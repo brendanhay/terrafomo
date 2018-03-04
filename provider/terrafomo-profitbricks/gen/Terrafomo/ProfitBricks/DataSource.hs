@@ -51,15 +51,15 @@ module Terrafomo.ProfitBricks.DataSource
     , P.HasVersion (..)
 
     -- ** Computed Attributes
-    , P.HasComputeFeature (..)
-    , P.HasComputeId (..)
-    , P.HasComputeLocation (..)
-    , P.HasComputeName (..)
-    , P.HasComputeResourceId (..)
-    , P.HasComputeResourceType (..)
-    , P.HasComputeSize (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeVersion (..)
+    , P.HasComputedFeature (..)
+    , P.HasComputedId (..)
+    , P.HasComputedLocation (..)
+    , P.HasComputedName (..)
+    , P.HasComputedResourceId (..)
+    , P.HasComputedResourceType (..)
+    , P.HasComputedSize (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedVersion (..)
 
     -- * Re-exported Types
     , module P
@@ -122,16 +122,16 @@ instance P.HasName (DataDatacenter s) (TF.Attr s P.Text) where
         lens (_name :: DataDatacenter s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataDatacenter s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLocation (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
-    computeLocation =
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
+    computedLocation =
         (_location :: DataDatacenter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataDatacenter s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -187,26 +187,26 @@ instance P.HasVersion (DataImage s) (TF.Attr s P.Text) where
         lens (_version :: DataImage s -> TF.Attr s P.Text)
              (\s a -> s { _version = a } :: DataImage s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLocation (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeLocation =
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedLocation =
         (_location :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVersion (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeVersion =
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedVersion =
         (_version :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -248,16 +248,16 @@ instance P.HasName (DataLocation s) (TF.Attr s P.Text) where
         lens (_name :: DataLocation s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataLocation s)
 
-instance s ~ s' => P.HasComputeFeature (TF.Ref s' (DataLocation s)) (TF.Attr s P.Text) where
-    computeFeature =
+instance s ~ s' => P.HasComputedFeature (TF.Ref s' (DataLocation s)) (TF.Attr s P.Text) where
+    computedFeature =
         (_feature :: DataLocation s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataLocation s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataLocation s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataLocation s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataLocation s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataLocation s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -303,16 +303,16 @@ instance P.HasResourceType (DataResource s) (TF.Attr s P.Text) where
         lens (_resource_type :: DataResource s -> TF.Attr s P.Text)
              (\s a -> s { _resource_type = a } :: DataResource s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataResource s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeResourceId (TF.Ref s' (DataResource s)) (TF.Attr s P.Text) where
-    computeResourceId =
+instance s ~ s' => P.HasComputedResourceId (TF.Ref s' (DataResource s)) (TF.Attr s P.Text) where
+    computedResourceId =
         (_resource_id :: DataResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeResourceType (TF.Ref s' (DataResource s)) (TF.Attr s P.Text) where
-    computeResourceType =
+instance s ~ s' => P.HasComputedResourceType (TF.Ref s' (DataResource s)) (TF.Attr s P.Text) where
+    computedResourceType =
         (_resource_type :: DataResource s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -360,21 +360,21 @@ instance P.HasSize (DataSnapshot s) (TF.Attr s P.Text) where
         lens (_size :: DataSnapshot s -> TF.Attr s P.Text)
              (\s a -> s { _size = a } :: DataSnapshot s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLocation (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
-    computeLocation =
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+    computedLocation =
         (_location :: DataSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSize (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
-    computeSize =
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+    computedSize =
         (_size :: DataSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 

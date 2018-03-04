@@ -35,13 +35,13 @@ module Terrafomo.Lailgun.Resource
     , P.HasWildcard (..)
 
     -- ** Computed Attributes
-    , P.HasComputeName (..)
-    , P.HasComputeReceivingRecords (..)
-    , P.HasComputeSendingRecords (..)
-    , P.HasComputeSmtpLogin (..)
-    , P.HasComputeSmtpPassword (..)
-    , P.HasComputeSpamAction (..)
-    , P.HasComputeWildcard (..)
+    , P.HasComputedName (..)
+    , P.HasComputedReceivingRecords (..)
+    , P.HasComputedSendingRecords (..)
+    , P.HasComputedSmtpLogin (..)
+    , P.HasComputedSmtpPassword (..)
+    , P.HasComputedSpamAction (..)
+    , P.HasComputedWildcard (..)
 
     -- * Re-exported Types
     , module P
@@ -115,26 +115,26 @@ instance P.HasWildcard (ResourceDomain s) (TF.Attr s P.Text) where
         lens (_wildcard :: ResourceDomain s -> TF.Attr s P.Text)
              (\s a -> s { _wildcard = a } :: ResourceDomain s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeReceivingRecords (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
-    computeReceivingRecords x = TF.compute (TF.refKey x) "receiving_records"
+instance s ~ s' => P.HasComputedReceivingRecords (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computedReceivingRecords x = TF.compute (TF.refKey x) "receiving_records"
 
-instance s ~ s' => P.HasComputeSendingRecords (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
-    computeSendingRecords x = TF.compute (TF.refKey x) "sending_records"
+instance s ~ s' => P.HasComputedSendingRecords (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computedSendingRecords x = TF.compute (TF.refKey x) "sending_records"
 
-instance s ~ s' => P.HasComputeSmtpLogin (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
-    computeSmtpLogin x = TF.compute (TF.refKey x) "smtp_login"
+instance s ~ s' => P.HasComputedSmtpLogin (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computedSmtpLogin x = TF.compute (TF.refKey x) "smtp_login"
 
-instance s ~ s' => P.HasComputeSmtpPassword (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
-    computeSmtpPassword x = TF.compute (TF.refKey x) "smtp_password"
+instance s ~ s' => P.HasComputedSmtpPassword (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computedSmtpPassword x = TF.compute (TF.refKey x) "smtp_password"
 
-instance s ~ s' => P.HasComputeSpamAction (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
-    computeSpamAction x = TF.compute (TF.refKey x) "spam_action"
+instance s ~ s' => P.HasComputedSpamAction (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computedSpamAction x = TF.compute (TF.refKey x) "spam_action"
 
-instance s ~ s' => P.HasComputeWildcard (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
-    computeWildcard x = TF.compute (TF.refKey x) "wildcard"
+instance s ~ s' => P.HasComputedWildcard (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computedWildcard x = TF.compute (TF.refKey x) "wildcard"
 
 resourceDomain :: TF.Resource P.Lailgun (ResourceDomain s)
 resourceDomain =

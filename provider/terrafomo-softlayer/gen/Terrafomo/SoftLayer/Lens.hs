@@ -46,30 +46,30 @@ module Terrafomo.SoftLayer.Lens
     , HasUserData (..)
 
     -- ** Computed Attributes
-    , HasComputeBackendVlanId (..)
-    , HasComputeBlockDeviceTemplateGroupGid (..)
-    , HasComputeCpu (..)
-    , HasComputeDedicatedAcctHostOnly (..)
-    , HasComputeDisks (..)
-    , HasComputeDomain (..)
-    , HasComputeFingerprint (..)
-    , HasComputeFrontendVlanId (..)
-    , HasComputeHourlyBilling (..)
-    , HasComputeId (..)
-    , HasComputeImage (..)
-    , HasComputeIpv4Address (..)
-    , HasComputeIpv4AddressPrivate (..)
-    , HasComputeLocalDisk (..)
-    , HasComputeName (..)
-    , HasComputeNotes (..)
-    , HasComputePostInstallScriptUri (..)
-    , HasComputePrivateNetworkOnly (..)
-    , HasComputePublicKey (..)
-    , HasComputePublicNetworkSpeed (..)
-    , HasComputeRam (..)
-    , HasComputeRegion (..)
-    , HasComputeSshKeys (..)
-    , HasComputeUserData (..)
+    , HasComputedBackendVlanId (..)
+    , HasComputedBlockDeviceTemplateGroupGid (..)
+    , HasComputedCpu (..)
+    , HasComputedDedicatedAcctHostOnly (..)
+    , HasComputedDisks (..)
+    , HasComputedDomain (..)
+    , HasComputedFingerprint (..)
+    , HasComputedFrontendVlanId (..)
+    , HasComputedHourlyBilling (..)
+    , HasComputedId (..)
+    , HasComputedImage (..)
+    , HasComputedIpv4Address (..)
+    , HasComputedIpv4AddressPrivate (..)
+    , HasComputedLocalDisk (..)
+    , HasComputedName (..)
+    , HasComputedNotes (..)
+    , HasComputedPostInstallScriptUri (..)
+    , HasComputedPrivateNetworkOnly (..)
+    , HasComputedPublicKey (..)
+    , HasComputedPublicNetworkSpeed (..)
+    , HasComputedRam (..)
+    , HasComputedRegion (..)
+    , HasComputedSshKeys (..)
+    , HasComputedUserData (..)
     ) where
 
 import GHC.Base ((.))
@@ -211,74 +211,74 @@ class HasUserData a b | a -> b where
 instance HasUserData a b => HasUserData (TF.Schema l p a) b where
     userData = TF.configuration . userData
 
-class HasComputeBackendVlanId a b | a -> b where
-    computeBackendVlanId :: a -> b
+class HasComputedBackendVlanId a b | a -> b where
+    computedBackendVlanId :: a -> b
 
-class HasComputeBlockDeviceTemplateGroupGid a b | a -> b where
-    computeBlockDeviceTemplateGroupGid :: a -> b
+class HasComputedBlockDeviceTemplateGroupGid a b | a -> b where
+    computedBlockDeviceTemplateGroupGid :: a -> b
 
-class HasComputeCpu a b | a -> b where
-    computeCpu :: a -> b
+class HasComputedCpu a b | a -> b where
+    computedCpu :: a -> b
 
-class HasComputeDedicatedAcctHostOnly a b | a -> b where
-    computeDedicatedAcctHostOnly :: a -> b
+class HasComputedDedicatedAcctHostOnly a b | a -> b where
+    computedDedicatedAcctHostOnly :: a -> b
 
-class HasComputeDisks a b | a -> b where
-    computeDisks :: a -> b
+class HasComputedDisks a b | a -> b where
+    computedDisks :: a -> b
 
-class HasComputeDomain a b | a -> b where
-    computeDomain :: a -> b
+class HasComputedDomain a b | a -> b where
+    computedDomain :: a -> b
 
-class HasComputeFingerprint a b | a -> b where
-    computeFingerprint :: a -> b
+class HasComputedFingerprint a b | a -> b where
+    computedFingerprint :: a -> b
 
-class HasComputeFrontendVlanId a b | a -> b where
-    computeFrontendVlanId :: a -> b
+class HasComputedFrontendVlanId a b | a -> b where
+    computedFrontendVlanId :: a -> b
 
-class HasComputeHourlyBilling a b | a -> b where
-    computeHourlyBilling :: a -> b
+class HasComputedHourlyBilling a b | a -> b where
+    computedHourlyBilling :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeImage a b | a -> b where
-    computeImage :: a -> b
+class HasComputedImage a b | a -> b where
+    computedImage :: a -> b
 
-class HasComputeIpv4Address a b | a -> b where
-    computeIpv4Address :: a -> b
+class HasComputedIpv4Address a b | a -> b where
+    computedIpv4Address :: a -> b
 
-class HasComputeIpv4AddressPrivate a b | a -> b where
-    computeIpv4AddressPrivate :: a -> b
+class HasComputedIpv4AddressPrivate a b | a -> b where
+    computedIpv4AddressPrivate :: a -> b
 
-class HasComputeLocalDisk a b | a -> b where
-    computeLocalDisk :: a -> b
+class HasComputedLocalDisk a b | a -> b where
+    computedLocalDisk :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeNotes a b | a -> b where
-    computeNotes :: a -> b
+class HasComputedNotes a b | a -> b where
+    computedNotes :: a -> b
 
-class HasComputePostInstallScriptUri a b | a -> b where
-    computePostInstallScriptUri :: a -> b
+class HasComputedPostInstallScriptUri a b | a -> b where
+    computedPostInstallScriptUri :: a -> b
 
-class HasComputePrivateNetworkOnly a b | a -> b where
-    computePrivateNetworkOnly :: a -> b
+class HasComputedPrivateNetworkOnly a b | a -> b where
+    computedPrivateNetworkOnly :: a -> b
 
-class HasComputePublicKey a b | a -> b where
-    computePublicKey :: a -> b
+class HasComputedPublicKey a b | a -> b where
+    computedPublicKey :: a -> b
 
-class HasComputePublicNetworkSpeed a b | a -> b where
-    computePublicNetworkSpeed :: a -> b
+class HasComputedPublicNetworkSpeed a b | a -> b where
+    computedPublicNetworkSpeed :: a -> b
 
-class HasComputeRam a b | a -> b where
-    computeRam :: a -> b
+class HasComputedRam a b | a -> b where
+    computedRam :: a -> b
 
-class HasComputeRegion a b | a -> b where
-    computeRegion :: a -> b
+class HasComputedRegion a b | a -> b where
+    computedRegion :: a -> b
 
-class HasComputeSshKeys a b | a -> b where
-    computeSshKeys :: a -> b
+class HasComputedSshKeys a b | a -> b where
+    computedSshKeys :: a -> b
 
-class HasComputeUserData a b | a -> b where
-    computeUserData :: a -> b
+class HasComputedUserData a b | a -> b where
+    computedUserData :: a -> b

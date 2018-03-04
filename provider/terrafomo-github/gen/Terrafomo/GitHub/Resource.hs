@@ -95,46 +95,46 @@ module Terrafomo.GitHub.Resource
     , P.HasUsername (..)
 
     -- ** Computed Attributes
-    , P.HasComputeActive (..)
-    , P.HasComputeAllowMergeCommit (..)
-    , P.HasComputeAllowRebaseMerge (..)
-    , P.HasComputeAllowSquashMerge (..)
-    , P.HasComputeAutoInit (..)
-    , P.HasComputeBranch (..)
-    , P.HasComputeColor (..)
-    , P.HasComputeConfiguration (..)
-    , P.HasComputeDefaultBranch (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeEnforceAdmins (..)
-    , P.HasComputeEvents (..)
-    , P.HasComputeFullName (..)
-    , P.HasComputeGitCloneUrl (..)
-    , P.HasComputeGitignoreTemplate (..)
-    , P.HasComputeHasDownloads (..)
-    , P.HasComputeHasIssues (..)
-    , P.HasComputeHasWiki (..)
-    , P.HasComputeHomepageUrl (..)
-    , P.HasComputeHttpCloneUrl (..)
-    , P.HasComputeId (..)
-    , P.HasComputeKey (..)
-    , P.HasComputeLdapDn (..)
-    , P.HasComputeLicenseTemplate (..)
-    , P.HasComputeName (..)
-    , P.HasComputePermission (..)
-    , P.HasComputePrivacy (..)
-    , P.HasComputePrivate (..)
-    , P.HasComputeReadOnly (..)
-    , P.HasComputeRepository (..)
-    , P.HasComputeRequiredPullRequestReviews (..)
-    , P.HasComputeRequiredStatusChecks (..)
-    , P.HasComputeRestrictions (..)
-    , P.HasComputeRole (..)
-    , P.HasComputeSshCloneUrl (..)
-    , P.HasComputeSvnUrl (..)
-    , P.HasComputeTeamId (..)
-    , P.HasComputeTitle (..)
-    , P.HasComputeUrl (..)
-    , P.HasComputeUsername (..)
+    , P.HasComputedActive (..)
+    , P.HasComputedAllowMergeCommit (..)
+    , P.HasComputedAllowRebaseMerge (..)
+    , P.HasComputedAllowSquashMerge (..)
+    , P.HasComputedAutoInit (..)
+    , P.HasComputedBranch (..)
+    , P.HasComputedColor (..)
+    , P.HasComputedConfiguration (..)
+    , P.HasComputedDefaultBranch (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedEnforceAdmins (..)
+    , P.HasComputedEvents (..)
+    , P.HasComputedFullName (..)
+    , P.HasComputedGitCloneUrl (..)
+    , P.HasComputedGitignoreTemplate (..)
+    , P.HasComputedHasDownloads (..)
+    , P.HasComputedHasIssues (..)
+    , P.HasComputedHasWiki (..)
+    , P.HasComputedHomepageUrl (..)
+    , P.HasComputedHttpCloneUrl (..)
+    , P.HasComputedId (..)
+    , P.HasComputedKey (..)
+    , P.HasComputedLdapDn (..)
+    , P.HasComputedLicenseTemplate (..)
+    , P.HasComputedName (..)
+    , P.HasComputedPermission (..)
+    , P.HasComputedPrivacy (..)
+    , P.HasComputedPrivate (..)
+    , P.HasComputedReadOnly (..)
+    , P.HasComputedRepository (..)
+    , P.HasComputedRequiredPullRequestReviews (..)
+    , P.HasComputedRequiredStatusChecks (..)
+    , P.HasComputedRestrictions (..)
+    , P.HasComputedRole (..)
+    , P.HasComputedSshCloneUrl (..)
+    , P.HasComputedSvnUrl (..)
+    , P.HasComputedTeamId (..)
+    , P.HasComputedTitle (..)
+    , P.HasComputedUrl (..)
+    , P.HasComputedUsername (..)
 
     -- * Re-exported Types
     , module P
@@ -227,33 +227,33 @@ instance P.HasRestrictions (ResourceBranchProtection s) (TF.Attr s P.Text) where
         lens (_restrictions :: ResourceBranchProtection s -> TF.Attr s P.Text)
              (\s a -> s { _restrictions = a } :: ResourceBranchProtection s)
 
-instance s ~ s' => P.HasComputeBranch (TF.Ref s' (ResourceBranchProtection s)) (TF.Attr s P.Text) where
-    computeBranch =
+instance s ~ s' => P.HasComputedBranch (TF.Ref s' (ResourceBranchProtection s)) (TF.Attr s P.Text) where
+    computedBranch =
         (_branch :: ResourceBranchProtection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEnforceAdmins (TF.Ref s' (ResourceBranchProtection s)) (TF.Attr s P.Text) where
-    computeEnforceAdmins =
+instance s ~ s' => P.HasComputedEnforceAdmins (TF.Ref s' (ResourceBranchProtection s)) (TF.Attr s P.Text) where
+    computedEnforceAdmins =
         (_enforce_admins :: ResourceBranchProtection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRepository (TF.Ref s' (ResourceBranchProtection s)) (TF.Attr s P.Text) where
-    computeRepository =
+instance s ~ s' => P.HasComputedRepository (TF.Ref s' (ResourceBranchProtection s)) (TF.Attr s P.Text) where
+    computedRepository =
         (_repository :: ResourceBranchProtection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRequiredPullRequestReviews (TF.Ref s' (ResourceBranchProtection s)) (TF.Attr s P.Text) where
-    computeRequiredPullRequestReviews =
+instance s ~ s' => P.HasComputedRequiredPullRequestReviews (TF.Ref s' (ResourceBranchProtection s)) (TF.Attr s P.Text) where
+    computedRequiredPullRequestReviews =
         (_required_pull_request_reviews :: ResourceBranchProtection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRequiredStatusChecks (TF.Ref s' (ResourceBranchProtection s)) (TF.Attr s P.Text) where
-    computeRequiredStatusChecks =
+instance s ~ s' => P.HasComputedRequiredStatusChecks (TF.Ref s' (ResourceBranchProtection s)) (TF.Attr s P.Text) where
+    computedRequiredStatusChecks =
         (_required_status_checks :: ResourceBranchProtection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRestrictions (TF.Ref s' (ResourceBranchProtection s)) (TF.Attr s P.Text) where
-    computeRestrictions =
+instance s ~ s' => P.HasComputedRestrictions (TF.Ref s' (ResourceBranchProtection s)) (TF.Attr s P.Text) where
+    computedRestrictions =
         (_restrictions :: ResourceBranchProtection s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -319,23 +319,23 @@ instance P.HasUrl (ResourceIssueLabel s) (TF.Attr s P.Text) where
         lens (_url :: ResourceIssueLabel s -> TF.Attr s P.Text)
              (\s a -> s { _url = a } :: ResourceIssueLabel s)
 
-instance s ~ s' => P.HasComputeColor (TF.Ref s' (ResourceIssueLabel s)) (TF.Attr s P.Text) where
-    computeColor =
+instance s ~ s' => P.HasComputedColor (TF.Ref s' (ResourceIssueLabel s)) (TF.Attr s P.Text) where
+    computedColor =
         (_color :: ResourceIssueLabel s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceIssueLabel s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceIssueLabel s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceIssueLabel s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRepository (TF.Ref s' (ResourceIssueLabel s)) (TF.Attr s P.Text) where
-    computeRepository =
+instance s ~ s' => P.HasComputedRepository (TF.Ref s' (ResourceIssueLabel s)) (TF.Attr s P.Text) where
+    computedRepository =
         (_repository :: ResourceIssueLabel s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUrl (TF.Ref s' (ResourceIssueLabel s)) (TF.Attr s P.Text) where
-    computeUrl =
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (ResourceIssueLabel s)) (TF.Attr s P.Text) where
+    computedUrl =
         (_url :: ResourceIssueLabel s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -379,13 +379,13 @@ instance P.HasUsername (ResourceMembership s) (TF.Attr s P.Text) where
         lens (_username :: ResourceMembership s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: ResourceMembership s)
 
-instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceMembership s)) (TF.Attr s P.Text) where
-    computeRole =
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (ResourceMembership s)) (TF.Attr s P.Text) where
+    computedRole =
         (_role :: ResourceMembership s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUsername (TF.Ref s' (ResourceMembership s)) (TF.Attr s P.Text) where
-    computeUsername =
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (ResourceMembership s)) (TF.Attr s P.Text) where
+    computedUsername =
         (_username :: ResourceMembership s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -441,28 +441,28 @@ instance P.HasName (ResourceOrganizationWebhook s) (TF.Attr s P.Text) where
         lens (_name :: ResourceOrganizationWebhook s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceOrganizationWebhook s)
 
-instance s ~ s' => P.HasComputeActive (TF.Ref s' (ResourceOrganizationWebhook s)) (TF.Attr s P.Text) where
-    computeActive =
+instance s ~ s' => P.HasComputedActive (TF.Ref s' (ResourceOrganizationWebhook s)) (TF.Attr s P.Text) where
+    computedActive =
         (_active :: ResourceOrganizationWebhook s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeConfiguration (TF.Ref s' (ResourceOrganizationWebhook s)) (TF.Attr s P.Text) where
-    computeConfiguration =
+instance s ~ s' => P.HasComputedConfiguration (TF.Ref s' (ResourceOrganizationWebhook s)) (TF.Attr s P.Text) where
+    computedConfiguration =
         (_configuration :: ResourceOrganizationWebhook s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEvents (TF.Ref s' (ResourceOrganizationWebhook s)) (TF.Attr s P.Text) where
-    computeEvents =
+instance s ~ s' => P.HasComputedEvents (TF.Ref s' (ResourceOrganizationWebhook s)) (TF.Attr s P.Text) where
+    computedEvents =
         (_events :: ResourceOrganizationWebhook s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceOrganizationWebhook s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceOrganizationWebhook s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceOrganizationWebhook s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUrl (TF.Ref s' (ResourceOrganizationWebhook s)) (TF.Attr s P.Text) where
-    computeUrl x = TF.compute (TF.refKey x) "url"
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (ResourceOrganizationWebhook s)) (TF.Attr s P.Text) where
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 resourceOrganizationWebhook :: TF.Resource P.GitHub (ResourceOrganizationWebhook s)
 resourceOrganizationWebhook =
@@ -599,90 +599,90 @@ instance P.HasPrivate (ResourceRepository s) (TF.Attr s P.Text) where
         lens (_private :: ResourceRepository s -> TF.Attr s P.Text)
              (\s a -> s { _private = a } :: ResourceRepository s)
 
-instance s ~ s' => P.HasComputeAllowMergeCommit (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeAllowMergeCommit =
+instance s ~ s' => P.HasComputedAllowMergeCommit (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedAllowMergeCommit =
         (_allow_merge_commit :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAllowRebaseMerge (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeAllowRebaseMerge =
+instance s ~ s' => P.HasComputedAllowRebaseMerge (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedAllowRebaseMerge =
         (_allow_rebase_merge :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAllowSquashMerge (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeAllowSquashMerge =
+instance s ~ s' => P.HasComputedAllowSquashMerge (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedAllowSquashMerge =
         (_allow_squash_merge :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAutoInit (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeAutoInit =
+instance s ~ s' => P.HasComputedAutoInit (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedAutoInit =
         (_auto_init :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDefaultBranch (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeDefaultBranch =
+instance s ~ s' => P.HasComputedDefaultBranch (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedDefaultBranch =
         (_default_branch :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeFullName (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeFullName x = TF.compute (TF.refKey x) "full_name"
+instance s ~ s' => P.HasComputedFullName (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedFullName x = TF.compute (TF.refKey x) "full_name"
 
-instance s ~ s' => P.HasComputeGitCloneUrl (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeGitCloneUrl x = TF.compute (TF.refKey x) "git_clone_url"
+instance s ~ s' => P.HasComputedGitCloneUrl (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedGitCloneUrl x = TF.compute (TF.refKey x) "git_clone_url"
 
-instance s ~ s' => P.HasComputeGitignoreTemplate (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeGitignoreTemplate =
+instance s ~ s' => P.HasComputedGitignoreTemplate (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedGitignoreTemplate =
         (_gitignore_template :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHasDownloads (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeHasDownloads =
+instance s ~ s' => P.HasComputedHasDownloads (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedHasDownloads =
         (_has_downloads :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHasIssues (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeHasIssues =
+instance s ~ s' => P.HasComputedHasIssues (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedHasIssues =
         (_has_issues :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHasWiki (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeHasWiki =
+instance s ~ s' => P.HasComputedHasWiki (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedHasWiki =
         (_has_wiki :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHomepageUrl (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeHomepageUrl =
+instance s ~ s' => P.HasComputedHomepageUrl (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedHomepageUrl =
         (_homepage_url :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHttpCloneUrl (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeHttpCloneUrl x = TF.compute (TF.refKey x) "http_clone_url"
+instance s ~ s' => P.HasComputedHttpCloneUrl (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedHttpCloneUrl x = TF.compute (TF.refKey x) "http_clone_url"
 
-instance s ~ s' => P.HasComputeLicenseTemplate (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeLicenseTemplate =
+instance s ~ s' => P.HasComputedLicenseTemplate (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedLicenseTemplate =
         (_license_template :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePrivate (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computePrivate =
+instance s ~ s' => P.HasComputedPrivate (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedPrivate =
         (_private :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSshCloneUrl (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeSshCloneUrl x = TF.compute (TF.refKey x) "ssh_clone_url"
+instance s ~ s' => P.HasComputedSshCloneUrl (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedSshCloneUrl x = TF.compute (TF.refKey x) "ssh_clone_url"
 
-instance s ~ s' => P.HasComputeSvnUrl (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
-    computeSvnUrl x = TF.compute (TF.refKey x) "svn_url"
+instance s ~ s' => P.HasComputedSvnUrl (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computedSvnUrl x = TF.compute (TF.refKey x) "svn_url"
 
 resourceRepository :: TF.Resource P.GitHub (ResourceRepository s)
 resourceRepository =
@@ -747,18 +747,18 @@ instance P.HasUsername (ResourceRepositoryCollaborator s) (TF.Attr s P.Text) whe
         lens (_username :: ResourceRepositoryCollaborator s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: ResourceRepositoryCollaborator s)
 
-instance s ~ s' => P.HasComputePermission (TF.Ref s' (ResourceRepositoryCollaborator s)) (TF.Attr s P.Text) where
-    computePermission =
+instance s ~ s' => P.HasComputedPermission (TF.Ref s' (ResourceRepositoryCollaborator s)) (TF.Attr s P.Text) where
+    computedPermission =
         (_permission :: ResourceRepositoryCollaborator s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRepository (TF.Ref s' (ResourceRepositoryCollaborator s)) (TF.Attr s P.Text) where
-    computeRepository =
+instance s ~ s' => P.HasComputedRepository (TF.Ref s' (ResourceRepositoryCollaborator s)) (TF.Attr s P.Text) where
+    computedRepository =
         (_repository :: ResourceRepositoryCollaborator s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUsername (TF.Ref s' (ResourceRepositoryCollaborator s)) (TF.Attr s P.Text) where
-    computeUsername =
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (ResourceRepositoryCollaborator s)) (TF.Attr s P.Text) where
+    computedUsername =
         (_username :: ResourceRepositoryCollaborator s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -818,23 +818,23 @@ instance P.HasTitle (ResourceRepositoryDeployKey s) (TF.Attr s P.Text) where
         lens (_title :: ResourceRepositoryDeployKey s -> TF.Attr s P.Text)
              (\s a -> s { _title = a } :: ResourceRepositoryDeployKey s)
 
-instance s ~ s' => P.HasComputeKey (TF.Ref s' (ResourceRepositoryDeployKey s)) (TF.Attr s P.Text) where
-    computeKey =
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (ResourceRepositoryDeployKey s)) (TF.Attr s P.Text) where
+    computedKey =
         (_key :: ResourceRepositoryDeployKey s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeReadOnly (TF.Ref s' (ResourceRepositoryDeployKey s)) (TF.Attr s P.Text) where
-    computeReadOnly =
+instance s ~ s' => P.HasComputedReadOnly (TF.Ref s' (ResourceRepositoryDeployKey s)) (TF.Attr s P.Text) where
+    computedReadOnly =
         (_read_only :: ResourceRepositoryDeployKey s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRepository (TF.Ref s' (ResourceRepositoryDeployKey s)) (TF.Attr s P.Text) where
-    computeRepository =
+instance s ~ s' => P.HasComputedRepository (TF.Ref s' (ResourceRepositoryDeployKey s)) (TF.Attr s P.Text) where
+    computedRepository =
         (_repository :: ResourceRepositoryDeployKey s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTitle (TF.Ref s' (ResourceRepositoryDeployKey s)) (TF.Attr s P.Text) where
-    computeTitle =
+instance s ~ s' => P.HasComputedTitle (TF.Ref s' (ResourceRepositoryDeployKey s)) (TF.Attr s P.Text) where
+    computedTitle =
         (_title :: ResourceRepositoryDeployKey s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -901,33 +901,33 @@ instance P.HasRepository (ResourceRepositoryWebhook s) (TF.Attr s P.Text) where
         lens (_repository :: ResourceRepositoryWebhook s -> TF.Attr s P.Text)
              (\s a -> s { _repository = a } :: ResourceRepositoryWebhook s)
 
-instance s ~ s' => P.HasComputeActive (TF.Ref s' (ResourceRepositoryWebhook s)) (TF.Attr s P.Text) where
-    computeActive =
+instance s ~ s' => P.HasComputedActive (TF.Ref s' (ResourceRepositoryWebhook s)) (TF.Attr s P.Text) where
+    computedActive =
         (_active :: ResourceRepositoryWebhook s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeConfiguration (TF.Ref s' (ResourceRepositoryWebhook s)) (TF.Attr s P.Text) where
-    computeConfiguration =
+instance s ~ s' => P.HasComputedConfiguration (TF.Ref s' (ResourceRepositoryWebhook s)) (TF.Attr s P.Text) where
+    computedConfiguration =
         (_configuration :: ResourceRepositoryWebhook s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEvents (TF.Ref s' (ResourceRepositoryWebhook s)) (TF.Attr s P.Text) where
-    computeEvents =
+instance s ~ s' => P.HasComputedEvents (TF.Ref s' (ResourceRepositoryWebhook s)) (TF.Attr s P.Text) where
+    computedEvents =
         (_events :: ResourceRepositoryWebhook s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRepositoryWebhook s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceRepositoryWebhook s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceRepositoryWebhook s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRepository (TF.Ref s' (ResourceRepositoryWebhook s)) (TF.Attr s P.Text) where
-    computeRepository =
+instance s ~ s' => P.HasComputedRepository (TF.Ref s' (ResourceRepositoryWebhook s)) (TF.Attr s P.Text) where
+    computedRepository =
         (_repository :: ResourceRepositoryWebhook s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUrl (TF.Ref s' (ResourceRepositoryWebhook s)) (TF.Attr s P.Text) where
-    computeUrl x = TF.compute (TF.refKey x) "url"
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (ResourceRepositoryWebhook s)) (TF.Attr s P.Text) where
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 resourceRepositoryWebhook :: TF.Resource P.GitHub (ResourceRepositoryWebhook s)
 resourceRepositoryWebhook =
@@ -985,26 +985,26 @@ instance P.HasPrivacy (ResourceTeam s) (TF.Attr s P.Text) where
         lens (_privacy :: ResourceTeam s -> TF.Attr s P.Text)
              (\s a -> s { _privacy = a } :: ResourceTeam s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceTeam s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLdapDn (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
-    computeLdapDn =
+instance s ~ s' => P.HasComputedLdapDn (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computedLdapDn =
         (_ldap_dn :: ResourceTeam s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceTeam s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePrivacy (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
-    computePrivacy =
+instance s ~ s' => P.HasComputedPrivacy (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computedPrivacy =
         (_privacy :: ResourceTeam s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1057,18 +1057,18 @@ instance P.HasUsername (ResourceTeamMembership s) (TF.Attr s P.Text) where
         lens (_username :: ResourceTeamMembership s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: ResourceTeamMembership s)
 
-instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceTeamMembership s)) (TF.Attr s P.Text) where
-    computeRole =
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (ResourceTeamMembership s)) (TF.Attr s P.Text) where
+    computedRole =
         (_role :: ResourceTeamMembership s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTeamId (TF.Ref s' (ResourceTeamMembership s)) (TF.Attr s P.Text) where
-    computeTeamId =
+instance s ~ s' => P.HasComputedTeamId (TF.Ref s' (ResourceTeamMembership s)) (TF.Attr s P.Text) where
+    computedTeamId =
         (_team_id :: ResourceTeamMembership s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUsername (TF.Ref s' (ResourceTeamMembership s)) (TF.Attr s P.Text) where
-    computeUsername =
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (ResourceTeamMembership s)) (TF.Attr s P.Text) where
+    computedUsername =
         (_username :: ResourceTeamMembership s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1120,18 +1120,18 @@ instance P.HasTeamId (ResourceTeamRepository s) (TF.Attr s P.Text) where
         lens (_team_id :: ResourceTeamRepository s -> TF.Attr s P.Text)
              (\s a -> s { _team_id = a } :: ResourceTeamRepository s)
 
-instance s ~ s' => P.HasComputePermission (TF.Ref s' (ResourceTeamRepository s)) (TF.Attr s P.Text) where
-    computePermission =
+instance s ~ s' => P.HasComputedPermission (TF.Ref s' (ResourceTeamRepository s)) (TF.Attr s P.Text) where
+    computedPermission =
         (_permission :: ResourceTeamRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRepository (TF.Ref s' (ResourceTeamRepository s)) (TF.Attr s P.Text) where
-    computeRepository =
+instance s ~ s' => P.HasComputedRepository (TF.Ref s' (ResourceTeamRepository s)) (TF.Attr s P.Text) where
+    computedRepository =
         (_repository :: ResourceTeamRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTeamId (TF.Ref s' (ResourceTeamRepository s)) (TF.Attr s P.Text) where
-    computeTeamId =
+instance s ~ s' => P.HasComputedTeamId (TF.Ref s' (ResourceTeamRepository s)) (TF.Attr s P.Text) where
+    computedTeamId =
         (_team_id :: ResourceTeamRepository s -> TF.Attr s P.Text)
             . TF.refValue
 

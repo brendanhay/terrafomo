@@ -75,73 +75,73 @@ module Terrafomo.Circonus.Lens
     , HasVictorops (..)
 
     -- ** Computed Attributes
-    , HasComputeActive (..)
-    , HasComputeAddress1 (..)
-    , HasComputeAddress2 (..)
-    , HasComputeAggregationWindow (..)
-    , HasComputeAlertOption (..)
-    , HasComputeCaql (..)
-    , HasComputeCcEmail (..)
-    , HasComputeCheck (..)
-    , HasComputeCity (..)
-    , HasComputeCloudwatch (..)
-    , HasComputeCollector (..)
-    , HasComputeConsul (..)
-    , HasComputeContactGroups (..)
-    , HasComputeCountry (..)
-    , HasComputeCurrent (..)
-    , HasComputeDescription (..)
-    , HasComputeDetails (..)
-    , HasComputeEmail (..)
-    , HasComputeGraphStyle (..)
-    , HasComputeHttp (..)
-    , HasComputeHttptrap (..)
-    , HasComputeIcmpPing (..)
-    , HasComputeId (..)
-    , HasComputeIf' (..)
-    , HasComputeInvites (..)
-    , HasComputeIrc (..)
-    , HasComputeJson (..)
-    , HasComputeLatitude (..)
-    , HasComputeLeft (..)
-    , HasComputeLineStyle (..)
-    , HasComputeLink (..)
-    , HasComputeLongMessage (..)
-    , HasComputeLongSubject (..)
-    , HasComputeLongSummary (..)
-    , HasComputeLongitude (..)
-    , HasComputeMetric (..)
-    , HasComputeMetricCluster (..)
-    , HasComputeMetricLimit (..)
-    , HasComputeMetricName (..)
-    , HasComputeMetricType (..)
-    , HasComputeMysql (..)
-    , HasComputeName (..)
-    , HasComputeNotes (..)
-    , HasComputeOwner (..)
-    , HasComputePagerDuty (..)
-    , HasComputeParent (..)
-    , HasComputePeriod (..)
-    , HasComputePostgresql (..)
-    , HasComputeQuery (..)
-    , HasComputeRight (..)
-    , HasComputeShortMessage (..)
-    , HasComputeShortSummary (..)
-    , HasComputeSlack (..)
-    , HasComputeSms (..)
-    , HasComputeState (..)
-    , HasComputeStatsd (..)
-    , HasComputeTags (..)
-    , HasComputeTarget (..)
-    , HasComputeTcp (..)
-    , HasComputeTimeout (..)
-    , HasComputeTimezone (..)
-    , HasComputeType' (..)
-    , HasComputeUiBaseUrl (..)
-    , HasComputeUnit (..)
-    , HasComputeUsage (..)
-    , HasComputeUsers (..)
-    , HasComputeVictorops (..)
+    , HasComputedActive (..)
+    , HasComputedAddress1 (..)
+    , HasComputedAddress2 (..)
+    , HasComputedAggregationWindow (..)
+    , HasComputedAlertOption (..)
+    , HasComputedCaql (..)
+    , HasComputedCcEmail (..)
+    , HasComputedCheck (..)
+    , HasComputedCity (..)
+    , HasComputedCloudwatch (..)
+    , HasComputedCollector (..)
+    , HasComputedConsul (..)
+    , HasComputedContactGroups (..)
+    , HasComputedCountry (..)
+    , HasComputedCurrent (..)
+    , HasComputedDescription (..)
+    , HasComputedDetails (..)
+    , HasComputedEmail (..)
+    , HasComputedGraphStyle (..)
+    , HasComputedHttp (..)
+    , HasComputedHttptrap (..)
+    , HasComputedIcmpPing (..)
+    , HasComputedId (..)
+    , HasComputedIf' (..)
+    , HasComputedInvites (..)
+    , HasComputedIrc (..)
+    , HasComputedJson (..)
+    , HasComputedLatitude (..)
+    , HasComputedLeft (..)
+    , HasComputedLineStyle (..)
+    , HasComputedLink (..)
+    , HasComputedLongMessage (..)
+    , HasComputedLongSubject (..)
+    , HasComputedLongSummary (..)
+    , HasComputedLongitude (..)
+    , HasComputedMetric (..)
+    , HasComputedMetricCluster (..)
+    , HasComputedMetricLimit (..)
+    , HasComputedMetricName (..)
+    , HasComputedMetricType (..)
+    , HasComputedMysql (..)
+    , HasComputedName (..)
+    , HasComputedNotes (..)
+    , HasComputedOwner (..)
+    , HasComputedPagerDuty (..)
+    , HasComputedParent (..)
+    , HasComputedPeriod (..)
+    , HasComputedPostgresql (..)
+    , HasComputedQuery (..)
+    , HasComputedRight (..)
+    , HasComputedShortMessage (..)
+    , HasComputedShortSummary (..)
+    , HasComputedSlack (..)
+    , HasComputedSms (..)
+    , HasComputedState (..)
+    , HasComputedStatsd (..)
+    , HasComputedTags (..)
+    , HasComputedTarget (..)
+    , HasComputedTcp (..)
+    , HasComputedTimeout (..)
+    , HasComputedTimezone (..)
+    , HasComputedType' (..)
+    , HasComputedUiBaseUrl (..)
+    , HasComputedUnit (..)
+    , HasComputedUsage (..)
+    , HasComputedUsers (..)
+    , HasComputedVictorops (..)
     ) where
 
 import GHC.Base ((.))
@@ -457,203 +457,203 @@ class HasVictorops a b | a -> b where
 instance HasVictorops a b => HasVictorops (TF.Schema l p a) b where
     victorops = TF.configuration . victorops
 
-class HasComputeActive a b | a -> b where
-    computeActive :: a -> b
+class HasComputedActive a b | a -> b where
+    computedActive :: a -> b
 
-class HasComputeAddress1 a b | a -> b where
-    computeAddress1 :: a -> b
+class HasComputedAddress1 a b | a -> b where
+    computedAddress1 :: a -> b
 
-class HasComputeAddress2 a b | a -> b where
-    computeAddress2 :: a -> b
+class HasComputedAddress2 a b | a -> b where
+    computedAddress2 :: a -> b
 
-class HasComputeAggregationWindow a b | a -> b where
-    computeAggregationWindow :: a -> b
+class HasComputedAggregationWindow a b | a -> b where
+    computedAggregationWindow :: a -> b
 
-class HasComputeAlertOption a b | a -> b where
-    computeAlertOption :: a -> b
+class HasComputedAlertOption a b | a -> b where
+    computedAlertOption :: a -> b
 
-class HasComputeCaql a b | a -> b where
-    computeCaql :: a -> b
+class HasComputedCaql a b | a -> b where
+    computedCaql :: a -> b
 
-class HasComputeCcEmail a b | a -> b where
-    computeCcEmail :: a -> b
+class HasComputedCcEmail a b | a -> b where
+    computedCcEmail :: a -> b
 
-class HasComputeCheck a b | a -> b where
-    computeCheck :: a -> b
+class HasComputedCheck a b | a -> b where
+    computedCheck :: a -> b
 
-class HasComputeCity a b | a -> b where
-    computeCity :: a -> b
+class HasComputedCity a b | a -> b where
+    computedCity :: a -> b
 
-class HasComputeCloudwatch a b | a -> b where
-    computeCloudwatch :: a -> b
+class HasComputedCloudwatch a b | a -> b where
+    computedCloudwatch :: a -> b
 
-class HasComputeCollector a b | a -> b where
-    computeCollector :: a -> b
+class HasComputedCollector a b | a -> b where
+    computedCollector :: a -> b
 
-class HasComputeConsul a b | a -> b where
-    computeConsul :: a -> b
+class HasComputedConsul a b | a -> b where
+    computedConsul :: a -> b
 
-class HasComputeContactGroups a b | a -> b where
-    computeContactGroups :: a -> b
+class HasComputedContactGroups a b | a -> b where
+    computedContactGroups :: a -> b
 
-class HasComputeCountry a b | a -> b where
-    computeCountry :: a -> b
+class HasComputedCountry a b | a -> b where
+    computedCountry :: a -> b
 
-class HasComputeCurrent a b | a -> b where
-    computeCurrent :: a -> b
+class HasComputedCurrent a b | a -> b where
+    computedCurrent :: a -> b
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeDetails a b | a -> b where
-    computeDetails :: a -> b
+class HasComputedDetails a b | a -> b where
+    computedDetails :: a -> b
 
-class HasComputeEmail a b | a -> b where
-    computeEmail :: a -> b
+class HasComputedEmail a b | a -> b where
+    computedEmail :: a -> b
 
-class HasComputeGraphStyle a b | a -> b where
-    computeGraphStyle :: a -> b
+class HasComputedGraphStyle a b | a -> b where
+    computedGraphStyle :: a -> b
 
-class HasComputeHttp a b | a -> b where
-    computeHttp :: a -> b
+class HasComputedHttp a b | a -> b where
+    computedHttp :: a -> b
 
-class HasComputeHttptrap a b | a -> b where
-    computeHttptrap :: a -> b
+class HasComputedHttptrap a b | a -> b where
+    computedHttptrap :: a -> b
 
-class HasComputeIcmpPing a b | a -> b where
-    computeIcmpPing :: a -> b
+class HasComputedIcmpPing a b | a -> b where
+    computedIcmpPing :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeIf' a b | a -> b where
-    computeIf' :: a -> b
+class HasComputedIf' a b | a -> b where
+    computedIf' :: a -> b
 
-class HasComputeInvites a b | a -> b where
-    computeInvites :: a -> b
+class HasComputedInvites a b | a -> b where
+    computedInvites :: a -> b
 
-class HasComputeIrc a b | a -> b where
-    computeIrc :: a -> b
+class HasComputedIrc a b | a -> b where
+    computedIrc :: a -> b
 
-class HasComputeJson a b | a -> b where
-    computeJson :: a -> b
+class HasComputedJson a b | a -> b where
+    computedJson :: a -> b
 
-class HasComputeLatitude a b | a -> b where
-    computeLatitude :: a -> b
+class HasComputedLatitude a b | a -> b where
+    computedLatitude :: a -> b
 
-class HasComputeLeft a b | a -> b where
-    computeLeft :: a -> b
+class HasComputedLeft a b | a -> b where
+    computedLeft :: a -> b
 
-class HasComputeLineStyle a b | a -> b where
-    computeLineStyle :: a -> b
+class HasComputedLineStyle a b | a -> b where
+    computedLineStyle :: a -> b
 
-class HasComputeLink a b | a -> b where
-    computeLink :: a -> b
+class HasComputedLink a b | a -> b where
+    computedLink :: a -> b
 
-class HasComputeLongMessage a b | a -> b where
-    computeLongMessage :: a -> b
+class HasComputedLongMessage a b | a -> b where
+    computedLongMessage :: a -> b
 
-class HasComputeLongSubject a b | a -> b where
-    computeLongSubject :: a -> b
+class HasComputedLongSubject a b | a -> b where
+    computedLongSubject :: a -> b
 
-class HasComputeLongSummary a b | a -> b where
-    computeLongSummary :: a -> b
+class HasComputedLongSummary a b | a -> b where
+    computedLongSummary :: a -> b
 
-class HasComputeLongitude a b | a -> b where
-    computeLongitude :: a -> b
+class HasComputedLongitude a b | a -> b where
+    computedLongitude :: a -> b
 
-class HasComputeMetric a b | a -> b where
-    computeMetric :: a -> b
+class HasComputedMetric a b | a -> b where
+    computedMetric :: a -> b
 
-class HasComputeMetricCluster a b | a -> b where
-    computeMetricCluster :: a -> b
+class HasComputedMetricCluster a b | a -> b where
+    computedMetricCluster :: a -> b
 
-class HasComputeMetricLimit a b | a -> b where
-    computeMetricLimit :: a -> b
+class HasComputedMetricLimit a b | a -> b where
+    computedMetricLimit :: a -> b
 
-class HasComputeMetricName a b | a -> b where
-    computeMetricName :: a -> b
+class HasComputedMetricName a b | a -> b where
+    computedMetricName :: a -> b
 
-class HasComputeMetricType a b | a -> b where
-    computeMetricType :: a -> b
+class HasComputedMetricType a b | a -> b where
+    computedMetricType :: a -> b
 
-class HasComputeMysql a b | a -> b where
-    computeMysql :: a -> b
+class HasComputedMysql a b | a -> b where
+    computedMysql :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeNotes a b | a -> b where
-    computeNotes :: a -> b
+class HasComputedNotes a b | a -> b where
+    computedNotes :: a -> b
 
-class HasComputeOwner a b | a -> b where
-    computeOwner :: a -> b
+class HasComputedOwner a b | a -> b where
+    computedOwner :: a -> b
 
-class HasComputePagerDuty a b | a -> b where
-    computePagerDuty :: a -> b
+class HasComputedPagerDuty a b | a -> b where
+    computedPagerDuty :: a -> b
 
-class HasComputeParent a b | a -> b where
-    computeParent :: a -> b
+class HasComputedParent a b | a -> b where
+    computedParent :: a -> b
 
-class HasComputePeriod a b | a -> b where
-    computePeriod :: a -> b
+class HasComputedPeriod a b | a -> b where
+    computedPeriod :: a -> b
 
-class HasComputePostgresql a b | a -> b where
-    computePostgresql :: a -> b
+class HasComputedPostgresql a b | a -> b where
+    computedPostgresql :: a -> b
 
-class HasComputeQuery a b | a -> b where
-    computeQuery :: a -> b
+class HasComputedQuery a b | a -> b where
+    computedQuery :: a -> b
 
-class HasComputeRight a b | a -> b where
-    computeRight :: a -> b
+class HasComputedRight a b | a -> b where
+    computedRight :: a -> b
 
-class HasComputeShortMessage a b | a -> b where
-    computeShortMessage :: a -> b
+class HasComputedShortMessage a b | a -> b where
+    computedShortMessage :: a -> b
 
-class HasComputeShortSummary a b | a -> b where
-    computeShortSummary :: a -> b
+class HasComputedShortSummary a b | a -> b where
+    computedShortSummary :: a -> b
 
-class HasComputeSlack a b | a -> b where
-    computeSlack :: a -> b
+class HasComputedSlack a b | a -> b where
+    computedSlack :: a -> b
 
-class HasComputeSms a b | a -> b where
-    computeSms :: a -> b
+class HasComputedSms a b | a -> b where
+    computedSms :: a -> b
 
-class HasComputeState a b | a -> b where
-    computeState :: a -> b
+class HasComputedState a b | a -> b where
+    computedState :: a -> b
 
-class HasComputeStatsd a b | a -> b where
-    computeStatsd :: a -> b
+class HasComputedStatsd a b | a -> b where
+    computedStatsd :: a -> b
 
-class HasComputeTags a b | a -> b where
-    computeTags :: a -> b
+class HasComputedTags a b | a -> b where
+    computedTags :: a -> b
 
-class HasComputeTarget a b | a -> b where
-    computeTarget :: a -> b
+class HasComputedTarget a b | a -> b where
+    computedTarget :: a -> b
 
-class HasComputeTcp a b | a -> b where
-    computeTcp :: a -> b
+class HasComputedTcp a b | a -> b where
+    computedTcp :: a -> b
 
-class HasComputeTimeout a b | a -> b where
-    computeTimeout :: a -> b
+class HasComputedTimeout a b | a -> b where
+    computedTimeout :: a -> b
 
-class HasComputeTimezone a b | a -> b where
-    computeTimezone :: a -> b
+class HasComputedTimezone a b | a -> b where
+    computedTimezone :: a -> b
 
-class HasComputeType' a b | a -> b where
-    computeType' :: a -> b
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b
 
-class HasComputeUiBaseUrl a b | a -> b where
-    computeUiBaseUrl :: a -> b
+class HasComputedUiBaseUrl a b | a -> b where
+    computedUiBaseUrl :: a -> b
 
-class HasComputeUnit a b | a -> b where
-    computeUnit :: a -> b
+class HasComputedUnit a b | a -> b where
+    computedUnit :: a -> b
 
-class HasComputeUsage a b | a -> b where
-    computeUsage :: a -> b
+class HasComputedUsage a b | a -> b where
+    computedUsage :: a -> b
 
-class HasComputeUsers a b | a -> b where
-    computeUsers :: a -> b
+class HasComputedUsers a b | a -> b where
+    computedUsers :: a -> b
 
-class HasComputeVictorops a b | a -> b where
-    computeVictorops :: a -> b
+class HasComputedVictorops a b | a -> b where
+    computedVictorops :: a -> b

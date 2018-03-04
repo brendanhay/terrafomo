@@ -66,32 +66,32 @@ module Terrafomo.PostgreSQL.Resource
     , P.HasVersion (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAllowConnections (..)
-    , P.HasComputeBypassRowLevelSecurity (..)
-    , P.HasComputeConnectionLimit (..)
-    , P.HasComputeCreateDatabase (..)
-    , P.HasComputeCreateRole (..)
-    , P.HasComputeEncoding (..)
-    , P.HasComputeEncryptedPassword (..)
-    , P.HasComputeIfNotExists (..)
-    , P.HasComputeInherit (..)
-    , P.HasComputeIsTemplate (..)
-    , P.HasComputeLcCollate (..)
-    , P.HasComputeLcCtype (..)
-    , P.HasComputeLogin (..)
-    , P.HasComputeName (..)
-    , P.HasComputeOwner (..)
-    , P.HasComputePassword (..)
-    , P.HasComputePolicy (..)
-    , P.HasComputeReplication (..)
-    , P.HasComputeSchema (..)
-    , P.HasComputeSkipDropRole (..)
-    , P.HasComputeSkipReassignOwned (..)
-    , P.HasComputeSuperuser (..)
-    , P.HasComputeTablespaceName (..)
-    , P.HasComputeTemplate (..)
-    , P.HasComputeValidUntil (..)
-    , P.HasComputeVersion (..)
+    , P.HasComputedAllowConnections (..)
+    , P.HasComputedBypassRowLevelSecurity (..)
+    , P.HasComputedConnectionLimit (..)
+    , P.HasComputedCreateDatabase (..)
+    , P.HasComputedCreateRole (..)
+    , P.HasComputedEncoding (..)
+    , P.HasComputedEncryptedPassword (..)
+    , P.HasComputedIfNotExists (..)
+    , P.HasComputedInherit (..)
+    , P.HasComputedIsTemplate (..)
+    , P.HasComputedLcCollate (..)
+    , P.HasComputedLcCtype (..)
+    , P.HasComputedLogin (..)
+    , P.HasComputedName (..)
+    , P.HasComputedOwner (..)
+    , P.HasComputedPassword (..)
+    , P.HasComputedPolicy (..)
+    , P.HasComputedReplication (..)
+    , P.HasComputedSchema (..)
+    , P.HasComputedSkipDropRole (..)
+    , P.HasComputedSkipReassignOwned (..)
+    , P.HasComputedSuperuser (..)
+    , P.HasComputedTablespaceName (..)
+    , P.HasComputedTemplate (..)
+    , P.HasComputedValidUntil (..)
+    , P.HasComputedVersion (..)
 
     -- * Re-exported Types
     , module P
@@ -214,53 +214,53 @@ instance P.HasTemplate (ResourceDatabase s) (TF.Attr s P.Text) where
         lens (_template :: ResourceDatabase s -> TF.Attr s P.Text)
              (\s a -> s { _template = a } :: ResourceDatabase s)
 
-instance s ~ s' => P.HasComputeAllowConnections (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeAllowConnections =
+instance s ~ s' => P.HasComputedAllowConnections (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedAllowConnections =
         (_allow_connections :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeConnectionLimit (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeConnectionLimit =
+instance s ~ s' => P.HasComputedConnectionLimit (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedConnectionLimit =
         (_connection_limit :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEncoding (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeEncoding =
+instance s ~ s' => P.HasComputedEncoding (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedEncoding =
         (_encoding :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIsTemplate (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeIsTemplate =
+instance s ~ s' => P.HasComputedIsTemplate (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedIsTemplate =
         (_is_template :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLcCollate (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeLcCollate =
+instance s ~ s' => P.HasComputedLcCollate (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedLcCollate =
         (_lc_collate :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLcCtype (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeLcCtype =
+instance s ~ s' => P.HasComputedLcCtype (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedLcCtype =
         (_lc_ctype :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOwner (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeOwner =
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedOwner =
         (_owner :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTablespaceName (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeTablespaceName =
+instance s ~ s' => P.HasComputedTablespaceName (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedTablespaceName =
         (_tablespace_name :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTemplate (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeTemplate =
+instance s ~ s' => P.HasComputedTemplate (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedTemplate =
         (_template :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -316,18 +316,18 @@ instance P.HasVersion (ResourceExtension s) (TF.Attr s P.Text) where
         lens (_version :: ResourceExtension s -> TF.Attr s P.Text)
              (\s a -> s { _version = a } :: ResourceExtension s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceExtension s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceExtension s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceExtension s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSchema (TF.Ref s' (ResourceExtension s)) (TF.Attr s P.Text) where
-    computeSchema =
+instance s ~ s' => P.HasComputedSchema (TF.Ref s' (ResourceExtension s)) (TF.Attr s P.Text) where
+    computedSchema =
         (_schema :: ResourceExtension s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVersion (TF.Ref s' (ResourceExtension s)) (TF.Attr s P.Text) where
-    computeVersion =
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ResourceExtension s)) (TF.Attr s P.Text) where
+    computedVersion =
         (_version :: ResourceExtension s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -474,73 +474,73 @@ instance P.HasValidUntil (ResourceRole s) (TF.Attr s P.Text) where
         lens (_valid_until :: ResourceRole s -> TF.Attr s P.Text)
              (\s a -> s { _valid_until = a } :: ResourceRole s)
 
-instance s ~ s' => P.HasComputeBypassRowLevelSecurity (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computeBypassRowLevelSecurity =
+instance s ~ s' => P.HasComputedBypassRowLevelSecurity (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedBypassRowLevelSecurity =
         (_bypass_row_level_security :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeConnectionLimit (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computeConnectionLimit =
+instance s ~ s' => P.HasComputedConnectionLimit (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedConnectionLimit =
         (_connection_limit :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCreateDatabase (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computeCreateDatabase =
+instance s ~ s' => P.HasComputedCreateDatabase (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedCreateDatabase =
         (_create_database :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCreateRole (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computeCreateRole =
+instance s ~ s' => P.HasComputedCreateRole (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedCreateRole =
         (_create_role :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEncryptedPassword (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computeEncryptedPassword =
+instance s ~ s' => P.HasComputedEncryptedPassword (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedEncryptedPassword =
         (_encrypted_password :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInherit (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computeInherit =
+instance s ~ s' => P.HasComputedInherit (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedInherit =
         (_inherit :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLogin (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computeLogin =
+instance s ~ s' => P.HasComputedLogin (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedLogin =
         (_login :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePassword (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computePassword =
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedPassword =
         (_password :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeReplication (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computeReplication =
+instance s ~ s' => P.HasComputedReplication (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedReplication =
         (_replication :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSkipDropRole (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computeSkipDropRole =
+instance s ~ s' => P.HasComputedSkipDropRole (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedSkipDropRole =
         (_skip_drop_role :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSkipReassignOwned (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computeSkipReassignOwned =
+instance s ~ s' => P.HasComputedSkipReassignOwned (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedSkipReassignOwned =
         (_skip_reassign_owned :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSuperuser (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computeSuperuser =
+instance s ~ s' => P.HasComputedSuperuser (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedSuperuser =
         (_superuser :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeValidUntil (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
-    computeValidUntil =
+instance s ~ s' => P.HasComputedValidUntil (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+    computedValidUntil =
         (_valid_until :: ResourceRole s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -609,23 +609,23 @@ instance P.HasPolicy (ResourceSchema s) (TF.Attr s P.Text) where
         lens (_policy :: ResourceSchema s -> TF.Attr s P.Text)
              (\s a -> s { _policy = a } :: ResourceSchema s)
 
-instance s ~ s' => P.HasComputeIfNotExists (TF.Ref s' (ResourceSchema s)) (TF.Attr s P.Text) where
-    computeIfNotExists =
+instance s ~ s' => P.HasComputedIfNotExists (TF.Ref s' (ResourceSchema s)) (TF.Attr s P.Text) where
+    computedIfNotExists =
         (_if_not_exists :: ResourceSchema s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSchema s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceSchema s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceSchema s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOwner (TF.Ref s' (ResourceSchema s)) (TF.Attr s P.Text) where
-    computeOwner =
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (ResourceSchema s)) (TF.Attr s P.Text) where
+    computedOwner =
         (_owner :: ResourceSchema s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicy (TF.Ref s' (ResourceSchema s)) (TF.Attr s P.Text) where
-    computePolicy =
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (ResourceSchema s)) (TF.Attr s P.Text) where
+    computedPolicy =
         (_policy :: ResourceSchema s -> TF.Attr s P.Text)
             . TF.refValue
 

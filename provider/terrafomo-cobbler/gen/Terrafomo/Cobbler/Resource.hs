@@ -109,69 +109,69 @@ module Terrafomo.Cobbler.Resource
     , P.HasVirtType (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAptComponents (..)
-    , P.HasComputeAptDists (..)
-    , P.HasComputeArch (..)
-    , P.HasComputeBody (..)
-    , P.HasComputeBootFiles (..)
-    , P.HasComputeBreed (..)
-    , P.HasComputeComment (..)
-    , P.HasComputeCreaterepoFlags (..)
-    , P.HasComputeDistro (..)
-    , P.HasComputeEnableGpxe (..)
-    , P.HasComputeEnableMenu (..)
-    , P.HasComputeEnvironment (..)
-    , P.HasComputeFetchableFiles (..)
-    , P.HasComputeGateway (..)
-    , P.HasComputeHostname (..)
-    , P.HasComputeImage (..)
-    , P.HasComputeInitrd (..)
-    , P.HasComputeInterface (..)
-    , P.HasComputeIpv6DefaultDevice (..)
-    , P.HasComputeKeepUpdated (..)
-    , P.HasComputeKernel (..)
-    , P.HasComputeKernelOptions (..)
-    , P.HasComputeKernelOptionsPost (..)
-    , P.HasComputeKickstart (..)
-    , P.HasComputeKsMeta (..)
-    , P.HasComputeLdapEnabled (..)
-    , P.HasComputeLdapType (..)
-    , P.HasComputeMgmtClasses (..)
-    , P.HasComputeMgmtParameters (..)
-    , P.HasComputeMirror (..)
-    , P.HasComputeMirrorLocally (..)
-    , P.HasComputeMonitEnabled (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNameServers (..)
-    , P.HasComputeNameServersSearch (..)
-    , P.HasComputeNetbootEnabled (..)
-    , P.HasComputeOsVersion (..)
-    , P.HasComputeOwners (..)
-    , P.HasComputeParent (..)
-    , P.HasComputePowerAddress (..)
-    , P.HasComputePowerId (..)
-    , P.HasComputePowerPass (..)
-    , P.HasComputePowerType (..)
-    , P.HasComputePowerUser (..)
-    , P.HasComputeProfile (..)
-    , P.HasComputeProxy (..)
-    , P.HasComputeRedhatManagementKey (..)
-    , P.HasComputeRedhatManagementServer (..)
-    , P.HasComputeRepos (..)
-    , P.HasComputeRpmList (..)
-    , P.HasComputeServer (..)
-    , P.HasComputeStatus (..)
-    , P.HasComputeTemplateFiles (..)
-    , P.HasComputeTemplateRemoteKickstarts (..)
-    , P.HasComputeVirtAutoBoot (..)
-    , P.HasComputeVirtBridge (..)
-    , P.HasComputeVirtCpus (..)
-    , P.HasComputeVirtDiskDriver (..)
-    , P.HasComputeVirtFileSize (..)
-    , P.HasComputeVirtPath (..)
-    , P.HasComputeVirtPxeBoot (..)
-    , P.HasComputeVirtRam (..)
-    , P.HasComputeVirtType (..)
+    , P.HasComputedAptComponents (..)
+    , P.HasComputedAptDists (..)
+    , P.HasComputedArch (..)
+    , P.HasComputedBody (..)
+    , P.HasComputedBootFiles (..)
+    , P.HasComputedBreed (..)
+    , P.HasComputedComment (..)
+    , P.HasComputedCreaterepoFlags (..)
+    , P.HasComputedDistro (..)
+    , P.HasComputedEnableGpxe (..)
+    , P.HasComputedEnableMenu (..)
+    , P.HasComputedEnvironment (..)
+    , P.HasComputedFetchableFiles (..)
+    , P.HasComputedGateway (..)
+    , P.HasComputedHostname (..)
+    , P.HasComputedImage (..)
+    , P.HasComputedInitrd (..)
+    , P.HasComputedInterface (..)
+    , P.HasComputedIpv6DefaultDevice (..)
+    , P.HasComputedKeepUpdated (..)
+    , P.HasComputedKernel (..)
+    , P.HasComputedKernelOptions (..)
+    , P.HasComputedKernelOptionsPost (..)
+    , P.HasComputedKickstart (..)
+    , P.HasComputedKsMeta (..)
+    , P.HasComputedLdapEnabled (..)
+    , P.HasComputedLdapType (..)
+    , P.HasComputedMgmtClasses (..)
+    , P.HasComputedMgmtParameters (..)
+    , P.HasComputedMirror (..)
+    , P.HasComputedMirrorLocally (..)
+    , P.HasComputedMonitEnabled (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNameServers (..)
+    , P.HasComputedNameServersSearch (..)
+    , P.HasComputedNetbootEnabled (..)
+    , P.HasComputedOsVersion (..)
+    , P.HasComputedOwners (..)
+    , P.HasComputedParent (..)
+    , P.HasComputedPowerAddress (..)
+    , P.HasComputedPowerId (..)
+    , P.HasComputedPowerPass (..)
+    , P.HasComputedPowerType (..)
+    , P.HasComputedPowerUser (..)
+    , P.HasComputedProfile (..)
+    , P.HasComputedProxy (..)
+    , P.HasComputedRedhatManagementKey (..)
+    , P.HasComputedRedhatManagementServer (..)
+    , P.HasComputedRepos (..)
+    , P.HasComputedRpmList (..)
+    , P.HasComputedServer (..)
+    , P.HasComputedStatus (..)
+    , P.HasComputedTemplateFiles (..)
+    , P.HasComputedTemplateRemoteKickstarts (..)
+    , P.HasComputedVirtAutoBoot (..)
+    , P.HasComputedVirtBridge (..)
+    , P.HasComputedVirtCpus (..)
+    , P.HasComputedVirtDiskDriver (..)
+    , P.HasComputedVirtFileSize (..)
+    , P.HasComputedVirtPath (..)
+    , P.HasComputedVirtPxeBoot (..)
+    , P.HasComputedVirtRam (..)
+    , P.HasComputedVirtType (..)
 
     -- * Re-exported Types
     , module P
@@ -340,83 +340,83 @@ instance P.HasTemplateFiles (ResourceDistro s) (TF.Attr s P.Text) where
         lens (_template_files :: ResourceDistro s -> TF.Attr s P.Text)
              (\s a -> s { _template_files = a } :: ResourceDistro s)
 
-instance s ~ s' => P.HasComputeArch (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeArch =
+instance s ~ s' => P.HasComputedArch (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedArch =
         (_arch :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBootFiles (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeBootFiles =
+instance s ~ s' => P.HasComputedBootFiles (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedBootFiles =
         (_boot_files :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBreed (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeBreed =
+instance s ~ s' => P.HasComputedBreed (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedBreed =
         (_breed :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeComment (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeComment =
+instance s ~ s' => P.HasComputedComment (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedComment =
         (_comment :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeFetchableFiles (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeFetchableFiles =
+instance s ~ s' => P.HasComputedFetchableFiles (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedFetchableFiles =
         (_fetchable_files :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInitrd (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeInitrd =
+instance s ~ s' => P.HasComputedInitrd (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedInitrd =
         (_initrd :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeKernel (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeKernel =
+instance s ~ s' => P.HasComputedKernel (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedKernel =
         (_kernel :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeKernelOptions (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeKernelOptions =
+instance s ~ s' => P.HasComputedKernelOptions (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedKernelOptions =
         (_kernel_options :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeKernelOptionsPost (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeKernelOptionsPost =
+instance s ~ s' => P.HasComputedKernelOptionsPost (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedKernelOptionsPost =
         (_kernel_options_post :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMgmtClasses (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeMgmtClasses =
+instance s ~ s' => P.HasComputedMgmtClasses (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedMgmtClasses =
         (_mgmt_classes :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOsVersion (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeOsVersion =
+instance s ~ s' => P.HasComputedOsVersion (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedOsVersion =
         (_os_version :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOwners (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeOwners =
+instance s ~ s' => P.HasComputedOwners (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedOwners =
         (_owners :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRedhatManagementKey (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeRedhatManagementKey =
+instance s ~ s' => P.HasComputedRedhatManagementKey (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedRedhatManagementKey =
         (_redhat_management_key :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRedhatManagementServer (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeRedhatManagementServer =
+instance s ~ s' => P.HasComputedRedhatManagementServer (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedRedhatManagementServer =
         (_redhat_management_server :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTemplateFiles (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
-    computeTemplateFiles =
+instance s ~ s' => P.HasComputedTemplateFiles (TF.Ref s' (ResourceDistro s)) (TF.Attr s P.Text) where
+    computedTemplateFiles =
         (_template_files :: ResourceDistro s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -469,13 +469,13 @@ instance P.HasName (ResourceKickstartFile s) (TF.Attr s P.Text) where
         lens (_name :: ResourceKickstartFile s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceKickstartFile s)
 
-instance s ~ s' => P.HasComputeBody (TF.Ref s' (ResourceKickstartFile s)) (TF.Attr s P.Text) where
-    computeBody =
+instance s ~ s' => P.HasComputedBody (TF.Ref s' (ResourceKickstartFile s)) (TF.Attr s P.Text) where
+    computedBody =
         (_body :: ResourceKickstartFile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceKickstartFile s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceKickstartFile s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceKickstartFile s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -754,163 +754,163 @@ instance P.HasVirtType (ResourceProfile s) (TF.Attr s P.Text) where
         lens (_virt_type :: ResourceProfile s -> TF.Attr s P.Text)
              (\s a -> s { _virt_type = a } :: ResourceProfile s)
 
-instance s ~ s' => P.HasComputeBootFiles (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeBootFiles =
+instance s ~ s' => P.HasComputedBootFiles (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedBootFiles =
         (_boot_files :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeComment (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeComment =
+instance s ~ s' => P.HasComputedComment (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedComment =
         (_comment :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDistro (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeDistro =
+instance s ~ s' => P.HasComputedDistro (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedDistro =
         (_distro :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEnableGpxe (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeEnableGpxe =
+instance s ~ s' => P.HasComputedEnableGpxe (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedEnableGpxe =
         (_enable_gpxe :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEnableMenu (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeEnableMenu =
+instance s ~ s' => P.HasComputedEnableMenu (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedEnableMenu =
         (_enable_menu :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeFetchableFiles (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeFetchableFiles =
+instance s ~ s' => P.HasComputedFetchableFiles (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedFetchableFiles =
         (_fetchable_files :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeKernelOptions (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeKernelOptions =
+instance s ~ s' => P.HasComputedKernelOptions (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedKernelOptions =
         (_kernel_options :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeKernelOptionsPost (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeKernelOptionsPost =
+instance s ~ s' => P.HasComputedKernelOptionsPost (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedKernelOptionsPost =
         (_kernel_options_post :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeKickstart (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeKickstart =
+instance s ~ s' => P.HasComputedKickstart (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedKickstart =
         (_kickstart :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeKsMeta (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeKsMeta =
+instance s ~ s' => P.HasComputedKsMeta (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedKsMeta =
         (_ks_meta :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMgmtClasses (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeMgmtClasses =
+instance s ~ s' => P.HasComputedMgmtClasses (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedMgmtClasses =
         (_mgmt_classes :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMgmtParameters (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeMgmtParameters =
+instance s ~ s' => P.HasComputedMgmtParameters (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedMgmtParameters =
         (_mgmt_parameters :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNameServers (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeNameServers =
+instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedNameServers =
         (_name_servers :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNameServersSearch (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeNameServersSearch =
+instance s ~ s' => P.HasComputedNameServersSearch (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedNameServersSearch =
         (_name_servers_search :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOwners (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeOwners =
+instance s ~ s' => P.HasComputedOwners (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedOwners =
         (_owners :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeParent (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeParent =
+instance s ~ s' => P.HasComputedParent (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedParent =
         (_parent :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeProxy (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeProxy =
+instance s ~ s' => P.HasComputedProxy (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedProxy =
         (_proxy :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRedhatManagementKey (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeRedhatManagementKey =
+instance s ~ s' => P.HasComputedRedhatManagementKey (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedRedhatManagementKey =
         (_redhat_management_key :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRedhatManagementServer (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeRedhatManagementServer =
+instance s ~ s' => P.HasComputedRedhatManagementServer (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedRedhatManagementServer =
         (_redhat_management_server :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRepos (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeRepos =
+instance s ~ s' => P.HasComputedRepos (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedRepos =
         (_repos :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeServer (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeServer =
+instance s ~ s' => P.HasComputedServer (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedServer =
         (_server :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTemplateFiles (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeTemplateFiles =
+instance s ~ s' => P.HasComputedTemplateFiles (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedTemplateFiles =
         (_template_files :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTemplateRemoteKickstarts (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeTemplateRemoteKickstarts =
+instance s ~ s' => P.HasComputedTemplateRemoteKickstarts (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedTemplateRemoteKickstarts =
         (_template_remote_kickstarts :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtAutoBoot (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeVirtAutoBoot =
+instance s ~ s' => P.HasComputedVirtAutoBoot (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedVirtAutoBoot =
         (_virt_auto_boot :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtBridge (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeVirtBridge =
+instance s ~ s' => P.HasComputedVirtBridge (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedVirtBridge =
         (_virt_bridge :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtCpus (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeVirtCpus =
+instance s ~ s' => P.HasComputedVirtCpus (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedVirtCpus =
         (_virt_cpus :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtDiskDriver (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeVirtDiskDriver =
+instance s ~ s' => P.HasComputedVirtDiskDriver (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedVirtDiskDriver =
         (_virt_disk_driver :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtFileSize (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeVirtFileSize =
+instance s ~ s' => P.HasComputedVirtFileSize (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedVirtFileSize =
         (_virt_file_size :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtPath (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeVirtPath =
+instance s ~ s' => P.HasComputedVirtPath (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedVirtPath =
         (_virt_path :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtRam (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeVirtRam =
+instance s ~ s' => P.HasComputedVirtRam (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedVirtRam =
         (_virt_ram :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtType (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
-    computeVirtType =
+instance s ~ s' => P.HasComputedVirtType (TF.Ref s' (ResourceProfile s)) (TF.Attr s P.Text) where
+    computedVirtType =
         (_virt_type :: ResourceProfile s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1075,73 +1075,73 @@ instance P.HasRpmList (ResourceRepo s) (TF.Attr s P.Text) where
         lens (_rpm_list :: ResourceRepo s -> TF.Attr s P.Text)
              (\s a -> s { _rpm_list = a } :: ResourceRepo s)
 
-instance s ~ s' => P.HasComputeAptComponents (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeAptComponents =
+instance s ~ s' => P.HasComputedAptComponents (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedAptComponents =
         (_apt_components :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAptDists (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeAptDists =
+instance s ~ s' => P.HasComputedAptDists (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedAptDists =
         (_apt_dists :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeArch (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeArch =
+instance s ~ s' => P.HasComputedArch (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedArch =
         (_arch :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBreed (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeBreed =
+instance s ~ s' => P.HasComputedBreed (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedBreed =
         (_breed :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeComment (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeComment =
+instance s ~ s' => P.HasComputedComment (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedComment =
         (_comment :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCreaterepoFlags (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeCreaterepoFlags =
+instance s ~ s' => P.HasComputedCreaterepoFlags (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedCreaterepoFlags =
         (_createrepo_flags :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEnvironment (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeEnvironment =
+instance s ~ s' => P.HasComputedEnvironment (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedEnvironment =
         (_environment :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeKeepUpdated (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeKeepUpdated =
+instance s ~ s' => P.HasComputedKeepUpdated (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedKeepUpdated =
         (_keep_updated :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMirror (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeMirror =
+instance s ~ s' => P.HasComputedMirror (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedMirror =
         (_mirror :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMirrorLocally (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeMirrorLocally =
+instance s ~ s' => P.HasComputedMirrorLocally (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedMirrorLocally =
         (_mirror_locally :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOwners (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeOwners =
+instance s ~ s' => P.HasComputedOwners (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedOwners =
         (_owners :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeProxy (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeProxy =
+instance s ~ s' => P.HasComputedProxy (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedProxy =
         (_proxy :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRpmList (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
-    computeRpmList =
+instance s ~ s' => P.HasComputedRpmList (TF.Ref s' (ResourceRepo s)) (TF.Attr s P.Text) where
+    computedRpmList =
         (_rpm_list :: ResourceRepo s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1192,13 +1192,13 @@ instance P.HasName (ResourceSnippet s) (TF.Attr s P.Text) where
         lens (_name :: ResourceSnippet s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceSnippet s)
 
-instance s ~ s' => P.HasComputeBody (TF.Ref s' (ResourceSnippet s)) (TF.Attr s P.Text) where
-    computeBody =
+instance s ~ s' => P.HasComputedBody (TF.Ref s' (ResourceSnippet s)) (TF.Attr s P.Text) where
+    computedBody =
         (_body :: ResourceSnippet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSnippet s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceSnippet s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceSnippet s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1565,218 +1565,218 @@ instance P.HasVirtType (ResourceSystem s) (TF.Attr s P.Text) where
         lens (_virt_type :: ResourceSystem s -> TF.Attr s P.Text)
              (\s a -> s { _virt_type = a } :: ResourceSystem s)
 
-instance s ~ s' => P.HasComputeBootFiles (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeBootFiles =
+instance s ~ s' => P.HasComputedBootFiles (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedBootFiles =
         (_boot_files :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeComment (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeComment =
+instance s ~ s' => P.HasComputedComment (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedComment =
         (_comment :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEnableGpxe (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeEnableGpxe =
+instance s ~ s' => P.HasComputedEnableGpxe (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedEnableGpxe =
         (_enable_gpxe :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeFetchableFiles (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeFetchableFiles =
+instance s ~ s' => P.HasComputedFetchableFiles (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedFetchableFiles =
         (_fetchable_files :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeGateway (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeGateway =
+instance s ~ s' => P.HasComputedGateway (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedGateway =
         (_gateway :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHostname (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeHostname =
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedHostname =
         (_hostname :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeImage (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeImage =
+instance s ~ s' => P.HasComputedImage (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedImage =
         (_image :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInterface (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeInterface =
+instance s ~ s' => P.HasComputedInterface (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedInterface =
         (_interface :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIpv6DefaultDevice (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeIpv6DefaultDevice =
+instance s ~ s' => P.HasComputedIpv6DefaultDevice (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedIpv6DefaultDevice =
         (_ipv6_default_device :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeKernelOptions (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeKernelOptions =
+instance s ~ s' => P.HasComputedKernelOptions (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedKernelOptions =
         (_kernel_options :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeKernelOptionsPost (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeKernelOptionsPost =
+instance s ~ s' => P.HasComputedKernelOptionsPost (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedKernelOptionsPost =
         (_kernel_options_post :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeKickstart (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeKickstart =
+instance s ~ s' => P.HasComputedKickstart (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedKickstart =
         (_kickstart :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeKsMeta (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeKsMeta =
+instance s ~ s' => P.HasComputedKsMeta (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedKsMeta =
         (_ks_meta :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLdapEnabled (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeLdapEnabled =
+instance s ~ s' => P.HasComputedLdapEnabled (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedLdapEnabled =
         (_ldap_enabled :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLdapType (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeLdapType =
+instance s ~ s' => P.HasComputedLdapType (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedLdapType =
         (_ldap_type :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMgmtClasses (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeMgmtClasses =
+instance s ~ s' => P.HasComputedMgmtClasses (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedMgmtClasses =
         (_mgmt_classes :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMgmtParameters (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeMgmtParameters =
+instance s ~ s' => P.HasComputedMgmtParameters (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedMgmtParameters =
         (_mgmt_parameters :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMonitEnabled (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeMonitEnabled =
+instance s ~ s' => P.HasComputedMonitEnabled (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedMonitEnabled =
         (_monit_enabled :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNameServers (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeNameServers =
+instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedNameServers =
         (_name_servers :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNameServersSearch (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeNameServersSearch =
+instance s ~ s' => P.HasComputedNameServersSearch (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedNameServersSearch =
         (_name_servers_search :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNetbootEnabled (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeNetbootEnabled =
+instance s ~ s' => P.HasComputedNetbootEnabled (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedNetbootEnabled =
         (_netboot_enabled :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOwners (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeOwners =
+instance s ~ s' => P.HasComputedOwners (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedOwners =
         (_owners :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePowerAddress (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computePowerAddress =
+instance s ~ s' => P.HasComputedPowerAddress (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedPowerAddress =
         (_power_address :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePowerId (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computePowerId =
+instance s ~ s' => P.HasComputedPowerId (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedPowerId =
         (_power_id :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePowerPass (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computePowerPass =
+instance s ~ s' => P.HasComputedPowerPass (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedPowerPass =
         (_power_pass :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePowerType (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computePowerType =
+instance s ~ s' => P.HasComputedPowerType (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedPowerType =
         (_power_type :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePowerUser (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computePowerUser =
+instance s ~ s' => P.HasComputedPowerUser (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedPowerUser =
         (_power_user :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeProfile (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeProfile =
+instance s ~ s' => P.HasComputedProfile (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedProfile =
         (_profile :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeProxy (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeProxy =
+instance s ~ s' => P.HasComputedProxy (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedProxy =
         (_proxy :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRedhatManagementKey (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeRedhatManagementKey =
+instance s ~ s' => P.HasComputedRedhatManagementKey (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedRedhatManagementKey =
         (_redhat_management_key :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRedhatManagementServer (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeRedhatManagementServer =
+instance s ~ s' => P.HasComputedRedhatManagementServer (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedRedhatManagementServer =
         (_redhat_management_server :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStatus (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeStatus =
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedStatus =
         (_status :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTemplateFiles (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeTemplateFiles =
+instance s ~ s' => P.HasComputedTemplateFiles (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedTemplateFiles =
         (_template_files :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTemplateRemoteKickstarts (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeTemplateRemoteKickstarts =
+instance s ~ s' => P.HasComputedTemplateRemoteKickstarts (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedTemplateRemoteKickstarts =
         (_template_remote_kickstarts :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtAutoBoot (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeVirtAutoBoot =
+instance s ~ s' => P.HasComputedVirtAutoBoot (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedVirtAutoBoot =
         (_virt_auto_boot :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtCpus (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeVirtCpus =
+instance s ~ s' => P.HasComputedVirtCpus (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedVirtCpus =
         (_virt_cpus :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtDiskDriver (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeVirtDiskDriver =
+instance s ~ s' => P.HasComputedVirtDiskDriver (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedVirtDiskDriver =
         (_virt_disk_driver :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtFileSize (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeVirtFileSize =
+instance s ~ s' => P.HasComputedVirtFileSize (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedVirtFileSize =
         (_virt_file_size :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtPath (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeVirtPath =
+instance s ~ s' => P.HasComputedVirtPath (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedVirtPath =
         (_virt_path :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtPxeBoot (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeVirtPxeBoot =
+instance s ~ s' => P.HasComputedVirtPxeBoot (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedVirtPxeBoot =
         (_virt_pxe_boot :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtRam (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeVirtRam =
+instance s ~ s' => P.HasComputedVirtRam (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedVirtRam =
         (_virt_ram :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVirtType (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
-    computeVirtType =
+instance s ~ s' => P.HasComputedVirtType (TF.Ref s' (ResourceSystem s)) (TF.Attr s P.Text) where
+    computedVirtType =
         (_virt_type :: ResourceSystem s -> TF.Attr s P.Text)
             . TF.refValue
 

@@ -40,22 +40,22 @@ module Terrafomo.Bitbucket.Lens
     , HasWebsite (..)
 
     -- ** Computed Attributes
-    , HasComputeDescription (..)
-    , HasComputeEvents (..)
-    , HasComputeForkPolicy (..)
-    , HasComputeHasIssues (..)
-    , HasComputeHasWiki (..)
-    , HasComputeIsPrivate (..)
-    , HasComputeLanguage (..)
-    , HasComputeName (..)
-    , HasComputeOwner (..)
-    , HasComputeProjectKey (..)
-    , HasComputeRepository (..)
-    , HasComputeReviewers (..)
-    , HasComputeScm (..)
-    , HasComputeSlug (..)
-    , HasComputeUrl (..)
-    , HasComputeWebsite (..)
+    , HasComputedDescription (..)
+    , HasComputedEvents (..)
+    , HasComputedForkPolicy (..)
+    , HasComputedHasIssues (..)
+    , HasComputedHasWiki (..)
+    , HasComputedIsPrivate (..)
+    , HasComputedLanguage (..)
+    , HasComputedName (..)
+    , HasComputedOwner (..)
+    , HasComputedProjectKey (..)
+    , HasComputedRepository (..)
+    , HasComputedReviewers (..)
+    , HasComputedScm (..)
+    , HasComputedSlug (..)
+    , HasComputedUrl (..)
+    , HasComputedWebsite (..)
     ) where
 
 import GHC.Base ((.))
@@ -161,50 +161,50 @@ class HasWebsite a b | a -> b where
 instance HasWebsite a b => HasWebsite (TF.Schema l p a) b where
     website = TF.configuration . website
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeEvents a b | a -> b where
-    computeEvents :: a -> b
+class HasComputedEvents a b | a -> b where
+    computedEvents :: a -> b
 
-class HasComputeForkPolicy a b | a -> b where
-    computeForkPolicy :: a -> b
+class HasComputedForkPolicy a b | a -> b where
+    computedForkPolicy :: a -> b
 
-class HasComputeHasIssues a b | a -> b where
-    computeHasIssues :: a -> b
+class HasComputedHasIssues a b | a -> b where
+    computedHasIssues :: a -> b
 
-class HasComputeHasWiki a b | a -> b where
-    computeHasWiki :: a -> b
+class HasComputedHasWiki a b | a -> b where
+    computedHasWiki :: a -> b
 
-class HasComputeIsPrivate a b | a -> b where
-    computeIsPrivate :: a -> b
+class HasComputedIsPrivate a b | a -> b where
+    computedIsPrivate :: a -> b
 
-class HasComputeLanguage a b | a -> b where
-    computeLanguage :: a -> b
+class HasComputedLanguage a b | a -> b where
+    computedLanguage :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeOwner a b | a -> b where
-    computeOwner :: a -> b
+class HasComputedOwner a b | a -> b where
+    computedOwner :: a -> b
 
-class HasComputeProjectKey a b | a -> b where
-    computeProjectKey :: a -> b
+class HasComputedProjectKey a b | a -> b where
+    computedProjectKey :: a -> b
 
-class HasComputeRepository a b | a -> b where
-    computeRepository :: a -> b
+class HasComputedRepository a b | a -> b where
+    computedRepository :: a -> b
 
-class HasComputeReviewers a b | a -> b where
-    computeReviewers :: a -> b
+class HasComputedReviewers a b | a -> b where
+    computedReviewers :: a -> b
 
-class HasComputeScm a b | a -> b where
-    computeScm :: a -> b
+class HasComputedScm a b | a -> b where
+    computedScm :: a -> b
 
-class HasComputeSlug a b | a -> b where
-    computeSlug :: a -> b
+class HasComputedSlug a b | a -> b where
+    computedSlug :: a -> b
 
-class HasComputeUrl a b | a -> b where
-    computeUrl :: a -> b
+class HasComputedUrl a b | a -> b where
+    computedUrl :: a -> b
 
-class HasComputeWebsite a b | a -> b where
-    computeWebsite :: a -> b
+class HasComputedWebsite a b | a -> b where
+    computedWebsite :: a -> b

@@ -38,10 +38,10 @@ module Terrafomo.LogicMonitor.DataSource
     , P.HasSize (..)
 
     -- ** Computed Attributes
-    , P.HasComputeFilters (..)
-    , P.HasComputeMostRecent (..)
-    , P.HasComputeOffset (..)
-    , P.HasComputeSize (..)
+    , P.HasComputedFilters (..)
+    , P.HasComputedMostRecent (..)
+    , P.HasComputedOffset (..)
+    , P.HasComputedSize (..)
 
     -- * Re-exported Types
     , module P
@@ -114,23 +114,23 @@ instance P.HasSize (DataCollectors s) (TF.Attr s P.Text) where
         lens (_size :: DataCollectors s -> TF.Attr s P.Text)
              (\s a -> s { _size = a } :: DataCollectors s)
 
-instance s ~ s' => P.HasComputeFilters (TF.Ref s' (DataCollectors s)) (TF.Attr s P.Text) where
-    computeFilters =
+instance s ~ s' => P.HasComputedFilters (TF.Ref s' (DataCollectors s)) (TF.Attr s P.Text) where
+    computedFilters =
         (_filters :: DataCollectors s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMostRecent (TF.Ref s' (DataCollectors s)) (TF.Attr s P.Text) where
-    computeMostRecent =
+instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (DataCollectors s)) (TF.Attr s P.Text) where
+    computedMostRecent =
         (_most_recent :: DataCollectors s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOffset (TF.Ref s' (DataCollectors s)) (TF.Attr s P.Text) where
-    computeOffset =
+instance s ~ s' => P.HasComputedOffset (TF.Ref s' (DataCollectors s)) (TF.Attr s P.Text) where
+    computedOffset =
         (_offset :: DataCollectors s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSize (TF.Ref s' (DataCollectors s)) (TF.Attr s P.Text) where
-    computeSize =
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (DataCollectors s)) (TF.Attr s P.Text) where
+    computedSize =
         (_size :: DataCollectors s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -179,18 +179,18 @@ instance P.HasSize (DataDeviceGroup s) (TF.Attr s P.Text) where
         lens (_size :: DataDeviceGroup s -> TF.Attr s P.Text)
              (\s a -> s { _size = a } :: DataDeviceGroup s)
 
-instance s ~ s' => P.HasComputeFilters (TF.Ref s' (DataDeviceGroup s)) (TF.Attr s P.Text) where
-    computeFilters =
+instance s ~ s' => P.HasComputedFilters (TF.Ref s' (DataDeviceGroup s)) (TF.Attr s P.Text) where
+    computedFilters =
         (_filters :: DataDeviceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOffset (TF.Ref s' (DataDeviceGroup s)) (TF.Attr s P.Text) where
-    computeOffset =
+instance s ~ s' => P.HasComputedOffset (TF.Ref s' (DataDeviceGroup s)) (TF.Attr s P.Text) where
+    computedOffset =
         (_offset :: DataDeviceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSize (TF.Ref s' (DataDeviceGroup s)) (TF.Attr s P.Text) where
-    computeSize =
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (DataDeviceGroup s)) (TF.Attr s P.Text) where
+    computedSize =
         (_size :: DataDeviceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 

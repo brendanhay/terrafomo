@@ -42,40 +42,40 @@ module Terrafomo.OVH.Lens
     , HasZone (..)
 
     -- ** Computed Attributes
-    , HasComputeCidr (..)
-    , HasComputeContinentCode (..)
-    , HasComputeCreationDate (..)
-    , HasComputeDatacenterLocation (..)
-    , HasComputeDescription (..)
-    , HasComputeDhcp (..)
-    , HasComputeDhcpId (..)
-    , HasComputeEnd (..)
-    , HasComputeFieldType (..)
-    , HasComputeGatewayIp (..)
-    , HasComputeId (..)
-    , HasComputeIpPools (..)
-    , HasComputeName (..)
-    , HasComputeNames (..)
-    , HasComputeNetwork (..)
-    , HasComputeNetworkId (..)
-    , HasComputeNoGateway (..)
-    , HasComputeOpenstackRc (..)
-    , HasComputePassword (..)
-    , HasComputeProjectId (..)
-    , HasComputeRegion (..)
-    , HasComputeRegions (..)
-    , HasComputeRegionsStatus (..)
-    , HasComputeServices (..)
-    , HasComputeStart (..)
-    , HasComputeStatus (..)
-    , HasComputeSubDomain (..)
-    , HasComputeTarget (..)
-    , HasComputeTtl (..)
-    , HasComputeType' (..)
-    , HasComputeUsername (..)
-    , HasComputeVlanId (..)
-    , HasComputeVrackId (..)
-    , HasComputeZone (..)
+    , HasComputedCidr (..)
+    , HasComputedContinentCode (..)
+    , HasComputedCreationDate (..)
+    , HasComputedDatacenterLocation (..)
+    , HasComputedDescription (..)
+    , HasComputedDhcp (..)
+    , HasComputedDhcpId (..)
+    , HasComputedEnd (..)
+    , HasComputedFieldType (..)
+    , HasComputedGatewayIp (..)
+    , HasComputedId (..)
+    , HasComputedIpPools (..)
+    , HasComputedName (..)
+    , HasComputedNames (..)
+    , HasComputedNetwork (..)
+    , HasComputedNetworkId (..)
+    , HasComputedNoGateway (..)
+    , HasComputedOpenstackRc (..)
+    , HasComputedPassword (..)
+    , HasComputedProjectId (..)
+    , HasComputedRegion (..)
+    , HasComputedRegions (..)
+    , HasComputedRegionsStatus (..)
+    , HasComputedServices (..)
+    , HasComputedStart (..)
+    , HasComputedStatus (..)
+    , HasComputedSubDomain (..)
+    , HasComputedTarget (..)
+    , HasComputedTtl (..)
+    , HasComputedType' (..)
+    , HasComputedUsername (..)
+    , HasComputedVlanId (..)
+    , HasComputedVrackId (..)
+    , HasComputedZone (..)
     ) where
 
 import GHC.Base ((.))
@@ -193,104 +193,104 @@ class HasZone a b | a -> b where
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
-class HasComputeCidr a b | a -> b where
-    computeCidr :: a -> b
+class HasComputedCidr a b | a -> b where
+    computedCidr :: a -> b
 
-class HasComputeContinentCode a b | a -> b where
-    computeContinentCode :: a -> b
+class HasComputedContinentCode a b | a -> b where
+    computedContinentCode :: a -> b
 
-class HasComputeCreationDate a b | a -> b where
-    computeCreationDate :: a -> b
+class HasComputedCreationDate a b | a -> b where
+    computedCreationDate :: a -> b
 
-class HasComputeDatacenterLocation a b | a -> b where
-    computeDatacenterLocation :: a -> b
+class HasComputedDatacenterLocation a b | a -> b where
+    computedDatacenterLocation :: a -> b
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeDhcp a b | a -> b where
-    computeDhcp :: a -> b
+class HasComputedDhcp a b | a -> b where
+    computedDhcp :: a -> b
 
-class HasComputeDhcpId a b | a -> b where
-    computeDhcpId :: a -> b
+class HasComputedDhcpId a b | a -> b where
+    computedDhcpId :: a -> b
 
-class HasComputeEnd a b | a -> b where
-    computeEnd :: a -> b
+class HasComputedEnd a b | a -> b where
+    computedEnd :: a -> b
 
-class HasComputeFieldType a b | a -> b where
-    computeFieldType :: a -> b
+class HasComputedFieldType a b | a -> b where
+    computedFieldType :: a -> b
 
-class HasComputeGatewayIp a b | a -> b where
-    computeGatewayIp :: a -> b
+class HasComputedGatewayIp a b | a -> b where
+    computedGatewayIp :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeIpPools a b | a -> b where
-    computeIpPools :: a -> b
+class HasComputedIpPools a b | a -> b where
+    computedIpPools :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeNames a b | a -> b where
-    computeNames :: a -> b
+class HasComputedNames a b | a -> b where
+    computedNames :: a -> b
 
-class HasComputeNetwork a b | a -> b where
-    computeNetwork :: a -> b
+class HasComputedNetwork a b | a -> b where
+    computedNetwork :: a -> b
 
-class HasComputeNetworkId a b | a -> b where
-    computeNetworkId :: a -> b
+class HasComputedNetworkId a b | a -> b where
+    computedNetworkId :: a -> b
 
-class HasComputeNoGateway a b | a -> b where
-    computeNoGateway :: a -> b
+class HasComputedNoGateway a b | a -> b where
+    computedNoGateway :: a -> b
 
-class HasComputeOpenstackRc a b | a -> b where
-    computeOpenstackRc :: a -> b
+class HasComputedOpenstackRc a b | a -> b where
+    computedOpenstackRc :: a -> b
 
-class HasComputePassword a b | a -> b where
-    computePassword :: a -> b
+class HasComputedPassword a b | a -> b where
+    computedPassword :: a -> b
 
-class HasComputeProjectId a b | a -> b where
-    computeProjectId :: a -> b
+class HasComputedProjectId a b | a -> b where
+    computedProjectId :: a -> b
 
-class HasComputeRegion a b | a -> b where
-    computeRegion :: a -> b
+class HasComputedRegion a b | a -> b where
+    computedRegion :: a -> b
 
-class HasComputeRegions a b | a -> b where
-    computeRegions :: a -> b
+class HasComputedRegions a b | a -> b where
+    computedRegions :: a -> b
 
-class HasComputeRegionsStatus a b | a -> b where
-    computeRegionsStatus :: a -> b
+class HasComputedRegionsStatus a b | a -> b where
+    computedRegionsStatus :: a -> b
 
-class HasComputeServices a b | a -> b where
-    computeServices :: a -> b
+class HasComputedServices a b | a -> b where
+    computedServices :: a -> b
 
-class HasComputeStart a b | a -> b where
-    computeStart :: a -> b
+class HasComputedStart a b | a -> b where
+    computedStart :: a -> b
 
-class HasComputeStatus a b | a -> b where
-    computeStatus :: a -> b
+class HasComputedStatus a b | a -> b where
+    computedStatus :: a -> b
 
-class HasComputeSubDomain a b | a -> b where
-    computeSubDomain :: a -> b
+class HasComputedSubDomain a b | a -> b where
+    computedSubDomain :: a -> b
 
-class HasComputeTarget a b | a -> b where
-    computeTarget :: a -> b
+class HasComputedTarget a b | a -> b where
+    computedTarget :: a -> b
 
-class HasComputeTtl a b | a -> b where
-    computeTtl :: a -> b
+class HasComputedTtl a b | a -> b where
+    computedTtl :: a -> b
 
-class HasComputeType' a b | a -> b where
-    computeType' :: a -> b
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b
 
-class HasComputeUsername a b | a -> b where
-    computeUsername :: a -> b
+class HasComputedUsername a b | a -> b where
+    computedUsername :: a -> b
 
-class HasComputeVlanId a b | a -> b where
-    computeVlanId :: a -> b
+class HasComputedVlanId a b | a -> b where
+    computedVlanId :: a -> b
 
-class HasComputeVrackId a b | a -> b where
-    computeVrackId :: a -> b
+class HasComputedVrackId a b | a -> b where
+    computedVrackId :: a -> b
 
-class HasComputeZone a b | a -> b where
-    computeZone :: a -> b
+class HasComputedZone a b | a -> b where
+    computedZone :: a -> b

@@ -53,19 +53,19 @@ module Terrafomo.Triton.DataSource
     , P.HasVersion (..)
 
     -- ** Computed Attributes
-    , P.HasComputeCnsEnabled (..)
-    , P.HasComputeEmail (..)
-    , P.HasComputeEndpoint (..)
-    , P.HasComputeId (..)
-    , P.HasComputeLogin (..)
-    , P.HasComputeMostRecent (..)
-    , P.HasComputeName (..)
-    , P.HasComputeOs (..)
-    , P.HasComputeOwner (..)
-    , P.HasComputePublic (..)
-    , P.HasComputeState (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeVersion (..)
+    , P.HasComputedCnsEnabled (..)
+    , P.HasComputedEmail (..)
+    , P.HasComputedEndpoint (..)
+    , P.HasComputedId (..)
+    , P.HasComputedLogin (..)
+    , P.HasComputedMostRecent (..)
+    , P.HasComputedName (..)
+    , P.HasComputedOs (..)
+    , P.HasComputedOwner (..)
+    , P.HasComputedPublic (..)
+    , P.HasComputedState (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedVersion (..)
 
     -- * Re-exported Types
     , module P
@@ -140,23 +140,23 @@ instance P.HasLogin (DataAccount s) (TF.Attr s P.Text) where
         lens (_login :: DataAccount s -> TF.Attr s P.Text)
              (\s a -> s { _login = a } :: DataAccount s)
 
-instance s ~ s' => P.HasComputeCnsEnabled (TF.Ref s' (DataAccount s)) (TF.Attr s P.Text) where
-    computeCnsEnabled =
+instance s ~ s' => P.HasComputedCnsEnabled (TF.Ref s' (DataAccount s)) (TF.Attr s P.Text) where
+    computedCnsEnabled =
         (_cns_enabled :: DataAccount s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEmail (TF.Ref s' (DataAccount s)) (TF.Attr s P.Text) where
-    computeEmail =
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (DataAccount s)) (TF.Attr s P.Text) where
+    computedEmail =
         (_email :: DataAccount s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataAccount s)) (TF.Attr s P.Text) where
-    computeId =
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataAccount s)) (TF.Attr s P.Text) where
+    computedId =
         (_id :: DataAccount s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLogin (TF.Ref s' (DataAccount s)) (TF.Attr s P.Text) where
-    computeLogin =
+instance s ~ s' => P.HasComputedLogin (TF.Ref s' (DataAccount s)) (TF.Attr s P.Text) where
+    computedLogin =
         (_login :: DataAccount s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -199,13 +199,13 @@ instance P.HasName (DataDatacenter s) (TF.Attr s P.Text) where
         lens (_name :: DataDatacenter s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataDatacenter s)
 
-instance s ~ s' => P.HasComputeEndpoint (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
-    computeEndpoint =
+instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
+    computedEndpoint =
         (_endpoint :: DataDatacenter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataDatacenter s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -293,46 +293,46 @@ instance P.HasVersion (DataImage s) (TF.Attr s P.Text) where
         lens (_version :: DataImage s -> TF.Attr s P.Text)
              (\s a -> s { _version = a } :: DataImage s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeMostRecent (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeMostRecent =
+instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedMostRecent =
         (_most_recent :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOs (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeOs =
+instance s ~ s' => P.HasComputedOs (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedOs =
         (_os :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOwner (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeOwner =
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedOwner =
         (_owner :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePublic (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computePublic =
+instance s ~ s' => P.HasComputedPublic (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedPublic =
         (_public :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeState (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeState =
+instance s ~ s' => P.HasComputedState (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedState =
         (_state :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVersion (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeVersion =
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedVersion =
         (_version :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -370,11 +370,11 @@ instance P.HasName (DataNetwork s) (TF.Attr s P.Text) where
         lens (_name :: DataNetwork s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataNetwork s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataNetwork s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataNetwork s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataNetwork s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataNetwork s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 

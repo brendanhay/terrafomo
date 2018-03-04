@@ -43,27 +43,27 @@ module Terrafomo.Librato.Lens
     , HasType' (..)
 
     -- ** Computed Attributes
-    , HasComputeActive (..)
-    , HasComputeAttributes (..)
-    , HasComputeComposite (..)
-    , HasComputeCondition (..)
-    , HasComputeDescription (..)
-    , HasComputeDisplayName (..)
-    , HasComputeId (..)
-    , HasComputeLabel (..)
-    , HasComputeMax (..)
-    , HasComputeMin (..)
-    , HasComputeName (..)
-    , HasComputePeriod (..)
-    , HasComputeRearmSeconds (..)
-    , HasComputeRelatedSpace (..)
-    , HasComputeServices (..)
-    , HasComputeSettings (..)
-    , HasComputeSourceLag (..)
-    , HasComputeSpaceId (..)
-    , HasComputeStream (..)
-    , HasComputeTitle (..)
-    , HasComputeType' (..)
+    , HasComputedActive (..)
+    , HasComputedAttributes (..)
+    , HasComputedComposite (..)
+    , HasComputedCondition (..)
+    , HasComputedDescription (..)
+    , HasComputedDisplayName (..)
+    , HasComputedId (..)
+    , HasComputedLabel (..)
+    , HasComputedMax (..)
+    , HasComputedMin (..)
+    , HasComputedName (..)
+    , HasComputedPeriod (..)
+    , HasComputedRearmSeconds (..)
+    , HasComputedRelatedSpace (..)
+    , HasComputedServices (..)
+    , HasComputedSettings (..)
+    , HasComputedSourceLag (..)
+    , HasComputedSpaceId (..)
+    , HasComputedStream (..)
+    , HasComputedTitle (..)
+    , HasComputedType' (..)
     ) where
 
 import GHC.Base ((.))
@@ -187,65 +187,65 @@ class HasType' a b | a -> b where
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasComputeActive a b | a -> b where
-    computeActive :: a -> b
+class HasComputedActive a b | a -> b where
+    computedActive :: a -> b
 
-class HasComputeAttributes a b | a -> b where
-    computeAttributes :: a -> b
+class HasComputedAttributes a b | a -> b where
+    computedAttributes :: a -> b
 
-class HasComputeComposite a b | a -> b where
-    computeComposite :: a -> b
+class HasComputedComposite a b | a -> b where
+    computedComposite :: a -> b
 
-class HasComputeCondition a b | a -> b where
-    computeCondition :: a -> b
+class HasComputedCondition a b | a -> b where
+    computedCondition :: a -> b
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeDisplayName a b | a -> b where
-    computeDisplayName :: a -> b
+class HasComputedDisplayName a b | a -> b where
+    computedDisplayName :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeLabel a b | a -> b where
-    computeLabel :: a -> b
+class HasComputedLabel a b | a -> b where
+    computedLabel :: a -> b
 
-class HasComputeMax a b | a -> b where
-    computeMax :: a -> b
+class HasComputedMax a b | a -> b where
+    computedMax :: a -> b
 
-class HasComputeMin a b | a -> b where
-    computeMin :: a -> b
+class HasComputedMin a b | a -> b where
+    computedMin :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputePeriod a b | a -> b where
-    computePeriod :: a -> b
+class HasComputedPeriod a b | a -> b where
+    computedPeriod :: a -> b
 
-class HasComputeRearmSeconds a b | a -> b where
-    computeRearmSeconds :: a -> b
+class HasComputedRearmSeconds a b | a -> b where
+    computedRearmSeconds :: a -> b
 
-class HasComputeRelatedSpace a b | a -> b where
-    computeRelatedSpace :: a -> b
+class HasComputedRelatedSpace a b | a -> b where
+    computedRelatedSpace :: a -> b
 
-class HasComputeServices a b | a -> b where
-    computeServices :: a -> b
+class HasComputedServices a b | a -> b where
+    computedServices :: a -> b
 
-class HasComputeSettings a b | a -> b where
-    computeSettings :: a -> b
+class HasComputedSettings a b | a -> b where
+    computedSettings :: a -> b
 
-class HasComputeSourceLag a b | a -> b where
-    computeSourceLag :: a -> b
+class HasComputedSourceLag a b | a -> b where
+    computedSourceLag :: a -> b
 
-class HasComputeSpaceId a b | a -> b where
-    computeSpaceId :: a -> b
+class HasComputedSpaceId a b | a -> b where
+    computedSpaceId :: a -> b
 
-class HasComputeStream a b | a -> b where
-    computeStream :: a -> b
+class HasComputedStream a b | a -> b where
+    computedStream :: a -> b
 
-class HasComputeTitle a b | a -> b where
-    computeTitle :: a -> b
+class HasComputedTitle a b | a -> b where
+    computedTitle :: a -> b
 
-class HasComputeType' a b | a -> b where
-    computeType' :: a -> b
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b

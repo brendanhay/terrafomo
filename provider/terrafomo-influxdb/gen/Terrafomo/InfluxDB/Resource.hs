@@ -44,13 +44,13 @@ module Terrafomo.InfluxDB.Resource
     , P.HasRetentionPolicies (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAdmin (..)
-    , P.HasComputeDatabase (..)
-    , P.HasComputeGrant (..)
-    , P.HasComputeName (..)
-    , P.HasComputePassword (..)
-    , P.HasComputeQuery (..)
-    , P.HasComputeRetentionPolicies (..)
+    , P.HasComputedAdmin (..)
+    , P.HasComputedDatabase (..)
+    , P.HasComputedGrant (..)
+    , P.HasComputedName (..)
+    , P.HasComputedPassword (..)
+    , P.HasComputedQuery (..)
+    , P.HasComputedRetentionPolicies (..)
 
     -- * Re-exported Types
     , module P
@@ -116,18 +116,18 @@ instance P.HasQuery (ResourceContinuousQuery s) (TF.Attr s P.Text) where
         lens (_query :: ResourceContinuousQuery s -> TF.Attr s P.Text)
              (\s a -> s { _query = a } :: ResourceContinuousQuery s)
 
-instance s ~ s' => P.HasComputeDatabase (TF.Ref s' (ResourceContinuousQuery s)) (TF.Attr s P.Text) where
-    computeDatabase =
+instance s ~ s' => P.HasComputedDatabase (TF.Ref s' (ResourceContinuousQuery s)) (TF.Attr s P.Text) where
+    computedDatabase =
         (_database :: ResourceContinuousQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceContinuousQuery s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceContinuousQuery s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceContinuousQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeQuery (TF.Ref s' (ResourceContinuousQuery s)) (TF.Attr s P.Text) where
-    computeQuery =
+instance s ~ s' => P.HasComputedQuery (TF.Ref s' (ResourceContinuousQuery s)) (TF.Attr s P.Text) where
+    computedQuery =
         (_query :: ResourceContinuousQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -167,13 +167,13 @@ instance P.HasRetentionPolicies (ResourceDatabase s) (TF.Attr s P.Text) where
         lens (_retention_policies :: ResourceDatabase s -> TF.Attr s P.Text)
              (\s a -> s { _retention_policies = a } :: ResourceDatabase s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRetentionPolicies (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeRetentionPolicies =
+instance s ~ s' => P.HasComputedRetentionPolicies (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedRetentionPolicies =
         (_retention_policies :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -228,21 +228,21 @@ instance P.HasPassword (ResourceUser s) (TF.Attr s P.Text) where
         lens (_password :: ResourceUser s -> TF.Attr s P.Text)
              (\s a -> s { _password = a } :: ResourceUser s)
 
-instance s ~ s' => P.HasComputeAdmin (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeAdmin x = TF.compute (TF.refKey x) "admin"
+instance s ~ s' => P.HasComputedAdmin (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedAdmin x = TF.compute (TF.refKey x) "admin"
 
-instance s ~ s' => P.HasComputeGrant (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeGrant =
+instance s ~ s' => P.HasComputedGrant (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedGrant =
         (_grant :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePassword (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computePassword =
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedPassword =
         (_password :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 

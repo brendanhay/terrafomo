@@ -60,42 +60,42 @@ module Terrafomo.VCloudDirector.Lens
     , HasVappName (..)
 
     -- ** Computed Attributes
-    , HasComputeCatalogName (..)
-    , HasComputeCpus (..)
-    , HasComputeDefaultAction (..)
-    , HasComputeDescription (..)
-    , HasComputeDhcpPool (..)
-    , HasComputeDns1 (..)
-    , HasComputeDns2 (..)
-    , HasComputeDnsSuffix (..)
-    , HasComputeEdgeGateway (..)
-    , HasComputeEncryptionProtocol (..)
-    , HasComputeExternalIp (..)
-    , HasComputeGateway (..)
-    , HasComputeInitscript (..)
-    , HasComputeInternalIp (..)
-    , HasComputeIp (..)
-    , HasComputeLocalId (..)
-    , HasComputeLocalIpAddress (..)
-    , HasComputeLocalSubnets (..)
-    , HasComputeMemory (..)
-    , HasComputeMetadata (..)
-    , HasComputeMtu (..)
-    , HasComputeName (..)
-    , HasComputeNetmask (..)
-    , HasComputeNetworkName (..)
-    , HasComputeOvf (..)
-    , HasComputePeerId (..)
-    , HasComputePeerIpAddress (..)
-    , HasComputePeerSubnets (..)
-    , HasComputePort (..)
-    , HasComputePowerOn (..)
-    , HasComputeRule (..)
-    , HasComputeShared (..)
-    , HasComputeSharedSecret (..)
-    , HasComputeStaticIpPool (..)
-    , HasComputeTemplateName (..)
-    , HasComputeVappName (..)
+    , HasComputedCatalogName (..)
+    , HasComputedCpus (..)
+    , HasComputedDefaultAction (..)
+    , HasComputedDescription (..)
+    , HasComputedDhcpPool (..)
+    , HasComputedDns1 (..)
+    , HasComputedDns2 (..)
+    , HasComputedDnsSuffix (..)
+    , HasComputedEdgeGateway (..)
+    , HasComputedEncryptionProtocol (..)
+    , HasComputedExternalIp (..)
+    , HasComputedGateway (..)
+    , HasComputedInitscript (..)
+    , HasComputedInternalIp (..)
+    , HasComputedIp (..)
+    , HasComputedLocalId (..)
+    , HasComputedLocalIpAddress (..)
+    , HasComputedLocalSubnets (..)
+    , HasComputedMemory (..)
+    , HasComputedMetadata (..)
+    , HasComputedMtu (..)
+    , HasComputedName (..)
+    , HasComputedNetmask (..)
+    , HasComputedNetworkName (..)
+    , HasComputedOvf (..)
+    , HasComputedPeerId (..)
+    , HasComputedPeerIpAddress (..)
+    , HasComputedPeerSubnets (..)
+    , HasComputedPort (..)
+    , HasComputedPowerOn (..)
+    , HasComputedRule (..)
+    , HasComputedShared (..)
+    , HasComputedSharedSecret (..)
+    , HasComputedStaticIpPool (..)
+    , HasComputedTemplateName (..)
+    , HasComputedVappName (..)
     ) where
 
 import GHC.Base ((.))
@@ -321,110 +321,110 @@ class HasVappName a b | a -> b where
 instance HasVappName a b => HasVappName (TF.Schema l p a) b where
     vappName = TF.configuration . vappName
 
-class HasComputeCatalogName a b | a -> b where
-    computeCatalogName :: a -> b
+class HasComputedCatalogName a b | a -> b where
+    computedCatalogName :: a -> b
 
-class HasComputeCpus a b | a -> b where
-    computeCpus :: a -> b
+class HasComputedCpus a b | a -> b where
+    computedCpus :: a -> b
 
-class HasComputeDefaultAction a b | a -> b where
-    computeDefaultAction :: a -> b
+class HasComputedDefaultAction a b | a -> b where
+    computedDefaultAction :: a -> b
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeDhcpPool a b | a -> b where
-    computeDhcpPool :: a -> b
+class HasComputedDhcpPool a b | a -> b where
+    computedDhcpPool :: a -> b
 
-class HasComputeDns1 a b | a -> b where
-    computeDns1 :: a -> b
+class HasComputedDns1 a b | a -> b where
+    computedDns1 :: a -> b
 
-class HasComputeDns2 a b | a -> b where
-    computeDns2 :: a -> b
+class HasComputedDns2 a b | a -> b where
+    computedDns2 :: a -> b
 
-class HasComputeDnsSuffix a b | a -> b where
-    computeDnsSuffix :: a -> b
+class HasComputedDnsSuffix a b | a -> b where
+    computedDnsSuffix :: a -> b
 
-class HasComputeEdgeGateway a b | a -> b where
-    computeEdgeGateway :: a -> b
+class HasComputedEdgeGateway a b | a -> b where
+    computedEdgeGateway :: a -> b
 
-class HasComputeEncryptionProtocol a b | a -> b where
-    computeEncryptionProtocol :: a -> b
+class HasComputedEncryptionProtocol a b | a -> b where
+    computedEncryptionProtocol :: a -> b
 
-class HasComputeExternalIp a b | a -> b where
-    computeExternalIp :: a -> b
+class HasComputedExternalIp a b | a -> b where
+    computedExternalIp :: a -> b
 
-class HasComputeGateway a b | a -> b where
-    computeGateway :: a -> b
+class HasComputedGateway a b | a -> b where
+    computedGateway :: a -> b
 
-class HasComputeInitscript a b | a -> b where
-    computeInitscript :: a -> b
+class HasComputedInitscript a b | a -> b where
+    computedInitscript :: a -> b
 
-class HasComputeInternalIp a b | a -> b where
-    computeInternalIp :: a -> b
+class HasComputedInternalIp a b | a -> b where
+    computedInternalIp :: a -> b
 
-class HasComputeIp a b | a -> b where
-    computeIp :: a -> b
+class HasComputedIp a b | a -> b where
+    computedIp :: a -> b
 
-class HasComputeLocalId a b | a -> b where
-    computeLocalId :: a -> b
+class HasComputedLocalId a b | a -> b where
+    computedLocalId :: a -> b
 
-class HasComputeLocalIpAddress a b | a -> b where
-    computeLocalIpAddress :: a -> b
+class HasComputedLocalIpAddress a b | a -> b where
+    computedLocalIpAddress :: a -> b
 
-class HasComputeLocalSubnets a b | a -> b where
-    computeLocalSubnets :: a -> b
+class HasComputedLocalSubnets a b | a -> b where
+    computedLocalSubnets :: a -> b
 
-class HasComputeMemory a b | a -> b where
-    computeMemory :: a -> b
+class HasComputedMemory a b | a -> b where
+    computedMemory :: a -> b
 
-class HasComputeMetadata a b | a -> b where
-    computeMetadata :: a -> b
+class HasComputedMetadata a b | a -> b where
+    computedMetadata :: a -> b
 
-class HasComputeMtu a b | a -> b where
-    computeMtu :: a -> b
+class HasComputedMtu a b | a -> b where
+    computedMtu :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeNetmask a b | a -> b where
-    computeNetmask :: a -> b
+class HasComputedNetmask a b | a -> b where
+    computedNetmask :: a -> b
 
-class HasComputeNetworkName a b | a -> b where
-    computeNetworkName :: a -> b
+class HasComputedNetworkName a b | a -> b where
+    computedNetworkName :: a -> b
 
-class HasComputeOvf a b | a -> b where
-    computeOvf :: a -> b
+class HasComputedOvf a b | a -> b where
+    computedOvf :: a -> b
 
-class HasComputePeerId a b | a -> b where
-    computePeerId :: a -> b
+class HasComputedPeerId a b | a -> b where
+    computedPeerId :: a -> b
 
-class HasComputePeerIpAddress a b | a -> b where
-    computePeerIpAddress :: a -> b
+class HasComputedPeerIpAddress a b | a -> b where
+    computedPeerIpAddress :: a -> b
 
-class HasComputePeerSubnets a b | a -> b where
-    computePeerSubnets :: a -> b
+class HasComputedPeerSubnets a b | a -> b where
+    computedPeerSubnets :: a -> b
 
-class HasComputePort a b | a -> b where
-    computePort :: a -> b
+class HasComputedPort a b | a -> b where
+    computedPort :: a -> b
 
-class HasComputePowerOn a b | a -> b where
-    computePowerOn :: a -> b
+class HasComputedPowerOn a b | a -> b where
+    computedPowerOn :: a -> b
 
-class HasComputeRule a b | a -> b where
-    computeRule :: a -> b
+class HasComputedRule a b | a -> b where
+    computedRule :: a -> b
 
-class HasComputeShared a b | a -> b where
-    computeShared :: a -> b
+class HasComputedShared a b | a -> b where
+    computedShared :: a -> b
 
-class HasComputeSharedSecret a b | a -> b where
-    computeSharedSecret :: a -> b
+class HasComputedSharedSecret a b | a -> b where
+    computedSharedSecret :: a -> b
 
-class HasComputeStaticIpPool a b | a -> b where
-    computeStaticIpPool :: a -> b
+class HasComputedStaticIpPool a b | a -> b where
+    computedStaticIpPool :: a -> b
 
-class HasComputeTemplateName a b | a -> b where
-    computeTemplateName :: a -> b
+class HasComputedTemplateName a b | a -> b where
+    computedTemplateName :: a -> b
 
-class HasComputeVappName a b | a -> b where
-    computeVappName :: a -> b
+class HasComputedVappName a b | a -> b where
+    computedVappName :: a -> b

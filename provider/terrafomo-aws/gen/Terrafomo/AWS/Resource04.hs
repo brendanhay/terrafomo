@@ -186,127 +186,127 @@ module Terrafomo.AWS.Resource04
     , P.HasVpcId (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAccessPolicy (..)
-    , P.HasComputeActive (..)
-    , P.HasComputeAgentVersion (..)
-    , P.HasComputeAmiId (..)
-    , P.HasComputeApplyImmediately (..)
-    , P.HasComputeArchitecture (..)
-    , P.HasComputeArn (..)
-    , P.HasComputeAssumeRolePolicy (..)
-    , P.HasComputeAtRestEncryptionEnabled (..)
-    , P.HasComputeAuthToken (..)
-    , P.HasComputeAutoMinorVersionUpgrade (..)
-    , P.HasComputeAutoScalingType (..)
-    , P.HasComputeAutomaticFailoverEnabled (..)
-    , P.HasComputeAvailabilityZone (..)
-    , P.HasComputeAvailabilityZones (..)
-    , P.HasComputeAzMode (..)
-    , P.HasComputeBlueprintId (..)
-    , P.HasComputeBucket (..)
-    , P.HasComputeBundleId (..)
-    , P.HasComputeByteMatchTuples (..)
-    , P.HasComputeCacheNodes (..)
-    , P.HasComputeCertificateBody (..)
-    , P.HasComputeCertificateChain (..)
-    , P.HasComputeClusterAddress (..)
-    , P.HasComputeClusterId (..)
-    , P.HasComputeClusterMode (..)
-    , P.HasComputeConfigurationEndpoint (..)
-    , P.HasComputeConfigurationEndpointAddress (..)
-    , P.HasComputeConnectionsBandwidth (..)
-    , P.HasComputeContent (..)
-    , P.HasComputeCreateDate (..)
-    , P.HasComputeCreatedDate (..)
-    , P.HasComputeCsr (..)
-    , P.HasComputeDefaultRouteTableId (..)
-    , P.HasComputeDefaultVersion (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeDocumentType (..)
-    , P.HasComputeEbsBlockDevice (..)
-    , P.HasComputeEbsOptimized (..)
-    , P.HasComputeEgress (..)
-    , P.HasComputeEnabled (..)
-    , P.HasComputeEngine (..)
-    , P.HasComputeEngineVersion (..)
-    , P.HasComputeEphemeralBlockDevice (..)
-    , P.HasComputeFamily' (..)
-    , P.HasComputeForceDestroy (..)
-    , P.HasComputeHash (..)
-    , P.HasComputeHashType (..)
-    , P.HasComputeHostname (..)
-    , P.HasComputeHtml (..)
-    , P.HasComputeId (..)
-    , P.HasComputeIngress (..)
-    , P.HasComputeInstallUpdatesOnBoot (..)
-    , P.HasComputeInstanceType (..)
-    , P.HasComputeKeyPairName (..)
-    , P.HasComputeLatestVersion (..)
-    , P.HasComputeLayerIds (..)
-    , P.HasComputeLocation (..)
-    , P.HasComputeLogGroupName (..)
-    , P.HasComputeMaintenanceWindow (..)
-    , P.HasComputeMetricTransformation (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNamePrefix (..)
-    , P.HasComputeNodeType (..)
-    , P.HasComputeNotification (..)
-    , P.HasComputeNotificationTopicArn (..)
-    , P.HasComputeNumCacheNodes (..)
-    , P.HasComputeNumberCacheClusters (..)
-    , P.HasComputeNumberOfConnections (..)
-    , P.HasComputeOs (..)
-    , P.HasComputeOwner (..)
-    , P.HasComputeOwnerId (..)
-    , P.HasComputeParameter (..)
-    , P.HasComputeParameterGroupName (..)
-    , P.HasComputePath (..)
-    , P.HasComputePattern (..)
-    , P.HasComputePermissions (..)
-    , P.HasComputePlatformTypes (..)
-    , P.HasComputePort (..)
-    , P.HasComputePrefix (..)
-    , P.HasComputePrimaryEndpointAddress (..)
-    , P.HasComputePrivateDns (..)
-    , P.HasComputePrivateIp (..)
-    , P.HasComputePrivateKey (..)
-    , P.HasComputePropagatingVgws (..)
-    , P.HasComputeProperties (..)
-    , P.HasComputePublicDns (..)
-    , P.HasComputePublicIp (..)
-    , P.HasComputeReplicationGroupDescription (..)
-    , P.HasComputeReplicationGroupId (..)
-    , P.HasComputeRestApiId (..)
-    , P.HasComputeRevokeRulesOnDelete (..)
-    , P.HasComputeRoleArn (..)
-    , P.HasComputeRootBlockDevice (..)
-    , P.HasComputeRootDeviceType (..)
-    , P.HasComputeRoute (..)
-    , P.HasComputeSchemaVersion (..)
-    , P.HasComputeSecurityGroupIds (..)
-    , P.HasComputeSecurityGroupNames (..)
-    , P.HasComputeSnapshotArns (..)
-    , P.HasComputeSnapshotName (..)
-    , P.HasComputeSnapshotRetentionLimit (..)
-    , P.HasComputeSnapshotWindow (..)
-    , P.HasComputeSql (..)
-    , P.HasComputeSqlVersion (..)
-    , P.HasComputeSshKeyName (..)
-    , P.HasComputeStackId (..)
-    , P.HasComputeState (..)
-    , P.HasComputeStatus (..)
-    , P.HasComputeSubject (..)
-    , P.HasComputeSubnetGroupName (..)
-    , P.HasComputeSubnetId (..)
-    , P.HasComputeTags (..)
-    , P.HasComputeTargetArn (..)
-    , P.HasComputeTenancy (..)
-    , P.HasComputeText (..)
-    , P.HasComputeTransitEncryptionEnabled (..)
-    , P.HasComputeUniqueId (..)
-    , P.HasComputeUserData (..)
-    , P.HasComputeVirtualizationType (..)
-    , P.HasComputeVpcId (..)
+    , P.HasComputedAccessPolicy (..)
+    , P.HasComputedActive (..)
+    , P.HasComputedAgentVersion (..)
+    , P.HasComputedAmiId (..)
+    , P.HasComputedApplyImmediately (..)
+    , P.HasComputedArchitecture (..)
+    , P.HasComputedArn (..)
+    , P.HasComputedAssumeRolePolicy (..)
+    , P.HasComputedAtRestEncryptionEnabled (..)
+    , P.HasComputedAuthToken (..)
+    , P.HasComputedAutoMinorVersionUpgrade (..)
+    , P.HasComputedAutoScalingType (..)
+    , P.HasComputedAutomaticFailoverEnabled (..)
+    , P.HasComputedAvailabilityZone (..)
+    , P.HasComputedAvailabilityZones (..)
+    , P.HasComputedAzMode (..)
+    , P.HasComputedBlueprintId (..)
+    , P.HasComputedBucket (..)
+    , P.HasComputedBundleId (..)
+    , P.HasComputedByteMatchTuples (..)
+    , P.HasComputedCacheNodes (..)
+    , P.HasComputedCertificateBody (..)
+    , P.HasComputedCertificateChain (..)
+    , P.HasComputedClusterAddress (..)
+    , P.HasComputedClusterId (..)
+    , P.HasComputedClusterMode (..)
+    , P.HasComputedConfigurationEndpoint (..)
+    , P.HasComputedConfigurationEndpointAddress (..)
+    , P.HasComputedConnectionsBandwidth (..)
+    , P.HasComputedContent (..)
+    , P.HasComputedCreateDate (..)
+    , P.HasComputedCreatedDate (..)
+    , P.HasComputedCsr (..)
+    , P.HasComputedDefaultRouteTableId (..)
+    , P.HasComputedDefaultVersion (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDocumentType (..)
+    , P.HasComputedEbsBlockDevice (..)
+    , P.HasComputedEbsOptimized (..)
+    , P.HasComputedEgress (..)
+    , P.HasComputedEnabled (..)
+    , P.HasComputedEngine (..)
+    , P.HasComputedEngineVersion (..)
+    , P.HasComputedEphemeralBlockDevice (..)
+    , P.HasComputedFamily' (..)
+    , P.HasComputedForceDestroy (..)
+    , P.HasComputedHash (..)
+    , P.HasComputedHashType (..)
+    , P.HasComputedHostname (..)
+    , P.HasComputedHtml (..)
+    , P.HasComputedId (..)
+    , P.HasComputedIngress (..)
+    , P.HasComputedInstallUpdatesOnBoot (..)
+    , P.HasComputedInstanceType (..)
+    , P.HasComputedKeyPairName (..)
+    , P.HasComputedLatestVersion (..)
+    , P.HasComputedLayerIds (..)
+    , P.HasComputedLocation (..)
+    , P.HasComputedLogGroupName (..)
+    , P.HasComputedMaintenanceWindow (..)
+    , P.HasComputedMetricTransformation (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNamePrefix (..)
+    , P.HasComputedNodeType (..)
+    , P.HasComputedNotification (..)
+    , P.HasComputedNotificationTopicArn (..)
+    , P.HasComputedNumCacheNodes (..)
+    , P.HasComputedNumberCacheClusters (..)
+    , P.HasComputedNumberOfConnections (..)
+    , P.HasComputedOs (..)
+    , P.HasComputedOwner (..)
+    , P.HasComputedOwnerId (..)
+    , P.HasComputedParameter (..)
+    , P.HasComputedParameterGroupName (..)
+    , P.HasComputedPath (..)
+    , P.HasComputedPattern (..)
+    , P.HasComputedPermissions (..)
+    , P.HasComputedPlatformTypes (..)
+    , P.HasComputedPort (..)
+    , P.HasComputedPrefix (..)
+    , P.HasComputedPrimaryEndpointAddress (..)
+    , P.HasComputedPrivateDns (..)
+    , P.HasComputedPrivateIp (..)
+    , P.HasComputedPrivateKey (..)
+    , P.HasComputedPropagatingVgws (..)
+    , P.HasComputedProperties (..)
+    , P.HasComputedPublicDns (..)
+    , P.HasComputedPublicIp (..)
+    , P.HasComputedReplicationGroupDescription (..)
+    , P.HasComputedReplicationGroupId (..)
+    , P.HasComputedRestApiId (..)
+    , P.HasComputedRevokeRulesOnDelete (..)
+    , P.HasComputedRoleArn (..)
+    , P.HasComputedRootBlockDevice (..)
+    , P.HasComputedRootDeviceType (..)
+    , P.HasComputedRoute (..)
+    , P.HasComputedSchemaVersion (..)
+    , P.HasComputedSecurityGroupIds (..)
+    , P.HasComputedSecurityGroupNames (..)
+    , P.HasComputedSnapshotArns (..)
+    , P.HasComputedSnapshotName (..)
+    , P.HasComputedSnapshotRetentionLimit (..)
+    , P.HasComputedSnapshotWindow (..)
+    , P.HasComputedSql (..)
+    , P.HasComputedSqlVersion (..)
+    , P.HasComputedSshKeyName (..)
+    , P.HasComputedStackId (..)
+    , P.HasComputedState (..)
+    , P.HasComputedStatus (..)
+    , P.HasComputedSubject (..)
+    , P.HasComputedSubnetGroupName (..)
+    , P.HasComputedSubnetId (..)
+    , P.HasComputedTags (..)
+    , P.HasComputedTargetArn (..)
+    , P.HasComputedTenancy (..)
+    , P.HasComputedText (..)
+    , P.HasComputedTransitEncryptionEnabled (..)
+    , P.HasComputedUniqueId (..)
+    , P.HasComputedUserData (..)
+    , P.HasComputedVirtualizationType (..)
+    , P.HasComputedVpcId (..)
 
     -- * Re-exported Types
     , module P
@@ -371,21 +371,21 @@ instance P.HasRestApiId (ResourceApiGatewayDocumentationPart s) (TF.Attr s P.Tex
         lens (_rest_api_id :: ResourceApiGatewayDocumentationPart s -> TF.Attr s P.Text)
              (\s a -> s { _rest_api_id = a } :: ResourceApiGatewayDocumentationPart s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceApiGatewayDocumentationPart s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceApiGatewayDocumentationPart s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLocation (TF.Ref s' (ResourceApiGatewayDocumentationPart s)) (TF.Attr s P.Text) where
-    computeLocation =
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ResourceApiGatewayDocumentationPart s)) (TF.Attr s P.Text) where
+    computedLocation =
         (_location :: ResourceApiGatewayDocumentationPart s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeProperties (TF.Ref s' (ResourceApiGatewayDocumentationPart s)) (TF.Attr s P.Text) where
-    computeProperties =
+instance s ~ s' => P.HasComputedProperties (TF.Ref s' (ResourceApiGatewayDocumentationPart s)) (TF.Attr s P.Text) where
+    computedProperties =
         (_properties :: ResourceApiGatewayDocumentationPart s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRestApiId (TF.Ref s' (ResourceApiGatewayDocumentationPart s)) (TF.Attr s P.Text) where
-    computeRestApiId =
+instance s ~ s' => P.HasComputedRestApiId (TF.Ref s' (ResourceApiGatewayDocumentationPart s)) (TF.Attr s P.Text) where
+    computedRestApiId =
         (_rest_api_id :: ResourceApiGatewayDocumentationPart s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -433,21 +433,21 @@ instance P.HasTargetArn (ResourceCloudwatchLogDestination s) (TF.Attr s P.Text) 
         lens (_target_arn :: ResourceCloudwatchLogDestination s -> TF.Attr s P.Text)
              (\s a -> s { _target_arn = a } :: ResourceCloudwatchLogDestination s)
 
-instance s ~ s' => P.HasComputeArn (TF.Ref s' (ResourceCloudwatchLogDestination s)) (TF.Attr s P.Text) where
-    computeArn x = TF.compute (TF.refKey x) "arn"
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (ResourceCloudwatchLogDestination s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceCloudwatchLogDestination s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceCloudwatchLogDestination s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceCloudwatchLogDestination s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRoleArn (TF.Ref s' (ResourceCloudwatchLogDestination s)) (TF.Attr s P.Text) where
-    computeRoleArn =
+instance s ~ s' => P.HasComputedRoleArn (TF.Ref s' (ResourceCloudwatchLogDestination s)) (TF.Attr s P.Text) where
+    computedRoleArn =
         (_role_arn :: ResourceCloudwatchLogDestination s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTargetArn (TF.Ref s' (ResourceCloudwatchLogDestination s)) (TF.Attr s P.Text) where
-    computeTargetArn =
+instance s ~ s' => P.HasComputedTargetArn (TF.Ref s' (ResourceCloudwatchLogDestination s)) (TF.Attr s P.Text) where
+    computedTargetArn =
         (_target_arn :: ResourceCloudwatchLogDestination s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -503,26 +503,26 @@ instance P.HasPattern (ResourceCloudwatchLogMetricFilter s) (TF.Attr s P.Text) w
         lens (_pattern :: ResourceCloudwatchLogMetricFilter s -> TF.Attr s P.Text)
              (\s a -> s { _pattern = a } :: ResourceCloudwatchLogMetricFilter s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceCloudwatchLogMetricFilter s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceCloudwatchLogMetricFilter s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLogGroupName (TF.Ref s' (ResourceCloudwatchLogMetricFilter s)) (TF.Attr s P.Text) where
-    computeLogGroupName =
+instance s ~ s' => P.HasComputedLogGroupName (TF.Ref s' (ResourceCloudwatchLogMetricFilter s)) (TF.Attr s P.Text) where
+    computedLogGroupName =
         (_log_group_name :: ResourceCloudwatchLogMetricFilter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMetricTransformation (TF.Ref s' (ResourceCloudwatchLogMetricFilter s)) (TF.Attr s P.Text) where
-    computeMetricTransformation =
+instance s ~ s' => P.HasComputedMetricTransformation (TF.Ref s' (ResourceCloudwatchLogMetricFilter s)) (TF.Attr s P.Text) where
+    computedMetricTransformation =
         (_metric_transformation :: ResourceCloudwatchLogMetricFilter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceCloudwatchLogMetricFilter s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceCloudwatchLogMetricFilter s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceCloudwatchLogMetricFilter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePattern (TF.Ref s' (ResourceCloudwatchLogMetricFilter s)) (TF.Attr s P.Text) where
-    computePattern =
+instance s ~ s' => P.HasComputedPattern (TF.Ref s' (ResourceCloudwatchLogMetricFilter s)) (TF.Attr s P.Text) where
+    computedPattern =
         (_pattern :: ResourceCloudwatchLogMetricFilter s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -602,26 +602,26 @@ instance P.HasTags (ResourceDefaultRouteTable s) (TF.Attr s (P.Tags s)) where
         lens (_tags :: ResourceDefaultRouteTable s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: ResourceDefaultRouteTable s)
 
-instance s ~ s' => P.HasComputeDefaultRouteTableId (TF.Ref s' (ResourceDefaultRouteTable s)) (TF.Attr s P.Text) where
-    computeDefaultRouteTableId =
+instance s ~ s' => P.HasComputedDefaultRouteTableId (TF.Ref s' (ResourceDefaultRouteTable s)) (TF.Attr s P.Text) where
+    computedDefaultRouteTableId =
         (_default_route_table_id :: ResourceDefaultRouteTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceDefaultRouteTable s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceDefaultRouteTable s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputePropagatingVgws (TF.Ref s' (ResourceDefaultRouteTable s)) (TF.Attr s P.Text) where
-    computePropagatingVgws =
+instance s ~ s' => P.HasComputedPropagatingVgws (TF.Ref s' (ResourceDefaultRouteTable s)) (TF.Attr s P.Text) where
+    computedPropagatingVgws =
         (_propagating_vgws :: ResourceDefaultRouteTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRoute (TF.Ref s' (ResourceDefaultRouteTable s)) (TF.Attr s P.Text) where
-    computeRoute =
+instance s ~ s' => P.HasComputedRoute (TF.Ref s' (ResourceDefaultRouteTable s)) (TF.Attr s P.Text) where
+    computedRoute =
         (_route :: ResourceDefaultRouteTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceDefaultRouteTable s)) (TF.Attr s (P.Tags s)) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceDefaultRouteTable s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
         (_tags :: ResourceDefaultRouteTable s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
@@ -694,39 +694,39 @@ instance P.HasTags (ResourceDxLag s) (TF.Attr s (P.Tags s)) where
         lens (_tags :: ResourceDxLag s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: ResourceDxLag s)
 
-instance s ~ s' => P.HasComputeArn (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
-    computeArn x = TF.compute (TF.refKey x) "arn"
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputeConnectionsBandwidth (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
-    computeConnectionsBandwidth =
+instance s ~ s' => P.HasComputedConnectionsBandwidth (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
+    computedConnectionsBandwidth =
         (_connections_bandwidth :: ResourceDxLag s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeForceDestroy (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
-    computeForceDestroy =
+instance s ~ s' => P.HasComputedForceDestroy (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
+    computedForceDestroy =
         (_force_destroy :: ResourceDxLag s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLocation (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
-    computeLocation =
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
+    computedLocation =
         (_location :: ResourceDxLag s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceDxLag s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNumberOfConnections (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
-    computeNumberOfConnections =
+instance s ~ s' => P.HasComputedNumberOfConnections (TF.Ref s' (ResourceDxLag s)) (TF.Attr s P.Text) where
+    computedNumberOfConnections =
         (_number_of_connections :: ResourceDxLag s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceDxLag s)) (TF.Attr s (P.Tags s)) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceDxLag s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
         (_tags :: ResourceDxLag s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
@@ -930,117 +930,117 @@ instance P.HasTags (ResourceElasticacheCluster s) (TF.Attr s (P.Tags s)) where
         lens (_tags :: ResourceElasticacheCluster s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: ResourceElasticacheCluster s)
 
-instance s ~ s' => P.HasComputeApplyImmediately (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeApplyImmediately =
+instance s ~ s' => P.HasComputedApplyImmediately (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedApplyImmediately =
         (_apply_immediately :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAvailabilityZone (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Zone) where
-    computeAvailabilityZone =
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Zone) where
+    computedAvailabilityZone =
         (_availability_zone :: ResourceElasticacheCluster s -> TF.Attr s P.Zone)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAvailabilityZones (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computeAvailabilityZones =
+instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedAvailabilityZones =
         (_availability_zones :: ResourceElasticacheCluster s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAzMode (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeAzMode =
+instance s ~ s' => P.HasComputedAzMode (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedAzMode =
         (_az_mode :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCacheNodes (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeCacheNodes x = TF.compute (TF.refKey x) "cache_nodes"
+instance s ~ s' => P.HasComputedCacheNodes (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedCacheNodes x = TF.compute (TF.refKey x) "cache_nodes"
 
-instance s ~ s' => P.HasComputeClusterAddress (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeClusterAddress x = TF.compute (TF.refKey x) "cluster_address"
+instance s ~ s' => P.HasComputedClusterAddress (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedClusterAddress x = TF.compute (TF.refKey x) "cluster_address"
 
-instance s ~ s' => P.HasComputeClusterId (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeClusterId =
+instance s ~ s' => P.HasComputedClusterId (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedClusterId =
         (_cluster_id :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeConfigurationEndpoint (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeConfigurationEndpoint x = TF.compute (TF.refKey x) "configuration_endpoint"
+instance s ~ s' => P.HasComputedConfigurationEndpoint (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedConfigurationEndpoint x = TF.compute (TF.refKey x) "configuration_endpoint"
 
-instance s ~ s' => P.HasComputeEngine (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeEngine =
+instance s ~ s' => P.HasComputedEngine (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedEngine =
         (_engine :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEngineVersion (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeEngineVersion =
+instance s ~ s' => P.HasComputedEngineVersion (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedEngineVersion =
         (_engine_version :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMaintenanceWindow (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeMaintenanceWindow =
+instance s ~ s' => P.HasComputedMaintenanceWindow (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedMaintenanceWindow =
         (_maintenance_window :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNodeType (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeNodeType =
+instance s ~ s' => P.HasComputedNodeType (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedNodeType =
         (_node_type :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNotificationTopicArn (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeNotificationTopicArn =
+instance s ~ s' => P.HasComputedNotificationTopicArn (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedNotificationTopicArn =
         (_notification_topic_arn :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNumCacheNodes (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeNumCacheNodes =
+instance s ~ s' => P.HasComputedNumCacheNodes (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedNumCacheNodes =
         (_num_cache_nodes :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeParameterGroupName (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeParameterGroupName =
+instance s ~ s' => P.HasComputedParameterGroupName (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedParameterGroupName =
         (_parameter_group_name :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePort (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computePort =
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedPort =
         (_port :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecurityGroupIds (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computeSecurityGroupIds =
+instance s ~ s' => P.HasComputedSecurityGroupIds (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedSecurityGroupIds =
         (_security_group_ids :: ResourceElasticacheCluster s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecurityGroupNames (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeSecurityGroupNames =
+instance s ~ s' => P.HasComputedSecurityGroupNames (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedSecurityGroupNames =
         (_security_group_names :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSnapshotArns (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeSnapshotArns =
+instance s ~ s' => P.HasComputedSnapshotArns (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedSnapshotArns =
         (_snapshot_arns :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSnapshotName (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeSnapshotName =
+instance s ~ s' => P.HasComputedSnapshotName (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedSnapshotName =
         (_snapshot_name :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSnapshotRetentionLimit (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeSnapshotRetentionLimit =
+instance s ~ s' => P.HasComputedSnapshotRetentionLimit (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedSnapshotRetentionLimit =
         (_snapshot_retention_limit :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSnapshotWindow (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeSnapshotWindow =
+instance s ~ s' => P.HasComputedSnapshotWindow (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedSnapshotWindow =
         (_snapshot_window :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSubnetGroupName (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
-    computeSubnetGroupName =
+instance s ~ s' => P.HasComputedSubnetGroupName (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s P.Text) where
+    computedSubnetGroupName =
         (_subnet_group_name :: ResourceElasticacheCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s (P.Tags s)) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceElasticacheCluster s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
         (_tags :: ResourceElasticacheCluster s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
@@ -1290,142 +1290,142 @@ instance P.HasTransitEncryptionEnabled (ResourceElasticacheReplicationGroup s) (
         lens (_transit_encryption_enabled :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Bool)
              (\s a -> s { _transit_encryption_enabled = a } :: ResourceElasticacheReplicationGroup s)
 
-instance s ~ s' => P.HasComputeApplyImmediately (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeApplyImmediately =
+instance s ~ s' => P.HasComputedApplyImmediately (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedApplyImmediately =
         (_apply_immediately :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAtRestEncryptionEnabled (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Bool) where
-    computeAtRestEncryptionEnabled =
+instance s ~ s' => P.HasComputedAtRestEncryptionEnabled (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Bool) where
+    computedAtRestEncryptionEnabled =
         (_at_rest_encryption_enabled :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Bool)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAuthToken (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeAuthToken =
+instance s ~ s' => P.HasComputedAuthToken (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedAuthToken =
         (_auth_token :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAutoMinorVersionUpgrade (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeAutoMinorVersionUpgrade =
+instance s ~ s' => P.HasComputedAutoMinorVersionUpgrade (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedAutoMinorVersionUpgrade =
         (_auto_minor_version_upgrade :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAutomaticFailoverEnabled (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Bool) where
-    computeAutomaticFailoverEnabled =
+instance s ~ s' => P.HasComputedAutomaticFailoverEnabled (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Bool) where
+    computedAutomaticFailoverEnabled =
         (_automatic_failover_enabled :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Bool)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAvailabilityZones (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computeAvailabilityZones =
+instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedAvailabilityZones =
         (_availability_zones :: ResourceElasticacheReplicationGroup s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputeClusterMode (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeClusterMode =
+instance s ~ s' => P.HasComputedClusterMode (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedClusterMode =
         (_cluster_mode :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeConfigurationEndpointAddress (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeConfigurationEndpointAddress x = TF.compute (TF.refKey x) "configuration_endpoint_address"
+instance s ~ s' => P.HasComputedConfigurationEndpointAddress (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedConfigurationEndpointAddress x = TF.compute (TF.refKey x) "configuration_endpoint_address"
 
-instance s ~ s' => P.HasComputeEngine (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeEngine =
+instance s ~ s' => P.HasComputedEngine (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedEngine =
         (_engine :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEngineVersion (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeEngineVersion =
+instance s ~ s' => P.HasComputedEngineVersion (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedEngineVersion =
         (_engine_version :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeMaintenanceWindow (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeMaintenanceWindow =
+instance s ~ s' => P.HasComputedMaintenanceWindow (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedMaintenanceWindow =
         (_maintenance_window :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNodeType (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeNodeType =
+instance s ~ s' => P.HasComputedNodeType (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedNodeType =
         (_node_type :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNotificationTopicArn (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeNotificationTopicArn =
+instance s ~ s' => P.HasComputedNotificationTopicArn (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedNotificationTopicArn =
         (_notification_topic_arn :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNumberCacheClusters (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeNumberCacheClusters =
+instance s ~ s' => P.HasComputedNumberCacheClusters (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedNumberCacheClusters =
         (_number_cache_clusters :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeParameterGroupName (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeParameterGroupName =
+instance s ~ s' => P.HasComputedParameterGroupName (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedParameterGroupName =
         (_parameter_group_name :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePort (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computePort =
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedPort =
         (_port :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePrimaryEndpointAddress (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computePrimaryEndpointAddress x = TF.compute (TF.refKey x) "primary_endpoint_address"
+instance s ~ s' => P.HasComputedPrimaryEndpointAddress (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedPrimaryEndpointAddress x = TF.compute (TF.refKey x) "primary_endpoint_address"
 
-instance s ~ s' => P.HasComputeReplicationGroupDescription (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeReplicationGroupDescription =
+instance s ~ s' => P.HasComputedReplicationGroupDescription (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedReplicationGroupDescription =
         (_replication_group_description :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeReplicationGroupId (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeReplicationGroupId =
+instance s ~ s' => P.HasComputedReplicationGroupId (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedReplicationGroupId =
         (_replication_group_id :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecurityGroupIds (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computeSecurityGroupIds =
+instance s ~ s' => P.HasComputedSecurityGroupIds (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedSecurityGroupIds =
         (_security_group_ids :: ResourceElasticacheReplicationGroup s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecurityGroupNames (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeSecurityGroupNames =
+instance s ~ s' => P.HasComputedSecurityGroupNames (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedSecurityGroupNames =
         (_security_group_names :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSnapshotArns (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeSnapshotArns =
+instance s ~ s' => P.HasComputedSnapshotArns (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedSnapshotArns =
         (_snapshot_arns :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSnapshotName (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeSnapshotName =
+instance s ~ s' => P.HasComputedSnapshotName (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedSnapshotName =
         (_snapshot_name :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSnapshotRetentionLimit (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeSnapshotRetentionLimit =
+instance s ~ s' => P.HasComputedSnapshotRetentionLimit (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedSnapshotRetentionLimit =
         (_snapshot_retention_limit :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSnapshotWindow (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeSnapshotWindow =
+instance s ~ s' => P.HasComputedSnapshotWindow (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedSnapshotWindow =
         (_snapshot_window :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSubnetGroupName (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
-    computeSubnetGroupName =
+instance s ~ s' => P.HasComputedSubnetGroupName (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Text) where
+    computedSubnetGroupName =
         (_subnet_group_name :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s (P.Tags s)) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
         (_tags :: ResourceElasticacheReplicationGroup s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTransitEncryptionEnabled (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Bool) where
-    computeTransitEncryptionEnabled =
+instance s ~ s' => P.HasComputedTransitEncryptionEnabled (TF.Ref s' (ResourceElasticacheReplicationGroup s)) (TF.Attr s P.Bool) where
+    computedTransitEncryptionEnabled =
         (_transit_encryption_enabled :: ResourceElasticacheReplicationGroup s -> TF.Attr s P.Bool)
             . TF.refValue
 
@@ -1507,29 +1507,29 @@ instance P.HasTags (ResourceGlacierVault s) (TF.Attr s (P.Tags s)) where
         lens (_tags :: ResourceGlacierVault s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: ResourceGlacierVault s)
 
-instance s ~ s' => P.HasComputeAccessPolicy (TF.Ref s' (ResourceGlacierVault s)) (TF.Attr s P.Text) where
-    computeAccessPolicy =
+instance s ~ s' => P.HasComputedAccessPolicy (TF.Ref s' (ResourceGlacierVault s)) (TF.Attr s P.Text) where
+    computedAccessPolicy =
         (_access_policy :: ResourceGlacierVault s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeArn (TF.Ref s' (ResourceGlacierVault s)) (TF.Attr s P.Text) where
-    computeArn x = TF.compute (TF.refKey x) "arn"
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (ResourceGlacierVault s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputeLocation (TF.Ref s' (ResourceGlacierVault s)) (TF.Attr s P.Text) where
-    computeLocation x = TF.compute (TF.refKey x) "location"
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ResourceGlacierVault s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceGlacierVault s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceGlacierVault s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceGlacierVault s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNotification (TF.Ref s' (ResourceGlacierVault s)) (TF.Attr s P.Text) where
-    computeNotification =
+instance s ~ s' => P.HasComputedNotification (TF.Ref s' (ResourceGlacierVault s)) (TF.Attr s P.Text) where
+    computedNotification =
         (_notification :: ResourceGlacierVault s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceGlacierVault s)) (TF.Attr s (P.Tags s)) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceGlacierVault s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
         (_tags :: ResourceGlacierVault s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
@@ -1578,30 +1578,30 @@ instance P.HasNamePrefix (ResourceIamRole s) (TF.Attr s P.Text) where
         lens (_name_prefix :: ResourceIamRole s -> TF.Attr s P.Text)
              (\s a -> s { _name_prefix = a } :: ResourceIamRole s)
 
-instance s ~ s' => P.HasComputeArn (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.Text) where
-    computeArn x = TF.compute (TF.refKey x) "arn"
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputeAssumeRolePolicy (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.IamPolicy) where
-    computeAssumeRolePolicy =
+instance s ~ s' => P.HasComputedAssumeRolePolicy (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.IamPolicy) where
+    computedAssumeRolePolicy =
         (_assume_role_policy :: ResourceIamRole s -> TF.Attr s P.IamPolicy)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCreateDate (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.Text) where
-    computeCreateDate x = TF.compute (TF.refKey x) "create_date"
+instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.Text) where
+    computedCreateDate x = TF.compute (TF.refKey x) "create_date"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeNamePrefix (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.Text) where
-    computeNamePrefix =
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.Text) where
+    computedNamePrefix =
         (_name_prefix :: ResourceIamRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUniqueId (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.Text) where
-    computeUniqueId x = TF.compute (TF.refKey x) "unique_id"
+instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (ResourceIamRole s)) (TF.Attr s P.Text) where
+    computedUniqueId x = TF.compute (TF.refKey x) "unique_id"
 
 resourceIamRole :: TF.Resource P.AWS (ResourceIamRole s)
 resourceIamRole =
@@ -1672,37 +1672,37 @@ instance P.HasPrivateKey (ResourceIamServerCertificate s) (TF.Attr s P.Text) whe
         lens (_private_key :: ResourceIamServerCertificate s -> TF.Attr s P.Text)
              (\s a -> s { _private_key = a } :: ResourceIamServerCertificate s)
 
-instance s ~ s' => P.HasComputeArn (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
-    computeArn x = TF.compute (TF.refKey x) "arn"
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputeCertificateBody (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
-    computeCertificateBody =
+instance s ~ s' => P.HasComputedCertificateBody (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
+    computedCertificateBody =
         (_certificate_body :: ResourceIamServerCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCertificateChain (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
-    computeCertificateChain =
+instance s ~ s' => P.HasComputedCertificateChain (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
+    computedCertificateChain =
         (_certificate_chain :: ResourceIamServerCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeNamePrefix (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
-    computeNamePrefix =
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
+    computedNamePrefix =
         (_name_prefix :: ResourceIamServerCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePath (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
-    computePath =
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
+    computedPath =
         (_path :: ResourceIamServerCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePrivateKey (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
-    computePrivateKey =
+instance s ~ s' => P.HasComputedPrivateKey (TF.Ref s' (ResourceIamServerCertificate s)) (TF.Attr s P.Text) where
+    computedPrivateKey =
         (_private_key :: ResourceIamServerCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1745,16 +1745,16 @@ instance P.HasCsr (ResourceIotCertificate s) (TF.Attr s P.Text) where
         lens (_csr :: ResourceIotCertificate s -> TF.Attr s P.Text)
              (\s a -> s { _csr = a } :: ResourceIotCertificate s)
 
-instance s ~ s' => P.HasComputeActive (TF.Ref s' (ResourceIotCertificate s)) (TF.Attr s P.Text) where
-    computeActive =
+instance s ~ s' => P.HasComputedActive (TF.Ref s' (ResourceIotCertificate s)) (TF.Attr s P.Text) where
+    computedActive =
         (_active :: ResourceIotCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeArn (TF.Ref s' (ResourceIotCertificate s)) (TF.Attr s P.Text) where
-    computeArn x = TF.compute (TF.refKey x) "arn"
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (ResourceIotCertificate s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputeCsr (TF.Ref s' (ResourceIotCertificate s)) (TF.Attr s P.Text) where
-    computeCsr =
+instance s ~ s' => P.HasComputedCsr (TF.Ref s' (ResourceIotCertificate s)) (TF.Attr s P.Text) where
+    computedCsr =
         (_csr :: ResourceIotCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1817,34 +1817,34 @@ instance P.HasSqlVersion (ResourceIotTopicRule s) (TF.Attr s P.Text) where
         lens (_sql_version :: ResourceIotTopicRule s -> TF.Attr s P.Text)
              (\s a -> s { _sql_version = a } :: ResourceIotTopicRule s)
 
-instance s ~ s' => P.HasComputeArn (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Text) where
-    computeArn x = TF.compute (TF.refKey x) "arn"
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceIotTopicRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEnabled (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Bool) where
-    computeEnabled =
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Bool) where
+    computedEnabled =
         (_enabled :: ResourceIotTopicRule s -> TF.Attr s P.Bool)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceIotTopicRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSql (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Text) where
-    computeSql =
+instance s ~ s' => P.HasComputedSql (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Text) where
+    computedSql =
         (_sql :: ResourceIotTopicRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSqlVersion (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Text) where
-    computeSqlVersion =
+instance s ~ s' => P.HasComputedSqlVersion (TF.Ref s' (ResourceIotTopicRule s)) (TF.Attr s P.Text) where
+    computedSqlVersion =
         (_sql_version :: ResourceIotTopicRule s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1924,33 +1924,33 @@ instance P.HasUserData (ResourceLightsailInstance s) (TF.Attr s P.Text) where
         lens (_user_data :: ResourceLightsailInstance s -> TF.Attr s P.Text)
              (\s a -> s { _user_data = a } :: ResourceLightsailInstance s)
 
-instance s ~ s' => P.HasComputeAvailabilityZone (TF.Ref s' (ResourceLightsailInstance s)) (TF.Attr s P.Zone) where
-    computeAvailabilityZone =
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (ResourceLightsailInstance s)) (TF.Attr s P.Zone) where
+    computedAvailabilityZone =
         (_availability_zone :: ResourceLightsailInstance s -> TF.Attr s P.Zone)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBlueprintId (TF.Ref s' (ResourceLightsailInstance s)) (TF.Attr s P.Text) where
-    computeBlueprintId =
+instance s ~ s' => P.HasComputedBlueprintId (TF.Ref s' (ResourceLightsailInstance s)) (TF.Attr s P.Text) where
+    computedBlueprintId =
         (_blueprint_id :: ResourceLightsailInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBundleId (TF.Ref s' (ResourceLightsailInstance s)) (TF.Attr s P.Text) where
-    computeBundleId =
+instance s ~ s' => P.HasComputedBundleId (TF.Ref s' (ResourceLightsailInstance s)) (TF.Attr s P.Text) where
+    computedBundleId =
         (_bundle_id :: ResourceLightsailInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeKeyPairName (TF.Ref s' (ResourceLightsailInstance s)) (TF.Attr s P.Text) where
-    computeKeyPairName =
+instance s ~ s' => P.HasComputedKeyPairName (TF.Ref s' (ResourceLightsailInstance s)) (TF.Attr s P.Text) where
+    computedKeyPairName =
         (_key_pair_name :: ResourceLightsailInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceLightsailInstance s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceLightsailInstance s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceLightsailInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUserData (TF.Ref s' (ResourceLightsailInstance s)) (TF.Attr s P.Text) where
-    computeUserData =
+instance s ~ s' => P.HasComputedUserData (TF.Ref s' (ResourceLightsailInstance s)) (TF.Attr s P.Text) where
+    computedUserData =
         (_user_data :: ResourceLightsailInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -2145,116 +2145,116 @@ instance P.HasVirtualizationType (ResourceOpsworksInstance s) (TF.Attr s P.Text)
         lens (_virtualization_type :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
              (\s a -> s { _virtualization_type = a } :: ResourceOpsworksInstance s)
 
-instance s ~ s' => P.HasComputeAgentVersion (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeAgentVersion x = TF.compute (TF.refKey x) "agent_version"
+instance s ~ s' => P.HasComputedAgentVersion (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedAgentVersion x = TF.compute (TF.refKey x) "agent_version"
 
-instance s ~ s' => P.HasComputeAmiId (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeAmiId =
+instance s ~ s' => P.HasComputedAmiId (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedAmiId =
         (_ami_id :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeArchitecture (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeArchitecture =
+instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedArchitecture =
         (_architecture :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAutoScalingType (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeAutoScalingType =
+instance s ~ s' => P.HasComputedAutoScalingType (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedAutoScalingType =
         (_auto_scaling_type :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAvailabilityZone (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Zone) where
-    computeAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Zone) where
+    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
-instance s ~ s' => P.HasComputeEbsBlockDevice (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeEbsBlockDevice =
+instance s ~ s' => P.HasComputedEbsBlockDevice (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedEbsBlockDevice =
         (_ebs_block_device :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEbsOptimized (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeEbsOptimized =
+instance s ~ s' => P.HasComputedEbsOptimized (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedEbsOptimized =
         (_ebs_optimized :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEphemeralBlockDevice (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeEphemeralBlockDevice =
+instance s ~ s' => P.HasComputedEphemeralBlockDevice (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedEphemeralBlockDevice =
         (_ephemeral_block_device :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHostname (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeHostname =
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedHostname =
         (_hostname :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeInstallUpdatesOnBoot (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeInstallUpdatesOnBoot =
+instance s ~ s' => P.HasComputedInstallUpdatesOnBoot (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedInstallUpdatesOnBoot =
         (_install_updates_on_boot :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInstanceType (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeInstanceType =
+instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedInstanceType =
         (_instance_type :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLayerIds (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeLayerIds =
+instance s ~ s' => P.HasComputedLayerIds (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedLayerIds =
         (_layer_ids :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOs (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeOs =
+instance s ~ s' => P.HasComputedOs (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedOs =
         (_os :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePrivateDns (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computePrivateDns x = TF.compute (TF.refKey x) "private_dns"
+instance s ~ s' => P.HasComputedPrivateDns (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedPrivateDns x = TF.compute (TF.refKey x) "private_dns"
 
-instance s ~ s' => P.HasComputePrivateIp (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computePrivateIp x = TF.compute (TF.refKey x) "private_ip"
+instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
 
-instance s ~ s' => P.HasComputePublicDns (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computePublicDns x = TF.compute (TF.refKey x) "public_dns"
+instance s ~ s' => P.HasComputedPublicDns (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedPublicDns x = TF.compute (TF.refKey x) "public_dns"
 
-instance s ~ s' => P.HasComputePublicIp (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computePublicIp x = TF.compute (TF.refKey x) "public_ip"
+instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
 
-instance s ~ s' => P.HasComputeRootBlockDevice (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeRootBlockDevice =
+instance s ~ s' => P.HasComputedRootBlockDevice (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedRootBlockDevice =
         (_root_block_device :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRootDeviceType (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeRootDeviceType =
+instance s ~ s' => P.HasComputedRootDeviceType (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedRootDeviceType =
         (_root_device_type :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecurityGroupIds (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computeSecurityGroupIds x = TF.compute (TF.refKey x) "security_group_ids"
+instance s ~ s' => P.HasComputedSecurityGroupIds (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedSecurityGroupIds x = TF.compute (TF.refKey x) "security_group_ids"
 
-instance s ~ s' => P.HasComputeSshKeyName (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeSshKeyName x = TF.compute (TF.refKey x) "ssh_key_name"
+instance s ~ s' => P.HasComputedSshKeyName (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedSshKeyName x = TF.compute (TF.refKey x) "ssh_key_name"
 
-instance s ~ s' => P.HasComputeStackId (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeStackId =
+instance s ~ s' => P.HasComputedStackId (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedStackId =
         (_stack_id :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeState (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeState =
+instance s ~ s' => P.HasComputedState (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedState =
         (_state :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSubnetId (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeSubnetId x = TF.compute (TF.refKey x) "subnet_id"
+instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
 
-instance s ~ s' => P.HasComputeTenancy (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeTenancy x = TF.compute (TF.refKey x) "tenancy"
+instance s ~ s' => P.HasComputedTenancy (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedTenancy x = TF.compute (TF.refKey x) "tenancy"
 
-instance s ~ s' => P.HasComputeVirtualizationType (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
-    computeVirtualizationType =
+instance s ~ s' => P.HasComputedVirtualizationType (TF.Ref s' (ResourceOpsworksInstance s)) (TF.Attr s P.Text) where
+    computedVirtualizationType =
         (_virtualization_type :: ResourceOpsworksInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -2344,39 +2344,39 @@ instance P.HasTags (ResourceRdsClusterParameterGroup s) (TF.Attr s (P.Tags s)) w
         lens (_tags :: ResourceRdsClusterParameterGroup s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: ResourceRdsClusterParameterGroup s)
 
-instance s ~ s' => P.HasComputeArn (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
-    computeArn x = TF.compute (TF.refKey x) "arn"
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceRdsClusterParameterGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeFamily' (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
-    computeFamily' =
+instance s ~ s' => P.HasComputedFamily' (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
+    computedFamily' =
         (_family' :: ResourceRdsClusterParameterGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceRdsClusterParameterGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNamePrefix (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
-    computeNamePrefix =
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
+    computedNamePrefix =
         (_name_prefix :: ResourceRdsClusterParameterGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeParameter (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
-    computeParameter =
+instance s ~ s' => P.HasComputedParameter (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s P.Text) where
+    computedParameter =
         (_parameter :: ResourceRdsClusterParameterGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s (P.Tags s)) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceRdsClusterParameterGroup s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
         (_tags :: ResourceRdsClusterParameterGroup s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
@@ -2473,41 +2473,41 @@ instance P.HasVpcId (ResourceSecurityGroup s) (TF.Attr s P.Text) where
         lens (_vpc_id :: ResourceSecurityGroup s -> TF.Attr s P.Text)
              (\s a -> s { _vpc_id = a } :: ResourceSecurityGroup s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeEgress (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
-    computeEgress x = TF.compute (TF.refKey x) "egress"
+instance s ~ s' => P.HasComputedEgress (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
+    computedEgress x = TF.compute (TF.refKey x) "egress"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeIngress (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
-    computeIngress x = TF.compute (TF.refKey x) "ingress"
+instance s ~ s' => P.HasComputedIngress (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
+    computedIngress x = TF.compute (TF.refKey x) "ingress"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeNamePrefix (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
-    computeNamePrefix =
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
+    computedNamePrefix =
         (_name_prefix :: ResourceSecurityGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOwnerId (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
-    computeOwnerId x = TF.compute (TF.refKey x) "owner_id"
+instance s ~ s' => P.HasComputedOwnerId (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
+    computedOwnerId x = TF.compute (TF.refKey x) "owner_id"
 
-instance s ~ s' => P.HasComputeRevokeRulesOnDelete (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
-    computeRevokeRulesOnDelete =
+instance s ~ s' => P.HasComputedRevokeRulesOnDelete (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
+    computedRevokeRulesOnDelete =
         (_revoke_rules_on_delete :: ResourceSecurityGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s (P.Tags s)) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
         (_tags :: ResourceSecurityGroup s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVpcId (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
-    computeVpcId x = TF.compute (TF.refKey x) "vpc_id"
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 resourceSecurityGroup :: TF.Resource P.AWS (ResourceSecurityGroup s)
 resourceSecurityGroup =
@@ -2566,26 +2566,26 @@ instance P.HasText (ResourceSesTemplate s) (TF.Attr s P.Text) where
         lens (_text :: ResourceSesTemplate s -> TF.Attr s P.Text)
              (\s a -> s { _text = a } :: ResourceSesTemplate s)
 
-instance s ~ s' => P.HasComputeHtml (TF.Ref s' (ResourceSesTemplate s)) (TF.Attr s P.Text) where
-    computeHtml =
+instance s ~ s' => P.HasComputedHtml (TF.Ref s' (ResourceSesTemplate s)) (TF.Attr s P.Text) where
+    computedHtml =
         (_html :: ResourceSesTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceSesTemplate s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceSesTemplate s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSesTemplate s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceSesTemplate s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceSesTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSubject (TF.Ref s' (ResourceSesTemplate s)) (TF.Attr s P.Text) where
-    computeSubject =
+instance s ~ s' => P.HasComputedSubject (TF.Ref s' (ResourceSesTemplate s)) (TF.Attr s P.Text) where
+    computedSubject =
         (_subject :: ResourceSesTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeText (TF.Ref s' (ResourceSesTemplate s)) (TF.Attr s P.Text) where
-    computeText =
+instance s ~ s' => P.HasComputedText (TF.Ref s' (ResourceSesTemplate s)) (TF.Attr s P.Text) where
+    computedText =
         (_text :: ResourceSesTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -2630,13 +2630,13 @@ instance P.HasPrefix (ResourceSpotDatafeedSubscription s) (TF.Attr s P.Text) whe
         lens (_prefix :: ResourceSpotDatafeedSubscription s -> TF.Attr s P.Text)
              (\s a -> s { _prefix = a } :: ResourceSpotDatafeedSubscription s)
 
-instance s ~ s' => P.HasComputeBucket (TF.Ref s' (ResourceSpotDatafeedSubscription s)) (TF.Attr s P.Text) where
-    computeBucket =
+instance s ~ s' => P.HasComputedBucket (TF.Ref s' (ResourceSpotDatafeedSubscription s)) (TF.Attr s P.Text) where
+    computedBucket =
         (_bucket :: ResourceSpotDatafeedSubscription s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePrefix (TF.Ref s' (ResourceSpotDatafeedSubscription s)) (TF.Attr s P.Text) where
-    computePrefix =
+instance s ~ s' => P.HasComputedPrefix (TF.Ref s' (ResourceSpotDatafeedSubscription s)) (TF.Attr s P.Text) where
+    computedPrefix =
         (_prefix :: ResourceSpotDatafeedSubscription s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -2696,50 +2696,50 @@ instance P.HasPermissions (ResourceSsmDocument s) (TF.Attr s P.Text) where
         lens (_permissions :: ResourceSsmDocument s -> TF.Attr s P.Text)
              (\s a -> s { _permissions = a } :: ResourceSsmDocument s)
 
-instance s ~ s' => P.HasComputeContent (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computeContent x = TF.compute (TF.refKey x) "content"
+instance s ~ s' => P.HasComputedContent (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedContent x = TF.compute (TF.refKey x) "content"
 
-instance s ~ s' => P.HasComputeCreatedDate (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computeCreatedDate x = TF.compute (TF.refKey x) "created_date"
+instance s ~ s' => P.HasComputedCreatedDate (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedCreatedDate x = TF.compute (TF.refKey x) "created_date"
 
-instance s ~ s' => P.HasComputeDefaultVersion (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computeDefaultVersion x = TF.compute (TF.refKey x) "default_version"
+instance s ~ s' => P.HasComputedDefaultVersion (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedDefaultVersion x = TF.compute (TF.refKey x) "default_version"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeDocumentType (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computeDocumentType x = TF.compute (TF.refKey x) "document_type"
+instance s ~ s' => P.HasComputedDocumentType (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedDocumentType x = TF.compute (TF.refKey x) "document_type"
 
-instance s ~ s' => P.HasComputeHash (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computeHash x = TF.compute (TF.refKey x) "hash"
+instance s ~ s' => P.HasComputedHash (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedHash x = TF.compute (TF.refKey x) "hash"
 
-instance s ~ s' => P.HasComputeHashType (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computeHashType x = TF.compute (TF.refKey x) "hash_type"
+instance s ~ s' => P.HasComputedHashType (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedHashType x = TF.compute (TF.refKey x) "hash_type"
 
-instance s ~ s' => P.HasComputeLatestVersion (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computeLatestVersion x = TF.compute (TF.refKey x) "latest_version"
+instance s ~ s' => P.HasComputedLatestVersion (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedLatestVersion x = TF.compute (TF.refKey x) "latest_version"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeOwner (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computeOwner x = TF.compute (TF.refKey x) "owner"
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedOwner x = TF.compute (TF.refKey x) "owner"
 
-instance s ~ s' => P.HasComputeParameter (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computeParameter x = TF.compute (TF.refKey x) "parameter"
+instance s ~ s' => P.HasComputedParameter (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedParameter x = TF.compute (TF.refKey x) "parameter"
 
-instance s ~ s' => P.HasComputePermissions (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computePermissions x = TF.compute (TF.refKey x) "permissions"
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedPermissions x = TF.compute (TF.refKey x) "permissions"
 
-instance s ~ s' => P.HasComputePlatformTypes (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computePlatformTypes x = TF.compute (TF.refKey x) "platform_types"
+instance s ~ s' => P.HasComputedPlatformTypes (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedPlatformTypes x = TF.compute (TF.refKey x) "platform_types"
 
-instance s ~ s' => P.HasComputeSchemaVersion (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computeSchemaVersion x = TF.compute (TF.refKey x) "schema_version"
+instance s ~ s' => P.HasComputedSchemaVersion (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedSchemaVersion x = TF.compute (TF.refKey x) "schema_version"
 
-instance s ~ s' => P.HasComputeStatus (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
-    computeStatus x = TF.compute (TF.refKey x) "status"
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ResourceSsmDocument s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 resourceSsmDocument :: TF.Resource P.AWS (ResourceSsmDocument s)
 resourceSsmDocument =
@@ -2778,16 +2778,16 @@ instance P.HasName (ResourceWafByteMatchSet s) (TF.Attr s P.Text) where
         lens (_name :: ResourceWafByteMatchSet s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceWafByteMatchSet s)
 
-instance s ~ s' => P.HasComputeByteMatchTuples (TF.Ref s' (ResourceWafByteMatchSet s)) (TF.Attr s P.Text) where
-    computeByteMatchTuples =
+instance s ~ s' => P.HasComputedByteMatchTuples (TF.Ref s' (ResourceWafByteMatchSet s)) (TF.Attr s P.Text) where
+    computedByteMatchTuples =
         (_byte_match_tuples :: ResourceWafByteMatchSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceWafByteMatchSet s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceWafByteMatchSet s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceWafByteMatchSet s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceWafByteMatchSet s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceWafByteMatchSet s -> TF.Attr s P.Text)
             . TF.refValue
 

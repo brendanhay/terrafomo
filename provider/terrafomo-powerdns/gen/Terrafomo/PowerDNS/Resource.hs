@@ -36,11 +36,11 @@ module Terrafomo.PowerDNS.Resource
     , P.HasZone (..)
 
     -- ** Computed Attributes
-    , P.HasComputeName (..)
-    , P.HasComputeRecords (..)
-    , P.HasComputeTtl (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeZone (..)
+    , P.HasComputedName (..)
+    , P.HasComputedRecords (..)
+    , P.HasComputedTtl (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedZone (..)
 
     -- * Re-exported Types
     , module P
@@ -121,28 +121,28 @@ instance P.HasZone (ResourceRecord s) (TF.Attr s P.Text) where
         lens (_zone :: ResourceRecord s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: ResourceRecord s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceRecord s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRecords (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeRecords =
+instance s ~ s' => P.HasComputedRecords (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedRecords =
         (_records :: ResourceRecord s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTtl (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeTtl =
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedTtl =
         (_ttl :: ResourceRecord s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceRecord s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeZone =
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedZone =
         (_zone :: ResourceRecord s -> TF.Attr s P.Text)
             . TF.refValue
 

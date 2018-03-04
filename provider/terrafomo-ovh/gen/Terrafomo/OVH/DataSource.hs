@@ -36,12 +36,12 @@ module Terrafomo.OVH.DataSource
     , P.HasRegion (..)
 
     -- ** Computed Attributes
-    , P.HasComputeContinentCode (..)
-    , P.HasComputeDatacenterLocation (..)
-    , P.HasComputeNames (..)
-    , P.HasComputeProjectId (..)
-    , P.HasComputeRegion (..)
-    , P.HasComputeServices (..)
+    , P.HasComputedContinentCode (..)
+    , P.HasComputedDatacenterLocation (..)
+    , P.HasComputedNames (..)
+    , P.HasComputedProjectId (..)
+    , P.HasComputedRegion (..)
+    , P.HasComputedServices (..)
 
     -- * Re-exported Types
     , module P
@@ -99,30 +99,30 @@ instance P.HasRegion (DataRegion s) (TF.Attr s P.Text) where
         lens (_region :: DataRegion s -> TF.Attr s P.Text)
              (\s a -> s { _region = a } :: DataRegion s)
 
-instance s ~ s' => P.HasComputeContinentCode (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
-    computeContinentCode x = TF.compute (TF.refKey x) "continentCode"
+instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
+    computedContinentCode x = TF.compute (TF.refKey x) "continentCode"
 
-instance s ~ s' => P.HasComputeContinentCode (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
-    computeContinentCode x = TF.compute (TF.refKey x) "continent_code"
+instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
+    computedContinentCode x = TF.compute (TF.refKey x) "continent_code"
 
-instance s ~ s' => P.HasComputeDatacenterLocation (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
-    computeDatacenterLocation x = TF.compute (TF.refKey x) "datacenterLocation"
+instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
+    computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenterLocation"
 
-instance s ~ s' => P.HasComputeDatacenterLocation (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
-    computeDatacenterLocation x = TF.compute (TF.refKey x) "datacenter_location"
+instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
+    computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenter_location"
 
-instance s ~ s' => P.HasComputeProjectId (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
-    computeProjectId =
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
+    computedProjectId =
         (_project_id :: DataRegion s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRegion (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
-    computeRegion =
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
+    computedRegion =
         (_region :: DataRegion s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeServices (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
-    computeServices x = TF.compute (TF.refKey x) "services"
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (DataRegion s)) (TF.Attr s P.Text) where
+    computedServices x = TF.compute (TF.refKey x) "services"
 
 dataRegion :: TF.DataSource P.OVH (DataRegion s)
 dataRegion =
@@ -151,11 +151,11 @@ instance P.HasProjectId (DataRegions s) (TF.Attr s P.Text) where
         lens (_project_id :: DataRegions s -> TF.Attr s P.Text)
              (\s a -> s { _project_id = a } :: DataRegions s)
 
-instance s ~ s' => P.HasComputeNames (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
-    computeNames x = TF.compute (TF.refKey x) "names"
+instance s ~ s' => P.HasComputedNames (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
+    computedNames x = TF.compute (TF.refKey x) "names"
 
-instance s ~ s' => P.HasComputeProjectId (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
-    computeProjectId =
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
+    computedProjectId =
         (_project_id :: DataRegions s -> TF.Attr s P.Text)
             . TF.refValue
 

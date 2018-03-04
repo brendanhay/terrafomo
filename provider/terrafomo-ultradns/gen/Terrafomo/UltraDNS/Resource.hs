@@ -66,28 +66,28 @@ module Terrafomo.UltraDNS.Resource
     , P.HasZone (..)
 
     -- ** Computed Attributes
-    , P.HasComputeActOnProbes (..)
-    , P.HasComputeAgents (..)
-    , P.HasComputeBackupRecordFailoverDelay (..)
-    , P.HasComputeBackupRecordRdata (..)
-    , P.HasComputeConflictResolve (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeHostname (..)
-    , P.HasComputeHttpProbe (..)
-    , P.HasComputeId (..)
-    , P.HasComputeInterval (..)
-    , P.HasComputeMaxToLb (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNoResponse (..)
-    , P.HasComputeOrder (..)
-    , P.HasComputePingProbe (..)
-    , P.HasComputePoolRecord (..)
-    , P.HasComputeRdata (..)
-    , P.HasComputeRunProbes (..)
-    , P.HasComputeThreshold (..)
-    , P.HasComputeTtl (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeZone (..)
+    , P.HasComputedActOnProbes (..)
+    , P.HasComputedAgents (..)
+    , P.HasComputedBackupRecordFailoverDelay (..)
+    , P.HasComputedBackupRecordRdata (..)
+    , P.HasComputedConflictResolve (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedHostname (..)
+    , P.HasComputedHttpProbe (..)
+    , P.HasComputedId (..)
+    , P.HasComputedInterval (..)
+    , P.HasComputedMaxToLb (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNoResponse (..)
+    , P.HasComputedOrder (..)
+    , P.HasComputedPingProbe (..)
+    , P.HasComputedPoolRecord (..)
+    , P.HasComputedRdata (..)
+    , P.HasComputedRunProbes (..)
+    , P.HasComputedThreshold (..)
+    , P.HasComputedTtl (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedZone (..)
 
     -- * Re-exported Types
     , module P
@@ -192,49 +192,49 @@ instance P.HasZone (ResourceDirpool s) (TF.Attr s P.Text) where
         lens (_zone :: ResourceDirpool s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: ResourceDirpool s)
 
-instance s ~ s' => P.HasComputeConflictResolve (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
-    computeConflictResolve =
+instance s ~ s' => P.HasComputedConflictResolve (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
+    computedConflictResolve =
         (_conflict_resolve :: ResourceDirpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceDirpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHostname (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
-    computeHostname x = TF.compute (TF.refKey x) "hostname"
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceDirpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNoResponse (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
-    computeNoResponse =
+instance s ~ s' => P.HasComputedNoResponse (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
+    computedNoResponse =
         (_no_response :: ResourceDirpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRdata (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
-    computeRdata =
+instance s ~ s' => P.HasComputedRdata (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
+    computedRdata =
         (_rdata :: ResourceDirpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTtl (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
-    computeTtl =
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
+    computedTtl =
         (_ttl :: ResourceDirpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceDirpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
-    computeZone =
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (ResourceDirpool s)) (TF.Attr s P.Text) where
+    computedZone =
         (_zone :: ResourceDirpool s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -319,38 +319,38 @@ instance P.HasZone (ResourceProbeHttp s) (TF.Attr s P.Text) where
         lens (_zone :: ResourceProbeHttp s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: ResourceProbeHttp s)
 
-instance s ~ s' => P.HasComputeAgents (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
-    computeAgents =
+instance s ~ s' => P.HasComputedAgents (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
+    computedAgents =
         (_agents :: ResourceProbeHttp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHttpProbe (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
-    computeHttpProbe =
+instance s ~ s' => P.HasComputedHttpProbe (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
+    computedHttpProbe =
         (_http_probe :: ResourceProbeHttp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInterval (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
-    computeInterval =
+instance s ~ s' => P.HasComputedInterval (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
+    computedInterval =
         (_interval :: ResourceProbeHttp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceProbeHttp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePoolRecord (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
-    computePoolRecord =
+instance s ~ s' => P.HasComputedPoolRecord (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
+    computedPoolRecord =
         (_pool_record :: ResourceProbeHttp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeThreshold (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
-    computeThreshold =
+instance s ~ s' => P.HasComputedThreshold (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
+    computedThreshold =
         (_threshold :: ResourceProbeHttp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
-    computeZone =
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (ResourceProbeHttp s)) (TF.Attr s P.Text) where
+    computedZone =
         (_zone :: ResourceProbeHttp s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -434,38 +434,38 @@ instance P.HasZone (ResourceProbePing s) (TF.Attr s P.Text) where
         lens (_zone :: ResourceProbePing s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: ResourceProbePing s)
 
-instance s ~ s' => P.HasComputeAgents (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
-    computeAgents =
+instance s ~ s' => P.HasComputedAgents (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
+    computedAgents =
         (_agents :: ResourceProbePing s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInterval (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
-    computeInterval =
+instance s ~ s' => P.HasComputedInterval (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
+    computedInterval =
         (_interval :: ResourceProbePing s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceProbePing s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePingProbe (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
-    computePingProbe =
+instance s ~ s' => P.HasComputedPingProbe (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
+    computedPingProbe =
         (_ping_probe :: ResourceProbePing s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePoolRecord (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
-    computePoolRecord =
+instance s ~ s' => P.HasComputedPoolRecord (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
+    computedPoolRecord =
         (_pool_record :: ResourceProbePing s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeThreshold (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
-    computeThreshold =
+instance s ~ s' => P.HasComputedThreshold (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
+    computedThreshold =
         (_threshold :: ResourceProbePing s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
-    computeZone =
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (ResourceProbePing s)) (TF.Attr s P.Text) where
+    computedZone =
         (_zone :: ResourceProbePing s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -543,39 +543,39 @@ instance P.HasZone (ResourceRdpool s) (TF.Attr s P.Text) where
         lens (_zone :: ResourceRdpool s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: ResourceRdpool s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceRdpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHostname (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
-    computeHostname x = TF.compute (TF.refKey x) "hostname"
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceRdpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOrder (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
-    computeOrder =
+instance s ~ s' => P.HasComputedOrder (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
+    computedOrder =
         (_order :: ResourceRdpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRdata (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
-    computeRdata =
+instance s ~ s' => P.HasComputedRdata (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
+    computedRdata =
         (_rdata :: ResourceRdpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTtl (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
-    computeTtl =
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
+    computedTtl =
         (_ttl :: ResourceRdpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
-    computeZone =
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (ResourceRdpool s)) (TF.Attr s P.Text) where
+    computedZone =
         (_zone :: ResourceRdpool s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -642,26 +642,26 @@ instance P.HasZone (ResourceRecord s) (TF.Attr s P.Text) where
         lens (_zone :: ResourceRecord s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: ResourceRecord s)
 
-instance s ~ s' => P.HasComputeHostname (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeHostname x = TF.compute (TF.refKey x) "hostname"
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeRdata (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeRdata x = TF.compute (TF.refKey x) "rdata"
+instance s ~ s' => P.HasComputedRdata (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedRdata x = TF.compute (TF.refKey x) "rdata"
 
-instance s ~ s' => P.HasComputeTtl (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeTtl x = TF.compute (TF.refKey x) "ttl"
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeZone x = TF.compute (TF.refKey x) "zone"
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedZone x = TF.compute (TF.refKey x) "zone"
 
 resourceRecord :: TF.Resource P.UltraDNS (ResourceRecord s)
 resourceRecord =
@@ -765,59 +765,59 @@ instance P.HasZone (ResourceTcpool s) (TF.Attr s P.Text) where
         lens (_zone :: ResourceTcpool s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: ResourceTcpool s)
 
-instance s ~ s' => P.HasComputeActOnProbes (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
-    computeActOnProbes =
+instance s ~ s' => P.HasComputedActOnProbes (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
+    computedActOnProbes =
         (_act_on_probes :: ResourceTcpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBackupRecordFailoverDelay (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
-    computeBackupRecordFailoverDelay =
+instance s ~ s' => P.HasComputedBackupRecordFailoverDelay (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
+    computedBackupRecordFailoverDelay =
         (_backup_record_failover_delay :: ResourceTcpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBackupRecordRdata (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
-    computeBackupRecordRdata =
+instance s ~ s' => P.HasComputedBackupRecordRdata (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
+    computedBackupRecordRdata =
         (_backup_record_rdata :: ResourceTcpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceTcpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHostname (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
-    computeHostname x = TF.compute (TF.refKey x) "hostname"
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeMaxToLb (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
-    computeMaxToLb =
+instance s ~ s' => P.HasComputedMaxToLb (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
+    computedMaxToLb =
         (_max_to_lb :: ResourceTcpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceTcpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRdata (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
-    computeRdata =
+instance s ~ s' => P.HasComputedRdata (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
+    computedRdata =
         (_rdata :: ResourceTcpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRunProbes (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
-    computeRunProbes =
+instance s ~ s' => P.HasComputedRunProbes (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
+    computedRunProbes =
         (_run_probes :: ResourceTcpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTtl (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
-    computeTtl =
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
+    computedTtl =
         (_ttl :: ResourceTcpool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
-    computeZone =
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (ResourceTcpool s)) (TF.Attr s P.Text) where
+    computedZone =
         (_zone :: ResourceTcpool s -> TF.Attr s P.Text)
             . TF.refValue
 

@@ -62,20 +62,20 @@ module Terrafomo.RabbitMQ.Resource
     , P.HasVhost (..)
 
     -- ** Computed Attributes
-    , P.HasComputeArguments (..)
-    , P.HasComputeDestination (..)
-    , P.HasComputeDestinationType (..)
-    , P.HasComputeName (..)
-    , P.HasComputePassword (..)
-    , P.HasComputePermissions (..)
-    , P.HasComputePolicy (..)
-    , P.HasComputePropertiesKey (..)
-    , P.HasComputeRoutingKey (..)
-    , P.HasComputeSettings (..)
-    , P.HasComputeSource (..)
-    , P.HasComputeTags (..)
-    , P.HasComputeUser (..)
-    , P.HasComputeVhost (..)
+    , P.HasComputedArguments (..)
+    , P.HasComputedDestination (..)
+    , P.HasComputedDestinationType (..)
+    , P.HasComputedName (..)
+    , P.HasComputedPassword (..)
+    , P.HasComputedPermissions (..)
+    , P.HasComputedPolicy (..)
+    , P.HasComputedPropertiesKey (..)
+    , P.HasComputedRoutingKey (..)
+    , P.HasComputedSettings (..)
+    , P.HasComputedSource (..)
+    , P.HasComputedTags (..)
+    , P.HasComputedUser (..)
+    , P.HasComputedVhost (..)
 
     -- * Re-exported Types
     , module P
@@ -165,36 +165,36 @@ instance P.HasVhost (ResourceBinding s) (TF.Attr s P.Text) where
         lens (_vhost :: ResourceBinding s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: ResourceBinding s)
 
-instance s ~ s' => P.HasComputeArguments (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
-    computeArguments =
+instance s ~ s' => P.HasComputedArguments (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
+    computedArguments =
         (_arguments :: ResourceBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDestination (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
-    computeDestination =
+instance s ~ s' => P.HasComputedDestination (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
+    computedDestination =
         (_destination :: ResourceBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDestinationType (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
-    computeDestinationType =
+instance s ~ s' => P.HasComputedDestinationType (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
+    computedDestinationType =
         (_destination_type :: ResourceBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePropertiesKey (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
-    computePropertiesKey x = TF.compute (TF.refKey x) "properties_key"
+instance s ~ s' => P.HasComputedPropertiesKey (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
+    computedPropertiesKey x = TF.compute (TF.refKey x) "properties_key"
 
-instance s ~ s' => P.HasComputeRoutingKey (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
-    computeRoutingKey =
+instance s ~ s' => P.HasComputedRoutingKey (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
+    computedRoutingKey =
         (_routing_key :: ResourceBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSource (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
-    computeSource =
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
+    computedSource =
         (_source :: ResourceBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVhost (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
-    computeVhost =
+instance s ~ s' => P.HasComputedVhost (TF.Ref s' (ResourceBinding s)) (TF.Attr s P.Text) where
+    computedVhost =
         (_vhost :: ResourceBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -245,18 +245,18 @@ instance P.HasVhost (ResourceExchange s) (TF.Attr s P.Text) where
         lens (_vhost :: ResourceExchange s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: ResourceExchange s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceExchange s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceExchange s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceExchange s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSettings (TF.Ref s' (ResourceExchange s)) (TF.Attr s P.Text) where
-    computeSettings =
+instance s ~ s' => P.HasComputedSettings (TF.Ref s' (ResourceExchange s)) (TF.Attr s P.Text) where
+    computedSettings =
         (_settings :: ResourceExchange s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVhost (TF.Ref s' (ResourceExchange s)) (TF.Attr s P.Text) where
-    computeVhost =
+instance s ~ s' => P.HasComputedVhost (TF.Ref s' (ResourceExchange s)) (TF.Attr s P.Text) where
+    computedVhost =
         (_vhost :: ResourceExchange s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -305,18 +305,18 @@ instance P.HasVhost (ResourcePermissions s) (TF.Attr s P.Text) where
         lens (_vhost :: ResourcePermissions s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: ResourcePermissions s)
 
-instance s ~ s' => P.HasComputePermissions (TF.Ref s' (ResourcePermissions s)) (TF.Attr s P.Text) where
-    computePermissions =
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (ResourcePermissions s)) (TF.Attr s P.Text) where
+    computedPermissions =
         (_permissions :: ResourcePermissions s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUser (TF.Ref s' (ResourcePermissions s)) (TF.Attr s P.Text) where
-    computeUser =
+instance s ~ s' => P.HasComputedUser (TF.Ref s' (ResourcePermissions s)) (TF.Attr s P.Text) where
+    computedUser =
         (_user :: ResourcePermissions s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVhost (TF.Ref s' (ResourcePermissions s)) (TF.Attr s P.Text) where
-    computeVhost =
+instance s ~ s' => P.HasComputedVhost (TF.Ref s' (ResourcePermissions s)) (TF.Attr s P.Text) where
+    computedVhost =
         (_vhost :: ResourcePermissions s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -365,18 +365,18 @@ instance P.HasVhost (ResourcePolicy s) (TF.Attr s P.Text) where
         lens (_vhost :: ResourcePolicy s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: ResourcePolicy s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourcePolicy s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourcePolicy s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourcePolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicy (TF.Ref s' (ResourcePolicy s)) (TF.Attr s P.Text) where
-    computePolicy =
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (ResourcePolicy s)) (TF.Attr s P.Text) where
+    computedPolicy =
         (_policy :: ResourcePolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVhost (TF.Ref s' (ResourcePolicy s)) (TF.Attr s P.Text) where
-    computeVhost =
+instance s ~ s' => P.HasComputedVhost (TF.Ref s' (ResourcePolicy s)) (TF.Attr s P.Text) where
+    computedVhost =
         (_vhost :: ResourcePolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -424,18 +424,18 @@ instance P.HasVhost (ResourceQueue s) (TF.Attr s P.Text) where
         lens (_vhost :: ResourceQueue s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: ResourceQueue s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceQueue s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceQueue s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceQueue s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSettings (TF.Ref s' (ResourceQueue s)) (TF.Attr s P.Text) where
-    computeSettings =
+instance s ~ s' => P.HasComputedSettings (TF.Ref s' (ResourceQueue s)) (TF.Attr s P.Text) where
+    computedSettings =
         (_settings :: ResourceQueue s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVhost (TF.Ref s' (ResourceQueue s)) (TF.Attr s P.Text) where
-    computeVhost =
+instance s ~ s' => P.HasComputedVhost (TF.Ref s' (ResourceQueue s)) (TF.Attr s P.Text) where
+    computedVhost =
         (_vhost :: ResourceQueue s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -485,18 +485,18 @@ instance P.HasTags (ResourceUser s) (TF.Attr s P.Text) where
         lens (_tags :: ResourceUser s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ResourceUser s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePassword (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computePassword =
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedPassword =
         (_password :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedTags =
         (_tags :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -528,8 +528,8 @@ instance P.HasName (ResourceVhost s) (TF.Attr s P.Text) where
         lens (_name :: ResourceVhost s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceVhost s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceVhost s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceVhost s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceVhost s -> TF.Attr s P.Text)
             . TF.refValue
 

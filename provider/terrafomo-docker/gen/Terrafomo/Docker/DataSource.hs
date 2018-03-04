@@ -32,8 +32,8 @@ module Terrafomo.Docker.DataSource
     , P.HasName (..)
 
     -- ** Computed Attributes
-    , P.HasComputeName (..)
-    , P.HasComputeSha256Digest (..)
+    , P.HasComputedName (..)
+    , P.HasComputedSha256Digest (..)
 
     -- * Re-exported Types
     , module P
@@ -84,13 +84,13 @@ instance P.HasName (DataRegistryImage s) (TF.Attr s P.Text) where
         lens (_name :: DataRegistryImage s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataRegistryImage s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataRegistryImage s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataRegistryImage s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataRegistryImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSha256Digest (TF.Ref s' (DataRegistryImage s)) (TF.Attr s P.Text) where
-    computeSha256Digest x = TF.compute (TF.refKey x) "sha256_digest"
+instance s ~ s' => P.HasComputedSha256Digest (TF.Ref s' (DataRegistryImage s)) (TF.Attr s P.Text) where
+    computedSha256Digest x = TF.compute (TF.refKey x) "sha256_digest"
 
 dataRegistryImage :: TF.DataSource P.Docker (DataRegistryImage s)
 dataRegistryImage =

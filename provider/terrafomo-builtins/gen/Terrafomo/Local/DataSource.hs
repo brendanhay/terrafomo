@@ -32,7 +32,7 @@ module Terrafomo.Local.DataSource
     , P.HasFilename (..)
 
     -- ** Computed Attributes
-    , P.HasComputeFilename (..)
+    , P.HasComputedFilename (..)
 
     -- * Re-exported Types
     , module P
@@ -80,8 +80,8 @@ instance P.HasFilename (DataFile s) (TF.Attr s P.Text) where
         lens (_filename :: DataFile s -> TF.Attr s P.Text)
              (\s a -> s { _filename = a } :: DataFile s)
 
-instance s ~ s' => P.HasComputeFilename (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
-    computeFilename =
+instance s ~ s' => P.HasComputedFilename (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
+    computedFilename =
         (_filename :: DataFile s -> TF.Attr s P.Text)
             . TF.refValue
 

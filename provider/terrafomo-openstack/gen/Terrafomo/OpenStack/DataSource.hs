@@ -95,79 +95,79 @@ module Terrafomo.OpenStack.DataSource
     , P.HasVisibility (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAddressScopeId (..)
-    , P.HasComputeAdminStateUp (..)
-    , P.HasComputeAllocationPools (..)
-    , P.HasComputeAttributes (..)
-    , P.HasComputeAvailabilityZoneHints (..)
-    , P.HasComputeChecksum (..)
-    , P.HasComputeCidr (..)
-    , P.HasComputeContainerFormat (..)
-    , P.HasComputeCreatedAt (..)
-    , P.HasComputeDefaultPrefixlen (..)
-    , P.HasComputeDefaultQuota (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeDhcpDisabled (..)
-    , P.HasComputeDhcpEnabled (..)
-    , P.HasComputeDisk (..)
-    , P.HasComputeDiskFormat (..)
-    , P.HasComputeDnsNameservers (..)
-    , P.HasComputeEmail (..)
-    , P.HasComputeEnableDhcp (..)
-    , P.HasComputeFile (..)
-    , P.HasComputeGatewayIp (..)
-    , P.HasComputeHostRoutes (..)
-    , P.HasComputeIpVersion (..)
-    , P.HasComputeIpv6AddressMode (..)
-    , P.HasComputeIpv6RaMode (..)
-    , P.HasComputeIsDefault (..)
-    , P.HasComputeIsPublic (..)
-    , P.HasComputeMasters (..)
-    , P.HasComputeMatchingSubnetCidr (..)
-    , P.HasComputeMaxPrefixlen (..)
-    , P.HasComputeMetadata (..)
-    , P.HasComputeMinDisk (..)
-    , P.HasComputeMinDiskGb (..)
-    , P.HasComputeMinPrefixlen (..)
-    , P.HasComputeMinRam (..)
-    , P.HasComputeMinRamMb (..)
-    , P.HasComputeMostRecent (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNetworkId (..)
-    , P.HasComputeOwner (..)
-    , P.HasComputePoolId (..)
-    , P.HasComputePrefixes (..)
-    , P.HasComputeProjectId (..)
-    , P.HasComputeProperties (..)
-    , P.HasComputeProtected (..)
-    , P.HasComputeRam (..)
-    , P.HasComputeRegion (..)
-    , P.HasComputeRevisionNumber (..)
-    , P.HasComputeRxTxFactor (..)
-    , P.HasComputeSchema (..)
-    , P.HasComputeSecgroupId (..)
-    , P.HasComputeSerial (..)
-    , P.HasComputeShared (..)
-    , P.HasComputeSizeBytes (..)
-    , P.HasComputeSizeMax (..)
-    , P.HasComputeSizeMin (..)
-    , P.HasComputeSortDirection (..)
-    , P.HasComputeSortKey (..)
-    , P.HasComputeStatus (..)
-    , P.HasComputeSubnetId (..)
-    , P.HasComputeSubnetpoolId (..)
-    , P.HasComputeSwap (..)
-    , P.HasComputeTag (..)
-    , P.HasComputeTags (..)
-    , P.HasComputeTenantId (..)
-    , P.HasComputeTransferredAt (..)
-    , P.HasComputeTtl (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeUpdateAt (..)
-    , P.HasComputeUpdatedAt (..)
-    , P.HasComputeVcpus (..)
-    , P.HasComputeVersion (..)
-    , P.HasComputeVisibility (..)
+    , P.HasComputedAddressScopeId (..)
+    , P.HasComputedAdminStateUp (..)
+    , P.HasComputedAllocationPools (..)
+    , P.HasComputedAttributes (..)
+    , P.HasComputedAvailabilityZoneHints (..)
+    , P.HasComputedChecksum (..)
+    , P.HasComputedCidr (..)
+    , P.HasComputedContainerFormat (..)
+    , P.HasComputedCreatedAt (..)
+    , P.HasComputedDefaultPrefixlen (..)
+    , P.HasComputedDefaultQuota (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDhcpDisabled (..)
+    , P.HasComputedDhcpEnabled (..)
+    , P.HasComputedDisk (..)
+    , P.HasComputedDiskFormat (..)
+    , P.HasComputedDnsNameservers (..)
+    , P.HasComputedEmail (..)
+    , P.HasComputedEnableDhcp (..)
+    , P.HasComputedFile (..)
+    , P.HasComputedGatewayIp (..)
+    , P.HasComputedHostRoutes (..)
+    , P.HasComputedIpVersion (..)
+    , P.HasComputedIpv6AddressMode (..)
+    , P.HasComputedIpv6RaMode (..)
+    , P.HasComputedIsDefault (..)
+    , P.HasComputedIsPublic (..)
+    , P.HasComputedMasters (..)
+    , P.HasComputedMatchingSubnetCidr (..)
+    , P.HasComputedMaxPrefixlen (..)
+    , P.HasComputedMetadata (..)
+    , P.HasComputedMinDisk (..)
+    , P.HasComputedMinDiskGb (..)
+    , P.HasComputedMinPrefixlen (..)
+    , P.HasComputedMinRam (..)
+    , P.HasComputedMinRamMb (..)
+    , P.HasComputedMostRecent (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNetworkId (..)
+    , P.HasComputedOwner (..)
+    , P.HasComputedPoolId (..)
+    , P.HasComputedPrefixes (..)
+    , P.HasComputedProjectId (..)
+    , P.HasComputedProperties (..)
+    , P.HasComputedProtected (..)
+    , P.HasComputedRam (..)
+    , P.HasComputedRegion (..)
+    , P.HasComputedRevisionNumber (..)
+    , P.HasComputedRxTxFactor (..)
+    , P.HasComputedSchema (..)
+    , P.HasComputedSecgroupId (..)
+    , P.HasComputedSerial (..)
+    , P.HasComputedShared (..)
+    , P.HasComputedSizeBytes (..)
+    , P.HasComputedSizeMax (..)
+    , P.HasComputedSizeMin (..)
+    , P.HasComputedSortDirection (..)
+    , P.HasComputedSortKey (..)
+    , P.HasComputedStatus (..)
+    , P.HasComputedSubnetId (..)
+    , P.HasComputedSubnetpoolId (..)
+    , P.HasComputedSwap (..)
+    , P.HasComputedTag (..)
+    , P.HasComputedTags (..)
+    , P.HasComputedTenantId (..)
+    , P.HasComputedTransferredAt (..)
+    , P.HasComputedTtl (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedUpdateAt (..)
+    , P.HasComputedUpdatedAt (..)
+    , P.HasComputedVcpus (..)
+    , P.HasComputedVersion (..)
+    , P.HasComputedVisibility (..)
 
     -- * Re-exported Types
     , module P
@@ -280,51 +280,51 @@ instance P.HasVcpus (DataComputeFlavorV2 s) (TF.Attr s P.Text) where
         lens (_vcpus :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
              (\s a -> s { _vcpus = a } :: DataComputeFlavorV2 s)
 
-instance s ~ s' => P.HasComputeDisk (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
-    computeDisk =
+instance s ~ s' => P.HasComputedDisk (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+    computedDisk =
         (_disk :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIsPublic (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
-    computeIsPublic x = TF.compute (TF.refKey x) "is_public"
+instance s ~ s' => P.HasComputedIsPublic (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+    computedIsPublic x = TF.compute (TF.refKey x) "is_public"
 
-instance s ~ s' => P.HasComputeMinDisk (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
-    computeMinDisk =
+instance s ~ s' => P.HasComputedMinDisk (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+    computedMinDisk =
         (_min_disk :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMinRam (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
-    computeMinRam =
+instance s ~ s' => P.HasComputedMinRam (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+    computedMinRam =
         (_min_ram :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRam (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
-    computeRam =
+instance s ~ s' => P.HasComputedRam (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+    computedRam =
         (_ram :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRegion (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
-    computeRegion =
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+    computedRegion =
         (_region :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRxTxFactor (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
-    computeRxTxFactor =
+instance s ~ s' => P.HasComputedRxTxFactor (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+    computedRxTxFactor =
         (_rx_tx_factor :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSwap (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
-    computeSwap =
+instance s ~ s' => P.HasComputedSwap (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+    computedSwap =
         (_swap :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVcpus (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
-    computeVcpus =
+instance s ~ s' => P.HasComputedVcpus (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+    computedVcpus =
         (_vcpus :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -410,53 +410,53 @@ instance P.HasType' (DataDnsZoneV2 s) (TF.Attr s P.Text) where
         lens (_type' :: DataDnsZoneV2 s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: DataDnsZoneV2 s)
 
-instance s ~ s' => P.HasComputeAttributes (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeAttributes x = TF.compute (TF.refKey x) "attributes"
+instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedAttributes x = TF.compute (TF.refKey x) "attributes"
 
-instance s ~ s' => P.HasComputeCreatedAt (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeCreatedAt x = TF.compute (TF.refKey x) "created_at"
+instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeEmail (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeEmail x = TF.compute (TF.refKey x) "email"
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedEmail x = TF.compute (TF.refKey x) "email"
 
-instance s ~ s' => P.HasComputeMasters (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeMasters x = TF.compute (TF.refKey x) "masters"
+instance s ~ s' => P.HasComputedMasters (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedMasters x = TF.compute (TF.refKey x) "masters"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputePoolId (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computePoolId x = TF.compute (TF.refKey x) "pool_id"
+instance s ~ s' => P.HasComputedPoolId (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedPoolId x = TF.compute (TF.refKey x) "pool_id"
 
-instance s ~ s' => P.HasComputeProjectId (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeProjectId x = TF.compute (TF.refKey x) "project_id"
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedProjectId x = TF.compute (TF.refKey x) "project_id"
 
-instance s ~ s' => P.HasComputeRegion (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeRegion x = TF.compute (TF.refKey x) "region"
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputeSerial (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeSerial x = TF.compute (TF.refKey x) "serial"
+instance s ~ s' => P.HasComputedSerial (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedSerial x = TF.compute (TF.refKey x) "serial"
 
-instance s ~ s' => P.HasComputeStatus (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeStatus x = TF.compute (TF.refKey x) "status"
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance s ~ s' => P.HasComputeTransferredAt (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeTransferredAt x = TF.compute (TF.refKey x) "transferred_at"
+instance s ~ s' => P.HasComputedTransferredAt (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedTransferredAt x = TF.compute (TF.refKey x) "transferred_at"
 
-instance s ~ s' => P.HasComputeTtl (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeTtl x = TF.compute (TF.refKey x) "ttl"
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputeUpdatedAt (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
+instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
 
-instance s ~ s' => P.HasComputeVersion (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
-    computeVersion x = TF.compute (TF.refKey x) "version"
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 dataDnsZoneV2 :: TF.DataSource P.OpenStack (DataDnsZoneV2 s)
 dataDnsZoneV2 =
@@ -570,95 +570,95 @@ instance P.HasVisibility (DataImagesImageV2 s) (TF.Attr s P.Text) where
         lens (_visibility :: DataImagesImageV2 s -> TF.Attr s P.Text)
              (\s a -> s { _visibility = a } :: DataImagesImageV2 s)
 
-instance s ~ s' => P.HasComputeChecksum (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeChecksum x = TF.compute (TF.refKey x) "checksum"
+instance s ~ s' => P.HasComputedChecksum (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedChecksum x = TF.compute (TF.refKey x) "checksum"
 
-instance s ~ s' => P.HasComputeContainerFormat (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeContainerFormat x = TF.compute (TF.refKey x) "container_format"
+instance s ~ s' => P.HasComputedContainerFormat (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedContainerFormat x = TF.compute (TF.refKey x) "container_format"
 
-instance s ~ s' => P.HasComputeCreatedAt (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeCreatedAt x = TF.compute (TF.refKey x) "created_at"
+instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputeDiskFormat (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeDiskFormat x = TF.compute (TF.refKey x) "disk_format"
+instance s ~ s' => P.HasComputedDiskFormat (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedDiskFormat x = TF.compute (TF.refKey x) "disk_format"
 
-instance s ~ s' => P.HasComputeFile (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeFile x = TF.compute (TF.refKey x) "file"
+instance s ~ s' => P.HasComputedFile (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedFile x = TF.compute (TF.refKey x) "file"
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeMetadata x = TF.compute (TF.refKey x) "metadata"
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
-instance s ~ s' => P.HasComputeMinDiskGb (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeMinDiskGb x = TF.compute (TF.refKey x) "min_disk_gb"
+instance s ~ s' => P.HasComputedMinDiskGb (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedMinDiskGb x = TF.compute (TF.refKey x) "min_disk_gb"
 
-instance s ~ s' => P.HasComputeMinRamMb (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeMinRamMb x = TF.compute (TF.refKey x) "min_ram_mb"
+instance s ~ s' => P.HasComputedMinRamMb (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedMinRamMb x = TF.compute (TF.refKey x) "min_ram_mb"
 
-instance s ~ s' => P.HasComputeMostRecent (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeMostRecent =
+instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedMostRecent =
         (_most_recent :: DataImagesImageV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataImagesImageV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOwner (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeOwner =
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedOwner =
         (_owner :: DataImagesImageV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeProperties (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeProperties x = TF.compute (TF.refKey x) "properties"
+instance s ~ s' => P.HasComputedProperties (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedProperties x = TF.compute (TF.refKey x) "properties"
 
-instance s ~ s' => P.HasComputeProtected (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeProtected x = TF.compute (TF.refKey x) "protected"
+instance s ~ s' => P.HasComputedProtected (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedProtected x = TF.compute (TF.refKey x) "protected"
 
-instance s ~ s' => P.HasComputeRegion (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeRegion =
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedRegion =
         (_region :: DataImagesImageV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSchema (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeSchema x = TF.compute (TF.refKey x) "schema"
+instance s ~ s' => P.HasComputedSchema (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedSchema x = TF.compute (TF.refKey x) "schema"
 
-instance s ~ s' => P.HasComputeSizeBytes (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeSizeBytes x = TF.compute (TF.refKey x) "size_bytes"
+instance s ~ s' => P.HasComputedSizeBytes (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedSizeBytes x = TF.compute (TF.refKey x) "size_bytes"
 
-instance s ~ s' => P.HasComputeSizeMax (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeSizeMax =
+instance s ~ s' => P.HasComputedSizeMax (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedSizeMax =
         (_size_max :: DataImagesImageV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSizeMin (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeSizeMin =
+instance s ~ s' => P.HasComputedSizeMin (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedSizeMin =
         (_size_min :: DataImagesImageV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSortDirection (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeSortDirection =
+instance s ~ s' => P.HasComputedSortDirection (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedSortDirection =
         (_sort_direction :: DataImagesImageV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSortKey (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeSortKey =
+instance s ~ s' => P.HasComputedSortKey (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedSortKey =
         (_sort_key :: DataImagesImageV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTag (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeTag =
+instance s ~ s' => P.HasComputedTag (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedTag =
         (_tag :: DataImagesImageV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeTags x = TF.compute (TF.refKey x) "tags"
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance s ~ s' => P.HasComputeUpdateAt (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeUpdateAt x = TF.compute (TF.refKey x) "update_at"
+instance s ~ s' => P.HasComputedUpdateAt (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedUpdateAt x = TF.compute (TF.refKey x) "update_at"
 
-instance s ~ s' => P.HasComputeVisibility (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
-    computeVisibility =
+instance s ~ s' => P.HasComputedVisibility (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+    computedVisibility =
         (_visibility :: DataImagesImageV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -746,38 +746,38 @@ instance P.HasTenantId (DataNetworkingNetworkV2 s) (TF.Attr s P.Text) where
         lens (_tenant_id :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
              (\s a -> s { _tenant_id = a } :: DataNetworkingNetworkV2 s)
 
-instance s ~ s' => P.HasComputeAdminStateUp (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
-    computeAdminStateUp x = TF.compute (TF.refKey x) "admin_state_up"
+instance s ~ s' => P.HasComputedAdminStateUp (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+    computedAdminStateUp x = TF.compute (TF.refKey x) "admin_state_up"
 
-instance s ~ s' => P.HasComputeAvailabilityZoneHints (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
-    computeAvailabilityZoneHints x = TF.compute (TF.refKey x) "availability_zone_hints"
+instance s ~ s' => P.HasComputedAvailabilityZoneHints (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+    computedAvailabilityZoneHints x = TF.compute (TF.refKey x) "availability_zone_hints"
 
-instance s ~ s' => P.HasComputeMatchingSubnetCidr (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
-    computeMatchingSubnetCidr =
+instance s ~ s' => P.HasComputedMatchingSubnetCidr (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+    computedMatchingSubnetCidr =
         (_matching_subnet_cidr :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeNetworkId (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
-    computeNetworkId =
+instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+    computedNetworkId =
         (_network_id :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRegion (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
-    computeRegion x = TF.compute (TF.refKey x) "region"
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputeShared (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
-    computeShared x = TF.compute (TF.refKey x) "shared"
+instance s ~ s' => P.HasComputedShared (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+    computedShared x = TF.compute (TF.refKey x) "shared"
 
-instance s ~ s' => P.HasComputeStatus (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
-    computeStatus =
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+    computedStatus =
         (_status :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTenantId (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
-    computeTenantId =
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+    computedTenantId =
         (_tenant_id :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -837,22 +837,22 @@ instance P.HasTenantId (DataNetworkingSecgroupV2 s) (TF.Attr s P.Text) where
         lens (_tenant_id :: DataNetworkingSecgroupV2 s -> TF.Attr s P.Text)
              (\s a -> s { _tenant_id = a } :: DataNetworkingSecgroupV2 s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeRegion (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
-    computeRegion x = TF.compute (TF.refKey x) "region"
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputeSecgroupId (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
-    computeSecgroupId =
+instance s ~ s' => P.HasComputedSecgroupId (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
+    computedSecgroupId =
         (_secgroup_id :: DataNetworkingSecgroupV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTenantId (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
-    computeTenantId =
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
+    computedTenantId =
         (_tenant_id :: DataNetworkingSecgroupV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -981,78 +981,78 @@ instance P.HasTenantId (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
         lens (_tenant_id :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
              (\s a -> s { _tenant_id = a } :: DataNetworkingSubnetV2 s)
 
-instance s ~ s' => P.HasComputeAllocationPools (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeAllocationPools x = TF.compute (TF.refKey x) "allocation_pools"
+instance s ~ s' => P.HasComputedAllocationPools (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedAllocationPools x = TF.compute (TF.refKey x) "allocation_pools"
 
-instance s ~ s' => P.HasComputeCidr (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeCidr =
+instance s ~ s' => P.HasComputedCidr (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedCidr =
         (_cidr :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDhcpDisabled (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeDhcpDisabled =
+instance s ~ s' => P.HasComputedDhcpDisabled (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedDhcpDisabled =
         (_dhcp_disabled :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDhcpEnabled (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeDhcpEnabled =
+instance s ~ s' => P.HasComputedDhcpEnabled (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedDhcpEnabled =
         (_dhcp_enabled :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDnsNameservers (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeDnsNameservers x = TF.compute (TF.refKey x) "dns_nameservers"
+instance s ~ s' => P.HasComputedDnsNameservers (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedDnsNameservers x = TF.compute (TF.refKey x) "dns_nameservers"
 
-instance s ~ s' => P.HasComputeEnableDhcp (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeEnableDhcp x = TF.compute (TF.refKey x) "enable_dhcp"
+instance s ~ s' => P.HasComputedEnableDhcp (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedEnableDhcp x = TF.compute (TF.refKey x) "enable_dhcp"
 
-instance s ~ s' => P.HasComputeGatewayIp (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeGatewayIp =
+instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedGatewayIp =
         (_gateway_ip :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHostRoutes (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeHostRoutes x = TF.compute (TF.refKey x) "host_routes"
+instance s ~ s' => P.HasComputedHostRoutes (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedHostRoutes x = TF.compute (TF.refKey x) "host_routes"
 
-instance s ~ s' => P.HasComputeIpVersion (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeIpVersion =
+instance s ~ s' => P.HasComputedIpVersion (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedIpVersion =
         (_ip_version :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIpv6AddressMode (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeIpv6AddressMode =
+instance s ~ s' => P.HasComputedIpv6AddressMode (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedIpv6AddressMode =
         (_ipv6_address_mode :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIpv6RaMode (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeIpv6RaMode =
+instance s ~ s' => P.HasComputedIpv6RaMode (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedIpv6RaMode =
         (_ipv6_ra_mode :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNetworkId (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeNetworkId =
+instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedNetworkId =
         (_network_id :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRegion (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeRegion x = TF.compute (TF.refKey x) "region"
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputeSubnetId (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeSubnetId =
+instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedSubnetId =
         (_subnet_id :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSubnetpoolId (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeSubnetpoolId =
+instance s ~ s' => P.HasComputedSubnetpoolId (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedSubnetpoolId =
         (_subnetpool_id :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTenantId (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
-    computeTenantId =
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+    computedTenantId =
         (_tenant_id :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1190,53 +1190,53 @@ instance P.HasShared (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
         lens (_shared :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
              (\s a -> s { _shared = a } :: DataNetworkingSubnetpoolV2 s)
 
-instance s ~ s' => P.HasComputeAddressScopeId (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeAddressScopeId x = TF.compute (TF.refKey x) "address_scope_id"
+instance s ~ s' => P.HasComputedAddressScopeId (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedAddressScopeId x = TF.compute (TF.refKey x) "address_scope_id"
 
-instance s ~ s' => P.HasComputeCreatedAt (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeCreatedAt x = TF.compute (TF.refKey x) "created_at"
+instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputeDefaultPrefixlen (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeDefaultPrefixlen x = TF.compute (TF.refKey x) "default_prefixlen"
+instance s ~ s' => P.HasComputedDefaultPrefixlen (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedDefaultPrefixlen x = TF.compute (TF.refKey x) "default_prefixlen"
 
-instance s ~ s' => P.HasComputeDefaultQuota (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeDefaultQuota x = TF.compute (TF.refKey x) "default_quota"
+instance s ~ s' => P.HasComputedDefaultQuota (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedDefaultQuota x = TF.compute (TF.refKey x) "default_quota"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeIpVersion (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeIpVersion x = TF.compute (TF.refKey x) "ip_version"
+instance s ~ s' => P.HasComputedIpVersion (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedIpVersion x = TF.compute (TF.refKey x) "ip_version"
 
-instance s ~ s' => P.HasComputeIsDefault (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeIsDefault x = TF.compute (TF.refKey x) "is_default"
+instance s ~ s' => P.HasComputedIsDefault (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedIsDefault x = TF.compute (TF.refKey x) "is_default"
 
-instance s ~ s' => P.HasComputeMaxPrefixlen (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeMaxPrefixlen x = TF.compute (TF.refKey x) "max_prefixlen"
+instance s ~ s' => P.HasComputedMaxPrefixlen (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedMaxPrefixlen x = TF.compute (TF.refKey x) "max_prefixlen"
 
-instance s ~ s' => P.HasComputeMinPrefixlen (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeMinPrefixlen x = TF.compute (TF.refKey x) "min_prefixlen"
+instance s ~ s' => P.HasComputedMinPrefixlen (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedMinPrefixlen x = TF.compute (TF.refKey x) "min_prefixlen"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputePrefixes (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computePrefixes x = TF.compute (TF.refKey x) "prefixes"
+instance s ~ s' => P.HasComputedPrefixes (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedPrefixes x = TF.compute (TF.refKey x) "prefixes"
 
-instance s ~ s' => P.HasComputeProjectId (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeProjectId x = TF.compute (TF.refKey x) "project_id"
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedProjectId x = TF.compute (TF.refKey x) "project_id"
 
-instance s ~ s' => P.HasComputeRegion (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeRegion x = TF.compute (TF.refKey x) "region"
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputeRevisionNumber (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeRevisionNumber x = TF.compute (TF.refKey x) "revision_number"
+instance s ~ s' => P.HasComputedRevisionNumber (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedRevisionNumber x = TF.compute (TF.refKey x) "revision_number"
 
-instance s ~ s' => P.HasComputeShared (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeShared x = TF.compute (TF.refKey x) "shared"
+instance s ~ s' => P.HasComputedShared (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedShared x = TF.compute (TF.refKey x) "shared"
 
-instance s ~ s' => P.HasComputeUpdatedAt (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
-    computeUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
+instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
 
 dataNetworkingSubnetpoolV2 :: TF.DataSource P.OpenStack (DataNetworkingSubnetpoolV2 s)
 dataNetworkingSubnetpoolV2 =

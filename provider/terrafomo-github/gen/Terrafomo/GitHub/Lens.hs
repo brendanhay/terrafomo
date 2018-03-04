@@ -59,65 +59,65 @@ module Terrafomo.GitHub.Lens
     , HasUsername (..)
 
     -- ** Computed Attributes
-    , HasComputeActive (..)
-    , HasComputeAllowMergeCommit (..)
-    , HasComputeAllowRebaseMerge (..)
-    , HasComputeAllowSquashMerge (..)
-    , HasComputeAutoInit (..)
-    , HasComputeAvatarUrl (..)
-    , HasComputeBio (..)
-    , HasComputeBlog (..)
-    , HasComputeBranch (..)
-    , HasComputeColor (..)
-    , HasComputeCompany (..)
-    , HasComputeConfiguration (..)
-    , HasComputeCreatedAt (..)
-    , HasComputeDefaultBranch (..)
-    , HasComputeDescription (..)
-    , HasComputeEmail (..)
-    , HasComputeEnforceAdmins (..)
-    , HasComputeEvents (..)
-    , HasComputeFollowers (..)
-    , HasComputeFollowing (..)
-    , HasComputeFullName (..)
-    , HasComputeGitCloneUrl (..)
-    , HasComputeGitignoreTemplate (..)
-    , HasComputeGpgKeys (..)
-    , HasComputeGravatarId (..)
-    , HasComputeHasDownloads (..)
-    , HasComputeHasIssues (..)
-    , HasComputeHasWiki (..)
-    , HasComputeHomepageUrl (..)
-    , HasComputeHttpCloneUrl (..)
-    , HasComputeId (..)
-    , HasComputeKey (..)
-    , HasComputeLdapDn (..)
-    , HasComputeLicenseTemplate (..)
-    , HasComputeLocation (..)
-    , HasComputeLogin (..)
-    , HasComputeMembers (..)
-    , HasComputeName (..)
-    , HasComputePermission (..)
-    , HasComputePrivacy (..)
-    , HasComputePrivate (..)
-    , HasComputePublicGists (..)
-    , HasComputePublicRepos (..)
-    , HasComputeReadOnly (..)
-    , HasComputeRepository (..)
-    , HasComputeRequiredPullRequestReviews (..)
-    , HasComputeRequiredStatusChecks (..)
-    , HasComputeRestrictions (..)
-    , HasComputeRole (..)
-    , HasComputeSiteAdmin (..)
-    , HasComputeSlug (..)
-    , HasComputeSshCloneUrl (..)
-    , HasComputeSshKeys (..)
-    , HasComputeSvnUrl (..)
-    , HasComputeTeamId (..)
-    , HasComputeTitle (..)
-    , HasComputeUpdatedAt (..)
-    , HasComputeUrl (..)
-    , HasComputeUsername (..)
+    , HasComputedActive (..)
+    , HasComputedAllowMergeCommit (..)
+    , HasComputedAllowRebaseMerge (..)
+    , HasComputedAllowSquashMerge (..)
+    , HasComputedAutoInit (..)
+    , HasComputedAvatarUrl (..)
+    , HasComputedBio (..)
+    , HasComputedBlog (..)
+    , HasComputedBranch (..)
+    , HasComputedColor (..)
+    , HasComputedCompany (..)
+    , HasComputedConfiguration (..)
+    , HasComputedCreatedAt (..)
+    , HasComputedDefaultBranch (..)
+    , HasComputedDescription (..)
+    , HasComputedEmail (..)
+    , HasComputedEnforceAdmins (..)
+    , HasComputedEvents (..)
+    , HasComputedFollowers (..)
+    , HasComputedFollowing (..)
+    , HasComputedFullName (..)
+    , HasComputedGitCloneUrl (..)
+    , HasComputedGitignoreTemplate (..)
+    , HasComputedGpgKeys (..)
+    , HasComputedGravatarId (..)
+    , HasComputedHasDownloads (..)
+    , HasComputedHasIssues (..)
+    , HasComputedHasWiki (..)
+    , HasComputedHomepageUrl (..)
+    , HasComputedHttpCloneUrl (..)
+    , HasComputedId (..)
+    , HasComputedKey (..)
+    , HasComputedLdapDn (..)
+    , HasComputedLicenseTemplate (..)
+    , HasComputedLocation (..)
+    , HasComputedLogin (..)
+    , HasComputedMembers (..)
+    , HasComputedName (..)
+    , HasComputedPermission (..)
+    , HasComputedPrivacy (..)
+    , HasComputedPrivate (..)
+    , HasComputedPublicGists (..)
+    , HasComputedPublicRepos (..)
+    , HasComputedReadOnly (..)
+    , HasComputedRepository (..)
+    , HasComputedRequiredPullRequestReviews (..)
+    , HasComputedRequiredStatusChecks (..)
+    , HasComputedRestrictions (..)
+    , HasComputedRole (..)
+    , HasComputedSiteAdmin (..)
+    , HasComputedSlug (..)
+    , HasComputedSshCloneUrl (..)
+    , HasComputedSshKeys (..)
+    , HasComputedSvnUrl (..)
+    , HasComputedTeamId (..)
+    , HasComputedTitle (..)
+    , HasComputedUpdatedAt (..)
+    , HasComputedUrl (..)
+    , HasComputedUsername (..)
     ) where
 
 import GHC.Base ((.))
@@ -337,179 +337,179 @@ class HasUsername a b | a -> b where
 instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
 
-class HasComputeActive a b | a -> b where
-    computeActive :: a -> b
+class HasComputedActive a b | a -> b where
+    computedActive :: a -> b
 
-class HasComputeAllowMergeCommit a b | a -> b where
-    computeAllowMergeCommit :: a -> b
+class HasComputedAllowMergeCommit a b | a -> b where
+    computedAllowMergeCommit :: a -> b
 
-class HasComputeAllowRebaseMerge a b | a -> b where
-    computeAllowRebaseMerge :: a -> b
+class HasComputedAllowRebaseMerge a b | a -> b where
+    computedAllowRebaseMerge :: a -> b
 
-class HasComputeAllowSquashMerge a b | a -> b where
-    computeAllowSquashMerge :: a -> b
+class HasComputedAllowSquashMerge a b | a -> b where
+    computedAllowSquashMerge :: a -> b
 
-class HasComputeAutoInit a b | a -> b where
-    computeAutoInit :: a -> b
+class HasComputedAutoInit a b | a -> b where
+    computedAutoInit :: a -> b
 
-class HasComputeAvatarUrl a b | a -> b where
-    computeAvatarUrl :: a -> b
+class HasComputedAvatarUrl a b | a -> b where
+    computedAvatarUrl :: a -> b
 
-class HasComputeBio a b | a -> b where
-    computeBio :: a -> b
+class HasComputedBio a b | a -> b where
+    computedBio :: a -> b
 
-class HasComputeBlog a b | a -> b where
-    computeBlog :: a -> b
+class HasComputedBlog a b | a -> b where
+    computedBlog :: a -> b
 
-class HasComputeBranch a b | a -> b where
-    computeBranch :: a -> b
+class HasComputedBranch a b | a -> b where
+    computedBranch :: a -> b
 
-class HasComputeColor a b | a -> b where
-    computeColor :: a -> b
+class HasComputedColor a b | a -> b where
+    computedColor :: a -> b
 
-class HasComputeCompany a b | a -> b where
-    computeCompany :: a -> b
+class HasComputedCompany a b | a -> b where
+    computedCompany :: a -> b
 
-class HasComputeConfiguration a b | a -> b where
-    computeConfiguration :: a -> b
+class HasComputedConfiguration a b | a -> b where
+    computedConfiguration :: a -> b
 
-class HasComputeCreatedAt a b | a -> b where
-    computeCreatedAt :: a -> b
+class HasComputedCreatedAt a b | a -> b where
+    computedCreatedAt :: a -> b
 
-class HasComputeDefaultBranch a b | a -> b where
-    computeDefaultBranch :: a -> b
+class HasComputedDefaultBranch a b | a -> b where
+    computedDefaultBranch :: a -> b
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeEmail a b | a -> b where
-    computeEmail :: a -> b
+class HasComputedEmail a b | a -> b where
+    computedEmail :: a -> b
 
-class HasComputeEnforceAdmins a b | a -> b where
-    computeEnforceAdmins :: a -> b
+class HasComputedEnforceAdmins a b | a -> b where
+    computedEnforceAdmins :: a -> b
 
-class HasComputeEvents a b | a -> b where
-    computeEvents :: a -> b
+class HasComputedEvents a b | a -> b where
+    computedEvents :: a -> b
 
-class HasComputeFollowers a b | a -> b where
-    computeFollowers :: a -> b
+class HasComputedFollowers a b | a -> b where
+    computedFollowers :: a -> b
 
-class HasComputeFollowing a b | a -> b where
-    computeFollowing :: a -> b
+class HasComputedFollowing a b | a -> b where
+    computedFollowing :: a -> b
 
-class HasComputeFullName a b | a -> b where
-    computeFullName :: a -> b
+class HasComputedFullName a b | a -> b where
+    computedFullName :: a -> b
 
-class HasComputeGitCloneUrl a b | a -> b where
-    computeGitCloneUrl :: a -> b
+class HasComputedGitCloneUrl a b | a -> b where
+    computedGitCloneUrl :: a -> b
 
-class HasComputeGitignoreTemplate a b | a -> b where
-    computeGitignoreTemplate :: a -> b
+class HasComputedGitignoreTemplate a b | a -> b where
+    computedGitignoreTemplate :: a -> b
 
-class HasComputeGpgKeys a b | a -> b where
-    computeGpgKeys :: a -> b
+class HasComputedGpgKeys a b | a -> b where
+    computedGpgKeys :: a -> b
 
-class HasComputeGravatarId a b | a -> b where
-    computeGravatarId :: a -> b
+class HasComputedGravatarId a b | a -> b where
+    computedGravatarId :: a -> b
 
-class HasComputeHasDownloads a b | a -> b where
-    computeHasDownloads :: a -> b
+class HasComputedHasDownloads a b | a -> b where
+    computedHasDownloads :: a -> b
 
-class HasComputeHasIssues a b | a -> b where
-    computeHasIssues :: a -> b
+class HasComputedHasIssues a b | a -> b where
+    computedHasIssues :: a -> b
 
-class HasComputeHasWiki a b | a -> b where
-    computeHasWiki :: a -> b
+class HasComputedHasWiki a b | a -> b where
+    computedHasWiki :: a -> b
 
-class HasComputeHomepageUrl a b | a -> b where
-    computeHomepageUrl :: a -> b
+class HasComputedHomepageUrl a b | a -> b where
+    computedHomepageUrl :: a -> b
 
-class HasComputeHttpCloneUrl a b | a -> b where
-    computeHttpCloneUrl :: a -> b
+class HasComputedHttpCloneUrl a b | a -> b where
+    computedHttpCloneUrl :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeKey a b | a -> b where
-    computeKey :: a -> b
+class HasComputedKey a b | a -> b where
+    computedKey :: a -> b
 
-class HasComputeLdapDn a b | a -> b where
-    computeLdapDn :: a -> b
+class HasComputedLdapDn a b | a -> b where
+    computedLdapDn :: a -> b
 
-class HasComputeLicenseTemplate a b | a -> b where
-    computeLicenseTemplate :: a -> b
+class HasComputedLicenseTemplate a b | a -> b where
+    computedLicenseTemplate :: a -> b
 
-class HasComputeLocation a b | a -> b where
-    computeLocation :: a -> b
+class HasComputedLocation a b | a -> b where
+    computedLocation :: a -> b
 
-class HasComputeLogin a b | a -> b where
-    computeLogin :: a -> b
+class HasComputedLogin a b | a -> b where
+    computedLogin :: a -> b
 
-class HasComputeMembers a b | a -> b where
-    computeMembers :: a -> b
+class HasComputedMembers a b | a -> b where
+    computedMembers :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputePermission a b | a -> b where
-    computePermission :: a -> b
+class HasComputedPermission a b | a -> b where
+    computedPermission :: a -> b
 
-class HasComputePrivacy a b | a -> b where
-    computePrivacy :: a -> b
+class HasComputedPrivacy a b | a -> b where
+    computedPrivacy :: a -> b
 
-class HasComputePrivate a b | a -> b where
-    computePrivate :: a -> b
+class HasComputedPrivate a b | a -> b where
+    computedPrivate :: a -> b
 
-class HasComputePublicGists a b | a -> b where
-    computePublicGists :: a -> b
+class HasComputedPublicGists a b | a -> b where
+    computedPublicGists :: a -> b
 
-class HasComputePublicRepos a b | a -> b where
-    computePublicRepos :: a -> b
+class HasComputedPublicRepos a b | a -> b where
+    computedPublicRepos :: a -> b
 
-class HasComputeReadOnly a b | a -> b where
-    computeReadOnly :: a -> b
+class HasComputedReadOnly a b | a -> b where
+    computedReadOnly :: a -> b
 
-class HasComputeRepository a b | a -> b where
-    computeRepository :: a -> b
+class HasComputedRepository a b | a -> b where
+    computedRepository :: a -> b
 
-class HasComputeRequiredPullRequestReviews a b | a -> b where
-    computeRequiredPullRequestReviews :: a -> b
+class HasComputedRequiredPullRequestReviews a b | a -> b where
+    computedRequiredPullRequestReviews :: a -> b
 
-class HasComputeRequiredStatusChecks a b | a -> b where
-    computeRequiredStatusChecks :: a -> b
+class HasComputedRequiredStatusChecks a b | a -> b where
+    computedRequiredStatusChecks :: a -> b
 
-class HasComputeRestrictions a b | a -> b where
-    computeRestrictions :: a -> b
+class HasComputedRestrictions a b | a -> b where
+    computedRestrictions :: a -> b
 
-class HasComputeRole a b | a -> b where
-    computeRole :: a -> b
+class HasComputedRole a b | a -> b where
+    computedRole :: a -> b
 
-class HasComputeSiteAdmin a b | a -> b where
-    computeSiteAdmin :: a -> b
+class HasComputedSiteAdmin a b | a -> b where
+    computedSiteAdmin :: a -> b
 
-class HasComputeSlug a b | a -> b where
-    computeSlug :: a -> b
+class HasComputedSlug a b | a -> b where
+    computedSlug :: a -> b
 
-class HasComputeSshCloneUrl a b | a -> b where
-    computeSshCloneUrl :: a -> b
+class HasComputedSshCloneUrl a b | a -> b where
+    computedSshCloneUrl :: a -> b
 
-class HasComputeSshKeys a b | a -> b where
-    computeSshKeys :: a -> b
+class HasComputedSshKeys a b | a -> b where
+    computedSshKeys :: a -> b
 
-class HasComputeSvnUrl a b | a -> b where
-    computeSvnUrl :: a -> b
+class HasComputedSvnUrl a b | a -> b where
+    computedSvnUrl :: a -> b
 
-class HasComputeTeamId a b | a -> b where
-    computeTeamId :: a -> b
+class HasComputedTeamId a b | a -> b where
+    computedTeamId :: a -> b
 
-class HasComputeTitle a b | a -> b where
-    computeTitle :: a -> b
+class HasComputedTitle a b | a -> b where
+    computedTitle :: a -> b
 
-class HasComputeUpdatedAt a b | a -> b where
-    computeUpdatedAt :: a -> b
+class HasComputedUpdatedAt a b | a -> b where
+    computedUpdatedAt :: a -> b
 
-class HasComputeUrl a b | a -> b where
-    computeUrl :: a -> b
+class HasComputedUrl a b | a -> b where
+    computedUrl :: a -> b
 
-class HasComputeUsername a b | a -> b where
-    computeUsername :: a -> b
+class HasComputedUsername a b | a -> b where
+    computedUsername :: a -> b

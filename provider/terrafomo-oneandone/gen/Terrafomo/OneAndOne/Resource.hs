@@ -77,43 +77,43 @@ module Terrafomo.OneAndOne.Resource
     , P.HasVcores (..)
 
     -- ** Computed Attributes
-    , P.HasCompute*diskSize (..)
-    , P.HasCompute*isMain (..)
-    , P.HasComputeAgent (..)
-    , P.HasComputeCoresPerProcessor (..)
-    , P.HasComputeDatacenter (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeDownloadPath (..)
-    , P.HasComputeEmail (..)
-    , P.HasComputeFileName (..)
-    , P.HasComputeFirewallPolicyId (..)
-    , P.HasComputeFixedInstanceSize (..)
-    , P.HasComputeHdds (..)
-    , P.HasComputeHealthCheckInterval (..)
-    , P.HasComputeHealthCheckPath (..)
-    , P.HasComputeHealthCheckPathParser (..)
-    , P.HasComputeHealthCheckTest (..)
-    , P.HasComputeImage (..)
-    , P.HasComputeIp (..)
-    , P.HasComputeIpAddress (..)
-    , P.HasComputeIpType (..)
-    , P.HasComputeLoadbalancerId (..)
-    , P.HasComputeMethod (..)
-    , P.HasComputeMonitoringPolicyId (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNetworkAddress (..)
-    , P.HasComputePassword (..)
-    , P.HasComputePersistence (..)
-    , P.HasComputePersistenceTime (..)
-    , P.HasComputeRam (..)
-    , P.HasComputeReverseDns (..)
-    , P.HasComputeServerIds (..)
-    , P.HasComputeSize (..)
-    , P.HasComputeSshKeyPath (..)
-    , P.HasComputeSshKeyPublic (..)
-    , P.HasComputeStorageServers (..)
-    , P.HasComputeSubnetMask (..)
-    , P.HasComputeVcores (..)
+    , P.HasComputed*diskSize (..)
+    , P.HasComputed*isMain (..)
+    , P.HasComputedAgent (..)
+    , P.HasComputedCoresPerProcessor (..)
+    , P.HasComputedDatacenter (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDownloadPath (..)
+    , P.HasComputedEmail (..)
+    , P.HasComputedFileName (..)
+    , P.HasComputedFirewallPolicyId (..)
+    , P.HasComputedFixedInstanceSize (..)
+    , P.HasComputedHdds (..)
+    , P.HasComputedHealthCheckInterval (..)
+    , P.HasComputedHealthCheckPath (..)
+    , P.HasComputedHealthCheckPathParser (..)
+    , P.HasComputedHealthCheckTest (..)
+    , P.HasComputedImage (..)
+    , P.HasComputedIp (..)
+    , P.HasComputedIpAddress (..)
+    , P.HasComputedIpType (..)
+    , P.HasComputedLoadbalancerId (..)
+    , P.HasComputedMethod (..)
+    , P.HasComputedMonitoringPolicyId (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNetworkAddress (..)
+    , P.HasComputedPassword (..)
+    , P.HasComputedPersistence (..)
+    , P.HasComputedPersistenceTime (..)
+    , P.HasComputedRam (..)
+    , P.HasComputedReverseDns (..)
+    , P.HasComputedServerIds (..)
+    , P.HasComputedSize (..)
+    , P.HasComputedSshKeyPath (..)
+    , P.HasComputedSshKeyPublic (..)
+    , P.HasComputedStorageServers (..)
+    , P.HasComputedSubnetMask (..)
+    , P.HasComputedVcores (..)
 
     -- * Re-exported Types
     , module P
@@ -178,18 +178,18 @@ instance P.HasVcores (ResourceInstanceSize s) (TF.Attr s P.Text) where
         lens (_vcores :: ResourceInstanceSize s -> TF.Attr s P.Text)
              (\s a -> s { _vcores = a } :: ResourceInstanceSize s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceInstanceSize s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceInstanceSize s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceInstanceSize s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRam (TF.Ref s' (ResourceInstanceSize s)) (TF.Attr s P.Text) where
-    computeRam =
+instance s ~ s' => P.HasComputedRam (TF.Ref s' (ResourceInstanceSize s)) (TF.Attr s P.Text) where
+    computedRam =
         (_ram :: ResourceInstanceSize s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVcores (TF.Ref s' (ResourceInstanceSize s)) (TF.Attr s P.Text) where
-    computeVcores =
+instance s ~ s' => P.HasComputedVcores (TF.Ref s' (ResourceInstanceSize s)) (TF.Attr s P.Text) where
+    computedVcores =
         (_vcores :: ResourceInstanceSize s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -245,23 +245,23 @@ instance P.HasReverseDns (ResourceIp s) (TF.Attr s P.Text) where
         lens (_reverse_dns :: ResourceIp s -> TF.Attr s P.Text)
              (\s a -> s { _reverse_dns = a } :: ResourceIp s)
 
-instance s ~ s' => P.HasComputeDatacenter (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
-    computeDatacenter =
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
+    computedDatacenter =
         (_datacenter :: ResourceIp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIpAddress (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
-    computeIpAddress =
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
+    computedIpAddress =
         (_ip_address :: ResourceIp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIpType (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
-    computeIpType =
+instance s ~ s' => P.HasComputedIpType (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
+    computedIpType =
         (_ip_type :: ResourceIp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeReverseDns (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
-    computeReverseDns =
+instance s ~ s' => P.HasComputedReverseDns (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
+    computedReverseDns =
         (_reverse_dns :: ResourceIp s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -326,28 +326,28 @@ instance P.HasStorageServers (ResourceServer s) (TF.Attr s P.Text) where
         lens (_storage_servers :: ResourceServer s -> TF.Attr s P.Text)
              (\s a -> s { _storage_servers = a } :: ResourceServer s)
 
-instance s ~ s' => P.HasComputeDatacenter (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeDatacenter =
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedDatacenter =
         (_datacenter :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSize (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeSize =
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedSize =
         (_size :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStorageServers (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeStorageServers =
+instance s ~ s' => P.HasComputedStorageServers (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedStorageServers =
         (_storage_servers :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -413,28 +413,28 @@ instance P.HasName (ResourceVpn s) (TF.Attr s P.Text) where
         lens (_name :: ResourceVpn s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceVpn s)
 
-instance s ~ s' => P.HasComputeDatacenter (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
-    computeDatacenter =
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
+    computedDatacenter =
         (_datacenter :: ResourceVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDownloadPath (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
-    computeDownloadPath =
+instance s ~ s' => P.HasComputedDownloadPath (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
+    computedDownloadPath =
         (_download_path :: ResourceVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeFileName (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
-    computeFileName =
+instance s ~ s' => P.HasComputedFileName (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
+    computedFileName =
         (_file_name :: ResourceVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceVpn s -> TF.Attr s P.Text)
             . TF.refValue
 

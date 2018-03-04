@@ -46,19 +46,19 @@ module Terrafomo.Google.Resource02
     , P.HasZone (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAutoscaling (..)
-    , P.HasComputeCluster (..)
-    , P.HasComputeCryptoKeyId (..)
-    , P.HasComputeEtag (..)
-    , P.HasComputeManagement (..)
-    , P.HasComputeMember (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNamePrefix (..)
-    , P.HasComputeNodeConfig (..)
-    , P.HasComputeNodeCount (..)
-    , P.HasComputeProject (..)
-    , P.HasComputeRole (..)
-    , P.HasComputeZone (..)
+    , P.HasComputedAutoscaling (..)
+    , P.HasComputedCluster (..)
+    , P.HasComputedCryptoKeyId (..)
+    , P.HasComputedEtag (..)
+    , P.HasComputedManagement (..)
+    , P.HasComputedMember (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNamePrefix (..)
+    , P.HasComputedNodeConfig (..)
+    , P.HasComputedNodeCount (..)
+    , P.HasComputedProject (..)
+    , P.HasComputedRole (..)
+    , P.HasComputedZone (..)
 
     -- * Re-exported Types
     , module P
@@ -174,48 +174,48 @@ instance P.HasZone (ResourceContainerNodePool s) (TF.Attr s P.Text) where
         lens (_zone :: ResourceContainerNodePool s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: ResourceContainerNodePool s)
 
-instance s ~ s' => P.HasComputeAutoscaling (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
-    computeAutoscaling =
+instance s ~ s' => P.HasComputedAutoscaling (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
+    computedAutoscaling =
         (_autoscaling :: ResourceContainerNodePool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCluster (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
-    computeCluster =
+instance s ~ s' => P.HasComputedCluster (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
+    computedCluster =
         (_cluster :: ResourceContainerNodePool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeManagement (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
-    computeManagement =
+instance s ~ s' => P.HasComputedManagement (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
+    computedManagement =
         (_management :: ResourceContainerNodePool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceContainerNodePool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNamePrefix (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
-    computeNamePrefix =
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
+    computedNamePrefix =
         (_name_prefix :: ResourceContainerNodePool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNodeConfig (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
-    computeNodeConfig =
+instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
+    computedNodeConfig =
         (_node_config :: ResourceContainerNodePool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNodeCount (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
-    computeNodeCount =
+instance s ~ s' => P.HasComputedNodeCount (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
+    computedNodeCount =
         (_node_count :: ResourceContainerNodePool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
-    computeProject =
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
+    computedProject =
         (_project :: ResourceContainerNodePool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
-    computeZone =
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (ResourceContainerNodePool s)) (TF.Attr s P.Text) where
+    computedZone =
         (_zone :: ResourceContainerNodePool s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -275,21 +275,21 @@ instance P.HasRole (ResourceKmsCryptoKeyIamMember s) (TF.Attr s P.Text) where
         lens (_role :: ResourceKmsCryptoKeyIamMember s -> TF.Attr s P.Text)
              (\s a -> s { _role = a } :: ResourceKmsCryptoKeyIamMember s)
 
-instance s ~ s' => P.HasComputeCryptoKeyId (TF.Ref s' (ResourceKmsCryptoKeyIamMember s)) (TF.Attr s P.Text) where
-    computeCryptoKeyId =
+instance s ~ s' => P.HasComputedCryptoKeyId (TF.Ref s' (ResourceKmsCryptoKeyIamMember s)) (TF.Attr s P.Text) where
+    computedCryptoKeyId =
         (_crypto_key_id :: ResourceKmsCryptoKeyIamMember s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceKmsCryptoKeyIamMember s)) (TF.Attr s P.Text) where
-    computeEtag x = TF.compute (TF.refKey x) "etag"
+instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ResourceKmsCryptoKeyIamMember s)) (TF.Attr s P.Text) where
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
-instance s ~ s' => P.HasComputeMember (TF.Ref s' (ResourceKmsCryptoKeyIamMember s)) (TF.Attr s P.Text) where
-    computeMember =
+instance s ~ s' => P.HasComputedMember (TF.Ref s' (ResourceKmsCryptoKeyIamMember s)) (TF.Attr s P.Text) where
+    computedMember =
         (_member :: ResourceKmsCryptoKeyIamMember s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceKmsCryptoKeyIamMember s)) (TF.Attr s P.Text) where
-    computeRole =
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (ResourceKmsCryptoKeyIamMember s)) (TF.Attr s P.Text) where
+    computedRole =
         (_role :: ResourceKmsCryptoKeyIamMember s -> TF.Attr s P.Text)
             . TF.refValue
 

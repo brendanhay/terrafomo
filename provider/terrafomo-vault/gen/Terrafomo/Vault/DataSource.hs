@@ -42,21 +42,21 @@ module Terrafomo.Vault.DataSource
     , P.HasType' (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAccessKey (..)
-    , P.HasComputeBackend (..)
-    , P.HasComputeData' (..)
-    , P.HasComputeDataJson (..)
-    , P.HasComputeLeaseDuration (..)
-    , P.HasComputeLeaseId (..)
-    , P.HasComputeLeaseRenewable (..)
-    , P.HasComputeLeaseStartTime (..)
-    , P.HasComputePath (..)
-    , P.HasComputeRole (..)
-    , P.HasComputeRoleId (..)
-    , P.HasComputeRoleName (..)
-    , P.HasComputeSecretKey (..)
-    , P.HasComputeSecurityToken (..)
-    , P.HasComputeType' (..)
+    , P.HasComputedAccessKey (..)
+    , P.HasComputedBackend (..)
+    , P.HasComputedData' (..)
+    , P.HasComputedDataJson (..)
+    , P.HasComputedLeaseDuration (..)
+    , P.HasComputedLeaseId (..)
+    , P.HasComputedLeaseRenewable (..)
+    , P.HasComputedLeaseStartTime (..)
+    , P.HasComputedPath (..)
+    , P.HasComputedRole (..)
+    , P.HasComputedRoleId (..)
+    , P.HasComputedRoleName (..)
+    , P.HasComputedSecretKey (..)
+    , P.HasComputedSecurityToken (..)
+    , P.HasComputedType' (..)
 
     -- * Re-exported Types
     , module P
@@ -113,16 +113,16 @@ instance P.HasRoleName (DataApproleAuthBackendRole s) (TF.Attr s P.Text) where
         lens (_role_name :: DataApproleAuthBackendRole s -> TF.Attr s P.Text)
              (\s a -> s { _role_name = a } :: DataApproleAuthBackendRole s)
 
-instance s ~ s' => P.HasComputeBackend (TF.Ref s' (DataApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeBackend =
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (DataApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedBackend =
         (_backend :: DataApproleAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRoleId (TF.Ref s' (DataApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeRoleId x = TF.compute (TF.refKey x) "role_id"
+instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (DataApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedRoleId x = TF.compute (TF.refKey x) "role_id"
 
-instance s ~ s' => P.HasComputeRoleName (TF.Ref s' (DataApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeRoleName =
+instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (DataApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedRoleName =
         (_role_name :: DataApproleAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -174,39 +174,39 @@ instance P.HasType' (DataAwsAccessCredentials s) (TF.Attr s P.Text) where
         lens (_type' :: DataAwsAccessCredentials s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: DataAwsAccessCredentials s)
 
-instance s ~ s' => P.HasComputeAccessKey (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
-    computeAccessKey x = TF.compute (TF.refKey x) "access_key"
+instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
+    computedAccessKey x = TF.compute (TF.refKey x) "access_key"
 
-instance s ~ s' => P.HasComputeBackend (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
-    computeBackend =
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
+    computedBackend =
         (_backend :: DataAwsAccessCredentials s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLeaseDuration (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
-    computeLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
+instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
+    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
 
-instance s ~ s' => P.HasComputeLeaseId (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
-    computeLeaseId x = TF.compute (TF.refKey x) "lease_id"
+instance s ~ s' => P.HasComputedLeaseId (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
+    computedLeaseId x = TF.compute (TF.refKey x) "lease_id"
 
-instance s ~ s' => P.HasComputeLeaseRenewable (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
-    computeLeaseRenewable x = TF.compute (TF.refKey x) "lease_renewable"
+instance s ~ s' => P.HasComputedLeaseRenewable (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
+    computedLeaseRenewable x = TF.compute (TF.refKey x) "lease_renewable"
 
-instance s ~ s' => P.HasComputeLeaseStartTime (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
-    computeLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
+instance s ~ s' => P.HasComputedLeaseStartTime (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
+    computedLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
 
-instance s ~ s' => P.HasComputeRole (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
-    computeRole =
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
+    computedRole =
         (_role :: DataAwsAccessCredentials s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecretKey (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
-    computeSecretKey x = TF.compute (TF.refKey x) "secret_key"
+instance s ~ s' => P.HasComputedSecretKey (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
+    computedSecretKey x = TF.compute (TF.refKey x) "secret_key"
 
-instance s ~ s' => P.HasComputeSecurityToken (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
-    computeSecurityToken x = TF.compute (TF.refKey x) "security_token"
+instance s ~ s' => P.HasComputedSecurityToken (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
+    computedSecurityToken x = TF.compute (TF.refKey x) "security_token"
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataAwsAccessCredentials s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: DataAwsAccessCredentials s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -246,26 +246,26 @@ instance P.HasPath (DataGenericSecret s) (TF.Attr s P.Text) where
         lens (_path :: DataGenericSecret s -> TF.Attr s P.Text)
              (\s a -> s { _path = a } :: DataGenericSecret s)
 
-instance s ~ s' => P.HasComputeData' (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
-    computeData' x = TF.compute (TF.refKey x) "data"
+instance s ~ s' => P.HasComputedData' (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
+    computedData' x = TF.compute (TF.refKey x) "data"
 
-instance s ~ s' => P.HasComputeDataJson (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
-    computeDataJson x = TF.compute (TF.refKey x) "data_json"
+instance s ~ s' => P.HasComputedDataJson (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
+    computedDataJson x = TF.compute (TF.refKey x) "data_json"
 
-instance s ~ s' => P.HasComputeLeaseDuration (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
-    computeLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
+instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
+    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
 
-instance s ~ s' => P.HasComputeLeaseId (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
-    computeLeaseId x = TF.compute (TF.refKey x) "lease_id"
+instance s ~ s' => P.HasComputedLeaseId (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
+    computedLeaseId x = TF.compute (TF.refKey x) "lease_id"
 
-instance s ~ s' => P.HasComputeLeaseRenewable (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
-    computeLeaseRenewable x = TF.compute (TF.refKey x) "lease_renewable"
+instance s ~ s' => P.HasComputedLeaseRenewable (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
+    computedLeaseRenewable x = TF.compute (TF.refKey x) "lease_renewable"
 
-instance s ~ s' => P.HasComputeLeaseStartTime (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
-    computeLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
+instance s ~ s' => P.HasComputedLeaseStartTime (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
+    computedLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
 
-instance s ~ s' => P.HasComputePath (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
-    computePath =
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (DataGenericSecret s)) (TF.Attr s P.Text) where
+    computedPath =
         (_path :: DataGenericSecret s -> TF.Attr s P.Text)
             . TF.refValue
 

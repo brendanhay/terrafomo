@@ -41,17 +41,17 @@ module Terrafomo.StatusCake.Resource
     , P.HasWebsiteUrl (..)
 
     -- ** Computed Attributes
-    , P.HasComputeCheckRate (..)
-    , P.HasComputeConfirmations (..)
-    , P.HasComputeContactId (..)
-    , P.HasComputePaused (..)
-    , P.HasComputePort (..)
-    , P.HasComputeTestId (..)
-    , P.HasComputeTestType (..)
-    , P.HasComputeTimeout (..)
-    , P.HasComputeTriggerRate (..)
-    , P.HasComputeWebsiteName (..)
-    , P.HasComputeWebsiteUrl (..)
+    , P.HasComputedCheckRate (..)
+    , P.HasComputedConfirmations (..)
+    , P.HasComputedContactId (..)
+    , P.HasComputedPaused (..)
+    , P.HasComputedPort (..)
+    , P.HasComputedTestId (..)
+    , P.HasComputedTestType (..)
+    , P.HasComputedTimeout (..)
+    , P.HasComputedTriggerRate (..)
+    , P.HasComputedWebsiteName (..)
+    , P.HasComputedWebsiteUrl (..)
 
     -- * Re-exported Types
     , module P
@@ -172,56 +172,56 @@ instance P.HasWebsiteUrl (ResourceTest s) (TF.Attr s P.Text) where
         lens (_website_url :: ResourceTest s -> TF.Attr s P.Text)
              (\s a -> s { _website_url = a } :: ResourceTest s)
 
-instance s ~ s' => P.HasComputeCheckRate (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
-    computeCheckRate =
+instance s ~ s' => P.HasComputedCheckRate (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computedCheckRate =
         (_check_rate :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeConfirmations (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
-    computeConfirmations =
+instance s ~ s' => P.HasComputedConfirmations (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computedConfirmations =
         (_confirmations :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeContactId (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
-    computeContactId =
+instance s ~ s' => P.HasComputedContactId (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computedContactId =
         (_contact_id :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePaused (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
-    computePaused =
+instance s ~ s' => P.HasComputedPaused (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computedPaused =
         (_paused :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePort (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
-    computePort =
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computedPort =
         (_port :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTestId (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
-    computeTestId x = TF.compute (TF.refKey x) "test_id"
+instance s ~ s' => P.HasComputedTestId (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computedTestId x = TF.compute (TF.refKey x) "test_id"
 
-instance s ~ s' => P.HasComputeTestType (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
-    computeTestType =
+instance s ~ s' => P.HasComputedTestType (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computedTestType =
         (_test_type :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTimeout (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
-    computeTimeout =
+instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computedTimeout =
         (_timeout :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTriggerRate (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
-    computeTriggerRate =
+instance s ~ s' => P.HasComputedTriggerRate (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computedTriggerRate =
         (_trigger_rate :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeWebsiteName (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
-    computeWebsiteName =
+instance s ~ s' => P.HasComputedWebsiteName (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computedWebsiteName =
         (_website_name :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeWebsiteUrl (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
-    computeWebsiteUrl =
+instance s ~ s' => P.HasComputedWebsiteUrl (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computedWebsiteUrl =
         (_website_url :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 

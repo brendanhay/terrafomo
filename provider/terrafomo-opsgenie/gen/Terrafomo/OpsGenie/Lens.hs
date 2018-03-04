@@ -32,15 +32,15 @@ module Terrafomo.OpsGenie.Lens
     , HasUsername (..)
 
     -- ** Computed Attributes
-    , HasComputeDescription (..)
-    , HasComputeFullName (..)
-    , HasComputeId (..)
-    , HasComputeLocale (..)
-    , HasComputeMember (..)
-    , HasComputeName (..)
-    , HasComputeRole (..)
-    , HasComputeTimezone (..)
-    , HasComputeUsername (..)
+    , HasComputedDescription (..)
+    , HasComputedFullName (..)
+    , HasComputedId (..)
+    , HasComputedLocale (..)
+    , HasComputedMember (..)
+    , HasComputedName (..)
+    , HasComputedRole (..)
+    , HasComputedTimezone (..)
+    , HasComputedUsername (..)
     ) where
 
 import GHC.Base ((.))
@@ -98,29 +98,29 @@ class HasUsername a b | a -> b where
 instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeFullName a b | a -> b where
-    computeFullName :: a -> b
+class HasComputedFullName a b | a -> b where
+    computedFullName :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeLocale a b | a -> b where
-    computeLocale :: a -> b
+class HasComputedLocale a b | a -> b where
+    computedLocale :: a -> b
 
-class HasComputeMember a b | a -> b where
-    computeMember :: a -> b
+class HasComputedMember a b | a -> b where
+    computedMember :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeRole a b | a -> b where
-    computeRole :: a -> b
+class HasComputedRole a b | a -> b where
+    computedRole :: a -> b
 
-class HasComputeTimezone a b | a -> b where
-    computeTimezone :: a -> b
+class HasComputedTimezone a b | a -> b where
+    computedTimezone :: a -> b
 
-class HasComputeUsername a b | a -> b where
-    computeUsername :: a -> b
+class HasComputedUsername a b | a -> b where
+    computedUsername :: a -> b

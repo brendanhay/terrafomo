@@ -47,40 +47,40 @@ module Terrafomo.Scaleway.Lens
     , HasVolume (..)
 
     -- ** Computed Attributes
-    , HasComputeAction (..)
-    , HasComputeArchitecture (..)
-    , HasComputeBootCmdArgs (..)
-    , HasComputeBootscript (..)
-    , HasComputeCreationDate (..)
-    , HasComputeDescription (..)
-    , HasComputeDirection (..)
-    , HasComputeDtb (..)
-    , HasComputeDynamicIpRequired (..)
-    , HasComputeEnableDefaultSecurity (..)
-    , HasComputeEnableIpv6 (..)
-    , HasComputeId (..)
-    , HasComputeImage (..)
-    , HasComputeInitrd (..)
-    , HasComputeIp (..)
-    , HasComputeIpRange (..)
-    , HasComputeKernel (..)
-    , HasComputeName (..)
-    , HasComputeNameFilter (..)
-    , HasComputeOrganization (..)
-    , HasComputePort (..)
-    , HasComputePrivateIp (..)
-    , HasComputeProtocol (..)
-    , HasComputePublic (..)
-    , HasComputePublicIp (..)
-    , HasComputePublicIpv6 (..)
-    , HasComputeSecurityGroup (..)
-    , HasComputeServer (..)
-    , HasComputeSizeInGb (..)
-    , HasComputeState (..)
-    , HasComputeStateDetail (..)
-    , HasComputeTags (..)
-    , HasComputeType' (..)
-    , HasComputeVolume (..)
+    , HasComputedAction (..)
+    , HasComputedArchitecture (..)
+    , HasComputedBootCmdArgs (..)
+    , HasComputedBootscript (..)
+    , HasComputedCreationDate (..)
+    , HasComputedDescription (..)
+    , HasComputedDirection (..)
+    , HasComputedDtb (..)
+    , HasComputedDynamicIpRequired (..)
+    , HasComputedEnableDefaultSecurity (..)
+    , HasComputedEnableIpv6 (..)
+    , HasComputedId (..)
+    , HasComputedImage (..)
+    , HasComputedInitrd (..)
+    , HasComputedIp (..)
+    , HasComputedIpRange (..)
+    , HasComputedKernel (..)
+    , HasComputedName (..)
+    , HasComputedNameFilter (..)
+    , HasComputedOrganization (..)
+    , HasComputedPort (..)
+    , HasComputedPrivateIp (..)
+    , HasComputedProtocol (..)
+    , HasComputedPublic (..)
+    , HasComputedPublicIp (..)
+    , HasComputedPublicIpv6 (..)
+    , HasComputedSecurityGroup (..)
+    , HasComputedServer (..)
+    , HasComputedSizeInGb (..)
+    , HasComputedState (..)
+    , HasComputedStateDetail (..)
+    , HasComputedTags (..)
+    , HasComputedType' (..)
+    , HasComputedVolume (..)
     ) where
 
 import GHC.Base ((.))
@@ -228,104 +228,104 @@ class HasVolume a b | a -> b where
 instance HasVolume a b => HasVolume (TF.Schema l p a) b where
     volume = TF.configuration . volume
 
-class HasComputeAction a b | a -> b where
-    computeAction :: a -> b
+class HasComputedAction a b | a -> b where
+    computedAction :: a -> b
 
-class HasComputeArchitecture a b | a -> b where
-    computeArchitecture :: a -> b
+class HasComputedArchitecture a b | a -> b where
+    computedArchitecture :: a -> b
 
-class HasComputeBootCmdArgs a b | a -> b where
-    computeBootCmdArgs :: a -> b
+class HasComputedBootCmdArgs a b | a -> b where
+    computedBootCmdArgs :: a -> b
 
-class HasComputeBootscript a b | a -> b where
-    computeBootscript :: a -> b
+class HasComputedBootscript a b | a -> b where
+    computedBootscript :: a -> b
 
-class HasComputeCreationDate a b | a -> b where
-    computeCreationDate :: a -> b
+class HasComputedCreationDate a b | a -> b where
+    computedCreationDate :: a -> b
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeDirection a b | a -> b where
-    computeDirection :: a -> b
+class HasComputedDirection a b | a -> b where
+    computedDirection :: a -> b
 
-class HasComputeDtb a b | a -> b where
-    computeDtb :: a -> b
+class HasComputedDtb a b | a -> b where
+    computedDtb :: a -> b
 
-class HasComputeDynamicIpRequired a b | a -> b where
-    computeDynamicIpRequired :: a -> b
+class HasComputedDynamicIpRequired a b | a -> b where
+    computedDynamicIpRequired :: a -> b
 
-class HasComputeEnableDefaultSecurity a b | a -> b where
-    computeEnableDefaultSecurity :: a -> b
+class HasComputedEnableDefaultSecurity a b | a -> b where
+    computedEnableDefaultSecurity :: a -> b
 
-class HasComputeEnableIpv6 a b | a -> b where
-    computeEnableIpv6 :: a -> b
+class HasComputedEnableIpv6 a b | a -> b where
+    computedEnableIpv6 :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeImage a b | a -> b where
-    computeImage :: a -> b
+class HasComputedImage a b | a -> b where
+    computedImage :: a -> b
 
-class HasComputeInitrd a b | a -> b where
-    computeInitrd :: a -> b
+class HasComputedInitrd a b | a -> b where
+    computedInitrd :: a -> b
 
-class HasComputeIp a b | a -> b where
-    computeIp :: a -> b
+class HasComputedIp a b | a -> b where
+    computedIp :: a -> b
 
-class HasComputeIpRange a b | a -> b where
-    computeIpRange :: a -> b
+class HasComputedIpRange a b | a -> b where
+    computedIpRange :: a -> b
 
-class HasComputeKernel a b | a -> b where
-    computeKernel :: a -> b
+class HasComputedKernel a b | a -> b where
+    computedKernel :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeNameFilter a b | a -> b where
-    computeNameFilter :: a -> b
+class HasComputedNameFilter a b | a -> b where
+    computedNameFilter :: a -> b
 
-class HasComputeOrganization a b | a -> b where
-    computeOrganization :: a -> b
+class HasComputedOrganization a b | a -> b where
+    computedOrganization :: a -> b
 
-class HasComputePort a b | a -> b where
-    computePort :: a -> b
+class HasComputedPort a b | a -> b where
+    computedPort :: a -> b
 
-class HasComputePrivateIp a b | a -> b where
-    computePrivateIp :: a -> b
+class HasComputedPrivateIp a b | a -> b where
+    computedPrivateIp :: a -> b
 
-class HasComputeProtocol a b | a -> b where
-    computeProtocol :: a -> b
+class HasComputedProtocol a b | a -> b where
+    computedProtocol :: a -> b
 
-class HasComputePublic a b | a -> b where
-    computePublic :: a -> b
+class HasComputedPublic a b | a -> b where
+    computedPublic :: a -> b
 
-class HasComputePublicIp a b | a -> b where
-    computePublicIp :: a -> b
+class HasComputedPublicIp a b | a -> b where
+    computedPublicIp :: a -> b
 
-class HasComputePublicIpv6 a b | a -> b where
-    computePublicIpv6 :: a -> b
+class HasComputedPublicIpv6 a b | a -> b where
+    computedPublicIpv6 :: a -> b
 
-class HasComputeSecurityGroup a b | a -> b where
-    computeSecurityGroup :: a -> b
+class HasComputedSecurityGroup a b | a -> b where
+    computedSecurityGroup :: a -> b
 
-class HasComputeServer a b | a -> b where
-    computeServer :: a -> b
+class HasComputedServer a b | a -> b where
+    computedServer :: a -> b
 
-class HasComputeSizeInGb a b | a -> b where
-    computeSizeInGb :: a -> b
+class HasComputedSizeInGb a b | a -> b where
+    computedSizeInGb :: a -> b
 
-class HasComputeState a b | a -> b where
-    computeState :: a -> b
+class HasComputedState a b | a -> b where
+    computedState :: a -> b
 
-class HasComputeStateDetail a b | a -> b where
-    computeStateDetail :: a -> b
+class HasComputedStateDetail a b | a -> b where
+    computedStateDetail :: a -> b
 
-class HasComputeTags a b | a -> b where
-    computeTags :: a -> b
+class HasComputedTags a b | a -> b where
+    computedTags :: a -> b
 
-class HasComputeType' a b | a -> b where
-    computeType' :: a -> b
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b
 
-class HasComputeVolume a b | a -> b where
-    computeVolume :: a -> b
+class HasComputedVolume a b | a -> b where
+    computedVolume :: a -> b

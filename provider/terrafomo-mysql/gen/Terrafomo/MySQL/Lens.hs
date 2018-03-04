@@ -34,16 +34,16 @@ module Terrafomo.MySQL.Lens
     , HasUser (..)
 
     -- ** Computed Attributes
-    , HasComputeDatabase (..)
-    , HasComputeDefaultCharacterSet (..)
-    , HasComputeDefaultCollation (..)
-    , HasComputeGrant (..)
-    , HasComputeHost (..)
-    , HasComputeName (..)
-    , HasComputePassword (..)
-    , HasComputePlaintextPassword (..)
-    , HasComputePrivileges (..)
-    , HasComputeUser (..)
+    , HasComputedDatabase (..)
+    , HasComputedDefaultCharacterSet (..)
+    , HasComputedDefaultCollation (..)
+    , HasComputedGrant (..)
+    , HasComputedHost (..)
+    , HasComputedName (..)
+    , HasComputedPassword (..)
+    , HasComputedPlaintextPassword (..)
+    , HasComputedPrivileges (..)
+    , HasComputedUser (..)
     ) where
 
 import GHC.Base ((.))
@@ -113,32 +113,32 @@ class HasUser a b | a -> b where
 instance HasUser a b => HasUser (TF.Schema l p a) b where
     user = TF.configuration . user
 
-class HasComputeDatabase a b | a -> b where
-    computeDatabase :: a -> b
+class HasComputedDatabase a b | a -> b where
+    computedDatabase :: a -> b
 
-class HasComputeDefaultCharacterSet a b | a -> b where
-    computeDefaultCharacterSet :: a -> b
+class HasComputedDefaultCharacterSet a b | a -> b where
+    computedDefaultCharacterSet :: a -> b
 
-class HasComputeDefaultCollation a b | a -> b where
-    computeDefaultCollation :: a -> b
+class HasComputedDefaultCollation a b | a -> b where
+    computedDefaultCollation :: a -> b
 
-class HasComputeGrant a b | a -> b where
-    computeGrant :: a -> b
+class HasComputedGrant a b | a -> b where
+    computedGrant :: a -> b
 
-class HasComputeHost a b | a -> b where
-    computeHost :: a -> b
+class HasComputedHost a b | a -> b where
+    computedHost :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputePassword a b | a -> b where
-    computePassword :: a -> b
+class HasComputedPassword a b | a -> b where
+    computedPassword :: a -> b
 
-class HasComputePlaintextPassword a b | a -> b where
-    computePlaintextPassword :: a -> b
+class HasComputedPlaintextPassword a b | a -> b where
+    computedPlaintextPassword :: a -> b
 
-class HasComputePrivileges a b | a -> b where
-    computePrivileges :: a -> b
+class HasComputedPrivileges a b | a -> b where
+    computedPrivileges :: a -> b
 
-class HasComputeUser a b | a -> b where
-    computeUser :: a -> b
+class HasComputedUser a b | a -> b where
+    computedUser :: a -> b

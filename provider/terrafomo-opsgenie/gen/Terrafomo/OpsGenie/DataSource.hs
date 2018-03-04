@@ -32,9 +32,9 @@ module Terrafomo.OpsGenie.DataSource
     , P.HasUsername (..)
 
     -- ** Computed Attributes
-    , P.HasComputeFullName (..)
-    , P.HasComputeRole (..)
-    , P.HasComputeUsername (..)
+    , P.HasComputedFullName (..)
+    , P.HasComputedRole (..)
+    , P.HasComputedUsername (..)
 
     -- * Re-exported Types
     , module P
@@ -84,14 +84,14 @@ instance P.HasUsername (DataUser s) (TF.Attr s P.Text) where
         lens (_username :: DataUser s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: DataUser s)
 
-instance s ~ s' => P.HasComputeFullName (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
-    computeFullName x = TF.compute (TF.refKey x) "full_name"
+instance s ~ s' => P.HasComputedFullName (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computedFullName x = TF.compute (TF.refKey x) "full_name"
 
-instance s ~ s' => P.HasComputeRole (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
-    computeRole x = TF.compute (TF.refKey x) "role"
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computedRole x = TF.compute (TF.refKey x) "role"
 
-instance s ~ s' => P.HasComputeUsername (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
-    computeUsername =
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computedUsername =
         (_username :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 

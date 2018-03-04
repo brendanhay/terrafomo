@@ -99,89 +99,89 @@ module Terrafomo.CloudStack.Lens
     , HasZone (..)
 
     -- ** Computed Attributes
-    , HasComputeAccount (..)
-    , HasComputeAclId (..)
-    , HasComputeAffinityGroupIds (..)
-    , HasComputeAffinityGroupNames (..)
-    , HasComputeAlgorithm (..)
-    , HasComputeAttach (..)
-    , HasComputeCidr (..)
-    , HasComputeCreated (..)
-    , HasComputeCustomerGatewayId (..)
-    , HasComputeDescription (..)
-    , HasComputeDeviceId (..)
-    , HasComputeDiskOffering (..)
-    , HasComputeDisplayName (..)
-    , HasComputeDisplayText (..)
-    , HasComputeDpd (..)
-    , HasComputeEndip (..)
-    , HasComputeEspLifetime (..)
-    , HasComputeEspPolicy (..)
-    , HasComputeExpunge (..)
-    , HasComputeFilter (..)
-    , HasComputeFingerprint (..)
-    , HasComputeFormat (..)
-    , HasComputeForward (..)
-    , HasComputeGateway (..)
-    , HasComputeGatewayId (..)
-    , HasComputeGroup (..)
-    , HasComputeHypervisor (..)
-    , HasComputeId (..)
-    , HasComputeIkeLifetime (..)
-    , HasComputeIkePolicy (..)
-    , HasComputeIpAddress (..)
-    , HasComputeIpAddressId (..)
-    , HasComputeIpsecPsk (..)
-    , HasComputeIsDynamicallyScalable (..)
-    , HasComputeIsExtractable (..)
-    , HasComputeIsFeatured (..)
-    , HasComputeIsPortable (..)
-    , HasComputeIsPublic (..)
-    , HasComputeIsReady (..)
-    , HasComputeIsReadyTimeout (..)
-    , HasComputeKeypair (..)
-    , HasComputeManaged (..)
-    , HasComputeMemberIds (..)
-    , HasComputeName (..)
-    , HasComputeNetmask (..)
-    , HasComputeNetworkDomain (..)
-    , HasComputeNetworkId (..)
-    , HasComputeNetworkOffering (..)
-    , HasComputeNicId (..)
-    , HasComputeOsType (..)
-    , HasComputeParallelism (..)
-    , HasComputePasswordEnabled (..)
-    , HasComputePhysicalNetworkId (..)
-    , HasComputePrivateKey (..)
-    , HasComputePrivatePort (..)
-    , HasComputeProject (..)
-    , HasComputeProtocol (..)
-    , HasComputePublicIp (..)
-    , HasComputePublicKey (..)
-    , HasComputePublicPort (..)
-    , HasComputeRootDiskSize (..)
-    , HasComputeRule (..)
-    , HasComputeSecurityGroupId (..)
-    , HasComputeSecurityGroupIds (..)
-    , HasComputeSecurityGroupNames (..)
-    , HasComputeServiceOffering (..)
-    , HasComputeShrinkOk (..)
-    , HasComputeSize (..)
-    , HasComputeSourceNatIp (..)
-    , HasComputeStartip (..)
-    , HasComputeTags (..)
-    , HasComputeTemplate (..)
-    , HasComputeTemplateFilter (..)
-    , HasComputeType' (..)
-    , HasComputeUrl (..)
-    , HasComputeUserData (..)
-    , HasComputeVirtualMachineId (..)
-    , HasComputeVlan (..)
-    , HasComputeVmGuestIp (..)
-    , HasComputeVpcId (..)
-    , HasComputeVpcOffering (..)
-    , HasComputeVpnGatewayId (..)
-    , HasComputeZone (..)
+    , HasComputedAccount (..)
+    , HasComputedAclId (..)
+    , HasComputedAffinityGroupIds (..)
+    , HasComputedAffinityGroupNames (..)
+    , HasComputedAlgorithm (..)
+    , HasComputedAttach (..)
+    , HasComputedCidr (..)
+    , HasComputedCreated (..)
+    , HasComputedCustomerGatewayId (..)
+    , HasComputedDescription (..)
+    , HasComputedDeviceId (..)
+    , HasComputedDiskOffering (..)
+    , HasComputedDisplayName (..)
+    , HasComputedDisplayText (..)
+    , HasComputedDpd (..)
+    , HasComputedEndip (..)
+    , HasComputedEspLifetime (..)
+    , HasComputedEspPolicy (..)
+    , HasComputedExpunge (..)
+    , HasComputedFilter (..)
+    , HasComputedFingerprint (..)
+    , HasComputedFormat (..)
+    , HasComputedForward (..)
+    , HasComputedGateway (..)
+    , HasComputedGatewayId (..)
+    , HasComputedGroup (..)
+    , HasComputedHypervisor (..)
+    , HasComputedId (..)
+    , HasComputedIkeLifetime (..)
+    , HasComputedIkePolicy (..)
+    , HasComputedIpAddress (..)
+    , HasComputedIpAddressId (..)
+    , HasComputedIpsecPsk (..)
+    , HasComputedIsDynamicallyScalable (..)
+    , HasComputedIsExtractable (..)
+    , HasComputedIsFeatured (..)
+    , HasComputedIsPortable (..)
+    , HasComputedIsPublic (..)
+    , HasComputedIsReady (..)
+    , HasComputedIsReadyTimeout (..)
+    , HasComputedKeypair (..)
+    , HasComputedManaged (..)
+    , HasComputedMemberIds (..)
+    , HasComputedName (..)
+    , HasComputedNetmask (..)
+    , HasComputedNetworkDomain (..)
+    , HasComputedNetworkId (..)
+    , HasComputedNetworkOffering (..)
+    , HasComputedNicId (..)
+    , HasComputedOsType (..)
+    , HasComputedParallelism (..)
+    , HasComputedPasswordEnabled (..)
+    , HasComputedPhysicalNetworkId (..)
+    , HasComputedPrivateKey (..)
+    , HasComputedPrivatePort (..)
+    , HasComputedProject (..)
+    , HasComputedProtocol (..)
+    , HasComputedPublicIp (..)
+    , HasComputedPublicKey (..)
+    , HasComputedPublicPort (..)
+    , HasComputedRootDiskSize (..)
+    , HasComputedRule (..)
+    , HasComputedSecurityGroupId (..)
+    , HasComputedSecurityGroupIds (..)
+    , HasComputedSecurityGroupNames (..)
+    , HasComputedServiceOffering (..)
+    , HasComputedShrinkOk (..)
+    , HasComputedSize (..)
+    , HasComputedSourceNatIp (..)
+    , HasComputedStartip (..)
+    , HasComputedTags (..)
+    , HasComputedTemplate (..)
+    , HasComputedTemplateFilter (..)
+    , HasComputedType' (..)
+    , HasComputedUrl (..)
+    , HasComputedUserData (..)
+    , HasComputedVirtualMachineId (..)
+    , HasComputedVlan (..)
+    , HasComputedVmGuestIp (..)
+    , HasComputedVpcId (..)
+    , HasComputedVpcOffering (..)
+    , HasComputedVpnGatewayId (..)
+    , HasComputedZone (..)
     ) where
 
 import GHC.Base ((.))
@@ -641,251 +641,251 @@ class HasZone a b | a -> b where
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
-class HasComputeAccount a b | a -> b where
-    computeAccount :: a -> b
+class HasComputedAccount a b | a -> b where
+    computedAccount :: a -> b
 
-class HasComputeAclId a b | a -> b where
-    computeAclId :: a -> b
+class HasComputedAclId a b | a -> b where
+    computedAclId :: a -> b
 
-class HasComputeAffinityGroupIds a b | a -> b where
-    computeAffinityGroupIds :: a -> b
+class HasComputedAffinityGroupIds a b | a -> b where
+    computedAffinityGroupIds :: a -> b
 
-class HasComputeAffinityGroupNames a b | a -> b where
-    computeAffinityGroupNames :: a -> b
+class HasComputedAffinityGroupNames a b | a -> b where
+    computedAffinityGroupNames :: a -> b
 
-class HasComputeAlgorithm a b | a -> b where
-    computeAlgorithm :: a -> b
+class HasComputedAlgorithm a b | a -> b where
+    computedAlgorithm :: a -> b
 
-class HasComputeAttach a b | a -> b where
-    computeAttach :: a -> b
+class HasComputedAttach a b | a -> b where
+    computedAttach :: a -> b
 
-class HasComputeCidr a b | a -> b where
-    computeCidr :: a -> b
+class HasComputedCidr a b | a -> b where
+    computedCidr :: a -> b
 
-class HasComputeCreated a b | a -> b where
-    computeCreated :: a -> b
+class HasComputedCreated a b | a -> b where
+    computedCreated :: a -> b
 
-class HasComputeCustomerGatewayId a b | a -> b where
-    computeCustomerGatewayId :: a -> b
+class HasComputedCustomerGatewayId a b | a -> b where
+    computedCustomerGatewayId :: a -> b
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeDeviceId a b | a -> b where
-    computeDeviceId :: a -> b
+class HasComputedDeviceId a b | a -> b where
+    computedDeviceId :: a -> b
 
-class HasComputeDiskOffering a b | a -> b where
-    computeDiskOffering :: a -> b
+class HasComputedDiskOffering a b | a -> b where
+    computedDiskOffering :: a -> b
 
-class HasComputeDisplayName a b | a -> b where
-    computeDisplayName :: a -> b
+class HasComputedDisplayName a b | a -> b where
+    computedDisplayName :: a -> b
 
-class HasComputeDisplayText a b | a -> b where
-    computeDisplayText :: a -> b
+class HasComputedDisplayText a b | a -> b where
+    computedDisplayText :: a -> b
 
-class HasComputeDpd a b | a -> b where
-    computeDpd :: a -> b
+class HasComputedDpd a b | a -> b where
+    computedDpd :: a -> b
 
-class HasComputeEndip a b | a -> b where
-    computeEndip :: a -> b
+class HasComputedEndip a b | a -> b where
+    computedEndip :: a -> b
 
-class HasComputeEspLifetime a b | a -> b where
-    computeEspLifetime :: a -> b
+class HasComputedEspLifetime a b | a -> b where
+    computedEspLifetime :: a -> b
 
-class HasComputeEspPolicy a b | a -> b where
-    computeEspPolicy :: a -> b
+class HasComputedEspPolicy a b | a -> b where
+    computedEspPolicy :: a -> b
 
-class HasComputeExpunge a b | a -> b where
-    computeExpunge :: a -> b
+class HasComputedExpunge a b | a -> b where
+    computedExpunge :: a -> b
 
-class HasComputeFilter a b | a -> b where
-    computeFilter :: a -> b
+class HasComputedFilter a b | a -> b where
+    computedFilter :: a -> b
 
-class HasComputeFingerprint a b | a -> b where
-    computeFingerprint :: a -> b
+class HasComputedFingerprint a b | a -> b where
+    computedFingerprint :: a -> b
 
-class HasComputeFormat a b | a -> b where
-    computeFormat :: a -> b
+class HasComputedFormat a b | a -> b where
+    computedFormat :: a -> b
 
-class HasComputeForward a b | a -> b where
-    computeForward :: a -> b
+class HasComputedForward a b | a -> b where
+    computedForward :: a -> b
 
-class HasComputeGateway a b | a -> b where
-    computeGateway :: a -> b
+class HasComputedGateway a b | a -> b where
+    computedGateway :: a -> b
 
-class HasComputeGatewayId a b | a -> b where
-    computeGatewayId :: a -> b
+class HasComputedGatewayId a b | a -> b where
+    computedGatewayId :: a -> b
 
-class HasComputeGroup a b | a -> b where
-    computeGroup :: a -> b
+class HasComputedGroup a b | a -> b where
+    computedGroup :: a -> b
 
-class HasComputeHypervisor a b | a -> b where
-    computeHypervisor :: a -> b
+class HasComputedHypervisor a b | a -> b where
+    computedHypervisor :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeIkeLifetime a b | a -> b where
-    computeIkeLifetime :: a -> b
+class HasComputedIkeLifetime a b | a -> b where
+    computedIkeLifetime :: a -> b
 
-class HasComputeIkePolicy a b | a -> b where
-    computeIkePolicy :: a -> b
+class HasComputedIkePolicy a b | a -> b where
+    computedIkePolicy :: a -> b
 
-class HasComputeIpAddress a b | a -> b where
-    computeIpAddress :: a -> b
+class HasComputedIpAddress a b | a -> b where
+    computedIpAddress :: a -> b
 
-class HasComputeIpAddressId a b | a -> b where
-    computeIpAddressId :: a -> b
+class HasComputedIpAddressId a b | a -> b where
+    computedIpAddressId :: a -> b
 
-class HasComputeIpsecPsk a b | a -> b where
-    computeIpsecPsk :: a -> b
+class HasComputedIpsecPsk a b | a -> b where
+    computedIpsecPsk :: a -> b
 
-class HasComputeIsDynamicallyScalable a b | a -> b where
-    computeIsDynamicallyScalable :: a -> b
+class HasComputedIsDynamicallyScalable a b | a -> b where
+    computedIsDynamicallyScalable :: a -> b
 
-class HasComputeIsExtractable a b | a -> b where
-    computeIsExtractable :: a -> b
+class HasComputedIsExtractable a b | a -> b where
+    computedIsExtractable :: a -> b
 
-class HasComputeIsFeatured a b | a -> b where
-    computeIsFeatured :: a -> b
+class HasComputedIsFeatured a b | a -> b where
+    computedIsFeatured :: a -> b
 
-class HasComputeIsPortable a b | a -> b where
-    computeIsPortable :: a -> b
+class HasComputedIsPortable a b | a -> b where
+    computedIsPortable :: a -> b
 
-class HasComputeIsPublic a b | a -> b where
-    computeIsPublic :: a -> b
+class HasComputedIsPublic a b | a -> b where
+    computedIsPublic :: a -> b
 
-class HasComputeIsReady a b | a -> b where
-    computeIsReady :: a -> b
+class HasComputedIsReady a b | a -> b where
+    computedIsReady :: a -> b
 
-class HasComputeIsReadyTimeout a b | a -> b where
-    computeIsReadyTimeout :: a -> b
+class HasComputedIsReadyTimeout a b | a -> b where
+    computedIsReadyTimeout :: a -> b
 
-class HasComputeKeypair a b | a -> b where
-    computeKeypair :: a -> b
+class HasComputedKeypair a b | a -> b where
+    computedKeypair :: a -> b
 
-class HasComputeManaged a b | a -> b where
-    computeManaged :: a -> b
+class HasComputedManaged a b | a -> b where
+    computedManaged :: a -> b
 
-class HasComputeMemberIds a b | a -> b where
-    computeMemberIds :: a -> b
+class HasComputedMemberIds a b | a -> b where
+    computedMemberIds :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeNetmask a b | a -> b where
-    computeNetmask :: a -> b
+class HasComputedNetmask a b | a -> b where
+    computedNetmask :: a -> b
 
-class HasComputeNetworkDomain a b | a -> b where
-    computeNetworkDomain :: a -> b
+class HasComputedNetworkDomain a b | a -> b where
+    computedNetworkDomain :: a -> b
 
-class HasComputeNetworkId a b | a -> b where
-    computeNetworkId :: a -> b
+class HasComputedNetworkId a b | a -> b where
+    computedNetworkId :: a -> b
 
-class HasComputeNetworkOffering a b | a -> b where
-    computeNetworkOffering :: a -> b
+class HasComputedNetworkOffering a b | a -> b where
+    computedNetworkOffering :: a -> b
 
-class HasComputeNicId a b | a -> b where
-    computeNicId :: a -> b
+class HasComputedNicId a b | a -> b where
+    computedNicId :: a -> b
 
-class HasComputeOsType a b | a -> b where
-    computeOsType :: a -> b
+class HasComputedOsType a b | a -> b where
+    computedOsType :: a -> b
 
-class HasComputeParallelism a b | a -> b where
-    computeParallelism :: a -> b
+class HasComputedParallelism a b | a -> b where
+    computedParallelism :: a -> b
 
-class HasComputePasswordEnabled a b | a -> b where
-    computePasswordEnabled :: a -> b
+class HasComputedPasswordEnabled a b | a -> b where
+    computedPasswordEnabled :: a -> b
 
-class HasComputePhysicalNetworkId a b | a -> b where
-    computePhysicalNetworkId :: a -> b
+class HasComputedPhysicalNetworkId a b | a -> b where
+    computedPhysicalNetworkId :: a -> b
 
-class HasComputePrivateKey a b | a -> b where
-    computePrivateKey :: a -> b
+class HasComputedPrivateKey a b | a -> b where
+    computedPrivateKey :: a -> b
 
-class HasComputePrivatePort a b | a -> b where
-    computePrivatePort :: a -> b
+class HasComputedPrivatePort a b | a -> b where
+    computedPrivatePort :: a -> b
 
-class HasComputeProject a b | a -> b where
-    computeProject :: a -> b
+class HasComputedProject a b | a -> b where
+    computedProject :: a -> b
 
-class HasComputeProtocol a b | a -> b where
-    computeProtocol :: a -> b
+class HasComputedProtocol a b | a -> b where
+    computedProtocol :: a -> b
 
-class HasComputePublicIp a b | a -> b where
-    computePublicIp :: a -> b
+class HasComputedPublicIp a b | a -> b where
+    computedPublicIp :: a -> b
 
-class HasComputePublicKey a b | a -> b where
-    computePublicKey :: a -> b
+class HasComputedPublicKey a b | a -> b where
+    computedPublicKey :: a -> b
 
-class HasComputePublicPort a b | a -> b where
-    computePublicPort :: a -> b
+class HasComputedPublicPort a b | a -> b where
+    computedPublicPort :: a -> b
 
-class HasComputeRootDiskSize a b | a -> b where
-    computeRootDiskSize :: a -> b
+class HasComputedRootDiskSize a b | a -> b where
+    computedRootDiskSize :: a -> b
 
-class HasComputeRule a b | a -> b where
-    computeRule :: a -> b
+class HasComputedRule a b | a -> b where
+    computedRule :: a -> b
 
-class HasComputeSecurityGroupId a b | a -> b where
-    computeSecurityGroupId :: a -> b
+class HasComputedSecurityGroupId a b | a -> b where
+    computedSecurityGroupId :: a -> b
 
-class HasComputeSecurityGroupIds a b | a -> b where
-    computeSecurityGroupIds :: a -> b
+class HasComputedSecurityGroupIds a b | a -> b where
+    computedSecurityGroupIds :: a -> b
 
-class HasComputeSecurityGroupNames a b | a -> b where
-    computeSecurityGroupNames :: a -> b
+class HasComputedSecurityGroupNames a b | a -> b where
+    computedSecurityGroupNames :: a -> b
 
-class HasComputeServiceOffering a b | a -> b where
-    computeServiceOffering :: a -> b
+class HasComputedServiceOffering a b | a -> b where
+    computedServiceOffering :: a -> b
 
-class HasComputeShrinkOk a b | a -> b where
-    computeShrinkOk :: a -> b
+class HasComputedShrinkOk a b | a -> b where
+    computedShrinkOk :: a -> b
 
-class HasComputeSize a b | a -> b where
-    computeSize :: a -> b
+class HasComputedSize a b | a -> b where
+    computedSize :: a -> b
 
-class HasComputeSourceNatIp a b | a -> b where
-    computeSourceNatIp :: a -> b
+class HasComputedSourceNatIp a b | a -> b where
+    computedSourceNatIp :: a -> b
 
-class HasComputeStartip a b | a -> b where
-    computeStartip :: a -> b
+class HasComputedStartip a b | a -> b where
+    computedStartip :: a -> b
 
-class HasComputeTags a b | a -> b where
-    computeTags :: a -> b
+class HasComputedTags a b | a -> b where
+    computedTags :: a -> b
 
-class HasComputeTemplate a b | a -> b where
-    computeTemplate :: a -> b
+class HasComputedTemplate a b | a -> b where
+    computedTemplate :: a -> b
 
-class HasComputeTemplateFilter a b | a -> b where
-    computeTemplateFilter :: a -> b
+class HasComputedTemplateFilter a b | a -> b where
+    computedTemplateFilter :: a -> b
 
-class HasComputeType' a b | a -> b where
-    computeType' :: a -> b
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b
 
-class HasComputeUrl a b | a -> b where
-    computeUrl :: a -> b
+class HasComputedUrl a b | a -> b where
+    computedUrl :: a -> b
 
-class HasComputeUserData a b | a -> b where
-    computeUserData :: a -> b
+class HasComputedUserData a b | a -> b where
+    computedUserData :: a -> b
 
-class HasComputeVirtualMachineId a b | a -> b where
-    computeVirtualMachineId :: a -> b
+class HasComputedVirtualMachineId a b | a -> b where
+    computedVirtualMachineId :: a -> b
 
-class HasComputeVlan a b | a -> b where
-    computeVlan :: a -> b
+class HasComputedVlan a b | a -> b where
+    computedVlan :: a -> b
 
-class HasComputeVmGuestIp a b | a -> b where
-    computeVmGuestIp :: a -> b
+class HasComputedVmGuestIp a b | a -> b where
+    computedVmGuestIp :: a -> b
 
-class HasComputeVpcId a b | a -> b where
-    computeVpcId :: a -> b
+class HasComputedVpcId a b | a -> b where
+    computedVpcId :: a -> b
 
-class HasComputeVpcOffering a b | a -> b where
-    computeVpcOffering :: a -> b
+class HasComputedVpcOffering a b | a -> b where
+    computedVpcOffering :: a -> b
 
-class HasComputeVpnGatewayId a b | a -> b where
-    computeVpnGatewayId :: a -> b
+class HasComputedVpnGatewayId a b | a -> b where
+    computedVpnGatewayId :: a -> b
 
-class HasComputeZone a b | a -> b where
-    computeZone :: a -> b
+class HasComputedZone a b | a -> b where
+    computedZone :: a -> b

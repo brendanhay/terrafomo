@@ -82,47 +82,47 @@ module Terrafomo.Datadog.Resource
     , P.HasUnit (..)
 
     -- ** Computed Attributes
-    , P.HasComputeActive (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeDisabled (..)
-    , P.HasComputeEmail (..)
-    , P.HasComputeEnd (..)
-    , P.HasComputeEscalationMessage (..)
-    , P.HasComputeEvaluationDelay (..)
-    , P.HasComputeGraph (..)
-    , P.HasComputeHandle (..)
-    , P.HasComputeId (..)
-    , P.HasComputeIncludeTags (..)
-    , P.HasComputeIsAdmin (..)
-    , P.HasComputeLocked (..)
-    , P.HasComputeMessage (..)
-    , P.HasComputeMetric (..)
-    , P.HasComputeMonitorId (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNewHostDelay (..)
-    , P.HasComputeNoDataTimeframe (..)
-    , P.HasComputeNotifyAudit (..)
-    , P.HasComputeNotifyNoData (..)
-    , P.HasComputePerUnit (..)
-    , P.HasComputeQuery (..)
-    , P.HasComputeReadOnly (..)
-    , P.HasComputeRecurrence (..)
-    , P.HasComputeRenotifyInterval (..)
-    , P.HasComputeRequireFullWindow (..)
-    , P.HasComputeRole (..)
-    , P.HasComputeScope (..)
-    , P.HasComputeShortName (..)
-    , P.HasComputeSilenced (..)
-    , P.HasComputeStart (..)
-    , P.HasComputeStatsdInterval (..)
-    , P.HasComputeTags (..)
-    , P.HasComputeTemplateVariable (..)
-    , P.HasComputeThresholds (..)
-    , P.HasComputeTimeoutH (..)
-    , P.HasComputeTitle (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeUnit (..)
-    , P.HasComputeVerified (..)
+    , P.HasComputedActive (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDisabled (..)
+    , P.HasComputedEmail (..)
+    , P.HasComputedEnd (..)
+    , P.HasComputedEscalationMessage (..)
+    , P.HasComputedEvaluationDelay (..)
+    , P.HasComputedGraph (..)
+    , P.HasComputedHandle (..)
+    , P.HasComputedId (..)
+    , P.HasComputedIncludeTags (..)
+    , P.HasComputedIsAdmin (..)
+    , P.HasComputedLocked (..)
+    , P.HasComputedMessage (..)
+    , P.HasComputedMetric (..)
+    , P.HasComputedMonitorId (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNewHostDelay (..)
+    , P.HasComputedNoDataTimeframe (..)
+    , P.HasComputedNotifyAudit (..)
+    , P.HasComputedNotifyNoData (..)
+    , P.HasComputedPerUnit (..)
+    , P.HasComputedQuery (..)
+    , P.HasComputedReadOnly (..)
+    , P.HasComputedRecurrence (..)
+    , P.HasComputedRenotifyInterval (..)
+    , P.HasComputedRequireFullWindow (..)
+    , P.HasComputedRole (..)
+    , P.HasComputedScope (..)
+    , P.HasComputedShortName (..)
+    , P.HasComputedSilenced (..)
+    , P.HasComputedStart (..)
+    , P.HasComputedStatsdInterval (..)
+    , P.HasComputedTags (..)
+    , P.HasComputedTemplateVariable (..)
+    , P.HasComputedThresholds (..)
+    , P.HasComputedTimeoutH (..)
+    , P.HasComputedTitle (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedUnit (..)
+    , P.HasComputedVerified (..)
 
     -- * Re-exported Types
     , module P
@@ -228,46 +228,46 @@ instance P.HasStart (ResourceDowntime s) (TF.Attr s P.Text) where
         lens (_start :: ResourceDowntime s -> TF.Attr s P.Text)
              (\s a -> s { _start = a } :: ResourceDowntime s)
 
-instance s ~ s' => P.HasComputeActive (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
-    computeActive =
+instance s ~ s' => P.HasComputedActive (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
+    computedActive =
         (_active :: ResourceDowntime s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDisabled (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
-    computeDisabled =
+instance s ~ s' => P.HasComputedDisabled (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
+    computedDisabled =
         (_disabled :: ResourceDowntime s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEnd (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
-    computeEnd =
+instance s ~ s' => P.HasComputedEnd (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
+    computedEnd =
         (_end :: ResourceDowntime s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeMessage (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
-    computeMessage =
+instance s ~ s' => P.HasComputedMessage (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
+    computedMessage =
         (_message :: ResourceDowntime s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMonitorId (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
-    computeMonitorId =
+instance s ~ s' => P.HasComputedMonitorId (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
+    computedMonitorId =
         (_monitor_id :: ResourceDowntime s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRecurrence (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
-    computeRecurrence =
+instance s ~ s' => P.HasComputedRecurrence (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
+    computedRecurrence =
         (_recurrence :: ResourceDowntime s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeScope (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
-    computeScope =
+instance s ~ s' => P.HasComputedScope (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
+    computedScope =
         (_scope :: ResourceDowntime s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStart (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
-    computeStart =
+instance s ~ s' => P.HasComputedStart (TF.Ref s' (ResourceDowntime s)) (TF.Attr s P.Text) where
+    computedStart =
         (_start :: ResourceDowntime s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -345,33 +345,33 @@ instance P.HasUnit (ResourceMetricMetadata s) (TF.Attr s P.Text) where
         lens (_unit :: ResourceMetricMetadata s -> TF.Attr s P.Text)
              (\s a -> s { _unit = a } :: ResourceMetricMetadata s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceMetricMetadata s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceMetricMetadata s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceMetricMetadata s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMetric (TF.Ref s' (ResourceMetricMetadata s)) (TF.Attr s P.Text) where
-    computeMetric =
+instance s ~ s' => P.HasComputedMetric (TF.Ref s' (ResourceMetricMetadata s)) (TF.Attr s P.Text) where
+    computedMetric =
         (_metric :: ResourceMetricMetadata s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePerUnit (TF.Ref s' (ResourceMetricMetadata s)) (TF.Attr s P.Text) where
-    computePerUnit =
+instance s ~ s' => P.HasComputedPerUnit (TF.Ref s' (ResourceMetricMetadata s)) (TF.Attr s P.Text) where
+    computedPerUnit =
         (_per_unit :: ResourceMetricMetadata s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeShortName (TF.Ref s' (ResourceMetricMetadata s)) (TF.Attr s P.Text) where
-    computeShortName =
+instance s ~ s' => P.HasComputedShortName (TF.Ref s' (ResourceMetricMetadata s)) (TF.Attr s P.Text) where
+    computedShortName =
         (_short_name :: ResourceMetricMetadata s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStatsdInterval (TF.Ref s' (ResourceMetricMetadata s)) (TF.Attr s P.Text) where
-    computeStatsdInterval =
+instance s ~ s' => P.HasComputedStatsdInterval (TF.Ref s' (ResourceMetricMetadata s)) (TF.Attr s P.Text) where
+    computedStatsdInterval =
         (_statsd_interval :: ResourceMetricMetadata s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUnit (TF.Ref s' (ResourceMetricMetadata s)) (TF.Attr s P.Text) where
-    computeUnit =
+instance s ~ s' => P.HasComputedUnit (TF.Ref s' (ResourceMetricMetadata s)) (TF.Attr s P.Text) where
+    computedUnit =
         (_unit :: ResourceMetricMetadata s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -543,96 +543,96 @@ instance P.HasType' (ResourceMonitor s) (TF.Attr s P.Text) where
         lens (_type' :: ResourceMonitor s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: ResourceMonitor s)
 
-instance s ~ s' => P.HasComputeEscalationMessage (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeEscalationMessage =
+instance s ~ s' => P.HasComputedEscalationMessage (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedEscalationMessage =
         (_escalation_message :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEvaluationDelay (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeEvaluationDelay =
+instance s ~ s' => P.HasComputedEvaluationDelay (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedEvaluationDelay =
         (_evaluation_delay :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeIncludeTags (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeIncludeTags =
+instance s ~ s' => P.HasComputedIncludeTags (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedIncludeTags =
         (_include_tags :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLocked (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeLocked =
+instance s ~ s' => P.HasComputedLocked (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedLocked =
         (_locked :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMessage (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeMessage =
+instance s ~ s' => P.HasComputedMessage (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedMessage =
         (_message :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNewHostDelay (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeNewHostDelay =
+instance s ~ s' => P.HasComputedNewHostDelay (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedNewHostDelay =
         (_new_host_delay :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNoDataTimeframe (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeNoDataTimeframe =
+instance s ~ s' => P.HasComputedNoDataTimeframe (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedNoDataTimeframe =
         (_no_data_timeframe :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNotifyAudit (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeNotifyAudit =
+instance s ~ s' => P.HasComputedNotifyAudit (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedNotifyAudit =
         (_notify_audit :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNotifyNoData (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeNotifyNoData =
+instance s ~ s' => P.HasComputedNotifyNoData (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedNotifyNoData =
         (_notify_no_data :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeQuery (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeQuery =
+instance s ~ s' => P.HasComputedQuery (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedQuery =
         (_query :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRenotifyInterval (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeRenotifyInterval =
+instance s ~ s' => P.HasComputedRenotifyInterval (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedRenotifyInterval =
         (_renotify_interval :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRequireFullWindow (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeRequireFullWindow =
+instance s ~ s' => P.HasComputedRequireFullWindow (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedRequireFullWindow =
         (_require_full_window :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSilenced (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeSilenced =
+instance s ~ s' => P.HasComputedSilenced (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedSilenced =
         (_silenced :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedTags =
         (_tags :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeThresholds (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeThresholds =
+instance s ~ s' => P.HasComputedThresholds (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedThresholds =
         (_thresholds :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTimeoutH (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeTimeoutH =
+instance s ~ s' => P.HasComputedTimeoutH (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedTimeoutH =
         (_timeout_h :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceMonitor s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceMonitor s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -712,28 +712,28 @@ instance P.HasTitle (ResourceTimeboard s) (TF.Attr s P.Text) where
         lens (_title :: ResourceTimeboard s -> TF.Attr s P.Text)
              (\s a -> s { _title = a } :: ResourceTimeboard s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceTimeboard s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceTimeboard s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceTimeboard s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeGraph (TF.Ref s' (ResourceTimeboard s)) (TF.Attr s P.Text) where
-    computeGraph =
+instance s ~ s' => P.HasComputedGraph (TF.Ref s' (ResourceTimeboard s)) (TF.Attr s P.Text) where
+    computedGraph =
         (_graph :: ResourceTimeboard s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeReadOnly (TF.Ref s' (ResourceTimeboard s)) (TF.Attr s P.Text) where
-    computeReadOnly =
+instance s ~ s' => P.HasComputedReadOnly (TF.Ref s' (ResourceTimeboard s)) (TF.Attr s P.Text) where
+    computedReadOnly =
         (_read_only :: ResourceTimeboard s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTemplateVariable (TF.Ref s' (ResourceTimeboard s)) (TF.Attr s P.Text) where
-    computeTemplateVariable =
+instance s ~ s' => P.HasComputedTemplateVariable (TF.Ref s' (ResourceTimeboard s)) (TF.Attr s P.Text) where
+    computedTemplateVariable =
         (_template_variable :: ResourceTimeboard s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTitle (TF.Ref s' (ResourceTimeboard s)) (TF.Attr s P.Text) where
-    computeTitle =
+instance s ~ s' => P.HasComputedTitle (TF.Ref s' (ResourceTimeboard s)) (TF.Attr s P.Text) where
+    computedTitle =
         (_title :: ResourceTimeboard s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -808,39 +808,39 @@ instance P.HasRole (ResourceUser s) (TF.Attr s P.Text) where
         lens (_role :: ResourceUser s -> TF.Attr s P.Text)
              (\s a -> s { _role = a } :: ResourceUser s)
 
-instance s ~ s' => P.HasComputeDisabled (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeDisabled x = TF.compute (TF.refKey x) "disabled"
+instance s ~ s' => P.HasComputedDisabled (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedDisabled x = TF.compute (TF.refKey x) "disabled"
 
-instance s ~ s' => P.HasComputeEmail (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeEmail =
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedEmail =
         (_email :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHandle (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeHandle =
+instance s ~ s' => P.HasComputedHandle (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedHandle =
         (_handle :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeIsAdmin (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeIsAdmin =
+instance s ~ s' => P.HasComputedIsAdmin (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedIsAdmin =
         (_is_admin :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeRole =
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedRole =
         (_role :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVerified (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeVerified x = TF.compute (TF.refKey x) "verified"
+instance s ~ s' => P.HasComputedVerified (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedVerified x = TF.compute (TF.refKey x) "verified"
 
 resourceUser :: TF.Resource P.Datadog (ResourceUser s)
 resourceUser =

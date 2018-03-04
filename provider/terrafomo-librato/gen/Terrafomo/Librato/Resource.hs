@@ -62,27 +62,27 @@ module Terrafomo.Librato.Resource
     , P.HasType' (..)
 
     -- ** Computed Attributes
-    , P.HasComputeActive (..)
-    , P.HasComputeAttributes (..)
-    , P.HasComputeComposite (..)
-    , P.HasComputeCondition (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeDisplayName (..)
-    , P.HasComputeId (..)
-    , P.HasComputeLabel (..)
-    , P.HasComputeMax (..)
-    , P.HasComputeMin (..)
-    , P.HasComputeName (..)
-    , P.HasComputePeriod (..)
-    , P.HasComputeRearmSeconds (..)
-    , P.HasComputeRelatedSpace (..)
-    , P.HasComputeServices (..)
-    , P.HasComputeSettings (..)
-    , P.HasComputeSourceLag (..)
-    , P.HasComputeSpaceId (..)
-    , P.HasComputeStream (..)
-    , P.HasComputeTitle (..)
-    , P.HasComputeType' (..)
+    , P.HasComputedActive (..)
+    , P.HasComputedAttributes (..)
+    , P.HasComputedComposite (..)
+    , P.HasComputedCondition (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDisplayName (..)
+    , P.HasComputedId (..)
+    , P.HasComputedLabel (..)
+    , P.HasComputedMax (..)
+    , P.HasComputedMin (..)
+    , P.HasComputedName (..)
+    , P.HasComputedPeriod (..)
+    , P.HasComputedRearmSeconds (..)
+    , P.HasComputedRelatedSpace (..)
+    , P.HasComputedServices (..)
+    , P.HasComputedSettings (..)
+    , P.HasComputedSourceLag (..)
+    , P.HasComputedSpaceId (..)
+    , P.HasComputedStream (..)
+    , P.HasComputedTitle (..)
+    , P.HasComputedType' (..)
 
     -- * Re-exported Types
     , module P
@@ -180,31 +180,31 @@ instance P.HasServices (ResourceAlert s) (TF.Attr s P.Text) where
         lens (_services :: ResourceAlert s -> TF.Attr s P.Text)
              (\s a -> s { _services = a } :: ResourceAlert s)
 
-instance s ~ s' => P.HasComputeActive (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
-    computeActive x = TF.compute (TF.refKey x) "active"
+instance s ~ s' => P.HasComputedActive (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
+    computedActive x = TF.compute (TF.refKey x) "active"
 
-instance s ~ s' => P.HasComputeAttributes (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
-    computeAttributes =
+instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
+    computedAttributes =
         (_attributes :: ResourceAlert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCondition (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
-    computeCondition x = TF.compute (TF.refKey x) "condition"
+instance s ~ s' => P.HasComputedCondition (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
+    computedCondition x = TF.compute (TF.refKey x) "condition"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeRearmSeconds (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
-    computeRearmSeconds x = TF.compute (TF.refKey x) "rearm_seconds"
+instance s ~ s' => P.HasComputedRearmSeconds (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
+    computedRearmSeconds x = TF.compute (TF.refKey x) "rearm_seconds"
 
-instance s ~ s' => P.HasComputeServices (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
-    computeServices x = TF.compute (TF.refKey x) "services"
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (ResourceAlert s)) (TF.Attr s P.Text) where
+    computedServices x = TF.compute (TF.refKey x) "services"
 
 resourceAlert :: TF.Resource P.Librato (ResourceAlert s)
 resourceAlert =
@@ -287,31 +287,31 @@ instance P.HasType' (ResourceMetric s) (TF.Attr s P.Text) where
         lens (_type' :: ResourceMetric s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: ResourceMetric s)
 
-instance s ~ s' => P.HasComputeAttributes (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
-    computeAttributes =
+instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
+    computedAttributes =
         (_attributes :: ResourceMetric s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeComposite (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
-    computeComposite x = TF.compute (TF.refKey x) "composite"
+instance s ~ s' => P.HasComputedComposite (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
+    computedComposite x = TF.compute (TF.refKey x) "composite"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeDisplayName (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
-    computeDisplayName x = TF.compute (TF.refKey x) "display_name"
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
+    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputePeriod (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
-    computePeriod x = TF.compute (TF.refKey x) "period"
+instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
+    computedPeriod x = TF.compute (TF.refKey x) "period"
 
-instance s ~ s' => P.HasComputeSourceLag (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
-    computeSourceLag x = TF.compute (TF.refKey x) "source_lag"
+instance s ~ s' => P.HasComputedSourceLag (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
+    computedSourceLag x = TF.compute (TF.refKey x) "source_lag"
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
-    computeType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
 
 resourceMetric :: TF.Resource P.Librato (ResourceMetric s)
 resourceMetric =
@@ -362,17 +362,17 @@ instance P.HasType' (ResourceService s) (TF.Attr s P.Text) where
         lens (_type' :: ResourceService s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: ResourceService s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeSettings (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeSettings x = TF.compute (TF.refKey x) "settings"
+instance s ~ s' => P.HasComputedSettings (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedSettings x = TF.compute (TF.refKey x) "settings"
 
-instance s ~ s' => P.HasComputeTitle (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeTitle x = TF.compute (TF.refKey x) "title"
+instance s ~ s' => P.HasComputedTitle (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedTitle x = TF.compute (TF.refKey x) "title"
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
 
 resourceService :: TF.Resource P.Librato (ResourceService s)
 resourceService =
@@ -403,11 +403,11 @@ instance P.HasName (ResourceSpace s) (TF.Attr s P.Text) where
         lens (_name :: ResourceSpace s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceSpace s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceSpace s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceSpace s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSpace s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceSpace s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
 resourceSpace :: TF.Resource P.Librato (ResourceSpace s)
 resourceSpace =
@@ -492,47 +492,47 @@ instance P.HasType' (ResourceSpaceChart s) (TF.Attr s P.Text) where
         lens (_type' :: ResourceSpaceChart s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: ResourceSpaceChart s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLabel (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
-    computeLabel =
+instance s ~ s' => P.HasComputedLabel (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
+    computedLabel =
         (_label :: ResourceSpaceChart s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMax (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
-    computeMax =
+instance s ~ s' => P.HasComputedMax (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
+    computedMax =
         (_max :: ResourceSpaceChart s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMin (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
-    computeMin =
+instance s ~ s' => P.HasComputedMin (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
+    computedMin =
         (_min :: ResourceSpaceChart s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceSpaceChart s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRelatedSpace (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
-    computeRelatedSpace =
+instance s ~ s' => P.HasComputedRelatedSpace (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
+    computedRelatedSpace =
         (_related_space :: ResourceSpaceChart s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSpaceId (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
-    computeSpaceId x = TF.compute (TF.refKey x) "space_id"
+instance s ~ s' => P.HasComputedSpaceId (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
+    computedSpaceId x = TF.compute (TF.refKey x) "space_id"
 
-instance s ~ s' => P.HasComputeStream (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
-    computeStream =
+instance s ~ s' => P.HasComputedStream (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
+    computedStream =
         (_stream :: ResourceSpaceChart s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTitle (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
-    computeTitle x = TF.compute (TF.refKey x) "title"
+instance s ~ s' => P.HasComputedTitle (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
+    computedTitle x = TF.compute (TF.refKey x) "title"
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceSpaceChart s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceSpaceChart s -> TF.Attr s P.Text)
             . TF.refValue
 

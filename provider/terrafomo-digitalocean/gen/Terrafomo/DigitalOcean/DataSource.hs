@@ -32,13 +32,13 @@ module Terrafomo.DigitalOcean.DataSource
     , P.HasName (..)
 
     -- ** Computed Attributes
-    , P.HasComputeImage (..)
-    , P.HasComputeMinDiskSize (..)
-    , P.HasComputeName (..)
-    , P.HasComputePrivate (..)
-    , P.HasComputeRegions (..)
-    , P.HasComputeSizeGigabytes (..)
-    , P.HasComputeType' (..)
+    , P.HasComputedImage (..)
+    , P.HasComputedMinDiskSize (..)
+    , P.HasComputedName (..)
+    , P.HasComputedPrivate (..)
+    , P.HasComputedRegions (..)
+    , P.HasComputedSizeGigabytes (..)
+    , P.HasComputedType' (..)
 
     -- * Re-exported Types
     , module P
@@ -89,26 +89,26 @@ instance P.HasName (DataImage s) (TF.Attr s P.Text) where
         lens (_name :: DataImage s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataImage s)
 
-instance s ~ s' => P.HasComputeImage (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeImage x = TF.compute (TF.refKey x) "image"
+instance s ~ s' => P.HasComputedImage (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedImage x = TF.compute (TF.refKey x) "image"
 
-instance s ~ s' => P.HasComputeMinDiskSize (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeMinDiskSize x = TF.compute (TF.refKey x) "min_disk_size"
+instance s ~ s' => P.HasComputedMinDiskSize (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedMinDiskSize x = TF.compute (TF.refKey x) "min_disk_size"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputePrivate (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computePrivate x = TF.compute (TF.refKey x) "private"
+instance s ~ s' => P.HasComputedPrivate (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedPrivate x = TF.compute (TF.refKey x) "private"
 
-instance s ~ s' => P.HasComputeRegions (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeRegions x = TF.compute (TF.refKey x) "regions"
+instance s ~ s' => P.HasComputedRegions (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedRegions x = TF.compute (TF.refKey x) "regions"
 
-instance s ~ s' => P.HasComputeSizeGigabytes (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeSizeGigabytes x = TF.compute (TF.refKey x) "size_gigabytes"
+instance s ~ s' => P.HasComputedSizeGigabytes (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedSizeGigabytes x = TF.compute (TF.refKey x) "size_gigabytes"
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
 
 dataImage :: TF.DataSource P.DigitalOcean (DataImage s)
 dataImage =

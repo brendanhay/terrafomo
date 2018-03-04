@@ -68,26 +68,26 @@ module Terrafomo.Consul.Resource
     , P.HasToken (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAddress (..)
-    , P.HasComputeDatacenter (..)
-    , P.HasComputeDns (..)
-    , P.HasComputeFailover (..)
-    , P.HasComputeId (..)
-    , P.HasComputeKey (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNear (..)
-    , P.HasComputeNode (..)
-    , P.HasComputeOnlyPassing (..)
-    , P.HasComputePathPrefix (..)
-    , P.HasComputePort (..)
-    , P.HasComputeService (..)
-    , P.HasComputeServiceId (..)
-    , P.HasComputeSession (..)
-    , P.HasComputeStoredToken (..)
-    , P.HasComputeSubkeys (..)
-    , P.HasComputeTags (..)
-    , P.HasComputeTemplate (..)
-    , P.HasComputeToken (..)
+    , P.HasComputedAddress (..)
+    , P.HasComputedDatacenter (..)
+    , P.HasComputedDns (..)
+    , P.HasComputedFailover (..)
+    , P.HasComputedId (..)
+    , P.HasComputedKey (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNear (..)
+    , P.HasComputedNode (..)
+    , P.HasComputedOnlyPassing (..)
+    , P.HasComputedPathPrefix (..)
+    , P.HasComputedPort (..)
+    , P.HasComputedService (..)
+    , P.HasComputedServiceId (..)
+    , P.HasComputedSession (..)
+    , P.HasComputedStoredToken (..)
+    , P.HasComputedSubkeys (..)
+    , P.HasComputedTags (..)
+    , P.HasComputedTemplate (..)
+    , P.HasComputedToken (..)
 
     -- * Re-exported Types
     , module P
@@ -162,20 +162,20 @@ instance P.HasTags (ResourceAgentService s) (TF.Attr s P.Text) where
         lens (_tags :: ResourceAgentService s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ResourceAgentService s)
 
-instance s ~ s' => P.HasComputeAddress (TF.Ref s' (ResourceAgentService s)) (TF.Attr s P.Text) where
-    computeAddress x = TF.compute (TF.refKey x) "address"
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ResourceAgentService s)) (TF.Attr s P.Text) where
+    computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceAgentService s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceAgentService s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceAgentService s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceAgentService s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputePort (TF.Ref s' (ResourceAgentService s)) (TF.Attr s P.Text) where
-    computePort x = TF.compute (TF.refKey x) "port"
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (ResourceAgentService s)) (TF.Attr s P.Text) where
+    computedPort x = TF.compute (TF.refKey x) "port"
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceAgentService s)) (TF.Attr s P.Text) where
-    computeTags x = TF.compute (TF.refKey x) "tags"
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceAgentService s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 resourceAgentService :: TF.Resource P.Consul (ResourceAgentService s)
 resourceAgentService =
@@ -240,24 +240,24 @@ instance P.HasToken (ResourceCatalogEntry s) (TF.Attr s P.Text) where
         lens (_token :: ResourceCatalogEntry s -> TF.Attr s P.Text)
              (\s a -> s { _token = a } :: ResourceCatalogEntry s)
 
-instance s ~ s' => P.HasComputeAddress (TF.Ref s' (ResourceCatalogEntry s)) (TF.Attr s P.Text) where
-    computeAddress x = TF.compute (TF.refKey x) "address"
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ResourceCatalogEntry s)) (TF.Attr s P.Text) where
+    computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance s ~ s' => P.HasComputeDatacenter (TF.Ref s' (ResourceCatalogEntry s)) (TF.Attr s P.Text) where
-    computeDatacenter =
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ResourceCatalogEntry s)) (TF.Attr s P.Text) where
+    computedDatacenter =
         (_datacenter :: ResourceCatalogEntry s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNode (TF.Ref s' (ResourceCatalogEntry s)) (TF.Attr s P.Text) where
-    computeNode x = TF.compute (TF.refKey x) "node"
+instance s ~ s' => P.HasComputedNode (TF.Ref s' (ResourceCatalogEntry s)) (TF.Attr s P.Text) where
+    computedNode x = TF.compute (TF.refKey x) "node"
 
-instance s ~ s' => P.HasComputeService (TF.Ref s' (ResourceCatalogEntry s)) (TF.Attr s P.Text) where
-    computeService =
+instance s ~ s' => P.HasComputedService (TF.Ref s' (ResourceCatalogEntry s)) (TF.Attr s P.Text) where
+    computedService =
         (_service :: ResourceCatalogEntry s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeToken (TF.Ref s' (ResourceCatalogEntry s)) (TF.Attr s P.Text) where
-    computeToken =
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (ResourceCatalogEntry s)) (TF.Attr s P.Text) where
+    computedToken =
         (_token :: ResourceCatalogEntry s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -330,21 +330,21 @@ instance P.HasToken (ResourceKeyPrefix s) (TF.Attr s P.Text) where
         lens (_token :: ResourceKeyPrefix s -> TF.Attr s P.Text)
              (\s a -> s { _token = a } :: ResourceKeyPrefix s)
 
-instance s ~ s' => P.HasComputeDatacenter (TF.Ref s' (ResourceKeyPrefix s)) (TF.Attr s P.Text) where
-    computeDatacenter x = TF.compute (TF.refKey x) "datacenter"
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ResourceKeyPrefix s)) (TF.Attr s P.Text) where
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
-instance s ~ s' => P.HasComputePathPrefix (TF.Ref s' (ResourceKeyPrefix s)) (TF.Attr s P.Text) where
-    computePathPrefix =
+instance s ~ s' => P.HasComputedPathPrefix (TF.Ref s' (ResourceKeyPrefix s)) (TF.Attr s P.Text) where
+    computedPathPrefix =
         (_path_prefix :: ResourceKeyPrefix s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSubkeys (TF.Ref s' (ResourceKeyPrefix s)) (TF.Attr s P.Text) where
-    computeSubkeys =
+instance s ~ s' => P.HasComputedSubkeys (TF.Ref s' (ResourceKeyPrefix s)) (TF.Attr s P.Text) where
+    computedSubkeys =
         (_subkeys :: ResourceKeyPrefix s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeToken (TF.Ref s' (ResourceKeyPrefix s)) (TF.Attr s P.Text) where
-    computeToken =
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (ResourceKeyPrefix s)) (TF.Attr s P.Text) where
+    computedToken =
         (_token :: ResourceKeyPrefix s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -400,16 +400,16 @@ instance P.HasToken (ResourceKeys s) (TF.Attr s P.Text) where
         lens (_token :: ResourceKeys s -> TF.Attr s P.Text)
              (\s a -> s { _token = a } :: ResourceKeys s)
 
-instance s ~ s' => P.HasComputeDatacenter (TF.Ref s' (ResourceKeys s)) (TF.Attr s P.Text) where
-    computeDatacenter x = TF.compute (TF.refKey x) "datacenter"
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ResourceKeys s)) (TF.Attr s P.Text) where
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
-instance s ~ s' => P.HasComputeKey (TF.Ref s' (ResourceKeys s)) (TF.Attr s P.Text) where
-    computeKey =
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (ResourceKeys s)) (TF.Attr s P.Text) where
+    computedKey =
         (_key :: ResourceKeys s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeToken (TF.Ref s' (ResourceKeys s)) (TF.Attr s P.Text) where
-    computeToken =
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (ResourceKeys s)) (TF.Attr s P.Text) where
+    computedToken =
         (_token :: ResourceKeys s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -450,11 +450,11 @@ instance P.HasName (ResourceNode s) (TF.Attr s P.Text) where
         lens (_name :: ResourceNode s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceNode s)
 
-instance s ~ s' => P.HasComputeAddress (TF.Ref s' (ResourceNode s)) (TF.Attr s P.Text) where
-    computeAddress x = TF.compute (TF.refKey x) "address"
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ResourceNode s)) (TF.Attr s P.Text) where
+    computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceNode s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceNode s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
 resourceNode :: TF.Resource P.Consul (ResourceNode s)
 resourceNode =
@@ -574,66 +574,66 @@ instance P.HasToken (ResourcePreparedQuery s) (TF.Attr s P.Text) where
         lens (_token :: ResourcePreparedQuery s -> TF.Attr s P.Text)
              (\s a -> s { _token = a } :: ResourcePreparedQuery s)
 
-instance s ~ s' => P.HasComputeDatacenter (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
-    computeDatacenter =
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
+    computedDatacenter =
         (_datacenter :: ResourcePreparedQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDns (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
-    computeDns =
+instance s ~ s' => P.HasComputedDns (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
+    computedDns =
         (_dns :: ResourcePreparedQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeFailover (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
-    computeFailover =
+instance s ~ s' => P.HasComputedFailover (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
+    computedFailover =
         (_failover :: ResourcePreparedQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourcePreparedQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNear (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
-    computeNear =
+instance s ~ s' => P.HasComputedNear (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
+    computedNear =
         (_near :: ResourcePreparedQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOnlyPassing (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
-    computeOnlyPassing =
+instance s ~ s' => P.HasComputedOnlyPassing (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
+    computedOnlyPassing =
         (_only_passing :: ResourcePreparedQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeService (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
-    computeService =
+instance s ~ s' => P.HasComputedService (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
+    computedService =
         (_service :: ResourcePreparedQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSession (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
-    computeSession =
+instance s ~ s' => P.HasComputedSession (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
+    computedSession =
         (_session :: ResourcePreparedQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStoredToken (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
-    computeStoredToken =
+instance s ~ s' => P.HasComputedStoredToken (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
+    computedStoredToken =
         (_stored_token :: ResourcePreparedQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
+    computedTags =
         (_tags :: ResourcePreparedQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTemplate (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
-    computeTemplate =
+instance s ~ s' => P.HasComputedTemplate (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
+    computedTemplate =
         (_template :: ResourcePreparedQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeToken (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
-    computeToken =
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (ResourcePreparedQuery s)) (TF.Attr s P.Text) where
+    computedToken =
         (_token :: ResourcePreparedQuery s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -715,20 +715,20 @@ instance P.HasTags (ResourceService s) (TF.Attr s P.Text) where
         lens (_tags :: ResourceService s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ResourceService s)
 
-instance s ~ s' => P.HasComputeAddress (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeAddress x = TF.compute (TF.refKey x) "address"
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputePort (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computePort x = TF.compute (TF.refKey x) "port"
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedPort x = TF.compute (TF.refKey x) "port"
 
-instance s ~ s' => P.HasComputeServiceId (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeServiceId x = TF.compute (TF.refKey x) "service_id"
+instance s ~ s' => P.HasComputedServiceId (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedServiceId x = TF.compute (TF.refKey x) "service_id"
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeTags x = TF.compute (TF.refKey x) "tags"
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 resourceService :: TF.Resource P.Consul (ResourceService s)
 resourceService =

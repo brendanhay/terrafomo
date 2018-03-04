@@ -37,20 +37,20 @@ module Terrafomo.RabbitMQ.Lens
     , HasVhost (..)
 
     -- ** Computed Attributes
-    , HasComputeArguments (..)
-    , HasComputeDestination (..)
-    , HasComputeDestinationType (..)
-    , HasComputeName (..)
-    , HasComputePassword (..)
-    , HasComputePermissions (..)
-    , HasComputePolicy (..)
-    , HasComputePropertiesKey (..)
-    , HasComputeRoutingKey (..)
-    , HasComputeSettings (..)
-    , HasComputeSource (..)
-    , HasComputeTags (..)
-    , HasComputeUser (..)
-    , HasComputeVhost (..)
+    , HasComputedArguments (..)
+    , HasComputedDestination (..)
+    , HasComputedDestinationType (..)
+    , HasComputedName (..)
+    , HasComputedPassword (..)
+    , HasComputedPermissions (..)
+    , HasComputedPolicy (..)
+    , HasComputedPropertiesKey (..)
+    , HasComputedRoutingKey (..)
+    , HasComputedSettings (..)
+    , HasComputedSource (..)
+    , HasComputedTags (..)
+    , HasComputedUser (..)
+    , HasComputedVhost (..)
     ) where
 
 import GHC.Base ((.))
@@ -138,44 +138,44 @@ class HasVhost a b | a -> b where
 instance HasVhost a b => HasVhost (TF.Schema l p a) b where
     vhost = TF.configuration . vhost
 
-class HasComputeArguments a b | a -> b where
-    computeArguments :: a -> b
+class HasComputedArguments a b | a -> b where
+    computedArguments :: a -> b
 
-class HasComputeDestination a b | a -> b where
-    computeDestination :: a -> b
+class HasComputedDestination a b | a -> b where
+    computedDestination :: a -> b
 
-class HasComputeDestinationType a b | a -> b where
-    computeDestinationType :: a -> b
+class HasComputedDestinationType a b | a -> b where
+    computedDestinationType :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputePassword a b | a -> b where
-    computePassword :: a -> b
+class HasComputedPassword a b | a -> b where
+    computedPassword :: a -> b
 
-class HasComputePermissions a b | a -> b where
-    computePermissions :: a -> b
+class HasComputedPermissions a b | a -> b where
+    computedPermissions :: a -> b
 
-class HasComputePolicy a b | a -> b where
-    computePolicy :: a -> b
+class HasComputedPolicy a b | a -> b where
+    computedPolicy :: a -> b
 
-class HasComputePropertiesKey a b | a -> b where
-    computePropertiesKey :: a -> b
+class HasComputedPropertiesKey a b | a -> b where
+    computedPropertiesKey :: a -> b
 
-class HasComputeRoutingKey a b | a -> b where
-    computeRoutingKey :: a -> b
+class HasComputedRoutingKey a b | a -> b where
+    computedRoutingKey :: a -> b
 
-class HasComputeSettings a b | a -> b where
-    computeSettings :: a -> b
+class HasComputedSettings a b | a -> b where
+    computedSettings :: a -> b
 
-class HasComputeSource a b | a -> b where
-    computeSource :: a -> b
+class HasComputedSource a b | a -> b where
+    computedSource :: a -> b
 
-class HasComputeTags a b | a -> b where
-    computeTags :: a -> b
+class HasComputedTags a b | a -> b where
+    computedTags :: a -> b
 
-class HasComputeUser a b | a -> b where
-    computeUser :: a -> b
+class HasComputedUser a b | a -> b where
+    computedUser :: a -> b
 
-class HasComputeVhost a b | a -> b where
-    computeVhost :: a -> b
+class HasComputedVhost a b | a -> b where
+    computedVhost :: a -> b

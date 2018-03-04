@@ -127,96 +127,96 @@ module Terrafomo.AliCloud.DataSource
     , P.HasZoneId (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAccountAlias (..)
-    , P.HasComputeAliDomain (..)
-    , P.HasComputeArchitecture (..)
-    , P.HasComputeArn (..)
-    , P.HasComputeAssumeRolePolicyDocument (..)
-    , P.HasComputeAttachmentCount (..)
-    , P.HasComputeAvailabilityZone (..)
-    , P.HasComputeAvailableDiskCategories (..)
-    , P.HasComputeAvailableDiskCategory (..)
-    , P.HasComputeAvailableInstanceType (..)
-    , P.HasComputeAvailableInstanceTypes (..)
-    , P.HasComputeAvailableResourceCreation (..)
-    , P.HasComputeCidrBlock (..)
-    , P.HasComputeComments (..)
-    , P.HasComputeCpuCoreCount (..)
-    , P.HasComputeCreateDate (..)
-    , P.HasComputeCreationDate (..)
-    , P.HasComputeCreationTime (..)
-    , P.HasComputeCreator (..)
-    , P.HasComputeCurrent (..)
-    , P.HasComputeDefaultVersion (..)
-    , P.HasComputeDeleteDate (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeDescriptionRegex (..)
-    , P.HasComputeDiskDeviceMappings (..)
-    , P.HasComputeDnsServers (..)
-    , P.HasComputeDocument (..)
-    , P.HasComputeDomainId (..)
-    , P.HasComputeDomainName (..)
-    , P.HasComputeDomainNameRegex (..)
-    , P.HasComputeEips (..)
-    , P.HasComputeFamily' (..)
-    , P.HasComputeFingerPrint (..)
-    , P.HasComputeGroupId (..)
-    , P.HasComputeGroupName (..)
-    , P.HasComputeGroupNameRegex (..)
-    , P.HasComputeHostRecord (..)
-    , P.HasComputeHostRecordRegex (..)
-    , P.HasComputeId (..)
-    , P.HasComputeIds (..)
-    , P.HasComputeImageId (..)
-    , P.HasComputeImageOwnerAlias (..)
-    , P.HasComputeImageVersion (..)
-    , P.HasComputeInstanceId (..)
-    , P.HasComputeInstanceTypeFamily (..)
-    , P.HasComputeInstances (..)
-    , P.HasComputeIpAddresses (..)
-    , P.HasComputeIsDefault (..)
-    , P.HasComputeIsLocked (..)
-    , P.HasComputeIsOutdated (..)
-    , P.HasComputeIsSubscribed (..)
-    , P.HasComputeKeyName (..)
-    , P.HasComputeLastLoginDate (..)
-    , P.HasComputeLine (..)
-    , P.HasComputeLocalName (..)
-    , P.HasComputeLocked (..)
-    , P.HasComputeMemorySize (..)
-    , P.HasComputeMostRecent (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNameRegex (..)
-    , P.HasComputeOsName (..)
-    , P.HasComputeOutputFile (..)
-    , P.HasComputeOwners (..)
-    , P.HasComputePolicyName (..)
-    , P.HasComputePolicyType (..)
-    , P.HasComputePriority (..)
-    , P.HasComputeProductCode (..)
-    , P.HasComputeProgress (..)
-    , P.HasComputePunyCode (..)
-    , P.HasComputeRecordId (..)
-    , P.HasComputeRegionId (..)
-    , P.HasComputeRoleName (..)
-    , P.HasComputeRouteTableId (..)
-    , P.HasComputeSize (..)
-    , P.HasComputeStatus (..)
-    , P.HasComputeTags (..)
-    , P.HasComputeTtl (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeUpdateDate (..)
-    , P.HasComputeUserName (..)
-    , P.HasComputeValue (..)
-    , P.HasComputeValueRegex (..)
-    , P.HasComputeVersionCode (..)
-    , P.HasComputeVpcId (..)
-    , P.HasComputeVpcName (..)
-    , P.HasComputeVrouterId (..)
-    , P.HasComputeVswitchId (..)
-    , P.HasComputeVswitchIds (..)
-    , P.HasComputeVswitches (..)
-    , P.HasComputeZoneId (..)
+    , P.HasComputedAccountAlias (..)
+    , P.HasComputedAliDomain (..)
+    , P.HasComputedArchitecture (..)
+    , P.HasComputedArn (..)
+    , P.HasComputedAssumeRolePolicyDocument (..)
+    , P.HasComputedAttachmentCount (..)
+    , P.HasComputedAvailabilityZone (..)
+    , P.HasComputedAvailableDiskCategories (..)
+    , P.HasComputedAvailableDiskCategory (..)
+    , P.HasComputedAvailableInstanceType (..)
+    , P.HasComputedAvailableInstanceTypes (..)
+    , P.HasComputedAvailableResourceCreation (..)
+    , P.HasComputedCidrBlock (..)
+    , P.HasComputedComments (..)
+    , P.HasComputedCpuCoreCount (..)
+    , P.HasComputedCreateDate (..)
+    , P.HasComputedCreationDate (..)
+    , P.HasComputedCreationTime (..)
+    , P.HasComputedCreator (..)
+    , P.HasComputedCurrent (..)
+    , P.HasComputedDefaultVersion (..)
+    , P.HasComputedDeleteDate (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDescriptionRegex (..)
+    , P.HasComputedDiskDeviceMappings (..)
+    , P.HasComputedDnsServers (..)
+    , P.HasComputedDocument (..)
+    , P.HasComputedDomainId (..)
+    , P.HasComputedDomainName (..)
+    , P.HasComputedDomainNameRegex (..)
+    , P.HasComputedEips (..)
+    , P.HasComputedFamily' (..)
+    , P.HasComputedFingerPrint (..)
+    , P.HasComputedGroupId (..)
+    , P.HasComputedGroupName (..)
+    , P.HasComputedGroupNameRegex (..)
+    , P.HasComputedHostRecord (..)
+    , P.HasComputedHostRecordRegex (..)
+    , P.HasComputedId (..)
+    , P.HasComputedIds (..)
+    , P.HasComputedImageId (..)
+    , P.HasComputedImageOwnerAlias (..)
+    , P.HasComputedImageVersion (..)
+    , P.HasComputedInstanceId (..)
+    , P.HasComputedInstanceTypeFamily (..)
+    , P.HasComputedInstances (..)
+    , P.HasComputedIpAddresses (..)
+    , P.HasComputedIsDefault (..)
+    , P.HasComputedIsLocked (..)
+    , P.HasComputedIsOutdated (..)
+    , P.HasComputedIsSubscribed (..)
+    , P.HasComputedKeyName (..)
+    , P.HasComputedLastLoginDate (..)
+    , P.HasComputedLine (..)
+    , P.HasComputedLocalName (..)
+    , P.HasComputedLocked (..)
+    , P.HasComputedMemorySize (..)
+    , P.HasComputedMostRecent (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNameRegex (..)
+    , P.HasComputedOsName (..)
+    , P.HasComputedOutputFile (..)
+    , P.HasComputedOwners (..)
+    , P.HasComputedPolicyName (..)
+    , P.HasComputedPolicyType (..)
+    , P.HasComputedPriority (..)
+    , P.HasComputedProductCode (..)
+    , P.HasComputedProgress (..)
+    , P.HasComputedPunyCode (..)
+    , P.HasComputedRecordId (..)
+    , P.HasComputedRegionId (..)
+    , P.HasComputedRoleName (..)
+    , P.HasComputedRouteTableId (..)
+    , P.HasComputedSize (..)
+    , P.HasComputedStatus (..)
+    , P.HasComputedTags (..)
+    , P.HasComputedTtl (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedUpdateDate (..)
+    , P.HasComputedUserName (..)
+    , P.HasComputedValue (..)
+    , P.HasComputedValueRegex (..)
+    , P.HasComputedVersionCode (..)
+    , P.HasComputedVpcId (..)
+    , P.HasComputedVpcName (..)
+    , P.HasComputedVrouterId (..)
+    , P.HasComputedVswitchId (..)
+    , P.HasComputedVswitchIds (..)
+    , P.HasComputedVswitches (..)
+    , P.HasComputedZoneId (..)
 
     -- * Re-exported Types
     , module P
@@ -306,47 +306,47 @@ instance P.HasVersionCode (DataDnsDomains s) (TF.Attr s P.Text) where
         lens (_version_code :: DataDnsDomains s -> TF.Attr s P.Text)
              (\s a -> s { _version_code = a } :: DataDnsDomains s)
 
-instance s ~ s' => P.HasComputeAliDomain (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
-    computeAliDomain x = TF.compute (TF.refKey x) "ali_domain"
+instance s ~ s' => P.HasComputedAliDomain (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
+    computedAliDomain x = TF.compute (TF.refKey x) "ali_domain"
 
-instance s ~ s' => P.HasComputeDnsServers (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
-    computeDnsServers x = TF.compute (TF.refKey x) "dns_servers"
+instance s ~ s' => P.HasComputedDnsServers (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
+    computedDnsServers x = TF.compute (TF.refKey x) "dns_servers"
 
-instance s ~ s' => P.HasComputeDomainId (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
-    computeDomainId x = TF.compute (TF.refKey x) "domain_id"
+instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
+    computedDomainId x = TF.compute (TF.refKey x) "domain_id"
 
-instance s ~ s' => P.HasComputeDomainName (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
-    computeDomainName x = TF.compute (TF.refKey x) "domain_name"
+instance s ~ s' => P.HasComputedDomainName (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
+    computedDomainName x = TF.compute (TF.refKey x) "domain_name"
 
-instance s ~ s' => P.HasComputeDomainNameRegex (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
-    computeDomainNameRegex =
+instance s ~ s' => P.HasComputedDomainNameRegex (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
+    computedDomainNameRegex =
         (_domain_name_regex :: DataDnsDomains s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeGroupId (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
-    computeGroupId x = TF.compute (TF.refKey x) "group_id"
+instance s ~ s' => P.HasComputedGroupId (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
+    computedGroupId x = TF.compute (TF.refKey x) "group_id"
 
-instance s ~ s' => P.HasComputeGroupName (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
-    computeGroupName x = TF.compute (TF.refKey x) "group_name"
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
+    computedGroupName x = TF.compute (TF.refKey x) "group_name"
 
-instance s ~ s' => P.HasComputeGroupNameRegex (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
-    computeGroupNameRegex =
+instance s ~ s' => P.HasComputedGroupNameRegex (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
+    computedGroupNameRegex =
         (_group_name_regex :: DataDnsDomains s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInstanceId (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
-    computeInstanceId x = TF.compute (TF.refKey x) "instance_id"
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
+    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataDnsDomains s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePunyCode (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
-    computePunyCode x = TF.compute (TF.refKey x) "puny_code"
+instance s ~ s' => P.HasComputedPunyCode (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
+    computedPunyCode x = TF.compute (TF.refKey x) "puny_code"
 
-instance s ~ s' => P.HasComputeVersionCode (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
-    computeVersionCode x = TF.compute (TF.refKey x) "version_code"
+instance s ~ s' => P.HasComputedVersionCode (TF.Ref s' (DataDnsDomains s)) (TF.Attr s P.Text) where
+    computedVersionCode x = TF.compute (TF.refKey x) "version_code"
 
 dataDnsDomains :: TF.DataSource P.AliCloud (DataDnsDomains s)
 dataDnsDomains =
@@ -388,19 +388,19 @@ instance P.HasOutputFile (DataDnsGroups s) (TF.Attr s P.Text) where
         lens (_output_file :: DataDnsGroups s -> TF.Attr s P.Text)
              (\s a -> s { _output_file = a } :: DataDnsGroups s)
 
-instance s ~ s' => P.HasComputeGroupId (TF.Ref s' (DataDnsGroups s)) (TF.Attr s P.Text) where
-    computeGroupId x = TF.compute (TF.refKey x) "group_id"
+instance s ~ s' => P.HasComputedGroupId (TF.Ref s' (DataDnsGroups s)) (TF.Attr s P.Text) where
+    computedGroupId x = TF.compute (TF.refKey x) "group_id"
 
-instance s ~ s' => P.HasComputeGroupName (TF.Ref s' (DataDnsGroups s)) (TF.Attr s P.Text) where
-    computeGroupName x = TF.compute (TF.refKey x) "group_name"
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (DataDnsGroups s)) (TF.Attr s P.Text) where
+    computedGroupName x = TF.compute (TF.refKey x) "group_name"
 
-instance s ~ s' => P.HasComputeNameRegex (TF.Ref s' (DataDnsGroups s)) (TF.Attr s P.Text) where
-    computeNameRegex =
+instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (DataDnsGroups s)) (TF.Attr s P.Text) where
+    computedNameRegex =
         (_name_regex :: DataDnsGroups s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataDnsGroups s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataDnsGroups s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataDnsGroups s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -488,53 +488,53 @@ instance P.HasValueRegex (DataDnsRecords s) (TF.Attr s P.Text) where
         lens (_value_regex :: DataDnsRecords s -> TF.Attr s P.Text)
              (\s a -> s { _value_regex = a } :: DataDnsRecords s)
 
-instance s ~ s' => P.HasComputeDomainName (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computeDomainName x = TF.compute (TF.refKey x) "domain_name"
+instance s ~ s' => P.HasComputedDomainName (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedDomainName x = TF.compute (TF.refKey x) "domain_name"
 
-instance s ~ s' => P.HasComputeHostRecord (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computeHostRecord x = TF.compute (TF.refKey x) "host_record"
+instance s ~ s' => P.HasComputedHostRecord (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedHostRecord x = TF.compute (TF.refKey x) "host_record"
 
-instance s ~ s' => P.HasComputeHostRecordRegex (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computeHostRecordRegex =
+instance s ~ s' => P.HasComputedHostRecordRegex (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedHostRecordRegex =
         (_host_record_regex :: DataDnsRecords s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIsLocked (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computeIsLocked =
+instance s ~ s' => P.HasComputedIsLocked (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedIsLocked =
         (_is_locked :: DataDnsRecords s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLine (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computeLine x = TF.compute (TF.refKey x) "line"
+instance s ~ s' => P.HasComputedLine (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedLine x = TF.compute (TF.refKey x) "line"
 
-instance s ~ s' => P.HasComputeLocked (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computeLocked x = TF.compute (TF.refKey x) "locked"
+instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedLocked x = TF.compute (TF.refKey x) "locked"
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataDnsRecords s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePriority (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computePriority x = TF.compute (TF.refKey x) "priority"
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedPriority x = TF.compute (TF.refKey x) "priority"
 
-instance s ~ s' => P.HasComputeRecordId (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computeRecordId x = TF.compute (TF.refKey x) "record_id"
+instance s ~ s' => P.HasComputedRecordId (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedRecordId x = TF.compute (TF.refKey x) "record_id"
 
-instance s ~ s' => P.HasComputeStatus (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computeStatus x = TF.compute (TF.refKey x) "status"
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance s ~ s' => P.HasComputeTtl (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computeTtl x = TF.compute (TF.refKey x) "ttl"
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computeType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputeValue (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computeValue x = TF.compute (TF.refKey x) "value"
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedValue x = TF.compute (TF.refKey x) "value"
 
-instance s ~ s' => P.HasComputeValueRegex (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
-    computeValueRegex =
+instance s ~ s' => P.HasComputedValueRegex (TF.Ref s' (DataDnsRecords s)) (TF.Attr s P.Text) where
+    computedValueRegex =
         (_value_regex :: DataDnsRecords s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -589,21 +589,21 @@ instance P.HasOutputFile (DataEips s) (TF.Attr s P.Text) where
         lens (_output_file :: DataEips s -> TF.Attr s P.Text)
              (\s a -> s { _output_file = a } :: DataEips s)
 
-instance s ~ s' => P.HasComputeEips (TF.Ref s' (DataEips s)) (TF.Attr s P.Text) where
-    computeEips x = TF.compute (TF.refKey x) "eips"
+instance s ~ s' => P.HasComputedEips (TF.Ref s' (DataEips s)) (TF.Attr s P.Text) where
+    computedEips x = TF.compute (TF.refKey x) "eips"
 
-instance s ~ s' => P.HasComputeIds (TF.Ref s' (DataEips s)) (TF.Attr s P.Text) where
-    computeIds =
+instance s ~ s' => P.HasComputedIds (TF.Ref s' (DataEips s)) (TF.Attr s P.Text) where
+    computedIds =
         (_ids :: DataEips s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIpAddresses (TF.Ref s' (DataEips s)) (TF.Attr s P.Text) where
-    computeIpAddresses =
+instance s ~ s' => P.HasComputedIpAddresses (TF.Ref s' (DataEips s)) (TF.Attr s P.Text) where
+    computedIpAddresses =
         (_ip_addresses :: DataEips s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataEips s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataEips s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataEips s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -661,64 +661,64 @@ instance P.HasOwners (DataImages s) (TF.Attr s P.Text) where
         lens (_owners :: DataImages s -> TF.Attr s P.Text)
              (\s a -> s { _owners = a } :: DataImages s)
 
-instance s ~ s' => P.HasComputeArchitecture (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeArchitecture x = TF.compute (TF.refKey x) "architecture"
+instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedArchitecture x = TF.compute (TF.refKey x) "architecture"
 
-instance s ~ s' => P.HasComputeCreationTime (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeCreationTime x = TF.compute (TF.refKey x) "creation_time"
+instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeDiskDeviceMappings (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeDiskDeviceMappings x = TF.compute (TF.refKey x) "disk_device_mappings"
+instance s ~ s' => P.HasComputedDiskDeviceMappings (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedDiskDeviceMappings x = TF.compute (TF.refKey x) "disk_device_mappings"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeImageOwnerAlias (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeImageOwnerAlias x = TF.compute (TF.refKey x) "image_owner_alias"
+instance s ~ s' => P.HasComputedImageOwnerAlias (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedImageOwnerAlias x = TF.compute (TF.refKey x) "image_owner_alias"
 
-instance s ~ s' => P.HasComputeImageVersion (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeImageVersion x = TF.compute (TF.refKey x) "image_version"
+instance s ~ s' => P.HasComputedImageVersion (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedImageVersion x = TF.compute (TF.refKey x) "image_version"
 
-instance s ~ s' => P.HasComputeIsSubscribed (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeIsSubscribed x = TF.compute (TF.refKey x) "is_subscribed"
+instance s ~ s' => P.HasComputedIsSubscribed (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedIsSubscribed x = TF.compute (TF.refKey x) "is_subscribed"
 
-instance s ~ s' => P.HasComputeMostRecent (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeMostRecent =
+instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedMostRecent =
         (_most_recent :: DataImages s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNameRegex (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeNameRegex =
+instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedNameRegex =
         (_name_regex :: DataImages s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOsName (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeOsName x = TF.compute (TF.refKey x) "os_name"
+instance s ~ s' => P.HasComputedOsName (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedOsName x = TF.compute (TF.refKey x) "os_name"
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataImages s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOwners (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeOwners =
+instance s ~ s' => P.HasComputedOwners (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedOwners =
         (_owners :: DataImages s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeProductCode (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeProductCode x = TF.compute (TF.refKey x) "product_code"
+instance s ~ s' => P.HasComputedProductCode (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedProductCode x = TF.compute (TF.refKey x) "product_code"
 
-instance s ~ s' => P.HasComputeProgress (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeProgress x = TF.compute (TF.refKey x) "progress"
+instance s ~ s' => P.HasComputedProgress (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedProgress x = TF.compute (TF.refKey x) "progress"
 
-instance s ~ s' => P.HasComputeSize (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeSize x = TF.compute (TF.refKey x) "size"
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedSize x = TF.compute (TF.refKey x) "size"
 
-instance s ~ s' => P.HasComputeStatus (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
-    computeStatus x = TF.compute (TF.refKey x) "status"
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataImages s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 dataImages :: TF.DataSource P.AliCloud (DataImages s)
 dataImages =
@@ -791,35 +791,35 @@ instance P.HasOutputFile (DataInstanceTypes s) (TF.Attr s P.Text) where
         lens (_output_file :: DataInstanceTypes s -> TF.Attr s P.Text)
              (\s a -> s { _output_file = a } :: DataInstanceTypes s)
 
-instance s ~ s' => P.HasComputeAvailabilityZone (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
-    computeAvailabilityZone =
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
+    computedAvailabilityZone =
         (_availability_zone :: DataInstanceTypes s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCpuCoreCount (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
-    computeCpuCoreCount x = TF.compute (TF.refKey x) "cpu_core_count"
+instance s ~ s' => P.HasComputedCpuCoreCount (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
+    computedCpuCoreCount x = TF.compute (TF.refKey x) "cpu_core_count"
 
-instance s ~ s' => P.HasComputeFamily' (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
-    computeFamily' x = TF.compute (TF.refKey x) "family"
+instance s ~ s' => P.HasComputedFamily' (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
+    computedFamily' x = TF.compute (TF.refKey x) "family"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeInstanceTypeFamily (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
-    computeInstanceTypeFamily =
+instance s ~ s' => P.HasComputedInstanceTypeFamily (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
+    computedInstanceTypeFamily =
         (_instance_type_family :: DataInstanceTypes s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIsOutdated (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
-    computeIsOutdated =
+instance s ~ s' => P.HasComputedIsOutdated (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
+    computedIsOutdated =
         (_is_outdated :: DataInstanceTypes s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMemorySize (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
-    computeMemorySize x = TF.compute (TF.refKey x) "memory_size"
+instance s ~ s' => P.HasComputedMemorySize (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
+    computedMemorySize x = TF.compute (TF.refKey x) "memory_size"
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataInstanceTypes s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataInstanceTypes s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -919,51 +919,51 @@ instance P.HasVswitchId (DataInstances s) (TF.Attr s P.Text) where
         lens (_vswitch_id :: DataInstances s -> TF.Attr s P.Text)
              (\s a -> s { _vswitch_id = a } :: DataInstances s)
 
-instance s ~ s' => P.HasComputeAvailabilityZone (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
-    computeAvailabilityZone =
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
+    computedAvailabilityZone =
         (_availability_zone :: DataInstances s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIds (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
-    computeIds =
+instance s ~ s' => P.HasComputedIds (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
+    computedIds =
         (_ids :: DataInstances s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeImageId (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
-    computeImageId =
+instance s ~ s' => P.HasComputedImageId (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
+    computedImageId =
         (_image_id :: DataInstances s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInstances (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
-    computeInstances x = TF.compute (TF.refKey x) "instances"
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
+    computedInstances x = TF.compute (TF.refKey x) "instances"
 
-instance s ~ s' => P.HasComputeNameRegex (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
-    computeNameRegex =
+instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
+    computedNameRegex =
         (_name_regex :: DataInstances s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataInstances s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStatus (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
-    computeStatus =
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
+    computedStatus =
         (_status :: DataInstances s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
+    computedTags =
         (_tags :: DataInstances s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVpcId (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
-    computeVpcId =
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
+    computedVpcId =
         (_vpc_id :: DataInstances s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVswitchId (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
-    computeVswitchId =
+instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (DataInstances s)) (TF.Attr s P.Text) where
+    computedVswitchId =
         (_vswitch_id :: DataInstances s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1018,25 +1018,25 @@ instance P.HasOutputFile (DataKeyPairs s) (TF.Attr s P.Text) where
         lens (_output_file :: DataKeyPairs s -> TF.Attr s P.Text)
              (\s a -> s { _output_file = a } :: DataKeyPairs s)
 
-instance s ~ s' => P.HasComputeFingerPrint (TF.Ref s' (DataKeyPairs s)) (TF.Attr s P.Text) where
-    computeFingerPrint x = TF.compute (TF.refKey x) "finger_print"
+instance s ~ s' => P.HasComputedFingerPrint (TF.Ref s' (DataKeyPairs s)) (TF.Attr s P.Text) where
+    computedFingerPrint x = TF.compute (TF.refKey x) "finger_print"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataKeyPairs s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataKeyPairs s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeInstances (TF.Ref s' (DataKeyPairs s)) (TF.Attr s P.Text) where
-    computeInstances x = TF.compute (TF.refKey x) "instances"
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (DataKeyPairs s)) (TF.Attr s P.Text) where
+    computedInstances x = TF.compute (TF.refKey x) "instances"
 
-instance s ~ s' => P.HasComputeKeyName (TF.Ref s' (DataKeyPairs s)) (TF.Attr s P.Text) where
-    computeKeyName x = TF.compute (TF.refKey x) "key_name"
+instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (DataKeyPairs s)) (TF.Attr s P.Text) where
+    computedKeyName x = TF.compute (TF.refKey x) "key_name"
 
-instance s ~ s' => P.HasComputeNameRegex (TF.Ref s' (DataKeyPairs s)) (TF.Attr s P.Text) where
-    computeNameRegex =
+instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (DataKeyPairs s)) (TF.Attr s P.Text) where
+    computedNameRegex =
         (_name_regex :: DataKeyPairs s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataKeyPairs s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataKeyPairs s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataKeyPairs s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1093,41 +1093,41 @@ instance P.HasStatus (DataKmsKeys s) (TF.Attr s P.Text) where
         lens (_status :: DataKmsKeys s -> TF.Attr s P.Text)
              (\s a -> s { _status = a } :: DataKmsKeys s)
 
-instance s ~ s' => P.HasComputeArn (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
-    computeArn x = TF.compute (TF.refKey x) "arn"
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputeCreationDate (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
-    computeCreationDate x = TF.compute (TF.refKey x) "creation_date"
+instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
+    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
 
-instance s ~ s' => P.HasComputeCreator (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
-    computeCreator x = TF.compute (TF.refKey x) "creator"
+instance s ~ s' => P.HasComputedCreator (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
+    computedCreator x = TF.compute (TF.refKey x) "creator"
 
-instance s ~ s' => P.HasComputeDeleteDate (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
-    computeDeleteDate x = TF.compute (TF.refKey x) "delete_date"
+instance s ~ s' => P.HasComputedDeleteDate (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
+    computedDeleteDate x = TF.compute (TF.refKey x) "delete_date"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeDescriptionRegex (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
-    computeDescriptionRegex =
+instance s ~ s' => P.HasComputedDescriptionRegex (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
+    computedDescriptionRegex =
         (_description_regex :: DataKmsKeys s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeIds (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
-    computeIds =
+instance s ~ s' => P.HasComputedIds (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
+    computedIds =
         (_ids :: DataKmsKeys s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataKmsKeys s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStatus (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
-    computeStatus x = TF.compute (TF.refKey x) "status"
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataKmsKeys s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 dataKmsKeys :: TF.DataSource P.AliCloud (DataKmsKeys s)
 dataKmsKeys =
@@ -1177,11 +1177,11 @@ instance P.HasOutputFile (DataRamAccountAliases s) (TF.Attr s P.Text) where
         lens (_output_file :: DataRamAccountAliases s -> TF.Attr s P.Text)
              (\s a -> s { _output_file = a } :: DataRamAccountAliases s)
 
-instance s ~ s' => P.HasComputeAccountAlias (TF.Ref s' (DataRamAccountAliases s)) (TF.Attr s P.Text) where
-    computeAccountAlias x = TF.compute (TF.refKey x) "account_alias"
+instance s ~ s' => P.HasComputedAccountAlias (TF.Ref s' (DataRamAccountAliases s)) (TF.Attr s P.Text) where
+    computedAccountAlias x = TF.compute (TF.refKey x) "account_alias"
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataRamAccountAliases s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataRamAccountAliases s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataRamAccountAliases s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1244,34 +1244,34 @@ instance P.HasUserName (DataRamGroups s) (TF.Attr s P.Text) where
         lens (_user_name :: DataRamGroups s -> TF.Attr s P.Text)
              (\s a -> s { _user_name = a } :: DataRamGroups s)
 
-instance s ~ s' => P.HasComputeComments (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
-    computeComments x = TF.compute (TF.refKey x) "comments"
+instance s ~ s' => P.HasComputedComments (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
+    computedComments x = TF.compute (TF.refKey x) "comments"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeNameRegex (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
-    computeNameRegex =
+instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
+    computedNameRegex =
         (_name_regex :: DataRamGroups s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataRamGroups s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicyName (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
-    computePolicyName =
+instance s ~ s' => P.HasComputedPolicyName (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
+    computedPolicyName =
         (_policy_name :: DataRamGroups s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicyType (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
-    computePolicyType =
+instance s ~ s' => P.HasComputedPolicyType (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
+    computedPolicyType =
         (_policy_type :: DataRamGroups s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUserName (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
-    computeUserName =
+instance s ~ s' => P.HasComputedUserName (TF.Ref s' (DataRamGroups s)) (TF.Attr s P.Text) where
+    computedUserName =
         (_user_name :: DataRamGroups s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1346,52 +1346,52 @@ instance P.HasUserName (DataRamPolicies s) (TF.Attr s P.Text) where
         lens (_user_name :: DataRamPolicies s -> TF.Attr s P.Text)
              (\s a -> s { _user_name = a } :: DataRamPolicies s)
 
-instance s ~ s' => P.HasComputeAttachmentCount (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
-    computeAttachmentCount x = TF.compute (TF.refKey x) "attachment_count"
+instance s ~ s' => P.HasComputedAttachmentCount (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
+    computedAttachmentCount x = TF.compute (TF.refKey x) "attachment_count"
 
-instance s ~ s' => P.HasComputeCreateDate (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
-    computeCreateDate x = TF.compute (TF.refKey x) "create_date"
+instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
+    computedCreateDate x = TF.compute (TF.refKey x) "create_date"
 
-instance s ~ s' => P.HasComputeDefaultVersion (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
-    computeDefaultVersion x = TF.compute (TF.refKey x) "default_version"
+instance s ~ s' => P.HasComputedDefaultVersion (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
+    computedDefaultVersion x = TF.compute (TF.refKey x) "default_version"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeDocument (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
-    computeDocument x = TF.compute (TF.refKey x) "document"
+instance s ~ s' => P.HasComputedDocument (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
+    computedDocument x = TF.compute (TF.refKey x) "document"
 
-instance s ~ s' => P.HasComputeGroupName (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
-    computeGroupName =
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
+    computedGroupName =
         (_group_name :: DataRamPolicies s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeNameRegex (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
-    computeNameRegex =
+instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
+    computedNameRegex =
         (_name_regex :: DataRamPolicies s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataRamPolicies s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRoleName (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
-    computeRoleName =
+instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
+    computedRoleName =
         (_role_name :: DataRamPolicies s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
-    computeType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputeUpdateDate (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
-    computeUpdateDate x = TF.compute (TF.refKey x) "update_date"
+instance s ~ s' => P.HasComputedUpdateDate (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
+    computedUpdateDate x = TF.compute (TF.refKey x) "update_date"
 
-instance s ~ s' => P.HasComputeUserName (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
-    computeUserName =
+instance s ~ s' => P.HasComputedUserName (TF.Ref s' (DataRamPolicies s)) (TF.Attr s P.Text) where
+    computedUserName =
         (_user_name :: DataRamPolicies s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1451,49 +1451,49 @@ instance P.HasPolicyType (DataRamRoles s) (TF.Attr s P.Text) where
         lens (_policy_type :: DataRamRoles s -> TF.Attr s P.Text)
              (\s a -> s { _policy_type = a } :: DataRamRoles s)
 
-instance s ~ s' => P.HasComputeArn (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
-    computeArn x = TF.compute (TF.refKey x) "arn"
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputeAssumeRolePolicyDocument (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
-    computeAssumeRolePolicyDocument x = TF.compute (TF.refKey x) "assume_role_policy_document"
+instance s ~ s' => P.HasComputedAssumeRolePolicyDocument (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
+    computedAssumeRolePolicyDocument x = TF.compute (TF.refKey x) "assume_role_policy_document"
 
-instance s ~ s' => P.HasComputeCreateDate (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
-    computeCreateDate x = TF.compute (TF.refKey x) "create_date"
+instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
+    computedCreateDate x = TF.compute (TF.refKey x) "create_date"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeDocument (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
-    computeDocument x = TF.compute (TF.refKey x) "document"
+instance s ~ s' => P.HasComputedDocument (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
+    computedDocument x = TF.compute (TF.refKey x) "document"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeNameRegex (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
-    computeNameRegex =
+instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
+    computedNameRegex =
         (_name_regex :: DataRamRoles s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataRamRoles s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicyName (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
-    computePolicyName =
+instance s ~ s' => P.HasComputedPolicyName (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
+    computedPolicyName =
         (_policy_name :: DataRamRoles s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicyType (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
-    computePolicyType =
+instance s ~ s' => P.HasComputedPolicyType (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
+    computedPolicyType =
         (_policy_type :: DataRamRoles s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUpdateDate (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
-    computeUpdateDate x = TF.compute (TF.refKey x) "update_date"
+instance s ~ s' => P.HasComputedUpdateDate (TF.Ref s' (DataRamRoles s)) (TF.Attr s P.Text) where
+    computedUpdateDate x = TF.compute (TF.refKey x) "update_date"
 
 dataRamRoles :: TF.DataSource P.AliCloud (DataRamRoles s)
 dataRamRoles =
@@ -1557,40 +1557,40 @@ instance P.HasPolicyType (DataRamUsers s) (TF.Attr s P.Text) where
         lens (_policy_type :: DataRamUsers s -> TF.Attr s P.Text)
              (\s a -> s { _policy_type = a } :: DataRamUsers s)
 
-instance s ~ s' => P.HasComputeCreateDate (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
-    computeCreateDate x = TF.compute (TF.refKey x) "create_date"
+instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
+    computedCreateDate x = TF.compute (TF.refKey x) "create_date"
 
-instance s ~ s' => P.HasComputeGroupName (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
-    computeGroupName =
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
+    computedGroupName =
         (_group_name :: DataRamUsers s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLastLoginDate (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
-    computeLastLoginDate x = TF.compute (TF.refKey x) "last_login_date"
+instance s ~ s' => P.HasComputedLastLoginDate (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
+    computedLastLoginDate x = TF.compute (TF.refKey x) "last_login_date"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeNameRegex (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
-    computeNameRegex =
+instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
+    computedNameRegex =
         (_name_regex :: DataRamUsers s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataRamUsers s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicyName (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
-    computePolicyName =
+instance s ~ s' => P.HasComputedPolicyName (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
+    computedPolicyName =
         (_policy_name :: DataRamUsers s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicyType (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
-    computePolicyType =
+instance s ~ s' => P.HasComputedPolicyType (TF.Ref s' (DataRamUsers s)) (TF.Attr s P.Text) where
+    computedPolicyType =
         (_policy_type :: DataRamUsers s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1640,24 +1640,24 @@ instance P.HasOutputFile (DataRegions s) (TF.Attr s P.Text) where
         lens (_output_file :: DataRegions s -> TF.Attr s P.Text)
              (\s a -> s { _output_file = a } :: DataRegions s)
 
-instance s ~ s' => P.HasComputeCurrent (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
-    computeCurrent =
+instance s ~ s' => P.HasComputedCurrent (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
+    computedCurrent =
         (_current :: DataRegions s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLocalName (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
-    computeLocalName x = TF.compute (TF.refKey x) "local_name"
+instance s ~ s' => P.HasComputedLocalName (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
+    computedLocalName x = TF.compute (TF.refKey x) "local_name"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataRegions s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataRegions s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataRegions s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1730,53 +1730,53 @@ instance P.HasVswitchId (DataVpcs s) (TF.Attr s P.Text) where
         lens (_vswitch_id :: DataVpcs s -> TF.Attr s P.Text)
              (\s a -> s { _vswitch_id = a } :: DataVpcs s)
 
-instance s ~ s' => P.HasComputeCidrBlock (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
 
-instance s ~ s' => P.HasComputeCreationTime (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeCreationTime x = TF.compute (TF.refKey x) "creation_time"
+instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeIsDefault (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeIsDefault x = TF.compute (TF.refKey x) "is_default"
+instance s ~ s' => P.HasComputedIsDefault (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedIsDefault x = TF.compute (TF.refKey x) "is_default"
 
-instance s ~ s' => P.HasComputeNameRegex (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeNameRegex =
+instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedNameRegex =
         (_name_regex :: DataVpcs s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataVpcs s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRegionId (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeRegionId x = TF.compute (TF.refKey x) "region_id"
+instance s ~ s' => P.HasComputedRegionId (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedRegionId x = TF.compute (TF.refKey x) "region_id"
 
-instance s ~ s' => P.HasComputeRouteTableId (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeRouteTableId x = TF.compute (TF.refKey x) "route_table_id"
+instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedRouteTableId x = TF.compute (TF.refKey x) "route_table_id"
 
-instance s ~ s' => P.HasComputeStatus (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeStatus x = TF.compute (TF.refKey x) "status"
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance s ~ s' => P.HasComputeVpcName (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeVpcName x = TF.compute (TF.refKey x) "vpc_name"
+instance s ~ s' => P.HasComputedVpcName (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedVpcName x = TF.compute (TF.refKey x) "vpc_name"
 
-instance s ~ s' => P.HasComputeVrouterId (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeVrouterId x = TF.compute (TF.refKey x) "vrouter_id"
+instance s ~ s' => P.HasComputedVrouterId (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedVrouterId x = TF.compute (TF.refKey x) "vrouter_id"
 
-instance s ~ s' => P.HasComputeVswitchId (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeVswitchId =
+instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedVswitchId =
         (_vswitch_id :: DataVpcs s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVswitchIds (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
-    computeVswitchIds x = TF.compute (TF.refKey x) "vswitch_ids"
+instance s ~ s' => P.HasComputedVswitchIds (TF.Ref s' (DataVpcs s)) (TF.Attr s P.Text) where
+    computedVswitchIds x = TF.compute (TF.refKey x) "vswitch_ids"
 
 dataVpcs :: TF.DataSource P.AliCloud (DataVpcs s)
 dataVpcs =
@@ -1851,36 +1851,36 @@ instance P.HasZoneId (DataVswitches s) (TF.Attr s P.Text) where
         lens (_zone_id :: DataVswitches s -> TF.Attr s P.Text)
              (\s a -> s { _zone_id = a } :: DataVswitches s)
 
-instance s ~ s' => P.HasComputeCidrBlock (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
-    computeCidrBlock =
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
+    computedCidrBlock =
         (_cidr_block :: DataVswitches s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIsDefault (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
-    computeIsDefault =
+instance s ~ s' => P.HasComputedIsDefault (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
+    computedIsDefault =
         (_is_default :: DataVswitches s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNameRegex (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
-    computeNameRegex =
+instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
+    computedNameRegex =
         (_name_regex :: DataVswitches s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataVswitches s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVpcId (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
-    computeVpcId =
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
+    computedVpcId =
         (_vpc_id :: DataVswitches s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVswitches (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
-    computeVswitches x = TF.compute (TF.refKey x) "vswitches"
+instance s ~ s' => P.HasComputedVswitches (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
+    computedVswitches x = TF.compute (TF.refKey x) "vswitches"
 
-instance s ~ s' => P.HasComputeZoneId (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
-    computeZoneId =
+instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (DataVswitches s)) (TF.Attr s P.Text) where
+    computedZoneId =
         (_zone_id :: DataVswitches s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1941,33 +1941,33 @@ instance P.HasOutputFile (DataZones s) (TF.Attr s P.Text) where
         lens (_output_file :: DataZones s -> TF.Attr s P.Text)
              (\s a -> s { _output_file = a } :: DataZones s)
 
-instance s ~ s' => P.HasComputeAvailableDiskCategories (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
-    computeAvailableDiskCategories x = TF.compute (TF.refKey x) "available_disk_categories"
+instance s ~ s' => P.HasComputedAvailableDiskCategories (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
+    computedAvailableDiskCategories x = TF.compute (TF.refKey x) "available_disk_categories"
 
-instance s ~ s' => P.HasComputeAvailableDiskCategory (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
-    computeAvailableDiskCategory =
+instance s ~ s' => P.HasComputedAvailableDiskCategory (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
+    computedAvailableDiskCategory =
         (_available_disk_category :: DataZones s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAvailableInstanceType (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
-    computeAvailableInstanceType =
+instance s ~ s' => P.HasComputedAvailableInstanceType (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
+    computedAvailableInstanceType =
         (_available_instance_type :: DataZones s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAvailableInstanceTypes (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
-    computeAvailableInstanceTypes x = TF.compute (TF.refKey x) "available_instance_types"
+instance s ~ s' => P.HasComputedAvailableInstanceTypes (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
+    computedAvailableInstanceTypes x = TF.compute (TF.refKey x) "available_instance_types"
 
-instance s ~ s' => P.HasComputeAvailableResourceCreation (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
-    computeAvailableResourceCreation x = TF.compute (TF.refKey x) "available_resource_creation"
+instance s ~ s' => P.HasComputedAvailableResourceCreation (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
+    computedAvailableResourceCreation x = TF.compute (TF.refKey x) "available_resource_creation"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLocalName (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
-    computeLocalName x = TF.compute (TF.refKey x) "local_name"
+instance s ~ s' => P.HasComputedLocalName (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
+    computedLocalName x = TF.compute (TF.refKey x) "local_name"
 
-instance s ~ s' => P.HasComputeOutputFile (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
-    computeOutputFile =
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DataZones s)) (TF.Attr s P.Text) where
+    computedOutputFile =
         (_output_file :: DataZones s -> TF.Attr s P.Text)
             . TF.refValue
 

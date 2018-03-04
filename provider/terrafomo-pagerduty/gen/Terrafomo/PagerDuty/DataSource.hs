@@ -42,9 +42,9 @@ module Terrafomo.PagerDuty.DataSource
     , P.HasName (..)
 
     -- ** Computed Attributes
-    , P.HasComputeEmail (..)
-    , P.HasComputeName (..)
-    , P.HasComputeType' (..)
+    , P.HasComputedEmail (..)
+    , P.HasComputedName (..)
+    , P.HasComputedType' (..)
 
     -- * Re-exported Types
     , module P
@@ -95,8 +95,8 @@ instance P.HasName (DataEscalationPolicy s) (TF.Attr s P.Text) where
         lens (_name :: DataEscalationPolicy s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataEscalationPolicy s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataEscalationPolicy s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataEscalationPolicy s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
 dataEscalationPolicy :: TF.DataSource P.PagerDuty (DataEscalationPolicy s)
 dataEscalationPolicy =
@@ -126,8 +126,8 @@ instance P.HasName (DataSchedule s) (TF.Attr s P.Text) where
         lens (_name :: DataSchedule s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataSchedule s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataSchedule s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataSchedule s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
 dataSchedule :: TF.DataSource P.PagerDuty (DataSchedule s)
 dataSchedule =
@@ -157,13 +157,13 @@ instance P.HasEmail (DataUser s) (TF.Attr s P.Text) where
         lens (_email :: DataUser s -> TF.Attr s P.Text)
              (\s a -> s { _email = a } :: DataUser s)
 
-instance s ~ s' => P.HasComputeEmail (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
-    computeEmail =
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computedEmail =
         (_email :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
 dataUser :: TF.DataSource P.PagerDuty (DataUser s)
 dataUser =
@@ -194,11 +194,11 @@ instance P.HasName (DataVendor s) (TF.Attr s P.Text) where
         lens (_name :: DataVendor s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataVendor s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataVendor s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataVendor s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (DataVendor s)) (TF.Attr s P.Text) where
-    computeType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataVendor s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
 
 dataVendor :: TF.DataSource P.PagerDuty (DataVendor s)
 dataVendor =

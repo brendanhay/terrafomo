@@ -95,55 +95,55 @@ module Terrafomo.Circonus.Resource
     , P.HasVictorops (..)
 
     -- ** Computed Attributes
-    , P.HasComputeActive (..)
-    , P.HasComputeAggregationWindow (..)
-    , P.HasComputeAlertOption (..)
-    , P.HasComputeCaql (..)
-    , P.HasComputeCheck (..)
-    , P.HasComputeCloudwatch (..)
-    , P.HasComputeCollector (..)
-    , P.HasComputeConsul (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeEmail (..)
-    , P.HasComputeGraphStyle (..)
-    , P.HasComputeHttp (..)
-    , P.HasComputeHttptrap (..)
-    , P.HasComputeIcmpPing (..)
-    , P.HasComputeIf' (..)
-    , P.HasComputeIrc (..)
-    , P.HasComputeJson (..)
-    , P.HasComputeLeft (..)
-    , P.HasComputeLineStyle (..)
-    , P.HasComputeLink (..)
-    , P.HasComputeLongMessage (..)
-    , P.HasComputeLongSubject (..)
-    , P.HasComputeLongSummary (..)
-    , P.HasComputeMetric (..)
-    , P.HasComputeMetricCluster (..)
-    , P.HasComputeMetricLimit (..)
-    , P.HasComputeMetricName (..)
-    , P.HasComputeMetricType (..)
-    , P.HasComputeMysql (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNotes (..)
-    , P.HasComputePagerDuty (..)
-    , P.HasComputeParent (..)
-    , P.HasComputePeriod (..)
-    , P.HasComputePostgresql (..)
-    , P.HasComputeQuery (..)
-    , P.HasComputeRight (..)
-    , P.HasComputeShortMessage (..)
-    , P.HasComputeShortSummary (..)
-    , P.HasComputeSlack (..)
-    , P.HasComputeSms (..)
-    , P.HasComputeStatsd (..)
-    , P.HasComputeTags (..)
-    , P.HasComputeTarget (..)
-    , P.HasComputeTcp (..)
-    , P.HasComputeTimeout (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeUnit (..)
-    , P.HasComputeVictorops (..)
+    , P.HasComputedActive (..)
+    , P.HasComputedAggregationWindow (..)
+    , P.HasComputedAlertOption (..)
+    , P.HasComputedCaql (..)
+    , P.HasComputedCheck (..)
+    , P.HasComputedCloudwatch (..)
+    , P.HasComputedCollector (..)
+    , P.HasComputedConsul (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedEmail (..)
+    , P.HasComputedGraphStyle (..)
+    , P.HasComputedHttp (..)
+    , P.HasComputedHttptrap (..)
+    , P.HasComputedIcmpPing (..)
+    , P.HasComputedIf' (..)
+    , P.HasComputedIrc (..)
+    , P.HasComputedJson (..)
+    , P.HasComputedLeft (..)
+    , P.HasComputedLineStyle (..)
+    , P.HasComputedLink (..)
+    , P.HasComputedLongMessage (..)
+    , P.HasComputedLongSubject (..)
+    , P.HasComputedLongSummary (..)
+    , P.HasComputedMetric (..)
+    , P.HasComputedMetricCluster (..)
+    , P.HasComputedMetricLimit (..)
+    , P.HasComputedMetricName (..)
+    , P.HasComputedMetricType (..)
+    , P.HasComputedMysql (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNotes (..)
+    , P.HasComputedPagerDuty (..)
+    , P.HasComputedParent (..)
+    , P.HasComputedPeriod (..)
+    , P.HasComputedPostgresql (..)
+    , P.HasComputedQuery (..)
+    , P.HasComputedRight (..)
+    , P.HasComputedShortMessage (..)
+    , P.HasComputedShortSummary (..)
+    , P.HasComputedSlack (..)
+    , P.HasComputedSms (..)
+    , P.HasComputedStatsd (..)
+    , P.HasComputedTags (..)
+    , P.HasComputedTarget (..)
+    , P.HasComputedTcp (..)
+    , P.HasComputedTimeout (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedUnit (..)
+    , P.HasComputedVictorops (..)
 
     -- * Re-exported Types
     , module P
@@ -359,108 +359,108 @@ instance P.HasTimeout (ResourceCheck s) (TF.Attr s P.Text) where
         lens (_timeout :: ResourceCheck s -> TF.Attr s P.Text)
              (\s a -> s { _timeout = a } :: ResourceCheck s)
 
-instance s ~ s' => P.HasComputeActive (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeActive =
+instance s ~ s' => P.HasComputedActive (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedActive =
         (_active :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCaql (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeCaql =
+instance s ~ s' => P.HasComputedCaql (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedCaql =
         (_caql :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCloudwatch (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeCloudwatch =
+instance s ~ s' => P.HasComputedCloudwatch (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedCloudwatch =
         (_cloudwatch :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCollector (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeCollector =
+instance s ~ s' => P.HasComputedCollector (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedCollector =
         (_collector :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeConsul (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeConsul =
+instance s ~ s' => P.HasComputedConsul (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedConsul =
         (_consul :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHttp (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeHttp =
+instance s ~ s' => P.HasComputedHttp (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedHttp =
         (_http :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHttptrap (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeHttptrap =
+instance s ~ s' => P.HasComputedHttptrap (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedHttptrap =
         (_httptrap :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIcmpPing (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeIcmpPing =
+instance s ~ s' => P.HasComputedIcmpPing (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedIcmpPing =
         (_icmp_ping :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeJson (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeJson =
+instance s ~ s' => P.HasComputedJson (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedJson =
         (_json :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMetric (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeMetric =
+instance s ~ s' => P.HasComputedMetric (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedMetric =
         (_metric :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMetricLimit (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeMetricLimit =
+instance s ~ s' => P.HasComputedMetricLimit (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedMetricLimit =
         (_metric_limit :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMysql (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeMysql =
+instance s ~ s' => P.HasComputedMysql (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedMysql =
         (_mysql :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNotes (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeNotes =
+instance s ~ s' => P.HasComputedNotes (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedNotes =
         (_notes :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePeriod (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computePeriod =
+instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedPeriod =
         (_period :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePostgresql (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computePostgresql =
+instance s ~ s' => P.HasComputedPostgresql (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedPostgresql =
         (_postgresql :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStatsd (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeStatsd =
+instance s ~ s' => P.HasComputedStatsd (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedStatsd =
         (_statsd :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedTags =
         (_tags :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTarget (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeTarget =
+instance s ~ s' => P.HasComputedTarget (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedTarget =
         (_target :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTcp (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeTcp =
+instance s ~ s' => P.HasComputedTcp (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedTcp =
         (_tcp :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTimeout (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
-    computeTimeout =
+instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (ResourceCheck s)) (TF.Attr s P.Text) where
+    computedTimeout =
         (_timeout :: ResourceCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -631,83 +631,83 @@ instance P.HasVictorops (ResourceContactGroup s) (TF.Attr s P.Text) where
         lens (_victorops :: ResourceContactGroup s -> TF.Attr s P.Text)
              (\s a -> s { _victorops = a } :: ResourceContactGroup s)
 
-instance s ~ s' => P.HasComputeAggregationWindow (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeAggregationWindow =
+instance s ~ s' => P.HasComputedAggregationWindow (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedAggregationWindow =
         (_aggregation_window :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAlertOption (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeAlertOption =
+instance s ~ s' => P.HasComputedAlertOption (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedAlertOption =
         (_alert_option :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEmail (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeEmail =
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedEmail =
         (_email :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHttp (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeHttp =
+instance s ~ s' => P.HasComputedHttp (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedHttp =
         (_http :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIrc (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeIrc =
+instance s ~ s' => P.HasComputedIrc (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedIrc =
         (_irc :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLongMessage (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeLongMessage =
+instance s ~ s' => P.HasComputedLongMessage (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedLongMessage =
         (_long_message :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLongSubject (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeLongSubject =
+instance s ~ s' => P.HasComputedLongSubject (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedLongSubject =
         (_long_subject :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLongSummary (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeLongSummary =
+instance s ~ s' => P.HasComputedLongSummary (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedLongSummary =
         (_long_summary :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePagerDuty (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computePagerDuty =
+instance s ~ s' => P.HasComputedPagerDuty (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedPagerDuty =
         (_pager_duty :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeShortMessage (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeShortMessage =
+instance s ~ s' => P.HasComputedShortMessage (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedShortMessage =
         (_short_message :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeShortSummary (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeShortSummary =
+instance s ~ s' => P.HasComputedShortSummary (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedShortSummary =
         (_short_summary :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSlack (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeSlack =
+instance s ~ s' => P.HasComputedSlack (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedSlack =
         (_slack :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSms (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeSms =
+instance s ~ s' => P.HasComputedSms (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedSms =
         (_sms :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedTags =
         (_tags :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVictorops (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
-    computeVictorops =
+instance s ~ s' => P.HasComputedVictorops (TF.Ref s' (ResourceContactGroup s)) (TF.Attr s P.Text) where
+    computedVictorops =
         (_victorops :: ResourceContactGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -826,53 +826,53 @@ instance P.HasTags (ResourceGraph s) (TF.Attr s P.Text) where
         lens (_tags :: ResourceGraph s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ResourceGraph s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceGraph s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeGraphStyle (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
-    computeGraphStyle =
+instance s ~ s' => P.HasComputedGraphStyle (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
+    computedGraphStyle =
         (_graph_style :: ResourceGraph s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLeft (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
-    computeLeft =
+instance s ~ s' => P.HasComputedLeft (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
+    computedLeft =
         (_left :: ResourceGraph s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLineStyle (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
-    computeLineStyle =
+instance s ~ s' => P.HasComputedLineStyle (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
+    computedLineStyle =
         (_line_style :: ResourceGraph s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMetric (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
-    computeMetric =
+instance s ~ s' => P.HasComputedMetric (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
+    computedMetric =
         (_metric :: ResourceGraph s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMetricCluster (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
-    computeMetricCluster =
+instance s ~ s' => P.HasComputedMetricCluster (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
+    computedMetricCluster =
         (_metric_cluster :: ResourceGraph s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceGraph s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNotes (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
-    computeNotes =
+instance s ~ s' => P.HasComputedNotes (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
+    computedNotes =
         (_notes :: ResourceGraph s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRight (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
-    computeRight =
+instance s ~ s' => P.HasComputedRight (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
+    computedRight =
         (_right :: ResourceGraph s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceGraph s)) (TF.Attr s P.Text) where
+    computedTags =
         (_tags :: ResourceGraph s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -945,28 +945,28 @@ instance P.HasUnit (ResourceMetric s) (TF.Attr s P.Text) where
         lens (_unit :: ResourceMetric s -> TF.Attr s P.Text)
              (\s a -> s { _unit = a } :: ResourceMetric s)
 
-instance s ~ s' => P.HasComputeActive (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
-    computeActive =
+instance s ~ s' => P.HasComputedActive (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
+    computedActive =
         (_active :: ResourceMetric s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceMetric s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
+    computedTags =
         (_tags :: ResourceMetric s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceMetric s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUnit (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
-    computeUnit =
+instance s ~ s' => P.HasComputedUnit (TF.Ref s' (ResourceMetric s)) (TF.Attr s P.Text) where
+    computedUnit =
         (_unit :: ResourceMetric s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1025,23 +1025,23 @@ instance P.HasTags (ResourceMetricCluster s) (TF.Attr s P.Text) where
         lens (_tags :: ResourceMetricCluster s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ResourceMetricCluster s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceMetricCluster s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceMetricCluster s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceMetricCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceMetricCluster s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceMetricCluster s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceMetricCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeQuery (TF.Ref s' (ResourceMetricCluster s)) (TF.Attr s P.Text) where
-    computeQuery =
+instance s ~ s' => P.HasComputedQuery (TF.Ref s' (ResourceMetricCluster s)) (TF.Attr s P.Text) where
+    computedQuery =
         (_query :: ResourceMetricCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceMetricCluster s)) (TF.Attr s P.Text) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceMetricCluster s)) (TF.Attr s P.Text) where
+    computedTags =
         (_tags :: ResourceMetricCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1131,43 +1131,43 @@ instance P.HasTags (ResourceRuleSet s) (TF.Attr s P.Text) where
         lens (_tags :: ResourceRuleSet s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ResourceRuleSet s)
 
-instance s ~ s' => P.HasComputeCheck (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
-    computeCheck =
+instance s ~ s' => P.HasComputedCheck (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
+    computedCheck =
         (_check :: ResourceRuleSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIf' (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
-    computeIf' =
+instance s ~ s' => P.HasComputedIf' (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
+    computedIf' =
         (_if' :: ResourceRuleSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLink (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
-    computeLink =
+instance s ~ s' => P.HasComputedLink (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
+    computedLink =
         (_link :: ResourceRuleSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMetricName (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
-    computeMetricName =
+instance s ~ s' => P.HasComputedMetricName (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
+    computedMetricName =
         (_metric_name :: ResourceRuleSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMetricType (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
-    computeMetricType =
+instance s ~ s' => P.HasComputedMetricType (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
+    computedMetricType =
         (_metric_type :: ResourceRuleSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNotes (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
-    computeNotes =
+instance s ~ s' => P.HasComputedNotes (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
+    computedNotes =
         (_notes :: ResourceRuleSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeParent (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
-    computeParent =
+instance s ~ s' => P.HasComputedParent (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
+    computedParent =
         (_parent :: ResourceRuleSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceRuleSet s)) (TF.Attr s P.Text) where
+    computedTags =
         (_tags :: ResourceRuleSet s -> TF.Attr s P.Text)
             . TF.refValue
 

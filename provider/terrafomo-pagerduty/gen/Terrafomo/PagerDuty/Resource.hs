@@ -89,46 +89,46 @@ module Terrafomo.PagerDuty.Resource
     , P.HasVendor (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAcknowledgementTimeout (..)
-    , P.HasComputeAddress (..)
-    , P.HasComputeAlertCreation (..)
-    , P.HasComputeAutoResolveTimeout (..)
-    , P.HasComputeAvatarUrl (..)
-    , P.HasComputeBlacklisted (..)
-    , P.HasComputeColor (..)
-    , P.HasComputeCountryCode (..)
-    , P.HasComputeCreatedAt (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeEmail (..)
-    , P.HasComputeEnabled (..)
-    , P.HasComputeEndTime (..)
-    , P.HasComputeEscalationPolicy (..)
-    , P.HasComputeHtmlUrl (..)
-    , P.HasComputeId (..)
-    , P.HasComputeIntegrationEmail (..)
-    , P.HasComputeIntegrationKey (..)
-    , P.HasComputeInvitationSent (..)
-    , P.HasComputeJobTitle (..)
-    , P.HasComputeLabel (..)
-    , P.HasComputeLastIncidentTimestamp (..)
-    , P.HasComputeLayer (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNumLoops (..)
-    , P.HasComputeOverflow (..)
-    , P.HasComputeRole (..)
-    , P.HasComputeRule (..)
-    , P.HasComputeSendShortEmail (..)
-    , P.HasComputeService (..)
-    , P.HasComputeServices (..)
-    , P.HasComputeSrc (..)
-    , P.HasComputeStartTime (..)
-    , P.HasComputeStatus (..)
-    , P.HasComputeTeamId (..)
-    , P.HasComputeTeams (..)
-    , P.HasComputeTimeZone (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeUserId (..)
-    , P.HasComputeVendor (..)
+    , P.HasComputedAcknowledgementTimeout (..)
+    , P.HasComputedAddress (..)
+    , P.HasComputedAlertCreation (..)
+    , P.HasComputedAutoResolveTimeout (..)
+    , P.HasComputedAvatarUrl (..)
+    , P.HasComputedBlacklisted (..)
+    , P.HasComputedColor (..)
+    , P.HasComputedCountryCode (..)
+    , P.HasComputedCreatedAt (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedEmail (..)
+    , P.HasComputedEnabled (..)
+    , P.HasComputedEndTime (..)
+    , P.HasComputedEscalationPolicy (..)
+    , P.HasComputedHtmlUrl (..)
+    , P.HasComputedId (..)
+    , P.HasComputedIntegrationEmail (..)
+    , P.HasComputedIntegrationKey (..)
+    , P.HasComputedInvitationSent (..)
+    , P.HasComputedJobTitle (..)
+    , P.HasComputedLabel (..)
+    , P.HasComputedLastIncidentTimestamp (..)
+    , P.HasComputedLayer (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNumLoops (..)
+    , P.HasComputedOverflow (..)
+    , P.HasComputedRole (..)
+    , P.HasComputedRule (..)
+    , P.HasComputedSendShortEmail (..)
+    , P.HasComputedService (..)
+    , P.HasComputedServices (..)
+    , P.HasComputedSrc (..)
+    , P.HasComputedStartTime (..)
+    , P.HasComputedStatus (..)
+    , P.HasComputedTeamId (..)
+    , P.HasComputedTeams (..)
+    , P.HasComputedTimeZone (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedUserId (..)
+    , P.HasComputedVendor (..)
 
     -- * Re-exported Types
     , module P
@@ -189,16 +189,16 @@ instance P.HasSrc (ResourceAddon s) (TF.Attr s P.Text) where
         lens (_src :: ResourceAddon s -> TF.Attr s P.Text)
              (\s a -> s { _src = a } :: ResourceAddon s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceAddon s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceAddon s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceAddon s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceAddon s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceAddon s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSrc (TF.Ref s' (ResourceAddon s)) (TF.Attr s P.Text) where
-    computeSrc =
+instance s ~ s' => P.HasComputedSrc (TF.Ref s' (ResourceAddon s)) (TF.Attr s P.Text) where
+    computedSrc =
         (_src :: ResourceAddon s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -265,31 +265,31 @@ instance P.HasTeams (ResourceEscalationPolicy s) (TF.Attr s P.Text) where
         lens (_teams :: ResourceEscalationPolicy s -> TF.Attr s P.Text)
              (\s a -> s { _teams = a } :: ResourceEscalationPolicy s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceEscalationPolicy s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceEscalationPolicy s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceEscalationPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceEscalationPolicy s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceEscalationPolicy s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceEscalationPolicy s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceEscalationPolicy s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceEscalationPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNumLoops (TF.Ref s' (ResourceEscalationPolicy s)) (TF.Attr s P.Text) where
-    computeNumLoops =
+instance s ~ s' => P.HasComputedNumLoops (TF.Ref s' (ResourceEscalationPolicy s)) (TF.Attr s P.Text) where
+    computedNumLoops =
         (_num_loops :: ResourceEscalationPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRule (TF.Ref s' (ResourceEscalationPolicy s)) (TF.Attr s P.Text) where
-    computeRule =
+instance s ~ s' => P.HasComputedRule (TF.Ref s' (ResourceEscalationPolicy s)) (TF.Attr s P.Text) where
+    computedRule =
         (_rule :: ResourceEscalationPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTeams (TF.Ref s' (ResourceEscalationPolicy s)) (TF.Attr s P.Text) where
-    computeTeams =
+instance s ~ s' => P.HasComputedTeams (TF.Ref s' (ResourceEscalationPolicy s)) (TF.Attr s P.Text) where
+    computedTeams =
         (_teams :: ResourceEscalationPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -354,26 +354,26 @@ instance P.HasStartTime (ResourceMaintenanceWindow s) (TF.Attr s P.Text) where
         lens (_start_time :: ResourceMaintenanceWindow s -> TF.Attr s P.Text)
              (\s a -> s { _start_time = a } :: ResourceMaintenanceWindow s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceMaintenanceWindow s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceMaintenanceWindow s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceMaintenanceWindow s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEndTime (TF.Ref s' (ResourceMaintenanceWindow s)) (TF.Attr s P.Text) where
-    computeEndTime =
+instance s ~ s' => P.HasComputedEndTime (TF.Ref s' (ResourceMaintenanceWindow s)) (TF.Attr s P.Text) where
+    computedEndTime =
         (_end_time :: ResourceMaintenanceWindow s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceMaintenanceWindow s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceMaintenanceWindow s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeServices (TF.Ref s' (ResourceMaintenanceWindow s)) (TF.Attr s P.Text) where
-    computeServices =
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (ResourceMaintenanceWindow s)) (TF.Attr s P.Text) where
+    computedServices =
         (_services :: ResourceMaintenanceWindow s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStartTime (TF.Ref s' (ResourceMaintenanceWindow s)) (TF.Attr s P.Text) where
-    computeStartTime =
+instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (ResourceMaintenanceWindow s)) (TF.Attr s P.Text) where
+    computedStartTime =
         (_start_time :: ResourceMaintenanceWindow s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -441,31 +441,31 @@ instance P.HasTimeZone (ResourceSchedule s) (TF.Attr s P.Text) where
         lens (_time_zone :: ResourceSchedule s -> TF.Attr s P.Text)
              (\s a -> s { _time_zone = a } :: ResourceSchedule s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceSchedule s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceSchedule s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceSchedule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceSchedule s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceSchedule s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLayer (TF.Ref s' (ResourceSchedule s)) (TF.Attr s P.Text) where
-    computeLayer =
+instance s ~ s' => P.HasComputedLayer (TF.Ref s' (ResourceSchedule s)) (TF.Attr s P.Text) where
+    computedLayer =
         (_layer :: ResourceSchedule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSchedule s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceSchedule s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceSchedule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOverflow (TF.Ref s' (ResourceSchedule s)) (TF.Attr s P.Text) where
-    computeOverflow =
+instance s ~ s' => P.HasComputedOverflow (TF.Ref s' (ResourceSchedule s)) (TF.Attr s P.Text) where
+    computedOverflow =
         (_overflow :: ResourceSchedule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTimeZone (TF.Ref s' (ResourceSchedule s)) (TF.Attr s P.Text) where
-    computeTimeZone =
+instance s ~ s' => P.HasComputedTimeZone (TF.Ref s' (ResourceSchedule s)) (TF.Attr s P.Text) where
+    computedTimeZone =
         (_time_zone :: ResourceSchedule s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -543,47 +543,47 @@ instance P.HasName (ResourceService s) (TF.Attr s P.Text) where
         lens (_name :: ResourceService s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceService s)
 
-instance s ~ s' => P.HasComputeAcknowledgementTimeout (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeAcknowledgementTimeout =
+instance s ~ s' => P.HasComputedAcknowledgementTimeout (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedAcknowledgementTimeout =
         (_acknowledgement_timeout :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAlertCreation (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeAlertCreation =
+instance s ~ s' => P.HasComputedAlertCreation (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedAlertCreation =
         (_alert_creation :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAutoResolveTimeout (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeAutoResolveTimeout =
+instance s ~ s' => P.HasComputedAutoResolveTimeout (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedAutoResolveTimeout =
         (_auto_resolve_timeout :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCreatedAt (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeCreatedAt x = TF.compute (TF.refKey x) "created_at"
+instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEscalationPolicy (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeEscalationPolicy =
+instance s ~ s' => P.HasComputedEscalationPolicy (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedEscalationPolicy =
         (_escalation_policy :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLastIncidentTimestamp (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeLastIncidentTimestamp x = TF.compute (TF.refKey x) "last_incident_timestamp"
+instance s ~ s' => P.HasComputedLastIncidentTimestamp (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedLastIncidentTimestamp x = TF.compute (TF.refKey x) "last_incident_timestamp"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStatus (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeStatus x = TF.compute (TF.refKey x) "status"
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 resourceService :: TF.Resource P.PagerDuty (ResourceService s)
 resourceService =
@@ -658,35 +658,35 @@ instance P.HasVendor (ResourceServiceIntegration s) (TF.Attr s P.Text) where
         lens (_vendor :: ResourceServiceIntegration s -> TF.Attr s P.Text)
              (\s a -> s { _vendor = a } :: ResourceServiceIntegration s)
 
-instance s ~ s' => P.HasComputeHtmlUrl (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
-    computeHtmlUrl x = TF.compute (TF.refKey x) "html_url"
+instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
+    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeIntegrationEmail (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
-    computeIntegrationEmail x = TF.compute (TF.refKey x) "integration_email"
+instance s ~ s' => P.HasComputedIntegrationEmail (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
+    computedIntegrationEmail x = TF.compute (TF.refKey x) "integration_email"
 
-instance s ~ s' => P.HasComputeIntegrationKey (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
-    computeIntegrationKey x = TF.compute (TF.refKey x) "integration_key"
+instance s ~ s' => P.HasComputedIntegrationKey (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
+    computedIntegrationKey x = TF.compute (TF.refKey x) "integration_key"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceServiceIntegration s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeService (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
-    computeService =
+instance s ~ s' => P.HasComputedService (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
+    computedService =
         (_service :: ResourceServiceIntegration s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceServiceIntegration s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVendor (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
-    computeVendor =
+instance s ~ s' => P.HasComputedVendor (TF.Ref s' (ResourceServiceIntegration s)) (TF.Attr s P.Text) where
+    computedVendor =
         (_vendor :: ResourceServiceIntegration s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -733,16 +733,16 @@ instance P.HasName (ResourceTeam s) (TF.Attr s P.Text) where
         lens (_name :: ResourceTeam s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceTeam s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceTeam s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceTeam s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -783,11 +783,11 @@ instance P.HasUserId (ResourceTeamMembership s) (TF.Attr s P.Text) where
         lens (_user_id :: ResourceTeamMembership s -> TF.Attr s P.Text)
              (\s a -> s { _user_id = a } :: ResourceTeamMembership s)
 
-instance s ~ s' => P.HasComputeTeamId (TF.Ref s' (ResourceTeamMembership s)) (TF.Attr s P.Text) where
-    computeTeamId x = TF.compute (TF.refKey x) "team_id"
+instance s ~ s' => P.HasComputedTeamId (TF.Ref s' (ResourceTeamMembership s)) (TF.Attr s P.Text) where
+    computedTeamId x = TF.compute (TF.refKey x) "team_id"
 
-instance s ~ s' => P.HasComputeUserId (TF.Ref s' (ResourceTeamMembership s)) (TF.Attr s P.Text) where
-    computeUserId x = TF.compute (TF.refKey x) "user_id"
+instance s ~ s' => P.HasComputedUserId (TF.Ref s' (ResourceTeamMembership s)) (TF.Attr s P.Text) where
+    computedUserId x = TF.compute (TF.refKey x) "user_id"
 
 resourceTeamMembership :: TF.Resource P.PagerDuty (ResourceTeamMembership s)
 resourceTeamMembership =
@@ -867,55 +867,55 @@ instance P.HasTeams (ResourceUser s) (TF.Attr s P.Text) where
         lens (_teams :: ResourceUser s -> TF.Attr s P.Text)
              (\s a -> s { _teams = a } :: ResourceUser s)
 
-instance s ~ s' => P.HasComputeAvatarUrl (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeAvatarUrl x = TF.compute (TF.refKey x) "avatar_url"
+instance s ~ s' => P.HasComputedAvatarUrl (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedAvatarUrl x = TF.compute (TF.refKey x) "avatar_url"
 
-instance s ~ s' => P.HasComputeColor (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeColor =
+instance s ~ s' => P.HasComputedColor (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedColor =
         (_color :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEmail (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeEmail =
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedEmail =
         (_email :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHtmlUrl (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeHtmlUrl x = TF.compute (TF.refKey x) "html_url"
+instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeInvitationSent (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeInvitationSent x = TF.compute (TF.refKey x) "invitation_sent"
+instance s ~ s' => P.HasComputedInvitationSent (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedInvitationSent x = TF.compute (TF.refKey x) "invitation_sent"
 
-instance s ~ s' => P.HasComputeJobTitle (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeJobTitle =
+instance s ~ s' => P.HasComputedJobTitle (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedJobTitle =
         (_job_title :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeRole =
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedRole =
         (_role :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTeams (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeTeams =
+instance s ~ s' => P.HasComputedTeams (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedTeams =
         (_teams :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTimeZone (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeTimeZone x = TF.compute (TF.refKey x) "time_zone"
+instance s ~ s' => P.HasComputedTimeZone (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedTimeZone x = TF.compute (TF.refKey x) "time_zone"
 
 resourceUser :: TF.Resource P.PagerDuty (ResourceUser s)
 resourceUser =
@@ -991,42 +991,42 @@ instance P.HasUserId (ResourceUserContactMethod s) (TF.Attr s P.Text) where
         lens (_user_id :: ResourceUserContactMethod s -> TF.Attr s P.Text)
              (\s a -> s { _user_id = a } :: ResourceUserContactMethod s)
 
-instance s ~ s' => P.HasComputeAddress (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
-    computeAddress =
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
+    computedAddress =
         (_address :: ResourceUserContactMethod s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBlacklisted (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
-    computeBlacklisted x = TF.compute (TF.refKey x) "blacklisted"
+instance s ~ s' => P.HasComputedBlacklisted (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
+    computedBlacklisted x = TF.compute (TF.refKey x) "blacklisted"
 
-instance s ~ s' => P.HasComputeCountryCode (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
-    computeCountryCode =
+instance s ~ s' => P.HasComputedCountryCode (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
+    computedCountryCode =
         (_country_code :: ResourceUserContactMethod s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEnabled (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
-    computeEnabled x = TF.compute (TF.refKey x) "enabled"
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLabel (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
-    computeLabel =
+instance s ~ s' => P.HasComputedLabel (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
+    computedLabel =
         (_label :: ResourceUserContactMethod s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSendShortEmail (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
-    computeSendShortEmail =
+instance s ~ s' => P.HasComputedSendShortEmail (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
+    computedSendShortEmail =
         (_send_short_email :: ResourceUserContactMethod s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceUserContactMethod s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUserId (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
-    computeUserId =
+instance s ~ s' => P.HasComputedUserId (TF.Ref s' (ResourceUserContactMethod s)) (TF.Attr s P.Text) where
+    computedUserId =
         (_user_id :: ResourceUserContactMethod s -> TF.Attr s P.Text)
             . TF.refValue
 

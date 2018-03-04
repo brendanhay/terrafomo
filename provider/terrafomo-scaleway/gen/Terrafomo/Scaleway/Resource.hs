@@ -67,31 +67,31 @@ module Terrafomo.Scaleway.Resource
     , P.HasVolume (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAction (..)
-    , P.HasComputeBootscript (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeDirection (..)
-    , P.HasComputeDynamicIpRequired (..)
-    , P.HasComputeEnableDefaultSecurity (..)
-    , P.HasComputeEnableIpv6 (..)
-    , P.HasComputeId (..)
-    , P.HasComputeImage (..)
-    , P.HasComputeIp (..)
-    , P.HasComputeIpRange (..)
-    , P.HasComputeName (..)
-    , P.HasComputePort (..)
-    , P.HasComputePrivateIp (..)
-    , P.HasComputeProtocol (..)
-    , P.HasComputePublicIp (..)
-    , P.HasComputePublicIpv6 (..)
-    , P.HasComputeSecurityGroup (..)
-    , P.HasComputeServer (..)
-    , P.HasComputeSizeInGb (..)
-    , P.HasComputeState (..)
-    , P.HasComputeStateDetail (..)
-    , P.HasComputeTags (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeVolume (..)
+    , P.HasComputedAction (..)
+    , P.HasComputedBootscript (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDirection (..)
+    , P.HasComputedDynamicIpRequired (..)
+    , P.HasComputedEnableDefaultSecurity (..)
+    , P.HasComputedEnableIpv6 (..)
+    , P.HasComputedId (..)
+    , P.HasComputedImage (..)
+    , P.HasComputedIp (..)
+    , P.HasComputedIpRange (..)
+    , P.HasComputedName (..)
+    , P.HasComputedPort (..)
+    , P.HasComputedPrivateIp (..)
+    , P.HasComputedProtocol (..)
+    , P.HasComputedPublicIp (..)
+    , P.HasComputedPublicIpv6 (..)
+    , P.HasComputedSecurityGroup (..)
+    , P.HasComputedServer (..)
+    , P.HasComputedSizeInGb (..)
+    , P.HasComputedState (..)
+    , P.HasComputedStateDetail (..)
+    , P.HasComputedTags (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedVolume (..)
 
     -- * Re-exported Types
     , module P
@@ -142,14 +142,14 @@ instance P.HasServer (ResourceIp s) (TF.Attr s P.Text) where
         lens (_server :: ResourceIp s -> TF.Attr s P.Text)
              (\s a -> s { _server = a } :: ResourceIp s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeIp (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
-    computeIp x = TF.compute (TF.refKey x) "ip"
+instance s ~ s' => P.HasComputedIp (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
+    computedIp x = TF.compute (TF.refKey x) "ip"
 
-instance s ~ s' => P.HasComputeServer (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
-    computeServer =
+instance s ~ s' => P.HasComputedServer (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
+    computedServer =
         (_server :: ResourceIp s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -197,21 +197,21 @@ instance P.HasName (ResourceSecurityGroup s) (TF.Attr s P.Text) where
         lens (_name :: ResourceSecurityGroup s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceSecurityGroup s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceSecurityGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEnableDefaultSecurity (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
-    computeEnableDefaultSecurity =
+instance s ~ s' => P.HasComputedEnableDefaultSecurity (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
+    computedEnableDefaultSecurity =
         (_enable_default_security :: ResourceSecurityGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceSecurityGroup s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceSecurityGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -285,36 +285,36 @@ instance P.HasSecurityGroup (ResourceSecurityGroupRule s) (TF.Attr s P.Text) whe
         lens (_security_group :: ResourceSecurityGroupRule s -> TF.Attr s P.Text)
              (\s a -> s { _security_group = a } :: ResourceSecurityGroupRule s)
 
-instance s ~ s' => P.HasComputeAction (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
-    computeAction =
+instance s ~ s' => P.HasComputedAction (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
+    computedAction =
         (_action :: ResourceSecurityGroupRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDirection (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
-    computeDirection =
+instance s ~ s' => P.HasComputedDirection (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
+    computedDirection =
         (_direction :: ResourceSecurityGroupRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeIpRange (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
-    computeIpRange =
+instance s ~ s' => P.HasComputedIpRange (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
+    computedIpRange =
         (_ip_range :: ResourceSecurityGroupRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePort (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
-    computePort =
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
+    computedPort =
         (_port :: ResourceSecurityGroupRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeProtocol (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
-    computeProtocol =
+instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
+    computedProtocol =
         (_protocol :: ResourceSecurityGroupRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecurityGroup (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
-    computeSecurityGroup =
+instance s ~ s' => P.HasComputedSecurityGroup (TF.Ref s' (ResourceSecurityGroupRule s)) (TF.Attr s P.Text) where
+    computedSecurityGroup =
         (_security_group :: ResourceSecurityGroupRule s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -439,72 +439,72 @@ instance P.HasVolume (ResourceServer s) (TF.Attr s P.Text) where
         lens (_volume :: ResourceServer s -> TF.Attr s P.Text)
              (\s a -> s { _volume = a } :: ResourceServer s)
 
-instance s ~ s' => P.HasComputeBootscript (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeBootscript =
+instance s ~ s' => P.HasComputedBootscript (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedBootscript =
         (_bootscript :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDynamicIpRequired (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeDynamicIpRequired =
+instance s ~ s' => P.HasComputedDynamicIpRequired (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedDynamicIpRequired =
         (_dynamic_ip_required :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEnableIpv6 (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeEnableIpv6 =
+instance s ~ s' => P.HasComputedEnableIpv6 (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedEnableIpv6 =
         (_enable_ipv6 :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeImage (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeImage =
+instance s ~ s' => P.HasComputedImage (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedImage =
         (_image :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePrivateIp (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computePrivateIp x = TF.compute (TF.refKey x) "private_ip"
+instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
 
-instance s ~ s' => P.HasComputePublicIp (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computePublicIp x = TF.compute (TF.refKey x) "public_ip"
+instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
 
-instance s ~ s' => P.HasComputePublicIpv6 (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computePublicIpv6 =
+instance s ~ s' => P.HasComputedPublicIpv6 (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedPublicIpv6 =
         (_public_ipv6 :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecurityGroup (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeSecurityGroup =
+instance s ~ s' => P.HasComputedSecurityGroup (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedSecurityGroup =
         (_security_group :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeState (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeState =
+instance s ~ s' => P.HasComputedState (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedState =
         (_state :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStateDetail (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeStateDetail =
+instance s ~ s' => P.HasComputedStateDetail (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedStateDetail =
         (_state_detail :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeTags =
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedTags =
         (_tags :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVolume (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
-    computeVolume =
+instance s ~ s' => P.HasComputedVolume (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computedVolume =
         (_volume :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -571,26 +571,26 @@ instance P.HasType' (ResourceVolume s) (TF.Attr s P.Text) where
         lens (_type' :: ResourceVolume s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: ResourceVolume s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceVolume s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeServer (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
-    computeServer =
+instance s ~ s' => P.HasComputedServer (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computedServer =
         (_server :: ResourceVolume s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSizeInGb (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
-    computeSizeInGb =
+instance s ~ s' => P.HasComputedSizeInGb (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computedSizeInGb =
         (_size_in_gb :: ResourceVolume s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceVolume s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -633,16 +633,16 @@ instance P.HasVolume (ResourceVolumeAttachment s) (TF.Attr s P.Text) where
         lens (_volume :: ResourceVolumeAttachment s -> TF.Attr s P.Text)
              (\s a -> s { _volume = a } :: ResourceVolumeAttachment s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceVolumeAttachment s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceVolumeAttachment s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeServer (TF.Ref s' (ResourceVolumeAttachment s)) (TF.Attr s P.Text) where
-    computeServer =
+instance s ~ s' => P.HasComputedServer (TF.Ref s' (ResourceVolumeAttachment s)) (TF.Attr s P.Text) where
+    computedServer =
         (_server :: ResourceVolumeAttachment s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVolume (TF.Ref s' (ResourceVolumeAttachment s)) (TF.Attr s P.Text) where
-    computeVolume =
+instance s ~ s' => P.HasComputedVolume (TF.Ref s' (ResourceVolumeAttachment s)) (TF.Attr s P.Text) where
+    computedVolume =
         (_volume :: ResourceVolumeAttachment s -> TF.Attr s P.Text)
             . TF.refValue
 

@@ -179,102 +179,102 @@ module Terrafomo.Vault.Resource
     , P.HasVerifyConnection (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAccessKey (..)
-    , P.HasComputeAccessor (..)
-    , P.HasComputeAccountId (..)
-    , P.HasComputeAllowInstanceMigration (..)
-    , P.HasComputeAllowRead (..)
-    , P.HasComputeAllowedRoles (..)
-    , P.HasComputeAuthType (..)
-    , P.HasComputeAwsPublicCert (..)
-    , P.HasComputeBackend (..)
-    , P.HasComputeBaseUrl (..)
-    , P.HasComputeBindSecretId (..)
-    , P.HasComputeBoundAccountId (..)
-    , P.HasComputeBoundAmiId (..)
-    , P.HasComputeBoundCidrList (..)
-    , P.HasComputeBoundIamInstanceProfileArn (..)
-    , P.HasComputeBoundIamPrincipalArn (..)
-    , P.HasComputeBoundIamRoleArn (..)
-    , P.HasComputeBoundRegion (..)
-    , P.HasComputeBoundSubnetId (..)
-    , P.HasComputeBoundVpcId (..)
-    , P.HasComputeCassandra (..)
-    , P.HasComputeCertName (..)
-    , P.HasComputeCidrList (..)
-    , P.HasComputeClientToken (..)
-    , P.HasComputeCreationStatements (..)
-    , P.HasComputeDataJson (..)
-    , P.HasComputeDbName (..)
-    , P.HasComputeDefaultLeaseTtlSeconds (..)
-    , P.HasComputeDefaultTtl (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeDisablePeriodicTidy (..)
-    , P.HasComputeDisableRead (..)
-    , P.HasComputeDisallowReauthentication (..)
-    , P.HasComputeEc2Endpoint (..)
-    , P.HasComputeGroup (..)
-    , P.HasComputeGroupName (..)
-    , P.HasComputeGroups (..)
-    , P.HasComputeHana (..)
-    , P.HasComputeIamEndpoint (..)
-    , P.HasComputeIamHttpRequestMethod (..)
-    , P.HasComputeIamRequestBody (..)
-    , P.HasComputeIamRequestHeaders (..)
-    , P.HasComputeIamRequestUrl (..)
-    , P.HasComputeIamServerIdHeaderValue (..)
-    , P.HasComputeIdentity (..)
-    , P.HasComputeInferredAwsRegion (..)
-    , P.HasComputeInferredEntityType (..)
-    , P.HasComputeInstanceId (..)
-    , P.HasComputeLeaseDuration (..)
-    , P.HasComputeLeaseStartTime (..)
-    , P.HasComputeLeaseStarted (..)
-    , P.HasComputeMaxLeaseTtlSeconds (..)
-    , P.HasComputeMaxTtl (..)
-    , P.HasComputeMetadata (..)
-    , P.HasComputeMongodb (..)
-    , P.HasComputeMssql (..)
-    , P.HasComputeMysql (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNonce (..)
-    , P.HasComputeOracle (..)
-    , P.HasComputeOrganization (..)
-    , P.HasComputePath (..)
-    , P.HasComputePeriod (..)
-    , P.HasComputePkcs7 (..)
-    , P.HasComputePolicies (..)
-    , P.HasComputePolicy (..)
-    , P.HasComputePolicyArn (..)
-    , P.HasComputePostgresql (..)
-    , P.HasComputeRenewStatements (..)
-    , P.HasComputeRenewable (..)
-    , P.HasComputeResolveAwsUniqueIds (..)
-    , P.HasComputeRevocationStatements (..)
-    , P.HasComputeRole (..)
-    , P.HasComputeRoleId (..)
-    , P.HasComputeRoleName (..)
-    , P.HasComputeRoleTag (..)
-    , P.HasComputeRollbackStatements (..)
-    , P.HasComputeSafetyBuffer (..)
-    , P.HasComputeSecretId (..)
-    , P.HasComputeSecretIdNumUses (..)
-    , P.HasComputeSecretIdTtl (..)
-    , P.HasComputeSecretKey (..)
-    , P.HasComputeSignature (..)
-    , P.HasComputeStsEndpoint (..)
-    , P.HasComputeStsRole (..)
-    , P.HasComputeTagKey (..)
-    , P.HasComputeTagValue (..)
-    , P.HasComputeToken (..)
-    , P.HasComputeTokenMaxTtl (..)
-    , P.HasComputeTokenNumUses (..)
-    , P.HasComputeTokenTtl (..)
-    , P.HasComputeTtl (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeUser (..)
-    , P.HasComputeUsername (..)
-    , P.HasComputeVerifyConnection (..)
+    , P.HasComputedAccessKey (..)
+    , P.HasComputedAccessor (..)
+    , P.HasComputedAccountId (..)
+    , P.HasComputedAllowInstanceMigration (..)
+    , P.HasComputedAllowRead (..)
+    , P.HasComputedAllowedRoles (..)
+    , P.HasComputedAuthType (..)
+    , P.HasComputedAwsPublicCert (..)
+    , P.HasComputedBackend (..)
+    , P.HasComputedBaseUrl (..)
+    , P.HasComputedBindSecretId (..)
+    , P.HasComputedBoundAccountId (..)
+    , P.HasComputedBoundAmiId (..)
+    , P.HasComputedBoundCidrList (..)
+    , P.HasComputedBoundIamInstanceProfileArn (..)
+    , P.HasComputedBoundIamPrincipalArn (..)
+    , P.HasComputedBoundIamRoleArn (..)
+    , P.HasComputedBoundRegion (..)
+    , P.HasComputedBoundSubnetId (..)
+    , P.HasComputedBoundVpcId (..)
+    , P.HasComputedCassandra (..)
+    , P.HasComputedCertName (..)
+    , P.HasComputedCidrList (..)
+    , P.HasComputedClientToken (..)
+    , P.HasComputedCreationStatements (..)
+    , P.HasComputedDataJson (..)
+    , P.HasComputedDbName (..)
+    , P.HasComputedDefaultLeaseTtlSeconds (..)
+    , P.HasComputedDefaultTtl (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDisablePeriodicTidy (..)
+    , P.HasComputedDisableRead (..)
+    , P.HasComputedDisallowReauthentication (..)
+    , P.HasComputedEc2Endpoint (..)
+    , P.HasComputedGroup (..)
+    , P.HasComputedGroupName (..)
+    , P.HasComputedGroups (..)
+    , P.HasComputedHana (..)
+    , P.HasComputedIamEndpoint (..)
+    , P.HasComputedIamHttpRequestMethod (..)
+    , P.HasComputedIamRequestBody (..)
+    , P.HasComputedIamRequestHeaders (..)
+    , P.HasComputedIamRequestUrl (..)
+    , P.HasComputedIamServerIdHeaderValue (..)
+    , P.HasComputedIdentity (..)
+    , P.HasComputedInferredAwsRegion (..)
+    , P.HasComputedInferredEntityType (..)
+    , P.HasComputedInstanceId (..)
+    , P.HasComputedLeaseDuration (..)
+    , P.HasComputedLeaseStartTime (..)
+    , P.HasComputedLeaseStarted (..)
+    , P.HasComputedMaxLeaseTtlSeconds (..)
+    , P.HasComputedMaxTtl (..)
+    , P.HasComputedMetadata (..)
+    , P.HasComputedMongodb (..)
+    , P.HasComputedMssql (..)
+    , P.HasComputedMysql (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNonce (..)
+    , P.HasComputedOracle (..)
+    , P.HasComputedOrganization (..)
+    , P.HasComputedPath (..)
+    , P.HasComputedPeriod (..)
+    , P.HasComputedPkcs7 (..)
+    , P.HasComputedPolicies (..)
+    , P.HasComputedPolicy (..)
+    , P.HasComputedPolicyArn (..)
+    , P.HasComputedPostgresql (..)
+    , P.HasComputedRenewStatements (..)
+    , P.HasComputedRenewable (..)
+    , P.HasComputedResolveAwsUniqueIds (..)
+    , P.HasComputedRevocationStatements (..)
+    , P.HasComputedRole (..)
+    , P.HasComputedRoleId (..)
+    , P.HasComputedRoleName (..)
+    , P.HasComputedRoleTag (..)
+    , P.HasComputedRollbackStatements (..)
+    , P.HasComputedSafetyBuffer (..)
+    , P.HasComputedSecretId (..)
+    , P.HasComputedSecretIdNumUses (..)
+    , P.HasComputedSecretIdTtl (..)
+    , P.HasComputedSecretKey (..)
+    , P.HasComputedSignature (..)
+    , P.HasComputedStsEndpoint (..)
+    , P.HasComputedStsRole (..)
+    , P.HasComputedTagKey (..)
+    , P.HasComputedTagValue (..)
+    , P.HasComputedToken (..)
+    , P.HasComputedTokenMaxTtl (..)
+    , P.HasComputedTokenNumUses (..)
+    , P.HasComputedTokenTtl (..)
+    , P.HasComputedTtl (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedUser (..)
+    , P.HasComputedUsername (..)
+    , P.HasComputedVerifyConnection (..)
 
     -- * Re-exported Types
     , module P
@@ -404,58 +404,58 @@ instance P.HasTokenTtl (ResourceApproleAuthBackendRole s) (TF.Attr s P.Text) whe
         lens (_token_ttl :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
              (\s a -> s { _token_ttl = a } :: ResourceApproleAuthBackendRole s)
 
-instance s ~ s' => P.HasComputeBindSecretId (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeBindSecretId =
+instance s ~ s' => P.HasComputedBindSecretId (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedBindSecretId =
         (_bind_secret_id :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBoundCidrList (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeBoundCidrList =
+instance s ~ s' => P.HasComputedBoundCidrList (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedBoundCidrList =
         (_bound_cidr_list :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePeriod (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computePeriod =
+instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedPeriod =
         (_period :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicies (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computePolicies =
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedPolicies =
         (_policies :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRoleId (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeRoleId =
+instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedRoleId =
         (_role_id :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRoleName (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeRoleName =
+instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedRoleName =
         (_role_name :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecretIdNumUses (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeSecretIdNumUses =
+instance s ~ s' => P.HasComputedSecretIdNumUses (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedSecretIdNumUses =
         (_secret_id_num_uses :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecretIdTtl (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeSecretIdTtl =
+instance s ~ s' => P.HasComputedSecretIdTtl (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedSecretIdTtl =
         (_secret_id_ttl :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTokenMaxTtl (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeTokenMaxTtl =
+instance s ~ s' => P.HasComputedTokenMaxTtl (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedTokenMaxTtl =
         (_token_max_ttl :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTokenNumUses (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeTokenNumUses =
+instance s ~ s' => P.HasComputedTokenNumUses (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedTokenNumUses =
         (_token_num_uses :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTokenTtl (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeTokenTtl =
+instance s ~ s' => P.HasComputedTokenTtl (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedTokenTtl =
         (_token_ttl :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -512,39 +512,39 @@ instance P.HasSecretId (ResourceApproleAuthBackendRoleLogin s) (TF.Attr s P.Text
         lens (_secret_id :: ResourceApproleAuthBackendRoleLogin s -> TF.Attr s P.Text)
              (\s a -> s { _secret_id = a } :: ResourceApproleAuthBackendRoleLogin s)
 
-instance s ~ s' => P.HasComputeAccessor (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computeAccessor x = TF.compute (TF.refKey x) "accessor"
+instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
+    computedAccessor x = TF.compute (TF.refKey x) "accessor"
 
-instance s ~ s' => P.HasComputeBackend (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computeBackend =
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
+    computedBackend =
         (_backend :: ResourceApproleAuthBackendRoleLogin s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeClientToken (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computeClientToken x = TF.compute (TF.refKey x) "client_token"
+instance s ~ s' => P.HasComputedClientToken (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
+    computedClientToken x = TF.compute (TF.refKey x) "client_token"
 
-instance s ~ s' => P.HasComputeLeaseDuration (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computeLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
+instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
+    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
 
-instance s ~ s' => P.HasComputeLeaseStarted (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computeLeaseStarted x = TF.compute (TF.refKey x) "lease_started"
+instance s ~ s' => P.HasComputedLeaseStarted (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
+    computedLeaseStarted x = TF.compute (TF.refKey x) "lease_started"
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computeMetadata x = TF.compute (TF.refKey x) "metadata"
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
+    computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
-instance s ~ s' => P.HasComputePolicies (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computePolicies x = TF.compute (TF.refKey x) "policies"
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
+    computedPolicies x = TF.compute (TF.refKey x) "policies"
 
-instance s ~ s' => P.HasComputeRenewable (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computeRenewable x = TF.compute (TF.refKey x) "renewable"
+instance s ~ s' => P.HasComputedRenewable (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
+    computedRenewable x = TF.compute (TF.refKey x) "renewable"
 
-instance s ~ s' => P.HasComputeRoleId (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computeRoleId =
+instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
+    computedRoleId =
         (_role_id :: ResourceApproleAuthBackendRoleLogin s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecretId (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computeSecretId =
+instance s ~ s' => P.HasComputedSecretId (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
+    computedSecretId =
         (_secret_id :: ResourceApproleAuthBackendRoleLogin s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -601,26 +601,26 @@ instance P.HasSecretId (ResourceApproleAuthBackendRoleSecretId s) (TF.Attr s P.T
         lens (_secret_id :: ResourceApproleAuthBackendRoleSecretId s -> TF.Attr s P.Text)
              (\s a -> s { _secret_id = a } :: ResourceApproleAuthBackendRoleSecretId s)
 
-instance s ~ s' => P.HasComputeAccessor (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
-    computeAccessor x = TF.compute (TF.refKey x) "accessor"
+instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
+    computedAccessor x = TF.compute (TF.refKey x) "accessor"
 
-instance s ~ s' => P.HasComputeCidrList (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
-    computeCidrList =
+instance s ~ s' => P.HasComputedCidrList (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
+    computedCidrList =
         (_cidr_list :: ResourceApproleAuthBackendRoleSecretId s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourceApproleAuthBackendRoleSecretId s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRoleName (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
-    computeRoleName =
+instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
+    computedRoleName =
         (_role_name :: ResourceApproleAuthBackendRoleSecretId s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecretId (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
-    computeSecretId =
+instance s ~ s' => P.HasComputedSecretId (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
+    computedSecretId =
         (_secret_id :: ResourceApproleAuthBackendRoleSecretId s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -669,18 +669,18 @@ instance P.HasType' (ResourceAuthBackend s) (TF.Attr s P.Text) where
         lens (_type' :: ResourceAuthBackend s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: ResourceAuthBackend s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceAuthBackend s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceAuthBackend s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceAuthBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePath (TF.Ref s' (ResourceAuthBackend s)) (TF.Attr s P.Text) where
-    computePath =
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (ResourceAuthBackend s)) (TF.Attr s P.Text) where
+    computedPath =
         (_path :: ResourceAuthBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceAuthBackend s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceAuthBackend s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceAuthBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -744,23 +744,23 @@ instance P.HasType' (ResourceAwsAuthBackendCert s) (TF.Attr s P.Text) where
         lens (_type' :: ResourceAwsAuthBackendCert s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: ResourceAwsAuthBackendCert s)
 
-instance s ~ s' => P.HasComputeAwsPublicCert (TF.Ref s' (ResourceAwsAuthBackendCert s)) (TF.Attr s P.Text) where
-    computeAwsPublicCert =
+instance s ~ s' => P.HasComputedAwsPublicCert (TF.Ref s' (ResourceAwsAuthBackendCert s)) (TF.Attr s P.Text) where
+    computedAwsPublicCert =
         (_aws_public_cert :: ResourceAwsAuthBackendCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBackend (TF.Ref s' (ResourceAwsAuthBackendCert s)) (TF.Attr s P.Text) where
-    computeBackend =
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsAuthBackendCert s)) (TF.Attr s P.Text) where
+    computedBackend =
         (_backend :: ResourceAwsAuthBackendCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCertName (TF.Ref s' (ResourceAwsAuthBackendCert s)) (TF.Attr s P.Text) where
-    computeCertName =
+instance s ~ s' => P.HasComputedCertName (TF.Ref s' (ResourceAwsAuthBackendCert s)) (TF.Attr s P.Text) where
+    computedCertName =
         (_cert_name :: ResourceAwsAuthBackendCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceAwsAuthBackendCert s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceAwsAuthBackendCert s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceAwsAuthBackendCert s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -850,38 +850,38 @@ instance P.HasStsEndpoint (ResourceAwsAuthBackendClient s) (TF.Attr s P.Text) wh
         lens (_sts_endpoint :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
              (\s a -> s { _sts_endpoint = a } :: ResourceAwsAuthBackendClient s)
 
-instance s ~ s' => P.HasComputeAccessKey (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
-    computeAccessKey =
+instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+    computedAccessKey =
         (_access_key :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBackend (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
-    computeBackend =
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+    computedBackend =
         (_backend :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEc2Endpoint (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
-    computeEc2Endpoint =
+instance s ~ s' => P.HasComputedEc2Endpoint (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+    computedEc2Endpoint =
         (_ec2_endpoint :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIamEndpoint (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
-    computeIamEndpoint =
+instance s ~ s' => P.HasComputedIamEndpoint (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+    computedIamEndpoint =
         (_iam_endpoint :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIamServerIdHeaderValue (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
-    computeIamServerIdHeaderValue =
+instance s ~ s' => P.HasComputedIamServerIdHeaderValue (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+    computedIamServerIdHeaderValue =
         (_iam_server_id_header_value :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecretKey (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
-    computeSecretKey =
+instance s ~ s' => P.HasComputedSecretKey (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+    computedSecretKey =
         (_secret_key :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStsEndpoint (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
-    computeStsEndpoint =
+instance s ~ s' => P.HasComputedStsEndpoint (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+    computedStsEndpoint =
         (_sts_endpoint :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -936,18 +936,18 @@ instance P.HasSafetyBuffer (ResourceAwsAuthBackendIdentityWhitelist s) (TF.Attr 
         lens (_safety_buffer :: ResourceAwsAuthBackendIdentityWhitelist s -> TF.Attr s P.Text)
              (\s a -> s { _safety_buffer = a } :: ResourceAwsAuthBackendIdentityWhitelist s)
 
-instance s ~ s' => P.HasComputeBackend (TF.Ref s' (ResourceAwsAuthBackendIdentityWhitelist s)) (TF.Attr s P.Text) where
-    computeBackend =
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsAuthBackendIdentityWhitelist s)) (TF.Attr s P.Text) where
+    computedBackend =
         (_backend :: ResourceAwsAuthBackendIdentityWhitelist s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDisablePeriodicTidy (TF.Ref s' (ResourceAwsAuthBackendIdentityWhitelist s)) (TF.Attr s P.Text) where
-    computeDisablePeriodicTidy =
+instance s ~ s' => P.HasComputedDisablePeriodicTidy (TF.Ref s' (ResourceAwsAuthBackendIdentityWhitelist s)) (TF.Attr s P.Text) where
+    computedDisablePeriodicTidy =
         (_disable_periodic_tidy :: ResourceAwsAuthBackendIdentityWhitelist s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSafetyBuffer (TF.Ref s' (ResourceAwsAuthBackendIdentityWhitelist s)) (TF.Attr s P.Text) where
-    computeSafetyBuffer =
+instance s ~ s' => P.HasComputedSafetyBuffer (TF.Ref s' (ResourceAwsAuthBackendIdentityWhitelist s)) (TF.Attr s P.Text) where
+    computedSafetyBuffer =
         (_safety_buffer :: ResourceAwsAuthBackendIdentityWhitelist s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1054,77 +1054,77 @@ instance P.HasSignature (ResourceAwsAuthBackendLogin s) (TF.Attr s P.Text) where
         lens (_signature :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
              (\s a -> s { _signature = a } :: ResourceAwsAuthBackendLogin s)
 
-instance s ~ s' => P.HasComputeAccessor (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeAccessor x = TF.compute (TF.refKey x) "accessor"
+instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedAccessor x = TF.compute (TF.refKey x) "accessor"
 
-instance s ~ s' => P.HasComputeAuthType (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeAuthType x = TF.compute (TF.refKey x) "auth_type"
+instance s ~ s' => P.HasComputedAuthType (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedAuthType x = TF.compute (TF.refKey x) "auth_type"
 
-instance s ~ s' => P.HasComputeBackend (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeBackend =
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedBackend =
         (_backend :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeClientToken (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeClientToken x = TF.compute (TF.refKey x) "client_token"
+instance s ~ s' => P.HasComputedClientToken (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedClientToken x = TF.compute (TF.refKey x) "client_token"
 
-instance s ~ s' => P.HasComputeIamHttpRequestMethod (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeIamHttpRequestMethod =
+instance s ~ s' => P.HasComputedIamHttpRequestMethod (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedIamHttpRequestMethod =
         (_iam_http_request_method :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIamRequestBody (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeIamRequestBody =
+instance s ~ s' => P.HasComputedIamRequestBody (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedIamRequestBody =
         (_iam_request_body :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIamRequestHeaders (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeIamRequestHeaders =
+instance s ~ s' => P.HasComputedIamRequestHeaders (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedIamRequestHeaders =
         (_iam_request_headers :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIamRequestUrl (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeIamRequestUrl =
+instance s ~ s' => P.HasComputedIamRequestUrl (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedIamRequestUrl =
         (_iam_request_url :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIdentity (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeIdentity =
+instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedIdentity =
         (_identity :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLeaseDuration (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
+instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
 
-instance s ~ s' => P.HasComputeLeaseStartTime (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
+instance s ~ s' => P.HasComputedLeaseStartTime (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeMetadata x = TF.compute (TF.refKey x) "metadata"
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
-instance s ~ s' => P.HasComputeNonce (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeNonce =
+instance s ~ s' => P.HasComputedNonce (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedNonce =
         (_nonce :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePkcs7 (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computePkcs7 =
+instance s ~ s' => P.HasComputedPkcs7 (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedPkcs7 =
         (_pkcs7 :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicies (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computePolicies x = TF.compute (TF.refKey x) "policies"
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedPolicies x = TF.compute (TF.refKey x) "policies"
 
-instance s ~ s' => P.HasComputeRenewable (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeRenewable x = TF.compute (TF.refKey x) "renewable"
+instance s ~ s' => P.HasComputedRenewable (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedRenewable x = TF.compute (TF.refKey x) "renewable"
 
-instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeRole =
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedRole =
         (_role :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSignature (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
-    computeSignature =
+instance s ~ s' => P.HasComputedSignature (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+    computedSignature =
         (_signature :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1318,103 +1318,103 @@ instance P.HasTtl (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
         lens (_ttl :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
              (\s a -> s { _ttl = a } :: ResourceAwsAuthBackendRole s)
 
-instance s ~ s' => P.HasComputeAllowInstanceMigration (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeAllowInstanceMigration =
+instance s ~ s' => P.HasComputedAllowInstanceMigration (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedAllowInstanceMigration =
         (_allow_instance_migration :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAuthType (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeAuthType =
+instance s ~ s' => P.HasComputedAuthType (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedAuthType =
         (_auth_type :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBoundAccountId (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeBoundAccountId =
+instance s ~ s' => P.HasComputedBoundAccountId (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedBoundAccountId =
         (_bound_account_id :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBoundAmiId (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeBoundAmiId =
+instance s ~ s' => P.HasComputedBoundAmiId (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedBoundAmiId =
         (_bound_ami_id :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBoundIamInstanceProfileArn (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeBoundIamInstanceProfileArn =
+instance s ~ s' => P.HasComputedBoundIamInstanceProfileArn (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedBoundIamInstanceProfileArn =
         (_bound_iam_instance_profile_arn :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBoundIamPrincipalArn (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeBoundIamPrincipalArn =
+instance s ~ s' => P.HasComputedBoundIamPrincipalArn (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedBoundIamPrincipalArn =
         (_bound_iam_principal_arn :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBoundIamRoleArn (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeBoundIamRoleArn =
+instance s ~ s' => P.HasComputedBoundIamRoleArn (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedBoundIamRoleArn =
         (_bound_iam_role_arn :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBoundRegion (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeBoundRegion =
+instance s ~ s' => P.HasComputedBoundRegion (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedBoundRegion =
         (_bound_region :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBoundSubnetId (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeBoundSubnetId =
+instance s ~ s' => P.HasComputedBoundSubnetId (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedBoundSubnetId =
         (_bound_subnet_id :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBoundVpcId (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeBoundVpcId =
+instance s ~ s' => P.HasComputedBoundVpcId (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedBoundVpcId =
         (_bound_vpc_id :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDisallowReauthentication (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeDisallowReauthentication =
+instance s ~ s' => P.HasComputedDisallowReauthentication (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedDisallowReauthentication =
         (_disallow_reauthentication :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInferredAwsRegion (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeInferredAwsRegion =
+instance s ~ s' => P.HasComputedInferredAwsRegion (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedInferredAwsRegion =
         (_inferred_aws_region :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInferredEntityType (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeInferredEntityType =
+instance s ~ s' => P.HasComputedInferredEntityType (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedInferredEntityType =
         (_inferred_entity_type :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMaxTtl (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeMaxTtl =
+instance s ~ s' => P.HasComputedMaxTtl (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedMaxTtl =
         (_max_ttl :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePeriod (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computePeriod =
+instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedPeriod =
         (_period :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicies (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computePolicies =
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedPolicies =
         (_policies :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeResolveAwsUniqueIds (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeResolveAwsUniqueIds =
+instance s ~ s' => P.HasComputedResolveAwsUniqueIds (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedResolveAwsUniqueIds =
         (_resolve_aws_unique_ids :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeRole =
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedRole =
         (_role :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRoleTag (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeRoleTag =
+instance s ~ s' => P.HasComputedRoleTag (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedRoleTag =
         (_role_tag :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTtl (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
-    computeTtl =
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+    computedTtl =
         (_ttl :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1511,46 +1511,46 @@ instance P.HasRole (ResourceAwsAuthBackendRoleTag s) (TF.Attr s P.Text) where
         lens (_role :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
              (\s a -> s { _role = a } :: ResourceAwsAuthBackendRoleTag s)
 
-instance s ~ s' => P.HasComputeAllowInstanceMigration (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
-    computeAllowInstanceMigration =
+instance s ~ s' => P.HasComputedAllowInstanceMigration (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+    computedAllowInstanceMigration =
         (_allow_instance_migration :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBackend (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
-    computeBackend =
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+    computedBackend =
         (_backend :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDisallowReauthentication (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
-    computeDisallowReauthentication =
+instance s ~ s' => P.HasComputedDisallowReauthentication (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+    computedDisallowReauthentication =
         (_disallow_reauthentication :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInstanceId (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
-    computeInstanceId =
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+    computedInstanceId =
         (_instance_id :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMaxTtl (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
-    computeMaxTtl =
+instance s ~ s' => P.HasComputedMaxTtl (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+    computedMaxTtl =
         (_max_ttl :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicies (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
-    computePolicies =
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+    computedPolicies =
         (_policies :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
-    computeRole =
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+    computedRole =
         (_role :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTagKey (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
-    computeTagKey x = TF.compute (TF.refKey x) "tag_key"
+instance s ~ s' => P.HasComputedTagKey (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+    computedTagKey x = TF.compute (TF.refKey x) "tag_key"
 
-instance s ~ s' => P.HasComputeTagValue (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
-    computeTagValue x = TF.compute (TF.refKey x) "tag_value"
+instance s ~ s' => P.HasComputedTagValue (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+    computedTagValue x = TF.compute (TF.refKey x) "tag_value"
 
 resourceAwsAuthBackendRoleTag :: TF.Resource P.Vault (ResourceAwsAuthBackendRoleTag s)
 resourceAwsAuthBackendRoleTag =
@@ -1608,18 +1608,18 @@ instance P.HasStsRole (ResourceAwsAuthBackendStsRole s) (TF.Attr s P.Text) where
         lens (_sts_role :: ResourceAwsAuthBackendStsRole s -> TF.Attr s P.Text)
              (\s a -> s { _sts_role = a } :: ResourceAwsAuthBackendStsRole s)
 
-instance s ~ s' => P.HasComputeAccountId (TF.Ref s' (ResourceAwsAuthBackendStsRole s)) (TF.Attr s P.Text) where
-    computeAccountId =
+instance s ~ s' => P.HasComputedAccountId (TF.Ref s' (ResourceAwsAuthBackendStsRole s)) (TF.Attr s P.Text) where
+    computedAccountId =
         (_account_id :: ResourceAwsAuthBackendStsRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBackend (TF.Ref s' (ResourceAwsAuthBackendStsRole s)) (TF.Attr s P.Text) where
-    computeBackend =
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsAuthBackendStsRole s)) (TF.Attr s P.Text) where
+    computedBackend =
         (_backend :: ResourceAwsAuthBackendStsRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStsRole (TF.Ref s' (ResourceAwsAuthBackendStsRole s)) (TF.Attr s P.Text) where
-    computeStsRole =
+instance s ~ s' => P.HasComputedStsRole (TF.Ref s' (ResourceAwsAuthBackendStsRole s)) (TF.Attr s P.Text) where
+    computedStsRole =
         (_sts_role :: ResourceAwsAuthBackendStsRole s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1664,13 +1664,13 @@ instance P.HasSecretKey (ResourceAwsSecretBackend s) (TF.Attr s P.Text) where
         lens (_secret_key :: ResourceAwsSecretBackend s -> TF.Attr s P.Text)
              (\s a -> s { _secret_key = a } :: ResourceAwsSecretBackend s)
 
-instance s ~ s' => P.HasComputeAccessKey (TF.Ref s' (ResourceAwsSecretBackend s)) (TF.Attr s P.Text) where
-    computeAccessKey =
+instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (ResourceAwsSecretBackend s)) (TF.Attr s P.Text) where
+    computedAccessKey =
         (_access_key :: ResourceAwsSecretBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecretKey (TF.Ref s' (ResourceAwsSecretBackend s)) (TF.Attr s P.Text) where
-    computeSecretKey =
+instance s ~ s' => P.HasComputedSecretKey (TF.Ref s' (ResourceAwsSecretBackend s)) (TF.Attr s P.Text) where
+    computedSecretKey =
         (_secret_key :: ResourceAwsSecretBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1730,23 +1730,23 @@ instance P.HasPolicyArn (ResourceAwsSecretBackendRole s) (TF.Attr s P.Text) wher
         lens (_policy_arn :: ResourceAwsSecretBackendRole s -> TF.Attr s P.Text)
              (\s a -> s { _policy_arn = a } :: ResourceAwsSecretBackendRole s)
 
-instance s ~ s' => P.HasComputeBackend (TF.Ref s' (ResourceAwsSecretBackendRole s)) (TF.Attr s P.Text) where
-    computeBackend =
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsSecretBackendRole s)) (TF.Attr s P.Text) where
+    computedBackend =
         (_backend :: ResourceAwsSecretBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceAwsSecretBackendRole s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceAwsSecretBackendRole s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceAwsSecretBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicy (TF.Ref s' (ResourceAwsSecretBackendRole s)) (TF.Attr s P.Text) where
-    computePolicy =
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (ResourceAwsSecretBackendRole s)) (TF.Attr s P.Text) where
+    computedPolicy =
         (_policy :: ResourceAwsSecretBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicyArn (TF.Ref s' (ResourceAwsSecretBackendRole s)) (TF.Attr s P.Text) where
-    computePolicyArn =
+instance s ~ s' => P.HasComputedPolicyArn (TF.Ref s' (ResourceAwsSecretBackendRole s)) (TF.Attr s P.Text) where
+    computedPolicyArn =
         (_policy_arn :: ResourceAwsSecretBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -1864,58 +1864,58 @@ instance P.HasVerifyConnection (ResourceDatabaseSecretBackendConnection s) (TF.A
         lens (_verify_connection :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
              (\s a -> s { _verify_connection = a } :: ResourceDatabaseSecretBackendConnection s)
 
-instance s ~ s' => P.HasComputeAllowedRoles (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
-    computeAllowedRoles =
+instance s ~ s' => P.HasComputedAllowedRoles (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+    computedAllowedRoles =
         (_allowed_roles :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeBackend (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
-    computeBackend =
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+    computedBackend =
         (_backend :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCassandra (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
-    computeCassandra =
+instance s ~ s' => P.HasComputedCassandra (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+    computedCassandra =
         (_cassandra :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHana (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
-    computeHana =
+instance s ~ s' => P.HasComputedHana (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+    computedHana =
         (_hana :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMongodb (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
-    computeMongodb =
+instance s ~ s' => P.HasComputedMongodb (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+    computedMongodb =
         (_mongodb :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMssql (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
-    computeMssql =
+instance s ~ s' => P.HasComputedMssql (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+    computedMssql =
         (_mssql :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMysql (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
-    computeMysql =
+instance s ~ s' => P.HasComputedMysql (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+    computedMysql =
         (_mysql :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOracle (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
-    computeOracle =
+instance s ~ s' => P.HasComputedOracle (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+    computedOracle =
         (_oracle :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePostgresql (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
-    computePostgresql =
+instance s ~ s' => P.HasComputedPostgresql (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+    computedPostgresql =
         (_postgresql :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVerifyConnection (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
-    computeVerifyConnection =
+instance s ~ s' => P.HasComputedVerifyConnection (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+    computedVerifyConnection =
         (_verify_connection :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -2024,48 +2024,48 @@ instance P.HasRollbackStatements (ResourceDatabaseSecretBackendRole s) (TF.Attr 
         lens (_rollback_statements :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
              (\s a -> s { _rollback_statements = a } :: ResourceDatabaseSecretBackendRole s)
 
-instance s ~ s' => P.HasComputeBackend (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
-    computeBackend =
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+    computedBackend =
         (_backend :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCreationStatements (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
-    computeCreationStatements =
+instance s ~ s' => P.HasComputedCreationStatements (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+    computedCreationStatements =
         (_creation_statements :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDbName (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
-    computeDbName =
+instance s ~ s' => P.HasComputedDbName (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+    computedDbName =
         (_db_name :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDefaultTtl (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
-    computeDefaultTtl =
+instance s ~ s' => P.HasComputedDefaultTtl (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+    computedDefaultTtl =
         (_default_ttl :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMaxTtl (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
-    computeMaxTtl =
+instance s ~ s' => P.HasComputedMaxTtl (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+    computedMaxTtl =
         (_max_ttl :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRenewStatements (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
-    computeRenewStatements =
+instance s ~ s' => P.HasComputedRenewStatements (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+    computedRenewStatements =
         (_renew_statements :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRevocationStatements (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
-    computeRevocationStatements =
+instance s ~ s' => P.HasComputedRevocationStatements (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+    computedRevocationStatements =
         (_revocation_statements :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRollbackStatements (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
-    computeRollbackStatements =
+instance s ~ s' => P.HasComputedRollbackStatements (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+    computedRollbackStatements =
         (_rollback_statements :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -2135,23 +2135,23 @@ instance P.HasPath (ResourceGenericSecret s) (TF.Attr s P.Text) where
         lens (_path :: ResourceGenericSecret s -> TF.Attr s P.Text)
              (\s a -> s { _path = a } :: ResourceGenericSecret s)
 
-instance s ~ s' => P.HasComputeAllowRead (TF.Ref s' (ResourceGenericSecret s)) (TF.Attr s P.Text) where
-    computeAllowRead =
+instance s ~ s' => P.HasComputedAllowRead (TF.Ref s' (ResourceGenericSecret s)) (TF.Attr s P.Text) where
+    computedAllowRead =
         (_allow_read :: ResourceGenericSecret s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDataJson (TF.Ref s' (ResourceGenericSecret s)) (TF.Attr s P.Text) where
-    computeDataJson =
+instance s ~ s' => P.HasComputedDataJson (TF.Ref s' (ResourceGenericSecret s)) (TF.Attr s P.Text) where
+    computedDataJson =
         (_data_json :: ResourceGenericSecret s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDisableRead (TF.Ref s' (ResourceGenericSecret s)) (TF.Attr s P.Text) where
-    computeDisableRead =
+instance s ~ s' => P.HasComputedDisableRead (TF.Ref s' (ResourceGenericSecret s)) (TF.Attr s P.Text) where
+    computedDisableRead =
         (_disable_read :: ResourceGenericSecret s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePath (TF.Ref s' (ResourceGenericSecret s)) (TF.Attr s P.Text) where
-    computePath =
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (ResourceGenericSecret s)) (TF.Attr s P.Text) where
+    computedPath =
         (_path :: ResourceGenericSecret s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -2216,28 +2216,28 @@ instance P.HasType' (ResourceMount s) (TF.Attr s P.Text) where
         lens (_type' :: ResourceMount s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: ResourceMount s)
 
-instance s ~ s' => P.HasComputeDefaultLeaseTtlSeconds (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
-    computeDefaultLeaseTtlSeconds =
+instance s ~ s' => P.HasComputedDefaultLeaseTtlSeconds (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
+    computedDefaultLeaseTtlSeconds =
         (_default_lease_ttl_seconds :: ResourceMount s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceMount s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMaxLeaseTtlSeconds (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
-    computeMaxLeaseTtlSeconds =
+instance s ~ s' => P.HasComputedMaxLeaseTtlSeconds (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
+    computedMaxLeaseTtlSeconds =
         (_max_lease_ttl_seconds :: ResourceMount s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePath (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
-    computePath =
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
+    computedPath =
         (_path :: ResourceMount s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceMount s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -2336,48 +2336,48 @@ instance P.HasUser (ResourceOktaAuthBackend s) (TF.Attr s P.Text) where
         lens (_user :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
              (\s a -> s { _user = a } :: ResourceOktaAuthBackend s)
 
-instance s ~ s' => P.HasComputeBaseUrl (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
-    computeBaseUrl =
+instance s ~ s' => P.HasComputedBaseUrl (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+    computedBaseUrl =
         (_base_url :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeGroup (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
-    computeGroup =
+instance s ~ s' => P.HasComputedGroup (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+    computedGroup =
         (_group :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMaxTtl (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
-    computeMaxTtl =
+instance s ~ s' => P.HasComputedMaxTtl (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+    computedMaxTtl =
         (_max_ttl :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOrganization (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
-    computeOrganization =
+instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+    computedOrganization =
         (_organization :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePath (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
-    computePath =
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+    computedPath =
         (_path :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeToken (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
-    computeToken =
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+    computedToken =
         (_token :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTtl (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
-    computeTtl =
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+    computedTtl =
         (_ttl :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUser (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
-    computeUser =
+instance s ~ s' => P.HasComputedUser (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+    computedUser =
         (_user :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -2432,18 +2432,18 @@ instance P.HasPolicies (ResourceOktaAuthBackendGroup s) (TF.Attr s P.Text) where
         lens (_policies :: ResourceOktaAuthBackendGroup s -> TF.Attr s P.Text)
              (\s a -> s { _policies = a } :: ResourceOktaAuthBackendGroup s)
 
-instance s ~ s' => P.HasComputeGroupName (TF.Ref s' (ResourceOktaAuthBackendGroup s)) (TF.Attr s P.Text) where
-    computeGroupName =
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (ResourceOktaAuthBackendGroup s)) (TF.Attr s P.Text) where
+    computedGroupName =
         (_group_name :: ResourceOktaAuthBackendGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePath (TF.Ref s' (ResourceOktaAuthBackendGroup s)) (TF.Attr s P.Text) where
-    computePath =
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (ResourceOktaAuthBackendGroup s)) (TF.Attr s P.Text) where
+    computedPath =
         (_path :: ResourceOktaAuthBackendGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicies (TF.Ref s' (ResourceOktaAuthBackendGroup s)) (TF.Attr s P.Text) where
-    computePolicies =
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceOktaAuthBackendGroup s)) (TF.Attr s P.Text) where
+    computedPolicies =
         (_policies :: ResourceOktaAuthBackendGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -2500,23 +2500,23 @@ instance P.HasUsername (ResourceOktaAuthBackendUser s) (TF.Attr s P.Text) where
         lens (_username :: ResourceOktaAuthBackendUser s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: ResourceOktaAuthBackendUser s)
 
-instance s ~ s' => P.HasComputeGroups (TF.Ref s' (ResourceOktaAuthBackendUser s)) (TF.Attr s P.Text) where
-    computeGroups =
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (ResourceOktaAuthBackendUser s)) (TF.Attr s P.Text) where
+    computedGroups =
         (_groups :: ResourceOktaAuthBackendUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePath (TF.Ref s' (ResourceOktaAuthBackendUser s)) (TF.Attr s P.Text) where
-    computePath =
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (ResourceOktaAuthBackendUser s)) (TF.Attr s P.Text) where
+    computedPath =
         (_path :: ResourceOktaAuthBackendUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicies (TF.Ref s' (ResourceOktaAuthBackendUser s)) (TF.Attr s P.Text) where
-    computePolicies =
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceOktaAuthBackendUser s)) (TF.Attr s P.Text) where
+    computedPolicies =
         (_policies :: ResourceOktaAuthBackendUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUsername (TF.Ref s' (ResourceOktaAuthBackendUser s)) (TF.Attr s P.Text) where
-    computeUsername =
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (ResourceOktaAuthBackendUser s)) (TF.Attr s P.Text) where
+    computedUsername =
         (_username :: ResourceOktaAuthBackendUser s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -2557,13 +2557,13 @@ instance P.HasPolicy (ResourcePolicy s) (TF.Attr s P.Text) where
         lens (_policy :: ResourcePolicy s -> TF.Attr s P.Text)
              (\s a -> s { _policy = a } :: ResourcePolicy s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourcePolicy s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourcePolicy s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourcePolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicy (TF.Ref s' (ResourcePolicy s)) (TF.Attr s P.Text) where
-    computePolicy =
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (ResourcePolicy s)) (TF.Attr s P.Text) where
+    computedPolicy =
         (_policy :: ResourcePolicy s -> TF.Attr s P.Text)
             . TF.refValue
 

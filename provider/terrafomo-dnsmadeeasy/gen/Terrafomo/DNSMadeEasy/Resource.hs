@@ -31,11 +31,11 @@ module Terrafomo.DNSMadeEasy.Resource
     -- ** Arguments
 
     -- ** Computed Attributes
-    , P.HasComputeGtdLocation (..)
-    , P.HasComputeName (..)
-    , P.HasComputeTtl (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeValue (..)
+    , P.HasComputedGtdLocation (..)
+    , P.HasComputedName (..)
+    , P.HasComputedTtl (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedValue (..)
 
     -- * Re-exported Types
     , module P
@@ -75,20 +75,20 @@ data ResourceRecord s = ResourceRecord {
 instance TF.ToHCL (ResourceRecord s) where
     toHCL _ = TF.empty
 
-instance s ~ s' => P.HasComputeGtdLocation (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeGtdLocation x = TF.compute (TF.refKey x) "gtdLocation"
+instance s ~ s' => P.HasComputedGtdLocation (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedGtdLocation x = TF.compute (TF.refKey x) "gtdLocation"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputeTtl (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeTtl x = TF.compute (TF.refKey x) "ttl"
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputeValue (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeValue x = TF.compute (TF.refKey x) "value"
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedValue x = TF.compute (TF.refKey x) "value"
 
 resourceRecord :: TF.Resource P.DNSMadeEasy (ResourceRecord s)
 resourceRecord =

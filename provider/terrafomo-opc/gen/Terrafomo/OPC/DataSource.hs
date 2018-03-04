@@ -51,51 +51,51 @@ module Terrafomo.OPC.DataSource
     , P.HasVersion (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAccount (..)
-    , P.HasComputeAttributes (..)
-    , P.HasComputeCollocated (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeDns (..)
-    , P.HasComputeEntry (..)
-    , P.HasComputeErrorReason (..)
-    , P.HasComputeFile (..)
-    , P.HasComputeHypervisor (..)
-    , P.HasComputeImageFormat (..)
-    , P.HasComputeImageList (..)
-    , P.HasComputeInstanceId (..)
-    , P.HasComputeInstanceName (..)
-    , P.HasComputeInterface (..)
-    , P.HasComputeIpAddress (..)
-    , P.HasComputeIpNetwork (..)
-    , P.HasComputeIsDefaultGateway (..)
-    , P.HasComputeMacAddress (..)
-    , P.HasComputeMachineImageName (..)
-    , P.HasComputeMachineImages (..)
-    , P.HasComputeModel (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNameServers (..)
-    , P.HasComputeNat (..)
-    , P.HasComputeParentVolumeBootable (..)
-    , P.HasComputePlatform (..)
-    , P.HasComputeProperty (..)
-    , P.HasComputeSearchDomains (..)
-    , P.HasComputeSecLists (..)
-    , P.HasComputeSharedNetwork (..)
-    , P.HasComputeSize (..)
-    , P.HasComputeSnapshotId (..)
-    , P.HasComputeSnapshotTimestamp (..)
-    , P.HasComputeStartTimestamp (..)
-    , P.HasComputeState (..)
-    , P.HasComputeStatus (..)
-    , P.HasComputeStatusDetail (..)
-    , P.HasComputeStatusTimestamp (..)
-    , P.HasComputeTags (..)
-    , P.HasComputeTransitFlag (..)
-    , P.HasComputeUri (..)
-    , P.HasComputeVersion (..)
-    , P.HasComputeVnic (..)
-    , P.HasComputeVnicSets (..)
-    , P.HasComputeVolumeName (..)
+    , P.HasComputedAccount (..)
+    , P.HasComputedAttributes (..)
+    , P.HasComputedCollocated (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDns (..)
+    , P.HasComputedEntry (..)
+    , P.HasComputedErrorReason (..)
+    , P.HasComputedFile (..)
+    , P.HasComputedHypervisor (..)
+    , P.HasComputedImageFormat (..)
+    , P.HasComputedImageList (..)
+    , P.HasComputedInstanceId (..)
+    , P.HasComputedInstanceName (..)
+    , P.HasComputedInterface (..)
+    , P.HasComputedIpAddress (..)
+    , P.HasComputedIpNetwork (..)
+    , P.HasComputedIsDefaultGateway (..)
+    , P.HasComputedMacAddress (..)
+    , P.HasComputedMachineImageName (..)
+    , P.HasComputedMachineImages (..)
+    , P.HasComputedModel (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNameServers (..)
+    , P.HasComputedNat (..)
+    , P.HasComputedParentVolumeBootable (..)
+    , P.HasComputedPlatform (..)
+    , P.HasComputedProperty (..)
+    , P.HasComputedSearchDomains (..)
+    , P.HasComputedSecLists (..)
+    , P.HasComputedSharedNetwork (..)
+    , P.HasComputedSize (..)
+    , P.HasComputedSnapshotId (..)
+    , P.HasComputedSnapshotTimestamp (..)
+    , P.HasComputedStartTimestamp (..)
+    , P.HasComputedState (..)
+    , P.HasComputedStatus (..)
+    , P.HasComputedStatusDetail (..)
+    , P.HasComputedStatusTimestamp (..)
+    , P.HasComputedTags (..)
+    , P.HasComputedTransitFlag (..)
+    , P.HasComputedUri (..)
+    , P.HasComputedVersion (..)
+    , P.HasComputedVnic (..)
+    , P.HasComputedVnicSets (..)
+    , P.HasComputedVolumeName (..)
 
     -- * Re-exported Types
     , module P
@@ -160,30 +160,30 @@ instance P.HasVersion (DataComputeImageListEntry s) (TF.Attr s P.Text) where
         lens (_version :: DataComputeImageListEntry s -> TF.Attr s P.Text)
              (\s a -> s { _version = a } :: DataComputeImageListEntry s)
 
-instance s ~ s' => P.HasComputeAttributes (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
-    computeAttributes x = TF.compute (TF.refKey x) "attributes"
+instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
+    computedAttributes x = TF.compute (TF.refKey x) "attributes"
 
-instance s ~ s' => P.HasComputeDns (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
-    computeDns x = TF.compute (TF.refKey x) "dns"
+instance s ~ s' => P.HasComputedDns (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
+    computedDns x = TF.compute (TF.refKey x) "dns"
 
-instance s ~ s' => P.HasComputeEntry (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
-    computeEntry =
+instance s ~ s' => P.HasComputedEntry (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
+    computedEntry =
         (_entry :: DataComputeImageListEntry s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeImageList (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
-    computeImageList =
+instance s ~ s' => P.HasComputedImageList (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
+    computedImageList =
         (_image_list :: DataComputeImageListEntry s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMachineImages (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
-    computeMachineImages x = TF.compute (TF.refKey x) "machine_images"
+instance s ~ s' => P.HasComputedMachineImages (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
+    computedMachineImages x = TF.compute (TF.refKey x) "machine_images"
 
-instance s ~ s' => P.HasComputeUri (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
-    computeUri x = TF.compute (TF.refKey x) "uri"
+instance s ~ s' => P.HasComputedUri (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
+    computedUri x = TF.compute (TF.refKey x) "uri"
 
-instance s ~ s' => P.HasComputeVersion (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
-    computeVersion =
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DataComputeImageListEntry s)) (TF.Attr s P.Text) where
+    computedVersion =
         (_version :: DataComputeImageListEntry s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -223,42 +223,42 @@ instance P.HasName (DataComputeMachineImage s) (TF.Attr s P.Text) where
         lens (_name :: DataComputeMachineImage s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataComputeMachineImage s)
 
-instance s ~ s' => P.HasComputeAccount (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
-    computeAccount =
+instance s ~ s' => P.HasComputedAccount (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
+    computedAccount =
         (_account :: DataComputeMachineImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeAttributes (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
-    computeAttributes x = TF.compute (TF.refKey x) "attributes"
+instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
+    computedAttributes x = TF.compute (TF.refKey x) "attributes"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeErrorReason (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
-    computeErrorReason x = TF.compute (TF.refKey x) "error_reason"
+instance s ~ s' => P.HasComputedErrorReason (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
+    computedErrorReason x = TF.compute (TF.refKey x) "error_reason"
 
-instance s ~ s' => P.HasComputeFile (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
-    computeFile x = TF.compute (TF.refKey x) "file"
+instance s ~ s' => P.HasComputedFile (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
+    computedFile x = TF.compute (TF.refKey x) "file"
 
-instance s ~ s' => P.HasComputeHypervisor (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
-    computeHypervisor x = TF.compute (TF.refKey x) "hypervisor"
+instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
+    computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
 
-instance s ~ s' => P.HasComputeImageFormat (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
-    computeImageFormat x = TF.compute (TF.refKey x) "image_format"
+instance s ~ s' => P.HasComputedImageFormat (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
+    computedImageFormat x = TF.compute (TF.refKey x) "image_format"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataComputeMachineImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePlatform (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
-    computePlatform x = TF.compute (TF.refKey x) "platform"
+instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
+    computedPlatform x = TF.compute (TF.refKey x) "platform"
 
-instance s ~ s' => P.HasComputeState (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
-    computeState x = TF.compute (TF.refKey x) "state"
+instance s ~ s' => P.HasComputedState (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
+    computedState x = TF.compute (TF.refKey x) "state"
 
-instance s ~ s' => P.HasComputeUri (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
-    computeUri x = TF.compute (TF.refKey x) "uri"
+instance s ~ s' => P.HasComputedUri (TF.Ref s' (DataComputeMachineImage s)) (TF.Attr s P.Text) where
+    computedUri x = TF.compute (TF.refKey x) "uri"
 
 dataComputeMachineImage :: TF.DataSource P.OPC (DataComputeMachineImage s)
 dataComputeMachineImage =
@@ -304,59 +304,59 @@ instance P.HasInterface (DataComputeNetworkInterface s) (TF.Attr s P.Text) where
         lens (_interface :: DataComputeNetworkInterface s -> TF.Attr s P.Text)
              (\s a -> s { _interface = a } :: DataComputeNetworkInterface s)
 
-instance s ~ s' => P.HasComputeDns (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeDns x = TF.compute (TF.refKey x) "dns"
+instance s ~ s' => P.HasComputedDns (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedDns x = TF.compute (TF.refKey x) "dns"
 
-instance s ~ s' => P.HasComputeInstanceId (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeInstanceId =
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedInstanceId =
         (_instance_id :: DataComputeNetworkInterface s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInstanceName (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeInstanceName =
+instance s ~ s' => P.HasComputedInstanceName (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedInstanceName =
         (_instance_name :: DataComputeNetworkInterface s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInterface (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeInterface =
+instance s ~ s' => P.HasComputedInterface (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedInterface =
         (_interface :: DataComputeNetworkInterface s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIpAddress (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeIpAddress x = TF.compute (TF.refKey x) "ip_address"
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
-instance s ~ s' => P.HasComputeIpNetwork (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeIpNetwork x = TF.compute (TF.refKey x) "ip_network"
+instance s ~ s' => P.HasComputedIpNetwork (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedIpNetwork x = TF.compute (TF.refKey x) "ip_network"
 
-instance s ~ s' => P.HasComputeIsDefaultGateway (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeIsDefaultGateway x = TF.compute (TF.refKey x) "is_default_gateway"
+instance s ~ s' => P.HasComputedIsDefaultGateway (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedIsDefaultGateway x = TF.compute (TF.refKey x) "is_default_gateway"
 
-instance s ~ s' => P.HasComputeMacAddress (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeMacAddress x = TF.compute (TF.refKey x) "mac_address"
+instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedMacAddress x = TF.compute (TF.refKey x) "mac_address"
 
-instance s ~ s' => P.HasComputeModel (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeModel x = TF.compute (TF.refKey x) "model"
+instance s ~ s' => P.HasComputedModel (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedModel x = TF.compute (TF.refKey x) "model"
 
-instance s ~ s' => P.HasComputeNameServers (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeNameServers x = TF.compute (TF.refKey x) "name_servers"
+instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
 
-instance s ~ s' => P.HasComputeNat (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeNat x = TF.compute (TF.refKey x) "nat"
+instance s ~ s' => P.HasComputedNat (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedNat x = TF.compute (TF.refKey x) "nat"
 
-instance s ~ s' => P.HasComputeSearchDomains (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeSearchDomains x = TF.compute (TF.refKey x) "search_domains"
+instance s ~ s' => P.HasComputedSearchDomains (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedSearchDomains x = TF.compute (TF.refKey x) "search_domains"
 
-instance s ~ s' => P.HasComputeSecLists (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeSecLists x = TF.compute (TF.refKey x) "sec_lists"
+instance s ~ s' => P.HasComputedSecLists (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedSecLists x = TF.compute (TF.refKey x) "sec_lists"
 
-instance s ~ s' => P.HasComputeSharedNetwork (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeSharedNetwork x = TF.compute (TF.refKey x) "shared_network"
+instance s ~ s' => P.HasComputedSharedNetwork (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedSharedNetwork x = TF.compute (TF.refKey x) "shared_network"
 
-instance s ~ s' => P.HasComputeVnic (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeVnic x = TF.compute (TF.refKey x) "vnic"
+instance s ~ s' => P.HasComputedVnic (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedVnic x = TF.compute (TF.refKey x) "vnic"
 
-instance s ~ s' => P.HasComputeVnicSets (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
-    computeVnicSets x = TF.compute (TF.refKey x) "vnic_sets"
+instance s ~ s' => P.HasComputedVnicSets (TF.Ref s' (DataComputeNetworkInterface s)) (TF.Attr s P.Text) where
+    computedVnicSets x = TF.compute (TF.refKey x) "vnic_sets"
 
 dataComputeNetworkInterface :: TF.DataSource P.OPC (DataComputeNetworkInterface s)
 dataComputeNetworkInterface =
@@ -387,61 +387,61 @@ instance P.HasName (DataComputeStorageVolumeSnapshot s) (TF.Attr s P.Text) where
         lens (_name :: DataComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataComputeStorageVolumeSnapshot s)
 
-instance s ~ s' => P.HasComputeAccount (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeAccount x = TF.compute (TF.refKey x) "account"
+instance s ~ s' => P.HasComputedAccount (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedAccount x = TF.compute (TF.refKey x) "account"
 
-instance s ~ s' => P.HasComputeCollocated (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeCollocated x = TF.compute (TF.refKey x) "collocated"
+instance s ~ s' => P.HasComputedCollocated (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedCollocated x = TF.compute (TF.refKey x) "collocated"
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeMachineImageName (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeMachineImageName x = TF.compute (TF.refKey x) "machine_image_name"
+instance s ~ s' => P.HasComputedMachineImageName (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedMachineImageName x = TF.compute (TF.refKey x) "machine_image_name"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeParentVolumeBootable (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeParentVolumeBootable x = TF.compute (TF.refKey x) "parent_volume_bootable"
+instance s ~ s' => P.HasComputedParentVolumeBootable (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedParentVolumeBootable x = TF.compute (TF.refKey x) "parent_volume_bootable"
 
-instance s ~ s' => P.HasComputePlatform (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computePlatform x = TF.compute (TF.refKey x) "platform"
+instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedPlatform x = TF.compute (TF.refKey x) "platform"
 
-instance s ~ s' => P.HasComputeProperty (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeProperty x = TF.compute (TF.refKey x) "property"
+instance s ~ s' => P.HasComputedProperty (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedProperty x = TF.compute (TF.refKey x) "property"
 
-instance s ~ s' => P.HasComputeSize (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeSize x = TF.compute (TF.refKey x) "size"
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedSize x = TF.compute (TF.refKey x) "size"
 
-instance s ~ s' => P.HasComputeSnapshotId (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
+instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
 
-instance s ~ s' => P.HasComputeSnapshotTimestamp (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeSnapshotTimestamp x = TF.compute (TF.refKey x) "snapshot_timestamp"
+instance s ~ s' => P.HasComputedSnapshotTimestamp (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedSnapshotTimestamp x = TF.compute (TF.refKey x) "snapshot_timestamp"
 
-instance s ~ s' => P.HasComputeStartTimestamp (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeStartTimestamp x = TF.compute (TF.refKey x) "start_timestamp"
+instance s ~ s' => P.HasComputedStartTimestamp (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedStartTimestamp x = TF.compute (TF.refKey x) "start_timestamp"
 
-instance s ~ s' => P.HasComputeStatus (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeStatus x = TF.compute (TF.refKey x) "status"
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance s ~ s' => P.HasComputeStatusDetail (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeStatusDetail x = TF.compute (TF.refKey x) "status_detail"
+instance s ~ s' => P.HasComputedStatusDetail (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedStatusDetail x = TF.compute (TF.refKey x) "status_detail"
 
-instance s ~ s' => P.HasComputeStatusTimestamp (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeStatusTimestamp x = TF.compute (TF.refKey x) "status_timestamp"
+instance s ~ s' => P.HasComputedStatusTimestamp (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedStatusTimestamp x = TF.compute (TF.refKey x) "status_timestamp"
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeTags x = TF.compute (TF.refKey x) "tags"
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance s ~ s' => P.HasComputeUri (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeUri x = TF.compute (TF.refKey x) "uri"
+instance s ~ s' => P.HasComputedUri (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedUri x = TF.compute (TF.refKey x) "uri"
 
-instance s ~ s' => P.HasComputeVolumeName (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
-    computeVolumeName x = TF.compute (TF.refKey x) "volume_name"
+instance s ~ s' => P.HasComputedVolumeName (TF.Ref s' (DataComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+    computedVolumeName x = TF.compute (TF.refKey x) "volume_name"
 
 dataComputeStorageVolumeSnapshot :: TF.DataSource P.OPC (DataComputeStorageVolumeSnapshot s)
 dataComputeStorageVolumeSnapshot =
@@ -469,25 +469,25 @@ instance P.HasName (DataComputeVnic s) (TF.Attr s P.Text) where
         lens (_name :: DataComputeVnic s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataComputeVnic s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (DataComputeVnic s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataComputeVnic s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeMacAddress (TF.Ref s' (DataComputeVnic s)) (TF.Attr s P.Text) where
-    computeMacAddress x = TF.compute (TF.refKey x) "mac_address"
+instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (DataComputeVnic s)) (TF.Attr s P.Text) where
+    computedMacAddress x = TF.compute (TF.refKey x) "mac_address"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataComputeVnic s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataComputeVnic s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataComputeVnic s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTags (TF.Ref s' (DataComputeVnic s)) (TF.Attr s P.Text) where
-    computeTags x = TF.compute (TF.refKey x) "tags"
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataComputeVnic s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance s ~ s' => P.HasComputeTransitFlag (TF.Ref s' (DataComputeVnic s)) (TF.Attr s P.Text) where
-    computeTransitFlag x = TF.compute (TF.refKey x) "transit_flag"
+instance s ~ s' => P.HasComputedTransitFlag (TF.Ref s' (DataComputeVnic s)) (TF.Attr s P.Text) where
+    computedTransitFlag x = TF.compute (TF.refKey x) "transit_flag"
 
-instance s ~ s' => P.HasComputeUri (TF.Ref s' (DataComputeVnic s)) (TF.Attr s P.Text) where
-    computeUri x = TF.compute (TF.refKey x) "uri"
+instance s ~ s' => P.HasComputedUri (TF.Ref s' (DataComputeVnic s)) (TF.Attr s P.Text) where
+    computedUri x = TF.compute (TF.refKey x) "uri"
 
 dataComputeVnic :: TF.DataSource P.OPC (DataComputeVnic s)
 dataComputeVnic =

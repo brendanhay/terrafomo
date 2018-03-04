@@ -61,43 +61,43 @@ module Terrafomo.NS1.Lens
     , HasZone (..)
 
     -- ** Computed Attributes
-    , HasComputeActive (..)
-    , HasComputeAnswers (..)
-    , HasComputeConfig (..)
-    , HasComputeDomain (..)
-    , HasComputeEmail (..)
-    , HasComputeExpiry (..)
-    , HasComputeFilters (..)
-    , HasComputeFrequency (..)
-    , HasComputeJobType (..)
-    , HasComputeKey (..)
-    , HasComputeLink (..)
-    , HasComputeName (..)
-    , HasComputeNotes (..)
-    , HasComputeNotifications (..)
-    , HasComputeNotify (..)
-    , HasComputeNotifyDelay (..)
-    , HasComputeNotifyFailback (..)
-    , HasComputeNotifyList (..)
-    , HasComputeNotifyRegional (..)
-    , HasComputeNotifyRepeat (..)
-    , HasComputeNxTtl (..)
-    , HasComputePermissions (..)
-    , HasComputePolicy (..)
-    , HasComputePrimary (..)
-    , HasComputeRapidRecheck (..)
-    , HasComputeRefresh (..)
-    , HasComputeRegions (..)
-    , HasComputeRetry (..)
-    , HasComputeRules (..)
-    , HasComputeSourceId (..)
-    , HasComputeSourcetype (..)
-    , HasComputeTeams (..)
-    , HasComputeTtl (..)
-    , HasComputeType' (..)
-    , HasComputeUseClientSubnet (..)
-    , HasComputeUsername (..)
-    , HasComputeZone (..)
+    , HasComputedActive (..)
+    , HasComputedAnswers (..)
+    , HasComputedConfig (..)
+    , HasComputedDomain (..)
+    , HasComputedEmail (..)
+    , HasComputedExpiry (..)
+    , HasComputedFilters (..)
+    , HasComputedFrequency (..)
+    , HasComputedJobType (..)
+    , HasComputedKey (..)
+    , HasComputedLink (..)
+    , HasComputedName (..)
+    , HasComputedNotes (..)
+    , HasComputedNotifications (..)
+    , HasComputedNotify (..)
+    , HasComputedNotifyDelay (..)
+    , HasComputedNotifyFailback (..)
+    , HasComputedNotifyList (..)
+    , HasComputedNotifyRegional (..)
+    , HasComputedNotifyRepeat (..)
+    , HasComputedNxTtl (..)
+    , HasComputedPermissions (..)
+    , HasComputedPolicy (..)
+    , HasComputedPrimary (..)
+    , HasComputedRapidRecheck (..)
+    , HasComputedRefresh (..)
+    , HasComputedRegions (..)
+    , HasComputedRetry (..)
+    , HasComputedRules (..)
+    , HasComputedSourceId (..)
+    , HasComputedSourcetype (..)
+    , HasComputedTeams (..)
+    , HasComputedTtl (..)
+    , HasComputedType' (..)
+    , HasComputedUseClientSubnet (..)
+    , HasComputedUsername (..)
+    , HasComputedZone (..)
     ) where
 
 import GHC.Base ((.))
@@ -329,113 +329,113 @@ class HasZone a b | a -> b where
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
-class HasComputeActive a b | a -> b where
-    computeActive :: a -> b
+class HasComputedActive a b | a -> b where
+    computedActive :: a -> b
 
-class HasComputeAnswers a b | a -> b where
-    computeAnswers :: a -> b
+class HasComputedAnswers a b | a -> b where
+    computedAnswers :: a -> b
 
-class HasComputeConfig a b | a -> b where
-    computeConfig :: a -> b
+class HasComputedConfig a b | a -> b where
+    computedConfig :: a -> b
 
-class HasComputeDomain a b | a -> b where
-    computeDomain :: a -> b
+class HasComputedDomain a b | a -> b where
+    computedDomain :: a -> b
 
-class HasComputeEmail a b | a -> b where
-    computeEmail :: a -> b
+class HasComputedEmail a b | a -> b where
+    computedEmail :: a -> b
 
-class HasComputeExpiry a b | a -> b where
-    computeExpiry :: a -> b
+class HasComputedExpiry a b | a -> b where
+    computedExpiry :: a -> b
 
-class HasComputeFilters a b | a -> b where
-    computeFilters :: a -> b
+class HasComputedFilters a b | a -> b where
+    computedFilters :: a -> b
 
-class HasComputeFrequency a b | a -> b where
-    computeFrequency :: a -> b
+class HasComputedFrequency a b | a -> b where
+    computedFrequency :: a -> b
 
-class HasComputeJobType a b | a -> b where
-    computeJobType :: a -> b
+class HasComputedJobType a b | a -> b where
+    computedJobType :: a -> b
 
-class HasComputeKey a b | a -> b where
-    computeKey :: a -> b
+class HasComputedKey a b | a -> b where
+    computedKey :: a -> b
 
-class HasComputeLink a b | a -> b where
-    computeLink :: a -> b
+class HasComputedLink a b | a -> b where
+    computedLink :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeNotes a b | a -> b where
-    computeNotes :: a -> b
+class HasComputedNotes a b | a -> b where
+    computedNotes :: a -> b
 
-class HasComputeNotifications a b | a -> b where
-    computeNotifications :: a -> b
+class HasComputedNotifications a b | a -> b where
+    computedNotifications :: a -> b
 
-class HasComputeNotify a b | a -> b where
-    computeNotify :: a -> b
+class HasComputedNotify a b | a -> b where
+    computedNotify :: a -> b
 
-class HasComputeNotifyDelay a b | a -> b where
-    computeNotifyDelay :: a -> b
+class HasComputedNotifyDelay a b | a -> b where
+    computedNotifyDelay :: a -> b
 
-class HasComputeNotifyFailback a b | a -> b where
-    computeNotifyFailback :: a -> b
+class HasComputedNotifyFailback a b | a -> b where
+    computedNotifyFailback :: a -> b
 
-class HasComputeNotifyList a b | a -> b where
-    computeNotifyList :: a -> b
+class HasComputedNotifyList a b | a -> b where
+    computedNotifyList :: a -> b
 
-class HasComputeNotifyRegional a b | a -> b where
-    computeNotifyRegional :: a -> b
+class HasComputedNotifyRegional a b | a -> b where
+    computedNotifyRegional :: a -> b
 
-class HasComputeNotifyRepeat a b | a -> b where
-    computeNotifyRepeat :: a -> b
+class HasComputedNotifyRepeat a b | a -> b where
+    computedNotifyRepeat :: a -> b
 
-class HasComputeNxTtl a b | a -> b where
-    computeNxTtl :: a -> b
+class HasComputedNxTtl a b | a -> b where
+    computedNxTtl :: a -> b
 
-class HasComputePermissions a b | a -> b where
-    computePermissions :: a -> b
+class HasComputedPermissions a b | a -> b where
+    computedPermissions :: a -> b
 
-class HasComputePolicy a b | a -> b where
-    computePolicy :: a -> b
+class HasComputedPolicy a b | a -> b where
+    computedPolicy :: a -> b
 
-class HasComputePrimary a b | a -> b where
-    computePrimary :: a -> b
+class HasComputedPrimary a b | a -> b where
+    computedPrimary :: a -> b
 
-class HasComputeRapidRecheck a b | a -> b where
-    computeRapidRecheck :: a -> b
+class HasComputedRapidRecheck a b | a -> b where
+    computedRapidRecheck :: a -> b
 
-class HasComputeRefresh a b | a -> b where
-    computeRefresh :: a -> b
+class HasComputedRefresh a b | a -> b where
+    computedRefresh :: a -> b
 
-class HasComputeRegions a b | a -> b where
-    computeRegions :: a -> b
+class HasComputedRegions a b | a -> b where
+    computedRegions :: a -> b
 
-class HasComputeRetry a b | a -> b where
-    computeRetry :: a -> b
+class HasComputedRetry a b | a -> b where
+    computedRetry :: a -> b
 
-class HasComputeRules a b | a -> b where
-    computeRules :: a -> b
+class HasComputedRules a b | a -> b where
+    computedRules :: a -> b
 
-class HasComputeSourceId a b | a -> b where
-    computeSourceId :: a -> b
+class HasComputedSourceId a b | a -> b where
+    computedSourceId :: a -> b
 
-class HasComputeSourcetype a b | a -> b where
-    computeSourcetype :: a -> b
+class HasComputedSourcetype a b | a -> b where
+    computedSourcetype :: a -> b
 
-class HasComputeTeams a b | a -> b where
-    computeTeams :: a -> b
+class HasComputedTeams a b | a -> b where
+    computedTeams :: a -> b
 
-class HasComputeTtl a b | a -> b where
-    computeTtl :: a -> b
+class HasComputedTtl a b | a -> b where
+    computedTtl :: a -> b
 
-class HasComputeType' a b | a -> b where
-    computeType' :: a -> b
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b
 
-class HasComputeUseClientSubnet a b | a -> b where
-    computeUseClientSubnet :: a -> b
+class HasComputedUseClientSubnet a b | a -> b where
+    computedUseClientSubnet :: a -> b
 
-class HasComputeUsername a b | a -> b where
-    computeUsername :: a -> b
+class HasComputedUsername a b | a -> b where
+    computedUsername :: a -> b
 
-class HasComputeZone a b | a -> b where
-    computeZone :: a -> b
+class HasComputedZone a b | a -> b where
+    computedZone :: a -> b

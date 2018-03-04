@@ -50,16 +50,16 @@ module Terrafomo.Nomad.Resource
     , P.HasType' (..)
 
     -- ** Computed Attributes
-    , P.HasComputeDeregisterOnDestroy (..)
-    , P.HasComputeDeregisterOnIdChange (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeGlobal (..)
-    , P.HasComputeJobspec (..)
-    , P.HasComputeLimits (..)
-    , P.HasComputeName (..)
-    , P.HasComputePolicies (..)
-    , P.HasComputeRulesHcl (..)
-    , P.HasComputeType' (..)
+    , P.HasComputedDeregisterOnDestroy (..)
+    , P.HasComputedDeregisterOnIdChange (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedGlobal (..)
+    , P.HasComputedJobspec (..)
+    , P.HasComputedLimits (..)
+    , P.HasComputedName (..)
+    , P.HasComputedPolicies (..)
+    , P.HasComputedRulesHcl (..)
+    , P.HasComputedType' (..)
 
     -- * Re-exported Types
     , module P
@@ -124,18 +124,18 @@ instance P.HasRulesHcl (ResourceAclPolicy s) (TF.Attr s P.Text) where
         lens (_rules_hcl :: ResourceAclPolicy s -> TF.Attr s P.Text)
              (\s a -> s { _rules_hcl = a } :: ResourceAclPolicy s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceAclPolicy s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceAclPolicy s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceAclPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceAclPolicy s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceAclPolicy s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceAclPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRulesHcl (TF.Ref s' (ResourceAclPolicy s)) (TF.Attr s P.Text) where
-    computeRulesHcl =
+instance s ~ s' => P.HasComputedRulesHcl (TF.Ref s' (ResourceAclPolicy s)) (TF.Attr s P.Text) where
+    computedRulesHcl =
         (_rules_hcl :: ResourceAclPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -193,23 +193,23 @@ instance P.HasType' (ResourceAclToken s) (TF.Attr s P.Text) where
         lens (_type' :: ResourceAclToken s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: ResourceAclToken s)
 
-instance s ~ s' => P.HasComputeGlobal (TF.Ref s' (ResourceAclToken s)) (TF.Attr s P.Text) where
-    computeGlobal =
+instance s ~ s' => P.HasComputedGlobal (TF.Ref s' (ResourceAclToken s)) (TF.Attr s P.Text) where
+    computedGlobal =
         (_global :: ResourceAclToken s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceAclToken s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceAclToken s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceAclToken s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePolicies (TF.Ref s' (ResourceAclToken s)) (TF.Attr s P.Text) where
-    computePolicies =
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceAclToken s)) (TF.Attr s P.Text) where
+    computedPolicies =
         (_policies :: ResourceAclToken s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceAclToken s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceAclToken s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceAclToken s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -264,18 +264,18 @@ instance P.HasJobspec (ResourceJob s) (TF.Attr s P.Text) where
         lens (_jobspec :: ResourceJob s -> TF.Attr s P.Text)
              (\s a -> s { _jobspec = a } :: ResourceJob s)
 
-instance s ~ s' => P.HasComputeDeregisterOnDestroy (TF.Ref s' (ResourceJob s)) (TF.Attr s P.Text) where
-    computeDeregisterOnDestroy =
+instance s ~ s' => P.HasComputedDeregisterOnDestroy (TF.Ref s' (ResourceJob s)) (TF.Attr s P.Text) where
+    computedDeregisterOnDestroy =
         (_deregister_on_destroy :: ResourceJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDeregisterOnIdChange (TF.Ref s' (ResourceJob s)) (TF.Attr s P.Text) where
-    computeDeregisterOnIdChange =
+instance s ~ s' => P.HasComputedDeregisterOnIdChange (TF.Ref s' (ResourceJob s)) (TF.Attr s P.Text) where
+    computedDeregisterOnIdChange =
         (_deregister_on_id_change :: ResourceJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeJobspec (TF.Ref s' (ResourceJob s)) (TF.Attr s P.Text) where
-    computeJobspec =
+instance s ~ s' => P.HasComputedJobspec (TF.Ref s' (ResourceJob s)) (TF.Attr s P.Text) where
+    computedJobspec =
         (_jobspec :: ResourceJob s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -323,18 +323,18 @@ instance P.HasName (ResourceQuotaSpecification s) (TF.Attr s P.Text) where
         lens (_name :: ResourceQuotaSpecification s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceQuotaSpecification s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceQuotaSpecification s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceQuotaSpecification s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceQuotaSpecification s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLimits (TF.Ref s' (ResourceQuotaSpecification s)) (TF.Attr s P.Text) where
-    computeLimits =
+instance s ~ s' => P.HasComputedLimits (TF.Ref s' (ResourceQuotaSpecification s)) (TF.Attr s P.Text) where
+    computedLimits =
         (_limits :: ResourceQuotaSpecification s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceQuotaSpecification s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceQuotaSpecification s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceQuotaSpecification s -> TF.Attr s P.Text)
             . TF.refValue
 

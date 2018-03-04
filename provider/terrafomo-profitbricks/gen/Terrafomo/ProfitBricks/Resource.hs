@@ -70,9 +70,9 @@ module Terrafomo.ProfitBricks.Resource
     , P.HasName (..)
 
     -- ** Computed Attributes
-    , P.HasComputeDescription (..)
-    , P.HasComputeLocation (..)
-    , P.HasComputeName (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedLocation (..)
+    , P.HasComputedName (..)
 
     -- * Re-exported Types
     , module P
@@ -137,18 +137,18 @@ instance P.HasName (ResourceDatacenter s) (TF.Attr s P.Text) where
         lens (_name :: ResourceDatacenter s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceDatacenter s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceDatacenter s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceDatacenter s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceDatacenter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLocation (TF.Ref s' (ResourceDatacenter s)) (TF.Attr s P.Text) where
-    computeLocation =
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ResourceDatacenter s)) (TF.Attr s P.Text) where
+    computedLocation =
         (_location :: ResourceDatacenter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDatacenter s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDatacenter s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceDatacenter s -> TF.Attr s P.Text)
             . TF.refValue
 

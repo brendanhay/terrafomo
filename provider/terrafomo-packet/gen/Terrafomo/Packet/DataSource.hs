@@ -35,11 +35,11 @@ module Terrafomo.Packet.DataSource
     , P.HasPublic (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAddressFamily (..)
-    , P.HasComputeCidrNotation (..)
-    , P.HasComputeFacility (..)
-    , P.HasComputeProjectId (..)
-    , P.HasComputePublic (..)
+    , P.HasComputedAddressFamily (..)
+    , P.HasComputedCidrNotation (..)
+    , P.HasComputedFacility (..)
+    , P.HasComputedProjectId (..)
+    , P.HasComputedPublic (..)
 
     -- * Re-exported Types
     , module P
@@ -114,26 +114,26 @@ instance P.HasPublic (DataPrecreatedIpBlock s) (TF.Attr s P.Text) where
         lens (_public :: DataPrecreatedIpBlock s -> TF.Attr s P.Text)
              (\s a -> s { _public = a } :: DataPrecreatedIpBlock s)
 
-instance s ~ s' => P.HasComputeAddressFamily (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
-    computeAddressFamily =
+instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
+    computedAddressFamily =
         (_address_family :: DataPrecreatedIpBlock s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCidrNotation (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
-    computeCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
+instance s ~ s' => P.HasComputedCidrNotation (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
+    computedCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
 
-instance s ~ s' => P.HasComputeFacility (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
-    computeFacility =
+instance s ~ s' => P.HasComputedFacility (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
+    computedFacility =
         (_facility :: DataPrecreatedIpBlock s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeProjectId (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
-    computeProjectId =
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
+    computedProjectId =
         (_project_id :: DataPrecreatedIpBlock s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePublic (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
-    computePublic =
+instance s ~ s' => P.HasComputedPublic (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
+    computedPublic =
         (_public :: DataPrecreatedIpBlock s -> TF.Attr s P.Text)
             . TF.refValue
 

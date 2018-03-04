@@ -25,7 +25,7 @@ safeArgName x =
             xs -> last xs
 
 safeAttrName :: Text -> Text
-safeAttrName = mappend "_compute" . safeArgName
+safeAttrName = mappend "_computed" . safeArgName
 
 resourceName :: Text -> Text
 resourceName = mappend "Resource" . schemaTypeName

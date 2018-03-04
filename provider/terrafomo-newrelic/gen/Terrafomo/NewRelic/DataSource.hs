@@ -35,10 +35,10 @@ module Terrafomo.NewRelic.DataSource
     , P.HasName (..)
 
     -- ** Computed Attributes
-    , P.HasComputeHostIds (..)
-    , P.HasComputeId (..)
-    , P.HasComputeInstanceIds (..)
-    , P.HasComputeName (..)
+    , P.HasComputedHostIds (..)
+    , P.HasComputedId (..)
+    , P.HasComputedInstanceIds (..)
+    , P.HasComputedName (..)
 
     -- * Re-exported Types
     , module P
@@ -88,17 +88,17 @@ instance P.HasName (DataApplication s) (TF.Attr s P.Text) where
         lens (_name :: DataApplication s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataApplication s)
 
-instance s ~ s' => P.HasComputeHostIds (TF.Ref s' (DataApplication s)) (TF.Attr s P.Text) where
-    computeHostIds x = TF.compute (TF.refKey x) "host_ids"
+instance s ~ s' => P.HasComputedHostIds (TF.Ref s' (DataApplication s)) (TF.Attr s P.Text) where
+    computedHostIds x = TF.compute (TF.refKey x) "host_ids"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataApplication s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataApplication s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeInstanceIds (TF.Ref s' (DataApplication s)) (TF.Attr s P.Text) where
-    computeInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
+instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (DataApplication s)) (TF.Attr s P.Text) where
+    computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataApplication s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataApplication s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataApplication s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -129,11 +129,11 @@ instance P.HasName (DataKeyTransaction s) (TF.Attr s P.Text) where
         lens (_name :: DataKeyTransaction s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataKeyTransaction s)
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataKeyTransaction s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataKeyTransaction s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataKeyTransaction s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataKeyTransaction s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataKeyTransaction s -> TF.Attr s P.Text)
             . TF.refValue
 

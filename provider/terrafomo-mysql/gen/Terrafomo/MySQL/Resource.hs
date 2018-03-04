@@ -47,16 +47,16 @@ module Terrafomo.MySQL.Resource
     , P.HasUser (..)
 
     -- ** Computed Attributes
-    , P.HasComputeDatabase (..)
-    , P.HasComputeDefaultCharacterSet (..)
-    , P.HasComputeDefaultCollation (..)
-    , P.HasComputeGrant (..)
-    , P.HasComputeHost (..)
-    , P.HasComputeName (..)
-    , P.HasComputePassword (..)
-    , P.HasComputePlaintextPassword (..)
-    , P.HasComputePrivileges (..)
-    , P.HasComputeUser (..)
+    , P.HasComputedDatabase (..)
+    , P.HasComputedDefaultCharacterSet (..)
+    , P.HasComputedDefaultCollation (..)
+    , P.HasComputedGrant (..)
+    , P.HasComputedHost (..)
+    , P.HasComputedName (..)
+    , P.HasComputedPassword (..)
+    , P.HasComputedPlaintextPassword (..)
+    , P.HasComputedPrivileges (..)
+    , P.HasComputedUser (..)
 
     -- * Re-exported Types
     , module P
@@ -125,18 +125,18 @@ instance P.HasName (ResourceDatabase s) (TF.Attr s P.Text) where
         lens (_name :: ResourceDatabase s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceDatabase s)
 
-instance s ~ s' => P.HasComputeDefaultCharacterSet (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeDefaultCharacterSet =
+instance s ~ s' => P.HasComputedDefaultCharacterSet (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedDefaultCharacterSet =
         (_default_character_set :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDefaultCollation (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeDefaultCollation =
+instance s ~ s' => P.HasComputedDefaultCollation (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedDefaultCollation =
         (_default_collation :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceDatabase s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -201,28 +201,28 @@ instance P.HasUser (ResourceGrant s) (TF.Attr s P.Text) where
         lens (_user :: ResourceGrant s -> TF.Attr s P.Text)
              (\s a -> s { _user = a } :: ResourceGrant s)
 
-instance s ~ s' => P.HasComputeDatabase (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
-    computeDatabase =
+instance s ~ s' => P.HasComputedDatabase (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
+    computedDatabase =
         (_database :: ResourceGrant s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeGrant (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
-    computeGrant =
+instance s ~ s' => P.HasComputedGrant (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
+    computedGrant =
         (_grant :: ResourceGrant s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHost (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
-    computeHost =
+instance s ~ s' => P.HasComputedHost (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
+    computedHost =
         (_host :: ResourceGrant s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePrivileges (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
-    computePrivileges =
+instance s ~ s' => P.HasComputedPrivileges (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
+    computedPrivileges =
         (_privileges :: ResourceGrant s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUser (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
-    computeUser =
+instance s ~ s' => P.HasComputedUser (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
+    computedUser =
         (_user :: ResourceGrant s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -283,23 +283,23 @@ instance P.HasUser (ResourceUser s) (TF.Attr s P.Text) where
         lens (_user :: ResourceUser s -> TF.Attr s P.Text)
              (\s a -> s { _user = a } :: ResourceUser s)
 
-instance s ~ s' => P.HasComputeHost (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeHost =
+instance s ~ s' => P.HasComputedHost (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedHost =
         (_host :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePassword (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computePassword =
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedPassword =
         (_password :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePlaintextPassword (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computePlaintextPassword =
+instance s ~ s' => P.HasComputedPlaintextPassword (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedPlaintextPassword =
         (_plaintext_password :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUser (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeUser =
+instance s ~ s' => P.HasComputedUser (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedUser =
         (_user :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 

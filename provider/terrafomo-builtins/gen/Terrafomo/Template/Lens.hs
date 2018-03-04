@@ -31,14 +31,14 @@ module Terrafomo.Template.Lens
     , HasVars (..)
 
     -- ** Computed Attributes
-    , HasComputeBase64Encode (..)
-    , HasComputeDestinationDir (..)
-    , HasComputeGzip (..)
-    , HasComputePart (..)
-    , HasComputeRendered (..)
-    , HasComputeSourceDir (..)
-    , HasComputeTemplate (..)
-    , HasComputeVars (..)
+    , HasComputedBase64Encode (..)
+    , HasComputedDestinationDir (..)
+    , HasComputedGzip (..)
+    , HasComputedPart (..)
+    , HasComputedRendered (..)
+    , HasComputedSourceDir (..)
+    , HasComputedTemplate (..)
+    , HasComputedVars (..)
     ) where
 
 import GHC.Base ((.))
@@ -90,26 +90,26 @@ class HasVars a b | a -> b where
 instance HasVars a b => HasVars (TF.Schema l p a) b where
     vars = TF.configuration . vars
 
-class HasComputeBase64Encode a b | a -> b where
-    computeBase64Encode :: a -> b
+class HasComputedBase64Encode a b | a -> b where
+    computedBase64Encode :: a -> b
 
-class HasComputeDestinationDir a b | a -> b where
-    computeDestinationDir :: a -> b
+class HasComputedDestinationDir a b | a -> b where
+    computedDestinationDir :: a -> b
 
-class HasComputeGzip a b | a -> b where
-    computeGzip :: a -> b
+class HasComputedGzip a b | a -> b where
+    computedGzip :: a -> b
 
-class HasComputePart a b | a -> b where
-    computePart :: a -> b
+class HasComputedPart a b | a -> b where
+    computedPart :: a -> b
 
-class HasComputeRendered a b | a -> b where
-    computeRendered :: a -> b
+class HasComputedRendered a b | a -> b where
+    computedRendered :: a -> b
 
-class HasComputeSourceDir a b | a -> b where
-    computeSourceDir :: a -> b
+class HasComputedSourceDir a b | a -> b where
+    computedSourceDir :: a -> b
 
-class HasComputeTemplate a b | a -> b where
-    computeTemplate :: a -> b
+class HasComputedTemplate a b | a -> b where
+    computedTemplate :: a -> b
 
-class HasComputeVars a b | a -> b where
-    computeVars :: a -> b
+class HasComputedVars a b | a -> b where
+    computedVars :: a -> b

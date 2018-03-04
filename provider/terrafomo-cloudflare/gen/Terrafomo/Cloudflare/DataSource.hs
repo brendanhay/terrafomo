@@ -31,9 +31,9 @@ module Terrafomo.Cloudflare.DataSource
     -- ** Arguments
 
     -- ** Computed Attributes
-    , P.HasComputeCidrBlocks (..)
-    , P.HasComputeIpv4CidrBlocks (..)
-    , P.HasComputeIpv6CidrBlocks (..)
+    , P.HasComputedCidrBlocks (..)
+    , P.HasComputedIpv4CidrBlocks (..)
+    , P.HasComputedIpv6CidrBlocks (..)
 
     -- * Re-exported Types
     , module P
@@ -74,14 +74,14 @@ data DataIpRanges s = DataIpRanges {
 instance TF.ToHCL (DataIpRanges s) where
     toHCL _ = TF.empty
 
-instance s ~ s' => P.HasComputeCidrBlocks (TF.Ref s' (DataIpRanges s)) (TF.Attr s P.Text) where
-    computeCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
+instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (DataIpRanges s)) (TF.Attr s P.Text) where
+    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
-instance s ~ s' => P.HasComputeIpv4CidrBlocks (TF.Ref s' (DataIpRanges s)) (TF.Attr s P.Text) where
-    computeIpv4CidrBlocks x = TF.compute (TF.refKey x) "ipv4_cidr_blocks"
+instance s ~ s' => P.HasComputedIpv4CidrBlocks (TF.Ref s' (DataIpRanges s)) (TF.Attr s P.Text) where
+    computedIpv4CidrBlocks x = TF.compute (TF.refKey x) "ipv4_cidr_blocks"
 
-instance s ~ s' => P.HasComputeIpv6CidrBlocks (TF.Ref s' (DataIpRanges s)) (TF.Attr s P.Text) where
-    computeIpv6CidrBlocks x = TF.compute (TF.refKey x) "ipv6_cidr_blocks"
+instance s ~ s' => P.HasComputedIpv6CidrBlocks (TF.Ref s' (DataIpRanges s)) (TF.Attr s P.Text) where
+    computedIpv6CidrBlocks x = TF.compute (TF.refKey x) "ipv6_cidr_blocks"
 
 dataIpRanges :: TF.DataSource P.Cloudflare (DataIpRanges s)
 dataIpRanges =

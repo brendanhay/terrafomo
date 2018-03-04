@@ -49,15 +49,15 @@ module Terrafomo.Icinga2.Resource
     , P.HasVars (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAddress (..)
-    , P.HasComputeArguments (..)
-    , P.HasComputeCheckCommand (..)
-    , P.HasComputeCommand (..)
-    , P.HasComputeDisplayName (..)
-    , P.HasComputeHostname (..)
-    , P.HasComputeName (..)
-    , P.HasComputeTemplates (..)
-    , P.HasComputeVars (..)
+    , P.HasComputedAddress (..)
+    , P.HasComputedArguments (..)
+    , P.HasComputedCheckCommand (..)
+    , P.HasComputedCommand (..)
+    , P.HasComputedDisplayName (..)
+    , P.HasComputedHostname (..)
+    , P.HasComputedName (..)
+    , P.HasComputedTemplates (..)
+    , P.HasComputedVars (..)
 
     -- * Re-exported Types
     , module P
@@ -131,23 +131,23 @@ instance P.HasTemplates (ResourceCheckcommand s) (TF.Attr s P.Text) where
         lens (_templates :: ResourceCheckcommand s -> TF.Attr s P.Text)
              (\s a -> s { _templates = a } :: ResourceCheckcommand s)
 
-instance s ~ s' => P.HasComputeArguments (TF.Ref s' (ResourceCheckcommand s)) (TF.Attr s P.Text) where
-    computeArguments =
+instance s ~ s' => P.HasComputedArguments (TF.Ref s' (ResourceCheckcommand s)) (TF.Attr s P.Text) where
+    computedArguments =
         (_arguments :: ResourceCheckcommand s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCommand (TF.Ref s' (ResourceCheckcommand s)) (TF.Attr s P.Text) where
-    computeCommand =
+instance s ~ s' => P.HasComputedCommand (TF.Ref s' (ResourceCheckcommand s)) (TF.Attr s P.Text) where
+    computedCommand =
         (_command :: ResourceCheckcommand s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceCheckcommand s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceCheckcommand s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceCheckcommand s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTemplates (TF.Ref s' (ResourceCheckcommand s)) (TF.Attr s P.Text) where
-    computeTemplates =
+instance s ~ s' => P.HasComputedTemplates (TF.Ref s' (ResourceCheckcommand s)) (TF.Attr s P.Text) where
+    computedTemplates =
         (_templates :: ResourceCheckcommand s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -213,28 +213,28 @@ instance P.HasVars (ResourceHost s) (TF.Attr s P.Text) where
         lens (_vars :: ResourceHost s -> TF.Attr s P.Text)
              (\s a -> s { _vars = a } :: ResourceHost s)
 
-instance s ~ s' => P.HasComputeAddress (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
-    computeAddress =
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
+    computedAddress =
         (_address :: ResourceHost s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCheckCommand (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
-    computeCheckCommand =
+instance s ~ s' => P.HasComputedCheckCommand (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
+    computedCheckCommand =
         (_check_command :: ResourceHost s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHostname (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
-    computeHostname =
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
+    computedHostname =
         (_hostname :: ResourceHost s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTemplates (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
-    computeTemplates =
+instance s ~ s' => P.HasComputedTemplates (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
+    computedTemplates =
         (_templates :: ResourceHost s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVars (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
-    computeVars =
+instance s ~ s' => P.HasComputedVars (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
+    computedVars =
         (_vars :: ResourceHost s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -277,13 +277,13 @@ instance P.HasName (ResourceHostgroup s) (TF.Attr s P.Text) where
         lens (_name :: ResourceHostgroup s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceHostgroup s)
 
-instance s ~ s' => P.HasComputeDisplayName (TF.Ref s' (ResourceHostgroup s)) (TF.Attr s P.Text) where
-    computeDisplayName =
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (ResourceHostgroup s)) (TF.Attr s P.Text) where
+    computedDisplayName =
         (_display_name :: ResourceHostgroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceHostgroup s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceHostgroup s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceHostgroup s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -331,18 +331,18 @@ instance P.HasName (ResourceService s) (TF.Attr s P.Text) where
         lens (_name :: ResourceService s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceService s)
 
-instance s ~ s' => P.HasComputeCheckCommand (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeCheckCommand =
+instance s ~ s' => P.HasComputedCheckCommand (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedCheckCommand =
         (_check_command :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHostname (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeHostname =
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedHostname =
         (_hostname :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 

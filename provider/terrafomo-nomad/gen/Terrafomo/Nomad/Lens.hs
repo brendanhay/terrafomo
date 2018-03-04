@@ -34,16 +34,16 @@ module Terrafomo.Nomad.Lens
     , HasType' (..)
 
     -- ** Computed Attributes
-    , HasComputeDeregisterOnDestroy (..)
-    , HasComputeDeregisterOnIdChange (..)
-    , HasComputeDescription (..)
-    , HasComputeGlobal (..)
-    , HasComputeJobspec (..)
-    , HasComputeLimits (..)
-    , HasComputeName (..)
-    , HasComputePolicies (..)
-    , HasComputeRulesHcl (..)
-    , HasComputeType' (..)
+    , HasComputedDeregisterOnDestroy (..)
+    , HasComputedDeregisterOnIdChange (..)
+    , HasComputedDescription (..)
+    , HasComputedGlobal (..)
+    , HasComputedJobspec (..)
+    , HasComputedLimits (..)
+    , HasComputedName (..)
+    , HasComputedPolicies (..)
+    , HasComputedRulesHcl (..)
+    , HasComputedType' (..)
     ) where
 
 import GHC.Base ((.))
@@ -113,32 +113,32 @@ class HasType' a b | a -> b where
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasComputeDeregisterOnDestroy a b | a -> b where
-    computeDeregisterOnDestroy :: a -> b
+class HasComputedDeregisterOnDestroy a b | a -> b where
+    computedDeregisterOnDestroy :: a -> b
 
-class HasComputeDeregisterOnIdChange a b | a -> b where
-    computeDeregisterOnIdChange :: a -> b
+class HasComputedDeregisterOnIdChange a b | a -> b where
+    computedDeregisterOnIdChange :: a -> b
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeGlobal a b | a -> b where
-    computeGlobal :: a -> b
+class HasComputedGlobal a b | a -> b where
+    computedGlobal :: a -> b
 
-class HasComputeJobspec a b | a -> b where
-    computeJobspec :: a -> b
+class HasComputedJobspec a b | a -> b where
+    computedJobspec :: a -> b
 
-class HasComputeLimits a b | a -> b where
-    computeLimits :: a -> b
+class HasComputedLimits a b | a -> b where
+    computedLimits :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputePolicies a b | a -> b where
-    computePolicies :: a -> b
+class HasComputedPolicies a b | a -> b where
+    computedPolicies :: a -> b
 
-class HasComputeRulesHcl a b | a -> b where
-    computeRulesHcl :: a -> b
+class HasComputedRulesHcl a b | a -> b where
+    computedRulesHcl :: a -> b
 
-class HasComputeType' a b | a -> b where
-    computeType' :: a -> b
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b

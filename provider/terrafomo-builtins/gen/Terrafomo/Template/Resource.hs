@@ -34,9 +34,9 @@ module Terrafomo.Template.Resource
     , P.HasVars (..)
 
     -- ** Computed Attributes
-    , P.HasComputeDestinationDir (..)
-    , P.HasComputeSourceDir (..)
-    , P.HasComputeVars (..)
+    , P.HasComputedDestinationDir (..)
+    , P.HasComputedSourceDir (..)
+    , P.HasComputedVars (..)
 
     -- * Re-exported Types
     , module P
@@ -109,18 +109,18 @@ instance P.HasVars (ResourceDir s) (TF.Attr s (P.Variables s)) where
         lens (_vars :: ResourceDir s -> TF.Attr s (P.Variables s))
              (\s a -> s { _vars = a } :: ResourceDir s)
 
-instance s ~ s' => P.HasComputeDestinationDir (TF.Ref s' (ResourceDir s)) (TF.Attr s P.Text) where
-    computeDestinationDir =
+instance s ~ s' => P.HasComputedDestinationDir (TF.Ref s' (ResourceDir s)) (TF.Attr s P.Text) where
+    computedDestinationDir =
         (_destination_dir :: ResourceDir s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSourceDir (TF.Ref s' (ResourceDir s)) (TF.Attr s P.Text) where
-    computeSourceDir =
+instance s ~ s' => P.HasComputedSourceDir (TF.Ref s' (ResourceDir s)) (TF.Attr s P.Text) where
+    computedSourceDir =
         (_source_dir :: ResourceDir s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVars (TF.Ref s' (ResourceDir s)) (TF.Attr s (P.Variables s)) where
-    computeVars =
+instance s ~ s' => P.HasComputedVars (TF.Ref s' (ResourceDir s)) (TF.Attr s (P.Variables s)) where
+    computedVars =
         (_vars :: ResourceDir s -> TF.Attr s (P.Variables s))
             . TF.refValue
 

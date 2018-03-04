@@ -42,15 +42,15 @@ module Terrafomo.OpsGenie.Resource
     , P.HasUsername (..)
 
     -- ** Computed Attributes
-    , P.HasComputeDescription (..)
-    , P.HasComputeFullName (..)
-    , P.HasComputeId (..)
-    , P.HasComputeLocale (..)
-    , P.HasComputeMember (..)
-    , P.HasComputeName (..)
-    , P.HasComputeRole (..)
-    , P.HasComputeTimezone (..)
-    , P.HasComputeUsername (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedFullName (..)
+    , P.HasComputedId (..)
+    , P.HasComputedLocale (..)
+    , P.HasComputedMember (..)
+    , P.HasComputedName (..)
+    , P.HasComputedRole (..)
+    , P.HasComputedTimezone (..)
+    , P.HasComputedUsername (..)
 
     -- * Re-exported Types
     , module P
@@ -115,21 +115,21 @@ instance P.HasName (ResourceTeam s) (TF.Attr s P.Text) where
         lens (_name :: ResourceTeam s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceTeam s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceTeam s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeMember (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
-    computeMember =
+instance s ~ s' => P.HasComputedMember (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computedMember =
         (_member :: ResourceTeam s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceTeam s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -193,31 +193,31 @@ instance P.HasUsername (ResourceUser s) (TF.Attr s P.Text) where
         lens (_username :: ResourceUser s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: ResourceUser s)
 
-instance s ~ s' => P.HasComputeFullName (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeFullName =
+instance s ~ s' => P.HasComputedFullName (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedFullName =
         (_full_name :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeLocale (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeLocale =
+instance s ~ s' => P.HasComputedLocale (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedLocale =
         (_locale :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeRole =
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedRole =
         (_role :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTimezone (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeTimezone =
+instance s ~ s' => P.HasComputedTimezone (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedTimezone =
         (_timezone :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeUsername (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
-    computeUsername =
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computedUsername =
         (_username :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 

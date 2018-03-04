@@ -33,16 +33,16 @@ module Terrafomo.ProfitBricks.Lens
     , HasVersion (..)
 
     -- ** Computed Attributes
-    , HasComputeDescription (..)
-    , HasComputeFeature (..)
-    , HasComputeId (..)
-    , HasComputeLocation (..)
-    , HasComputeName (..)
-    , HasComputeResourceId (..)
-    , HasComputeResourceType (..)
-    , HasComputeSize (..)
-    , HasComputeType' (..)
-    , HasComputeVersion (..)
+    , HasComputedDescription (..)
+    , HasComputedFeature (..)
+    , HasComputedId (..)
+    , HasComputedLocation (..)
+    , HasComputedName (..)
+    , HasComputedResourceId (..)
+    , HasComputedResourceType (..)
+    , HasComputedSize (..)
+    , HasComputedType' (..)
+    , HasComputedVersion (..)
     ) where
 
 import GHC.Base ((.))
@@ -106,32 +106,32 @@ class HasVersion a b | a -> b where
 instance HasVersion a b => HasVersion (TF.Schema l p a) b where
     version = TF.configuration . version
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeFeature a b | a -> b where
-    computeFeature :: a -> b
+class HasComputedFeature a b | a -> b where
+    computedFeature :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeLocation a b | a -> b where
-    computeLocation :: a -> b
+class HasComputedLocation a b | a -> b where
+    computedLocation :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeResourceId a b | a -> b where
-    computeResourceId :: a -> b
+class HasComputedResourceId a b | a -> b where
+    computedResourceId :: a -> b
 
-class HasComputeResourceType a b | a -> b where
-    computeResourceType :: a -> b
+class HasComputedResourceType a b | a -> b where
+    computedResourceType :: a -> b
 
-class HasComputeSize a b | a -> b where
-    computeSize :: a -> b
+class HasComputedSize a b | a -> b where
+    computedSize :: a -> b
 
-class HasComputeType' a b | a -> b where
-    computeType' :: a -> b
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b
 
-class HasComputeVersion a b | a -> b where
-    computeVersion :: a -> b
+class HasComputedVersion a b | a -> b where
+    computedVersion :: a -> b

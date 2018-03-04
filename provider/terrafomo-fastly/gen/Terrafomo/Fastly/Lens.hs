@@ -44,29 +44,29 @@ module Terrafomo.Fastly.Lens
     , HasVcl (..)
 
     -- ** Computed Attributes
-    , HasComputeActiveVersion (..)
-    , HasComputeBackend (..)
-    , HasComputeCacheSetting (..)
-    , HasComputeCidrBlocks (..)
-    , HasComputeCondition (..)
-    , HasComputeDefaultHost (..)
-    , HasComputeDefaultTtl (..)
-    , HasComputeDomain (..)
-    , HasComputeForceDestroy (..)
-    , HasComputeGcslogging (..)
-    , HasComputeGzip (..)
-    , HasComputeHeader (..)
-    , HasComputeHealthcheck (..)
-    , HasComputeId (..)
-    , HasComputeLogentries (..)
-    , HasComputeName (..)
-    , HasComputePapertrail (..)
-    , HasComputeRequestSetting (..)
-    , HasComputeResponseObject (..)
-    , HasComputeS3logging (..)
-    , HasComputeSumologic (..)
-    , HasComputeSyslog (..)
-    , HasComputeVcl (..)
+    , HasComputedActiveVersion (..)
+    , HasComputedBackend (..)
+    , HasComputedCacheSetting (..)
+    , HasComputedCidrBlocks (..)
+    , HasComputedCondition (..)
+    , HasComputedDefaultHost (..)
+    , HasComputedDefaultTtl (..)
+    , HasComputedDomain (..)
+    , HasComputedForceDestroy (..)
+    , HasComputedGcslogging (..)
+    , HasComputedGzip (..)
+    , HasComputedHeader (..)
+    , HasComputedHealthcheck (..)
+    , HasComputedId (..)
+    , HasComputedLogentries (..)
+    , HasComputedName (..)
+    , HasComputedPapertrail (..)
+    , HasComputedRequestSetting (..)
+    , HasComputedResponseObject (..)
+    , HasComputedS3logging (..)
+    , HasComputedSumologic (..)
+    , HasComputedSyslog (..)
+    , HasComputedVcl (..)
     ) where
 
 import GHC.Base ((.))
@@ -196,71 +196,71 @@ class HasVcl a b | a -> b where
 instance HasVcl a b => HasVcl (TF.Schema l p a) b where
     vcl = TF.configuration . vcl
 
-class HasComputeActiveVersion a b | a -> b where
-    computeActiveVersion :: a -> b
+class HasComputedActiveVersion a b | a -> b where
+    computedActiveVersion :: a -> b
 
-class HasComputeBackend a b | a -> b where
-    computeBackend :: a -> b
+class HasComputedBackend a b | a -> b where
+    computedBackend :: a -> b
 
-class HasComputeCacheSetting a b | a -> b where
-    computeCacheSetting :: a -> b
+class HasComputedCacheSetting a b | a -> b where
+    computedCacheSetting :: a -> b
 
-class HasComputeCidrBlocks a b | a -> b where
-    computeCidrBlocks :: a -> b
+class HasComputedCidrBlocks a b | a -> b where
+    computedCidrBlocks :: a -> b
 
-class HasComputeCondition a b | a -> b where
-    computeCondition :: a -> b
+class HasComputedCondition a b | a -> b where
+    computedCondition :: a -> b
 
-class HasComputeDefaultHost a b | a -> b where
-    computeDefaultHost :: a -> b
+class HasComputedDefaultHost a b | a -> b where
+    computedDefaultHost :: a -> b
 
-class HasComputeDefaultTtl a b | a -> b where
-    computeDefaultTtl :: a -> b
+class HasComputedDefaultTtl a b | a -> b where
+    computedDefaultTtl :: a -> b
 
-class HasComputeDomain a b | a -> b where
-    computeDomain :: a -> b
+class HasComputedDomain a b | a -> b where
+    computedDomain :: a -> b
 
-class HasComputeForceDestroy a b | a -> b where
-    computeForceDestroy :: a -> b
+class HasComputedForceDestroy a b | a -> b where
+    computedForceDestroy :: a -> b
 
-class HasComputeGcslogging a b | a -> b where
-    computeGcslogging :: a -> b
+class HasComputedGcslogging a b | a -> b where
+    computedGcslogging :: a -> b
 
-class HasComputeGzip a b | a -> b where
-    computeGzip :: a -> b
+class HasComputedGzip a b | a -> b where
+    computedGzip :: a -> b
 
-class HasComputeHeader a b | a -> b where
-    computeHeader :: a -> b
+class HasComputedHeader a b | a -> b where
+    computedHeader :: a -> b
 
-class HasComputeHealthcheck a b | a -> b where
-    computeHealthcheck :: a -> b
+class HasComputedHealthcheck a b | a -> b where
+    computedHealthcheck :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeLogentries a b | a -> b where
-    computeLogentries :: a -> b
+class HasComputedLogentries a b | a -> b where
+    computedLogentries :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputePapertrail a b | a -> b where
-    computePapertrail :: a -> b
+class HasComputedPapertrail a b | a -> b where
+    computedPapertrail :: a -> b
 
-class HasComputeRequestSetting a b | a -> b where
-    computeRequestSetting :: a -> b
+class HasComputedRequestSetting a b | a -> b where
+    computedRequestSetting :: a -> b
 
-class HasComputeResponseObject a b | a -> b where
-    computeResponseObject :: a -> b
+class HasComputedResponseObject a b | a -> b where
+    computedResponseObject :: a -> b
 
-class HasComputeS3logging a b | a -> b where
-    computeS3logging :: a -> b
+class HasComputedS3logging a b | a -> b where
+    computedS3logging :: a -> b
 
-class HasComputeSumologic a b | a -> b where
-    computeSumologic :: a -> b
+class HasComputedSumologic a b | a -> b where
+    computedSumologic :: a -> b
 
-class HasComputeSyslog a b | a -> b where
-    computeSyslog :: a -> b
+class HasComputedSyslog a b | a -> b where
+    computedSyslog :: a -> b
 
-class HasComputeVcl a b | a -> b where
-    computeVcl :: a -> b
+class HasComputedVcl a b | a -> b where
+    computedVcl :: a -> b

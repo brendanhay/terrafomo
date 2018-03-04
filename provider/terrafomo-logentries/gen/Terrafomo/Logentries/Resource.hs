@@ -41,14 +41,14 @@ module Terrafomo.Logentries.Resource
     , P.HasType' (..)
 
     -- ** Computed Attributes
-    , P.HasComputeFilename (..)
-    , P.HasComputeLocation (..)
-    , P.HasComputeLogsetId (..)
-    , P.HasComputeName (..)
-    , P.HasComputeRetentionPeriod (..)
-    , P.HasComputeSource (..)
-    , P.HasComputeToken (..)
-    , P.HasComputeType' (..)
+    , P.HasComputedFilename (..)
+    , P.HasComputedLocation (..)
+    , P.HasComputedLogsetId (..)
+    , P.HasComputedName (..)
+    , P.HasComputedRetentionPeriod (..)
+    , P.HasComputedSource (..)
+    , P.HasComputedToken (..)
+    , P.HasComputedType' (..)
 
     -- * Re-exported Types
     , module P
@@ -137,36 +137,36 @@ instance P.HasType' (ResourceLog s) (TF.Attr s P.Text) where
         lens (_type' :: ResourceLog s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: ResourceLog s)
 
-instance s ~ s' => P.HasComputeFilename (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
-    computeFilename =
+instance s ~ s' => P.HasComputedFilename (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+    computedFilename =
         (_filename :: ResourceLog s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLogsetId (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
-    computeLogsetId =
+instance s ~ s' => P.HasComputedLogsetId (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+    computedLogsetId =
         (_logset_id :: ResourceLog s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceLog s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRetentionPeriod (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
-    computeRetentionPeriod =
+instance s ~ s' => P.HasComputedRetentionPeriod (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+    computedRetentionPeriod =
         (_retention_period :: ResourceLog s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSource (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
-    computeSource =
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+    computedSource =
         (_source :: ResourceLog s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeToken (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
-    computeToken x = TF.compute (TF.refKey x) "token"
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+    computedToken x = TF.compute (TF.refKey x) "token"
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceLog s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -210,13 +210,13 @@ instance P.HasName (ResourceLogset s) (TF.Attr s P.Text) where
         lens (_name :: ResourceLogset s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceLogset s)
 
-instance s ~ s' => P.HasComputeLocation (TF.Ref s' (ResourceLogset s)) (TF.Attr s P.Text) where
-    computeLocation =
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ResourceLogset s)) (TF.Attr s P.Text) where
+    computedLocation =
         (_location :: ResourceLogset s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceLogset s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceLogset s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceLogset s -> TF.Attr s P.Text)
             . TF.refValue
 

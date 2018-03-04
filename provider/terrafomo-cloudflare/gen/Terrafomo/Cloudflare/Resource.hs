@@ -38,16 +38,16 @@ module Terrafomo.Cloudflare.Resource
     , P.HasValue (..)
 
     -- ** Computed Attributes
-    , P.HasComputeDomain (..)
-    , P.HasComputeHostname (..)
-    , P.HasComputeId (..)
-    , P.HasComputeName (..)
-    , P.HasComputePriority (..)
-    , P.HasComputeProxied (..)
-    , P.HasComputeTtl (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeValue (..)
-    , P.HasComputeZoneId (..)
+    , P.HasComputedDomain (..)
+    , P.HasComputedHostname (..)
+    , P.HasComputedId (..)
+    , P.HasComputedName (..)
+    , P.HasComputedPriority (..)
+    , P.HasComputedProxied (..)
+    , P.HasComputedTtl (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedValue (..)
+    , P.HasComputedZoneId (..)
 
     -- * Re-exported Types
     , module P
@@ -144,37 +144,37 @@ instance P.HasValue (ResourceRecord s) (TF.Attr s P.Text) where
         lens (_value :: ResourceRecord s -> TF.Attr s P.Text)
              (\s a -> s { _value = a } :: ResourceRecord s)
 
-instance s ~ s' => P.HasComputeDomain (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeDomain =
+instance s ~ s' => P.HasComputedDomain (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedDomain =
         (_domain :: ResourceRecord s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHostname (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeHostname x = TF.compute (TF.refKey x) "hostname"
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputePriority (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computePriority x = TF.compute (TF.refKey x) "priority"
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedPriority x = TF.compute (TF.refKey x) "priority"
 
-instance s ~ s' => P.HasComputeProxied (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeProxied x = TF.compute (TF.refKey x) "proxied"
+instance s ~ s' => P.HasComputedProxied (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedProxied x = TF.compute (TF.refKey x) "proxied"
 
-instance s ~ s' => P.HasComputeTtl (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeTtl x = TF.compute (TF.refKey x) "ttl"
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputeValue (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeValue x = TF.compute (TF.refKey x) "value"
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedValue x = TF.compute (TF.refKey x) "value"
 
-instance s ~ s' => P.HasComputeZoneId (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
-    computeZoneId x = TF.compute (TF.refKey x) "zone_id"
+instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
 resourceRecord :: TF.Resource P.Cloudflare (ResourceRecord s)
 resourceRecord =

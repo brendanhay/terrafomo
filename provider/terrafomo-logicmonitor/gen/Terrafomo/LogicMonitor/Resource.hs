@@ -47,16 +47,16 @@ module Terrafomo.LogicMonitor.Resource
     , P.HasProperties (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAppliesTo (..)
-    , P.HasComputeCollector (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeDisableAlerting (..)
-    , P.HasComputeDisplayName (..)
-    , P.HasComputeHostgroupId (..)
-    , P.HasComputeIpAddr (..)
-    , P.HasComputeName (..)
-    , P.HasComputeParentId (..)
-    , P.HasComputeProperties (..)
+    , P.HasComputedAppliesTo (..)
+    , P.HasComputedCollector (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDisableAlerting (..)
+    , P.HasComputedDisplayName (..)
+    , P.HasComputedHostgroupId (..)
+    , P.HasComputedIpAddr (..)
+    , P.HasComputedName (..)
+    , P.HasComputedParentId (..)
+    , P.HasComputedProperties (..)
 
     -- * Re-exported Types
     , module P
@@ -114,13 +114,13 @@ instance P.HasName (ResourceCollectorGroup s) (TF.Attr s P.Text) where
         lens (_name :: ResourceCollectorGroup s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourceCollectorGroup s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceCollectorGroup s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceCollectorGroup s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceCollectorGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceCollectorGroup s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceCollectorGroup s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceCollectorGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -192,33 +192,33 @@ instance P.HasProperties (ResourceDevice s) (TF.Attr s P.Text) where
         lens (_properties :: ResourceDevice s -> TF.Attr s P.Text)
              (\s a -> s { _properties = a } :: ResourceDevice s)
 
-instance s ~ s' => P.HasComputeCollector (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
-    computeCollector =
+instance s ~ s' => P.HasComputedCollector (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computedCollector =
         (_collector :: ResourceDevice s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDisableAlerting (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
-    computeDisableAlerting =
+instance s ~ s' => P.HasComputedDisableAlerting (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computedDisableAlerting =
         (_disable_alerting :: ResourceDevice s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDisplayName (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
-    computeDisplayName =
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computedDisplayName =
         (_display_name :: ResourceDevice s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeHostgroupId (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
-    computeHostgroupId =
+instance s ~ s' => P.HasComputedHostgroupId (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computedHostgroupId =
         (_hostgroup_id :: ResourceDevice s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIpAddr (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
-    computeIpAddr =
+instance s ~ s' => P.HasComputedIpAddr (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computedIpAddr =
         (_ip_addr :: ResourceDevice s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeProperties (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
-    computeProperties =
+instance s ~ s' => P.HasComputedProperties (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computedProperties =
         (_properties :: ResourceDevice s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -294,33 +294,33 @@ instance P.HasProperties (ResourceDeviceGroup s) (TF.Attr s P.Text) where
         lens (_properties :: ResourceDeviceGroup s -> TF.Attr s P.Text)
              (\s a -> s { _properties = a } :: ResourceDeviceGroup s)
 
-instance s ~ s' => P.HasComputeAppliesTo (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
-    computeAppliesTo =
+instance s ~ s' => P.HasComputedAppliesTo (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
+    computedAppliesTo =
         (_applies_to :: ResourceDeviceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceDeviceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDisableAlerting (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
-    computeDisableAlerting =
+instance s ~ s' => P.HasComputedDisableAlerting (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
+    computedDisableAlerting =
         (_disable_alerting :: ResourceDeviceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceDeviceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeParentId (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
-    computeParentId =
+instance s ~ s' => P.HasComputedParentId (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
+    computedParentId =
         (_parent_id :: ResourceDeviceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeProperties (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
-    computeProperties =
+instance s ~ s' => P.HasComputedProperties (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
+    computedProperties =
         (_properties :: ResourceDeviceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 

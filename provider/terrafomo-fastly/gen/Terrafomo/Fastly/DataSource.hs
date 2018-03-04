@@ -31,7 +31,7 @@ module Terrafomo.Fastly.DataSource
     -- ** Arguments
 
     -- ** Computed Attributes
-    , P.HasComputeCidrBlocks (..)
+    , P.HasComputedCidrBlocks (..)
 
     -- * Re-exported Types
     , module P
@@ -73,8 +73,8 @@ data DataIpRanges s = DataIpRanges {
 instance TF.ToHCL (DataIpRanges s) where
     toHCL _ = TF.empty
 
-instance s ~ s' => P.HasComputeCidrBlocks (TF.Ref s' (DataIpRanges s)) (TF.Attr s P.Text) where
-    computeCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
+instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (DataIpRanges s)) (TF.Attr s P.Text) where
+    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
 dataIpRanges :: TF.DataSource P.Fastly (DataIpRanges s)
 dataIpRanges =

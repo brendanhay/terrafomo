@@ -79,93 +79,93 @@ module Terrafomo.VSphere.Lens
     , HasVmdkPath (..)
 
     -- ** Computed Attributes
-    , HasComputeAccessMode (..)
-    , HasComputeAccessible (..)
-    , HasComputeAdapterType (..)
-    , HasComputeAlternateGuestName (..)
-    , HasComputeAssociableTypes (..)
-    , HasComputeAutoExpand (..)
-    , HasComputeCapacity (..)
-    , HasComputeCardinality (..)
-    , HasComputeCategoryId (..)
-    , HasComputeChangeVersion (..)
-    , HasComputeComputedPolicy (..)
-    , HasComputeConfigVersion (..)
-    , HasComputeConsolidate (..)
-    , HasComputeContactDetail (..)
-    , HasComputeContactName (..)
-    , HasComputeCreateDirectories (..)
-    , HasComputeDatacenter (..)
-    , HasComputeDatacenterId (..)
-    , HasComputeDatastore (..)
-    , HasComputeDefaultIpAddress (..)
-    , HasComputeDescription (..)
-    , HasComputeDestinationFile (..)
-    , HasComputeDisks (..)
-    , HasComputeDistributedVirtualSwitchUuid (..)
-    , HasComputeEagerlyScrub (..)
-    , HasComputeEditionKey (..)
-    , HasComputeFilter (..)
-    , HasComputeFolder (..)
-    , HasComputeFreeSpace (..)
-    , HasComputeGuestId (..)
-    , HasComputeGuestIpAddresses (..)
-    , HasComputeHostSystemId (..)
-    , HasComputeHostSystemIds (..)
-    , HasComputeId (..)
-    , HasComputeImported (..)
-    , HasComputeIpv4Address (..)
-    , HasComputeKey (..)
-    , HasComputeLabels (..)
-    , HasComputeLacpApiVersion (..)
-    , HasComputeLicenseKey (..)
-    , HasComputeLinkDiscoveryOperation (..)
-    , HasComputeLinkDiscoveryProtocol (..)
-    , HasComputeMaintenanceMode (..)
-    , HasComputeManagedObjectType (..)
-    , HasComputeMaxMtu (..)
-    , HasComputeMemory (..)
-    , HasComputeMoid (..)
-    , HasComputeMtu (..)
-    , HasComputeMulticastFilteringMode (..)
-    , HasComputeMultipleHostAccess (..)
-    , HasComputeName (..)
-    , HasComputeNetworkInterfaceTypes (..)
-    , HasComputeNumberOfPorts (..)
-    , HasComputePath (..)
-    , HasComputePorts (..)
-    , HasComputeProtocolEndpoint (..)
-    , HasComputeQuiesce (..)
-    , HasComputeRebootRequired (..)
-    , HasComputeRemoteHosts (..)
-    , HasComputeRemotePath (..)
-    , HasComputeRemoveChildren (..)
-    , HasComputeRescan (..)
-    , HasComputeResourcePoolId (..)
-    , HasComputeScsiControllerScanCount (..)
-    , HasComputeScsiType (..)
-    , HasComputeSecurityType (..)
-    , HasComputeSize (..)
-    , HasComputeSnapshotName (..)
-    , HasComputeSourceDatacenter (..)
-    , HasComputeSourceDatastore (..)
-    , HasComputeSourceFile (..)
-    , HasComputeTags (..)
-    , HasComputeThinProvisioned (..)
-    , HasComputeTotal (..)
-    , HasComputeType' (..)
-    , HasComputeUncommittedSpace (..)
-    , HasComputeUplinks (..)
-    , HasComputeUrl (..)
-    , HasComputeUsed (..)
-    , HasComputeUuid (..)
-    , HasComputeVersion (..)
-    , HasComputeVirtualMachineUuid (..)
-    , HasComputeVirtualSwitchName (..)
-    , HasComputeVlanId (..)
-    , HasComputeVmdkPath (..)
-    , HasComputeVmwareToolsStatus (..)
-    , HasComputeVmxPath (..)
+    , HasComputedAccessMode (..)
+    , HasComputedAccessible (..)
+    , HasComputedAdapterType (..)
+    , HasComputedAlternateGuestName (..)
+    , HasComputedAssociableTypes (..)
+    , HasComputedAutoExpand (..)
+    , HasComputedCapacity (..)
+    , HasComputedCardinality (..)
+    , HasComputedCategoryId (..)
+    , HasComputedChangeVersion (..)
+    , HasComputedComputedPolicy (..)
+    , HasComputedConfigVersion (..)
+    , HasComputedConsolidate (..)
+    , HasComputedContactDetail (..)
+    , HasComputedContactName (..)
+    , HasComputedCreateDirectories (..)
+    , HasComputedDatacenter (..)
+    , HasComputedDatacenterId (..)
+    , HasComputedDatastore (..)
+    , HasComputedDefaultIpAddress (..)
+    , HasComputedDescription (..)
+    , HasComputedDestinationFile (..)
+    , HasComputedDisks (..)
+    , HasComputedDistributedVirtualSwitchUuid (..)
+    , HasComputedEagerlyScrub (..)
+    , HasComputedEditionKey (..)
+    , HasComputedFilter (..)
+    , HasComputedFolder (..)
+    , HasComputedFreeSpace (..)
+    , HasComputedGuestId (..)
+    , HasComputedGuestIpAddresses (..)
+    , HasComputedHostSystemId (..)
+    , HasComputedHostSystemIds (..)
+    , HasComputedId (..)
+    , HasComputedImported (..)
+    , HasComputedIpv4Address (..)
+    , HasComputedKey (..)
+    , HasComputedLabels (..)
+    , HasComputedLacpApiVersion (..)
+    , HasComputedLicenseKey (..)
+    , HasComputedLinkDiscoveryOperation (..)
+    , HasComputedLinkDiscoveryProtocol (..)
+    , HasComputedMaintenanceMode (..)
+    , HasComputedManagedObjectType (..)
+    , HasComputedMaxMtu (..)
+    , HasComputedMemory (..)
+    , HasComputedMoid (..)
+    , HasComputedMtu (..)
+    , HasComputedMulticastFilteringMode (..)
+    , HasComputedMultipleHostAccess (..)
+    , HasComputedName (..)
+    , HasComputedNetworkInterfaceTypes (..)
+    , HasComputedNumberOfPorts (..)
+    , HasComputedPath (..)
+    , HasComputedPorts (..)
+    , HasComputedProtocolEndpoint (..)
+    , HasComputedQuiesce (..)
+    , HasComputedRebootRequired (..)
+    , HasComputedRemoteHosts (..)
+    , HasComputedRemotePath (..)
+    , HasComputedRemoveChildren (..)
+    , HasComputedRescan (..)
+    , HasComputedResourcePoolId (..)
+    , HasComputedScsiControllerScanCount (..)
+    , HasComputedScsiType (..)
+    , HasComputedSecurityType (..)
+    , HasComputedSize (..)
+    , HasComputedSnapshotName (..)
+    , HasComputedSourceDatacenter (..)
+    , HasComputedSourceDatastore (..)
+    , HasComputedSourceFile (..)
+    , HasComputedTags (..)
+    , HasComputedThinProvisioned (..)
+    , HasComputedTotal (..)
+    , HasComputedType' (..)
+    , HasComputedUncommittedSpace (..)
+    , HasComputedUplinks (..)
+    , HasComputedUrl (..)
+    , HasComputedUsed (..)
+    , HasComputedUuid (..)
+    , HasComputedVersion (..)
+    , HasComputedVirtualMachineUuid (..)
+    , HasComputedVirtualSwitchName (..)
+    , HasComputedVlanId (..)
+    , HasComputedVmdkPath (..)
+    , HasComputedVmwareToolsStatus (..)
+    , HasComputedVmxPath (..)
     ) where
 
 import GHC.Base ((.))
@@ -505,263 +505,263 @@ class HasVmdkPath a b | a -> b where
 instance HasVmdkPath a b => HasVmdkPath (TF.Schema l p a) b where
     vmdkPath = TF.configuration . vmdkPath
 
-class HasComputeAccessMode a b | a -> b where
-    computeAccessMode :: a -> b
+class HasComputedAccessMode a b | a -> b where
+    computedAccessMode :: a -> b
 
-class HasComputeAccessible a b | a -> b where
-    computeAccessible :: a -> b
+class HasComputedAccessible a b | a -> b where
+    computedAccessible :: a -> b
 
-class HasComputeAdapterType a b | a -> b where
-    computeAdapterType :: a -> b
+class HasComputedAdapterType a b | a -> b where
+    computedAdapterType :: a -> b
 
-class HasComputeAlternateGuestName a b | a -> b where
-    computeAlternateGuestName :: a -> b
+class HasComputedAlternateGuestName a b | a -> b where
+    computedAlternateGuestName :: a -> b
 
-class HasComputeAssociableTypes a b | a -> b where
-    computeAssociableTypes :: a -> b
+class HasComputedAssociableTypes a b | a -> b where
+    computedAssociableTypes :: a -> b
 
-class HasComputeAutoExpand a b | a -> b where
-    computeAutoExpand :: a -> b
+class HasComputedAutoExpand a b | a -> b where
+    computedAutoExpand :: a -> b
 
-class HasComputeCapacity a b | a -> b where
-    computeCapacity :: a -> b
+class HasComputedCapacity a b | a -> b where
+    computedCapacity :: a -> b
 
-class HasComputeCardinality a b | a -> b where
-    computeCardinality :: a -> b
+class HasComputedCardinality a b | a -> b where
+    computedCardinality :: a -> b
 
-class HasComputeCategoryId a b | a -> b where
-    computeCategoryId :: a -> b
+class HasComputedCategoryId a b | a -> b where
+    computedCategoryId :: a -> b
 
-class HasComputeChangeVersion a b | a -> b where
-    computeChangeVersion :: a -> b
+class HasComputedChangeVersion a b | a -> b where
+    computedChangeVersion :: a -> b
 
-class HasComputeComputedPolicy a b | a -> b where
-    computeComputedPolicy :: a -> b
+class HasComputedComputedPolicy a b | a -> b where
+    computedComputedPolicy :: a -> b
 
-class HasComputeConfigVersion a b | a -> b where
-    computeConfigVersion :: a -> b
+class HasComputedConfigVersion a b | a -> b where
+    computedConfigVersion :: a -> b
 
-class HasComputeConsolidate a b | a -> b where
-    computeConsolidate :: a -> b
+class HasComputedConsolidate a b | a -> b where
+    computedConsolidate :: a -> b
 
-class HasComputeContactDetail a b | a -> b where
-    computeContactDetail :: a -> b
+class HasComputedContactDetail a b | a -> b where
+    computedContactDetail :: a -> b
 
-class HasComputeContactName a b | a -> b where
-    computeContactName :: a -> b
+class HasComputedContactName a b | a -> b where
+    computedContactName :: a -> b
 
-class HasComputeCreateDirectories a b | a -> b where
-    computeCreateDirectories :: a -> b
+class HasComputedCreateDirectories a b | a -> b where
+    computedCreateDirectories :: a -> b
 
-class HasComputeDatacenter a b | a -> b where
-    computeDatacenter :: a -> b
+class HasComputedDatacenter a b | a -> b where
+    computedDatacenter :: a -> b
 
-class HasComputeDatacenterId a b | a -> b where
-    computeDatacenterId :: a -> b
+class HasComputedDatacenterId a b | a -> b where
+    computedDatacenterId :: a -> b
 
-class HasComputeDatastore a b | a -> b where
-    computeDatastore :: a -> b
+class HasComputedDatastore a b | a -> b where
+    computedDatastore :: a -> b
 
-class HasComputeDefaultIpAddress a b | a -> b where
-    computeDefaultIpAddress :: a -> b
+class HasComputedDefaultIpAddress a b | a -> b where
+    computedDefaultIpAddress :: a -> b
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeDestinationFile a b | a -> b where
-    computeDestinationFile :: a -> b
+class HasComputedDestinationFile a b | a -> b where
+    computedDestinationFile :: a -> b
 
-class HasComputeDisks a b | a -> b where
-    computeDisks :: a -> b
+class HasComputedDisks a b | a -> b where
+    computedDisks :: a -> b
 
-class HasComputeDistributedVirtualSwitchUuid a b | a -> b where
-    computeDistributedVirtualSwitchUuid :: a -> b
+class HasComputedDistributedVirtualSwitchUuid a b | a -> b where
+    computedDistributedVirtualSwitchUuid :: a -> b
 
-class HasComputeEagerlyScrub a b | a -> b where
-    computeEagerlyScrub :: a -> b
+class HasComputedEagerlyScrub a b | a -> b where
+    computedEagerlyScrub :: a -> b
 
-class HasComputeEditionKey a b | a -> b where
-    computeEditionKey :: a -> b
+class HasComputedEditionKey a b | a -> b where
+    computedEditionKey :: a -> b
 
-class HasComputeFilter a b | a -> b where
-    computeFilter :: a -> b
+class HasComputedFilter a b | a -> b where
+    computedFilter :: a -> b
 
-class HasComputeFolder a b | a -> b where
-    computeFolder :: a -> b
+class HasComputedFolder a b | a -> b where
+    computedFolder :: a -> b
 
-class HasComputeFreeSpace a b | a -> b where
-    computeFreeSpace :: a -> b
+class HasComputedFreeSpace a b | a -> b where
+    computedFreeSpace :: a -> b
 
-class HasComputeGuestId a b | a -> b where
-    computeGuestId :: a -> b
+class HasComputedGuestId a b | a -> b where
+    computedGuestId :: a -> b
 
-class HasComputeGuestIpAddresses a b | a -> b where
-    computeGuestIpAddresses :: a -> b
+class HasComputedGuestIpAddresses a b | a -> b where
+    computedGuestIpAddresses :: a -> b
 
-class HasComputeHostSystemId a b | a -> b where
-    computeHostSystemId :: a -> b
+class HasComputedHostSystemId a b | a -> b where
+    computedHostSystemId :: a -> b
 
-class HasComputeHostSystemIds a b | a -> b where
-    computeHostSystemIds :: a -> b
+class HasComputedHostSystemIds a b | a -> b where
+    computedHostSystemIds :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeImported a b | a -> b where
-    computeImported :: a -> b
+class HasComputedImported a b | a -> b where
+    computedImported :: a -> b
 
-class HasComputeIpv4Address a b | a -> b where
-    computeIpv4Address :: a -> b
+class HasComputedIpv4Address a b | a -> b where
+    computedIpv4Address :: a -> b
 
-class HasComputeKey a b | a -> b where
-    computeKey :: a -> b
+class HasComputedKey a b | a -> b where
+    computedKey :: a -> b
 
-class HasComputeLabels a b | a -> b where
-    computeLabels :: a -> b
+class HasComputedLabels a b | a -> b where
+    computedLabels :: a -> b
 
-class HasComputeLacpApiVersion a b | a -> b where
-    computeLacpApiVersion :: a -> b
+class HasComputedLacpApiVersion a b | a -> b where
+    computedLacpApiVersion :: a -> b
 
-class HasComputeLicenseKey a b | a -> b where
-    computeLicenseKey :: a -> b
+class HasComputedLicenseKey a b | a -> b where
+    computedLicenseKey :: a -> b
 
-class HasComputeLinkDiscoveryOperation a b | a -> b where
-    computeLinkDiscoveryOperation :: a -> b
+class HasComputedLinkDiscoveryOperation a b | a -> b where
+    computedLinkDiscoveryOperation :: a -> b
 
-class HasComputeLinkDiscoveryProtocol a b | a -> b where
-    computeLinkDiscoveryProtocol :: a -> b
+class HasComputedLinkDiscoveryProtocol a b | a -> b where
+    computedLinkDiscoveryProtocol :: a -> b
 
-class HasComputeMaintenanceMode a b | a -> b where
-    computeMaintenanceMode :: a -> b
+class HasComputedMaintenanceMode a b | a -> b where
+    computedMaintenanceMode :: a -> b
 
-class HasComputeManagedObjectType a b | a -> b where
-    computeManagedObjectType :: a -> b
+class HasComputedManagedObjectType a b | a -> b where
+    computedManagedObjectType :: a -> b
 
-class HasComputeMaxMtu a b | a -> b where
-    computeMaxMtu :: a -> b
+class HasComputedMaxMtu a b | a -> b where
+    computedMaxMtu :: a -> b
 
-class HasComputeMemory a b | a -> b where
-    computeMemory :: a -> b
+class HasComputedMemory a b | a -> b where
+    computedMemory :: a -> b
 
-class HasComputeMoid a b | a -> b where
-    computeMoid :: a -> b
+class HasComputedMoid a b | a -> b where
+    computedMoid :: a -> b
 
-class HasComputeMtu a b | a -> b where
-    computeMtu :: a -> b
+class HasComputedMtu a b | a -> b where
+    computedMtu :: a -> b
 
-class HasComputeMulticastFilteringMode a b | a -> b where
-    computeMulticastFilteringMode :: a -> b
+class HasComputedMulticastFilteringMode a b | a -> b where
+    computedMulticastFilteringMode :: a -> b
 
-class HasComputeMultipleHostAccess a b | a -> b where
-    computeMultipleHostAccess :: a -> b
+class HasComputedMultipleHostAccess a b | a -> b where
+    computedMultipleHostAccess :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeNetworkInterfaceTypes a b | a -> b where
-    computeNetworkInterfaceTypes :: a -> b
+class HasComputedNetworkInterfaceTypes a b | a -> b where
+    computedNetworkInterfaceTypes :: a -> b
 
-class HasComputeNumberOfPorts a b | a -> b where
-    computeNumberOfPorts :: a -> b
+class HasComputedNumberOfPorts a b | a -> b where
+    computedNumberOfPorts :: a -> b
 
-class HasComputePath a b | a -> b where
-    computePath :: a -> b
+class HasComputedPath a b | a -> b where
+    computedPath :: a -> b
 
-class HasComputePorts a b | a -> b where
-    computePorts :: a -> b
+class HasComputedPorts a b | a -> b where
+    computedPorts :: a -> b
 
-class HasComputeProtocolEndpoint a b | a -> b where
-    computeProtocolEndpoint :: a -> b
+class HasComputedProtocolEndpoint a b | a -> b where
+    computedProtocolEndpoint :: a -> b
 
-class HasComputeQuiesce a b | a -> b where
-    computeQuiesce :: a -> b
+class HasComputedQuiesce a b | a -> b where
+    computedQuiesce :: a -> b
 
-class HasComputeRebootRequired a b | a -> b where
-    computeRebootRequired :: a -> b
+class HasComputedRebootRequired a b | a -> b where
+    computedRebootRequired :: a -> b
 
-class HasComputeRemoteHosts a b | a -> b where
-    computeRemoteHosts :: a -> b
+class HasComputedRemoteHosts a b | a -> b where
+    computedRemoteHosts :: a -> b
 
-class HasComputeRemotePath a b | a -> b where
-    computeRemotePath :: a -> b
+class HasComputedRemotePath a b | a -> b where
+    computedRemotePath :: a -> b
 
-class HasComputeRemoveChildren a b | a -> b where
-    computeRemoveChildren :: a -> b
+class HasComputedRemoveChildren a b | a -> b where
+    computedRemoveChildren :: a -> b
 
-class HasComputeRescan a b | a -> b where
-    computeRescan :: a -> b
+class HasComputedRescan a b | a -> b where
+    computedRescan :: a -> b
 
-class HasComputeResourcePoolId a b | a -> b where
-    computeResourcePoolId :: a -> b
+class HasComputedResourcePoolId a b | a -> b where
+    computedResourcePoolId :: a -> b
 
-class HasComputeScsiControllerScanCount a b | a -> b where
-    computeScsiControllerScanCount :: a -> b
+class HasComputedScsiControllerScanCount a b | a -> b where
+    computedScsiControllerScanCount :: a -> b
 
-class HasComputeScsiType a b | a -> b where
-    computeScsiType :: a -> b
+class HasComputedScsiType a b | a -> b where
+    computedScsiType :: a -> b
 
-class HasComputeSecurityType a b | a -> b where
-    computeSecurityType :: a -> b
+class HasComputedSecurityType a b | a -> b where
+    computedSecurityType :: a -> b
 
-class HasComputeSize a b | a -> b where
-    computeSize :: a -> b
+class HasComputedSize a b | a -> b where
+    computedSize :: a -> b
 
-class HasComputeSnapshotName a b | a -> b where
-    computeSnapshotName :: a -> b
+class HasComputedSnapshotName a b | a -> b where
+    computedSnapshotName :: a -> b
 
-class HasComputeSourceDatacenter a b | a -> b where
-    computeSourceDatacenter :: a -> b
+class HasComputedSourceDatacenter a b | a -> b where
+    computedSourceDatacenter :: a -> b
 
-class HasComputeSourceDatastore a b | a -> b where
-    computeSourceDatastore :: a -> b
+class HasComputedSourceDatastore a b | a -> b where
+    computedSourceDatastore :: a -> b
 
-class HasComputeSourceFile a b | a -> b where
-    computeSourceFile :: a -> b
+class HasComputedSourceFile a b | a -> b where
+    computedSourceFile :: a -> b
 
-class HasComputeTags a b | a -> b where
-    computeTags :: a -> b
+class HasComputedTags a b | a -> b where
+    computedTags :: a -> b
 
-class HasComputeThinProvisioned a b | a -> b where
-    computeThinProvisioned :: a -> b
+class HasComputedThinProvisioned a b | a -> b where
+    computedThinProvisioned :: a -> b
 
-class HasComputeTotal a b | a -> b where
-    computeTotal :: a -> b
+class HasComputedTotal a b | a -> b where
+    computedTotal :: a -> b
 
-class HasComputeType' a b | a -> b where
-    computeType' :: a -> b
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b
 
-class HasComputeUncommittedSpace a b | a -> b where
-    computeUncommittedSpace :: a -> b
+class HasComputedUncommittedSpace a b | a -> b where
+    computedUncommittedSpace :: a -> b
 
-class HasComputeUplinks a b | a -> b where
-    computeUplinks :: a -> b
+class HasComputedUplinks a b | a -> b where
+    computedUplinks :: a -> b
 
-class HasComputeUrl a b | a -> b where
-    computeUrl :: a -> b
+class HasComputedUrl a b | a -> b where
+    computedUrl :: a -> b
 
-class HasComputeUsed a b | a -> b where
-    computeUsed :: a -> b
+class HasComputedUsed a b | a -> b where
+    computedUsed :: a -> b
 
-class HasComputeUuid a b | a -> b where
-    computeUuid :: a -> b
+class HasComputedUuid a b | a -> b where
+    computedUuid :: a -> b
 
-class HasComputeVersion a b | a -> b where
-    computeVersion :: a -> b
+class HasComputedVersion a b | a -> b where
+    computedVersion :: a -> b
 
-class HasComputeVirtualMachineUuid a b | a -> b where
-    computeVirtualMachineUuid :: a -> b
+class HasComputedVirtualMachineUuid a b | a -> b where
+    computedVirtualMachineUuid :: a -> b
 
-class HasComputeVirtualSwitchName a b | a -> b where
-    computeVirtualSwitchName :: a -> b
+class HasComputedVirtualSwitchName a b | a -> b where
+    computedVirtualSwitchName :: a -> b
 
-class HasComputeVlanId a b | a -> b where
-    computeVlanId :: a -> b
+class HasComputedVlanId a b | a -> b where
+    computedVlanId :: a -> b
 
-class HasComputeVmdkPath a b | a -> b where
-    computeVmdkPath :: a -> b
+class HasComputedVmdkPath a b | a -> b where
+    computedVmdkPath :: a -> b
 
-class HasComputeVmwareToolsStatus a b | a -> b where
-    computeVmwareToolsStatus :: a -> b
+class HasComputedVmwareToolsStatus a b | a -> b where
+    computedVmwareToolsStatus :: a -> b
 
-class HasComputeVmxPath a b | a -> b where
-    computeVmxPath :: a -> b
+class HasComputedVmxPath a b | a -> b where
+    computedVmxPath :: a -> b

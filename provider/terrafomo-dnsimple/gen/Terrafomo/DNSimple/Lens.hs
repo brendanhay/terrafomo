@@ -30,15 +30,15 @@ module Terrafomo.DNSimple.Lens
     , HasValue (..)
 
     -- ** Computed Attributes
-    , HasComputeDomain (..)
-    , HasComputeDomainId (..)
-    , HasComputeHostname (..)
-    , HasComputeId (..)
-    , HasComputeName (..)
-    , HasComputePriority (..)
-    , HasComputeTtl (..)
-    , HasComputeType' (..)
-    , HasComputeValue (..)
+    , HasComputedDomain (..)
+    , HasComputedDomainId (..)
+    , HasComputedHostname (..)
+    , HasComputedId (..)
+    , HasComputedName (..)
+    , HasComputedPriority (..)
+    , HasComputedTtl (..)
+    , HasComputedType' (..)
+    , HasComputedValue (..)
     ) where
 
 import GHC.Base ((.))
@@ -84,29 +84,29 @@ class HasValue a b | a -> b where
 instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
 
-class HasComputeDomain a b | a -> b where
-    computeDomain :: a -> b
+class HasComputedDomain a b | a -> b where
+    computedDomain :: a -> b
 
-class HasComputeDomainId a b | a -> b where
-    computeDomainId :: a -> b
+class HasComputedDomainId a b | a -> b where
+    computedDomainId :: a -> b
 
-class HasComputeHostname a b | a -> b where
-    computeHostname :: a -> b
+class HasComputedHostname a b | a -> b where
+    computedHostname :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputePriority a b | a -> b where
-    computePriority :: a -> b
+class HasComputedPriority a b | a -> b where
+    computedPriority :: a -> b
 
-class HasComputeTtl a b | a -> b where
-    computeTtl :: a -> b
+class HasComputedTtl a b | a -> b where
+    computedTtl :: a -> b
 
-class HasComputeType' a b | a -> b where
-    computeType' :: a -> b
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b
 
-class HasComputeValue a b | a -> b where
-    computeValue :: a -> b
+class HasComputedValue a b | a -> b where
+    computedValue :: a -> b

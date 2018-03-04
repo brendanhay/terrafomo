@@ -39,12 +39,12 @@ module Terrafomo.Template.DataSource
     , P.HasVars (..)
 
     -- ** Computed Attributes
-    , P.HasComputeBase64Encode (..)
-    , P.HasComputeGzip (..)
-    , P.HasComputePart (..)
-    , P.HasComputeRendered (..)
-    , P.HasComputeTemplate (..)
-    , P.HasComputeVars (..)
+    , P.HasComputedBase64Encode (..)
+    , P.HasComputedGzip (..)
+    , P.HasComputedPart (..)
+    , P.HasComputedRendered (..)
+    , P.HasComputedTemplate (..)
+    , P.HasComputedVars (..)
 
     -- * Re-exported Types
     , module P
@@ -108,23 +108,23 @@ instance P.HasPart (DataCloudinitConfig s) (TF.Attr s P.Text) where
         lens (_part :: DataCloudinitConfig s -> TF.Attr s P.Text)
              (\s a -> s { _part = a } :: DataCloudinitConfig s)
 
-instance s ~ s' => P.HasComputeBase64Encode (TF.Ref s' (DataCloudinitConfig s)) (TF.Attr s P.Text) where
-    computeBase64Encode =
+instance s ~ s' => P.HasComputedBase64Encode (TF.Ref s' (DataCloudinitConfig s)) (TF.Attr s P.Text) where
+    computedBase64Encode =
         (_base64_encode :: DataCloudinitConfig s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeGzip (TF.Ref s' (DataCloudinitConfig s)) (TF.Attr s P.Text) where
-    computeGzip =
+instance s ~ s' => P.HasComputedGzip (TF.Ref s' (DataCloudinitConfig s)) (TF.Attr s P.Text) where
+    computedGzip =
         (_gzip :: DataCloudinitConfig s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePart (TF.Ref s' (DataCloudinitConfig s)) (TF.Attr s P.Text) where
-    computePart =
+instance s ~ s' => P.HasComputedPart (TF.Ref s' (DataCloudinitConfig s)) (TF.Attr s P.Text) where
+    computedPart =
         (_part :: DataCloudinitConfig s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRendered (TF.Ref s' (DataCloudinitConfig s)) (TF.Attr s P.Text) where
-    computeRendered x = TF.compute (TF.refKey x) "rendered"
+instance s ~ s' => P.HasComputedRendered (TF.Ref s' (DataCloudinitConfig s)) (TF.Attr s P.Text) where
+    computedRendered x = TF.compute (TF.refKey x) "rendered"
 
 dataCloudinitConfig :: TF.DataSource TF.NoProvider (DataCloudinitConfig s)
 dataCloudinitConfig =
@@ -162,14 +162,14 @@ instance P.HasVars (DataFile s) (TF.Attr s (P.Variables s)) where
         lens (_vars :: DataFile s -> TF.Attr s (P.Variables s))
              (\s a -> s { _vars = a } :: DataFile s)
 
-instance s ~ s' => P.HasComputeRendered (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
-    computeRendered x = TF.compute (TF.refKey x) "rendered"
+instance s ~ s' => P.HasComputedRendered (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
+    computedRendered x = TF.compute (TF.refKey x) "rendered"
 
-instance s ~ s' => P.HasComputeTemplate (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
-    computeTemplate x = TF.compute (TF.refKey x) "template"
+instance s ~ s' => P.HasComputedTemplate (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
+    computedTemplate x = TF.compute (TF.refKey x) "template"
 
-instance s ~ s' => P.HasComputeVars (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
-    computeVars x = TF.compute (TF.refKey x) "vars"
+instance s ~ s' => P.HasComputedVars (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
+    computedVars x = TF.compute (TF.refKey x) "vars"
 
 dataFile :: TF.DataSource TF.NoProvider (DataFile s)
 dataFile =

@@ -37,16 +37,16 @@ module Terrafomo.Scaleway.DataSource
     , P.HasNameFilter (..)
 
     -- ** Computed Attributes
-    , P.HasComputeArchitecture (..)
-    , P.HasComputeBootCmdArgs (..)
-    , P.HasComputeCreationDate (..)
-    , P.HasComputeDtb (..)
-    , P.HasComputeInitrd (..)
-    , P.HasComputeKernel (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNameFilter (..)
-    , P.HasComputeOrganization (..)
-    , P.HasComputePublic (..)
+    , P.HasComputedArchitecture (..)
+    , P.HasComputedBootCmdArgs (..)
+    , P.HasComputedCreationDate (..)
+    , P.HasComputedDtb (..)
+    , P.HasComputedInitrd (..)
+    , P.HasComputedKernel (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNameFilter (..)
+    , P.HasComputedOrganization (..)
+    , P.HasComputedPublic (..)
 
     -- * Re-exported Types
     , module P
@@ -112,36 +112,36 @@ instance P.HasNameFilter (DataBootscript s) (TF.Attr s P.Text) where
         lens (_name_filter :: DataBootscript s -> TF.Attr s P.Text)
              (\s a -> s { _name_filter = a } :: DataBootscript s)
 
-instance s ~ s' => P.HasComputeArchitecture (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
-    computeArchitecture x = TF.compute (TF.refKey x) "architecture"
+instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
+    computedArchitecture x = TF.compute (TF.refKey x) "architecture"
 
-instance s ~ s' => P.HasComputeBootCmdArgs (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
-    computeBootCmdArgs x = TF.compute (TF.refKey x) "boot_cmd_args"
+instance s ~ s' => P.HasComputedBootCmdArgs (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
+    computedBootCmdArgs x = TF.compute (TF.refKey x) "boot_cmd_args"
 
-instance s ~ s' => P.HasComputeDtb (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
-    computeDtb x = TF.compute (TF.refKey x) "dtb"
+instance s ~ s' => P.HasComputedDtb (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
+    computedDtb x = TF.compute (TF.refKey x) "dtb"
 
-instance s ~ s' => P.HasComputeInitrd (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
-    computeInitrd x = TF.compute (TF.refKey x) "initrd"
+instance s ~ s' => P.HasComputedInitrd (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
+    computedInitrd x = TF.compute (TF.refKey x) "initrd"
 
-instance s ~ s' => P.HasComputeKernel (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
-    computeKernel x = TF.compute (TF.refKey x) "kernel"
+instance s ~ s' => P.HasComputedKernel (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
+    computedKernel x = TF.compute (TF.refKey x) "kernel"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataBootscript s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNameFilter (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
-    computeNameFilter =
+instance s ~ s' => P.HasComputedNameFilter (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
+    computedNameFilter =
         (_name_filter :: DataBootscript s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOrganization (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
-    computeOrganization x = TF.compute (TF.refKey x) "organization"
+instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
+    computedOrganization x = TF.compute (TF.refKey x) "organization"
 
-instance s ~ s' => P.HasComputePublic (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
-    computePublic x = TF.compute (TF.refKey x) "public"
+instance s ~ s' => P.HasComputedPublic (TF.Ref s' (DataBootscript s)) (TF.Attr s P.Text) where
+    computedPublic x = TF.compute (TF.refKey x) "public"
 
 dataBootscript :: TF.DataSource P.Scaleway (DataBootscript s)
 dataBootscript =
@@ -188,27 +188,27 @@ instance P.HasNameFilter (DataImage s) (TF.Attr s P.Text) where
         lens (_name_filter :: DataImage s -> TF.Attr s P.Text)
              (\s a -> s { _name_filter = a } :: DataImage s)
 
-instance s ~ s' => P.HasComputeArchitecture (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeArchitecture x = TF.compute (TF.refKey x) "architecture"
+instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedArchitecture x = TF.compute (TF.refKey x) "architecture"
 
-instance s ~ s' => P.HasComputeCreationDate (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeCreationDate x = TF.compute (TF.refKey x) "creation_date"
+instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNameFilter (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeNameFilter =
+instance s ~ s' => P.HasComputedNameFilter (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedNameFilter =
         (_name_filter :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOrganization (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computeOrganization x = TF.compute (TF.refKey x) "organization"
+instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedOrganization x = TF.compute (TF.refKey x) "organization"
 
-instance s ~ s' => P.HasComputePublic (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
-    computePublic x = TF.compute (TF.refKey x) "public"
+instance s ~ s' => P.HasComputedPublic (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computedPublic x = TF.compute (TF.refKey x) "public"
 
 dataImage :: TF.DataSource P.Scaleway (DataImage s)
 dataImage =

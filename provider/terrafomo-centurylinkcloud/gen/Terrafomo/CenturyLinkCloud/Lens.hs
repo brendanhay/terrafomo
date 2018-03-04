@@ -61,43 +61,43 @@ module Terrafomo.CenturyLinkCloud.Lens
     , HasType' (..)
 
     -- ** Computed Attributes
-    , HasComputeAaPolicyId (..)
-    , HasComputeAdditionalDisks (..)
-    , HasComputeConfigurationId (..)
-    , HasComputeCpu (..)
-    , HasComputeCreatedDat (..)
-    , HasComputeCustomFields (..)
-    , HasComputeDataCenter (..)
-    , HasComputeDescription (..)
-    , HasComputeGroupId (..)
-    , HasComputeInternalIpAddress (..)
-    , HasComputeIpAddress (..)
-    , HasComputeLoadBalancer (..)
-    , HasComputeLocationId (..)
-    , HasComputeMemoryMb (..)
-    , HasComputeMetadata (..)
-    , HasComputeMethod (..)
-    , HasComputeModifiedDat (..)
-    , HasComputeName (..)
-    , HasComputeNameTemplate (..)
-    , HasComputeNetworkId (..)
-    , HasComputeNodes (..)
-    , HasComputeOsType (..)
-    , HasComputeParent (..)
-    , HasComputeParentGroupId (..)
-    , HasComputePassword (..)
-    , HasComputePersistence (..)
-    , HasComputePort (..)
-    , HasComputePorts (..)
-    , HasComputePowerState (..)
-    , HasComputePrivateIpAddress (..)
-    , HasComputePublicIpAddress (..)
-    , HasComputeServerId (..)
-    , HasComputeSourceRestrictions (..)
-    , HasComputeSourceServerId (..)
-    , HasComputeStatus (..)
-    , HasComputeStorageType (..)
-    , HasComputeType' (..)
+    , HasComputedAaPolicyId (..)
+    , HasComputedAdditionalDisks (..)
+    , HasComputedConfigurationId (..)
+    , HasComputedCpu (..)
+    , HasComputedCreatedDat (..)
+    , HasComputedCustomFields (..)
+    , HasComputedDataCenter (..)
+    , HasComputedDescription (..)
+    , HasComputedGroupId (..)
+    , HasComputedInternalIpAddress (..)
+    , HasComputedIpAddress (..)
+    , HasComputedLoadBalancer (..)
+    , HasComputedLocationId (..)
+    , HasComputedMemoryMb (..)
+    , HasComputedMetadata (..)
+    , HasComputedMethod (..)
+    , HasComputedModifiedDat (..)
+    , HasComputedName (..)
+    , HasComputedNameTemplate (..)
+    , HasComputedNetworkId (..)
+    , HasComputedNodes (..)
+    , HasComputedOsType (..)
+    , HasComputedParent (..)
+    , HasComputedParentGroupId (..)
+    , HasComputedPassword (..)
+    , HasComputedPersistence (..)
+    , HasComputedPort (..)
+    , HasComputedPorts (..)
+    , HasComputedPowerState (..)
+    , HasComputedPrivateIpAddress (..)
+    , HasComputedPublicIpAddress (..)
+    , HasComputedServerId (..)
+    , HasComputedSourceRestrictions (..)
+    , HasComputedSourceServerId (..)
+    , HasComputedStatus (..)
+    , HasComputedStorageType (..)
+    , HasComputedType' (..)
     ) where
 
 import GHC.Base ((.))
@@ -329,113 +329,113 @@ class HasType' a b | a -> b where
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasComputeAaPolicyId a b | a -> b where
-    computeAaPolicyId :: a -> b
+class HasComputedAaPolicyId a b | a -> b where
+    computedAaPolicyId :: a -> b
 
-class HasComputeAdditionalDisks a b | a -> b where
-    computeAdditionalDisks :: a -> b
+class HasComputedAdditionalDisks a b | a -> b where
+    computedAdditionalDisks :: a -> b
 
-class HasComputeConfigurationId a b | a -> b where
-    computeConfigurationId :: a -> b
+class HasComputedConfigurationId a b | a -> b where
+    computedConfigurationId :: a -> b
 
-class HasComputeCpu a b | a -> b where
-    computeCpu :: a -> b
+class HasComputedCpu a b | a -> b where
+    computedCpu :: a -> b
 
-class HasComputeCreatedDat a b | a -> b where
-    computeCreatedDat :: a -> b
+class HasComputedCreatedDat a b | a -> b where
+    computedCreatedDat :: a -> b
 
-class HasComputeCustomFields a b | a -> b where
-    computeCustomFields :: a -> b
+class HasComputedCustomFields a b | a -> b where
+    computedCustomFields :: a -> b
 
-class HasComputeDataCenter a b | a -> b where
-    computeDataCenter :: a -> b
+class HasComputedDataCenter a b | a -> b where
+    computedDataCenter :: a -> b
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeGroupId a b | a -> b where
-    computeGroupId :: a -> b
+class HasComputedGroupId a b | a -> b where
+    computedGroupId :: a -> b
 
-class HasComputeInternalIpAddress a b | a -> b where
-    computeInternalIpAddress :: a -> b
+class HasComputedInternalIpAddress a b | a -> b where
+    computedInternalIpAddress :: a -> b
 
-class HasComputeIpAddress a b | a -> b where
-    computeIpAddress :: a -> b
+class HasComputedIpAddress a b | a -> b where
+    computedIpAddress :: a -> b
 
-class HasComputeLoadBalancer a b | a -> b where
-    computeLoadBalancer :: a -> b
+class HasComputedLoadBalancer a b | a -> b where
+    computedLoadBalancer :: a -> b
 
-class HasComputeLocationId a b | a -> b where
-    computeLocationId :: a -> b
+class HasComputedLocationId a b | a -> b where
+    computedLocationId :: a -> b
 
-class HasComputeMemoryMb a b | a -> b where
-    computeMemoryMb :: a -> b
+class HasComputedMemoryMb a b | a -> b where
+    computedMemoryMb :: a -> b
 
-class HasComputeMetadata a b | a -> b where
-    computeMetadata :: a -> b
+class HasComputedMetadata a b | a -> b where
+    computedMetadata :: a -> b
 
-class HasComputeMethod a b | a -> b where
-    computeMethod :: a -> b
+class HasComputedMethod a b | a -> b where
+    computedMethod :: a -> b
 
-class HasComputeModifiedDat a b | a -> b where
-    computeModifiedDat :: a -> b
+class HasComputedModifiedDat a b | a -> b where
+    computedModifiedDat :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeNameTemplate a b | a -> b where
-    computeNameTemplate :: a -> b
+class HasComputedNameTemplate a b | a -> b where
+    computedNameTemplate :: a -> b
 
-class HasComputeNetworkId a b | a -> b where
-    computeNetworkId :: a -> b
+class HasComputedNetworkId a b | a -> b where
+    computedNetworkId :: a -> b
 
-class HasComputeNodes a b | a -> b where
-    computeNodes :: a -> b
+class HasComputedNodes a b | a -> b where
+    computedNodes :: a -> b
 
-class HasComputeOsType a b | a -> b where
-    computeOsType :: a -> b
+class HasComputedOsType a b | a -> b where
+    computedOsType :: a -> b
 
-class HasComputeParent a b | a -> b where
-    computeParent :: a -> b
+class HasComputedParent a b | a -> b where
+    computedParent :: a -> b
 
-class HasComputeParentGroupId a b | a -> b where
-    computeParentGroupId :: a -> b
+class HasComputedParentGroupId a b | a -> b where
+    computedParentGroupId :: a -> b
 
-class HasComputePassword a b | a -> b where
-    computePassword :: a -> b
+class HasComputedPassword a b | a -> b where
+    computedPassword :: a -> b
 
-class HasComputePersistence a b | a -> b where
-    computePersistence :: a -> b
+class HasComputedPersistence a b | a -> b where
+    computedPersistence :: a -> b
 
-class HasComputePort a b | a -> b where
-    computePort :: a -> b
+class HasComputedPort a b | a -> b where
+    computedPort :: a -> b
 
-class HasComputePorts a b | a -> b where
-    computePorts :: a -> b
+class HasComputedPorts a b | a -> b where
+    computedPorts :: a -> b
 
-class HasComputePowerState a b | a -> b where
-    computePowerState :: a -> b
+class HasComputedPowerState a b | a -> b where
+    computedPowerState :: a -> b
 
-class HasComputePrivateIpAddress a b | a -> b where
-    computePrivateIpAddress :: a -> b
+class HasComputedPrivateIpAddress a b | a -> b where
+    computedPrivateIpAddress :: a -> b
 
-class HasComputePublicIpAddress a b | a -> b where
-    computePublicIpAddress :: a -> b
+class HasComputedPublicIpAddress a b | a -> b where
+    computedPublicIpAddress :: a -> b
 
-class HasComputeServerId a b | a -> b where
-    computeServerId :: a -> b
+class HasComputedServerId a b | a -> b where
+    computedServerId :: a -> b
 
-class HasComputeSourceRestrictions a b | a -> b where
-    computeSourceRestrictions :: a -> b
+class HasComputedSourceRestrictions a b | a -> b where
+    computedSourceRestrictions :: a -> b
 
-class HasComputeSourceServerId a b | a -> b where
-    computeSourceServerId :: a -> b
+class HasComputedSourceServerId a b | a -> b where
+    computedSourceServerId :: a -> b
 
-class HasComputeStatus a b | a -> b where
-    computeStatus :: a -> b
+class HasComputedStatus a b | a -> b where
+    computedStatus :: a -> b
 
-class HasComputeStorageType a b | a -> b where
-    computeStorageType :: a -> b
+class HasComputedStorageType a b | a -> b where
+    computedStorageType :: a -> b
 
-class HasComputeType' a b | a -> b where
-    computeType' :: a -> b
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b

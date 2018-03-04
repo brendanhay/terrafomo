@@ -33,15 +33,15 @@ module Terrafomo.Icinga2.Lens
     , HasVars (..)
 
     -- ** Computed Attributes
-    , HasComputeAddress (..)
-    , HasComputeArguments (..)
-    , HasComputeCheckCommand (..)
-    , HasComputeCommand (..)
-    , HasComputeDisplayName (..)
-    , HasComputeHostname (..)
-    , HasComputeName (..)
-    , HasComputeTemplates (..)
-    , HasComputeVars (..)
+    , HasComputedAddress (..)
+    , HasComputedArguments (..)
+    , HasComputedCheckCommand (..)
+    , HasComputedCommand (..)
+    , HasComputedDisplayName (..)
+    , HasComputedHostname (..)
+    , HasComputedName (..)
+    , HasComputedTemplates (..)
+    , HasComputedVars (..)
     ) where
 
 import GHC.Base ((.))
@@ -105,29 +105,29 @@ class HasVars a b | a -> b where
 instance HasVars a b => HasVars (TF.Schema l p a) b where
     vars = TF.configuration . vars
 
-class HasComputeAddress a b | a -> b where
-    computeAddress :: a -> b
+class HasComputedAddress a b | a -> b where
+    computedAddress :: a -> b
 
-class HasComputeArguments a b | a -> b where
-    computeArguments :: a -> b
+class HasComputedArguments a b | a -> b where
+    computedArguments :: a -> b
 
-class HasComputeCheckCommand a b | a -> b where
-    computeCheckCommand :: a -> b
+class HasComputedCheckCommand a b | a -> b where
+    computedCheckCommand :: a -> b
 
-class HasComputeCommand a b | a -> b where
-    computeCommand :: a -> b
+class HasComputedCommand a b | a -> b where
+    computedCommand :: a -> b
 
-class HasComputeDisplayName a b | a -> b where
-    computeDisplayName :: a -> b
+class HasComputedDisplayName a b | a -> b where
+    computedDisplayName :: a -> b
 
-class HasComputeHostname a b | a -> b where
-    computeHostname :: a -> b
+class HasComputedHostname a b | a -> b where
+    computedHostname :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeTemplates a b | a -> b where
-    computeTemplates :: a -> b
+class HasComputedTemplates a b | a -> b where
+    computedTemplates :: a -> b
 
-class HasComputeVars a b | a -> b where
-    computeVars :: a -> b
+class HasComputedVars a b | a -> b where
+    computedVars :: a -> b

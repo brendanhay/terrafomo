@@ -64,61 +64,61 @@ module Terrafomo.Triton.Lens
     , HasVlanId (..)
 
     -- ** Computed Attributes
-    , HasComputeAdministratorPw (..)
-    , HasComputeAffinity (..)
-    , HasComputeCloudConfig (..)
-    , HasComputeCns (..)
-    , HasComputeCnsEnabled (..)
-    , HasComputeComputeNode (..)
-    , HasComputeCreated (..)
-    , HasComputeDataset (..)
-    , HasComputeDescription (..)
-    , HasComputeDisk (..)
-    , HasComputeEmail (..)
-    , HasComputeEnabled (..)
-    , HasComputeEndpoint (..)
-    , HasComputeFabric (..)
-    , HasComputeFirewallEnabled (..)
-    , HasComputeGateway (..)
-    , HasComputeId (..)
-    , HasComputeImage (..)
-    , HasComputeInternetNat (..)
-    , HasComputeIp (..)
-    , HasComputeIps (..)
-    , HasComputeKey (..)
-    , HasComputeLocality (..)
-    , HasComputeLogin (..)
-    , HasComputeMac (..)
-    , HasComputeMachineId (..)
-    , HasComputeMemory (..)
-    , HasComputeMetadata (..)
-    , HasComputeMostRecent (..)
-    , HasComputeName (..)
-    , HasComputeNetmask (..)
-    , HasComputeNetwork (..)
-    , HasComputeNetworks (..)
-    , HasComputeNic (..)
-    , HasComputeOs (..)
-    , HasComputeOwner (..)
-    , HasComputePackage (..)
-    , HasComputePrimary (..)
-    , HasComputePrimaryip (..)
-    , HasComputeProvisionEndIp (..)
-    , HasComputeProvisionStartIp (..)
-    , HasComputePublic (..)
-    , HasComputeResolvers (..)
-    , HasComputeRootAuthorizedKeys (..)
-    , HasComputeRoutes (..)
-    , HasComputeRule (..)
-    , HasComputeState (..)
-    , HasComputeSubnet (..)
-    , HasComputeTags (..)
-    , HasComputeType' (..)
-    , HasComputeUpdated (..)
-    , HasComputeUserData (..)
-    , HasComputeUserScript (..)
-    , HasComputeVersion (..)
-    , HasComputeVlanId (..)
+    , HasComputedAdministratorPw (..)
+    , HasComputedAffinity (..)
+    , HasComputedCloudConfig (..)
+    , HasComputedCns (..)
+    , HasComputedCnsEnabled (..)
+    , HasComputedComputeNode (..)
+    , HasComputedCreated (..)
+    , HasComputedDataset (..)
+    , HasComputedDescription (..)
+    , HasComputedDisk (..)
+    , HasComputedEmail (..)
+    , HasComputedEnabled (..)
+    , HasComputedEndpoint (..)
+    , HasComputedFabric (..)
+    , HasComputedFirewallEnabled (..)
+    , HasComputedGateway (..)
+    , HasComputedId (..)
+    , HasComputedImage (..)
+    , HasComputedInternetNat (..)
+    , HasComputedIp (..)
+    , HasComputedIps (..)
+    , HasComputedKey (..)
+    , HasComputedLocality (..)
+    , HasComputedLogin (..)
+    , HasComputedMac (..)
+    , HasComputedMachineId (..)
+    , HasComputedMemory (..)
+    , HasComputedMetadata (..)
+    , HasComputedMostRecent (..)
+    , HasComputedName (..)
+    , HasComputedNetmask (..)
+    , HasComputedNetwork (..)
+    , HasComputedNetworks (..)
+    , HasComputedNic (..)
+    , HasComputedOs (..)
+    , HasComputedOwner (..)
+    , HasComputedPackage (..)
+    , HasComputedPrimary (..)
+    , HasComputedPrimaryip (..)
+    , HasComputedProvisionEndIp (..)
+    , HasComputedProvisionStartIp (..)
+    , HasComputedPublic (..)
+    , HasComputedResolvers (..)
+    , HasComputedRootAuthorizedKeys (..)
+    , HasComputedRoutes (..)
+    , HasComputedRule (..)
+    , HasComputedState (..)
+    , HasComputedSubnet (..)
+    , HasComputedTags (..)
+    , HasComputedType' (..)
+    , HasComputedUpdated (..)
+    , HasComputedUserData (..)
+    , HasComputedUserScript (..)
+    , HasComputedVersion (..)
+    , HasComputedVlanId (..)
     ) where
 
 import GHC.Base ((.))
@@ -368,167 +368,167 @@ class HasVlanId a b | a -> b where
 instance HasVlanId a b => HasVlanId (TF.Schema l p a) b where
     vlanId = TF.configuration . vlanId
 
-class HasComputeAdministratorPw a b | a -> b where
-    computeAdministratorPw :: a -> b
+class HasComputedAdministratorPw a b | a -> b where
+    computedAdministratorPw :: a -> b
 
-class HasComputeAffinity a b | a -> b where
-    computeAffinity :: a -> b
+class HasComputedAffinity a b | a -> b where
+    computedAffinity :: a -> b
 
-class HasComputeCloudConfig a b | a -> b where
-    computeCloudConfig :: a -> b
+class HasComputedCloudConfig a b | a -> b where
+    computedCloudConfig :: a -> b
 
-class HasComputeCns a b | a -> b where
-    computeCns :: a -> b
+class HasComputedCns a b | a -> b where
+    computedCns :: a -> b
 
-class HasComputeCnsEnabled a b | a -> b where
-    computeCnsEnabled :: a -> b
+class HasComputedCnsEnabled a b | a -> b where
+    computedCnsEnabled :: a -> b
 
-class HasComputeComputeNode a b | a -> b where
-    computeComputeNode :: a -> b
+class HasComputedComputeNode a b | a -> b where
+    computedComputeNode :: a -> b
 
-class HasComputeCreated a b | a -> b where
-    computeCreated :: a -> b
+class HasComputedCreated a b | a -> b where
+    computedCreated :: a -> b
 
-class HasComputeDataset a b | a -> b where
-    computeDataset :: a -> b
+class HasComputedDataset a b | a -> b where
+    computedDataset :: a -> b
 
-class HasComputeDescription a b | a -> b where
-    computeDescription :: a -> b
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
 
-class HasComputeDisk a b | a -> b where
-    computeDisk :: a -> b
+class HasComputedDisk a b | a -> b where
+    computedDisk :: a -> b
 
-class HasComputeEmail a b | a -> b where
-    computeEmail :: a -> b
+class HasComputedEmail a b | a -> b where
+    computedEmail :: a -> b
 
-class HasComputeEnabled a b | a -> b where
-    computeEnabled :: a -> b
+class HasComputedEnabled a b | a -> b where
+    computedEnabled :: a -> b
 
-class HasComputeEndpoint a b | a -> b where
-    computeEndpoint :: a -> b
+class HasComputedEndpoint a b | a -> b where
+    computedEndpoint :: a -> b
 
-class HasComputeFabric a b | a -> b where
-    computeFabric :: a -> b
+class HasComputedFabric a b | a -> b where
+    computedFabric :: a -> b
 
-class HasComputeFirewallEnabled a b | a -> b where
-    computeFirewallEnabled :: a -> b
+class HasComputedFirewallEnabled a b | a -> b where
+    computedFirewallEnabled :: a -> b
 
-class HasComputeGateway a b | a -> b where
-    computeGateway :: a -> b
+class HasComputedGateway a b | a -> b where
+    computedGateway :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeImage a b | a -> b where
-    computeImage :: a -> b
+class HasComputedImage a b | a -> b where
+    computedImage :: a -> b
 
-class HasComputeInternetNat a b | a -> b where
-    computeInternetNat :: a -> b
+class HasComputedInternetNat a b | a -> b where
+    computedInternetNat :: a -> b
 
-class HasComputeIp a b | a -> b where
-    computeIp :: a -> b
+class HasComputedIp a b | a -> b where
+    computedIp :: a -> b
 
-class HasComputeIps a b | a -> b where
-    computeIps :: a -> b
+class HasComputedIps a b | a -> b where
+    computedIps :: a -> b
 
-class HasComputeKey a b | a -> b where
-    computeKey :: a -> b
+class HasComputedKey a b | a -> b where
+    computedKey :: a -> b
 
-class HasComputeLocality a b | a -> b where
-    computeLocality :: a -> b
+class HasComputedLocality a b | a -> b where
+    computedLocality :: a -> b
 
-class HasComputeLogin a b | a -> b where
-    computeLogin :: a -> b
+class HasComputedLogin a b | a -> b where
+    computedLogin :: a -> b
 
-class HasComputeMac a b | a -> b where
-    computeMac :: a -> b
+class HasComputedMac a b | a -> b where
+    computedMac :: a -> b
 
-class HasComputeMachineId a b | a -> b where
-    computeMachineId :: a -> b
+class HasComputedMachineId a b | a -> b where
+    computedMachineId :: a -> b
 
-class HasComputeMemory a b | a -> b where
-    computeMemory :: a -> b
+class HasComputedMemory a b | a -> b where
+    computedMemory :: a -> b
 
-class HasComputeMetadata a b | a -> b where
-    computeMetadata :: a -> b
+class HasComputedMetadata a b | a -> b where
+    computedMetadata :: a -> b
 
-class HasComputeMostRecent a b | a -> b where
-    computeMostRecent :: a -> b
+class HasComputedMostRecent a b | a -> b where
+    computedMostRecent :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeNetmask a b | a -> b where
-    computeNetmask :: a -> b
+class HasComputedNetmask a b | a -> b where
+    computedNetmask :: a -> b
 
-class HasComputeNetwork a b | a -> b where
-    computeNetwork :: a -> b
+class HasComputedNetwork a b | a -> b where
+    computedNetwork :: a -> b
 
-class HasComputeNetworks a b | a -> b where
-    computeNetworks :: a -> b
+class HasComputedNetworks a b | a -> b where
+    computedNetworks :: a -> b
 
-class HasComputeNic a b | a -> b where
-    computeNic :: a -> b
+class HasComputedNic a b | a -> b where
+    computedNic :: a -> b
 
-class HasComputeOs a b | a -> b where
-    computeOs :: a -> b
+class HasComputedOs a b | a -> b where
+    computedOs :: a -> b
 
-class HasComputeOwner a b | a -> b where
-    computeOwner :: a -> b
+class HasComputedOwner a b | a -> b where
+    computedOwner :: a -> b
 
-class HasComputePackage a b | a -> b where
-    computePackage :: a -> b
+class HasComputedPackage a b | a -> b where
+    computedPackage :: a -> b
 
-class HasComputePrimary a b | a -> b where
-    computePrimary :: a -> b
+class HasComputedPrimary a b | a -> b where
+    computedPrimary :: a -> b
 
-class HasComputePrimaryip a b | a -> b where
-    computePrimaryip :: a -> b
+class HasComputedPrimaryip a b | a -> b where
+    computedPrimaryip :: a -> b
 
-class HasComputeProvisionEndIp a b | a -> b where
-    computeProvisionEndIp :: a -> b
+class HasComputedProvisionEndIp a b | a -> b where
+    computedProvisionEndIp :: a -> b
 
-class HasComputeProvisionStartIp a b | a -> b where
-    computeProvisionStartIp :: a -> b
+class HasComputedProvisionStartIp a b | a -> b where
+    computedProvisionStartIp :: a -> b
 
-class HasComputePublic a b | a -> b where
-    computePublic :: a -> b
+class HasComputedPublic a b | a -> b where
+    computedPublic :: a -> b
 
-class HasComputeResolvers a b | a -> b where
-    computeResolvers :: a -> b
+class HasComputedResolvers a b | a -> b where
+    computedResolvers :: a -> b
 
-class HasComputeRootAuthorizedKeys a b | a -> b where
-    computeRootAuthorizedKeys :: a -> b
+class HasComputedRootAuthorizedKeys a b | a -> b where
+    computedRootAuthorizedKeys :: a -> b
 
-class HasComputeRoutes a b | a -> b where
-    computeRoutes :: a -> b
+class HasComputedRoutes a b | a -> b where
+    computedRoutes :: a -> b
 
-class HasComputeRule a b | a -> b where
-    computeRule :: a -> b
+class HasComputedRule a b | a -> b where
+    computedRule :: a -> b
 
-class HasComputeState a b | a -> b where
-    computeState :: a -> b
+class HasComputedState a b | a -> b where
+    computedState :: a -> b
 
-class HasComputeSubnet a b | a -> b where
-    computeSubnet :: a -> b
+class HasComputedSubnet a b | a -> b where
+    computedSubnet :: a -> b
 
-class HasComputeTags a b | a -> b where
-    computeTags :: a -> b
+class HasComputedTags a b | a -> b where
+    computedTags :: a -> b
 
-class HasComputeType' a b | a -> b where
-    computeType' :: a -> b
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b
 
-class HasComputeUpdated a b | a -> b where
-    computeUpdated :: a -> b
+class HasComputedUpdated a b | a -> b where
+    computedUpdated :: a -> b
 
-class HasComputeUserData a b | a -> b where
-    computeUserData :: a -> b
+class HasComputedUserData a b | a -> b where
+    computedUserData :: a -> b
 
-class HasComputeUserScript a b | a -> b where
-    computeUserScript :: a -> b
+class HasComputedUserScript a b | a -> b where
+    computedUserScript :: a -> b
 
-class HasComputeVersion a b | a -> b where
-    computeVersion :: a -> b
+class HasComputedVersion a b | a -> b where
+    computedVersion :: a -> b
 
-class HasComputeVlanId a b | a -> b where
-    computeVlanId :: a -> b
+class HasComputedVlanId a b | a -> b where
+    computedVlanId :: a -> b

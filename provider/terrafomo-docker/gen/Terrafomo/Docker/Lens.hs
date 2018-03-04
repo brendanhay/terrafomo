@@ -66,57 +66,57 @@ module Terrafomo.Docker.Lens
     , HasVolumes (..)
 
     -- ** Computed Attributes
-    , HasComputeBridge (..)
-    , HasComputeCapabilities (..)
-    , HasComputeCheckDuplicate (..)
-    , HasComputeCommand (..)
-    , HasComputeCpuShares (..)
-    , HasComputeDestroyGraceSeconds (..)
-    , HasComputeDns (..)
-    , HasComputeDnsOpts (..)
-    , HasComputeDnsSearch (..)
-    , HasComputeDomainname (..)
-    , HasComputeDriver (..)
-    , HasComputeDriverOpts (..)
-    , HasComputeEntrypoint (..)
-    , HasComputeEnv (..)
-    , HasComputeGateway (..)
-    , HasComputeHost (..)
-    , HasComputeHostname (..)
-    , HasComputeId (..)
-    , HasComputeImage (..)
-    , HasComputeInternal (..)
-    , HasComputeIpAddress (..)
-    , HasComputeIpPrefixLength (..)
-    , HasComputeIpamConfig (..)
-    , HasComputeIpamDriver (..)
-    , HasComputeKeepLocally (..)
-    , HasComputeLabels (..)
-    , HasComputeLatest (..)
-    , HasComputeLinks (..)
-    , HasComputeLogDriver (..)
-    , HasComputeLogOpts (..)
-    , HasComputeMaxRetryCount (..)
-    , HasComputeMemory (..)
-    , HasComputeMemorySwap (..)
-    , HasComputeMountpoint (..)
-    , HasComputeMustRun (..)
-    , HasComputeName (..)
-    , HasComputeNetworkAlias (..)
-    , HasComputeNetworkMode (..)
-    , HasComputeNetworks (..)
-    , HasComputeOptions (..)
-    , HasComputePorts (..)
-    , HasComputePrivileged (..)
-    , HasComputePublishAllPorts (..)
-    , HasComputePullTrigger (..)
-    , HasComputePullTriggers (..)
-    , HasComputeRestart (..)
-    , HasComputeScope (..)
-    , HasComputeSha256Digest (..)
-    , HasComputeUpload (..)
-    , HasComputeUser (..)
-    , HasComputeVolumes (..)
+    , HasComputedBridge (..)
+    , HasComputedCapabilities (..)
+    , HasComputedCheckDuplicate (..)
+    , HasComputedCommand (..)
+    , HasComputedCpuShares (..)
+    , HasComputedDestroyGraceSeconds (..)
+    , HasComputedDns (..)
+    , HasComputedDnsOpts (..)
+    , HasComputedDnsSearch (..)
+    , HasComputedDomainname (..)
+    , HasComputedDriver (..)
+    , HasComputedDriverOpts (..)
+    , HasComputedEntrypoint (..)
+    , HasComputedEnv (..)
+    , HasComputedGateway (..)
+    , HasComputedHost (..)
+    , HasComputedHostname (..)
+    , HasComputedId (..)
+    , HasComputedImage (..)
+    , HasComputedInternal (..)
+    , HasComputedIpAddress (..)
+    , HasComputedIpPrefixLength (..)
+    , HasComputedIpamConfig (..)
+    , HasComputedIpamDriver (..)
+    , HasComputedKeepLocally (..)
+    , HasComputedLabels (..)
+    , HasComputedLatest (..)
+    , HasComputedLinks (..)
+    , HasComputedLogDriver (..)
+    , HasComputedLogOpts (..)
+    , HasComputedMaxRetryCount (..)
+    , HasComputedMemory (..)
+    , HasComputedMemorySwap (..)
+    , HasComputedMountpoint (..)
+    , HasComputedMustRun (..)
+    , HasComputedName (..)
+    , HasComputedNetworkAlias (..)
+    , HasComputedNetworkMode (..)
+    , HasComputedNetworks (..)
+    , HasComputedOptions (..)
+    , HasComputedPorts (..)
+    , HasComputedPrivileged (..)
+    , HasComputedPublishAllPorts (..)
+    , HasComputedPullTrigger (..)
+    , HasComputedPullTriggers (..)
+    , HasComputedRestart (..)
+    , HasComputedScope (..)
+    , HasComputedSha256Digest (..)
+    , HasComputedUpload (..)
+    , HasComputedUser (..)
+    , HasComputedVolumes (..)
     ) where
 
 import GHC.Base ((.))
@@ -378,155 +378,155 @@ class HasVolumes a b | a -> b where
 instance HasVolumes a b => HasVolumes (TF.Schema l p a) b where
     volumes = TF.configuration . volumes
 
-class HasComputeBridge a b | a -> b where
-    computeBridge :: a -> b
+class HasComputedBridge a b | a -> b where
+    computedBridge :: a -> b
 
-class HasComputeCapabilities a b | a -> b where
-    computeCapabilities :: a -> b
+class HasComputedCapabilities a b | a -> b where
+    computedCapabilities :: a -> b
 
-class HasComputeCheckDuplicate a b | a -> b where
-    computeCheckDuplicate :: a -> b
+class HasComputedCheckDuplicate a b | a -> b where
+    computedCheckDuplicate :: a -> b
 
-class HasComputeCommand a b | a -> b where
-    computeCommand :: a -> b
+class HasComputedCommand a b | a -> b where
+    computedCommand :: a -> b
 
-class HasComputeCpuShares a b | a -> b where
-    computeCpuShares :: a -> b
+class HasComputedCpuShares a b | a -> b where
+    computedCpuShares :: a -> b
 
-class HasComputeDestroyGraceSeconds a b | a -> b where
-    computeDestroyGraceSeconds :: a -> b
+class HasComputedDestroyGraceSeconds a b | a -> b where
+    computedDestroyGraceSeconds :: a -> b
 
-class HasComputeDns a b | a -> b where
-    computeDns :: a -> b
+class HasComputedDns a b | a -> b where
+    computedDns :: a -> b
 
-class HasComputeDnsOpts a b | a -> b where
-    computeDnsOpts :: a -> b
+class HasComputedDnsOpts a b | a -> b where
+    computedDnsOpts :: a -> b
 
-class HasComputeDnsSearch a b | a -> b where
-    computeDnsSearch :: a -> b
+class HasComputedDnsSearch a b | a -> b where
+    computedDnsSearch :: a -> b
 
-class HasComputeDomainname a b | a -> b where
-    computeDomainname :: a -> b
+class HasComputedDomainname a b | a -> b where
+    computedDomainname :: a -> b
 
-class HasComputeDriver a b | a -> b where
-    computeDriver :: a -> b
+class HasComputedDriver a b | a -> b where
+    computedDriver :: a -> b
 
-class HasComputeDriverOpts a b | a -> b where
-    computeDriverOpts :: a -> b
+class HasComputedDriverOpts a b | a -> b where
+    computedDriverOpts :: a -> b
 
-class HasComputeEntrypoint a b | a -> b where
-    computeEntrypoint :: a -> b
+class HasComputedEntrypoint a b | a -> b where
+    computedEntrypoint :: a -> b
 
-class HasComputeEnv a b | a -> b where
-    computeEnv :: a -> b
+class HasComputedEnv a b | a -> b where
+    computedEnv :: a -> b
 
-class HasComputeGateway a b | a -> b where
-    computeGateway :: a -> b
+class HasComputedGateway a b | a -> b where
+    computedGateway :: a -> b
 
-class HasComputeHost a b | a -> b where
-    computeHost :: a -> b
+class HasComputedHost a b | a -> b where
+    computedHost :: a -> b
 
-class HasComputeHostname a b | a -> b where
-    computeHostname :: a -> b
+class HasComputedHostname a b | a -> b where
+    computedHostname :: a -> b
 
-class HasComputeId a b | a -> b where
-    computeId :: a -> b
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
-class HasComputeImage a b | a -> b where
-    computeImage :: a -> b
+class HasComputedImage a b | a -> b where
+    computedImage :: a -> b
 
-class HasComputeInternal a b | a -> b where
-    computeInternal :: a -> b
+class HasComputedInternal a b | a -> b where
+    computedInternal :: a -> b
 
-class HasComputeIpAddress a b | a -> b where
-    computeIpAddress :: a -> b
+class HasComputedIpAddress a b | a -> b where
+    computedIpAddress :: a -> b
 
-class HasComputeIpPrefixLength a b | a -> b where
-    computeIpPrefixLength :: a -> b
+class HasComputedIpPrefixLength a b | a -> b where
+    computedIpPrefixLength :: a -> b
 
-class HasComputeIpamConfig a b | a -> b where
-    computeIpamConfig :: a -> b
+class HasComputedIpamConfig a b | a -> b where
+    computedIpamConfig :: a -> b
 
-class HasComputeIpamDriver a b | a -> b where
-    computeIpamDriver :: a -> b
+class HasComputedIpamDriver a b | a -> b where
+    computedIpamDriver :: a -> b
 
-class HasComputeKeepLocally a b | a -> b where
-    computeKeepLocally :: a -> b
+class HasComputedKeepLocally a b | a -> b where
+    computedKeepLocally :: a -> b
 
-class HasComputeLabels a b | a -> b where
-    computeLabels :: a -> b
+class HasComputedLabels a b | a -> b where
+    computedLabels :: a -> b
 
-class HasComputeLatest a b | a -> b where
-    computeLatest :: a -> b
+class HasComputedLatest a b | a -> b where
+    computedLatest :: a -> b
 
-class HasComputeLinks a b | a -> b where
-    computeLinks :: a -> b
+class HasComputedLinks a b | a -> b where
+    computedLinks :: a -> b
 
-class HasComputeLogDriver a b | a -> b where
-    computeLogDriver :: a -> b
+class HasComputedLogDriver a b | a -> b where
+    computedLogDriver :: a -> b
 
-class HasComputeLogOpts a b | a -> b where
-    computeLogOpts :: a -> b
+class HasComputedLogOpts a b | a -> b where
+    computedLogOpts :: a -> b
 
-class HasComputeMaxRetryCount a b | a -> b where
-    computeMaxRetryCount :: a -> b
+class HasComputedMaxRetryCount a b | a -> b where
+    computedMaxRetryCount :: a -> b
 
-class HasComputeMemory a b | a -> b where
-    computeMemory :: a -> b
+class HasComputedMemory a b | a -> b where
+    computedMemory :: a -> b
 
-class HasComputeMemorySwap a b | a -> b where
-    computeMemorySwap :: a -> b
+class HasComputedMemorySwap a b | a -> b where
+    computedMemorySwap :: a -> b
 
-class HasComputeMountpoint a b | a -> b where
-    computeMountpoint :: a -> b
+class HasComputedMountpoint a b | a -> b where
+    computedMountpoint :: a -> b
 
-class HasComputeMustRun a b | a -> b where
-    computeMustRun :: a -> b
+class HasComputedMustRun a b | a -> b where
+    computedMustRun :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputeNetworkAlias a b | a -> b where
-    computeNetworkAlias :: a -> b
+class HasComputedNetworkAlias a b | a -> b where
+    computedNetworkAlias :: a -> b
 
-class HasComputeNetworkMode a b | a -> b where
-    computeNetworkMode :: a -> b
+class HasComputedNetworkMode a b | a -> b where
+    computedNetworkMode :: a -> b
 
-class HasComputeNetworks a b | a -> b where
-    computeNetworks :: a -> b
+class HasComputedNetworks a b | a -> b where
+    computedNetworks :: a -> b
 
-class HasComputeOptions a b | a -> b where
-    computeOptions :: a -> b
+class HasComputedOptions a b | a -> b where
+    computedOptions :: a -> b
 
-class HasComputePorts a b | a -> b where
-    computePorts :: a -> b
+class HasComputedPorts a b | a -> b where
+    computedPorts :: a -> b
 
-class HasComputePrivileged a b | a -> b where
-    computePrivileged :: a -> b
+class HasComputedPrivileged a b | a -> b where
+    computedPrivileged :: a -> b
 
-class HasComputePublishAllPorts a b | a -> b where
-    computePublishAllPorts :: a -> b
+class HasComputedPublishAllPorts a b | a -> b where
+    computedPublishAllPorts :: a -> b
 
-class HasComputePullTrigger a b | a -> b where
-    computePullTrigger :: a -> b
+class HasComputedPullTrigger a b | a -> b where
+    computedPullTrigger :: a -> b
 
-class HasComputePullTriggers a b | a -> b where
-    computePullTriggers :: a -> b
+class HasComputedPullTriggers a b | a -> b where
+    computedPullTriggers :: a -> b
 
-class HasComputeRestart a b | a -> b where
-    computeRestart :: a -> b
+class HasComputedRestart a b | a -> b where
+    computedRestart :: a -> b
 
-class HasComputeScope a b | a -> b where
-    computeScope :: a -> b
+class HasComputedScope a b | a -> b where
+    computedScope :: a -> b
 
-class HasComputeSha256Digest a b | a -> b where
-    computeSha256Digest :: a -> b
+class HasComputedSha256Digest a b | a -> b where
+    computedSha256Digest :: a -> b
 
-class HasComputeUpload a b | a -> b where
-    computeUpload :: a -> b
+class HasComputedUpload a b | a -> b where
+    computedUpload :: a -> b
 
-class HasComputeUser a b | a -> b where
-    computeUser :: a -> b
+class HasComputedUser a b | a -> b where
+    computedUser :: a -> b
 
-class HasComputeVolumes a b | a -> b where
-    computeVolumes :: a -> b
+class HasComputedVolumes a b | a -> b where
+    computedVolumes :: a -> b

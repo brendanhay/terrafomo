@@ -35,7 +35,7 @@ module Terrafomo.Kubernetes.DataSource
     , P.HasMetadata (..)
 
     -- ** Computed Attributes
-    , P.HasComputeMetadata (..)
+    , P.HasComputedMetadata (..)
 
     -- * Re-exported Types
     , module P
@@ -86,8 +86,8 @@ instance P.HasMetadata (DataService s) (TF.Attr s P.Text) where
         lens (_metadata :: DataService s -> TF.Attr s P.Text)
              (\s a -> s { _metadata = a } :: DataService s)
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (DataService s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (DataService s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: DataService s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -120,8 +120,8 @@ instance P.HasMetadata (DataStorageClass s) (TF.Attr s P.Text) where
         lens (_metadata :: DataStorageClass s -> TF.Attr s P.Text)
              (\s a -> s { _metadata = a } :: DataStorageClass s)
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (DataStorageClass s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (DataStorageClass s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: DataStorageClass s -> TF.Attr s P.Text)
             . TF.refValue
 

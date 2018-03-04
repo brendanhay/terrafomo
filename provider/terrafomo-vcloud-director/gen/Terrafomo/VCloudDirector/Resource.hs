@@ -85,42 +85,42 @@ module Terrafomo.VCloudDirector.Resource
     , P.HasVappName (..)
 
     -- ** Computed Attributes
-    , P.HasComputeCatalogName (..)
-    , P.HasComputeCpus (..)
-    , P.HasComputeDefaultAction (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeDhcpPool (..)
-    , P.HasComputeDns1 (..)
-    , P.HasComputeDns2 (..)
-    , P.HasComputeDnsSuffix (..)
-    , P.HasComputeEdgeGateway (..)
-    , P.HasComputeEncryptionProtocol (..)
-    , P.HasComputeExternalIp (..)
-    , P.HasComputeGateway (..)
-    , P.HasComputeInitscript (..)
-    , P.HasComputeInternalIp (..)
-    , P.HasComputeIp (..)
-    , P.HasComputeLocalId (..)
-    , P.HasComputeLocalIpAddress (..)
-    , P.HasComputeLocalSubnets (..)
-    , P.HasComputeMemory (..)
-    , P.HasComputeMetadata (..)
-    , P.HasComputeMtu (..)
-    , P.HasComputeName (..)
-    , P.HasComputeNetmask (..)
-    , P.HasComputeNetworkName (..)
-    , P.HasComputeOvf (..)
-    , P.HasComputePeerId (..)
-    , P.HasComputePeerIpAddress (..)
-    , P.HasComputePeerSubnets (..)
-    , P.HasComputePort (..)
-    , P.HasComputePowerOn (..)
-    , P.HasComputeRule (..)
-    , P.HasComputeShared (..)
-    , P.HasComputeSharedSecret (..)
-    , P.HasComputeStaticIpPool (..)
-    , P.HasComputeTemplateName (..)
-    , P.HasComputeVappName (..)
+    , P.HasComputedCatalogName (..)
+    , P.HasComputedCpus (..)
+    , P.HasComputedDefaultAction (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDhcpPool (..)
+    , P.HasComputedDns1 (..)
+    , P.HasComputedDns2 (..)
+    , P.HasComputedDnsSuffix (..)
+    , P.HasComputedEdgeGateway (..)
+    , P.HasComputedEncryptionProtocol (..)
+    , P.HasComputedExternalIp (..)
+    , P.HasComputedGateway (..)
+    , P.HasComputedInitscript (..)
+    , P.HasComputedInternalIp (..)
+    , P.HasComputedIp (..)
+    , P.HasComputedLocalId (..)
+    , P.HasComputedLocalIpAddress (..)
+    , P.HasComputedLocalSubnets (..)
+    , P.HasComputedMemory (..)
+    , P.HasComputedMetadata (..)
+    , P.HasComputedMtu (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNetmask (..)
+    , P.HasComputedNetworkName (..)
+    , P.HasComputedOvf (..)
+    , P.HasComputedPeerId (..)
+    , P.HasComputedPeerIpAddress (..)
+    , P.HasComputedPeerSubnets (..)
+    , P.HasComputedPort (..)
+    , P.HasComputedPowerOn (..)
+    , P.HasComputedRule (..)
+    , P.HasComputedShared (..)
+    , P.HasComputedSharedSecret (..)
+    , P.HasComputedStaticIpPool (..)
+    , P.HasComputedTemplateName (..)
+    , P.HasComputedVappName (..)
 
     -- * Re-exported Types
     , module P
@@ -195,23 +195,23 @@ instance P.HasPort (ResourceDnat s) (TF.Attr s P.Text) where
         lens (_port :: ResourceDnat s -> TF.Attr s P.Text)
              (\s a -> s { _port = a } :: ResourceDnat s)
 
-instance s ~ s' => P.HasComputeEdgeGateway (TF.Ref s' (ResourceDnat s)) (TF.Attr s P.Text) where
-    computeEdgeGateway =
+instance s ~ s' => P.HasComputedEdgeGateway (TF.Ref s' (ResourceDnat s)) (TF.Attr s P.Text) where
+    computedEdgeGateway =
         (_edge_gateway :: ResourceDnat s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeExternalIp (TF.Ref s' (ResourceDnat s)) (TF.Attr s P.Text) where
-    computeExternalIp =
+instance s ~ s' => P.HasComputedExternalIp (TF.Ref s' (ResourceDnat s)) (TF.Attr s P.Text) where
+    computedExternalIp =
         (_external_ip :: ResourceDnat s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInternalIp (TF.Ref s' (ResourceDnat s)) (TF.Attr s P.Text) where
-    computeInternalIp =
+instance s ~ s' => P.HasComputedInternalIp (TF.Ref s' (ResourceDnat s)) (TF.Attr s P.Text) where
+    computedInternalIp =
         (_internal_ip :: ResourceDnat s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePort (TF.Ref s' (ResourceDnat s)) (TF.Attr s P.Text) where
-    computePort =
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (ResourceDnat s)) (TF.Attr s P.Text) where
+    computedPort =
         (_port :: ResourceDnat s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -333,63 +333,63 @@ instance P.HasSharedSecret (ResourceEdgegatewayVpn s) (TF.Attr s P.Text) where
         lens (_shared_secret :: ResourceEdgegatewayVpn s -> TF.Attr s P.Text)
              (\s a -> s { _shared_secret = a } :: ResourceEdgegatewayVpn s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
-    computeDescription =
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
+    computedDescription =
         (_description :: ResourceEdgegatewayVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEdgeGateway (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
-    computeEdgeGateway =
+instance s ~ s' => P.HasComputedEdgeGateway (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
+    computedEdgeGateway =
         (_edge_gateway :: ResourceEdgegatewayVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEncryptionProtocol (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
-    computeEncryptionProtocol =
+instance s ~ s' => P.HasComputedEncryptionProtocol (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
+    computedEncryptionProtocol =
         (_encryption_protocol :: ResourceEdgegatewayVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLocalId (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
-    computeLocalId =
+instance s ~ s' => P.HasComputedLocalId (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
+    computedLocalId =
         (_local_id :: ResourceEdgegatewayVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLocalIpAddress (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
-    computeLocalIpAddress =
+instance s ~ s' => P.HasComputedLocalIpAddress (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
+    computedLocalIpAddress =
         (_local_ip_address :: ResourceEdgegatewayVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeLocalSubnets (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
-    computeLocalSubnets =
+instance s ~ s' => P.HasComputedLocalSubnets (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
+    computedLocalSubnets =
         (_local_subnets :: ResourceEdgegatewayVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMtu (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
-    computeMtu =
+instance s ~ s' => P.HasComputedMtu (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
+    computedMtu =
         (_mtu :: ResourceEdgegatewayVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceEdgegatewayVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePeerId (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
-    computePeerId =
+instance s ~ s' => P.HasComputedPeerId (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
+    computedPeerId =
         (_peer_id :: ResourceEdgegatewayVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePeerIpAddress (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
-    computePeerIpAddress =
+instance s ~ s' => P.HasComputedPeerIpAddress (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
+    computedPeerIpAddress =
         (_peer_ip_address :: ResourceEdgegatewayVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePeerSubnets (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
-    computePeerSubnets =
+instance s ~ s' => P.HasComputedPeerSubnets (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
+    computedPeerSubnets =
         (_peer_subnets :: ResourceEdgegatewayVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSharedSecret (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
-    computeSharedSecret =
+instance s ~ s' => P.HasComputedSharedSecret (TF.Ref s' (ResourceEdgegatewayVpn s)) (TF.Attr s P.Text) where
+    computedSharedSecret =
         (_shared_secret :: ResourceEdgegatewayVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -447,18 +447,18 @@ instance P.HasRule (ResourceFirewallRules s) (TF.Attr s P.Text) where
         lens (_rule :: ResourceFirewallRules s -> TF.Attr s P.Text)
              (\s a -> s { _rule = a } :: ResourceFirewallRules s)
 
-instance s ~ s' => P.HasComputeDefaultAction (TF.Ref s' (ResourceFirewallRules s)) (TF.Attr s P.Text) where
-    computeDefaultAction =
+instance s ~ s' => P.HasComputedDefaultAction (TF.Ref s' (ResourceFirewallRules s)) (TF.Attr s P.Text) where
+    computedDefaultAction =
         (_default_action :: ResourceFirewallRules s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEdgeGateway (TF.Ref s' (ResourceFirewallRules s)) (TF.Attr s P.Text) where
-    computeEdgeGateway =
+instance s ~ s' => P.HasComputedEdgeGateway (TF.Ref s' (ResourceFirewallRules s)) (TF.Attr s P.Text) where
+    computedEdgeGateway =
         (_edge_gateway :: ResourceFirewallRules s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeRule (TF.Ref s' (ResourceFirewallRules s)) (TF.Attr s P.Text) where
-    computeRule =
+instance s ~ s' => P.HasComputedRule (TF.Ref s' (ResourceFirewallRules s)) (TF.Attr s P.Text) where
+    computedRule =
         (_rule :: ResourceFirewallRules s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -563,53 +563,53 @@ instance P.HasStaticIpPool (ResourceNetwork s) (TF.Attr s P.Text) where
         lens (_static_ip_pool :: ResourceNetwork s -> TF.Attr s P.Text)
              (\s a -> s { _static_ip_pool = a } :: ResourceNetwork s)
 
-instance s ~ s' => P.HasComputeDhcpPool (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
-    computeDhcpPool =
+instance s ~ s' => P.HasComputedDhcpPool (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
+    computedDhcpPool =
         (_dhcp_pool :: ResourceNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDns1 (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
-    computeDns1 =
+instance s ~ s' => P.HasComputedDns1 (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
+    computedDns1 =
         (_dns1 :: ResourceNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDns2 (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
-    computeDns2 =
+instance s ~ s' => P.HasComputedDns2 (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
+    computedDns2 =
         (_dns2 :: ResourceNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeDnsSuffix (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
-    computeDnsSuffix =
+instance s ~ s' => P.HasComputedDnsSuffix (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
+    computedDnsSuffix =
         (_dns_suffix :: ResourceNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeEdgeGateway (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
-    computeEdgeGateway =
+instance s ~ s' => P.HasComputedEdgeGateway (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
+    computedEdgeGateway =
         (_edge_gateway :: ResourceNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeGateway (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
-    computeGateway =
+instance s ~ s' => P.HasComputedGateway (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
+    computedGateway =
         (_gateway :: ResourceNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNetmask (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
-    computeNetmask =
+instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
+    computedNetmask =
         (_netmask :: ResourceNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeShared (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
-    computeShared =
+instance s ~ s' => P.HasComputedShared (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
+    computedShared =
         (_shared :: ResourceNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStaticIpPool (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
-    computeStaticIpPool =
+instance s ~ s' => P.HasComputedStaticIpPool (TF.Ref s' (ResourceNetwork s)) (TF.Attr s P.Text) where
+    computedStaticIpPool =
         (_static_ip_pool :: ResourceNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -665,18 +665,18 @@ instance P.HasInternalIp (ResourceSnat s) (TF.Attr s P.Text) where
         lens (_internal_ip :: ResourceSnat s -> TF.Attr s P.Text)
              (\s a -> s { _internal_ip = a } :: ResourceSnat s)
 
-instance s ~ s' => P.HasComputeEdgeGateway (TF.Ref s' (ResourceSnat s)) (TF.Attr s P.Text) where
-    computeEdgeGateway =
+instance s ~ s' => P.HasComputedEdgeGateway (TF.Ref s' (ResourceSnat s)) (TF.Attr s P.Text) where
+    computedEdgeGateway =
         (_edge_gateway :: ResourceSnat s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeExternalIp (TF.Ref s' (ResourceSnat s)) (TF.Attr s P.Text) where
-    computeExternalIp =
+instance s ~ s' => P.HasComputedExternalIp (TF.Ref s' (ResourceSnat s)) (TF.Attr s P.Text) where
+    computedExternalIp =
         (_external_ip :: ResourceSnat s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInternalIp (TF.Ref s' (ResourceSnat s)) (TF.Attr s P.Text) where
-    computeInternalIp =
+instance s ~ s' => P.HasComputedInternalIp (TF.Ref s' (ResourceSnat s)) (TF.Attr s P.Text) where
+    computedInternalIp =
         (_internal_ip :: ResourceSnat s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -789,58 +789,58 @@ instance P.HasTemplateName (ResourceVapp s) (TF.Attr s P.Text) where
         lens (_template_name :: ResourceVapp s -> TF.Attr s P.Text)
              (\s a -> s { _template_name = a } :: ResourceVapp s)
 
-instance s ~ s' => P.HasComputeCatalogName (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
-    computeCatalogName =
+instance s ~ s' => P.HasComputedCatalogName (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
+    computedCatalogName =
         (_catalog_name :: ResourceVapp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCpus (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
-    computeCpus =
+instance s ~ s' => P.HasComputedCpus (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
+    computedCpus =
         (_cpus :: ResourceVapp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInitscript (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
-    computeInitscript =
+instance s ~ s' => P.HasComputedInitscript (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
+    computedInitscript =
         (_initscript :: ResourceVapp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIp (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
-    computeIp =
+instance s ~ s' => P.HasComputedIp (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
+    computedIp =
         (_ip :: ResourceVapp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMemory (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
-    computeMemory =
+instance s ~ s' => P.HasComputedMemory (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
+    computedMemory =
         (_memory :: ResourceVapp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourceVapp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceVapp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeNetworkName (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
-    computeNetworkName =
+instance s ~ s' => P.HasComputedNetworkName (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
+    computedNetworkName =
         (_network_name :: ResourceVapp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOvf (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
-    computeOvf =
+instance s ~ s' => P.HasComputedOvf (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
+    computedOvf =
         (_ovf :: ResourceVapp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePowerOn (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
-    computePowerOn =
+instance s ~ s' => P.HasComputedPowerOn (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
+    computedPowerOn =
         (_power_on :: ResourceVapp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTemplateName (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
-    computeTemplateName =
+instance s ~ s' => P.HasComputedTemplateName (TF.Ref s' (ResourceVapp s)) (TF.Attr s P.Text) where
+    computedTemplateName =
         (_template_name :: ResourceVapp s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -948,48 +948,48 @@ instance P.HasVappName (ResourceVappVm s) (TF.Attr s P.Text) where
         lens (_vapp_name :: ResourceVappVm s -> TF.Attr s P.Text)
              (\s a -> s { _vapp_name = a } :: ResourceVappVm s)
 
-instance s ~ s' => P.HasComputeCatalogName (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
-    computeCatalogName =
+instance s ~ s' => P.HasComputedCatalogName (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
+    computedCatalogName =
         (_catalog_name :: ResourceVappVm s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeCpus (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
-    computeCpus =
+instance s ~ s' => P.HasComputedCpus (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
+    computedCpus =
         (_cpus :: ResourceVappVm s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeInitscript (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
-    computeInitscript =
+instance s ~ s' => P.HasComputedInitscript (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
+    computedInitscript =
         (_initscript :: ResourceVappVm s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeIp (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
-    computeIp =
+instance s ~ s' => P.HasComputedIp (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
+    computedIp =
         (_ip :: ResourceVappVm s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMemory (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
-    computeMemory =
+instance s ~ s' => P.HasComputedMemory (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
+    computedMemory =
         (_memory :: ResourceVappVm s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: ResourceVappVm s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputePowerOn (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
-    computePowerOn =
+instance s ~ s' => P.HasComputedPowerOn (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
+    computedPowerOn =
         (_power_on :: ResourceVappVm s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeTemplateName (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
-    computeTemplateName =
+instance s ~ s' => P.HasComputedTemplateName (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
+    computedTemplateName =
         (_template_name :: ResourceVappVm s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeVappName (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
-    computeVappName =
+instance s ~ s' => P.HasComputedVappName (TF.Ref s' (ResourceVappVm s)) (TF.Attr s P.Text) where
+    computedVappName =
         (_vapp_name :: ResourceVappVm s -> TF.Attr s P.Text)
             . TF.refValue
 

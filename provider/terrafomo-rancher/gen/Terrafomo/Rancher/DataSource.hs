@@ -39,23 +39,23 @@ module Terrafomo.Rancher.DataSource
     , P.HasName (..)
 
     -- ** Computed Attributes
-    , P.HasComputeAlgorithm (..)
-    , P.HasComputeCertFingerprint (..)
-    , P.HasComputeCn (..)
-    , P.HasComputeDescription (..)
-    , P.HasComputeEnvironmentId (..)
-    , P.HasComputeExpiresAt (..)
-    , P.HasComputeId (..)
-    , P.HasComputeIssuedAt (..)
-    , P.HasComputeIssuer (..)
-    , P.HasComputeMember (..)
-    , P.HasComputeName (..)
-    , P.HasComputeOrchestration (..)
-    , P.HasComputeProjectTemplateId (..)
-    , P.HasComputeSerialNumber (..)
-    , P.HasComputeSubjectAlternativeNames (..)
-    , P.HasComputeValue (..)
-    , P.HasComputeVersion (..)
+    , P.HasComputedAlgorithm (..)
+    , P.HasComputedCertFingerprint (..)
+    , P.HasComputedCn (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedEnvironmentId (..)
+    , P.HasComputedExpiresAt (..)
+    , P.HasComputedId (..)
+    , P.HasComputedIssuedAt (..)
+    , P.HasComputedIssuer (..)
+    , P.HasComputedMember (..)
+    , P.HasComputedName (..)
+    , P.HasComputedOrchestration (..)
+    , P.HasComputedProjectTemplateId (..)
+    , P.HasComputedSerialNumber (..)
+    , P.HasComputedSubjectAlternativeNames (..)
+    , P.HasComputedValue (..)
+    , P.HasComputedVersion (..)
 
     -- * Re-exported Types
     , module P
@@ -112,45 +112,45 @@ instance P.HasName (DataCertificate s) (TF.Attr s P.Text) where
         lens (_name :: DataCertificate s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataCertificate s)
 
-instance s ~ s' => P.HasComputeAlgorithm (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
-    computeAlgorithm x = TF.compute (TF.refKey x) "algorithm"
+instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
+    computedAlgorithm x = TF.compute (TF.refKey x) "algorithm"
 
-instance s ~ s' => P.HasComputeCertFingerprint (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
-    computeCertFingerprint x = TF.compute (TF.refKey x) "cert_fingerprint"
+instance s ~ s' => P.HasComputedCertFingerprint (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
+    computedCertFingerprint x = TF.compute (TF.refKey x) "cert_fingerprint"
 
-instance s ~ s' => P.HasComputeCn (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
-    computeCn x = TF.compute (TF.refKey x) "cn"
+instance s ~ s' => P.HasComputedCn (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
+    computedCn x = TF.compute (TF.refKey x) "cn"
 
-instance s ~ s' => P.HasComputeEnvironmentId (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
-    computeEnvironmentId =
+instance s ~ s' => P.HasComputedEnvironmentId (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
+    computedEnvironmentId =
         (_environment_id :: DataCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeExpiresAt (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
-    computeExpiresAt x = TF.compute (TF.refKey x) "expires_at"
+instance s ~ s' => P.HasComputedExpiresAt (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
+    computedExpiresAt x = TF.compute (TF.refKey x) "expires_at"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeIssuedAt (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
-    computeIssuedAt x = TF.compute (TF.refKey x) "issued_at"
+instance s ~ s' => P.HasComputedIssuedAt (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
+    computedIssuedAt x = TF.compute (TF.refKey x) "issued_at"
 
-instance s ~ s' => P.HasComputeIssuer (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
-    computeIssuer x = TF.compute (TF.refKey x) "issuer"
+instance s ~ s' => P.HasComputedIssuer (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
+    computedIssuer x = TF.compute (TF.refKey x) "issuer"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSerialNumber (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
-    computeSerialNumber x = TF.compute (TF.refKey x) "serial_number"
+instance s ~ s' => P.HasComputedSerialNumber (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
+    computedSerialNumber x = TF.compute (TF.refKey x) "serial_number"
 
-instance s ~ s' => P.HasComputeSubjectAlternativeNames (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
-    computeSubjectAlternativeNames x = TF.compute (TF.refKey x) "subject_alternative_names"
+instance s ~ s' => P.HasComputedSubjectAlternativeNames (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
+    computedSubjectAlternativeNames x = TF.compute (TF.refKey x) "subject_alternative_names"
 
-instance s ~ s' => P.HasComputeVersion (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
-    computeVersion x = TF.compute (TF.refKey x) "version"
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DataCertificate s)) (TF.Attr s P.Text) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 dataCertificate :: TF.DataSource P.Rancher (DataCertificate s)
 dataCertificate =
@@ -179,25 +179,25 @@ instance P.HasName (DataEnvironment s) (TF.Attr s P.Text) where
         lens (_name :: DataEnvironment s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataEnvironment s)
 
-instance s ~ s' => P.HasComputeDescription (TF.Ref s' (DataEnvironment s)) (TF.Attr s P.Text) where
-    computeDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataEnvironment s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputeId (TF.Ref s' (DataEnvironment s)) (TF.Attr s P.Text) where
-    computeId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataEnvironment s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputeMember (TF.Ref s' (DataEnvironment s)) (TF.Attr s P.Text) where
-    computeMember x = TF.compute (TF.refKey x) "member"
+instance s ~ s' => P.HasComputedMember (TF.Ref s' (DataEnvironment s)) (TF.Attr s P.Text) where
+    computedMember x = TF.compute (TF.refKey x) "member"
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataEnvironment s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataEnvironment s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataEnvironment s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeOrchestration (TF.Ref s' (DataEnvironment s)) (TF.Attr s P.Text) where
-    computeOrchestration x = TF.compute (TF.refKey x) "orchestration"
+instance s ~ s' => P.HasComputedOrchestration (TF.Ref s' (DataEnvironment s)) (TF.Attr s P.Text) where
+    computedOrchestration x = TF.compute (TF.refKey x) "orchestration"
 
-instance s ~ s' => P.HasComputeProjectTemplateId (TF.Ref s' (DataEnvironment s)) (TF.Attr s P.Text) where
-    computeProjectTemplateId x = TF.compute (TF.refKey x) "project_template_id"
+instance s ~ s' => P.HasComputedProjectTemplateId (TF.Ref s' (DataEnvironment s)) (TF.Attr s P.Text) where
+    computedProjectTemplateId x = TF.compute (TF.refKey x) "project_template_id"
 
 dataEnvironment :: TF.DataSource P.Rancher (DataEnvironment s)
 dataEnvironment =
@@ -225,13 +225,13 @@ instance P.HasName (DataSetting s) (TF.Attr s P.Text) where
         lens (_name :: DataSetting s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataSetting s)
 
-instance s ~ s' => P.HasComputeName (TF.Ref s' (DataSetting s)) (TF.Attr s P.Text) where
-    computeName =
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataSetting s)) (TF.Attr s P.Text) where
+    computedName =
         (_name :: DataSetting s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeValue (TF.Ref s' (DataSetting s)) (TF.Attr s P.Text) where
-    computeValue x = TF.compute (TF.refKey x) "value"
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (DataSetting s)) (TF.Attr s P.Text) where
+    computedValue x = TF.compute (TF.refKey x) "value"
 
 dataSetting :: TF.DataSource P.Rancher (DataSetting s)
 dataSetting =

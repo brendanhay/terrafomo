@@ -76,16 +76,16 @@ module Terrafomo.Kubernetes.Resource
     , P.HasWaitUntilBound (..)
 
     -- ** Computed Attributes
-    , P.HasComputeData' (..)
-    , P.HasComputeDefaultSecretName (..)
-    , P.HasComputeImagePullSecret (..)
-    , P.HasComputeMetadata (..)
-    , P.HasComputeParameters (..)
-    , P.HasComputeSecret (..)
-    , P.HasComputeSpec (..)
-    , P.HasComputeStorageProvisioner (..)
-    , P.HasComputeType' (..)
-    , P.HasComputeWaitUntilBound (..)
+    , P.HasComputedData' (..)
+    , P.HasComputedDefaultSecretName (..)
+    , P.HasComputedImagePullSecret (..)
+    , P.HasComputedMetadata (..)
+    , P.HasComputedParameters (..)
+    , P.HasComputedSecret (..)
+    , P.HasComputedSpec (..)
+    , P.HasComputedStorageProvisioner (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedWaitUntilBound (..)
 
     -- * Re-exported Types
     , module P
@@ -145,13 +145,13 @@ instance P.HasMetadata (ResourceConfigMap s) (TF.Attr s P.Text) where
         lens (_metadata :: ResourceConfigMap s -> TF.Attr s P.Text)
              (\s a -> s { _metadata = a } :: ResourceConfigMap s)
 
-instance s ~ s' => P.HasComputeData' (TF.Ref s' (ResourceConfigMap s)) (TF.Attr s P.Text) where
-    computeData' =
+instance s ~ s' => P.HasComputedData' (TF.Ref s' (ResourceConfigMap s)) (TF.Attr s P.Text) where
+    computedData' =
         (_data' :: ResourceConfigMap s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceConfigMap s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceConfigMap s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourceConfigMap s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -192,13 +192,13 @@ instance P.HasSpec (ResourceHorizontalPodAutoscaler s) (TF.Attr s P.Text) where
         lens (_spec :: ResourceHorizontalPodAutoscaler s -> TF.Attr s P.Text)
              (\s a -> s { _spec = a } :: ResourceHorizontalPodAutoscaler s)
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceHorizontalPodAutoscaler s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceHorizontalPodAutoscaler s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourceHorizontalPodAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSpec (TF.Ref s' (ResourceHorizontalPodAutoscaler s)) (TF.Attr s P.Text) where
-    computeSpec =
+instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ResourceHorizontalPodAutoscaler s)) (TF.Attr s P.Text) where
+    computedSpec =
         (_spec :: ResourceHorizontalPodAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -240,13 +240,13 @@ instance P.HasSpec (ResourceLimitRange s) (TF.Attr s P.Text) where
         lens (_spec :: ResourceLimitRange s -> TF.Attr s P.Text)
              (\s a -> s { _spec = a } :: ResourceLimitRange s)
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceLimitRange s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceLimitRange s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourceLimitRange s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSpec (TF.Ref s' (ResourceLimitRange s)) (TF.Attr s P.Text) where
-    computeSpec =
+instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ResourceLimitRange s)) (TF.Attr s P.Text) where
+    computedSpec =
         (_spec :: ResourceLimitRange s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -279,8 +279,8 @@ instance P.HasMetadata (ResourceNamespace s) (TF.Attr s P.Text) where
         lens (_metadata :: ResourceNamespace s -> TF.Attr s P.Text)
              (\s a -> s { _metadata = a } :: ResourceNamespace s)
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceNamespace s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceNamespace s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourceNamespace s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -322,13 +322,13 @@ instance P.HasSpec (ResourcePersistentVolume s) (TF.Attr s P.Text) where
         lens (_spec :: ResourcePersistentVolume s -> TF.Attr s P.Text)
              (\s a -> s { _spec = a } :: ResourcePersistentVolume s)
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourcePersistentVolume s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourcePersistentVolume s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourcePersistentVolume s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSpec (TF.Ref s' (ResourcePersistentVolume s)) (TF.Attr s P.Text) where
-    computeSpec =
+instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ResourcePersistentVolume s)) (TF.Attr s P.Text) where
+    computedSpec =
         (_spec :: ResourcePersistentVolume s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -376,18 +376,18 @@ instance P.HasWaitUntilBound (ResourcePersistentVolumeClaim s) (TF.Attr s P.Text
         lens (_wait_until_bound :: ResourcePersistentVolumeClaim s -> TF.Attr s P.Text)
              (\s a -> s { _wait_until_bound = a } :: ResourcePersistentVolumeClaim s)
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourcePersistentVolumeClaim s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourcePersistentVolumeClaim s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourcePersistentVolumeClaim s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSpec (TF.Ref s' (ResourcePersistentVolumeClaim s)) (TF.Attr s P.Text) where
-    computeSpec =
+instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ResourcePersistentVolumeClaim s)) (TF.Attr s P.Text) where
+    computedSpec =
         (_spec :: ResourcePersistentVolumeClaim s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeWaitUntilBound (TF.Ref s' (ResourcePersistentVolumeClaim s)) (TF.Attr s P.Text) where
-    computeWaitUntilBound =
+instance s ~ s' => P.HasComputedWaitUntilBound (TF.Ref s' (ResourcePersistentVolumeClaim s)) (TF.Attr s P.Text) where
+    computedWaitUntilBound =
         (_wait_until_bound :: ResourcePersistentVolumeClaim s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -430,13 +430,13 @@ instance P.HasSpec (ResourcePod s) (TF.Attr s P.Text) where
         lens (_spec :: ResourcePod s -> TF.Attr s P.Text)
              (\s a -> s { _spec = a } :: ResourcePod s)
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourcePod s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourcePod s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourcePod s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSpec (TF.Ref s' (ResourcePod s)) (TF.Attr s P.Text) where
-    computeSpec =
+instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ResourcePod s)) (TF.Attr s P.Text) where
+    computedSpec =
         (_spec :: ResourcePod s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -479,13 +479,13 @@ instance P.HasSpec (ResourceReplicationController s) (TF.Attr s P.Text) where
         lens (_spec :: ResourceReplicationController s -> TF.Attr s P.Text)
              (\s a -> s { _spec = a } :: ResourceReplicationController s)
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceReplicationController s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceReplicationController s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourceReplicationController s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSpec (TF.Ref s' (ResourceReplicationController s)) (TF.Attr s P.Text) where
-    computeSpec =
+instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ResourceReplicationController s)) (TF.Attr s P.Text) where
+    computedSpec =
         (_spec :: ResourceReplicationController s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -527,13 +527,13 @@ instance P.HasSpec (ResourceResourceQuota s) (TF.Attr s P.Text) where
         lens (_spec :: ResourceResourceQuota s -> TF.Attr s P.Text)
              (\s a -> s { _spec = a } :: ResourceResourceQuota s)
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceResourceQuota s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceResourceQuota s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourceResourceQuota s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSpec (TF.Ref s' (ResourceResourceQuota s)) (TF.Attr s P.Text) where
-    computeSpec =
+instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ResourceResourceQuota s)) (TF.Attr s P.Text) where
+    computedSpec =
         (_spec :: ResourceResourceQuota s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -589,18 +589,18 @@ instance P.HasType' (ResourceSecret s) (TF.Attr s P.Text) where
         lens (_type' :: ResourceSecret s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: ResourceSecret s)
 
-instance s ~ s' => P.HasComputeData' (TF.Ref s' (ResourceSecret s)) (TF.Attr s P.Text) where
-    computeData' =
+instance s ~ s' => P.HasComputedData' (TF.Ref s' (ResourceSecret s)) (TF.Attr s P.Text) where
+    computedData' =
         (_data' :: ResourceSecret s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceSecret s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceSecret s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourceSecret s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceSecret s)) (TF.Attr s P.Text) where
-    computeType' =
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceSecret s)) (TF.Attr s P.Text) where
+    computedType' =
         (_type' :: ResourceSecret s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -641,13 +641,13 @@ instance P.HasSpec (ResourceService s) (TF.Attr s P.Text) where
         lens (_spec :: ResourceService s -> TF.Attr s P.Text)
              (\s a -> s { _spec = a } :: ResourceService s)
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSpec (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
-    computeSpec =
+instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computedSpec =
         (_spec :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -695,21 +695,21 @@ instance P.HasSecret (ResourceServiceAccount s) (TF.Attr s P.Text) where
         lens (_secret :: ResourceServiceAccount s -> TF.Attr s P.Text)
              (\s a -> s { _secret = a } :: ResourceServiceAccount s)
 
-instance s ~ s' => P.HasComputeDefaultSecretName (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
-    computeDefaultSecretName x = TF.compute (TF.refKey x) "default_secret_name"
+instance s ~ s' => P.HasComputedDefaultSecretName (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
+    computedDefaultSecretName x = TF.compute (TF.refKey x) "default_secret_name"
 
-instance s ~ s' => P.HasComputeImagePullSecret (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
-    computeImagePullSecret =
+instance s ~ s' => P.HasComputedImagePullSecret (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
+    computedImagePullSecret =
         (_image_pull_secret :: ResourceServiceAccount s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourceServiceAccount s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeSecret (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
-    computeSecret =
+instance s ~ s' => P.HasComputedSecret (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
+    computedSecret =
         (_secret :: ResourceServiceAccount s -> TF.Attr s P.Text)
             . TF.refValue
 
@@ -760,18 +760,18 @@ instance P.HasStorageProvisioner (ResourceStorageClass s) (TF.Attr s P.Text) whe
         lens (_storage_provisioner :: ResourceStorageClass s -> TF.Attr s P.Text)
              (\s a -> s { _storage_provisioner = a } :: ResourceStorageClass s)
 
-instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceStorageClass s)) (TF.Attr s P.Text) where
-    computeMetadata =
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceStorageClass s)) (TF.Attr s P.Text) where
+    computedMetadata =
         (_metadata :: ResourceStorageClass s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeParameters (TF.Ref s' (ResourceStorageClass s)) (TF.Attr s P.Text) where
-    computeParameters =
+instance s ~ s' => P.HasComputedParameters (TF.Ref s' (ResourceStorageClass s)) (TF.Attr s P.Text) where
+    computedParameters =
         (_parameters :: ResourceStorageClass s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeStorageProvisioner (TF.Ref s' (ResourceStorageClass s)) (TF.Attr s P.Text) where
-    computeStorageProvisioner =
+instance s ~ s' => P.HasComputedStorageProvisioner (TF.Ref s' (ResourceStorageClass s)) (TF.Attr s P.Text) where
+    computedStorageProvisioner =
         (_storage_provisioner :: ResourceStorageClass s -> TF.Attr s P.Text)
             . TF.refValue
 

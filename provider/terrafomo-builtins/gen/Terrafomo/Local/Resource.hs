@@ -33,8 +33,8 @@ module Terrafomo.Local.Resource
     , P.HasFilename (..)
 
     -- ** Computed Attributes
-    , P.HasComputeContent (..)
-    , P.HasComputeFilename (..)
+    , P.HasComputedContent (..)
+    , P.HasComputedFilename (..)
 
     -- * Re-exported Types
     , module P
@@ -95,13 +95,13 @@ instance P.HasFilename (ResourceFile s) (TF.Attr s P.Text) where
         lens (_filename :: ResourceFile s -> TF.Attr s P.Text)
              (\s a -> s { _filename = a } :: ResourceFile s)
 
-instance s ~ s' => P.HasComputeContent (TF.Ref s' (ResourceFile s)) (TF.Attr s P.Text) where
-    computeContent =
+instance s ~ s' => P.HasComputedContent (TF.Ref s' (ResourceFile s)) (TF.Attr s P.Text) where
+    computedContent =
         (_content :: ResourceFile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputeFilename (TF.Ref s' (ResourceFile s)) (TF.Attr s P.Text) where
-    computeFilename =
+instance s ~ s' => P.HasComputedFilename (TF.Ref s' (ResourceFile s)) (TF.Attr s P.Text) where
+    computedFilename =
         (_filename :: ResourceFile s -> TF.Attr s P.Text)
             . TF.refValue
 

@@ -31,13 +31,13 @@ module Terrafomo.InfluxDB.Lens
     , HasRetentionPolicies (..)
 
     -- ** Computed Attributes
-    , HasComputeAdmin (..)
-    , HasComputeDatabase (..)
-    , HasComputeGrant (..)
-    , HasComputeName (..)
-    , HasComputePassword (..)
-    , HasComputeQuery (..)
-    , HasComputeRetentionPolicies (..)
+    , HasComputedAdmin (..)
+    , HasComputedDatabase (..)
+    , HasComputedGrant (..)
+    , HasComputedName (..)
+    , HasComputedPassword (..)
+    , HasComputedQuery (..)
+    , HasComputedRetentionPolicies (..)
     ) where
 
 import GHC.Base ((.))
@@ -89,23 +89,23 @@ class HasRetentionPolicies a b | a -> b where
 instance HasRetentionPolicies a b => HasRetentionPolicies (TF.Schema l p a) b where
     retentionPolicies = TF.configuration . retentionPolicies
 
-class HasComputeAdmin a b | a -> b where
-    computeAdmin :: a -> b
+class HasComputedAdmin a b | a -> b where
+    computedAdmin :: a -> b
 
-class HasComputeDatabase a b | a -> b where
-    computeDatabase :: a -> b
+class HasComputedDatabase a b | a -> b where
+    computedDatabase :: a -> b
 
-class HasComputeGrant a b | a -> b where
-    computeGrant :: a -> b
+class HasComputedGrant a b | a -> b where
+    computedGrant :: a -> b
 
-class HasComputeName a b | a -> b where
-    computeName :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputePassword a b | a -> b where
-    computePassword :: a -> b
+class HasComputedPassword a b | a -> b where
+    computedPassword :: a -> b
 
-class HasComputeQuery a b | a -> b where
-    computeQuery :: a -> b
+class HasComputedQuery a b | a -> b where
+    computedQuery :: a -> b
 
-class HasComputeRetentionPolicies a b | a -> b where
-    computeRetentionPolicies :: a -> b
+class HasComputedRetentionPolicies a b | a -> b where
+    computedRetentionPolicies :: a -> b
