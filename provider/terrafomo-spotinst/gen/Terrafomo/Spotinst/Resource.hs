@@ -24,14 +24,14 @@
 module Terrafomo.Spotinst.Resource
     (
     -- * Types
-      AwsGroupResource (..)
-    , awsGroupResource
+      ResourceAwsGroup (..)
+    , resourceAwsGroup
 
-    , HealthcheckResource (..)
-    , healthcheckResource
+    , ResourceHealthcheck (..)
+    , resourceHealthcheck
 
-    , SubscriptionResource (..)
-    , subscriptionResource
+    , ResourceSubscription (..)
+    , resourceSubscription
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -54,24 +54,24 @@ module Terrafomo.Spotinst.Resource
     , P.HasThreshold (..)
 
     -- ** Computed Attributes
-    , P.HasComputedCapacity (..)
-    , P.HasComputedCheck (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedElasticIps (..)
-    , P.HasComputedEndpoint (..)
-    , P.HasComputedEventType (..)
-    , P.HasComputedFormat (..)
-    , P.HasComputedId (..)
-    , P.HasComputedInstanceTypes (..)
-    , P.HasComputedLaunchSpecification (..)
-    , P.HasComputedName (..)
-    , P.HasComputedProduct (..)
-    , P.HasComputedProtocol (..)
-    , P.HasComputedProxy (..)
-    , P.HasComputedResourceId (..)
-    , P.HasComputedStrategy (..)
-    , P.HasComputedTags (..)
-    , P.HasComputedThreshold (..)
+    , P.HasComputeCapacity (..)
+    , P.HasComputeCheck (..)
+    , P.HasComputeDescription (..)
+    , P.HasComputeElasticIps (..)
+    , P.HasComputeEndpoint (..)
+    , P.HasComputeEventType (..)
+    , P.HasComputeFormat (..)
+    , P.HasComputeId (..)
+    , P.HasComputeInstanceTypes (..)
+    , P.HasComputeLaunchSpecification (..)
+    , P.HasComputeName (..)
+    , P.HasComputeProduct (..)
+    , P.HasComputeProtocol (..)
+    , P.HasComputeProxy (..)
+    , P.HasComputeResourceId (..)
+    , P.HasComputeStrategy (..)
+    , P.HasComputeTags (..)
+    , P.HasComputeThreshold (..)
 
     -- * Re-exported Types
     , module P
@@ -105,7 +105,7 @@ import qualified Terrafomo.Schema    as TF
 
 Provides a Spotinst AWS group resource.
 -}
-data AwsGroupResource s = AwsGroupResource {
+data ResourceAwsGroup s = ResourceAwsGroup {
       _capacity             :: !(TF.Attr s P.Text)
     {- ^ (Required) The group capacity. Only a single block is allowed. -}
     , _description          :: !(TF.Attr s P.Text)
@@ -126,8 +126,8 @@ data AwsGroupResource s = AwsGroupResource {
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AwsGroupResource s) where
-    toHCL AwsGroupResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceAwsGroup s) where
+    toHCL ResourceAwsGroup{..} = TF.inline $ catMaybes
         [ TF.assign "capacity" <$> TF.attribute _capacity
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "elastic_ips" <$> TF.attribute _elastic_ips
@@ -139,103 +139,103 @@ instance TF.ToHCL (AwsGroupResource s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasCapacity (AwsGroupResource s) (TF.Attr s P.Text) where
+instance P.HasCapacity (ResourceAwsGroup s) (TF.Attr s P.Text) where
     capacity =
-        lens (_capacity :: AwsGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _capacity = a } :: AwsGroupResource s)
+        lens (_capacity :: ResourceAwsGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _capacity = a } :: ResourceAwsGroup s)
 
-instance P.HasDescription (AwsGroupResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceAwsGroup s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: AwsGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: AwsGroupResource s)
+        lens (_description :: ResourceAwsGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceAwsGroup s)
 
-instance P.HasElasticIps (AwsGroupResource s) (TF.Attr s P.Text) where
+instance P.HasElasticIps (ResourceAwsGroup s) (TF.Attr s P.Text) where
     elasticIps =
-        lens (_elastic_ips :: AwsGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _elastic_ips = a } :: AwsGroupResource s)
+        lens (_elastic_ips :: ResourceAwsGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _elastic_ips = a } :: ResourceAwsGroup s)
 
-instance P.HasInstanceTypes (AwsGroupResource s) (TF.Attr s P.Text) where
+instance P.HasInstanceTypes (ResourceAwsGroup s) (TF.Attr s P.Text) where
     instanceTypes =
-        lens (_instance_types :: AwsGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_types = a } :: AwsGroupResource s)
+        lens (_instance_types :: ResourceAwsGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_types = a } :: ResourceAwsGroup s)
 
-instance P.HasLaunchSpecification (AwsGroupResource s) (TF.Attr s P.Text) where
+instance P.HasLaunchSpecification (ResourceAwsGroup s) (TF.Attr s P.Text) where
     launchSpecification =
-        lens (_launch_specification :: AwsGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _launch_specification = a } :: AwsGroupResource s)
+        lens (_launch_specification :: ResourceAwsGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _launch_specification = a } :: ResourceAwsGroup s)
 
-instance P.HasName (AwsGroupResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceAwsGroup s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: AwsGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: AwsGroupResource s)
+        lens (_name :: ResourceAwsGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceAwsGroup s)
 
-instance P.HasProduct (AwsGroupResource s) (TF.Attr s P.Text) where
+instance P.HasProduct (ResourceAwsGroup s) (TF.Attr s P.Text) where
     product =
-        lens (_product :: AwsGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _product = a } :: AwsGroupResource s)
+        lens (_product :: ResourceAwsGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _product = a } :: ResourceAwsGroup s)
 
-instance P.HasStrategy (AwsGroupResource s) (TF.Attr s P.Text) where
+instance P.HasStrategy (ResourceAwsGroup s) (TF.Attr s P.Text) where
     strategy =
-        lens (_strategy :: AwsGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _strategy = a } :: AwsGroupResource s)
+        lens (_strategy :: ResourceAwsGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _strategy = a } :: ResourceAwsGroup s)
 
-instance P.HasTags (AwsGroupResource s) (TF.Attr s P.Text) where
+instance P.HasTags (ResourceAwsGroup s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: AwsGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: AwsGroupResource s)
+        lens (_tags :: ResourceAwsGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ResourceAwsGroup s)
 
-instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (AwsGroupResource s)) (TF.Attr s P.Text) where
-    computedCapacity =
-        (_capacity :: AwsGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCapacity (TF.Ref s' (ResourceAwsGroup s)) (TF.Attr s P.Text) where
+    computeCapacity =
+        (_capacity :: ResourceAwsGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AwsGroupResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: AwsGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceAwsGroup s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceAwsGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedElasticIps (TF.Ref s' (AwsGroupResource s)) (TF.Attr s P.Text) where
-    computedElasticIps =
-        (_elastic_ips :: AwsGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeElasticIps (TF.Ref s' (ResourceAwsGroup s)) (TF.Attr s P.Text) where
+    computeElasticIps =
+        (_elastic_ips :: ResourceAwsGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AwsGroupResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceAwsGroup s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInstanceTypes (TF.Ref s' (AwsGroupResource s)) (TF.Attr s P.Text) where
-    computedInstanceTypes =
-        (_instance_types :: AwsGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeInstanceTypes (TF.Ref s' (ResourceAwsGroup s)) (TF.Attr s P.Text) where
+    computeInstanceTypes =
+        (_instance_types :: ResourceAwsGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLaunchSpecification (TF.Ref s' (AwsGroupResource s)) (TF.Attr s P.Text) where
-    computedLaunchSpecification =
-        (_launch_specification :: AwsGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLaunchSpecification (TF.Ref s' (ResourceAwsGroup s)) (TF.Attr s P.Text) where
+    computeLaunchSpecification =
+        (_launch_specification :: ResourceAwsGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (AwsGroupResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: AwsGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceAwsGroup s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceAwsGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProduct (TF.Ref s' (AwsGroupResource s)) (TF.Attr s P.Text) where
-    computedProduct =
-        (_product :: AwsGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProduct (TF.Ref s' (ResourceAwsGroup s)) (TF.Attr s P.Text) where
+    computeProduct =
+        (_product :: ResourceAwsGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStrategy (TF.Ref s' (AwsGroupResource s)) (TF.Attr s P.Text) where
-    computedStrategy =
-        (_strategy :: AwsGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeStrategy (TF.Ref s' (ResourceAwsGroup s)) (TF.Attr s P.Text) where
+    computeStrategy =
+        (_strategy :: ResourceAwsGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (AwsGroupResource s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: AwsGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceAwsGroup s)) (TF.Attr s P.Text) where
+    computeTags =
+        (_tags :: ResourceAwsGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-awsGroupResource :: TF.Resource P.Spotinst (AwsGroupResource s)
-awsGroupResource =
+resourceAwsGroup :: TF.Resource P.Spotinst (ResourceAwsGroup s)
+resourceAwsGroup =
     TF.newResource "spotinst_aws_group" $
-        AwsGroupResource {
+        ResourceAwsGroup {
               _capacity = TF.Nil
             , _description = TF.Nil
             , _elastic_ips = TF.Nil
@@ -251,7 +251,7 @@ awsGroupResource =
 
 Provides a Spotinst healthcheck resource.
 -}
-data HealthcheckResource s = HealthcheckResource {
+data ResourceHealthcheck s = ResourceHealthcheck {
       _check       :: !(TF.Attr s P.Text)
     {- ^ (Required) Describes the check to execute. -}
     , _name        :: !(TF.Attr s P.Text)
@@ -264,8 +264,8 @@ data HealthcheckResource s = HealthcheckResource {
     {- ^ (Required) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HealthcheckResource s) where
-    toHCL HealthcheckResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceHealthcheck s) where
+    toHCL ResourceHealthcheck{..} = TF.inline $ catMaybes
         [ TF.assign "check" <$> TF.attribute _check
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "proxy" <$> TF.attribute _proxy
@@ -273,63 +273,63 @@ instance TF.ToHCL (HealthcheckResource s) where
         , TF.assign "threshold" <$> TF.attribute _threshold
         ]
 
-instance P.HasCheck (HealthcheckResource s) (TF.Attr s P.Text) where
+instance P.HasCheck (ResourceHealthcheck s) (TF.Attr s P.Text) where
     check =
-        lens (_check :: HealthcheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _check = a } :: HealthcheckResource s)
+        lens (_check :: ResourceHealthcheck s -> TF.Attr s P.Text)
+             (\s a -> s { _check = a } :: ResourceHealthcheck s)
 
-instance P.HasName (HealthcheckResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceHealthcheck s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: HealthcheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: HealthcheckResource s)
+        lens (_name :: ResourceHealthcheck s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceHealthcheck s)
 
-instance P.HasProxy (HealthcheckResource s) (TF.Attr s P.Text) where
+instance P.HasProxy (ResourceHealthcheck s) (TF.Attr s P.Text) where
     proxy =
-        lens (_proxy :: HealthcheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _proxy = a } :: HealthcheckResource s)
+        lens (_proxy :: ResourceHealthcheck s -> TF.Attr s P.Text)
+             (\s a -> s { _proxy = a } :: ResourceHealthcheck s)
 
-instance P.HasResourceId (HealthcheckResource s) (TF.Attr s P.Text) where
+instance P.HasResourceId (ResourceHealthcheck s) (TF.Attr s P.Text) where
     resourceId =
-        lens (_resource_id :: HealthcheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_id = a } :: HealthcheckResource s)
+        lens (_resource_id :: ResourceHealthcheck s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_id = a } :: ResourceHealthcheck s)
 
-instance P.HasThreshold (HealthcheckResource s) (TF.Attr s P.Text) where
+instance P.HasThreshold (ResourceHealthcheck s) (TF.Attr s P.Text) where
     threshold =
-        lens (_threshold :: HealthcheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _threshold = a } :: HealthcheckResource s)
+        lens (_threshold :: ResourceHealthcheck s -> TF.Attr s P.Text)
+             (\s a -> s { _threshold = a } :: ResourceHealthcheck s)
 
-instance s ~ s' => P.HasComputedCheck (TF.Ref s' (HealthcheckResource s)) (TF.Attr s P.Text) where
-    computedCheck =
-        (_check :: HealthcheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCheck (TF.Ref s' (ResourceHealthcheck s)) (TF.Attr s P.Text) where
+    computeCheck =
+        (_check :: ResourceHealthcheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (HealthcheckResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceHealthcheck s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (HealthcheckResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: HealthcheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceHealthcheck s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceHealthcheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProxy (TF.Ref s' (HealthcheckResource s)) (TF.Attr s P.Text) where
-    computedProxy =
-        (_proxy :: HealthcheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProxy (TF.Ref s' (ResourceHealthcheck s)) (TF.Attr s P.Text) where
+    computeProxy =
+        (_proxy :: ResourceHealthcheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedResourceId (TF.Ref s' (HealthcheckResource s)) (TF.Attr s P.Text) where
-    computedResourceId =
-        (_resource_id :: HealthcheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeResourceId (TF.Ref s' (ResourceHealthcheck s)) (TF.Attr s P.Text) where
+    computeResourceId =
+        (_resource_id :: ResourceHealthcheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedThreshold (TF.Ref s' (HealthcheckResource s)) (TF.Attr s P.Text) where
-    computedThreshold =
-        (_threshold :: HealthcheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeThreshold (TF.Ref s' (ResourceHealthcheck s)) (TF.Attr s P.Text) where
+    computeThreshold =
+        (_threshold :: ResourceHealthcheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-healthcheckResource :: TF.Resource P.Spotinst (HealthcheckResource s)
-healthcheckResource =
+resourceHealthcheck :: TF.Resource P.Spotinst (ResourceHealthcheck s)
+resourceHealthcheck =
     TF.newResource "spotinst_healthcheck" $
-        HealthcheckResource {
+        ResourceHealthcheck {
               _check = TF.Nil
             , _name = TF.Nil
             , _proxy = TF.Nil
@@ -341,7 +341,7 @@ healthcheckResource =
 
 Provides a Spotinst subscription resource.
 -}
-data SubscriptionResource s = SubscriptionResource {
+data ResourceSubscription s = ResourceSubscription {
       _endpoint    :: !(TF.Attr s P.Text)
     {- ^ (Required) The destination for the request -}
     , _event_type  :: !(TF.Attr s P.Text)
@@ -354,8 +354,8 @@ data SubscriptionResource s = SubscriptionResource {
     {- ^ (Required) The resource to subscribe to -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SubscriptionResource s) where
-    toHCL SubscriptionResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceSubscription s) where
+    toHCL ResourceSubscription{..} = TF.inline $ catMaybes
         [ TF.assign "endpoint" <$> TF.attribute _endpoint
         , TF.assign "event_type" <$> TF.attribute _event_type
         , TF.assign "format" <$> TF.attribute _format
@@ -363,63 +363,63 @@ instance TF.ToHCL (SubscriptionResource s) where
         , TF.assign "resource_id" <$> TF.attribute _resource_id
         ]
 
-instance P.HasEndpoint (SubscriptionResource s) (TF.Attr s P.Text) where
+instance P.HasEndpoint (ResourceSubscription s) (TF.Attr s P.Text) where
     endpoint =
-        lens (_endpoint :: SubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _endpoint = a } :: SubscriptionResource s)
+        lens (_endpoint :: ResourceSubscription s -> TF.Attr s P.Text)
+             (\s a -> s { _endpoint = a } :: ResourceSubscription s)
 
-instance P.HasEventType (SubscriptionResource s) (TF.Attr s P.Text) where
+instance P.HasEventType (ResourceSubscription s) (TF.Attr s P.Text) where
     eventType =
-        lens (_event_type :: SubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _event_type = a } :: SubscriptionResource s)
+        lens (_event_type :: ResourceSubscription s -> TF.Attr s P.Text)
+             (\s a -> s { _event_type = a } :: ResourceSubscription s)
 
-instance P.HasFormat (SubscriptionResource s) (TF.Attr s P.Text) where
+instance P.HasFormat (ResourceSubscription s) (TF.Attr s P.Text) where
     format =
-        lens (_format :: SubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _format = a } :: SubscriptionResource s)
+        lens (_format :: ResourceSubscription s -> TF.Attr s P.Text)
+             (\s a -> s { _format = a } :: ResourceSubscription s)
 
-instance P.HasProtocol (SubscriptionResource s) (TF.Attr s P.Text) where
+instance P.HasProtocol (ResourceSubscription s) (TF.Attr s P.Text) where
     protocol =
-        lens (_protocol :: SubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _protocol = a } :: SubscriptionResource s)
+        lens (_protocol :: ResourceSubscription s -> TF.Attr s P.Text)
+             (\s a -> s { _protocol = a } :: ResourceSubscription s)
 
-instance P.HasResourceId (SubscriptionResource s) (TF.Attr s P.Text) where
+instance P.HasResourceId (ResourceSubscription s) (TF.Attr s P.Text) where
     resourceId =
-        lens (_resource_id :: SubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_id = a } :: SubscriptionResource s)
+        lens (_resource_id :: ResourceSubscription s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_id = a } :: ResourceSubscription s)
 
-instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (SubscriptionResource s)) (TF.Attr s P.Text) where
-    computedEndpoint =
-        (_endpoint :: SubscriptionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEndpoint (TF.Ref s' (ResourceSubscription s)) (TF.Attr s P.Text) where
+    computeEndpoint =
+        (_endpoint :: ResourceSubscription s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEventType (TF.Ref s' (SubscriptionResource s)) (TF.Attr s P.Text) where
-    computedEventType =
-        (_event_type :: SubscriptionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEventType (TF.Ref s' (ResourceSubscription s)) (TF.Attr s P.Text) where
+    computeEventType =
+        (_event_type :: ResourceSubscription s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFormat (TF.Ref s' (SubscriptionResource s)) (TF.Attr s P.Text) where
-    computedFormat =
-        (_format :: SubscriptionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFormat (TF.Ref s' (ResourceSubscription s)) (TF.Attr s P.Text) where
+    computeFormat =
+        (_format :: ResourceSubscription s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SubscriptionResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceSubscription s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (SubscriptionResource s)) (TF.Attr s P.Text) where
-    computedProtocol =
-        (_protocol :: SubscriptionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProtocol (TF.Ref s' (ResourceSubscription s)) (TF.Attr s P.Text) where
+    computeProtocol =
+        (_protocol :: ResourceSubscription s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedResourceId (TF.Ref s' (SubscriptionResource s)) (TF.Attr s P.Text) where
-    computedResourceId =
-        (_resource_id :: SubscriptionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeResourceId (TF.Ref s' (ResourceSubscription s)) (TF.Attr s P.Text) where
+    computeResourceId =
+        (_resource_id :: ResourceSubscription s -> TF.Attr s P.Text)
             . TF.refValue
 
-subscriptionResource :: TF.Resource P.Spotinst (SubscriptionResource s)
-subscriptionResource =
+resourceSubscription :: TF.Resource P.Spotinst (ResourceSubscription s)
+resourceSubscription =
     TF.newResource "spotinst_subscription" $
-        SubscriptionResource {
+        ResourceSubscription {
               _endpoint = TF.Nil
             , _event_type = TF.Nil
             , _format = TF.Nil

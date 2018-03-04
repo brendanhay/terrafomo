@@ -44,28 +44,28 @@ module Terrafomo.UltraDNS.Lens
     , HasZone (..)
 
     -- ** Computed Attributes
-    , HasComputedActOnProbes (..)
-    , HasComputedAgents (..)
-    , HasComputedBackupRecordFailoverDelay (..)
-    , HasComputedBackupRecordRdata (..)
-    , HasComputedConflictResolve (..)
-    , HasComputedDescription (..)
-    , HasComputedHostname (..)
-    , HasComputedHttpProbe (..)
-    , HasComputedId (..)
-    , HasComputedInterval (..)
-    , HasComputedMaxToLb (..)
-    , HasComputedName (..)
-    , HasComputedNoResponse (..)
-    , HasComputedOrder (..)
-    , HasComputedPingProbe (..)
-    , HasComputedPoolRecord (..)
-    , HasComputedRdata (..)
-    , HasComputedRunProbes (..)
-    , HasComputedThreshold (..)
-    , HasComputedTtl (..)
-    , HasComputedType' (..)
-    , HasComputedZone (..)
+    , HasComputeActOnProbes (..)
+    , HasComputeAgents (..)
+    , HasComputeBackupRecordFailoverDelay (..)
+    , HasComputeBackupRecordRdata (..)
+    , HasComputeConflictResolve (..)
+    , HasComputeDescription (..)
+    , HasComputeHostname (..)
+    , HasComputeHttpProbe (..)
+    , HasComputeId (..)
+    , HasComputeInterval (..)
+    , HasComputeMaxToLb (..)
+    , HasComputeName (..)
+    , HasComputeNoResponse (..)
+    , HasComputeOrder (..)
+    , HasComputePingProbe (..)
+    , HasComputePoolRecord (..)
+    , HasComputeRdata (..)
+    , HasComputeRunProbes (..)
+    , HasComputeThreshold (..)
+    , HasComputeTtl (..)
+    , HasComputeType' (..)
+    , HasComputeZone (..)
     ) where
 
 import GHC.Base ((.))
@@ -195,68 +195,68 @@ class HasZone a b | a -> b where
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
-class HasComputedActOnProbes a b | a -> b where
-    computedActOnProbes :: a -> b
+class HasComputeActOnProbes a b | a -> b where
+    computeActOnProbes :: a -> b
 
-class HasComputedAgents a b | a -> b where
-    computedAgents :: a -> b
+class HasComputeAgents a b | a -> b where
+    computeAgents :: a -> b
 
-class HasComputedBackupRecordFailoverDelay a b | a -> b where
-    computedBackupRecordFailoverDelay :: a -> b
+class HasComputeBackupRecordFailoverDelay a b | a -> b where
+    computeBackupRecordFailoverDelay :: a -> b
 
-class HasComputedBackupRecordRdata a b | a -> b where
-    computedBackupRecordRdata :: a -> b
+class HasComputeBackupRecordRdata a b | a -> b where
+    computeBackupRecordRdata :: a -> b
 
-class HasComputedConflictResolve a b | a -> b where
-    computedConflictResolve :: a -> b
+class HasComputeConflictResolve a b | a -> b where
+    computeConflictResolve :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedHostname a b | a -> b where
-    computedHostname :: a -> b
+class HasComputeHostname a b | a -> b where
+    computeHostname :: a -> b
 
-class HasComputedHttpProbe a b | a -> b where
-    computedHttpProbe :: a -> b
+class HasComputeHttpProbe a b | a -> b where
+    computeHttpProbe :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedInterval a b | a -> b where
-    computedInterval :: a -> b
+class HasComputeInterval a b | a -> b where
+    computeInterval :: a -> b
 
-class HasComputedMaxToLb a b | a -> b where
-    computedMaxToLb :: a -> b
+class HasComputeMaxToLb a b | a -> b where
+    computeMaxToLb :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNoResponse a b | a -> b where
-    computedNoResponse :: a -> b
+class HasComputeNoResponse a b | a -> b where
+    computeNoResponse :: a -> b
 
-class HasComputedOrder a b | a -> b where
-    computedOrder :: a -> b
+class HasComputeOrder a b | a -> b where
+    computeOrder :: a -> b
 
-class HasComputedPingProbe a b | a -> b where
-    computedPingProbe :: a -> b
+class HasComputePingProbe a b | a -> b where
+    computePingProbe :: a -> b
 
-class HasComputedPoolRecord a b | a -> b where
-    computedPoolRecord :: a -> b
+class HasComputePoolRecord a b | a -> b where
+    computePoolRecord :: a -> b
 
-class HasComputedRdata a b | a -> b where
-    computedRdata :: a -> b
+class HasComputeRdata a b | a -> b where
+    computeRdata :: a -> b
 
-class HasComputedRunProbes a b | a -> b where
-    computedRunProbes :: a -> b
+class HasComputeRunProbes a b | a -> b where
+    computeRunProbes :: a -> b
 
-class HasComputedThreshold a b | a -> b where
-    computedThreshold :: a -> b
+class HasComputeThreshold a b | a -> b where
+    computeThreshold :: a -> b
 
-class HasComputedTtl a b | a -> b where
-    computedTtl :: a -> b
+class HasComputeTtl a b | a -> b where
+    computeTtl :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputeType' a b | a -> b where
+    computeType' :: a -> b
 
-class HasComputedZone a b | a -> b where
-    computedZone :: a -> b
+class HasComputeZone a b | a -> b where
+    computeZone :: a -> b

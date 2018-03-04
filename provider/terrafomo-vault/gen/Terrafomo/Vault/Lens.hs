@@ -112,105 +112,106 @@ module Terrafomo.Vault.Lens
     , HasVerifyConnection (..)
 
     -- ** Computed Attributes
-    , HasComputedAccessKey (..)
-    , HasComputedAccessor (..)
-    , HasComputedAccountId (..)
-    , HasComputedAllowInstanceMigration (..)
-    , HasComputedAllowRead (..)
-    , HasComputedAllowedRoles (..)
-    , HasComputedAuthType (..)
-    , HasComputedAwsPublicCert (..)
-    , HasComputedBackend (..)
-    , HasComputedBaseUrl (..)
-    , HasComputedBindSecretId (..)
-    , HasComputedBoundAccountId (..)
-    , HasComputedBoundAmiId (..)
-    , HasComputedBoundCidrList (..)
-    , HasComputedBoundIamInstanceProfileArn (..)
-    , HasComputedBoundIamPrincipalArn (..)
-    , HasComputedBoundIamRoleArn (..)
-    , HasComputedBoundRegion (..)
-    , HasComputedBoundSubnetId (..)
-    , HasComputedBoundVpcId (..)
-    , HasComputedCassandra (..)
-    , HasComputedCertName (..)
-    , HasComputedCidrList (..)
-    , HasComputedClientToken (..)
-    , HasComputedCreationStatements (..)
-    , HasComputedData' (..)
-    , HasComputedDataJson (..)
-    , HasComputedDbName (..)
-    , HasComputedDefaultLeaseTtlSeconds (..)
-    , HasComputedDefaultTtl (..)
-    , HasComputedDescription (..)
-    , HasComputedDisablePeriodicTidy (..)
-    , HasComputedDisableRead (..)
-    , HasComputedDisallowReauthentication (..)
-    , HasComputedEc2Endpoint (..)
-    , HasComputedGroup (..)
-    , HasComputedGroupName (..)
-    , HasComputedGroups (..)
-    , HasComputedHana (..)
-    , HasComputedIamEndpoint (..)
-    , HasComputedIamHttpRequestMethod (..)
-    , HasComputedIamRequestBody (..)
-    , HasComputedIamRequestHeaders (..)
-    , HasComputedIamRequestUrl (..)
-    , HasComputedIamServerIdHeaderValue (..)
-    , HasComputedIdentity (..)
-    , HasComputedInferredAwsRegion (..)
-    , HasComputedInferredEntityType (..)
-    , HasComputedInstanceId (..)
-    , HasComputedLeaseDuration (..)
-    , HasComputedLeaseId (..)
-    , HasComputedLeaseRenewable (..)
-    , HasComputedLeaseStartTime (..)
-    , HasComputedMaxLeaseTtlSeconds (..)
-    , HasComputedMaxTtl (..)
-    , HasComputedMetadata (..)
-    , HasComputedMongodb (..)
-    , HasComputedMssql (..)
-    , HasComputedMysql (..)
-    , HasComputedName (..)
-    , HasComputedNonce (..)
-    , HasComputedOracle (..)
-    , HasComputedOrganization (..)
-    , HasComputedPath (..)
-    , HasComputedPeriod (..)
-    , HasComputedPkcs7 (..)
-    , HasComputedPolicies (..)
-    , HasComputedPolicy (..)
-    , HasComputedPolicyArn (..)
-    , HasComputedPostgresql (..)
-    , HasComputedRenewStatements (..)
-    , HasComputedRenewable (..)
-    , HasComputedResolveAwsUniqueIds (..)
-    , HasComputedRevocationStatements (..)
-    , HasComputedRole (..)
-    , HasComputedRoleId (..)
-    , HasComputedRoleName (..)
-    , HasComputedRoleTag (..)
-    , HasComputedRollbackStatements (..)
-    , HasComputedSafetyBuffer (..)
-    , HasComputedSecretId (..)
-    , HasComputedSecretIdNumUses (..)
-    , HasComputedSecretIdTtl (..)
-    , HasComputedSecretKey (..)
-    , HasComputedSecurityToken (..)
-    , HasComputedSignature (..)
-    , HasComputedStsEndpoint (..)
-    , HasComputedStsRole (..)
-    , HasComputedTagKey (..)
-    , HasComputedTagValue (..)
-    , HasComputedToken (..)
-    , HasComputedTokenMaxTtl (..)
-    , HasComputedTokenNumUses (..)
-    , HasComputedTokenTtl (..)
-    , HasComputedTtl (..)
-    , HasComputedType' (..)
-    , HasComputedUser (..)
-    , HasComputedUsername (..)
-    , HasComputedVerifyConnection (..)
+    , HasComputeAccessKey (..)
+    , HasComputeAccessor (..)
+    , HasComputeAccountId (..)
+    , HasComputeAllowInstanceMigration (..)
+    , HasComputeAllowRead (..)
+    , HasComputeAllowedRoles (..)
+    , HasComputeAuthType (..)
+    , HasComputeAwsPublicCert (..)
+    , HasComputeBackend (..)
+    , HasComputeBaseUrl (..)
+    , HasComputeBindSecretId (..)
+    , HasComputeBoundAccountId (..)
+    , HasComputeBoundAmiId (..)
+    , HasComputeBoundCidrList (..)
+    , HasComputeBoundIamInstanceProfileArn (..)
+    , HasComputeBoundIamPrincipalArn (..)
+    , HasComputeBoundIamRoleArn (..)
+    , HasComputeBoundRegion (..)
+    , HasComputeBoundSubnetId (..)
+    , HasComputeBoundVpcId (..)
+    , HasComputeCassandra (..)
+    , HasComputeCertName (..)
+    , HasComputeCidrList (..)
+    , HasComputeClientToken (..)
+    , HasComputeCreationStatements (..)
+    , HasComputeData' (..)
+    , HasComputeDataJson (..)
+    , HasComputeDbName (..)
+    , HasComputeDefaultLeaseTtlSeconds (..)
+    , HasComputeDefaultTtl (..)
+    , HasComputeDescription (..)
+    , HasComputeDisablePeriodicTidy (..)
+    , HasComputeDisableRead (..)
+    , HasComputeDisallowReauthentication (..)
+    , HasComputeEc2Endpoint (..)
+    , HasComputeGroup (..)
+    , HasComputeGroupName (..)
+    , HasComputeGroups (..)
+    , HasComputeHana (..)
+    , HasComputeIamEndpoint (..)
+    , HasComputeIamHttpRequestMethod (..)
+    , HasComputeIamRequestBody (..)
+    , HasComputeIamRequestHeaders (..)
+    , HasComputeIamRequestUrl (..)
+    , HasComputeIamServerIdHeaderValue (..)
+    , HasComputeIdentity (..)
+    , HasComputeInferredAwsRegion (..)
+    , HasComputeInferredEntityType (..)
+    , HasComputeInstanceId (..)
+    , HasComputeLeaseDuration (..)
+    , HasComputeLeaseId (..)
+    , HasComputeLeaseRenewable (..)
+    , HasComputeLeaseStartTime (..)
+    , HasComputeLeaseStarted (..)
+    , HasComputeMaxLeaseTtlSeconds (..)
+    , HasComputeMaxTtl (..)
+    , HasComputeMetadata (..)
+    , HasComputeMongodb (..)
+    , HasComputeMssql (..)
+    , HasComputeMysql (..)
+    , HasComputeName (..)
+    , HasComputeNonce (..)
+    , HasComputeOracle (..)
+    , HasComputeOrganization (..)
+    , HasComputePath (..)
+    , HasComputePeriod (..)
+    , HasComputePkcs7 (..)
+    , HasComputePolicies (..)
+    , HasComputePolicy (..)
+    , HasComputePolicyArn (..)
+    , HasComputePostgresql (..)
+    , HasComputeRenewStatements (..)
+    , HasComputeRenewable (..)
+    , HasComputeResolveAwsUniqueIds (..)
+    , HasComputeRevocationStatements (..)
+    , HasComputeRole (..)
+    , HasComputeRoleId (..)
+    , HasComputeRoleName (..)
+    , HasComputeRoleTag (..)
+    , HasComputeRollbackStatements (..)
+    , HasComputeSafetyBuffer (..)
+    , HasComputeSecretId (..)
+    , HasComputeSecretIdNumUses (..)
+    , HasComputeSecretIdTtl (..)
+    , HasComputeSecretKey (..)
+    , HasComputeSecurityToken (..)
+    , HasComputeSignature (..)
+    , HasComputeStsEndpoint (..)
+    , HasComputeStsRole (..)
+    , HasComputeTagKey (..)
+    , HasComputeTagValue (..)
+    , HasComputeToken (..)
+    , HasComputeTokenMaxTtl (..)
+    , HasComputeTokenNumUses (..)
+    , HasComputeTokenTtl (..)
+    , HasComputeTtl (..)
+    , HasComputeType' (..)
+    , HasComputeUser (..)
+    , HasComputeUsername (..)
+    , HasComputeVerifyConnection (..)
     ) where
 
 import GHC.Base ((.))
@@ -748,299 +749,302 @@ class HasVerifyConnection a b | a -> b where
 instance HasVerifyConnection a b => HasVerifyConnection (TF.Schema l p a) b where
     verifyConnection = TF.configuration . verifyConnection
 
-class HasComputedAccessKey a b | a -> b where
-    computedAccessKey :: a -> b
+class HasComputeAccessKey a b | a -> b where
+    computeAccessKey :: a -> b
 
-class HasComputedAccessor a b | a -> b where
-    computedAccessor :: a -> b
+class HasComputeAccessor a b | a -> b where
+    computeAccessor :: a -> b
 
-class HasComputedAccountId a b | a -> b where
-    computedAccountId :: a -> b
+class HasComputeAccountId a b | a -> b where
+    computeAccountId :: a -> b
 
-class HasComputedAllowInstanceMigration a b | a -> b where
-    computedAllowInstanceMigration :: a -> b
+class HasComputeAllowInstanceMigration a b | a -> b where
+    computeAllowInstanceMigration :: a -> b
 
-class HasComputedAllowRead a b | a -> b where
-    computedAllowRead :: a -> b
+class HasComputeAllowRead a b | a -> b where
+    computeAllowRead :: a -> b
 
-class HasComputedAllowedRoles a b | a -> b where
-    computedAllowedRoles :: a -> b
+class HasComputeAllowedRoles a b | a -> b where
+    computeAllowedRoles :: a -> b
 
-class HasComputedAuthType a b | a -> b where
-    computedAuthType :: a -> b
+class HasComputeAuthType a b | a -> b where
+    computeAuthType :: a -> b
 
-class HasComputedAwsPublicCert a b | a -> b where
-    computedAwsPublicCert :: a -> b
+class HasComputeAwsPublicCert a b | a -> b where
+    computeAwsPublicCert :: a -> b
 
-class HasComputedBackend a b | a -> b where
-    computedBackend :: a -> b
+class HasComputeBackend a b | a -> b where
+    computeBackend :: a -> b
 
-class HasComputedBaseUrl a b | a -> b where
-    computedBaseUrl :: a -> b
+class HasComputeBaseUrl a b | a -> b where
+    computeBaseUrl :: a -> b
 
-class HasComputedBindSecretId a b | a -> b where
-    computedBindSecretId :: a -> b
+class HasComputeBindSecretId a b | a -> b where
+    computeBindSecretId :: a -> b
 
-class HasComputedBoundAccountId a b | a -> b where
-    computedBoundAccountId :: a -> b
+class HasComputeBoundAccountId a b | a -> b where
+    computeBoundAccountId :: a -> b
 
-class HasComputedBoundAmiId a b | a -> b where
-    computedBoundAmiId :: a -> b
+class HasComputeBoundAmiId a b | a -> b where
+    computeBoundAmiId :: a -> b
 
-class HasComputedBoundCidrList a b | a -> b where
-    computedBoundCidrList :: a -> b
+class HasComputeBoundCidrList a b | a -> b where
+    computeBoundCidrList :: a -> b
 
-class HasComputedBoundIamInstanceProfileArn a b | a -> b where
-    computedBoundIamInstanceProfileArn :: a -> b
+class HasComputeBoundIamInstanceProfileArn a b | a -> b where
+    computeBoundIamInstanceProfileArn :: a -> b
 
-class HasComputedBoundIamPrincipalArn a b | a -> b where
-    computedBoundIamPrincipalArn :: a -> b
+class HasComputeBoundIamPrincipalArn a b | a -> b where
+    computeBoundIamPrincipalArn :: a -> b
 
-class HasComputedBoundIamRoleArn a b | a -> b where
-    computedBoundIamRoleArn :: a -> b
+class HasComputeBoundIamRoleArn a b | a -> b where
+    computeBoundIamRoleArn :: a -> b
 
-class HasComputedBoundRegion a b | a -> b where
-    computedBoundRegion :: a -> b
+class HasComputeBoundRegion a b | a -> b where
+    computeBoundRegion :: a -> b
 
-class HasComputedBoundSubnetId a b | a -> b where
-    computedBoundSubnetId :: a -> b
+class HasComputeBoundSubnetId a b | a -> b where
+    computeBoundSubnetId :: a -> b
 
-class HasComputedBoundVpcId a b | a -> b where
-    computedBoundVpcId :: a -> b
+class HasComputeBoundVpcId a b | a -> b where
+    computeBoundVpcId :: a -> b
 
-class HasComputedCassandra a b | a -> b where
-    computedCassandra :: a -> b
+class HasComputeCassandra a b | a -> b where
+    computeCassandra :: a -> b
 
-class HasComputedCertName a b | a -> b where
-    computedCertName :: a -> b
+class HasComputeCertName a b | a -> b where
+    computeCertName :: a -> b
 
-class HasComputedCidrList a b | a -> b where
-    computedCidrList :: a -> b
+class HasComputeCidrList a b | a -> b where
+    computeCidrList :: a -> b
 
-class HasComputedClientToken a b | a -> b where
-    computedClientToken :: a -> b
+class HasComputeClientToken a b | a -> b where
+    computeClientToken :: a -> b
 
-class HasComputedCreationStatements a b | a -> b where
-    computedCreationStatements :: a -> b
+class HasComputeCreationStatements a b | a -> b where
+    computeCreationStatements :: a -> b
 
-class HasComputedData' a b | a -> b where
-    computedData' :: a -> b
+class HasComputeData' a b | a -> b where
+    computeData' :: a -> b
 
-class HasComputedDataJson a b | a -> b where
-    computedDataJson :: a -> b
+class HasComputeDataJson a b | a -> b where
+    computeDataJson :: a -> b
 
-class HasComputedDbName a b | a -> b where
-    computedDbName :: a -> b
+class HasComputeDbName a b | a -> b where
+    computeDbName :: a -> b
 
-class HasComputedDefaultLeaseTtlSeconds a b | a -> b where
-    computedDefaultLeaseTtlSeconds :: a -> b
+class HasComputeDefaultLeaseTtlSeconds a b | a -> b where
+    computeDefaultLeaseTtlSeconds :: a -> b
 
-class HasComputedDefaultTtl a b | a -> b where
-    computedDefaultTtl :: a -> b
+class HasComputeDefaultTtl a b | a -> b where
+    computeDefaultTtl :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedDisablePeriodicTidy a b | a -> b where
-    computedDisablePeriodicTidy :: a -> b
+class HasComputeDisablePeriodicTidy a b | a -> b where
+    computeDisablePeriodicTidy :: a -> b
 
-class HasComputedDisableRead a b | a -> b where
-    computedDisableRead :: a -> b
+class HasComputeDisableRead a b | a -> b where
+    computeDisableRead :: a -> b
 
-class HasComputedDisallowReauthentication a b | a -> b where
-    computedDisallowReauthentication :: a -> b
+class HasComputeDisallowReauthentication a b | a -> b where
+    computeDisallowReauthentication :: a -> b
 
-class HasComputedEc2Endpoint a b | a -> b where
-    computedEc2Endpoint :: a -> b
+class HasComputeEc2Endpoint a b | a -> b where
+    computeEc2Endpoint :: a -> b
 
-class HasComputedGroup a b | a -> b where
-    computedGroup :: a -> b
+class HasComputeGroup a b | a -> b where
+    computeGroup :: a -> b
 
-class HasComputedGroupName a b | a -> b where
-    computedGroupName :: a -> b
+class HasComputeGroupName a b | a -> b where
+    computeGroupName :: a -> b
 
-class HasComputedGroups a b | a -> b where
-    computedGroups :: a -> b
+class HasComputeGroups a b | a -> b where
+    computeGroups :: a -> b
 
-class HasComputedHana a b | a -> b where
-    computedHana :: a -> b
+class HasComputeHana a b | a -> b where
+    computeHana :: a -> b
 
-class HasComputedIamEndpoint a b | a -> b where
-    computedIamEndpoint :: a -> b
+class HasComputeIamEndpoint a b | a -> b where
+    computeIamEndpoint :: a -> b
 
-class HasComputedIamHttpRequestMethod a b | a -> b where
-    computedIamHttpRequestMethod :: a -> b
+class HasComputeIamHttpRequestMethod a b | a -> b where
+    computeIamHttpRequestMethod :: a -> b
 
-class HasComputedIamRequestBody a b | a -> b where
-    computedIamRequestBody :: a -> b
+class HasComputeIamRequestBody a b | a -> b where
+    computeIamRequestBody :: a -> b
 
-class HasComputedIamRequestHeaders a b | a -> b where
-    computedIamRequestHeaders :: a -> b
+class HasComputeIamRequestHeaders a b | a -> b where
+    computeIamRequestHeaders :: a -> b
 
-class HasComputedIamRequestUrl a b | a -> b where
-    computedIamRequestUrl :: a -> b
+class HasComputeIamRequestUrl a b | a -> b where
+    computeIamRequestUrl :: a -> b
 
-class HasComputedIamServerIdHeaderValue a b | a -> b where
-    computedIamServerIdHeaderValue :: a -> b
+class HasComputeIamServerIdHeaderValue a b | a -> b where
+    computeIamServerIdHeaderValue :: a -> b
 
-class HasComputedIdentity a b | a -> b where
-    computedIdentity :: a -> b
+class HasComputeIdentity a b | a -> b where
+    computeIdentity :: a -> b
 
-class HasComputedInferredAwsRegion a b | a -> b where
-    computedInferredAwsRegion :: a -> b
+class HasComputeInferredAwsRegion a b | a -> b where
+    computeInferredAwsRegion :: a -> b
 
-class HasComputedInferredEntityType a b | a -> b where
-    computedInferredEntityType :: a -> b
+class HasComputeInferredEntityType a b | a -> b where
+    computeInferredEntityType :: a -> b
 
-class HasComputedInstanceId a b | a -> b where
-    computedInstanceId :: a -> b
+class HasComputeInstanceId a b | a -> b where
+    computeInstanceId :: a -> b
 
-class HasComputedLeaseDuration a b | a -> b where
-    computedLeaseDuration :: a -> b
+class HasComputeLeaseDuration a b | a -> b where
+    computeLeaseDuration :: a -> b
 
-class HasComputedLeaseId a b | a -> b where
-    computedLeaseId :: a -> b
+class HasComputeLeaseId a b | a -> b where
+    computeLeaseId :: a -> b
 
-class HasComputedLeaseRenewable a b | a -> b where
-    computedLeaseRenewable :: a -> b
+class HasComputeLeaseRenewable a b | a -> b where
+    computeLeaseRenewable :: a -> b
 
-class HasComputedLeaseStartTime a b | a -> b where
-    computedLeaseStartTime :: a -> b
+class HasComputeLeaseStartTime a b | a -> b where
+    computeLeaseStartTime :: a -> b
 
-class HasComputedMaxLeaseTtlSeconds a b | a -> b where
-    computedMaxLeaseTtlSeconds :: a -> b
+class HasComputeLeaseStarted a b | a -> b where
+    computeLeaseStarted :: a -> b
 
-class HasComputedMaxTtl a b | a -> b where
-    computedMaxTtl :: a -> b
+class HasComputeMaxLeaseTtlSeconds a b | a -> b where
+    computeMaxLeaseTtlSeconds :: a -> b
 
-class HasComputedMetadata a b | a -> b where
-    computedMetadata :: a -> b
+class HasComputeMaxTtl a b | a -> b where
+    computeMaxTtl :: a -> b
 
-class HasComputedMongodb a b | a -> b where
-    computedMongodb :: a -> b
+class HasComputeMetadata a b | a -> b where
+    computeMetadata :: a -> b
 
-class HasComputedMssql a b | a -> b where
-    computedMssql :: a -> b
+class HasComputeMongodb a b | a -> b where
+    computeMongodb :: a -> b
 
-class HasComputedMysql a b | a -> b where
-    computedMysql :: a -> b
+class HasComputeMssql a b | a -> b where
+    computeMssql :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeMysql a b | a -> b where
+    computeMysql :: a -> b
 
-class HasComputedNonce a b | a -> b where
-    computedNonce :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedOracle a b | a -> b where
-    computedOracle :: a -> b
+class HasComputeNonce a b | a -> b where
+    computeNonce :: a -> b
 
-class HasComputedOrganization a b | a -> b where
-    computedOrganization :: a -> b
+class HasComputeOracle a b | a -> b where
+    computeOracle :: a -> b
 
-class HasComputedPath a b | a -> b where
-    computedPath :: a -> b
+class HasComputeOrganization a b | a -> b where
+    computeOrganization :: a -> b
 
-class HasComputedPeriod a b | a -> b where
-    computedPeriod :: a -> b
+class HasComputePath a b | a -> b where
+    computePath :: a -> b
 
-class HasComputedPkcs7 a b | a -> b where
-    computedPkcs7 :: a -> b
+class HasComputePeriod a b | a -> b where
+    computePeriod :: a -> b
 
-class HasComputedPolicies a b | a -> b where
-    computedPolicies :: a -> b
+class HasComputePkcs7 a b | a -> b where
+    computePkcs7 :: a -> b
 
-class HasComputedPolicy a b | a -> b where
-    computedPolicy :: a -> b
+class HasComputePolicies a b | a -> b where
+    computePolicies :: a -> b
 
-class HasComputedPolicyArn a b | a -> b where
-    computedPolicyArn :: a -> b
+class HasComputePolicy a b | a -> b where
+    computePolicy :: a -> b
 
-class HasComputedPostgresql a b | a -> b where
-    computedPostgresql :: a -> b
+class HasComputePolicyArn a b | a -> b where
+    computePolicyArn :: a -> b
 
-class HasComputedRenewStatements a b | a -> b where
-    computedRenewStatements :: a -> b
+class HasComputePostgresql a b | a -> b where
+    computePostgresql :: a -> b
 
-class HasComputedRenewable a b | a -> b where
-    computedRenewable :: a -> b
+class HasComputeRenewStatements a b | a -> b where
+    computeRenewStatements :: a -> b
 
-class HasComputedResolveAwsUniqueIds a b | a -> b where
-    computedResolveAwsUniqueIds :: a -> b
+class HasComputeRenewable a b | a -> b where
+    computeRenewable :: a -> b
 
-class HasComputedRevocationStatements a b | a -> b where
-    computedRevocationStatements :: a -> b
+class HasComputeResolveAwsUniqueIds a b | a -> b where
+    computeResolveAwsUniqueIds :: a -> b
 
-class HasComputedRole a b | a -> b where
-    computedRole :: a -> b
+class HasComputeRevocationStatements a b | a -> b where
+    computeRevocationStatements :: a -> b
 
-class HasComputedRoleId a b | a -> b where
-    computedRoleId :: a -> b
+class HasComputeRole a b | a -> b where
+    computeRole :: a -> b
 
-class HasComputedRoleName a b | a -> b where
-    computedRoleName :: a -> b
+class HasComputeRoleId a b | a -> b where
+    computeRoleId :: a -> b
 
-class HasComputedRoleTag a b | a -> b where
-    computedRoleTag :: a -> b
+class HasComputeRoleName a b | a -> b where
+    computeRoleName :: a -> b
 
-class HasComputedRollbackStatements a b | a -> b where
-    computedRollbackStatements :: a -> b
+class HasComputeRoleTag a b | a -> b where
+    computeRoleTag :: a -> b
 
-class HasComputedSafetyBuffer a b | a -> b where
-    computedSafetyBuffer :: a -> b
+class HasComputeRollbackStatements a b | a -> b where
+    computeRollbackStatements :: a -> b
 
-class HasComputedSecretId a b | a -> b where
-    computedSecretId :: a -> b
+class HasComputeSafetyBuffer a b | a -> b where
+    computeSafetyBuffer :: a -> b
 
-class HasComputedSecretIdNumUses a b | a -> b where
-    computedSecretIdNumUses :: a -> b
+class HasComputeSecretId a b | a -> b where
+    computeSecretId :: a -> b
 
-class HasComputedSecretIdTtl a b | a -> b where
-    computedSecretIdTtl :: a -> b
+class HasComputeSecretIdNumUses a b | a -> b where
+    computeSecretIdNumUses :: a -> b
 
-class HasComputedSecretKey a b | a -> b where
-    computedSecretKey :: a -> b
+class HasComputeSecretIdTtl a b | a -> b where
+    computeSecretIdTtl :: a -> b
 
-class HasComputedSecurityToken a b | a -> b where
-    computedSecurityToken :: a -> b
+class HasComputeSecretKey a b | a -> b where
+    computeSecretKey :: a -> b
 
-class HasComputedSignature a b | a -> b where
-    computedSignature :: a -> b
+class HasComputeSecurityToken a b | a -> b where
+    computeSecurityToken :: a -> b
 
-class HasComputedStsEndpoint a b | a -> b where
-    computedStsEndpoint :: a -> b
+class HasComputeSignature a b | a -> b where
+    computeSignature :: a -> b
 
-class HasComputedStsRole a b | a -> b where
-    computedStsRole :: a -> b
+class HasComputeStsEndpoint a b | a -> b where
+    computeStsEndpoint :: a -> b
 
-class HasComputedTagKey a b | a -> b where
-    computedTagKey :: a -> b
+class HasComputeStsRole a b | a -> b where
+    computeStsRole :: a -> b
 
-class HasComputedTagValue a b | a -> b where
-    computedTagValue :: a -> b
+class HasComputeTagKey a b | a -> b where
+    computeTagKey :: a -> b
 
-class HasComputedToken a b | a -> b where
-    computedToken :: a -> b
+class HasComputeTagValue a b | a -> b where
+    computeTagValue :: a -> b
 
-class HasComputedTokenMaxTtl a b | a -> b where
-    computedTokenMaxTtl :: a -> b
+class HasComputeToken a b | a -> b where
+    computeToken :: a -> b
 
-class HasComputedTokenNumUses a b | a -> b where
-    computedTokenNumUses :: a -> b
+class HasComputeTokenMaxTtl a b | a -> b where
+    computeTokenMaxTtl :: a -> b
 
-class HasComputedTokenTtl a b | a -> b where
-    computedTokenTtl :: a -> b
+class HasComputeTokenNumUses a b | a -> b where
+    computeTokenNumUses :: a -> b
 
-class HasComputedTtl a b | a -> b where
-    computedTtl :: a -> b
+class HasComputeTokenTtl a b | a -> b where
+    computeTokenTtl :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputeTtl a b | a -> b where
+    computeTtl :: a -> b
 
-class HasComputedUser a b | a -> b where
-    computedUser :: a -> b
+class HasComputeType' a b | a -> b where
+    computeType' :: a -> b
 
-class HasComputedUsername a b | a -> b where
-    computedUsername :: a -> b
+class HasComputeUser a b | a -> b where
+    computeUser :: a -> b
 
-class HasComputedVerifyConnection a b | a -> b where
-    computedVerifyConnection :: a -> b
+class HasComputeUsername a b | a -> b where
+    computeUsername :: a -> b
+
+class HasComputeVerifyConnection a b | a -> b where
+    computeVerifyConnection :: a -> b

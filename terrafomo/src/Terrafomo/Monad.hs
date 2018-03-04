@@ -30,13 +30,13 @@ module Terrafomo.Monad
     -- * Providers
     , withProvider
 
-    -- * Refs
-    , ref
+    -- * Declarations
+    , define
 
-    -- * Outputs
+    -- ** Outputs
     , output
 
-    -- * Remote State
+    -- ** Remote State
     , remote
     ) where
 
@@ -84,8 +84,8 @@ import qualified Control.Monad.Trans.Writer.Lazy   as Lazy
 import qualified Control.Monad.Trans.Writer.Strict as Strict
 
 data Error
-    = NonUniqueRef !Key  !HCL.Value
-    | NonUniqueOutput    !Name !HCL.Value
+    = NonUniqueRef    !Key  !HCL.Value
+    | NonUniqueOutput !Name !HCL.Value
       deriving (Eq, Show, Typeable)
 
 instance Exception Error
@@ -294,14 +294,15 @@ insertProvider = \case
 
 -- Values
 
-ref :: ( MonadTerraform s m
+define
+    :: ( MonadTerraform s m
        , IsProvider p
        , HCL.ToHCL (Schema l Key a)
        )
     => Name
     -> Schema l p a
     -> m (Ref s a)
-ref name x =
+define name x =
     liftTerraform $ do
         alias <- insertProvider (_schemaProvider x)
 

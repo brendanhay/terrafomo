@@ -60,66 +60,66 @@ module Terrafomo.DigitalOcean.Lens
     , HasWeight (..)
 
     -- ** Computed Attributes
-    , HasComputedAlgorithm (..)
-    , HasComputedBackups (..)
-    , HasComputedCertificateChain (..)
-    , HasComputedCreatedAt (..)
-    , HasComputedDescription (..)
-    , HasComputedDisk (..)
-    , HasComputedDomain (..)
-    , HasComputedDropletId (..)
-    , HasComputedDropletIds (..)
-    , HasComputedDropletTag (..)
-    , HasComputedFingerprint (..)
-    , HasComputedForwardingRule (..)
-    , HasComputedFqdn (..)
-    , HasComputedHealthcheck (..)
-    , HasComputedId (..)
-    , HasComputedImage (..)
-    , HasComputedInboundRule (..)
-    , HasComputedInboundRules (..)
-    , HasComputedIp (..)
-    , HasComputedIpAddress (..)
-    , HasComputedIpv4Address (..)
-    , HasComputedIpv4AddressPrivate (..)
-    , HasComputedIpv6 (..)
-    , HasComputedIpv6Address (..)
-    , HasComputedIpv6AddressPrivate (..)
-    , HasComputedLeafCertificate (..)
-    , HasComputedLocked (..)
-    , HasComputedMinDiskSize (..)
-    , HasComputedMonitoring (..)
-    , HasComputedName (..)
-    , HasComputedNotAfter (..)
-    , HasComputedOutboundRule (..)
-    , HasComputedOutboundRules (..)
-    , HasComputedPendingChanges (..)
-    , HasComputedPort (..)
-    , HasComputedPriceHourly (..)
-    , HasComputedPriceMonthly (..)
-    , HasComputedPriority (..)
-    , HasComputedPrivate (..)
-    , HasComputedPrivateKey (..)
-    , HasComputedPrivateNetworking (..)
-    , HasComputedPublicKey (..)
-    , HasComputedRedirectHttpToHttps (..)
-    , HasComputedRegion (..)
-    , HasComputedRegions (..)
-    , HasComputedResizeDisk (..)
-    , HasComputedSha1Fingerprint (..)
-    , HasComputedSize (..)
-    , HasComputedSizeGigabytes (..)
-    , HasComputedSshKeys (..)
-    , HasComputedStatus (..)
-    , HasComputedStickySessions (..)
-    , HasComputedTags (..)
-    , HasComputedTtl (..)
-    , HasComputedType' (..)
-    , HasComputedUserData (..)
-    , HasComputedValue (..)
-    , HasComputedVcpus (..)
-    , HasComputedVolumeIds (..)
-    , HasComputedWeight (..)
+    , HasComputeAlgorithm (..)
+    , HasComputeBackups (..)
+    , HasComputeCertificateChain (..)
+    , HasComputeCreatedAt (..)
+    , HasComputeDescription (..)
+    , HasComputeDisk (..)
+    , HasComputeDomain (..)
+    , HasComputeDropletId (..)
+    , HasComputeDropletIds (..)
+    , HasComputeDropletTag (..)
+    , HasComputeFingerprint (..)
+    , HasComputeForwardingRule (..)
+    , HasComputeFqdn (..)
+    , HasComputeHealthcheck (..)
+    , HasComputeId (..)
+    , HasComputeImage (..)
+    , HasComputeInboundRule (..)
+    , HasComputeInboundRules (..)
+    , HasComputeIp (..)
+    , HasComputeIpAddress (..)
+    , HasComputeIpv4Address (..)
+    , HasComputeIpv4AddressPrivate (..)
+    , HasComputeIpv6 (..)
+    , HasComputeIpv6Address (..)
+    , HasComputeIpv6AddressPrivate (..)
+    , HasComputeLeafCertificate (..)
+    , HasComputeLocked (..)
+    , HasComputeMinDiskSize (..)
+    , HasComputeMonitoring (..)
+    , HasComputeName (..)
+    , HasComputeNotAfter (..)
+    , HasComputeOutboundRule (..)
+    , HasComputeOutboundRules (..)
+    , HasComputePendingChanges (..)
+    , HasComputePort (..)
+    , HasComputePriceHourly (..)
+    , HasComputePriceMonthly (..)
+    , HasComputePriority (..)
+    , HasComputePrivate (..)
+    , HasComputePrivateKey (..)
+    , HasComputePrivateNetworking (..)
+    , HasComputePublicKey (..)
+    , HasComputeRedirectHttpToHttps (..)
+    , HasComputeRegion (..)
+    , HasComputeRegions (..)
+    , HasComputeResizeDisk (..)
+    , HasComputeSha1Fingerprint (..)
+    , HasComputeSize (..)
+    , HasComputeSizeGigabytes (..)
+    , HasComputeSshKeys (..)
+    , HasComputeStatus (..)
+    , HasComputeStickySessions (..)
+    , HasComputeTags (..)
+    , HasComputeTtl (..)
+    , HasComputeType' (..)
+    , HasComputeUserData (..)
+    , HasComputeValue (..)
+    , HasComputeVcpus (..)
+    , HasComputeVolumeIds (..)
+    , HasComputeWeight (..)
     ) where
 
 import GHC.Base ((.))
@@ -345,182 +345,182 @@ class HasWeight a b | a -> b where
 instance HasWeight a b => HasWeight (TF.Schema l p a) b where
     weight = TF.configuration . weight
 
-class HasComputedAlgorithm a b | a -> b where
-    computedAlgorithm :: a -> b
+class HasComputeAlgorithm a b | a -> b where
+    computeAlgorithm :: a -> b
 
-class HasComputedBackups a b | a -> b where
-    computedBackups :: a -> b
+class HasComputeBackups a b | a -> b where
+    computeBackups :: a -> b
 
-class HasComputedCertificateChain a b | a -> b where
-    computedCertificateChain :: a -> b
+class HasComputeCertificateChain a b | a -> b where
+    computeCertificateChain :: a -> b
 
-class HasComputedCreatedAt a b | a -> b where
-    computedCreatedAt :: a -> b
+class HasComputeCreatedAt a b | a -> b where
+    computeCreatedAt :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedDisk a b | a -> b where
-    computedDisk :: a -> b
+class HasComputeDisk a b | a -> b where
+    computeDisk :: a -> b
 
-class HasComputedDomain a b | a -> b where
-    computedDomain :: a -> b
+class HasComputeDomain a b | a -> b where
+    computeDomain :: a -> b
 
-class HasComputedDropletId a b | a -> b where
-    computedDropletId :: a -> b
+class HasComputeDropletId a b | a -> b where
+    computeDropletId :: a -> b
 
-class HasComputedDropletIds a b | a -> b where
-    computedDropletIds :: a -> b
+class HasComputeDropletIds a b | a -> b where
+    computeDropletIds :: a -> b
 
-class HasComputedDropletTag a b | a -> b where
-    computedDropletTag :: a -> b
+class HasComputeDropletTag a b | a -> b where
+    computeDropletTag :: a -> b
 
-class HasComputedFingerprint a b | a -> b where
-    computedFingerprint :: a -> b
+class HasComputeFingerprint a b | a -> b where
+    computeFingerprint :: a -> b
 
-class HasComputedForwardingRule a b | a -> b where
-    computedForwardingRule :: a -> b
+class HasComputeForwardingRule a b | a -> b where
+    computeForwardingRule :: a -> b
 
-class HasComputedFqdn a b | a -> b where
-    computedFqdn :: a -> b
+class HasComputeFqdn a b | a -> b where
+    computeFqdn :: a -> b
 
-class HasComputedHealthcheck a b | a -> b where
-    computedHealthcheck :: a -> b
+class HasComputeHealthcheck a b | a -> b where
+    computeHealthcheck :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedImage a b | a -> b where
-    computedImage :: a -> b
+class HasComputeImage a b | a -> b where
+    computeImage :: a -> b
 
-class HasComputedInboundRule a b | a -> b where
-    computedInboundRule :: a -> b
+class HasComputeInboundRule a b | a -> b where
+    computeInboundRule :: a -> b
 
-class HasComputedInboundRules a b | a -> b where
-    computedInboundRules :: a -> b
+class HasComputeInboundRules a b | a -> b where
+    computeInboundRules :: a -> b
 
-class HasComputedIp a b | a -> b where
-    computedIp :: a -> b
+class HasComputeIp a b | a -> b where
+    computeIp :: a -> b
 
-class HasComputedIpAddress a b | a -> b where
-    computedIpAddress :: a -> b
+class HasComputeIpAddress a b | a -> b where
+    computeIpAddress :: a -> b
 
-class HasComputedIpv4Address a b | a -> b where
-    computedIpv4Address :: a -> b
+class HasComputeIpv4Address a b | a -> b where
+    computeIpv4Address :: a -> b
 
-class HasComputedIpv4AddressPrivate a b | a -> b where
-    computedIpv4AddressPrivate :: a -> b
+class HasComputeIpv4AddressPrivate a b | a -> b where
+    computeIpv4AddressPrivate :: a -> b
 
-class HasComputedIpv6 a b | a -> b where
-    computedIpv6 :: a -> b
+class HasComputeIpv6 a b | a -> b where
+    computeIpv6 :: a -> b
 
-class HasComputedIpv6Address a b | a -> b where
-    computedIpv6Address :: a -> b
+class HasComputeIpv6Address a b | a -> b where
+    computeIpv6Address :: a -> b
 
-class HasComputedIpv6AddressPrivate a b | a -> b where
-    computedIpv6AddressPrivate :: a -> b
+class HasComputeIpv6AddressPrivate a b | a -> b where
+    computeIpv6AddressPrivate :: a -> b
 
-class HasComputedLeafCertificate a b | a -> b where
-    computedLeafCertificate :: a -> b
+class HasComputeLeafCertificate a b | a -> b where
+    computeLeafCertificate :: a -> b
 
-class HasComputedLocked a b | a -> b where
-    computedLocked :: a -> b
+class HasComputeLocked a b | a -> b where
+    computeLocked :: a -> b
 
-class HasComputedMinDiskSize a b | a -> b where
-    computedMinDiskSize :: a -> b
+class HasComputeMinDiskSize a b | a -> b where
+    computeMinDiskSize :: a -> b
 
-class HasComputedMonitoring a b | a -> b where
-    computedMonitoring :: a -> b
+class HasComputeMonitoring a b | a -> b where
+    computeMonitoring :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNotAfter a b | a -> b where
-    computedNotAfter :: a -> b
+class HasComputeNotAfter a b | a -> b where
+    computeNotAfter :: a -> b
 
-class HasComputedOutboundRule a b | a -> b where
-    computedOutboundRule :: a -> b
+class HasComputeOutboundRule a b | a -> b where
+    computeOutboundRule :: a -> b
 
-class HasComputedOutboundRules a b | a -> b where
-    computedOutboundRules :: a -> b
+class HasComputeOutboundRules a b | a -> b where
+    computeOutboundRules :: a -> b
 
-class HasComputedPendingChanges a b | a -> b where
-    computedPendingChanges :: a -> b
+class HasComputePendingChanges a b | a -> b where
+    computePendingChanges :: a -> b
 
-class HasComputedPort a b | a -> b where
-    computedPort :: a -> b
+class HasComputePort a b | a -> b where
+    computePort :: a -> b
 
-class HasComputedPriceHourly a b | a -> b where
-    computedPriceHourly :: a -> b
+class HasComputePriceHourly a b | a -> b where
+    computePriceHourly :: a -> b
 
-class HasComputedPriceMonthly a b | a -> b where
-    computedPriceMonthly :: a -> b
+class HasComputePriceMonthly a b | a -> b where
+    computePriceMonthly :: a -> b
 
-class HasComputedPriority a b | a -> b where
-    computedPriority :: a -> b
+class HasComputePriority a b | a -> b where
+    computePriority :: a -> b
 
-class HasComputedPrivate a b | a -> b where
-    computedPrivate :: a -> b
+class HasComputePrivate a b | a -> b where
+    computePrivate :: a -> b
 
-class HasComputedPrivateKey a b | a -> b where
-    computedPrivateKey :: a -> b
+class HasComputePrivateKey a b | a -> b where
+    computePrivateKey :: a -> b
 
-class HasComputedPrivateNetworking a b | a -> b where
-    computedPrivateNetworking :: a -> b
+class HasComputePrivateNetworking a b | a -> b where
+    computePrivateNetworking :: a -> b
 
-class HasComputedPublicKey a b | a -> b where
-    computedPublicKey :: a -> b
+class HasComputePublicKey a b | a -> b where
+    computePublicKey :: a -> b
 
-class HasComputedRedirectHttpToHttps a b | a -> b where
-    computedRedirectHttpToHttps :: a -> b
+class HasComputeRedirectHttpToHttps a b | a -> b where
+    computeRedirectHttpToHttps :: a -> b
 
-class HasComputedRegion a b | a -> b where
-    computedRegion :: a -> b
+class HasComputeRegion a b | a -> b where
+    computeRegion :: a -> b
 
-class HasComputedRegions a b | a -> b where
-    computedRegions :: a -> b
+class HasComputeRegions a b | a -> b where
+    computeRegions :: a -> b
 
-class HasComputedResizeDisk a b | a -> b where
-    computedResizeDisk :: a -> b
+class HasComputeResizeDisk a b | a -> b where
+    computeResizeDisk :: a -> b
 
-class HasComputedSha1Fingerprint a b | a -> b where
-    computedSha1Fingerprint :: a -> b
+class HasComputeSha1Fingerprint a b | a -> b where
+    computeSha1Fingerprint :: a -> b
 
-class HasComputedSize a b | a -> b where
-    computedSize :: a -> b
+class HasComputeSize a b | a -> b where
+    computeSize :: a -> b
 
-class HasComputedSizeGigabytes a b | a -> b where
-    computedSizeGigabytes :: a -> b
+class HasComputeSizeGigabytes a b | a -> b where
+    computeSizeGigabytes :: a -> b
 
-class HasComputedSshKeys a b | a -> b where
-    computedSshKeys :: a -> b
+class HasComputeSshKeys a b | a -> b where
+    computeSshKeys :: a -> b
 
-class HasComputedStatus a b | a -> b where
-    computedStatus :: a -> b
+class HasComputeStatus a b | a -> b where
+    computeStatus :: a -> b
 
-class HasComputedStickySessions a b | a -> b where
-    computedStickySessions :: a -> b
+class HasComputeStickySessions a b | a -> b where
+    computeStickySessions :: a -> b
 
-class HasComputedTags a b | a -> b where
-    computedTags :: a -> b
+class HasComputeTags a b | a -> b where
+    computeTags :: a -> b
 
-class HasComputedTtl a b | a -> b where
-    computedTtl :: a -> b
+class HasComputeTtl a b | a -> b where
+    computeTtl :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputeType' a b | a -> b where
+    computeType' :: a -> b
 
-class HasComputedUserData a b | a -> b where
-    computedUserData :: a -> b
+class HasComputeUserData a b | a -> b where
+    computeUserData :: a -> b
 
-class HasComputedValue a b | a -> b where
-    computedValue :: a -> b
+class HasComputeValue a b | a -> b where
+    computeValue :: a -> b
 
-class HasComputedVcpus a b | a -> b where
-    computedVcpus :: a -> b
+class HasComputeVcpus a b | a -> b where
+    computeVcpus :: a -> b
 
-class HasComputedVolumeIds a b | a -> b where
-    computedVolumeIds :: a -> b
+class HasComputeVolumeIds a b | a -> b where
+    computeVolumeIds :: a -> b
 
-class HasComputedWeight a b | a -> b where
-    computedWeight :: a -> b
+class HasComputeWeight a b | a -> b where
+    computeWeight :: a -> b

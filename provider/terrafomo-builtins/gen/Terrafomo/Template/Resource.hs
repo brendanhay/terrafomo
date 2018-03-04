@@ -24,8 +24,8 @@
 module Terrafomo.Template.Resource
     (
     -- * Types
-      DirResource (..)
-    , dirResource
+      ResourceDir (..)
+    , resourceDir
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -34,9 +34,9 @@ module Terrafomo.Template.Resource
     , P.HasVars (..)
 
     -- ** Computed Attributes
-    , P.HasComputedDestinationDir (..)
-    , P.HasComputedSourceDir (..)
-    , P.HasComputedVars (..)
+    , P.HasComputeDestinationDir (..)
+    , P.HasComputeSourceDir (..)
+    , P.HasComputeVars (..)
 
     -- * Re-exported Types
     , module P
@@ -78,7 +78,7 @@ diff to create it. This may cause "noise" in diffs in environments where
 configurations are routinely applied by many different users or within
 automation systems.
 -}
-data DirResource s = DirResource {
+data ResourceDir s = ResourceDir {
       _destination_dir :: !(TF.Attr s P.Text)
     {- ^ (Required) Path to the directory where the templated files will be written. -}
     , _source_dir      :: !(TF.Attr s P.Text)
@@ -87,47 +87,47 @@ data DirResource s = DirResource {
     {- ^ (Optional) Variables for interpolation within the template. Note that variables must all be primitives. Direct references to lists or maps will cause a validation error. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DirResource s) where
-    toHCL DirResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceDir s) where
+    toHCL ResourceDir{..} = TF.inline $ catMaybes
         [ TF.assign "destination_dir" <$> TF.attribute _destination_dir
         , TF.assign "source_dir" <$> TF.attribute _source_dir
         , TF.assign "vars" <$> TF.attribute _vars
         ]
 
-instance P.HasDestinationDir (DirResource s) (TF.Attr s P.Text) where
+instance P.HasDestinationDir (ResourceDir s) (TF.Attr s P.Text) where
     destinationDir =
-        lens (_destination_dir :: DirResource s -> TF.Attr s P.Text)
-             (\s a -> s { _destination_dir = a } :: DirResource s)
+        lens (_destination_dir :: ResourceDir s -> TF.Attr s P.Text)
+             (\s a -> s { _destination_dir = a } :: ResourceDir s)
 
-instance P.HasSourceDir (DirResource s) (TF.Attr s P.Text) where
+instance P.HasSourceDir (ResourceDir s) (TF.Attr s P.Text) where
     sourceDir =
-        lens (_source_dir :: DirResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_dir = a } :: DirResource s)
+        lens (_source_dir :: ResourceDir s -> TF.Attr s P.Text)
+             (\s a -> s { _source_dir = a } :: ResourceDir s)
 
-instance P.HasVars (DirResource s) (TF.Attr s (P.Variables s)) where
+instance P.HasVars (ResourceDir s) (TF.Attr s (P.Variables s)) where
     vars =
-        lens (_vars :: DirResource s -> TF.Attr s (P.Variables s))
-             (\s a -> s { _vars = a } :: DirResource s)
+        lens (_vars :: ResourceDir s -> TF.Attr s (P.Variables s))
+             (\s a -> s { _vars = a } :: ResourceDir s)
 
-instance s ~ s' => P.HasComputedDestinationDir (TF.Ref s' (DirResource s)) (TF.Attr s P.Text) where
-    computedDestinationDir =
-        (_destination_dir :: DirResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDestinationDir (TF.Ref s' (ResourceDir s)) (TF.Attr s P.Text) where
+    computeDestinationDir =
+        (_destination_dir :: ResourceDir s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourceDir (TF.Ref s' (DirResource s)) (TF.Attr s P.Text) where
-    computedSourceDir =
-        (_source_dir :: DirResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSourceDir (TF.Ref s' (ResourceDir s)) (TF.Attr s P.Text) where
+    computeSourceDir =
+        (_source_dir :: ResourceDir s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVars (TF.Ref s' (DirResource s)) (TF.Attr s (P.Variables s)) where
-    computedVars =
-        (_vars :: DirResource s -> TF.Attr s (P.Variables s))
+instance s ~ s' => P.HasComputeVars (TF.Ref s' (ResourceDir s)) (TF.Attr s (P.Variables s)) where
+    computeVars =
+        (_vars :: ResourceDir s -> TF.Attr s (P.Variables s))
             . TF.refValue
 
-dirResource :: TF.Resource TF.NoProvider (DirResource s)
-dirResource =
+resourceDir :: TF.Resource TF.NoProvider (ResourceDir s)
+resourceDir =
     TF.newResource "template_dir" $
-        DirResource {
+        ResourceDir {
               _destination_dir = TF.Nil
             , _source_dir = TF.Nil
             , _vars = TF.Nil

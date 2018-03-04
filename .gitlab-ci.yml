@@ -13,7 +13,6 @@ cache:
     - provider/terrafomo-aws/.stack-work/
     - provider/terrafomo-azurerm/.stack-work/
     - provider/terrafomo-bitbucket/.stack-work/
-    - provider/terrafomo-builtins/.stack-work/
     - provider/terrafomo-centurylinkcloud/.stack-work/
     - provider/terrafomo-chef/.stack-work/
     - provider/terrafomo-circonus/.stack-work/

@@ -28,13 +28,13 @@ module Terrafomo.Lailgun.Lens
     , HasWildcard (..)
 
     -- ** Computed Attributes
-    , HasComputedName (..)
-    , HasComputedReceivingRecords (..)
-    , HasComputedSendingRecords (..)
-    , HasComputedSmtpLogin (..)
-    , HasComputedSmtpPassword (..)
-    , HasComputedSpamAction (..)
-    , HasComputedWildcard (..)
+    , HasComputeName (..)
+    , HasComputeReceivingRecords (..)
+    , HasComputeSendingRecords (..)
+    , HasComputeSmtpLogin (..)
+    , HasComputeSmtpPassword (..)
+    , HasComputeSpamAction (..)
+    , HasComputeWildcard (..)
     ) where
 
 import GHC.Base ((.))
@@ -68,23 +68,23 @@ class HasWildcard a b | a -> b where
 instance HasWildcard a b => HasWildcard (TF.Schema l p a) b where
     wildcard = TF.configuration . wildcard
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedReceivingRecords a b | a -> b where
-    computedReceivingRecords :: a -> b
+class HasComputeReceivingRecords a b | a -> b where
+    computeReceivingRecords :: a -> b
 
-class HasComputedSendingRecords a b | a -> b where
-    computedSendingRecords :: a -> b
+class HasComputeSendingRecords a b | a -> b where
+    computeSendingRecords :: a -> b
 
-class HasComputedSmtpLogin a b | a -> b where
-    computedSmtpLogin :: a -> b
+class HasComputeSmtpLogin a b | a -> b where
+    computeSmtpLogin :: a -> b
 
-class HasComputedSmtpPassword a b | a -> b where
-    computedSmtpPassword :: a -> b
+class HasComputeSmtpPassword a b | a -> b where
+    computeSmtpPassword :: a -> b
 
-class HasComputedSpamAction a b | a -> b where
-    computedSpamAction :: a -> b
+class HasComputeSpamAction a b | a -> b where
+    computeSpamAction :: a -> b
 
-class HasComputedWildcard a b | a -> b where
-    computedWildcard :: a -> b
+class HasComputeWildcard a b | a -> b where
+    computeWildcard :: a -> b

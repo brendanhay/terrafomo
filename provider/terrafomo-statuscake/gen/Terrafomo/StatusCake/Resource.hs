@@ -24,8 +24,8 @@
 module Terrafomo.StatusCake.Resource
     (
     -- * Types
-      TestResource (..)
-    , testResource
+      ResourceTest (..)
+    , resourceTest
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -41,17 +41,17 @@ module Terrafomo.StatusCake.Resource
     , P.HasWebsiteUrl (..)
 
     -- ** Computed Attributes
-    , P.HasComputedCheckRate (..)
-    , P.HasComputedConfirmations (..)
-    , P.HasComputedContactId (..)
-    , P.HasComputedPaused (..)
-    , P.HasComputedPort (..)
-    , P.HasComputedTestId (..)
-    , P.HasComputedTestType (..)
-    , P.HasComputedTimeout (..)
-    , P.HasComputedTriggerRate (..)
-    , P.HasComputedWebsiteName (..)
-    , P.HasComputedWebsiteUrl (..)
+    , P.HasComputeCheckRate (..)
+    , P.HasComputeConfirmations (..)
+    , P.HasComputeContactId (..)
+    , P.HasComputePaused (..)
+    , P.HasComputePort (..)
+    , P.HasComputeTestId (..)
+    , P.HasComputeTestType (..)
+    , P.HasComputeTimeout (..)
+    , P.HasComputeTriggerRate (..)
+    , P.HasComputeWebsiteName (..)
+    , P.HasComputeWebsiteUrl (..)
 
     -- * Re-exported Types
     , module P
@@ -85,7 +85,7 @@ import qualified Terrafomo.Schema    as TF
 
 The test resource allows StatusCake tests to be managed by Terraform.
 -}
-data TestResource s = TestResource {
+data ResourceTest s = ResourceTest {
       _check_rate    :: !(TF.Attr s P.Text)
     {- ^ (Optional) Test check rate in seconds. Defaults to 300 -}
     , _confirmations :: !(TF.Attr s P.Text)
@@ -108,8 +108,8 @@ data TestResource s = TestResource {
     {- ^ (Required) The URL of the website to be monitored -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TestResource s) where
-    toHCL TestResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceTest s) where
+    toHCL ResourceTest{..} = TF.inline $ catMaybes
         [ TF.assign "check_rate" <$> TF.attribute _check_rate
         , TF.assign "confirmations" <$> TF.attribute _confirmations
         , TF.assign "contact_id" <$> TF.attribute _contact_id
@@ -122,113 +122,113 @@ instance TF.ToHCL (TestResource s) where
         , TF.assign "website_url" <$> TF.attribute _website_url
         ]
 
-instance P.HasCheckRate (TestResource s) (TF.Attr s P.Text) where
+instance P.HasCheckRate (ResourceTest s) (TF.Attr s P.Text) where
     checkRate =
-        lens (_check_rate :: TestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _check_rate = a } :: TestResource s)
+        lens (_check_rate :: ResourceTest s -> TF.Attr s P.Text)
+             (\s a -> s { _check_rate = a } :: ResourceTest s)
 
-instance P.HasConfirmations (TestResource s) (TF.Attr s P.Text) where
+instance P.HasConfirmations (ResourceTest s) (TF.Attr s P.Text) where
     confirmations =
-        lens (_confirmations :: TestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _confirmations = a } :: TestResource s)
+        lens (_confirmations :: ResourceTest s -> TF.Attr s P.Text)
+             (\s a -> s { _confirmations = a } :: ResourceTest s)
 
-instance P.HasContactId (TestResource s) (TF.Attr s P.Text) where
+instance P.HasContactId (ResourceTest s) (TF.Attr s P.Text) where
     contactId =
-        lens (_contact_id :: TestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _contact_id = a } :: TestResource s)
+        lens (_contact_id :: ResourceTest s -> TF.Attr s P.Text)
+             (\s a -> s { _contact_id = a } :: ResourceTest s)
 
-instance P.HasPaused (TestResource s) (TF.Attr s P.Text) where
+instance P.HasPaused (ResourceTest s) (TF.Attr s P.Text) where
     paused =
-        lens (_paused :: TestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _paused = a } :: TestResource s)
+        lens (_paused :: ResourceTest s -> TF.Attr s P.Text)
+             (\s a -> s { _paused = a } :: ResourceTest s)
 
-instance P.HasPort (TestResource s) (TF.Attr s P.Text) where
+instance P.HasPort (ResourceTest s) (TF.Attr s P.Text) where
     port =
-        lens (_port :: TestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _port = a } :: TestResource s)
+        lens (_port :: ResourceTest s -> TF.Attr s P.Text)
+             (\s a -> s { _port = a } :: ResourceTest s)
 
-instance P.HasTestType (TestResource s) (TF.Attr s P.Text) where
+instance P.HasTestType (ResourceTest s) (TF.Attr s P.Text) where
     testType =
-        lens (_test_type :: TestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _test_type = a } :: TestResource s)
+        lens (_test_type :: ResourceTest s -> TF.Attr s P.Text)
+             (\s a -> s { _test_type = a } :: ResourceTest s)
 
-instance P.HasTimeout (TestResource s) (TF.Attr s P.Text) where
+instance P.HasTimeout (ResourceTest s) (TF.Attr s P.Text) where
     timeout =
-        lens (_timeout :: TestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _timeout = a } :: TestResource s)
+        lens (_timeout :: ResourceTest s -> TF.Attr s P.Text)
+             (\s a -> s { _timeout = a } :: ResourceTest s)
 
-instance P.HasTriggerRate (TestResource s) (TF.Attr s P.Text) where
+instance P.HasTriggerRate (ResourceTest s) (TF.Attr s P.Text) where
     triggerRate =
-        lens (_trigger_rate :: TestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _trigger_rate = a } :: TestResource s)
+        lens (_trigger_rate :: ResourceTest s -> TF.Attr s P.Text)
+             (\s a -> s { _trigger_rate = a } :: ResourceTest s)
 
-instance P.HasWebsiteName (TestResource s) (TF.Attr s P.Text) where
+instance P.HasWebsiteName (ResourceTest s) (TF.Attr s P.Text) where
     websiteName =
-        lens (_website_name :: TestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _website_name = a } :: TestResource s)
+        lens (_website_name :: ResourceTest s -> TF.Attr s P.Text)
+             (\s a -> s { _website_name = a } :: ResourceTest s)
 
-instance P.HasWebsiteUrl (TestResource s) (TF.Attr s P.Text) where
+instance P.HasWebsiteUrl (ResourceTest s) (TF.Attr s P.Text) where
     websiteUrl =
-        lens (_website_url :: TestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _website_url = a } :: TestResource s)
+        lens (_website_url :: ResourceTest s -> TF.Attr s P.Text)
+             (\s a -> s { _website_url = a } :: ResourceTest s)
 
-instance s ~ s' => P.HasComputedCheckRate (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedCheckRate =
-        (_check_rate :: TestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCheckRate (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computeCheckRate =
+        (_check_rate :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedConfirmations (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedConfirmations =
-        (_confirmations :: TestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeConfirmations (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computeConfirmations =
+        (_confirmations :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedContactId (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedContactId =
-        (_contact_id :: TestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeContactId (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computeContactId =
+        (_contact_id :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPaused (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedPaused =
-        (_paused :: TestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePaused (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computePaused =
+        (_paused :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedPort =
-        (_port :: TestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePort (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computePort =
+        (_port :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTestId (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedTestId x = TF.compute (TF.refKey x) "test_id"
+instance s ~ s' => P.HasComputeTestId (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computeTestId x = TF.compute (TF.refKey x) "test_id"
 
-instance s ~ s' => P.HasComputedTestType (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedTestType =
-        (_test_type :: TestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTestType (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computeTestType =
+        (_test_type :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedTimeout =
-        (_timeout :: TestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTimeout (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computeTimeout =
+        (_timeout :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTriggerRate (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedTriggerRate =
-        (_trigger_rate :: TestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTriggerRate (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computeTriggerRate =
+        (_trigger_rate :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedWebsiteName (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedWebsiteName =
-        (_website_name :: TestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeWebsiteName (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computeWebsiteName =
+        (_website_name :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedWebsiteUrl (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedWebsiteUrl =
-        (_website_url :: TestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeWebsiteUrl (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+    computeWebsiteUrl =
+        (_website_url :: ResourceTest s -> TF.Attr s P.Text)
             . TF.refValue
 
-testResource :: TF.Resource P.StatusCake (TestResource s)
-testResource =
+resourceTest :: TF.Resource P.StatusCake (ResourceTest s)
+resourceTest =
     TF.newResource "statuscake_test" $
-        TestResource {
+        ResourceTest {
               _check_rate = TF.Nil
             , _confirmations = TF.Nil
             , _contact_id = TF.Nil

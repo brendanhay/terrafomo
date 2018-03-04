@@ -55,46 +55,46 @@ module Terrafomo.PagerDuty.Lens
     , HasVendor (..)
 
     -- ** Computed Attributes
-    , HasComputedAcknowledgementTimeout (..)
-    , HasComputedAddress (..)
-    , HasComputedAlertCreation (..)
-    , HasComputedAutoResolveTimeout (..)
-    , HasComputedAvatarUrl (..)
-    , HasComputedBlacklisted (..)
-    , HasComputedColor (..)
-    , HasComputedCountryCode (..)
-    , HasComputedCreatedAt (..)
-    , HasComputedDescription (..)
-    , HasComputedEmail (..)
-    , HasComputedEnabled (..)
-    , HasComputedEndTime (..)
-    , HasComputedEscalationPolicy (..)
-    , HasComputedHtmlUrl (..)
-    , HasComputedId (..)
-    , HasComputedIntegrationEmail (..)
-    , HasComputedIntegrationKey (..)
-    , HasComputedInvitationSent (..)
-    , HasComputedJobTitle (..)
-    , HasComputedLabel (..)
-    , HasComputedLastIncidentTimestamp (..)
-    , HasComputedLayer (..)
-    , HasComputedName (..)
-    , HasComputedNumLoops (..)
-    , HasComputedOverflow (..)
-    , HasComputedRole (..)
-    , HasComputedRule (..)
-    , HasComputedSendShortEmail (..)
-    , HasComputedService (..)
-    , HasComputedServices (..)
-    , HasComputedSrc (..)
-    , HasComputedStartTime (..)
-    , HasComputedStatus (..)
-    , HasComputedTeamId (..)
-    , HasComputedTeams (..)
-    , HasComputedTimeZone (..)
-    , HasComputedType' (..)
-    , HasComputedUserId (..)
-    , HasComputedVendor (..)
+    , HasComputeAcknowledgementTimeout (..)
+    , HasComputeAddress (..)
+    , HasComputeAlertCreation (..)
+    , HasComputeAutoResolveTimeout (..)
+    , HasComputeAvatarUrl (..)
+    , HasComputeBlacklisted (..)
+    , HasComputeColor (..)
+    , HasComputeCountryCode (..)
+    , HasComputeCreatedAt (..)
+    , HasComputeDescription (..)
+    , HasComputeEmail (..)
+    , HasComputeEnabled (..)
+    , HasComputeEndTime (..)
+    , HasComputeEscalationPolicy (..)
+    , HasComputeHtmlUrl (..)
+    , HasComputeId (..)
+    , HasComputeIntegrationEmail (..)
+    , HasComputeIntegrationKey (..)
+    , HasComputeInvitationSent (..)
+    , HasComputeJobTitle (..)
+    , HasComputeLabel (..)
+    , HasComputeLastIncidentTimestamp (..)
+    , HasComputeLayer (..)
+    , HasComputeName (..)
+    , HasComputeNumLoops (..)
+    , HasComputeOverflow (..)
+    , HasComputeRole (..)
+    , HasComputeRule (..)
+    , HasComputeSendShortEmail (..)
+    , HasComputeService (..)
+    , HasComputeServices (..)
+    , HasComputeSrc (..)
+    , HasComputeStartTime (..)
+    , HasComputeStatus (..)
+    , HasComputeTeamId (..)
+    , HasComputeTeams (..)
+    , HasComputeTimeZone (..)
+    , HasComputeType' (..)
+    , HasComputeUserId (..)
+    , HasComputeVendor (..)
     ) where
 
 import GHC.Base ((.))
@@ -290,122 +290,122 @@ class HasVendor a b | a -> b where
 instance HasVendor a b => HasVendor (TF.Schema l p a) b where
     vendor = TF.configuration . vendor
 
-class HasComputedAcknowledgementTimeout a b | a -> b where
-    computedAcknowledgementTimeout :: a -> b
+class HasComputeAcknowledgementTimeout a b | a -> b where
+    computeAcknowledgementTimeout :: a -> b
 
-class HasComputedAddress a b | a -> b where
-    computedAddress :: a -> b
+class HasComputeAddress a b | a -> b where
+    computeAddress :: a -> b
 
-class HasComputedAlertCreation a b | a -> b where
-    computedAlertCreation :: a -> b
+class HasComputeAlertCreation a b | a -> b where
+    computeAlertCreation :: a -> b
 
-class HasComputedAutoResolveTimeout a b | a -> b where
-    computedAutoResolveTimeout :: a -> b
+class HasComputeAutoResolveTimeout a b | a -> b where
+    computeAutoResolveTimeout :: a -> b
 
-class HasComputedAvatarUrl a b | a -> b where
-    computedAvatarUrl :: a -> b
+class HasComputeAvatarUrl a b | a -> b where
+    computeAvatarUrl :: a -> b
 
-class HasComputedBlacklisted a b | a -> b where
-    computedBlacklisted :: a -> b
+class HasComputeBlacklisted a b | a -> b where
+    computeBlacklisted :: a -> b
 
-class HasComputedColor a b | a -> b where
-    computedColor :: a -> b
+class HasComputeColor a b | a -> b where
+    computeColor :: a -> b
 
-class HasComputedCountryCode a b | a -> b where
-    computedCountryCode :: a -> b
+class HasComputeCountryCode a b | a -> b where
+    computeCountryCode :: a -> b
 
-class HasComputedCreatedAt a b | a -> b where
-    computedCreatedAt :: a -> b
+class HasComputeCreatedAt a b | a -> b where
+    computeCreatedAt :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedEmail a b | a -> b where
-    computedEmail :: a -> b
+class HasComputeEmail a b | a -> b where
+    computeEmail :: a -> b
 
-class HasComputedEnabled a b | a -> b where
-    computedEnabled :: a -> b
+class HasComputeEnabled a b | a -> b where
+    computeEnabled :: a -> b
 
-class HasComputedEndTime a b | a -> b where
-    computedEndTime :: a -> b
+class HasComputeEndTime a b | a -> b where
+    computeEndTime :: a -> b
 
-class HasComputedEscalationPolicy a b | a -> b where
-    computedEscalationPolicy :: a -> b
+class HasComputeEscalationPolicy a b | a -> b where
+    computeEscalationPolicy :: a -> b
 
-class HasComputedHtmlUrl a b | a -> b where
-    computedHtmlUrl :: a -> b
+class HasComputeHtmlUrl a b | a -> b where
+    computeHtmlUrl :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedIntegrationEmail a b | a -> b where
-    computedIntegrationEmail :: a -> b
+class HasComputeIntegrationEmail a b | a -> b where
+    computeIntegrationEmail :: a -> b
 
-class HasComputedIntegrationKey a b | a -> b where
-    computedIntegrationKey :: a -> b
+class HasComputeIntegrationKey a b | a -> b where
+    computeIntegrationKey :: a -> b
 
-class HasComputedInvitationSent a b | a -> b where
-    computedInvitationSent :: a -> b
+class HasComputeInvitationSent a b | a -> b where
+    computeInvitationSent :: a -> b
 
-class HasComputedJobTitle a b | a -> b where
-    computedJobTitle :: a -> b
+class HasComputeJobTitle a b | a -> b where
+    computeJobTitle :: a -> b
 
-class HasComputedLabel a b | a -> b where
-    computedLabel :: a -> b
+class HasComputeLabel a b | a -> b where
+    computeLabel :: a -> b
 
-class HasComputedLastIncidentTimestamp a b | a -> b where
-    computedLastIncidentTimestamp :: a -> b
+class HasComputeLastIncidentTimestamp a b | a -> b where
+    computeLastIncidentTimestamp :: a -> b
 
-class HasComputedLayer a b | a -> b where
-    computedLayer :: a -> b
+class HasComputeLayer a b | a -> b where
+    computeLayer :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNumLoops a b | a -> b where
-    computedNumLoops :: a -> b
+class HasComputeNumLoops a b | a -> b where
+    computeNumLoops :: a -> b
 
-class HasComputedOverflow a b | a -> b where
-    computedOverflow :: a -> b
+class HasComputeOverflow a b | a -> b where
+    computeOverflow :: a -> b
 
-class HasComputedRole a b | a -> b where
-    computedRole :: a -> b
+class HasComputeRole a b | a -> b where
+    computeRole :: a -> b
 
-class HasComputedRule a b | a -> b where
-    computedRule :: a -> b
+class HasComputeRule a b | a -> b where
+    computeRule :: a -> b
 
-class HasComputedSendShortEmail a b | a -> b where
-    computedSendShortEmail :: a -> b
+class HasComputeSendShortEmail a b | a -> b where
+    computeSendShortEmail :: a -> b
 
-class HasComputedService a b | a -> b where
-    computedService :: a -> b
+class HasComputeService a b | a -> b where
+    computeService :: a -> b
 
-class HasComputedServices a b | a -> b where
-    computedServices :: a -> b
+class HasComputeServices a b | a -> b where
+    computeServices :: a -> b
 
-class HasComputedSrc a b | a -> b where
-    computedSrc :: a -> b
+class HasComputeSrc a b | a -> b where
+    computeSrc :: a -> b
 
-class HasComputedStartTime a b | a -> b where
-    computedStartTime :: a -> b
+class HasComputeStartTime a b | a -> b where
+    computeStartTime :: a -> b
 
-class HasComputedStatus a b | a -> b where
-    computedStatus :: a -> b
+class HasComputeStatus a b | a -> b where
+    computeStatus :: a -> b
 
-class HasComputedTeamId a b | a -> b where
-    computedTeamId :: a -> b
+class HasComputeTeamId a b | a -> b where
+    computeTeamId :: a -> b
 
-class HasComputedTeams a b | a -> b where
-    computedTeams :: a -> b
+class HasComputeTeams a b | a -> b where
+    computeTeams :: a -> b
 
-class HasComputedTimeZone a b | a -> b where
-    computedTimeZone :: a -> b
+class HasComputeTimeZone a b | a -> b where
+    computeTimeZone :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputeType' a b | a -> b where
+    computeType' :: a -> b
 
-class HasComputedUserId a b | a -> b where
-    computedUserId :: a -> b
+class HasComputeUserId a b | a -> b where
+    computeUserId :: a -> b
 
-class HasComputedVendor a b | a -> b where
-    computedVendor :: a -> b
+class HasComputeVendor a b | a -> b where
+    computeVendor :: a -> b

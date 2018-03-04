@@ -24,18 +24,18 @@
 module Terrafomo.Kubernetes.DataSource
     (
     -- * Types
-      ServiceDataSource (..)
-    , serviceDataSource
+      DataService (..)
+    , dataService
 
-    , StorageClassDataSource (..)
-    , storageClassDataSource
+    , DataStorageClass (..)
+    , dataStorageClass
 
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasMetadata (..)
 
     -- ** Computed Attributes
-    , P.HasComputedMetadata (..)
+    , P.HasComputeMetadata (..)
 
     -- * Re-exported Types
     , module P
@@ -71,30 +71,30 @@ A Service is an abstraction which defines a logical set of pods and a policy
 by which to access them - sometimes called a micro-service. This data source
 allows you to pull data about such service.
 -}
-data ServiceDataSource s = ServiceDataSource {
+data DataService s = DataService {
       _metadata :: !(TF.Attr s P.Text)
     {- ^ (Required) Standard service's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceDataSource s) where
-    toHCL ServiceDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataService s) where
+    toHCL DataService{..} = TF.inline $ catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         ]
 
-instance P.HasMetadata (ServiceDataSource s) (TF.Attr s P.Text) where
+instance P.HasMetadata (DataService s) (TF.Attr s P.Text) where
     metadata =
-        lens (_metadata :: ServiceDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _metadata = a } :: ServiceDataSource s)
+        lens (_metadata :: DataService s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata = a } :: DataService s)
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ServiceDataSource s)) (TF.Attr s P.Text) where
-    computedMetadata =
-        (_metadata :: ServiceDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (DataService s)) (TF.Attr s P.Text) where
+    computeMetadata =
+        (_metadata :: DataService s -> TF.Attr s P.Text)
             . TF.refValue
 
-serviceDataSource :: TF.DataSource P.Kubernetes (ServiceDataSource s)
-serviceDataSource =
+dataService :: TF.DataSource P.Kubernetes (DataService s)
+dataService =
     TF.newDataSource "kubernetes_service" $
-        ServiceDataSource {
+        DataService {
               _metadata = TF.Nil
             }
 
@@ -105,29 +105,29 @@ administrators to define abstractions for the underlying storage platform.
 Read more at
 http://blog.kubernetes.io/2017/03/dynamic-provisioning-and-storage-classes-kubernetes.html
 -}
-data StorageClassDataSource s = StorageClassDataSource {
+data DataStorageClass s = DataStorageClass {
       _metadata :: !(TF.Attr s P.Text)
     {- ^ (Required) Standard storage class's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageClassDataSource s) where
-    toHCL StorageClassDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataStorageClass s) where
+    toHCL DataStorageClass{..} = TF.inline $ catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         ]
 
-instance P.HasMetadata (StorageClassDataSource s) (TF.Attr s P.Text) where
+instance P.HasMetadata (DataStorageClass s) (TF.Attr s P.Text) where
     metadata =
-        lens (_metadata :: StorageClassDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _metadata = a } :: StorageClassDataSource s)
+        lens (_metadata :: DataStorageClass s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata = a } :: DataStorageClass s)
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (StorageClassDataSource s)) (TF.Attr s P.Text) where
-    computedMetadata =
-        (_metadata :: StorageClassDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (DataStorageClass s)) (TF.Attr s P.Text) where
+    computeMetadata =
+        (_metadata :: DataStorageClass s -> TF.Attr s P.Text)
             . TF.refValue
 
-storageClassDataSource :: TF.DataSource P.Kubernetes (StorageClassDataSource s)
-storageClassDataSource =
+dataStorageClass :: TF.DataSource P.Kubernetes (DataStorageClass s)
+dataStorageClass =
     TF.newDataSource "kubernetes_storage_class" $
-        StorageClassDataSource {
+        DataStorageClass {
               _metadata = TF.Nil
             }

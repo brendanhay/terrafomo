@@ -24,38 +24,38 @@
 module Terrafomo.VSphere.DataSource
     (
     -- * Types
-      CustomAttributeDataSource (..)
-    , customAttributeDataSource
+      DataCustomAttribute (..)
+    , dataCustomAttribute
 
-    , DatacenterDataSource (..)
-    , datacenterDataSource
+    , DataDatacenter (..)
+    , dataDatacenter
 
-    , DatastoreDataSource (..)
-    , datastoreDataSource
+    , DataDatastore (..)
+    , dataDatastore
 
-    , DistributedVirtualSwitchDataSource (..)
-    , distributedVirtualSwitchDataSource
+    , DataDistributedVirtualSwitch (..)
+    , dataDistributedVirtualSwitch
 
-    , HostDataSource (..)
-    , hostDataSource
+    , DataHost (..)
+    , dataHost
 
-    , NetworkDataSource (..)
-    , networkDataSource
+    , DataNetwork (..)
+    , dataNetwork
 
-    , ResourcePoolDataSource (..)
-    , resourcePoolDataSource
+    , DataResourcePool (..)
+    , dataResourcePool
 
-    , TagCategoryDataSource (..)
-    , tagCategoryDataSource
+    , DataTag (..)
+    , dataTag
 
-    , TagDataSource (..)
-    , tagDataSource
+    , DataTagCategory (..)
+    , dataTagCategory
 
-    , VirtualMachineDataSource (..)
-    , virtualMachineDataSource
+    , DataVirtualMachine (..)
+    , dataVirtualMachine
 
-    , VmfsDisksDataSource (..)
-    , vmfsDisksDataSource
+    , DataVmfsDisks (..)
+    , dataVmfsDisks
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -68,24 +68,24 @@ module Terrafomo.VSphere.DataSource
     , P.HasScsiControllerScanCount (..)
 
     -- ** Computed Attributes
-    , P.HasComputedAlternateGuestName (..)
-    , P.HasComputedCategoryId (..)
-    , P.HasComputedDatacenterId (..)
-    , P.HasComputedDisks (..)
-    , P.HasComputedEagerlyScrub (..)
-    , P.HasComputedFilter (..)
-    , P.HasComputedGuestId (..)
-    , P.HasComputedHostSystemId (..)
-    , P.HasComputedId (..)
-    , P.HasComputedName (..)
-    , P.HasComputedNetworkInterfaceTypes (..)
-    , P.HasComputedRescan (..)
-    , P.HasComputedScsiControllerScanCount (..)
-    , P.HasComputedScsiType (..)
-    , P.HasComputedSize (..)
-    , P.HasComputedThinProvisioned (..)
-    , P.HasComputedType' (..)
-    , P.HasComputedUplinks (..)
+    , P.HasComputeAlternateGuestName (..)
+    , P.HasComputeCategoryId (..)
+    , P.HasComputeDatacenterId (..)
+    , P.HasComputeDisks (..)
+    , P.HasComputeEagerlyScrub (..)
+    , P.HasComputeFilter (..)
+    , P.HasComputeGuestId (..)
+    , P.HasComputeHostSystemId (..)
+    , P.HasComputeId (..)
+    , P.HasComputeName (..)
+    , P.HasComputeNetworkInterfaceTypes (..)
+    , P.HasComputeRescan (..)
+    , P.HasComputeScsiControllerScanCount (..)
+    , P.HasComputeScsiType (..)
+    , P.HasComputeSize (..)
+    , P.HasComputeThinProvisioned (..)
+    , P.HasComputeType' (..)
+    , P.HasComputeUplinks (..)
 
     -- * Re-exported Types
     , module P
@@ -125,30 +125,30 @@ attributes are then populated with the data found by the search. ~> NOTE:
 Custom attributes are unsupported on direct ESXi connections and require
 vCenter.
 -}
-data CustomAttributeDataSource s = CustomAttributeDataSource {
+data DataCustomAttribute s = DataCustomAttribute {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the custom attribute. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CustomAttributeDataSource s) where
-    toHCL CustomAttributeDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataCustomAttribute s) where
+    toHCL DataCustomAttribute{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (CustomAttributeDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataCustomAttribute s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: CustomAttributeDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: CustomAttributeDataSource s)
+        lens (_name :: DataCustomAttribute s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataCustomAttribute s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CustomAttributeDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: CustomAttributeDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataCustomAttribute s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataCustomAttribute s -> TF.Attr s P.Text)
             . TF.refValue
 
-customAttributeDataSource :: TF.DataSource P.VSphere (CustomAttributeDataSource s)
-customAttributeDataSource =
+dataCustomAttribute :: TF.DataSource P.VSphere (DataCustomAttribute s)
+dataCustomAttribute =
     TF.newDataSource "vsphere_custom_attribute" $
-        CustomAttributeDataSource {
+        DataCustomAttribute {
               _name = TF.Nil
             }
 
@@ -159,30 +159,30 @@ vSphere datacenter. This can then be used with resources or data sources
 that require a datacenter, such as the </docs/providers/vsphere/d/host.html>
 data source.
 -}
-data DatacenterDataSource s = DatacenterDataSource {
+data DataDatacenter s = DataDatacenter {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the datacenter. This can be a name or path. Can be omitted if there is only one datacenter in your inventory. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatacenterDataSource s) where
-    toHCL DatacenterDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataDatacenter s) where
+    toHCL DataDatacenter{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (DatacenterDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataDatacenter s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DatacenterDataSource s)
+        lens (_name :: DataDatacenter s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataDatacenter s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataDatacenter s -> TF.Attr s P.Text)
             . TF.refValue
 
-datacenterDataSource :: TF.DataSource P.VSphere (DatacenterDataSource s)
-datacenterDataSource =
+dataDatacenter :: TF.DataSource P.VSphere (DataDatacenter s)
+dataDatacenter =
     TF.newDataSource "vsphere_datacenter" $
-        DatacenterDataSource {
+        DataDatacenter {
               _name = TF.Nil
             }
 
@@ -193,43 +193,43 @@ datastore in vSphere. This is useful to fetch the ID of a datastore that you
 want to use to create virtual machines in using the
 </docs/providers/vsphere/r/virtual_machine.html> resource.
 -}
-data DatastoreDataSource s = DatastoreDataSource {
+data DataDatastore s = DataDatastore {
       _datacenter_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datacenter the datastore is located in. This can be omitted if the search path used in @name@ is an absolute path. For default datacenters, use the id attribute from an empty @vsphere_datacenter@ data source. -}
     , _name          :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the datastore. This can be a name or path. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatastoreDataSource s) where
-    toHCL DatastoreDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataDatastore s) where
+    toHCL DataDatastore{..} = TF.inline $ catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDatacenterId (DatastoreDataSource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (DataDatastore s) (TF.Attr s P.Text) where
     datacenterId =
-        lens (_datacenter_id :: DatastoreDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter_id = a } :: DatastoreDataSource s)
+        lens (_datacenter_id :: DataDatastore s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter_id = a } :: DataDatastore s)
 
-instance P.HasName (DatastoreDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataDatastore s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DatastoreDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DatastoreDataSource s)
+        lens (_name :: DataDatastore s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataDatastore s)
 
-instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (DatastoreDataSource s)) (TF.Attr s P.Text) where
-    computedDatacenterId =
-        (_datacenter_id :: DatastoreDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDatacenterId (TF.Ref s' (DataDatastore s)) (TF.Attr s P.Text) where
+    computeDatacenterId =
+        (_datacenter_id :: DataDatastore s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DatastoreDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DatastoreDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataDatastore s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataDatastore s -> TF.Attr s P.Text)
             . TF.refValue
 
-datastoreDataSource :: TF.DataSource P.VSphere (DatastoreDataSource s)
-datastoreDataSource =
+dataDatastore :: TF.DataSource P.VSphere (DataDatastore s)
+dataDatastore =
     TF.newDataSource "vsphere_datastore" $
-        DatastoreDataSource {
+        DataDatastore {
               _datacenter_id = TF.Nil
             , _name = TF.Nil
             }
@@ -243,49 +243,49 @@ such as the </docs/providers/vsphere/r/distributed_port_group.html>
 resource, for which an example is shown below. ~> NOTE: This data source
 requires vCenter and is not available on direct ESXi connections.
 -}
-data DistributedVirtualSwitchDataSource s = DistributedVirtualSwitchDataSource {
+data DataDistributedVirtualSwitch s = DataDistributedVirtualSwitch {
       _datacenter_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datacenter the DVS is located in. This can be omitted if the search path used in @name@ is an absolute path. For default datacenters, use the id attribute from an empty @vsphere_datacenter@ data source. -}
     , _name          :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the distributed virtual switch. This can be a name or path. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DistributedVirtualSwitchDataSource s) where
-    toHCL DistributedVirtualSwitchDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataDistributedVirtualSwitch s) where
+    toHCL DataDistributedVirtualSwitch{..} = TF.inline $ catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDatacenterId (DistributedVirtualSwitchDataSource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (DataDistributedVirtualSwitch s) (TF.Attr s P.Text) where
     datacenterId =
-        lens (_datacenter_id :: DistributedVirtualSwitchDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter_id = a } :: DistributedVirtualSwitchDataSource s)
+        lens (_datacenter_id :: DataDistributedVirtualSwitch s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter_id = a } :: DataDistributedVirtualSwitch s)
 
-instance P.HasName (DistributedVirtualSwitchDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataDistributedVirtualSwitch s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DistributedVirtualSwitchDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DistributedVirtualSwitchDataSource s)
+        lens (_name :: DataDistributedVirtualSwitch s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataDistributedVirtualSwitch s)
 
-instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (DistributedVirtualSwitchDataSource s)) (TF.Attr s P.Text) where
-    computedDatacenterId =
-        (_datacenter_id :: DistributedVirtualSwitchDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDatacenterId (TF.Ref s' (DataDistributedVirtualSwitch s)) (TF.Attr s P.Text) where
+    computeDatacenterId =
+        (_datacenter_id :: DataDistributedVirtualSwitch s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DistributedVirtualSwitchDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataDistributedVirtualSwitch s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DistributedVirtualSwitchDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DistributedVirtualSwitchDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataDistributedVirtualSwitch s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataDistributedVirtualSwitch s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUplinks (TF.Ref s' (DistributedVirtualSwitchDataSource s)) (TF.Attr s P.Text) where
-    computedUplinks x = TF.compute (TF.refKey x) "uplinks"
+instance s ~ s' => P.HasComputeUplinks (TF.Ref s' (DataDistributedVirtualSwitch s)) (TF.Attr s P.Text) where
+    computeUplinks x = TF.compute (TF.refKey x) "uplinks"
 
-distributedVirtualSwitchDataSource :: TF.DataSource P.VSphere (DistributedVirtualSwitchDataSource s)
-distributedVirtualSwitchDataSource =
+dataDistributedVirtualSwitch :: TF.DataSource P.VSphere (DataDistributedVirtualSwitch s)
+dataDistributedVirtualSwitch =
     TF.newDataSource "vsphere_distributed_virtual_switch" $
-        DistributedVirtualSwitchDataSource {
+        DataDistributedVirtualSwitch {
               _datacenter_id = TF.Nil
             , _name = TF.Nil
             }
@@ -296,43 +296,43 @@ The @vsphere_host@ data source can be used to discover the ID of a vSphere
 host. This can then be used with resources or data sources that require a
 host managed object reference ID.
 -}
-data HostDataSource s = HostDataSource {
+data DataHost s = DataHost {
       _datacenter_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of a datacenter. -}
     , _name          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the host. This can be a name or path. Can be omitted if there is only one host in your inventory. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HostDataSource s) where
-    toHCL HostDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataHost s) where
+    toHCL DataHost{..} = TF.inline $ catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDatacenterId (HostDataSource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (DataHost s) (TF.Attr s P.Text) where
     datacenterId =
-        lens (_datacenter_id :: HostDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter_id = a } :: HostDataSource s)
+        lens (_datacenter_id :: DataHost s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter_id = a } :: DataHost s)
 
-instance P.HasName (HostDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataHost s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: HostDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: HostDataSource s)
+        lens (_name :: DataHost s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataHost s)
 
-instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (HostDataSource s)) (TF.Attr s P.Text) where
-    computedDatacenterId =
-        (_datacenter_id :: HostDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDatacenterId (TF.Ref s' (DataHost s)) (TF.Attr s P.Text) where
+    computeDatacenterId =
+        (_datacenter_id :: DataHost s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (HostDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: HostDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataHost s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataHost s -> TF.Attr s P.Text)
             . TF.refValue
 
-hostDataSource :: TF.DataSource P.VSphere (HostDataSource s)
-hostDataSource =
+dataHost :: TF.DataSource P.VSphere (DataHost s)
+dataHost =
     TF.newDataSource "vsphere_host" $
-        HostDataSource {
+        DataHost {
               _datacenter_id = TF.Nil
             , _name = TF.Nil
             }
@@ -345,49 +345,49 @@ for a network interface for @vsphere_virtual_machine@ or any other vSphere
 resource that requires a network. This includes standard (host-based) port
 groups, DVS port groups, or opaque networks such as those managed by NSX.
 -}
-data NetworkDataSource s = NetworkDataSource {
+data DataNetwork s = DataNetwork {
       _datacenter_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datacenter the network is located in. This can be omitted if the search path used in @name@ is an absolute path. For default datacenters, use the id attribute from an empty @vsphere_datacenter@ data source. -}
     , _name          :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the network. This can be a name or path. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkDataSource s) where
-    toHCL NetworkDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataNetwork s) where
+    toHCL DataNetwork{..} = TF.inline $ catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDatacenterId (NetworkDataSource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (DataNetwork s) (TF.Attr s P.Text) where
     datacenterId =
-        lens (_datacenter_id :: NetworkDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter_id = a } :: NetworkDataSource s)
+        lens (_datacenter_id :: DataNetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter_id = a } :: DataNetwork s)
 
-instance P.HasName (NetworkDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataNetwork s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: NetworkDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: NetworkDataSource s)
+        lens (_name :: DataNetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataNetwork s)
 
-instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (NetworkDataSource s)) (TF.Attr s P.Text) where
-    computedDatacenterId =
-        (_datacenter_id :: NetworkDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDatacenterId (TF.Ref s' (DataNetwork s)) (TF.Attr s P.Text) where
+    computeDatacenterId =
+        (_datacenter_id :: DataNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataNetwork s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: NetworkDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataNetwork s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (NetworkDataSource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputeType' (TF.Ref s' (DataNetwork s)) (TF.Attr s P.Text) where
+    computeType' x = TF.compute (TF.refKey x) "type"
 
-networkDataSource :: TF.DataSource P.VSphere (NetworkDataSource s)
-networkDataSource =
+dataNetwork :: TF.DataSource P.VSphere (DataNetwork s)
+dataNetwork =
     TF.newDataSource "vsphere_network" $
-        NetworkDataSource {
+        DataNetwork {
               _datacenter_id = TF.Nil
             , _name = TF.Nil
             }
@@ -399,44 +399,95 @@ resource pool in vSphere. This is useful to fetch the ID of a resource pool
 that you want to use to create virtual machines in using the
 </docs/providers/vsphere/r/virtual_machine.html> resource.
 -}
-data ResourcePoolDataSource s = ResourcePoolDataSource {
+data DataResourcePool s = DataResourcePool {
       _datacenter_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datacenter the resource pool is located in. This can be omitted if the search path used in @name@ is an absolute path. For default datacenters, use the id attribute from an empty @vsphere_datacenter@ data source. -}
     , _name          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the resource pool. This can be a name or path. This is required when using vCenter. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourcePoolDataSource s) where
-    toHCL ResourcePoolDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataResourcePool s) where
+    toHCL DataResourcePool{..} = TF.inline $ catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDatacenterId (ResourcePoolDataSource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (DataResourcePool s) (TF.Attr s P.Text) where
     datacenterId =
-        lens (_datacenter_id :: ResourcePoolDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter_id = a } :: ResourcePoolDataSource s)
+        lens (_datacenter_id :: DataResourcePool s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter_id = a } :: DataResourcePool s)
 
-instance P.HasName (ResourcePoolDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataResourcePool s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourcePoolDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourcePoolDataSource s)
+        lens (_name :: DataResourcePool s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataResourcePool s)
 
-instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (ResourcePoolDataSource s)) (TF.Attr s P.Text) where
-    computedDatacenterId =
-        (_datacenter_id :: ResourcePoolDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDatacenterId (TF.Ref s' (DataResourcePool s)) (TF.Attr s P.Text) where
+    computeDatacenterId =
+        (_datacenter_id :: DataResourcePool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourcePoolDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ResourcePoolDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataResourcePool s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataResourcePool s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourcePoolDataSource :: TF.DataSource P.VSphere (ResourcePoolDataSource s)
-resourcePoolDataSource =
+dataResourcePool :: TF.DataSource P.VSphere (DataResourcePool s)
+dataResourcePool =
     TF.newDataSource "vsphere_resource_pool" $
-        ResourcePoolDataSource {
+        DataResourcePool {
               _datacenter_id = TF.Nil
+            , _name = TF.Nil
+            }
+
+{- | The @vsphere_tag@ VSphere datasource.
+
+The @vsphere_tag@ data source can be used to reference tags that are not
+managed by Terraform. Its attributes are exactly the same as the
+</docs/providers/vsphere/r/tag.html> , and, like importing, the data source
+takes a name and category to search on. The @id@ and other attributes are
+then populated with the data found by the search. ~> NOTE: Tagging support
+is unsupported on direct ESXi connections and requires vCenter 6.0 or
+higher.
+-}
+data DataTag s = DataTag {
+      _category_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the tag category the tag is located in. -}
+    , _name        :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the tag. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DataTag s) where
+    toHCL DataTag{..} = TF.inline $ catMaybes
+        [ TF.assign "category_id" <$> TF.attribute _category_id
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasCategoryId (DataTag s) (TF.Attr s P.Text) where
+    categoryId =
+        lens (_category_id :: DataTag s -> TF.Attr s P.Text)
+             (\s a -> s { _category_id = a } :: DataTag s)
+
+instance P.HasName (DataTag s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: DataTag s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataTag s)
+
+instance s ~ s' => P.HasComputeCategoryId (TF.Ref s' (DataTag s)) (TF.Attr s P.Text) where
+    computeCategoryId =
+        (_category_id :: DataTag s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataTag s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataTag s -> TF.Attr s P.Text)
+            . TF.refValue
+
+dataTag :: TF.DataSource P.VSphere (DataTag s)
+dataTag =
+    TF.newDataSource "vsphere_tag" $
+        DataTag {
+              _category_id = TF.Nil
             , _name = TF.Nil
             }
 
@@ -450,82 +501,31 @@ attributes are then populated with the data found by the search. ~> NOTE:
 Tagging support is unsupported on direct ESXi connections and requires
 vCenter 6.0 or higher.
 -}
-data TagCategoryDataSource s = TagCategoryDataSource {
+data DataTagCategory s = DataTagCategory {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the tag category. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TagCategoryDataSource s) where
-    toHCL TagCategoryDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataTagCategory s) where
+    toHCL DataTagCategory{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (TagCategoryDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataTagCategory s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: TagCategoryDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: TagCategoryDataSource s)
+        lens (_name :: DataTagCategory s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataTagCategory s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (TagCategoryDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: TagCategoryDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataTagCategory s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataTagCategory s -> TF.Attr s P.Text)
             . TF.refValue
 
-tagCategoryDataSource :: TF.DataSource P.VSphere (TagCategoryDataSource s)
-tagCategoryDataSource =
+dataTagCategory :: TF.DataSource P.VSphere (DataTagCategory s)
+dataTagCategory =
     TF.newDataSource "vsphere_tag_category" $
-        TagCategoryDataSource {
+        DataTagCategory {
               _name = TF.Nil
-            }
-
-{- | The @vsphere_tag@ VSphere datasource.
-
-The @vsphere_tag@ data source can be used to reference tags that are not
-managed by Terraform. Its attributes are exactly the same as the
-</docs/providers/vsphere/r/tag.html> , and, like importing, the data source
-takes a name and category to search on. The @id@ and other attributes are
-then populated with the data found by the search. ~> NOTE: Tagging support
-is unsupported on direct ESXi connections and requires vCenter 6.0 or
-higher.
--}
-data TagDataSource s = TagDataSource {
-      _category_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the tag category the tag is located in. -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the tag. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (TagDataSource s) where
-    toHCL TagDataSource{..} = TF.inline $ catMaybes
-        [ TF.assign "category_id" <$> TF.attribute _category_id
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance P.HasCategoryId (TagDataSource s) (TF.Attr s P.Text) where
-    categoryId =
-        lens (_category_id :: TagDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _category_id = a } :: TagDataSource s)
-
-instance P.HasName (TagDataSource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: TagDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: TagDataSource s)
-
-instance s ~ s' => P.HasComputedCategoryId (TF.Ref s' (TagDataSource s)) (TF.Attr s P.Text) where
-    computedCategoryId =
-        (_category_id :: TagDataSource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (TagDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: TagDataSource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-tagDataSource :: TF.DataSource P.VSphere (TagDataSource s)
-tagDataSource =
-    TF.newDataSource "vsphere_tag" $
-        TagDataSource {
-              _category_id = TF.Nil
-            , _name = TF.Nil
             }
 
 {- | The @vsphere_virtual_machine@ VSphere datasource.
@@ -536,7 +536,7 @@ finding the UUID of a template to be used as the source for cloning into a
 new </docs/providers/vsphere/r/virtual_machine.html> resource. It also reads
 the guest ID so that can be supplied as well.
 -}
-data VirtualMachineDataSource s = VirtualMachineDataSource {
+data DataVirtualMachine s = DataVirtualMachine {
       _datacenter_id              :: !(TF.Attr s P.Text)
     {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datacenter the virtual machine is located in. This can be omitted if the search path used in @name@ is an absolute path. For default datacenters, use the @id@ attribute from an empty @vsphere_datacenter@ data source. -}
     , _name                       :: !(TF.Attr s P.Text)
@@ -545,74 +545,74 @@ data VirtualMachineDataSource s = VirtualMachineDataSource {
     {- ^ (Optional) The number of SCSI controllers to scan for disk attributes and controller types on. Default: @1@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VirtualMachineDataSource s) where
-    toHCL VirtualMachineDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataVirtualMachine s) where
+    toHCL DataVirtualMachine{..} = TF.inline $ catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "scsi_controller_scan_count" <$> TF.attribute _scsi_controller_scan_count
         ]
 
-instance P.HasDatacenterId (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (DataVirtualMachine s) (TF.Attr s P.Text) where
     datacenterId =
-        lens (_datacenter_id :: VirtualMachineDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter_id = a } :: VirtualMachineDataSource s)
+        lens (_datacenter_id :: DataVirtualMachine s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter_id = a } :: DataVirtualMachine s)
 
-instance P.HasName (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataVirtualMachine s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: VirtualMachineDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: VirtualMachineDataSource s)
+        lens (_name :: DataVirtualMachine s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataVirtualMachine s)
 
-instance P.HasScsiControllerScanCount (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance P.HasScsiControllerScanCount (DataVirtualMachine s) (TF.Attr s P.Text) where
     scsiControllerScanCount =
-        lens (_scsi_controller_scan_count :: VirtualMachineDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _scsi_controller_scan_count = a } :: VirtualMachineDataSource s)
+        lens (_scsi_controller_scan_count :: DataVirtualMachine s -> TF.Attr s P.Text)
+             (\s a -> s { _scsi_controller_scan_count = a } :: DataVirtualMachine s)
 
-instance s ~ s' => P.HasComputedAlternateGuestName (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
-    computedAlternateGuestName x = TF.compute (TF.refKey x) "alternate_guest_name"
+instance s ~ s' => P.HasComputeAlternateGuestName (TF.Ref s' (DataVirtualMachine s)) (TF.Attr s P.Text) where
+    computeAlternateGuestName x = TF.compute (TF.refKey x) "alternate_guest_name"
 
-instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
-    computedDatacenterId =
-        (_datacenter_id :: VirtualMachineDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDatacenterId (TF.Ref s' (DataVirtualMachine s)) (TF.Attr s P.Text) where
+    computeDatacenterId =
+        (_datacenter_id :: DataVirtualMachine s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
-    computedDisks x = TF.compute (TF.refKey x) "disks"
+instance s ~ s' => P.HasComputeDisks (TF.Ref s' (DataVirtualMachine s)) (TF.Attr s P.Text) where
+    computeDisks x = TF.compute (TF.refKey x) "disks"
 
-instance s ~ s' => P.HasComputedEagerlyScrub (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
-    computedEagerlyScrub x = TF.compute (TF.refKey x) "eagerly_scrub"
+instance s ~ s' => P.HasComputeEagerlyScrub (TF.Ref s' (DataVirtualMachine s)) (TF.Attr s P.Text) where
+    computeEagerlyScrub x = TF.compute (TF.refKey x) "eagerly_scrub"
 
-instance s ~ s' => P.HasComputedGuestId (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
-    computedGuestId x = TF.compute (TF.refKey x) "guest_id"
+instance s ~ s' => P.HasComputeGuestId (TF.Ref s' (DataVirtualMachine s)) (TF.Attr s P.Text) where
+    computeGuestId x = TF.compute (TF.refKey x) "guest_id"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataVirtualMachine s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: VirtualMachineDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataVirtualMachine s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataVirtualMachine s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetworkInterfaceTypes (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
-    computedNetworkInterfaceTypes x = TF.compute (TF.refKey x) "network_interface_types"
+instance s ~ s' => P.HasComputeNetworkInterfaceTypes (TF.Ref s' (DataVirtualMachine s)) (TF.Attr s P.Text) where
+    computeNetworkInterfaceTypes x = TF.compute (TF.refKey x) "network_interface_types"
 
-instance s ~ s' => P.HasComputedScsiControllerScanCount (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
-    computedScsiControllerScanCount =
-        (_scsi_controller_scan_count :: VirtualMachineDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeScsiControllerScanCount (TF.Ref s' (DataVirtualMachine s)) (TF.Attr s P.Text) where
+    computeScsiControllerScanCount =
+        (_scsi_controller_scan_count :: DataVirtualMachine s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedScsiType (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
-    computedScsiType x = TF.compute (TF.refKey x) "scsi_type"
+instance s ~ s' => P.HasComputeScsiType (TF.Ref s' (DataVirtualMachine s)) (TF.Attr s P.Text) where
+    computeScsiType x = TF.compute (TF.refKey x) "scsi_type"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
-    computedSize x = TF.compute (TF.refKey x) "size"
+instance s ~ s' => P.HasComputeSize (TF.Ref s' (DataVirtualMachine s)) (TF.Attr s P.Text) where
+    computeSize x = TF.compute (TF.refKey x) "size"
 
-instance s ~ s' => P.HasComputedThinProvisioned (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
-    computedThinProvisioned x = TF.compute (TF.refKey x) "thin_provisioned"
+instance s ~ s' => P.HasComputeThinProvisioned (TF.Ref s' (DataVirtualMachine s)) (TF.Attr s P.Text) where
+    computeThinProvisioned x = TF.compute (TF.refKey x) "thin_provisioned"
 
-virtualMachineDataSource :: TF.DataSource P.VSphere (VirtualMachineDataSource s)
-virtualMachineDataSource =
+dataVirtualMachine :: TF.DataSource P.VSphere (DataVirtualMachine s)
+dataVirtualMachine =
     TF.newDataSource "vsphere_virtual_machine" $
-        VirtualMachineDataSource {
+        DataVirtualMachine {
               _datacenter_id = TF.Nil
             , _name = TF.Nil
             , _scsi_controller_scan_count = TF.Nil
@@ -625,7 +625,7 @@ devices available on an ESXi host. This data source can be combined with the
 </docs/providers/vsphere/r/vmfs_datastore.html> resource to create VMFS
 datastores based off a set of discovered disks.
 -}
-data VmfsDisksDataSource s = VmfsDisksDataSource {
+data DataVmfsDisks s = DataVmfsDisks {
       _filter         :: !(TF.Attr s P.Text)
     {- ^ (Optional) A regular expression to filter the disks against. Only disks with canonical names that match will be included. -}
     , _host_system_id :: !(TF.Attr s P.Text)
@@ -634,50 +634,50 @@ data VmfsDisksDataSource s = VmfsDisksDataSource {
     {- ^ (Optional) Whether or not to rescan storage adapters before searching for disks. This may lengthen the time it takes to perform the search. Default: @false@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VmfsDisksDataSource s) where
-    toHCL VmfsDisksDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataVmfsDisks s) where
+    toHCL DataVmfsDisks{..} = TF.inline $ catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "host_system_id" <$> TF.attribute _host_system_id
         , TF.assign "rescan" <$> TF.attribute _rescan
         ]
 
-instance P.HasFilter (VmfsDisksDataSource s) (TF.Attr s P.Text) where
+instance P.HasFilter (DataVmfsDisks s) (TF.Attr s P.Text) where
     filter =
-        lens (_filter :: VmfsDisksDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _filter = a } :: VmfsDisksDataSource s)
+        lens (_filter :: DataVmfsDisks s -> TF.Attr s P.Text)
+             (\s a -> s { _filter = a } :: DataVmfsDisks s)
 
-instance P.HasHostSystemId (VmfsDisksDataSource s) (TF.Attr s P.Text) where
+instance P.HasHostSystemId (DataVmfsDisks s) (TF.Attr s P.Text) where
     hostSystemId =
-        lens (_host_system_id :: VmfsDisksDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _host_system_id = a } :: VmfsDisksDataSource s)
+        lens (_host_system_id :: DataVmfsDisks s -> TF.Attr s P.Text)
+             (\s a -> s { _host_system_id = a } :: DataVmfsDisks s)
 
-instance P.HasRescan (VmfsDisksDataSource s) (TF.Attr s P.Text) where
+instance P.HasRescan (DataVmfsDisks s) (TF.Attr s P.Text) where
     rescan =
-        lens (_rescan :: VmfsDisksDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _rescan = a } :: VmfsDisksDataSource s)
+        lens (_rescan :: DataVmfsDisks s -> TF.Attr s P.Text)
+             (\s a -> s { _rescan = a } :: DataVmfsDisks s)
 
-instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VmfsDisksDataSource s)) (TF.Attr s P.Text) where
-    computedDisks x = TF.compute (TF.refKey x) "disks"
+instance s ~ s' => P.HasComputeDisks (TF.Ref s' (DataVmfsDisks s)) (TF.Attr s P.Text) where
+    computeDisks x = TF.compute (TF.refKey x) "disks"
 
-instance s ~ s' => P.HasComputedFilter (TF.Ref s' (VmfsDisksDataSource s)) (TF.Attr s P.Text) where
-    computedFilter =
-        (_filter :: VmfsDisksDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFilter (TF.Ref s' (DataVmfsDisks s)) (TF.Attr s P.Text) where
+    computeFilter =
+        (_filter :: DataVmfsDisks s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHostSystemId (TF.Ref s' (VmfsDisksDataSource s)) (TF.Attr s P.Text) where
-    computedHostSystemId =
-        (_host_system_id :: VmfsDisksDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHostSystemId (TF.Ref s' (DataVmfsDisks s)) (TF.Attr s P.Text) where
+    computeHostSystemId =
+        (_host_system_id :: DataVmfsDisks s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRescan (TF.Ref s' (VmfsDisksDataSource s)) (TF.Attr s P.Text) where
-    computedRescan =
-        (_rescan :: VmfsDisksDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRescan (TF.Ref s' (DataVmfsDisks s)) (TF.Attr s P.Text) where
+    computeRescan =
+        (_rescan :: DataVmfsDisks s -> TF.Attr s P.Text)
             . TF.refValue
 
-vmfsDisksDataSource :: TF.DataSource P.VSphere (VmfsDisksDataSource s)
-vmfsDisksDataSource =
+dataVmfsDisks :: TF.DataSource P.VSphere (DataVmfsDisks s)
+dataVmfsDisks =
     TF.newDataSource "vsphere_vmfs_disks" $
-        VmfsDisksDataSource {
+        DataVmfsDisks {
               _filter = TF.Nil
             , _host_system_id = TF.Nil
             , _rescan = TF.Nil

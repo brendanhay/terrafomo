@@ -61,43 +61,43 @@ module Terrafomo.OneAndOne.Lens
     , HasVcores (..)
 
     -- ** Computed Attributes
-    , HasComputed*diskSize (..)
-    , HasComputed*isMain (..)
-    , HasComputedAgent (..)
-    , HasComputedCoresPerProcessor (..)
-    , HasComputedDatacenter (..)
-    , HasComputedDescription (..)
-    , HasComputedDownloadPath (..)
-    , HasComputedEmail (..)
-    , HasComputedFileName (..)
-    , HasComputedFirewallPolicyId (..)
-    , HasComputedFixedInstanceSize (..)
-    , HasComputedHdds (..)
-    , HasComputedHealthCheckInterval (..)
-    , HasComputedHealthCheckPath (..)
-    , HasComputedHealthCheckPathParser (..)
-    , HasComputedHealthCheckTest (..)
-    , HasComputedImage (..)
-    , HasComputedIp (..)
-    , HasComputedIpAddress (..)
-    , HasComputedIpType (..)
-    , HasComputedLoadbalancerId (..)
-    , HasComputedMethod (..)
-    , HasComputedMonitoringPolicyId (..)
-    , HasComputedName (..)
-    , HasComputedNetworkAddress (..)
-    , HasComputedPassword (..)
-    , HasComputedPersistence (..)
-    , HasComputedPersistenceTime (..)
-    , HasComputedRam (..)
-    , HasComputedReverseDns (..)
-    , HasComputedServerIds (..)
-    , HasComputedSize (..)
-    , HasComputedSshKeyPath (..)
-    , HasComputedSshKeyPublic (..)
-    , HasComputedStorageServers (..)
-    , HasComputedSubnetMask (..)
-    , HasComputedVcores (..)
+    , HasCompute*diskSize (..)
+    , HasCompute*isMain (..)
+    , HasComputeAgent (..)
+    , HasComputeCoresPerProcessor (..)
+    , HasComputeDatacenter (..)
+    , HasComputeDescription (..)
+    , HasComputeDownloadPath (..)
+    , HasComputeEmail (..)
+    , HasComputeFileName (..)
+    , HasComputeFirewallPolicyId (..)
+    , HasComputeFixedInstanceSize (..)
+    , HasComputeHdds (..)
+    , HasComputeHealthCheckInterval (..)
+    , HasComputeHealthCheckPath (..)
+    , HasComputeHealthCheckPathParser (..)
+    , HasComputeHealthCheckTest (..)
+    , HasComputeImage (..)
+    , HasComputeIp (..)
+    , HasComputeIpAddress (..)
+    , HasComputeIpType (..)
+    , HasComputeLoadbalancerId (..)
+    , HasComputeMethod (..)
+    , HasComputeMonitoringPolicyId (..)
+    , HasComputeName (..)
+    , HasComputeNetworkAddress (..)
+    , HasComputePassword (..)
+    , HasComputePersistence (..)
+    , HasComputePersistenceTime (..)
+    , HasComputeRam (..)
+    , HasComputeReverseDns (..)
+    , HasComputeServerIds (..)
+    , HasComputeSize (..)
+    , HasComputeSshKeyPath (..)
+    , HasComputeSshKeyPublic (..)
+    , HasComputeStorageServers (..)
+    , HasComputeSubnetMask (..)
+    , HasComputeVcores (..)
     ) where
 
 import GHC.Base ((.))
@@ -329,113 +329,113 @@ class HasVcores a b | a -> b where
 instance HasVcores a b => HasVcores (TF.Schema l p a) b where
     vcores = TF.configuration . vcores
 
-class HasComputed*diskSize a b | a -> b where
-    computed*diskSize :: a -> b
+class HasCompute*diskSize a b | a -> b where
+    compute*diskSize :: a -> b
 
-class HasComputed*isMain a b | a -> b where
-    computed*isMain :: a -> b
+class HasCompute*isMain a b | a -> b where
+    compute*isMain :: a -> b
 
-class HasComputedAgent a b | a -> b where
-    computedAgent :: a -> b
+class HasComputeAgent a b | a -> b where
+    computeAgent :: a -> b
 
-class HasComputedCoresPerProcessor a b | a -> b where
-    computedCoresPerProcessor :: a -> b
+class HasComputeCoresPerProcessor a b | a -> b where
+    computeCoresPerProcessor :: a -> b
 
-class HasComputedDatacenter a b | a -> b where
-    computedDatacenter :: a -> b
+class HasComputeDatacenter a b | a -> b where
+    computeDatacenter :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedDownloadPath a b | a -> b where
-    computedDownloadPath :: a -> b
+class HasComputeDownloadPath a b | a -> b where
+    computeDownloadPath :: a -> b
 
-class HasComputedEmail a b | a -> b where
-    computedEmail :: a -> b
+class HasComputeEmail a b | a -> b where
+    computeEmail :: a -> b
 
-class HasComputedFileName a b | a -> b where
-    computedFileName :: a -> b
+class HasComputeFileName a b | a -> b where
+    computeFileName :: a -> b
 
-class HasComputedFirewallPolicyId a b | a -> b where
-    computedFirewallPolicyId :: a -> b
+class HasComputeFirewallPolicyId a b | a -> b where
+    computeFirewallPolicyId :: a -> b
 
-class HasComputedFixedInstanceSize a b | a -> b where
-    computedFixedInstanceSize :: a -> b
+class HasComputeFixedInstanceSize a b | a -> b where
+    computeFixedInstanceSize :: a -> b
 
-class HasComputedHdds a b | a -> b where
-    computedHdds :: a -> b
+class HasComputeHdds a b | a -> b where
+    computeHdds :: a -> b
 
-class HasComputedHealthCheckInterval a b | a -> b where
-    computedHealthCheckInterval :: a -> b
+class HasComputeHealthCheckInterval a b | a -> b where
+    computeHealthCheckInterval :: a -> b
 
-class HasComputedHealthCheckPath a b | a -> b where
-    computedHealthCheckPath :: a -> b
+class HasComputeHealthCheckPath a b | a -> b where
+    computeHealthCheckPath :: a -> b
 
-class HasComputedHealthCheckPathParser a b | a -> b where
-    computedHealthCheckPathParser :: a -> b
+class HasComputeHealthCheckPathParser a b | a -> b where
+    computeHealthCheckPathParser :: a -> b
 
-class HasComputedHealthCheckTest a b | a -> b where
-    computedHealthCheckTest :: a -> b
+class HasComputeHealthCheckTest a b | a -> b where
+    computeHealthCheckTest :: a -> b
 
-class HasComputedImage a b | a -> b where
-    computedImage :: a -> b
+class HasComputeImage a b | a -> b where
+    computeImage :: a -> b
 
-class HasComputedIp a b | a -> b where
-    computedIp :: a -> b
+class HasComputeIp a b | a -> b where
+    computeIp :: a -> b
 
-class HasComputedIpAddress a b | a -> b where
-    computedIpAddress :: a -> b
+class HasComputeIpAddress a b | a -> b where
+    computeIpAddress :: a -> b
 
-class HasComputedIpType a b | a -> b where
-    computedIpType :: a -> b
+class HasComputeIpType a b | a -> b where
+    computeIpType :: a -> b
 
-class HasComputedLoadbalancerId a b | a -> b where
-    computedLoadbalancerId :: a -> b
+class HasComputeLoadbalancerId a b | a -> b where
+    computeLoadbalancerId :: a -> b
 
-class HasComputedMethod a b | a -> b where
-    computedMethod :: a -> b
+class HasComputeMethod a b | a -> b where
+    computeMethod :: a -> b
 
-class HasComputedMonitoringPolicyId a b | a -> b where
-    computedMonitoringPolicyId :: a -> b
+class HasComputeMonitoringPolicyId a b | a -> b where
+    computeMonitoringPolicyId :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNetworkAddress a b | a -> b where
-    computedNetworkAddress :: a -> b
+class HasComputeNetworkAddress a b | a -> b where
+    computeNetworkAddress :: a -> b
 
-class HasComputedPassword a b | a -> b where
-    computedPassword :: a -> b
+class HasComputePassword a b | a -> b where
+    computePassword :: a -> b
 
-class HasComputedPersistence a b | a -> b where
-    computedPersistence :: a -> b
+class HasComputePersistence a b | a -> b where
+    computePersistence :: a -> b
 
-class HasComputedPersistenceTime a b | a -> b where
-    computedPersistenceTime :: a -> b
+class HasComputePersistenceTime a b | a -> b where
+    computePersistenceTime :: a -> b
 
-class HasComputedRam a b | a -> b where
-    computedRam :: a -> b
+class HasComputeRam a b | a -> b where
+    computeRam :: a -> b
 
-class HasComputedReverseDns a b | a -> b where
-    computedReverseDns :: a -> b
+class HasComputeReverseDns a b | a -> b where
+    computeReverseDns :: a -> b
 
-class HasComputedServerIds a b | a -> b where
-    computedServerIds :: a -> b
+class HasComputeServerIds a b | a -> b where
+    computeServerIds :: a -> b
 
-class HasComputedSize a b | a -> b where
-    computedSize :: a -> b
+class HasComputeSize a b | a -> b where
+    computeSize :: a -> b
 
-class HasComputedSshKeyPath a b | a -> b where
-    computedSshKeyPath :: a -> b
+class HasComputeSshKeyPath a b | a -> b where
+    computeSshKeyPath :: a -> b
 
-class HasComputedSshKeyPublic a b | a -> b where
-    computedSshKeyPublic :: a -> b
+class HasComputeSshKeyPublic a b | a -> b where
+    computeSshKeyPublic :: a -> b
 
-class HasComputedStorageServers a b | a -> b where
-    computedStorageServers :: a -> b
+class HasComputeStorageServers a b | a -> b where
+    computeStorageServers :: a -> b
 
-class HasComputedSubnetMask a b | a -> b where
-    computedSubnetMask :: a -> b
+class HasComputeSubnetMask a b | a -> b where
+    computeSubnetMask :: a -> b
 
-class HasComputedVcores a b | a -> b where
-    computedVcores :: a -> b
+class HasComputeVcores a b | a -> b where
+    computeVcores :: a -> b

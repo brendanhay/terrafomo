@@ -29,13 +29,13 @@ module Terrafomo.Dyn.Lens
     , HasZone (..)
 
     -- ** Computed Attributes
-    , HasComputedFqdn (..)
-    , HasComputedId (..)
-    , HasComputedName (..)
-    , HasComputedTtl (..)
-    , HasComputedType' (..)
-    , HasComputedValue (..)
-    , HasComputedZone (..)
+    , HasComputeFqdn (..)
+    , HasComputeId (..)
+    , HasComputeName (..)
+    , HasComputeTtl (..)
+    , HasComputeType' (..)
+    , HasComputeValue (..)
+    , HasComputeZone (..)
     ) where
 
 import GHC.Base ((.))
@@ -75,23 +75,23 @@ class HasZone a b | a -> b where
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
-class HasComputedFqdn a b | a -> b where
-    computedFqdn :: a -> b
+class HasComputeFqdn a b | a -> b where
+    computeFqdn :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedTtl a b | a -> b where
-    computedTtl :: a -> b
+class HasComputeTtl a b | a -> b where
+    computeTtl :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputeType' a b | a -> b where
+    computeType' :: a -> b
 
-class HasComputedValue a b | a -> b where
-    computedValue :: a -> b
+class HasComputeValue a b | a -> b where
+    computeValue :: a -> b
 
-class HasComputedZone a b | a -> b where
-    computedZone :: a -> b
+class HasComputeZone a b | a -> b where
+    computeZone :: a -> b

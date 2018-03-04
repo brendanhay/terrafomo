@@ -24,44 +24,44 @@
 module Terrafomo.ProfitBricks.Resource
     (
     -- * Types
-      DatacenterResource (..)
-    , datacenterResource
+      ResourceDatacenter (..)
+    , resourceDatacenter
 
-    , FirewallResource (..)
-    , firewallResource
+    , ResourceFirewall (..)
+    , resourceFirewall
 
-    , GroupResource (..)
-    , groupResource
+    , ResourceGroup (..)
+    , resourceGroup
 
-    , IpblockResource (..)
-    , ipblockResource
+    , ResourceIpblock (..)
+    , resourceIpblock
 
-    , IpfailoverResource (..)
-    , ipfailoverResource
+    , ResourceIpfailover (..)
+    , resourceIpfailover
 
-    , LanResource (..)
-    , lanResource
+    , ResourceLan (..)
+    , resourceLan
 
-    , LoadbalancerResource (..)
-    , loadbalancerResource
+    , ResourceLoadbalancer (..)
+    , resourceLoadbalancer
 
-    , NicResource (..)
-    , nicResource
+    , ResourceNic (..)
+    , resourceNic
 
-    , ServerResource (..)
-    , serverResource
+    , ResourceServer (..)
+    , resourceServer
 
-    , ShareResource (..)
-    , shareResource
+    , ResourceShare (..)
+    , resourceShare
 
-    , SnapshotResource (..)
-    , snapshotResource
+    , ResourceSnapshot (..)
+    , resourceSnapshot
 
-    , UserResource (..)
-    , userResource
+    , ResourceUser (..)
+    , resourceUser
 
-    , VolumeResource (..)
-    , volumeResource
+    , ResourceVolume (..)
+    , resourceVolume
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -70,9 +70,9 @@ module Terrafomo.ProfitBricks.Resource
     , P.HasName (..)
 
     -- ** Computed Attributes
-    , P.HasComputedDescription (..)
-    , P.HasComputedLocation (..)
-    , P.HasComputedName (..)
+    , P.HasComputeDescription (..)
+    , P.HasComputeLocation (..)
+    , P.HasComputeName (..)
 
     -- * Re-exported Types
     , module P
@@ -106,7 +106,7 @@ import qualified Terrafomo.Schema    as TF
 
 Manages a Virtual Data Center on ProfitBricks
 -}
-data DatacenterResource s = DatacenterResource {
+data ResourceDatacenter s = ResourceDatacenter {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional)[string] Description for the data center. -}
     , _location    :: !(TF.Attr s P.Text)
@@ -115,47 +115,47 @@ data DatacenterResource s = DatacenterResource {
     {- ^ (Required)[string] The name of the Virtual Data Center. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatacenterResource s) where
-    toHCL DatacenterResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceDatacenter s) where
+    toHCL ResourceDatacenter{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDescription (DatacenterResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceDatacenter s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: DatacenterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: DatacenterResource s)
+        lens (_description :: ResourceDatacenter s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceDatacenter s)
 
-instance P.HasLocation (DatacenterResource s) (TF.Attr s P.Text) where
+instance P.HasLocation (ResourceDatacenter s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: DatacenterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: DatacenterResource s)
+        lens (_location :: ResourceDatacenter s -> TF.Attr s P.Text)
+             (\s a -> s { _location = a } :: ResourceDatacenter s)
 
-instance P.HasName (DatacenterResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceDatacenter s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DatacenterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DatacenterResource s)
+        lens (_name :: ResourceDatacenter s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceDatacenter s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: DatacenterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceDatacenter s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceDatacenter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedLocation =
-        (_location :: DatacenterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLocation (TF.Ref s' (ResourceDatacenter s)) (TF.Attr s P.Text) where
+    computeLocation =
+        (_location :: ResourceDatacenter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DatacenterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDatacenter s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceDatacenter s -> TF.Attr s P.Text)
             . TF.refValue
 
-datacenterResource :: TF.Resource P.ProfitBricks (DatacenterResource s)
-datacenterResource =
+resourceDatacenter :: TF.Resource P.ProfitBricks (ResourceDatacenter s)
+resourceDatacenter =
     TF.newResource "profitbricks_datacenter" $
-        DatacenterResource {
+        ResourceDatacenter {
               _description = TF.Nil
             , _location = TF.Nil
             , _name = TF.Nil
@@ -165,128 +165,128 @@ datacenterResource =
 
 Manages a Firewall Rules on ProfitBricks
 -}
-data FirewallResource s = FirewallResource {
+data ResourceFirewall s = ResourceFirewall {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FirewallResource s) where
+instance TF.ToHCL (ResourceFirewall s) where
     toHCL _ = TF.empty
 
-firewallResource :: TF.Resource P.ProfitBricks (FirewallResource s)
-firewallResource =
+resourceFirewall :: TF.Resource P.ProfitBricks (ResourceFirewall s)
+resourceFirewall =
     TF.newResource "profitbricks_firewall" $
-        FirewallResource {
+        ResourceFirewall {
             }
 
 {- | The @profitbricks_group@ ProfitBricks resource.
 
 Manages groups and group priviliages on ProfitBricks
 -}
-data GroupResource s = GroupResource {
+data ResourceGroup s = ResourceGroup {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (GroupResource s) where
+instance TF.ToHCL (ResourceGroup s) where
     toHCL _ = TF.empty
 
-groupResource :: TF.Resource P.ProfitBricks (GroupResource s)
-groupResource =
+resourceGroup :: TF.Resource P.ProfitBricks (ResourceGroup s)
+resourceGroup =
     TF.newResource "profitbricks_group" $
-        GroupResource {
+        ResourceGroup {
             }
 
 {- | The @profitbricks_ipblock@ ProfitBricks resource.
 
 Manages a IP Blocks on ProfitBricks
 -}
-data IpblockResource s = IpblockResource {
+data ResourceIpblock s = ResourceIpblock {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpblockResource s) where
+instance TF.ToHCL (ResourceIpblock s) where
     toHCL _ = TF.empty
 
-ipblockResource :: TF.Resource P.ProfitBricks (IpblockResource s)
-ipblockResource =
+resourceIpblock :: TF.Resource P.ProfitBricks (ResourceIpblock s)
+resourceIpblock =
     TF.newResource "profitbricks_ipblock" $
-        IpblockResource {
+        ResourceIpblock {
             }
 
 {- | The @profitbricks_ipfailover@ ProfitBricks resource.
 
 Manages Ip Failover groups on ProfitBricks
 -}
-data IpfailoverResource s = IpfailoverResource {
+data ResourceIpfailover s = ResourceIpfailover {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpfailoverResource s) where
+instance TF.ToHCL (ResourceIpfailover s) where
     toHCL _ = TF.empty
 
-ipfailoverResource :: TF.Resource P.ProfitBricks (IpfailoverResource s)
-ipfailoverResource =
+resourceIpfailover :: TF.Resource P.ProfitBricks (ResourceIpfailover s)
+resourceIpfailover =
     TF.newResource "profitbricks_ipfailover" $
-        IpfailoverResource {
+        ResourceIpfailover {
             }
 
 {- | The @profitbricks_lan@ ProfitBricks resource.
 
 Manages a LANs on ProfitBricks
 -}
-data LanResource s = LanResource {
+data ResourceLan s = ResourceLan {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LanResource s) where
+instance TF.ToHCL (ResourceLan s) where
     toHCL _ = TF.empty
 
-lanResource :: TF.Resource P.ProfitBricks (LanResource s)
-lanResource =
+resourceLan :: TF.Resource P.ProfitBricks (ResourceLan s)
+resourceLan =
     TF.newResource "profitbricks_lan" $
-        LanResource {
+        ResourceLan {
             }
 
 {- | The @profitbricks_loadbalancer@ ProfitBricks resource.
 
 Manages a Load Balancers on ProfitBricks
 -}
-data LoadbalancerResource s = LoadbalancerResource {
+data ResourceLoadbalancer s = ResourceLoadbalancer {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoadbalancerResource s) where
+instance TF.ToHCL (ResourceLoadbalancer s) where
     toHCL _ = TF.empty
 
-loadbalancerResource :: TF.Resource P.ProfitBricks (LoadbalancerResource s)
-loadbalancerResource =
+resourceLoadbalancer :: TF.Resource P.ProfitBricks (ResourceLoadbalancer s)
+resourceLoadbalancer =
     TF.newResource "profitbricks_loadbalancer" $
-        LoadbalancerResource {
+        ResourceLoadbalancer {
             }
 
 {- | The @profitbricks_nic@ ProfitBricks resource.
 
 Manages a NICs on ProfitBricks
 -}
-data NicResource s = NicResource {
+data ResourceNic s = ResourceNic {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NicResource s) where
+instance TF.ToHCL (ResourceNic s) where
     toHCL _ = TF.empty
 
-nicResource :: TF.Resource P.ProfitBricks (NicResource s)
-nicResource =
+resourceNic :: TF.Resource P.ProfitBricks (ResourceNic s)
+resourceNic =
     TF.newResource "profitbricks_nic" $
-        NicResource {
+        ResourceNic {
             }
 
 {- | The @profitbricks_server@ ProfitBricks resource.
 
 Manages a Servers on ProfitBricks
 -}
-data ServerResource s = ServerResource {
+data ResourceServer s = ResourceServer {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServerResource s) where
+instance TF.ToHCL (ResourceServer s) where
     toHCL _ = TF.empty
 
-serverResource :: TF.Resource P.ProfitBricks (ServerResource s)
-serverResource =
+resourceServer :: TF.Resource P.ProfitBricks (ResourceServer s)
+resourceServer =
     TF.newResource "profitbricks_server" $
-        ServerResource {
+        ResourceServer {
             }
 
 {- | The @profitbricks_share@ ProfitBricks resource.
@@ -294,62 +294,62 @@ serverResource =
 Manages shares and list shares permissions granted to the group members for
 each shared resource.
 -}
-data ShareResource s = ShareResource {
+data ResourceShare s = ResourceShare {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ShareResource s) where
+instance TF.ToHCL (ResourceShare s) where
     toHCL _ = TF.empty
 
-shareResource :: TF.Resource P.ProfitBricks (ShareResource s)
-shareResource =
+resourceShare :: TF.Resource P.ProfitBricks (ResourceShare s)
+resourceShare =
     TF.newResource "profitbricks_share" $
-        ShareResource {
+        ResourceShare {
             }
 
 {- | The @profitbricks_snapshot@ ProfitBricks resource.
 
 Manages snapshots on ProfitBricks.
 -}
-data SnapshotResource s = SnapshotResource {
+data ResourceSnapshot s = ResourceSnapshot {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SnapshotResource s) where
+instance TF.ToHCL (ResourceSnapshot s) where
     toHCL _ = TF.empty
 
-snapshotResource :: TF.Resource P.ProfitBricks (SnapshotResource s)
-snapshotResource =
+resourceSnapshot :: TF.Resource P.ProfitBricks (ResourceSnapshot s)
+resourceSnapshot =
     TF.newResource "profitbricks_snapshot" $
-        SnapshotResource {
+        ResourceSnapshot {
             }
 
 {- | The @profitbricks_user@ ProfitBricks resource.
 
 Manages users and list users and groups associated.
 -}
-data UserResource s = UserResource {
+data ResourceUser s = ResourceUser {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserResource s) where
+instance TF.ToHCL (ResourceUser s) where
     toHCL _ = TF.empty
 
-userResource :: TF.Resource P.ProfitBricks (UserResource s)
-userResource =
+resourceUser :: TF.Resource P.ProfitBricks (ResourceUser s)
+resourceUser =
     TF.newResource "profitbricks_user" $
-        UserResource {
+        ResourceUser {
             }
 
 {- | The @profitbricks_volume@ ProfitBricks resource.
 
 Manages a Volumes on ProfitBricks
 -}
-data VolumeResource s = VolumeResource {
+data ResourceVolume s = ResourceVolume {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VolumeResource s) where
+instance TF.ToHCL (ResourceVolume s) where
     toHCL _ = TF.empty
 
-volumeResource :: TF.Resource P.ProfitBricks (VolumeResource s)
-volumeResource =
+resourceVolume :: TF.Resource P.ProfitBricks (ResourceVolume s)
+resourceVolume =
     TF.newResource "profitbricks_volume" $
-        VolumeResource {
+        ResourceVolume {
             }

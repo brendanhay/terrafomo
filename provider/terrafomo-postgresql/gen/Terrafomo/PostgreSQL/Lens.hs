@@ -50,32 +50,32 @@ module Terrafomo.PostgreSQL.Lens
     , HasVersion (..)
 
     -- ** Computed Attributes
-    , HasComputedAllowConnections (..)
-    , HasComputedBypassRowLevelSecurity (..)
-    , HasComputedConnectionLimit (..)
-    , HasComputedCreateDatabase (..)
-    , HasComputedCreateRole (..)
-    , HasComputedEncoding (..)
-    , HasComputedEncryptedPassword (..)
-    , HasComputedIfNotExists (..)
-    , HasComputedInherit (..)
-    , HasComputedIsTemplate (..)
-    , HasComputedLcCollate (..)
-    , HasComputedLcCtype (..)
-    , HasComputedLogin (..)
-    , HasComputedName (..)
-    , HasComputedOwner (..)
-    , HasComputedPassword (..)
-    , HasComputedPolicy (..)
-    , HasComputedReplication (..)
-    , HasComputedSchema (..)
-    , HasComputedSkipDropRole (..)
-    , HasComputedSkipReassignOwned (..)
-    , HasComputedSuperuser (..)
-    , HasComputedTablespaceName (..)
-    , HasComputedTemplate (..)
-    , HasComputedValidUntil (..)
-    , HasComputedVersion (..)
+    , HasComputeAllowConnections (..)
+    , HasComputeBypassRowLevelSecurity (..)
+    , HasComputeConnectionLimit (..)
+    , HasComputeCreateDatabase (..)
+    , HasComputeCreateRole (..)
+    , HasComputeEncoding (..)
+    , HasComputeEncryptedPassword (..)
+    , HasComputeIfNotExists (..)
+    , HasComputeInherit (..)
+    , HasComputeIsTemplate (..)
+    , HasComputeLcCollate (..)
+    , HasComputeLcCtype (..)
+    , HasComputeLogin (..)
+    , HasComputeName (..)
+    , HasComputeOwner (..)
+    , HasComputePassword (..)
+    , HasComputePolicy (..)
+    , HasComputeReplication (..)
+    , HasComputeSchema (..)
+    , HasComputeSkipDropRole (..)
+    , HasComputeSkipReassignOwned (..)
+    , HasComputeSuperuser (..)
+    , HasComputeTablespaceName (..)
+    , HasComputeTemplate (..)
+    , HasComputeValidUntil (..)
+    , HasComputeVersion (..)
     ) where
 
 import GHC.Base ((.))
@@ -241,80 +241,80 @@ class HasVersion a b | a -> b where
 instance HasVersion a b => HasVersion (TF.Schema l p a) b where
     version = TF.configuration . version
 
-class HasComputedAllowConnections a b | a -> b where
-    computedAllowConnections :: a -> b
+class HasComputeAllowConnections a b | a -> b where
+    computeAllowConnections :: a -> b
 
-class HasComputedBypassRowLevelSecurity a b | a -> b where
-    computedBypassRowLevelSecurity :: a -> b
+class HasComputeBypassRowLevelSecurity a b | a -> b where
+    computeBypassRowLevelSecurity :: a -> b
 
-class HasComputedConnectionLimit a b | a -> b where
-    computedConnectionLimit :: a -> b
+class HasComputeConnectionLimit a b | a -> b where
+    computeConnectionLimit :: a -> b
 
-class HasComputedCreateDatabase a b | a -> b where
-    computedCreateDatabase :: a -> b
+class HasComputeCreateDatabase a b | a -> b where
+    computeCreateDatabase :: a -> b
 
-class HasComputedCreateRole a b | a -> b where
-    computedCreateRole :: a -> b
+class HasComputeCreateRole a b | a -> b where
+    computeCreateRole :: a -> b
 
-class HasComputedEncoding a b | a -> b where
-    computedEncoding :: a -> b
+class HasComputeEncoding a b | a -> b where
+    computeEncoding :: a -> b
 
-class HasComputedEncryptedPassword a b | a -> b where
-    computedEncryptedPassword :: a -> b
+class HasComputeEncryptedPassword a b | a -> b where
+    computeEncryptedPassword :: a -> b
 
-class HasComputedIfNotExists a b | a -> b where
-    computedIfNotExists :: a -> b
+class HasComputeIfNotExists a b | a -> b where
+    computeIfNotExists :: a -> b
 
-class HasComputedInherit a b | a -> b where
-    computedInherit :: a -> b
+class HasComputeInherit a b | a -> b where
+    computeInherit :: a -> b
 
-class HasComputedIsTemplate a b | a -> b where
-    computedIsTemplate :: a -> b
+class HasComputeIsTemplate a b | a -> b where
+    computeIsTemplate :: a -> b
 
-class HasComputedLcCollate a b | a -> b where
-    computedLcCollate :: a -> b
+class HasComputeLcCollate a b | a -> b where
+    computeLcCollate :: a -> b
 
-class HasComputedLcCtype a b | a -> b where
-    computedLcCtype :: a -> b
+class HasComputeLcCtype a b | a -> b where
+    computeLcCtype :: a -> b
 
-class HasComputedLogin a b | a -> b where
-    computedLogin :: a -> b
+class HasComputeLogin a b | a -> b where
+    computeLogin :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedOwner a b | a -> b where
-    computedOwner :: a -> b
+class HasComputeOwner a b | a -> b where
+    computeOwner :: a -> b
 
-class HasComputedPassword a b | a -> b where
-    computedPassword :: a -> b
+class HasComputePassword a b | a -> b where
+    computePassword :: a -> b
 
-class HasComputedPolicy a b | a -> b where
-    computedPolicy :: a -> b
+class HasComputePolicy a b | a -> b where
+    computePolicy :: a -> b
 
-class HasComputedReplication a b | a -> b where
-    computedReplication :: a -> b
+class HasComputeReplication a b | a -> b where
+    computeReplication :: a -> b
 
-class HasComputedSchema a b | a -> b where
-    computedSchema :: a -> b
+class HasComputeSchema a b | a -> b where
+    computeSchema :: a -> b
 
-class HasComputedSkipDropRole a b | a -> b where
-    computedSkipDropRole :: a -> b
+class HasComputeSkipDropRole a b | a -> b where
+    computeSkipDropRole :: a -> b
 
-class HasComputedSkipReassignOwned a b | a -> b where
-    computedSkipReassignOwned :: a -> b
+class HasComputeSkipReassignOwned a b | a -> b where
+    computeSkipReassignOwned :: a -> b
 
-class HasComputedSuperuser a b | a -> b where
-    computedSuperuser :: a -> b
+class HasComputeSuperuser a b | a -> b where
+    computeSuperuser :: a -> b
 
-class HasComputedTablespaceName a b | a -> b where
-    computedTablespaceName :: a -> b
+class HasComputeTablespaceName a b | a -> b where
+    computeTablespaceName :: a -> b
 
-class HasComputedTemplate a b | a -> b where
-    computedTemplate :: a -> b
+class HasComputeTemplate a b | a -> b where
+    computeTemplate :: a -> b
 
-class HasComputedValidUntil a b | a -> b where
-    computedValidUntil :: a -> b
+class HasComputeValidUntil a b | a -> b where
+    computeValidUntil :: a -> b
 
-class HasComputedVersion a b | a -> b where
-    computedVersion :: a -> b
+class HasComputeVersion a b | a -> b where
+    computeVersion :: a -> b

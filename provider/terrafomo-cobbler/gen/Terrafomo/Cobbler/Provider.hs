@@ -23,6 +23,8 @@ module Terrafomo.Cobbler.Provider
     , emptyCobbler
 
     -- * Lenses
+    , providerCacertFile
+    , providerInsecure
     , providerPassword
     , providerUrl
     , providerUsername
@@ -53,11 +55,15 @@ the proper credentials before it can be used. Use the navigation to the left
 to read about the available resources.
 -}
 data Cobbler = Cobbler {
-      _password :: !(Maybe P.Text)
+      _cacert_file :: !(Maybe P.Text)
+    {- ^ (Optional) The path or contents of an SSL CA certificate. This can also be specified with the @COBBLER_CACERT_FILE@ shell environment variable. -}
+    , _insecure    :: !(Maybe P.Text)
+    {- ^ (Optional) Ignore SSL certificate warnings and errors. This can also be specified with the @COBBLER_INSECURE@ shell environment variable. -}
+    , _password    :: !(Maybe P.Text)
     {- ^ (Required) The password to the Cobbler service. This can also be specified with the @COBBLER_PASSWORD@ shell environment variable. -}
-    , _url      :: !(Maybe P.Text)
+    , _url         :: !(Maybe P.Text)
     {- ^ (Required) The url to the Cobbler service. This can also be specified with the @COBBLER_URL@ shell environment variable. -}
-    , _username :: !(Maybe P.Text)
+    , _username    :: !(Maybe P.Text)
     {- ^ (Required) The username to the Cobbler service. This can also be specified with the @COBBLER_USERNAME@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -69,6 +75,8 @@ instance TF.ToHCL Cobbler where
             key = TF.providerKey x
          in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
             [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
+            , TF.assign "cacert_file" <$> _cacert_file x
+            , TF.assign "insecure" <$> _insecure x
             , TF.assign "password" <$> _password x
             , TF.assign "url" <$> _url x
             , TF.assign "username" <$> _username x
@@ -79,10 +87,20 @@ instance TF.IsProvider Cobbler where
 
 emptyCobbler :: Cobbler
 emptyCobbler = Cobbler {
-        _password = Nothing
+        _cacert_file = Nothing
+      , _insecure = Nothing
+      , _password = Nothing
       , _url = Nothing
       , _username = Nothing
     }
+
+providerCacertFile :: Lens' Cobbler (Maybe P.Text)
+providerCacertFile =
+    lens _cacert_file (\s a -> s { _cacert_file = a })
+
+providerInsecure :: Lens' Cobbler (Maybe P.Text)
+providerInsecure =
+    lens _insecure (\s a -> s { _insecure = a })
 
 providerPassword :: Lens' Cobbler (Maybe P.Text)
 providerPassword =

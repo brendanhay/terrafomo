@@ -24,17 +24,17 @@
 module Terrafomo.PagerDuty.DataSource
     (
     -- * Types
-      EscalationPolicyDataSource (..)
-    , escalationPolicyDataSource
+      DataEscalationPolicy (..)
+    , dataEscalationPolicy
 
-    , ScheduleDataSource (..)
-    , scheduleDataSource
+    , DataSchedule (..)
+    , dataSchedule
 
-    , UserDataSource (..)
-    , userDataSource
+    , DataUser (..)
+    , dataUser
 
-    , VendorDataSource (..)
-    , vendorDataSource
+    , DataVendor (..)
+    , dataVendor
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -42,9 +42,9 @@ module Terrafomo.PagerDuty.DataSource
     , P.HasName (..)
 
     -- ** Computed Attributes
-    , P.HasComputedEmail (..)
-    , P.HasComputedName (..)
-    , P.HasComputedType' (..)
+    , P.HasComputeEmail (..)
+    , P.HasComputeName (..)
+    , P.HasComputeType' (..)
 
     -- * Re-exported Types
     , module P
@@ -80,28 +80,28 @@ Use this data source to get information about a specific
 <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Escalation_Policies/get_escalation_policies>
 that you can use for other PagerDuty resources.
 -}
-data EscalationPolicyDataSource s = EscalationPolicyDataSource {
+data DataEscalationPolicy s = DataEscalationPolicy {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name to use to find an escalation policy in the PagerDuty API. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EscalationPolicyDataSource s) where
-    toHCL EscalationPolicyDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataEscalationPolicy s) where
+    toHCL DataEscalationPolicy{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (EscalationPolicyDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataEscalationPolicy s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: EscalationPolicyDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: EscalationPolicyDataSource s)
+        lens (_name :: DataEscalationPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataEscalationPolicy s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (EscalationPolicyDataSource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataEscalationPolicy s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-escalationPolicyDataSource :: TF.DataSource P.PagerDuty (EscalationPolicyDataSource s)
-escalationPolicyDataSource =
+dataEscalationPolicy :: TF.DataSource P.PagerDuty (DataEscalationPolicy s)
+dataEscalationPolicy =
     TF.newDataSource "pagerduty_escalation_policy" $
-        EscalationPolicyDataSource {
+        DataEscalationPolicy {
               _name = TF.Nil
             }
 
@@ -111,28 +111,28 @@ Use this data source to get information about a specific
 <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Schedules/get_schedules>
 that you can use for other PagerDuty resources.
 -}
-data ScheduleDataSource s = ScheduleDataSource {
+data DataSchedule s = DataSchedule {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name to use to find a schedule in the PagerDuty API. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ScheduleDataSource s) where
-    toHCL ScheduleDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataSchedule s) where
+    toHCL DataSchedule{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (ScheduleDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataSchedule s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ScheduleDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ScheduleDataSource s)
+        lens (_name :: DataSchedule s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataSchedule s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ScheduleDataSource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataSchedule s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-scheduleDataSource :: TF.DataSource P.PagerDuty (ScheduleDataSource s)
-scheduleDataSource =
+dataSchedule :: TF.DataSource P.PagerDuty (DataSchedule s)
+dataSchedule =
     TF.newDataSource "pagerduty_schedule" $
-        ScheduleDataSource {
+        DataSchedule {
               _name = TF.Nil
             }
 
@@ -142,33 +142,33 @@ Use this data source to get information about a specific
 <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Users/get_users>
 that you can use for other PagerDuty resources.
 -}
-data UserDataSource s = UserDataSource {
+data DataUser s = DataUser {
       _email :: !(TF.Attr s P.Text)
     {- ^ (Required) The email to use to find a user in the PagerDuty API. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserDataSource s) where
-    toHCL UserDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataUser s) where
+    toHCL DataUser{..} = TF.inline $ catMaybes
         [ TF.assign "email" <$> TF.attribute _email
         ]
 
-instance P.HasEmail (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasEmail (DataUser s) (TF.Attr s P.Text) where
     email =
-        lens (_email :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _email = a } :: UserDataSource s)
+        lens (_email :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _email = a } :: DataUser s)
 
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedEmail =
-        (_email :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEmail (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeEmail =
+        (_email :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-userDataSource :: TF.DataSource P.PagerDuty (UserDataSource s)
-userDataSource =
+dataUser :: TF.DataSource P.PagerDuty (DataUser s)
+dataUser =
     TF.newDataSource "pagerduty_user" $
-        UserDataSource {
+        DataUser {
               _email = TF.Nil
             }
 
@@ -179,30 +179,30 @@ Use this data source to get information about a specific
 that you can use for a service integration (e.g Amazon Cloudwatch, Splunk,
 Datadog).
 -}
-data VendorDataSource s = VendorDataSource {
+data DataVendor s = DataVendor {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The vendor name to use to find a vendor in the PagerDuty API. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VendorDataSource s) where
-    toHCL VendorDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataVendor s) where
+    toHCL DataVendor{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (VendorDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataVendor s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: VendorDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: VendorDataSource s)
+        lens (_name :: DataVendor s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataVendor s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (VendorDataSource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataVendor s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (VendorDataSource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputeType' (TF.Ref s' (DataVendor s)) (TF.Attr s P.Text) where
+    computeType' x = TF.compute (TF.refKey x) "type"
 
-vendorDataSource :: TF.DataSource P.PagerDuty (VendorDataSource s)
-vendorDataSource =
+dataVendor :: TF.DataSource P.PagerDuty (DataVendor s)
+dataVendor =
     TF.newDataSource "pagerduty_vendor" $
-        VendorDataSource {
+        DataVendor {
               _name = TF.Nil
             }

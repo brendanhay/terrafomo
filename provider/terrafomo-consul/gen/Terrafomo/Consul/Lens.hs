@@ -46,33 +46,33 @@ module Terrafomo.Consul.Lens
     , HasToken (..)
 
     -- ** Computed Attributes
-    , HasComputedAddress (..)
-    , HasComputedDatacenter (..)
-    , HasComputedDns (..)
-    , HasComputedFailover (..)
-    , HasComputedId (..)
-    , HasComputedKey (..)
-    , HasComputedName (..)
-    , HasComputedNear (..)
-    , HasComputedNode (..)
-    , HasComputedNodeIds (..)
-    , HasComputedNodeNames (..)
-    , HasComputedNodes (..)
-    , HasComputedOnlyPassing (..)
-    , HasComputedPathPrefix (..)
-    , HasComputedPort (..)
-    , HasComputedQueryOptions (..)
-    , HasComputedService (..)
-    , HasComputedServiceId (..)
-    , HasComputedSession (..)
-    , HasComputedStoredToken (..)
-    , HasComputedSubkey (..)
-    , HasComputedSubkeys (..)
-    , HasComputedTag (..)
-    , HasComputedTags (..)
-    , HasComputedTemplate (..)
-    , HasComputedToken (..)
-    , HasComputedVar<name> (..)
+    , HasComputeAddress (..)
+    , HasComputeDatacenter (..)
+    , HasComputeDns (..)
+    , HasComputeFailover (..)
+    , HasComputeId (..)
+    , HasComputeKey (..)
+    , HasComputeName (..)
+    , HasComputeNear (..)
+    , HasComputeNode (..)
+    , HasComputeNodeIds (..)
+    , HasComputeNodeNames (..)
+    , HasComputeNodes (..)
+    , HasComputeOnlyPassing (..)
+    , HasComputePathPrefix (..)
+    , HasComputePort (..)
+    , HasComputeQueryOptions (..)
+    , HasComputeService (..)
+    , HasComputeServiceId (..)
+    , HasComputeSession (..)
+    , HasComputeStoredToken (..)
+    , HasComputeSubkey (..)
+    , HasComputeSubkeys (..)
+    , HasComputeTag (..)
+    , HasComputeTags (..)
+    , HasComputeTemplate (..)
+    , HasComputeToken (..)
+    , HasComputeVar<name> (..)
     ) where
 
 import GHC.Base ((.))
@@ -214,83 +214,83 @@ class HasToken a b | a -> b where
 instance HasToken a b => HasToken (TF.Schema l p a) b where
     token = TF.configuration . token
 
-class HasComputedAddress a b | a -> b where
-    computedAddress :: a -> b
+class HasComputeAddress a b | a -> b where
+    computeAddress :: a -> b
 
-class HasComputedDatacenter a b | a -> b where
-    computedDatacenter :: a -> b
+class HasComputeDatacenter a b | a -> b where
+    computeDatacenter :: a -> b
 
-class HasComputedDns a b | a -> b where
-    computedDns :: a -> b
+class HasComputeDns a b | a -> b where
+    computeDns :: a -> b
 
-class HasComputedFailover a b | a -> b where
-    computedFailover :: a -> b
+class HasComputeFailover a b | a -> b where
+    computeFailover :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedKey a b | a -> b where
-    computedKey :: a -> b
+class HasComputeKey a b | a -> b where
+    computeKey :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNear a b | a -> b where
-    computedNear :: a -> b
+class HasComputeNear a b | a -> b where
+    computeNear :: a -> b
 
-class HasComputedNode a b | a -> b where
-    computedNode :: a -> b
+class HasComputeNode a b | a -> b where
+    computeNode :: a -> b
 
-class HasComputedNodeIds a b | a -> b where
-    computedNodeIds :: a -> b
+class HasComputeNodeIds a b | a -> b where
+    computeNodeIds :: a -> b
 
-class HasComputedNodeNames a b | a -> b where
-    computedNodeNames :: a -> b
+class HasComputeNodeNames a b | a -> b where
+    computeNodeNames :: a -> b
 
-class HasComputedNodes a b | a -> b where
-    computedNodes :: a -> b
+class HasComputeNodes a b | a -> b where
+    computeNodes :: a -> b
 
-class HasComputedOnlyPassing a b | a -> b where
-    computedOnlyPassing :: a -> b
+class HasComputeOnlyPassing a b | a -> b where
+    computeOnlyPassing :: a -> b
 
-class HasComputedPathPrefix a b | a -> b where
-    computedPathPrefix :: a -> b
+class HasComputePathPrefix a b | a -> b where
+    computePathPrefix :: a -> b
 
-class HasComputedPort a b | a -> b where
-    computedPort :: a -> b
+class HasComputePort a b | a -> b where
+    computePort :: a -> b
 
-class HasComputedQueryOptions a b | a -> b where
-    computedQueryOptions :: a -> b
+class HasComputeQueryOptions a b | a -> b where
+    computeQueryOptions :: a -> b
 
-class HasComputedService a b | a -> b where
-    computedService :: a -> b
+class HasComputeService a b | a -> b where
+    computeService :: a -> b
 
-class HasComputedServiceId a b | a -> b where
-    computedServiceId :: a -> b
+class HasComputeServiceId a b | a -> b where
+    computeServiceId :: a -> b
 
-class HasComputedSession a b | a -> b where
-    computedSession :: a -> b
+class HasComputeSession a b | a -> b where
+    computeSession :: a -> b
 
-class HasComputedStoredToken a b | a -> b where
-    computedStoredToken :: a -> b
+class HasComputeStoredToken a b | a -> b where
+    computeStoredToken :: a -> b
 
-class HasComputedSubkey a b | a -> b where
-    computedSubkey :: a -> b
+class HasComputeSubkey a b | a -> b where
+    computeSubkey :: a -> b
 
-class HasComputedSubkeys a b | a -> b where
-    computedSubkeys :: a -> b
+class HasComputeSubkeys a b | a -> b where
+    computeSubkeys :: a -> b
 
-class HasComputedTag a b | a -> b where
-    computedTag :: a -> b
+class HasComputeTag a b | a -> b where
+    computeTag :: a -> b
 
-class HasComputedTags a b | a -> b where
-    computedTags :: a -> b
+class HasComputeTags a b | a -> b where
+    computeTags :: a -> b
 
-class HasComputedTemplate a b | a -> b where
-    computedTemplate :: a -> b
+class HasComputeTemplate a b | a -> b where
+    computeTemplate :: a -> b
 
-class HasComputedToken a b | a -> b where
-    computedToken :: a -> b
+class HasComputeToken a b | a -> b where
+    computeToken :: a -> b
 
-class HasComputedVar<name> a b | a -> b where
-    computedVar<name> :: a -> b
+class HasComputeVar<name> a b | a -> b where
+    computeVar<name> :: a -> b

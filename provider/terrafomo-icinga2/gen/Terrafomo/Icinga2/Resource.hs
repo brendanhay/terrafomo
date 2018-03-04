@@ -24,17 +24,17 @@
 module Terrafomo.Icinga2.Resource
     (
     -- * Types
-      CheckcommandResource (..)
-    , checkcommandResource
+      ResourceCheckcommand (..)
+    , resourceCheckcommand
 
-    , HostResource (..)
-    , hostResource
+    , ResourceHost (..)
+    , resourceHost
 
-    , HostgroupResource (..)
-    , hostgroupResource
+    , ResourceHostgroup (..)
+    , resourceHostgroup
 
-    , ServiceResource (..)
-    , serviceResource
+    , ResourceService (..)
+    , resourceService
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -49,15 +49,15 @@ module Terrafomo.Icinga2.Resource
     , P.HasVars (..)
 
     -- ** Computed Attributes
-    , P.HasComputedAddress (..)
-    , P.HasComputedArguments (..)
-    , P.HasComputedCheckCommand (..)
-    , P.HasComputedCommand (..)
-    , P.HasComputedDisplayName (..)
-    , P.HasComputedHostname (..)
-    , P.HasComputedName (..)
-    , P.HasComputedTemplates (..)
-    , P.HasComputedVars (..)
+    , P.HasComputeAddress (..)
+    , P.HasComputeArguments (..)
+    , P.HasComputeCheckCommand (..)
+    , P.HasComputeCommand (..)
+    , P.HasComputeDisplayName (..)
+    , P.HasComputeHostname (..)
+    , P.HasComputeName (..)
+    , P.HasComputeTemplates (..)
+    , P.HasComputeVars (..)
 
     -- * Re-exported Types
     , module P
@@ -92,7 +92,7 @@ import qualified Terrafomo.Schema    as TF
 Configures an Icinga2 checkcommand resource. This allows checkcommands to be
 configured, updated, and deleted.
 -}
-data CheckcommandResource s = CheckcommandResource {
+data ResourceCheckcommand s = ResourceCheckcommand {
       _arguments :: !(TF.Attr s P.Text)
     {- ^ (Optional) A mapping of arguments to include with the command. -}
     , _command   :: !(TF.Attr s P.Text)
@@ -103,58 +103,58 @@ data CheckcommandResource s = CheckcommandResource {
     {- ^ (Optional) A list of Icinga2 templates to assign to the host. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CheckcommandResource s) where
-    toHCL CheckcommandResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceCheckcommand s) where
+    toHCL ResourceCheckcommand{..} = TF.inline $ catMaybes
         [ TF.assign "arguments" <$> TF.attribute _arguments
         , TF.assign "command" <$> TF.attribute _command
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "templates" <$> TF.attribute _templates
         ]
 
-instance P.HasArguments (CheckcommandResource s) (TF.Attr s P.Text) where
+instance P.HasArguments (ResourceCheckcommand s) (TF.Attr s P.Text) where
     arguments =
-        lens (_arguments :: CheckcommandResource s -> TF.Attr s P.Text)
-             (\s a -> s { _arguments = a } :: CheckcommandResource s)
+        lens (_arguments :: ResourceCheckcommand s -> TF.Attr s P.Text)
+             (\s a -> s { _arguments = a } :: ResourceCheckcommand s)
 
-instance P.HasCommand (CheckcommandResource s) (TF.Attr s P.Text) where
+instance P.HasCommand (ResourceCheckcommand s) (TF.Attr s P.Text) where
     command =
-        lens (_command :: CheckcommandResource s -> TF.Attr s P.Text)
-             (\s a -> s { _command = a } :: CheckcommandResource s)
+        lens (_command :: ResourceCheckcommand s -> TF.Attr s P.Text)
+             (\s a -> s { _command = a } :: ResourceCheckcommand s)
 
-instance P.HasName (CheckcommandResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceCheckcommand s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: CheckcommandResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: CheckcommandResource s)
+        lens (_name :: ResourceCheckcommand s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceCheckcommand s)
 
-instance P.HasTemplates (CheckcommandResource s) (TF.Attr s P.Text) where
+instance P.HasTemplates (ResourceCheckcommand s) (TF.Attr s P.Text) where
     templates =
-        lens (_templates :: CheckcommandResource s -> TF.Attr s P.Text)
-             (\s a -> s { _templates = a } :: CheckcommandResource s)
+        lens (_templates :: ResourceCheckcommand s -> TF.Attr s P.Text)
+             (\s a -> s { _templates = a } :: ResourceCheckcommand s)
 
-instance s ~ s' => P.HasComputedArguments (TF.Ref s' (CheckcommandResource s)) (TF.Attr s P.Text) where
-    computedArguments =
-        (_arguments :: CheckcommandResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeArguments (TF.Ref s' (ResourceCheckcommand s)) (TF.Attr s P.Text) where
+    computeArguments =
+        (_arguments :: ResourceCheckcommand s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCommand (TF.Ref s' (CheckcommandResource s)) (TF.Attr s P.Text) where
-    computedCommand =
-        (_command :: CheckcommandResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCommand (TF.Ref s' (ResourceCheckcommand s)) (TF.Attr s P.Text) where
+    computeCommand =
+        (_command :: ResourceCheckcommand s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CheckcommandResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: CheckcommandResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceCheckcommand s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceCheckcommand s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTemplates (TF.Ref s' (CheckcommandResource s)) (TF.Attr s P.Text) where
-    computedTemplates =
-        (_templates :: CheckcommandResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTemplates (TF.Ref s' (ResourceCheckcommand s)) (TF.Attr s P.Text) where
+    computeTemplates =
+        (_templates :: ResourceCheckcommand s -> TF.Attr s P.Text)
             . TF.refValue
 
-checkcommandResource :: TF.Resource P.Icinga2 (CheckcommandResource s)
-checkcommandResource =
+resourceCheckcommand :: TF.Resource P.Icinga2 (ResourceCheckcommand s)
+resourceCheckcommand =
     TF.newResource "icinga2_checkcommand" $
-        CheckcommandResource {
+        ResourceCheckcommand {
               _arguments = TF.Nil
             , _command = TF.Nil
             , _name = TF.Nil
@@ -166,7 +166,7 @@ checkcommandResource =
 Configures an Icinga2 host resource. This allows hosts to be configured,
 updated, and deleted.
 -}
-data HostResource s = HostResource {
+data ResourceHost s = ResourceHost {
       _address       :: !(TF.Attr s P.Text)
     {- ^ (Required) The address of the host. -}
     , _check_command :: !(TF.Attr s P.Text)
@@ -179,8 +179,8 @@ data HostResource s = HostResource {
     {- ^ (Optional) A mapping of variables to assign to the host. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HostResource s) where
-    toHCL HostResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceHost s) where
+    toHCL ResourceHost{..} = TF.inline $ catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "check_command" <$> TF.attribute _check_command
         , TF.assign "hostname" <$> TF.attribute _hostname
@@ -188,60 +188,60 @@ instance TF.ToHCL (HostResource s) where
         , TF.assign "vars" <$> TF.attribute _vars
         ]
 
-instance P.HasAddress (HostResource s) (TF.Attr s P.Text) where
+instance P.HasAddress (ResourceHost s) (TF.Attr s P.Text) where
     address =
-        lens (_address :: HostResource s -> TF.Attr s P.Text)
-             (\s a -> s { _address = a } :: HostResource s)
+        lens (_address :: ResourceHost s -> TF.Attr s P.Text)
+             (\s a -> s { _address = a } :: ResourceHost s)
 
-instance P.HasCheckCommand (HostResource s) (TF.Attr s P.Text) where
+instance P.HasCheckCommand (ResourceHost s) (TF.Attr s P.Text) where
     checkCommand =
-        lens (_check_command :: HostResource s -> TF.Attr s P.Text)
-             (\s a -> s { _check_command = a } :: HostResource s)
+        lens (_check_command :: ResourceHost s -> TF.Attr s P.Text)
+             (\s a -> s { _check_command = a } :: ResourceHost s)
 
-instance P.HasHostname (HostResource s) (TF.Attr s P.Text) where
+instance P.HasHostname (ResourceHost s) (TF.Attr s P.Text) where
     hostname =
-        lens (_hostname :: HostResource s -> TF.Attr s P.Text)
-             (\s a -> s { _hostname = a } :: HostResource s)
+        lens (_hostname :: ResourceHost s -> TF.Attr s P.Text)
+             (\s a -> s { _hostname = a } :: ResourceHost s)
 
-instance P.HasTemplates (HostResource s) (TF.Attr s P.Text) where
+instance P.HasTemplates (ResourceHost s) (TF.Attr s P.Text) where
     templates =
-        lens (_templates :: HostResource s -> TF.Attr s P.Text)
-             (\s a -> s { _templates = a } :: HostResource s)
+        lens (_templates :: ResourceHost s -> TF.Attr s P.Text)
+             (\s a -> s { _templates = a } :: ResourceHost s)
 
-instance P.HasVars (HostResource s) (TF.Attr s P.Text) where
+instance P.HasVars (ResourceHost s) (TF.Attr s P.Text) where
     vars =
-        lens (_vars :: HostResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vars = a } :: HostResource s)
+        lens (_vars :: ResourceHost s -> TF.Attr s P.Text)
+             (\s a -> s { _vars = a } :: ResourceHost s)
 
-instance s ~ s' => P.HasComputedAddress (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
-    computedAddress =
-        (_address :: HostResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAddress (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
+    computeAddress =
+        (_address :: ResourceHost s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCheckCommand (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
-    computedCheckCommand =
-        (_check_command :: HostResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCheckCommand (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
+    computeCheckCommand =
+        (_check_command :: ResourceHost s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHostname (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
-    computedHostname =
-        (_hostname :: HostResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHostname (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
+    computeHostname =
+        (_hostname :: ResourceHost s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTemplates (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
-    computedTemplates =
-        (_templates :: HostResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTemplates (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
+    computeTemplates =
+        (_templates :: ResourceHost s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVars (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
-    computedVars =
-        (_vars :: HostResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeVars (TF.Ref s' (ResourceHost s)) (TF.Attr s P.Text) where
+    computeVars =
+        (_vars :: ResourceHost s -> TF.Attr s P.Text)
             . TF.refValue
 
-hostResource :: TF.Resource P.Icinga2 (HostResource s)
-hostResource =
+resourceHost :: TF.Resource P.Icinga2 (ResourceHost s)
+resourceHost =
     TF.newResource "icinga2_host" $
-        HostResource {
+        ResourceHost {
               _address = TF.Nil
             , _check_command = TF.Nil
             , _hostname = TF.Nil
@@ -254,43 +254,43 @@ hostResource =
 Configures an Icinga2 hostgroup resource. This allows hostgroup to be
 configured, updated, and deleted.
 -}
-data HostgroupResource s = HostgroupResource {
+data ResourceHostgroup s = ResourceHostgroup {
       _display_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the hostgroup to display in the Icinga2 interface. -}
     , _name         :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the hostgroup. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HostgroupResource s) where
-    toHCL HostgroupResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceHostgroup s) where
+    toHCL ResourceHostgroup{..} = TF.inline $ catMaybes
         [ TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDisplayName (HostgroupResource s) (TF.Attr s P.Text) where
+instance P.HasDisplayName (ResourceHostgroup s) (TF.Attr s P.Text) where
     displayName =
-        lens (_display_name :: HostgroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _display_name = a } :: HostgroupResource s)
+        lens (_display_name :: ResourceHostgroup s -> TF.Attr s P.Text)
+             (\s a -> s { _display_name = a } :: ResourceHostgroup s)
 
-instance P.HasName (HostgroupResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceHostgroup s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: HostgroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: HostgroupResource s)
+        lens (_name :: ResourceHostgroup s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceHostgroup s)
 
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (HostgroupResource s)) (TF.Attr s P.Text) where
-    computedDisplayName =
-        (_display_name :: HostgroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDisplayName (TF.Ref s' (ResourceHostgroup s)) (TF.Attr s P.Text) where
+    computeDisplayName =
+        (_display_name :: ResourceHostgroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (HostgroupResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: HostgroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceHostgroup s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceHostgroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-hostgroupResource :: TF.Resource P.Icinga2 (HostgroupResource s)
-hostgroupResource =
+resourceHostgroup :: TF.Resource P.Icinga2 (ResourceHostgroup s)
+resourceHostgroup =
     TF.newResource "icinga2_hostgroup" $
-        HostgroupResource {
+        ResourceHostgroup {
               _display_name = TF.Nil
             , _name = TF.Nil
             }
@@ -300,7 +300,7 @@ hostgroupResource =
 Configures an Icinga2 service resource. This allows service to be
 configured, updated, and deleted.
 -}
-data ServiceResource s = ServiceResource {
+data ResourceService s = ResourceService {
       _check_command :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of an existing Icinga2 CheckCommand object that is used to determine if the service is available on the host. -}
     , _hostname      :: !(TF.Attr s P.Text)
@@ -309,47 +309,47 @@ data ServiceResource s = ServiceResource {
     {- ^ (Required) The name of the Service object. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceResource s) where
-    toHCL ServiceResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceService s) where
+    toHCL ResourceService{..} = TF.inline $ catMaybes
         [ TF.assign "check_command" <$> TF.attribute _check_command
         , TF.assign "hostname" <$> TF.attribute _hostname
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasCheckCommand (ServiceResource s) (TF.Attr s P.Text) where
+instance P.HasCheckCommand (ResourceService s) (TF.Attr s P.Text) where
     checkCommand =
-        lens (_check_command :: ServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _check_command = a } :: ServiceResource s)
+        lens (_check_command :: ResourceService s -> TF.Attr s P.Text)
+             (\s a -> s { _check_command = a } :: ResourceService s)
 
-instance P.HasHostname (ServiceResource s) (TF.Attr s P.Text) where
+instance P.HasHostname (ResourceService s) (TF.Attr s P.Text) where
     hostname =
-        lens (_hostname :: ServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _hostname = a } :: ServiceResource s)
+        lens (_hostname :: ResourceService s -> TF.Attr s P.Text)
+             (\s a -> s { _hostname = a } :: ResourceService s)
 
-instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceService s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ServiceResource s)
+        lens (_name :: ResourceService s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceService s)
 
-instance s ~ s' => P.HasComputedCheckCommand (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedCheckCommand =
-        (_check_command :: ServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCheckCommand (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computeCheckCommand =
+        (_check_command :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedHostname =
-        (_hostname :: ServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHostname (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computeHostname =
+        (_hostname :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceService s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceService s -> TF.Attr s P.Text)
             . TF.refValue
 
-serviceResource :: TF.Resource P.Icinga2 (ServiceResource s)
-serviceResource =
+resourceService :: TF.Resource P.Icinga2 (ResourceService s)
+resourceService =
     TF.newResource "icinga2_service" $
-        ServiceResource {
+        ResourceService {
               _check_command = TF.Nil
             , _hostname = TF.Nil
             , _name = TF.Nil

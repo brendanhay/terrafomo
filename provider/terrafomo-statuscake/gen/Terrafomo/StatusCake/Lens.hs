@@ -34,17 +34,17 @@ module Terrafomo.StatusCake.Lens
     , HasWebsiteUrl (..)
 
     -- ** Computed Attributes
-    , HasComputedCheckRate (..)
-    , HasComputedConfirmations (..)
-    , HasComputedContactId (..)
-    , HasComputedPaused (..)
-    , HasComputedPort (..)
-    , HasComputedTestId (..)
-    , HasComputedTestType (..)
-    , HasComputedTimeout (..)
-    , HasComputedTriggerRate (..)
-    , HasComputedWebsiteName (..)
-    , HasComputedWebsiteUrl (..)
+    , HasComputeCheckRate (..)
+    , HasComputeConfirmations (..)
+    , HasComputeContactId (..)
+    , HasComputePaused (..)
+    , HasComputePort (..)
+    , HasComputeTestId (..)
+    , HasComputeTestType (..)
+    , HasComputeTimeout (..)
+    , HasComputeTriggerRate (..)
+    , HasComputeWebsiteName (..)
+    , HasComputeWebsiteUrl (..)
     ) where
 
 import GHC.Base ((.))
@@ -114,35 +114,35 @@ class HasWebsiteUrl a b | a -> b where
 instance HasWebsiteUrl a b => HasWebsiteUrl (TF.Schema l p a) b where
     websiteUrl = TF.configuration . websiteUrl
 
-class HasComputedCheckRate a b | a -> b where
-    computedCheckRate :: a -> b
+class HasComputeCheckRate a b | a -> b where
+    computeCheckRate :: a -> b
 
-class HasComputedConfirmations a b | a -> b where
-    computedConfirmations :: a -> b
+class HasComputeConfirmations a b | a -> b where
+    computeConfirmations :: a -> b
 
-class HasComputedContactId a b | a -> b where
-    computedContactId :: a -> b
+class HasComputeContactId a b | a -> b where
+    computeContactId :: a -> b
 
-class HasComputedPaused a b | a -> b where
-    computedPaused :: a -> b
+class HasComputePaused a b | a -> b where
+    computePaused :: a -> b
 
-class HasComputedPort a b | a -> b where
-    computedPort :: a -> b
+class HasComputePort a b | a -> b where
+    computePort :: a -> b
 
-class HasComputedTestId a b | a -> b where
-    computedTestId :: a -> b
+class HasComputeTestId a b | a -> b where
+    computeTestId :: a -> b
 
-class HasComputedTestType a b | a -> b where
-    computedTestType :: a -> b
+class HasComputeTestType a b | a -> b where
+    computeTestType :: a -> b
 
-class HasComputedTimeout a b | a -> b where
-    computedTimeout :: a -> b
+class HasComputeTimeout a b | a -> b where
+    computeTimeout :: a -> b
 
-class HasComputedTriggerRate a b | a -> b where
-    computedTriggerRate :: a -> b
+class HasComputeTriggerRate a b | a -> b where
+    computeTriggerRate :: a -> b
 
-class HasComputedWebsiteName a b | a -> b where
-    computedWebsiteName :: a -> b
+class HasComputeWebsiteName a b | a -> b where
+    computeWebsiteName :: a -> b
 
-class HasComputedWebsiteUrl a b | a -> b where
-    computedWebsiteUrl :: a -> b
+class HasComputeWebsiteUrl a b | a -> b where
+    computeWebsiteUrl :: a -> b

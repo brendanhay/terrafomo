@@ -25,19 +25,25 @@ module Terrafomo
     -- * Syntax
     , Name            (..)
     , Attr
+
+    -- ** Functions
     , join
     , file
+
+    -- ** Values
     , value
     , nil
     , true
     , false
 
-    -- * Schema References
+    -- * Declarations
     , DataSource
     , Resource
     , Schema
+
+    -- ** References
     , Ref
-    , ref
+    , define
 
     -- ** Lifecycles
     , HasLifecycle    (..)
@@ -50,7 +56,7 @@ module Terrafomo
     -- ** Dependencies
     , dependOn
 
-    -- * Outputs and Remote State
+    -- ** Outputs and Remote State
     , Output
     , output
     , remote

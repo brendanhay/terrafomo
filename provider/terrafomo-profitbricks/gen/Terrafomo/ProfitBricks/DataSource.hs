@@ -24,20 +24,20 @@
 module Terrafomo.ProfitBricks.DataSource
     (
     -- * Types
-      DatacenterDataSource (..)
-    , datacenterDataSource
+      DataDatacenter (..)
+    , dataDatacenter
 
-    , ImageDataSource (..)
-    , imageDataSource
+    , DataImage (..)
+    , dataImage
 
-    , LocationDataSource (..)
-    , locationDataSource
+    , DataLocation (..)
+    , dataLocation
 
-    , ResourceDataSource (..)
-    , resourceDataSource
+    , DataResource (..)
+    , dataResource
 
-    , SnapshotDataSource (..)
-    , snapshotDataSource
+    , DataSnapshot (..)
+    , dataSnapshot
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -51,15 +51,15 @@ module Terrafomo.ProfitBricks.DataSource
     , P.HasVersion (..)
 
     -- ** Computed Attributes
-    , P.HasComputedFeature (..)
-    , P.HasComputedId (..)
-    , P.HasComputedLocation (..)
-    , P.HasComputedName (..)
-    , P.HasComputedResourceId (..)
-    , P.HasComputedResourceType (..)
-    , P.HasComputedSize (..)
-    , P.HasComputedType' (..)
-    , P.HasComputedVersion (..)
+    , P.HasComputeFeature (..)
+    , P.HasComputeId (..)
+    , P.HasComputeLocation (..)
+    , P.HasComputeName (..)
+    , P.HasComputeResourceId (..)
+    , P.HasComputeResourceType (..)
+    , P.HasComputeSize (..)
+    , P.HasComputeType' (..)
+    , P.HasComputeVersion (..)
 
     -- * Re-exported Types
     , module P
@@ -99,46 +99,46 @@ results in multiple matches, an error will be generated. When this happens,
 please refine your search string so that it is specific enough to return
 only one result.
 -}
-data DatacenterDataSource s = DatacenterDataSource {
+data DataDatacenter s = DataDatacenter {
       _location :: !(TF.Attr s P.Text)
     {- ^ (Optional) Id of the existing Virtual Data Center's location. -}
     , _name     :: !(TF.Attr s P.Text)
     {- ^ (Required) Name or part of the name of an existing Virtual Data Center that you want to search for. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatacenterDataSource s) where
-    toHCL DatacenterDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataDatacenter s) where
+    toHCL DataDatacenter{..} = TF.inline $ catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasLocation (DatacenterDataSource s) (TF.Attr s P.Text) where
+instance P.HasLocation (DataDatacenter s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: DatacenterDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: DatacenterDataSource s)
+        lens (_location :: DataDatacenter s -> TF.Attr s P.Text)
+             (\s a -> s { _location = a } :: DataDatacenter s)
 
-instance P.HasName (DatacenterDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataDatacenter s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DatacenterDataSource s)
+        lens (_name :: DataDatacenter s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataDatacenter s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DatacenterDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DatacenterDataSource s)) (TF.Attr s P.Text) where
-    computedLocation =
-        (_location :: DatacenterDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLocation (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
+    computeLocation =
+        (_location :: DataDatacenter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataDatacenter s -> TF.Attr s P.Text)
             . TF.refValue
 
-datacenterDataSource :: TF.DataSource P.ProfitBricks (DatacenterDataSource s)
-datacenterDataSource =
+dataDatacenter :: TF.DataSource P.ProfitBricks (DataDatacenter s)
+dataDatacenter =
     TF.newDataSource "profitbricks_datacenter" $
-        DatacenterDataSource {
+        DataDatacenter {
               _location = TF.Nil
             , _name = TF.Nil
             }
@@ -148,7 +148,7 @@ datacenterDataSource =
 The images data source can be used to search for and return an existing
 image which can then be used to provision a server.
 -}
-data ImageDataSource s = ImageDataSource {
+data DataImage s = DataImage {
       _location :: !(TF.Attr s P.Text)
     {- ^ (Optional) Id of the existing image's location. -}
     , _name     :: !(TF.Attr s P.Text)
@@ -159,61 +159,61 @@ data ImageDataSource s = ImageDataSource {
     {- ^ (Optional) Version of the image (see details below). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImageDataSource s) where
-    toHCL ImageDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataImage s) where
+    toHCL DataImage{..} = TF.inline $ catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "version" <$> TF.attribute _version
         ]
 
-instance P.HasLocation (ImageDataSource s) (TF.Attr s P.Text) where
+instance P.HasLocation (DataImage s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: ImageDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: ImageDataSource s)
+        lens (_location :: DataImage s -> TF.Attr s P.Text)
+             (\s a -> s { _location = a } :: DataImage s)
 
-instance P.HasName (ImageDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataImage s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ImageDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ImageDataSource s)
+        lens (_name :: DataImage s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataImage s)
 
-instance P.HasType' (ImageDataSource s) (TF.Attr s P.Text) where
+instance P.HasType' (DataImage s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: ImageDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: ImageDataSource s)
+        lens (_type' :: DataImage s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: DataImage s)
 
-instance P.HasVersion (ImageDataSource s) (TF.Attr s P.Text) where
+instance P.HasVersion (DataImage s) (TF.Attr s P.Text) where
     version =
-        lens (_version :: ImageDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _version = a } :: ImageDataSource s)
+        lens (_version :: DataImage s -> TF.Attr s P.Text)
+             (\s a -> s { _version = a } :: DataImage s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
-    computedLocation =
-        (_location :: ImageDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLocation (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computeLocation =
+        (_location :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ImageDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: ImageDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeType' (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computeType' =
+        (_type' :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
-    computedVersion =
-        (_version :: ImageDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeVersion (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computeVersion =
+        (_version :: DataImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-imageDataSource :: TF.DataSource P.ProfitBricks (ImageDataSource s)
-imageDataSource =
+dataImage :: TF.DataSource P.ProfitBricks (DataImage s)
+dataImage =
     TF.newDataSource "profitbricks_image" $
-        ImageDataSource {
+        DataImage {
               _location = TF.Nil
             , _name = TF.Nil
             , _type' = TF.Nil
@@ -225,46 +225,46 @@ imageDataSource =
 The locations data source can be used to search for and return an existing
 location which can then be used elsewhere in the configuration.
 -}
-data LocationDataSource s = LocationDataSource {
+data DataLocation s = DataLocation {
       _feature :: !(TF.Attr s P.Text)
     {- ^ (Optional) A desired feature that the location must be able to provide. -}
     , _name    :: !(TF.Attr s P.Text)
     {- ^ (Required) Name or part of the location name to search for. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LocationDataSource s) where
-    toHCL LocationDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataLocation s) where
+    toHCL DataLocation{..} = TF.inline $ catMaybes
         [ TF.assign "feature" <$> TF.attribute _feature
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasFeature (LocationDataSource s) (TF.Attr s P.Text) where
+instance P.HasFeature (DataLocation s) (TF.Attr s P.Text) where
     feature =
-        lens (_feature :: LocationDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _feature = a } :: LocationDataSource s)
+        lens (_feature :: DataLocation s -> TF.Attr s P.Text)
+             (\s a -> s { _feature = a } :: DataLocation s)
 
-instance P.HasName (LocationDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataLocation s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: LocationDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: LocationDataSource s)
+        lens (_name :: DataLocation s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataLocation s)
 
-instance s ~ s' => P.HasComputedFeature (TF.Ref s' (LocationDataSource s)) (TF.Attr s P.Text) where
-    computedFeature =
-        (_feature :: LocationDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFeature (TF.Ref s' (DataLocation s)) (TF.Attr s P.Text) where
+    computeFeature =
+        (_feature :: DataLocation s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LocationDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataLocation s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (LocationDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: LocationDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataLocation s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataLocation s -> TF.Attr s P.Text)
             . TF.refValue
 
-locationDataSource :: TF.DataSource P.ProfitBricks (LocationDataSource s)
-locationDataSource =
+dataLocation :: TF.DataSource P.ProfitBricks (DataLocation s)
+dataLocation =
     TF.newDataSource "profitbricks_location" $
-        LocationDataSource {
+        DataLocation {
               _feature = TF.Nil
             , _name = TF.Nil
             }
@@ -280,46 +280,46 @@ results in multiple matches, an error will be generated. When this happens,
 please refine your search string so that it is specific enough to return
 only one result.
 -}
-data ResourceDataSource s = ResourceDataSource {
+data DataResource s = DataResource {
       _resource_id   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of the specific resource to retrieve information about. -}
     , _resource_type :: !(TF.Attr s P.Text)
     {- ^ (Optional) The specific type of resources to retrieve information about. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceDataSource s) where
-    toHCL ResourceDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataResource s) where
+    toHCL DataResource{..} = TF.inline $ catMaybes
         [ TF.assign "resource_id" <$> TF.attribute _resource_id
         , TF.assign "resource_type" <$> TF.attribute _resource_type
         ]
 
-instance P.HasResourceId (ResourceDataSource s) (TF.Attr s P.Text) where
+instance P.HasResourceId (DataResource s) (TF.Attr s P.Text) where
     resourceId =
-        lens (_resource_id :: ResourceDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_id = a } :: ResourceDataSource s)
+        lens (_resource_id :: DataResource s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_id = a } :: DataResource s)
 
-instance P.HasResourceType (ResourceDataSource s) (TF.Attr s P.Text) where
+instance P.HasResourceType (DataResource s) (TF.Attr s P.Text) where
     resourceType =
-        lens (_resource_type :: ResourceDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_type = a } :: ResourceDataSource s)
+        lens (_resource_type :: DataResource s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_type = a } :: DataResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataResource s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedResourceId (TF.Ref s' (ResourceDataSource s)) (TF.Attr s P.Text) where
-    computedResourceId =
-        (_resource_id :: ResourceDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeResourceId (TF.Ref s' (DataResource s)) (TF.Attr s P.Text) where
+    computeResourceId =
+        (_resource_id :: DataResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedResourceType (TF.Ref s' (ResourceDataSource s)) (TF.Attr s P.Text) where
-    computedResourceType =
-        (_resource_type :: ResourceDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeResourceType (TF.Ref s' (DataResource s)) (TF.Attr s P.Text) where
+    computeResourceType =
+        (_resource_type :: DataResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceDataSource :: TF.DataSource P.ProfitBricks (ResourceDataSource s)
-resourceDataSource =
+dataResource :: TF.DataSource P.ProfitBricks (DataResource s)
+dataResource =
     TF.newDataSource "profitbricks_resource" $
-        ResourceDataSource {
+        DataResource {
               _resource_id = TF.Nil
             , _resource_type = TF.Nil
             }
@@ -329,7 +329,7 @@ resourceDataSource =
 The snapshots data source can be used to search for and return an existing
 snapshot which can then be used to provision a server.
 -}
-data SnapshotDataSource s = SnapshotDataSource {
+data DataSnapshot s = DataSnapshot {
       _location :: !(TF.Attr s P.Text)
     {- ^ (Optional) Id of the existing snapshot's location. -}
     , _name     :: !(TF.Attr s P.Text)
@@ -338,50 +338,50 @@ data SnapshotDataSource s = SnapshotDataSource {
     {- ^ (Optional) The size of the snapshot to look for. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SnapshotDataSource s) where
-    toHCL SnapshotDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataSnapshot s) where
+    toHCL DataSnapshot{..} = TF.inline $ catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "size" <$> TF.attribute _size
         ]
 
-instance P.HasLocation (SnapshotDataSource s) (TF.Attr s P.Text) where
+instance P.HasLocation (DataSnapshot s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: SnapshotDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: SnapshotDataSource s)
+        lens (_location :: DataSnapshot s -> TF.Attr s P.Text)
+             (\s a -> s { _location = a } :: DataSnapshot s)
 
-instance P.HasName (SnapshotDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataSnapshot s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: SnapshotDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SnapshotDataSource s)
+        lens (_name :: DataSnapshot s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataSnapshot s)
 
-instance P.HasSize (SnapshotDataSource s) (TF.Attr s P.Text) where
+instance P.HasSize (DataSnapshot s) (TF.Attr s P.Text) where
     size =
-        lens (_size :: SnapshotDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: SnapshotDataSource s)
+        lens (_size :: DataSnapshot s -> TF.Attr s P.Text)
+             (\s a -> s { _size = a } :: DataSnapshot s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SnapshotDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (SnapshotDataSource s)) (TF.Attr s P.Text) where
-    computedLocation =
-        (_location :: SnapshotDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLocation (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+    computeLocation =
+        (_location :: DataSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SnapshotDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: SnapshotDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (SnapshotDataSource s)) (TF.Attr s P.Text) where
-    computedSize =
-        (_size :: SnapshotDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSize (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+    computeSize =
+        (_size :: DataSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 
-snapshotDataSource :: TF.DataSource P.ProfitBricks (SnapshotDataSource s)
-snapshotDataSource =
+dataSnapshot :: TF.DataSource P.ProfitBricks (DataSnapshot s)
+dataSnapshot =
     TF.newDataSource "profitbricks_snapshot" $
-        SnapshotDataSource {
+        DataSnapshot {
               _location = TF.Nil
             , _name = TF.Nil
             , _size = TF.Nil

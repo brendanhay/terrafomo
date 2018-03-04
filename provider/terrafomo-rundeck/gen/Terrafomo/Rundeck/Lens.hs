@@ -51,36 +51,36 @@ module Terrafomo.Rundeck.Lens
     , HasSshKeyStoragePath (..)
 
     -- ** Computed Attributes
-    , HasComputedAllowConcurrentExecutions (..)
-    , HasComputedCommand (..)
-    , HasComputedCommandOrderingStrategy (..)
-    , HasComputedContinueOnError (..)
-    , HasComputedDefaultNodeExecutorPlugin (..)
-    , HasComputedDefaultNodeFileCopierPlugin (..)
-    , HasComputedDelete (..)
-    , HasComputedDescription (..)
-    , HasComputedExtraConfig (..)
-    , HasComputedGroupName (..)
-    , HasComputedId (..)
-    , HasComputedKeyMaterial (..)
-    , HasComputedLogLevel (..)
-    , HasComputedMaxThreadCount (..)
-    , HasComputedName (..)
-    , HasComputedNodeFilterExcludePrecedence (..)
-    , HasComputedNodeFilterQuery (..)
-    , HasComputedOption (..)
-    , HasComputedPath (..)
-    , HasComputedPreserveOptionsOrder (..)
-    , HasComputedProjectName (..)
-    , HasComputedRankAttribute (..)
-    , HasComputedRankOrder (..)
-    , HasComputedResourceModelSource (..)
-    , HasComputedSchedule (..)
-    , HasComputedSshAuthenticationType (..)
-    , HasComputedSshKeyFilePath (..)
-    , HasComputedSshKeyStoragePath (..)
-    , HasComputedUiUrl (..)
-    , HasComputedUrl (..)
+    , HasComputeAllowConcurrentExecutions (..)
+    , HasComputeCommand (..)
+    , HasComputeCommandOrderingStrategy (..)
+    , HasComputeContinueOnError (..)
+    , HasComputeDefaultNodeExecutorPlugin (..)
+    , HasComputeDefaultNodeFileCopierPlugin (..)
+    , HasComputeDelete (..)
+    , HasComputeDescription (..)
+    , HasComputeExtraConfig (..)
+    , HasComputeGroupName (..)
+    , HasComputeId (..)
+    , HasComputeKeyMaterial (..)
+    , HasComputeLogLevel (..)
+    , HasComputeMaxThreadCount (..)
+    , HasComputeName (..)
+    , HasComputeNodeFilterExcludePrecedence (..)
+    , HasComputeNodeFilterQuery (..)
+    , HasComputeOption (..)
+    , HasComputePath (..)
+    , HasComputePreserveOptionsOrder (..)
+    , HasComputeProjectName (..)
+    , HasComputeRankAttribute (..)
+    , HasComputeRankOrder (..)
+    , HasComputeResourceModelSource (..)
+    , HasComputeSchedule (..)
+    , HasComputeSshAuthenticationType (..)
+    , HasComputeSshKeyFilePath (..)
+    , HasComputeSshKeyStoragePath (..)
+    , HasComputeUiUrl (..)
+    , HasComputeUrl (..)
     ) where
 
 import GHC.Base ((.))
@@ -252,92 +252,92 @@ class HasSshKeyStoragePath a b | a -> b where
 instance HasSshKeyStoragePath a b => HasSshKeyStoragePath (TF.Schema l p a) b where
     sshKeyStoragePath = TF.configuration . sshKeyStoragePath
 
-class HasComputedAllowConcurrentExecutions a b | a -> b where
-    computedAllowConcurrentExecutions :: a -> b
+class HasComputeAllowConcurrentExecutions a b | a -> b where
+    computeAllowConcurrentExecutions :: a -> b
 
-class HasComputedCommand a b | a -> b where
-    computedCommand :: a -> b
+class HasComputeCommand a b | a -> b where
+    computeCommand :: a -> b
 
-class HasComputedCommandOrderingStrategy a b | a -> b where
-    computedCommandOrderingStrategy :: a -> b
+class HasComputeCommandOrderingStrategy a b | a -> b where
+    computeCommandOrderingStrategy :: a -> b
 
-class HasComputedContinueOnError a b | a -> b where
-    computedContinueOnError :: a -> b
+class HasComputeContinueOnError a b | a -> b where
+    computeContinueOnError :: a -> b
 
-class HasComputedDefaultNodeExecutorPlugin a b | a -> b where
-    computedDefaultNodeExecutorPlugin :: a -> b
+class HasComputeDefaultNodeExecutorPlugin a b | a -> b where
+    computeDefaultNodeExecutorPlugin :: a -> b
 
-class HasComputedDefaultNodeFileCopierPlugin a b | a -> b where
-    computedDefaultNodeFileCopierPlugin :: a -> b
+class HasComputeDefaultNodeFileCopierPlugin a b | a -> b where
+    computeDefaultNodeFileCopierPlugin :: a -> b
 
-class HasComputedDelete a b | a -> b where
-    computedDelete :: a -> b
+class HasComputeDelete a b | a -> b where
+    computeDelete :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedExtraConfig a b | a -> b where
-    computedExtraConfig :: a -> b
+class HasComputeExtraConfig a b | a -> b where
+    computeExtraConfig :: a -> b
 
-class HasComputedGroupName a b | a -> b where
-    computedGroupName :: a -> b
+class HasComputeGroupName a b | a -> b where
+    computeGroupName :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedKeyMaterial a b | a -> b where
-    computedKeyMaterial :: a -> b
+class HasComputeKeyMaterial a b | a -> b where
+    computeKeyMaterial :: a -> b
 
-class HasComputedLogLevel a b | a -> b where
-    computedLogLevel :: a -> b
+class HasComputeLogLevel a b | a -> b where
+    computeLogLevel :: a -> b
 
-class HasComputedMaxThreadCount a b | a -> b where
-    computedMaxThreadCount :: a -> b
+class HasComputeMaxThreadCount a b | a -> b where
+    computeMaxThreadCount :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNodeFilterExcludePrecedence a b | a -> b where
-    computedNodeFilterExcludePrecedence :: a -> b
+class HasComputeNodeFilterExcludePrecedence a b | a -> b where
+    computeNodeFilterExcludePrecedence :: a -> b
 
-class HasComputedNodeFilterQuery a b | a -> b where
-    computedNodeFilterQuery :: a -> b
+class HasComputeNodeFilterQuery a b | a -> b where
+    computeNodeFilterQuery :: a -> b
 
-class HasComputedOption a b | a -> b where
-    computedOption :: a -> b
+class HasComputeOption a b | a -> b where
+    computeOption :: a -> b
 
-class HasComputedPath a b | a -> b where
-    computedPath :: a -> b
+class HasComputePath a b | a -> b where
+    computePath :: a -> b
 
-class HasComputedPreserveOptionsOrder a b | a -> b where
-    computedPreserveOptionsOrder :: a -> b
+class HasComputePreserveOptionsOrder a b | a -> b where
+    computePreserveOptionsOrder :: a -> b
 
-class HasComputedProjectName a b | a -> b where
-    computedProjectName :: a -> b
+class HasComputeProjectName a b | a -> b where
+    computeProjectName :: a -> b
 
-class HasComputedRankAttribute a b | a -> b where
-    computedRankAttribute :: a -> b
+class HasComputeRankAttribute a b | a -> b where
+    computeRankAttribute :: a -> b
 
-class HasComputedRankOrder a b | a -> b where
-    computedRankOrder :: a -> b
+class HasComputeRankOrder a b | a -> b where
+    computeRankOrder :: a -> b
 
-class HasComputedResourceModelSource a b | a -> b where
-    computedResourceModelSource :: a -> b
+class HasComputeResourceModelSource a b | a -> b where
+    computeResourceModelSource :: a -> b
 
-class HasComputedSchedule a b | a -> b where
-    computedSchedule :: a -> b
+class HasComputeSchedule a b | a -> b where
+    computeSchedule :: a -> b
 
-class HasComputedSshAuthenticationType a b | a -> b where
-    computedSshAuthenticationType :: a -> b
+class HasComputeSshAuthenticationType a b | a -> b where
+    computeSshAuthenticationType :: a -> b
 
-class HasComputedSshKeyFilePath a b | a -> b where
-    computedSshKeyFilePath :: a -> b
+class HasComputeSshKeyFilePath a b | a -> b where
+    computeSshKeyFilePath :: a -> b
 
-class HasComputedSshKeyStoragePath a b | a -> b where
-    computedSshKeyStoragePath :: a -> b
+class HasComputeSshKeyStoragePath a b | a -> b where
+    computeSshKeyStoragePath :: a -> b
 
-class HasComputedUiUrl a b | a -> b where
-    computedUiUrl :: a -> b
+class HasComputeUiUrl a b | a -> b where
+    computeUiUrl :: a -> b
 
-class HasComputedUrl a b | a -> b where
-    computedUrl :: a -> b
+class HasComputeUrl a b | a -> b where
+    computeUrl :: a -> b

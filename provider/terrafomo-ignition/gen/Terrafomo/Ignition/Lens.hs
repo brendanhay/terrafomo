@@ -66,50 +66,50 @@ module Terrafomo.Ignition.Lens
     , HasWipeTable (..)
 
     -- ** Computed Attributes
-    , HasComputedAppend (..)
-    , HasComputedArrays (..)
-    , HasComputedContent (..)
-    , HasComputedDevice (..)
-    , HasComputedDevices (..)
-    , HasComputedDirectories (..)
-    , HasComputedDisks (..)
-    , HasComputedDropin (..)
-    , HasComputedEnabled (..)
-    , HasComputedFiles (..)
-    , HasComputedFilesystem (..)
-    , HasComputedFilesystems (..)
-    , HasComputedGecos (..)
-    , HasComputedGid (..)
-    , HasComputedGroups (..)
-    , HasComputedHard (..)
-    , HasComputedHomeDir (..)
-    , HasComputedId (..)
-    , HasComputedLevel (..)
-    , HasComputedLinks (..)
-    , HasComputedMask (..)
-    , HasComputedMode (..)
-    , HasComputedMount (..)
-    , HasComputedName (..)
-    , HasComputedNetworkd (..)
-    , HasComputedNoCreateHome (..)
-    , HasComputedNoLogInit (..)
-    , HasComputedNoUserGroup (..)
-    , HasComputedPartition (..)
-    , HasComputedPasswordHash (..)
-    , HasComputedPath (..)
-    , HasComputedPrimaryGroup (..)
-    , HasComputedRendered (..)
-    , HasComputedReplace (..)
-    , HasComputedShell (..)
-    , HasComputedSource (..)
-    , HasComputedSpares (..)
-    , HasComputedSshAuthorizedKeys (..)
-    , HasComputedSystem (..)
-    , HasComputedSystemd (..)
-    , HasComputedTarget (..)
-    , HasComputedUid (..)
-    , HasComputedUsers (..)
-    , HasComputedWipeTable (..)
+    , HasComputeAppend (..)
+    , HasComputeArrays (..)
+    , HasComputeContent (..)
+    , HasComputeDevice (..)
+    , HasComputeDevices (..)
+    , HasComputeDirectories (..)
+    , HasComputeDisks (..)
+    , HasComputeDropin (..)
+    , HasComputeEnabled (..)
+    , HasComputeFiles (..)
+    , HasComputeFilesystem (..)
+    , HasComputeFilesystems (..)
+    , HasComputeGecos (..)
+    , HasComputeGid (..)
+    , HasComputeGroups (..)
+    , HasComputeHard (..)
+    , HasComputeHomeDir (..)
+    , HasComputeId (..)
+    , HasComputeLevel (..)
+    , HasComputeLinks (..)
+    , HasComputeMask (..)
+    , HasComputeMode (..)
+    , HasComputeMount (..)
+    , HasComputeName (..)
+    , HasComputeNetworkd (..)
+    , HasComputeNoCreateHome (..)
+    , HasComputeNoLogInit (..)
+    , HasComputeNoUserGroup (..)
+    , HasComputePartition (..)
+    , HasComputePasswordHash (..)
+    , HasComputePath (..)
+    , HasComputePrimaryGroup (..)
+    , HasComputeRendered (..)
+    , HasComputeReplace (..)
+    , HasComputeShell (..)
+    , HasComputeSource (..)
+    , HasComputeSpares (..)
+    , HasComputeSshAuthorizedKeys (..)
+    , HasComputeSystem (..)
+    , HasComputeSystemd (..)
+    , HasComputeTarget (..)
+    , HasComputeUid (..)
+    , HasComputeUsers (..)
+    , HasComputeWipeTable (..)
     ) where
 
 import GHC.Base ((.))
@@ -371,134 +371,134 @@ class HasWipeTable a b | a -> b where
 instance HasWipeTable a b => HasWipeTable (TF.Schema l p a) b where
     wipeTable = TF.configuration . wipeTable
 
-class HasComputedAppend a b | a -> b where
-    computedAppend :: a -> b
+class HasComputeAppend a b | a -> b where
+    computeAppend :: a -> b
 
-class HasComputedArrays a b | a -> b where
-    computedArrays :: a -> b
+class HasComputeArrays a b | a -> b where
+    computeArrays :: a -> b
 
-class HasComputedContent a b | a -> b where
-    computedContent :: a -> b
+class HasComputeContent a b | a -> b where
+    computeContent :: a -> b
 
-class HasComputedDevice a b | a -> b where
-    computedDevice :: a -> b
+class HasComputeDevice a b | a -> b where
+    computeDevice :: a -> b
 
-class HasComputedDevices a b | a -> b where
-    computedDevices :: a -> b
+class HasComputeDevices a b | a -> b where
+    computeDevices :: a -> b
 
-class HasComputedDirectories a b | a -> b where
-    computedDirectories :: a -> b
+class HasComputeDirectories a b | a -> b where
+    computeDirectories :: a -> b
 
-class HasComputedDisks a b | a -> b where
-    computedDisks :: a -> b
+class HasComputeDisks a b | a -> b where
+    computeDisks :: a -> b
 
-class HasComputedDropin a b | a -> b where
-    computedDropin :: a -> b
+class HasComputeDropin a b | a -> b where
+    computeDropin :: a -> b
 
-class HasComputedEnabled a b | a -> b where
-    computedEnabled :: a -> b
+class HasComputeEnabled a b | a -> b where
+    computeEnabled :: a -> b
 
-class HasComputedFiles a b | a -> b where
-    computedFiles :: a -> b
+class HasComputeFiles a b | a -> b where
+    computeFiles :: a -> b
 
-class HasComputedFilesystem a b | a -> b where
-    computedFilesystem :: a -> b
+class HasComputeFilesystem a b | a -> b where
+    computeFilesystem :: a -> b
 
-class HasComputedFilesystems a b | a -> b where
-    computedFilesystems :: a -> b
+class HasComputeFilesystems a b | a -> b where
+    computeFilesystems :: a -> b
 
-class HasComputedGecos a b | a -> b where
-    computedGecos :: a -> b
+class HasComputeGecos a b | a -> b where
+    computeGecos :: a -> b
 
-class HasComputedGid a b | a -> b where
-    computedGid :: a -> b
+class HasComputeGid a b | a -> b where
+    computeGid :: a -> b
 
-class HasComputedGroups a b | a -> b where
-    computedGroups :: a -> b
+class HasComputeGroups a b | a -> b where
+    computeGroups :: a -> b
 
-class HasComputedHard a b | a -> b where
-    computedHard :: a -> b
+class HasComputeHard a b | a -> b where
+    computeHard :: a -> b
 
-class HasComputedHomeDir a b | a -> b where
-    computedHomeDir :: a -> b
+class HasComputeHomeDir a b | a -> b where
+    computeHomeDir :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedLevel a b | a -> b where
-    computedLevel :: a -> b
+class HasComputeLevel a b | a -> b where
+    computeLevel :: a -> b
 
-class HasComputedLinks a b | a -> b where
-    computedLinks :: a -> b
+class HasComputeLinks a b | a -> b where
+    computeLinks :: a -> b
 
-class HasComputedMask a b | a -> b where
-    computedMask :: a -> b
+class HasComputeMask a b | a -> b where
+    computeMask :: a -> b
 
-class HasComputedMode a b | a -> b where
-    computedMode :: a -> b
+class HasComputeMode a b | a -> b where
+    computeMode :: a -> b
 
-class HasComputedMount a b | a -> b where
-    computedMount :: a -> b
+class HasComputeMount a b | a -> b where
+    computeMount :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNetworkd a b | a -> b where
-    computedNetworkd :: a -> b
+class HasComputeNetworkd a b | a -> b where
+    computeNetworkd :: a -> b
 
-class HasComputedNoCreateHome a b | a -> b where
-    computedNoCreateHome :: a -> b
+class HasComputeNoCreateHome a b | a -> b where
+    computeNoCreateHome :: a -> b
 
-class HasComputedNoLogInit a b | a -> b where
-    computedNoLogInit :: a -> b
+class HasComputeNoLogInit a b | a -> b where
+    computeNoLogInit :: a -> b
 
-class HasComputedNoUserGroup a b | a -> b where
-    computedNoUserGroup :: a -> b
+class HasComputeNoUserGroup a b | a -> b where
+    computeNoUserGroup :: a -> b
 
-class HasComputedPartition a b | a -> b where
-    computedPartition :: a -> b
+class HasComputePartition a b | a -> b where
+    computePartition :: a -> b
 
-class HasComputedPasswordHash a b | a -> b where
-    computedPasswordHash :: a -> b
+class HasComputePasswordHash a b | a -> b where
+    computePasswordHash :: a -> b
 
-class HasComputedPath a b | a -> b where
-    computedPath :: a -> b
+class HasComputePath a b | a -> b where
+    computePath :: a -> b
 
-class HasComputedPrimaryGroup a b | a -> b where
-    computedPrimaryGroup :: a -> b
+class HasComputePrimaryGroup a b | a -> b where
+    computePrimaryGroup :: a -> b
 
-class HasComputedRendered a b | a -> b where
-    computedRendered :: a -> b
+class HasComputeRendered a b | a -> b where
+    computeRendered :: a -> b
 
-class HasComputedReplace a b | a -> b where
-    computedReplace :: a -> b
+class HasComputeReplace a b | a -> b where
+    computeReplace :: a -> b
 
-class HasComputedShell a b | a -> b where
-    computedShell :: a -> b
+class HasComputeShell a b | a -> b where
+    computeShell :: a -> b
 
-class HasComputedSource a b | a -> b where
-    computedSource :: a -> b
+class HasComputeSource a b | a -> b where
+    computeSource :: a -> b
 
-class HasComputedSpares a b | a -> b where
-    computedSpares :: a -> b
+class HasComputeSpares a b | a -> b where
+    computeSpares :: a -> b
 
-class HasComputedSshAuthorizedKeys a b | a -> b where
-    computedSshAuthorizedKeys :: a -> b
+class HasComputeSshAuthorizedKeys a b | a -> b where
+    computeSshAuthorizedKeys :: a -> b
 
-class HasComputedSystem a b | a -> b where
-    computedSystem :: a -> b
+class HasComputeSystem a b | a -> b where
+    computeSystem :: a -> b
 
-class HasComputedSystemd a b | a -> b where
-    computedSystemd :: a -> b
+class HasComputeSystemd a b | a -> b where
+    computeSystemd :: a -> b
 
-class HasComputedTarget a b | a -> b where
-    computedTarget :: a -> b
+class HasComputeTarget a b | a -> b where
+    computeTarget :: a -> b
 
-class HasComputedUid a b | a -> b where
-    computedUid :: a -> b
+class HasComputeUid a b | a -> b where
+    computeUid :: a -> b
 
-class HasComputedUsers a b | a -> b where
-    computedUsers :: a -> b
+class HasComputeUsers a b | a -> b where
+    computeUsers :: a -> b
 
-class HasComputedWipeTable a b | a -> b where
-    computedWipeTable :: a -> b
+class HasComputeWipeTable a b | a -> b where
+    computeWipeTable :: a -> b

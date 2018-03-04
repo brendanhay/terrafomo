@@ -47,34 +47,34 @@ module Terrafomo.NewRelic.Lens
     , HasWidget (..)
 
     -- ** Computed Attributes
-    , HasComputedChannelId (..)
-    , HasComputedConditionScope (..)
-    , HasComputedConfiguration (..)
-    , HasComputedCreatedAt (..)
-    , HasComputedEditable (..)
-    , HasComputedEnabled (..)
-    , HasComputedEntities (..)
-    , HasComputedGcMetric (..)
-    , HasComputedHostIds (..)
-    , HasComputedIcon (..)
-    , HasComputedId (..)
-    , HasComputedIncidentPreference (..)
-    , HasComputedInstanceIds (..)
-    , HasComputedMetric (..)
-    , HasComputedName (..)
-    , HasComputedNrql (..)
-    , HasComputedPolicyId (..)
-    , HasComputedRunbookUrl (..)
-    , HasComputedTerm (..)
-    , HasComputedTitle (..)
-    , HasComputedType' (..)
-    , HasComputedUpdatedAt (..)
-    , HasComputedUserDefinedMetric (..)
-    , HasComputedUserDefinedValueFunction (..)
-    , HasComputedValueFunction (..)
-    , HasComputedViolationCloseTimer (..)
-    , HasComputedVisibility (..)
-    , HasComputedWidget (..)
+    , HasComputeChannelId (..)
+    , HasComputeConditionScope (..)
+    , HasComputeConfiguration (..)
+    , HasComputeCreatedAt (..)
+    , HasComputeEditable (..)
+    , HasComputeEnabled (..)
+    , HasComputeEntities (..)
+    , HasComputeGcMetric (..)
+    , HasComputeHostIds (..)
+    , HasComputeIcon (..)
+    , HasComputeId (..)
+    , HasComputeIncidentPreference (..)
+    , HasComputeInstanceIds (..)
+    , HasComputeMetric (..)
+    , HasComputeName (..)
+    , HasComputeNrql (..)
+    , HasComputePolicyId (..)
+    , HasComputeRunbookUrl (..)
+    , HasComputeTerm (..)
+    , HasComputeTitle (..)
+    , HasComputeType' (..)
+    , HasComputeUpdatedAt (..)
+    , HasComputeUserDefinedMetric (..)
+    , HasComputeUserDefinedValueFunction (..)
+    , HasComputeValueFunction (..)
+    , HasComputeViolationCloseTimer (..)
+    , HasComputeVisibility (..)
+    , HasComputeWidget (..)
     ) where
 
 import GHC.Base ((.))
@@ -222,86 +222,86 @@ class HasWidget a b | a -> b where
 instance HasWidget a b => HasWidget (TF.Schema l p a) b where
     widget = TF.configuration . widget
 
-class HasComputedChannelId a b | a -> b where
-    computedChannelId :: a -> b
+class HasComputeChannelId a b | a -> b where
+    computeChannelId :: a -> b
 
-class HasComputedConditionScope a b | a -> b where
-    computedConditionScope :: a -> b
+class HasComputeConditionScope a b | a -> b where
+    computeConditionScope :: a -> b
 
-class HasComputedConfiguration a b | a -> b where
-    computedConfiguration :: a -> b
+class HasComputeConfiguration a b | a -> b where
+    computeConfiguration :: a -> b
 
-class HasComputedCreatedAt a b | a -> b where
-    computedCreatedAt :: a -> b
+class HasComputeCreatedAt a b | a -> b where
+    computeCreatedAt :: a -> b
 
-class HasComputedEditable a b | a -> b where
-    computedEditable :: a -> b
+class HasComputeEditable a b | a -> b where
+    computeEditable :: a -> b
 
-class HasComputedEnabled a b | a -> b where
-    computedEnabled :: a -> b
+class HasComputeEnabled a b | a -> b where
+    computeEnabled :: a -> b
 
-class HasComputedEntities a b | a -> b where
-    computedEntities :: a -> b
+class HasComputeEntities a b | a -> b where
+    computeEntities :: a -> b
 
-class HasComputedGcMetric a b | a -> b where
-    computedGcMetric :: a -> b
+class HasComputeGcMetric a b | a -> b where
+    computeGcMetric :: a -> b
 
-class HasComputedHostIds a b | a -> b where
-    computedHostIds :: a -> b
+class HasComputeHostIds a b | a -> b where
+    computeHostIds :: a -> b
 
-class HasComputedIcon a b | a -> b where
-    computedIcon :: a -> b
+class HasComputeIcon a b | a -> b where
+    computeIcon :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedIncidentPreference a b | a -> b where
-    computedIncidentPreference :: a -> b
+class HasComputeIncidentPreference a b | a -> b where
+    computeIncidentPreference :: a -> b
 
-class HasComputedInstanceIds a b | a -> b where
-    computedInstanceIds :: a -> b
+class HasComputeInstanceIds a b | a -> b where
+    computeInstanceIds :: a -> b
 
-class HasComputedMetric a b | a -> b where
-    computedMetric :: a -> b
+class HasComputeMetric a b | a -> b where
+    computeMetric :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNrql a b | a -> b where
-    computedNrql :: a -> b
+class HasComputeNrql a b | a -> b where
+    computeNrql :: a -> b
 
-class HasComputedPolicyId a b | a -> b where
-    computedPolicyId :: a -> b
+class HasComputePolicyId a b | a -> b where
+    computePolicyId :: a -> b
 
-class HasComputedRunbookUrl a b | a -> b where
-    computedRunbookUrl :: a -> b
+class HasComputeRunbookUrl a b | a -> b where
+    computeRunbookUrl :: a -> b
 
-class HasComputedTerm a b | a -> b where
-    computedTerm :: a -> b
+class HasComputeTerm a b | a -> b where
+    computeTerm :: a -> b
 
-class HasComputedTitle a b | a -> b where
-    computedTitle :: a -> b
+class HasComputeTitle a b | a -> b where
+    computeTitle :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputeType' a b | a -> b where
+    computeType' :: a -> b
 
-class HasComputedUpdatedAt a b | a -> b where
-    computedUpdatedAt :: a -> b
+class HasComputeUpdatedAt a b | a -> b where
+    computeUpdatedAt :: a -> b
 
-class HasComputedUserDefinedMetric a b | a -> b where
-    computedUserDefinedMetric :: a -> b
+class HasComputeUserDefinedMetric a b | a -> b where
+    computeUserDefinedMetric :: a -> b
 
-class HasComputedUserDefinedValueFunction a b | a -> b where
-    computedUserDefinedValueFunction :: a -> b
+class HasComputeUserDefinedValueFunction a b | a -> b where
+    computeUserDefinedValueFunction :: a -> b
 
-class HasComputedValueFunction a b | a -> b where
-    computedValueFunction :: a -> b
+class HasComputeValueFunction a b | a -> b where
+    computeValueFunction :: a -> b
 
-class HasComputedViolationCloseTimer a b | a -> b where
-    computedViolationCloseTimer :: a -> b
+class HasComputeViolationCloseTimer a b | a -> b where
+    computeViolationCloseTimer :: a -> b
 
-class HasComputedVisibility a b | a -> b where
-    computedVisibility :: a -> b
+class HasComputeVisibility a b | a -> b where
+    computeVisibility :: a -> b
 
-class HasComputedWidget a b | a -> b where
-    computedWidget :: a -> b
+class HasComputeWidget a b | a -> b where
+    computeWidget :: a -> b

@@ -24,20 +24,20 @@
 module Terrafomo.CenturyLinkCloud.Resource
     (
     -- * Types
-      GroupResource (..)
-    , groupResource
+      ResourceGroup (..)
+    , resourceGroup
 
-    , LoadBalancerPoolResource (..)
-    , loadBalancerPoolResource
+    , ResourceLoadBalancer (..)
+    , resourceLoadBalancer
 
-    , LoadBalancerResource (..)
-    , loadBalancerResource
+    , ResourceLoadBalancerPool (..)
+    , resourceLoadBalancerPool
 
-    , PublicIpResource (..)
-    , publicIpResource
+    , ResourcePublicIp (..)
+    , resourcePublicIp
 
-    , ServerResource (..)
-    , serverResource
+    , ResourceServer (..)
+    , resourceServer
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -80,43 +80,43 @@ module Terrafomo.CenturyLinkCloud.Resource
     , P.HasType' (..)
 
     -- ** Computed Attributes
-    , P.HasComputedAaPolicyId (..)
-    , P.HasComputedAdditionalDisks (..)
-    , P.HasComputedConfigurationId (..)
-    , P.HasComputedCpu (..)
-    , P.HasComputedCreatedDat (..)
-    , P.HasComputedCustomFields (..)
-    , P.HasComputedDataCenter (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedGroupId (..)
-    , P.HasComputedInternalIpAddress (..)
-    , P.HasComputedIpAddress (..)
-    , P.HasComputedLoadBalancer (..)
-    , P.HasComputedLocationId (..)
-    , P.HasComputedMemoryMb (..)
-    , P.HasComputedMetadata (..)
-    , P.HasComputedMethod (..)
-    , P.HasComputedModifiedDat (..)
-    , P.HasComputedName (..)
-    , P.HasComputedNameTemplate (..)
-    , P.HasComputedNetworkId (..)
-    , P.HasComputedNodes (..)
-    , P.HasComputedOsType (..)
-    , P.HasComputedParent (..)
-    , P.HasComputedParentGroupId (..)
-    , P.HasComputedPassword (..)
-    , P.HasComputedPersistence (..)
-    , P.HasComputedPort (..)
-    , P.HasComputedPorts (..)
-    , P.HasComputedPowerState (..)
-    , P.HasComputedPrivateIpAddress (..)
-    , P.HasComputedPublicIpAddress (..)
-    , P.HasComputedServerId (..)
-    , P.HasComputedSourceRestrictions (..)
-    , P.HasComputedSourceServerId (..)
-    , P.HasComputedStatus (..)
-    , P.HasComputedStorageType (..)
-    , P.HasComputedType' (..)
+    , P.HasComputeAaPolicyId (..)
+    , P.HasComputeAdditionalDisks (..)
+    , P.HasComputeConfigurationId (..)
+    , P.HasComputeCpu (..)
+    , P.HasComputeCreatedDat (..)
+    , P.HasComputeCustomFields (..)
+    , P.HasComputeDataCenter (..)
+    , P.HasComputeDescription (..)
+    , P.HasComputeGroupId (..)
+    , P.HasComputeInternalIpAddress (..)
+    , P.HasComputeIpAddress (..)
+    , P.HasComputeLoadBalancer (..)
+    , P.HasComputeLocationId (..)
+    , P.HasComputeMemoryMb (..)
+    , P.HasComputeMetadata (..)
+    , P.HasComputeMethod (..)
+    , P.HasComputeModifiedDat (..)
+    , P.HasComputeName (..)
+    , P.HasComputeNameTemplate (..)
+    , P.HasComputeNetworkId (..)
+    , P.HasComputeNodes (..)
+    , P.HasComputeOsType (..)
+    , P.HasComputeParent (..)
+    , P.HasComputeParentGroupId (..)
+    , P.HasComputePassword (..)
+    , P.HasComputePersistence (..)
+    , P.HasComputePort (..)
+    , P.HasComputePorts (..)
+    , P.HasComputePowerState (..)
+    , P.HasComputePrivateIpAddress (..)
+    , P.HasComputePublicIpAddress (..)
+    , P.HasComputeServerId (..)
+    , P.HasComputeSourceRestrictions (..)
+    , P.HasComputeSourceServerId (..)
+    , P.HasComputeStatus (..)
+    , P.HasComputeStorageType (..)
+    , P.HasComputeType' (..)
 
     -- * Re-exported Types
     , module P
@@ -151,7 +151,7 @@ import qualified Terrafomo.Schema    as TF
 Manages a CLC server group. Either provisions or resolves to an existing
 group. See also <https://www.ctl.io/api-docs/v2/#groups> .
 -}
-data GroupResource s = GroupResource {
+data ResourceGroup s = ResourceGroup {
       _custom_fields   :: !(TF.Attr s P.Text)
     {- ^ (Optional) See <#custom_fields> below for details. -}
     , _description     :: !(TF.Attr s P.Text)
@@ -166,8 +166,8 @@ data GroupResource s = GroupResource {
     {- ^ - (Computed) The ID of the parent group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (GroupResource s) where
-    toHCL GroupResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceGroup s) where
+    toHCL ResourceGroup{..} = TF.inline $ catMaybes
         [ TF.assign "custom_fields" <$> TF.attribute _custom_fields
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "location_id" <$> TF.attribute _location_id
@@ -176,70 +176,70 @@ instance TF.ToHCL (GroupResource s) where
         , TF.assign "parent_group_id" <$> TF.attribute _parent_group_id
         ]
 
-instance P.HasCustomFields (GroupResource s) (TF.Attr s P.Text) where
+instance P.HasCustomFields (ResourceGroup s) (TF.Attr s P.Text) where
     customFields =
-        lens (_custom_fields :: GroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _custom_fields = a } :: GroupResource s)
+        lens (_custom_fields :: ResourceGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _custom_fields = a } :: ResourceGroup s)
 
-instance P.HasDescription (GroupResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceGroup s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: GroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: GroupResource s)
+        lens (_description :: ResourceGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceGroup s)
 
-instance P.HasLocationId (GroupResource s) (TF.Attr s P.Text) where
+instance P.HasLocationId (ResourceGroup s) (TF.Attr s P.Text) where
     locationId =
-        lens (_location_id :: GroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _location_id = a } :: GroupResource s)
+        lens (_location_id :: ResourceGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _location_id = a } :: ResourceGroup s)
 
-instance P.HasName (GroupResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceGroup s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: GroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: GroupResource s)
+        lens (_name :: ResourceGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceGroup s)
 
-instance P.HasParent (GroupResource s) (TF.Attr s P.Text) where
+instance P.HasParent (ResourceGroup s) (TF.Attr s P.Text) where
     parent =
-        lens (_parent :: GroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _parent = a } :: GroupResource s)
+        lens (_parent :: ResourceGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _parent = a } :: ResourceGroup s)
 
-instance P.HasParentGroupId (GroupResource s) (TF.Attr s P.Text) where
+instance P.HasParentGroupId (ResourceGroup s) (TF.Attr s P.Text) where
     parentGroupId =
-        lens (_parent_group_id :: GroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _parent_group_id = a } :: GroupResource s)
+        lens (_parent_group_id :: ResourceGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _parent_group_id = a } :: ResourceGroup s)
 
-instance s ~ s' => P.HasComputedCustomFields (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
-    computedCustomFields =
-        (_custom_fields :: GroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCustomFields (TF.Ref s' (ResourceGroup s)) (TF.Attr s P.Text) where
+    computeCustomFields =
+        (_custom_fields :: ResourceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: GroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceGroup s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLocationId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
-    computedLocationId =
-        (_location_id :: GroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLocationId (TF.Ref s' (ResourceGroup s)) (TF.Attr s P.Text) where
+    computeLocationId =
+        (_location_id :: ResourceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: GroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceGroup s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedParent (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
-    computedParent =
-        (_parent :: GroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeParent (TF.Ref s' (ResourceGroup s)) (TF.Attr s P.Text) where
+    computeParent =
+        (_parent :: ResourceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedParentGroupId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
-    computedParentGroupId =
-        (_parent_group_id :: GroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeParentGroupId (TF.Ref s' (ResourceGroup s)) (TF.Attr s P.Text) where
+    computeParentGroupId =
+        (_parent_group_id :: ResourceGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-groupResource :: TF.Resource P.CenturyLinkCloud (GroupResource s)
-groupResource =
+resourceGroup :: TF.Resource P.CenturyLinkCloud (ResourceGroup s)
+resourceGroup =
     TF.newResource "clc_group" $
-        GroupResource {
+        ResourceGroup {
               _custom_fields = TF.Nil
             , _description = TF.Nil
             , _location_id = TF.Nil
@@ -248,13 +248,102 @@ groupResource =
             , _parent_group_id = TF.Nil
             }
 
+{- | The @clc_load_balancer@ CenturyLinkCloud resource.
+
+Manages a CLC load balancer. Manage connected backends with
+<load_balancer_pool.html> See also
+<https://www.ctl.io/api-docs/v2/#shared-load-balancer> .
+-}
+data ResourceLoadBalancer s = ResourceLoadBalancer {
+      _data_center :: !(TF.Attr s P.Text)
+    {- ^ (Required, string) The datacenter location of both parent group and this group. -}
+    , _description :: !(TF.Attr s P.Text)
+    {- ^ (Optional, string) Description for server group (visible in control portal only) -}
+    , _ip_address  :: !(TF.Attr s P.Text)
+    {- ^ - (Computed) The IP of the load balancer. -}
+    , _name        :: !(TF.Attr s P.Text)
+    {- ^ (Required, string) The name of the load balancer. -}
+    , _status      :: !(TF.Attr s P.Text)
+    {- ^ (Required, string) Either "enabled" or "disabled" -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceLoadBalancer s) where
+    toHCL ResourceLoadBalancer{..} = TF.inline $ catMaybes
+        [ TF.assign "data_center" <$> TF.attribute _data_center
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ip_address" <$> TF.attribute _ip_address
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "status" <$> TF.attribute _status
+        ]
+
+instance P.HasDataCenter (ResourceLoadBalancer s) (TF.Attr s P.Text) where
+    dataCenter =
+        lens (_data_center :: ResourceLoadBalancer s -> TF.Attr s P.Text)
+             (\s a -> s { _data_center = a } :: ResourceLoadBalancer s)
+
+instance P.HasDescription (ResourceLoadBalancer s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: ResourceLoadBalancer s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceLoadBalancer s)
+
+instance P.HasIpAddress (ResourceLoadBalancer s) (TF.Attr s P.Text) where
+    ipAddress =
+        lens (_ip_address :: ResourceLoadBalancer s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_address = a } :: ResourceLoadBalancer s)
+
+instance P.HasName (ResourceLoadBalancer s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ResourceLoadBalancer s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceLoadBalancer s)
+
+instance P.HasStatus (ResourceLoadBalancer s) (TF.Attr s P.Text) where
+    status =
+        lens (_status :: ResourceLoadBalancer s -> TF.Attr s P.Text)
+             (\s a -> s { _status = a } :: ResourceLoadBalancer s)
+
+instance s ~ s' => P.HasComputeDataCenter (TF.Ref s' (ResourceLoadBalancer s)) (TF.Attr s P.Text) where
+    computeDataCenter =
+        (_data_center :: ResourceLoadBalancer s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceLoadBalancer s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceLoadBalancer s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeIpAddress (TF.Ref s' (ResourceLoadBalancer s)) (TF.Attr s P.Text) where
+    computeIpAddress =
+        (_ip_address :: ResourceLoadBalancer s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceLoadBalancer s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceLoadBalancer s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeStatus (TF.Ref s' (ResourceLoadBalancer s)) (TF.Attr s P.Text) where
+    computeStatus =
+        (_status :: ResourceLoadBalancer s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourceLoadBalancer :: TF.Resource P.CenturyLinkCloud (ResourceLoadBalancer s)
+resourceLoadBalancer =
+    TF.newResource "clc_load_balancer" $
+        ResourceLoadBalancer {
+              _data_center = TF.Nil
+            , _description = TF.Nil
+            , _ip_address = TF.Nil
+            , _name = TF.Nil
+            , _status = TF.Nil
+            }
+
 {- | The @clc_load_balancer_pool@ CenturyLinkCloud resource.
 
 Manages a CLC load balancer pool. Manage related frontend with
 <load_balancer.html> See also
 <https://www.ctl.io/api-docs/v2/#shared-load-balancer> .
 -}
-data LoadBalancerPoolResource s = LoadBalancerPoolResource {
+data ResourceLoadBalancerPool s = ResourceLoadBalancerPool {
       _data_center   :: !(TF.Attr s P.Text)
     {- ^ (Required, string) The datacenter location for this pool. -}
     , _load_balancer :: !(TF.Attr s P.Text)
@@ -269,8 +358,8 @@ data LoadBalancerPoolResource s = LoadBalancerPoolResource {
     {- ^ (Required, int) Either 80 or 443 -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoadBalancerPoolResource s) where
-    toHCL LoadBalancerPoolResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceLoadBalancerPool s) where
+    toHCL ResourceLoadBalancerPool{..} = TF.inline $ catMaybes
         [ TF.assign "data_center" <$> TF.attribute _data_center
         , TF.assign "load_balancer" <$> TF.attribute _load_balancer
         , TF.assign "method" <$> TF.attribute _method
@@ -279,70 +368,70 @@ instance TF.ToHCL (LoadBalancerPoolResource s) where
         , TF.assign "port" <$> TF.attribute _port
         ]
 
-instance P.HasDataCenter (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
+instance P.HasDataCenter (ResourceLoadBalancerPool s) (TF.Attr s P.Text) where
     dataCenter =
-        lens (_data_center :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _data_center = a } :: LoadBalancerPoolResource s)
+        lens (_data_center :: ResourceLoadBalancerPool s -> TF.Attr s P.Text)
+             (\s a -> s { _data_center = a } :: ResourceLoadBalancerPool s)
 
-instance P.HasLoadBalancer (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
+instance P.HasLoadBalancer (ResourceLoadBalancerPool s) (TF.Attr s P.Text) where
     loadBalancer =
-        lens (_load_balancer :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _load_balancer = a } :: LoadBalancerPoolResource s)
+        lens (_load_balancer :: ResourceLoadBalancerPool s -> TF.Attr s P.Text)
+             (\s a -> s { _load_balancer = a } :: ResourceLoadBalancerPool s)
 
-instance P.HasMethod (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
+instance P.HasMethod (ResourceLoadBalancerPool s) (TF.Attr s P.Text) where
     method =
-        lens (_method :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _method = a } :: LoadBalancerPoolResource s)
+        lens (_method :: ResourceLoadBalancerPool s -> TF.Attr s P.Text)
+             (\s a -> s { _method = a } :: ResourceLoadBalancerPool s)
 
-instance P.HasNodes (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
+instance P.HasNodes (ResourceLoadBalancerPool s) (TF.Attr s P.Text) where
     nodes =
-        lens (_nodes :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _nodes = a } :: LoadBalancerPoolResource s)
+        lens (_nodes :: ResourceLoadBalancerPool s -> TF.Attr s P.Text)
+             (\s a -> s { _nodes = a } :: ResourceLoadBalancerPool s)
 
-instance P.HasPersistence (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
+instance P.HasPersistence (ResourceLoadBalancerPool s) (TF.Attr s P.Text) where
     persistence =
-        lens (_persistence :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _persistence = a } :: LoadBalancerPoolResource s)
+        lens (_persistence :: ResourceLoadBalancerPool s -> TF.Attr s P.Text)
+             (\s a -> s { _persistence = a } :: ResourceLoadBalancerPool s)
 
-instance P.HasPort (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
+instance P.HasPort (ResourceLoadBalancerPool s) (TF.Attr s P.Text) where
     port =
-        lens (_port :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _port = a } :: LoadBalancerPoolResource s)
+        lens (_port :: ResourceLoadBalancerPool s -> TF.Attr s P.Text)
+             (\s a -> s { _port = a } :: ResourceLoadBalancerPool s)
 
-instance s ~ s' => P.HasComputedDataCenter (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
-    computedDataCenter =
-        (_data_center :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDataCenter (TF.Ref s' (ResourceLoadBalancerPool s)) (TF.Attr s P.Text) where
+    computeDataCenter =
+        (_data_center :: ResourceLoadBalancerPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLoadBalancer (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
-    computedLoadBalancer =
-        (_load_balancer :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLoadBalancer (TF.Ref s' (ResourceLoadBalancerPool s)) (TF.Attr s P.Text) where
+    computeLoadBalancer =
+        (_load_balancer :: ResourceLoadBalancerPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMethod (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
-    computedMethod =
-        (_method :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMethod (TF.Ref s' (ResourceLoadBalancerPool s)) (TF.Attr s P.Text) where
+    computeMethod =
+        (_method :: ResourceLoadBalancerPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNodes (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
-    computedNodes =
-        (_nodes :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNodes (TF.Ref s' (ResourceLoadBalancerPool s)) (TF.Attr s P.Text) where
+    computeNodes =
+        (_nodes :: ResourceLoadBalancerPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPersistence (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
-    computedPersistence =
-        (_persistence :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePersistence (TF.Ref s' (ResourceLoadBalancerPool s)) (TF.Attr s P.Text) where
+    computePersistence =
+        (_persistence :: ResourceLoadBalancerPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
-    computedPort =
-        (_port :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePort (TF.Ref s' (ResourceLoadBalancerPool s)) (TF.Attr s P.Text) where
+    computePort =
+        (_port :: ResourceLoadBalancerPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-loadBalancerPoolResource :: TF.Resource P.CenturyLinkCloud (LoadBalancerPoolResource s)
-loadBalancerPoolResource =
+resourceLoadBalancerPool :: TF.Resource P.CenturyLinkCloud (ResourceLoadBalancerPool s)
+resourceLoadBalancerPool =
     TF.newResource "clc_load_balancer_pool" $
-        LoadBalancerPoolResource {
+        ResourceLoadBalancerPool {
               _data_center = TF.Nil
             , _load_balancer = TF.Nil
             , _method = TF.Nil
@@ -351,101 +440,12 @@ loadBalancerPoolResource =
             , _port = TF.Nil
             }
 
-{- | The @clc_load_balancer@ CenturyLinkCloud resource.
-
-Manages a CLC load balancer. Manage connected backends with
-<load_balancer_pool.html> See also
-<https://www.ctl.io/api-docs/v2/#shared-load-balancer> .
--}
-data LoadBalancerResource s = LoadBalancerResource {
-      _data_center :: !(TF.Attr s P.Text)
-    {- ^ (Required, string) The datacenter location of both parent group and this group. -}
-    , _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional, string) Description for server group (visible in control portal only) -}
-    , _ip_address  :: !(TF.Attr s P.Text)
-    {- ^ - (Computed) The IP of the load balancer. -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required, string) The name of the load balancer. -}
-    , _status      :: !(TF.Attr s P.Text)
-    {- ^ (Required, string) Either "enabled" or "disabled" -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (LoadBalancerResource s) where
-    toHCL LoadBalancerResource{..} = TF.inline $ catMaybes
-        [ TF.assign "data_center" <$> TF.attribute _data_center
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "ip_address" <$> TF.attribute _ip_address
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "status" <$> TF.attribute _status
-        ]
-
-instance P.HasDataCenter (LoadBalancerResource s) (TF.Attr s P.Text) where
-    dataCenter =
-        lens (_data_center :: LoadBalancerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _data_center = a } :: LoadBalancerResource s)
-
-instance P.HasDescription (LoadBalancerResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: LoadBalancerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: LoadBalancerResource s)
-
-instance P.HasIpAddress (LoadBalancerResource s) (TF.Attr s P.Text) where
-    ipAddress =
-        lens (_ip_address :: LoadBalancerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_address = a } :: LoadBalancerResource s)
-
-instance P.HasName (LoadBalancerResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: LoadBalancerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: LoadBalancerResource s)
-
-instance P.HasStatus (LoadBalancerResource s) (TF.Attr s P.Text) where
-    status =
-        lens (_status :: LoadBalancerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _status = a } :: LoadBalancerResource s)
-
-instance s ~ s' => P.HasComputedDataCenter (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedDataCenter =
-        (_data_center :: LoadBalancerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: LoadBalancerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedIpAddress =
-        (_ip_address :: LoadBalancerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: LoadBalancerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedStatus =
-        (_status :: LoadBalancerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-loadBalancerResource :: TF.Resource P.CenturyLinkCloud (LoadBalancerResource s)
-loadBalancerResource =
-    TF.newResource "clc_load_balancer" $
-        LoadBalancerResource {
-              _data_center = TF.Nil
-            , _description = TF.Nil
-            , _ip_address = TF.Nil
-            , _name = TF.Nil
-            , _status = TF.Nil
-            }
-
 {- | The @clc_public_ip@ CenturyLinkCloud resource.
 
 Manages a CLC public ip (for an existing server). See also
 <https://www.ctl.io/api-docs/v2/#public-ip> .
 -}
-data PublicIpResource s = PublicIpResource {
+data ResourcePublicIp s = ResourcePublicIp {
       _internal_ip_address :: !(TF.Attr s P.Text)
     {- ^ (Required, string) The internal IP of the NIC to attach to. If not provided, a new internal NIC will be provisioned and used. -}
     , _ports               :: !(TF.Attr s P.Text)
@@ -456,58 +456,58 @@ data PublicIpResource s = PublicIpResource {
     {- ^ (Optional) See <#source_restrictions> below for details. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PublicIpResource s) where
-    toHCL PublicIpResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourcePublicIp s) where
+    toHCL ResourcePublicIp{..} = TF.inline $ catMaybes
         [ TF.assign "internal_ip_address" <$> TF.attribute _internal_ip_address
         , TF.assign "ports" <$> TF.attribute _ports
         , TF.assign "server_id" <$> TF.attribute _server_id
         , TF.assign "source_restrictions" <$> TF.attribute _source_restrictions
         ]
 
-instance P.HasInternalIpAddress (PublicIpResource s) (TF.Attr s P.Text) where
+instance P.HasInternalIpAddress (ResourcePublicIp s) (TF.Attr s P.Text) where
     internalIpAddress =
-        lens (_internal_ip_address :: PublicIpResource s -> TF.Attr s P.Text)
-             (\s a -> s { _internal_ip_address = a } :: PublicIpResource s)
+        lens (_internal_ip_address :: ResourcePublicIp s -> TF.Attr s P.Text)
+             (\s a -> s { _internal_ip_address = a } :: ResourcePublicIp s)
 
-instance P.HasPorts (PublicIpResource s) (TF.Attr s P.Text) where
+instance P.HasPorts (ResourcePublicIp s) (TF.Attr s P.Text) where
     ports =
-        lens (_ports :: PublicIpResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ports = a } :: PublicIpResource s)
+        lens (_ports :: ResourcePublicIp s -> TF.Attr s P.Text)
+             (\s a -> s { _ports = a } :: ResourcePublicIp s)
 
-instance P.HasServerId (PublicIpResource s) (TF.Attr s P.Text) where
+instance P.HasServerId (ResourcePublicIp s) (TF.Attr s P.Text) where
     serverId =
-        lens (_server_id :: PublicIpResource s -> TF.Attr s P.Text)
-             (\s a -> s { _server_id = a } :: PublicIpResource s)
+        lens (_server_id :: ResourcePublicIp s -> TF.Attr s P.Text)
+             (\s a -> s { _server_id = a } :: ResourcePublicIp s)
 
-instance P.HasSourceRestrictions (PublicIpResource s) (TF.Attr s P.Text) where
+instance P.HasSourceRestrictions (ResourcePublicIp s) (TF.Attr s P.Text) where
     sourceRestrictions =
-        lens (_source_restrictions :: PublicIpResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_restrictions = a } :: PublicIpResource s)
+        lens (_source_restrictions :: ResourcePublicIp s -> TF.Attr s P.Text)
+             (\s a -> s { _source_restrictions = a } :: ResourcePublicIp s)
 
-instance s ~ s' => P.HasComputedInternalIpAddress (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
-    computedInternalIpAddress =
-        (_internal_ip_address :: PublicIpResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeInternalIpAddress (TF.Ref s' (ResourcePublicIp s)) (TF.Attr s P.Text) where
+    computeInternalIpAddress =
+        (_internal_ip_address :: ResourcePublicIp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPorts (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
-    computedPorts =
-        (_ports :: PublicIpResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePorts (TF.Ref s' (ResourcePublicIp s)) (TF.Attr s P.Text) where
+    computePorts =
+        (_ports :: ResourcePublicIp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedServerId (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
-    computedServerId =
-        (_server_id :: PublicIpResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeServerId (TF.Ref s' (ResourcePublicIp s)) (TF.Attr s P.Text) where
+    computeServerId =
+        (_server_id :: ResourcePublicIp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourceRestrictions (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
-    computedSourceRestrictions =
-        (_source_restrictions :: PublicIpResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSourceRestrictions (TF.Ref s' (ResourcePublicIp s)) (TF.Attr s P.Text) where
+    computeSourceRestrictions =
+        (_source_restrictions :: ResourcePublicIp s -> TF.Attr s P.Text)
             . TF.refValue
 
-publicIpResource :: TF.Resource P.CenturyLinkCloud (PublicIpResource s)
-publicIpResource =
+resourcePublicIp :: TF.Resource P.CenturyLinkCloud (ResourcePublicIp s)
+resourcePublicIp =
     TF.newResource "clc_public_ip" $
-        PublicIpResource {
+        ResourcePublicIp {
               _internal_ip_address = TF.Nil
             , _ports = TF.Nil
             , _server_id = TF.Nil
@@ -518,7 +518,7 @@ publicIpResource =
 
 Manages a CLC server. Resources and Documentation:
 -}
-data ServerResource s = ServerResource {
+data ResourceServer s = ResourceServer {
       _aa_policy_id       :: !(TF.Attr s P.Text)
     {- ^ (Optional, string | hyperscale) Anti-Affinity policy ID -}
     , _additional_disks   :: !(TF.Attr s P.Text)
@@ -565,8 +565,8 @@ data ServerResource s = ServerResource {
     {- ^ (Required, string) The virtualization type One of "standard", "hyperscale", "bareMetal" -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServerResource s) where
-    toHCL ServerResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceServer s) where
+    toHCL ResourceServer{..} = TF.inline $ catMaybes
         [ TF.assign "aa_policy_id" <$> TF.attribute _aa_policy_id
         , TF.assign "additional_disks" <$> TF.attribute _additional_disks
         , TF.assign "configuration_id" <$> TF.attribute _configuration_id
@@ -591,230 +591,230 @@ instance TF.ToHCL (ServerResource s) where
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasAaPolicyId (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasAaPolicyId (ResourceServer s) (TF.Attr s P.Text) where
     aaPolicyId =
-        lens (_aa_policy_id :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _aa_policy_id = a } :: ServerResource s)
+        lens (_aa_policy_id :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _aa_policy_id = a } :: ResourceServer s)
 
-instance P.HasAdditionalDisks (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasAdditionalDisks (ResourceServer s) (TF.Attr s P.Text) where
     additionalDisks =
-        lens (_additional_disks :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _additional_disks = a } :: ServerResource s)
+        lens (_additional_disks :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _additional_disks = a } :: ResourceServer s)
 
-instance P.HasConfigurationId (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasConfigurationId (ResourceServer s) (TF.Attr s P.Text) where
     configurationId =
-        lens (_configuration_id :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _configuration_id = a } :: ServerResource s)
+        lens (_configuration_id :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _configuration_id = a } :: ResourceServer s)
 
-instance P.HasCpu (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasCpu (ResourceServer s) (TF.Attr s P.Text) where
     cpu =
-        lens (_cpu :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpu = a } :: ServerResource s)
+        lens (_cpu :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _cpu = a } :: ResourceServer s)
 
-instance P.HasCreatedDat (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasCreatedDat (ResourceServer s) (TF.Attr s P.Text) where
     createdDat =
-        lens (_created_dat :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _created_dat = a } :: ServerResource s)
+        lens (_created_dat :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _created_dat = a } :: ResourceServer s)
 
-instance P.HasCustomFields (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasCustomFields (ResourceServer s) (TF.Attr s P.Text) where
     customFields =
-        lens (_custom_fields :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _custom_fields = a } :: ServerResource s)
+        lens (_custom_fields :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _custom_fields = a } :: ResourceServer s)
 
-instance P.HasDescription (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceServer s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ServerResource s)
+        lens (_description :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceServer s)
 
-instance P.HasGroupId (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasGroupId (ResourceServer s) (TF.Attr s P.Text) where
     groupId =
-        lens (_group_id :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _group_id = a } :: ServerResource s)
+        lens (_group_id :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _group_id = a } :: ResourceServer s)
 
-instance P.HasMemoryMb (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasMemoryMb (ResourceServer s) (TF.Attr s P.Text) where
     memoryMb =
-        lens (_memory_mb :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory_mb = a } :: ServerResource s)
+        lens (_memory_mb :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _memory_mb = a } :: ResourceServer s)
 
-instance P.HasMetadata (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasMetadata (ResourceServer s) (TF.Attr s P.Text) where
     metadata =
-        lens (_metadata :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _metadata = a } :: ServerResource s)
+        lens (_metadata :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata = a } :: ResourceServer s)
 
-instance P.HasModifiedDat (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasModifiedDat (ResourceServer s) (TF.Attr s P.Text) where
     modifiedDat =
-        lens (_modified_dat :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _modified_dat = a } :: ServerResource s)
+        lens (_modified_dat :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _modified_dat = a } :: ResourceServer s)
 
-instance P.HasName (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceServer s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ServerResource s)
+        lens (_name :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceServer s)
 
-instance P.HasNameTemplate (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasNameTemplate (ResourceServer s) (TF.Attr s P.Text) where
     nameTemplate =
-        lens (_name_template :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name_template = a } :: ServerResource s)
+        lens (_name_template :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _name_template = a } :: ResourceServer s)
 
-instance P.HasNetworkId (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasNetworkId (ResourceServer s) (TF.Attr s P.Text) where
     networkId =
-        lens (_network_id :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network_id = a } :: ServerResource s)
+        lens (_network_id :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _network_id = a } :: ResourceServer s)
 
-instance P.HasOsType (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasOsType (ResourceServer s) (TF.Attr s P.Text) where
     osType =
-        lens (_os_type :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _os_type = a } :: ServerResource s)
+        lens (_os_type :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _os_type = a } :: ResourceServer s)
 
-instance P.HasPassword (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasPassword (ResourceServer s) (TF.Attr s P.Text) where
     password =
-        lens (_password :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _password = a } :: ServerResource s)
+        lens (_password :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _password = a } :: ResourceServer s)
 
-instance P.HasPowerState (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasPowerState (ResourceServer s) (TF.Attr s P.Text) where
     powerState =
-        lens (_power_state :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _power_state = a } :: ServerResource s)
+        lens (_power_state :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _power_state = a } :: ResourceServer s)
 
-instance P.HasPrivateIpAddress (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasPrivateIpAddress (ResourceServer s) (TF.Attr s P.Text) where
     privateIpAddress =
-        lens (_private_ip_address :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _private_ip_address = a } :: ServerResource s)
+        lens (_private_ip_address :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _private_ip_address = a } :: ResourceServer s)
 
-instance P.HasPublicIpAddress (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasPublicIpAddress (ResourceServer s) (TF.Attr s P.Text) where
     publicIpAddress =
-        lens (_public_ip_address :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _public_ip_address = a } :: ServerResource s)
+        lens (_public_ip_address :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _public_ip_address = a } :: ResourceServer s)
 
-instance P.HasSourceServerId (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasSourceServerId (ResourceServer s) (TF.Attr s P.Text) where
     sourceServerId =
-        lens (_source_server_id :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_server_id = a } :: ServerResource s)
+        lens (_source_server_id :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _source_server_id = a } :: ResourceServer s)
 
-instance P.HasStorageType (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasStorageType (ResourceServer s) (TF.Attr s P.Text) where
     storageType =
-        lens (_storage_type :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _storage_type = a } :: ServerResource s)
+        lens (_storage_type :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _storage_type = a } :: ResourceServer s)
 
-instance P.HasType' (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasType' (ResourceServer s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: ServerResource s)
+        lens (_type' :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: ResourceServer s)
 
-instance s ~ s' => P.HasComputedAaPolicyId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedAaPolicyId =
-        (_aa_policy_id :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAaPolicyId (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeAaPolicyId =
+        (_aa_policy_id :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedAdditionalDisks (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedAdditionalDisks =
-        (_additional_disks :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAdditionalDisks (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeAdditionalDisks =
+        (_additional_disks :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedConfigurationId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedConfigurationId =
-        (_configuration_id :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeConfigurationId (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeConfigurationId =
+        (_configuration_id :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCpu (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedCpu =
-        (_cpu :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCpu (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeCpu =
+        (_cpu :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCreatedDat (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedCreatedDat =
-        (_created_dat :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCreatedDat (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeCreatedDat =
+        (_created_dat :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCustomFields (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedCustomFields =
-        (_custom_fields :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCustomFields (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeCustomFields =
+        (_custom_fields :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedGroupId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedGroupId =
-        (_group_id :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeGroupId (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeGroupId =
+        (_group_id :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMemoryMb (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedMemoryMb =
-        (_memory_mb :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMemoryMb (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeMemoryMb =
+        (_memory_mb :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedMetadata =
-        (_metadata :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeMetadata =
+        (_metadata :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedModifiedDat (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedModifiedDat =
-        (_modified_dat :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeModifiedDat (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeModifiedDat =
+        (_modified_dat :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNameTemplate (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedNameTemplate =
-        (_name_template :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNameTemplate (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeNameTemplate =
+        (_name_template :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedNetworkId =
-        (_network_id :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNetworkId (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeNetworkId =
+        (_network_id :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOsType (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedOsType =
-        (_os_type :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeOsType (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeOsType =
+        (_os_type :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPassword =
-        (_password :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePassword (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computePassword =
+        (_password :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPowerState (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPowerState =
-        (_power_state :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePowerState (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computePowerState =
+        (_power_state :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrivateIpAddress (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPrivateIpAddress =
-        (_private_ip_address :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePrivateIpAddress (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computePrivateIpAddress =
+        (_private_ip_address :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPublicIpAddress (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPublicIpAddress =
-        (_public_ip_address :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePublicIpAddress (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computePublicIpAddress =
+        (_public_ip_address :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourceServerId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedSourceServerId =
-        (_source_server_id :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSourceServerId (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeSourceServerId =
+        (_source_server_id :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStorageType (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedStorageType =
-        (_storage_type :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeStorageType (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeStorageType =
+        (_storage_type :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeType' =
+        (_type' :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-serverResource :: TF.Resource P.CenturyLinkCloud (ServerResource s)
-serverResource =
+resourceServer :: TF.Resource P.CenturyLinkCloud (ResourceServer s)
+resourceServer =
     TF.newResource "clc_server" $
-        ServerResource {
+        ResourceServer {
               _aa_policy_id = TF.Nil
             , _additional_disks = TF.Nil
             , _configuration_id = TF.Nil

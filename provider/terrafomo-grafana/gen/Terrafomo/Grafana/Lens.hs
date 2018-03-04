@@ -39,23 +39,23 @@ module Terrafomo.Grafana.Lens
     , HasUsername (..)
 
     -- ** Computed Attributes
-    , HasComputedAccessMode (..)
-    , HasComputedBasicAuthEnabled (..)
-    , HasComputedBasicAuthPassword (..)
-    , HasComputedBasicAuthUsername (..)
-    , HasComputedConfigJson (..)
-    , HasComputedDatabaseName (..)
-    , HasComputedId (..)
-    , HasComputedIsDefault (..)
-    , HasComputedJsonData (..)
-    , HasComputedName (..)
-    , HasComputedPassword (..)
-    , HasComputedSecureJsonData (..)
-    , HasComputedSettings (..)
-    , HasComputedSlug (..)
-    , HasComputedType' (..)
-    , HasComputedUrl (..)
-    , HasComputedUsername (..)
+    , HasComputeAccessMode (..)
+    , HasComputeBasicAuthEnabled (..)
+    , HasComputeBasicAuthPassword (..)
+    , HasComputeBasicAuthUsername (..)
+    , HasComputeConfigJson (..)
+    , HasComputeDatabaseName (..)
+    , HasComputeId (..)
+    , HasComputeIsDefault (..)
+    , HasComputeJsonData (..)
+    , HasComputeName (..)
+    , HasComputePassword (..)
+    , HasComputeSecureJsonData (..)
+    , HasComputeSettings (..)
+    , HasComputeSlug (..)
+    , HasComputeType' (..)
+    , HasComputeUrl (..)
+    , HasComputeUsername (..)
     ) where
 
 import GHC.Base ((.))
@@ -155,53 +155,53 @@ class HasUsername a b | a -> b where
 instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
 
-class HasComputedAccessMode a b | a -> b where
-    computedAccessMode :: a -> b
+class HasComputeAccessMode a b | a -> b where
+    computeAccessMode :: a -> b
 
-class HasComputedBasicAuthEnabled a b | a -> b where
-    computedBasicAuthEnabled :: a -> b
+class HasComputeBasicAuthEnabled a b | a -> b where
+    computeBasicAuthEnabled :: a -> b
 
-class HasComputedBasicAuthPassword a b | a -> b where
-    computedBasicAuthPassword :: a -> b
+class HasComputeBasicAuthPassword a b | a -> b where
+    computeBasicAuthPassword :: a -> b
 
-class HasComputedBasicAuthUsername a b | a -> b where
-    computedBasicAuthUsername :: a -> b
+class HasComputeBasicAuthUsername a b | a -> b where
+    computeBasicAuthUsername :: a -> b
 
-class HasComputedConfigJson a b | a -> b where
-    computedConfigJson :: a -> b
+class HasComputeConfigJson a b | a -> b where
+    computeConfigJson :: a -> b
 
-class HasComputedDatabaseName a b | a -> b where
-    computedDatabaseName :: a -> b
+class HasComputeDatabaseName a b | a -> b where
+    computeDatabaseName :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedIsDefault a b | a -> b where
-    computedIsDefault :: a -> b
+class HasComputeIsDefault a b | a -> b where
+    computeIsDefault :: a -> b
 
-class HasComputedJsonData a b | a -> b where
-    computedJsonData :: a -> b
+class HasComputeJsonData a b | a -> b where
+    computeJsonData :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedPassword a b | a -> b where
-    computedPassword :: a -> b
+class HasComputePassword a b | a -> b where
+    computePassword :: a -> b
 
-class HasComputedSecureJsonData a b | a -> b where
-    computedSecureJsonData :: a -> b
+class HasComputeSecureJsonData a b | a -> b where
+    computeSecureJsonData :: a -> b
 
-class HasComputedSettings a b | a -> b where
-    computedSettings :: a -> b
+class HasComputeSettings a b | a -> b where
+    computeSettings :: a -> b
 
-class HasComputedSlug a b | a -> b where
-    computedSlug :: a -> b
+class HasComputeSlug a b | a -> b where
+    computeSlug :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputeType' a b | a -> b where
+    computeType' :: a -> b
 
-class HasComputedUrl a b | a -> b where
-    computedUrl :: a -> b
+class HasComputeUrl a b | a -> b where
+    computeUrl :: a -> b
 
-class HasComputedUsername a b | a -> b where
-    computedUsername :: a -> b
+class HasComputeUsername a b | a -> b where
+    computeUsername :: a -> b

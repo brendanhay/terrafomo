@@ -41,24 +41,24 @@ module Terrafomo.Spotinst.Lens
     , HasThreshold (..)
 
     -- ** Computed Attributes
-    , HasComputedCapacity (..)
-    , HasComputedCheck (..)
-    , HasComputedDescription (..)
-    , HasComputedElasticIps (..)
-    , HasComputedEndpoint (..)
-    , HasComputedEventType (..)
-    , HasComputedFormat (..)
-    , HasComputedId (..)
-    , HasComputedInstanceTypes (..)
-    , HasComputedLaunchSpecification (..)
-    , HasComputedName (..)
-    , HasComputedProduct (..)
-    , HasComputedProtocol (..)
-    , HasComputedProxy (..)
-    , HasComputedResourceId (..)
-    , HasComputedStrategy (..)
-    , HasComputedTags (..)
-    , HasComputedThreshold (..)
+    , HasComputeCapacity (..)
+    , HasComputeCheck (..)
+    , HasComputeDescription (..)
+    , HasComputeElasticIps (..)
+    , HasComputeEndpoint (..)
+    , HasComputeEventType (..)
+    , HasComputeFormat (..)
+    , HasComputeId (..)
+    , HasComputeInstanceTypes (..)
+    , HasComputeLaunchSpecification (..)
+    , HasComputeName (..)
+    , HasComputeProduct (..)
+    , HasComputeProtocol (..)
+    , HasComputeProxy (..)
+    , HasComputeResourceId (..)
+    , HasComputeStrategy (..)
+    , HasComputeTags (..)
+    , HasComputeThreshold (..)
     ) where
 
 import GHC.Base ((.))
@@ -170,56 +170,56 @@ class HasThreshold a b | a -> b where
 instance HasThreshold a b => HasThreshold (TF.Schema l p a) b where
     threshold = TF.configuration . threshold
 
-class HasComputedCapacity a b | a -> b where
-    computedCapacity :: a -> b
+class HasComputeCapacity a b | a -> b where
+    computeCapacity :: a -> b
 
-class HasComputedCheck a b | a -> b where
-    computedCheck :: a -> b
+class HasComputeCheck a b | a -> b where
+    computeCheck :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedElasticIps a b | a -> b where
-    computedElasticIps :: a -> b
+class HasComputeElasticIps a b | a -> b where
+    computeElasticIps :: a -> b
 
-class HasComputedEndpoint a b | a -> b where
-    computedEndpoint :: a -> b
+class HasComputeEndpoint a b | a -> b where
+    computeEndpoint :: a -> b
 
-class HasComputedEventType a b | a -> b where
-    computedEventType :: a -> b
+class HasComputeEventType a b | a -> b where
+    computeEventType :: a -> b
 
-class HasComputedFormat a b | a -> b where
-    computedFormat :: a -> b
+class HasComputeFormat a b | a -> b where
+    computeFormat :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedInstanceTypes a b | a -> b where
-    computedInstanceTypes :: a -> b
+class HasComputeInstanceTypes a b | a -> b where
+    computeInstanceTypes :: a -> b
 
-class HasComputedLaunchSpecification a b | a -> b where
-    computedLaunchSpecification :: a -> b
+class HasComputeLaunchSpecification a b | a -> b where
+    computeLaunchSpecification :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedProduct a b | a -> b where
-    computedProduct :: a -> b
+class HasComputeProduct a b | a -> b where
+    computeProduct :: a -> b
 
-class HasComputedProtocol a b | a -> b where
-    computedProtocol :: a -> b
+class HasComputeProtocol a b | a -> b where
+    computeProtocol :: a -> b
 
-class HasComputedProxy a b | a -> b where
-    computedProxy :: a -> b
+class HasComputeProxy a b | a -> b where
+    computeProxy :: a -> b
 
-class HasComputedResourceId a b | a -> b where
-    computedResourceId :: a -> b
+class HasComputeResourceId a b | a -> b where
+    computeResourceId :: a -> b
 
-class HasComputedStrategy a b | a -> b where
-    computedStrategy :: a -> b
+class HasComputeStrategy a b | a -> b where
+    computeStrategy :: a -> b
 
-class HasComputedTags a b | a -> b where
-    computedTags :: a -> b
+class HasComputeTags a b | a -> b where
+    computeTags :: a -> b
 
-class HasComputedThreshold a b | a -> b where
-    computedThreshold :: a -> b
+class HasComputeThreshold a b | a -> b where
+    computeThreshold :: a -> b

@@ -24,21 +24,21 @@
 module Terrafomo.DigitalOcean.DataSource
     (
     -- * Types
-      ImageDataSource (..)
-    , imageDataSource
+      DataImage (..)
+    , dataImage
 
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasName (..)
 
     -- ** Computed Attributes
-    , P.HasComputedImage (..)
-    , P.HasComputedMinDiskSize (..)
-    , P.HasComputedName (..)
-    , P.HasComputedPrivate (..)
-    , P.HasComputedRegions (..)
-    , P.HasComputedSizeGigabytes (..)
-    , P.HasComputedType' (..)
+    , P.HasComputeImage (..)
+    , P.HasComputeMinDiskSize (..)
+    , P.HasComputeName (..)
+    , P.HasComputePrivate (..)
+    , P.HasComputeRegions (..)
+    , P.HasComputeSizeGigabytes (..)
+    , P.HasComputeType' (..)
 
     -- * Re-exported Types
     , module P
@@ -74,45 +74,45 @@ Get information on an snapshot images. The aim of this datasource is to
 enable you to build droplets based on snapshot names. An error is triggered
 if zero or more than one result is returned by the query.
 -}
-data ImageDataSource s = ImageDataSource {
+data DataImage s = DataImage {
       _name :: !(TF.Attr s P.Text)
     {- ^ - The name of the image. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImageDataSource s) where
-    toHCL ImageDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataImage s) where
+    toHCL DataImage{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (ImageDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataImage s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ImageDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ImageDataSource s)
+        lens (_name :: DataImage s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataImage s)
 
-instance s ~ s' => P.HasComputedImage (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
-    computedImage x = TF.compute (TF.refKey x) "image"
+instance s ~ s' => P.HasComputeImage (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computeImage x = TF.compute (TF.refKey x) "image"
 
-instance s ~ s' => P.HasComputedMinDiskSize (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
-    computedMinDiskSize x = TF.compute (TF.refKey x) "min_disk_size"
+instance s ~ s' => P.HasComputeMinDiskSize (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computeMinDiskSize x = TF.compute (TF.refKey x) "min_disk_size"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPrivate (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
-    computedPrivate x = TF.compute (TF.refKey x) "private"
+instance s ~ s' => P.HasComputePrivate (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computePrivate x = TF.compute (TF.refKey x) "private"
 
-instance s ~ s' => P.HasComputedRegions (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
-    computedRegions x = TF.compute (TF.refKey x) "regions"
+instance s ~ s' => P.HasComputeRegions (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computeRegions x = TF.compute (TF.refKey x) "regions"
 
-instance s ~ s' => P.HasComputedSizeGigabytes (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
-    computedSizeGigabytes x = TF.compute (TF.refKey x) "size_gigabytes"
+instance s ~ s' => P.HasComputeSizeGigabytes (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computeSizeGigabytes x = TF.compute (TF.refKey x) "size_gigabytes"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputeType' (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+    computeType' x = TF.compute (TF.refKey x) "type"
 
-imageDataSource :: TF.DataSource P.DigitalOcean (ImageDataSource s)
-imageDataSource =
+dataImage :: TF.DataSource P.DigitalOcean (DataImage s)
+dataImage =
     TF.newDataSource "digitalocean_image" $
-        ImageDataSource {
+        DataImage {
               _name = TF.Nil
             }

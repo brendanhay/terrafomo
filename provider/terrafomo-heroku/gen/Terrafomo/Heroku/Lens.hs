@@ -44,34 +44,34 @@ module Terrafomo.Heroku.Lens
     , HasUrl (..)
 
     -- ** Computed Attributes
-    , HasComputedAcm (..)
-    , HasComputedAddonId (..)
-    , HasComputedAllConfigVars (..)
-    , HasComputedApp (..)
-    , HasComputedAppId (..)
-    , HasComputedBuildpacks (..)
-    , HasComputedCertificateChain (..)
-    , HasComputedCname (..)
-    , HasComputedConfig (..)
-    , HasComputedConfigVars (..)
-    , HasComputedEnabled (..)
-    , HasComputedGitUrl (..)
-    , HasComputedHerokuHostname (..)
-    , HasComputedHostname (..)
-    , HasComputedId (..)
-    , HasComputedName (..)
-    , HasComputedOrganization (..)
-    , HasComputedPipeline (..)
-    , HasComputedPlan (..)
-    , HasComputedPrivateKey (..)
-    , HasComputedProviderId (..)
-    , HasComputedRegion (..)
-    , HasComputedSpace (..)
-    , HasComputedStack (..)
-    , HasComputedStage (..)
-    , HasComputedToken (..)
-    , HasComputedUrl (..)
-    , HasComputedWebUrl (..)
+    , HasComputeAcm (..)
+    , HasComputeAddonId (..)
+    , HasComputeAllConfigVars (..)
+    , HasComputeApp (..)
+    , HasComputeAppId (..)
+    , HasComputeBuildpacks (..)
+    , HasComputeCertificateChain (..)
+    , HasComputeCname (..)
+    , HasComputeConfig (..)
+    , HasComputeConfigVars (..)
+    , HasComputeEnabled (..)
+    , HasComputeGitUrl (..)
+    , HasComputeHerokuHostname (..)
+    , HasComputeHostname (..)
+    , HasComputeId (..)
+    , HasComputeName (..)
+    , HasComputeOrganization (..)
+    , HasComputePipeline (..)
+    , HasComputePlan (..)
+    , HasComputePrivateKey (..)
+    , HasComputeProviderId (..)
+    , HasComputeRegion (..)
+    , HasComputeSpace (..)
+    , HasComputeStack (..)
+    , HasComputeStage (..)
+    , HasComputeToken (..)
+    , HasComputeUrl (..)
+    , HasComputeWebUrl (..)
     ) where
 
 import GHC.Base ((.))
@@ -201,86 +201,86 @@ class HasUrl a b | a -> b where
 instance HasUrl a b => HasUrl (TF.Schema l p a) b where
     url = TF.configuration . url
 
-class HasComputedAcm a b | a -> b where
-    computedAcm :: a -> b
+class HasComputeAcm a b | a -> b where
+    computeAcm :: a -> b
 
-class HasComputedAddonId a b | a -> b where
-    computedAddonId :: a -> b
+class HasComputeAddonId a b | a -> b where
+    computeAddonId :: a -> b
 
-class HasComputedAllConfigVars a b | a -> b where
-    computedAllConfigVars :: a -> b
+class HasComputeAllConfigVars a b | a -> b where
+    computeAllConfigVars :: a -> b
 
-class HasComputedApp a b | a -> b where
-    computedApp :: a -> b
+class HasComputeApp a b | a -> b where
+    computeApp :: a -> b
 
-class HasComputedAppId a b | a -> b where
-    computedAppId :: a -> b
+class HasComputeAppId a b | a -> b where
+    computeAppId :: a -> b
 
-class HasComputedBuildpacks a b | a -> b where
-    computedBuildpacks :: a -> b
+class HasComputeBuildpacks a b | a -> b where
+    computeBuildpacks :: a -> b
 
-class HasComputedCertificateChain a b | a -> b where
-    computedCertificateChain :: a -> b
+class HasComputeCertificateChain a b | a -> b where
+    computeCertificateChain :: a -> b
 
-class HasComputedCname a b | a -> b where
-    computedCname :: a -> b
+class HasComputeCname a b | a -> b where
+    computeCname :: a -> b
 
-class HasComputedConfig a b | a -> b where
-    computedConfig :: a -> b
+class HasComputeConfig a b | a -> b where
+    computeConfig :: a -> b
 
-class HasComputedConfigVars a b | a -> b where
-    computedConfigVars :: a -> b
+class HasComputeConfigVars a b | a -> b where
+    computeConfigVars :: a -> b
 
-class HasComputedEnabled a b | a -> b where
-    computedEnabled :: a -> b
+class HasComputeEnabled a b | a -> b where
+    computeEnabled :: a -> b
 
-class HasComputedGitUrl a b | a -> b where
-    computedGitUrl :: a -> b
+class HasComputeGitUrl a b | a -> b where
+    computeGitUrl :: a -> b
 
-class HasComputedHerokuHostname a b | a -> b where
-    computedHerokuHostname :: a -> b
+class HasComputeHerokuHostname a b | a -> b where
+    computeHerokuHostname :: a -> b
 
-class HasComputedHostname a b | a -> b where
-    computedHostname :: a -> b
+class HasComputeHostname a b | a -> b where
+    computeHostname :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedOrganization a b | a -> b where
-    computedOrganization :: a -> b
+class HasComputeOrganization a b | a -> b where
+    computeOrganization :: a -> b
 
-class HasComputedPipeline a b | a -> b where
-    computedPipeline :: a -> b
+class HasComputePipeline a b | a -> b where
+    computePipeline :: a -> b
 
-class HasComputedPlan a b | a -> b where
-    computedPlan :: a -> b
+class HasComputePlan a b | a -> b where
+    computePlan :: a -> b
 
-class HasComputedPrivateKey a b | a -> b where
-    computedPrivateKey :: a -> b
+class HasComputePrivateKey a b | a -> b where
+    computePrivateKey :: a -> b
 
-class HasComputedProviderId a b | a -> b where
-    computedProviderId :: a -> b
+class HasComputeProviderId a b | a -> b where
+    computeProviderId :: a -> b
 
-class HasComputedRegion a b | a -> b where
-    computedRegion :: a -> b
+class HasComputeRegion a b | a -> b where
+    computeRegion :: a -> b
 
-class HasComputedSpace a b | a -> b where
-    computedSpace :: a -> b
+class HasComputeSpace a b | a -> b where
+    computeSpace :: a -> b
 
-class HasComputedStack a b | a -> b where
-    computedStack :: a -> b
+class HasComputeStack a b | a -> b where
+    computeStack :: a -> b
 
-class HasComputedStage a b | a -> b where
-    computedStage :: a -> b
+class HasComputeStage a b | a -> b where
+    computeStage :: a -> b
 
-class HasComputedToken a b | a -> b where
-    computedToken :: a -> b
+class HasComputeToken a b | a -> b where
+    computeToken :: a -> b
 
-class HasComputedUrl a b | a -> b where
-    computedUrl :: a -> b
+class HasComputeUrl a b | a -> b where
+    computeUrl :: a -> b
 
-class HasComputedWebUrl a b | a -> b where
-    computedWebUrl :: a -> b
+class HasComputeWebUrl a b | a -> b where
+    computeWebUrl :: a -> b

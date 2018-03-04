@@ -24,17 +24,17 @@
 module Terrafomo.Nomad.Resource
     (
     -- * Types
-      AclPolicyResource (..)
-    , aclPolicyResource
+      ResourceAclPolicy (..)
+    , resourceAclPolicy
 
-    , AclTokenResource (..)
-    , aclTokenResource
+    , ResourceAclToken (..)
+    , resourceAclToken
 
-    , JobResource (..)
-    , jobResource
+    , ResourceJob (..)
+    , resourceJob
 
-    , QuotaSpecificationResource (..)
-    , quotaSpecificationResource
+    , ResourceQuotaSpecification (..)
+    , resourceQuotaSpecification
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -50,16 +50,16 @@ module Terrafomo.Nomad.Resource
     , P.HasType' (..)
 
     -- ** Computed Attributes
-    , P.HasComputedDeregisterOnDestroy (..)
-    , P.HasComputedDeregisterOnIdChange (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedGlobal (..)
-    , P.HasComputedJobspec (..)
-    , P.HasComputedLimits (..)
-    , P.HasComputedName (..)
-    , P.HasComputedPolicies (..)
-    , P.HasComputedRulesHcl (..)
-    , P.HasComputedType' (..)
+    , P.HasComputeDeregisterOnDestroy (..)
+    , P.HasComputeDeregisterOnIdChange (..)
+    , P.HasComputeDescription (..)
+    , P.HasComputeGlobal (..)
+    , P.HasComputeJobspec (..)
+    , P.HasComputeLimits (..)
+    , P.HasComputeName (..)
+    , P.HasComputePolicies (..)
+    , P.HasComputeRulesHcl (..)
+    , P.HasComputeType' (..)
 
     -- * Re-exported Types
     , module P
@@ -93,7 +93,7 @@ import qualified Terrafomo.Schema    as TF
 
 Manages an ACL policy registered in Nomad.
 -}
-data AclPolicyResource s = AclPolicyResource {
+data ResourceAclPolicy s = ResourceAclPolicy {
       _description :: !(TF.Attr s P.Text)
     {- ^  @(string: "")@ - A description of the policy. -}
     , _name        :: !(TF.Attr s P.Text)
@@ -102,47 +102,47 @@ data AclPolicyResource s = AclPolicyResource {
     {- ^  @(string: <required>)@ - The contents of the policy to register, as HCL or JSON. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AclPolicyResource s) where
-    toHCL AclPolicyResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceAclPolicy s) where
+    toHCL ResourceAclPolicy{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "rules_hcl" <$> TF.attribute _rules_hcl
         ]
 
-instance P.HasDescription (AclPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceAclPolicy s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: AclPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: AclPolicyResource s)
+        lens (_description :: ResourceAclPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceAclPolicy s)
 
-instance P.HasName (AclPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceAclPolicy s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: AclPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: AclPolicyResource s)
+        lens (_name :: ResourceAclPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceAclPolicy s)
 
-instance P.HasRulesHcl (AclPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasRulesHcl (ResourceAclPolicy s) (TF.Attr s P.Text) where
     rulesHcl =
-        lens (_rules_hcl :: AclPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _rules_hcl = a } :: AclPolicyResource s)
+        lens (_rules_hcl :: ResourceAclPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _rules_hcl = a } :: ResourceAclPolicy s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AclPolicyResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: AclPolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceAclPolicy s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceAclPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (AclPolicyResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: AclPolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceAclPolicy s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceAclPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRulesHcl (TF.Ref s' (AclPolicyResource s)) (TF.Attr s P.Text) where
-    computedRulesHcl =
-        (_rules_hcl :: AclPolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRulesHcl (TF.Ref s' (ResourceAclPolicy s)) (TF.Attr s P.Text) where
+    computeRulesHcl =
+        (_rules_hcl :: ResourceAclPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-aclPolicyResource :: TF.Resource P.Nomad (AclPolicyResource s)
-aclPolicyResource =
+resourceAclPolicy :: TF.Resource P.Nomad (ResourceAclPolicy s)
+resourceAclPolicy =
     TF.newResource "nomad_acl_policy" $
-        AclPolicyResource {
+        ResourceAclPolicy {
               _description = TF.Nil
             , _name = TF.Nil
             , _rules_hcl = TF.Nil
@@ -154,7 +154,7 @@ Manages an ACL token in Nomad. ~> Warning: this resource will store any
 tokens it creates in Terraform's state file. Take care to
 </docs/state/sensitive-data.html> .
 -}
-data AclTokenResource s = AclTokenResource {
+data ResourceAclToken s = ResourceAclToken {
       _global   :: !(TF.Attr s P.Text)
     {- ^  @(bool: false)@ - Whether the token should be replicated to all regions, or if it will only be used in the region it was created in. -}
     , _name     :: !(TF.Attr s P.Text)
@@ -165,58 +165,58 @@ data AclTokenResource s = AclTokenResource {
     {- ^  @(string: <required>)@ - The type of token this is. Use @client@ for tokens that will have policies associated with them. Use @management@ for tokens that can perform any action. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AclTokenResource s) where
-    toHCL AclTokenResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceAclToken s) where
+    toHCL ResourceAclToken{..} = TF.inline $ catMaybes
         [ TF.assign "global" <$> TF.attribute _global
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "policies" <$> TF.attribute _policies
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasGlobal (AclTokenResource s) (TF.Attr s P.Text) where
+instance P.HasGlobal (ResourceAclToken s) (TF.Attr s P.Text) where
     global =
-        lens (_global :: AclTokenResource s -> TF.Attr s P.Text)
-             (\s a -> s { _global = a } :: AclTokenResource s)
+        lens (_global :: ResourceAclToken s -> TF.Attr s P.Text)
+             (\s a -> s { _global = a } :: ResourceAclToken s)
 
-instance P.HasName (AclTokenResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceAclToken s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: AclTokenResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: AclTokenResource s)
+        lens (_name :: ResourceAclToken s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceAclToken s)
 
-instance P.HasPolicies (AclTokenResource s) (TF.Attr s P.Text) where
+instance P.HasPolicies (ResourceAclToken s) (TF.Attr s P.Text) where
     policies =
-        lens (_policies :: AclTokenResource s -> TF.Attr s P.Text)
-             (\s a -> s { _policies = a } :: AclTokenResource s)
+        lens (_policies :: ResourceAclToken s -> TF.Attr s P.Text)
+             (\s a -> s { _policies = a } :: ResourceAclToken s)
 
-instance P.HasType' (AclTokenResource s) (TF.Attr s P.Text) where
+instance P.HasType' (ResourceAclToken s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: AclTokenResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: AclTokenResource s)
+        lens (_type' :: ResourceAclToken s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: ResourceAclToken s)
 
-instance s ~ s' => P.HasComputedGlobal (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
-    computedGlobal =
-        (_global :: AclTokenResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeGlobal (TF.Ref s' (ResourceAclToken s)) (TF.Attr s P.Text) where
+    computeGlobal =
+        (_global :: ResourceAclToken s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: AclTokenResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceAclToken s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceAclToken s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
-    computedPolicies =
-        (_policies :: AclTokenResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePolicies (TF.Ref s' (ResourceAclToken s)) (TF.Attr s P.Text) where
+    computePolicies =
+        (_policies :: ResourceAclToken s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: AclTokenResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceAclToken s)) (TF.Attr s P.Text) where
+    computeType' =
+        (_type' :: ResourceAclToken s -> TF.Attr s P.Text)
             . TF.refValue
 
-aclTokenResource :: TF.Resource P.Nomad (AclTokenResource s)
-aclTokenResource =
+resourceAclToken :: TF.Resource P.Nomad (ResourceAclToken s)
+resourceAclToken =
     TF.newResource "nomad_acl_token" $
-        AclTokenResource {
+        ResourceAclToken {
               _global = TF.Nil
             , _name = TF.Nil
             , _policies = TF.Nil
@@ -233,7 +233,7 @@ runs core system services that are ideally setup during infrastructure
 creation. This resource is ideal for the latter type of job, but can be used
 to manage any job within Nomad.
 -}
-data JobResource s = JobResource {
+data ResourceJob s = ResourceJob {
       _deregister_on_destroy   :: !(TF.Attr s P.Text)
     {- ^  @(bool: true)@ - Determines if the job will be deregistered when this resource is destroyed in Terraform. -}
     , _deregister_on_id_change :: !(TF.Attr s P.Text)
@@ -242,47 +242,47 @@ data JobResource s = JobResource {
     {- ^  @(string: <required>)@ - The contents of the jobspec to register. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (JobResource s) where
-    toHCL JobResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceJob s) where
+    toHCL ResourceJob{..} = TF.inline $ catMaybes
         [ TF.assign "deregister_on_destroy" <$> TF.attribute _deregister_on_destroy
         , TF.assign "deregister_on_id_change" <$> TF.attribute _deregister_on_id_change
         , TF.assign "jobspec" <$> TF.attribute _jobspec
         ]
 
-instance P.HasDeregisterOnDestroy (JobResource s) (TF.Attr s P.Text) where
+instance P.HasDeregisterOnDestroy (ResourceJob s) (TF.Attr s P.Text) where
     deregisterOnDestroy =
-        lens (_deregister_on_destroy :: JobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _deregister_on_destroy = a } :: JobResource s)
+        lens (_deregister_on_destroy :: ResourceJob s -> TF.Attr s P.Text)
+             (\s a -> s { _deregister_on_destroy = a } :: ResourceJob s)
 
-instance P.HasDeregisterOnIdChange (JobResource s) (TF.Attr s P.Text) where
+instance P.HasDeregisterOnIdChange (ResourceJob s) (TF.Attr s P.Text) where
     deregisterOnIdChange =
-        lens (_deregister_on_id_change :: JobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _deregister_on_id_change = a } :: JobResource s)
+        lens (_deregister_on_id_change :: ResourceJob s -> TF.Attr s P.Text)
+             (\s a -> s { _deregister_on_id_change = a } :: ResourceJob s)
 
-instance P.HasJobspec (JobResource s) (TF.Attr s P.Text) where
+instance P.HasJobspec (ResourceJob s) (TF.Attr s P.Text) where
     jobspec =
-        lens (_jobspec :: JobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _jobspec = a } :: JobResource s)
+        lens (_jobspec :: ResourceJob s -> TF.Attr s P.Text)
+             (\s a -> s { _jobspec = a } :: ResourceJob s)
 
-instance s ~ s' => P.HasComputedDeregisterOnDestroy (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
-    computedDeregisterOnDestroy =
-        (_deregister_on_destroy :: JobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDeregisterOnDestroy (TF.Ref s' (ResourceJob s)) (TF.Attr s P.Text) where
+    computeDeregisterOnDestroy =
+        (_deregister_on_destroy :: ResourceJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDeregisterOnIdChange (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
-    computedDeregisterOnIdChange =
-        (_deregister_on_id_change :: JobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDeregisterOnIdChange (TF.Ref s' (ResourceJob s)) (TF.Attr s P.Text) where
+    computeDeregisterOnIdChange =
+        (_deregister_on_id_change :: ResourceJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedJobspec (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
-    computedJobspec =
-        (_jobspec :: JobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeJobspec (TF.Ref s' (ResourceJob s)) (TF.Attr s P.Text) where
+    computeJobspec =
+        (_jobspec :: ResourceJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-jobResource :: TF.Resource P.Nomad (JobResource s)
-jobResource =
+resourceJob :: TF.Resource P.Nomad (ResourceJob s)
+resourceJob =
     TF.newResource "nomad_job" $
-        JobResource {
+        ResourceJob {
               _deregister_on_destroy = TF.Nil
             , _deregister_on_id_change = TF.Nil
             , _jobspec = TF.Nil
@@ -292,7 +292,7 @@ jobResource =
 
 Manages a quota specification in a Nomad cluster.
 -}
-data QuotaSpecificationResource s = QuotaSpecificationResource {
+data ResourceQuotaSpecification s = ResourceQuotaSpecification {
       _description :: !(TF.Attr s P.Text)
     {- ^  @(string: "")@ - A description of the quota specification. -}
     , _limits      :: !(TF.Attr s P.Text)
@@ -301,47 +301,47 @@ data QuotaSpecificationResource s = QuotaSpecificationResource {
     {- ^  @(string: <required>)@ - A unique name for the quota specification. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (QuotaSpecificationResource s) where
-    toHCL QuotaSpecificationResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceQuotaSpecification s) where
+    toHCL ResourceQuotaSpecification{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "limits" <$> TF.attribute _limits
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDescription (QuotaSpecificationResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceQuotaSpecification s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: QuotaSpecificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: QuotaSpecificationResource s)
+        lens (_description :: ResourceQuotaSpecification s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceQuotaSpecification s)
 
-instance P.HasLimits (QuotaSpecificationResource s) (TF.Attr s P.Text) where
+instance P.HasLimits (ResourceQuotaSpecification s) (TF.Attr s P.Text) where
     limits =
-        lens (_limits :: QuotaSpecificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _limits = a } :: QuotaSpecificationResource s)
+        lens (_limits :: ResourceQuotaSpecification s -> TF.Attr s P.Text)
+             (\s a -> s { _limits = a } :: ResourceQuotaSpecification s)
 
-instance P.HasName (QuotaSpecificationResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceQuotaSpecification s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: QuotaSpecificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: QuotaSpecificationResource s)
+        lens (_name :: ResourceQuotaSpecification s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceQuotaSpecification s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (QuotaSpecificationResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: QuotaSpecificationResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceQuotaSpecification s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceQuotaSpecification s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLimits (TF.Ref s' (QuotaSpecificationResource s)) (TF.Attr s P.Text) where
-    computedLimits =
-        (_limits :: QuotaSpecificationResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLimits (TF.Ref s' (ResourceQuotaSpecification s)) (TF.Attr s P.Text) where
+    computeLimits =
+        (_limits :: ResourceQuotaSpecification s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (QuotaSpecificationResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: QuotaSpecificationResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceQuotaSpecification s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceQuotaSpecification s -> TF.Attr s P.Text)
             . TF.refValue
 
-quotaSpecificationResource :: TF.Resource P.Nomad (QuotaSpecificationResource s)
-quotaSpecificationResource =
+resourceQuotaSpecification :: TF.Resource P.Nomad (ResourceQuotaSpecification s)
+resourceQuotaSpecification =
     TF.newResource "nomad_quota_specification" $
-        QuotaSpecificationResource {
+        ResourceQuotaSpecification {
               _description = TF.Nil
             , _limits = TF.Nil
             , _name = TF.Nil

@@ -24,11 +24,11 @@ module Terrafomo.DNSMadeEasy.Lens
     -- ** Arguments
 
     -- ** Computed Attributes
-    , HasComputedGtdLocation (..)
-    , HasComputedName (..)
-    , HasComputedTtl (..)
-    , HasComputedType' (..)
-    , HasComputedValue (..)
+    , HasComputeGtdLocation (..)
+    , HasComputeName (..)
+    , HasComputeTtl (..)
+    , HasComputeType' (..)
+    , HasComputeValue (..)
     ) where
 
 import GHC.Base ((.))
@@ -38,17 +38,17 @@ import Lens.Micro (Lens')
 import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
 
-class HasComputedGtdLocation a b | a -> b where
-    computedGtdLocation :: a -> b
+class HasComputeGtdLocation a b | a -> b where
+    computeGtdLocation :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedTtl a b | a -> b where
-    computedTtl :: a -> b
+class HasComputeTtl a b | a -> b where
+    computeTtl :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputeType' a b | a -> b where
+    computeType' :: a -> b
 
-class HasComputedValue a b | a -> b where
-    computedValue :: a -> b
+class HasComputeValue a b | a -> b where
+    computeValue :: a -> b

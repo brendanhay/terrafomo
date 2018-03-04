@@ -40,27 +40,27 @@ module Terrafomo.TLS.Lens
     , HasValidityPeriodHours (..)
 
     -- ** Computed Attributes
-    , HasComputedAlgorithm (..)
-    , HasComputedAllowedUses (..)
-    , HasComputedCaCertPem (..)
-    , HasComputedCaKeyAlgorithm (..)
-    , HasComputedCaPrivateKeyPem (..)
-    , HasComputedCertPem (..)
-    , HasComputedCertRequestPem (..)
-    , HasComputedDnsNames (..)
-    , HasComputedEarlyRenewalHours (..)
-    , HasComputedEcdsaCurve (..)
-    , HasComputedIpAddresses (..)
-    , HasComputedIsCaCertificate (..)
-    , HasComputedKeyAlgorithm (..)
-    , HasComputedPrivateKeyPem (..)
-    , HasComputedPublicKeyOpenssh (..)
-    , HasComputedPublicKeyPem (..)
-    , HasComputedRsaBits (..)
-    , HasComputedSubject (..)
-    , HasComputedValidityEndTime (..)
-    , HasComputedValidityPeriodHours (..)
-    , HasComputedValidityStartTime (..)
+    , HasComputeAlgorithm (..)
+    , HasComputeAllowedUses (..)
+    , HasComputeCaCertPem (..)
+    , HasComputeCaKeyAlgorithm (..)
+    , HasComputeCaPrivateKeyPem (..)
+    , HasComputeCertPem (..)
+    , HasComputeCertRequestPem (..)
+    , HasComputeDnsNames (..)
+    , HasComputeEarlyRenewalHours (..)
+    , HasComputeEcdsaCurve (..)
+    , HasComputeIpAddresses (..)
+    , HasComputeIsCaCertificate (..)
+    , HasComputeKeyAlgorithm (..)
+    , HasComputePrivateKeyPem (..)
+    , HasComputePublicKeyOpenssh (..)
+    , HasComputePublicKeyPem (..)
+    , HasComputeRsaBits (..)
+    , HasComputeSubject (..)
+    , HasComputeValidityEndTime (..)
+    , HasComputeValidityPeriodHours (..)
+    , HasComputeValidityStartTime (..)
     ) where
 
 import GHC.Base ((.))
@@ -166,65 +166,65 @@ class HasValidityPeriodHours a b | a -> b where
 instance HasValidityPeriodHours a b => HasValidityPeriodHours (TF.Schema l p a) b where
     validityPeriodHours = TF.configuration . validityPeriodHours
 
-class HasComputedAlgorithm a b | a -> b where
-    computedAlgorithm :: a -> b
+class HasComputeAlgorithm a b | a -> b where
+    computeAlgorithm :: a -> b
 
-class HasComputedAllowedUses a b | a -> b where
-    computedAllowedUses :: a -> b
+class HasComputeAllowedUses a b | a -> b where
+    computeAllowedUses :: a -> b
 
-class HasComputedCaCertPem a b | a -> b where
-    computedCaCertPem :: a -> b
+class HasComputeCaCertPem a b | a -> b where
+    computeCaCertPem :: a -> b
 
-class HasComputedCaKeyAlgorithm a b | a -> b where
-    computedCaKeyAlgorithm :: a -> b
+class HasComputeCaKeyAlgorithm a b | a -> b where
+    computeCaKeyAlgorithm :: a -> b
 
-class HasComputedCaPrivateKeyPem a b | a -> b where
-    computedCaPrivateKeyPem :: a -> b
+class HasComputeCaPrivateKeyPem a b | a -> b where
+    computeCaPrivateKeyPem :: a -> b
 
-class HasComputedCertPem a b | a -> b where
-    computedCertPem :: a -> b
+class HasComputeCertPem a b | a -> b where
+    computeCertPem :: a -> b
 
-class HasComputedCertRequestPem a b | a -> b where
-    computedCertRequestPem :: a -> b
+class HasComputeCertRequestPem a b | a -> b where
+    computeCertRequestPem :: a -> b
 
-class HasComputedDnsNames a b | a -> b where
-    computedDnsNames :: a -> b
+class HasComputeDnsNames a b | a -> b where
+    computeDnsNames :: a -> b
 
-class HasComputedEarlyRenewalHours a b | a -> b where
-    computedEarlyRenewalHours :: a -> b
+class HasComputeEarlyRenewalHours a b | a -> b where
+    computeEarlyRenewalHours :: a -> b
 
-class HasComputedEcdsaCurve a b | a -> b where
-    computedEcdsaCurve :: a -> b
+class HasComputeEcdsaCurve a b | a -> b where
+    computeEcdsaCurve :: a -> b
 
-class HasComputedIpAddresses a b | a -> b where
-    computedIpAddresses :: a -> b
+class HasComputeIpAddresses a b | a -> b where
+    computeIpAddresses :: a -> b
 
-class HasComputedIsCaCertificate a b | a -> b where
-    computedIsCaCertificate :: a -> b
+class HasComputeIsCaCertificate a b | a -> b where
+    computeIsCaCertificate :: a -> b
 
-class HasComputedKeyAlgorithm a b | a -> b where
-    computedKeyAlgorithm :: a -> b
+class HasComputeKeyAlgorithm a b | a -> b where
+    computeKeyAlgorithm :: a -> b
 
-class HasComputedPrivateKeyPem a b | a -> b where
-    computedPrivateKeyPem :: a -> b
+class HasComputePrivateKeyPem a b | a -> b where
+    computePrivateKeyPem :: a -> b
 
-class HasComputedPublicKeyOpenssh a b | a -> b where
-    computedPublicKeyOpenssh :: a -> b
+class HasComputePublicKeyOpenssh a b | a -> b where
+    computePublicKeyOpenssh :: a -> b
 
-class HasComputedPublicKeyPem a b | a -> b where
-    computedPublicKeyPem :: a -> b
+class HasComputePublicKeyPem a b | a -> b where
+    computePublicKeyPem :: a -> b
 
-class HasComputedRsaBits a b | a -> b where
-    computedRsaBits :: a -> b
+class HasComputeRsaBits a b | a -> b where
+    computeRsaBits :: a -> b
 
-class HasComputedSubject a b | a -> b where
-    computedSubject :: a -> b
+class HasComputeSubject a b | a -> b where
+    computeSubject :: a -> b
 
-class HasComputedValidityEndTime a b | a -> b where
-    computedValidityEndTime :: a -> b
+class HasComputeValidityEndTime a b | a -> b where
+    computeValidityEndTime :: a -> b
 
-class HasComputedValidityPeriodHours a b | a -> b where
-    computedValidityPeriodHours :: a -> b
+class HasComputeValidityPeriodHours a b | a -> b where
+    computeValidityPeriodHours :: a -> b
 
-class HasComputedValidityStartTime a b | a -> b where
-    computedValidityStartTime :: a -> b
+class HasComputeValidityStartTime a b | a -> b where
+    computeValidityStartTime :: a -> b

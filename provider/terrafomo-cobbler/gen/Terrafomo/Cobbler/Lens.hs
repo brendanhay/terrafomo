@@ -87,69 +87,69 @@ module Terrafomo.Cobbler.Lens
     , HasVirtType (..)
 
     -- ** Computed Attributes
-    , HasComputedAptComponents (..)
-    , HasComputedAptDists (..)
-    , HasComputedArch (..)
-    , HasComputedBody (..)
-    , HasComputedBootFiles (..)
-    , HasComputedBreed (..)
-    , HasComputedComment (..)
-    , HasComputedCreaterepoFlags (..)
-    , HasComputedDistro (..)
-    , HasComputedEnableGpxe (..)
-    , HasComputedEnableMenu (..)
-    , HasComputedEnvironment (..)
-    , HasComputedFetchableFiles (..)
-    , HasComputedGateway (..)
-    , HasComputedHostname (..)
-    , HasComputedImage (..)
-    , HasComputedInitrd (..)
-    , HasComputedInterface (..)
-    , HasComputedIpv6DefaultDevice (..)
-    , HasComputedKeepUpdated (..)
-    , HasComputedKernel (..)
-    , HasComputedKernelOptions (..)
-    , HasComputedKernelOptionsPost (..)
-    , HasComputedKickstart (..)
-    , HasComputedKsMeta (..)
-    , HasComputedLdapEnabled (..)
-    , HasComputedLdapType (..)
-    , HasComputedMgmtClasses (..)
-    , HasComputedMgmtParameters (..)
-    , HasComputedMirror (..)
-    , HasComputedMirrorLocally (..)
-    , HasComputedMonitEnabled (..)
-    , HasComputedName (..)
-    , HasComputedNameServers (..)
-    , HasComputedNameServersSearch (..)
-    , HasComputedNetbootEnabled (..)
-    , HasComputedOsVersion (..)
-    , HasComputedOwners (..)
-    , HasComputedParent (..)
-    , HasComputedPowerAddress (..)
-    , HasComputedPowerId (..)
-    , HasComputedPowerPass (..)
-    , HasComputedPowerType (..)
-    , HasComputedPowerUser (..)
-    , HasComputedProfile (..)
-    , HasComputedProxy (..)
-    , HasComputedRedhatManagementKey (..)
-    , HasComputedRedhatManagementServer (..)
-    , HasComputedRepos (..)
-    , HasComputedRpmList (..)
-    , HasComputedServer (..)
-    , HasComputedStatus (..)
-    , HasComputedTemplateFiles (..)
-    , HasComputedTemplateRemoteKickstarts (..)
-    , HasComputedVirtAutoBoot (..)
-    , HasComputedVirtBridge (..)
-    , HasComputedVirtCpus (..)
-    , HasComputedVirtDiskDriver (..)
-    , HasComputedVirtFileSize (..)
-    , HasComputedVirtPath (..)
-    , HasComputedVirtPxeBoot (..)
-    , HasComputedVirtRam (..)
-    , HasComputedVirtType (..)
+    , HasComputeAptComponents (..)
+    , HasComputeAptDists (..)
+    , HasComputeArch (..)
+    , HasComputeBody (..)
+    , HasComputeBootFiles (..)
+    , HasComputeBreed (..)
+    , HasComputeComment (..)
+    , HasComputeCreaterepoFlags (..)
+    , HasComputeDistro (..)
+    , HasComputeEnableGpxe (..)
+    , HasComputeEnableMenu (..)
+    , HasComputeEnvironment (..)
+    , HasComputeFetchableFiles (..)
+    , HasComputeGateway (..)
+    , HasComputeHostname (..)
+    , HasComputeImage (..)
+    , HasComputeInitrd (..)
+    , HasComputeInterface (..)
+    , HasComputeIpv6DefaultDevice (..)
+    , HasComputeKeepUpdated (..)
+    , HasComputeKernel (..)
+    , HasComputeKernelOptions (..)
+    , HasComputeKernelOptionsPost (..)
+    , HasComputeKickstart (..)
+    , HasComputeKsMeta (..)
+    , HasComputeLdapEnabled (..)
+    , HasComputeLdapType (..)
+    , HasComputeMgmtClasses (..)
+    , HasComputeMgmtParameters (..)
+    , HasComputeMirror (..)
+    , HasComputeMirrorLocally (..)
+    , HasComputeMonitEnabled (..)
+    , HasComputeName (..)
+    , HasComputeNameServers (..)
+    , HasComputeNameServersSearch (..)
+    , HasComputeNetbootEnabled (..)
+    , HasComputeOsVersion (..)
+    , HasComputeOwners (..)
+    , HasComputeParent (..)
+    , HasComputePowerAddress (..)
+    , HasComputePowerId (..)
+    , HasComputePowerPass (..)
+    , HasComputePowerType (..)
+    , HasComputePowerUser (..)
+    , HasComputeProfile (..)
+    , HasComputeProxy (..)
+    , HasComputeRedhatManagementKey (..)
+    , HasComputeRedhatManagementServer (..)
+    , HasComputeRepos (..)
+    , HasComputeRpmList (..)
+    , HasComputeServer (..)
+    , HasComputeStatus (..)
+    , HasComputeTemplateFiles (..)
+    , HasComputeTemplateRemoteKickstarts (..)
+    , HasComputeVirtAutoBoot (..)
+    , HasComputeVirtBridge (..)
+    , HasComputeVirtCpus (..)
+    , HasComputeVirtDiskDriver (..)
+    , HasComputeVirtFileSize (..)
+    , HasComputeVirtPath (..)
+    , HasComputeVirtPxeBoot (..)
+    , HasComputeVirtRam (..)
+    , HasComputeVirtType (..)
     ) where
 
 import GHC.Base ((.))
@@ -537,191 +537,191 @@ class HasVirtType a b | a -> b where
 instance HasVirtType a b => HasVirtType (TF.Schema l p a) b where
     virtType = TF.configuration . virtType
 
-class HasComputedAptComponents a b | a -> b where
-    computedAptComponents :: a -> b
+class HasComputeAptComponents a b | a -> b where
+    computeAptComponents :: a -> b
 
-class HasComputedAptDists a b | a -> b where
-    computedAptDists :: a -> b
+class HasComputeAptDists a b | a -> b where
+    computeAptDists :: a -> b
 
-class HasComputedArch a b | a -> b where
-    computedArch :: a -> b
+class HasComputeArch a b | a -> b where
+    computeArch :: a -> b
 
-class HasComputedBody a b | a -> b where
-    computedBody :: a -> b
+class HasComputeBody a b | a -> b where
+    computeBody :: a -> b
 
-class HasComputedBootFiles a b | a -> b where
-    computedBootFiles :: a -> b
+class HasComputeBootFiles a b | a -> b where
+    computeBootFiles :: a -> b
 
-class HasComputedBreed a b | a -> b where
-    computedBreed :: a -> b
+class HasComputeBreed a b | a -> b where
+    computeBreed :: a -> b
 
-class HasComputedComment a b | a -> b where
-    computedComment :: a -> b
+class HasComputeComment a b | a -> b where
+    computeComment :: a -> b
 
-class HasComputedCreaterepoFlags a b | a -> b where
-    computedCreaterepoFlags :: a -> b
+class HasComputeCreaterepoFlags a b | a -> b where
+    computeCreaterepoFlags :: a -> b
 
-class HasComputedDistro a b | a -> b where
-    computedDistro :: a -> b
+class HasComputeDistro a b | a -> b where
+    computeDistro :: a -> b
 
-class HasComputedEnableGpxe a b | a -> b where
-    computedEnableGpxe :: a -> b
+class HasComputeEnableGpxe a b | a -> b where
+    computeEnableGpxe :: a -> b
 
-class HasComputedEnableMenu a b | a -> b where
-    computedEnableMenu :: a -> b
+class HasComputeEnableMenu a b | a -> b where
+    computeEnableMenu :: a -> b
 
-class HasComputedEnvironment a b | a -> b where
-    computedEnvironment :: a -> b
+class HasComputeEnvironment a b | a -> b where
+    computeEnvironment :: a -> b
 
-class HasComputedFetchableFiles a b | a -> b where
-    computedFetchableFiles :: a -> b
+class HasComputeFetchableFiles a b | a -> b where
+    computeFetchableFiles :: a -> b
 
-class HasComputedGateway a b | a -> b where
-    computedGateway :: a -> b
+class HasComputeGateway a b | a -> b where
+    computeGateway :: a -> b
 
-class HasComputedHostname a b | a -> b where
-    computedHostname :: a -> b
+class HasComputeHostname a b | a -> b where
+    computeHostname :: a -> b
 
-class HasComputedImage a b | a -> b where
-    computedImage :: a -> b
+class HasComputeImage a b | a -> b where
+    computeImage :: a -> b
 
-class HasComputedInitrd a b | a -> b where
-    computedInitrd :: a -> b
+class HasComputeInitrd a b | a -> b where
+    computeInitrd :: a -> b
 
-class HasComputedInterface a b | a -> b where
-    computedInterface :: a -> b
+class HasComputeInterface a b | a -> b where
+    computeInterface :: a -> b
 
-class HasComputedIpv6DefaultDevice a b | a -> b where
-    computedIpv6DefaultDevice :: a -> b
+class HasComputeIpv6DefaultDevice a b | a -> b where
+    computeIpv6DefaultDevice :: a -> b
 
-class HasComputedKeepUpdated a b | a -> b where
-    computedKeepUpdated :: a -> b
+class HasComputeKeepUpdated a b | a -> b where
+    computeKeepUpdated :: a -> b
 
-class HasComputedKernel a b | a -> b where
-    computedKernel :: a -> b
+class HasComputeKernel a b | a -> b where
+    computeKernel :: a -> b
 
-class HasComputedKernelOptions a b | a -> b where
-    computedKernelOptions :: a -> b
+class HasComputeKernelOptions a b | a -> b where
+    computeKernelOptions :: a -> b
 
-class HasComputedKernelOptionsPost a b | a -> b where
-    computedKernelOptionsPost :: a -> b
+class HasComputeKernelOptionsPost a b | a -> b where
+    computeKernelOptionsPost :: a -> b
 
-class HasComputedKickstart a b | a -> b where
-    computedKickstart :: a -> b
+class HasComputeKickstart a b | a -> b where
+    computeKickstart :: a -> b
 
-class HasComputedKsMeta a b | a -> b where
-    computedKsMeta :: a -> b
+class HasComputeKsMeta a b | a -> b where
+    computeKsMeta :: a -> b
 
-class HasComputedLdapEnabled a b | a -> b where
-    computedLdapEnabled :: a -> b
+class HasComputeLdapEnabled a b | a -> b where
+    computeLdapEnabled :: a -> b
 
-class HasComputedLdapType a b | a -> b where
-    computedLdapType :: a -> b
+class HasComputeLdapType a b | a -> b where
+    computeLdapType :: a -> b
 
-class HasComputedMgmtClasses a b | a -> b where
-    computedMgmtClasses :: a -> b
+class HasComputeMgmtClasses a b | a -> b where
+    computeMgmtClasses :: a -> b
 
-class HasComputedMgmtParameters a b | a -> b where
-    computedMgmtParameters :: a -> b
+class HasComputeMgmtParameters a b | a -> b where
+    computeMgmtParameters :: a -> b
 
-class HasComputedMirror a b | a -> b where
-    computedMirror :: a -> b
+class HasComputeMirror a b | a -> b where
+    computeMirror :: a -> b
 
-class HasComputedMirrorLocally a b | a -> b where
-    computedMirrorLocally :: a -> b
+class HasComputeMirrorLocally a b | a -> b where
+    computeMirrorLocally :: a -> b
 
-class HasComputedMonitEnabled a b | a -> b where
-    computedMonitEnabled :: a -> b
+class HasComputeMonitEnabled a b | a -> b where
+    computeMonitEnabled :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNameServers a b | a -> b where
-    computedNameServers :: a -> b
+class HasComputeNameServers a b | a -> b where
+    computeNameServers :: a -> b
 
-class HasComputedNameServersSearch a b | a -> b where
-    computedNameServersSearch :: a -> b
+class HasComputeNameServersSearch a b | a -> b where
+    computeNameServersSearch :: a -> b
 
-class HasComputedNetbootEnabled a b | a -> b where
-    computedNetbootEnabled :: a -> b
+class HasComputeNetbootEnabled a b | a -> b where
+    computeNetbootEnabled :: a -> b
 
-class HasComputedOsVersion a b | a -> b where
-    computedOsVersion :: a -> b
+class HasComputeOsVersion a b | a -> b where
+    computeOsVersion :: a -> b
 
-class HasComputedOwners a b | a -> b where
-    computedOwners :: a -> b
+class HasComputeOwners a b | a -> b where
+    computeOwners :: a -> b
 
-class HasComputedParent a b | a -> b where
-    computedParent :: a -> b
+class HasComputeParent a b | a -> b where
+    computeParent :: a -> b
 
-class HasComputedPowerAddress a b | a -> b where
-    computedPowerAddress :: a -> b
+class HasComputePowerAddress a b | a -> b where
+    computePowerAddress :: a -> b
 
-class HasComputedPowerId a b | a -> b where
-    computedPowerId :: a -> b
+class HasComputePowerId a b | a -> b where
+    computePowerId :: a -> b
 
-class HasComputedPowerPass a b | a -> b where
-    computedPowerPass :: a -> b
+class HasComputePowerPass a b | a -> b where
+    computePowerPass :: a -> b
 
-class HasComputedPowerType a b | a -> b where
-    computedPowerType :: a -> b
+class HasComputePowerType a b | a -> b where
+    computePowerType :: a -> b
 
-class HasComputedPowerUser a b | a -> b where
-    computedPowerUser :: a -> b
+class HasComputePowerUser a b | a -> b where
+    computePowerUser :: a -> b
 
-class HasComputedProfile a b | a -> b where
-    computedProfile :: a -> b
+class HasComputeProfile a b | a -> b where
+    computeProfile :: a -> b
 
-class HasComputedProxy a b | a -> b where
-    computedProxy :: a -> b
+class HasComputeProxy a b | a -> b where
+    computeProxy :: a -> b
 
-class HasComputedRedhatManagementKey a b | a -> b where
-    computedRedhatManagementKey :: a -> b
+class HasComputeRedhatManagementKey a b | a -> b where
+    computeRedhatManagementKey :: a -> b
 
-class HasComputedRedhatManagementServer a b | a -> b where
-    computedRedhatManagementServer :: a -> b
+class HasComputeRedhatManagementServer a b | a -> b where
+    computeRedhatManagementServer :: a -> b
 
-class HasComputedRepos a b | a -> b where
-    computedRepos :: a -> b
+class HasComputeRepos a b | a -> b where
+    computeRepos :: a -> b
 
-class HasComputedRpmList a b | a -> b where
-    computedRpmList :: a -> b
+class HasComputeRpmList a b | a -> b where
+    computeRpmList :: a -> b
 
-class HasComputedServer a b | a -> b where
-    computedServer :: a -> b
+class HasComputeServer a b | a -> b where
+    computeServer :: a -> b
 
-class HasComputedStatus a b | a -> b where
-    computedStatus :: a -> b
+class HasComputeStatus a b | a -> b where
+    computeStatus :: a -> b
 
-class HasComputedTemplateFiles a b | a -> b where
-    computedTemplateFiles :: a -> b
+class HasComputeTemplateFiles a b | a -> b where
+    computeTemplateFiles :: a -> b
 
-class HasComputedTemplateRemoteKickstarts a b | a -> b where
-    computedTemplateRemoteKickstarts :: a -> b
+class HasComputeTemplateRemoteKickstarts a b | a -> b where
+    computeTemplateRemoteKickstarts :: a -> b
 
-class HasComputedVirtAutoBoot a b | a -> b where
-    computedVirtAutoBoot :: a -> b
+class HasComputeVirtAutoBoot a b | a -> b where
+    computeVirtAutoBoot :: a -> b
 
-class HasComputedVirtBridge a b | a -> b where
-    computedVirtBridge :: a -> b
+class HasComputeVirtBridge a b | a -> b where
+    computeVirtBridge :: a -> b
 
-class HasComputedVirtCpus a b | a -> b where
-    computedVirtCpus :: a -> b
+class HasComputeVirtCpus a b | a -> b where
+    computeVirtCpus :: a -> b
 
-class HasComputedVirtDiskDriver a b | a -> b where
-    computedVirtDiskDriver :: a -> b
+class HasComputeVirtDiskDriver a b | a -> b where
+    computeVirtDiskDriver :: a -> b
 
-class HasComputedVirtFileSize a b | a -> b where
-    computedVirtFileSize :: a -> b
+class HasComputeVirtFileSize a b | a -> b where
+    computeVirtFileSize :: a -> b
 
-class HasComputedVirtPath a b | a -> b where
-    computedVirtPath :: a -> b
+class HasComputeVirtPath a b | a -> b where
+    computeVirtPath :: a -> b
 
-class HasComputedVirtPxeBoot a b | a -> b where
-    computedVirtPxeBoot :: a -> b
+class HasComputeVirtPxeBoot a b | a -> b where
+    computeVirtPxeBoot :: a -> b
 
-class HasComputedVirtRam a b | a -> b where
-    computedVirtRam :: a -> b
+class HasComputeVirtRam a b | a -> b where
+    computeVirtRam :: a -> b
 
-class HasComputedVirtType a b | a -> b where
-    computedVirtType :: a -> b
+class HasComputeVirtType a b | a -> b where
+    computeVirtType :: a -> b

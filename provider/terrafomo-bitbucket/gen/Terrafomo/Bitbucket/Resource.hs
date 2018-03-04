@@ -24,14 +24,14 @@
 module Terrafomo.Bitbucket.Resource
     (
     -- * Types
-      DefaultReviewersResource (..)
-    , defaultReviewersResource
+      ResourceDefaultReviewers (..)
+    , resourceDefaultReviewers
 
-    , HookResource (..)
-    , hookResource
+    , ResourceHook (..)
+    , resourceHook
 
-    , RepositoryResource (..)
-    , repositoryResource
+    , ResourceRepository (..)
+    , resourceRepository
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -53,22 +53,22 @@ module Terrafomo.Bitbucket.Resource
     , P.HasWebsite (..)
 
     -- ** Computed Attributes
-    , P.HasComputedDescription (..)
-    , P.HasComputedEvents (..)
-    , P.HasComputedForkPolicy (..)
-    , P.HasComputedHasIssues (..)
-    , P.HasComputedHasWiki (..)
-    , P.HasComputedIsPrivate (..)
-    , P.HasComputedLanguage (..)
-    , P.HasComputedName (..)
-    , P.HasComputedOwner (..)
-    , P.HasComputedProjectKey (..)
-    , P.HasComputedRepository (..)
-    , P.HasComputedReviewers (..)
-    , P.HasComputedScm (..)
-    , P.HasComputedSlug (..)
-    , P.HasComputedUrl (..)
-    , P.HasComputedWebsite (..)
+    , P.HasComputeDescription (..)
+    , P.HasComputeEvents (..)
+    , P.HasComputeForkPolicy (..)
+    , P.HasComputeHasIssues (..)
+    , P.HasComputeHasWiki (..)
+    , P.HasComputeIsPrivate (..)
+    , P.HasComputeLanguage (..)
+    , P.HasComputeName (..)
+    , P.HasComputeOwner (..)
+    , P.HasComputeProjectKey (..)
+    , P.HasComputeRepository (..)
+    , P.HasComputeReviewers (..)
+    , P.HasComputeScm (..)
+    , P.HasComputeSlug (..)
+    , P.HasComputeUrl (..)
+    , P.HasComputeWebsite (..)
 
     -- * Re-exported Types
     , module P
@@ -102,7 +102,7 @@ import qualified Terrafomo.Schema    as TF
 
 Provides support for setting up default reviewers for your repository.
 -}
-data DefaultReviewersResource s = DefaultReviewersResource {
+data ResourceDefaultReviewers s = ResourceDefaultReviewers {
       _owner      :: !(TF.Attr s P.Text)
     {- ^ (Required) The owner of this repository. Can be you or any team you have write access to. -}
     , _repository :: !(TF.Attr s P.Text)
@@ -111,47 +111,47 @@ data DefaultReviewersResource s = DefaultReviewersResource {
     {- ^ (Required) A list of reviewers to use. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DefaultReviewersResource s) where
-    toHCL DefaultReviewersResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceDefaultReviewers s) where
+    toHCL ResourceDefaultReviewers{..} = TF.inline $ catMaybes
         [ TF.assign "owner" <$> TF.attribute _owner
         , TF.assign "repository" <$> TF.attribute _repository
         , TF.assign "reviewers" <$> TF.attribute _reviewers
         ]
 
-instance P.HasOwner (DefaultReviewersResource s) (TF.Attr s P.Text) where
+instance P.HasOwner (ResourceDefaultReviewers s) (TF.Attr s P.Text) where
     owner =
-        lens (_owner :: DefaultReviewersResource s -> TF.Attr s P.Text)
-             (\s a -> s { _owner = a } :: DefaultReviewersResource s)
+        lens (_owner :: ResourceDefaultReviewers s -> TF.Attr s P.Text)
+             (\s a -> s { _owner = a } :: ResourceDefaultReviewers s)
 
-instance P.HasRepository (DefaultReviewersResource s) (TF.Attr s P.Text) where
+instance P.HasRepository (ResourceDefaultReviewers s) (TF.Attr s P.Text) where
     repository =
-        lens (_repository :: DefaultReviewersResource s -> TF.Attr s P.Text)
-             (\s a -> s { _repository = a } :: DefaultReviewersResource s)
+        lens (_repository :: ResourceDefaultReviewers s -> TF.Attr s P.Text)
+             (\s a -> s { _repository = a } :: ResourceDefaultReviewers s)
 
-instance P.HasReviewers (DefaultReviewersResource s) (TF.Attr s P.Text) where
+instance P.HasReviewers (ResourceDefaultReviewers s) (TF.Attr s P.Text) where
     reviewers =
-        lens (_reviewers :: DefaultReviewersResource s -> TF.Attr s P.Text)
-             (\s a -> s { _reviewers = a } :: DefaultReviewersResource s)
+        lens (_reviewers :: ResourceDefaultReviewers s -> TF.Attr s P.Text)
+             (\s a -> s { _reviewers = a } :: ResourceDefaultReviewers s)
 
-instance s ~ s' => P.HasComputedOwner (TF.Ref s' (DefaultReviewersResource s)) (TF.Attr s P.Text) where
-    computedOwner =
-        (_owner :: DefaultReviewersResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeOwner (TF.Ref s' (ResourceDefaultReviewers s)) (TF.Attr s P.Text) where
+    computeOwner =
+        (_owner :: ResourceDefaultReviewers s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRepository (TF.Ref s' (DefaultReviewersResource s)) (TF.Attr s P.Text) where
-    computedRepository =
-        (_repository :: DefaultReviewersResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRepository (TF.Ref s' (ResourceDefaultReviewers s)) (TF.Attr s P.Text) where
+    computeRepository =
+        (_repository :: ResourceDefaultReviewers s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedReviewers (TF.Ref s' (DefaultReviewersResource s)) (TF.Attr s P.Text) where
-    computedReviewers =
-        (_reviewers :: DefaultReviewersResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeReviewers (TF.Ref s' (ResourceDefaultReviewers s)) (TF.Attr s P.Text) where
+    computeReviewers =
+        (_reviewers :: ResourceDefaultReviewers s -> TF.Attr s P.Text)
             . TF.refValue
 
-defaultReviewersResource :: TF.Resource P.Bitbucket (DefaultReviewersResource s)
-defaultReviewersResource =
+resourceDefaultReviewers :: TF.Resource P.Bitbucket (ResourceDefaultReviewers s)
+resourceDefaultReviewers =
     TF.newResource "bitbucket_default_reviewers" $
-        DefaultReviewersResource {
+        ResourceDefaultReviewers {
               _owner = TF.Nil
             , _repository = TF.Nil
             , _reviewers = TF.Nil
@@ -162,7 +162,7 @@ defaultReviewersResource =
 Provides a Bitbucket hook resource. This allows you to manage your webhooks
 on a repository.
 -}
-data HookResource s = HookResource {
+data ResourceHook s = ResourceHook {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Required) The name / description to show in the UI. -}
     , _events      :: !(TF.Attr s P.Text)
@@ -175,8 +175,8 @@ data HookResource s = HookResource {
     {- ^ (Required) Where to POST to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HookResource s) where
-    toHCL HookResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceHook s) where
+    toHCL ResourceHook{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "events" <$> TF.attribute _events
         , TF.assign "owner" <$> TF.attribute _owner
@@ -184,60 +184,60 @@ instance TF.ToHCL (HookResource s) where
         , TF.assign "url" <$> TF.attribute _url
         ]
 
-instance P.HasDescription (HookResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceHook s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: HookResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: HookResource s)
+        lens (_description :: ResourceHook s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceHook s)
 
-instance P.HasEvents (HookResource s) (TF.Attr s P.Text) where
+instance P.HasEvents (ResourceHook s) (TF.Attr s P.Text) where
     events =
-        lens (_events :: HookResource s -> TF.Attr s P.Text)
-             (\s a -> s { _events = a } :: HookResource s)
+        lens (_events :: ResourceHook s -> TF.Attr s P.Text)
+             (\s a -> s { _events = a } :: ResourceHook s)
 
-instance P.HasOwner (HookResource s) (TF.Attr s P.Text) where
+instance P.HasOwner (ResourceHook s) (TF.Attr s P.Text) where
     owner =
-        lens (_owner :: HookResource s -> TF.Attr s P.Text)
-             (\s a -> s { _owner = a } :: HookResource s)
+        lens (_owner :: ResourceHook s -> TF.Attr s P.Text)
+             (\s a -> s { _owner = a } :: ResourceHook s)
 
-instance P.HasRepository (HookResource s) (TF.Attr s P.Text) where
+instance P.HasRepository (ResourceHook s) (TF.Attr s P.Text) where
     repository =
-        lens (_repository :: HookResource s -> TF.Attr s P.Text)
-             (\s a -> s { _repository = a } :: HookResource s)
+        lens (_repository :: ResourceHook s -> TF.Attr s P.Text)
+             (\s a -> s { _repository = a } :: ResourceHook s)
 
-instance P.HasUrl (HookResource s) (TF.Attr s P.Text) where
+instance P.HasUrl (ResourceHook s) (TF.Attr s P.Text) where
     url =
-        lens (_url :: HookResource s -> TF.Attr s P.Text)
-             (\s a -> s { _url = a } :: HookResource s)
+        lens (_url :: ResourceHook s -> TF.Attr s P.Text)
+             (\s a -> s { _url = a } :: ResourceHook s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: HookResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceHook s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceHook s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEvents (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
-    computedEvents =
-        (_events :: HookResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEvents (TF.Ref s' (ResourceHook s)) (TF.Attr s P.Text) where
+    computeEvents =
+        (_events :: ResourceHook s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOwner (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
-    computedOwner =
-        (_owner :: HookResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeOwner (TF.Ref s' (ResourceHook s)) (TF.Attr s P.Text) where
+    computeOwner =
+        (_owner :: ResourceHook s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRepository (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
-    computedRepository =
-        (_repository :: HookResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRepository (TF.Ref s' (ResourceHook s)) (TF.Attr s P.Text) where
+    computeRepository =
+        (_repository :: ResourceHook s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUrl (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
-    computedUrl =
-        (_url :: HookResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeUrl (TF.Ref s' (ResourceHook s)) (TF.Attr s P.Text) where
+    computeUrl =
+        (_url :: ResourceHook s -> TF.Attr s P.Text)
             . TF.refValue
 
-hookResource :: TF.Resource P.Bitbucket (HookResource s)
-hookResource =
+resourceHook :: TF.Resource P.Bitbucket (ResourceHook s)
+resourceHook =
     TF.newResource "bitbucket_hook" $
-        HookResource {
+        ResourceHook {
               _description = TF.Nil
             , _events = TF.Nil
             , _owner = TF.Nil
@@ -251,7 +251,7 @@ Provides a Bitbucket repository resource. This resource allows you manage
 your repositories such as scm type, if it is private, how to fork the
 repository and other options.
 -}
-data RepositoryResource s = RepositoryResource {
+data ResourceRepository s = ResourceRepository {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) What the description of the repo is. -}
     , _fork_policy :: !(TF.Attr s P.Text)
@@ -278,8 +278,8 @@ data RepositoryResource s = RepositoryResource {
     {- ^ (Optional) URL of website associated with this repository. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RepositoryResource s) where
-    toHCL RepositoryResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceRepository s) where
+    toHCL ResourceRepository{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "fork_policy" <$> TF.attribute _fork_policy
         , TF.assign "has_issues" <$> TF.attribute _has_issues
@@ -294,130 +294,130 @@ instance TF.ToHCL (RepositoryResource s) where
         , TF.assign "website" <$> TF.attribute _website
         ]
 
-instance P.HasDescription (RepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceRepository s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: RepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: RepositoryResource s)
+        lens (_description :: ResourceRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceRepository s)
 
-instance P.HasForkPolicy (RepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasForkPolicy (ResourceRepository s) (TF.Attr s P.Text) where
     forkPolicy =
-        lens (_fork_policy :: RepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _fork_policy = a } :: RepositoryResource s)
+        lens (_fork_policy :: ResourceRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _fork_policy = a } :: ResourceRepository s)
 
-instance P.HasHasIssues (RepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasHasIssues (ResourceRepository s) (TF.Attr s P.Text) where
     hasIssues =
-        lens (_has_issues :: RepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _has_issues = a } :: RepositoryResource s)
+        lens (_has_issues :: ResourceRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _has_issues = a } :: ResourceRepository s)
 
-instance P.HasHasWiki (RepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasHasWiki (ResourceRepository s) (TF.Attr s P.Text) where
     hasWiki =
-        lens (_has_wiki :: RepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _has_wiki = a } :: RepositoryResource s)
+        lens (_has_wiki :: ResourceRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _has_wiki = a } :: ResourceRepository s)
 
-instance P.HasIsPrivate (RepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasIsPrivate (ResourceRepository s) (TF.Attr s P.Text) where
     isPrivate =
-        lens (_is_private :: RepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _is_private = a } :: RepositoryResource s)
+        lens (_is_private :: ResourceRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _is_private = a } :: ResourceRepository s)
 
-instance P.HasLanguage (RepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasLanguage (ResourceRepository s) (TF.Attr s P.Text) where
     language =
-        lens (_language :: RepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _language = a } :: RepositoryResource s)
+        lens (_language :: ResourceRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _language = a } :: ResourceRepository s)
 
-instance P.HasName (RepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceRepository s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: RepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: RepositoryResource s)
+        lens (_name :: ResourceRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceRepository s)
 
-instance P.HasOwner (RepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasOwner (ResourceRepository s) (TF.Attr s P.Text) where
     owner =
-        lens (_owner :: RepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _owner = a } :: RepositoryResource s)
+        lens (_owner :: ResourceRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _owner = a } :: ResourceRepository s)
 
-instance P.HasProjectKey (RepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasProjectKey (ResourceRepository s) (TF.Attr s P.Text) where
     projectKey =
-        lens (_project_key :: RepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project_key = a } :: RepositoryResource s)
+        lens (_project_key :: ResourceRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _project_key = a } :: ResourceRepository s)
 
-instance P.HasScm (RepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasScm (ResourceRepository s) (TF.Attr s P.Text) where
     scm =
-        lens (_scm :: RepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _scm = a } :: RepositoryResource s)
+        lens (_scm :: ResourceRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _scm = a } :: ResourceRepository s)
 
-instance P.HasSlug (RepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasSlug (ResourceRepository s) (TF.Attr s P.Text) where
     slug =
-        lens (_slug :: RepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _slug = a } :: RepositoryResource s)
+        lens (_slug :: ResourceRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _slug = a } :: ResourceRepository s)
 
-instance P.HasWebsite (RepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasWebsite (ResourceRepository s) (TF.Attr s P.Text) where
     website =
-        lens (_website :: RepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _website = a } :: RepositoryResource s)
+        lens (_website :: ResourceRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _website = a } :: ResourceRepository s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: RepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedForkPolicy (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedForkPolicy =
-        (_fork_policy :: RepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeForkPolicy (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computeForkPolicy =
+        (_fork_policy :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHasIssues (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedHasIssues =
-        (_has_issues :: RepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHasIssues (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computeHasIssues =
+        (_has_issues :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHasWiki (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedHasWiki =
-        (_has_wiki :: RepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHasWiki (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computeHasWiki =
+        (_has_wiki :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIsPrivate (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedIsPrivate =
-        (_is_private :: RepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIsPrivate (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computeIsPrivate =
+        (_is_private :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLanguage (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedLanguage =
-        (_language :: RepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLanguage (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computeLanguage =
+        (_language :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: RepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOwner (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedOwner =
-        (_owner :: RepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeOwner (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computeOwner =
+        (_owner :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProjectKey (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedProjectKey =
-        (_project_key :: RepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProjectKey (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computeProjectKey =
+        (_project_key :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedScm (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedScm =
-        (_scm :: RepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeScm (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computeScm =
+        (_scm :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSlug (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedSlug =
-        (_slug :: RepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSlug (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computeSlug =
+        (_slug :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedWebsite (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedWebsite =
-        (_website :: RepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeWebsite (TF.Ref s' (ResourceRepository s)) (TF.Attr s P.Text) where
+    computeWebsite =
+        (_website :: ResourceRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-repositoryResource :: TF.Resource P.Bitbucket (RepositoryResource s)
-repositoryResource =
+resourceRepository :: TF.Resource P.Bitbucket (ResourceRepository s)
+resourceRepository =
     TF.newResource "bitbucket_repository" $
-        RepositoryResource {
+        ResourceRepository {
               _description = TF.Nil
             , _fork_policy = TF.Nil
             , _has_issues = TF.Nil

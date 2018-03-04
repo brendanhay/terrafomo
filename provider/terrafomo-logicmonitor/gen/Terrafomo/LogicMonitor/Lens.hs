@@ -38,20 +38,20 @@ module Terrafomo.LogicMonitor.Lens
     , HasSize (..)
 
     -- ** Computed Attributes
-    , HasComputedAppliesTo (..)
-    , HasComputedCollector (..)
-    , HasComputedDescription (..)
-    , HasComputedDisableAlerting (..)
-    , HasComputedDisplayName (..)
-    , HasComputedFilters (..)
-    , HasComputedHostgroupId (..)
-    , HasComputedIpAddr (..)
-    , HasComputedMostRecent (..)
-    , HasComputedName (..)
-    , HasComputedOffset (..)
-    , HasComputedParentId (..)
-    , HasComputedProperties (..)
-    , HasComputedSize (..)
+    , HasComputeAppliesTo (..)
+    , HasComputeCollector (..)
+    , HasComputeDescription (..)
+    , HasComputeDisableAlerting (..)
+    , HasComputeDisplayName (..)
+    , HasComputeFilters (..)
+    , HasComputeHostgroupId (..)
+    , HasComputeIpAddr (..)
+    , HasComputeMostRecent (..)
+    , HasComputeName (..)
+    , HasComputeOffset (..)
+    , HasComputeParentId (..)
+    , HasComputeProperties (..)
+    , HasComputeSize (..)
     ) where
 
 import GHC.Base ((.))
@@ -145,44 +145,44 @@ class HasSize a b | a -> b where
 instance HasSize a b => HasSize (TF.Schema l p a) b where
     size = TF.configuration . size
 
-class HasComputedAppliesTo a b | a -> b where
-    computedAppliesTo :: a -> b
+class HasComputeAppliesTo a b | a -> b where
+    computeAppliesTo :: a -> b
 
-class HasComputedCollector a b | a -> b where
-    computedCollector :: a -> b
+class HasComputeCollector a b | a -> b where
+    computeCollector :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedDisableAlerting a b | a -> b where
-    computedDisableAlerting :: a -> b
+class HasComputeDisableAlerting a b | a -> b where
+    computeDisableAlerting :: a -> b
 
-class HasComputedDisplayName a b | a -> b where
-    computedDisplayName :: a -> b
+class HasComputeDisplayName a b | a -> b where
+    computeDisplayName :: a -> b
 
-class HasComputedFilters a b | a -> b where
-    computedFilters :: a -> b
+class HasComputeFilters a b | a -> b where
+    computeFilters :: a -> b
 
-class HasComputedHostgroupId a b | a -> b where
-    computedHostgroupId :: a -> b
+class HasComputeHostgroupId a b | a -> b where
+    computeHostgroupId :: a -> b
 
-class HasComputedIpAddr a b | a -> b where
-    computedIpAddr :: a -> b
+class HasComputeIpAddr a b | a -> b where
+    computeIpAddr :: a -> b
 
-class HasComputedMostRecent a b | a -> b where
-    computedMostRecent :: a -> b
+class HasComputeMostRecent a b | a -> b where
+    computeMostRecent :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedOffset a b | a -> b where
-    computedOffset :: a -> b
+class HasComputeOffset a b | a -> b where
+    computeOffset :: a -> b
 
-class HasComputedParentId a b | a -> b where
-    computedParentId :: a -> b
+class HasComputeParentId a b | a -> b where
+    computeParentId :: a -> b
 
-class HasComputedProperties a b | a -> b where
-    computedProperties :: a -> b
+class HasComputeProperties a b | a -> b where
+    computeProperties :: a -> b
 
-class HasComputedSize a b | a -> b where
-    computedSize :: a -> b
+class HasComputeSize a b | a -> b where
+    computeSize :: a -> b

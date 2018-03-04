@@ -24,8 +24,8 @@
 module Terrafomo.Local.Resource
     (
     -- * Types
-      FileResource (..)
-    , fileResource
+      ResourceFile (..)
+    , resourceFile
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -33,8 +33,8 @@ module Terrafomo.Local.Resource
     , P.HasFilename (..)
 
     -- ** Computed Attributes
-    , P.HasComputedContent (..)
-    , P.HasComputedFilename (..)
+    , P.HasComputeContent (..)
+    , P.HasComputeFilename (..)
 
     -- * Re-exported Types
     , module P
@@ -72,43 +72,43 @@ present and will generate a diff to re-create it. This may cause "noise" in
 diffs in environments where configurations are routinely applied by many
 different users or within automation systems.
 -}
-data FileResource s = FileResource {
+data ResourceFile s = ResourceFile {
       _content  :: !(TF.Attr s P.Text)
     {- ^ (Required) The content of file to create. -}
     , _filename :: !(TF.Attr s P.Text)
     {- ^ (Required) The path of the file to create. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FileResource s) where
-    toHCL FileResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceFile s) where
+    toHCL ResourceFile{..} = TF.inline $ catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "filename" <$> TF.attribute _filename
         ]
 
-instance P.HasContent (FileResource s) (TF.Attr s P.Text) where
+instance P.HasContent (ResourceFile s) (TF.Attr s P.Text) where
     content =
-        lens (_content :: FileResource s -> TF.Attr s P.Text)
-             (\s a -> s { _content = a } :: FileResource s)
+        lens (_content :: ResourceFile s -> TF.Attr s P.Text)
+             (\s a -> s { _content = a } :: ResourceFile s)
 
-instance P.HasFilename (FileResource s) (TF.Attr s P.Text) where
+instance P.HasFilename (ResourceFile s) (TF.Attr s P.Text) where
     filename =
-        lens (_filename :: FileResource s -> TF.Attr s P.Text)
-             (\s a -> s { _filename = a } :: FileResource s)
+        lens (_filename :: ResourceFile s -> TF.Attr s P.Text)
+             (\s a -> s { _filename = a } :: ResourceFile s)
 
-instance s ~ s' => P.HasComputedContent (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedContent =
-        (_content :: FileResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeContent (TF.Ref s' (ResourceFile s)) (TF.Attr s P.Text) where
+    computeContent =
+        (_content :: ResourceFile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFilename (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedFilename =
-        (_filename :: FileResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFilename (TF.Ref s' (ResourceFile s)) (TF.Attr s P.Text) where
+    computeFilename =
+        (_filename :: ResourceFile s -> TF.Attr s P.Text)
             . TF.refValue
 
-fileResource :: TF.Resource TF.NoProvider (FileResource s)
-fileResource =
+resourceFile :: TF.Resource TF.NoProvider (ResourceFile s)
+resourceFile =
     TF.newResource "local_file" $
-        FileResource {
+        ResourceFile {
               _content = TF.Nil
             , _filename = TF.Nil
             }

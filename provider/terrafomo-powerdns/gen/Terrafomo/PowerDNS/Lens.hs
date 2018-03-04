@@ -29,11 +29,11 @@ module Terrafomo.PowerDNS.Lens
     , HasZone (..)
 
     -- ** Computed Attributes
-    , HasComputedName (..)
-    , HasComputedRecords (..)
-    , HasComputedTtl (..)
-    , HasComputedType' (..)
-    , HasComputedZone (..)
+    , HasComputeName (..)
+    , HasComputeRecords (..)
+    , HasComputeTtl (..)
+    , HasComputeType' (..)
+    , HasComputeZone (..)
     ) where
 
 import GHC.Base ((.))
@@ -73,17 +73,17 @@ class HasZone a b | a -> b where
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedRecords a b | a -> b where
-    computedRecords :: a -> b
+class HasComputeRecords a b | a -> b where
+    computeRecords :: a -> b
 
-class HasComputedTtl a b | a -> b where
-    computedTtl :: a -> b
+class HasComputeTtl a b | a -> b where
+    computeTtl :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputeType' a b | a -> b where
+    computeType' :: a -> b
 
-class HasComputedZone a b | a -> b where
-    computedZone :: a -> b
+class HasComputeZone a b | a -> b where
+    computeZone :: a -> b

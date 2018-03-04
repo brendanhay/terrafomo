@@ -47,45 +47,45 @@ module Terrafomo.Packet.Lens
     , HasVolumeId (..)
 
     -- ** Computed Attributes
-    , HasComputedAccessPrivateIpv4 (..)
-    , HasComputedAccessPublicIpv4 (..)
-    , HasComputedAccessPublicIpv6 (..)
-    , HasComputedAddressFamily (..)
-    , HasComputedAlwaysPxe (..)
-    , HasComputedAttachments (..)
-    , HasComputedBillingCycle (..)
-    , HasComputedCidr (..)
-    , HasComputedCidrNotation (..)
-    , HasComputedCreated (..)
-    , HasComputedDescription (..)
-    , HasComputedDeviceId (..)
-    , HasComputedFacility (..)
-    , HasComputedFingerprint (..)
-    , HasComputedGateway (..)
-    , HasComputedHardwareReservationId (..)
-    , HasComputedHostname (..)
-    , HasComputedId (..)
-    , HasComputedIpxeScriptUrl (..)
-    , HasComputedLocked (..)
-    , HasComputedName (..)
-    , HasComputedNetmask (..)
-    , HasComputedNetwork (..)
-    , HasComputedOperatingSystem (..)
-    , HasComputedPlan (..)
-    , HasComputedProjectId (..)
-    , HasComputedPublic (..)
-    , HasComputedPublicIpv4SubnetSize (..)
-    , HasComputedPublicKey (..)
-    , HasComputedQuantity (..)
-    , HasComputedRootPassword (..)
-    , HasComputedSize (..)
-    , HasComputedSnapshotPolicies (..)
-    , HasComputedState (..)
-    , HasComputedStorage (..)
-    , HasComputedTags (..)
-    , HasComputedUpdated (..)
-    , HasComputedUserData (..)
-    , HasComputedVolumeId (..)
+    , HasComputeAccessPrivateIpv4 (..)
+    , HasComputeAccessPublicIpv4 (..)
+    , HasComputeAccessPublicIpv6 (..)
+    , HasComputeAddressFamily (..)
+    , HasComputeAlwaysPxe (..)
+    , HasComputeAttachments (..)
+    , HasComputeBillingCycle (..)
+    , HasComputeCidr (..)
+    , HasComputeCidrNotation (..)
+    , HasComputeCreated (..)
+    , HasComputeDescription (..)
+    , HasComputeDeviceId (..)
+    , HasComputeFacility (..)
+    , HasComputeFingerprint (..)
+    , HasComputeGateway (..)
+    , HasComputeHardwareReservationId (..)
+    , HasComputeHostname (..)
+    , HasComputeId (..)
+    , HasComputeIpxeScriptUrl (..)
+    , HasComputeLocked (..)
+    , HasComputeName (..)
+    , HasComputeNetmask (..)
+    , HasComputeNetwork (..)
+    , HasComputeOperatingSystem (..)
+    , HasComputePlan (..)
+    , HasComputeProjectId (..)
+    , HasComputePublic (..)
+    , HasComputePublicIpv4SubnetSize (..)
+    , HasComputePublicKey (..)
+    , HasComputeQuantity (..)
+    , HasComputeRootPassword (..)
+    , HasComputeSize (..)
+    , HasComputeSnapshotPolicies (..)
+    , HasComputeState (..)
+    , HasComputeStorage (..)
+    , HasComputeTags (..)
+    , HasComputeUpdated (..)
+    , HasComputeUserData (..)
+    , HasComputeVolumeId (..)
     ) where
 
 import GHC.Base ((.))
@@ -233,119 +233,119 @@ class HasVolumeId a b | a -> b where
 instance HasVolumeId a b => HasVolumeId (TF.Schema l p a) b where
     volumeId = TF.configuration . volumeId
 
-class HasComputedAccessPrivateIpv4 a b | a -> b where
-    computedAccessPrivateIpv4 :: a -> b
+class HasComputeAccessPrivateIpv4 a b | a -> b where
+    computeAccessPrivateIpv4 :: a -> b
 
-class HasComputedAccessPublicIpv4 a b | a -> b where
-    computedAccessPublicIpv4 :: a -> b
+class HasComputeAccessPublicIpv4 a b | a -> b where
+    computeAccessPublicIpv4 :: a -> b
 
-class HasComputedAccessPublicIpv6 a b | a -> b where
-    computedAccessPublicIpv6 :: a -> b
+class HasComputeAccessPublicIpv6 a b | a -> b where
+    computeAccessPublicIpv6 :: a -> b
 
-class HasComputedAddressFamily a b | a -> b where
-    computedAddressFamily :: a -> b
+class HasComputeAddressFamily a b | a -> b where
+    computeAddressFamily :: a -> b
 
-class HasComputedAlwaysPxe a b | a -> b where
-    computedAlwaysPxe :: a -> b
+class HasComputeAlwaysPxe a b | a -> b where
+    computeAlwaysPxe :: a -> b
 
-class HasComputedAttachments a b | a -> b where
-    computedAttachments :: a -> b
+class HasComputeAttachments a b | a -> b where
+    computeAttachments :: a -> b
 
-class HasComputedBillingCycle a b | a -> b where
-    computedBillingCycle :: a -> b
+class HasComputeBillingCycle a b | a -> b where
+    computeBillingCycle :: a -> b
 
-class HasComputedCidr a b | a -> b where
-    computedCidr :: a -> b
+class HasComputeCidr a b | a -> b where
+    computeCidr :: a -> b
 
-class HasComputedCidrNotation a b | a -> b where
-    computedCidrNotation :: a -> b
+class HasComputeCidrNotation a b | a -> b where
+    computeCidrNotation :: a -> b
 
-class HasComputedCreated a b | a -> b where
-    computedCreated :: a -> b
+class HasComputeCreated a b | a -> b where
+    computeCreated :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedDeviceId a b | a -> b where
-    computedDeviceId :: a -> b
+class HasComputeDeviceId a b | a -> b where
+    computeDeviceId :: a -> b
 
-class HasComputedFacility a b | a -> b where
-    computedFacility :: a -> b
+class HasComputeFacility a b | a -> b where
+    computeFacility :: a -> b
 
-class HasComputedFingerprint a b | a -> b where
-    computedFingerprint :: a -> b
+class HasComputeFingerprint a b | a -> b where
+    computeFingerprint :: a -> b
 
-class HasComputedGateway a b | a -> b where
-    computedGateway :: a -> b
+class HasComputeGateway a b | a -> b where
+    computeGateway :: a -> b
 
-class HasComputedHardwareReservationId a b | a -> b where
-    computedHardwareReservationId :: a -> b
+class HasComputeHardwareReservationId a b | a -> b where
+    computeHardwareReservationId :: a -> b
 
-class HasComputedHostname a b | a -> b where
-    computedHostname :: a -> b
+class HasComputeHostname a b | a -> b where
+    computeHostname :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedIpxeScriptUrl a b | a -> b where
-    computedIpxeScriptUrl :: a -> b
+class HasComputeIpxeScriptUrl a b | a -> b where
+    computeIpxeScriptUrl :: a -> b
 
-class HasComputedLocked a b | a -> b where
-    computedLocked :: a -> b
+class HasComputeLocked a b | a -> b where
+    computeLocked :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNetmask a b | a -> b where
-    computedNetmask :: a -> b
+class HasComputeNetmask a b | a -> b where
+    computeNetmask :: a -> b
 
-class HasComputedNetwork a b | a -> b where
-    computedNetwork :: a -> b
+class HasComputeNetwork a b | a -> b where
+    computeNetwork :: a -> b
 
-class HasComputedOperatingSystem a b | a -> b where
-    computedOperatingSystem :: a -> b
+class HasComputeOperatingSystem a b | a -> b where
+    computeOperatingSystem :: a -> b
 
-class HasComputedPlan a b | a -> b where
-    computedPlan :: a -> b
+class HasComputePlan a b | a -> b where
+    computePlan :: a -> b
 
-class HasComputedProjectId a b | a -> b where
-    computedProjectId :: a -> b
+class HasComputeProjectId a b | a -> b where
+    computeProjectId :: a -> b
 
-class HasComputedPublic a b | a -> b where
-    computedPublic :: a -> b
+class HasComputePublic a b | a -> b where
+    computePublic :: a -> b
 
-class HasComputedPublicIpv4SubnetSize a b | a -> b where
-    computedPublicIpv4SubnetSize :: a -> b
+class HasComputePublicIpv4SubnetSize a b | a -> b where
+    computePublicIpv4SubnetSize :: a -> b
 
-class HasComputedPublicKey a b | a -> b where
-    computedPublicKey :: a -> b
+class HasComputePublicKey a b | a -> b where
+    computePublicKey :: a -> b
 
-class HasComputedQuantity a b | a -> b where
-    computedQuantity :: a -> b
+class HasComputeQuantity a b | a -> b where
+    computeQuantity :: a -> b
 
-class HasComputedRootPassword a b | a -> b where
-    computedRootPassword :: a -> b
+class HasComputeRootPassword a b | a -> b where
+    computeRootPassword :: a -> b
 
-class HasComputedSize a b | a -> b where
-    computedSize :: a -> b
+class HasComputeSize a b | a -> b where
+    computeSize :: a -> b
 
-class HasComputedSnapshotPolicies a b | a -> b where
-    computedSnapshotPolicies :: a -> b
+class HasComputeSnapshotPolicies a b | a -> b where
+    computeSnapshotPolicies :: a -> b
 
-class HasComputedState a b | a -> b where
-    computedState :: a -> b
+class HasComputeState a b | a -> b where
+    computeState :: a -> b
 
-class HasComputedStorage a b | a -> b where
-    computedStorage :: a -> b
+class HasComputeStorage a b | a -> b where
+    computeStorage :: a -> b
 
-class HasComputedTags a b | a -> b where
-    computedTags :: a -> b
+class HasComputeTags a b | a -> b where
+    computeTags :: a -> b
 
-class HasComputedUpdated a b | a -> b where
-    computedUpdated :: a -> b
+class HasComputeUpdated a b | a -> b where
+    computeUpdated :: a -> b
 
-class HasComputedUserData a b | a -> b where
-    computedUserData :: a -> b
+class HasComputeUserData a b | a -> b where
+    computeUserData :: a -> b
 
-class HasComputedVolumeId a b | a -> b where
-    computedVolumeId :: a -> b
+class HasComputeVolumeId a b | a -> b where
+    computeVolumeId :: a -> b

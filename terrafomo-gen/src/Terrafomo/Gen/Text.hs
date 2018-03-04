@@ -2,9 +2,8 @@
 
 module Terrafomo.Gen.Text where
 
-import Data.Maybe  (fromMaybe)
-import Data.Monoid ((<>))
-import Data.Text   (Text)
+import Data.Maybe (fromMaybe)
+import Data.Text  (Text)
 
 import qualified Data.Char as Char
 import qualified Data.Set  as Set
@@ -26,13 +25,13 @@ safeArgName x =
             xs -> last xs
 
 safeAttrName :: Text -> Text
-safeAttrName = mappend "_computed" . safeArgName
+safeAttrName = mappend "_compute" . safeArgName
 
 resourceName :: Text -> Text
-resourceName = (<> "Resource") . schemaTypeName
+resourceName = mappend "Resource" . schemaTypeName
 
 dataSourceName :: Text -> Text
-dataSourceName = (<> "DataSource") . schemaTypeName
+dataSourceName = mappend "Data" . schemaTypeName
 
 schemaTypeName :: Text -> Text
 schemaTypeName x =

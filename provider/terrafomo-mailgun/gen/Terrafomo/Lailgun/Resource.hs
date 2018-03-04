@@ -24,8 +24,8 @@
 module Terrafomo.Lailgun.Resource
     (
     -- * Types
-      DomainResource (..)
-    , domainResource
+      ResourceDomain (..)
+    , resourceDomain
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -35,13 +35,13 @@ module Terrafomo.Lailgun.Resource
     , P.HasWildcard (..)
 
     -- ** Computed Attributes
-    , P.HasComputedName (..)
-    , P.HasComputedReceivingRecords (..)
-    , P.HasComputedSendingRecords (..)
-    , P.HasComputedSmtpLogin (..)
-    , P.HasComputedSmtpPassword (..)
-    , P.HasComputedSpamAction (..)
-    , P.HasComputedWildcard (..)
+    , P.HasComputeName (..)
+    , P.HasComputeReceivingRecords (..)
+    , P.HasComputeSendingRecords (..)
+    , P.HasComputeSmtpLogin (..)
+    , P.HasComputeSmtpPassword (..)
+    , P.HasComputeSpamAction (..)
+    , P.HasComputeWildcard (..)
 
     -- * Re-exported Types
     , module P
@@ -76,7 +76,7 @@ import qualified Terrafomo.Schema    as TF
 Provides a Mailgun App resource. This can be used to create and manage
 applications on Mailgun.
 -}
-data DomainResource s = DomainResource {
+data ResourceDomain s = ResourceDomain {
       _name          :: !(TF.Attr s P.Text)
     {- ^ (Required) The domain to add to Mailgun -}
     , _smtp_password :: !(TF.Attr s P.Text)
@@ -87,59 +87,59 @@ data DomainResource s = DomainResource {
     {- ^ (Optional) Boolean that determines whether the domain will accept email for sub-domains. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DomainResource s) where
-    toHCL DomainResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceDomain s) where
+    toHCL ResourceDomain{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "smtp_password" <$> TF.attribute _smtp_password
         , TF.assign "spam_action" <$> TF.attribute _spam_action
         , TF.assign "wildcard" <$> TF.attribute _wildcard
         ]
 
-instance P.HasName (DomainResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceDomain s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DomainResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DomainResource s)
+        lens (_name :: ResourceDomain s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceDomain s)
 
-instance P.HasSmtpPassword (DomainResource s) (TF.Attr s P.Text) where
+instance P.HasSmtpPassword (ResourceDomain s) (TF.Attr s P.Text) where
     smtpPassword =
-        lens (_smtp_password :: DomainResource s -> TF.Attr s P.Text)
-             (\s a -> s { _smtp_password = a } :: DomainResource s)
+        lens (_smtp_password :: ResourceDomain s -> TF.Attr s P.Text)
+             (\s a -> s { _smtp_password = a } :: ResourceDomain s)
 
-instance P.HasSpamAction (DomainResource s) (TF.Attr s P.Text) where
+instance P.HasSpamAction (ResourceDomain s) (TF.Attr s P.Text) where
     spamAction =
-        lens (_spam_action :: DomainResource s -> TF.Attr s P.Text)
-             (\s a -> s { _spam_action = a } :: DomainResource s)
+        lens (_spam_action :: ResourceDomain s -> TF.Attr s P.Text)
+             (\s a -> s { _spam_action = a } :: ResourceDomain s)
 
-instance P.HasWildcard (DomainResource s) (TF.Attr s P.Text) where
+instance P.HasWildcard (ResourceDomain s) (TF.Attr s P.Text) where
     wildcard =
-        lens (_wildcard :: DomainResource s -> TF.Attr s P.Text)
-             (\s a -> s { _wildcard = a } :: DomainResource s)
+        lens (_wildcard :: ResourceDomain s -> TF.Attr s P.Text)
+             (\s a -> s { _wildcard = a } :: ResourceDomain s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedReceivingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedReceivingRecords x = TF.compute (TF.refKey x) "receiving_records"
+instance s ~ s' => P.HasComputeReceivingRecords (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computeReceivingRecords x = TF.compute (TF.refKey x) "receiving_records"
 
-instance s ~ s' => P.HasComputedSendingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedSendingRecords x = TF.compute (TF.refKey x) "sending_records"
+instance s ~ s' => P.HasComputeSendingRecords (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computeSendingRecords x = TF.compute (TF.refKey x) "sending_records"
 
-instance s ~ s' => P.HasComputedSmtpLogin (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedSmtpLogin x = TF.compute (TF.refKey x) "smtp_login"
+instance s ~ s' => P.HasComputeSmtpLogin (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computeSmtpLogin x = TF.compute (TF.refKey x) "smtp_login"
 
-instance s ~ s' => P.HasComputedSmtpPassword (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedSmtpPassword x = TF.compute (TF.refKey x) "smtp_password"
+instance s ~ s' => P.HasComputeSmtpPassword (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computeSmtpPassword x = TF.compute (TF.refKey x) "smtp_password"
 
-instance s ~ s' => P.HasComputedSpamAction (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedSpamAction x = TF.compute (TF.refKey x) "spam_action"
+instance s ~ s' => P.HasComputeSpamAction (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computeSpamAction x = TF.compute (TF.refKey x) "spam_action"
 
-instance s ~ s' => P.HasComputedWildcard (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedWildcard x = TF.compute (TF.refKey x) "wildcard"
+instance s ~ s' => P.HasComputeWildcard (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+    computeWildcard x = TF.compute (TF.refKey x) "wildcard"
 
-domainResource :: TF.Resource P.Lailgun (DomainResource s)
-domainResource =
+resourceDomain :: TF.Resource P.Lailgun (ResourceDomain s)
+resourceDomain =
     TF.newResource "mailgun_domain" $
-        DomainResource {
+        ResourceDomain {
               _name = TF.Nil
             , _smtp_password = TF.Nil
             , _spam_action = TF.Nil

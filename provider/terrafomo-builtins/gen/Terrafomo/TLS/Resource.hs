@@ -24,17 +24,17 @@
 module Terrafomo.TLS.Resource
     (
     -- * Types
-      CertRequestResource (..)
-    , certRequestResource
+      ResourceCertRequest (..)
+    , resourceCertRequest
 
-    , LocallySignedCertResource (..)
-    , locallySignedCertResource
+    , ResourceLocallySignedCert (..)
+    , resourceLocallySignedCert
 
-    , PrivateKeyResource (..)
-    , privateKeyResource
+    , ResourcePrivateKey (..)
+    , resourcePrivateKey
 
-    , SelfSignedCertResource (..)
-    , selfSignedCertResource
+    , ResourceSelfSignedCert (..)
+    , resourceSelfSignedCert
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -56,27 +56,27 @@ module Terrafomo.TLS.Resource
     , P.HasValidityPeriodHours (..)
 
     -- ** Computed Attributes
-    , P.HasComputedAlgorithm (..)
-    , P.HasComputedAllowedUses (..)
-    , P.HasComputedCaCertPem (..)
-    , P.HasComputedCaKeyAlgorithm (..)
-    , P.HasComputedCaPrivateKeyPem (..)
-    , P.HasComputedCertPem (..)
-    , P.HasComputedCertRequestPem (..)
-    , P.HasComputedDnsNames (..)
-    , P.HasComputedEarlyRenewalHours (..)
-    , P.HasComputedEcdsaCurve (..)
-    , P.HasComputedIpAddresses (..)
-    , P.HasComputedIsCaCertificate (..)
-    , P.HasComputedKeyAlgorithm (..)
-    , P.HasComputedPrivateKeyPem (..)
-    , P.HasComputedPublicKeyOpenssh (..)
-    , P.HasComputedPublicKeyPem (..)
-    , P.HasComputedRsaBits (..)
-    , P.HasComputedSubject (..)
-    , P.HasComputedValidityEndTime (..)
-    , P.HasComputedValidityPeriodHours (..)
-    , P.HasComputedValidityStartTime (..)
+    , P.HasComputeAlgorithm (..)
+    , P.HasComputeAllowedUses (..)
+    , P.HasComputeCaCertPem (..)
+    , P.HasComputeCaKeyAlgorithm (..)
+    , P.HasComputeCaPrivateKeyPem (..)
+    , P.HasComputeCertPem (..)
+    , P.HasComputeCertRequestPem (..)
+    , P.HasComputeDnsNames (..)
+    , P.HasComputeEarlyRenewalHours (..)
+    , P.HasComputeEcdsaCurve (..)
+    , P.HasComputeIpAddresses (..)
+    , P.HasComputeIsCaCertificate (..)
+    , P.HasComputeKeyAlgorithm (..)
+    , P.HasComputePrivateKeyPem (..)
+    , P.HasComputePublicKeyOpenssh (..)
+    , P.HasComputePublicKeyPem (..)
+    , P.HasComputeRsaBits (..)
+    , P.HasComputeSubject (..)
+    , P.HasComputeValidityEndTime (..)
+    , P.HasComputeValidityPeriodHours (..)
+    , P.HasComputeValidityStartTime (..)
 
     -- * Re-exported Types
     , module P
@@ -121,7 +121,7 @@ this resource caused non-convergent configuration. The data source form is
 no longer supported as of Terraform 0.7.5 and any users should return to
 using the resource form.
 -}
-data CertRequestResource s = CertRequestResource {
+data ResourceCertRequest s = ResourceCertRequest {
       _dns_names       :: !(TF.Attr s P.Text)
     {- ^ (Optional) List of DNS names for which a certificate is being requested. -}
     , _ip_addresses    :: !(TF.Attr s P.Text)
@@ -134,8 +134,8 @@ data CertRequestResource s = CertRequestResource {
     {- ^ (Required) The subject for which a certificate is being requested. This is a nested configuration block whose structure is described below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CertRequestResource s) where
-    toHCL CertRequestResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceCertRequest s) where
+    toHCL ResourceCertRequest{..} = TF.inline $ catMaybes
         [ TF.assign "dns_names" <$> TF.attribute _dns_names
         , TF.assign "ip_addresses" <$> TF.attribute _ip_addresses
         , TF.assign "key_algorithm" <$> TF.attribute _key_algorithm
@@ -143,63 +143,63 @@ instance TF.ToHCL (CertRequestResource s) where
         , TF.assign "subject" <$> TF.attribute _subject
         ]
 
-instance P.HasDnsNames (CertRequestResource s) (TF.Attr s P.Text) where
+instance P.HasDnsNames (ResourceCertRequest s) (TF.Attr s P.Text) where
     dnsNames =
-        lens (_dns_names :: CertRequestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dns_names = a } :: CertRequestResource s)
+        lens (_dns_names :: ResourceCertRequest s -> TF.Attr s P.Text)
+             (\s a -> s { _dns_names = a } :: ResourceCertRequest s)
 
-instance P.HasIpAddresses (CertRequestResource s) (TF.Attr s P.Text) where
+instance P.HasIpAddresses (ResourceCertRequest s) (TF.Attr s P.Text) where
     ipAddresses =
-        lens (_ip_addresses :: CertRequestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_addresses = a } :: CertRequestResource s)
+        lens (_ip_addresses :: ResourceCertRequest s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_addresses = a } :: ResourceCertRequest s)
 
-instance P.HasKeyAlgorithm (CertRequestResource s) (TF.Attr s P.Text) where
+instance P.HasKeyAlgorithm (ResourceCertRequest s) (TF.Attr s P.Text) where
     keyAlgorithm =
-        lens (_key_algorithm :: CertRequestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _key_algorithm = a } :: CertRequestResource s)
+        lens (_key_algorithm :: ResourceCertRequest s -> TF.Attr s P.Text)
+             (\s a -> s { _key_algorithm = a } :: ResourceCertRequest s)
 
-instance P.HasPrivateKeyPem (CertRequestResource s) (TF.Attr s P.Text) where
+instance P.HasPrivateKeyPem (ResourceCertRequest s) (TF.Attr s P.Text) where
     privateKeyPem =
-        lens (_private_key_pem :: CertRequestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _private_key_pem = a } :: CertRequestResource s)
+        lens (_private_key_pem :: ResourceCertRequest s -> TF.Attr s P.Text)
+             (\s a -> s { _private_key_pem = a } :: ResourceCertRequest s)
 
-instance P.HasSubject (CertRequestResource s) (TF.Attr s P.Text) where
+instance P.HasSubject (ResourceCertRequest s) (TF.Attr s P.Text) where
     subject =
-        lens (_subject :: CertRequestResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subject = a } :: CertRequestResource s)
+        lens (_subject :: ResourceCertRequest s -> TF.Attr s P.Text)
+             (\s a -> s { _subject = a } :: ResourceCertRequest s)
 
-instance s ~ s' => P.HasComputedCertRequestPem (TF.Ref s' (CertRequestResource s)) (TF.Attr s P.Text) where
-    computedCertRequestPem x = TF.compute (TF.refKey x) "cert_request_pem"
+instance s ~ s' => P.HasComputeCertRequestPem (TF.Ref s' (ResourceCertRequest s)) (TF.Attr s P.Text) where
+    computeCertRequestPem x = TF.compute (TF.refKey x) "cert_request_pem"
 
-instance s ~ s' => P.HasComputedDnsNames (TF.Ref s' (CertRequestResource s)) (TF.Attr s P.Text) where
-    computedDnsNames =
-        (_dns_names :: CertRequestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDnsNames (TF.Ref s' (ResourceCertRequest s)) (TF.Attr s P.Text) where
+    computeDnsNames =
+        (_dns_names :: ResourceCertRequest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpAddresses (TF.Ref s' (CertRequestResource s)) (TF.Attr s P.Text) where
-    computedIpAddresses =
-        (_ip_addresses :: CertRequestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpAddresses (TF.Ref s' (ResourceCertRequest s)) (TF.Attr s P.Text) where
+    computeIpAddresses =
+        (_ip_addresses :: ResourceCertRequest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedKeyAlgorithm (TF.Ref s' (CertRequestResource s)) (TF.Attr s P.Text) where
-    computedKeyAlgorithm =
-        (_key_algorithm :: CertRequestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeKeyAlgorithm (TF.Ref s' (ResourceCertRequest s)) (TF.Attr s P.Text) where
+    computeKeyAlgorithm =
+        (_key_algorithm :: ResourceCertRequest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrivateKeyPem (TF.Ref s' (CertRequestResource s)) (TF.Attr s P.Text) where
-    computedPrivateKeyPem =
-        (_private_key_pem :: CertRequestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePrivateKeyPem (TF.Ref s' (ResourceCertRequest s)) (TF.Attr s P.Text) where
+    computePrivateKeyPem =
+        (_private_key_pem :: ResourceCertRequest s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSubject (TF.Ref s' (CertRequestResource s)) (TF.Attr s P.Text) where
-    computedSubject =
-        (_subject :: CertRequestResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSubject (TF.Ref s' (ResourceCertRequest s)) (TF.Attr s P.Text) where
+    computeSubject =
+        (_subject :: ResourceCertRequest s -> TF.Attr s P.Text)
             . TF.refValue
 
-certRequestResource :: TF.Resource TF.NoProvider (CertRequestResource s)
-certRequestResource =
+resourceCertRequest :: TF.Resource TF.NoProvider (ResourceCertRequest s)
+resourceCertRequest =
     TF.newResource "tls_cert_request" $
-        CertRequestResource {
+        ResourceCertRequest {
               _dns_names = TF.Nil
             , _ip_addresses = TF.Nil
             , _key_algorithm = TF.Nil
@@ -215,7 +215,7 @@ Locally-signed certificates are generally only trusted by client software
 when setup to use the provided CA. They are normally used in development
 environments or when deployed internally to an organization.
 -}
-data LocallySignedCertResource s = LocallySignedCertResource {
+data ResourceLocallySignedCert s = ResourceLocallySignedCert {
       _allowed_uses          :: !(TF.Attr s P.Text)
     {- ^ (Required) List of keywords each describing a use that is permitted for the issued certificate. The valid keywords are listed below. -}
     , _ca_cert_pem           :: !(TF.Attr s P.Text)
@@ -234,8 +234,8 @@ data LocallySignedCertResource s = LocallySignedCertResource {
     {- ^ (Required) The number of hours after initial issuing that the certificate will become invalid. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LocallySignedCertResource s) where
-    toHCL LocallySignedCertResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceLocallySignedCert s) where
+    toHCL ResourceLocallySignedCert{..} = TF.inline $ catMaybes
         [ TF.assign "allowed_uses" <$> TF.attribute _allowed_uses
         , TF.assign "ca_cert_pem" <$> TF.attribute _ca_cert_pem
         , TF.assign "ca_key_algorithm" <$> TF.attribute _ca_key_algorithm
@@ -246,99 +246,99 @@ instance TF.ToHCL (LocallySignedCertResource s) where
         , TF.assign "validity_period_hours" <$> TF.attribute _validity_period_hours
         ]
 
-instance P.HasAllowedUses (LocallySignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasAllowedUses (ResourceLocallySignedCert s) (TF.Attr s P.Text) where
     allowedUses =
-        lens (_allowed_uses :: LocallySignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _allowed_uses = a } :: LocallySignedCertResource s)
+        lens (_allowed_uses :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _allowed_uses = a } :: ResourceLocallySignedCert s)
 
-instance P.HasCaCertPem (LocallySignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasCaCertPem (ResourceLocallySignedCert s) (TF.Attr s P.Text) where
     caCertPem =
-        lens (_ca_cert_pem :: LocallySignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ca_cert_pem = a } :: LocallySignedCertResource s)
+        lens (_ca_cert_pem :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _ca_cert_pem = a } :: ResourceLocallySignedCert s)
 
-instance P.HasCaKeyAlgorithm (LocallySignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasCaKeyAlgorithm (ResourceLocallySignedCert s) (TF.Attr s P.Text) where
     caKeyAlgorithm =
-        lens (_ca_key_algorithm :: LocallySignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ca_key_algorithm = a } :: LocallySignedCertResource s)
+        lens (_ca_key_algorithm :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _ca_key_algorithm = a } :: ResourceLocallySignedCert s)
 
-instance P.HasCaPrivateKeyPem (LocallySignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasCaPrivateKeyPem (ResourceLocallySignedCert s) (TF.Attr s P.Text) where
     caPrivateKeyPem =
-        lens (_ca_private_key_pem :: LocallySignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ca_private_key_pem = a } :: LocallySignedCertResource s)
+        lens (_ca_private_key_pem :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _ca_private_key_pem = a } :: ResourceLocallySignedCert s)
 
-instance P.HasCertRequestPem (LocallySignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasCertRequestPem (ResourceLocallySignedCert s) (TF.Attr s P.Text) where
     certRequestPem =
-        lens (_cert_request_pem :: LocallySignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cert_request_pem = a } :: LocallySignedCertResource s)
+        lens (_cert_request_pem :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _cert_request_pem = a } :: ResourceLocallySignedCert s)
 
-instance P.HasEarlyRenewalHours (LocallySignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasEarlyRenewalHours (ResourceLocallySignedCert s) (TF.Attr s P.Text) where
     earlyRenewalHours =
-        lens (_early_renewal_hours :: LocallySignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _early_renewal_hours = a } :: LocallySignedCertResource s)
+        lens (_early_renewal_hours :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _early_renewal_hours = a } :: ResourceLocallySignedCert s)
 
-instance P.HasIsCaCertificate (LocallySignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasIsCaCertificate (ResourceLocallySignedCert s) (TF.Attr s P.Text) where
     isCaCertificate =
-        lens (_is_ca_certificate :: LocallySignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _is_ca_certificate = a } :: LocallySignedCertResource s)
+        lens (_is_ca_certificate :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _is_ca_certificate = a } :: ResourceLocallySignedCert s)
 
-instance P.HasValidityPeriodHours (LocallySignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasValidityPeriodHours (ResourceLocallySignedCert s) (TF.Attr s P.Text) where
     validityPeriodHours =
-        lens (_validity_period_hours :: LocallySignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _validity_period_hours = a } :: LocallySignedCertResource s)
+        lens (_validity_period_hours :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _validity_period_hours = a } :: ResourceLocallySignedCert s)
 
-instance s ~ s' => P.HasComputedAllowedUses (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedAllowedUses =
-        (_allowed_uses :: LocallySignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAllowedUses (TF.Ref s' (ResourceLocallySignedCert s)) (TF.Attr s P.Text) where
+    computeAllowedUses =
+        (_allowed_uses :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCaCertPem (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedCaCertPem =
-        (_ca_cert_pem :: LocallySignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCaCertPem (TF.Ref s' (ResourceLocallySignedCert s)) (TF.Attr s P.Text) where
+    computeCaCertPem =
+        (_ca_cert_pem :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCaKeyAlgorithm (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedCaKeyAlgorithm =
-        (_ca_key_algorithm :: LocallySignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCaKeyAlgorithm (TF.Ref s' (ResourceLocallySignedCert s)) (TF.Attr s P.Text) where
+    computeCaKeyAlgorithm =
+        (_ca_key_algorithm :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCaPrivateKeyPem (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedCaPrivateKeyPem =
-        (_ca_private_key_pem :: LocallySignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCaPrivateKeyPem (TF.Ref s' (ResourceLocallySignedCert s)) (TF.Attr s P.Text) where
+    computeCaPrivateKeyPem =
+        (_ca_private_key_pem :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCertPem (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedCertPem x = TF.compute (TF.refKey x) "cert_pem"
+instance s ~ s' => P.HasComputeCertPem (TF.Ref s' (ResourceLocallySignedCert s)) (TF.Attr s P.Text) where
+    computeCertPem x = TF.compute (TF.refKey x) "cert_pem"
 
-instance s ~ s' => P.HasComputedCertRequestPem (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedCertRequestPem =
-        (_cert_request_pem :: LocallySignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCertRequestPem (TF.Ref s' (ResourceLocallySignedCert s)) (TF.Attr s P.Text) where
+    computeCertRequestPem =
+        (_cert_request_pem :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEarlyRenewalHours (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedEarlyRenewalHours =
-        (_early_renewal_hours :: LocallySignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEarlyRenewalHours (TF.Ref s' (ResourceLocallySignedCert s)) (TF.Attr s P.Text) where
+    computeEarlyRenewalHours =
+        (_early_renewal_hours :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIsCaCertificate (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedIsCaCertificate =
-        (_is_ca_certificate :: LocallySignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIsCaCertificate (TF.Ref s' (ResourceLocallySignedCert s)) (TF.Attr s P.Text) where
+    computeIsCaCertificate =
+        (_is_ca_certificate :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedValidityEndTime (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedValidityEndTime x = TF.compute (TF.refKey x) "validity_end_time"
+instance s ~ s' => P.HasComputeValidityEndTime (TF.Ref s' (ResourceLocallySignedCert s)) (TF.Attr s P.Text) where
+    computeValidityEndTime x = TF.compute (TF.refKey x) "validity_end_time"
 
-instance s ~ s' => P.HasComputedValidityPeriodHours (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedValidityPeriodHours =
-        (_validity_period_hours :: LocallySignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeValidityPeriodHours (TF.Ref s' (ResourceLocallySignedCert s)) (TF.Attr s P.Text) where
+    computeValidityPeriodHours =
+        (_validity_period_hours :: ResourceLocallySignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedValidityStartTime (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedValidityStartTime x = TF.compute (TF.refKey x) "validity_start_time"
+instance s ~ s' => P.HasComputeValidityStartTime (TF.Ref s' (ResourceLocallySignedCert s)) (TF.Attr s P.Text) where
+    computeValidityStartTime x = TF.compute (TF.refKey x) "validity_start_time"
 
-locallySignedCertResource :: TF.Resource TF.NoProvider (LocallySignedCertResource s)
-locallySignedCertResource =
+resourceLocallySignedCert :: TF.Resource TF.NoProvider (ResourceLocallySignedCert s)
+resourceLocallySignedCert =
     TF.newResource "tls_locally_signed_cert" $
-        LocallySignedCertResource {
+        ResourceLocallySignedCert {
               _allowed_uses = TF.Nil
             , _ca_cert_pem = TF.Nil
             , _ca_key_algorithm = TF.Nil
@@ -361,7 +361,7 @@ to the system where Terraform will be run. This is a logical resource , so
 it contributes only to the current Terraform state and does not create any
 external managed resources.
 -}
-data PrivateKeyResource s = PrivateKeyResource {
+data ResourcePrivateKey s = ResourcePrivateKey {
       _algorithm   :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the algorithm to use for the key. Currently-supported values are "RSA" and "ECDSA". -}
     , _ecdsa_curve :: !(TF.Attr s P.Text)
@@ -370,54 +370,54 @@ data PrivateKeyResource s = PrivateKeyResource {
     {- ^ (Optional) When @algorithm@ is "RSA", the size of the generated RSA key in bits. Defaults to 2048. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PrivateKeyResource s) where
-    toHCL PrivateKeyResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourcePrivateKey s) where
+    toHCL ResourcePrivateKey{..} = TF.inline $ catMaybes
         [ TF.assign "algorithm" <$> TF.attribute _algorithm
         , TF.assign "ecdsa_curve" <$> TF.attribute _ecdsa_curve
         , TF.assign "rsa_bits" <$> TF.attribute _rsa_bits
         ]
 
-instance P.HasAlgorithm (PrivateKeyResource s) (TF.Attr s P.Text) where
+instance P.HasAlgorithm (ResourcePrivateKey s) (TF.Attr s P.Text) where
     algorithm =
-        lens (_algorithm :: PrivateKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _algorithm = a } :: PrivateKeyResource s)
+        lens (_algorithm :: ResourcePrivateKey s -> TF.Attr s P.Text)
+             (\s a -> s { _algorithm = a } :: ResourcePrivateKey s)
 
-instance P.HasEcdsaCurve (PrivateKeyResource s) (TF.Attr s P.Text) where
+instance P.HasEcdsaCurve (ResourcePrivateKey s) (TF.Attr s P.Text) where
     ecdsaCurve =
-        lens (_ecdsa_curve :: PrivateKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ecdsa_curve = a } :: PrivateKeyResource s)
+        lens (_ecdsa_curve :: ResourcePrivateKey s -> TF.Attr s P.Text)
+             (\s a -> s { _ecdsa_curve = a } :: ResourcePrivateKey s)
 
-instance P.HasRsaBits (PrivateKeyResource s) (TF.Attr s P.Text) where
+instance P.HasRsaBits (ResourcePrivateKey s) (TF.Attr s P.Text) where
     rsaBits =
-        lens (_rsa_bits :: PrivateKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _rsa_bits = a } :: PrivateKeyResource s)
+        lens (_rsa_bits :: ResourcePrivateKey s -> TF.Attr s P.Text)
+             (\s a -> s { _rsa_bits = a } :: ResourcePrivateKey s)
 
-instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
-    computedAlgorithm x = TF.compute (TF.refKey x) "algorithm"
+instance s ~ s' => P.HasComputeAlgorithm (TF.Ref s' (ResourcePrivateKey s)) (TF.Attr s P.Text) where
+    computeAlgorithm x = TF.compute (TF.refKey x) "algorithm"
 
-instance s ~ s' => P.HasComputedEcdsaCurve (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
-    computedEcdsaCurve =
-        (_ecdsa_curve :: PrivateKeyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEcdsaCurve (TF.Ref s' (ResourcePrivateKey s)) (TF.Attr s P.Text) where
+    computeEcdsaCurve =
+        (_ecdsa_curve :: ResourcePrivateKey s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrivateKeyPem (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
-    computedPrivateKeyPem x = TF.compute (TF.refKey x) "private_key_pem"
+instance s ~ s' => P.HasComputePrivateKeyPem (TF.Ref s' (ResourcePrivateKey s)) (TF.Attr s P.Text) where
+    computePrivateKeyPem x = TF.compute (TF.refKey x) "private_key_pem"
 
-instance s ~ s' => P.HasComputedPublicKeyOpenssh (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
-    computedPublicKeyOpenssh x = TF.compute (TF.refKey x) "public_key_openssh"
+instance s ~ s' => P.HasComputePublicKeyOpenssh (TF.Ref s' (ResourcePrivateKey s)) (TF.Attr s P.Text) where
+    computePublicKeyOpenssh x = TF.compute (TF.refKey x) "public_key_openssh"
 
-instance s ~ s' => P.HasComputedPublicKeyPem (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
-    computedPublicKeyPem x = TF.compute (TF.refKey x) "public_key_pem"
+instance s ~ s' => P.HasComputePublicKeyPem (TF.Ref s' (ResourcePrivateKey s)) (TF.Attr s P.Text) where
+    computePublicKeyPem x = TF.compute (TF.refKey x) "public_key_pem"
 
-instance s ~ s' => P.HasComputedRsaBits (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
-    computedRsaBits =
-        (_rsa_bits :: PrivateKeyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRsaBits (TF.Ref s' (ResourcePrivateKey s)) (TF.Attr s P.Text) where
+    computeRsaBits =
+        (_rsa_bits :: ResourcePrivateKey s -> TF.Attr s P.Text)
             . TF.refValue
 
-privateKeyResource :: TF.Resource TF.NoProvider (PrivateKeyResource s)
-privateKeyResource =
+resourcePrivateKey :: TF.Resource TF.NoProvider (ResourcePrivateKey s)
+resourcePrivateKey =
     TF.newResource "tls_private_key" $
-        PrivateKeyResource {
+        ResourcePrivateKey {
               _algorithm = TF.Nil
             , _ecdsa_curve = TF.Nil
             , _rsa_bits = TF.Nil
@@ -435,7 +435,7 @@ organization. This resource is intended to be used in conjunction with a
 Terraform provider that has a resource that requires a TLS certificate, such
 as:
 -}
-data SelfSignedCertResource s = SelfSignedCertResource {
+data ResourceSelfSignedCert s = ResourceSelfSignedCert {
       _allowed_uses          :: !(TF.Attr s P.Text)
     {- ^ (Required) List of keywords each describing a use that is permitted for the issued certificate. The valid keywords are listed below. -}
     , _dns_names             :: !(TF.Attr s P.Text)
@@ -456,8 +456,8 @@ data SelfSignedCertResource s = SelfSignedCertResource {
     {- ^ (Required) The number of hours after initial issuing that the certificate will become invalid. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SelfSignedCertResource s) where
-    toHCL SelfSignedCertResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceSelfSignedCert s) where
+    toHCL ResourceSelfSignedCert{..} = TF.inline $ catMaybes
         [ TF.assign "allowed_uses" <$> TF.attribute _allowed_uses
         , TF.assign "dns_names" <$> TF.attribute _dns_names
         , TF.assign "early_renewal_hours" <$> TF.attribute _early_renewal_hours
@@ -469,109 +469,109 @@ instance TF.ToHCL (SelfSignedCertResource s) where
         , TF.assign "validity_period_hours" <$> TF.attribute _validity_period_hours
         ]
 
-instance P.HasAllowedUses (SelfSignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasAllowedUses (ResourceSelfSignedCert s) (TF.Attr s P.Text) where
     allowedUses =
-        lens (_allowed_uses :: SelfSignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _allowed_uses = a } :: SelfSignedCertResource s)
+        lens (_allowed_uses :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _allowed_uses = a } :: ResourceSelfSignedCert s)
 
-instance P.HasDnsNames (SelfSignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasDnsNames (ResourceSelfSignedCert s) (TF.Attr s P.Text) where
     dnsNames =
-        lens (_dns_names :: SelfSignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dns_names = a } :: SelfSignedCertResource s)
+        lens (_dns_names :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _dns_names = a } :: ResourceSelfSignedCert s)
 
-instance P.HasEarlyRenewalHours (SelfSignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasEarlyRenewalHours (ResourceSelfSignedCert s) (TF.Attr s P.Text) where
     earlyRenewalHours =
-        lens (_early_renewal_hours :: SelfSignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _early_renewal_hours = a } :: SelfSignedCertResource s)
+        lens (_early_renewal_hours :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _early_renewal_hours = a } :: ResourceSelfSignedCert s)
 
-instance P.HasIpAddresses (SelfSignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasIpAddresses (ResourceSelfSignedCert s) (TF.Attr s P.Text) where
     ipAddresses =
-        lens (_ip_addresses :: SelfSignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_addresses = a } :: SelfSignedCertResource s)
+        lens (_ip_addresses :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_addresses = a } :: ResourceSelfSignedCert s)
 
-instance P.HasIsCaCertificate (SelfSignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasIsCaCertificate (ResourceSelfSignedCert s) (TF.Attr s P.Text) where
     isCaCertificate =
-        lens (_is_ca_certificate :: SelfSignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _is_ca_certificate = a } :: SelfSignedCertResource s)
+        lens (_is_ca_certificate :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _is_ca_certificate = a } :: ResourceSelfSignedCert s)
 
-instance P.HasKeyAlgorithm (SelfSignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasKeyAlgorithm (ResourceSelfSignedCert s) (TF.Attr s P.Text) where
     keyAlgorithm =
-        lens (_key_algorithm :: SelfSignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _key_algorithm = a } :: SelfSignedCertResource s)
+        lens (_key_algorithm :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _key_algorithm = a } :: ResourceSelfSignedCert s)
 
-instance P.HasPrivateKeyPem (SelfSignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasPrivateKeyPem (ResourceSelfSignedCert s) (TF.Attr s P.Text) where
     privateKeyPem =
-        lens (_private_key_pem :: SelfSignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _private_key_pem = a } :: SelfSignedCertResource s)
+        lens (_private_key_pem :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _private_key_pem = a } :: ResourceSelfSignedCert s)
 
-instance P.HasSubject (SelfSignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasSubject (ResourceSelfSignedCert s) (TF.Attr s P.Text) where
     subject =
-        lens (_subject :: SelfSignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subject = a } :: SelfSignedCertResource s)
+        lens (_subject :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _subject = a } :: ResourceSelfSignedCert s)
 
-instance P.HasValidityPeriodHours (SelfSignedCertResource s) (TF.Attr s P.Text) where
+instance P.HasValidityPeriodHours (ResourceSelfSignedCert s) (TF.Attr s P.Text) where
     validityPeriodHours =
-        lens (_validity_period_hours :: SelfSignedCertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _validity_period_hours = a } :: SelfSignedCertResource s)
+        lens (_validity_period_hours :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
+             (\s a -> s { _validity_period_hours = a } :: ResourceSelfSignedCert s)
 
-instance s ~ s' => P.HasComputedAllowedUses (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedAllowedUses =
-        (_allowed_uses :: SelfSignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAllowedUses (TF.Ref s' (ResourceSelfSignedCert s)) (TF.Attr s P.Text) where
+    computeAllowedUses =
+        (_allowed_uses :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCertPem (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedCertPem x = TF.compute (TF.refKey x) "cert_pem"
+instance s ~ s' => P.HasComputeCertPem (TF.Ref s' (ResourceSelfSignedCert s)) (TF.Attr s P.Text) where
+    computeCertPem x = TF.compute (TF.refKey x) "cert_pem"
 
-instance s ~ s' => P.HasComputedDnsNames (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedDnsNames =
-        (_dns_names :: SelfSignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDnsNames (TF.Ref s' (ResourceSelfSignedCert s)) (TF.Attr s P.Text) where
+    computeDnsNames =
+        (_dns_names :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEarlyRenewalHours (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedEarlyRenewalHours =
-        (_early_renewal_hours :: SelfSignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEarlyRenewalHours (TF.Ref s' (ResourceSelfSignedCert s)) (TF.Attr s P.Text) where
+    computeEarlyRenewalHours =
+        (_early_renewal_hours :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpAddresses (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedIpAddresses =
-        (_ip_addresses :: SelfSignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpAddresses (TF.Ref s' (ResourceSelfSignedCert s)) (TF.Attr s P.Text) where
+    computeIpAddresses =
+        (_ip_addresses :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIsCaCertificate (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedIsCaCertificate =
-        (_is_ca_certificate :: SelfSignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIsCaCertificate (TF.Ref s' (ResourceSelfSignedCert s)) (TF.Attr s P.Text) where
+    computeIsCaCertificate =
+        (_is_ca_certificate :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedKeyAlgorithm (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedKeyAlgorithm =
-        (_key_algorithm :: SelfSignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeKeyAlgorithm (TF.Ref s' (ResourceSelfSignedCert s)) (TF.Attr s P.Text) where
+    computeKeyAlgorithm =
+        (_key_algorithm :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrivateKeyPem (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedPrivateKeyPem =
-        (_private_key_pem :: SelfSignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePrivateKeyPem (TF.Ref s' (ResourceSelfSignedCert s)) (TF.Attr s P.Text) where
+    computePrivateKeyPem =
+        (_private_key_pem :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSubject (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedSubject =
-        (_subject :: SelfSignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSubject (TF.Ref s' (ResourceSelfSignedCert s)) (TF.Attr s P.Text) where
+    computeSubject =
+        (_subject :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedValidityEndTime (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedValidityEndTime x = TF.compute (TF.refKey x) "validity_end_time"
+instance s ~ s' => P.HasComputeValidityEndTime (TF.Ref s' (ResourceSelfSignedCert s)) (TF.Attr s P.Text) where
+    computeValidityEndTime x = TF.compute (TF.refKey x) "validity_end_time"
 
-instance s ~ s' => P.HasComputedValidityPeriodHours (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedValidityPeriodHours =
-        (_validity_period_hours :: SelfSignedCertResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeValidityPeriodHours (TF.Ref s' (ResourceSelfSignedCert s)) (TF.Attr s P.Text) where
+    computeValidityPeriodHours =
+        (_validity_period_hours :: ResourceSelfSignedCert s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedValidityStartTime (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedValidityStartTime x = TF.compute (TF.refKey x) "validity_start_time"
+instance s ~ s' => P.HasComputeValidityStartTime (TF.Ref s' (ResourceSelfSignedCert s)) (TF.Attr s P.Text) where
+    computeValidityStartTime x = TF.compute (TF.refKey x) "validity_start_time"
 
-selfSignedCertResource :: TF.Resource TF.NoProvider (SelfSignedCertResource s)
-selfSignedCertResource =
+resourceSelfSignedCert :: TF.Resource TF.NoProvider (ResourceSelfSignedCert s)
+resourceSelfSignedCert =
     TF.newResource "tls_self_signed_cert" $
-        SelfSignedCertResource {
+        ResourceSelfSignedCert {
               _allowed_uses = TF.Nil
             , _dns_names = TF.Nil
             , _early_renewal_hours = TF.Nil

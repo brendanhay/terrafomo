@@ -24,290 +24,290 @@
 module Terrafomo.Google.Resource01
     (
     -- * Types
-      BigqueryDatasetResource (..)
-    , bigqueryDatasetResource
-
-    , BigqueryTableResource (..)
-    , bigqueryTableResource
-
-    , BigtableInstanceResource (..)
-    , bigtableInstanceResource
-
-    , BigtableTableResource (..)
-    , bigtableTableResource
-
-    , CloudfunctionsFunctionResource (..)
-    , cloudfunctionsFunctionResource
-
-    , ComputeAddressResource (..)
-    , computeAddressResource
-
-    , ComputeAutoscalerResource (..)
-    , computeAutoscalerResource
-
-    , ComputeBackendBucketResource (..)
-    , computeBackendBucketResource
-
-    , ComputeBackendServiceResource (..)
-    , computeBackendServiceResource
-
-    , ComputeDiskResource (..)
-    , computeDiskResource
-
-    , ComputeFirewallResource (..)
-    , computeFirewallResource
-
-    , ComputeForwardingRuleResource (..)
-    , computeForwardingRuleResource
-
-    , ComputeGlobalAddressResource (..)
-    , computeGlobalAddressResource
-
-    , ComputeGlobalForwardingRuleResource (..)
-    , computeGlobalForwardingRuleResource
-
-    , ComputeHealthCheckResource (..)
-    , computeHealthCheckResource
-
-    , ComputeHttpHealthCheckResource (..)
-    , computeHttpHealthCheckResource
-
-    , ComputeHttpsHealthCheckResource (..)
-    , computeHttpsHealthCheckResource
-
-    , ComputeImageResource (..)
-    , computeImageResource
-
-    , ComputeInstanceGroupManagerResource (..)
-    , computeInstanceGroupManagerResource
-
-    , ComputeInstanceGroupResource (..)
-    , computeInstanceGroupResource
-
-    , ComputeInstanceResource (..)
-    , computeInstanceResource
-
-    , ComputeInstanceTemplateResource (..)
-    , computeInstanceTemplateResource
-
-    , ComputeNetworkPeeringResource (..)
-    , computeNetworkPeeringResource
-
-    , ComputeNetworkResource (..)
-    , computeNetworkResource
-
-    , ComputeProjectMetadataItemResource (..)
-    , computeProjectMetadataItemResource
-
-    , ComputeProjectMetadataResource (..)
-    , computeProjectMetadataResource
-
-    , ComputeRegionAutoscalerResource (..)
-    , computeRegionAutoscalerResource
-
-    , ComputeRegionBackendServiceResource (..)
-    , computeRegionBackendServiceResource
-
-    , ComputeRegionInstanceGroupManagerResource (..)
-    , computeRegionInstanceGroupManagerResource
-
-    , ComputeRouteResource (..)
-    , computeRouteResource
-
-    , ComputeRouterInterfaceResource (..)
-    , computeRouterInterfaceResource
-
-    , ComputeRouterResource (..)
-    , computeRouterResource
-
-    , ComputeSharedVpcHostProjectResource (..)
-    , computeSharedVpcHostProjectResource
-
-    , ComputeSharedVpcServiceProjectResource (..)
-    , computeSharedVpcServiceProjectResource
-
-    , ComputeSnapshotResource (..)
-    , computeSnapshotResource
-
-    , ComputeSslCertificateResource (..)
-    , computeSslCertificateResource
-
-    , ComputeSubnetworkResource (..)
-    , computeSubnetworkResource
-
-    , ComputeTargetHttpProxyResource (..)
-    , computeTargetHttpProxyResource
-
-    , ComputeTargetHttpsProxyResource (..)
-    , computeTargetHttpsProxyResource
-
-    , ComputeTargetPoolResource (..)
-    , computeTargetPoolResource
-
-    , ComputeTargetSslProxyResource (..)
-    , computeTargetSslProxyResource
-
-    , ComputeTargetTcpProxyResource (..)
-    , computeTargetTcpProxyResource
-
-    , ComputeUrlMapResource (..)
-    , computeUrlMapResource
-
-    , ComputeVpnGatewayResource (..)
-    , computeVpnGatewayResource
-
-    , ComputeVpnTunnelResource (..)
-    , computeVpnTunnelResource
-
-    , ContainerClusterResource (..)
-    , containerClusterResource
-
-    , DataflowJobResource (..)
-    , dataflowJobResource
-
-    , DataprocClusterResource (..)
-    , dataprocClusterResource
-
-    , DataprocJobResource (..)
-    , dataprocJobResource
-
-    , DnsManagedZoneResource (..)
-    , dnsManagedZoneResource
-
-    , DnsRecordSetResource (..)
-    , dnsRecordSetResource
-
-    , EndpointsServiceResource (..)
-    , endpointsServiceResource
-
-    , FolderIamBindingResource (..)
-    , folderIamBindingResource
-
-    , FolderIamMemberResource (..)
-    , folderIamMemberResource
-
-    , FolderIamPolicyResource (..)
-    , folderIamPolicyResource
-
-    , FolderOrganizationPolicyResource (..)
-    , folderOrganizationPolicyResource
-
-    , FolderResource (..)
-    , folderResource
-
-    , KmsCryptoKeyIamBindingResource (..)
-    , kmsCryptoKeyIamBindingResource
-
-    , KmsCryptoKeyResource (..)
-    , kmsCryptoKeyResource
-
-    , KmsKeyRingResource (..)
-    , kmsKeyRingResource
-
-    , LoggingBillingAccountSinkResource (..)
-    , loggingBillingAccountSinkResource
-
-    , LoggingFolderSinkResource (..)
-    , loggingFolderSinkResource
-
-    , LoggingOrganizationSinkResource (..)
-    , loggingOrganizationSinkResource
-
-    , LoggingProjectSinkResource (..)
-    , loggingProjectSinkResource
-
-    , OrganizationIamBindingResource (..)
-    , organizationIamBindingResource
-
-    , OrganizationIamCustomRoleResource (..)
-    , organizationIamCustomRoleResource
-
-    , OrganizationIamMemberResource (..)
-    , organizationIamMemberResource
-
-    , OrganizationPolicyResource (..)
-    , organizationPolicyResource
-
-    , ProjectIamBindingResource (..)
-    , projectIamBindingResource
-
-    , ProjectIamCustomRoleResource (..)
-    , projectIamCustomRoleResource
-
-    , ProjectIamMemberResource (..)
-    , projectIamMemberResource
-
-    , ProjectIamPolicyResource (..)
-    , projectIamPolicyResource
-
-    , ProjectResource (..)
-    , projectResource
-
-    , ProjectServiceResource (..)
-    , projectServiceResource
-
-    , ProjectServicesResource (..)
-    , projectServicesResource
-
-    , ProjectUsageExportBucketResource (..)
-    , projectUsageExportBucketResource
-
-    , PubsubSubscriptionResource (..)
-    , pubsubSubscriptionResource
-
-    , PubsubTopicResource (..)
-    , pubsubTopicResource
-
-    , RegistryResource (..)
-    , registryResource
-
-    , Resource (..)
+      Resource (..)
     , resource
 
-    , RuntimeconfigConfigResource (..)
-    , runtimeconfigConfigResource
+    , ResourceBigqueryDataset (..)
+    , resourceBigqueryDataset
 
-    , RuntimeconfigVariableResource (..)
-    , runtimeconfigVariableResource
+    , ResourceBigqueryTable (..)
+    , resourceBigqueryTable
 
-    , ServiceAccountKeyResource (..)
-    , serviceAccountKeyResource
+    , ResourceBigtableInstance (..)
+    , resourceBigtableInstance
 
-    , ServiceAccountResource (..)
-    , serviceAccountResource
+    , ResourceBigtableTable (..)
+    , resourceBigtableTable
 
-    , SourcerepoRepositoryResource (..)
-    , sourcerepoRepositoryResource
+    , ResourceCloudfunctionsFunction (..)
+    , resourceCloudfunctionsFunction
 
-    , SpannerInstanceResource (..)
-    , spannerInstanceResource
+    , ResourceComputeAddress (..)
+    , resourceComputeAddress
 
-    , SqlDatabaseInstanceResource (..)
-    , sqlDatabaseInstanceResource
+    , ResourceComputeAutoscaler (..)
+    , resourceComputeAutoscaler
 
-    , SqlDatabaseResource (..)
-    , sqlDatabaseResource
+    , ResourceComputeBackendBucket (..)
+    , resourceComputeBackendBucket
 
-    , SqlUserResource (..)
-    , sqlUserResource
+    , ResourceComputeBackendService (..)
+    , resourceComputeBackendService
 
-    , StorageBucketAclResource (..)
-    , storageBucketAclResource
+    , ResourceComputeDisk (..)
+    , resourceComputeDisk
 
-    , StorageBucketObjectResource (..)
-    , storageBucketObjectResource
+    , ResourceComputeFirewall (..)
+    , resourceComputeFirewall
 
-    , StorageBucketResource (..)
-    , storageBucketResource
+    , ResourceComputeForwardingRule (..)
+    , resourceComputeForwardingRule
 
-    , StorageDefaultObjectAclResource (..)
-    , storageDefaultObjectAclResource
+    , ResourceComputeGlobalAddress (..)
+    , resourceComputeGlobalAddress
 
-    , StorageNotificationResource (..)
-    , storageNotificationResource
+    , ResourceComputeGlobalForwardingRule (..)
+    , resourceComputeGlobalForwardingRule
 
-    , StorageObjectAclResource (..)
-    , storageObjectAclResource
+    , ResourceComputeHealthCheck (..)
+    , resourceComputeHealthCheck
+
+    , ResourceComputeHttpHealthCheck (..)
+    , resourceComputeHttpHealthCheck
+
+    , ResourceComputeHttpsHealthCheck (..)
+    , resourceComputeHttpsHealthCheck
+
+    , ResourceComputeImage (..)
+    , resourceComputeImage
+
+    , ResourceComputeInstance (..)
+    , resourceComputeInstance
+
+    , ResourceComputeInstanceGroup (..)
+    , resourceComputeInstanceGroup
+
+    , ResourceComputeInstanceGroupManager (..)
+    , resourceComputeInstanceGroupManager
+
+    , ResourceComputeInstanceTemplate (..)
+    , resourceComputeInstanceTemplate
+
+    , ResourceComputeNetwork (..)
+    , resourceComputeNetwork
+
+    , ResourceComputeNetworkPeering (..)
+    , resourceComputeNetworkPeering
+
+    , ResourceComputeProjectMetadata (..)
+    , resourceComputeProjectMetadata
+
+    , ResourceComputeProjectMetadataItem (..)
+    , resourceComputeProjectMetadataItem
+
+    , ResourceComputeRegionAutoscaler (..)
+    , resourceComputeRegionAutoscaler
+
+    , ResourceComputeRegionBackendService (..)
+    , resourceComputeRegionBackendService
+
+    , ResourceComputeRegionInstanceGroupManager (..)
+    , resourceComputeRegionInstanceGroupManager
+
+    , ResourceComputeRoute (..)
+    , resourceComputeRoute
+
+    , ResourceComputeRouter (..)
+    , resourceComputeRouter
+
+    , ResourceComputeRouterInterface (..)
+    , resourceComputeRouterInterface
+
+    , ResourceComputeSharedVpcHostProject (..)
+    , resourceComputeSharedVpcHostProject
+
+    , ResourceComputeSharedVpcServiceProject (..)
+    , resourceComputeSharedVpcServiceProject
+
+    , ResourceComputeSnapshot (..)
+    , resourceComputeSnapshot
+
+    , ResourceComputeSslCertificate (..)
+    , resourceComputeSslCertificate
+
+    , ResourceComputeSubnetwork (..)
+    , resourceComputeSubnetwork
+
+    , ResourceComputeTargetHttpProxy (..)
+    , resourceComputeTargetHttpProxy
+
+    , ResourceComputeTargetHttpsProxy (..)
+    , resourceComputeTargetHttpsProxy
+
+    , ResourceComputeTargetPool (..)
+    , resourceComputeTargetPool
+
+    , ResourceComputeTargetSslProxy (..)
+    , resourceComputeTargetSslProxy
+
+    , ResourceComputeTargetTcpProxy (..)
+    , resourceComputeTargetTcpProxy
+
+    , ResourceComputeUrlMap (..)
+    , resourceComputeUrlMap
+
+    , ResourceComputeVpnGateway (..)
+    , resourceComputeVpnGateway
+
+    , ResourceComputeVpnTunnel (..)
+    , resourceComputeVpnTunnel
+
+    , ResourceContainerCluster (..)
+    , resourceContainerCluster
+
+    , ResourceDataflowJob (..)
+    , resourceDataflowJob
+
+    , ResourceDataprocCluster (..)
+    , resourceDataprocCluster
+
+    , ResourceDataprocJob (..)
+    , resourceDataprocJob
+
+    , ResourceDnsManagedZone (..)
+    , resourceDnsManagedZone
+
+    , ResourceDnsRecordSet (..)
+    , resourceDnsRecordSet
+
+    , ResourceEndpointsService (..)
+    , resourceEndpointsService
+
+    , ResourceFolder (..)
+    , resourceFolder
+
+    , ResourceFolderIamBinding (..)
+    , resourceFolderIamBinding
+
+    , ResourceFolderIamMember (..)
+    , resourceFolderIamMember
+
+    , ResourceFolderIamPolicy (..)
+    , resourceFolderIamPolicy
+
+    , ResourceFolderOrganizationPolicy (..)
+    , resourceFolderOrganizationPolicy
+
+    , ResourceKmsCryptoKey (..)
+    , resourceKmsCryptoKey
+
+    , ResourceKmsCryptoKeyIamBinding (..)
+    , resourceKmsCryptoKeyIamBinding
+
+    , ResourceKmsKeyRing (..)
+    , resourceKmsKeyRing
+
+    , ResourceLoggingBillingAccountSink (..)
+    , resourceLoggingBillingAccountSink
+
+    , ResourceLoggingFolderSink (..)
+    , resourceLoggingFolderSink
+
+    , ResourceLoggingOrganizationSink (..)
+    , resourceLoggingOrganizationSink
+
+    , ResourceLoggingProjectSink (..)
+    , resourceLoggingProjectSink
+
+    , ResourceOrganizationIamBinding (..)
+    , resourceOrganizationIamBinding
+
+    , ResourceOrganizationIamCustomRole (..)
+    , resourceOrganizationIamCustomRole
+
+    , ResourceOrganizationIamMember (..)
+    , resourceOrganizationIamMember
+
+    , ResourceOrganizationPolicy (..)
+    , resourceOrganizationPolicy
+
+    , ResourceProject (..)
+    , resourceProject
+
+    , ResourceProjectIamBinding (..)
+    , resourceProjectIamBinding
+
+    , ResourceProjectIamCustomRole (..)
+    , resourceProjectIamCustomRole
+
+    , ResourceProjectIamMember (..)
+    , resourceProjectIamMember
+
+    , ResourceProjectIamPolicy (..)
+    , resourceProjectIamPolicy
+
+    , ResourceProjectService (..)
+    , resourceProjectService
+
+    , ResourceProjectServices (..)
+    , resourceProjectServices
+
+    , ResourceProjectUsageExportBucket (..)
+    , resourceProjectUsageExportBucket
+
+    , ResourcePubsubSubscription (..)
+    , resourcePubsubSubscription
+
+    , ResourcePubsubTopic (..)
+    , resourcePubsubTopic
+
+    , ResourceRegistry (..)
+    , resourceRegistry
+
+    , ResourceRuntimeconfigConfig (..)
+    , resourceRuntimeconfigConfig
+
+    , ResourceRuntimeconfigVariable (..)
+    , resourceRuntimeconfigVariable
+
+    , ResourceServiceAccount (..)
+    , resourceServiceAccount
+
+    , ResourceServiceAccountKey (..)
+    , resourceServiceAccountKey
+
+    , ResourceSourcerepoRepository (..)
+    , resourceSourcerepoRepository
+
+    , ResourceSpannerInstance (..)
+    , resourceSpannerInstance
+
+    , ResourceSqlDatabase (..)
+    , resourceSqlDatabase
+
+    , ResourceSqlDatabaseInstance (..)
+    , resourceSqlDatabaseInstance
+
+    , ResourceSqlUser (..)
+    , resourceSqlUser
+
+    , ResourceStorageBucket (..)
+    , resourceStorageBucket
+
+    , ResourceStorageBucketAcl (..)
+    , resourceStorageBucketAcl
+
+    , ResourceStorageBucketObject (..)
+    , resourceStorageBucketObject
+
+    , ResourceStorageDefaultObjectAcl (..)
+    , resourceStorageDefaultObjectAcl
+
+    , ResourceStorageNotification (..)
+    , resourceStorageNotification
+
+    , ResourceStorageObjectAcl (..)
+    , resourceStorageObjectAcl
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -572,346 +572,346 @@ module Terrafomo.Google.Resource01
     , P.HasZone (..)
 
     -- ** Computed Attributes
-    , P.HasComputedAccountId (..)
-    , P.HasComputedAckDeadlineSeconds (..)
-    , P.HasComputedAdditionalZones (..)
-    , P.HasComputedAddonsConfig (..)
-    , P.HasComputedAddress (..)
-    , P.HasComputedAddressType (..)
-    , P.HasComputedAdvertisedRoutePriority (..)
-    , P.HasComputedAllow (..)
-    , P.HasComputedAllowStoppingForUpdate (..)
-    , P.HasComputedApis (..)
-    , P.HasComputedAttachedDisk (..)
-    , P.HasComputedAttachedDisk0DiskEncryptionKeySha256 (..)
-    , P.HasComputedAuthoritative (..)
-    , P.HasComputedAutoCreateRoutes (..)
-    , P.HasComputedAutoCreateSubnetworks (..)
-    , P.HasComputedAutoHealingPolicies (..)
-    , P.HasComputedAutoscalingPolicy (..)
-    , P.HasComputedAvailableMemoryMb (..)
-    , P.HasComputedBackend (..)
-    , P.HasComputedBackendService (..)
-    , P.HasComputedBackupPool (..)
-    , P.HasComputedBaseInstanceName (..)
-    , P.HasComputedBgp (..)
-    , P.HasComputedBillingAccount (..)
-    , P.HasComputedBooleanPolicy (..)
-    , P.HasComputedBootDisk (..)
-    , P.HasComputedBootDiskDiskEncryptionKeySha256 (..)
-    , P.HasComputedBucket (..)
-    , P.HasComputedBucketName (..)
-    , P.HasComputedCanIpForward (..)
-    , P.HasComputedCertificate (..)
-    , P.HasComputedCertificateId (..)
-    , P.HasComputedCharset (..)
-    , P.HasComputedCheckIntervalSec (..)
-    , P.HasComputedClusterConfig (..)
-    , P.HasComputedClusterConfigBucket (..)
-    , P.HasComputedClusterConfigMasterConfigInstanceNames (..)
-    , P.HasComputedClusterConfigPreemptibleWorkerConfigInstanceNames (..)
-    , P.HasComputedClusterConfigSoftwareConfigProperties (..)
-    , P.HasComputedClusterConfigWorkerConfigInstanceNames (..)
-    , P.HasComputedClusterId (..)
-    , P.HasComputedClusterIpv4Cidr (..)
-    , P.HasComputedCollation (..)
-    , P.HasComputedConfig (..)
-    , P.HasComputedConfigId (..)
-    , P.HasComputedConnectionDrainingTimeoutSec (..)
-    , P.HasComputedConnectionName (..)
-    , P.HasComputedConstraint (..)
-    , P.HasComputedCors (..)
-    , P.HasComputedCpuPlatform (..)
-    , P.HasComputedCrc32c (..)
-    , P.HasComputedCreateTime (..)
-    , P.HasComputedCreateTimeout (..)
-    , P.HasComputedCreationTime (..)
-    , P.HasComputedCreationTimestamp (..)
-    , P.HasComputedCredentials (..)
-    , P.HasComputedCryptoKeyId (..)
-    , P.HasComputedCustomAttributes (..)
-    , P.HasComputedDatabaseVersion (..)
-    , P.HasComputedDatasetId (..)
-    , P.HasComputedDdl (..)
-    , P.HasComputedDefaultAcl (..)
-    , P.HasComputedDefaultService (..)
-    , P.HasComputedDefaultTableExpirationMs (..)
-    , P.HasComputedDeleted (..)
-    , P.HasComputedDeny (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedDestRange (..)
-    , P.HasComputedDestination (..)
-    , P.HasComputedDestinationRanges (..)
-    , P.HasComputedDetailedStatus (..)
-    , P.HasComputedDirection (..)
-    , P.HasComputedDisableOnDestroy (..)
-    , P.HasComputedDisableProject (..)
-    , P.HasComputedDisk (..)
-    , P.HasComputedDisk0DiskEncryptionKeySha256 (..)
-    , P.HasComputedDiskEncryptionKeyRaw (..)
-    , P.HasComputedDiskEncryptionKeySha256 (..)
-    , P.HasComputedDisplayName (..)
-    , P.HasComputedDnsAddress (..)
-    , P.HasComputedDnsName (..)
-    , P.HasComputedDriverControlsFilesUri (..)
-    , P.HasComputedDriverOutputResourceUri (..)
-    , P.HasComputedEmail (..)
-    , P.HasComputedEnableCdn (..)
-    , P.HasComputedEnableKubernetesAlpha (..)
-    , P.HasComputedEnableLegacyAbac (..)
-    , P.HasComputedEndpoint (..)
-    , P.HasComputedEndpoints (..)
-    , P.HasComputedEntryPoint (..)
-    , P.HasComputedEtag (..)
-    , P.HasComputedEventNotificationConfig (..)
-    , P.HasComputedEventTypes (..)
-    , P.HasComputedExpirationTime (..)
-    , P.HasComputedFailoverRatio (..)
-    , P.HasComputedFamily' (..)
-    , P.HasComputedFingerprint (..)
-    , P.HasComputedFolder (..)
-    , P.HasComputedFolderId (..)
-    , P.HasComputedForceDelete (..)
-    , P.HasComputedForceDestroy (..)
-    , P.HasComputedFriendlyName (..)
-    , P.HasComputedGatewayAddress (..)
-    , P.HasComputedGatewayIpv4 (..)
-    , P.HasComputedGrpcConfig (..)
-    , P.HasComputedGuestAccelerator (..)
-    , P.HasComputedHealthChecks (..)
-    , P.HasComputedHealthyThreshold (..)
-    , P.HasComputedHost (..)
-    , P.HasComputedHostProject (..)
-    , P.HasComputedHostRule (..)
-    , P.HasComputedHttpConfig (..)
-    , P.HasComputedHttpHealthCheck (..)
-    , P.HasComputedHttpsHealthCheck (..)
-    , P.HasComputedHttpsTriggerUrl (..)
-    , P.HasComputedIap (..)
-    , P.HasComputedId (..)
-    , P.HasComputedIkeVersion (..)
-    , P.HasComputedImage (..)
-    , P.HasComputedInitialNodeCount (..)
-    , P.HasComputedInstance' (..)
-    , P.HasComputedInstanceDescription (..)
-    , P.HasComputedInstanceGroup (..)
-    , P.HasComputedInstanceGroupUrls (..)
-    , P.HasComputedInstanceId (..)
-    , P.HasComputedInstanceName (..)
-    , P.HasComputedInstanceTemplate (..)
-    , P.HasComputedInstanceType (..)
-    , P.HasComputedInstances (..)
-    , P.HasComputedInterface (..)
-    , P.HasComputedIpAddress (..)
-    , P.HasComputedIpAddress0IpAddress (..)
-    , P.HasComputedIpAddress0TimeToRetire (..)
-    , P.HasComputedIpAllocationPolicy (..)
-    , P.HasComputedIpCidrRange (..)
-    , P.HasComputedIpProtocol (..)
-    , P.HasComputedIpRange (..)
-    , P.HasComputedIpVersion (..)
-    , P.HasComputedIpv4Range (..)
-    , P.HasComputedKey (..)
-    , P.HasComputedKeyAlgorithm (..)
-    , P.HasComputedKeyRing (..)
-    , P.HasComputedKeyRingId (..)
-    , P.HasComputedLabelFingerprint (..)
-    , P.HasComputedLabels (..)
-    , P.HasComputedLastModifiedTime (..)
-    , P.HasComputedLifecycleRule (..)
-    , P.HasComputedLifecycleState (..)
-    , P.HasComputedListPolicy (..)
-    , P.HasComputedLoadBalancingScheme (..)
-    , P.HasComputedLocalTrafficSelector (..)
-    , P.HasComputedLocation (..)
-    , P.HasComputedLogging (..)
-    , P.HasComputedLoggingService (..)
-    , P.HasComputedMachineType (..)
-    , P.HasComputedMaintenancePolicy (..)
-    , P.HasComputedMaintenancePolicy0DailyMaintenanceWindow0Duration (..)
-    , P.HasComputedManagedZone (..)
-    , P.HasComputedMapId (..)
-    , P.HasComputedMasterAuth (..)
-    , P.HasComputedMasterAuth0ClientCertificate (..)
-    , P.HasComputedMasterAuth0ClientKey (..)
-    , P.HasComputedMasterAuth0ClusterCaCertificate (..)
-    , P.HasComputedMasterAuthorizedNetworksConfig (..)
-    , P.HasComputedMasterInstanceName (..)
-    , P.HasComputedMasterVersion (..)
-    , P.HasComputedMaxWorkers (..)
-    , P.HasComputedMd5hash (..)
-    , P.HasComputedMember (..)
-    , P.HasComputedMembers (..)
-    , P.HasComputedMetadata (..)
-    , P.HasComputedMetadataFingerprint (..)
-    , P.HasComputedMetadataStartupScript (..)
-    , P.HasComputedMinCpuPlatform (..)
-    , P.HasComputedMinMasterVersion (..)
-    , P.HasComputedMonitoringService (..)
-    , P.HasComputedMqttConfig (..)
-    , P.HasComputedName (..)
-    , P.HasComputedNamePrefix (..)
-    , P.HasComputedNameServers (..)
-    , P.HasComputedNamedPort (..)
-    , P.HasComputedNetwork (..)
-    , P.HasComputedNetworkInterface (..)
-    , P.HasComputedNetworkInterface0AccessConfig0AssignedNatIp (..)
-    , P.HasComputedNetworkInterface0Address (..)
-    , P.HasComputedNetworkPolicy (..)
-    , P.HasComputedNextHopGateway (..)
-    , P.HasComputedNextHopInstance (..)
-    , P.HasComputedNextHopInstanceZone (..)
-    , P.HasComputedNextHopIp (..)
-    , P.HasComputedNextHopNetwork (..)
-    , P.HasComputedNextHopVpnTunnel (..)
-    , P.HasComputedNodeConfig (..)
-    , P.HasComputedNodePool (..)
-    , P.HasComputedNodeVersion (..)
-    , P.HasComputedNumBytes (..)
-    , P.HasComputedNumLongTermBytes (..)
-    , P.HasComputedNumNodes (..)
-    , P.HasComputedNumRows (..)
-    , P.HasComputedNumber (..)
-    , P.HasComputedObject (..)
-    , P.HasComputedObjectNamePrefix (..)
-    , P.HasComputedOnDelete (..)
-    , P.HasComputedOpenapiConfig (..)
-    , P.HasComputedOrgId (..)
-    , P.HasComputedParameters (..)
-    , P.HasComputedParent (..)
-    , P.HasComputedPassword (..)
-    , P.HasComputedPath (..)
-    , P.HasComputedPathMatcher (..)
-    , P.HasComputedPayloadFormat (..)
-    , P.HasComputedPeerAsn (..)
-    , P.HasComputedPeerIp (..)
-    , P.HasComputedPeerIpAddress (..)
-    , P.HasComputedPeerNetwork (..)
-    , P.HasComputedPermissions (..)
-    , P.HasComputedPgpKey (..)
-    , P.HasComputedPlacement (..)
-    , P.HasComputedPolicyData (..)
-    , P.HasComputedPolicyEtag (..)
-    , P.HasComputedPort (..)
-    , P.HasComputedPortName (..)
-    , P.HasComputedPortRange (..)
-    , P.HasComputedPorts (..)
-    , P.HasComputedPredefinedAcl (..)
-    , P.HasComputedPrefix (..)
-    , P.HasComputedPriority (..)
-    , P.HasComputedPrivateIpGoogleAccess (..)
-    , P.HasComputedPrivateKey (..)
-    , P.HasComputedPrivateKeyEncrypted (..)
-    , P.HasComputedPrivateKeyFingerprint (..)
-    , P.HasComputedPrivateKeyType (..)
-    , P.HasComputedProject (..)
-    , P.HasComputedProjectId (..)
-    , P.HasComputedProtocOutput (..)
-    , P.HasComputedProtocol (..)
-    , P.HasComputedProxyHeader (..)
-    , P.HasComputedProxyId (..)
-    , P.HasComputedPublicKey (..)
-    , P.HasComputedPublicKeyType (..)
-    , P.HasComputedPushConfig (..)
-    , P.HasComputedRawDisk (..)
-    , P.HasComputedReference0ClusterUuid (..)
-    , P.HasComputedRegion (..)
-    , P.HasComputedRemoteTrafficSelector (..)
-    , P.HasComputedReplicaConfiguration (..)
-    , P.HasComputedRequestPath (..)
-    , P.HasComputedRestorePolicy (..)
-    , P.HasComputedRole (..)
-    , P.HasComputedRoleEntity (..)
-    , P.HasComputedRoleId (..)
-    , P.HasComputedRotationPeriod (..)
-    , P.HasComputedRouter (..)
-    , P.HasComputedRoutingMode (..)
-    , P.HasComputedRrdatas (..)
-    , P.HasComputedScheduling (..)
-    , P.HasComputedSchema (..)
-    , P.HasComputedScratchDisk (..)
-    , P.HasComputedSecondaryIpRange (..)
-    , P.HasComputedSelfLink (..)
-    , P.HasComputedService (..)
-    , P.HasComputedServiceAccount (..)
-    , P.HasComputedServiceAccountId (..)
-    , P.HasComputedServiceName (..)
-    , P.HasComputedServiceProject (..)
-    , P.HasComputedServices (..)
-    , P.HasComputedSessionAffinity (..)
-    , P.HasComputedSettings (..)
-    , P.HasComputedSettingsVersion (..)
-    , P.HasComputedSharedSecret (..)
-    , P.HasComputedSize (..)
-    , P.HasComputedSkipDelete (..)
-    , P.HasComputedSnapshot (..)
-    , P.HasComputedSnapshotEncryptionKeyRaw (..)
-    , P.HasComputedSnapshotEncryptionKeySha256 (..)
-    , P.HasComputedSourceArchiveBucket (..)
-    , P.HasComputedSourceArchiveObject (..)
-    , P.HasComputedSourceDisk (..)
-    , P.HasComputedSourceDiskEncryptionKeyRaw (..)
-    , P.HasComputedSourceDiskEncryptionKeySha256 (..)
-    , P.HasComputedSourceDiskLink (..)
-    , P.HasComputedSourceRanges (..)
-    , P.HasComputedSourceServiceAccounts (..)
-    , P.HasComputedSourceTags (..)
-    , P.HasComputedSplitKeys (..)
-    , P.HasComputedSslCertificates (..)
-    , P.HasComputedSslHealthCheck (..)
-    , P.HasComputedStage (..)
-    , P.HasComputedState (..)
-    , P.HasComputedStateDetails (..)
-    , P.HasComputedStateNotificationConfig (..)
-    , P.HasComputedStatus0Details (..)
-    , P.HasComputedStatus0State (..)
-    , P.HasComputedStatus0StateStartTime (..)
-    , P.HasComputedStatus0Substate (..)
-    , P.HasComputedStorageClass (..)
-    , P.HasComputedStorageType (..)
-    , P.HasComputedSubnetwork (..)
-    , P.HasComputedTableId (..)
-    , P.HasComputedTags (..)
-    , P.HasComputedTagsFingerprint (..)
-    , P.HasComputedTarget (..)
-    , P.HasComputedTargetPools (..)
-    , P.HasComputedTargetServiceAccounts (..)
-    , P.HasComputedTargetSize (..)
-    , P.HasComputedTargetTags (..)
-    , P.HasComputedTargetVpnGateway (..)
-    , P.HasComputedTcpHealthCheck (..)
-    , P.HasComputedTempGcsLocation (..)
-    , P.HasComputedTemplateGcsPath (..)
-    , P.HasComputedTest (..)
-    , P.HasComputedText (..)
-    , P.HasComputedTimePartitioning (..)
-    , P.HasComputedTimeout (..)
-    , P.HasComputedTimeoutSec (..)
-    , P.HasComputedTitle (..)
-    , P.HasComputedTopic (..)
-    , P.HasComputedTriggerBucket (..)
-    , P.HasComputedTriggerHttp (..)
-    , P.HasComputedTriggerTopic (..)
-    , P.HasComputedTtl (..)
-    , P.HasComputedType' (..)
-    , P.HasComputedUnhealthyThreshold (..)
-    , P.HasComputedUniqueId (..)
-    , P.HasComputedUpdateStrategy (..)
-    , P.HasComputedUpdateTime (..)
-    , P.HasComputedUrl (..)
-    , P.HasComputedUrlMap (..)
-    , P.HasComputedUsers (..)
-    , P.HasComputedValidAfter (..)
-    , P.HasComputedValidBefore (..)
-    , P.HasComputedValue (..)
-    , P.HasComputedVersion (..)
-    , P.HasComputedVersioning (..)
-    , P.HasComputedView (..)
-    , P.HasComputedVpnTunnel (..)
-    , P.HasComputedWebsite (..)
-    , P.HasComputedWriterIdentity (..)
-    , P.HasComputedXxxConfig (..)
-    , P.HasComputedZone (..)
+    , P.HasComputeAccountId (..)
+    , P.HasComputeAckDeadlineSeconds (..)
+    , P.HasComputeAdditionalZones (..)
+    , P.HasComputeAddonsConfig (..)
+    , P.HasComputeAddress (..)
+    , P.HasComputeAddressType (..)
+    , P.HasComputeAdvertisedRoutePriority (..)
+    , P.HasComputeAllow (..)
+    , P.HasComputeAllowStoppingForUpdate (..)
+    , P.HasComputeApis (..)
+    , P.HasComputeAttachedDisk (..)
+    , P.HasComputeAttachedDisk0DiskEncryptionKeySha256 (..)
+    , P.HasComputeAuthoritative (..)
+    , P.HasComputeAutoCreateRoutes (..)
+    , P.HasComputeAutoCreateSubnetworks (..)
+    , P.HasComputeAutoHealingPolicies (..)
+    , P.HasComputeAutoscalingPolicy (..)
+    , P.HasComputeAvailableMemoryMb (..)
+    , P.HasComputeBackend (..)
+    , P.HasComputeBackendService (..)
+    , P.HasComputeBackupPool (..)
+    , P.HasComputeBaseInstanceName (..)
+    , P.HasComputeBgp (..)
+    , P.HasComputeBillingAccount (..)
+    , P.HasComputeBooleanPolicy (..)
+    , P.HasComputeBootDisk (..)
+    , P.HasComputeBootDiskDiskEncryptionKeySha256 (..)
+    , P.HasComputeBucket (..)
+    , P.HasComputeBucketName (..)
+    , P.HasComputeCanIpForward (..)
+    , P.HasComputeCertificate (..)
+    , P.HasComputeCertificateId (..)
+    , P.HasComputeCharset (..)
+    , P.HasComputeCheckIntervalSec (..)
+    , P.HasComputeClusterConfig (..)
+    , P.HasComputeClusterConfigBucket (..)
+    , P.HasComputeClusterConfigMasterConfigInstanceNames (..)
+    , P.HasComputeClusterConfigPreemptibleWorkerConfigInstanceNames (..)
+    , P.HasComputeClusterConfigSoftwareConfigProperties (..)
+    , P.HasComputeClusterConfigWorkerConfigInstanceNames (..)
+    , P.HasComputeClusterId (..)
+    , P.HasComputeClusterIpv4Cidr (..)
+    , P.HasComputeCollation (..)
+    , P.HasComputeConfig (..)
+    , P.HasComputeConfigId (..)
+    , P.HasComputeConnectionDrainingTimeoutSec (..)
+    , P.HasComputeConnectionName (..)
+    , P.HasComputeConstraint (..)
+    , P.HasComputeCors (..)
+    , P.HasComputeCpuPlatform (..)
+    , P.HasComputeCrc32c (..)
+    , P.HasComputeCreateTime (..)
+    , P.HasComputeCreateTimeout (..)
+    , P.HasComputeCreationTime (..)
+    , P.HasComputeCreationTimestamp (..)
+    , P.HasComputeCredentials (..)
+    , P.HasComputeCryptoKeyId (..)
+    , P.HasComputeCustomAttributes (..)
+    , P.HasComputeDatabaseVersion (..)
+    , P.HasComputeDatasetId (..)
+    , P.HasComputeDdl (..)
+    , P.HasComputeDefaultAcl (..)
+    , P.HasComputeDefaultService (..)
+    , P.HasComputeDefaultTableExpirationMs (..)
+    , P.HasComputeDeleted (..)
+    , P.HasComputeDeny (..)
+    , P.HasComputeDescription (..)
+    , P.HasComputeDestRange (..)
+    , P.HasComputeDestination (..)
+    , P.HasComputeDestinationRanges (..)
+    , P.HasComputeDetailedStatus (..)
+    , P.HasComputeDirection (..)
+    , P.HasComputeDisableOnDestroy (..)
+    , P.HasComputeDisableProject (..)
+    , P.HasComputeDisk (..)
+    , P.HasComputeDisk0DiskEncryptionKeySha256 (..)
+    , P.HasComputeDiskEncryptionKeyRaw (..)
+    , P.HasComputeDiskEncryptionKeySha256 (..)
+    , P.HasComputeDisplayName (..)
+    , P.HasComputeDnsAddress (..)
+    , P.HasComputeDnsName (..)
+    , P.HasComputeDriverControlsFilesUri (..)
+    , P.HasComputeDriverOutputResourceUri (..)
+    , P.HasComputeEmail (..)
+    , P.HasComputeEnableCdn (..)
+    , P.HasComputeEnableKubernetesAlpha (..)
+    , P.HasComputeEnableLegacyAbac (..)
+    , P.HasComputeEndpoint (..)
+    , P.HasComputeEndpoints (..)
+    , P.HasComputeEntryPoint (..)
+    , P.HasComputeEtag (..)
+    , P.HasComputeEventNotificationConfig (..)
+    , P.HasComputeEventTypes (..)
+    , P.HasComputeExpirationTime (..)
+    , P.HasComputeFailoverRatio (..)
+    , P.HasComputeFamily' (..)
+    , P.HasComputeFingerprint (..)
+    , P.HasComputeFolder (..)
+    , P.HasComputeFolderId (..)
+    , P.HasComputeForceDelete (..)
+    , P.HasComputeForceDestroy (..)
+    , P.HasComputeFriendlyName (..)
+    , P.HasComputeGatewayAddress (..)
+    , P.HasComputeGatewayIpv4 (..)
+    , P.HasComputeGrpcConfig (..)
+    , P.HasComputeGuestAccelerator (..)
+    , P.HasComputeHealthChecks (..)
+    , P.HasComputeHealthyThreshold (..)
+    , P.HasComputeHost (..)
+    , P.HasComputeHostProject (..)
+    , P.HasComputeHostRule (..)
+    , P.HasComputeHttpConfig (..)
+    , P.HasComputeHttpHealthCheck (..)
+    , P.HasComputeHttpsHealthCheck (..)
+    , P.HasComputeHttpsTriggerUrl (..)
+    , P.HasComputeIap (..)
+    , P.HasComputeId (..)
+    , P.HasComputeIkeVersion (..)
+    , P.HasComputeImage (..)
+    , P.HasComputeInitialNodeCount (..)
+    , P.HasComputeInstance' (..)
+    , P.HasComputeInstanceDescription (..)
+    , P.HasComputeInstanceGroup (..)
+    , P.HasComputeInstanceGroupUrls (..)
+    , P.HasComputeInstanceId (..)
+    , P.HasComputeInstanceName (..)
+    , P.HasComputeInstanceTemplate (..)
+    , P.HasComputeInstanceType (..)
+    , P.HasComputeInstances (..)
+    , P.HasComputeInterface (..)
+    , P.HasComputeIpAddress (..)
+    , P.HasComputeIpAddress0IpAddress (..)
+    , P.HasComputeIpAddress0TimeToRetire (..)
+    , P.HasComputeIpAllocationPolicy (..)
+    , P.HasComputeIpCidrRange (..)
+    , P.HasComputeIpProtocol (..)
+    , P.HasComputeIpRange (..)
+    , P.HasComputeIpVersion (..)
+    , P.HasComputeIpv4Range (..)
+    , P.HasComputeKey (..)
+    , P.HasComputeKeyAlgorithm (..)
+    , P.HasComputeKeyRing (..)
+    , P.HasComputeKeyRingId (..)
+    , P.HasComputeLabelFingerprint (..)
+    , P.HasComputeLabels (..)
+    , P.HasComputeLastModifiedTime (..)
+    , P.HasComputeLifecycleRule (..)
+    , P.HasComputeLifecycleState (..)
+    , P.HasComputeListPolicy (..)
+    , P.HasComputeLoadBalancingScheme (..)
+    , P.HasComputeLocalTrafficSelector (..)
+    , P.HasComputeLocation (..)
+    , P.HasComputeLogging (..)
+    , P.HasComputeLoggingService (..)
+    , P.HasComputeMachineType (..)
+    , P.HasComputeMaintenancePolicy (..)
+    , P.HasComputeMaintenancePolicy0DailyMaintenanceWindow0Duration (..)
+    , P.HasComputeManagedZone (..)
+    , P.HasComputeMapId (..)
+    , P.HasComputeMasterAuth (..)
+    , P.HasComputeMasterAuth0ClientCertificate (..)
+    , P.HasComputeMasterAuth0ClientKey (..)
+    , P.HasComputeMasterAuth0ClusterCaCertificate (..)
+    , P.HasComputeMasterAuthorizedNetworksConfig (..)
+    , P.HasComputeMasterInstanceName (..)
+    , P.HasComputeMasterVersion (..)
+    , P.HasComputeMaxWorkers (..)
+    , P.HasComputeMd5hash (..)
+    , P.HasComputeMember (..)
+    , P.HasComputeMembers (..)
+    , P.HasComputeMetadata (..)
+    , P.HasComputeMetadataFingerprint (..)
+    , P.HasComputeMetadataStartupScript (..)
+    , P.HasComputeMinCpuPlatform (..)
+    , P.HasComputeMinMasterVersion (..)
+    , P.HasComputeMonitoringService (..)
+    , P.HasComputeMqttConfig (..)
+    , P.HasComputeName (..)
+    , P.HasComputeNamePrefix (..)
+    , P.HasComputeNameServers (..)
+    , P.HasComputeNamedPort (..)
+    , P.HasComputeNetwork (..)
+    , P.HasComputeNetworkInterface (..)
+    , P.HasComputeNetworkInterface0AccessConfig0AssignedNatIp (..)
+    , P.HasComputeNetworkInterface0Address (..)
+    , P.HasComputeNetworkPolicy (..)
+    , P.HasComputeNextHopGateway (..)
+    , P.HasComputeNextHopInstance (..)
+    , P.HasComputeNextHopInstanceZone (..)
+    , P.HasComputeNextHopIp (..)
+    , P.HasComputeNextHopNetwork (..)
+    , P.HasComputeNextHopVpnTunnel (..)
+    , P.HasComputeNodeConfig (..)
+    , P.HasComputeNodePool (..)
+    , P.HasComputeNodeVersion (..)
+    , P.HasComputeNumBytes (..)
+    , P.HasComputeNumLongTermBytes (..)
+    , P.HasComputeNumNodes (..)
+    , P.HasComputeNumRows (..)
+    , P.HasComputeNumber (..)
+    , P.HasComputeObject (..)
+    , P.HasComputeObjectNamePrefix (..)
+    , P.HasComputeOnDelete (..)
+    , P.HasComputeOpenapiConfig (..)
+    , P.HasComputeOrgId (..)
+    , P.HasComputeParameters (..)
+    , P.HasComputeParent (..)
+    , P.HasComputePassword (..)
+    , P.HasComputePath (..)
+    , P.HasComputePathMatcher (..)
+    , P.HasComputePayloadFormat (..)
+    , P.HasComputePeerAsn (..)
+    , P.HasComputePeerIp (..)
+    , P.HasComputePeerIpAddress (..)
+    , P.HasComputePeerNetwork (..)
+    , P.HasComputePermissions (..)
+    , P.HasComputePgpKey (..)
+    , P.HasComputePlacement (..)
+    , P.HasComputePolicyData (..)
+    , P.HasComputePolicyEtag (..)
+    , P.HasComputePort (..)
+    , P.HasComputePortName (..)
+    , P.HasComputePortRange (..)
+    , P.HasComputePorts (..)
+    , P.HasComputePredefinedAcl (..)
+    , P.HasComputePrefix (..)
+    , P.HasComputePriority (..)
+    , P.HasComputePrivateIpGoogleAccess (..)
+    , P.HasComputePrivateKey (..)
+    , P.HasComputePrivateKeyEncrypted (..)
+    , P.HasComputePrivateKeyFingerprint (..)
+    , P.HasComputePrivateKeyType (..)
+    , P.HasComputeProject (..)
+    , P.HasComputeProjectId (..)
+    , P.HasComputeProtocOutput (..)
+    , P.HasComputeProtocol (..)
+    , P.HasComputeProxyHeader (..)
+    , P.HasComputeProxyId (..)
+    , P.HasComputePublicKey (..)
+    , P.HasComputePublicKeyType (..)
+    , P.HasComputePushConfig (..)
+    , P.HasComputeRawDisk (..)
+    , P.HasComputeReference0ClusterUuid (..)
+    , P.HasComputeRegion (..)
+    , P.HasComputeRemoteTrafficSelector (..)
+    , P.HasComputeReplicaConfiguration (..)
+    , P.HasComputeRequestPath (..)
+    , P.HasComputeRestorePolicy (..)
+    , P.HasComputeRole (..)
+    , P.HasComputeRoleEntity (..)
+    , P.HasComputeRoleId (..)
+    , P.HasComputeRotationPeriod (..)
+    , P.HasComputeRouter (..)
+    , P.HasComputeRoutingMode (..)
+    , P.HasComputeRrdatas (..)
+    , P.HasComputeScheduling (..)
+    , P.HasComputeSchema (..)
+    , P.HasComputeScratchDisk (..)
+    , P.HasComputeSecondaryIpRange (..)
+    , P.HasComputeSelfLink (..)
+    , P.HasComputeService (..)
+    , P.HasComputeServiceAccount (..)
+    , P.HasComputeServiceAccountId (..)
+    , P.HasComputeServiceName (..)
+    , P.HasComputeServiceProject (..)
+    , P.HasComputeServices (..)
+    , P.HasComputeSessionAffinity (..)
+    , P.HasComputeSettings (..)
+    , P.HasComputeSettingsVersion (..)
+    , P.HasComputeSharedSecret (..)
+    , P.HasComputeSize (..)
+    , P.HasComputeSkipDelete (..)
+    , P.HasComputeSnapshot (..)
+    , P.HasComputeSnapshotEncryptionKeyRaw (..)
+    , P.HasComputeSnapshotEncryptionKeySha256 (..)
+    , P.HasComputeSourceArchiveBucket (..)
+    , P.HasComputeSourceArchiveObject (..)
+    , P.HasComputeSourceDisk (..)
+    , P.HasComputeSourceDiskEncryptionKeyRaw (..)
+    , P.HasComputeSourceDiskEncryptionKeySha256 (..)
+    , P.HasComputeSourceDiskLink (..)
+    , P.HasComputeSourceRanges (..)
+    , P.HasComputeSourceServiceAccounts (..)
+    , P.HasComputeSourceTags (..)
+    , P.HasComputeSplitKeys (..)
+    , P.HasComputeSslCertificates (..)
+    , P.HasComputeSslHealthCheck (..)
+    , P.HasComputeStage (..)
+    , P.HasComputeState (..)
+    , P.HasComputeStateDetails (..)
+    , P.HasComputeStateNotificationConfig (..)
+    , P.HasComputeStatus0Details (..)
+    , P.HasComputeStatus0State (..)
+    , P.HasComputeStatus0StateStartTime (..)
+    , P.HasComputeStatus0Substate (..)
+    , P.HasComputeStorageClass (..)
+    , P.HasComputeStorageType (..)
+    , P.HasComputeSubnetwork (..)
+    , P.HasComputeTableId (..)
+    , P.HasComputeTags (..)
+    , P.HasComputeTagsFingerprint (..)
+    , P.HasComputeTarget (..)
+    , P.HasComputeTargetPools (..)
+    , P.HasComputeTargetServiceAccounts (..)
+    , P.HasComputeTargetSize (..)
+    , P.HasComputeTargetTags (..)
+    , P.HasComputeTargetVpnGateway (..)
+    , P.HasComputeTcpHealthCheck (..)
+    , P.HasComputeTempGcsLocation (..)
+    , P.HasComputeTemplateGcsPath (..)
+    , P.HasComputeTest (..)
+    , P.HasComputeText (..)
+    , P.HasComputeTimePartitioning (..)
+    , P.HasComputeTimeout (..)
+    , P.HasComputeTimeoutSec (..)
+    , P.HasComputeTitle (..)
+    , P.HasComputeTopic (..)
+    , P.HasComputeTriggerBucket (..)
+    , P.HasComputeTriggerHttp (..)
+    , P.HasComputeTriggerTopic (..)
+    , P.HasComputeTtl (..)
+    , P.HasComputeType' (..)
+    , P.HasComputeUnhealthyThreshold (..)
+    , P.HasComputeUniqueId (..)
+    , P.HasComputeUpdateStrategy (..)
+    , P.HasComputeUpdateTime (..)
+    , P.HasComputeUrl (..)
+    , P.HasComputeUrlMap (..)
+    , P.HasComputeUsers (..)
+    , P.HasComputeValidAfter (..)
+    , P.HasComputeValidBefore (..)
+    , P.HasComputeValue (..)
+    , P.HasComputeVersion (..)
+    , P.HasComputeVersioning (..)
+    , P.HasComputeView (..)
+    , P.HasComputeVpnTunnel (..)
+    , P.HasComputeWebsite (..)
+    , P.HasComputeWriterIdentity (..)
+    , P.HasComputeXxxConfig (..)
+    , P.HasComputeZone (..)
 
     -- * Re-exported Types
     , module P
@@ -941,13 +941,76 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
+{- | The @IAMpolicyforGooglestoragebucket@ Google resource.
+
+Two different resources help you manage your IAM policy for storage bucket.
+Each of these resources serves a different use case:
+-}
+data Resource s = Resource {
+      _bucket :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the bucket it applies to. -}
+    , _members :: !(TF.Attr s P.Text)
+    {- ^ (Required) Identities that will be granted the privilege in @role@ . Each entry can have one of the following values: -}
+    , _role :: !(TF.Attr s P.Text)
+    {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (Resource s) where
+    toHCL Resource{..} = TF.inline $ catMaybes
+        [ TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "member/members" <$> TF.attribute _members
+        , TF.assign "role" <$> TF.attribute _role
+        ]
+
+instance P.HasBucket (Resource s) (TF.Attr s P.Text) where
+    bucket =
+        lens (_bucket :: Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _bucket = a } :: Resource s)
+
+instance P.HasMembers (Resource s) (TF.Attr s P.Text) where
+    members =
+        lens (_members :: Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _members = a } :: Resource s)
+
+instance P.HasRole (Resource s) (TF.Attr s P.Text) where
+    role =
+        lens (_role :: Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: Resource s)
+
+instance s ~ s' => P.HasComputeBucket (TF.Ref s' (Resource s)) (TF.Attr s P.Text) where
+    computeBucket =
+        (_bucket :: Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (Resource s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
+
+instance s ~ s' => P.HasComputeMembers (TF.Ref s' (Resource s)) (TF.Attr s P.Text) where
+    computeMembers =
+        (_members :: Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeRole (TF.Ref s' (Resource s)) (TF.Attr s P.Text) where
+    computeRole =
+        (_role :: Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resource :: TF.Resource P.Google (Resource s)
+resource =
+    TF.newResource "IAMpolicyforGooglestoragebucket" $
+        Resource {
+              _bucket = TF.Nil
+            , _members = TF.Nil
+            , _role = TF.Nil
+            }
+
 {- | The @google_bigquery_dataset@ Google resource.
 
 Creates a dataset resource for Google BigQuery. For more information see
 <https://cloud.google.com/bigquery/docs/> and
 <https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets> .
 -}
-data BigqueryDatasetResource s = BigqueryDatasetResource {
+data ResourceBigqueryDataset s = ResourceBigqueryDataset {
       _dataset_id :: !(TF.Attr s P.Text)
     {- ^ (Required) A unique ID for the resource. Changing this forces a new resource to be created. -}
     , _default_table_expiration_ms :: !(TF.Attr s P.Text)
@@ -964,8 +1027,8 @@ data BigqueryDatasetResource s = BigqueryDatasetResource {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BigqueryDatasetResource s) where
-    toHCL BigqueryDatasetResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceBigqueryDataset s) where
+    toHCL ResourceBigqueryDataset{..} = TF.inline $ catMaybes
         [ TF.assign "dataset_id" <$> TF.attribute _dataset_id
         , TF.assign "default_table_expiration_ms" <$> TF.attribute _default_table_expiration_ms
         , TF.assign "description" <$> TF.attribute _description
@@ -975,92 +1038,92 @@ instance TF.ToHCL (BigqueryDatasetResource s) where
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasDatasetId (BigqueryDatasetResource s) (TF.Attr s P.Text) where
+instance P.HasDatasetId (ResourceBigqueryDataset s) (TF.Attr s P.Text) where
     datasetId =
-        lens (_dataset_id :: BigqueryDatasetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dataset_id = a } :: BigqueryDatasetResource s)
+        lens (_dataset_id :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
+             (\s a -> s { _dataset_id = a } :: ResourceBigqueryDataset s)
 
-instance P.HasDefaultTableExpirationMs (BigqueryDatasetResource s) (TF.Attr s P.Text) where
+instance P.HasDefaultTableExpirationMs (ResourceBigqueryDataset s) (TF.Attr s P.Text) where
     defaultTableExpirationMs =
-        lens (_default_table_expiration_ms :: BigqueryDatasetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _default_table_expiration_ms = a } :: BigqueryDatasetResource s)
+        lens (_default_table_expiration_ms :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
+             (\s a -> s { _default_table_expiration_ms = a } :: ResourceBigqueryDataset s)
 
-instance P.HasDescription (BigqueryDatasetResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceBigqueryDataset s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: BigqueryDatasetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: BigqueryDatasetResource s)
+        lens (_description :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceBigqueryDataset s)
 
-instance P.HasFriendlyName (BigqueryDatasetResource s) (TF.Attr s P.Text) where
+instance P.HasFriendlyName (ResourceBigqueryDataset s) (TF.Attr s P.Text) where
     friendlyName =
-        lens (_friendly_name :: BigqueryDatasetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _friendly_name = a } :: BigqueryDatasetResource s)
+        lens (_friendly_name :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
+             (\s a -> s { _friendly_name = a } :: ResourceBigqueryDataset s)
 
-instance P.HasLabels (BigqueryDatasetResource s) (TF.Attr s P.Text) where
+instance P.HasLabels (ResourceBigqueryDataset s) (TF.Attr s P.Text) where
     labels =
-        lens (_labels :: BigqueryDatasetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: BigqueryDatasetResource s)
+        lens (_labels :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceBigqueryDataset s)
 
-instance P.HasLocation (BigqueryDatasetResource s) (TF.Attr s P.Text) where
+instance P.HasLocation (ResourceBigqueryDataset s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: BigqueryDatasetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: BigqueryDatasetResource s)
+        lens (_location :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
+             (\s a -> s { _location = a } :: ResourceBigqueryDataset s)
 
-instance P.HasProject (BigqueryDatasetResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceBigqueryDataset s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: BigqueryDatasetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: BigqueryDatasetResource s)
+        lens (_project :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceBigqueryDataset s)
 
-instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
+instance s ~ s' => P.HasComputeCreationTime (TF.Ref s' (ResourceBigqueryDataset s)) (TF.Attr s P.Text) where
+    computeCreationTime x = TF.compute (TF.refKey x) "creation_time"
 
-instance s ~ s' => P.HasComputedDatasetId (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedDatasetId =
-        (_dataset_id :: BigqueryDatasetResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDatasetId (TF.Ref s' (ResourceBigqueryDataset s)) (TF.Attr s P.Text) where
+    computeDatasetId =
+        (_dataset_id :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDefaultTableExpirationMs (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedDefaultTableExpirationMs =
-        (_default_table_expiration_ms :: BigqueryDatasetResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDefaultTableExpirationMs (TF.Ref s' (ResourceBigqueryDataset s)) (TF.Attr s P.Text) where
+    computeDefaultTableExpirationMs =
+        (_default_table_expiration_ms :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: BigqueryDatasetResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceBigqueryDataset s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceBigqueryDataset s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
 
-instance s ~ s' => P.HasComputedFriendlyName (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedFriendlyName =
-        (_friendly_name :: BigqueryDatasetResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFriendlyName (TF.Ref s' (ResourceBigqueryDataset s)) (TF.Attr s P.Text) where
+    computeFriendlyName =
+        (_friendly_name :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: BigqueryDatasetResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceBigqueryDataset s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLastModifiedTime (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedLastModifiedTime x = TF.compute (TF.refKey x) "last_modified_time"
+instance s ~ s' => P.HasComputeLastModifiedTime (TF.Ref s' (ResourceBigqueryDataset s)) (TF.Attr s P.Text) where
+    computeLastModifiedTime x = TF.compute (TF.refKey x) "last_modified_time"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedLocation =
-        (_location :: BigqueryDatasetResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLocation (TF.Ref s' (ResourceBigqueryDataset s)) (TF.Attr s P.Text) where
+    computeLocation =
+        (_location :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: BigqueryDatasetResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceBigqueryDataset s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceBigqueryDataset s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceBigqueryDataset s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-bigqueryDatasetResource :: TF.Resource P.Google (BigqueryDatasetResource s)
-bigqueryDatasetResource =
+resourceBigqueryDataset :: TF.Resource P.Google (ResourceBigqueryDataset s)
+resourceBigqueryDataset =
     TF.newResource "google_bigquery_dataset" $
-        BigqueryDatasetResource {
+        ResourceBigqueryDataset {
               _dataset_id = TF.Nil
             , _default_table_expiration_ms = TF.Nil
             , _description = TF.Nil
@@ -1076,7 +1139,7 @@ Creates a table resource in a dataset for Google BigQuery. For more
 information see <https://cloud.google.com/bigquery/docs/> and
 <https://cloud.google.com/bigquery/docs/reference/rest/v2/tables> .
 -}
-data BigqueryTableResource s = BigqueryTableResource {
+data ResourceBigqueryTable s = ResourceBigqueryTable {
       _dataset_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The dataset ID to create the table in. Changing this forces a new resource to be created. -}
     , _description :: !(TF.Attr s P.Text)
@@ -1099,8 +1162,8 @@ data BigqueryTableResource s = BigqueryTableResource {
     {- ^ (Optional) If specified, configures this table as a view. Structure is documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BigqueryTableResource s) where
-    toHCL BigqueryTableResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceBigqueryTable s) where
+    toHCL ResourceBigqueryTable{..} = TF.inline $ catMaybes
         [ TF.assign "dataset_id" <$> TF.attribute _dataset_id
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "expiration_time" <$> TF.attribute _expiration_time
@@ -1113,137 +1176,137 @@ instance TF.ToHCL (BigqueryTableResource s) where
         , TF.assign "view" <$> TF.attribute _view
         ]
 
-instance P.HasDatasetId (BigqueryTableResource s) (TF.Attr s P.Text) where
+instance P.HasDatasetId (ResourceBigqueryTable s) (TF.Attr s P.Text) where
     datasetId =
-        lens (_dataset_id :: BigqueryTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dataset_id = a } :: BigqueryTableResource s)
+        lens (_dataset_id :: ResourceBigqueryTable s -> TF.Attr s P.Text)
+             (\s a -> s { _dataset_id = a } :: ResourceBigqueryTable s)
 
-instance P.HasDescription (BigqueryTableResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceBigqueryTable s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: BigqueryTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: BigqueryTableResource s)
+        lens (_description :: ResourceBigqueryTable s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceBigqueryTable s)
 
-instance P.HasExpirationTime (BigqueryTableResource s) (TF.Attr s P.Text) where
+instance P.HasExpirationTime (ResourceBigqueryTable s) (TF.Attr s P.Text) where
     expirationTime =
-        lens (_expiration_time :: BigqueryTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _expiration_time = a } :: BigqueryTableResource s)
+        lens (_expiration_time :: ResourceBigqueryTable s -> TF.Attr s P.Text)
+             (\s a -> s { _expiration_time = a } :: ResourceBigqueryTable s)
 
-instance P.HasFriendlyName (BigqueryTableResource s) (TF.Attr s P.Text) where
+instance P.HasFriendlyName (ResourceBigqueryTable s) (TF.Attr s P.Text) where
     friendlyName =
-        lens (_friendly_name :: BigqueryTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _friendly_name = a } :: BigqueryTableResource s)
+        lens (_friendly_name :: ResourceBigqueryTable s -> TF.Attr s P.Text)
+             (\s a -> s { _friendly_name = a } :: ResourceBigqueryTable s)
 
-instance P.HasLabels (BigqueryTableResource s) (TF.Attr s P.Text) where
+instance P.HasLabels (ResourceBigqueryTable s) (TF.Attr s P.Text) where
     labels =
-        lens (_labels :: BigqueryTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: BigqueryTableResource s)
+        lens (_labels :: ResourceBigqueryTable s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceBigqueryTable s)
 
-instance P.HasProject (BigqueryTableResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceBigqueryTable s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: BigqueryTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: BigqueryTableResource s)
+        lens (_project :: ResourceBigqueryTable s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceBigqueryTable s)
 
-instance P.HasSchema (BigqueryTableResource s) (TF.Attr s P.Text) where
+instance P.HasSchema (ResourceBigqueryTable s) (TF.Attr s P.Text) where
     schema =
-        lens (_schema :: BigqueryTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _schema = a } :: BigqueryTableResource s)
+        lens (_schema :: ResourceBigqueryTable s -> TF.Attr s P.Text)
+             (\s a -> s { _schema = a } :: ResourceBigqueryTable s)
 
-instance P.HasTableId (BigqueryTableResource s) (TF.Attr s P.Text) where
+instance P.HasTableId (ResourceBigqueryTable s) (TF.Attr s P.Text) where
     tableId =
-        lens (_table_id :: BigqueryTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _table_id = a } :: BigqueryTableResource s)
+        lens (_table_id :: ResourceBigqueryTable s -> TF.Attr s P.Text)
+             (\s a -> s { _table_id = a } :: ResourceBigqueryTable s)
 
-instance P.HasTimePartitioning (BigqueryTableResource s) (TF.Attr s P.Text) where
+instance P.HasTimePartitioning (ResourceBigqueryTable s) (TF.Attr s P.Text) where
     timePartitioning =
-        lens (_time_partitioning :: BigqueryTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _time_partitioning = a } :: BigqueryTableResource s)
+        lens (_time_partitioning :: ResourceBigqueryTable s -> TF.Attr s P.Text)
+             (\s a -> s { _time_partitioning = a } :: ResourceBigqueryTable s)
 
-instance P.HasView (BigqueryTableResource s) (TF.Attr s P.Text) where
+instance P.HasView (ResourceBigqueryTable s) (TF.Attr s P.Text) where
     view =
-        lens (_view :: BigqueryTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _view = a } :: BigqueryTableResource s)
+        lens (_view :: ResourceBigqueryTable s -> TF.Attr s P.Text)
+             (\s a -> s { _view = a } :: ResourceBigqueryTable s)
 
-instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
+instance s ~ s' => P.HasComputeCreationTime (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeCreationTime x = TF.compute (TF.refKey x) "creation_time"
 
-instance s ~ s' => P.HasComputedDatasetId (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedDatasetId =
-        (_dataset_id :: BigqueryTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDatasetId (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeDatasetId =
+        (_dataset_id :: ResourceBigqueryTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: BigqueryTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceBigqueryTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
 
-instance s ~ s' => P.HasComputedExpirationTime (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedExpirationTime =
-        (_expiration_time :: BigqueryTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeExpirationTime (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeExpirationTime =
+        (_expiration_time :: ResourceBigqueryTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFriendlyName (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedFriendlyName =
-        (_friendly_name :: BigqueryTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFriendlyName (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeFriendlyName =
+        (_friendly_name :: ResourceBigqueryTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: BigqueryTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceBigqueryTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLastModifiedTime (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedLastModifiedTime x = TF.compute (TF.refKey x) "last_modified_time"
+instance s ~ s' => P.HasComputeLastModifiedTime (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeLastModifiedTime x = TF.compute (TF.refKey x) "last_modified_time"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedLocation x = TF.compute (TF.refKey x) "location"
+instance s ~ s' => P.HasComputeLocation (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedNumBytes (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedNumBytes x = TF.compute (TF.refKey x) "num_bytes"
+instance s ~ s' => P.HasComputeNumBytes (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeNumBytes x = TF.compute (TF.refKey x) "num_bytes"
 
-instance s ~ s' => P.HasComputedNumLongTermBytes (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedNumLongTermBytes x = TF.compute (TF.refKey x) "num_long_term_bytes"
+instance s ~ s' => P.HasComputeNumLongTermBytes (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeNumLongTermBytes x = TF.compute (TF.refKey x) "num_long_term_bytes"
 
-instance s ~ s' => P.HasComputedNumRows (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedNumRows x = TF.compute (TF.refKey x) "num_rows"
+instance s ~ s' => P.HasComputeNumRows (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeNumRows x = TF.compute (TF.refKey x) "num_rows"
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: BigqueryTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceBigqueryTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSchema (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedSchema =
-        (_schema :: BigqueryTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSchema (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeSchema =
+        (_schema :: ResourceBigqueryTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedTableId (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedTableId =
-        (_table_id :: BigqueryTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTableId (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeTableId =
+        (_table_id :: ResourceBigqueryTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTimePartitioning (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedTimePartitioning =
-        (_time_partitioning :: BigqueryTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTimePartitioning (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeTimePartitioning =
+        (_time_partitioning :: ResourceBigqueryTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeType' x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputedView (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedView =
-        (_view :: BigqueryTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeView (TF.Ref s' (ResourceBigqueryTable s)) (TF.Attr s P.Text) where
+    computeView =
+        (_view :: ResourceBigqueryTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-bigqueryTableResource :: TF.Resource P.Google (BigqueryTableResource s)
-bigqueryTableResource =
+resourceBigqueryTable :: TF.Resource P.Google (ResourceBigqueryTable s)
+resourceBigqueryTable =
     TF.newResource "google_bigquery_table" $
-        BigqueryTableResource {
+        ResourceBigqueryTable {
               _dataset_id = TF.Nil
             , _description = TF.Nil
             , _expiration_time = TF.Nil
@@ -1262,7 +1325,7 @@ Creates a Google Bigtable instance. For more information see
 <https://cloud.google.com/bigtable/> and
 <https://cloud.google.com/bigtable/docs/go/reference> .
 -}
-data BigtableInstanceResource s = BigtableInstanceResource {
+data ResourceBigtableInstance s = ResourceBigtableInstance {
       _cluster_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the Bigtable instance's cluster. -}
     , _display_name :: !(TF.Attr s P.Text)
@@ -1281,8 +1344,8 @@ data BigtableInstanceResource s = BigtableInstanceResource {
     {- ^ (Required) The zone to create the Bigtable instance in. Zones that support Bigtable instances are noted on the <https://cloud.google.com/about/locations/> . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BigtableInstanceResource s) where
-    toHCL BigtableInstanceResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceBigtableInstance s) where
+    toHCL ResourceBigtableInstance{..} = TF.inline $ catMaybes
         [ TF.assign "cluster_id" <$> TF.attribute _cluster_id
         , TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "instance_type" <$> TF.attribute _instance_type
@@ -1293,90 +1356,90 @@ instance TF.ToHCL (BigtableInstanceResource s) where
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasClusterId (BigtableInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasClusterId (ResourceBigtableInstance s) (TF.Attr s P.Text) where
     clusterId =
-        lens (_cluster_id :: BigtableInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cluster_id = a } :: BigtableInstanceResource s)
+        lens (_cluster_id :: ResourceBigtableInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_id = a } :: ResourceBigtableInstance s)
 
-instance P.HasDisplayName (BigtableInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasDisplayName (ResourceBigtableInstance s) (TF.Attr s P.Text) where
     displayName =
-        lens (_display_name :: BigtableInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _display_name = a } :: BigtableInstanceResource s)
+        lens (_display_name :: ResourceBigtableInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _display_name = a } :: ResourceBigtableInstance s)
 
-instance P.HasInstanceType (BigtableInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasInstanceType (ResourceBigtableInstance s) (TF.Attr s P.Text) where
     instanceType =
-        lens (_instance_type :: BigtableInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_type = a } :: BigtableInstanceResource s)
+        lens (_instance_type :: ResourceBigtableInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_type = a } :: ResourceBigtableInstance s)
 
-instance P.HasName (BigtableInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceBigtableInstance s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: BigtableInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: BigtableInstanceResource s)
+        lens (_name :: ResourceBigtableInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceBigtableInstance s)
 
-instance P.HasNumNodes (BigtableInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasNumNodes (ResourceBigtableInstance s) (TF.Attr s P.Text) where
     numNodes =
-        lens (_num_nodes :: BigtableInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _num_nodes = a } :: BigtableInstanceResource s)
+        lens (_num_nodes :: ResourceBigtableInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _num_nodes = a } :: ResourceBigtableInstance s)
 
-instance P.HasProject (BigtableInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceBigtableInstance s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: BigtableInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: BigtableInstanceResource s)
+        lens (_project :: ResourceBigtableInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceBigtableInstance s)
 
-instance P.HasStorageType (BigtableInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasStorageType (ResourceBigtableInstance s) (TF.Attr s P.Text) where
     storageType =
-        lens (_storage_type :: BigtableInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _storage_type = a } :: BigtableInstanceResource s)
+        lens (_storage_type :: ResourceBigtableInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _storage_type = a } :: ResourceBigtableInstance s)
 
-instance P.HasZone (BigtableInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasZone (ResourceBigtableInstance s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: BigtableInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: BigtableInstanceResource s)
+        lens (_zone :: ResourceBigtableInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _zone = a } :: ResourceBigtableInstance s)
 
-instance s ~ s' => P.HasComputedClusterId (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
-    computedClusterId =
-        (_cluster_id :: BigtableInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeClusterId (TF.Ref s' (ResourceBigtableInstance s)) (TF.Attr s P.Text) where
+    computeClusterId =
+        (_cluster_id :: ResourceBigtableInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
-    computedDisplayName =
-        (_display_name :: BigtableInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDisplayName (TF.Ref s' (ResourceBigtableInstance s)) (TF.Attr s P.Text) where
+    computeDisplayName =
+        (_display_name :: ResourceBigtableInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
-    computedInstanceType =
-        (_instance_type :: BigtableInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeInstanceType (TF.Ref s' (ResourceBigtableInstance s)) (TF.Attr s P.Text) where
+    computeInstanceType =
+        (_instance_type :: ResourceBigtableInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: BigtableInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceBigtableInstance s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceBigtableInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNumNodes (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
-    computedNumNodes =
-        (_num_nodes :: BigtableInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNumNodes (TF.Ref s' (ResourceBigtableInstance s)) (TF.Attr s P.Text) where
+    computeNumNodes =
+        (_num_nodes :: ResourceBigtableInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: BigtableInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceBigtableInstance s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceBigtableInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStorageType (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
-    computedStorageType =
-        (_storage_type :: BigtableInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeStorageType (TF.Ref s' (ResourceBigtableInstance s)) (TF.Attr s P.Text) where
+    computeStorageType =
+        (_storage_type :: ResourceBigtableInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: BigtableInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceBigtableInstance s)) (TF.Attr s P.Text) where
+    computeZone =
+        (_zone :: ResourceBigtableInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-bigtableInstanceResource :: TF.Resource P.Google (BigtableInstanceResource s)
-bigtableInstanceResource =
+resourceBigtableInstance :: TF.Resource P.Google (ResourceBigtableInstance s)
+resourceBigtableInstance =
     TF.newResource "google_bigtable_instance" $
-        BigtableInstanceResource {
+        ResourceBigtableInstance {
               _cluster_id = TF.Nil
             , _display_name = TF.Nil
             , _instance_type = TF.Nil
@@ -1393,7 +1456,7 @@ Creates a Google Bigtable table inside an instance. For more information see
 <https://cloud.google.com/bigtable/> and
 <https://cloud.google.com/bigtable/docs/go/reference> .
 -}
-data BigtableTableResource s = BigtableTableResource {
+data ResourceBigtableTable s = ResourceBigtableTable {
       _instance_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the Bigtable instance. -}
     , _name :: !(TF.Attr s P.Text)
@@ -1404,58 +1467,58 @@ data BigtableTableResource s = BigtableTableResource {
     {- ^ (Optional) A list of predefined keys to split the table on. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BigtableTableResource s) where
-    toHCL BigtableTableResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceBigtableTable s) where
+    toHCL ResourceBigtableTable{..} = TF.inline $ catMaybes
         [ TF.assign "instance_name" <$> TF.attribute _instance_name
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "split_keys" <$> TF.attribute _split_keys
         ]
 
-instance P.HasInstanceName (BigtableTableResource s) (TF.Attr s P.Text) where
+instance P.HasInstanceName (ResourceBigtableTable s) (TF.Attr s P.Text) where
     instanceName =
-        lens (_instance_name :: BigtableTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_name = a } :: BigtableTableResource s)
+        lens (_instance_name :: ResourceBigtableTable s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_name = a } :: ResourceBigtableTable s)
 
-instance P.HasName (BigtableTableResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceBigtableTable s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: BigtableTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: BigtableTableResource s)
+        lens (_name :: ResourceBigtableTable s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceBigtableTable s)
 
-instance P.HasProject (BigtableTableResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceBigtableTable s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: BigtableTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: BigtableTableResource s)
+        lens (_project :: ResourceBigtableTable s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceBigtableTable s)
 
-instance P.HasSplitKeys (BigtableTableResource s) (TF.Attr s P.Text) where
+instance P.HasSplitKeys (ResourceBigtableTable s) (TF.Attr s P.Text) where
     splitKeys =
-        lens (_split_keys :: BigtableTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _split_keys = a } :: BigtableTableResource s)
+        lens (_split_keys :: ResourceBigtableTable s -> TF.Attr s P.Text)
+             (\s a -> s { _split_keys = a } :: ResourceBigtableTable s)
 
-instance s ~ s' => P.HasComputedInstanceName (TF.Ref s' (BigtableTableResource s)) (TF.Attr s P.Text) where
-    computedInstanceName =
-        (_instance_name :: BigtableTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeInstanceName (TF.Ref s' (ResourceBigtableTable s)) (TF.Attr s P.Text) where
+    computeInstanceName =
+        (_instance_name :: ResourceBigtableTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (BigtableTableResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: BigtableTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceBigtableTable s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceBigtableTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (BigtableTableResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: BigtableTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceBigtableTable s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceBigtableTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSplitKeys (TF.Ref s' (BigtableTableResource s)) (TF.Attr s P.Text) where
-    computedSplitKeys =
-        (_split_keys :: BigtableTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSplitKeys (TF.Ref s' (ResourceBigtableTable s)) (TF.Attr s P.Text) where
+    computeSplitKeys =
+        (_split_keys :: ResourceBigtableTable s -> TF.Attr s P.Text)
             . TF.refValue
 
-bigtableTableResource :: TF.Resource P.Google (BigtableTableResource s)
-bigtableTableResource =
+resourceBigtableTable :: TF.Resource P.Google (ResourceBigtableTable s)
+resourceBigtableTable =
     TF.newResource "google_bigtable_table" $
-        BigtableTableResource {
+        ResourceBigtableTable {
               _instance_name = TF.Nil
             , _name = TF.Nil
             , _project = TF.Nil
@@ -1468,7 +1531,7 @@ Creates a new Cloud Function. For more information see
 <https://cloud.google.com/functions/docs/> and
 <https://cloud.google.com/functions/docs/apis> .
 -}
-data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource {
+data ResourceCloudfunctionsFunction s = ResourceCloudfunctionsFunction {
       _available_memory_mb :: !(TF.Attr s P.Text)
     {- ^ (Optional) Memory (in MB), available to the function. Default value is 256MB. Allowed values are: 128MB, 256MB, 512MB, 1024MB, and 2048MB. -}
     , _description :: !(TF.Attr s P.Text)
@@ -1493,8 +1556,8 @@ data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource {
     {- ^ (Optional) Name of Pub/Sub topic. Every message published in this topic will trigger function execution with message contents passed as input data. Cannot be used with @trigger_http@ and @trigger_bucket@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudfunctionsFunctionResource s) where
-    toHCL CloudfunctionsFunctionResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceCloudfunctionsFunction s) where
+    toHCL ResourceCloudfunctionsFunction{..} = TF.inline $ catMaybes
         [ TF.assign "available_memory_mb" <$> TF.attribute _available_memory_mb
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "entry_point" <$> TF.attribute _entry_point
@@ -1508,129 +1571,129 @@ instance TF.ToHCL (CloudfunctionsFunctionResource s) where
         , TF.assign "trigger_topic" <$> TF.attribute _trigger_topic
         ]
 
-instance P.HasAvailableMemoryMb (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+instance P.HasAvailableMemoryMb (ResourceCloudfunctionsFunction s) (TF.Attr s P.Text) where
     availableMemoryMb =
-        lens (_available_memory_mb :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _available_memory_mb = a } :: CloudfunctionsFunctionResource s)
+        lens (_available_memory_mb :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
+             (\s a -> s { _available_memory_mb = a } :: ResourceCloudfunctionsFunction s)
 
-instance P.HasDescription (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceCloudfunctionsFunction s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: CloudfunctionsFunctionResource s)
+        lens (_description :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceCloudfunctionsFunction s)
 
-instance P.HasEntryPoint (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+instance P.HasEntryPoint (ResourceCloudfunctionsFunction s) (TF.Attr s P.Text) where
     entryPoint =
-        lens (_entry_point :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _entry_point = a } :: CloudfunctionsFunctionResource s)
+        lens (_entry_point :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
+             (\s a -> s { _entry_point = a } :: ResourceCloudfunctionsFunction s)
 
-instance P.HasLabels (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+instance P.HasLabels (ResourceCloudfunctionsFunction s) (TF.Attr s P.Text) where
     labels =
-        lens (_labels :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: CloudfunctionsFunctionResource s)
+        lens (_labels :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceCloudfunctionsFunction s)
 
-instance P.HasName (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceCloudfunctionsFunction s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: CloudfunctionsFunctionResource s)
+        lens (_name :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceCloudfunctionsFunction s)
 
-instance P.HasSourceArchiveBucket (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+instance P.HasSourceArchiveBucket (ResourceCloudfunctionsFunction s) (TF.Attr s P.Text) where
     sourceArchiveBucket =
-        lens (_source_archive_bucket :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_archive_bucket = a } :: CloudfunctionsFunctionResource s)
+        lens (_source_archive_bucket :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
+             (\s a -> s { _source_archive_bucket = a } :: ResourceCloudfunctionsFunction s)
 
-instance P.HasSourceArchiveObject (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+instance P.HasSourceArchiveObject (ResourceCloudfunctionsFunction s) (TF.Attr s P.Text) where
     sourceArchiveObject =
-        lens (_source_archive_object :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_archive_object = a } :: CloudfunctionsFunctionResource s)
+        lens (_source_archive_object :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
+             (\s a -> s { _source_archive_object = a } :: ResourceCloudfunctionsFunction s)
 
-instance P.HasTimeout (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+instance P.HasTimeout (ResourceCloudfunctionsFunction s) (TF.Attr s P.Text) where
     timeout =
-        lens (_timeout :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _timeout = a } :: CloudfunctionsFunctionResource s)
+        lens (_timeout :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
+             (\s a -> s { _timeout = a } :: ResourceCloudfunctionsFunction s)
 
-instance P.HasTriggerBucket (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+instance P.HasTriggerBucket (ResourceCloudfunctionsFunction s) (TF.Attr s P.Text) where
     triggerBucket =
-        lens (_trigger_bucket :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _trigger_bucket = a } :: CloudfunctionsFunctionResource s)
+        lens (_trigger_bucket :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
+             (\s a -> s { _trigger_bucket = a } :: ResourceCloudfunctionsFunction s)
 
-instance P.HasTriggerHttp (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+instance P.HasTriggerHttp (ResourceCloudfunctionsFunction s) (TF.Attr s P.Text) where
     triggerHttp =
-        lens (_trigger_http :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _trigger_http = a } :: CloudfunctionsFunctionResource s)
+        lens (_trigger_http :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
+             (\s a -> s { _trigger_http = a } :: ResourceCloudfunctionsFunction s)
 
-instance P.HasTriggerTopic (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+instance P.HasTriggerTopic (ResourceCloudfunctionsFunction s) (TF.Attr s P.Text) where
     triggerTopic =
-        lens (_trigger_topic :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _trigger_topic = a } :: CloudfunctionsFunctionResource s)
+        lens (_trigger_topic :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
+             (\s a -> s { _trigger_topic = a } :: ResourceCloudfunctionsFunction s)
 
-instance s ~ s' => P.HasComputedAvailableMemoryMb (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedAvailableMemoryMb =
-        (_available_memory_mb :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAvailableMemoryMb (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeAvailableMemoryMb =
+        (_available_memory_mb :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEntryPoint (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedEntryPoint =
-        (_entry_point :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEntryPoint (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeEntryPoint =
+        (_entry_point :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHttpsTriggerUrl (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedHttpsTriggerUrl x = TF.compute (TF.refKey x) "https_trigger_url"
+instance s ~ s' => P.HasComputeHttpsTriggerUrl (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeHttpsTriggerUrl x = TF.compute (TF.refKey x) "https_trigger_url"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedSourceArchiveBucket (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedSourceArchiveBucket =
-        (_source_archive_bucket :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSourceArchiveBucket (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeSourceArchiveBucket =
+        (_source_archive_bucket :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourceArchiveObject (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedSourceArchiveObject =
-        (_source_archive_object :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSourceArchiveObject (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeSourceArchiveObject =
+        (_source_archive_object :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedTimeout =
-        (_timeout :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTimeout (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeTimeout =
+        (_timeout :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTriggerBucket (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedTriggerBucket =
-        (_trigger_bucket :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTriggerBucket (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeTriggerBucket =
+        (_trigger_bucket :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTriggerHttp (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedTriggerHttp =
-        (_trigger_http :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTriggerHttp (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeTriggerHttp =
+        (_trigger_http :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTriggerTopic (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedTriggerTopic =
-        (_trigger_topic :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTriggerTopic (TF.Ref s' (ResourceCloudfunctionsFunction s)) (TF.Attr s P.Text) where
+    computeTriggerTopic =
+        (_trigger_topic :: ResourceCloudfunctionsFunction s -> TF.Attr s P.Text)
             . TF.refValue
 
-cloudfunctionsFunctionResource :: TF.Resource P.Google (CloudfunctionsFunctionResource s)
-cloudfunctionsFunctionResource =
+resourceCloudfunctionsFunction :: TF.Resource P.Google (ResourceCloudfunctionsFunction s)
+resourceCloudfunctionsFunction =
     TF.newResource "google_cloudfunctions_function" $
-        CloudfunctionsFunctionResource {
+        ResourceCloudfunctionsFunction {
               _available_memory_mb = TF.Nil
             , _description = TF.Nil
             , _entry_point = TF.Nil
@@ -1653,7 +1716,7 @@ information see the official documentation for
 static IP reservations, as well as the
 <https://cloud.google.com/compute/docs/reference/beta/addresses/insert> .
 -}
-data ComputeAddressResource s = ComputeAddressResource {
+data ResourceComputeAddress s = ResourceComputeAddress {
       _address :: !(TF.Attr s P.Text)
     {- ^ (Optional) The IP address to reserve. An address may only be specified for INTERNAL address types. The IP address must be inside the specified subnetwork, if any. -}
     , _address_type :: !(TF.Attr s P.Text)
@@ -1668,8 +1731,8 @@ data ComputeAddressResource s = ComputeAddressResource {
     {- ^ (Optional) The self link URI of the subnetwork in which to create the address. A subnetwork may only be specified for INTERNAL address types. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeAddressResource s) where
-    toHCL ComputeAddressResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeAddress s) where
+    toHCL ResourceComputeAddress{..} = TF.inline $ catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "address_type" <$> TF.attribute _address_type
         , TF.assign "name" <$> TF.attribute _name
@@ -1678,71 +1741,71 @@ instance TF.ToHCL (ComputeAddressResource s) where
         , TF.assign "subnetwork" <$> TF.attribute _subnetwork
         ]
 
-instance P.HasAddress (ComputeAddressResource s) (TF.Attr s P.Text) where
+instance P.HasAddress (ResourceComputeAddress s) (TF.Attr s P.Text) where
     address =
-        lens (_address :: ComputeAddressResource s -> TF.Attr s P.Text)
-             (\s a -> s { _address = a } :: ComputeAddressResource s)
+        lens (_address :: ResourceComputeAddress s -> TF.Attr s P.Text)
+             (\s a -> s { _address = a } :: ResourceComputeAddress s)
 
-instance P.HasAddressType (ComputeAddressResource s) (TF.Attr s P.Text) where
+instance P.HasAddressType (ResourceComputeAddress s) (TF.Attr s P.Text) where
     addressType =
-        lens (_address_type :: ComputeAddressResource s -> TF.Attr s P.Text)
-             (\s a -> s { _address_type = a } :: ComputeAddressResource s)
+        lens (_address_type :: ResourceComputeAddress s -> TF.Attr s P.Text)
+             (\s a -> s { _address_type = a } :: ResourceComputeAddress s)
 
-instance P.HasName (ComputeAddressResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeAddress s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeAddressResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeAddressResource s)
+        lens (_name :: ResourceComputeAddress s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeAddress s)
 
-instance P.HasProject (ComputeAddressResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeAddress s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeAddressResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeAddressResource s)
+        lens (_project :: ResourceComputeAddress s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeAddress s)
 
-instance P.HasRegion (ComputeAddressResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceComputeAddress s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ComputeAddressResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeAddressResource s)
+        lens (_region :: ResourceComputeAddress s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceComputeAddress s)
 
-instance P.HasSubnetwork (ComputeAddressResource s) (TF.Attr s P.Text) where
+instance P.HasSubnetwork (ResourceComputeAddress s) (TF.Attr s P.Text) where
     subnetwork =
-        lens (_subnetwork :: ComputeAddressResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subnetwork = a } :: ComputeAddressResource s)
+        lens (_subnetwork :: ResourceComputeAddress s -> TF.Attr s P.Text)
+             (\s a -> s { _subnetwork = a } :: ResourceComputeAddress s)
 
-instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
+instance s ~ s' => P.HasComputeAddress (TF.Ref s' (ResourceComputeAddress s)) (TF.Attr s P.Text) where
+    computeAddress x = TF.compute (TF.refKey x) "address"
 
-instance s ~ s' => P.HasComputedAddressType (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedAddressType =
-        (_address_type :: ComputeAddressResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAddressType (TF.Ref s' (ResourceComputeAddress s)) (TF.Attr s P.Text) where
+    computeAddressType =
+        (_address_type :: ResourceComputeAddress s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeAddressResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeAddress s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeAddress s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeAddressResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeAddress s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeAddress s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeAddressResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceComputeAddress s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceComputeAddress s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeAddress s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSubnetwork (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedSubnetwork =
-        (_subnetwork :: ComputeAddressResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSubnetwork (TF.Ref s' (ResourceComputeAddress s)) (TF.Attr s P.Text) where
+    computeSubnetwork =
+        (_subnetwork :: ResourceComputeAddress s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeAddressResource :: TF.Resource P.Google (ComputeAddressResource s)
-computeAddressResource =
+resourceComputeAddress :: TF.Resource P.Google (ResourceComputeAddress s)
+resourceComputeAddress =
     TF.newResource "google_compute_address" $
-        ComputeAddressResource {
+        ResourceComputeAddress {
               _address = TF.Nil
             , _address_type = TF.Nil
             , _name = TF.Nil
@@ -1762,7 +1825,7 @@ the measured load. For more information, see
 <https://cloud.google.com/compute/docs/autoscaler/> and
 <https://cloud.google.com/compute/docs/reference/latest/autoscalers>
 -}
-data ComputeAutoscalerResource s = ComputeAutoscalerResource {
+data ResourceComputeAutoscaler s = ResourceComputeAutoscaler {
       _autoscaling_policy :: !(TF.Attr s P.Text)
     {- ^ (Required) The parameters of the autoscaling algorithm. Structure is documented below. -}
     , _description :: !(TF.Attr s P.Text)
@@ -1777,8 +1840,8 @@ data ComputeAutoscalerResource s = ComputeAutoscalerResource {
     {- ^ (Required) The zone of the target. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeAutoscalerResource s) where
-    toHCL ComputeAutoscalerResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeAutoscaler s) where
+    toHCL ResourceComputeAutoscaler{..} = TF.inline $ catMaybes
         [ TF.assign "autoscaling_policy" <$> TF.attribute _autoscaling_policy
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -1787,73 +1850,73 @@ instance TF.ToHCL (ComputeAutoscalerResource s) where
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasAutoscalingPolicy (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
+instance P.HasAutoscalingPolicy (ResourceComputeAutoscaler s) (TF.Attr s P.Text) where
     autoscalingPolicy =
-        lens (_autoscaling_policy :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _autoscaling_policy = a } :: ComputeAutoscalerResource s)
+        lens (_autoscaling_policy :: ResourceComputeAutoscaler s -> TF.Attr s P.Text)
+             (\s a -> s { _autoscaling_policy = a } :: ResourceComputeAutoscaler s)
 
-instance P.HasDescription (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeAutoscaler s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeAutoscalerResource s)
+        lens (_description :: ResourceComputeAutoscaler s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeAutoscaler s)
 
-instance P.HasName (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeAutoscaler s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeAutoscalerResource s)
+        lens (_name :: ResourceComputeAutoscaler s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeAutoscaler s)
 
-instance P.HasProject (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeAutoscaler s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeAutoscalerResource s)
+        lens (_project :: ResourceComputeAutoscaler s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeAutoscaler s)
 
-instance P.HasTarget (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
+instance P.HasTarget (ResourceComputeAutoscaler s) (TF.Attr s P.Text) where
     target =
-        lens (_target :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target = a } :: ComputeAutoscalerResource s)
+        lens (_target :: ResourceComputeAutoscaler s -> TF.Attr s P.Text)
+             (\s a -> s { _target = a } :: ResourceComputeAutoscaler s)
 
-instance P.HasZone (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
+instance P.HasZone (ResourceComputeAutoscaler s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: ComputeAutoscalerResource s)
+        lens (_zone :: ResourceComputeAutoscaler s -> TF.Attr s P.Text)
+             (\s a -> s { _zone = a } :: ResourceComputeAutoscaler s)
 
-instance s ~ s' => P.HasComputedAutoscalingPolicy (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedAutoscalingPolicy =
-        (_autoscaling_policy :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAutoscalingPolicy (TF.Ref s' (ResourceComputeAutoscaler s)) (TF.Attr s P.Text) where
+    computeAutoscalingPolicy =
+        (_autoscaling_policy :: ResourceComputeAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeAutoscaler s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeAutoscaler s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeAutoscaler s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeAutoscaler s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedTarget (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedTarget =
-        (_target :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTarget (TF.Ref s' (ResourceComputeAutoscaler s)) (TF.Attr s P.Text) where
+    computeTarget =
+        (_target :: ResourceComputeAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceComputeAutoscaler s)) (TF.Attr s P.Text) where
+    computeZone =
+        (_zone :: ResourceComputeAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeAutoscalerResource :: TF.Resource P.Google (ComputeAutoscalerResource s)
-computeAutoscalerResource =
+resourceComputeAutoscaler :: TF.Resource P.Google (ResourceComputeAutoscaler s)
+resourceComputeAutoscaler =
     TF.newResource "google_compute_autoscaler" $
-        ComputeAutoscalerResource {
+        ResourceComputeAutoscaler {
               _autoscaling_policy = TF.Nil
             , _description = TF.Nil
             , _name = TF.Nil
@@ -1870,7 +1933,7 @@ traffic through Google Cloud Load Balancer. For more information see
 and <https://cloud.google.com/compute/docs/reference/latest/backendBuckets>
 .
 -}
-data ComputeBackendBucketResource s = ComputeBackendBucketResource {
+data ResourceComputeBackendBucket s = ResourceComputeBackendBucket {
       _bucket_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the Google Cloud Storage bucket to be used as a backend bucket. -}
     , _description :: !(TF.Attr s P.Text)
@@ -1883,8 +1946,8 @@ data ComputeBackendBucketResource s = ComputeBackendBucketResource {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeBackendBucketResource s) where
-    toHCL ComputeBackendBucketResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeBackendBucket s) where
+    toHCL ResourceComputeBackendBucket{..} = TF.inline $ catMaybes
         [ TF.assign "bucket_name" <$> TF.attribute _bucket_name
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "enable_cdn" <$> TF.attribute _enable_cdn
@@ -1892,66 +1955,66 @@ instance TF.ToHCL (ComputeBackendBucketResource s) where
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasBucketName (ComputeBackendBucketResource s) (TF.Attr s P.Text) where
+instance P.HasBucketName (ResourceComputeBackendBucket s) (TF.Attr s P.Text) where
     bucketName =
-        lens (_bucket_name :: ComputeBackendBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _bucket_name = a } :: ComputeBackendBucketResource s)
+        lens (_bucket_name :: ResourceComputeBackendBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _bucket_name = a } :: ResourceComputeBackendBucket s)
 
-instance P.HasDescription (ComputeBackendBucketResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeBackendBucket s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeBackendBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeBackendBucketResource s)
+        lens (_description :: ResourceComputeBackendBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeBackendBucket s)
 
-instance P.HasEnableCdn (ComputeBackendBucketResource s) (TF.Attr s P.Text) where
+instance P.HasEnableCdn (ResourceComputeBackendBucket s) (TF.Attr s P.Text) where
     enableCdn =
-        lens (_enable_cdn :: ComputeBackendBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _enable_cdn = a } :: ComputeBackendBucketResource s)
+        lens (_enable_cdn :: ResourceComputeBackendBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _enable_cdn = a } :: ResourceComputeBackendBucket s)
 
-instance P.HasName (ComputeBackendBucketResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeBackendBucket s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeBackendBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeBackendBucketResource s)
+        lens (_name :: ResourceComputeBackendBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeBackendBucket s)
 
-instance P.HasProject (ComputeBackendBucketResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeBackendBucket s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeBackendBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeBackendBucketResource s)
+        lens (_project :: ResourceComputeBackendBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeBackendBucket s)
 
-instance s ~ s' => P.HasComputedBucketName (TF.Ref s' (ComputeBackendBucketResource s)) (TF.Attr s P.Text) where
-    computedBucketName =
-        (_bucket_name :: ComputeBackendBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBucketName (TF.Ref s' (ResourceComputeBackendBucket s)) (TF.Attr s P.Text) where
+    computeBucketName =
+        (_bucket_name :: ResourceComputeBackendBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeBackendBucketResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
+instance s ~ s' => P.HasComputeCreationTimestamp (TF.Ref s' (ResourceComputeBackendBucket s)) (TF.Attr s P.Text) where
+    computeCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeBackendBucketResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeBackendBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeBackendBucket s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeBackendBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEnableCdn (TF.Ref s' (ComputeBackendBucketResource s)) (TF.Attr s P.Text) where
-    computedEnableCdn =
-        (_enable_cdn :: ComputeBackendBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEnableCdn (TF.Ref s' (ResourceComputeBackendBucket s)) (TF.Attr s P.Text) where
+    computeEnableCdn =
+        (_enable_cdn :: ResourceComputeBackendBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeBackendBucketResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeBackendBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeBackendBucket s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeBackendBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeBackendBucketResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeBackendBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeBackendBucket s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeBackendBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeBackendBucketResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeBackendBucket s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-computeBackendBucketResource :: TF.Resource P.Google (ComputeBackendBucketResource s)
-computeBackendBucketResource =
+resourceComputeBackendBucket :: TF.Resource P.Google (ResourceComputeBackendBucket s)
+resourceComputeBackendBucket =
     TF.newResource "google_compute_backend_bucket" $
-        ComputeBackendBucketResource {
+        ResourceComputeBackendBucket {
               _bucket_name = TF.Nil
             , _description = TF.Nil
             , _enable_cdn = TF.Nil
@@ -1969,7 +2032,7 @@ and the
 For internal load balancing, use a
 </docs/providers/google/r/compute_region_backend_service.html> .
 -}
-data ComputeBackendServiceResource s = ComputeBackendServiceResource {
+data ResourceComputeBackendService s = ResourceComputeBackendService {
       _backend :: !(TF.Attr s P.Text)
     {- ^ (Optional) The list of backends that serve this BackendService. Structure is documented below. -}
     , _connection_draining_timeout_sec :: !(TF.Attr s P.Text)
@@ -1996,8 +2059,8 @@ data ComputeBackendServiceResource s = ComputeBackendServiceResource {
     {- ^ (Optional) The number of secs to wait for a backend to respond to a request before considering the request failed. Defaults to @30@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeBackendServiceResource s) where
-    toHCL ComputeBackendServiceResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeBackendService s) where
+    toHCL ResourceComputeBackendService{..} = TF.inline $ catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "connection_draining_timeout_sec" <$> TF.attribute _connection_draining_timeout_sec
         , TF.assign "description" <$> TF.attribute _description
@@ -2012,136 +2075,136 @@ instance TF.ToHCL (ComputeBackendServiceResource s) where
         , TF.assign "timeout_sec" <$> TF.attribute _timeout_sec
         ]
 
-instance P.HasBackend (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasBackend (ResourceComputeBackendService s) (TF.Attr s P.Text) where
     backend =
-        lens (_backend :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: ComputeBackendServiceResource s)
+        lens (_backend :: ResourceComputeBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _backend = a } :: ResourceComputeBackendService s)
 
-instance P.HasConnectionDrainingTimeoutSec (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasConnectionDrainingTimeoutSec (ResourceComputeBackendService s) (TF.Attr s P.Text) where
     connectionDrainingTimeoutSec =
-        lens (_connection_draining_timeout_sec :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _connection_draining_timeout_sec = a } :: ComputeBackendServiceResource s)
+        lens (_connection_draining_timeout_sec :: ResourceComputeBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _connection_draining_timeout_sec = a } :: ResourceComputeBackendService s)
 
-instance P.HasDescription (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeBackendService s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeBackendServiceResource s)
+        lens (_description :: ResourceComputeBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeBackendService s)
 
-instance P.HasEnableCdn (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasEnableCdn (ResourceComputeBackendService s) (TF.Attr s P.Text) where
     enableCdn =
-        lens (_enable_cdn :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _enable_cdn = a } :: ComputeBackendServiceResource s)
+        lens (_enable_cdn :: ResourceComputeBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _enable_cdn = a } :: ResourceComputeBackendService s)
 
-instance P.HasHealthChecks (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasHealthChecks (ResourceComputeBackendService s) (TF.Attr s P.Text) where
     healthChecks =
-        lens (_health_checks :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _health_checks = a } :: ComputeBackendServiceResource s)
+        lens (_health_checks :: ResourceComputeBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _health_checks = a } :: ResourceComputeBackendService s)
 
-instance P.HasIap (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasIap (ResourceComputeBackendService s) (TF.Attr s P.Text) where
     iap =
-        lens (_iap :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _iap = a } :: ComputeBackendServiceResource s)
+        lens (_iap :: ResourceComputeBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _iap = a } :: ResourceComputeBackendService s)
 
-instance P.HasName (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeBackendService s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeBackendServiceResource s)
+        lens (_name :: ResourceComputeBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeBackendService s)
 
-instance P.HasPortName (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasPortName (ResourceComputeBackendService s) (TF.Attr s P.Text) where
     portName =
-        lens (_port_name :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _port_name = a } :: ComputeBackendServiceResource s)
+        lens (_port_name :: ResourceComputeBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _port_name = a } :: ResourceComputeBackendService s)
 
-instance P.HasProject (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeBackendService s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeBackendServiceResource s)
+        lens (_project :: ResourceComputeBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeBackendService s)
 
-instance P.HasProtocol (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasProtocol (ResourceComputeBackendService s) (TF.Attr s P.Text) where
     protocol =
-        lens (_protocol :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _protocol = a } :: ComputeBackendServiceResource s)
+        lens (_protocol :: ResourceComputeBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _protocol = a } :: ResourceComputeBackendService s)
 
-instance P.HasSessionAffinity (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasSessionAffinity (ResourceComputeBackendService s) (TF.Attr s P.Text) where
     sessionAffinity =
-        lens (_session_affinity :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _session_affinity = a } :: ComputeBackendServiceResource s)
+        lens (_session_affinity :: ResourceComputeBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _session_affinity = a } :: ResourceComputeBackendService s)
 
-instance P.HasTimeoutSec (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasTimeoutSec (ResourceComputeBackendService s) (TF.Attr s P.Text) where
     timeoutSec =
-        lens (_timeout_sec :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _timeout_sec = a } :: ComputeBackendServiceResource s)
+        lens (_timeout_sec :: ResourceComputeBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _timeout_sec = a } :: ResourceComputeBackendService s)
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedBackend =
-        (_backend :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBackend (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computeBackend =
+        (_backend :: ResourceComputeBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedConnectionDrainingTimeoutSec (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedConnectionDrainingTimeoutSec =
-        (_connection_draining_timeout_sec :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeConnectionDrainingTimeoutSec (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computeConnectionDrainingTimeoutSec =
+        (_connection_draining_timeout_sec :: ResourceComputeBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEnableCdn (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedEnableCdn =
-        (_enable_cdn :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEnableCdn (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computeEnableCdn =
+        (_enable_cdn :: ResourceComputeBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+instance s ~ s' => P.HasComputeFingerprint (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computeFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
-instance s ~ s' => P.HasComputedHealthChecks (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedHealthChecks =
-        (_health_checks :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHealthChecks (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computeHealthChecks =
+        (_health_checks :: ResourceComputeBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIap (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedIap =
-        (_iap :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIap (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computeIap =
+        (_iap :: ResourceComputeBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPortName (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedPortName =
-        (_port_name :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePortName (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computePortName =
+        (_port_name :: ResourceComputeBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedProtocol =
-        (_protocol :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProtocol (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computeProtocol =
+        (_protocol :: ResourceComputeBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSessionAffinity (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedSessionAffinity =
-        (_session_affinity :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSessionAffinity (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computeSessionAffinity =
+        (_session_affinity :: ResourceComputeBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedTimeoutSec =
-        (_timeout_sec :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTimeoutSec (TF.Ref s' (ResourceComputeBackendService s)) (TF.Attr s P.Text) where
+    computeTimeoutSec =
+        (_timeout_sec :: ResourceComputeBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeBackendServiceResource :: TF.Resource P.Google (ComputeBackendServiceResource s)
-computeBackendServiceResource =
+resourceComputeBackendService :: TF.Resource P.Google (ResourceComputeBackendService s)
+resourceComputeBackendService =
     TF.newResource "google_compute_backend_service" $
-        ComputeBackendServiceResource {
+        ResourceComputeBackendService {
               _backend = TF.Nil
             , _connection_draining_timeout_sec = TF.Nil
             , _description = TF.Nil
@@ -2165,7 +2228,7 @@ information see
 All arguments including the disk encryption key will be stored in the raw
 state as plain-text. </docs/state/sensitive-data.html> .
 -}
-data ComputeDiskResource s = ComputeDiskResource {
+data ResourceComputeDisk s = ResourceComputeDisk {
       _disk_encryption_key_raw :: !(TF.Attr s P.Text)
     {- ^ (Optional) A 256-bit [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption), encoded in <https://tools.ietf.org/html/rfc4648#section-4> to encrypt this disk. -}
     , _image :: !(TF.Attr s P.Text)
@@ -2186,8 +2249,8 @@ data ComputeDiskResource s = ComputeDiskResource {
     {- ^ (Required) The zone where this disk will be available. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeDiskResource s) where
-    toHCL ComputeDiskResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeDisk s) where
+    toHCL ResourceComputeDisk{..} = TF.inline $ catMaybes
         [ TF.assign "disk_encryption_key_raw" <$> TF.attribute _disk_encryption_key_raw
         , TF.assign "image" <$> TF.attribute _image
         , TF.assign "labels" <$> TF.attribute _labels
@@ -2199,112 +2262,112 @@ instance TF.ToHCL (ComputeDiskResource s) where
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasDiskEncryptionKeyRaw (ComputeDiskResource s) (TF.Attr s P.Text) where
+instance P.HasDiskEncryptionKeyRaw (ResourceComputeDisk s) (TF.Attr s P.Text) where
     diskEncryptionKeyRaw =
-        lens (_disk_encryption_key_raw :: ComputeDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _disk_encryption_key_raw = a } :: ComputeDiskResource s)
+        lens (_disk_encryption_key_raw :: ResourceComputeDisk s -> TF.Attr s P.Text)
+             (\s a -> s { _disk_encryption_key_raw = a } :: ResourceComputeDisk s)
 
-instance P.HasImage (ComputeDiskResource s) (TF.Attr s P.Text) where
+instance P.HasImage (ResourceComputeDisk s) (TF.Attr s P.Text) where
     image =
-        lens (_image :: ComputeDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _image = a } :: ComputeDiskResource s)
+        lens (_image :: ResourceComputeDisk s -> TF.Attr s P.Text)
+             (\s a -> s { _image = a } :: ResourceComputeDisk s)
 
-instance P.HasLabels (ComputeDiskResource s) (TF.Attr s P.Text) where
+instance P.HasLabels (ResourceComputeDisk s) (TF.Attr s P.Text) where
     labels =
-        lens (_labels :: ComputeDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: ComputeDiskResource s)
+        lens (_labels :: ResourceComputeDisk s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceComputeDisk s)
 
-instance P.HasName (ComputeDiskResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeDisk s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeDiskResource s)
+        lens (_name :: ResourceComputeDisk s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeDisk s)
 
-instance P.HasProject (ComputeDiskResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeDisk s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeDiskResource s)
+        lens (_project :: ResourceComputeDisk s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeDisk s)
 
-instance P.HasSize (ComputeDiskResource s) (TF.Attr s P.Text) where
+instance P.HasSize (ResourceComputeDisk s) (TF.Attr s P.Text) where
     size =
-        lens (_size :: ComputeDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: ComputeDiskResource s)
+        lens (_size :: ResourceComputeDisk s -> TF.Attr s P.Text)
+             (\s a -> s { _size = a } :: ResourceComputeDisk s)
 
-instance P.HasSnapshot (ComputeDiskResource s) (TF.Attr s P.Text) where
+instance P.HasSnapshot (ResourceComputeDisk s) (TF.Attr s P.Text) where
     snapshot =
-        lens (_snapshot :: ComputeDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _snapshot = a } :: ComputeDiskResource s)
+        lens (_snapshot :: ResourceComputeDisk s -> TF.Attr s P.Text)
+             (\s a -> s { _snapshot = a } :: ResourceComputeDisk s)
 
-instance P.HasType' (ComputeDiskResource s) (TF.Attr s P.Text) where
+instance P.HasType' (ResourceComputeDisk s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: ComputeDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: ComputeDiskResource s)
+        lens (_type' :: ResourceComputeDisk s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: ResourceComputeDisk s)
 
-instance P.HasZone (ComputeDiskResource s) (TF.Attr s P.Text) where
+instance P.HasZone (ResourceComputeDisk s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: ComputeDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: ComputeDiskResource s)
+        lens (_zone :: ResourceComputeDisk s -> TF.Attr s P.Text)
+             (\s a -> s { _zone = a } :: ResourceComputeDisk s)
 
-instance s ~ s' => P.HasComputedDiskEncryptionKeyRaw (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedDiskEncryptionKeyRaw =
-        (_disk_encryption_key_raw :: ComputeDiskResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDiskEncryptionKeyRaw (TF.Ref s' (ResourceComputeDisk s)) (TF.Attr s P.Text) where
+    computeDiskEncryptionKeyRaw =
+        (_disk_encryption_key_raw :: ResourceComputeDisk s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDiskEncryptionKeySha256 (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "disk_encryption_key_sha256"
+instance s ~ s' => P.HasComputeDiskEncryptionKeySha256 (TF.Ref s' (ResourceComputeDisk s)) (TF.Attr s P.Text) where
+    computeDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "disk_encryption_key_sha256"
 
-instance s ~ s' => P.HasComputedImage (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedImage =
-        (_image :: ComputeDiskResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeImage (TF.Ref s' (ResourceComputeDisk s)) (TF.Attr s P.Text) where
+    computeImage =
+        (_image :: ResourceComputeDisk s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
+instance s ~ s' => P.HasComputeLabelFingerprint (TF.Ref s' (ResourceComputeDisk s)) (TF.Attr s P.Text) where
+    computeLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: ComputeDiskResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceComputeDisk s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceComputeDisk s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeDiskResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeDisk s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeDisk s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeDiskResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeDisk s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeDisk s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeDisk s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedSize =
-        (_size :: ComputeDiskResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSize (TF.Ref s' (ResourceComputeDisk s)) (TF.Attr s P.Text) where
+    computeSize =
+        (_size :: ResourceComputeDisk s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSnapshot (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedSnapshot =
-        (_snapshot :: ComputeDiskResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSnapshot (TF.Ref s' (ResourceComputeDisk s)) (TF.Attr s P.Text) where
+    computeSnapshot =
+        (_snapshot :: ResourceComputeDisk s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: ComputeDiskResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceComputeDisk s)) (TF.Attr s P.Text) where
+    computeType' =
+        (_type' :: ResourceComputeDisk s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUsers (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedUsers x = TF.compute (TF.refKey x) "users"
+instance s ~ s' => P.HasComputeUsers (TF.Ref s' (ResourceComputeDisk s)) (TF.Attr s P.Text) where
+    computeUsers x = TF.compute (TF.refKey x) "users"
 
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: ComputeDiskResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceComputeDisk s)) (TF.Attr s P.Text) where
+    computeZone =
+        (_zone :: ResourceComputeDisk s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeDiskResource :: TF.Resource P.Google (ComputeDiskResource s)
-computeDiskResource =
+resourceComputeDisk :: TF.Resource P.Google (ResourceComputeDisk s)
+resourceComputeDisk =
     TF.newResource "google_compute_disk" $
-        ComputeDiskResource {
+        ResourceComputeDisk {
               _disk_encryption_key_raw = TF.Nil
             , _image = TF.Nil
             , _labels = TF.Nil
@@ -2322,7 +2385,7 @@ Manages a firewall resource within GCE. For more information see
 <https://cloud.google.com/compute/docs/vpc/firewalls> and
 <https://cloud.google.com/compute/docs/reference/latest/firewalls> .
 -}
-data ComputeFirewallResource s = ComputeFirewallResource {
+data ResourceComputeFirewall s = ResourceComputeFirewall {
       _allow :: !(TF.Attr s P.Text)
     {- ^ (Required) Can be specified multiple times for each allow rule. Each allow block supports fields documented below. -}
     , _deny :: !(TF.Attr s P.Text)
@@ -2353,8 +2416,8 @@ data ComputeFirewallResource s = ComputeFirewallResource {
     {- ^ (Optional) A list of target tags for this firewall. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeFirewallResource s) where
-    toHCL ComputeFirewallResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeFirewall s) where
+    toHCL ResourceComputeFirewall{..} = TF.inline $ catMaybes
         [ TF.assign "allow" <$> TF.attribute _allow
         , TF.assign "deny" <$> TF.attribute _deny
         , TF.assign "description" <$> TF.attribute _description
@@ -2371,153 +2434,153 @@ instance TF.ToHCL (ComputeFirewallResource s) where
         , TF.assign "target_tags" <$> TF.attribute _target_tags
         ]
 
-instance P.HasAllow (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasAllow (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     allow =
-        lens (_allow :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _allow = a } :: ComputeFirewallResource s)
+        lens (_allow :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _allow = a } :: ResourceComputeFirewall s)
 
-instance P.HasDeny (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasDeny (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     deny =
-        lens (_deny :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _deny = a } :: ComputeFirewallResource s)
+        lens (_deny :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _deny = a } :: ResourceComputeFirewall s)
 
-instance P.HasDescription (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeFirewallResource s)
+        lens (_description :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeFirewall s)
 
-instance P.HasDestinationRanges (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasDestinationRanges (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     destinationRanges =
-        lens (_destination_ranges :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _destination_ranges = a } :: ComputeFirewallResource s)
+        lens (_destination_ranges :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _destination_ranges = a } :: ResourceComputeFirewall s)
 
-instance P.HasDirection (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasDirection (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     direction =
-        lens (_direction :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _direction = a } :: ComputeFirewallResource s)
+        lens (_direction :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _direction = a } :: ResourceComputeFirewall s)
 
-instance P.HasName (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeFirewallResource s)
+        lens (_name :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeFirewall s)
 
-instance P.HasNetwork (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasNetwork (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     network =
-        lens (_network :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network = a } :: ComputeFirewallResource s)
+        lens (_network :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _network = a } :: ResourceComputeFirewall s)
 
-instance P.HasPriority (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasPriority (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     priority =
-        lens (_priority :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _priority = a } :: ComputeFirewallResource s)
+        lens (_priority :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _priority = a } :: ResourceComputeFirewall s)
 
-instance P.HasProject (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeFirewallResource s)
+        lens (_project :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeFirewall s)
 
-instance P.HasSourceRanges (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasSourceRanges (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     sourceRanges =
-        lens (_source_ranges :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_ranges = a } :: ComputeFirewallResource s)
+        lens (_source_ranges :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _source_ranges = a } :: ResourceComputeFirewall s)
 
-instance P.HasSourceServiceAccounts (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasSourceServiceAccounts (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     sourceServiceAccounts =
-        lens (_source_service_accounts :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_service_accounts = a } :: ComputeFirewallResource s)
+        lens (_source_service_accounts :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _source_service_accounts = a } :: ResourceComputeFirewall s)
 
-instance P.HasSourceTags (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasSourceTags (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     sourceTags =
-        lens (_source_tags :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_tags = a } :: ComputeFirewallResource s)
+        lens (_source_tags :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _source_tags = a } :: ResourceComputeFirewall s)
 
-instance P.HasTargetServiceAccounts (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasTargetServiceAccounts (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     targetServiceAccounts =
-        lens (_target_service_accounts :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target_service_accounts = a } :: ComputeFirewallResource s)
+        lens (_target_service_accounts :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _target_service_accounts = a } :: ResourceComputeFirewall s)
 
-instance P.HasTargetTags (ComputeFirewallResource s) (TF.Attr s P.Text) where
+instance P.HasTargetTags (ResourceComputeFirewall s) (TF.Attr s P.Text) where
     targetTags =
-        lens (_target_tags :: ComputeFirewallResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target_tags = a } :: ComputeFirewallResource s)
+        lens (_target_tags :: ResourceComputeFirewall s -> TF.Attr s P.Text)
+             (\s a -> s { _target_tags = a } :: ResourceComputeFirewall s)
 
-instance s ~ s' => P.HasComputedAllow (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedAllow =
-        (_allow :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAllow (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeAllow =
+        (_allow :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDeny (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedDeny =
-        (_deny :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDeny (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeDeny =
+        (_deny :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDestinationRanges (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedDestinationRanges =
-        (_destination_ranges :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDestinationRanges (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeDestinationRanges =
+        (_destination_ranges :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDirection (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedDirection =
-        (_direction :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDirection (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeDirection =
+        (_direction :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedNetwork =
-        (_network :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNetwork (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeNetwork =
+        (_network :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPriority (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedPriority =
-        (_priority :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePriority (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computePriority =
+        (_priority :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSourceRanges (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedSourceRanges =
-        (_source_ranges :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSourceRanges (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeSourceRanges =
+        (_source_ranges :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourceServiceAccounts (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedSourceServiceAccounts =
-        (_source_service_accounts :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSourceServiceAccounts (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeSourceServiceAccounts =
+        (_source_service_accounts :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourceTags (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedSourceTags =
-        (_source_tags :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSourceTags (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeSourceTags =
+        (_source_tags :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTargetServiceAccounts (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedTargetServiceAccounts =
-        (_target_service_accounts :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTargetServiceAccounts (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeTargetServiceAccounts =
+        (_target_service_accounts :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTargetTags (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedTargetTags =
-        (_target_tags :: ComputeFirewallResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTargetTags (TF.Ref s' (ResourceComputeFirewall s)) (TF.Attr s P.Text) where
+    computeTargetTags =
+        (_target_tags :: ResourceComputeFirewall s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeFirewallResource :: TF.Resource P.Google (ComputeFirewallResource s)
-computeFirewallResource =
+resourceComputeFirewall :: TF.Resource P.Google (ResourceComputeFirewall s)
+resourceComputeFirewall =
     TF.newResource "google_compute_firewall" $
-        ComputeFirewallResource {
+        ResourceComputeFirewall {
               _allow = TF.Nil
             , _deny = TF.Nil
             , _description = TF.Nil
@@ -2542,7 +2605,7 @@ target pool. For more information see
 and <https://cloud.google.com/compute/docs/reference/latest/forwardingRules>
 .
 -}
-data ComputeForwardingRuleResource s = ComputeForwardingRuleResource {
+data ResourceComputeForwardingRule s = ResourceComputeForwardingRule {
       _backend_service :: !(TF.Attr s P.Text)
     {- ^ (Optional) BackendService resource to receive the matched traffic. Only used for internal load balancing. -}
     , _description :: !(TF.Attr s P.Text)
@@ -2571,8 +2634,8 @@ data ComputeForwardingRuleResource s = ComputeForwardingRuleResource {
     {- ^ (Optional) URL of target pool. Required for external load balancing. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeForwardingRuleResource s) where
-    toHCL ComputeForwardingRuleResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeForwardingRule s) where
+    toHCL ResourceComputeForwardingRule{..} = TF.inline $ catMaybes
         [ TF.assign "backend_service" <$> TF.attribute _backend_service
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address" <$> TF.attribute _ip_address
@@ -2588,143 +2651,143 @@ instance TF.ToHCL (ComputeForwardingRuleResource s) where
         , TF.assign "target" <$> TF.attribute _target
         ]
 
-instance P.HasBackendService (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasBackendService (ResourceComputeForwardingRule s) (TF.Attr s P.Text) where
     backendService =
-        lens (_backend_service :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _backend_service = a } :: ComputeForwardingRuleResource s)
+        lens (_backend_service :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _backend_service = a } :: ResourceComputeForwardingRule s)
 
-instance P.HasDescription (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeForwardingRule s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeForwardingRuleResource s)
+        lens (_description :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeForwardingRule s)
 
-instance P.HasIpAddress (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasIpAddress (ResourceComputeForwardingRule s) (TF.Attr s P.Text) where
     ipAddress =
-        lens (_ip_address :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_address = a } :: ComputeForwardingRuleResource s)
+        lens (_ip_address :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_address = a } :: ResourceComputeForwardingRule s)
 
-instance P.HasIpProtocol (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasIpProtocol (ResourceComputeForwardingRule s) (TF.Attr s P.Text) where
     ipProtocol =
-        lens (_ip_protocol :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_protocol = a } :: ComputeForwardingRuleResource s)
+        lens (_ip_protocol :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_protocol = a } :: ResourceComputeForwardingRule s)
 
-instance P.HasLoadBalancingScheme (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasLoadBalancingScheme (ResourceComputeForwardingRule s) (TF.Attr s P.Text) where
     loadBalancingScheme =
-        lens (_load_balancing_scheme :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _load_balancing_scheme = a } :: ComputeForwardingRuleResource s)
+        lens (_load_balancing_scheme :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _load_balancing_scheme = a } :: ResourceComputeForwardingRule s)
 
-instance P.HasName (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeForwardingRule s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeForwardingRuleResource s)
+        lens (_name :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeForwardingRule s)
 
-instance P.HasNetwork (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasNetwork (ResourceComputeForwardingRule s) (TF.Attr s P.Text) where
     network =
-        lens (_network :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network = a } :: ComputeForwardingRuleResource s)
+        lens (_network :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _network = a } :: ResourceComputeForwardingRule s)
 
-instance P.HasPortRange (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasPortRange (ResourceComputeForwardingRule s) (TF.Attr s P.Text) where
     portRange =
-        lens (_port_range :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _port_range = a } :: ComputeForwardingRuleResource s)
+        lens (_port_range :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _port_range = a } :: ResourceComputeForwardingRule s)
 
-instance P.HasPorts (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasPorts (ResourceComputeForwardingRule s) (TF.Attr s P.Text) where
     ports =
-        lens (_ports :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ports = a } :: ComputeForwardingRuleResource s)
+        lens (_ports :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _ports = a } :: ResourceComputeForwardingRule s)
 
-instance P.HasProject (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeForwardingRule s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeForwardingRuleResource s)
+        lens (_project :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeForwardingRule s)
 
-instance P.HasRegion (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceComputeForwardingRule s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeForwardingRuleResource s)
+        lens (_region :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceComputeForwardingRule s)
 
-instance P.HasSubnetwork (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasSubnetwork (ResourceComputeForwardingRule s) (TF.Attr s P.Text) where
     subnetwork =
-        lens (_subnetwork :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subnetwork = a } :: ComputeForwardingRuleResource s)
+        lens (_subnetwork :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _subnetwork = a } :: ResourceComputeForwardingRule s)
 
-instance P.HasTarget (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasTarget (ResourceComputeForwardingRule s) (TF.Attr s P.Text) where
     target =
-        lens (_target :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target = a } :: ComputeForwardingRuleResource s)
+        lens (_target :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _target = a } :: ResourceComputeForwardingRule s)
 
-instance s ~ s' => P.HasComputedBackendService (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedBackendService =
-        (_backend_service :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBackendService (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computeBackendService =
+        (_backend_service :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedIpAddress =
-        (_ip_address :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpAddress (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computeIpAddress =
+        (_ip_address :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpProtocol (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedIpProtocol =
-        (_ip_protocol :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpProtocol (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computeIpProtocol =
+        (_ip_protocol :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLoadBalancingScheme (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedLoadBalancingScheme =
-        (_load_balancing_scheme :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLoadBalancingScheme (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computeLoadBalancingScheme =
+        (_load_balancing_scheme :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedNetwork =
-        (_network :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNetwork (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computeNetwork =
+        (_network :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPortRange (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedPortRange =
-        (_port_range :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePortRange (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computePortRange =
+        (_port_range :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPorts (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedPorts =
-        (_ports :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePorts (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computePorts =
+        (_ports :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSubnetwork (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedSubnetwork =
-        (_subnetwork :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSubnetwork (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computeSubnetwork =
+        (_subnetwork :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTarget (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedTarget =
-        (_target :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTarget (TF.Ref s' (ResourceComputeForwardingRule s)) (TF.Attr s P.Text) where
+    computeTarget =
+        (_target :: ResourceComputeForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeForwardingRuleResource :: TF.Resource P.Google (ComputeForwardingRuleResource s)
-computeForwardingRuleResource =
+resourceComputeForwardingRule :: TF.Resource P.Google (ResourceComputeForwardingRule s)
+resourceComputeForwardingRule =
     TF.newResource "google_compute_forwarding_rule" $
-        ComputeForwardingRuleResource {
+        ResourceComputeForwardingRule {
               _backend_service = TF.Nil
             , _description = TF.Nil
             , _ip_address = TF.Nil
@@ -2747,7 +2810,7 @@ project. For more information see
 <https://cloud.google.com/compute/docs/instances-and-network> and
 <https://cloud.google.com/compute/docs/reference/latest/globalAddresses> .
 -}
-data ComputeGlobalAddressResource s = ComputeGlobalAddressResource {
+data ResourceComputeGlobalAddress s = ResourceComputeGlobalAddress {
       _ip_version :: !(TF.Attr s P.Text)
     {- ^ (Optional) The IP Version that will be used by this address. One of @"IPV4"@ or @"IPV6"@ . -}
     , _name :: !(TF.Attr s P.Text)
@@ -2756,53 +2819,53 @@ data ComputeGlobalAddressResource s = ComputeGlobalAddressResource {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeGlobalAddressResource s) where
-    toHCL ComputeGlobalAddressResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeGlobalAddress s) where
+    toHCL ResourceComputeGlobalAddress{..} = TF.inline $ catMaybes
         [ TF.assign "ip_version" <$> TF.attribute _ip_version
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasIpVersion (ComputeGlobalAddressResource s) (TF.Attr s P.Text) where
+instance P.HasIpVersion (ResourceComputeGlobalAddress s) (TF.Attr s P.Text) where
     ipVersion =
-        lens (_ip_version :: ComputeGlobalAddressResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_version = a } :: ComputeGlobalAddressResource s)
+        lens (_ip_version :: ResourceComputeGlobalAddress s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_version = a } :: ResourceComputeGlobalAddress s)
 
-instance P.HasName (ComputeGlobalAddressResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeGlobalAddress s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeGlobalAddressResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeGlobalAddressResource s)
+        lens (_name :: ResourceComputeGlobalAddress s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeGlobalAddress s)
 
-instance P.HasProject (ComputeGlobalAddressResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeGlobalAddress s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeGlobalAddressResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeGlobalAddressResource s)
+        lens (_project :: ResourceComputeGlobalAddress s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeGlobalAddress s)
 
-instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ComputeGlobalAddressResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
+instance s ~ s' => P.HasComputeAddress (TF.Ref s' (ResourceComputeGlobalAddress s)) (TF.Attr s P.Text) where
+    computeAddress x = TF.compute (TF.refKey x) "address"
 
-instance s ~ s' => P.HasComputedIpVersion (TF.Ref s' (ComputeGlobalAddressResource s)) (TF.Attr s P.Text) where
-    computedIpVersion =
-        (_ip_version :: ComputeGlobalAddressResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpVersion (TF.Ref s' (ResourceComputeGlobalAddress s)) (TF.Attr s P.Text) where
+    computeIpVersion =
+        (_ip_version :: ResourceComputeGlobalAddress s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeGlobalAddressResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeGlobalAddressResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeGlobalAddress s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeGlobalAddress s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeGlobalAddressResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeGlobalAddressResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeGlobalAddress s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeGlobalAddress s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeGlobalAddressResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeGlobalAddress s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-computeGlobalAddressResource :: TF.Resource P.Google (ComputeGlobalAddressResource s)
-computeGlobalAddressResource =
+resourceComputeGlobalAddress :: TF.Resource P.Google (ResourceComputeGlobalAddress s)
+resourceComputeGlobalAddress =
     TF.newResource "google_compute_global_address" $
-        ComputeGlobalAddressResource {
+        ResourceComputeGlobalAddress {
               _ip_version = TF.Nil
             , _name = TF.Nil
             , _project = TF.Nil
@@ -2817,7 +2880,7 @@ and
 <https://cloud.google.com/compute/docs/reference/latest/globalForwardingRules>
 .
 -}
-data ComputeGlobalForwardingRuleResource s = ComputeGlobalForwardingRuleResource {
+data ResourceComputeGlobalForwardingRule s = ResourceComputeGlobalForwardingRule {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) Textual description field. -}
     , _ip_address :: !(TF.Attr s P.Text)
@@ -2838,8 +2901,8 @@ data ComputeGlobalForwardingRuleResource s = ComputeGlobalForwardingRuleResource
     {- ^ (Required) URL of target HTTP or HTTPS proxy. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeGlobalForwardingRuleResource s) where
-    toHCL ComputeGlobalForwardingRuleResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeGlobalForwardingRule s) where
+    toHCL ResourceComputeGlobalForwardingRule{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address" <$> TF.attribute _ip_address
         , TF.assign "ip_protocol" <$> TF.attribute _ip_protocol
@@ -2851,106 +2914,106 @@ instance TF.ToHCL (ComputeGlobalForwardingRuleResource s) where
         , TF.assign "target" <$> TF.attribute _target
         ]
 
-instance P.HasDescription (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeGlobalForwardingRule s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeGlobalForwardingRuleResource s)
+        lens (_description :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeGlobalForwardingRule s)
 
-instance P.HasIpAddress (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasIpAddress (ResourceComputeGlobalForwardingRule s) (TF.Attr s P.Text) where
     ipAddress =
-        lens (_ip_address :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_address = a } :: ComputeGlobalForwardingRuleResource s)
+        lens (_ip_address :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_address = a } :: ResourceComputeGlobalForwardingRule s)
 
-instance P.HasIpProtocol (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasIpProtocol (ResourceComputeGlobalForwardingRule s) (TF.Attr s P.Text) where
     ipProtocol =
-        lens (_ip_protocol :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_protocol = a } :: ComputeGlobalForwardingRuleResource s)
+        lens (_ip_protocol :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_protocol = a } :: ResourceComputeGlobalForwardingRule s)
 
-instance P.HasIpVersion (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasIpVersion (ResourceComputeGlobalForwardingRule s) (TF.Attr s P.Text) where
     ipVersion =
-        lens (_ip_version :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_version = a } :: ComputeGlobalForwardingRuleResource s)
+        lens (_ip_version :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_version = a } :: ResourceComputeGlobalForwardingRule s)
 
-instance P.HasLabels (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasLabels (ResourceComputeGlobalForwardingRule s) (TF.Attr s P.Text) where
     labels =
-        lens (_labels :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: ComputeGlobalForwardingRuleResource s)
+        lens (_labels :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceComputeGlobalForwardingRule s)
 
-instance P.HasName (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeGlobalForwardingRule s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeGlobalForwardingRuleResource s)
+        lens (_name :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeGlobalForwardingRule s)
 
-instance P.HasPortRange (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasPortRange (ResourceComputeGlobalForwardingRule s) (TF.Attr s P.Text) where
     portRange =
-        lens (_port_range :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _port_range = a } :: ComputeGlobalForwardingRuleResource s)
+        lens (_port_range :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _port_range = a } :: ResourceComputeGlobalForwardingRule s)
 
-instance P.HasProject (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeGlobalForwardingRule s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeGlobalForwardingRuleResource s)
+        lens (_project :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeGlobalForwardingRule s)
 
-instance P.HasTarget (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
+instance P.HasTarget (ResourceComputeGlobalForwardingRule s) (TF.Attr s P.Text) where
     target =
-        lens (_target :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target = a } :: ComputeGlobalForwardingRuleResource s)
+        lens (_target :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
+             (\s a -> s { _target = a } :: ResourceComputeGlobalForwardingRule s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeGlobalForwardingRule s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedIpAddress =
-        (_ip_address :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpAddress (TF.Ref s' (ResourceComputeGlobalForwardingRule s)) (TF.Attr s P.Text) where
+    computeIpAddress =
+        (_ip_address :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpProtocol (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedIpProtocol =
-        (_ip_protocol :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpProtocol (TF.Ref s' (ResourceComputeGlobalForwardingRule s)) (TF.Attr s P.Text) where
+    computeIpProtocol =
+        (_ip_protocol :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpVersion (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedIpVersion =
-        (_ip_version :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpVersion (TF.Ref s' (ResourceComputeGlobalForwardingRule s)) (TF.Attr s P.Text) where
+    computeIpVersion =
+        (_ip_version :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
+instance s ~ s' => P.HasComputeLabelFingerprint (TF.Ref s' (ResourceComputeGlobalForwardingRule s)) (TF.Attr s P.Text) where
+    computeLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceComputeGlobalForwardingRule s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeGlobalForwardingRule s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPortRange (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedPortRange =
-        (_port_range :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePortRange (TF.Ref s' (ResourceComputeGlobalForwardingRule s)) (TF.Attr s P.Text) where
+    computePortRange =
+        (_port_range :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeGlobalForwardingRule s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeGlobalForwardingRule s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedTarget (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedTarget =
-        (_target :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTarget (TF.Ref s' (ResourceComputeGlobalForwardingRule s)) (TF.Attr s P.Text) where
+    computeTarget =
+        (_target :: ResourceComputeGlobalForwardingRule s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeGlobalForwardingRuleResource :: TF.Resource P.Google (ComputeGlobalForwardingRuleResource s)
-computeGlobalForwardingRuleResource =
+resourceComputeGlobalForwardingRule :: TF.Resource P.Google (ResourceComputeGlobalForwardingRule s)
+resourceComputeGlobalForwardingRule =
     TF.newResource "google_compute_global_forwarding_rule" $
-        ComputeGlobalForwardingRuleResource {
+        ResourceComputeGlobalForwardingRule {
               _description = TF.Nil
             , _ip_address = TF.Nil
             , _ip_protocol = TF.Nil
@@ -2970,7 +3033,7 @@ from the pool. For more information, see
 <https://cloud.google.com/compute/docs/load-balancing/health-checks> and
 <https://cloud.google.com/compute/docs/reference/latest/healthChecks> .
 -}
-data ComputeHealthCheckResource s = ComputeHealthCheckResource {
+data ResourceComputeHealthCheck s = ResourceComputeHealthCheck {
       _check_interval_sec :: !(TF.Attr s P.Text)
     {- ^ (Optional) The number of seconds between each poll of the instance instance (default 5). -}
     , _description :: !(TF.Attr s P.Text)
@@ -2995,8 +3058,8 @@ data ComputeHealthCheckResource s = ComputeHealthCheckResource {
     {- ^ (Optional) Consecutive failures required (default 2). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeHealthCheckResource s) where
-    toHCL ComputeHealthCheckResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeHealthCheck s) where
+    toHCL ResourceComputeHealthCheck{..} = TF.inline $ catMaybes
         [ TF.assign "check_interval_sec" <$> TF.attribute _check_interval_sec
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "healthy_threshold" <$> TF.attribute _healthy_threshold
@@ -3010,123 +3073,123 @@ instance TF.ToHCL (ComputeHealthCheckResource s) where
         , TF.assign "unhealthy_threshold" <$> TF.attribute _unhealthy_threshold
         ]
 
-instance P.HasCheckIntervalSec (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasCheckIntervalSec (ResourceComputeHealthCheck s) (TF.Attr s P.Text) where
     checkIntervalSec =
-        lens (_check_interval_sec :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _check_interval_sec = a } :: ComputeHealthCheckResource s)
+        lens (_check_interval_sec :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _check_interval_sec = a } :: ResourceComputeHealthCheck s)
 
-instance P.HasDescription (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeHealthCheck s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeHealthCheckResource s)
+        lens (_description :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeHealthCheck s)
 
-instance P.HasHealthyThreshold (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasHealthyThreshold (ResourceComputeHealthCheck s) (TF.Attr s P.Text) where
     healthyThreshold =
-        lens (_healthy_threshold :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _healthy_threshold = a } :: ComputeHealthCheckResource s)
+        lens (_healthy_threshold :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _healthy_threshold = a } :: ResourceComputeHealthCheck s)
 
-instance P.HasHttpHealthCheck (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasHttpHealthCheck (ResourceComputeHealthCheck s) (TF.Attr s P.Text) where
     httpHealthCheck =
-        lens (_http_health_check :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _http_health_check = a } :: ComputeHealthCheckResource s)
+        lens (_http_health_check :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _http_health_check = a } :: ResourceComputeHealthCheck s)
 
-instance P.HasHttpsHealthCheck (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasHttpsHealthCheck (ResourceComputeHealthCheck s) (TF.Attr s P.Text) where
     httpsHealthCheck =
-        lens (_https_health_check :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _https_health_check = a } :: ComputeHealthCheckResource s)
+        lens (_https_health_check :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _https_health_check = a } :: ResourceComputeHealthCheck s)
 
-instance P.HasName (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeHealthCheck s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeHealthCheckResource s)
+        lens (_name :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeHealthCheck s)
 
-instance P.HasProject (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeHealthCheck s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeHealthCheckResource s)
+        lens (_project :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeHealthCheck s)
 
-instance P.HasSslHealthCheck (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasSslHealthCheck (ResourceComputeHealthCheck s) (TF.Attr s P.Text) where
     sslHealthCheck =
-        lens (_ssl_health_check :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ssl_health_check = a } :: ComputeHealthCheckResource s)
+        lens (_ssl_health_check :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _ssl_health_check = a } :: ResourceComputeHealthCheck s)
 
-instance P.HasTcpHealthCheck (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasTcpHealthCheck (ResourceComputeHealthCheck s) (TF.Attr s P.Text) where
     tcpHealthCheck =
-        lens (_tcp_health_check :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tcp_health_check = a } :: ComputeHealthCheckResource s)
+        lens (_tcp_health_check :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _tcp_health_check = a } :: ResourceComputeHealthCheck s)
 
-instance P.HasTimeoutSec (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasTimeoutSec (ResourceComputeHealthCheck s) (TF.Attr s P.Text) where
     timeoutSec =
-        lens (_timeout_sec :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _timeout_sec = a } :: ComputeHealthCheckResource s)
+        lens (_timeout_sec :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _timeout_sec = a } :: ResourceComputeHealthCheck s)
 
-instance P.HasUnhealthyThreshold (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasUnhealthyThreshold (ResourceComputeHealthCheck s) (TF.Attr s P.Text) where
     unhealthyThreshold =
-        lens (_unhealthy_threshold :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _unhealthy_threshold = a } :: ComputeHealthCheckResource s)
+        lens (_unhealthy_threshold :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _unhealthy_threshold = a } :: ResourceComputeHealthCheck s)
 
-instance s ~ s' => P.HasComputedCheckIntervalSec (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedCheckIntervalSec =
-        (_check_interval_sec :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCheckIntervalSec (TF.Ref s' (ResourceComputeHealthCheck s)) (TF.Attr s P.Text) where
+    computeCheckIntervalSec =
+        (_check_interval_sec :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeHealthCheck s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHealthyThreshold (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedHealthyThreshold =
-        (_healthy_threshold :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHealthyThreshold (TF.Ref s' (ResourceComputeHealthCheck s)) (TF.Attr s P.Text) where
+    computeHealthyThreshold =
+        (_healthy_threshold :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHttpHealthCheck (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedHttpHealthCheck =
-        (_http_health_check :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHttpHealthCheck (TF.Ref s' (ResourceComputeHealthCheck s)) (TF.Attr s P.Text) where
+    computeHttpHealthCheck =
+        (_http_health_check :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHttpsHealthCheck (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedHttpsHealthCheck =
-        (_https_health_check :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHttpsHealthCheck (TF.Ref s' (ResourceComputeHealthCheck s)) (TF.Attr s P.Text) where
+    computeHttpsHealthCheck =
+        (_https_health_check :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeHealthCheck s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeHealthCheck s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeHealthCheck s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSslHealthCheck (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedSslHealthCheck =
-        (_ssl_health_check :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSslHealthCheck (TF.Ref s' (ResourceComputeHealthCheck s)) (TF.Attr s P.Text) where
+    computeSslHealthCheck =
+        (_ssl_health_check :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTcpHealthCheck (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedTcpHealthCheck =
-        (_tcp_health_check :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTcpHealthCheck (TF.Ref s' (ResourceComputeHealthCheck s)) (TF.Attr s P.Text) where
+    computeTcpHealthCheck =
+        (_tcp_health_check :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedTimeoutSec =
-        (_timeout_sec :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTimeoutSec (TF.Ref s' (ResourceComputeHealthCheck s)) (TF.Attr s P.Text) where
+    computeTimeoutSec =
+        (_timeout_sec :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUnhealthyThreshold (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedUnhealthyThreshold =
-        (_unhealthy_threshold :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeUnhealthyThreshold (TF.Ref s' (ResourceComputeHealthCheck s)) (TF.Attr s P.Text) where
+    computeUnhealthyThreshold =
+        (_unhealthy_threshold :: ResourceComputeHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeHealthCheckResource :: TF.Resource P.Google (ComputeHealthCheckResource s)
-computeHealthCheckResource =
+resourceComputeHealthCheck :: TF.Resource P.Google (ResourceComputeHealthCheck s)
+resourceComputeHealthCheck =
     TF.newResource "google_compute_health_check" $
-        ComputeHealthCheckResource {
+        ResourceComputeHealthCheck {
               _check_interval_sec = TF.Nil
             , _description = TF.Nil
             , _healthy_threshold = TF.Nil
@@ -3154,7 +3217,7 @@ preferred for all uses except except
 <https://cloud.google.com/compute/docs/load-balancing/network/> which still
 require the legacy HttpHealthChecks.
 -}
-data ComputeHttpHealthCheckResource s = ComputeHttpHealthCheckResource {
+data ResourceComputeHttpHealthCheck s = ResourceComputeHttpHealthCheck {
       _check_interval_sec :: !(TF.Attr s P.Text)
     {- ^ (Optional) The number of seconds between each poll of the instance instance (default 5). -}
     , _description :: !(TF.Attr s P.Text)
@@ -3177,8 +3240,8 @@ data ComputeHttpHealthCheckResource s = ComputeHttpHealthCheckResource {
     {- ^ (Optional) Consecutive failures required (default 2). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeHttpHealthCheckResource s) where
-    toHCL ComputeHttpHealthCheckResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeHttpHealthCheck s) where
+    toHCL ResourceComputeHttpHealthCheck{..} = TF.inline $ catMaybes
         [ TF.assign "check_interval_sec" <$> TF.attribute _check_interval_sec
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "healthy_threshold" <$> TF.attribute _healthy_threshold
@@ -3191,113 +3254,113 @@ instance TF.ToHCL (ComputeHttpHealthCheckResource s) where
         , TF.assign "unhealthy_threshold" <$> TF.attribute _unhealthy_threshold
         ]
 
-instance P.HasCheckIntervalSec (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasCheckIntervalSec (ResourceComputeHttpHealthCheck s) (TF.Attr s P.Text) where
     checkIntervalSec =
-        lens (_check_interval_sec :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _check_interval_sec = a } :: ComputeHttpHealthCheckResource s)
+        lens (_check_interval_sec :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _check_interval_sec = a } :: ResourceComputeHttpHealthCheck s)
 
-instance P.HasDescription (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeHttpHealthCheck s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeHttpHealthCheckResource s)
+        lens (_description :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeHttpHealthCheck s)
 
-instance P.HasHealthyThreshold (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasHealthyThreshold (ResourceComputeHttpHealthCheck s) (TF.Attr s P.Text) where
     healthyThreshold =
-        lens (_healthy_threshold :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _healthy_threshold = a } :: ComputeHttpHealthCheckResource s)
+        lens (_healthy_threshold :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _healthy_threshold = a } :: ResourceComputeHttpHealthCheck s)
 
-instance P.HasHost (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasHost (ResourceComputeHttpHealthCheck s) (TF.Attr s P.Text) where
     host =
-        lens (_host :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _host = a } :: ComputeHttpHealthCheckResource s)
+        lens (_host :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _host = a } :: ResourceComputeHttpHealthCheck s)
 
-instance P.HasName (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeHttpHealthCheck s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeHttpHealthCheckResource s)
+        lens (_name :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeHttpHealthCheck s)
 
-instance P.HasPort (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasPort (ResourceComputeHttpHealthCheck s) (TF.Attr s P.Text) where
     port =
-        lens (_port :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _port = a } :: ComputeHttpHealthCheckResource s)
+        lens (_port :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _port = a } :: ResourceComputeHttpHealthCheck s)
 
-instance P.HasProject (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeHttpHealthCheck s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeHttpHealthCheckResource s)
+        lens (_project :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeHttpHealthCheck s)
 
-instance P.HasRequestPath (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasRequestPath (ResourceComputeHttpHealthCheck s) (TF.Attr s P.Text) where
     requestPath =
-        lens (_request_path :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _request_path = a } :: ComputeHttpHealthCheckResource s)
+        lens (_request_path :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _request_path = a } :: ResourceComputeHttpHealthCheck s)
 
-instance P.HasTimeoutSec (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasTimeoutSec (ResourceComputeHttpHealthCheck s) (TF.Attr s P.Text) where
     timeoutSec =
-        lens (_timeout_sec :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _timeout_sec = a } :: ComputeHttpHealthCheckResource s)
+        lens (_timeout_sec :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _timeout_sec = a } :: ResourceComputeHttpHealthCheck s)
 
-instance P.HasUnhealthyThreshold (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasUnhealthyThreshold (ResourceComputeHttpHealthCheck s) (TF.Attr s P.Text) where
     unhealthyThreshold =
-        lens (_unhealthy_threshold :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _unhealthy_threshold = a } :: ComputeHttpHealthCheckResource s)
+        lens (_unhealthy_threshold :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _unhealthy_threshold = a } :: ResourceComputeHttpHealthCheck s)
 
-instance s ~ s' => P.HasComputedCheckIntervalSec (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedCheckIntervalSec =
-        (_check_interval_sec :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCheckIntervalSec (TF.Ref s' (ResourceComputeHttpHealthCheck s)) (TF.Attr s P.Text) where
+    computeCheckIntervalSec =
+        (_check_interval_sec :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeHttpHealthCheck s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHealthyThreshold (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedHealthyThreshold =
-        (_healthy_threshold :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHealthyThreshold (TF.Ref s' (ResourceComputeHttpHealthCheck s)) (TF.Attr s P.Text) where
+    computeHealthyThreshold =
+        (_healthy_threshold :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHost (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedHost =
-        (_host :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHost (TF.Ref s' (ResourceComputeHttpHealthCheck s)) (TF.Attr s P.Text) where
+    computeHost =
+        (_host :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeHttpHealthCheck s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedPort =
-        (_port :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePort (TF.Ref s' (ResourceComputeHttpHealthCheck s)) (TF.Attr s P.Text) where
+    computePort =
+        (_port :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeHttpHealthCheck s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRequestPath (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedRequestPath =
-        (_request_path :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRequestPath (TF.Ref s' (ResourceComputeHttpHealthCheck s)) (TF.Attr s P.Text) where
+    computeRequestPath =
+        (_request_path :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeHttpHealthCheck s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedTimeoutSec =
-        (_timeout_sec :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTimeoutSec (TF.Ref s' (ResourceComputeHttpHealthCheck s)) (TF.Attr s P.Text) where
+    computeTimeoutSec =
+        (_timeout_sec :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUnhealthyThreshold (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedUnhealthyThreshold =
-        (_unhealthy_threshold :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeUnhealthyThreshold (TF.Ref s' (ResourceComputeHttpHealthCheck s)) (TF.Attr s P.Text) where
+    computeUnhealthyThreshold =
+        (_unhealthy_threshold :: ResourceComputeHttpHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeHttpHealthCheckResource :: TF.Resource P.Google (ComputeHttpHealthCheckResource s)
-computeHttpHealthCheckResource =
+resourceComputeHttpHealthCheck :: TF.Resource P.Google (ResourceComputeHttpHealthCheck s)
+resourceComputeHttpHealthCheck =
     TF.newResource "google_compute_http_health_check" $
-        ComputeHttpHealthCheckResource {
+        ResourceComputeHttpHealthCheck {
               _check_interval_sec = TF.Nil
             , _description = TF.Nil
             , _healthy_threshold = TF.Nil
@@ -3324,7 +3387,7 @@ preferred for all uses except except
 <https://cloud.google.com/compute/docs/load-balancing/network/> which still
 require the legacy HttpHealthChecks.
 -}
-data ComputeHttpsHealthCheckResource s = ComputeHttpsHealthCheckResource {
+data ResourceComputeHttpsHealthCheck s = ResourceComputeHttpsHealthCheck {
       _check_interval_sec :: !(TF.Attr s P.Text)
     {- ^ (Optional) How often to poll each instance (default 5). -}
     , _description :: !(TF.Attr s P.Text)
@@ -3347,8 +3410,8 @@ data ComputeHttpsHealthCheckResource s = ComputeHttpsHealthCheckResource {
     {- ^ (Optional) Consecutive failures required (default 2). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeHttpsHealthCheckResource s) where
-    toHCL ComputeHttpsHealthCheckResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeHttpsHealthCheck s) where
+    toHCL ResourceComputeHttpsHealthCheck{..} = TF.inline $ catMaybes
         [ TF.assign "check_interval_sec" <$> TF.attribute _check_interval_sec
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "healthy_threshold" <$> TF.attribute _healthy_threshold
@@ -3361,113 +3424,113 @@ instance TF.ToHCL (ComputeHttpsHealthCheckResource s) where
         , TF.assign "unhealthy_threshold" <$> TF.attribute _unhealthy_threshold
         ]
 
-instance P.HasCheckIntervalSec (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasCheckIntervalSec (ResourceComputeHttpsHealthCheck s) (TF.Attr s P.Text) where
     checkIntervalSec =
-        lens (_check_interval_sec :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _check_interval_sec = a } :: ComputeHttpsHealthCheckResource s)
+        lens (_check_interval_sec :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _check_interval_sec = a } :: ResourceComputeHttpsHealthCheck s)
 
-instance P.HasDescription (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeHttpsHealthCheck s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeHttpsHealthCheckResource s)
+        lens (_description :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeHttpsHealthCheck s)
 
-instance P.HasHealthyThreshold (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasHealthyThreshold (ResourceComputeHttpsHealthCheck s) (TF.Attr s P.Text) where
     healthyThreshold =
-        lens (_healthy_threshold :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _healthy_threshold = a } :: ComputeHttpsHealthCheckResource s)
+        lens (_healthy_threshold :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _healthy_threshold = a } :: ResourceComputeHttpsHealthCheck s)
 
-instance P.HasHost (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasHost (ResourceComputeHttpsHealthCheck s) (TF.Attr s P.Text) where
     host =
-        lens (_host :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _host = a } :: ComputeHttpsHealthCheckResource s)
+        lens (_host :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _host = a } :: ResourceComputeHttpsHealthCheck s)
 
-instance P.HasName (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeHttpsHealthCheck s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeHttpsHealthCheckResource s)
+        lens (_name :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeHttpsHealthCheck s)
 
-instance P.HasPort (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasPort (ResourceComputeHttpsHealthCheck s) (TF.Attr s P.Text) where
     port =
-        lens (_port :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _port = a } :: ComputeHttpsHealthCheckResource s)
+        lens (_port :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _port = a } :: ResourceComputeHttpsHealthCheck s)
 
-instance P.HasProject (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeHttpsHealthCheck s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeHttpsHealthCheckResource s)
+        lens (_project :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeHttpsHealthCheck s)
 
-instance P.HasRequestPath (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasRequestPath (ResourceComputeHttpsHealthCheck s) (TF.Attr s P.Text) where
     requestPath =
-        lens (_request_path :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _request_path = a } :: ComputeHttpsHealthCheckResource s)
+        lens (_request_path :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _request_path = a } :: ResourceComputeHttpsHealthCheck s)
 
-instance P.HasTimeoutSec (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasTimeoutSec (ResourceComputeHttpsHealthCheck s) (TF.Attr s P.Text) where
     timeoutSec =
-        lens (_timeout_sec :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _timeout_sec = a } :: ComputeHttpsHealthCheckResource s)
+        lens (_timeout_sec :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _timeout_sec = a } :: ResourceComputeHttpsHealthCheck s)
 
-instance P.HasUnhealthyThreshold (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
+instance P.HasUnhealthyThreshold (ResourceComputeHttpsHealthCheck s) (TF.Attr s P.Text) where
     unhealthyThreshold =
-        lens (_unhealthy_threshold :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _unhealthy_threshold = a } :: ComputeHttpsHealthCheckResource s)
+        lens (_unhealthy_threshold :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
+             (\s a -> s { _unhealthy_threshold = a } :: ResourceComputeHttpsHealthCheck s)
 
-instance s ~ s' => P.HasComputedCheckIntervalSec (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedCheckIntervalSec =
-        (_check_interval_sec :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCheckIntervalSec (TF.Ref s' (ResourceComputeHttpsHealthCheck s)) (TF.Attr s P.Text) where
+    computeCheckIntervalSec =
+        (_check_interval_sec :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeHttpsHealthCheck s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHealthyThreshold (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedHealthyThreshold =
-        (_healthy_threshold :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHealthyThreshold (TF.Ref s' (ResourceComputeHttpsHealthCheck s)) (TF.Attr s P.Text) where
+    computeHealthyThreshold =
+        (_healthy_threshold :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHost (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedHost =
-        (_host :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHost (TF.Ref s' (ResourceComputeHttpsHealthCheck s)) (TF.Attr s P.Text) where
+    computeHost =
+        (_host :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeHttpsHealthCheck s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedPort =
-        (_port :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePort (TF.Ref s' (ResourceComputeHttpsHealthCheck s)) (TF.Attr s P.Text) where
+    computePort =
+        (_port :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeHttpsHealthCheck s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRequestPath (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedRequestPath =
-        (_request_path :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRequestPath (TF.Ref s' (ResourceComputeHttpsHealthCheck s)) (TF.Attr s P.Text) where
+    computeRequestPath =
+        (_request_path :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeHttpsHealthCheck s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedTimeoutSec =
-        (_timeout_sec :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTimeoutSec (TF.Ref s' (ResourceComputeHttpsHealthCheck s)) (TF.Attr s P.Text) where
+    computeTimeoutSec =
+        (_timeout_sec :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUnhealthyThreshold (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedUnhealthyThreshold =
-        (_unhealthy_threshold :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeUnhealthyThreshold (TF.Ref s' (ResourceComputeHttpsHealthCheck s)) (TF.Attr s P.Text) where
+    computeUnhealthyThreshold =
+        (_unhealthy_threshold :: ResourceComputeHttpsHealthCheck s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeHttpsHealthCheckResource :: TF.Resource P.Google (ComputeHttpsHealthCheckResource s)
-computeHttpsHealthCheckResource =
+resourceComputeHttpsHealthCheck :: TF.Resource P.Google (ResourceComputeHttpsHealthCheck s)
+resourceComputeHttpsHealthCheck =
     TF.newResource "google_compute_https_health_check" $
-        ComputeHttpsHealthCheckResource {
+        ResourceComputeHttpsHealthCheck {
               _check_interval_sec = TF.Nil
             , _description = TF.Nil
             , _healthy_threshold = TF.Nil
@@ -3487,7 +3550,7 @@ existing tarball. For more information see
 <https://cloud.google.com/compute/docs/images> and
 <https://cloud.google.com/compute/docs/reference/latest/images> .
 -}
-data ComputeImageResource s = ComputeImageResource {
+data ResourceComputeImage s = ResourceComputeImage {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) The description of the image to be created -}
     , _family' :: !(TF.Attr s P.Text)
@@ -3504,8 +3567,8 @@ data ComputeImageResource s = ComputeImageResource {
     {- ^ (Optional) The URL of a disk that will be used as the source of the image. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeImageResource s) where
-    toHCL ComputeImageResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeImage s) where
+    toHCL ResourceComputeImage{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "family" <$> TF.attribute _family'
         , TF.assign "labels" <$> TF.attribute _labels
@@ -3515,86 +3578,86 @@ instance TF.ToHCL (ComputeImageResource s) where
         , TF.assign "source_disk" <$> TF.attribute _source_disk
         ]
 
-instance P.HasDescription (ComputeImageResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeImage s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeImageResource s)
+        lens (_description :: ResourceComputeImage s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeImage s)
 
-instance P.HasFamily' (ComputeImageResource s) (TF.Attr s P.Text) where
+instance P.HasFamily' (ResourceComputeImage s) (TF.Attr s P.Text) where
     family' =
-        lens (_family' :: ComputeImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _family' = a } :: ComputeImageResource s)
+        lens (_family' :: ResourceComputeImage s -> TF.Attr s P.Text)
+             (\s a -> s { _family' = a } :: ResourceComputeImage s)
 
-instance P.HasLabels (ComputeImageResource s) (TF.Attr s P.Text) where
+instance P.HasLabels (ResourceComputeImage s) (TF.Attr s P.Text) where
     labels =
-        lens (_labels :: ComputeImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: ComputeImageResource s)
+        lens (_labels :: ResourceComputeImage s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceComputeImage s)
 
-instance P.HasName (ComputeImageResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeImage s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeImageResource s)
+        lens (_name :: ResourceComputeImage s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeImage s)
 
-instance P.HasProject (ComputeImageResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeImage s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeImageResource s)
+        lens (_project :: ResourceComputeImage s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeImage s)
 
-instance P.HasRawDisk (ComputeImageResource s) (TF.Attr s P.Text) where
+instance P.HasRawDisk (ResourceComputeImage s) (TF.Attr s P.Text) where
     rawDisk =
-        lens (_raw_disk :: ComputeImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _raw_disk = a } :: ComputeImageResource s)
+        lens (_raw_disk :: ResourceComputeImage s -> TF.Attr s P.Text)
+             (\s a -> s { _raw_disk = a } :: ResourceComputeImage s)
 
-instance P.HasSourceDisk (ComputeImageResource s) (TF.Attr s P.Text) where
+instance P.HasSourceDisk (ResourceComputeImage s) (TF.Attr s P.Text) where
     sourceDisk =
-        lens (_source_disk :: ComputeImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_disk = a } :: ComputeImageResource s)
+        lens (_source_disk :: ResourceComputeImage s -> TF.Attr s P.Text)
+             (\s a -> s { _source_disk = a } :: ResourceComputeImage s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeImageResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeImage s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFamily' (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
-    computedFamily' =
-        (_family' :: ComputeImageResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFamily' (TF.Ref s' (ResourceComputeImage s)) (TF.Attr s P.Text) where
+    computeFamily' =
+        (_family' :: ResourceComputeImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
+instance s ~ s' => P.HasComputeLabelFingerprint (TF.Ref s' (ResourceComputeImage s)) (TF.Attr s P.Text) where
+    computeLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: ComputeImageResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceComputeImage s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceComputeImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeImageResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeImage s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeImageResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeImage s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRawDisk (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
-    computedRawDisk =
-        (_raw_disk :: ComputeImageResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRawDisk (TF.Ref s' (ResourceComputeImage s)) (TF.Attr s P.Text) where
+    computeRawDisk =
+        (_raw_disk :: ResourceComputeImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeImage s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSourceDisk (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
-    computedSourceDisk =
-        (_source_disk :: ComputeImageResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSourceDisk (TF.Ref s' (ResourceComputeImage s)) (TF.Attr s P.Text) where
+    computeSourceDisk =
+        (_source_disk :: ResourceComputeImage s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeImageResource :: TF.Resource P.Google (ComputeImageResource s)
-computeImageResource =
+resourceComputeImage :: TF.Resource P.Google (ResourceComputeImage s)
+resourceComputeImage =
     TF.newResource "google_compute_image" $
-        ComputeImageResource {
+        ResourceComputeImage {
               _description = TF.Nil
             , _family' = TF.Nil
             , _labels = TF.Nil
@@ -3604,324 +3667,13 @@ computeImageResource =
             , _source_disk = TF.Nil
             }
 
-{- | The @google_compute_instance_group_manager@ Google resource.
-
-The Google Compute Engine Instance Group Manager API creates and manages
-pools of homogeneous Compute Engine virtual machine instances from a common
-instance template. For more information, see
-<https://cloud.google.com/compute/docs/instance-groups/manager> and
-<https://cloud.google.com/compute/docs/reference/latest/instanceGroupManagers>
-~> Note: Use
-</docs/providers/google/r/compute_region_instance_group_manager.html> to
-create a regional (multi-zone) instance group manager.
--}
-data ComputeInstanceGroupManagerResource s = ComputeInstanceGroupManagerResource {
-      _auto_healing_policies :: !(TF.Attr s P.Text)
-    {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) The autohealing policies for this managed instance group. You can specify only one value. Structure is documented below. For more information, see the <https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances#monitoring_groups> . -}
-    , _base_instance_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The base instance name to use for instances in this group. The value must be a valid <https://www.ietf.org/rfc/rfc1035.txt> name. Supported characters are lowercase letters, numbers, and hyphens (-). Instances are named by appending a hyphen and a random four-character string to the base instance name. -}
-    , _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) An optional textual description of the instance group manager. -}
-    , _instance_template :: !(TF.Attr s P.Text)
-    {- ^ (Required) The full URL to an instance template from which all new instances will be created. -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the instance group manager. Must be 1-63 characters long and comply with <https://www.ietf.org/rfc/rfc1035.txt> . Supported characters include lowercase letters, numbers, and hyphens. -}
-    , _named_port :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The named port configuration. See the section below for details on configuration. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _target_pools :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The full URL of all target pools to which new instances in the group are added. Updating the target pools attribute does not affect existing instances. -}
-    , _target_size :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The target number of running instances for this managed instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set. Defaults to @0@ . -}
-    , _update_strategy :: !(TF.Attr s P.Text)
-    {- ^ (Optional, Default @"RESTART"@ ) If the @instance_template@ resource is modified, a value of @"NONE"@ will prevent any of the managed instances from being restarted by Terraform. A value of @"RESTART"@ will restart all of the instances at once. In the future, as the GCE API matures we will support @"ROLLING_UPDATE"@ as well. -}
-    , _zone :: !(TF.Attr s P.Text)
-    {- ^ (Required) The zone that instances in this group should be created in. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ComputeInstanceGroupManagerResource s) where
-    toHCL ComputeInstanceGroupManagerResource{..} = TF.inline $ catMaybes
-        [ TF.assign "auto_healing_policies" <$> TF.attribute _auto_healing_policies
-        , TF.assign "base_instance_name" <$> TF.attribute _base_instance_name
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "instance_template" <$> TF.attribute _instance_template
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "named_port" <$> TF.attribute _named_port
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "target_pools" <$> TF.attribute _target_pools
-        , TF.assign "target_size" <$> TF.attribute _target_size
-        , TF.assign "update_strategy" <$> TF.attribute _update_strategy
-        , TF.assign "zone" <$> TF.attribute _zone
-        ]
-
-instance P.HasAutoHealingPolicies (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
-    autoHealingPolicies =
-        lens (_auto_healing_policies :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _auto_healing_policies = a } :: ComputeInstanceGroupManagerResource s)
-
-instance P.HasBaseInstanceName (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
-    baseInstanceName =
-        lens (_base_instance_name :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _base_instance_name = a } :: ComputeInstanceGroupManagerResource s)
-
-instance P.HasDescription (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeInstanceGroupManagerResource s)
-
-instance P.HasInstanceTemplate (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
-    instanceTemplate =
-        lens (_instance_template :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_template = a } :: ComputeInstanceGroupManagerResource s)
-
-instance P.HasName (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeInstanceGroupManagerResource s)
-
-instance P.HasNamedPort (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
-    namedPort =
-        lens (_named_port :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _named_port = a } :: ComputeInstanceGroupManagerResource s)
-
-instance P.HasProject (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeInstanceGroupManagerResource s)
-
-instance P.HasTargetPools (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
-    targetPools =
-        lens (_target_pools :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target_pools = a } :: ComputeInstanceGroupManagerResource s)
-
-instance P.HasTargetSize (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
-    targetSize =
-        lens (_target_size :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target_size = a } :: ComputeInstanceGroupManagerResource s)
-
-instance P.HasUpdateStrategy (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
-    updateStrategy =
-        lens (_update_strategy :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _update_strategy = a } :: ComputeInstanceGroupManagerResource s)
-
-instance P.HasZone (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
-    zone =
-        lens (_zone :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: ComputeInstanceGroupManagerResource s)
-
-instance s ~ s' => P.HasComputedAutoHealingPolicies (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedAutoHealingPolicies =
-        (_auto_healing_policies :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedBaseInstanceName (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedBaseInstanceName =
-        (_base_instance_name :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
-
-instance s ~ s' => P.HasComputedInstanceGroup (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedInstanceGroup x = TF.compute (TF.refKey x) "instance_group"
-
-instance s ~ s' => P.HasComputedInstanceTemplate (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedInstanceTemplate =
-        (_instance_template :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNamedPort (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedNamedPort =
-        (_named_port :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
-
-instance s ~ s' => P.HasComputedTargetPools (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedTargetPools =
-        (_target_pools :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTargetSize (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedTargetSize =
-        (_target_size :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUpdateStrategy (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedUpdateStrategy =
-        (_update_strategy :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-computeInstanceGroupManagerResource :: TF.Resource P.Google (ComputeInstanceGroupManagerResource s)
-computeInstanceGroupManagerResource =
-    TF.newResource "google_compute_instance_group_manager" $
-        ComputeInstanceGroupManagerResource {
-              _auto_healing_policies = TF.Nil
-            , _base_instance_name = TF.Nil
-            , _description = TF.Nil
-            , _instance_template = TF.Nil
-            , _name = TF.Nil
-            , _named_port = TF.Nil
-            , _project = TF.Nil
-            , _target_pools = TF.Nil
-            , _target_size = TF.Nil
-            , _update_strategy = TF.Nil
-            , _zone = TF.Nil
-            }
-
-{- | The @google_compute_instance_group@ Google resource.
-
-Creates a group of dissimilar Compute Engine virtual machine instances. For
-more information, see
-<https://cloud.google.com/compute/docs/instance-groups/#unmanaged_instance_groups>
-and <https://cloud.google.com/compute/docs/reference/latest/instanceGroups>
--}
-data ComputeInstanceGroupResource s = ComputeInstanceGroupResource {
-      _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) An optional textual description of the instance group. -}
-    , _instances :: !(TF.Attr s P.Text)
-    {- ^ (Optional) List of instances in the group. They should be given as self_link URLs. When adding instances they must all be in the same network and zone as the instance group. -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the instance group. Must be 1-63 characters long and comply with <https://www.ietf.org/rfc/rfc1035.txt> . Supported characters include lowercase letters, numbers, and hyphens. -}
-    , _named_port :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The named port configuration. See the section below for details on configuration. -}
-    , _network :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The URL of the network the instance group is in. If this is different from the network where the instances are in, the creation fails. Defaults to the network where the instances are in (if neither @network@ nor @instances@ is specified, this field will be blank). -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _zone :: !(TF.Attr s P.Text)
-    {- ^ (Required) The zone that this instance group should be created in. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ComputeInstanceGroupResource s) where
-    toHCL ComputeInstanceGroupResource{..} = TF.inline $ catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "instances" <$> TF.attribute _instances
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "named_port" <$> TF.attribute _named_port
-        , TF.assign "network" <$> TF.attribute _network
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "zone" <$> TF.attribute _zone
-        ]
-
-instance P.HasDescription (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeInstanceGroupResource s)
-
-instance P.HasInstances (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
-    instances =
-        lens (_instances :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instances = a } :: ComputeInstanceGroupResource s)
-
-instance P.HasName (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeInstanceGroupResource s)
-
-instance P.HasNamedPort (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
-    namedPort =
-        lens (_named_port :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _named_port = a } :: ComputeInstanceGroupResource s)
-
-instance P.HasNetwork (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
-    network =
-        lens (_network :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network = a } :: ComputeInstanceGroupResource s)
-
-instance P.HasProject (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeInstanceGroupResource s)
-
-instance P.HasZone (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
-    zone =
-        lens (_zone :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: ComputeInstanceGroupResource s)
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
-    computedInstances =
-        (_instances :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNamedPort (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
-    computedNamedPort =
-        (_named_port :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
-    computedNetwork =
-        (_network :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
-
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
-    computedSize x = TF.compute (TF.refKey x) "size"
-
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-computeInstanceGroupResource :: TF.Resource P.Google (ComputeInstanceGroupResource s)
-computeInstanceGroupResource =
-    TF.newResource "google_compute_instance_group" $
-        ComputeInstanceGroupResource {
-              _description = TF.Nil
-            , _instances = TF.Nil
-            , _name = TF.Nil
-            , _named_port = TF.Nil
-            , _network = TF.Nil
-            , _project = TF.Nil
-            , _zone = TF.Nil
-            }
-
 {- | The @google_compute_instance@ Google resource.
 
 Manages a VM instance resource within GCE. For more information see
 <https://cloud.google.com/compute/docs/instances> and
 <https://cloud.google.com/compute/docs/reference/latest/instances> .
 -}
-data ComputeInstanceResource s = ComputeInstanceResource {
+data ResourceComputeInstance s = ResourceComputeInstance {
       _allow_stopping_for_update :: !(TF.Attr s P.Text)
     {- ^ (Optional) If true, allows Terraform to stop the instance to update its properties. If you try to update a property that requires stopping the instance without setting this field, the update will fail. -}
     , _attached_disk :: !(TF.Attr s P.Text)
@@ -3964,8 +3716,8 @@ data ComputeInstanceResource s = ComputeInstanceResource {
     {- ^ (Required) The zone that the machine should be created in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeInstanceResource s) where
-    toHCL ComputeInstanceResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeInstance s) where
+    toHCL ResourceComputeInstance{..} = TF.inline $ catMaybes
         [ TF.assign "allow_stopping_for_update" <$> TF.attribute _allow_stopping_for_update
         , TF.assign "attached_disk" <$> TF.attribute _attached_disk
         , TF.assign "boot_disk" <$> TF.attribute _boot_disk
@@ -3988,243 +3740,243 @@ instance TF.ToHCL (ComputeInstanceResource s) where
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasAllowStoppingForUpdate (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasAllowStoppingForUpdate (ResourceComputeInstance s) (TF.Attr s P.Text) where
     allowStoppingForUpdate =
-        lens (_allow_stopping_for_update :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _allow_stopping_for_update = a } :: ComputeInstanceResource s)
+        lens (_allow_stopping_for_update :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _allow_stopping_for_update = a } :: ResourceComputeInstance s)
 
-instance P.HasAttachedDisk (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasAttachedDisk (ResourceComputeInstance s) (TF.Attr s P.Text) where
     attachedDisk =
-        lens (_attached_disk :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _attached_disk = a } :: ComputeInstanceResource s)
+        lens (_attached_disk :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _attached_disk = a } :: ResourceComputeInstance s)
 
-instance P.HasBootDisk (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasBootDisk (ResourceComputeInstance s) (TF.Attr s P.Text) where
     bootDisk =
-        lens (_boot_disk :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _boot_disk = a } :: ComputeInstanceResource s)
+        lens (_boot_disk :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _boot_disk = a } :: ResourceComputeInstance s)
 
-instance P.HasCanIpForward (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasCanIpForward (ResourceComputeInstance s) (TF.Attr s P.Text) where
     canIpForward =
-        lens (_can_ip_forward :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _can_ip_forward = a } :: ComputeInstanceResource s)
+        lens (_can_ip_forward :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _can_ip_forward = a } :: ResourceComputeInstance s)
 
-instance P.HasCreateTimeout (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasCreateTimeout (ResourceComputeInstance s) (TF.Attr s P.Text) where
     createTimeout =
-        lens (_create_timeout :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _create_timeout = a } :: ComputeInstanceResource s)
+        lens (_create_timeout :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _create_timeout = a } :: ResourceComputeInstance s)
 
-instance P.HasDescription (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeInstance s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeInstanceResource s)
+        lens (_description :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeInstance s)
 
-instance P.HasGuestAccelerator (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasGuestAccelerator (ResourceComputeInstance s) (TF.Attr s P.Text) where
     guestAccelerator =
-        lens (_guest_accelerator :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _guest_accelerator = a } :: ComputeInstanceResource s)
+        lens (_guest_accelerator :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _guest_accelerator = a } :: ResourceComputeInstance s)
 
-instance P.HasLabels (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasLabels (ResourceComputeInstance s) (TF.Attr s P.Text) where
     labels =
-        lens (_labels :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: ComputeInstanceResource s)
+        lens (_labels :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceComputeInstance s)
 
-instance P.HasMachineType (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasMachineType (ResourceComputeInstance s) (TF.Attr s P.Text) where
     machineType =
-        lens (_machine_type :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _machine_type = a } :: ComputeInstanceResource s)
+        lens (_machine_type :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _machine_type = a } :: ResourceComputeInstance s)
 
-instance P.HasMetadata (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasMetadata (ResourceComputeInstance s) (TF.Attr s P.Text) where
     metadata =
-        lens (_metadata :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _metadata = a } :: ComputeInstanceResource s)
+        lens (_metadata :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata = a } :: ResourceComputeInstance s)
 
-instance P.HasMetadataStartupScript (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasMetadataStartupScript (ResourceComputeInstance s) (TF.Attr s P.Text) where
     metadataStartupScript =
-        lens (_metadata_startup_script :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _metadata_startup_script = a } :: ComputeInstanceResource s)
+        lens (_metadata_startup_script :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata_startup_script = a } :: ResourceComputeInstance s)
 
-instance P.HasMinCpuPlatform (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasMinCpuPlatform (ResourceComputeInstance s) (TF.Attr s P.Text) where
     minCpuPlatform =
-        lens (_min_cpu_platform :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _min_cpu_platform = a } :: ComputeInstanceResource s)
+        lens (_min_cpu_platform :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _min_cpu_platform = a } :: ResourceComputeInstance s)
 
-instance P.HasName (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeInstance s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeInstanceResource s)
+        lens (_name :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeInstance s)
 
-instance P.HasNetworkInterface (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasNetworkInterface (ResourceComputeInstance s) (TF.Attr s P.Text) where
     networkInterface =
-        lens (_network_interface :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network_interface = a } :: ComputeInstanceResource s)
+        lens (_network_interface :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _network_interface = a } :: ResourceComputeInstance s)
 
-instance P.HasProject (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeInstance s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeInstanceResource s)
+        lens (_project :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeInstance s)
 
-instance P.HasScheduling (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasScheduling (ResourceComputeInstance s) (TF.Attr s P.Text) where
     scheduling =
-        lens (_scheduling :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _scheduling = a } :: ComputeInstanceResource s)
+        lens (_scheduling :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _scheduling = a } :: ResourceComputeInstance s)
 
-instance P.HasScratchDisk (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasScratchDisk (ResourceComputeInstance s) (TF.Attr s P.Text) where
     scratchDisk =
-        lens (_scratch_disk :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _scratch_disk = a } :: ComputeInstanceResource s)
+        lens (_scratch_disk :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _scratch_disk = a } :: ResourceComputeInstance s)
 
-instance P.HasServiceAccount (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasServiceAccount (ResourceComputeInstance s) (TF.Attr s P.Text) where
     serviceAccount =
-        lens (_service_account :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _service_account = a } :: ComputeInstanceResource s)
+        lens (_service_account :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _service_account = a } :: ResourceComputeInstance s)
 
-instance P.HasTags (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasTags (ResourceComputeInstance s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ComputeInstanceResource s)
+        lens (_tags :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ResourceComputeInstance s)
 
-instance P.HasZone (ComputeInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasZone (ResourceComputeInstance s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: ComputeInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: ComputeInstanceResource s)
+        lens (_zone :: ResourceComputeInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _zone = a } :: ResourceComputeInstance s)
 
-instance s ~ s' => P.HasComputedAllowStoppingForUpdate (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedAllowStoppingForUpdate =
-        (_allow_stopping_for_update :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAllowStoppingForUpdate (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeAllowStoppingForUpdate =
+        (_allow_stopping_for_update :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedAttachedDisk (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedAttachedDisk =
-        (_attached_disk :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAttachedDisk (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeAttachedDisk =
+        (_attached_disk :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedAttachedDisk0DiskEncryptionKeySha256 (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedAttachedDisk0DiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "attached_disk.0.disk_encryption_key_sha256"
+instance s ~ s' => P.HasComputeAttachedDisk0DiskEncryptionKeySha256 (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeAttachedDisk0DiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "attached_disk.0.disk_encryption_key_sha256"
 
-instance s ~ s' => P.HasComputedBootDisk (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedBootDisk =
-        (_boot_disk :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBootDisk (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeBootDisk =
+        (_boot_disk :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBootDiskDiskEncryptionKeySha256 (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedBootDiskDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "boot_disk.disk_encryption_key_sha256"
+instance s ~ s' => P.HasComputeBootDiskDiskEncryptionKeySha256 (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeBootDiskDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "boot_disk.disk_encryption_key_sha256"
 
-instance s ~ s' => P.HasComputedCanIpForward (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedCanIpForward =
-        (_can_ip_forward :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCanIpForward (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeCanIpForward =
+        (_can_ip_forward :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCpuPlatform (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedCpuPlatform x = TF.compute (TF.refKey x) "cpu_platform"
+instance s ~ s' => P.HasComputeCpuPlatform (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeCpuPlatform x = TF.compute (TF.refKey x) "cpu_platform"
 
-instance s ~ s' => P.HasComputedCreateTimeout (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedCreateTimeout =
-        (_create_timeout :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCreateTimeout (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeCreateTimeout =
+        (_create_timeout :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisk0DiskEncryptionKeySha256 (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedDisk0DiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "disk.0.disk_encryption_key_sha256"
+instance s ~ s' => P.HasComputeDisk0DiskEncryptionKeySha256 (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeDisk0DiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "disk.0.disk_encryption_key_sha256"
 
-instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedGuestAccelerator =
-        (_guest_accelerator :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeGuestAccelerator (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeGuestAccelerator =
+        (_guest_accelerator :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
+instance s ~ s' => P.HasComputeInstanceId (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
-instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
+instance s ~ s' => P.HasComputeLabelFingerprint (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedMachineType =
-        (_machine_type :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMachineType (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeMachineType =
+        (_machine_type :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedMetadata =
-        (_metadata :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeMetadata =
+        (_metadata :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMetadataFingerprint (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedMetadataFingerprint x = TF.compute (TF.refKey x) "metadata_fingerprint"
+instance s ~ s' => P.HasComputeMetadataFingerprint (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeMetadataFingerprint x = TF.compute (TF.refKey x) "metadata_fingerprint"
 
-instance s ~ s' => P.HasComputedMetadataStartupScript (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedMetadataStartupScript =
-        (_metadata_startup_script :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMetadataStartupScript (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeMetadataStartupScript =
+        (_metadata_startup_script :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMinCpuPlatform (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedMinCpuPlatform =
-        (_min_cpu_platform :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMinCpuPlatform (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeMinCpuPlatform =
+        (_min_cpu_platform :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetworkInterface (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedNetworkInterface =
-        (_network_interface :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNetworkInterface (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeNetworkInterface =
+        (_network_interface :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetworkInterface0AccessConfig0AssignedNatIp (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedNetworkInterface0AccessConfig0AssignedNatIp x = TF.compute (TF.refKey x) "network_interface.0.access_config.0.assigned_nat_ip"
+instance s ~ s' => P.HasComputeNetworkInterface0AccessConfig0AssignedNatIp (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeNetworkInterface0AccessConfig0AssignedNatIp x = TF.compute (TF.refKey x) "network_interface.0.access_config.0.assigned_nat_ip"
 
-instance s ~ s' => P.HasComputedNetworkInterface0Address (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedNetworkInterface0Address x = TF.compute (TF.refKey x) "network_interface.0.address"
+instance s ~ s' => P.HasComputeNetworkInterface0Address (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeNetworkInterface0Address x = TF.compute (TF.refKey x) "network_interface.0.address"
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedScheduling =
-        (_scheduling :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeScheduling (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeScheduling =
+        (_scheduling :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedScratchDisk (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedScratchDisk =
-        (_scratch_disk :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeScratchDisk (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeScratchDisk =
+        (_scratch_disk :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedServiceAccount (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedServiceAccount =
-        (_service_account :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeServiceAccount (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeServiceAccount =
+        (_service_account :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeTags =
+        (_tags :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTagsFingerprint (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedTagsFingerprint x = TF.compute (TF.refKey x) "tags_fingerprint"
+instance s ~ s' => P.HasComputeTagsFingerprint (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeTagsFingerprint x = TF.compute (TF.refKey x) "tags_fingerprint"
 
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: ComputeInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+    computeZone =
+        (_zone :: ResourceComputeInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeInstanceResource :: TF.Resource P.Google (ComputeInstanceResource s)
-computeInstanceResource =
+resourceComputeInstance :: TF.Resource P.Google (ResourceComputeInstance s)
+resourceComputeInstance =
     TF.newResource "google_compute_instance" $
-        ComputeInstanceResource {
+        ResourceComputeInstance {
               _allow_stopping_for_update = TF.Nil
             , _attached_disk = TF.Nil
             , _boot_disk = TF.Nil
@@ -4247,13 +3999,324 @@ computeInstanceResource =
             , _zone = TF.Nil
             }
 
+{- | The @google_compute_instance_group@ Google resource.
+
+Creates a group of dissimilar Compute Engine virtual machine instances. For
+more information, see
+<https://cloud.google.com/compute/docs/instance-groups/#unmanaged_instance_groups>
+and <https://cloud.google.com/compute/docs/reference/latest/instanceGroups>
+-}
+data ResourceComputeInstanceGroup s = ResourceComputeInstanceGroup {
+      _description :: !(TF.Attr s P.Text)
+    {- ^ (Optional) An optional textual description of the instance group. -}
+    , _instances :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of instances in the group. They should be given as self_link URLs. When adding instances they must all be in the same network and zone as the instance group. -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the instance group. Must be 1-63 characters long and comply with <https://www.ietf.org/rfc/rfc1035.txt> . Supported characters include lowercase letters, numbers, and hyphens. -}
+    , _named_port :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The named port configuration. See the section below for details on configuration. -}
+    , _network :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The URL of the network the instance group is in. If this is different from the network where the instances are in, the creation fails. Defaults to the network where the instances are in (if neither @network@ nor @instances@ is specified, this field will be blank). -}
+    , _project :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
+    , _zone :: !(TF.Attr s P.Text)
+    {- ^ (Required) The zone that this instance group should be created in. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceComputeInstanceGroup s) where
+    toHCL ResourceComputeInstanceGroup{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "instances" <$> TF.attribute _instances
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "named_port" <$> TF.attribute _named_port
+        , TF.assign "network" <$> TF.attribute _network
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "zone" <$> TF.attribute _zone
+        ]
+
+instance P.HasDescription (ResourceComputeInstanceGroup s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeInstanceGroup s)
+
+instance P.HasInstances (ResourceComputeInstanceGroup s) (TF.Attr s P.Text) where
+    instances =
+        lens (_instances :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _instances = a } :: ResourceComputeInstanceGroup s)
+
+instance P.HasName (ResourceComputeInstanceGroup s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeInstanceGroup s)
+
+instance P.HasNamedPort (ResourceComputeInstanceGroup s) (TF.Attr s P.Text) where
+    namedPort =
+        lens (_named_port :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _named_port = a } :: ResourceComputeInstanceGroup s)
+
+instance P.HasNetwork (ResourceComputeInstanceGroup s) (TF.Attr s P.Text) where
+    network =
+        lens (_network :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _network = a } :: ResourceComputeInstanceGroup s)
+
+instance P.HasProject (ResourceComputeInstanceGroup s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeInstanceGroup s)
+
+instance P.HasZone (ResourceComputeInstanceGroup s) (TF.Attr s P.Text) where
+    zone =
+        lens (_zone :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _zone = a } :: ResourceComputeInstanceGroup s)
+
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeInstanceGroup s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeInstances (TF.Ref s' (ResourceComputeInstanceGroup s)) (TF.Attr s P.Text) where
+    computeInstances =
+        (_instances :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeInstanceGroup s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeNamedPort (TF.Ref s' (ResourceComputeInstanceGroup s)) (TF.Attr s P.Text) where
+    computeNamedPort =
+        (_named_port :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeNetwork (TF.Ref s' (ResourceComputeInstanceGroup s)) (TF.Attr s P.Text) where
+    computeNetwork =
+        (_network :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeInstanceGroup s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeInstanceGroup s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
+
+instance s ~ s' => P.HasComputeSize (TF.Ref s' (ResourceComputeInstanceGroup s)) (TF.Attr s P.Text) where
+    computeSize x = TF.compute (TF.refKey x) "size"
+
+instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceComputeInstanceGroup s)) (TF.Attr s P.Text) where
+    computeZone =
+        (_zone :: ResourceComputeInstanceGroup s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourceComputeInstanceGroup :: TF.Resource P.Google (ResourceComputeInstanceGroup s)
+resourceComputeInstanceGroup =
+    TF.newResource "google_compute_instance_group" $
+        ResourceComputeInstanceGroup {
+              _description = TF.Nil
+            , _instances = TF.Nil
+            , _name = TF.Nil
+            , _named_port = TF.Nil
+            , _network = TF.Nil
+            , _project = TF.Nil
+            , _zone = TF.Nil
+            }
+
+{- | The @google_compute_instance_group_manager@ Google resource.
+
+The Google Compute Engine Instance Group Manager API creates and manages
+pools of homogeneous Compute Engine virtual machine instances from a common
+instance template. For more information, see
+<https://cloud.google.com/compute/docs/instance-groups/manager> and
+<https://cloud.google.com/compute/docs/reference/latest/instanceGroupManagers>
+~> Note: Use
+</docs/providers/google/r/compute_region_instance_group_manager.html> to
+create a regional (multi-zone) instance group manager.
+-}
+data ResourceComputeInstanceGroupManager s = ResourceComputeInstanceGroupManager {
+      _auto_healing_policies :: !(TF.Attr s P.Text)
+    {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) The autohealing policies for this managed instance group. You can specify only one value. Structure is documented below. For more information, see the <https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances#monitoring_groups> . -}
+    , _base_instance_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The base instance name to use for instances in this group. The value must be a valid <https://www.ietf.org/rfc/rfc1035.txt> name. Supported characters are lowercase letters, numbers, and hyphens (-). Instances are named by appending a hyphen and a random four-character string to the base instance name. -}
+    , _description :: !(TF.Attr s P.Text)
+    {- ^ (Optional) An optional textual description of the instance group manager. -}
+    , _instance_template :: !(TF.Attr s P.Text)
+    {- ^ (Required) The full URL to an instance template from which all new instances will be created. -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the instance group manager. Must be 1-63 characters long and comply with <https://www.ietf.org/rfc/rfc1035.txt> . Supported characters include lowercase letters, numbers, and hyphens. -}
+    , _named_port :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The named port configuration. See the section below for details on configuration. -}
+    , _project :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
+    , _target_pools :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The full URL of all target pools to which new instances in the group are added. Updating the target pools attribute does not affect existing instances. -}
+    , _target_size :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The target number of running instances for this managed instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set. Defaults to @0@ . -}
+    , _update_strategy :: !(TF.Attr s P.Text)
+    {- ^ (Optional, Default @"RESTART"@ ) If the @instance_template@ resource is modified, a value of @"NONE"@ will prevent any of the managed instances from being restarted by Terraform. A value of @"RESTART"@ will restart all of the instances at once. In the future, as the GCE API matures we will support @"ROLLING_UPDATE"@ as well. -}
+    , _zone :: !(TF.Attr s P.Text)
+    {- ^ (Required) The zone that instances in this group should be created in. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceComputeInstanceGroupManager s) where
+    toHCL ResourceComputeInstanceGroupManager{..} = TF.inline $ catMaybes
+        [ TF.assign "auto_healing_policies" <$> TF.attribute _auto_healing_policies
+        , TF.assign "base_instance_name" <$> TF.attribute _base_instance_name
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "instance_template" <$> TF.attribute _instance_template
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "named_port" <$> TF.attribute _named_port
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "target_pools" <$> TF.attribute _target_pools
+        , TF.assign "target_size" <$> TF.attribute _target_size
+        , TF.assign "update_strategy" <$> TF.attribute _update_strategy
+        , TF.assign "zone" <$> TF.attribute _zone
+        ]
+
+instance P.HasAutoHealingPolicies (ResourceComputeInstanceGroupManager s) (TF.Attr s P.Text) where
+    autoHealingPolicies =
+        lens (_auto_healing_policies :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _auto_healing_policies = a } :: ResourceComputeInstanceGroupManager s)
+
+instance P.HasBaseInstanceName (ResourceComputeInstanceGroupManager s) (TF.Attr s P.Text) where
+    baseInstanceName =
+        lens (_base_instance_name :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _base_instance_name = a } :: ResourceComputeInstanceGroupManager s)
+
+instance P.HasDescription (ResourceComputeInstanceGroupManager s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeInstanceGroupManager s)
+
+instance P.HasInstanceTemplate (ResourceComputeInstanceGroupManager s) (TF.Attr s P.Text) where
+    instanceTemplate =
+        lens (_instance_template :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_template = a } :: ResourceComputeInstanceGroupManager s)
+
+instance P.HasName (ResourceComputeInstanceGroupManager s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeInstanceGroupManager s)
+
+instance P.HasNamedPort (ResourceComputeInstanceGroupManager s) (TF.Attr s P.Text) where
+    namedPort =
+        lens (_named_port :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _named_port = a } :: ResourceComputeInstanceGroupManager s)
+
+instance P.HasProject (ResourceComputeInstanceGroupManager s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeInstanceGroupManager s)
+
+instance P.HasTargetPools (ResourceComputeInstanceGroupManager s) (TF.Attr s P.Text) where
+    targetPools =
+        lens (_target_pools :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _target_pools = a } :: ResourceComputeInstanceGroupManager s)
+
+instance P.HasTargetSize (ResourceComputeInstanceGroupManager s) (TF.Attr s P.Text) where
+    targetSize =
+        lens (_target_size :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _target_size = a } :: ResourceComputeInstanceGroupManager s)
+
+instance P.HasUpdateStrategy (ResourceComputeInstanceGroupManager s) (TF.Attr s P.Text) where
+    updateStrategy =
+        lens (_update_strategy :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _update_strategy = a } :: ResourceComputeInstanceGroupManager s)
+
+instance P.HasZone (ResourceComputeInstanceGroupManager s) (TF.Attr s P.Text) where
+    zone =
+        lens (_zone :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _zone = a } :: ResourceComputeInstanceGroupManager s)
+
+instance s ~ s' => P.HasComputeAutoHealingPolicies (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeAutoHealingPolicies =
+        (_auto_healing_policies :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeBaseInstanceName (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeBaseInstanceName =
+        (_base_instance_name :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeFingerprint (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+
+instance s ~ s' => P.HasComputeInstanceGroup (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeInstanceGroup x = TF.compute (TF.refKey x) "instance_group"
+
+instance s ~ s' => P.HasComputeInstanceTemplate (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeInstanceTemplate =
+        (_instance_template :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeNamedPort (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeNamedPort =
+        (_named_port :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
+
+instance s ~ s' => P.HasComputeTargetPools (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeTargetPools =
+        (_target_pools :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeTargetSize (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeTargetSize =
+        (_target_size :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeUpdateStrategy (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeUpdateStrategy =
+        (_update_strategy :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceComputeInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeZone =
+        (_zone :: ResourceComputeInstanceGroupManager s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourceComputeInstanceGroupManager :: TF.Resource P.Google (ResourceComputeInstanceGroupManager s)
+resourceComputeInstanceGroupManager =
+    TF.newResource "google_compute_instance_group_manager" $
+        ResourceComputeInstanceGroupManager {
+              _auto_healing_policies = TF.Nil
+            , _base_instance_name = TF.Nil
+            , _description = TF.Nil
+            , _instance_template = TF.Nil
+            , _name = TF.Nil
+            , _named_port = TF.Nil
+            , _project = TF.Nil
+            , _target_pools = TF.Nil
+            , _target_size = TF.Nil
+            , _update_strategy = TF.Nil
+            , _zone = TF.Nil
+            }
+
 {- | The @google_compute_instance_template@ Google resource.
 
 Manages a VM instance template resource within GCE. For more information see
 <https://cloud.google.com/compute/docs/instance-templates> and
 <https://cloud.google.com/compute/docs/reference/latest/instanceTemplates> .
 -}
-data ComputeInstanceTemplateResource s = ComputeInstanceTemplateResource {
+data ResourceComputeInstanceTemplate s = ResourceComputeInstanceTemplate {
       _can_ip_forward :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to allow sending and receiving of packets with non-matching source or destination IPs. This defaults to false. -}
     , _description :: !(TF.Attr s P.Text)
@@ -4292,8 +4355,8 @@ data ComputeInstanceTemplateResource s = ComputeInstanceTemplateResource {
     {- ^ (Optional) Tags to attach to the instance. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeInstanceTemplateResource s) where
-    toHCL ComputeInstanceTemplateResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeInstanceTemplate s) where
+    toHCL ResourceComputeInstanceTemplate{..} = TF.inline $ catMaybes
         [ TF.assign "can_ip_forward" <$> TF.attribute _can_ip_forward
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "disk" <$> TF.attribute _disk
@@ -4314,199 +4377,199 @@ instance TF.ToHCL (ComputeInstanceTemplateResource s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasCanIpForward (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasCanIpForward (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     canIpForward =
-        lens (_can_ip_forward :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _can_ip_forward = a } :: ComputeInstanceTemplateResource s)
+        lens (_can_ip_forward :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _can_ip_forward = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasDescription (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeInstanceTemplateResource s)
+        lens (_description :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasDisk (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasDisk (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     disk =
-        lens (_disk :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _disk = a } :: ComputeInstanceTemplateResource s)
+        lens (_disk :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _disk = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasGuestAccelerator (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasGuestAccelerator (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     guestAccelerator =
-        lens (_guest_accelerator :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _guest_accelerator = a } :: ComputeInstanceTemplateResource s)
+        lens (_guest_accelerator :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _guest_accelerator = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasInstanceDescription (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasInstanceDescription (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     instanceDescription =
-        lens (_instance_description :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_description = a } :: ComputeInstanceTemplateResource s)
+        lens (_instance_description :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_description = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasLabels (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasLabels (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     labels =
-        lens (_labels :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: ComputeInstanceTemplateResource s)
+        lens (_labels :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasMachineType (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasMachineType (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     machineType =
-        lens (_machine_type :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _machine_type = a } :: ComputeInstanceTemplateResource s)
+        lens (_machine_type :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _machine_type = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasMetadata (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasMetadata (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     metadata =
-        lens (_metadata :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _metadata = a } :: ComputeInstanceTemplateResource s)
+        lens (_metadata :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasMetadataStartupScript (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasMetadataStartupScript (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     metadataStartupScript =
-        lens (_metadata_startup_script :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _metadata_startup_script = a } :: ComputeInstanceTemplateResource s)
+        lens (_metadata_startup_script :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata_startup_script = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasMinCpuPlatform (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasMinCpuPlatform (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     minCpuPlatform =
-        lens (_min_cpu_platform :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _min_cpu_platform = a } :: ComputeInstanceTemplateResource s)
+        lens (_min_cpu_platform :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _min_cpu_platform = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasName (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeInstanceTemplateResource s)
+        lens (_name :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasNamePrefix (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasNamePrefix (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     namePrefix =
-        lens (_name_prefix :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name_prefix = a } :: ComputeInstanceTemplateResource s)
+        lens (_name_prefix :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _name_prefix = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasNetworkInterface (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasNetworkInterface (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     networkInterface =
-        lens (_network_interface :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network_interface = a } :: ComputeInstanceTemplateResource s)
+        lens (_network_interface :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _network_interface = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasProject (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeInstanceTemplateResource s)
+        lens (_project :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasRegion (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeInstanceTemplateResource s)
+        lens (_region :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasScheduling (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasScheduling (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     scheduling =
-        lens (_scheduling :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _scheduling = a } :: ComputeInstanceTemplateResource s)
+        lens (_scheduling :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _scheduling = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasServiceAccount (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasServiceAccount (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     serviceAccount =
-        lens (_service_account :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _service_account = a } :: ComputeInstanceTemplateResource s)
+        lens (_service_account :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _service_account = a } :: ResourceComputeInstanceTemplate s)
 
-instance P.HasTags (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+instance P.HasTags (ResourceComputeInstanceTemplate s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ComputeInstanceTemplateResource s)
+        lens (_tags :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ResourceComputeInstanceTemplate s)
 
-instance s ~ s' => P.HasComputedCanIpForward (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedCanIpForward =
-        (_can_ip_forward :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCanIpForward (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeCanIpForward =
+        (_can_ip_forward :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisk (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedDisk =
-        (_disk :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDisk (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeDisk =
+        (_disk :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedGuestAccelerator =
-        (_guest_accelerator :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeGuestAccelerator (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeGuestAccelerator =
+        (_guest_accelerator :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInstanceDescription (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedInstanceDescription =
-        (_instance_description :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeInstanceDescription (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeInstanceDescription =
+        (_instance_description :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedMachineType =
-        (_machine_type :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMachineType (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeMachineType =
+        (_machine_type :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedMetadata =
-        (_metadata :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeMetadata =
+        (_metadata :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMetadataFingerprint (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedMetadataFingerprint x = TF.compute (TF.refKey x) "metadata_fingerprint"
+instance s ~ s' => P.HasComputeMetadataFingerprint (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeMetadataFingerprint x = TF.compute (TF.refKey x) "metadata_fingerprint"
 
-instance s ~ s' => P.HasComputedMetadataStartupScript (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedMetadataStartupScript =
-        (_metadata_startup_script :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMetadataStartupScript (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeMetadataStartupScript =
+        (_metadata_startup_script :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMinCpuPlatform (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedMinCpuPlatform =
-        (_min_cpu_platform :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMinCpuPlatform (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeMinCpuPlatform =
+        (_min_cpu_platform :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedNamePrefix =
-        (_name_prefix :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNamePrefix (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeNamePrefix =
+        (_name_prefix :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetworkInterface (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedNetworkInterface =
-        (_network_interface :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNetworkInterface (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeNetworkInterface =
+        (_network_interface :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedScheduling =
-        (_scheduling :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeScheduling (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeScheduling =
+        (_scheduling :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedServiceAccount (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedServiceAccount =
-        (_service_account :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeServiceAccount (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeServiceAccount =
+        (_service_account :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeTags =
+        (_tags :: ResourceComputeInstanceTemplate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTagsFingerprint (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedTagsFingerprint x = TF.compute (TF.refKey x) "tags_fingerprint"
+instance s ~ s' => P.HasComputeTagsFingerprint (TF.Ref s' (ResourceComputeInstanceTemplate s)) (TF.Attr s P.Text) where
+    computeTagsFingerprint x = TF.compute (TF.refKey x) "tags_fingerprint"
 
-computeInstanceTemplateResource :: TF.Resource P.Google (ComputeInstanceTemplateResource s)
-computeInstanceTemplateResource =
+resourceComputeInstanceTemplate :: TF.Resource P.Google (ResourceComputeInstanceTemplate s)
+resourceComputeInstanceTemplate =
     TF.newResource "google_compute_instance_template" $
-        ComputeInstanceTemplateResource {
+        ResourceComputeInstanceTemplate {
               _can_ip_forward = TF.Nil
             , _description = TF.Nil
             , _disk = TF.Nil
@@ -4527,97 +4590,13 @@ computeInstanceTemplateResource =
             , _tags = TF.Nil
             }
 
-{- | The @google_compute_network_peering@ Google resource.
-
-Manages a network peering within GCE. For more information see
-<https://cloud.google.com/compute/docs/vpc/vpc-peering> and
-<https://cloud.google.com/compute/docs/reference/latest/networks> . ~> Note:
-Both network must create a peering with each other for the peering to be
-functional. ~> Note: Subnets IP ranges across peered VPC networks cannot
-overlap.
--}
-data ComputeNetworkPeeringResource s = ComputeNetworkPeeringResource {
-      _auto_create_routes :: !(TF.Attr s P.Text)
-    {- ^ (Optional) If set to @true@ , the routes between the two networks will be created and managed automatically. Defaults to @true@ . -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) Name of the peering. -}
-    , _network :: !(TF.Attr s P.Text)
-    {- ^ (Required) Resource link of the network to add a peering to. -}
-    , _peer_network :: !(TF.Attr s P.Text)
-    {- ^ (Required) Resource link of the peer network. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ComputeNetworkPeeringResource s) where
-    toHCL ComputeNetworkPeeringResource{..} = TF.inline $ catMaybes
-        [ TF.assign "auto_create_routes" <$> TF.attribute _auto_create_routes
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "network" <$> TF.attribute _network
-        , TF.assign "peer_network" <$> TF.attribute _peer_network
-        ]
-
-instance P.HasAutoCreateRoutes (ComputeNetworkPeeringResource s) (TF.Attr s P.Text) where
-    autoCreateRoutes =
-        lens (_auto_create_routes :: ComputeNetworkPeeringResource s -> TF.Attr s P.Text)
-             (\s a -> s { _auto_create_routes = a } :: ComputeNetworkPeeringResource s)
-
-instance P.HasName (ComputeNetworkPeeringResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ComputeNetworkPeeringResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeNetworkPeeringResource s)
-
-instance P.HasNetwork (ComputeNetworkPeeringResource s) (TF.Attr s P.Text) where
-    network =
-        lens (_network :: ComputeNetworkPeeringResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network = a } :: ComputeNetworkPeeringResource s)
-
-instance P.HasPeerNetwork (ComputeNetworkPeeringResource s) (TF.Attr s P.Text) where
-    peerNetwork =
-        lens (_peer_network :: ComputeNetworkPeeringResource s -> TF.Attr s P.Text)
-             (\s a -> s { _peer_network = a } :: ComputeNetworkPeeringResource s)
-
-instance s ~ s' => P.HasComputedAutoCreateRoutes (TF.Ref s' (ComputeNetworkPeeringResource s)) (TF.Attr s P.Text) where
-    computedAutoCreateRoutes =
-        (_auto_create_routes :: ComputeNetworkPeeringResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeNetworkPeeringResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeNetworkPeeringResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeNetworkPeeringResource s)) (TF.Attr s P.Text) where
-    computedNetwork =
-        (_network :: ComputeNetworkPeeringResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPeerNetwork (TF.Ref s' (ComputeNetworkPeeringResource s)) (TF.Attr s P.Text) where
-    computedPeerNetwork =
-        (_peer_network :: ComputeNetworkPeeringResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedState (TF.Ref s' (ComputeNetworkPeeringResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
-
-instance s ~ s' => P.HasComputedStateDetails (TF.Ref s' (ComputeNetworkPeeringResource s)) (TF.Attr s P.Text) where
-    computedStateDetails x = TF.compute (TF.refKey x) "state_details"
-
-computeNetworkPeeringResource :: TF.Resource P.Google (ComputeNetworkPeeringResource s)
-computeNetworkPeeringResource =
-    TF.newResource "google_compute_network_peering" $
-        ComputeNetworkPeeringResource {
-              _auto_create_routes = TF.Nil
-            , _name = TF.Nil
-            , _network = TF.Nil
-            , _peer_network = TF.Nil
-            }
-
 {- | The @google_compute_network@ Google resource.
 
 Manages a network within GCE. For more information see
 <https://cloud.google.com/compute/docs/vpc> and
 <https://cloud.google.com/compute/docs/reference/latest/networks> .
 -}
-data ComputeNetworkResource s = ComputeNetworkResource {
+data ResourceComputeNetwork s = ResourceComputeNetwork {
       _auto_create_subnetworks :: !(TF.Attr s P.Text)
     {- ^ (Optional) If set to true, this network will be created in auto subnet mode, and Google will create a subnet for each region automatically. If set to false, a custom subnetted network will be created that can support @google_compute_subnetwork@ resources. Defaults to true. -}
     , _description :: !(TF.Attr s P.Text)
@@ -4632,8 +4611,8 @@ data ComputeNetworkResource s = ComputeNetworkResource {
     {- ^ (Optional) Sets the network-wide routing mode for Cloud Routers to use. Accepted values are @"GLOBAL"@ or @"REGIONAL"@ . Defaults to @"REGIONAL"@ . Refer to the <https://cloud.google.com/router/docs/concepts/overview#dynamic-routing-mode> for more details. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeNetworkResource s) where
-    toHCL ComputeNetworkResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeNetwork s) where
+    toHCL ResourceComputeNetwork{..} = TF.inline $ catMaybes
         [ TF.assign "auto_create_subnetworks" <$> TF.attribute _auto_create_subnetworks
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "ipv4_range" <$> TF.attribute _ipv4_range
@@ -4642,74 +4621,74 @@ instance TF.ToHCL (ComputeNetworkResource s) where
         , TF.assign "routing_mode" <$> TF.attribute _routing_mode
         ]
 
-instance P.HasAutoCreateSubnetworks (ComputeNetworkResource s) (TF.Attr s P.Text) where
+instance P.HasAutoCreateSubnetworks (ResourceComputeNetwork s) (TF.Attr s P.Text) where
     autoCreateSubnetworks =
-        lens (_auto_create_subnetworks :: ComputeNetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _auto_create_subnetworks = a } :: ComputeNetworkResource s)
+        lens (_auto_create_subnetworks :: ResourceComputeNetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _auto_create_subnetworks = a } :: ResourceComputeNetwork s)
 
-instance P.HasDescription (ComputeNetworkResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeNetwork s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeNetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeNetworkResource s)
+        lens (_description :: ResourceComputeNetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeNetwork s)
 
-instance P.HasIpv4Range (ComputeNetworkResource s) (TF.Attr s P.Text) where
+instance P.HasIpv4Range (ResourceComputeNetwork s) (TF.Attr s P.Text) where
     ipv4Range =
-        lens (_ipv4_range :: ComputeNetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ipv4_range = a } :: ComputeNetworkResource s)
+        lens (_ipv4_range :: ResourceComputeNetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _ipv4_range = a } :: ResourceComputeNetwork s)
 
-instance P.HasName (ComputeNetworkResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeNetwork s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeNetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeNetworkResource s)
+        lens (_name :: ResourceComputeNetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeNetwork s)
 
-instance P.HasProject (ComputeNetworkResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeNetwork s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeNetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeNetworkResource s)
+        lens (_project :: ResourceComputeNetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeNetwork s)
 
-instance P.HasRoutingMode (ComputeNetworkResource s) (TF.Attr s P.Text) where
+instance P.HasRoutingMode (ResourceComputeNetwork s) (TF.Attr s P.Text) where
     routingMode =
-        lens (_routing_mode :: ComputeNetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _routing_mode = a } :: ComputeNetworkResource s)
+        lens (_routing_mode :: ResourceComputeNetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _routing_mode = a } :: ResourceComputeNetwork s)
 
-instance s ~ s' => P.HasComputedAutoCreateSubnetworks (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
-    computedAutoCreateSubnetworks =
-        (_auto_create_subnetworks :: ComputeNetworkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAutoCreateSubnetworks (TF.Ref s' (ResourceComputeNetwork s)) (TF.Attr s P.Text) where
+    computeAutoCreateSubnetworks =
+        (_auto_create_subnetworks :: ResourceComputeNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeNetworkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeNetwork s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedGatewayIpv4 (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
-    computedGatewayIpv4 x = TF.compute (TF.refKey x) "gateway_ipv4"
+instance s ~ s' => P.HasComputeGatewayIpv4 (TF.Ref s' (ResourceComputeNetwork s)) (TF.Attr s P.Text) where
+    computeGatewayIpv4 x = TF.compute (TF.refKey x) "gateway_ipv4"
 
-instance s ~ s' => P.HasComputedIpv4Range (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
-    computedIpv4Range =
-        (_ipv4_range :: ComputeNetworkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpv4Range (TF.Ref s' (ResourceComputeNetwork s)) (TF.Attr s P.Text) where
+    computeIpv4Range =
+        (_ipv4_range :: ResourceComputeNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeNetwork s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeNetworkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeNetwork s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRoutingMode (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
-    computedRoutingMode =
-        (_routing_mode :: ComputeNetworkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRoutingMode (TF.Ref s' (ResourceComputeNetwork s)) (TF.Attr s P.Text) where
+    computeRoutingMode =
+        (_routing_mode :: ResourceComputeNetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeNetwork s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-computeNetworkResource :: TF.Resource P.Google (ComputeNetworkResource s)
-computeNetworkResource =
+resourceComputeNetwork :: TF.Resource P.Google (ResourceComputeNetwork s)
+resourceComputeNetwork =
     TF.newResource "google_compute_network" $
-        ComputeNetworkResource {
+        ResourceComputeNetwork {
               _auto_create_subnetworks = TF.Nil
             , _description = TF.Nil
             , _ipv4_range = TF.Nil
@@ -4718,66 +4697,88 @@ computeNetworkResource =
             , _routing_mode = TF.Nil
             }
 
-{- | The @google_compute_project_metadata_item@ Google resource.
+{- | The @google_compute_network_peering@ Google resource.
 
-Manages a single key/value pair on metadata common to all instances for a
-project in GCE. Using @google_compute_project_metadata_item@ lets you manage
-a single key/value setting in Terraform rather than the entire project
-metadata map.
+Manages a network peering within GCE. For more information see
+<https://cloud.google.com/compute/docs/vpc/vpc-peering> and
+<https://cloud.google.com/compute/docs/reference/latest/networks> . ~> Note:
+Both network must create a peering with each other for the peering to be
+functional. ~> Note: Subnets IP ranges across peered VPC networks cannot
+overlap.
 -}
-data ComputeProjectMetadataItemResource s = ComputeProjectMetadataItemResource {
-      _key :: !(TF.Attr s P.Text)
-    {- ^ (Required) The metadata key to set. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _value :: !(TF.Attr s P.Text)
-    {- ^ (Required) The value to set for the given metadata key. -}
+data ResourceComputeNetworkPeering s = ResourceComputeNetworkPeering {
+      _auto_create_routes :: !(TF.Attr s P.Text)
+    {- ^ (Optional) If set to @true@ , the routes between the two networks will be created and managed automatically. Defaults to @true@ . -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) Name of the peering. -}
+    , _network :: !(TF.Attr s P.Text)
+    {- ^ (Required) Resource link of the network to add a peering to. -}
+    , _peer_network :: !(TF.Attr s P.Text)
+    {- ^ (Required) Resource link of the peer network. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeProjectMetadataItemResource s) where
-    toHCL ComputeProjectMetadataItemResource{..} = TF.inline $ catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "value" <$> TF.attribute _value
+instance TF.ToHCL (ResourceComputeNetworkPeering s) where
+    toHCL ResourceComputeNetworkPeering{..} = TF.inline $ catMaybes
+        [ TF.assign "auto_create_routes" <$> TF.attribute _auto_create_routes
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network" <$> TF.attribute _network
+        , TF.assign "peer_network" <$> TF.attribute _peer_network
         ]
 
-instance P.HasKey (ComputeProjectMetadataItemResource s) (TF.Attr s P.Text) where
-    key =
-        lens (_key :: ComputeProjectMetadataItemResource s -> TF.Attr s P.Text)
-             (\s a -> s { _key = a } :: ComputeProjectMetadataItemResource s)
+instance P.HasAutoCreateRoutes (ResourceComputeNetworkPeering s) (TF.Attr s P.Text) where
+    autoCreateRoutes =
+        lens (_auto_create_routes :: ResourceComputeNetworkPeering s -> TF.Attr s P.Text)
+             (\s a -> s { _auto_create_routes = a } :: ResourceComputeNetworkPeering s)
 
-instance P.HasProject (ComputeProjectMetadataItemResource s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeProjectMetadataItemResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeProjectMetadataItemResource s)
+instance P.HasName (ResourceComputeNetworkPeering s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ResourceComputeNetworkPeering s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeNetworkPeering s)
 
-instance P.HasValue (ComputeProjectMetadataItemResource s) (TF.Attr s P.Text) where
-    value =
-        lens (_value :: ComputeProjectMetadataItemResource s -> TF.Attr s P.Text)
-             (\s a -> s { _value = a } :: ComputeProjectMetadataItemResource s)
+instance P.HasNetwork (ResourceComputeNetworkPeering s) (TF.Attr s P.Text) where
+    network =
+        lens (_network :: ResourceComputeNetworkPeering s -> TF.Attr s P.Text)
+             (\s a -> s { _network = a } :: ResourceComputeNetworkPeering s)
 
-instance s ~ s' => P.HasComputedKey (TF.Ref s' (ComputeProjectMetadataItemResource s)) (TF.Attr s P.Text) where
-    computedKey =
-        (_key :: ComputeProjectMetadataItemResource s -> TF.Attr s P.Text)
+instance P.HasPeerNetwork (ResourceComputeNetworkPeering s) (TF.Attr s P.Text) where
+    peerNetwork =
+        lens (_peer_network :: ResourceComputeNetworkPeering s -> TF.Attr s P.Text)
+             (\s a -> s { _peer_network = a } :: ResourceComputeNetworkPeering s)
+
+instance s ~ s' => P.HasComputeAutoCreateRoutes (TF.Ref s' (ResourceComputeNetworkPeering s)) (TF.Attr s P.Text) where
+    computeAutoCreateRoutes =
+        (_auto_create_routes :: ResourceComputeNetworkPeering s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeProjectMetadataItemResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeProjectMetadataItemResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeNetworkPeering s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeNetworkPeering s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedValue (TF.Ref s' (ComputeProjectMetadataItemResource s)) (TF.Attr s P.Text) where
-    computedValue =
-        (_value :: ComputeProjectMetadataItemResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNetwork (TF.Ref s' (ResourceComputeNetworkPeering s)) (TF.Attr s P.Text) where
+    computeNetwork =
+        (_network :: ResourceComputeNetworkPeering s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeProjectMetadataItemResource :: TF.Resource P.Google (ComputeProjectMetadataItemResource s)
-computeProjectMetadataItemResource =
-    TF.newResource "google_compute_project_metadata_item" $
-        ComputeProjectMetadataItemResource {
-              _key = TF.Nil
-            , _project = TF.Nil
-            , _value = TF.Nil
+instance s ~ s' => P.HasComputePeerNetwork (TF.Ref s' (ResourceComputeNetworkPeering s)) (TF.Attr s P.Text) where
+    computePeerNetwork =
+        (_peer_network :: ResourceComputeNetworkPeering s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeState (TF.Ref s' (ResourceComputeNetworkPeering s)) (TF.Attr s P.Text) where
+    computeState x = TF.compute (TF.refKey x) "state"
+
+instance s ~ s' => P.HasComputeStateDetails (TF.Ref s' (ResourceComputeNetworkPeering s)) (TF.Attr s P.Text) where
+    computeStateDetails x = TF.compute (TF.refKey x) "state_details"
+
+resourceComputeNetworkPeering :: TF.Resource P.Google (ResourceComputeNetworkPeering s)
+resourceComputeNetworkPeering =
+    TF.newResource "google_compute_network_peering" $
+        ResourceComputeNetworkPeering {
+              _auto_create_routes = TF.Nil
+            , _name = TF.Nil
+            , _network = TF.Nil
+            , _peer_network = TF.Nil
             }
 
 {- | The @google_compute_project_metadata@ Google resource.
@@ -4790,45 +4791,107 @@ information see
 project metadata rather than the entire set, then use
 <compute_project_metadata_item.html> .
 -}
-data ComputeProjectMetadataResource s = ComputeProjectMetadataResource {
+data ResourceComputeProjectMetadata s = ResourceComputeProjectMetadata {
       _metadata :: !(TF.Attr s P.Text)
     {- ^ (Required) A series of key value pairs. Changing this resource updates the GCE state. -}
     , _project :: !(TF.Attr s P.Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeProjectMetadataResource s) where
-    toHCL ComputeProjectMetadataResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeProjectMetadata s) where
+    toHCL ResourceComputeProjectMetadata{..} = TF.inline $ catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasMetadata (ComputeProjectMetadataResource s) (TF.Attr s P.Text) where
+instance P.HasMetadata (ResourceComputeProjectMetadata s) (TF.Attr s P.Text) where
     metadata =
-        lens (_metadata :: ComputeProjectMetadataResource s -> TF.Attr s P.Text)
-             (\s a -> s { _metadata = a } :: ComputeProjectMetadataResource s)
+        lens (_metadata :: ResourceComputeProjectMetadata s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata = a } :: ResourceComputeProjectMetadata s)
 
-instance P.HasProject (ComputeProjectMetadataResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeProjectMetadata s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeProjectMetadataResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeProjectMetadataResource s)
+        lens (_project :: ResourceComputeProjectMetadata s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeProjectMetadata s)
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ComputeProjectMetadataResource s)) (TF.Attr s P.Text) where
-    computedMetadata =
-        (_metadata :: ComputeProjectMetadataResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMetadata (TF.Ref s' (ResourceComputeProjectMetadata s)) (TF.Attr s P.Text) where
+    computeMetadata =
+        (_metadata :: ResourceComputeProjectMetadata s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeProjectMetadataResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeProjectMetadataResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeProjectMetadata s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeProjectMetadata s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeProjectMetadataResource :: TF.Resource P.Google (ComputeProjectMetadataResource s)
-computeProjectMetadataResource =
+resourceComputeProjectMetadata :: TF.Resource P.Google (ResourceComputeProjectMetadata s)
+resourceComputeProjectMetadata =
     TF.newResource "google_compute_project_metadata" $
-        ComputeProjectMetadataResource {
+        ResourceComputeProjectMetadata {
               _metadata = TF.Nil
             , _project = TF.Nil
+            }
+
+{- | The @google_compute_project_metadata_item@ Google resource.
+
+Manages a single key/value pair on metadata common to all instances for a
+project in GCE. Using @google_compute_project_metadata_item@ lets you manage
+a single key/value setting in Terraform rather than the entire project
+metadata map.
+-}
+data ResourceComputeProjectMetadataItem s = ResourceComputeProjectMetadataItem {
+      _key :: !(TF.Attr s P.Text)
+    {- ^ (Required) The metadata key to set. -}
+    , _project :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
+    , _value :: !(TF.Attr s P.Text)
+    {- ^ (Required) The value to set for the given metadata key. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceComputeProjectMetadataItem s) where
+    toHCL ResourceComputeProjectMetadataItem{..} = TF.inline $ catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance P.HasKey (ResourceComputeProjectMetadataItem s) (TF.Attr s P.Text) where
+    key =
+        lens (_key :: ResourceComputeProjectMetadataItem s -> TF.Attr s P.Text)
+             (\s a -> s { _key = a } :: ResourceComputeProjectMetadataItem s)
+
+instance P.HasProject (ResourceComputeProjectMetadataItem s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: ResourceComputeProjectMetadataItem s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeProjectMetadataItem s)
+
+instance P.HasValue (ResourceComputeProjectMetadataItem s) (TF.Attr s P.Text) where
+    value =
+        lens (_value :: ResourceComputeProjectMetadataItem s -> TF.Attr s P.Text)
+             (\s a -> s { _value = a } :: ResourceComputeProjectMetadataItem s)
+
+instance s ~ s' => P.HasComputeKey (TF.Ref s' (ResourceComputeProjectMetadataItem s)) (TF.Attr s P.Text) where
+    computeKey =
+        (_key :: ResourceComputeProjectMetadataItem s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeProjectMetadataItem s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeProjectMetadataItem s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeValue (TF.Ref s' (ResourceComputeProjectMetadataItem s)) (TF.Attr s P.Text) where
+    computeValue =
+        (_value :: ResourceComputeProjectMetadataItem s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourceComputeProjectMetadataItem :: TF.Resource P.Google (ResourceComputeProjectMetadataItem s)
+resourceComputeProjectMetadataItem =
+    TF.newResource "google_compute_project_metadata_item" $
+        ResourceComputeProjectMetadataItem {
+              _key = TF.Nil
+            , _project = TF.Nil
+            , _value = TF.Nil
             }
 
 {- | The @google_compute_region_autoscaler@ Google resource.
@@ -4842,7 +4905,7 @@ based on the measured load. For more information, see
 <https://cloud.google.com/compute/docs/autoscaler/> and
 <https://cloud.google.com/compute/docs/reference/latest/regionAutoscalers>
 -}
-data ComputeRegionAutoscalerResource s = ComputeRegionAutoscalerResource {
+data ResourceComputeRegionAutoscaler s = ResourceComputeRegionAutoscaler {
       _autoscaling_policy :: !(TF.Attr s P.Text)
     {- ^ (Required) The parameters of the autoscaling algorithm. Structure is documented below. -}
     , _description :: !(TF.Attr s P.Text)
@@ -4857,8 +4920,8 @@ data ComputeRegionAutoscalerResource s = ComputeRegionAutoscalerResource {
     {- ^ (Required) The full URL to the instance group manager whose size we control. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeRegionAutoscalerResource s) where
-    toHCL ComputeRegionAutoscalerResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeRegionAutoscaler s) where
+    toHCL ResourceComputeRegionAutoscaler{..} = TF.inline $ catMaybes
         [ TF.assign "autoscaling_policy" <$> TF.attribute _autoscaling_policy
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -4867,73 +4930,73 @@ instance TF.ToHCL (ComputeRegionAutoscalerResource s) where
         , TF.assign "target" <$> TF.attribute _target
         ]
 
-instance P.HasAutoscalingPolicy (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) where
+instance P.HasAutoscalingPolicy (ResourceComputeRegionAutoscaler s) (TF.Attr s P.Text) where
     autoscalingPolicy =
-        lens (_autoscaling_policy :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _autoscaling_policy = a } :: ComputeRegionAutoscalerResource s)
+        lens (_autoscaling_policy :: ResourceComputeRegionAutoscaler s -> TF.Attr s P.Text)
+             (\s a -> s { _autoscaling_policy = a } :: ResourceComputeRegionAutoscaler s)
 
-instance P.HasDescription (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeRegionAutoscaler s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeRegionAutoscalerResource s)
+        lens (_description :: ResourceComputeRegionAutoscaler s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeRegionAutoscaler s)
 
-instance P.HasName (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeRegionAutoscaler s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeRegionAutoscalerResource s)
+        lens (_name :: ResourceComputeRegionAutoscaler s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeRegionAutoscaler s)
 
-instance P.HasProject (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeRegionAutoscaler s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeRegionAutoscalerResource s)
+        lens (_project :: ResourceComputeRegionAutoscaler s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeRegionAutoscaler s)
 
-instance P.HasRegion (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceComputeRegionAutoscaler s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeRegionAutoscalerResource s)
+        lens (_region :: ResourceComputeRegionAutoscaler s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceComputeRegionAutoscaler s)
 
-instance P.HasTarget (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) where
+instance P.HasTarget (ResourceComputeRegionAutoscaler s) (TF.Attr s P.Text) where
     target =
-        lens (_target :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target = a } :: ComputeRegionAutoscalerResource s)
+        lens (_target :: ResourceComputeRegionAutoscaler s -> TF.Attr s P.Text)
+             (\s a -> s { _target = a } :: ResourceComputeRegionAutoscaler s)
 
-instance s ~ s' => P.HasComputedAutoscalingPolicy (TF.Ref s' (ComputeRegionAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedAutoscalingPolicy =
-        (_autoscaling_policy :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAutoscalingPolicy (TF.Ref s' (ResourceComputeRegionAutoscaler s)) (TF.Attr s P.Text) where
+    computeAutoscalingPolicy =
+        (_autoscaling_policy :: ResourceComputeRegionAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeRegionAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeRegionAutoscaler s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeRegionAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeRegionAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeRegionAutoscaler s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeRegionAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRegionAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeRegionAutoscaler s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeRegionAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRegionAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceComputeRegionAutoscaler s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceComputeRegionAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRegionAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeRegionAutoscaler s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedTarget (TF.Ref s' (ComputeRegionAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedTarget =
-        (_target :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTarget (TF.Ref s' (ResourceComputeRegionAutoscaler s)) (TF.Attr s P.Text) where
+    computeTarget =
+        (_target :: ResourceComputeRegionAutoscaler s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeRegionAutoscalerResource :: TF.Resource P.Google (ComputeRegionAutoscalerResource s)
-computeRegionAutoscalerResource =
+resourceComputeRegionAutoscaler :: TF.Resource P.Google (ResourceComputeRegionAutoscaler s)
+resourceComputeRegionAutoscaler =
     TF.newResource "google_compute_region_autoscaler" $
-        ComputeRegionAutoscalerResource {
+        ResourceComputeRegionAutoscaler {
               _autoscaling_policy = TF.Nil
             , _description = TF.Nil
             , _name = TF.Nil
@@ -4949,7 +5012,7 @@ machines that will serve traffic for load balancing. For more information
 see <https://cloud.google.com/compute/docs/load-balancing/internal/> and
 <https://cloud.google.com/compute/docs/reference/latest/backendServices> .
 -}
-data ComputeRegionBackendServiceResource s = ComputeRegionBackendServiceResource {
+data ResourceComputeRegionBackendService s = ResourceComputeRegionBackendService {
       _backend :: !(TF.Attr s P.Text)
     {- ^ (Optional) The list of backends that serve this BackendService. Structure is documented below. -}
     , _connection_draining_timeout_sec :: !(TF.Attr s P.Text)
@@ -4972,8 +5035,8 @@ data ComputeRegionBackendServiceResource s = ComputeRegionBackendServiceResource
     {- ^ (Optional) The number of secs to wait for a backend to respond to a request before considering the request failed. Defaults to @30@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeRegionBackendServiceResource s) where
-    toHCL ComputeRegionBackendServiceResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeRegionBackendService s) where
+    toHCL ResourceComputeRegionBackendService{..} = TF.inline $ catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "connection_draining_timeout_sec" <$> TF.attribute _connection_draining_timeout_sec
         , TF.assign "description" <$> TF.attribute _description
@@ -4986,116 +5049,116 @@ instance TF.ToHCL (ComputeRegionBackendServiceResource s) where
         , TF.assign "timeout_sec" <$> TF.attribute _timeout_sec
         ]
 
-instance P.HasBackend (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasBackend (ResourceComputeRegionBackendService s) (TF.Attr s P.Text) where
     backend =
-        lens (_backend :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: ComputeRegionBackendServiceResource s)
+        lens (_backend :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _backend = a } :: ResourceComputeRegionBackendService s)
 
-instance P.HasConnectionDrainingTimeoutSec (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasConnectionDrainingTimeoutSec (ResourceComputeRegionBackendService s) (TF.Attr s P.Text) where
     connectionDrainingTimeoutSec =
-        lens (_connection_draining_timeout_sec :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _connection_draining_timeout_sec = a } :: ComputeRegionBackendServiceResource s)
+        lens (_connection_draining_timeout_sec :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _connection_draining_timeout_sec = a } :: ResourceComputeRegionBackendService s)
 
-instance P.HasDescription (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeRegionBackendService s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeRegionBackendServiceResource s)
+        lens (_description :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeRegionBackendService s)
 
-instance P.HasHealthChecks (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasHealthChecks (ResourceComputeRegionBackendService s) (TF.Attr s P.Text) where
     healthChecks =
-        lens (_health_checks :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _health_checks = a } :: ComputeRegionBackendServiceResource s)
+        lens (_health_checks :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _health_checks = a } :: ResourceComputeRegionBackendService s)
 
-instance P.HasName (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeRegionBackendService s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeRegionBackendServiceResource s)
+        lens (_name :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeRegionBackendService s)
 
-instance P.HasProject (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeRegionBackendService s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeRegionBackendServiceResource s)
+        lens (_project :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeRegionBackendService s)
 
-instance P.HasProtocol (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasProtocol (ResourceComputeRegionBackendService s) (TF.Attr s P.Text) where
     protocol =
-        lens (_protocol :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _protocol = a } :: ComputeRegionBackendServiceResource s)
+        lens (_protocol :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _protocol = a } :: ResourceComputeRegionBackendService s)
 
-instance P.HasRegion (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceComputeRegionBackendService s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeRegionBackendServiceResource s)
+        lens (_region :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceComputeRegionBackendService s)
 
-instance P.HasSessionAffinity (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasSessionAffinity (ResourceComputeRegionBackendService s) (TF.Attr s P.Text) where
     sessionAffinity =
-        lens (_session_affinity :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _session_affinity = a } :: ComputeRegionBackendServiceResource s)
+        lens (_session_affinity :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _session_affinity = a } :: ResourceComputeRegionBackendService s)
 
-instance P.HasTimeoutSec (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+instance P.HasTimeoutSec (ResourceComputeRegionBackendService s) (TF.Attr s P.Text) where
     timeoutSec =
-        lens (_timeout_sec :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _timeout_sec = a } :: ComputeRegionBackendServiceResource s)
+        lens (_timeout_sec :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
+             (\s a -> s { _timeout_sec = a } :: ResourceComputeRegionBackendService s)
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedBackend =
-        (_backend :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBackend (TF.Ref s' (ResourceComputeRegionBackendService s)) (TF.Attr s P.Text) where
+    computeBackend =
+        (_backend :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedConnectionDrainingTimeoutSec (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedConnectionDrainingTimeoutSec =
-        (_connection_draining_timeout_sec :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeConnectionDrainingTimeoutSec (TF.Ref s' (ResourceComputeRegionBackendService s)) (TF.Attr s P.Text) where
+    computeConnectionDrainingTimeoutSec =
+        (_connection_draining_timeout_sec :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeRegionBackendService s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+instance s ~ s' => P.HasComputeFingerprint (TF.Ref s' (ResourceComputeRegionBackendService s)) (TF.Attr s P.Text) where
+    computeFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
-instance s ~ s' => P.HasComputedHealthChecks (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedHealthChecks =
-        (_health_checks :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHealthChecks (TF.Ref s' (ResourceComputeRegionBackendService s)) (TF.Attr s P.Text) where
+    computeHealthChecks =
+        (_health_checks :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeRegionBackendService s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeRegionBackendService s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedProtocol =
-        (_protocol :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProtocol (TF.Ref s' (ResourceComputeRegionBackendService s)) (TF.Attr s P.Text) where
+    computeProtocol =
+        (_protocol :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceComputeRegionBackendService s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeRegionBackendService s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSessionAffinity (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedSessionAffinity =
-        (_session_affinity :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSessionAffinity (TF.Ref s' (ResourceComputeRegionBackendService s)) (TF.Attr s P.Text) where
+    computeSessionAffinity =
+        (_session_affinity :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedTimeoutSec =
-        (_timeout_sec :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTimeoutSec (TF.Ref s' (ResourceComputeRegionBackendService s)) (TF.Attr s P.Text) where
+    computeTimeoutSec =
+        (_timeout_sec :: ResourceComputeRegionBackendService s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeRegionBackendServiceResource :: TF.Resource P.Google (ComputeRegionBackendServiceResource s)
-computeRegionBackendServiceResource =
+resourceComputeRegionBackendService :: TF.Resource P.Google (ResourceComputeRegionBackendService s)
+resourceComputeRegionBackendService =
     TF.newResource "google_compute_region_backend_service" $
-        ComputeRegionBackendServiceResource {
+        ResourceComputeRegionBackendService {
               _backend = TF.Nil
             , _connection_draining_timeout_sec = TF.Nil
             , _description = TF.Nil
@@ -5119,7 +5182,7 @@ and
 ~> Note: Use </docs/providers/google/r/compute_instance_group_manager.html>
 to create a single-zone instance group manager.
 -}
-data ComputeRegionInstanceGroupManagerResource s = ComputeRegionInstanceGroupManagerResource {
+data ResourceComputeRegionInstanceGroupManager s = ResourceComputeRegionInstanceGroupManager {
       _auto_healing_policies :: !(TF.Attr s P.Text)
     {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) The autohealing policies for this managed instance group. You can specify only one value. Structure is documented below. For more information, see the <https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances#monitoring_groups> . -}
     , _base_instance_name :: !(TF.Attr s P.Text)
@@ -5142,8 +5205,8 @@ data ComputeRegionInstanceGroupManagerResource s = ComputeRegionInstanceGroupMan
     {- ^ (Optional) The target number of running instances for this managed instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set. Defaults to @0@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeRegionInstanceGroupManagerResource s) where
-    toHCL ComputeRegionInstanceGroupManagerResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeRegionInstanceGroupManager s) where
+    toHCL ResourceComputeRegionInstanceGroupManager{..} = TF.inline $ catMaybes
         [ TF.assign "auto_healing_policies" <$> TF.attribute _auto_healing_policies
         , TF.assign "base_instance_name" <$> TF.attribute _base_instance_name
         , TF.assign "description" <$> TF.attribute _description
@@ -5156,119 +5219,119 @@ instance TF.ToHCL (ComputeRegionInstanceGroupManagerResource s) where
         , TF.assign "target_size" <$> TF.attribute _target_size
         ]
 
-instance P.HasAutoHealingPolicies (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+instance P.HasAutoHealingPolicies (ResourceComputeRegionInstanceGroupManager s) (TF.Attr s P.Text) where
     autoHealingPolicies =
-        lens (_auto_healing_policies :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _auto_healing_policies = a } :: ComputeRegionInstanceGroupManagerResource s)
+        lens (_auto_healing_policies :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _auto_healing_policies = a } :: ResourceComputeRegionInstanceGroupManager s)
 
-instance P.HasBaseInstanceName (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+instance P.HasBaseInstanceName (ResourceComputeRegionInstanceGroupManager s) (TF.Attr s P.Text) where
     baseInstanceName =
-        lens (_base_instance_name :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _base_instance_name = a } :: ComputeRegionInstanceGroupManagerResource s)
+        lens (_base_instance_name :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _base_instance_name = a } :: ResourceComputeRegionInstanceGroupManager s)
 
-instance P.HasDescription (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeRegionInstanceGroupManager s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeRegionInstanceGroupManagerResource s)
+        lens (_description :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeRegionInstanceGroupManager s)
 
-instance P.HasInstanceTemplate (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+instance P.HasInstanceTemplate (ResourceComputeRegionInstanceGroupManager s) (TF.Attr s P.Text) where
     instanceTemplate =
-        lens (_instance_template :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_template = a } :: ComputeRegionInstanceGroupManagerResource s)
+        lens (_instance_template :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_template = a } :: ResourceComputeRegionInstanceGroupManager s)
 
-instance P.HasName (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeRegionInstanceGroupManager s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeRegionInstanceGroupManagerResource s)
+        lens (_name :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeRegionInstanceGroupManager s)
 
-instance P.HasNamedPort (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+instance P.HasNamedPort (ResourceComputeRegionInstanceGroupManager s) (TF.Attr s P.Text) where
     namedPort =
-        lens (_named_port :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _named_port = a } :: ComputeRegionInstanceGroupManagerResource s)
+        lens (_named_port :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _named_port = a } :: ResourceComputeRegionInstanceGroupManager s)
 
-instance P.HasProject (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeRegionInstanceGroupManager s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeRegionInstanceGroupManagerResource s)
+        lens (_project :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeRegionInstanceGroupManager s)
 
-instance P.HasRegion (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceComputeRegionInstanceGroupManager s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeRegionInstanceGroupManagerResource s)
+        lens (_region :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceComputeRegionInstanceGroupManager s)
 
-instance P.HasTargetPools (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+instance P.HasTargetPools (ResourceComputeRegionInstanceGroupManager s) (TF.Attr s P.Text) where
     targetPools =
-        lens (_target_pools :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target_pools = a } :: ComputeRegionInstanceGroupManagerResource s)
+        lens (_target_pools :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _target_pools = a } :: ResourceComputeRegionInstanceGroupManager s)
 
-instance P.HasTargetSize (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+instance P.HasTargetSize (ResourceComputeRegionInstanceGroupManager s) (TF.Attr s P.Text) where
     targetSize =
-        lens (_target_size :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target_size = a } :: ComputeRegionInstanceGroupManagerResource s)
+        lens (_target_size :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
+             (\s a -> s { _target_size = a } :: ResourceComputeRegionInstanceGroupManager s)
 
-instance s ~ s' => P.HasComputedAutoHealingPolicies (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedAutoHealingPolicies =
-        (_auto_healing_policies :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAutoHealingPolicies (TF.Ref s' (ResourceComputeRegionInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeAutoHealingPolicies =
+        (_auto_healing_policies :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBaseInstanceName (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedBaseInstanceName =
-        (_base_instance_name :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBaseInstanceName (TF.Ref s' (ResourceComputeRegionInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeBaseInstanceName =
+        (_base_instance_name :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeRegionInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+instance s ~ s' => P.HasComputeFingerprint (TF.Ref s' (ResourceComputeRegionInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
-instance s ~ s' => P.HasComputedInstanceGroup (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedInstanceGroup x = TF.compute (TF.refKey x) "instance_group"
+instance s ~ s' => P.HasComputeInstanceGroup (TF.Ref s' (ResourceComputeRegionInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeInstanceGroup x = TF.compute (TF.refKey x) "instance_group"
 
-instance s ~ s' => P.HasComputedInstanceTemplate (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedInstanceTemplate =
-        (_instance_template :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeInstanceTemplate (TF.Ref s' (ResourceComputeRegionInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeInstanceTemplate =
+        (_instance_template :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeRegionInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNamedPort (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedNamedPort =
-        (_named_port :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNamedPort (TF.Ref s' (ResourceComputeRegionInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeNamedPort =
+        (_named_port :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeRegionInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceComputeRegionInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeRegionInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedTargetPools (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedTargetPools =
-        (_target_pools :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTargetPools (TF.Ref s' (ResourceComputeRegionInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeTargetPools =
+        (_target_pools :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTargetSize (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedTargetSize =
-        (_target_size :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTargetSize (TF.Ref s' (ResourceComputeRegionInstanceGroupManager s)) (TF.Attr s P.Text) where
+    computeTargetSize =
+        (_target_size :: ResourceComputeRegionInstanceGroupManager s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeRegionInstanceGroupManagerResource :: TF.Resource P.Google (ComputeRegionInstanceGroupManagerResource s)
-computeRegionInstanceGroupManagerResource =
+resourceComputeRegionInstanceGroupManager :: TF.Resource P.Google (ResourceComputeRegionInstanceGroupManager s)
+resourceComputeRegionInstanceGroupManager =
     TF.newResource "google_compute_region_instance_group_manager" $
-        ComputeRegionInstanceGroupManagerResource {
+        ResourceComputeRegionInstanceGroupManager {
               _auto_healing_policies = TF.Nil
             , _base_instance_name = TF.Nil
             , _description = TF.Nil
@@ -5287,7 +5350,7 @@ Manages a network route within GCE. For more information see
 <https://cloud.google.com/compute/docs/vpc/routes> and
 <https://cloud.google.com/compute/docs/reference/latest/routes> .
 -}
-data ComputeRouteResource s = ComputeRouteResource {
+data ResourceComputeRoute s = ResourceComputeRoute {
       _dest_range :: !(TF.Attr s P.Text)
     {- ^ (Required) The destination IPv4 address range that this route applies to. -}
     , _name :: !(TF.Attr s P.Text)
@@ -5312,8 +5375,8 @@ data ComputeRouteResource s = ComputeRouteResource {
     {- ^ (Optional) The tags that this route applies to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeRouteResource s) where
-    toHCL ComputeRouteResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeRoute s) where
+    toHCL ResourceComputeRoute{..} = TF.inline $ catMaybes
         [ TF.assign "dest_range" <$> TF.attribute _dest_range
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network" <$> TF.attribute _network
@@ -5327,126 +5390,126 @@ instance TF.ToHCL (ComputeRouteResource s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasDestRange (ComputeRouteResource s) (TF.Attr s P.Text) where
+instance P.HasDestRange (ResourceComputeRoute s) (TF.Attr s P.Text) where
     destRange =
-        lens (_dest_range :: ComputeRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dest_range = a } :: ComputeRouteResource s)
+        lens (_dest_range :: ResourceComputeRoute s -> TF.Attr s P.Text)
+             (\s a -> s { _dest_range = a } :: ResourceComputeRoute s)
 
-instance P.HasName (ComputeRouteResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeRoute s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeRouteResource s)
+        lens (_name :: ResourceComputeRoute s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeRoute s)
 
-instance P.HasNetwork (ComputeRouteResource s) (TF.Attr s P.Text) where
+instance P.HasNetwork (ResourceComputeRoute s) (TF.Attr s P.Text) where
     network =
-        lens (_network :: ComputeRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network = a } :: ComputeRouteResource s)
+        lens (_network :: ResourceComputeRoute s -> TF.Attr s P.Text)
+             (\s a -> s { _network = a } :: ResourceComputeRoute s)
 
-instance P.HasNextHopGateway (ComputeRouteResource s) (TF.Attr s P.Text) where
+instance P.HasNextHopGateway (ResourceComputeRoute s) (TF.Attr s P.Text) where
     nextHopGateway =
-        lens (_next_hop_gateway :: ComputeRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _next_hop_gateway = a } :: ComputeRouteResource s)
+        lens (_next_hop_gateway :: ResourceComputeRoute s -> TF.Attr s P.Text)
+             (\s a -> s { _next_hop_gateway = a } :: ResourceComputeRoute s)
 
-instance P.HasNextHopInstance (ComputeRouteResource s) (TF.Attr s P.Text) where
+instance P.HasNextHopInstance (ResourceComputeRoute s) (TF.Attr s P.Text) where
     nextHopInstance =
-        lens (_next_hop_instance :: ComputeRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _next_hop_instance = a } :: ComputeRouteResource s)
+        lens (_next_hop_instance :: ResourceComputeRoute s -> TF.Attr s P.Text)
+             (\s a -> s { _next_hop_instance = a } :: ResourceComputeRoute s)
 
-instance P.HasNextHopInstanceZone (ComputeRouteResource s) (TF.Attr s P.Text) where
+instance P.HasNextHopInstanceZone (ResourceComputeRoute s) (TF.Attr s P.Text) where
     nextHopInstanceZone =
-        lens (_next_hop_instance_zone :: ComputeRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _next_hop_instance_zone = a } :: ComputeRouteResource s)
+        lens (_next_hop_instance_zone :: ResourceComputeRoute s -> TF.Attr s P.Text)
+             (\s a -> s { _next_hop_instance_zone = a } :: ResourceComputeRoute s)
 
-instance P.HasNextHopIp (ComputeRouteResource s) (TF.Attr s P.Text) where
+instance P.HasNextHopIp (ResourceComputeRoute s) (TF.Attr s P.Text) where
     nextHopIp =
-        lens (_next_hop_ip :: ComputeRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _next_hop_ip = a } :: ComputeRouteResource s)
+        lens (_next_hop_ip :: ResourceComputeRoute s -> TF.Attr s P.Text)
+             (\s a -> s { _next_hop_ip = a } :: ResourceComputeRoute s)
 
-instance P.HasNextHopVpnTunnel (ComputeRouteResource s) (TF.Attr s P.Text) where
+instance P.HasNextHopVpnTunnel (ResourceComputeRoute s) (TF.Attr s P.Text) where
     nextHopVpnTunnel =
-        lens (_next_hop_vpn_tunnel :: ComputeRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _next_hop_vpn_tunnel = a } :: ComputeRouteResource s)
+        lens (_next_hop_vpn_tunnel :: ResourceComputeRoute s -> TF.Attr s P.Text)
+             (\s a -> s { _next_hop_vpn_tunnel = a } :: ResourceComputeRoute s)
 
-instance P.HasPriority (ComputeRouteResource s) (TF.Attr s P.Text) where
+instance P.HasPriority (ResourceComputeRoute s) (TF.Attr s P.Text) where
     priority =
-        lens (_priority :: ComputeRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _priority = a } :: ComputeRouteResource s)
+        lens (_priority :: ResourceComputeRoute s -> TF.Attr s P.Text)
+             (\s a -> s { _priority = a } :: ResourceComputeRoute s)
 
-instance P.HasProject (ComputeRouteResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeRoute s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeRouteResource s)
+        lens (_project :: ResourceComputeRoute s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeRoute s)
 
-instance P.HasTags (ComputeRouteResource s) (TF.Attr s P.Text) where
+instance P.HasTags (ResourceComputeRoute s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ComputeRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ComputeRouteResource s)
+        lens (_tags :: ResourceComputeRoute s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ResourceComputeRoute s)
 
-instance s ~ s' => P.HasComputedDestRange (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedDestRange =
-        (_dest_range :: ComputeRouteResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDestRange (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+    computeDestRange =
+        (_dest_range :: ResourceComputeRoute s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeRouteResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeRoute s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedNetwork =
-        (_network :: ComputeRouteResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNetwork (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+    computeNetwork =
+        (_network :: ResourceComputeRoute s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNextHopGateway (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedNextHopGateway =
-        (_next_hop_gateway :: ComputeRouteResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNextHopGateway (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+    computeNextHopGateway =
+        (_next_hop_gateway :: ResourceComputeRoute s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNextHopInstance (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedNextHopInstance =
-        (_next_hop_instance :: ComputeRouteResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNextHopInstance (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+    computeNextHopInstance =
+        (_next_hop_instance :: ResourceComputeRoute s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNextHopInstanceZone (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedNextHopInstanceZone =
-        (_next_hop_instance_zone :: ComputeRouteResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNextHopInstanceZone (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+    computeNextHopInstanceZone =
+        (_next_hop_instance_zone :: ResourceComputeRoute s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNextHopIp (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedNextHopIp =
-        (_next_hop_ip :: ComputeRouteResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNextHopIp (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+    computeNextHopIp =
+        (_next_hop_ip :: ResourceComputeRoute s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNextHopNetwork (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedNextHopNetwork x = TF.compute (TF.refKey x) "next_hop_network"
+instance s ~ s' => P.HasComputeNextHopNetwork (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+    computeNextHopNetwork x = TF.compute (TF.refKey x) "next_hop_network"
 
-instance s ~ s' => P.HasComputedNextHopVpnTunnel (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedNextHopVpnTunnel =
-        (_next_hop_vpn_tunnel :: ComputeRouteResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNextHopVpnTunnel (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+    computeNextHopVpnTunnel =
+        (_next_hop_vpn_tunnel :: ResourceComputeRoute s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPriority (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedPriority =
-        (_priority :: ComputeRouteResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePriority (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+    computePriority =
+        (_priority :: ResourceComputeRoute s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeRouteResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeRoute s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: ComputeRouteResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+    computeTags =
+        (_tags :: ResourceComputeRoute s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeRouteResource :: TF.Resource P.Google (ComputeRouteResource s)
-computeRouteResource =
+resourceComputeRoute :: TF.Resource P.Google (ResourceComputeRoute s)
+resourceComputeRoute =
     TF.newResource "google_compute_route" $
-        ComputeRouteResource {
+        ResourceComputeRoute {
               _dest_range = TF.Nil
             , _name = TF.Nil
             , _network = TF.Nil
@@ -5460,116 +5523,13 @@ computeRouteResource =
             , _tags = TF.Nil
             }
 
-{- | The @google_compute_router_interface@ Google resource.
-
-Manages a Cloud Router interface. For more information see
-<https://cloud.google.com/compute/docs/cloudrouter> and
-<https://cloud.google.com/compute/docs/reference/latest/routers> .
--}
-data ComputeRouterInterfaceResource s = ComputeRouterInterfaceResource {
-      _ip_range :: !(TF.Attr s P.Text)
-    {- ^ (Optional) IP address and range of the interface. The IP range must be in the RFC3927 link-local IP space. Changing this forces a new interface to be created. -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) A unique name for the interface, required by GCE. Changing this forces a new interface to be created. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which this interface's router belongs. If it is not provided, the provider project is used. Changing this forces a new interface to be created. -}
-    , _region :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The region this interface's router sits in. If not specified, the project region will be used. Changing this forces a new interface to be created. -}
-    , _router :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the router this interface will be attached to. Changing this forces a new interface to be created. -}
-    , _vpn_tunnel :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name or resource link to the VPN tunnel this interface will be linked to. Changing this forces a new interface to be created. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ComputeRouterInterfaceResource s) where
-    toHCL ComputeRouterInterfaceResource{..} = TF.inline $ catMaybes
-        [ TF.assign "ip_range" <$> TF.attribute _ip_range
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "region" <$> TF.attribute _region
-        , TF.assign "router" <$> TF.attribute _router
-        , TF.assign "vpn_tunnel" <$> TF.attribute _vpn_tunnel
-        ]
-
-instance P.HasIpRange (ComputeRouterInterfaceResource s) (TF.Attr s P.Text) where
-    ipRange =
-        lens (_ip_range :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_range = a } :: ComputeRouterInterfaceResource s)
-
-instance P.HasName (ComputeRouterInterfaceResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeRouterInterfaceResource s)
-
-instance P.HasProject (ComputeRouterInterfaceResource s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeRouterInterfaceResource s)
-
-instance P.HasRegion (ComputeRouterInterfaceResource s) (TF.Attr s P.Text) where
-    region =
-        lens (_region :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeRouterInterfaceResource s)
-
-instance P.HasRouter (ComputeRouterInterfaceResource s) (TF.Attr s P.Text) where
-    router =
-        lens (_router :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _router = a } :: ComputeRouterInterfaceResource s)
-
-instance P.HasVpnTunnel (ComputeRouterInterfaceResource s) (TF.Attr s P.Text) where
-    vpnTunnel =
-        lens (_vpn_tunnel :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vpn_tunnel = a } :: ComputeRouterInterfaceResource s)
-
-instance s ~ s' => P.HasComputedIpRange (TF.Ref s' (ComputeRouterInterfaceResource s)) (TF.Attr s P.Text) where
-    computedIpRange =
-        (_ip_range :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeRouterInterfaceResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRouterInterfaceResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRouterInterfaceResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRouter (TF.Ref s' (ComputeRouterInterfaceResource s)) (TF.Attr s P.Text) where
-    computedRouter =
-        (_router :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVpnTunnel (TF.Ref s' (ComputeRouterInterfaceResource s)) (TF.Attr s P.Text) where
-    computedVpnTunnel =
-        (_vpn_tunnel :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-computeRouterInterfaceResource :: TF.Resource P.Google (ComputeRouterInterfaceResource s)
-computeRouterInterfaceResource =
-    TF.newResource "google_compute_router_interface" $
-        ComputeRouterInterfaceResource {
-              _ip_range = TF.Nil
-            , _name = TF.Nil
-            , _project = TF.Nil
-            , _region = TF.Nil
-            , _router = TF.Nil
-            , _vpn_tunnel = TF.Nil
-            }
-
 {- | The @google_compute_router@ Google resource.
 
 Manages a Cloud Router resource. For more information see
 <https://cloud.google.com/compute/docs/cloudrouter> and
 <https://cloud.google.com/compute/docs/reference/latest/routers> .
 -}
-data ComputeRouterResource s = ComputeRouterResource {
+data ResourceComputeRouter s = ResourceComputeRouter {
       _bgp :: !(TF.Attr s P.Text)
     {- ^ (Required) BGP information specific to this router. Changing this forces a new router to be created. Structure is documented below. -}
     , _description :: !(TF.Attr s P.Text)
@@ -5584,8 +5544,8 @@ data ComputeRouterResource s = ComputeRouterResource {
     {- ^ (Optional) The region this router should sit in. If not specified, the project region will be used. Changing this forces a new router to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeRouterResource s) where
-    toHCL ComputeRouterResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeRouter s) where
+    toHCL ResourceComputeRouter{..} = TF.inline $ catMaybes
         [ TF.assign "bgp" <$> TF.attribute _bgp
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -5594,79 +5554,182 @@ instance TF.ToHCL (ComputeRouterResource s) where
         , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasBgp (ComputeRouterResource s) (TF.Attr s P.Text) where
+instance P.HasBgp (ResourceComputeRouter s) (TF.Attr s P.Text) where
     bgp =
-        lens (_bgp :: ComputeRouterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _bgp = a } :: ComputeRouterResource s)
+        lens (_bgp :: ResourceComputeRouter s -> TF.Attr s P.Text)
+             (\s a -> s { _bgp = a } :: ResourceComputeRouter s)
 
-instance P.HasDescription (ComputeRouterResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeRouter s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeRouterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeRouterResource s)
+        lens (_description :: ResourceComputeRouter s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeRouter s)
 
-instance P.HasName (ComputeRouterResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeRouter s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeRouterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeRouterResource s)
+        lens (_name :: ResourceComputeRouter s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeRouter s)
 
-instance P.HasNetwork (ComputeRouterResource s) (TF.Attr s P.Text) where
+instance P.HasNetwork (ResourceComputeRouter s) (TF.Attr s P.Text) where
     network =
-        lens (_network :: ComputeRouterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network = a } :: ComputeRouterResource s)
+        lens (_network :: ResourceComputeRouter s -> TF.Attr s P.Text)
+             (\s a -> s { _network = a } :: ResourceComputeRouter s)
 
-instance P.HasProject (ComputeRouterResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeRouter s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeRouterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeRouterResource s)
+        lens (_project :: ResourceComputeRouter s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeRouter s)
 
-instance P.HasRegion (ComputeRouterResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceComputeRouter s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ComputeRouterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeRouterResource s)
+        lens (_region :: ResourceComputeRouter s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceComputeRouter s)
 
-instance s ~ s' => P.HasComputedBgp (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedBgp =
-        (_bgp :: ComputeRouterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBgp (TF.Ref s' (ResourceComputeRouter s)) (TF.Attr s P.Text) where
+    computeBgp =
+        (_bgp :: ResourceComputeRouter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeRouterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeRouter s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeRouter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeRouterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeRouter s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeRouter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedNetwork =
-        (_network :: ComputeRouterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNetwork (TF.Ref s' (ResourceComputeRouter s)) (TF.Attr s P.Text) where
+    computeNetwork =
+        (_network :: ResourceComputeRouter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeRouterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeRouter s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeRouter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeRouterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceComputeRouter s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceComputeRouter s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeRouter s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-computeRouterResource :: TF.Resource P.Google (ComputeRouterResource s)
-computeRouterResource =
+resourceComputeRouter :: TF.Resource P.Google (ResourceComputeRouter s)
+resourceComputeRouter =
     TF.newResource "google_compute_router" $
-        ComputeRouterResource {
+        ResourceComputeRouter {
               _bgp = TF.Nil
             , _description = TF.Nil
             , _name = TF.Nil
             , _network = TF.Nil
             , _project = TF.Nil
             , _region = TF.Nil
+            }
+
+{- | The @google_compute_router_interface@ Google resource.
+
+Manages a Cloud Router interface. For more information see
+<https://cloud.google.com/compute/docs/cloudrouter> and
+<https://cloud.google.com/compute/docs/reference/latest/routers> .
+-}
+data ResourceComputeRouterInterface s = ResourceComputeRouterInterface {
+      _ip_range :: !(TF.Attr s P.Text)
+    {- ^ (Optional) IP address and range of the interface. The IP range must be in the RFC3927 link-local IP space. Changing this forces a new interface to be created. -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) A unique name for the interface, required by GCE. Changing this forces a new interface to be created. -}
+    , _project :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The project in which this interface's router belongs. If it is not provided, the provider project is used. Changing this forces a new interface to be created. -}
+    , _region :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region this interface's router sits in. If not specified, the project region will be used. Changing this forces a new interface to be created. -}
+    , _router :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the router this interface will be attached to. Changing this forces a new interface to be created. -}
+    , _vpn_tunnel :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name or resource link to the VPN tunnel this interface will be linked to. Changing this forces a new interface to be created. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceComputeRouterInterface s) where
+    toHCL ResourceComputeRouterInterface{..} = TF.inline $ catMaybes
+        [ TF.assign "ip_range" <$> TF.attribute _ip_range
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "router" <$> TF.attribute _router
+        , TF.assign "vpn_tunnel" <$> TF.attribute _vpn_tunnel
+        ]
+
+instance P.HasIpRange (ResourceComputeRouterInterface s) (TF.Attr s P.Text) where
+    ipRange =
+        lens (_ip_range :: ResourceComputeRouterInterface s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_range = a } :: ResourceComputeRouterInterface s)
+
+instance P.HasName (ResourceComputeRouterInterface s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ResourceComputeRouterInterface s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeRouterInterface s)
+
+instance P.HasProject (ResourceComputeRouterInterface s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: ResourceComputeRouterInterface s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeRouterInterface s)
+
+instance P.HasRegion (ResourceComputeRouterInterface s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: ResourceComputeRouterInterface s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceComputeRouterInterface s)
+
+instance P.HasRouter (ResourceComputeRouterInterface s) (TF.Attr s P.Text) where
+    router =
+        lens (_router :: ResourceComputeRouterInterface s -> TF.Attr s P.Text)
+             (\s a -> s { _router = a } :: ResourceComputeRouterInterface s)
+
+instance P.HasVpnTunnel (ResourceComputeRouterInterface s) (TF.Attr s P.Text) where
+    vpnTunnel =
+        lens (_vpn_tunnel :: ResourceComputeRouterInterface s -> TF.Attr s P.Text)
+             (\s a -> s { _vpn_tunnel = a } :: ResourceComputeRouterInterface s)
+
+instance s ~ s' => P.HasComputeIpRange (TF.Ref s' (ResourceComputeRouterInterface s)) (TF.Attr s P.Text) where
+    computeIpRange =
+        (_ip_range :: ResourceComputeRouterInterface s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeRouterInterface s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeRouterInterface s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeRouterInterface s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeRouterInterface s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceComputeRouterInterface s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceComputeRouterInterface s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeRouter (TF.Ref s' (ResourceComputeRouterInterface s)) (TF.Attr s P.Text) where
+    computeRouter =
+        (_router :: ResourceComputeRouterInterface s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeVpnTunnel (TF.Ref s' (ResourceComputeRouterInterface s)) (TF.Attr s P.Text) where
+    computeVpnTunnel =
+        (_vpn_tunnel :: ResourceComputeRouterInterface s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourceComputeRouterInterface :: TF.Resource P.Google (ResourceComputeRouterInterface s)
+resourceComputeRouterInterface =
+    TF.newResource "google_compute_router_interface" $
+        ResourceComputeRouterInterface {
+              _ip_range = TF.Nil
+            , _name = TF.Nil
+            , _project = TF.Nil
+            , _region = TF.Nil
+            , _router = TF.Nil
+            , _vpn_tunnel = TF.Nil
             }
 
 {- | The @google_compute_shared_vpc_host_project@ Google resource.
@@ -5677,30 +5740,30 @@ assigning it as a Shared VPC host project. For more information, see,
 <https://cloud.google.com/compute/docs/reference/latest/projects> , where
 the Shared VPC feature is referred to by its former name "XPN".
 -}
-data ComputeSharedVpcHostProjectResource s = ComputeSharedVpcHostProjectResource {
+data ResourceComputeSharedVpcHostProject s = ResourceComputeSharedVpcHostProject {
       _project :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the project that will serve as a Shared VPC host project -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSharedVpcHostProjectResource s) where
-    toHCL ComputeSharedVpcHostProjectResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeSharedVpcHostProject s) where
+    toHCL ResourceComputeSharedVpcHostProject{..} = TF.inline $ catMaybes
         [ TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasProject (ComputeSharedVpcHostProjectResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeSharedVpcHostProject s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeSharedVpcHostProjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeSharedVpcHostProjectResource s)
+        lens (_project :: ResourceComputeSharedVpcHostProject s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeSharedVpcHostProject s)
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSharedVpcHostProjectResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeSharedVpcHostProjectResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeSharedVpcHostProject s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeSharedVpcHostProject s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeSharedVpcHostProjectResource :: TF.Resource P.Google (ComputeSharedVpcHostProjectResource s)
-computeSharedVpcHostProjectResource =
+resourceComputeSharedVpcHostProject :: TF.Resource P.Google (ResourceComputeSharedVpcHostProject s)
+resourceComputeSharedVpcHostProject =
     TF.newResource "google_compute_shared_vpc_host_project" $
-        ComputeSharedVpcHostProjectResource {
+        ResourceComputeSharedVpcHostProject {
               _project = TF.Nil
             }
 
@@ -5713,43 +5776,43 @@ project. For more information, see,
 <https://cloud.google.com/compute/docs/reference/latest/projects> , where
 the Shared VPC feature is referred to by its former name "XPN".
 -}
-data ComputeSharedVpcServiceProjectResource s = ComputeSharedVpcServiceProjectResource {
+data ResourceComputeSharedVpcServiceProject s = ResourceComputeSharedVpcServiceProject {
       _host_project :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of a host project to associate. -}
     , _service_project :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the project that will serve as a Shared VPC service project. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSharedVpcServiceProjectResource s) where
-    toHCL ComputeSharedVpcServiceProjectResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeSharedVpcServiceProject s) where
+    toHCL ResourceComputeSharedVpcServiceProject{..} = TF.inline $ catMaybes
         [ TF.assign "host_project" <$> TF.attribute _host_project
         , TF.assign "service_project" <$> TF.attribute _service_project
         ]
 
-instance P.HasHostProject (ComputeSharedVpcServiceProjectResource s) (TF.Attr s P.Text) where
+instance P.HasHostProject (ResourceComputeSharedVpcServiceProject s) (TF.Attr s P.Text) where
     hostProject =
-        lens (_host_project :: ComputeSharedVpcServiceProjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _host_project = a } :: ComputeSharedVpcServiceProjectResource s)
+        lens (_host_project :: ResourceComputeSharedVpcServiceProject s -> TF.Attr s P.Text)
+             (\s a -> s { _host_project = a } :: ResourceComputeSharedVpcServiceProject s)
 
-instance P.HasServiceProject (ComputeSharedVpcServiceProjectResource s) (TF.Attr s P.Text) where
+instance P.HasServiceProject (ResourceComputeSharedVpcServiceProject s) (TF.Attr s P.Text) where
     serviceProject =
-        lens (_service_project :: ComputeSharedVpcServiceProjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _service_project = a } :: ComputeSharedVpcServiceProjectResource s)
+        lens (_service_project :: ResourceComputeSharedVpcServiceProject s -> TF.Attr s P.Text)
+             (\s a -> s { _service_project = a } :: ResourceComputeSharedVpcServiceProject s)
 
-instance s ~ s' => P.HasComputedHostProject (TF.Ref s' (ComputeSharedVpcServiceProjectResource s)) (TF.Attr s P.Text) where
-    computedHostProject =
-        (_host_project :: ComputeSharedVpcServiceProjectResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHostProject (TF.Ref s' (ResourceComputeSharedVpcServiceProject s)) (TF.Attr s P.Text) where
+    computeHostProject =
+        (_host_project :: ResourceComputeSharedVpcServiceProject s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedServiceProject (TF.Ref s' (ComputeSharedVpcServiceProjectResource s)) (TF.Attr s P.Text) where
-    computedServiceProject =
-        (_service_project :: ComputeSharedVpcServiceProjectResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeServiceProject (TF.Ref s' (ResourceComputeSharedVpcServiceProject s)) (TF.Attr s P.Text) where
+    computeServiceProject =
+        (_service_project :: ResourceComputeSharedVpcServiceProject s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeSharedVpcServiceProjectResource :: TF.Resource P.Google (ComputeSharedVpcServiceProjectResource s)
-computeSharedVpcServiceProjectResource =
+resourceComputeSharedVpcServiceProject :: TF.Resource P.Google (ResourceComputeSharedVpcServiceProject s)
+resourceComputeSharedVpcServiceProject =
     TF.newResource "google_compute_shared_vpc_service_project" $
-        ComputeSharedVpcServiceProjectResource {
+        ResourceComputeSharedVpcServiceProject {
               _host_project = TF.Nil
             , _service_project = TF.Nil
             }
@@ -5760,7 +5823,7 @@ Creates a new snapshot of a disk within GCE. For more information see
 <https://cloud.google.com/compute/docs/disks/create-snapshots> and
 <https://cloud.google.com/compute/docs/reference/latest/snapshots> .
 -}
-data ComputeSnapshotResource s = ComputeSnapshotResource {
+data ResourceComputeSnapshot s = ResourceComputeSnapshot {
       _labels :: !(TF.Attr s P.Text)
     {- ^ (Optional) A set of key/value label pairs to assign to the snapshot. -}
     , _name :: !(TF.Attr s P.Text)
@@ -5777,8 +5840,8 @@ data ComputeSnapshotResource s = ComputeSnapshotResource {
     {- ^ (Required) The zone where the source disk is located. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSnapshotResource s) where
-    toHCL ComputeSnapshotResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeSnapshot s) where
+    toHCL ResourceComputeSnapshot{..} = TF.inline $ catMaybes
         [ TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -5788,95 +5851,95 @@ instance TF.ToHCL (ComputeSnapshotResource s) where
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasLabels (ComputeSnapshotResource s) (TF.Attr s P.Text) where
+instance P.HasLabels (ResourceComputeSnapshot s) (TF.Attr s P.Text) where
     labels =
-        lens (_labels :: ComputeSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: ComputeSnapshotResource s)
+        lens (_labels :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceComputeSnapshot s)
 
-instance P.HasName (ComputeSnapshotResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeSnapshot s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeSnapshotResource s)
+        lens (_name :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeSnapshot s)
 
-instance P.HasProject (ComputeSnapshotResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeSnapshot s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeSnapshotResource s)
+        lens (_project :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeSnapshot s)
 
-instance P.HasSnapshotEncryptionKeyRaw (ComputeSnapshotResource s) (TF.Attr s P.Text) where
+instance P.HasSnapshotEncryptionKeyRaw (ResourceComputeSnapshot s) (TF.Attr s P.Text) where
     snapshotEncryptionKeyRaw =
-        lens (_snapshot_encryption_key_raw :: ComputeSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _snapshot_encryption_key_raw = a } :: ComputeSnapshotResource s)
+        lens (_snapshot_encryption_key_raw :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
+             (\s a -> s { _snapshot_encryption_key_raw = a } :: ResourceComputeSnapshot s)
 
-instance P.HasSourceDisk (ComputeSnapshotResource s) (TF.Attr s P.Text) where
+instance P.HasSourceDisk (ResourceComputeSnapshot s) (TF.Attr s P.Text) where
     sourceDisk =
-        lens (_source_disk :: ComputeSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_disk = a } :: ComputeSnapshotResource s)
+        lens (_source_disk :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
+             (\s a -> s { _source_disk = a } :: ResourceComputeSnapshot s)
 
-instance P.HasSourceDiskEncryptionKeyRaw (ComputeSnapshotResource s) (TF.Attr s P.Text) where
+instance P.HasSourceDiskEncryptionKeyRaw (ResourceComputeSnapshot s) (TF.Attr s P.Text) where
     sourceDiskEncryptionKeyRaw =
-        lens (_source_disk_encryption_key_raw :: ComputeSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_disk_encryption_key_raw = a } :: ComputeSnapshotResource s)
+        lens (_source_disk_encryption_key_raw :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
+             (\s a -> s { _source_disk_encryption_key_raw = a } :: ResourceComputeSnapshot s)
 
-instance P.HasZone (ComputeSnapshotResource s) (TF.Attr s P.Text) where
+instance P.HasZone (ResourceComputeSnapshot s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: ComputeSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: ComputeSnapshotResource s)
+        lens (_zone :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
+             (\s a -> s { _zone = a } :: ResourceComputeSnapshot s)
 
-instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
+instance s ~ s' => P.HasComputeLabelFingerprint (TF.Ref s' (ResourceComputeSnapshot s)) (TF.Attr s P.Text) where
+    computeLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: ComputeSnapshotResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceComputeSnapshot s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeSnapshotResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeSnapshot s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeSnapshotResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeSnapshot s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeSnapshot s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSnapshotEncryptionKeyRaw (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSnapshotEncryptionKeyRaw =
-        (_snapshot_encryption_key_raw :: ComputeSnapshotResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSnapshotEncryptionKeyRaw (TF.Ref s' (ResourceComputeSnapshot s)) (TF.Attr s P.Text) where
+    computeSnapshotEncryptionKeyRaw =
+        (_snapshot_encryption_key_raw :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSnapshotEncryptionKeySha256 (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSnapshotEncryptionKeySha256 x = TF.compute (TF.refKey x) "snapshot_encryption_key_sha256"
+instance s ~ s' => P.HasComputeSnapshotEncryptionKeySha256 (TF.Ref s' (ResourceComputeSnapshot s)) (TF.Attr s P.Text) where
+    computeSnapshotEncryptionKeySha256 x = TF.compute (TF.refKey x) "snapshot_encryption_key_sha256"
 
-instance s ~ s' => P.HasComputedSourceDisk (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSourceDisk =
-        (_source_disk :: ComputeSnapshotResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSourceDisk (TF.Ref s' (ResourceComputeSnapshot s)) (TF.Attr s P.Text) where
+    computeSourceDisk =
+        (_source_disk :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourceDiskEncryptionKeyRaw (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSourceDiskEncryptionKeyRaw =
-        (_source_disk_encryption_key_raw :: ComputeSnapshotResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSourceDiskEncryptionKeyRaw (TF.Ref s' (ResourceComputeSnapshot s)) (TF.Attr s P.Text) where
+    computeSourceDiskEncryptionKeyRaw =
+        (_source_disk_encryption_key_raw :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourceDiskEncryptionKeySha256 (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSourceDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "source_disk_encryption_key_sha256"
+instance s ~ s' => P.HasComputeSourceDiskEncryptionKeySha256 (TF.Ref s' (ResourceComputeSnapshot s)) (TF.Attr s P.Text) where
+    computeSourceDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "source_disk_encryption_key_sha256"
 
-instance s ~ s' => P.HasComputedSourceDiskLink (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSourceDiskLink x = TF.compute (TF.refKey x) "source_disk_link"
+instance s ~ s' => P.HasComputeSourceDiskLink (TF.Ref s' (ResourceComputeSnapshot s)) (TF.Attr s P.Text) where
+    computeSourceDiskLink x = TF.compute (TF.refKey x) "source_disk_link"
 
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: ComputeSnapshotResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceComputeSnapshot s)) (TF.Attr s P.Text) where
+    computeZone =
+        (_zone :: ResourceComputeSnapshot s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeSnapshotResource :: TF.Resource P.Google (ComputeSnapshotResource s)
-computeSnapshotResource =
+resourceComputeSnapshot :: TF.Resource P.Google (ResourceComputeSnapshot s)
+resourceComputeSnapshot =
     TF.newResource "google_compute_snapshot" $
-        ComputeSnapshotResource {
+        ResourceComputeSnapshot {
               _labels = TF.Nil
             , _name = TF.Nil
             , _project = TF.Nil
@@ -5894,7 +5957,7 @@ GCE. For more information see
 and <https://cloud.google.com/compute/docs/reference/latest/sslCertificates>
 .
 -}
-data ComputeSslCertificateResource s = ComputeSslCertificateResource {
+data ResourceComputeSslCertificate s = ResourceComputeSslCertificate {
       _certificate :: !(TF.Attr s P.Text)
     {- ^ (Required) A local certificate file in PEM format. The chain may be at most 5 certs long, and must include at least one intermediate cert. Changing this forces a new resource to be created. -}
     , _description :: !(TF.Attr s P.Text)
@@ -5909,8 +5972,8 @@ data ComputeSslCertificateResource s = ComputeSslCertificateResource {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSslCertificateResource s) where
-    toHCL ComputeSslCertificateResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeSslCertificate s) where
+    toHCL ResourceComputeSslCertificate{..} = TF.inline $ catMaybes
         [ TF.assign "certificate" <$> TF.attribute _certificate
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -5919,76 +5982,76 @@ instance TF.ToHCL (ComputeSslCertificateResource s) where
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasCertificate (ComputeSslCertificateResource s) (TF.Attr s P.Text) where
+instance P.HasCertificate (ResourceComputeSslCertificate s) (TF.Attr s P.Text) where
     certificate =
-        lens (_certificate :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _certificate = a } :: ComputeSslCertificateResource s)
+        lens (_certificate :: ResourceComputeSslCertificate s -> TF.Attr s P.Text)
+             (\s a -> s { _certificate = a } :: ResourceComputeSslCertificate s)
 
-instance P.HasDescription (ComputeSslCertificateResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeSslCertificate s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeSslCertificateResource s)
+        lens (_description :: ResourceComputeSslCertificate s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeSslCertificate s)
 
-instance P.HasName (ComputeSslCertificateResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeSslCertificate s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeSslCertificateResource s)
+        lens (_name :: ResourceComputeSslCertificate s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeSslCertificate s)
 
-instance P.HasNamePrefix (ComputeSslCertificateResource s) (TF.Attr s P.Text) where
+instance P.HasNamePrefix (ResourceComputeSslCertificate s) (TF.Attr s P.Text) where
     namePrefix =
-        lens (_name_prefix :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name_prefix = a } :: ComputeSslCertificateResource s)
+        lens (_name_prefix :: ResourceComputeSslCertificate s -> TF.Attr s P.Text)
+             (\s a -> s { _name_prefix = a } :: ResourceComputeSslCertificate s)
 
-instance P.HasPrivateKey (ComputeSslCertificateResource s) (TF.Attr s P.Text) where
+instance P.HasPrivateKey (ResourceComputeSslCertificate s) (TF.Attr s P.Text) where
     privateKey =
-        lens (_private_key :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _private_key = a } :: ComputeSslCertificateResource s)
+        lens (_private_key :: ResourceComputeSslCertificate s -> TF.Attr s P.Text)
+             (\s a -> s { _private_key = a } :: ResourceComputeSslCertificate s)
 
-instance P.HasProject (ComputeSslCertificateResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeSslCertificate s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeSslCertificateResource s)
+        lens (_project :: ResourceComputeSslCertificate s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeSslCertificate s)
 
-instance s ~ s' => P.HasComputedCertificate (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
-    computedCertificate =
-        (_certificate :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCertificate (TF.Ref s' (ResourceComputeSslCertificate s)) (TF.Attr s P.Text) where
+    computeCertificate =
+        (_certificate :: ResourceComputeSslCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCertificateId (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
-    computedCertificateId x = TF.compute (TF.refKey x) "certificate_id"
+instance s ~ s' => P.HasComputeCertificateId (TF.Ref s' (ResourceComputeSslCertificate s)) (TF.Attr s P.Text) where
+    computeCertificateId x = TF.compute (TF.refKey x) "certificate_id"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeSslCertificate s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeSslCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeSslCertificate s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeSslCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
-    computedNamePrefix =
-        (_name_prefix :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNamePrefix (TF.Ref s' (ResourceComputeSslCertificate s)) (TF.Attr s P.Text) where
+    computeNamePrefix =
+        (_name_prefix :: ResourceComputeSslCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrivateKey (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
-    computedPrivateKey =
-        (_private_key :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePrivateKey (TF.Ref s' (ResourceComputeSslCertificate s)) (TF.Attr s P.Text) where
+    computePrivateKey =
+        (_private_key :: ResourceComputeSslCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeSslCertificate s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeSslCertificate s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeSslCertificate s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-computeSslCertificateResource :: TF.Resource P.Google (ComputeSslCertificateResource s)
-computeSslCertificateResource =
+resourceComputeSslCertificate :: TF.Resource P.Google (ResourceComputeSslCertificate s)
+resourceComputeSslCertificate =
     TF.newResource "google_compute_ssl_certificate" $
-        ComputeSslCertificateResource {
+        ResourceComputeSslCertificate {
               _certificate = TF.Nil
             , _description = TF.Nil
             , _name = TF.Nil
@@ -6003,7 +6066,7 @@ Manages a subnetwork within GCE. For more information see
 <https://cloud.google.com/compute/docs/vpc/#vpc_networks_and_subnets> and
 <https://cloud.google.com/compute/docs/reference/latest/subnetworks> .
 -}
-data ComputeSubnetworkResource s = ComputeSubnetworkResource {
+data ResourceComputeSubnetwork s = ResourceComputeSubnetwork {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) Description of this subnetwork. -}
     , _ip_cidr_range :: !(TF.Attr s P.Text)
@@ -6022,8 +6085,8 @@ data ComputeSubnetworkResource s = ComputeSubnetworkResource {
     {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) An array of configurations for secondary IP ranges for VM instances contained in this subnetwork. Structure is documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSubnetworkResource s) where
-    toHCL ComputeSubnetworkResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeSubnetwork s) where
+    toHCL ResourceComputeSubnetwork{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_cidr_range" <$> TF.attribute _ip_cidr_range
         , TF.assign "name" <$> TF.attribute _name
@@ -6034,96 +6097,96 @@ instance TF.ToHCL (ComputeSubnetworkResource s) where
         , TF.assign "secondary_ip_range" <$> TF.attribute _secondary_ip_range
         ]
 
-instance P.HasDescription (ComputeSubnetworkResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeSubnetwork s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeSubnetworkResource s)
+        lens (_description :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeSubnetwork s)
 
-instance P.HasIpCidrRange (ComputeSubnetworkResource s) (TF.Attr s P.Text) where
+instance P.HasIpCidrRange (ResourceComputeSubnetwork s) (TF.Attr s P.Text) where
     ipCidrRange =
-        lens (_ip_cidr_range :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_cidr_range = a } :: ComputeSubnetworkResource s)
+        lens (_ip_cidr_range :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_cidr_range = a } :: ResourceComputeSubnetwork s)
 
-instance P.HasName (ComputeSubnetworkResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeSubnetwork s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeSubnetworkResource s)
+        lens (_name :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeSubnetwork s)
 
-instance P.HasNetwork (ComputeSubnetworkResource s) (TF.Attr s P.Text) where
+instance P.HasNetwork (ResourceComputeSubnetwork s) (TF.Attr s P.Text) where
     network =
-        lens (_network :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network = a } :: ComputeSubnetworkResource s)
+        lens (_network :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _network = a } :: ResourceComputeSubnetwork s)
 
-instance P.HasPrivateIpGoogleAccess (ComputeSubnetworkResource s) (TF.Attr s P.Text) where
+instance P.HasPrivateIpGoogleAccess (ResourceComputeSubnetwork s) (TF.Attr s P.Text) where
     privateIpGoogleAccess =
-        lens (_private_ip_google_access :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _private_ip_google_access = a } :: ComputeSubnetworkResource s)
+        lens (_private_ip_google_access :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _private_ip_google_access = a } :: ResourceComputeSubnetwork s)
 
-instance P.HasProject (ComputeSubnetworkResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeSubnetwork s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeSubnetworkResource s)
+        lens (_project :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeSubnetwork s)
 
-instance P.HasRegion (ComputeSubnetworkResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceComputeSubnetwork s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeSubnetworkResource s)
+        lens (_region :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceComputeSubnetwork s)
 
-instance P.HasSecondaryIpRange (ComputeSubnetworkResource s) (TF.Attr s P.Text) where
+instance P.HasSecondaryIpRange (ResourceComputeSubnetwork s) (TF.Attr s P.Text) where
     secondaryIpRange =
-        lens (_secondary_ip_range :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _secondary_ip_range = a } :: ComputeSubnetworkResource s)
+        lens (_secondary_ip_range :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
+             (\s a -> s { _secondary_ip_range = a } :: ResourceComputeSubnetwork s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeSubnetwork s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedGatewayAddress (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedGatewayAddress x = TF.compute (TF.refKey x) "gateway_address"
+instance s ~ s' => P.HasComputeGatewayAddress (TF.Ref s' (ResourceComputeSubnetwork s)) (TF.Attr s P.Text) where
+    computeGatewayAddress x = TF.compute (TF.refKey x) "gateway_address"
 
-instance s ~ s' => P.HasComputedIpCidrRange (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedIpCidrRange =
-        (_ip_cidr_range :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpCidrRange (TF.Ref s' (ResourceComputeSubnetwork s)) (TF.Attr s P.Text) where
+    computeIpCidrRange =
+        (_ip_cidr_range :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeSubnetwork s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedNetwork =
-        (_network :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNetwork (TF.Ref s' (ResourceComputeSubnetwork s)) (TF.Attr s P.Text) where
+    computeNetwork =
+        (_network :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrivateIpGoogleAccess (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedPrivateIpGoogleAccess =
-        (_private_ip_google_access :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePrivateIpGoogleAccess (TF.Ref s' (ResourceComputeSubnetwork s)) (TF.Attr s P.Text) where
+    computePrivateIpGoogleAccess =
+        (_private_ip_google_access :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeSubnetwork s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceComputeSubnetwork s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSecondaryIpRange (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedSecondaryIpRange =
-        (_secondary_ip_range :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSecondaryIpRange (TF.Ref s' (ResourceComputeSubnetwork s)) (TF.Attr s P.Text) where
+    computeSecondaryIpRange =
+        (_secondary_ip_range :: ResourceComputeSubnetwork s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeSubnetwork s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-computeSubnetworkResource :: TF.Resource P.Google (ComputeSubnetworkResource s)
-computeSubnetworkResource =
+resourceComputeSubnetwork :: TF.Resource P.Google (ResourceComputeSubnetwork s)
+resourceComputeSubnetwork =
     TF.newResource "google_compute_subnetwork" $
-        ComputeSubnetworkResource {
+        ResourceComputeSubnetwork {
               _description = TF.Nil
             , _ip_cidr_range = TF.Nil
             , _name = TF.Nil
@@ -6141,7 +6204,7 @@ Creates a target HTTP proxy resource in GCE. For more information see
 and
 <https://cloud.google.com/compute/docs/reference/latest/targetHttpProxies> .
 -}
-data ComputeTargetHttpProxyResource s = ComputeTargetHttpProxyResource {
+data ResourceComputeTargetHttpProxy s = ResourceComputeTargetHttpProxy {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of this resource. Changing this forces a new resource to be created. -}
     , _name :: !(TF.Attr s P.Text)
@@ -6152,64 +6215,64 @@ data ComputeTargetHttpProxyResource s = ComputeTargetHttpProxyResource {
     {- ^ (Required) The URL of a URL Map resource that defines the mapping from the URL to the BackendService. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeTargetHttpProxyResource s) where
-    toHCL ComputeTargetHttpProxyResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeTargetHttpProxy s) where
+    toHCL ResourceComputeTargetHttpProxy{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "url_map" <$> TF.attribute _url_map
         ]
 
-instance P.HasDescription (ComputeTargetHttpProxyResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeTargetHttpProxy s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeTargetHttpProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeTargetHttpProxyResource s)
+        lens (_description :: ResourceComputeTargetHttpProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeTargetHttpProxy s)
 
-instance P.HasName (ComputeTargetHttpProxyResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeTargetHttpProxy s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeTargetHttpProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeTargetHttpProxyResource s)
+        lens (_name :: ResourceComputeTargetHttpProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeTargetHttpProxy s)
 
-instance P.HasProject (ComputeTargetHttpProxyResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeTargetHttpProxy s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeTargetHttpProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeTargetHttpProxyResource s)
+        lens (_project :: ResourceComputeTargetHttpProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeTargetHttpProxy s)
 
-instance P.HasUrlMap (ComputeTargetHttpProxyResource s) (TF.Attr s P.Text) where
+instance P.HasUrlMap (ResourceComputeTargetHttpProxy s) (TF.Attr s P.Text) where
     urlMap =
-        lens (_url_map :: ComputeTargetHttpProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _url_map = a } :: ComputeTargetHttpProxyResource s)
+        lens (_url_map :: ResourceComputeTargetHttpProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _url_map = a } :: ResourceComputeTargetHttpProxy s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeTargetHttpProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeTargetHttpProxy s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeTargetHttpProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeTargetHttpProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeTargetHttpProxy s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeTargetHttpProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeTargetHttpProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeTargetHttpProxy s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeTargetHttpProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Text) where
-    computedProxyId x = TF.compute (TF.refKey x) "proxy_id"
+instance s ~ s' => P.HasComputeProxyId (TF.Ref s' (ResourceComputeTargetHttpProxy s)) (TF.Attr s P.Text) where
+    computeProxyId x = TF.compute (TF.refKey x) "proxy_id"
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeTargetHttpProxy s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedUrlMap (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Text) where
-    computedUrlMap =
-        (_url_map :: ComputeTargetHttpProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeUrlMap (TF.Ref s' (ResourceComputeTargetHttpProxy s)) (TF.Attr s P.Text) where
+    computeUrlMap =
+        (_url_map :: ResourceComputeTargetHttpProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeTargetHttpProxyResource :: TF.Resource P.Google (ComputeTargetHttpProxyResource s)
-computeTargetHttpProxyResource =
+resourceComputeTargetHttpProxy :: TF.Resource P.Google (ResourceComputeTargetHttpProxy s)
+resourceComputeTargetHttpProxy =
     TF.newResource "google_compute_target_http_proxy" $
-        ComputeTargetHttpProxyResource {
+        ResourceComputeTargetHttpProxy {
               _description = TF.Nil
             , _name = TF.Nil
             , _project = TF.Nil
@@ -6224,7 +6287,7 @@ and
 <https://cloud.google.com/compute/docs/reference/latest/targetHttpsProxies>
 .
 -}
-data ComputeTargetHttpsProxyResource s = ComputeTargetHttpsProxyResource {
+data ResourceComputeTargetHttpsProxy s = ResourceComputeTargetHttpsProxy {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of this resource. Changing this forces a new resource to be created. -}
     , _name :: !(TF.Attr s P.Text)
@@ -6237,8 +6300,8 @@ data ComputeTargetHttpsProxyResource s = ComputeTargetHttpsProxyResource {
     {- ^ (Required) The URL of a URL Map resource that defines the mapping from the URL to the BackendService. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeTargetHttpsProxyResource s) where
-    toHCL ComputeTargetHttpsProxyResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeTargetHttpsProxy s) where
+    toHCL ResourceComputeTargetHttpsProxy{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -6246,66 +6309,66 @@ instance TF.ToHCL (ComputeTargetHttpsProxyResource s) where
         , TF.assign "url_map" <$> TF.attribute _url_map
         ]
 
-instance P.HasDescription (ComputeTargetHttpsProxyResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeTargetHttpsProxy s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeTargetHttpsProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeTargetHttpsProxyResource s)
+        lens (_description :: ResourceComputeTargetHttpsProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeTargetHttpsProxy s)
 
-instance P.HasName (ComputeTargetHttpsProxyResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeTargetHttpsProxy s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeTargetHttpsProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeTargetHttpsProxyResource s)
+        lens (_name :: ResourceComputeTargetHttpsProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeTargetHttpsProxy s)
 
-instance P.HasProject (ComputeTargetHttpsProxyResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeTargetHttpsProxy s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeTargetHttpsProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeTargetHttpsProxyResource s)
+        lens (_project :: ResourceComputeTargetHttpsProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeTargetHttpsProxy s)
 
-instance P.HasSslCertificates (ComputeTargetHttpsProxyResource s) (TF.Attr s P.Text) where
+instance P.HasSslCertificates (ResourceComputeTargetHttpsProxy s) (TF.Attr s P.Text) where
     sslCertificates =
-        lens (_ssl_certificates :: ComputeTargetHttpsProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ssl_certificates = a } :: ComputeTargetHttpsProxyResource s)
+        lens (_ssl_certificates :: ResourceComputeTargetHttpsProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _ssl_certificates = a } :: ResourceComputeTargetHttpsProxy s)
 
-instance P.HasUrlMap (ComputeTargetHttpsProxyResource s) (TF.Attr s P.Text) where
+instance P.HasUrlMap (ResourceComputeTargetHttpsProxy s) (TF.Attr s P.Text) where
     urlMap =
-        lens (_url_map :: ComputeTargetHttpsProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _url_map = a } :: ComputeTargetHttpsProxyResource s)
+        lens (_url_map :: ResourceComputeTargetHttpsProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _url_map = a } :: ResourceComputeTargetHttpsProxy s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeTargetHttpsProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeTargetHttpsProxy s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeTargetHttpsProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeTargetHttpsProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeTargetHttpsProxy s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeTargetHttpsProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeTargetHttpsProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeTargetHttpsProxy s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeTargetHttpsProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
-    computedProxyId x = TF.compute (TF.refKey x) "proxy_id"
+instance s ~ s' => P.HasComputeProxyId (TF.Ref s' (ResourceComputeTargetHttpsProxy s)) (TF.Attr s P.Text) where
+    computeProxyId x = TF.compute (TF.refKey x) "proxy_id"
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeTargetHttpsProxy s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSslCertificates (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
-    computedSslCertificates =
-        (_ssl_certificates :: ComputeTargetHttpsProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSslCertificates (TF.Ref s' (ResourceComputeTargetHttpsProxy s)) (TF.Attr s P.Text) where
+    computeSslCertificates =
+        (_ssl_certificates :: ResourceComputeTargetHttpsProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUrlMap (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
-    computedUrlMap =
-        (_url_map :: ComputeTargetHttpsProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeUrlMap (TF.Ref s' (ResourceComputeTargetHttpsProxy s)) (TF.Attr s P.Text) where
+    computeUrlMap =
+        (_url_map :: ResourceComputeTargetHttpsProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeTargetHttpsProxyResource :: TF.Resource P.Google (ComputeTargetHttpsProxyResource s)
-computeTargetHttpsProxyResource =
+resourceComputeTargetHttpsProxy :: TF.Resource P.Google (ResourceComputeTargetHttpsProxy s)
+resourceComputeTargetHttpsProxy =
     TF.newResource "google_compute_target_https_proxy" $
-        ComputeTargetHttpsProxyResource {
+        ResourceComputeTargetHttpsProxy {
               _description = TF.Nil
             , _name = TF.Nil
             , _project = TF.Nil
@@ -6321,7 +6384,7 @@ see
 <https://cloud.google.com/compute/docs/load-balancing/network/target-pools>
 and <https://cloud.google.com/compute/docs/reference/latest/targetPools> .
 -}
-data ComputeTargetPoolResource s = ComputeTargetPoolResource {
+data ResourceComputeTargetPool s = ResourceComputeTargetPool {
       _backup_pool :: !(TF.Attr s P.Text)
     {- ^ (Optional) URL to the backup target pool. Must also set failover_ratio. -}
     , _description :: !(TF.Attr s P.Text)
@@ -6342,8 +6405,8 @@ data ComputeTargetPoolResource s = ComputeTargetPoolResource {
     {- ^ (Optional) How to distribute load. Options are "NONE" (no affinity). "CLIENT_IP" (hash of the source/dest addresses / ports), and "CLIENT_IP_PROTO" also includes the protocol (default "NONE"). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeTargetPoolResource s) where
-    toHCL ComputeTargetPoolResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeTargetPool s) where
+    toHCL ResourceComputeTargetPool{..} = TF.inline $ catMaybes
         [ TF.assign "backup_pool" <$> TF.attribute _backup_pool
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "failover_ratio" <$> TF.attribute _failover_ratio
@@ -6355,103 +6418,103 @@ instance TF.ToHCL (ComputeTargetPoolResource s) where
         , TF.assign "session_affinity" <$> TF.attribute _session_affinity
         ]
 
-instance P.HasBackupPool (ComputeTargetPoolResource s) (TF.Attr s P.Text) where
+instance P.HasBackupPool (ResourceComputeTargetPool s) (TF.Attr s P.Text) where
     backupPool =
-        lens (_backup_pool :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _backup_pool = a } :: ComputeTargetPoolResource s)
+        lens (_backup_pool :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
+             (\s a -> s { _backup_pool = a } :: ResourceComputeTargetPool s)
 
-instance P.HasDescription (ComputeTargetPoolResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeTargetPool s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeTargetPoolResource s)
+        lens (_description :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeTargetPool s)
 
-instance P.HasFailoverRatio (ComputeTargetPoolResource s) (TF.Attr s P.Text) where
+instance P.HasFailoverRatio (ResourceComputeTargetPool s) (TF.Attr s P.Text) where
     failoverRatio =
-        lens (_failover_ratio :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _failover_ratio = a } :: ComputeTargetPoolResource s)
+        lens (_failover_ratio :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
+             (\s a -> s { _failover_ratio = a } :: ResourceComputeTargetPool s)
 
-instance P.HasHealthChecks (ComputeTargetPoolResource s) (TF.Attr s P.Text) where
+instance P.HasHealthChecks (ResourceComputeTargetPool s) (TF.Attr s P.Text) where
     healthChecks =
-        lens (_health_checks :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _health_checks = a } :: ComputeTargetPoolResource s)
+        lens (_health_checks :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
+             (\s a -> s { _health_checks = a } :: ResourceComputeTargetPool s)
 
-instance P.HasInstances (ComputeTargetPoolResource s) (TF.Attr s P.Text) where
+instance P.HasInstances (ResourceComputeTargetPool s) (TF.Attr s P.Text) where
     instances =
-        lens (_instances :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instances = a } :: ComputeTargetPoolResource s)
+        lens (_instances :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
+             (\s a -> s { _instances = a } :: ResourceComputeTargetPool s)
 
-instance P.HasName (ComputeTargetPoolResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeTargetPool s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeTargetPoolResource s)
+        lens (_name :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeTargetPool s)
 
-instance P.HasProject (ComputeTargetPoolResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeTargetPool s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeTargetPoolResource s)
+        lens (_project :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeTargetPool s)
 
-instance P.HasRegion (ComputeTargetPoolResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceComputeTargetPool s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeTargetPoolResource s)
+        lens (_region :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceComputeTargetPool s)
 
-instance P.HasSessionAffinity (ComputeTargetPoolResource s) (TF.Attr s P.Text) where
+instance P.HasSessionAffinity (ResourceComputeTargetPool s) (TF.Attr s P.Text) where
     sessionAffinity =
-        lens (_session_affinity :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _session_affinity = a } :: ComputeTargetPoolResource s)
+        lens (_session_affinity :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
+             (\s a -> s { _session_affinity = a } :: ResourceComputeTargetPool s)
 
-instance s ~ s' => P.HasComputedBackupPool (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
-    computedBackupPool =
-        (_backup_pool :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBackupPool (TF.Ref s' (ResourceComputeTargetPool s)) (TF.Attr s P.Text) where
+    computeBackupPool =
+        (_backup_pool :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeTargetPool s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFailoverRatio (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
-    computedFailoverRatio =
-        (_failover_ratio :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFailoverRatio (TF.Ref s' (ResourceComputeTargetPool s)) (TF.Attr s P.Text) where
+    computeFailoverRatio =
+        (_failover_ratio :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHealthChecks (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
-    computedHealthChecks =
-        (_health_checks :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHealthChecks (TF.Ref s' (ResourceComputeTargetPool s)) (TF.Attr s P.Text) where
+    computeHealthChecks =
+        (_health_checks :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
-    computedInstances =
-        (_instances :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeInstances (TF.Ref s' (ResourceComputeTargetPool s)) (TF.Attr s P.Text) where
+    computeInstances =
+        (_instances :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeTargetPool s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeTargetPool s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceComputeTargetPool s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeTargetPool s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSessionAffinity (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
-    computedSessionAffinity =
-        (_session_affinity :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSessionAffinity (TF.Ref s' (ResourceComputeTargetPool s)) (TF.Attr s P.Text) where
+    computeSessionAffinity =
+        (_session_affinity :: ResourceComputeTargetPool s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeTargetPoolResource :: TF.Resource P.Google (ComputeTargetPoolResource s)
-computeTargetPoolResource =
+resourceComputeTargetPool :: TF.Resource P.Google (ResourceComputeTargetPool s)
+resourceComputeTargetPool =
     TF.newResource "google_compute_target_pool" $
-        ComputeTargetPoolResource {
+        ResourceComputeTargetPool {
               _backup_pool = TF.Nil
             , _description = TF.Nil
             , _failover_ratio = TF.Nil
@@ -6469,7 +6532,7 @@ Creates a target SSL proxy resource in GCE. For more information see
 <https://cloud.google.com/compute/docs/load-balancing/ssl-ssl/> and
 <https://cloud.google.com/compute/docs/reference/latest/targetSslProxies> .
 -}
-data ComputeTargetSslProxyResource s = ComputeTargetSslProxyResource {
+data ResourceComputeTargetSslProxy s = ResourceComputeTargetSslProxy {
       _backend_service :: !(TF.Attr s P.Text)
     {- ^ (Required) The URL of a Backend Service resource to receive the matched traffic. -}
     , _description :: !(TF.Attr s P.Text)
@@ -6484,8 +6547,8 @@ data ComputeTargetSslProxyResource s = ComputeTargetSslProxyResource {
     {- ^ (Required) The URLs or names of the SSL Certificate resources that authenticate connections between users and load balancing. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeTargetSslProxyResource s) where
-    toHCL ComputeTargetSslProxyResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeTargetSslProxy s) where
+    toHCL ResourceComputeTargetSslProxy{..} = TF.inline $ catMaybes
         [ TF.assign "backend_service" <$> TF.attribute _backend_service
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -6494,76 +6557,76 @@ instance TF.ToHCL (ComputeTargetSslProxyResource s) where
         , TF.assign "ssl_certificates" <$> TF.attribute _ssl_certificates
         ]
 
-instance P.HasBackendService (ComputeTargetSslProxyResource s) (TF.Attr s P.Text) where
+instance P.HasBackendService (ResourceComputeTargetSslProxy s) (TF.Attr s P.Text) where
     backendService =
-        lens (_backend_service :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _backend_service = a } :: ComputeTargetSslProxyResource s)
+        lens (_backend_service :: ResourceComputeTargetSslProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _backend_service = a } :: ResourceComputeTargetSslProxy s)
 
-instance P.HasDescription (ComputeTargetSslProxyResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeTargetSslProxy s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeTargetSslProxyResource s)
+        lens (_description :: ResourceComputeTargetSslProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeTargetSslProxy s)
 
-instance P.HasName (ComputeTargetSslProxyResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeTargetSslProxy s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeTargetSslProxyResource s)
+        lens (_name :: ResourceComputeTargetSslProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeTargetSslProxy s)
 
-instance P.HasProject (ComputeTargetSslProxyResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeTargetSslProxy s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeTargetSslProxyResource s)
+        lens (_project :: ResourceComputeTargetSslProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeTargetSslProxy s)
 
-instance P.HasProxyHeader (ComputeTargetSslProxyResource s) (TF.Attr s P.Text) where
+instance P.HasProxyHeader (ResourceComputeTargetSslProxy s) (TF.Attr s P.Text) where
     proxyHeader =
-        lens (_proxy_header :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _proxy_header = a } :: ComputeTargetSslProxyResource s)
+        lens (_proxy_header :: ResourceComputeTargetSslProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _proxy_header = a } :: ResourceComputeTargetSslProxy s)
 
-instance P.HasSslCertificates (ComputeTargetSslProxyResource s) (TF.Attr s P.Text) where
+instance P.HasSslCertificates (ResourceComputeTargetSslProxy s) (TF.Attr s P.Text) where
     sslCertificates =
-        lens (_ssl_certificates :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ssl_certificates = a } :: ComputeTargetSslProxyResource s)
+        lens (_ssl_certificates :: ResourceComputeTargetSslProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _ssl_certificates = a } :: ResourceComputeTargetSslProxy s)
 
-instance s ~ s' => P.HasComputedBackendService (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
-    computedBackendService =
-        (_backend_service :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBackendService (TF.Ref s' (ResourceComputeTargetSslProxy s)) (TF.Attr s P.Text) where
+    computeBackendService =
+        (_backend_service :: ResourceComputeTargetSslProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeTargetSslProxy s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeTargetSslProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeTargetSslProxy s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeTargetSslProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeTargetSslProxy s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeTargetSslProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProxyHeader (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
-    computedProxyHeader =
-        (_proxy_header :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProxyHeader (TF.Ref s' (ResourceComputeTargetSslProxy s)) (TF.Attr s P.Text) where
+    computeProxyHeader =
+        (_proxy_header :: ResourceComputeTargetSslProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
-    computedProxyId x = TF.compute (TF.refKey x) "proxy_id"
+instance s ~ s' => P.HasComputeProxyId (TF.Ref s' (ResourceComputeTargetSslProxy s)) (TF.Attr s P.Text) where
+    computeProxyId x = TF.compute (TF.refKey x) "proxy_id"
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeTargetSslProxy s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSslCertificates (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
-    computedSslCertificates =
-        (_ssl_certificates :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSslCertificates (TF.Ref s' (ResourceComputeTargetSslProxy s)) (TF.Attr s P.Text) where
+    computeSslCertificates =
+        (_ssl_certificates :: ResourceComputeTargetSslProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeTargetSslProxyResource :: TF.Resource P.Google (ComputeTargetSslProxyResource s)
-computeTargetSslProxyResource =
+resourceComputeTargetSslProxy :: TF.Resource P.Google (ResourceComputeTargetSslProxy s)
+resourceComputeTargetSslProxy =
     TF.newResource "google_compute_target_ssl_proxy" $
-        ComputeTargetSslProxyResource {
+        ResourceComputeTargetSslProxy {
               _backend_service = TF.Nil
             , _description = TF.Nil
             , _name = TF.Nil
@@ -6578,7 +6641,7 @@ Creates a target TCP proxy resource in GCE. For more information see
 <https://cloud.google.com/compute/docs/load-balancing/tcp-ssl/tcp-proxy> and
 <https://cloud.google.com/compute/docs/reference/latest/targetTcpProxies> .
 -}
-data ComputeTargetTcpProxyResource s = ComputeTargetTcpProxyResource {
+data ResourceComputeTargetTcpProxy s = ResourceComputeTargetTcpProxy {
       _backend_service :: !(TF.Attr s P.Text)
     {- ^ (Required) The URL of a Backend Service resource to receive the matched traffic. -}
     , _description :: !(TF.Attr s P.Text)
@@ -6591,8 +6654,8 @@ data ComputeTargetTcpProxyResource s = ComputeTargetTcpProxyResource {
     {- ^ (Optional) Type of proxy header to append before sending data to the backend, either NONE or PROXY_V1 (default NONE). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeTargetTcpProxyResource s) where
-    toHCL ComputeTargetTcpProxyResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeTargetTcpProxy s) where
+    toHCL ResourceComputeTargetTcpProxy{..} = TF.inline $ catMaybes
         [ TF.assign "backend_service" <$> TF.attribute _backend_service
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -6600,66 +6663,66 @@ instance TF.ToHCL (ComputeTargetTcpProxyResource s) where
         , TF.assign "proxy_header" <$> TF.attribute _proxy_header
         ]
 
-instance P.HasBackendService (ComputeTargetTcpProxyResource s) (TF.Attr s P.Text) where
+instance P.HasBackendService (ResourceComputeTargetTcpProxy s) (TF.Attr s P.Text) where
     backendService =
-        lens (_backend_service :: ComputeTargetTcpProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _backend_service = a } :: ComputeTargetTcpProxyResource s)
+        lens (_backend_service :: ResourceComputeTargetTcpProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _backend_service = a } :: ResourceComputeTargetTcpProxy s)
 
-instance P.HasDescription (ComputeTargetTcpProxyResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeTargetTcpProxy s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeTargetTcpProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeTargetTcpProxyResource s)
+        lens (_description :: ResourceComputeTargetTcpProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeTargetTcpProxy s)
 
-instance P.HasName (ComputeTargetTcpProxyResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeTargetTcpProxy s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeTargetTcpProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeTargetTcpProxyResource s)
+        lens (_name :: ResourceComputeTargetTcpProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeTargetTcpProxy s)
 
-instance P.HasProject (ComputeTargetTcpProxyResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeTargetTcpProxy s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeTargetTcpProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeTargetTcpProxyResource s)
+        lens (_project :: ResourceComputeTargetTcpProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeTargetTcpProxy s)
 
-instance P.HasProxyHeader (ComputeTargetTcpProxyResource s) (TF.Attr s P.Text) where
+instance P.HasProxyHeader (ResourceComputeTargetTcpProxy s) (TF.Attr s P.Text) where
     proxyHeader =
-        lens (_proxy_header :: ComputeTargetTcpProxyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _proxy_header = a } :: ComputeTargetTcpProxyResource s)
+        lens (_proxy_header :: ResourceComputeTargetTcpProxy s -> TF.Attr s P.Text)
+             (\s a -> s { _proxy_header = a } :: ResourceComputeTargetTcpProxy s)
 
-instance s ~ s' => P.HasComputedBackendService (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
-    computedBackendService =
-        (_backend_service :: ComputeTargetTcpProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBackendService (TF.Ref s' (ResourceComputeTargetTcpProxy s)) (TF.Attr s P.Text) where
+    computeBackendService =
+        (_backend_service :: ResourceComputeTargetTcpProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeTargetTcpProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeTargetTcpProxy s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeTargetTcpProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeTargetTcpProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeTargetTcpProxy s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeTargetTcpProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeTargetTcpProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeTargetTcpProxy s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeTargetTcpProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProxyHeader (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
-    computedProxyHeader =
-        (_proxy_header :: ComputeTargetTcpProxyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProxyHeader (TF.Ref s' (ResourceComputeTargetTcpProxy s)) (TF.Attr s P.Text) where
+    computeProxyHeader =
+        (_proxy_header :: ResourceComputeTargetTcpProxy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
-    computedProxyId x = TF.compute (TF.refKey x) "proxy_id"
+instance s ~ s' => P.HasComputeProxyId (TF.Ref s' (ResourceComputeTargetTcpProxy s)) (TF.Attr s P.Text) where
+    computeProxyId x = TF.compute (TF.refKey x) "proxy_id"
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeTargetTcpProxy s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-computeTargetTcpProxyResource :: TF.Resource P.Google (ComputeTargetTcpProxyResource s)
-computeTargetTcpProxyResource =
+resourceComputeTargetTcpProxy :: TF.Resource P.Google (ResourceComputeTargetTcpProxy s)
+resourceComputeTargetTcpProxy =
     TF.newResource "google_compute_target_tcp_proxy" $
-        ComputeTargetTcpProxyResource {
+        ResourceComputeTargetTcpProxy {
               _backend_service = TF.Nil
             , _description = TF.Nil
             , _name = TF.Nil
@@ -6673,7 +6736,7 @@ Manages a URL Map resource within GCE. For more information see
 <https://cloud.google.com/compute/docs/load-balancing/http/url-map> and
 <https://cloud.google.com/compute/docs/reference/latest/urlMaps> .
 -}
-data ComputeUrlMapResource s = ComputeUrlMapResource {
+data ResourceComputeUrlMap s = ResourceComputeUrlMap {
       _default_service :: !(TF.Attr s P.Text)
     {- ^ (Required) The backend service or backend bucket to use when none of the given rules match. -}
     , _description :: !(TF.Attr s P.Text)
@@ -6690,8 +6753,8 @@ data ComputeUrlMapResource s = ComputeUrlMapResource {
     {- ^ (Optional) The test to perform.  Multiple blocks of this type are permitted. Structure is documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeUrlMapResource s) where
-    toHCL ComputeUrlMapResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeUrlMap s) where
+    toHCL ResourceComputeUrlMap{..} = TF.inline $ catMaybes
         [ TF.assign "default_service" <$> TF.attribute _default_service
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "host_rule" <$> TF.attribute _host_rule
@@ -6701,89 +6764,89 @@ instance TF.ToHCL (ComputeUrlMapResource s) where
         , TF.assign "test" <$> TF.attribute _test
         ]
 
-instance P.HasDefaultService (ComputeUrlMapResource s) (TF.Attr s P.Text) where
+instance P.HasDefaultService (ResourceComputeUrlMap s) (TF.Attr s P.Text) where
     defaultService =
-        lens (_default_service :: ComputeUrlMapResource s -> TF.Attr s P.Text)
-             (\s a -> s { _default_service = a } :: ComputeUrlMapResource s)
+        lens (_default_service :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
+             (\s a -> s { _default_service = a } :: ResourceComputeUrlMap s)
 
-instance P.HasDescription (ComputeUrlMapResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeUrlMap s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeUrlMapResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeUrlMapResource s)
+        lens (_description :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeUrlMap s)
 
-instance P.HasHostRule (ComputeUrlMapResource s) (TF.Attr s P.Text) where
+instance P.HasHostRule (ResourceComputeUrlMap s) (TF.Attr s P.Text) where
     hostRule =
-        lens (_host_rule :: ComputeUrlMapResource s -> TF.Attr s P.Text)
-             (\s a -> s { _host_rule = a } :: ComputeUrlMapResource s)
+        lens (_host_rule :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
+             (\s a -> s { _host_rule = a } :: ResourceComputeUrlMap s)
 
-instance P.HasName (ComputeUrlMapResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeUrlMap s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeUrlMapResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeUrlMapResource s)
+        lens (_name :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeUrlMap s)
 
-instance P.HasPathMatcher (ComputeUrlMapResource s) (TF.Attr s P.Text) where
+instance P.HasPathMatcher (ResourceComputeUrlMap s) (TF.Attr s P.Text) where
     pathMatcher =
-        lens (_path_matcher :: ComputeUrlMapResource s -> TF.Attr s P.Text)
-             (\s a -> s { _path_matcher = a } :: ComputeUrlMapResource s)
+        lens (_path_matcher :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
+             (\s a -> s { _path_matcher = a } :: ResourceComputeUrlMap s)
 
-instance P.HasProject (ComputeUrlMapResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeUrlMap s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeUrlMapResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeUrlMapResource s)
+        lens (_project :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeUrlMap s)
 
-instance P.HasTest (ComputeUrlMapResource s) (TF.Attr s P.Text) where
+instance P.HasTest (ResourceComputeUrlMap s) (TF.Attr s P.Text) where
     test =
-        lens (_test :: ComputeUrlMapResource s -> TF.Attr s P.Text)
-             (\s a -> s { _test = a } :: ComputeUrlMapResource s)
+        lens (_test :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
+             (\s a -> s { _test = a } :: ResourceComputeUrlMap s)
 
-instance s ~ s' => P.HasComputedDefaultService (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedDefaultService =
-        (_default_service :: ComputeUrlMapResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDefaultService (TF.Ref s' (ResourceComputeUrlMap s)) (TF.Attr s P.Text) where
+    computeDefaultService =
+        (_default_service :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeUrlMapResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeUrlMap s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+instance s ~ s' => P.HasComputeFingerprint (TF.Ref s' (ResourceComputeUrlMap s)) (TF.Attr s P.Text) where
+    computeFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
-instance s ~ s' => P.HasComputedHostRule (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedHostRule =
-        (_host_rule :: ComputeUrlMapResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHostRule (TF.Ref s' (ResourceComputeUrlMap s)) (TF.Attr s P.Text) where
+    computeHostRule =
+        (_host_rule :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMapId (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedMapId x = TF.compute (TF.refKey x) "map_id"
+instance s ~ s' => P.HasComputeMapId (TF.Ref s' (ResourceComputeUrlMap s)) (TF.Attr s P.Text) where
+    computeMapId x = TF.compute (TF.refKey x) "map_id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeUrlMapResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeUrlMap s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPathMatcher (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedPathMatcher =
-        (_path_matcher :: ComputeUrlMapResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePathMatcher (TF.Ref s' (ResourceComputeUrlMap s)) (TF.Attr s P.Text) where
+    computePathMatcher =
+        (_path_matcher :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeUrlMapResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeUrlMap s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeUrlMap s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedTest (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedTest =
-        (_test :: ComputeUrlMapResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTest (TF.Ref s' (ResourceComputeUrlMap s)) (TF.Attr s P.Text) where
+    computeTest =
+        (_test :: ResourceComputeUrlMap s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeUrlMapResource :: TF.Resource P.Google (ComputeUrlMapResource s)
-computeUrlMapResource =
+resourceComputeUrlMap :: TF.Resource P.Google (ResourceComputeUrlMap s)
+resourceComputeUrlMap =
     TF.newResource "google_compute_url_map" $
-        ComputeUrlMapResource {
+        ResourceComputeUrlMap {
               _default_service = TF.Nil
             , _description = TF.Nil
             , _host_rule = TF.Nil
@@ -6798,7 +6861,7 @@ computeUrlMapResource =
 Manages a VPN Gateway in the GCE network. For more info, read the
 <https://cloud.google.com/compute/docs/vpn> .
 -}
-data ComputeVpnGatewayResource s = ComputeVpnGatewayResource {
+data ResourceComputeVpnGateway s = ResourceComputeVpnGateway {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of the resource. Changing this forces a new resource to be created. -}
     , _name :: !(TF.Attr s P.Text)
@@ -6811,8 +6874,8 @@ data ComputeVpnGatewayResource s = ComputeVpnGatewayResource {
     {- ^ (Optional) The region this gateway should sit in. If not specified, the project region will be used. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeVpnGatewayResource s) where
-    toHCL ComputeVpnGatewayResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeVpnGateway s) where
+    toHCL ResourceComputeVpnGateway{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network" <$> TF.attribute _network
@@ -6820,63 +6883,63 @@ instance TF.ToHCL (ComputeVpnGatewayResource s) where
         , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasDescription (ComputeVpnGatewayResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeVpnGateway s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeVpnGatewayResource s)
+        lens (_description :: ResourceComputeVpnGateway s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeVpnGateway s)
 
-instance P.HasName (ComputeVpnGatewayResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeVpnGateway s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeVpnGatewayResource s)
+        lens (_name :: ResourceComputeVpnGateway s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeVpnGateway s)
 
-instance P.HasNetwork (ComputeVpnGatewayResource s) (TF.Attr s P.Text) where
+instance P.HasNetwork (ResourceComputeVpnGateway s) (TF.Attr s P.Text) where
     network =
-        lens (_network :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network = a } :: ComputeVpnGatewayResource s)
+        lens (_network :: ResourceComputeVpnGateway s -> TF.Attr s P.Text)
+             (\s a -> s { _network = a } :: ResourceComputeVpnGateway s)
 
-instance P.HasProject (ComputeVpnGatewayResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeVpnGateway s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeVpnGatewayResource s)
+        lens (_project :: ResourceComputeVpnGateway s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeVpnGateway s)
 
-instance P.HasRegion (ComputeVpnGatewayResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceComputeVpnGateway s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeVpnGatewayResource s)
+        lens (_region :: ResourceComputeVpnGateway s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceComputeVpnGateway s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeVpnGatewayResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeVpnGateway s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeVpnGateway s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeVpnGatewayResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeVpnGateway s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeVpnGateway s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeVpnGatewayResource s)) (TF.Attr s P.Text) where
-    computedNetwork =
-        (_network :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNetwork (TF.Ref s' (ResourceComputeVpnGateway s)) (TF.Attr s P.Text) where
+    computeNetwork =
+        (_network :: ResourceComputeVpnGateway s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeVpnGatewayResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeVpnGateway s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeVpnGateway s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeVpnGatewayResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceComputeVpnGateway s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceComputeVpnGateway s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeVpnGatewayResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeVpnGateway s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-computeVpnGatewayResource :: TF.Resource P.Google (ComputeVpnGatewayResource s)
-computeVpnGatewayResource =
+resourceComputeVpnGateway :: TF.Resource P.Google (ResourceComputeVpnGateway s)
+resourceComputeVpnGateway =
     TF.newResource "google_compute_vpn_gateway" $
-        ComputeVpnGatewayResource {
+        ResourceComputeVpnGateway {
               _description = TF.Nil
             , _name = TF.Nil
             , _network = TF.Nil
@@ -6891,7 +6954,7 @@ Manages a VPN Tunnel to the GCE network. For more info, read the
 including the @shared_secret@ will be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
-data ComputeVpnTunnelResource s = ComputeVpnTunnelResource {
+data ResourceComputeVpnTunnel s = ResourceComputeVpnTunnel {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of the resource. Changing this forces a new resource to be created. -}
     , _ike_version :: !(TF.Attr s P.Text)
@@ -6916,8 +6979,8 @@ data ComputeVpnTunnelResource s = ComputeVpnTunnelResource {
     {- ^ (Required) A link to the VPN gateway sitting inside GCE. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeVpnTunnelResource s) where
-    toHCL ComputeVpnTunnelResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceComputeVpnTunnel s) where
+    toHCL ResourceComputeVpnTunnel{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ike_version" <$> TF.attribute _ike_version
         , TF.assign "local_traffic_selector" <$> TF.attribute _local_traffic_selector
@@ -6931,126 +6994,126 @@ instance TF.ToHCL (ComputeVpnTunnelResource s) where
         , TF.assign "target_vpn_gateway" <$> TF.attribute _target_vpn_gateway
         ]
 
-instance P.HasDescription (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceComputeVpnTunnel s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeVpnTunnelResource s)
+        lens (_description :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceComputeVpnTunnel s)
 
-instance P.HasIkeVersion (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
+instance P.HasIkeVersion (ResourceComputeVpnTunnel s) (TF.Attr s P.Text) where
     ikeVersion =
-        lens (_ike_version :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ike_version = a } :: ComputeVpnTunnelResource s)
+        lens (_ike_version :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
+             (\s a -> s { _ike_version = a } :: ResourceComputeVpnTunnel s)
 
-instance P.HasLocalTrafficSelector (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
+instance P.HasLocalTrafficSelector (ResourceComputeVpnTunnel s) (TF.Attr s P.Text) where
     localTrafficSelector =
-        lens (_local_traffic_selector :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
-             (\s a -> s { _local_traffic_selector = a } :: ComputeVpnTunnelResource s)
+        lens (_local_traffic_selector :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
+             (\s a -> s { _local_traffic_selector = a } :: ResourceComputeVpnTunnel s)
 
-instance P.HasName (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceComputeVpnTunnel s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeVpnTunnelResource s)
+        lens (_name :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceComputeVpnTunnel s)
 
-instance P.HasPeerIp (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
+instance P.HasPeerIp (ResourceComputeVpnTunnel s) (TF.Attr s P.Text) where
     peerIp =
-        lens (_peer_ip :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
-             (\s a -> s { _peer_ip = a } :: ComputeVpnTunnelResource s)
+        lens (_peer_ip :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
+             (\s a -> s { _peer_ip = a } :: ResourceComputeVpnTunnel s)
 
-instance P.HasProject (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceComputeVpnTunnel s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeVpnTunnelResource s)
+        lens (_project :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceComputeVpnTunnel s)
 
-instance P.HasRegion (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceComputeVpnTunnel s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeVpnTunnelResource s)
+        lens (_region :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceComputeVpnTunnel s)
 
-instance P.HasRemoteTrafficSelector (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
+instance P.HasRemoteTrafficSelector (ResourceComputeVpnTunnel s) (TF.Attr s P.Text) where
     remoteTrafficSelector =
-        lens (_remote_traffic_selector :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
-             (\s a -> s { _remote_traffic_selector = a } :: ComputeVpnTunnelResource s)
+        lens (_remote_traffic_selector :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
+             (\s a -> s { _remote_traffic_selector = a } :: ResourceComputeVpnTunnel s)
 
-instance P.HasRouter (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
+instance P.HasRouter (ResourceComputeVpnTunnel s) (TF.Attr s P.Text) where
     router =
-        lens (_router :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
-             (\s a -> s { _router = a } :: ComputeVpnTunnelResource s)
+        lens (_router :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
+             (\s a -> s { _router = a } :: ResourceComputeVpnTunnel s)
 
-instance P.HasSharedSecret (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
+instance P.HasSharedSecret (ResourceComputeVpnTunnel s) (TF.Attr s P.Text) where
     sharedSecret =
-        lens (_shared_secret :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
-             (\s a -> s { _shared_secret = a } :: ComputeVpnTunnelResource s)
+        lens (_shared_secret :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
+             (\s a -> s { _shared_secret = a } :: ResourceComputeVpnTunnel s)
 
-instance P.HasTargetVpnGateway (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
+instance P.HasTargetVpnGateway (ResourceComputeVpnTunnel s) (TF.Attr s P.Text) where
     targetVpnGateway =
-        lens (_target_vpn_gateway :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target_vpn_gateway = a } :: ComputeVpnTunnelResource s)
+        lens (_target_vpn_gateway :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
+             (\s a -> s { _target_vpn_gateway = a } :: ResourceComputeVpnTunnel s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceComputeVpnTunnel s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDetailedStatus (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedDetailedStatus x = TF.compute (TF.refKey x) "detailed_status"
+instance s ~ s' => P.HasComputeDetailedStatus (TF.Ref s' (ResourceComputeVpnTunnel s)) (TF.Attr s P.Text) where
+    computeDetailedStatus x = TF.compute (TF.refKey x) "detailed_status"
 
-instance s ~ s' => P.HasComputedIkeVersion (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedIkeVersion =
-        (_ike_version :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIkeVersion (TF.Ref s' (ResourceComputeVpnTunnel s)) (TF.Attr s P.Text) where
+    computeIkeVersion =
+        (_ike_version :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLocalTrafficSelector (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedLocalTrafficSelector =
-        (_local_traffic_selector :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLocalTrafficSelector (TF.Ref s' (ResourceComputeVpnTunnel s)) (TF.Attr s P.Text) where
+    computeLocalTrafficSelector =
+        (_local_traffic_selector :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceComputeVpnTunnel s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPeerIp (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedPeerIp =
-        (_peer_ip :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePeerIp (TF.Ref s' (ResourceComputeVpnTunnel s)) (TF.Attr s P.Text) where
+    computePeerIp =
+        (_peer_ip :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceComputeVpnTunnel s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceComputeVpnTunnel s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRemoteTrafficSelector (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedRemoteTrafficSelector =
-        (_remote_traffic_selector :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRemoteTrafficSelector (TF.Ref s' (ResourceComputeVpnTunnel s)) (TF.Attr s P.Text) where
+    computeRemoteTrafficSelector =
+        (_remote_traffic_selector :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRouter (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedRouter =
-        (_router :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRouter (TF.Ref s' (ResourceComputeVpnTunnel s)) (TF.Attr s P.Text) where
+    computeRouter =
+        (_router :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceComputeVpnTunnel s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSharedSecret (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedSharedSecret =
-        (_shared_secret :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSharedSecret (TF.Ref s' (ResourceComputeVpnTunnel s)) (TF.Attr s P.Text) where
+    computeSharedSecret =
+        (_shared_secret :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTargetVpnGateway (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedTargetVpnGateway =
-        (_target_vpn_gateway :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTargetVpnGateway (TF.Ref s' (ResourceComputeVpnTunnel s)) (TF.Attr s P.Text) where
+    computeTargetVpnGateway =
+        (_target_vpn_gateway :: ResourceComputeVpnTunnel s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeVpnTunnelResource :: TF.Resource P.Google (ComputeVpnTunnelResource s)
-computeVpnTunnelResource =
+resourceComputeVpnTunnel :: TF.Resource P.Google (ResourceComputeVpnTunnel s)
+resourceComputeVpnTunnel =
     TF.newResource "google_compute_vpn_tunnel" $
-        ComputeVpnTunnelResource {
+        ResourceComputeVpnTunnel {
               _description = TF.Nil
             , _ike_version = TF.Nil
             , _local_traffic_selector = TF.Nil
@@ -7072,7 +7135,7 @@ Creates a Google Kubernetes Engine (GKE) cluster. For more information see
 . ~> Note: All arguments including the username and password will be stored
 in the raw state as plain-text. </docs/state/sensitive-data.html> .
 -}
-data ContainerClusterResource s = ContainerClusterResource {
+data ResourceContainerCluster s = ResourceContainerCluster {
       _additional_zones :: !(TF.Attr s P.Text)
     {- ^ (Optional) The list of additional Google Compute Engine locations in which the cluster's nodes should be located. If additional zones are configured, the number of nodes specified in @initial_node_count@ is created in all specified zones. -}
     , _addons_config :: !(TF.Attr s P.Text)
@@ -7121,8 +7184,8 @@ data ContainerClusterResource s = ContainerClusterResource {
     {- ^ (Required) The zone that the master and the number of nodes specified in @initial_node_count@ should be created in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ContainerClusterResource s) where
-    toHCL ContainerClusterResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceContainerCluster s) where
+    toHCL ResourceContainerCluster{..} = TF.inline $ catMaybes
         [ TF.assign "additional_zones" <$> TF.attribute _additional_zones
         , TF.assign "addons_config" <$> TF.attribute _addons_config
         , TF.assign "cluster_ipv4_cidr" <$> TF.attribute _cluster_ipv4_cidr
@@ -7148,261 +7211,261 @@ instance TF.ToHCL (ContainerClusterResource s) where
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasAdditionalZones (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasAdditionalZones (ResourceContainerCluster s) (TF.Attr s P.Text) where
     additionalZones =
-        lens (_additional_zones :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _additional_zones = a } :: ContainerClusterResource s)
+        lens (_additional_zones :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _additional_zones = a } :: ResourceContainerCluster s)
 
-instance P.HasAddonsConfig (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasAddonsConfig (ResourceContainerCluster s) (TF.Attr s P.Text) where
     addonsConfig =
-        lens (_addons_config :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _addons_config = a } :: ContainerClusterResource s)
+        lens (_addons_config :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _addons_config = a } :: ResourceContainerCluster s)
 
-instance P.HasClusterIpv4Cidr (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasClusterIpv4Cidr (ResourceContainerCluster s) (TF.Attr s P.Text) where
     clusterIpv4Cidr =
-        lens (_cluster_ipv4_cidr :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cluster_ipv4_cidr = a } :: ContainerClusterResource s)
+        lens (_cluster_ipv4_cidr :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_ipv4_cidr = a } :: ResourceContainerCluster s)
 
-instance P.HasDescription (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceContainerCluster s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ContainerClusterResource s)
+        lens (_description :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceContainerCluster s)
 
-instance P.HasEnableKubernetesAlpha (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasEnableKubernetesAlpha (ResourceContainerCluster s) (TF.Attr s P.Text) where
     enableKubernetesAlpha =
-        lens (_enable_kubernetes_alpha :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _enable_kubernetes_alpha = a } :: ContainerClusterResource s)
+        lens (_enable_kubernetes_alpha :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _enable_kubernetes_alpha = a } :: ResourceContainerCluster s)
 
-instance P.HasEnableLegacyAbac (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasEnableLegacyAbac (ResourceContainerCluster s) (TF.Attr s P.Text) where
     enableLegacyAbac =
-        lens (_enable_legacy_abac :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _enable_legacy_abac = a } :: ContainerClusterResource s)
+        lens (_enable_legacy_abac :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _enable_legacy_abac = a } :: ResourceContainerCluster s)
 
-instance P.HasInitialNodeCount (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasInitialNodeCount (ResourceContainerCluster s) (TF.Attr s P.Text) where
     initialNodeCount =
-        lens (_initial_node_count :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _initial_node_count = a } :: ContainerClusterResource s)
+        lens (_initial_node_count :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _initial_node_count = a } :: ResourceContainerCluster s)
 
-instance P.HasIpAllocationPolicy (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasIpAllocationPolicy (ResourceContainerCluster s) (TF.Attr s P.Text) where
     ipAllocationPolicy =
-        lens (_ip_allocation_policy :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_allocation_policy = a } :: ContainerClusterResource s)
+        lens (_ip_allocation_policy :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_allocation_policy = a } :: ResourceContainerCluster s)
 
-instance P.HasLoggingService (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasLoggingService (ResourceContainerCluster s) (TF.Attr s P.Text) where
     loggingService =
-        lens (_logging_service :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _logging_service = a } :: ContainerClusterResource s)
+        lens (_logging_service :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _logging_service = a } :: ResourceContainerCluster s)
 
-instance P.HasMaintenancePolicy (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasMaintenancePolicy (ResourceContainerCluster s) (TF.Attr s P.Text) where
     maintenancePolicy =
-        lens (_maintenance_policy :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _maintenance_policy = a } :: ContainerClusterResource s)
+        lens (_maintenance_policy :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _maintenance_policy = a } :: ResourceContainerCluster s)
 
-instance P.HasMasterAuth (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasMasterAuth (ResourceContainerCluster s) (TF.Attr s P.Text) where
     masterAuth =
-        lens (_master_auth :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _master_auth = a } :: ContainerClusterResource s)
+        lens (_master_auth :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _master_auth = a } :: ResourceContainerCluster s)
 
-instance P.HasMasterAuthorizedNetworksConfig (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasMasterAuthorizedNetworksConfig (ResourceContainerCluster s) (TF.Attr s P.Text) where
     masterAuthorizedNetworksConfig =
-        lens (_master_authorized_networks_config :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _master_authorized_networks_config = a } :: ContainerClusterResource s)
+        lens (_master_authorized_networks_config :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _master_authorized_networks_config = a } :: ResourceContainerCluster s)
 
-instance P.HasMinMasterVersion (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasMinMasterVersion (ResourceContainerCluster s) (TF.Attr s P.Text) where
     minMasterVersion =
-        lens (_min_master_version :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _min_master_version = a } :: ContainerClusterResource s)
+        lens (_min_master_version :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _min_master_version = a } :: ResourceContainerCluster s)
 
-instance P.HasMonitoringService (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasMonitoringService (ResourceContainerCluster s) (TF.Attr s P.Text) where
     monitoringService =
-        lens (_monitoring_service :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _monitoring_service = a } :: ContainerClusterResource s)
+        lens (_monitoring_service :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _monitoring_service = a } :: ResourceContainerCluster s)
 
-instance P.HasName (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceContainerCluster s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ContainerClusterResource s)
+        lens (_name :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceContainerCluster s)
 
-instance P.HasNetwork (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasNetwork (ResourceContainerCluster s) (TF.Attr s P.Text) where
     network =
-        lens (_network :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network = a } :: ContainerClusterResource s)
+        lens (_network :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _network = a } :: ResourceContainerCluster s)
 
-instance P.HasNetworkPolicy (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasNetworkPolicy (ResourceContainerCluster s) (TF.Attr s P.Text) where
     networkPolicy =
-        lens (_network_policy :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network_policy = a } :: ContainerClusterResource s)
+        lens (_network_policy :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _network_policy = a } :: ResourceContainerCluster s)
 
-instance P.HasNodeConfig (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasNodeConfig (ResourceContainerCluster s) (TF.Attr s P.Text) where
     nodeConfig =
-        lens (_node_config :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _node_config = a } :: ContainerClusterResource s)
+        lens (_node_config :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _node_config = a } :: ResourceContainerCluster s)
 
-instance P.HasNodePool (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasNodePool (ResourceContainerCluster s) (TF.Attr s P.Text) where
     nodePool =
-        lens (_node_pool :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _node_pool = a } :: ContainerClusterResource s)
+        lens (_node_pool :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _node_pool = a } :: ResourceContainerCluster s)
 
-instance P.HasNodeVersion (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasNodeVersion (ResourceContainerCluster s) (TF.Attr s P.Text) where
     nodeVersion =
-        lens (_node_version :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _node_version = a } :: ContainerClusterResource s)
+        lens (_node_version :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _node_version = a } :: ResourceContainerCluster s)
 
-instance P.HasProject (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceContainerCluster s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ContainerClusterResource s)
+        lens (_project :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceContainerCluster s)
 
-instance P.HasSubnetwork (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasSubnetwork (ResourceContainerCluster s) (TF.Attr s P.Text) where
     subnetwork =
-        lens (_subnetwork :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subnetwork = a } :: ContainerClusterResource s)
+        lens (_subnetwork :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _subnetwork = a } :: ResourceContainerCluster s)
 
-instance P.HasZone (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasZone (ResourceContainerCluster s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: ContainerClusterResource s)
+        lens (_zone :: ResourceContainerCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _zone = a } :: ResourceContainerCluster s)
 
-instance s ~ s' => P.HasComputedAdditionalZones (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedAdditionalZones =
-        (_additional_zones :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAdditionalZones (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeAdditionalZones =
+        (_additional_zones :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedAddonsConfig =
-        (_addons_config :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAddonsConfig (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeAddonsConfig =
+        (_addons_config :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedClusterIpv4Cidr (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedClusterIpv4Cidr =
-        (_cluster_ipv4_cidr :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeClusterIpv4Cidr (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeClusterIpv4Cidr =
+        (_cluster_ipv4_cidr :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEnableKubernetesAlpha (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedEnableKubernetesAlpha =
-        (_enable_kubernetes_alpha :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEnableKubernetesAlpha (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeEnableKubernetesAlpha =
+        (_enable_kubernetes_alpha :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEnableLegacyAbac (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedEnableLegacyAbac =
-        (_enable_legacy_abac :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEnableLegacyAbac (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeEnableLegacyAbac =
+        (_enable_legacy_abac :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
+instance s ~ s' => P.HasComputeEndpoint (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeEndpoint x = TF.compute (TF.refKey x) "endpoint"
 
-instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedInitialNodeCount =
-        (_initial_node_count :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeInitialNodeCount (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeInitialNodeCount =
+        (_initial_node_count :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInstanceGroupUrls (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedInstanceGroupUrls x = TF.compute (TF.refKey x) "instance_group_urls"
+instance s ~ s' => P.HasComputeInstanceGroupUrls (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeInstanceGroupUrls x = TF.compute (TF.refKey x) "instance_group_urls"
 
-instance s ~ s' => P.HasComputedIpAllocationPolicy (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedIpAllocationPolicy =
-        (_ip_allocation_policy :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpAllocationPolicy (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeIpAllocationPolicy =
+        (_ip_allocation_policy :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLoggingService (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedLoggingService =
-        (_logging_service :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLoggingService (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeLoggingService =
+        (_logging_service :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMaintenancePolicy (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedMaintenancePolicy =
-        (_maintenance_policy :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMaintenancePolicy (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeMaintenancePolicy =
+        (_maintenance_policy :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMaintenancePolicy0DailyMaintenanceWindow0Duration (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedMaintenancePolicy0DailyMaintenanceWindow0Duration x = TF.compute (TF.refKey x) "maintenance_policy.0.daily_maintenance_window.0.duration"
+instance s ~ s' => P.HasComputeMaintenancePolicy0DailyMaintenanceWindow0Duration (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeMaintenancePolicy0DailyMaintenanceWindow0Duration x = TF.compute (TF.refKey x) "maintenance_policy.0.daily_maintenance_window.0.duration"
 
-instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedMasterAuth =
-        (_master_auth :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMasterAuth (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeMasterAuth =
+        (_master_auth :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMasterAuth0ClientCertificate (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedMasterAuth0ClientCertificate x = TF.compute (TF.refKey x) "master_auth.0.client_certificate"
+instance s ~ s' => P.HasComputeMasterAuth0ClientCertificate (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeMasterAuth0ClientCertificate x = TF.compute (TF.refKey x) "master_auth.0.client_certificate"
 
-instance s ~ s' => P.HasComputedMasterAuth0ClientKey (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedMasterAuth0ClientKey x = TF.compute (TF.refKey x) "master_auth.0.client_key"
+instance s ~ s' => P.HasComputeMasterAuth0ClientKey (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeMasterAuth0ClientKey x = TF.compute (TF.refKey x) "master_auth.0.client_key"
 
-instance s ~ s' => P.HasComputedMasterAuth0ClusterCaCertificate (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedMasterAuth0ClusterCaCertificate x = TF.compute (TF.refKey x) "master_auth.0.cluster_ca_certificate"
+instance s ~ s' => P.HasComputeMasterAuth0ClusterCaCertificate (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeMasterAuth0ClusterCaCertificate x = TF.compute (TF.refKey x) "master_auth.0.cluster_ca_certificate"
 
-instance s ~ s' => P.HasComputedMasterAuthorizedNetworksConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedMasterAuthorizedNetworksConfig =
-        (_master_authorized_networks_config :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMasterAuthorizedNetworksConfig (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeMasterAuthorizedNetworksConfig =
+        (_master_authorized_networks_config :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMasterVersion (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedMasterVersion x = TF.compute (TF.refKey x) "master_version"
+instance s ~ s' => P.HasComputeMasterVersion (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeMasterVersion x = TF.compute (TF.refKey x) "master_version"
 
-instance s ~ s' => P.HasComputedMinMasterVersion (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedMinMasterVersion =
-        (_min_master_version :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMinMasterVersion (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeMinMasterVersion =
+        (_min_master_version :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMonitoringService (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedMonitoringService =
-        (_monitoring_service :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMonitoringService (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeMonitoringService =
+        (_monitoring_service :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedNetwork =
-        (_network :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNetwork (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeNetwork =
+        (_network :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedNetworkPolicy =
-        (_network_policy :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNetworkPolicy (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeNetworkPolicy =
+        (_network_policy :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedNodeConfig =
-        (_node_config :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNodeConfig (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeNodeConfig =
+        (_node_config :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedNodePool =
-        (_node_pool :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNodePool (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeNodePool =
+        (_node_pool :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNodeVersion (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedNodeVersion =
-        (_node_version :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNodeVersion (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeNodeVersion =
+        (_node_version :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSubnetwork (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedSubnetwork =
-        (_subnetwork :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSubnetwork (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeSubnetwork =
+        (_subnetwork :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceContainerCluster s)) (TF.Attr s P.Text) where
+    computeZone =
+        (_zone :: ResourceContainerCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-containerClusterResource :: TF.Resource P.Google (ContainerClusterResource s)
-containerClusterResource =
+resourceContainerCluster :: TF.Resource P.Google (ResourceContainerCluster s)
+resourceContainerCluster =
     TF.newResource "google_container_cluster" $
-        ContainerClusterResource {
+        ResourceContainerCluster {
               _additional_zones = TF.Nil
             , _addons_config = TF.Nil
             , _cluster_ipv4_cidr = TF.Nil
@@ -7435,7 +7498,7 @@ on Google Compute Engine. For more information see the official
 documentation for <https://beam.apache.org> and
 <https://cloud.google.com/dataflow/> .
 -}
-data DataflowJobResource s = DataflowJobResource {
+data ResourceDataflowJob s = ResourceDataflowJob {
       _max_workers :: !(TF.Attr s P.Text)
     {- ^ (Optional) The number of workers permitted to work on the job.  More workers may improve processing speed at additional cost. -}
     , _name :: !(TF.Attr s P.Text)
@@ -7454,8 +7517,8 @@ data DataflowJobResource s = DataflowJobResource {
     {- ^ (Optional) The zone in which the created job should run. If it is not provided, the provider zone is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataflowJobResource s) where
-    toHCL DataflowJobResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceDataflowJob s) where
+    toHCL ResourceDataflowJob{..} = TF.inline $ catMaybes
         [ TF.assign "max_workers" <$> TF.attribute _max_workers
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "on_delete" <$> TF.attribute _on_delete
@@ -7466,93 +7529,93 @@ instance TF.ToHCL (DataflowJobResource s) where
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasMaxWorkers (DataflowJobResource s) (TF.Attr s P.Text) where
+instance P.HasMaxWorkers (ResourceDataflowJob s) (TF.Attr s P.Text) where
     maxWorkers =
-        lens (_max_workers :: DataflowJobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _max_workers = a } :: DataflowJobResource s)
+        lens (_max_workers :: ResourceDataflowJob s -> TF.Attr s P.Text)
+             (\s a -> s { _max_workers = a } :: ResourceDataflowJob s)
 
-instance P.HasName (DataflowJobResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceDataflowJob s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataflowJobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataflowJobResource s)
+        lens (_name :: ResourceDataflowJob s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceDataflowJob s)
 
-instance P.HasOnDelete (DataflowJobResource s) (TF.Attr s P.Text) where
+instance P.HasOnDelete (ResourceDataflowJob s) (TF.Attr s P.Text) where
     onDelete =
-        lens (_on_delete :: DataflowJobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _on_delete = a } :: DataflowJobResource s)
+        lens (_on_delete :: ResourceDataflowJob s -> TF.Attr s P.Text)
+             (\s a -> s { _on_delete = a } :: ResourceDataflowJob s)
 
-instance P.HasParameters (DataflowJobResource s) (TF.Attr s P.Text) where
+instance P.HasParameters (ResourceDataflowJob s) (TF.Attr s P.Text) where
     parameters =
-        lens (_parameters :: DataflowJobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _parameters = a } :: DataflowJobResource s)
+        lens (_parameters :: ResourceDataflowJob s -> TF.Attr s P.Text)
+             (\s a -> s { _parameters = a } :: ResourceDataflowJob s)
 
-instance P.HasProject (DataflowJobResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceDataflowJob s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: DataflowJobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: DataflowJobResource s)
+        lens (_project :: ResourceDataflowJob s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceDataflowJob s)
 
-instance P.HasTempGcsLocation (DataflowJobResource s) (TF.Attr s P.Text) where
+instance P.HasTempGcsLocation (ResourceDataflowJob s) (TF.Attr s P.Text) where
     tempGcsLocation =
-        lens (_temp_gcs_location :: DataflowJobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _temp_gcs_location = a } :: DataflowJobResource s)
+        lens (_temp_gcs_location :: ResourceDataflowJob s -> TF.Attr s P.Text)
+             (\s a -> s { _temp_gcs_location = a } :: ResourceDataflowJob s)
 
-instance P.HasTemplateGcsPath (DataflowJobResource s) (TF.Attr s P.Text) where
+instance P.HasTemplateGcsPath (ResourceDataflowJob s) (TF.Attr s P.Text) where
     templateGcsPath =
-        lens (_template_gcs_path :: DataflowJobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _template_gcs_path = a } :: DataflowJobResource s)
+        lens (_template_gcs_path :: ResourceDataflowJob s -> TF.Attr s P.Text)
+             (\s a -> s { _template_gcs_path = a } :: ResourceDataflowJob s)
 
-instance P.HasZone (DataflowJobResource s) (TF.Attr s P.Text) where
+instance P.HasZone (ResourceDataflowJob s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: DataflowJobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: DataflowJobResource s)
+        lens (_zone :: ResourceDataflowJob s -> TF.Attr s P.Text)
+             (\s a -> s { _zone = a } :: ResourceDataflowJob s)
 
-instance s ~ s' => P.HasComputedMaxWorkers (TF.Ref s' (DataflowJobResource s)) (TF.Attr s P.Text) where
-    computedMaxWorkers =
-        (_max_workers :: DataflowJobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMaxWorkers (TF.Ref s' (ResourceDataflowJob s)) (TF.Attr s P.Text) where
+    computeMaxWorkers =
+        (_max_workers :: ResourceDataflowJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataflowJobResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DataflowJobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDataflowJob s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceDataflowJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOnDelete (TF.Ref s' (DataflowJobResource s)) (TF.Attr s P.Text) where
-    computedOnDelete =
-        (_on_delete :: DataflowJobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeOnDelete (TF.Ref s' (ResourceDataflowJob s)) (TF.Attr s P.Text) where
+    computeOnDelete =
+        (_on_delete :: ResourceDataflowJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedParameters (TF.Ref s' (DataflowJobResource s)) (TF.Attr s P.Text) where
-    computedParameters =
-        (_parameters :: DataflowJobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeParameters (TF.Ref s' (ResourceDataflowJob s)) (TF.Attr s P.Text) where
+    computeParameters =
+        (_parameters :: ResourceDataflowJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (DataflowJobResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: DataflowJobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceDataflowJob s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceDataflowJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedState (TF.Ref s' (DataflowJobResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+instance s ~ s' => P.HasComputeState (TF.Ref s' (ResourceDataflowJob s)) (TF.Attr s P.Text) where
+    computeState x = TF.compute (TF.refKey x) "state"
 
-instance s ~ s' => P.HasComputedTempGcsLocation (TF.Ref s' (DataflowJobResource s)) (TF.Attr s P.Text) where
-    computedTempGcsLocation =
-        (_temp_gcs_location :: DataflowJobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTempGcsLocation (TF.Ref s' (ResourceDataflowJob s)) (TF.Attr s P.Text) where
+    computeTempGcsLocation =
+        (_temp_gcs_location :: ResourceDataflowJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTemplateGcsPath (TF.Ref s' (DataflowJobResource s)) (TF.Attr s P.Text) where
-    computedTemplateGcsPath =
-        (_template_gcs_path :: DataflowJobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTemplateGcsPath (TF.Ref s' (ResourceDataflowJob s)) (TF.Attr s P.Text) where
+    computeTemplateGcsPath =
+        (_template_gcs_path :: ResourceDataflowJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (DataflowJobResource s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: DataflowJobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeZone (TF.Ref s' (ResourceDataflowJob s)) (TF.Attr s P.Text) where
+    computeZone =
+        (_zone :: ResourceDataflowJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataflowJobResource :: TF.Resource P.Google (DataflowJobResource s)
-dataflowJobResource =
+resourceDataflowJob :: TF.Resource P.Google (ResourceDataflowJob s)
+resourceDataflowJob =
     TF.newResource "google_dataflow_job" $
-        DataflowJobResource {
+        ResourceDataflowJob {
               _max_workers = TF.Nil
             , _name = TF.Nil
             , _on_delete = TF.Nil
@@ -7572,7 +7635,7 @@ the API, all arguments except @labels@ ,
 @cluster_config.preemptible_worker_config.num_instances@ are non-updateable.
 Changing others will cause recreation of the whole cluster!
 -}
-data DataprocClusterResource s = DataprocClusterResource {
+data ResourceDataprocCluster s = ResourceDataprocCluster {
       _cluster_config :: !(TF.Attr s P.Text)
     {- ^ (Optional) Allows you to configure various aspects of the cluster. Structure defined below. -}
     , _labels :: !(TF.Attr s P.Text)
@@ -7585,8 +7648,8 @@ data DataprocClusterResource s = DataprocClusterResource {
     {- ^ (Optional) The region in which the cluster and associated nodes will be created in. Defaults to @global@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataprocClusterResource s) where
-    toHCL DataprocClusterResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceDataprocCluster s) where
+    toHCL ResourceDataprocCluster{..} = TF.inline $ catMaybes
         [ TF.assign "cluster_config" <$> TF.attribute _cluster_config
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
@@ -7594,75 +7657,75 @@ instance TF.ToHCL (DataprocClusterResource s) where
         , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasClusterConfig (DataprocClusterResource s) (TF.Attr s P.Text) where
+instance P.HasClusterConfig (ResourceDataprocCluster s) (TF.Attr s P.Text) where
     clusterConfig =
-        lens (_cluster_config :: DataprocClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cluster_config = a } :: DataprocClusterResource s)
+        lens (_cluster_config :: ResourceDataprocCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_config = a } :: ResourceDataprocCluster s)
 
-instance P.HasLabels (DataprocClusterResource s) (TF.Attr s P.Text) where
+instance P.HasLabels (ResourceDataprocCluster s) (TF.Attr s P.Text) where
     labels =
-        lens (_labels :: DataprocClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: DataprocClusterResource s)
+        lens (_labels :: ResourceDataprocCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceDataprocCluster s)
 
-instance P.HasName (DataprocClusterResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceDataprocCluster s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataprocClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataprocClusterResource s)
+        lens (_name :: ResourceDataprocCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceDataprocCluster s)
 
-instance P.HasProject (DataprocClusterResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceDataprocCluster s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: DataprocClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: DataprocClusterResource s)
+        lens (_project :: ResourceDataprocCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceDataprocCluster s)
 
-instance P.HasRegion (DataprocClusterResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceDataprocCluster s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: DataprocClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: DataprocClusterResource s)
+        lens (_region :: ResourceDataprocCluster s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceDataprocCluster s)
 
-instance s ~ s' => P.HasComputedClusterConfig (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
-    computedClusterConfig =
-        (_cluster_config :: DataprocClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeClusterConfig (TF.Ref s' (ResourceDataprocCluster s)) (TF.Attr s P.Text) where
+    computeClusterConfig =
+        (_cluster_config :: ResourceDataprocCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedClusterConfigBucket (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
-    computedClusterConfigBucket x = TF.compute (TF.refKey x) "cluster_config.bucket"
+instance s ~ s' => P.HasComputeClusterConfigBucket (TF.Ref s' (ResourceDataprocCluster s)) (TF.Attr s P.Text) where
+    computeClusterConfigBucket x = TF.compute (TF.refKey x) "cluster_config.bucket"
 
-instance s ~ s' => P.HasComputedClusterConfigMasterConfigInstanceNames (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
-    computedClusterConfigMasterConfigInstanceNames x = TF.compute (TF.refKey x) "cluster_config.master_config.instance_names"
+instance s ~ s' => P.HasComputeClusterConfigMasterConfigInstanceNames (TF.Ref s' (ResourceDataprocCluster s)) (TF.Attr s P.Text) where
+    computeClusterConfigMasterConfigInstanceNames x = TF.compute (TF.refKey x) "cluster_config.master_config.instance_names"
 
-instance s ~ s' => P.HasComputedClusterConfigPreemptibleWorkerConfigInstanceNames (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
-    computedClusterConfigPreemptibleWorkerConfigInstanceNames x = TF.compute (TF.refKey x) "cluster_config.preemptible_worker_config.instance_names"
+instance s ~ s' => P.HasComputeClusterConfigPreemptibleWorkerConfigInstanceNames (TF.Ref s' (ResourceDataprocCluster s)) (TF.Attr s P.Text) where
+    computeClusterConfigPreemptibleWorkerConfigInstanceNames x = TF.compute (TF.refKey x) "cluster_config.preemptible_worker_config.instance_names"
 
-instance s ~ s' => P.HasComputedClusterConfigSoftwareConfigProperties (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
-    computedClusterConfigSoftwareConfigProperties x = TF.compute (TF.refKey x) "cluster_config.software_config.properties"
+instance s ~ s' => P.HasComputeClusterConfigSoftwareConfigProperties (TF.Ref s' (ResourceDataprocCluster s)) (TF.Attr s P.Text) where
+    computeClusterConfigSoftwareConfigProperties x = TF.compute (TF.refKey x) "cluster_config.software_config.properties"
 
-instance s ~ s' => P.HasComputedClusterConfigWorkerConfigInstanceNames (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
-    computedClusterConfigWorkerConfigInstanceNames x = TF.compute (TF.refKey x) "cluster_config.worker_config.instance_names"
+instance s ~ s' => P.HasComputeClusterConfigWorkerConfigInstanceNames (TF.Ref s' (ResourceDataprocCluster s)) (TF.Attr s P.Text) where
+    computeClusterConfigWorkerConfigInstanceNames x = TF.compute (TF.refKey x) "cluster_config.worker_config.instance_names"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: DataprocClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceDataprocCluster s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceDataprocCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DataprocClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDataprocCluster s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceDataprocCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: DataprocClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceDataprocCluster s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceDataprocCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: DataprocClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceDataprocCluster s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceDataprocCluster s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataprocClusterResource :: TF.Resource P.Google (DataprocClusterResource s)
-dataprocClusterResource =
+resourceDataprocCluster :: TF.Resource P.Google (ResourceDataprocCluster s)
+resourceDataprocCluster =
     TF.newResource "google_dataproc_cluster" $
-        DataprocClusterResource {
+        ResourceDataprocCluster {
               _cluster_config = TF.Nil
             , _labels = TF.Nil
             , _name = TF.Nil
@@ -7677,7 +7740,7 @@ information see <https://cloud.google.com/dataproc/> . !> Note: This
 resource does not support 'update' and changing any attributes will cause
 the resource to be recreated.
 -}
-data DataprocJobResource s = DataprocJobResource {
+data ResourceDataprocJob s = ResourceDataprocJob {
       _force_delete :: !(TF.Attr s P.Text)
     {- ^ (Optional) By default, you can only delete inactive jobs within Dataproc. Setting this to true, and calling destroy, will ensure that the job is first cancelled before issuing the delete. -}
     , _labels :: !(TF.Attr s P.Text)
@@ -7694,8 +7757,8 @@ data DataprocJobResource s = DataprocJobResource {
     {- ^ (Required) Exactly one of the specific job types to run on the cluster should be specified. If you want to submit multiple jobs, this will currently require the definition of multiple @google_dataproc_job@ resources as shown in the example above, or by setting the @count@ attribute. The following job configs are supported: -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataprocJobResource s) where
-    toHCL DataprocJobResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceDataprocJob s) where
+    toHCL ResourceDataprocJob{..} = TF.inline $ catMaybes
         [ TF.assign "force_delete" <$> TF.attribute _force_delete
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "placement.cluster_name" <$> TF.attribute _placement
@@ -7705,101 +7768,101 @@ instance TF.ToHCL (DataprocJobResource s) where
         , TF.assign "xxx_config" <$> TF.attribute _xxx_config
         ]
 
-instance P.HasForceDelete (DataprocJobResource s) (TF.Attr s P.Text) where
+instance P.HasForceDelete (ResourceDataprocJob s) (TF.Attr s P.Text) where
     forceDelete =
-        lens (_force_delete :: DataprocJobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _force_delete = a } :: DataprocJobResource s)
+        lens (_force_delete :: ResourceDataprocJob s -> TF.Attr s P.Text)
+             (\s a -> s { _force_delete = a } :: ResourceDataprocJob s)
 
-instance P.HasLabels (DataprocJobResource s) (TF.Attr s P.Text) where
+instance P.HasLabels (ResourceDataprocJob s) (TF.Attr s P.Text) where
     labels =
-        lens (_labels :: DataprocJobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: DataprocJobResource s)
+        lens (_labels :: ResourceDataprocJob s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceDataprocJob s)
 
-instance P.HasPlacement (DataprocJobResource s) (TF.Attr s P.PlacementType) where
+instance P.HasPlacement (ResourceDataprocJob s) (TF.Attr s P.PlacementType) where
     placement =
-        lens (_placement :: DataprocJobResource s -> TF.Attr s P.PlacementType)
-             (\s a -> s { _placement = a } :: DataprocJobResource s)
+        lens (_placement :: ResourceDataprocJob s -> TF.Attr s P.PlacementType)
+             (\s a -> s { _placement = a } :: ResourceDataprocJob s)
 
-instance P.HasProject (DataprocJobResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceDataprocJob s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: DataprocJobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: DataprocJobResource s)
+        lens (_project :: ResourceDataprocJob s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceDataprocJob s)
 
-instance P.HasRegion (DataprocJobResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceDataprocJob s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: DataprocJobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: DataprocJobResource s)
+        lens (_region :: ResourceDataprocJob s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceDataprocJob s)
 
-instance P.HasScheduling (DataprocJobResource s) (TF.Attr s P.SchedulingType) where
+instance P.HasScheduling (ResourceDataprocJob s) (TF.Attr s P.SchedulingType) where
     scheduling =
-        lens (_scheduling :: DataprocJobResource s -> TF.Attr s P.SchedulingType)
-             (\s a -> s { _scheduling = a } :: DataprocJobResource s)
+        lens (_scheduling :: ResourceDataprocJob s -> TF.Attr s P.SchedulingType)
+             (\s a -> s { _scheduling = a } :: ResourceDataprocJob s)
 
-instance P.HasXxxConfig (DataprocJobResource s) (TF.Attr s P.Text) where
+instance P.HasXxxConfig (ResourceDataprocJob s) (TF.Attr s P.Text) where
     xxxConfig =
-        lens (_xxx_config :: DataprocJobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _xxx_config = a } :: DataprocJobResource s)
+        lens (_xxx_config :: ResourceDataprocJob s -> TF.Attr s P.Text)
+             (\s a -> s { _xxx_config = a } :: ResourceDataprocJob s)
 
-instance s ~ s' => P.HasComputedDriverControlsFilesUri (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedDriverControlsFilesUri x = TF.compute (TF.refKey x) "driver_controls_files_uri"
+instance s ~ s' => P.HasComputeDriverControlsFilesUri (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.Text) where
+    computeDriverControlsFilesUri x = TF.compute (TF.refKey x) "driver_controls_files_uri"
 
-instance s ~ s' => P.HasComputedDriverOutputResourceUri (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedDriverOutputResourceUri x = TF.compute (TF.refKey x) "driver_output_resource_uri"
+instance s ~ s' => P.HasComputeDriverOutputResourceUri (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.Text) where
+    computeDriverOutputResourceUri x = TF.compute (TF.refKey x) "driver_output_resource_uri"
 
-instance s ~ s' => P.HasComputedForceDelete (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedForceDelete =
-        (_force_delete :: DataprocJobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeForceDelete (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.Text) where
+    computeForceDelete =
+        (_force_delete :: ResourceDataprocJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: DataprocJobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceDataprocJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPlacement (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.PlacementType) where
-    computedPlacement =
-        (_placement :: DataprocJobResource s -> TF.Attr s P.PlacementType)
+instance s ~ s' => P.HasComputePlacement (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.PlacementType) where
+    computePlacement =
+        (_placement :: ResourceDataprocJob s -> TF.Attr s P.PlacementType)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: DataprocJobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceDataprocJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedReference0ClusterUuid (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedReference0ClusterUuid x = TF.compute (TF.refKey x) "reference.0.cluster_uuid"
+instance s ~ s' => P.HasComputeReference0ClusterUuid (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.Text) where
+    computeReference0ClusterUuid x = TF.compute (TF.refKey x) "reference.0.cluster_uuid"
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: DataprocJobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceDataprocJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.SchedulingType) where
-    computedScheduling =
-        (_scheduling :: DataprocJobResource s -> TF.Attr s P.SchedulingType)
+instance s ~ s' => P.HasComputeScheduling (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.SchedulingType) where
+    computeScheduling =
+        (_scheduling :: ResourceDataprocJob s -> TF.Attr s P.SchedulingType)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStatus0Details (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedStatus0Details x = TF.compute (TF.refKey x) "status.0.details"
+instance s ~ s' => P.HasComputeStatus0Details (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.Text) where
+    computeStatus0Details x = TF.compute (TF.refKey x) "status.0.details"
 
-instance s ~ s' => P.HasComputedStatus0State (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedStatus0State x = TF.compute (TF.refKey x) "status.0.state"
+instance s ~ s' => P.HasComputeStatus0State (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.Text) where
+    computeStatus0State x = TF.compute (TF.refKey x) "status.0.state"
 
-instance s ~ s' => P.HasComputedStatus0StateStartTime (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedStatus0StateStartTime x = TF.compute (TF.refKey x) "status.0.state_start_time"
+instance s ~ s' => P.HasComputeStatus0StateStartTime (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.Text) where
+    computeStatus0StateStartTime x = TF.compute (TF.refKey x) "status.0.state_start_time"
 
-instance s ~ s' => P.HasComputedStatus0Substate (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedStatus0Substate x = TF.compute (TF.refKey x) "status.0.substate"
+instance s ~ s' => P.HasComputeStatus0Substate (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.Text) where
+    computeStatus0Substate x = TF.compute (TF.refKey x) "status.0.substate"
 
-instance s ~ s' => P.HasComputedXxxConfig (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedXxxConfig =
-        (_xxx_config :: DataprocJobResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeXxxConfig (TF.Ref s' (ResourceDataprocJob s)) (TF.Attr s P.Text) where
+    computeXxxConfig =
+        (_xxx_config :: ResourceDataprocJob s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataprocJobResource :: TF.Resource P.Google (DataprocJobResource s)
-dataprocJobResource =
+resourceDataprocJob :: TF.Resource P.Google (ResourceDataprocJob s)
+resourceDataprocJob =
     TF.newResource "google_dataproc_job" $
-        DataprocJobResource {
+        ResourceDataprocJob {
               _force_delete = TF.Nil
             , _labels = TF.Nil
             , _placement = TF.Nil
@@ -7815,7 +7878,7 @@ Manages a zone within Google Cloud DNS. For more information see
 <https://cloud.google.com/dns/zones/> and
 <https://cloud.google.com/dns/api/v1/managedZones> .
 -}
-data DnsManagedZoneResource s = DnsManagedZoneResource {
+data ResourceDnsManagedZone s = ResourceDnsManagedZone {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) A textual description field. Defaults to 'Managed by Terraform'. -}
     , _dns_name :: !(TF.Attr s P.Text)
@@ -7826,61 +7889,61 @@ data DnsManagedZoneResource s = DnsManagedZoneResource {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsManagedZoneResource s) where
-    toHCL DnsManagedZoneResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceDnsManagedZone s) where
+    toHCL ResourceDnsManagedZone{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "dns_name" <$> TF.attribute _dns_name
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasDescription (DnsManagedZoneResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceDnsManagedZone s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: DnsManagedZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: DnsManagedZoneResource s)
+        lens (_description :: ResourceDnsManagedZone s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceDnsManagedZone s)
 
-instance P.HasDnsName (DnsManagedZoneResource s) (TF.Attr s P.Text) where
+instance P.HasDnsName (ResourceDnsManagedZone s) (TF.Attr s P.Text) where
     dnsName =
-        lens (_dns_name :: DnsManagedZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dns_name = a } :: DnsManagedZoneResource s)
+        lens (_dns_name :: ResourceDnsManagedZone s -> TF.Attr s P.Text)
+             (\s a -> s { _dns_name = a } :: ResourceDnsManagedZone s)
 
-instance P.HasName (DnsManagedZoneResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceDnsManagedZone s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DnsManagedZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DnsManagedZoneResource s)
+        lens (_name :: ResourceDnsManagedZone s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceDnsManagedZone s)
 
-instance P.HasProject (DnsManagedZoneResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceDnsManagedZone s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: DnsManagedZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: DnsManagedZoneResource s)
+        lens (_project :: ResourceDnsManagedZone s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceDnsManagedZone s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DnsManagedZoneResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: DnsManagedZoneResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceDnsManagedZone s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceDnsManagedZone s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (DnsManagedZoneResource s)) (TF.Attr s P.Text) where
-    computedDnsName =
-        (_dns_name :: DnsManagedZoneResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDnsName (TF.Ref s' (ResourceDnsManagedZone s)) (TF.Attr s P.Text) where
+    computeDnsName =
+        (_dns_name :: ResourceDnsManagedZone s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DnsManagedZoneResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DnsManagedZoneResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDnsManagedZone s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceDnsManagedZone s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DnsManagedZoneResource s)) (TF.Attr s P.Text) where
-    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
+instance s ~ s' => P.HasComputeNameServers (TF.Ref s' (ResourceDnsManagedZone s)) (TF.Attr s P.Text) where
+    computeNameServers x = TF.compute (TF.refKey x) "name_servers"
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (DnsManagedZoneResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: DnsManagedZoneResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceDnsManagedZone s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceDnsManagedZone s -> TF.Attr s P.Text)
             . TF.refValue
 
-dnsManagedZoneResource :: TF.Resource P.Google (DnsManagedZoneResource s)
-dnsManagedZoneResource =
+resourceDnsManagedZone :: TF.Resource P.Google (ResourceDnsManagedZone s)
+resourceDnsManagedZone =
     TF.newResource "google_dns_managed_zone" $
-        DnsManagedZoneResource {
+        ResourceDnsManagedZone {
               _description = TF.Nil
             , _dns_name = TF.Nil
             , _name = TF.Nil
@@ -7898,7 +7961,7 @@ automatically creates will be silently overwritten.  Also, when destroying
 NS records, Terraform will not actually remove NS records, but will report
 that it did.
 -}
-data DnsRecordSetResource s = DnsRecordSetResource {
+data ResourceDnsRecordSet s = ResourceDnsRecordSet {
       _managed_zone :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the zone in which this record set will reside. -}
     , _name :: !(TF.Attr s P.Text)
@@ -7913,8 +7976,8 @@ data DnsRecordSetResource s = DnsRecordSetResource {
     {- ^ (Required) The DNS record set type. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsRecordSetResource s) where
-    toHCL DnsRecordSetResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceDnsRecordSet s) where
+    toHCL ResourceDnsRecordSet{..} = TF.inline $ catMaybes
         [ TF.assign "managed_zone" <$> TF.attribute _managed_zone
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -7923,70 +7986,70 @@ instance TF.ToHCL (DnsRecordSetResource s) where
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasManagedZone (DnsRecordSetResource s) (TF.Attr s P.Text) where
+instance P.HasManagedZone (ResourceDnsRecordSet s) (TF.Attr s P.Text) where
     managedZone =
-        lens (_managed_zone :: DnsRecordSetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _managed_zone = a } :: DnsRecordSetResource s)
+        lens (_managed_zone :: ResourceDnsRecordSet s -> TF.Attr s P.Text)
+             (\s a -> s { _managed_zone = a } :: ResourceDnsRecordSet s)
 
-instance P.HasName (DnsRecordSetResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceDnsRecordSet s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DnsRecordSetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DnsRecordSetResource s)
+        lens (_name :: ResourceDnsRecordSet s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceDnsRecordSet s)
 
-instance P.HasProject (DnsRecordSetResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceDnsRecordSet s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: DnsRecordSetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: DnsRecordSetResource s)
+        lens (_project :: ResourceDnsRecordSet s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceDnsRecordSet s)
 
-instance P.HasRrdatas (DnsRecordSetResource s) (TF.Attr s P.Text) where
+instance P.HasRrdatas (ResourceDnsRecordSet s) (TF.Attr s P.Text) where
     rrdatas =
-        lens (_rrdatas :: DnsRecordSetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _rrdatas = a } :: DnsRecordSetResource s)
+        lens (_rrdatas :: ResourceDnsRecordSet s -> TF.Attr s P.Text)
+             (\s a -> s { _rrdatas = a } :: ResourceDnsRecordSet s)
 
-instance P.HasTtl (DnsRecordSetResource s) (TF.Attr s P.Text) where
+instance P.HasTtl (ResourceDnsRecordSet s) (TF.Attr s P.Text) where
     ttl =
-        lens (_ttl :: DnsRecordSetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: DnsRecordSetResource s)
+        lens (_ttl :: ResourceDnsRecordSet s -> TF.Attr s P.Text)
+             (\s a -> s { _ttl = a } :: ResourceDnsRecordSet s)
 
-instance P.HasType' (DnsRecordSetResource s) (TF.Attr s P.Text) where
+instance P.HasType' (ResourceDnsRecordSet s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: DnsRecordSetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: DnsRecordSetResource s)
+        lens (_type' :: ResourceDnsRecordSet s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: ResourceDnsRecordSet s)
 
-instance s ~ s' => P.HasComputedManagedZone (TF.Ref s' (DnsRecordSetResource s)) (TF.Attr s P.Text) where
-    computedManagedZone =
-        (_managed_zone :: DnsRecordSetResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeManagedZone (TF.Ref s' (ResourceDnsRecordSet s)) (TF.Attr s P.Text) where
+    computeManagedZone =
+        (_managed_zone :: ResourceDnsRecordSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DnsRecordSetResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DnsRecordSetResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceDnsRecordSet s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceDnsRecordSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (DnsRecordSetResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: DnsRecordSetResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceDnsRecordSet s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceDnsRecordSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRrdatas (TF.Ref s' (DnsRecordSetResource s)) (TF.Attr s P.Text) where
-    computedRrdatas =
-        (_rrdatas :: DnsRecordSetResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRrdatas (TF.Ref s' (ResourceDnsRecordSet s)) (TF.Attr s P.Text) where
+    computeRrdatas =
+        (_rrdatas :: ResourceDnsRecordSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DnsRecordSetResource s)) (TF.Attr s P.Text) where
-    computedTtl =
-        (_ttl :: DnsRecordSetResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTtl (TF.Ref s' (ResourceDnsRecordSet s)) (TF.Attr s P.Text) where
+    computeTtl =
+        (_ttl :: ResourceDnsRecordSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (DnsRecordSetResource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: DnsRecordSetResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceDnsRecordSet s)) (TF.Attr s P.Text) where
+    computeType' =
+        (_type' :: ResourceDnsRecordSet s -> TF.Attr s P.Text)
             . TF.refValue
 
-dnsRecordSetResource :: TF.Resource P.Google (DnsRecordSetResource s)
-dnsRecordSetResource =
+resourceDnsRecordSet :: TF.Resource P.Google (ResourceDnsRecordSet s)
+resourceDnsRecordSet =
     TF.newResource "google_dns_record_set" $
-        DnsRecordSetResource {
+        ResourceDnsRecordSet {
               _managed_zone = TF.Nil
             , _name = TF.Nil
             , _project = TF.Nil
@@ -8002,7 +8065,7 @@ or gRPC.  View the relevant docs for
 <https://cloud.google.com/endpoints/docs/openapi/> and
 <https://cloud.google.com/endpoints/docs/grpc/> .
 -}
-data EndpointsServiceResource s = EndpointsServiceResource {
+data ResourceEndpointsService s = ResourceEndpointsService {
       _grpc_config :: !(TF.Attr s P.Text)
     {- ^ : (Optional) The full text of the Service Config YAML file (Example located <https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/endpoints/bookstore-grpc/api_config.yaml> ).  If provided, must also provide @protoc_output@ . @open_api@ config must not be provided. -}
     , _openapi_config :: !(TF.Attr s P.Text)
@@ -8015,8 +8078,8 @@ data EndpointsServiceResource s = EndpointsServiceResource {
     {- ^ : (Required) The name of the service.  Usually of the form @$apiname.endpoints.$projectid.cloud.goog@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EndpointsServiceResource s) where
-    toHCL EndpointsServiceResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceEndpointsService s) where
+    toHCL ResourceEndpointsService{..} = TF.inline $ catMaybes
         [ TF.assign "grpc_config" <$> TF.attribute _grpc_config
         , TF.assign "openapi_config" <$> TF.attribute _openapi_config
         , TF.assign "project" <$> TF.attribute _project
@@ -8024,356 +8087,77 @@ instance TF.ToHCL (EndpointsServiceResource s) where
         , TF.assign "service_name" <$> TF.attribute _service_name
         ]
 
-instance P.HasGrpcConfig (EndpointsServiceResource s) (TF.Attr s P.Text) where
+instance P.HasGrpcConfig (ResourceEndpointsService s) (TF.Attr s P.Text) where
     grpcConfig =
-        lens (_grpc_config :: EndpointsServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _grpc_config = a } :: EndpointsServiceResource s)
+        lens (_grpc_config :: ResourceEndpointsService s -> TF.Attr s P.Text)
+             (\s a -> s { _grpc_config = a } :: ResourceEndpointsService s)
 
-instance P.HasOpenapiConfig (EndpointsServiceResource s) (TF.Attr s P.Text) where
+instance P.HasOpenapiConfig (ResourceEndpointsService s) (TF.Attr s P.Text) where
     openapiConfig =
-        lens (_openapi_config :: EndpointsServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _openapi_config = a } :: EndpointsServiceResource s)
+        lens (_openapi_config :: ResourceEndpointsService s -> TF.Attr s P.Text)
+             (\s a -> s { _openapi_config = a } :: ResourceEndpointsService s)
 
-instance P.HasProject (EndpointsServiceResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceEndpointsService s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: EndpointsServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: EndpointsServiceResource s)
+        lens (_project :: ResourceEndpointsService s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceEndpointsService s)
 
-instance P.HasProtocOutput (EndpointsServiceResource s) (TF.Attr s P.Text) where
+instance P.HasProtocOutput (ResourceEndpointsService s) (TF.Attr s P.Text) where
     protocOutput =
-        lens (_protoc_output :: EndpointsServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _protoc_output = a } :: EndpointsServiceResource s)
+        lens (_protoc_output :: ResourceEndpointsService s -> TF.Attr s P.Text)
+             (\s a -> s { _protoc_output = a } :: ResourceEndpointsService s)
 
-instance P.HasServiceName (EndpointsServiceResource s) (TF.Attr s P.Text) where
+instance P.HasServiceName (ResourceEndpointsService s) (TF.Attr s P.Text) where
     serviceName =
-        lens (_service_name :: EndpointsServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _service_name = a } :: EndpointsServiceResource s)
+        lens (_service_name :: ResourceEndpointsService s -> TF.Attr s P.Text)
+             (\s a -> s { _service_name = a } :: ResourceEndpointsService s)
 
-instance s ~ s' => P.HasComputedApis (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
-    computedApis x = TF.compute (TF.refKey x) "apis"
+instance s ~ s' => P.HasComputeApis (TF.Ref s' (ResourceEndpointsService s)) (TF.Attr s P.Text) where
+    computeApis x = TF.compute (TF.refKey x) "apis"
 
-instance s ~ s' => P.HasComputedConfigId (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
-    computedConfigId x = TF.compute (TF.refKey x) "config_id"
+instance s ~ s' => P.HasComputeConfigId (TF.Ref s' (ResourceEndpointsService s)) (TF.Attr s P.Text) where
+    computeConfigId x = TF.compute (TF.refKey x) "config_id"
 
-instance s ~ s' => P.HasComputedDnsAddress (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
-    computedDnsAddress x = TF.compute (TF.refKey x) "dns_address"
+instance s ~ s' => P.HasComputeDnsAddress (TF.Ref s' (ResourceEndpointsService s)) (TF.Attr s P.Text) where
+    computeDnsAddress x = TF.compute (TF.refKey x) "dns_address"
 
-instance s ~ s' => P.HasComputedEndpoints (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
-    computedEndpoints x = TF.compute (TF.refKey x) "endpoints"
+instance s ~ s' => P.HasComputeEndpoints (TF.Ref s' (ResourceEndpointsService s)) (TF.Attr s P.Text) where
+    computeEndpoints x = TF.compute (TF.refKey x) "endpoints"
 
-instance s ~ s' => P.HasComputedGrpcConfig (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
-    computedGrpcConfig =
-        (_grpc_config :: EndpointsServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeGrpcConfig (TF.Ref s' (ResourceEndpointsService s)) (TF.Attr s P.Text) where
+    computeGrpcConfig =
+        (_grpc_config :: ResourceEndpointsService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOpenapiConfig (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
-    computedOpenapiConfig =
-        (_openapi_config :: EndpointsServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeOpenapiConfig (TF.Ref s' (ResourceEndpointsService s)) (TF.Attr s P.Text) where
+    computeOpenapiConfig =
+        (_openapi_config :: ResourceEndpointsService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: EndpointsServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceEndpointsService s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceEndpointsService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProtocOutput (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
-    computedProtocOutput =
-        (_protoc_output :: EndpointsServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProtocOutput (TF.Ref s' (ResourceEndpointsService s)) (TF.Attr s P.Text) where
+    computeProtocOutput =
+        (_protoc_output :: ResourceEndpointsService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
-    computedServiceName =
-        (_service_name :: EndpointsServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeServiceName (TF.Ref s' (ResourceEndpointsService s)) (TF.Attr s P.Text) where
+    computeServiceName =
+        (_service_name :: ResourceEndpointsService s -> TF.Attr s P.Text)
             . TF.refValue
 
-endpointsServiceResource :: TF.Resource P.Google (EndpointsServiceResource s)
-endpointsServiceResource =
+resourceEndpointsService :: TF.Resource P.Google (ResourceEndpointsService s)
+resourceEndpointsService =
     TF.newResource "google_endpoints_service" $
-        EndpointsServiceResource {
+        ResourceEndpointsService {
               _grpc_config = TF.Nil
             , _openapi_config = TF.Nil
             , _project = TF.Nil
             , _protoc_output = TF.Nil
             , _service_name = TF.Nil
-            }
-
-{- | The @google_folder_iam_binding@ Google resource.
-
-Allows creation and management of a single binding within IAM policy for an
-existing Google Cloud Platform folder. ~> Note: This resource must not be
-used in conjunction with @google_folder_iam_policy@ or they will fight over
-what your policy should be.
--}
-data FolderIamBindingResource s = FolderIamBindingResource {
-      _folder :: !(TF.Attr s P.Text)
-    {- ^ (Required) The resource name of the folder the policy is attached to. Its format is folders/{folder_id}. -}
-    , _members :: !(TF.Attr s P.Text)
-    {- ^ (Required) - An array of identites that will be granted the privilege in the @role@ . Each entry can have one of the following values: -}
-    , _role :: !(TF.Attr s P.Text)
-    {- ^ (Required) The role that should be applied. Only one @google_folder_iam_binding@ can be used per role. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (FolderIamBindingResource s) where
-    toHCL FolderIamBindingResource{..} = TF.inline $ catMaybes
-        [ TF.assign "folder" <$> TF.attribute _folder
-        , TF.assign "members" <$> TF.attribute _members
-        , TF.assign "role" <$> TF.attribute _role
-        ]
-
-instance P.HasFolder (FolderIamBindingResource s) (TF.Attr s P.Text) where
-    folder =
-        lens (_folder :: FolderIamBindingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _folder = a } :: FolderIamBindingResource s)
-
-instance P.HasMembers (FolderIamBindingResource s) (TF.Attr s P.Text) where
-    members =
-        lens (_members :: FolderIamBindingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _members = a } :: FolderIamBindingResource s)
-
-instance P.HasRole (FolderIamBindingResource s) (TF.Attr s P.Text) where
-    role =
-        lens (_role :: FolderIamBindingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: FolderIamBindingResource s)
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
-instance s ~ s' => P.HasComputedFolder (TF.Ref s' (FolderIamBindingResource s)) (TF.Attr s P.Text) where
-    computedFolder =
-        (_folder :: FolderIamBindingResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMembers (TF.Ref s' (FolderIamBindingResource s)) (TF.Attr s P.Text) where
-    computedMembers =
-        (_members :: FolderIamBindingResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (FolderIamBindingResource s)) (TF.Attr s P.Text) where
-    computedRole =
-        (_role :: FolderIamBindingResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-folderIamBindingResource :: TF.Resource P.Google (FolderIamBindingResource s)
-folderIamBindingResource =
-    TF.newResource "google_folder_iam_binding" $
-        FolderIamBindingResource {
-              _folder = TF.Nil
-            , _members = TF.Nil
-            , _role = TF.Nil
-            }
-
-{- | The @google_folder_iam_member@ Google resource.
-
-Allows creation and management of a single member for a single binding
-within the IAM policy for an existing Google Cloud Platform folder. ~> Note:
-This resource must not be used in conjunction with
-@google_folder_iam_policy@ or they will fight over what your policy should
-be. Similarly, roles controlled by @google_folder_iam_binding@ should not be
-assigned to using @google_folder_iam_member@ .
--}
-data FolderIamMemberResource s = FolderIamMemberResource {
-      _folder :: !(TF.Attr s P.Text)
-    {- ^ (Required) The resource name of the folder the policy is attached to. Its format is folders/{folder_id}. -}
-    , _member :: !(TF.Attr s P.Text)
-    {- ^ (Required) The identity that will be granted the privilege in the @role@ . This field can have one of the following values: -}
-    , _role :: !(TF.Attr s P.Text)
-    {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (FolderIamMemberResource s) where
-    toHCL FolderIamMemberResource{..} = TF.inline $ catMaybes
-        [ TF.assign "folder" <$> TF.attribute _folder
-        , TF.assign "member" <$> TF.attribute _member
-        , TF.assign "role" <$> TF.attribute _role
-        ]
-
-instance P.HasFolder (FolderIamMemberResource s) (TF.Attr s P.Text) where
-    folder =
-        lens (_folder :: FolderIamMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _folder = a } :: FolderIamMemberResource s)
-
-instance P.HasMember (FolderIamMemberResource s) (TF.Attr s P.Text) where
-    member =
-        lens (_member :: FolderIamMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _member = a } :: FolderIamMemberResource s)
-
-instance P.HasRole (FolderIamMemberResource s) (TF.Attr s P.Text) where
-    role =
-        lens (_role :: FolderIamMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: FolderIamMemberResource s)
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
-instance s ~ s' => P.HasComputedFolder (TF.Ref s' (FolderIamMemberResource s)) (TF.Attr s P.Text) where
-    computedFolder =
-        (_folder :: FolderIamMemberResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMember (TF.Ref s' (FolderIamMemberResource s)) (TF.Attr s P.Text) where
-    computedMember =
-        (_member :: FolderIamMemberResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (FolderIamMemberResource s)) (TF.Attr s P.Text) where
-    computedRole =
-        (_role :: FolderIamMemberResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-folderIamMemberResource :: TF.Resource P.Google (FolderIamMemberResource s)
-folderIamMemberResource =
-    TF.newResource "google_folder_iam_member" $
-        FolderIamMemberResource {
-              _folder = TF.Nil
-            , _member = TF.Nil
-            , _role = TF.Nil
-            }
-
-{- | The @google_folder_iam_policy@ Google resource.
-
-Allows creation and management of the IAM policy for an existing Google
-Cloud Platform folder.
--}
-data FolderIamPolicyResource s = FolderIamPolicyResource {
-      _folder :: !(TF.Attr s P.Text)
-    {- ^ (Required) The resource name of the folder the policy is attached to. Its format is folders/{folder_id}. -}
-    , _policy_data :: !(TF.Attr s P.Text)
-    {- ^ (Required) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (FolderIamPolicyResource s) where
-    toHCL FolderIamPolicyResource{..} = TF.inline $ catMaybes
-        [ TF.assign "folder" <$> TF.attribute _folder
-        , TF.assign "policy_data" <$> TF.attribute _policy_data
-        ]
-
-instance P.HasFolder (FolderIamPolicyResource s) (TF.Attr s P.Text) where
-    folder =
-        lens (_folder :: FolderIamPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _folder = a } :: FolderIamPolicyResource s)
-
-instance P.HasPolicyData (FolderIamPolicyResource s) (TF.Attr s P.Text) where
-    policyData =
-        lens (_policy_data :: FolderIamPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _policy_data = a } :: FolderIamPolicyResource s)
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
-instance s ~ s' => P.HasComputedFolder (TF.Ref s' (FolderIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedFolder =
-        (_folder :: FolderIamPolicyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPolicyData (TF.Ref s' (FolderIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedPolicyData =
-        (_policy_data :: FolderIamPolicyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-folderIamPolicyResource :: TF.Resource P.Google (FolderIamPolicyResource s)
-folderIamPolicyResource =
-    TF.newResource "google_folder_iam_policy" $
-        FolderIamPolicyResource {
-              _folder = TF.Nil
-            , _policy_data = TF.Nil
-            }
-
-{- | The @google_folder_organization_policy@ Google resource.
-
-Allows management of Organization policies for a Google Folder. For more
-information see
-<https://cloud.google.com/resource-manager/docs/organization-policy/overview>
-and
-<https://cloud.google.com/resource-manager/reference/rest/v1/folders/setOrgPolicy>
-.
--}
-data FolderOrganizationPolicyResource s = FolderOrganizationPolicyResource {
-      _boolean_policy :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A boolean policy is a constraint that is either enforced or not. Structure is documented below. -}
-    , _constraint :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the Constraint the Policy is configuring, for example, @serviceuser.services@ . Check out the <https://cloud.google.com/resource-manager/docs/organization-policy/understanding-constraints#available_constraints> . -}
-    , _folder :: !(TF.Attr s P.Text)
-    {- ^ (Required) The resource name of the folder to set the policy for. Its format is folders/{folder_id}. -}
-    , _list_policy :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A policy that can define specific values that are allowed or denied for the given constraint. It can also be used to allow or deny all values. Structure is documented below. -}
-    , _version :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Version of the Policy. Default version is 0. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (FolderOrganizationPolicyResource s) where
-    toHCL FolderOrganizationPolicyResource{..} = TF.inline $ catMaybes
-        [ TF.assign "boolean_policy" <$> TF.attribute _boolean_policy
-        , TF.assign "constraint" <$> TF.attribute _constraint
-        , TF.assign "folder" <$> TF.attribute _folder
-        , TF.assign "list_policy" <$> TF.attribute _list_policy
-        , TF.assign "version" <$> TF.attribute _version
-        ]
-
-instance P.HasBooleanPolicy (FolderOrganizationPolicyResource s) (TF.Attr s P.Text) where
-    booleanPolicy =
-        lens (_boolean_policy :: FolderOrganizationPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _boolean_policy = a } :: FolderOrganizationPolicyResource s)
-
-instance P.HasConstraint (FolderOrganizationPolicyResource s) (TF.Attr s P.Text) where
-    constraint =
-        lens (_constraint :: FolderOrganizationPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _constraint = a } :: FolderOrganizationPolicyResource s)
-
-instance P.HasFolder (FolderOrganizationPolicyResource s) (TF.Attr s P.Text) where
-    folder =
-        lens (_folder :: FolderOrganizationPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _folder = a } :: FolderOrganizationPolicyResource s)
-
-instance P.HasListPolicy (FolderOrganizationPolicyResource s) (TF.Attr s P.Text) where
-    listPolicy =
-        lens (_list_policy :: FolderOrganizationPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _list_policy = a } :: FolderOrganizationPolicyResource s)
-
-instance P.HasVersion (FolderOrganizationPolicyResource s) (TF.Attr s P.Text) where
-    version =
-        lens (_version :: FolderOrganizationPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _version = a } :: FolderOrganizationPolicyResource s)
-
-instance s ~ s' => P.HasComputedBooleanPolicy (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedBooleanPolicy =
-        (_boolean_policy :: FolderOrganizationPolicyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedConstraint (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedConstraint =
-        (_constraint :: FolderOrganizationPolicyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
-instance s ~ s' => P.HasComputedFolder (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedFolder =
-        (_folder :: FolderOrganizationPolicyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedListPolicy (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedListPolicy =
-        (_list_policy :: FolderOrganizationPolicyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
-
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedVersion =
-        (_version :: FolderOrganizationPolicyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-folderOrganizationPolicyResource :: TF.Resource P.Google (FolderOrganizationPolicyResource s)
-folderOrganizationPolicyResource =
-    TF.newResource "google_folder_organization_policy" $
-        FolderOrganizationPolicyResource {
-              _boolean_policy = TF.Nil
-            , _constraint = TF.Nil
-            , _folder = TF.Nil
-            , _list_policy = TF.Nil
-            , _version = TF.Nil
             }
 
 {- | The @google_folder@ Google resource.
@@ -8395,117 +8179,333 @@ See the
 <https://cloud.google.com/resource-manager/docs/access-control-folders> doc
 for more information.
 -}
-data FolderResource s = FolderResource {
+data ResourceFolder s = ResourceFolder {
       _display_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The folder’s display name. A folder’s display name must be unique amongst its siblings, e.g. no two folders with the same parent can share the same display name. The display name must start and end with a letter or digit, may contain letters, digits, spaces, hyphens and underscores and can be no longer than 30 characters. -}
     , _parent :: !(TF.Attr s P.Text)
     {- ^ (Required) The resource name of the parent Folder or Organization. Must be of the form @folders/{folder_id}@ or @organizations/{org_id}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FolderResource s) where
-    toHCL FolderResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceFolder s) where
+    toHCL ResourceFolder{..} = TF.inline $ catMaybes
         [ TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "parent" <$> TF.attribute _parent
         ]
 
-instance P.HasDisplayName (FolderResource s) (TF.Attr s P.Text) where
+instance P.HasDisplayName (ResourceFolder s) (TF.Attr s P.Text) where
     displayName =
-        lens (_display_name :: FolderResource s -> TF.Attr s P.Text)
-             (\s a -> s { _display_name = a } :: FolderResource s)
+        lens (_display_name :: ResourceFolder s -> TF.Attr s P.Text)
+             (\s a -> s { _display_name = a } :: ResourceFolder s)
 
-instance P.HasParent (FolderResource s) (TF.Attr s P.Text) where
+instance P.HasParent (ResourceFolder s) (TF.Attr s P.Text) where
     parent =
-        lens (_parent :: FolderResource s -> TF.Attr s P.Text)
-             (\s a -> s { _parent = a } :: FolderResource s)
+        lens (_parent :: ResourceFolder s -> TF.Attr s P.Text)
+             (\s a -> s { _parent = a } :: ResourceFolder s)
 
-instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (FolderResource s)) (TF.Attr s P.Text) where
-    computedCreateTime x = TF.compute (TF.refKey x) "create_time"
+instance s ~ s' => P.HasComputeCreateTime (TF.Ref s' (ResourceFolder s)) (TF.Attr s P.Text) where
+    computeCreateTime x = TF.compute (TF.refKey x) "create_time"
 
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (FolderResource s)) (TF.Attr s P.Text) where
-    computedDisplayName =
-        (_display_name :: FolderResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDisplayName (TF.Ref s' (ResourceFolder s)) (TF.Attr s P.Text) where
+    computeDisplayName =
+        (_display_name :: ResourceFolder s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLifecycleState (TF.Ref s' (FolderResource s)) (TF.Attr s P.Text) where
-    computedLifecycleState x = TF.compute (TF.refKey x) "lifecycle_state"
+instance s ~ s' => P.HasComputeLifecycleState (TF.Ref s' (ResourceFolder s)) (TF.Attr s P.Text) where
+    computeLifecycleState x = TF.compute (TF.refKey x) "lifecycle_state"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (FolderResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceFolder s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedParent (TF.Ref s' (FolderResource s)) (TF.Attr s P.Text) where
-    computedParent =
-        (_parent :: FolderResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeParent (TF.Ref s' (ResourceFolder s)) (TF.Attr s P.Text) where
+    computeParent =
+        (_parent :: ResourceFolder s -> TF.Attr s P.Text)
             . TF.refValue
 
-folderResource :: TF.Resource P.Google (FolderResource s)
-folderResource =
+resourceFolder :: TF.Resource P.Google (ResourceFolder s)
+resourceFolder =
     TF.newResource "google_folder" $
-        FolderResource {
+        ResourceFolder {
               _display_name = TF.Nil
             , _parent = TF.Nil
             }
 
-{- | The @google_kms_crypto_key_iam_binding@ Google resource.
+{- | The @google_folder_iam_binding@ Google resource.
 
 Allows creation and management of a single binding within IAM policy for an
-existing Google Cloud KMS crypto key.
+existing Google Cloud Platform folder. ~> Note: This resource must not be
+used in conjunction with @google_folder_iam_policy@ or they will fight over
+what your policy should be.
 -}
-data KmsCryptoKeyIamBindingResource s = KmsCryptoKeyIamBindingResource {
-      _crypto_key_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The crypto key ID, in the form @{project_id}/{location_name}/{key_ring_name}/{crypto_key_name}@ or @{location_name}/{key_ring_name}/{crypto_key_name}@ . In the second form, the provider's project setting will be used as a fallback. -}
+data ResourceFolderIamBinding s = ResourceFolderIamBinding {
+      _folder :: !(TF.Attr s P.Text)
+    {- ^ (Required) The resource name of the folder the policy is attached to. Its format is folders/{folder_id}. -}
     , _members :: !(TF.Attr s P.Text)
-    {- ^ (Required) A list of users that the role should apply to. -}
+    {- ^ (Required) - An array of identites that will be granted the privilege in the @role@ . Each entry can have one of the following values: -}
     , _role :: !(TF.Attr s P.Text)
-    {- ^ (Required) The role that should be applied. Only one @google_kms_crypto_key_iam_binding@ can be used per role. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
+    {- ^ (Required) The role that should be applied. Only one @google_folder_iam_binding@ can be used per role. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsCryptoKeyIamBindingResource s) where
-    toHCL KmsCryptoKeyIamBindingResource{..} = TF.inline $ catMaybes
-        [ TF.assign "crypto_key_id" <$> TF.attribute _crypto_key_id
+instance TF.ToHCL (ResourceFolderIamBinding s) where
+    toHCL ResourceFolderIamBinding{..} = TF.inline $ catMaybes
+        [ TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "members" <$> TF.attribute _members
         , TF.assign "role" <$> TF.attribute _role
         ]
 
-instance P.HasCryptoKeyId (KmsCryptoKeyIamBindingResource s) (TF.Attr s P.Text) where
-    cryptoKeyId =
-        lens (_crypto_key_id :: KmsCryptoKeyIamBindingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _crypto_key_id = a } :: KmsCryptoKeyIamBindingResource s)
+instance P.HasFolder (ResourceFolderIamBinding s) (TF.Attr s P.Text) where
+    folder =
+        lens (_folder :: ResourceFolderIamBinding s -> TF.Attr s P.Text)
+             (\s a -> s { _folder = a } :: ResourceFolderIamBinding s)
 
-instance P.HasMembers (KmsCryptoKeyIamBindingResource s) (TF.Attr s P.Text) where
+instance P.HasMembers (ResourceFolderIamBinding s) (TF.Attr s P.Text) where
     members =
-        lens (_members :: KmsCryptoKeyIamBindingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _members = a } :: KmsCryptoKeyIamBindingResource s)
+        lens (_members :: ResourceFolderIamBinding s -> TF.Attr s P.Text)
+             (\s a -> s { _members = a } :: ResourceFolderIamBinding s)
 
-instance P.HasRole (KmsCryptoKeyIamBindingResource s) (TF.Attr s P.Text) where
+instance P.HasRole (ResourceFolderIamBinding s) (TF.Attr s P.Text) where
     role =
-        lens (_role :: KmsCryptoKeyIamBindingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: KmsCryptoKeyIamBindingResource s)
+        lens (_role :: ResourceFolderIamBinding s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: ResourceFolderIamBinding s)
 
-instance s ~ s' => P.HasComputedCryptoKeyId (TF.Ref s' (KmsCryptoKeyIamBindingResource s)) (TF.Attr s P.Text) where
-    computedCryptoKeyId =
-        (_crypto_key_id :: KmsCryptoKeyIamBindingResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceFolderIamBinding s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
+
+instance s ~ s' => P.HasComputeFolder (TF.Ref s' (ResourceFolderIamBinding s)) (TF.Attr s P.Text) where
+    computeFolder =
+        (_folder :: ResourceFolderIamBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (KmsCryptoKeyIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
-instance s ~ s' => P.HasComputedMembers (TF.Ref s' (KmsCryptoKeyIamBindingResource s)) (TF.Attr s P.Text) where
-    computedMembers =
-        (_members :: KmsCryptoKeyIamBindingResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMembers (TF.Ref s' (ResourceFolderIamBinding s)) (TF.Attr s P.Text) where
+    computeMembers =
+        (_members :: ResourceFolderIamBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (KmsCryptoKeyIamBindingResource s)) (TF.Attr s P.Text) where
-    computedRole =
-        (_role :: KmsCryptoKeyIamBindingResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceFolderIamBinding s)) (TF.Attr s P.Text) where
+    computeRole =
+        (_role :: ResourceFolderIamBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-kmsCryptoKeyIamBindingResource :: TF.Resource P.Google (KmsCryptoKeyIamBindingResource s)
-kmsCryptoKeyIamBindingResource =
-    TF.newResource "google_kms_crypto_key_iam_binding" $
-        KmsCryptoKeyIamBindingResource {
-              _crypto_key_id = TF.Nil
+resourceFolderIamBinding :: TF.Resource P.Google (ResourceFolderIamBinding s)
+resourceFolderIamBinding =
+    TF.newResource "google_folder_iam_binding" $
+        ResourceFolderIamBinding {
+              _folder = TF.Nil
             , _members = TF.Nil
             , _role = TF.Nil
+            }
+
+{- | The @google_folder_iam_member@ Google resource.
+
+Allows creation and management of a single member for a single binding
+within the IAM policy for an existing Google Cloud Platform folder. ~> Note:
+This resource must not be used in conjunction with
+@google_folder_iam_policy@ or they will fight over what your policy should
+be. Similarly, roles controlled by @google_folder_iam_binding@ should not be
+assigned to using @google_folder_iam_member@ .
+-}
+data ResourceFolderIamMember s = ResourceFolderIamMember {
+      _folder :: !(TF.Attr s P.Text)
+    {- ^ (Required) The resource name of the folder the policy is attached to. Its format is folders/{folder_id}. -}
+    , _member :: !(TF.Attr s P.Text)
+    {- ^ (Required) The identity that will be granted the privilege in the @role@ . This field can have one of the following values: -}
+    , _role :: !(TF.Attr s P.Text)
+    {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceFolderIamMember s) where
+    toHCL ResourceFolderIamMember{..} = TF.inline $ catMaybes
+        [ TF.assign "folder" <$> TF.attribute _folder
+        , TF.assign "member" <$> TF.attribute _member
+        , TF.assign "role" <$> TF.attribute _role
+        ]
+
+instance P.HasFolder (ResourceFolderIamMember s) (TF.Attr s P.Text) where
+    folder =
+        lens (_folder :: ResourceFolderIamMember s -> TF.Attr s P.Text)
+             (\s a -> s { _folder = a } :: ResourceFolderIamMember s)
+
+instance P.HasMember (ResourceFolderIamMember s) (TF.Attr s P.Text) where
+    member =
+        lens (_member :: ResourceFolderIamMember s -> TF.Attr s P.Text)
+             (\s a -> s { _member = a } :: ResourceFolderIamMember s)
+
+instance P.HasRole (ResourceFolderIamMember s) (TF.Attr s P.Text) where
+    role =
+        lens (_role :: ResourceFolderIamMember s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: ResourceFolderIamMember s)
+
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceFolderIamMember s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
+
+instance s ~ s' => P.HasComputeFolder (TF.Ref s' (ResourceFolderIamMember s)) (TF.Attr s P.Text) where
+    computeFolder =
+        (_folder :: ResourceFolderIamMember s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeMember (TF.Ref s' (ResourceFolderIamMember s)) (TF.Attr s P.Text) where
+    computeMember =
+        (_member :: ResourceFolderIamMember s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceFolderIamMember s)) (TF.Attr s P.Text) where
+    computeRole =
+        (_role :: ResourceFolderIamMember s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourceFolderIamMember :: TF.Resource P.Google (ResourceFolderIamMember s)
+resourceFolderIamMember =
+    TF.newResource "google_folder_iam_member" $
+        ResourceFolderIamMember {
+              _folder = TF.Nil
+            , _member = TF.Nil
+            , _role = TF.Nil
+            }
+
+{- | The @google_folder_iam_policy@ Google resource.
+
+Allows creation and management of the IAM policy for an existing Google
+Cloud Platform folder.
+-}
+data ResourceFolderIamPolicy s = ResourceFolderIamPolicy {
+      _folder :: !(TF.Attr s P.Text)
+    {- ^ (Required) The resource name of the folder the policy is attached to. Its format is folders/{folder_id}. -}
+    , _policy_data :: !(TF.Attr s P.Text)
+    {- ^ (Required) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceFolderIamPolicy s) where
+    toHCL ResourceFolderIamPolicy{..} = TF.inline $ catMaybes
+        [ TF.assign "folder" <$> TF.attribute _folder
+        , TF.assign "policy_data" <$> TF.attribute _policy_data
+        ]
+
+instance P.HasFolder (ResourceFolderIamPolicy s) (TF.Attr s P.Text) where
+    folder =
+        lens (_folder :: ResourceFolderIamPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _folder = a } :: ResourceFolderIamPolicy s)
+
+instance P.HasPolicyData (ResourceFolderIamPolicy s) (TF.Attr s P.Text) where
+    policyData =
+        lens (_policy_data :: ResourceFolderIamPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _policy_data = a } :: ResourceFolderIamPolicy s)
+
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceFolderIamPolicy s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
+
+instance s ~ s' => P.HasComputeFolder (TF.Ref s' (ResourceFolderIamPolicy s)) (TF.Attr s P.Text) where
+    computeFolder =
+        (_folder :: ResourceFolderIamPolicy s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputePolicyData (TF.Ref s' (ResourceFolderIamPolicy s)) (TF.Attr s P.Text) where
+    computePolicyData =
+        (_policy_data :: ResourceFolderIamPolicy s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourceFolderIamPolicy :: TF.Resource P.Google (ResourceFolderIamPolicy s)
+resourceFolderIamPolicy =
+    TF.newResource "google_folder_iam_policy" $
+        ResourceFolderIamPolicy {
+              _folder = TF.Nil
+            , _policy_data = TF.Nil
+            }
+
+{- | The @google_folder_organization_policy@ Google resource.
+
+Allows management of Organization policies for a Google Folder. For more
+information see
+<https://cloud.google.com/resource-manager/docs/organization-policy/overview>
+and
+<https://cloud.google.com/resource-manager/reference/rest/v1/folders/setOrgPolicy>
+.
+-}
+data ResourceFolderOrganizationPolicy s = ResourceFolderOrganizationPolicy {
+      _boolean_policy :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A boolean policy is a constraint that is either enforced or not. Structure is documented below. -}
+    , _constraint :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Constraint the Policy is configuring, for example, @serviceuser.services@ . Check out the <https://cloud.google.com/resource-manager/docs/organization-policy/understanding-constraints#available_constraints> . -}
+    , _folder :: !(TF.Attr s P.Text)
+    {- ^ (Required) The resource name of the folder to set the policy for. Its format is folders/{folder_id}. -}
+    , _list_policy :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A policy that can define specific values that are allowed or denied for the given constraint. It can also be used to allow or deny all values. Structure is documented below. -}
+    , _version :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Version of the Policy. Default version is 0. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceFolderOrganizationPolicy s) where
+    toHCL ResourceFolderOrganizationPolicy{..} = TF.inline $ catMaybes
+        [ TF.assign "boolean_policy" <$> TF.attribute _boolean_policy
+        , TF.assign "constraint" <$> TF.attribute _constraint
+        , TF.assign "folder" <$> TF.attribute _folder
+        , TF.assign "list_policy" <$> TF.attribute _list_policy
+        , TF.assign "version" <$> TF.attribute _version
+        ]
+
+instance P.HasBooleanPolicy (ResourceFolderOrganizationPolicy s) (TF.Attr s P.Text) where
+    booleanPolicy =
+        lens (_boolean_policy :: ResourceFolderOrganizationPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _boolean_policy = a } :: ResourceFolderOrganizationPolicy s)
+
+instance P.HasConstraint (ResourceFolderOrganizationPolicy s) (TF.Attr s P.Text) where
+    constraint =
+        lens (_constraint :: ResourceFolderOrganizationPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _constraint = a } :: ResourceFolderOrganizationPolicy s)
+
+instance P.HasFolder (ResourceFolderOrganizationPolicy s) (TF.Attr s P.Text) where
+    folder =
+        lens (_folder :: ResourceFolderOrganizationPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _folder = a } :: ResourceFolderOrganizationPolicy s)
+
+instance P.HasListPolicy (ResourceFolderOrganizationPolicy s) (TF.Attr s P.Text) where
+    listPolicy =
+        lens (_list_policy :: ResourceFolderOrganizationPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _list_policy = a } :: ResourceFolderOrganizationPolicy s)
+
+instance P.HasVersion (ResourceFolderOrganizationPolicy s) (TF.Attr s P.Text) where
+    version =
+        lens (_version :: ResourceFolderOrganizationPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _version = a } :: ResourceFolderOrganizationPolicy s)
+
+instance s ~ s' => P.HasComputeBooleanPolicy (TF.Ref s' (ResourceFolderOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeBooleanPolicy =
+        (_boolean_policy :: ResourceFolderOrganizationPolicy s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeConstraint (TF.Ref s' (ResourceFolderOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeConstraint =
+        (_constraint :: ResourceFolderOrganizationPolicy s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceFolderOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
+
+instance s ~ s' => P.HasComputeFolder (TF.Ref s' (ResourceFolderOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeFolder =
+        (_folder :: ResourceFolderOrganizationPolicy s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeListPolicy (TF.Ref s' (ResourceFolderOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeListPolicy =
+        (_list_policy :: ResourceFolderOrganizationPolicy s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeUpdateTime (TF.Ref s' (ResourceFolderOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeUpdateTime x = TF.compute (TF.refKey x) "update_time"
+
+instance s ~ s' => P.HasComputeVersion (TF.Ref s' (ResourceFolderOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeVersion =
+        (_version :: ResourceFolderOrganizationPolicy s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourceFolderOrganizationPolicy :: TF.Resource P.Google (ResourceFolderOrganizationPolicy s)
+resourceFolderOrganizationPolicy =
+    TF.newResource "google_folder_organization_policy" $
+        ResourceFolderOrganizationPolicy {
+              _boolean_policy = TF.Nil
+            , _constraint = TF.Nil
+            , _folder = TF.Nil
+            , _list_policy = TF.Nil
+            , _version = TF.Nil
             }
 
 {- | The @google_kms_crypto_key@ Google resource.
@@ -8521,7 +8521,7 @@ Terraform-managed CryptoKey will remove it from state and delete all
 CryptoKeyVersions, rendering the key unusable, but will not delete the
 resource on the server .
 -}
-data KmsCryptoKeyResource s = KmsCryptoKeyResource {
+data ResourceKmsCryptoKey s = ResourceKmsCryptoKey {
       _key_ring :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the Google Cloud Platform KeyRing to which the key shall belong. -}
     , _name :: !(TF.Attr s P.Text)
@@ -8530,53 +8530,116 @@ data KmsCryptoKeyResource s = KmsCryptoKeyResource {
     {- ^ (Optional) Every time this period passes, generate a new CryptoKeyVersion and set it as the primary. The first rotation will take place after the specified period. The rotation period has the format of a decimal number with up to 9 fractional digits, followed by the letter s (seconds). It must be greater than a day (ie, 83400). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsCryptoKeyResource s) where
-    toHCL KmsCryptoKeyResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceKmsCryptoKey s) where
+    toHCL ResourceKmsCryptoKey{..} = TF.inline $ catMaybes
         [ TF.assign "key_ring" <$> TF.attribute _key_ring
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "rotation_period" <$> TF.attribute _rotation_period
         ]
 
-instance P.HasKeyRing (KmsCryptoKeyResource s) (TF.Attr s P.Text) where
+instance P.HasKeyRing (ResourceKmsCryptoKey s) (TF.Attr s P.Text) where
     keyRing =
-        lens (_key_ring :: KmsCryptoKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _key_ring = a } :: KmsCryptoKeyResource s)
+        lens (_key_ring :: ResourceKmsCryptoKey s -> TF.Attr s P.Text)
+             (\s a -> s { _key_ring = a } :: ResourceKmsCryptoKey s)
 
-instance P.HasName (KmsCryptoKeyResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceKmsCryptoKey s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: KmsCryptoKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: KmsCryptoKeyResource s)
+        lens (_name :: ResourceKmsCryptoKey s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceKmsCryptoKey s)
 
-instance P.HasRotationPeriod (KmsCryptoKeyResource s) (TF.Attr s P.Text) where
+instance P.HasRotationPeriod (ResourceKmsCryptoKey s) (TF.Attr s P.Text) where
     rotationPeriod =
-        lens (_rotation_period :: KmsCryptoKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _rotation_period = a } :: KmsCryptoKeyResource s)
+        lens (_rotation_period :: ResourceKmsCryptoKey s -> TF.Attr s P.Text)
+             (\s a -> s { _rotation_period = a } :: ResourceKmsCryptoKey s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsCryptoKeyResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceKmsCryptoKey s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedKeyRing (TF.Ref s' (KmsCryptoKeyResource s)) (TF.Attr s P.Text) where
-    computedKeyRing =
-        (_key_ring :: KmsCryptoKeyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeKeyRing (TF.Ref s' (ResourceKmsCryptoKey s)) (TF.Attr s P.Text) where
+    computeKeyRing =
+        (_key_ring :: ResourceKmsCryptoKey s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (KmsCryptoKeyResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: KmsCryptoKeyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceKmsCryptoKey s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceKmsCryptoKey s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRotationPeriod (TF.Ref s' (KmsCryptoKeyResource s)) (TF.Attr s P.Text) where
-    computedRotationPeriod =
-        (_rotation_period :: KmsCryptoKeyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRotationPeriod (TF.Ref s' (ResourceKmsCryptoKey s)) (TF.Attr s P.Text) where
+    computeRotationPeriod =
+        (_rotation_period :: ResourceKmsCryptoKey s -> TF.Attr s P.Text)
             . TF.refValue
 
-kmsCryptoKeyResource :: TF.Resource P.Google (KmsCryptoKeyResource s)
-kmsCryptoKeyResource =
+resourceKmsCryptoKey :: TF.Resource P.Google (ResourceKmsCryptoKey s)
+resourceKmsCryptoKey =
     TF.newResource "google_kms_crypto_key" $
-        KmsCryptoKeyResource {
+        ResourceKmsCryptoKey {
               _key_ring = TF.Nil
             , _name = TF.Nil
             , _rotation_period = TF.Nil
+            }
+
+{- | The @google_kms_crypto_key_iam_binding@ Google resource.
+
+Allows creation and management of a single binding within IAM policy for an
+existing Google Cloud KMS crypto key.
+-}
+data ResourceKmsCryptoKeyIamBinding s = ResourceKmsCryptoKeyIamBinding {
+      _crypto_key_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The crypto key ID, in the form @{project_id}/{location_name}/{key_ring_name}/{crypto_key_name}@ or @{location_name}/{key_ring_name}/{crypto_key_name}@ . In the second form, the provider's project setting will be used as a fallback. -}
+    , _members :: !(TF.Attr s P.Text)
+    {- ^ (Required) A list of users that the role should apply to. -}
+    , _role :: !(TF.Attr s P.Text)
+    {- ^ (Required) The role that should be applied. Only one @google_kms_crypto_key_iam_binding@ can be used per role. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceKmsCryptoKeyIamBinding s) where
+    toHCL ResourceKmsCryptoKeyIamBinding{..} = TF.inline $ catMaybes
+        [ TF.assign "crypto_key_id" <$> TF.attribute _crypto_key_id
+        , TF.assign "members" <$> TF.attribute _members
+        , TF.assign "role" <$> TF.attribute _role
+        ]
+
+instance P.HasCryptoKeyId (ResourceKmsCryptoKeyIamBinding s) (TF.Attr s P.Text) where
+    cryptoKeyId =
+        lens (_crypto_key_id :: ResourceKmsCryptoKeyIamBinding s -> TF.Attr s P.Text)
+             (\s a -> s { _crypto_key_id = a } :: ResourceKmsCryptoKeyIamBinding s)
+
+instance P.HasMembers (ResourceKmsCryptoKeyIamBinding s) (TF.Attr s P.Text) where
+    members =
+        lens (_members :: ResourceKmsCryptoKeyIamBinding s -> TF.Attr s P.Text)
+             (\s a -> s { _members = a } :: ResourceKmsCryptoKeyIamBinding s)
+
+instance P.HasRole (ResourceKmsCryptoKeyIamBinding s) (TF.Attr s P.Text) where
+    role =
+        lens (_role :: ResourceKmsCryptoKeyIamBinding s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: ResourceKmsCryptoKeyIamBinding s)
+
+instance s ~ s' => P.HasComputeCryptoKeyId (TF.Ref s' (ResourceKmsCryptoKeyIamBinding s)) (TF.Attr s P.Text) where
+    computeCryptoKeyId =
+        (_crypto_key_id :: ResourceKmsCryptoKeyIamBinding s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceKmsCryptoKeyIamBinding s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
+
+instance s ~ s' => P.HasComputeMembers (TF.Ref s' (ResourceKmsCryptoKeyIamBinding s)) (TF.Attr s P.Text) where
+    computeMembers =
+        (_members :: ResourceKmsCryptoKeyIamBinding s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceKmsCryptoKeyIamBinding s)) (TF.Attr s P.Text) where
+    computeRole =
+        (_role :: ResourceKmsCryptoKeyIamBinding s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourceKmsCryptoKeyIamBinding :: TF.Resource P.Google (ResourceKmsCryptoKeyIamBinding s)
+resourceKmsCryptoKeyIamBinding =
+    TF.newResource "google_kms_crypto_key_iam_binding" $
+        ResourceKmsCryptoKeyIamBinding {
+              _crypto_key_id = TF.Nil
+            , _members = TF.Nil
+            , _role = TF.Nil
             }
 
 {- | The @google_kms_key_ring@ Google resource.
@@ -8590,7 +8653,7 @@ location. ~> Note: KeyRings cannot be deleted from Google Cloud Platform.
 Destroying a Terraform-managed KeyRing will remove it from state but will
 not delete the resource on the server .
 -}
-data KmsKeyRingResource s = KmsKeyRingResource {
+data ResourceKmsKeyRing s = ResourceKmsKeyRing {
       _location :: !(TF.Attr s P.Text)
     {- ^ (Required) The Google Cloud Platform location for the KeyRing. A full list of valid locations can be found by running @gcloud kms locations list@ . -}
     , _name :: !(TF.Attr s P.Text)
@@ -8599,50 +8662,50 @@ data KmsKeyRingResource s = KmsKeyRingResource {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsKeyRingResource s) where
-    toHCL KmsKeyRingResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceKmsKeyRing s) where
+    toHCL ResourceKmsKeyRing{..} = TF.inline $ catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasLocation (KmsKeyRingResource s) (TF.Attr s P.Text) where
+instance P.HasLocation (ResourceKmsKeyRing s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: KmsKeyRingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: KmsKeyRingResource s)
+        lens (_location :: ResourceKmsKeyRing s -> TF.Attr s P.Text)
+             (\s a -> s { _location = a } :: ResourceKmsKeyRing s)
 
-instance P.HasName (KmsKeyRingResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceKmsKeyRing s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: KmsKeyRingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: KmsKeyRingResource s)
+        lens (_name :: ResourceKmsKeyRing s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceKmsKeyRing s)
 
-instance P.HasProject (KmsKeyRingResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceKmsKeyRing s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: KmsKeyRingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: KmsKeyRingResource s)
+        lens (_project :: ResourceKmsKeyRing s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceKmsKeyRing s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsKeyRingResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceKmsKeyRing s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (KmsKeyRingResource s)) (TF.Attr s P.Text) where
-    computedLocation =
-        (_location :: KmsKeyRingResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLocation (TF.Ref s' (ResourceKmsKeyRing s)) (TF.Attr s P.Text) where
+    computeLocation =
+        (_location :: ResourceKmsKeyRing s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (KmsKeyRingResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: KmsKeyRingResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceKmsKeyRing s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceKmsKeyRing s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (KmsKeyRingResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: KmsKeyRingResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceKmsKeyRing s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceKmsKeyRing s -> TF.Attr s P.Text)
             . TF.refValue
 
-kmsKeyRingResource :: TF.Resource P.Google (KmsKeyRingResource s)
-kmsKeyRingResource =
+resourceKmsKeyRing :: TF.Resource P.Google (ResourceKmsKeyRing s)
+resourceKmsKeyRing =
     TF.newResource "google_kms_key_ring" $
-        KmsKeyRingResource {
+        ResourceKmsKeyRing {
               _location = TF.Nil
             , _name = TF.Nil
             , _project = TF.Nil
@@ -8657,7 +8720,7 @@ you must have the "Logs Configuration Writer" IAM role (
 @roles/logging.configWriter@ ) granted to the credentials used with
 terraform.
 -}
-data LoggingBillingAccountSinkResource s = LoggingBillingAccountSinkResource {
+data ResourceLoggingBillingAccountSink s = ResourceLoggingBillingAccountSink {
       _billing_account :: !(TF.Attr s P.Text)
     {- ^ (Required) The billing account exported to the sink. -}
     , _destination :: !(TF.Attr s P.Text)
@@ -8666,50 +8729,50 @@ data LoggingBillingAccountSinkResource s = LoggingBillingAccountSinkResource {
     {- ^ (Required) The name of the logging sink. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoggingBillingAccountSinkResource s) where
-    toHCL LoggingBillingAccountSinkResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceLoggingBillingAccountSink s) where
+    toHCL ResourceLoggingBillingAccountSink{..} = TF.inline $ catMaybes
         [ TF.assign "billing_account" <$> TF.attribute _billing_account
         , TF.assign "destination" <$> TF.attribute _destination
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasBillingAccount (LoggingBillingAccountSinkResource s) (TF.Attr s P.Text) where
+instance P.HasBillingAccount (ResourceLoggingBillingAccountSink s) (TF.Attr s P.Text) where
     billingAccount =
-        lens (_billing_account :: LoggingBillingAccountSinkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _billing_account = a } :: LoggingBillingAccountSinkResource s)
+        lens (_billing_account :: ResourceLoggingBillingAccountSink s -> TF.Attr s P.Text)
+             (\s a -> s { _billing_account = a } :: ResourceLoggingBillingAccountSink s)
 
-instance P.HasDestination (LoggingBillingAccountSinkResource s) (TF.Attr s P.Text) where
+instance P.HasDestination (ResourceLoggingBillingAccountSink s) (TF.Attr s P.Text) where
     destination =
-        lens (_destination :: LoggingBillingAccountSinkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _destination = a } :: LoggingBillingAccountSinkResource s)
+        lens (_destination :: ResourceLoggingBillingAccountSink s -> TF.Attr s P.Text)
+             (\s a -> s { _destination = a } :: ResourceLoggingBillingAccountSink s)
 
-instance P.HasName (LoggingBillingAccountSinkResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceLoggingBillingAccountSink s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: LoggingBillingAccountSinkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: LoggingBillingAccountSinkResource s)
+        lens (_name :: ResourceLoggingBillingAccountSink s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceLoggingBillingAccountSink s)
 
-instance s ~ s' => P.HasComputedBillingAccount (TF.Ref s' (LoggingBillingAccountSinkResource s)) (TF.Attr s P.Text) where
-    computedBillingAccount =
-        (_billing_account :: LoggingBillingAccountSinkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBillingAccount (TF.Ref s' (ResourceLoggingBillingAccountSink s)) (TF.Attr s P.Text) where
+    computeBillingAccount =
+        (_billing_account :: ResourceLoggingBillingAccountSink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDestination (TF.Ref s' (LoggingBillingAccountSinkResource s)) (TF.Attr s P.Text) where
-    computedDestination =
-        (_destination :: LoggingBillingAccountSinkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDestination (TF.Ref s' (ResourceLoggingBillingAccountSink s)) (TF.Attr s P.Text) where
+    computeDestination =
+        (_destination :: ResourceLoggingBillingAccountSink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (LoggingBillingAccountSinkResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: LoggingBillingAccountSinkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceLoggingBillingAccountSink s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceLoggingBillingAccountSink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingBillingAccountSinkResource s)) (TF.Attr s P.Text) where
-    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
+instance s ~ s' => P.HasComputeWriterIdentity (TF.Ref s' (ResourceLoggingBillingAccountSink s)) (TF.Attr s P.Text) where
+    computeWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
 
-loggingBillingAccountSinkResource :: TF.Resource P.Google (LoggingBillingAccountSinkResource s)
-loggingBillingAccountSinkResource =
+resourceLoggingBillingAccountSink :: TF.Resource P.Google (ResourceLoggingBillingAccountSink s)
+resourceLoggingBillingAccountSink =
     TF.newResource "google_logging_billing_account_sink" $
-        LoggingBillingAccountSinkResource {
+        ResourceLoggingBillingAccountSink {
               _billing_account = TF.Nil
             , _destination = TF.Nil
             , _name = TF.Nil
@@ -8724,7 +8787,7 @@ you must have the "Logs Configuration Writer" IAM role (
 @roles/logging.configWriter@ ) granted to the credentials used with
 terraform.
 -}
-data LoggingFolderSinkResource s = LoggingFolderSinkResource {
+data ResourceLoggingFolderSink s = ResourceLoggingFolderSink {
       _destination :: !(TF.Attr s P.Text)
     {- ^ (Required) The destination of the sink (or, in other words, where logs are written to). Can be a Cloud Storage bucket, a PubSub topic, or a BigQuery dataset. Examples: -}
     , _folder :: !(TF.Attr s P.Text)
@@ -8733,50 +8796,50 @@ data LoggingFolderSinkResource s = LoggingFolderSinkResource {
     {- ^ (Required) The name of the logging sink. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoggingFolderSinkResource s) where
-    toHCL LoggingFolderSinkResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceLoggingFolderSink s) where
+    toHCL ResourceLoggingFolderSink{..} = TF.inline $ catMaybes
         [ TF.assign "destination" <$> TF.attribute _destination
         , TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDestination (LoggingFolderSinkResource s) (TF.Attr s P.Text) where
+instance P.HasDestination (ResourceLoggingFolderSink s) (TF.Attr s P.Text) where
     destination =
-        lens (_destination :: LoggingFolderSinkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _destination = a } :: LoggingFolderSinkResource s)
+        lens (_destination :: ResourceLoggingFolderSink s -> TF.Attr s P.Text)
+             (\s a -> s { _destination = a } :: ResourceLoggingFolderSink s)
 
-instance P.HasFolder (LoggingFolderSinkResource s) (TF.Attr s P.Text) where
+instance P.HasFolder (ResourceLoggingFolderSink s) (TF.Attr s P.Text) where
     folder =
-        lens (_folder :: LoggingFolderSinkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _folder = a } :: LoggingFolderSinkResource s)
+        lens (_folder :: ResourceLoggingFolderSink s -> TF.Attr s P.Text)
+             (\s a -> s { _folder = a } :: ResourceLoggingFolderSink s)
 
-instance P.HasName (LoggingFolderSinkResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceLoggingFolderSink s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: LoggingFolderSinkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: LoggingFolderSinkResource s)
+        lens (_name :: ResourceLoggingFolderSink s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceLoggingFolderSink s)
 
-instance s ~ s' => P.HasComputedDestination (TF.Ref s' (LoggingFolderSinkResource s)) (TF.Attr s P.Text) where
-    computedDestination =
-        (_destination :: LoggingFolderSinkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDestination (TF.Ref s' (ResourceLoggingFolderSink s)) (TF.Attr s P.Text) where
+    computeDestination =
+        (_destination :: ResourceLoggingFolderSink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFolder (TF.Ref s' (LoggingFolderSinkResource s)) (TF.Attr s P.Text) where
-    computedFolder =
-        (_folder :: LoggingFolderSinkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFolder (TF.Ref s' (ResourceLoggingFolderSink s)) (TF.Attr s P.Text) where
+    computeFolder =
+        (_folder :: ResourceLoggingFolderSink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (LoggingFolderSinkResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: LoggingFolderSinkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceLoggingFolderSink s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceLoggingFolderSink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingFolderSinkResource s)) (TF.Attr s P.Text) where
-    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
+instance s ~ s' => P.HasComputeWriterIdentity (TF.Ref s' (ResourceLoggingFolderSink s)) (TF.Attr s P.Text) where
+    computeWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
 
-loggingFolderSinkResource :: TF.Resource P.Google (LoggingFolderSinkResource s)
-loggingFolderSinkResource =
+resourceLoggingFolderSink :: TF.Resource P.Google (ResourceLoggingFolderSink s)
+resourceLoggingFolderSink =
     TF.newResource "google_logging_folder_sink" $
-        LoggingFolderSinkResource {
+        ResourceLoggingFolderSink {
               _destination = TF.Nil
             , _folder = TF.Nil
             , _name = TF.Nil
@@ -8791,7 +8854,7 @@ you must have the "Logs Configuration Writer" IAM role (
 @roles/logging.configWriter@ ) granted to the credentials used with
 terraform.
 -}
-data LoggingOrganizationSinkResource s = LoggingOrganizationSinkResource {
+data ResourceLoggingOrganizationSink s = ResourceLoggingOrganizationSink {
       _destination :: !(TF.Attr s P.Text)
     {- ^ (Required) The destination of the sink (or, in other words, where logs are written to). Can be a Cloud Storage bucket, a PubSub topic, or a BigQuery dataset. Examples: -}
     , _name :: !(TF.Attr s P.Text)
@@ -8800,50 +8863,50 @@ data LoggingOrganizationSinkResource s = LoggingOrganizationSinkResource {
     {- ^ (Required) The numeric ID of the organization to be exported to the sink. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoggingOrganizationSinkResource s) where
-    toHCL LoggingOrganizationSinkResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceLoggingOrganizationSink s) where
+    toHCL ResourceLoggingOrganizationSink{..} = TF.inline $ catMaybes
         [ TF.assign "destination" <$> TF.attribute _destination
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "org_id" <$> TF.attribute _org_id
         ]
 
-instance P.HasDestination (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
+instance P.HasDestination (ResourceLoggingOrganizationSink s) (TF.Attr s P.Text) where
     destination =
-        lens (_destination :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _destination = a } :: LoggingOrganizationSinkResource s)
+        lens (_destination :: ResourceLoggingOrganizationSink s -> TF.Attr s P.Text)
+             (\s a -> s { _destination = a } :: ResourceLoggingOrganizationSink s)
 
-instance P.HasName (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceLoggingOrganizationSink s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: LoggingOrganizationSinkResource s)
+        lens (_name :: ResourceLoggingOrganizationSink s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceLoggingOrganizationSink s)
 
-instance P.HasOrgId (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
+instance P.HasOrgId (ResourceLoggingOrganizationSink s) (TF.Attr s P.Text) where
     orgId =
-        lens (_org_id :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _org_id = a } :: LoggingOrganizationSinkResource s)
+        lens (_org_id :: ResourceLoggingOrganizationSink s -> TF.Attr s P.Text)
+             (\s a -> s { _org_id = a } :: ResourceLoggingOrganizationSink s)
 
-instance s ~ s' => P.HasComputedDestination (TF.Ref s' (LoggingOrganizationSinkResource s)) (TF.Attr s P.Text) where
-    computedDestination =
-        (_destination :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDestination (TF.Ref s' (ResourceLoggingOrganizationSink s)) (TF.Attr s P.Text) where
+    computeDestination =
+        (_destination :: ResourceLoggingOrganizationSink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (LoggingOrganizationSinkResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceLoggingOrganizationSink s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceLoggingOrganizationSink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (LoggingOrganizationSinkResource s)) (TF.Attr s P.Text) where
-    computedOrgId =
-        (_org_id :: LoggingOrganizationSinkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeOrgId (TF.Ref s' (ResourceLoggingOrganizationSink s)) (TF.Attr s P.Text) where
+    computeOrgId =
+        (_org_id :: ResourceLoggingOrganizationSink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingOrganizationSinkResource s)) (TF.Attr s P.Text) where
-    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
+instance s ~ s' => P.HasComputeWriterIdentity (TF.Ref s' (ResourceLoggingOrganizationSink s)) (TF.Attr s P.Text) where
+    computeWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
 
-loggingOrganizationSinkResource :: TF.Resource P.Google (LoggingOrganizationSinkResource s)
-loggingOrganizationSinkResource =
+resourceLoggingOrganizationSink :: TF.Resource P.Google (ResourceLoggingOrganizationSink s)
+resourceLoggingOrganizationSink =
     TF.newResource "google_logging_organization_sink" $
-        LoggingOrganizationSinkResource {
+        ResourceLoggingOrganizationSink {
               _destination = TF.Nil
             , _name = TF.Nil
             , _org_id = TF.Nil
@@ -8859,46 +8922,46 @@ that you must have the "Logs Configuration Writer" IAM role (
 @roles/logging.configWriter@ ) granted to the credentials used with
 terraform.
 -}
-data LoggingProjectSinkResource s = LoggingProjectSinkResource {
+data ResourceLoggingProjectSink s = ResourceLoggingProjectSink {
       _destination :: !(TF.Attr s P.Text)
     {- ^ (Required) The destination of the sink (or, in other words, where logs are written to). Can be a Cloud Storage bucket, a PubSub topic, or a BigQuery dataset. Examples: -}
     , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the logging sink. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoggingProjectSinkResource s) where
-    toHCL LoggingProjectSinkResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceLoggingProjectSink s) where
+    toHCL ResourceLoggingProjectSink{..} = TF.inline $ catMaybes
         [ TF.assign "destination" <$> TF.attribute _destination
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDestination (LoggingProjectSinkResource s) (TF.Attr s P.Text) where
+instance P.HasDestination (ResourceLoggingProjectSink s) (TF.Attr s P.Text) where
     destination =
-        lens (_destination :: LoggingProjectSinkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _destination = a } :: LoggingProjectSinkResource s)
+        lens (_destination :: ResourceLoggingProjectSink s -> TF.Attr s P.Text)
+             (\s a -> s { _destination = a } :: ResourceLoggingProjectSink s)
 
-instance P.HasName (LoggingProjectSinkResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceLoggingProjectSink s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: LoggingProjectSinkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: LoggingProjectSinkResource s)
+        lens (_name :: ResourceLoggingProjectSink s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceLoggingProjectSink s)
 
-instance s ~ s' => P.HasComputedDestination (TF.Ref s' (LoggingProjectSinkResource s)) (TF.Attr s P.Text) where
-    computedDestination =
-        (_destination :: LoggingProjectSinkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDestination (TF.Ref s' (ResourceLoggingProjectSink s)) (TF.Attr s P.Text) where
+    computeDestination =
+        (_destination :: ResourceLoggingProjectSink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (LoggingProjectSinkResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: LoggingProjectSinkResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceLoggingProjectSink s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceLoggingProjectSink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingProjectSinkResource s)) (TF.Attr s P.Text) where
-    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
+instance s ~ s' => P.HasComputeWriterIdentity (TF.Ref s' (ResourceLoggingProjectSink s)) (TF.Attr s P.Text) where
+    computeWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
 
-loggingProjectSinkResource :: TF.Resource P.Google (LoggingProjectSinkResource s)
-loggingProjectSinkResource =
+resourceLoggingProjectSink :: TF.Resource P.Google (ResourceLoggingProjectSink s)
+resourceLoggingProjectSink =
     TF.newResource "google_logging_project_sink" $
-        LoggingProjectSinkResource {
+        ResourceLoggingProjectSink {
               _destination = TF.Nil
             , _name = TF.Nil
             }
@@ -8910,7 +8973,7 @@ existing Google Cloud Platform Organization. ~> Note: This resource must not
 be used in conjunction with @google_organization_iam_member@ for the same
 role or they will fight over what your policy should be.
 -}
-data OrganizationIamBindingResource s = OrganizationIamBindingResource {
+data ResourceOrganizationIamBinding s = ResourceOrganizationIamBinding {
       _members :: !(TF.Attr s P.Text)
     {- ^ (Required) A list of users that the role should apply to. -}
     , _org_id :: !(TF.Attr s P.Text)
@@ -8919,50 +8982,50 @@ data OrganizationIamBindingResource s = OrganizationIamBindingResource {
     {- ^ (Required) The role that should be applied. Only one @google_organization_iam_binding@ can be used per role. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OrganizationIamBindingResource s) where
-    toHCL OrganizationIamBindingResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceOrganizationIamBinding s) where
+    toHCL ResourceOrganizationIamBinding{..} = TF.inline $ catMaybes
         [ TF.assign "members" <$> TF.attribute _members
         , TF.assign "org_id" <$> TF.attribute _org_id
         , TF.assign "role" <$> TF.attribute _role
         ]
 
-instance P.HasMembers (OrganizationIamBindingResource s) (TF.Attr s P.Text) where
+instance P.HasMembers (ResourceOrganizationIamBinding s) (TF.Attr s P.Text) where
     members =
-        lens (_members :: OrganizationIamBindingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _members = a } :: OrganizationIamBindingResource s)
+        lens (_members :: ResourceOrganizationIamBinding s -> TF.Attr s P.Text)
+             (\s a -> s { _members = a } :: ResourceOrganizationIamBinding s)
 
-instance P.HasOrgId (OrganizationIamBindingResource s) (TF.Attr s P.Text) where
+instance P.HasOrgId (ResourceOrganizationIamBinding s) (TF.Attr s P.Text) where
     orgId =
-        lens (_org_id :: OrganizationIamBindingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _org_id = a } :: OrganizationIamBindingResource s)
+        lens (_org_id :: ResourceOrganizationIamBinding s -> TF.Attr s P.Text)
+             (\s a -> s { _org_id = a } :: ResourceOrganizationIamBinding s)
 
-instance P.HasRole (OrganizationIamBindingResource s) (TF.Attr s P.Text) where
+instance P.HasRole (ResourceOrganizationIamBinding s) (TF.Attr s P.Text) where
     role =
-        lens (_role :: OrganizationIamBindingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: OrganizationIamBindingResource s)
+        lens (_role :: ResourceOrganizationIamBinding s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: ResourceOrganizationIamBinding s)
 
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceOrganizationIamBinding s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
 
-instance s ~ s' => P.HasComputedMembers (TF.Ref s' (OrganizationIamBindingResource s)) (TF.Attr s P.Text) where
-    computedMembers =
-        (_members :: OrganizationIamBindingResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMembers (TF.Ref s' (ResourceOrganizationIamBinding s)) (TF.Attr s P.Text) where
+    computeMembers =
+        (_members :: ResourceOrganizationIamBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (OrganizationIamBindingResource s)) (TF.Attr s P.Text) where
-    computedOrgId =
-        (_org_id :: OrganizationIamBindingResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeOrgId (TF.Ref s' (ResourceOrganizationIamBinding s)) (TF.Attr s P.Text) where
+    computeOrgId =
+        (_org_id :: ResourceOrganizationIamBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (OrganizationIamBindingResource s)) (TF.Attr s P.Text) where
-    computedRole =
-        (_role :: OrganizationIamBindingResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceOrganizationIamBinding s)) (TF.Attr s P.Text) where
+    computeRole =
+        (_role :: ResourceOrganizationIamBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-organizationIamBindingResource :: TF.Resource P.Google (OrganizationIamBindingResource s)
-organizationIamBindingResource =
+resourceOrganizationIamBinding :: TF.Resource P.Google (ResourceOrganizationIamBinding s)
+resourceOrganizationIamBinding =
     TF.newResource "google_organization_iam_binding" $
-        OrganizationIamBindingResource {
+        ResourceOrganizationIamBinding {
               _members = TF.Nil
             , _org_id = TF.Nil
             , _role = TF.Nil
@@ -8975,7 +9038,7 @@ information see
 <https://cloud.google.com/iam/docs/understanding-custom-roles> and
 <https://cloud.google.com/iam/reference/rest/v1/organizations.roles> .
 -}
-data OrganizationIamCustomRoleResource s = OrganizationIamCustomRoleResource {
+data ResourceOrganizationIamCustomRole s = ResourceOrganizationIamCustomRole {
       _deleted :: !(TF.Attr s P.Text)
     {- ^ (Optional) The current deleted state of the role. Defaults to @false@ . -}
     , _description :: !(TF.Attr s P.Text)
@@ -8992,8 +9055,8 @@ data OrganizationIamCustomRoleResource s = OrganizationIamCustomRoleResource {
     {- ^ (Required) A human-readable title for the role. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OrganizationIamCustomRoleResource s) where
-    toHCL OrganizationIamCustomRoleResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceOrganizationIamCustomRole s) where
+    toHCL ResourceOrganizationIamCustomRole{..} = TF.inline $ catMaybes
         [ TF.assign "deleted" <$> TF.attribute _deleted
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "org_id" <$> TF.attribute _org_id
@@ -9003,80 +9066,80 @@ instance TF.ToHCL (OrganizationIamCustomRoleResource s) where
         , TF.assign "title" <$> TF.attribute _title
         ]
 
-instance P.HasDeleted (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasDeleted (ResourceOrganizationIamCustomRole s) (TF.Attr s P.Text) where
     deleted =
-        lens (_deleted :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _deleted = a } :: OrganizationIamCustomRoleResource s)
+        lens (_deleted :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _deleted = a } :: ResourceOrganizationIamCustomRole s)
 
-instance P.HasDescription (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceOrganizationIamCustomRole s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: OrganizationIamCustomRoleResource s)
+        lens (_description :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceOrganizationIamCustomRole s)
 
-instance P.HasOrgId (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasOrgId (ResourceOrganizationIamCustomRole s) (TF.Attr s P.Text) where
     orgId =
-        lens (_org_id :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _org_id = a } :: OrganizationIamCustomRoleResource s)
+        lens (_org_id :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _org_id = a } :: ResourceOrganizationIamCustomRole s)
 
-instance P.HasPermissions (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasPermissions (ResourceOrganizationIamCustomRole s) (TF.Attr s P.Text) where
     permissions =
-        lens (_permissions :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _permissions = a } :: OrganizationIamCustomRoleResource s)
+        lens (_permissions :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _permissions = a } :: ResourceOrganizationIamCustomRole s)
 
-instance P.HasRoleId (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasRoleId (ResourceOrganizationIamCustomRole s) (TF.Attr s P.Text) where
     roleId =
-        lens (_role_id :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role_id = a } :: OrganizationIamCustomRoleResource s)
+        lens (_role_id :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _role_id = a } :: ResourceOrganizationIamCustomRole s)
 
-instance P.HasStage (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasStage (ResourceOrganizationIamCustomRole s) (TF.Attr s P.Text) where
     stage =
-        lens (_stage :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _stage = a } :: OrganizationIamCustomRoleResource s)
+        lens (_stage :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _stage = a } :: ResourceOrganizationIamCustomRole s)
 
-instance P.HasTitle (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasTitle (ResourceOrganizationIamCustomRole s) (TF.Attr s P.Text) where
     title =
-        lens (_title :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _title = a } :: OrganizationIamCustomRoleResource s)
+        lens (_title :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _title = a } :: ResourceOrganizationIamCustomRole s)
 
-instance s ~ s' => P.HasComputedDeleted (TF.Ref s' (OrganizationIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedDeleted =
-        (_deleted :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDeleted (TF.Ref s' (ResourceOrganizationIamCustomRole s)) (TF.Attr s P.Text) where
+    computeDeleted =
+        (_deleted :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (OrganizationIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceOrganizationIamCustomRole s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (OrganizationIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedOrgId =
-        (_org_id :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeOrgId (TF.Ref s' (ResourceOrganizationIamCustomRole s)) (TF.Attr s P.Text) where
+    computeOrgId =
+        (_org_id :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (OrganizationIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedPermissions =
-        (_permissions :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePermissions (TF.Ref s' (ResourceOrganizationIamCustomRole s)) (TF.Attr s P.Text) where
+    computePermissions =
+        (_permissions :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (OrganizationIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedRoleId =
-        (_role_id :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRoleId (TF.Ref s' (ResourceOrganizationIamCustomRole s)) (TF.Attr s P.Text) where
+    computeRoleId =
+        (_role_id :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStage (TF.Ref s' (OrganizationIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedStage =
-        (_stage :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeStage (TF.Ref s' (ResourceOrganizationIamCustomRole s)) (TF.Attr s P.Text) where
+    computeStage =
+        (_stage :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTitle (TF.Ref s' (OrganizationIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedTitle =
-        (_title :: OrganizationIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTitle (TF.Ref s' (ResourceOrganizationIamCustomRole s)) (TF.Attr s P.Text) where
+    computeTitle =
+        (_title :: ResourceOrganizationIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-organizationIamCustomRoleResource :: TF.Resource P.Google (OrganizationIamCustomRoleResource s)
-organizationIamCustomRoleResource =
+resourceOrganizationIamCustomRole :: TF.Resource P.Google (ResourceOrganizationIamCustomRole s)
+resourceOrganizationIamCustomRole =
     TF.newResource "google_organization_iam_custom_role" $
-        OrganizationIamCustomRoleResource {
+        ResourceOrganizationIamCustomRole {
               _deleted = TF.Nil
             , _description = TF.Nil
             , _org_id = TF.Nil
@@ -9094,7 +9157,7 @@ Note: This resource must not be used in conjunction with
 @google_organization_iam_binding@ for the same role or they will fight over
 what your policy should be.
 -}
-data OrganizationIamMemberResource s = OrganizationIamMemberResource {
+data ResourceOrganizationIamMember s = ResourceOrganizationIamMember {
       _member :: !(TF.Attr s P.Text)
     {- ^ (Required) The user that the role should apply to. -}
     , _org_id :: !(TF.Attr s P.Text)
@@ -9103,50 +9166,50 @@ data OrganizationIamMemberResource s = OrganizationIamMemberResource {
     {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OrganizationIamMemberResource s) where
-    toHCL OrganizationIamMemberResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceOrganizationIamMember s) where
+    toHCL ResourceOrganizationIamMember{..} = TF.inline $ catMaybes
         [ TF.assign "member" <$> TF.attribute _member
         , TF.assign "org_id" <$> TF.attribute _org_id
         , TF.assign "role" <$> TF.attribute _role
         ]
 
-instance P.HasMember (OrganizationIamMemberResource s) (TF.Attr s P.Text) where
+instance P.HasMember (ResourceOrganizationIamMember s) (TF.Attr s P.Text) where
     member =
-        lens (_member :: OrganizationIamMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _member = a } :: OrganizationIamMemberResource s)
+        lens (_member :: ResourceOrganizationIamMember s -> TF.Attr s P.Text)
+             (\s a -> s { _member = a } :: ResourceOrganizationIamMember s)
 
-instance P.HasOrgId (OrganizationIamMemberResource s) (TF.Attr s P.Text) where
+instance P.HasOrgId (ResourceOrganizationIamMember s) (TF.Attr s P.Text) where
     orgId =
-        lens (_org_id :: OrganizationIamMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _org_id = a } :: OrganizationIamMemberResource s)
+        lens (_org_id :: ResourceOrganizationIamMember s -> TF.Attr s P.Text)
+             (\s a -> s { _org_id = a } :: ResourceOrganizationIamMember s)
 
-instance P.HasRole (OrganizationIamMemberResource s) (TF.Attr s P.Text) where
+instance P.HasRole (ResourceOrganizationIamMember s) (TF.Attr s P.Text) where
     role =
-        lens (_role :: OrganizationIamMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: OrganizationIamMemberResource s)
+        lens (_role :: ResourceOrganizationIamMember s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: ResourceOrganizationIamMember s)
 
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceOrganizationIamMember s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
 
-instance s ~ s' => P.HasComputedMember (TF.Ref s' (OrganizationIamMemberResource s)) (TF.Attr s P.Text) where
-    computedMember =
-        (_member :: OrganizationIamMemberResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMember (TF.Ref s' (ResourceOrganizationIamMember s)) (TF.Attr s P.Text) where
+    computeMember =
+        (_member :: ResourceOrganizationIamMember s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (OrganizationIamMemberResource s)) (TF.Attr s P.Text) where
-    computedOrgId =
-        (_org_id :: OrganizationIamMemberResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeOrgId (TF.Ref s' (ResourceOrganizationIamMember s)) (TF.Attr s P.Text) where
+    computeOrgId =
+        (_org_id :: ResourceOrganizationIamMember s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (OrganizationIamMemberResource s)) (TF.Attr s P.Text) where
-    computedRole =
-        (_role :: OrganizationIamMemberResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceOrganizationIamMember s)) (TF.Attr s P.Text) where
+    computeRole =
+        (_role :: ResourceOrganizationIamMember s -> TF.Attr s P.Text)
             . TF.refValue
 
-organizationIamMemberResource :: TF.Resource P.Google (OrganizationIamMemberResource s)
-organizationIamMemberResource =
+resourceOrganizationIamMember :: TF.Resource P.Google (ResourceOrganizationIamMember s)
+resourceOrganizationIamMember =
     TF.newResource "google_organization_iam_member" $
-        OrganizationIamMemberResource {
+        ResourceOrganizationIamMember {
               _member = TF.Nil
             , _org_id = TF.Nil
             , _role = TF.Nil
@@ -9161,7 +9224,7 @@ and
 <https://cloud.google.com/resource-manager/reference/rest/v1/organizations/setOrgPolicy>
 .
 -}
-data OrganizationPolicyResource s = OrganizationPolicyResource {
+data ResourceOrganizationPolicy s = ResourceOrganizationPolicy {
       _boolean_policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) A boolean policy is a constraint that is either enforced or not. Structure is documented below. -}
     , _constraint :: !(TF.Attr s P.Text)
@@ -9174,8 +9237,8 @@ data OrganizationPolicyResource s = OrganizationPolicyResource {
     {- ^ (Optional) Version of the Policy. Default version is 0. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OrganizationPolicyResource s) where
-    toHCL OrganizationPolicyResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceOrganizationPolicy s) where
+    toHCL ResourceOrganizationPolicy{..} = TF.inline $ catMaybes
         [ TF.assign "boolean_policy" <$> TF.attribute _boolean_policy
         , TF.assign "constraint" <$> TF.attribute _constraint
         , TF.assign "list_policy" <$> TF.attribute _list_policy
@@ -9183,71 +9246,202 @@ instance TF.ToHCL (OrganizationPolicyResource s) where
         , TF.assign "version" <$> TF.attribute _version
         ]
 
-instance P.HasBooleanPolicy (OrganizationPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasBooleanPolicy (ResourceOrganizationPolicy s) (TF.Attr s P.Text) where
     booleanPolicy =
-        lens (_boolean_policy :: OrganizationPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _boolean_policy = a } :: OrganizationPolicyResource s)
+        lens (_boolean_policy :: ResourceOrganizationPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _boolean_policy = a } :: ResourceOrganizationPolicy s)
 
-instance P.HasConstraint (OrganizationPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasConstraint (ResourceOrganizationPolicy s) (TF.Attr s P.Text) where
     constraint =
-        lens (_constraint :: OrganizationPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _constraint = a } :: OrganizationPolicyResource s)
+        lens (_constraint :: ResourceOrganizationPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _constraint = a } :: ResourceOrganizationPolicy s)
 
-instance P.HasListPolicy (OrganizationPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasListPolicy (ResourceOrganizationPolicy s) (TF.Attr s P.Text) where
     listPolicy =
-        lens (_list_policy :: OrganizationPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _list_policy = a } :: OrganizationPolicyResource s)
+        lens (_list_policy :: ResourceOrganizationPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _list_policy = a } :: ResourceOrganizationPolicy s)
 
-instance P.HasOrgId (OrganizationPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasOrgId (ResourceOrganizationPolicy s) (TF.Attr s P.Text) where
     orgId =
-        lens (_org_id :: OrganizationPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _org_id = a } :: OrganizationPolicyResource s)
+        lens (_org_id :: ResourceOrganizationPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _org_id = a } :: ResourceOrganizationPolicy s)
 
-instance P.HasVersion (OrganizationPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasVersion (ResourceOrganizationPolicy s) (TF.Attr s P.Text) where
     version =
-        lens (_version :: OrganizationPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _version = a } :: OrganizationPolicyResource s)
+        lens (_version :: ResourceOrganizationPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _version = a } :: ResourceOrganizationPolicy s)
 
-instance s ~ s' => P.HasComputedBooleanPolicy (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedBooleanPolicy =
-        (_boolean_policy :: OrganizationPolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBooleanPolicy (TF.Ref s' (ResourceOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeBooleanPolicy =
+        (_boolean_policy :: ResourceOrganizationPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedConstraint (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedConstraint =
-        (_constraint :: OrganizationPolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeConstraint (TF.Ref s' (ResourceOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeConstraint =
+        (_constraint :: ResourceOrganizationPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
 
-instance s ~ s' => P.HasComputedListPolicy (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedListPolicy =
-        (_list_policy :: OrganizationPolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeListPolicy (TF.Ref s' (ResourceOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeListPolicy =
+        (_list_policy :: ResourceOrganizationPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedOrgId =
-        (_org_id :: OrganizationPolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeOrgId (TF.Ref s' (ResourceOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeOrgId =
+        (_org_id :: ResourceOrganizationPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
+instance s ~ s' => P.HasComputeUpdateTime (TF.Ref s' (ResourceOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeUpdateTime x = TF.compute (TF.refKey x) "update_time"
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedVersion =
-        (_version :: OrganizationPolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeVersion (TF.Ref s' (ResourceOrganizationPolicy s)) (TF.Attr s P.Text) where
+    computeVersion =
+        (_version :: ResourceOrganizationPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-organizationPolicyResource :: TF.Resource P.Google (OrganizationPolicyResource s)
-organizationPolicyResource =
+resourceOrganizationPolicy :: TF.Resource P.Google (ResourceOrganizationPolicy s)
+resourceOrganizationPolicy =
     TF.newResource "google_organization_policy" $
-        OrganizationPolicyResource {
+        ResourceOrganizationPolicy {
               _boolean_policy = TF.Nil
             , _constraint = TF.Nil
             , _list_policy = TF.Nil
             , _org_id = TF.Nil
             , _version = TF.Nil
+            }
+
+{- | The @google_project@ Google resource.
+
+Allows creation and management of a Google Cloud Platform project. Projects
+created with this resource must be associated with an Organization. See the
+<https://cloud.google.com/resource-manager/docs/quickstarts> for more
+details. The service account used to run Terraform when creating a
+@google_project@ resource must have @roles/resourcemanager.projectCreator@ .
+See the <https://cloud.google.com/resource-manager/docs/access-control-org>
+doc for more information. Note that prior to 0.8.5, @google_project@
+functioned like a data source, meaning any project referenced by it had to
+be created and managed outside Terraform. As of 0.8.5, @google_project@
+functions like any other Terraform resource, with Terraform creating and
+managing the project. To replicate the old behavior, either:
+-}
+data ResourceProject s = ResourceProject {
+      _billing_account :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The alphanumeric ID of the billing account this project belongs to. The user or service account performing this operation with Terraform must have Billing Account Administrator privileges ( @roles/billing.admin@ ) in the organization. See <https://cloud.google.com/billing/v1/how-tos/access-control> for more details. -}
+    , _folder_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The numeric ID of the folder this project should be created under. Only one of @org_id@ or @folder_id@ may be specified. If the @folder_id@ is specified, then the project is created under the specified folder. Changing this forces the project to be migrated to the newly specified folder. -}
+    , _labels :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A set of key/value label pairs to assign to the project. -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The display name of the project. -}
+    , _org_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The numeric ID of the organization this project belongs to. Changing this forces a new project to be created.  Only one of @org_id@ or @folder_id@ may be specified. If the @org_id@ is specified then the project is created at the top level. Changing this forces the project to be migrated to the newly specified organization. -}
+    , _project_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The project ID. Changing this forces a new project to be created. -}
+    , _skip_delete :: !(TF.Attr s P.Text)
+    {- ^ (Optional) If true, the Terraform resource can be deleted without deleting the Project via the Google API. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceProject s) where
+    toHCL ResourceProject{..} = TF.inline $ catMaybes
+        [ TF.assign "billing_account" <$> TF.attribute _billing_account
+        , TF.assign "folder_id" <$> TF.attribute _folder_id
+        , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "org_id" <$> TF.attribute _org_id
+        , TF.assign "project_id" <$> TF.attribute _project_id
+        , TF.assign "skip_delete" <$> TF.attribute _skip_delete
+        ]
+
+instance P.HasBillingAccount (ResourceProject s) (TF.Attr s P.Text) where
+    billingAccount =
+        lens (_billing_account :: ResourceProject s -> TF.Attr s P.Text)
+             (\s a -> s { _billing_account = a } :: ResourceProject s)
+
+instance P.HasFolderId (ResourceProject s) (TF.Attr s P.Text) where
+    folderId =
+        lens (_folder_id :: ResourceProject s -> TF.Attr s P.Text)
+             (\s a -> s { _folder_id = a } :: ResourceProject s)
+
+instance P.HasLabels (ResourceProject s) (TF.Attr s P.Text) where
+    labels =
+        lens (_labels :: ResourceProject s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceProject s)
+
+instance P.HasName (ResourceProject s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ResourceProject s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceProject s)
+
+instance P.HasOrgId (ResourceProject s) (TF.Attr s P.Text) where
+    orgId =
+        lens (_org_id :: ResourceProject s -> TF.Attr s P.Text)
+             (\s a -> s { _org_id = a } :: ResourceProject s)
+
+instance P.HasProjectId (ResourceProject s) (TF.Attr s P.Text) where
+    projectId =
+        lens (_project_id :: ResourceProject s -> TF.Attr s P.Text)
+             (\s a -> s { _project_id = a } :: ResourceProject s)
+
+instance P.HasSkipDelete (ResourceProject s) (TF.Attr s P.Text) where
+    skipDelete =
+        lens (_skip_delete :: ResourceProject s -> TF.Attr s P.Text)
+             (\s a -> s { _skip_delete = a } :: ResourceProject s)
+
+instance s ~ s' => P.HasComputeBillingAccount (TF.Ref s' (ResourceProject s)) (TF.Attr s P.Text) where
+    computeBillingAccount =
+        (_billing_account :: ResourceProject s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeFolderId (TF.Ref s' (ResourceProject s)) (TF.Attr s P.Text) where
+    computeFolderId =
+        (_folder_id :: ResourceProject s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceProject s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceProject s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceProject s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceProject s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeNumber (TF.Ref s' (ResourceProject s)) (TF.Attr s P.Text) where
+    computeNumber x = TF.compute (TF.refKey x) "number"
+
+instance s ~ s' => P.HasComputeOrgId (TF.Ref s' (ResourceProject s)) (TF.Attr s P.Text) where
+    computeOrgId =
+        (_org_id :: ResourceProject s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputePolicyEtag (TF.Ref s' (ResourceProject s)) (TF.Attr s P.Text) where
+    computePolicyEtag x = TF.compute (TF.refKey x) "policy_etag"
+
+instance s ~ s' => P.HasComputeProjectId (TF.Ref s' (ResourceProject s)) (TF.Attr s P.Text) where
+    computeProjectId =
+        (_project_id :: ResourceProject s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeSkipDelete (TF.Ref s' (ResourceProject s)) (TF.Attr s P.Text) where
+    computeSkipDelete =
+        (_skip_delete :: ResourceProject s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourceProject :: TF.Resource P.Google (ResourceProject s)
+resourceProject =
+    TF.newResource "google_project" $
+        ResourceProject {
+              _billing_account = TF.Nil
+            , _folder_id = TF.Nil
+            , _labels = TF.Nil
+            , _name = TF.Nil
+            , _org_id = TF.Nil
+            , _project_id = TF.Nil
+            , _skip_delete = TF.Nil
             }
 
 {- | The @google_project_iam_binding@ Google resource.
@@ -9257,7 +9451,7 @@ existing Google Cloud Platform project. ~> Note: This resource must not be
 used in conjunction with @google_project_iam_policy@ or they will fight over
 what your policy should be.
 -}
-data ProjectIamBindingResource s = ProjectIamBindingResource {
+data ResourceProjectIamBinding s = ResourceProjectIamBinding {
       _members :: !(TF.Attr s P.Text)
     {- ^ (Required) - An array of identites that will be granted the privilege in the @role@ . Each entry can have one of the following values: -}
     , _project :: !(TF.Attr s P.Text)
@@ -9266,50 +9460,50 @@ data ProjectIamBindingResource s = ProjectIamBindingResource {
     {- ^ (Required) The role that should be applied. Only one @google_project_iam_binding@ can be used per role. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectIamBindingResource s) where
-    toHCL ProjectIamBindingResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceProjectIamBinding s) where
+    toHCL ResourceProjectIamBinding{..} = TF.inline $ catMaybes
         [ TF.assign "members" <$> TF.attribute _members
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "role" <$> TF.attribute _role
         ]
 
-instance P.HasMembers (ProjectIamBindingResource s) (TF.Attr s P.Text) where
+instance P.HasMembers (ResourceProjectIamBinding s) (TF.Attr s P.Text) where
     members =
-        lens (_members :: ProjectIamBindingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _members = a } :: ProjectIamBindingResource s)
+        lens (_members :: ResourceProjectIamBinding s -> TF.Attr s P.Text)
+             (\s a -> s { _members = a } :: ResourceProjectIamBinding s)
 
-instance P.HasProject (ProjectIamBindingResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceProjectIamBinding s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ProjectIamBindingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ProjectIamBindingResource s)
+        lens (_project :: ResourceProjectIamBinding s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceProjectIamBinding s)
 
-instance P.HasRole (ProjectIamBindingResource s) (TF.Attr s P.Text) where
+instance P.HasRole (ResourceProjectIamBinding s) (TF.Attr s P.Text) where
     role =
-        lens (_role :: ProjectIamBindingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: ProjectIamBindingResource s)
+        lens (_role :: ResourceProjectIamBinding s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: ResourceProjectIamBinding s)
 
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceProjectIamBinding s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
 
-instance s ~ s' => P.HasComputedMembers (TF.Ref s' (ProjectIamBindingResource s)) (TF.Attr s P.Text) where
-    computedMembers =
-        (_members :: ProjectIamBindingResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMembers (TF.Ref s' (ResourceProjectIamBinding s)) (TF.Attr s P.Text) where
+    computeMembers =
+        (_members :: ResourceProjectIamBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectIamBindingResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ProjectIamBindingResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceProjectIamBinding s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceProjectIamBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (ProjectIamBindingResource s)) (TF.Attr s P.Text) where
-    computedRole =
-        (_role :: ProjectIamBindingResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceProjectIamBinding s)) (TF.Attr s P.Text) where
+    computeRole =
+        (_role :: ResourceProjectIamBinding s -> TF.Attr s P.Text)
             . TF.refValue
 
-projectIamBindingResource :: TF.Resource P.Google (ProjectIamBindingResource s)
-projectIamBindingResource =
+resourceProjectIamBinding :: TF.Resource P.Google (ResourceProjectIamBinding s)
+resourceProjectIamBinding =
     TF.newResource "google_project_iam_binding" $
-        ProjectIamBindingResource {
+        ResourceProjectIamBinding {
               _members = TF.Nil
             , _project = TF.Nil
             , _role = TF.Nil
@@ -9322,7 +9516,7 @@ information see
 <https://cloud.google.com/iam/docs/understanding-custom-roles> and
 <https://cloud.google.com/iam/reference/rest/v1/projects.roles> .
 -}
-data ProjectIamCustomRoleResource s = ProjectIamCustomRoleResource {
+data ResourceProjectIamCustomRole s = ResourceProjectIamCustomRole {
       _deleted :: !(TF.Attr s P.Text)
     {- ^ (Optional) The current deleted state of the role. Defaults to @false@ . -}
     , _description :: !(TF.Attr s P.Text)
@@ -9339,8 +9533,8 @@ data ProjectIamCustomRoleResource s = ProjectIamCustomRoleResource {
     {- ^ (Required) A human-readable title for the role. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectIamCustomRoleResource s) where
-    toHCL ProjectIamCustomRoleResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceProjectIamCustomRole s) where
+    toHCL ResourceProjectIamCustomRole{..} = TF.inline $ catMaybes
         [ TF.assign "deleted" <$> TF.attribute _deleted
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "permissions" <$> TF.attribute _permissions
@@ -9350,80 +9544,80 @@ instance TF.ToHCL (ProjectIamCustomRoleResource s) where
         , TF.assign "title" <$> TF.attribute _title
         ]
 
-instance P.HasDeleted (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasDeleted (ResourceProjectIamCustomRole s) (TF.Attr s P.Text) where
     deleted =
-        lens (_deleted :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _deleted = a } :: ProjectIamCustomRoleResource s)
+        lens (_deleted :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _deleted = a } :: ResourceProjectIamCustomRole s)
 
-instance P.HasDescription (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceProjectIamCustomRole s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ProjectIamCustomRoleResource s)
+        lens (_description :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceProjectIamCustomRole s)
 
-instance P.HasPermissions (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasPermissions (ResourceProjectIamCustomRole s) (TF.Attr s P.Text) where
     permissions =
-        lens (_permissions :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _permissions = a } :: ProjectIamCustomRoleResource s)
+        lens (_permissions :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _permissions = a } :: ResourceProjectIamCustomRole s)
 
-instance P.HasProject (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceProjectIamCustomRole s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ProjectIamCustomRoleResource s)
+        lens (_project :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceProjectIamCustomRole s)
 
-instance P.HasRoleId (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasRoleId (ResourceProjectIamCustomRole s) (TF.Attr s P.Text) where
     roleId =
-        lens (_role_id :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role_id = a } :: ProjectIamCustomRoleResource s)
+        lens (_role_id :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _role_id = a } :: ResourceProjectIamCustomRole s)
 
-instance P.HasStage (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasStage (ResourceProjectIamCustomRole s) (TF.Attr s P.Text) where
     stage =
-        lens (_stage :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _stage = a } :: ProjectIamCustomRoleResource s)
+        lens (_stage :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _stage = a } :: ResourceProjectIamCustomRole s)
 
-instance P.HasTitle (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
+instance P.HasTitle (ResourceProjectIamCustomRole s) (TF.Attr s P.Text) where
     title =
-        lens (_title :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _title = a } :: ProjectIamCustomRoleResource s)
+        lens (_title :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
+             (\s a -> s { _title = a } :: ResourceProjectIamCustomRole s)
 
-instance s ~ s' => P.HasComputedDeleted (TF.Ref s' (ProjectIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedDeleted =
-        (_deleted :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDeleted (TF.Ref s' (ResourceProjectIamCustomRole s)) (TF.Attr s P.Text) where
+    computeDeleted =
+        (_deleted :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ProjectIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceProjectIamCustomRole s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (ProjectIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedPermissions =
-        (_permissions :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePermissions (TF.Ref s' (ResourceProjectIamCustomRole s)) (TF.Attr s P.Text) where
+    computePermissions =
+        (_permissions :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceProjectIamCustomRole s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ProjectIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedRoleId =
-        (_role_id :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRoleId (TF.Ref s' (ResourceProjectIamCustomRole s)) (TF.Attr s P.Text) where
+    computeRoleId =
+        (_role_id :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStage (TF.Ref s' (ProjectIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedStage =
-        (_stage :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeStage (TF.Ref s' (ResourceProjectIamCustomRole s)) (TF.Attr s P.Text) where
+    computeStage =
+        (_stage :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTitle (TF.Ref s' (ProjectIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedTitle =
-        (_title :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTitle (TF.Ref s' (ResourceProjectIamCustomRole s)) (TF.Attr s P.Text) where
+    computeTitle =
+        (_title :: ResourceProjectIamCustomRole s -> TF.Attr s P.Text)
             . TF.refValue
 
-projectIamCustomRoleResource :: TF.Resource P.Google (ProjectIamCustomRoleResource s)
-projectIamCustomRoleResource =
+resourceProjectIamCustomRole :: TF.Resource P.Google (ResourceProjectIamCustomRole s)
+resourceProjectIamCustomRole =
     TF.newResource "google_project_iam_custom_role" $
-        ProjectIamCustomRoleResource {
+        ResourceProjectIamCustomRole {
               _deleted = TF.Nil
             , _description = TF.Nil
             , _permissions = TF.Nil
@@ -9442,7 +9636,7 @@ Note: This resource must not be used in conjunction with
 be. Similarly, roles controlled by @google_project_iam_binding@ should not
 be assigned to using @google_project_iam_member@ .
 -}
-data ProjectIamMemberResource s = ProjectIamMemberResource {
+data ResourceProjectIamMember s = ResourceProjectIamMember {
       _member :: !(TF.Attr s P.Text)
     {- ^ (Required) The identity that will be granted the privilege in the @role@ . This field can have one of the following values: -}
     , _project :: !(TF.Attr s P.Text)
@@ -9451,50 +9645,50 @@ data ProjectIamMemberResource s = ProjectIamMemberResource {
     {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectIamMemberResource s) where
-    toHCL ProjectIamMemberResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceProjectIamMember s) where
+    toHCL ResourceProjectIamMember{..} = TF.inline $ catMaybes
         [ TF.assign "member" <$> TF.attribute _member
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "role" <$> TF.attribute _role
         ]
 
-instance P.HasMember (ProjectIamMemberResource s) (TF.Attr s P.Text) where
+instance P.HasMember (ResourceProjectIamMember s) (TF.Attr s P.Text) where
     member =
-        lens (_member :: ProjectIamMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _member = a } :: ProjectIamMemberResource s)
+        lens (_member :: ResourceProjectIamMember s -> TF.Attr s P.Text)
+             (\s a -> s { _member = a } :: ResourceProjectIamMember s)
 
-instance P.HasProject (ProjectIamMemberResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceProjectIamMember s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ProjectIamMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ProjectIamMemberResource s)
+        lens (_project :: ResourceProjectIamMember s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceProjectIamMember s)
 
-instance P.HasRole (ProjectIamMemberResource s) (TF.Attr s P.Text) where
+instance P.HasRole (ResourceProjectIamMember s) (TF.Attr s P.Text) where
     role =
-        lens (_role :: ProjectIamMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: ProjectIamMemberResource s)
+        lens (_role :: ResourceProjectIamMember s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: ResourceProjectIamMember s)
 
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceProjectIamMember s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
 
-instance s ~ s' => P.HasComputedMember (TF.Ref s' (ProjectIamMemberResource s)) (TF.Attr s P.Text) where
-    computedMember =
-        (_member :: ProjectIamMemberResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMember (TF.Ref s' (ResourceProjectIamMember s)) (TF.Attr s P.Text) where
+    computeMember =
+        (_member :: ResourceProjectIamMember s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectIamMemberResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ProjectIamMemberResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceProjectIamMember s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceProjectIamMember s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (ProjectIamMemberResource s)) (TF.Attr s P.Text) where
-    computedRole =
-        (_role :: ProjectIamMemberResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceProjectIamMember s)) (TF.Attr s P.Text) where
+    computeRole =
+        (_role :: ResourceProjectIamMember s -> TF.Attr s P.Text)
             . TF.refValue
 
-projectIamMemberResource :: TF.Resource P.Google (ProjectIamMemberResource s)
-projectIamMemberResource =
+resourceProjectIamMember :: TF.Resource P.Google (ResourceProjectIamMember s)
+resourceProjectIamMember =
     TF.newResource "google_project_iam_member" $
-        ProjectIamMemberResource {
+        ResourceProjectIamMember {
               _member = TF.Nil
             , _project = TF.Nil
             , _role = TF.Nil
@@ -9506,7 +9700,7 @@ Allows creation and management of an IAM policy for an existing Google Cloud
 Platform project. ~> Be careful! You can accidentally lock yourself out of
 your project using this resource. Proceed with caution.
 -}
-data ProjectIamPolicyResource s = ProjectIamPolicyResource {
+data ResourceProjectIamPolicy s = ResourceProjectIamPolicy {
       _authoritative :: !(TF.Attr s P.Text)
     {- ^ - (DEPRECATED) (Optional) A boolean value indicating if this policy should overwrite any existing IAM policy on the project. When set to true, any policies not in your config file will be removed . This can lock you out of your project until an Organization Administrator grants you access again, so please exercise caution. If this argument is @true@ and you want to delete the resource, you must set the @disable_project@ argument to @true@ , acknowledging that the project will be inaccessible to anyone but the Organization Admins, as it will no longer have an IAM policy. Rather than using this, you should use @google_project_iam_policy_binding@ and @google_project_iam_policy_member@ . -}
     , _disable_project :: !(TF.Attr s P.Text)
@@ -9517,199 +9711,68 @@ data ProjectIamPolicyResource s = ProjectIamPolicyResource {
     {- ^ (Required) The project ID. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectIamPolicyResource s) where
-    toHCL ProjectIamPolicyResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceProjectIamPolicy s) where
+    toHCL ResourceProjectIamPolicy{..} = TF.inline $ catMaybes
         [ TF.assign "authoritative" <$> TF.attribute _authoritative
         , TF.assign "disable_project" <$> TF.attribute _disable_project
         , TF.assign "policy_data" <$> TF.attribute _policy_data
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasAuthoritative (ProjectIamPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasAuthoritative (ResourceProjectIamPolicy s) (TF.Attr s P.Text) where
     authoritative =
-        lens (_authoritative :: ProjectIamPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _authoritative = a } :: ProjectIamPolicyResource s)
+        lens (_authoritative :: ResourceProjectIamPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _authoritative = a } :: ResourceProjectIamPolicy s)
 
-instance P.HasDisableProject (ProjectIamPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasDisableProject (ResourceProjectIamPolicy s) (TF.Attr s P.Text) where
     disableProject =
-        lens (_disable_project :: ProjectIamPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _disable_project = a } :: ProjectIamPolicyResource s)
+        lens (_disable_project :: ResourceProjectIamPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _disable_project = a } :: ResourceProjectIamPolicy s)
 
-instance P.HasPolicyData (ProjectIamPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasPolicyData (ResourceProjectIamPolicy s) (TF.Attr s P.Text) where
     policyData =
-        lens (_policy_data :: ProjectIamPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _policy_data = a } :: ProjectIamPolicyResource s)
+        lens (_policy_data :: ResourceProjectIamPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _policy_data = a } :: ResourceProjectIamPolicy s)
 
-instance P.HasProject (ProjectIamPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceProjectIamPolicy s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ProjectIamPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ProjectIamPolicyResource s)
+        lens (_project :: ResourceProjectIamPolicy s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceProjectIamPolicy s)
 
-instance s ~ s' => P.HasComputedAuthoritative (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedAuthoritative =
-        (_authoritative :: ProjectIamPolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAuthoritative (TF.Ref s' (ResourceProjectIamPolicy s)) (TF.Attr s P.Text) where
+    computeAuthoritative =
+        (_authoritative :: ResourceProjectIamPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisableProject (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedDisableProject =
-        (_disable_project :: ProjectIamPolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDisableProject (TF.Ref s' (ResourceProjectIamPolicy s)) (TF.Attr s P.Text) where
+    computeDisableProject =
+        (_disable_project :: ResourceProjectIamPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+instance s ~ s' => P.HasComputeEtag (TF.Ref s' (ResourceProjectIamPolicy s)) (TF.Attr s P.Text) where
+    computeEtag x = TF.compute (TF.refKey x) "etag"
 
-instance s ~ s' => P.HasComputedPolicyData (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedPolicyData =
-        (_policy_data :: ProjectIamPolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePolicyData (TF.Ref s' (ResourceProjectIamPolicy s)) (TF.Attr s P.Text) where
+    computePolicyData =
+        (_policy_data :: ResourceProjectIamPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ProjectIamPolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceProjectIamPolicy s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceProjectIamPolicy s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRestorePolicy (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedRestorePolicy x = TF.compute (TF.refKey x) "restore_policy"
+instance s ~ s' => P.HasComputeRestorePolicy (TF.Ref s' (ResourceProjectIamPolicy s)) (TF.Attr s P.Text) where
+    computeRestorePolicy x = TF.compute (TF.refKey x) "restore_policy"
 
-projectIamPolicyResource :: TF.Resource P.Google (ProjectIamPolicyResource s)
-projectIamPolicyResource =
+resourceProjectIamPolicy :: TF.Resource P.Google (ResourceProjectIamPolicy s)
+resourceProjectIamPolicy =
     TF.newResource "google_project_iam_policy" $
-        ProjectIamPolicyResource {
+        ResourceProjectIamPolicy {
               _authoritative = TF.Nil
             , _disable_project = TF.Nil
             , _policy_data = TF.Nil
             , _project = TF.Nil
-            }
-
-{- | The @google_project@ Google resource.
-
-Allows creation and management of a Google Cloud Platform project. Projects
-created with this resource must be associated with an Organization. See the
-<https://cloud.google.com/resource-manager/docs/quickstarts> for more
-details. The service account used to run Terraform when creating a
-@google_project@ resource must have @roles/resourcemanager.projectCreator@ .
-See the <https://cloud.google.com/resource-manager/docs/access-control-org>
-doc for more information. Note that prior to 0.8.5, @google_project@
-functioned like a data source, meaning any project referenced by it had to
-be created and managed outside Terraform. As of 0.8.5, @google_project@
-functions like any other Terraform resource, with Terraform creating and
-managing the project. To replicate the old behavior, either:
--}
-data ProjectResource s = ProjectResource {
-      _billing_account :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The alphanumeric ID of the billing account this project belongs to. The user or service account performing this operation with Terraform must have Billing Account Administrator privileges ( @roles/billing.admin@ ) in the organization. See <https://cloud.google.com/billing/v1/how-tos/access-control> for more details. -}
-    , _folder_id :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The numeric ID of the folder this project should be created under. Only one of @org_id@ or @folder_id@ may be specified. If the @folder_id@ is specified, then the project is created under the specified folder. Changing this forces the project to be migrated to the newly specified folder. -}
-    , _labels :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A set of key/value label pairs to assign to the project. -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The display name of the project. -}
-    , _org_id :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The numeric ID of the organization this project belongs to. Changing this forces a new project to be created.  Only one of @org_id@ or @folder_id@ may be specified. If the @org_id@ is specified then the project is created at the top level. Changing this forces the project to be migrated to the newly specified organization. -}
-    , _project_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The project ID. Changing this forces a new project to be created. -}
-    , _skip_delete :: !(TF.Attr s P.Text)
-    {- ^ (Optional) If true, the Terraform resource can be deleted without deleting the Project via the Google API. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ProjectResource s) where
-    toHCL ProjectResource{..} = TF.inline $ catMaybes
-        [ TF.assign "billing_account" <$> TF.attribute _billing_account
-        , TF.assign "folder_id" <$> TF.attribute _folder_id
-        , TF.assign "labels" <$> TF.attribute _labels
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "org_id" <$> TF.attribute _org_id
-        , TF.assign "project_id" <$> TF.attribute _project_id
-        , TF.assign "skip_delete" <$> TF.attribute _skip_delete
-        ]
-
-instance P.HasBillingAccount (ProjectResource s) (TF.Attr s P.Text) where
-    billingAccount =
-        lens (_billing_account :: ProjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _billing_account = a } :: ProjectResource s)
-
-instance P.HasFolderId (ProjectResource s) (TF.Attr s P.Text) where
-    folderId =
-        lens (_folder_id :: ProjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _folder_id = a } :: ProjectResource s)
-
-instance P.HasLabels (ProjectResource s) (TF.Attr s P.Text) where
-    labels =
-        lens (_labels :: ProjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: ProjectResource s)
-
-instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ProjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ProjectResource s)
-
-instance P.HasOrgId (ProjectResource s) (TF.Attr s P.Text) where
-    orgId =
-        lens (_org_id :: ProjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _org_id = a } :: ProjectResource s)
-
-instance P.HasProjectId (ProjectResource s) (TF.Attr s P.Text) where
-    projectId =
-        lens (_project_id :: ProjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: ProjectResource s)
-
-instance P.HasSkipDelete (ProjectResource s) (TF.Attr s P.Text) where
-    skipDelete =
-        lens (_skip_delete :: ProjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _skip_delete = a } :: ProjectResource s)
-
-instance s ~ s' => P.HasComputedBillingAccount (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedBillingAccount =
-        (_billing_account :: ProjectResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFolderId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedFolderId =
-        (_folder_id :: ProjectResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: ProjectResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ProjectResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNumber (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedNumber x = TF.compute (TF.refKey x) "number"
-
-instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedOrgId =
-        (_org_id :: ProjectResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPolicyEtag (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedPolicyEtag x = TF.compute (TF.refKey x) "policy_etag"
-
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedProjectId =
-        (_project_id :: ProjectResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSkipDelete (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedSkipDelete =
-        (_skip_delete :: ProjectResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-projectResource :: TF.Resource P.Google (ProjectResource s)
-projectResource =
-    TF.newResource "google_project" $
-        ProjectResource {
-              _billing_account = TF.Nil
-            , _folder_id = TF.Nil
-            , _labels = TF.Nil
-            , _name = TF.Nil
-            , _org_id = TF.Nil
-            , _project_id = TF.Nil
-            , _skip_delete = TF.Nil
             }
 
 {- | The @google_project_service@ Google resource.
@@ -9721,7 +9784,7 @@ service-management list@ . ~> Note: This resource must not be used in
 conjunction with @google_project_services@ or they will fight over which
 services should be enabled.
 -}
-data ProjectServiceResource s = ProjectServiceResource {
+data ResourceProjectService s = ResourceProjectService {
       _disable_on_destroy :: !(TF.Attr s P.Text)
     {- ^ (Optional) If true, disable the service when the terraform resource is destroyed.  Defaults to true.  May be useful in the event that a project is long-lived but the infrastructure running in that project changes frequently. -}
     , _project :: !(TF.Attr s P.Text)
@@ -9730,47 +9793,47 @@ data ProjectServiceResource s = ProjectServiceResource {
     {- ^ (Required) The service to enable. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectServiceResource s) where
-    toHCL ProjectServiceResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceProjectService s) where
+    toHCL ResourceProjectService{..} = TF.inline $ catMaybes
         [ TF.assign "disable_on_destroy" <$> TF.attribute _disable_on_destroy
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "service" <$> TF.attribute _service
         ]
 
-instance P.HasDisableOnDestroy (ProjectServiceResource s) (TF.Attr s P.Text) where
+instance P.HasDisableOnDestroy (ResourceProjectService s) (TF.Attr s P.Text) where
     disableOnDestroy =
-        lens (_disable_on_destroy :: ProjectServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _disable_on_destroy = a } :: ProjectServiceResource s)
+        lens (_disable_on_destroy :: ResourceProjectService s -> TF.Attr s P.Text)
+             (\s a -> s { _disable_on_destroy = a } :: ResourceProjectService s)
 
-instance P.HasProject (ProjectServiceResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceProjectService s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ProjectServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ProjectServiceResource s)
+        lens (_project :: ResourceProjectService s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceProjectService s)
 
-instance P.HasService (ProjectServiceResource s) (TF.Attr s P.Text) where
+instance P.HasService (ResourceProjectService s) (TF.Attr s P.Text) where
     service =
-        lens (_service :: ProjectServiceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _service = a } :: ProjectServiceResource s)
+        lens (_service :: ResourceProjectService s -> TF.Attr s P.Text)
+             (\s a -> s { _service = a } :: ResourceProjectService s)
 
-instance s ~ s' => P.HasComputedDisableOnDestroy (TF.Ref s' (ProjectServiceResource s)) (TF.Attr s P.Text) where
-    computedDisableOnDestroy =
-        (_disable_on_destroy :: ProjectServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDisableOnDestroy (TF.Ref s' (ResourceProjectService s)) (TF.Attr s P.Text) where
+    computeDisableOnDestroy =
+        (_disable_on_destroy :: ResourceProjectService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectServiceResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ProjectServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceProjectService s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceProjectService s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedService (TF.Ref s' (ProjectServiceResource s)) (TF.Attr s P.Text) where
-    computedService =
-        (_service :: ProjectServiceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeService (TF.Ref s' (ResourceProjectService s)) (TF.Attr s P.Text) where
+    computeService =
+        (_service :: ResourceProjectService s -> TF.Attr s P.Text)
             . TF.refValue
 
-projectServiceResource :: TF.Resource P.Google (ProjectServiceResource s)
-projectServiceResource =
+resourceProjectService :: TF.Resource P.Google (ResourceProjectService s)
+resourceProjectService =
     TF.newResource "google_project_service" $
-        ProjectServiceResource {
+        ResourceProjectService {
               _disable_on_destroy = TF.Nil
             , _project = TF.Nil
             , _service = TF.Nil
@@ -9787,43 +9850,43 @@ authoritative source on which APIs are enabled, which can lead to conflicts
 when certain APIs or actions enable other APIs. To just ensure that a
 specific API is enabled, use the <google_project_service.html> resource.
 -}
-data ProjectServicesResource s = ProjectServicesResource {
+data ResourceProjectServices s = ResourceProjectServices {
       _project :: !(TF.Attr s P.Text)
     {- ^ (Required) The project ID. Changing this forces Terraform to attempt to disable all previously managed API services in the previous project. -}
     , _services :: !(TF.Attr s P.Text)
     {- ^ (Required) The list of services that are enabled. Supports update. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectServicesResource s) where
-    toHCL ProjectServicesResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceProjectServices s) where
+    toHCL ResourceProjectServices{..} = TF.inline $ catMaybes
         [ TF.assign "project" <$> TF.attribute _project
         , TF.assign "services" <$> TF.attribute _services
         ]
 
-instance P.HasProject (ProjectServicesResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceProjectServices s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ProjectServicesResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ProjectServicesResource s)
+        lens (_project :: ResourceProjectServices s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceProjectServices s)
 
-instance P.HasServices (ProjectServicesResource s) (TF.Attr s P.Text) where
+instance P.HasServices (ResourceProjectServices s) (TF.Attr s P.Text) where
     services =
-        lens (_services :: ProjectServicesResource s -> TF.Attr s P.Text)
-             (\s a -> s { _services = a } :: ProjectServicesResource s)
+        lens (_services :: ResourceProjectServices s -> TF.Attr s P.Text)
+             (\s a -> s { _services = a } :: ResourceProjectServices s)
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectServicesResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ProjectServicesResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceProjectServices s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceProjectServices s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedServices (TF.Ref s' (ProjectServicesResource s)) (TF.Attr s P.Text) where
-    computedServices =
-        (_services :: ProjectServicesResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeServices (TF.Ref s' (ResourceProjectServices s)) (TF.Attr s P.Text) where
+    computeServices =
+        (_services :: ResourceProjectServices s -> TF.Attr s P.Text)
             . TF.refValue
 
-projectServicesResource :: TF.Resource P.Google (ProjectServicesResource s)
-projectServicesResource =
+resourceProjectServices :: TF.Resource P.Google (ResourceProjectServices s)
+resourceProjectServices =
     TF.newResource "google_project_services" $
-        ProjectServicesResource {
+        ResourceProjectServices {
               _project = TF.Nil
             , _services = TF.Nil
             }
@@ -9838,7 +9901,7 @@ details, the
 <https://cloud.google.com/compute/docs/reference/rest/beta/projects/setUsageExportBucket>
 .
 -}
-data ProjectUsageExportBucketResource s = ProjectUsageExportBucketResource {
+data ResourceProjectUsageExportBucket s = ResourceProjectUsageExportBucket {
       _bucket_name :: !(TF.Attr s P.Text)
     {- ^ : (Required) The bucket to store reports in. -}
     , _prefix :: !(TF.Attr s P.Text)
@@ -9847,47 +9910,47 @@ data ProjectUsageExportBucketResource s = ProjectUsageExportBucketResource {
     {- ^ : (Required) The project to set the export bucket on. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectUsageExportBucketResource s) where
-    toHCL ProjectUsageExportBucketResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceProjectUsageExportBucket s) where
+    toHCL ResourceProjectUsageExportBucket{..} = TF.inline $ catMaybes
         [ TF.assign "bucket_name" <$> TF.attribute _bucket_name
         , TF.assign "prefix" <$> TF.attribute _prefix
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasBucketName (ProjectUsageExportBucketResource s) (TF.Attr s P.Text) where
+instance P.HasBucketName (ResourceProjectUsageExportBucket s) (TF.Attr s P.Text) where
     bucketName =
-        lens (_bucket_name :: ProjectUsageExportBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _bucket_name = a } :: ProjectUsageExportBucketResource s)
+        lens (_bucket_name :: ResourceProjectUsageExportBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _bucket_name = a } :: ResourceProjectUsageExportBucket s)
 
-instance P.HasPrefix (ProjectUsageExportBucketResource s) (TF.Attr s P.Text) where
+instance P.HasPrefix (ResourceProjectUsageExportBucket s) (TF.Attr s P.Text) where
     prefix =
-        lens (_prefix :: ProjectUsageExportBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _prefix = a } :: ProjectUsageExportBucketResource s)
+        lens (_prefix :: ResourceProjectUsageExportBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _prefix = a } :: ResourceProjectUsageExportBucket s)
 
-instance P.HasProject (ProjectUsageExportBucketResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceProjectUsageExportBucket s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ProjectUsageExportBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ProjectUsageExportBucketResource s)
+        lens (_project :: ResourceProjectUsageExportBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceProjectUsageExportBucket s)
 
-instance s ~ s' => P.HasComputedBucketName (TF.Ref s' (ProjectUsageExportBucketResource s)) (TF.Attr s P.Text) where
-    computedBucketName =
-        (_bucket_name :: ProjectUsageExportBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBucketName (TF.Ref s' (ResourceProjectUsageExportBucket s)) (TF.Attr s P.Text) where
+    computeBucketName =
+        (_bucket_name :: ResourceProjectUsageExportBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrefix (TF.Ref s' (ProjectUsageExportBucketResource s)) (TF.Attr s P.Text) where
-    computedPrefix =
-        (_prefix :: ProjectUsageExportBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePrefix (TF.Ref s' (ResourceProjectUsageExportBucket s)) (TF.Attr s P.Text) where
+    computePrefix =
+        (_prefix :: ResourceProjectUsageExportBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectUsageExportBucketResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ProjectUsageExportBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceProjectUsageExportBucket s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceProjectUsageExportBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-projectUsageExportBucketResource :: TF.Resource P.Google (ProjectUsageExportBucketResource s)
-projectUsageExportBucketResource =
+resourceProjectUsageExportBucket :: TF.Resource P.Google (ResourceProjectUsageExportBucket s)
+resourceProjectUsageExportBucket =
     TF.newResource "google_project_usage_export_bucket" $
-        ProjectUsageExportBucketResource {
+        ResourceProjectUsageExportBucket {
               _bucket_name = TF.Nil
             , _prefix = TF.Nil
             , _project = TF.Nil
@@ -9900,7 +9963,7 @@ information see <https://cloud.google.com/pubsub/docs> and
 <https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions>
 .
 -}
-data PubsubSubscriptionResource s = PubsubSubscriptionResource {
+data ResourcePubsubSubscription s = ResourcePubsubSubscription {
       _ack_deadline_seconds :: !(TF.Attr s P.Text)
     {- ^ (Optional) The maximum number of seconds a subscriber has to acknowledge a received message, otherwise the message is redelivered. Changing this forces a new resource to be created. -}
     , _name :: !(TF.Attr s P.Text)
@@ -9913,8 +9976,8 @@ data PubsubSubscriptionResource s = PubsubSubscriptionResource {
     {- ^ (Required) The topic name or id to bind this subscription to, required by pubsub. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PubsubSubscriptionResource s) where
-    toHCL PubsubSubscriptionResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourcePubsubSubscription s) where
+    toHCL ResourcePubsubSubscription{..} = TF.inline $ catMaybes
         [ TF.assign "ack_deadline_seconds" <$> TF.attribute _ack_deadline_seconds
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -9922,63 +9985,63 @@ instance TF.ToHCL (PubsubSubscriptionResource s) where
         , TF.assign "topic" <$> TF.attribute _topic
         ]
 
-instance P.HasAckDeadlineSeconds (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
+instance P.HasAckDeadlineSeconds (ResourcePubsubSubscription s) (TF.Attr s P.Text) where
     ackDeadlineSeconds =
-        lens (_ack_deadline_seconds :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ack_deadline_seconds = a } :: PubsubSubscriptionResource s)
+        lens (_ack_deadline_seconds :: ResourcePubsubSubscription s -> TF.Attr s P.Text)
+             (\s a -> s { _ack_deadline_seconds = a } :: ResourcePubsubSubscription s)
 
-instance P.HasName (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourcePubsubSubscription s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: PubsubSubscriptionResource s)
+        lens (_name :: ResourcePubsubSubscription s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourcePubsubSubscription s)
 
-instance P.HasProject (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourcePubsubSubscription s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: PubsubSubscriptionResource s)
+        lens (_project :: ResourcePubsubSubscription s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourcePubsubSubscription s)
 
-instance P.HasPushConfig (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
+instance P.HasPushConfig (ResourcePubsubSubscription s) (TF.Attr s P.Text) where
     pushConfig =
-        lens (_push_config :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _push_config = a } :: PubsubSubscriptionResource s)
+        lens (_push_config :: ResourcePubsubSubscription s -> TF.Attr s P.Text)
+             (\s a -> s { _push_config = a } :: ResourcePubsubSubscription s)
 
-instance P.HasTopic (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
+instance P.HasTopic (ResourcePubsubSubscription s) (TF.Attr s P.Text) where
     topic =
-        lens (_topic :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _topic = a } :: PubsubSubscriptionResource s)
+        lens (_topic :: ResourcePubsubSubscription s -> TF.Attr s P.Text)
+             (\s a -> s { _topic = a } :: ResourcePubsubSubscription s)
 
-instance s ~ s' => P.HasComputedAckDeadlineSeconds (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedAckDeadlineSeconds =
-        (_ack_deadline_seconds :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAckDeadlineSeconds (TF.Ref s' (ResourcePubsubSubscription s)) (TF.Attr s P.Text) where
+    computeAckDeadlineSeconds =
+        (_ack_deadline_seconds :: ResourcePubsubSubscription s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourcePubsubSubscription s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourcePubsubSubscription s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedPath x = TF.compute (TF.refKey x) "path"
+instance s ~ s' => P.HasComputePath (TF.Ref s' (ResourcePubsubSubscription s)) (TF.Attr s P.Text) where
+    computePath x = TF.compute (TF.refKey x) "path"
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourcePubsubSubscription s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourcePubsubSubscription s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPushConfig (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedPushConfig =
-        (_push_config :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePushConfig (TF.Ref s' (ResourcePubsubSubscription s)) (TF.Attr s P.Text) where
+    computePushConfig =
+        (_push_config :: ResourcePubsubSubscription s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTopic (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedTopic =
-        (_topic :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTopic (TF.Ref s' (ResourcePubsubSubscription s)) (TF.Attr s P.Text) where
+    computeTopic =
+        (_topic :: ResourcePubsubSubscription s -> TF.Attr s P.Text)
             . TF.refValue
 
-pubsubSubscriptionResource :: TF.Resource P.Google (PubsubSubscriptionResource s)
-pubsubSubscriptionResource =
+resourcePubsubSubscription :: TF.Resource P.Google (ResourcePubsubSubscription s)
+resourcePubsubSubscription =
     TF.newResource "google_pubsub_subscription" $
-        PubsubSubscriptionResource {
+        ResourcePubsubSubscription {
               _ack_deadline_seconds = TF.Nil
             , _name = TF.Nil
             , _project = TF.Nil
@@ -9992,43 +10055,43 @@ Creates a topic in Google's pubsub queueing system. For more information see
 <https://cloud.google.com/pubsub/docs> and
 <https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics> .
 -}
-data PubsubTopicResource s = PubsubTopicResource {
+data ResourcePubsubTopic s = ResourcePubsubTopic {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) A unique name for the resource, required by pubsub. Changing this forces a new resource to be created. -}
     , _project :: !(TF.Attr s P.Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PubsubTopicResource s) where
-    toHCL PubsubTopicResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourcePubsubTopic s) where
+    toHCL ResourcePubsubTopic{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasName (PubsubTopicResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourcePubsubTopic s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: PubsubTopicResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: PubsubTopicResource s)
+        lens (_name :: ResourcePubsubTopic s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourcePubsubTopic s)
 
-instance P.HasProject (PubsubTopicResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourcePubsubTopic s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: PubsubTopicResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: PubsubTopicResource s)
+        lens (_project :: ResourcePubsubTopic s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourcePubsubTopic s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (PubsubTopicResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: PubsubTopicResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourcePubsubTopic s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourcePubsubTopic s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubTopicResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: PubsubTopicResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourcePubsubTopic s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourcePubsubTopic s -> TF.Attr s P.Text)
             . TF.refValue
 
-pubsubTopicResource :: TF.Resource P.Google (PubsubTopicResource s)
-pubsubTopicResource =
+resourcePubsubTopic :: TF.Resource P.Google (ResourcePubsubTopic s)
+resourcePubsubTopic =
     TF.newResource "google_pubsub_topic" $
-        PubsubTopicResource {
+        ResourcePubsubTopic {
               _name = TF.Nil
             , _project = TF.Nil
             }
@@ -10040,7 +10103,7 @@ information see <https://cloud.google.com/iot/docs/> and
 <https://cloud.google.com/iot/docs/reference/rest/v1/projects.locations.registries>
 .
 -}
-data RegistryResource s = RegistryResource {
+data ResourceRegistry s = ResourceRegistry {
       _credentials :: !(TF.Attr s P.Text)
     {- ^ (Optional) List of public key certificates to authenticate devices. Structure is documented below. -}
     , _event_notification_config :: !(TF.Attr s P.Text)
@@ -10059,8 +10122,8 @@ data RegistryResource s = RegistryResource {
     {- ^ (Optional) A PubSub topic to publish device state updates. Structure is documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RegistryResource s) where
-    toHCL RegistryResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceRegistry s) where
+    toHCL ResourceRegistry{..} = TF.inline $ catMaybes
         [ TF.assign "credentials" <$> TF.attribute _credentials
         , TF.assign "event_notification_config" <$> TF.attribute _event_notification_config
         , TF.assign "http_config" <$> TF.attribute _http_config
@@ -10071,90 +10134,90 @@ instance TF.ToHCL (RegistryResource s) where
         , TF.assign "state_notification_config" <$> TF.attribute _state_notification_config
         ]
 
-instance P.HasCredentials (RegistryResource s) (TF.Attr s P.Text) where
+instance P.HasCredentials (ResourceRegistry s) (TF.Attr s P.Text) where
     credentials =
-        lens (_credentials :: RegistryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _credentials = a } :: RegistryResource s)
+        lens (_credentials :: ResourceRegistry s -> TF.Attr s P.Text)
+             (\s a -> s { _credentials = a } :: ResourceRegistry s)
 
-instance P.HasEventNotificationConfig (RegistryResource s) (TF.Attr s P.Text) where
+instance P.HasEventNotificationConfig (ResourceRegistry s) (TF.Attr s P.Text) where
     eventNotificationConfig =
-        lens (_event_notification_config :: RegistryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _event_notification_config = a } :: RegistryResource s)
+        lens (_event_notification_config :: ResourceRegistry s -> TF.Attr s P.Text)
+             (\s a -> s { _event_notification_config = a } :: ResourceRegistry s)
 
-instance P.HasHttpConfig (RegistryResource s) (TF.Attr s P.Text) where
+instance P.HasHttpConfig (ResourceRegistry s) (TF.Attr s P.Text) where
     httpConfig =
-        lens (_http_config :: RegistryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _http_config = a } :: RegistryResource s)
+        lens (_http_config :: ResourceRegistry s -> TF.Attr s P.Text)
+             (\s a -> s { _http_config = a } :: ResourceRegistry s)
 
-instance P.HasMqttConfig (RegistryResource s) (TF.Attr s P.Text) where
+instance P.HasMqttConfig (ResourceRegistry s) (TF.Attr s P.Text) where
     mqttConfig =
-        lens (_mqtt_config :: RegistryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _mqtt_config = a } :: RegistryResource s)
+        lens (_mqtt_config :: ResourceRegistry s -> TF.Attr s P.Text)
+             (\s a -> s { _mqtt_config = a } :: ResourceRegistry s)
 
-instance P.HasName (RegistryResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceRegistry s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: RegistryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: RegistryResource s)
+        lens (_name :: ResourceRegistry s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceRegistry s)
 
-instance P.HasProject (RegistryResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceRegistry s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: RegistryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: RegistryResource s)
+        lens (_project :: ResourceRegistry s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceRegistry s)
 
-instance P.HasRegion (RegistryResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceRegistry s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: RegistryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: RegistryResource s)
+        lens (_region :: ResourceRegistry s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceRegistry s)
 
-instance P.HasStateNotificationConfig (RegistryResource s) (TF.Attr s P.Text) where
+instance P.HasStateNotificationConfig (ResourceRegistry s) (TF.Attr s P.Text) where
     stateNotificationConfig =
-        lens (_state_notification_config :: RegistryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _state_notification_config = a } :: RegistryResource s)
+        lens (_state_notification_config :: ResourceRegistry s -> TF.Attr s P.Text)
+             (\s a -> s { _state_notification_config = a } :: ResourceRegistry s)
 
-instance s ~ s' => P.HasComputedCredentials (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
-    computedCredentials =
-        (_credentials :: RegistryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCredentials (TF.Ref s' (ResourceRegistry s)) (TF.Attr s P.Text) where
+    computeCredentials =
+        (_credentials :: ResourceRegistry s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEventNotificationConfig (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
-    computedEventNotificationConfig =
-        (_event_notification_config :: RegistryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEventNotificationConfig (TF.Ref s' (ResourceRegistry s)) (TF.Attr s P.Text) where
+    computeEventNotificationConfig =
+        (_event_notification_config :: ResourceRegistry s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHttpConfig (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
-    computedHttpConfig =
-        (_http_config :: RegistryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHttpConfig (TF.Ref s' (ResourceRegistry s)) (TF.Attr s P.Text) where
+    computeHttpConfig =
+        (_http_config :: ResourceRegistry s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMqttConfig (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
-    computedMqttConfig =
-        (_mqtt_config :: RegistryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMqttConfig (TF.Ref s' (ResourceRegistry s)) (TF.Attr s P.Text) where
+    computeMqttConfig =
+        (_mqtt_config :: ResourceRegistry s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: RegistryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRegistry s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceRegistry s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: RegistryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceRegistry s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceRegistry s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: RegistryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceRegistry s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceRegistry s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStateNotificationConfig (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
-    computedStateNotificationConfig =
-        (_state_notification_config :: RegistryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeStateNotificationConfig (TF.Ref s' (ResourceRegistry s)) (TF.Attr s P.Text) where
+    computeStateNotificationConfig =
+        (_state_notification_config :: ResourceRegistry s -> TF.Attr s P.Text)
             . TF.refValue
 
-registryResource :: TF.Resource P.Google (RegistryResource s)
-registryResource =
+resourceRegistry :: TF.Resource P.Google (ResourceRegistry s)
+resourceRegistry =
     TF.newResource "google\cloudiot_registry" $
-        RegistryResource {
+        ResourceRegistry {
               _credentials = TF.Nil
             , _event_notification_config = TF.Nil
             , _http_config = TF.Nil
@@ -10165,69 +10228,6 @@ registryResource =
             , _state_notification_config = TF.Nil
             }
 
-{- | The @IAMpolicyforGooglestoragebucket@ Google resource.
-
-Two different resources help you manage your IAM policy for storage bucket.
-Each of these resources serves a different use case:
--}
-data Resource s = Resource {
-      _bucket :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the bucket it applies to. -}
-    , _members :: !(TF.Attr s P.Text)
-    {- ^ (Required) Identities that will be granted the privilege in @role@ . Each entry can have one of the following values: -}
-    , _role :: !(TF.Attr s P.Text)
-    {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (Resource s) where
-    toHCL Resource{..} = TF.inline $ catMaybes
-        [ TF.assign "bucket" <$> TF.attribute _bucket
-        , TF.assign "member/members" <$> TF.attribute _members
-        , TF.assign "role" <$> TF.attribute _role
-        ]
-
-instance P.HasBucket (Resource s) (TF.Attr s P.Text) where
-    bucket =
-        lens (_bucket :: Resource s -> TF.Attr s P.Text)
-             (\s a -> s { _bucket = a } :: Resource s)
-
-instance P.HasMembers (Resource s) (TF.Attr s P.Text) where
-    members =
-        lens (_members :: Resource s -> TF.Attr s P.Text)
-             (\s a -> s { _members = a } :: Resource s)
-
-instance P.HasRole (Resource s) (TF.Attr s P.Text) where
-    role =
-        lens (_role :: Resource s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: Resource s)
-
-instance s ~ s' => P.HasComputedBucket (TF.Ref s' (Resource s)) (TF.Attr s P.Text) where
-    computedBucket =
-        (_bucket :: Resource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (Resource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
-instance s ~ s' => P.HasComputedMembers (TF.Ref s' (Resource s)) (TF.Attr s P.Text) where
-    computedMembers =
-        (_members :: Resource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (Resource s)) (TF.Attr s P.Text) where
-    computedRole =
-        (_role :: Resource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-resource :: TF.Resource P.Google (Resource s)
-resource =
-    TF.newResource "IAMpolicyforGooglestoragebucket" $
-        Resource {
-              _bucket = TF.Nil
-            , _members = TF.Nil
-            , _role = TF.Nil
-            }
-
 {- | The @google_runtimeconfig_config@ Google resource.
 
 Manages a RuntimeConfig resource in Google Cloud. For more information, see
@@ -10236,7 +10236,7 @@ the
 <https://cloud.google.com/deployment-manager/runtime-configurator/reference/rest/>
 .
 -}
-data RuntimeconfigConfigResource s = RuntimeconfigConfigResource {
+data ResourceRuntimeconfigConfig s = ResourceRuntimeconfigConfig {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) The description to associate with the runtime config. -}
     , _name :: !(TF.Attr s P.Text)
@@ -10245,47 +10245,47 @@ data RuntimeconfigConfigResource s = RuntimeconfigConfigResource {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RuntimeconfigConfigResource s) where
-    toHCL RuntimeconfigConfigResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceRuntimeconfigConfig s) where
+    toHCL ResourceRuntimeconfigConfig{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasDescription (RuntimeconfigConfigResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceRuntimeconfigConfig s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: RuntimeconfigConfigResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: RuntimeconfigConfigResource s)
+        lens (_description :: ResourceRuntimeconfigConfig s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceRuntimeconfigConfig s)
 
-instance P.HasName (RuntimeconfigConfigResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceRuntimeconfigConfig s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: RuntimeconfigConfigResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: RuntimeconfigConfigResource s)
+        lens (_name :: ResourceRuntimeconfigConfig s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceRuntimeconfigConfig s)
 
-instance P.HasProject (RuntimeconfigConfigResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceRuntimeconfigConfig s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: RuntimeconfigConfigResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: RuntimeconfigConfigResource s)
+        lens (_project :: ResourceRuntimeconfigConfig s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceRuntimeconfigConfig s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RuntimeconfigConfigResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: RuntimeconfigConfigResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceRuntimeconfigConfig s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceRuntimeconfigConfig s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (RuntimeconfigConfigResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: RuntimeconfigConfigResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRuntimeconfigConfig s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceRuntimeconfigConfig s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (RuntimeconfigConfigResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: RuntimeconfigConfigResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceRuntimeconfigConfig s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceRuntimeconfigConfig s -> TF.Attr s P.Text)
             . TF.refValue
 
-runtimeconfigConfigResource :: TF.Resource P.Google (RuntimeconfigConfigResource s)
-runtimeconfigConfigResource =
+resourceRuntimeconfigConfig :: TF.Resource P.Google (ResourceRuntimeconfigConfig s)
+resourceRuntimeconfigConfig =
     TF.newResource "google_runtimeconfig_config" $
-        RuntimeconfigConfigResource {
+        ResourceRuntimeconfigConfig {
               _description = TF.Nil
             , _name = TF.Nil
             , _project = TF.Nil
@@ -10299,7 +10299,7 @@ the
 <https://cloud.google.com/deployment-manager/runtime-configurator/reference/rest/>
 .
 -}
-data RuntimeconfigVariableResource s = RuntimeconfigVariableResource {
+data ResourceRuntimeconfigVariable s = ResourceRuntimeconfigVariable {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the variable to manage. Note that variable names can be hierarchical using slashes (e.g. "prod-variables/hostname"). -}
     , _parent :: !(TF.Attr s P.Text)
@@ -10310,65 +10310,148 @@ data RuntimeconfigVariableResource s = RuntimeconfigVariableResource {
     {- ^ or @value@ - (Required) The content to associate with the variable. Exactly one of @text@ or @variable@ must be specified. If @text@ is specified, it must be a valid UTF-8 string and less than 4096 bytes in length. If @value@ is specified, it must be base64 encoded and less than 4096 bytes in length. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RuntimeconfigVariableResource s) where
-    toHCL RuntimeconfigVariableResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceRuntimeconfigVariable s) where
+    toHCL ResourceRuntimeconfigVariable{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "parent" <$> TF.attribute _parent
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "text" <$> TF.attribute _text
         ]
 
-instance P.HasName (RuntimeconfigVariableResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceRuntimeconfigVariable s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: RuntimeconfigVariableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: RuntimeconfigVariableResource s)
+        lens (_name :: ResourceRuntimeconfigVariable s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceRuntimeconfigVariable s)
 
-instance P.HasParent (RuntimeconfigVariableResource s) (TF.Attr s P.Text) where
+instance P.HasParent (ResourceRuntimeconfigVariable s) (TF.Attr s P.Text) where
     parent =
-        lens (_parent :: RuntimeconfigVariableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _parent = a } :: RuntimeconfigVariableResource s)
+        lens (_parent :: ResourceRuntimeconfigVariable s -> TF.Attr s P.Text)
+             (\s a -> s { _parent = a } :: ResourceRuntimeconfigVariable s)
 
-instance P.HasProject (RuntimeconfigVariableResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceRuntimeconfigVariable s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: RuntimeconfigVariableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: RuntimeconfigVariableResource s)
+        lens (_project :: ResourceRuntimeconfigVariable s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceRuntimeconfigVariable s)
 
-instance P.HasText (RuntimeconfigVariableResource s) (TF.Attr s P.Text) where
+instance P.HasText (ResourceRuntimeconfigVariable s) (TF.Attr s P.Text) where
     text =
-        lens (_text :: RuntimeconfigVariableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _text = a } :: RuntimeconfigVariableResource s)
+        lens (_text :: ResourceRuntimeconfigVariable s -> TF.Attr s P.Text)
+             (\s a -> s { _text = a } :: ResourceRuntimeconfigVariable s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (RuntimeconfigVariableResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: RuntimeconfigVariableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRuntimeconfigVariable s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceRuntimeconfigVariable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedParent (TF.Ref s' (RuntimeconfigVariableResource s)) (TF.Attr s P.Text) where
-    computedParent =
-        (_parent :: RuntimeconfigVariableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeParent (TF.Ref s' (ResourceRuntimeconfigVariable s)) (TF.Attr s P.Text) where
+    computeParent =
+        (_parent :: ResourceRuntimeconfigVariable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (RuntimeconfigVariableResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: RuntimeconfigVariableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceRuntimeconfigVariable s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceRuntimeconfigVariable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedText (TF.Ref s' (RuntimeconfigVariableResource s)) (TF.Attr s P.Text) where
-    computedText =
-        (_text :: RuntimeconfigVariableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeText (TF.Ref s' (ResourceRuntimeconfigVariable s)) (TF.Attr s P.Text) where
+    computeText =
+        (_text :: ResourceRuntimeconfigVariable s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (RuntimeconfigVariableResource s)) (TF.Attr s P.Text) where
-    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
+instance s ~ s' => P.HasComputeUpdateTime (TF.Ref s' (ResourceRuntimeconfigVariable s)) (TF.Attr s P.Text) where
+    computeUpdateTime x = TF.compute (TF.refKey x) "update_time"
 
-runtimeconfigVariableResource :: TF.Resource P.Google (RuntimeconfigVariableResource s)
-runtimeconfigVariableResource =
+resourceRuntimeconfigVariable :: TF.Resource P.Google (ResourceRuntimeconfigVariable s)
+resourceRuntimeconfigVariable =
     TF.newResource "google_runtimeconfig_variable" $
-        RuntimeconfigVariableResource {
+        ResourceRuntimeconfigVariable {
               _name = TF.Nil
             , _parent = TF.Nil
             , _project = TF.Nil
             , _text = TF.Nil
+            }
+
+{- | The @google_service_account@ Google resource.
+
+Allows management of a
+<https://cloud.google.com/compute/docs/access/service-accounts>
+-}
+data ResourceServiceAccount s = ResourceServiceAccount {
+      _account_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The service account ID. Changing this forces a new service account to be created. -}
+    , _display_name :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The display name for the service account. Can be updated without creating a new resource. -}
+    , _policy_data :: !(TF.Attr s P.Text)
+    {- ^ - (DEPRECATED, Optional) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the service account. The policy will be merged with any existing policy. -}
+    , _project :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The project that the service account will be created in. Defaults to the provider project configuration. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceServiceAccount s) where
+    toHCL ResourceServiceAccount{..} = TF.inline $ catMaybes
+        [ TF.assign "account_id" <$> TF.attribute _account_id
+        , TF.assign "display_name" <$> TF.attribute _display_name
+        , TF.assign "policy_data" <$> TF.attribute _policy_data
+        , TF.assign "project" <$> TF.attribute _project
+        ]
+
+instance P.HasAccountId (ResourceServiceAccount s) (TF.Attr s P.Text) where
+    accountId =
+        lens (_account_id :: ResourceServiceAccount s -> TF.Attr s P.Text)
+             (\s a -> s { _account_id = a } :: ResourceServiceAccount s)
+
+instance P.HasDisplayName (ResourceServiceAccount s) (TF.Attr s P.Text) where
+    displayName =
+        lens (_display_name :: ResourceServiceAccount s -> TF.Attr s P.Text)
+             (\s a -> s { _display_name = a } :: ResourceServiceAccount s)
+
+instance P.HasPolicyData (ResourceServiceAccount s) (TF.Attr s P.Text) where
+    policyData =
+        lens (_policy_data :: ResourceServiceAccount s -> TF.Attr s P.Text)
+             (\s a -> s { _policy_data = a } :: ResourceServiceAccount s)
+
+instance P.HasProject (ResourceServiceAccount s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: ResourceServiceAccount s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceServiceAccount s)
+
+instance s ~ s' => P.HasComputeAccountId (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
+    computeAccountId =
+        (_account_id :: ResourceServiceAccount s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeDisplayName (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
+    computeDisplayName =
+        (_display_name :: ResourceServiceAccount s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeEmail (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
+    computeEmail x = TF.compute (TF.refKey x) "email"
+
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputePolicyData (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
+    computePolicyData =
+        (_policy_data :: ResourceServiceAccount s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceServiceAccount s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeUniqueId (TF.Ref s' (ResourceServiceAccount s)) (TF.Attr s P.Text) where
+    computeUniqueId x = TF.compute (TF.refKey x) "unique_id"
+
+resourceServiceAccount :: TF.Resource P.Google (ResourceServiceAccount s)
+resourceServiceAccount =
+    TF.newResource "google_service_account" $
+        ResourceServiceAccount {
+              _account_id = TF.Nil
+            , _display_name = TF.Nil
+            , _policy_data = TF.Nil
+            , _project = TF.Nil
             }
 
 {- | The @google_service_account_key@ Google resource.
@@ -10381,7 +10464,7 @@ and
 <https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys>
 .
 -}
-data ServiceAccountKeyResource s = ServiceAccountKeyResource {
+data ResourceServiceAccountKey s = ResourceServiceAccountKey {
       _key_algorithm :: !(TF.Attr s P.Text)
     {- ^ (Optional) The algorithm used to generate the key. KEY_ALG_RSA_2048 is the default algorithm. Valid values are listed at <https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys#ServiceAccountKeyAlgorithm> (only used on create) -}
     , _pgp_key :: !(TF.Attr s P.Text)
@@ -10394,8 +10477,8 @@ data ServiceAccountKeyResource s = ServiceAccountKeyResource {
     {- ^ (Required) The Service account id of the Key Pair. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceAccountKeyResource s) where
-    toHCL ServiceAccountKeyResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceServiceAccountKey s) where
+    toHCL ResourceServiceAccountKey{..} = TF.inline $ catMaybes
         [ TF.assign "key_algorithm" <$> TF.attribute _key_algorithm
         , TF.assign "pgp_key" <$> TF.attribute _pgp_key
         , TF.assign "private_key_type" <$> TF.attribute _private_key_type
@@ -10403,169 +10486,86 @@ instance TF.ToHCL (ServiceAccountKeyResource s) where
         , TF.assign "service_account_id" <$> TF.attribute _service_account_id
         ]
 
-instance P.HasKeyAlgorithm (ServiceAccountKeyResource s) (TF.Attr s P.Text) where
+instance P.HasKeyAlgorithm (ResourceServiceAccountKey s) (TF.Attr s P.Text) where
     keyAlgorithm =
-        lens (_key_algorithm :: ServiceAccountKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _key_algorithm = a } :: ServiceAccountKeyResource s)
+        lens (_key_algorithm :: ResourceServiceAccountKey s -> TF.Attr s P.Text)
+             (\s a -> s { _key_algorithm = a } :: ResourceServiceAccountKey s)
 
-instance P.HasPgpKey (ServiceAccountKeyResource s) (TF.Attr s P.Text) where
+instance P.HasPgpKey (ResourceServiceAccountKey s) (TF.Attr s P.Text) where
     pgpKey =
-        lens (_pgp_key :: ServiceAccountKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _pgp_key = a } :: ServiceAccountKeyResource s)
+        lens (_pgp_key :: ResourceServiceAccountKey s -> TF.Attr s P.Text)
+             (\s a -> s { _pgp_key = a } :: ResourceServiceAccountKey s)
 
-instance P.HasPrivateKeyType (ServiceAccountKeyResource s) (TF.Attr s P.Text) where
+instance P.HasPrivateKeyType (ResourceServiceAccountKey s) (TF.Attr s P.Text) where
     privateKeyType =
-        lens (_private_key_type :: ServiceAccountKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _private_key_type = a } :: ServiceAccountKeyResource s)
+        lens (_private_key_type :: ResourceServiceAccountKey s -> TF.Attr s P.Text)
+             (\s a -> s { _private_key_type = a } :: ResourceServiceAccountKey s)
 
-instance P.HasPublicKeyType (ServiceAccountKeyResource s) (TF.Attr s P.Text) where
+instance P.HasPublicKeyType (ResourceServiceAccountKey s) (TF.Attr s P.Text) where
     publicKeyType =
-        lens (_public_key_type :: ServiceAccountKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _public_key_type = a } :: ServiceAccountKeyResource s)
+        lens (_public_key_type :: ResourceServiceAccountKey s -> TF.Attr s P.Text)
+             (\s a -> s { _public_key_type = a } :: ResourceServiceAccountKey s)
 
-instance P.HasServiceAccountId (ServiceAccountKeyResource s) (TF.Attr s P.Text) where
+instance P.HasServiceAccountId (ResourceServiceAccountKey s) (TF.Attr s P.Text) where
     serviceAccountId =
-        lens (_service_account_id :: ServiceAccountKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _service_account_id = a } :: ServiceAccountKeyResource s)
+        lens (_service_account_id :: ResourceServiceAccountKey s -> TF.Attr s P.Text)
+             (\s a -> s { _service_account_id = a } :: ResourceServiceAccountKey s)
 
-instance s ~ s' => P.HasComputedKeyAlgorithm (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedKeyAlgorithm =
-        (_key_algorithm :: ServiceAccountKeyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeKeyAlgorithm (TF.Ref s' (ResourceServiceAccountKey s)) (TF.Attr s P.Text) where
+    computeKeyAlgorithm =
+        (_key_algorithm :: ResourceServiceAccountKey s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceServiceAccountKey s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPgpKey (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPgpKey =
-        (_pgp_key :: ServiceAccountKeyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePgpKey (TF.Ref s' (ResourceServiceAccountKey s)) (TF.Attr s P.Text) where
+    computePgpKey =
+        (_pgp_key :: ResourceServiceAccountKey s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrivateKey (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPrivateKey x = TF.compute (TF.refKey x) "private_key"
+instance s ~ s' => P.HasComputePrivateKey (TF.Ref s' (ResourceServiceAccountKey s)) (TF.Attr s P.Text) where
+    computePrivateKey x = TF.compute (TF.refKey x) "private_key"
 
-instance s ~ s' => P.HasComputedPrivateKeyEncrypted (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPrivateKeyEncrypted x = TF.compute (TF.refKey x) "private_key_encrypted"
+instance s ~ s' => P.HasComputePrivateKeyEncrypted (TF.Ref s' (ResourceServiceAccountKey s)) (TF.Attr s P.Text) where
+    computePrivateKeyEncrypted x = TF.compute (TF.refKey x) "private_key_encrypted"
 
-instance s ~ s' => P.HasComputedPrivateKeyFingerprint (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPrivateKeyFingerprint x = TF.compute (TF.refKey x) "private_key_fingerprint"
+instance s ~ s' => P.HasComputePrivateKeyFingerprint (TF.Ref s' (ResourceServiceAccountKey s)) (TF.Attr s P.Text) where
+    computePrivateKeyFingerprint x = TF.compute (TF.refKey x) "private_key_fingerprint"
 
-instance s ~ s' => P.HasComputedPrivateKeyType (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPrivateKeyType =
-        (_private_key_type :: ServiceAccountKeyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePrivateKeyType (TF.Ref s' (ResourceServiceAccountKey s)) (TF.Attr s P.Text) where
+    computePrivateKeyType =
+        (_private_key_type :: ResourceServiceAccountKey s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPublicKey x = TF.compute (TF.refKey x) "public_key"
+instance s ~ s' => P.HasComputePublicKey (TF.Ref s' (ResourceServiceAccountKey s)) (TF.Attr s P.Text) where
+    computePublicKey x = TF.compute (TF.refKey x) "public_key"
 
-instance s ~ s' => P.HasComputedPublicKeyType (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPublicKeyType =
-        (_public_key_type :: ServiceAccountKeyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePublicKeyType (TF.Ref s' (ResourceServiceAccountKey s)) (TF.Attr s P.Text) where
+    computePublicKeyType =
+        (_public_key_type :: ResourceServiceAccountKey s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedServiceAccountId (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedServiceAccountId =
-        (_service_account_id :: ServiceAccountKeyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeServiceAccountId (TF.Ref s' (ResourceServiceAccountKey s)) (TF.Attr s P.Text) where
+    computeServiceAccountId =
+        (_service_account_id :: ResourceServiceAccountKey s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedValidAfter (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedValidAfter x = TF.compute (TF.refKey x) "valid_after"
+instance s ~ s' => P.HasComputeValidAfter (TF.Ref s' (ResourceServiceAccountKey s)) (TF.Attr s P.Text) where
+    computeValidAfter x = TF.compute (TF.refKey x) "valid_after"
 
-instance s ~ s' => P.HasComputedValidBefore (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedValidBefore x = TF.compute (TF.refKey x) "valid_before"
+instance s ~ s' => P.HasComputeValidBefore (TF.Ref s' (ResourceServiceAccountKey s)) (TF.Attr s P.Text) where
+    computeValidBefore x = TF.compute (TF.refKey x) "valid_before"
 
-serviceAccountKeyResource :: TF.Resource P.Google (ServiceAccountKeyResource s)
-serviceAccountKeyResource =
+resourceServiceAccountKey :: TF.Resource P.Google (ResourceServiceAccountKey s)
+resourceServiceAccountKey =
     TF.newResource "google_service_account_key" $
-        ServiceAccountKeyResource {
+        ResourceServiceAccountKey {
               _key_algorithm = TF.Nil
             , _pgp_key = TF.Nil
             , _private_key_type = TF.Nil
             , _public_key_type = TF.Nil
             , _service_account_id = TF.Nil
-            }
-
-{- | The @google_service_account@ Google resource.
-
-Allows management of a
-<https://cloud.google.com/compute/docs/access/service-accounts>
--}
-data ServiceAccountResource s = ServiceAccountResource {
-      _account_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The service account ID. Changing this forces a new service account to be created. -}
-    , _display_name :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The display name for the service account. Can be updated without creating a new resource. -}
-    , _policy_data :: !(TF.Attr s P.Text)
-    {- ^ - (DEPRECATED, Optional) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the service account. The policy will be merged with any existing policy. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project that the service account will be created in. Defaults to the provider project configuration. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ServiceAccountResource s) where
-    toHCL ServiceAccountResource{..} = TF.inline $ catMaybes
-        [ TF.assign "account_id" <$> TF.attribute _account_id
-        , TF.assign "display_name" <$> TF.attribute _display_name
-        , TF.assign "policy_data" <$> TF.attribute _policy_data
-        , TF.assign "project" <$> TF.attribute _project
-        ]
-
-instance P.HasAccountId (ServiceAccountResource s) (TF.Attr s P.Text) where
-    accountId =
-        lens (_account_id :: ServiceAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _account_id = a } :: ServiceAccountResource s)
-
-instance P.HasDisplayName (ServiceAccountResource s) (TF.Attr s P.Text) where
-    displayName =
-        lens (_display_name :: ServiceAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _display_name = a } :: ServiceAccountResource s)
-
-instance P.HasPolicyData (ServiceAccountResource s) (TF.Attr s P.Text) where
-    policyData =
-        lens (_policy_data :: ServiceAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _policy_data = a } :: ServiceAccountResource s)
-
-instance P.HasProject (ServiceAccountResource s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ServiceAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ServiceAccountResource s)
-
-instance s ~ s' => P.HasComputedAccountId (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedAccountId =
-        (_account_id :: ServiceAccountResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedDisplayName =
-        (_display_name :: ServiceAccountResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "email"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedPolicyData (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedPolicyData =
-        (_policy_data :: ServiceAccountResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ServiceAccountResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedUniqueId x = TF.compute (TF.refKey x) "unique_id"
-
-serviceAccountResource :: TF.Resource P.Google (ServiceAccountResource s)
-serviceAccountResource =
-    TF.newResource "google_service_account" $
-        ServiceAccountResource {
-              _account_id = TF.Nil
-            , _display_name = TF.Nil
-            , _policy_data = TF.Nil
-            , _project = TF.Nil
             }
 
 {- | The @google_sourcerepo_repository@ Google resource.
@@ -10574,49 +10574,49 @@ For more information, see <https://cloud.google.com/source-repositories/>
 and
 <https://cloud.google.com/source-repositories/docs/reference/rest/v1/projects.repos>
 -}
-data SourcerepoRepositoryResource s = SourcerepoRepositoryResource {
+data ResourceSourcerepoRepository s = ResourceSourcerepoRepository {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the repository that will be created. -}
     , _project :: !(TF.Attr s P.Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SourcerepoRepositoryResource s) where
-    toHCL SourcerepoRepositoryResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceSourcerepoRepository s) where
+    toHCL ResourceSourcerepoRepository{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasName (SourcerepoRepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceSourcerepoRepository s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: SourcerepoRepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SourcerepoRepositoryResource s)
+        lens (_name :: ResourceSourcerepoRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceSourcerepoRepository s)
 
-instance P.HasProject (SourcerepoRepositoryResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceSourcerepoRepository s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: SourcerepoRepositoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: SourcerepoRepositoryResource s)
+        lens (_project :: ResourceSourcerepoRepository s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceSourcerepoRepository s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: SourcerepoRepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSourcerepoRepository s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceSourcerepoRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: SourcerepoRepositoryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceSourcerepoRepository s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceSourcerepoRepository s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Text) where
-    computedSize x = TF.compute (TF.refKey x) "size"
+instance s ~ s' => P.HasComputeSize (TF.Ref s' (ResourceSourcerepoRepository s)) (TF.Attr s P.Text) where
+    computeSize x = TF.compute (TF.refKey x) "size"
 
-instance s ~ s' => P.HasComputedUrl (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+instance s ~ s' => P.HasComputeUrl (TF.Ref s' (ResourceSourcerepoRepository s)) (TF.Attr s P.Text) where
+    computeUrl x = TF.compute (TF.refKey x) "url"
 
-sourcerepoRepositoryResource :: TF.Resource P.Google (SourcerepoRepositoryResource s)
-sourcerepoRepositoryResource =
+resourceSourcerepoRepository :: TF.Resource P.Google (ResourceSourcerepoRepository s)
+resourceSourcerepoRepository =
     TF.newResource "google_sourcerepo_repository" $
-        SourcerepoRepositoryResource {
+        ResourceSourcerepoRepository {
               _name = TF.Nil
             , _project = TF.Nil
             }
@@ -10628,7 +10628,7 @@ Creates and manages a Google Spanner Instance. For more information, see the
 <https://cloud.google.com/spanner/docs/reference/rest/v1/projects.instances>
 .
 -}
-data SpannerInstanceResource s = SpannerInstanceResource {
+data ResourceSpannerInstance s = ResourceSpannerInstance {
       _config :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the instance's configuration (similar but not quite the same as a region) which defines defines the geographic placement and replication of your databases in this instance. It determines where your data is stored. Values are typically of the form @regional-europe-west1@ , @us-central@ etc. In order to obtain a valid list please consult the <https://cloud.google.com/spanner/docs/instances> . -}
     , _display_name :: !(TF.Attr s P.Text)
@@ -10643,8 +10643,8 @@ data SpannerInstanceResource s = SpannerInstanceResource {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SpannerInstanceResource s) where
-    toHCL SpannerInstanceResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceSpannerInstance s) where
+    toHCL ResourceSpannerInstance{..} = TF.inline $ catMaybes
         [ TF.assign "config" <$> TF.attribute _config
         , TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "labels" <$> TF.attribute _labels
@@ -10653,78 +10653,172 @@ instance TF.ToHCL (SpannerInstanceResource s) where
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasConfig (SpannerInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasConfig (ResourceSpannerInstance s) (TF.Attr s P.Text) where
     config =
-        lens (_config :: SpannerInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _config = a } :: SpannerInstanceResource s)
+        lens (_config :: ResourceSpannerInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _config = a } :: ResourceSpannerInstance s)
 
-instance P.HasDisplayName (SpannerInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasDisplayName (ResourceSpannerInstance s) (TF.Attr s P.Text) where
     displayName =
-        lens (_display_name :: SpannerInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _display_name = a } :: SpannerInstanceResource s)
+        lens (_display_name :: ResourceSpannerInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _display_name = a } :: ResourceSpannerInstance s)
 
-instance P.HasLabels (SpannerInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasLabels (ResourceSpannerInstance s) (TF.Attr s P.Text) where
     labels =
-        lens (_labels :: SpannerInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: SpannerInstanceResource s)
+        lens (_labels :: ResourceSpannerInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceSpannerInstance s)
 
-instance P.HasName (SpannerInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceSpannerInstance s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: SpannerInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SpannerInstanceResource s)
+        lens (_name :: ResourceSpannerInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceSpannerInstance s)
 
-instance P.HasNumNodes (SpannerInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasNumNodes (ResourceSpannerInstance s) (TF.Attr s P.Text) where
     numNodes =
-        lens (_num_nodes :: SpannerInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _num_nodes = a } :: SpannerInstanceResource s)
+        lens (_num_nodes :: ResourceSpannerInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _num_nodes = a } :: ResourceSpannerInstance s)
 
-instance P.HasProject (SpannerInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceSpannerInstance s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: SpannerInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: SpannerInstanceResource s)
+        lens (_project :: ResourceSpannerInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceSpannerInstance s)
 
-instance s ~ s' => P.HasComputedConfig (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
-    computedConfig =
-        (_config :: SpannerInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeConfig (TF.Ref s' (ResourceSpannerInstance s)) (TF.Attr s P.Text) where
+    computeConfig =
+        (_config :: ResourceSpannerInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
-    computedDisplayName =
-        (_display_name :: SpannerInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDisplayName (TF.Ref s' (ResourceSpannerInstance s)) (TF.Attr s P.Text) where
+    computeDisplayName =
+        (_display_name :: ResourceSpannerInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: SpannerInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceSpannerInstance s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceSpannerInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: SpannerInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSpannerInstance s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceSpannerInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNumNodes (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
-    computedNumNodes =
-        (_num_nodes :: SpannerInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNumNodes (TF.Ref s' (ResourceSpannerInstance s)) (TF.Attr s P.Text) where
+    computeNumNodes =
+        (_num_nodes :: ResourceSpannerInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: SpannerInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceSpannerInstance s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceSpannerInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedState (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+instance s ~ s' => P.HasComputeState (TF.Ref s' (ResourceSpannerInstance s)) (TF.Attr s P.Text) where
+    computeState x = TF.compute (TF.refKey x) "state"
 
-spannerInstanceResource :: TF.Resource P.Google (SpannerInstanceResource s)
-spannerInstanceResource =
+resourceSpannerInstance :: TF.Resource P.Google (ResourceSpannerInstance s)
+resourceSpannerInstance =
     TF.newResource "google_spanner_instance" $
-        SpannerInstanceResource {
+        ResourceSpannerInstance {
               _config = TF.Nil
             , _display_name = TF.Nil
             , _labels = TF.Nil
             , _name = TF.Nil
             , _num_nodes = TF.Nil
+            , _project = TF.Nil
+            }
+
+{- | The @google_sql_database@ Google resource.
+
+Creates a new Google SQL Database on a Google SQL Database Instance. For
+more information, see the <https://cloud.google.com/sql/> , or the
+<https://cloud.google.com/sql/docs/admin-api/v1beta4/databases> . Postgres
+support for @google_sql_database@ is in
+</docs/providers/google/index.html#beta-features> .
+-}
+data ResourceSqlDatabase s = ResourceSqlDatabase {
+      _charset :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The charset value. See MySQL's <https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html> and Postgres' <https://www.postgresql.org/docs/9.6/static/multibyte.html> for more details and supported values. Postgres databases are in </docs/providers/google/index.html#beta-features> , and have limited @charset@ support; they only support a value of @UTF8@ at creation time. -}
+    , _collation :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The collation value. See MySQL's <https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html> and Postgres' <https://www.postgresql.org/docs/9.6/static/collation.html> for more details and supported values. Postgres databases are in </docs/providers/google/index.html#beta-features> , and have limited @collation@ support; they only support a value of @en_US.UTF8@ at creation time. -}
+    , _instance' :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of containing instance. -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the database. -}
+    , _project :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceSqlDatabase s) where
+    toHCL ResourceSqlDatabase{..} = TF.inline $ catMaybes
+        [ TF.assign "charset" <$> TF.attribute _charset
+        , TF.assign "collation" <$> TF.attribute _collation
+        , TF.assign "instance" <$> TF.attribute _instance'
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        ]
+
+instance P.HasCharset (ResourceSqlDatabase s) (TF.Attr s P.Text) where
+    charset =
+        lens (_charset :: ResourceSqlDatabase s -> TF.Attr s P.Text)
+             (\s a -> s { _charset = a } :: ResourceSqlDatabase s)
+
+instance P.HasCollation (ResourceSqlDatabase s) (TF.Attr s P.Text) where
+    collation =
+        lens (_collation :: ResourceSqlDatabase s -> TF.Attr s P.Text)
+             (\s a -> s { _collation = a } :: ResourceSqlDatabase s)
+
+instance P.HasInstance' (ResourceSqlDatabase s) (TF.Attr s P.Text) where
+    instance' =
+        lens (_instance' :: ResourceSqlDatabase s -> TF.Attr s P.Text)
+             (\s a -> s { _instance' = a } :: ResourceSqlDatabase s)
+
+instance P.HasName (ResourceSqlDatabase s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ResourceSqlDatabase s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceSqlDatabase s)
+
+instance P.HasProject (ResourceSqlDatabase s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: ResourceSqlDatabase s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceSqlDatabase s)
+
+instance s ~ s' => P.HasComputeCharset (TF.Ref s' (ResourceSqlDatabase s)) (TF.Attr s P.Text) where
+    computeCharset =
+        (_charset :: ResourceSqlDatabase s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeCollation (TF.Ref s' (ResourceSqlDatabase s)) (TF.Attr s P.Text) where
+    computeCollation =
+        (_collation :: ResourceSqlDatabase s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeInstance' (TF.Ref s' (ResourceSqlDatabase s)) (TF.Attr s P.Text) where
+    computeInstance' =
+        (_instance' :: ResourceSqlDatabase s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSqlDatabase s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceSqlDatabase s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceSqlDatabase s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceSqlDatabase s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceSqlDatabase s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
+
+resourceSqlDatabase :: TF.Resource P.Google (ResourceSqlDatabase s)
+resourceSqlDatabase =
+    TF.newResource "google_sql_database" $
+        ResourceSqlDatabase {
+              _charset = TF.Nil
+            , _collation = TF.Nil
+            , _instance' = TF.Nil
+            , _name = TF.Nil
             , _project = TF.Nil
             }
 
@@ -10740,7 +10834,7 @@ default 'root'@'%' user with no password. This user will be deleted by
 Terraform on instance creation. You should use @google_sql_user@ to define a
 custom user with a restricted host and strong password.
 -}
-data SqlDatabaseInstanceResource s = SqlDatabaseInstanceResource {
+data ResourceSqlDatabaseInstance s = ResourceSqlDatabaseInstance {
       _connection_name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The connection name of the instance to be used in connection strings. -}
     , _database_version :: !(TF.Attr s P.Text)
@@ -10759,8 +10853,8 @@ data SqlDatabaseInstanceResource s = SqlDatabaseInstanceResource {
     {- ^ (Required) The settings to use for the database. The configuration is detailed below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SqlDatabaseInstanceResource s) where
-    toHCL SqlDatabaseInstanceResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceSqlDatabaseInstance s) where
+    toHCL ResourceSqlDatabaseInstance{..} = TF.inline $ catMaybes
         [ TF.assign "connection_name" <$> TF.attribute _connection_name
         , TF.assign "database_version" <$> TF.attribute _database_version
         , TF.assign "master_instance_name" <$> TF.attribute _master_instance_name
@@ -10771,102 +10865,102 @@ instance TF.ToHCL (SqlDatabaseInstanceResource s) where
         , TF.assign "settings" <$> TF.attribute _settings
         ]
 
-instance P.HasConnectionName (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasConnectionName (ResourceSqlDatabaseInstance s) (TF.Attr s P.Text) where
     connectionName =
-        lens (_connection_name :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _connection_name = a } :: SqlDatabaseInstanceResource s)
+        lens (_connection_name :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _connection_name = a } :: ResourceSqlDatabaseInstance s)
 
-instance P.HasDatabaseVersion (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasDatabaseVersion (ResourceSqlDatabaseInstance s) (TF.Attr s P.Text) where
     databaseVersion =
-        lens (_database_version :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _database_version = a } :: SqlDatabaseInstanceResource s)
+        lens (_database_version :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _database_version = a } :: ResourceSqlDatabaseInstance s)
 
-instance P.HasMasterInstanceName (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasMasterInstanceName (ResourceSqlDatabaseInstance s) (TF.Attr s P.Text) where
     masterInstanceName =
-        lens (_master_instance_name :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _master_instance_name = a } :: SqlDatabaseInstanceResource s)
+        lens (_master_instance_name :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _master_instance_name = a } :: ResourceSqlDatabaseInstance s)
 
-instance P.HasName (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceSqlDatabaseInstance s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SqlDatabaseInstanceResource s)
+        lens (_name :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceSqlDatabaseInstance s)
 
-instance P.HasProject (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceSqlDatabaseInstance s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: SqlDatabaseInstanceResource s)
+        lens (_project :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceSqlDatabaseInstance s)
 
-instance P.HasRegion (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasRegion (ResourceSqlDatabaseInstance s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: SqlDatabaseInstanceResource s)
+        lens (_region :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ResourceSqlDatabaseInstance s)
 
-instance P.HasReplicaConfiguration (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasReplicaConfiguration (ResourceSqlDatabaseInstance s) (TF.Attr s P.Text) where
     replicaConfiguration =
-        lens (_replica_configuration :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _replica_configuration = a } :: SqlDatabaseInstanceResource s)
+        lens (_replica_configuration :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _replica_configuration = a } :: ResourceSqlDatabaseInstance s)
 
-instance P.HasSettings (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
+instance P.HasSettings (ResourceSqlDatabaseInstance s) (TF.Attr s P.Text) where
     settings =
-        lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _settings = a } :: SqlDatabaseInstanceResource s)
+        lens (_settings :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
+             (\s a -> s { _settings = a } :: ResourceSqlDatabaseInstance s)
 
-instance s ~ s' => P.HasComputedConnectionName (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedConnectionName =
-        (_connection_name :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeConnectionName (TF.Ref s' (ResourceSqlDatabaseInstance s)) (TF.Attr s P.Text) where
+    computeConnectionName =
+        (_connection_name :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDatabaseVersion (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedDatabaseVersion =
-        (_database_version :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDatabaseVersion (TF.Ref s' (ResourceSqlDatabaseInstance s)) (TF.Attr s P.Text) where
+    computeDatabaseVersion =
+        (_database_version :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpAddress0IpAddress (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedIpAddress0IpAddress x = TF.compute (TF.refKey x) "ip_address.0.ip_address"
+instance s ~ s' => P.HasComputeIpAddress0IpAddress (TF.Ref s' (ResourceSqlDatabaseInstance s)) (TF.Attr s P.Text) where
+    computeIpAddress0IpAddress x = TF.compute (TF.refKey x) "ip_address.0.ip_address"
 
-instance s ~ s' => P.HasComputedIpAddress0TimeToRetire (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedIpAddress0TimeToRetire x = TF.compute (TF.refKey x) "ip_address.0.time_to_retire"
+instance s ~ s' => P.HasComputeIpAddress0TimeToRetire (TF.Ref s' (ResourceSqlDatabaseInstance s)) (TF.Attr s P.Text) where
+    computeIpAddress0TimeToRetire x = TF.compute (TF.refKey x) "ip_address.0.time_to_retire"
 
-instance s ~ s' => P.HasComputedMasterInstanceName (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedMasterInstanceName =
-        (_master_instance_name :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMasterInstanceName (TF.Ref s' (ResourceSqlDatabaseInstance s)) (TF.Attr s P.Text) where
+    computeMasterInstanceName =
+        (_master_instance_name :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSqlDatabaseInstance s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceSqlDatabaseInstance s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRegion (TF.Ref s' (ResourceSqlDatabaseInstance s)) (TF.Attr s P.Text) where
+    computeRegion =
+        (_region :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedReplicaConfiguration (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedReplicaConfiguration =
-        (_replica_configuration :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeReplicaConfiguration (TF.Ref s' (ResourceSqlDatabaseInstance s)) (TF.Attr s P.Text) where
+    computeReplicaConfiguration =
+        (_replica_configuration :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceSqlDatabaseInstance s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedSettings (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedSettings =
-        (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSettings (TF.Ref s' (ResourceSqlDatabaseInstance s)) (TF.Attr s P.Text) where
+    computeSettings =
+        (_settings :: ResourceSqlDatabaseInstance s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSettingsVersion (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedSettingsVersion x = TF.compute (TF.refKey x) "settings.version"
+instance s ~ s' => P.HasComputeSettingsVersion (TF.Ref s' (ResourceSqlDatabaseInstance s)) (TF.Attr s P.Text) where
+    computeSettingsVersion x = TF.compute (TF.refKey x) "settings.version"
 
-sqlDatabaseInstanceResource :: TF.Resource P.Google (SqlDatabaseInstanceResource s)
-sqlDatabaseInstanceResource =
+resourceSqlDatabaseInstance :: TF.Resource P.Google (ResourceSqlDatabaseInstance s)
+resourceSqlDatabaseInstance =
     TF.newResource "google_sql_database_instance" $
-        SqlDatabaseInstanceResource {
+        ResourceSqlDatabaseInstance {
               _connection_name = TF.Nil
             , _database_version = TF.Nil
             , _master_instance_name = TF.Nil
@@ -10875,100 +10969,6 @@ sqlDatabaseInstanceResource =
             , _region = TF.Nil
             , _replica_configuration = TF.Nil
             , _settings = TF.Nil
-            }
-
-{- | The @google_sql_database@ Google resource.
-
-Creates a new Google SQL Database on a Google SQL Database Instance. For
-more information, see the <https://cloud.google.com/sql/> , or the
-<https://cloud.google.com/sql/docs/admin-api/v1beta4/databases> . Postgres
-support for @google_sql_database@ is in
-</docs/providers/google/index.html#beta-features> .
--}
-data SqlDatabaseResource s = SqlDatabaseResource {
-      _charset :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The charset value. See MySQL's <https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html> and Postgres' <https://www.postgresql.org/docs/9.6/static/multibyte.html> for more details and supported values. Postgres databases are in </docs/providers/google/index.html#beta-features> , and have limited @charset@ support; they only support a value of @UTF8@ at creation time. -}
-    , _collation :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The collation value. See MySQL's <https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html> and Postgres' <https://www.postgresql.org/docs/9.6/static/collation.html> for more details and supported values. Postgres databases are in </docs/providers/google/index.html#beta-features> , and have limited @collation@ support; they only support a value of @en_US.UTF8@ at creation time. -}
-    , _instance' :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of containing instance. -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the database. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (SqlDatabaseResource s) where
-    toHCL SqlDatabaseResource{..} = TF.inline $ catMaybes
-        [ TF.assign "charset" <$> TF.attribute _charset
-        , TF.assign "collation" <$> TF.attribute _collation
-        , TF.assign "instance" <$> TF.attribute _instance'
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        ]
-
-instance P.HasCharset (SqlDatabaseResource s) (TF.Attr s P.Text) where
-    charset =
-        lens (_charset :: SqlDatabaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _charset = a } :: SqlDatabaseResource s)
-
-instance P.HasCollation (SqlDatabaseResource s) (TF.Attr s P.Text) where
-    collation =
-        lens (_collation :: SqlDatabaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _collation = a } :: SqlDatabaseResource s)
-
-instance P.HasInstance' (SqlDatabaseResource s) (TF.Attr s P.Text) where
-    instance' =
-        lens (_instance' :: SqlDatabaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance' = a } :: SqlDatabaseResource s)
-
-instance P.HasName (SqlDatabaseResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: SqlDatabaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SqlDatabaseResource s)
-
-instance P.HasProject (SqlDatabaseResource s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: SqlDatabaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: SqlDatabaseResource s)
-
-instance s ~ s' => P.HasComputedCharset (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedCharset =
-        (_charset :: SqlDatabaseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCollation (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedCollation =
-        (_collation :: SqlDatabaseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedInstance' (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedInstance' =
-        (_instance' :: SqlDatabaseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: SqlDatabaseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: SqlDatabaseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
-
-sqlDatabaseResource :: TF.Resource P.Google (SqlDatabaseResource s)
-sqlDatabaseResource =
-    TF.newResource "google_sql_database" $
-        SqlDatabaseResource {
-              _charset = TF.Nil
-            , _collation = TF.Nil
-            , _instance' = TF.Nil
-            , _name = TF.Nil
-            , _project = TF.Nil
             }
 
 {- | The @google_sql_user@ Google resource.
@@ -10980,7 +10980,7 @@ arguments including the username and password will be stored in the raw
 state as plain-text. </docs/state/sensitive-data.html> . Passwords will not
 be retrieved when running "terraform import".
 -}
-data SqlUserResource s = SqlUserResource {
+data ResourceSqlUser s = ResourceSqlUser {
       _host :: !(TF.Attr s P.Text)
     {- ^ (Optional) The host the user can connect from. This is only supported for first generation SQL instances. Don't set this field for second generation SQL instances. Can be an IP address. Changing this forces a new resource to be created. -}
     , _instance' :: !(TF.Attr s P.Text)
@@ -10993,8 +10993,8 @@ data SqlUserResource s = SqlUserResource {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SqlUserResource s) where
-    toHCL SqlUserResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceSqlUser s) where
+    toHCL ResourceSqlUser{..} = TF.inline $ catMaybes
         [ TF.assign "host" <$> TF.attribute _host
         , TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "name" <$> TF.attribute _name
@@ -11002,196 +11002,65 @@ instance TF.ToHCL (SqlUserResource s) where
         , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasHost (SqlUserResource s) (TF.Attr s P.Text) where
+instance P.HasHost (ResourceSqlUser s) (TF.Attr s P.Text) where
     host =
-        lens (_host :: SqlUserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _host = a } :: SqlUserResource s)
+        lens (_host :: ResourceSqlUser s -> TF.Attr s P.Text)
+             (\s a -> s { _host = a } :: ResourceSqlUser s)
 
-instance P.HasInstance' (SqlUserResource s) (TF.Attr s P.Text) where
+instance P.HasInstance' (ResourceSqlUser s) (TF.Attr s P.Text) where
     instance' =
-        lens (_instance' :: SqlUserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance' = a } :: SqlUserResource s)
+        lens (_instance' :: ResourceSqlUser s -> TF.Attr s P.Text)
+             (\s a -> s { _instance' = a } :: ResourceSqlUser s)
 
-instance P.HasName (SqlUserResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceSqlUser s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: SqlUserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SqlUserResource s)
+        lens (_name :: ResourceSqlUser s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceSqlUser s)
 
-instance P.HasPassword (SqlUserResource s) (TF.Attr s P.Text) where
+instance P.HasPassword (ResourceSqlUser s) (TF.Attr s P.Text) where
     password =
-        lens (_password :: SqlUserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _password = a } :: SqlUserResource s)
+        lens (_password :: ResourceSqlUser s -> TF.Attr s P.Text)
+             (\s a -> s { _password = a } :: ResourceSqlUser s)
 
-instance P.HasProject (SqlUserResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceSqlUser s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: SqlUserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: SqlUserResource s)
+        lens (_project :: ResourceSqlUser s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceSqlUser s)
 
-instance s ~ s' => P.HasComputedHost (TF.Ref s' (SqlUserResource s)) (TF.Attr s P.Text) where
-    computedHost =
-        (_host :: SqlUserResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHost (TF.Ref s' (ResourceSqlUser s)) (TF.Attr s P.Text) where
+    computeHost =
+        (_host :: ResourceSqlUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInstance' (TF.Ref s' (SqlUserResource s)) (TF.Attr s P.Text) where
-    computedInstance' =
-        (_instance' :: SqlUserResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeInstance' (TF.Ref s' (ResourceSqlUser s)) (TF.Attr s P.Text) where
+    computeInstance' =
+        (_instance' :: ResourceSqlUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SqlUserResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: SqlUserResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSqlUser s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceSqlUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPassword (TF.Ref s' (SqlUserResource s)) (TF.Attr s P.Text) where
-    computedPassword =
-        (_password :: SqlUserResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePassword (TF.Ref s' (ResourceSqlUser s)) (TF.Attr s P.Text) where
+    computePassword =
+        (_password :: ResourceSqlUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (SqlUserResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: SqlUserResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceSqlUser s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceSqlUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-sqlUserResource :: TF.Resource P.Google (SqlUserResource s)
-sqlUserResource =
+resourceSqlUser :: TF.Resource P.Google (ResourceSqlUser s)
+resourceSqlUser =
     TF.newResource "google_sql_user" $
-        SqlUserResource {
+        ResourceSqlUser {
               _host = TF.Nil
             , _instance' = TF.Nil
             , _name = TF.Nil
             , _password = TF.Nil
             , _project = TF.Nil
-            }
-
-{- | The @google_storage_bucket_acl@ Google resource.
-
-Creates a new bucket ACL in Google cloud storage service (GCS). For more
-information see <https://cloud.google.com/storage/docs/access-control/lists>
-and <https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls>
-.
--}
-data StorageBucketAclResource s = StorageBucketAclResource {
-      _bucket :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the bucket it applies to. -}
-    , _default_acl :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Configure this ACL to be the default ACL. -}
-    , _predefined_acl :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The <https://cloud.google.com/storage/docs/access-control/lists#predefined-acl> to apply. Must be set if @role_entity@ is not. -}
-    , _role_entity :: !(TF.Attr s P.Text)
-    {- ^ (Optional) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls> for more details. Must be set if @predefined_acl@ is not. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (StorageBucketAclResource s) where
-    toHCL StorageBucketAclResource{..} = TF.inline $ catMaybes
-        [ TF.assign "bucket" <$> TF.attribute _bucket
-        , TF.assign "default_acl" <$> TF.attribute _default_acl
-        , TF.assign "predefined_acl" <$> TF.attribute _predefined_acl
-        , TF.assign "role_entity" <$> TF.attribute _role_entity
-        ]
-
-instance P.HasBucket (StorageBucketAclResource s) (TF.Attr s P.Text) where
-    bucket =
-        lens (_bucket :: StorageBucketAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _bucket = a } :: StorageBucketAclResource s)
-
-instance P.HasDefaultAcl (StorageBucketAclResource s) (TF.Attr s P.Text) where
-    defaultAcl =
-        lens (_default_acl :: StorageBucketAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _default_acl = a } :: StorageBucketAclResource s)
-
-instance P.HasPredefinedAcl (StorageBucketAclResource s) (TF.Attr s P.Text) where
-    predefinedAcl =
-        lens (_predefined_acl :: StorageBucketAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _predefined_acl = a } :: StorageBucketAclResource s)
-
-instance P.HasRoleEntity (StorageBucketAclResource s) (TF.Attr s P.Text) where
-    roleEntity =
-        lens (_role_entity :: StorageBucketAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role_entity = a } :: StorageBucketAclResource s)
-
-instance s ~ s' => P.HasComputedBucket (TF.Ref s' (StorageBucketAclResource s)) (TF.Attr s P.Text) where
-    computedBucket =
-        (_bucket :: StorageBucketAclResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDefaultAcl (TF.Ref s' (StorageBucketAclResource s)) (TF.Attr s P.Text) where
-    computedDefaultAcl =
-        (_default_acl :: StorageBucketAclResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPredefinedAcl (TF.Ref s' (StorageBucketAclResource s)) (TF.Attr s P.Text) where
-    computedPredefinedAcl =
-        (_predefined_acl :: StorageBucketAclResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRoleEntity (TF.Ref s' (StorageBucketAclResource s)) (TF.Attr s P.Text) where
-    computedRoleEntity =
-        (_role_entity :: StorageBucketAclResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-storageBucketAclResource :: TF.Resource P.Google (StorageBucketAclResource s)
-storageBucketAclResource =
-    TF.newResource "google_storage_bucket_acl" $
-        StorageBucketAclResource {
-              _bucket = TF.Nil
-            , _default_acl = TF.Nil
-            , _predefined_acl = TF.Nil
-            , _role_entity = TF.Nil
-            }
-
-{- | The @google_storage_bucket_object@ Google resource.
-
-Creates a new object inside an existing bucket in Google cloud storage
-service (GCS). <https://cloud.google.com/storage/docs/access-control/lists>
-can be applied using the @google_storage_object_acl@ resource. For more
-information see <https://cloud.google.com/storage/docs/key-terms#objects>
-and <https://cloud.google.com/storage/docs/json_api/v1/objects> .
--}
-data StorageBucketObjectResource s = StorageBucketObjectResource {
-      _bucket :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the containing bucket. -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the object. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (StorageBucketObjectResource s) where
-    toHCL StorageBucketObjectResource{..} = TF.inline $ catMaybes
-        [ TF.assign "bucket" <$> TF.attribute _bucket
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance P.HasBucket (StorageBucketObjectResource s) (TF.Attr s P.Text) where
-    bucket =
-        lens (_bucket :: StorageBucketObjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _bucket = a } :: StorageBucketObjectResource s)
-
-instance P.HasName (StorageBucketObjectResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: StorageBucketObjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: StorageBucketObjectResource s)
-
-instance s ~ s' => P.HasComputedBucket (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedBucket =
-        (_bucket :: StorageBucketObjectResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCrc32c (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedCrc32c x = TF.compute (TF.refKey x) "crc32c"
-
-instance s ~ s' => P.HasComputedMd5hash (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedMd5hash x = TF.compute (TF.refKey x) "md5hash"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: StorageBucketObjectResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-storageBucketObjectResource :: TF.Resource P.Google (StorageBucketObjectResource s)
-storageBucketObjectResource =
-    TF.newResource "google_storage_bucket_object" $
-        StorageBucketObjectResource {
-              _bucket = TF.Nil
-            , _name = TF.Nil
             }
 
 {- | The @google_storage_bucket@ Google resource.
@@ -11203,7 +11072,7 @@ using the @google_storage_bucket_acl@ resource. For more information see
 <https://cloud.google.com/storage/docs/overview> and
 <https://cloud.google.com/storage/docs/json_api/v1/buckets> .
 -}
-data StorageBucketResource s = StorageBucketResource {
+data ResourceStorageBucket s = ResourceStorageBucket {
       _cors :: !(TF.Attr s P.Text)
     {- ^ (Optional) The bucket's <https://www.w3.org/TR/cors/> configuration. Multiple blocks of this type are permitted. Structure is documented below. -}
     , _force_destroy :: !(TF.Attr s P.Text)
@@ -11228,8 +11097,8 @@ data StorageBucketResource s = StorageBucketResource {
     {- ^ (Optional) Configuration if the bucket acts as a website. Structure is documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageBucketResource s) where
-    toHCL StorageBucketResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceStorageBucket s) where
+    toHCL ResourceStorageBucket{..} = TF.inline $ catMaybes
         [ TF.assign "cors" <$> TF.attribute _cors
         , TF.assign "force_destroy" <$> TF.attribute _force_destroy
         , TF.assign "labels" <$> TF.attribute _labels
@@ -11243,126 +11112,126 @@ instance TF.ToHCL (StorageBucketResource s) where
         , TF.assign "website" <$> TF.attribute _website
         ]
 
-instance P.HasCors (StorageBucketResource s) (TF.Attr s P.Text) where
+instance P.HasCors (ResourceStorageBucket s) (TF.Attr s P.Text) where
     cors =
-        lens (_cors :: StorageBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cors = a } :: StorageBucketResource s)
+        lens (_cors :: ResourceStorageBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _cors = a } :: ResourceStorageBucket s)
 
-instance P.HasForceDestroy (StorageBucketResource s) (TF.Attr s P.Text) where
+instance P.HasForceDestroy (ResourceStorageBucket s) (TF.Attr s P.Text) where
     forceDestroy =
-        lens (_force_destroy :: StorageBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _force_destroy = a } :: StorageBucketResource s)
+        lens (_force_destroy :: ResourceStorageBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _force_destroy = a } :: ResourceStorageBucket s)
 
-instance P.HasLabels (StorageBucketResource s) (TF.Attr s P.Text) where
+instance P.HasLabels (ResourceStorageBucket s) (TF.Attr s P.Text) where
     labels =
-        lens (_labels :: StorageBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: StorageBucketResource s)
+        lens (_labels :: ResourceStorageBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _labels = a } :: ResourceStorageBucket s)
 
-instance P.HasLifecycleRule (StorageBucketResource s) (TF.Attr s P.Text) where
+instance P.HasLifecycleRule (ResourceStorageBucket s) (TF.Attr s P.Text) where
     lifecycleRule =
-        lens (_lifecycle_rule :: StorageBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _lifecycle_rule = a } :: StorageBucketResource s)
+        lens (_lifecycle_rule :: ResourceStorageBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _lifecycle_rule = a } :: ResourceStorageBucket s)
 
-instance P.HasLocation (StorageBucketResource s) (TF.Attr s P.Text) where
+instance P.HasLocation (ResourceStorageBucket s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: StorageBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: StorageBucketResource s)
+        lens (_location :: ResourceStorageBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _location = a } :: ResourceStorageBucket s)
 
-instance P.HasLogging (StorageBucketResource s) (TF.Attr s P.Text) where
+instance P.HasLogging (ResourceStorageBucket s) (TF.Attr s P.Text) where
     logging =
-        lens (_logging :: StorageBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _logging = a } :: StorageBucketResource s)
+        lens (_logging :: ResourceStorageBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _logging = a } :: ResourceStorageBucket s)
 
-instance P.HasName (StorageBucketResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceStorageBucket s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: StorageBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: StorageBucketResource s)
+        lens (_name :: ResourceStorageBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceStorageBucket s)
 
-instance P.HasProject (StorageBucketResource s) (TF.Attr s P.Text) where
+instance P.HasProject (ResourceStorageBucket s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: StorageBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: StorageBucketResource s)
+        lens (_project :: ResourceStorageBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ResourceStorageBucket s)
 
-instance P.HasStorageClass (StorageBucketResource s) (TF.Attr s P.Text) where
+instance P.HasStorageClass (ResourceStorageBucket s) (TF.Attr s P.Text) where
     storageClass =
-        lens (_storage_class :: StorageBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _storage_class = a } :: StorageBucketResource s)
+        lens (_storage_class :: ResourceStorageBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _storage_class = a } :: ResourceStorageBucket s)
 
-instance P.HasVersioning (StorageBucketResource s) (TF.Attr s P.Text) where
+instance P.HasVersioning (ResourceStorageBucket s) (TF.Attr s P.Text) where
     versioning =
-        lens (_versioning :: StorageBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _versioning = a } :: StorageBucketResource s)
+        lens (_versioning :: ResourceStorageBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _versioning = a } :: ResourceStorageBucket s)
 
-instance P.HasWebsite (StorageBucketResource s) (TF.Attr s P.Text) where
+instance P.HasWebsite (ResourceStorageBucket s) (TF.Attr s P.Text) where
     website =
-        lens (_website :: StorageBucketResource s -> TF.Attr s P.Text)
-             (\s a -> s { _website = a } :: StorageBucketResource s)
+        lens (_website :: ResourceStorageBucket s -> TF.Attr s P.Text)
+             (\s a -> s { _website = a } :: ResourceStorageBucket s)
 
-instance s ~ s' => P.HasComputedCors (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedCors =
-        (_cors :: StorageBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCors (TF.Ref s' (ResourceStorageBucket s)) (TF.Attr s P.Text) where
+    computeCors =
+        (_cors :: ResourceStorageBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedForceDestroy (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedForceDestroy =
-        (_force_destroy :: StorageBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeForceDestroy (TF.Ref s' (ResourceStorageBucket s)) (TF.Attr s P.Text) where
+    computeForceDestroy =
+        (_force_destroy :: ResourceStorageBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: StorageBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLabels (TF.Ref s' (ResourceStorageBucket s)) (TF.Attr s P.Text) where
+    computeLabels =
+        (_labels :: ResourceStorageBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLifecycleRule (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedLifecycleRule =
-        (_lifecycle_rule :: StorageBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLifecycleRule (TF.Ref s' (ResourceStorageBucket s)) (TF.Attr s P.Text) where
+    computeLifecycleRule =
+        (_lifecycle_rule :: ResourceStorageBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedLocation =
-        (_location :: StorageBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLocation (TF.Ref s' (ResourceStorageBucket s)) (TF.Attr s P.Text) where
+    computeLocation =
+        (_location :: ResourceStorageBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLogging (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedLogging =
-        (_logging :: StorageBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLogging (TF.Ref s' (ResourceStorageBucket s)) (TF.Attr s P.Text) where
+    computeLogging =
+        (_logging :: ResourceStorageBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: StorageBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceStorageBucket s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceStorageBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: StorageBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeProject (TF.Ref s' (ResourceStorageBucket s)) (TF.Attr s P.Text) where
+    computeProject =
+        (_project :: ResourceStorageBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceStorageBucket s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedStorageClass =
-        (_storage_class :: StorageBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeStorageClass (TF.Ref s' (ResourceStorageBucket s)) (TF.Attr s P.Text) where
+    computeStorageClass =
+        (_storage_class :: ResourceStorageBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUrl (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+instance s ~ s' => P.HasComputeUrl (TF.Ref s' (ResourceStorageBucket s)) (TF.Attr s P.Text) where
+    computeUrl x = TF.compute (TF.refKey x) "url"
 
-instance s ~ s' => P.HasComputedVersioning (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedVersioning =
-        (_versioning :: StorageBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeVersioning (TF.Ref s' (ResourceStorageBucket s)) (TF.Attr s P.Text) where
+    computeVersioning =
+        (_versioning :: ResourceStorageBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedWebsite (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedWebsite =
-        (_website :: StorageBucketResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeWebsite (TF.Ref s' (ResourceStorageBucket s)) (TF.Attr s P.Text) where
+    computeWebsite =
+        (_website :: ResourceStorageBucket s -> TF.Attr s P.Text)
             . TF.refValue
 
-storageBucketResource :: TF.Resource P.Google (StorageBucketResource s)
-storageBucketResource =
+resourceStorageBucket :: TF.Resource P.Google (ResourceStorageBucket s)
+resourceStorageBucket =
     TF.newResource "google_storage_bucket" $
-        StorageBucketResource {
+        ResourceStorageBucket {
               _cors = TF.Nil
             , _force_destroy = TF.Nil
             , _labels = TF.Nil
@@ -11376,6 +11245,137 @@ storageBucketResource =
             , _website = TF.Nil
             }
 
+{- | The @google_storage_bucket_acl@ Google resource.
+
+Creates a new bucket ACL in Google cloud storage service (GCS). For more
+information see <https://cloud.google.com/storage/docs/access-control/lists>
+and <https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls>
+.
+-}
+data ResourceStorageBucketAcl s = ResourceStorageBucketAcl {
+      _bucket :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the bucket it applies to. -}
+    , _default_acl :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Configure this ACL to be the default ACL. -}
+    , _predefined_acl :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The <https://cloud.google.com/storage/docs/access-control/lists#predefined-acl> to apply. Must be set if @role_entity@ is not. -}
+    , _role_entity :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls> for more details. Must be set if @predefined_acl@ is not. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceStorageBucketAcl s) where
+    toHCL ResourceStorageBucketAcl{..} = TF.inline $ catMaybes
+        [ TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "default_acl" <$> TF.attribute _default_acl
+        , TF.assign "predefined_acl" <$> TF.attribute _predefined_acl
+        , TF.assign "role_entity" <$> TF.attribute _role_entity
+        ]
+
+instance P.HasBucket (ResourceStorageBucketAcl s) (TF.Attr s P.Text) where
+    bucket =
+        lens (_bucket :: ResourceStorageBucketAcl s -> TF.Attr s P.Text)
+             (\s a -> s { _bucket = a } :: ResourceStorageBucketAcl s)
+
+instance P.HasDefaultAcl (ResourceStorageBucketAcl s) (TF.Attr s P.Text) where
+    defaultAcl =
+        lens (_default_acl :: ResourceStorageBucketAcl s -> TF.Attr s P.Text)
+             (\s a -> s { _default_acl = a } :: ResourceStorageBucketAcl s)
+
+instance P.HasPredefinedAcl (ResourceStorageBucketAcl s) (TF.Attr s P.Text) where
+    predefinedAcl =
+        lens (_predefined_acl :: ResourceStorageBucketAcl s -> TF.Attr s P.Text)
+             (\s a -> s { _predefined_acl = a } :: ResourceStorageBucketAcl s)
+
+instance P.HasRoleEntity (ResourceStorageBucketAcl s) (TF.Attr s P.Text) where
+    roleEntity =
+        lens (_role_entity :: ResourceStorageBucketAcl s -> TF.Attr s P.Text)
+             (\s a -> s { _role_entity = a } :: ResourceStorageBucketAcl s)
+
+instance s ~ s' => P.HasComputeBucket (TF.Ref s' (ResourceStorageBucketAcl s)) (TF.Attr s P.Text) where
+    computeBucket =
+        (_bucket :: ResourceStorageBucketAcl s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeDefaultAcl (TF.Ref s' (ResourceStorageBucketAcl s)) (TF.Attr s P.Text) where
+    computeDefaultAcl =
+        (_default_acl :: ResourceStorageBucketAcl s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputePredefinedAcl (TF.Ref s' (ResourceStorageBucketAcl s)) (TF.Attr s P.Text) where
+    computePredefinedAcl =
+        (_predefined_acl :: ResourceStorageBucketAcl s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeRoleEntity (TF.Ref s' (ResourceStorageBucketAcl s)) (TF.Attr s P.Text) where
+    computeRoleEntity =
+        (_role_entity :: ResourceStorageBucketAcl s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourceStorageBucketAcl :: TF.Resource P.Google (ResourceStorageBucketAcl s)
+resourceStorageBucketAcl =
+    TF.newResource "google_storage_bucket_acl" $
+        ResourceStorageBucketAcl {
+              _bucket = TF.Nil
+            , _default_acl = TF.Nil
+            , _predefined_acl = TF.Nil
+            , _role_entity = TF.Nil
+            }
+
+{- | The @google_storage_bucket_object@ Google resource.
+
+Creates a new object inside an existing bucket in Google cloud storage
+service (GCS). <https://cloud.google.com/storage/docs/access-control/lists>
+can be applied using the @google_storage_object_acl@ resource. For more
+information see <https://cloud.google.com/storage/docs/key-terms#objects>
+and <https://cloud.google.com/storage/docs/json_api/v1/objects> .
+-}
+data ResourceStorageBucketObject s = ResourceStorageBucketObject {
+      _bucket :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the containing bucket. -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the object. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceStorageBucketObject s) where
+    toHCL ResourceStorageBucketObject{..} = TF.inline $ catMaybes
+        [ TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasBucket (ResourceStorageBucketObject s) (TF.Attr s P.Text) where
+    bucket =
+        lens (_bucket :: ResourceStorageBucketObject s -> TF.Attr s P.Text)
+             (\s a -> s { _bucket = a } :: ResourceStorageBucketObject s)
+
+instance P.HasName (ResourceStorageBucketObject s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ResourceStorageBucketObject s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceStorageBucketObject s)
+
+instance s ~ s' => P.HasComputeBucket (TF.Ref s' (ResourceStorageBucketObject s)) (TF.Attr s P.Text) where
+    computeBucket =
+        (_bucket :: ResourceStorageBucketObject s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeCrc32c (TF.Ref s' (ResourceStorageBucketObject s)) (TF.Attr s P.Text) where
+    computeCrc32c x = TF.compute (TF.refKey x) "crc32c"
+
+instance s ~ s' => P.HasComputeMd5hash (TF.Ref s' (ResourceStorageBucketObject s)) (TF.Attr s P.Text) where
+    computeMd5hash x = TF.compute (TF.refKey x) "md5hash"
+
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceStorageBucketObject s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceStorageBucketObject s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourceStorageBucketObject :: TF.Resource P.Google (ResourceStorageBucketObject s)
+resourceStorageBucketObject =
+    TF.newResource "google_storage_bucket_object" $
+        ResourceStorageBucketObject {
+              _bucket = TF.Nil
+            , _name = TF.Nil
+            }
+
 {- | The @google_storage_default_object_acl@ Google resource.
 
 Creates a new default object ACL in Google Cloud Storage service (GCS). For
@@ -11384,43 +11384,43 @@ more information see
 <https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls>
 .
 -}
-data StorageDefaultObjectAclResource s = StorageDefaultObjectAclResource {
+data ResourceStorageDefaultObjectAcl s = ResourceStorageDefaultObjectAcl {
       _bucket :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the bucket it applies to. -}
     , _role_entity :: !(TF.Attr s P.Text)
     {- ^ (Required) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls> for more details. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageDefaultObjectAclResource s) where
-    toHCL StorageDefaultObjectAclResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceStorageDefaultObjectAcl s) where
+    toHCL ResourceStorageDefaultObjectAcl{..} = TF.inline $ catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "role_entity" <$> TF.attribute _role_entity
         ]
 
-instance P.HasBucket (StorageDefaultObjectAclResource s) (TF.Attr s P.Text) where
+instance P.HasBucket (ResourceStorageDefaultObjectAcl s) (TF.Attr s P.Text) where
     bucket =
-        lens (_bucket :: StorageDefaultObjectAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _bucket = a } :: StorageDefaultObjectAclResource s)
+        lens (_bucket :: ResourceStorageDefaultObjectAcl s -> TF.Attr s P.Text)
+             (\s a -> s { _bucket = a } :: ResourceStorageDefaultObjectAcl s)
 
-instance P.HasRoleEntity (StorageDefaultObjectAclResource s) (TF.Attr s P.Text) where
+instance P.HasRoleEntity (ResourceStorageDefaultObjectAcl s) (TF.Attr s P.Text) where
     roleEntity =
-        lens (_role_entity :: StorageDefaultObjectAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role_entity = a } :: StorageDefaultObjectAclResource s)
+        lens (_role_entity :: ResourceStorageDefaultObjectAcl s -> TF.Attr s P.Text)
+             (\s a -> s { _role_entity = a } :: ResourceStorageDefaultObjectAcl s)
 
-instance s ~ s' => P.HasComputedBucket (TF.Ref s' (StorageDefaultObjectAclResource s)) (TF.Attr s P.Text) where
-    computedBucket =
-        (_bucket :: StorageDefaultObjectAclResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBucket (TF.Ref s' (ResourceStorageDefaultObjectAcl s)) (TF.Attr s P.Text) where
+    computeBucket =
+        (_bucket :: ResourceStorageDefaultObjectAcl s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRoleEntity (TF.Ref s' (StorageDefaultObjectAclResource s)) (TF.Attr s P.Text) where
-    computedRoleEntity =
-        (_role_entity :: StorageDefaultObjectAclResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRoleEntity (TF.Ref s' (ResourceStorageDefaultObjectAcl s)) (TF.Attr s P.Text) where
+    computeRoleEntity =
+        (_role_entity :: ResourceStorageDefaultObjectAcl s -> TF.Attr s P.Text)
             . TF.refValue
 
-storageDefaultObjectAclResource :: TF.Resource P.Google (StorageDefaultObjectAclResource s)
-storageDefaultObjectAclResource =
+resourceStorageDefaultObjectAcl :: TF.Resource P.Google (ResourceStorageDefaultObjectAcl s)
+resourceStorageDefaultObjectAcl =
     TF.newResource "google_storage_default_object_acl" $
-        StorageDefaultObjectAclResource {
+        ResourceStorageDefaultObjectAcl {
               _bucket = TF.Nil
             , _role_entity = TF.Nil
             }
@@ -11432,7 +11432,7 @@ a flow of event notifications from GCS to a Cloud Pub/Sub topic. For more
 information see <https://cloud.google.com/storage/docs/pubsub-notifications>
 and <https://cloud.google.com/storage/docs/json_api/v1/notifications> .
 -}
-data StorageNotificationResource s = StorageNotificationResource {
+data ResourceStorageNotification s = ResourceStorageNotification {
       _bucket :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the bucket. -}
     , _custom_attributes :: !(TF.Attr s P.Text)
@@ -11447,8 +11447,8 @@ data StorageNotificationResource s = StorageNotificationResource {
     {- ^ (Required) The Cloud PubSub topic to which this subscription publishes. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageNotificationResource s) where
-    toHCL StorageNotificationResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceStorageNotification s) where
+    toHCL ResourceStorageNotification{..} = TF.inline $ catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "custom_attributes" <$> TF.attribute _custom_attributes
         , TF.assign "event_types" <$> TF.attribute _event_types
@@ -11457,73 +11457,73 @@ instance TF.ToHCL (StorageNotificationResource s) where
         , TF.assign "topic" <$> TF.attribute _topic
         ]
 
-instance P.HasBucket (StorageNotificationResource s) (TF.Attr s P.Text) where
+instance P.HasBucket (ResourceStorageNotification s) (TF.Attr s P.Text) where
     bucket =
-        lens (_bucket :: StorageNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _bucket = a } :: StorageNotificationResource s)
+        lens (_bucket :: ResourceStorageNotification s -> TF.Attr s P.Text)
+             (\s a -> s { _bucket = a } :: ResourceStorageNotification s)
 
-instance P.HasCustomAttributes (StorageNotificationResource s) (TF.Attr s P.Text) where
+instance P.HasCustomAttributes (ResourceStorageNotification s) (TF.Attr s P.Text) where
     customAttributes =
-        lens (_custom_attributes :: StorageNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _custom_attributes = a } :: StorageNotificationResource s)
+        lens (_custom_attributes :: ResourceStorageNotification s -> TF.Attr s P.Text)
+             (\s a -> s { _custom_attributes = a } :: ResourceStorageNotification s)
 
-instance P.HasEventTypes (StorageNotificationResource s) (TF.Attr s P.Text) where
+instance P.HasEventTypes (ResourceStorageNotification s) (TF.Attr s P.Text) where
     eventTypes =
-        lens (_event_types :: StorageNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _event_types = a } :: StorageNotificationResource s)
+        lens (_event_types :: ResourceStorageNotification s -> TF.Attr s P.Text)
+             (\s a -> s { _event_types = a } :: ResourceStorageNotification s)
 
-instance P.HasObjectNamePrefix (StorageNotificationResource s) (TF.Attr s P.Text) where
+instance P.HasObjectNamePrefix (ResourceStorageNotification s) (TF.Attr s P.Text) where
     objectNamePrefix =
-        lens (_object_name_prefix :: StorageNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _object_name_prefix = a } :: StorageNotificationResource s)
+        lens (_object_name_prefix :: ResourceStorageNotification s -> TF.Attr s P.Text)
+             (\s a -> s { _object_name_prefix = a } :: ResourceStorageNotification s)
 
-instance P.HasPayloadFormat (StorageNotificationResource s) (TF.Attr s P.Text) where
+instance P.HasPayloadFormat (ResourceStorageNotification s) (TF.Attr s P.Text) where
     payloadFormat =
-        lens (_payload_format :: StorageNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _payload_format = a } :: StorageNotificationResource s)
+        lens (_payload_format :: ResourceStorageNotification s -> TF.Attr s P.Text)
+             (\s a -> s { _payload_format = a } :: ResourceStorageNotification s)
 
-instance P.HasTopic (StorageNotificationResource s) (TF.Attr s P.Text) where
+instance P.HasTopic (ResourceStorageNotification s) (TF.Attr s P.Text) where
     topic =
-        lens (_topic :: StorageNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _topic = a } :: StorageNotificationResource s)
+        lens (_topic :: ResourceStorageNotification s -> TF.Attr s P.Text)
+             (\s a -> s { _topic = a } :: ResourceStorageNotification s)
 
-instance s ~ s' => P.HasComputedBucket (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedBucket =
-        (_bucket :: StorageNotificationResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBucket (TF.Ref s' (ResourceStorageNotification s)) (TF.Attr s P.Text) where
+    computeBucket =
+        (_bucket :: ResourceStorageNotification s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCustomAttributes (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedCustomAttributes =
-        (_custom_attributes :: StorageNotificationResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeCustomAttributes (TF.Ref s' (ResourceStorageNotification s)) (TF.Attr s P.Text) where
+    computeCustomAttributes =
+        (_custom_attributes :: ResourceStorageNotification s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEventTypes (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedEventTypes =
-        (_event_types :: StorageNotificationResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeEventTypes (TF.Ref s' (ResourceStorageNotification s)) (TF.Attr s P.Text) where
+    computeEventTypes =
+        (_event_types :: ResourceStorageNotification s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedObjectNamePrefix (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedObjectNamePrefix =
-        (_object_name_prefix :: StorageNotificationResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeObjectNamePrefix (TF.Ref s' (ResourceStorageNotification s)) (TF.Attr s P.Text) where
+    computeObjectNamePrefix =
+        (_object_name_prefix :: ResourceStorageNotification s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPayloadFormat (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedPayloadFormat =
-        (_payload_format :: StorageNotificationResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePayloadFormat (TF.Ref s' (ResourceStorageNotification s)) (TF.Attr s P.Text) where
+    computePayloadFormat =
+        (_payload_format :: ResourceStorageNotification s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputeSelfLink (TF.Ref s' (ResourceStorageNotification s)) (TF.Attr s P.Text) where
+    computeSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedTopic (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedTopic =
-        (_topic :: StorageNotificationResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTopic (TF.Ref s' (ResourceStorageNotification s)) (TF.Attr s P.Text) where
+    computeTopic =
+        (_topic :: ResourceStorageNotification s -> TF.Attr s P.Text)
             . TF.refValue
 
-storageNotificationResource :: TF.Resource P.Google (StorageNotificationResource s)
-storageNotificationResource =
+resourceStorageNotification :: TF.Resource P.Google (ResourceStorageNotification s)
+resourceStorageNotification =
     TF.newResource "google_storage_notification" $
-        StorageNotificationResource {
+        ResourceStorageNotification {
               _bucket = TF.Nil
             , _custom_attributes = TF.Nil
             , _event_types = TF.Nil
@@ -11539,7 +11539,7 @@ information see <https://cloud.google.com/storage/docs/access-control/lists>
 and <https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls>
 .
 -}
-data StorageObjectAclResource s = StorageObjectAclResource {
+data ResourceStorageObjectAcl s = ResourceStorageObjectAcl {
       _bucket :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the bucket it applies to. -}
     , _object :: !(TF.Attr s P.Text)
@@ -11550,58 +11550,58 @@ data StorageObjectAclResource s = StorageObjectAclResource {
     {- ^ (Optional) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls> for more details. Must be set if @predefined_acl@ is not. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageObjectAclResource s) where
-    toHCL StorageObjectAclResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceStorageObjectAcl s) where
+    toHCL ResourceStorageObjectAcl{..} = TF.inline $ catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "object" <$> TF.attribute _object
         , TF.assign "predefined_acl" <$> TF.attribute _predefined_acl
         , TF.assign "role_entity" <$> TF.attribute _role_entity
         ]
 
-instance P.HasBucket (StorageObjectAclResource s) (TF.Attr s P.Text) where
+instance P.HasBucket (ResourceStorageObjectAcl s) (TF.Attr s P.Text) where
     bucket =
-        lens (_bucket :: StorageObjectAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _bucket = a } :: StorageObjectAclResource s)
+        lens (_bucket :: ResourceStorageObjectAcl s -> TF.Attr s P.Text)
+             (\s a -> s { _bucket = a } :: ResourceStorageObjectAcl s)
 
-instance P.HasObject (StorageObjectAclResource s) (TF.Attr s P.Text) where
+instance P.HasObject (ResourceStorageObjectAcl s) (TF.Attr s P.Text) where
     object =
-        lens (_object :: StorageObjectAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _object = a } :: StorageObjectAclResource s)
+        lens (_object :: ResourceStorageObjectAcl s -> TF.Attr s P.Text)
+             (\s a -> s { _object = a } :: ResourceStorageObjectAcl s)
 
-instance P.HasPredefinedAcl (StorageObjectAclResource s) (TF.Attr s P.Text) where
+instance P.HasPredefinedAcl (ResourceStorageObjectAcl s) (TF.Attr s P.Text) where
     predefinedAcl =
-        lens (_predefined_acl :: StorageObjectAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _predefined_acl = a } :: StorageObjectAclResource s)
+        lens (_predefined_acl :: ResourceStorageObjectAcl s -> TF.Attr s P.Text)
+             (\s a -> s { _predefined_acl = a } :: ResourceStorageObjectAcl s)
 
-instance P.HasRoleEntity (StorageObjectAclResource s) (TF.Attr s P.Text) where
+instance P.HasRoleEntity (ResourceStorageObjectAcl s) (TF.Attr s P.Text) where
     roleEntity =
-        lens (_role_entity :: StorageObjectAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role_entity = a } :: StorageObjectAclResource s)
+        lens (_role_entity :: ResourceStorageObjectAcl s -> TF.Attr s P.Text)
+             (\s a -> s { _role_entity = a } :: ResourceStorageObjectAcl s)
 
-instance s ~ s' => P.HasComputedBucket (TF.Ref s' (StorageObjectAclResource s)) (TF.Attr s P.Text) where
-    computedBucket =
-        (_bucket :: StorageObjectAclResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeBucket (TF.Ref s' (ResourceStorageObjectAcl s)) (TF.Attr s P.Text) where
+    computeBucket =
+        (_bucket :: ResourceStorageObjectAcl s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedObject (TF.Ref s' (StorageObjectAclResource s)) (TF.Attr s P.Text) where
-    computedObject =
-        (_object :: StorageObjectAclResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeObject (TF.Ref s' (ResourceStorageObjectAcl s)) (TF.Attr s P.Text) where
+    computeObject =
+        (_object :: ResourceStorageObjectAcl s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPredefinedAcl (TF.Ref s' (StorageObjectAclResource s)) (TF.Attr s P.Text) where
-    computedPredefinedAcl =
-        (_predefined_acl :: StorageObjectAclResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePredefinedAcl (TF.Ref s' (ResourceStorageObjectAcl s)) (TF.Attr s P.Text) where
+    computePredefinedAcl =
+        (_predefined_acl :: ResourceStorageObjectAcl s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRoleEntity (TF.Ref s' (StorageObjectAclResource s)) (TF.Attr s P.Text) where
-    computedRoleEntity =
-        (_role_entity :: StorageObjectAclResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRoleEntity (TF.Ref s' (ResourceStorageObjectAcl s)) (TF.Attr s P.Text) where
+    computeRoleEntity =
+        (_role_entity :: ResourceStorageObjectAcl s -> TF.Attr s P.Text)
             . TF.refValue
 
-storageObjectAclResource :: TF.Resource P.Google (StorageObjectAclResource s)
-storageObjectAclResource =
+resourceStorageObjectAcl :: TF.Resource P.Google (ResourceStorageObjectAcl s)
+resourceStorageObjectAcl =
     TF.newResource "google_storage_object_acl" $
-        StorageObjectAclResource {
+        ResourceStorageObjectAcl {
               _bucket = TF.Nil
             , _object = TF.Nil
             , _predefined_acl = TF.Nil

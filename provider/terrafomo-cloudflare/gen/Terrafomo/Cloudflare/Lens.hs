@@ -31,19 +31,19 @@ module Terrafomo.Cloudflare.Lens
     , HasValue (..)
 
     -- ** Computed Attributes
-    , HasComputedCidrBlocks (..)
-    , HasComputedDomain (..)
-    , HasComputedHostname (..)
-    , HasComputedId (..)
-    , HasComputedIpv4CidrBlocks (..)
-    , HasComputedIpv6CidrBlocks (..)
-    , HasComputedName (..)
-    , HasComputedPriority (..)
-    , HasComputedProxied (..)
-    , HasComputedTtl (..)
-    , HasComputedType' (..)
-    , HasComputedValue (..)
-    , HasComputedZoneId (..)
+    , HasComputeCidrBlocks (..)
+    , HasComputeDomain (..)
+    , HasComputeHostname (..)
+    , HasComputeId (..)
+    , HasComputeIpv4CidrBlocks (..)
+    , HasComputeIpv6CidrBlocks (..)
+    , HasComputeName (..)
+    , HasComputePriority (..)
+    , HasComputeProxied (..)
+    , HasComputeTtl (..)
+    , HasComputeType' (..)
+    , HasComputeValue (..)
+    , HasComputeZoneId (..)
     ) where
 
 import GHC.Base ((.))
@@ -95,41 +95,41 @@ class HasValue a b | a -> b where
 instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
 
-class HasComputedCidrBlocks a b | a -> b where
-    computedCidrBlocks :: a -> b
+class HasComputeCidrBlocks a b | a -> b where
+    computeCidrBlocks :: a -> b
 
-class HasComputedDomain a b | a -> b where
-    computedDomain :: a -> b
+class HasComputeDomain a b | a -> b where
+    computeDomain :: a -> b
 
-class HasComputedHostname a b | a -> b where
-    computedHostname :: a -> b
+class HasComputeHostname a b | a -> b where
+    computeHostname :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedIpv4CidrBlocks a b | a -> b where
-    computedIpv4CidrBlocks :: a -> b
+class HasComputeIpv4CidrBlocks a b | a -> b where
+    computeIpv4CidrBlocks :: a -> b
 
-class HasComputedIpv6CidrBlocks a b | a -> b where
-    computedIpv6CidrBlocks :: a -> b
+class HasComputeIpv6CidrBlocks a b | a -> b where
+    computeIpv6CidrBlocks :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedPriority a b | a -> b where
-    computedPriority :: a -> b
+class HasComputePriority a b | a -> b where
+    computePriority :: a -> b
 
-class HasComputedProxied a b | a -> b where
-    computedProxied :: a -> b
+class HasComputeProxied a b | a -> b where
+    computeProxied :: a -> b
 
-class HasComputedTtl a b | a -> b where
-    computedTtl :: a -> b
+class HasComputeTtl a b | a -> b where
+    computeTtl :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputeType' a b | a -> b where
+    computeType' :: a -> b
 
-class HasComputedValue a b | a -> b where
-    computedValue :: a -> b
+class HasComputeValue a b | a -> b where
+    computeValue :: a -> b
 
-class HasComputedZoneId a b | a -> b where
-    computedZoneId :: a -> b
+class HasComputeZoneId a b | a -> b where
+    computeZoneId :: a -> b

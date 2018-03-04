@@ -63,47 +63,47 @@ module Terrafomo.Datadog.Lens
     , HasUnit (..)
 
     -- ** Computed Attributes
-    , HasComputedActive (..)
-    , HasComputedDescription (..)
-    , HasComputedDisabled (..)
-    , HasComputedEmail (..)
-    , HasComputedEnd (..)
-    , HasComputedEscalationMessage (..)
-    , HasComputedEvaluationDelay (..)
-    , HasComputedGraph (..)
-    , HasComputedHandle (..)
-    , HasComputedId (..)
-    , HasComputedIncludeTags (..)
-    , HasComputedIsAdmin (..)
-    , HasComputedLocked (..)
-    , HasComputedMessage (..)
-    , HasComputedMetric (..)
-    , HasComputedMonitorId (..)
-    , HasComputedName (..)
-    , HasComputedNewHostDelay (..)
-    , HasComputedNoDataTimeframe (..)
-    , HasComputedNotifyAudit (..)
-    , HasComputedNotifyNoData (..)
-    , HasComputedPerUnit (..)
-    , HasComputedQuery (..)
-    , HasComputedReadOnly (..)
-    , HasComputedRecurrence (..)
-    , HasComputedRenotifyInterval (..)
-    , HasComputedRequireFullWindow (..)
-    , HasComputedRole (..)
-    , HasComputedScope (..)
-    , HasComputedShortName (..)
-    , HasComputedSilenced (..)
-    , HasComputedStart (..)
-    , HasComputedStatsdInterval (..)
-    , HasComputedTags (..)
-    , HasComputedTemplateVariable (..)
-    , HasComputedThresholds (..)
-    , HasComputedTimeoutH (..)
-    , HasComputedTitle (..)
-    , HasComputedType' (..)
-    , HasComputedUnit (..)
-    , HasComputedVerified (..)
+    , HasComputeActive (..)
+    , HasComputeDescription (..)
+    , HasComputeDisabled (..)
+    , HasComputeEmail (..)
+    , HasComputeEnd (..)
+    , HasComputeEscalationMessage (..)
+    , HasComputeEvaluationDelay (..)
+    , HasComputeGraph (..)
+    , HasComputeHandle (..)
+    , HasComputeId (..)
+    , HasComputeIncludeTags (..)
+    , HasComputeIsAdmin (..)
+    , HasComputeLocked (..)
+    , HasComputeMessage (..)
+    , HasComputeMetric (..)
+    , HasComputeMonitorId (..)
+    , HasComputeName (..)
+    , HasComputeNewHostDelay (..)
+    , HasComputeNoDataTimeframe (..)
+    , HasComputeNotifyAudit (..)
+    , HasComputeNotifyNoData (..)
+    , HasComputePerUnit (..)
+    , HasComputeQuery (..)
+    , HasComputeReadOnly (..)
+    , HasComputeRecurrence (..)
+    , HasComputeRenotifyInterval (..)
+    , HasComputeRequireFullWindow (..)
+    , HasComputeRole (..)
+    , HasComputeScope (..)
+    , HasComputeShortName (..)
+    , HasComputeSilenced (..)
+    , HasComputeStart (..)
+    , HasComputeStatsdInterval (..)
+    , HasComputeTags (..)
+    , HasComputeTemplateVariable (..)
+    , HasComputeThresholds (..)
+    , HasComputeTimeoutH (..)
+    , HasComputeTitle (..)
+    , HasComputeType' (..)
+    , HasComputeUnit (..)
+    , HasComputeVerified (..)
     ) where
 
 import GHC.Base ((.))
@@ -347,125 +347,125 @@ class HasUnit a b | a -> b where
 instance HasUnit a b => HasUnit (TF.Schema l p a) b where
     unit = TF.configuration . unit
 
-class HasComputedActive a b | a -> b where
-    computedActive :: a -> b
+class HasComputeActive a b | a -> b where
+    computeActive :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedDisabled a b | a -> b where
-    computedDisabled :: a -> b
+class HasComputeDisabled a b | a -> b where
+    computeDisabled :: a -> b
 
-class HasComputedEmail a b | a -> b where
-    computedEmail :: a -> b
+class HasComputeEmail a b | a -> b where
+    computeEmail :: a -> b
 
-class HasComputedEnd a b | a -> b where
-    computedEnd :: a -> b
+class HasComputeEnd a b | a -> b where
+    computeEnd :: a -> b
 
-class HasComputedEscalationMessage a b | a -> b where
-    computedEscalationMessage :: a -> b
+class HasComputeEscalationMessage a b | a -> b where
+    computeEscalationMessage :: a -> b
 
-class HasComputedEvaluationDelay a b | a -> b where
-    computedEvaluationDelay :: a -> b
+class HasComputeEvaluationDelay a b | a -> b where
+    computeEvaluationDelay :: a -> b
 
-class HasComputedGraph a b | a -> b where
-    computedGraph :: a -> b
+class HasComputeGraph a b | a -> b where
+    computeGraph :: a -> b
 
-class HasComputedHandle a b | a -> b where
-    computedHandle :: a -> b
+class HasComputeHandle a b | a -> b where
+    computeHandle :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedIncludeTags a b | a -> b where
-    computedIncludeTags :: a -> b
+class HasComputeIncludeTags a b | a -> b where
+    computeIncludeTags :: a -> b
 
-class HasComputedIsAdmin a b | a -> b where
-    computedIsAdmin :: a -> b
+class HasComputeIsAdmin a b | a -> b where
+    computeIsAdmin :: a -> b
 
-class HasComputedLocked a b | a -> b where
-    computedLocked :: a -> b
+class HasComputeLocked a b | a -> b where
+    computeLocked :: a -> b
 
-class HasComputedMessage a b | a -> b where
-    computedMessage :: a -> b
+class HasComputeMessage a b | a -> b where
+    computeMessage :: a -> b
 
-class HasComputedMetric a b | a -> b where
-    computedMetric :: a -> b
+class HasComputeMetric a b | a -> b where
+    computeMetric :: a -> b
 
-class HasComputedMonitorId a b | a -> b where
-    computedMonitorId :: a -> b
+class HasComputeMonitorId a b | a -> b where
+    computeMonitorId :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNewHostDelay a b | a -> b where
-    computedNewHostDelay :: a -> b
+class HasComputeNewHostDelay a b | a -> b where
+    computeNewHostDelay :: a -> b
 
-class HasComputedNoDataTimeframe a b | a -> b where
-    computedNoDataTimeframe :: a -> b
+class HasComputeNoDataTimeframe a b | a -> b where
+    computeNoDataTimeframe :: a -> b
 
-class HasComputedNotifyAudit a b | a -> b where
-    computedNotifyAudit :: a -> b
+class HasComputeNotifyAudit a b | a -> b where
+    computeNotifyAudit :: a -> b
 
-class HasComputedNotifyNoData a b | a -> b where
-    computedNotifyNoData :: a -> b
+class HasComputeNotifyNoData a b | a -> b where
+    computeNotifyNoData :: a -> b
 
-class HasComputedPerUnit a b | a -> b where
-    computedPerUnit :: a -> b
+class HasComputePerUnit a b | a -> b where
+    computePerUnit :: a -> b
 
-class HasComputedQuery a b | a -> b where
-    computedQuery :: a -> b
+class HasComputeQuery a b | a -> b where
+    computeQuery :: a -> b
 
-class HasComputedReadOnly a b | a -> b where
-    computedReadOnly :: a -> b
+class HasComputeReadOnly a b | a -> b where
+    computeReadOnly :: a -> b
 
-class HasComputedRecurrence a b | a -> b where
-    computedRecurrence :: a -> b
+class HasComputeRecurrence a b | a -> b where
+    computeRecurrence :: a -> b
 
-class HasComputedRenotifyInterval a b | a -> b where
-    computedRenotifyInterval :: a -> b
+class HasComputeRenotifyInterval a b | a -> b where
+    computeRenotifyInterval :: a -> b
 
-class HasComputedRequireFullWindow a b | a -> b where
-    computedRequireFullWindow :: a -> b
+class HasComputeRequireFullWindow a b | a -> b where
+    computeRequireFullWindow :: a -> b
 
-class HasComputedRole a b | a -> b where
-    computedRole :: a -> b
+class HasComputeRole a b | a -> b where
+    computeRole :: a -> b
 
-class HasComputedScope a b | a -> b where
-    computedScope :: a -> b
+class HasComputeScope a b | a -> b where
+    computeScope :: a -> b
 
-class HasComputedShortName a b | a -> b where
-    computedShortName :: a -> b
+class HasComputeShortName a b | a -> b where
+    computeShortName :: a -> b
 
-class HasComputedSilenced a b | a -> b where
-    computedSilenced :: a -> b
+class HasComputeSilenced a b | a -> b where
+    computeSilenced :: a -> b
 
-class HasComputedStart a b | a -> b where
-    computedStart :: a -> b
+class HasComputeStart a b | a -> b where
+    computeStart :: a -> b
 
-class HasComputedStatsdInterval a b | a -> b where
-    computedStatsdInterval :: a -> b
+class HasComputeStatsdInterval a b | a -> b where
+    computeStatsdInterval :: a -> b
 
-class HasComputedTags a b | a -> b where
-    computedTags :: a -> b
+class HasComputeTags a b | a -> b where
+    computeTags :: a -> b
 
-class HasComputedTemplateVariable a b | a -> b where
-    computedTemplateVariable :: a -> b
+class HasComputeTemplateVariable a b | a -> b where
+    computeTemplateVariable :: a -> b
 
-class HasComputedThresholds a b | a -> b where
-    computedThresholds :: a -> b
+class HasComputeThresholds a b | a -> b where
+    computeThresholds :: a -> b
 
-class HasComputedTimeoutH a b | a -> b where
-    computedTimeoutH :: a -> b
+class HasComputeTimeoutH a b | a -> b where
+    computeTimeoutH :: a -> b
 
-class HasComputedTitle a b | a -> b where
-    computedTitle :: a -> b
+class HasComputeTitle a b | a -> b where
+    computeTitle :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputeType' a b | a -> b where
+    computeType' :: a -> b
 
-class HasComputedUnit a b | a -> b where
-    computedUnit :: a -> b
+class HasComputeUnit a b | a -> b where
+    computeUnit :: a -> b
 
-class HasComputedVerified a b | a -> b where
-    computedVerified :: a -> b
+class HasComputeVerified a b | a -> b where
+    computeVerified :: a -> b

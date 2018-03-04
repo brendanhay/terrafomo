@@ -29,6 +29,7 @@ module Terrafomo.Nomad.Provider
     , providerKeyFile
     , providerRegion
     , providerSecretId
+    , providerVaultToken
     ) where
 
 import Data.Hashable      (Hashable)
@@ -55,18 +56,20 @@ provider exposes resources to interact with a Nomad cluster. Use the
 navigation to the left to read about the available resources.
 -}
 data Nomad = Nomad {
-      _address   :: !(Maybe P.Text)
+      _address     :: !(Maybe P.Text)
     {- ^  @(string: "http://127.0.0.1:4646")@ - The HTTP(S) API address of the Nomad agent. This must include the leading protocol (e.g. @https://@ ). This can also be specified as the @NOMAD_ADDR@ environment variable. -}
-    , _ca_file   :: !(Maybe P.Text)
+    , _ca_file     :: !(Maybe P.Text)
     {- ^  @(string: "")@ - A local file path to a PEM-encoded certificate authority used to verify the remote agent's certificate. This can also be specified as the @NOMAD_CACERT@ environment variable. -}
-    , _cert_file :: !(Maybe P.Text)
+    , _cert_file   :: !(Maybe P.Text)
     {- ^  @(string: "")@ - A local file path to a PEM-encoded certificate provided to the remote agent. If this is specified, @key_file@ is also required. This can also be specified as the @NOMAD_CLIENT_CERT@ environment variable. -}
-    , _key_file  :: !(Maybe P.Text)
+    , _key_file    :: !(Maybe P.Text)
     {- ^  @(string: "")@ - A local file path to a PEM-encoded private key. This is required if @cert_file@ is specified. This can also be specified via the @NOMAD_CLIENT_KEY@ environment variable. -}
-    , _region    :: !(Maybe P.Text)
+    , _region      :: !(Maybe P.Text)
     {- ^  @(string: "")@ - The Nomad region to target. This can also be specified as the @NOMAD_REGION@ environment variable. -}
-    , _secret_id :: !(Maybe P.Text)
+    , _secret_id   :: !(Maybe P.Text)
     {- ^  @(string: "")@ - The Secret ID of an ACL token to make requests with, for ACL-enabled clusters. This can also be specified via the @NOMAD_TOKEN@ environment variable. -}
+    , _vault_token :: !(Maybe P.Text)
+    {- ^  @(string: "")@ - A vault token to be inserted in the job file. This can also be specified as the @VAULT_TOKEN@ environment variable or using a vault token helper (see <https://www.vaultproject.io/docs/commands/token-helper.html> for more details). -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Nomad
@@ -83,6 +86,7 @@ instance TF.ToHCL Nomad where
             , TF.assign "key_file" <$> _key_file x
             , TF.assign "region" <$> _region x
             , TF.assign "secret_id" <$> _secret_id x
+            , TF.assign "vault_token" <$> _vault_token x
             ]
 
 instance TF.IsProvider Nomad where
@@ -96,6 +100,7 @@ emptyNomad = Nomad {
       , _key_file = Nothing
       , _region = Nothing
       , _secret_id = Nothing
+      , _vault_token = Nothing
     }
 
 providerAddress :: Lens' Nomad (Maybe P.Text)
@@ -121,3 +126,7 @@ providerRegion =
 providerSecretId :: Lens' Nomad (Maybe P.Text)
 providerSecretId =
     lens _secret_id (\s a -> s { _secret_id = a })
+
+providerVaultToken :: Lens' Nomad (Maybe P.Text)
+providerVaultToken =
+    lens _vault_token (\s a -> s { _vault_token = a })

@@ -24,8 +24,8 @@
 module Terrafomo.Cloudflare.Resource
     (
     -- * Types
-      RecordResource (..)
-    , recordResource
+      ResourceRecord (..)
+    , resourceRecord
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -38,16 +38,16 @@ module Terrafomo.Cloudflare.Resource
     , P.HasValue (..)
 
     -- ** Computed Attributes
-    , P.HasComputedDomain (..)
-    , P.HasComputedHostname (..)
-    , P.HasComputedId (..)
-    , P.HasComputedName (..)
-    , P.HasComputedPriority (..)
-    , P.HasComputedProxied (..)
-    , P.HasComputedTtl (..)
-    , P.HasComputedType' (..)
-    , P.HasComputedValue (..)
-    , P.HasComputedZoneId (..)
+    , P.HasComputeDomain (..)
+    , P.HasComputeHostname (..)
+    , P.HasComputeId (..)
+    , P.HasComputeName (..)
+    , P.HasComputePriority (..)
+    , P.HasComputeProxied (..)
+    , P.HasComputeTtl (..)
+    , P.HasComputeType' (..)
+    , P.HasComputeValue (..)
+    , P.HasComputeZoneId (..)
 
     -- * Re-exported Types
     , module P
@@ -81,7 +81,7 @@ import qualified Terrafomo.Schema    as TF
 
 Provides a Cloudflare record resource.
 -}
-data RecordResource s = RecordResource {
+data ResourceRecord s = ResourceRecord {
       _domain   :: !(TF.Attr s P.Text)
     {- ^ (Required) The domain to add the record to -}
     , _name     :: !(TF.Attr s P.Text)
@@ -98,8 +98,8 @@ data RecordResource s = RecordResource {
     {- ^ (Required) The value of the record -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RecordResource s) where
-    toHCL RecordResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceRecord s) where
+    toHCL ResourceRecord{..} = TF.inline $ catMaybes
         [ TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "priority" <$> TF.attribute _priority
@@ -109,77 +109,77 @@ instance TF.ToHCL (RecordResource s) where
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance P.HasDomain (RecordResource s) (TF.Attr s P.Text) where
+instance P.HasDomain (ResourceRecord s) (TF.Attr s P.Text) where
     domain =
-        lens (_domain :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _domain = a } :: RecordResource s)
+        lens (_domain :: ResourceRecord s -> TF.Attr s P.Text)
+             (\s a -> s { _domain = a } :: ResourceRecord s)
 
-instance P.HasName (RecordResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceRecord s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: RecordResource s)
+        lens (_name :: ResourceRecord s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceRecord s)
 
-instance P.HasPriority (RecordResource s) (TF.Attr s P.Text) where
+instance P.HasPriority (ResourceRecord s) (TF.Attr s P.Text) where
     priority =
-        lens (_priority :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _priority = a } :: RecordResource s)
+        lens (_priority :: ResourceRecord s -> TF.Attr s P.Text)
+             (\s a -> s { _priority = a } :: ResourceRecord s)
 
-instance P.HasProxied (RecordResource s) (TF.Attr s P.Text) where
+instance P.HasProxied (ResourceRecord s) (TF.Attr s P.Text) where
     proxied =
-        lens (_proxied :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _proxied = a } :: RecordResource s)
+        lens (_proxied :: ResourceRecord s -> TF.Attr s P.Text)
+             (\s a -> s { _proxied = a } :: ResourceRecord s)
 
-instance P.HasTtl (RecordResource s) (TF.Attr s P.Text) where
+instance P.HasTtl (ResourceRecord s) (TF.Attr s P.Text) where
     ttl =
-        lens (_ttl :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: RecordResource s)
+        lens (_ttl :: ResourceRecord s -> TF.Attr s P.Text)
+             (\s a -> s { _ttl = a } :: ResourceRecord s)
 
-instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
+instance P.HasType' (ResourceRecord s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: RecordResource s)
+        lens (_type' :: ResourceRecord s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: ResourceRecord s)
 
-instance P.HasValue (RecordResource s) (TF.Attr s P.Text) where
+instance P.HasValue (ResourceRecord s) (TF.Attr s P.Text) where
     value =
-        lens (_value :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _value = a } :: RecordResource s)
+        lens (_value :: ResourceRecord s -> TF.Attr s P.Text)
+             (\s a -> s { _value = a } :: ResourceRecord s)
 
-instance s ~ s' => P.HasComputedDomain (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedDomain =
-        (_domain :: RecordResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDomain (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computeDomain =
+        (_domain :: ResourceRecord s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHostname (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "hostname"
+instance s ~ s' => P.HasComputeHostname (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computeHostname x = TF.compute (TF.refKey x) "hostname"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPriority (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedPriority x = TF.compute (TF.refKey x) "priority"
+instance s ~ s' => P.HasComputePriority (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computePriority x = TF.compute (TF.refKey x) "priority"
 
-instance s ~ s' => P.HasComputedProxied (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedProxied x = TF.compute (TF.refKey x) "proxied"
+instance s ~ s' => P.HasComputeProxied (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computeProxied x = TF.compute (TF.refKey x) "proxied"
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedTtl x = TF.compute (TF.refKey x) "ttl"
+instance s ~ s' => P.HasComputeTtl (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computeTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputeType' (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computeType' x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputedValue (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "value"
+instance s ~ s' => P.HasComputeValue (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computeValue x = TF.compute (TF.refKey x) "value"
 
-instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
+instance s ~ s' => P.HasComputeZoneId (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+    computeZoneId x = TF.compute (TF.refKey x) "zone_id"
 
-recordResource :: TF.Resource P.Cloudflare (RecordResource s)
-recordResource =
+resourceRecord :: TF.Resource P.Cloudflare (ResourceRecord s)
+resourceRecord =
     TF.newResource "cloudflare_record" $
-        RecordResource {
+        ResourceRecord {
               _domain = TF.Nil
             , _name = TF.Nil
             , _priority = TF.Nil

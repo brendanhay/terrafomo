@@ -5,9 +5,12 @@
 
 module Terrafomo.Attribute
     ( Attr (..)
+
     , compute
+
     , join
     , file
+
     , value
     , nil
     , true
@@ -77,10 +80,12 @@ nil :: Attr s a
 nil = Nil
 {-# INLINE nil #-}
 
+-- | Specify a boolean attribute value. Equivalent to @value True@.
 true :: Attr s Bool
 true = Constant True
 {-# INLINE true #-}
 
+-- | Specify a boolean attribute value. Equivalent to @value False@.
 false :: Attr s Bool
 false = Constant False
 {-# INLINE false #-}

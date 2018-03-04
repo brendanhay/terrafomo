@@ -24,26 +24,26 @@
 module Terrafomo.Packet.Resource
     (
     -- * Types
-      DeviceResource (..)
-    , deviceResource
+      ResourceDevice (..)
+    , resourceDevice
 
-    , IpAttachmentResource (..)
-    , ipAttachmentResource
+    , ResourceIpAttachment (..)
+    , resourceIpAttachment
 
-    , ProjectResource (..)
-    , projectResource
+    , ResourceProject (..)
+    , resourceProject
 
-    , ReservedIpBlockResource (..)
-    , reservedIpBlockResource
+    , ResourceReservedIpBlock (..)
+    , resourceReservedIpBlock
 
-    , SshKeyResource (..)
-    , sshKeyResource
+    , ResourceSshKey (..)
+    , resourceSshKey
 
-    , VolumeAttachmentResource (..)
-    , volumeAttachmentResource
+    , ResourceVolume (..)
+    , resourceVolume
 
-    , VolumeResource (..)
-    , volumeResource
+    , ResourceVolumeAttachment (..)
+    , resourceVolumeAttachment
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -70,45 +70,45 @@ module Terrafomo.Packet.Resource
     , P.HasVolumeId (..)
 
     -- ** Computed Attributes
-    , P.HasComputedAccessPrivateIpv4 (..)
-    , P.HasComputedAccessPublicIpv4 (..)
-    , P.HasComputedAccessPublicIpv6 (..)
-    , P.HasComputedAddressFamily (..)
-    , P.HasComputedAlwaysPxe (..)
-    , P.HasComputedAttachments (..)
-    , P.HasComputedBillingCycle (..)
-    , P.HasComputedCidr (..)
-    , P.HasComputedCidrNotation (..)
-    , P.HasComputedCreated (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedDeviceId (..)
-    , P.HasComputedFacility (..)
-    , P.HasComputedFingerprint (..)
-    , P.HasComputedGateway (..)
-    , P.HasComputedHardwareReservationId (..)
-    , P.HasComputedHostname (..)
-    , P.HasComputedId (..)
-    , P.HasComputedIpxeScriptUrl (..)
-    , P.HasComputedLocked (..)
-    , P.HasComputedName (..)
-    , P.HasComputedNetmask (..)
-    , P.HasComputedNetwork (..)
-    , P.HasComputedOperatingSystem (..)
-    , P.HasComputedPlan (..)
-    , P.HasComputedProjectId (..)
-    , P.HasComputedPublic (..)
-    , P.HasComputedPublicIpv4SubnetSize (..)
-    , P.HasComputedPublicKey (..)
-    , P.HasComputedQuantity (..)
-    , P.HasComputedRootPassword (..)
-    , P.HasComputedSize (..)
-    , P.HasComputedSnapshotPolicies (..)
-    , P.HasComputedState (..)
-    , P.HasComputedStorage (..)
-    , P.HasComputedTags (..)
-    , P.HasComputedUpdated (..)
-    , P.HasComputedUserData (..)
-    , P.HasComputedVolumeId (..)
+    , P.HasComputeAccessPrivateIpv4 (..)
+    , P.HasComputeAccessPublicIpv4 (..)
+    , P.HasComputeAccessPublicIpv6 (..)
+    , P.HasComputeAddressFamily (..)
+    , P.HasComputeAlwaysPxe (..)
+    , P.HasComputeAttachments (..)
+    , P.HasComputeBillingCycle (..)
+    , P.HasComputeCidr (..)
+    , P.HasComputeCidrNotation (..)
+    , P.HasComputeCreated (..)
+    , P.HasComputeDescription (..)
+    , P.HasComputeDeviceId (..)
+    , P.HasComputeFacility (..)
+    , P.HasComputeFingerprint (..)
+    , P.HasComputeGateway (..)
+    , P.HasComputeHardwareReservationId (..)
+    , P.HasComputeHostname (..)
+    , P.HasComputeId (..)
+    , P.HasComputeIpxeScriptUrl (..)
+    , P.HasComputeLocked (..)
+    , P.HasComputeName (..)
+    , P.HasComputeNetmask (..)
+    , P.HasComputeNetwork (..)
+    , P.HasComputeOperatingSystem (..)
+    , P.HasComputePlan (..)
+    , P.HasComputeProjectId (..)
+    , P.HasComputePublic (..)
+    , P.HasComputePublicIpv4SubnetSize (..)
+    , P.HasComputePublicKey (..)
+    , P.HasComputeQuantity (..)
+    , P.HasComputeRootPassword (..)
+    , P.HasComputeSize (..)
+    , P.HasComputeSnapshotPolicies (..)
+    , P.HasComputeState (..)
+    , P.HasComputeStorage (..)
+    , P.HasComputeTags (..)
+    , P.HasComputeUpdated (..)
+    , P.HasComputeUserData (..)
+    , P.HasComputeVolumeId (..)
 
     -- * Re-exported Types
     , module P
@@ -145,7 +145,7 @@ delete devices. ~> Note: All arguments including the root_password and
 user_data will be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
-data DeviceResource s = DeviceResource {
+data ResourceDevice s = ResourceDevice {
       _always_pxe              :: !(TF.Attr s P.Text)
     {- ^ (Optional) - If true, a device with OS @custom_ipxe@ will continue to boot via iPXE on reboots. -}
     , _billing_cycle           :: !(TF.Attr s P.Text)
@@ -172,8 +172,8 @@ data DeviceResource s = DeviceResource {
     {- ^ (Optional) - A string of the desired User Data for the device. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DeviceResource s) where
-    toHCL DeviceResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceDevice s) where
+    toHCL ResourceDevice{..} = TF.inline $ catMaybes
         [ TF.assign "always_pxe" <$> TF.attribute _always_pxe
         , TF.assign "billing_cycle" <$> TF.attribute _billing_cycle
         , TF.assign "facility" <$> TF.attribute _facility
@@ -188,149 +188,149 @@ instance TF.ToHCL (DeviceResource s) where
         , TF.assign "user_data" <$> TF.attribute _user_data
         ]
 
-instance P.HasAlwaysPxe (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasAlwaysPxe (ResourceDevice s) (TF.Attr s P.Text) where
     alwaysPxe =
-        lens (_always_pxe :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _always_pxe = a } :: DeviceResource s)
+        lens (_always_pxe :: ResourceDevice s -> TF.Attr s P.Text)
+             (\s a -> s { _always_pxe = a } :: ResourceDevice s)
 
-instance P.HasBillingCycle (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasBillingCycle (ResourceDevice s) (TF.Attr s P.Text) where
     billingCycle =
-        lens (_billing_cycle :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _billing_cycle = a } :: DeviceResource s)
+        lens (_billing_cycle :: ResourceDevice s -> TF.Attr s P.Text)
+             (\s a -> s { _billing_cycle = a } :: ResourceDevice s)
 
-instance P.HasFacility (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasFacility (ResourceDevice s) (TF.Attr s P.Text) where
     facility =
-        lens (_facility :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _facility = a } :: DeviceResource s)
+        lens (_facility :: ResourceDevice s -> TF.Attr s P.Text)
+             (\s a -> s { _facility = a } :: ResourceDevice s)
 
-instance P.HasHardwareReservationId (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasHardwareReservationId (ResourceDevice s) (TF.Attr s P.Text) where
     hardwareReservationId =
-        lens (_hardware_reservation_id :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _hardware_reservation_id = a } :: DeviceResource s)
+        lens (_hardware_reservation_id :: ResourceDevice s -> TF.Attr s P.Text)
+             (\s a -> s { _hardware_reservation_id = a } :: ResourceDevice s)
 
-instance P.HasHostname (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasHostname (ResourceDevice s) (TF.Attr s P.Text) where
     hostname =
-        lens (_hostname :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _hostname = a } :: DeviceResource s)
+        lens (_hostname :: ResourceDevice s -> TF.Attr s P.Text)
+             (\s a -> s { _hostname = a } :: ResourceDevice s)
 
-instance P.HasIpxeScriptUrl (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasIpxeScriptUrl (ResourceDevice s) (TF.Attr s P.Text) where
     ipxeScriptUrl =
-        lens (_ipxe_script_url :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ipxe_script_url = a } :: DeviceResource s)
+        lens (_ipxe_script_url :: ResourceDevice s -> TF.Attr s P.Text)
+             (\s a -> s { _ipxe_script_url = a } :: ResourceDevice s)
 
-instance P.HasOperatingSystem (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasOperatingSystem (ResourceDevice s) (TF.Attr s P.Text) where
     operatingSystem =
-        lens (_operating_system :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _operating_system = a } :: DeviceResource s)
+        lens (_operating_system :: ResourceDevice s -> TF.Attr s P.Text)
+             (\s a -> s { _operating_system = a } :: ResourceDevice s)
 
-instance P.HasPlan (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasPlan (ResourceDevice s) (TF.Attr s P.Text) where
     plan =
-        lens (_plan :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _plan = a } :: DeviceResource s)
+        lens (_plan :: ResourceDevice s -> TF.Attr s P.Text)
+             (\s a -> s { _plan = a } :: ResourceDevice s)
 
-instance P.HasProjectId (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasProjectId (ResourceDevice s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: DeviceResource s)
+        lens (_project_id :: ResourceDevice s -> TF.Attr s P.Text)
+             (\s a -> s { _project_id = a } :: ResourceDevice s)
 
-instance P.HasPublicIpv4SubnetSize (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasPublicIpv4SubnetSize (ResourceDevice s) (TF.Attr s P.Text) where
     publicIpv4SubnetSize =
-        lens (_public_ipv4_subnet_size :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _public_ipv4_subnet_size = a } :: DeviceResource s)
+        lens (_public_ipv4_subnet_size :: ResourceDevice s -> TF.Attr s P.Text)
+             (\s a -> s { _public_ipv4_subnet_size = a } :: ResourceDevice s)
 
-instance P.HasStorage (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasStorage (ResourceDevice s) (TF.Attr s P.Text) where
     storage =
-        lens (_storage :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _storage = a } :: DeviceResource s)
+        lens (_storage :: ResourceDevice s -> TF.Attr s P.Text)
+             (\s a -> s { _storage = a } :: ResourceDevice s)
 
-instance P.HasUserData (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasUserData (ResourceDevice s) (TF.Attr s P.Text) where
     userData =
-        lens (_user_data :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _user_data = a } :: DeviceResource s)
+        lens (_user_data :: ResourceDevice s -> TF.Attr s P.Text)
+             (\s a -> s { _user_data = a } :: ResourceDevice s)
 
-instance s ~ s' => P.HasComputedAccessPrivateIpv4 (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedAccessPrivateIpv4 x = TF.compute (TF.refKey x) "access_private_ipv4"
+instance s ~ s' => P.HasComputeAccessPrivateIpv4 (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeAccessPrivateIpv4 x = TF.compute (TF.refKey x) "access_private_ipv4"
 
-instance s ~ s' => P.HasComputedAccessPublicIpv4 (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedAccessPublicIpv4 x = TF.compute (TF.refKey x) "access_public_ipv4"
+instance s ~ s' => P.HasComputeAccessPublicIpv4 (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeAccessPublicIpv4 x = TF.compute (TF.refKey x) "access_public_ipv4"
 
-instance s ~ s' => P.HasComputedAccessPublicIpv6 (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedAccessPublicIpv6 x = TF.compute (TF.refKey x) "access_public_ipv6"
+instance s ~ s' => P.HasComputeAccessPublicIpv6 (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeAccessPublicIpv6 x = TF.compute (TF.refKey x) "access_public_ipv6"
 
-instance s ~ s' => P.HasComputedAlwaysPxe (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedAlwaysPxe =
-        (_always_pxe :: DeviceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeAlwaysPxe (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeAlwaysPxe =
+        (_always_pxe :: ResourceDevice s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBillingCycle (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedBillingCycle x = TF.compute (TF.refKey x) "billing_cycle"
+instance s ~ s' => P.HasComputeBillingCycle (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeBillingCycle x = TF.compute (TF.refKey x) "billing_cycle"
 
-instance s ~ s' => P.HasComputedCreated (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "created"
+instance s ~ s' => P.HasComputeCreated (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeCreated x = TF.compute (TF.refKey x) "created"
 
-instance s ~ s' => P.HasComputedFacility (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedFacility x = TF.compute (TF.refKey x) "facility"
+instance s ~ s' => P.HasComputeFacility (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeFacility x = TF.compute (TF.refKey x) "facility"
 
-instance s ~ s' => P.HasComputedHardwareReservationId (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedHardwareReservationId x = TF.compute (TF.refKey x) "hardware_reservation_id"
+instance s ~ s' => P.HasComputeHardwareReservationId (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeHardwareReservationId x = TF.compute (TF.refKey x) "hardware_reservation_id"
 
-instance s ~ s' => P.HasComputedHostname (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "hostname"
+instance s ~ s' => P.HasComputeHostname (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeHostname x = TF.compute (TF.refKey x) "hostname"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedIpxeScriptUrl (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedIpxeScriptUrl =
-        (_ipxe_script_url :: DeviceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpxeScriptUrl (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeIpxeScriptUrl =
+        (_ipxe_script_url :: ResourceDevice s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedLocked x = TF.compute (TF.refKey x) "locked"
+instance s ~ s' => P.HasComputeLocked (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeLocked x = TF.compute (TF.refKey x) "locked"
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+instance s ~ s' => P.HasComputeNetwork (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeNetwork x = TF.compute (TF.refKey x) "network"
 
-instance s ~ s' => P.HasComputedOperatingSystem (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedOperatingSystem x = TF.compute (TF.refKey x) "operating_system"
+instance s ~ s' => P.HasComputeOperatingSystem (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeOperatingSystem x = TF.compute (TF.refKey x) "operating_system"
 
-instance s ~ s' => P.HasComputedPlan (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedPlan x = TF.compute (TF.refKey x) "plan"
+instance s ~ s' => P.HasComputePlan (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computePlan x = TF.compute (TF.refKey x) "plan"
 
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "project_id"
+instance s ~ s' => P.HasComputeProjectId (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeProjectId x = TF.compute (TF.refKey x) "project_id"
 
-instance s ~ s' => P.HasComputedPublicIpv4SubnetSize (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedPublicIpv4SubnetSize =
-        (_public_ipv4_subnet_size :: DeviceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePublicIpv4SubnetSize (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computePublicIpv4SubnetSize =
+        (_public_ipv4_subnet_size :: ResourceDevice s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRootPassword (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedRootPassword x = TF.compute (TF.refKey x) "root_password"
+instance s ~ s' => P.HasComputeRootPassword (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeRootPassword x = TF.compute (TF.refKey x) "root_password"
 
-instance s ~ s' => P.HasComputedState (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+instance s ~ s' => P.HasComputeState (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeState x = TF.compute (TF.refKey x) "state"
 
-instance s ~ s' => P.HasComputedStorage (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedStorage =
-        (_storage :: DeviceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeStorage (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeStorage =
+        (_storage :: ResourceDevice s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+instance s ~ s' => P.HasComputeTags (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeTags x = TF.compute (TF.refKey x) "tags"
 
-instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "updated"
+instance s ~ s' => P.HasComputeUpdated (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeUpdated x = TF.compute (TF.refKey x) "updated"
 
-instance s ~ s' => P.HasComputedUserData (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedUserData =
-        (_user_data :: DeviceResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeUserData (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
+    computeUserData =
+        (_user_data :: ResourceDevice s -> TF.Attr s P.Text)
             . TF.refValue
 
-deviceResource :: TF.Resource P.Packet (DeviceResource s)
-deviceResource =
+resourceDevice :: TF.Resource P.Packet (ResourceDevice s)
+resourceDevice =
     TF.newResource "packet_device" $
-        DeviceResource {
+        ResourceDevice {
               _always_pxe = TF.Nil
             , _billing_cycle = TF.Nil
             , _facility = TF.Nil
@@ -358,60 +358,60 @@ elastic IP subnets is
 <https://help.packet.net/technical/networking/elastic-ips> . Device and
 reserved block must be in the same facility.
 -}
-data IpAttachmentResource s = IpAttachmentResource {
+data ResourceIpAttachment s = ResourceIpAttachment {
       _cidr_notation :: !(TF.Attr s P.Text)
     {- ^ (Required) CIDR notation of subnet from block reserved in the same project and facility as the device -}
     , _device_id     :: !(TF.Attr s P.Text)
     {- ^ (Required) ID of device to which to assign the subnet -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpAttachmentResource s) where
-    toHCL IpAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceIpAttachment s) where
+    toHCL ResourceIpAttachment{..} = TF.inline $ catMaybes
         [ TF.assign "cidr_notation" <$> TF.attribute _cidr_notation
         , TF.assign "device_id" <$> TF.attribute _device_id
         ]
 
-instance P.HasCidrNotation (IpAttachmentResource s) (TF.Attr s P.Text) where
+instance P.HasCidrNotation (ResourceIpAttachment s) (TF.Attr s P.Text) where
     cidrNotation =
-        lens (_cidr_notation :: IpAttachmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cidr_notation = a } :: IpAttachmentResource s)
+        lens (_cidr_notation :: ResourceIpAttachment s -> TF.Attr s P.Text)
+             (\s a -> s { _cidr_notation = a } :: ResourceIpAttachment s)
 
-instance P.HasDeviceId (IpAttachmentResource s) (TF.Attr s P.Text) where
+instance P.HasDeviceId (ResourceIpAttachment s) (TF.Attr s P.Text) where
     deviceId =
-        lens (_device_id :: IpAttachmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _device_id = a } :: IpAttachmentResource s)
+        lens (_device_id :: ResourceIpAttachment s -> TF.Attr s P.Text)
+             (\s a -> s { _device_id = a } :: ResourceIpAttachment s)
 
-instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedAddressFamily x = TF.compute (TF.refKey x) "address_family"
+instance s ~ s' => P.HasComputeAddressFamily (TF.Ref s' (ResourceIpAttachment s)) (TF.Attr s P.Text) where
+    computeAddressFamily x = TF.compute (TF.refKey x) "address_family"
 
-instance s ~ s' => P.HasComputedCidr (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedCidr x = TF.compute (TF.refKey x) "cidr"
+instance s ~ s' => P.HasComputeCidr (TF.Ref s' (ResourceIpAttachment s)) (TF.Attr s P.Text) where
+    computeCidr x = TF.compute (TF.refKey x) "cidr"
 
-instance s ~ s' => P.HasComputedCidrNotation (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
+instance s ~ s' => P.HasComputeCidrNotation (TF.Ref s' (ResourceIpAttachment s)) (TF.Attr s P.Text) where
+    computeCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
 
-instance s ~ s' => P.HasComputedDeviceId (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedDeviceId x = TF.compute (TF.refKey x) "device_id"
+instance s ~ s' => P.HasComputeDeviceId (TF.Ref s' (ResourceIpAttachment s)) (TF.Attr s P.Text) where
+    computeDeviceId x = TF.compute (TF.refKey x) "device_id"
 
-instance s ~ s' => P.HasComputedGateway (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "gateway"
+instance s ~ s' => P.HasComputeGateway (TF.Ref s' (ResourceIpAttachment s)) (TF.Attr s P.Text) where
+    computeGateway x = TF.compute (TF.refKey x) "gateway"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceIpAttachment s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedNetmask x = TF.compute (TF.refKey x) "netmask"
+instance s ~ s' => P.HasComputeNetmask (TF.Ref s' (ResourceIpAttachment s)) (TF.Attr s P.Text) where
+    computeNetmask x = TF.compute (TF.refKey x) "netmask"
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+instance s ~ s' => P.HasComputeNetwork (TF.Ref s' (ResourceIpAttachment s)) (TF.Attr s P.Text) where
+    computeNetwork x = TF.compute (TF.refKey x) "network"
 
-instance s ~ s' => P.HasComputedPublic (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedPublic x = TF.compute (TF.refKey x) "public"
+instance s ~ s' => P.HasComputePublic (TF.Ref s' (ResourceIpAttachment s)) (TF.Attr s P.Text) where
+    computePublic x = TF.compute (TF.refKey x) "public"
 
-ipAttachmentResource :: TF.Resource P.Packet (IpAttachmentResource s)
-ipAttachmentResource =
+resourceIpAttachment :: TF.Resource P.Packet (ResourceIpAttachment s)
+resourceIpAttachment =
     TF.newResource "packet_ip_attachment" $
-        IpAttachmentResource {
+        ResourceIpAttachment {
               _cidr_notation = TF.Nil
             , _device_id = TF.Nil
             }
@@ -421,39 +421,39 @@ ipAttachmentResource =
 Provides a Packet Project resource to allow you manage devices in your
 projects.
 -}
-data ProjectResource s = ProjectResource {
+data ResourceProject s = ResourceProject {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the Project on Packet.net -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectResource s) where
-    toHCL ProjectResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceProject s) where
+    toHCL ResourceProject{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceProject s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ProjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ProjectResource s)
+        lens (_name :: ResourceProject s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceProject s)
 
-instance s ~ s' => P.HasComputedCreated (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "created"
+instance s ~ s' => P.HasComputeCreated (TF.Ref s' (ResourceProject s)) (TF.Attr s P.Text) where
+    computeCreated x = TF.compute (TF.refKey x) "created"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceProject s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ProjectResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceProject s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceProject s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "updated"
+instance s ~ s' => P.HasComputeUpdated (TF.Ref s' (ResourceProject s)) (TF.Attr s P.Text) where
+    computeUpdated x = TF.compute (TF.refKey x) "updated"
 
-projectResource :: TF.Resource P.Packet (ProjectResource s)
-projectResource =
+resourceProject :: TF.Resource P.Packet (ResourceProject s)
+resourceProject =
     TF.newResource "packet_project" $
-        ProjectResource {
+        ResourceProject {
               _name = TF.Nil
             }
 
@@ -471,7 +471,7 @@ addresses) to /32 (1 address). Once IP block is allocated or imported, an
 address from it can be assigned to device with the @packet_ip_attachment@
 resource.
 -}
-data ReservedIpBlockResource s = ReservedIpBlockResource {
+data ResourceReservedIpBlock s = ResourceReservedIpBlock {
       _facility   :: !(TF.Attr s P.Text)
     {- ^ (Required) The facility where to allocate the address block -}
     , _project_id :: !(TF.Attr s P.Text)
@@ -480,62 +480,62 @@ data ReservedIpBlockResource s = ReservedIpBlockResource {
     {- ^ (Required) The number of allocated /32 addresses, a power of 2 -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ReservedIpBlockResource s) where
-    toHCL ReservedIpBlockResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceReservedIpBlock s) where
+    toHCL ResourceReservedIpBlock{..} = TF.inline $ catMaybes
         [ TF.assign "facility" <$> TF.attribute _facility
         , TF.assign "project_id" <$> TF.attribute _project_id
         , TF.assign "quantity" <$> TF.attribute _quantity
         ]
 
-instance P.HasFacility (ReservedIpBlockResource s) (TF.Attr s P.Text) where
+instance P.HasFacility (ResourceReservedIpBlock s) (TF.Attr s P.Text) where
     facility =
-        lens (_facility :: ReservedIpBlockResource s -> TF.Attr s P.Text)
-             (\s a -> s { _facility = a } :: ReservedIpBlockResource s)
+        lens (_facility :: ResourceReservedIpBlock s -> TF.Attr s P.Text)
+             (\s a -> s { _facility = a } :: ResourceReservedIpBlock s)
 
-instance P.HasProjectId (ReservedIpBlockResource s) (TF.Attr s P.Text) where
+instance P.HasProjectId (ResourceReservedIpBlock s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: ReservedIpBlockResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: ReservedIpBlockResource s)
+        lens (_project_id :: ResourceReservedIpBlock s -> TF.Attr s P.Text)
+             (\s a -> s { _project_id = a } :: ResourceReservedIpBlock s)
 
-instance P.HasQuantity (ReservedIpBlockResource s) (TF.Attr s P.Text) where
+instance P.HasQuantity (ResourceReservedIpBlock s) (TF.Attr s P.Text) where
     quantity =
-        lens (_quantity :: ReservedIpBlockResource s -> TF.Attr s P.Text)
-             (\s a -> s { _quantity = a } :: ReservedIpBlockResource s)
+        lens (_quantity :: ResourceReservedIpBlock s -> TF.Attr s P.Text)
+             (\s a -> s { _quantity = a } :: ResourceReservedIpBlock s)
 
-instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedAddressFamily x = TF.compute (TF.refKey x) "address_family"
+instance s ~ s' => P.HasComputeAddressFamily (TF.Ref s' (ResourceReservedIpBlock s)) (TF.Attr s P.Text) where
+    computeAddressFamily x = TF.compute (TF.refKey x) "address_family"
 
-instance s ~ s' => P.HasComputedCidr (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedCidr x = TF.compute (TF.refKey x) "cidr"
+instance s ~ s' => P.HasComputeCidr (TF.Ref s' (ResourceReservedIpBlock s)) (TF.Attr s P.Text) where
+    computeCidr x = TF.compute (TF.refKey x) "cidr"
 
-instance s ~ s' => P.HasComputedCidrNotation (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
+instance s ~ s' => P.HasComputeCidrNotation (TF.Ref s' (ResourceReservedIpBlock s)) (TF.Attr s P.Text) where
+    computeCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
 
-instance s ~ s' => P.HasComputedFacility (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedFacility x = TF.compute (TF.refKey x) "facility"
+instance s ~ s' => P.HasComputeFacility (TF.Ref s' (ResourceReservedIpBlock s)) (TF.Attr s P.Text) where
+    computeFacility x = TF.compute (TF.refKey x) "facility"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceReservedIpBlock s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedNetmask x = TF.compute (TF.refKey x) "netmask"
+instance s ~ s' => P.HasComputeNetmask (TF.Ref s' (ResourceReservedIpBlock s)) (TF.Attr s P.Text) where
+    computeNetmask x = TF.compute (TF.refKey x) "netmask"
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+instance s ~ s' => P.HasComputeNetwork (TF.Ref s' (ResourceReservedIpBlock s)) (TF.Attr s P.Text) where
+    computeNetwork x = TF.compute (TF.refKey x) "network"
 
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "project_id"
+instance s ~ s' => P.HasComputeProjectId (TF.Ref s' (ResourceReservedIpBlock s)) (TF.Attr s P.Text) where
+    computeProjectId x = TF.compute (TF.refKey x) "project_id"
 
-instance s ~ s' => P.HasComputedPublic (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedPublic x = TF.compute (TF.refKey x) "public"
+instance s ~ s' => P.HasComputePublic (TF.Ref s' (ResourceReservedIpBlock s)) (TF.Attr s P.Text) where
+    computePublic x = TF.compute (TF.refKey x) "public"
 
-instance s ~ s' => P.HasComputedQuantity (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedQuantity x = TF.compute (TF.refKey x) "quantity"
+instance s ~ s' => P.HasComputeQuantity (TF.Ref s' (ResourceReservedIpBlock s)) (TF.Attr s P.Text) where
+    computeQuantity x = TF.compute (TF.refKey x) "quantity"
 
-reservedIpBlockResource :: TF.Resource P.Packet (ReservedIpBlockResource s)
-reservedIpBlockResource =
+resourceReservedIpBlock :: TF.Resource P.Packet (ResourceReservedIpBlock s)
+resourceReservedIpBlock =
     TF.newResource "packet_reserved_ip_block" $
-        ReservedIpBlockResource {
+        ResourceReservedIpBlock {
               _facility = TF.Nil
             , _project_id = TF.Nil
             , _quantity = TF.Nil
@@ -547,104 +547,53 @@ Provides a Packet SSH key resource to allow you manage SSH keys on your
 account. All SSH keys on your account are loaded on all new devices, they do
 not have to be explicitly declared on device creation.
 -}
-data SshKeyResource s = SshKeyResource {
+data ResourceSshKey s = ResourceSshKey {
       _name       :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the SSH key for identification -}
     , _public_key :: !(TF.Attr s P.Text)
     {- ^ (Required) The public key. If this is a file, it can be read using the file interpolation function -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SshKeyResource s) where
-    toHCL SshKeyResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceSshKey s) where
+    toHCL ResourceSshKey{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "public_key" <$> TF.attribute _public_key
         ]
 
-instance P.HasName (SshKeyResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceSshKey s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: SshKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SshKeyResource s)
+        lens (_name :: ResourceSshKey s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceSshKey s)
 
-instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
+instance P.HasPublicKey (ResourceSshKey s) (TF.Attr s P.Text) where
     publicKey =
-        lens (_public_key :: SshKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _public_key = a } :: SshKeyResource s)
+        lens (_public_key :: ResourceSshKey s -> TF.Attr s P.Text)
+             (\s a -> s { _public_key = a } :: ResourceSshKey s)
 
-instance s ~ s' => P.HasComputedCreated (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "created"
+instance s ~ s' => P.HasComputeCreated (TF.Ref s' (ResourceSshKey s)) (TF.Attr s P.Text) where
+    computeCreated x = TF.compute (TF.refKey x) "created"
 
-instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+instance s ~ s' => P.HasComputeFingerprint (TF.Ref s' (ResourceSshKey s)) (TF.Attr s P.Text) where
+    computeFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceSshKey s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceSshKey s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedPublicKey x = TF.compute (TF.refKey x) "public_key"
+instance s ~ s' => P.HasComputePublicKey (TF.Ref s' (ResourceSshKey s)) (TF.Attr s P.Text) where
+    computePublicKey x = TF.compute (TF.refKey x) "public_key"
 
-instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "updated"
+instance s ~ s' => P.HasComputeUpdated (TF.Ref s' (ResourceSshKey s)) (TF.Attr s P.Text) where
+    computeUpdated x = TF.compute (TF.refKey x) "updated"
 
-sshKeyResource :: TF.Resource P.Packet (SshKeyResource s)
-sshKeyResource =
+resourceSshKey :: TF.Resource P.Packet (ResourceSshKey s)
+resourceSshKey =
     TF.newResource "packet_ssh_key" $
-        SshKeyResource {
+        ResourceSshKey {
               _name = TF.Nil
             , _public_key = TF.Nil
-            }
-
-{- | The @packet_volume_attachment@ Packet resource.
-
-Provides attachment of Packet Block Storage Volume to Devices. Device and
-volume must be in the same location (facility). Once attached by Terraform,
-they must then be mounted using the @packet_block_attach@ and
-@packet_block_detach@ scripts.
--}
-data VolumeAttachmentResource s = VolumeAttachmentResource {
-      _device_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the device to which the volume should be attached -}
-    , _volume_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the volume to attach -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (VolumeAttachmentResource s) where
-    toHCL VolumeAttachmentResource{..} = TF.inline $ catMaybes
-        [ TF.assign "device_id" <$> TF.attribute _device_id
-        , TF.assign "volume_id" <$> TF.attribute _volume_id
-        ]
-
-instance P.HasDeviceId (VolumeAttachmentResource s) (TF.Attr s P.Text) where
-    deviceId =
-        lens (_device_id :: VolumeAttachmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _device_id = a } :: VolumeAttachmentResource s)
-
-instance P.HasVolumeId (VolumeAttachmentResource s) (TF.Attr s P.Text) where
-    volumeId =
-        lens (_volume_id :: VolumeAttachmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _volume_id = a } :: VolumeAttachmentResource s)
-
-instance s ~ s' => P.HasComputedDeviceId (TF.Ref s' (VolumeAttachmentResource s)) (TF.Attr s P.Text) where
-    computedDeviceId =
-        (_device_id :: VolumeAttachmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeAttachmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedVolumeId (TF.Ref s' (VolumeAttachmentResource s)) (TF.Attr s P.Text) where
-    computedVolumeId =
-        (_volume_id :: VolumeAttachmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-volumeAttachmentResource :: TF.Resource P.Packet (VolumeAttachmentResource s)
-volumeAttachmentResource =
-    TF.newResource "packet_volume_attachment" $
-        VolumeAttachmentResource {
-              _device_id = TF.Nil
-            , _volume_id = TF.Nil
             }
 
 {- | The @packet_volume@ Packet resource.
@@ -654,7 +603,7 @@ volumes on your account. Once created by Terraform, they must then be
 attached and mounted using the api and @packet_block_attach@ and
 @packet_block_detach@ scripts.
 -}
-data VolumeResource s = VolumeResource {
+data ResourceVolume s = ResourceVolume {
       _billing_cycle     :: !(TF.Attr s P.Text)
     {- ^ - The billing cycle, defaults to "hourly" -}
     , _description       :: !(TF.Attr s P.Text)
@@ -671,8 +620,8 @@ data VolumeResource s = VolumeResource {
     {- ^ - Optional list of snapshot policies -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VolumeResource s) where
-    toHCL VolumeResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceVolume s) where
+    toHCL ResourceVolume{..} = TF.inline $ catMaybes
         [ TF.assign "billing_cycle" <$> TF.attribute _billing_cycle
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "facility" <$> TF.attribute _facility
@@ -682,89 +631,89 @@ instance TF.ToHCL (VolumeResource s) where
         , TF.assign "snapshot_policies" <$> TF.attribute _snapshot_policies
         ]
 
-instance P.HasBillingCycle (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasBillingCycle (ResourceVolume s) (TF.Attr s P.Text) where
     billingCycle =
-        lens (_billing_cycle :: VolumeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _billing_cycle = a } :: VolumeResource s)
+        lens (_billing_cycle :: ResourceVolume s -> TF.Attr s P.Text)
+             (\s a -> s { _billing_cycle = a } :: ResourceVolume s)
 
-instance P.HasDescription (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceVolume s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: VolumeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: VolumeResource s)
+        lens (_description :: ResourceVolume s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceVolume s)
 
-instance P.HasFacility (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasFacility (ResourceVolume s) (TF.Attr s P.Text) where
     facility =
-        lens (_facility :: VolumeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _facility = a } :: VolumeResource s)
+        lens (_facility :: ResourceVolume s -> TF.Attr s P.Text)
+             (\s a -> s { _facility = a } :: ResourceVolume s)
 
-instance P.HasPlan (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasPlan (ResourceVolume s) (TF.Attr s P.Text) where
     plan =
-        lens (_plan :: VolumeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _plan = a } :: VolumeResource s)
+        lens (_plan :: ResourceVolume s -> TF.Attr s P.Text)
+             (\s a -> s { _plan = a } :: ResourceVolume s)
 
-instance P.HasProjectId (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasProjectId (ResourceVolume s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: VolumeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: VolumeResource s)
+        lens (_project_id :: ResourceVolume s -> TF.Attr s P.Text)
+             (\s a -> s { _project_id = a } :: ResourceVolume s)
 
-instance P.HasSize (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasSize (ResourceVolume s) (TF.Attr s P.Text) where
     size =
-        lens (_size :: VolumeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: VolumeResource s)
+        lens (_size :: ResourceVolume s -> TF.Attr s P.Text)
+             (\s a -> s { _size = a } :: ResourceVolume s)
 
-instance P.HasSnapshotPolicies (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasSnapshotPolicies (ResourceVolume s) (TF.Attr s P.Text) where
     snapshotPolicies =
-        lens (_snapshot_policies :: VolumeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _snapshot_policies = a } :: VolumeResource s)
+        lens (_snapshot_policies :: ResourceVolume s -> TF.Attr s P.Text)
+             (\s a -> s { _snapshot_policies = a } :: ResourceVolume s)
 
-instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedAttachments x = TF.compute (TF.refKey x) "attachments"
+instance s ~ s' => P.HasComputeAttachments (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computeAttachments x = TF.compute (TF.refKey x) "attachments"
 
-instance s ~ s' => P.HasComputedBillingCycle (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedBillingCycle x = TF.compute (TF.refKey x) "billing_cycle"
+instance s ~ s' => P.HasComputeBillingCycle (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computeBillingCycle x = TF.compute (TF.refKey x) "billing_cycle"
 
-instance s ~ s' => P.HasComputedCreated (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "created"
+instance s ~ s' => P.HasComputeCreated (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computeCreated x = TF.compute (TF.refKey x) "created"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computeDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedFacility (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedFacility x = TF.compute (TF.refKey x) "facility"
+instance s ~ s' => P.HasComputeFacility (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computeFacility x = TF.compute (TF.refKey x) "facility"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLocked (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedLocked x = TF.compute (TF.refKey x) "locked"
+instance s ~ s' => P.HasComputeLocked (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computeLocked x = TF.compute (TF.refKey x) "locked"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPlan (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedPlan x = TF.compute (TF.refKey x) "plan"
+instance s ~ s' => P.HasComputePlan (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computePlan x = TF.compute (TF.refKey x) "plan"
 
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "project_id"
+instance s ~ s' => P.HasComputeProjectId (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computeProjectId x = TF.compute (TF.refKey x) "project_id"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedSize x = TF.compute (TF.refKey x) "size"
+instance s ~ s' => P.HasComputeSize (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computeSize x = TF.compute (TF.refKey x) "size"
 
-instance s ~ s' => P.HasComputedSnapshotPolicies (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedSnapshotPolicies =
-        (_snapshot_policies :: VolumeResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSnapshotPolicies (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computeSnapshotPolicies =
+        (_snapshot_policies :: ResourceVolume s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedState (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+instance s ~ s' => P.HasComputeState (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computeState x = TF.compute (TF.refKey x) "state"
 
-instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "updated"
+instance s ~ s' => P.HasComputeUpdated (TF.Ref s' (ResourceVolume s)) (TF.Attr s P.Text) where
+    computeUpdated x = TF.compute (TF.refKey x) "updated"
 
-volumeResource :: TF.Resource P.Packet (VolumeResource s)
-volumeResource =
+resourceVolume :: TF.Resource P.Packet (ResourceVolume s)
+resourceVolume =
     TF.newResource "packet_volume" $
-        VolumeResource {
+        ResourceVolume {
               _billing_cycle = TF.Nil
             , _description = TF.Nil
             , _facility = TF.Nil
@@ -772,4 +721,55 @@ volumeResource =
             , _project_id = TF.Nil
             , _size = TF.Nil
             , _snapshot_policies = TF.Nil
+            }
+
+{- | The @packet_volume_attachment@ Packet resource.
+
+Provides attachment of Packet Block Storage Volume to Devices. Device and
+volume must be in the same location (facility). Once attached by Terraform,
+they must then be mounted using the @packet_block_attach@ and
+@packet_block_detach@ scripts.
+-}
+data ResourceVolumeAttachment s = ResourceVolumeAttachment {
+      _device_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the device to which the volume should be attached -}
+    , _volume_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the volume to attach -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourceVolumeAttachment s) where
+    toHCL ResourceVolumeAttachment{..} = TF.inline $ catMaybes
+        [ TF.assign "device_id" <$> TF.attribute _device_id
+        , TF.assign "volume_id" <$> TF.attribute _volume_id
+        ]
+
+instance P.HasDeviceId (ResourceVolumeAttachment s) (TF.Attr s P.Text) where
+    deviceId =
+        lens (_device_id :: ResourceVolumeAttachment s -> TF.Attr s P.Text)
+             (\s a -> s { _device_id = a } :: ResourceVolumeAttachment s)
+
+instance P.HasVolumeId (ResourceVolumeAttachment s) (TF.Attr s P.Text) where
+    volumeId =
+        lens (_volume_id :: ResourceVolumeAttachment s -> TF.Attr s P.Text)
+             (\s a -> s { _volume_id = a } :: ResourceVolumeAttachment s)
+
+instance s ~ s' => P.HasComputeDeviceId (TF.Ref s' (ResourceVolumeAttachment s)) (TF.Attr s P.Text) where
+    computeDeviceId =
+        (_device_id :: ResourceVolumeAttachment s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceVolumeAttachment s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputeVolumeId (TF.Ref s' (ResourceVolumeAttachment s)) (TF.Attr s P.Text) where
+    computeVolumeId =
+        (_volume_id :: ResourceVolumeAttachment s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourceVolumeAttachment :: TF.Resource P.Packet (ResourceVolumeAttachment s)
+resourceVolumeAttachment =
+    TF.newResource "packet_volume_attachment" $
+        ResourceVolumeAttachment {
+              _device_id = TF.Nil
+            , _volume_id = TF.Nil
             }

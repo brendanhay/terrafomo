@@ -24,15 +24,15 @@
 module Terrafomo.Local.DataSource
     (
     -- * Types
-      FileDataSource (..)
-    , fileDataSource
+      DataFile (..)
+    , dataFile
 
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasFilename (..)
 
     -- ** Computed Attributes
-    , P.HasComputedFilename (..)
+    , P.HasComputeFilename (..)
 
     -- * Re-exported Types
     , module P
@@ -65,29 +65,29 @@ import qualified Terrafomo.Schema    as TF
 
 @local_file@ reads a file from the local filesystem.
 -}
-data FileDataSource s = FileDataSource {
+data DataFile s = DataFile {
       _filename :: !(TF.Attr s P.Text)
     {- ^ (Required) The path to the file that will be read. The data source will return an error if the file does not exist. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FileDataSource s) where
-    toHCL FileDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataFile s) where
+    toHCL DataFile{..} = TF.inline $ catMaybes
         [ TF.assign "filename" <$> TF.attribute _filename
         ]
 
-instance P.HasFilename (FileDataSource s) (TF.Attr s P.Text) where
+instance P.HasFilename (DataFile s) (TF.Attr s P.Text) where
     filename =
-        lens (_filename :: FileDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _filename = a } :: FileDataSource s)
+        lens (_filename :: DataFile s -> TF.Attr s P.Text)
+             (\s a -> s { _filename = a } :: DataFile s)
 
-instance s ~ s' => P.HasComputedFilename (TF.Ref s' (FileDataSource s)) (TF.Attr s P.Text) where
-    computedFilename =
-        (_filename :: FileDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFilename (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
+    computeFilename =
+        (_filename :: DataFile s -> TF.Attr s P.Text)
             . TF.refValue
 
-fileDataSource :: TF.DataSource TF.NoProvider (FileDataSource s)
-fileDataSource =
+dataFile :: TF.DataSource TF.NoProvider (DataFile s)
+dataFile =
     TF.newDataSource "local_file" $
-        FileDataSource {
+        DataFile {
               _filename = TF.Nil
             }

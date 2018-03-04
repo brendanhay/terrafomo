@@ -24,11 +24,11 @@
 module Terrafomo.OpsGenie.Resource
     (
     -- * Types
-      TeamResource (..)
-    , teamResource
+      ResourceTeam (..)
+    , resourceTeam
 
-    , UserResource (..)
-    , userResource
+    , ResourceUser (..)
+    , resourceUser
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -42,15 +42,15 @@ module Terrafomo.OpsGenie.Resource
     , P.HasUsername (..)
 
     -- ** Computed Attributes
-    , P.HasComputedDescription (..)
-    , P.HasComputedFullName (..)
-    , P.HasComputedId (..)
-    , P.HasComputedLocale (..)
-    , P.HasComputedMember (..)
-    , P.HasComputedName (..)
-    , P.HasComputedRole (..)
-    , P.HasComputedTimezone (..)
-    , P.HasComputedUsername (..)
+    , P.HasComputeDescription (..)
+    , P.HasComputeFullName (..)
+    , P.HasComputeId (..)
+    , P.HasComputeLocale (..)
+    , P.HasComputeMember (..)
+    , P.HasComputeName (..)
+    , P.HasComputeRole (..)
+    , P.HasComputeTimezone (..)
+    , P.HasComputeUsername (..)
 
     -- * Re-exported Types
     , module P
@@ -84,7 +84,7 @@ import qualified Terrafomo.Schema    as TF
 
 Manages a Team within OpsGenie.
 -}
-data TeamResource s = TeamResource {
+data ResourceTeam s = ResourceTeam {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description for this team. -}
     , _member      :: !(TF.Attr s P.Text)
@@ -93,50 +93,50 @@ data TeamResource s = TeamResource {
     {- ^ (Required) The name associated with this team. OpsGenie defines that this must not be longer than 100 characters. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TeamResource s) where
-    toHCL TeamResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceTeam s) where
+    toHCL ResourceTeam{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "member" <$> TF.attribute _member
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDescription (TeamResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceTeam s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: TeamResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: TeamResource s)
+        lens (_description :: ResourceTeam s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceTeam s)
 
-instance P.HasMember (TeamResource s) (TF.Attr s P.Text) where
+instance P.HasMember (ResourceTeam s) (TF.Attr s P.Text) where
     member =
-        lens (_member :: TeamResource s -> TF.Attr s P.Text)
-             (\s a -> s { _member = a } :: TeamResource s)
+        lens (_member :: ResourceTeam s -> TF.Attr s P.Text)
+             (\s a -> s { _member = a } :: ResourceTeam s)
 
-instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceTeam s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: TeamResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: TeamResource s)
+        lens (_name :: ResourceTeam s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceTeam s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: TeamResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceTeam s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedMember (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
-    computedMember =
-        (_member :: TeamResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMember (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computeMember =
+        (_member :: ResourceTeam s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: TeamResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceTeam s -> TF.Attr s P.Text)
             . TF.refValue
 
-teamResource :: TF.Resource P.OpsGenie (TeamResource s)
-teamResource =
+resourceTeam :: TF.Resource P.OpsGenie (ResourceTeam s)
+resourceTeam =
     TF.newResource "opsgenie_team" $
-        TeamResource {
+        ResourceTeam {
               _description = TF.Nil
             , _member = TF.Nil
             , _name = TF.Nil
@@ -146,7 +146,7 @@ teamResource =
 
 Manages a User within OpsGenie.
 -}
-data UserResource s = UserResource {
+data ResourceUser s = ResourceUser {
       _full_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The Full Name of the User. -}
     , _locale    :: !(TF.Attr s P.Text)
@@ -159,8 +159,8 @@ data UserResource s = UserResource {
     {- ^ (Required) The email address associated with this user. OpsGenie defines that this must not be longer than 100 characters. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserResource s) where
-    toHCL UserResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceUser s) where
+    toHCL ResourceUser{..} = TF.inline $ catMaybes
         [ TF.assign "full_name" <$> TF.attribute _full_name
         , TF.assign "locale" <$> TF.attribute _locale
         , TF.assign "role" <$> TF.attribute _role
@@ -168,63 +168,63 @@ instance TF.ToHCL (UserResource s) where
         , TF.assign "username" <$> TF.attribute _username
         ]
 
-instance P.HasFullName (UserResource s) (TF.Attr s P.Text) where
+instance P.HasFullName (ResourceUser s) (TF.Attr s P.Text) where
     fullName =
-        lens (_full_name :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _full_name = a } :: UserResource s)
+        lens (_full_name :: ResourceUser s -> TF.Attr s P.Text)
+             (\s a -> s { _full_name = a } :: ResourceUser s)
 
-instance P.HasLocale (UserResource s) (TF.Attr s P.Text) where
+instance P.HasLocale (ResourceUser s) (TF.Attr s P.Text) where
     locale =
-        lens (_locale :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _locale = a } :: UserResource s)
+        lens (_locale :: ResourceUser s -> TF.Attr s P.Text)
+             (\s a -> s { _locale = a } :: ResourceUser s)
 
-instance P.HasRole (UserResource s) (TF.Attr s P.Text) where
+instance P.HasRole (ResourceUser s) (TF.Attr s P.Text) where
     role =
-        lens (_role :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: UserResource s)
+        lens (_role :: ResourceUser s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: ResourceUser s)
 
-instance P.HasTimezone (UserResource s) (TF.Attr s P.Text) where
+instance P.HasTimezone (ResourceUser s) (TF.Attr s P.Text) where
     timezone =
-        lens (_timezone :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _timezone = a } :: UserResource s)
+        lens (_timezone :: ResourceUser s -> TF.Attr s P.Text)
+             (\s a -> s { _timezone = a } :: ResourceUser s)
 
-instance P.HasUsername (UserResource s) (TF.Attr s P.Text) where
+instance P.HasUsername (ResourceUser s) (TF.Attr s P.Text) where
     username =
-        lens (_username :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _username = a } :: UserResource s)
+        lens (_username :: ResourceUser s -> TF.Attr s P.Text)
+             (\s a -> s { _username = a } :: ResourceUser s)
 
-instance s ~ s' => P.HasComputedFullName (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedFullName =
-        (_full_name :: UserResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFullName (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computeFullName =
+        (_full_name :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLocale (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedLocale =
-        (_locale :: UserResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLocale (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computeLocale =
+        (_locale :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedRole =
-        (_role :: UserResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRole (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computeRole =
+        (_role :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTimezone (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedTimezone =
-        (_timezone :: UserResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTimezone (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computeTimezone =
+        (_timezone :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUsername (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedUsername =
-        (_username :: UserResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeUsername (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+    computeUsername =
+        (_username :: ResourceUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-userResource :: TF.Resource P.OpsGenie (UserResource s)
-userResource =
+resourceUser :: TF.Resource P.OpsGenie (ResourceUser s)
+resourceUser =
     TF.newResource "opsgenie_user" $
-        UserResource {
+        ResourceUser {
               _full_name = TF.Nil
             , _locale = TF.Nil
             , _role = TF.Nil

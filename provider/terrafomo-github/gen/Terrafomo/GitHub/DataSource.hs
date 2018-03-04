@@ -24,11 +24,11 @@
 module Terrafomo.GitHub.DataSource
     (
     -- * Types
-      TeamDataSource (..)
-    , teamDataSource
+      DataTeam (..)
+    , dataTeam
 
-    , UserDataSource (..)
-    , userDataSource
+    , DataUser (..)
+    , dataUser
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -36,31 +36,31 @@ module Terrafomo.GitHub.DataSource
     , P.HasUsername (..)
 
     -- ** Computed Attributes
-    , P.HasComputedAvatarUrl (..)
-    , P.HasComputedBio (..)
-    , P.HasComputedBlog (..)
-    , P.HasComputedCompany (..)
-    , P.HasComputedCreatedAt (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedEmail (..)
-    , P.HasComputedFollowers (..)
-    , P.HasComputedFollowing (..)
-    , P.HasComputedGpgKeys (..)
-    , P.HasComputedGravatarId (..)
-    , P.HasComputedId (..)
-    , P.HasComputedLocation (..)
-    , P.HasComputedLogin (..)
-    , P.HasComputedMembers (..)
-    , P.HasComputedName (..)
-    , P.HasComputedPermission (..)
-    , P.HasComputedPrivacy (..)
-    , P.HasComputedPublicGists (..)
-    , P.HasComputedPublicRepos (..)
-    , P.HasComputedSiteAdmin (..)
-    , P.HasComputedSlug (..)
-    , P.HasComputedSshKeys (..)
-    , P.HasComputedUpdatedAt (..)
-    , P.HasComputedUsername (..)
+    , P.HasComputeAvatarUrl (..)
+    , P.HasComputeBio (..)
+    , P.HasComputeBlog (..)
+    , P.HasComputeCompany (..)
+    , P.HasComputeCreatedAt (..)
+    , P.HasComputeDescription (..)
+    , P.HasComputeEmail (..)
+    , P.HasComputeFollowers (..)
+    , P.HasComputeFollowing (..)
+    , P.HasComputeGpgKeys (..)
+    , P.HasComputeGravatarId (..)
+    , P.HasComputeId (..)
+    , P.HasComputeLocation (..)
+    , P.HasComputeLogin (..)
+    , P.HasComputeMembers (..)
+    , P.HasComputeName (..)
+    , P.HasComputePermission (..)
+    , P.HasComputePrivacy (..)
+    , P.HasComputePublicGists (..)
+    , P.HasComputePublicRepos (..)
+    , P.HasComputeSiteAdmin (..)
+    , P.HasComputeSlug (..)
+    , P.HasComputeSshKeys (..)
+    , P.HasComputeUpdatedAt (..)
+    , P.HasComputeUsername (..)
 
     -- * Re-exported Types
     , module P
@@ -94,48 +94,48 @@ import qualified Terrafomo.Schema    as TF
 
 Use this data source to retrieve information about a Github team.
 -}
-data TeamDataSource s = TeamDataSource {
+data DataTeam s = DataTeam {
       _slug :: !(TF.Attr s P.Text)
     {- ^ (Required) The team slug. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TeamDataSource s) where
-    toHCL TeamDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataTeam s) where
+    toHCL DataTeam{..} = TF.inline $ catMaybes
         [ TF.assign "slug" <$> TF.attribute _slug
         ]
 
-instance P.HasSlug (TeamDataSource s) (TF.Attr s P.Text) where
+instance P.HasSlug (DataTeam s) (TF.Attr s P.Text) where
     slug =
-        lens (_slug :: TeamDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _slug = a } :: TeamDataSource s)
+        lens (_slug :: DataTeam s -> TF.Attr s P.Text)
+             (\s a -> s { _slug = a } :: DataTeam s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TeamDataSource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (DataTeam s)) (TF.Attr s P.Text) where
+    computeDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataTeam s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedMembers (TF.Ref s' (TeamDataSource s)) (TF.Attr s P.Text) where
-    computedMembers x = TF.compute (TF.refKey x) "members"
+instance s ~ s' => P.HasComputeMembers (TF.Ref s' (DataTeam s)) (TF.Attr s P.Text) where
+    computeMembers x = TF.compute (TF.refKey x) "members"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (TeamDataSource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataTeam s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPermission (TF.Ref s' (TeamDataSource s)) (TF.Attr s P.Text) where
-    computedPermission x = TF.compute (TF.refKey x) "permission"
+instance s ~ s' => P.HasComputePermission (TF.Ref s' (DataTeam s)) (TF.Attr s P.Text) where
+    computePermission x = TF.compute (TF.refKey x) "permission"
 
-instance s ~ s' => P.HasComputedPrivacy (TF.Ref s' (TeamDataSource s)) (TF.Attr s P.Text) where
-    computedPrivacy x = TF.compute (TF.refKey x) "privacy"
+instance s ~ s' => P.HasComputePrivacy (TF.Ref s' (DataTeam s)) (TF.Attr s P.Text) where
+    computePrivacy x = TF.compute (TF.refKey x) "privacy"
 
-instance s ~ s' => P.HasComputedSlug (TF.Ref s' (TeamDataSource s)) (TF.Attr s P.Text) where
-    computedSlug =
-        (_slug :: TeamDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSlug (TF.Ref s' (DataTeam s)) (TF.Attr s P.Text) where
+    computeSlug =
+        (_slug :: DataTeam s -> TF.Attr s P.Text)
             . TF.refValue
 
-teamDataSource :: TF.DataSource P.GitHub (TeamDataSource s)
-teamDataSource =
+dataTeam :: TF.DataSource P.GitHub (DataTeam s)
+dataTeam =
     TF.newDataSource "github_team" $
-        TeamDataSource {
+        DataTeam {
               _slug = TF.Nil
             }
 
@@ -143,83 +143,83 @@ teamDataSource =
 
 Use this data source to retrieve information about a Github user.
 -}
-data UserDataSource s = UserDataSource {
+data DataUser s = DataUser {
       _username :: !(TF.Attr s P.Text)
     {- ^ (Required) The username. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserDataSource s) where
-    toHCL UserDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataUser s) where
+    toHCL DataUser{..} = TF.inline $ catMaybes
         [ TF.assign "username" <$> TF.attribute _username
         ]
 
-instance P.HasUsername (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasUsername (DataUser s) (TF.Attr s P.Text) where
     username =
-        lens (_username :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _username = a } :: UserDataSource s)
+        lens (_username :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _username = a } :: DataUser s)
 
-instance s ~ s' => P.HasComputedAvatarUrl (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedAvatarUrl x = TF.compute (TF.refKey x) "avatar_url"
+instance s ~ s' => P.HasComputeAvatarUrl (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeAvatarUrl x = TF.compute (TF.refKey x) "avatar_url"
 
-instance s ~ s' => P.HasComputedBio (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedBio x = TF.compute (TF.refKey x) "bio"
+instance s ~ s' => P.HasComputeBio (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeBio x = TF.compute (TF.refKey x) "bio"
 
-instance s ~ s' => P.HasComputedBlog (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedBlog x = TF.compute (TF.refKey x) "blog"
+instance s ~ s' => P.HasComputeBlog (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeBlog x = TF.compute (TF.refKey x) "blog"
 
-instance s ~ s' => P.HasComputedCompany (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedCompany x = TF.compute (TF.refKey x) "company"
+instance s ~ s' => P.HasComputeCompany (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeCompany x = TF.compute (TF.refKey x) "company"
 
-instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
+instance s ~ s' => P.HasComputeCreatedAt (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "email"
+instance s ~ s' => P.HasComputeEmail (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeEmail x = TF.compute (TF.refKey x) "email"
 
-instance s ~ s' => P.HasComputedFollowers (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedFollowers x = TF.compute (TF.refKey x) "followers"
+instance s ~ s' => P.HasComputeFollowers (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeFollowers x = TF.compute (TF.refKey x) "followers"
 
-instance s ~ s' => P.HasComputedFollowing (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedFollowing x = TF.compute (TF.refKey x) "following"
+instance s ~ s' => P.HasComputeFollowing (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeFollowing x = TF.compute (TF.refKey x) "following"
 
-instance s ~ s' => P.HasComputedGpgKeys (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedGpgKeys x = TF.compute (TF.refKey x) "gpg_keys"
+instance s ~ s' => P.HasComputeGpgKeys (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeGpgKeys x = TF.compute (TF.refKey x) "gpg_keys"
 
-instance s ~ s' => P.HasComputedGravatarId (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedGravatarId x = TF.compute (TF.refKey x) "gravatar_id"
+instance s ~ s' => P.HasComputeGravatarId (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeGravatarId x = TF.compute (TF.refKey x) "gravatar_id"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedLocation x = TF.compute (TF.refKey x) "location"
+instance s ~ s' => P.HasComputeLocation (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedLogin (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedLogin x = TF.compute (TF.refKey x) "login"
+instance s ~ s' => P.HasComputeLogin (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeLogin x = TF.compute (TF.refKey x) "login"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPublicGists (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedPublicGists x = TF.compute (TF.refKey x) "public_gists"
+instance s ~ s' => P.HasComputePublicGists (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computePublicGists x = TF.compute (TF.refKey x) "public_gists"
 
-instance s ~ s' => P.HasComputedPublicRepos (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedPublicRepos x = TF.compute (TF.refKey x) "public_repos"
+instance s ~ s' => P.HasComputePublicRepos (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computePublicRepos x = TF.compute (TF.refKey x) "public_repos"
 
-instance s ~ s' => P.HasComputedSiteAdmin (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedSiteAdmin x = TF.compute (TF.refKey x) "site_admin"
+instance s ~ s' => P.HasComputeSiteAdmin (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeSiteAdmin x = TF.compute (TF.refKey x) "site_admin"
 
-instance s ~ s' => P.HasComputedSshKeys (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedSshKeys x = TF.compute (TF.refKey x) "ssh_keys"
+instance s ~ s' => P.HasComputeSshKeys (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeSshKeys x = TF.compute (TF.refKey x) "ssh_keys"
 
-instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
+instance s ~ s' => P.HasComputeUpdatedAt (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
 
-instance s ~ s' => P.HasComputedUsername (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedUsername =
-        (_username :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeUsername (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeUsername =
+        (_username :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-userDataSource :: TF.DataSource P.GitHub (UserDataSource s)
-userDataSource =
+dataUser :: TF.DataSource P.GitHub (DataUser s)
+dataUser =
     TF.newDataSource "github_user" $
-        UserDataSource {
+        DataUser {
               _username = TF.Nil
             }

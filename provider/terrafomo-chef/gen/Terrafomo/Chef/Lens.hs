@@ -35,19 +35,19 @@ module Terrafomo.Chef.Lens
     , HasRunList (..)
 
     -- ** Computed Attributes
-    , HasComputedApiUri (..)
-    , HasComputedAutomaticAttributesJson (..)
-    , HasComputedContentJson (..)
-    , HasComputedCookbookConstraints (..)
-    , HasComputedDataBagName (..)
-    , HasComputedDefaultAttributesJson (..)
-    , HasComputedDescription (..)
-    , HasComputedEnvironmentName (..)
-    , HasComputedId (..)
-    , HasComputedName (..)
-    , HasComputedNormalAttributesJson (..)
-    , HasComputedOverrideAttributesJson (..)
-    , HasComputedRunList (..)
+    , HasComputeApiUri (..)
+    , HasComputeAutomaticAttributesJson (..)
+    , HasComputeContentJson (..)
+    , HasComputeCookbookConstraints (..)
+    , HasComputeDataBagName (..)
+    , HasComputeDefaultAttributesJson (..)
+    , HasComputeDescription (..)
+    , HasComputeEnvironmentName (..)
+    , HasComputeId (..)
+    , HasComputeName (..)
+    , HasComputeNormalAttributesJson (..)
+    , HasComputeOverrideAttributesJson (..)
+    , HasComputeRunList (..)
     ) where
 
 import GHC.Base ((.))
@@ -123,41 +123,41 @@ class HasRunList a b | a -> b where
 instance HasRunList a b => HasRunList (TF.Schema l p a) b where
     runList = TF.configuration . runList
 
-class HasComputedApiUri a b | a -> b where
-    computedApiUri :: a -> b
+class HasComputeApiUri a b | a -> b where
+    computeApiUri :: a -> b
 
-class HasComputedAutomaticAttributesJson a b | a -> b where
-    computedAutomaticAttributesJson :: a -> b
+class HasComputeAutomaticAttributesJson a b | a -> b where
+    computeAutomaticAttributesJson :: a -> b
 
-class HasComputedContentJson a b | a -> b where
-    computedContentJson :: a -> b
+class HasComputeContentJson a b | a -> b where
+    computeContentJson :: a -> b
 
-class HasComputedCookbookConstraints a b | a -> b where
-    computedCookbookConstraints :: a -> b
+class HasComputeCookbookConstraints a b | a -> b where
+    computeCookbookConstraints :: a -> b
 
-class HasComputedDataBagName a b | a -> b where
-    computedDataBagName :: a -> b
+class HasComputeDataBagName a b | a -> b where
+    computeDataBagName :: a -> b
 
-class HasComputedDefaultAttributesJson a b | a -> b where
-    computedDefaultAttributesJson :: a -> b
+class HasComputeDefaultAttributesJson a b | a -> b where
+    computeDefaultAttributesJson :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedEnvironmentName a b | a -> b where
-    computedEnvironmentName :: a -> b
+class HasComputeEnvironmentName a b | a -> b where
+    computeEnvironmentName :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNormalAttributesJson a b | a -> b where
-    computedNormalAttributesJson :: a -> b
+class HasComputeNormalAttributesJson a b | a -> b where
+    computeNormalAttributesJson :: a -> b
 
-class HasComputedOverrideAttributesJson a b | a -> b where
-    computedOverrideAttributesJson :: a -> b
+class HasComputeOverrideAttributesJson a b | a -> b where
+    computeOverrideAttributesJson :: a -> b
 
-class HasComputedRunList a b | a -> b where
-    computedRunList :: a -> b
+class HasComputeRunList a b | a -> b where
+    computeRunList :: a -> b

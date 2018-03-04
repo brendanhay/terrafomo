@@ -24,38 +24,38 @@
 module Terrafomo.Ignition.DataSource
     (
     -- * Types
-      ConfigDataSource (..)
-    , configDataSource
+      DataConfig (..)
+    , dataConfig
 
-    , DirectoryDataSource (..)
-    , directoryDataSource
+    , DataDirectory (..)
+    , dataDirectory
 
-    , DiskDataSource (..)
-    , diskDataSource
+    , DataDisk (..)
+    , dataDisk
 
-    , FileDataSource (..)
-    , fileDataSource
+    , DataFile (..)
+    , dataFile
 
-    , FilesystemDataSource (..)
-    , filesystemDataSource
+    , DataFilesystem (..)
+    , dataFilesystem
 
-    , GroupDataSource (..)
-    , groupDataSource
+    , DataGroup (..)
+    , dataGroup
 
-    , LinkDataSource (..)
-    , linkDataSource
+    , DataLink (..)
+    , dataLink
 
-    , NetworkdUnitDataSource (..)
-    , networkdUnitDataSource
+    , DataNetworkdUnit (..)
+    , dataNetworkdUnit
 
-    , RaidDataSource (..)
-    , raidDataSource
+    , DataRaid (..)
+    , dataRaid
 
-    , SystemdUnitDataSource (..)
-    , systemdUnitDataSource
+    , DataSystemdUnit (..)
+    , dataSystemdUnit
 
-    , UserDataSource (..)
-    , userDataSource
+    , DataUser (..)
+    , dataUser
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -103,50 +103,50 @@ module Terrafomo.Ignition.DataSource
     , P.HasWipeTable (..)
 
     -- ** Computed Attributes
-    , P.HasComputedAppend (..)
-    , P.HasComputedArrays (..)
-    , P.HasComputedContent (..)
-    , P.HasComputedDevice (..)
-    , P.HasComputedDevices (..)
-    , P.HasComputedDirectories (..)
-    , P.HasComputedDisks (..)
-    , P.HasComputedDropin (..)
-    , P.HasComputedEnabled (..)
-    , P.HasComputedFiles (..)
-    , P.HasComputedFilesystem (..)
-    , P.HasComputedFilesystems (..)
-    , P.HasComputedGecos (..)
-    , P.HasComputedGid (..)
-    , P.HasComputedGroups (..)
-    , P.HasComputedHard (..)
-    , P.HasComputedHomeDir (..)
-    , P.HasComputedId (..)
-    , P.HasComputedLevel (..)
-    , P.HasComputedLinks (..)
-    , P.HasComputedMask (..)
-    , P.HasComputedMode (..)
-    , P.HasComputedMount (..)
-    , P.HasComputedName (..)
-    , P.HasComputedNetworkd (..)
-    , P.HasComputedNoCreateHome (..)
-    , P.HasComputedNoLogInit (..)
-    , P.HasComputedNoUserGroup (..)
-    , P.HasComputedPartition (..)
-    , P.HasComputedPasswordHash (..)
-    , P.HasComputedPath (..)
-    , P.HasComputedPrimaryGroup (..)
-    , P.HasComputedRendered (..)
-    , P.HasComputedReplace (..)
-    , P.HasComputedShell (..)
-    , P.HasComputedSource (..)
-    , P.HasComputedSpares (..)
-    , P.HasComputedSshAuthorizedKeys (..)
-    , P.HasComputedSystem (..)
-    , P.HasComputedSystemd (..)
-    , P.HasComputedTarget (..)
-    , P.HasComputedUid (..)
-    , P.HasComputedUsers (..)
-    , P.HasComputedWipeTable (..)
+    , P.HasComputeAppend (..)
+    , P.HasComputeArrays (..)
+    , P.HasComputeContent (..)
+    , P.HasComputeDevice (..)
+    , P.HasComputeDevices (..)
+    , P.HasComputeDirectories (..)
+    , P.HasComputeDisks (..)
+    , P.HasComputeDropin (..)
+    , P.HasComputeEnabled (..)
+    , P.HasComputeFiles (..)
+    , P.HasComputeFilesystem (..)
+    , P.HasComputeFilesystems (..)
+    , P.HasComputeGecos (..)
+    , P.HasComputeGid (..)
+    , P.HasComputeGroups (..)
+    , P.HasComputeHard (..)
+    , P.HasComputeHomeDir (..)
+    , P.HasComputeId (..)
+    , P.HasComputeLevel (..)
+    , P.HasComputeLinks (..)
+    , P.HasComputeMask (..)
+    , P.HasComputeMode (..)
+    , P.HasComputeMount (..)
+    , P.HasComputeName (..)
+    , P.HasComputeNetworkd (..)
+    , P.HasComputeNoCreateHome (..)
+    , P.HasComputeNoLogInit (..)
+    , P.HasComputeNoUserGroup (..)
+    , P.HasComputePartition (..)
+    , P.HasComputePasswordHash (..)
+    , P.HasComputePath (..)
+    , P.HasComputePrimaryGroup (..)
+    , P.HasComputeRendered (..)
+    , P.HasComputeReplace (..)
+    , P.HasComputeShell (..)
+    , P.HasComputeSource (..)
+    , P.HasComputeSpares (..)
+    , P.HasComputeSshAuthorizedKeys (..)
+    , P.HasComputeSystem (..)
+    , P.HasComputeSystemd (..)
+    , P.HasComputeTarget (..)
+    , P.HasComputeUid (..)
+    , P.HasComputeUsers (..)
+    , P.HasComputeWipeTable (..)
 
     -- * Re-exported Types
     , module P
@@ -181,7 +181,7 @@ import qualified Terrafomo.Schema    as TF
 Renders an ignition configuration as JSON. It  contains all the disks,
 partitions, arrays, filesystems, files, users, groups and units.
 -}
-data ConfigDataSource s = ConfigDataSource {
+data DataConfig s = DataConfig {
       _append      :: !(TF.Attr s [P.FileSource s])
     {- ^ (Optional) Any number of blocks with the configs to be appended to the current config. -}
     , _arrays      :: !(TF.Attr s [TF.Attr s P.Text])
@@ -208,8 +208,8 @@ data ConfigDataSource s = ConfigDataSource {
     {- ^ (Optional) The list of accounts to be added. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ConfigDataSource s) where
-    toHCL ConfigDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataConfig s) where
+    toHCL DataConfig{..} = TF.inline $ catMaybes
         [ TF.assign "append" <$> TF.attribute _append
         , TF.assign "arrays" <$> TF.attribute _arrays
         , TF.assign "directories" <$> TF.attribute _directories
@@ -224,133 +224,133 @@ instance TF.ToHCL (ConfigDataSource s) where
         , TF.assign "users" <$> TF.attribute _users
         ]
 
-instance P.HasAppend (ConfigDataSource s) (TF.Attr s [P.FileSource s]) where
+instance P.HasAppend (DataConfig s) (TF.Attr s [P.FileSource s]) where
     append =
-        lens (_append :: ConfigDataSource s -> TF.Attr s [P.FileSource s])
-             (\s a -> s { _append = a } :: ConfigDataSource s)
+        lens (_append :: DataConfig s -> TF.Attr s [P.FileSource s])
+             (\s a -> s { _append = a } :: DataConfig s)
 
-instance P.HasArrays (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasArrays (DataConfig s) (TF.Attr s [TF.Attr s P.Text]) where
     arrays =
-        lens (_arrays :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _arrays = a } :: ConfigDataSource s)
+        lens (_arrays :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
+             (\s a -> s { _arrays = a } :: DataConfig s)
 
-instance P.HasDirectories (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasDirectories (DataConfig s) (TF.Attr s [TF.Attr s P.Text]) where
     directories =
-        lens (_directories :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _directories = a } :: ConfigDataSource s)
+        lens (_directories :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
+             (\s a -> s { _directories = a } :: DataConfig s)
 
-instance P.HasDisks (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasDisks (DataConfig s) (TF.Attr s [TF.Attr s P.Text]) where
     disks =
-        lens (_disks :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _disks = a } :: ConfigDataSource s)
+        lens (_disks :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
+             (\s a -> s { _disks = a } :: DataConfig s)
 
-instance P.HasFiles (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasFiles (DataConfig s) (TF.Attr s [TF.Attr s P.Text]) where
     files =
-        lens (_files :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _files = a } :: ConfigDataSource s)
+        lens (_files :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
+             (\s a -> s { _files = a } :: DataConfig s)
 
-instance P.HasFilesystems (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasFilesystems (DataConfig s) (TF.Attr s [TF.Attr s P.Text]) where
     filesystems =
-        lens (_filesystems :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _filesystems = a } :: ConfigDataSource s)
+        lens (_filesystems :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
+             (\s a -> s { _filesystems = a } :: DataConfig s)
 
-instance P.HasGroups (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasGroups (DataConfig s) (TF.Attr s [TF.Attr s P.Text]) where
     groups =
-        lens (_groups :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _groups = a } :: ConfigDataSource s)
+        lens (_groups :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
+             (\s a -> s { _groups = a } :: DataConfig s)
 
-instance P.HasLinks (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasLinks (DataConfig s) (TF.Attr s [TF.Attr s P.Text]) where
     links =
-        lens (_links :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _links = a } :: ConfigDataSource s)
+        lens (_links :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
+             (\s a -> s { _links = a } :: DataConfig s)
 
-instance P.HasNetworkd (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasNetworkd (DataConfig s) (TF.Attr s [TF.Attr s P.Text]) where
     networkd =
-        lens (_networkd :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _networkd = a } :: ConfigDataSource s)
+        lens (_networkd :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
+             (\s a -> s { _networkd = a } :: DataConfig s)
 
-instance P.HasReplace (ConfigDataSource s) (TF.Attr s [P.FileSource s]) where
+instance P.HasReplace (DataConfig s) (TF.Attr s [P.FileSource s]) where
     replace =
-        lens (_replace :: ConfigDataSource s -> TF.Attr s [P.FileSource s])
-             (\s a -> s { _replace = a } :: ConfigDataSource s)
+        lens (_replace :: DataConfig s -> TF.Attr s [P.FileSource s])
+             (\s a -> s { _replace = a } :: DataConfig s)
 
-instance P.HasSystemd (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasSystemd (DataConfig s) (TF.Attr s [TF.Attr s P.Text]) where
     systemd =
-        lens (_systemd :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _systemd = a } :: ConfigDataSource s)
+        lens (_systemd :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
+             (\s a -> s { _systemd = a } :: DataConfig s)
 
-instance P.HasUsers (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasUsers (DataConfig s) (TF.Attr s [TF.Attr s P.Text]) where
     users =
-        lens (_users :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _users = a } :: ConfigDataSource s)
+        lens (_users :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
+             (\s a -> s { _users = a } :: DataConfig s)
 
-instance s ~ s' => P.HasComputedAppend (TF.Ref s' (ConfigDataSource s)) (TF.Attr s [P.FileSource s]) where
-    computedAppend =
-        (_append :: ConfigDataSource s -> TF.Attr s [P.FileSource s])
+instance s ~ s' => P.HasComputeAppend (TF.Ref s' (DataConfig s)) (TF.Attr s [P.FileSource s]) where
+    computeAppend =
+        (_append :: DataConfig s -> TF.Attr s [P.FileSource s])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedArrays (TF.Ref s' (ConfigDataSource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedArrays =
-        (_arrays :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
+instance s ~ s' => P.HasComputeArrays (TF.Ref s' (DataConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computeArrays =
+        (_arrays :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDirectories (TF.Ref s' (ConfigDataSource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDirectories =
-        (_directories :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
+instance s ~ s' => P.HasComputeDirectories (TF.Ref s' (DataConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computeDirectories =
+        (_directories :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisks (TF.Ref s' (ConfigDataSource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDisks =
-        (_disks :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
+instance s ~ s' => P.HasComputeDisks (TF.Ref s' (DataConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computeDisks =
+        (_disks :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFiles (TF.Ref s' (ConfigDataSource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedFiles =
-        (_files :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
+instance s ~ s' => P.HasComputeFiles (TF.Ref s' (DataConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computeFiles =
+        (_files :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFilesystems (TF.Ref s' (ConfigDataSource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedFilesystems =
-        (_filesystems :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
+instance s ~ s' => P.HasComputeFilesystems (TF.Ref s' (DataConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computeFilesystems =
+        (_filesystems :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (ConfigDataSource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedGroups =
-        (_groups :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
+instance s ~ s' => P.HasComputeGroups (TF.Ref s' (DataConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computeGroups =
+        (_groups :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLinks (TF.Ref s' (ConfigDataSource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedLinks =
-        (_links :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
+instance s ~ s' => P.HasComputeLinks (TF.Ref s' (DataConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computeLinks =
+        (_links :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetworkd (TF.Ref s' (ConfigDataSource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNetworkd =
-        (_networkd :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
+instance s ~ s' => P.HasComputeNetworkd (TF.Ref s' (DataConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computeNetworkd =
+        (_networkd :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRendered (TF.Ref s' (ConfigDataSource s)) (TF.Attr s P.Text) where
-    computedRendered x = TF.compute (TF.refKey x) "rendered"
+instance s ~ s' => P.HasComputeRendered (TF.Ref s' (DataConfig s)) (TF.Attr s P.Text) where
+    computeRendered x = TF.compute (TF.refKey x) "rendered"
 
-instance s ~ s' => P.HasComputedReplace (TF.Ref s' (ConfigDataSource s)) (TF.Attr s [P.FileSource s]) where
-    computedReplace =
-        (_replace :: ConfigDataSource s -> TF.Attr s [P.FileSource s])
+instance s ~ s' => P.HasComputeReplace (TF.Ref s' (DataConfig s)) (TF.Attr s [P.FileSource s]) where
+    computeReplace =
+        (_replace :: DataConfig s -> TF.Attr s [P.FileSource s])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSystemd (TF.Ref s' (ConfigDataSource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSystemd =
-        (_systemd :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
+instance s ~ s' => P.HasComputeSystemd (TF.Ref s' (DataConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computeSystemd =
+        (_systemd :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUsers (TF.Ref s' (ConfigDataSource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedUsers =
-        (_users :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
+instance s ~ s' => P.HasComputeUsers (TF.Ref s' (DataConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computeUsers =
+        (_users :: DataConfig s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-configDataSource :: TF.DataSource P.Ignition (ConfigDataSource s)
-configDataSource =
+dataConfig :: TF.DataSource P.Ignition (DataConfig s)
+dataConfig =
     TF.newDataSource "ignition_config" $
-        ConfigDataSource {
+        DataConfig {
               _append = TF.Nil
             , _arrays = TF.Nil
             , _directories = TF.Nil
@@ -369,7 +369,7 @@ configDataSource =
 
 Describes a directory to be created in a particular filesystem.
 -}
-data DirectoryDataSource s = DirectoryDataSource {
+data DataDirectory s = DataDirectory {
       _filesystem :: !(TF.Attr s P.Text)
     {- ^ (Required) The internal identifier of the filesystem. This matches the last filesystem with the given identifier. This should be a valid name from a ignition_filesystem resource. -}
     , _gid        :: !(TF.Attr s P.Text)
@@ -382,8 +382,8 @@ data DirectoryDataSource s = DirectoryDataSource {
     {- ^ (Optional) The user ID of the owner. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DirectoryDataSource s) where
-    toHCL DirectoryDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataDirectory s) where
+    toHCL DataDirectory{..} = TF.inline $ catMaybes
         [ TF.assign "filesystem" <$> TF.attribute _filesystem
         , TF.assign "gid" <$> TF.attribute _gid
         , TF.assign "mode" <$> TF.attribute _mode
@@ -391,63 +391,63 @@ instance TF.ToHCL (DirectoryDataSource s) where
         , TF.assign "uid" <$> TF.attribute _uid
         ]
 
-instance P.HasFilesystem (DirectoryDataSource s) (TF.Attr s P.Text) where
+instance P.HasFilesystem (DataDirectory s) (TF.Attr s P.Text) where
     filesystem =
-        lens (_filesystem :: DirectoryDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _filesystem = a } :: DirectoryDataSource s)
+        lens (_filesystem :: DataDirectory s -> TF.Attr s P.Text)
+             (\s a -> s { _filesystem = a } :: DataDirectory s)
 
-instance P.HasGid (DirectoryDataSource s) (TF.Attr s P.Text) where
+instance P.HasGid (DataDirectory s) (TF.Attr s P.Text) where
     gid =
-        lens (_gid :: DirectoryDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _gid = a } :: DirectoryDataSource s)
+        lens (_gid :: DataDirectory s -> TF.Attr s P.Text)
+             (\s a -> s { _gid = a } :: DataDirectory s)
 
-instance P.HasMode (DirectoryDataSource s) (TF.Attr s P.Text) where
+instance P.HasMode (DataDirectory s) (TF.Attr s P.Text) where
     mode =
-        lens (_mode :: DirectoryDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _mode = a } :: DirectoryDataSource s)
+        lens (_mode :: DataDirectory s -> TF.Attr s P.Text)
+             (\s a -> s { _mode = a } :: DataDirectory s)
 
-instance P.HasPath (DirectoryDataSource s) (TF.Attr s P.Text) where
+instance P.HasPath (DataDirectory s) (TF.Attr s P.Text) where
     path =
-        lens (_path :: DirectoryDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _path = a } :: DirectoryDataSource s)
+        lens (_path :: DataDirectory s -> TF.Attr s P.Text)
+             (\s a -> s { _path = a } :: DataDirectory s)
 
-instance P.HasUid (DirectoryDataSource s) (TF.Attr s P.Text) where
+instance P.HasUid (DataDirectory s) (TF.Attr s P.Text) where
     uid =
-        lens (_uid :: DirectoryDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _uid = a } :: DirectoryDataSource s)
+        lens (_uid :: DataDirectory s -> TF.Attr s P.Text)
+             (\s a -> s { _uid = a } :: DataDirectory s)
 
-instance s ~ s' => P.HasComputedFilesystem (TF.Ref s' (DirectoryDataSource s)) (TF.Attr s P.Text) where
-    computedFilesystem =
-        (_filesystem :: DirectoryDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFilesystem (TF.Ref s' (DataDirectory s)) (TF.Attr s P.Text) where
+    computeFilesystem =
+        (_filesystem :: DataDirectory s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedGid (TF.Ref s' (DirectoryDataSource s)) (TF.Attr s P.Text) where
-    computedGid =
-        (_gid :: DirectoryDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeGid (TF.Ref s' (DataDirectory s)) (TF.Attr s P.Text) where
+    computeGid =
+        (_gid :: DataDirectory s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DirectoryDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataDirectory s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedMode (TF.Ref s' (DirectoryDataSource s)) (TF.Attr s P.Text) where
-    computedMode =
-        (_mode :: DirectoryDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMode (TF.Ref s' (DataDirectory s)) (TF.Attr s P.Text) where
+    computeMode =
+        (_mode :: DataDirectory s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (DirectoryDataSource s)) (TF.Attr s P.Text) where
-    computedPath =
-        (_path :: DirectoryDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePath (TF.Ref s' (DataDirectory s)) (TF.Attr s P.Text) where
+    computePath =
+        (_path :: DataDirectory s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUid (TF.Ref s' (DirectoryDataSource s)) (TF.Attr s P.Text) where
-    computedUid =
-        (_uid :: DirectoryDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeUid (TF.Ref s' (DataDirectory s)) (TF.Attr s P.Text) where
+    computeUid =
+        (_uid :: DataDirectory s -> TF.Attr s P.Text)
             . TF.refValue
 
-directoryDataSource :: TF.DataSource P.Ignition (DirectoryDataSource s)
-directoryDataSource =
+dataDirectory :: TF.DataSource P.Ignition (DataDirectory s)
+dataDirectory =
     TF.newDataSource "ignition_directory" $
-        DirectoryDataSource {
+        DataDirectory {
               _filesystem = TF.Nil
             , _gid = TF.Nil
             , _mode = TF.Nil
@@ -459,7 +459,7 @@ directoryDataSource =
 
 Describes the desired state of a system’s disk.
 -}
-data DiskDataSource s = DiskDataSource {
+data DataDisk s = DataDisk {
       _device     :: !(TF.Attr s P.Text)
     {- ^ (Required) The absolute path to the device. Devices are typically referenced by the /dev/disk/by-* symlinks. -}
     , _partition  :: !(TF.Attr s P.Text)
@@ -468,50 +468,50 @@ data DiskDataSource s = DiskDataSource {
     {- ^ (Optional) Whether or not the partition tables shall be wiped. When true, the partition tables are erased before any further manipulation. Otherwise, the existing entries are left intact. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DiskDataSource s) where
-    toHCL DiskDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataDisk s) where
+    toHCL DataDisk{..} = TF.inline $ catMaybes
         [ TF.assign "device" <$> TF.attribute _device
         , TF.assign "partition" <$> TF.attribute _partition
         , TF.assign "wipe_table" <$> TF.attribute _wipe_table
         ]
 
-instance P.HasDevice (DiskDataSource s) (TF.Attr s P.Text) where
+instance P.HasDevice (DataDisk s) (TF.Attr s P.Text) where
     device =
-        lens (_device :: DiskDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _device = a } :: DiskDataSource s)
+        lens (_device :: DataDisk s -> TF.Attr s P.Text)
+             (\s a -> s { _device = a } :: DataDisk s)
 
-instance P.HasPartition (DiskDataSource s) (TF.Attr s P.Text) where
+instance P.HasPartition (DataDisk s) (TF.Attr s P.Text) where
     partition =
-        lens (_partition :: DiskDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _partition = a } :: DiskDataSource s)
+        lens (_partition :: DataDisk s -> TF.Attr s P.Text)
+             (\s a -> s { _partition = a } :: DataDisk s)
 
-instance P.HasWipeTable (DiskDataSource s) (TF.Attr s P.Text) where
+instance P.HasWipeTable (DataDisk s) (TF.Attr s P.Text) where
     wipeTable =
-        lens (_wipe_table :: DiskDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _wipe_table = a } :: DiskDataSource s)
+        lens (_wipe_table :: DataDisk s -> TF.Attr s P.Text)
+             (\s a -> s { _wipe_table = a } :: DataDisk s)
 
-instance s ~ s' => P.HasComputedDevice (TF.Ref s' (DiskDataSource s)) (TF.Attr s P.Text) where
-    computedDevice =
-        (_device :: DiskDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDevice (TF.Ref s' (DataDisk s)) (TF.Attr s P.Text) where
+    computeDevice =
+        (_device :: DataDisk s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DiskDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataDisk s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedPartition (TF.Ref s' (DiskDataSource s)) (TF.Attr s P.Text) where
-    computedPartition =
-        (_partition :: DiskDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePartition (TF.Ref s' (DataDisk s)) (TF.Attr s P.Text) where
+    computePartition =
+        (_partition :: DataDisk s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedWipeTable (TF.Ref s' (DiskDataSource s)) (TF.Attr s P.Text) where
-    computedWipeTable =
-        (_wipe_table :: DiskDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeWipeTable (TF.Ref s' (DataDisk s)) (TF.Attr s P.Text) where
+    computeWipeTable =
+        (_wipe_table :: DataDisk s -> TF.Attr s P.Text)
             . TF.refValue
 
-diskDataSource :: TF.DataSource P.Ignition (DiskDataSource s)
-diskDataSource =
+dataDisk :: TF.DataSource P.Ignition (DataDisk s)
+dataDisk =
     TF.newDataSource "ignition_disk" $
-        DiskDataSource {
+        DataDisk {
               _device = TF.Nil
             , _partition = TF.Nil
             , _wipe_table = TF.Nil
@@ -521,7 +521,7 @@ diskDataSource =
 
 Describes a file to be written in a particular filesystem.
 -}
-data FileDataSource s = FileDataSource {
+data DataFile s = DataFile {
       _content    :: !(TF.Attr s (P.FileContent s))
     {- ^ (Optional) Block to provide the file content inline. -}
     , _filesystem :: !(TF.Attr s P.Text)
@@ -538,8 +538,8 @@ data FileDataSource s = FileDataSource {
     {- ^ (Optional) The user ID of the owner. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FileDataSource s) where
-    toHCL FileDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataFile s) where
+    toHCL DataFile{..} = TF.inline $ catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "filesystem" <$> TF.attribute _filesystem
         , TF.assign "gid" <$> TF.attribute _gid
@@ -549,83 +549,83 @@ instance TF.ToHCL (FileDataSource s) where
         , TF.assign "uid" <$> TF.attribute _uid
         ]
 
-instance P.HasContent (FileDataSource s) (TF.Attr s (P.FileContent s)) where
+instance P.HasContent (DataFile s) (TF.Attr s (P.FileContent s)) where
     content =
-        lens (_content :: FileDataSource s -> TF.Attr s (P.FileContent s))
-             (\s a -> s { _content = a } :: FileDataSource s)
+        lens (_content :: DataFile s -> TF.Attr s (P.FileContent s))
+             (\s a -> s { _content = a } :: DataFile s)
 
-instance P.HasFilesystem (FileDataSource s) (TF.Attr s P.Text) where
+instance P.HasFilesystem (DataFile s) (TF.Attr s P.Text) where
     filesystem =
-        lens (_filesystem :: FileDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _filesystem = a } :: FileDataSource s)
+        lens (_filesystem :: DataFile s -> TF.Attr s P.Text)
+             (\s a -> s { _filesystem = a } :: DataFile s)
 
-instance P.HasGid (FileDataSource s) (TF.Attr s P.Int) where
+instance P.HasGid (DataFile s) (TF.Attr s P.Int) where
     gid =
-        lens (_gid :: FileDataSource s -> TF.Attr s P.Int)
-             (\s a -> s { _gid = a } :: FileDataSource s)
+        lens (_gid :: DataFile s -> TF.Attr s P.Int)
+             (\s a -> s { _gid = a } :: DataFile s)
 
-instance P.HasMode (FileDataSource s) (TF.Attr s P.Text) where
+instance P.HasMode (DataFile s) (TF.Attr s P.Text) where
     mode =
-        lens (_mode :: FileDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _mode = a } :: FileDataSource s)
+        lens (_mode :: DataFile s -> TF.Attr s P.Text)
+             (\s a -> s { _mode = a } :: DataFile s)
 
-instance P.HasPath (FileDataSource s) (TF.Attr s P.Text) where
+instance P.HasPath (DataFile s) (TF.Attr s P.Text) where
     path =
-        lens (_path :: FileDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _path = a } :: FileDataSource s)
+        lens (_path :: DataFile s -> TF.Attr s P.Text)
+             (\s a -> s { _path = a } :: DataFile s)
 
-instance P.HasSource (FileDataSource s) (TF.Attr s (P.FileSource s)) where
+instance P.HasSource (DataFile s) (TF.Attr s (P.FileSource s)) where
     source =
-        lens (_source :: FileDataSource s -> TF.Attr s (P.FileSource s))
-             (\s a -> s { _source = a } :: FileDataSource s)
+        lens (_source :: DataFile s -> TF.Attr s (P.FileSource s))
+             (\s a -> s { _source = a } :: DataFile s)
 
-instance P.HasUid (FileDataSource s) (TF.Attr s P.Int) where
+instance P.HasUid (DataFile s) (TF.Attr s P.Int) where
     uid =
-        lens (_uid :: FileDataSource s -> TF.Attr s P.Int)
-             (\s a -> s { _uid = a } :: FileDataSource s)
+        lens (_uid :: DataFile s -> TF.Attr s P.Int)
+             (\s a -> s { _uid = a } :: DataFile s)
 
-instance s ~ s' => P.HasComputedContent (TF.Ref s' (FileDataSource s)) (TF.Attr s (P.FileContent s)) where
-    computedContent =
-        (_content :: FileDataSource s -> TF.Attr s (P.FileContent s))
+instance s ~ s' => P.HasComputeContent (TF.Ref s' (DataFile s)) (TF.Attr s (P.FileContent s)) where
+    computeContent =
+        (_content :: DataFile s -> TF.Attr s (P.FileContent s))
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFilesystem (TF.Ref s' (FileDataSource s)) (TF.Attr s P.Text) where
-    computedFilesystem =
-        (_filesystem :: FileDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFilesystem (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
+    computeFilesystem =
+        (_filesystem :: DataFile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedGid (TF.Ref s' (FileDataSource s)) (TF.Attr s P.Int) where
-    computedGid =
-        (_gid :: FileDataSource s -> TF.Attr s P.Int)
+instance s ~ s' => P.HasComputeGid (TF.Ref s' (DataFile s)) (TF.Attr s P.Int) where
+    computeGid =
+        (_gid :: DataFile s -> TF.Attr s P.Int)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (FileDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedMode (TF.Ref s' (FileDataSource s)) (TF.Attr s P.Text) where
-    computedMode =
-        (_mode :: FileDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMode (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
+    computeMode =
+        (_mode :: DataFile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (FileDataSource s)) (TF.Attr s P.Text) where
-    computedPath =
-        (_path :: FileDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePath (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
+    computePath =
+        (_path :: DataFile s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSource (TF.Ref s' (FileDataSource s)) (TF.Attr s (P.FileSource s)) where
-    computedSource =
-        (_source :: FileDataSource s -> TF.Attr s (P.FileSource s))
+instance s ~ s' => P.HasComputeSource (TF.Ref s' (DataFile s)) (TF.Attr s (P.FileSource s)) where
+    computeSource =
+        (_source :: DataFile s -> TF.Attr s (P.FileSource s))
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUid (TF.Ref s' (FileDataSource s)) (TF.Attr s P.Int) where
-    computedUid =
-        (_uid :: FileDataSource s -> TF.Attr s P.Int)
+instance s ~ s' => P.HasComputeUid (TF.Ref s' (DataFile s)) (TF.Attr s P.Int) where
+    computeUid =
+        (_uid :: DataFile s -> TF.Attr s P.Int)
             . TF.refValue
 
-fileDataSource :: TF.DataSource P.Ignition (FileDataSource s)
-fileDataSource =
+dataFile :: TF.DataSource P.Ignition (DataFile s)
+dataFile =
     TF.newDataSource "ignition_file" $
-        FileDataSource {
+        DataFile {
               _content = TF.Nil
             , _filesystem = TF.Nil
             , _gid = TF.Nil
@@ -640,7 +640,7 @@ fileDataSource =
 Describes the desired state of a the system’s filesystems to be configured
 and/or used with the ignition_file resource.
 -}
-data FilesystemDataSource s = FilesystemDataSource {
+data DataFilesystem s = DataFilesystem {
       _mount :: !(TF.Attr s P.Text)
     {- ^ (Optional) Contains the set of mount and formatting options for the filesystem. A non-null entry indicates that the filesystem should be mounted before it is used by Ignition. -}
     , _name  :: !(TF.Attr s P.Text)
@@ -649,50 +649,50 @@ data FilesystemDataSource s = FilesystemDataSource {
     {- ^ (Optional) The mount-point of the filesystem. A non-null entry indicates that the filesystem has already been mounted by the system at the specified path. This is really only useful for /sysroot . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FilesystemDataSource s) where
-    toHCL FilesystemDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataFilesystem s) where
+    toHCL DataFilesystem{..} = TF.inline $ catMaybes
         [ TF.assign "mount" <$> TF.attribute _mount
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "path" <$> TF.attribute _path
         ]
 
-instance P.HasMount (FilesystemDataSource s) (TF.Attr s P.Text) where
+instance P.HasMount (DataFilesystem s) (TF.Attr s P.Text) where
     mount =
-        lens (_mount :: FilesystemDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _mount = a } :: FilesystemDataSource s)
+        lens (_mount :: DataFilesystem s -> TF.Attr s P.Text)
+             (\s a -> s { _mount = a } :: DataFilesystem s)
 
-instance P.HasName (FilesystemDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataFilesystem s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: FilesystemDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: FilesystemDataSource s)
+        lens (_name :: DataFilesystem s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataFilesystem s)
 
-instance P.HasPath (FilesystemDataSource s) (TF.Attr s P.Text) where
+instance P.HasPath (DataFilesystem s) (TF.Attr s P.Text) where
     path =
-        lens (_path :: FilesystemDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _path = a } :: FilesystemDataSource s)
+        lens (_path :: DataFilesystem s -> TF.Attr s P.Text)
+             (\s a -> s { _path = a } :: DataFilesystem s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (FilesystemDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataFilesystem s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedMount (TF.Ref s' (FilesystemDataSource s)) (TF.Attr s P.Text) where
-    computedMount =
-        (_mount :: FilesystemDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeMount (TF.Ref s' (DataFilesystem s)) (TF.Attr s P.Text) where
+    computeMount =
+        (_mount :: DataFilesystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (FilesystemDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: FilesystemDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataFilesystem s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataFilesystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (FilesystemDataSource s)) (TF.Attr s P.Text) where
-    computedPath =
-        (_path :: FilesystemDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePath (TF.Ref s' (DataFilesystem s)) (TF.Attr s P.Text) where
+    computePath =
+        (_path :: DataFilesystem s -> TF.Attr s P.Text)
             . TF.refValue
 
-filesystemDataSource :: TF.DataSource P.Ignition (FilesystemDataSource s)
-filesystemDataSource =
+dataFilesystem :: TF.DataSource P.Ignition (DataFilesystem s)
+dataFilesystem =
     TF.newDataSource "ignition_filesystem" $
-        FilesystemDataSource {
+        DataFilesystem {
               _mount = TF.Nil
             , _name = TF.Nil
             , _path = TF.Nil
@@ -702,7 +702,7 @@ filesystemDataSource =
 
 Describes the desired group additions to the passwd database.
 -}
-data GroupDataSource s = GroupDataSource {
+data DataGroup s = DataGroup {
       _gid           :: !(TF.Attr s P.Text)
     {- ^ (Optional) The group ID of the new account. -}
     , _name          :: !(TF.Attr s P.Text)
@@ -711,50 +711,50 @@ data GroupDataSource s = GroupDataSource {
     {- ^ (Optional) The encrypted password for the account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (GroupDataSource s) where
-    toHCL GroupDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataGroup s) where
+    toHCL DataGroup{..} = TF.inline $ catMaybes
         [ TF.assign "gid" <$> TF.attribute _gid
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "password_hash" <$> TF.attribute _password_hash
         ]
 
-instance P.HasGid (GroupDataSource s) (TF.Attr s P.Text) where
+instance P.HasGid (DataGroup s) (TF.Attr s P.Text) where
     gid =
-        lens (_gid :: GroupDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _gid = a } :: GroupDataSource s)
+        lens (_gid :: DataGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _gid = a } :: DataGroup s)
 
-instance P.HasName (GroupDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataGroup s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: GroupDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: GroupDataSource s)
+        lens (_name :: DataGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataGroup s)
 
-instance P.HasPasswordHash (GroupDataSource s) (TF.Attr s P.Text) where
+instance P.HasPasswordHash (DataGroup s) (TF.Attr s P.Text) where
     passwordHash =
-        lens (_password_hash :: GroupDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _password_hash = a } :: GroupDataSource s)
+        lens (_password_hash :: DataGroup s -> TF.Attr s P.Text)
+             (\s a -> s { _password_hash = a } :: DataGroup s)
 
-instance s ~ s' => P.HasComputedGid (TF.Ref s' (GroupDataSource s)) (TF.Attr s P.Text) where
-    computedGid =
-        (_gid :: GroupDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeGid (TF.Ref s' (DataGroup s)) (TF.Attr s P.Text) where
+    computeGid =
+        (_gid :: DataGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (GroupDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataGroup s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (GroupDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: GroupDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataGroup s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPasswordHash (TF.Ref s' (GroupDataSource s)) (TF.Attr s P.Text) where
-    computedPasswordHash =
-        (_password_hash :: GroupDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePasswordHash (TF.Ref s' (DataGroup s)) (TF.Attr s P.Text) where
+    computePasswordHash =
+        (_password_hash :: DataGroup s -> TF.Attr s P.Text)
             . TF.refValue
 
-groupDataSource :: TF.DataSource P.Ignition (GroupDataSource s)
-groupDataSource =
+dataGroup :: TF.DataSource P.Ignition (DataGroup s)
+dataGroup =
     TF.newDataSource "ignition_group" $
-        GroupDataSource {
+        DataGroup {
               _gid = TF.Nil
             , _name = TF.Nil
             , _password_hash = TF.Nil
@@ -764,7 +764,7 @@ groupDataSource =
 
 Describes a link to be created in a particular filesystem.
 -}
-data LinkDataSource s = LinkDataSource {
+data DataLink s = DataLink {
       _filesystem :: !(TF.Attr s P.Text)
     {- ^ (Required) The internal identifier of the filesystem. This matches the last filesystem with the given identifier. This should be a valid name from a ignition_filesystem resource. -}
     , _gid        :: !(TF.Attr s P.Text)
@@ -779,8 +779,8 @@ data LinkDataSource s = LinkDataSource {
     {- ^ (Optional) The user ID of the owner. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LinkDataSource s) where
-    toHCL LinkDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataLink s) where
+    toHCL DataLink{..} = TF.inline $ catMaybes
         [ TF.assign "filesystem" <$> TF.attribute _filesystem
         , TF.assign "gid" <$> TF.attribute _gid
         , TF.assign "hard" <$> TF.attribute _hard
@@ -789,73 +789,73 @@ instance TF.ToHCL (LinkDataSource s) where
         , TF.assign "uid" <$> TF.attribute _uid
         ]
 
-instance P.HasFilesystem (LinkDataSource s) (TF.Attr s P.Text) where
+instance P.HasFilesystem (DataLink s) (TF.Attr s P.Text) where
     filesystem =
-        lens (_filesystem :: LinkDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _filesystem = a } :: LinkDataSource s)
+        lens (_filesystem :: DataLink s -> TF.Attr s P.Text)
+             (\s a -> s { _filesystem = a } :: DataLink s)
 
-instance P.HasGid (LinkDataSource s) (TF.Attr s P.Text) where
+instance P.HasGid (DataLink s) (TF.Attr s P.Text) where
     gid =
-        lens (_gid :: LinkDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _gid = a } :: LinkDataSource s)
+        lens (_gid :: DataLink s -> TF.Attr s P.Text)
+             (\s a -> s { _gid = a } :: DataLink s)
 
-instance P.HasHard (LinkDataSource s) (TF.Attr s P.Text) where
+instance P.HasHard (DataLink s) (TF.Attr s P.Text) where
     hard =
-        lens (_hard :: LinkDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _hard = a } :: LinkDataSource s)
+        lens (_hard :: DataLink s -> TF.Attr s P.Text)
+             (\s a -> s { _hard = a } :: DataLink s)
 
-instance P.HasPath (LinkDataSource s) (TF.Attr s P.Text) where
+instance P.HasPath (DataLink s) (TF.Attr s P.Text) where
     path =
-        lens (_path :: LinkDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _path = a } :: LinkDataSource s)
+        lens (_path :: DataLink s -> TF.Attr s P.Text)
+             (\s a -> s { _path = a } :: DataLink s)
 
-instance P.HasTarget (LinkDataSource s) (TF.Attr s P.Text) where
+instance P.HasTarget (DataLink s) (TF.Attr s P.Text) where
     target =
-        lens (_target :: LinkDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _target = a } :: LinkDataSource s)
+        lens (_target :: DataLink s -> TF.Attr s P.Text)
+             (\s a -> s { _target = a } :: DataLink s)
 
-instance P.HasUid (LinkDataSource s) (TF.Attr s P.Text) where
+instance P.HasUid (DataLink s) (TF.Attr s P.Text) where
     uid =
-        lens (_uid :: LinkDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _uid = a } :: LinkDataSource s)
+        lens (_uid :: DataLink s -> TF.Attr s P.Text)
+             (\s a -> s { _uid = a } :: DataLink s)
 
-instance s ~ s' => P.HasComputedFilesystem (TF.Ref s' (LinkDataSource s)) (TF.Attr s P.Text) where
-    computedFilesystem =
-        (_filesystem :: LinkDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFilesystem (TF.Ref s' (DataLink s)) (TF.Attr s P.Text) where
+    computeFilesystem =
+        (_filesystem :: DataLink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedGid (TF.Ref s' (LinkDataSource s)) (TF.Attr s P.Text) where
-    computedGid =
-        (_gid :: LinkDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeGid (TF.Ref s' (DataLink s)) (TF.Attr s P.Text) where
+    computeGid =
+        (_gid :: DataLink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHard (TF.Ref s' (LinkDataSource s)) (TF.Attr s P.Text) where
-    computedHard =
-        (_hard :: LinkDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHard (TF.Ref s' (DataLink s)) (TF.Attr s P.Text) where
+    computeHard =
+        (_hard :: DataLink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LinkDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataLink s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (LinkDataSource s)) (TF.Attr s P.Text) where
-    computedPath =
-        (_path :: LinkDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePath (TF.Ref s' (DataLink s)) (TF.Attr s P.Text) where
+    computePath =
+        (_path :: DataLink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTarget (TF.Ref s' (LinkDataSource s)) (TF.Attr s P.Text) where
-    computedTarget =
-        (_target :: LinkDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeTarget (TF.Ref s' (DataLink s)) (TF.Attr s P.Text) where
+    computeTarget =
+        (_target :: DataLink s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUid (TF.Ref s' (LinkDataSource s)) (TF.Attr s P.Text) where
-    computedUid =
-        (_uid :: LinkDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeUid (TF.Ref s' (DataLink s)) (TF.Attr s P.Text) where
+    computeUid =
+        (_uid :: DataLink s -> TF.Attr s P.Text)
             . TF.refValue
 
-linkDataSource :: TF.DataSource P.Ignition (LinkDataSource s)
-linkDataSource =
+dataLink :: TF.DataSource P.Ignition (DataLink s)
+dataLink =
     TF.newDataSource "ignition_link" $
-        LinkDataSource {
+        DataLink {
               _filesystem = TF.Nil
             , _gid = TF.Nil
             , _hard = TF.Nil
@@ -868,46 +868,46 @@ linkDataSource =
 
 Describes the desired state of the networkd units.
 -}
-data NetworkdUnitDataSource s = NetworkdUnitDataSource {
+data DataNetworkdUnit s = DataNetworkdUnit {
       _content :: !(TF.Attr s P.Text)
     {- ^ (Required) The contents of the networkd file. -}
     , _name    :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the file. This must be suffixed with a valid unit type (e.g. 00-eth0.network ). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkdUnitDataSource s) where
-    toHCL NetworkdUnitDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataNetworkdUnit s) where
+    toHCL DataNetworkdUnit{..} = TF.inline $ catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasContent (NetworkdUnitDataSource s) (TF.Attr s P.Text) where
+instance P.HasContent (DataNetworkdUnit s) (TF.Attr s P.Text) where
     content =
-        lens (_content :: NetworkdUnitDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _content = a } :: NetworkdUnitDataSource s)
+        lens (_content :: DataNetworkdUnit s -> TF.Attr s P.Text)
+             (\s a -> s { _content = a } :: DataNetworkdUnit s)
 
-instance P.HasName (NetworkdUnitDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataNetworkdUnit s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: NetworkdUnitDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: NetworkdUnitDataSource s)
+        lens (_name :: DataNetworkdUnit s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataNetworkdUnit s)
 
-instance s ~ s' => P.HasComputedContent (TF.Ref s' (NetworkdUnitDataSource s)) (TF.Attr s P.Text) where
-    computedContent =
-        (_content :: NetworkdUnitDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeContent (TF.Ref s' (DataNetworkdUnit s)) (TF.Attr s P.Text) where
+    computeContent =
+        (_content :: DataNetworkdUnit s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkdUnitDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataNetworkdUnit s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkdUnitDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: NetworkdUnitDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataNetworkdUnit s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataNetworkdUnit s -> TF.Attr s P.Text)
             . TF.refValue
 
-networkdUnitDataSource :: TF.DataSource P.Ignition (NetworkdUnitDataSource s)
-networkdUnitDataSource =
+dataNetworkdUnit :: TF.DataSource P.Ignition (DataNetworkdUnit s)
+dataNetworkdUnit =
     TF.newDataSource "ignition_networkd_unit" $
-        NetworkdUnitDataSource {
+        DataNetworkdUnit {
               _content = TF.Nil
             , _name = TF.Nil
             }
@@ -916,7 +916,7 @@ networkdUnitDataSource =
 
 Describes the desired state of the system’s RAID.
 -}
-data RaidDataSource s = RaidDataSource {
+data DataRaid s = DataRaid {
       _devices :: !(TF.Attr s P.Text)
     {- ^ (Required) The list of devices (referenced by their absolute path) in the array. -}
     , _level   :: !(TF.Attr s P.Text)
@@ -927,61 +927,61 @@ data RaidDataSource s = RaidDataSource {
     {- ^ (Optional) The number of spares (if applicable) in the array. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RaidDataSource s) where
-    toHCL RaidDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataRaid s) where
+    toHCL DataRaid{..} = TF.inline $ catMaybes
         [ TF.assign "devices" <$> TF.attribute _devices
         , TF.assign "level" <$> TF.attribute _level
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "spares" <$> TF.attribute _spares
         ]
 
-instance P.HasDevices (RaidDataSource s) (TF.Attr s P.Text) where
+instance P.HasDevices (DataRaid s) (TF.Attr s P.Text) where
     devices =
-        lens (_devices :: RaidDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _devices = a } :: RaidDataSource s)
+        lens (_devices :: DataRaid s -> TF.Attr s P.Text)
+             (\s a -> s { _devices = a } :: DataRaid s)
 
-instance P.HasLevel (RaidDataSource s) (TF.Attr s P.Text) where
+instance P.HasLevel (DataRaid s) (TF.Attr s P.Text) where
     level =
-        lens (_level :: RaidDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _level = a } :: RaidDataSource s)
+        lens (_level :: DataRaid s -> TF.Attr s P.Text)
+             (\s a -> s { _level = a } :: DataRaid s)
 
-instance P.HasName (RaidDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataRaid s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: RaidDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: RaidDataSource s)
+        lens (_name :: DataRaid s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataRaid s)
 
-instance P.HasSpares (RaidDataSource s) (TF.Attr s P.Text) where
+instance P.HasSpares (DataRaid s) (TF.Attr s P.Text) where
     spares =
-        lens (_spares :: RaidDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _spares = a } :: RaidDataSource s)
+        lens (_spares :: DataRaid s -> TF.Attr s P.Text)
+             (\s a -> s { _spares = a } :: DataRaid s)
 
-instance s ~ s' => P.HasComputedDevices (TF.Ref s' (RaidDataSource s)) (TF.Attr s P.Text) where
-    computedDevices =
-        (_devices :: RaidDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDevices (TF.Ref s' (DataRaid s)) (TF.Attr s P.Text) where
+    computeDevices =
+        (_devices :: DataRaid s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RaidDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataRaid s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLevel (TF.Ref s' (RaidDataSource s)) (TF.Attr s P.Text) where
-    computedLevel =
-        (_level :: RaidDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeLevel (TF.Ref s' (DataRaid s)) (TF.Attr s P.Text) where
+    computeLevel =
+        (_level :: DataRaid s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (RaidDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: RaidDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataRaid s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataRaid s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSpares (TF.Ref s' (RaidDataSource s)) (TF.Attr s P.Text) where
-    computedSpares =
-        (_spares :: RaidDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSpares (TF.Ref s' (DataRaid s)) (TF.Attr s P.Text) where
+    computeSpares =
+        (_spares :: DataRaid s -> TF.Attr s P.Text)
             . TF.refValue
 
-raidDataSource :: TF.DataSource P.Ignition (RaidDataSource s)
-raidDataSource =
+dataRaid :: TF.DataSource P.Ignition (DataRaid s)
+dataRaid =
     TF.newDataSource "ignition_raid" $
-        RaidDataSource {
+        DataRaid {
               _devices = TF.Nil
             , _level = TF.Nil
             , _name = TF.Nil
@@ -992,7 +992,7 @@ raidDataSource =
 
 Describes the desired state of the systemd units.
 -}
-data SystemdUnitDataSource s = SystemdUnitDataSource {
+data DataSystemdUnit s = DataSystemdUnit {
       _content :: !(TF.Attr s P.SystemdUnit)
     {- ^ (Optional) The contents of the unit. -}
     , _dropin  :: !(TF.Attr s [P.SystemdUnitDropin s])
@@ -1005,8 +1005,8 @@ data SystemdUnitDataSource s = SystemdUnitDataSource {
     {- ^ (Required) Tthe name of the unit. This must be suffixed with a valid unit type (e.g. thing.service ). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SystemdUnitDataSource s) where
-    toHCL SystemdUnitDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataSystemdUnit s) where
+    toHCL DataSystemdUnit{..} = TF.inline $ catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "dropin" <$> TF.attribute _dropin
         , TF.assign "enabled" <$> TF.attribute _enabled
@@ -1014,63 +1014,63 @@ instance TF.ToHCL (SystemdUnitDataSource s) where
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasContent (SystemdUnitDataSource s) (TF.Attr s P.SystemdUnit) where
+instance P.HasContent (DataSystemdUnit s) (TF.Attr s P.SystemdUnit) where
     content =
-        lens (_content :: SystemdUnitDataSource s -> TF.Attr s P.SystemdUnit)
-             (\s a -> s { _content = a } :: SystemdUnitDataSource s)
+        lens (_content :: DataSystemdUnit s -> TF.Attr s P.SystemdUnit)
+             (\s a -> s { _content = a } :: DataSystemdUnit s)
 
-instance P.HasDropin (SystemdUnitDataSource s) (TF.Attr s [P.SystemdUnitDropin s]) where
+instance P.HasDropin (DataSystemdUnit s) (TF.Attr s [P.SystemdUnitDropin s]) where
     dropin =
-        lens (_dropin :: SystemdUnitDataSource s -> TF.Attr s [P.SystemdUnitDropin s])
-             (\s a -> s { _dropin = a } :: SystemdUnitDataSource s)
+        lens (_dropin :: DataSystemdUnit s -> TF.Attr s [P.SystemdUnitDropin s])
+             (\s a -> s { _dropin = a } :: DataSystemdUnit s)
 
-instance P.HasEnabled (SystemdUnitDataSource s) (TF.Attr s P.Bool) where
+instance P.HasEnabled (DataSystemdUnit s) (TF.Attr s P.Bool) where
     enabled =
-        lens (_enabled :: SystemdUnitDataSource s -> TF.Attr s P.Bool)
-             (\s a -> s { _enabled = a } :: SystemdUnitDataSource s)
+        lens (_enabled :: DataSystemdUnit s -> TF.Attr s P.Bool)
+             (\s a -> s { _enabled = a } :: DataSystemdUnit s)
 
-instance P.HasMask (SystemdUnitDataSource s) (TF.Attr s P.Bool) where
+instance P.HasMask (DataSystemdUnit s) (TF.Attr s P.Bool) where
     mask =
-        lens (_mask :: SystemdUnitDataSource s -> TF.Attr s P.Bool)
-             (\s a -> s { _mask = a } :: SystemdUnitDataSource s)
+        lens (_mask :: DataSystemdUnit s -> TF.Attr s P.Bool)
+             (\s a -> s { _mask = a } :: DataSystemdUnit s)
 
-instance P.HasName (SystemdUnitDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataSystemdUnit s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: SystemdUnitDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SystemdUnitDataSource s)
+        lens (_name :: DataSystemdUnit s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataSystemdUnit s)
 
-instance s ~ s' => P.HasComputedContent (TF.Ref s' (SystemdUnitDataSource s)) (TF.Attr s P.SystemdUnit) where
-    computedContent =
-        (_content :: SystemdUnitDataSource s -> TF.Attr s P.SystemdUnit)
+instance s ~ s' => P.HasComputeContent (TF.Ref s' (DataSystemdUnit s)) (TF.Attr s P.SystemdUnit) where
+    computeContent =
+        (_content :: DataSystemdUnit s -> TF.Attr s P.SystemdUnit)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDropin (TF.Ref s' (SystemdUnitDataSource s)) (TF.Attr s [P.SystemdUnitDropin s]) where
-    computedDropin =
-        (_dropin :: SystemdUnitDataSource s -> TF.Attr s [P.SystemdUnitDropin s])
+instance s ~ s' => P.HasComputeDropin (TF.Ref s' (DataSystemdUnit s)) (TF.Attr s [P.SystemdUnitDropin s]) where
+    computeDropin =
+        (_dropin :: DataSystemdUnit s -> TF.Attr s [P.SystemdUnitDropin s])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (SystemdUnitDataSource s)) (TF.Attr s P.Bool) where
-    computedEnabled =
-        (_enabled :: SystemdUnitDataSource s -> TF.Attr s P.Bool)
+instance s ~ s' => P.HasComputeEnabled (TF.Ref s' (DataSystemdUnit s)) (TF.Attr s P.Bool) where
+    computeEnabled =
+        (_enabled :: DataSystemdUnit s -> TF.Attr s P.Bool)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SystemdUnitDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataSystemdUnit s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedMask (TF.Ref s' (SystemdUnitDataSource s)) (TF.Attr s P.Bool) where
-    computedMask =
-        (_mask :: SystemdUnitDataSource s -> TF.Attr s P.Bool)
+instance s ~ s' => P.HasComputeMask (TF.Ref s' (DataSystemdUnit s)) (TF.Attr s P.Bool) where
+    computeMask =
+        (_mask :: DataSystemdUnit s -> TF.Attr s P.Bool)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SystemdUnitDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: SystemdUnitDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataSystemdUnit s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataSystemdUnit s -> TF.Attr s P.Text)
             . TF.refValue
 
-systemdUnitDataSource :: TF.DataSource P.Ignition (SystemdUnitDataSource s)
-systemdUnitDataSource =
+dataSystemdUnit :: TF.DataSource P.Ignition (DataSystemdUnit s)
+dataSystemdUnit =
     TF.newDataSource "ignition_systemd_unit" $
-        SystemdUnitDataSource {
+        DataSystemdUnit {
               _content = TF.Nil
             , _dropin = TF.Nil
             , _enabled = TF.Nil
@@ -1082,7 +1082,7 @@ systemdUnitDataSource =
 
 Describes the desired user additions to the passwd database.
 -}
-data UserDataSource s = UserDataSource {
+data DataUser s = DataUser {
       _gecos               :: !(TF.Attr s P.Text)
     {- ^ (Optional) The GECOS field of the new account. -}
     , _groups              :: !(TF.Attr s P.Text)
@@ -1111,8 +1111,8 @@ data UserDataSource s = UserDataSource {
     {- ^ (Optional) The user ID of the new account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserDataSource s) where
-    toHCL UserDataSource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataUser s) where
+    toHCL DataUser{..} = TF.inline $ catMaybes
         [ TF.assign "gecos" <$> TF.attribute _gecos
         , TF.assign "groups" <$> TF.attribute _groups
         , TF.assign "home_dir" <$> TF.attribute _home_dir
@@ -1128,143 +1128,143 @@ instance TF.ToHCL (UserDataSource s) where
         , TF.assign "uid" <$> TF.attribute _uid
         ]
 
-instance P.HasGecos (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasGecos (DataUser s) (TF.Attr s P.Text) where
     gecos =
-        lens (_gecos :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _gecos = a } :: UserDataSource s)
+        lens (_gecos :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _gecos = a } :: DataUser s)
 
-instance P.HasGroups (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasGroups (DataUser s) (TF.Attr s P.Text) where
     groups =
-        lens (_groups :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _groups = a } :: UserDataSource s)
+        lens (_groups :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _groups = a } :: DataUser s)
 
-instance P.HasHomeDir (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasHomeDir (DataUser s) (TF.Attr s P.Text) where
     homeDir =
-        lens (_home_dir :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _home_dir = a } :: UserDataSource s)
+        lens (_home_dir :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _home_dir = a } :: DataUser s)
 
-instance P.HasName (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasName (DataUser s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: UserDataSource s)
+        lens (_name :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataUser s)
 
-instance P.HasNoCreateHome (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasNoCreateHome (DataUser s) (TF.Attr s P.Text) where
     noCreateHome =
-        lens (_no_create_home :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _no_create_home = a } :: UserDataSource s)
+        lens (_no_create_home :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _no_create_home = a } :: DataUser s)
 
-instance P.HasNoLogInit (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasNoLogInit (DataUser s) (TF.Attr s P.Text) where
     noLogInit =
-        lens (_no_log_init :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _no_log_init = a } :: UserDataSource s)
+        lens (_no_log_init :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _no_log_init = a } :: DataUser s)
 
-instance P.HasNoUserGroup (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasNoUserGroup (DataUser s) (TF.Attr s P.Text) where
     noUserGroup =
-        lens (_no_user_group :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _no_user_group = a } :: UserDataSource s)
+        lens (_no_user_group :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _no_user_group = a } :: DataUser s)
 
-instance P.HasPasswordHash (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasPasswordHash (DataUser s) (TF.Attr s P.Text) where
     passwordHash =
-        lens (_password_hash :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _password_hash = a } :: UserDataSource s)
+        lens (_password_hash :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _password_hash = a } :: DataUser s)
 
-instance P.HasPrimaryGroup (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasPrimaryGroup (DataUser s) (TF.Attr s P.Text) where
     primaryGroup =
-        lens (_primary_group :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _primary_group = a } :: UserDataSource s)
+        lens (_primary_group :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _primary_group = a } :: DataUser s)
 
-instance P.HasShell (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasShell (DataUser s) (TF.Attr s P.Text) where
     shell =
-        lens (_shell :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _shell = a } :: UserDataSource s)
+        lens (_shell :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _shell = a } :: DataUser s)
 
-instance P.HasSshAuthorizedKeys (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasSshAuthorizedKeys (DataUser s) (TF.Attr s P.Text) where
     sshAuthorizedKeys =
-        lens (_ssh_authorized_keys :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _ssh_authorized_keys = a } :: UserDataSource s)
+        lens (_ssh_authorized_keys :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _ssh_authorized_keys = a } :: DataUser s)
 
-instance P.HasSystem (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasSystem (DataUser s) (TF.Attr s P.Text) where
     system =
-        lens (_system :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _system = a } :: UserDataSource s)
+        lens (_system :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _system = a } :: DataUser s)
 
-instance P.HasUid (UserDataSource s) (TF.Attr s P.Text) where
+instance P.HasUid (DataUser s) (TF.Attr s P.Text) where
     uid =
-        lens (_uid :: UserDataSource s -> TF.Attr s P.Text)
-             (\s a -> s { _uid = a } :: UserDataSource s)
+        lens (_uid :: DataUser s -> TF.Attr s P.Text)
+             (\s a -> s { _uid = a } :: DataUser s)
 
-instance s ~ s' => P.HasComputedGecos (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedGecos =
-        (_gecos :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeGecos (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeGecos =
+        (_gecos :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedGroups =
-        (_groups :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeGroups (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeGroups =
+        (_groups :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHomeDir (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedHomeDir =
-        (_home_dir :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeHomeDir (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeHomeDir =
+        (_home_dir :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputeId (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNoCreateHome (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedNoCreateHome =
-        (_no_create_home :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNoCreateHome (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeNoCreateHome =
+        (_no_create_home :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNoLogInit (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedNoLogInit =
-        (_no_log_init :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNoLogInit (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeNoLogInit =
+        (_no_log_init :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNoUserGroup (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedNoUserGroup =
-        (_no_user_group :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeNoUserGroup (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeNoUserGroup =
+        (_no_user_group :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPasswordHash (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedPasswordHash =
-        (_password_hash :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePasswordHash (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computePasswordHash =
+        (_password_hash :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrimaryGroup (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedPrimaryGroup =
-        (_primary_group :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputePrimaryGroup (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computePrimaryGroup =
+        (_primary_group :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedShell (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedShell =
-        (_shell :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeShell (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeShell =
+        (_shell :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSshAuthorizedKeys (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedSshAuthorizedKeys =
-        (_ssh_authorized_keys :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSshAuthorizedKeys (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeSshAuthorizedKeys =
+        (_ssh_authorized_keys :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSystem (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedSystem =
-        (_system :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSystem (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeSystem =
+        (_system :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUid (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
-    computedUid =
-        (_uid :: UserDataSource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeUid (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+    computeUid =
+        (_uid :: DataUser s -> TF.Attr s P.Text)
             . TF.refValue
 
-userDataSource :: TF.DataSource P.Ignition (UserDataSource s)
-userDataSource =
+dataUser :: TF.DataSource P.Ignition (DataUser s)
+dataUser =
     TF.newDataSource "ignition_user" $
-        UserDataSource {
+        DataUser {
               _gecos = TF.Nil
             , _groups = TF.Nil
             , _home_dir = TF.Nil

@@ -26,10 +26,12 @@ module Terrafomo.AzureRM.Provider
     , providerClientId
     , providerClientSecret
     , providerEnvironment
+    , providerMsiEndpoint
     , providerSkipCredentialsValidation
     , providerSkipProviderRegistration
     , providerSubscriptionId
     , providerTenantId
+    , providerUseMsi
     ) where
 
 import Data.Hashable      (Hashable)
@@ -64,6 +66,8 @@ data AzureRM = AzureRM {
     {- ^ (Optional) The client secret to use. It can also be sourced from the @ARM_CLIENT_SECRET@ environment variable. -}
     , _environment                 :: !(Maybe P.Text)
     {- ^ (Optional) The cloud environment to use. It can also be sourced from the @ARM_ENVIRONMENT@ environment variable. Supported values are: -}
+    , _msi_endpoint                :: !(Maybe P.Text)
+    {- ^ (Optional) The REST endpoint to retrieve an MSI token from. Terraform will attempt to discover this automatically but it can be specified manually here. It can also be sourced from the @ARM_MSI_ENDPOINT@ environment variable. -}
     , _skip_credentials_validation :: !(Maybe P.Text)
     {- ^ (Optional) Prevents the provider from validating the given credentials. When set to @true@ , @skip_provider_registration@ is assumed. It can also be sourced from the @ARM_SKIP_CREDENTIALS_VALIDATION@ environment variable; defaults to @false@ . -}
     , _skip_provider_registration  :: !(Maybe P.Text)
@@ -72,6 +76,8 @@ data AzureRM = AzureRM {
     {- ^ (Optional) The subscription ID to use. It can also be sourced from the @ARM_SUBSCRIPTION_ID@ environment variable. -}
     , _tenant_id                   :: !(Maybe P.Text)
     {- ^ (Optional) The tenant ID to use. It can also be sourced from the @ARM_TENANT_ID@ environment variable. -}
+    , _use_msi                     :: !(Maybe P.Text)
+    {- ^ (Optional) Set to true to authenticate using managed service identity. It can also be sourced from the @ARM_USE_MSI@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable AzureRM
@@ -85,10 +91,12 @@ instance TF.ToHCL AzureRM where
             , TF.assign "client_id" <$> _client_id x
             , TF.assign "client_secret" <$> _client_secret x
             , TF.assign "environment" <$> _environment x
+            , TF.assign "msi_endpoint" <$> _msi_endpoint x
             , TF.assign "skip_credentials_validation" <$> _skip_credentials_validation x
             , TF.assign "skip_provider_registration" <$> _skip_provider_registration x
             , TF.assign "subscription_id" <$> _subscription_id x
             , TF.assign "tenant_id" <$> _tenant_id x
+            , TF.assign "use_msi" <$> _use_msi x
             ]
 
 instance TF.IsProvider AzureRM where
@@ -99,10 +107,12 @@ emptyAzureRM = AzureRM {
         _client_id = Nothing
       , _client_secret = Nothing
       , _environment = Nothing
+      , _msi_endpoint = Nothing
       , _skip_credentials_validation = Nothing
       , _skip_provider_registration = Nothing
       , _subscription_id = Nothing
       , _tenant_id = Nothing
+      , _use_msi = Nothing
     }
 
 providerClientId :: Lens' AzureRM (Maybe P.Text)
@@ -116,6 +126,10 @@ providerClientSecret =
 providerEnvironment :: Lens' AzureRM (Maybe P.Text)
 providerEnvironment =
     lens _environment (\s a -> s { _environment = a })
+
+providerMsiEndpoint :: Lens' AzureRM (Maybe P.Text)
+providerMsiEndpoint =
+    lens _msi_endpoint (\s a -> s { _msi_endpoint = a })
 
 providerSkipCredentialsValidation :: Lens' AzureRM (Maybe P.Text)
 providerSkipCredentialsValidation =
@@ -132,3 +146,7 @@ providerSubscriptionId =
 providerTenantId :: Lens' AzureRM (Maybe P.Text)
 providerTenantId =
     lens _tenant_id (\s a -> s { _tenant_id = a })
+
+providerUseMsi :: Lens' AzureRM (Maybe P.Text)
+providerUseMsi =
+    lens _use_msi (\s a -> s { _use_msi = a })

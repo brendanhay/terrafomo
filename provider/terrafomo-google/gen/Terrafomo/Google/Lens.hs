@@ -119,6 +119,7 @@ module Terrafomo.Google.Lens
     , HasHttpSslTcpInternal (..)
     , HasHttpsHealthCheck (..)
     , HasIap (..)
+    , HasId (..)
     , HasIkeVersion (..)
     , HasImage (..)
     , HasInitialNodeCount (..)
@@ -301,381 +302,381 @@ module Terrafomo.Google.Lens
     , HasZone (..)
 
     -- ** Computed Attributes
-    , HasComputedAccountId (..)
-    , HasComputedAckDeadlineSeconds (..)
-    , HasComputedAdditionalZones (..)
-    , HasComputedAddonsConfig (..)
-    , HasComputedAddress (..)
-    , HasComputedAddressType (..)
-    , HasComputedAdvertisedRoutePriority (..)
-    , HasComputedAllow (..)
-    , HasComputedAllowStoppingForUpdate (..)
-    , HasComputedApis (..)
-    , HasComputedArchiveSizeBytes (..)
-    , HasComputedAttachedDisk (..)
-    , HasComputedAttachedDisk0DiskEncryptionKeySha256 (..)
-    , HasComputedAuthoritative (..)
-    , HasComputedAutoCreateRoutes (..)
-    , HasComputedAutoCreateSubnetworks (..)
-    , HasComputedAutoHealingPolicies (..)
-    , HasComputedAutoscaling (..)
-    , HasComputedAutoscalingPolicy (..)
-    , HasComputedAvailableMemoryMb (..)
-    , HasComputedBackend (..)
-    , HasComputedBackendService (..)
-    , HasComputedBackupPool (..)
-    , HasComputedBaseInstanceName (..)
-    , HasComputedBgp (..)
-    , HasComputedBillingAccount (..)
-    , HasComputedBinding (..)
-    , HasComputedBooleanPolicy (..)
-    , HasComputedBootDisk (..)
-    , HasComputedBootDiskDiskEncryptionKeySha256 (..)
-    , HasComputedBucket (..)
-    , HasComputedBucketName (..)
-    , HasComputedCanIpForward (..)
-    , HasComputedCertificate (..)
-    , HasComputedCertificateId (..)
-    , HasComputedCharset (..)
-    , HasComputedCheckIntervalSec (..)
-    , HasComputedCiphertext (..)
-    , HasComputedCluster (..)
-    , HasComputedClusterConfig (..)
-    , HasComputedClusterConfigBucket (..)
-    , HasComputedClusterConfigMasterConfigInstanceNames (..)
-    , HasComputedClusterConfigPreemptibleWorkerConfigInstanceNames (..)
-    , HasComputedClusterConfigSoftwareConfigProperties (..)
-    , HasComputedClusterConfigWorkerConfigInstanceNames (..)
-    , HasComputedClusterId (..)
-    , HasComputedClusterIpv4Cidr (..)
-    , HasComputedCollation (..)
-    , HasComputedConfig (..)
-    , HasComputedConfigId (..)
-    , HasComputedConnectionDrainingTimeoutSec (..)
-    , HasComputedConnectionName (..)
-    , HasComputedConstraint (..)
-    , HasComputedCors (..)
-    , HasComputedCpuPlatform (..)
-    , HasComputedCrc32c (..)
-    , HasComputedCreateTime (..)
-    , HasComputedCreateTimeout (..)
-    , HasComputedCreationTime (..)
-    , HasComputedCreationTimestamp (..)
-    , HasComputedCredentials (..)
-    , HasComputedCryptoKey (..)
-    , HasComputedCryptoKeyId (..)
-    , HasComputedCustomAttributes (..)
-    , HasComputedDatabaseVersion (..)
-    , HasComputedDatasetId (..)
-    , HasComputedDdl (..)
-    , HasComputedDefaultAcl (..)
-    , HasComputedDefaultService (..)
-    , HasComputedDefaultTableExpirationMs (..)
-    , HasComputedDeleted (..)
-    , HasComputedDeny (..)
-    , HasComputedDescription (..)
-    , HasComputedDestRange (..)
-    , HasComputedDestination (..)
-    , HasComputedDestinationRanges (..)
-    , HasComputedDetailedStatus (..)
-    , HasComputedDigest (..)
-    , HasComputedDirection (..)
-    , HasComputedDirectoryCustomerId (..)
-    , HasComputedDisableOnDestroy (..)
-    , HasComputedDisableProject (..)
-    , HasComputedDisk (..)
-    , HasComputedDisk0DiskEncryptionKeySha256 (..)
-    , HasComputedDiskEncryptionKeyRaw (..)
-    , HasComputedDiskEncryptionKeySha256 (..)
-    , HasComputedDiskSizeGb (..)
-    , HasComputedDisplayName (..)
-    , HasComputedDnsAddress (..)
-    , HasComputedDnsName (..)
-    , HasComputedDomain (..)
-    , HasComputedDriverControlsFilesUri (..)
-    , HasComputedDriverOutputResourceUri (..)
-    , HasComputedDuration (..)
-    , HasComputedEmail (..)
-    , HasComputedEnableCdn (..)
-    , HasComputedEnableKubernetesAlpha (..)
-    , HasComputedEnableLegacyAbac (..)
-    , HasComputedEndpoint (..)
-    , HasComputedEndpoints (..)
-    , HasComputedEntryPoint (..)
-    , HasComputedEtag (..)
-    , HasComputedEventNotificationConfig (..)
-    , HasComputedEventTypes (..)
-    , HasComputedExpirationTime (..)
-    , HasComputedFailoverRatio (..)
-    , HasComputedFamily' (..)
-    , HasComputedFingerprint (..)
-    , HasComputedFolder (..)
-    , HasComputedFolderId (..)
-    , HasComputedForceDelete (..)
-    , HasComputedForceDestroy (..)
-    , HasComputedFriendlyName (..)
-    , HasComputedGatewayAddress (..)
-    , HasComputedGatewayIpv4 (..)
-    , HasComputedGrpcConfig (..)
-    , HasComputedGuestAccelerator (..)
-    , HasComputedHealthChecks (..)
-    , HasComputedHealthyThreshold (..)
-    , HasComputedHost (..)
-    , HasComputedHostProject (..)
-    , HasComputedHostRule (..)
-    , HasComputedHttpConfig (..)
-    , HasComputedHttpHealthCheck (..)
-    , HasComputedHttpMethod (..)
-    , HasComputedHttpSslTcpInternal (..)
-    , HasComputedHttpsHealthCheck (..)
-    , HasComputedHttpsTriggerUrl (..)
-    , HasComputedIap (..)
-    , HasComputedId (..)
-    , HasComputedIkeVersion (..)
-    , HasComputedImage (..)
-    , HasComputedImageEncryptionKeySha256 (..)
-    , HasComputedImageId (..)
-    , HasComputedImageUrl (..)
-    , HasComputedInitialNodeCount (..)
-    , HasComputedInstance' (..)
-    , HasComputedInstanceDescription (..)
-    , HasComputedInstanceGroup (..)
-    , HasComputedInstanceGroupUrls (..)
-    , HasComputedInstanceId (..)
-    , HasComputedInstanceName (..)
-    , HasComputedInstanceTemplate (..)
-    , HasComputedInstanceType (..)
-    , HasComputedInstances (..)
-    , HasComputedInterface (..)
-    , HasComputedIpAddress (..)
-    , HasComputedIpAddress0IpAddress (..)
-    , HasComputedIpAddress0TimeToRetire (..)
-    , HasComputedIpAllocationPolicy (..)
-    , HasComputedIpCidrRange (..)
-    , HasComputedIpProtocol (..)
-    , HasComputedIpRange (..)
-    , HasComputedIpVersion (..)
-    , HasComputedIpv4Range (..)
-    , HasComputedKey (..)
-    , HasComputedKeyAlgorithm (..)
-    , HasComputedKeyRing (..)
-    , HasComputedKeyRingId (..)
-    , HasComputedLabelFingerprint (..)
-    , HasComputedLabels (..)
-    , HasComputedLastModifiedTime (..)
-    , HasComputedLatestMasterVersion (..)
-    , HasComputedLatestNodeVersion (..)
-    , HasComputedLicenses (..)
-    , HasComputedLifecycleRule (..)
-    , HasComputedLifecycleState (..)
-    , HasComputedListPolicy (..)
-    , HasComputedLoadBalancingScheme (..)
-    , HasComputedLocalTrafficSelector (..)
-    , HasComputedLocation (..)
-    , HasComputedLogging (..)
-    , HasComputedLoggingService (..)
-    , HasComputedMachineType (..)
-    , HasComputedMaintenancePolicy (..)
-    , HasComputedMaintenancePolicy0DailyMaintenanceWindow0Duration (..)
-    , HasComputedManagedZone (..)
-    , HasComputedManagement (..)
-    , HasComputedMapId (..)
-    , HasComputedMasterAuth (..)
-    , HasComputedMasterAuth0ClientCertificate (..)
-    , HasComputedMasterAuth0ClientKey (..)
-    , HasComputedMasterAuth0ClusterCaCertificate (..)
-    , HasComputedMasterAuthorizedNetworksConfig (..)
-    , HasComputedMasterInstanceName (..)
-    , HasComputedMasterVersion (..)
-    , HasComputedMaxWorkers (..)
-    , HasComputedMd5hash (..)
-    , HasComputedMember (..)
-    , HasComputedMembers (..)
-    , HasComputedMetadata (..)
-    , HasComputedMetadataFingerprint (..)
-    , HasComputedMetadataStartupScript (..)
-    , HasComputedMinCpuPlatform (..)
-    , HasComputedMinMasterVersion (..)
-    , HasComputedMonitoringService (..)
-    , HasComputedMqttConfig (..)
-    , HasComputedName (..)
-    , HasComputedNamePrefix (..)
-    , HasComputedNameServers (..)
-    , HasComputedNamedPort (..)
-    , HasComputedNames (..)
-    , HasComputedNetwork (..)
-    , HasComputedNetworkInterface (..)
-    , HasComputedNetworkInterface0AccessConfig0AssignedNatIp (..)
-    , HasComputedNetworkInterface0Address (..)
-    , HasComputedNetworkPolicy (..)
-    , HasComputedNextHopGateway (..)
-    , HasComputedNextHopInstance (..)
-    , HasComputedNextHopInstanceZone (..)
-    , HasComputedNextHopIp (..)
-    , HasComputedNextHopNetwork (..)
-    , HasComputedNextHopVpnTunnel (..)
-    , HasComputedNodeConfig (..)
-    , HasComputedNodeCount (..)
-    , HasComputedNodePool (..)
-    , HasComputedNodeVersion (..)
-    , HasComputedNumBytes (..)
-    , HasComputedNumLongTermBytes (..)
-    , HasComputedNumNodes (..)
-    , HasComputedNumRows (..)
-    , HasComputedNumber (..)
-    , HasComputedObject (..)
-    , HasComputedObjectNamePrefix (..)
-    , HasComputedOnDelete (..)
-    , HasComputedOpen (..)
-    , HasComputedOpenapiConfig (..)
-    , HasComputedOrgId (..)
-    , HasComputedOrganization (..)
-    , HasComputedParameters (..)
-    , HasComputedParent (..)
-    , HasComputedPassword (..)
-    , HasComputedPath (..)
-    , HasComputedPathMatcher (..)
-    , HasComputedPayloadFormat (..)
-    , HasComputedPeerAsn (..)
-    , HasComputedPeerIp (..)
-    , HasComputedPeerIpAddress (..)
-    , HasComputedPeerNetwork (..)
-    , HasComputedPermissions (..)
-    , HasComputedPgpKey (..)
-    , HasComputedPlacement (..)
-    , HasComputedPlaintext (..)
-    , HasComputedPolicyData (..)
-    , HasComputedPolicyEtag (..)
-    , HasComputedPort (..)
-    , HasComputedPortName (..)
-    , HasComputedPortRange (..)
-    , HasComputedPorts (..)
-    , HasComputedPredefinedAcl (..)
-    , HasComputedPrefix (..)
-    , HasComputedPriority (..)
-    , HasComputedPrivateIpGoogleAccess (..)
-    , HasComputedPrivateKey (..)
-    , HasComputedPrivateKeyEncrypted (..)
-    , HasComputedPrivateKeyFingerprint (..)
-    , HasComputedPrivateKeyType (..)
-    , HasComputedProject (..)
-    , HasComputedProjectId (..)
-    , HasComputedProjectIds (..)
-    , HasComputedProtocOutput (..)
-    , HasComputedProtocol (..)
-    , HasComputedProxyHeader (..)
-    , HasComputedProxyId (..)
-    , HasComputedPublicKey (..)
-    , HasComputedPublicKeyType (..)
-    , HasComputedPushConfig (..)
-    , HasComputedRawDisk (..)
-    , HasComputedReference0ClusterUuid (..)
-    , HasComputedRegion (..)
-    , HasComputedRemoteTrafficSelector (..)
-    , HasComputedReplicaConfiguration (..)
-    , HasComputedRepositoryUrl (..)
-    , HasComputedRequestPath (..)
-    , HasComputedRestorePolicy (..)
-    , HasComputedRole (..)
-    , HasComputedRoleEntity (..)
-    , HasComputedRoleId (..)
-    , HasComputedRotationPeriod (..)
-    , HasComputedRouter (..)
-    , HasComputedRoutingMode (..)
-    , HasComputedRrdatas (..)
-    , HasComputedScheduling (..)
-    , HasComputedSchema (..)
-    , HasComputedScratchDisk (..)
-    , HasComputedSecondaryIpRange (..)
-    , HasComputedSelfLink (..)
-    , HasComputedService (..)
-    , HasComputedServiceAccount (..)
-    , HasComputedServiceAccountId (..)
-    , HasComputedServiceName (..)
-    , HasComputedServiceProject (..)
-    , HasComputedServices (..)
-    , HasComputedSessionAffinity (..)
-    , HasComputedSettings (..)
-    , HasComputedSettingsVersion (..)
-    , HasComputedSharedSecret (..)
-    , HasComputedSignedUrl (..)
-    , HasComputedSize (..)
-    , HasComputedSkipDelete (..)
-    , HasComputedSnapshot (..)
-    , HasComputedSnapshotEncryptionKeyRaw (..)
-    , HasComputedSnapshotEncryptionKeySha256 (..)
-    , HasComputedSourceArchiveBucket (..)
-    , HasComputedSourceArchiveObject (..)
-    , HasComputedSourceDisk (..)
-    , HasComputedSourceDiskEncryptionKeyRaw (..)
-    , HasComputedSourceDiskEncryptionKeySha256 (..)
-    , HasComputedSourceDiskId (..)
-    , HasComputedSourceDiskLink (..)
-    , HasComputedSourceImageId (..)
-    , HasComputedSourceRanges (..)
-    , HasComputedSourceServiceAccounts (..)
-    , HasComputedSourceTags (..)
-    , HasComputedSplitKeys (..)
-    , HasComputedSslCertificates (..)
-    , HasComputedSslHealthCheck (..)
-    , HasComputedStage (..)
-    , HasComputedState (..)
-    , HasComputedStateDetails (..)
-    , HasComputedStateNotificationConfig (..)
-    , HasComputedStatus (..)
-    , HasComputedStatus0Details (..)
-    , HasComputedStatus0State (..)
-    , HasComputedStatus0StateStartTime (..)
-    , HasComputedStatus0Substate (..)
-    , HasComputedStorageClass (..)
-    , HasComputedStorageType (..)
-    , HasComputedSubnetwork (..)
-    , HasComputedSubnetworksSelfLinks (..)
-    , HasComputedTableId (..)
-    , HasComputedTag (..)
-    , HasComputedTags (..)
-    , HasComputedTagsFingerprint (..)
-    , HasComputedTarget (..)
-    , HasComputedTargetPools (..)
-    , HasComputedTargetServiceAccounts (..)
-    , HasComputedTargetSize (..)
-    , HasComputedTargetTags (..)
-    , HasComputedTargetVpnGateway (..)
-    , HasComputedTcpHealthCheck (..)
-    , HasComputedTempGcsLocation (..)
-    , HasComputedTemplateGcsPath (..)
-    , HasComputedTest (..)
-    , HasComputedText (..)
-    , HasComputedTimePartitioning (..)
-    , HasComputedTimeout (..)
-    , HasComputedTimeoutSec (..)
-    , HasComputedTitle (..)
-    , HasComputedTopic (..)
-    , HasComputedTriggerBucket (..)
-    , HasComputedTriggerHttp (..)
-    , HasComputedTriggerTopic (..)
-    , HasComputedTtl (..)
-    , HasComputedType' (..)
-    , HasComputedUnhealthyThreshold (..)
-    , HasComputedUniqueId (..)
-    , HasComputedUpdateStrategy (..)
-    , HasComputedUpdateTime (..)
-    , HasComputedUrl (..)
-    , HasComputedUrlMap (..)
-    , HasComputedUsers (..)
-    , HasComputedValidAfter (..)
-    , HasComputedValidBefore (..)
-    , HasComputedValidMasterVersions (..)
-    , HasComputedValidNodeVersions (..)
-    , HasComputedValue (..)
-    , HasComputedVersion (..)
-    , HasComputedVersioning (..)
-    , HasComputedView (..)
-    , HasComputedVpnTunnel (..)
-    , HasComputedWebsite (..)
-    , HasComputedWriterIdentity (..)
-    , HasComputedXxxConfig (..)
-    , HasComputedZone (..)
+    , HasComputeAccountId (..)
+    , HasComputeAckDeadlineSeconds (..)
+    , HasComputeAdditionalZones (..)
+    , HasComputeAddonsConfig (..)
+    , HasComputeAddress (..)
+    , HasComputeAddressType (..)
+    , HasComputeAdvertisedRoutePriority (..)
+    , HasComputeAllow (..)
+    , HasComputeAllowStoppingForUpdate (..)
+    , HasComputeApis (..)
+    , HasComputeArchiveSizeBytes (..)
+    , HasComputeAttachedDisk (..)
+    , HasComputeAttachedDisk0DiskEncryptionKeySha256 (..)
+    , HasComputeAuthoritative (..)
+    , HasComputeAutoCreateRoutes (..)
+    , HasComputeAutoCreateSubnetworks (..)
+    , HasComputeAutoHealingPolicies (..)
+    , HasComputeAutoscaling (..)
+    , HasComputeAutoscalingPolicy (..)
+    , HasComputeAvailableMemoryMb (..)
+    , HasComputeBackend (..)
+    , HasComputeBackendService (..)
+    , HasComputeBackupPool (..)
+    , HasComputeBaseInstanceName (..)
+    , HasComputeBgp (..)
+    , HasComputeBillingAccount (..)
+    , HasComputeBinding (..)
+    , HasComputeBooleanPolicy (..)
+    , HasComputeBootDisk (..)
+    , HasComputeBootDiskDiskEncryptionKeySha256 (..)
+    , HasComputeBucket (..)
+    , HasComputeBucketName (..)
+    , HasComputeCanIpForward (..)
+    , HasComputeCertificate (..)
+    , HasComputeCertificateId (..)
+    , HasComputeCharset (..)
+    , HasComputeCheckIntervalSec (..)
+    , HasComputeCiphertext (..)
+    , HasComputeCluster (..)
+    , HasComputeClusterConfig (..)
+    , HasComputeClusterConfigBucket (..)
+    , HasComputeClusterConfigMasterConfigInstanceNames (..)
+    , HasComputeClusterConfigPreemptibleWorkerConfigInstanceNames (..)
+    , HasComputeClusterConfigSoftwareConfigProperties (..)
+    , HasComputeClusterConfigWorkerConfigInstanceNames (..)
+    , HasComputeClusterId (..)
+    , HasComputeClusterIpv4Cidr (..)
+    , HasComputeCollation (..)
+    , HasComputeConfig (..)
+    , HasComputeConfigId (..)
+    , HasComputeConnectionDrainingTimeoutSec (..)
+    , HasComputeConnectionName (..)
+    , HasComputeConstraint (..)
+    , HasComputeCors (..)
+    , HasComputeCpuPlatform (..)
+    , HasComputeCrc32c (..)
+    , HasComputeCreateTime (..)
+    , HasComputeCreateTimeout (..)
+    , HasComputeCreationTime (..)
+    , HasComputeCreationTimestamp (..)
+    , HasComputeCredentials (..)
+    , HasComputeCryptoKey (..)
+    , HasComputeCryptoKeyId (..)
+    , HasComputeCustomAttributes (..)
+    , HasComputeDatabaseVersion (..)
+    , HasComputeDatasetId (..)
+    , HasComputeDdl (..)
+    , HasComputeDefaultAcl (..)
+    , HasComputeDefaultService (..)
+    , HasComputeDefaultTableExpirationMs (..)
+    , HasComputeDeleted (..)
+    , HasComputeDeny (..)
+    , HasComputeDescription (..)
+    , HasComputeDestRange (..)
+    , HasComputeDestination (..)
+    , HasComputeDestinationRanges (..)
+    , HasComputeDetailedStatus (..)
+    , HasComputeDigest (..)
+    , HasComputeDirection (..)
+    , HasComputeDirectoryCustomerId (..)
+    , HasComputeDisableOnDestroy (..)
+    , HasComputeDisableProject (..)
+    , HasComputeDisk (..)
+    , HasComputeDisk0DiskEncryptionKeySha256 (..)
+    , HasComputeDiskEncryptionKeyRaw (..)
+    , HasComputeDiskEncryptionKeySha256 (..)
+    , HasComputeDiskSizeGb (..)
+    , HasComputeDisplayName (..)
+    , HasComputeDnsAddress (..)
+    , HasComputeDnsName (..)
+    , HasComputeDomain (..)
+    , HasComputeDriverControlsFilesUri (..)
+    , HasComputeDriverOutputResourceUri (..)
+    , HasComputeDuration (..)
+    , HasComputeEmail (..)
+    , HasComputeEnableCdn (..)
+    , HasComputeEnableKubernetesAlpha (..)
+    , HasComputeEnableLegacyAbac (..)
+    , HasComputeEndpoint (..)
+    , HasComputeEndpoints (..)
+    , HasComputeEntryPoint (..)
+    , HasComputeEtag (..)
+    , HasComputeEventNotificationConfig (..)
+    , HasComputeEventTypes (..)
+    , HasComputeExpirationTime (..)
+    , HasComputeFailoverRatio (..)
+    , HasComputeFamily' (..)
+    , HasComputeFingerprint (..)
+    , HasComputeFolder (..)
+    , HasComputeFolderId (..)
+    , HasComputeForceDelete (..)
+    , HasComputeForceDestroy (..)
+    , HasComputeFriendlyName (..)
+    , HasComputeGatewayAddress (..)
+    , HasComputeGatewayIpv4 (..)
+    , HasComputeGrpcConfig (..)
+    , HasComputeGuestAccelerator (..)
+    , HasComputeHealthChecks (..)
+    , HasComputeHealthyThreshold (..)
+    , HasComputeHost (..)
+    , HasComputeHostProject (..)
+    , HasComputeHostRule (..)
+    , HasComputeHttpConfig (..)
+    , HasComputeHttpHealthCheck (..)
+    , HasComputeHttpMethod (..)
+    , HasComputeHttpSslTcpInternal (..)
+    , HasComputeHttpsHealthCheck (..)
+    , HasComputeHttpsTriggerUrl (..)
+    , HasComputeIap (..)
+    , HasComputeId (..)
+    , HasComputeIkeVersion (..)
+    , HasComputeImage (..)
+    , HasComputeImageEncryptionKeySha256 (..)
+    , HasComputeImageId (..)
+    , HasComputeImageUrl (..)
+    , HasComputeInitialNodeCount (..)
+    , HasComputeInstance' (..)
+    , HasComputeInstanceDescription (..)
+    , HasComputeInstanceGroup (..)
+    , HasComputeInstanceGroupUrls (..)
+    , HasComputeInstanceId (..)
+    , HasComputeInstanceName (..)
+    , HasComputeInstanceTemplate (..)
+    , HasComputeInstanceType (..)
+    , HasComputeInstances (..)
+    , HasComputeInterface (..)
+    , HasComputeIpAddress (..)
+    , HasComputeIpAddress0IpAddress (..)
+    , HasComputeIpAddress0TimeToRetire (..)
+    , HasComputeIpAllocationPolicy (..)
+    , HasComputeIpCidrRange (..)
+    , HasComputeIpProtocol (..)
+    , HasComputeIpRange (..)
+    , HasComputeIpVersion (..)
+    , HasComputeIpv4Range (..)
+    , HasComputeKey (..)
+    , HasComputeKeyAlgorithm (..)
+    , HasComputeKeyRing (..)
+    , HasComputeKeyRingId (..)
+    , HasComputeLabelFingerprint (..)
+    , HasComputeLabels (..)
+    , HasComputeLastModifiedTime (..)
+    , HasComputeLatestMasterVersion (..)
+    , HasComputeLatestNodeVersion (..)
+    , HasComputeLicenses (..)
+    , HasComputeLifecycleRule (..)
+    , HasComputeLifecycleState (..)
+    , HasComputeListPolicy (..)
+    , HasComputeLoadBalancingScheme (..)
+    , HasComputeLocalTrafficSelector (..)
+    , HasComputeLocation (..)
+    , HasComputeLogging (..)
+    , HasComputeLoggingService (..)
+    , HasComputeMachineType (..)
+    , HasComputeMaintenancePolicy (..)
+    , HasComputeMaintenancePolicy0DailyMaintenanceWindow0Duration (..)
+    , HasComputeManagedZone (..)
+    , HasComputeManagement (..)
+    , HasComputeMapId (..)
+    , HasComputeMasterAuth (..)
+    , HasComputeMasterAuth0ClientCertificate (..)
+    , HasComputeMasterAuth0ClientKey (..)
+    , HasComputeMasterAuth0ClusterCaCertificate (..)
+    , HasComputeMasterAuthorizedNetworksConfig (..)
+    , HasComputeMasterInstanceName (..)
+    , HasComputeMasterVersion (..)
+    , HasComputeMaxWorkers (..)
+    , HasComputeMd5hash (..)
+    , HasComputeMember (..)
+    , HasComputeMembers (..)
+    , HasComputeMetadata (..)
+    , HasComputeMetadataFingerprint (..)
+    , HasComputeMetadataStartupScript (..)
+    , HasComputeMinCpuPlatform (..)
+    , HasComputeMinMasterVersion (..)
+    , HasComputeMonitoringService (..)
+    , HasComputeMqttConfig (..)
+    , HasComputeName (..)
+    , HasComputeNamePrefix (..)
+    , HasComputeNameServers (..)
+    , HasComputeNamedPort (..)
+    , HasComputeNames (..)
+    , HasComputeNetwork (..)
+    , HasComputeNetworkInterface (..)
+    , HasComputeNetworkInterface0AccessConfig0AssignedNatIp (..)
+    , HasComputeNetworkInterface0Address (..)
+    , HasComputeNetworkPolicy (..)
+    , HasComputeNextHopGateway (..)
+    , HasComputeNextHopInstance (..)
+    , HasComputeNextHopInstanceZone (..)
+    , HasComputeNextHopIp (..)
+    , HasComputeNextHopNetwork (..)
+    , HasComputeNextHopVpnTunnel (..)
+    , HasComputeNodeConfig (..)
+    , HasComputeNodeCount (..)
+    , HasComputeNodePool (..)
+    , HasComputeNodeVersion (..)
+    , HasComputeNumBytes (..)
+    , HasComputeNumLongTermBytes (..)
+    , HasComputeNumNodes (..)
+    , HasComputeNumRows (..)
+    , HasComputeNumber (..)
+    , HasComputeObject (..)
+    , HasComputeObjectNamePrefix (..)
+    , HasComputeOnDelete (..)
+    , HasComputeOpen (..)
+    , HasComputeOpenapiConfig (..)
+    , HasComputeOrgId (..)
+    , HasComputeOrganization (..)
+    , HasComputeParameters (..)
+    , HasComputeParent (..)
+    , HasComputePassword (..)
+    , HasComputePath (..)
+    , HasComputePathMatcher (..)
+    , HasComputePayloadFormat (..)
+    , HasComputePeerAsn (..)
+    , HasComputePeerIp (..)
+    , HasComputePeerIpAddress (..)
+    , HasComputePeerNetwork (..)
+    , HasComputePermissions (..)
+    , HasComputePgpKey (..)
+    , HasComputePlacement (..)
+    , HasComputePlaintext (..)
+    , HasComputePolicyData (..)
+    , HasComputePolicyEtag (..)
+    , HasComputePort (..)
+    , HasComputePortName (..)
+    , HasComputePortRange (..)
+    , HasComputePorts (..)
+    , HasComputePredefinedAcl (..)
+    , HasComputePrefix (..)
+    , HasComputePriority (..)
+    , HasComputePrivateIpGoogleAccess (..)
+    , HasComputePrivateKey (..)
+    , HasComputePrivateKeyEncrypted (..)
+    , HasComputePrivateKeyFingerprint (..)
+    , HasComputePrivateKeyType (..)
+    , HasComputeProject (..)
+    , HasComputeProjectId (..)
+    , HasComputeProjectIds (..)
+    , HasComputeProtocOutput (..)
+    , HasComputeProtocol (..)
+    , HasComputeProxyHeader (..)
+    , HasComputeProxyId (..)
+    , HasComputePublicKey (..)
+    , HasComputePublicKeyType (..)
+    , HasComputePushConfig (..)
+    , HasComputeRawDisk (..)
+    , HasComputeReference0ClusterUuid (..)
+    , HasComputeRegion (..)
+    , HasComputeRemoteTrafficSelector (..)
+    , HasComputeReplicaConfiguration (..)
+    , HasComputeRepositoryUrl (..)
+    , HasComputeRequestPath (..)
+    , HasComputeRestorePolicy (..)
+    , HasComputeRole (..)
+    , HasComputeRoleEntity (..)
+    , HasComputeRoleId (..)
+    , HasComputeRotationPeriod (..)
+    , HasComputeRouter (..)
+    , HasComputeRoutingMode (..)
+    , HasComputeRrdatas (..)
+    , HasComputeScheduling (..)
+    , HasComputeSchema (..)
+    , HasComputeScratchDisk (..)
+    , HasComputeSecondaryIpRange (..)
+    , HasComputeSelfLink (..)
+    , HasComputeService (..)
+    , HasComputeServiceAccount (..)
+    , HasComputeServiceAccountId (..)
+    , HasComputeServiceName (..)
+    , HasComputeServiceProject (..)
+    , HasComputeServices (..)
+    , HasComputeSessionAffinity (..)
+    , HasComputeSettings (..)
+    , HasComputeSettingsVersion (..)
+    , HasComputeSharedSecret (..)
+    , HasComputeSignedUrl (..)
+    , HasComputeSize (..)
+    , HasComputeSkipDelete (..)
+    , HasComputeSnapshot (..)
+    , HasComputeSnapshotEncryptionKeyRaw (..)
+    , HasComputeSnapshotEncryptionKeySha256 (..)
+    , HasComputeSourceArchiveBucket (..)
+    , HasComputeSourceArchiveObject (..)
+    , HasComputeSourceDisk (..)
+    , HasComputeSourceDiskEncryptionKeyRaw (..)
+    , HasComputeSourceDiskEncryptionKeySha256 (..)
+    , HasComputeSourceDiskId (..)
+    , HasComputeSourceDiskLink (..)
+    , HasComputeSourceImageId (..)
+    , HasComputeSourceRanges (..)
+    , HasComputeSourceServiceAccounts (..)
+    , HasComputeSourceTags (..)
+    , HasComputeSplitKeys (..)
+    , HasComputeSslCertificates (..)
+    , HasComputeSslHealthCheck (..)
+    , HasComputeStage (..)
+    , HasComputeState (..)
+    , HasComputeStateDetails (..)
+    , HasComputeStateNotificationConfig (..)
+    , HasComputeStatus (..)
+    , HasComputeStatus0Details (..)
+    , HasComputeStatus0State (..)
+    , HasComputeStatus0StateStartTime (..)
+    , HasComputeStatus0Substate (..)
+    , HasComputeStorageClass (..)
+    , HasComputeStorageType (..)
+    , HasComputeSubnetwork (..)
+    , HasComputeSubnetworksSelfLinks (..)
+    , HasComputeTableId (..)
+    , HasComputeTag (..)
+    , HasComputeTags (..)
+    , HasComputeTagsFingerprint (..)
+    , HasComputeTarget (..)
+    , HasComputeTargetPools (..)
+    , HasComputeTargetServiceAccounts (..)
+    , HasComputeTargetSize (..)
+    , HasComputeTargetTags (..)
+    , HasComputeTargetVpnGateway (..)
+    , HasComputeTcpHealthCheck (..)
+    , HasComputeTempGcsLocation (..)
+    , HasComputeTemplateGcsPath (..)
+    , HasComputeTest (..)
+    , HasComputeText (..)
+    , HasComputeTimePartitioning (..)
+    , HasComputeTimeout (..)
+    , HasComputeTimeoutSec (..)
+    , HasComputeTitle (..)
+    , HasComputeTopic (..)
+    , HasComputeTriggerBucket (..)
+    , HasComputeTriggerHttp (..)
+    , HasComputeTriggerTopic (..)
+    , HasComputeTtl (..)
+    , HasComputeType' (..)
+    , HasComputeUnhealthyThreshold (..)
+    , HasComputeUniqueId (..)
+    , HasComputeUpdateStrategy (..)
+    , HasComputeUpdateTime (..)
+    , HasComputeUrl (..)
+    , HasComputeUrlMap (..)
+    , HasComputeUsers (..)
+    , HasComputeValidAfter (..)
+    , HasComputeValidBefore (..)
+    , HasComputeValidMasterVersions (..)
+    , HasComputeValidNodeVersions (..)
+    , HasComputeValue (..)
+    , HasComputeVersion (..)
+    , HasComputeVersioning (..)
+    , HasComputeView (..)
+    , HasComputeVpnTunnel (..)
+    , HasComputeWebsite (..)
+    , HasComputeWriterIdentity (..)
+    , HasComputeXxxConfig (..)
+    , HasComputeZone (..)
     ) where
 
 import GHC.Base ((.))
@@ -1266,6 +1267,12 @@ class HasIap a b | a -> b where
 
 instance HasIap a b => HasIap (TF.Schema l p a) b where
     iap = TF.configuration . iap
+
+class HasId a b | a -> b where
+    id :: Lens' a b
+
+instance HasId a b => HasId (TF.Schema l p a) b where
+    id = TF.configuration . id
 
 class HasIkeVersion a b | a -> b where
     ikeVersion :: Lens' a b
@@ -2347,1127 +2354,1127 @@ class HasZone a b | a -> b where
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
-class HasComputedAccountId a b | a -> b where
-    computedAccountId :: a -> b
+class HasComputeAccountId a b | a -> b where
+    computeAccountId :: a -> b
 
-class HasComputedAckDeadlineSeconds a b | a -> b where
-    computedAckDeadlineSeconds :: a -> b
+class HasComputeAckDeadlineSeconds a b | a -> b where
+    computeAckDeadlineSeconds :: a -> b
 
-class HasComputedAdditionalZones a b | a -> b where
-    computedAdditionalZones :: a -> b
+class HasComputeAdditionalZones a b | a -> b where
+    computeAdditionalZones :: a -> b
 
-class HasComputedAddonsConfig a b | a -> b where
-    computedAddonsConfig :: a -> b
+class HasComputeAddonsConfig a b | a -> b where
+    computeAddonsConfig :: a -> b
 
-class HasComputedAddress a b | a -> b where
-    computedAddress :: a -> b
+class HasComputeAddress a b | a -> b where
+    computeAddress :: a -> b
 
-class HasComputedAddressType a b | a -> b where
-    computedAddressType :: a -> b
+class HasComputeAddressType a b | a -> b where
+    computeAddressType :: a -> b
 
-class HasComputedAdvertisedRoutePriority a b | a -> b where
-    computedAdvertisedRoutePriority :: a -> b
+class HasComputeAdvertisedRoutePriority a b | a -> b where
+    computeAdvertisedRoutePriority :: a -> b
 
-class HasComputedAllow a b | a -> b where
-    computedAllow :: a -> b
+class HasComputeAllow a b | a -> b where
+    computeAllow :: a -> b
 
-class HasComputedAllowStoppingForUpdate a b | a -> b where
-    computedAllowStoppingForUpdate :: a -> b
+class HasComputeAllowStoppingForUpdate a b | a -> b where
+    computeAllowStoppingForUpdate :: a -> b
 
-class HasComputedApis a b | a -> b where
-    computedApis :: a -> b
+class HasComputeApis a b | a -> b where
+    computeApis :: a -> b
 
-class HasComputedArchiveSizeBytes a b | a -> b where
-    computedArchiveSizeBytes :: a -> b
+class HasComputeArchiveSizeBytes a b | a -> b where
+    computeArchiveSizeBytes :: a -> b
 
-class HasComputedAttachedDisk a b | a -> b where
-    computedAttachedDisk :: a -> b
+class HasComputeAttachedDisk a b | a -> b where
+    computeAttachedDisk :: a -> b
 
-class HasComputedAttachedDisk0DiskEncryptionKeySha256 a b | a -> b where
-    computedAttachedDisk0DiskEncryptionKeySha256 :: a -> b
+class HasComputeAttachedDisk0DiskEncryptionKeySha256 a b | a -> b where
+    computeAttachedDisk0DiskEncryptionKeySha256 :: a -> b
 
-class HasComputedAuthoritative a b | a -> b where
-    computedAuthoritative :: a -> b
+class HasComputeAuthoritative a b | a -> b where
+    computeAuthoritative :: a -> b
 
-class HasComputedAutoCreateRoutes a b | a -> b where
-    computedAutoCreateRoutes :: a -> b
+class HasComputeAutoCreateRoutes a b | a -> b where
+    computeAutoCreateRoutes :: a -> b
 
-class HasComputedAutoCreateSubnetworks a b | a -> b where
-    computedAutoCreateSubnetworks :: a -> b
+class HasComputeAutoCreateSubnetworks a b | a -> b where
+    computeAutoCreateSubnetworks :: a -> b
 
-class HasComputedAutoHealingPolicies a b | a -> b where
-    computedAutoHealingPolicies :: a -> b
+class HasComputeAutoHealingPolicies a b | a -> b where
+    computeAutoHealingPolicies :: a -> b
 
-class HasComputedAutoscaling a b | a -> b where
-    computedAutoscaling :: a -> b
+class HasComputeAutoscaling a b | a -> b where
+    computeAutoscaling :: a -> b
 
-class HasComputedAutoscalingPolicy a b | a -> b where
-    computedAutoscalingPolicy :: a -> b
+class HasComputeAutoscalingPolicy a b | a -> b where
+    computeAutoscalingPolicy :: a -> b
 
-class HasComputedAvailableMemoryMb a b | a -> b where
-    computedAvailableMemoryMb :: a -> b
+class HasComputeAvailableMemoryMb a b | a -> b where
+    computeAvailableMemoryMb :: a -> b
 
-class HasComputedBackend a b | a -> b where
-    computedBackend :: a -> b
+class HasComputeBackend a b | a -> b where
+    computeBackend :: a -> b
 
-class HasComputedBackendService a b | a -> b where
-    computedBackendService :: a -> b
+class HasComputeBackendService a b | a -> b where
+    computeBackendService :: a -> b
 
-class HasComputedBackupPool a b | a -> b where
-    computedBackupPool :: a -> b
+class HasComputeBackupPool a b | a -> b where
+    computeBackupPool :: a -> b
 
-class HasComputedBaseInstanceName a b | a -> b where
-    computedBaseInstanceName :: a -> b
+class HasComputeBaseInstanceName a b | a -> b where
+    computeBaseInstanceName :: a -> b
 
-class HasComputedBgp a b | a -> b where
-    computedBgp :: a -> b
+class HasComputeBgp a b | a -> b where
+    computeBgp :: a -> b
 
-class HasComputedBillingAccount a b | a -> b where
-    computedBillingAccount :: a -> b
+class HasComputeBillingAccount a b | a -> b where
+    computeBillingAccount :: a -> b
 
-class HasComputedBinding a b | a -> b where
-    computedBinding :: a -> b
+class HasComputeBinding a b | a -> b where
+    computeBinding :: a -> b
 
-class HasComputedBooleanPolicy a b | a -> b where
-    computedBooleanPolicy :: a -> b
+class HasComputeBooleanPolicy a b | a -> b where
+    computeBooleanPolicy :: a -> b
 
-class HasComputedBootDisk a b | a -> b where
-    computedBootDisk :: a -> b
+class HasComputeBootDisk a b | a -> b where
+    computeBootDisk :: a -> b
 
-class HasComputedBootDiskDiskEncryptionKeySha256 a b | a -> b where
-    computedBootDiskDiskEncryptionKeySha256 :: a -> b
+class HasComputeBootDiskDiskEncryptionKeySha256 a b | a -> b where
+    computeBootDiskDiskEncryptionKeySha256 :: a -> b
 
-class HasComputedBucket a b | a -> b where
-    computedBucket :: a -> b
+class HasComputeBucket a b | a -> b where
+    computeBucket :: a -> b
 
-class HasComputedBucketName a b | a -> b where
-    computedBucketName :: a -> b
+class HasComputeBucketName a b | a -> b where
+    computeBucketName :: a -> b
 
-class HasComputedCanIpForward a b | a -> b where
-    computedCanIpForward :: a -> b
+class HasComputeCanIpForward a b | a -> b where
+    computeCanIpForward :: a -> b
 
-class HasComputedCertificate a b | a -> b where
-    computedCertificate :: a -> b
+class HasComputeCertificate a b | a -> b where
+    computeCertificate :: a -> b
 
-class HasComputedCertificateId a b | a -> b where
-    computedCertificateId :: a -> b
+class HasComputeCertificateId a b | a -> b where
+    computeCertificateId :: a -> b
 
-class HasComputedCharset a b | a -> b where
-    computedCharset :: a -> b
+class HasComputeCharset a b | a -> b where
+    computeCharset :: a -> b
 
-class HasComputedCheckIntervalSec a b | a -> b where
-    computedCheckIntervalSec :: a -> b
+class HasComputeCheckIntervalSec a b | a -> b where
+    computeCheckIntervalSec :: a -> b
 
-class HasComputedCiphertext a b | a -> b where
-    computedCiphertext :: a -> b
+class HasComputeCiphertext a b | a -> b where
+    computeCiphertext :: a -> b
 
-class HasComputedCluster a b | a -> b where
-    computedCluster :: a -> b
+class HasComputeCluster a b | a -> b where
+    computeCluster :: a -> b
 
-class HasComputedClusterConfig a b | a -> b where
-    computedClusterConfig :: a -> b
+class HasComputeClusterConfig a b | a -> b where
+    computeClusterConfig :: a -> b
 
-class HasComputedClusterConfigBucket a b | a -> b where
-    computedClusterConfigBucket :: a -> b
+class HasComputeClusterConfigBucket a b | a -> b where
+    computeClusterConfigBucket :: a -> b
 
-class HasComputedClusterConfigMasterConfigInstanceNames a b | a -> b where
-    computedClusterConfigMasterConfigInstanceNames :: a -> b
+class HasComputeClusterConfigMasterConfigInstanceNames a b | a -> b where
+    computeClusterConfigMasterConfigInstanceNames :: a -> b
 
-class HasComputedClusterConfigPreemptibleWorkerConfigInstanceNames a b | a -> b where
-    computedClusterConfigPreemptibleWorkerConfigInstanceNames :: a -> b
+class HasComputeClusterConfigPreemptibleWorkerConfigInstanceNames a b | a -> b where
+    computeClusterConfigPreemptibleWorkerConfigInstanceNames :: a -> b
 
-class HasComputedClusterConfigSoftwareConfigProperties a b | a -> b where
-    computedClusterConfigSoftwareConfigProperties :: a -> b
+class HasComputeClusterConfigSoftwareConfigProperties a b | a -> b where
+    computeClusterConfigSoftwareConfigProperties :: a -> b
 
-class HasComputedClusterConfigWorkerConfigInstanceNames a b | a -> b where
-    computedClusterConfigWorkerConfigInstanceNames :: a -> b
+class HasComputeClusterConfigWorkerConfigInstanceNames a b | a -> b where
+    computeClusterConfigWorkerConfigInstanceNames :: a -> b
 
-class HasComputedClusterId a b | a -> b where
-    computedClusterId :: a -> b
+class HasComputeClusterId a b | a -> b where
+    computeClusterId :: a -> b
 
-class HasComputedClusterIpv4Cidr a b | a -> b where
-    computedClusterIpv4Cidr :: a -> b
+class HasComputeClusterIpv4Cidr a b | a -> b where
+    computeClusterIpv4Cidr :: a -> b
 
-class HasComputedCollation a b | a -> b where
-    computedCollation :: a -> b
+class HasComputeCollation a b | a -> b where
+    computeCollation :: a -> b
 
-class HasComputedConfig a b | a -> b where
-    computedConfig :: a -> b
+class HasComputeConfig a b | a -> b where
+    computeConfig :: a -> b
 
-class HasComputedConfigId a b | a -> b where
-    computedConfigId :: a -> b
+class HasComputeConfigId a b | a -> b where
+    computeConfigId :: a -> b
 
-class HasComputedConnectionDrainingTimeoutSec a b | a -> b where
-    computedConnectionDrainingTimeoutSec :: a -> b
+class HasComputeConnectionDrainingTimeoutSec a b | a -> b where
+    computeConnectionDrainingTimeoutSec :: a -> b
 
-class HasComputedConnectionName a b | a -> b where
-    computedConnectionName :: a -> b
+class HasComputeConnectionName a b | a -> b where
+    computeConnectionName :: a -> b
 
-class HasComputedConstraint a b | a -> b where
-    computedConstraint :: a -> b
+class HasComputeConstraint a b | a -> b where
+    computeConstraint :: a -> b
 
-class HasComputedCors a b | a -> b where
-    computedCors :: a -> b
+class HasComputeCors a b | a -> b where
+    computeCors :: a -> b
 
-class HasComputedCpuPlatform a b | a -> b where
-    computedCpuPlatform :: a -> b
+class HasComputeCpuPlatform a b | a -> b where
+    computeCpuPlatform :: a -> b
 
-class HasComputedCrc32c a b | a -> b where
-    computedCrc32c :: a -> b
+class HasComputeCrc32c a b | a -> b where
+    computeCrc32c :: a -> b
 
-class HasComputedCreateTime a b | a -> b where
-    computedCreateTime :: a -> b
+class HasComputeCreateTime a b | a -> b where
+    computeCreateTime :: a -> b
 
-class HasComputedCreateTimeout a b | a -> b where
-    computedCreateTimeout :: a -> b
+class HasComputeCreateTimeout a b | a -> b where
+    computeCreateTimeout :: a -> b
 
-class HasComputedCreationTime a b | a -> b where
-    computedCreationTime :: a -> b
+class HasComputeCreationTime a b | a -> b where
+    computeCreationTime :: a -> b
 
-class HasComputedCreationTimestamp a b | a -> b where
-    computedCreationTimestamp :: a -> b
+class HasComputeCreationTimestamp a b | a -> b where
+    computeCreationTimestamp :: a -> b
 
-class HasComputedCredentials a b | a -> b where
-    computedCredentials :: a -> b
+class HasComputeCredentials a b | a -> b where
+    computeCredentials :: a -> b
 
-class HasComputedCryptoKey a b | a -> b where
-    computedCryptoKey :: a -> b
+class HasComputeCryptoKey a b | a -> b where
+    computeCryptoKey :: a -> b
 
-class HasComputedCryptoKeyId a b | a -> b where
-    computedCryptoKeyId :: a -> b
+class HasComputeCryptoKeyId a b | a -> b where
+    computeCryptoKeyId :: a -> b
 
-class HasComputedCustomAttributes a b | a -> b where
-    computedCustomAttributes :: a -> b
+class HasComputeCustomAttributes a b | a -> b where
+    computeCustomAttributes :: a -> b
 
-class HasComputedDatabaseVersion a b | a -> b where
-    computedDatabaseVersion :: a -> b
+class HasComputeDatabaseVersion a b | a -> b where
+    computeDatabaseVersion :: a -> b
 
-class HasComputedDatasetId a b | a -> b where
-    computedDatasetId :: a -> b
+class HasComputeDatasetId a b | a -> b where
+    computeDatasetId :: a -> b
 
-class HasComputedDdl a b | a -> b where
-    computedDdl :: a -> b
+class HasComputeDdl a b | a -> b where
+    computeDdl :: a -> b
 
-class HasComputedDefaultAcl a b | a -> b where
-    computedDefaultAcl :: a -> b
+class HasComputeDefaultAcl a b | a -> b where
+    computeDefaultAcl :: a -> b
 
-class HasComputedDefaultService a b | a -> b where
-    computedDefaultService :: a -> b
+class HasComputeDefaultService a b | a -> b where
+    computeDefaultService :: a -> b
 
-class HasComputedDefaultTableExpirationMs a b | a -> b where
-    computedDefaultTableExpirationMs :: a -> b
+class HasComputeDefaultTableExpirationMs a b | a -> b where
+    computeDefaultTableExpirationMs :: a -> b
 
-class HasComputedDeleted a b | a -> b where
-    computedDeleted :: a -> b
+class HasComputeDeleted a b | a -> b where
+    computeDeleted :: a -> b
 
-class HasComputedDeny a b | a -> b where
-    computedDeny :: a -> b
+class HasComputeDeny a b | a -> b where
+    computeDeny :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedDestRange a b | a -> b where
-    computedDestRange :: a -> b
+class HasComputeDestRange a b | a -> b where
+    computeDestRange :: a -> b
 
-class HasComputedDestination a b | a -> b where
-    computedDestination :: a -> b
+class HasComputeDestination a b | a -> b where
+    computeDestination :: a -> b
 
-class HasComputedDestinationRanges a b | a -> b where
-    computedDestinationRanges :: a -> b
+class HasComputeDestinationRanges a b | a -> b where
+    computeDestinationRanges :: a -> b
 
-class HasComputedDetailedStatus a b | a -> b where
-    computedDetailedStatus :: a -> b
+class HasComputeDetailedStatus a b | a -> b where
+    computeDetailedStatus :: a -> b
 
-class HasComputedDigest a b | a -> b where
-    computedDigest :: a -> b
+class HasComputeDigest a b | a -> b where
+    computeDigest :: a -> b
 
-class HasComputedDirection a b | a -> b where
-    computedDirection :: a -> b
+class HasComputeDirection a b | a -> b where
+    computeDirection :: a -> b
 
-class HasComputedDirectoryCustomerId a b | a -> b where
-    computedDirectoryCustomerId :: a -> b
+class HasComputeDirectoryCustomerId a b | a -> b where
+    computeDirectoryCustomerId :: a -> b
 
-class HasComputedDisableOnDestroy a b | a -> b where
-    computedDisableOnDestroy :: a -> b
+class HasComputeDisableOnDestroy a b | a -> b where
+    computeDisableOnDestroy :: a -> b
 
-class HasComputedDisableProject a b | a -> b where
-    computedDisableProject :: a -> b
+class HasComputeDisableProject a b | a -> b where
+    computeDisableProject :: a -> b
 
-class HasComputedDisk a b | a -> b where
-    computedDisk :: a -> b
+class HasComputeDisk a b | a -> b where
+    computeDisk :: a -> b
 
-class HasComputedDisk0DiskEncryptionKeySha256 a b | a -> b where
-    computedDisk0DiskEncryptionKeySha256 :: a -> b
+class HasComputeDisk0DiskEncryptionKeySha256 a b | a -> b where
+    computeDisk0DiskEncryptionKeySha256 :: a -> b
 
-class HasComputedDiskEncryptionKeyRaw a b | a -> b where
-    computedDiskEncryptionKeyRaw :: a -> b
+class HasComputeDiskEncryptionKeyRaw a b | a -> b where
+    computeDiskEncryptionKeyRaw :: a -> b
 
-class HasComputedDiskEncryptionKeySha256 a b | a -> b where
-    computedDiskEncryptionKeySha256 :: a -> b
+class HasComputeDiskEncryptionKeySha256 a b | a -> b where
+    computeDiskEncryptionKeySha256 :: a -> b
 
-class HasComputedDiskSizeGb a b | a -> b where
-    computedDiskSizeGb :: a -> b
+class HasComputeDiskSizeGb a b | a -> b where
+    computeDiskSizeGb :: a -> b
 
-class HasComputedDisplayName a b | a -> b where
-    computedDisplayName :: a -> b
+class HasComputeDisplayName a b | a -> b where
+    computeDisplayName :: a -> b
 
-class HasComputedDnsAddress a b | a -> b where
-    computedDnsAddress :: a -> b
+class HasComputeDnsAddress a b | a -> b where
+    computeDnsAddress :: a -> b
 
-class HasComputedDnsName a b | a -> b where
-    computedDnsName :: a -> b
+class HasComputeDnsName a b | a -> b where
+    computeDnsName :: a -> b
 
-class HasComputedDomain a b | a -> b where
-    computedDomain :: a -> b
+class HasComputeDomain a b | a -> b where
+    computeDomain :: a -> b
 
-class HasComputedDriverControlsFilesUri a b | a -> b where
-    computedDriverControlsFilesUri :: a -> b
+class HasComputeDriverControlsFilesUri a b | a -> b where
+    computeDriverControlsFilesUri :: a -> b
 
-class HasComputedDriverOutputResourceUri a b | a -> b where
-    computedDriverOutputResourceUri :: a -> b
+class HasComputeDriverOutputResourceUri a b | a -> b where
+    computeDriverOutputResourceUri :: a -> b
 
-class HasComputedDuration a b | a -> b where
-    computedDuration :: a -> b
+class HasComputeDuration a b | a -> b where
+    computeDuration :: a -> b
 
-class HasComputedEmail a b | a -> b where
-    computedEmail :: a -> b
+class HasComputeEmail a b | a -> b where
+    computeEmail :: a -> b
 
-class HasComputedEnableCdn a b | a -> b where
-    computedEnableCdn :: a -> b
+class HasComputeEnableCdn a b | a -> b where
+    computeEnableCdn :: a -> b
 
-class HasComputedEnableKubernetesAlpha a b | a -> b where
-    computedEnableKubernetesAlpha :: a -> b
+class HasComputeEnableKubernetesAlpha a b | a -> b where
+    computeEnableKubernetesAlpha :: a -> b
 
-class HasComputedEnableLegacyAbac a b | a -> b where
-    computedEnableLegacyAbac :: a -> b
+class HasComputeEnableLegacyAbac a b | a -> b where
+    computeEnableLegacyAbac :: a -> b
 
-class HasComputedEndpoint a b | a -> b where
-    computedEndpoint :: a -> b
+class HasComputeEndpoint a b | a -> b where
+    computeEndpoint :: a -> b
 
-class HasComputedEndpoints a b | a -> b where
-    computedEndpoints :: a -> b
+class HasComputeEndpoints a b | a -> b where
+    computeEndpoints :: a -> b
 
-class HasComputedEntryPoint a b | a -> b where
-    computedEntryPoint :: a -> b
+class HasComputeEntryPoint a b | a -> b where
+    computeEntryPoint :: a -> b
 
-class HasComputedEtag a b | a -> b where
-    computedEtag :: a -> b
+class HasComputeEtag a b | a -> b where
+    computeEtag :: a -> b
 
-class HasComputedEventNotificationConfig a b | a -> b where
-    computedEventNotificationConfig :: a -> b
+class HasComputeEventNotificationConfig a b | a -> b where
+    computeEventNotificationConfig :: a -> b
 
-class HasComputedEventTypes a b | a -> b where
-    computedEventTypes :: a -> b
+class HasComputeEventTypes a b | a -> b where
+    computeEventTypes :: a -> b
 
-class HasComputedExpirationTime a b | a -> b where
-    computedExpirationTime :: a -> b
+class HasComputeExpirationTime a b | a -> b where
+    computeExpirationTime :: a -> b
 
-class HasComputedFailoverRatio a b | a -> b where
-    computedFailoverRatio :: a -> b
+class HasComputeFailoverRatio a b | a -> b where
+    computeFailoverRatio :: a -> b
 
-class HasComputedFamily' a b | a -> b where
-    computedFamily' :: a -> b
+class HasComputeFamily' a b | a -> b where
+    computeFamily' :: a -> b
 
-class HasComputedFingerprint a b | a -> b where
-    computedFingerprint :: a -> b
+class HasComputeFingerprint a b | a -> b where
+    computeFingerprint :: a -> b
 
-class HasComputedFolder a b | a -> b where
-    computedFolder :: a -> b
+class HasComputeFolder a b | a -> b where
+    computeFolder :: a -> b
 
-class HasComputedFolderId a b | a -> b where
-    computedFolderId :: a -> b
+class HasComputeFolderId a b | a -> b where
+    computeFolderId :: a -> b
 
-class HasComputedForceDelete a b | a -> b where
-    computedForceDelete :: a -> b
+class HasComputeForceDelete a b | a -> b where
+    computeForceDelete :: a -> b
 
-class HasComputedForceDestroy a b | a -> b where
-    computedForceDestroy :: a -> b
+class HasComputeForceDestroy a b | a -> b where
+    computeForceDestroy :: a -> b
 
-class HasComputedFriendlyName a b | a -> b where
-    computedFriendlyName :: a -> b
+class HasComputeFriendlyName a b | a -> b where
+    computeFriendlyName :: a -> b
 
-class HasComputedGatewayAddress a b | a -> b where
-    computedGatewayAddress :: a -> b
+class HasComputeGatewayAddress a b | a -> b where
+    computeGatewayAddress :: a -> b
 
-class HasComputedGatewayIpv4 a b | a -> b where
-    computedGatewayIpv4 :: a -> b
+class HasComputeGatewayIpv4 a b | a -> b where
+    computeGatewayIpv4 :: a -> b
 
-class HasComputedGrpcConfig a b | a -> b where
-    computedGrpcConfig :: a -> b
+class HasComputeGrpcConfig a b | a -> b where
+    computeGrpcConfig :: a -> b
 
-class HasComputedGuestAccelerator a b | a -> b where
-    computedGuestAccelerator :: a -> b
+class HasComputeGuestAccelerator a b | a -> b where
+    computeGuestAccelerator :: a -> b
 
-class HasComputedHealthChecks a b | a -> b where
-    computedHealthChecks :: a -> b
+class HasComputeHealthChecks a b | a -> b where
+    computeHealthChecks :: a -> b
 
-class HasComputedHealthyThreshold a b | a -> b where
-    computedHealthyThreshold :: a -> b
+class HasComputeHealthyThreshold a b | a -> b where
+    computeHealthyThreshold :: a -> b
 
-class HasComputedHost a b | a -> b where
-    computedHost :: a -> b
+class HasComputeHost a b | a -> b where
+    computeHost :: a -> b
 
-class HasComputedHostProject a b | a -> b where
-    computedHostProject :: a -> b
+class HasComputeHostProject a b | a -> b where
+    computeHostProject :: a -> b
 
-class HasComputedHostRule a b | a -> b where
-    computedHostRule :: a -> b
+class HasComputeHostRule a b | a -> b where
+    computeHostRule :: a -> b
 
-class HasComputedHttpConfig a b | a -> b where
-    computedHttpConfig :: a -> b
+class HasComputeHttpConfig a b | a -> b where
+    computeHttpConfig :: a -> b
 
-class HasComputedHttpHealthCheck a b | a -> b where
-    computedHttpHealthCheck :: a -> b
+class HasComputeHttpHealthCheck a b | a -> b where
+    computeHttpHealthCheck :: a -> b
 
-class HasComputedHttpMethod a b | a -> b where
-    computedHttpMethod :: a -> b
+class HasComputeHttpMethod a b | a -> b where
+    computeHttpMethod :: a -> b
 
-class HasComputedHttpSslTcpInternal a b | a -> b where
-    computedHttpSslTcpInternal :: a -> b
+class HasComputeHttpSslTcpInternal a b | a -> b where
+    computeHttpSslTcpInternal :: a -> b
 
-class HasComputedHttpsHealthCheck a b | a -> b where
-    computedHttpsHealthCheck :: a -> b
+class HasComputeHttpsHealthCheck a b | a -> b where
+    computeHttpsHealthCheck :: a -> b
 
-class HasComputedHttpsTriggerUrl a b | a -> b where
-    computedHttpsTriggerUrl :: a -> b
+class HasComputeHttpsTriggerUrl a b | a -> b where
+    computeHttpsTriggerUrl :: a -> b
 
-class HasComputedIap a b | a -> b where
-    computedIap :: a -> b
+class HasComputeIap a b | a -> b where
+    computeIap :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedIkeVersion a b | a -> b where
-    computedIkeVersion :: a -> b
+class HasComputeIkeVersion a b | a -> b where
+    computeIkeVersion :: a -> b
 
-class HasComputedImage a b | a -> b where
-    computedImage :: a -> b
+class HasComputeImage a b | a -> b where
+    computeImage :: a -> b
 
-class HasComputedImageEncryptionKeySha256 a b | a -> b where
-    computedImageEncryptionKeySha256 :: a -> b
+class HasComputeImageEncryptionKeySha256 a b | a -> b where
+    computeImageEncryptionKeySha256 :: a -> b
 
-class HasComputedImageId a b | a -> b where
-    computedImageId :: a -> b
+class HasComputeImageId a b | a -> b where
+    computeImageId :: a -> b
 
-class HasComputedImageUrl a b | a -> b where
-    computedImageUrl :: a -> b
+class HasComputeImageUrl a b | a -> b where
+    computeImageUrl :: a -> b
 
-class HasComputedInitialNodeCount a b | a -> b where
-    computedInitialNodeCount :: a -> b
+class HasComputeInitialNodeCount a b | a -> b where
+    computeInitialNodeCount :: a -> b
 
-class HasComputedInstance' a b | a -> b where
-    computedInstance' :: a -> b
+class HasComputeInstance' a b | a -> b where
+    computeInstance' :: a -> b
 
-class HasComputedInstanceDescription a b | a -> b where
-    computedInstanceDescription :: a -> b
+class HasComputeInstanceDescription a b | a -> b where
+    computeInstanceDescription :: a -> b
 
-class HasComputedInstanceGroup a b | a -> b where
-    computedInstanceGroup :: a -> b
+class HasComputeInstanceGroup a b | a -> b where
+    computeInstanceGroup :: a -> b
 
-class HasComputedInstanceGroupUrls a b | a -> b where
-    computedInstanceGroupUrls :: a -> b
+class HasComputeInstanceGroupUrls a b | a -> b where
+    computeInstanceGroupUrls :: a -> b
 
-class HasComputedInstanceId a b | a -> b where
-    computedInstanceId :: a -> b
+class HasComputeInstanceId a b | a -> b where
+    computeInstanceId :: a -> b
 
-class HasComputedInstanceName a b | a -> b where
-    computedInstanceName :: a -> b
+class HasComputeInstanceName a b | a -> b where
+    computeInstanceName :: a -> b
 
-class HasComputedInstanceTemplate a b | a -> b where
-    computedInstanceTemplate :: a -> b
+class HasComputeInstanceTemplate a b | a -> b where
+    computeInstanceTemplate :: a -> b
 
-class HasComputedInstanceType a b | a -> b where
-    computedInstanceType :: a -> b
+class HasComputeInstanceType a b | a -> b where
+    computeInstanceType :: a -> b
 
-class HasComputedInstances a b | a -> b where
-    computedInstances :: a -> b
+class HasComputeInstances a b | a -> b where
+    computeInstances :: a -> b
 
-class HasComputedInterface a b | a -> b where
-    computedInterface :: a -> b
+class HasComputeInterface a b | a -> b where
+    computeInterface :: a -> b
 
-class HasComputedIpAddress a b | a -> b where
-    computedIpAddress :: a -> b
+class HasComputeIpAddress a b | a -> b where
+    computeIpAddress :: a -> b
 
-class HasComputedIpAddress0IpAddress a b | a -> b where
-    computedIpAddress0IpAddress :: a -> b
+class HasComputeIpAddress0IpAddress a b | a -> b where
+    computeIpAddress0IpAddress :: a -> b
 
-class HasComputedIpAddress0TimeToRetire a b | a -> b where
-    computedIpAddress0TimeToRetire :: a -> b
+class HasComputeIpAddress0TimeToRetire a b | a -> b where
+    computeIpAddress0TimeToRetire :: a -> b
 
-class HasComputedIpAllocationPolicy a b | a -> b where
-    computedIpAllocationPolicy :: a -> b
+class HasComputeIpAllocationPolicy a b | a -> b where
+    computeIpAllocationPolicy :: a -> b
 
-class HasComputedIpCidrRange a b | a -> b where
-    computedIpCidrRange :: a -> b
+class HasComputeIpCidrRange a b | a -> b where
+    computeIpCidrRange :: a -> b
 
-class HasComputedIpProtocol a b | a -> b where
-    computedIpProtocol :: a -> b
+class HasComputeIpProtocol a b | a -> b where
+    computeIpProtocol :: a -> b
 
-class HasComputedIpRange a b | a -> b where
-    computedIpRange :: a -> b
+class HasComputeIpRange a b | a -> b where
+    computeIpRange :: a -> b
 
-class HasComputedIpVersion a b | a -> b where
-    computedIpVersion :: a -> b
+class HasComputeIpVersion a b | a -> b where
+    computeIpVersion :: a -> b
 
-class HasComputedIpv4Range a b | a -> b where
-    computedIpv4Range :: a -> b
+class HasComputeIpv4Range a b | a -> b where
+    computeIpv4Range :: a -> b
 
-class HasComputedKey a b | a -> b where
-    computedKey :: a -> b
+class HasComputeKey a b | a -> b where
+    computeKey :: a -> b
 
-class HasComputedKeyAlgorithm a b | a -> b where
-    computedKeyAlgorithm :: a -> b
+class HasComputeKeyAlgorithm a b | a -> b where
+    computeKeyAlgorithm :: a -> b
 
-class HasComputedKeyRing a b | a -> b where
-    computedKeyRing :: a -> b
+class HasComputeKeyRing a b | a -> b where
+    computeKeyRing :: a -> b
 
-class HasComputedKeyRingId a b | a -> b where
-    computedKeyRingId :: a -> b
+class HasComputeKeyRingId a b | a -> b where
+    computeKeyRingId :: a -> b
 
-class HasComputedLabelFingerprint a b | a -> b where
-    computedLabelFingerprint :: a -> b
+class HasComputeLabelFingerprint a b | a -> b where
+    computeLabelFingerprint :: a -> b
 
-class HasComputedLabels a b | a -> b where
-    computedLabels :: a -> b
+class HasComputeLabels a b | a -> b where
+    computeLabels :: a -> b
 
-class HasComputedLastModifiedTime a b | a -> b where
-    computedLastModifiedTime :: a -> b
+class HasComputeLastModifiedTime a b | a -> b where
+    computeLastModifiedTime :: a -> b
 
-class HasComputedLatestMasterVersion a b | a -> b where
-    computedLatestMasterVersion :: a -> b
+class HasComputeLatestMasterVersion a b | a -> b where
+    computeLatestMasterVersion :: a -> b
 
-class HasComputedLatestNodeVersion a b | a -> b where
-    computedLatestNodeVersion :: a -> b
+class HasComputeLatestNodeVersion a b | a -> b where
+    computeLatestNodeVersion :: a -> b
 
-class HasComputedLicenses a b | a -> b where
-    computedLicenses :: a -> b
+class HasComputeLicenses a b | a -> b where
+    computeLicenses :: a -> b
 
-class HasComputedLifecycleRule a b | a -> b where
-    computedLifecycleRule :: a -> b
+class HasComputeLifecycleRule a b | a -> b where
+    computeLifecycleRule :: a -> b
 
-class HasComputedLifecycleState a b | a -> b where
-    computedLifecycleState :: a -> b
+class HasComputeLifecycleState a b | a -> b where
+    computeLifecycleState :: a -> b
 
-class HasComputedListPolicy a b | a -> b where
-    computedListPolicy :: a -> b
+class HasComputeListPolicy a b | a -> b where
+    computeListPolicy :: a -> b
 
-class HasComputedLoadBalancingScheme a b | a -> b where
-    computedLoadBalancingScheme :: a -> b
+class HasComputeLoadBalancingScheme a b | a -> b where
+    computeLoadBalancingScheme :: a -> b
 
-class HasComputedLocalTrafficSelector a b | a -> b where
-    computedLocalTrafficSelector :: a -> b
+class HasComputeLocalTrafficSelector a b | a -> b where
+    computeLocalTrafficSelector :: a -> b
 
-class HasComputedLocation a b | a -> b where
-    computedLocation :: a -> b
+class HasComputeLocation a b | a -> b where
+    computeLocation :: a -> b
 
-class HasComputedLogging a b | a -> b where
-    computedLogging :: a -> b
+class HasComputeLogging a b | a -> b where
+    computeLogging :: a -> b
 
-class HasComputedLoggingService a b | a -> b where
-    computedLoggingService :: a -> b
+class HasComputeLoggingService a b | a -> b where
+    computeLoggingService :: a -> b
 
-class HasComputedMachineType a b | a -> b where
-    computedMachineType :: a -> b
+class HasComputeMachineType a b | a -> b where
+    computeMachineType :: a -> b
 
-class HasComputedMaintenancePolicy a b | a -> b where
-    computedMaintenancePolicy :: a -> b
+class HasComputeMaintenancePolicy a b | a -> b where
+    computeMaintenancePolicy :: a -> b
 
-class HasComputedMaintenancePolicy0DailyMaintenanceWindow0Duration a b | a -> b where
-    computedMaintenancePolicy0DailyMaintenanceWindow0Duration :: a -> b
+class HasComputeMaintenancePolicy0DailyMaintenanceWindow0Duration a b | a -> b where
+    computeMaintenancePolicy0DailyMaintenanceWindow0Duration :: a -> b
 
-class HasComputedManagedZone a b | a -> b where
-    computedManagedZone :: a -> b
+class HasComputeManagedZone a b | a -> b where
+    computeManagedZone :: a -> b
 
-class HasComputedManagement a b | a -> b where
-    computedManagement :: a -> b
+class HasComputeManagement a b | a -> b where
+    computeManagement :: a -> b
 
-class HasComputedMapId a b | a -> b where
-    computedMapId :: a -> b
+class HasComputeMapId a b | a -> b where
+    computeMapId :: a -> b
 
-class HasComputedMasterAuth a b | a -> b where
-    computedMasterAuth :: a -> b
+class HasComputeMasterAuth a b | a -> b where
+    computeMasterAuth :: a -> b
 
-class HasComputedMasterAuth0ClientCertificate a b | a -> b where
-    computedMasterAuth0ClientCertificate :: a -> b
+class HasComputeMasterAuth0ClientCertificate a b | a -> b where
+    computeMasterAuth0ClientCertificate :: a -> b
 
-class HasComputedMasterAuth0ClientKey a b | a -> b where
-    computedMasterAuth0ClientKey :: a -> b
+class HasComputeMasterAuth0ClientKey a b | a -> b where
+    computeMasterAuth0ClientKey :: a -> b
 
-class HasComputedMasterAuth0ClusterCaCertificate a b | a -> b where
-    computedMasterAuth0ClusterCaCertificate :: a -> b
+class HasComputeMasterAuth0ClusterCaCertificate a b | a -> b where
+    computeMasterAuth0ClusterCaCertificate :: a -> b
 
-class HasComputedMasterAuthorizedNetworksConfig a b | a -> b where
-    computedMasterAuthorizedNetworksConfig :: a -> b
+class HasComputeMasterAuthorizedNetworksConfig a b | a -> b where
+    computeMasterAuthorizedNetworksConfig :: a -> b
 
-class HasComputedMasterInstanceName a b | a -> b where
-    computedMasterInstanceName :: a -> b
+class HasComputeMasterInstanceName a b | a -> b where
+    computeMasterInstanceName :: a -> b
 
-class HasComputedMasterVersion a b | a -> b where
-    computedMasterVersion :: a -> b
+class HasComputeMasterVersion a b | a -> b where
+    computeMasterVersion :: a -> b
 
-class HasComputedMaxWorkers a b | a -> b where
-    computedMaxWorkers :: a -> b
+class HasComputeMaxWorkers a b | a -> b where
+    computeMaxWorkers :: a -> b
 
-class HasComputedMd5hash a b | a -> b where
-    computedMd5hash :: a -> b
+class HasComputeMd5hash a b | a -> b where
+    computeMd5hash :: a -> b
 
-class HasComputedMember a b | a -> b where
-    computedMember :: a -> b
+class HasComputeMember a b | a -> b where
+    computeMember :: a -> b
 
-class HasComputedMembers a b | a -> b where
-    computedMembers :: a -> b
+class HasComputeMembers a b | a -> b where
+    computeMembers :: a -> b
 
-class HasComputedMetadata a b | a -> b where
-    computedMetadata :: a -> b
+class HasComputeMetadata a b | a -> b where
+    computeMetadata :: a -> b
 
-class HasComputedMetadataFingerprint a b | a -> b where
-    computedMetadataFingerprint :: a -> b
+class HasComputeMetadataFingerprint a b | a -> b where
+    computeMetadataFingerprint :: a -> b
 
-class HasComputedMetadataStartupScript a b | a -> b where
-    computedMetadataStartupScript :: a -> b
+class HasComputeMetadataStartupScript a b | a -> b where
+    computeMetadataStartupScript :: a -> b
 
-class HasComputedMinCpuPlatform a b | a -> b where
-    computedMinCpuPlatform :: a -> b
+class HasComputeMinCpuPlatform a b | a -> b where
+    computeMinCpuPlatform :: a -> b
 
-class HasComputedMinMasterVersion a b | a -> b where
-    computedMinMasterVersion :: a -> b
+class HasComputeMinMasterVersion a b | a -> b where
+    computeMinMasterVersion :: a -> b
 
-class HasComputedMonitoringService a b | a -> b where
-    computedMonitoringService :: a -> b
+class HasComputeMonitoringService a b | a -> b where
+    computeMonitoringService :: a -> b
 
-class HasComputedMqttConfig a b | a -> b where
-    computedMqttConfig :: a -> b
+class HasComputeMqttConfig a b | a -> b where
+    computeMqttConfig :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNamePrefix a b | a -> b where
-    computedNamePrefix :: a -> b
+class HasComputeNamePrefix a b | a -> b where
+    computeNamePrefix :: a -> b
 
-class HasComputedNameServers a b | a -> b where
-    computedNameServers :: a -> b
+class HasComputeNameServers a b | a -> b where
+    computeNameServers :: a -> b
 
-class HasComputedNamedPort a b | a -> b where
-    computedNamedPort :: a -> b
+class HasComputeNamedPort a b | a -> b where
+    computeNamedPort :: a -> b
 
-class HasComputedNames a b | a -> b where
-    computedNames :: a -> b
+class HasComputeNames a b | a -> b where
+    computeNames :: a -> b
 
-class HasComputedNetwork a b | a -> b where
-    computedNetwork :: a -> b
+class HasComputeNetwork a b | a -> b where
+    computeNetwork :: a -> b
 
-class HasComputedNetworkInterface a b | a -> b where
-    computedNetworkInterface :: a -> b
+class HasComputeNetworkInterface a b | a -> b where
+    computeNetworkInterface :: a -> b
 
-class HasComputedNetworkInterface0AccessConfig0AssignedNatIp a b | a -> b where
-    computedNetworkInterface0AccessConfig0AssignedNatIp :: a -> b
+class HasComputeNetworkInterface0AccessConfig0AssignedNatIp a b | a -> b where
+    computeNetworkInterface0AccessConfig0AssignedNatIp :: a -> b
 
-class HasComputedNetworkInterface0Address a b | a -> b where
-    computedNetworkInterface0Address :: a -> b
+class HasComputeNetworkInterface0Address a b | a -> b where
+    computeNetworkInterface0Address :: a -> b
 
-class HasComputedNetworkPolicy a b | a -> b where
-    computedNetworkPolicy :: a -> b
+class HasComputeNetworkPolicy a b | a -> b where
+    computeNetworkPolicy :: a -> b
 
-class HasComputedNextHopGateway a b | a -> b where
-    computedNextHopGateway :: a -> b
+class HasComputeNextHopGateway a b | a -> b where
+    computeNextHopGateway :: a -> b
 
-class HasComputedNextHopInstance a b | a -> b where
-    computedNextHopInstance :: a -> b
+class HasComputeNextHopInstance a b | a -> b where
+    computeNextHopInstance :: a -> b
 
-class HasComputedNextHopInstanceZone a b | a -> b where
-    computedNextHopInstanceZone :: a -> b
+class HasComputeNextHopInstanceZone a b | a -> b where
+    computeNextHopInstanceZone :: a -> b
 
-class HasComputedNextHopIp a b | a -> b where
-    computedNextHopIp :: a -> b
+class HasComputeNextHopIp a b | a -> b where
+    computeNextHopIp :: a -> b
 
-class HasComputedNextHopNetwork a b | a -> b where
-    computedNextHopNetwork :: a -> b
+class HasComputeNextHopNetwork a b | a -> b where
+    computeNextHopNetwork :: a -> b
 
-class HasComputedNextHopVpnTunnel a b | a -> b where
-    computedNextHopVpnTunnel :: a -> b
+class HasComputeNextHopVpnTunnel a b | a -> b where
+    computeNextHopVpnTunnel :: a -> b
 
-class HasComputedNodeConfig a b | a -> b where
-    computedNodeConfig :: a -> b
+class HasComputeNodeConfig a b | a -> b where
+    computeNodeConfig :: a -> b
 
-class HasComputedNodeCount a b | a -> b where
-    computedNodeCount :: a -> b
+class HasComputeNodeCount a b | a -> b where
+    computeNodeCount :: a -> b
 
-class HasComputedNodePool a b | a -> b where
-    computedNodePool :: a -> b
+class HasComputeNodePool a b | a -> b where
+    computeNodePool :: a -> b
 
-class HasComputedNodeVersion a b | a -> b where
-    computedNodeVersion :: a -> b
+class HasComputeNodeVersion a b | a -> b where
+    computeNodeVersion :: a -> b
 
-class HasComputedNumBytes a b | a -> b where
-    computedNumBytes :: a -> b
+class HasComputeNumBytes a b | a -> b where
+    computeNumBytes :: a -> b
 
-class HasComputedNumLongTermBytes a b | a -> b where
-    computedNumLongTermBytes :: a -> b
+class HasComputeNumLongTermBytes a b | a -> b where
+    computeNumLongTermBytes :: a -> b
 
-class HasComputedNumNodes a b | a -> b where
-    computedNumNodes :: a -> b
+class HasComputeNumNodes a b | a -> b where
+    computeNumNodes :: a -> b
 
-class HasComputedNumRows a b | a -> b where
-    computedNumRows :: a -> b
+class HasComputeNumRows a b | a -> b where
+    computeNumRows :: a -> b
 
-class HasComputedNumber a b | a -> b where
-    computedNumber :: a -> b
+class HasComputeNumber a b | a -> b where
+    computeNumber :: a -> b
 
-class HasComputedObject a b | a -> b where
-    computedObject :: a -> b
+class HasComputeObject a b | a -> b where
+    computeObject :: a -> b
 
-class HasComputedObjectNamePrefix a b | a -> b where
-    computedObjectNamePrefix :: a -> b
+class HasComputeObjectNamePrefix a b | a -> b where
+    computeObjectNamePrefix :: a -> b
 
-class HasComputedOnDelete a b | a -> b where
-    computedOnDelete :: a -> b
+class HasComputeOnDelete a b | a -> b where
+    computeOnDelete :: a -> b
 
-class HasComputedOpen a b | a -> b where
-    computedOpen :: a -> b
+class HasComputeOpen a b | a -> b where
+    computeOpen :: a -> b
 
-class HasComputedOpenapiConfig a b | a -> b where
-    computedOpenapiConfig :: a -> b
+class HasComputeOpenapiConfig a b | a -> b where
+    computeOpenapiConfig :: a -> b
 
-class HasComputedOrgId a b | a -> b where
-    computedOrgId :: a -> b
+class HasComputeOrgId a b | a -> b where
+    computeOrgId :: a -> b
 
-class HasComputedOrganization a b | a -> b where
-    computedOrganization :: a -> b
+class HasComputeOrganization a b | a -> b where
+    computeOrganization :: a -> b
 
-class HasComputedParameters a b | a -> b where
-    computedParameters :: a -> b
+class HasComputeParameters a b | a -> b where
+    computeParameters :: a -> b
 
-class HasComputedParent a b | a -> b where
-    computedParent :: a -> b
+class HasComputeParent a b | a -> b where
+    computeParent :: a -> b
 
-class HasComputedPassword a b | a -> b where
-    computedPassword :: a -> b
+class HasComputePassword a b | a -> b where
+    computePassword :: a -> b
 
-class HasComputedPath a b | a -> b where
-    computedPath :: a -> b
+class HasComputePath a b | a -> b where
+    computePath :: a -> b
 
-class HasComputedPathMatcher a b | a -> b where
-    computedPathMatcher :: a -> b
+class HasComputePathMatcher a b | a -> b where
+    computePathMatcher :: a -> b
 
-class HasComputedPayloadFormat a b | a -> b where
-    computedPayloadFormat :: a -> b
+class HasComputePayloadFormat a b | a -> b where
+    computePayloadFormat :: a -> b
 
-class HasComputedPeerAsn a b | a -> b where
-    computedPeerAsn :: a -> b
+class HasComputePeerAsn a b | a -> b where
+    computePeerAsn :: a -> b
 
-class HasComputedPeerIp a b | a -> b where
-    computedPeerIp :: a -> b
+class HasComputePeerIp a b | a -> b where
+    computePeerIp :: a -> b
 
-class HasComputedPeerIpAddress a b | a -> b where
-    computedPeerIpAddress :: a -> b
+class HasComputePeerIpAddress a b | a -> b where
+    computePeerIpAddress :: a -> b
 
-class HasComputedPeerNetwork a b | a -> b where
-    computedPeerNetwork :: a -> b
+class HasComputePeerNetwork a b | a -> b where
+    computePeerNetwork :: a -> b
 
-class HasComputedPermissions a b | a -> b where
-    computedPermissions :: a -> b
+class HasComputePermissions a b | a -> b where
+    computePermissions :: a -> b
 
-class HasComputedPgpKey a b | a -> b where
-    computedPgpKey :: a -> b
+class HasComputePgpKey a b | a -> b where
+    computePgpKey :: a -> b
 
-class HasComputedPlacement a b | a -> b where
-    computedPlacement :: a -> b
+class HasComputePlacement a b | a -> b where
+    computePlacement :: a -> b
 
-class HasComputedPlaintext a b | a -> b where
-    computedPlaintext :: a -> b
+class HasComputePlaintext a b | a -> b where
+    computePlaintext :: a -> b
 
-class HasComputedPolicyData a b | a -> b where
-    computedPolicyData :: a -> b
+class HasComputePolicyData a b | a -> b where
+    computePolicyData :: a -> b
 
-class HasComputedPolicyEtag a b | a -> b where
-    computedPolicyEtag :: a -> b
+class HasComputePolicyEtag a b | a -> b where
+    computePolicyEtag :: a -> b
 
-class HasComputedPort a b | a -> b where
-    computedPort :: a -> b
+class HasComputePort a b | a -> b where
+    computePort :: a -> b
 
-class HasComputedPortName a b | a -> b where
-    computedPortName :: a -> b
+class HasComputePortName a b | a -> b where
+    computePortName :: a -> b
 
-class HasComputedPortRange a b | a -> b where
-    computedPortRange :: a -> b
+class HasComputePortRange a b | a -> b where
+    computePortRange :: a -> b
 
-class HasComputedPorts a b | a -> b where
-    computedPorts :: a -> b
+class HasComputePorts a b | a -> b where
+    computePorts :: a -> b
 
-class HasComputedPredefinedAcl a b | a -> b where
-    computedPredefinedAcl :: a -> b
+class HasComputePredefinedAcl a b | a -> b where
+    computePredefinedAcl :: a -> b
 
-class HasComputedPrefix a b | a -> b where
-    computedPrefix :: a -> b
+class HasComputePrefix a b | a -> b where
+    computePrefix :: a -> b
 
-class HasComputedPriority a b | a -> b where
-    computedPriority :: a -> b
+class HasComputePriority a b | a -> b where
+    computePriority :: a -> b
 
-class HasComputedPrivateIpGoogleAccess a b | a -> b where
-    computedPrivateIpGoogleAccess :: a -> b
+class HasComputePrivateIpGoogleAccess a b | a -> b where
+    computePrivateIpGoogleAccess :: a -> b
 
-class HasComputedPrivateKey a b | a -> b where
-    computedPrivateKey :: a -> b
+class HasComputePrivateKey a b | a -> b where
+    computePrivateKey :: a -> b
 
-class HasComputedPrivateKeyEncrypted a b | a -> b where
-    computedPrivateKeyEncrypted :: a -> b
+class HasComputePrivateKeyEncrypted a b | a -> b where
+    computePrivateKeyEncrypted :: a -> b
 
-class HasComputedPrivateKeyFingerprint a b | a -> b where
-    computedPrivateKeyFingerprint :: a -> b
+class HasComputePrivateKeyFingerprint a b | a -> b where
+    computePrivateKeyFingerprint :: a -> b
 
-class HasComputedPrivateKeyType a b | a -> b where
-    computedPrivateKeyType :: a -> b
+class HasComputePrivateKeyType a b | a -> b where
+    computePrivateKeyType :: a -> b
 
-class HasComputedProject a b | a -> b where
-    computedProject :: a -> b
+class HasComputeProject a b | a -> b where
+    computeProject :: a -> b
 
-class HasComputedProjectId a b | a -> b where
-    computedProjectId :: a -> b
+class HasComputeProjectId a b | a -> b where
+    computeProjectId :: a -> b
 
-class HasComputedProjectIds a b | a -> b where
-    computedProjectIds :: a -> b
+class HasComputeProjectIds a b | a -> b where
+    computeProjectIds :: a -> b
 
-class HasComputedProtocOutput a b | a -> b where
-    computedProtocOutput :: a -> b
+class HasComputeProtocOutput a b | a -> b where
+    computeProtocOutput :: a -> b
 
-class HasComputedProtocol a b | a -> b where
-    computedProtocol :: a -> b
+class HasComputeProtocol a b | a -> b where
+    computeProtocol :: a -> b
 
-class HasComputedProxyHeader a b | a -> b where
-    computedProxyHeader :: a -> b
+class HasComputeProxyHeader a b | a -> b where
+    computeProxyHeader :: a -> b
 
-class HasComputedProxyId a b | a -> b where
-    computedProxyId :: a -> b
+class HasComputeProxyId a b | a -> b where
+    computeProxyId :: a -> b
 
-class HasComputedPublicKey a b | a -> b where
-    computedPublicKey :: a -> b
+class HasComputePublicKey a b | a -> b where
+    computePublicKey :: a -> b
 
-class HasComputedPublicKeyType a b | a -> b where
-    computedPublicKeyType :: a -> b
+class HasComputePublicKeyType a b | a -> b where
+    computePublicKeyType :: a -> b
 
-class HasComputedPushConfig a b | a -> b where
-    computedPushConfig :: a -> b
+class HasComputePushConfig a b | a -> b where
+    computePushConfig :: a -> b
 
-class HasComputedRawDisk a b | a -> b where
-    computedRawDisk :: a -> b
+class HasComputeRawDisk a b | a -> b where
+    computeRawDisk :: a -> b
 
-class HasComputedReference0ClusterUuid a b | a -> b where
-    computedReference0ClusterUuid :: a -> b
+class HasComputeReference0ClusterUuid a b | a -> b where
+    computeReference0ClusterUuid :: a -> b
 
-class HasComputedRegion a b | a -> b where
-    computedRegion :: a -> b
+class HasComputeRegion a b | a -> b where
+    computeRegion :: a -> b
 
-class HasComputedRemoteTrafficSelector a b | a -> b where
-    computedRemoteTrafficSelector :: a -> b
+class HasComputeRemoteTrafficSelector a b | a -> b where
+    computeRemoteTrafficSelector :: a -> b
 
-class HasComputedReplicaConfiguration a b | a -> b where
-    computedReplicaConfiguration :: a -> b
+class HasComputeReplicaConfiguration a b | a -> b where
+    computeReplicaConfiguration :: a -> b
 
-class HasComputedRepositoryUrl a b | a -> b where
-    computedRepositoryUrl :: a -> b
+class HasComputeRepositoryUrl a b | a -> b where
+    computeRepositoryUrl :: a -> b
 
-class HasComputedRequestPath a b | a -> b where
-    computedRequestPath :: a -> b
+class HasComputeRequestPath a b | a -> b where
+    computeRequestPath :: a -> b
 
-class HasComputedRestorePolicy a b | a -> b where
-    computedRestorePolicy :: a -> b
+class HasComputeRestorePolicy a b | a -> b where
+    computeRestorePolicy :: a -> b
 
-class HasComputedRole a b | a -> b where
-    computedRole :: a -> b
+class HasComputeRole a b | a -> b where
+    computeRole :: a -> b
 
-class HasComputedRoleEntity a b | a -> b where
-    computedRoleEntity :: a -> b
+class HasComputeRoleEntity a b | a -> b where
+    computeRoleEntity :: a -> b
 
-class HasComputedRoleId a b | a -> b where
-    computedRoleId :: a -> b
+class HasComputeRoleId a b | a -> b where
+    computeRoleId :: a -> b
 
-class HasComputedRotationPeriod a b | a -> b where
-    computedRotationPeriod :: a -> b
+class HasComputeRotationPeriod a b | a -> b where
+    computeRotationPeriod :: a -> b
 
-class HasComputedRouter a b | a -> b where
-    computedRouter :: a -> b
+class HasComputeRouter a b | a -> b where
+    computeRouter :: a -> b
 
-class HasComputedRoutingMode a b | a -> b where
-    computedRoutingMode :: a -> b
+class HasComputeRoutingMode a b | a -> b where
+    computeRoutingMode :: a -> b
 
-class HasComputedRrdatas a b | a -> b where
-    computedRrdatas :: a -> b
+class HasComputeRrdatas a b | a -> b where
+    computeRrdatas :: a -> b
 
-class HasComputedScheduling a b | a -> b where
-    computedScheduling :: a -> b
+class HasComputeScheduling a b | a -> b where
+    computeScheduling :: a -> b
 
-class HasComputedSchema a b | a -> b where
-    computedSchema :: a -> b
+class HasComputeSchema a b | a -> b where
+    computeSchema :: a -> b
 
-class HasComputedScratchDisk a b | a -> b where
-    computedScratchDisk :: a -> b
+class HasComputeScratchDisk a b | a -> b where
+    computeScratchDisk :: a -> b
 
-class HasComputedSecondaryIpRange a b | a -> b where
-    computedSecondaryIpRange :: a -> b
+class HasComputeSecondaryIpRange a b | a -> b where
+    computeSecondaryIpRange :: a -> b
 
-class HasComputedSelfLink a b | a -> b where
-    computedSelfLink :: a -> b
+class HasComputeSelfLink a b | a -> b where
+    computeSelfLink :: a -> b
 
-class HasComputedService a b | a -> b where
-    computedService :: a -> b
+class HasComputeService a b | a -> b where
+    computeService :: a -> b
 
-class HasComputedServiceAccount a b | a -> b where
-    computedServiceAccount :: a -> b
+class HasComputeServiceAccount a b | a -> b where
+    computeServiceAccount :: a -> b
 
-class HasComputedServiceAccountId a b | a -> b where
-    computedServiceAccountId :: a -> b
+class HasComputeServiceAccountId a b | a -> b where
+    computeServiceAccountId :: a -> b
 
-class HasComputedServiceName a b | a -> b where
-    computedServiceName :: a -> b
+class HasComputeServiceName a b | a -> b where
+    computeServiceName :: a -> b
 
-class HasComputedServiceProject a b | a -> b where
-    computedServiceProject :: a -> b
+class HasComputeServiceProject a b | a -> b where
+    computeServiceProject :: a -> b
 
-class HasComputedServices a b | a -> b where
-    computedServices :: a -> b
+class HasComputeServices a b | a -> b where
+    computeServices :: a -> b
 
-class HasComputedSessionAffinity a b | a -> b where
-    computedSessionAffinity :: a -> b
+class HasComputeSessionAffinity a b | a -> b where
+    computeSessionAffinity :: a -> b
 
-class HasComputedSettings a b | a -> b where
-    computedSettings :: a -> b
+class HasComputeSettings a b | a -> b where
+    computeSettings :: a -> b
 
-class HasComputedSettingsVersion a b | a -> b where
-    computedSettingsVersion :: a -> b
+class HasComputeSettingsVersion a b | a -> b where
+    computeSettingsVersion :: a -> b
 
-class HasComputedSharedSecret a b | a -> b where
-    computedSharedSecret :: a -> b
+class HasComputeSharedSecret a b | a -> b where
+    computeSharedSecret :: a -> b
 
-class HasComputedSignedUrl a b | a -> b where
-    computedSignedUrl :: a -> b
+class HasComputeSignedUrl a b | a -> b where
+    computeSignedUrl :: a -> b
 
-class HasComputedSize a b | a -> b where
-    computedSize :: a -> b
+class HasComputeSize a b | a -> b where
+    computeSize :: a -> b
 
-class HasComputedSkipDelete a b | a -> b where
-    computedSkipDelete :: a -> b
+class HasComputeSkipDelete a b | a -> b where
+    computeSkipDelete :: a -> b
 
-class HasComputedSnapshot a b | a -> b where
-    computedSnapshot :: a -> b
+class HasComputeSnapshot a b | a -> b where
+    computeSnapshot :: a -> b
 
-class HasComputedSnapshotEncryptionKeyRaw a b | a -> b where
-    computedSnapshotEncryptionKeyRaw :: a -> b
+class HasComputeSnapshotEncryptionKeyRaw a b | a -> b where
+    computeSnapshotEncryptionKeyRaw :: a -> b
 
-class HasComputedSnapshotEncryptionKeySha256 a b | a -> b where
-    computedSnapshotEncryptionKeySha256 :: a -> b
+class HasComputeSnapshotEncryptionKeySha256 a b | a -> b where
+    computeSnapshotEncryptionKeySha256 :: a -> b
 
-class HasComputedSourceArchiveBucket a b | a -> b where
-    computedSourceArchiveBucket :: a -> b
+class HasComputeSourceArchiveBucket a b | a -> b where
+    computeSourceArchiveBucket :: a -> b
 
-class HasComputedSourceArchiveObject a b | a -> b where
-    computedSourceArchiveObject :: a -> b
+class HasComputeSourceArchiveObject a b | a -> b where
+    computeSourceArchiveObject :: a -> b
 
-class HasComputedSourceDisk a b | a -> b where
-    computedSourceDisk :: a -> b
+class HasComputeSourceDisk a b | a -> b where
+    computeSourceDisk :: a -> b
 
-class HasComputedSourceDiskEncryptionKeyRaw a b | a -> b where
-    computedSourceDiskEncryptionKeyRaw :: a -> b
+class HasComputeSourceDiskEncryptionKeyRaw a b | a -> b where
+    computeSourceDiskEncryptionKeyRaw :: a -> b
 
-class HasComputedSourceDiskEncryptionKeySha256 a b | a -> b where
-    computedSourceDiskEncryptionKeySha256 :: a -> b
+class HasComputeSourceDiskEncryptionKeySha256 a b | a -> b where
+    computeSourceDiskEncryptionKeySha256 :: a -> b
 
-class HasComputedSourceDiskId a b | a -> b where
-    computedSourceDiskId :: a -> b
+class HasComputeSourceDiskId a b | a -> b where
+    computeSourceDiskId :: a -> b
 
-class HasComputedSourceDiskLink a b | a -> b where
-    computedSourceDiskLink :: a -> b
+class HasComputeSourceDiskLink a b | a -> b where
+    computeSourceDiskLink :: a -> b
 
-class HasComputedSourceImageId a b | a -> b where
-    computedSourceImageId :: a -> b
+class HasComputeSourceImageId a b | a -> b where
+    computeSourceImageId :: a -> b
 
-class HasComputedSourceRanges a b | a -> b where
-    computedSourceRanges :: a -> b
+class HasComputeSourceRanges a b | a -> b where
+    computeSourceRanges :: a -> b
 
-class HasComputedSourceServiceAccounts a b | a -> b where
-    computedSourceServiceAccounts :: a -> b
+class HasComputeSourceServiceAccounts a b | a -> b where
+    computeSourceServiceAccounts :: a -> b
 
-class HasComputedSourceTags a b | a -> b where
-    computedSourceTags :: a -> b
+class HasComputeSourceTags a b | a -> b where
+    computeSourceTags :: a -> b
 
-class HasComputedSplitKeys a b | a -> b where
-    computedSplitKeys :: a -> b
+class HasComputeSplitKeys a b | a -> b where
+    computeSplitKeys :: a -> b
 
-class HasComputedSslCertificates a b | a -> b where
-    computedSslCertificates :: a -> b
+class HasComputeSslCertificates a b | a -> b where
+    computeSslCertificates :: a -> b
 
-class HasComputedSslHealthCheck a b | a -> b where
-    computedSslHealthCheck :: a -> b
+class HasComputeSslHealthCheck a b | a -> b where
+    computeSslHealthCheck :: a -> b
 
-class HasComputedStage a b | a -> b where
-    computedStage :: a -> b
+class HasComputeStage a b | a -> b where
+    computeStage :: a -> b
 
-class HasComputedState a b | a -> b where
-    computedState :: a -> b
+class HasComputeState a b | a -> b where
+    computeState :: a -> b
 
-class HasComputedStateDetails a b | a -> b where
-    computedStateDetails :: a -> b
+class HasComputeStateDetails a b | a -> b where
+    computeStateDetails :: a -> b
 
-class HasComputedStateNotificationConfig a b | a -> b where
-    computedStateNotificationConfig :: a -> b
+class HasComputeStateNotificationConfig a b | a -> b where
+    computeStateNotificationConfig :: a -> b
 
-class HasComputedStatus a b | a -> b where
-    computedStatus :: a -> b
+class HasComputeStatus a b | a -> b where
+    computeStatus :: a -> b
 
-class HasComputedStatus0Details a b | a -> b where
-    computedStatus0Details :: a -> b
+class HasComputeStatus0Details a b | a -> b where
+    computeStatus0Details :: a -> b
 
-class HasComputedStatus0State a b | a -> b where
-    computedStatus0State :: a -> b
+class HasComputeStatus0State a b | a -> b where
+    computeStatus0State :: a -> b
 
-class HasComputedStatus0StateStartTime a b | a -> b where
-    computedStatus0StateStartTime :: a -> b
+class HasComputeStatus0StateStartTime a b | a -> b where
+    computeStatus0StateStartTime :: a -> b
 
-class HasComputedStatus0Substate a b | a -> b where
-    computedStatus0Substate :: a -> b
+class HasComputeStatus0Substate a b | a -> b where
+    computeStatus0Substate :: a -> b
 
-class HasComputedStorageClass a b | a -> b where
-    computedStorageClass :: a -> b
+class HasComputeStorageClass a b | a -> b where
+    computeStorageClass :: a -> b
 
-class HasComputedStorageType a b | a -> b where
-    computedStorageType :: a -> b
+class HasComputeStorageType a b | a -> b where
+    computeStorageType :: a -> b
 
-class HasComputedSubnetwork a b | a -> b where
-    computedSubnetwork :: a -> b
+class HasComputeSubnetwork a b | a -> b where
+    computeSubnetwork :: a -> b
 
-class HasComputedSubnetworksSelfLinks a b | a -> b where
-    computedSubnetworksSelfLinks :: a -> b
+class HasComputeSubnetworksSelfLinks a b | a -> b where
+    computeSubnetworksSelfLinks :: a -> b
 
-class HasComputedTableId a b | a -> b where
-    computedTableId :: a -> b
+class HasComputeTableId a b | a -> b where
+    computeTableId :: a -> b
 
-class HasComputedTag a b | a -> b where
-    computedTag :: a -> b
+class HasComputeTag a b | a -> b where
+    computeTag :: a -> b
 
-class HasComputedTags a b | a -> b where
-    computedTags :: a -> b
+class HasComputeTags a b | a -> b where
+    computeTags :: a -> b
 
-class HasComputedTagsFingerprint a b | a -> b where
-    computedTagsFingerprint :: a -> b
+class HasComputeTagsFingerprint a b | a -> b where
+    computeTagsFingerprint :: a -> b
 
-class HasComputedTarget a b | a -> b where
-    computedTarget :: a -> b
+class HasComputeTarget a b | a -> b where
+    computeTarget :: a -> b
 
-class HasComputedTargetPools a b | a -> b where
-    computedTargetPools :: a -> b
+class HasComputeTargetPools a b | a -> b where
+    computeTargetPools :: a -> b
 
-class HasComputedTargetServiceAccounts a b | a -> b where
-    computedTargetServiceAccounts :: a -> b
+class HasComputeTargetServiceAccounts a b | a -> b where
+    computeTargetServiceAccounts :: a -> b
 
-class HasComputedTargetSize a b | a -> b where
-    computedTargetSize :: a -> b
+class HasComputeTargetSize a b | a -> b where
+    computeTargetSize :: a -> b
 
-class HasComputedTargetTags a b | a -> b where
-    computedTargetTags :: a -> b
+class HasComputeTargetTags a b | a -> b where
+    computeTargetTags :: a -> b
 
-class HasComputedTargetVpnGateway a b | a -> b where
-    computedTargetVpnGateway :: a -> b
+class HasComputeTargetVpnGateway a b | a -> b where
+    computeTargetVpnGateway :: a -> b
 
-class HasComputedTcpHealthCheck a b | a -> b where
-    computedTcpHealthCheck :: a -> b
+class HasComputeTcpHealthCheck a b | a -> b where
+    computeTcpHealthCheck :: a -> b
 
-class HasComputedTempGcsLocation a b | a -> b where
-    computedTempGcsLocation :: a -> b
+class HasComputeTempGcsLocation a b | a -> b where
+    computeTempGcsLocation :: a -> b
 
-class HasComputedTemplateGcsPath a b | a -> b where
-    computedTemplateGcsPath :: a -> b
+class HasComputeTemplateGcsPath a b | a -> b where
+    computeTemplateGcsPath :: a -> b
 
-class HasComputedTest a b | a -> b where
-    computedTest :: a -> b
+class HasComputeTest a b | a -> b where
+    computeTest :: a -> b
 
-class HasComputedText a b | a -> b where
-    computedText :: a -> b
+class HasComputeText a b | a -> b where
+    computeText :: a -> b
 
-class HasComputedTimePartitioning a b | a -> b where
-    computedTimePartitioning :: a -> b
+class HasComputeTimePartitioning a b | a -> b where
+    computeTimePartitioning :: a -> b
 
-class HasComputedTimeout a b | a -> b where
-    computedTimeout :: a -> b
+class HasComputeTimeout a b | a -> b where
+    computeTimeout :: a -> b
 
-class HasComputedTimeoutSec a b | a -> b where
-    computedTimeoutSec :: a -> b
+class HasComputeTimeoutSec a b | a -> b where
+    computeTimeoutSec :: a -> b
 
-class HasComputedTitle a b | a -> b where
-    computedTitle :: a -> b
+class HasComputeTitle a b | a -> b where
+    computeTitle :: a -> b
 
-class HasComputedTopic a b | a -> b where
-    computedTopic :: a -> b
+class HasComputeTopic a b | a -> b where
+    computeTopic :: a -> b
 
-class HasComputedTriggerBucket a b | a -> b where
-    computedTriggerBucket :: a -> b
+class HasComputeTriggerBucket a b | a -> b where
+    computeTriggerBucket :: a -> b
 
-class HasComputedTriggerHttp a b | a -> b where
-    computedTriggerHttp :: a -> b
+class HasComputeTriggerHttp a b | a -> b where
+    computeTriggerHttp :: a -> b
 
-class HasComputedTriggerTopic a b | a -> b where
-    computedTriggerTopic :: a -> b
+class HasComputeTriggerTopic a b | a -> b where
+    computeTriggerTopic :: a -> b
 
-class HasComputedTtl a b | a -> b where
-    computedTtl :: a -> b
+class HasComputeTtl a b | a -> b where
+    computeTtl :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputeType' a b | a -> b where
+    computeType' :: a -> b
 
-class HasComputedUnhealthyThreshold a b | a -> b where
-    computedUnhealthyThreshold :: a -> b
+class HasComputeUnhealthyThreshold a b | a -> b where
+    computeUnhealthyThreshold :: a -> b
 
-class HasComputedUniqueId a b | a -> b where
-    computedUniqueId :: a -> b
+class HasComputeUniqueId a b | a -> b where
+    computeUniqueId :: a -> b
 
-class HasComputedUpdateStrategy a b | a -> b where
-    computedUpdateStrategy :: a -> b
+class HasComputeUpdateStrategy a b | a -> b where
+    computeUpdateStrategy :: a -> b
 
-class HasComputedUpdateTime a b | a -> b where
-    computedUpdateTime :: a -> b
+class HasComputeUpdateTime a b | a -> b where
+    computeUpdateTime :: a -> b
 
-class HasComputedUrl a b | a -> b where
-    computedUrl :: a -> b
+class HasComputeUrl a b | a -> b where
+    computeUrl :: a -> b
 
-class HasComputedUrlMap a b | a -> b where
-    computedUrlMap :: a -> b
+class HasComputeUrlMap a b | a -> b where
+    computeUrlMap :: a -> b
 
-class HasComputedUsers a b | a -> b where
-    computedUsers :: a -> b
+class HasComputeUsers a b | a -> b where
+    computeUsers :: a -> b
 
-class HasComputedValidAfter a b | a -> b where
-    computedValidAfter :: a -> b
+class HasComputeValidAfter a b | a -> b where
+    computeValidAfter :: a -> b
 
-class HasComputedValidBefore a b | a -> b where
-    computedValidBefore :: a -> b
+class HasComputeValidBefore a b | a -> b where
+    computeValidBefore :: a -> b
 
-class HasComputedValidMasterVersions a b | a -> b where
-    computedValidMasterVersions :: a -> b
+class HasComputeValidMasterVersions a b | a -> b where
+    computeValidMasterVersions :: a -> b
 
-class HasComputedValidNodeVersions a b | a -> b where
-    computedValidNodeVersions :: a -> b
+class HasComputeValidNodeVersions a b | a -> b where
+    computeValidNodeVersions :: a -> b
 
-class HasComputedValue a b | a -> b where
-    computedValue :: a -> b
+class HasComputeValue a b | a -> b where
+    computeValue :: a -> b
 
-class HasComputedVersion a b | a -> b where
-    computedVersion :: a -> b
+class HasComputeVersion a b | a -> b where
+    computeVersion :: a -> b
 
-class HasComputedVersioning a b | a -> b where
-    computedVersioning :: a -> b
+class HasComputeVersioning a b | a -> b where
+    computeVersioning :: a -> b
 
-class HasComputedView a b | a -> b where
-    computedView :: a -> b
+class HasComputeView a b | a -> b where
+    computeView :: a -> b
 
-class HasComputedVpnTunnel a b | a -> b where
-    computedVpnTunnel :: a -> b
+class HasComputeVpnTunnel a b | a -> b where
+    computeVpnTunnel :: a -> b
 
-class HasComputedWebsite a b | a -> b where
-    computedWebsite :: a -> b
+class HasComputeWebsite a b | a -> b where
+    computeWebsite :: a -> b
 
-class HasComputedWriterIdentity a b | a -> b where
-    computedWriterIdentity :: a -> b
+class HasComputeWriterIdentity a b | a -> b where
+    computeWriterIdentity :: a -> b
 
-class HasComputedXxxConfig a b | a -> b where
-    computedXxxConfig :: a -> b
+class HasComputeXxxConfig a b | a -> b where
+    computeXxxConfig :: a -> b
 
-class HasComputedZone a b | a -> b where
-    computedZone :: a -> b
+class HasComputeZone a b | a -> b where
+    computeZone :: a -> b

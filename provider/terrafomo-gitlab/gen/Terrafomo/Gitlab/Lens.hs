@@ -60,46 +60,46 @@ module Terrafomo.Gitlab.Lens
     , HasWikiPageEvents (..)
 
     -- ** Computed Attributes
-    , HasComputedCanCreateGroup (..)
-    , HasComputedCanPush (..)
-    , HasComputedColor (..)
-    , HasComputedDefaultBranch (..)
-    , HasComputedDescription (..)
-    , HasComputedEmail (..)
-    , HasComputedEnableSslVerification (..)
-    , HasComputedHttpUrlToRepo (..)
-    , HasComputedId (..)
-    , HasComputedIsAdmin (..)
-    , HasComputedIssuesEnabled (..)
-    , HasComputedIssuesEvents (..)
-    , HasComputedJobEvents (..)
-    , HasComputedKey (..)
-    , HasComputedLfsEnabled (..)
-    , HasComputedMergeRequestsEnabled (..)
-    , HasComputedMergeRequestsEvents (..)
-    , HasComputedName (..)
-    , HasComputedNamespaceId (..)
-    , HasComputedNoteEvents (..)
-    , HasComputedParentId (..)
-    , HasComputedPassword (..)
-    , HasComputedPath (..)
-    , HasComputedPipelineEvents (..)
-    , HasComputedProject (..)
-    , HasComputedProjectsLimit (..)
-    , HasComputedPushEvents (..)
-    , HasComputedRequestAccessEnabled (..)
-    , HasComputedSkipConfirmation (..)
-    , HasComputedSnippetsEnabled (..)
-    , HasComputedSshUrlToRepo (..)
-    , HasComputedTagPushEvents (..)
-    , HasComputedTitle (..)
-    , HasComputedToken (..)
-    , HasComputedUrl (..)
-    , HasComputedUsername (..)
-    , HasComputedVisibilityLevel (..)
-    , HasComputedWebUrl (..)
-    , HasComputedWikiEnabled (..)
-    , HasComputedWikiPageEvents (..)
+    , HasComputeCanCreateGroup (..)
+    , HasComputeCanPush (..)
+    , HasComputeColor (..)
+    , HasComputeDefaultBranch (..)
+    , HasComputeDescription (..)
+    , HasComputeEmail (..)
+    , HasComputeEnableSslVerification (..)
+    , HasComputeHttpUrlToRepo (..)
+    , HasComputeId (..)
+    , HasComputeIsAdmin (..)
+    , HasComputeIssuesEnabled (..)
+    , HasComputeIssuesEvents (..)
+    , HasComputeJobEvents (..)
+    , HasComputeKey (..)
+    , HasComputeLfsEnabled (..)
+    , HasComputeMergeRequestsEnabled (..)
+    , HasComputeMergeRequestsEvents (..)
+    , HasComputeName (..)
+    , HasComputeNamespaceId (..)
+    , HasComputeNoteEvents (..)
+    , HasComputeParentId (..)
+    , HasComputePassword (..)
+    , HasComputePath (..)
+    , HasComputePipelineEvents (..)
+    , HasComputeProject (..)
+    , HasComputeProjectsLimit (..)
+    , HasComputePushEvents (..)
+    , HasComputeRequestAccessEnabled (..)
+    , HasComputeSkipConfirmation (..)
+    , HasComputeSnippetsEnabled (..)
+    , HasComputeSshUrlToRepo (..)
+    , HasComputeTagPushEvents (..)
+    , HasComputeTitle (..)
+    , HasComputeToken (..)
+    , HasComputeUrl (..)
+    , HasComputeUsername (..)
+    , HasComputeVisibilityLevel (..)
+    , HasComputeWebUrl (..)
+    , HasComputeWikiEnabled (..)
+    , HasComputeWikiPageEvents (..)
     ) where
 
 import GHC.Base ((.))
@@ -325,122 +325,122 @@ class HasWikiPageEvents a b | a -> b where
 instance HasWikiPageEvents a b => HasWikiPageEvents (TF.Schema l p a) b where
     wikiPageEvents = TF.configuration . wikiPageEvents
 
-class HasComputedCanCreateGroup a b | a -> b where
-    computedCanCreateGroup :: a -> b
+class HasComputeCanCreateGroup a b | a -> b where
+    computeCanCreateGroup :: a -> b
 
-class HasComputedCanPush a b | a -> b where
-    computedCanPush :: a -> b
+class HasComputeCanPush a b | a -> b where
+    computeCanPush :: a -> b
 
-class HasComputedColor a b | a -> b where
-    computedColor :: a -> b
+class HasComputeColor a b | a -> b where
+    computeColor :: a -> b
 
-class HasComputedDefaultBranch a b | a -> b where
-    computedDefaultBranch :: a -> b
+class HasComputeDefaultBranch a b | a -> b where
+    computeDefaultBranch :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedEmail a b | a -> b where
-    computedEmail :: a -> b
+class HasComputeEmail a b | a -> b where
+    computeEmail :: a -> b
 
-class HasComputedEnableSslVerification a b | a -> b where
-    computedEnableSslVerification :: a -> b
+class HasComputeEnableSslVerification a b | a -> b where
+    computeEnableSslVerification :: a -> b
 
-class HasComputedHttpUrlToRepo a b | a -> b where
-    computedHttpUrlToRepo :: a -> b
+class HasComputeHttpUrlToRepo a b | a -> b where
+    computeHttpUrlToRepo :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedIsAdmin a b | a -> b where
-    computedIsAdmin :: a -> b
+class HasComputeIsAdmin a b | a -> b where
+    computeIsAdmin :: a -> b
 
-class HasComputedIssuesEnabled a b | a -> b where
-    computedIssuesEnabled :: a -> b
+class HasComputeIssuesEnabled a b | a -> b where
+    computeIssuesEnabled :: a -> b
 
-class HasComputedIssuesEvents a b | a -> b where
-    computedIssuesEvents :: a -> b
+class HasComputeIssuesEvents a b | a -> b where
+    computeIssuesEvents :: a -> b
 
-class HasComputedJobEvents a b | a -> b where
-    computedJobEvents :: a -> b
+class HasComputeJobEvents a b | a -> b where
+    computeJobEvents :: a -> b
 
-class HasComputedKey a b | a -> b where
-    computedKey :: a -> b
+class HasComputeKey a b | a -> b where
+    computeKey :: a -> b
 
-class HasComputedLfsEnabled a b | a -> b where
-    computedLfsEnabled :: a -> b
+class HasComputeLfsEnabled a b | a -> b where
+    computeLfsEnabled :: a -> b
 
-class HasComputedMergeRequestsEnabled a b | a -> b where
-    computedMergeRequestsEnabled :: a -> b
+class HasComputeMergeRequestsEnabled a b | a -> b where
+    computeMergeRequestsEnabled :: a -> b
 
-class HasComputedMergeRequestsEvents a b | a -> b where
-    computedMergeRequestsEvents :: a -> b
+class HasComputeMergeRequestsEvents a b | a -> b where
+    computeMergeRequestsEvents :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedNamespaceId a b | a -> b where
-    computedNamespaceId :: a -> b
+class HasComputeNamespaceId a b | a -> b where
+    computeNamespaceId :: a -> b
 
-class HasComputedNoteEvents a b | a -> b where
-    computedNoteEvents :: a -> b
+class HasComputeNoteEvents a b | a -> b where
+    computeNoteEvents :: a -> b
 
-class HasComputedParentId a b | a -> b where
-    computedParentId :: a -> b
+class HasComputeParentId a b | a -> b where
+    computeParentId :: a -> b
 
-class HasComputedPassword a b | a -> b where
-    computedPassword :: a -> b
+class HasComputePassword a b | a -> b where
+    computePassword :: a -> b
 
-class HasComputedPath a b | a -> b where
-    computedPath :: a -> b
+class HasComputePath a b | a -> b where
+    computePath :: a -> b
 
-class HasComputedPipelineEvents a b | a -> b where
-    computedPipelineEvents :: a -> b
+class HasComputePipelineEvents a b | a -> b where
+    computePipelineEvents :: a -> b
 
-class HasComputedProject a b | a -> b where
-    computedProject :: a -> b
+class HasComputeProject a b | a -> b where
+    computeProject :: a -> b
 
-class HasComputedProjectsLimit a b | a -> b where
-    computedProjectsLimit :: a -> b
+class HasComputeProjectsLimit a b | a -> b where
+    computeProjectsLimit :: a -> b
 
-class HasComputedPushEvents a b | a -> b where
-    computedPushEvents :: a -> b
+class HasComputePushEvents a b | a -> b where
+    computePushEvents :: a -> b
 
-class HasComputedRequestAccessEnabled a b | a -> b where
-    computedRequestAccessEnabled :: a -> b
+class HasComputeRequestAccessEnabled a b | a -> b where
+    computeRequestAccessEnabled :: a -> b
 
-class HasComputedSkipConfirmation a b | a -> b where
-    computedSkipConfirmation :: a -> b
+class HasComputeSkipConfirmation a b | a -> b where
+    computeSkipConfirmation :: a -> b
 
-class HasComputedSnippetsEnabled a b | a -> b where
-    computedSnippetsEnabled :: a -> b
+class HasComputeSnippetsEnabled a b | a -> b where
+    computeSnippetsEnabled :: a -> b
 
-class HasComputedSshUrlToRepo a b | a -> b where
-    computedSshUrlToRepo :: a -> b
+class HasComputeSshUrlToRepo a b | a -> b where
+    computeSshUrlToRepo :: a -> b
 
-class HasComputedTagPushEvents a b | a -> b where
-    computedTagPushEvents :: a -> b
+class HasComputeTagPushEvents a b | a -> b where
+    computeTagPushEvents :: a -> b
 
-class HasComputedTitle a b | a -> b where
-    computedTitle :: a -> b
+class HasComputeTitle a b | a -> b where
+    computeTitle :: a -> b
 
-class HasComputedToken a b | a -> b where
-    computedToken :: a -> b
+class HasComputeToken a b | a -> b where
+    computeToken :: a -> b
 
-class HasComputedUrl a b | a -> b where
-    computedUrl :: a -> b
+class HasComputeUrl a b | a -> b where
+    computeUrl :: a -> b
 
-class HasComputedUsername a b | a -> b where
-    computedUsername :: a -> b
+class HasComputeUsername a b | a -> b where
+    computeUsername :: a -> b
 
-class HasComputedVisibilityLevel a b | a -> b where
-    computedVisibilityLevel :: a -> b
+class HasComputeVisibilityLevel a b | a -> b where
+    computeVisibilityLevel :: a -> b
 
-class HasComputedWebUrl a b | a -> b where
-    computedWebUrl :: a -> b
+class HasComputeWebUrl a b | a -> b where
+    computeWebUrl :: a -> b
 
-class HasComputedWikiEnabled a b | a -> b where
-    computedWikiEnabled :: a -> b
+class HasComputeWikiEnabled a b | a -> b where
+    computeWikiEnabled :: a -> b
 
-class HasComputedWikiPageEvents a b | a -> b where
-    computedWikiPageEvents :: a -> b
+class HasComputeWikiPageEvents a b | a -> b where
+    computeWikiPageEvents :: a -> b

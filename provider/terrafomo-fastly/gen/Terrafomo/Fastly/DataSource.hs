@@ -24,14 +24,14 @@
 module Terrafomo.Fastly.DataSource
     (
     -- * Types
-      IpRangesDataSource (..)
-    , ipRangesDataSource
+      DataIpRanges (..)
+    , dataIpRanges
 
     -- * Overloaded Fields
     -- ** Arguments
 
     -- ** Computed Attributes
-    , P.HasComputedCidrBlocks (..)
+    , P.HasComputeCidrBlocks (..)
 
     -- * Re-exported Types
     , module P
@@ -67,17 +67,17 @@ Use this data source to get the
 <https://docs.fastly.com/guides/securing-communications/accessing-fastlys-ip-ranges>
 of Fastly edge nodes.
 -}
-data IpRangesDataSource s = IpRangesDataSource {
+data DataIpRanges s = DataIpRanges {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpRangesDataSource s) where
+instance TF.ToHCL (DataIpRanges s) where
     toHCL _ = TF.empty
 
-instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesDataSource s)) (TF.Attr s P.Text) where
-    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
+instance s ~ s' => P.HasComputeCidrBlocks (TF.Ref s' (DataIpRanges s)) (TF.Attr s P.Text) where
+    computeCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
-ipRangesDataSource :: TF.DataSource P.Fastly (IpRangesDataSource s)
-ipRangesDataSource =
+dataIpRanges :: TF.DataSource P.Fastly (DataIpRanges s)
+dataIpRanges =
     TF.newDataSource "fastly_ip_ranges" $
-        IpRangesDataSource {
+        DataIpRanges {
             }

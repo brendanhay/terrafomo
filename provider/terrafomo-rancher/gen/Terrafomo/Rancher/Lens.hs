@@ -51,49 +51,49 @@ module Terrafomo.Rancher.Lens
     , HasValue (..)
 
     -- ** Computed Attributes
-    , HasComputedAgentIp (..)
-    , HasComputedAlgorithm (..)
-    , HasComputedCatalogId (..)
-    , HasComputedCert (..)
-    , HasComputedCertChain (..)
-    , HasComputedCertFingerprint (..)
-    , HasComputedCn (..)
-    , HasComputedCommand (..)
-    , HasComputedDescription (..)
-    , HasComputedDockerCompose (..)
-    , HasComputedDriver (..)
-    , HasComputedEnvironment (..)
-    , HasComputedEnvironmentId (..)
-    , HasComputedExpiresAt (..)
-    , HasComputedFinishUpgrade (..)
-    , HasComputedHostLabels (..)
-    , HasComputedHostname (..)
-    , HasComputedId (..)
-    , HasComputedImage (..)
-    , HasComputedIssuedAt (..)
-    , HasComputedIssuer (..)
-    , HasComputedKey (..)
-    , HasComputedKeySize (..)
-    , HasComputedLabels (..)
-    , HasComputedMember (..)
-    , HasComputedName (..)
-    , HasComputedOrchestration (..)
-    , HasComputedProjectTemplateId (..)
-    , HasComputedPublicValue (..)
-    , HasComputedRancherCompose (..)
-    , HasComputedRegistrationUrl (..)
-    , HasComputedRegistryId (..)
-    , HasComputedRenderedDockerCompose (..)
-    , HasComputedRenderedRancherCompose (..)
-    , HasComputedScope (..)
-    , HasComputedSecretValue (..)
-    , HasComputedSerialNumber (..)
-    , HasComputedServerAddress (..)
-    , HasComputedStartOnCreate (..)
-    , HasComputedSubjectAlternativeNames (..)
-    , HasComputedToken (..)
-    , HasComputedValue (..)
-    , HasComputedVersion (..)
+    , HasComputeAgentIp (..)
+    , HasComputeAlgorithm (..)
+    , HasComputeCatalogId (..)
+    , HasComputeCert (..)
+    , HasComputeCertChain (..)
+    , HasComputeCertFingerprint (..)
+    , HasComputeCn (..)
+    , HasComputeCommand (..)
+    , HasComputeDescription (..)
+    , HasComputeDockerCompose (..)
+    , HasComputeDriver (..)
+    , HasComputeEnvironment (..)
+    , HasComputeEnvironmentId (..)
+    , HasComputeExpiresAt (..)
+    , HasComputeFinishUpgrade (..)
+    , HasComputeHostLabels (..)
+    , HasComputeHostname (..)
+    , HasComputeId (..)
+    , HasComputeImage (..)
+    , HasComputeIssuedAt (..)
+    , HasComputeIssuer (..)
+    , HasComputeKey (..)
+    , HasComputeKeySize (..)
+    , HasComputeLabels (..)
+    , HasComputeMember (..)
+    , HasComputeName (..)
+    , HasComputeOrchestration (..)
+    , HasComputeProjectTemplateId (..)
+    , HasComputePublicValue (..)
+    , HasComputeRancherCompose (..)
+    , HasComputeRegistrationUrl (..)
+    , HasComputeRegistryId (..)
+    , HasComputeRenderedDockerCompose (..)
+    , HasComputeRenderedRancherCompose (..)
+    , HasComputeScope (..)
+    , HasComputeSecretValue (..)
+    , HasComputeSerialNumber (..)
+    , HasComputeServerAddress (..)
+    , HasComputeStartOnCreate (..)
+    , HasComputeSubjectAlternativeNames (..)
+    , HasComputeToken (..)
+    , HasComputeValue (..)
+    , HasComputeVersion (..)
     ) where
 
 import GHC.Base ((.))
@@ -265,131 +265,131 @@ class HasValue a b | a -> b where
 instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
 
-class HasComputedAgentIp a b | a -> b where
-    computedAgentIp :: a -> b
+class HasComputeAgentIp a b | a -> b where
+    computeAgentIp :: a -> b
 
-class HasComputedAlgorithm a b | a -> b where
-    computedAlgorithm :: a -> b
+class HasComputeAlgorithm a b | a -> b where
+    computeAlgorithm :: a -> b
 
-class HasComputedCatalogId a b | a -> b where
-    computedCatalogId :: a -> b
+class HasComputeCatalogId a b | a -> b where
+    computeCatalogId :: a -> b
 
-class HasComputedCert a b | a -> b where
-    computedCert :: a -> b
+class HasComputeCert a b | a -> b where
+    computeCert :: a -> b
 
-class HasComputedCertChain a b | a -> b where
-    computedCertChain :: a -> b
+class HasComputeCertChain a b | a -> b where
+    computeCertChain :: a -> b
 
-class HasComputedCertFingerprint a b | a -> b where
-    computedCertFingerprint :: a -> b
+class HasComputeCertFingerprint a b | a -> b where
+    computeCertFingerprint :: a -> b
 
-class HasComputedCn a b | a -> b where
-    computedCn :: a -> b
+class HasComputeCn a b | a -> b where
+    computeCn :: a -> b
 
-class HasComputedCommand a b | a -> b where
-    computedCommand :: a -> b
+class HasComputeCommand a b | a -> b where
+    computeCommand :: a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasComputeDescription a b | a -> b where
+    computeDescription :: a -> b
 
-class HasComputedDockerCompose a b | a -> b where
-    computedDockerCompose :: a -> b
+class HasComputeDockerCompose a b | a -> b where
+    computeDockerCompose :: a -> b
 
-class HasComputedDriver a b | a -> b where
-    computedDriver :: a -> b
+class HasComputeDriver a b | a -> b where
+    computeDriver :: a -> b
 
-class HasComputedEnvironment a b | a -> b where
-    computedEnvironment :: a -> b
+class HasComputeEnvironment a b | a -> b where
+    computeEnvironment :: a -> b
 
-class HasComputedEnvironmentId a b | a -> b where
-    computedEnvironmentId :: a -> b
+class HasComputeEnvironmentId a b | a -> b where
+    computeEnvironmentId :: a -> b
 
-class HasComputedExpiresAt a b | a -> b where
-    computedExpiresAt :: a -> b
+class HasComputeExpiresAt a b | a -> b where
+    computeExpiresAt :: a -> b
 
-class HasComputedFinishUpgrade a b | a -> b where
-    computedFinishUpgrade :: a -> b
+class HasComputeFinishUpgrade a b | a -> b where
+    computeFinishUpgrade :: a -> b
 
-class HasComputedHostLabels a b | a -> b where
-    computedHostLabels :: a -> b
+class HasComputeHostLabels a b | a -> b where
+    computeHostLabels :: a -> b
 
-class HasComputedHostname a b | a -> b where
-    computedHostname :: a -> b
+class HasComputeHostname a b | a -> b where
+    computeHostname :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+class HasComputeId a b | a -> b where
+    computeId :: a -> b
 
-class HasComputedImage a b | a -> b where
-    computedImage :: a -> b
+class HasComputeImage a b | a -> b where
+    computeImage :: a -> b
 
-class HasComputedIssuedAt a b | a -> b where
-    computedIssuedAt :: a -> b
+class HasComputeIssuedAt a b | a -> b where
+    computeIssuedAt :: a -> b
 
-class HasComputedIssuer a b | a -> b where
-    computedIssuer :: a -> b
+class HasComputeIssuer a b | a -> b where
+    computeIssuer :: a -> b
 
-class HasComputedKey a b | a -> b where
-    computedKey :: a -> b
+class HasComputeKey a b | a -> b where
+    computeKey :: a -> b
 
-class HasComputedKeySize a b | a -> b where
-    computedKeySize :: a -> b
+class HasComputeKeySize a b | a -> b where
+    computeKeySize :: a -> b
 
-class HasComputedLabels a b | a -> b where
-    computedLabels :: a -> b
+class HasComputeLabels a b | a -> b where
+    computeLabels :: a -> b
 
-class HasComputedMember a b | a -> b where
-    computedMember :: a -> b
+class HasComputeMember a b | a -> b where
+    computeMember :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputeName a b | a -> b where
+    computeName :: a -> b
 
-class HasComputedOrchestration a b | a -> b where
-    computedOrchestration :: a -> b
+class HasComputeOrchestration a b | a -> b where
+    computeOrchestration :: a -> b
 
-class HasComputedProjectTemplateId a b | a -> b where
-    computedProjectTemplateId :: a -> b
+class HasComputeProjectTemplateId a b | a -> b where
+    computeProjectTemplateId :: a -> b
 
-class HasComputedPublicValue a b | a -> b where
-    computedPublicValue :: a -> b
+class HasComputePublicValue a b | a -> b where
+    computePublicValue :: a -> b
 
-class HasComputedRancherCompose a b | a -> b where
-    computedRancherCompose :: a -> b
+class HasComputeRancherCompose a b | a -> b where
+    computeRancherCompose :: a -> b
 
-class HasComputedRegistrationUrl a b | a -> b where
-    computedRegistrationUrl :: a -> b
+class HasComputeRegistrationUrl a b | a -> b where
+    computeRegistrationUrl :: a -> b
 
-class HasComputedRegistryId a b | a -> b where
-    computedRegistryId :: a -> b
+class HasComputeRegistryId a b | a -> b where
+    computeRegistryId :: a -> b
 
-class HasComputedRenderedDockerCompose a b | a -> b where
-    computedRenderedDockerCompose :: a -> b
+class HasComputeRenderedDockerCompose a b | a -> b where
+    computeRenderedDockerCompose :: a -> b
 
-class HasComputedRenderedRancherCompose a b | a -> b where
-    computedRenderedRancherCompose :: a -> b
+class HasComputeRenderedRancherCompose a b | a -> b where
+    computeRenderedRancherCompose :: a -> b
 
-class HasComputedScope a b | a -> b where
-    computedScope :: a -> b
+class HasComputeScope a b | a -> b where
+    computeScope :: a -> b
 
-class HasComputedSecretValue a b | a -> b where
-    computedSecretValue :: a -> b
+class HasComputeSecretValue a b | a -> b where
+    computeSecretValue :: a -> b
 
-class HasComputedSerialNumber a b | a -> b where
-    computedSerialNumber :: a -> b
+class HasComputeSerialNumber a b | a -> b where
+    computeSerialNumber :: a -> b
 
-class HasComputedServerAddress a b | a -> b where
-    computedServerAddress :: a -> b
+class HasComputeServerAddress a b | a -> b where
+    computeServerAddress :: a -> b
 
-class HasComputedStartOnCreate a b | a -> b where
-    computedStartOnCreate :: a -> b
+class HasComputeStartOnCreate a b | a -> b where
+    computeStartOnCreate :: a -> b
 
-class HasComputedSubjectAlternativeNames a b | a -> b where
-    computedSubjectAlternativeNames :: a -> b
+class HasComputeSubjectAlternativeNames a b | a -> b where
+    computeSubjectAlternativeNames :: a -> b
 
-class HasComputedToken a b | a -> b where
-    computedToken :: a -> b
+class HasComputeToken a b | a -> b where
+    computeToken :: a -> b
 
-class HasComputedValue a b | a -> b where
-    computedValue :: a -> b
+class HasComputeValue a b | a -> b where
+    computeValue :: a -> b
 
-class HasComputedVersion a b | a -> b where
-    computedVersion :: a -> b
+class HasComputeVersion a b | a -> b where
+    computeVersion :: a -> b

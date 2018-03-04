@@ -26,8 +26,8 @@ module Terrafomo.Local.Lens
     , HasFilename (..)
 
     -- ** Computed Attributes
-    , HasComputedContent (..)
-    , HasComputedFilename (..)
+    , HasComputeContent (..)
+    , HasComputeFilename (..)
     ) where
 
 import GHC.Base ((.))
@@ -49,8 +49,8 @@ class HasFilename a b | a -> b where
 instance HasFilename a b => HasFilename (TF.Schema l p a) b where
     filename = TF.configuration . filename
 
-class HasComputedContent a b | a -> b where
-    computedContent :: a -> b
+class HasComputeContent a b | a -> b where
+    computeContent :: a -> b
 
-class HasComputedFilename a b | a -> b where
-    computedFilename :: a -> b
+class HasComputeFilename a b | a -> b where
+    computeFilename :: a -> b

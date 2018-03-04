@@ -24,17 +24,17 @@
 module Terrafomo.OneAndOne.Resource
     (
     -- * Types
-      InstanceSizeResource (..)
-    , instanceSizeResource
+      ResourceInstanceSize (..)
+    , resourceInstanceSize
 
-    , IpResource (..)
-    , ipResource
+    , ResourceIp (..)
+    , resourceIp
 
-    , ServerResource (..)
-    , serverResource
+    , ResourceServer (..)
+    , resourceServer
 
-    , VpnResource (..)
-    , vpnResource
+    , ResourceVpn (..)
+    , resourceVpn
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -77,43 +77,43 @@ module Terrafomo.OneAndOne.Resource
     , P.HasVcores (..)
 
     -- ** Computed Attributes
-    , P.HasComputed*diskSize (..)
-    , P.HasComputed*isMain (..)
-    , P.HasComputedAgent (..)
-    , P.HasComputedCoresPerProcessor (..)
-    , P.HasComputedDatacenter (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedDownloadPath (..)
-    , P.HasComputedEmail (..)
-    , P.HasComputedFileName (..)
-    , P.HasComputedFirewallPolicyId (..)
-    , P.HasComputedFixedInstanceSize (..)
-    , P.HasComputedHdds (..)
-    , P.HasComputedHealthCheckInterval (..)
-    , P.HasComputedHealthCheckPath (..)
-    , P.HasComputedHealthCheckPathParser (..)
-    , P.HasComputedHealthCheckTest (..)
-    , P.HasComputedImage (..)
-    , P.HasComputedIp (..)
-    , P.HasComputedIpAddress (..)
-    , P.HasComputedIpType (..)
-    , P.HasComputedLoadbalancerId (..)
-    , P.HasComputedMethod (..)
-    , P.HasComputedMonitoringPolicyId (..)
-    , P.HasComputedName (..)
-    , P.HasComputedNetworkAddress (..)
-    , P.HasComputedPassword (..)
-    , P.HasComputedPersistence (..)
-    , P.HasComputedPersistenceTime (..)
-    , P.HasComputedRam (..)
-    , P.HasComputedReverseDns (..)
-    , P.HasComputedServerIds (..)
-    , P.HasComputedSize (..)
-    , P.HasComputedSshKeyPath (..)
-    , P.HasComputedSshKeyPublic (..)
-    , P.HasComputedStorageServers (..)
-    , P.HasComputedSubnetMask (..)
-    , P.HasComputedVcores (..)
+    , P.HasCompute*diskSize (..)
+    , P.HasCompute*isMain (..)
+    , P.HasComputeAgent (..)
+    , P.HasComputeCoresPerProcessor (..)
+    , P.HasComputeDatacenter (..)
+    , P.HasComputeDescription (..)
+    , P.HasComputeDownloadPath (..)
+    , P.HasComputeEmail (..)
+    , P.HasComputeFileName (..)
+    , P.HasComputeFirewallPolicyId (..)
+    , P.HasComputeFixedInstanceSize (..)
+    , P.HasComputeHdds (..)
+    , P.HasComputeHealthCheckInterval (..)
+    , P.HasComputeHealthCheckPath (..)
+    , P.HasComputeHealthCheckPathParser (..)
+    , P.HasComputeHealthCheckTest (..)
+    , P.HasComputeImage (..)
+    , P.HasComputeIp (..)
+    , P.HasComputeIpAddress (..)
+    , P.HasComputeIpType (..)
+    , P.HasComputeLoadbalancerId (..)
+    , P.HasComputeMethod (..)
+    , P.HasComputeMonitoringPolicyId (..)
+    , P.HasComputeName (..)
+    , P.HasComputeNetworkAddress (..)
+    , P.HasComputePassword (..)
+    , P.HasComputePersistence (..)
+    , P.HasComputePersistenceTime (..)
+    , P.HasComputeRam (..)
+    , P.HasComputeReverseDns (..)
+    , P.HasComputeServerIds (..)
+    , P.HasComputeSize (..)
+    , P.HasComputeSshKeyPath (..)
+    , P.HasComputeSshKeyPublic (..)
+    , P.HasComputeStorageServers (..)
+    , P.HasComputeSubnetMask (..)
+    , P.HasComputeVcores (..)
 
     -- * Re-exported Types
     , module P
@@ -147,7 +147,7 @@ import qualified Terrafomo.Schema    as TF
 
 Fetches a predefined instance type for 1&1 servers
 -}
-data InstanceSizeResource s = InstanceSizeResource {
+data ResourceInstanceSize s = ResourceInstanceSize {
       _name :: !(TF.Attr s P.Text)
     {- ^ -(Optional) Number of cores per processor -}
     , _ram :: !(TF.Attr s P.Text)
@@ -156,47 +156,47 @@ data InstanceSizeResource s = InstanceSizeResource {
     {- ^ (Optional)  Number of vcores -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InstanceSizeResource s) where
-    toHCL InstanceSizeResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceInstanceSize s) where
+    toHCL ResourceInstanceSize{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "ram" <$> TF.attribute _ram
         , TF.assign "vcores" <$> TF.attribute _vcores
         ]
 
-instance P.HasName (InstanceSizeResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceInstanceSize s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: InstanceSizeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: InstanceSizeResource s)
+        lens (_name :: ResourceInstanceSize s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceInstanceSize s)
 
-instance P.HasRam (InstanceSizeResource s) (TF.Attr s P.Text) where
+instance P.HasRam (ResourceInstanceSize s) (TF.Attr s P.Text) where
     ram =
-        lens (_ram :: InstanceSizeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ram = a } :: InstanceSizeResource s)
+        lens (_ram :: ResourceInstanceSize s -> TF.Attr s P.Text)
+             (\s a -> s { _ram = a } :: ResourceInstanceSize s)
 
-instance P.HasVcores (InstanceSizeResource s) (TF.Attr s P.Text) where
+instance P.HasVcores (ResourceInstanceSize s) (TF.Attr s P.Text) where
     vcores =
-        lens (_vcores :: InstanceSizeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vcores = a } :: InstanceSizeResource s)
+        lens (_vcores :: ResourceInstanceSize s -> TF.Attr s P.Text)
+             (\s a -> s { _vcores = a } :: ResourceInstanceSize s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (InstanceSizeResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: InstanceSizeResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceInstanceSize s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceInstanceSize s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRam (TF.Ref s' (InstanceSizeResource s)) (TF.Attr s P.Text) where
-    computedRam =
-        (_ram :: InstanceSizeResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeRam (TF.Ref s' (ResourceInstanceSize s)) (TF.Attr s P.Text) where
+    computeRam =
+        (_ram :: ResourceInstanceSize s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVcores (TF.Ref s' (InstanceSizeResource s)) (TF.Attr s P.Text) where
-    computedVcores =
-        (_vcores :: InstanceSizeResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeVcores (TF.Ref s' (ResourceInstanceSize s)) (TF.Attr s P.Text) where
+    computeVcores =
+        (_vcores :: ResourceInstanceSize s -> TF.Attr s P.Text)
             . TF.refValue
 
-instanceSizeResource :: TF.Resource P.OneAndOne (InstanceSizeResource s)
-instanceSizeResource =
+resourceInstanceSize :: TF.Resource P.OneAndOne (ResourceInstanceSize s)
+resourceInstanceSize =
     TF.newResource "oneandone_instance_size" $
-        InstanceSizeResource {
+        ResourceInstanceSize {
               _name = TF.Nil
             , _ram = TF.Nil
             , _vcores = TF.Nil
@@ -206,7 +206,7 @@ instanceSizeResource =
 
 Manages a Public IP on 1&1
 -}
-data IpResource s = IpResource {
+data ResourceIp s = ResourceIp {
       _datacenter :: !(TF.Attr s P.Text)
     {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
     , _ip_address :: !(TF.Attr s P.Text)
@@ -217,58 +217,58 @@ data IpResource s = IpResource {
     {- ^ (Optional) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpResource s) where
-    toHCL IpResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceIp s) where
+    toHCL ResourceIp{..} = TF.inline $ catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "ip_address" <$> TF.attribute _ip_address
         , TF.assign "ip_type" <$> TF.attribute _ip_type
         , TF.assign "reverse_dns" <$> TF.attribute _reverse_dns
         ]
 
-instance P.HasDatacenter (IpResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenter (ResourceIp s) (TF.Attr s P.Text) where
     datacenter =
-        lens (_datacenter :: IpResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter = a } :: IpResource s)
+        lens (_datacenter :: ResourceIp s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter = a } :: ResourceIp s)
 
-instance P.HasIpAddress (IpResource s) (TF.Attr s P.Text) where
+instance P.HasIpAddress (ResourceIp s) (TF.Attr s P.Text) where
     ipAddress =
-        lens (_ip_address :: IpResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_address = a } :: IpResource s)
+        lens (_ip_address :: ResourceIp s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_address = a } :: ResourceIp s)
 
-instance P.HasIpType (IpResource s) (TF.Attr s P.Text) where
+instance P.HasIpType (ResourceIp s) (TF.Attr s P.Text) where
     ipType =
-        lens (_ip_type :: IpResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_type = a } :: IpResource s)
+        lens (_ip_type :: ResourceIp s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_type = a } :: ResourceIp s)
 
-instance P.HasReverseDns (IpResource s) (TF.Attr s P.Text) where
+instance P.HasReverseDns (ResourceIp s) (TF.Attr s P.Text) where
     reverseDns =
-        lens (_reverse_dns :: IpResource s -> TF.Attr s P.Text)
-             (\s a -> s { _reverse_dns = a } :: IpResource s)
+        lens (_reverse_dns :: ResourceIp s -> TF.Attr s P.Text)
+             (\s a -> s { _reverse_dns = a } :: ResourceIp s)
 
-instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
-    computedDatacenter =
-        (_datacenter :: IpResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDatacenter (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
+    computeDatacenter =
+        (_datacenter :: ResourceIp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
-    computedIpAddress =
-        (_ip_address :: IpResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpAddress (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
+    computeIpAddress =
+        (_ip_address :: ResourceIp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpType (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
-    computedIpType =
-        (_ip_type :: IpResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeIpType (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
+    computeIpType =
+        (_ip_type :: ResourceIp s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedReverseDns (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
-    computedReverseDns =
-        (_reverse_dns :: IpResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeReverseDns (TF.Ref s' (ResourceIp s)) (TF.Attr s P.Text) where
+    computeReverseDns =
+        (_reverse_dns :: ResourceIp s -> TF.Attr s P.Text)
             . TF.refValue
 
-ipResource :: TF.Resource P.OneAndOne (IpResource s)
-ipResource =
+resourceIp :: TF.Resource P.OneAndOne (ResourceIp s)
+resourceIp =
     TF.newResource "oneandone_ip" $
-        IpResource {
+        ResourceIp {
               _datacenter = TF.Nil
             , _ip_address = TF.Nil
             , _ip_type = TF.Nil
@@ -279,7 +279,7 @@ ipResource =
 
 Manages a Shared Storage on 1&1
 -}
-data ServerResource s = ServerResource {
+data ResourceServer s = ResourceServer {
       _datacenter :: !(TF.Attr s P.Text)
     {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ -}
     , _description :: !(TF.Attr s P.Text)
@@ -292,8 +292,8 @@ data ServerResource s = ServerResource {
     {- ^ (Optional) List of servers that will have access to the stored storage -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServerResource s) where
-    toHCL ServerResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceServer s) where
+    toHCL ResourceServer{..} = TF.inline $ catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -301,60 +301,60 @@ instance TF.ToHCL (ServerResource s) where
         , TF.assign "storage_servers" <$> TF.attribute _storage_servers
         ]
 
-instance P.HasDatacenter (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenter (ResourceServer s) (TF.Attr s P.Text) where
     datacenter =
-        lens (_datacenter :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter = a } :: ServerResource s)
+        lens (_datacenter :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter = a } :: ResourceServer s)
 
-instance P.HasDescription (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceServer s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ServerResource s)
+        lens (_description :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceServer s)
 
-instance P.HasName (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceServer s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ServerResource s)
+        lens (_name :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceServer s)
 
-instance P.HasSize (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasSize (ResourceServer s) (TF.Attr s P.Text) where
     size =
-        lens (_size :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: ServerResource s)
+        lens (_size :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _size = a } :: ResourceServer s)
 
-instance P.HasStorageServers (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasStorageServers (ResourceServer s) (TF.Attr s P.Text) where
     storageServers =
-        lens (_storage_servers :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _storage_servers = a } :: ServerResource s)
+        lens (_storage_servers :: ResourceServer s -> TF.Attr s P.Text)
+             (\s a -> s { _storage_servers = a } :: ResourceServer s)
 
-instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedDatacenter =
-        (_datacenter :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDatacenter (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeDatacenter =
+        (_datacenter :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedSize =
-        (_size :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeSize (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeSize =
+        (_size :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStorageServers (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedStorageServers =
-        (_storage_servers :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeStorageServers (TF.Ref s' (ResourceServer s)) (TF.Attr s P.Text) where
+    computeStorageServers =
+        (_storage_servers :: ResourceServer s -> TF.Attr s P.Text)
             . TF.refValue
 
-serverResource :: TF.Resource P.OneAndOne (ServerResource s)
-serverResource =
+resourceServer :: TF.Resource P.OneAndOne (ResourceServer s)
+resourceServer =
     TF.newResource "oneandone_server" $
-        ServerResource {
+        ResourceServer {
               _datacenter = TF.Nil
             , _description = TF.Nil
             , _name = TF.Nil
@@ -366,7 +366,7 @@ serverResource =
 
 Manages a VPN on 1&1
 -}
-data VpnResource s = VpnResource {
+data ResourceVpn s = ResourceVpn {
       _datacenter :: !(TF.Attr s P.Text)
     {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
     , _description :: !(TF.Attr s P.Text)
@@ -379,8 +379,8 @@ data VpnResource s = VpnResource {
     {- ^ (Required) The name of the VPN -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpnResource s) where
-    toHCL VpnResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceVpn s) where
+    toHCL ResourceVpn{..} = TF.inline $ catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "download_path" <$> TF.attribute _download_path
@@ -388,60 +388,60 @@ instance TF.ToHCL (VpnResource s) where
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDatacenter (VpnResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenter (ResourceVpn s) (TF.Attr s P.Text) where
     datacenter =
-        lens (_datacenter :: VpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter = a } :: VpnResource s)
+        lens (_datacenter :: ResourceVpn s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter = a } :: ResourceVpn s)
 
-instance P.HasDescription (VpnResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ResourceVpn s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: VpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: VpnResource s)
+        lens (_description :: ResourceVpn s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ResourceVpn s)
 
-instance P.HasDownloadPath (VpnResource s) (TF.Attr s P.Text) where
+instance P.HasDownloadPath (ResourceVpn s) (TF.Attr s P.Text) where
     downloadPath =
-        lens (_download_path :: VpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _download_path = a } :: VpnResource s)
+        lens (_download_path :: ResourceVpn s -> TF.Attr s P.Text)
+             (\s a -> s { _download_path = a } :: ResourceVpn s)
 
-instance P.HasFileName (VpnResource s) (TF.Attr s P.Text) where
+instance P.HasFileName (ResourceVpn s) (TF.Attr s P.Text) where
     fileName =
-        lens (_file_name :: VpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _file_name = a } :: VpnResource s)
+        lens (_file_name :: ResourceVpn s -> TF.Attr s P.Text)
+             (\s a -> s { _file_name = a } :: ResourceVpn s)
 
-instance P.HasName (VpnResource s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceVpn s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: VpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: VpnResource s)
+        lens (_name :: ResourceVpn s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceVpn s)
 
-instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedDatacenter =
-        (_datacenter :: VpnResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDatacenter (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
+    computeDatacenter =
+        (_datacenter :: ResourceVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: VpnResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDescription (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
+    computeDescription =
+        (_description :: ResourceVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDownloadPath (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedDownloadPath =
-        (_download_path :: VpnResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeDownloadPath (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
+    computeDownloadPath =
+        (_download_path :: ResourceVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFileName (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedFileName =
-        (_file_name :: VpnResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeFileName (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
+    computeFileName =
+        (_file_name :: ResourceVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: VpnResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputeName (TF.Ref s' (ResourceVpn s)) (TF.Attr s P.Text) where
+    computeName =
+        (_name :: ResourceVpn s -> TF.Attr s P.Text)
             . TF.refValue
 
-vpnResource :: TF.Resource P.OneAndOne (VpnResource s)
-vpnResource =
+resourceVpn :: TF.Resource P.OneAndOne (ResourceVpn s)
+resourceVpn =
     TF.newResource "oneandone_vpn" $
-        VpnResource {
+        ResourceVpn {
               _datacenter = TF.Nil
             , _description = TF.Nil
             , _download_path = TF.Nil

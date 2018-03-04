@@ -33,16 +33,16 @@ module Terrafomo.Kubernetes.Lens
     , HasWaitUntilBound (..)
 
     -- ** Computed Attributes
-    , HasComputedData' (..)
-    , HasComputedDefaultSecretName (..)
-    , HasComputedImagePullSecret (..)
-    , HasComputedMetadata (..)
-    , HasComputedParameters (..)
-    , HasComputedSecret (..)
-    , HasComputedSpec (..)
-    , HasComputedStorageProvisioner (..)
-    , HasComputedType' (..)
-    , HasComputedWaitUntilBound (..)
+    , HasComputeData' (..)
+    , HasComputeDefaultSecretName (..)
+    , HasComputeImagePullSecret (..)
+    , HasComputeMetadata (..)
+    , HasComputeParameters (..)
+    , HasComputeSecret (..)
+    , HasComputeSpec (..)
+    , HasComputeStorageProvisioner (..)
+    , HasComputeType' (..)
+    , HasComputeWaitUntilBound (..)
     ) where
 
 import GHC.Base ((.))
@@ -106,32 +106,32 @@ class HasWaitUntilBound a b | a -> b where
 instance HasWaitUntilBound a b => HasWaitUntilBound (TF.Schema l p a) b where
     waitUntilBound = TF.configuration . waitUntilBound
 
-class HasComputedData' a b | a -> b where
-    computedData' :: a -> b
+class HasComputeData' a b | a -> b where
+    computeData' :: a -> b
 
-class HasComputedDefaultSecretName a b | a -> b where
-    computedDefaultSecretName :: a -> b
+class HasComputeDefaultSecretName a b | a -> b where
+    computeDefaultSecretName :: a -> b
 
-class HasComputedImagePullSecret a b | a -> b where
-    computedImagePullSecret :: a -> b
+class HasComputeImagePullSecret a b | a -> b where
+    computeImagePullSecret :: a -> b
 
-class HasComputedMetadata a b | a -> b where
-    computedMetadata :: a -> b
+class HasComputeMetadata a b | a -> b where
+    computeMetadata :: a -> b
 
-class HasComputedParameters a b | a -> b where
-    computedParameters :: a -> b
+class HasComputeParameters a b | a -> b where
+    computeParameters :: a -> b
 
-class HasComputedSecret a b | a -> b where
-    computedSecret :: a -> b
+class HasComputeSecret a b | a -> b where
+    computeSecret :: a -> b
 
-class HasComputedSpec a b | a -> b where
-    computedSpec :: a -> b
+class HasComputeSpec a b | a -> b where
+    computeSpec :: a -> b
 
-class HasComputedStorageProvisioner a b | a -> b where
-    computedStorageProvisioner :: a -> b
+class HasComputeStorageProvisioner a b | a -> b where
+    computeStorageProvisioner :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputeType' a b | a -> b where
+    computeType' :: a -> b
 
-class HasComputedWaitUntilBound a b | a -> b where
-    computedWaitUntilBound :: a -> b
+class HasComputeWaitUntilBound a b | a -> b where
+    computeWaitUntilBound :: a -> b
