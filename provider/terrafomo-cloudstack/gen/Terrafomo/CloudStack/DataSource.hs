@@ -24,8 +24,8 @@
 module Terrafomo.CloudStack.DataSource
     (
     -- * Types
-      DataTemplate (..)
-    , dataTemplate
+      TemplateData (..)
+    , templateData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -77,70 +77,70 @@ import qualified Terrafomo.Schema    as TF
 
 Use this datasource to get the ID of a template for use in other resources.
 -}
-data DataTemplate s = DataTemplate {
+data TemplateData s = TemplateData {
       _filter          :: !(TF.Attr s P.Text)
     {- ^ (Required) One or more name/value pairs to filter off of. You can apply filters on any exported attributes. -}
     , _template_filter :: !(TF.Attr s P.Text)
     {- ^ (Required) The template filter. Possible values are @featured@ , @self@ , @selfexecutable@ , @sharedexecutable@ , @executable@ and @community@ (see the Cloudstack API listTemplate command documentation). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataTemplate s) where
-    toHCL DataTemplate{..} = TF.inline $ catMaybes
+instance TF.ToHCL (TemplateData s) where
+    toHCL TemplateData{..} = TF.inline $ catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "template_filter" <$> TF.attribute _template_filter
         ]
 
-instance P.HasFilter (DataTemplate s) (TF.Attr s P.Text) where
+instance P.HasFilter (TemplateData s) (TF.Attr s P.Text) where
     filter =
-        lens (_filter :: DataTemplate s -> TF.Attr s P.Text)
-             (\s a -> s { _filter = a } :: DataTemplate s)
+        lens (_filter :: TemplateData s -> TF.Attr s P.Text)
+             (\s a -> s { _filter = a } :: TemplateData s)
 
-instance P.HasTemplateFilter (DataTemplate s) (TF.Attr s P.Text) where
+instance P.HasTemplateFilter (TemplateData s) (TF.Attr s P.Text) where
     templateFilter =
-        lens (_template_filter :: DataTemplate s -> TF.Attr s P.Text)
-             (\s a -> s { _template_filter = a } :: DataTemplate s)
+        lens (_template_filter :: TemplateData s -> TF.Attr s P.Text)
+             (\s a -> s { _template_filter = a } :: TemplateData s)
 
-instance s ~ s' => P.HasComputedAccount (TF.Ref s' (DataTemplate s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccount (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedAccount x = TF.compute (TF.refKey x) "account"
 
-instance s ~ s' => P.HasComputedCreated (TF.Ref s' (DataTemplate s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCreated (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedCreated x = TF.compute (TF.refKey x) "created"
 
-instance s ~ s' => P.HasComputedDisplayText (TF.Ref s' (DataTemplate s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisplayText (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedDisplayText x = TF.compute (TF.refKey x) "display_text"
 
-instance s ~ s' => P.HasComputedFilter (TF.Ref s' (DataTemplate s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFilter (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedFilter =
-        (_filter :: DataTemplate s -> TF.Attr s P.Text)
+        (_filter :: TemplateData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFormat (TF.Ref s' (DataTemplate s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFormat (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedFormat x = TF.compute (TF.refKey x) "format"
 
-instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (DataTemplate s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataTemplate s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataTemplate s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (DataTemplate s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataTemplate s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance s ~ s' => P.HasComputedTemplateFilter (TF.Ref s' (DataTemplate s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTemplateFilter (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedTemplateFilter =
-        (_template_filter :: DataTemplate s -> TF.Attr s P.Text)
+        (_template_filter :: TemplateData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataTemplate :: TF.DataSource P.CloudStack (DataTemplate s)
-dataTemplate =
+templateData :: TF.DataSource P.CloudStack (TemplateData s)
+templateData =
     TF.newDataSource "cloudstack_template" $
-        DataTemplate {
+        TemplateData {
               _filter = TF.Nil
             , _template_filter = TF.Nil
             }

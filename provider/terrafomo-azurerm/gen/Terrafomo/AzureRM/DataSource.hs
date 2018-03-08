@@ -24,62 +24,62 @@
 module Terrafomo.AzureRM.DataSource
     (
     -- * Types
-      DataAppServicePlan (..)
-    , dataAppServicePlan
+      AppServicePlanData (..)
+    , appServicePlanData
 
-    , DataBuiltinRoleDefinition (..)
-    , dataBuiltinRoleDefinition
+    , BuiltinRoleDefinitionData (..)
+    , builtinRoleDefinitionData
 
-    , DataClientConfig (..)
-    , dataClientConfig
+    , ClientConfigData (..)
+    , clientConfigData
 
-    , DataDnsZone (..)
-    , dataDnsZone
+    , DnsZoneData (..)
+    , dnsZoneData
 
-    , DataEventhubNamespace (..)
-    , dataEventhubNamespace
+    , EventhubNamespaceData (..)
+    , eventhubNamespaceData
 
-    , DataImage (..)
-    , dataImage
+    , ImageData (..)
+    , imageData
 
-    , DataKeyVaultAccessPolicy (..)
-    , dataKeyVaultAccessPolicy
+    , KeyVaultAccessPolicyData (..)
+    , keyVaultAccessPolicyData
 
-    , DataManagedDisk (..)
-    , dataManagedDisk
+    , ManagedDiskData (..)
+    , managedDiskData
 
-    , DataNetworkSecurityGroup (..)
-    , dataNetworkSecurityGroup
+    , NetworkSecurityGroupData (..)
+    , networkSecurityGroupData
 
-    , DataPlatformImage (..)
-    , dataPlatformImage
+    , PlatformImageData (..)
+    , platformImageData
 
-    , DataPublicIp (..)
-    , dataPublicIp
+    , PublicIpData (..)
+    , publicIpData
 
-    , DataResourceGroup (..)
-    , dataResourceGroup
+    , ResourceGroupData (..)
+    , resourceGroupData
 
-    , DataRoleDefinition (..)
-    , dataRoleDefinition
+    , RoleDefinitionData (..)
+    , roleDefinitionData
 
-    , DataSnapshot (..)
-    , dataSnapshot
+    , SnapshotData (..)
+    , snapshotData
 
-    , DataStorageAccount (..)
-    , dataStorageAccount
+    , StorageAccountData (..)
+    , storageAccountData
 
-    , DataSubnet (..)
-    , dataSubnet
+    , SubnetData (..)
+    , subnetData
 
-    , DataSubscription (..)
-    , dataSubscription
+    , SubscriptionData (..)
+    , subscriptionData
 
-    , DataVirtualNetwork (..)
-    , dataVirtualNetwork
+    , VirtualNetworkData (..)
+    , virtualNetworkData
 
-    , DataVirtualNetworkGateway (..)
-    , dataVirtualNetworkGateway
+    , VirtualNetworkGatewayData (..)
+    , virtualNetworkGatewayData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -223,64 +223,64 @@ import qualified Terrafomo.Schema    as TF
 Use this data source to obtain information about an App Service Plan
 (formerly known as a @Server Farm@ ).
 -}
-data DataAppServicePlan s = DataAppServicePlan {
+data AppServicePlanData s = AppServicePlanData {
       _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the App Service Plan. -}
     , _resource_group_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The Name of the Resource Group where the App Service Plan exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataAppServicePlan s) where
-    toHCL DataAppServicePlan{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AppServicePlanData s) where
+    toHCL AppServicePlanData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (DataAppServicePlan s) (TF.Attr s P.Text) where
+instance P.HasName (AppServicePlanData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataAppServicePlan s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataAppServicePlan s)
+        lens (_name :: AppServicePlanData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: AppServicePlanData s)
 
-instance P.HasResourceGroupName (DataAppServicePlan s) (TF.Attr s P.Text) where
+instance P.HasResourceGroupName (AppServicePlanData s) (TF.Attr s P.Text) where
     resourceGroupName =
-        lens (_resource_group_name :: DataAppServicePlan s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_group_name = a } :: DataAppServicePlan s)
+        lens (_resource_group_name :: AppServicePlanData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: AppServicePlanData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataAppServicePlan s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AppServicePlanData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedKind (TF.Ref s' (DataAppServicePlan s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKind (TF.Ref s' (AppServicePlanData s)) (TF.Attr s P.Text) where
     computedKind x = TF.compute (TF.refKey x) "kind"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DataAppServicePlan s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (AppServicePlanData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedMaximumNumberOfWorkers (TF.Ref s' (DataAppServicePlan s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaximumNumberOfWorkers (TF.Ref s' (AppServicePlanData s)) (TF.Attr s P.Text) where
     computedMaximumNumberOfWorkers x = TF.compute (TF.refKey x) "maximum_number_of_workers"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataAppServicePlan s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AppServicePlanData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataAppServicePlan s -> TF.Attr s P.Text)
+        (_name :: AppServicePlanData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProperties (TF.Ref s' (DataAppServicePlan s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProperties (TF.Ref s' (AppServicePlanData s)) (TF.Attr s P.Text) where
     computedProperties x = TF.compute (TF.refKey x) "properties"
 
-instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DataAppServicePlan s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (AppServicePlanData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
-        (_resource_group_name :: DataAppServicePlan s -> TF.Attr s P.Text)
+        (_resource_group_name :: AppServicePlanData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSku (TF.Ref s' (DataAppServicePlan s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSku (TF.Ref s' (AppServicePlanData s)) (TF.Attr s P.Text) where
     computedSku x = TF.compute (TF.refKey x) "sku"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataAppServicePlan s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (AppServicePlanData s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-dataAppServicePlan :: TF.DataSource P.AzureRM (DataAppServicePlan s)
-dataAppServicePlan =
+appServicePlanData :: TF.DataSource P.AzureRM (AppServicePlanData s)
+appServicePlanData =
     TF.newDataSource "azurerm_app_service_plan" $
-        DataAppServicePlan {
+        AppServicePlanData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
@@ -291,45 +291,45 @@ Use this data source to access the properties of a built-in Role Definition.
 To access information about a custom Role Definition, <role_definition.html>
 instead.
 -}
-data DataBuiltinRoleDefinition s = DataBuiltinRoleDefinition {
+data BuiltinRoleDefinitionData s = BuiltinRoleDefinitionData {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the built-in Role Definition. Possible values are: @Contributor@ , @Owner@ , @Reader@ and @VirtualMachineContributor@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataBuiltinRoleDefinition s) where
-    toHCL DataBuiltinRoleDefinition{..} = TF.inline $ catMaybes
+instance TF.ToHCL (BuiltinRoleDefinitionData s) where
+    toHCL BuiltinRoleDefinitionData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (DataBuiltinRoleDefinition s) (TF.Attr s P.Text) where
+instance P.HasName (BuiltinRoleDefinitionData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataBuiltinRoleDefinition s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataBuiltinRoleDefinition s)
+        lens (_name :: BuiltinRoleDefinitionData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: BuiltinRoleDefinitionData s)
 
-instance s ~ s' => P.HasComputedAssignableScopes (TF.Ref s' (DataBuiltinRoleDefinition s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAssignableScopes (TF.Ref s' (BuiltinRoleDefinitionData s)) (TF.Attr s P.Text) where
     computedAssignableScopes x = TF.compute (TF.refKey x) "assignable_scopes"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataBuiltinRoleDefinition s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (BuiltinRoleDefinitionData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataBuiltinRoleDefinition s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BuiltinRoleDefinitionData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataBuiltinRoleDefinition s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (BuiltinRoleDefinitionData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataBuiltinRoleDefinition s -> TF.Attr s P.Text)
+        (_name :: BuiltinRoleDefinitionData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (DataBuiltinRoleDefinition s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (BuiltinRoleDefinitionData s)) (TF.Attr s P.Text) where
     computedPermissions x = TF.compute (TF.refKey x) "permissions"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataBuiltinRoleDefinition s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (BuiltinRoleDefinitionData s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-dataBuiltinRoleDefinition :: TF.DataSource P.AzureRM (DataBuiltinRoleDefinition s)
-dataBuiltinRoleDefinition =
+builtinRoleDefinitionData :: TF.DataSource P.AzureRM (BuiltinRoleDefinitionData s)
+builtinRoleDefinitionData =
     TF.newDataSource "azurerm_builtin_role_definition" $
-        DataBuiltinRoleDefinition {
+        BuiltinRoleDefinitionData {
               _name = TF.Nil
             }
 
@@ -338,7 +338,7 @@ dataBuiltinRoleDefinition =
 Use this data source to access the configuration of the Azure Resource
 Manager provider.
 -}
-data DataClientConfig s = DataClientConfig {
+data ClientConfigData s = ClientConfigData {
       _client_id       :: !(TF.Attr s P.Text)
     {- ^ is set to the Azure Client ID (Application Object ID). -}
     , _subscription_id :: !(TF.Attr s P.Text)
@@ -347,47 +347,47 @@ data DataClientConfig s = DataClientConfig {
     {- ^ is set to the Azure Tenant ID. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataClientConfig s) where
-    toHCL DataClientConfig{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ClientConfigData s) where
+    toHCL ClientConfigData{..} = TF.inline $ catMaybes
         [ TF.assign "client_id" <$> TF.attribute _client_id
         , TF.assign "subscription_id" <$> TF.attribute _subscription_id
         , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasClientId (DataClientConfig s) (TF.Attr s P.Text) where
+instance P.HasClientId (ClientConfigData s) (TF.Attr s P.Text) where
     clientId =
-        lens (_client_id :: DataClientConfig s -> TF.Attr s P.Text)
-             (\s a -> s { _client_id = a } :: DataClientConfig s)
+        lens (_client_id :: ClientConfigData s -> TF.Attr s P.Text)
+             (\s a -> s { _client_id = a } :: ClientConfigData s)
 
-instance P.HasSubscriptionId (DataClientConfig s) (TF.Attr s P.Text) where
+instance P.HasSubscriptionId (ClientConfigData s) (TF.Attr s P.Text) where
     subscriptionId =
-        lens (_subscription_id :: DataClientConfig s -> TF.Attr s P.Text)
-             (\s a -> s { _subscription_id = a } :: DataClientConfig s)
+        lens (_subscription_id :: ClientConfigData s -> TF.Attr s P.Text)
+             (\s a -> s { _subscription_id = a } :: ClientConfigData s)
 
-instance P.HasTenantId (DataClientConfig s) (TF.Attr s P.Text) where
+instance P.HasTenantId (ClientConfigData s) (TF.Attr s P.Text) where
     tenantId =
-        lens (_tenant_id :: DataClientConfig s -> TF.Attr s P.Text)
-             (\s a -> s { _tenant_id = a } :: DataClientConfig s)
+        lens (_tenant_id :: ClientConfigData s -> TF.Attr s P.Text)
+             (\s a -> s { _tenant_id = a } :: ClientConfigData s)
 
-instance s ~ s' => P.HasComputedClientId (TF.Ref s' (DataClientConfig s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedClientId (TF.Ref s' (ClientConfigData s)) (TF.Attr s P.Text) where
     computedClientId =
-        (_client_id :: DataClientConfig s -> TF.Attr s P.Text)
+        (_client_id :: ClientConfigData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSubscriptionId (TF.Ref s' (DataClientConfig s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSubscriptionId (TF.Ref s' (ClientConfigData s)) (TF.Attr s P.Text) where
     computedSubscriptionId =
-        (_subscription_id :: DataClientConfig s -> TF.Attr s P.Text)
+        (_subscription_id :: ClientConfigData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (DataClientConfig s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (ClientConfigData s)) (TF.Attr s P.Text) where
     computedTenantId =
-        (_tenant_id :: DataClientConfig s -> TF.Attr s P.Text)
+        (_tenant_id :: ClientConfigData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataClientConfig :: TF.DataSource P.AzureRM (DataClientConfig s)
-dataClientConfig =
+clientConfigData :: TF.DataSource P.AzureRM (ClientConfigData s)
+clientConfigData =
     TF.newDataSource "azurerm_client_config" $
-        DataClientConfig {
+        ClientConfigData {
               _client_id = TF.Nil
             , _subscription_id = TF.Nil
             , _tenant_id = TF.Nil
@@ -397,58 +397,58 @@ dataClientConfig =
 
 Use this data source to obtain information about a DNS Zone.
 -}
-data DataDnsZone s = DataDnsZone {
+data DnsZoneData s = DnsZoneData {
       _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the DNS Zone. -}
     , _resource_group_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The Name of the Resource Group where the DNS Zone exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataDnsZone s) where
-    toHCL DataDnsZone{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DnsZoneData s) where
+    toHCL DnsZoneData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (DataDnsZone s) (TF.Attr s P.Text) where
+instance P.HasName (DnsZoneData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataDnsZone s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataDnsZone s)
+        lens (_name :: DnsZoneData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DnsZoneData s)
 
-instance P.HasResourceGroupName (DataDnsZone s) (TF.Attr s P.Text) where
+instance P.HasResourceGroupName (DnsZoneData s) (TF.Attr s P.Text) where
     resourceGroupName =
-        lens (_resource_group_name :: DataDnsZone s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_group_name = a } :: DataDnsZone s)
+        lens (_resource_group_name :: DnsZoneData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: DnsZoneData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataDnsZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedMaxNumberOfRecordSets (TF.Ref s' (DataDnsZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaxNumberOfRecordSets (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
     computedMaxNumberOfRecordSets x = TF.compute (TF.refKey x) "max_number_of_record_sets"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataDnsZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataDnsZone s -> TF.Attr s P.Text)
+        (_name :: DnsZoneData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DataDnsZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
     computedNameServers x = TF.compute (TF.refKey x) "name_servers"
 
-instance s ~ s' => P.HasComputedNumberOfRecordSets (TF.Ref s' (DataDnsZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNumberOfRecordSets (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
     computedNumberOfRecordSets x = TF.compute (TF.refKey x) "number_of_record_sets"
 
-instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DataDnsZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
-        (_resource_group_name :: DataDnsZone s -> TF.Attr s P.Text)
+        (_resource_group_name :: DnsZoneData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataDnsZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-dataDnsZone :: TF.DataSource P.AzureRM (DataDnsZone s)
-dataDnsZone =
+dnsZoneData :: TF.DataSource P.AzureRM (DnsZoneData s)
+dnsZoneData =
     TF.newDataSource "azurerm_dns_zone" $
-        DataDnsZone {
+        DnsZoneData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
@@ -457,64 +457,64 @@ dataDnsZone =
 
 Use this data source to obtain information about an EventHub Namespace.
 -}
-data DataEventhubNamespace s = DataEventhubNamespace {
+data EventhubNamespaceData s = EventhubNamespaceData {
       _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the EventHub Namespace. -}
     , _resource_group_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The Name of the Resource Group where the EventHub Namespace exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataEventhubNamespace s) where
-    toHCL DataEventhubNamespace{..} = TF.inline $ catMaybes
+instance TF.ToHCL (EventhubNamespaceData s) where
+    toHCL EventhubNamespaceData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (DataEventhubNamespace s) (TF.Attr s P.Text) where
+instance P.HasName (EventhubNamespaceData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataEventhubNamespace s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataEventhubNamespace s)
+        lens (_name :: EventhubNamespaceData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: EventhubNamespaceData s)
 
-instance P.HasResourceGroupName (DataEventhubNamespace s) (TF.Attr s P.Text) where
+instance P.HasResourceGroupName (EventhubNamespaceData s) (TF.Attr s P.Text) where
     resourceGroupName =
-        lens (_resource_group_name :: DataEventhubNamespace s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_group_name = a } :: DataEventhubNamespace s)
+        lens (_resource_group_name :: EventhubNamespaceData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: EventhubNamespaceData s)
 
-instance s ~ s' => P.HasComputedAutoInflateEnabled (TF.Ref s' (DataEventhubNamespace s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAutoInflateEnabled (TF.Ref s' (EventhubNamespaceData s)) (TF.Attr s P.Text) where
     computedAutoInflateEnabled x = TF.compute (TF.refKey x) "auto_inflate_enabled"
 
-instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (DataEventhubNamespace s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (EventhubNamespaceData s)) (TF.Attr s P.Text) where
     computedCapacity x = TF.compute (TF.refKey x) "capacity"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataEventhubNamespace s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EventhubNamespaceData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DataEventhubNamespace s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (EventhubNamespaceData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedMaximumThroughputUnits (TF.Ref s' (DataEventhubNamespace s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaximumThroughputUnits (TF.Ref s' (EventhubNamespaceData s)) (TF.Attr s P.Text) where
     computedMaximumThroughputUnits x = TF.compute (TF.refKey x) "maximum_throughput_units"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataEventhubNamespace s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (EventhubNamespaceData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataEventhubNamespace s -> TF.Attr s P.Text)
+        (_name :: EventhubNamespaceData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DataEventhubNamespace s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (EventhubNamespaceData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
-        (_resource_group_name :: DataEventhubNamespace s -> TF.Attr s P.Text)
+        (_resource_group_name :: EventhubNamespaceData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSku (TF.Ref s' (DataEventhubNamespace s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSku (TF.Ref s' (EventhubNamespaceData s)) (TF.Attr s P.Text) where
     computedSku x = TF.compute (TF.refKey x) "sku"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataEventhubNamespace s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (EventhubNamespaceData s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-dataEventhubNamespace :: TF.DataSource P.AzureRM (DataEventhubNamespace s)
-dataEventhubNamespace =
+eventhubNamespaceData :: TF.DataSource P.AzureRM (EventhubNamespaceData s)
+eventhubNamespaceData =
     TF.newDataSource "azurerm_eventhub_namespace" $
-        DataEventhubNamespace {
+        EventhubNamespaceData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
@@ -523,7 +523,7 @@ dataEventhubNamespace =
 
 Use this data source to access information about an Image.
 -}
-data DataImage s = DataImage {
+data ImageData s = ImageData {
       _name                :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the Image. -}
     , _name_regex          :: !(TF.Attr s P.Text)
@@ -534,68 +534,68 @@ data DataImage s = DataImage {
     {- ^ (Optional) By default when matching by regex, images are sorted by name in ascending order and the first match is chosen, to sort descending, set this flag. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataImage s) where
-    toHCL DataImage{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ImageData s) where
+    toHCL ImageData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_regex" <$> TF.attribute _name_regex
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         , TF.assign "sort_descending" <$> TF.attribute _sort_descending
         ]
 
-instance P.HasName (DataImage s) (TF.Attr s P.Text) where
+instance P.HasName (ImageData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataImage s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataImage s)
+        lens (_name :: ImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ImageData s)
 
-instance P.HasNameRegex (DataImage s) (TF.Attr s P.Text) where
+instance P.HasNameRegex (ImageData s) (TF.Attr s P.Text) where
     nameRegex =
-        lens (_name_regex :: DataImage s -> TF.Attr s P.Text)
-             (\s a -> s { _name_regex = a } :: DataImage s)
+        lens (_name_regex :: ImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _name_regex = a } :: ImageData s)
 
-instance P.HasResourceGroupName (DataImage s) (TF.Attr s P.Text) where
+instance P.HasResourceGroupName (ImageData s) (TF.Attr s P.Text) where
     resourceGroupName =
-        lens (_resource_group_name :: DataImage s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_group_name = a } :: DataImage s)
+        lens (_resource_group_name :: ImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: ImageData s)
 
-instance P.HasSortDescending (DataImage s) (TF.Attr s P.Text) where
+instance P.HasSortDescending (ImageData s) (TF.Attr s P.Text) where
     sortDescending =
-        lens (_sort_descending :: DataImage s -> TF.Attr s P.Text)
-             (\s a -> s { _sort_descending = a } :: DataImage s)
+        lens (_sort_descending :: ImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _sort_descending = a } :: ImageData s)
 
-instance s ~ s' => P.HasComputedDataDisk (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDataDisk (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedDataDisk x = TF.compute (TF.refKey x) "data_disk"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedNameRegex =
-        (_name_regex :: DataImage s -> TF.Attr s P.Text)
+        (_name_regex :: ImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOsDisk (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOsDisk (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedOsDisk x = TF.compute (TF.refKey x) "os_disk"
 
-instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
-        (_resource_group_name :: DataImage s -> TF.Attr s P.Text)
+        (_resource_group_name :: ImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSortDescending (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSortDescending (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedSortDescending =
-        (_sort_descending :: DataImage s -> TF.Attr s P.Text)
+        (_sort_descending :: ImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-dataImage :: TF.DataSource P.AzureRM (DataImage s)
-dataImage =
+imageData :: TF.DataSource P.AzureRM (ImageData s)
+imageData =
     TF.newDataSource "azurerm_image" $
-        DataImage {
+        ImageData {
               _name = TF.Nil
             , _name_regex = TF.Nil
             , _resource_group_name = TF.Nil
@@ -607,42 +607,42 @@ dataImage =
 Use this data source to access information about the permissions from the
 Management Key Vault Templates.
 -}
-data DataKeyVaultAccessPolicy s = DataKeyVaultAccessPolicy {
+data KeyVaultAccessPolicyData s = KeyVaultAccessPolicyData {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the Management Tempalte. Possible values are: @Key Management@ , @Secret Management@ , @Certificate Management@ , @Key & Secret Management@ , @Key & Certificate Management@ , @Secret & Certificate Management@ , @Key, Secret, & Certificate Management@ -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataKeyVaultAccessPolicy s) where
-    toHCL DataKeyVaultAccessPolicy{..} = TF.inline $ catMaybes
+instance TF.ToHCL (KeyVaultAccessPolicyData s) where
+    toHCL KeyVaultAccessPolicyData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (DataKeyVaultAccessPolicy s) (TF.Attr s P.Text) where
+instance P.HasName (KeyVaultAccessPolicyData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataKeyVaultAccessPolicy s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataKeyVaultAccessPolicy s)
+        lens (_name :: KeyVaultAccessPolicyData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: KeyVaultAccessPolicyData s)
 
-instance s ~ s' => P.HasComputedCertificatePermissions (TF.Ref s' (DataKeyVaultAccessPolicy s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCertificatePermissions (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s P.Text) where
     computedCertificatePermissions x = TF.compute (TF.refKey x) "certificate_permissions"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataKeyVaultAccessPolicy s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedKeyPermissions (TF.Ref s' (DataKeyVaultAccessPolicy s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKeyPermissions (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s P.Text) where
     computedKeyPermissions x = TF.compute (TF.refKey x) "key_permissions"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataKeyVaultAccessPolicy s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataKeyVaultAccessPolicy s -> TF.Attr s P.Text)
+        (_name :: KeyVaultAccessPolicyData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSecretPermissions (TF.Ref s' (DataKeyVaultAccessPolicy s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecretPermissions (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s P.Text) where
     computedSecretPermissions x = TF.compute (TF.refKey x) "secret_permissions"
 
-dataKeyVaultAccessPolicy :: TF.DataSource P.AzureRM (DataKeyVaultAccessPolicy s)
-dataKeyVaultAccessPolicy =
+keyVaultAccessPolicyData :: TF.DataSource P.AzureRM (KeyVaultAccessPolicyData s)
+keyVaultAccessPolicyData =
     TF.newDataSource "azurerm_key_vault_access_policy" $
-        DataKeyVaultAccessPolicy {
+        KeyVaultAccessPolicyData {
               _name = TF.Nil
             }
 
@@ -651,61 +651,61 @@ dataKeyVaultAccessPolicy =
 Use this data source to access the properties of an existing Azure Managed
 Disk.
 -}
-data DataManagedDisk s = DataManagedDisk {
+data ManagedDiskData s = ManagedDiskData {
       _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the Managed Disk. -}
     , _resource_group_name :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the resource group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataManagedDisk s) where
-    toHCL DataManagedDisk{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ManagedDiskData s) where
+    toHCL ManagedDiskData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (DataManagedDisk s) (TF.Attr s P.Text) where
+instance P.HasName (ManagedDiskData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataManagedDisk s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataManagedDisk s)
+        lens (_name :: ManagedDiskData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ManagedDiskData s)
 
-instance P.HasResourceGroupName (DataManagedDisk s) (TF.Attr s P.Text) where
+instance P.HasResourceGroupName (ManagedDiskData s) (TF.Attr s P.Text) where
     resourceGroupName =
-        lens (_resource_group_name :: DataManagedDisk s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_group_name = a } :: DataManagedDisk s)
+        lens (_resource_group_name :: ManagedDiskData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: ManagedDiskData s)
 
-instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (DataManagedDisk s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (ManagedDiskData s)) (TF.Attr s P.Text) where
     computedDiskSizeGb x = TF.compute (TF.refKey x) "disk_size_gb"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataManagedDisk s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ManagedDiskData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataManagedDisk s -> TF.Attr s P.Text)
+        (_name :: ManagedDiskData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOsType (TF.Ref s' (DataManagedDisk s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOsType (TF.Ref s' (ManagedDiskData s)) (TF.Attr s P.Text) where
     computedOsType x = TF.compute (TF.refKey x) "os_type"
 
-instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DataManagedDisk s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (ManagedDiskData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
-        (_resource_group_name :: DataManagedDisk s -> TF.Attr s P.Text)
+        (_resource_group_name :: ManagedDiskData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourceResourceId (TF.Ref s' (DataManagedDisk s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceResourceId (TF.Ref s' (ManagedDiskData s)) (TF.Attr s P.Text) where
     computedSourceResourceId x = TF.compute (TF.refKey x) "source_resource_id"
 
-instance s ~ s' => P.HasComputedSourceUri (TF.Ref s' (DataManagedDisk s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceUri (TF.Ref s' (ManagedDiskData s)) (TF.Attr s P.Text) where
     computedSourceUri x = TF.compute (TF.refKey x) "source_uri"
 
-instance s ~ s' => P.HasComputedStorageAccountType (TF.Ref s' (DataManagedDisk s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStorageAccountType (TF.Ref s' (ManagedDiskData s)) (TF.Attr s P.Text) where
     computedStorageAccountType x = TF.compute (TF.refKey x) "storage_account_type"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataManagedDisk s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ManagedDiskData s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-dataManagedDisk :: TF.DataSource P.AzureRM (DataManagedDisk s)
-dataManagedDisk =
+managedDiskData :: TF.DataSource P.AzureRM (ManagedDiskData s)
+managedDiskData =
     TF.newDataSource "azurerm_managed_disk" $
-        DataManagedDisk {
+        ManagedDiskData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
@@ -714,55 +714,55 @@ dataManagedDisk =
 
 Use this data source to access the properties of a Network Security Group.
 -}
-data DataNetworkSecurityGroup s = DataNetworkSecurityGroup {
+data NetworkSecurityGroupData s = NetworkSecurityGroupData {
       _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the Name of the Network Security Group. -}
     , _resource_group_name :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the Name of the Resource Group within which the Network Security Group exists -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataNetworkSecurityGroup s) where
-    toHCL DataNetworkSecurityGroup{..} = TF.inline $ catMaybes
+instance TF.ToHCL (NetworkSecurityGroupData s) where
+    toHCL NetworkSecurityGroupData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (DataNetworkSecurityGroup s) (TF.Attr s P.Text) where
+instance P.HasName (NetworkSecurityGroupData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataNetworkSecurityGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataNetworkSecurityGroup s)
+        lens (_name :: NetworkSecurityGroupData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: NetworkSecurityGroupData s)
 
-instance P.HasResourceGroupName (DataNetworkSecurityGroup s) (TF.Attr s P.Text) where
+instance P.HasResourceGroupName (NetworkSecurityGroupData s) (TF.Attr s P.Text) where
     resourceGroupName =
-        lens (_resource_group_name :: DataNetworkSecurityGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_group_name = a } :: DataNetworkSecurityGroup s)
+        lens (_resource_group_name :: NetworkSecurityGroupData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: NetworkSecurityGroupData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataNetworkSecurityGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkSecurityGroupData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DataNetworkSecurityGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (NetworkSecurityGroupData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataNetworkSecurityGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkSecurityGroupData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataNetworkSecurityGroup s -> TF.Attr s P.Text)
+        (_name :: NetworkSecurityGroupData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DataNetworkSecurityGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (NetworkSecurityGroupData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
-        (_resource_group_name :: DataNetworkSecurityGroup s -> TF.Attr s P.Text)
+        (_resource_group_name :: NetworkSecurityGroupData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSecurityRule (TF.Ref s' (DataNetworkSecurityGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecurityRule (TF.Ref s' (NetworkSecurityGroupData s)) (TF.Attr s P.Text) where
     computedSecurityRule x = TF.compute (TF.refKey x) "security_rule"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataNetworkSecurityGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkSecurityGroupData s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-dataNetworkSecurityGroup :: TF.DataSource P.AzureRM (DataNetworkSecurityGroup s)
-dataNetworkSecurityGroup =
+networkSecurityGroupData :: TF.DataSource P.AzureRM (NetworkSecurityGroupData s)
+networkSecurityGroupData =
     TF.newDataSource "azurerm_network_security_group" $
-        DataNetworkSecurityGroup {
+        NetworkSecurityGroupData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
@@ -771,7 +771,7 @@ dataNetworkSecurityGroup =
 
 Use this data source to access the properties of an Azure Platform Image.
 -}
-data DataPlatformImage s = DataPlatformImage {
+data PlatformImageData s = PlatformImageData {
       _location  :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the Location to pull information about this Platform Image from. -}
     , _offer     :: !(TF.Attr s P.Text)
@@ -782,64 +782,64 @@ data DataPlatformImage s = DataPlatformImage {
     {- ^ (Required) Specifies the SKU of the Platform Image. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataPlatformImage s) where
-    toHCL DataPlatformImage{..} = TF.inline $ catMaybes
+instance TF.ToHCL (PlatformImageData s) where
+    toHCL PlatformImageData{..} = TF.inline $ catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "offer" <$> TF.attribute _offer
         , TF.assign "publisher" <$> TF.attribute _publisher
         , TF.assign "sku" <$> TF.attribute _sku
         ]
 
-instance P.HasLocation (DataPlatformImage s) (TF.Attr s P.Text) where
+instance P.HasLocation (PlatformImageData s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: DataPlatformImage s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: DataPlatformImage s)
+        lens (_location :: PlatformImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _location = a } :: PlatformImageData s)
 
-instance P.HasOffer (DataPlatformImage s) (TF.Attr s P.Text) where
+instance P.HasOffer (PlatformImageData s) (TF.Attr s P.Text) where
     offer =
-        lens (_offer :: DataPlatformImage s -> TF.Attr s P.Text)
-             (\s a -> s { _offer = a } :: DataPlatformImage s)
+        lens (_offer :: PlatformImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _offer = a } :: PlatformImageData s)
 
-instance P.HasPublisher (DataPlatformImage s) (TF.Attr s P.Text) where
+instance P.HasPublisher (PlatformImageData s) (TF.Attr s P.Text) where
     publisher =
-        lens (_publisher :: DataPlatformImage s -> TF.Attr s P.Text)
-             (\s a -> s { _publisher = a } :: DataPlatformImage s)
+        lens (_publisher :: PlatformImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _publisher = a } :: PlatformImageData s)
 
-instance P.HasSku (DataPlatformImage s) (TF.Attr s P.Text) where
+instance P.HasSku (PlatformImageData s) (TF.Attr s P.Text) where
     sku =
-        lens (_sku :: DataPlatformImage s -> TF.Attr s P.Text)
-             (\s a -> s { _sku = a } :: DataPlatformImage s)
+        lens (_sku :: PlatformImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _sku = a } :: PlatformImageData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataPlatformImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PlatformImageData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DataPlatformImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (PlatformImageData s)) (TF.Attr s P.Text) where
     computedLocation =
-        (_location :: DataPlatformImage s -> TF.Attr s P.Text)
+        (_location :: PlatformImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOffer (TF.Ref s' (DataPlatformImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOffer (TF.Ref s' (PlatformImageData s)) (TF.Attr s P.Text) where
     computedOffer =
-        (_offer :: DataPlatformImage s -> TF.Attr s P.Text)
+        (_offer :: PlatformImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPublisher (TF.Ref s' (DataPlatformImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublisher (TF.Ref s' (PlatformImageData s)) (TF.Attr s P.Text) where
     computedPublisher =
-        (_publisher :: DataPlatformImage s -> TF.Attr s P.Text)
+        (_publisher :: PlatformImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSku (TF.Ref s' (DataPlatformImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSku (TF.Ref s' (PlatformImageData s)) (TF.Attr s P.Text) where
     computedSku =
-        (_sku :: DataPlatformImage s -> TF.Attr s P.Text)
+        (_sku :: PlatformImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DataPlatformImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (PlatformImageData s)) (TF.Attr s P.Text) where
     computedVersion x = TF.compute (TF.refKey x) "version"
 
-dataPlatformImage :: TF.DataSource P.AzureRM (DataPlatformImage s)
-dataPlatformImage =
+platformImageData :: TF.DataSource P.AzureRM (PlatformImageData s)
+platformImageData =
     TF.newDataSource "azurerm_platform_image" $
-        DataPlatformImage {
+        PlatformImageData {
               _location = TF.Nil
             , _offer = TF.Nil
             , _publisher = TF.Nil
@@ -851,58 +851,58 @@ dataPlatformImage =
 Use this data source to access the properties of an existing Azure Public IP
 Address.
 -}
-data DataPublicIp s = DataPublicIp {
+data PublicIpData s = PublicIpData {
       _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the public IP address. -}
     , _resource_group_name :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the resource group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataPublicIp s) where
-    toHCL DataPublicIp{..} = TF.inline $ catMaybes
+instance TF.ToHCL (PublicIpData s) where
+    toHCL PublicIpData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (DataPublicIp s) (TF.Attr s P.Text) where
+instance P.HasName (PublicIpData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataPublicIp s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataPublicIp s)
+        lens (_name :: PublicIpData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: PublicIpData s)
 
-instance P.HasResourceGroupName (DataPublicIp s) (TF.Attr s P.Text) where
+instance P.HasResourceGroupName (PublicIpData s) (TF.Attr s P.Text) where
     resourceGroupName =
-        lens (_resource_group_name :: DataPublicIp s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_group_name = a } :: DataPublicIp s)
+        lens (_resource_group_name :: PublicIpData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: PublicIpData s)
 
-instance s ~ s' => P.HasComputedDomainNameLabel (TF.Ref s' (DataPublicIp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDomainNameLabel (TF.Ref s' (PublicIpData s)) (TF.Attr s P.Text) where
     computedDomainNameLabel x = TF.compute (TF.refKey x) "domain_name_label"
 
-instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (DataPublicIp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (PublicIpData s)) (TF.Attr s P.Text) where
     computedFqdn x = TF.compute (TF.refKey x) "fqdn"
 
-instance s ~ s' => P.HasComputedIdleTimeoutInMinutes (TF.Ref s' (DataPublicIp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIdleTimeoutInMinutes (TF.Ref s' (PublicIpData s)) (TF.Attr s P.Text) where
     computedIdleTimeoutInMinutes x = TF.compute (TF.refKey x) "idle_timeout_in_minutes"
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (DataPublicIp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (PublicIpData s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataPublicIp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (PublicIpData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataPublicIp s -> TF.Attr s P.Text)
+        (_name :: PublicIpData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DataPublicIp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (PublicIpData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
-        (_resource_group_name :: DataPublicIp s -> TF.Attr s P.Text)
+        (_resource_group_name :: PublicIpData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataPublicIp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (PublicIpData s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-dataPublicIp :: TF.DataSource P.AzureRM (DataPublicIp s)
-dataPublicIp =
+publicIpData :: TF.DataSource P.AzureRM (PublicIpData s)
+publicIpData =
     TF.newDataSource "azurerm_public_ip" $
-        DataPublicIp {
+        PublicIpData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
@@ -911,36 +911,36 @@ dataPublicIp =
 
 Use this data source to access the properties of an Azure resource group.
 -}
-data DataResourceGroup s = DataResourceGroup {
+data ResourceGroupData s = ResourceGroupData {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the resource group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataResourceGroup s) where
-    toHCL DataResourceGroup{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ResourceGroupData s) where
+    toHCL ResourceGroupData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (DataResourceGroup s) (TF.Attr s P.Text) where
+instance P.HasName (ResourceGroupData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataResourceGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataResourceGroup s)
+        lens (_name :: ResourceGroupData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourceGroupData s)
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DataResourceGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ResourceGroupData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataResourceGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceGroupData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataResourceGroup s -> TF.Attr s P.Text)
+        (_name :: ResourceGroupData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataResourceGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceGroupData s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-dataResourceGroup :: TF.DataSource P.AzureRM (DataResourceGroup s)
-dataResourceGroup =
+resourceGroupData :: TF.DataSource P.AzureRM (ResourceGroupData s)
+resourceGroupData =
     TF.newDataSource "azurerm_resource_group" $
-        DataResourceGroup {
+        ResourceGroupData {
               _name = TF.Nil
             }
 
@@ -950,58 +950,58 @@ Use this data source to access the properties of a custom Role Definition.
 To access information about a built-in Role Definition,
 <builtin_role_definition.html> instead.
 -}
-data DataRoleDefinition s = DataRoleDefinition {
+data RoleDefinitionData s = RoleDefinitionData {
       _role_definition_id :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the ID of the Role Definition as a UUID/GUID. -}
     , _scope              :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the Scope at which the Custom Role Definition exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataRoleDefinition s) where
-    toHCL DataRoleDefinition{..} = TF.inline $ catMaybes
+instance TF.ToHCL (RoleDefinitionData s) where
+    toHCL RoleDefinitionData{..} = TF.inline $ catMaybes
         [ TF.assign "role_definition_id" <$> TF.attribute _role_definition_id
         , TF.assign "scope" <$> TF.attribute _scope
         ]
 
-instance P.HasRoleDefinitionId (DataRoleDefinition s) (TF.Attr s P.Text) where
+instance P.HasRoleDefinitionId (RoleDefinitionData s) (TF.Attr s P.Text) where
     roleDefinitionId =
-        lens (_role_definition_id :: DataRoleDefinition s -> TF.Attr s P.Text)
-             (\s a -> s { _role_definition_id = a } :: DataRoleDefinition s)
+        lens (_role_definition_id :: RoleDefinitionData s -> TF.Attr s P.Text)
+             (\s a -> s { _role_definition_id = a } :: RoleDefinitionData s)
 
-instance P.HasScope (DataRoleDefinition s) (TF.Attr s P.Text) where
+instance P.HasScope (RoleDefinitionData s) (TF.Attr s P.Text) where
     scope =
-        lens (_scope :: DataRoleDefinition s -> TF.Attr s P.Text)
-             (\s a -> s { _scope = a } :: DataRoleDefinition s)
+        lens (_scope :: RoleDefinitionData s -> TF.Attr s P.Text)
+             (\s a -> s { _scope = a } :: RoleDefinitionData s)
 
-instance s ~ s' => P.HasComputedAssignableScopes (TF.Ref s' (DataRoleDefinition s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAssignableScopes (TF.Ref s' (RoleDefinitionData s)) (TF.Attr s P.Text) where
     computedAssignableScopes x = TF.compute (TF.refKey x) "assignable_scopes"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataRoleDefinition s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RoleDefinitionData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataRoleDefinition s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RoleDefinitionData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (DataRoleDefinition s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (RoleDefinitionData s)) (TF.Attr s P.Text) where
     computedPermissions x = TF.compute (TF.refKey x) "permissions"
 
-instance s ~ s' => P.HasComputedRoleDefinitionId (TF.Ref s' (DataRoleDefinition s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRoleDefinitionId (TF.Ref s' (RoleDefinitionData s)) (TF.Attr s P.Text) where
     computedRoleDefinitionId =
-        (_role_definition_id :: DataRoleDefinition s -> TF.Attr s P.Text)
+        (_role_definition_id :: RoleDefinitionData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedScope (TF.Ref s' (DataRoleDefinition s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScope (TF.Ref s' (RoleDefinitionData s)) (TF.Attr s P.Text) where
     computedScope =
-        (_scope :: DataRoleDefinition s -> TF.Attr s P.Text)
+        (_scope :: RoleDefinitionData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataRoleDefinition s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (RoleDefinitionData s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-dataRoleDefinition :: TF.DataSource P.AzureRM (DataRoleDefinition s)
-dataRoleDefinition =
+roleDefinitionData :: TF.DataSource P.AzureRM (RoleDefinitionData s)
+roleDefinitionData =
     TF.newDataSource "azurerm_role_definition" $
-        DataRoleDefinition {
+        RoleDefinitionData {
               _role_definition_id = TF.Nil
             , _scope = TF.Nil
             }
@@ -1010,61 +1010,61 @@ dataRoleDefinition =
 
 Use this data source to access the properties of a Snapshot of an Disk.
 -}
-data DataSnapshot s = DataSnapshot {
+data SnapshotData s = SnapshotData {
       _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the Snapshot. -}
     , _resource_group_name :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the resource group the Snapshot is located in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataSnapshot s) where
-    toHCL DataSnapshot{..} = TF.inline $ catMaybes
+instance TF.ToHCL (SnapshotData s) where
+    toHCL SnapshotData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (DataSnapshot s) (TF.Attr s P.Text) where
+instance P.HasName (SnapshotData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataSnapshot s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataSnapshot s)
+        lens (_name :: SnapshotData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SnapshotData s)
 
-instance P.HasResourceGroupName (DataSnapshot s) (TF.Attr s P.Text) where
+instance P.HasResourceGroupName (SnapshotData s) (TF.Attr s P.Text) where
     resourceGroupName =
-        lens (_resource_group_name :: DataSnapshot s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_group_name = a } :: DataSnapshot s)
+        lens (_resource_group_name :: SnapshotData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: SnapshotData s)
 
-instance s ~ s' => P.HasComputedCreateOption (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCreateOption (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
     computedCreateOption x = TF.compute (TF.refKey x) "create_option"
 
-instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
     computedDiskSizeGb x = TF.compute (TF.refKey x) "disk_size_gb"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataSnapshot s -> TF.Attr s P.Text)
+        (_name :: SnapshotData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
-        (_resource_group_name :: DataSnapshot s -> TF.Attr s P.Text)
+        (_resource_group_name :: SnapshotData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourceResourceId (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceResourceId (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
     computedSourceResourceId x = TF.compute (TF.refKey x) "source_resource_id"
 
-instance s ~ s' => P.HasComputedSourceUri (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceUri (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
     computedSourceUri x = TF.compute (TF.refKey x) "source_uri"
 
-instance s ~ s' => P.HasComputedStorageAccountId (TF.Ref s' (DataSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStorageAccountId (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
     computedStorageAccountId x = TF.compute (TF.refKey x) "storage_account_id"
 
-dataSnapshot :: TF.DataSource P.AzureRM (DataSnapshot s)
-dataSnapshot =
+snapshotData :: TF.DataSource P.AzureRM (SnapshotData s)
+snapshotData =
     TF.newDataSource "azurerm_snapshot" $
-        DataSnapshot {
+        SnapshotData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
@@ -1073,122 +1073,122 @@ dataSnapshot =
 
 Gets information about the specified Storage Account.
 -}
-data DataStorageAccount s = DataStorageAccount {
+data StorageAccountData s = StorageAccountData {
       _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the Storage Account -}
     , _resource_group_name :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the resource group the Storage Account is located in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataStorageAccount s) where
-    toHCL DataStorageAccount{..} = TF.inline $ catMaybes
+instance TF.ToHCL (StorageAccountData s) where
+    toHCL StorageAccountData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (DataStorageAccount s) (TF.Attr s P.Text) where
+instance P.HasName (StorageAccountData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataStorageAccount s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataStorageAccount s)
+        lens (_name :: StorageAccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: StorageAccountData s)
 
-instance P.HasResourceGroupName (DataStorageAccount s) (TF.Attr s P.Text) where
+instance P.HasResourceGroupName (StorageAccountData s) (TF.Attr s P.Text) where
     resourceGroupName =
-        lens (_resource_group_name :: DataStorageAccount s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_group_name = a } :: DataStorageAccount s)
+        lens (_resource_group_name :: StorageAccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: StorageAccountData s)
 
-instance s ~ s' => P.HasComputedAccessTier (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccessTier (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedAccessTier x = TF.compute (TF.refKey x) "access_tier"
 
-instance s ~ s' => P.HasComputedAccountEncryptionSource (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccountEncryptionSource (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedAccountEncryptionSource x = TF.compute (TF.refKey x) "account_encryption_source"
 
-instance s ~ s' => P.HasComputedAccountKind (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccountKind (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedAccountKind x = TF.compute (TF.refKey x) "account_kind"
 
-instance s ~ s' => P.HasComputedAccountReplicationType (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccountReplicationType (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedAccountReplicationType x = TF.compute (TF.refKey x) "account_replication_type"
 
-instance s ~ s' => P.HasComputedAccountTier (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccountTier (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedAccountTier x = TF.compute (TF.refKey x) "account_tier"
 
-instance s ~ s' => P.HasComputedCustomDomain (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCustomDomain (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedCustomDomain x = TF.compute (TF.refKey x) "custom_domain"
 
-instance s ~ s' => P.HasComputedEnableBlobEncryption (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnableBlobEncryption (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedEnableBlobEncryption x = TF.compute (TF.refKey x) "enable_blob_encryption"
 
-instance s ~ s' => P.HasComputedEnableFileEncryption (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnableFileEncryption (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedEnableFileEncryption x = TF.compute (TF.refKey x) "enable_file_encryption"
 
-instance s ~ s' => P.HasComputedEnableHttpsTrafficOnly (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnableHttpsTrafficOnly (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedEnableHttpsTrafficOnly x = TF.compute (TF.refKey x) "enable_https_traffic_only"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPrimaryAccessKey (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimaryAccessKey (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedPrimaryAccessKey x = TF.compute (TF.refKey x) "primary_access_key"
 
-instance s ~ s' => P.HasComputedPrimaryBlobConnectionString (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimaryBlobConnectionString (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedPrimaryBlobConnectionString x = TF.compute (TF.refKey x) "primary_blob_connection_string"
 
-instance s ~ s' => P.HasComputedPrimaryBlobEndpoint (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimaryBlobEndpoint (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedPrimaryBlobEndpoint x = TF.compute (TF.refKey x) "primary_blob_endpoint"
 
-instance s ~ s' => P.HasComputedPrimaryConnectionString (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimaryConnectionString (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedPrimaryConnectionString x = TF.compute (TF.refKey x) "primary_connection_string"
 
-instance s ~ s' => P.HasComputedPrimaryFileEndpoint (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimaryFileEndpoint (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedPrimaryFileEndpoint x = TF.compute (TF.refKey x) "primary_file_endpoint"
 
-instance s ~ s' => P.HasComputedPrimaryLocation (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimaryLocation (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedPrimaryLocation x = TF.compute (TF.refKey x) "primary_location"
 
-instance s ~ s' => P.HasComputedPrimaryQueueEndpoint (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimaryQueueEndpoint (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedPrimaryQueueEndpoint x = TF.compute (TF.refKey x) "primary_queue_endpoint"
 
-instance s ~ s' => P.HasComputedPrimaryTableEndpoint (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimaryTableEndpoint (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedPrimaryTableEndpoint x = TF.compute (TF.refKey x) "primary_table_endpoint"
 
-instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
-        (_resource_group_name :: DataStorageAccount s -> TF.Attr s P.Text)
+        (_resource_group_name :: StorageAccountData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSecondaryAccessKey (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecondaryAccessKey (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedSecondaryAccessKey x = TF.compute (TF.refKey x) "secondary_access_key"
 
-instance s ~ s' => P.HasComputedSecondaryBlobConnectionString (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecondaryBlobConnectionString (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedSecondaryBlobConnectionString x = TF.compute (TF.refKey x) "secondary_blob_connection_string"
 
-instance s ~ s' => P.HasComputedSecondaryBlobEndpoint (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecondaryBlobEndpoint (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedSecondaryBlobEndpoint x = TF.compute (TF.refKey x) "secondary_blob_endpoint"
 
-instance s ~ s' => P.HasComputedSecondaryConnectionString (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecondaryConnectionString (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedSecondaryConnectionString x = TF.compute (TF.refKey x) "secondary_connection_string"
 
-instance s ~ s' => P.HasComputedSecondaryLocation (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecondaryLocation (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedSecondaryLocation x = TF.compute (TF.refKey x) "secondary_location"
 
-instance s ~ s' => P.HasComputedSecondaryQueueEndpoint (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecondaryQueueEndpoint (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedSecondaryQueueEndpoint x = TF.compute (TF.refKey x) "secondary_queue_endpoint"
 
-instance s ~ s' => P.HasComputedSecondaryTableEndpoint (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecondaryTableEndpoint (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedSecondaryTableEndpoint x = TF.compute (TF.refKey x) "secondary_table_endpoint"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataStorageAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-dataStorageAccount :: TF.DataSource P.AzureRM (DataStorageAccount s)
-dataStorageAccount =
+storageAccountData :: TF.DataSource P.AzureRM (StorageAccountData s)
+storageAccountData =
     TF.newDataSource "azurerm_storage_account" $
-        DataStorageAccount {
+        StorageAccountData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
@@ -1198,7 +1198,7 @@ dataStorageAccount =
 Use this data source to access the properties of an Azure Subnet located
 within a Virtual Network.
 -}
-data DataSubnet s = DataSubnet {
+data SubnetData s = SubnetData {
       _name                 :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the Subnet. -}
     , _resource_group_name  :: !(TF.Attr s P.Text)
@@ -1207,62 +1207,62 @@ data DataSubnet s = DataSubnet {
     {- ^ (Required) Specifies the name of the Virtual Network this Subnet is located within. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataSubnet s) where
-    toHCL DataSubnet{..} = TF.inline $ catMaybes
+instance TF.ToHCL (SubnetData s) where
+    toHCL SubnetData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         , TF.assign "virtual_network_name" <$> TF.attribute _virtual_network_name
         ]
 
-instance P.HasName (DataSubnet s) (TF.Attr s P.Text) where
+instance P.HasName (SubnetData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataSubnet s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataSubnet s)
+        lens (_name :: SubnetData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SubnetData s)
 
-instance P.HasResourceGroupName (DataSubnet s) (TF.Attr s P.Text) where
+instance P.HasResourceGroupName (SubnetData s) (TF.Attr s P.Text) where
     resourceGroupName =
-        lens (_resource_group_name :: DataSubnet s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_group_name = a } :: DataSubnet s)
+        lens (_resource_group_name :: SubnetData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: SubnetData s)
 
-instance P.HasVirtualNetworkName (DataSubnet s) (TF.Attr s P.Text) where
+instance P.HasVirtualNetworkName (SubnetData s) (TF.Attr s P.Text) where
     virtualNetworkName =
-        lens (_virtual_network_name :: DataSubnet s -> TF.Attr s P.Text)
-             (\s a -> s { _virtual_network_name = a } :: DataSubnet s)
+        lens (_virtual_network_name :: SubnetData s -> TF.Attr s P.Text)
+             (\s a -> s { _virtual_network_name = a } :: SubnetData s)
 
-instance s ~ s' => P.HasComputedAddressPrefix (TF.Ref s' (DataSubnet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddressPrefix (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
     computedAddressPrefix x = TF.compute (TF.refKey x) "address_prefix"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataSubnet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedIpConfigurations (TF.Ref s' (DataSubnet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpConfigurations (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
     computedIpConfigurations x = TF.compute (TF.refKey x) "ip_configurations"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataSubnet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataSubnet s -> TF.Attr s P.Text)
+        (_name :: SubnetData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetworkSecurityGroupId (TF.Ref s' (DataSubnet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNetworkSecurityGroupId (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
     computedNetworkSecurityGroupId x = TF.compute (TF.refKey x) "network_security_group_id"
 
-instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DataSubnet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
-        (_resource_group_name :: DataSubnet s -> TF.Attr s P.Text)
+        (_resource_group_name :: SubnetData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (DataSubnet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
     computedRouteTableId x = TF.compute (TF.refKey x) "route_table_id"
 
-instance s ~ s' => P.HasComputedVirtualNetworkName (TF.Ref s' (DataSubnet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVirtualNetworkName (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
     computedVirtualNetworkName =
-        (_virtual_network_name :: DataSubnet s -> TF.Attr s P.Text)
+        (_virtual_network_name :: SubnetData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataSubnet :: TF.DataSource P.AzureRM (DataSubnet s)
-dataSubnet =
+subnetData :: TF.DataSource P.AzureRM (SubnetData s)
+subnetData =
     TF.newDataSource "azurerm_subnet" $
-        DataSubnet {
+        SubnetData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             , _virtual_network_name = TF.Nil
@@ -1272,45 +1272,45 @@ dataSubnet =
 
 Use this data source to access the properties of an Azure subscription.
 -}
-data DataSubscription s = DataSubscription {
+data SubscriptionData s = SubscriptionData {
       _subscription_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies the ID of the subscription. If this argument is omitted, the subscription ID of the current Azure Resource Manager provider is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataSubscription s) where
-    toHCL DataSubscription{..} = TF.inline $ catMaybes
+instance TF.ToHCL (SubscriptionData s) where
+    toHCL SubscriptionData{..} = TF.inline $ catMaybes
         [ TF.assign "subscription_id" <$> TF.attribute _subscription_id
         ]
 
-instance P.HasSubscriptionId (DataSubscription s) (TF.Attr s P.Text) where
+instance P.HasSubscriptionId (SubscriptionData s) (TF.Attr s P.Text) where
     subscriptionId =
-        lens (_subscription_id :: DataSubscription s -> TF.Attr s P.Text)
-             (\s a -> s { _subscription_id = a } :: DataSubscription s)
+        lens (_subscription_id :: SubscriptionData s -> TF.Attr s P.Text)
+             (\s a -> s { _subscription_id = a } :: SubscriptionData s)
 
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (DataSubscription s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (SubscriptionData s)) (TF.Attr s P.Text) where
     computedDisplayName x = TF.compute (TF.refKey x) "display_name"
 
-instance s ~ s' => P.HasComputedLocationPlacementId (TF.Ref s' (DataSubscription s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocationPlacementId (TF.Ref s' (SubscriptionData s)) (TF.Attr s P.Text) where
     computedLocationPlacementId x = TF.compute (TF.refKey x) "location_placement_id"
 
-instance s ~ s' => P.HasComputedQuotaId (TF.Ref s' (DataSubscription s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedQuotaId (TF.Ref s' (SubscriptionData s)) (TF.Attr s P.Text) where
     computedQuotaId x = TF.compute (TF.refKey x) "quota_id"
 
-instance s ~ s' => P.HasComputedSpendingLimit (TF.Ref s' (DataSubscription s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSpendingLimit (TF.Ref s' (SubscriptionData s)) (TF.Attr s P.Text) where
     computedSpendingLimit x = TF.compute (TF.refKey x) "spending_limit"
 
-instance s ~ s' => P.HasComputedState (TF.Ref s' (DataSubscription s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedState (TF.Ref s' (SubscriptionData s)) (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
 
-instance s ~ s' => P.HasComputedSubscriptionId (TF.Ref s' (DataSubscription s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSubscriptionId (TF.Ref s' (SubscriptionData s)) (TF.Attr s P.Text) where
     computedSubscriptionId =
-        (_subscription_id :: DataSubscription s -> TF.Attr s P.Text)
+        (_subscription_id :: SubscriptionData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataSubscription :: TF.DataSource P.AzureRM (DataSubscription s)
-dataSubscription =
+subscriptionData :: TF.DataSource P.AzureRM (SubscriptionData s)
+subscriptionData =
     TF.newDataSource "azurerm_subscription" $
-        DataSubscription {
+        SubscriptionData {
               _subscription_id = TF.Nil
             }
 
@@ -1318,58 +1318,58 @@ dataSubscription =
 
 Use this data source to access the properties of an Azure Virtual Network.
 -}
-data DataVirtualNetwork s = DataVirtualNetwork {
+data VirtualNetworkData s = VirtualNetworkData {
       _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the Virtual Network. -}
     , _resource_group_name :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the resource group the Virtual Network is located in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataVirtualNetwork s) where
-    toHCL DataVirtualNetwork{..} = TF.inline $ catMaybes
+instance TF.ToHCL (VirtualNetworkData s) where
+    toHCL VirtualNetworkData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (DataVirtualNetwork s) (TF.Attr s P.Text) where
+instance P.HasName (VirtualNetworkData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataVirtualNetwork s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataVirtualNetwork s)
+        lens (_name :: VirtualNetworkData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: VirtualNetworkData s)
 
-instance P.HasResourceGroupName (DataVirtualNetwork s) (TF.Attr s P.Text) where
+instance P.HasResourceGroupName (VirtualNetworkData s) (TF.Attr s P.Text) where
     resourceGroupName =
-        lens (_resource_group_name :: DataVirtualNetwork s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_group_name = a } :: DataVirtualNetwork s)
+        lens (_resource_group_name :: VirtualNetworkData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: VirtualNetworkData s)
 
-instance s ~ s' => P.HasComputedAddressSpaces (TF.Ref s' (DataVirtualNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddressSpaces (TF.Ref s' (VirtualNetworkData s)) (TF.Attr s P.Text) where
     computedAddressSpaces x = TF.compute (TF.refKey x) "address_spaces"
 
-instance s ~ s' => P.HasComputedDnsServers (TF.Ref s' (DataVirtualNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDnsServers (TF.Ref s' (VirtualNetworkData s)) (TF.Attr s P.Text) where
     computedDnsServers x = TF.compute (TF.refKey x) "dns_servers"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataVirtualNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataVirtualNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VirtualNetworkData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataVirtualNetwork s -> TF.Attr s P.Text)
+        (_name :: VirtualNetworkData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DataVirtualNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (VirtualNetworkData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
-        (_resource_group_name :: DataVirtualNetwork s -> TF.Attr s P.Text)
+        (_resource_group_name :: VirtualNetworkData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (DataVirtualNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (VirtualNetworkData s)) (TF.Attr s P.Text) where
     computedSubnets x = TF.compute (TF.refKey x) "subnets"
 
-instance s ~ s' => P.HasComputedVnetPeerings (TF.Ref s' (DataVirtualNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVnetPeerings (TF.Ref s' (VirtualNetworkData s)) (TF.Attr s P.Text) where
     computedVnetPeerings x = TF.compute (TF.refKey x) "vnet_peerings"
 
-dataVirtualNetwork :: TF.DataSource P.AzureRM (DataVirtualNetwork s)
-dataVirtualNetwork =
+virtualNetworkData :: TF.DataSource P.AzureRM (VirtualNetworkData s)
+virtualNetworkData =
     TF.newDataSource "azurerm_virtual_network" $
-        DataVirtualNetwork {
+        VirtualNetworkData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
@@ -1379,76 +1379,76 @@ dataVirtualNetwork =
 Use this data source to access the properties of an Azure Virtual Network
 Gateway.
 -}
-data DataVirtualNetworkGateway s = DataVirtualNetworkGateway {
+data VirtualNetworkGatewayData s = VirtualNetworkGatewayData {
       _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the Virtual Network Gateway. -}
     , _resource_group_name :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the resource group the Virtual Network Gateway is located in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataVirtualNetworkGateway s) where
-    toHCL DataVirtualNetworkGateway{..} = TF.inline $ catMaybes
+instance TF.ToHCL (VirtualNetworkGatewayData s) where
+    toHCL VirtualNetworkGatewayData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (DataVirtualNetworkGateway s) (TF.Attr s P.Text) where
+instance P.HasName (VirtualNetworkGatewayData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataVirtualNetworkGateway s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataVirtualNetworkGateway s)
+        lens (_name :: VirtualNetworkGatewayData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: VirtualNetworkGatewayData s)
 
-instance P.HasResourceGroupName (DataVirtualNetworkGateway s) (TF.Attr s P.Text) where
+instance P.HasResourceGroupName (VirtualNetworkGatewayData s) (TF.Attr s P.Text) where
     resourceGroupName =
-        lens (_resource_group_name :: DataVirtualNetworkGateway s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_group_name = a } :: DataVirtualNetworkGateway s)
+        lens (_resource_group_name :: VirtualNetworkGatewayData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: VirtualNetworkGatewayData s)
 
-instance s ~ s' => P.HasComputedActiveActive (TF.Ref s' (DataVirtualNetworkGateway s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedActiveActive (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedActiveActive x = TF.compute (TF.refKey x) "active_active"
 
-instance s ~ s' => P.HasComputedDefaultLocalNetworkGatewayId (TF.Ref s' (DataVirtualNetworkGateway s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultLocalNetworkGatewayId (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedDefaultLocalNetworkGatewayId x = TF.compute (TF.refKey x) "default_local_network_gateway_id"
 
-instance s ~ s' => P.HasComputedEnableBgp (TF.Ref s' (DataVirtualNetworkGateway s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnableBgp (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedEnableBgp x = TF.compute (TF.refKey x) "enable_bgp"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataVirtualNetworkGateway s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedIpConfiguration (TF.Ref s' (DataVirtualNetworkGateway s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpConfiguration (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedIpConfiguration x = TF.compute (TF.refKey x) "ip_configuration"
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DataVirtualNetworkGateway s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataVirtualNetworkGateway s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataVirtualNetworkGateway s -> TF.Attr s P.Text)
+        (_name :: VirtualNetworkGatewayData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DataVirtualNetworkGateway s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
-        (_resource_group_name :: DataVirtualNetworkGateway s -> TF.Attr s P.Text)
+        (_resource_group_name :: VirtualNetworkGatewayData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSku (TF.Ref s' (DataVirtualNetworkGateway s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSku (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedSku x = TF.compute (TF.refKey x) "sku"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataVirtualNetworkGateway s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataVirtualNetworkGateway s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputedVpnClientConfiguration (TF.Ref s' (DataVirtualNetworkGateway s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVpnClientConfiguration (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedVpnClientConfiguration x = TF.compute (TF.refKey x) "vpn_client_configuration"
 
-instance s ~ s' => P.HasComputedVpnType (TF.Ref s' (DataVirtualNetworkGateway s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVpnType (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedVpnType x = TF.compute (TF.refKey x) "vpn_type"
 
-dataVirtualNetworkGateway :: TF.DataSource P.AzureRM (DataVirtualNetworkGateway s)
-dataVirtualNetworkGateway =
+virtualNetworkGatewayData :: TF.DataSource P.AzureRM (VirtualNetworkGatewayData s)
+virtualNetworkGatewayData =
     TF.newDataSource "azurerm_virtual_network_gateway" $
-        DataVirtualNetworkGateway {
+        VirtualNetworkGatewayData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }

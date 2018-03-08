@@ -130,16 +130,15 @@ instance IsString Value where
 instance Pretty Value where
     prettyList = pretty . List
     pretty     = \case
-        Assign  k  (Block vs) -> pretty k <+> prettyBlock vs
-        Assign  k  v          -> pretty k <+> "=" <+> pretty v
-        Object  ks vs         -> prettyList (Fold.toList ks) <+> prettyBlock vs
-        Block   vs            -> prettyBlock vs
-        Inline  vs            -> PP.vcat (map pretty vs)
-        Bool    x             -> prettyBool x
-        Number  x             -> pretty x
-        Float   x             -> pretty x
-        String  x             -> PP.dquotes (pretty x)
-        Comment x             -> "//" <+> pretty x
+        Assign  k  v  -> pretty k <+> "=" <+> pretty v
+        Object  ks vs -> prettyList (Fold.toList ks) <+> prettyBlock vs
+        Block   vs    -> prettyBlock vs
+        Inline  vs    -> PP.vcat (map pretty vs)
+        Bool    x     -> prettyBool x
+        Number  x     -> pretty x
+        Float   x     -> pretty x
+        String  x     -> PP.dquotes (pretty x)
+        Comment x     -> "//" <+> pretty x
 
         HereDoc (pretty -> k) x ->
             "<<-" <> k <$$> pretty x <$$> k
@@ -295,6 +294,10 @@ instance ToHCL Bool where
 
 instance ToHCL a => ToHCL [a] where
     toHCL = list
+    {-# INLINEABLE toHCL #-}
+
+instance ToHCL Char where
+    toHCL = string . LText.singleton
     {-# INLINEABLE toHCL #-}
 
 instance ToHCL Float where

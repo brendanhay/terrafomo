@@ -24,14 +24,14 @@
 module Terrafomo.MySQL.Resource
     (
     -- * Types
-      ResourceDatabase (..)
-    , resourceDatabase
+      DatabaseResource (..)
+    , databaseResource
 
-    , ResourceGrant (..)
-    , resourceGrant
+    , GrantResource (..)
+    , grantResource
 
-    , ResourceUser (..)
-    , resourceUser
+    , UserResource (..)
+    , userResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -94,7 +94,7 @@ database just as easily as it can create it. To avoid costly accidents,
 consider setting </docs/configuration/resources.html#prevent_destroy> on
 your database resources as an extra safety measure.
 -}
-data ResourceDatabase s = ResourceDatabase {
+data DatabaseResource s = DatabaseResource {
       _default_character_set :: !(TF.Attr s P.Text)
     {- ^ (Optional) The default character set to use when a table is created without specifying an explicit character set. Defaults to "utf8". -}
     , _default_collation     :: !(TF.Attr s P.Text)
@@ -103,47 +103,47 @@ data ResourceDatabase s = ResourceDatabase {
     {- ^ (Required) The name of the database. This must be unique within a given MySQL server and may or may not be case-sensitive depending on the operating system on which the MySQL server is running. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceDatabase s) where
-    toHCL ResourceDatabase{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DatabaseResource s) where
+    toHCL DatabaseResource{..} = TF.inline $ catMaybes
         [ TF.assign "default_character_set" <$> TF.attribute _default_character_set
         , TF.assign "default_collation" <$> TF.attribute _default_collation
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDefaultCharacterSet (ResourceDatabase s) (TF.Attr s P.Text) where
+instance P.HasDefaultCharacterSet (DatabaseResource s) (TF.Attr s P.Text) where
     defaultCharacterSet =
-        lens (_default_character_set :: ResourceDatabase s -> TF.Attr s P.Text)
-             (\s a -> s { _default_character_set = a } :: ResourceDatabase s)
+        lens (_default_character_set :: DatabaseResource s -> TF.Attr s P.Text)
+             (\s a -> s { _default_character_set = a } :: DatabaseResource s)
 
-instance P.HasDefaultCollation (ResourceDatabase s) (TF.Attr s P.Text) where
+instance P.HasDefaultCollation (DatabaseResource s) (TF.Attr s P.Text) where
     defaultCollation =
-        lens (_default_collation :: ResourceDatabase s -> TF.Attr s P.Text)
-             (\s a -> s { _default_collation = a } :: ResourceDatabase s)
+        lens (_default_collation :: DatabaseResource s -> TF.Attr s P.Text)
+             (\s a -> s { _default_collation = a } :: DatabaseResource s)
 
-instance P.HasName (ResourceDatabase s) (TF.Attr s P.Text) where
+instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceDatabase s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceDatabase s)
+        lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DatabaseResource s)
 
-instance s ~ s' => P.HasComputedDefaultCharacterSet (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultCharacterSet (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
     computedDefaultCharacterSet =
-        (_default_character_set :: ResourceDatabase s -> TF.Attr s P.Text)
+        (_default_character_set :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDefaultCollation (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultCollation (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
     computedDefaultCollation =
-        (_default_collation :: ResourceDatabase s -> TF.Attr s P.Text)
+        (_default_collation :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDatabase s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceDatabase s -> TF.Attr s P.Text)
+        (_name :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceDatabase :: TF.Resource P.MySQL (ResourceDatabase s)
-resourceDatabase =
+databaseResource :: TF.Resource P.MySQL (DatabaseResource s)
+databaseResource =
     TF.newResource "mysql_database" $
-        ResourceDatabase {
+        DatabaseResource {
               _default_character_set = TF.Nil
             , _default_collation = TF.Nil
             , _name = TF.Nil
@@ -154,7 +154,7 @@ resourceDatabase =
 The @mysql_grant@ resource creates and manages privileges given to a user on
 a MySQL server.
 -}
-data ResourceGrant s = ResourceGrant {
+data GrantResource s = GrantResource {
       _database   :: !(TF.Attr s P.Text)
     {- ^ (Required) The database to grant privileges on. At this time, privileges are given to all tables on the database ( @mydb.*@ ). -}
     , _grant      :: !(TF.Attr s P.Text)
@@ -167,8 +167,8 @@ data ResourceGrant s = ResourceGrant {
     {- ^ (Required) The name of the user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceGrant s) where
-    toHCL ResourceGrant{..} = TF.inline $ catMaybes
+instance TF.ToHCL (GrantResource s) where
+    toHCL GrantResource{..} = TF.inline $ catMaybes
         [ TF.assign "database" <$> TF.attribute _database
         , TF.assign "grant" <$> TF.attribute _grant
         , TF.assign "host" <$> TF.attribute _host
@@ -176,60 +176,60 @@ instance TF.ToHCL (ResourceGrant s) where
         , TF.assign "user" <$> TF.attribute _user
         ]
 
-instance P.HasDatabase (ResourceGrant s) (TF.Attr s P.Text) where
+instance P.HasDatabase (GrantResource s) (TF.Attr s P.Text) where
     database =
-        lens (_database :: ResourceGrant s -> TF.Attr s P.Text)
-             (\s a -> s { _database = a } :: ResourceGrant s)
+        lens (_database :: GrantResource s -> TF.Attr s P.Text)
+             (\s a -> s { _database = a } :: GrantResource s)
 
-instance P.HasGrant (ResourceGrant s) (TF.Attr s P.Text) where
+instance P.HasGrant (GrantResource s) (TF.Attr s P.Text) where
     grant =
-        lens (_grant :: ResourceGrant s -> TF.Attr s P.Text)
-             (\s a -> s { _grant = a } :: ResourceGrant s)
+        lens (_grant :: GrantResource s -> TF.Attr s P.Text)
+             (\s a -> s { _grant = a } :: GrantResource s)
 
-instance P.HasHost (ResourceGrant s) (TF.Attr s P.Text) where
+instance P.HasHost (GrantResource s) (TF.Attr s P.Text) where
     host =
-        lens (_host :: ResourceGrant s -> TF.Attr s P.Text)
-             (\s a -> s { _host = a } :: ResourceGrant s)
+        lens (_host :: GrantResource s -> TF.Attr s P.Text)
+             (\s a -> s { _host = a } :: GrantResource s)
 
-instance P.HasPrivileges (ResourceGrant s) (TF.Attr s P.Text) where
+instance P.HasPrivileges (GrantResource s) (TF.Attr s P.Text) where
     privileges =
-        lens (_privileges :: ResourceGrant s -> TF.Attr s P.Text)
-             (\s a -> s { _privileges = a } :: ResourceGrant s)
+        lens (_privileges :: GrantResource s -> TF.Attr s P.Text)
+             (\s a -> s { _privileges = a } :: GrantResource s)
 
-instance P.HasUser (ResourceGrant s) (TF.Attr s P.Text) where
+instance P.HasUser (GrantResource s) (TF.Attr s P.Text) where
     user =
-        lens (_user :: ResourceGrant s -> TF.Attr s P.Text)
-             (\s a -> s { _user = a } :: ResourceGrant s)
+        lens (_user :: GrantResource s -> TF.Attr s P.Text)
+             (\s a -> s { _user = a } :: GrantResource s)
 
-instance s ~ s' => P.HasComputedDatabase (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatabase (TF.Ref s' (GrantResource s)) (TF.Attr s P.Text) where
     computedDatabase =
-        (_database :: ResourceGrant s -> TF.Attr s P.Text)
+        (_database :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedGrant (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGrant (TF.Ref s' (GrantResource s)) (TF.Attr s P.Text) where
     computedGrant =
-        (_grant :: ResourceGrant s -> TF.Attr s P.Text)
+        (_grant :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHost (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHost (TF.Ref s' (GrantResource s)) (TF.Attr s P.Text) where
     computedHost =
-        (_host :: ResourceGrant s -> TF.Attr s P.Text)
+        (_host :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrivileges (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrivileges (TF.Ref s' (GrantResource s)) (TF.Attr s P.Text) where
     computedPrivileges =
-        (_privileges :: ResourceGrant s -> TF.Attr s P.Text)
+        (_privileges :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUser (TF.Ref s' (ResourceGrant s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUser (TF.Ref s' (GrantResource s)) (TF.Attr s P.Text) where
     computedUser =
-        (_user :: ResourceGrant s -> TF.Attr s P.Text)
+        (_user :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceGrant :: TF.Resource P.MySQL (ResourceGrant s)
-resourceGrant =
+grantResource :: TF.Resource P.MySQL (GrantResource s)
+grantResource =
     TF.newResource "mysql_grant" $
-        ResourceGrant {
+        GrantResource {
               _database = TF.Nil
             , _grant = TF.Nil
             , _host = TF.Nil
@@ -244,7 +244,7 @@ Note: The password for the user is provided in plain text, and is obscured
 by an unsalted hash in the state </docs/state/sensitive-data.html> . Care is
 required when using this resource, to avoid disclosing the password.
 -}
-data ResourceUser s = ResourceUser {
+data UserResource s = UserResource {
       _host               :: !(TF.Attr s P.Text)
     {- ^ (Optional) The source host of the user. Defaults to "localhost". -}
     , _password           :: !(TF.Attr s P.Text)
@@ -255,58 +255,58 @@ data ResourceUser s = ResourceUser {
     {- ^ (Required) The name of the user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceUser s) where
-    toHCL ResourceUser{..} = TF.inline $ catMaybes
+instance TF.ToHCL (UserResource s) where
+    toHCL UserResource{..} = TF.inline $ catMaybes
         [ TF.assign "host" <$> TF.attribute _host
         , TF.assign "password" <$> TF.attribute _password
         , TF.assign "plaintext_password" <$> TF.attribute _plaintext_password
         , TF.assign "user" <$> TF.attribute _user
         ]
 
-instance P.HasHost (ResourceUser s) (TF.Attr s P.Text) where
+instance P.HasHost (UserResource s) (TF.Attr s P.Text) where
     host =
-        lens (_host :: ResourceUser s -> TF.Attr s P.Text)
-             (\s a -> s { _host = a } :: ResourceUser s)
+        lens (_host :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _host = a } :: UserResource s)
 
-instance P.HasPassword (ResourceUser s) (TF.Attr s P.Text) where
+instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
     password =
-        lens (_password :: ResourceUser s -> TF.Attr s P.Text)
-             (\s a -> s { _password = a } :: ResourceUser s)
+        lens (_password :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _password = a } :: UserResource s)
 
-instance P.HasPlaintextPassword (ResourceUser s) (TF.Attr s P.Text) where
+instance P.HasPlaintextPassword (UserResource s) (TF.Attr s P.Text) where
     plaintextPassword =
-        lens (_plaintext_password :: ResourceUser s -> TF.Attr s P.Text)
-             (\s a -> s { _plaintext_password = a } :: ResourceUser s)
+        lens (_plaintext_password :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _plaintext_password = a } :: UserResource s)
 
-instance P.HasUser (ResourceUser s) (TF.Attr s P.Text) where
+instance P.HasUser (UserResource s) (TF.Attr s P.Text) where
     user =
-        lens (_user :: ResourceUser s -> TF.Attr s P.Text)
-             (\s a -> s { _user = a } :: ResourceUser s)
+        lens (_user :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _user = a } :: UserResource s)
 
-instance s ~ s' => P.HasComputedHost (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHost (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedHost =
-        (_host :: ResourceUser s -> TF.Attr s P.Text)
+        (_host :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedPassword =
-        (_password :: ResourceUser s -> TF.Attr s P.Text)
+        (_password :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPlaintextPassword (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPlaintextPassword (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedPlaintextPassword =
-        (_plaintext_password :: ResourceUser s -> TF.Attr s P.Text)
+        (_plaintext_password :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUser (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUser (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedUser =
-        (_user :: ResourceUser s -> TF.Attr s P.Text)
+        (_user :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceUser :: TF.Resource P.MySQL (ResourceUser s)
-resourceUser =
+userResource :: TF.Resource P.MySQL (UserResource s)
+userResource =
     TF.newResource "mysql_user" $
-        ResourceUser {
+        UserResource {
               _host = TF.Nil
             , _password = TF.Nil
             , _plaintext_password = TF.Nil

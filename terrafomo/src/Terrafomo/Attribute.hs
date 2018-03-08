@@ -66,8 +66,8 @@ join = Join
 -- not interpolated. The contents of the file are read as-is.
 --
 -- The path is interpreted relative to the working directory.
-file :: FilePath -> Attr s Text
-file = Apply "file" . pure . fromString
+file :: Attr s Text -> Attr s Text
+file = Apply "file" . pure
 {-# INLINE file #-}
 
 -- | Supply a constant Haskell value as an attribute. Equivalent to 'Just'.

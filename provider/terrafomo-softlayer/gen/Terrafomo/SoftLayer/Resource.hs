@@ -24,11 +24,11 @@
 module Terrafomo.SoftLayer.Resource
     (
     -- * Types
-      ResourceSshKey (..)
-    , resourceSshKey
+      SshKeyResource (..)
+    , sshKeyResource
 
-    , ResourceVirtualGuest (..)
-    , resourceVirtualGuest
+    , VirtualGuestResource (..)
+    , virtualGuestResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -115,7 +115,7 @@ Provides SSK keys. This allows SSH keys to be created, updated and deleted.
 For additional details please refer to
 <http://sldn.softlayer.com/reference/datatypes/SoftLayer_Security_Ssh_Key> .
 -}
-data ResourceSshKey s = ResourceSshKey {
+data SshKeyResource s = SshKeyResource {
       _name       :: !(TF.Attr s P.Text)
     {- ^ (Required) A descriptive name used to identify an SSH key. -}
     , _notes      :: !(TF.Attr s P.Text)
@@ -124,53 +124,53 @@ data ResourceSshKey s = ResourceSshKey {
     {- ^ (Required) The public SSH key. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceSshKey s) where
-    toHCL ResourceSshKey{..} = TF.inline $ catMaybes
+instance TF.ToHCL (SshKeyResource s) where
+    toHCL SshKeyResource{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "notes" <$> TF.attribute _notes
         , TF.assign "public_key" <$> TF.attribute _public_key
         ]
 
-instance P.HasName (ResourceSshKey s) (TF.Attr s P.Text) where
+instance P.HasName (SshKeyResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceSshKey s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceSshKey s)
+        lens (_name :: SshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SshKeyResource s)
 
-instance P.HasNotes (ResourceSshKey s) (TF.Attr s P.Text) where
+instance P.HasNotes (SshKeyResource s) (TF.Attr s P.Text) where
     notes =
-        lens (_notes :: ResourceSshKey s -> TF.Attr s P.Text)
-             (\s a -> s { _notes = a } :: ResourceSshKey s)
+        lens (_notes :: SshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _notes = a } :: SshKeyResource s)
 
-instance P.HasPublicKey (ResourceSshKey s) (TF.Attr s P.Text) where
+instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
     publicKey =
-        lens (_public_key :: ResourceSshKey s -> TF.Attr s P.Text)
-             (\s a -> s { _public_key = a } :: ResourceSshKey s)
+        lens (_public_key :: SshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _public_key = a } :: SshKeyResource s)
 
-instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ResourceSshKey s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceSshKey s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceSshKey s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceSshKey s -> TF.Attr s P.Text)
+        (_name :: SshKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNotes (TF.Ref s' (ResourceSshKey s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotes (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedNotes =
-        (_notes :: ResourceSshKey s -> TF.Attr s P.Text)
+        (_notes :: SshKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (ResourceSshKey s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedPublicKey =
-        (_public_key :: ResourceSshKey s -> TF.Attr s P.Text)
+        (_public_key :: SshKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceSshKey :: TF.Resource P.SoftLayer (ResourceSshKey s)
-resourceSshKey =
+sshKeyResource :: TF.Resource P.SoftLayer (SshKeyResource s)
+sshKeyResource =
     TF.newResource "softlayer_ssh_key" $
-        ResourceSshKey {
+        SshKeyResource {
               _name = TF.Nil
             , _notes = TF.Nil
             , _public_key = TF.Nil
@@ -182,7 +182,7 @@ Provides virtual guest resource. This allows virtual guests to be created,
 updated and deleted. For additional details please refer to
 <http://sldn.softlayer.com/reference/services/SoftLayer_Virtual_Guest> .
 -}
-data ResourceVirtualGuest s = ResourceVirtualGuest {
+data VirtualGuestResource s = VirtualGuestResource {
       _backend_vlan_id                 :: !(TF.Attr s P.Text)
     {- ^ (Optional, int) Specifies the network VLAN which is to be used for the back end interface of the computing instance. -}
     , _block_device_template_group_gid :: !(TF.Attr s P.Text)
@@ -225,8 +225,8 @@ data ResourceVirtualGuest s = ResourceVirtualGuest {
     {- ^ (Optional, string) Arbitrary data to be made available to the computing instance. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceVirtualGuest s) where
-    toHCL ResourceVirtualGuest{..} = TF.inline $ catMaybes
+instance TF.ToHCL (VirtualGuestResource s) where
+    toHCL VirtualGuestResource{..} = TF.inline $ catMaybes
         [ TF.assign "backend_vlan_id" <$> TF.attribute _backend_vlan_id
         , TF.assign "block_device_template_group_gid" <$> TF.attribute _block_device_template_group_gid
         , TF.assign "cpu" <$> TF.attribute _cpu
@@ -249,213 +249,213 @@ instance TF.ToHCL (ResourceVirtualGuest s) where
         , TF.assign "user_data" <$> TF.attribute _user_data
         ]
 
-instance P.HasBackendVlanId (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasBackendVlanId (VirtualGuestResource s) (TF.Attr s P.Text) where
     backendVlanId =
-        lens (_backend_vlan_id :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _backend_vlan_id = a } :: ResourceVirtualGuest s)
+        lens (_backend_vlan_id :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _backend_vlan_id = a } :: VirtualGuestResource s)
 
-instance P.HasBlockDeviceTemplateGroupGid (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasBlockDeviceTemplateGroupGid (VirtualGuestResource s) (TF.Attr s P.Text) where
     blockDeviceTemplateGroupGid =
-        lens (_block_device_template_group_gid :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _block_device_template_group_gid = a } :: ResourceVirtualGuest s)
+        lens (_block_device_template_group_gid :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _block_device_template_group_gid = a } :: VirtualGuestResource s)
 
-instance P.HasCpu (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasCpu (VirtualGuestResource s) (TF.Attr s P.Text) where
     cpu =
-        lens (_cpu :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _cpu = a } :: ResourceVirtualGuest s)
+        lens (_cpu :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cpu = a } :: VirtualGuestResource s)
 
-instance P.HasDedicatedAcctHostOnly (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasDedicatedAcctHostOnly (VirtualGuestResource s) (TF.Attr s P.Text) where
     dedicatedAcctHostOnly =
-        lens (_dedicated_acct_host_only :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _dedicated_acct_host_only = a } :: ResourceVirtualGuest s)
+        lens (_dedicated_acct_host_only :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _dedicated_acct_host_only = a } :: VirtualGuestResource s)
 
-instance P.HasDisks (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasDisks (VirtualGuestResource s) (TF.Attr s P.Text) where
     disks =
-        lens (_disks :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _disks = a } :: ResourceVirtualGuest s)
+        lens (_disks :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _disks = a } :: VirtualGuestResource s)
 
-instance P.HasDomain (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasDomain (VirtualGuestResource s) (TF.Attr s P.Text) where
     domain =
-        lens (_domain :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _domain = a } :: ResourceVirtualGuest s)
+        lens (_domain :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _domain = a } :: VirtualGuestResource s)
 
-instance P.HasFrontendVlanId (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasFrontendVlanId (VirtualGuestResource s) (TF.Attr s P.Text) where
     frontendVlanId =
-        lens (_frontend_vlan_id :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _frontend_vlan_id = a } :: ResourceVirtualGuest s)
+        lens (_frontend_vlan_id :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _frontend_vlan_id = a } :: VirtualGuestResource s)
 
-instance P.HasHourlyBilling (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasHourlyBilling (VirtualGuestResource s) (TF.Attr s P.Text) where
     hourlyBilling =
-        lens (_hourly_billing :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _hourly_billing = a } :: ResourceVirtualGuest s)
+        lens (_hourly_billing :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _hourly_billing = a } :: VirtualGuestResource s)
 
-instance P.HasImage (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasImage (VirtualGuestResource s) (TF.Attr s P.Text) where
     image =
-        lens (_image :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _image = a } :: ResourceVirtualGuest s)
+        lens (_image :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _image = a } :: VirtualGuestResource s)
 
-instance P.HasIpv4Address (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasIpv4Address (VirtualGuestResource s) (TF.Attr s P.Text) where
     ipv4Address =
-        lens (_ipv4_address :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _ipv4_address = a } :: ResourceVirtualGuest s)
+        lens (_ipv4_address :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ipv4_address = a } :: VirtualGuestResource s)
 
-instance P.HasIpv4AddressPrivate (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasIpv4AddressPrivate (VirtualGuestResource s) (TF.Attr s P.Text) where
     ipv4AddressPrivate =
-        lens (_ipv4_address_private :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _ipv4_address_private = a } :: ResourceVirtualGuest s)
+        lens (_ipv4_address_private :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ipv4_address_private = a } :: VirtualGuestResource s)
 
-instance P.HasLocalDisk (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasLocalDisk (VirtualGuestResource s) (TF.Attr s P.Text) where
     localDisk =
-        lens (_local_disk :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _local_disk = a } :: ResourceVirtualGuest s)
+        lens (_local_disk :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _local_disk = a } :: VirtualGuestResource s)
 
-instance P.HasName (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasName (VirtualGuestResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceVirtualGuest s)
+        lens (_name :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: VirtualGuestResource s)
 
-instance P.HasPostInstallScriptUri (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasPostInstallScriptUri (VirtualGuestResource s) (TF.Attr s P.Text) where
     postInstallScriptUri =
-        lens (_post_install_script_uri :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _post_install_script_uri = a } :: ResourceVirtualGuest s)
+        lens (_post_install_script_uri :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _post_install_script_uri = a } :: VirtualGuestResource s)
 
-instance P.HasPrivateNetworkOnly (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasPrivateNetworkOnly (VirtualGuestResource s) (TF.Attr s P.Text) where
     privateNetworkOnly =
-        lens (_private_network_only :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _private_network_only = a } :: ResourceVirtualGuest s)
+        lens (_private_network_only :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _private_network_only = a } :: VirtualGuestResource s)
 
-instance P.HasPublicNetworkSpeed (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasPublicNetworkSpeed (VirtualGuestResource s) (TF.Attr s P.Text) where
     publicNetworkSpeed =
-        lens (_public_network_speed :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _public_network_speed = a } :: ResourceVirtualGuest s)
+        lens (_public_network_speed :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _public_network_speed = a } :: VirtualGuestResource s)
 
-instance P.HasRam (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasRam (VirtualGuestResource s) (TF.Attr s P.Text) where
     ram =
-        lens (_ram :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _ram = a } :: ResourceVirtualGuest s)
+        lens (_ram :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ram = a } :: VirtualGuestResource s)
 
-instance P.HasRegion (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasRegion (VirtualGuestResource s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ResourceVirtualGuest s)
+        lens (_region :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: VirtualGuestResource s)
 
-instance P.HasSshKeys (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasSshKeys (VirtualGuestResource s) (TF.Attr s P.Text) where
     sshKeys =
-        lens (_ssh_keys :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _ssh_keys = a } :: ResourceVirtualGuest s)
+        lens (_ssh_keys :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ssh_keys = a } :: VirtualGuestResource s)
 
-instance P.HasUserData (ResourceVirtualGuest s) (TF.Attr s P.Text) where
+instance P.HasUserData (VirtualGuestResource s) (TF.Attr s P.Text) where
     userData =
-        lens (_user_data :: ResourceVirtualGuest s -> TF.Attr s P.Text)
-             (\s a -> s { _user_data = a } :: ResourceVirtualGuest s)
+        lens (_user_data :: VirtualGuestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _user_data = a } :: VirtualGuestResource s)
 
-instance s ~ s' => P.HasComputedBackendVlanId (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackendVlanId (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedBackendVlanId =
-        (_backend_vlan_id :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_backend_vlan_id :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBlockDeviceTemplateGroupGid (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBlockDeviceTemplateGroupGid (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedBlockDeviceTemplateGroupGid =
-        (_block_device_template_group_gid :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_block_device_template_group_gid :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCpu (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCpu (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedCpu =
-        (_cpu :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_cpu :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDedicatedAcctHostOnly (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDedicatedAcctHostOnly (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedDedicatedAcctHostOnly =
-        (_dedicated_acct_host_only :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_dedicated_acct_host_only :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisks (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedDisks =
-        (_disks :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_disks :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDomain (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDomain (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedDomain =
-        (_domain :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_domain :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFrontendVlanId (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFrontendVlanId (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedFrontendVlanId =
-        (_frontend_vlan_id :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_frontend_vlan_id :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHourlyBilling (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHourlyBilling (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedHourlyBilling =
-        (_hourly_billing :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_hourly_billing :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedImage (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImage (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedImage =
-        (_image :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_image :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpv4Address (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv4Address (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedIpv4Address =
-        (_ipv4_address :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_ipv4_address :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpv4AddressPrivate (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv4AddressPrivate (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedIpv4AddressPrivate =
-        (_ipv4_address_private :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_ipv4_address_private :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLocalDisk (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocalDisk (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedLocalDisk =
-        (_local_disk :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_local_disk :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_name :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPostInstallScriptUri (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPostInstallScriptUri (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedPostInstallScriptUri =
-        (_post_install_script_uri :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_post_install_script_uri :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrivateNetworkOnly (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrivateNetworkOnly (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedPrivateNetworkOnly =
-        (_private_network_only :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_private_network_only :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPublicNetworkSpeed (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublicNetworkSpeed (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedPublicNetworkSpeed =
-        (_public_network_speed :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_public_network_speed :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRam (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRam (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedRam =
-        (_ram :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_ram :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedRegion =
-        (_region :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_region :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSshKeys (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSshKeys (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedSshKeys =
-        (_ssh_keys :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_ssh_keys :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUserData (TF.Ref s' (ResourceVirtualGuest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUserData (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedUserData =
-        (_user_data :: ResourceVirtualGuest s -> TF.Attr s P.Text)
+        (_user_data :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceVirtualGuest :: TF.Resource P.SoftLayer (ResourceVirtualGuest s)
-resourceVirtualGuest =
+virtualGuestResource :: TF.Resource P.SoftLayer (VirtualGuestResource s)
+virtualGuestResource =
     TF.newResource "softlayer_virtual_guest" $
-        ResourceVirtualGuest {
+        VirtualGuestResource {
               _backend_vlan_id = TF.Nil
             , _block_device_template_group_gid = TF.Nil
             , _cpu = TF.Nil

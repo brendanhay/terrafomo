@@ -24,8 +24,8 @@
 module Terrafomo.DNSimple.Resource
     (
     -- * Types
-      ResourceRecord (..)
-    , resourceRecord
+      RecordResource (..)
+    , recordResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -79,7 +79,7 @@ import qualified Terrafomo.Schema    as TF
 
 Provides a DNSimple record resource.
 -}
-data ResourceRecord s = ResourceRecord {
+data RecordResource s = RecordResource {
       _domain   :: !(TF.Attr s P.Text)
     {- ^ (Required) The domain to add the record to -}
     , _name     :: !(TF.Attr s P.Text)
@@ -94,8 +94,8 @@ data ResourceRecord s = ResourceRecord {
     {- ^ (Required) The value of the record -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceRecord s) where
-    toHCL ResourceRecord{..} = TF.inline $ catMaybes
+instance TF.ToHCL (RecordResource s) where
+    toHCL RecordResource{..} = TF.inline $ catMaybes
         [ TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "priority" <$> TF.attribute _priority
@@ -104,69 +104,69 @@ instance TF.ToHCL (ResourceRecord s) where
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance P.HasDomain (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasDomain (RecordResource s) (TF.Attr s P.Text) where
     domain =
-        lens (_domain :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _domain = a } :: ResourceRecord s)
+        lens (_domain :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _domain = a } :: RecordResource s)
 
-instance P.HasName (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasName (RecordResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceRecord s)
+        lens (_name :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: RecordResource s)
 
-instance P.HasPriority (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasPriority (RecordResource s) (TF.Attr s P.Text) where
     priority =
-        lens (_priority :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _priority = a } :: ResourceRecord s)
+        lens (_priority :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _priority = a } :: RecordResource s)
 
-instance P.HasTtl (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasTtl (RecordResource s) (TF.Attr s P.Text) where
     ttl =
-        lens (_ttl :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: ResourceRecord s)
+        lens (_ttl :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ttl = a } :: RecordResource s)
 
-instance P.HasType' (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: ResourceRecord s)
+        lens (_type' :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: RecordResource s)
 
-instance P.HasValue (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasValue (RecordResource s) (TF.Attr s P.Text) where
     value =
-        lens (_value :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _value = a } :: ResourceRecord s)
+        lens (_value :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _value = a } :: RecordResource s)
 
-instance s ~ s' => P.HasComputedDomain (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDomain (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedDomain =
-        (_domain :: ResourceRecord s -> TF.Attr s P.Text)
+        (_domain :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedDomainId x = TF.compute (TF.refKey x) "domain_id"
 
-instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedHostname x = TF.compute (TF.refKey x) "hostname"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPriority (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedPriority x = TF.compute (TF.refKey x) "priority"
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputedValue (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedValue x = TF.compute (TF.refKey x) "value"
 
-resourceRecord :: TF.Resource P.DNSimple (ResourceRecord s)
-resourceRecord =
+recordResource :: TF.Resource P.DNSimple (RecordResource s)
+recordResource =
     TF.newResource "dnsimple_record" $
-        ResourceRecord {
+        RecordResource {
               _domain = TF.Nil
             , _name = TF.Nil
             , _priority = TF.Nil

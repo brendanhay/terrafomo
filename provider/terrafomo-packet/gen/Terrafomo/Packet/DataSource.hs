@@ -24,8 +24,8 @@
 module Terrafomo.Packet.DataSource
     (
     -- * Types
-      DataPrecreatedIpBlock (..)
-    , dataPrecreatedIpBlock
+      PrecreatedIpBlockData (..)
+    , precreatedIpBlockData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -75,7 +75,7 @@ Use this data source to get CIDR expression for precreated IPv6 and IPv4
 blocks in Packet. You can then use the cidrsubnet TF builtin function to
 derive subnets.
 -}
-data DataPrecreatedIpBlock s = DataPrecreatedIpBlock {
+data PrecreatedIpBlockData s = PrecreatedIpBlockData {
       _address_family :: !(TF.Attr s P.Text)
     {- ^ (Required) 4 or 6, depending on which block you are looking for. -}
     , _facility       :: !(TF.Attr s P.Text)
@@ -86,61 +86,61 @@ data DataPrecreatedIpBlock s = DataPrecreatedIpBlock {
     {- ^ (Required) Whether to look for public or private block. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataPrecreatedIpBlock s) where
-    toHCL DataPrecreatedIpBlock{..} = TF.inline $ catMaybes
+instance TF.ToHCL (PrecreatedIpBlockData s) where
+    toHCL PrecreatedIpBlockData{..} = TF.inline $ catMaybes
         [ TF.assign "address_family" <$> TF.attribute _address_family
         , TF.assign "facility" <$> TF.attribute _facility
         , TF.assign "project_id" <$> TF.attribute _project_id
         , TF.assign "public" <$> TF.attribute _public
         ]
 
-instance P.HasAddressFamily (DataPrecreatedIpBlock s) (TF.Attr s P.Text) where
+instance P.HasAddressFamily (PrecreatedIpBlockData s) (TF.Attr s P.Text) where
     addressFamily =
-        lens (_address_family :: DataPrecreatedIpBlock s -> TF.Attr s P.Text)
-             (\s a -> s { _address_family = a } :: DataPrecreatedIpBlock s)
+        lens (_address_family :: PrecreatedIpBlockData s -> TF.Attr s P.Text)
+             (\s a -> s { _address_family = a } :: PrecreatedIpBlockData s)
 
-instance P.HasFacility (DataPrecreatedIpBlock s) (TF.Attr s P.Text) where
+instance P.HasFacility (PrecreatedIpBlockData s) (TF.Attr s P.Text) where
     facility =
-        lens (_facility :: DataPrecreatedIpBlock s -> TF.Attr s P.Text)
-             (\s a -> s { _facility = a } :: DataPrecreatedIpBlock s)
+        lens (_facility :: PrecreatedIpBlockData s -> TF.Attr s P.Text)
+             (\s a -> s { _facility = a } :: PrecreatedIpBlockData s)
 
-instance P.HasProjectId (DataPrecreatedIpBlock s) (TF.Attr s P.Text) where
+instance P.HasProjectId (PrecreatedIpBlockData s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: DataPrecreatedIpBlock s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: DataPrecreatedIpBlock s)
+        lens (_project_id :: PrecreatedIpBlockData s -> TF.Attr s P.Text)
+             (\s a -> s { _project_id = a } :: PrecreatedIpBlockData s)
 
-instance P.HasPublic (DataPrecreatedIpBlock s) (TF.Attr s P.Text) where
+instance P.HasPublic (PrecreatedIpBlockData s) (TF.Attr s P.Text) where
     public =
-        lens (_public :: DataPrecreatedIpBlock s -> TF.Attr s P.Text)
-             (\s a -> s { _public = a } :: DataPrecreatedIpBlock s)
+        lens (_public :: PrecreatedIpBlockData s -> TF.Attr s P.Text)
+             (\s a -> s { _public = a } :: PrecreatedIpBlockData s)
 
-instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
     computedAddressFamily =
-        (_address_family :: DataPrecreatedIpBlock s -> TF.Attr s P.Text)
+        (_address_family :: PrecreatedIpBlockData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCidrNotation (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCidrNotation (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
     computedCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
 
-instance s ~ s' => P.HasComputedFacility (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFacility (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
     computedFacility =
-        (_facility :: DataPrecreatedIpBlock s -> TF.Attr s P.Text)
+        (_facility :: PrecreatedIpBlockData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
     computedProjectId =
-        (_project_id :: DataPrecreatedIpBlock s -> TF.Attr s P.Text)
+        (_project_id :: PrecreatedIpBlockData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPublic (TF.Ref s' (DataPrecreatedIpBlock s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublic (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
     computedPublic =
-        (_public :: DataPrecreatedIpBlock s -> TF.Attr s P.Text)
+        (_public :: PrecreatedIpBlockData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataPrecreatedIpBlock :: TF.DataSource P.Packet (DataPrecreatedIpBlock s)
-dataPrecreatedIpBlock =
+precreatedIpBlockData :: TF.DataSource P.Packet (PrecreatedIpBlockData s)
+precreatedIpBlockData =
     TF.newDataSource "packet_precreated_ip_block" $
-        DataPrecreatedIpBlock {
+        PrecreatedIpBlockData {
               _address_family = TF.Nil
             , _facility = TF.Nil
             , _project_id = TF.Nil

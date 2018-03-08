@@ -24,26 +24,26 @@
 module Terrafomo.OpenStack.DataSource
     (
     -- * Types
-      DataComputeFlavorV2 (..)
-    , dataComputeFlavorV2
+      ComputeFlavorV2Data (..)
+    , computeFlavorV2Data
 
-    , DataDnsZoneV2 (..)
-    , dataDnsZoneV2
+    , DnsZoneV2Data (..)
+    , dnsZoneV2Data
 
-    , DataImagesImageV2 (..)
-    , dataImagesImageV2
+    , ImagesImageV2Data (..)
+    , imagesImageV2Data
 
-    , DataNetworkingNetworkV2 (..)
-    , dataNetworkingNetworkV2
+    , NetworkingNetworkV2Data (..)
+    , networkingNetworkV2Data
 
-    , DataNetworkingSecgroupV2 (..)
-    , dataNetworkingSecgroupV2
+    , NetworkingSecgroupV2Data (..)
+    , networkingSecgroupV2Data
 
-    , DataNetworkingSubnetV2 (..)
-    , dataNetworkingSubnetV2
+    , NetworkingSubnetV2Data (..)
+    , networkingSubnetV2Data
 
-    , DataNetworkingSubnetpoolV2 (..)
-    , dataNetworkingSubnetpoolV2
+    , NetworkingSubnetpoolV2Data (..)
+    , networkingSubnetpoolV2Data
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -201,7 +201,7 @@ import qualified Terrafomo.Schema    as TF
 
 Use this data source to get the ID of an available OpenStack flavor.
 -}
-data DataComputeFlavorV2 s = DataComputeFlavorV2 {
+data ComputeFlavorV2Data s = ComputeFlavorV2Data {
       _disk         :: !(TF.Attr s P.Text)
     {- ^ (Optional) The exact amount of disk (in gigabytes). -}
     , _min_disk     :: !(TF.Attr s P.Text)
@@ -222,8 +222,8 @@ data DataComputeFlavorV2 s = DataComputeFlavorV2 {
     {- ^ (Optional) The amount of VCPUs. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataComputeFlavorV2 s) where
-    toHCL DataComputeFlavorV2{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeFlavorV2Data s) where
+    toHCL ComputeFlavorV2Data{..} = TF.inline $ catMaybes
         [ TF.assign "disk" <$> TF.attribute _disk
         , TF.assign "min_disk" <$> TF.attribute _min_disk
         , TF.assign "min_ram" <$> TF.attribute _min_ram
@@ -235,103 +235,103 @@ instance TF.ToHCL (DataComputeFlavorV2 s) where
         , TF.assign "vcpus" <$> TF.attribute _vcpus
         ]
 
-instance P.HasDisk (DataComputeFlavorV2 s) (TF.Attr s P.Text) where
+instance P.HasDisk (ComputeFlavorV2Data s) (TF.Attr s P.Text) where
     disk =
-        lens (_disk :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _disk = a } :: DataComputeFlavorV2 s)
+        lens (_disk :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _disk = a } :: ComputeFlavorV2Data s)
 
-instance P.HasMinDisk (DataComputeFlavorV2 s) (TF.Attr s P.Text) where
+instance P.HasMinDisk (ComputeFlavorV2Data s) (TF.Attr s P.Text) where
     minDisk =
-        lens (_min_disk :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _min_disk = a } :: DataComputeFlavorV2 s)
+        lens (_min_disk :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _min_disk = a } :: ComputeFlavorV2Data s)
 
-instance P.HasMinRam (DataComputeFlavorV2 s) (TF.Attr s P.Text) where
+instance P.HasMinRam (ComputeFlavorV2Data s) (TF.Attr s P.Text) where
     minRam =
-        lens (_min_ram :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _min_ram = a } :: DataComputeFlavorV2 s)
+        lens (_min_ram :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _min_ram = a } :: ComputeFlavorV2Data s)
 
-instance P.HasName (DataComputeFlavorV2 s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeFlavorV2Data s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataComputeFlavorV2 s)
+        lens (_name :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeFlavorV2Data s)
 
-instance P.HasRam (DataComputeFlavorV2 s) (TF.Attr s P.Text) where
+instance P.HasRam (ComputeFlavorV2Data s) (TF.Attr s P.Text) where
     ram =
-        lens (_ram :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _ram = a } :: DataComputeFlavorV2 s)
+        lens (_ram :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _ram = a } :: ComputeFlavorV2Data s)
 
-instance P.HasRegion (DataComputeFlavorV2 s) (TF.Attr s P.Text) where
+instance P.HasRegion (ComputeFlavorV2Data s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: DataComputeFlavorV2 s)
+        lens (_region :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ComputeFlavorV2Data s)
 
-instance P.HasRxTxFactor (DataComputeFlavorV2 s) (TF.Attr s P.Text) where
+instance P.HasRxTxFactor (ComputeFlavorV2Data s) (TF.Attr s P.Text) where
     rxTxFactor =
-        lens (_rx_tx_factor :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _rx_tx_factor = a } :: DataComputeFlavorV2 s)
+        lens (_rx_tx_factor :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _rx_tx_factor = a } :: ComputeFlavorV2Data s)
 
-instance P.HasSwap (DataComputeFlavorV2 s) (TF.Attr s P.Text) where
+instance P.HasSwap (ComputeFlavorV2Data s) (TF.Attr s P.Text) where
     swap =
-        lens (_swap :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _swap = a } :: DataComputeFlavorV2 s)
+        lens (_swap :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _swap = a } :: ComputeFlavorV2Data s)
 
-instance P.HasVcpus (DataComputeFlavorV2 s) (TF.Attr s P.Text) where
+instance P.HasVcpus (ComputeFlavorV2Data s) (TF.Attr s P.Text) where
     vcpus =
-        lens (_vcpus :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _vcpus = a } :: DataComputeFlavorV2 s)
+        lens (_vcpus :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _vcpus = a } :: ComputeFlavorV2Data s)
 
-instance s ~ s' => P.HasComputedDisk (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisk (TF.Ref s' (ComputeFlavorV2Data s)) (TF.Attr s P.Text) where
     computedDisk =
-        (_disk :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
+        (_disk :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIsPublic (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIsPublic (TF.Ref s' (ComputeFlavorV2Data s)) (TF.Attr s P.Text) where
     computedIsPublic x = TF.compute (TF.refKey x) "is_public"
 
-instance s ~ s' => P.HasComputedMinDisk (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMinDisk (TF.Ref s' (ComputeFlavorV2Data s)) (TF.Attr s P.Text) where
     computedMinDisk =
-        (_min_disk :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
+        (_min_disk :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMinRam (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMinRam (TF.Ref s' (ComputeFlavorV2Data s)) (TF.Attr s P.Text) where
     computedMinRam =
-        (_min_ram :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
+        (_min_ram :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeFlavorV2Data s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
+        (_name :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRam (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRam (TF.Ref s' (ComputeFlavorV2Data s)) (TF.Attr s P.Text) where
     computedRam =
-        (_ram :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
+        (_ram :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeFlavorV2Data s)) (TF.Attr s P.Text) where
     computedRegion =
-        (_region :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
+        (_region :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRxTxFactor (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRxTxFactor (TF.Ref s' (ComputeFlavorV2Data s)) (TF.Attr s P.Text) where
     computedRxTxFactor =
-        (_rx_tx_factor :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
+        (_rx_tx_factor :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSwap (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSwap (TF.Ref s' (ComputeFlavorV2Data s)) (TF.Attr s P.Text) where
     computedSwap =
-        (_swap :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
+        (_swap :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVcpus (TF.Ref s' (DataComputeFlavorV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVcpus (TF.Ref s' (ComputeFlavorV2Data s)) (TF.Attr s P.Text) where
     computedVcpus =
-        (_vcpus :: DataComputeFlavorV2 s -> TF.Attr s P.Text)
+        (_vcpus :: ComputeFlavorV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataComputeFlavorV2 :: TF.DataSource P.OpenStack (DataComputeFlavorV2 s)
-dataComputeFlavorV2 =
+computeFlavorV2Data :: TF.DataSource P.OpenStack (ComputeFlavorV2Data s)
+computeFlavorV2Data =
     TF.newDataSource "openstack_compute_flavor_v2" $
-        DataComputeFlavorV2 {
+        ComputeFlavorV2Data {
               _disk = TF.Nil
             , _min_disk = TF.Nil
             , _min_ram = TF.Nil
@@ -347,7 +347,7 @@ dataComputeFlavorV2 =
 
 Use this data source to get the ID of an available OpenStack DNS zone.
 -}
-data DataDnsZoneV2 s = DataDnsZoneV2 {
+data DnsZoneV2Data s = DnsZoneV2Data {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of the zone. -}
     , _email       :: !(TF.Attr s P.Text)
@@ -364,8 +364,8 @@ data DataDnsZoneV2 s = DataDnsZoneV2 {
     {- ^ (Optional) The type of the zone. Can either be @PRIMARY@ or @SECONDARY@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataDnsZoneV2 s) where
-    toHCL DataDnsZoneV2{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DnsZoneV2Data s) where
+    toHCL DnsZoneV2Data{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "email" <$> TF.attribute _email
         , TF.assign "name" <$> TF.attribute _name
@@ -375,93 +375,93 @@ instance TF.ToHCL (DataDnsZoneV2 s) where
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasDescription (DataDnsZoneV2 s) (TF.Attr s P.Text) where
+instance P.HasDescription (DnsZoneV2Data s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: DataDnsZoneV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: DataDnsZoneV2 s)
+        lens (_description :: DnsZoneV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: DnsZoneV2Data s)
 
-instance P.HasEmail (DataDnsZoneV2 s) (TF.Attr s P.Text) where
+instance P.HasEmail (DnsZoneV2Data s) (TF.Attr s P.Text) where
     email =
-        lens (_email :: DataDnsZoneV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _email = a } :: DataDnsZoneV2 s)
+        lens (_email :: DnsZoneV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _email = a } :: DnsZoneV2Data s)
 
-instance P.HasName (DataDnsZoneV2 s) (TF.Attr s P.Text) where
+instance P.HasName (DnsZoneV2Data s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataDnsZoneV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataDnsZoneV2 s)
+        lens (_name :: DnsZoneV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DnsZoneV2Data s)
 
-instance P.HasRegion (DataDnsZoneV2 s) (TF.Attr s P.Text) where
+instance P.HasRegion (DnsZoneV2Data s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: DataDnsZoneV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: DataDnsZoneV2 s)
+        lens (_region :: DnsZoneV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: DnsZoneV2Data s)
 
-instance P.HasStatus (DataDnsZoneV2 s) (TF.Attr s P.Text) where
+instance P.HasStatus (DnsZoneV2Data s) (TF.Attr s P.Text) where
     status =
-        lens (_status :: DataDnsZoneV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _status = a } :: DataDnsZoneV2 s)
+        lens (_status :: DnsZoneV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _status = a } :: DnsZoneV2Data s)
 
-instance P.HasTtl (DataDnsZoneV2 s) (TF.Attr s P.Text) where
+instance P.HasTtl (DnsZoneV2Data s) (TF.Attr s P.Text) where
     ttl =
-        lens (_ttl :: DataDnsZoneV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: DataDnsZoneV2 s)
+        lens (_ttl :: DnsZoneV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _ttl = a } :: DnsZoneV2Data s)
 
-instance P.HasType' (DataDnsZoneV2 s) (TF.Attr s P.Text) where
+instance P.HasType' (DnsZoneV2Data s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: DataDnsZoneV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: DataDnsZoneV2 s)
+        lens (_type' :: DnsZoneV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: DnsZoneV2Data s)
 
-instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedAttributes x = TF.compute (TF.refKey x) "attributes"
 
-instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedEmail x = TF.compute (TF.refKey x) "email"
 
-instance s ~ s' => P.HasComputedMasters (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMasters (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedMasters x = TF.compute (TF.refKey x) "masters"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPoolId (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPoolId (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedPoolId x = TF.compute (TF.refKey x) "pool_id"
 
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedProjectId x = TF.compute (TF.refKey x) "project_id"
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedSerial (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSerial (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedSerial x = TF.compute (TF.refKey x) "serial"
 
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance s ~ s' => P.HasComputedTransferredAt (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTransferredAt (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedTransferredAt x = TF.compute (TF.refKey x) "transferred_at"
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DataDnsZoneV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
     computedVersion x = TF.compute (TF.refKey x) "version"
 
-dataDnsZoneV2 :: TF.DataSource P.OpenStack (DataDnsZoneV2 s)
-dataDnsZoneV2 =
+dnsZoneV2Data :: TF.DataSource P.OpenStack (DnsZoneV2Data s)
+dnsZoneV2Data =
     TF.newDataSource "openstack_dns_zone_v2" $
-        DataDnsZoneV2 {
+        DnsZoneV2Data {
               _description = TF.Nil
             , _email = TF.Nil
             , _name = TF.Nil
@@ -475,7 +475,7 @@ dataDnsZoneV2 =
 
 Use this data source to get the ID of an available OpenStack image.
 -}
-data DataImagesImageV2 s = DataImagesImageV2 {
+data ImagesImageV2Data s = ImagesImageV2Data {
       _most_recent    :: !(TF.Attr s P.Text)
     {- ^ (Optional) If more than one result is returned, use the most recent image. -}
     , _name           :: !(TF.Attr s P.Text)
@@ -500,8 +500,8 @@ data DataImagesImageV2 s = DataImagesImageV2 {
     {- ^ (Optional) The visibility of the image. Must be one of "public", "private", "community", or "shared". Defaults to "private". -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataImagesImageV2 s) where
-    toHCL DataImagesImageV2{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ImagesImageV2Data s) where
+    toHCL ImagesImageV2Data{..} = TF.inline $ catMaybes
         [ TF.assign "most_recent" <$> TF.attribute _most_recent
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "owner" <$> TF.attribute _owner
@@ -515,157 +515,157 @@ instance TF.ToHCL (DataImagesImageV2 s) where
         , TF.assign "visibility" <$> TF.attribute _visibility
         ]
 
-instance P.HasMostRecent (DataImagesImageV2 s) (TF.Attr s P.Text) where
+instance P.HasMostRecent (ImagesImageV2Data s) (TF.Attr s P.Text) where
     mostRecent =
-        lens (_most_recent :: DataImagesImageV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _most_recent = a } :: DataImagesImageV2 s)
+        lens (_most_recent :: ImagesImageV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _most_recent = a } :: ImagesImageV2Data s)
 
-instance P.HasName (DataImagesImageV2 s) (TF.Attr s P.Text) where
+instance P.HasName (ImagesImageV2Data s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataImagesImageV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataImagesImageV2 s)
+        lens (_name :: ImagesImageV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ImagesImageV2Data s)
 
-instance P.HasOwner (DataImagesImageV2 s) (TF.Attr s P.Text) where
+instance P.HasOwner (ImagesImageV2Data s) (TF.Attr s P.Text) where
     owner =
-        lens (_owner :: DataImagesImageV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _owner = a } :: DataImagesImageV2 s)
+        lens (_owner :: ImagesImageV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _owner = a } :: ImagesImageV2Data s)
 
-instance P.HasProperties (DataImagesImageV2 s) (TF.Attr s P.Text) where
+instance P.HasProperties (ImagesImageV2Data s) (TF.Attr s P.Text) where
     properties =
-        lens (_properties :: DataImagesImageV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _properties = a } :: DataImagesImageV2 s)
+        lens (_properties :: ImagesImageV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _properties = a } :: ImagesImageV2Data s)
 
-instance P.HasRegion (DataImagesImageV2 s) (TF.Attr s P.Text) where
+instance P.HasRegion (ImagesImageV2Data s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: DataImagesImageV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: DataImagesImageV2 s)
+        lens (_region :: ImagesImageV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ImagesImageV2Data s)
 
-instance P.HasSizeMax (DataImagesImageV2 s) (TF.Attr s P.Text) where
+instance P.HasSizeMax (ImagesImageV2Data s) (TF.Attr s P.Text) where
     sizeMax =
-        lens (_size_max :: DataImagesImageV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _size_max = a } :: DataImagesImageV2 s)
+        lens (_size_max :: ImagesImageV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _size_max = a } :: ImagesImageV2Data s)
 
-instance P.HasSizeMin (DataImagesImageV2 s) (TF.Attr s P.Text) where
+instance P.HasSizeMin (ImagesImageV2Data s) (TF.Attr s P.Text) where
     sizeMin =
-        lens (_size_min :: DataImagesImageV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _size_min = a } :: DataImagesImageV2 s)
+        lens (_size_min :: ImagesImageV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _size_min = a } :: ImagesImageV2Data s)
 
-instance P.HasSortDirection (DataImagesImageV2 s) (TF.Attr s P.Text) where
+instance P.HasSortDirection (ImagesImageV2Data s) (TF.Attr s P.Text) where
     sortDirection =
-        lens (_sort_direction :: DataImagesImageV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _sort_direction = a } :: DataImagesImageV2 s)
+        lens (_sort_direction :: ImagesImageV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _sort_direction = a } :: ImagesImageV2Data s)
 
-instance P.HasSortKey (DataImagesImageV2 s) (TF.Attr s P.Text) where
+instance P.HasSortKey (ImagesImageV2Data s) (TF.Attr s P.Text) where
     sortKey =
-        lens (_sort_key :: DataImagesImageV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _sort_key = a } :: DataImagesImageV2 s)
+        lens (_sort_key :: ImagesImageV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _sort_key = a } :: ImagesImageV2Data s)
 
-instance P.HasTag (DataImagesImageV2 s) (TF.Attr s P.Text) where
+instance P.HasTag (ImagesImageV2Data s) (TF.Attr s P.Text) where
     tag =
-        lens (_tag :: DataImagesImageV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _tag = a } :: DataImagesImageV2 s)
+        lens (_tag :: ImagesImageV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _tag = a } :: ImagesImageV2Data s)
 
-instance P.HasVisibility (DataImagesImageV2 s) (TF.Attr s P.Text) where
+instance P.HasVisibility (ImagesImageV2Data s) (TF.Attr s P.Text) where
     visibility =
-        lens (_visibility :: DataImagesImageV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _visibility = a } :: DataImagesImageV2 s)
+        lens (_visibility :: ImagesImageV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _visibility = a } :: ImagesImageV2Data s)
 
-instance s ~ s' => P.HasComputedChecksum (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedChecksum (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedChecksum x = TF.compute (TF.refKey x) "checksum"
 
-instance s ~ s' => P.HasComputedContainerFormat (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContainerFormat (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedContainerFormat x = TF.compute (TF.refKey x) "container_format"
 
-instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputedDiskFormat (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDiskFormat (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedDiskFormat x = TF.compute (TF.refKey x) "disk_format"
 
-instance s ~ s' => P.HasComputedFile (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFile (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedFile x = TF.compute (TF.refKey x) "file"
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
-instance s ~ s' => P.HasComputedMinDiskGb (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMinDiskGb (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedMinDiskGb x = TF.compute (TF.refKey x) "min_disk_gb"
 
-instance s ~ s' => P.HasComputedMinRamMb (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMinRamMb (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedMinRamMb x = TF.compute (TF.refKey x) "min_ram_mb"
 
-instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedMostRecent =
-        (_most_recent :: DataImagesImageV2 s -> TF.Attr s P.Text)
+        (_most_recent :: ImagesImageV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataImagesImageV2 s -> TF.Attr s P.Text)
+        (_name :: ImagesImageV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOwner (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedOwner =
-        (_owner :: DataImagesImageV2 s -> TF.Attr s P.Text)
+        (_owner :: ImagesImageV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProperties (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProperties (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedProperties x = TF.compute (TF.refKey x) "properties"
 
-instance s ~ s' => P.HasComputedProtected (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProtected (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedProtected x = TF.compute (TF.refKey x) "protected"
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedRegion =
-        (_region :: DataImagesImageV2 s -> TF.Attr s P.Text)
+        (_region :: ImagesImageV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSchema (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSchema (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedSchema x = TF.compute (TF.refKey x) "schema"
 
-instance s ~ s' => P.HasComputedSizeBytes (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSizeBytes (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedSizeBytes x = TF.compute (TF.refKey x) "size_bytes"
 
-instance s ~ s' => P.HasComputedSizeMax (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSizeMax (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedSizeMax =
-        (_size_max :: DataImagesImageV2 s -> TF.Attr s P.Text)
+        (_size_max :: ImagesImageV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSizeMin (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSizeMin (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedSizeMin =
-        (_size_min :: DataImagesImageV2 s -> TF.Attr s P.Text)
+        (_size_min :: ImagesImageV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSortDirection (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSortDirection (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedSortDirection =
-        (_sort_direction :: DataImagesImageV2 s -> TF.Attr s P.Text)
+        (_sort_direction :: ImagesImageV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSortKey (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSortKey (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedSortKey =
-        (_sort_key :: DataImagesImageV2 s -> TF.Attr s P.Text)
+        (_sort_key :: ImagesImageV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTag (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTag (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedTag =
-        (_tag :: DataImagesImageV2 s -> TF.Attr s P.Text)
+        (_tag :: ImagesImageV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance s ~ s' => P.HasComputedUpdateAt (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUpdateAt (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedUpdateAt x = TF.compute (TF.refKey x) "update_at"
 
-instance s ~ s' => P.HasComputedVisibility (TF.Ref s' (DataImagesImageV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVisibility (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedVisibility =
-        (_visibility :: DataImagesImageV2 s -> TF.Attr s P.Text)
+        (_visibility :: ImagesImageV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataImagesImageV2 :: TF.DataSource P.OpenStack (DataImagesImageV2 s)
-dataImagesImageV2 =
+imagesImageV2Data :: TF.DataSource P.OpenStack (ImagesImageV2Data s)
+imagesImageV2Data =
     TF.newDataSource "openstack_images_image_v2" $
-        DataImagesImageV2 {
+        ImagesImageV2Data {
               _most_recent = TF.Nil
             , _name = TF.Nil
             , _owner = TF.Nil
@@ -683,7 +683,7 @@ dataImagesImageV2 =
 
 Use this data source to get the ID of an available OpenStack network.
 -}
-data DataNetworkingNetworkV2 s = DataNetworkingNetworkV2 {
+data NetworkingNetworkV2Data s = NetworkingNetworkV2Data {
       _availability_zone_hints :: !(TF.Attr s P.Text)
     {- ^ (Optional) The availability zone candidates for the network. -}
     , _matching_subnet_cidr    :: !(TF.Attr s P.Text)
@@ -700,8 +700,8 @@ data DataNetworkingNetworkV2 s = DataNetworkingNetworkV2 {
     {- ^ (Optional) The owner of the network. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataNetworkingNetworkV2 s) where
-    toHCL DataNetworkingNetworkV2{..} = TF.inline $ catMaybes
+instance TF.ToHCL (NetworkingNetworkV2Data s) where
+    toHCL NetworkingNetworkV2Data{..} = TF.inline $ catMaybes
         [ TF.assign "availability_zone_hints" <$> TF.attribute _availability_zone_hints
         , TF.assign "matching_subnet_cidr" <$> TF.attribute _matching_subnet_cidr
         , TF.assign "name" <$> TF.attribute _name
@@ -711,80 +711,80 @@ instance TF.ToHCL (DataNetworkingNetworkV2 s) where
         , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasAvailabilityZoneHints (DataNetworkingNetworkV2 s) (TF.Attr s P.Text) where
+instance P.HasAvailabilityZoneHints (NetworkingNetworkV2Data s) (TF.Attr s P.Text) where
     availabilityZoneHints =
-        lens (_availability_zone_hints :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _availability_zone_hints = a } :: DataNetworkingNetworkV2 s)
+        lens (_availability_zone_hints :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _availability_zone_hints = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasMatchingSubnetCidr (DataNetworkingNetworkV2 s) (TF.Attr s P.Text) where
+instance P.HasMatchingSubnetCidr (NetworkingNetworkV2Data s) (TF.Attr s P.Text) where
     matchingSubnetCidr =
-        lens (_matching_subnet_cidr :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _matching_subnet_cidr = a } :: DataNetworkingNetworkV2 s)
+        lens (_matching_subnet_cidr :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _matching_subnet_cidr = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasName (DataNetworkingNetworkV2 s) (TF.Attr s P.Text) where
+instance P.HasName (NetworkingNetworkV2Data s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataNetworkingNetworkV2 s)
+        lens (_name :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasNetworkId (DataNetworkingNetworkV2 s) (TF.Attr s P.Text) where
+instance P.HasNetworkId (NetworkingNetworkV2Data s) (TF.Attr s P.Text) where
     networkId =
-        lens (_network_id :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _network_id = a } :: DataNetworkingNetworkV2 s)
+        lens (_network_id :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _network_id = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasRegion (DataNetworkingNetworkV2 s) (TF.Attr s P.Text) where
+instance P.HasRegion (NetworkingNetworkV2Data s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: DataNetworkingNetworkV2 s)
+        lens (_region :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasStatus (DataNetworkingNetworkV2 s) (TF.Attr s P.Text) where
+instance P.HasStatus (NetworkingNetworkV2Data s) (TF.Attr s P.Text) where
     status =
-        lens (_status :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _status = a } :: DataNetworkingNetworkV2 s)
+        lens (_status :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _status = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasTenantId (DataNetworkingNetworkV2 s) (TF.Attr s P.Text) where
+instance P.HasTenantId (NetworkingNetworkV2Data s) (TF.Attr s P.Text) where
     tenantId =
-        lens (_tenant_id :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _tenant_id = a } :: DataNetworkingNetworkV2 s)
+        lens (_tenant_id :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _tenant_id = a } :: NetworkingNetworkV2Data s)
 
-instance s ~ s' => P.HasComputedAdminStateUp (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAdminStateUp (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
     computedAdminStateUp x = TF.compute (TF.refKey x) "admin_state_up"
 
-instance s ~ s' => P.HasComputedAvailabilityZoneHints (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAvailabilityZoneHints (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
     computedAvailabilityZoneHints x = TF.compute (TF.refKey x) "availability_zone_hints"
 
-instance s ~ s' => P.HasComputedMatchingSubnetCidr (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMatchingSubnetCidr (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
     computedMatchingSubnetCidr =
-        (_matching_subnet_cidr :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
+        (_matching_subnet_cidr :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
     computedNetworkId =
-        (_network_id :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
+        (_network_id :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedShared (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedShared (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
     computedShared x = TF.compute (TF.refKey x) "shared"
 
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
     computedStatus =
-        (_status :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
+        (_status :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (DataNetworkingNetworkV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
     computedTenantId =
-        (_tenant_id :: DataNetworkingNetworkV2 s -> TF.Attr s P.Text)
+        (_tenant_id :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataNetworkingNetworkV2 :: TF.DataSource P.OpenStack (DataNetworkingNetworkV2 s)
-dataNetworkingNetworkV2 =
+networkingNetworkV2Data :: TF.DataSource P.OpenStack (NetworkingNetworkV2Data s)
+networkingNetworkV2Data =
     TF.newDataSource "openstack_networking_network_v2" $
-        DataNetworkingNetworkV2 {
+        NetworkingNetworkV2Data {
               _availability_zone_hints = TF.Nil
             , _matching_subnet_cidr = TF.Nil
             , _name = TF.Nil
@@ -798,7 +798,7 @@ dataNetworkingNetworkV2 =
 
 Use this data source to get the ID of an available OpenStack security group.
 -}
-data DataNetworkingSecgroupV2 s = DataNetworkingSecgroupV2 {
+data NetworkingSecgroupV2Data s = NetworkingSecgroupV2Data {
       _name        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the security group. -}
     , _region      :: !(TF.Attr s P.Text)
@@ -809,57 +809,57 @@ data DataNetworkingSecgroupV2 s = DataNetworkingSecgroupV2 {
     {- ^ (Optional) The owner of the security group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataNetworkingSecgroupV2 s) where
-    toHCL DataNetworkingSecgroupV2{..} = TF.inline $ catMaybes
+instance TF.ToHCL (NetworkingSecgroupV2Data s) where
+    toHCL NetworkingSecgroupV2Data{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "secgroup_id" <$> TF.attribute _secgroup_id
         , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasName (DataNetworkingSecgroupV2 s) (TF.Attr s P.Text) where
+instance P.HasName (NetworkingSecgroupV2Data s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataNetworkingSecgroupV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataNetworkingSecgroupV2 s)
+        lens (_name :: NetworkingSecgroupV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: NetworkingSecgroupV2Data s)
 
-instance P.HasRegion (DataNetworkingSecgroupV2 s) (TF.Attr s P.Text) where
+instance P.HasRegion (NetworkingSecgroupV2Data s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: DataNetworkingSecgroupV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: DataNetworkingSecgroupV2 s)
+        lens (_region :: NetworkingSecgroupV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: NetworkingSecgroupV2Data s)
 
-instance P.HasSecgroupId (DataNetworkingSecgroupV2 s) (TF.Attr s P.Text) where
+instance P.HasSecgroupId (NetworkingSecgroupV2Data s) (TF.Attr s P.Text) where
     secgroupId =
-        lens (_secgroup_id :: DataNetworkingSecgroupV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _secgroup_id = a } :: DataNetworkingSecgroupV2 s)
+        lens (_secgroup_id :: NetworkingSecgroupV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _secgroup_id = a } :: NetworkingSecgroupV2Data s)
 
-instance P.HasTenantId (DataNetworkingSecgroupV2 s) (TF.Attr s P.Text) where
+instance P.HasTenantId (NetworkingSecgroupV2Data s) (TF.Attr s P.Text) where
     tenantId =
-        lens (_tenant_id :: DataNetworkingSecgroupV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _tenant_id = a } :: DataNetworkingSecgroupV2 s)
+        lens (_tenant_id :: NetworkingSecgroupV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _tenant_id = a } :: NetworkingSecgroupV2Data s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (NetworkingSecgroupV2Data s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkingSecgroupV2Data s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingSecgroupV2Data s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedSecgroupId (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecgroupId (TF.Ref s' (NetworkingSecgroupV2Data s)) (TF.Attr s P.Text) where
     computedSecgroupId =
-        (_secgroup_id :: DataNetworkingSecgroupV2 s -> TF.Attr s P.Text)
+        (_secgroup_id :: NetworkingSecgroupV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (DataNetworkingSecgroupV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (NetworkingSecgroupV2Data s)) (TF.Attr s P.Text) where
     computedTenantId =
-        (_tenant_id :: DataNetworkingSecgroupV2 s -> TF.Attr s P.Text)
+        (_tenant_id :: NetworkingSecgroupV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataNetworkingSecgroupV2 :: TF.DataSource P.OpenStack (DataNetworkingSecgroupV2 s)
-dataNetworkingSecgroupV2 =
+networkingSecgroupV2Data :: TF.DataSource P.OpenStack (NetworkingSecgroupV2Data s)
+networkingSecgroupV2Data =
     TF.newDataSource "openstack_networking_secgroup_v2" $
-        DataNetworkingSecgroupV2 {
+        NetworkingSecgroupV2Data {
               _name = TF.Nil
             , _region = TF.Nil
             , _secgroup_id = TF.Nil
@@ -870,7 +870,7 @@ dataNetworkingSecgroupV2 =
 
 Use this data source to get the ID of an available OpenStack subnet.
 -}
-data DataNetworkingSubnetV2 s = DataNetworkingSubnetV2 {
+data NetworkingSubnetV2Data s = NetworkingSubnetV2Data {
       _cidr              :: !(TF.Attr s P.Text)
     {- ^ (Optional) The CIDR of the subnet. -}
     , _dhcp_disabled     :: !(TF.Attr s P.Text)
@@ -899,8 +899,8 @@ data DataNetworkingSubnetV2 s = DataNetworkingSubnetV2 {
     {- ^ (Optional) The owner of the subnet. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataNetworkingSubnetV2 s) where
-    toHCL DataNetworkingSubnetV2{..} = TF.inline $ catMaybes
+instance TF.ToHCL (NetworkingSubnetV2Data s) where
+    toHCL NetworkingSubnetV2Data{..} = TF.inline $ catMaybes
         [ TF.assign "cidr" <$> TF.attribute _cidr
         , TF.assign "dhcp_disabled" <$> TF.attribute _dhcp_disabled
         , TF.assign "dhcp_enabled" <$> TF.attribute _dhcp_enabled
@@ -916,150 +916,150 @@ instance TF.ToHCL (DataNetworkingSubnetV2 s) where
         , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasCidr (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
+instance P.HasCidr (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
     cidr =
-        lens (_cidr :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _cidr = a } :: DataNetworkingSubnetV2 s)
+        lens (_cidr :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _cidr = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasDhcpDisabled (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
+instance P.HasDhcpDisabled (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
     dhcpDisabled =
-        lens (_dhcp_disabled :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _dhcp_disabled = a } :: DataNetworkingSubnetV2 s)
+        lens (_dhcp_disabled :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _dhcp_disabled = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasDhcpEnabled (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
+instance P.HasDhcpEnabled (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
     dhcpEnabled =
-        lens (_dhcp_enabled :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _dhcp_enabled = a } :: DataNetworkingSubnetV2 s)
+        lens (_dhcp_enabled :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _dhcp_enabled = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasGatewayIp (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
+instance P.HasGatewayIp (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
     gatewayIp =
-        lens (_gateway_ip :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _gateway_ip = a } :: DataNetworkingSubnetV2 s)
+        lens (_gateway_ip :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _gateway_ip = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasIpVersion (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
+instance P.HasIpVersion (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
     ipVersion =
-        lens (_ip_version :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_version = a } :: DataNetworkingSubnetV2 s)
+        lens (_ip_version :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_version = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasIpv6AddressMode (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
+instance P.HasIpv6AddressMode (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
     ipv6AddressMode =
-        lens (_ipv6_address_mode :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _ipv6_address_mode = a } :: DataNetworkingSubnetV2 s)
+        lens (_ipv6_address_mode :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _ipv6_address_mode = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasIpv6RaMode (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
+instance P.HasIpv6RaMode (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
     ipv6RaMode =
-        lens (_ipv6_ra_mode :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _ipv6_ra_mode = a } :: DataNetworkingSubnetV2 s)
+        lens (_ipv6_ra_mode :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _ipv6_ra_mode = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasName (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
+instance P.HasName (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataNetworkingSubnetV2 s)
+        lens (_name :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasNetworkId (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
+instance P.HasNetworkId (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
     networkId =
-        lens (_network_id :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _network_id = a } :: DataNetworkingSubnetV2 s)
+        lens (_network_id :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _network_id = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasRegion (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
+instance P.HasRegion (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: DataNetworkingSubnetV2 s)
+        lens (_region :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasSubnetId (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
+instance P.HasSubnetId (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
     subnetId =
-        lens (_subnet_id :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _subnet_id = a } :: DataNetworkingSubnetV2 s)
+        lens (_subnet_id :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _subnet_id = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasSubnetpoolId (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
+instance P.HasSubnetpoolId (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
     subnetpoolId =
-        lens (_subnetpool_id :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _subnetpool_id = a } :: DataNetworkingSubnetV2 s)
+        lens (_subnetpool_id :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _subnetpool_id = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasTenantId (DataNetworkingSubnetV2 s) (TF.Attr s P.Text) where
+instance P.HasTenantId (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
     tenantId =
-        lens (_tenant_id :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _tenant_id = a } :: DataNetworkingSubnetV2 s)
+        lens (_tenant_id :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _tenant_id = a } :: NetworkingSubnetV2Data s)
 
-instance s ~ s' => P.HasComputedAllocationPools (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAllocationPools (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedAllocationPools x = TF.compute (TF.refKey x) "allocation_pools"
 
-instance s ~ s' => P.HasComputedCidr (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCidr (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedCidr =
-        (_cidr :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
+        (_cidr :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDhcpDisabled (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDhcpDisabled (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedDhcpDisabled =
-        (_dhcp_disabled :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
+        (_dhcp_disabled :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDhcpEnabled (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDhcpEnabled (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedDhcpEnabled =
-        (_dhcp_enabled :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
+        (_dhcp_enabled :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDnsNameservers (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDnsNameservers (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedDnsNameservers x = TF.compute (TF.refKey x) "dns_nameservers"
 
-instance s ~ s' => P.HasComputedEnableDhcp (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnableDhcp (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedEnableDhcp x = TF.compute (TF.refKey x) "enable_dhcp"
 
-instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedGatewayIp =
-        (_gateway_ip :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
+        (_gateway_ip :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHostRoutes (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostRoutes (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedHostRoutes x = TF.compute (TF.refKey x) "host_routes"
 
-instance s ~ s' => P.HasComputedIpVersion (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpVersion (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedIpVersion =
-        (_ip_version :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
+        (_ip_version :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpv6AddressMode (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv6AddressMode (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedIpv6AddressMode =
-        (_ipv6_address_mode :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
+        (_ipv6_address_mode :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpv6RaMode (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv6RaMode (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedIpv6RaMode =
-        (_ipv6_ra_mode :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
+        (_ipv6_ra_mode :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
+        (_name :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedNetworkId =
-        (_network_id :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
+        (_network_id :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedSubnetId =
-        (_subnet_id :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
+        (_subnet_id :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSubnetpoolId (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSubnetpoolId (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedSubnetpoolId =
-        (_subnetpool_id :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
+        (_subnetpool_id :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (DataNetworkingSubnetV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedTenantId =
-        (_tenant_id :: DataNetworkingSubnetV2 s -> TF.Attr s P.Text)
+        (_tenant_id :: NetworkingSubnetV2Data s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataNetworkingSubnetV2 :: TF.DataSource P.OpenStack (DataNetworkingSubnetV2 s)
-dataNetworkingSubnetV2 =
+networkingSubnetV2Data :: TF.DataSource P.OpenStack (NetworkingSubnetV2Data s)
+networkingSubnetV2Data =
     TF.newDataSource "openstack_networking_subnet_v2" $
-        DataNetworkingSubnetV2 {
+        NetworkingSubnetV2Data {
               _cidr = TF.Nil
             , _dhcp_disabled = TF.Nil
             , _dhcp_enabled = TF.Nil
@@ -1079,7 +1079,7 @@ dataNetworkingSubnetV2 =
 
 Use this data source to get the ID of an available OpenStack subnetpool.
 -}
-data DataNetworkingSubnetpoolV2 s = DataNetworkingSubnetpoolV2 {
+data NetworkingSubnetpoolV2Data s = NetworkingSubnetpoolV2Data {
       _address_scope_id  :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Neutron address scope that subnetpools is assigned to. -}
     , _default_prefixlen :: !(TF.Attr s P.Text)
@@ -1108,8 +1108,8 @@ data DataNetworkingSubnetpoolV2 s = DataNetworkingSubnetpoolV2 {
     {- ^ (Optional) Whether this subnetpool is shared across all projects. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataNetworkingSubnetpoolV2 s) where
-    toHCL DataNetworkingSubnetpoolV2{..} = TF.inline $ catMaybes
+instance TF.ToHCL (NetworkingSubnetpoolV2Data s) where
+    toHCL NetworkingSubnetpoolV2Data{..} = TF.inline $ catMaybes
         [ TF.assign "address_scope_id" <$> TF.attribute _address_scope_id
         , TF.assign "default_prefixlen" <$> TF.attribute _default_prefixlen
         , TF.assign "default_quota" <$> TF.attribute _default_quota
@@ -1125,123 +1125,123 @@ instance TF.ToHCL (DataNetworkingSubnetpoolV2 s) where
         , TF.assign "shared" <$> TF.attribute _shared
         ]
 
-instance P.HasAddressScopeId (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
+instance P.HasAddressScopeId (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
     addressScopeId =
-        lens (_address_scope_id :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _address_scope_id = a } :: DataNetworkingSubnetpoolV2 s)
+        lens (_address_scope_id :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _address_scope_id = a } :: NetworkingSubnetpoolV2Data s)
 
-instance P.HasDefaultPrefixlen (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
+instance P.HasDefaultPrefixlen (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
     defaultPrefixlen =
-        lens (_default_prefixlen :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _default_prefixlen = a } :: DataNetworkingSubnetpoolV2 s)
+        lens (_default_prefixlen :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _default_prefixlen = a } :: NetworkingSubnetpoolV2Data s)
 
-instance P.HasDefaultQuota (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
+instance P.HasDefaultQuota (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
     defaultQuota =
-        lens (_default_quota :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _default_quota = a } :: DataNetworkingSubnetpoolV2 s)
+        lens (_default_quota :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _default_quota = a } :: NetworkingSubnetpoolV2Data s)
 
-instance P.HasDescription (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
+instance P.HasDescription (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: DataNetworkingSubnetpoolV2 s)
+        lens (_description :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: NetworkingSubnetpoolV2Data s)
 
-instance P.HasIpVersion (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
+instance P.HasIpVersion (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
     ipVersion =
-        lens (_ip_version :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_version = a } :: DataNetworkingSubnetpoolV2 s)
+        lens (_ip_version :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_version = a } :: NetworkingSubnetpoolV2Data s)
 
-instance P.HasIsDefault (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
+instance P.HasIsDefault (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
     isDefault =
-        lens (_is_default :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _is_default = a } :: DataNetworkingSubnetpoolV2 s)
+        lens (_is_default :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _is_default = a } :: NetworkingSubnetpoolV2Data s)
 
-instance P.HasMaxPrefixlen (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
+instance P.HasMaxPrefixlen (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
     maxPrefixlen =
-        lens (_max_prefixlen :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _max_prefixlen = a } :: DataNetworkingSubnetpoolV2 s)
+        lens (_max_prefixlen :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _max_prefixlen = a } :: NetworkingSubnetpoolV2Data s)
 
-instance P.HasMinPrefixlen (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
+instance P.HasMinPrefixlen (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
     minPrefixlen =
-        lens (_min_prefixlen :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _min_prefixlen = a } :: DataNetworkingSubnetpoolV2 s)
+        lens (_min_prefixlen :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _min_prefixlen = a } :: NetworkingSubnetpoolV2Data s)
 
-instance P.HasName (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
+instance P.HasName (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataNetworkingSubnetpoolV2 s)
+        lens (_name :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: NetworkingSubnetpoolV2Data s)
 
-instance P.HasPrefixes (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
+instance P.HasPrefixes (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
     prefixes =
-        lens (_prefixes :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _prefixes = a } :: DataNetworkingSubnetpoolV2 s)
+        lens (_prefixes :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _prefixes = a } :: NetworkingSubnetpoolV2Data s)
 
-instance P.HasProjectId (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
+instance P.HasProjectId (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: DataNetworkingSubnetpoolV2 s)
+        lens (_project_id :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _project_id = a } :: NetworkingSubnetpoolV2Data s)
 
-instance P.HasRegion (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
+instance P.HasRegion (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: DataNetworkingSubnetpoolV2 s)
+        lens (_region :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: NetworkingSubnetpoolV2Data s)
 
-instance P.HasShared (DataNetworkingSubnetpoolV2 s) (TF.Attr s P.Text) where
+instance P.HasShared (NetworkingSubnetpoolV2Data s) (TF.Attr s P.Text) where
     shared =
-        lens (_shared :: DataNetworkingSubnetpoolV2 s -> TF.Attr s P.Text)
-             (\s a -> s { _shared = a } :: DataNetworkingSubnetpoolV2 s)
+        lens (_shared :: NetworkingSubnetpoolV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _shared = a } :: NetworkingSubnetpoolV2Data s)
 
-instance s ~ s' => P.HasComputedAddressScopeId (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddressScopeId (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedAddressScopeId x = TF.compute (TF.refKey x) "address_scope_id"
 
-instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputedDefaultPrefixlen (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultPrefixlen (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedDefaultPrefixlen x = TF.compute (TF.refKey x) "default_prefixlen"
 
-instance s ~ s' => P.HasComputedDefaultQuota (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultQuota (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedDefaultQuota x = TF.compute (TF.refKey x) "default_quota"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedIpVersion (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpVersion (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedIpVersion x = TF.compute (TF.refKey x) "ip_version"
 
-instance s ~ s' => P.HasComputedIsDefault (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIsDefault (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedIsDefault x = TF.compute (TF.refKey x) "is_default"
 
-instance s ~ s' => P.HasComputedMaxPrefixlen (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaxPrefixlen (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedMaxPrefixlen x = TF.compute (TF.refKey x) "max_prefixlen"
 
-instance s ~ s' => P.HasComputedMinPrefixlen (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMinPrefixlen (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedMinPrefixlen x = TF.compute (TF.refKey x) "min_prefixlen"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPrefixes (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrefixes (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedPrefixes x = TF.compute (TF.refKey x) "prefixes"
 
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedProjectId x = TF.compute (TF.refKey x) "project_id"
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedRevisionNumber (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRevisionNumber (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedRevisionNumber x = TF.compute (TF.refKey x) "revision_number"
 
-instance s ~ s' => P.HasComputedShared (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedShared (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedShared x = TF.compute (TF.refKey x) "shared"
 
-instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (DataNetworkingSubnetpoolV2 s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
     computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
 
-dataNetworkingSubnetpoolV2 :: TF.DataSource P.OpenStack (DataNetworkingSubnetpoolV2 s)
-dataNetworkingSubnetpoolV2 =
+networkingSubnetpoolV2Data :: TF.DataSource P.OpenStack (NetworkingSubnetpoolV2Data s)
+networkingSubnetpoolV2Data =
     TF.newDataSource "openstack_networking_subnetpool_v2" $
-        DataNetworkingSubnetpoolV2 {
+        NetworkingSubnetpoolV2Data {
               _address_scope_id = TF.Nil
             , _default_prefixlen = TF.Nil
             , _default_quota = TF.Nil

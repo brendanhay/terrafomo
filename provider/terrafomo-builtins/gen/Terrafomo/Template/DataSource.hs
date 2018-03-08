@@ -24,11 +24,11 @@
 module Terrafomo.Template.DataSource
     (
     -- * Types
-      DataCloudinitConfig (..)
-    , dataCloudinitConfig
+      CloudinitConfigData (..)
+    , cloudinitConfigData
 
-    , DataFile (..)
-    , dataFile
+    , FileData (..)
+    , fileData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -77,7 +77,7 @@ import qualified Terrafomo.Schema    as TF
 
 Renders a multi-part cloud-init config from source files.
 -}
-data DataCloudinitConfig s = DataCloudinitConfig {
+data CloudinitConfigData s = CloudinitConfigData {
       _base64_encode :: !(TF.Attr s P.Text)
     {- ^ (Optional) Base64 encoding of the rendered output. Default to @true@ -}
     , _gzip          :: !(TF.Attr s P.Text)
@@ -86,50 +86,50 @@ data DataCloudinitConfig s = DataCloudinitConfig {
     {- ^ (Required) One may specify this many times, this creates a fragment of the rendered cloud-init config file. The order of the parts is maintained in the configuration is maintained in the rendered template. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataCloudinitConfig s) where
-    toHCL DataCloudinitConfig{..} = TF.inline $ catMaybes
+instance TF.ToHCL (CloudinitConfigData s) where
+    toHCL CloudinitConfigData{..} = TF.inline $ catMaybes
         [ TF.assign "base64_encode" <$> TF.attribute _base64_encode
         , TF.assign "gzip" <$> TF.attribute _gzip
         , TF.assign "part" <$> TF.attribute _part
         ]
 
-instance P.HasBase64Encode (DataCloudinitConfig s) (TF.Attr s P.Text) where
+instance P.HasBase64Encode (CloudinitConfigData s) (TF.Attr s P.Text) where
     base64Encode =
-        lens (_base64_encode :: DataCloudinitConfig s -> TF.Attr s P.Text)
-             (\s a -> s { _base64_encode = a } :: DataCloudinitConfig s)
+        lens (_base64_encode :: CloudinitConfigData s -> TF.Attr s P.Text)
+             (\s a -> s { _base64_encode = a } :: CloudinitConfigData s)
 
-instance P.HasGzip (DataCloudinitConfig s) (TF.Attr s P.Text) where
+instance P.HasGzip (CloudinitConfigData s) (TF.Attr s P.Text) where
     gzip =
-        lens (_gzip :: DataCloudinitConfig s -> TF.Attr s P.Text)
-             (\s a -> s { _gzip = a } :: DataCloudinitConfig s)
+        lens (_gzip :: CloudinitConfigData s -> TF.Attr s P.Text)
+             (\s a -> s { _gzip = a } :: CloudinitConfigData s)
 
-instance P.HasPart (DataCloudinitConfig s) (TF.Attr s P.Text) where
+instance P.HasPart (CloudinitConfigData s) (TF.Attr s P.Text) where
     part =
-        lens (_part :: DataCloudinitConfig s -> TF.Attr s P.Text)
-             (\s a -> s { _part = a } :: DataCloudinitConfig s)
+        lens (_part :: CloudinitConfigData s -> TF.Attr s P.Text)
+             (\s a -> s { _part = a } :: CloudinitConfigData s)
 
-instance s ~ s' => P.HasComputedBase64Encode (TF.Ref s' (DataCloudinitConfig s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBase64Encode (TF.Ref s' (CloudinitConfigData s)) (TF.Attr s P.Text) where
     computedBase64Encode =
-        (_base64_encode :: DataCloudinitConfig s -> TF.Attr s P.Text)
+        (_base64_encode :: CloudinitConfigData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedGzip (TF.Ref s' (DataCloudinitConfig s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGzip (TF.Ref s' (CloudinitConfigData s)) (TF.Attr s P.Text) where
     computedGzip =
-        (_gzip :: DataCloudinitConfig s -> TF.Attr s P.Text)
+        (_gzip :: CloudinitConfigData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPart (TF.Ref s' (DataCloudinitConfig s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPart (TF.Ref s' (CloudinitConfigData s)) (TF.Attr s P.Text) where
     computedPart =
-        (_part :: DataCloudinitConfig s -> TF.Attr s P.Text)
+        (_part :: CloudinitConfigData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRendered (TF.Ref s' (DataCloudinitConfig s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRendered (TF.Ref s' (CloudinitConfigData s)) (TF.Attr s P.Text) where
     computedRendered x = TF.compute (TF.refKey x) "rendered"
 
-dataCloudinitConfig :: TF.DataSource TF.NoProvider (DataCloudinitConfig s)
-dataCloudinitConfig =
+cloudinitConfigData :: TF.DataSource TF.NoProvider (CloudinitConfigData s)
+cloudinitConfigData =
     TF.newDataSource "template_cloudinit_config" $
-        DataCloudinitConfig {
+        CloudinitConfigData {
               _base64_encode = TF.Nil
             , _gzip = TF.Nil
             , _part = TF.Nil
@@ -139,42 +139,42 @@ dataCloudinitConfig =
 
 Renders a template from a file.
 -}
-data DataFile s = DataFile {
+data FileData s = FileData {
       _template :: !(TF.Attr s P.Text)
     {- ^ (Required) The contents of the template. These can be loaded from a file on disk using the </docs/configuration/interpolation.html#file_path_> . -}
     , _vars     :: !(TF.Attr s (P.Variables s))
     {- ^ (Optional) Variables for interpolation within the template. Note that variables must all be primitives. Direct references to lists or maps will cause a validation error. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataFile s) where
-    toHCL DataFile{..} = TF.inline $ catMaybes
+instance TF.ToHCL (FileData s) where
+    toHCL FileData{..} = TF.inline $ catMaybes
         [ TF.assign "template" <$> TF.attribute _template
         , TF.assign "vars" <$> TF.attribute _vars
         ]
 
-instance P.HasTemplate (DataFile s) (TF.Attr s P.Text) where
+instance P.HasTemplate (FileData s) (TF.Attr s P.Text) where
     template =
-        lens (_template :: DataFile s -> TF.Attr s P.Text)
-             (\s a -> s { _template = a } :: DataFile s)
+        lens (_template :: FileData s -> TF.Attr s P.Text)
+             (\s a -> s { _template = a } :: FileData s)
 
-instance P.HasVars (DataFile s) (TF.Attr s (P.Variables s)) where
+instance P.HasVars (FileData s) (TF.Attr s (P.Variables s)) where
     vars =
-        lens (_vars :: DataFile s -> TF.Attr s (P.Variables s))
-             (\s a -> s { _vars = a } :: DataFile s)
+        lens (_vars :: FileData s -> TF.Attr s (P.Variables s))
+             (\s a -> s { _vars = a } :: FileData s)
 
-instance s ~ s' => P.HasComputedRendered (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRendered (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
     computedRendered x = TF.compute (TF.refKey x) "rendered"
 
-instance s ~ s' => P.HasComputedTemplate (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTemplate (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
     computedTemplate x = TF.compute (TF.refKey x) "template"
 
-instance s ~ s' => P.HasComputedVars (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVars (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
     computedVars x = TF.compute (TF.refKey x) "vars"
 
-dataFile :: TF.DataSource TF.NoProvider (DataFile s)
-dataFile =
+fileData :: TF.DataSource TF.NoProvider (FileData s)
+fileData =
     TF.newDataSource "template_file" $
-        DataFile {
+        FileData {
               _template = TF.Nil
             , _vars = TF.Nil
             }

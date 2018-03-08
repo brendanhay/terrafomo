@@ -24,17 +24,17 @@
 module Terrafomo.Triton.DataSource
     (
     -- * Types
-      DataAccount (..)
-    , dataAccount
+      AccountData (..)
+    , accountData
 
-    , DataDatacenter (..)
-    , dataDatacenter
+    , DatacenterData (..)
+    , datacenterData
 
-    , DataImage (..)
-    , dataImage
+    , ImageData (..)
+    , imageData
 
-    , DataNetwork (..)
-    , dataNetwork
+    , NetworkData (..)
+    , networkData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -101,7 +101,7 @@ The @triton_account@ data source queries Triton for Account information. ~>
 NOTE: This data source uses the name of the Account currently configured in
 the </docs/providers/triton/index.html> .
 -}
-data DataAccount s = DataAccount {
+data AccountData s = AccountData {
       _cns_enabled :: !(TF.Attr s P.Text)
     {- ^ - (boolean) Whether the Container Name Service (CNS) is enabled for the Account. -}
     , _email       :: !(TF.Attr s P.Text)
@@ -112,58 +112,58 @@ data DataAccount s = DataAccount {
     {- ^ - (string) The login name associated with the Account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataAccount s) where
-    toHCL DataAccount{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AccountData s) where
+    toHCL AccountData{..} = TF.inline $ catMaybes
         [ TF.assign "cns_enabled" <$> TF.attribute _cns_enabled
         , TF.assign "email" <$> TF.attribute _email
         , TF.assign "id" <$> TF.attribute _id
         , TF.assign "login" <$> TF.attribute _login
         ]
 
-instance P.HasCnsEnabled (DataAccount s) (TF.Attr s P.Text) where
+instance P.HasCnsEnabled (AccountData s) (TF.Attr s P.Text) where
     cnsEnabled =
-        lens (_cns_enabled :: DataAccount s -> TF.Attr s P.Text)
-             (\s a -> s { _cns_enabled = a } :: DataAccount s)
+        lens (_cns_enabled :: AccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _cns_enabled = a } :: AccountData s)
 
-instance P.HasEmail (DataAccount s) (TF.Attr s P.Text) where
+instance P.HasEmail (AccountData s) (TF.Attr s P.Text) where
     email =
-        lens (_email :: DataAccount s -> TF.Attr s P.Text)
-             (\s a -> s { _email = a } :: DataAccount s)
+        lens (_email :: AccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _email = a } :: AccountData s)
 
-instance P.HasId (DataAccount s) (TF.Attr s P.Text) where
+instance P.HasId (AccountData s) (TF.Attr s P.Text) where
     id =
-        lens (_id :: DataAccount s -> TF.Attr s P.Text)
-             (\s a -> s { _id = a } :: DataAccount s)
+        lens (_id :: AccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _id = a } :: AccountData s)
 
-instance P.HasLogin (DataAccount s) (TF.Attr s P.Text) where
+instance P.HasLogin (AccountData s) (TF.Attr s P.Text) where
     login =
-        lens (_login :: DataAccount s -> TF.Attr s P.Text)
-             (\s a -> s { _login = a } :: DataAccount s)
+        lens (_login :: AccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _login = a } :: AccountData s)
 
-instance s ~ s' => P.HasComputedCnsEnabled (TF.Ref s' (DataAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCnsEnabled (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
     computedCnsEnabled =
-        (_cns_enabled :: DataAccount s -> TF.Attr s P.Text)
+        (_cns_enabled :: AccountData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (DataAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
     computedEmail =
-        (_email :: DataAccount s -> TF.Attr s P.Text)
+        (_email :: AccountData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
     computedId =
-        (_id :: DataAccount s -> TF.Attr s P.Text)
+        (_id :: AccountData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLogin (TF.Ref s' (DataAccount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLogin (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
     computedLogin =
-        (_login :: DataAccount s -> TF.Attr s P.Text)
+        (_login :: AccountData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataAccount :: TF.DataSource P.Triton (DataAccount s)
-dataAccount =
+accountData :: TF.DataSource P.Triton (AccountData s)
+accountData =
     TF.newDataSource "triton_account" $
-        DataAccount {
+        AccountData {
               _cns_enabled = TF.Nil
             , _email = TF.Nil
             , _id = TF.Nil
@@ -176,43 +176,43 @@ The @triton_datacenter@ data source queries Triton for Data Center
 information. ~> NOTE: This data source uses the endpoint URL of the Data
 Center currently configured in the </docs/providers/triton/index.html> .
 -}
-data DataDatacenter s = DataDatacenter {
+data DatacenterData s = DatacenterData {
       _endpoint :: !(TF.Attr s P.Text)
     {- ^ - (string) The endpoint URL of the Data Center. -}
     , _name     :: !(TF.Attr s P.Text)
     {- ^ - (string) The name of the Data Center. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataDatacenter s) where
-    toHCL DataDatacenter{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DatacenterData s) where
+    toHCL DatacenterData{..} = TF.inline $ catMaybes
         [ TF.assign "endpoint" <$> TF.attribute _endpoint
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasEndpoint (DataDatacenter s) (TF.Attr s P.Text) where
+instance P.HasEndpoint (DatacenterData s) (TF.Attr s P.Text) where
     endpoint =
-        lens (_endpoint :: DataDatacenter s -> TF.Attr s P.Text)
-             (\s a -> s { _endpoint = a } :: DataDatacenter s)
+        lens (_endpoint :: DatacenterData s -> TF.Attr s P.Text)
+             (\s a -> s { _endpoint = a } :: DatacenterData s)
 
-instance P.HasName (DataDatacenter s) (TF.Attr s P.Text) where
+instance P.HasName (DatacenterData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataDatacenter s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataDatacenter s)
+        lens (_name :: DatacenterData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DatacenterData s)
 
-instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
     computedEndpoint =
-        (_endpoint :: DataDatacenter s -> TF.Attr s P.Text)
+        (_endpoint :: DatacenterData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataDatacenter s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataDatacenter s -> TF.Attr s P.Text)
+        (_name :: DatacenterData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataDatacenter :: TF.DataSource P.Triton (DataDatacenter s)
-dataDatacenter =
+datacenterData :: TF.DataSource P.Triton (DatacenterData s)
+datacenterData =
     TF.newDataSource "triton_datacenter" $
-        DataDatacenter {
+        DatacenterData {
               _endpoint = TF.Nil
             , _name = TF.Nil
             }
@@ -222,7 +222,7 @@ dataDatacenter =
 The @triton_image@ data source queries the Triton Image API for an image ID
 based on a variety of different parameters.
 -}
-data DataImage s = DataImage {
+data ImageData s = ImageData {
       _most_recent :: !(TF.Attr s P.Text)
     {- ^ - (bool) If more than one result is returned, use the most recent Image. -}
     , _name        :: !(TF.Attr s P.Text)
@@ -241,8 +241,8 @@ data DataImage s = DataImage {
     {- ^ - (string) The version for the image -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataImage s) where
-    toHCL DataImage{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ImageData s) where
+    toHCL ImageData{..} = TF.inline $ catMaybes
         [ TF.assign "most_recent" <$> TF.attribute _most_recent
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "os" <$> TF.attribute _os
@@ -253,93 +253,93 @@ instance TF.ToHCL (DataImage s) where
         , TF.assign "version" <$> TF.attribute _version
         ]
 
-instance P.HasMostRecent (DataImage s) (TF.Attr s P.Text) where
+instance P.HasMostRecent (ImageData s) (TF.Attr s P.Text) where
     mostRecent =
-        lens (_most_recent :: DataImage s -> TF.Attr s P.Text)
-             (\s a -> s { _most_recent = a } :: DataImage s)
+        lens (_most_recent :: ImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _most_recent = a } :: ImageData s)
 
-instance P.HasName (DataImage s) (TF.Attr s P.Text) where
+instance P.HasName (ImageData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataImage s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataImage s)
+        lens (_name :: ImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ImageData s)
 
-instance P.HasOs (DataImage s) (TF.Attr s P.Text) where
+instance P.HasOs (ImageData s) (TF.Attr s P.Text) where
     os =
-        lens (_os :: DataImage s -> TF.Attr s P.Text)
-             (\s a -> s { _os = a } :: DataImage s)
+        lens (_os :: ImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _os = a } :: ImageData s)
 
-instance P.HasOwner (DataImage s) (TF.Attr s P.Text) where
+instance P.HasOwner (ImageData s) (TF.Attr s P.Text) where
     owner =
-        lens (_owner :: DataImage s -> TF.Attr s P.Text)
-             (\s a -> s { _owner = a } :: DataImage s)
+        lens (_owner :: ImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _owner = a } :: ImageData s)
 
-instance P.HasPublic (DataImage s) (TF.Attr s P.Text) where
+instance P.HasPublic (ImageData s) (TF.Attr s P.Text) where
     public =
-        lens (_public :: DataImage s -> TF.Attr s P.Text)
-             (\s a -> s { _public = a } :: DataImage s)
+        lens (_public :: ImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _public = a } :: ImageData s)
 
-instance P.HasState (DataImage s) (TF.Attr s P.Text) where
+instance P.HasState (ImageData s) (TF.Attr s P.Text) where
     state =
-        lens (_state :: DataImage s -> TF.Attr s P.Text)
-             (\s a -> s { _state = a } :: DataImage s)
+        lens (_state :: ImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _state = a } :: ImageData s)
 
-instance P.HasType' (DataImage s) (TF.Attr s P.Text) where
+instance P.HasType' (ImageData s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: DataImage s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: DataImage s)
+        lens (_type' :: ImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: ImageData s)
 
-instance P.HasVersion (DataImage s) (TF.Attr s P.Text) where
+instance P.HasVersion (ImageData s) (TF.Attr s P.Text) where
     version =
-        lens (_version :: DataImage s -> TF.Attr s P.Text)
-             (\s a -> s { _version = a } :: DataImage s)
+        lens (_version :: ImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _version = a } :: ImageData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedMostRecent =
-        (_most_recent :: DataImage s -> TF.Attr s P.Text)
+        (_most_recent :: ImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataImage s -> TF.Attr s P.Text)
+        (_name :: ImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOs (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOs (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedOs =
-        (_os :: DataImage s -> TF.Attr s P.Text)
+        (_os :: ImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOwner (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedOwner =
-        (_owner :: DataImage s -> TF.Attr s P.Text)
+        (_owner :: ImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPublic (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublic (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedPublic =
-        (_public :: DataImage s -> TF.Attr s P.Text)
+        (_public :: ImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedState (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedState (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedState =
-        (_state :: DataImage s -> TF.Attr s P.Text)
+        (_state :: ImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedType' =
-        (_type' :: DataImage s -> TF.Attr s P.Text)
+        (_type' :: ImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DataImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedVersion =
-        (_version :: DataImage s -> TF.Attr s P.Text)
+        (_version :: ImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataImage :: TF.DataSource P.Triton (DataImage s)
-dataImage =
+imageData :: TF.DataSource P.Triton (ImageData s)
+imageData =
     TF.newDataSource "triton_image" $
-        DataImage {
+        ImageData {
               _most_recent = TF.Nil
             , _name = TF.Nil
             , _os = TF.Nil
@@ -355,32 +355,32 @@ dataImage =
 The @triton_network@ data source queries the Triton Network API for a
 network ID based on the name of the network.
 -}
-data DataNetwork s = DataNetwork {
+data NetworkData s = NetworkData {
       _name :: !(TF.Attr s P.Text)
     {- ^ - (string) The name of the network. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataNetwork s) where
-    toHCL DataNetwork{..} = TF.inline $ catMaybes
+instance TF.ToHCL (NetworkData s) where
+    toHCL NetworkData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (DataNetwork s) (TF.Attr s P.Text) where
+instance P.HasName (NetworkData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataNetwork s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataNetwork s)
+        lens (_name :: NetworkData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: NetworkData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataNetwork s -> TF.Attr s P.Text)
+        (_name :: NetworkData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataNetwork :: TF.DataSource P.Triton (DataNetwork s)
-dataNetwork =
+networkData :: TF.DataSource P.Triton (NetworkData s)
+networkData =
     TF.newDataSource "triton_network" $
-        DataNetwork {
+        NetworkData {
               _name = TF.Nil
             }

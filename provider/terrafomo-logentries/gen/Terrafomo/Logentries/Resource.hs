@@ -24,11 +24,11 @@
 module Terrafomo.Logentries.Resource
     (
     -- * Types
-      ResourceLog (..)
-    , resourceLog
+      LogResource (..)
+    , logResource
 
-    , ResourceLogset (..)
-    , resourceLogset
+    , LogsetResource (..)
+    , logsetResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -82,7 +82,7 @@ import qualified Terrafomo.Schema    as TF
 
 Provides a Logentries log resource.
 -}
-data ResourceLog s = ResourceLog {
+data LogResource s = LogResource {
       _filename         :: !(TF.Attr s P.Text)
     {- ^ (Optional) the filename of the log. -}
     , _logset_id        :: !(TF.Attr s P.Text)
@@ -97,8 +97,8 @@ data ResourceLog s = ResourceLog {
     {- ^ (Optional) The log type. See the Logentries <https://logentries.com/doc/log-types/> for more information. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceLog s) where
-    toHCL ResourceLog{..} = TF.inline $ catMaybes
+instance TF.ToHCL (LogResource s) where
+    toHCL LogResource{..} = TF.inline $ catMaybes
         [ TF.assign "filename" <$> TF.attribute _filename
         , TF.assign "logset_id" <$> TF.attribute _logset_id
         , TF.assign "name" <$> TF.attribute _name
@@ -107,73 +107,73 @@ instance TF.ToHCL (ResourceLog s) where
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasFilename (ResourceLog s) (TF.Attr s P.Text) where
+instance P.HasFilename (LogResource s) (TF.Attr s P.Text) where
     filename =
-        lens (_filename :: ResourceLog s -> TF.Attr s P.Text)
-             (\s a -> s { _filename = a } :: ResourceLog s)
+        lens (_filename :: LogResource s -> TF.Attr s P.Text)
+             (\s a -> s { _filename = a } :: LogResource s)
 
-instance P.HasLogsetId (ResourceLog s) (TF.Attr s P.Text) where
+instance P.HasLogsetId (LogResource s) (TF.Attr s P.Text) where
     logsetId =
-        lens (_logset_id :: ResourceLog s -> TF.Attr s P.Text)
-             (\s a -> s { _logset_id = a } :: ResourceLog s)
+        lens (_logset_id :: LogResource s -> TF.Attr s P.Text)
+             (\s a -> s { _logset_id = a } :: LogResource s)
 
-instance P.HasName (ResourceLog s) (TF.Attr s P.Text) where
+instance P.HasName (LogResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceLog s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceLog s)
+        lens (_name :: LogResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: LogResource s)
 
-instance P.HasRetentionPeriod (ResourceLog s) (TF.Attr s P.Text) where
+instance P.HasRetentionPeriod (LogResource s) (TF.Attr s P.Text) where
     retentionPeriod =
-        lens (_retention_period :: ResourceLog s -> TF.Attr s P.Text)
-             (\s a -> s { _retention_period = a } :: ResourceLog s)
+        lens (_retention_period :: LogResource s -> TF.Attr s P.Text)
+             (\s a -> s { _retention_period = a } :: LogResource s)
 
-instance P.HasSource (ResourceLog s) (TF.Attr s P.Text) where
+instance P.HasSource (LogResource s) (TF.Attr s P.Text) where
     source =
-        lens (_source :: ResourceLog s -> TF.Attr s P.Text)
-             (\s a -> s { _source = a } :: ResourceLog s)
+        lens (_source :: LogResource s -> TF.Attr s P.Text)
+             (\s a -> s { _source = a } :: LogResource s)
 
-instance P.HasType' (ResourceLog s) (TF.Attr s P.Text) where
+instance P.HasType' (LogResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: ResourceLog s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: ResourceLog s)
+        lens (_type' :: LogResource s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: LogResource s)
 
-instance s ~ s' => P.HasComputedFilename (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFilename (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedFilename =
-        (_filename :: ResourceLog s -> TF.Attr s P.Text)
+        (_filename :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLogsetId (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLogsetId (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedLogsetId =
-        (_logset_id :: ResourceLog s -> TF.Attr s P.Text)
+        (_logset_id :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceLog s -> TF.Attr s P.Text)
+        (_name :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRetentionPeriod (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRetentionPeriod (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedRetentionPeriod =
-        (_retention_period :: ResourceLog s -> TF.Attr s P.Text)
+        (_retention_period :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSource (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedSource =
-        (_source :: ResourceLog s -> TF.Attr s P.Text)
+        (_source :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedToken (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedToken x = TF.compute (TF.refKey x) "token"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceLog s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedType' =
-        (_type' :: ResourceLog s -> TF.Attr s P.Text)
+        (_type' :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceLog :: TF.Resource P.Logentries (ResourceLog s)
-resourceLog =
+logResource :: TF.Resource P.Logentries (LogResource s)
+logResource =
     TF.newResource "logentries_log" $
-        ResourceLog {
+        LogResource {
               _filename = TF.Nil
             , _logset_id = TF.Nil
             , _name = TF.Nil
@@ -187,43 +187,43 @@ resourceLog =
 Provides a Logentries logset resource. A logset is a collection of
 @logentries_log@ resources.
 -}
-data ResourceLogset s = ResourceLogset {
+data LogsetResource s = LogsetResource {
       _location :: !(TF.Attr s P.Text)
     {- ^ (Optional, default "nonlocation") A location is for your convenience only. You can specify a DNS entry such as web.example.com, IP address or arbitrary comment. -}
     , _name     :: !(TF.Attr s P.Text)
     {- ^ (Required) The log set name, which should be short and descriptive. For example, www, db1. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceLogset s) where
-    toHCL ResourceLogset{..} = TF.inline $ catMaybes
+instance TF.ToHCL (LogsetResource s) where
+    toHCL LogsetResource{..} = TF.inline $ catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasLocation (ResourceLogset s) (TF.Attr s P.Text) where
+instance P.HasLocation (LogsetResource s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: ResourceLogset s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: ResourceLogset s)
+        lens (_location :: LogsetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _location = a } :: LogsetResource s)
 
-instance P.HasName (ResourceLogset s) (TF.Attr s P.Text) where
+instance P.HasName (LogsetResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceLogset s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceLogset s)
+        lens (_name :: LogsetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: LogsetResource s)
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ResourceLogset s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (LogsetResource s)) (TF.Attr s P.Text) where
     computedLocation =
-        (_location :: ResourceLogset s -> TF.Attr s P.Text)
+        (_location :: LogsetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceLogset s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LogsetResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceLogset s -> TF.Attr s P.Text)
+        (_name :: LogsetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceLogset :: TF.Resource P.Logentries (ResourceLogset s)
-resourceLogset =
+logsetResource :: TF.Resource P.Logentries (LogsetResource s)
+logsetResource =
     TF.newResource "logentries_logset" $
-        ResourceLogset {
+        LogsetResource {
               _location = TF.Nil
             , _name = TF.Nil
             }

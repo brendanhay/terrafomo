@@ -1,5 +1,7 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
+{-# LANGUAGE TypeFamilies #-}
+
 -- |
 -- Module      : Terrafomo.TLS.Types
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -10,11 +12,24 @@
 --
 module Terrafomo.TLS.Types where
 
--- import Data.Text (Text)
+import Data.Map.Strict (Map)
+import Data.Text       (Text)
 
--- import Terrafomo
+import GHC.Exts (IsList (..))
 
--- import Formatting (Format, (%))
+import Terrafomo
 
--- import qualified Terrafomo.TLS.Lens as TF
--- import qualified Terrafomo.HCL as HCL
+import qualified Terrafomo.HCL      as HCL
+import qualified Terrafomo.TLS.Lens as TF
+
+newtype Subject s = Subject { fromSubject :: Map Text (Attr s Text) }
+    deriving (Show, Eq)
+
+instance ToHCL (Subject s) where
+    toHCL = HCL.pairs . fromSubject
+
+instance IsList (Subject s) where
+    type Item (Subject s) = (Text, Attr s Text)
+
+    toList   = toList  . fromSubject
+    fromList = Subject . fromList

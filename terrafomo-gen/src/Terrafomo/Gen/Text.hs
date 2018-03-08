@@ -2,8 +2,9 @@
 
 module Terrafomo.Gen.Text where
 
-import Data.Maybe (fromMaybe)
-import Data.Text  (Text)
+import Data.Maybe  (fromMaybe)
+import Data.Monoid ((<>))
+import Data.Text   (Text)
 
 import qualified Data.Char as Char
 import qualified Data.Set  as Set
@@ -28,10 +29,10 @@ safeAttrName :: Text -> Text
 safeAttrName = mappend "_computed" . safeArgName
 
 resourceName :: Text -> Text
-resourceName = mappend "Resource" . schemaTypeName
+resourceName = (<> "Resource") . schemaTypeName
 
 dataSourceName :: Text -> Text
-dataSourceName = mappend "Data" . schemaTypeName
+dataSourceName = (<> "Data") . schemaTypeName
 
 schemaTypeName :: Text -> Text
 schemaTypeName x =

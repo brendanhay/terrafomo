@@ -24,8 +24,8 @@
 module Terrafomo.Local.DataSource
     (
     -- * Types
-      DataFile (..)
-    , dataFile
+      FileData (..)
+    , fileData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -65,29 +65,29 @@ import qualified Terrafomo.Schema    as TF
 
 @local_file@ reads a file from the local filesystem.
 -}
-data DataFile s = DataFile {
+data FileData s = FileData {
       _filename :: !(TF.Attr s P.Text)
     {- ^ (Required) The path to the file that will be read. The data source will return an error if the file does not exist. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataFile s) where
-    toHCL DataFile{..} = TF.inline $ catMaybes
+instance TF.ToHCL (FileData s) where
+    toHCL FileData{..} = TF.inline $ catMaybes
         [ TF.assign "filename" <$> TF.attribute _filename
         ]
 
-instance P.HasFilename (DataFile s) (TF.Attr s P.Text) where
+instance P.HasFilename (FileData s) (TF.Attr s P.Text) where
     filename =
-        lens (_filename :: DataFile s -> TF.Attr s P.Text)
-             (\s a -> s { _filename = a } :: DataFile s)
+        lens (_filename :: FileData s -> TF.Attr s P.Text)
+             (\s a -> s { _filename = a } :: FileData s)
 
-instance s ~ s' => P.HasComputedFilename (TF.Ref s' (DataFile s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFilename (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
     computedFilename =
-        (_filename :: DataFile s -> TF.Attr s P.Text)
+        (_filename :: FileData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataFile :: TF.DataSource TF.NoProvider (DataFile s)
-dataFile =
+fileData :: TF.DataSource TF.NoProvider (FileData s)
+fileData =
     TF.newDataSource "local_file" $
-        DataFile {
+        FileData {
               _filename = TF.Nil
             }

@@ -24,32 +24,32 @@
 module Terrafomo.NS1.Resource
     (
     -- * Types
-      ResourceApikey (..)
-    , resourceApikey
+      ApikeyResource (..)
+    , apikeyResource
 
-    , ResourceDatafeed (..)
-    , resourceDatafeed
+    , DatafeedResource (..)
+    , datafeedResource
 
-    , ResourceDatasource (..)
-    , resourceDatasource
+    , DatasourceResource (..)
+    , datasourceResource
 
-    , ResourceMonitoringjob (..)
-    , resourceMonitoringjob
+    , MonitoringjobResource (..)
+    , monitoringjobResource
 
-    , ResourceNotifylist (..)
-    , resourceNotifylist
+    , NotifylistResource (..)
+    , notifylistResource
 
-    , ResourceRecord (..)
-    , resourceRecord
+    , RecordResource (..)
+    , recordResource
 
-    , ResourceTeam (..)
-    , resourceTeam
+    , TeamResource (..)
+    , teamResource
 
-    , ResourceUser (..)
-    , resourceUser
+    , UserResource (..)
+    , userResource
 
-    , ResourceZone (..)
-    , resourceZone
+    , ZoneResource (..)
+    , zoneResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -163,7 +163,7 @@ import qualified Terrafomo.Schema    as TF
 Provides a NS1 Api Key resource. This can be used to create, modify, and
 delete api keys.
 -}
-data ResourceApikey s = ResourceApikey {
+data ApikeyResource s = ApikeyResource {
       _key         :: !(TF.Attr s P.Text)
     {- ^ (Required) The apikeys authentication token. -}
     , _name        :: !(TF.Attr s P.Text)
@@ -174,58 +174,58 @@ data ResourceApikey s = ResourceApikey {
     {- ^ (Required) The teams that the apikey belongs to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceApikey s) where
-    toHCL ResourceApikey{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ApikeyResource s) where
+    toHCL ApikeyResource{..} = TF.inline $ catMaybes
         [ TF.assign "key" <$> TF.attribute _key
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "permissions" <$> TF.attribute _permissions
         , TF.assign "teams" <$> TF.attribute _teams
         ]
 
-instance P.HasKey (ResourceApikey s) (TF.Attr s P.Text) where
+instance P.HasKey (ApikeyResource s) (TF.Attr s P.Text) where
     key =
-        lens (_key :: ResourceApikey s -> TF.Attr s P.Text)
-             (\s a -> s { _key = a } :: ResourceApikey s)
+        lens (_key :: ApikeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _key = a } :: ApikeyResource s)
 
-instance P.HasName (ResourceApikey s) (TF.Attr s P.Text) where
+instance P.HasName (ApikeyResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceApikey s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceApikey s)
+        lens (_name :: ApikeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ApikeyResource s)
 
-instance P.HasPermissions (ResourceApikey s) (TF.Attr s P.Text) where
+instance P.HasPermissions (ApikeyResource s) (TF.Attr s P.Text) where
     permissions =
-        lens (_permissions :: ResourceApikey s -> TF.Attr s P.Text)
-             (\s a -> s { _permissions = a } :: ResourceApikey s)
+        lens (_permissions :: ApikeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _permissions = a } :: ApikeyResource s)
 
-instance P.HasTeams (ResourceApikey s) (TF.Attr s P.Text) where
+instance P.HasTeams (ApikeyResource s) (TF.Attr s P.Text) where
     teams =
-        lens (_teams :: ResourceApikey s -> TF.Attr s P.Text)
-             (\s a -> s { _teams = a } :: ResourceApikey s)
+        lens (_teams :: ApikeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _teams = a } :: ApikeyResource s)
 
-instance s ~ s' => P.HasComputedKey (TF.Ref s' (ResourceApikey s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
     computedKey =
-        (_key :: ResourceApikey s -> TF.Attr s P.Text)
+        (_key :: ApikeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceApikey s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceApikey s -> TF.Attr s P.Text)
+        (_name :: ApikeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (ResourceApikey s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
     computedPermissions =
-        (_permissions :: ResourceApikey s -> TF.Attr s P.Text)
+        (_permissions :: ApikeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTeams (TF.Ref s' (ResourceApikey s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTeams (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
     computedTeams =
-        (_teams :: ResourceApikey s -> TF.Attr s P.Text)
+        (_teams :: ApikeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceApikey :: TF.Resource P.NS1 (ResourceApikey s)
-resourceApikey =
+apikeyResource :: TF.Resource P.NS1 (ApikeyResource s)
+apikeyResource =
     TF.newResource "ns1_apikey" $
-        ResourceApikey {
+        ApikeyResource {
               _key = TF.Nil
             , _name = TF.Nil
             , _permissions = TF.Nil
@@ -237,7 +237,7 @@ resourceApikey =
 Provides a NS1 Data Feed resource. This can be used to create, modify, and
 delete data feeds.
 -}
-data ResourceDatafeed s = ResourceDatafeed {
+data DatafeedResource s = DatafeedResource {
       _config    :: !(TF.Attr s P.Text)
     {- ^ (Optional) The feeds configuration matching the specification in 'feed_config' from /data/sourcetypes. -}
     , _name      :: !(TF.Attr s P.Text)
@@ -246,47 +246,47 @@ data ResourceDatafeed s = ResourceDatafeed {
     {- ^ (Required) The data source id that this feed is connected to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceDatafeed s) where
-    toHCL ResourceDatafeed{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DatafeedResource s) where
+    toHCL DatafeedResource{..} = TF.inline $ catMaybes
         [ TF.assign "config" <$> TF.attribute _config
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "source_id" <$> TF.attribute _source_id
         ]
 
-instance P.HasConfig (ResourceDatafeed s) (TF.Attr s P.Text) where
+instance P.HasConfig (DatafeedResource s) (TF.Attr s P.Text) where
     config =
-        lens (_config :: ResourceDatafeed s -> TF.Attr s P.Text)
-             (\s a -> s { _config = a } :: ResourceDatafeed s)
+        lens (_config :: DatafeedResource s -> TF.Attr s P.Text)
+             (\s a -> s { _config = a } :: DatafeedResource s)
 
-instance P.HasName (ResourceDatafeed s) (TF.Attr s P.Text) where
+instance P.HasName (DatafeedResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceDatafeed s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceDatafeed s)
+        lens (_name :: DatafeedResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DatafeedResource s)
 
-instance P.HasSourceId (ResourceDatafeed s) (TF.Attr s P.Text) where
+instance P.HasSourceId (DatafeedResource s) (TF.Attr s P.Text) where
     sourceId =
-        lens (_source_id :: ResourceDatafeed s -> TF.Attr s P.Text)
-             (\s a -> s { _source_id = a } :: ResourceDatafeed s)
+        lens (_source_id :: DatafeedResource s -> TF.Attr s P.Text)
+             (\s a -> s { _source_id = a } :: DatafeedResource s)
 
-instance s ~ s' => P.HasComputedConfig (TF.Ref s' (ResourceDatafeed s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConfig (TF.Ref s' (DatafeedResource s)) (TF.Attr s P.Text) where
     computedConfig =
-        (_config :: ResourceDatafeed s -> TF.Attr s P.Text)
+        (_config :: DatafeedResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDatafeed s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatafeedResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceDatafeed s -> TF.Attr s P.Text)
+        (_name :: DatafeedResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourceId (TF.Ref s' (ResourceDatafeed s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceId (TF.Ref s' (DatafeedResource s)) (TF.Attr s P.Text) where
     computedSourceId =
-        (_source_id :: ResourceDatafeed s -> TF.Attr s P.Text)
+        (_source_id :: DatafeedResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceDatafeed :: TF.Resource P.NS1 (ResourceDatafeed s)
-resourceDatafeed =
+datafeedResource :: TF.Resource P.NS1 (DatafeedResource s)
+datafeedResource =
     TF.newResource "ns1_datafeed" $
-        ResourceDatafeed {
+        DatafeedResource {
               _config = TF.Nil
             , _name = TF.Nil
             , _source_id = TF.Nil
@@ -297,7 +297,7 @@ resourceDatafeed =
 Provides a NS1 Data Source resource. This can be used to create, modify, and
 delete data sources.
 -}
-data ResourceDatasource s = ResourceDatasource {
+data DatasourceResource s = DatasourceResource {
       _config     :: !(TF.Attr s P.Text)
     {- ^ (Optional) The data source configuration, determined by its type. -}
     , _name       :: !(TF.Attr s P.Text)
@@ -306,47 +306,47 @@ data ResourceDatasource s = ResourceDatasource {
     {- ^ (Required) The data sources type, listed in API endpoint https://api.nsone.net/v1/data/sourcetypes. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceDatasource s) where
-    toHCL ResourceDatasource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DatasourceResource s) where
+    toHCL DatasourceResource{..} = TF.inline $ catMaybes
         [ TF.assign "config" <$> TF.attribute _config
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "sourcetype" <$> TF.attribute _sourcetype
         ]
 
-instance P.HasConfig (ResourceDatasource s) (TF.Attr s P.Text) where
+instance P.HasConfig (DatasourceResource s) (TF.Attr s P.Text) where
     config =
-        lens (_config :: ResourceDatasource s -> TF.Attr s P.Text)
-             (\s a -> s { _config = a } :: ResourceDatasource s)
+        lens (_config :: DatasourceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _config = a } :: DatasourceResource s)
 
-instance P.HasName (ResourceDatasource s) (TF.Attr s P.Text) where
+instance P.HasName (DatasourceResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceDatasource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceDatasource s)
+        lens (_name :: DatasourceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DatasourceResource s)
 
-instance P.HasSourcetype (ResourceDatasource s) (TF.Attr s P.Text) where
+instance P.HasSourcetype (DatasourceResource s) (TF.Attr s P.Text) where
     sourcetype =
-        lens (_sourcetype :: ResourceDatasource s -> TF.Attr s P.Text)
-             (\s a -> s { _sourcetype = a } :: ResourceDatasource s)
+        lens (_sourcetype :: DatasourceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _sourcetype = a } :: DatasourceResource s)
 
-instance s ~ s' => P.HasComputedConfig (TF.Ref s' (ResourceDatasource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConfig (TF.Ref s' (DatasourceResource s)) (TF.Attr s P.Text) where
     computedConfig =
-        (_config :: ResourceDatasource s -> TF.Attr s P.Text)
+        (_config :: DatasourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDatasource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatasourceResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceDatasource s -> TF.Attr s P.Text)
+        (_name :: DatasourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourcetype (TF.Ref s' (ResourceDatasource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourcetype (TF.Ref s' (DatasourceResource s)) (TF.Attr s P.Text) where
     computedSourcetype =
-        (_sourcetype :: ResourceDatasource s -> TF.Attr s P.Text)
+        (_sourcetype :: DatasourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceDatasource :: TF.Resource P.NS1 (ResourceDatasource s)
-resourceDatasource =
+datasourceResource :: TF.Resource P.NS1 (DatasourceResource s)
+datasourceResource =
     TF.newResource "ns1_datasource" $
-        ResourceDatasource {
+        DatasourceResource {
               _config = TF.Nil
             , _name = TF.Nil
             , _sourcetype = TF.Nil
@@ -357,7 +357,7 @@ resourceDatasource =
 Provides a NS1 Monitoring Job resource. This can be used to create, modify,
 and delete monitoring jobs.
 -}
-data ResourceMonitoringjob s = ResourceMonitoringjob {
+data MonitoringjobResource s = MonitoringjobResource {
       _active          :: !(TF.Attr s P.Text)
     {- ^ (Required) Indicates if the job is active or temporaril.y disabled. -}
     , _config          :: !(TF.Attr s P.Text)
@@ -390,8 +390,8 @@ data ResourceMonitoringjob s = ResourceMonitoringjob {
     {- ^ (Optional) A list of rules for determining failure conditions. Job Rules are documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceMonitoringjob s) where
-    toHCL ResourceMonitoringjob{..} = TF.inline $ catMaybes
+instance TF.ToHCL (MonitoringjobResource s) where
+    toHCL MonitoringjobResource{..} = TF.inline $ catMaybes
         [ TF.assign "active" <$> TF.attribute _active
         , TF.assign "config" <$> TF.attribute _config
         , TF.assign "frequency" <$> TF.attribute _frequency
@@ -409,160 +409,160 @@ instance TF.ToHCL (ResourceMonitoringjob s) where
         , TF.assign "rules" <$> TF.attribute _rules
         ]
 
-instance P.HasActive (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasActive (MonitoringjobResource s) (TF.Attr s P.Text) where
     active =
-        lens (_active :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _active = a } :: ResourceMonitoringjob s)
+        lens (_active :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _active = a } :: MonitoringjobResource s)
 
-instance P.HasConfig (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasConfig (MonitoringjobResource s) (TF.Attr s P.Text) where
     config =
-        lens (_config :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _config = a } :: ResourceMonitoringjob s)
+        lens (_config :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _config = a } :: MonitoringjobResource s)
 
-instance P.HasFrequency (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasFrequency (MonitoringjobResource s) (TF.Attr s P.Text) where
     frequency =
-        lens (_frequency :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _frequency = a } :: ResourceMonitoringjob s)
+        lens (_frequency :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _frequency = a } :: MonitoringjobResource s)
 
-instance P.HasJobType (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasJobType (MonitoringjobResource s) (TF.Attr s P.Text) where
     jobType =
-        lens (_job_type :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _job_type = a } :: ResourceMonitoringjob s)
+        lens (_job_type :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _job_type = a } :: MonitoringjobResource s)
 
-instance P.HasName (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasName (MonitoringjobResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceMonitoringjob s)
+        lens (_name :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: MonitoringjobResource s)
 
-instance P.HasNotes (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasNotes (MonitoringjobResource s) (TF.Attr s P.Text) where
     notes =
-        lens (_notes :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _notes = a } :: ResourceMonitoringjob s)
+        lens (_notes :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _notes = a } :: MonitoringjobResource s)
 
-instance P.HasNotifyDelay (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasNotifyDelay (MonitoringjobResource s) (TF.Attr s P.Text) where
     notifyDelay =
-        lens (_notify_delay :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _notify_delay = a } :: ResourceMonitoringjob s)
+        lens (_notify_delay :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _notify_delay = a } :: MonitoringjobResource s)
 
-instance P.HasNotifyFailback (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasNotifyFailback (MonitoringjobResource s) (TF.Attr s P.Text) where
     notifyFailback =
-        lens (_notify_failback :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _notify_failback = a } :: ResourceMonitoringjob s)
+        lens (_notify_failback :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _notify_failback = a } :: MonitoringjobResource s)
 
-instance P.HasNotifyList (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasNotifyList (MonitoringjobResource s) (TF.Attr s P.Text) where
     notifyList =
-        lens (_notify_list :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _notify_list = a } :: ResourceMonitoringjob s)
+        lens (_notify_list :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _notify_list = a } :: MonitoringjobResource s)
 
-instance P.HasNotifyRegional (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasNotifyRegional (MonitoringjobResource s) (TF.Attr s P.Text) where
     notifyRegional =
-        lens (_notify_regional :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _notify_regional = a } :: ResourceMonitoringjob s)
+        lens (_notify_regional :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _notify_regional = a } :: MonitoringjobResource s)
 
-instance P.HasNotifyRepeat (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasNotifyRepeat (MonitoringjobResource s) (TF.Attr s P.Text) where
     notifyRepeat =
-        lens (_notify_repeat :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _notify_repeat = a } :: ResourceMonitoringjob s)
+        lens (_notify_repeat :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _notify_repeat = a } :: MonitoringjobResource s)
 
-instance P.HasPolicy (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasPolicy (MonitoringjobResource s) (TF.Attr s P.Text) where
     policy =
-        lens (_policy :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _policy = a } :: ResourceMonitoringjob s)
+        lens (_policy :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policy = a } :: MonitoringjobResource s)
 
-instance P.HasRapidRecheck (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasRapidRecheck (MonitoringjobResource s) (TF.Attr s P.Text) where
     rapidRecheck =
-        lens (_rapid_recheck :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _rapid_recheck = a } :: ResourceMonitoringjob s)
+        lens (_rapid_recheck :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _rapid_recheck = a } :: MonitoringjobResource s)
 
-instance P.HasRegions (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasRegions (MonitoringjobResource s) (TF.Attr s P.Text) where
     regions =
-        lens (_regions :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _regions = a } :: ResourceMonitoringjob s)
+        lens (_regions :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _regions = a } :: MonitoringjobResource s)
 
-instance P.HasRules (ResourceMonitoringjob s) (TF.Attr s P.Text) where
+instance P.HasRules (MonitoringjobResource s) (TF.Attr s P.Text) where
     rules =
-        lens (_rules :: ResourceMonitoringjob s -> TF.Attr s P.Text)
-             (\s a -> s { _rules = a } :: ResourceMonitoringjob s)
+        lens (_rules :: MonitoringjobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _rules = a } :: MonitoringjobResource s)
 
-instance s ~ s' => P.HasComputedActive (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedActive (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedActive =
-        (_active :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_active :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedConfig (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConfig (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedConfig =
-        (_config :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_config :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFrequency (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFrequency (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedFrequency =
-        (_frequency :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_frequency :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedJobType (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedJobType (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedJobType =
-        (_job_type :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_job_type :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_name :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNotes (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotes (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedNotes =
-        (_notes :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_notes :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNotifyDelay (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotifyDelay (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedNotifyDelay =
-        (_notify_delay :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_notify_delay :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNotifyFailback (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotifyFailback (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedNotifyFailback =
-        (_notify_failback :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_notify_failback :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNotifyList (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotifyList (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedNotifyList =
-        (_notify_list :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_notify_list :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNotifyRegional (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotifyRegional (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedNotifyRegional =
-        (_notify_regional :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_notify_regional :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNotifyRepeat (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotifyRepeat (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedNotifyRepeat =
-        (_notify_repeat :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_notify_repeat :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedPolicy =
-        (_policy :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_policy :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRapidRecheck (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRapidRecheck (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedRapidRecheck =
-        (_rapid_recheck :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_rapid_recheck :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegions (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegions (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedRegions =
-        (_regions :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_regions :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRules (TF.Ref s' (ResourceMonitoringjob s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRules (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedRules =
-        (_rules :: ResourceMonitoringjob s -> TF.Attr s P.Text)
+        (_rules :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceMonitoringjob :: TF.Resource P.NS1 (ResourceMonitoringjob s)
-resourceMonitoringjob =
+monitoringjobResource :: TF.Resource P.NS1 (MonitoringjobResource s)
+monitoringjobResource =
     TF.newResource "ns1_monitoringjob" $
-        ResourceMonitoringjob {
+        MonitoringjobResource {
               _active = TF.Nil
             , _config = TF.Nil
             , _frequency = TF.Nil
@@ -585,43 +585,43 @@ resourceMonitoringjob =
 Provides a NS1 Notify List resource. This can be used to create, modify, and
 delete notify lists.
 -}
-data ResourceNotifylist s = ResourceNotifylist {
+data NotifylistResource s = NotifylistResource {
       _name          :: !(TF.Attr s P.Text)
     {- ^ (Required) The free-form display name for the notify list. -}
     , _notifications :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of notifiers. All notifiers in a notification list will receive notifications whenever an event is send to the list (e.g., when a monitoring job fails). Notifiers are documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceNotifylist s) where
-    toHCL ResourceNotifylist{..} = TF.inline $ catMaybes
+instance TF.ToHCL (NotifylistResource s) where
+    toHCL NotifylistResource{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "notifications" <$> TF.attribute _notifications
         ]
 
-instance P.HasName (ResourceNotifylist s) (TF.Attr s P.Text) where
+instance P.HasName (NotifylistResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceNotifylist s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceNotifylist s)
+        lens (_name :: NotifylistResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: NotifylistResource s)
 
-instance P.HasNotifications (ResourceNotifylist s) (TF.Attr s P.Text) where
+instance P.HasNotifications (NotifylistResource s) (TF.Attr s P.Text) where
     notifications =
-        lens (_notifications :: ResourceNotifylist s -> TF.Attr s P.Text)
-             (\s a -> s { _notifications = a } :: ResourceNotifylist s)
+        lens (_notifications :: NotifylistResource s -> TF.Attr s P.Text)
+             (\s a -> s { _notifications = a } :: NotifylistResource s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceNotifylist s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NotifylistResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceNotifylist s -> TF.Attr s P.Text)
+        (_name :: NotifylistResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNotifications (TF.Ref s' (ResourceNotifylist s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotifications (TF.Ref s' (NotifylistResource s)) (TF.Attr s P.Text) where
     computedNotifications =
-        (_notifications :: ResourceNotifylist s -> TF.Attr s P.Text)
+        (_notifications :: NotifylistResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceNotifylist :: TF.Resource P.NS1 (ResourceNotifylist s)
-resourceNotifylist =
+notifylistResource :: TF.Resource P.NS1 (NotifylistResource s)
+notifylistResource =
     TF.newResource "ns1_notifylist" $
-        ResourceNotifylist {
+        NotifylistResource {
               _name = TF.Nil
             , _notifications = TF.Nil
             }
@@ -631,7 +631,7 @@ resourceNotifylist =
 Provides a NS1 Record resource. This can be used to create, modify, and
 delete records.
 -}
-data ResourceRecord s = ResourceRecord {
+data RecordResource s = RecordResource {
       _answers           :: !(TF.Attr s P.Text)
     {- ^ (Optional) One or more NS1 answers for the records' specified type. Answers are documented below. -}
     , _domain            :: !(TF.Attr s P.Text)
@@ -650,8 +650,8 @@ data ResourceRecord s = ResourceRecord {
     {- ^ (Required) The zone the record belongs to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceRecord s) where
-    toHCL ResourceRecord{..} = TF.inline $ catMaybes
+instance TF.ToHCL (RecordResource s) where
+    toHCL RecordResource{..} = TF.inline $ catMaybes
         [ TF.assign "answers" <$> TF.attribute _answers
         , TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "filters" <$> TF.attribute _filters
@@ -662,90 +662,90 @@ instance TF.ToHCL (ResourceRecord s) where
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasAnswers (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasAnswers (RecordResource s) (TF.Attr s P.Text) where
     answers =
-        lens (_answers :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _answers = a } :: ResourceRecord s)
+        lens (_answers :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _answers = a } :: RecordResource s)
 
-instance P.HasDomain (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasDomain (RecordResource s) (TF.Attr s P.Text) where
     domain =
-        lens (_domain :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _domain = a } :: ResourceRecord s)
+        lens (_domain :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _domain = a } :: RecordResource s)
 
-instance P.HasFilters (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasFilters (RecordResource s) (TF.Attr s P.Text) where
     filters =
-        lens (_filters :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _filters = a } :: ResourceRecord s)
+        lens (_filters :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _filters = a } :: RecordResource s)
 
-instance P.HasLink (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasLink (RecordResource s) (TF.Attr s P.Text) where
     link =
-        lens (_link :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _link = a } :: ResourceRecord s)
+        lens (_link :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _link = a } :: RecordResource s)
 
-instance P.HasTtl (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasTtl (RecordResource s) (TF.Attr s P.Text) where
     ttl =
-        lens (_ttl :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: ResourceRecord s)
+        lens (_ttl :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ttl = a } :: RecordResource s)
 
-instance P.HasType' (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: ResourceRecord s)
+        lens (_type' :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: RecordResource s)
 
-instance P.HasUseClientSubnet (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasUseClientSubnet (RecordResource s) (TF.Attr s P.Text) where
     useClientSubnet =
-        lens (_use_client_subnet :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _use_client_subnet = a } :: ResourceRecord s)
+        lens (_use_client_subnet :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _use_client_subnet = a } :: RecordResource s)
 
-instance P.HasZone (ResourceRecord s) (TF.Attr s P.Text) where
+instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: ResourceRecord s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: ResourceRecord s)
+        lens (_zone :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _zone = a } :: RecordResource s)
 
-instance s ~ s' => P.HasComputedAnswers (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAnswers (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedAnswers =
-        (_answers :: ResourceRecord s -> TF.Attr s P.Text)
+        (_answers :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDomain (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDomain (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedDomain =
-        (_domain :: ResourceRecord s -> TF.Attr s P.Text)
+        (_domain :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFilters (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFilters (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedFilters =
-        (_filters :: ResourceRecord s -> TF.Attr s P.Text)
+        (_filters :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLink (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLink (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedLink =
-        (_link :: ResourceRecord s -> TF.Attr s P.Text)
+        (_link :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedTtl =
-        (_ttl :: ResourceRecord s -> TF.Attr s P.Text)
+        (_ttl :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedType' =
-        (_type' :: ResourceRecord s -> TF.Attr s P.Text)
+        (_type' :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUseClientSubnet (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUseClientSubnet (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedUseClientSubnet =
-        (_use_client_subnet :: ResourceRecord s -> TF.Attr s P.Text)
+        (_use_client_subnet :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (ResourceRecord s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedZone =
-        (_zone :: ResourceRecord s -> TF.Attr s P.Text)
+        (_zone :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceRecord :: TF.Resource P.NS1 (ResourceRecord s)
-resourceRecord =
+recordResource :: TF.Resource P.NS1 (RecordResource s)
+recordResource =
     TF.newResource "ns1_record" $
-        ResourceRecord {
+        RecordResource {
               _answers = TF.Nil
             , _domain = TF.Nil
             , _filters = TF.Nil
@@ -761,43 +761,43 @@ resourceRecord =
 Provides a NS1 Team resource. This can be used to create, modify, and delete
 teams.
 -}
-data ResourceTeam s = ResourceTeam {
+data TeamResource s = TeamResource {
       _name        :: !(TF.Attr s P.Text)
     {- ^ (Required) The free form name of the team. -}
     , _permissions :: !(TF.Attr s P.Text)
     {- ^ (Optional) The allowed permissions of the team. Permissions documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceTeam s) where
-    toHCL ResourceTeam{..} = TF.inline $ catMaybes
+instance TF.ToHCL (TeamResource s) where
+    toHCL TeamResource{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "permissions" <$> TF.attribute _permissions
         ]
 
-instance P.HasName (ResourceTeam s) (TF.Attr s P.Text) where
+instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceTeam s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceTeam s)
+        lens (_name :: TeamResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: TeamResource s)
 
-instance P.HasPermissions (ResourceTeam s) (TF.Attr s P.Text) where
+instance P.HasPermissions (TeamResource s) (TF.Attr s P.Text) where
     permissions =
-        lens (_permissions :: ResourceTeam s -> TF.Attr s P.Text)
-             (\s a -> s { _permissions = a } :: ResourceTeam s)
+        lens (_permissions :: TeamResource s -> TF.Attr s P.Text)
+             (\s a -> s { _permissions = a } :: TeamResource s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceTeam s -> TF.Attr s P.Text)
+        (_name :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (ResourceTeam s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
     computedPermissions =
-        (_permissions :: ResourceTeam s -> TF.Attr s P.Text)
+        (_permissions :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceTeam :: TF.Resource P.NS1 (ResourceTeam s)
-resourceTeam =
+teamResource :: TF.Resource P.NS1 (TeamResource s)
+teamResource =
     TF.newResource "ns1_team" $
-        ResourceTeam {
+        TeamResource {
               _name = TF.Nil
             , _permissions = TF.Nil
             }
@@ -808,7 +808,7 @@ Provides a NS1 User resource. Creating a user sends an invitation email to
 the user's email address. This can be used to create, modify, and delete
 users.
 -}
-data ResourceUser s = ResourceUser {
+data UserResource s = UserResource {
       _email       :: !(TF.Attr s P.Text)
     {- ^ (Required) The email address of the user. -}
     , _name        :: !(TF.Attr s P.Text)
@@ -823,8 +823,8 @@ data ResourceUser s = ResourceUser {
     {- ^ (Required) The users login name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceUser s) where
-    toHCL ResourceUser{..} = TF.inline $ catMaybes
+instance TF.ToHCL (UserResource s) where
+    toHCL UserResource{..} = TF.inline $ catMaybes
         [ TF.assign "email" <$> TF.attribute _email
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "notify" <$> TF.attribute _notify
@@ -833,70 +833,70 @@ instance TF.ToHCL (ResourceUser s) where
         , TF.assign "username" <$> TF.attribute _username
         ]
 
-instance P.HasEmail (ResourceUser s) (TF.Attr s P.Text) where
+instance P.HasEmail (UserResource s) (TF.Attr s P.Text) where
     email =
-        lens (_email :: ResourceUser s -> TF.Attr s P.Text)
-             (\s a -> s { _email = a } :: ResourceUser s)
+        lens (_email :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _email = a } :: UserResource s)
 
-instance P.HasName (ResourceUser s) (TF.Attr s P.Text) where
+instance P.HasName (UserResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceUser s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceUser s)
+        lens (_name :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: UserResource s)
 
-instance P.HasNotify (ResourceUser s) (TF.Attr s P.Text) where
+instance P.HasNotify (UserResource s) (TF.Attr s P.Text) where
     notify =
-        lens (_notify :: ResourceUser s -> TF.Attr s P.Text)
-             (\s a -> s { _notify = a } :: ResourceUser s)
+        lens (_notify :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _notify = a } :: UserResource s)
 
-instance P.HasPermissions (ResourceUser s) (TF.Attr s P.Text) where
+instance P.HasPermissions (UserResource s) (TF.Attr s P.Text) where
     permissions =
-        lens (_permissions :: ResourceUser s -> TF.Attr s P.Text)
-             (\s a -> s { _permissions = a } :: ResourceUser s)
+        lens (_permissions :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _permissions = a } :: UserResource s)
 
-instance P.HasTeams (ResourceUser s) (TF.Attr s P.Text) where
+instance P.HasTeams (UserResource s) (TF.Attr s P.Text) where
     teams =
-        lens (_teams :: ResourceUser s -> TF.Attr s P.Text)
-             (\s a -> s { _teams = a } :: ResourceUser s)
+        lens (_teams :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _teams = a } :: UserResource s)
 
-instance P.HasUsername (ResourceUser s) (TF.Attr s P.Text) where
+instance P.HasUsername (UserResource s) (TF.Attr s P.Text) where
     username =
-        lens (_username :: ResourceUser s -> TF.Attr s P.Text)
-             (\s a -> s { _username = a } :: ResourceUser s)
+        lens (_username :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _username = a } :: UserResource s)
 
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedEmail =
-        (_email :: ResourceUser s -> TF.Attr s P.Text)
+        (_email :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceUser s -> TF.Attr s P.Text)
+        (_name :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNotify (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotify (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedNotify =
-        (_notify :: ResourceUser s -> TF.Attr s P.Text)
+        (_notify :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedPermissions =
-        (_permissions :: ResourceUser s -> TF.Attr s P.Text)
+        (_permissions :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTeams (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTeams (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedTeams =
-        (_teams :: ResourceUser s -> TF.Attr s P.Text)
+        (_teams :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUsername (TF.Ref s' (ResourceUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedUsername =
-        (_username :: ResourceUser s -> TF.Attr s P.Text)
+        (_username :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceUser :: TF.Resource P.NS1 (ResourceUser s)
-resourceUser =
+userResource :: TF.Resource P.NS1 (UserResource s)
+userResource =
     TF.newResource "ns1_user" $
-        ResourceUser {
+        UserResource {
               _email = TF.Nil
             , _name = TF.Nil
             , _notify = TF.Nil
@@ -910,7 +910,7 @@ resourceUser =
 Provides a NS1 DNS Zone resource. This can be used to create, modify, and
 delete zones.
 -}
-data ResourceZone s = ResourceZone {
+data ZoneResource s = ZoneResource {
       _expiry  :: !(TF.Attr s P.Text)
     {- ^ (Optional) The SOA Expiry. -}
     , _link    :: !(TF.Attr s P.Text)
@@ -929,8 +929,8 @@ data ResourceZone s = ResourceZone {
     {- ^ (Required) The domain name of the zone. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceZone s) where
-    toHCL ResourceZone{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ZoneResource s) where
+    toHCL ZoneResource{..} = TF.inline $ catMaybes
         [ TF.assign "expiry" <$> TF.attribute _expiry
         , TF.assign "link" <$> TF.attribute _link
         , TF.assign "nx_ttl" <$> TF.attribute _nx_ttl
@@ -941,90 +941,90 @@ instance TF.ToHCL (ResourceZone s) where
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasExpiry (ResourceZone s) (TF.Attr s P.Text) where
+instance P.HasExpiry (ZoneResource s) (TF.Attr s P.Text) where
     expiry =
-        lens (_expiry :: ResourceZone s -> TF.Attr s P.Text)
-             (\s a -> s { _expiry = a } :: ResourceZone s)
+        lens (_expiry :: ZoneResource s -> TF.Attr s P.Text)
+             (\s a -> s { _expiry = a } :: ZoneResource s)
 
-instance P.HasLink (ResourceZone s) (TF.Attr s P.Text) where
+instance P.HasLink (ZoneResource s) (TF.Attr s P.Text) where
     link =
-        lens (_link :: ResourceZone s -> TF.Attr s P.Text)
-             (\s a -> s { _link = a } :: ResourceZone s)
+        lens (_link :: ZoneResource s -> TF.Attr s P.Text)
+             (\s a -> s { _link = a } :: ZoneResource s)
 
-instance P.HasNxTtl (ResourceZone s) (TF.Attr s P.Text) where
+instance P.HasNxTtl (ZoneResource s) (TF.Attr s P.Text) where
     nxTtl =
-        lens (_nx_ttl :: ResourceZone s -> TF.Attr s P.Text)
-             (\s a -> s { _nx_ttl = a } :: ResourceZone s)
+        lens (_nx_ttl :: ZoneResource s -> TF.Attr s P.Text)
+             (\s a -> s { _nx_ttl = a } :: ZoneResource s)
 
-instance P.HasPrimary (ResourceZone s) (TF.Attr s P.Text) where
+instance P.HasPrimary (ZoneResource s) (TF.Attr s P.Text) where
     primary =
-        lens (_primary :: ResourceZone s -> TF.Attr s P.Text)
-             (\s a -> s { _primary = a } :: ResourceZone s)
+        lens (_primary :: ZoneResource s -> TF.Attr s P.Text)
+             (\s a -> s { _primary = a } :: ZoneResource s)
 
-instance P.HasRefresh (ResourceZone s) (TF.Attr s P.Text) where
+instance P.HasRefresh (ZoneResource s) (TF.Attr s P.Text) where
     refresh =
-        lens (_refresh :: ResourceZone s -> TF.Attr s P.Text)
-             (\s a -> s { _refresh = a } :: ResourceZone s)
+        lens (_refresh :: ZoneResource s -> TF.Attr s P.Text)
+             (\s a -> s { _refresh = a } :: ZoneResource s)
 
-instance P.HasRetry (ResourceZone s) (TF.Attr s P.Text) where
+instance P.HasRetry (ZoneResource s) (TF.Attr s P.Text) where
     retry =
-        lens (_retry :: ResourceZone s -> TF.Attr s P.Text)
-             (\s a -> s { _retry = a } :: ResourceZone s)
+        lens (_retry :: ZoneResource s -> TF.Attr s P.Text)
+             (\s a -> s { _retry = a } :: ZoneResource s)
 
-instance P.HasTtl (ResourceZone s) (TF.Attr s P.Text) where
+instance P.HasTtl (ZoneResource s) (TF.Attr s P.Text) where
     ttl =
-        lens (_ttl :: ResourceZone s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: ResourceZone s)
+        lens (_ttl :: ZoneResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ttl = a } :: ZoneResource s)
 
-instance P.HasZone (ResourceZone s) (TF.Attr s P.Text) where
+instance P.HasZone (ZoneResource s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: ResourceZone s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: ResourceZone s)
+        lens (_zone :: ZoneResource s -> TF.Attr s P.Text)
+             (\s a -> s { _zone = a } :: ZoneResource s)
 
-instance s ~ s' => P.HasComputedExpiry (TF.Ref s' (ResourceZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedExpiry (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedExpiry =
-        (_expiry :: ResourceZone s -> TF.Attr s P.Text)
+        (_expiry :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLink (TF.Ref s' (ResourceZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLink (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedLink =
-        (_link :: ResourceZone s -> TF.Attr s P.Text)
+        (_link :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNxTtl (TF.Ref s' (ResourceZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNxTtl (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedNxTtl =
-        (_nx_ttl :: ResourceZone s -> TF.Attr s P.Text)
+        (_nx_ttl :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrimary (TF.Ref s' (ResourceZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimary (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedPrimary =
-        (_primary :: ResourceZone s -> TF.Attr s P.Text)
+        (_primary :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRefresh (TF.Ref s' (ResourceZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRefresh (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedRefresh =
-        (_refresh :: ResourceZone s -> TF.Attr s P.Text)
+        (_refresh :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRetry (TF.Ref s' (ResourceZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRetry (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedRetry =
-        (_retry :: ResourceZone s -> TF.Attr s P.Text)
+        (_retry :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedTtl =
-        (_ttl :: ResourceZone s -> TF.Attr s P.Text)
+        (_ttl :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (ResourceZone s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedZone =
-        (_zone :: ResourceZone s -> TF.Attr s P.Text)
+        (_zone :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceZone :: TF.Resource P.NS1 (ResourceZone s)
-resourceZone =
+zoneResource :: TF.Resource P.NS1 (ZoneResource s)
+zoneResource =
     TF.newResource "ns1_zone" $
-        ResourceZone {
+        ZoneResource {
               _expiry = TF.Nil
             , _link = TF.Nil
             , _nx_ttl = TF.Nil

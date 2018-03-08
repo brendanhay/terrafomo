@@ -5,7 +5,7 @@
   license: MPL-2.0
   homepage: https://github.com/brendanhay/terrafomo
   bug-reports: https://github.com/brendanhay/terrafomo/issues
-  git: git@gitlab.com:brendanhay/terreurfromage.git
+  github: brendanhay/terrafomo
 
 - &version
   version: 0.0.0.0

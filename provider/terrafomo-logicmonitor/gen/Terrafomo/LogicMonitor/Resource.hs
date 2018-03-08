@@ -24,14 +24,14 @@
 module Terrafomo.LogicMonitor.Resource
     (
     -- * Types
-      ResourceCollectorGroup (..)
-    , resourceCollectorGroup
+      CollectorGroupResource (..)
+    , collectorGroupResource
 
-    , ResourceDevice (..)
-    , resourceDevice
+    , DeviceGroupResource (..)
+    , deviceGroupResource
 
-    , ResourceDeviceGroup (..)
-    , resourceDeviceGroup
+    , DeviceResource (..)
+    , deviceResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -91,147 +91,45 @@ import qualified Terrafomo.Schema    as TF
 Provides a LogicMonitor collector group resource. This can be used to create
 and manage LogicMonitor users
 -}
-data ResourceCollectorGroup s = ResourceCollectorGroup {
+data CollectorGroupResource s = CollectorGroupResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) Set description of collector group -}
     , _name        :: !(TF.Attr s P.Text)
     {- ^ (Required) Name of collector group -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceCollectorGroup s) where
-    toHCL ResourceCollectorGroup{..} = TF.inline $ catMaybes
+instance TF.ToHCL (CollectorGroupResource s) where
+    toHCL CollectorGroupResource{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDescription (ResourceCollectorGroup s) (TF.Attr s P.Text) where
+instance P.HasDescription (CollectorGroupResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceCollectorGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceCollectorGroup s)
+        lens (_description :: CollectorGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: CollectorGroupResource s)
 
-instance P.HasName (ResourceCollectorGroup s) (TF.Attr s P.Text) where
+instance P.HasName (CollectorGroupResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceCollectorGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceCollectorGroup s)
+        lens (_name :: CollectorGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: CollectorGroupResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceCollectorGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (CollectorGroupResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceCollectorGroup s -> TF.Attr s P.Text)
+        (_description :: CollectorGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceCollectorGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CollectorGroupResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceCollectorGroup s -> TF.Attr s P.Text)
+        (_name :: CollectorGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceCollectorGroup :: TF.Resource P.LogicMonitor (ResourceCollectorGroup s)
-resourceCollectorGroup =
+collectorGroupResource :: TF.Resource P.LogicMonitor (CollectorGroupResource s)
+collectorGroupResource =
     TF.newResource "logicmonitor_collector_group" $
-        ResourceCollectorGroup {
+        CollectorGroupResource {
               _description = TF.Nil
             , _name = TF.Nil
-            }
-
-{- | The @logicmonitor_device@ LogicMonitor resource.
-
-Provides a LogicMonitor device resource. This can be used to create and
-manage LogicMonitor devices
--}
-data ResourceDevice s = ResourceDevice {
-      _collector        :: !(TF.Attr s P.Text)
-    {- ^ - (required) The id of the collector that will monitoring the device -}
-    , _disable_alerting :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The host is created with alerting disabled (default is true) -}
-    , _display_name     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Display name of device, (default is ip_addr) -}
-    , _hostgroup_id     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The host group id that specifies which group the device belongs to (multiple host group ids can be added, represented by a comma separated string) -}
-    , _ip_addr          :: !(TF.Attr s P.Text)
-    {- ^ (Required) Ip Address/Hostname of device -}
-    , _properties       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ResourceDevice s) where
-    toHCL ResourceDevice{..} = TF.inline $ catMaybes
-        [ TF.assign "collector" <$> TF.attribute _collector
-        , TF.assign "disable_alerting" <$> TF.attribute _disable_alerting
-        , TF.assign "display_name" <$> TF.attribute _display_name
-        , TF.assign "hostgroup_id" <$> TF.attribute _hostgroup_id
-        , TF.assign "ip_addr" <$> TF.attribute _ip_addr
-        , TF.assign "properties" <$> TF.attribute _properties
-        ]
-
-instance P.HasCollector (ResourceDevice s) (TF.Attr s P.Text) where
-    collector =
-        lens (_collector :: ResourceDevice s -> TF.Attr s P.Text)
-             (\s a -> s { _collector = a } :: ResourceDevice s)
-
-instance P.HasDisableAlerting (ResourceDevice s) (TF.Attr s P.Text) where
-    disableAlerting =
-        lens (_disable_alerting :: ResourceDevice s -> TF.Attr s P.Text)
-             (\s a -> s { _disable_alerting = a } :: ResourceDevice s)
-
-instance P.HasDisplayName (ResourceDevice s) (TF.Attr s P.Text) where
-    displayName =
-        lens (_display_name :: ResourceDevice s -> TF.Attr s P.Text)
-             (\s a -> s { _display_name = a } :: ResourceDevice s)
-
-instance P.HasHostgroupId (ResourceDevice s) (TF.Attr s P.Text) where
-    hostgroupId =
-        lens (_hostgroup_id :: ResourceDevice s -> TF.Attr s P.Text)
-             (\s a -> s { _hostgroup_id = a } :: ResourceDevice s)
-
-instance P.HasIpAddr (ResourceDevice s) (TF.Attr s P.Text) where
-    ipAddr =
-        lens (_ip_addr :: ResourceDevice s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_addr = a } :: ResourceDevice s)
-
-instance P.HasProperties (ResourceDevice s) (TF.Attr s P.Text) where
-    properties =
-        lens (_properties :: ResourceDevice s -> TF.Attr s P.Text)
-             (\s a -> s { _properties = a } :: ResourceDevice s)
-
-instance s ~ s' => P.HasComputedCollector (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
-    computedCollector =
-        (_collector :: ResourceDevice s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDisableAlerting (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
-    computedDisableAlerting =
-        (_disable_alerting :: ResourceDevice s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
-    computedDisplayName =
-        (_display_name :: ResourceDevice s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedHostgroupId (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
-    computedHostgroupId =
-        (_hostgroup_id :: ResourceDevice s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedIpAddr (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
-    computedIpAddr =
-        (_ip_addr :: ResourceDevice s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedProperties (TF.Ref s' (ResourceDevice s)) (TF.Attr s P.Text) where
-    computedProperties =
-        (_properties :: ResourceDevice s -> TF.Attr s P.Text)
-            . TF.refValue
-
-resourceDevice :: TF.Resource P.LogicMonitor (ResourceDevice s)
-resourceDevice =
-    TF.newResource "logicmonitor_device" $
-        ResourceDevice {
-              _collector = TF.Nil
-            , _disable_alerting = TF.Nil
-            , _display_name = TF.Nil
-            , _hostgroup_id = TF.Nil
-            , _ip_addr = TF.Nil
-            , _properties = TF.Nil
             }
 
 {- | The @logicmonitor_device_group@ LogicMonitor resource.
@@ -239,7 +137,7 @@ resourceDevice =
 Provides a LogicMonitor device group resource. This can be used to create
 and manage LogicMonitor device groups
 -}
-data ResourceDeviceGroup s = ResourceDeviceGroup {
+data DeviceGroupResource s = DeviceGroupResource {
       _applies_to       :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Applies to custom query for this group. Setting this field will make this a dynamic group. -}
     , _description      :: !(TF.Attr s P.Text)
@@ -254,8 +152,8 @@ data ResourceDeviceGroup s = ResourceDeviceGroup {
     {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceDeviceGroup s) where
-    toHCL ResourceDeviceGroup{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DeviceGroupResource s) where
+    toHCL DeviceGroupResource{..} = TF.inline $ catMaybes
         [ TF.assign "applies_to" <$> TF.attribute _applies_to
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "disable_alerting" <$> TF.attribute _disable_alerting
@@ -264,74 +162,176 @@ instance TF.ToHCL (ResourceDeviceGroup s) where
         , TF.assign "properties" <$> TF.attribute _properties
         ]
 
-instance P.HasAppliesTo (ResourceDeviceGroup s) (TF.Attr s P.Text) where
+instance P.HasAppliesTo (DeviceGroupResource s) (TF.Attr s P.Text) where
     appliesTo =
-        lens (_applies_to :: ResourceDeviceGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _applies_to = a } :: ResourceDeviceGroup s)
+        lens (_applies_to :: DeviceGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _applies_to = a } :: DeviceGroupResource s)
 
-instance P.HasDescription (ResourceDeviceGroup s) (TF.Attr s P.Text) where
+instance P.HasDescription (DeviceGroupResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceDeviceGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceDeviceGroup s)
+        lens (_description :: DeviceGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: DeviceGroupResource s)
 
-instance P.HasDisableAlerting (ResourceDeviceGroup s) (TF.Attr s P.Text) where
+instance P.HasDisableAlerting (DeviceGroupResource s) (TF.Attr s P.Text) where
     disableAlerting =
-        lens (_disable_alerting :: ResourceDeviceGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _disable_alerting = a } :: ResourceDeviceGroup s)
+        lens (_disable_alerting :: DeviceGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _disable_alerting = a } :: DeviceGroupResource s)
 
-instance P.HasName (ResourceDeviceGroup s) (TF.Attr s P.Text) where
+instance P.HasName (DeviceGroupResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceDeviceGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceDeviceGroup s)
+        lens (_name :: DeviceGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DeviceGroupResource s)
 
-instance P.HasParentId (ResourceDeviceGroup s) (TF.Attr s P.Text) where
+instance P.HasParentId (DeviceGroupResource s) (TF.Attr s P.Text) where
     parentId =
-        lens (_parent_id :: ResourceDeviceGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _parent_id = a } :: ResourceDeviceGroup s)
+        lens (_parent_id :: DeviceGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _parent_id = a } :: DeviceGroupResource s)
 
-instance P.HasProperties (ResourceDeviceGroup s) (TF.Attr s P.Text) where
+instance P.HasProperties (DeviceGroupResource s) (TF.Attr s P.Text) where
     properties =
-        lens (_properties :: ResourceDeviceGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _properties = a } :: ResourceDeviceGroup s)
+        lens (_properties :: DeviceGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _properties = a } :: DeviceGroupResource s)
 
-instance s ~ s' => P.HasComputedAppliesTo (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAppliesTo (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
     computedAppliesTo =
-        (_applies_to :: ResourceDeviceGroup s -> TF.Attr s P.Text)
+        (_applies_to :: DeviceGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceDeviceGroup s -> TF.Attr s P.Text)
+        (_description :: DeviceGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisableAlerting (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisableAlerting (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
     computedDisableAlerting =
-        (_disable_alerting :: ResourceDeviceGroup s -> TF.Attr s P.Text)
+        (_disable_alerting :: DeviceGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceDeviceGroup s -> TF.Attr s P.Text)
+        (_name :: DeviceGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedParentId (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedParentId (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
     computedParentId =
-        (_parent_id :: ResourceDeviceGroup s -> TF.Attr s P.Text)
+        (_parent_id :: DeviceGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProperties (TF.Ref s' (ResourceDeviceGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProperties (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
     computedProperties =
-        (_properties :: ResourceDeviceGroup s -> TF.Attr s P.Text)
+        (_properties :: DeviceGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceDeviceGroup :: TF.Resource P.LogicMonitor (ResourceDeviceGroup s)
-resourceDeviceGroup =
+deviceGroupResource :: TF.Resource P.LogicMonitor (DeviceGroupResource s)
+deviceGroupResource =
     TF.newResource "logicmonitor_device_group" $
-        ResourceDeviceGroup {
+        DeviceGroupResource {
               _applies_to = TF.Nil
             , _description = TF.Nil
             , _disable_alerting = TF.Nil
             , _name = TF.Nil
             , _parent_id = TF.Nil
+            , _properties = TF.Nil
+            }
+
+{- | The @logicmonitor_device@ LogicMonitor resource.
+
+Provides a LogicMonitor device resource. This can be used to create and
+manage LogicMonitor devices
+-}
+data DeviceResource s = DeviceResource {
+      _collector        :: !(TF.Attr s P.Text)
+    {- ^ - (required) The id of the collector that will monitoring the device -}
+    , _disable_alerting :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The host is created with alerting disabled (default is true) -}
+    , _display_name     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Display name of device, (default is ip_addr) -}
+    , _hostgroup_id     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The host group id that specifies which group the device belongs to (multiple host group ids can be added, represented by a comma separated string) -}
+    , _ip_addr          :: !(TF.Attr s P.Text)
+    {- ^ (Required) Ip Address/Hostname of device -}
+    , _properties       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DeviceResource s) where
+    toHCL DeviceResource{..} = TF.inline $ catMaybes
+        [ TF.assign "collector" <$> TF.attribute _collector
+        , TF.assign "disable_alerting" <$> TF.attribute _disable_alerting
+        , TF.assign "display_name" <$> TF.attribute _display_name
+        , TF.assign "hostgroup_id" <$> TF.attribute _hostgroup_id
+        , TF.assign "ip_addr" <$> TF.attribute _ip_addr
+        , TF.assign "properties" <$> TF.attribute _properties
+        ]
+
+instance P.HasCollector (DeviceResource s) (TF.Attr s P.Text) where
+    collector =
+        lens (_collector :: DeviceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _collector = a } :: DeviceResource s)
+
+instance P.HasDisableAlerting (DeviceResource s) (TF.Attr s P.Text) where
+    disableAlerting =
+        lens (_disable_alerting :: DeviceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _disable_alerting = a } :: DeviceResource s)
+
+instance P.HasDisplayName (DeviceResource s) (TF.Attr s P.Text) where
+    displayName =
+        lens (_display_name :: DeviceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _display_name = a } :: DeviceResource s)
+
+instance P.HasHostgroupId (DeviceResource s) (TF.Attr s P.Text) where
+    hostgroupId =
+        lens (_hostgroup_id :: DeviceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _hostgroup_id = a } :: DeviceResource s)
+
+instance P.HasIpAddr (DeviceResource s) (TF.Attr s P.Text) where
+    ipAddr =
+        lens (_ip_addr :: DeviceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_addr = a } :: DeviceResource s)
+
+instance P.HasProperties (DeviceResource s) (TF.Attr s P.Text) where
+    properties =
+        lens (_properties :: DeviceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _properties = a } :: DeviceResource s)
+
+instance s ~ s' => P.HasComputedCollector (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
+    computedCollector =
+        (_collector :: DeviceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDisableAlerting (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
+    computedDisableAlerting =
+        (_disable_alerting :: DeviceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
+    computedDisplayName =
+        (_display_name :: DeviceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHostgroupId (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
+    computedHostgroupId =
+        (_hostgroup_id :: DeviceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedIpAddr (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
+    computedIpAddr =
+        (_ip_addr :: DeviceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedProperties (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
+    computedProperties =
+        (_properties :: DeviceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+deviceResource :: TF.Resource P.LogicMonitor (DeviceResource s)
+deviceResource =
+    TF.newResource "logicmonitor_device" $
+        DeviceResource {
+              _collector = TF.Nil
+            , _disable_alerting = TF.Nil
+            , _display_name = TF.Nil
+            , _hostgroup_id = TF.Nil
+            , _ip_addr = TF.Nil
             , _properties = TF.Nil
             }

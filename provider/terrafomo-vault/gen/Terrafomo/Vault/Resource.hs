@@ -24,68 +24,68 @@
 module Terrafomo.Vault.Resource
     (
     -- * Types
-      ResourceApproleAuthBackendRole (..)
-    , resourceApproleAuthBackendRole
+      ApproleAuthBackendRoleLoginResource (..)
+    , approleAuthBackendRoleLoginResource
 
-    , ResourceApproleAuthBackendRoleLogin (..)
-    , resourceApproleAuthBackendRoleLogin
+    , ApproleAuthBackendRoleResource (..)
+    , approleAuthBackendRoleResource
 
-    , ResourceApproleAuthBackendRoleSecretId (..)
-    , resourceApproleAuthBackendRoleSecretId
+    , ApproleAuthBackendRoleSecretIdResource (..)
+    , approleAuthBackendRoleSecretIdResource
 
-    , ResourceAuthBackend (..)
-    , resourceAuthBackend
+    , AuthBackendResource (..)
+    , authBackendResource
 
-    , ResourceAwsAuthBackendCert (..)
-    , resourceAwsAuthBackendCert
+    , AwsAuthBackendCertResource (..)
+    , awsAuthBackendCertResource
 
-    , ResourceAwsAuthBackendClient (..)
-    , resourceAwsAuthBackendClient
+    , AwsAuthBackendClientResource (..)
+    , awsAuthBackendClientResource
 
-    , ResourceAwsAuthBackendIdentityWhitelist (..)
-    , resourceAwsAuthBackendIdentityWhitelist
+    , AwsAuthBackendIdentityWhitelistResource (..)
+    , awsAuthBackendIdentityWhitelistResource
 
-    , ResourceAwsAuthBackendLogin (..)
-    , resourceAwsAuthBackendLogin
+    , AwsAuthBackendLoginResource (..)
+    , awsAuthBackendLoginResource
 
-    , ResourceAwsAuthBackendRole (..)
-    , resourceAwsAuthBackendRole
+    , AwsAuthBackendRoleResource (..)
+    , awsAuthBackendRoleResource
 
-    , ResourceAwsAuthBackendRoleTag (..)
-    , resourceAwsAuthBackendRoleTag
+    , AwsAuthBackendRoleTagResource (..)
+    , awsAuthBackendRoleTagResource
 
-    , ResourceAwsAuthBackendStsRole (..)
-    , resourceAwsAuthBackendStsRole
+    , AwsAuthBackendStsRoleResource (..)
+    , awsAuthBackendStsRoleResource
 
-    , ResourceAwsSecretBackend (..)
-    , resourceAwsSecretBackend
+    , AwsSecretBackendResource (..)
+    , awsSecretBackendResource
 
-    , ResourceAwsSecretBackendRole (..)
-    , resourceAwsSecretBackendRole
+    , AwsSecretBackendRoleResource (..)
+    , awsSecretBackendRoleResource
 
-    , ResourceDatabaseSecretBackendConnection (..)
-    , resourceDatabaseSecretBackendConnection
+    , DatabaseSecretBackendConnectionResource (..)
+    , databaseSecretBackendConnectionResource
 
-    , ResourceDatabaseSecretBackendRole (..)
-    , resourceDatabaseSecretBackendRole
+    , DatabaseSecretBackendRoleResource (..)
+    , databaseSecretBackendRoleResource
 
-    , ResourceGenericSecret (..)
-    , resourceGenericSecret
+    , GenericSecretResource (..)
+    , genericSecretResource
 
-    , ResourceMount (..)
-    , resourceMount
+    , MountResource (..)
+    , mountResource
 
-    , ResourceOktaAuthBackend (..)
-    , resourceOktaAuthBackend
+    , OktaAuthBackendGroupResource (..)
+    , oktaAuthBackendGroupResource
 
-    , ResourceOktaAuthBackendGroup (..)
-    , resourceOktaAuthBackendGroup
+    , OktaAuthBackendResource (..)
+    , oktaAuthBackendResource
 
-    , ResourceOktaAuthBackendUser (..)
-    , resourceOktaAuthBackendUser
+    , OktaAuthBackendUserResource (..)
+    , oktaAuthBackendUserResource
 
-    , ResourcePolicy (..)
-    , resourcePolicy
+    , PolicyResource (..)
+    , policyResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -304,12 +304,93 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
+{- | The @vault_approle_auth_backend_role_login@ Vault resource.
+
+Logs into Vault using the AppRole auth backend. See the
+<https://www.vaultproject.io/docs/auth/approle.html> for more information.
+-}
+data ApproleAuthBackendRoleLoginResource s = ApproleAuthBackendRoleLoginResource {
+      _backend   :: !(TF.Attr s P.Text)
+    {- ^ - The unique path of the Vault backend to log in with. -}
+    , _role_id   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the role to log in with. -}
+    , _secret_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The secret ID of the role to log in with. Required unless @bind_secret_id@ is set to false on the role. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ApproleAuthBackendRoleLoginResource s) where
+    toHCL ApproleAuthBackendRoleLoginResource{..} = TF.inline $ catMaybes
+        [ TF.assign "backend" <$> TF.attribute _backend
+        , TF.assign "role_id" <$> TF.attribute _role_id
+        , TF.assign "secret_id" <$> TF.attribute _secret_id
+        ]
+
+instance P.HasBackend (ApproleAuthBackendRoleLoginResource s) (TF.Attr s P.Text) where
+    backend =
+        lens (_backend :: ApproleAuthBackendRoleLoginResource s -> TF.Attr s P.Text)
+             (\s a -> s { _backend = a } :: ApproleAuthBackendRoleLoginResource s)
+
+instance P.HasRoleId (ApproleAuthBackendRoleLoginResource s) (TF.Attr s P.Text) where
+    roleId =
+        lens (_role_id :: ApproleAuthBackendRoleLoginResource s -> TF.Attr s P.Text)
+             (\s a -> s { _role_id = a } :: ApproleAuthBackendRoleLoginResource s)
+
+instance P.HasSecretId (ApproleAuthBackendRoleLoginResource s) (TF.Attr s P.Text) where
+    secretId =
+        lens (_secret_id :: ApproleAuthBackendRoleLoginResource s -> TF.Attr s P.Text)
+             (\s a -> s { _secret_id = a } :: ApproleAuthBackendRoleLoginResource s)
+
+instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (ApproleAuthBackendRoleLoginResource s)) (TF.Attr s P.Text) where
+    computedAccessor x = TF.compute (TF.refKey x) "accessor"
+
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ApproleAuthBackendRoleLoginResource s)) (TF.Attr s P.Text) where
+    computedBackend =
+        (_backend :: ApproleAuthBackendRoleLoginResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedClientToken (TF.Ref s' (ApproleAuthBackendRoleLoginResource s)) (TF.Attr s P.Text) where
+    computedClientToken x = TF.compute (TF.refKey x) "client_token"
+
+instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (ApproleAuthBackendRoleLoginResource s)) (TF.Attr s P.Text) where
+    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
+
+instance s ~ s' => P.HasComputedLeaseStarted (TF.Ref s' (ApproleAuthBackendRoleLoginResource s)) (TF.Attr s P.Text) where
+    computedLeaseStarted x = TF.compute (TF.refKey x) "lease_started"
+
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ApproleAuthBackendRoleLoginResource s)) (TF.Attr s P.Text) where
+    computedMetadata x = TF.compute (TF.refKey x) "metadata"
+
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ApproleAuthBackendRoleLoginResource s)) (TF.Attr s P.Text) where
+    computedPolicies x = TF.compute (TF.refKey x) "policies"
+
+instance s ~ s' => P.HasComputedRenewable (TF.Ref s' (ApproleAuthBackendRoleLoginResource s)) (TF.Attr s P.Text) where
+    computedRenewable x = TF.compute (TF.refKey x) "renewable"
+
+instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ApproleAuthBackendRoleLoginResource s)) (TF.Attr s P.Text) where
+    computedRoleId =
+        (_role_id :: ApproleAuthBackendRoleLoginResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSecretId (TF.Ref s' (ApproleAuthBackendRoleLoginResource s)) (TF.Attr s P.Text) where
+    computedSecretId =
+        (_secret_id :: ApproleAuthBackendRoleLoginResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+approleAuthBackendRoleLoginResource :: TF.Resource P.Vault (ApproleAuthBackendRoleLoginResource s)
+approleAuthBackendRoleLoginResource =
+    TF.newResource "vault_approle_auth_backend_role_login" $
+        ApproleAuthBackendRoleLoginResource {
+              _backend = TF.Nil
+            , _role_id = TF.Nil
+            , _secret_id = TF.Nil
+            }
+
 {- | The @vault_approle_auth_backend_role@ Vault resource.
 
 Manages an AppRole auth backend role in a Vault server. See the
 <https://www.vaultproject.io/docs/auth/approle.html> for more information.
 -}
-data ResourceApproleAuthBackendRole s = ResourceApproleAuthBackendRole {
+data ApproleAuthBackendRoleResource s = ApproleAuthBackendRoleResource {
       _bind_secret_id     :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether or not to require @secret_id@ to be presented when logging in using this AppRole. Defaults to @true@ . -}
     , _bound_cidr_list    :: !(TF.Attr s P.Text)
@@ -334,8 +415,8 @@ data ResourceApproleAuthBackendRole s = ResourceApproleAuthBackendRole {
     {- ^ (Optional) The TTL period of tokens issued using this role, provided as a number of seconds. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceApproleAuthBackendRole s) where
-    toHCL ResourceApproleAuthBackendRole{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ApproleAuthBackendRoleResource s) where
+    toHCL ApproleAuthBackendRoleResource{..} = TF.inline $ catMaybes
         [ TF.assign "bind_secret_id" <$> TF.attribute _bind_secret_id
         , TF.assign "bound_cidr_list" <$> TF.attribute _bound_cidr_list
         , TF.assign "period" <$> TF.attribute _period
@@ -349,120 +430,120 @@ instance TF.ToHCL (ResourceApproleAuthBackendRole s) where
         , TF.assign "token_ttl" <$> TF.attribute _token_ttl
         ]
 
-instance P.HasBindSecretId (ResourceApproleAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasBindSecretId (ApproleAuthBackendRoleResource s) (TF.Attr s P.Text) where
     bindSecretId =
-        lens (_bind_secret_id :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _bind_secret_id = a } :: ResourceApproleAuthBackendRole s)
+        lens (_bind_secret_id :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bind_secret_id = a } :: ApproleAuthBackendRoleResource s)
 
-instance P.HasBoundCidrList (ResourceApproleAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasBoundCidrList (ApproleAuthBackendRoleResource s) (TF.Attr s P.Text) where
     boundCidrList =
-        lens (_bound_cidr_list :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _bound_cidr_list = a } :: ResourceApproleAuthBackendRole s)
+        lens (_bound_cidr_list :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bound_cidr_list = a } :: ApproleAuthBackendRoleResource s)
 
-instance P.HasPeriod (ResourceApproleAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasPeriod (ApproleAuthBackendRoleResource s) (TF.Attr s P.Text) where
     period =
-        lens (_period :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _period = a } :: ResourceApproleAuthBackendRole s)
+        lens (_period :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _period = a } :: ApproleAuthBackendRoleResource s)
 
-instance P.HasPolicies (ResourceApproleAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasPolicies (ApproleAuthBackendRoleResource s) (TF.Attr s P.Text) where
     policies =
-        lens (_policies :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _policies = a } :: ResourceApproleAuthBackendRole s)
+        lens (_policies :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policies = a } :: ApproleAuthBackendRoleResource s)
 
-instance P.HasRoleId (ResourceApproleAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasRoleId (ApproleAuthBackendRoleResource s) (TF.Attr s P.Text) where
     roleId =
-        lens (_role_id :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _role_id = a } :: ResourceApproleAuthBackendRole s)
+        lens (_role_id :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _role_id = a } :: ApproleAuthBackendRoleResource s)
 
-instance P.HasRoleName (ResourceApproleAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasRoleName (ApproleAuthBackendRoleResource s) (TF.Attr s P.Text) where
     roleName =
-        lens (_role_name :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _role_name = a } :: ResourceApproleAuthBackendRole s)
+        lens (_role_name :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _role_name = a } :: ApproleAuthBackendRoleResource s)
 
-instance P.HasSecretIdNumUses (ResourceApproleAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasSecretIdNumUses (ApproleAuthBackendRoleResource s) (TF.Attr s P.Text) where
     secretIdNumUses =
-        lens (_secret_id_num_uses :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _secret_id_num_uses = a } :: ResourceApproleAuthBackendRole s)
+        lens (_secret_id_num_uses :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _secret_id_num_uses = a } :: ApproleAuthBackendRoleResource s)
 
-instance P.HasSecretIdTtl (ResourceApproleAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasSecretIdTtl (ApproleAuthBackendRoleResource s) (TF.Attr s P.Text) where
     secretIdTtl =
-        lens (_secret_id_ttl :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _secret_id_ttl = a } :: ResourceApproleAuthBackendRole s)
+        lens (_secret_id_ttl :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _secret_id_ttl = a } :: ApproleAuthBackendRoleResource s)
 
-instance P.HasTokenMaxTtl (ResourceApproleAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasTokenMaxTtl (ApproleAuthBackendRoleResource s) (TF.Attr s P.Text) where
     tokenMaxTtl =
-        lens (_token_max_ttl :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _token_max_ttl = a } :: ResourceApproleAuthBackendRole s)
+        lens (_token_max_ttl :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _token_max_ttl = a } :: ApproleAuthBackendRoleResource s)
 
-instance P.HasTokenNumUses (ResourceApproleAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasTokenNumUses (ApproleAuthBackendRoleResource s) (TF.Attr s P.Text) where
     tokenNumUses =
-        lens (_token_num_uses :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _token_num_uses = a } :: ResourceApproleAuthBackendRole s)
+        lens (_token_num_uses :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _token_num_uses = a } :: ApproleAuthBackendRoleResource s)
 
-instance P.HasTokenTtl (ResourceApproleAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasTokenTtl (ApproleAuthBackendRoleResource s) (TF.Attr s P.Text) where
     tokenTtl =
-        lens (_token_ttl :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _token_ttl = a } :: ResourceApproleAuthBackendRole s)
+        lens (_token_ttl :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _token_ttl = a } :: ApproleAuthBackendRoleResource s)
 
-instance s ~ s' => P.HasComputedBindSecretId (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBindSecretId (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedBindSecretId =
-        (_bind_secret_id :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
+        (_bind_secret_id :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBoundCidrList (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBoundCidrList (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedBoundCidrList =
-        (_bound_cidr_list :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
+        (_bound_cidr_list :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedPeriod =
-        (_period :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
+        (_period :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedPolicies =
-        (_policies :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
+        (_policies :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedRoleId =
-        (_role_id :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
+        (_role_id :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedRoleName =
-        (_role_name :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
+        (_role_name :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSecretIdNumUses (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecretIdNumUses (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedSecretIdNumUses =
-        (_secret_id_num_uses :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
+        (_secret_id_num_uses :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSecretIdTtl (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecretIdTtl (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedSecretIdTtl =
-        (_secret_id_ttl :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
+        (_secret_id_ttl :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTokenMaxTtl (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTokenMaxTtl (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedTokenMaxTtl =
-        (_token_max_ttl :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
+        (_token_max_ttl :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTokenNumUses (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTokenNumUses (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedTokenNumUses =
-        (_token_num_uses :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
+        (_token_num_uses :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTokenTtl (TF.Ref s' (ResourceApproleAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTokenTtl (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedTokenTtl =
-        (_token_ttl :: ResourceApproleAuthBackendRole s -> TF.Attr s P.Text)
+        (_token_ttl :: ApproleAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceApproleAuthBackendRole :: TF.Resource P.Vault (ResourceApproleAuthBackendRole s)
-resourceApproleAuthBackendRole =
+approleAuthBackendRoleResource :: TF.Resource P.Vault (ApproleAuthBackendRoleResource s)
+approleAuthBackendRoleResource =
     TF.newResource "vault_approle_auth_backend_role" $
-        ResourceApproleAuthBackendRole {
+        ApproleAuthBackendRoleResource {
               _bind_secret_id = TF.Nil
             , _bound_cidr_list = TF.Nil
             , _period = TF.Nil
@@ -476,93 +557,12 @@ resourceApproleAuthBackendRole =
             , _token_ttl = TF.Nil
             }
 
-{- | The @vault_approle_auth_backend_role_login@ Vault resource.
-
-Logs into Vault using the AppRole auth backend. See the
-<https://www.vaultproject.io/docs/auth/approle.html> for more information.
--}
-data ResourceApproleAuthBackendRoleLogin s = ResourceApproleAuthBackendRoleLogin {
-      _backend   :: !(TF.Attr s P.Text)
-    {- ^ - The unique path of the Vault backend to log in with. -}
-    , _role_id   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the role to log in with. -}
-    , _secret_id :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The secret ID of the role to log in with. Required unless @bind_secret_id@ is set to false on the role. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ResourceApproleAuthBackendRoleLogin s) where
-    toHCL ResourceApproleAuthBackendRoleLogin{..} = TF.inline $ catMaybes
-        [ TF.assign "backend" <$> TF.attribute _backend
-        , TF.assign "role_id" <$> TF.attribute _role_id
-        , TF.assign "secret_id" <$> TF.attribute _secret_id
-        ]
-
-instance P.HasBackend (ResourceApproleAuthBackendRoleLogin s) (TF.Attr s P.Text) where
-    backend =
-        lens (_backend :: ResourceApproleAuthBackendRoleLogin s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: ResourceApproleAuthBackendRoleLogin s)
-
-instance P.HasRoleId (ResourceApproleAuthBackendRoleLogin s) (TF.Attr s P.Text) where
-    roleId =
-        lens (_role_id :: ResourceApproleAuthBackendRoleLogin s -> TF.Attr s P.Text)
-             (\s a -> s { _role_id = a } :: ResourceApproleAuthBackendRoleLogin s)
-
-instance P.HasSecretId (ResourceApproleAuthBackendRoleLogin s) (TF.Attr s P.Text) where
-    secretId =
-        lens (_secret_id :: ResourceApproleAuthBackendRoleLogin s -> TF.Attr s P.Text)
-             (\s a -> s { _secret_id = a } :: ResourceApproleAuthBackendRoleLogin s)
-
-instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computedAccessor x = TF.compute (TF.refKey x) "accessor"
-
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computedBackend =
-        (_backend :: ResourceApproleAuthBackendRoleLogin s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedClientToken (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computedClientToken x = TF.compute (TF.refKey x) "client_token"
-
-instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
-
-instance s ~ s' => P.HasComputedLeaseStarted (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computedLeaseStarted x = TF.compute (TF.refKey x) "lease_started"
-
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computedMetadata x = TF.compute (TF.refKey x) "metadata"
-
-instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computedPolicies x = TF.compute (TF.refKey x) "policies"
-
-instance s ~ s' => P.HasComputedRenewable (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computedRenewable x = TF.compute (TF.refKey x) "renewable"
-
-instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computedRoleId =
-        (_role_id :: ResourceApproleAuthBackendRoleLogin s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSecretId (TF.Ref s' (ResourceApproleAuthBackendRoleLogin s)) (TF.Attr s P.Text) where
-    computedSecretId =
-        (_secret_id :: ResourceApproleAuthBackendRoleLogin s -> TF.Attr s P.Text)
-            . TF.refValue
-
-resourceApproleAuthBackendRoleLogin :: TF.Resource P.Vault (ResourceApproleAuthBackendRoleLogin s)
-resourceApproleAuthBackendRoleLogin =
-    TF.newResource "vault_approle_auth_backend_role_login" $
-        ResourceApproleAuthBackendRoleLogin {
-              _backend = TF.Nil
-            , _role_id = TF.Nil
-            , _secret_id = TF.Nil
-            }
-
 {- | The @vault_approle_auth_backend_role_secret_id@ Vault resource.
 
 Manages an AppRole auth backend SecretID in a Vault server. See the
 <https://www.vaultproject.io/docs/auth/approle.html> for more information.
 -}
-data ResourceApproleAuthBackendRoleSecretId s = ResourceApproleAuthBackendRoleSecretId {
+data ApproleAuthBackendRoleSecretIdResource s = ApproleAuthBackendRoleSecretIdResource {
       _cidr_list :: !(TF.Attr s P.Text)
     {- ^ (Optional) If set, specifies blocks of IP addresses which can perform the login operation using this SecretID. -}
     , _metadata  :: !(TF.Attr s P.Text)
@@ -573,61 +573,61 @@ data ResourceApproleAuthBackendRoleSecretId s = ResourceApproleAuthBackendRoleSe
     {- ^ (Optional) The SecretID to be created. If set, uses "Push" mode.  Defaults to Vault auto-generating SecretIDs. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceApproleAuthBackendRoleSecretId s) where
-    toHCL ResourceApproleAuthBackendRoleSecretId{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ApproleAuthBackendRoleSecretIdResource s) where
+    toHCL ApproleAuthBackendRoleSecretIdResource{..} = TF.inline $ catMaybes
         [ TF.assign "cidr_list" <$> TF.attribute _cidr_list
         , TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "role_name" <$> TF.attribute _role_name
         , TF.assign "secret_id" <$> TF.attribute _secret_id
         ]
 
-instance P.HasCidrList (ResourceApproleAuthBackendRoleSecretId s) (TF.Attr s P.Text) where
+instance P.HasCidrList (ApproleAuthBackendRoleSecretIdResource s) (TF.Attr s P.Text) where
     cidrList =
-        lens (_cidr_list :: ResourceApproleAuthBackendRoleSecretId s -> TF.Attr s P.Text)
-             (\s a -> s { _cidr_list = a } :: ResourceApproleAuthBackendRoleSecretId s)
+        lens (_cidr_list :: ApproleAuthBackendRoleSecretIdResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cidr_list = a } :: ApproleAuthBackendRoleSecretIdResource s)
 
-instance P.HasMetadata (ResourceApproleAuthBackendRoleSecretId s) (TF.Attr s P.Text) where
+instance P.HasMetadata (ApproleAuthBackendRoleSecretIdResource s) (TF.Attr s P.Text) where
     metadata =
-        lens (_metadata :: ResourceApproleAuthBackendRoleSecretId s -> TF.Attr s P.Text)
-             (\s a -> s { _metadata = a } :: ResourceApproleAuthBackendRoleSecretId s)
+        lens (_metadata :: ApproleAuthBackendRoleSecretIdResource s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata = a } :: ApproleAuthBackendRoleSecretIdResource s)
 
-instance P.HasRoleName (ResourceApproleAuthBackendRoleSecretId s) (TF.Attr s P.Text) where
+instance P.HasRoleName (ApproleAuthBackendRoleSecretIdResource s) (TF.Attr s P.Text) where
     roleName =
-        lens (_role_name :: ResourceApproleAuthBackendRoleSecretId s -> TF.Attr s P.Text)
-             (\s a -> s { _role_name = a } :: ResourceApproleAuthBackendRoleSecretId s)
+        lens (_role_name :: ApproleAuthBackendRoleSecretIdResource s -> TF.Attr s P.Text)
+             (\s a -> s { _role_name = a } :: ApproleAuthBackendRoleSecretIdResource s)
 
-instance P.HasSecretId (ResourceApproleAuthBackendRoleSecretId s) (TF.Attr s P.Text) where
+instance P.HasSecretId (ApproleAuthBackendRoleSecretIdResource s) (TF.Attr s P.Text) where
     secretId =
-        lens (_secret_id :: ResourceApproleAuthBackendRoleSecretId s -> TF.Attr s P.Text)
-             (\s a -> s { _secret_id = a } :: ResourceApproleAuthBackendRoleSecretId s)
+        lens (_secret_id :: ApproleAuthBackendRoleSecretIdResource s -> TF.Attr s P.Text)
+             (\s a -> s { _secret_id = a } :: ApproleAuthBackendRoleSecretIdResource s)
 
-instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (ApproleAuthBackendRoleSecretIdResource s)) (TF.Attr s P.Text) where
     computedAccessor x = TF.compute (TF.refKey x) "accessor"
 
-instance s ~ s' => P.HasComputedCidrList (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCidrList (TF.Ref s' (ApproleAuthBackendRoleSecretIdResource s)) (TF.Attr s P.Text) where
     computedCidrList =
-        (_cidr_list :: ResourceApproleAuthBackendRoleSecretId s -> TF.Attr s P.Text)
+        (_cidr_list :: ApproleAuthBackendRoleSecretIdResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ApproleAuthBackendRoleSecretIdResource s)) (TF.Attr s P.Text) where
     computedMetadata =
-        (_metadata :: ResourceApproleAuthBackendRoleSecretId s -> TF.Attr s P.Text)
+        (_metadata :: ApproleAuthBackendRoleSecretIdResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (ApproleAuthBackendRoleSecretIdResource s)) (TF.Attr s P.Text) where
     computedRoleName =
-        (_role_name :: ResourceApproleAuthBackendRoleSecretId s -> TF.Attr s P.Text)
+        (_role_name :: ApproleAuthBackendRoleSecretIdResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSecretId (TF.Ref s' (ResourceApproleAuthBackendRoleSecretId s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecretId (TF.Ref s' (ApproleAuthBackendRoleSecretIdResource s)) (TF.Attr s P.Text) where
     computedSecretId =
-        (_secret_id :: ResourceApproleAuthBackendRoleSecretId s -> TF.Attr s P.Text)
+        (_secret_id :: ApproleAuthBackendRoleSecretIdResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceApproleAuthBackendRoleSecretId :: TF.Resource P.Vault (ResourceApproleAuthBackendRoleSecretId s)
-resourceApproleAuthBackendRoleSecretId =
+approleAuthBackendRoleSecretIdResource :: TF.Resource P.Vault (ApproleAuthBackendRoleSecretIdResource s)
+approleAuthBackendRoleSecretIdResource =
     TF.newResource "vault_approle_auth_backend_role_secret_id" $
-        ResourceApproleAuthBackendRoleSecretId {
+        ApproleAuthBackendRoleSecretIdResource {
               _cidr_list = TF.Nil
             , _metadata = TF.Nil
             , _role_name = TF.Nil
@@ -638,7 +638,7 @@ resourceApproleAuthBackendRoleSecretId =
 
 
 -}
-data ResourceAuthBackend s = ResourceAuthBackend {
+data AuthBackendResource s = AuthBackendResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of the auth backend -}
     , _path        :: !(TF.Attr s P.Text)
@@ -647,47 +647,47 @@ data ResourceAuthBackend s = ResourceAuthBackend {
     {- ^ (Required) The name of the policy -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceAuthBackend s) where
-    toHCL ResourceAuthBackend{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AuthBackendResource s) where
+    toHCL AuthBackendResource{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "path" <$> TF.attribute _path
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasDescription (ResourceAuthBackend s) (TF.Attr s P.Text) where
+instance P.HasDescription (AuthBackendResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceAuthBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceAuthBackend s)
+        lens (_description :: AuthBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: AuthBackendResource s)
 
-instance P.HasPath (ResourceAuthBackend s) (TF.Attr s P.Text) where
+instance P.HasPath (AuthBackendResource s) (TF.Attr s P.Text) where
     path =
-        lens (_path :: ResourceAuthBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _path = a } :: ResourceAuthBackend s)
+        lens (_path :: AuthBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _path = a } :: AuthBackendResource s)
 
-instance P.HasType' (ResourceAuthBackend s) (TF.Attr s P.Text) where
+instance P.HasType' (AuthBackendResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: ResourceAuthBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: ResourceAuthBackend s)
+        lens (_type' :: AuthBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: AuthBackendResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceAuthBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AuthBackendResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceAuthBackend s -> TF.Attr s P.Text)
+        (_description :: AuthBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (ResourceAuthBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (AuthBackendResource s)) (TF.Attr s P.Text) where
     computedPath =
-        (_path :: ResourceAuthBackend s -> TF.Attr s P.Text)
+        (_path :: AuthBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceAuthBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (AuthBackendResource s)) (TF.Attr s P.Text) where
     computedType' =
-        (_type' :: ResourceAuthBackend s -> TF.Attr s P.Text)
+        (_type' :: AuthBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceAuthBackend :: TF.Resource P.Vault (ResourceAuthBackend s)
-resourceAuthBackend =
+authBackendResource :: TF.Resource P.Vault (AuthBackendResource s)
+authBackendResource =
     TF.newResource "vault_auth_backend" $
-        ResourceAuthBackend {
+        AuthBackendResource {
               _description = TF.Nil
             , _path = TF.Nil
             , _type' = TF.Nil
@@ -705,7 +705,7 @@ cleartext to state and plan files generated by Terraform, and will appear in
 the console output when Terraform runs. Protect these artifacts accordingly.
 See <../index.html> for more details.
 -}
-data ResourceAwsAuthBackendCert s = ResourceAwsAuthBackendCert {
+data AwsAuthBackendCertResource s = AwsAuthBackendCertResource {
       _aws_public_cert :: !(TF.Attr s P.Text)
     {- ^ (Required) The  Base64 encoded AWS Public key required to verify PKCS7 signature of the EC2 instance metadata. You can find this key in the <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html> . -}
     , _backend         :: !(TF.Attr s P.Text)
@@ -716,58 +716,58 @@ data ResourceAwsAuthBackendCert s = ResourceAwsAuthBackendCert {
     {- ^ (Optional) Either "pkcs7" or "identity", indicating the type of document which can be verified using the given certificate. Defaults to "pkcs7". -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceAwsAuthBackendCert s) where
-    toHCL ResourceAwsAuthBackendCert{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AwsAuthBackendCertResource s) where
+    toHCL AwsAuthBackendCertResource{..} = TF.inline $ catMaybes
         [ TF.assign "aws_public_cert" <$> TF.attribute _aws_public_cert
         , TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "cert_name" <$> TF.attribute _cert_name
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasAwsPublicCert (ResourceAwsAuthBackendCert s) (TF.Attr s P.Text) where
+instance P.HasAwsPublicCert (AwsAuthBackendCertResource s) (TF.Attr s P.Text) where
     awsPublicCert =
-        lens (_aws_public_cert :: ResourceAwsAuthBackendCert s -> TF.Attr s P.Text)
-             (\s a -> s { _aws_public_cert = a } :: ResourceAwsAuthBackendCert s)
+        lens (_aws_public_cert :: AwsAuthBackendCertResource s -> TF.Attr s P.Text)
+             (\s a -> s { _aws_public_cert = a } :: AwsAuthBackendCertResource s)
 
-instance P.HasBackend (ResourceAwsAuthBackendCert s) (TF.Attr s P.Text) where
+instance P.HasBackend (AwsAuthBackendCertResource s) (TF.Attr s P.Text) where
     backend =
-        lens (_backend :: ResourceAwsAuthBackendCert s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: ResourceAwsAuthBackendCert s)
+        lens (_backend :: AwsAuthBackendCertResource s -> TF.Attr s P.Text)
+             (\s a -> s { _backend = a } :: AwsAuthBackendCertResource s)
 
-instance P.HasCertName (ResourceAwsAuthBackendCert s) (TF.Attr s P.Text) where
+instance P.HasCertName (AwsAuthBackendCertResource s) (TF.Attr s P.Text) where
     certName =
-        lens (_cert_name :: ResourceAwsAuthBackendCert s -> TF.Attr s P.Text)
-             (\s a -> s { _cert_name = a } :: ResourceAwsAuthBackendCert s)
+        lens (_cert_name :: AwsAuthBackendCertResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cert_name = a } :: AwsAuthBackendCertResource s)
 
-instance P.HasType' (ResourceAwsAuthBackendCert s) (TF.Attr s P.Text) where
+instance P.HasType' (AwsAuthBackendCertResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: ResourceAwsAuthBackendCert s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: ResourceAwsAuthBackendCert s)
+        lens (_type' :: AwsAuthBackendCertResource s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: AwsAuthBackendCertResource s)
 
-instance s ~ s' => P.HasComputedAwsPublicCert (TF.Ref s' (ResourceAwsAuthBackendCert s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAwsPublicCert (TF.Ref s' (AwsAuthBackendCertResource s)) (TF.Attr s P.Text) where
     computedAwsPublicCert =
-        (_aws_public_cert :: ResourceAwsAuthBackendCert s -> TF.Attr s P.Text)
+        (_aws_public_cert :: AwsAuthBackendCertResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsAuthBackendCert s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (AwsAuthBackendCertResource s)) (TF.Attr s P.Text) where
     computedBackend =
-        (_backend :: ResourceAwsAuthBackendCert s -> TF.Attr s P.Text)
+        (_backend :: AwsAuthBackendCertResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCertName (TF.Ref s' (ResourceAwsAuthBackendCert s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCertName (TF.Ref s' (AwsAuthBackendCertResource s)) (TF.Attr s P.Text) where
     computedCertName =
-        (_cert_name :: ResourceAwsAuthBackendCert s -> TF.Attr s P.Text)
+        (_cert_name :: AwsAuthBackendCertResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceAwsAuthBackendCert s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (AwsAuthBackendCertResource s)) (TF.Attr s P.Text) where
     computedType' =
-        (_type' :: ResourceAwsAuthBackendCert s -> TF.Attr s P.Text)
+        (_type' :: AwsAuthBackendCertResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceAwsAuthBackendCert :: TF.Resource P.Vault (ResourceAwsAuthBackendCert s)
-resourceAwsAuthBackendCert =
+awsAuthBackendCertResource :: TF.Resource P.Vault (AwsAuthBackendCertResource s)
+awsAuthBackendCertResource =
     TF.newResource "vault_aws_auth_backend_cert" $
-        ResourceAwsAuthBackendCert {
+        AwsAuthBackendCertResource {
               _aws_public_cert = TF.Nil
             , _backend = TF.Nil
             , _cert_name = TF.Nil
@@ -787,7 +787,7 @@ cleartext to state and plan files generated by Terraform, and will appear in
 the console output when Terraform runs. Protect these artifacts accordingly.
 See <../index.html> for more details.
 -}
-data ResourceAwsAuthBackendClient s = ResourceAwsAuthBackendClient {
+data AwsAuthBackendClientResource s = AwsAuthBackendClientResource {
       _access_key                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) The AWS access key that Vault should use for the auth backend. -}
     , _backend                    :: !(TF.Attr s P.Text)
@@ -804,8 +804,8 @@ data ResourceAwsAuthBackendClient s = ResourceAwsAuthBackendClient {
     {- ^ (Optional) Override the URL Vault uses when making STS API calls. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceAwsAuthBackendClient s) where
-    toHCL ResourceAwsAuthBackendClient{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AwsAuthBackendClientResource s) where
+    toHCL AwsAuthBackendClientResource{..} = TF.inline $ catMaybes
         [ TF.assign "access_key" <$> TF.attribute _access_key
         , TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "ec2_endpoint" <$> TF.attribute _ec2_endpoint
@@ -815,80 +815,80 @@ instance TF.ToHCL (ResourceAwsAuthBackendClient s) where
         , TF.assign "sts_endpoint" <$> TF.attribute _sts_endpoint
         ]
 
-instance P.HasAccessKey (ResourceAwsAuthBackendClient s) (TF.Attr s P.Text) where
+instance P.HasAccessKey (AwsAuthBackendClientResource s) (TF.Attr s P.Text) where
     accessKey =
-        lens (_access_key :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
-             (\s a -> s { _access_key = a } :: ResourceAwsAuthBackendClient s)
+        lens (_access_key :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
+             (\s a -> s { _access_key = a } :: AwsAuthBackendClientResource s)
 
-instance P.HasBackend (ResourceAwsAuthBackendClient s) (TF.Attr s P.Text) where
+instance P.HasBackend (AwsAuthBackendClientResource s) (TF.Attr s P.Text) where
     backend =
-        lens (_backend :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: ResourceAwsAuthBackendClient s)
+        lens (_backend :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
+             (\s a -> s { _backend = a } :: AwsAuthBackendClientResource s)
 
-instance P.HasEc2Endpoint (ResourceAwsAuthBackendClient s) (TF.Attr s P.Text) where
+instance P.HasEc2Endpoint (AwsAuthBackendClientResource s) (TF.Attr s P.Text) where
     ec2Endpoint =
-        lens (_ec2_endpoint :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
-             (\s a -> s { _ec2_endpoint = a } :: ResourceAwsAuthBackendClient s)
+        lens (_ec2_endpoint :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ec2_endpoint = a } :: AwsAuthBackendClientResource s)
 
-instance P.HasIamEndpoint (ResourceAwsAuthBackendClient s) (TF.Attr s P.Text) where
+instance P.HasIamEndpoint (AwsAuthBackendClientResource s) (TF.Attr s P.Text) where
     iamEndpoint =
-        lens (_iam_endpoint :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
-             (\s a -> s { _iam_endpoint = a } :: ResourceAwsAuthBackendClient s)
+        lens (_iam_endpoint :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
+             (\s a -> s { _iam_endpoint = a } :: AwsAuthBackendClientResource s)
 
-instance P.HasIamServerIdHeaderValue (ResourceAwsAuthBackendClient s) (TF.Attr s P.Text) where
+instance P.HasIamServerIdHeaderValue (AwsAuthBackendClientResource s) (TF.Attr s P.Text) where
     iamServerIdHeaderValue =
-        lens (_iam_server_id_header_value :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
-             (\s a -> s { _iam_server_id_header_value = a } :: ResourceAwsAuthBackendClient s)
+        lens (_iam_server_id_header_value :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
+             (\s a -> s { _iam_server_id_header_value = a } :: AwsAuthBackendClientResource s)
 
-instance P.HasSecretKey (ResourceAwsAuthBackendClient s) (TF.Attr s P.Text) where
+instance P.HasSecretKey (AwsAuthBackendClientResource s) (TF.Attr s P.Text) where
     secretKey =
-        lens (_secret_key :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
-             (\s a -> s { _secret_key = a } :: ResourceAwsAuthBackendClient s)
+        lens (_secret_key :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
+             (\s a -> s { _secret_key = a } :: AwsAuthBackendClientResource s)
 
-instance P.HasStsEndpoint (ResourceAwsAuthBackendClient s) (TF.Attr s P.Text) where
+instance P.HasStsEndpoint (AwsAuthBackendClientResource s) (TF.Attr s P.Text) where
     stsEndpoint =
-        lens (_sts_endpoint :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
-             (\s a -> s { _sts_endpoint = a } :: ResourceAwsAuthBackendClient s)
+        lens (_sts_endpoint :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
+             (\s a -> s { _sts_endpoint = a } :: AwsAuthBackendClientResource s)
 
-instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (AwsAuthBackendClientResource s)) (TF.Attr s P.Text) where
     computedAccessKey =
-        (_access_key :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
+        (_access_key :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (AwsAuthBackendClientResource s)) (TF.Attr s P.Text) where
     computedBackend =
-        (_backend :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
+        (_backend :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEc2Endpoint (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEc2Endpoint (TF.Ref s' (AwsAuthBackendClientResource s)) (TF.Attr s P.Text) where
     computedEc2Endpoint =
-        (_ec2_endpoint :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
+        (_ec2_endpoint :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIamEndpoint (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIamEndpoint (TF.Ref s' (AwsAuthBackendClientResource s)) (TF.Attr s P.Text) where
     computedIamEndpoint =
-        (_iam_endpoint :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
+        (_iam_endpoint :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIamServerIdHeaderValue (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIamServerIdHeaderValue (TF.Ref s' (AwsAuthBackendClientResource s)) (TF.Attr s P.Text) where
     computedIamServerIdHeaderValue =
-        (_iam_server_id_header_value :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
+        (_iam_server_id_header_value :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSecretKey (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecretKey (TF.Ref s' (AwsAuthBackendClientResource s)) (TF.Attr s P.Text) where
     computedSecretKey =
-        (_secret_key :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
+        (_secret_key :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStsEndpoint (TF.Ref s' (ResourceAwsAuthBackendClient s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStsEndpoint (TF.Ref s' (AwsAuthBackendClientResource s)) (TF.Attr s P.Text) where
     computedStsEndpoint =
-        (_sts_endpoint :: ResourceAwsAuthBackendClient s -> TF.Attr s P.Text)
+        (_sts_endpoint :: AwsAuthBackendClientResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceAwsAuthBackendClient :: TF.Resource P.Vault (ResourceAwsAuthBackendClient s)
-resourceAwsAuthBackendClient =
+awsAuthBackendClientResource :: TF.Resource P.Vault (AwsAuthBackendClientResource s)
+awsAuthBackendClientResource =
     TF.newResource "vault_aws_auth_backend_client" $
-        ResourceAwsAuthBackendClient {
+        AwsAuthBackendClientResource {
               _access_key = TF.Nil
             , _backend = TF.Nil
             , _ec2_endpoint = TF.Nil
@@ -905,7 +905,7 @@ entries. For more information, see the
 <https://www.vaultproject.io/api/auth/aws/index.html#configure-identity-whitelist-tidy-operation>
 .
 -}
-data ResourceAwsAuthBackendIdentityWhitelist s = ResourceAwsAuthBackendIdentityWhitelist {
+data AwsAuthBackendIdentityWhitelistResource s = AwsAuthBackendIdentityWhitelistResource {
       _backend               :: !(TF.Attr s P.Text)
     {- ^ (Optional) The path of the AWS backend being configured. -}
     , _disable_periodic_tidy :: !(TF.Attr s P.Text)
@@ -914,47 +914,47 @@ data ResourceAwsAuthBackendIdentityWhitelist s = ResourceAwsAuthBackendIdentityW
     {- ^ (Optional) The amount of extra time, in minutes, that must have passed beyond the roletag expiration, before it is removed from the backend storage. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceAwsAuthBackendIdentityWhitelist s) where
-    toHCL ResourceAwsAuthBackendIdentityWhitelist{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AwsAuthBackendIdentityWhitelistResource s) where
+    toHCL AwsAuthBackendIdentityWhitelistResource{..} = TF.inline $ catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "disable_periodic_tidy" <$> TF.attribute _disable_periodic_tidy
         , TF.assign "safety_buffer" <$> TF.attribute _safety_buffer
         ]
 
-instance P.HasBackend (ResourceAwsAuthBackendIdentityWhitelist s) (TF.Attr s P.Text) where
+instance P.HasBackend (AwsAuthBackendIdentityWhitelistResource s) (TF.Attr s P.Text) where
     backend =
-        lens (_backend :: ResourceAwsAuthBackendIdentityWhitelist s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: ResourceAwsAuthBackendIdentityWhitelist s)
+        lens (_backend :: AwsAuthBackendIdentityWhitelistResource s -> TF.Attr s P.Text)
+             (\s a -> s { _backend = a } :: AwsAuthBackendIdentityWhitelistResource s)
 
-instance P.HasDisablePeriodicTidy (ResourceAwsAuthBackendIdentityWhitelist s) (TF.Attr s P.Text) where
+instance P.HasDisablePeriodicTidy (AwsAuthBackendIdentityWhitelistResource s) (TF.Attr s P.Text) where
     disablePeriodicTidy =
-        lens (_disable_periodic_tidy :: ResourceAwsAuthBackendIdentityWhitelist s -> TF.Attr s P.Text)
-             (\s a -> s { _disable_periodic_tidy = a } :: ResourceAwsAuthBackendIdentityWhitelist s)
+        lens (_disable_periodic_tidy :: AwsAuthBackendIdentityWhitelistResource s -> TF.Attr s P.Text)
+             (\s a -> s { _disable_periodic_tidy = a } :: AwsAuthBackendIdentityWhitelistResource s)
 
-instance P.HasSafetyBuffer (ResourceAwsAuthBackendIdentityWhitelist s) (TF.Attr s P.Text) where
+instance P.HasSafetyBuffer (AwsAuthBackendIdentityWhitelistResource s) (TF.Attr s P.Text) where
     safetyBuffer =
-        lens (_safety_buffer :: ResourceAwsAuthBackendIdentityWhitelist s -> TF.Attr s P.Text)
-             (\s a -> s { _safety_buffer = a } :: ResourceAwsAuthBackendIdentityWhitelist s)
+        lens (_safety_buffer :: AwsAuthBackendIdentityWhitelistResource s -> TF.Attr s P.Text)
+             (\s a -> s { _safety_buffer = a } :: AwsAuthBackendIdentityWhitelistResource s)
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsAuthBackendIdentityWhitelist s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (AwsAuthBackendIdentityWhitelistResource s)) (TF.Attr s P.Text) where
     computedBackend =
-        (_backend :: ResourceAwsAuthBackendIdentityWhitelist s -> TF.Attr s P.Text)
+        (_backend :: AwsAuthBackendIdentityWhitelistResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisablePeriodicTidy (TF.Ref s' (ResourceAwsAuthBackendIdentityWhitelist s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisablePeriodicTidy (TF.Ref s' (AwsAuthBackendIdentityWhitelistResource s)) (TF.Attr s P.Text) where
     computedDisablePeriodicTidy =
-        (_disable_periodic_tidy :: ResourceAwsAuthBackendIdentityWhitelist s -> TF.Attr s P.Text)
+        (_disable_periodic_tidy :: AwsAuthBackendIdentityWhitelistResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSafetyBuffer (TF.Ref s' (ResourceAwsAuthBackendIdentityWhitelist s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSafetyBuffer (TF.Ref s' (AwsAuthBackendIdentityWhitelistResource s)) (TF.Attr s P.Text) where
     computedSafetyBuffer =
-        (_safety_buffer :: ResourceAwsAuthBackendIdentityWhitelist s -> TF.Attr s P.Text)
+        (_safety_buffer :: AwsAuthBackendIdentityWhitelistResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceAwsAuthBackendIdentityWhitelist :: TF.Resource P.Vault (ResourceAwsAuthBackendIdentityWhitelist s)
-resourceAwsAuthBackendIdentityWhitelist =
+awsAuthBackendIdentityWhitelistResource :: TF.Resource P.Vault (AwsAuthBackendIdentityWhitelistResource s)
+awsAuthBackendIdentityWhitelistResource =
     TF.newResource "vault_aws_auth_backend_identity_whitelist" $
-        ResourceAwsAuthBackendIdentityWhitelist {
+        AwsAuthBackendIdentityWhitelistResource {
               _backend = TF.Nil
             , _disable_periodic_tidy = TF.Nil
             , _safety_buffer = TF.Nil
@@ -967,7 +967,7 @@ accomplished using a signed identity request from IAM or using ec2 instance
 metadata. For more information, see the
 <https://www.vaultproject.io/docs/auth/aws.html> .
 -}
-data ResourceAwsAuthBackendLogin s = ResourceAwsAuthBackendLogin {
+data AwsAuthBackendLoginResource s = AwsAuthBackendLoginResource {
       _backend                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) The unique name of the AWS auth backend. Defaults to 'aws'. -}
     , _iam_http_request_method :: !(TF.Attr s P.Text)
@@ -990,8 +990,8 @@ data ResourceAwsAuthBackendLogin s = ResourceAwsAuthBackendLogin {
     {- ^ (Optional) The base64-encoded SHA256 RSA signature of the instance identity document to authenticate with, with all newline characters removed. Can be retrieved from the EC2 metadata server. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceAwsAuthBackendLogin s) where
-    toHCL ResourceAwsAuthBackendLogin{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AwsAuthBackendLoginResource s) where
+    toHCL AwsAuthBackendLoginResource{..} = TF.inline $ catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "iam_http_request_method" <$> TF.attribute _iam_http_request_method
         , TF.assign "iam_request_body" <$> TF.attribute _iam_request_body
@@ -1004,134 +1004,134 @@ instance TF.ToHCL (ResourceAwsAuthBackendLogin s) where
         , TF.assign "signature" <$> TF.attribute _signature
         ]
 
-instance P.HasBackend (ResourceAwsAuthBackendLogin s) (TF.Attr s P.Text) where
+instance P.HasBackend (AwsAuthBackendLoginResource s) (TF.Attr s P.Text) where
     backend =
-        lens (_backend :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: ResourceAwsAuthBackendLogin s)
+        lens (_backend :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
+             (\s a -> s { _backend = a } :: AwsAuthBackendLoginResource s)
 
-instance P.HasIamHttpRequestMethod (ResourceAwsAuthBackendLogin s) (TF.Attr s P.Text) where
+instance P.HasIamHttpRequestMethod (AwsAuthBackendLoginResource s) (TF.Attr s P.Text) where
     iamHttpRequestMethod =
-        lens (_iam_http_request_method :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
-             (\s a -> s { _iam_http_request_method = a } :: ResourceAwsAuthBackendLogin s)
+        lens (_iam_http_request_method :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
+             (\s a -> s { _iam_http_request_method = a } :: AwsAuthBackendLoginResource s)
 
-instance P.HasIamRequestBody (ResourceAwsAuthBackendLogin s) (TF.Attr s P.Text) where
+instance P.HasIamRequestBody (AwsAuthBackendLoginResource s) (TF.Attr s P.Text) where
     iamRequestBody =
-        lens (_iam_request_body :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
-             (\s a -> s { _iam_request_body = a } :: ResourceAwsAuthBackendLogin s)
+        lens (_iam_request_body :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
+             (\s a -> s { _iam_request_body = a } :: AwsAuthBackendLoginResource s)
 
-instance P.HasIamRequestHeaders (ResourceAwsAuthBackendLogin s) (TF.Attr s P.Text) where
+instance P.HasIamRequestHeaders (AwsAuthBackendLoginResource s) (TF.Attr s P.Text) where
     iamRequestHeaders =
-        lens (_iam_request_headers :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
-             (\s a -> s { _iam_request_headers = a } :: ResourceAwsAuthBackendLogin s)
+        lens (_iam_request_headers :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
+             (\s a -> s { _iam_request_headers = a } :: AwsAuthBackendLoginResource s)
 
-instance P.HasIamRequestUrl (ResourceAwsAuthBackendLogin s) (TF.Attr s P.Text) where
+instance P.HasIamRequestUrl (AwsAuthBackendLoginResource s) (TF.Attr s P.Text) where
     iamRequestUrl =
-        lens (_iam_request_url :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
-             (\s a -> s { _iam_request_url = a } :: ResourceAwsAuthBackendLogin s)
+        lens (_iam_request_url :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
+             (\s a -> s { _iam_request_url = a } :: AwsAuthBackendLoginResource s)
 
-instance P.HasIdentity (ResourceAwsAuthBackendLogin s) (TF.Attr s P.Text) where
+instance P.HasIdentity (AwsAuthBackendLoginResource s) (TF.Attr s P.Text) where
     identity =
-        lens (_identity :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
-             (\s a -> s { _identity = a } :: ResourceAwsAuthBackendLogin s)
+        lens (_identity :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
+             (\s a -> s { _identity = a } :: AwsAuthBackendLoginResource s)
 
-instance P.HasNonce (ResourceAwsAuthBackendLogin s) (TF.Attr s P.Text) where
+instance P.HasNonce (AwsAuthBackendLoginResource s) (TF.Attr s P.Text) where
     nonce =
-        lens (_nonce :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
-             (\s a -> s { _nonce = a } :: ResourceAwsAuthBackendLogin s)
+        lens (_nonce :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
+             (\s a -> s { _nonce = a } :: AwsAuthBackendLoginResource s)
 
-instance P.HasPkcs7 (ResourceAwsAuthBackendLogin s) (TF.Attr s P.Text) where
+instance P.HasPkcs7 (AwsAuthBackendLoginResource s) (TF.Attr s P.Text) where
     pkcs7 =
-        lens (_pkcs7 :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
-             (\s a -> s { _pkcs7 = a } :: ResourceAwsAuthBackendLogin s)
+        lens (_pkcs7 :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
+             (\s a -> s { _pkcs7 = a } :: AwsAuthBackendLoginResource s)
 
-instance P.HasRole (ResourceAwsAuthBackendLogin s) (TF.Attr s P.Text) where
+instance P.HasRole (AwsAuthBackendLoginResource s) (TF.Attr s P.Text) where
     role =
-        lens (_role :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: ResourceAwsAuthBackendLogin s)
+        lens (_role :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: AwsAuthBackendLoginResource s)
 
-instance P.HasSignature (ResourceAwsAuthBackendLogin s) (TF.Attr s P.Text) where
+instance P.HasSignature (AwsAuthBackendLoginResource s) (TF.Attr s P.Text) where
     signature =
-        lens (_signature :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
-             (\s a -> s { _signature = a } :: ResourceAwsAuthBackendLogin s)
+        lens (_signature :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
+             (\s a -> s { _signature = a } :: AwsAuthBackendLoginResource s)
 
-instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedAccessor x = TF.compute (TF.refKey x) "accessor"
 
-instance s ~ s' => P.HasComputedAuthType (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAuthType (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedAuthType x = TF.compute (TF.refKey x) "auth_type"
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedBackend =
-        (_backend :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
+        (_backend :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedClientToken (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedClientToken (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedClientToken x = TF.compute (TF.refKey x) "client_token"
 
-instance s ~ s' => P.HasComputedIamHttpRequestMethod (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIamHttpRequestMethod (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedIamHttpRequestMethod =
-        (_iam_http_request_method :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
+        (_iam_http_request_method :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIamRequestBody (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIamRequestBody (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedIamRequestBody =
-        (_iam_request_body :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
+        (_iam_request_body :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIamRequestHeaders (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIamRequestHeaders (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedIamRequestHeaders =
-        (_iam_request_headers :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
+        (_iam_request_headers :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIamRequestUrl (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIamRequestUrl (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedIamRequestUrl =
-        (_iam_request_url :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
+        (_iam_request_url :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedIdentity =
-        (_identity :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
+        (_identity :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
 
-instance s ~ s' => P.HasComputedLeaseStartTime (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLeaseStartTime (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
-instance s ~ s' => P.HasComputedNonce (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNonce (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedNonce =
-        (_nonce :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
+        (_nonce :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPkcs7 (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPkcs7 (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedPkcs7 =
-        (_pkcs7 :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
+        (_pkcs7 :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedPolicies x = TF.compute (TF.refKey x) "policies"
 
-instance s ~ s' => P.HasComputedRenewable (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRenewable (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedRenewable x = TF.compute (TF.refKey x) "renewable"
 
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedRole =
-        (_role :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
+        (_role :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSignature (TF.Ref s' (ResourceAwsAuthBackendLogin s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSignature (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
     computedSignature =
-        (_signature :: ResourceAwsAuthBackendLogin s -> TF.Attr s P.Text)
+        (_signature :: AwsAuthBackendLoginResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceAwsAuthBackendLogin :: TF.Resource P.Vault (ResourceAwsAuthBackendLogin s)
-resourceAwsAuthBackendLogin =
+awsAuthBackendLoginResource :: TF.Resource P.Vault (AwsAuthBackendLoginResource s)
+awsAuthBackendLoginResource =
     TF.newResource "vault_aws_auth_backend_login" $
-        ResourceAwsAuthBackendLogin {
+        AwsAuthBackendLoginResource {
               _backend = TF.Nil
             , _iam_http_request_method = TF.Nil
             , _iam_request_body = TF.Nil
@@ -1151,7 +1151,7 @@ instances or principals that can perform the login operation against the
 backend. See the <https://www.vaultproject.io/docs/auth/aws.html> for more
 information.
 -}
-data ResourceAwsAuthBackendRole s = ResourceAwsAuthBackendRole {
+data AwsAuthBackendRoleResource s = AwsAuthBackendRoleResource {
       _allow_instance_migration       :: !(TF.Attr s P.Text)
     {- ^ (Optional) If set to @true@ , allows migration of the underlying instance where the client resides. -}
     , _auth_type                      :: !(TF.Attr s P.Text)
@@ -1194,8 +1194,8 @@ data ResourceAwsAuthBackendRole s = ResourceAwsAuthBackendRole {
     {- ^ (Optional) The TTL period of tokens issued using this role, provided as a number of minutes. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceAwsAuthBackendRole s) where
-    toHCL ResourceAwsAuthBackendRole{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AwsAuthBackendRoleResource s) where
+    toHCL AwsAuthBackendRoleResource{..} = TF.inline $ catMaybes
         [ TF.assign "allow_instance_migration" <$> TF.attribute _allow_instance_migration
         , TF.assign "auth_type" <$> TF.attribute _auth_type
         , TF.assign "bound_account_id" <$> TF.attribute _bound_account_id
@@ -1218,210 +1218,210 @@ instance TF.ToHCL (ResourceAwsAuthBackendRole s) where
         , TF.assign "ttl" <$> TF.attribute _ttl
         ]
 
-instance P.HasAllowInstanceMigration (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasAllowInstanceMigration (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     allowInstanceMigration =
-        lens (_allow_instance_migration :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _allow_instance_migration = a } :: ResourceAwsAuthBackendRole s)
+        lens (_allow_instance_migration :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _allow_instance_migration = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasAuthType (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasAuthType (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     authType =
-        lens (_auth_type :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _auth_type = a } :: ResourceAwsAuthBackendRole s)
+        lens (_auth_type :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _auth_type = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasBoundAccountId (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasBoundAccountId (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     boundAccountId =
-        lens (_bound_account_id :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _bound_account_id = a } :: ResourceAwsAuthBackendRole s)
+        lens (_bound_account_id :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bound_account_id = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasBoundAmiId (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasBoundAmiId (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     boundAmiId =
-        lens (_bound_ami_id :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _bound_ami_id = a } :: ResourceAwsAuthBackendRole s)
+        lens (_bound_ami_id :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bound_ami_id = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasBoundIamInstanceProfileArn (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasBoundIamInstanceProfileArn (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     boundIamInstanceProfileArn =
-        lens (_bound_iam_instance_profile_arn :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _bound_iam_instance_profile_arn = a } :: ResourceAwsAuthBackendRole s)
+        lens (_bound_iam_instance_profile_arn :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bound_iam_instance_profile_arn = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasBoundIamPrincipalArn (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasBoundIamPrincipalArn (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     boundIamPrincipalArn =
-        lens (_bound_iam_principal_arn :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _bound_iam_principal_arn = a } :: ResourceAwsAuthBackendRole s)
+        lens (_bound_iam_principal_arn :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bound_iam_principal_arn = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasBoundIamRoleArn (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasBoundIamRoleArn (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     boundIamRoleArn =
-        lens (_bound_iam_role_arn :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _bound_iam_role_arn = a } :: ResourceAwsAuthBackendRole s)
+        lens (_bound_iam_role_arn :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bound_iam_role_arn = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasBoundRegion (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasBoundRegion (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     boundRegion =
-        lens (_bound_region :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _bound_region = a } :: ResourceAwsAuthBackendRole s)
+        lens (_bound_region :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bound_region = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasBoundSubnetId (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasBoundSubnetId (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     boundSubnetId =
-        lens (_bound_subnet_id :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _bound_subnet_id = a } :: ResourceAwsAuthBackendRole s)
+        lens (_bound_subnet_id :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bound_subnet_id = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasBoundVpcId (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasBoundVpcId (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     boundVpcId =
-        lens (_bound_vpc_id :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _bound_vpc_id = a } :: ResourceAwsAuthBackendRole s)
+        lens (_bound_vpc_id :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bound_vpc_id = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasDisallowReauthentication (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasDisallowReauthentication (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     disallowReauthentication =
-        lens (_disallow_reauthentication :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _disallow_reauthentication = a } :: ResourceAwsAuthBackendRole s)
+        lens (_disallow_reauthentication :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _disallow_reauthentication = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasInferredAwsRegion (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasInferredAwsRegion (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     inferredAwsRegion =
-        lens (_inferred_aws_region :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _inferred_aws_region = a } :: ResourceAwsAuthBackendRole s)
+        lens (_inferred_aws_region :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _inferred_aws_region = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasInferredEntityType (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasInferredEntityType (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     inferredEntityType =
-        lens (_inferred_entity_type :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _inferred_entity_type = a } :: ResourceAwsAuthBackendRole s)
+        lens (_inferred_entity_type :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _inferred_entity_type = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasMaxTtl (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasMaxTtl (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     maxTtl =
-        lens (_max_ttl :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _max_ttl = a } :: ResourceAwsAuthBackendRole s)
+        lens (_max_ttl :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _max_ttl = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasPeriod (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasPeriod (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     period =
-        lens (_period :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _period = a } :: ResourceAwsAuthBackendRole s)
+        lens (_period :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _period = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasPolicies (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasPolicies (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     policies =
-        lens (_policies :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _policies = a } :: ResourceAwsAuthBackendRole s)
+        lens (_policies :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policies = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasResolveAwsUniqueIds (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasResolveAwsUniqueIds (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     resolveAwsUniqueIds =
-        lens (_resolve_aws_unique_ids :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _resolve_aws_unique_ids = a } :: ResourceAwsAuthBackendRole s)
+        lens (_resolve_aws_unique_ids :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _resolve_aws_unique_ids = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasRole (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasRole (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     role =
-        lens (_role :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: ResourceAwsAuthBackendRole s)
+        lens (_role :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasRoleTag (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasRoleTag (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     roleTag =
-        lens (_role_tag :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _role_tag = a } :: ResourceAwsAuthBackendRole s)
+        lens (_role_tag :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _role_tag = a } :: AwsAuthBackendRoleResource s)
 
-instance P.HasTtl (ResourceAwsAuthBackendRole s) (TF.Attr s P.Text) where
+instance P.HasTtl (AwsAuthBackendRoleResource s) (TF.Attr s P.Text) where
     ttl =
-        lens (_ttl :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: ResourceAwsAuthBackendRole s)
+        lens (_ttl :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ttl = a } :: AwsAuthBackendRoleResource s)
 
-instance s ~ s' => P.HasComputedAllowInstanceMigration (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAllowInstanceMigration (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedAllowInstanceMigration =
-        (_allow_instance_migration :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_allow_instance_migration :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedAuthType (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAuthType (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedAuthType =
-        (_auth_type :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_auth_type :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBoundAccountId (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBoundAccountId (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedBoundAccountId =
-        (_bound_account_id :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_bound_account_id :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBoundAmiId (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBoundAmiId (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedBoundAmiId =
-        (_bound_ami_id :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_bound_ami_id :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBoundIamInstanceProfileArn (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBoundIamInstanceProfileArn (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedBoundIamInstanceProfileArn =
-        (_bound_iam_instance_profile_arn :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_bound_iam_instance_profile_arn :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBoundIamPrincipalArn (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBoundIamPrincipalArn (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedBoundIamPrincipalArn =
-        (_bound_iam_principal_arn :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_bound_iam_principal_arn :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBoundIamRoleArn (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBoundIamRoleArn (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedBoundIamRoleArn =
-        (_bound_iam_role_arn :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_bound_iam_role_arn :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBoundRegion (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBoundRegion (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedBoundRegion =
-        (_bound_region :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_bound_region :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBoundSubnetId (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBoundSubnetId (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedBoundSubnetId =
-        (_bound_subnet_id :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_bound_subnet_id :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBoundVpcId (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBoundVpcId (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedBoundVpcId =
-        (_bound_vpc_id :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_bound_vpc_id :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisallowReauthentication (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisallowReauthentication (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedDisallowReauthentication =
-        (_disallow_reauthentication :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_disallow_reauthentication :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInferredAwsRegion (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInferredAwsRegion (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedInferredAwsRegion =
-        (_inferred_aws_region :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_inferred_aws_region :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInferredEntityType (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInferredEntityType (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedInferredEntityType =
-        (_inferred_entity_type :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_inferred_entity_type :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMaxTtl (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaxTtl (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedMaxTtl =
-        (_max_ttl :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_max_ttl :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedPeriod =
-        (_period :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_period :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedPolicies =
-        (_policies :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_policies :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedResolveAwsUniqueIds (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResolveAwsUniqueIds (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedResolveAwsUniqueIds =
-        (_resolve_aws_unique_ids :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_resolve_aws_unique_ids :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedRole =
-        (_role :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_role :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRoleTag (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRoleTag (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedRoleTag =
-        (_role_tag :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_role_tag :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceAwsAuthBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Text) where
     computedTtl =
-        (_ttl :: ResourceAwsAuthBackendRole s -> TF.Attr s P.Text)
+        (_ttl :: AwsAuthBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceAwsAuthBackendRole :: TF.Resource P.Vault (ResourceAwsAuthBackendRole s)
-resourceAwsAuthBackendRole =
+awsAuthBackendRoleResource :: TF.Resource P.Vault (AwsAuthBackendRoleResource s)
+awsAuthBackendRoleResource =
     TF.newResource "vault_aws_auth_backend_role" $
-        ResourceAwsAuthBackendRole {
+        AwsAuthBackendRoleResource {
               _allow_instance_migration = TF.Nil
             , _auth_type = TF.Nil
             , _bound_account_id = TF.Nil
@@ -1448,7 +1448,7 @@ resourceAwsAuthBackendRole =
 
 Reads role tag information from an AWS auth backend in Vault.
 -}
-data ResourceAwsAuthBackendRoleTag s = ResourceAwsAuthBackendRoleTag {
+data AwsAuthBackendRoleTagResource s = AwsAuthBackendRoleTagResource {
       _allow_instance_migration  :: !(TF.Attr s P.Text)
     {- ^ (Optional) If set, allows migration of the underlying instances where the client resides. Use with caution. -}
     , _backend                   :: !(TF.Attr s P.Text)
@@ -1465,8 +1465,8 @@ data ResourceAwsAuthBackendRoleTag s = ResourceAwsAuthBackendRoleTag {
     {- ^ (Required) The name of the AWS auth backend role to read role tags from, with no leading or trailing @/@ s. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceAwsAuthBackendRoleTag s) where
-    toHCL ResourceAwsAuthBackendRoleTag{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AwsAuthBackendRoleTagResource s) where
+    toHCL AwsAuthBackendRoleTagResource{..} = TF.inline $ catMaybes
         [ TF.assign "allow_instance_migration" <$> TF.attribute _allow_instance_migration
         , TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "disallow_reauthentication" <$> TF.attribute _disallow_reauthentication
@@ -1476,86 +1476,86 @@ instance TF.ToHCL (ResourceAwsAuthBackendRoleTag s) where
         , TF.assign "role" <$> TF.attribute _role
         ]
 
-instance P.HasAllowInstanceMigration (ResourceAwsAuthBackendRoleTag s) (TF.Attr s P.Text) where
+instance P.HasAllowInstanceMigration (AwsAuthBackendRoleTagResource s) (TF.Attr s P.Text) where
     allowInstanceMigration =
-        lens (_allow_instance_migration :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
-             (\s a -> s { _allow_instance_migration = a } :: ResourceAwsAuthBackendRoleTag s)
+        lens (_allow_instance_migration :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
+             (\s a -> s { _allow_instance_migration = a } :: AwsAuthBackendRoleTagResource s)
 
-instance P.HasBackend (ResourceAwsAuthBackendRoleTag s) (TF.Attr s P.Text) where
+instance P.HasBackend (AwsAuthBackendRoleTagResource s) (TF.Attr s P.Text) where
     backend =
-        lens (_backend :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: ResourceAwsAuthBackendRoleTag s)
+        lens (_backend :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
+             (\s a -> s { _backend = a } :: AwsAuthBackendRoleTagResource s)
 
-instance P.HasDisallowReauthentication (ResourceAwsAuthBackendRoleTag s) (TF.Attr s P.Text) where
+instance P.HasDisallowReauthentication (AwsAuthBackendRoleTagResource s) (TF.Attr s P.Text) where
     disallowReauthentication =
-        lens (_disallow_reauthentication :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
-             (\s a -> s { _disallow_reauthentication = a } :: ResourceAwsAuthBackendRoleTag s)
+        lens (_disallow_reauthentication :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
+             (\s a -> s { _disallow_reauthentication = a } :: AwsAuthBackendRoleTagResource s)
 
-instance P.HasInstanceId (ResourceAwsAuthBackendRoleTag s) (TF.Attr s P.Text) where
+instance P.HasInstanceId (AwsAuthBackendRoleTagResource s) (TF.Attr s P.Text) where
     instanceId =
-        lens (_instance_id :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_id = a } :: ResourceAwsAuthBackendRoleTag s)
+        lens (_instance_id :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_id = a } :: AwsAuthBackendRoleTagResource s)
 
-instance P.HasMaxTtl (ResourceAwsAuthBackendRoleTag s) (TF.Attr s P.Text) where
+instance P.HasMaxTtl (AwsAuthBackendRoleTagResource s) (TF.Attr s P.Text) where
     maxTtl =
-        lens (_max_ttl :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
-             (\s a -> s { _max_ttl = a } :: ResourceAwsAuthBackendRoleTag s)
+        lens (_max_ttl :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
+             (\s a -> s { _max_ttl = a } :: AwsAuthBackendRoleTagResource s)
 
-instance P.HasPolicies (ResourceAwsAuthBackendRoleTag s) (TF.Attr s P.Text) where
+instance P.HasPolicies (AwsAuthBackendRoleTagResource s) (TF.Attr s P.Text) where
     policies =
-        lens (_policies :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
-             (\s a -> s { _policies = a } :: ResourceAwsAuthBackendRoleTag s)
+        lens (_policies :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policies = a } :: AwsAuthBackendRoleTagResource s)
 
-instance P.HasRole (ResourceAwsAuthBackendRoleTag s) (TF.Attr s P.Text) where
+instance P.HasRole (AwsAuthBackendRoleTagResource s) (TF.Attr s P.Text) where
     role =
-        lens (_role :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: ResourceAwsAuthBackendRoleTag s)
+        lens (_role :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: AwsAuthBackendRoleTagResource s)
 
-instance s ~ s' => P.HasComputedAllowInstanceMigration (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAllowInstanceMigration (TF.Ref s' (AwsAuthBackendRoleTagResource s)) (TF.Attr s P.Text) where
     computedAllowInstanceMigration =
-        (_allow_instance_migration :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
+        (_allow_instance_migration :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (AwsAuthBackendRoleTagResource s)) (TF.Attr s P.Text) where
     computedBackend =
-        (_backend :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
+        (_backend :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisallowReauthentication (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisallowReauthentication (TF.Ref s' (AwsAuthBackendRoleTagResource s)) (TF.Attr s P.Text) where
     computedDisallowReauthentication =
-        (_disallow_reauthentication :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
+        (_disallow_reauthentication :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (AwsAuthBackendRoleTagResource s)) (TF.Attr s P.Text) where
     computedInstanceId =
-        (_instance_id :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
+        (_instance_id :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMaxTtl (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaxTtl (TF.Ref s' (AwsAuthBackendRoleTagResource s)) (TF.Attr s P.Text) where
     computedMaxTtl =
-        (_max_ttl :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
+        (_max_ttl :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (AwsAuthBackendRoleTagResource s)) (TF.Attr s P.Text) where
     computedPolicies =
-        (_policies :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
+        (_policies :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (AwsAuthBackendRoleTagResource s)) (TF.Attr s P.Text) where
     computedRole =
-        (_role :: ResourceAwsAuthBackendRoleTag s -> TF.Attr s P.Text)
+        (_role :: AwsAuthBackendRoleTagResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTagKey (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTagKey (TF.Ref s' (AwsAuthBackendRoleTagResource s)) (TF.Attr s P.Text) where
     computedTagKey x = TF.compute (TF.refKey x) "tag_key"
 
-instance s ~ s' => P.HasComputedTagValue (TF.Ref s' (ResourceAwsAuthBackendRoleTag s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTagValue (TF.Ref s' (AwsAuthBackendRoleTagResource s)) (TF.Attr s P.Text) where
     computedTagValue x = TF.compute (TF.refKey x) "tag_value"
 
-resourceAwsAuthBackendRoleTag :: TF.Resource P.Vault (ResourceAwsAuthBackendRoleTag s)
-resourceAwsAuthBackendRoleTag =
+awsAuthBackendRoleTagResource :: TF.Resource P.Vault (AwsAuthBackendRoleTagResource s)
+awsAuthBackendRoleTagResource =
     TF.newResource "vault_aws_auth_backend_role_tag" $
-        ResourceAwsAuthBackendRoleTag {
+        AwsAuthBackendRoleTagResource {
               _allow_instance_migration = TF.Nil
             , _backend = TF.Nil
             , _disallow_reauthentication = TF.Nil
@@ -1577,7 +1577,7 @@ cleartext to state and plan files generated by Terraform, and will appear in
 the console output when Terraform runs. Protect these artifacts accordingly.
 See <../../index.html> for more details.
 -}
-data ResourceAwsAuthBackendStsRole s = ResourceAwsAuthBackendStsRole {
+data AwsAuthBackendStsRoleResource s = AwsAuthBackendStsRoleResource {
       _account_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The AWS account ID to configure the STS role for. -}
     , _backend    :: !(TF.Attr s P.Text)
@@ -1586,47 +1586,47 @@ data ResourceAwsAuthBackendStsRole s = ResourceAwsAuthBackendStsRole {
     {- ^ (Optional) The STS role to assume when verifying requests made by EC2 instances in the account specified by @account_id@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceAwsAuthBackendStsRole s) where
-    toHCL ResourceAwsAuthBackendStsRole{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AwsAuthBackendStsRoleResource s) where
+    toHCL AwsAuthBackendStsRoleResource{..} = TF.inline $ catMaybes
         [ TF.assign "account_id" <$> TF.attribute _account_id
         , TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "sts_role" <$> TF.attribute _sts_role
         ]
 
-instance P.HasAccountId (ResourceAwsAuthBackendStsRole s) (TF.Attr s P.Text) where
+instance P.HasAccountId (AwsAuthBackendStsRoleResource s) (TF.Attr s P.Text) where
     accountId =
-        lens (_account_id :: ResourceAwsAuthBackendStsRole s -> TF.Attr s P.Text)
-             (\s a -> s { _account_id = a } :: ResourceAwsAuthBackendStsRole s)
+        lens (_account_id :: AwsAuthBackendStsRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _account_id = a } :: AwsAuthBackendStsRoleResource s)
 
-instance P.HasBackend (ResourceAwsAuthBackendStsRole s) (TF.Attr s P.Text) where
+instance P.HasBackend (AwsAuthBackendStsRoleResource s) (TF.Attr s P.Text) where
     backend =
-        lens (_backend :: ResourceAwsAuthBackendStsRole s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: ResourceAwsAuthBackendStsRole s)
+        lens (_backend :: AwsAuthBackendStsRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _backend = a } :: AwsAuthBackendStsRoleResource s)
 
-instance P.HasStsRole (ResourceAwsAuthBackendStsRole s) (TF.Attr s P.Text) where
+instance P.HasStsRole (AwsAuthBackendStsRoleResource s) (TF.Attr s P.Text) where
     stsRole =
-        lens (_sts_role :: ResourceAwsAuthBackendStsRole s -> TF.Attr s P.Text)
-             (\s a -> s { _sts_role = a } :: ResourceAwsAuthBackendStsRole s)
+        lens (_sts_role :: AwsAuthBackendStsRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _sts_role = a } :: AwsAuthBackendStsRoleResource s)
 
-instance s ~ s' => P.HasComputedAccountId (TF.Ref s' (ResourceAwsAuthBackendStsRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccountId (TF.Ref s' (AwsAuthBackendStsRoleResource s)) (TF.Attr s P.Text) where
     computedAccountId =
-        (_account_id :: ResourceAwsAuthBackendStsRole s -> TF.Attr s P.Text)
+        (_account_id :: AwsAuthBackendStsRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsAuthBackendStsRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (AwsAuthBackendStsRoleResource s)) (TF.Attr s P.Text) where
     computedBackend =
-        (_backend :: ResourceAwsAuthBackendStsRole s -> TF.Attr s P.Text)
+        (_backend :: AwsAuthBackendStsRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStsRole (TF.Ref s' (ResourceAwsAuthBackendStsRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStsRole (TF.Ref s' (AwsAuthBackendStsRoleResource s)) (TF.Attr s P.Text) where
     computedStsRole =
-        (_sts_role :: ResourceAwsAuthBackendStsRole s -> TF.Attr s P.Text)
+        (_sts_role :: AwsAuthBackendStsRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceAwsAuthBackendStsRole :: TF.Resource P.Vault (ResourceAwsAuthBackendStsRole s)
-resourceAwsAuthBackendStsRole =
+awsAuthBackendStsRoleResource :: TF.Resource P.Vault (AwsAuthBackendStsRoleResource s)
+awsAuthBackendStsRoleResource =
     TF.newResource "vault_aws_auth_backend_sts_role" $
-        ResourceAwsAuthBackendStsRole {
+        AwsAuthBackendStsRoleResource {
               _account_id = TF.Nil
             , _backend = TF.Nil
             , _sts_role = TF.Nil
@@ -1641,43 +1641,43 @@ in cleartext to state and plan files generated by Terraform, and will appear
 in the console output when Terraform runs. Protect these artifacts
 accordingly. See <../index.html> for more details.
 -}
-data ResourceAwsSecretBackend s = ResourceAwsSecretBackend {
+data AwsSecretBackendResource s = AwsSecretBackendResource {
       _access_key :: !(TF.Attr s P.Text)
     {- ^ (Required) The AWS Access Key ID this backend should use to issue new credentials. -}
     , _secret_key :: !(TF.Attr s P.Text)
     {- ^ (Required) The AWS Secret Key this backend should use to issue new credentials. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceAwsSecretBackend s) where
-    toHCL ResourceAwsSecretBackend{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AwsSecretBackendResource s) where
+    toHCL AwsSecretBackendResource{..} = TF.inline $ catMaybes
         [ TF.assign "access_key" <$> TF.attribute _access_key
         , TF.assign "secret_key" <$> TF.attribute _secret_key
         ]
 
-instance P.HasAccessKey (ResourceAwsSecretBackend s) (TF.Attr s P.Text) where
+instance P.HasAccessKey (AwsSecretBackendResource s) (TF.Attr s P.Text) where
     accessKey =
-        lens (_access_key :: ResourceAwsSecretBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _access_key = a } :: ResourceAwsSecretBackend s)
+        lens (_access_key :: AwsSecretBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _access_key = a } :: AwsSecretBackendResource s)
 
-instance P.HasSecretKey (ResourceAwsSecretBackend s) (TF.Attr s P.Text) where
+instance P.HasSecretKey (AwsSecretBackendResource s) (TF.Attr s P.Text) where
     secretKey =
-        lens (_secret_key :: ResourceAwsSecretBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _secret_key = a } :: ResourceAwsSecretBackend s)
+        lens (_secret_key :: AwsSecretBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _secret_key = a } :: AwsSecretBackendResource s)
 
-instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (ResourceAwsSecretBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (AwsSecretBackendResource s)) (TF.Attr s P.Text) where
     computedAccessKey =
-        (_access_key :: ResourceAwsSecretBackend s -> TF.Attr s P.Text)
+        (_access_key :: AwsSecretBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSecretKey (TF.Ref s' (ResourceAwsSecretBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecretKey (TF.Ref s' (AwsSecretBackendResource s)) (TF.Attr s P.Text) where
     computedSecretKey =
-        (_secret_key :: ResourceAwsSecretBackend s -> TF.Attr s P.Text)
+        (_secret_key :: AwsSecretBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceAwsSecretBackend :: TF.Resource P.Vault (ResourceAwsSecretBackend s)
-resourceAwsSecretBackend =
+awsSecretBackendResource :: TF.Resource P.Vault (AwsSecretBackendResource s)
+awsSecretBackendResource =
     TF.newResource "vault_aws_secret_backend" $
-        ResourceAwsSecretBackend {
+        AwsSecretBackendResource {
               _access_key = TF.Nil
             , _secret_key = TF.Nil
             }
@@ -1691,7 +1691,7 @@ and plan files generated by Terraform, and will appear in the console output
 when Terraform runs. Protect these artifacts accordingly. See
 <../index.html> for more details.
 -}
-data ResourceAwsSecretBackendRole s = ResourceAwsSecretBackendRole {
+data AwsSecretBackendRoleResource s = AwsSecretBackendRoleResource {
       _backend    :: !(TF.Attr s P.Text)
     {- ^ (Required) The path the AWS secret backend is mounted at, with no leading or trailing @/@ s. -}
     , _name       :: !(TF.Attr s P.Text)
@@ -1702,58 +1702,58 @@ data ResourceAwsSecretBackendRole s = ResourceAwsSecretBackendRole {
     {- ^ (Optional) The ARN for a pre-existing policy to associate with this role. Either @policy@ or @policy_arn@ must be specified. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceAwsSecretBackendRole s) where
-    toHCL ResourceAwsSecretBackendRole{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AwsSecretBackendRoleResource s) where
+    toHCL AwsSecretBackendRoleResource{..} = TF.inline $ catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "policy" <$> TF.attribute _policy
         , TF.assign "policy_arn" <$> TF.attribute _policy_arn
         ]
 
-instance P.HasBackend (ResourceAwsSecretBackendRole s) (TF.Attr s P.Text) where
+instance P.HasBackend (AwsSecretBackendRoleResource s) (TF.Attr s P.Text) where
     backend =
-        lens (_backend :: ResourceAwsSecretBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: ResourceAwsSecretBackendRole s)
+        lens (_backend :: AwsSecretBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _backend = a } :: AwsSecretBackendRoleResource s)
 
-instance P.HasName (ResourceAwsSecretBackendRole s) (TF.Attr s P.Text) where
+instance P.HasName (AwsSecretBackendRoleResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceAwsSecretBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceAwsSecretBackendRole s)
+        lens (_name :: AwsSecretBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: AwsSecretBackendRoleResource s)
 
-instance P.HasPolicy (ResourceAwsSecretBackendRole s) (TF.Attr s P.Text) where
+instance P.HasPolicy (AwsSecretBackendRoleResource s) (TF.Attr s P.Text) where
     policy =
-        lens (_policy :: ResourceAwsSecretBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _policy = a } :: ResourceAwsSecretBackendRole s)
+        lens (_policy :: AwsSecretBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policy = a } :: AwsSecretBackendRoleResource s)
 
-instance P.HasPolicyArn (ResourceAwsSecretBackendRole s) (TF.Attr s P.Text) where
+instance P.HasPolicyArn (AwsSecretBackendRoleResource s) (TF.Attr s P.Text) where
     policyArn =
-        lens (_policy_arn :: ResourceAwsSecretBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _policy_arn = a } :: ResourceAwsSecretBackendRole s)
+        lens (_policy_arn :: AwsSecretBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policy_arn = a } :: AwsSecretBackendRoleResource s)
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceAwsSecretBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (AwsSecretBackendRoleResource s)) (TF.Attr s P.Text) where
     computedBackend =
-        (_backend :: ResourceAwsSecretBackendRole s -> TF.Attr s P.Text)
+        (_backend :: AwsSecretBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceAwsSecretBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AwsSecretBackendRoleResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceAwsSecretBackendRole s -> TF.Attr s P.Text)
+        (_name :: AwsSecretBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (ResourceAwsSecretBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (AwsSecretBackendRoleResource s)) (TF.Attr s P.Text) where
     computedPolicy =
-        (_policy :: ResourceAwsSecretBackendRole s -> TF.Attr s P.Text)
+        (_policy :: AwsSecretBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPolicyArn (TF.Ref s' (ResourceAwsSecretBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicyArn (TF.Ref s' (AwsSecretBackendRoleResource s)) (TF.Attr s P.Text) where
     computedPolicyArn =
-        (_policy_arn :: ResourceAwsSecretBackendRole s -> TF.Attr s P.Text)
+        (_policy_arn :: AwsSecretBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceAwsSecretBackendRole :: TF.Resource P.Vault (ResourceAwsSecretBackendRole s)
-resourceAwsSecretBackendRole =
+awsSecretBackendRoleResource :: TF.Resource P.Vault (AwsSecretBackendRoleResource s)
+awsSecretBackendRoleResource =
     TF.newResource "vault_aws_secret_backend_role" $
-        ResourceAwsSecretBackendRole {
+        AwsSecretBackendRoleResource {
               _backend = TF.Nil
             , _name = TF.Nil
             , _policy = TF.Nil
@@ -1769,7 +1769,7 @@ be written in cleartext to state and plan files generated by Terraform, and
 will appear in the console output when Terraform runs. Protect these
 artifacts accordingly. See <../index.html> for more details.
 -}
-data ResourceDatabaseSecretBackendConnection s = ResourceDatabaseSecretBackendConnection {
+data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnectionResource {
       _allowed_roles     :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of roles that are allowed to use this connection. -}
     , _backend           :: !(TF.Attr s P.Text)
@@ -1794,8 +1794,8 @@ data ResourceDatabaseSecretBackendConnection s = ResourceDatabaseSecretBackendCo
     {- ^ (Optional) Whether the connection should be verified on initial configuration or not. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceDatabaseSecretBackendConnection s) where
-    toHCL ResourceDatabaseSecretBackendConnection{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DatabaseSecretBackendConnectionResource s) where
+    toHCL DatabaseSecretBackendConnectionResource{..} = TF.inline $ catMaybes
         [ TF.assign "allowed_roles" <$> TF.attribute _allowed_roles
         , TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "cassandra" <$> TF.attribute _cassandra
@@ -1809,120 +1809,120 @@ instance TF.ToHCL (ResourceDatabaseSecretBackendConnection s) where
         , TF.assign "verify_connection" <$> TF.attribute _verify_connection
         ]
 
-instance P.HasAllowedRoles (ResourceDatabaseSecretBackendConnection s) (TF.Attr s P.Text) where
+instance P.HasAllowedRoles (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text) where
     allowedRoles =
-        lens (_allowed_roles :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
-             (\s a -> s { _allowed_roles = a } :: ResourceDatabaseSecretBackendConnection s)
+        lens (_allowed_roles :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _allowed_roles = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasBackend (ResourceDatabaseSecretBackendConnection s) (TF.Attr s P.Text) where
+instance P.HasBackend (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text) where
     backend =
-        lens (_backend :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: ResourceDatabaseSecretBackendConnection s)
+        lens (_backend :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _backend = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasCassandra (ResourceDatabaseSecretBackendConnection s) (TF.Attr s P.Text) where
+instance P.HasCassandra (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text) where
     cassandra =
-        lens (_cassandra :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
-             (\s a -> s { _cassandra = a } :: ResourceDatabaseSecretBackendConnection s)
+        lens (_cassandra :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cassandra = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasHana (ResourceDatabaseSecretBackendConnection s) (TF.Attr s P.Text) where
+instance P.HasHana (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text) where
     hana =
-        lens (_hana :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
-             (\s a -> s { _hana = a } :: ResourceDatabaseSecretBackendConnection s)
+        lens (_hana :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _hana = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasMongodb (ResourceDatabaseSecretBackendConnection s) (TF.Attr s P.Text) where
+instance P.HasMongodb (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text) where
     mongodb =
-        lens (_mongodb :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
-             (\s a -> s { _mongodb = a } :: ResourceDatabaseSecretBackendConnection s)
+        lens (_mongodb :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _mongodb = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasMssql (ResourceDatabaseSecretBackendConnection s) (TF.Attr s P.Text) where
+instance P.HasMssql (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text) where
     mssql =
-        lens (_mssql :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
-             (\s a -> s { _mssql = a } :: ResourceDatabaseSecretBackendConnection s)
+        lens (_mssql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _mssql = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasMysql (ResourceDatabaseSecretBackendConnection s) (TF.Attr s P.Text) where
+instance P.HasMysql (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text) where
     mysql =
-        lens (_mysql :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
-             (\s a -> s { _mysql = a } :: ResourceDatabaseSecretBackendConnection s)
+        lens (_mysql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _mysql = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasName (ResourceDatabaseSecretBackendConnection s) (TF.Attr s P.Text) where
+instance P.HasName (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceDatabaseSecretBackendConnection s)
+        lens (_name :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasOracle (ResourceDatabaseSecretBackendConnection s) (TF.Attr s P.Text) where
+instance P.HasOracle (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text) where
     oracle =
-        lens (_oracle :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
-             (\s a -> s { _oracle = a } :: ResourceDatabaseSecretBackendConnection s)
+        lens (_oracle :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _oracle = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasPostgresql (ResourceDatabaseSecretBackendConnection s) (TF.Attr s P.Text) where
+instance P.HasPostgresql (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text) where
     postgresql =
-        lens (_postgresql :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
-             (\s a -> s { _postgresql = a } :: ResourceDatabaseSecretBackendConnection s)
+        lens (_postgresql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _postgresql = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasVerifyConnection (ResourceDatabaseSecretBackendConnection s) (TF.Attr s P.Text) where
+instance P.HasVerifyConnection (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text) where
     verifyConnection =
-        lens (_verify_connection :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
-             (\s a -> s { _verify_connection = a } :: ResourceDatabaseSecretBackendConnection s)
+        lens (_verify_connection :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _verify_connection = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance s ~ s' => P.HasComputedAllowedRoles (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAllowedRoles (TF.Ref s' (DatabaseSecretBackendConnectionResource s)) (TF.Attr s P.Text) where
     computedAllowedRoles =
-        (_allowed_roles :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
+        (_allowed_roles :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (DatabaseSecretBackendConnectionResource s)) (TF.Attr s P.Text) where
     computedBackend =
-        (_backend :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
+        (_backend :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCassandra (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCassandra (TF.Ref s' (DatabaseSecretBackendConnectionResource s)) (TF.Attr s P.Text) where
     computedCassandra =
-        (_cassandra :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
+        (_cassandra :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHana (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHana (TF.Ref s' (DatabaseSecretBackendConnectionResource s)) (TF.Attr s P.Text) where
     computedHana =
-        (_hana :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
+        (_hana :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMongodb (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMongodb (TF.Ref s' (DatabaseSecretBackendConnectionResource s)) (TF.Attr s P.Text) where
     computedMongodb =
-        (_mongodb :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
+        (_mongodb :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMssql (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMssql (TF.Ref s' (DatabaseSecretBackendConnectionResource s)) (TF.Attr s P.Text) where
     computedMssql =
-        (_mssql :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
+        (_mssql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMysql (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMysql (TF.Ref s' (DatabaseSecretBackendConnectionResource s)) (TF.Attr s P.Text) where
     computedMysql =
-        (_mysql :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
+        (_mysql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatabaseSecretBackendConnectionResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
+        (_name :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOracle (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOracle (TF.Ref s' (DatabaseSecretBackendConnectionResource s)) (TF.Attr s P.Text) where
     computedOracle =
-        (_oracle :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
+        (_oracle :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPostgresql (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPostgresql (TF.Ref s' (DatabaseSecretBackendConnectionResource s)) (TF.Attr s P.Text) where
     computedPostgresql =
-        (_postgresql :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
+        (_postgresql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVerifyConnection (TF.Ref s' (ResourceDatabaseSecretBackendConnection s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVerifyConnection (TF.Ref s' (DatabaseSecretBackendConnectionResource s)) (TF.Attr s P.Text) where
     computedVerifyConnection =
-        (_verify_connection :: ResourceDatabaseSecretBackendConnection s -> TF.Attr s P.Text)
+        (_verify_connection :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceDatabaseSecretBackendConnection :: TF.Resource P.Vault (ResourceDatabaseSecretBackendConnection s)
-resourceDatabaseSecretBackendConnection =
+databaseSecretBackendConnectionResource :: TF.Resource P.Vault (DatabaseSecretBackendConnectionResource s)
+databaseSecretBackendConnectionResource =
     TF.newResource "vault_database_secret_backend_connection" $
-        ResourceDatabaseSecretBackendConnection {
+        DatabaseSecretBackendConnectionResource {
               _allowed_roles = TF.Nil
             , _backend = TF.Nil
             , _cassandra = TF.Nil
@@ -1945,7 +1945,7 @@ cleartext to state and plan files generated by Terraform, and will appear in
 the console output when Terraform runs. Protect these artifacts accordingly.
 See <../index.html> for more details.
 -}
-data ResourceDatabaseSecretBackendRole s = ResourceDatabaseSecretBackendRole {
+data DatabaseSecretBackendRoleResource s = DatabaseSecretBackendRoleResource {
       _backend               :: !(TF.Attr s P.Text)
     {- ^ (Required) The unique name of the Vault mount to configure. -}
     , _creation_statements   :: !(TF.Attr s P.Text)
@@ -1966,8 +1966,8 @@ data ResourceDatabaseSecretBackendRole s = ResourceDatabaseSecretBackendRole {
     {- ^ (Optional) The database statements to execute when rolling back creation due to an error. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceDatabaseSecretBackendRole s) where
-    toHCL ResourceDatabaseSecretBackendRole{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DatabaseSecretBackendRoleResource s) where
+    toHCL DatabaseSecretBackendRoleResource{..} = TF.inline $ catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "creation_statements" <$> TF.attribute _creation_statements
         , TF.assign "db_name" <$> TF.attribute _db_name
@@ -1979,100 +1979,100 @@ instance TF.ToHCL (ResourceDatabaseSecretBackendRole s) where
         , TF.assign "rollback_statements" <$> TF.attribute _rollback_statements
         ]
 
-instance P.HasBackend (ResourceDatabaseSecretBackendRole s) (TF.Attr s P.Text) where
+instance P.HasBackend (DatabaseSecretBackendRoleResource s) (TF.Attr s P.Text) where
     backend =
-        lens (_backend :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: ResourceDatabaseSecretBackendRole s)
+        lens (_backend :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _backend = a } :: DatabaseSecretBackendRoleResource s)
 
-instance P.HasCreationStatements (ResourceDatabaseSecretBackendRole s) (TF.Attr s P.Text) where
+instance P.HasCreationStatements (DatabaseSecretBackendRoleResource s) (TF.Attr s P.Text) where
     creationStatements =
-        lens (_creation_statements :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _creation_statements = a } :: ResourceDatabaseSecretBackendRole s)
+        lens (_creation_statements :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _creation_statements = a } :: DatabaseSecretBackendRoleResource s)
 
-instance P.HasDbName (ResourceDatabaseSecretBackendRole s) (TF.Attr s P.Text) where
+instance P.HasDbName (DatabaseSecretBackendRoleResource s) (TF.Attr s P.Text) where
     dbName =
-        lens (_db_name :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _db_name = a } :: ResourceDatabaseSecretBackendRole s)
+        lens (_db_name :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _db_name = a } :: DatabaseSecretBackendRoleResource s)
 
-instance P.HasDefaultTtl (ResourceDatabaseSecretBackendRole s) (TF.Attr s P.Text) where
+instance P.HasDefaultTtl (DatabaseSecretBackendRoleResource s) (TF.Attr s P.Text) where
     defaultTtl =
-        lens (_default_ttl :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _default_ttl = a } :: ResourceDatabaseSecretBackendRole s)
+        lens (_default_ttl :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _default_ttl = a } :: DatabaseSecretBackendRoleResource s)
 
-instance P.HasMaxTtl (ResourceDatabaseSecretBackendRole s) (TF.Attr s P.Text) where
+instance P.HasMaxTtl (DatabaseSecretBackendRoleResource s) (TF.Attr s P.Text) where
     maxTtl =
-        lens (_max_ttl :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _max_ttl = a } :: ResourceDatabaseSecretBackendRole s)
+        lens (_max_ttl :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _max_ttl = a } :: DatabaseSecretBackendRoleResource s)
 
-instance P.HasName (ResourceDatabaseSecretBackendRole s) (TF.Attr s P.Text) where
+instance P.HasName (DatabaseSecretBackendRoleResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceDatabaseSecretBackendRole s)
+        lens (_name :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DatabaseSecretBackendRoleResource s)
 
-instance P.HasRenewStatements (ResourceDatabaseSecretBackendRole s) (TF.Attr s P.Text) where
+instance P.HasRenewStatements (DatabaseSecretBackendRoleResource s) (TF.Attr s P.Text) where
     renewStatements =
-        lens (_renew_statements :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _renew_statements = a } :: ResourceDatabaseSecretBackendRole s)
+        lens (_renew_statements :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _renew_statements = a } :: DatabaseSecretBackendRoleResource s)
 
-instance P.HasRevocationStatements (ResourceDatabaseSecretBackendRole s) (TF.Attr s P.Text) where
+instance P.HasRevocationStatements (DatabaseSecretBackendRoleResource s) (TF.Attr s P.Text) where
     revocationStatements =
-        lens (_revocation_statements :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _revocation_statements = a } :: ResourceDatabaseSecretBackendRole s)
+        lens (_revocation_statements :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _revocation_statements = a } :: DatabaseSecretBackendRoleResource s)
 
-instance P.HasRollbackStatements (ResourceDatabaseSecretBackendRole s) (TF.Attr s P.Text) where
+instance P.HasRollbackStatements (DatabaseSecretBackendRoleResource s) (TF.Attr s P.Text) where
     rollbackStatements =
-        lens (_rollback_statements :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
-             (\s a -> s { _rollback_statements = a } :: ResourceDatabaseSecretBackendRole s)
+        lens (_rollback_statements :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _rollback_statements = a } :: DatabaseSecretBackendRoleResource s)
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (DatabaseSecretBackendRoleResource s)) (TF.Attr s P.Text) where
     computedBackend =
-        (_backend :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
+        (_backend :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCreationStatements (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCreationStatements (TF.Ref s' (DatabaseSecretBackendRoleResource s)) (TF.Attr s P.Text) where
     computedCreationStatements =
-        (_creation_statements :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
+        (_creation_statements :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDbName (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDbName (TF.Ref s' (DatabaseSecretBackendRoleResource s)) (TF.Attr s P.Text) where
     computedDbName =
-        (_db_name :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
+        (_db_name :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDefaultTtl (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultTtl (TF.Ref s' (DatabaseSecretBackendRoleResource s)) (TF.Attr s P.Text) where
     computedDefaultTtl =
-        (_default_ttl :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
+        (_default_ttl :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMaxTtl (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaxTtl (TF.Ref s' (DatabaseSecretBackendRoleResource s)) (TF.Attr s P.Text) where
     computedMaxTtl =
-        (_max_ttl :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
+        (_max_ttl :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatabaseSecretBackendRoleResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
+        (_name :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRenewStatements (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRenewStatements (TF.Ref s' (DatabaseSecretBackendRoleResource s)) (TF.Attr s P.Text) where
     computedRenewStatements =
-        (_renew_statements :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
+        (_renew_statements :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRevocationStatements (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRevocationStatements (TF.Ref s' (DatabaseSecretBackendRoleResource s)) (TF.Attr s P.Text) where
     computedRevocationStatements =
-        (_revocation_statements :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
+        (_revocation_statements :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRollbackStatements (TF.Ref s' (ResourceDatabaseSecretBackendRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRollbackStatements (TF.Ref s' (DatabaseSecretBackendRoleResource s)) (TF.Attr s P.Text) where
     computedRollbackStatements =
-        (_rollback_statements :: ResourceDatabaseSecretBackendRole s -> TF.Attr s P.Text)
+        (_rollback_statements :: DatabaseSecretBackendRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceDatabaseSecretBackendRole :: TF.Resource P.Vault (ResourceDatabaseSecretBackendRole s)
-resourceDatabaseSecretBackendRole =
+databaseSecretBackendRoleResource :: TF.Resource P.Vault (DatabaseSecretBackendRoleResource s)
+databaseSecretBackendRoleResource =
     TF.newResource "vault_database_secret_backend_role" $
-        ResourceDatabaseSecretBackendRole {
+        DatabaseSecretBackendRoleResource {
               _backend = TF.Nil
             , _creation_statements = TF.Nil
             , _db_name = TF.Nil
@@ -2096,7 +2096,7 @@ cleartext to state and plan files generated by Terraform, and will appear in
 the console output when Terraform runs. Protect these artifacts accordingly.
 See <../index.html> for more details.
 -}
-data ResourceGenericSecret s = ResourceGenericSecret {
+data GenericSecretResource s = GenericSecretResource {
       _allow_read   :: !(TF.Attr s P.Text)
     {- ^ (Optional, Deprecated) True/false. Set this to true if your vault authentication is able to read the data, this allows the resource to be compared and updated. Defaults to false. -}
     , _data_json    :: !(TF.Attr s P.Text)
@@ -2107,58 +2107,58 @@ data ResourceGenericSecret s = ResourceGenericSecret {
     {- ^ (Required) The full logical path at which to write the given data. To write data into the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Writing to other backends with this resource is possible; consult each backend's documentation to see which endpoints support the @PUT@ and @DELETE@ methods. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceGenericSecret s) where
-    toHCL ResourceGenericSecret{..} = TF.inline $ catMaybes
+instance TF.ToHCL (GenericSecretResource s) where
+    toHCL GenericSecretResource{..} = TF.inline $ catMaybes
         [ TF.assign "allow_read" <$> TF.attribute _allow_read
         , TF.assign "data_json" <$> TF.attribute _data_json
         , TF.assign "disable_read" <$> TF.attribute _disable_read
         , TF.assign "path" <$> TF.attribute _path
         ]
 
-instance P.HasAllowRead (ResourceGenericSecret s) (TF.Attr s P.Text) where
+instance P.HasAllowRead (GenericSecretResource s) (TF.Attr s P.Text) where
     allowRead =
-        lens (_allow_read :: ResourceGenericSecret s -> TF.Attr s P.Text)
-             (\s a -> s { _allow_read = a } :: ResourceGenericSecret s)
+        lens (_allow_read :: GenericSecretResource s -> TF.Attr s P.Text)
+             (\s a -> s { _allow_read = a } :: GenericSecretResource s)
 
-instance P.HasDataJson (ResourceGenericSecret s) (TF.Attr s P.Text) where
+instance P.HasDataJson (GenericSecretResource s) (TF.Attr s P.Text) where
     dataJson =
-        lens (_data_json :: ResourceGenericSecret s -> TF.Attr s P.Text)
-             (\s a -> s { _data_json = a } :: ResourceGenericSecret s)
+        lens (_data_json :: GenericSecretResource s -> TF.Attr s P.Text)
+             (\s a -> s { _data_json = a } :: GenericSecretResource s)
 
-instance P.HasDisableRead (ResourceGenericSecret s) (TF.Attr s P.Text) where
+instance P.HasDisableRead (GenericSecretResource s) (TF.Attr s P.Text) where
     disableRead =
-        lens (_disable_read :: ResourceGenericSecret s -> TF.Attr s P.Text)
-             (\s a -> s { _disable_read = a } :: ResourceGenericSecret s)
+        lens (_disable_read :: GenericSecretResource s -> TF.Attr s P.Text)
+             (\s a -> s { _disable_read = a } :: GenericSecretResource s)
 
-instance P.HasPath (ResourceGenericSecret s) (TF.Attr s P.Text) where
+instance P.HasPath (GenericSecretResource s) (TF.Attr s P.Text) where
     path =
-        lens (_path :: ResourceGenericSecret s -> TF.Attr s P.Text)
-             (\s a -> s { _path = a } :: ResourceGenericSecret s)
+        lens (_path :: GenericSecretResource s -> TF.Attr s P.Text)
+             (\s a -> s { _path = a } :: GenericSecretResource s)
 
-instance s ~ s' => P.HasComputedAllowRead (TF.Ref s' (ResourceGenericSecret s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAllowRead (TF.Ref s' (GenericSecretResource s)) (TF.Attr s P.Text) where
     computedAllowRead =
-        (_allow_read :: ResourceGenericSecret s -> TF.Attr s P.Text)
+        (_allow_read :: GenericSecretResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDataJson (TF.Ref s' (ResourceGenericSecret s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDataJson (TF.Ref s' (GenericSecretResource s)) (TF.Attr s P.Text) where
     computedDataJson =
-        (_data_json :: ResourceGenericSecret s -> TF.Attr s P.Text)
+        (_data_json :: GenericSecretResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisableRead (TF.Ref s' (ResourceGenericSecret s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisableRead (TF.Ref s' (GenericSecretResource s)) (TF.Attr s P.Text) where
     computedDisableRead =
-        (_disable_read :: ResourceGenericSecret s -> TF.Attr s P.Text)
+        (_disable_read :: GenericSecretResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (ResourceGenericSecret s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (GenericSecretResource s)) (TF.Attr s P.Text) where
     computedPath =
-        (_path :: ResourceGenericSecret s -> TF.Attr s P.Text)
+        (_path :: GenericSecretResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceGenericSecret :: TF.Resource P.Vault (ResourceGenericSecret s)
-resourceGenericSecret =
+genericSecretResource :: TF.Resource P.Vault (GenericSecretResource s)
+genericSecretResource =
     TF.newResource "vault_generic_secret" $
-        ResourceGenericSecret {
+        GenericSecretResource {
               _allow_read = TF.Nil
             , _data_json = TF.Nil
             , _disable_read = TF.Nil
@@ -2169,7 +2169,7 @@ resourceGenericSecret =
 
 
 -}
-data ResourceMount s = ResourceMount {
+data MountResource s = MountResource {
       _default_lease_ttl_seconds :: !(TF.Attr s P.Text)
     {- ^ (Optional) Default lease duration for tokens and secrets in seconds -}
     , _description               :: !(TF.Attr s P.Text)
@@ -2182,8 +2182,8 @@ data ResourceMount s = ResourceMount {
     {- ^ (Required) Type of the backend, such as "aws" -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceMount s) where
-    toHCL ResourceMount{..} = TF.inline $ catMaybes
+instance TF.ToHCL (MountResource s) where
+    toHCL MountResource{..} = TF.inline $ catMaybes
         [ TF.assign "default_lease_ttl_seconds" <$> TF.attribute _default_lease_ttl_seconds
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "max_lease_ttl_seconds" <$> TF.attribute _max_lease_ttl_seconds
@@ -2191,60 +2191,60 @@ instance TF.ToHCL (ResourceMount s) where
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasDefaultLeaseTtlSeconds (ResourceMount s) (TF.Attr s P.Text) where
+instance P.HasDefaultLeaseTtlSeconds (MountResource s) (TF.Attr s P.Text) where
     defaultLeaseTtlSeconds =
-        lens (_default_lease_ttl_seconds :: ResourceMount s -> TF.Attr s P.Text)
-             (\s a -> s { _default_lease_ttl_seconds = a } :: ResourceMount s)
+        lens (_default_lease_ttl_seconds :: MountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _default_lease_ttl_seconds = a } :: MountResource s)
 
-instance P.HasDescription (ResourceMount s) (TF.Attr s P.Text) where
+instance P.HasDescription (MountResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceMount s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceMount s)
+        lens (_description :: MountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: MountResource s)
 
-instance P.HasMaxLeaseTtlSeconds (ResourceMount s) (TF.Attr s P.Text) where
+instance P.HasMaxLeaseTtlSeconds (MountResource s) (TF.Attr s P.Text) where
     maxLeaseTtlSeconds =
-        lens (_max_lease_ttl_seconds :: ResourceMount s -> TF.Attr s P.Text)
-             (\s a -> s { _max_lease_ttl_seconds = a } :: ResourceMount s)
+        lens (_max_lease_ttl_seconds :: MountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _max_lease_ttl_seconds = a } :: MountResource s)
 
-instance P.HasPath (ResourceMount s) (TF.Attr s P.Text) where
+instance P.HasPath (MountResource s) (TF.Attr s P.Text) where
     path =
-        lens (_path :: ResourceMount s -> TF.Attr s P.Text)
-             (\s a -> s { _path = a } :: ResourceMount s)
+        lens (_path :: MountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _path = a } :: MountResource s)
 
-instance P.HasType' (ResourceMount s) (TF.Attr s P.Text) where
+instance P.HasType' (MountResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: ResourceMount s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: ResourceMount s)
+        lens (_type' :: MountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: MountResource s)
 
-instance s ~ s' => P.HasComputedDefaultLeaseTtlSeconds (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultLeaseTtlSeconds (TF.Ref s' (MountResource s)) (TF.Attr s P.Text) where
     computedDefaultLeaseTtlSeconds =
-        (_default_lease_ttl_seconds :: ResourceMount s -> TF.Attr s P.Text)
+        (_default_lease_ttl_seconds :: MountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (MountResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceMount s -> TF.Attr s P.Text)
+        (_description :: MountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMaxLeaseTtlSeconds (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaxLeaseTtlSeconds (TF.Ref s' (MountResource s)) (TF.Attr s P.Text) where
     computedMaxLeaseTtlSeconds =
-        (_max_lease_ttl_seconds :: ResourceMount s -> TF.Attr s P.Text)
+        (_max_lease_ttl_seconds :: MountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (MountResource s)) (TF.Attr s P.Text) where
     computedPath =
-        (_path :: ResourceMount s -> TF.Attr s P.Text)
+        (_path :: MountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ResourceMount s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (MountResource s)) (TF.Attr s P.Text) where
     computedType' =
-        (_type' :: ResourceMount s -> TF.Attr s P.Text)
+        (_type' :: MountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceMount :: TF.Resource P.Vault (ResourceMount s)
-resourceMount =
+mountResource :: TF.Resource P.Vault (MountResource s)
+mountResource =
     TF.newResource "vault_mount" $
-        ResourceMount {
+        MountResource {
               _default_lease_ttl_seconds = TF.Nil
             , _description = TF.Nil
             , _max_lease_ttl_seconds = TF.Nil
@@ -2252,12 +2252,72 @@ resourceMount =
             , _type' = TF.Nil
             }
 
+{- | The @vault_okta_auth_backend_group@ Vault resource.
+
+Provides a resource to create a group in an
+<https://www.vaultproject.io/docs/auth/okta.html> .
+-}
+data OktaAuthBackendGroupResource s = OktaAuthBackendGroupResource {
+      _group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) Name of the group within the Okta -}
+    , _path       :: !(TF.Attr s P.Text)
+    {- ^ (Required) The path where the Okta auth backend is mounted -}
+    , _policies   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Vault policies to associate with this group -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (OktaAuthBackendGroupResource s) where
+    toHCL OktaAuthBackendGroupResource{..} = TF.inline $ catMaybes
+        [ TF.assign "group_name" <$> TF.attribute _group_name
+        , TF.assign "path" <$> TF.attribute _path
+        , TF.assign "policies" <$> TF.attribute _policies
+        ]
+
+instance P.HasGroupName (OktaAuthBackendGroupResource s) (TF.Attr s P.Text) where
+    groupName =
+        lens (_group_name :: OktaAuthBackendGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _group_name = a } :: OktaAuthBackendGroupResource s)
+
+instance P.HasPath (OktaAuthBackendGroupResource s) (TF.Attr s P.Text) where
+    path =
+        lens (_path :: OktaAuthBackendGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _path = a } :: OktaAuthBackendGroupResource s)
+
+instance P.HasPolicies (OktaAuthBackendGroupResource s) (TF.Attr s P.Text) where
+    policies =
+        lens (_policies :: OktaAuthBackendGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policies = a } :: OktaAuthBackendGroupResource s)
+
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (OktaAuthBackendGroupResource s)) (TF.Attr s P.Text) where
+    computedGroupName =
+        (_group_name :: OktaAuthBackendGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (OktaAuthBackendGroupResource s)) (TF.Attr s P.Text) where
+    computedPath =
+        (_path :: OktaAuthBackendGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (OktaAuthBackendGroupResource s)) (TF.Attr s P.Text) where
+    computedPolicies =
+        (_policies :: OktaAuthBackendGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+oktaAuthBackendGroupResource :: TF.Resource P.Vault (OktaAuthBackendGroupResource s)
+oktaAuthBackendGroupResource =
+    TF.newResource "vault_okta_auth_backend_group" $
+        OktaAuthBackendGroupResource {
+              _group_name = TF.Nil
+            , _path = TF.Nil
+            , _policies = TF.Nil
+            }
+
 {- | The @vault_okta_auth_backend@ Vault resource.
 
 Provides a resource for managing an
 <https://www.vaultproject.io/docs/auth/okta.html> .
 -}
-data ResourceOktaAuthBackend s = ResourceOktaAuthBackend {
+data OktaAuthBackendResource s = OktaAuthBackendResource {
       _base_url     :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Okta url. Examples: oktapreview.com, okta.com -}
     , _description  :: !(TF.Attr s P.Text)
@@ -2278,8 +2338,8 @@ data ResourceOktaAuthBackend s = ResourceOktaAuthBackend {
     {- ^ (Optional) Associate Okta users with groups or policies within Vault. <#okta-user> . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceOktaAuthBackend s) where
-    toHCL ResourceOktaAuthBackend{..} = TF.inline $ catMaybes
+instance TF.ToHCL (OktaAuthBackendResource s) where
+    toHCL OktaAuthBackendResource{..} = TF.inline $ catMaybes
         [ TF.assign "base_url" <$> TF.attribute _base_url
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "group" <$> TF.attribute _group
@@ -2291,100 +2351,100 @@ instance TF.ToHCL (ResourceOktaAuthBackend s) where
         , TF.assign "user" <$> TF.attribute _user
         ]
 
-instance P.HasBaseUrl (ResourceOktaAuthBackend s) (TF.Attr s P.Text) where
+instance P.HasBaseUrl (OktaAuthBackendResource s) (TF.Attr s P.Text) where
     baseUrl =
-        lens (_base_url :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _base_url = a } :: ResourceOktaAuthBackend s)
+        lens (_base_url :: OktaAuthBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _base_url = a } :: OktaAuthBackendResource s)
 
-instance P.HasDescription (ResourceOktaAuthBackend s) (TF.Attr s P.Text) where
+instance P.HasDescription (OktaAuthBackendResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceOktaAuthBackend s)
+        lens (_description :: OktaAuthBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: OktaAuthBackendResource s)
 
-instance P.HasGroup (ResourceOktaAuthBackend s) (TF.Attr s P.Text) where
+instance P.HasGroup (OktaAuthBackendResource s) (TF.Attr s P.Text) where
     group =
-        lens (_group :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _group = a } :: ResourceOktaAuthBackend s)
+        lens (_group :: OktaAuthBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _group = a } :: OktaAuthBackendResource s)
 
-instance P.HasMaxTtl (ResourceOktaAuthBackend s) (TF.Attr s P.Text) where
+instance P.HasMaxTtl (OktaAuthBackendResource s) (TF.Attr s P.Text) where
     maxTtl =
-        lens (_max_ttl :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _max_ttl = a } :: ResourceOktaAuthBackend s)
+        lens (_max_ttl :: OktaAuthBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _max_ttl = a } :: OktaAuthBackendResource s)
 
-instance P.HasOrganization (ResourceOktaAuthBackend s) (TF.Attr s P.Text) where
+instance P.HasOrganization (OktaAuthBackendResource s) (TF.Attr s P.Text) where
     organization =
-        lens (_organization :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _organization = a } :: ResourceOktaAuthBackend s)
+        lens (_organization :: OktaAuthBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _organization = a } :: OktaAuthBackendResource s)
 
-instance P.HasPath (ResourceOktaAuthBackend s) (TF.Attr s P.Text) where
+instance P.HasPath (OktaAuthBackendResource s) (TF.Attr s P.Text) where
     path =
-        lens (_path :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _path = a } :: ResourceOktaAuthBackend s)
+        lens (_path :: OktaAuthBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _path = a } :: OktaAuthBackendResource s)
 
-instance P.HasToken (ResourceOktaAuthBackend s) (TF.Attr s P.Text) where
+instance P.HasToken (OktaAuthBackendResource s) (TF.Attr s P.Text) where
     token =
-        lens (_token :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _token = a } :: ResourceOktaAuthBackend s)
+        lens (_token :: OktaAuthBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _token = a } :: OktaAuthBackendResource s)
 
-instance P.HasTtl (ResourceOktaAuthBackend s) (TF.Attr s P.Text) where
+instance P.HasTtl (OktaAuthBackendResource s) (TF.Attr s P.Text) where
     ttl =
-        lens (_ttl :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: ResourceOktaAuthBackend s)
+        lens (_ttl :: OktaAuthBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ttl = a } :: OktaAuthBackendResource s)
 
-instance P.HasUser (ResourceOktaAuthBackend s) (TF.Attr s P.Text) where
+instance P.HasUser (OktaAuthBackendResource s) (TF.Attr s P.Text) where
     user =
-        lens (_user :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
-             (\s a -> s { _user = a } :: ResourceOktaAuthBackend s)
+        lens (_user :: OktaAuthBackendResource s -> TF.Attr s P.Text)
+             (\s a -> s { _user = a } :: OktaAuthBackendResource s)
 
-instance s ~ s' => P.HasComputedBaseUrl (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBaseUrl (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s P.Text) where
     computedBaseUrl =
-        (_base_url :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
+        (_base_url :: OktaAuthBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
+        (_description :: OktaAuthBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedGroup (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGroup (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s P.Text) where
     computedGroup =
-        (_group :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
+        (_group :: OktaAuthBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMaxTtl (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaxTtl (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s P.Text) where
     computedMaxTtl =
-        (_max_ttl :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
+        (_max_ttl :: OktaAuthBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s P.Text) where
     computedOrganization =
-        (_organization :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
+        (_organization :: OktaAuthBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s P.Text) where
     computedPath =
-        (_path :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
+        (_path :: OktaAuthBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedToken (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s P.Text) where
     computedToken =
-        (_token :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
+        (_token :: OktaAuthBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s P.Text) where
     computedTtl =
-        (_ttl :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
+        (_ttl :: OktaAuthBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUser (TF.Ref s' (ResourceOktaAuthBackend s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUser (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s P.Text) where
     computedUser =
-        (_user :: ResourceOktaAuthBackend s -> TF.Attr s P.Text)
+        (_user :: OktaAuthBackendResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceOktaAuthBackend :: TF.Resource P.Vault (ResourceOktaAuthBackend s)
-resourceOktaAuthBackend =
+oktaAuthBackendResource :: TF.Resource P.Vault (OktaAuthBackendResource s)
+oktaAuthBackendResource =
     TF.newResource "vault_okta_auth_backend" $
-        ResourceOktaAuthBackend {
+        OktaAuthBackendResource {
               _base_url = TF.Nil
             , _description = TF.Nil
             , _group = TF.Nil
@@ -2396,72 +2456,12 @@ resourceOktaAuthBackend =
             , _user = TF.Nil
             }
 
-{- | The @vault_okta_auth_backend_group@ Vault resource.
-
-Provides a resource to create a group in an
-<https://www.vaultproject.io/docs/auth/okta.html> .
--}
-data ResourceOktaAuthBackendGroup s = ResourceOktaAuthBackendGroup {
-      _group_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) Name of the group within the Okta -}
-    , _path       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The path where the Okta auth backend is mounted -}
-    , _policies   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Vault policies to associate with this group -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ResourceOktaAuthBackendGroup s) where
-    toHCL ResourceOktaAuthBackendGroup{..} = TF.inline $ catMaybes
-        [ TF.assign "group_name" <$> TF.attribute _group_name
-        , TF.assign "path" <$> TF.attribute _path
-        , TF.assign "policies" <$> TF.attribute _policies
-        ]
-
-instance P.HasGroupName (ResourceOktaAuthBackendGroup s) (TF.Attr s P.Text) where
-    groupName =
-        lens (_group_name :: ResourceOktaAuthBackendGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _group_name = a } :: ResourceOktaAuthBackendGroup s)
-
-instance P.HasPath (ResourceOktaAuthBackendGroup s) (TF.Attr s P.Text) where
-    path =
-        lens (_path :: ResourceOktaAuthBackendGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _path = a } :: ResourceOktaAuthBackendGroup s)
-
-instance P.HasPolicies (ResourceOktaAuthBackendGroup s) (TF.Attr s P.Text) where
-    policies =
-        lens (_policies :: ResourceOktaAuthBackendGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _policies = a } :: ResourceOktaAuthBackendGroup s)
-
-instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (ResourceOktaAuthBackendGroup s)) (TF.Attr s P.Text) where
-    computedGroupName =
-        (_group_name :: ResourceOktaAuthBackendGroup s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (ResourceOktaAuthBackendGroup s)) (TF.Attr s P.Text) where
-    computedPath =
-        (_path :: ResourceOktaAuthBackendGroup s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceOktaAuthBackendGroup s)) (TF.Attr s P.Text) where
-    computedPolicies =
-        (_policies :: ResourceOktaAuthBackendGroup s -> TF.Attr s P.Text)
-            . TF.refValue
-
-resourceOktaAuthBackendGroup :: TF.Resource P.Vault (ResourceOktaAuthBackendGroup s)
-resourceOktaAuthBackendGroup =
-    TF.newResource "vault_okta_auth_backend_group" $
-        ResourceOktaAuthBackendGroup {
-              _group_name = TF.Nil
-            , _path = TF.Nil
-            , _policies = TF.Nil
-            }
-
 {- | The @vault_okta_auth_backend_user@ Vault resource.
 
 Provides a resource to create a user in an
 <https://www.vaultproject.io/docs/auth/okta.html> .
 -}
-data ResourceOktaAuthBackendUser s = ResourceOktaAuthBackendUser {
+data OktaAuthBackendUserResource s = OktaAuthBackendUserResource {
       _groups   :: !(TF.Attr s P.Text)
     {- ^ (Optional) List of Okta groups to associate with this user -}
     , _path     :: !(TF.Attr s P.Text)
@@ -2472,58 +2472,58 @@ data ResourceOktaAuthBackendUser s = ResourceOktaAuthBackendUser {
     {- ^ (Required Optional) Name of the user within Okta -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceOktaAuthBackendUser s) where
-    toHCL ResourceOktaAuthBackendUser{..} = TF.inline $ catMaybes
+instance TF.ToHCL (OktaAuthBackendUserResource s) where
+    toHCL OktaAuthBackendUserResource{..} = TF.inline $ catMaybes
         [ TF.assign "groups" <$> TF.attribute _groups
         , TF.assign "path" <$> TF.attribute _path
         , TF.assign "policies" <$> TF.attribute _policies
         , TF.assign "username" <$> TF.attribute _username
         ]
 
-instance P.HasGroups (ResourceOktaAuthBackendUser s) (TF.Attr s P.Text) where
+instance P.HasGroups (OktaAuthBackendUserResource s) (TF.Attr s P.Text) where
     groups =
-        lens (_groups :: ResourceOktaAuthBackendUser s -> TF.Attr s P.Text)
-             (\s a -> s { _groups = a } :: ResourceOktaAuthBackendUser s)
+        lens (_groups :: OktaAuthBackendUserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _groups = a } :: OktaAuthBackendUserResource s)
 
-instance P.HasPath (ResourceOktaAuthBackendUser s) (TF.Attr s P.Text) where
+instance P.HasPath (OktaAuthBackendUserResource s) (TF.Attr s P.Text) where
     path =
-        lens (_path :: ResourceOktaAuthBackendUser s -> TF.Attr s P.Text)
-             (\s a -> s { _path = a } :: ResourceOktaAuthBackendUser s)
+        lens (_path :: OktaAuthBackendUserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _path = a } :: OktaAuthBackendUserResource s)
 
-instance P.HasPolicies (ResourceOktaAuthBackendUser s) (TF.Attr s P.Text) where
+instance P.HasPolicies (OktaAuthBackendUserResource s) (TF.Attr s P.Text) where
     policies =
-        lens (_policies :: ResourceOktaAuthBackendUser s -> TF.Attr s P.Text)
-             (\s a -> s { _policies = a } :: ResourceOktaAuthBackendUser s)
+        lens (_policies :: OktaAuthBackendUserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policies = a } :: OktaAuthBackendUserResource s)
 
-instance P.HasUsername (ResourceOktaAuthBackendUser s) (TF.Attr s P.Text) where
+instance P.HasUsername (OktaAuthBackendUserResource s) (TF.Attr s P.Text) where
     username =
-        lens (_username :: ResourceOktaAuthBackendUser s -> TF.Attr s P.Text)
-             (\s a -> s { _username = a } :: ResourceOktaAuthBackendUser s)
+        lens (_username :: OktaAuthBackendUserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _username = a } :: OktaAuthBackendUserResource s)
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (ResourceOktaAuthBackendUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (OktaAuthBackendUserResource s)) (TF.Attr s P.Text) where
     computedGroups =
-        (_groups :: ResourceOktaAuthBackendUser s -> TF.Attr s P.Text)
+        (_groups :: OktaAuthBackendUserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (ResourceOktaAuthBackendUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (OktaAuthBackendUserResource s)) (TF.Attr s P.Text) where
     computedPath =
-        (_path :: ResourceOktaAuthBackendUser s -> TF.Attr s P.Text)
+        (_path :: OktaAuthBackendUserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ResourceOktaAuthBackendUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (OktaAuthBackendUserResource s)) (TF.Attr s P.Text) where
     computedPolicies =
-        (_policies :: ResourceOktaAuthBackendUser s -> TF.Attr s P.Text)
+        (_policies :: OktaAuthBackendUserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUsername (TF.Ref s' (ResourceOktaAuthBackendUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (OktaAuthBackendUserResource s)) (TF.Attr s P.Text) where
     computedUsername =
-        (_username :: ResourceOktaAuthBackendUser s -> TF.Attr s P.Text)
+        (_username :: OktaAuthBackendUserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceOktaAuthBackendUser :: TF.Resource P.Vault (ResourceOktaAuthBackendUser s)
-resourceOktaAuthBackendUser =
+oktaAuthBackendUserResource :: TF.Resource P.Vault (OktaAuthBackendUserResource s)
+oktaAuthBackendUserResource =
     TF.newResource "vault_okta_auth_backend_user" $
-        ResourceOktaAuthBackendUser {
+        OktaAuthBackendUserResource {
               _groups = TF.Nil
             , _path = TF.Nil
             , _policies = TF.Nil
@@ -2534,43 +2534,43 @@ resourceOktaAuthBackendUser =
 
 
 -}
-data ResourcePolicy s = ResourcePolicy {
+data PolicyResource s = PolicyResource {
       _name   :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the policy -}
     , _policy :: !(TF.Attr s P.Text)
     {- ^ (Required) String containing a Vault policy -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourcePolicy s) where
-    toHCL ResourcePolicy{..} = TF.inline $ catMaybes
+instance TF.ToHCL (PolicyResource s) where
+    toHCL PolicyResource{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "policy" <$> TF.attribute _policy
         ]
 
-instance P.HasName (ResourcePolicy s) (TF.Attr s P.Text) where
+instance P.HasName (PolicyResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourcePolicy s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourcePolicy s)
+        lens (_name :: PolicyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: PolicyResource s)
 
-instance P.HasPolicy (ResourcePolicy s) (TF.Attr s P.Text) where
+instance P.HasPolicy (PolicyResource s) (TF.Attr s P.Text) where
     policy =
-        lens (_policy :: ResourcePolicy s -> TF.Attr s P.Text)
-             (\s a -> s { _policy = a } :: ResourcePolicy s)
+        lens (_policy :: PolicyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policy = a } :: PolicyResource s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourcePolicy s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (PolicyResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourcePolicy s -> TF.Attr s P.Text)
+        (_name :: PolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (ResourcePolicy s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (PolicyResource s)) (TF.Attr s P.Text) where
     computedPolicy =
-        (_policy :: ResourcePolicy s -> TF.Attr s P.Text)
+        (_policy :: PolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourcePolicy :: TF.Resource P.Vault (ResourcePolicy s)
-resourcePolicy =
+policyResource :: TF.Resource P.Vault (PolicyResource s)
+policyResource =
     TF.newResource "vault_policy" $
-        ResourcePolicy {
+        PolicyResource {
               _name = TF.Nil
             , _policy = TF.Nil
             }

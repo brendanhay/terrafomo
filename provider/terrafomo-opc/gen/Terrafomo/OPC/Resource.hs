@@ -24,89 +24,89 @@
 module Terrafomo.OPC.Resource
     (
     -- * Types
-      ResourceComputeAcl (..)
-    , resourceComputeAcl
+      ComputeAclResource (..)
+    , computeAclResource
 
-    , ResourceComputeImageList (..)
-    , resourceComputeImageList
+    , ComputeImageListEntryResource (..)
+    , computeImageListEntryResource
 
-    , ResourceComputeImageListEntry (..)
-    , resourceComputeImageListEntry
+    , ComputeImageListResource (..)
+    , computeImageListResource
 
-    , ResourceComputeInstance (..)
-    , resourceComputeInstance
+    , ComputeInstanceResource (..)
+    , computeInstanceResource
 
-    , ResourceComputeIpAddressAssociation (..)
-    , resourceComputeIpAddressAssociation
+    , ComputeIpAddressAssociationResource (..)
+    , computeIpAddressAssociationResource
 
-    , ResourceComputeIpAddressPrefixSet (..)
-    , resourceComputeIpAddressPrefixSet
+    , ComputeIpAddressPrefixSetResource (..)
+    , computeIpAddressPrefixSetResource
 
-    , ResourceComputeIpAddressReservation (..)
-    , resourceComputeIpAddressReservation
+    , ComputeIpAddressReservationResource (..)
+    , computeIpAddressReservationResource
 
-    , ResourceComputeIpAssociation (..)
-    , resourceComputeIpAssociation
+    , ComputeIpAssociationResource (..)
+    , computeIpAssociationResource
 
-    , ResourceComputeIpNetwork (..)
-    , resourceComputeIpNetwork
+    , ComputeIpNetworkExchangeResource (..)
+    , computeIpNetworkExchangeResource
 
-    , ResourceComputeIpNetworkExchange (..)
-    , resourceComputeIpNetworkExchange
+    , ComputeIpNetworkResource (..)
+    , computeIpNetworkResource
 
-    , ResourceComputeIpReservation (..)
-    , resourceComputeIpReservation
+    , ComputeIpReservationResource (..)
+    , computeIpReservationResource
 
-    , ResourceComputeMachineImage (..)
-    , resourceComputeMachineImage
+    , ComputeMachineImageResource (..)
+    , computeMachineImageResource
 
-    , ResourceComputeOrchestratedInstance (..)
-    , resourceComputeOrchestratedInstance
+    , ComputeOrchestratedInstanceResource (..)
+    , computeOrchestratedInstanceResource
 
-    , ResourceComputeRoute (..)
-    , resourceComputeRoute
+    , ComputeRouteResource (..)
+    , computeRouteResource
 
-    , ResourceComputeSecRule (..)
-    , resourceComputeSecRule
+    , ComputeSecRuleResource (..)
+    , computeSecRuleResource
 
-    , ResourceComputeSecurityApplication (..)
-    , resourceComputeSecurityApplication
+    , ComputeSecurityApplicationResource (..)
+    , computeSecurityApplicationResource
 
-    , ResourceComputeSecurityAssociation (..)
-    , resourceComputeSecurityAssociation
+    , ComputeSecurityAssociationResource (..)
+    , computeSecurityAssociationResource
 
-    , ResourceComputeSecurityIpList (..)
-    , resourceComputeSecurityIpList
+    , ComputeSecurityIpListResource (..)
+    , computeSecurityIpListResource
 
-    , ResourceComputeSecurityList (..)
-    , resourceComputeSecurityList
+    , ComputeSecurityListResource (..)
+    , computeSecurityListResource
 
-    , ResourceComputeSecurityProtocol (..)
-    , resourceComputeSecurityProtocol
+    , ComputeSecurityProtocolResource (..)
+    , computeSecurityProtocolResource
 
-    , ResourceComputeSecurityRule (..)
-    , resourceComputeSecurityRule
+    , ComputeSecurityRuleResource (..)
+    , computeSecurityRuleResource
 
-    , ResourceComputeSshKey (..)
-    , resourceComputeSshKey
+    , ComputeSshKeyResource (..)
+    , computeSshKeyResource
 
-    , ResourceComputeStorageVolume (..)
-    , resourceComputeStorageVolume
+    , ComputeStorageVolumeAttachmentResource (..)
+    , computeStorageVolumeAttachmentResource
 
-    , ResourceComputeStorageVolumeAttachment (..)
-    , resourceComputeStorageVolumeAttachment
+    , ComputeStorageVolumeResource (..)
+    , computeStorageVolumeResource
 
-    , ResourceComputeStorageVolumeSnapshot (..)
-    , resourceComputeStorageVolumeSnapshot
+    , ComputeStorageVolumeSnapshotResource (..)
+    , computeStorageVolumeSnapshotResource
 
-    , ResourceComputeVnicSet (..)
-    , resourceComputeVnicSet
+    , ComputeVnicSetResource (..)
+    , computeVnicSetResource
 
-    , ResourceStorageContainer (..)
-    , resourceStorageContainer
+    , StorageContainerResource (..)
+    , storageContainerResource
 
-    , ResourceStorageObject (..)
-    , resourceStorageObject
+    , StorageObjectResource (..)
+    , storageObjectResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -345,7 +345,7 @@ import qualified Terrafomo.Schema    as TF
 The @opc_compute_acl@ resource creates and manages an ACL in an OPC identity
 domain.
 -}
-data ResourceComputeAcl s = ResourceComputeAcl {
+data ComputeAclResource s = ComputeAclResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of the ACL. -}
     , _enabled     :: !(TF.Attr s P.Text)
@@ -356,122 +356,62 @@ data ResourceComputeAcl s = ResourceComputeAcl {
     {- ^ (Optional) List of tags that may be applied to the ACL. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeAcl s) where
-    toHCL ResourceComputeAcl{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeAclResource s) where
+    toHCL ComputeAclResource{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasDescription (ResourceComputeAcl s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeAclResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeAcl s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeAcl s)
+        lens (_description :: ComputeAclResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeAclResource s)
 
-instance P.HasEnabled (ResourceComputeAcl s) (TF.Attr s P.Text) where
+instance P.HasEnabled (ComputeAclResource s) (TF.Attr s P.Text) where
     enabled =
-        lens (_enabled :: ResourceComputeAcl s -> TF.Attr s P.Text)
-             (\s a -> s { _enabled = a } :: ResourceComputeAcl s)
+        lens (_enabled :: ComputeAclResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: ComputeAclResource s)
 
-instance P.HasName (ResourceComputeAcl s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeAclResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeAcl s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeAcl s)
+        lens (_name :: ComputeAclResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeAclResource s)
 
-instance P.HasTags (ResourceComputeAcl s) (TF.Attr s P.Text) where
+instance P.HasTags (ComputeAclResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ResourceComputeAcl s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ResourceComputeAcl s)
+        lens (_tags :: ComputeAclResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ComputeAclResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeAcl s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeAclResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceComputeAcl s -> TF.Attr s P.Text)
+        (_description :: ComputeAclResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ResourceComputeAcl s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeAclResource s)) (TF.Attr s P.Text) where
     computedEnabled =
-        (_enabled :: ResourceComputeAcl s -> TF.Attr s P.Text)
+        (_enabled :: ComputeAclResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeAcl s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeAclResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeAcl s -> TF.Attr s P.Text)
+        (_name :: ComputeAclResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceComputeAcl s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeAclResource s)) (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: ResourceComputeAcl s -> TF.Attr s P.Text)
+        (_tags :: ComputeAclResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeAcl :: TF.Resource P.OPC (ResourceComputeAcl s)
-resourceComputeAcl =
+computeAclResource :: TF.Resource P.OPC (ComputeAclResource s)
+computeAclResource =
     TF.newResource "opc_compute_acl" $
-        ResourceComputeAcl {
+        ComputeAclResource {
               _description = TF.Nil
             , _enabled = TF.Nil
             , _name = TF.Nil
             , _tags = TF.Nil
-            }
-
-{- | The @opc_compute_image_list@ OPC resource.
-
-The @opc_compute_image_list@ resource creates and manages an Image List in
-an OPC identity domain.
--}
-data ResourceComputeImageList s = ResourceComputeImageList {
-      _default'    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The image list entry to be used, by default, when launching instances using this image list. Defaults to @1@ . -}
-    , _description :: !(TF.Attr s P.Text)
-    {- ^ (Required) A description of the Image List. -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the Image List. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ResourceComputeImageList s) where
-    toHCL ResourceComputeImageList{..} = TF.inline $ catMaybes
-        [ TF.assign "default" <$> TF.attribute _default'
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance P.HasDefault' (ResourceComputeImageList s) (TF.Attr s P.Text) where
-    default' =
-        lens (_default' :: ResourceComputeImageList s -> TF.Attr s P.Text)
-             (\s a -> s { _default' = a } :: ResourceComputeImageList s)
-
-instance P.HasDescription (ResourceComputeImageList s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: ResourceComputeImageList s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeImageList s)
-
-instance P.HasName (ResourceComputeImageList s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ResourceComputeImageList s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeImageList s)
-
-instance s ~ s' => P.HasComputedDefault' (TF.Ref s' (ResourceComputeImageList s)) (TF.Attr s P.Text) where
-    computedDefault' =
-        (_default' :: ResourceComputeImageList s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeImageList s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ResourceComputeImageList s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeImageList s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ResourceComputeImageList s -> TF.Attr s P.Text)
-            . TF.refValue
-
-resourceComputeImageList :: TF.Resource P.OPC (ResourceComputeImageList s)
-resourceComputeImageList =
-    TF.newResource "opc_compute_image_list" $
-        ResourceComputeImageList {
-              _default' = TF.Nil
-            , _description = TF.Nil
-            , _name = TF.Nil
             }
 
 {- | The @opc_compute_image_list_entry@ OPC resource.
@@ -479,7 +419,7 @@ resourceComputeImageList =
 The @opc_compute_image_list_entry@ resource creates and manages an Image
 List Entry in an OPC identity domain.
 -}
-data ResourceComputeImageListEntry s = ResourceComputeImageListEntry {
+data ComputeImageListEntryResource s = ComputeImageListEntryResource {
       _attributes     :: !(TF.Attr s P.Text)
     {- ^ (Optional) JSON String of optional data that will be passed to an instance of this machine image when it is launched. -}
     , _machine_images :: !(TF.Attr s P.Text)
@@ -490,65 +430,125 @@ data ResourceComputeImageListEntry s = ResourceComputeImageListEntry {
     {- ^ (Required) The unique version of the image list entry, as an integer. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeImageListEntry s) where
-    toHCL ResourceComputeImageListEntry{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeImageListEntryResource s) where
+    toHCL ComputeImageListEntryResource{..} = TF.inline $ catMaybes
         [ TF.assign "attributes" <$> TF.attribute _attributes
         , TF.assign "machine_images" <$> TF.attribute _machine_images
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "version" <$> TF.attribute _version
         ]
 
-instance P.HasAttributes (ResourceComputeImageListEntry s) (TF.Attr s P.Text) where
+instance P.HasAttributes (ComputeImageListEntryResource s) (TF.Attr s P.Text) where
     attributes =
-        lens (_attributes :: ResourceComputeImageListEntry s -> TF.Attr s P.Text)
-             (\s a -> s { _attributes = a } :: ResourceComputeImageListEntry s)
+        lens (_attributes :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _attributes = a } :: ComputeImageListEntryResource s)
 
-instance P.HasMachineImages (ResourceComputeImageListEntry s) (TF.Attr s P.Text) where
+instance P.HasMachineImages (ComputeImageListEntryResource s) (TF.Attr s P.Text) where
     machineImages =
-        lens (_machine_images :: ResourceComputeImageListEntry s -> TF.Attr s P.Text)
-             (\s a -> s { _machine_images = a } :: ResourceComputeImageListEntry s)
+        lens (_machine_images :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _machine_images = a } :: ComputeImageListEntryResource s)
 
-instance P.HasName (ResourceComputeImageListEntry s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeImageListEntryResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeImageListEntry s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeImageListEntry s)
+        lens (_name :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeImageListEntryResource s)
 
-instance P.HasVersion (ResourceComputeImageListEntry s) (TF.Attr s P.Text) where
+instance P.HasVersion (ComputeImageListEntryResource s) (TF.Attr s P.Text) where
     version =
-        lens (_version :: ResourceComputeImageListEntry s -> TF.Attr s P.Text)
-             (\s a -> s { _version = a } :: ResourceComputeImageListEntry s)
+        lens (_version :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _version = a } :: ComputeImageListEntryResource s)
 
-instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ResourceComputeImageListEntry s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ComputeImageListEntryResource s)) (TF.Attr s P.Text) where
     computedAttributes =
-        (_attributes :: ResourceComputeImageListEntry s -> TF.Attr s P.Text)
+        (_attributes :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMachineImages (TF.Ref s' (ResourceComputeImageListEntry s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMachineImages (TF.Ref s' (ComputeImageListEntryResource s)) (TF.Attr s P.Text) where
     computedMachineImages =
-        (_machine_images :: ResourceComputeImageListEntry s -> TF.Attr s P.Text)
+        (_machine_images :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeImageListEntry s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeImageListEntryResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeImageListEntry s -> TF.Attr s P.Text)
+        (_name :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUri (TF.Ref s' (ResourceComputeImageListEntry s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeImageListEntryResource s)) (TF.Attr s P.Text) where
     computedUri x = TF.compute (TF.refKey x) "uri"
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ResourceComputeImageListEntry s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeImageListEntryResource s)) (TF.Attr s P.Text) where
     computedVersion =
-        (_version :: ResourceComputeImageListEntry s -> TF.Attr s P.Text)
+        (_version :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeImageListEntry :: TF.Resource P.OPC (ResourceComputeImageListEntry s)
-resourceComputeImageListEntry =
+computeImageListEntryResource :: TF.Resource P.OPC (ComputeImageListEntryResource s)
+computeImageListEntryResource =
     TF.newResource "opc_compute_image_list_entry" $
-        ResourceComputeImageListEntry {
+        ComputeImageListEntryResource {
               _attributes = TF.Nil
             , _machine_images = TF.Nil
             , _name = TF.Nil
             , _version = TF.Nil
+            }
+
+{- | The @opc_compute_image_list@ OPC resource.
+
+The @opc_compute_image_list@ resource creates and manages an Image List in
+an OPC identity domain.
+-}
+data ComputeImageListResource s = ComputeImageListResource {
+      _default'    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The image list entry to be used, by default, when launching instances using this image list. Defaults to @1@ . -}
+    , _description :: !(TF.Attr s P.Text)
+    {- ^ (Required) A description of the Image List. -}
+    , _name        :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Image List. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeImageListResource s) where
+    toHCL ComputeImageListResource{..} = TF.inline $ catMaybes
+        [ TF.assign "default" <$> TF.attribute _default'
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasDefault' (ComputeImageListResource s) (TF.Attr s P.Text) where
+    default' =
+        lens (_default' :: ComputeImageListResource s -> TF.Attr s P.Text)
+             (\s a -> s { _default' = a } :: ComputeImageListResource s)
+
+instance P.HasDescription (ComputeImageListResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: ComputeImageListResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeImageListResource s)
+
+instance P.HasName (ComputeImageListResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeImageListResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeImageListResource s)
+
+instance s ~ s' => P.HasComputedDefault' (TF.Ref s' (ComputeImageListResource s)) (TF.Attr s P.Text) where
+    computedDefault' =
+        (_default' :: ComputeImageListResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeImageListResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: ComputeImageListResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeImageListResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeImageListResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+computeImageListResource :: TF.Resource P.OPC (ComputeImageListResource s)
+computeImageListResource =
+    TF.newResource "opc_compute_image_list" $
+        ComputeImageListResource {
+              _default' = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
             }
 
 {- | The @opc_compute_instance@ OPC resource.
@@ -560,7 +560,7 @@ costly accidents, consider setting
 </docs/configuration/resources.html#prevent_destroy> on your instance
 resources as an extra safety measure.
 -}
-data ResourceComputeInstance s = ResourceComputeInstance {
+data ComputeInstanceResource s = ComputeInstanceResource {
       _boot_order          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The index number of the bootable storage volume, presented as a list, that should be used to boot the instance. The only valid value is @[1]@ . If you set this attribute, you must also specify a bootable storage volume with index number 1 in the volume sub-parameter of storage_attachments. When you specify boot_order, you don't need to specify the imagelist attribute, because the instance is booted using the image on the specified bootable storage volume. If you specify both boot_order and imagelist, the imagelist attribute is ignored. -}
     , _desired_state       :: !(TF.Attr s P.Text)
@@ -589,8 +589,8 @@ data ResourceComputeInstance s = ResourceComputeInstance {
     {- ^ (Optional) A list of strings that should be supplied to the instance as tags. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeInstance s) where
-    toHCL ResourceComputeInstance{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeInstanceResource s) where
+    toHCL ComputeInstanceResource{..} = TF.inline $ catMaybes
         [ TF.assign "boot_order" <$> TF.attribute _boot_order
         , TF.assign "desired_state" <$> TF.attribute _desired_state
         , TF.assign "hostname" <$> TF.attribute _hostname
@@ -606,203 +606,203 @@ instance TF.ToHCL (ResourceComputeInstance s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasBootOrder (ResourceComputeInstance s) (TF.Attr s P.Text) where
+instance P.HasBootOrder (ComputeInstanceResource s) (TF.Attr s P.Text) where
     bootOrder =
-        lens (_boot_order :: ResourceComputeInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _boot_order = a } :: ResourceComputeInstance s)
+        lens (_boot_order :: ComputeInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _boot_order = a } :: ComputeInstanceResource s)
 
-instance P.HasDesiredState (ResourceComputeInstance s) (TF.Attr s P.Text) where
+instance P.HasDesiredState (ComputeInstanceResource s) (TF.Attr s P.Text) where
     desiredState =
-        lens (_desired_state :: ResourceComputeInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _desired_state = a } :: ResourceComputeInstance s)
+        lens (_desired_state :: ComputeInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _desired_state = a } :: ComputeInstanceResource s)
 
-instance P.HasHostname (ResourceComputeInstance s) (TF.Attr s P.Text) where
+instance P.HasHostname (ComputeInstanceResource s) (TF.Attr s P.Text) where
     hostname =
-        lens (_hostname :: ResourceComputeInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _hostname = a } :: ResourceComputeInstance s)
+        lens (_hostname :: ComputeInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _hostname = a } :: ComputeInstanceResource s)
 
-instance P.HasImageList (ResourceComputeInstance s) (TF.Attr s P.Text) where
+instance P.HasImageList (ComputeInstanceResource s) (TF.Attr s P.Text) where
     imageList =
-        lens (_image_list :: ResourceComputeInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _image_list = a } :: ResourceComputeInstance s)
+        lens (_image_list :: ComputeInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _image_list = a } :: ComputeInstanceResource s)
 
-instance P.HasInstanceAttributes (ResourceComputeInstance s) (TF.Attr s P.Text) where
+instance P.HasInstanceAttributes (ComputeInstanceResource s) (TF.Attr s P.Text) where
     instanceAttributes =
-        lens (_instance_attributes :: ResourceComputeInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_attributes = a } :: ResourceComputeInstance s)
+        lens (_instance_attributes :: ComputeInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_attributes = a } :: ComputeInstanceResource s)
 
-instance P.HasLabel (ResourceComputeInstance s) (TF.Attr s P.Text) where
+instance P.HasLabel (ComputeInstanceResource s) (TF.Attr s P.Text) where
     label =
-        lens (_label :: ResourceComputeInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _label = a } :: ResourceComputeInstance s)
+        lens (_label :: ComputeInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _label = a } :: ComputeInstanceResource s)
 
-instance P.HasName (ResourceComputeInstance s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeInstanceResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeInstance s)
+        lens (_name :: ComputeInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeInstanceResource s)
 
-instance P.HasNetworkingInfo (ResourceComputeInstance s) (TF.Attr s P.Text) where
+instance P.HasNetworkingInfo (ComputeInstanceResource s) (TF.Attr s P.Text) where
     networkingInfo =
-        lens (_networking_info :: ResourceComputeInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _networking_info = a } :: ResourceComputeInstance s)
+        lens (_networking_info :: ComputeInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _networking_info = a } :: ComputeInstanceResource s)
 
-instance P.HasReverseDns (ResourceComputeInstance s) (TF.Attr s P.Text) where
+instance P.HasReverseDns (ComputeInstanceResource s) (TF.Attr s P.Text) where
     reverseDns =
-        lens (_reverse_dns :: ResourceComputeInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _reverse_dns = a } :: ResourceComputeInstance s)
+        lens (_reverse_dns :: ComputeInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _reverse_dns = a } :: ComputeInstanceResource s)
 
-instance P.HasShape (ResourceComputeInstance s) (TF.Attr s P.Text) where
+instance P.HasShape (ComputeInstanceResource s) (TF.Attr s P.Text) where
     shape =
-        lens (_shape :: ResourceComputeInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _shape = a } :: ResourceComputeInstance s)
+        lens (_shape :: ComputeInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _shape = a } :: ComputeInstanceResource s)
 
-instance P.HasSshKeys (ResourceComputeInstance s) (TF.Attr s P.Text) where
+instance P.HasSshKeys (ComputeInstanceResource s) (TF.Attr s P.Text) where
     sshKeys =
-        lens (_ssh_keys :: ResourceComputeInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _ssh_keys = a } :: ResourceComputeInstance s)
+        lens (_ssh_keys :: ComputeInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ssh_keys = a } :: ComputeInstanceResource s)
 
-instance P.HasStorage (ResourceComputeInstance s) (TF.Attr s P.Text) where
+instance P.HasStorage (ComputeInstanceResource s) (TF.Attr s P.Text) where
     storage =
-        lens (_storage :: ResourceComputeInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _storage = a } :: ResourceComputeInstance s)
+        lens (_storage :: ComputeInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _storage = a } :: ComputeInstanceResource s)
 
-instance P.HasTags (ResourceComputeInstance s) (TF.Attr s P.Text) where
+instance P.HasTags (ComputeInstanceResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ResourceComputeInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ResourceComputeInstance s)
+        lens (_tags :: ComputeInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ComputeInstanceResource s)
 
-instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedAttributes x = TF.compute (TF.refKey x) "attributes"
 
-instance s ~ s' => P.HasComputedAvailabilityDomain (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAvailabilityDomain (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedAvailabilityDomain x = TF.compute (TF.refKey x) "availability_domain"
 
-instance s ~ s' => P.HasComputedBootOrder (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBootOrder (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedBootOrder =
-        (_boot_order :: ResourceComputeInstance s -> TF.Attr s P.Text)
+        (_boot_order :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDesiredState (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDesiredState (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedDesiredState =
-        (_desired_state :: ResourceComputeInstance s -> TF.Attr s P.Text)
+        (_desired_state :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDomain (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDomain (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedDomain x = TF.compute (TF.refKey x) "domain"
 
-instance s ~ s' => P.HasComputedEntry (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEntry (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedEntry x = TF.compute (TF.refKey x) "entry"
 
-instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
-instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedFqdn x = TF.compute (TF.refKey x) "fqdn"
 
-instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedHostname =
-        (_hostname :: ResourceComputeInstance s -> TF.Attr s P.Text)
+        (_hostname :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedImageFormat (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImageFormat (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedImageFormat x = TF.compute (TF.refKey x) "image_format"
 
-instance s ~ s' => P.HasComputedImageList (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImageList (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedImageList =
-        (_image_list :: ResourceComputeInstance s -> TF.Attr s P.Text)
+        (_image_list :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInstanceAttributes (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceAttributes (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedInstanceAttributes =
-        (_instance_attributes :: ResourceComputeInstance s -> TF.Attr s P.Text)
+        (_instance_attributes :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
-instance s ~ s' => P.HasComputedLabel (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLabel (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedLabel =
-        (_label :: ResourceComputeInstance s -> TF.Attr s P.Text)
+        (_label :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeInstance s -> TF.Attr s P.Text)
+        (_name :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetworkingInfo (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNetworkingInfo (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedNetworkingInfo =
-        (_networking_info :: ResourceComputeInstance s -> TF.Attr s P.Text)
+        (_networking_info :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPlacementRequirements (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPlacementRequirements (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedPlacementRequirements x = TF.compute (TF.refKey x) "placement_requirements"
 
-instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedPlatform x = TF.compute (TF.refKey x) "platform"
 
-instance s ~ s' => P.HasComputedPriority (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedPriority x = TF.compute (TF.refKey x) "priority"
 
-instance s ~ s' => P.HasComputedQuotaReservation (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedQuotaReservation (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedQuotaReservation x = TF.compute (TF.refKey x) "quota_reservation"
 
-instance s ~ s' => P.HasComputedRelationships (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRelationships (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedRelationships x = TF.compute (TF.refKey x) "relationships"
 
-instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedResolvers x = TF.compute (TF.refKey x) "resolvers"
 
-instance s ~ s' => P.HasComputedReverseDns (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedReverseDns (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedReverseDns =
-        (_reverse_dns :: ResourceComputeInstance s -> TF.Attr s P.Text)
+        (_reverse_dns :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedShape (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedShape (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedShape =
-        (_shape :: ResourceComputeInstance s -> TF.Attr s P.Text)
+        (_shape :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSite (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSite (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedSite x = TF.compute (TF.refKey x) "site"
 
-instance s ~ s' => P.HasComputedSshKeys (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSshKeys (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedSshKeys =
-        (_ssh_keys :: ResourceComputeInstance s -> TF.Attr s P.Text)
+        (_ssh_keys :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedStartTime x = TF.compute (TF.refKey x) "start_time"
 
-instance s ~ s' => P.HasComputedState (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedState (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
 
-instance s ~ s' => P.HasComputedStorage (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStorage (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedStorage =
-        (_storage :: ResourceComputeInstance s -> TF.Attr s P.Text)
+        (_storage :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: ResourceComputeInstance s -> TF.Attr s P.Text)
+        (_tags :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVcableId (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVcableId (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedVcableId x = TF.compute (TF.refKey x) "vcable_id"
 
-instance s ~ s' => P.HasComputedVirtio (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVirtio (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedVirtio x = TF.compute (TF.refKey x) "virtio"
 
-instance s ~ s' => P.HasComputedVncAddress (TF.Ref s' (ResourceComputeInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVncAddress (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedVncAddress x = TF.compute (TF.refKey x) "vnc_address"
 
-resourceComputeInstance :: TF.Resource P.OPC (ResourceComputeInstance s)
-resourceComputeInstance =
+computeInstanceResource :: TF.Resource P.OPC (ComputeInstanceResource s)
+computeInstanceResource =
     TF.newResource "opc_compute_instance" $
-        ResourceComputeInstance {
+        ComputeInstanceResource {
               _boot_order = TF.Nil
             , _desired_state = TF.Nil
             , _hostname = TF.Nil
@@ -824,7 +824,7 @@ The @opc_compute_ip_address_association@ resource creates and manages an IP
 address association between an IP address reservation and a virtual NIC in
 an OPC identity domain, for an IP Network.
 -}
-data ResourceComputeIpAddressAssociation s = ResourceComputeIpAddressAssociation {
+data ComputeIpAddressAssociationResource s = ComputeIpAddressAssociationResource {
       _description            :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of the ip address association. -}
     , _ip_address_reservation :: !(TF.Attr s P.Text)
@@ -837,8 +837,8 @@ data ResourceComputeIpAddressAssociation s = ResourceComputeIpAddressAssociation
     {- ^ (Optional) The name of the virtual NIC associated with this NAT IP reservation. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeIpAddressAssociation s) where
-    toHCL ResourceComputeIpAddressAssociation{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeIpAddressAssociationResource s) where
+    toHCL ComputeIpAddressAssociationResource{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address_reservation" <$> TF.attribute _ip_address_reservation
         , TF.assign "name" <$> TF.attribute _name
@@ -846,60 +846,60 @@ instance TF.ToHCL (ResourceComputeIpAddressAssociation s) where
         , TF.assign "vnic" <$> TF.attribute _vnic
         ]
 
-instance P.HasDescription (ResourceComputeIpAddressAssociation s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeIpAddressAssociationResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeIpAddressAssociation s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeIpAddressAssociation s)
+        lens (_description :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeIpAddressAssociationResource s)
 
-instance P.HasIpAddressReservation (ResourceComputeIpAddressAssociation s) (TF.Attr s P.Text) where
+instance P.HasIpAddressReservation (ComputeIpAddressAssociationResource s) (TF.Attr s P.Text) where
     ipAddressReservation =
-        lens (_ip_address_reservation :: ResourceComputeIpAddressAssociation s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_address_reservation = a } :: ResourceComputeIpAddressAssociation s)
+        lens (_ip_address_reservation :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_address_reservation = a } :: ComputeIpAddressAssociationResource s)
 
-instance P.HasName (ResourceComputeIpAddressAssociation s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeIpAddressAssociationResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeIpAddressAssociation s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeIpAddressAssociation s)
+        lens (_name :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeIpAddressAssociationResource s)
 
-instance P.HasTags (ResourceComputeIpAddressAssociation s) (TF.Attr s P.Text) where
+instance P.HasTags (ComputeIpAddressAssociationResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ResourceComputeIpAddressAssociation s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ResourceComputeIpAddressAssociation s)
+        lens (_tags :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ComputeIpAddressAssociationResource s)
 
-instance P.HasVnic (ResourceComputeIpAddressAssociation s) (TF.Attr s P.Text) where
+instance P.HasVnic (ComputeIpAddressAssociationResource s) (TF.Attr s P.Text) where
     vnic =
-        lens (_vnic :: ResourceComputeIpAddressAssociation s -> TF.Attr s P.Text)
-             (\s a -> s { _vnic = a } :: ResourceComputeIpAddressAssociation s)
+        lens (_vnic :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vnic = a } :: ComputeIpAddressAssociationResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeIpAddressAssociation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeIpAddressAssociationResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceComputeIpAddressAssociation s -> TF.Attr s P.Text)
+        (_description :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpAddressReservation (TF.Ref s' (ResourceComputeIpAddressAssociation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpAddressReservation (TF.Ref s' (ComputeIpAddressAssociationResource s)) (TF.Attr s P.Text) where
     computedIpAddressReservation =
-        (_ip_address_reservation :: ResourceComputeIpAddressAssociation s -> TF.Attr s P.Text)
+        (_ip_address_reservation :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeIpAddressAssociation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeIpAddressAssociationResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeIpAddressAssociation s -> TF.Attr s P.Text)
+        (_name :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceComputeIpAddressAssociation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeIpAddressAssociationResource s)) (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: ResourceComputeIpAddressAssociation s -> TF.Attr s P.Text)
+        (_tags :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVnic (TF.Ref s' (ResourceComputeIpAddressAssociation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVnic (TF.Ref s' (ComputeIpAddressAssociationResource s)) (TF.Attr s P.Text) where
     computedVnic =
-        (_vnic :: ResourceComputeIpAddressAssociation s -> TF.Attr s P.Text)
+        (_vnic :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeIpAddressAssociation :: TF.Resource P.OPC (ResourceComputeIpAddressAssociation s)
-resourceComputeIpAddressAssociation =
+computeIpAddressAssociationResource :: TF.Resource P.OPC (ComputeIpAddressAssociationResource s)
+computeIpAddressAssociationResource =
     TF.newResource "opc_compute_ip_address_association" $
-        ResourceComputeIpAddressAssociation {
+        ComputeIpAddressAssociationResource {
               _description = TF.Nil
             , _ip_address_reservation = TF.Nil
             , _name = TF.Nil
@@ -912,7 +912,7 @@ resourceComputeIpAddressAssociation =
 The @opc_compute_ip_address_prefix_set@ resource creates and manages an IP
 address prefix set in an OPC identity domain.
 -}
-data ResourceComputeIpAddressPrefixSet s = ResourceComputeIpAddressPrefixSet {
+data ComputeIpAddressPrefixSetResource s = ComputeIpAddressPrefixSetResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of the ip address prefix set. -}
     , _name        :: !(TF.Attr s P.Text)
@@ -923,58 +923,58 @@ data ResourceComputeIpAddressPrefixSet s = ResourceComputeIpAddressPrefixSet {
     {- ^ (Optional) List of tags that may be applied to the ip address prefix set. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeIpAddressPrefixSet s) where
-    toHCL ResourceComputeIpAddressPrefixSet{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeIpAddressPrefixSetResource s) where
+    toHCL ComputeIpAddressPrefixSetResource{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "prefixes" <$> TF.attribute _prefixes
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasDescription (ResourceComputeIpAddressPrefixSet s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeIpAddressPrefixSetResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeIpAddressPrefixSet s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeIpAddressPrefixSet s)
+        lens (_description :: ComputeIpAddressPrefixSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeIpAddressPrefixSetResource s)
 
-instance P.HasName (ResourceComputeIpAddressPrefixSet s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeIpAddressPrefixSetResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeIpAddressPrefixSet s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeIpAddressPrefixSet s)
+        lens (_name :: ComputeIpAddressPrefixSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeIpAddressPrefixSetResource s)
 
-instance P.HasPrefixes (ResourceComputeIpAddressPrefixSet s) (TF.Attr s P.Text) where
+instance P.HasPrefixes (ComputeIpAddressPrefixSetResource s) (TF.Attr s P.Text) where
     prefixes =
-        lens (_prefixes :: ResourceComputeIpAddressPrefixSet s -> TF.Attr s P.Text)
-             (\s a -> s { _prefixes = a } :: ResourceComputeIpAddressPrefixSet s)
+        lens (_prefixes :: ComputeIpAddressPrefixSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _prefixes = a } :: ComputeIpAddressPrefixSetResource s)
 
-instance P.HasTags (ResourceComputeIpAddressPrefixSet s) (TF.Attr s P.Text) where
+instance P.HasTags (ComputeIpAddressPrefixSetResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ResourceComputeIpAddressPrefixSet s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ResourceComputeIpAddressPrefixSet s)
+        lens (_tags :: ComputeIpAddressPrefixSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ComputeIpAddressPrefixSetResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeIpAddressPrefixSet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeIpAddressPrefixSetResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceComputeIpAddressPrefixSet s -> TF.Attr s P.Text)
+        (_description :: ComputeIpAddressPrefixSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeIpAddressPrefixSet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeIpAddressPrefixSetResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeIpAddressPrefixSet s -> TF.Attr s P.Text)
+        (_name :: ComputeIpAddressPrefixSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrefixes (TF.Ref s' (ResourceComputeIpAddressPrefixSet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrefixes (TF.Ref s' (ComputeIpAddressPrefixSetResource s)) (TF.Attr s P.Text) where
     computedPrefixes =
-        (_prefixes :: ResourceComputeIpAddressPrefixSet s -> TF.Attr s P.Text)
+        (_prefixes :: ComputeIpAddressPrefixSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceComputeIpAddressPrefixSet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeIpAddressPrefixSetResource s)) (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: ResourceComputeIpAddressPrefixSet s -> TF.Attr s P.Text)
+        (_tags :: ComputeIpAddressPrefixSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeIpAddressPrefixSet :: TF.Resource P.OPC (ResourceComputeIpAddressPrefixSet s)
-resourceComputeIpAddressPrefixSet =
+computeIpAddressPrefixSetResource :: TF.Resource P.OPC (ComputeIpAddressPrefixSetResource s)
+computeIpAddressPrefixSetResource =
     TF.newResource "opc_compute_ip_address_prefix_set" $
-        ResourceComputeIpAddressPrefixSet {
+        ComputeIpAddressPrefixSetResource {
               _description = TF.Nil
             , _name = TF.Nil
             , _prefixes = TF.Nil
@@ -986,7 +986,7 @@ resourceComputeIpAddressPrefixSet =
 The @opc_compute_ip_address_reservation@ resource creates and manages an IP
 address reservation in an OPC identity domain, for an IP Network.
 -}
-data ResourceComputeIpAddressReservation s = ResourceComputeIpAddressReservation {
+data ComputeIpAddressReservationResource s = ComputeIpAddressReservationResource {
       _description     :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of the ip address reservation. -}
     , _ip_address_pool :: !(TF.Attr s P.Text)
@@ -997,58 +997,58 @@ data ResourceComputeIpAddressReservation s = ResourceComputeIpAddressReservation
     {- ^ (Optional) List of tags that may be applied to the IP address reservation. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeIpAddressReservation s) where
-    toHCL ResourceComputeIpAddressReservation{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeIpAddressReservationResource s) where
+    toHCL ComputeIpAddressReservationResource{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address_pool" <$> TF.attribute _ip_address_pool
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasDescription (ResourceComputeIpAddressReservation s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeIpAddressReservationResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeIpAddressReservation s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeIpAddressReservation s)
+        lens (_description :: ComputeIpAddressReservationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeIpAddressReservationResource s)
 
-instance P.HasIpAddressPool (ResourceComputeIpAddressReservation s) (TF.Attr s P.Text) where
+instance P.HasIpAddressPool (ComputeIpAddressReservationResource s) (TF.Attr s P.Text) where
     ipAddressPool =
-        lens (_ip_address_pool :: ResourceComputeIpAddressReservation s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_address_pool = a } :: ResourceComputeIpAddressReservation s)
+        lens (_ip_address_pool :: ComputeIpAddressReservationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_address_pool = a } :: ComputeIpAddressReservationResource s)
 
-instance P.HasName (ResourceComputeIpAddressReservation s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeIpAddressReservationResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeIpAddressReservation s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeIpAddressReservation s)
+        lens (_name :: ComputeIpAddressReservationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeIpAddressReservationResource s)
 
-instance P.HasTags (ResourceComputeIpAddressReservation s) (TF.Attr s P.Text) where
+instance P.HasTags (ComputeIpAddressReservationResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ResourceComputeIpAddressReservation s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ResourceComputeIpAddressReservation s)
+        lens (_tags :: ComputeIpAddressReservationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ComputeIpAddressReservationResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeIpAddressReservation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeIpAddressReservationResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceComputeIpAddressReservation s -> TF.Attr s P.Text)
+        (_description :: ComputeIpAddressReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpAddressPool (TF.Ref s' (ResourceComputeIpAddressReservation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpAddressPool (TF.Ref s' (ComputeIpAddressReservationResource s)) (TF.Attr s P.Text) where
     computedIpAddressPool =
-        (_ip_address_pool :: ResourceComputeIpAddressReservation s -> TF.Attr s P.Text)
+        (_ip_address_pool :: ComputeIpAddressReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeIpAddressReservation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeIpAddressReservationResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeIpAddressReservation s -> TF.Attr s P.Text)
+        (_name :: ComputeIpAddressReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceComputeIpAddressReservation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeIpAddressReservationResource s)) (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: ResourceComputeIpAddressReservation s -> TF.Attr s P.Text)
+        (_tags :: ComputeIpAddressReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeIpAddressReservation :: TF.Resource P.OPC (ResourceComputeIpAddressReservation s)
-resourceComputeIpAddressReservation =
+computeIpAddressReservationResource :: TF.Resource P.OPC (ComputeIpAddressReservationResource s)
+computeIpAddressReservationResource =
     TF.newResource "opc_compute_ip_address_reservation" $
-        ResourceComputeIpAddressReservation {
+        ComputeIpAddressReservationResource {
               _description = TF.Nil
             , _ip_address_pool = TF.Nil
             , _name = TF.Nil
@@ -1061,55 +1061,115 @@ The @opc_compute_ip_association@ resource creates and manages an association
 between an IP address and an instance in an OPC identity domain, for the
 Shared Network.
 -}
-data ResourceComputeIpAssociation s = ResourceComputeIpAssociation {
+data ComputeIpAssociationResource s = ComputeIpAssociationResource {
       _parent_pool :: !(TF.Attr s P.Text)
     {- ^ (Required) The pool from which to take an IP address. To associate a specific reserved IP address, use the prefix @ipreservation:@ followed by the name of the IP reservation. To allocate an IP address from a pool, use the prefix @ippool:@ , e.g. @ippool:/oracle/public/ippool@ . -}
     , _vcable      :: !(TF.Attr s P.Text)
     {- ^ (Required) The vcable of the instance to associate the IP address with. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeIpAssociation s) where
-    toHCL ResourceComputeIpAssociation{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeIpAssociationResource s) where
+    toHCL ComputeIpAssociationResource{..} = TF.inline $ catMaybes
         [ TF.assign "parent_pool" <$> TF.attribute _parent_pool
         , TF.assign "vcable" <$> TF.attribute _vcable
         ]
 
-instance P.HasParentPool (ResourceComputeIpAssociation s) (TF.Attr s P.Text) where
+instance P.HasParentPool (ComputeIpAssociationResource s) (TF.Attr s P.Text) where
     parentPool =
-        lens (_parent_pool :: ResourceComputeIpAssociation s -> TF.Attr s P.Text)
-             (\s a -> s { _parent_pool = a } :: ResourceComputeIpAssociation s)
+        lens (_parent_pool :: ComputeIpAssociationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _parent_pool = a } :: ComputeIpAssociationResource s)
 
-instance P.HasVcable (ResourceComputeIpAssociation s) (TF.Attr s P.Text) where
+instance P.HasVcable (ComputeIpAssociationResource s) (TF.Attr s P.Text) where
     vcable =
-        lens (_vcable :: ResourceComputeIpAssociation s -> TF.Attr s P.Text)
-             (\s a -> s { _vcable = a } :: ResourceComputeIpAssociation s)
+        lens (_vcable :: ComputeIpAssociationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vcable = a } :: ComputeIpAssociationResource s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeIpAssociation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeIpAssociationResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedParentPool (TF.Ref s' (ResourceComputeIpAssociation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedParentPool (TF.Ref s' (ComputeIpAssociationResource s)) (TF.Attr s P.Text) where
     computedParentPool =
-        (_parent_pool :: ResourceComputeIpAssociation s -> TF.Attr s P.Text)
+        (_parent_pool :: ComputeIpAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVcable (TF.Ref s' (ResourceComputeIpAssociation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVcable (TF.Ref s' (ComputeIpAssociationResource s)) (TF.Attr s P.Text) where
     computedVcable =
-        (_vcable :: ResourceComputeIpAssociation s -> TF.Attr s P.Text)
+        (_vcable :: ComputeIpAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeIpAssociation :: TF.Resource P.OPC (ResourceComputeIpAssociation s)
-resourceComputeIpAssociation =
+computeIpAssociationResource :: TF.Resource P.OPC (ComputeIpAssociationResource s)
+computeIpAssociationResource =
     TF.newResource "opc_compute_ip_association" $
-        ResourceComputeIpAssociation {
+        ComputeIpAssociationResource {
               _parent_pool = TF.Nil
             , _vcable = TF.Nil
+            }
+
+{- | The @opc_compute_ip_network_exchange@ OPC resource.
+
+The @opc_compute_ip_network_exchange@ resource creates and manages an IP
+network exchange in an OPC identity domain.
+-}
+data ComputeIpNetworkExchangeResource s = ComputeIpNetworkExchangeResource {
+      _description :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A description of the ip network exchange. -}
+    , _name        :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the ip network exchange. -}
+    , _tags        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of tags that may be applied to the IP network exchange. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeIpNetworkExchangeResource s) where
+    toHCL ComputeIpNetworkExchangeResource{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance P.HasDescription (ComputeIpNetworkExchangeResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeIpNetworkExchangeResource s)
+
+instance P.HasName (ComputeIpNetworkExchangeResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeIpNetworkExchangeResource s)
+
+instance P.HasTags (ComputeIpNetworkExchangeResource s) (TF.Attr s P.Text) where
+    tags =
+        lens (_tags :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ComputeIpNetworkExchangeResource s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeIpNetworkExchangeResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeIpNetworkExchangeResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeIpNetworkExchangeResource s)) (TF.Attr s P.Text) where
+    computedTags =
+        (_tags :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+computeIpNetworkExchangeResource :: TF.Resource P.OPC (ComputeIpNetworkExchangeResource s)
+computeIpNetworkExchangeResource =
+    TF.newResource "opc_compute_ip_network_exchange" $
+        ComputeIpNetworkExchangeResource {
+              _description = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
             }
 
 {- | The @opc_compute_ip_network@ OPC resource.
 
 The @opc_compute_ip_network@ resource creates and manages an IP Network.
 -}
-data ResourceComputeIpNetwork s = ResourceComputeIpNetwork {
+data ComputeIpNetworkResource s = ComputeIpNetworkResource {
       _description         :: !(TF.Attr s P.Text)
     {- ^ (Optional) The description of the IP Network. -}
     , _ip_address_prefix   :: !(TF.Attr s P.Text)
@@ -1122,8 +1182,8 @@ data ResourceComputeIpNetwork s = ResourceComputeIpNetwork {
     {- ^ (Optional) If true, enable public internet access using NAPT for VNICs without any public IP Reservation. Defaults to @false@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeIpNetwork s) where
-    toHCL ResourceComputeIpNetwork{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeIpNetworkResource s) where
+    toHCL ComputeIpNetworkResource{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address_prefix" <$> TF.attribute _ip_address_prefix
         , TF.assign "ip_network_exchange" <$> TF.attribute _ip_network_exchange
@@ -1131,53 +1191,53 @@ instance TF.ToHCL (ResourceComputeIpNetwork s) where
         , TF.assign "public_napt_enabled" <$> TF.attribute _public_napt_enabled
         ]
 
-instance P.HasDescription (ResourceComputeIpNetwork s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeIpNetworkResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeIpNetwork s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeIpNetwork s)
+        lens (_description :: ComputeIpNetworkResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeIpNetworkResource s)
 
-instance P.HasIpAddressPrefix (ResourceComputeIpNetwork s) (TF.Attr s P.Text) where
+instance P.HasIpAddressPrefix (ComputeIpNetworkResource s) (TF.Attr s P.Text) where
     ipAddressPrefix =
-        lens (_ip_address_prefix :: ResourceComputeIpNetwork s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_address_prefix = a } :: ResourceComputeIpNetwork s)
+        lens (_ip_address_prefix :: ComputeIpNetworkResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_address_prefix = a } :: ComputeIpNetworkResource s)
 
-instance P.HasIpNetworkExchange (ResourceComputeIpNetwork s) (TF.Attr s P.Text) where
+instance P.HasIpNetworkExchange (ComputeIpNetworkResource s) (TF.Attr s P.Text) where
     ipNetworkExchange =
-        lens (_ip_network_exchange :: ResourceComputeIpNetwork s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_network_exchange = a } :: ResourceComputeIpNetwork s)
+        lens (_ip_network_exchange :: ComputeIpNetworkResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_network_exchange = a } :: ComputeIpNetworkResource s)
 
-instance P.HasName (ResourceComputeIpNetwork s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeIpNetworkResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeIpNetwork s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeIpNetwork s)
+        lens (_name :: ComputeIpNetworkResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeIpNetworkResource s)
 
-instance P.HasPublicNaptEnabled (ResourceComputeIpNetwork s) (TF.Attr s P.Text) where
+instance P.HasPublicNaptEnabled (ComputeIpNetworkResource s) (TF.Attr s P.Text) where
     publicNaptEnabled =
-        lens (_public_napt_enabled :: ResourceComputeIpNetwork s -> TF.Attr s P.Text)
-             (\s a -> s { _public_napt_enabled = a } :: ResourceComputeIpNetwork s)
+        lens (_public_napt_enabled :: ComputeIpNetworkResource s -> TF.Attr s P.Text)
+             (\s a -> s { _public_napt_enabled = a } :: ComputeIpNetworkResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeIpNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeIpNetworkResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedIpAddressPrefix (TF.Ref s' (ResourceComputeIpNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpAddressPrefix (TF.Ref s' (ComputeIpNetworkResource s)) (TF.Attr s P.Text) where
     computedIpAddressPrefix x = TF.compute (TF.refKey x) "ip_address_prefix"
 
-instance s ~ s' => P.HasComputedIpNetworkExchange (TF.Ref s' (ResourceComputeIpNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpNetworkExchange (TF.Ref s' (ComputeIpNetworkResource s)) (TF.Attr s P.Text) where
     computedIpNetworkExchange x = TF.compute (TF.refKey x) "ip_network_exchange"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeIpNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeIpNetworkResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPublicNaptEnabled (TF.Ref s' (ResourceComputeIpNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublicNaptEnabled (TF.Ref s' (ComputeIpNetworkResource s)) (TF.Attr s P.Text) where
     computedPublicNaptEnabled x = TF.compute (TF.refKey x) "public_napt_enabled"
 
-instance s ~ s' => P.HasComputedUri (TF.Ref s' (ResourceComputeIpNetwork s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpNetworkResource s)) (TF.Attr s P.Text) where
     computedUri x = TF.compute (TF.refKey x) "uri"
 
-resourceComputeIpNetwork :: TF.Resource P.OPC (ResourceComputeIpNetwork s)
-resourceComputeIpNetwork =
+computeIpNetworkResource :: TF.Resource P.OPC (ComputeIpNetworkResource s)
+computeIpNetworkResource =
     TF.newResource "opc_compute_ip_network" $
-        ResourceComputeIpNetwork {
+        ComputeIpNetworkResource {
               _description = TF.Nil
             , _ip_address_prefix = TF.Nil
             , _ip_network_exchange = TF.Nil
@@ -1185,72 +1245,12 @@ resourceComputeIpNetwork =
             , _public_napt_enabled = TF.Nil
             }
 
-{- | The @opc_compute_ip_network_exchange@ OPC resource.
-
-The @opc_compute_ip_network_exchange@ resource creates and manages an IP
-network exchange in an OPC identity domain.
--}
-data ResourceComputeIpNetworkExchange s = ResourceComputeIpNetworkExchange {
-      _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A description of the ip network exchange. -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the ip network exchange. -}
-    , _tags        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) List of tags that may be applied to the IP network exchange. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ResourceComputeIpNetworkExchange s) where
-    toHCL ResourceComputeIpNetworkExchange{..} = TF.inline $ catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "tags" <$> TF.attribute _tags
-        ]
-
-instance P.HasDescription (ResourceComputeIpNetworkExchange s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: ResourceComputeIpNetworkExchange s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeIpNetworkExchange s)
-
-instance P.HasName (ResourceComputeIpNetworkExchange s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ResourceComputeIpNetworkExchange s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeIpNetworkExchange s)
-
-instance P.HasTags (ResourceComputeIpNetworkExchange s) (TF.Attr s P.Text) where
-    tags =
-        lens (_tags :: ResourceComputeIpNetworkExchange s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ResourceComputeIpNetworkExchange s)
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeIpNetworkExchange s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ResourceComputeIpNetworkExchange s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeIpNetworkExchange s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ResourceComputeIpNetworkExchange s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceComputeIpNetworkExchange s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: ResourceComputeIpNetworkExchange s -> TF.Attr s P.Text)
-            . TF.refValue
-
-resourceComputeIpNetworkExchange :: TF.Resource P.OPC (ResourceComputeIpNetworkExchange s)
-resourceComputeIpNetworkExchange =
-    TF.newResource "opc_compute_ip_network_exchange" $
-        ResourceComputeIpNetworkExchange {
-              _description = TF.Nil
-            , _name = TF.Nil
-            , _tags = TF.Nil
-            }
-
 {- | The @opc_compute_ip_reservation@ OPC resource.
 
 The @opc_compute_ip_reservation@ resource creates and manages an IP
 reservation in an OPC identity domain for the Shared Network.
 -}
-data ResourceComputeIpReservation s = ResourceComputeIpReservation {
+data ComputeIpReservationResource s = ComputeIpReservationResource {
       _name        :: !(TF.Attr s P.Text)
     {- ^ (Optional) Name of the IP Reservation. Will be generated if unspecified. -}
     , _parent_pool :: !(TF.Attr s P.Text)
@@ -1261,58 +1261,58 @@ data ResourceComputeIpReservation s = ResourceComputeIpReservation {
     {- ^ (Optional) List of tags that may be applied to the IP reservation. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeIpReservation s) where
-    toHCL ResourceComputeIpReservation{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeIpReservationResource s) where
+    toHCL ComputeIpReservationResource{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "parent_pool" <$> TF.attribute _parent_pool
         , TF.assign "permanent" <$> TF.attribute _permanent
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasName (ResourceComputeIpReservation s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeIpReservationResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeIpReservation s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeIpReservation s)
+        lens (_name :: ComputeIpReservationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeIpReservationResource s)
 
-instance P.HasParentPool (ResourceComputeIpReservation s) (TF.Attr s P.Text) where
+instance P.HasParentPool (ComputeIpReservationResource s) (TF.Attr s P.Text) where
     parentPool =
-        lens (_parent_pool :: ResourceComputeIpReservation s -> TF.Attr s P.Text)
-             (\s a -> s { _parent_pool = a } :: ResourceComputeIpReservation s)
+        lens (_parent_pool :: ComputeIpReservationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _parent_pool = a } :: ComputeIpReservationResource s)
 
-instance P.HasPermanent (ResourceComputeIpReservation s) (TF.Attr s P.Text) where
+instance P.HasPermanent (ComputeIpReservationResource s) (TF.Attr s P.Text) where
     permanent =
-        lens (_permanent :: ResourceComputeIpReservation s -> TF.Attr s P.Text)
-             (\s a -> s { _permanent = a } :: ResourceComputeIpReservation s)
+        lens (_permanent :: ComputeIpReservationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _permanent = a } :: ComputeIpReservationResource s)
 
-instance P.HasTags (ResourceComputeIpReservation s) (TF.Attr s P.Text) where
+instance P.HasTags (ComputeIpReservationResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ResourceComputeIpReservation s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ResourceComputeIpReservation s)
+        lens (_tags :: ComputeIpReservationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ComputeIpReservationResource s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeIpReservation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeIpReservationResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeIpReservation s -> TF.Attr s P.Text)
+        (_name :: ComputeIpReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedParentPool (TF.Ref s' (ResourceComputeIpReservation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedParentPool (TF.Ref s' (ComputeIpReservationResource s)) (TF.Attr s P.Text) where
     computedParentPool =
-        (_parent_pool :: ResourceComputeIpReservation s -> TF.Attr s P.Text)
+        (_parent_pool :: ComputeIpReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPermanent (TF.Ref s' (ResourceComputeIpReservation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPermanent (TF.Ref s' (ComputeIpReservationResource s)) (TF.Attr s P.Text) where
     computedPermanent =
-        (_permanent :: ResourceComputeIpReservation s -> TF.Attr s P.Text)
+        (_permanent :: ComputeIpReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceComputeIpReservation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeIpReservationResource s)) (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: ResourceComputeIpReservation s -> TF.Attr s P.Text)
+        (_tags :: ComputeIpReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeIpReservation :: TF.Resource P.OPC (ResourceComputeIpReservation s)
-resourceComputeIpReservation =
+computeIpReservationResource :: TF.Resource P.OPC (ComputeIpReservationResource s)
+computeIpReservationResource =
     TF.newResource "opc_compute_ip_reservation" $
-        ResourceComputeIpReservation {
+        ComputeIpReservationResource {
               _name = TF.Nil
             , _parent_pool = TF.Nil
             , _permanent = TF.Nil
@@ -1327,7 +1327,7 @@ operating system. Before performing this creating the Machine Image, you
 must upload your machine image file to Oracle Cloud Infrastructure Object
 Storage Classic @compute_images@ container
 -}
-data ResourceComputeMachineImage s = ResourceComputeMachineImage {
+data ComputeMachineImageResource s = ComputeMachineImageResource {
       _account     :: !(TF.Attr s P.Text)
     {- ^ (Required) The two part name of the compute object storage account in the format @/Compute-{identity_domain}/cloud_storage@ -}
     , _attributes  :: !(TF.Attr s P.Text)
@@ -1340,8 +1340,8 @@ data ResourceComputeMachineImage s = ResourceComputeMachineImage {
     {- ^ (Required) The name of the Machine Image. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeMachineImage s) where
-    toHCL ResourceComputeMachineImage{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeMachineImageResource s) where
+    toHCL ComputeMachineImageResource{..} = TF.inline $ catMaybes
         [ TF.assign "account" <$> TF.attribute _account
         , TF.assign "attributes" <$> TF.attribute _attributes
         , TF.assign "description" <$> TF.attribute _description
@@ -1349,60 +1349,60 @@ instance TF.ToHCL (ResourceComputeMachineImage s) where
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasAccount (ResourceComputeMachineImage s) (TF.Attr s P.Text) where
+instance P.HasAccount (ComputeMachineImageResource s) (TF.Attr s P.Text) where
     account =
-        lens (_account :: ResourceComputeMachineImage s -> TF.Attr s P.Text)
-             (\s a -> s { _account = a } :: ResourceComputeMachineImage s)
+        lens (_account :: ComputeMachineImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _account = a } :: ComputeMachineImageResource s)
 
-instance P.HasAttributes (ResourceComputeMachineImage s) (TF.Attr s P.Text) where
+instance P.HasAttributes (ComputeMachineImageResource s) (TF.Attr s P.Text) where
     attributes =
-        lens (_attributes :: ResourceComputeMachineImage s -> TF.Attr s P.Text)
-             (\s a -> s { _attributes = a } :: ResourceComputeMachineImage s)
+        lens (_attributes :: ComputeMachineImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _attributes = a } :: ComputeMachineImageResource s)
 
-instance P.HasDescription (ResourceComputeMachineImage s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeMachineImageResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeMachineImage s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeMachineImage s)
+        lens (_description :: ComputeMachineImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeMachineImageResource s)
 
-instance P.HasFile (ResourceComputeMachineImage s) (TF.Attr s P.Text) where
+instance P.HasFile (ComputeMachineImageResource s) (TF.Attr s P.Text) where
     file =
-        lens (_file :: ResourceComputeMachineImage s -> TF.Attr s P.Text)
-             (\s a -> s { _file = a } :: ResourceComputeMachineImage s)
+        lens (_file :: ComputeMachineImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _file = a } :: ComputeMachineImageResource s)
 
-instance P.HasName (ResourceComputeMachineImage s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeMachineImageResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeMachineImage s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeMachineImage s)
+        lens (_name :: ComputeMachineImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeMachineImageResource s)
 
-instance s ~ s' => P.HasComputedAccount (TF.Ref s' (ResourceComputeMachineImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccount (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s P.Text) where
     computedAccount =
-        (_account :: ResourceComputeMachineImage s -> TF.Attr s P.Text)
+        (_account :: ComputeMachineImageResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ResourceComputeMachineImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s P.Text) where
     computedAttributes =
-        (_attributes :: ResourceComputeMachineImage s -> TF.Attr s P.Text)
+        (_attributes :: ComputeMachineImageResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeMachineImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceComputeMachineImage s -> TF.Attr s P.Text)
+        (_description :: ComputeMachineImageResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFile (TF.Ref s' (ResourceComputeMachineImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFile (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s P.Text) where
     computedFile =
-        (_file :: ResourceComputeMachineImage s -> TF.Attr s P.Text)
+        (_file :: ComputeMachineImageResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeMachineImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeMachineImage s -> TF.Attr s P.Text)
+        (_name :: ComputeMachineImageResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeMachineImage :: TF.Resource P.OPC (ResourceComputeMachineImage s)
-resourceComputeMachineImage =
+computeMachineImageResource :: TF.Resource P.OPC (ComputeMachineImageResource s)
+computeMachineImageResource =
     TF.newResource "opc_compute_machine_image" $
-        ResourceComputeMachineImage {
+        ComputeMachineImageResource {
               _account = TF.Nil
             , _attributes = TF.Nil
             , _description = TF.Nil
@@ -1415,7 +1415,7 @@ resourceComputeMachineImage =
 The @opc_compute_orchestrated_instance@ resource creates and manages an
 orchestration containing a number of instances in an OPC identity domain.
 -}
-data ResourceComputeOrchestratedInstance s = ResourceComputeOrchestratedInstance {
+data ComputeOrchestratedInstanceResource s = ComputeOrchestratedInstanceResource {
       _description   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The description of the orchestration. -}
     , _desired_state :: !(TF.Attr s P.Text)
@@ -1426,58 +1426,58 @@ data ResourceComputeOrchestratedInstance s = ResourceComputeOrchestratedInstance
     {- ^ (Required) The name of the orchestration. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeOrchestratedInstance s) where
-    toHCL ResourceComputeOrchestratedInstance{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeOrchestratedInstanceResource s) where
+    toHCL ComputeOrchestratedInstanceResource{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "desired_state" <$> TF.attribute _desired_state
         , TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDescription (ResourceComputeOrchestratedInstance s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeOrchestratedInstanceResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeOrchestratedInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeOrchestratedInstance s)
+        lens (_description :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeOrchestratedInstanceResource s)
 
-instance P.HasDesiredState (ResourceComputeOrchestratedInstance s) (TF.Attr s P.Text) where
+instance P.HasDesiredState (ComputeOrchestratedInstanceResource s) (TF.Attr s P.Text) where
     desiredState =
-        lens (_desired_state :: ResourceComputeOrchestratedInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _desired_state = a } :: ResourceComputeOrchestratedInstance s)
+        lens (_desired_state :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _desired_state = a } :: ComputeOrchestratedInstanceResource s)
 
-instance P.HasInstance' (ResourceComputeOrchestratedInstance s) (TF.Attr s P.Text) where
+instance P.HasInstance' (ComputeOrchestratedInstanceResource s) (TF.Attr s P.Text) where
     instance' =
-        lens (_instance' :: ResourceComputeOrchestratedInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _instance' = a } :: ResourceComputeOrchestratedInstance s)
+        lens (_instance' :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _instance' = a } :: ComputeOrchestratedInstanceResource s)
 
-instance P.HasName (ResourceComputeOrchestratedInstance s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeOrchestratedInstanceResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeOrchestratedInstance s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeOrchestratedInstance s)
+        lens (_name :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeOrchestratedInstanceResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeOrchestratedInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeOrchestratedInstanceResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceComputeOrchestratedInstance s -> TF.Attr s P.Text)
+        (_description :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDesiredState (TF.Ref s' (ResourceComputeOrchestratedInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDesiredState (TF.Ref s' (ComputeOrchestratedInstanceResource s)) (TF.Attr s P.Text) where
     computedDesiredState =
-        (_desired_state :: ResourceComputeOrchestratedInstance s -> TF.Attr s P.Text)
+        (_desired_state :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInstance' (TF.Ref s' (ResourceComputeOrchestratedInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstance' (TF.Ref s' (ComputeOrchestratedInstanceResource s)) (TF.Attr s P.Text) where
     computedInstance' =
-        (_instance' :: ResourceComputeOrchestratedInstance s -> TF.Attr s P.Text)
+        (_instance' :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeOrchestratedInstance s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeOrchestratedInstanceResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeOrchestratedInstance s -> TF.Attr s P.Text)
+        (_name :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeOrchestratedInstance :: TF.Resource P.OPC (ResourceComputeOrchestratedInstance s)
-resourceComputeOrchestratedInstance =
+computeOrchestratedInstanceResource :: TF.Resource P.OPC (ComputeOrchestratedInstanceResource s)
+computeOrchestratedInstanceResource =
     TF.newResource "opc_compute_orchestrated_instance" $
-        ResourceComputeOrchestratedInstance {
+        ComputeOrchestratedInstanceResource {
               _description = TF.Nil
             , _desired_state = TF.Nil
             , _instance' = TF.Nil
@@ -1489,7 +1489,7 @@ resourceComputeOrchestratedInstance =
 The @opc_compute_route@ resource creates and manages a route for an IP
 Network.
 -}
-data ResourceComputeRoute s = ResourceComputeRoute {
+data ComputeRouteResource s = ComputeRouteResource {
       _admin_distance    :: !(TF.Attr s P.Text)
     {- ^ (Optional) The route's administrative distance. Defaults to @0@ . -}
     , _description       :: !(TF.Attr s P.Text)
@@ -1502,8 +1502,8 @@ data ResourceComputeRoute s = ResourceComputeRoute {
     {- ^ (Required) Name of the virtual NIC set to route matching packets to. Routed flows are load-balanced among all the virtual NICs in the virtual NIC set. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeRoute s) where
-    toHCL ResourceComputeRoute{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeRouteResource s) where
+    toHCL ComputeRouteResource{..} = TF.inline $ catMaybes
         [ TF.assign "admin_distance" <$> TF.attribute _admin_distance
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address_prefix" <$> TF.attribute _ip_address_prefix
@@ -1511,50 +1511,50 @@ instance TF.ToHCL (ResourceComputeRoute s) where
         , TF.assign "next_hop_vnic_set" <$> TF.attribute _next_hop_vnic_set
         ]
 
-instance P.HasAdminDistance (ResourceComputeRoute s) (TF.Attr s P.Text) where
+instance P.HasAdminDistance (ComputeRouteResource s) (TF.Attr s P.Text) where
     adminDistance =
-        lens (_admin_distance :: ResourceComputeRoute s -> TF.Attr s P.Text)
-             (\s a -> s { _admin_distance = a } :: ResourceComputeRoute s)
+        lens (_admin_distance :: ComputeRouteResource s -> TF.Attr s P.Text)
+             (\s a -> s { _admin_distance = a } :: ComputeRouteResource s)
 
-instance P.HasDescription (ResourceComputeRoute s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeRouteResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeRoute s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeRoute s)
+        lens (_description :: ComputeRouteResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeRouteResource s)
 
-instance P.HasIpAddressPrefix (ResourceComputeRoute s) (TF.Attr s P.Text) where
+instance P.HasIpAddressPrefix (ComputeRouteResource s) (TF.Attr s P.Text) where
     ipAddressPrefix =
-        lens (_ip_address_prefix :: ResourceComputeRoute s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_address_prefix = a } :: ResourceComputeRoute s)
+        lens (_ip_address_prefix :: ComputeRouteResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_address_prefix = a } :: ComputeRouteResource s)
 
-instance P.HasName (ResourceComputeRoute s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeRouteResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeRoute s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeRoute s)
+        lens (_name :: ComputeRouteResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeRouteResource s)
 
-instance P.HasNextHopVnicSet (ResourceComputeRoute s) (TF.Attr s P.Text) where
+instance P.HasNextHopVnicSet (ComputeRouteResource s) (TF.Attr s P.Text) where
     nextHopVnicSet =
-        lens (_next_hop_vnic_set :: ResourceComputeRoute s -> TF.Attr s P.Text)
-             (\s a -> s { _next_hop_vnic_set = a } :: ResourceComputeRoute s)
+        lens (_next_hop_vnic_set :: ComputeRouteResource s -> TF.Attr s P.Text)
+             (\s a -> s { _next_hop_vnic_set = a } :: ComputeRouteResource s)
 
-instance s ~ s' => P.HasComputedAdminDistance (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAdminDistance (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
     computedAdminDistance x = TF.compute (TF.refKey x) "admin_distance"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedIpAddressPrefix (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpAddressPrefix (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
     computedIpAddressPrefix x = TF.compute (TF.refKey x) "ip_address_prefix"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNextHopVnicSet (TF.Ref s' (ResourceComputeRoute s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNextHopVnicSet (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
     computedNextHopVnicSet x = TF.compute (TF.refKey x) "next_hop_vnic_set"
 
-resourceComputeRoute :: TF.Resource P.OPC (ResourceComputeRoute s)
-resourceComputeRoute =
+computeRouteResource :: TF.Resource P.OPC (ComputeRouteResource s)
+computeRouteResource =
     TF.newResource "opc_compute_route" $
-        ResourceComputeRoute {
+        ComputeRouteResource {
               _admin_distance = TF.Nil
             , _description = TF.Nil
             , _ip_address_prefix = TF.Nil
@@ -1569,7 +1569,7 @@ identity domain, which joinstogether a source security list (or security IP
 list), a destination security list (or security IP list), and a security
 application.
 -}
-data ResourceComputeSecRule s = ResourceComputeSecRule {
+data ComputeSecRuleResource s = ComputeSecRuleResource {
       _action           :: !(TF.Attr s P.Text)
     {- ^ (Required) Whether to @permit@ , @refuse@ or @deny@ packets to which this rule applies. This will ordinarily be @permit@ . -}
     , _application      :: !(TF.Attr s P.Text)
@@ -1586,8 +1586,8 @@ data ResourceComputeSecRule s = ResourceComputeSecRule {
     {- ^ (Required) The source security list (prefixed with @seclist:@ ), or security IP list (prefixed with @seciplist:@ ). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeSecRule s) where
-    toHCL ResourceComputeSecRule{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeSecRuleResource s) where
+    toHCL ComputeSecRuleResource{..} = TF.inline $ catMaybes
         [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "application" <$> TF.attribute _application
         , TF.assign "description" <$> TF.attribute _description
@@ -1597,80 +1597,80 @@ instance TF.ToHCL (ResourceComputeSecRule s) where
         , TF.assign "source_list" <$> TF.attribute _source_list
         ]
 
-instance P.HasAction (ResourceComputeSecRule s) (TF.Attr s P.Text) where
+instance P.HasAction (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     action =
-        lens (_action :: ResourceComputeSecRule s -> TF.Attr s P.Text)
-             (\s a -> s { _action = a } :: ResourceComputeSecRule s)
+        lens (_action :: ComputeSecRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _action = a } :: ComputeSecRuleResource s)
 
-instance P.HasApplication (ResourceComputeSecRule s) (TF.Attr s P.Text) where
+instance P.HasApplication (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     application =
-        lens (_application :: ResourceComputeSecRule s -> TF.Attr s P.Text)
-             (\s a -> s { _application = a } :: ResourceComputeSecRule s)
+        lens (_application :: ComputeSecRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _application = a } :: ComputeSecRuleResource s)
 
-instance P.HasDescription (ResourceComputeSecRule s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeSecRule s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeSecRule s)
+        lens (_description :: ComputeSecRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeSecRuleResource s)
 
-instance P.HasDestinationList (ResourceComputeSecRule s) (TF.Attr s P.Text) where
+instance P.HasDestinationList (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     destinationList =
-        lens (_destination_list :: ResourceComputeSecRule s -> TF.Attr s P.Text)
-             (\s a -> s { _destination_list = a } :: ResourceComputeSecRule s)
+        lens (_destination_list :: ComputeSecRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _destination_list = a } :: ComputeSecRuleResource s)
 
-instance P.HasDisabled (ResourceComputeSecRule s) (TF.Attr s P.Text) where
+instance P.HasDisabled (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     disabled =
-        lens (_disabled :: ResourceComputeSecRule s -> TF.Attr s P.Text)
-             (\s a -> s { _disabled = a } :: ResourceComputeSecRule s)
+        lens (_disabled :: ComputeSecRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _disabled = a } :: ComputeSecRuleResource s)
 
-instance P.HasName (ResourceComputeSecRule s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeSecRule s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeSecRule s)
+        lens (_name :: ComputeSecRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeSecRuleResource s)
 
-instance P.HasSourceList (ResourceComputeSecRule s) (TF.Attr s P.Text) where
+instance P.HasSourceList (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     sourceList =
-        lens (_source_list :: ResourceComputeSecRule s -> TF.Attr s P.Text)
-             (\s a -> s { _source_list = a } :: ResourceComputeSecRule s)
+        lens (_source_list :: ComputeSecRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _source_list = a } :: ComputeSecRuleResource s)
 
-instance s ~ s' => P.HasComputedAction (TF.Ref s' (ResourceComputeSecRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAction (TF.Ref s' (ComputeSecRuleResource s)) (TF.Attr s P.Text) where
     computedAction =
-        (_action :: ResourceComputeSecRule s -> TF.Attr s P.Text)
+        (_action :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedApplication (TF.Ref s' (ResourceComputeSecRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedApplication (TF.Ref s' (ComputeSecRuleResource s)) (TF.Attr s P.Text) where
     computedApplication =
-        (_application :: ResourceComputeSecRule s -> TF.Attr s P.Text)
+        (_application :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeSecRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeSecRuleResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceComputeSecRule s -> TF.Attr s P.Text)
+        (_description :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDestinationList (TF.Ref s' (ResourceComputeSecRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDestinationList (TF.Ref s' (ComputeSecRuleResource s)) (TF.Attr s P.Text) where
     computedDestinationList =
-        (_destination_list :: ResourceComputeSecRule s -> TF.Attr s P.Text)
+        (_destination_list :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisabled (TF.Ref s' (ResourceComputeSecRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisabled (TF.Ref s' (ComputeSecRuleResource s)) (TF.Attr s P.Text) where
     computedDisabled =
-        (_disabled :: ResourceComputeSecRule s -> TF.Attr s P.Text)
+        (_disabled :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeSecRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSecRuleResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeSecRule s -> TF.Attr s P.Text)
+        (_name :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourceList (TF.Ref s' (ResourceComputeSecRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceList (TF.Ref s' (ComputeSecRuleResource s)) (TF.Attr s P.Text) where
     computedSourceList =
-        (_source_list :: ResourceComputeSecRule s -> TF.Attr s P.Text)
+        (_source_list :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeSecRule :: TF.Resource P.OPC (ResourceComputeSecRule s)
-resourceComputeSecRule =
+computeSecRuleResource :: TF.Resource P.OPC (ComputeSecRuleResource s)
+computeSecRuleResource =
     TF.newResource "opc_compute_sec_rule" $
-        ResourceComputeSecRule {
+        ComputeSecRuleResource {
               _action = TF.Nil
             , _application = TF.Nil
             , _description = TF.Nil
@@ -1685,7 +1685,7 @@ resourceComputeSecRule =
 The @opc_compute_security_application@ resource creates and manages a
 security application in an OPC identity domain.
 -}
-data ResourceComputeSecurityApplication s = ResourceComputeSecurityApplication {
+data ComputeSecurityApplicationResource s = ComputeSecurityApplicationResource {
       _dport    :: !(TF.Attr s P.Text)
     {- ^ (Required) The port, or range of ports, to enable for this application, e.g @8080@ , @6000-7000@ . This must be set if the @protocol@ is set to @tcp@ or @udp@ . -}
     , _icmpcode :: !(TF.Attr s P.Text)
@@ -1698,8 +1698,8 @@ data ResourceComputeSecurityApplication s = ResourceComputeSecurityApplication {
     {- ^ (Required) The protocol to enable for this application. Must be one of @tcp@ , @udp@ , @ah@ , @esp@ , @icmp@ , @icmpv6@ , @igmp@ , @ipip@ , @gre@ , @mplsip@ , @ospf@ , @pim@ , @rdp@ , @sctp@ or @all@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeSecurityApplication s) where
-    toHCL ResourceComputeSecurityApplication{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeSecurityApplicationResource s) where
+    toHCL ComputeSecurityApplicationResource{..} = TF.inline $ catMaybes
         [ TF.assign "dport" <$> TF.attribute _dport
         , TF.assign "icmpcode" <$> TF.attribute _icmpcode
         , TF.assign "icmptype" <$> TF.attribute _icmptype
@@ -1707,60 +1707,60 @@ instance TF.ToHCL (ResourceComputeSecurityApplication s) where
         , TF.assign "protocol" <$> TF.attribute _protocol
         ]
 
-instance P.HasDport (ResourceComputeSecurityApplication s) (TF.Attr s P.Text) where
+instance P.HasDport (ComputeSecurityApplicationResource s) (TF.Attr s P.Text) where
     dport =
-        lens (_dport :: ResourceComputeSecurityApplication s -> TF.Attr s P.Text)
-             (\s a -> s { _dport = a } :: ResourceComputeSecurityApplication s)
+        lens (_dport :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _dport = a } :: ComputeSecurityApplicationResource s)
 
-instance P.HasIcmpcode (ResourceComputeSecurityApplication s) (TF.Attr s P.Text) where
+instance P.HasIcmpcode (ComputeSecurityApplicationResource s) (TF.Attr s P.Text) where
     icmpcode =
-        lens (_icmpcode :: ResourceComputeSecurityApplication s -> TF.Attr s P.Text)
-             (\s a -> s { _icmpcode = a } :: ResourceComputeSecurityApplication s)
+        lens (_icmpcode :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _icmpcode = a } :: ComputeSecurityApplicationResource s)
 
-instance P.HasIcmptype (ResourceComputeSecurityApplication s) (TF.Attr s P.Text) where
+instance P.HasIcmptype (ComputeSecurityApplicationResource s) (TF.Attr s P.Text) where
     icmptype =
-        lens (_icmptype :: ResourceComputeSecurityApplication s -> TF.Attr s P.Text)
-             (\s a -> s { _icmptype = a } :: ResourceComputeSecurityApplication s)
+        lens (_icmptype :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _icmptype = a } :: ComputeSecurityApplicationResource s)
 
-instance P.HasName (ResourceComputeSecurityApplication s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeSecurityApplicationResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeSecurityApplication s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeSecurityApplication s)
+        lens (_name :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeSecurityApplicationResource s)
 
-instance P.HasProtocol (ResourceComputeSecurityApplication s) (TF.Attr s P.Text) where
+instance P.HasProtocol (ComputeSecurityApplicationResource s) (TF.Attr s P.Text) where
     protocol =
-        lens (_protocol :: ResourceComputeSecurityApplication s -> TF.Attr s P.Text)
-             (\s a -> s { _protocol = a } :: ResourceComputeSecurityApplication s)
+        lens (_protocol :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _protocol = a } :: ComputeSecurityApplicationResource s)
 
-instance s ~ s' => P.HasComputedDport (TF.Ref s' (ResourceComputeSecurityApplication s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDport (TF.Ref s' (ComputeSecurityApplicationResource s)) (TF.Attr s P.Text) where
     computedDport =
-        (_dport :: ResourceComputeSecurityApplication s -> TF.Attr s P.Text)
+        (_dport :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIcmpcode (TF.Ref s' (ResourceComputeSecurityApplication s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIcmpcode (TF.Ref s' (ComputeSecurityApplicationResource s)) (TF.Attr s P.Text) where
     computedIcmpcode =
-        (_icmpcode :: ResourceComputeSecurityApplication s -> TF.Attr s P.Text)
+        (_icmpcode :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIcmptype (TF.Ref s' (ResourceComputeSecurityApplication s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIcmptype (TF.Ref s' (ComputeSecurityApplicationResource s)) (TF.Attr s P.Text) where
     computedIcmptype =
-        (_icmptype :: ResourceComputeSecurityApplication s -> TF.Attr s P.Text)
+        (_icmptype :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeSecurityApplication s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSecurityApplicationResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeSecurityApplication s -> TF.Attr s P.Text)
+        (_name :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (ResourceComputeSecurityApplication s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (ComputeSecurityApplicationResource s)) (TF.Attr s P.Text) where
     computedProtocol =
-        (_protocol :: ResourceComputeSecurityApplication s -> TF.Attr s P.Text)
+        (_protocol :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeSecurityApplication :: TF.Resource P.OPC (ResourceComputeSecurityApplication s)
-resourceComputeSecurityApplication =
+computeSecurityApplicationResource :: TF.Resource P.OPC (ComputeSecurityApplicationResource s)
+computeSecurityApplicationResource =
     TF.newResource "opc_compute_security_application" $
-        ResourceComputeSecurityApplication {
+        ComputeSecurityApplicationResource {
               _dport = TF.Nil
             , _icmpcode = TF.Nil
             , _icmptype = TF.Nil
@@ -1774,7 +1774,7 @@ The @opc_compute_security_association@ resource creates and manages an
 association between an instance and a security list in an OPC identity
 domain.
 -}
-data ResourceComputeSecurityAssociation s = ResourceComputeSecurityAssociation {
+data ComputeSecurityAssociationResource s = ComputeSecurityAssociationResource {
       _name    :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Name for the Security Association. If not specified, one is created automatically. Changing this forces a new resource to be created. -}
     , _seclist :: !(TF.Attr s P.Text)
@@ -1783,47 +1783,47 @@ data ResourceComputeSecurityAssociation s = ResourceComputeSecurityAssociation {
     {- ^ (Required) The @vcable@ of the instance to associate to the security list. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeSecurityAssociation s) where
-    toHCL ResourceComputeSecurityAssociation{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeSecurityAssociationResource s) where
+    toHCL ComputeSecurityAssociationResource{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "seclist" <$> TF.attribute _seclist
         , TF.assign "vcable" <$> TF.attribute _vcable
         ]
 
-instance P.HasName (ResourceComputeSecurityAssociation s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeSecurityAssociationResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeSecurityAssociation s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeSecurityAssociation s)
+        lens (_name :: ComputeSecurityAssociationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeSecurityAssociationResource s)
 
-instance P.HasSeclist (ResourceComputeSecurityAssociation s) (TF.Attr s P.Text) where
+instance P.HasSeclist (ComputeSecurityAssociationResource s) (TF.Attr s P.Text) where
     seclist =
-        lens (_seclist :: ResourceComputeSecurityAssociation s -> TF.Attr s P.Text)
-             (\s a -> s { _seclist = a } :: ResourceComputeSecurityAssociation s)
+        lens (_seclist :: ComputeSecurityAssociationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _seclist = a } :: ComputeSecurityAssociationResource s)
 
-instance P.HasVcable (ResourceComputeSecurityAssociation s) (TF.Attr s P.Text) where
+instance P.HasVcable (ComputeSecurityAssociationResource s) (TF.Attr s P.Text) where
     vcable =
-        lens (_vcable :: ResourceComputeSecurityAssociation s -> TF.Attr s P.Text)
-             (\s a -> s { _vcable = a } :: ResourceComputeSecurityAssociation s)
+        lens (_vcable :: ComputeSecurityAssociationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vcable = a } :: ComputeSecurityAssociationResource s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeSecurityAssociation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSecurityAssociationResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeSecurityAssociation s -> TF.Attr s P.Text)
+        (_name :: ComputeSecurityAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSeclist (TF.Ref s' (ResourceComputeSecurityAssociation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSeclist (TF.Ref s' (ComputeSecurityAssociationResource s)) (TF.Attr s P.Text) where
     computedSeclist =
-        (_seclist :: ResourceComputeSecurityAssociation s -> TF.Attr s P.Text)
+        (_seclist :: ComputeSecurityAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVcable (TF.Ref s' (ResourceComputeSecurityAssociation s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVcable (TF.Ref s' (ComputeSecurityAssociationResource s)) (TF.Attr s P.Text) where
     computedVcable =
-        (_vcable :: ResourceComputeSecurityAssociation s -> TF.Attr s P.Text)
+        (_vcable :: ComputeSecurityAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeSecurityAssociation :: TF.Resource P.OPC (ResourceComputeSecurityAssociation s)
-resourceComputeSecurityAssociation =
+computeSecurityAssociationResource :: TF.Resource P.OPC (ComputeSecurityAssociationResource s)
+computeSecurityAssociationResource =
     TF.newResource "opc_compute_security_association" $
-        ResourceComputeSecurityAssociation {
+        ComputeSecurityAssociationResource {
               _name = TF.Nil
             , _seclist = TF.Nil
             , _vcable = TF.Nil
@@ -1834,7 +1834,7 @@ resourceComputeSecurityAssociation =
 The @opc_compute_security_ip_list@ resource creates and manages a security
 IP list in an OPC identity domain.
 -}
-data ResourceComputeSecurityIpList s = ResourceComputeSecurityIpList {
+data ComputeSecurityIpListResource s = ComputeSecurityIpListResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) The description of the security ip list. -}
     , _ip_entries  :: !(TF.Attr s P.Text)
@@ -1843,47 +1843,47 @@ data ResourceComputeSecurityIpList s = ResourceComputeSecurityIpList {
     {- ^ (Required) The unique (within the identity domain) name of the security IP list. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeSecurityIpList s) where
-    toHCL ResourceComputeSecurityIpList{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeSecurityIpListResource s) where
+    toHCL ComputeSecurityIpListResource{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_entries" <$> TF.attribute _ip_entries
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDescription (ResourceComputeSecurityIpList s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeSecurityIpListResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeSecurityIpList s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeSecurityIpList s)
+        lens (_description :: ComputeSecurityIpListResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeSecurityIpListResource s)
 
-instance P.HasIpEntries (ResourceComputeSecurityIpList s) (TF.Attr s P.Text) where
+instance P.HasIpEntries (ComputeSecurityIpListResource s) (TF.Attr s P.Text) where
     ipEntries =
-        lens (_ip_entries :: ResourceComputeSecurityIpList s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_entries = a } :: ResourceComputeSecurityIpList s)
+        lens (_ip_entries :: ComputeSecurityIpListResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_entries = a } :: ComputeSecurityIpListResource s)
 
-instance P.HasName (ResourceComputeSecurityIpList s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeSecurityIpListResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeSecurityIpList s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeSecurityIpList s)
+        lens (_name :: ComputeSecurityIpListResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeSecurityIpListResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeSecurityIpList s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeSecurityIpListResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceComputeSecurityIpList s -> TF.Attr s P.Text)
+        (_description :: ComputeSecurityIpListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpEntries (TF.Ref s' (ResourceComputeSecurityIpList s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpEntries (TF.Ref s' (ComputeSecurityIpListResource s)) (TF.Attr s P.Text) where
     computedIpEntries =
-        (_ip_entries :: ResourceComputeSecurityIpList s -> TF.Attr s P.Text)
+        (_ip_entries :: ComputeSecurityIpListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeSecurityIpList s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSecurityIpListResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeSecurityIpList s -> TF.Attr s P.Text)
+        (_name :: ComputeSecurityIpListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeSecurityIpList :: TF.Resource P.OPC (ResourceComputeSecurityIpList s)
-resourceComputeSecurityIpList =
+computeSecurityIpListResource :: TF.Resource P.OPC (ComputeSecurityIpListResource s)
+computeSecurityIpListResource =
     TF.newResource "opc_compute_security_ip_list" $
-        ResourceComputeSecurityIpList {
+        ComputeSecurityIpListResource {
               _description = TF.Nil
             , _ip_entries = TF.Nil
             , _name = TF.Nil
@@ -1894,7 +1894,7 @@ resourceComputeSecurityIpList =
 The @opc_compute_security_list@ resource creates and manages a security list
 in an OPC identity domain.
 -}
-data ResourceComputeSecurityList s = ResourceComputeSecurityList {
+data ComputeSecurityListResource s = ComputeSecurityListResource {
       _name               :: !(TF.Attr s P.Text)
     {- ^ (Required) The unique (within the identity domain) name of the security list. -}
     , _output_cidr_policy :: !(TF.Attr s P.Text)
@@ -1903,47 +1903,47 @@ data ResourceComputeSecurityList s = ResourceComputeSecurityList {
     {- ^ (Required) The policy to apply to instances associated with this list. Must be one of @permit@ , @reject@ (packets are dropped but a reply is sent) and @deny@ (packets are dropped and no reply is sent). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeSecurityList s) where
-    toHCL ResourceComputeSecurityList{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeSecurityListResource s) where
+    toHCL ComputeSecurityListResource{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "output_cidr_policy" <$> TF.attribute _output_cidr_policy
         , TF.assign "policy" <$> TF.attribute _policy
         ]
 
-instance P.HasName (ResourceComputeSecurityList s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeSecurityListResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeSecurityList s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeSecurityList s)
+        lens (_name :: ComputeSecurityListResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeSecurityListResource s)
 
-instance P.HasOutputCidrPolicy (ResourceComputeSecurityList s) (TF.Attr s P.Text) where
+instance P.HasOutputCidrPolicy (ComputeSecurityListResource s) (TF.Attr s P.Text) where
     outputCidrPolicy =
-        lens (_output_cidr_policy :: ResourceComputeSecurityList s -> TF.Attr s P.Text)
-             (\s a -> s { _output_cidr_policy = a } :: ResourceComputeSecurityList s)
+        lens (_output_cidr_policy :: ComputeSecurityListResource s -> TF.Attr s P.Text)
+             (\s a -> s { _output_cidr_policy = a } :: ComputeSecurityListResource s)
 
-instance P.HasPolicy (ResourceComputeSecurityList s) (TF.Attr s P.Text) where
+instance P.HasPolicy (ComputeSecurityListResource s) (TF.Attr s P.Text) where
     policy =
-        lens (_policy :: ResourceComputeSecurityList s -> TF.Attr s P.Text)
-             (\s a -> s { _policy = a } :: ResourceComputeSecurityList s)
+        lens (_policy :: ComputeSecurityListResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policy = a } :: ComputeSecurityListResource s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeSecurityList s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSecurityListResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeSecurityList s -> TF.Attr s P.Text)
+        (_name :: ComputeSecurityListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOutputCidrPolicy (TF.Ref s' (ResourceComputeSecurityList s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOutputCidrPolicy (TF.Ref s' (ComputeSecurityListResource s)) (TF.Attr s P.Text) where
     computedOutputCidrPolicy =
-        (_output_cidr_policy :: ResourceComputeSecurityList s -> TF.Attr s P.Text)
+        (_output_cidr_policy :: ComputeSecurityListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (ResourceComputeSecurityList s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (ComputeSecurityListResource s)) (TF.Attr s P.Text) where
     computedPolicy =
-        (_policy :: ResourceComputeSecurityList s -> TF.Attr s P.Text)
+        (_policy :: ComputeSecurityListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeSecurityList :: TF.Resource P.OPC (ResourceComputeSecurityList s)
-resourceComputeSecurityList =
+computeSecurityListResource :: TF.Resource P.OPC (ComputeSecurityListResource s)
+computeSecurityListResource =
     TF.newResource "opc_compute_security_list" $
-        ResourceComputeSecurityList {
+        ComputeSecurityListResource {
               _name = TF.Nil
             , _output_cidr_policy = TF.Nil
             , _policy = TF.Nil
@@ -1954,7 +1954,7 @@ resourceComputeSecurityList =
 The @opc_compute_security_protocol@ resource creates and manages a security
 protocol in an OPC identity domain.
 -}
-data ResourceComputeSecurityProtocol s = ResourceComputeSecurityProtocol {
+data ComputeSecurityProtocolResource s = ComputeSecurityProtocolResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of the security protocol. -}
     , _dst_ports   :: !(TF.Attr s P.Text)
@@ -1969,8 +1969,8 @@ data ResourceComputeSecurityProtocol s = ResourceComputeSecurityProtocol {
     {- ^ (Optional) List of tags that may be applied to the security protocol. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeSecurityProtocol s) where
-    toHCL ResourceComputeSecurityProtocol{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeSecurityProtocolResource s) where
+    toHCL ComputeSecurityProtocolResource{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "dst_ports" <$> TF.attribute _dst_ports
         , TF.assign "ip_protocol" <$> TF.attribute _ip_protocol
@@ -1979,70 +1979,70 @@ instance TF.ToHCL (ResourceComputeSecurityProtocol s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasDescription (ResourceComputeSecurityProtocol s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeSecurityProtocolResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeSecurityProtocol s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeSecurityProtocol s)
+        lens (_description :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeSecurityProtocolResource s)
 
-instance P.HasDstPorts (ResourceComputeSecurityProtocol s) (TF.Attr s P.Text) where
+instance P.HasDstPorts (ComputeSecurityProtocolResource s) (TF.Attr s P.Text) where
     dstPorts =
-        lens (_dst_ports :: ResourceComputeSecurityProtocol s -> TF.Attr s P.Text)
-             (\s a -> s { _dst_ports = a } :: ResourceComputeSecurityProtocol s)
+        lens (_dst_ports :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _dst_ports = a } :: ComputeSecurityProtocolResource s)
 
-instance P.HasIpProtocol (ResourceComputeSecurityProtocol s) (TF.Attr s P.Text) where
+instance P.HasIpProtocol (ComputeSecurityProtocolResource s) (TF.Attr s P.Text) where
     ipProtocol =
-        lens (_ip_protocol :: ResourceComputeSecurityProtocol s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_protocol = a } :: ResourceComputeSecurityProtocol s)
+        lens (_ip_protocol :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_protocol = a } :: ComputeSecurityProtocolResource s)
 
-instance P.HasName (ResourceComputeSecurityProtocol s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeSecurityProtocolResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeSecurityProtocol s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeSecurityProtocol s)
+        lens (_name :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeSecurityProtocolResource s)
 
-instance P.HasSrcPorts (ResourceComputeSecurityProtocol s) (TF.Attr s P.Text) where
+instance P.HasSrcPorts (ComputeSecurityProtocolResource s) (TF.Attr s P.Text) where
     srcPorts =
-        lens (_src_ports :: ResourceComputeSecurityProtocol s -> TF.Attr s P.Text)
-             (\s a -> s { _src_ports = a } :: ResourceComputeSecurityProtocol s)
+        lens (_src_ports :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _src_ports = a } :: ComputeSecurityProtocolResource s)
 
-instance P.HasTags (ResourceComputeSecurityProtocol s) (TF.Attr s P.Text) where
+instance P.HasTags (ComputeSecurityProtocolResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ResourceComputeSecurityProtocol s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ResourceComputeSecurityProtocol s)
+        lens (_tags :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ComputeSecurityProtocolResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeSecurityProtocol s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeSecurityProtocolResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceComputeSecurityProtocol s -> TF.Attr s P.Text)
+        (_description :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDstPorts (TF.Ref s' (ResourceComputeSecurityProtocol s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDstPorts (TF.Ref s' (ComputeSecurityProtocolResource s)) (TF.Attr s P.Text) where
     computedDstPorts =
-        (_dst_ports :: ResourceComputeSecurityProtocol s -> TF.Attr s P.Text)
+        (_dst_ports :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpProtocol (TF.Ref s' (ResourceComputeSecurityProtocol s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpProtocol (TF.Ref s' (ComputeSecurityProtocolResource s)) (TF.Attr s P.Text) where
     computedIpProtocol =
-        (_ip_protocol :: ResourceComputeSecurityProtocol s -> TF.Attr s P.Text)
+        (_ip_protocol :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeSecurityProtocol s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSecurityProtocolResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeSecurityProtocol s -> TF.Attr s P.Text)
+        (_name :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSrcPorts (TF.Ref s' (ResourceComputeSecurityProtocol s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSrcPorts (TF.Ref s' (ComputeSecurityProtocolResource s)) (TF.Attr s P.Text) where
     computedSrcPorts =
-        (_src_ports :: ResourceComputeSecurityProtocol s -> TF.Attr s P.Text)
+        (_src_ports :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceComputeSecurityProtocol s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeSecurityProtocolResource s)) (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: ResourceComputeSecurityProtocol s -> TF.Attr s P.Text)
+        (_tags :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeSecurityProtocol :: TF.Resource P.OPC (ResourceComputeSecurityProtocol s)
-resourceComputeSecurityProtocol =
+computeSecurityProtocolResource :: TF.Resource P.OPC (ComputeSecurityProtocolResource s)
+computeSecurityProtocolResource =
     TF.newResource "opc_compute_security_protocol" $
-        ResourceComputeSecurityProtocol {
+        ComputeSecurityProtocolResource {
               _description = TF.Nil
             , _dst_ports = TF.Nil
             , _ip_protocol = TF.Nil
@@ -2056,7 +2056,7 @@ resourceComputeSecurityProtocol =
 The @opc_compute_security_rule@ resource creates and manages a security rule
 in an OPC identity domain.
 -}
-data ResourceComputeSecurityRule s = ResourceComputeSecurityRule {
+data ComputeSecurityRuleResource s = ComputeSecurityRuleResource {
       _acl                     :: !(TF.Attr s P.Text)
     {- ^ (Optional) Name of the ACL that contains this security rule. -}
     , _description             :: !(TF.Attr s P.Text)
@@ -2081,8 +2081,8 @@ data ResourceComputeSecurityRule s = ResourceComputeSecurityRule {
     {- ^ (Optional) List of tags that may be applied to the security rule. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeSecurityRule s) where
-    toHCL ResourceComputeSecurityRule{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeSecurityRuleResource s) where
+    toHCL ComputeSecurityRuleResource{..} = TF.inline $ catMaybes
         [ TF.assign "acl" <$> TF.attribute _acl
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "disabled" <$> TF.attribute _disabled
@@ -2096,123 +2096,123 @@ instance TF.ToHCL (ResourceComputeSecurityRule s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasAcl (ResourceComputeSecurityRule s) (TF.Attr s P.Text) where
+instance P.HasAcl (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     acl =
-        lens (_acl :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
-             (\s a -> s { _acl = a } :: ResourceComputeSecurityRule s)
+        lens (_acl :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _acl = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasDescription (ResourceComputeSecurityRule s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeSecurityRule s)
+        lens (_description :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasDisabled (ResourceComputeSecurityRule s) (TF.Attr s P.Text) where
+instance P.HasDisabled (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     disabled =
-        lens (_disabled :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
-             (\s a -> s { _disabled = a } :: ResourceComputeSecurityRule s)
+        lens (_disabled :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _disabled = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasDstIpAddressPrefixes (ResourceComputeSecurityRule s) (TF.Attr s P.Text) where
+instance P.HasDstIpAddressPrefixes (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     dstIpAddressPrefixes =
-        lens (_dst_ip_address_prefixes :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
-             (\s a -> s { _dst_ip_address_prefixes = a } :: ResourceComputeSecurityRule s)
+        lens (_dst_ip_address_prefixes :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _dst_ip_address_prefixes = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasDstVnicSet (ResourceComputeSecurityRule s) (TF.Attr s P.Text) where
+instance P.HasDstVnicSet (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     dstVnicSet =
-        lens (_dst_vnic_set :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
-             (\s a -> s { _dst_vnic_set = a } :: ResourceComputeSecurityRule s)
+        lens (_dst_vnic_set :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _dst_vnic_set = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasFlowDirection (ResourceComputeSecurityRule s) (TF.Attr s P.Text) where
+instance P.HasFlowDirection (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     flowDirection =
-        lens (_flow_direction :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
-             (\s a -> s { _flow_direction = a } :: ResourceComputeSecurityRule s)
+        lens (_flow_direction :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _flow_direction = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasName (ResourceComputeSecurityRule s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeSecurityRule s)
+        lens (_name :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasSecurityProtocols (ResourceComputeSecurityRule s) (TF.Attr s P.Text) where
+instance P.HasSecurityProtocols (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     securityProtocols =
-        lens (_security_protocols :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
-             (\s a -> s { _security_protocols = a } :: ResourceComputeSecurityRule s)
+        lens (_security_protocols :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _security_protocols = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasSrcIpAddressPrefixes (ResourceComputeSecurityRule s) (TF.Attr s P.Text) where
+instance P.HasSrcIpAddressPrefixes (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     srcIpAddressPrefixes =
-        lens (_src_ip_address_prefixes :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
-             (\s a -> s { _src_ip_address_prefixes = a } :: ResourceComputeSecurityRule s)
+        lens (_src_ip_address_prefixes :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _src_ip_address_prefixes = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasSrcVnicSet (ResourceComputeSecurityRule s) (TF.Attr s P.Text) where
+instance P.HasSrcVnicSet (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     srcVnicSet =
-        lens (_src_vnic_set :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
-             (\s a -> s { _src_vnic_set = a } :: ResourceComputeSecurityRule s)
+        lens (_src_vnic_set :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _src_vnic_set = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasTags (ResourceComputeSecurityRule s) (TF.Attr s P.Text) where
+instance P.HasTags (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ResourceComputeSecurityRule s)
+        lens (_tags :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ComputeSecurityRuleResource s)
 
-instance s ~ s' => P.HasComputedAcl (TF.Ref s' (ResourceComputeSecurityRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAcl (TF.Ref s' (ComputeSecurityRuleResource s)) (TF.Attr s P.Text) where
     computedAcl =
-        (_acl :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
+        (_acl :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeSecurityRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeSecurityRuleResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
+        (_description :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDisabled (TF.Ref s' (ResourceComputeSecurityRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisabled (TF.Ref s' (ComputeSecurityRuleResource s)) (TF.Attr s P.Text) where
     computedDisabled =
-        (_disabled :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
+        (_disabled :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDstIpAddressPrefixes (TF.Ref s' (ResourceComputeSecurityRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDstIpAddressPrefixes (TF.Ref s' (ComputeSecurityRuleResource s)) (TF.Attr s P.Text) where
     computedDstIpAddressPrefixes =
-        (_dst_ip_address_prefixes :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
+        (_dst_ip_address_prefixes :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDstVnicSet (TF.Ref s' (ResourceComputeSecurityRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDstVnicSet (TF.Ref s' (ComputeSecurityRuleResource s)) (TF.Attr s P.Text) where
     computedDstVnicSet =
-        (_dst_vnic_set :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
+        (_dst_vnic_set :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFlowDirection (TF.Ref s' (ResourceComputeSecurityRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFlowDirection (TF.Ref s' (ComputeSecurityRuleResource s)) (TF.Attr s P.Text) where
     computedFlowDirection =
-        (_flow_direction :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
+        (_flow_direction :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeSecurityRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSecurityRuleResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
+        (_name :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSecurityProtocols (TF.Ref s' (ResourceComputeSecurityRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecurityProtocols (TF.Ref s' (ComputeSecurityRuleResource s)) (TF.Attr s P.Text) where
     computedSecurityProtocols =
-        (_security_protocols :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
+        (_security_protocols :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSrcIpAddressPrefixes (TF.Ref s' (ResourceComputeSecurityRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSrcIpAddressPrefixes (TF.Ref s' (ComputeSecurityRuleResource s)) (TF.Attr s P.Text) where
     computedSrcIpAddressPrefixes =
-        (_src_ip_address_prefixes :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
+        (_src_ip_address_prefixes :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSrcVnicSet (TF.Ref s' (ResourceComputeSecurityRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSrcVnicSet (TF.Ref s' (ComputeSecurityRuleResource s)) (TF.Attr s P.Text) where
     computedSrcVnicSet =
-        (_src_vnic_set :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
+        (_src_vnic_set :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceComputeSecurityRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeSecurityRuleResource s)) (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: ResourceComputeSecurityRule s -> TF.Attr s P.Text)
+        (_tags :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUri (TF.Ref s' (ResourceComputeSecurityRule s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeSecurityRuleResource s)) (TF.Attr s P.Text) where
     computedUri x = TF.compute (TF.refKey x) "uri"
 
-resourceComputeSecurityRule :: TF.Resource P.OPC (ResourceComputeSecurityRule s)
-resourceComputeSecurityRule =
+computeSecurityRuleResource :: TF.Resource P.OPC (ComputeSecurityRuleResource s)
+computeSecurityRuleResource =
     TF.newResource "opc_compute_security_rule" $
-        ResourceComputeSecurityRule {
+        ComputeSecurityRuleResource {
               _acl = TF.Nil
             , _description = TF.Nil
             , _disabled = TF.Nil
@@ -2231,7 +2231,7 @@ resourceComputeSecurityRule =
 The @opc_compute_ssh_key@ resource creates and manages an SSH key in an OPC
 identity domain.
 -}
-data ResourceComputeSshKey s = ResourceComputeSshKey {
+data ComputeSshKeyResource s = ComputeSshKeyResource {
       _enabled :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether or not the key is enabled. This is useful if you want to temporarily disable an SSH key, without removing it entirely from your Terraform resource definition. Defaults to @true@ -}
     , _key     :: !(TF.Attr s P.Text)
@@ -2240,50 +2240,110 @@ data ResourceComputeSshKey s = ResourceComputeSshKey {
     {- ^ (Required) The unique (within this identity domain) name of the SSH key. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeSshKey s) where
-    toHCL ResourceComputeSshKey{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeSshKeyResource s) where
+    toHCL ComputeSshKeyResource{..} = TF.inline $ catMaybes
         [ TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "key" <$> TF.attribute _key
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasEnabled (ResourceComputeSshKey s) (TF.Attr s P.Text) where
+instance P.HasEnabled (ComputeSshKeyResource s) (TF.Attr s P.Text) where
     enabled =
-        lens (_enabled :: ResourceComputeSshKey s -> TF.Attr s P.Text)
-             (\s a -> s { _enabled = a } :: ResourceComputeSshKey s)
+        lens (_enabled :: ComputeSshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: ComputeSshKeyResource s)
 
-instance P.HasKey (ResourceComputeSshKey s) (TF.Attr s P.Text) where
+instance P.HasKey (ComputeSshKeyResource s) (TF.Attr s P.Text) where
     key =
-        lens (_key :: ResourceComputeSshKey s -> TF.Attr s P.Text)
-             (\s a -> s { _key = a } :: ResourceComputeSshKey s)
+        lens (_key :: ComputeSshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _key = a } :: ComputeSshKeyResource s)
 
-instance P.HasName (ResourceComputeSshKey s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeSshKeyResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeSshKey s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeSshKey s)
+        lens (_name :: ComputeSshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeSshKeyResource s)
 
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ResourceComputeSshKey s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeSshKeyResource s)) (TF.Attr s P.Text) where
     computedEnabled =
-        (_enabled :: ResourceComputeSshKey s -> TF.Attr s P.Text)
+        (_enabled :: ComputeSshKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedKey (TF.Ref s' (ResourceComputeSshKey s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (ComputeSshKeyResource s)) (TF.Attr s P.Text) where
     computedKey =
-        (_key :: ResourceComputeSshKey s -> TF.Attr s P.Text)
+        (_key :: ComputeSshKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeSshKey s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSshKeyResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeSshKey s -> TF.Attr s P.Text)
+        (_name :: ComputeSshKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeSshKey :: TF.Resource P.OPC (ResourceComputeSshKey s)
-resourceComputeSshKey =
+computeSshKeyResource :: TF.Resource P.OPC (ComputeSshKeyResource s)
+computeSshKeyResource =
     TF.newResource "opc_compute_ssh_key" $
-        ResourceComputeSshKey {
+        ComputeSshKeyResource {
               _enabled = TF.Nil
             , _key = TF.Nil
             , _name = TF.Nil
+            }
+
+{- | The @opc_compute_storage_volume_attachment@ OPC resource.
+
+The @opc_compute_storage_volume_attachment@ resource creates and manages a
+storage volume attachment in an OPC identity domain.
+-}
+data ComputeStorageVolumeAttachmentResource s = ComputeStorageVolumeAttachmentResource {
+      _index          :: !(TF.Attr s P.Text)
+    {- ^ (Required) The index on the instance that the storage volume will be attached to. -}
+    , _instance'      :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the instance the volume will be attached to. -}
+    , _storage_volume :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the storage volume that will be attached to the instance -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeStorageVolumeAttachmentResource s) where
+    toHCL ComputeStorageVolumeAttachmentResource{..} = TF.inline $ catMaybes
+        [ TF.assign "index" <$> TF.attribute _index
+        , TF.assign "instance" <$> TF.attribute _instance'
+        , TF.assign "storage_volume" <$> TF.attribute _storage_volume
+        ]
+
+instance P.HasIndex (ComputeStorageVolumeAttachmentResource s) (TF.Attr s P.Text) where
+    index =
+        lens (_index :: ComputeStorageVolumeAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _index = a } :: ComputeStorageVolumeAttachmentResource s)
+
+instance P.HasInstance' (ComputeStorageVolumeAttachmentResource s) (TF.Attr s P.Text) where
+    instance' =
+        lens (_instance' :: ComputeStorageVolumeAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _instance' = a } :: ComputeStorageVolumeAttachmentResource s)
+
+instance P.HasStorageVolume (ComputeStorageVolumeAttachmentResource s) (TF.Attr s P.Text) where
+    storageVolume =
+        lens (_storage_volume :: ComputeStorageVolumeAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _storage_volume = a } :: ComputeStorageVolumeAttachmentResource s)
+
+instance s ~ s' => P.HasComputedIndex (TF.Ref s' (ComputeStorageVolumeAttachmentResource s)) (TF.Attr s P.Text) where
+    computedIndex =
+        (_index :: ComputeStorageVolumeAttachmentResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedInstance' (TF.Ref s' (ComputeStorageVolumeAttachmentResource s)) (TF.Attr s P.Text) where
+    computedInstance' =
+        (_instance' :: ComputeStorageVolumeAttachmentResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedStorageVolume (TF.Ref s' (ComputeStorageVolumeAttachmentResource s)) (TF.Attr s P.Text) where
+    computedStorageVolume =
+        (_storage_volume :: ComputeStorageVolumeAttachmentResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+computeStorageVolumeAttachmentResource :: TF.Resource P.OPC (ComputeStorageVolumeAttachmentResource s)
+computeStorageVolumeAttachmentResource =
+    TF.newResource "opc_compute_storage_volume_attachment" $
+        ComputeStorageVolumeAttachmentResource {
+              _index = TF.Nil
+            , _instance' = TF.Nil
+            , _storage_volume = TF.Nil
             }
 
 {- | The @opc_compute_storage_volume@ OPC resource.
@@ -2295,7 +2355,7 @@ volume just as easily as it can create it. To avoid costly accidents,
 consider setting </docs/configuration/resources.html#prevent_destroy> on
 your storage volume resources as an extra safety measure.
 -}
-data ResourceComputeStorageVolume s = ResourceComputeStorageVolume {
+data ComputeStorageVolumeResource s = ComputeStorageVolumeResource {
       _bootable         :: !(TF.Attr s P.Text)
     {- ^ (Optional) Is the Volume Bootable? Defaults to @false@ . -}
     , _description      :: !(TF.Attr s P.Text)
@@ -2320,8 +2380,8 @@ data ResourceComputeStorageVolume s = ResourceComputeStorageVolume {
     {- ^ (Optional) Comma-separated strings that tag the storage volume. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeStorageVolume s) where
-    toHCL ResourceComputeStorageVolume{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeStorageVolumeResource s) where
+    toHCL ComputeStorageVolumeResource{..} = TF.inline $ catMaybes
         [ TF.assign "bootable" <$> TF.attribute _bootable
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "image_list" <$> TF.attribute _image_list
@@ -2335,144 +2395,144 @@ instance TF.ToHCL (ResourceComputeStorageVolume s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasBootable (ResourceComputeStorageVolume s) (TF.Attr s P.Text) where
+instance P.HasBootable (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     bootable =
-        lens (_bootable :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
-             (\s a -> s { _bootable = a } :: ResourceComputeStorageVolume s)
+        lens (_bootable :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bootable = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasDescription (ResourceComputeStorageVolume s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeStorageVolume s)
+        lens (_description :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasImageList (ResourceComputeStorageVolume s) (TF.Attr s P.Text) where
+instance P.HasImageList (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     imageList =
-        lens (_image_list :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
-             (\s a -> s { _image_list = a } :: ResourceComputeStorageVolume s)
+        lens (_image_list :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _image_list = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasImageListEntry (ResourceComputeStorageVolume s) (TF.Attr s P.Text) where
+instance P.HasImageListEntry (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     imageListEntry =
-        lens (_image_list_entry :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
-             (\s a -> s { _image_list_entry = a } :: ResourceComputeStorageVolume s)
+        lens (_image_list_entry :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _image_list_entry = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasName (ResourceComputeStorageVolume s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeStorageVolume s)
+        lens (_name :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasSize (ResourceComputeStorageVolume s) (TF.Attr s P.Text) where
+instance P.HasSize (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     size =
-        lens (_size :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: ResourceComputeStorageVolume s)
+        lens (_size :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _size = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasSnapshot (ResourceComputeStorageVolume s) (TF.Attr s P.Text) where
+instance P.HasSnapshot (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     snapshot =
-        lens (_snapshot :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
-             (\s a -> s { _snapshot = a } :: ResourceComputeStorageVolume s)
+        lens (_snapshot :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _snapshot = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasSnapshotAccount (ResourceComputeStorageVolume s) (TF.Attr s P.Text) where
+instance P.HasSnapshotAccount (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     snapshotAccount =
-        lens (_snapshot_account :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
-             (\s a -> s { _snapshot_account = a } :: ResourceComputeStorageVolume s)
+        lens (_snapshot_account :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _snapshot_account = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasSnapshotId (ResourceComputeStorageVolume s) (TF.Attr s P.Text) where
+instance P.HasSnapshotId (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     snapshotId =
-        lens (_snapshot_id :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
-             (\s a -> s { _snapshot_id = a } :: ResourceComputeStorageVolume s)
+        lens (_snapshot_id :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _snapshot_id = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasStorageType (ResourceComputeStorageVolume s) (TF.Attr s P.Text) where
+instance P.HasStorageType (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     storageType =
-        lens (_storage_type :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
-             (\s a -> s { _storage_type = a } :: ResourceComputeStorageVolume s)
+        lens (_storage_type :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _storage_type = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasTags (ResourceComputeStorageVolume s) (TF.Attr s P.Text) where
+instance P.HasTags (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ResourceComputeStorageVolume s)
+        lens (_tags :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ComputeStorageVolumeResource s)
 
-instance s ~ s' => P.HasComputedBootable (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBootable (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedBootable =
-        (_bootable :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
+        (_bootable :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
+        (_description :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
 
-instance s ~ s' => P.HasComputedImageList (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImageList (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedImageList =
-        (_image_list :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
+        (_image_list :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedImageListEntry (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImageListEntry (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedImageListEntry =
-        (_image_list_entry :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
+        (_image_list_entry :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMachineImage (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMachineImage (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedMachineImage x = TF.compute (TF.refKey x) "machine_image"
 
-instance s ~ s' => P.HasComputedManaged (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedManaged (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedManaged x = TF.compute (TF.refKey x) "managed"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
+        (_name :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedPlatform x = TF.compute (TF.refKey x) "platform"
 
-instance s ~ s' => P.HasComputedReadonly (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedReadonly (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedReadonly x = TF.compute (TF.refKey x) "readonly"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedSize =
-        (_size :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
+        (_size :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSnapshot (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSnapshot (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedSnapshot =
-        (_snapshot :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
+        (_snapshot :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSnapshotAccount (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSnapshotAccount (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedSnapshotAccount =
-        (_snapshot_account :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
+        (_snapshot_account :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedSnapshotId =
-        (_snapshot_id :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
+        (_snapshot_id :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance s ~ s' => P.HasComputedStoragePool (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStoragePool (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedStoragePool x = TF.compute (TF.refKey x) "storage_pool"
 
-instance s ~ s' => P.HasComputedStorageType (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStorageType (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedStorageType =
-        (_storage_type :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
+        (_storage_type :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: ResourceComputeStorageVolume s -> TF.Attr s P.Text)
+        (_tags :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUri (TF.Ref s' (ResourceComputeStorageVolume s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
     computedUri x = TF.compute (TF.refKey x) "uri"
 
-resourceComputeStorageVolume :: TF.Resource P.OPC (ResourceComputeStorageVolume s)
-resourceComputeStorageVolume =
+computeStorageVolumeResource :: TF.Resource P.OPC (ComputeStorageVolumeResource s)
+computeStorageVolumeResource =
     TF.newResource "opc_compute_storage_volume" $
-        ResourceComputeStorageVolume {
+        ComputeStorageVolumeResource {
               _bootable = TF.Nil
             , _description = TF.Nil
             , _image_list = TF.Nil
@@ -2486,72 +2546,12 @@ resourceComputeStorageVolume =
             , _tags = TF.Nil
             }
 
-{- | The @opc_compute_storage_volume_attachment@ OPC resource.
-
-The @opc_compute_storage_volume_attachment@ resource creates and manages a
-storage volume attachment in an OPC identity domain.
--}
-data ResourceComputeStorageVolumeAttachment s = ResourceComputeStorageVolumeAttachment {
-      _index          :: !(TF.Attr s P.Text)
-    {- ^ (Required) The index on the instance that the storage volume will be attached to. -}
-    , _instance'      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the instance the volume will be attached to. -}
-    , _storage_volume :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the storage volume that will be attached to the instance -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ResourceComputeStorageVolumeAttachment s) where
-    toHCL ResourceComputeStorageVolumeAttachment{..} = TF.inline $ catMaybes
-        [ TF.assign "index" <$> TF.attribute _index
-        , TF.assign "instance" <$> TF.attribute _instance'
-        , TF.assign "storage_volume" <$> TF.attribute _storage_volume
-        ]
-
-instance P.HasIndex (ResourceComputeStorageVolumeAttachment s) (TF.Attr s P.Text) where
-    index =
-        lens (_index :: ResourceComputeStorageVolumeAttachment s -> TF.Attr s P.Text)
-             (\s a -> s { _index = a } :: ResourceComputeStorageVolumeAttachment s)
-
-instance P.HasInstance' (ResourceComputeStorageVolumeAttachment s) (TF.Attr s P.Text) where
-    instance' =
-        lens (_instance' :: ResourceComputeStorageVolumeAttachment s -> TF.Attr s P.Text)
-             (\s a -> s { _instance' = a } :: ResourceComputeStorageVolumeAttachment s)
-
-instance P.HasStorageVolume (ResourceComputeStorageVolumeAttachment s) (TF.Attr s P.Text) where
-    storageVolume =
-        lens (_storage_volume :: ResourceComputeStorageVolumeAttachment s -> TF.Attr s P.Text)
-             (\s a -> s { _storage_volume = a } :: ResourceComputeStorageVolumeAttachment s)
-
-instance s ~ s' => P.HasComputedIndex (TF.Ref s' (ResourceComputeStorageVolumeAttachment s)) (TF.Attr s P.Text) where
-    computedIndex =
-        (_index :: ResourceComputeStorageVolumeAttachment s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedInstance' (TF.Ref s' (ResourceComputeStorageVolumeAttachment s)) (TF.Attr s P.Text) where
-    computedInstance' =
-        (_instance' :: ResourceComputeStorageVolumeAttachment s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedStorageVolume (TF.Ref s' (ResourceComputeStorageVolumeAttachment s)) (TF.Attr s P.Text) where
-    computedStorageVolume =
-        (_storage_volume :: ResourceComputeStorageVolumeAttachment s -> TF.Attr s P.Text)
-            . TF.refValue
-
-resourceComputeStorageVolumeAttachment :: TF.Resource P.OPC (ResourceComputeStorageVolumeAttachment s)
-resourceComputeStorageVolumeAttachment =
-    TF.newResource "opc_compute_storage_volume_attachment" $
-        ResourceComputeStorageVolumeAttachment {
-              _index = TF.Nil
-            , _instance' = TF.Nil
-            , _storage_volume = TF.Nil
-            }
-
 {- | The @opc_compute_storage_volume_snapshot@ OPC resource.
 
 The @opc_compute_storage_volume_snapshot@ resource creates and manages a
 storage volume snapshot in an OPC identity domain.
 -}
-data ResourceComputeStorageVolumeSnapshot s = ResourceComputeStorageVolumeSnapshot {
+data ComputeStorageVolumeSnapshotResource s = ComputeStorageVolumeSnapshotResource {
       _collocated             :: !(TF.Attr s P.Text)
     {- ^ (Optional) Boolean specifying whether the snapshot is collocated or remote. Defaults to @false@ . -}
     , _description            :: !(TF.Attr s P.Text)
@@ -2566,8 +2566,8 @@ data ResourceComputeStorageVolumeSnapshot s = ResourceComputeStorageVolumeSnapsh
     {- ^ (Required) The name of the storage volume to create the snapshot from. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeStorageVolumeSnapshot s) where
-    toHCL ResourceComputeStorageVolumeSnapshot{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeStorageVolumeSnapshotResource s) where
+    toHCL ComputeStorageVolumeSnapshotResource{..} = TF.inline $ catMaybes
         [ TF.assign "collocated" <$> TF.attribute _collocated
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -2576,106 +2576,106 @@ instance TF.ToHCL (ResourceComputeStorageVolumeSnapshot s) where
         , TF.assign "volume_name" <$> TF.attribute _volume_name
         ]
 
-instance P.HasCollocated (ResourceComputeStorageVolumeSnapshot s) (TF.Attr s P.Text) where
+instance P.HasCollocated (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     collocated =
-        lens (_collocated :: ResourceComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
-             (\s a -> s { _collocated = a } :: ResourceComputeStorageVolumeSnapshot s)
+        lens (_collocated :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
+             (\s a -> s { _collocated = a } :: ComputeStorageVolumeSnapshotResource s)
 
-instance P.HasDescription (ResourceComputeStorageVolumeSnapshot s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeStorageVolumeSnapshot s)
+        lens (_description :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeStorageVolumeSnapshotResource s)
 
-instance P.HasName (ResourceComputeStorageVolumeSnapshot s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeStorageVolumeSnapshot s)
+        lens (_name :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeStorageVolumeSnapshotResource s)
 
-instance P.HasParentVolumeBootable (ResourceComputeStorageVolumeSnapshot s) (TF.Attr s P.Text) where
+instance P.HasParentVolumeBootable (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     parentVolumeBootable =
-        lens (_parent_volume_bootable :: ResourceComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
-             (\s a -> s { _parent_volume_bootable = a } :: ResourceComputeStorageVolumeSnapshot s)
+        lens (_parent_volume_bootable :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
+             (\s a -> s { _parent_volume_bootable = a } :: ComputeStorageVolumeSnapshotResource s)
 
-instance P.HasTags (ResourceComputeStorageVolumeSnapshot s) (TF.Attr s P.Text) where
+instance P.HasTags (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ResourceComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ResourceComputeStorageVolumeSnapshot s)
+        lens (_tags :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ComputeStorageVolumeSnapshotResource s)
 
-instance P.HasVolumeName (ResourceComputeStorageVolumeSnapshot s) (TF.Attr s P.Text) where
+instance P.HasVolumeName (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     volumeName =
-        lens (_volume_name :: ResourceComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
-             (\s a -> s { _volume_name = a } :: ResourceComputeStorageVolumeSnapshot s)
+        lens (_volume_name :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
+             (\s a -> s { _volume_name = a } :: ComputeStorageVolumeSnapshotResource s)
 
-instance s ~ s' => P.HasComputedAccount (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccount (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedAccount x = TF.compute (TF.refKey x) "account"
 
-instance s ~ s' => P.HasComputedCollocated (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCollocated (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedCollocated =
-        (_collocated :: ResourceComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
+        (_collocated :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
+        (_description :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMachineImageName (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMachineImageName (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedMachineImageName x = TF.compute (TF.refKey x) "machine_image_name"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
+        (_name :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedParentVolumeBootable (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedParentVolumeBootable (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedParentVolumeBootable =
-        (_parent_volume_bootable :: ResourceComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
+        (_parent_volume_bootable :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedPlatform x = TF.compute (TF.refKey x) "platform"
 
-instance s ~ s' => P.HasComputedProperty (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProperty (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedProperty x = TF.compute (TF.refKey x) "property"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
-instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
 
-instance s ~ s' => P.HasComputedSnapshotTimestamp (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSnapshotTimestamp (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedSnapshotTimestamp x = TF.compute (TF.refKey x) "snapshot_timestamp"
 
-instance s ~ s' => P.HasComputedStartTimestamp (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStartTimestamp (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedStartTimestamp x = TF.compute (TF.refKey x) "start_timestamp"
 
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance s ~ s' => P.HasComputedStatusDetail (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatusDetail (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedStatusDetail x = TF.compute (TF.refKey x) "status_detail"
 
-instance s ~ s' => P.HasComputedStatusTimestamp (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatusTimestamp (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedStatusTimestamp x = TF.compute (TF.refKey x) "status_timestamp"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: ResourceComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
+        (_tags :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUri (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedUri x = TF.compute (TF.refKey x) "uri"
 
-instance s ~ s' => P.HasComputedVolumeName (TF.Ref s' (ResourceComputeStorageVolumeSnapshot s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVolumeName (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
     computedVolumeName =
-        (_volume_name :: ResourceComputeStorageVolumeSnapshot s -> TF.Attr s P.Text)
+        (_volume_name :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeStorageVolumeSnapshot :: TF.Resource P.OPC (ResourceComputeStorageVolumeSnapshot s)
-resourceComputeStorageVolumeSnapshot =
+computeStorageVolumeSnapshotResource :: TF.Resource P.OPC (ComputeStorageVolumeSnapshotResource s)
+computeStorageVolumeSnapshotResource =
     TF.newResource "opc_compute_storage_volume_snapshot" $
-        ResourceComputeStorageVolumeSnapshot {
+        ComputeStorageVolumeSnapshotResource {
               _collocated = TF.Nil
             , _description = TF.Nil
             , _name = TF.Nil
@@ -2689,7 +2689,7 @@ resourceComputeStorageVolumeSnapshot =
 The @opc_compute_vnic_set@ resource creates and manages a virtual NIC set in
 an OPC identity domain.
 -}
-data ResourceComputeVnicSet s = ResourceComputeVnicSet {
+data ComputeVnicSetResource s = ComputeVnicSetResource {
       _applied_acls :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of the ACLs to apply to the virtual nics in the set. -}
     , _description  :: !(TF.Attr s P.Text)
@@ -2702,8 +2702,8 @@ data ResourceComputeVnicSet s = ResourceComputeVnicSet {
     {- ^ (Optional) List of virtual NICs associated with this virtual NIC set. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceComputeVnicSet s) where
-    toHCL ResourceComputeVnicSet{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ComputeVnicSetResource s) where
+    toHCL ComputeVnicSetResource{..} = TF.inline $ catMaybes
         [ TF.assign "applied_acls" <$> TF.attribute _applied_acls
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -2711,60 +2711,60 @@ instance TF.ToHCL (ResourceComputeVnicSet s) where
         , TF.assign "virtual_nics" <$> TF.attribute _virtual_nics
         ]
 
-instance P.HasAppliedAcls (ResourceComputeVnicSet s) (TF.Attr s P.Text) where
+instance P.HasAppliedAcls (ComputeVnicSetResource s) (TF.Attr s P.Text) where
     appliedAcls =
-        lens (_applied_acls :: ResourceComputeVnicSet s -> TF.Attr s P.Text)
-             (\s a -> s { _applied_acls = a } :: ResourceComputeVnicSet s)
+        lens (_applied_acls :: ComputeVnicSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _applied_acls = a } :: ComputeVnicSetResource s)
 
-instance P.HasDescription (ResourceComputeVnicSet s) (TF.Attr s P.Text) where
+instance P.HasDescription (ComputeVnicSetResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceComputeVnicSet s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceComputeVnicSet s)
+        lens (_description :: ComputeVnicSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ComputeVnicSetResource s)
 
-instance P.HasName (ResourceComputeVnicSet s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeVnicSetResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceComputeVnicSet s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceComputeVnicSet s)
+        lens (_name :: ComputeVnicSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeVnicSetResource s)
 
-instance P.HasTags (ResourceComputeVnicSet s) (TF.Attr s P.Text) where
+instance P.HasTags (ComputeVnicSetResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ResourceComputeVnicSet s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ResourceComputeVnicSet s)
+        lens (_tags :: ComputeVnicSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ComputeVnicSetResource s)
 
-instance P.HasVirtualNics (ResourceComputeVnicSet s) (TF.Attr s P.Text) where
+instance P.HasVirtualNics (ComputeVnicSetResource s) (TF.Attr s P.Text) where
     virtualNics =
-        lens (_virtual_nics :: ResourceComputeVnicSet s -> TF.Attr s P.Text)
-             (\s a -> s { _virtual_nics = a } :: ResourceComputeVnicSet s)
+        lens (_virtual_nics :: ComputeVnicSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _virtual_nics = a } :: ComputeVnicSetResource s)
 
-instance s ~ s' => P.HasComputedAppliedAcls (TF.Ref s' (ResourceComputeVnicSet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAppliedAcls (TF.Ref s' (ComputeVnicSetResource s)) (TF.Attr s P.Text) where
     computedAppliedAcls =
-        (_applied_acls :: ResourceComputeVnicSet s -> TF.Attr s P.Text)
+        (_applied_acls :: ComputeVnicSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceComputeVnicSet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeVnicSetResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceComputeVnicSet s -> TF.Attr s P.Text)
+        (_description :: ComputeVnicSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceComputeVnicSet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeVnicSetResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceComputeVnicSet s -> TF.Attr s P.Text)
+        (_name :: ComputeVnicSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourceComputeVnicSet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeVnicSetResource s)) (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: ResourceComputeVnicSet s -> TF.Attr s P.Text)
+        (_tags :: ComputeVnicSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVirtualNics (TF.Ref s' (ResourceComputeVnicSet s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVirtualNics (TF.Ref s' (ComputeVnicSetResource s)) (TF.Attr s P.Text) where
     computedVirtualNics =
-        (_virtual_nics :: ResourceComputeVnicSet s -> TF.Attr s P.Text)
+        (_virtual_nics :: ComputeVnicSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceComputeVnicSet :: TF.Resource P.OPC (ResourceComputeVnicSet s)
-resourceComputeVnicSet =
+computeVnicSetResource :: TF.Resource P.OPC (ComputeVnicSetResource s)
+computeVnicSetResource =
     TF.newResource "opc_compute_vnic_set" $
-        ResourceComputeVnicSet {
+        ComputeVnicSetResource {
               _applied_acls = TF.Nil
             , _description = TF.Nil
             , _name = TF.Nil
@@ -2778,7 +2778,7 @@ Creates and manages a Container in the OPC Storage Domain.
 @storage_endpoint@ must be set in the provider or environment to manage
 these resources.
 -}
-data ResourceStorageContainer s = ResourceStorageContainer {
+data StorageContainerResource s = StorageContainerResource {
       _allowed_origins :: !(TF.Attr s P.Text)
     {- ^ (Optional) List of origins that are allowed to make cross-origin requests. -}
     , _exposed_headers :: !(TF.Attr s P.Text)
@@ -2803,8 +2803,8 @@ data ResourceStorageContainer s = ResourceStorageContainer {
     {- ^ (Optional) The list of ACLs that grant write access. See <#setting-container-acls> . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceStorageContainer s) where
-    toHCL ResourceStorageContainer{..} = TF.inline $ catMaybes
+instance TF.ToHCL (StorageContainerResource s) where
+    toHCL StorageContainerResource{..} = TF.inline $ catMaybes
         [ TF.assign "allowed_origins" <$> TF.attribute _allowed_origins
         , TF.assign "exposed_headers" <$> TF.attribute _exposed_headers
         , TF.assign "max_age" <$> TF.attribute _max_age
@@ -2818,120 +2818,120 @@ instance TF.ToHCL (ResourceStorageContainer s) where
         , TF.assign "write_acls" <$> TF.attribute _write_acls
         ]
 
-instance P.HasAllowedOrigins (ResourceStorageContainer s) (TF.Attr s P.Text) where
+instance P.HasAllowedOrigins (StorageContainerResource s) (TF.Attr s P.Text) where
     allowedOrigins =
-        lens (_allowed_origins :: ResourceStorageContainer s -> TF.Attr s P.Text)
-             (\s a -> s { _allowed_origins = a } :: ResourceStorageContainer s)
+        lens (_allowed_origins :: StorageContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _allowed_origins = a } :: StorageContainerResource s)
 
-instance P.HasExposedHeaders (ResourceStorageContainer s) (TF.Attr s P.Text) where
+instance P.HasExposedHeaders (StorageContainerResource s) (TF.Attr s P.Text) where
     exposedHeaders =
-        lens (_exposed_headers :: ResourceStorageContainer s -> TF.Attr s P.Text)
-             (\s a -> s { _exposed_headers = a } :: ResourceStorageContainer s)
+        lens (_exposed_headers :: StorageContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _exposed_headers = a } :: StorageContainerResource s)
 
-instance P.HasMaxAge (ResourceStorageContainer s) (TF.Attr s P.Text) where
+instance P.HasMaxAge (StorageContainerResource s) (TF.Attr s P.Text) where
     maxAge =
-        lens (_max_age :: ResourceStorageContainer s -> TF.Attr s P.Text)
-             (\s a -> s { _max_age = a } :: ResourceStorageContainer s)
+        lens (_max_age :: StorageContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _max_age = a } :: StorageContainerResource s)
 
-instance P.HasMetadata (ResourceStorageContainer s) (TF.Attr s P.Text) where
+instance P.HasMetadata (StorageContainerResource s) (TF.Attr s P.Text) where
     metadata =
-        lens (_metadata :: ResourceStorageContainer s -> TF.Attr s P.Text)
-             (\s a -> s { _metadata = a } :: ResourceStorageContainer s)
+        lens (_metadata :: StorageContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata = a } :: StorageContainerResource s)
 
-instance P.HasName (ResourceStorageContainer s) (TF.Attr s P.Text) where
+instance P.HasName (StorageContainerResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceStorageContainer s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceStorageContainer s)
+        lens (_name :: StorageContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: StorageContainerResource s)
 
-instance P.HasPrimaryKey (ResourceStorageContainer s) (TF.Attr s P.Text) where
+instance P.HasPrimaryKey (StorageContainerResource s) (TF.Attr s P.Text) where
     primaryKey =
-        lens (_primary_key :: ResourceStorageContainer s -> TF.Attr s P.Text)
-             (\s a -> s { _primary_key = a } :: ResourceStorageContainer s)
+        lens (_primary_key :: StorageContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _primary_key = a } :: StorageContainerResource s)
 
-instance P.HasQuotaBytes (ResourceStorageContainer s) (TF.Attr s P.Text) where
+instance P.HasQuotaBytes (StorageContainerResource s) (TF.Attr s P.Text) where
     quotaBytes =
-        lens (_quota_bytes :: ResourceStorageContainer s -> TF.Attr s P.Text)
-             (\s a -> s { _quota_bytes = a } :: ResourceStorageContainer s)
+        lens (_quota_bytes :: StorageContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _quota_bytes = a } :: StorageContainerResource s)
 
-instance P.HasQuotaCount (ResourceStorageContainer s) (TF.Attr s P.Text) where
+instance P.HasQuotaCount (StorageContainerResource s) (TF.Attr s P.Text) where
     quotaCount =
-        lens (_quota_count :: ResourceStorageContainer s -> TF.Attr s P.Text)
-             (\s a -> s { _quota_count = a } :: ResourceStorageContainer s)
+        lens (_quota_count :: StorageContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _quota_count = a } :: StorageContainerResource s)
 
-instance P.HasReadAcls (ResourceStorageContainer s) (TF.Attr s P.Text) where
+instance P.HasReadAcls (StorageContainerResource s) (TF.Attr s P.Text) where
     readAcls =
-        lens (_read_acls :: ResourceStorageContainer s -> TF.Attr s P.Text)
-             (\s a -> s { _read_acls = a } :: ResourceStorageContainer s)
+        lens (_read_acls :: StorageContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _read_acls = a } :: StorageContainerResource s)
 
-instance P.HasSecondaryKey (ResourceStorageContainer s) (TF.Attr s P.Text) where
+instance P.HasSecondaryKey (StorageContainerResource s) (TF.Attr s P.Text) where
     secondaryKey =
-        lens (_secondary_key :: ResourceStorageContainer s -> TF.Attr s P.Text)
-             (\s a -> s { _secondary_key = a } :: ResourceStorageContainer s)
+        lens (_secondary_key :: StorageContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _secondary_key = a } :: StorageContainerResource s)
 
-instance P.HasWriteAcls (ResourceStorageContainer s) (TF.Attr s P.Text) where
+instance P.HasWriteAcls (StorageContainerResource s) (TF.Attr s P.Text) where
     writeAcls =
-        lens (_write_acls :: ResourceStorageContainer s -> TF.Attr s P.Text)
-             (\s a -> s { _write_acls = a } :: ResourceStorageContainer s)
+        lens (_write_acls :: StorageContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _write_acls = a } :: StorageContainerResource s)
 
-instance s ~ s' => P.HasComputedAllowedOrigins (TF.Ref s' (ResourceStorageContainer s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAllowedOrigins (TF.Ref s' (StorageContainerResource s)) (TF.Attr s P.Text) where
     computedAllowedOrigins =
-        (_allowed_origins :: ResourceStorageContainer s -> TF.Attr s P.Text)
+        (_allowed_origins :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedExposedHeaders (TF.Ref s' (ResourceStorageContainer s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedExposedHeaders (TF.Ref s' (StorageContainerResource s)) (TF.Attr s P.Text) where
     computedExposedHeaders =
-        (_exposed_headers :: ResourceStorageContainer s -> TF.Attr s P.Text)
+        (_exposed_headers :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMaxAge (TF.Ref s' (ResourceStorageContainer s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaxAge (TF.Ref s' (StorageContainerResource s)) (TF.Attr s P.Text) where
     computedMaxAge =
-        (_max_age :: ResourceStorageContainer s -> TF.Attr s P.Text)
+        (_max_age :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ResourceStorageContainer s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (StorageContainerResource s)) (TF.Attr s P.Text) where
     computedMetadata =
-        (_metadata :: ResourceStorageContainer s -> TF.Attr s P.Text)
+        (_metadata :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceStorageContainer s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (StorageContainerResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceStorageContainer s -> TF.Attr s P.Text)
+        (_name :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrimaryKey (TF.Ref s' (ResourceStorageContainer s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimaryKey (TF.Ref s' (StorageContainerResource s)) (TF.Attr s P.Text) where
     computedPrimaryKey =
-        (_primary_key :: ResourceStorageContainer s -> TF.Attr s P.Text)
+        (_primary_key :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedQuotaBytes (TF.Ref s' (ResourceStorageContainer s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedQuotaBytes (TF.Ref s' (StorageContainerResource s)) (TF.Attr s P.Text) where
     computedQuotaBytes =
-        (_quota_bytes :: ResourceStorageContainer s -> TF.Attr s P.Text)
+        (_quota_bytes :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedQuotaCount (TF.Ref s' (ResourceStorageContainer s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedQuotaCount (TF.Ref s' (StorageContainerResource s)) (TF.Attr s P.Text) where
     computedQuotaCount =
-        (_quota_count :: ResourceStorageContainer s -> TF.Attr s P.Text)
+        (_quota_count :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedReadAcls (TF.Ref s' (ResourceStorageContainer s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedReadAcls (TF.Ref s' (StorageContainerResource s)) (TF.Attr s P.Text) where
     computedReadAcls =
-        (_read_acls :: ResourceStorageContainer s -> TF.Attr s P.Text)
+        (_read_acls :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSecondaryKey (TF.Ref s' (ResourceStorageContainer s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecondaryKey (TF.Ref s' (StorageContainerResource s)) (TF.Attr s P.Text) where
     computedSecondaryKey =
-        (_secondary_key :: ResourceStorageContainer s -> TF.Attr s P.Text)
+        (_secondary_key :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedWriteAcls (TF.Ref s' (ResourceStorageContainer s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedWriteAcls (TF.Ref s' (StorageContainerResource s)) (TF.Attr s P.Text) where
     computedWriteAcls =
-        (_write_acls :: ResourceStorageContainer s -> TF.Attr s P.Text)
+        (_write_acls :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceStorageContainer :: TF.Resource P.OPC (ResourceStorageContainer s)
-resourceStorageContainer =
+storageContainerResource :: TF.Resource P.OPC (StorageContainerResource s)
+storageContainerResource =
     TF.newResource "opc_storage_container" $
-        ResourceStorageContainer {
+        StorageContainerResource {
               _allowed_origins = TF.Nil
             , _exposed_headers = TF.Nil
             , _max_age = TF.Nil
@@ -2951,43 +2951,43 @@ Creates and manages a Object in the OPC Storage Container.
 @storage_endpoint@ must be set in the provider or environment to manage
 these resources.
 -}
-data ResourceStorageObject s = ResourceStorageObject {
+data StorageObjectResource s = StorageObjectResource {
       _container :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of Storage Container the store the object in. -}
     , _name      :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the Storage Object. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceStorageObject s) where
-    toHCL ResourceStorageObject{..} = TF.inline $ catMaybes
+instance TF.ToHCL (StorageObjectResource s) where
+    toHCL StorageObjectResource{..} = TF.inline $ catMaybes
         [ TF.assign "container" <$> TF.attribute _container
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasContainer (ResourceStorageObject s) (TF.Attr s P.Text) where
+instance P.HasContainer (StorageObjectResource s) (TF.Attr s P.Text) where
     container =
-        lens (_container :: ResourceStorageObject s -> TF.Attr s P.Text)
-             (\s a -> s { _container = a } :: ResourceStorageObject s)
+        lens (_container :: StorageObjectResource s -> TF.Attr s P.Text)
+             (\s a -> s { _container = a } :: StorageObjectResource s)
 
-instance P.HasName (ResourceStorageObject s) (TF.Attr s P.Text) where
+instance P.HasName (StorageObjectResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceStorageObject s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceStorageObject s)
+        lens (_name :: StorageObjectResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: StorageObjectResource s)
 
-instance s ~ s' => P.HasComputedContainer (TF.Ref s' (ResourceStorageObject s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContainer (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where
     computedContainer =
-        (_container :: ResourceStorageObject s -> TF.Attr s P.Text)
+        (_container :: StorageObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceStorageObject s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceStorageObject s -> TF.Attr s P.Text)
+        (_name :: StorageObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceStorageObject :: TF.Resource P.OPC (ResourceStorageObject s)
-resourceStorageObject =
+storageObjectResource :: TF.Resource P.OPC (StorageObjectResource s)
+storageObjectResource =
     TF.newResource "opc_storage_object" $
-        ResourceStorageObject {
+        StorageObjectResource {
               _container = TF.Nil
             , _name = TF.Nil
             }

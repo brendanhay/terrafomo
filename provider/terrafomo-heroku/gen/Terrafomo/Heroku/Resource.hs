@@ -24,35 +24,35 @@
 module Terrafomo.Heroku.Resource
     (
     -- * Types
-      ResourceAddon (..)
-    , resourceAddon
+      AddonAttachmentResource (..)
+    , addonAttachmentResource
 
-    , ResourceAddonAttachment (..)
-    , resourceAddonAttachment
+    , AddonResource (..)
+    , addonResource
 
-    , ResourceApp (..)
-    , resourceApp
+    , AppFeatureResource (..)
+    , appFeatureResource
 
-    , ResourceAppFeature (..)
-    , resourceAppFeature
+    , AppResource (..)
+    , appResource
 
-    , ResourceCert (..)
-    , resourceCert
+    , CertResource (..)
+    , certResource
 
-    , ResourceDomain (..)
-    , resourceDomain
+    , DomainResource (..)
+    , domainResource
 
-    , ResourceDrain (..)
-    , resourceDrain
+    , DrainResource (..)
+    , drainResource
 
-    , ResourcePipeline (..)
-    , resourcePipeline
+    , PipelineCouplingResource (..)
+    , pipelineCouplingResource
 
-    , ResourcePipelineCoupling (..)
-    , resourcePipelineCoupling
+    , PipelineResource (..)
+    , pipelineResource
 
-    , ResourceSpace (..)
-    , resourceSpace
+    , SpaceResource (..)
+    , spaceResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -135,81 +135,11 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
-{- | The @heroku_addon@ Heroku resource.
-
-Provides a Heroku Add-On resource. These can be attach services to a Heroku
-app.
--}
-data ResourceAddon s = ResourceAddon {
-      _app    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Heroku app to add to. -}
-    , _config :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Optional plan configuration. -}
-    , _plan   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The addon to add. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ResourceAddon s) where
-    toHCL ResourceAddon{..} = TF.inline $ catMaybes
-        [ TF.assign "app" <$> TF.attribute _app
-        , TF.assign "config" <$> TF.attribute _config
-        , TF.assign "plan" <$> TF.attribute _plan
-        ]
-
-instance P.HasApp (ResourceAddon s) (TF.Attr s P.Text) where
-    app =
-        lens (_app :: ResourceAddon s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: ResourceAddon s)
-
-instance P.HasConfig (ResourceAddon s) (TF.Attr s P.Text) where
-    config =
-        lens (_config :: ResourceAddon s -> TF.Attr s P.Text)
-             (\s a -> s { _config = a } :: ResourceAddon s)
-
-instance P.HasPlan (ResourceAddon s) (TF.Attr s P.Text) where
-    plan =
-        lens (_plan :: ResourceAddon s -> TF.Attr s P.Text)
-             (\s a -> s { _plan = a } :: ResourceAddon s)
-
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (ResourceAddon s)) (TF.Attr s P.Text) where
-    computedApp =
-        (_app :: ResourceAddon s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedConfig (TF.Ref s' (ResourceAddon s)) (TF.Attr s P.Text) where
-    computedConfig =
-        (_config :: ResourceAddon s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (ResourceAddon s)) (TF.Attr s P.Text) where
-    computedConfigVars x = TF.compute (TF.refKey x) "config_vars"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceAddon s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceAddon s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedPlan (TF.Ref s' (ResourceAddon s)) (TF.Attr s P.Text) where
-    computedPlan x = TF.compute (TF.refKey x) "plan"
-
-instance s ~ s' => P.HasComputedProviderId (TF.Ref s' (ResourceAddon s)) (TF.Attr s P.Text) where
-    computedProviderId x = TF.compute (TF.refKey x) "provider_id"
-
-resourceAddon :: TF.Resource P.Heroku (ResourceAddon s)
-resourceAddon =
-    TF.newResource "heroku_addon" $
-        ResourceAddon {
-              _app = TF.Nil
-            , _config = TF.Nil
-            , _plan = TF.Nil
-            }
-
 {- | The @heroku_addon_attachment@ Heroku resource.
 
 Attaches a Heroku Addon Resource to an additional Heroku App.
 -}
-data ResourceAddonAttachment s = ResourceAddonAttachment {
+data AddonAttachmentResource s = AddonAttachmentResource {
       _addon_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the existing Heroku Addon to attach. -}
     , _app_id   :: !(TF.Attr s P.Text)
@@ -218,52 +148,182 @@ data ResourceAddonAttachment s = ResourceAddonAttachment {
     {- ^ (Optional) A friendly name for the Heroku Addon Attachment. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceAddonAttachment s) where
-    toHCL ResourceAddonAttachment{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AddonAttachmentResource s) where
+    toHCL AddonAttachmentResource{..} = TF.inline $ catMaybes
         [ TF.assign "addon_id" <$> TF.attribute _addon_id
         , TF.assign "app_id" <$> TF.attribute _app_id
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasAddonId (ResourceAddonAttachment s) (TF.Attr s P.Text) where
+instance P.HasAddonId (AddonAttachmentResource s) (TF.Attr s P.Text) where
     addonId =
-        lens (_addon_id :: ResourceAddonAttachment s -> TF.Attr s P.Text)
-             (\s a -> s { _addon_id = a } :: ResourceAddonAttachment s)
+        lens (_addon_id :: AddonAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _addon_id = a } :: AddonAttachmentResource s)
 
-instance P.HasAppId (ResourceAddonAttachment s) (TF.Attr s P.Text) where
+instance P.HasAppId (AddonAttachmentResource s) (TF.Attr s P.Text) where
     appId =
-        lens (_app_id :: ResourceAddonAttachment s -> TF.Attr s P.Text)
-             (\s a -> s { _app_id = a } :: ResourceAddonAttachment s)
+        lens (_app_id :: AddonAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _app_id = a } :: AddonAttachmentResource s)
 
-instance P.HasName (ResourceAddonAttachment s) (TF.Attr s P.Text) where
+instance P.HasName (AddonAttachmentResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceAddonAttachment s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceAddonAttachment s)
+        lens (_name :: AddonAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: AddonAttachmentResource s)
 
-instance s ~ s' => P.HasComputedAddonId (TF.Ref s' (ResourceAddonAttachment s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddonId (TF.Ref s' (AddonAttachmentResource s)) (TF.Attr s P.Text) where
     computedAddonId =
-        (_addon_id :: ResourceAddonAttachment s -> TF.Attr s P.Text)
+        (_addon_id :: AddonAttachmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedAppId (TF.Ref s' (ResourceAddonAttachment s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAppId (TF.Ref s' (AddonAttachmentResource s)) (TF.Attr s P.Text) where
     computedAppId =
-        (_app_id :: ResourceAddonAttachment s -> TF.Attr s P.Text)
+        (_app_id :: AddonAttachmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceAddonAttachment s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AddonAttachmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceAddonAttachment s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AddonAttachmentResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceAddonAttachment s -> TF.Attr s P.Text)
+        (_name :: AddonAttachmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceAddonAttachment :: TF.Resource P.Heroku (ResourceAddonAttachment s)
-resourceAddonAttachment =
+addonAttachmentResource :: TF.Resource P.Heroku (AddonAttachmentResource s)
+addonAttachmentResource =
     TF.newResource "heroku_addon_attachment" $
-        ResourceAddonAttachment {
+        AddonAttachmentResource {
               _addon_id = TF.Nil
             , _app_id = TF.Nil
+            , _name = TF.Nil
+            }
+
+{- | The @heroku_addon@ Heroku resource.
+
+Provides a Heroku Add-On resource. These can be attach services to a Heroku
+app.
+-}
+data AddonResource s = AddonResource {
+      _app    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The Heroku app to add to. -}
+    , _config :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Optional plan configuration. -}
+    , _plan   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The addon to add. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (AddonResource s) where
+    toHCL AddonResource{..} = TF.inline $ catMaybes
+        [ TF.assign "app" <$> TF.attribute _app
+        , TF.assign "config" <$> TF.attribute _config
+        , TF.assign "plan" <$> TF.attribute _plan
+        ]
+
+instance P.HasApp (AddonResource s) (TF.Attr s P.Text) where
+    app =
+        lens (_app :: AddonResource s -> TF.Attr s P.Text)
+             (\s a -> s { _app = a } :: AddonResource s)
+
+instance P.HasConfig (AddonResource s) (TF.Attr s P.Text) where
+    config =
+        lens (_config :: AddonResource s -> TF.Attr s P.Text)
+             (\s a -> s { _config = a } :: AddonResource s)
+
+instance P.HasPlan (AddonResource s) (TF.Attr s P.Text) where
+    plan =
+        lens (_plan :: AddonResource s -> TF.Attr s P.Text)
+             (\s a -> s { _plan = a } :: AddonResource s)
+
+instance s ~ s' => P.HasComputedApp (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
+    computedApp =
+        (_app :: AddonResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedConfig (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
+    computedConfig =
+        (_config :: AddonResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
+    computedConfigVars x = TF.compute (TF.refKey x) "config_vars"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedPlan (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
+    computedPlan x = TF.compute (TF.refKey x) "plan"
+
+instance s ~ s' => P.HasComputedProviderId (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
+    computedProviderId x = TF.compute (TF.refKey x) "provider_id"
+
+addonResource :: TF.Resource P.Heroku (AddonResource s)
+addonResource =
+    TF.newResource "heroku_addon" $
+        AddonResource {
+              _app = TF.Nil
+            , _config = TF.Nil
+            , _plan = TF.Nil
+            }
+
+{- | The @heroku_app_feature@ Heroku resource.
+
+Provides a Heroku App Feature resource. This can be used to create and
+manage App Features on Heroku.
+-}
+data AppFeatureResource s = AppFeatureResource {
+      _app     :: !(TF.Attr s P.Text)
+    {- ^ (Required) The Heroku app to link to. -}
+    , _enabled :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether to enable or disable the App Feature. The default value is true. -}
+    , _name    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the App Feature to manage. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (AppFeatureResource s) where
+    toHCL AppFeatureResource{..} = TF.inline $ catMaybes
+        [ TF.assign "app" <$> TF.attribute _app
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasApp (AppFeatureResource s) (TF.Attr s P.Text) where
+    app =
+        lens (_app :: AppFeatureResource s -> TF.Attr s P.Text)
+             (\s a -> s { _app = a } :: AppFeatureResource s)
+
+instance P.HasEnabled (AppFeatureResource s) (TF.Attr s P.Text) where
+    enabled =
+        lens (_enabled :: AppFeatureResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: AppFeatureResource s)
+
+instance P.HasName (AppFeatureResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: AppFeatureResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: AppFeatureResource s)
+
+instance s ~ s' => P.HasComputedApp (TF.Ref s' (AppFeatureResource s)) (TF.Attr s P.Text) where
+    computedApp =
+        (_app :: AppFeatureResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (AppFeatureResource s)) (TF.Attr s P.Text) where
+    computedEnabled =
+        (_enabled :: AppFeatureResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AppFeatureResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: AppFeatureResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+appFeatureResource :: TF.Resource P.Heroku (AppFeatureResource s)
+appFeatureResource =
+    TF.newResource "heroku_app_feature" $
+        AppFeatureResource {
+              _app = TF.Nil
+            , _enabled = TF.Nil
             , _name = TF.Nil
             }
 
@@ -272,7 +332,7 @@ resourceAddonAttachment =
 Provides a Heroku App resource. This can be used to create and manage
 applications on Heroku.
 -}
-data ResourceApp s = ResourceApp {
+data AppResource s = AppResource {
       _acm          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The flag representing Automated Certificate Management for the app. -}
     , _buildpacks   :: !(TF.Attr s P.Text)
@@ -291,8 +351,8 @@ data ResourceApp s = ResourceApp {
     {- ^ (Optional) The application stack is what platform to run the application in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceApp s) where
-    toHCL ResourceApp{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AppResource s) where
+    toHCL AppResource{..} = TF.inline $ catMaybes
         [ TF.assign "acm" <$> TF.attribute _acm
         , TF.assign "buildpacks" <$> TF.attribute _buildpacks
         , TF.assign "config_vars" <$> TF.attribute _config_vars
@@ -303,97 +363,97 @@ instance TF.ToHCL (ResourceApp s) where
         , TF.assign "stack" <$> TF.attribute _stack
         ]
 
-instance P.HasAcm (ResourceApp s) (TF.Attr s P.Text) where
+instance P.HasAcm (AppResource s) (TF.Attr s P.Text) where
     acm =
-        lens (_acm :: ResourceApp s -> TF.Attr s P.Text)
-             (\s a -> s { _acm = a } :: ResourceApp s)
+        lens (_acm :: AppResource s -> TF.Attr s P.Text)
+             (\s a -> s { _acm = a } :: AppResource s)
 
-instance P.HasBuildpacks (ResourceApp s) (TF.Attr s P.Text) where
+instance P.HasBuildpacks (AppResource s) (TF.Attr s P.Text) where
     buildpacks =
-        lens (_buildpacks :: ResourceApp s -> TF.Attr s P.Text)
-             (\s a -> s { _buildpacks = a } :: ResourceApp s)
+        lens (_buildpacks :: AppResource s -> TF.Attr s P.Text)
+             (\s a -> s { _buildpacks = a } :: AppResource s)
 
-instance P.HasConfigVars (ResourceApp s) (TF.Attr s P.Text) where
+instance P.HasConfigVars (AppResource s) (TF.Attr s P.Text) where
     configVars =
-        lens (_config_vars :: ResourceApp s -> TF.Attr s P.Text)
-             (\s a -> s { _config_vars = a } :: ResourceApp s)
+        lens (_config_vars :: AppResource s -> TF.Attr s P.Text)
+             (\s a -> s { _config_vars = a } :: AppResource s)
 
-instance P.HasName (ResourceApp s) (TF.Attr s P.Text) where
+instance P.HasName (AppResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceApp s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceApp s)
+        lens (_name :: AppResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: AppResource s)
 
-instance P.HasOrganization (ResourceApp s) (TF.Attr s P.Text) where
+instance P.HasOrganization (AppResource s) (TF.Attr s P.Text) where
     organization =
-        lens (_organization :: ResourceApp s -> TF.Attr s P.Text)
-             (\s a -> s { _organization = a } :: ResourceApp s)
+        lens (_organization :: AppResource s -> TF.Attr s P.Text)
+             (\s a -> s { _organization = a } :: AppResource s)
 
-instance P.HasRegion (ResourceApp s) (TF.Attr s P.Text) where
+instance P.HasRegion (AppResource s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ResourceApp s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ResourceApp s)
+        lens (_region :: AppResource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: AppResource s)
 
-instance P.HasSpace (ResourceApp s) (TF.Attr s P.Text) where
+instance P.HasSpace (AppResource s) (TF.Attr s P.Text) where
     space =
-        lens (_space :: ResourceApp s -> TF.Attr s P.Text)
-             (\s a -> s { _space = a } :: ResourceApp s)
+        lens (_space :: AppResource s -> TF.Attr s P.Text)
+             (\s a -> s { _space = a } :: AppResource s)
 
-instance P.HasStack (ResourceApp s) (TF.Attr s P.Text) where
+instance P.HasStack (AppResource s) (TF.Attr s P.Text) where
     stack =
-        lens (_stack :: ResourceApp s -> TF.Attr s P.Text)
-             (\s a -> s { _stack = a } :: ResourceApp s)
+        lens (_stack :: AppResource s -> TF.Attr s P.Text)
+             (\s a -> s { _stack = a } :: AppResource s)
 
-instance s ~ s' => P.HasComputedAcm (TF.Ref s' (ResourceApp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAcm (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedAcm =
-        (_acm :: ResourceApp s -> TF.Attr s P.Text)
+        (_acm :: AppResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedAllConfigVars (TF.Ref s' (ResourceApp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAllConfigVars (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedAllConfigVars x = TF.compute (TF.refKey x) "all_config_vars"
 
-instance s ~ s' => P.HasComputedBuildpacks (TF.Ref s' (ResourceApp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBuildpacks (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedBuildpacks =
-        (_buildpacks :: ResourceApp s -> TF.Attr s P.Text)
+        (_buildpacks :: AppResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (ResourceApp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedConfigVars =
-        (_config_vars :: ResourceApp s -> TF.Attr s P.Text)
+        (_config_vars :: AppResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedGitUrl (TF.Ref s' (ResourceApp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGitUrl (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedGitUrl x = TF.compute (TF.refKey x) "git_url"
 
-instance s ~ s' => P.HasComputedHerokuHostname (TF.Ref s' (ResourceApp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHerokuHostname (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedHerokuHostname x = TF.compute (TF.refKey x) "heroku_hostname"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceApp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceApp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (ResourceApp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedOrganization =
-        (_organization :: ResourceApp s -> TF.Attr s P.Text)
+        (_organization :: AppResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ResourceApp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedSpace (TF.Ref s' (ResourceApp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSpace (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedSpace x = TF.compute (TF.refKey x) "space"
 
-instance s ~ s' => P.HasComputedStack (TF.Ref s' (ResourceApp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStack (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedStack x = TF.compute (TF.refKey x) "stack"
 
-instance s ~ s' => P.HasComputedWebUrl (TF.Ref s' (ResourceApp s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedWebUrl (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedWebUrl x = TF.compute (TF.refKey x) "web_url"
 
-resourceApp :: TF.Resource P.Heroku (ResourceApp s)
-resourceApp =
+appResource :: TF.Resource P.Heroku (AppResource s)
+appResource =
     TF.newResource "heroku_app" $
-        ResourceApp {
+        AppResource {
               _acm = TF.Nil
             , _buildpacks = TF.Nil
             , _config_vars = TF.Nil
@@ -404,72 +464,12 @@ resourceApp =
             , _stack = TF.Nil
             }
 
-{- | The @heroku_app_feature@ Heroku resource.
-
-Provides a Heroku App Feature resource. This can be used to create and
-manage App Features on Heroku.
--}
-data ResourceAppFeature s = ResourceAppFeature {
-      _app     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Heroku app to link to. -}
-    , _enabled :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Whether to enable or disable the App Feature. The default value is true. -}
-    , _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the App Feature to manage. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ResourceAppFeature s) where
-    toHCL ResourceAppFeature{..} = TF.inline $ catMaybes
-        [ TF.assign "app" <$> TF.attribute _app
-        , TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance P.HasApp (ResourceAppFeature s) (TF.Attr s P.Text) where
-    app =
-        lens (_app :: ResourceAppFeature s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: ResourceAppFeature s)
-
-instance P.HasEnabled (ResourceAppFeature s) (TF.Attr s P.Text) where
-    enabled =
-        lens (_enabled :: ResourceAppFeature s -> TF.Attr s P.Text)
-             (\s a -> s { _enabled = a } :: ResourceAppFeature s)
-
-instance P.HasName (ResourceAppFeature s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ResourceAppFeature s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceAppFeature s)
-
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (ResourceAppFeature s)) (TF.Attr s P.Text) where
-    computedApp =
-        (_app :: ResourceAppFeature s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ResourceAppFeature s)) (TF.Attr s P.Text) where
-    computedEnabled =
-        (_enabled :: ResourceAppFeature s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceAppFeature s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ResourceAppFeature s -> TF.Attr s P.Text)
-            . TF.refValue
-
-resourceAppFeature :: TF.Resource P.Heroku (ResourceAppFeature s)
-resourceAppFeature =
-    TF.newResource "heroku_app_feature" $
-        ResourceAppFeature {
-              _app = TF.Nil
-            , _enabled = TF.Nil
-            , _name = TF.Nil
-            }
-
 {- | The @heroku_cert@ Heroku resource.
 
 Provides a Heroku SSL certificate resource. It allows to set a given
 certificate for a Heroku app.
 -}
-data ResourceCert s = ResourceCert {
+data CertResource s = CertResource {
       _app               :: !(TF.Attr s P.Text)
     {- ^ (Required) The Heroku app to add to. -}
     , _certificate_chain :: !(TF.Attr s P.Text)
@@ -478,56 +478,56 @@ data ResourceCert s = ResourceCert {
     {- ^ (Required) The private key for a given certificate chain -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceCert s) where
-    toHCL ResourceCert{..} = TF.inline $ catMaybes
+instance TF.ToHCL (CertResource s) where
+    toHCL CertResource{..} = TF.inline $ catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "certificate_chain" <$> TF.attribute _certificate_chain
         , TF.assign "private_key" <$> TF.attribute _private_key
         ]
 
-instance P.HasApp (ResourceCert s) (TF.Attr s P.Text) where
+instance P.HasApp (CertResource s) (TF.Attr s P.Text) where
     app =
-        lens (_app :: ResourceCert s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: ResourceCert s)
+        lens (_app :: CertResource s -> TF.Attr s P.Text)
+             (\s a -> s { _app = a } :: CertResource s)
 
-instance P.HasCertificateChain (ResourceCert s) (TF.Attr s P.Text) where
+instance P.HasCertificateChain (CertResource s) (TF.Attr s P.Text) where
     certificateChain =
-        lens (_certificate_chain :: ResourceCert s -> TF.Attr s P.Text)
-             (\s a -> s { _certificate_chain = a } :: ResourceCert s)
+        lens (_certificate_chain :: CertResource s -> TF.Attr s P.Text)
+             (\s a -> s { _certificate_chain = a } :: CertResource s)
 
-instance P.HasPrivateKey (ResourceCert s) (TF.Attr s P.Text) where
+instance P.HasPrivateKey (CertResource s) (TF.Attr s P.Text) where
     privateKey =
-        lens (_private_key :: ResourceCert s -> TF.Attr s P.Text)
-             (\s a -> s { _private_key = a } :: ResourceCert s)
+        lens (_private_key :: CertResource s -> TF.Attr s P.Text)
+             (\s a -> s { _private_key = a } :: CertResource s)
 
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (ResourceCert s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedApp (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
     computedApp =
-        (_app :: ResourceCert s -> TF.Attr s P.Text)
+        (_app :: CertResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCertificateChain (TF.Ref s' (ResourceCert s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCertificateChain (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
     computedCertificateChain =
-        (_certificate_chain :: ResourceCert s -> TF.Attr s P.Text)
+        (_certificate_chain :: CertResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCname (TF.Ref s' (ResourceCert s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCname (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
     computedCname x = TF.compute (TF.refKey x) "cname"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceCert s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceCert s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPrivateKey (TF.Ref s' (ResourceCert s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrivateKey (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
     computedPrivateKey =
-        (_private_key :: ResourceCert s -> TF.Attr s P.Text)
+        (_private_key :: CertResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceCert :: TF.Resource P.Heroku (ResourceCert s)
-resourceCert =
+certResource :: TF.Resource P.Heroku (CertResource s)
+certResource =
     TF.newResource "heroku_cert" $
-        ResourceCert {
+        CertResource {
               _app = TF.Nil
             , _certificate_chain = TF.Nil
             , _private_key = TF.Nil
@@ -538,47 +538,47 @@ resourceCert =
 Provides a Heroku App resource. This can be used to create and manage
 applications on Heroku.
 -}
-data ResourceDomain s = ResourceDomain {
+data DomainResource s = DomainResource {
       _app      :: !(TF.Attr s P.Text)
     {- ^ (Required) The Heroku app to link to. -}
     , _hostname :: !(TF.Attr s P.Text)
     {- ^ (Required) The hostname to serve requests from. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceDomain s) where
-    toHCL ResourceDomain{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DomainResource s) where
+    toHCL DomainResource{..} = TF.inline $ catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "hostname" <$> TF.attribute _hostname
         ]
 
-instance P.HasApp (ResourceDomain s) (TF.Attr s P.Text) where
+instance P.HasApp (DomainResource s) (TF.Attr s P.Text) where
     app =
-        lens (_app :: ResourceDomain s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: ResourceDomain s)
+        lens (_app :: DomainResource s -> TF.Attr s P.Text)
+             (\s a -> s { _app = a } :: DomainResource s)
 
-instance P.HasHostname (ResourceDomain s) (TF.Attr s P.Text) where
+instance P.HasHostname (DomainResource s) (TF.Attr s P.Text) where
     hostname =
-        lens (_hostname :: ResourceDomain s -> TF.Attr s P.Text)
-             (\s a -> s { _hostname = a } :: ResourceDomain s)
+        lens (_hostname :: DomainResource s -> TF.Attr s P.Text)
+             (\s a -> s { _hostname = a } :: DomainResource s)
 
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedApp (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedApp =
-        (_app :: ResourceDomain s -> TF.Attr s P.Text)
+        (_app :: DomainResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCname (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCname (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedCname x = TF.compute (TF.refKey x) "cname"
 
-instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedHostname x = TF.compute (TF.refKey x) "hostname"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceDomain s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-resourceDomain :: TF.Resource P.Heroku (ResourceDomain s)
-resourceDomain =
+domainResource :: TF.Resource P.Heroku (DomainResource s)
+domainResource =
     TF.newResource "heroku_domain" $
-        ResourceDomain {
+        DomainResource {
               _app = TF.Nil
             , _hostname = TF.Nil
             }
@@ -588,83 +588,48 @@ resourceDomain =
 Provides a Heroku Drain resource. This can be used to create and manage Log
 Drains on Heroku.
 -}
-data ResourceDrain s = ResourceDrain {
+data DrainResource s = DrainResource {
       _app :: !(TF.Attr s P.Text)
     {- ^ (Required) The Heroku app to link to. -}
     , _url :: !(TF.Attr s P.Text)
     {- ^ (Required) The URL for Heroku to drain your logs to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceDrain s) where
-    toHCL ResourceDrain{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DrainResource s) where
+    toHCL DrainResource{..} = TF.inline $ catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "url" <$> TF.attribute _url
         ]
 
-instance P.HasApp (ResourceDrain s) (TF.Attr s P.Text) where
+instance P.HasApp (DrainResource s) (TF.Attr s P.Text) where
     app =
-        lens (_app :: ResourceDrain s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: ResourceDrain s)
+        lens (_app :: DrainResource s -> TF.Attr s P.Text)
+             (\s a -> s { _app = a } :: DrainResource s)
 
-instance P.HasUrl (ResourceDrain s) (TF.Attr s P.Text) where
+instance P.HasUrl (DrainResource s) (TF.Attr s P.Text) where
     url =
-        lens (_url :: ResourceDrain s -> TF.Attr s P.Text)
-             (\s a -> s { _url = a } :: ResourceDrain s)
+        lens (_url :: DrainResource s -> TF.Attr s P.Text)
+             (\s a -> s { _url = a } :: DrainResource s)
 
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (ResourceDrain s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedApp (TF.Ref s' (DrainResource s)) (TF.Attr s P.Text) where
     computedApp =
-        (_app :: ResourceDrain s -> TF.Attr s P.Text)
+        (_app :: DrainResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedToken (TF.Ref s' (ResourceDrain s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (DrainResource s)) (TF.Attr s P.Text) where
     computedToken x = TF.compute (TF.refKey x) "token"
 
-instance s ~ s' => P.HasComputedUrl (TF.Ref s' (ResourceDrain s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (DrainResource s)) (TF.Attr s P.Text) where
     computedUrl =
-        (_url :: ResourceDrain s -> TF.Attr s P.Text)
+        (_url :: DrainResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceDrain :: TF.Resource P.Heroku (ResourceDrain s)
-resourceDrain =
+drainResource :: TF.Resource P.Heroku (DrainResource s)
+drainResource =
     TF.newResource "heroku_drain" $
-        ResourceDrain {
+        DrainResource {
               _app = TF.Nil
             , _url = TF.Nil
-            }
-
-{- | The @heroku_pipeline@ Heroku resource.
-
-Provides a <https://devcenter.heroku.com/articles/pipelines> resource. A
-pipeline is a group of Heroku apps that share the same codebase. Once a
-pipeline is created, and apps are added to different stages using
-<./pipeline_coupling.html> , you can promote app slugs to the next stage.
--}
-data ResourcePipeline s = ResourcePipeline {
-      _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the pipeline. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ResourcePipeline s) where
-    toHCL ResourcePipeline{..} = TF.inline $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance P.HasName (ResourcePipeline s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ResourcePipeline s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourcePipeline s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourcePipeline s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourcePipeline s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-resourcePipeline :: TF.Resource P.Heroku (ResourcePipeline s)
-resourcePipeline =
-    TF.newResource "heroku_pipeline" $
-        ResourcePipeline {
-              _name = TF.Nil
             }
 
 {- | The @heroku_pipeline_coupling@ Heroku resource.
@@ -675,7 +640,7 @@ pipeline is created using <./pipeline.html> , and apps are added to
 different stages using @heroku_pipeline_coupling@ , you can promote app
 slugs to the downstream stages.
 -}
-data ResourcePipelineCoupling s = ResourcePipelineCoupling {
+data PipelineCouplingResource s = PipelineCouplingResource {
       _app      :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the app for this coupling. -}
     , _pipeline :: !(TF.Attr s P.Text)
@@ -684,50 +649,85 @@ data ResourcePipelineCoupling s = ResourcePipelineCoupling {
     {- ^ (Required) The stage to couple this app to. Must be one of @review@ , @development@ , @staging@ , or @production@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourcePipelineCoupling s) where
-    toHCL ResourcePipelineCoupling{..} = TF.inline $ catMaybes
+instance TF.ToHCL (PipelineCouplingResource s) where
+    toHCL PipelineCouplingResource{..} = TF.inline $ catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "pipeline" <$> TF.attribute _pipeline
         , TF.assign "stage" <$> TF.attribute _stage
         ]
 
-instance P.HasApp (ResourcePipelineCoupling s) (TF.Attr s P.Text) where
+instance P.HasApp (PipelineCouplingResource s) (TF.Attr s P.Text) where
     app =
-        lens (_app :: ResourcePipelineCoupling s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: ResourcePipelineCoupling s)
+        lens (_app :: PipelineCouplingResource s -> TF.Attr s P.Text)
+             (\s a -> s { _app = a } :: PipelineCouplingResource s)
 
-instance P.HasPipeline (ResourcePipelineCoupling s) (TF.Attr s P.Text) where
+instance P.HasPipeline (PipelineCouplingResource s) (TF.Attr s P.Text) where
     pipeline =
-        lens (_pipeline :: ResourcePipelineCoupling s -> TF.Attr s P.Text)
-             (\s a -> s { _pipeline = a } :: ResourcePipelineCoupling s)
+        lens (_pipeline :: PipelineCouplingResource s -> TF.Attr s P.Text)
+             (\s a -> s { _pipeline = a } :: PipelineCouplingResource s)
 
-instance P.HasStage (ResourcePipelineCoupling s) (TF.Attr s P.Text) where
+instance P.HasStage (PipelineCouplingResource s) (TF.Attr s P.Text) where
     stage =
-        lens (_stage :: ResourcePipelineCoupling s -> TF.Attr s P.Text)
-             (\s a -> s { _stage = a } :: ResourcePipelineCoupling s)
+        lens (_stage :: PipelineCouplingResource s -> TF.Attr s P.Text)
+             (\s a -> s { _stage = a } :: PipelineCouplingResource s)
 
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (ResourcePipelineCoupling s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedApp (TF.Ref s' (PipelineCouplingResource s)) (TF.Attr s P.Text) where
     computedApp x = TF.compute (TF.refKey x) "app"
 
-instance s ~ s' => P.HasComputedAppId (TF.Ref s' (ResourcePipelineCoupling s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAppId (TF.Ref s' (PipelineCouplingResource s)) (TF.Attr s P.Text) where
     computedAppId x = TF.compute (TF.refKey x) "app_id"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourcePipelineCoupling s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PipelineCouplingResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedPipeline (TF.Ref s' (ResourcePipelineCoupling s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPipeline (TF.Ref s' (PipelineCouplingResource s)) (TF.Attr s P.Text) where
     computedPipeline x = TF.compute (TF.refKey x) "pipeline"
 
-instance s ~ s' => P.HasComputedStage (TF.Ref s' (ResourcePipelineCoupling s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStage (TF.Ref s' (PipelineCouplingResource s)) (TF.Attr s P.Text) where
     computedStage x = TF.compute (TF.refKey x) "stage"
 
-resourcePipelineCoupling :: TF.Resource P.Heroku (ResourcePipelineCoupling s)
-resourcePipelineCoupling =
+pipelineCouplingResource :: TF.Resource P.Heroku (PipelineCouplingResource s)
+pipelineCouplingResource =
     TF.newResource "heroku_pipeline_coupling" $
-        ResourcePipelineCoupling {
+        PipelineCouplingResource {
               _app = TF.Nil
             , _pipeline = TF.Nil
             , _stage = TF.Nil
+            }
+
+{- | The @heroku_pipeline@ Heroku resource.
+
+Provides a <https://devcenter.heroku.com/articles/pipelines> resource. A
+pipeline is a group of Heroku apps that share the same codebase. Once a
+pipeline is created, and apps are added to different stages using
+<./pipeline_coupling.html> , you can promote app slugs to the next stage.
+-}
+data PipelineResource s = PipelineResource {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the pipeline. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (PipelineResource s) where
+    toHCL PipelineResource{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (PipelineResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: PipelineResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: PipelineResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PipelineResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (PipelineResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+pipelineResource :: TF.Resource P.Heroku (PipelineResource s)
+pipelineResource =
+    TF.newResource "heroku_pipeline" $
+        PipelineResource {
+              _name = TF.Nil
             }
 
 {- | The @heroku_space@ Heroku resource.
@@ -735,7 +735,7 @@ resourcePipelineCoupling =
 Provides a Heroku Space resource for running apps in isolated, highly
 available, secure app execution environments.
 -}
-data ResourceSpace s = ResourceSpace {
+data SpaceResource s = SpaceResource {
       _name         :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the space. -}
     , _organization :: !(TF.Attr s P.Text)
@@ -744,44 +744,44 @@ data ResourceSpace s = ResourceSpace {
     {- ^ (Optional) The region that the space should be created in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceSpace s) where
-    toHCL ResourceSpace{..} = TF.inline $ catMaybes
+instance TF.ToHCL (SpaceResource s) where
+    toHCL SpaceResource{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "organization" <$> TF.attribute _organization
         , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasName (ResourceSpace s) (TF.Attr s P.Text) where
+instance P.HasName (SpaceResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceSpace s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceSpace s)
+        lens (_name :: SpaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SpaceResource s)
 
-instance P.HasOrganization (ResourceSpace s) (TF.Attr s P.Text) where
+instance P.HasOrganization (SpaceResource s) (TF.Attr s P.Text) where
     organization =
-        lens (_organization :: ResourceSpace s -> TF.Attr s P.Text)
-             (\s a -> s { _organization = a } :: ResourceSpace s)
+        lens (_organization :: SpaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _organization = a } :: SpaceResource s)
 
-instance P.HasRegion (ResourceSpace s) (TF.Attr s P.Text) where
+instance P.HasRegion (SpaceResource s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ResourceSpace s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ResourceSpace s)
+        lens (_region :: SpaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: SpaceResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceSpace s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceSpace s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (ResourceSpace s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
     computedOrganization x = TF.compute (TF.refKey x) "organization"
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ResourceSpace s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-resourceSpace :: TF.Resource P.Heroku (ResourceSpace s)
-resourceSpace =
+spaceResource :: TF.Resource P.Heroku (SpaceResource s)
+spaceResource =
     TF.newResource "heroku_space" $
-        ResourceSpace {
+        SpaceResource {
               _name = TF.Nil
             , _organization = TF.Nil
             , _region = TF.Nil

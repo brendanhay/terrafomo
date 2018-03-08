@@ -24,11 +24,11 @@
 module Terrafomo.LogicMonitor.DataSource
     (
     -- * Types
-      DataCollectors (..)
-    , dataCollectors
+      CollectorsData (..)
+    , collectorsData
 
-    , DataDeviceGroup (..)
-    , dataDeviceGroup
+    , DeviceGroupData (..)
+    , deviceGroupData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -75,7 +75,7 @@ import qualified Terrafomo.Schema    as TF
 
 Use this datasource to get the ID of an available collector.
 -}
-data DataCollectors s = DataCollectors {
+data CollectorsData s = CollectorsData {
       _filters     :: !(TF.Attr s P.Text)
     {- ^ (Optional) Filters the response according to the operator and value specified. Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/ -}
     , _most_recent :: !(TF.Attr s P.Text)
@@ -86,58 +86,58 @@ data DataCollectors s = DataCollectors {
     {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataCollectors s) where
-    toHCL DataCollectors{..} = TF.inline $ catMaybes
+instance TF.ToHCL (CollectorsData s) where
+    toHCL CollectorsData{..} = TF.inline $ catMaybes
         [ TF.assign "filters" <$> TF.attribute _filters
         , TF.assign "most_recent" <$> TF.attribute _most_recent
         , TF.assign "offset" <$> TF.attribute _offset
         , TF.assign "size" <$> TF.attribute _size
         ]
 
-instance P.HasFilters (DataCollectors s) (TF.Attr s P.Text) where
+instance P.HasFilters (CollectorsData s) (TF.Attr s P.Text) where
     filters =
-        lens (_filters :: DataCollectors s -> TF.Attr s P.Text)
-             (\s a -> s { _filters = a } :: DataCollectors s)
+        lens (_filters :: CollectorsData s -> TF.Attr s P.Text)
+             (\s a -> s { _filters = a } :: CollectorsData s)
 
-instance P.HasMostRecent (DataCollectors s) (TF.Attr s P.Text) where
+instance P.HasMostRecent (CollectorsData s) (TF.Attr s P.Text) where
     mostRecent =
-        lens (_most_recent :: DataCollectors s -> TF.Attr s P.Text)
-             (\s a -> s { _most_recent = a } :: DataCollectors s)
+        lens (_most_recent :: CollectorsData s -> TF.Attr s P.Text)
+             (\s a -> s { _most_recent = a } :: CollectorsData s)
 
-instance P.HasOffset (DataCollectors s) (TF.Attr s P.Text) where
+instance P.HasOffset (CollectorsData s) (TF.Attr s P.Text) where
     offset =
-        lens (_offset :: DataCollectors s -> TF.Attr s P.Text)
-             (\s a -> s { _offset = a } :: DataCollectors s)
+        lens (_offset :: CollectorsData s -> TF.Attr s P.Text)
+             (\s a -> s { _offset = a } :: CollectorsData s)
 
-instance P.HasSize (DataCollectors s) (TF.Attr s P.Text) where
+instance P.HasSize (CollectorsData s) (TF.Attr s P.Text) where
     size =
-        lens (_size :: DataCollectors s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: DataCollectors s)
+        lens (_size :: CollectorsData s -> TF.Attr s P.Text)
+             (\s a -> s { _size = a } :: CollectorsData s)
 
-instance s ~ s' => P.HasComputedFilters (TF.Ref s' (DataCollectors s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFilters (TF.Ref s' (CollectorsData s)) (TF.Attr s P.Text) where
     computedFilters =
-        (_filters :: DataCollectors s -> TF.Attr s P.Text)
+        (_filters :: CollectorsData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (DataCollectors s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (CollectorsData s)) (TF.Attr s P.Text) where
     computedMostRecent =
-        (_most_recent :: DataCollectors s -> TF.Attr s P.Text)
+        (_most_recent :: CollectorsData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOffset (TF.Ref s' (DataCollectors s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOffset (TF.Ref s' (CollectorsData s)) (TF.Attr s P.Text) where
     computedOffset =
-        (_offset :: DataCollectors s -> TF.Attr s P.Text)
+        (_offset :: CollectorsData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (DataCollectors s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (CollectorsData s)) (TF.Attr s P.Text) where
     computedSize =
-        (_size :: DataCollectors s -> TF.Attr s P.Text)
+        (_size :: CollectorsData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataCollectors :: TF.DataSource P.LogicMonitor (DataCollectors s)
-dataCollectors =
+collectorsData :: TF.DataSource P.LogicMonitor (CollectorsData s)
+collectorsData =
     TF.newDataSource "logicmonitor_collectors" $
-        DataCollectors {
+        CollectorsData {
               _filters = TF.Nil
             , _most_recent = TF.Nil
             , _offset = TF.Nil
@@ -148,7 +148,7 @@ dataCollectors =
 
 Use this datasource to get the ID of an available device group.
 -}
-data DataDeviceGroup s = DataDeviceGroup {
+data DeviceGroupData s = DeviceGroupData {
       _filters :: !(TF.Attr s P.Text)
     {- ^ (Optional) Filters the response according to the operator and value specified. Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/ -}
     , _offset  :: !(TF.Attr s P.Text)
@@ -157,47 +157,47 @@ data DataDeviceGroup s = DataDeviceGroup {
     {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataDeviceGroup s) where
-    toHCL DataDeviceGroup{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DeviceGroupData s) where
+    toHCL DeviceGroupData{..} = TF.inline $ catMaybes
         [ TF.assign "filters" <$> TF.attribute _filters
         , TF.assign "offset" <$> TF.attribute _offset
         , TF.assign "size" <$> TF.attribute _size
         ]
 
-instance P.HasFilters (DataDeviceGroup s) (TF.Attr s P.Text) where
+instance P.HasFilters (DeviceGroupData s) (TF.Attr s P.Text) where
     filters =
-        lens (_filters :: DataDeviceGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _filters = a } :: DataDeviceGroup s)
+        lens (_filters :: DeviceGroupData s -> TF.Attr s P.Text)
+             (\s a -> s { _filters = a } :: DeviceGroupData s)
 
-instance P.HasOffset (DataDeviceGroup s) (TF.Attr s P.Text) where
+instance P.HasOffset (DeviceGroupData s) (TF.Attr s P.Text) where
     offset =
-        lens (_offset :: DataDeviceGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _offset = a } :: DataDeviceGroup s)
+        lens (_offset :: DeviceGroupData s -> TF.Attr s P.Text)
+             (\s a -> s { _offset = a } :: DeviceGroupData s)
 
-instance P.HasSize (DataDeviceGroup s) (TF.Attr s P.Text) where
+instance P.HasSize (DeviceGroupData s) (TF.Attr s P.Text) where
     size =
-        lens (_size :: DataDeviceGroup s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: DataDeviceGroup s)
+        lens (_size :: DeviceGroupData s -> TF.Attr s P.Text)
+             (\s a -> s { _size = a } :: DeviceGroupData s)
 
-instance s ~ s' => P.HasComputedFilters (TF.Ref s' (DataDeviceGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFilters (TF.Ref s' (DeviceGroupData s)) (TF.Attr s P.Text) where
     computedFilters =
-        (_filters :: DataDeviceGroup s -> TF.Attr s P.Text)
+        (_filters :: DeviceGroupData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOffset (TF.Ref s' (DataDeviceGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOffset (TF.Ref s' (DeviceGroupData s)) (TF.Attr s P.Text) where
     computedOffset =
-        (_offset :: DataDeviceGroup s -> TF.Attr s P.Text)
+        (_offset :: DeviceGroupData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (DataDeviceGroup s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (DeviceGroupData s)) (TF.Attr s P.Text) where
     computedSize =
-        (_size :: DataDeviceGroup s -> TF.Attr s P.Text)
+        (_size :: DeviceGroupData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataDeviceGroup :: TF.DataSource P.LogicMonitor (DataDeviceGroup s)
-dataDeviceGroup =
+deviceGroupData :: TF.DataSource P.LogicMonitor (DeviceGroupData s)
+deviceGroupData =
     TF.newDataSource "logicmonitor_device_group" $
-        DataDeviceGroup {
+        DeviceGroupData {
               _filters = TF.Nil
             , _offset = TF.Nil
             , _size = TF.Nil

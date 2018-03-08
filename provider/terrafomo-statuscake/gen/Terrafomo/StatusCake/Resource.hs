@@ -24,8 +24,8 @@
 module Terrafomo.StatusCake.Resource
     (
     -- * Types
-      ResourceTest (..)
-    , resourceTest
+      TestResource (..)
+    , testResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -85,7 +85,7 @@ import qualified Terrafomo.Schema    as TF
 
 The test resource allows StatusCake tests to be managed by Terraform.
 -}
-data ResourceTest s = ResourceTest {
+data TestResource s = TestResource {
       _check_rate    :: !(TF.Attr s P.Text)
     {- ^ (Optional) Test check rate in seconds. Defaults to 300 -}
     , _confirmations :: !(TF.Attr s P.Text)
@@ -108,8 +108,8 @@ data ResourceTest s = ResourceTest {
     {- ^ (Required) The URL of the website to be monitored -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceTest s) where
-    toHCL ResourceTest{..} = TF.inline $ catMaybes
+instance TF.ToHCL (TestResource s) where
+    toHCL TestResource{..} = TF.inline $ catMaybes
         [ TF.assign "check_rate" <$> TF.attribute _check_rate
         , TF.assign "confirmations" <$> TF.attribute _confirmations
         , TF.assign "contact_id" <$> TF.attribute _contact_id
@@ -122,113 +122,113 @@ instance TF.ToHCL (ResourceTest s) where
         , TF.assign "website_url" <$> TF.attribute _website_url
         ]
 
-instance P.HasCheckRate (ResourceTest s) (TF.Attr s P.Text) where
+instance P.HasCheckRate (TestResource s) (TF.Attr s P.Text) where
     checkRate =
-        lens (_check_rate :: ResourceTest s -> TF.Attr s P.Text)
-             (\s a -> s { _check_rate = a } :: ResourceTest s)
+        lens (_check_rate :: TestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _check_rate = a } :: TestResource s)
 
-instance P.HasConfirmations (ResourceTest s) (TF.Attr s P.Text) where
+instance P.HasConfirmations (TestResource s) (TF.Attr s P.Text) where
     confirmations =
-        lens (_confirmations :: ResourceTest s -> TF.Attr s P.Text)
-             (\s a -> s { _confirmations = a } :: ResourceTest s)
+        lens (_confirmations :: TestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _confirmations = a } :: TestResource s)
 
-instance P.HasContactId (ResourceTest s) (TF.Attr s P.Text) where
+instance P.HasContactId (TestResource s) (TF.Attr s P.Text) where
     contactId =
-        lens (_contact_id :: ResourceTest s -> TF.Attr s P.Text)
-             (\s a -> s { _contact_id = a } :: ResourceTest s)
+        lens (_contact_id :: TestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _contact_id = a } :: TestResource s)
 
-instance P.HasPaused (ResourceTest s) (TF.Attr s P.Text) where
+instance P.HasPaused (TestResource s) (TF.Attr s P.Text) where
     paused =
-        lens (_paused :: ResourceTest s -> TF.Attr s P.Text)
-             (\s a -> s { _paused = a } :: ResourceTest s)
+        lens (_paused :: TestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _paused = a } :: TestResource s)
 
-instance P.HasPort (ResourceTest s) (TF.Attr s P.Text) where
+instance P.HasPort (TestResource s) (TF.Attr s P.Text) where
     port =
-        lens (_port :: ResourceTest s -> TF.Attr s P.Text)
-             (\s a -> s { _port = a } :: ResourceTest s)
+        lens (_port :: TestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _port = a } :: TestResource s)
 
-instance P.HasTestType (ResourceTest s) (TF.Attr s P.Text) where
+instance P.HasTestType (TestResource s) (TF.Attr s P.Text) where
     testType =
-        lens (_test_type :: ResourceTest s -> TF.Attr s P.Text)
-             (\s a -> s { _test_type = a } :: ResourceTest s)
+        lens (_test_type :: TestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _test_type = a } :: TestResource s)
 
-instance P.HasTimeout (ResourceTest s) (TF.Attr s P.Text) where
+instance P.HasTimeout (TestResource s) (TF.Attr s P.Text) where
     timeout =
-        lens (_timeout :: ResourceTest s -> TF.Attr s P.Text)
-             (\s a -> s { _timeout = a } :: ResourceTest s)
+        lens (_timeout :: TestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _timeout = a } :: TestResource s)
 
-instance P.HasTriggerRate (ResourceTest s) (TF.Attr s P.Text) where
+instance P.HasTriggerRate (TestResource s) (TF.Attr s P.Text) where
     triggerRate =
-        lens (_trigger_rate :: ResourceTest s -> TF.Attr s P.Text)
-             (\s a -> s { _trigger_rate = a } :: ResourceTest s)
+        lens (_trigger_rate :: TestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _trigger_rate = a } :: TestResource s)
 
-instance P.HasWebsiteName (ResourceTest s) (TF.Attr s P.Text) where
+instance P.HasWebsiteName (TestResource s) (TF.Attr s P.Text) where
     websiteName =
-        lens (_website_name :: ResourceTest s -> TF.Attr s P.Text)
-             (\s a -> s { _website_name = a } :: ResourceTest s)
+        lens (_website_name :: TestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _website_name = a } :: TestResource s)
 
-instance P.HasWebsiteUrl (ResourceTest s) (TF.Attr s P.Text) where
+instance P.HasWebsiteUrl (TestResource s) (TF.Attr s P.Text) where
     websiteUrl =
-        lens (_website_url :: ResourceTest s -> TF.Attr s P.Text)
-             (\s a -> s { _website_url = a } :: ResourceTest s)
+        lens (_website_url :: TestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _website_url = a } :: TestResource s)
 
-instance s ~ s' => P.HasComputedCheckRate (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCheckRate (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedCheckRate =
-        (_check_rate :: ResourceTest s -> TF.Attr s P.Text)
+        (_check_rate :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedConfirmations (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConfirmations (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedConfirmations =
-        (_confirmations :: ResourceTest s -> TF.Attr s P.Text)
+        (_confirmations :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedContactId (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContactId (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedContactId =
-        (_contact_id :: ResourceTest s -> TF.Attr s P.Text)
+        (_contact_id :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPaused (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPaused (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedPaused =
-        (_paused :: ResourceTest s -> TF.Attr s P.Text)
+        (_paused :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedPort =
-        (_port :: ResourceTest s -> TF.Attr s P.Text)
+        (_port :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTestId (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTestId (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedTestId x = TF.compute (TF.refKey x) "test_id"
 
-instance s ~ s' => P.HasComputedTestType (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTestType (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedTestType =
-        (_test_type :: ResourceTest s -> TF.Attr s P.Text)
+        (_test_type :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedTimeout =
-        (_timeout :: ResourceTest s -> TF.Attr s P.Text)
+        (_timeout :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTriggerRate (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTriggerRate (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedTriggerRate =
-        (_trigger_rate :: ResourceTest s -> TF.Attr s P.Text)
+        (_trigger_rate :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedWebsiteName (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedWebsiteName (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedWebsiteName =
-        (_website_name :: ResourceTest s -> TF.Attr s P.Text)
+        (_website_name :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedWebsiteUrl (TF.Ref s' (ResourceTest s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedWebsiteUrl (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedWebsiteUrl =
-        (_website_url :: ResourceTest s -> TF.Attr s P.Text)
+        (_website_url :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceTest :: TF.Resource P.StatusCake (ResourceTest s)
-resourceTest =
+testResource :: TF.Resource P.StatusCake (TestResource s)
+testResource =
     TF.newResource "statuscake_test" $
-        ResourceTest {
+        TestResource {
               _check_rate = TF.Nil
             , _confirmations = TF.Nil
             , _contact_id = TF.Nil

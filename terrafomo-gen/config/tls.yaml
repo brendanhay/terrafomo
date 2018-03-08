@@ -3,3 +3,32 @@ datatype: false
 original: tls
 package: terrafomo-builtins
 package-yaml: false
+
+rules:
+  - mode: exact
+    match: subject
+    type: '(P.Subject s)'
+
+  - mode: exact
+    match: validity_period_hours
+    type: 'P.Int'
+
+  - mode: exact
+    match: is_ca_certificate
+    type: 'P.Bool'
+
+  - mode: exact
+    match: rsa_bits
+    type: 'P.Int'
+
+  - mode: exact
+    match: ip_addresses
+    type: '[TF.Attr s P.Text]'
+
+  - mode: exact
+    match: dns_names
+    type: '[TF.Attr s P.Text]'
+
+  - mode: exact
+    match: allowed_uses
+    type: '[TF.Attr s P.Text]'

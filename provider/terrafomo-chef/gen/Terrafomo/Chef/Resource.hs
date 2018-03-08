@@ -24,20 +24,20 @@
 module Terrafomo.Chef.Resource
     (
     -- * Types
-      ResourceDataBag (..)
-    , resourceDataBag
+      DataBagItemResource (..)
+    , dataBagItemResource
 
-    , ResourceDataBagItem (..)
-    , resourceDataBagItem
+    , DataBagResource (..)
+    , dataBagResource
 
-    , ResourceEnvironment (..)
-    , resourceEnvironment
+    , EnvironmentResource (..)
+    , environmentResource
 
-    , ResourceNode (..)
-    , resourceNode
+    , NodeResource (..)
+    , nodeResource
 
-    , ResourceRole (..)
-    , resourceRole
+    , RoleResource (..)
+    , roleResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -96,6 +96,57 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
+{- | The @chef_data_bag_item@ Chef resource.
+
+A <http://docs.chef.io/data_bags.html> is a collection of configuration
+objects that are stored as JSON in Chef Server and can be retrieved and used
+in Chef recipes. This resource creates objects within an existing data bag.
+To create the data bag itself, use the @chef_data_bag@ resource.
+-}
+data DataBagItemResource s = DataBagItemResource {
+      _content_json  :: !(TF.Attr s P.Text)
+    {- ^ (Required) A string containing a JSON object that will be the content of the item. Must at minimum contain a property called "id" that is unique within the data bag, which will become the identifier of the created item. -}
+    , _data_bag_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the data bag into which this item will be placed. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DataBagItemResource s) where
+    toHCL DataBagItemResource{..} = TF.inline $ catMaybes
+        [ TF.assign "content_json" <$> TF.attribute _content_json
+        , TF.assign "data_bag_name" <$> TF.attribute _data_bag_name
+        ]
+
+instance P.HasContentJson (DataBagItemResource s) (TF.Attr s P.Text) where
+    contentJson =
+        lens (_content_json :: DataBagItemResource s -> TF.Attr s P.Text)
+             (\s a -> s { _content_json = a } :: DataBagItemResource s)
+
+instance P.HasDataBagName (DataBagItemResource s) (TF.Attr s P.Text) where
+    dataBagName =
+        lens (_data_bag_name :: DataBagItemResource s -> TF.Attr s P.Text)
+             (\s a -> s { _data_bag_name = a } :: DataBagItemResource s)
+
+instance s ~ s' => P.HasComputedContentJson (TF.Ref s' (DataBagItemResource s)) (TF.Attr s P.Text) where
+    computedContentJson =
+        (_content_json :: DataBagItemResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDataBagName (TF.Ref s' (DataBagItemResource s)) (TF.Attr s P.Text) where
+    computedDataBagName =
+        (_data_bag_name :: DataBagItemResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataBagItemResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+dataBagItemResource :: TF.Resource P.Chef (DataBagItemResource s)
+dataBagItemResource =
+    TF.newResource "chef_data_bag_item" $
+        DataBagItemResource {
+              _content_json = TF.Nil
+            , _data_bag_name = TF.Nil
+            }
+
 {- | The @chef_data_bag@ Chef resource.
 
 A <http://docs.chef.io/data_bags.html> is a collection of configuration
@@ -104,85 +155,34 @@ in Chef recipes. This resource creates the data bag itself. Inside each data
 bag is a collection of items which can be created using the
 @chef_data_bag_item@ resource.
 -}
-data ResourceDataBag s = ResourceDataBag {
+data DataBagResource s = DataBagResource {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The unique name to assign to the data bag. This is the name that other server clients will use to find and retrieve data from the data bag. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceDataBag s) where
-    toHCL ResourceDataBag{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DataBagResource s) where
+    toHCL DataBagResource{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (ResourceDataBag s) (TF.Attr s P.Text) where
+instance P.HasName (DataBagResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceDataBag s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceDataBag s)
+        lens (_name :: DataBagResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataBagResource s)
 
-instance s ~ s' => P.HasComputedApiUri (TF.Ref s' (ResourceDataBag s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedApiUri (TF.Ref s' (DataBagResource s)) (TF.Attr s P.Text) where
     computedApiUri x = TF.compute (TF.refKey x) "api_uri"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceDataBag s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataBagResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceDataBag s -> TF.Attr s P.Text)
+        (_name :: DataBagResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceDataBag :: TF.Resource P.Chef (ResourceDataBag s)
-resourceDataBag =
+dataBagResource :: TF.Resource P.Chef (DataBagResource s)
+dataBagResource =
     TF.newResource "chef_data_bag" $
-        ResourceDataBag {
+        DataBagResource {
               _name = TF.Nil
-            }
-
-{- | The @chef_data_bag_item@ Chef resource.
-
-A <http://docs.chef.io/data_bags.html> is a collection of configuration
-objects that are stored as JSON in Chef Server and can be retrieved and used
-in Chef recipes. This resource creates objects within an existing data bag.
-To create the data bag itself, use the @chef_data_bag@ resource.
--}
-data ResourceDataBagItem s = ResourceDataBagItem {
-      _content_json  :: !(TF.Attr s P.Text)
-    {- ^ (Required) A string containing a JSON object that will be the content of the item. Must at minimum contain a property called "id" that is unique within the data bag, which will become the identifier of the created item. -}
-    , _data_bag_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the data bag into which this item will be placed. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ResourceDataBagItem s) where
-    toHCL ResourceDataBagItem{..} = TF.inline $ catMaybes
-        [ TF.assign "content_json" <$> TF.attribute _content_json
-        , TF.assign "data_bag_name" <$> TF.attribute _data_bag_name
-        ]
-
-instance P.HasContentJson (ResourceDataBagItem s) (TF.Attr s P.Text) where
-    contentJson =
-        lens (_content_json :: ResourceDataBagItem s -> TF.Attr s P.Text)
-             (\s a -> s { _content_json = a } :: ResourceDataBagItem s)
-
-instance P.HasDataBagName (ResourceDataBagItem s) (TF.Attr s P.Text) where
-    dataBagName =
-        lens (_data_bag_name :: ResourceDataBagItem s -> TF.Attr s P.Text)
-             (\s a -> s { _data_bag_name = a } :: ResourceDataBagItem s)
-
-instance s ~ s' => P.HasComputedContentJson (TF.Ref s' (ResourceDataBagItem s)) (TF.Attr s P.Text) where
-    computedContentJson =
-        (_content_json :: ResourceDataBagItem s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDataBagName (TF.Ref s' (ResourceDataBagItem s)) (TF.Attr s P.Text) where
-    computedDataBagName =
-        (_data_bag_name :: ResourceDataBagItem s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceDataBagItem s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-resourceDataBagItem :: TF.Resource P.Chef (ResourceDataBagItem s)
-resourceDataBagItem =
-    TF.newResource "chef_data_bag_item" $
-        ResourceDataBagItem {
-              _content_json = TF.Nil
-            , _data_bag_name = TF.Nil
             }
 
 {- | The @chef_environment@ Chef resource.
@@ -191,7 +191,7 @@ An <http://docs.chef.io/environments.html> is a container for Chef nodes
 that share a set of attribute values and may have a set of version
 constraints for which cookbook versions may be used on its nodes.
 -}
-data ResourceEnvironment s = ResourceEnvironment {
+data EnvironmentResource s = EnvironmentResource {
       _cookbook_constraints     :: !(TF.Attr s P.Text)
     {- ^ (Optional) Mapping of cookbook names to cookbook version constraints that should apply for this environment. -}
     , _default_attributes_json  :: !(TF.Attr s P.Text)
@@ -204,8 +204,8 @@ data ResourceEnvironment s = ResourceEnvironment {
     {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the environment. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceEnvironment s) where
-    toHCL ResourceEnvironment{..} = TF.inline $ catMaybes
+instance TF.ToHCL (EnvironmentResource s) where
+    toHCL EnvironmentResource{..} = TF.inline $ catMaybes
         [ TF.assign "cookbook_constraints" <$> TF.attribute _cookbook_constraints
         , TF.assign "default_attributes_json" <$> TF.attribute _default_attributes_json
         , TF.assign "description" <$> TF.attribute _description
@@ -213,60 +213,60 @@ instance TF.ToHCL (ResourceEnvironment s) where
         , TF.assign "override_attributes_json" <$> TF.attribute _override_attributes_json
         ]
 
-instance P.HasCookbookConstraints (ResourceEnvironment s) (TF.Attr s P.Text) where
+instance P.HasCookbookConstraints (EnvironmentResource s) (TF.Attr s P.Text) where
     cookbookConstraints =
-        lens (_cookbook_constraints :: ResourceEnvironment s -> TF.Attr s P.Text)
-             (\s a -> s { _cookbook_constraints = a } :: ResourceEnvironment s)
+        lens (_cookbook_constraints :: EnvironmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cookbook_constraints = a } :: EnvironmentResource s)
 
-instance P.HasDefaultAttributesJson (ResourceEnvironment s) (TF.Attr s P.Text) where
+instance P.HasDefaultAttributesJson (EnvironmentResource s) (TF.Attr s P.Text) where
     defaultAttributesJson =
-        lens (_default_attributes_json :: ResourceEnvironment s -> TF.Attr s P.Text)
-             (\s a -> s { _default_attributes_json = a } :: ResourceEnvironment s)
+        lens (_default_attributes_json :: EnvironmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _default_attributes_json = a } :: EnvironmentResource s)
 
-instance P.HasDescription (ResourceEnvironment s) (TF.Attr s P.Text) where
+instance P.HasDescription (EnvironmentResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceEnvironment s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceEnvironment s)
+        lens (_description :: EnvironmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: EnvironmentResource s)
 
-instance P.HasName (ResourceEnvironment s) (TF.Attr s P.Text) where
+instance P.HasName (EnvironmentResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceEnvironment s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceEnvironment s)
+        lens (_name :: EnvironmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: EnvironmentResource s)
 
-instance P.HasOverrideAttributesJson (ResourceEnvironment s) (TF.Attr s P.Text) where
+instance P.HasOverrideAttributesJson (EnvironmentResource s) (TF.Attr s P.Text) where
     overrideAttributesJson =
-        lens (_override_attributes_json :: ResourceEnvironment s -> TF.Attr s P.Text)
-             (\s a -> s { _override_attributes_json = a } :: ResourceEnvironment s)
+        lens (_override_attributes_json :: EnvironmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _override_attributes_json = a } :: EnvironmentResource s)
 
-instance s ~ s' => P.HasComputedCookbookConstraints (TF.Ref s' (ResourceEnvironment s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCookbookConstraints (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedCookbookConstraints =
-        (_cookbook_constraints :: ResourceEnvironment s -> TF.Attr s P.Text)
+        (_cookbook_constraints :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDefaultAttributesJson (TF.Ref s' (ResourceEnvironment s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultAttributesJson (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedDefaultAttributesJson =
-        (_default_attributes_json :: ResourceEnvironment s -> TF.Attr s P.Text)
+        (_default_attributes_json :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceEnvironment s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceEnvironment s -> TF.Attr s P.Text)
+        (_description :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceEnvironment s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceEnvironment s -> TF.Attr s P.Text)
+        (_name :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOverrideAttributesJson (TF.Ref s' (ResourceEnvironment s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOverrideAttributesJson (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedOverrideAttributesJson =
-        (_override_attributes_json :: ResourceEnvironment s -> TF.Attr s P.Text)
+        (_override_attributes_json :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceEnvironment :: TF.Resource P.Chef (ResourceEnvironment s)
-resourceEnvironment =
+environmentResource :: TF.Resource P.Chef (EnvironmentResource s)
+environmentResource =
     TF.newResource "chef_environment" $
-        ResourceEnvironment {
+        EnvironmentResource {
               _cookbook_constraints = TF.Nil
             , _default_attributes_json = TF.Nil
             , _description = TF.Nil
@@ -283,7 +283,7 @@ In most cases it is better to use </docs/provisioners/chef.html> to
 configure the Chef client on a computer and have it register itself with the
 Chef server.
 -}
-data ResourceNode s = ResourceNode {
+data NodeResource s = NodeResource {
       _automatic_attributes_json :: !(TF.Attr s P.Text)
     {- ^ (Optional) String containing a JSON-serialized object containing the automatic attributes for the node. -}
     , _default_attributes_json   :: !(TF.Attr s P.Text)
@@ -300,8 +300,8 @@ data ResourceNode s = ResourceNode {
     {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for the node. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceNode s) where
-    toHCL ResourceNode{..} = TF.inline $ catMaybes
+instance TF.ToHCL (NodeResource s) where
+    toHCL NodeResource{..} = TF.inline $ catMaybes
         [ TF.assign "automatic_attributes_json" <$> TF.attribute _automatic_attributes_json
         , TF.assign "default_attributes_json" <$> TF.attribute _default_attributes_json
         , TF.assign "environment_name" <$> TF.attribute _environment_name
@@ -311,80 +311,80 @@ instance TF.ToHCL (ResourceNode s) where
         , TF.assign "run_list" <$> TF.attribute _run_list
         ]
 
-instance P.HasAutomaticAttributesJson (ResourceNode s) (TF.Attr s P.Text) where
+instance P.HasAutomaticAttributesJson (NodeResource s) (TF.Attr s P.Text) where
     automaticAttributesJson =
-        lens (_automatic_attributes_json :: ResourceNode s -> TF.Attr s P.Text)
-             (\s a -> s { _automatic_attributes_json = a } :: ResourceNode s)
+        lens (_automatic_attributes_json :: NodeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _automatic_attributes_json = a } :: NodeResource s)
 
-instance P.HasDefaultAttributesJson (ResourceNode s) (TF.Attr s P.Text) where
+instance P.HasDefaultAttributesJson (NodeResource s) (TF.Attr s P.Text) where
     defaultAttributesJson =
-        lens (_default_attributes_json :: ResourceNode s -> TF.Attr s P.Text)
-             (\s a -> s { _default_attributes_json = a } :: ResourceNode s)
+        lens (_default_attributes_json :: NodeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _default_attributes_json = a } :: NodeResource s)
 
-instance P.HasEnvironmentName (ResourceNode s) (TF.Attr s P.Text) where
+instance P.HasEnvironmentName (NodeResource s) (TF.Attr s P.Text) where
     environmentName =
-        lens (_environment_name :: ResourceNode s -> TF.Attr s P.Text)
-             (\s a -> s { _environment_name = a } :: ResourceNode s)
+        lens (_environment_name :: NodeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _environment_name = a } :: NodeResource s)
 
-instance P.HasName (ResourceNode s) (TF.Attr s P.Text) where
+instance P.HasName (NodeResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceNode s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceNode s)
+        lens (_name :: NodeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: NodeResource s)
 
-instance P.HasNormalAttributesJson (ResourceNode s) (TF.Attr s P.Text) where
+instance P.HasNormalAttributesJson (NodeResource s) (TF.Attr s P.Text) where
     normalAttributesJson =
-        lens (_normal_attributes_json :: ResourceNode s -> TF.Attr s P.Text)
-             (\s a -> s { _normal_attributes_json = a } :: ResourceNode s)
+        lens (_normal_attributes_json :: NodeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _normal_attributes_json = a } :: NodeResource s)
 
-instance P.HasOverrideAttributesJson (ResourceNode s) (TF.Attr s P.Text) where
+instance P.HasOverrideAttributesJson (NodeResource s) (TF.Attr s P.Text) where
     overrideAttributesJson =
-        lens (_override_attributes_json :: ResourceNode s -> TF.Attr s P.Text)
-             (\s a -> s { _override_attributes_json = a } :: ResourceNode s)
+        lens (_override_attributes_json :: NodeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _override_attributes_json = a } :: NodeResource s)
 
-instance P.HasRunList (ResourceNode s) (TF.Attr s P.Text) where
+instance P.HasRunList (NodeResource s) (TF.Attr s P.Text) where
     runList =
-        lens (_run_list :: ResourceNode s -> TF.Attr s P.Text)
-             (\s a -> s { _run_list = a } :: ResourceNode s)
+        lens (_run_list :: NodeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _run_list = a } :: NodeResource s)
 
-instance s ~ s' => P.HasComputedAutomaticAttributesJson (TF.Ref s' (ResourceNode s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAutomaticAttributesJson (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedAutomaticAttributesJson =
-        (_automatic_attributes_json :: ResourceNode s -> TF.Attr s P.Text)
+        (_automatic_attributes_json :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDefaultAttributesJson (TF.Ref s' (ResourceNode s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultAttributesJson (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedDefaultAttributesJson =
-        (_default_attributes_json :: ResourceNode s -> TF.Attr s P.Text)
+        (_default_attributes_json :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEnvironmentName (TF.Ref s' (ResourceNode s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnvironmentName (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedEnvironmentName =
-        (_environment_name :: ResourceNode s -> TF.Attr s P.Text)
+        (_environment_name :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceNode s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceNode s -> TF.Attr s P.Text)
+        (_name :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNormalAttributesJson (TF.Ref s' (ResourceNode s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNormalAttributesJson (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedNormalAttributesJson =
-        (_normal_attributes_json :: ResourceNode s -> TF.Attr s P.Text)
+        (_normal_attributes_json :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOverrideAttributesJson (TF.Ref s' (ResourceNode s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOverrideAttributesJson (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedOverrideAttributesJson =
-        (_override_attributes_json :: ResourceNode s -> TF.Attr s P.Text)
+        (_override_attributes_json :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRunList (TF.Ref s' (ResourceNode s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRunList (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedRunList =
-        (_run_list :: ResourceNode s -> TF.Attr s P.Text)
+        (_run_list :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceNode :: TF.Resource P.Chef (ResourceNode s)
-resourceNode =
+nodeResource :: TF.Resource P.Chef (NodeResource s)
+nodeResource =
     TF.newResource "chef_node" $
-        ResourceNode {
+        NodeResource {
               _automatic_attributes_json = TF.Nil
             , _default_attributes_json = TF.Nil
             , _environment_name = TF.Nil
@@ -399,7 +399,7 @@ resourceNode =
 A <http://docs.chef.io/roles.html> is a set of standard configuration that
 can apply across multiple nodes that perform the same function.
 -}
-data ResourceRole s = ResourceRole {
+data RoleResource s = RoleResource {
       _default_attributes_json  :: !(TF.Attr s P.Text)
     {- ^ (Optional) String containing a JSON-serialized object containing the default attributes for the role. -}
     , _description              :: !(TF.Attr s P.Text)
@@ -412,8 +412,8 @@ data ResourceRole s = ResourceRole {
     {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for any nodes that belong to this role. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceRole s) where
-    toHCL ResourceRole{..} = TF.inline $ catMaybes
+instance TF.ToHCL (RoleResource s) where
+    toHCL RoleResource{..} = TF.inline $ catMaybes
         [ TF.assign "default_attributes_json" <$> TF.attribute _default_attributes_json
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -421,60 +421,60 @@ instance TF.ToHCL (ResourceRole s) where
         , TF.assign "run_list" <$> TF.attribute _run_list
         ]
 
-instance P.HasDefaultAttributesJson (ResourceRole s) (TF.Attr s P.Text) where
+instance P.HasDefaultAttributesJson (RoleResource s) (TF.Attr s P.Text) where
     defaultAttributesJson =
-        lens (_default_attributes_json :: ResourceRole s -> TF.Attr s P.Text)
-             (\s a -> s { _default_attributes_json = a } :: ResourceRole s)
+        lens (_default_attributes_json :: RoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _default_attributes_json = a } :: RoleResource s)
 
-instance P.HasDescription (ResourceRole s) (TF.Attr s P.Text) where
+instance P.HasDescription (RoleResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ResourceRole s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ResourceRole s)
+        lens (_description :: RoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: RoleResource s)
 
-instance P.HasName (ResourceRole s) (TF.Attr s P.Text) where
+instance P.HasName (RoleResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourceRole s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourceRole s)
+        lens (_name :: RoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: RoleResource s)
 
-instance P.HasOverrideAttributesJson (ResourceRole s) (TF.Attr s P.Text) where
+instance P.HasOverrideAttributesJson (RoleResource s) (TF.Attr s P.Text) where
     overrideAttributesJson =
-        lens (_override_attributes_json :: ResourceRole s -> TF.Attr s P.Text)
-             (\s a -> s { _override_attributes_json = a } :: ResourceRole s)
+        lens (_override_attributes_json :: RoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _override_attributes_json = a } :: RoleResource s)
 
-instance P.HasRunList (ResourceRole s) (TF.Attr s P.Text) where
+instance P.HasRunList (RoleResource s) (TF.Attr s P.Text) where
     runList =
-        lens (_run_list :: ResourceRole s -> TF.Attr s P.Text)
-             (\s a -> s { _run_list = a } :: ResourceRole s)
+        lens (_run_list :: RoleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _run_list = a } :: RoleResource s)
 
-instance s ~ s' => P.HasComputedDefaultAttributesJson (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultAttributesJson (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
     computedDefaultAttributesJson =
-        (_default_attributes_json :: ResourceRole s -> TF.Attr s P.Text)
+        (_default_attributes_json :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ResourceRole s -> TF.Attr s P.Text)
+        (_description :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ResourceRole s -> TF.Attr s P.Text)
+        (_name :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOverrideAttributesJson (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOverrideAttributesJson (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
     computedOverrideAttributesJson =
-        (_override_attributes_json :: ResourceRole s -> TF.Attr s P.Text)
+        (_override_attributes_json :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRunList (TF.Ref s' (ResourceRole s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRunList (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
     computedRunList =
-        (_run_list :: ResourceRole s -> TF.Attr s P.Text)
+        (_run_list :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceRole :: TF.Resource P.Chef (ResourceRole s)
-resourceRole =
+roleResource :: TF.Resource P.Chef (RoleResource s)
+roleResource =
     TF.newResource "chef_role" $
-        ResourceRole {
+        RoleResource {
               _default_attributes_json = TF.Nil
             , _description = TF.Nil
             , _name = TF.Nil

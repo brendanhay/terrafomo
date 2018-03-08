@@ -1,0 +1,28 @@
+name: Random
+datatype: false
+original: random
+package: terrafomo-builtins
+package-yaml: false
+
+rules:
+  - mode: exact
+    match: byte_length
+    type: 'P.Int'
+
+  - mode: exact
+    match: length
+    type: 'P.Int'
+
+  - mode: exact
+    match: prefix
+    type: 'P.Text'
+
+  - mode: exact
+    match: separator
+    type: 'P.Char'
+
+  - mode: exact
+    match: keepers
+    type: '(P.Keepers s)'
+
+

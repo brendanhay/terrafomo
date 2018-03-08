@@ -24,8 +24,8 @@
 module Terrafomo.Docker.DataSource
     (
     -- * Types
-      DataRegistryImage (..)
-    , dataRegistryImage
+      RegistryImageData (..)
+    , registryImageData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -69,32 +69,32 @@ Reads the image metadata from a Docker Registry. Used in conjunction with
 the </docs/providers/docker/r/image.html> resource to keep an image up to
 date on the latest available version of the tag.
 -}
-data DataRegistryImage s = DataRegistryImage {
+data RegistryImageData s = RegistryImageData {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required, string) The name of the Docker image, including any tags. e.g. @alpine:latest@ -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataRegistryImage s) where
-    toHCL DataRegistryImage{..} = TF.inline $ catMaybes
+instance TF.ToHCL (RegistryImageData s) where
+    toHCL RegistryImageData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (DataRegistryImage s) (TF.Attr s P.Text) where
+instance P.HasName (RegistryImageData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataRegistryImage s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataRegistryImage s)
+        lens (_name :: RegistryImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: RegistryImageData s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataRegistryImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RegistryImageData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataRegistryImage s -> TF.Attr s P.Text)
+        (_name :: RegistryImageData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSha256Digest (TF.Ref s' (DataRegistryImage s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSha256Digest (TF.Ref s' (RegistryImageData s)) (TF.Attr s P.Text) where
     computedSha256Digest x = TF.compute (TF.refKey x) "sha256_digest"
 
-dataRegistryImage :: TF.DataSource P.Docker (DataRegistryImage s)
-dataRegistryImage =
+registryImageData :: TF.DataSource P.Docker (RegistryImageData s)
+registryImageData =
     TF.newDataSource "docker_registry_image" $
-        DataRegistryImage {
+        RegistryImageData {
               _name = TF.Nil
             }

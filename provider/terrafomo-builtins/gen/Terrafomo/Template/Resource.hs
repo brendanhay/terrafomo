@@ -24,8 +24,8 @@
 module Terrafomo.Template.Resource
     (
     -- * Types
-      ResourceDir (..)
-    , resourceDir
+      DirResource (..)
+    , dirResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -78,7 +78,7 @@ diff to create it. This may cause "noise" in diffs in environments where
 configurations are routinely applied by many different users or within
 automation systems.
 -}
-data ResourceDir s = ResourceDir {
+data DirResource s = DirResource {
       _destination_dir :: !(TF.Attr s P.Text)
     {- ^ (Required) Path to the directory where the templated files will be written. -}
     , _source_dir      :: !(TF.Attr s P.Text)
@@ -87,47 +87,47 @@ data ResourceDir s = ResourceDir {
     {- ^ (Optional) Variables for interpolation within the template. Note that variables must all be primitives. Direct references to lists or maps will cause a validation error. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceDir s) where
-    toHCL ResourceDir{..} = TF.inline $ catMaybes
+instance TF.ToHCL (DirResource s) where
+    toHCL DirResource{..} = TF.inline $ catMaybes
         [ TF.assign "destination_dir" <$> TF.attribute _destination_dir
         , TF.assign "source_dir" <$> TF.attribute _source_dir
         , TF.assign "vars" <$> TF.attribute _vars
         ]
 
-instance P.HasDestinationDir (ResourceDir s) (TF.Attr s P.Text) where
+instance P.HasDestinationDir (DirResource s) (TF.Attr s P.Text) where
     destinationDir =
-        lens (_destination_dir :: ResourceDir s -> TF.Attr s P.Text)
-             (\s a -> s { _destination_dir = a } :: ResourceDir s)
+        lens (_destination_dir :: DirResource s -> TF.Attr s P.Text)
+             (\s a -> s { _destination_dir = a } :: DirResource s)
 
-instance P.HasSourceDir (ResourceDir s) (TF.Attr s P.Text) where
+instance P.HasSourceDir (DirResource s) (TF.Attr s P.Text) where
     sourceDir =
-        lens (_source_dir :: ResourceDir s -> TF.Attr s P.Text)
-             (\s a -> s { _source_dir = a } :: ResourceDir s)
+        lens (_source_dir :: DirResource s -> TF.Attr s P.Text)
+             (\s a -> s { _source_dir = a } :: DirResource s)
 
-instance P.HasVars (ResourceDir s) (TF.Attr s (P.Variables s)) where
+instance P.HasVars (DirResource s) (TF.Attr s (P.Variables s)) where
     vars =
-        lens (_vars :: ResourceDir s -> TF.Attr s (P.Variables s))
-             (\s a -> s { _vars = a } :: ResourceDir s)
+        lens (_vars :: DirResource s -> TF.Attr s (P.Variables s))
+             (\s a -> s { _vars = a } :: DirResource s)
 
-instance s ~ s' => P.HasComputedDestinationDir (TF.Ref s' (ResourceDir s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDestinationDir (TF.Ref s' (DirResource s)) (TF.Attr s P.Text) where
     computedDestinationDir =
-        (_destination_dir :: ResourceDir s -> TF.Attr s P.Text)
+        (_destination_dir :: DirResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSourceDir (TF.Ref s' (ResourceDir s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceDir (TF.Ref s' (DirResource s)) (TF.Attr s P.Text) where
     computedSourceDir =
-        (_source_dir :: ResourceDir s -> TF.Attr s P.Text)
+        (_source_dir :: DirResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVars (TF.Ref s' (ResourceDir s)) (TF.Attr s (P.Variables s)) where
+instance s ~ s' => P.HasComputedVars (TF.Ref s' (DirResource s)) (TF.Attr s (P.Variables s)) where
     computedVars =
-        (_vars :: ResourceDir s -> TF.Attr s (P.Variables s))
+        (_vars :: DirResource s -> TF.Attr s (P.Variables s))
             . TF.refValue
 
-resourceDir :: TF.Resource TF.NoProvider (ResourceDir s)
-resourceDir =
+dirResource :: TF.Resource TF.NoProvider (DirResource s)
+dirResource =
     TF.newResource "template_dir" $
-        ResourceDir {
+        DirResource {
               _destination_dir = TF.Nil
             , _source_dir = TF.Nil
             , _vars = TF.Nil

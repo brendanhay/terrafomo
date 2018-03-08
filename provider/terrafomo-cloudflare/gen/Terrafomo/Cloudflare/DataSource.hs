@@ -24,8 +24,8 @@
 module Terrafomo.Cloudflare.DataSource
     (
     -- * Types
-      DataIpRanges (..)
-    , dataIpRanges
+      IpRangesData (..)
+    , ipRangesData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -68,23 +68,23 @@ import qualified Terrafomo.Schema    as TF
 Use this data source to get the <https://www.cloudflare.com/ips/> of
 CloudFlare edge nodes.
 -}
-data DataIpRanges s = DataIpRanges {
+data IpRangesData s = IpRangesData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataIpRanges s) where
+instance TF.ToHCL (IpRangesData s) where
     toHCL _ = TF.empty
 
-instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (DataIpRanges s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
-instance s ~ s' => P.HasComputedIpv4CidrBlocks (TF.Ref s' (DataIpRanges s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv4CidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
     computedIpv4CidrBlocks x = TF.compute (TF.refKey x) "ipv4_cidr_blocks"
 
-instance s ~ s' => P.HasComputedIpv6CidrBlocks (TF.Ref s' (DataIpRanges s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv6CidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
     computedIpv6CidrBlocks x = TF.compute (TF.refKey x) "ipv6_cidr_blocks"
 
-dataIpRanges :: TF.DataSource P.Cloudflare (DataIpRanges s)
-dataIpRanges =
+ipRangesData :: TF.DataSource P.Cloudflare (IpRangesData s)
+ipRangesData =
     TF.newDataSource "cloudflare_ip_ranges" $
-        DataIpRanges {
+        IpRangesData {
             }

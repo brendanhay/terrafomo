@@ -24,8 +24,8 @@
 module Terrafomo.OpsGenie.DataSource
     (
     -- * Types
-      DataUser (..)
-    , dataUser
+      UserData (..)
+    , userData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -69,35 +69,35 @@ import qualified Terrafomo.Schema    as TF
 Use this data source to get information about a specific user within
 OpsGenie.
 -}
-data DataUser s = DataUser {
+data UserData s = UserData {
       _username :: !(TF.Attr s P.Text)
     {- ^ (Required) The username (email) to use to find a user in OpsGenie. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataUser s) where
-    toHCL DataUser{..} = TF.inline $ catMaybes
+instance TF.ToHCL (UserData s) where
+    toHCL UserData{..} = TF.inline $ catMaybes
         [ TF.assign "username" <$> TF.attribute _username
         ]
 
-instance P.HasUsername (DataUser s) (TF.Attr s P.Text) where
+instance P.HasUsername (UserData s) (TF.Attr s P.Text) where
     username =
-        lens (_username :: DataUser s -> TF.Attr s P.Text)
-             (\s a -> s { _username = a } :: DataUser s)
+        lens (_username :: UserData s -> TF.Attr s P.Text)
+             (\s a -> s { _username = a } :: UserData s)
 
-instance s ~ s' => P.HasComputedFullName (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFullName (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
     computedFullName x = TF.compute (TF.refKey x) "full_name"
 
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
     computedRole x = TF.compute (TF.refKey x) "role"
 
-instance s ~ s' => P.HasComputedUsername (TF.Ref s' (DataUser s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
     computedUsername =
-        (_username :: DataUser s -> TF.Attr s P.Text)
+        (_username :: UserData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataUser :: TF.DataSource P.OpsGenie (DataUser s)
-dataUser =
+userData :: TF.DataSource P.OpsGenie (UserData s)
+userData =
     TF.newDataSource "opsgenie_user" $
-        DataUser {
+        UserData {
               _username = TF.Nil
             }

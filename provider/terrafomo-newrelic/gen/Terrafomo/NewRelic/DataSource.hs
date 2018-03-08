@@ -24,11 +24,11 @@
 module Terrafomo.NewRelic.DataSource
     (
     -- * Types
-      DataApplication (..)
-    , dataApplication
+      ApplicationData (..)
+    , applicationData
 
-    , DataKeyTransaction (..)
-    , dataKeyTransaction
+    , KeyTransactionData (..)
+    , keyTransactionData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -73,39 +73,39 @@ import qualified Terrafomo.Schema    as TF
 Use this data source to get information about a specific application in New
 Relic.
 -}
-data DataApplication s = DataApplication {
+data ApplicationData s = ApplicationData {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the application in New Relic. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataApplication s) where
-    toHCL DataApplication{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ApplicationData s) where
+    toHCL ApplicationData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (DataApplication s) (TF.Attr s P.Text) where
+instance P.HasName (ApplicationData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataApplication s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataApplication s)
+        lens (_name :: ApplicationData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ApplicationData s)
 
-instance s ~ s' => P.HasComputedHostIds (TF.Ref s' (DataApplication s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostIds (TF.Ref s' (ApplicationData s)) (TF.Attr s P.Text) where
     computedHostIds x = TF.compute (TF.refKey x) "host_ids"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataApplication s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApplicationData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (DataApplication s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (ApplicationData s)) (TF.Attr s P.Text) where
     computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataApplication s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ApplicationData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataApplication s -> TF.Attr s P.Text)
+        (_name :: ApplicationData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataApplication :: TF.DataSource P.NewRelic (DataApplication s)
-dataApplication =
+applicationData :: TF.DataSource P.NewRelic (ApplicationData s)
+applicationData =
     TF.newDataSource "newrelic_application" $
-        DataApplication {
+        ApplicationData {
               _name = TF.Nil
             }
 
@@ -114,32 +114,32 @@ dataApplication =
 Use this data source to get information about a specific key transaction in
 New Relic.
 -}
-data DataKeyTransaction s = DataKeyTransaction {
+data KeyTransactionData s = KeyTransactionData {
       _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the application in New Relic. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataKeyTransaction s) where
-    toHCL DataKeyTransaction{..} = TF.inline $ catMaybes
+instance TF.ToHCL (KeyTransactionData s) where
+    toHCL KeyTransactionData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (DataKeyTransaction s) (TF.Attr s P.Text) where
+instance P.HasName (KeyTransactionData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DataKeyTransaction s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DataKeyTransaction s)
+        lens (_name :: KeyTransactionData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: KeyTransactionData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataKeyTransaction s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyTransactionData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DataKeyTransaction s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (KeyTransactionData s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: DataKeyTransaction s -> TF.Attr s P.Text)
+        (_name :: KeyTransactionData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataKeyTransaction :: TF.DataSource P.NewRelic (DataKeyTransaction s)
-dataKeyTransaction =
+keyTransactionData :: TF.DataSource P.NewRelic (KeyTransactionData s)
+keyTransactionData =
     TF.newDataSource "newrelic_key_transaction" $
-        DataKeyTransaction {
+        KeyTransactionData {
               _name = TF.Nil
             }

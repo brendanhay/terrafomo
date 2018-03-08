@@ -9,12 +9,3 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Local.Types where
-
--- import Data.Text (Text)
-
--- import Terrafomo
-
--- import Formatting (Format, (%))
-
--- import qualified Terrafomo.Local.Lens as TF
--- import qualified Terrafomo.HCL as HCL

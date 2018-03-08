@@ -24,11 +24,11 @@
 module Terrafomo.Kubernetes.DataSource
     (
     -- * Types
-      DataService (..)
-    , dataService
+      ServiceData (..)
+    , serviceData
 
-    , DataStorageClass (..)
-    , dataStorageClass
+    , StorageClassData (..)
+    , storageClassData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -71,30 +71,30 @@ A Service is an abstraction which defines a logical set of pods and a policy
 by which to access them - sometimes called a micro-service. This data source
 allows you to pull data about such service.
 -}
-data DataService s = DataService {
+data ServiceData s = ServiceData {
       _metadata :: !(TF.Attr s P.Text)
     {- ^ (Required) Standard service's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataService s) where
-    toHCL DataService{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ServiceData s) where
+    toHCL ServiceData{..} = TF.inline $ catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         ]
 
-instance P.HasMetadata (DataService s) (TF.Attr s P.Text) where
+instance P.HasMetadata (ServiceData s) (TF.Attr s P.Text) where
     metadata =
-        lens (_metadata :: DataService s -> TF.Attr s P.Text)
-             (\s a -> s { _metadata = a } :: DataService s)
+        lens (_metadata :: ServiceData s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata = a } :: ServiceData s)
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (DataService s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ServiceData s)) (TF.Attr s P.Text) where
     computedMetadata =
-        (_metadata :: DataService s -> TF.Attr s P.Text)
+        (_metadata :: ServiceData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataService :: TF.DataSource P.Kubernetes (DataService s)
-dataService =
+serviceData :: TF.DataSource P.Kubernetes (ServiceData s)
+serviceData =
     TF.newDataSource "kubernetes_service" $
-        DataService {
+        ServiceData {
               _metadata = TF.Nil
             }
 
@@ -105,29 +105,29 @@ administrators to define abstractions for the underlying storage platform.
 Read more at
 http://blog.kubernetes.io/2017/03/dynamic-provisioning-and-storage-classes-kubernetes.html
 -}
-data DataStorageClass s = DataStorageClass {
+data StorageClassData s = StorageClassData {
       _metadata :: !(TF.Attr s P.Text)
     {- ^ (Required) Standard storage class's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataStorageClass s) where
-    toHCL DataStorageClass{..} = TF.inline $ catMaybes
+instance TF.ToHCL (StorageClassData s) where
+    toHCL StorageClassData{..} = TF.inline $ catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         ]
 
-instance P.HasMetadata (DataStorageClass s) (TF.Attr s P.Text) where
+instance P.HasMetadata (StorageClassData s) (TF.Attr s P.Text) where
     metadata =
-        lens (_metadata :: DataStorageClass s -> TF.Attr s P.Text)
-             (\s a -> s { _metadata = a } :: DataStorageClass s)
+        lens (_metadata :: StorageClassData s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata = a } :: StorageClassData s)
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (DataStorageClass s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (StorageClassData s)) (TF.Attr s P.Text) where
     computedMetadata =
-        (_metadata :: DataStorageClass s -> TF.Attr s P.Text)
+        (_metadata :: StorageClassData s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataStorageClass :: TF.DataSource P.Kubernetes (DataStorageClass s)
-dataStorageClass =
+storageClassData :: TF.DataSource P.Kubernetes (StorageClassData s)
+storageClassData =
     TF.newDataSource "kubernetes_storage_class" $
-        DataStorageClass {
+        StorageClassData {
               _metadata = TF.Nil
             }
