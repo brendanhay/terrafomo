@@ -49,7 +49,6 @@ import qualified Network.AWS.Data.Text  as AWS
 import qualified Terrafomo.HCL          as HCL
 import qualified Terrafomo.TH           as TH
 
--- FIXME: Needs to be redefined using Attr.
 newtype Tags s = Tags { fromTags :: Map Text (Attr s Text) }
     deriving (Show, Eq)
 
@@ -120,7 +119,7 @@ data Ec2Filter s = Ec2Filter
     , _values :: !(Attr s [Attr s Text])
     } deriving (Show, Eq, Generic)
 
-$(TH.makeInline ''Ec2Filter)
+$(TH.makeBlock ''Ec2Filter)
 
 data Ec2VolumeType
     = VolumeStandard
@@ -148,7 +147,7 @@ data Ec2RootBlockDevice s = Ec2RootBlockDevice
     -- termination (Default: true).
     } deriving (Show, Eq, Generic)
 
-$(TH.makeInline ''Ec2RootBlockDevice)
+$(TH.makeBlock ''Ec2RootBlockDevice)
 
 -- | If you use ebs_block_device on an aws_instance, Terraform will assume
 -- management over the full set of non-root EBS block devices for the instance,
@@ -175,7 +174,7 @@ data Ec2EbsBlockDevice s = Ec2EbsBlockDevice
     -- false). Cannot be used with snapshot_id.
     } deriving (Show, Eq, Generic)
 
-$(TH.makeInline ''Ec2EbsBlockDevice)
+$(TH.makeBlock ''Ec2EbsBlockDevice)
 
 -- | Each AWS Instance type has a different set of Instance Store block devices
 -- available for attachment. AWS publishes a list of which ephemeral devices are
@@ -190,7 +189,7 @@ data Ec2EphemeralBlockDevice s = Ec2EphemeralBlockDevice
     -- ^ (Optional) Suppresses the specified device included in the AMI's block device mapping.
     } deriving (Show, Eq, Generic)
 
-$(TH.makeInline ''Ec2EphemeralBlockDevice)
+$(TH.makeBlock ''Ec2EphemeralBlockDevice)
 
 -- S3
 
@@ -204,7 +203,7 @@ data S3BucketVersioning s = S3BucketVersioning
     -- bucket or Permanently delete an object version. Default is false.
     } deriving (Show, Eq, Generic)
 
-$(TH.makeInline ''S3BucketVersioning)
+$(TH.makeBlock ''S3BucketVersioning)
 
 -- DynamoDB
 
@@ -291,7 +290,7 @@ data ElbAccessLogs s = ElbAccessLogs
     -- ^ (Optional) Boolean to enable / disable access_logs. Default is true
     } deriving (Show, Eq, Generic)
 
-$(TH.makeInline ''ElbAccessLogs)
+$(TH.makeBlock ''ElbAccessLogs)
 
 data ElbListener s = ElbListener
     { _instance_port      :: (Attr s Word16)
@@ -323,7 +322,7 @@ data ElbHealthCheck s = ElbHealthCheck
     -- ^ (Required) The length of time before the check times out.
     } deriving (Show, Eq, Generic)
 
-$(TH.makeInline ''ElbHealthCheck)
+$(TH.makeBlock ''ElbHealthCheck)
 
 -- IAM
 

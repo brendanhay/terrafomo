@@ -101,6 +101,6 @@ class HasVerification a b | a -> b where
 instance HasVerification a b => HasVerification (Schema l p a) b where
     verification = TF.configuration . verification
 
-$(TH.makeInline ''SystemdUnitDropin)
-$(TH.makeInline ''FileContent)
-$(TH.makeInline ''FileSource)
+$(TH.makeBlock ''SystemdUnitDropin)
+$(TH.makeBlock ''FileContent)
+$(TH.makeBlock ''FileSource)

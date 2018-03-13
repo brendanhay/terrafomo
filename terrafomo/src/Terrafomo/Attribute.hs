@@ -30,11 +30,11 @@ import Terrafomo.Name
 -- or data source, a constant value, or nil.
 data Attr s a
     = Compute  !Key  !Name !Name
+    | Constant !a
+    | Nil
     | Join     !Text ![Attr s a]
     | Apply    !Text ![Attr s a]
     | Infix    !Text !(Attr s a) !(Attr s a)
-    | Constant !a
-    | Nil
       deriving (Show, Eq, Generic)
 
 -- Flatten above is really a sign of some expression language - rather than a
@@ -66,8 +66,8 @@ join = Join
 -- not interpolated. The contents of the file are read as-is.
 --
 -- The path is interpreted relative to the working directory.
-file :: Attr s Text -> Attr s Text
-file = Apply "file" . pure
+file :: FilePath -> Attr s Text
+file = Apply "file" . pure . Constant . fromString
 {-# INLINE file #-}
 
 -- | Supply a constant Haskell value as an attribute. Equivalent to 'Just'.

@@ -181,6 +181,9 @@ type JSON = JSON.Value
 renderHCL :: [Value] -> Doc
 renderHCL = PP.vcat . List.intersperse (PP.text " ") . map pretty
 
+renderRaw :: Value -> LText.Text
+renderRaw = PP.displayT . PP.renderCompact . pretty
+
 prettyBlock :: [Value] -> Doc
 prettyBlock xs = PP.nest 2 ("{" <$$> PP.vcat (map pretty xs)) <$$> "}"
 
@@ -192,13 +195,6 @@ prettyBool = \case
 assign :: ToHCL a => Id -> a -> Value
 assign k v = Assign k (toHCL v)
 
--- repeated :: ToHCL a => Maybe [Attr s a] -> Maybe Value
--- repeated x = do
---     ys <- x
---     case mapMaybe attribute ys of
---         [] -> Nothing
---         zs -> Just (List zs)
-
 -- FIXME: This is essentially a scratch pad. Need to revisit attributes and
 -- expressions specifically, along with general interpolation syntax (Interpolate).
 attribute :: ToHCL a => Attr s a -> Maybe Value
@@ -207,22 +203,23 @@ attribute = \case
     Constant    v   -> Just (toHCL      v)
     Nil             -> Nothing
 
-    Infix    op a b -> Just . String $ Escape [a', " ", sym, " ", b']
+    Join d vs -> Just (concat args)
+      where
+        sep  = Chunk (LText.fromStrict d)
+        args = List.intersperse sep (map (Escape . pure) $ mapMaybe attribute vs)
+
+    Apply f xs -> Just . String $ Escape [concat (fun : "(" : args ++ [")"])]
+      where
+        fun  = Chunk (LText.fromStrict f)
+        args = List.intersperse ", " (mapMaybe (fmap (Chunk . renderRaw) . attribute) xs)
+
+    -- FIXME: precedence - ${${${1 + 1} + 3} + 9} ...
+    Infix  op a b -> Just . String $ Escape [a', " ", sym, " ", b']
       where
         a'  = fromMaybe "nil" (attribute a)
         b'  = fromMaybe "nil" (attribute b)
 
         sym = string (LText.fromStrict op)
-
-    Apply    f  xs  -> Just $ String args
-      where
-        args    = Escape $ fun : "(" : List.intersperse ", " (mapMaybe attribute xs) ++ [")"]
-        fun     = string (LText.fromStrict f)
-
-    Join d vs -> Just (concat escaped)
-      where
-        escaped = List.intersperse sep (map (Escape . pure) $ mapMaybe attribute vs)
-        sep     = Chunk (LText.fromStrict d)
 
 compute :: Key -> Name -> Value
 compute (Key t n) v =
