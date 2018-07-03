@@ -25,9 +25,11 @@
 --
 module Terrafomo.AWS.Types
     ( module Terrafomo.AWS.Types
+    , IPRange
     , Region (..)
     ) where
 
+import Data.IP         (IPRange)
 import Data.Map.Strict (Map)
 import Data.Text       (Text)
 import Data.Word       (Word16)

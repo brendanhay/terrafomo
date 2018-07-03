@@ -98,7 +98,6 @@ import qualified Data.Text             as P
 import qualified Data.Word             as P
 import qualified GHC.Base              as P
 import qualified Numeric.Natural       as P
-import qualified Terrafomo.IP          as P
 import qualified Terrafomo.Random.Lens as P
 
 import qualified Terrafomo.Attribute as TF
@@ -440,15 +439,15 @@ data StringResource s = StringResource {
     {- ^ (Optional) Arbitrary map of values that, when changed, will trigger a new id to be generated. See <../index.html> for more information. -}
     , _length           :: !(TF.Attr s P.Int)
     {- ^ (Required) The length of the string desired -}
-    , _lower            :: !(TF.Attr s P.Text)
+    , _lower            :: !(TF.Attr s P.Bool)
     {- ^ (Optional) (default true) Include lowercase alphabet characters in random string. -}
-    , _number           :: !(TF.Attr s P.Text)
+    , _number           :: !(TF.Attr s P.Bool)
     {- ^ (Optional) (default true) Include numeric characters in random string. -}
     , _override_special :: !(TF.Attr s P.Text)
     {- ^ (Optional) Supply your own list of special characters to use for string generation.  This overrides characters list in the special argument.  The special argument must still be set to true for any overwritten characters to be used in generation. -}
-    , _special          :: !(TF.Attr s P.Text)
+    , _special          :: !(TF.Attr s P.Bool)
     {- ^ (Optional) (default true) Include special characters in random string. These are '!@#$%&*()-_=+[]{}<>:?' -}
-    , _upper            :: !(TF.Attr s P.Text)
+    , _upper            :: !(TF.Attr s P.Bool)
     {- ^ (Optional) (default true) Include uppercase alphabet characters in random string. -}
     } deriving (Show, Eq)
 
@@ -473,14 +472,14 @@ instance P.HasLength (StringResource s) (TF.Attr s P.Int) where
         lens (_length :: StringResource s -> TF.Attr s P.Int)
              (\s a -> s { _length = a } :: StringResource s)
 
-instance P.HasLower (StringResource s) (TF.Attr s P.Text) where
+instance P.HasLower (StringResource s) (TF.Attr s P.Bool) where
     lower =
-        lens (_lower :: StringResource s -> TF.Attr s P.Text)
+        lens (_lower :: StringResource s -> TF.Attr s P.Bool)
              (\s a -> s { _lower = a } :: StringResource s)
 
-instance P.HasNumber (StringResource s) (TF.Attr s P.Text) where
+instance P.HasNumber (StringResource s) (TF.Attr s P.Bool) where
     number =
-        lens (_number :: StringResource s -> TF.Attr s P.Text)
+        lens (_number :: StringResource s -> TF.Attr s P.Bool)
              (\s a -> s { _number = a } :: StringResource s)
 
 instance P.HasOverrideSpecial (StringResource s) (TF.Attr s P.Text) where
@@ -488,14 +487,14 @@ instance P.HasOverrideSpecial (StringResource s) (TF.Attr s P.Text) where
         lens (_override_special :: StringResource s -> TF.Attr s P.Text)
              (\s a -> s { _override_special = a } :: StringResource s)
 
-instance P.HasSpecial (StringResource s) (TF.Attr s P.Text) where
+instance P.HasSpecial (StringResource s) (TF.Attr s P.Bool) where
     special =
-        lens (_special :: StringResource s -> TF.Attr s P.Text)
+        lens (_special :: StringResource s -> TF.Attr s P.Bool)
              (\s a -> s { _special = a } :: StringResource s)
 
-instance P.HasUpper (StringResource s) (TF.Attr s P.Text) where
+instance P.HasUpper (StringResource s) (TF.Attr s P.Bool) where
     upper =
-        lens (_upper :: StringResource s -> TF.Attr s P.Text)
+        lens (_upper :: StringResource s -> TF.Attr s P.Bool)
              (\s a -> s { _upper = a } :: StringResource s)
 
 instance s ~ s' => P.HasComputedKeepers (TF.Ref s' (StringResource s)) (TF.Attr s (P.Keepers s)) where
@@ -508,14 +507,14 @@ instance s ~ s' => P.HasComputedLength (TF.Ref s' (StringResource s)) (TF.Attr s
         (_length :: StringResource s -> TF.Attr s P.Int)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLower (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLower (TF.Ref s' (StringResource s)) (TF.Attr s P.Bool) where
     computedLower =
-        (_lower :: StringResource s -> TF.Attr s P.Text)
+        (_lower :: StringResource s -> TF.Attr s P.Bool)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNumber (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNumber (TF.Ref s' (StringResource s)) (TF.Attr s P.Bool) where
     computedNumber =
-        (_number :: StringResource s -> TF.Attr s P.Text)
+        (_number :: StringResource s -> TF.Attr s P.Bool)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedOverrideSpecial (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
@@ -526,14 +525,14 @@ instance s ~ s' => P.HasComputedOverrideSpecial (TF.Ref s' (StringResource s)) (
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
     computedResult x = TF.compute (TF.refKey x) "result"
 
-instance s ~ s' => P.HasComputedSpecial (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSpecial (TF.Ref s' (StringResource s)) (TF.Attr s P.Bool) where
     computedSpecial =
-        (_special :: StringResource s -> TF.Attr s P.Text)
+        (_special :: StringResource s -> TF.Attr s P.Bool)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUpper (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUpper (TF.Ref s' (StringResource s)) (TF.Attr s P.Bool) where
     computedUpper =
-        (_upper :: StringResource s -> TF.Attr s P.Text)
+        (_upper :: StringResource s -> TF.Attr s P.Bool)
             . TF.refValue
 
 stringResource :: TF.Resource TF.NoProvider (StringResource s)

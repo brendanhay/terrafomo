@@ -81,6 +81,7 @@ import Terrafomo.Name
 import qualified Data.Aeson                   as JSON
 import qualified Data.Aeson.Encode.Pretty     as JSON (encodePretty)
 import qualified Data.Foldable                as Fold
+import qualified Data.IP                      as IP
 import qualified Data.List                    as List
 import qualified Data.Map.Strict              as Map
 import qualified Data.Text.Lazy               as LText
@@ -272,9 +273,6 @@ string = String . Chunk
 concat :: [Interpolate] -> Value
 concat = String . Concat
 
--- escape :: Value -> Value
--- escape = String . Escape . pure
-
 json :: ToJSON a => a -> Value
 json = HereDoc "JSON" . LText.decodeUtf8 . JSON.encodePretty
 
@@ -359,6 +357,14 @@ instance ToHCL LText.Text where
 
 instance ToHCL Builder where
     toHCL = string . Build.toLazyText
+    {-# INLINEABLE toHCL #-}
+
+instance ToHCL IP.IP where
+    toHCL = String . fromString . show
+    {-# INLINEABLE toHCL #-}
+
+instance ToHCL IP.IPRange where
+    toHCL = String . fromString . show
     {-# INLINEABLE toHCL #-}
 
 instance ToHCL JSON where

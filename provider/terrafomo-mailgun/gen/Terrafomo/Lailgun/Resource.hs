@@ -61,7 +61,6 @@ import qualified Data.Text                  as P
 import qualified Data.Word                  as P
 import qualified GHC.Base                   as P
 import qualified Numeric.Natural            as P
-import qualified Terrafomo.IP               as P
 import qualified Terrafomo.Lailgun.Lens     as P
 import qualified Terrafomo.Lailgun.Provider as P
 

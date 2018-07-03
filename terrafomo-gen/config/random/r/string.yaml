@@ -1,0 +1,9 @@
+arguments:
+  _upper:
+    type: 'P.Bool'
+  _lower:
+    type: 'P.Bool'
+  _number:
+    type: 'P.Bool'
+  _special:
+    type: 'P.Bool'

@@ -1,6 +1,6 @@
 arguments:
   _cidr_blocks:
-    type: '[TF.Attr s P.CIDR]'
+    type: '[TF.Attr s P.IPRange]'
   _type':
     type: 'P.Ec2Traffic'
   _protocol:

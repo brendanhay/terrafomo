@@ -60,7 +60,6 @@ import qualified Data.Text                   as P
 import qualified Data.Word                   as P
 import qualified GHC.Base                    as P
 import qualified Numeric.Natural             as P
-import qualified Terrafomo.IP                as P
 import qualified Terrafomo.PowerDNS.Lens     as P
 import qualified Terrafomo.PowerDNS.Provider as P
 

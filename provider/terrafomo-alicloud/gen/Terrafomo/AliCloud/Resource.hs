@@ -657,7 +657,6 @@ import qualified GHC.Base                    as P
 import qualified Numeric.Natural             as P
 import qualified Terrafomo.AliCloud.Lens     as P
 import qualified Terrafomo.AliCloud.Provider as P
-import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -1708,112 +1707,51 @@ dnsGroupResource =
 
 {- | The @alicloud_dns@ AliCloud resource.
 
-Provides a DNS Record resource.
+Provides a DNS resource. ~> NOTE: The domain name which you want to add must
+be already registered and had not added by another account. Every domain
+name can only exist in a unique group.
 -}
 data DnsResource s = DnsResource {
-      _host_record :: !(TF.Attr s P.Text)
-    {- ^ (Required) Host record for the domain record. This host_record can have at most 253 characters, and each part split with "." can have at most 63 characters, and must contain only alphanumeric characters or hyphens, such as "-",".","*","@",  and must not begin or end with "-". -}
-    , _name        :: !(TF.Attr s P.Text)
+      _group_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Id of the group in which the domain will add. If not supplied, then use default group. -}
+    , _name     :: !(TF.Attr s P.Text)
     {- ^ (Required) Name of the domain. This name without suffix can have a string of 1 to 63 characters, must contain only alphanumeric characters or "-", and must not begin or end with "-", and "-" must not in the 3th and 4th character positions at the same time. Suffix @.sh@ and @.tel@ are not supported. -}
-    , _priority    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The priority of domain record. Valid values are @[1-10]@ . When the @type@ is @MX@ , this parameter is required. -}
-    , _routing     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The parsing line of domain record. Valid values are @default@ , @telecom@ , @unicom@ , @mobile@ , @oversea@ and @edu@ . When the @type@ is @FORWORD_URL@ , this parameter must be @default@ . Default value is @default@ . -}
-    , _ttl         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The effective time of domain record. Its scope depends on the edition of the cloud resolution. Free is @[600, 86400]@ , Basic is @[120, 86400]@ , Standard is @[60, 86400]@ , Ultimate is @[10, 86400]@ , Exclusive is @[1, 86400]@ . Default value is @600@ . -}
-    , _type'       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The type of domain record. Valid values are @A@ , @NS@ , @MX@ , @TXT@ , @CNAME@ , @SRV@ , @AAAA@ , @REDIRECT_URL@ and @FORWORD_URL@ . -}
-    , _value       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The value of domain record. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DnsResource s) where
     toHCL DnsResource{..} = TF.inline $ catMaybes
-        [ TF.assign "host_record" <$> TF.attribute _host_record
+        [ TF.assign "group_id" <$> TF.attribute _group_id
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "priority" <$> TF.attribute _priority
-        , TF.assign "routing" <$> TF.attribute _routing
-        , TF.assign "ttl" <$> TF.attribute _ttl
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance P.HasHostRecord (DnsResource s) (TF.Attr s P.Text) where
-    hostRecord =
-        lens (_host_record :: DnsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _host_record = a } :: DnsResource s)
+instance P.HasGroupId (DnsResource s) (TF.Attr s P.Text) where
+    groupId =
+        lens (_group_id :: DnsResource s -> TF.Attr s P.Text)
+             (\s a -> s { _group_id = a } :: DnsResource s)
 
 instance P.HasName (DnsResource s) (TF.Attr s P.Text) where
     name =
         lens (_name :: DnsResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DnsResource s)
 
-instance P.HasPriority (DnsResource s) (TF.Attr s P.Text) where
-    priority =
-        lens (_priority :: DnsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _priority = a } :: DnsResource s)
+instance s ~ s' => P.HasComputedDnsServer (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
+    computedDnsServer x = TF.compute (TF.refKey x) "dns_server"
 
-instance P.HasRouting (DnsResource s) (TF.Attr s P.Text) where
-    routing =
-        lens (_routing :: DnsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _routing = a } :: DnsResource s)
-
-instance P.HasTtl (DnsResource s) (TF.Attr s P.Text) where
-    ttl =
-        lens (_ttl :: DnsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: DnsResource s)
-
-instance P.HasType' (DnsResource s) (TF.Attr s P.Text) where
-    type' =
-        lens (_type' :: DnsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: DnsResource s)
-
-instance P.HasValue (DnsResource s) (TF.Attr s P.Text) where
-    value =
-        lens (_value :: DnsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _value = a } :: DnsResource s)
-
-instance s ~ s' => P.HasComputedHostRecord (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
-    computedHostRecord x = TF.compute (TF.refKey x) "host_record"
+instance s ~ s' => P.HasComputedGroupId (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
+    computedGroupId x = TF.compute (TF.refKey x) "group_id"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
-    computedLocked x = TF.compute (TF.refKey x) "Locked"
-
 instance s ~ s' => P.HasComputedName (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedPriority (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
-    computedPriority x = TF.compute (TF.refKey x) "priority"
-
-instance s ~ s' => P.HasComputedRouting (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
-    computedRouting x = TF.compute (TF.refKey x) "routing"
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
-
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
-    computedTtl x = TF.compute (TF.refKey x) "ttl"
-
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
-
-instance s ~ s' => P.HasComputedValue (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "value"
 
 dnsResource :: TF.Resource P.AliCloud (DnsResource s)
 dnsResource =
     TF.newResource "alicloud_dns" $
         DnsResource {
-              _host_record = TF.Nil
+              _group_id = TF.Nil
             , _name = TF.Nil
-            , _priority = TF.Nil
-            , _routing = TF.Nil
-            , _ttl = TF.Nil
-            , _type' = TF.Nil
-            , _value = TF.Nil
             }
 
 {- | The @alicloud_eip_association@ AliCloud resource.

@@ -34,8 +34,7 @@ import Lens.Micro (Lens', lens)
 {% for import in imports %}
 import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Data.Text    as P
-import qualified Terrafomo.IP as P
+import qualified Data.Text as P
 
 import qualified Terrafomo.HCL      as TF
 import qualified Terrafomo.Name     as TF

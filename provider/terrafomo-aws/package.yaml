@@ -15,6 +15,7 @@ dependencies:
   - text
   - amazonka-core
   - formatting
+  - iproute
 
 library:
   source-dirs:

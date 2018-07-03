@@ -655,7 +655,6 @@ import qualified GHC.Base               as P
 import qualified Numeric.Natural        as P
 import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Terrafomo.IP           as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -4350,7 +4349,7 @@ instance P.HasVpcId (RouteTableData s) (TF.Attr s P.Text) where
         lens (_vpc_id :: RouteTableData s -> TF.Attr s P.Text)
              (\s a -> s { _vpc_id = a } :: RouteTableData s)
 
-instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (RouteTableData s)) (TF.Attr s P.CIDR) where
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (RouteTableData s)) (TF.Attr s P.IPRange) where
     computedCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
 
 instance s ~ s' => P.HasComputedEgressOnlyGatewayId (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
@@ -4367,7 +4366,7 @@ instance s ~ s' => P.HasComputedGatewayId (TF.Ref s' (RouteTableData s)) (TF.Att
 instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
     computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
-instance s ~ s' => P.HasComputedIpv6CidrBlock (TF.Ref s' (RouteTableData s)) (TF.Attr s P.CIDR) where
+instance s ~ s' => P.HasComputedIpv6CidrBlock (TF.Ref s' (RouteTableData s)) (TF.Attr s P.IPRange) where
     computedIpv6CidrBlock x = TF.compute (TF.refKey x) "ipv6_cidr_block"
 
 instance s ~ s' => P.HasComputedNatGatewayId (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
@@ -4764,7 +4763,7 @@ to.
 data SubnetData s = SubnetData {
       _availability_zone :: !(TF.Attr s P.Zone)
     {- ^ (Optional) The availability zone where the subnet must reside. -}
-    , _cidr_block        :: !(TF.Attr s P.CIDR)
+    , _cidr_block        :: !(TF.Attr s P.IPRange)
     {- ^ (Optional) The cidr block of the desired subnet. -}
     , _default_for_az    :: !(TF.Attr s P.Text)
     {- ^ (Optional) Boolean constraint for whether the desired subnet must be the default subnet for its associated availability zone. -}
@@ -4772,7 +4771,7 @@ data SubnetData s = SubnetData {
     {- ^ (Optional) Custom filter block as described below. -}
     , _id                :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the specific subnet to retrieve. -}
-    , _ipv6_cidr_block   :: !(TF.Attr s P.CIDR)
+    , _ipv6_cidr_block   :: !(TF.Attr s P.IPRange)
     {- ^ (Optional) The Ipv6 cidr block of the desired subnet -}
     , _state             :: !(TF.Attr s P.Text)
     {- ^ (Optional) The state that the desired subnet must have. -}
@@ -4800,9 +4799,9 @@ instance P.HasAvailabilityZone (SubnetData s) (TF.Attr s P.Zone) where
         lens (_availability_zone :: SubnetData s -> TF.Attr s P.Zone)
              (\s a -> s { _availability_zone = a } :: SubnetData s)
 
-instance P.HasCidrBlock (SubnetData s) (TF.Attr s P.CIDR) where
+instance P.HasCidrBlock (SubnetData s) (TF.Attr s P.IPRange) where
     cidrBlock =
-        lens (_cidr_block :: SubnetData s -> TF.Attr s P.CIDR)
+        lens (_cidr_block :: SubnetData s -> TF.Attr s P.IPRange)
              (\s a -> s { _cidr_block = a } :: SubnetData s)
 
 instance P.HasDefaultForAz (SubnetData s) (TF.Attr s P.Text) where
@@ -4820,9 +4819,9 @@ instance P.HasId (SubnetData s) (TF.Attr s P.Text) where
         lens (_id :: SubnetData s -> TF.Attr s P.Text)
              (\s a -> s { _id = a } :: SubnetData s)
 
-instance P.HasIpv6CidrBlock (SubnetData s) (TF.Attr s P.CIDR) where
+instance P.HasIpv6CidrBlock (SubnetData s) (TF.Attr s P.IPRange) where
     ipv6CidrBlock =
-        lens (_ipv6_cidr_block :: SubnetData s -> TF.Attr s P.CIDR)
+        lens (_ipv6_cidr_block :: SubnetData s -> TF.Attr s P.IPRange)
              (\s a -> s { _ipv6_cidr_block = a } :: SubnetData s)
 
 instance P.HasState (SubnetData s) (TF.Attr s P.Text) where
@@ -4845,9 +4844,9 @@ instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (SubnetData s)) (TF.
         (_availability_zone :: SubnetData s -> TF.Attr s P.Zone)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (SubnetData s)) (TF.Attr s P.CIDR) where
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (SubnetData s)) (TF.Attr s P.IPRange) where
     computedCidrBlock =
-        (_cidr_block :: SubnetData s -> TF.Attr s P.CIDR)
+        (_cidr_block :: SubnetData s -> TF.Attr s P.IPRange)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedDefaultForAz (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
@@ -4865,9 +4864,9 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text)
         (_id :: SubnetData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedIpv6CidrBlock (TF.Ref s' (SubnetData s)) (TF.Attr s P.CIDR) where
+instance s ~ s' => P.HasComputedIpv6CidrBlock (TF.Ref s' (SubnetData s)) (TF.Attr s P.IPRange) where
     computedIpv6CidrBlock =
-        (_ipv6_cidr_block :: SubnetData s -> TF.Attr s P.CIDR)
+        (_ipv6_cidr_block :: SubnetData s -> TF.Attr s P.IPRange)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
@@ -4956,7 +4955,7 @@ useful when a module accepts a vpc id as an input variable and needs to, for
 example, determine the CIDR block of that VPC.
 -}
 data VpcData s = VpcData {
-      _cidr_block      :: !(TF.Attr s P.CIDR)
+      _cidr_block      :: !(TF.Attr s P.IPRange)
     {- ^ (Optional) The cidr block of the desired VPC. -}
     , _default'        :: !(TF.Attr s P.Text)
     {- ^ (Optional) Boolean constraint on whether the desired VPC is the default VPC for the region. -}
@@ -4983,9 +4982,9 @@ instance TF.ToHCL (VpcData s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasCidrBlock (VpcData s) (TF.Attr s P.CIDR) where
+instance P.HasCidrBlock (VpcData s) (TF.Attr s P.IPRange) where
     cidrBlock =
-        lens (_cidr_block :: VpcData s -> TF.Attr s P.CIDR)
+        lens (_cidr_block :: VpcData s -> TF.Attr s P.IPRange)
              (\s a -> s { _cidr_block = a } :: VpcData s)
 
 instance P.HasDefault' (VpcData s) (TF.Attr s P.Text) where
@@ -5018,9 +5017,9 @@ instance P.HasTags (VpcData s) (TF.Attr s (P.Tags s)) where
         lens (_tags :: VpcData s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: VpcData s)
 
-instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (VpcData s)) (TF.Attr s P.CIDR) where
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (VpcData s)) (TF.Attr s P.IPRange) where
     computedCidrBlock =
-        (_cidr_block :: VpcData s -> TF.Attr s P.CIDR)
+        (_cidr_block :: VpcData s -> TF.Attr s P.IPRange)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedDefault' (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
@@ -5055,7 +5054,7 @@ instance s ~ s' => P.HasComputedInstanceTenancy (TF.Ref s' (VpcData s)) (TF.Attr
 instance s ~ s' => P.HasComputedIpv6AssociationId (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
     computedIpv6AssociationId x = TF.compute (TF.refKey x) "ipv6_association_id"
 
-instance s ~ s' => P.HasComputedIpv6CidrBlock (TF.Ref s' (VpcData s)) (TF.Attr s P.CIDR) where
+instance s ~ s' => P.HasComputedIpv6CidrBlock (TF.Ref s' (VpcData s)) (TF.Attr s P.IPRange) where
     computedIpv6CidrBlock x = TF.compute (TF.refKey x) "ipv6_cidr_block"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
@@ -5258,7 +5257,7 @@ The VPC Peering Connection data source provides details about a specific VPC
 peering connection.
 -}
 data VpcPeeringConnectionData s = VpcPeeringConnectionData {
-      _cidr_block      :: !(TF.Attr s P.CIDR)
+      _cidr_block      :: !(TF.Attr s P.IPRange)
     {- ^ (Optional) The CIDR block of the requester VPC of the specific VPC Peering Connection to retrieve. -}
     , _filter          :: !(TF.Attr s P.Text)
     {- ^ (Optional) Custom filter block as described below. -}
@@ -5266,7 +5265,7 @@ data VpcPeeringConnectionData s = VpcPeeringConnectionData {
     {- ^ (Optional) The ID of the specific VPC Peering Connection to retrieve. -}
     , _owner_id        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The AWS account ID of the owner of the requester VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_cidr_block :: !(TF.Attr s P.CIDR)
+    , _peer_cidr_block :: !(TF.Attr s P.IPRange)
     {- ^ (Optional) The CIDR block of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
     , _peer_owner_id   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The AWS account ID of the owner of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
@@ -5300,9 +5299,9 @@ instance TF.ToHCL (VpcPeeringConnectionData s) where
         , TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 
-instance P.HasCidrBlock (VpcPeeringConnectionData s) (TF.Attr s P.CIDR) where
+instance P.HasCidrBlock (VpcPeeringConnectionData s) (TF.Attr s P.IPRange) where
     cidrBlock =
-        lens (_cidr_block :: VpcPeeringConnectionData s -> TF.Attr s P.CIDR)
+        lens (_cidr_block :: VpcPeeringConnectionData s -> TF.Attr s P.IPRange)
              (\s a -> s { _cidr_block = a } :: VpcPeeringConnectionData s)
 
 instance P.HasFilter (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
@@ -5320,9 +5319,9 @@ instance P.HasOwnerId (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
         lens (_owner_id :: VpcPeeringConnectionData s -> TF.Attr s P.Text)
              (\s a -> s { _owner_id = a } :: VpcPeeringConnectionData s)
 
-instance P.HasPeerCidrBlock (VpcPeeringConnectionData s) (TF.Attr s P.CIDR) where
+instance P.HasPeerCidrBlock (VpcPeeringConnectionData s) (TF.Attr s P.IPRange) where
     peerCidrBlock =
-        lens (_peer_cidr_block :: VpcPeeringConnectionData s -> TF.Attr s P.CIDR)
+        lens (_peer_cidr_block :: VpcPeeringConnectionData s -> TF.Attr s P.IPRange)
              (\s a -> s { _peer_cidr_block = a } :: VpcPeeringConnectionData s)
 
 instance P.HasPeerOwnerId (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
@@ -5363,9 +5362,9 @@ instance P.HasVpcId (VpcPeeringConnectionData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedAccepter (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.Text) where
     computedAccepter x = TF.compute (TF.refKey x) "accepter"
 
-instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.CIDR) where
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.IPRange) where
     computedCidrBlock =
-        (_cidr_block :: VpcPeeringConnectionData s -> TF.Attr s P.CIDR)
+        (_cidr_block :: VpcPeeringConnectionData s -> TF.Attr s P.IPRange)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedFilter (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.Text) where
@@ -5383,9 +5382,9 @@ instance s ~ s' => P.HasComputedOwnerId (TF.Ref s' (VpcPeeringConnectionData s))
         (_owner_id :: VpcPeeringConnectionData s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPeerCidrBlock (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.CIDR) where
+instance s ~ s' => P.HasComputedPeerCidrBlock (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.IPRange) where
     computedPeerCidrBlock =
-        (_peer_cidr_block :: VpcPeeringConnectionData s -> TF.Attr s P.CIDR)
+        (_peer_cidr_block :: VpcPeeringConnectionData s -> TF.Attr s P.IPRange)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedPeerOwnerId (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.Text) where

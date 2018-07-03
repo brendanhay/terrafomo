@@ -135,7 +135,6 @@ import qualified Data.Text       as P
 import qualified Data.Word       as P
 import qualified GHC.Base        as P
 import qualified Numeric.Natural as P
-import qualified Terrafomo.IP    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -277,28 +276,43 @@ ipResource =
 
 {- | The @oneandone_server@ OneAndOne resource.
 
-Manages a Shared Storage on 1&1
+Manages a Load Balancer on 1&1
 -}
 data ServerResource s = ServerResource {
       _datacenter :: !(TF.Attr s P.Text)
     {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ -}
     , _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Description for the shared storage -}
+    {- ^ (Optional) Description for the load balancer -}
+    , _health_check_interval :: !(TF.Attr s P.Text)
+    {- ^ (Optional) -}
+    , _health_check_path :: !(TF.Attr s P.Text)
+    {- ^ (Optional) -}
+    , _health_check_path_parser :: !(TF.Attr s P.Text)
+    {- ^ (Optional) -}
+    , _health_check_test :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Can be @TCP@ or @ICMP@ . -}
+    , _method :: !(TF.Attr s P.Text)
+    {- ^ (Required)  Balancing procedure Can be @ROUND_ROBIN@ or @LEAST_CONNECTIONS@ -}
     , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the storage -}
-    , _size :: !(TF.Attr s P.Text)
-    {- ^ (Required) Size of the shared storage -}
-    , _storage_servers :: !(TF.Attr s P.Text)
-    {- ^ (Optional) List of servers that will have access to the stored storage -}
+    {- ^ (Required) The name of the load balancer. -}
+    , _persistence :: !(TF.Attr s P.Text)
+    {- ^ (Optional) True/false defines whether persistence should be turned on/off -}
+    , _persistence_time :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Persistence duration in seconds -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ServerResource s) where
     toHCL ServerResource{..} = TF.inline $ catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "health_check_interval" <$> TF.attribute _health_check_interval
+        , TF.assign "health_check_path" <$> TF.attribute _health_check_path
+        , TF.assign "health_check_path_parser" <$> TF.attribute _health_check_path_parser
+        , TF.assign "health_check_test" <$> TF.attribute _health_check_test
+        , TF.assign "method" <$> TF.attribute _method
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "size" <$> TF.attribute _size
-        , TF.assign "storage_servers" <$> TF.attribute _storage_servers
+        , TF.assign "persistence" <$> TF.attribute _persistence
+        , TF.assign "persistence_time" <$> TF.attribute _persistence_time
         ]
 
 instance P.HasDatacenter (ServerResource s) (TF.Attr s P.Text) where
@@ -311,20 +325,45 @@ instance P.HasDescription (ServerResource s) (TF.Attr s P.Text) where
         lens (_description :: ServerResource s -> TF.Attr s P.Text)
              (\s a -> s { _description = a } :: ServerResource s)
 
+instance P.HasHealthCheckInterval (ServerResource s) (TF.Attr s P.Text) where
+    healthCheckInterval =
+        lens (_health_check_interval :: ServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _health_check_interval = a } :: ServerResource s)
+
+instance P.HasHealthCheckPath (ServerResource s) (TF.Attr s P.Text) where
+    healthCheckPath =
+        lens (_health_check_path :: ServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _health_check_path = a } :: ServerResource s)
+
+instance P.HasHealthCheckPathParser (ServerResource s) (TF.Attr s P.Text) where
+    healthCheckPathParser =
+        lens (_health_check_path_parser :: ServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _health_check_path_parser = a } :: ServerResource s)
+
+instance P.HasHealthCheckTest (ServerResource s) (TF.Attr s P.Text) where
+    healthCheckTest =
+        lens (_health_check_test :: ServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _health_check_test = a } :: ServerResource s)
+
+instance P.HasMethod (ServerResource s) (TF.Attr s P.Text) where
+    method =
+        lens (_method :: ServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _method = a } :: ServerResource s)
+
 instance P.HasName (ServerResource s) (TF.Attr s P.Text) where
     name =
         lens (_name :: ServerResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ServerResource s)
 
-instance P.HasSize (ServerResource s) (TF.Attr s P.Text) where
-    size =
-        lens (_size :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: ServerResource s)
+instance P.HasPersistence (ServerResource s) (TF.Attr s P.Text) where
+    persistence =
+        lens (_persistence :: ServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _persistence = a } :: ServerResource s)
 
-instance P.HasStorageServers (ServerResource s) (TF.Attr s P.Text) where
-    storageServers =
-        lens (_storage_servers :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _storage_servers = a } :: ServerResource s)
+instance P.HasPersistenceTime (ServerResource s) (TF.Attr s P.Text) where
+    persistenceTime =
+        lens (_persistence_time :: ServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _persistence_time = a } :: ServerResource s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedDatacenter =
@@ -336,19 +375,44 @@ instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ServerResource s)) (TF.A
         (_description :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedHealthCheckInterval (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
+    computedHealthCheckInterval =
+        (_health_check_interval :: ServerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHealthCheckPath (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
+    computedHealthCheckPath =
+        (_health_check_path :: ServerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHealthCheckPathParser (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
+    computedHealthCheckPathParser =
+        (_health_check_path_parser :: ServerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHealthCheckTest (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
+    computedHealthCheckTest =
+        (_health_check_test :: ServerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMethod (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
+    computedMethod =
+        (_method :: ServerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedSize =
-        (_size :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedPersistence (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
+    computedPersistence =
+        (_persistence :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStorageServers (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedStorageServers =
-        (_storage_servers :: ServerResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedPersistenceTime (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
+    computedPersistenceTime =
+        (_persistence_time :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 serverResource :: TF.Resource P.OneAndOne (ServerResource s)
@@ -357,9 +421,14 @@ serverResource =
         ServerResource {
               _datacenter = TF.Nil
             , _description = TF.Nil
+            , _health_check_interval = TF.Nil
+            , _health_check_path = TF.Nil
+            , _health_check_path_parser = TF.Nil
+            , _health_check_test = TF.Nil
+            , _method = TF.Nil
             , _name = TF.Nil
-            , _size = TF.Nil
-            , _storage_servers = TF.Nil
+            , _persistence = TF.Nil
+            , _persistence_time = TF.Nil
             }
 
 {- | The @oneandone_vpn@ OneAndOne resource.

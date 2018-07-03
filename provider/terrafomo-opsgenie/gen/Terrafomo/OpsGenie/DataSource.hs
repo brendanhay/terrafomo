@@ -54,7 +54,6 @@ import qualified Data.Text                   as P
 import qualified Data.Word                   as P
 import qualified GHC.Base                    as P
 import qualified Numeric.Natural             as P
-import qualified Terrafomo.IP                as P
 import qualified Terrafomo.OpsGenie.Lens     as P
 import qualified Terrafomo.OpsGenie.Provider as P
 

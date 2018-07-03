@@ -168,7 +168,6 @@ import qualified GHC.Base                    as P
 import qualified Numeric.Natural             as P
 import qualified Terrafomo.Ignition.Lens     as P
 import qualified Terrafomo.Ignition.Provider as P
-import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF

@@ -21,7 +21,6 @@ library:
     - Terrafomo.Backend
     - Terrafomo.Format
     - Terrafomo.HCL
-    - Terrafomo.IP
     - Terrafomo.Lifecycle
     - Terrafomo.Monad
     - Terrafomo.Name
@@ -38,6 +37,7 @@ library:
     - containers
     - formatting >= 6.2.5
     - hashable
+    - iproute
     - microlens
     - microlens-th
     - mmorph

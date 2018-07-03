@@ -6,11 +6,12 @@ original: aws
 dependencies:
   - amazonka-core
   - formatting
+  - iproute
 
 rules:
   - mode: suffix
     match: cidr_block
-    type: 'P.CIDR'
+    type: 'P.IPRange'
 
   - mode: exact
     match: tags

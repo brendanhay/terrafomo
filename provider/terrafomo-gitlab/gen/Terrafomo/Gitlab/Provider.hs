@@ -40,7 +40,6 @@ import Lens.Micro (Lens', lens)
 
 import qualified Data.Text              as P
 import qualified Terrafomo.Gitlab.Types as P
-import qualified Terrafomo.IP           as P
 
 import qualified Terrafomo.HCL      as TF
 import qualified Terrafomo.Name     as TF

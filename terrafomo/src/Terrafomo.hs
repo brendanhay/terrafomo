@@ -1,7 +1,7 @@
 module Terrafomo
     (
     -- * Terraform Monad
-      Error (..)
+      Error          (..)
     , Config
     , Document
     , renderDocument
@@ -10,20 +10,20 @@ module Terrafomo
     , runTerraform
 
     -- ** Terraform Monad Class
-    , MonadTerraform  (..)
+    , MonadTerraform (..)
 
     -- * Backends
-    , Backend         (..)
-    , Local           (..)
+    , Backend        (..)
+    , Local          (..)
     , localBackend
 
     -- * Providers
     , NoProvider
-    , IsProvider      (..)
+    , IsProvider     (..)
     , withProvider
 
     -- * Syntax
-    , Name            (..)
+    , Name           (..)
     , Attr
 
     -- ** Functions
@@ -46,8 +46,8 @@ module Terrafomo
     , define
 
     -- ** Lifecycles
-    , HasLifecycle    (..)
-    , Lifecycle       (..)
+    , HasLifecycle   (..)
+    , Lifecycle      (..)
 
     -- ** Ignored Attributes
     , Changes
@@ -61,11 +61,6 @@ module Terrafomo
     , output
     , remote
 
-    -- * Domain Types
-    , Bits            (..)
-    , IP              (..)
-    , CIDR            (..)
-
     -- * Serialization
     , ToHCL
     , renderHCL
@@ -74,7 +69,6 @@ module Terrafomo
 import Terrafomo.Attribute
 import Terrafomo.Backend
 import Terrafomo.HCL       (ToHCL, renderHCL)
-import Terrafomo.IP
 import Terrafomo.Lifecycle
 import Terrafomo.Monad
 import Terrafomo.Name

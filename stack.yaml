@@ -1,12 +1,14 @@
-resolver: lts-10.4
+resolver: lts-11.12
 
 local-bin-path: bin
 
 nix:
   enable: true
+  add-gc-roots: true
   packages: [stdenv, zlib]
 
-extra-deps: []
+extra-deps:
+  - ede-0.2.9
 
 packages:
   - terrafomo

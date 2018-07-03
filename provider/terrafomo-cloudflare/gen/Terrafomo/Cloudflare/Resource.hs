@@ -69,7 +69,6 @@ import qualified GHC.Base                      as P
 import qualified Numeric.Natural               as P
 import qualified Terrafomo.Cloudflare.Lens     as P
 import qualified Terrafomo.Cloudflare.Provider as P
-import qualified Terrafomo.IP                  as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF

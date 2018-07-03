@@ -21,9 +21,6 @@ module Terrafomo.Format
     , ftype
     , fref
     , fbool
-    , fbits
-    , fcidr
-    , fip
 
     -- ** Strings
     , Format.text
@@ -45,7 +42,6 @@ import Data.Text (Text)
 import Formatting (Format, (%), (%.))
 
 import Terrafomo.Attribute (Attr (Constant))
-import Terrafomo.IP
 import Terrafomo.Name
 
 import qualified Data.Text.Lazy         as LText
