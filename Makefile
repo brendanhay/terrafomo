@@ -24,7 +24,7 @@ clean:
 format: $(STYLISH)
 	@echo -e '\nFormatting...'
 	@find \
- $(wildcard terrafomo/gen) \
+ terrafomo/gen \
  $(wildcard provider/*/gen) \
  -type f \
  -name '*.hs' \
@@ -57,3 +57,14 @@ $(VENDOR_DIR)/$1:
 endef
 
 $(foreach p,$(PROVIDERS),$(eval $(call provider,$p)))
+
+.PHONY: audit
+
+ACTUAL = $(addsuffix \\n,$(sort $(PROVIDERS)))
+
+audit:
+	@curl -s "https://api.github.com/users/terraform-providers/repos?per_page=100" | \
+	    grep -o 'git@[^"]*' --line-buffered | \
+	    sed -E 's/git@github\.com:terraform-providers\/terraform-provider-(.*)\.git/ \1/g' | \
+	    sort | \
+	    diff -B -y <(echo -en $(ACTUAL)) -
