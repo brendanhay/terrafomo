@@ -153,9 +153,6 @@ module Terrafomo.AWS.Resource03
     , ElasticacheSubnetGroupResource (..)
     , elasticacheSubnetGroupResource
 
-    , GameliftFleetResource (..)
-    , gameliftFleetResource
-
     , GlueCatalogDatabaseResource (..)
     , glueCatalogDatabaseResource
 
@@ -167,6 +164,9 @@ module Terrafomo.AWS.Resource03
 
     , GuarddutyMemberResource (..)
     , guarddutyMemberResource
+
+    , IamInstanceProfileResource (..)
+    , iamInstanceProfileResource
 
     , IamPolicyAttachmentResource (..)
     , iamPolicyAttachmentResource
@@ -373,7 +373,6 @@ module Terrafomo.AWS.Resource03
     , P.HasBlueprintId (..)
     , P.HasBranchFilter (..)
     , P.HasBucket (..)
-    , P.HasBuildId (..)
     , P.HasBundleId (..)
     , P.HasCacheKeyParameters (..)
     , P.HasCacheNamespace (..)
@@ -440,8 +439,6 @@ module Terrafomo.AWS.Resource03
     , P.HasEbsBlockDevice (..)
     , P.HasEbsOptimized (..)
     , P.HasEbsVolume (..)
-    , P.HasEc2InboundPermission (..)
-    , P.HasEc2InstanceType (..)
     , P.HasEgress (..)
     , P.HasEgressOnlyGatewayId (..)
     , P.HasElasticGpuSpecifications (..)
@@ -542,7 +539,6 @@ module Terrafomo.AWS.Resource03
     , P.HasMaxSize (..)
     , P.HasMeasureLatency (..)
     , P.HasMemorySize (..)
-    , P.HasMetricGroups (..)
     , P.HasMetricName (..)
     , P.HasMetricTransformation (..)
     , P.HasMetricsGranularity (..)
@@ -554,7 +550,6 @@ module Terrafomo.AWS.Resource03
     , P.HasNatGatewayId (..)
     , P.HasNetworkInterfaceId (..)
     , P.HasNetworkInterfaces (..)
-    , P.HasNewGameSessionProtectionPolicy (..)
     , P.HasNodeType (..)
     , P.HasNotificationMetadata (..)
     , P.HasNotificationTargetArn (..)
@@ -566,6 +561,7 @@ module Terrafomo.AWS.Resource03
     , P.HasParameterGroupName (..)
     , P.HasParameters (..)
     , P.HasPassthroughBehavior (..)
+    , P.HasPath (..)
     , P.HasPattern (..)
     , P.HasPermissions (..)
     , P.HasPhysicalConnectionRequirements (..)
@@ -609,7 +605,6 @@ module Terrafomo.AWS.Resource03
     , P.HasRequestTemplates (..)
     , P.HasReservedConcurrentExecutions (..)
     , P.HasResourceArn (..)
-    , P.HasResourceCreationLimitPolicy (..)
     , P.HasResourceId (..)
     , P.HasResourcePath (..)
     , P.HasResponseParameters (..)
@@ -632,7 +627,6 @@ module Terrafomo.AWS.Resource03
     , P.HasRuleSetName (..)
     , P.HasRules (..)
     , P.HasRuntime (..)
-    , P.HasRuntimeConfiguration (..)
     , P.HasS3Bucket (..)
     , P.HasS3Key (..)
     , P.HasS3ObjectVersion (..)
@@ -782,7 +776,6 @@ module Terrafomo.AWS.Resource03
     , P.HasComputedBlueprintId (..)
     , P.HasComputedBranchFilter (..)
     , P.HasComputedBucket (..)
-    , P.HasComputedBuildId (..)
     , P.HasComputedBundleId (..)
     , P.HasComputedCacheKeyParameters (..)
     , P.HasComputedCacheNamespace (..)
@@ -867,9 +860,7 @@ module Terrafomo.AWS.Resource03
     , P.HasComputedEbsBlockDevice (..)
     , P.HasComputedEbsOptimized (..)
     , P.HasComputedEbsVolume (..)
-    , P.HasComputedEc2InboundPermission (..)
     , P.HasComputedEc2InstanceId (..)
-    , P.HasComputedEc2InstanceType (..)
     , P.HasComputedEgress (..)
     , P.HasComputedEgressOnlyGatewayId (..)
     , P.HasComputedElasticGpuSpecifications (..)
@@ -995,7 +986,6 @@ module Terrafomo.AWS.Resource03
     , P.HasComputedMeasureLatency (..)
     , P.HasComputedMemberClusters (..)
     , P.HasComputedMemorySize (..)
-    , P.HasComputedMetricGroups (..)
     , P.HasComputedMetricName (..)
     , P.HasComputedMetricTransformation (..)
     , P.HasComputedMetricsGranularity (..)
@@ -1009,14 +999,12 @@ module Terrafomo.AWS.Resource03
     , P.HasComputedNetworkInterfaceId (..)
     , P.HasComputedNetworkInterfaceIds (..)
     , P.HasComputedNetworkInterfaces (..)
-    , P.HasComputedNewGameSessionProtectionPolicy (..)
     , P.HasComputedNodeType (..)
     , P.HasComputedNotificationMetadata (..)
     , P.HasComputedNotificationTargetArn (..)
     , P.HasComputedNotificationTopicArn (..)
     , P.HasComputedNotificationType (..)
     , P.HasComputedNumberCacheClusters (..)
-    , P.HasComputedOperatingSystem (..)
     , P.HasComputedOptionGroupName (..)
     , P.HasComputedOrganizationAggregationSource (..)
     , P.HasComputedOs (..)
@@ -1027,6 +1015,7 @@ module Terrafomo.AWS.Resource03
     , P.HasComputedParameters (..)
     , P.HasComputedPassthroughBehavior (..)
     , P.HasComputedPasswordData (..)
+    , P.HasComputedPath (..)
     , P.HasComputedPattern (..)
     , P.HasComputedPayloadUrl (..)
     , P.HasComputedPermissions (..)
@@ -1084,7 +1073,6 @@ module Terrafomo.AWS.Resource03
     , P.HasComputedRequestTemplates (..)
     , P.HasComputedReservedConcurrentExecutions (..)
     , P.HasComputedResourceArn (..)
-    , P.HasComputedResourceCreationLimitPolicy (..)
     , P.HasComputedResourceId (..)
     , P.HasComputedResourcePath (..)
     , P.HasComputedResponseParameters (..)
@@ -1107,7 +1095,6 @@ module Terrafomo.AWS.Resource03
     , P.HasComputedRuleSetName (..)
     , P.HasComputedRules (..)
     , P.HasComputedRuntime (..)
-    , P.HasComputedRuntimeConfiguration (..)
     , P.HasComputedS3Bucket (..)
     , P.HasComputedS3Key (..)
     , P.HasComputedS3ObjectVersion (..)
@@ -5419,158 +5406,6 @@ elasticacheSubnetGroupResource =
             , _subnet_ids = TF.Nil
             }
 
-{- | The @aws_gamelift_fleet@ AWS resource.
-
-Provides a Gamelift Fleet resource.
--}
-data GameliftFleetResource s = GameliftFleetResource {
-      _build_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) ID of the Gamelift Build to be deployed on the fleet. -}
-    , _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Human-readable description of the fleet. -}
-    , _ec2_inbound_permission :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Range of IP addresses and port settings that permit inbound traffic to access server processes running on the fleet. See below. -}
-    , _ec2_instance_type :: !(TF.Attr s P.Text)
-    {- ^ (Required) Name of an EC2 instance type. e.g. @t2.micro@ -}
-    , _metric_groups :: !(TF.Attr s P.Text)
-    {- ^ (Optional) List of names of metric groups to add this fleet to. A metric group tracks metrics across all fleets in the group. Defaults to @default@ . -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the fleet. -}
-    , _new_game_session_protection_policy :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Game session protection policy to apply to all instances in this fleet. e.g. @FullProtection@ . Defaults to @NoProtection@ . -}
-    , _resource_creation_limit_policy :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Policy that limits the number of game sessions an individual player can create over a span of time for this fleet. See below. -}
-    , _runtime_configuration :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Instructions for launching server processes on each instance in the fleet. See below. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (GameliftFleetResource s) where
-    toHCL GameliftFleetResource{..} = TF.inline $ catMaybes
-        [ TF.assign "build_id" <$> TF.attribute _build_id
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "ec2_inbound_permission" <$> TF.attribute _ec2_inbound_permission
-        , TF.assign "ec2_instance_type" <$> TF.attribute _ec2_instance_type
-        , TF.assign "metric_groups" <$> TF.attribute _metric_groups
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "new_game_session_protection_policy" <$> TF.attribute _new_game_session_protection_policy
-        , TF.assign "resource_creation_limit_policy" <$> TF.attribute _resource_creation_limit_policy
-        , TF.assign "runtime_configuration" <$> TF.attribute _runtime_configuration
-        ]
-
-instance P.HasBuildId (GameliftFleetResource s) (TF.Attr s P.Text) where
-    buildId =
-        lens (_build_id :: GameliftFleetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _build_id = a } :: GameliftFleetResource s)
-
-instance P.HasDescription (GameliftFleetResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: GameliftFleetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: GameliftFleetResource s)
-
-instance P.HasEc2InboundPermission (GameliftFleetResource s) (TF.Attr s P.Text) where
-    ec2InboundPermission =
-        lens (_ec2_inbound_permission :: GameliftFleetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ec2_inbound_permission = a } :: GameliftFleetResource s)
-
-instance P.HasEc2InstanceType (GameliftFleetResource s) (TF.Attr s P.Text) where
-    ec2InstanceType =
-        lens (_ec2_instance_type :: GameliftFleetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ec2_instance_type = a } :: GameliftFleetResource s)
-
-instance P.HasMetricGroups (GameliftFleetResource s) (TF.Attr s P.Text) where
-    metricGroups =
-        lens (_metric_groups :: GameliftFleetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _metric_groups = a } :: GameliftFleetResource s)
-
-instance P.HasName (GameliftFleetResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: GameliftFleetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: GameliftFleetResource s)
-
-instance P.HasNewGameSessionProtectionPolicy (GameliftFleetResource s) (TF.Attr s P.Text) where
-    newGameSessionProtectionPolicy =
-        lens (_new_game_session_protection_policy :: GameliftFleetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _new_game_session_protection_policy = a } :: GameliftFleetResource s)
-
-instance P.HasResourceCreationLimitPolicy (GameliftFleetResource s) (TF.Attr s P.Text) where
-    resourceCreationLimitPolicy =
-        lens (_resource_creation_limit_policy :: GameliftFleetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_creation_limit_policy = a } :: GameliftFleetResource s)
-
-instance P.HasRuntimeConfiguration (GameliftFleetResource s) (TF.Attr s P.Text) where
-    runtimeConfiguration =
-        lens (_runtime_configuration :: GameliftFleetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _runtime_configuration = a } :: GameliftFleetResource s)
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
-
-instance s ~ s' => P.HasComputedBuildId (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
-    computedBuildId =
-        (_build_id :: GameliftFleetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: GameliftFleetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEc2InboundPermission (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
-    computedEc2InboundPermission =
-        (_ec2_inbound_permission :: GameliftFleetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEc2InstanceType (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
-    computedEc2InstanceType =
-        (_ec2_instance_type :: GameliftFleetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedMetricGroups (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
-    computedMetricGroups =
-        (_metric_groups :: GameliftFleetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: GameliftFleetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNewGameSessionProtectionPolicy (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
-    computedNewGameSessionProtectionPolicy =
-        (_new_game_session_protection_policy :: GameliftFleetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedOperatingSystem (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
-    computedOperatingSystem x = TF.compute (TF.refKey x) "operating_system"
-
-instance s ~ s' => P.HasComputedResourceCreationLimitPolicy (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
-    computedResourceCreationLimitPolicy =
-        (_resource_creation_limit_policy :: GameliftFleetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRuntimeConfiguration (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
-    computedRuntimeConfiguration =
-        (_runtime_configuration :: GameliftFleetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-gameliftFleetResource :: TF.Resource P.AWS (GameliftFleetResource s)
-gameliftFleetResource =
-    TF.newResource "aws_gamelift_fleet" $
-        GameliftFleetResource {
-              _build_id = TF.Nil
-            , _description = TF.Nil
-            , _ec2_inbound_permission = TF.Nil
-            , _ec2_instance_type = TF.Nil
-            , _metric_groups = TF.Nil
-            , _name = TF.Nil
-            , _new_game_session_protection_policy = TF.Nil
-            , _resource_creation_limit_policy = TF.Nil
-            , _runtime_configuration = TF.Nil
-            }
-
 {- | The @aws_glue_catalog_database@ AWS resource.
 
 Provides a Glue Catalog Database Resource. You can refer to the
@@ -6050,6 +5885,98 @@ guarddutyMemberResource =
             , _email = TF.Nil
             , _invitation_message = TF.Nil
             , _invite = TF.Nil
+            }
+
+{- | The @aws_iam_instance_profile@ AWS resource.
+
+Provides an IAM instance profile. ~> NOTE: Either @role@ or @roles@ (
+deprecated ) must be specified.
+-}
+data IamInstanceProfileResource s = IamInstanceProfileResource {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Optional, Forces new resource) The profile's name. If omitted, Terraform will assign a random, unique name. -}
+    , _name_prefix :: !(TF.Attr s P.Text)
+    {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
+    , _path :: !(TF.Attr s P.Text)
+    {- ^ (Optional, default "/") Path in which to create the profile. -}
+    , _role :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The role name to include in the profile. -}
+    , _roles :: !(TF.Attr s P.Text)
+    {- ^ - ( Deprecated ) A list of role names to include in the profile.  The current default is 1.  If you see an error message similar to @Cannot exceed quota for InstanceSessionsPerInstanceProfile: 1@ , then you must contact AWS support and ask for a limit increase. WARNING: This is deprecated since <https://github.com/hashicorp/terraform/blob/master/CHANGELOG.md#093-april-12-2017> , as >= 2 roles are not possible. See <https://github.com/hashicorp/terraform/issues/11575> . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (IamInstanceProfileResource s) where
+    toHCL IamInstanceProfileResource{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
+        , TF.assign "path" <$> TF.attribute _path
+        , TF.assign "role" <$> TF.attribute _role
+        , TF.assign "roles" <$> TF.attribute _roles
+        ]
+
+instance P.HasName (IamInstanceProfileResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: IamInstanceProfileResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: IamInstanceProfileResource s)
+
+instance P.HasNamePrefix (IamInstanceProfileResource s) (TF.Attr s P.Text) where
+    namePrefix =
+        lens (_name_prefix :: IamInstanceProfileResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name_prefix = a } :: IamInstanceProfileResource s)
+
+instance P.HasPath (IamInstanceProfileResource s) (TF.Attr s P.Text) where
+    path =
+        lens (_path :: IamInstanceProfileResource s -> TF.Attr s P.Text)
+             (\s a -> s { _path = a } :: IamInstanceProfileResource s)
+
+instance P.HasRole (IamInstanceProfileResource s) (TF.Attr s P.Text) where
+    role =
+        lens (_role :: IamInstanceProfileResource s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: IamInstanceProfileResource s)
+
+instance P.HasRoles (IamInstanceProfileResource s) (TF.Attr s P.Text) where
+    roles =
+        lens (_roles :: IamInstanceProfileResource s -> TF.Attr s P.Text)
+             (\s a -> s { _roles = a } :: IamInstanceProfileResource s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s P.Text) where
+    computedCreateDate x = TF.compute (TF.refKey x) "create_date"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s P.Text) where
+    computedNamePrefix =
+        (_name_prefix :: IamInstanceProfileResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s P.Text) where
+    computedPath x = TF.compute (TF.refKey x) "path"
+
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s P.Text) where
+    computedRole x = TF.compute (TF.refKey x) "role"
+
+instance s ~ s' => P.HasComputedRoles (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s P.Text) where
+    computedRoles x = TF.compute (TF.refKey x) "roles"
+
+instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s P.Text) where
+    computedUniqueId x = TF.compute (TF.refKey x) "unique_id"
+
+iamInstanceProfileResource :: TF.Resource P.AWS (IamInstanceProfileResource s)
+iamInstanceProfileResource =
+    TF.newResource "aws_iam_instance_profile" $
+        IamInstanceProfileResource {
+              _name = TF.Nil
+            , _name_prefix = TF.Nil
+            , _path = TF.Nil
+            , _role = TF.Nil
+            , _roles = TF.Nil
             }
 
 {- | The @aws_iam_policy_attachment@ AWS resource.

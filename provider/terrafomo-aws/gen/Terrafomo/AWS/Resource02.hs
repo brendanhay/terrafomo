@@ -7,8 +7,8 @@
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
 {-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -123,6 +123,9 @@ module Terrafomo.AWS.Resource02
     , EcsServiceResource (..)
     , ecsServiceResource
 
+    , EgressOnlyInternetGatewayResource (..)
+    , egressOnlyInternetGatewayResource
+
     , ElasticBeanstalkConfigurationTemplateResource (..)
     , elasticBeanstalkConfigurationTemplateResource
 
@@ -161,6 +164,9 @@ module Terrafomo.AWS.Resource02
 
     , GameliftBuildResource (..)
     , gameliftBuildResource
+
+    , GameliftFleetResource (..)
+    , gameliftFleetResource
 
     , GlacierVaultResource (..)
     , glacierVaultResource
@@ -380,6 +386,7 @@ module Terrafomo.AWS.Resource02
     , P.HasBranches (..)
     , P.HasBucket (..)
     , P.HasBucketPrefix (..)
+    , P.HasBuildId (..)
     , P.HasByteMatchTuples (..)
     , P.HasCacheClusterEnabled (..)
     , P.HasCacheClusterSize (..)
@@ -455,6 +462,8 @@ module Terrafomo.AWS.Resource02
     , P.HasEbsRootVolumeSize (..)
     , P.HasEbsVolume (..)
     , P.HasEc2Attributes (..)
+    , P.HasEc2InboundPermission (..)
+    , P.HasEc2InstanceType (..)
     , P.HasEc2TagFilter (..)
     , P.HasEc2TagSet (..)
     , P.HasElasticIp (..)
@@ -563,6 +572,7 @@ module Terrafomo.AWS.Resource02
     , P.HasMaxSize (..)
     , P.HasMaximumExecutionFrequency (..)
     , P.HasMessageRetentionSeconds (..)
+    , P.HasMetricGroups (..)
     , P.HasMetricName (..)
     , P.HasMfaConfiguration (..)
     , P.HasMigrationType (..)
@@ -574,6 +584,7 @@ module Terrafomo.AWS.Resource02
     , P.HasNamePrefix (..)
     , P.HasNetworkConfiguration (..)
     , P.HasNetworkInterfaceId (..)
+    , P.HasNewGameSessionProtectionPolicy (..)
     , P.HasNodeType (..)
     , P.HasNotification (..)
     , P.HasNotificationTopicArn (..)
@@ -640,6 +651,7 @@ module Terrafomo.AWS.Resource02
     , P.HasRequestPayer (..)
     , P.HasRequestValidatorId (..)
     , P.HasRequester (..)
+    , P.HasResourceCreationLimitPolicy (..)
     , P.HasResourceId (..)
     , P.HasRestApiId (..)
     , P.HasRetentionPeriod (..)
@@ -654,6 +666,7 @@ module Terrafomo.AWS.Resource02
     , P.HasRouteTableId (..)
     , P.HasRoutingStrategy (..)
     , P.HasRuleSetName (..)
+    , P.HasRuntimeConfiguration (..)
     , P.HasS3BucketName (..)
     , P.HasS3KeyPrefix (..)
     , P.HasS3Settings (..)
@@ -848,6 +861,7 @@ module Terrafomo.AWS.Resource02
     , P.HasComputedBucketDomainName (..)
     , P.HasComputedBucketPrefix (..)
     , P.HasComputedBucketRegionalDomainName (..)
+    , P.HasComputedBuildId (..)
     , P.HasComputedByteMatchTuples (..)
     , P.HasComputedCacheClusterEnabled (..)
     , P.HasComputedCacheClusterSize (..)
@@ -935,6 +949,8 @@ module Terrafomo.AWS.Resource02
     , P.HasComputedEbsRootVolumeSize (..)
     , P.HasComputedEbsVolume (..)
     , P.HasComputedEc2Attributes (..)
+    , P.HasComputedEc2InboundPermission (..)
+    , P.HasComputedEc2InstanceType (..)
     , P.HasComputedEc2TagFilter (..)
     , P.HasComputedEc2TagSet (..)
     , P.HasComputedElasticIp (..)
@@ -1067,6 +1083,7 @@ module Terrafomo.AWS.Resource02
     , P.HasComputedMaxSize (..)
     , P.HasComputedMaximumExecutionFrequency (..)
     , P.HasComputedMessageRetentionSeconds (..)
+    , P.HasComputedMetricGroups (..)
     , P.HasComputedMetricName (..)
     , P.HasComputedMfaConfiguration (..)
     , P.HasComputedMigrationType (..)
@@ -1078,6 +1095,7 @@ module Terrafomo.AWS.Resource02
     , P.HasComputedNamePrefix (..)
     , P.HasComputedNetworkConfiguration (..)
     , P.HasComputedNetworkInterfaceId (..)
+    , P.HasComputedNewGameSessionProtectionPolicy (..)
     , P.HasComputedNodeType (..)
     , P.HasComputedNodes (..)
     , P.HasComputedNotification (..)
@@ -1147,6 +1165,7 @@ module Terrafomo.AWS.Resource02
     , P.HasComputedRequestPayer (..)
     , P.HasComputedRequestValidatorId (..)
     , P.HasComputedRequester (..)
+    , P.HasComputedResourceCreationLimitPolicy (..)
     , P.HasComputedResourceId (..)
     , P.HasComputedRestApiId (..)
     , P.HasComputedRetentionPeriod (..)
@@ -1164,6 +1183,7 @@ module Terrafomo.AWS.Resource02
     , P.HasComputedRoutingStrategy (..)
     , P.HasComputedRuleId (..)
     , P.HasComputedRuleSetName (..)
+    , P.HasComputedRuntimeConfiguration (..)
     , P.HasComputedS3BucketName (..)
     , P.HasComputedS3KeyPrefix (..)
     , P.HasComputedS3Settings (..)
@@ -1318,12 +1338,12 @@ import Lens.Micro (lens)
 
 import Terrafomo.AWS.Types as P
 
-import qualified Data.Text              as P
-import qualified Data.Word              as P
-import qualified GHC.Base               as P
-import qualified Numeric.Natural        as P
-import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
+import qualified Terrafomo.AWS.Lens as P
+import qualified Data.Text       as P
+import qualified Data.Word       as P
+import qualified GHC.Base        as P
+import qualified Numeric.Natural as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -1377,13 +1397,13 @@ minutes. The creation of this resource will block until the new AMI is
 available for use on new instances.
 -}
 data AmiCopyResource s = AmiCopyResource {
-      _encrypted         :: !(TF.Attr s P.Text)
+      _encrypted :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies whether the destination snapshots of the copied image should be encrypted. Defaults to @false@ -}
-    , _kms_key_id        :: !(TF.Attr s P.Text)
+    , _kms_key_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The full ARN of the KMS Key to use when encrypting the snapshots of an image during a copy operation. If not specified, then the default AWS KMS Key will be used -}
-    , _name              :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) A region-unique name for the AMI. -}
-    , _source_ami_id     :: !(TF.Attr s P.Text)
+    , _source_ami_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the AMI to copy. This id must be valid in the region given by @source_ami_region@ . -}
     , _source_ami_region :: !(TF.Attr s P.Region)
     {- ^ (Required) The region from which the AMI will be copied. This may be the same as the AWS provider region in order to create a copy within the same region. -}
@@ -1514,7 +1534,7 @@ data ApiGatewayDocumentationVersionResource s = ApiGatewayDocumentationVersionRe
     {- ^ (Optional) The description of the API documentation version. -}
     , _rest_api_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the associated Rest API -}
-    , _version     :: !(TF.Attr s P.Text)
+    , _version :: !(TF.Attr s P.Text)
     {- ^ (Required) The version identifier of the API documentation snapshot. -}
     } deriving (Show, Eq)
 
@@ -1569,25 +1589,25 @@ apiGatewayDocumentationVersionResource =
 Provides a HTTP Method for an API Gateway Resource.
 -}
 data ApiGatewayMethodResource s = ApiGatewayMethodResource {
-      _api_key_required     :: !(TF.Attr s P.Text)
+      _api_key_required :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specify if the method requires an API key -}
-    , _authorization        :: !(TF.Attr s P.Text)
+    , _authorization :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of authorization used for the method ( @NONE@ , @CUSTOM@ , @AWS_IAM@ , @COGNITO_USER_POOLS@ ) -}
     , _authorization_scopes :: !(TF.Attr s P.Text)
     {- ^ (Optional) The authorization scopes used when the authorization is @COGNITO_USER_POOLS@ -}
-    , _authorizer_id        :: !(TF.Attr s P.Text)
+    , _authorizer_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The authorizer id to be used when the authorization is @CUSTOM@ or @COGNITO_USER_POOLS@ -}
-    , _http_method          :: !(TF.Attr s P.Text)
+    , _http_method :: !(TF.Attr s P.Text)
     {- ^ (Required) The HTTP Method ( @GET@ , @POST@ , @PUT@ , @DELETE@ , @HEAD@ , @OPTIONS@ , @ANY@ ) -}
-    , _request_models       :: !(TF.Attr s P.Text)
+    , _request_models :: !(TF.Attr s P.Text)
     {- ^ (Optional) A map of the API models used for the request's content type where key is the content type (e.g. @application/json@ ) and value is either @Error@ , @Empty@ (built-in models) or @aws_api_gateway_model@ 's @name@ . -}
-    , _request_parameters   :: !(TF.Attr s P.Text)
+    , _request_parameters :: !(TF.Attr s P.Text)
     {- ^ (Optional) A map of request query string parameters and headers that should be passed to the integration. For example: -}
     , _request_validator_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of a @aws_api_gateway_request_validator@ -}
-    , _resource_id          :: !(TF.Attr s P.Text)
+    , _resource_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The API resource ID -}
-    , _rest_api_id          :: !(TF.Attr s P.Text)
+    , _rest_api_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the associated REST API -}
     } deriving (Show, Eq)
 
@@ -1728,13 +1748,13 @@ Provides a Model for a API Gateway.
 data ApiGatewayModelResource s = ApiGatewayModelResource {
       _content_type :: !(TF.Attr s P.Text)
     {- ^ (Required) The content type of the model -}
-    , _description  :: !(TF.Attr s P.Text)
+    , _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) The description of the model -}
-    , _name         :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the model -}
-    , _rest_api_id  :: !(TF.Attr s P.Text)
+    , _rest_api_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the associated REST API -}
-    , _schema       :: !(TF.Attr s P.Text)
+    , _schema :: !(TF.Attr s P.Text)
     {- ^ (Required) The schema of the model in a JSON form -}
     } deriving (Show, Eq)
 
@@ -1816,27 +1836,27 @@ apiGatewayModelResource =
 Provides an API Gateway Stage.
 -}
 data ApiGatewayStageResource s = ApiGatewayStageResource {
-      _access_log_settings   :: !(TF.Attr s P.Text)
+      _access_log_settings :: !(TF.Attr s P.Text)
     {- ^ (Optional) Enables access logs for the API stage. Detailed below. -}
     , _cache_cluster_enabled :: !(TF.Attr s P.Bool)
     {- ^ (Optional) Specifies whether a cache cluster is enabled for the stage -}
-    , _cache_cluster_size    :: !(TF.Attr s P.Text)
+    , _cache_cluster_size :: !(TF.Attr s P.Text)
     {- ^ (Optional) The size of the cache cluster for the stage, if enabled. Allowed values include @0.5@ , @1.6@ , @6.1@ , @13.5@ , @28.4@ , @58.2@ , @118@ and @237@ . -}
     , _client_certificate_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The identifier of a client certificate for the stage. -}
-    , _deployment_id         :: !(TF.Attr s P.Text)
+    , _deployment_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the deployment that the stage points to -}
-    , _description           :: !(TF.Attr s P.Text)
+    , _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) The description of the stage -}
     , _documentation_version :: !(TF.Attr s P.Text)
     {- ^ (Optional) The version of the associated API documentation -}
-    , _rest_api_id           :: !(TF.Attr s P.Text)
+    , _rest_api_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the associated REST API -}
-    , _stage_name            :: !(TF.Attr s P.Text)
+    , _stage_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the stage -}
-    , _tags                  :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _variables             :: !(TF.Attr s P.Text)
+    , _variables :: !(TF.Attr s P.Text)
     {- ^ (Optional) A map that defines the stage variables -}
     } deriving (Show, Eq)
 
@@ -1998,7 +2018,7 @@ Provides an API Gateway VPC Link.
 data ApiGatewayVpcLinkResource s = ApiGatewayVpcLinkResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) The description of the VPC link. -}
-    , _name        :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name used to label and identify the VPC link. -}
     , _target_arns :: !(TF.Attr s P.Text)
     {- ^ (Required, ForceNew) The list of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target. -}
@@ -2058,21 +2078,21 @@ apiGatewayVpcLinkResource =
 Provides an Application AutoScaling ScheduledAction resource.
 -}
 data AppautoscalingScheduledActionResource s = AppautoscalingScheduledActionResource {
-      _end_time               :: !(TF.Attr s P.Text)
+      _end_time :: !(TF.Attr s P.Text)
     {- ^ (Optional) The date and time for the scheduled action to end. Specify the following format: 2006-01-02T15:04:05Z -}
-    , _name                   :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the scheduled action. -}
-    , _resource_id            :: !(TF.Attr s P.Text)
+    , _resource_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The identifier of the resource associated with the scheduled action. Documentation can be found in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-ResourceId> -}
-    , _scalable_dimension     :: !(TF.Attr s P.Text)
+    , _scalable_dimension :: !(TF.Attr s P.Text)
     {- ^ (Optional) The scalable dimension. Documentation can be found in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-ScalableDimension> Example: ecs:service:DesiredCount -}
     , _scalable_target_action :: !(TF.Attr s P.Text)
     {- ^ (Optional) The new minimum and maximum capacity. You can set both values or just one. See <#scalable-target-action-arguments> -}
-    , _schedule               :: !(TF.Attr s P.Text)
+    , _schedule :: !(TF.Attr s P.Text)
     {- ^ (Optional) The schedule for this action. The following formats are supported: At expressions - at(yyyy-mm-ddThh:mm:ss), Rate expressions - rate(valueunit), Cron expressions - cron(fields). In UTC. Documentation can be found in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-Schedule> -}
-    , _service_namespace      :: !(TF.Attr s P.Text)
+    , _service_namespace :: !(TF.Attr s P.Text)
     {- ^ (Required) The namespace of the AWS service. Documentation can be found in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-ServiceNamespace> Example: ecs -}
-    , _start_time             :: !(TF.Attr s P.Text)
+    , _start_time :: !(TF.Attr s P.Text)
     {- ^ (Optional) The date and time for the scheduled action to start. Specify the following format: 2006-01-02T15:04:05Z -}
     } deriving (Show, Eq)
 
@@ -2190,11 +2210,11 @@ appautoscalingScheduledActionResource =
 Provides an Athena database.
 -}
 data AthenaDatabaseResource s = AthenaDatabaseResource {
-      _bucket        :: !(TF.Attr s P.Text)
+      _bucket :: !(TF.Attr s P.Text)
     {- ^ (Required) Name of s3 bucket to save the results of the query execution. -}
     , _force_destroy :: !(TF.Attr s P.Text)
     {- ^ (Optional, Default: false) A boolean that indicates all tables should be deleted from the database so that the database can be destroyed without error. The tables are not recoverable. -}
-    , _name          :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) Name of the database to create. -}
     } deriving (Show, Eq)
 
@@ -2256,11 +2276,11 @@ inside Amazon Web Services, and are applied to each AutoScaling Group you
 supply.
 -}
 data AutoscalingNotificationResource s = AutoscalingNotificationResource {
-      _group_names   :: !(TF.Attr s P.Text)
+      _group_names :: !(TF.Attr s P.Text)
     {- ^ (Required) A list of AutoScaling Group Names -}
     , _notifications :: !(TF.Attr s P.Text)
     {- ^ (Required) A list of Notification Types that trigger notifications. Acceptable values are documented <https://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_NotificationConfiguration.html> -}
-    , _topic_arn     :: !(TF.Attr s P.Text)
+    , _topic_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) The Topic ARN for notifications to be sent through -}
     } deriving (Show, Eq)
 
@@ -2317,19 +2337,19 @@ Provides an AutoScaling Schedule resource.
 data AutoscalingScheduleResource s = AutoscalingScheduleResource {
       _autoscaling_group_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name or Amazon Resource Name (ARN) of the Auto Scaling group. -}
-    , _desired_capacity       :: !(TF.Attr s P.Text)
+    , _desired_capacity :: !(TF.Attr s P.Text)
     {- ^ (Optional) The number of EC2 instances that should be running in the group. Default 0.  Set to -1 if you don't want to change the desired capacity at the scheduled time. -}
-    , _end_time               :: !(TF.Attr s P.Text)
+    , _end_time :: !(TF.Attr s P.Text)
     {- ^ (Optional) The time for this action to end, in "YYYY-MM-DDThh:mm:ssZ" format in UTC/GMT only (for example, 2014-06-01T00:00:00Z ). If you try to schedule your action in the past, Auto Scaling returns an error message. -}
-    , _max_size               :: !(TF.Attr s P.Text)
+    , _max_size :: !(TF.Attr s P.Text)
     {- ^ (Optional) The maximum size for the Auto Scaling group. Default 0. Set to -1 if you don't want to change the maximum size at the scheduled time. -}
-    , _min_size               :: !(TF.Attr s P.Text)
+    , _min_size :: !(TF.Attr s P.Text)
     {- ^ (Optional) The minimum size for the Auto Scaling group. Default 0. Set to -1 if you don't want to change the minimum size at the scheduled time. -}
-    , _recurrence             :: !(TF.Attr s P.Text)
+    , _recurrence :: !(TF.Attr s P.Text)
     {- ^ (Optional) The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. -}
-    , _scheduled_action_name  :: !(TF.Attr s P.Text)
+    , _scheduled_action_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of this scaling action. -}
-    , _start_time             :: !(TF.Attr s P.Text)
+    , _start_time :: !(TF.Attr s P.Text)
     {- ^ (Optional) The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ" format in UTC/GMT only (for example, 2014-06-01T00:00:00Z ). If you try to schedule your action in the past, Auto Scaling returns an error message. -}
     } deriving (Show, Eq)
 
@@ -2449,15 +2469,15 @@ Provides a Batch Job Definition resource.
 data BatchJobDefinitionResource s = BatchJobDefinitionResource {
       _container_properties :: !(TF.Attr s P.Text)
     {- ^ (Optional) A valid <http://docs.aws.amazon.com/batch/latest/APIReference/API_RegisterJobDefinition.html> provided as a single valid JSON document. This parameter is required if the @type@ parameter is @container@ . -}
-    , _name                 :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the job definition. -}
-    , _parameters           :: !(TF.Attr s P.Text)
+    , _parameters :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies the parameter substitution placeholders to set in the job definition. -}
-    , _retry_strategy       :: !(TF.Attr s P.Text)
+    , _retry_strategy :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies the retry strategy to use for failed jobs that are submitted with this job definition. Maximum number of @retry_strategy@ is @1@ .  Defined below. -}
-    , _timeout              :: !(TF.Attr s P.Text)
+    , _timeout :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies the timeout for jobs so that if a job runs longer, AWS Batch terminates the job. Maximum number of @timeout@ is @1@ . Defined below. -}
-    , _type'                :: !(TF.Attr s P.Text)
+    , _type' :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of job definition.  Must be @container@ -}
     } deriving (Show, Eq)
 
@@ -2556,15 +2576,15 @@ Provides a Cloud9 EC2 Development Environment.
 data Cloud9EnvironmentEc2Resource s = Cloud9EnvironmentEc2Resource {
       _automatic_stop_time_minutes :: !(TF.Attr s P.Text)
     {- ^ (Optional) The number of minutes until the running instance is shut down after the environment has last been used. -}
-    , _description                 :: !(TF.Attr s P.Text)
+    , _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) The description of the environment. -}
-    , _instance_type               :: !(TF.Attr s P.Text)
+    , _instance_type :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of instance to connect to the environment, e.g. @t2.micro@ . -}
-    , _name                        :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the environment. -}
-    , _owner_arn                   :: !(TF.Attr s P.Text)
+    , _owner_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ARN of the environment owner. This can be ARN of any AWS IAM principal. Defaults to the environment's creator. -}
-    , _subnet_id                   :: !(TF.Attr s P.Text)
+    , _subnet_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of the subnet in Amazon VPC that AWS Cloud9 will use to communicate with the Amazon EC2 instance. -}
     } deriving (Show, Eq)
 
@@ -2668,15 +2688,15 @@ listed
 .
 -}
 data CodecommitTriggerResource s = CodecommitTriggerResource {
-      _branches        :: !(TF.Attr s P.Text)
+      _branches :: !(TF.Attr s P.Text)
     {- ^ (Optional) The branches that will be included in the trigger configuration. If no branches are specified, the trigger will apply to all branches. -}
-    , _custom_data     :: !(TF.Attr s P.Text)
+    , _custom_data :: !(TF.Attr s P.Text)
     {- ^ (Optional) Any custom data associated with the trigger that will be included in the information sent to the target of the trigger. -}
     , _destination_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon Simple Notification Service (SNS). -}
-    , _events          :: !(TF.Attr s P.Text)
+    , _events :: !(TF.Attr s P.Text)
     {- ^ (Required) The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). If no events are specified, the trigger will run for all repository events. Event types include: @all@ , @updateReference@ , @createReference@ , @deleteReference@ . -}
-    , _name            :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the trigger. -}
     , _repository_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name for the repository. This needs to be less than 100 characters. -}
@@ -2769,33 +2789,33 @@ codecommitTriggerResource =
 Provides a CodeDeploy Deployment Group for a CodeDeploy Application
 -}
 data CodedeployDeploymentGroupResource s = CodedeployDeploymentGroupResource {
-      _alarm_configuration             :: !(TF.Attr s P.Text)
+      _alarm_configuration :: !(TF.Attr s P.Text)
     {- ^ (Optional) Information about alarms associated with the deployment group (documented below). -}
-    , _app_name                        :: !(TF.Attr s P.Text)
+    , _app_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the application. -}
-    , _auto_rollback_configuration     :: !(TF.Attr s P.Text)
+    , _auto_rollback_configuration :: !(TF.Attr s P.Text)
     {- ^ (Optional) The automatic rollback configuration associated with the deployment group (documented below). -}
-    , _autoscaling_groups              :: !(TF.Attr s P.Text)
+    , _autoscaling_groups :: !(TF.Attr s P.Text)
     {- ^ (Optional) Autoscaling groups associated with the deployment group. -}
-    , _blue_green_deployment_config    :: !(TF.Attr s P.Text)
+    , _blue_green_deployment_config :: !(TF.Attr s P.Text)
     {- ^ (Optional) Information about blue/green deployment options for a deployment group (documented below). -}
-    , _deployment_config_name          :: !(TF.Attr s P.Text)
+    , _deployment_config_name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the group's deployment config. The default is "CodeDeployDefault.OneAtATime". -}
-    , _deployment_group_name           :: !(TF.Attr s P.Text)
+    , _deployment_group_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the deployment group. -}
-    , _deployment_style                :: !(TF.Attr s P.Text)
+    , _deployment_style :: !(TF.Attr s P.Text)
     {- ^ (Optional) Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer (documented below). -}
-    , _ec2_tag_filter                  :: !(TF.Attr s P.Text)
+    , _ec2_tag_filter :: !(TF.Attr s P.Text)
     {- ^ (Optional) Tag filters associated with the deployment group. See the AWS docs for details. -}
-    , _ec2_tag_set                     :: !(TF.Attr s P.Text)
+    , _ec2_tag_set :: !(TF.Attr s P.Text)
     {- ^ (Optional) Sets of Tag filters associated with the deployment group, which are referred to as tag groups in the document.  See the AWS docs for details. -}
-    , _load_balancer_info              :: !(TF.Attr s P.Text)
+    , _load_balancer_info :: !(TF.Attr s P.Text)
     {- ^ (Optional) Information about the load balancer to use in a blue/green deployment (documented below). -}
     , _on_premises_instance_tag_filter :: !(TF.Attr s P.Text)
     {- ^ (Optional) On premise tag filters associated with the group. See the AWS docs for details. -}
-    , _service_role_arn                :: !(TF.Attr s P.Text)
+    , _service_role_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) The service role ARN that allows deployments. -}
-    , _trigger_configuration           :: !(TF.Attr s P.Text)
+    , _trigger_configuration :: !(TF.Attr s P.Text)
     {- ^ (Optional) Trigger Configurations for the deployment group (documented below). -}
     } deriving (Show, Eq)
 
@@ -2979,11 +2999,11 @@ specified.
 data CodepipelineResource s = CodepipelineResource {
       _artifact_store :: !(TF.Attr s P.Text)
     {- ^ (Required) An artifact_store block. Artifact stores are documented below. -}
-    , _name           :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the pipeline. -}
-    , _role_arn       :: !(TF.Attr s P.Text)
+    , _role_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf. -}
-    , _stage          :: !(TF.Attr s P.Text)
+    , _stage :: !(TF.Attr s P.Text)
     {- ^ (Required) A stage block. Stages are documented below. -}
     } deriving (Show, Eq)
 
@@ -3056,39 +3076,39 @@ codepipelineResource =
 Provides a Cognito User Pool resource.
 -}
 data CognitoUserPoolResource s = CognitoUserPoolResource {
-      _admin_create_user_config      :: !(TF.Attr s P.Text)
+      _admin_create_user_config :: !(TF.Attr s P.Text)
     {- ^ (Optional) - The configuration for <#admin-create-user-config> requests. -}
-    , _alias_attributes              :: !(TF.Attr s P.Text)
+    , _alias_attributes :: !(TF.Attr s P.Text)
     {- ^ (Optional) Attributes supported as an alias for this user pool. Possible values: phone_number, email, or preferred_username. Conflicts with @username_attributes@ . -}
-    , _auto_verified_attributes      :: !(TF.Attr s P.Text)
+    , _auto_verified_attributes :: !(TF.Attr s P.Text)
     {- ^ (Optional) The attributes to be auto-verified. Possible values: email, phone_number. -}
-    , _device_configuration          :: !(TF.Attr s P.Text)
+    , _device_configuration :: !(TF.Attr s P.Text)
     {- ^ (Optional) - The configuration for the <#device-configuration> . -}
-    , _email_configuration           :: !(TF.Attr s P.Text)
+    , _email_configuration :: !(TF.Attr s P.Text)
     {- ^ (Optional) - The <#email-configuration> . -}
-    , _email_verification_message    :: !(TF.Attr s P.Text)
+    , _email_verification_message :: !(TF.Attr s P.Text)
     {- ^ (Optional) A string representing the email verification message. Must contain the @{####}@ placeholder. NOTE: - If @email_verification_message@ and @verification_message_template.email_message@ are specified and the values are different, either one is prioritized and updated. -}
-    , _email_verification_subject    :: !(TF.Attr s P.Text)
+    , _email_verification_subject :: !(TF.Attr s P.Text)
     {- ^ (Optional) A string representing the email verification subject. NOTE: - If @email_verification_subject@ and @verification_message_template.email_subject@ are specified and the values are different, either one is prioritized and updated. -}
-    , _lambda_config                 :: !(TF.Attr s P.Text)
+    , _lambda_config :: !(TF.Attr s P.Text)
     {- ^ (Optional) - A container for the AWS <#lambda-configuration> associated with the user pool. -}
-    , _mfa_configuration             :: !(TF.Attr s P.Text)
+    , _mfa_configuration :: !(TF.Attr s P.Text)
     {- ^ (Optional, Default: OFF) Set to enable multi-factor authentication. Must be one of the following values (ON, OFF, OPTIONAL) -}
-    , _name                          :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the user pool. -}
-    , _password_policy               :: !(TF.Attr s P.Text)
+    , _password_policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) - A container for information about the <#password-policy> . -}
-    , _schema                        :: !(TF.Attr s P.Text)
+    , _schema :: !(TF.Attr s P.Text)
     {- ^ (Optional) - A container with the <#schema-attributes> of a user pool. Maximum of 50 attributes. -}
-    , _sms_authentication_message    :: !(TF.Attr s P.Text)
+    , _sms_authentication_message :: !(TF.Attr s P.Text)
     {- ^ (Optional) A string representing the SMS authentication message. -}
-    , _sms_configuration             :: !(TF.Attr s P.Text)
+    , _sms_configuration :: !(TF.Attr s P.Text)
     {- ^ (Optional) - The <#sms-configuration> . -}
-    , _sms_verification_message      :: !(TF.Attr s P.Text)
+    , _sms_verification_message :: !(TF.Attr s P.Text)
     {- ^ (Optional) A string representing the SMS verification message. -}
-    , _tags                          :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the User Pool. -}
-    , _username_attributes           :: !(TF.Attr s P.Text)
+    , _username_attributes :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies whether email addresses or phone numbers can be specified as usernames when a user signs up. Conflicts with @alias_attributes@ . -}
     , _verification_message_template :: !(TF.Attr s P.Text)
     {- ^ (Optional) - The <#verification-message-template> configuration. -}
@@ -3343,17 +3363,17 @@ Use of @depends_on@ is recommended (as shown below) to avoid race
 conditions.
 -}
 data ConfigConfigRuleResource s = ConfigConfigRuleResource {
-      _description                 :: !(TF.Attr s P.Text)
+      _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) Description of the rule -}
-    , _input_parameters            :: !(TF.Attr s P.Text)
+    , _input_parameters :: !(TF.Attr s P.Text)
     {- ^ (Optional) A string in JSON format that is passed to the AWS Config rule Lambda function. -}
     , _maximum_execution_frequency :: !(TF.Attr s P.Text)
     {- ^ (Optional) The maximum frequency with which AWS Config runs evaluations for a rule. -}
-    , _name                        :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the rule -}
-    , _scope                       :: !(TF.Attr s P.Text)
+    , _scope :: !(TF.Attr s P.Text)
     {- ^ (Optional) Scope defines which resources can trigger an evaluation for the rule as documented below. -}
-    , _source                      :: !(TF.Attr s P.Text)
+    , _source :: !(TF.Attr s P.Text)
     {- ^ (Required) Source specifies the rule owner, the rule identifier, and the notifications that cause the function to evaluate your AWS resources as documented below. -}
     } deriving (Show, Eq)
 
@@ -3455,7 +3475,7 @@ Recorder. ~> Note: Starting Configuration Recorder requires a
 data ConfigConfigurationRecorderStatusResource s = ConfigConfigurationRecorderStatusResource {
       _is_enabled :: !(TF.Attr s P.Bool)
     {- ^ (Required) Whether the configuration recorder should be enabled or disabled. -}
-    , _name       :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the recorder -}
     } deriving (Show, Eq)
 
@@ -3501,15 +3521,15 @@ Use of @depends_on@ (as shown below) is recommended to avoid race
 conditions.
 -}
 data ConfigDeliveryChannelResource s = ConfigDeliveryChannelResource {
-      _name                         :: !(TF.Attr s P.Text)
+      _name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the delivery channel. Defaults to @default@ . Changing it recreates the resource. -}
-    , _s3_bucket_name               :: !(TF.Attr s P.Text)
+    , _s3_bucket_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the S3 bucket used to store the configuration history. -}
-    , _s3_key_prefix                :: !(TF.Attr s P.Text)
+    , _s3_key_prefix :: !(TF.Attr s P.Text)
     {- ^ (Optional) The prefix for the specified S3 bucket. -}
     , _snapshot_delivery_properties :: !(TF.Attr s P.Text)
     {- ^ (Optional) Options for how AWS Config delivers configuration snapshots. See below -}
-    , _sns_topic_arn                :: !(TF.Attr s P.Text)
+    , _sns_topic_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ARN of the SNS topic that AWS Config delivers notifications to. -}
     } deriving (Show, Eq)
 
@@ -3591,29 +3611,29 @@ configDeliveryChannelResource =
 Provides a DAX Cluster resource.
 -}
 data DaxClusterResource s = DaxClusterResource {
-      _availability_zones     :: !(TF.Attr s [TF.Attr s P.Text])
+      _availability_zones :: !(TF.Attr s [TF.Attr s P.Text])
     {- ^ (Optional) List of Availability Zones in which the nodes will be created -}
-    , _cluster_name           :: !(TF.Attr s P.Text)
+    , _cluster_name :: !(TF.Attr s P.Text)
     {- ^ – (Required) Group identifier. DAX converts this name to lowercase -}
-    , _description            :: !(TF.Attr s P.Text)
+    , _description :: !(TF.Attr s P.Text)
     {- ^ – (Optional) Description for the cluster -}
-    , _iam_role_arn           :: !(TF.Attr s P.Text)
+    , _iam_role_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX will assume this role and use the role's permissions to access DynamoDB on your behalf -}
-    , _maintenance_window     :: !(TF.Attr s P.Text)
+    , _maintenance_window :: !(TF.Attr s P.Text)
     {- ^ – (Optional) Specifies the weekly time range for when maintenance on the cluster is performed. The format is @ddd:hh24:mi-ddd:hh24:mi@ (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: @sun:05:00-sun:09:00@ -}
-    , _node_type              :: !(TF.Attr s P.Text)
+    , _node_type :: !(TF.Attr s P.Text)
     {- ^ – (Required) The compute and memory capacity of the nodes. See <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.concepts.cluster.html#DAX.concepts.nodes> for supported node types -}
     , _notification_topic_arn :: !(TF.Attr s P.Text)
     {- ^ – (Optional) An Amazon Resource Name (ARN) of an SNS topic to send DAX notifications to. Example: @arn:aws:sns:us-east-1:012345678999:my_sns_topic@ -}
-    , _parameter_group_name   :: !(TF.Attr s P.Text)
+    , _parameter_group_name :: !(TF.Attr s P.Text)
     {- ^ – (Optional) Name of the parameter group to associate with this DAX cluster -}
-    , _replication_factor     :: !(TF.Attr s P.Text)
+    , _replication_factor :: !(TF.Attr s P.Text)
     {- ^ – (Required) The number of nodes in the DAX cluster. A replication factor of 1 will create a single-node cluster, without any read replicas -}
-    , _security_group_ids     :: !(TF.Attr s [TF.Attr s P.Text])
+    , _security_group_ids :: !(TF.Attr s [TF.Attr s P.Text])
     {- ^ – (Optional) One or more VPC security groups associated with the cluster -}
-    , _subnet_group_name      :: !(TF.Attr s P.Text)
+    , _subnet_group_name :: !(TF.Attr s P.Text)
     {- ^ – (Optional) Name of the subnet group to be used for the cluster -}
-    , _tags                   :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource -}
     } deriving (Show, Eq)
 
@@ -3798,13 +3818,13 @@ differently from normal resources, in that Terraform does not create this
 resource, but instead "adopts" it into management.
 -}
 data DefaultVpcResource s = DefaultVpcResource {
-      _enable_classiclink   :: !(TF.Attr s P.Bool)
+      _enable_classiclink :: !(TF.Attr s P.Bool)
     {- ^ (Optional) A boolean flag to enable/disable ClassicLink for the VPC. Only valid in regions and accounts that support EC2 Classic. See the <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html> for more information. Defaults false. -}
     , _enable_dns_hostnames :: !(TF.Attr s P.Bool)
     {- ^ (Optional) A boolean flag to enable/disable DNS hostnames in the VPC. Defaults false. -}
-    , _enable_dns_support   :: !(TF.Attr s P.Bool)
+    , _enable_dns_support :: !(TF.Attr s P.Bool)
     {- ^ (Optional) A boolean flag to enable/disable DNS support in the VPC. Defaults true. -}
-    , _tags                 :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -3896,9 +3916,9 @@ Provides a conditional forwarder for managed Microsoft AD in AWS Directory
 Service.
 -}
 data DirectoryServiceConditionalForwarderResource s = DirectoryServiceConditionalForwarderResource {
-      _directory_id       :: !(TF.Attr s P.Text)
+      _directory_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of directory. -}
-    , _dns_ips            :: !(TF.Attr s P.Text)
+    , _dns_ips :: !(TF.Attr s P.Text)
     {- ^ (Required) A list of forwarder IP addresses. -}
     , _remote_domain_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The fully qualified domain name of the remote domain for which forwarders will be used. -}
@@ -3958,37 +3978,37 @@ the password will be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
 data DmsEndpointResource s = DmsEndpointResource {
-      _certificate_arn             :: !(TF.Attr s P.Text)
+      _certificate_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional, Default: empty string) The Amazon Resource Name (ARN) for the certificate. -}
-    , _database_name               :: !(TF.Attr s P.Text)
+    , _database_name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the endpoint database. -}
-    , _endpoint_id                 :: !(TF.Attr s P.Text)
+    , _endpoint_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The database endpoint identifier. -}
-    , _endpoint_type               :: !(TF.Attr s P.Text)
+    , _endpoint_type :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of endpoint. Can be one of @source | target@ . -}
-    , _engine_name                 :: !(TF.Attr s P.Text)
+    , _engine_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of engine for the endpoint. Can be one of @mysql | oracle | postgres | mariadb | aurora | redshift | sybase | sqlserver | dynamodb | mongodb | s3 | azuredb@ . -}
     , _extra_connection_attributes :: !(TF.Attr s P.Text)
     {- ^ (Optional) Additional attributes associated with the connection. For available attributes see <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.ConnectionAttributes.html> . -}
-    , _kms_key_arn                 :: !(TF.Attr s P.Text)
+    , _kms_key_arn :: !(TF.Attr s P.Text)
     {- ^ (Required when @engine_name@ is @mongodb@ , optional otherwise) The Amazon Resource Name (ARN) for the KMS key that will be used to encrypt the connection parameters. If you do not specify a value for @kms_key_arn@ , then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region. -}
-    , _mongodb_settings            :: !(TF.Attr s P.Text)
+    , _mongodb_settings :: !(TF.Attr s P.Text)
     {- ^ (Optional) Settings for the source MongoDB endpoint. Available settings are @auth_type@ (default: @PASSWORD@ ), @auth_mechanism@ (default: @DEFAULT@ ), @nesting_level@ (default: @NONE@ ), @extract_doc_id@ (default: @false@ ), @docs_to_investigate@ (default: @1000@ ) and @auth_source@ (default: @admin@ ). For more details, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html> . -}
-    , _password                    :: !(TF.Attr s P.Text)
+    , _password :: !(TF.Attr s P.Text)
     {- ^ (Optional) The password to be used to login to the endpoint database. -}
-    , _port                        :: !(TF.Attr s P.Text)
+    , _port :: !(TF.Attr s P.Text)
     {- ^ (Optional) The port used by the endpoint database. -}
-    , _s3_settings                 :: !(TF.Attr s P.Text)
+    , _s3_settings :: !(TF.Attr s P.Text)
     {- ^ (Optional) Settings for the target S3 endpoint. Available settings are @service_access_role_arn@ , @external_table_definition@ , @csv_row_delimiter@ (default: @\\n@ ), @csv_delimiter@ (default: @,@ ), @bucket_folder@ , @bucket_name@ and @compression_type@ (default: @NONE@ ). For more details, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html> . -}
-    , _server_name                 :: !(TF.Attr s P.Text)
+    , _server_name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The host name of the server. -}
-    , _service_access_role         :: !(TF.Attr s P.Text)
+    , _service_access_role :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Amazon Resource Name (ARN) used by the service access IAM role for dynamodb endpoints. -}
-    , _ssl_mode                    :: !(TF.Attr s P.Text)
+    , _ssl_mode :: !(TF.Attr s P.Text)
     {- ^ (Optional, Default: none) The SSL mode to use for the connection. Can be one of @none | require | verify-ca | verify-full@ -}
-    , _tags                        :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _username                    :: !(TF.Attr s P.Text)
+    , _username :: !(TF.Attr s P.Text)
     {- ^ (Optional) The user name to be used to login to the endpoint database. -}
     } deriving (Show, Eq)
 
@@ -4203,23 +4223,23 @@ Provides a DMS (Data Migration Service) replication task resource. DMS
 replication tasks can be created, updated, deleted, and imported.
 -}
 data DmsReplicationTaskResource s = DmsReplicationTaskResource {
-      _cdc_start_time            :: !(TF.Attr s P.Text)
+      _cdc_start_time :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Unix timestamp integer for the start of the Change Data Capture (CDC) operation. -}
-    , _migration_type            :: !(TF.Attr s P.Text)
+    , _migration_type :: !(TF.Attr s P.Text)
     {- ^ (Required) The migration type. Can be one of @full-load | cdc | full-load-and-cdc@ . -}
-    , _replication_instance_arn  :: !(TF.Attr s P.Text)
+    , _replication_instance_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) The Amazon Resource Name (ARN) of the replication instance. -}
-    , _replication_task_id       :: !(TF.Attr s P.Text)
+    , _replication_task_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The replication task identifier. -}
     , _replication_task_settings :: !(TF.Attr s P.Text)
     {- ^ (Optional) An escaped JSON string that contains the task settings. For a complete list of task settings, see <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html> . -}
-    , _source_endpoint_arn       :: !(TF.Attr s P.Text)
+    , _source_endpoint_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) The Amazon Resource Name (ARN) string that uniquely identifies the source endpoint. -}
-    , _table_mappings            :: !(TF.Attr s P.Text)
+    , _table_mappings :: !(TF.Attr s P.Text)
     {- ^ (Required) An escaped JSON string that contains the table mappings. For information on table mapping see <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html> -}
-    , _tags                      :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _target_endpoint_arn       :: !(TF.Attr s P.Text)
+    , _target_endpoint_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) The Amazon Resource Name (ARN) string that uniquely identifies the target endpoint. -}
     } deriving (Show, Eq)
 
@@ -4352,25 +4372,25 @@ hosted virtual interface is a virtual interface that is owned by another AWS
 account.
 -}
 data DxHostedPublicVirtualInterfaceResource s = DxHostedPublicVirtualInterfaceResource {
-      _address_family        :: !(TF.Attr s P.Text)
+      _address_family :: !(TF.Attr s P.Text)
     {- ^ (Required) The address family for the BGP peer. @ipv4@ or @ipv6@ . -}
-    , _amazon_address        :: !(TF.Attr s P.Text)
+    , _amazon_address :: !(TF.Attr s P.Text)
     {- ^ (Optional) The IPv4 CIDR address to use to send traffic to Amazon. Required for IPv4 BGP peers. -}
-    , _bgp_asn               :: !(TF.Attr s P.Text)
+    , _bgp_asn :: !(TF.Attr s P.Text)
     {- ^ (Required) The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration. -}
-    , _bgp_auth_key          :: !(TF.Attr s P.Text)
+    , _bgp_auth_key :: !(TF.Attr s P.Text)
     {- ^ (Optional) The authentication key for BGP configuration. -}
-    , _connection_id         :: !(TF.Attr s P.Text)
+    , _connection_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the Direct Connect connection (or LAG) on which to create the virtual interface. -}
-    , _customer_address      :: !(TF.Attr s P.Text)
+    , _customer_address :: !(TF.Attr s P.Text)
     {- ^ (Optional) The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers. -}
-    , _name                  :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name for the virtual interface. -}
-    , _owner_account_id      :: !(TF.Attr s P.Text)
+    , _owner_account_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The AWS account that will own the new virtual interface. -}
     , _route_filter_prefixes :: !(TF.Attr s P.Text)
     {- ^ (Required) A list of routes to be advertised to the AWS network in this region. -}
-    , _vlan                  :: !(TF.Attr s P.Text)
+    , _vlan :: !(TF.Attr s P.Text)
     {- ^ (Required) The VLAN ID. -}
     } deriving (Show, Eq)
 
@@ -4517,15 +4537,15 @@ Provides a Direct Connect LAG.
 data DxLagResource s = DxLagResource {
       _connections_bandwidth :: !(TF.Attr s P.Text)
     {- ^ (Required) The bandwidth of the individual physical connections bundled by the LAG. Available values: 1Gbps, 10Gbps. Case sensitive. -}
-    , _force_destroy         :: !(TF.Attr s P.Text)
+    , _force_destroy :: !(TF.Attr s P.Text)
     {- ^ (Optional, Default:false) A boolean that indicates all connections associated with the LAG should be deleted so that the LAG can be destroyed without error. These objects are not recoverable. -}
-    , _location              :: !(TF.Attr s P.Text)
+    , _location :: !(TF.Attr s P.Text)
     {- ^ (Required) The AWS Direct Connect location in which the LAG should be allocated. See <https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeLocations.html> for the list of AWS Direct Connect locations. Use @locationCode@ . -}
-    , _name                  :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the LAG. -}
     , _number_of_connections :: !(TF.Attr s P.Text)
     {- ^ - ( Deprecated ) The number of physical connections initially provisioned and bundled by the LAG. Use @aws_dx_connection@ and @aws_dx_connection_association@ resources instead. Default connections will be removed as part of LAG creation automatically in future versions. -}
-    , _tags                  :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -4622,27 +4642,27 @@ dxLagResource =
 Provides a Direct Connect private virtual interface resource.
 -}
 data DxPrivateVirtualInterfaceResource s = DxPrivateVirtualInterfaceResource {
-      _address_family   :: !(TF.Attr s P.Text)
+      _address_family :: !(TF.Attr s P.Text)
     {- ^ (Required) The address family for the BGP peer. @ipv4@ or @ipv6@ . -}
-    , _amazon_address   :: !(TF.Attr s P.Text)
+    , _amazon_address :: !(TF.Attr s P.Text)
     {- ^ (Optional) The IPv4 CIDR address to use to send traffic to Amazon. Required for IPv4 BGP peers. -}
-    , _bgp_asn          :: !(TF.Attr s P.Text)
+    , _bgp_asn :: !(TF.Attr s P.Text)
     {- ^ (Required) The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration. -}
-    , _bgp_auth_key     :: !(TF.Attr s P.Text)
+    , _bgp_auth_key :: !(TF.Attr s P.Text)
     {- ^ (Optional) The authentication key for BGP configuration. -}
-    , _connection_id    :: !(TF.Attr s P.Text)
+    , _connection_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the Direct Connect connection (or LAG) on which to create the virtual interface. -}
     , _customer_address :: !(TF.Attr s P.Text)
     {- ^ (Optional) The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers. -}
-    , _dx_gateway_id    :: !(TF.Attr s P.Text)
+    , _dx_gateway_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of the Direct Connect gateway to which to connect the virtual interface. -}
-    , _name             :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name for the virtual interface. -}
-    , _tags             :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _vlan             :: !(TF.Attr s P.Text)
+    , _vlan :: !(TF.Attr s P.Text)
     {- ^ (Required) The VLAN ID. -}
-    , _vpn_gateway_id   :: !(TF.Attr s P.Text)
+    , _vpn_gateway_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of the <vpn_gateway.html> to which to connect the virtual interface. -}
     } deriving (Show, Eq)
 
@@ -4804,11 +4824,11 @@ table, see
 .
 -}
 data DynamodbTableItemResource s = DynamodbTableItemResource {
-      _hash_key   :: !(TF.Attr s P.Text)
+      _hash_key :: !(TF.Attr s P.Text)
     {- ^ (Required) Hash key to use for lookups and identification of the item -}
-    , _item       :: !(TF.Attr s P.Text)
+    , _item :: !(TF.Attr s P.Text)
     {- ^ (Required) JSON representation of a map of attribute name/value pairs, one for each attribute. Only the primary key attributes are required; you can optionally provide other attribute name-value pairs for the item. -}
-    , _range_key  :: !(TF.Attr s P.Text)
+    , _range_key :: !(TF.Attr s P.Text)
     {- ^ (Optional) Range key to use for lookups and identification of the item. Required if there is range key defined in the table. -}
     , _table_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the table to contain the item. -}
@@ -4879,19 +4899,19 @@ Manages a single EBS volume.
 data EbsVolumeResource s = EbsVolumeResource {
       _availability_zone :: !(TF.Attr s P.Zone)
     {- ^ (Required) The AZ where the EBS volume will exist. -}
-    , _encrypted         :: !(TF.Attr s P.Text)
+    , _encrypted :: !(TF.Attr s P.Text)
     {- ^ (Optional) If true, the disk will be encrypted. -}
-    , _iops              :: !(TF.Attr s P.Text)
+    , _iops :: !(TF.Attr s P.Text)
     {- ^ (Optional) The amount of IOPS to provision for the disk. -}
-    , _kms_key_id        :: !(TF.Attr s P.Text)
+    , _kms_key_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ARN for the KMS encryption key. When specifying @kms_key_id@ , @encrypted@ needs to be set to true. -}
-    , _size              :: !(TF.Attr s P.Text)
+    , _size :: !(TF.Attr s P.Text)
     {- ^ (Optional) The size of the drive in GiBs. -}
-    , _snapshot_id       :: !(TF.Attr s P.Text)
+    , _snapshot_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) A snapshot to base the EBS volume off of. -}
-    , _tags              :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _type'             :: !(TF.Attr s P.Text)
+    , _type' :: !(TF.Attr s P.Text)
     {- ^ (Optional) The type of EBS volume. Can be "standard", "gp2", "io1", "sc1" or "st1" (Default: "standard"). -}
     } deriving (Show, Eq)
 
@@ -5056,37 +5076,37 @@ webserver or a database). See
 .
 -}
 data EcsServiceResource s = EcsServiceResource {
-      _cluster                            :: !(TF.Attr s P.Text)
+      _cluster :: !(TF.Attr s P.Text)
     {- ^ (Optional) ARN of an ECS cluster -}
-    , _deployment_maximum_percent         :: !(TF.Attr s P.Text)
+    , _deployment_maximum_percent :: !(TF.Attr s P.Text)
     {- ^ (Optional) The upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment. Not valid when using the @DAEMON@ scheduling strategy. -}
     , _deployment_minimum_healthy_percent :: !(TF.Attr s P.Text)
     {- ^ (Optional) The lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment. Not valid when using the @DAEMON@ scheduling strategy. -}
-    , _desired_count                      :: !(TF.Attr s P.Text)
+    , _desired_count :: !(TF.Attr s P.Text)
     {- ^ (Optional) The number of instances of the task definition to place and keep running. Defaults to 0. Do not specify if using the @DAEMON@ scheduling strategy. -}
-    , _health_check_grace_period_seconds  :: !(TF.Attr s P.Text)
+    , _health_check_grace_period_seconds :: !(TF.Attr s P.Text)
     {- ^ (Optional) Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 7200. Only valid for services configured to use load balancers. -}
-    , _iam_role                           :: !(TF.Attr s P.Text)
+    , _iam_role :: !(TF.Attr s P.Text)
     {- ^ (Optional) ARN of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is required if you are using a load balancer with your service, but only if your task definition does not use the @awsvpc@ network mode. If using @awsvpc@ network mode, do not specify this role. If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here. -}
-    , _launch_type                        :: !(TF.Attr s P.Text)
+    , _launch_type :: !(TF.Attr s P.Text)
     {- ^ (Optional) The launch type on which to run your service. The valid values are @EC2@ and @FARGATE@ . Defaults to @EC2@ . -}
-    , _load_balancer                      :: !(TF.Attr s P.Text)
+    , _load_balancer :: !(TF.Attr s P.Text)
     {- ^ (Optional) A load balancer block. Load balancers documented below. -}
-    , _name                               :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the service (up to 255 letters, numbers, hyphens, and underscores) -}
-    , _network_configuration              :: !(TF.Attr s P.Text)
+    , _network_configuration :: !(TF.Attr s P.Text)
     {- ^ (Optional) The network configuration for the service. This parameter is required for task definitions that use the @awsvpc@ network mode to receive their own Elastic Network Interface, and it is not supported for other network modes. -}
-    , _ordered_placement_strategy         :: !(TF.Attr s P.Text)
+    , _ordered_placement_strategy :: !(TF.Attr s P.Text)
     {- ^ (Optional) Service level strategy rules that are taken into consideration during task placement. List from top to bottom in order of precedence. The maximum number of @ordered_placement_strategy@ blocks is @5@ . Defined below. -}
-    , _placement_constraints              :: !(TF.Attr s P.Text)
+    , _placement_constraints :: !(TF.Attr s P.Text)
     {- ^ (Optional) rules that are taken into consideration during task placement. Maximum number of @placement_constraints@ is @10@ . Defined below. -}
-    , _placement_strategy                 :: !(TF.Attr s P.Text)
+    , _placement_strategy :: !(TF.Attr s P.Text)
     {- ^ (Optional) Deprecated , use @ordered_placement_strategy@ instead. -}
-    , _scheduling_strategy                :: !(TF.Attr s P.Text)
+    , _scheduling_strategy :: !(TF.Attr s P.Text)
     {- ^ (Optional) The scheduling strategy to use for the service. The valid values are @REPLICA@ and @DAEMON@ . Defaults to @REPLICA@ . Note that <https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html> . -}
-    , _service_registries                 :: !(TF.Attr s P.Text)
+    , _service_registries :: !(TF.Attr s P.Text)
     {- ^ (Optional) The service discovery registries for the service. The maximum number of @service_registries@ blocks is @1@ . -}
-    , _task_definition                    :: !(TF.Attr s P.Text)
+    , _task_definition :: !(TF.Attr s P.Text)
     {- ^ (Required) The family and revision ( @family:revision@ ) or full ARN of the task definition that you want to run in your service. -}
     } deriving (Show, Eq)
 
@@ -5287,6 +5307,43 @@ ecsServiceResource =
             , _task_definition = TF.Nil
             }
 
+{- | The @aws_egress_only_internet_gateway@ AWS resource.
+
+[IPv6 only] Creates an egress-only Internet gateway for your VPC. An
+egress-only Internet gateway is used to enable outbound communication over
+IPv6 from instances in your VPC to the Internet, and prevents hosts outside
+of your VPC from initiating an IPv6 connection with your instance.
+-}
+data EgressOnlyInternetGatewayResource s = EgressOnlyInternetGatewayResource {
+      _vpc_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The VPC ID to create in. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (EgressOnlyInternetGatewayResource s) where
+    toHCL EgressOnlyInternetGatewayResource{..} = TF.inline $ catMaybes
+        [ TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        ]
+
+instance P.HasVpcId (EgressOnlyInternetGatewayResource s) (TF.Attr s P.Text) where
+    vpcId =
+        lens (_vpc_id :: EgressOnlyInternetGatewayResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vpc_id = a } :: EgressOnlyInternetGatewayResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EgressOnlyInternetGatewayResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (EgressOnlyInternetGatewayResource s)) (TF.Attr s P.Text) where
+    computedVpcId =
+        (_vpc_id :: EgressOnlyInternetGatewayResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+egressOnlyInternetGatewayResource :: TF.Resource P.AWS (EgressOnlyInternetGatewayResource s)
+egressOnlyInternetGatewayResource =
+    TF.newResource "aws_egress_only_internet_gateway" $
+        EgressOnlyInternetGatewayResource {
+              _vpc_id = TF.Nil
+            }
+
 {- | The @aws_elastic_beanstalk_configuration_template@ AWS resource.
 
 Provides an Elastic Beanstalk Configuration Template, which are associated
@@ -5294,15 +5351,15 @@ with a specific application and are used to deploy different versions of the
 application with the same configuration settings.
 -}
 data ElasticBeanstalkConfigurationTemplateResource s = ElasticBeanstalkConfigurationTemplateResource {
-      _application         :: !(TF.Attr s P.Text)
+      _application :: !(TF.Attr s P.Text)
     {- ^ – (Required) name of the application to associate with this configuration template -}
-    , _description         :: !(TF.Attr s P.Text)
+    , _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) Short description of the Template -}
-    , _environment_id      :: !(TF.Attr s P.Text)
+    , _environment_id :: !(TF.Attr s P.Text)
     {- ^ – (Optional) The ID of the environment used with this configuration template -}
-    , _name                :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) A unique name for this Template. -}
-    , _setting             :: !(TF.Attr s P.Text)
+    , _setting :: !(TF.Attr s P.Text)
     {- ^ – (Optional) Option settings to configure the new Environment. These override specific values that are set as defaults. The format is detailed below in <#option-settings> -}
     , _solution_stack_name :: !(TF.Attr s P.Text)
     {- ^ – (Optional) A solution stack to base your Template off of. Example stacks can be found in the <https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> -}
@@ -5397,11 +5454,11 @@ Provides an ElastiCache parameter group resource.
 data ElasticacheParameterGroupResource s = ElasticacheParameterGroupResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) The description of the ElastiCache parameter group. Defaults to "Managed by Terraform". -}
-    , _family'     :: !(TF.Attr s P.Text)
+    , _family' :: !(TF.Attr s P.Text)
     {- ^ (Required) The family of the ElastiCache parameter group. -}
-    , _name        :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the ElastiCache parameter group. -}
-    , _parameter   :: !(TF.Attr s P.Text)
+    , _parameter :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of ElastiCache parameters to apply. -}
     } deriving (Show, Eq)
 
@@ -5474,9 +5531,9 @@ working with an ElastiCache cluster outside of a VPC. If you are using a
 VPC, see the <elasticache_subnet_group.html> .
 -}
 data ElasticacheSecurityGroupResource s = ElasticacheSecurityGroupResource {
-      _description          :: !(TF.Attr s P.Text)
+      _description :: !(TF.Attr s P.Text)
     {- ^ – (Optional) description for the cache security group. Defaults to "Managed by Terraform". -}
-    , _name                 :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ – (Required) Name for the cache security group. This value is stored as a lowercase string. -}
     , _security_group_names :: !(TF.Attr s P.Text)
     {- ^ – (Required) List of EC2 security group names to be authorized for ingress to the cache security group -}
@@ -5536,7 +5593,7 @@ attributes (e.g. ARN)
 data ElasticsearchDomainPolicyResource s = ElasticsearchDomainPolicyResource {
       _access_policies :: !(TF.Attr s P.Text)
     {- ^ (Optional) IAM policy document specifying the access policies for the domain -}
-    , _domain_name     :: !(TF.Attr s P.Text)
+    , _domain_name :: !(TF.Attr s P.Text)
     {- ^ (Required) Name of the domain. -}
     } deriving (Show, Eq)
 
@@ -5579,27 +5636,27 @@ elasticsearchDomainPolicyResource =
 
 -}
 data ElasticsearchDomainResource s = ElasticsearchDomainResource {
-      _access_policies        :: !(TF.Attr s P.Text)
+      _access_policies :: !(TF.Attr s P.Text)
     {- ^ (Optional) IAM policy document specifying the access policies for the domain -}
-    , _advanced_options       :: !(TF.Attr s P.Text)
+    , _advanced_options :: !(TF.Attr s P.Text)
     {- ^ (Optional) Key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply. -}
-    , _cluster_config         :: !(TF.Attr s P.Text)
+    , _cluster_config :: !(TF.Attr s P.Text)
     {- ^ (Optional) Cluster configuration of the domain, see below. -}
-    , _domain_name            :: !(TF.Attr s P.Text)
+    , _domain_name :: !(TF.Attr s P.Text)
     {- ^ (Required) Name of the domain. -}
-    , _ebs_options            :: !(TF.Attr s P.Text)
+    , _ebs_options :: !(TF.Attr s P.Text)
     {- ^ (Optional) EBS related options, may be required based on chosen <https://aws.amazon.com/elasticsearch-service/pricing/> . See below. -}
-    , _elasticsearch_version  :: !(TF.Attr s P.Text)
+    , _elasticsearch_version :: !(TF.Attr s P.Text)
     {- ^ (Optional) The version of ElasticSearch to deploy. Defaults to @1.5@ -}
-    , _encrypt_at_rest        :: !(TF.Attr s P.Text)
+    , _encrypt_at_rest :: !(TF.Attr s P.Text)
     {- ^ (Optional) Encrypt at rest options. Only available for <http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/aes-supported-instance-types.html> . See below. -}
     , _log_publishing_options :: !(TF.Attr s P.Text)
     {- ^ (Optional) Options for publishing slow logs to CloudWatch Logs. -}
-    , _snapshot_options       :: !(TF.Attr s P.Text)
+    , _snapshot_options :: !(TF.Attr s P.Text)
     {- ^ (Optional) Snapshot related options, see below. -}
-    , _tags                   :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource -}
-    , _vpc_options            :: !(TF.Attr s P.Text)
+    , _vpc_options :: !(TF.Attr s P.Text)
     {- ^ (Optional) VPC related options, see below. Adding or removing this configuration forces a new resource ( <https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-vpc-limitations> ). -}
     } deriving (Show, Eq)
 
@@ -5768,23 +5825,23 @@ elasticsearchDomainResource =
 Provides an Elastic Transcoder pipeline resource.
 -}
 data ElastictranscoderPipelineResource s = ElastictranscoderPipelineResource {
-      _aws_kms_key_arn              :: !(TF.Attr s P.Text)
+      _aws_kms_key_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline. -}
-    , _content_config               :: !(TF.Attr s P.Text)
+    , _content_config :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ContentConfig object specifies information about the Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists. (documented below) -}
-    , _content_config_permissions   :: !(TF.Attr s P.Text)
+    , _content_config_permissions :: !(TF.Attr s P.Text)
     {- ^ (Optional) The permissions for the @content_config@ object. (documented below) -}
-    , _input_bucket                 :: !(TF.Attr s P.Text)
+    , _input_bucket :: !(TF.Attr s P.Text)
     {- ^ (Required) The Amazon S3 bucket in which you saved the media files that you want to transcode and the graphics that you want to use as watermarks. -}
-    , _name                         :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Optional, Forces new resource) The name of the pipeline. Maximum 40 characters -}
-    , _notifications                :: !(TF.Attr s P.Text)
+    , _notifications :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Amazon Simple Notification Service (Amazon SNS) topic that you want to notify to report job status. (documented below) -}
-    , _output_bucket                :: !(TF.Attr s P.Text)
+    , _output_bucket :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded files. -}
-    , _role                         :: !(TF.Attr s P.Text)
+    , _role :: !(TF.Attr s P.Text)
     {- ^ (Required) The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to use to transcode jobs for this pipeline. -}
-    , _thumbnail_config             :: !(TF.Attr s P.Text)
+    , _thumbnail_config :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ThumbnailConfig object specifies information about the Amazon S3 bucket in which you want Elastic Transcoder to save thumbnail files. (documented below) -}
     , _thumbnail_config_permissions :: !(TF.Attr s P.Text)
     {- ^ (Optional) The permissions for the @thumbnail_config@ object. (documented below) -}
@@ -5925,23 +5982,23 @@ elastictranscoderPipelineResource =
 Provides an Elastic Transcoder preset resource.
 -}
 data ElastictranscoderPresetResource s = ElastictranscoderPresetResource {
-      _audio               :: !(TF.Attr s P.Text)
+      _audio :: !(TF.Attr s P.Text)
     {- ^ (Optional, Forces new resource) Audio parameters object (documented below). -}
     , _audio_codec_options :: !(TF.Attr s P.Text)
     {- ^ (Optional, Forces new resource) Codec options for the audio parameters (documented below) -}
-    , _container           :: !(TF.Attr s P.Text)
+    , _container :: !(TF.Attr s P.Text)
     {- ^ (Required, Forces new resource) The container type for the output file. Valid values are @flac@ , @flv@ , @fmp4@ , @gif@ , @mp3@ , @mp4@ , @mpg@ , @mxf@ , @oga@ , @ogg@ , @ts@ , and @webm@ . -}
-    , _description         :: !(TF.Attr s P.Text)
+    , _description :: !(TF.Attr s P.Text)
     {- ^ (Optional, Forces new resource) A description of the preset (maximum 255 characters) -}
-    , _name                :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Optional, Forces new resource) The name of the preset. (maximum 40 characters) -}
-    , _thumbnails          :: !(TF.Attr s P.Text)
+    , _thumbnails :: !(TF.Attr s P.Text)
     {- ^ (Optional, Forces new resource) Thumbnail parameters object (documented below) -}
-    , _video               :: !(TF.Attr s P.Text)
+    , _video :: !(TF.Attr s P.Text)
     {- ^ (Optional, Forces new resource) Video parameters object (documented below) -}
     , _video_codec_options :: !(TF.Attr s P.Text)
     {- ^ (Optional, Forces new resource) Codec options for the video parameters -}
-    , _video_watermarks    :: !(TF.Attr s P.Text)
+    , _video_watermarks :: !(TF.Attr s P.Text)
     {- ^ (Optional, Forces new resource) Watermark parameters for the video parameters (documented below) -}
     } deriving (Show, Eq)
 
@@ -6074,7 +6131,7 @@ Attachment resource. Doing so will cause a conflict and will overwrite
 attachments.
 -}
 data ElbAttachmentResource s = ElbAttachmentResource {
-      _elb       :: !(TF.Attr s P.Text)
+      _elb :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the ELB. -}
     , _instance' :: !(TF.Attr s P.Text)
     {- ^ (Required) Instance ID to place in the ELB pool. -}
@@ -6123,7 +6180,7 @@ data ElbLoadBalancerListenerPolicyResource s = ElbLoadBalancerListenerPolicyReso
     {- ^ (Required) The load balancer to attach the policy to. -}
     , _load_balancer_port :: !(TF.Attr s P.Word16)
     {- ^ (Required) The load balancer listener port to apply the policy to. -}
-    , _policy_names       :: !(TF.Attr s P.Text)
+    , _policy_names :: !(TF.Attr s P.Text)
     {- ^ (Required) List of Policy Names to apply to the backend server. -}
     } deriving (Show, Eq)
 
@@ -6184,35 +6241,35 @@ Attachment resources. Doing so will cause a conflict and will overwrite
 attachments.
 -}
 data ElbResource s = ElbResource {
-      _access_logs                 :: !(TF.Attr s (P.ElbAccessLogs s))
+      _access_logs :: !(TF.Attr s (P.ElbAccessLogs s))
     {- ^ (Optional) An Access Logs block. Access Logs documented below. -}
-    , _availability_zones          :: !(TF.Attr s [TF.Attr s P.Text])
+    , _availability_zones :: !(TF.Attr s [TF.Attr s P.Text])
     {- ^ (Required for an EC2-classic ELB) The AZ's to serve traffic in. -}
-    , _connection_draining         :: !(TF.Attr s P.Bool)
+    , _connection_draining :: !(TF.Attr s P.Bool)
     {- ^ (Optional) Boolean to enable connection draining. Default: @false@ -}
     , _connection_draining_timeout :: !(TF.Attr s P.Int)
     {- ^ (Optional) The time in seconds to allow for connections to drain. Default: @300@ -}
-    , _cross_zone_load_balancing   :: !(TF.Attr s P.Bool)
+    , _cross_zone_load_balancing :: !(TF.Attr s P.Bool)
     {- ^ (Optional) Enable cross-zone load balancing. Default: @true@ -}
-    , _health_check                :: !(TF.Attr s (P.ElbHealthCheck s))
+    , _health_check :: !(TF.Attr s (P.ElbHealthCheck s))
     {- ^ (Optional) A health_check block. Health Check documented below. -}
-    , _idle_timeout                :: !(TF.Attr s P.Int)
+    , _idle_timeout :: !(TF.Attr s P.Int)
     {- ^ (Optional) The time in seconds that the connection is allowed to be idle. Default: @60@ -}
-    , _instances                   :: !(TF.Attr s [TF.Attr s P.Text])
+    , _instances :: !(TF.Attr s [TF.Attr s P.Text])
     {- ^ (Optional) A list of instance ids to place in the ELB pool. -}
-    , _internal                    :: !(TF.Attr s P.Bool)
+    , _internal :: !(TF.Attr s P.Bool)
     {- ^ (Optional) If true, ELB will be an internal ELB. -}
-    , _listener                    :: !(TF.Attr s [P.ElbListener s])
+    , _listener :: !(TF.Attr s [P.ElbListener s])
     {- ^ (Required) A list of listener blocks. Listeners documented below. -}
-    , _name                        :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the ELB. By default generated by Terraform. -}
-    , _name_prefix                 :: !(TF.Attr s P.Text)
+    , _name_prefix :: !(TF.Attr s P.Text)
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _security_groups             :: !(TF.Attr s [TF.Attr s P.Text])
+    , _security_groups :: !(TF.Attr s [TF.Attr s P.Text])
     {- ^ (Optional) A list of security group IDs to assign to the ELB. Only valid if creating an ELB within a VPC -}
-    , _subnets                     :: !(TF.Attr s [TF.Attr s P.Text])
+    , _subnets :: !(TF.Attr s [TF.Attr s P.Text])
     {- ^ (Required for a VPC ELB) A list of subnet IDs to attach to the ELB. -}
-    , _tags                        :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -6428,53 +6485,53 @@ process large amounts of data efficiently. See
 information.
 -}
 data EmrClusterResource s = EmrClusterResource {
-      _additional_info                   :: !(TF.Attr s P.Text)
+      _additional_info :: !(TF.Attr s P.Text)
     {- ^ (Optional) A JSON string for selecting additional features such as adding proxy information. Note: Currently there is no API to retrieve the value of this argument after EMR cluster creation from provider, therefore Terraform cannot detect drift from the actual EMR cluster if its value is changed outside Terraform. -}
-    , _applications                      :: !(TF.Attr s P.Text)
+    , _applications :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of applications for the cluster. Valid values are: @Flink@ , @Hadoop@ , @Hive@ , @Mahout@ , @Pig@ , and @Spark@ . Case insensitive -}
-    , _autoscaling_role                  :: !(TF.Attr s P.Text)
+    , _autoscaling_role :: !(TF.Attr s P.Text)
     {- ^ (Optional) An IAM role for automatic scaling policies. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate EC2 instances in an instance group. -}
-    , _bootstrap_action                  :: !(TF.Attr s P.Text)
+    , _bootstrap_action :: !(TF.Attr s P.Text)
     {- ^ (Optional) List of bootstrap actions that will be run before Hadoop is started on the cluster nodes. Defined below -}
-    , _configurations                    :: !(TF.Attr s P.Text)
+    , _configurations :: !(TF.Attr s P.Text)
     {- ^ (Optional) List of configurations supplied for the EMR cluster you are creating -}
-    , _core_instance_count               :: !(TF.Attr s P.Text)
+    , _core_instance_count :: !(TF.Attr s P.Text)
     {- ^ (Optional) Number of Amazon EC2 instances used to execute the job flow. EMR will use one node as the cluster's master node and use the remainder of the nodes ( @core_instance_count@ -1) as core nodes. Cannot be specified if @instance_groups@ is set. Default @1@ -}
-    , _core_instance_type                :: !(TF.Attr s P.Text)
+    , _core_instance_type :: !(TF.Attr s P.Text)
     {- ^ (Optional) The EC2 instance type of the slave nodes. Cannot be specified if @instance_groups@ is set -}
-    , _custom_ami_id                     :: !(TF.Attr s P.Text)
+    , _custom_ami_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) A custom Amazon Linux AMI for the cluster (instead of an EMR-owned AMI). Available in Amazon EMR version 5.7.0 and later. -}
-    , _ebs_root_volume_size              :: !(TF.Attr s P.Text)
+    , _ebs_root_volume_size :: !(TF.Attr s P.Text)
     {- ^ (Optional) Size in GiB of the EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later. -}
-    , _ec2_attributes                    :: !(TF.Attr s P.Text)
+    , _ec2_attributes :: !(TF.Attr s P.Text)
     {- ^ (Optional) Attributes for the EC2 instances running the job flow. Defined below -}
-    , _instance_group                    :: !(TF.Attr s P.Text)
+    , _instance_group :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of @instance_group@ objects for each instance group in the cluster. Exactly one of @master_instance_type@ and @instance_group@ must be specified. If @instance_group@ is set, then it must contain a configuration block for at least the @MASTER@ instance group type (as well as any additional instance groups). Defined below -}
     , _keep_job_flow_alive_when_no_steps :: !(TF.Attr s P.Text)
     {- ^ (Optional) Switch on/off run cluster with no steps or when all steps are complete (default is on) -}
-    , _kerberos_attributes               :: !(TF.Attr s P.Text)
+    , _kerberos_attributes :: !(TF.Attr s P.Text)
     {- ^ (Optional) Kerberos configuration for the cluster. Defined below -}
-    , _log_uri                           :: !(TF.Attr s P.Text)
+    , _log_uri :: !(TF.Attr s P.Text)
     {- ^ (Optional) S3 bucket to write the log files of the job flow. If a value is not provided, logs are not created -}
-    , _master_instance_type              :: !(TF.Attr s P.Text)
+    , _master_instance_type :: !(TF.Attr s P.Text)
     {- ^ (Optional) The EC2 instance type of the master node. Exactly one of @master_instance_type@ and @instance_group@ must be specified. -}
-    , _name                              :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the job flow -}
-    , _release_label                     :: !(TF.Attr s P.Text)
+    , _release_label :: !(TF.Attr s P.Text)
     {- ^ (Required) The release label for the Amazon EMR release -}
-    , _scale_down_behavior               :: !(TF.Attr s P.Text)
+    , _scale_down_behavior :: !(TF.Attr s P.Text)
     {- ^ (Optional) The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an @instance group@ is resized. -}
-    , _security_configuration            :: !(TF.Attr s P.Text)
+    , _security_configuration :: !(TF.Attr s P.Text)
     {- ^ (Optional) The security configuration name to attach to the EMR cluster. Only valid for EMR clusters with @release_label@ 4.8.0 or greater -}
-    , _service_role                      :: !(TF.Attr s P.Text)
+    , _service_role :: !(TF.Attr s P.Text)
     {- ^ (Required) IAM role that will be assumed by the Amazon EMR service to access AWS resources -}
-    , _step                              :: !(TF.Attr s P.Text)
+    , _step :: !(TF.Attr s P.Text)
     {- ^ (Optional) List of steps to run when creating the cluster. Defined below. It is highly recommended to utilize the </docs/configuration/resources.html> with @ignore_changes@ if other steps are being managed outside of Terraform. -}
-    , _tags                              :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) list of tags to apply to the EMR Cluster -}
-    , _termination_protection            :: !(TF.Attr s P.Text)
+    , _termination_protection :: !(TF.Attr s P.Text)
     {- ^ (Optional) Switch on/off termination protection (default is off) -}
-    , _visible_to_all_users              :: !(TF.Attr s P.Text)
+    , _visible_to_all_users :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether the job flow is visible to all IAM users of the AWS account associated with the job flow. Default @true@ -}
     } deriving (Show, Eq)
 
@@ -6761,9 +6818,9 @@ emrClusterResource =
 Provides a Gamelift Alias resource.
 -}
 data GameliftAliasResource s = GameliftAliasResource {
-      _description      :: !(TF.Attr s P.Text)
+      _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) Description of the alias. -}
-    , _name             :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) Name of the alias. -}
     , _routing_strategy :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the fleet and/or routing type to use for the alias. -}
@@ -6826,13 +6883,13 @@ gameliftAliasResource =
 Provides an Gamelift Build resource.
 -}
 data GameliftBuildResource s = GameliftBuildResource {
-      _name             :: !(TF.Attr s P.Text)
+      _name :: !(TF.Attr s P.Text)
     {- ^ (Required) Name of the build -}
     , _operating_system :: !(TF.Attr s P.Text)
     {- ^ (Required) Operating system that the game server binaries are built to run on. e.g. @WINDOWS_2012@ or @AMAZON_LINUX@ . -}
     , _storage_location :: !(TF.Attr s P.Text)
     {- ^ (Required) Information indicating where your game build files are stored. See below. -}
-    , _version          :: !(TF.Attr s P.Text)
+    , _version :: !(TF.Attr s P.Text)
     {- ^ (Optional) Version that is associated with this build. -}
     } deriving (Show, Eq)
 
@@ -6897,6 +6954,158 @@ gameliftBuildResource =
             , _version = TF.Nil
             }
 
+{- | The @aws_gamelift_fleet@ AWS resource.
+
+Provides a Gamelift Fleet resource.
+-}
+data GameliftFleetResource s = GameliftFleetResource {
+      _build_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) ID of the Gamelift Build to be deployed on the fleet. -}
+    , _description :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Human-readable description of the fleet. -}
+    , _ec2_inbound_permission :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Range of IP addresses and port settings that permit inbound traffic to access server processes running on the fleet. See below. -}
+    , _ec2_instance_type :: !(TF.Attr s P.Text)
+    {- ^ (Required) Name of an EC2 instance type. e.g. @t2.micro@ -}
+    , _metric_groups :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of names of metric groups to add this fleet to. A metric group tracks metrics across all fleets in the group. Defaults to @default@ . -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the fleet. -}
+    , _new_game_session_protection_policy :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Game session protection policy to apply to all instances in this fleet. e.g. @FullProtection@ . Defaults to @NoProtection@ . -}
+    , _resource_creation_limit_policy :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Policy that limits the number of game sessions an individual player can create over a span of time for this fleet. See below. -}
+    , _runtime_configuration :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Instructions for launching server processes on each instance in the fleet. See below. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (GameliftFleetResource s) where
+    toHCL GameliftFleetResource{..} = TF.inline $ catMaybes
+        [ TF.assign "build_id" <$> TF.attribute _build_id
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ec2_inbound_permission" <$> TF.attribute _ec2_inbound_permission
+        , TF.assign "ec2_instance_type" <$> TF.attribute _ec2_instance_type
+        , TF.assign "metric_groups" <$> TF.attribute _metric_groups
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "new_game_session_protection_policy" <$> TF.attribute _new_game_session_protection_policy
+        , TF.assign "resource_creation_limit_policy" <$> TF.attribute _resource_creation_limit_policy
+        , TF.assign "runtime_configuration" <$> TF.attribute _runtime_configuration
+        ]
+
+instance P.HasBuildId (GameliftFleetResource s) (TF.Attr s P.Text) where
+    buildId =
+        lens (_build_id :: GameliftFleetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _build_id = a } :: GameliftFleetResource s)
+
+instance P.HasDescription (GameliftFleetResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: GameliftFleetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: GameliftFleetResource s)
+
+instance P.HasEc2InboundPermission (GameliftFleetResource s) (TF.Attr s P.Text) where
+    ec2InboundPermission =
+        lens (_ec2_inbound_permission :: GameliftFleetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ec2_inbound_permission = a } :: GameliftFleetResource s)
+
+instance P.HasEc2InstanceType (GameliftFleetResource s) (TF.Attr s P.Text) where
+    ec2InstanceType =
+        lens (_ec2_instance_type :: GameliftFleetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ec2_instance_type = a } :: GameliftFleetResource s)
+
+instance P.HasMetricGroups (GameliftFleetResource s) (TF.Attr s P.Text) where
+    metricGroups =
+        lens (_metric_groups :: GameliftFleetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _metric_groups = a } :: GameliftFleetResource s)
+
+instance P.HasName (GameliftFleetResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: GameliftFleetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: GameliftFleetResource s)
+
+instance P.HasNewGameSessionProtectionPolicy (GameliftFleetResource s) (TF.Attr s P.Text) where
+    newGameSessionProtectionPolicy =
+        lens (_new_game_session_protection_policy :: GameliftFleetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _new_game_session_protection_policy = a } :: GameliftFleetResource s)
+
+instance P.HasResourceCreationLimitPolicy (GameliftFleetResource s) (TF.Attr s P.Text) where
+    resourceCreationLimitPolicy =
+        lens (_resource_creation_limit_policy :: GameliftFleetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_creation_limit_policy = a } :: GameliftFleetResource s)
+
+instance P.HasRuntimeConfiguration (GameliftFleetResource s) (TF.Attr s P.Text) where
+    runtimeConfiguration =
+        lens (_runtime_configuration :: GameliftFleetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _runtime_configuration = a } :: GameliftFleetResource s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedBuildId (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
+    computedBuildId =
+        (_build_id :: GameliftFleetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: GameliftFleetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEc2InboundPermission (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
+    computedEc2InboundPermission =
+        (_ec2_inbound_permission :: GameliftFleetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEc2InstanceType (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
+    computedEc2InstanceType =
+        (_ec2_instance_type :: GameliftFleetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedMetricGroups (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
+    computedMetricGroups =
+        (_metric_groups :: GameliftFleetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: GameliftFleetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNewGameSessionProtectionPolicy (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
+    computedNewGameSessionProtectionPolicy =
+        (_new_game_session_protection_policy :: GameliftFleetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedOperatingSystem (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
+    computedOperatingSystem x = TF.compute (TF.refKey x) "operating_system"
+
+instance s ~ s' => P.HasComputedResourceCreationLimitPolicy (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
+    computedResourceCreationLimitPolicy =
+        (_resource_creation_limit_policy :: GameliftFleetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRuntimeConfiguration (TF.Ref s' (GameliftFleetResource s)) (TF.Attr s P.Text) where
+    computedRuntimeConfiguration =
+        (_runtime_configuration :: GameliftFleetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+gameliftFleetResource :: TF.Resource P.AWS (GameliftFleetResource s)
+gameliftFleetResource =
+    TF.newResource "aws_gamelift_fleet" $
+        GameliftFleetResource {
+              _build_id = TF.Nil
+            , _description = TF.Nil
+            , _ec2_inbound_permission = TF.Nil
+            , _ec2_instance_type = TF.Nil
+            , _metric_groups = TF.Nil
+            , _name = TF.Nil
+            , _new_game_session_protection_policy = TF.Nil
+            , _resource_creation_limit_policy = TF.Nil
+            , _runtime_configuration = TF.Nil
+            }
+
 {- | The @aws_glacier_vault@ AWS resource.
 
 Provides a Glacier Vault Resource. You can refer to the
@@ -6907,11 +7116,11 @@ removing a Glacier Vault, the Vault must be empty.
 data GlacierVaultResource s = GlacierVaultResource {
       _access_policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) The policy document. This is a JSON formatted string. The heredoc syntax or @file@ function is helpful here. Use the <https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html> for more information on Glacier Vault Policy -}
-    , _name          :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the Vault. Names can be between 1 and 255 characters long and the valid characters are a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), and '.' (period). -}
-    , _notification  :: !(TF.Attr s P.Text)
+    , _notification :: !(TF.Attr s P.Text)
     {- ^ (Optional) The notifications for the Vault. Fields documented below. -}
-    , _tags          :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -6990,9 +7199,9 @@ data GlueClassifierResource s = GlueClassifierResource {
     {- ^ – (Optional) A classifier that uses grok patterns. Defined below. -}
     , _json_classifier :: !(TF.Attr s P.Text)
     {- ^ – (Optional) A classifier for JSON content. Defined below. -}
-    , _name            :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ – (Required) The name of the classifier. -}
-    , _xml_classifier  :: !(TF.Attr s P.Text)
+    , _xml_classifier :: !(TF.Attr s P.Text)
     {- ^ – (Optional) A classifier for XML content. Defined below. -}
     } deriving (Show, Eq)
 
@@ -7063,27 +7272,27 @@ Manages a Glue Crawler. More information can be found in the
 <https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html>
 -}
 data GlueCrawlerResource s = GlueCrawlerResource {
-      _classifiers          :: !(TF.Attr s P.Text)
+      _classifiers :: !(TF.Attr s P.Text)
     {- ^ (Optional) List of custom classifiers. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification. -}
-    , _configuration        :: !(TF.Attr s P.Text)
+    , _configuration :: !(TF.Attr s P.Text)
     {- ^ (Optional) JSON string of configuration information. -}
-    , _database_name        :: !(TF.Attr s P.Text)
+    , _database_name :: !(TF.Attr s P.Text)
     {- ^ (Required) Glue database where results are written. -}
-    , _description          :: !(TF.Attr s P.Text)
+    , _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) Description of the crawler. -}
-    , _jdbc_target          :: !(TF.Attr s P.Text)
+    , _jdbc_target :: !(TF.Attr s P.Text)
     {- ^ (Optional) List of nested JBDC target arguments. See below. -}
-    , _name                 :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) Name of the crawler. -}
-    , _role                 :: !(TF.Attr s P.Text)
+    , _role :: !(TF.Attr s P.Text)
     {- ^ (Required) The IAM role (or ARN of an IAM role) used by the crawler to access other resources. -}
-    , _s3_target            :: !(TF.Attr s P.Text)
+    , _s3_target :: !(TF.Attr s P.Text)
     {- ^ (Optional) List nested Amazon S3 target arguments. See below. -}
-    , _schedule             :: !(TF.Attr s P.Text)
+    , _schedule :: !(TF.Attr s P.Text)
     {- ^ (Optional) A cron expression used to specify the schedule. For more information, see <https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html> . For example, to run something every day at 12:15 UTC, you would specify: @cron(15 12 * * ? *)@ . -}
     , _schema_change_policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) Policy for the crawler's update and deletion behavior. -}
-    , _table_prefix         :: !(TF.Attr s P.Text)
+    , _table_prefix :: !(TF.Attr s P.Text)
     {- ^ (Optional) The table prefix used for catalog tables that are created. -}
     } deriving (Show, Eq)
 
@@ -7237,13 +7446,13 @@ glueCrawlerResource =
 Provides an IAM policy attached to a group.
 -}
 data IamGroupPolicyResource s = IamGroupPolicyResource {
-      _group       :: !(TF.Attr s P.Text)
+      _group :: !(TF.Attr s P.Text)
     {- ^ (Required) The IAM group to attach to the policy. -}
-    , _name        :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the policy. If omitted, Terraform will assign a random, unique name. -}
     , _name_prefix :: !(TF.Attr s P.Text)
     {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _policy      :: !(TF.Attr s P.Text)
+    , _policy :: !(TF.Attr s P.Text)
     {- ^ (Required) The policy document. This is a JSON formatted string. The heredoc syntax or @file@ function is helpful here. -}
     } deriving (Show, Eq)
 
@@ -7307,13 +7516,13 @@ iamGroupPolicyResource =
 Provides an IAM role policy.
 -}
 data IamRolePolicyResource s = IamRolePolicyResource {
-      _name        :: !(TF.Attr s P.Text)
+      _name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the role policy. If omitted, Terraform will assign a random, unique name. -}
     , _name_prefix :: !(TF.Attr s P.Text)
     {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _policy      :: !(TF.Attr s P.IamPolicy)
+    , _policy :: !(TF.Attr s P.IamPolicy)
     {- ^ (Required) The policy document. This is a JSON formatted string. The heredoc syntax or @file@ function is helpful here. -}
-    , _role        :: !(TF.Attr s P.Text)
+    , _role :: !(TF.Attr s P.Text)
     {- ^ (Required) The IAM role to attach to the policy. -}
     } deriving (Show, Eq)
 
@@ -7377,7 +7586,7 @@ iamRolePolicyResource =
 Provides an IAM SAML provider.
 -}
 data IamSamlProviderResource s = IamSamlProviderResource {
-      _name                   :: !(TF.Attr s P.Text)
+      _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the provider to create. -}
     , _saml_metadata_document :: !(TF.Attr s P.Text)
     {- ^ (Required) An XML document generated by an identity provider that supports SAML 2.0. -}
@@ -7430,13 +7639,13 @@ encrypt the password for safe transport to the user. PGP keys can be
 obtained from Keybase.
 -}
 data IamUserLoginProfileResource s = IamUserLoginProfileResource {
-      _password_length         :: !(TF.Attr s P.Text)
+      _password_length :: !(TF.Attr s P.Text)
     {- ^ (Optional, default 20) The length of the generated password. -}
     , _password_reset_required :: !(TF.Attr s P.Text)
     {- ^ (Optional, default "true") Whether the user should be forced to reset the generated password on first login. -}
-    , _pgp_key                 :: !(TF.Attr s P.Text)
+    , _pgp_key :: !(TF.Attr s P.Text)
     {- ^ (Required) Either a base-64 encoded PGP public key, or a keybase username in the form @keybase:username@ . -}
-    , _user                    :: !(TF.Attr s P.Text)
+    , _user :: !(TF.Attr s P.Text)
     {- ^ (Required) The IAM user's name. -}
     } deriving (Show, Eq)
 
@@ -7509,13 +7718,13 @@ iamUserLoginProfileResource =
 Uploads an SSH public key and associates it with the specified IAM user.
 -}
 data IamUserSshKeyResource s = IamUserSshKeyResource {
-      _encoding   :: !(TF.Attr s P.Text)
+      _encoding :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use @SSH@ . To retrieve the public key in PEM format, use @PEM@ . -}
     , _public_key :: !(TF.Attr s P.Text)
     {- ^ (Required) The SSH public key. The public key must be encoded in ssh-rsa format or PEM format. -}
-    , _status     :: !(TF.Attr s P.Text)
+    , _status :: !(TF.Attr s P.Text)
     {- ^ (Optional) The status to assign to the SSH public key. Active means the key can be used for authentication with an AWS CodeCommit repository. Inactive means the key cannot be used. Default is @active@ . -}
-    , _username   :: !(TF.Attr s P.Text)
+    , _username :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the IAM user to associate the SSH public key with. -}
     } deriving (Show, Eq)
 
@@ -7622,7 +7831,7 @@ inspectorResourceGroupResource =
 Provides a resource to create a VPC Internet Gateway.
 -}
 data InternetGatewayResource s = InternetGatewayResource {
-      _tags   :: !(TF.Attr s (P.Tags s))
+      _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The VPC ID to create in. -}
@@ -7672,19 +7881,19 @@ scales elastically for real-time processing of streaming big data. For more
 details, see the <https://aws.amazon.com/documentation/kinesis/> .
 -}
 data KinesisStreamResource s = KinesisStreamResource {
-      _encryption_type     :: !(TF.Attr s P.Text)
+      _encryption_type :: !(TF.Attr s P.Text)
     {- ^ (Optional) The encryption type to use. The only acceptable values are @NONE@ or @KMS@ . The default value is @NONE@ . -}
-    , _kms_key_id          :: !(TF.Attr s P.Text)
+    , _kms_key_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The GUID for the customer-managed KMS key to use for encryption. You can also use a Kinesis-owned master key by specifying the alias aws/kinesis. -}
-    , _name                :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) A name to identify the stream. This is unique to the AWS account and region the Stream is created in. -}
-    , _retention_period    :: !(TF.Attr s P.Text)
+    , _retention_period :: !(TF.Attr s P.Text)
     {- ^ (Optional) Length of time data records are accessible after they are added to the stream. The maximum value of a stream's retention period is 168 hours. Minimum value is 24. Default is 24. -}
-    , _shard_count         :: !(TF.Attr s P.Text)
+    , _shard_count :: !(TF.Attr s P.Text)
     {- ^ – (Required) The number of shards that the stream will use. Amazon has guidlines for specifying the Stream size that should be referenced when creating a Kinesis stream. See <https://docs.aws.amazon.com/kinesis/latest/dev/amazon-kinesis-streams.html> for more. -}
     , _shard_level_metrics :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of shard-level CloudWatch metrics which can be enabled for the stream. See <https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html> for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable. -}
-    , _tags                :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -7794,13 +8003,13 @@ For information about event source mappings, see
 in the API docs.
 -}
 data LambdaEventSourceMappingResource s = LambdaEventSourceMappingResource {
-      _batch_size        :: !(TF.Attr s P.Text)
+      _batch_size :: !(TF.Attr s P.Text)
     {- ^ (Optional) The largest number of records that Lambda will retrieve from your event source at the time of invocation. Defaults to @100@ for DynamoDB and Kinesis, @10@ for SQS. -}
-    , _enabled           :: !(TF.Attr s P.Bool)
+    , _enabled :: !(TF.Attr s P.Bool)
     {- ^ (Optional) Determines if the mapping will be enabled on creation. Defaults to @true@ . -}
-    , _event_source_arn  :: !(TF.Attr s P.Text)
+    , _event_source_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) The event source ARN - can either be a Kinesis or DynamoDB stream. -}
-    , _function_name     :: !(TF.Attr s P.Text)
+    , _function_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name or the ARN of the Lambda function that will be subscribing to events. -}
     , _starting_position :: !(TF.Attr s P.Text)
     {- ^ (Optional) The position in the stream where AWS Lambda should start reading. Must be one of either @TRIM_HORIZON@ or @LATEST@ if getting events from Kinesis or DynamoDB.  Must not be provided if getting events from SQS. -}
@@ -7900,19 +8109,19 @@ Creates a Lambda permission to allow external sources invoking the Lambda
 function (e.g. CloudWatch Event Rule, SNS or S3).
 -}
 data LambdaPermissionResource s = LambdaPermissionResource {
-      _action              :: !(TF.Attr s P.Text)
+      _action :: !(TF.Attr s P.Text)
     {- ^ (Required) The AWS Lambda action you want to allow in this statement. (e.g. @lambda:InvokeFunction@ ) -}
-    , _function_name       :: !(TF.Attr s P.Text)
+    , _function_name :: !(TF.Attr s P.Text)
     {- ^ (Required) Name of the Lambda function whose resource policy you are updating -}
-    , _principal           :: !(TF.Attr s P.Text)
+    , _principal :: !(TF.Attr s P.Text)
     {- ^ (Required) The principal who is getting this permission. e.g. @s3.amazonaws.com@ , an AWS account ID, or any valid AWS service principal such as @events.amazonaws.com@ or @sns.amazonaws.com@ . -}
-    , _qualifier           :: !(TF.Attr s P.Text)
+    , _qualifier :: !(TF.Attr s P.Text)
     {- ^ (Optional) Query parameter to specify function version or alias name. The permission will then apply to the specific qualified ARN. e.g. @arn:aws:lambda:aws-region:acct-id:function:function-name:2@ -}
-    , _source_account      :: !(TF.Attr s P.Text)
+    , _source_account :: !(TF.Attr s P.Text)
     {- ^ (Optional) This parameter is used for S3 and SES. The AWS account ID (without a hyphen) of the source owner. -}
-    , _source_arn          :: !(TF.Attr s P.Text)
+    , _source_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) When granting Amazon S3 or CloudWatch Events permission to invoke your function, you should specify this field with the Amazon Resource Name (ARN) for the S3 Bucket or CloudWatch Events Rule as its value.  This ensures that only events generated from the specified bucket or rule can invoke the function. API Gateway ARNs have a unique structure described <http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html> . -}
-    , _statement_id        :: !(TF.Attr s P.Text)
+    , _statement_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) A unique statement identifier. By default generated by Terraform. -}
     , _statement_id_prefix :: !(TF.Attr s P.Text)
     {- ^ (Optional) A statement identifier prefix. Terraform will generate a unique suffix. Conflicts with @statement_id@ . -}
@@ -8034,7 +8243,7 @@ listener. ~> Note:  @aws_alb_listener_certificate@ is known as
 data LbListenerCertificateResource s = LbListenerCertificateResource {
       _certificate_arn :: !(TF.Attr s P.Text)
     {- ^ (Required, Forces New Resource) The ARN of the certificate to attach to the listener. -}
-    , _listener_arn    :: !(TF.Attr s P.Text)
+    , _listener_arn :: !(TF.Attr s P.Text)
     {- ^ (Required, Forces New Resource) The ARN of the listener to which to attach the certificate. -}
     } deriving (Show, Eq)
 
@@ -8079,13 +8288,13 @@ Provides a Load Balancer Listener Rule resource. ~> Note:
 functionality is identical.
 -}
 data LbListenerRuleResource s = LbListenerRuleResource {
-      _action       :: !(TF.Attr s P.Text)
+      _action :: !(TF.Attr s P.Text)
     {- ^ (Required) An Action block. Action blocks are documented below. -}
-    , _condition    :: !(TF.Attr s P.Text)
+    , _condition :: !(TF.Attr s P.Text)
     {- ^ (Required) A Condition block. Condition blocks are documented below. -}
     , _listener_arn :: !(TF.Attr s P.Text)
     {- ^ (Required, Forces New Resource) The ARN of the listener to which to attach the rule. -}
-    , _priority     :: !(TF.Attr s P.Text)
+    , _priority :: !(TF.Attr s P.Text)
     {- ^ (Optional) The priority for the rule between @1@ and @50000@ . Leaving it unset will automatically set the rule with next available priority after currently existing highest rule. A listener can't have multiple rules with the same priority. -}
     } deriving (Show, Eq)
 
@@ -8162,11 +8371,11 @@ group ~> Note:  @aws_alb_target_group_attachment@ is known as
 data LbTargetGroupAttachmentResource s = LbTargetGroupAttachmentResource {
       _availability_zone :: !(TF.Attr s P.Zone)
     {- ^ (Optional) The Availability Zone where the IP address of the target is to be registered. -}
-    , _port              :: !(TF.Attr s P.Text)
+    , _port :: !(TF.Attr s P.Text)
     {- ^ (Optional) The port on which targets receive traffic. -}
-    , _target_group_arn  :: !(TF.Attr s P.Text)
+    , _target_group_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) The ARN of the target group with which to register targets -}
-    , _target_id         :: !(TF.Attr s P.Text)
+    , _target_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. -}
     } deriving (Show, Eq)
 
@@ -8326,15 +8535,15 @@ see
 .
 -}
 data MqConfigurationResource s = MqConfigurationResource {
-      _data'          :: !(TF.Attr s P.Text)
+      _data' :: !(TF.Attr s P.Text)
     {- ^ (Required) The broker configuration in XML format. See <https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/amazon-mq-broker-configuration-parameters.html> for supported parameters and format of the XML. -}
-    , _description    :: !(TF.Attr s P.Text)
+    , _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) The description of the configuration. -}
-    , _engine_type    :: !(TF.Attr s P.Text)
+    , _engine_type :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of broker engine. -}
     , _engine_version :: !(TF.Attr s P.Text)
     {- ^ (Required) The version of the broker engine. -}
-    , _name           :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the configuration -}
     } deriving (Show, Eq)
 
@@ -8424,13 +8633,13 @@ Manages a Neptune Parameter Group
 data NeptuneParameterGroupResource s = NeptuneParameterGroupResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) The description of the Neptune parameter group. Defaults to "Managed by Terraform". -}
-    , _family'     :: !(TF.Attr s P.Text)
+    , _family' :: !(TF.Attr s P.Text)
     {- ^ (Required) The family of the Neptune parameter group. -}
-    , _name        :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required, Forces new resource) The name of the Neptune parameter group. -}
-    , _parameter   :: !(TF.Attr s P.Text)
+    , _parameter :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of Neptune parameters to apply. -}
-    , _tags        :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -8526,7 +8735,7 @@ undefined behavior - please use one or the other.
 data NetworkInterfaceSgAttachmentResource s = NetworkInterfaceSgAttachmentResource {
       _network_interface_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the network interface to attach to. -}
-    , _security_group_id    :: !(TF.Attr s P.Text)
+    , _security_group_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the security group. -}
     } deriving (Show, Eq)
 
@@ -8569,41 +8778,41 @@ networkInterfaceSgAttachmentResource =
 Provides an OpsWorks Ganglia layer resource.
 -}
 data OpsworksGangliaLayerResource s = OpsworksGangliaLayerResource {
-      _auto_assign_elastic_ips     :: !(TF.Attr s P.Text)
+      _auto_assign_elastic_ips :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to automatically assign an elastic IP address to the layer's instances. -}
-    , _auto_assign_public_ips      :: !(TF.Attr s P.Text)
+    , _auto_assign_public_ips :: !(TF.Attr s P.Text)
     {- ^ (Optional) For stacks belonging to a VPC, whether to automatically assign a public IP address to each of the layer's instances. -}
-    , _auto_healing                :: !(TF.Attr s P.Text)
+    , _auto_healing :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to enable auto-healing for the layer. -}
     , _custom_instance_profile_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ARN of an IAM profile that will be used for the layer's instances. -}
-    , _custom_json                 :: !(TF.Attr s P.Text)
+    , _custom_json :: !(TF.Attr s P.Text)
     {- ^ (Optional) Custom JSON attributes to apply to the layer. -}
-    , _custom_security_group_ids   :: !(TF.Attr s P.Text)
+    , _custom_security_group_ids :: !(TF.Attr s P.Text)
     {- ^ (Optional) Ids for a set of security groups to apply to the layer's instances. -}
-    , _drain_elb_on_shutdown       :: !(TF.Attr s P.Text)
+    , _drain_elb_on_shutdown :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to enable Elastic Load Balancing connection draining. -}
-    , _ebs_volume                  :: !(TF.Attr s P.Text)
+    , _ebs_volume :: !(TF.Attr s P.Text)
     {- ^ (Optional) @ebs_volume@ blocks, as described below, will each create an EBS volume and connect it to the layer's instances. -}
-    , _elastic_load_balancer       :: !(TF.Attr s P.Text)
+    , _elastic_load_balancer :: !(TF.Attr s P.Text)
     {- ^ (Optional) Name of an Elastic Load Balancer to attach to this layer -}
-    , _install_updates_on_boot     :: !(TF.Attr s P.Text)
+    , _install_updates_on_boot :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to install OS and package updates on each instance when it boots. -}
-    , _instance_shutdown_timeout   :: !(TF.Attr s P.Text)
+    , _instance_shutdown_timeout :: !(TF.Attr s P.Text)
     {- ^ (Optional) The time, in seconds, that OpsWorks will wait for Chef to complete after triggering the Shutdown event. -}
-    , _name                        :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Optional) A human-readable name for the layer. -}
-    , _password                    :: !(TF.Attr s P.Text)
+    , _password :: !(TF.Attr s P.Text)
     {- ^ (Required) The password to use for Ganglia. -}
-    , _stack_id                    :: !(TF.Attr s P.Text)
+    , _stack_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the stack the layer will belong to. -}
-    , _system_packages             :: !(TF.Attr s P.Text)
+    , _system_packages :: !(TF.Attr s P.Text)
     {- ^ (Optional) Names of a set of system packages to install on the layer's instances. -}
-    , _url                         :: !(TF.Attr s P.Text)
+    , _url :: !(TF.Attr s P.Text)
     {- ^ (Optional) The URL path to use for Ganglia. Defaults to "/ganglia". -}
     , _use_ebs_optimized_instances :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to use EBS-optimized instances. -}
-    , _username                    :: !(TF.Attr s P.Text)
+    , _username :: !(TF.Attr s P.Text)
     {- ^ - (Optiona) The username to use for Ganglia. Defaults to "opsworks". -}
     } deriving (Show, Eq)
 
@@ -8841,35 +9050,35 @@ opsworksGangliaLayerResource =
 Provides an OpsWorks memcached layer resource.
 -}
 data OpsworksMemcachedLayerResource s = OpsworksMemcachedLayerResource {
-      _allocated_memory            :: !(TF.Attr s P.Text)
+      _allocated_memory :: !(TF.Attr s P.Text)
     {- ^ (Optional) Amount of memory to allocate for the cache on each instance, in megabytes. Defaults to 512MB. -}
-    , _auto_assign_elastic_ips     :: !(TF.Attr s P.Text)
+    , _auto_assign_elastic_ips :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to automatically assign an elastic IP address to the layer's instances. -}
-    , _auto_assign_public_ips      :: !(TF.Attr s P.Text)
+    , _auto_assign_public_ips :: !(TF.Attr s P.Text)
     {- ^ (Optional) For stacks belonging to a VPC, whether to automatically assign a public IP address to each of the layer's instances. -}
-    , _auto_healing                :: !(TF.Attr s P.Text)
+    , _auto_healing :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to enable auto-healing for the layer. -}
     , _custom_instance_profile_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ARN of an IAM profile that will be used for the layer's instances. -}
-    , _custom_json                 :: !(TF.Attr s P.Text)
+    , _custom_json :: !(TF.Attr s P.Text)
     {- ^ (Optional) Custom JSON attributes to apply to the layer. -}
-    , _custom_security_group_ids   :: !(TF.Attr s P.Text)
+    , _custom_security_group_ids :: !(TF.Attr s P.Text)
     {- ^ (Optional) Ids for a set of security groups to apply to the layer's instances. -}
-    , _drain_elb_on_shutdown       :: !(TF.Attr s P.Text)
+    , _drain_elb_on_shutdown :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to enable Elastic Load Balancing connection draining. -}
-    , _ebs_volume                  :: !(TF.Attr s P.Text)
+    , _ebs_volume :: !(TF.Attr s P.Text)
     {- ^ (Optional) @ebs_volume@ blocks, as described below, will each create an EBS volume and connect it to the layer's instances. -}
-    , _elastic_load_balancer       :: !(TF.Attr s P.Text)
+    , _elastic_load_balancer :: !(TF.Attr s P.Text)
     {- ^ (Optional) Name of an Elastic Load Balancer to attach to this layer -}
-    , _install_updates_on_boot     :: !(TF.Attr s P.Text)
+    , _install_updates_on_boot :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to install OS and package updates on each instance when it boots. -}
-    , _instance_shutdown_timeout   :: !(TF.Attr s P.Text)
+    , _instance_shutdown_timeout :: !(TF.Attr s P.Text)
     {- ^ (Optional) The time, in seconds, that OpsWorks will wait for Chef to complete after triggering the Shutdown event. -}
-    , _name                        :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Optional) A human-readable name for the layer. -}
-    , _stack_id                    :: !(TF.Attr s P.Text)
+    , _stack_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the stack the layer will belong to. -}
-    , _system_packages             :: !(TF.Attr s P.Text)
+    , _system_packages :: !(TF.Attr s P.Text)
     {- ^ (Optional) Names of a set of system packages to install on the layer's instances. -}
     , _use_ebs_optimized_instances :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to use EBS-optimized instances. -}
@@ -9087,39 +9296,39 @@ the root password will be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
 data OpsworksMysqlLayerResource s = OpsworksMysqlLayerResource {
-      _auto_assign_elastic_ips        :: !(TF.Attr s P.Text)
+      _auto_assign_elastic_ips :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to automatically assign an elastic IP address to the layer's instances. -}
-    , _auto_assign_public_ips         :: !(TF.Attr s P.Text)
+    , _auto_assign_public_ips :: !(TF.Attr s P.Text)
     {- ^ (Optional) For stacks belonging to a VPC, whether to automatically assign a public IP address to each of the layer's instances. -}
-    , _auto_healing                   :: !(TF.Attr s P.Text)
+    , _auto_healing :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to enable auto-healing for the layer. -}
-    , _custom_instance_profile_arn    :: !(TF.Attr s P.Text)
+    , _custom_instance_profile_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ARN of an IAM profile that will be used for the layer's instances. -}
-    , _custom_json                    :: !(TF.Attr s P.Text)
+    , _custom_json :: !(TF.Attr s P.Text)
     {- ^ (Optional) Custom JSON attributes to apply to the layer. -}
-    , _custom_security_group_ids      :: !(TF.Attr s P.Text)
+    , _custom_security_group_ids :: !(TF.Attr s P.Text)
     {- ^ (Optional) Ids for a set of security groups to apply to the layer's instances. -}
-    , _drain_elb_on_shutdown          :: !(TF.Attr s P.Text)
+    , _drain_elb_on_shutdown :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to enable Elastic Load Balancing connection draining. -}
-    , _ebs_volume                     :: !(TF.Attr s P.Text)
+    , _ebs_volume :: !(TF.Attr s P.Text)
     {- ^ (Optional) @ebs_volume@ blocks, as described below, will each create an EBS volume and connect it to the layer's instances. -}
-    , _elastic_load_balancer          :: !(TF.Attr s P.Text)
+    , _elastic_load_balancer :: !(TF.Attr s P.Text)
     {- ^ (Optional) Name of an Elastic Load Balancer to attach to this layer -}
-    , _install_updates_on_boot        :: !(TF.Attr s P.Text)
+    , _install_updates_on_boot :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to install OS and package updates on each instance when it boots. -}
-    , _instance_shutdown_timeout      :: !(TF.Attr s P.Text)
+    , _instance_shutdown_timeout :: !(TF.Attr s P.Text)
     {- ^ (Optional) The time, in seconds, that OpsWorks will wait for Chef to complete after triggering the Shutdown event. -}
-    , _name                           :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Optional) A human-readable name for the layer. -}
-    , _root_password                  :: !(TF.Attr s P.Text)
+    , _root_password :: !(TF.Attr s P.Text)
     {- ^ (Optional) Root password to use for MySQL. -}
     , _root_password_on_all_instances :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to set the root user password to all instances in the stack so they can access the instances in this layer. -}
-    , _stack_id                       :: !(TF.Attr s P.Text)
+    , _stack_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the stack the layer will belong to. -}
-    , _system_packages                :: !(TF.Attr s P.Text)
+    , _system_packages :: !(TF.Attr s P.Text)
     {- ^ (Optional) Names of a set of system packages to install on the layer's instances. -}
-    , _use_ebs_optimized_instances    :: !(TF.Attr s P.Text)
+    , _use_ebs_optimized_instances :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to use EBS-optimized instances. -}
     } deriving (Show, Eq)
 
@@ -9345,15 +9554,15 @@ opsworksMysqlLayerResource =
 Provides an OpsWorks permission resource.
 -}
 data OpsworksPermissionResource s = OpsworksPermissionResource {
-      _allow_ssh  :: !(TF.Attr s P.Text)
+      _allow_ssh :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether the user is allowed to use SSH to communicate with the instance -}
     , _allow_sudo :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether the user is allowed to use sudo to elevate privileges -}
-    , _level      :: !(TF.Attr s P.Text)
+    , _level :: !(TF.Attr s P.Text)
     {- ^ (Optional) The users permission level. Mus be one of @deny@ , @show@ , @deploy@ , @manage@ , @iam_only@ -}
-    , _stack_id   :: !(TF.Attr s P.Text)
+    , _stack_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The stack to set the permissions for -}
-    , _user_arn   :: !(TF.Attr s P.Text)
+    , _user_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) The user's IAM ARN to set permissions for -}
     } deriving (Show, Eq)
 
@@ -9437,11 +9646,11 @@ Provides an OpsWorks User Profile resource.
 data OpsworksUserProfileResource s = OpsworksUserProfileResource {
       _allow_self_management :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether users can specify their own SSH public key through the My Settings page -}
-    , _ssh_public_key        :: !(TF.Attr s P.Text)
+    , _ssh_public_key :: !(TF.Attr s P.Text)
     {- ^ (Optional) The users public key -}
-    , _ssh_username          :: !(TF.Attr s P.Text)
+    , _ssh_username :: !(TF.Attr s P.Text)
     {- ^ (Required) The ssh username, with witch this user wants to log in -}
-    , _user_arn              :: !(TF.Attr s P.Text)
+    , _user_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) The user's IAM ARN -}
     } deriving (Show, Eq)
 
@@ -9559,67 +9768,67 @@ username and password will be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
 data RedshiftClusterResource s = RedshiftClusterResource {
-      _allow_version_upgrade               :: !(TF.Attr s P.Text)
+      _allow_version_upgrade :: !(TF.Attr s P.Text)
     {- ^ (Optional) If true , major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. Default is true -}
     , _automated_snapshot_retention_period :: !(TF.Attr s P.Text)
     {- ^ (Optional) The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with create-cluster-snapshot. Default is 1. -}
-    , _availability_zone                   :: !(TF.Attr s P.Zone)
+    , _availability_zone :: !(TF.Attr s P.Zone)
     {- ^ (Optional) The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency. -}
-    , _cluster_identifier                  :: !(TF.Attr s P.Text)
+    , _cluster_identifier :: !(TF.Attr s P.Text)
     {- ^ (Required) The Cluster Identifier. Must be a lower case string. -}
-    , _cluster_parameter_group_name        :: !(TF.Attr s P.Text)
+    , _cluster_parameter_group_name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the parameter group to be associated with this cluster. -}
-    , _cluster_security_groups             :: !(TF.Attr s P.Text)
+    , _cluster_security_groups :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of security groups to be associated with this cluster. -}
-    , _cluster_subnet_group_name           :: !(TF.Attr s P.Text)
+    , _cluster_subnet_group_name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC). -}
-    , _cluster_type                        :: !(TF.Attr s P.Text)
+    , _cluster_type :: !(TF.Attr s P.Text)
     {- ^ (Optional) The cluster type to use. Either @single-node@ or @multi-node@ . -}
-    , _cluster_version                     :: !(TF.Attr s P.Text)
+    , _cluster_version :: !(TF.Attr s P.Text)
     {- ^ (Optional) The version of the Amazon Redshift engine software that you want to deploy on the cluster. The version selected runs on all the nodes in the cluster. -}
-    , _database_name                       :: !(TF.Attr s P.Text)
+    , _database_name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the first database to be created when the cluster is created. If you do not provide a name, Amazon Redshift will create a default database called @dev@ . -}
-    , _elastic_ip                          :: !(TF.Attr s P.Text)
+    , _elastic_ip :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Elastic IP (EIP) address for the cluster. -}
-    , _encrypted                           :: !(TF.Attr s P.Text)
+    , _encrypted :: !(TF.Attr s P.Text)
     {- ^ (Optional) If true , the data in the cluster is encrypted at rest. -}
-    , _enhanced_vpc_routing                :: !(TF.Attr s P.Text)
+    , _enhanced_vpc_routing :: !(TF.Attr s P.Text)
     {- ^ (Optional) If true , enhanced VPC routing is enabled. -}
-    , _final_snapshot_identifier           :: !(TF.Attr s P.Text)
+    , _final_snapshot_identifier :: !(TF.Attr s P.Text)
     {- ^ (Optional) The identifier of the final snapshot that is to be created immediately before deleting the cluster. If this parameter is provided, @skip_final_snapshot@ must be false. -}
-    , _iam_roles                           :: !(TF.Attr s P.Text)
+    , _iam_roles :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of IAM Role ARNs to associate with the cluster. A Maximum of 10 can be associated to the cluster at any time. -}
-    , _kms_key_id                          :: !(TF.Attr s P.Text)
+    , _kms_key_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ARN for the KMS encryption key. When specifying @kms_key_id@ , @encrypted@ needs to be set to true. -}
-    , _logging                             :: !(TF.Attr s P.Text)
+    , _logging :: !(TF.Attr s P.Text)
     {- ^ (Optional) Logging, documented below. -}
-    , _master_password                     :: !(TF.Attr s P.Text)
+    , _master_password :: !(TF.Attr s P.Text)
     {- ^ (Required unless a @snapshot_identifier@ is provided) Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Password must contain at least 8 chars and contain at least one uppercase letter, one lowercase letter, and one number. -}
-    , _master_username                     :: !(TF.Attr s P.Text)
+    , _master_username :: !(TF.Attr s P.Text)
     {- ^ (Required unless a @snapshot_identifier@ is provided) Username for the master DB user. -}
-    , _node_type                           :: !(TF.Attr s P.Text)
+    , _node_type :: !(TF.Attr s P.Text)
     {- ^ (Required) The node type to be provisioned for the cluster. -}
-    , _number_of_nodes                     :: !(TF.Attr s P.Text)
+    , _number_of_nodes :: !(TF.Attr s P.Text)
     {- ^ (Optional) The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node. Default is 1. -}
-    , _owner_account                       :: !(TF.Attr s P.Text)
+    , _owner_account :: !(TF.Attr s P.Text)
     {- ^ (Optional) The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot. -}
-    , _port                                :: !(TF.Attr s P.Text)
+    , _port :: !(TF.Attr s P.Text)
     {- ^ (Optional) The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings. Part of the connection string requires the port on which the cluster will listen for incoming connections. Default port is 5439. -}
-    , _preferred_maintenance_window        :: !(TF.Attr s P.Text)
+    , _preferred_maintenance_window :: !(TF.Attr s P.Text)
     {- ^ (Optional) The weekly time range (in UTC) during which automated cluster maintenance can occur. Format: ddd:hh24:mi-ddd:hh24:mi -}
-    , _publicly_accessible                 :: !(TF.Attr s P.Text)
+    , _publicly_accessible :: !(TF.Attr s P.Text)
     {- ^ (Optional) If true, the cluster can be accessed from a public network. Default is @true@ . -}
-    , _skip_final_snapshot                 :: !(TF.Attr s P.Text)
+    , _skip_final_snapshot :: !(TF.Attr s P.Text)
     {- ^ (Optional) Determines whether a final snapshot of the cluster is created before Amazon Redshift deletes the cluster. If true , a final cluster snapshot is not created. If false , a final cluster snapshot is created before the cluster is deleted. Default is false. -}
-    , _snapshot_cluster_identifier         :: !(TF.Attr s P.Text)
+    , _snapshot_cluster_identifier :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the cluster the source snapshot was created from. -}
-    , _snapshot_copy                       :: !(TF.Attr s P.Text)
+    , _snapshot_copy :: !(TF.Attr s P.Text)
     {- ^ (Optional) Configuration of automatic copy of snapshots from one region to another. Documented below. -}
-    , _snapshot_identifier                 :: !(TF.Attr s P.Text)
+    , _snapshot_identifier :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the snapshot from which to create the new cluster. -}
-    , _tags                                :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _vpc_security_group_ids              :: !(TF.Attr s P.Text)
+    , _vpc_security_group_ids :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster. -}
     } deriving (Show, Eq)
 
@@ -10005,7 +10214,7 @@ for additional details.
 data Route53QueryLogResource s = Route53QueryLogResource {
       _cloudwatch_log_group_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) CloudWatch log group ARN to send query logs. -}
-    , _zone_id                  :: !(TF.Attr s P.Text)
+    , _zone_id :: !(TF.Attr s P.Text)
     {- ^ (Required) Route53 hosted zone ID to enable query logs. -}
     } deriving (Show, Eq)
 
@@ -10051,33 +10260,33 @@ route53QueryLogResource =
 Provides a Route53 record resource.
 -}
 data Route53RecordResource s = Route53RecordResource {
-      _alias                            :: !(TF.Attr s P.Text)
+      _alias :: !(TF.Attr s P.Text)
     {- ^ (Optional) An alias block. Conflicts with @ttl@ & @records@ . Alias record documented below. -}
-    , _allow_overwrite                  :: !(TF.Attr s P.Text)
+    , _allow_overwrite :: !(TF.Attr s P.Text)
     {- ^ (Optional) Allow creation of this record in Terraform to overwrite an existing record, if any. This does not prevent other resources within Terraform or manual Route53 changes from overwriting this record. @true@ by default. -}
-    , _failover_routing_policy          :: !(TF.Attr s P.Text)
+    , _failover_routing_policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) A block indicating the routing behavior when associated health check fails. Conflicts with any other routing policy. Documented below. -}
-    , _geolocation_routing_policy       :: !(TF.Attr s P.Text)
+    , _geolocation_routing_policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) A block indicating a routing policy based on the geolocation of the requestor. Conflicts with any other routing policy. Documented below. -}
-    , _health_check_id                  :: !(TF.Attr s P.Text)
+    , _health_check_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The health check the record should be associated with. -}
-    , _latency_routing_policy           :: !(TF.Attr s P.Text)
+    , _latency_routing_policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) A block indicating a routing policy based on the latency between the requestor and an AWS region. Conflicts with any other routing policy. Documented below. -}
     , _multivalue_answer_routing_policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) Set to @true@ to indicate a multivalue answer routing policy. Conflicts with any other routing policy. -}
-    , _name                             :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the record. -}
-    , _records                          :: !(TF.Attr s [TF.Attr s P.Text])
+    , _records :: !(TF.Attr s [TF.Attr s P.Text])
     {- ^ (Required for non-alias records) A string list of records. To specify a single record value longer than 255 characters such as a TXT record for DKIM, add @\"\"@ inside the Terraform configuration string (e.g. @"first255characters\"\"morecharacters"@ ). -}
-    , _set_identifier                   :: !(TF.Attr s P.Text)
+    , _set_identifier :: !(TF.Attr s P.Text)
     {- ^ (Optional) Unique identifier to differentiate records with routing policies from one another. Required if using @failover@ , @geolocation@ , @latency@ , or @weighted@ routing policies documented below. -}
-    , _ttl                              :: !(TF.Attr s P.Text)
+    , _ttl :: !(TF.Attr s P.Text)
     {- ^ (Required for non-alias records) The TTL of the record. -}
-    , _type'                            :: !(TF.Attr s P.Text)
+    , _type' :: !(TF.Attr s P.Text)
     {- ^ (Required) The record type. Valid values are @A@ , @AAAA@ , @CAA@ , @CNAME@ , @MX@ , @NAPTR@ , @NS@ , @PTR@ , @SOA@ , @SPF@ , @SRV@ and @TXT@ . -}
-    , _weighted_routing_policy          :: !(TF.Attr s P.Text)
+    , _weighted_routing_policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) A block indicating a weighted routing policy. Conflicts with any other routing policy. Documented below. -}
-    , _zone_id                          :: !(TF.Attr s P.Text)
+    , _zone_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the hosted zone to contain this record. -}
     } deriving (Show, Eq)
 
@@ -10268,7 +10477,7 @@ table.
 data RouteTableAssociationResource s = RouteTableAssociationResource {
       _route_table_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the routing table to associate with. -}
-    , _subnet_id      :: !(TF.Attr s P.Text)
+    , _subnet_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The subnet ID to create an association. -}
     } deriving (Show, Eq)
 
@@ -10316,21 +10525,21 @@ Provides a S3 bucket
 resource.
 -}
 data S3BucketInventoryResource s = S3BucketInventoryResource {
-      _bucket                   :: !(TF.Attr s P.Text)
+      _bucket :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the bucket to put inventory configuration. -}
-    , _destination              :: !(TF.Attr s P.Text)
+    , _destination :: !(TF.Attr s P.Text)
     {- ^ (Required) Destination bucket where inventory list files are written (documented below). -}
-    , _enabled                  :: !(TF.Attr s P.Bool)
+    , _enabled :: !(TF.Attr s P.Bool)
     {- ^ (Optional, Default: true) Specifies whether the inventory is enabled or disabled. -}
-    , _filter                   :: !(TF.Attr s P.Text)
+    , _filter :: !(TF.Attr s P.Text)
     {- ^ (Optional) Object filtering that accepts a prefix (documented below). -}
     , _included_object_versions :: !(TF.Attr s P.Text)
     {- ^ (Required) Object filtering that accepts a prefix (documented below). Can be @All@ or @Current@ . -}
-    , _name                     :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) Unique identifier of the inventory configuration for the bucket. -}
-    , _optional_fields          :: !(TF.Attr s P.Text)
+    , _optional_fields :: !(TF.Attr s P.Text)
     {- ^ (Optional) Contains the optional fields that are included in the inventory results. -}
-    , _schedule                 :: !(TF.Attr s P.Text)
+    , _schedule :: !(TF.Attr s P.Text)
     {- ^ (Required) Contains the frequency for generating inventory results (documented below). -}
     } deriving (Show, Eq)
 
@@ -10707,19 +10916,19 @@ a secret value, see the
 </docs/providers/aws/r/secretsmanager_secret_version.html> .
 -}
 data SecretsmanagerSecretResource s = SecretsmanagerSecretResource {
-      _description             :: !(TF.Attr s P.Text)
+      _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of the secret. -}
-    , _kms_key_id              :: !(TF.Attr s P.Text)
+    , _kms_key_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies the ARN or alias of the AWS KMS customer master key (CMK) to be used to encrypt the secret values in the versions stored in this secret. If you don't specify this value, then Secrets Manager defaults to using the AWS account's default CMK (the one named @aws/secretsmanager@ ). If the default KMS CMK with that name doesn't yet exist, then AWS Secrets Manager creates it for you automatically the first time. -}
-    , _name                    :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the friendly name of the new secret. The secret name can consist of uppercase letters, lowercase letters, digits, and any of the following characters: @/_+=.@-@ Spaces are not permitted. -}
     , _recovery_window_in_days :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies the number of days that AWS Secrets Manager waits before it can delete the secret. This value can range from 7 to 30 days. The default value is 30. -}
-    , _rotation_lambda_arn     :: !(TF.Attr s P.Text)
+    , _rotation_lambda_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies the ARN of the Lambda function that can rotate the secret. -}
-    , _rotation_rules          :: !(TF.Attr s P.Text)
+    , _rotation_rules :: !(TF.Attr s P.Text)
     {- ^ (Optional) A structure that defines the rotation configuration for this secret. Defined below. -}
-    , _tags                    :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) Specifies a key-value map of user-defined tags that are attached to the secret. -}
     } deriving (Show, Eq)
 
@@ -10835,15 +11044,15 @@ data SesEventDestinationResource s = SesEventDestinationResource {
     {- ^ (Optional) CloudWatch destination for the events -}
     , _configuration_set_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the configuration set -}
-    , _enabled                :: !(TF.Attr s P.Bool)
+    , _enabled :: !(TF.Attr s P.Bool)
     {- ^ (Optional) If true, the event destination will be enabled -}
-    , _kinesis_destination    :: !(TF.Attr s P.Text)
+    , _kinesis_destination :: !(TF.Attr s P.Text)
     {- ^ (Optional) Send the events to a kinesis firehose destination -}
-    , _matching_types         :: !(TF.Attr s P.Text)
+    , _matching_types :: !(TF.Attr s P.Text)
     {- ^ (Required) A list of matching types. May be any of @"send"@ , @"reject"@ , @"bounce"@ , @"complaint"@ , @"delivery"@ , @"open"@ , or @"click"@ . -}
-    , _name                   :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the event destination -}
-    , _sns_destination        :: !(TF.Attr s P.Text)
+    , _sns_destination :: !(TF.Attr s P.Text)
     {- ^ (Optional) Send the events to an SNS Topic destination -}
     } deriving (Show, Eq)
 
@@ -10977,17 +11186,17 @@ sesReceiptRuleSetResource =
 Provides a way to set SNS SMS preferences.
 -}
 data SnsSmsPreferencesResource s = SnsSmsPreferencesResource {
-      _default_sender_id                     :: !(TF.Attr s P.Text)
+      _default_sender_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) A string, such as your business brand, that is displayed as the sender on the receiving device. -}
-    , _default_sms_type                      :: !(TF.Attr s P.Text)
+    , _default_sms_type :: !(TF.Attr s P.Text)
     {- ^ (Optional) The type of SMS message that you will send by default. Possible values are: Promotional, Transactional -}
-    , _delivery_status_iam_role_arn          :: !(TF.Attr s P.Text)
+    , _delivery_status_iam_role_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ARN of the IAM role that allows Amazon SNS to write logs about SMS deliveries in CloudWatch Logs. -}
     , _delivery_status_success_sampling_rate :: !(TF.Attr s P.Text)
     {- ^ (Optional) The percentage of successful SMS deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value must be between 0 and 100. -}
-    , _monthly_spend_limit                   :: !(TF.Attr s P.Text)
+    , _monthly_spend_limit :: !(TF.Attr s P.Text)
     {- ^ (Optional) The maximum amount in USD that you are willing to spend each month to send SMS messages. -}
-    , _usage_report_s3_bucket                :: !(TF.Attr s P.Text)
+    , _usage_report_s3_bucket :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the Amazon S3 bucket to receive daily SMS usage reports from Amazon SNS. -}
     } deriving (Show, Eq)
 
@@ -11078,39 +11287,39 @@ snsSmsPreferencesResource =
 Provides an SNS topic resource
 -}
 data SnsTopicResource s = SnsTopicResource {
-      _application_failure_feedback_role_arn    :: !(TF.Attr s P.Text)
+      _application_failure_feedback_role_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) IAM role for failure feedback -}
-    , _application_success_feedback_role_arn    :: !(TF.Attr s P.Text)
+    , _application_success_feedback_role_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) The IAM role permitted to receive success feedback for this topic -}
     , _application_success_feedback_sample_rate :: !(TF.Attr s P.Text)
     {- ^ (Optional) Percentage of success to sample -}
-    , _delivery_policy                          :: !(TF.Attr s P.Text)
+    , _delivery_policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) The SNS delivery policy. More on <https://docs.aws.amazon.com/sns/latest/dg/DeliveryPolicies.html> -}
-    , _display_name                             :: !(TF.Attr s P.Text)
+    , _display_name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The display name for the SNS topic -}
-    , _http_failure_feedback_role_arn           :: !(TF.Attr s P.Text)
+    , _http_failure_feedback_role_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) IAM role for failure feedback -}
-    , _http_success_feedback_role_arn           :: !(TF.Attr s P.Text)
+    , _http_success_feedback_role_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) The IAM role permitted to receive success feedback for this topic -}
-    , _http_success_feedback_sample_rate        :: !(TF.Attr s P.Text)
+    , _http_success_feedback_sample_rate :: !(TF.Attr s P.Text)
     {- ^ (Optional) Percentage of success to sample -}
-    , _lambda_failure_feedback_role_arn         :: !(TF.Attr s P.Text)
+    , _lambda_failure_feedback_role_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) IAM role for failure feedback -}
-    , _lambda_success_feedback_role_arn         :: !(TF.Attr s P.Text)
+    , _lambda_success_feedback_role_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) The IAM role permitted to receive success feedback for this topic -}
-    , _lambda_success_feedback_sample_rate      :: !(TF.Attr s P.Text)
+    , _lambda_success_feedback_sample_rate :: !(TF.Attr s P.Text)
     {- ^ (Optional) Percentage of success to sample -}
-    , _name                                     :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The friendly name for the SNS topic. By default generated by Terraform. -}
-    , _name_prefix                              :: !(TF.Attr s P.Text)
+    , _name_prefix :: !(TF.Attr s P.Text)
     {- ^ (Optional) The friendly name for the SNS topic. Conflicts with @name@ . -}
-    , _policy                                   :: !(TF.Attr s P.Text)
+    , _policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) The fully-formed AWS policy as JSON -}
-    , _sqs_failure_feedback_role_arn            :: !(TF.Attr s P.Text)
+    , _sqs_failure_feedback_role_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) IAM role for failure feedback -}
-    , _sqs_success_feedback_role_arn            :: !(TF.Attr s P.Text)
+    , _sqs_success_feedback_role_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) The IAM role permitted to receive success feedback for this topic -}
-    , _sqs_success_feedback_sample_rate         :: !(TF.Attr s P.Text)
+    , _sqs_success_feedback_sample_rate :: !(TF.Attr s P.Text)
     {- ^ (Optional) Percentage of success to sample -}
     } deriving (Show, Eq)
 
@@ -11340,35 +11549,35 @@ Provides an EC2 Spot Fleet Request resource. This allows a fleet of Spot
 instances to be requested on the Spot market.
 -}
 data SpotFleetRequestResource s = SpotFleetRequestResource {
-      _allocation_strategy                 :: !(TF.Attr s P.Text)
+      _allocation_strategy :: !(TF.Attr s P.Text)
     {- ^ - Indicates how to allocate the target capacity across the Spot pools specified by the Spot fleet request. The default is lowestPrice. -}
-    , _excess_capacity_termination_policy  :: !(TF.Attr s P.Text)
+    , _excess_capacity_termination_policy :: !(TF.Attr s P.Text)
     {- ^ - Indicates whether running Spot instances should be terminated if the target capacity of the Spot fleet request is decreased below the current size of the Spot fleet. -}
-    , _fleet_type                          :: !(TF.Attr s P.Text)
+    , _fleet_type :: !(TF.Attr s P.Text)
     {- ^ (Optional) The type of fleet request. Indicates whether the Spot Fleet only requests the target capacity or also attempts to maintain it. Default is @maintain@ . -}
-    , _iam_fleet_role                      :: !(TF.Attr s P.Text)
+    , _iam_fleet_role :: !(TF.Attr s P.Text)
     {- ^ (Required) Grants the Spot fleet permission to terminate Spot instances on your behalf when you cancel its Spot fleet request using CancelSpotFleetRequests or when the Spot fleet request expires, if you set terminateInstancesWithExpiration. -}
-    , _instance_interruption_behaviour     :: !(TF.Attr s P.Text)
+    , _instance_interruption_behaviour :: !(TF.Attr s P.Text)
     {- ^ (Optional) Indicates whether a Spot instance stops or terminates when it is interrupted. Default is @terminate@ . -}
-    , _launch_specification                :: !(TF.Attr s P.Text)
+    , _launch_specification :: !(TF.Attr s P.Text)
     {- ^ - Used to define the launch configuration of the spot-fleet request. Can be specified multiple times to define different bids across different markets and instance types. -}
-    , _load_balancers                      :: !(TF.Attr s P.Text)
+    , _load_balancers :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of elastic load balancer names to add to the Spot fleet. -}
-    , _replace_unhealthy_instances         :: !(TF.Attr s P.Text)
+    , _replace_unhealthy_instances :: !(TF.Attr s P.Text)
     {- ^ (Optional) Indicates whether Spot fleet should replace unhealthy instances. Default @false@ . -}
-    , _spot_price                          :: !(TF.Attr s P.Text)
+    , _spot_price :: !(TF.Attr s P.Text)
     {- ^ (Optional; Default: On-demand price) The maximum bid price per unit hour. -}
-    , _target_capacity                     :: !(TF.Attr s P.Text)
+    , _target_capacity :: !(TF.Attr s P.Text)
     {- ^ - The number of units to request. You can choose to set the target capacity in terms of instances or a performance characteristic that is important to your application workload, such as vCPUs, memory, or I/O. -}
-    , _target_group_arns                   :: !(TF.Attr s P.Text)
+    , _target_group_arns :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of @aws_alb_target_group@ ARNs, for use with Application Load Balancing. -}
     , _terminate_instances_with_expiration :: !(TF.Attr s P.Text)
     {- ^ - Indicates whether running Spot instances should be terminated when the Spot fleet request expires. -}
-    , _valid_from                          :: !(TF.Attr s P.Text)
+    , _valid_from :: !(TF.Attr s P.Text)
     {- ^ (Optional) The start date and time of the request, in UTC <https://tools.ietf.org/html/rfc3339#section-5.8> format(for example, YYYY-MM-DDTHH:MM:SSZ). The default is to start fulfilling the request immediately. -}
-    , _valid_until                         :: !(TF.Attr s P.Text)
+    , _valid_until :: !(TF.Attr s P.Text)
     {- ^ (Optional) The end date and time of the request, in UTC <https://tools.ietf.org/html/rfc3339#section-5.8> format(for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new Spot instance requests are placed or enabled to fulfill the request. Defaults to 24 hours. -}
-    , _wait_for_fulfillment                :: !(TF.Attr s P.Text)
+    , _wait_for_fulfillment :: !(TF.Attr s P.Text)
     {- ^ (Optional; Default: false) If set, Terraform will wait for the Spot Request to be fulfilled, and will throw an error if the timeout of 10m is reached. -}
     } deriving (Show, Eq)
 
@@ -11573,33 +11782,33 @@ spotFleetRequestResource =
 
 -}
 data SqsQueueResource s = SqsQueueResource {
-      _content_based_deduplication       :: !(TF.Attr s P.Text)
+      _content_based_deduplication :: !(TF.Attr s P.Text)
     {- ^ (Optional) Enables content-based deduplication for FIFO queues. For more information, see the <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing> -}
-    , _delay_seconds                     :: !(TF.Attr s P.Text)
+    , _delay_seconds :: !(TF.Attr s P.Text)
     {- ^ (Optional) The time in seconds that the delivery of all messages in the queue will be delayed. An integer from 0 to 900 (15 minutes). The default for this attribute is 0 seconds. -}
-    , _fifo_queue                        :: !(TF.Attr s P.Text)
+    , _fifo_queue :: !(TF.Attr s P.Text)
     {- ^ (Optional) Boolean designating a FIFO queue. If not set, it defaults to @false@ making it standard. -}
     , _kms_data_key_reuse_period_seconds :: !(TF.Attr s P.Text)
     {- ^ (Optional) The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again. An integer representing seconds, between 60 seconds (1 minute) and 86,400 seconds (24 hours). The default is 300 (5 minutes). -}
-    , _kms_master_key_id                 :: !(TF.Attr s P.Text)
+    , _kms_master_key_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of an AWS-managed customer master key (CMK) for Amazon SQS or a custom CMK. For more information, see <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms> . -}
-    , _max_message_size                  :: !(TF.Attr s P.Text)
+    , _max_message_size :: !(TF.Attr s P.Text)
     {- ^ (Optional) The limit of how many bytes a message can contain before Amazon SQS rejects it. An integer from 1024 bytes (1 KiB) up to 262144 bytes (256 KiB). The default for this attribute is 262144 (256 KiB). -}
-    , _message_retention_seconds         :: !(TF.Attr s P.Text)
+    , _message_retention_seconds :: !(TF.Attr s P.Text)
     {- ^ (Optional) The number of seconds Amazon SQS retains a message. Integer representing seconds, from 60 (1 minute) to 1209600 (14 days). The default for this attribute is 345600 (4 days). -}
-    , _name                              :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Optional) This is the human-readable name of the queue. If omitted, Terraform will assign a random name. -}
-    , _name_prefix                       :: !(TF.Attr s P.Text)
+    , _name_prefix :: !(TF.Attr s P.Text)
     {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _policy                            :: !(TF.Attr s P.Text)
+    , _policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) The JSON policy for the SQS queue -}
-    , _receive_wait_time_seconds         :: !(TF.Attr s P.Text)
+    , _receive_wait_time_seconds :: !(TF.Attr s P.Text)
     {- ^ (Optional) The time for which a ReceiveMessage call will wait for a message to arrive (long polling) before returning. An integer from 0 to 20 (seconds). The default for this attribute is 0, meaning that the call will return immediately. -}
-    , _redrive_policy                    :: !(TF.Attr s P.Text)
+    , _redrive_policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) The JSON policy to set up the Dead Letter Queue, see <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSDeadLetterQueue.html> . Note: when specifying @maxReceiveCount@ , you must specify it as an integer ( @5@ ), and not a string ( @"5"@ ). -}
-    , _tags                              :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the queue. -}
-    , _visibility_timeout_seconds        :: !(TF.Attr s P.Text)
+    , _visibility_timeout_seconds :: !(TF.Attr s P.Text)
     {- ^ (Optional) The visibility timeout for the queue. An integer from 0 to 43200 (12 hours). The default for this attribute is 30. For more information about visibility timeout, see <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html> . -}
     } deriving (Show, Eq)
 
@@ -11792,21 +12001,21 @@ sqsQueueResource =
 Associates an SSM Document to an instance or EC2 tag.
 -}
 data SsmAssociationResource s = SsmAssociationResource {
-      _association_name    :: !(TF.Attr s P.Text)
+      _association_name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The descriptive name for the association. -}
-    , _document_version    :: !(TF.Attr s P.Text)
+    , _document_version :: !(TF.Attr s P.Text)
     {- ^ (Optional) The document version you want to associate with the target(s). Can be a specific version or the default version. -}
-    , _instance_id         :: !(TF.Attr s P.Text)
+    , _instance_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The instance ID to apply an SSM document to. Use @targets@ with key @InstanceIds@ for document schema versions 2.0 and above. -}
-    , _name                :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the SSM document to apply. -}
-    , _output_location     :: !(TF.Attr s P.Text)
+    , _output_location :: !(TF.Attr s P.Text)
     {- ^ (Optional) An output location block. Output Location is documented below. -}
-    , _parameters          :: !(TF.Attr s P.Text)
+    , _parameters :: !(TF.Attr s P.Text)
     {- ^ (Optional) A block of arbitrary string parameters to pass to the SSM document. -}
     , _schedule_expression :: !(TF.Attr s P.Text)
     {- ^ (Optional) A cron expression when the association will be applied to the target(s). -}
-    , _targets             :: !(TF.Attr s P.Text)
+    , _targets :: !(TF.Attr s P.Text)
     {- ^ (Optional) A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets. -}
     } deriving (Show, Eq)
 
@@ -11922,19 +12131,19 @@ Provides an SSM Parameter resource.
 data SsmParameterResource s = SsmParameterResource {
       _allowed_pattern :: !(TF.Attr s P.Text)
     {- ^ (Optional) A regular expression used to validate the parameter value. -}
-    , _description     :: !(TF.Attr s P.Text)
+    , _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) The description of the parameter. -}
-    , _key_id          :: !(TF.Attr s P.Text)
+    , _key_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The KMS key id or arn for encrypting a SecureString. -}
-    , _name            :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the parameter. -}
-    , _overwrite       :: !(TF.Attr s P.Text)
+    , _overwrite :: !(TF.Attr s P.Text)
     {- ^ (Optional) Overwrite an existing parameter. If not specified, will default to @false@ if the resource has not been created by terraform to avoid overwrite of existing resource and will default to @true@ otherwise (terraform lifecycle rules should then be used to manage the update behavior). -}
-    , _tags            :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the object. -}
-    , _type'           :: !(TF.Attr s P.Text)
+    , _type' :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of the parameter. Valid types are @String@ , @StringList@ and @SecureString@ . -}
-    , _value           :: !(TF.Attr s P.Text)
+    , _value :: !(TF.Attr s P.Text)
     {- ^ (Required) The value of the parameter. -}
     } deriving (Show, Eq)
 
@@ -12051,7 +12260,7 @@ Service Allowed Principal resource. Doing so will cause a conflict and will
 overwrite the association.
 -}
 data VpcEndpointServiceAllowedPrincipalResource s = VpcEndpointServiceAllowedPrincipalResource {
-      _principal_arn           :: !(TF.Attr s P.Text)
+      _principal_arn :: !(TF.Attr s P.Text)
     {- ^ (Required) The ARN of the principal to allow permissions. -}
     , _vpc_endpoint_service_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the VPC endpoint service to allow permission. -}
@@ -12108,9 +12317,9 @@ from management of the VPC Peering Connection and allows options to be set
 correctly in cross-account scenarios. Basic usage:
 -}
 data VpcPeeringConnectionOptionsResource s = VpcPeeringConnectionOptionsResource {
-      _accepter                  :: !(TF.Attr s P.Text)
+      _accepter :: !(TF.Attr s P.Text)
     {- ^ (Optional) - An optional configuration block that allows for [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options to be set for the VPC that accepts the peering connection (a maximum of one). -}
-    , _requester                 :: !(TF.Attr s P.Text)
+    , _requester :: !(TF.Attr s P.Text)
     {- ^ (Optional) - A optional configuration block that allows for [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options to be set for the VPC that requests the peering connection (a maximum of one). -}
     , _vpc_peering_connection_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the requester VPC peering connection. -}
@@ -12184,21 +12393,21 @@ resource to manage the requester's side of the connection and use the
 of the connection.
 -}
 data VpcPeeringConnectionResource s = VpcPeeringConnectionResource {
-      _accepter      :: !(TF.Attr s P.Text)
+      _accepter :: !(TF.Attr s P.Text)
     {- ^ (Optional) - An optional configuration block that allows for [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options to be set for the VPC that accepts the peering connection (a maximum of one). -}
-    , _auto_accept   :: !(TF.Attr s P.Text)
+    , _auto_accept :: !(TF.Attr s P.Text)
     {- ^ (Optional) Accept the peering (both VPCs need to be in the same AWS account). -}
     , _peer_owner_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The AWS account ID of the owner of the peer VPC. Defaults to the account ID the </docs/providers/aws/index.html> is currently connected to. -}
-    , _peer_region   :: !(TF.Attr s P.Region)
+    , _peer_region :: !(TF.Attr s P.Region)
     {- ^ (Optional) The region of the accepter VPC of the [VPC Peering Connection]. @auto_accept@ must be @false@ , and use the @aws_vpc_peering_connection_accepter@ to manage the accepter side. -}
-    , _peer_vpc_id   :: !(TF.Attr s P.Text)
+    , _peer_vpc_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the VPC with which you are creating the VPC Peering Connection. -}
-    , _requester     :: !(TF.Attr s P.Text)
+    , _requester :: !(TF.Attr s P.Text)
     {- ^ (Optional) - A optional configuration block that allows for [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options to be set for the VPC that requests the peering connection (a maximum of one). -}
-    , _tags          :: !(TF.Attr s (P.Tags s))
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _vpc_id        :: !(TF.Attr s P.Text)
+    , _vpc_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the requester VPC. -}
     } deriving (Show, Eq)
 
@@ -12321,7 +12530,7 @@ Provides a static route between a VPN connection and a customer gateway.
 data VpnConnectionRouteResource s = VpnConnectionRouteResource {
       _destination_cidr_block :: !(TF.Attr s P.IPRange)
     {- ^ (Required) The CIDR block associated with the local subnet of the customer network. -}
-    , _vpn_connection_id      :: !(TF.Attr s P.Text)
+    , _vpn_connection_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the VPN connection. -}
     } deriving (Show, Eq)
 
@@ -12362,7 +12571,7 @@ Provides a WAF Byte Match Set Resource
 data WafByteMatchSetResource s = WafByteMatchSetResource {
       _byte_match_tuples :: !(TF.Attr s P.Text)
     {- ^ - Specifies the bytes (typically a string that corresponds with ASCII characters) that you want to search for in web requests, the location in requests that you want to search, and other settings. -}
-    , _name              :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name or description of the Byte Match Set. -}
     } deriving (Show, Eq)
 
@@ -12410,13 +12619,13 @@ Provides a WAF Rate Based Rule Resource
 data WafRateBasedRuleResource s = WafRateBasedRuleResource {
       _metric_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name or description for the Amazon CloudWatch metric of this rule. -}
-    , _name        :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name or description of the rule. -}
-    , _predicates  :: !(TF.Attr s P.Text)
+    , _predicates :: !(TF.Attr s P.Text)
     {- ^ (Optional) One of ByteMatchSet, IPSet, SizeConstraintSet, SqlInjectionMatchSet, or XssMatchSet objects to include in a rule. -}
-    , _rate_key    :: !(TF.Attr s P.Text)
+    , _rate_key :: !(TF.Attr s P.Text)
     {- ^ (Required) Valid value is IP. -}
-    , _rate_limit  :: !(TF.Attr s P.Text)
+    , _rate_limit :: !(TF.Attr s P.Text)
     {- ^ (Required) The maximum number of requests, which have an identical value in the field specified by the RateKey, allowed in a five-minute period. Minimum value is 2000. -}
     } deriving (Show, Eq)
 
@@ -12498,7 +12707,7 @@ wafRateBasedRuleResource =
 Provides a WAF Regex Pattern Set Resource
 -}
 data WafRegexPatternSetResource s = WafRegexPatternSetResource {
-      _name                  :: !(TF.Attr s P.Text)
+      _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name or description of the Regex Pattern Set. -}
     , _regex_pattern_strings :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of regular expression (regex) patterns that you want AWS WAF to search for, such as @B[a@]dB[o0]t@ . -}
@@ -12548,13 +12757,13 @@ Provides a WAF Rate Based Rule Resource
 data WafregionalRateBasedRuleResource s = WafregionalRateBasedRuleResource {
       _metric_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name or description for the Amazon CloudWatch metric of this rule. -}
-    , _name        :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name or description of the rule. -}
-    , _predicate   :: !(TF.Attr s P.Text)
+    , _predicate :: !(TF.Attr s P.Text)
     {- ^ (Optional) One of ByteMatchSet, IPSet, SizeConstraintSet, SqlInjectionMatchSet, or XssMatchSet objects to include in a rule. -}
-    , _rate_key    :: !(TF.Attr s P.Text)
+    , _rate_key :: !(TF.Attr s P.Text)
     {- ^ (Required) Valid value is IP. -}
-    , _rate_limit  :: !(TF.Attr s P.Text)
+    , _rate_limit :: !(TF.Attr s P.Text)
     {- ^ (Required) The maximum number of requests, which have an identical value in the field specified by the RateKey, allowed in a five-minute period. Minimum value is 2000. -}
     } deriving (Show, Eq)
 
@@ -12636,7 +12845,7 @@ wafregionalRateBasedRuleResource =
 Provides a WAF Regional Regex Pattern Set Resource
 -}
 data WafregionalRegexPatternSetResource s = WafregionalRegexPatternSetResource {
-      _name                  :: !(TF.Attr s P.Text)
+      _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name or description of the Regex Pattern Set. -}
     , _regex_pattern_strings :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of regular expression (regex) patterns that you want AWS WAF to search for, such as @B[a@]dB[o0]t@ . -}
@@ -12685,7 +12894,7 @@ Provides a WAF Regional Size Constraint Set Resource for use with
 Application Load Balancer.
 -}
 data WafregionalSizeConstraintSetResource s = WafregionalSizeConstraintSetResource {
-      _name             :: !(TF.Attr s P.Text)
+      _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name or description of the Size Constraint Set. -}
     , _size_constraints :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies the parts of web requests that you want to inspect the size of. -}

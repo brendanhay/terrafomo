@@ -57,7 +57,10 @@ types p = provider p <> "Types"
 lenses :: Provider a -> NS
 lenses p = provider p <> "Lens"
 
-partitionSchemas :: Provider a -> SchemaType -> [b] -> [(NS, [b])]
+-- partitionSchemas :: Provider a -> SchemaType -> [b] -> [(NS, [b])]
+-- partitionSchemas p typ = partition p (show typ)
+
+partitionSchemas :: Provider a -> SchemaType -> [Schema] -> [(NS, [Schema])]
 partitionSchemas p typ = partition p (show typ)
 
 partition :: Provider a -> String -> [b] -> [(NS, [b])]

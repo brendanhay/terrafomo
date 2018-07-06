@@ -282,28 +282,28 @@ instance ToHCL ElbHealthCheckTarget where
             Format.format ("ssl://" % Format.int) n
 
 data ElbAccessLogs s = ElbAccessLogs
-    { _bucket        :: (Attr s Text)
+    { _bucket        :: !(Attr s Text)
     -- ^ (Required) The S3 bucket name to store the logs in.
-    , _bucket_prefix :: (Attr s Text)
+    , _bucket_prefix :: !(Attr s Text)
     -- ^ (Optional) The S3 bucket prefix. Logs are stored in the root if not configured.
-    , _interval      :: (Attr s Int)
+    , _interval      :: !(Attr s Int)
     -- ^ (Optional) The publishing interval in minutes. Default: 60 minutes.
-    , _enabled       :: (Attr s Bool)
+    , _enabled       :: !(Attr s Bool)
     -- ^ (Optional) Boolean to enable / disable access_logs. Default is true
     } deriving (Show, Eq, Generic)
 
 $(TH.makeBlock ''ElbAccessLogs)
 
 data ElbListener s = ElbListener
-    { _instance_port      :: (Attr s Word16)
+    { _instance_port      :: !(Attr s Word16)
     -- ^ (Required) The port on the instance to route to
-    , _instance_protocol  :: (Attr s ElbProtocol)
+    , _instance_protocol  :: !(Attr s ElbProtocol)
     -- ^ (Required) The protocol to use to the instance.
-    , _lb_port            :: (Attr s Word16)
+    , _lb_port            :: !(Attr s Word16)
     -- ^ (Required) The port to listen on for the load balancer
-    , _lb_protocol        :: (Attr s ElbProtocol)
+    , _lb_protocol        :: !(Attr s ElbProtocol)
     -- ^ (Required) The protocol to listen on.
-    , _ssl_certificate_id :: (Attr s Text)
+    , _ssl_certificate_id :: !(Attr s Text)
     -- ^ (Optional) The ARN of an SSL certificate you have uploaded to AWS
     -- IAM. Note ECDSA-specific restrictions below. Only valid when lb_protocol
     -- is either HTTPS or SSL
@@ -312,15 +312,15 @@ data ElbListener s = ElbListener
 $(TH.makeBlock ''ElbListener)
 
 data ElbHealthCheck s = ElbHealthCheck
-    { _healthy_threshold   :: (Attr s Int)
+    { _healthy_threshold   :: !(Attr s Int)
     -- ^ (Required) The number of checks before the instance is declared healthy.
-    , _unhealthy_threshold :: (Attr s Int)
+    , _unhealthy_threshold :: !(Attr s Int)
     -- ^ (Required) The number of checks before the instance is declared unhealthy.
-    , _target              :: (Attr s ElbHealthCheckTarget)
+    , _target              :: !(Attr s ElbHealthCheckTarget)
     -- ^(Required) The target of the check.
-    , _interval            :: (Attr s Int)
+    , _interval            :: !(Attr s Int)
     -- ^ (Required) The interval between checks.
-    , _timeout             :: (Attr s Int)
+    , _timeout             :: !(Attr s Int)
     -- ^ (Required) The length of time before the check times out.
     } deriving (Show, Eq, Generic)
 
@@ -330,6 +330,37 @@ $(TH.makeBlock ''ElbHealthCheck)
 
 -- FIXME: This should come from amazonka-iam-policy.
 type IamPolicy = HCL.JSON
+
+-- EKS
+
+-- | Nested argument for the VPC associated with your cluster. Amazon EKS VPC
+-- resources have specific requirements to work properly with Kubernetes. For more
+-- information, see Cluster VPC Considerations and Cluster Security Group
+-- Considerations in the Amazon EKS User Guide. Configuration detailed below.
+data EksVpcConfig s = EksVpcConfig
+    { _security_group_ids :: !(Attr s [Attr s Text])
+    -- ^ (Optional) List of security group IDs for the cross-account elastic
+    -- network interfaces that Amazon EKS creates to use to allow communication
+    -- between your worker nodes and the Kubernetes control plane.
+    , _subnet_ids         :: !(Attr s [Attr s Text])
+    -- ^ (Required) List of subnet IDs. Must be in at least two different
+    -- availability zones. Amazon EKS creates cross-account elastic network interfaces
+    -- in these subnets to allow communication between your worker nodes and the
+    -- Kubernetes control plane.
+    } deriving (Show, Eq, Generic)
+
+$(TH.makeBlock ''EksVpcConfig)
+
+-- | Nested argument for the VPC associated with your cluster. Amazon EKS VPC
+-- resources have specific requirements to work properly with Kubernetes. For more
+-- information, see Cluster VPC Considerations and Cluster Security Group
+-- Considerations in the Amazon EKS User Guide. Configuration detailed below.
+data EksVpcConfigId s = EksVpcConfigId
+    { _vpc_id :: !(Attr s Text)
+    -- ^ The VPC associated with your cluster.
+    } deriving (Show, Eq, Generic)
+
+$(TH.makeBlock ''EksVpcConfigId)
 
 -- Field Classes
 
