@@ -22,14 +22,17 @@ module Terrafomo.Gitlab.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasCanCreateGroup (..)
+      HasAccessLevel (..)
+    , HasCanCreateGroup (..)
     , HasCanPush (..)
     , HasColor (..)
     , HasDefaultBranch (..)
     , HasDescription (..)
     , HasEmail (..)
     , HasEnableSslVerification (..)
+    , HasId (..)
     , HasIsAdmin (..)
+    , HasIsExternal (..)
     , HasIssuesEnabled (..)
     , HasIssuesEvents (..)
     , HasJobEvents (..)
@@ -45,6 +48,7 @@ module Terrafomo.Gitlab.Lens
     , HasPath (..)
     , HasPipelineEvents (..)
     , HasProject (..)
+    , HasProjectId (..)
     , HasProjectsLimit (..)
     , HasPushEvents (..)
     , HasRequestAccessEnabled (..)
@@ -54,12 +58,14 @@ module Terrafomo.Gitlab.Lens
     , HasTitle (..)
     , HasToken (..)
     , HasUrl (..)
+    , HasUserId (..)
     , HasUsername (..)
     , HasVisibilityLevel (..)
     , HasWikiEnabled (..)
     , HasWikiPageEvents (..)
 
     -- ** Computed Attributes
+    , HasComputedAccessLevel (..)
     , HasComputedCanCreateGroup (..)
     , HasComputedCanPush (..)
     , HasComputedColor (..)
@@ -70,6 +76,7 @@ module Terrafomo.Gitlab.Lens
     , HasComputedHttpUrlToRepo (..)
     , HasComputedId (..)
     , HasComputedIsAdmin (..)
+    , HasComputedIsExternal (..)
     , HasComputedIssuesEnabled (..)
     , HasComputedIssuesEvents (..)
     , HasComputedJobEvents (..)
@@ -85,6 +92,7 @@ module Terrafomo.Gitlab.Lens
     , HasComputedPath (..)
     , HasComputedPipelineEvents (..)
     , HasComputedProject (..)
+    , HasComputedProjectId (..)
     , HasComputedProjectsLimit (..)
     , HasComputedPushEvents (..)
     , HasComputedRequestAccessEnabled (..)
@@ -95,6 +103,7 @@ module Terrafomo.Gitlab.Lens
     , HasComputedTitle (..)
     , HasComputedToken (..)
     , HasComputedUrl (..)
+    , HasComputedUserId (..)
     , HasComputedUsername (..)
     , HasComputedVisibilityLevel (..)
     , HasComputedWebUrl (..)
@@ -108,6 +117,12 @@ import Lens.Micro (Lens')
 
 import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
+
+class HasAccessLevel a b | a -> b where
+    accessLevel :: Lens' a b
+
+instance HasAccessLevel a b => HasAccessLevel (TF.Schema l p a) b where
+    accessLevel = TF.configuration . accessLevel
 
 class HasCanCreateGroup a b | a -> b where
     canCreateGroup :: Lens' a b
@@ -151,11 +166,23 @@ class HasEnableSslVerification a b | a -> b where
 instance HasEnableSslVerification a b => HasEnableSslVerification (TF.Schema l p a) b where
     enableSslVerification = TF.configuration . enableSslVerification
 
+class HasId a b | a -> b where
+    id :: Lens' a b
+
+instance HasId a b => HasId (TF.Schema l p a) b where
+    id = TF.configuration . id
+
 class HasIsAdmin a b | a -> b where
     isAdmin :: Lens' a b
 
 instance HasIsAdmin a b => HasIsAdmin (TF.Schema l p a) b where
     isAdmin = TF.configuration . isAdmin
+
+class HasIsExternal a b | a -> b where
+    isExternal :: Lens' a b
+
+instance HasIsExternal a b => HasIsExternal (TF.Schema l p a) b where
+    isExternal = TF.configuration . isExternal
 
 class HasIssuesEnabled a b | a -> b where
     issuesEnabled :: Lens' a b
@@ -247,6 +274,12 @@ class HasProject a b | a -> b where
 instance HasProject a b => HasProject (TF.Schema l p a) b where
     project = TF.configuration . project
 
+class HasProjectId a b | a -> b where
+    projectId :: Lens' a b
+
+instance HasProjectId a b => HasProjectId (TF.Schema l p a) b where
+    projectId = TF.configuration . projectId
+
 class HasProjectsLimit a b | a -> b where
     projectsLimit :: Lens' a b
 
@@ -301,6 +334,12 @@ class HasUrl a b | a -> b where
 instance HasUrl a b => HasUrl (TF.Schema l p a) b where
     url = TF.configuration . url
 
+class HasUserId a b | a -> b where
+    userId :: Lens' a b
+
+instance HasUserId a b => HasUserId (TF.Schema l p a) b where
+    userId = TF.configuration . userId
+
 class HasUsername a b | a -> b where
     username :: Lens' a b
 
@@ -324,6 +363,9 @@ class HasWikiPageEvents a b | a -> b where
 
 instance HasWikiPageEvents a b => HasWikiPageEvents (TF.Schema l p a) b where
     wikiPageEvents = TF.configuration . wikiPageEvents
+
+class HasComputedAccessLevel a b | a -> b where
+    computedAccessLevel :: a -> b
 
 class HasComputedCanCreateGroup a b | a -> b where
     computedCanCreateGroup :: a -> b
@@ -354,6 +396,9 @@ class HasComputedId a b | a -> b where
 
 class HasComputedIsAdmin a b | a -> b where
     computedIsAdmin :: a -> b
+
+class HasComputedIsExternal a b | a -> b where
+    computedIsExternal :: a -> b
 
 class HasComputedIssuesEnabled a b | a -> b where
     computedIssuesEnabled :: a -> b
@@ -400,6 +445,9 @@ class HasComputedPipelineEvents a b | a -> b where
 class HasComputedProject a b | a -> b where
     computedProject :: a -> b
 
+class HasComputedProjectId a b | a -> b where
+    computedProjectId :: a -> b
+
 class HasComputedProjectsLimit a b | a -> b where
     computedProjectsLimit :: a -> b
 
@@ -429,6 +477,9 @@ class HasComputedToken a b | a -> b where
 
 class HasComputedUrl a b | a -> b where
     computedUrl :: a -> b
+
+class HasComputedUserId a b | a -> b where
+    computedUserId :: a -> b
 
 class HasComputedUsername a b | a -> b where
     computedUsername :: a -> b

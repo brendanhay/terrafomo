@@ -103,13 +103,13 @@ import qualified Terrafomo.Schema    as TF
 
 {- | The @profitbricks_datacenter@ ProfitBricks resource.
 
-Manages a Virtual Data Center on ProfitBricks
+Manages a Virtual Data Center on ProfitBricks.
 -}
 data DatacenterResource s = DatacenterResource {
       _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional)[string] Description for the data center. -}
+    {- ^ (Optional)[string] Description for the Virtual Data Center. -}
     , _location    :: !(TF.Attr s P.Text)
-    {- ^ (Required)[string] The physical location where the data center will be created. -}
+    {- ^ (Required)[string] The regional location where the Virtual Data Center will be created. -}
     , _name        :: !(TF.Attr s P.Text)
     {- ^ (Required)[string] The name of the Virtual Data Center. -}
     } deriving (Show, Eq)
@@ -162,7 +162,7 @@ datacenterResource =
 
 {- | The @profitbricks_firewall@ ProfitBricks resource.
 
-Manages a Firewall Rules on ProfitBricks
+Manages a set of firewall rules on ProfitBricks.
 -}
 data FirewallResource s = FirewallResource {
     } deriving (Show, Eq)
@@ -178,7 +178,7 @@ firewallResource =
 
 {- | The @profitbricks_group@ ProfitBricks resource.
 
-Manages groups and group priviliages on ProfitBricks
+Manages groups and group privileges on ProfitBricks.
 -}
 data GroupResource s = GroupResource {
     } deriving (Show, Eq)
@@ -194,7 +194,8 @@ groupResource =
 
 {- | The @profitbricks_ipblock@ ProfitBricks resource.
 
-Manages a IP Blocks on ProfitBricks
+Manages IP Blocks on ProfitBricks. IP Blocks contain reserved public IP
+addresses that can be assigned servers or other resources.
 -}
 data IpblockResource s = IpblockResource {
     } deriving (Show, Eq)
@@ -210,7 +211,7 @@ ipblockResource =
 
 {- | The @profitbricks_ipfailover@ ProfitBricks resource.
 
-Manages Ip Failover groups on ProfitBricks
+Manages IP Failover groups on ProfitBricks.
 -}
 data IpfailoverResource s = IpfailoverResource {
     } deriving (Show, Eq)
@@ -226,7 +227,7 @@ ipfailoverResource =
 
 {- | The @profitbricks_lan@ ProfitBricks resource.
 
-Manages a LANs on ProfitBricks
+Manages a LAN on ProfitBricks.
 -}
 data LanResource s = LanResource {
     } deriving (Show, Eq)
@@ -242,7 +243,7 @@ lanResource =
 
 {- | The @profitbricks_loadbalancer@ ProfitBricks resource.
 
-Manages a Load Balancers on ProfitBricks
+Manages a Load Balancer on ProfitBricks.
 -}
 data LoadbalancerResource s = LoadbalancerResource {
     } deriving (Show, Eq)
@@ -258,7 +259,7 @@ loadbalancerResource =
 
 {- | The @profitbricks_nic@ ProfitBricks resource.
 
-Manages a NICs on ProfitBricks
+Manages a NIC on ProfitBricks.
 -}
 data NicResource s = NicResource {
     } deriving (Show, Eq)
@@ -274,7 +275,7 @@ nicResource =
 
 {- | The @profitbricks_server@ ProfitBricks resource.
 
-Manages a Servers on ProfitBricks
+Manages a Server on ProfitBricks.
 -}
 data ServerResource s = ServerResource {
     } deriving (Show, Eq)
@@ -323,7 +324,7 @@ snapshotResource =
 
 {- | The @profitbricks_user@ ProfitBricks resource.
 
-Manages users and list users and groups associated.
+Manages users and list users and groups associated with that user.
 -}
 data UserResource s = UserResource {
     } deriving (Show, Eq)
@@ -339,7 +340,7 @@ userResource =
 
 {- | The @profitbricks_volume@ ProfitBricks resource.
 
-Manages a Volumes on ProfitBricks
+Manages a volume on ProfitBricks.
 -}
 data VolumeResource s = VolumeResource {
     } deriving (Show, Eq)

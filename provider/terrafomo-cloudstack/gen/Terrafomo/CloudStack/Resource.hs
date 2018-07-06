@@ -1848,9 +1848,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SecondaryIpaddressResource s)) (T
     computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SecondaryIpaddressResource s)) (TF.Attr s P.Text) where
-    computedIpAddress =
-        (_ip_address :: SecondaryIpaddressResource s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 instance s ~ s' => P.HasComputedNicId (TF.Ref s' (SecondaryIpaddressResource s)) (TF.Attr s P.Text) where
     computedNicId =

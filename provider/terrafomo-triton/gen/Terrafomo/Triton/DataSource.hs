@@ -30,6 +30,12 @@ module Terrafomo.Triton.DataSource
     , DatacenterData (..)
     , datacenterData
 
+    , FabricNetworkData (..)
+    , fabricNetworkData
+
+    , FabricVlanData (..)
+    , fabricVlanData
+
     , ImageData (..)
     , imageData
 
@@ -39,6 +45,7 @@ module Terrafomo.Triton.DataSource
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasCnsEnabled (..)
+    , P.HasDescription (..)
     , P.HasEmail (..)
     , P.HasEndpoint (..)
     , P.HasId (..)
@@ -51,21 +58,32 @@ module Terrafomo.Triton.DataSource
     , P.HasState (..)
     , P.HasType' (..)
     , P.HasVersion (..)
+    , P.HasVlanId (..)
 
     -- ** Computed Attributes
     , P.HasComputedCnsEnabled (..)
+    , P.HasComputedDescription (..)
     , P.HasComputedEmail (..)
     , P.HasComputedEndpoint (..)
+    , P.HasComputedFabric (..)
+    , P.HasComputedGateway (..)
     , P.HasComputedId (..)
+    , P.HasComputedInternetNat (..)
     , P.HasComputedLogin (..)
     , P.HasComputedMostRecent (..)
     , P.HasComputedName (..)
     , P.HasComputedOs (..)
     , P.HasComputedOwner (..)
+    , P.HasComputedProvisionEndIp (..)
+    , P.HasComputedProvisionStartIp (..)
     , P.HasComputedPublic (..)
+    , P.HasComputedResolvers (..)
+    , P.HasComputedRoutes (..)
     , P.HasComputedState (..)
+    , P.HasComputedSubnet (..)
     , P.HasComputedType' (..)
     , P.HasComputedVersion (..)
+    , P.HasComputedVlanId (..)
 
     -- * Re-exported Types
     , module P
@@ -216,6 +234,136 @@ datacenterData =
             , _name = TF.Nil
             }
 
+{- | The @triton_fabric_network@ Triton datasource.
+
+The @triton_fabric_network@ data source queries Triton for
+<https://docs.joyent.com/public-cloud/network/sdn> information (e.g., subnet
+CIDR, gateway, state routes, etc.) based on the name of the Fabric Network
+and ID of the VLAN on which the network has been created.
+-}
+data FabricNetworkData s = FabricNetworkData {
+      _name    :: !(TF.Attr s P.Text)
+    {- ^ - (string) Required. The name of the Fabric Network. -}
+    , _vlan_id :: !(TF.Attr s P.Text)
+    {- ^ - (integer) Required. The unique identifier (VLAN ID) of the Fabric VLAN. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (FabricNetworkData s) where
+    toHCL FabricNetworkData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "vlan_id" <$> TF.attribute _vlan_id
+        ]
+
+instance P.HasName (FabricNetworkData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: FabricNetworkData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: FabricNetworkData s)
+
+instance P.HasVlanId (FabricNetworkData s) (TF.Attr s P.Text) where
+    vlanId =
+        lens (_vlan_id :: FabricNetworkData s -> TF.Attr s P.Text)
+             (\s a -> s { _vlan_id = a } :: FabricNetworkData s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedFabric (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedFabric x = TF.compute (TF.refKey x) "fabric"
+
+instance s ~ s' => P.HasComputedGateway (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedGateway x = TF.compute (TF.refKey x) "gateway"
+
+instance s ~ s' => P.HasComputedInternetNat (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedInternetNat x = TF.compute (TF.refKey x) "internet_nat"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedProvisionEndIp (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedProvisionEndIp x = TF.compute (TF.refKey x) "provision_end_ip"
+
+instance s ~ s' => P.HasComputedProvisionStartIp (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedProvisionStartIp x = TF.compute (TF.refKey x) "provision_start_ip"
+
+instance s ~ s' => P.HasComputedPublic (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedPublic x = TF.compute (TF.refKey x) "public"
+
+instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedResolvers x = TF.compute (TF.refKey x) "resolvers"
+
+instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedRoutes x = TF.compute (TF.refKey x) "routes"
+
+instance s ~ s' => P.HasComputedSubnet (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedSubnet x = TF.compute (TF.refKey x) "subnet"
+
+instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedVlanId x = TF.compute (TF.refKey x) "vlan_id"
+
+fabricNetworkData :: TF.DataSource P.Triton (FabricNetworkData s)
+fabricNetworkData =
+    TF.newDataSource "triton_fabric_network" $
+        FabricNetworkData {
+              _name = TF.Nil
+            , _vlan_id = TF.Nil
+            }
+
+{- | The @triton_fabric_vlan@ Triton datasource.
+
+The @triton_fabric_vlan@ data source queries Triton for
+<https://docs.joyent.com/public-cloud/network/sdn#vlans> information (e.g.,
+VLAN ID, etc.) based either on the name, VLAN ID or description of the
+Fabric VLAN.
+-}
+data FabricVlanData s = FabricVlanData {
+      _description :: !(TF.Attr s P.Text)
+    {- ^ - (string) Optional. The description of the Fabric VLAN. -}
+    , _name        :: !(TF.Attr s P.Text)
+    {- ^ - (string) Optional. The name of the Fabric VLAN. -}
+    , _vlan_id     :: !(TF.Attr s P.Text)
+    {- ^ - (integer) Optional. The unique identifier (VLAN ID) of the Fabric VLAN. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (FabricVlanData s) where
+    toHCL FabricVlanData{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "vlan_id" <$> TF.attribute _vlan_id
+        ]
+
+instance P.HasDescription (FabricVlanData s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: FabricVlanData s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: FabricVlanData s)
+
+instance P.HasName (FabricVlanData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: FabricVlanData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: FabricVlanData s)
+
+instance P.HasVlanId (FabricVlanData s) (TF.Attr s P.Text) where
+    vlanId =
+        lens (_vlan_id :: FabricVlanData s -> TF.Attr s P.Text)
+             (\s a -> s { _vlan_id = a } :: FabricVlanData s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (FabricVlanData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (FabricVlanData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (FabricVlanData s)) (TF.Attr s P.Text) where
+    computedVlanId x = TF.compute (TF.refKey x) "vlan_id"
+
+fabricVlanData :: TF.DataSource P.Triton (FabricVlanData s)
+fabricVlanData =
+    TF.newDataSource "triton_fabric_vlan" $
+        FabricVlanData {
+              _description = TF.Nil
+            , _name = TF.Nil
+            , _vlan_id = TF.Nil
+            }
+
 {- | The @triton_image@ Triton datasource.
 
 The @triton_image@ data source queries the Triton Image API for an image ID
@@ -351,12 +499,12 @@ imageData =
 
 {- | The @triton_network@ Triton datasource.
 
-The @triton_network@ data source queries the Triton Network API for a
-network ID based on the name of the network.
+The @triton_network@ data source queries Triton for Network information
+(e.g., Network ID, etc.) based on the name of the Network.
 -}
 data NetworkData s = NetworkData {
       _name :: !(TF.Attr s P.Text)
-    {- ^ - (string) The name of the network. -}
+    {- ^ - (string) Required. The name of the Network. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NetworkData s) where
@@ -369,6 +517,9 @@ instance P.HasName (NetworkData s) (TF.Attr s P.Text) where
         lens (_name :: NetworkData s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: NetworkData s)
 
+instance s ~ s' => P.HasComputedFabric (TF.Ref s' (NetworkData s)) (TF.Attr s P.Text) where
+    computedFabric x = TF.compute (TF.refKey x) "fabric"
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -376,6 +527,9 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkData s)) (TF.Attr s P.Te
     computedName =
         (_name :: NetworkData s -> TF.Attr s P.Text)
             . TF.refValue
+
+instance s ~ s' => P.HasComputedPublic (TF.Ref s' (NetworkData s)) (TF.Attr s P.Text) where
+    computedPublic x = TF.compute (TF.refKey x) "public"
 
 networkData :: TF.DataSource P.Triton (NetworkData s)
 networkData =

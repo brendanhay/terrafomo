@@ -236,6 +236,7 @@ module Terrafomo.OPC.Resource
     , P.HasComputedIndex (..)
     , P.HasComputedInstance' (..)
     , P.HasComputedInstanceAttributes (..)
+    , P.HasComputedIp (..)
     , P.HasComputedIpAddress (..)
     , P.HasComputedIpAddressPool (..)
     , P.HasComputedIpAddressPrefix (..)
@@ -302,6 +303,7 @@ module Terrafomo.OPC.Resource
     , P.HasComputedStorageVolume (..)
     , P.HasComputedTags (..)
     , P.HasComputedUri (..)
+    , P.HasComputedUsed (..)
     , P.HasComputedVcable (..)
     , P.HasComputedVcableId (..)
     , P.HasComputedVersion (..)
@@ -341,8 +343,8 @@ import qualified Terrafomo.Schema    as TF
 
 {- | The @opc_compute_acl@ OPC resource.
 
-The @opc_compute_acl@ resource creates and manages an ACL in an OPC identity
-domain.
+The @opc_compute_acl@ resource creates and manages an ACL in an Oracle Cloud
+Infrastructure Compute Classic identity domain.
 -}
 data ComputeAclResource s = ComputeAclResource {
       _description :: !(TF.Attr s P.Text)
@@ -416,7 +418,8 @@ computeAclResource =
 {- | The @opc_compute_image_list_entry@ OPC resource.
 
 The @opc_compute_image_list_entry@ resource creates and manages an Image
-List Entry in an OPC identity domain.
+List Entry in an Oracle Cloud Infrastructure Compute Classic identity
+domain.
 -}
 data ComputeImageListEntryResource s = ComputeImageListEntryResource {
       _attributes     :: !(TF.Attr s P.Text)
@@ -493,7 +496,7 @@ computeImageListEntryResource =
 {- | The @opc_compute_image_list@ OPC resource.
 
 The @opc_compute_image_list@ resource creates and manages an Image List in
-an OPC identity domain.
+an Oracle Cloud Infrastructure Compute Classic identity domain.
 -}
 data ComputeImageListResource s = ComputeImageListResource {
       _default'    :: !(TF.Attr s P.Text)
@@ -553,9 +556,9 @@ computeImageListResource =
 {- | The @opc_compute_instance@ OPC resource.
 
 The @opc_compute_instance@ resource creates and manages an instance in an
-OPC identity domain. ~> Caution: The @opc_compute_instance@ resource can
-completely delete your instance just as easily as it can create it. To avoid
-costly accidents, consider setting
+Oracle Cloud Infrastructure Compute Classic identity domain. ~> Caution: The
+@opc_compute_instance@ resource can completely delete your instance just as
+easily as it can create it. To avoid costly accidents, consider setting
 </docs/configuration/resources.html#prevent_destroy> on your instance
 resources as an extra safety measure.
 -}
@@ -821,7 +824,8 @@ computeInstanceResource =
 
 The @opc_compute_ip_address_association@ resource creates and manages an IP
 address association between an IP address reservation and a virtual NIC in
-an OPC identity domain, for an IP Network.
+an Oracle Cloud Infrastructure Compute Classic identity domain, for an IP
+Network.
 -}
 data ComputeIpAddressAssociationResource s = ComputeIpAddressAssociationResource {
       _description            :: !(TF.Attr s P.Text)
@@ -909,7 +913,8 @@ computeIpAddressAssociationResource =
 {- | The @opc_compute_ip_address_prefix_set@ OPC resource.
 
 The @opc_compute_ip_address_prefix_set@ resource creates and manages an IP
-address prefix set in an OPC identity domain.
+address prefix set in an Oracle Cloud Infrastructure Compute Classic
+identity domain.
 -}
 data ComputeIpAddressPrefixSetResource s = ComputeIpAddressPrefixSetResource {
       _description :: !(TF.Attr s P.Text)
@@ -983,7 +988,8 @@ computeIpAddressPrefixSetResource =
 {- | The @opc_compute_ip_address_reservation@ OPC resource.
 
 The @opc_compute_ip_address_reservation@ resource creates and manages an IP
-address reservation in an OPC identity domain, for an IP Network.
+address reservation in an Oracle Cloud Infrastructure Compute Classic
+identity domain, for an IP Network.
 -}
 data ComputeIpAddressReservationResource s = ComputeIpAddressReservationResource {
       _description     :: !(TF.Attr s P.Text)
@@ -1057,8 +1063,8 @@ computeIpAddressReservationResource =
 {- | The @opc_compute_ip_association@ OPC resource.
 
 The @opc_compute_ip_association@ resource creates and manages an association
-between an IP address and an instance in an OPC identity domain, for the
-Shared Network.
+between an IP address and an instance in an Oracle Cloud Infrastructure
+Compute Classic identity domain, for the Shared Network.
 -}
 data ComputeIpAssociationResource s = ComputeIpAssociationResource {
       _parent_pool :: !(TF.Attr s P.Text)
@@ -1107,7 +1113,8 @@ computeIpAssociationResource =
 {- | The @opc_compute_ip_network_exchange@ OPC resource.
 
 The @opc_compute_ip_network_exchange@ resource creates and manages an IP
-network exchange in an OPC identity domain.
+network exchange in an Oracle Cloud Infrastructure Compute Classic identity
+domain.
 -}
 data ComputeIpNetworkExchangeResource s = ComputeIpNetworkExchangeResource {
       _description :: !(TF.Attr s P.Text)
@@ -1166,7 +1173,8 @@ computeIpNetworkExchangeResource =
 
 {- | The @opc_compute_ip_network@ OPC resource.
 
-The @opc_compute_ip_network@ resource creates and manages an IP Network.
+The @opc_compute_ip_network@ resource creates and manages an IP Network in
+an Oracle Cloud Infrastructure Compute Classic identity domain.
 -}
 data ComputeIpNetworkResource s = ComputeIpNetworkResource {
       _description         :: !(TF.Attr s P.Text)
@@ -1247,7 +1255,8 @@ computeIpNetworkResource =
 {- | The @opc_compute_ip_reservation@ OPC resource.
 
 The @opc_compute_ip_reservation@ resource creates and manages an IP
-reservation in an OPC identity domain for the Shared Network.
+reservation in an Oracle Cloud Infrastructure Compute Classic identity
+domain for the Shared Network.
 -}
 data ComputeIpReservationResource s = ComputeIpReservationResource {
       _name        :: !(TF.Attr s P.Text)
@@ -1288,6 +1297,9 @@ instance P.HasTags (ComputeIpReservationResource s) (TF.Attr s P.Text) where
         lens (_tags :: ComputeIpReservationResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ComputeIpReservationResource s)
 
+instance s ~ s' => P.HasComputedIp (TF.Ref s' (ComputeIpReservationResource s)) (TF.Attr s P.Text) where
+    computedIp x = TF.compute (TF.refKey x) "ip"
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeIpReservationResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeIpReservationResource s -> TF.Attr s P.Text)
@@ -1307,6 +1319,9 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeIpReservationResource s)
     computedTags =
         (_tags :: ComputeIpReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
+
+instance s ~ s' => P.HasComputedUsed (TF.Ref s' (ComputeIpReservationResource s)) (TF.Attr s P.Text) where
+    computedUsed x = TF.compute (TF.refKey x) "used"
 
 computeIpReservationResource :: TF.Resource P.OPC (ComputeIpReservationResource s)
 computeIpReservationResource =
@@ -1412,7 +1427,8 @@ computeMachineImageResource =
 {- | The @opc_compute_orchestrated_instance@ OPC resource.
 
 The @opc_compute_orchestrated_instance@ resource creates and manages an
-orchestration containing a number of instances in an OPC identity domain.
+orchestration containing a number of instances in an Oracle Cloud
+Infrastructure Compute Classic identity domain.
 -}
 data ComputeOrchestratedInstanceResource s = ComputeOrchestratedInstanceResource {
       _description   :: !(TF.Attr s P.Text)
@@ -1486,7 +1502,7 @@ computeOrchestratedInstanceResource =
 {- | The @opc_compute_route@ OPC resource.
 
 The @opc_compute_route@ resource creates and manages a route for an IP
-Network.
+Network in an Oracle Cloud Infrastructure Compute Classic identity domain.
 -}
 data ComputeRouteResource s = ComputeRouteResource {
       _admin_distance    :: !(TF.Attr s P.Text)
@@ -1563,10 +1579,10 @@ computeRouteResource =
 
 {- | The @opc_compute_sec_rule@ OPC resource.
 
-The @opc_compute_sec_rule@ resource creates and manages a sec rule in an OPC
-identity domain, which joinstogether a source security list (or security IP
-list), a destination security list (or security IP list), and a security
-application.
+The @opc_compute_sec_rule@ resource creates and manages a sec rule in an
+Oracle Cloud Infrastructure Compute Classic identity domain, which joins
+together a source security list (or security IP list), a destination
+security list (or security IP list), and a security application.
 -}
 data ComputeSecRuleResource s = ComputeSecRuleResource {
       _action           :: !(TF.Attr s P.Text)
@@ -1682,7 +1698,8 @@ computeSecRuleResource =
 {- | The @opc_compute_security_application@ OPC resource.
 
 The @opc_compute_security_application@ resource creates and manages a
-security application in an OPC identity domain.
+security application in an Oracle Cloud Infrastructure Compute Classic
+identity domain.
 -}
 data ComputeSecurityApplicationResource s = ComputeSecurityApplicationResource {
       _dport    :: !(TF.Attr s P.Text)
@@ -1770,8 +1787,8 @@ computeSecurityApplicationResource =
 {- | The @opc_compute_security_association@ OPC resource.
 
 The @opc_compute_security_association@ resource creates and manages an
-association between an instance and a security list in an OPC identity
-domain.
+association between an instance and a security list in an Oracle Cloud
+Infrastructure Compute Classic identity domain.
 -}
 data ComputeSecurityAssociationResource s = ComputeSecurityAssociationResource {
       _name    :: !(TF.Attr s P.Text)
@@ -1831,7 +1848,7 @@ computeSecurityAssociationResource =
 {- | The @opc_compute_security_ip_list@ OPC resource.
 
 The @opc_compute_security_ip_list@ resource creates and manages a security
-IP list in an OPC identity domain.
+IP list in an Oracle Cloud Infrastructure Compute Classic identity domain.
 -}
 data ComputeSecurityIpListResource s = ComputeSecurityIpListResource {
       _description :: !(TF.Attr s P.Text)
@@ -1891,7 +1908,7 @@ computeSecurityIpListResource =
 {- | The @opc_compute_security_list@ OPC resource.
 
 The @opc_compute_security_list@ resource creates and manages a security list
-in an OPC identity domain.
+in an Oracle Cloud Infrastructure Compute Classic identity domain.
 -}
 data ComputeSecurityListResource s = ComputeSecurityListResource {
       _name               :: !(TF.Attr s P.Text)
@@ -1951,7 +1968,7 @@ computeSecurityListResource =
 {- | The @opc_compute_security_protocol@ OPC resource.
 
 The @opc_compute_security_protocol@ resource creates and manages a security
-protocol in an OPC identity domain.
+protocol in an Oracle Cloud Infrastructure Compute Classic identity domain.
 -}
 data ComputeSecurityProtocolResource s = ComputeSecurityProtocolResource {
       _description :: !(TF.Attr s P.Text)
@@ -2053,7 +2070,7 @@ computeSecurityProtocolResource =
 {- | The @opc_compute_security_rule@ OPC resource.
 
 The @opc_compute_security_rule@ resource creates and manages a security rule
-in an OPC identity domain.
+in an Oracle Cloud Infrastructure Compute Classic identity domain.
 -}
 data ComputeSecurityRuleResource s = ComputeSecurityRuleResource {
       _acl                     :: !(TF.Attr s P.Text)
@@ -2227,8 +2244,8 @@ computeSecurityRuleResource =
 
 {- | The @opc_compute_ssh_key@ OPC resource.
 
-The @opc_compute_ssh_key@ resource creates and manages an SSH key in an OPC
-identity domain.
+The @opc_compute_ssh_key@ resource creates and manages an SSH key in an
+Oracle Cloud Infrastructure Compute Classic identity domain.
 -}
 data ComputeSshKeyResource s = ComputeSshKeyResource {
       _enabled :: !(TF.Attr s P.Text)
@@ -2288,7 +2305,8 @@ computeSshKeyResource =
 {- | The @opc_compute_storage_volume_attachment@ OPC resource.
 
 The @opc_compute_storage_volume_attachment@ resource creates and manages a
-storage volume attachment in an OPC identity domain.
+storage volume attachment in an Oracle Cloud Infrastructure Compute Classic
+identity domain.
 -}
 data ComputeStorageVolumeAttachmentResource s = ComputeStorageVolumeAttachmentResource {
       _index          :: !(TF.Attr s P.Text)
@@ -2348,11 +2366,12 @@ computeStorageVolumeAttachmentResource =
 {- | The @opc_compute_storage_volume@ OPC resource.
 
 The @opc_compute_storage_volume@ resource creates and manages a storage
-volume in an OPC identity domain. ~> Caution: The
-@opc_compute_storage_volume@ resource can completely delete your storage
-volume just as easily as it can create it. To avoid costly accidents,
-consider setting </docs/configuration/resources.html#prevent_destroy> on
-your storage volume resources as an extra safety measure.
+volume in an Oracle Cloud Infrastructure Compute Classic identity domain. ~>
+Caution: The @opc_compute_storage_volume@ resource can completely delete
+your storage volume just as easily as it can create it. To avoid costly
+accidents, consider setting
+</docs/configuration/resources.html#prevent_destroy> on your storage volume
+resources as an extra safety measure.
 -}
 data ComputeStorageVolumeResource s = ComputeStorageVolumeResource {
       _bootable         :: !(TF.Attr s P.Text)
@@ -2548,7 +2567,8 @@ computeStorageVolumeResource =
 {- | The @opc_compute_storage_volume_snapshot@ OPC resource.
 
 The @opc_compute_storage_volume_snapshot@ resource creates and manages a
-storage volume snapshot in an OPC identity domain.
+storage volume snapshot in an Oracle Cloud Infrastructure Compute Classic
+identity domain.
 -}
 data ComputeStorageVolumeSnapshotResource s = ComputeStorageVolumeSnapshotResource {
       _collocated             :: !(TF.Attr s P.Text)
@@ -2686,7 +2706,7 @@ computeStorageVolumeSnapshotResource =
 {- | The @opc_compute_vnic_set@ OPC resource.
 
 The @opc_compute_vnic_set@ resource creates and manages a virtual NIC set in
-an OPC identity domain.
+an Oracle Cloud Infrastructure Compute Classic identity domain.
 -}
 data ComputeVnicSetResource s = ComputeVnicSetResource {
       _applied_acls :: !(TF.Attr s P.Text)
@@ -2773,9 +2793,9 @@ computeVnicSetResource =
 
 {- | The @opc_storage_container@ OPC resource.
 
-Creates and manages a Container in the OPC Storage Domain.
-@storage_endpoint@ must be set in the provider or environment to manage
-these resources.
+Creates and manages a Container in the Oracle Cloud Infrastructure Storage
+Classic service. @storage_endpoint@ must be set in the provider or
+environment to manage these resources.
 -}
 data StorageContainerResource s = StorageContainerResource {
       _allowed_origins :: !(TF.Attr s P.Text)
@@ -2946,9 +2966,9 @@ storageContainerResource =
 
 {- | The @opc_storage_object@ OPC resource.
 
-Creates and manages a Object in the OPC Storage Container.
-@storage_endpoint@ must be set in the provider or environment to manage
-these resources.
+Creates and manages a Object in an Oracle Cloud Infrastructure Storage
+Classic container. @storage_endpoint@ must be set in the provider or
+environment to manage these resources.
 -}
 data StorageObjectResource s = StorageObjectResource {
       _container :: !(TF.Attr s P.Text)

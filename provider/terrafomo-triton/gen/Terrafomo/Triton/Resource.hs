@@ -7,8 +7,8 @@
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
 {-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -30,11 +30,17 @@ module Terrafomo.Triton.Resource
     , FirewallRuleResource (..)
     , firewallRuleResource
 
+    , InstanceTemplateResource (..)
+    , instanceTemplateResource
+
     , KeyResource (..)
     , keyResource
 
     , MachineResource (..)
     , machineResource
+
+    , ServiceGroupResource (..)
+    , serviceGroupResource
 
     , SnapshotResource (..)
     , snapshotResource
@@ -44,18 +50,21 @@ module Terrafomo.Triton.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
+    , P.Has(Deprecated) locality (..)
     , P.HasAdministratorPw (..)
     , P.HasAffinity (..)
+    , P.HasCapacity (..)
     , P.HasCloudConfig (..)
     , P.HasCns (..)
+    , P.HasDeletionProtectionEnabled (..)
     , P.HasDescription (..)
     , P.HasEnabled (..)
     , P.HasFirewallEnabled (..)
     , P.HasGateway (..)
+    , P.HasGroupName (..)
     , P.HasImage (..)
     , P.HasInternetNat (..)
     , P.HasKey (..)
-    , P.HasLocality (..)
     , P.HasMachineId (..)
     , P.HasMetadata (..)
     , P.HasName (..)
@@ -69,31 +78,37 @@ module Terrafomo.Triton.Resource
     , P.HasRule (..)
     , P.HasSubnet (..)
     , P.HasTags (..)
+    , P.HasTemplate (..)
+    , P.HasTemplateName (..)
     , P.HasUserData (..)
     , P.HasUserScript (..)
+    , P.HasUserdata (..)
     , P.HasVlanId (..)
 
     -- ** Computed Attributes
+    , P.HasComputed(Deprecated) locality (..)
     , P.HasComputedAdministratorPw (..)
     , P.HasComputedAffinity (..)
+    , P.HasComputedCapacity (..)
     , P.HasComputedCloudConfig (..)
     , P.HasComputedCns (..)
     , P.HasComputedComputeNode (..)
     , P.HasComputedCreated (..)
     , P.HasComputedDataset (..)
+    , P.HasComputedDeletionProtectionEnabled (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDisk (..)
     , P.HasComputedEnabled (..)
     , P.HasComputedFabric (..)
     , P.HasComputedFirewallEnabled (..)
     , P.HasComputedGateway (..)
+    , P.HasComputedGroupName (..)
     , P.HasComputedId (..)
     , P.HasComputedImage (..)
     , P.HasComputedInternetNat (..)
     , P.HasComputedIp (..)
     , P.HasComputedIps (..)
     , P.HasComputedKey (..)
-    , P.HasComputedLocality (..)
     , P.HasComputedMac (..)
     , P.HasComputedMachineId (..)
     , P.HasComputedMemory (..)
@@ -116,10 +131,13 @@ module Terrafomo.Triton.Resource
     , P.HasComputedState (..)
     , P.HasComputedSubnet (..)
     , P.HasComputedTags (..)
+    , P.HasComputedTemplate (..)
+    , P.HasComputedTemplateName (..)
     , P.HasComputedType' (..)
     , P.HasComputedUpdated (..)
     , P.HasComputedUserData (..)
     , P.HasComputedUserScript (..)
+    , P.HasComputedUserdata (..)
     , P.HasComputedVlanId (..)
 
     -- * Re-exported Types
@@ -136,12 +154,12 @@ import Lens.Micro (lens)
 
 import Terrafomo.Triton.Types as P
 
-import qualified Data.Text                 as P
-import qualified Data.Word                 as P
-import qualified GHC.Base                  as P
-import qualified Numeric.Natural           as P
-import qualified Terrafomo.Triton.Lens     as P
 import qualified Terrafomo.Triton.Provider as P
+import qualified Terrafomo.Triton.Lens as P
+import qualified Data.Text       as P
+import qualified Data.Word       as P
+import qualified GHC.Base        as P
+import qualified Numeric.Natural as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -155,25 +173,25 @@ The @triton_fabric@ resource represents an fabric for a Triton account. The
 fabric is a logical set of interconnected switches.
 -}
 data FabricResource s = FabricResource {
-      _description        :: !(TF.Attr s P.Text)
+      _description :: !(TF.Attr s P.Text)
     {- ^ - (String, Optional, Change forces new resource) Optional description of network. -}
-    , _gateway            :: !(TF.Attr s P.Text)
+    , _gateway :: !(TF.Attr s P.Text)
     {- ^ - (String, Optional, Change forces new resource) Optional gateway IP. -}
-    , _internet_nat       :: !(TF.Attr s P.Text)
-    {- ^ - (Bool, Optional, Change forces new resource) If a NAT zone is provisioned at Gateway IP address. Default is @false@ . This differs from <https://apidocs.joyent.com/cloudapi/#CreateFabricNetwork> which implicitly creates a NAT instance by default. NOTE: There is a known issue in Triton that prevents deletion of fabric networks when @internet_nat@ is enabled. -}
-    , _name               :: !(TF.Attr s P.Text)
+    , _internet_nat :: !(TF.Attr s P.Text)
+    {- ^ - (Bool, Optional, Change forces new resource) If a NAT zone is provisioned at Gateway IP address. Default is @true@ . -}
+    , _name :: !(TF.Attr s P.Text)
     {- ^ - (String, Required, Change forces new resource) Network name. -}
-    , _provision_end_ip   :: !(TF.Attr s P.Text)
+    , _provision_end_ip :: !(TF.Attr s P.Text)
     {- ^ - (String, Required, Change forces new resource) Last assignable IP on the network. -}
     , _provision_start_ip :: !(TF.Attr s P.Text)
     {- ^ - (String, Required, Change forces new resource) First IP on the network that can be assigned. -}
-    , _resolvers          :: !(TF.Attr s P.Text)
+    , _resolvers :: !(TF.Attr s P.Text)
     {- ^ - (List, Optional) Array of IP addresses for resolvers. -}
-    , _routes             :: !(TF.Attr s P.Text)
+    , _routes :: !(TF.Attr s P.Text)
     {- ^ - (Map, Optional, Change forces new resource) Map of CIDR block to Gateway IP address. -}
-    , _subnet             :: !(TF.Attr s P.Text)
+    , _subnet :: !(TF.Attr s P.Text)
     {- ^ - (String, Required, Change forces new resource) CIDR formatted string describing network. -}
-    , _vlan_id            :: !(TF.Attr s P.Text)
+    , _vlan_id :: !(TF.Attr s P.Text)
     {- ^ - (Int, Required, Change forces new resource) VLAN id the network is on. Number between 0-4095 indicating VLAN ID. -}
     } deriving (Show, Eq)
 
@@ -304,9 +322,9 @@ firewall.
 data FirewallRuleResource s = FirewallRuleResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ - (string, Optional) Description of the firewall rule -}
-    , _enabled     :: !(TF.Attr s P.Text)
+    , _enabled :: !(TF.Attr s P.Text)
     {- ^ - (boolean, Optional)  Default: @false@ Whether the rule should be effective. -}
-    , _rule        :: !(TF.Attr s P.Text)
+    , _rule :: !(TF.Attr s P.Text)
     {- ^ - (string, Required) The firewall rule described using the Cloud API rule syntax defined at https://docs.joyent.com/public-cloud/network/firewall/cloud-firewall-rules-reference. Note: Cloud API will normalize rules based on case-sensitivity, parentheses, ordering of IP addresses, etc. This can result in Terraform updating rules repeatedly if the rule definition differs from the normalized value. -}
     } deriving (Show, Eq)
 
@@ -359,12 +377,147 @@ firewallRuleResource =
             , _rule = TF.Nil
             }
 
+{- | The @triton_instance_template@ Triton resource.
+
+The @triton_instance_template@ resource represents a Triton Service Group
+instance template. ~> NOTE: Triton Service Groups are in Preview and only
+supported in specific regions at this time. They will become Generally
+Available in the near future.
+-}
+data InstanceTemplateResource s = InstanceTemplateResource {
+      _firewall_enabled :: !(TF.Attr s P.Text)
+    {- ^ - (boolean, Optional) Whether to enable the firewall for group instances. Default is @false@ . -}
+    , _image :: !(TF.Attr s P.Text)
+    {- ^ - (string, Required)  UUID of the image. -}
+    , _metadata :: !(TF.Attr s P.Text)
+    {- ^ - (map, Optional) Metadata for group instances. -}
+    , _networks :: !(TF.Attr s P.Text)
+    {- ^ - (list, Optional) Network IDs for group instances. -}
+    , _package :: !(TF.Attr s P.Text)
+    {- ^ - (string, Required) Package name used for provisioning. -}
+    , _tags :: !(TF.Attr s P.Text)
+    {- ^ - (map, Optional) Tags for group instances. -}
+    , _template_name :: !(TF.Attr s P.Text)
+    {- ^ - (string, Required) Friendly name for the instance template. -}
+    , _userdata :: !(TF.Attr s P.Text)
+    {- ^ - (string, Optional) Data copied to instance on boot. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (InstanceTemplateResource s) where
+    toHCL InstanceTemplateResource{..} = TF.inline $ catMaybes
+        [ TF.assign "firewall_enabled" <$> TF.attribute _firewall_enabled
+        , TF.assign "image" <$> TF.attribute _image
+        , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "networks" <$> TF.attribute _networks
+        , TF.assign "package" <$> TF.attribute _package
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "template_name" <$> TF.attribute _template_name
+        , TF.assign "userdata" <$> TF.attribute _userdata
+        ]
+
+instance P.HasFirewallEnabled (InstanceTemplateResource s) (TF.Attr s P.Text) where
+    firewallEnabled =
+        lens (_firewall_enabled :: InstanceTemplateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _firewall_enabled = a } :: InstanceTemplateResource s)
+
+instance P.HasImage (InstanceTemplateResource s) (TF.Attr s P.Text) where
+    image =
+        lens (_image :: InstanceTemplateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _image = a } :: InstanceTemplateResource s)
+
+instance P.HasMetadata (InstanceTemplateResource s) (TF.Attr s P.Text) where
+    metadata =
+        lens (_metadata :: InstanceTemplateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata = a } :: InstanceTemplateResource s)
+
+instance P.HasNetworks (InstanceTemplateResource s) (TF.Attr s P.Text) where
+    networks =
+        lens (_networks :: InstanceTemplateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _networks = a } :: InstanceTemplateResource s)
+
+instance P.HasPackage (InstanceTemplateResource s) (TF.Attr s P.Text) where
+    package =
+        lens (_package :: InstanceTemplateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _package = a } :: InstanceTemplateResource s)
+
+instance P.HasTags (InstanceTemplateResource s) (TF.Attr s P.Text) where
+    tags =
+        lens (_tags :: InstanceTemplateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: InstanceTemplateResource s)
+
+instance P.HasTemplateName (InstanceTemplateResource s) (TF.Attr s P.Text) where
+    templateName =
+        lens (_template_name :: InstanceTemplateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _template_name = a } :: InstanceTemplateResource s)
+
+instance P.HasUserdata (InstanceTemplateResource s) (TF.Attr s P.Text) where
+    userdata =
+        lens (_userdata :: InstanceTemplateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _userdata = a } :: InstanceTemplateResource s)
+
+instance s ~ s' => P.HasComputedFirewallEnabled (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
+    computedFirewallEnabled =
+        (_firewall_enabled :: InstanceTemplateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedImage (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
+    computedImage =
+        (_image :: InstanceTemplateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
+    computedMetadata =
+        (_metadata :: InstanceTemplateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNetworks (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
+    computedNetworks =
+        (_networks :: InstanceTemplateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPackage (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
+    computedPackage =
+        (_package :: InstanceTemplateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
+    computedTags =
+        (_tags :: InstanceTemplateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTemplateName (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
+    computedTemplateName =
+        (_template_name :: InstanceTemplateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUserdata (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
+    computedUserdata =
+        (_userdata :: InstanceTemplateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instanceTemplateResource :: TF.Resource P.Triton (InstanceTemplateResource s)
+instanceTemplateResource =
+    TF.newResource "triton_instance_template" $
+        InstanceTemplateResource {
+              _firewall_enabled = TF.Nil
+            , _image = TF.Nil
+            , _metadata = TF.Nil
+            , _networks = TF.Nil
+            , _package = TF.Nil
+            , _tags = TF.Nil
+            , _template_name = TF.Nil
+            , _userdata = TF.Nil
+            }
+
 {- | The @triton_key@ Triton resource.
 
 The @triton_key@ resource represents an SSH key for a Triton account.
 -}
 data KeyResource s = KeyResource {
-      _key  :: !(TF.Attr s P.Text)
+      _key :: !(TF.Attr s P.Text)
     {- ^ - (string, Required, Change forces new resource) The SSH key material. In order to read this from a file, use the @file@ interpolation. -}
     , _name :: !(TF.Attr s P.Text)
     {- ^ - (string, Change forces new resource) The name of the key. If this is left empty, the name is inferred from the comment in the SSH key material. -}
@@ -412,47 +565,50 @@ note that when you want to specify the networks that you want the machine to
 be attached to, use the @networks@ parameter and not the @nic@ parameter.
 -}
 data MachineResource s = MachineResource {
-      _administrator_pw     :: !(TF.Attr s P.Text)
-    {- ^ - (string) The initial password for the Administrator user. Only used for Windows virtual machines. -}
-    , _affinity             :: !(TF.Attr s P.Text)
-    {- ^ - (list of Affinity rules, Optional) A list of valid <https://apidocs.joyent.com/cloudapi/#affinity-rules> to apply to the machine which assist in data center placement. Using this attribute will force resource creation to be serial. NOTE: Affinity rules are best guess and assist in placing instances across a data center. They're used at creation and not referenced after. -}
-    , _cloud_config         :: !(TF.Attr s P.Text)
-    {- ^ - (string) Cloud-init configuration for Linux brand machines, used instead of @user_data@ . -}
-    , _cns                  :: !(TF.Attr s P.Text)
-    {- ^ - (map of CNS attributes, Optional) A mapping of <https://docs.joyent.com/public-cloud/network/cns> attributes to apply to the machine. -}
-    , _firewall_enabled     :: !(TF.Attr s P.Text)
-    {- ^ - (boolean)  Default: @false@ Whether the cloud firewall should be enabled for this machine. -}
-    , _image                :: !(TF.Attr s P.Text)
-    {- ^ - (string, Required) The UUID of the image to provision. -}
-    , _locality             :: !(TF.Attr s P.Text)
+      _(Deprecated) locality :: !(TF.Attr s P.Text)
     {- ^ - (map of Locality hints, Optional) A mapping of <https://apidocs.joyent.com/cloudapi/#CreateMachine> attributes to apply to the machine that assist in data center placement. NOTE: Locality hints are only used at the time of machine creation and not referenced after. Locality is deprecated as of <https://apidocs.joyent.com/cloudapi/#830> . -}
-    , _metadata             :: !(TF.Attr s P.Text)
+    , _administrator_pw :: !(TF.Attr s P.Text)
+    {- ^ - (string) The initial password for the Administrator user. Only used for Windows virtual machines. -}
+    , _affinity :: !(TF.Attr s P.Text)
+    {- ^ - (list of Affinity rules, Optional) A list of valid <https://apidocs.joyent.com/cloudapi/#affinity-rules> to apply to the machine which assist in data center placement. Using this attribute will force resource creation to be serial. NOTE: Affinity rules are best guess and assist in placing instances across a data center. They're used at creation and not referenced after. -}
+    , _cloud_config :: !(TF.Attr s P.Text)
+    {- ^ - (string) Cloud-init configuration for Linux brand machines, used instead of @user_data@ . -}
+    , _cns :: !(TF.Attr s P.Text)
+    {- ^ - (map of CNS attributes, Optional) A mapping of <https://docs.joyent.com/public-cloud/network/cns> attributes to apply to the machine. -}
+    , _deletion_protection_enabled :: !(TF.Attr s P.Text)
+    {- ^ - (bool) Whether an instance is destroyable. Default is @false@ . -}
+    , _firewall_enabled :: !(TF.Attr s P.Text)
+    {- ^ - (boolean)  Default: @false@ Whether the cloud firewall should be enabled for this machine. -}
+    , _image :: !(TF.Attr s P.Text)
+    {- ^ - (string, Required) The UUID of the image to provision. -}
+    , _metadata :: !(TF.Attr s P.Text)
     {- ^ - (map, optional) A mapping of metadata to apply to the machine. -}
-    , _name                 :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ - (string) The friendly name for the machine. Triton will generate a name if one is not specified. -}
-    , _networks             :: !(TF.Attr s P.Text)
+    , _networks :: !(TF.Attr s P.Text)
     {- ^ - (list, optional) The list of networks to associate with the machine. The network ID will be in hex form, e.g @xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx@ . -}
-    , _package              :: !(TF.Attr s P.Text)
+    , _package :: !(TF.Attr s P.Text)
     {- ^ - (string, Required) The name of the package to use for provisioning. -}
     , _root_authorized_keys :: !(TF.Attr s P.Text)
     {- ^ - (string) The public keys authorized for root access via SSH to the machine. -}
-    , _tags                 :: !(TF.Attr s P.Text)
+    , _tags :: !(TF.Attr s P.Text)
     {- ^ - (map) A mapping of tags to apply to the machine. -}
-    , _user_data            :: !(TF.Attr s P.Text)
-    {- ^ - (string) Data to be copied to the machine on boot. -}
-    , _user_script          :: !(TF.Attr s P.Text)
-    {- ^ - (string) The user script to run on boot (every boot on SmartMachines). -}
+    , _user_data :: !(TF.Attr s P.Text)
+    {- ^ - (string) Data to be copied to the machine on boot. NOTE: The content of @user_data@ will not be executed on boot. The data will only be written to the file on each boot before the content of the script from @user_script@ is to be run. -}
+    , _user_script :: !(TF.Attr s P.Text)
+    {- ^ - (string) The user script to run on boot (every boot on SmartMachines). To learn more about both the user script and user data see the <https://docs.joyent.com/private-cloud/instances/using-mdata> documentation and the <https://eng.joyent.com/mdata/datadict.html> specification. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (MachineResource s) where
     toHCL MachineResource{..} = TF.inline $ catMaybes
-        [ TF.assign "administrator_pw" <$> TF.attribute _administrator_pw
+        [ TF.assign "(Deprecated) locality" <$> TF.attribute _(Deprecated) locality
+        , TF.assign "administrator_pw" <$> TF.attribute _administrator_pw
         , TF.assign "affinity" <$> TF.attribute _affinity
         , TF.assign "cloud_config" <$> TF.attribute _cloud_config
         , TF.assign "cns" <$> TF.attribute _cns
+        , TF.assign "deletion_protection_enabled" <$> TF.attribute _deletion_protection_enabled
         , TF.assign "firewall_enabled" <$> TF.attribute _firewall_enabled
         , TF.assign "image" <$> TF.attribute _image
-        , TF.assign "locality" <$> TF.attribute _locality
         , TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "networks" <$> TF.attribute _networks
@@ -462,6 +618,11 @@ instance TF.ToHCL (MachineResource s) where
         , TF.assign "user_data" <$> TF.attribute _user_data
         , TF.assign "user_script" <$> TF.attribute _user_script
         ]
+
+instance P.Has(Deprecated) locality (MachineResource s) (TF.Attr s P.Text) where
+    (Deprecated) locality =
+        lens (_(Deprecated) locality :: MachineResource s -> TF.Attr s P.Text)
+             (\s a -> s { _(Deprecated) locality = a } :: MachineResource s)
 
 instance P.HasAdministratorPw (MachineResource s) (TF.Attr s P.Text) where
     administratorPw =
@@ -483,6 +644,11 @@ instance P.HasCns (MachineResource s) (TF.Attr s P.Text) where
         lens (_cns :: MachineResource s -> TF.Attr s P.Text)
              (\s a -> s { _cns = a } :: MachineResource s)
 
+instance P.HasDeletionProtectionEnabled (MachineResource s) (TF.Attr s P.Text) where
+    deletionProtectionEnabled =
+        lens (_deletion_protection_enabled :: MachineResource s -> TF.Attr s P.Text)
+             (\s a -> s { _deletion_protection_enabled = a } :: MachineResource s)
+
 instance P.HasFirewallEnabled (MachineResource s) (TF.Attr s P.Text) where
     firewallEnabled =
         lens (_firewall_enabled :: MachineResource s -> TF.Attr s P.Text)
@@ -492,11 +658,6 @@ instance P.HasImage (MachineResource s) (TF.Attr s P.Text) where
     image =
         lens (_image :: MachineResource s -> TF.Attr s P.Text)
              (\s a -> s { _image = a } :: MachineResource s)
-
-instance P.HasLocality (MachineResource s) (TF.Attr s P.Text) where
-    locality =
-        lens (_locality :: MachineResource s -> TF.Attr s P.Text)
-             (\s a -> s { _locality = a } :: MachineResource s)
 
 instance P.HasMetadata (MachineResource s) (TF.Attr s P.Text) where
     metadata =
@@ -538,6 +699,11 @@ instance P.HasUserScript (MachineResource s) (TF.Attr s P.Text) where
         lens (_user_script :: MachineResource s -> TF.Attr s P.Text)
              (\s a -> s { _user_script = a } :: MachineResource s)
 
+instance s ~ s' => P.HasComputed(Deprecated) locality (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
+    computed(Deprecated) locality =
+        (_(Deprecated) locality :: MachineResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedAdministratorPw (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
     computedAdministratorPw =
         (_administrator_pw :: MachineResource s -> TF.Attr s P.Text)
@@ -567,6 +733,11 @@ instance s ~ s' => P.HasComputedCreated (TF.Ref s' (MachineResource s)) (TF.Attr
 instance s ~ s' => P.HasComputedDataset (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
     computedDataset x = TF.compute (TF.refKey x) "dataset"
 
+instance s ~ s' => P.HasComputedDeletionProtectionEnabled (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
+    computedDeletionProtectionEnabled =
+        (_deletion_protection_enabled :: MachineResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedDisk (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
     computedDisk x = TF.compute (TF.refKey x) "disk"
 
@@ -591,11 +762,6 @@ instance s ~ s' => P.HasComputedIp (TF.Ref s' (MachineResource s)) (TF.Attr s P.
 
 instance s ~ s' => P.HasComputedIps (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
     computedIps x = TF.compute (TF.refKey x) "ips"
-
-instance s ~ s' => P.HasComputedLocality (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedLocality =
-        (_locality :: MachineResource s -> TF.Attr s P.Text)
-            . TF.refValue
 
 instance s ~ s' => P.HasComputedMac (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
     computedMac x = TF.compute (TF.refKey x) "mac"
@@ -671,13 +837,14 @@ machineResource :: TF.Resource P.Triton (MachineResource s)
 machineResource =
     TF.newResource "triton_machine" $
         MachineResource {
-              _administrator_pw = TF.Nil
+              _(Deprecated) locality = TF.Nil
+            , _administrator_pw = TF.Nil
             , _affinity = TF.Nil
             , _cloud_config = TF.Nil
             , _cns = TF.Nil
+            , _deletion_protection_enabled = TF.Nil
             , _firewall_enabled = TF.Nil
             , _image = TF.Nil
-            , _locality = TF.Nil
             , _metadata = TF.Nil
             , _name = TF.Nil
             , _networks = TF.Nil
@@ -686,6 +853,71 @@ machineResource =
             , _tags = TF.Nil
             , _user_data = TF.Nil
             , _user_script = TF.Nil
+            }
+
+{- | The @triton_service_group@ Triton resource.
+
+The @triton_service_group@ resource represents a Triton Service Group. ~>
+NOTE: Triton Service Groups are in Preview and only supported in specific
+regions at this time. They will become Generally Available in the near
+future.
+-}
+data ServiceGroupResource s = ServiceGroupResource {
+      _capacity :: !(TF.Attr s P.Text)
+    {- ^ - (int, Optional) Number of instances to launch and monitor. -}
+    , _group_name :: !(TF.Attr s P.Text)
+    {- ^ - (string, Required) Friendly name for the service group. -}
+    , _template :: !(TF.Attr s P.Text)
+    {- ^ - (string, Required)  Identifier of an instance template. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ServiceGroupResource s) where
+    toHCL ServiceGroupResource{..} = TF.inline $ catMaybes
+        [ TF.assign "capacity" <$> TF.attribute _capacity
+        , TF.assign "group_name" <$> TF.attribute _group_name
+        , TF.assign "template" <$> TF.attribute _template
+        ]
+
+instance P.HasCapacity (ServiceGroupResource s) (TF.Attr s P.Text) where
+    capacity =
+        lens (_capacity :: ServiceGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _capacity = a } :: ServiceGroupResource s)
+
+instance P.HasGroupName (ServiceGroupResource s) (TF.Attr s P.Text) where
+    groupName =
+        lens (_group_name :: ServiceGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _group_name = a } :: ServiceGroupResource s)
+
+instance P.HasTemplate (ServiceGroupResource s) (TF.Attr s P.Text) where
+    template =
+        lens (_template :: ServiceGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _template = a } :: ServiceGroupResource s)
+
+instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (ServiceGroupResource s)) (TF.Attr s P.Text) where
+    computedCapacity =
+        (_capacity :: ServiceGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (ServiceGroupResource s)) (TF.Attr s P.Text) where
+    computedGroupName =
+        (_group_name :: ServiceGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedTemplate (TF.Ref s' (ServiceGroupResource s)) (TF.Attr s P.Text) where
+    computedTemplate =
+        (_template :: ServiceGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+serviceGroupResource :: TF.Resource P.Triton (ServiceGroupResource s)
+serviceGroupResource =
+    TF.newResource "triton_service_group" $
+        ServiceGroupResource {
+              _capacity = TF.Nil
+            , _group_name = TF.Nil
+            , _template = TF.Nil
             }
 
 {- | The @triton_snapshot@ Triton resource.
@@ -698,7 +930,7 @@ instances that are not of brand @kvm@ .
 data SnapshotResource s = SnapshotResource {
       _machine_id :: !(TF.Attr s P.Text)
     {- ^ - (string, Required) The ID of the machine of which to take a snapshot. -}
-    , _name       :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ - (string, Required) The name for the snapshot. -}
     } deriving (Show, Eq)
 
@@ -751,9 +983,9 @@ cannot, on its own , reach another VLAN.
 data VlanResource s = VlanResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ - (string, Optional) Description of the VLAN -}
-    , _name        :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ - (string, Required) Unique name to identify VLAN -}
-    , _vlan_id     :: !(TF.Attr s P.Text)
+    , _vlan_id :: !(TF.Attr s P.Text)
     {- ^ - (int, Required, Change forces new resource) Number between 0-4095 indicating VLAN ID -}
     } deriving (Show, Eq)
 

@@ -27,11 +27,20 @@ module Terrafomo.OPC.DataSource
       ComputeImageListEntryData (..)
     , computeImageListEntryData
 
+    , ComputeIpAddressReservationData (..)
+    , computeIpAddressReservationData
+
+    , ComputeIpReservationData (..)
+    , computeIpReservationData
+
     , ComputeMachineImageData (..)
     , computeMachineImageData
 
     , ComputeNetworkInterfaceData (..)
     , computeNetworkInterfaceData
+
+    , ComputeSshKeyData (..)
+    , computeSshKeyData
 
     , ComputeStorageVolumeSnapshotData (..)
     , computeStorageVolumeSnapshotData
@@ -56,6 +65,7 @@ module Terrafomo.OPC.DataSource
     , P.HasComputedCollocated (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDns (..)
+    , P.HasComputedEnabled (..)
     , P.HasComputedEntry (..)
     , P.HasComputedErrorReason (..)
     , P.HasComputedFile (..)
@@ -65,9 +75,12 @@ module Terrafomo.OPC.DataSource
     , P.HasComputedInstanceId (..)
     , P.HasComputedInstanceName (..)
     , P.HasComputedInterface (..)
+    , P.HasComputedIp (..)
     , P.HasComputedIpAddress (..)
+    , P.HasComputedIpAddressPool (..)
     , P.HasComputedIpNetwork (..)
     , P.HasComputedIsDefaultGateway (..)
+    , P.HasComputedKey (..)
     , P.HasComputedMacAddress (..)
     , P.HasComputedMachineImageName (..)
     , P.HasComputedMachineImages (..)
@@ -75,7 +88,9 @@ module Terrafomo.OPC.DataSource
     , P.HasComputedName (..)
     , P.HasComputedNameServers (..)
     , P.HasComputedNat (..)
+    , P.HasComputedParentPool (..)
     , P.HasComputedParentVolumeBootable (..)
+    , P.HasComputedPermanent (..)
     , P.HasComputedPlatform (..)
     , P.HasComputedProperty (..)
     , P.HasComputedSearchDomains (..)
@@ -92,6 +107,7 @@ module Terrafomo.OPC.DataSource
     , P.HasComputedTags (..)
     , P.HasComputedTransitFlag (..)
     , P.HasComputedUri (..)
+    , P.HasComputedUsed (..)
     , P.HasComputedVersion (..)
     , P.HasComputedVnic (..)
     , P.HasComputedVnicSets (..)
@@ -193,6 +209,100 @@ computeImageListEntryData =
               _entry = TF.Nil
             , _image_list = TF.Nil
             , _version = TF.Nil
+            }
+
+{- | The @opc_compute_ip_address_reservation@ OPC datasource.
+
+Use this data source to access the attributes of an existing IP Network IP
+Address Reservation.
+-}
+data ComputeIpAddressReservationData s = ComputeIpAddressReservationData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the ip address reservation. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeIpAddressReservationData s) where
+    toHCL ComputeIpAddressReservationData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (ComputeIpAddressReservationData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeIpAddressReservationData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeIpAddressReservationData s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+
+instance s ~ s' => P.HasComputedIpAddressPool (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
+    computedIpAddressPool x = TF.compute (TF.refKey x) "ip_address_pool"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeIpAddressReservationData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
+    computedUri x = TF.compute (TF.refKey x) "uri"
+
+computeIpAddressReservationData :: TF.DataSource P.OPC (ComputeIpAddressReservationData s)
+computeIpAddressReservationData =
+    TF.newDataSource "opc_compute_ip_address_reservation" $
+        ComputeIpAddressReservationData {
+              _name = TF.Nil
+            }
+
+{- | The @opc_compute_ip_reservation@ OPC datasource.
+
+Use this data source to access the attributes of an existing Shared Network
+IP Reservation.
+-}
+data ComputeIpReservationData s = ComputeIpReservationData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) Name of the IP Reservation. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeIpReservationData s) where
+    toHCL ComputeIpReservationData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (ComputeIpReservationData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeIpReservationData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeIpReservationData s)
+
+instance s ~ s' => P.HasComputedIp (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Text) where
+    computedIp x = TF.compute (TF.refKey x) "ip"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeIpReservationData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedParentPool (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Text) where
+    computedParentPool x = TF.compute (TF.refKey x) "parent_pool"
+
+instance s ~ s' => P.HasComputedPermanent (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Text) where
+    computedPermanent x = TF.compute (TF.refKey x) "permanent"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedUsed (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Text) where
+    computedUsed x = TF.compute (TF.refKey x) "used"
+
+computeIpReservationData :: TF.DataSource P.OPC (ComputeIpReservationData s)
+computeIpReservationData =
+    TF.newDataSource "opc_compute_ip_reservation" $
+        ComputeIpReservationData {
+              _name = TF.Nil
             }
 
 {- | The @opc_compute_machine_image@ OPC datasource.
@@ -364,6 +474,43 @@ computeNetworkInterfaceData =
               _instance_id = TF.Nil
             , _instance_name = TF.Nil
             , _interface = TF.Nil
+            }
+
+{- | The @opc_compute_ssh_key@ OPC datasource.
+
+Use this data source to access the attributes of an SSH Key.
+-}
+data ComputeSshKeyData s = ComputeSshKeyData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The unique (within this identity domain) name of the SSH key. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeSshKeyData s) where
+    toHCL ComputeSshKeyData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (ComputeSshKeyData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeSshKeyData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeSshKeyData s)
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeSshKeyData s)) (TF.Attr s P.Text) where
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (ComputeSshKeyData s)) (TF.Attr s P.Text) where
+    computedKey x = TF.compute (TF.refKey x) "key"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSshKeyData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeSshKeyData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+computeSshKeyData :: TF.DataSource P.OPC (ComputeSshKeyData s)
+computeSshKeyData =
+    TF.newDataSource "opc_compute_ssh_key" $
+        ComputeSshKeyData {
+              _name = TF.Nil
             }
 
 {- | The @opc_compute_storage_volume_snapshot@ OPC datasource.

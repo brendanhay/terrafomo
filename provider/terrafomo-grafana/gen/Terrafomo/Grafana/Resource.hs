@@ -237,7 +237,7 @@ data DataSourceResource s = DataSourceResource {
     , _type'               :: !(TF.Attr s P.Text)
     {- ^ (Required) The data source type. Must be one of the data source keywords supported by the Grafana server. -}
     , _url                 :: !(TF.Attr s P.Text)
-    {- ^ (Required) The URL for the data source. The type of URL required varies depending on the chosen data source type. -}
+    {- ^ (Optional) The URL for the data source. The type of URL required varies depending on the chosen data source type. -}
     , _username            :: !(TF.Attr s P.Text)
     {- ^ (Required by some data source types) The username to use to authenticate to the data source. -}
     } deriving (Show, Eq)

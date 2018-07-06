@@ -36,6 +36,9 @@ module Terrafomo.Gitlab.Resource
     , ProjectHookResource (..)
     , projectHookResource
 
+    , ProjectMembershipResource (..)
+    , projectMembershipResource
+
     , ProjectResource (..)
     , projectResource
 
@@ -44,6 +47,7 @@ module Terrafomo.Gitlab.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
+    , P.HasAccessLevel (..)
     , P.HasCanCreateGroup (..)
     , P.HasCanPush (..)
     , P.HasColor (..)
@@ -52,6 +56,7 @@ module Terrafomo.Gitlab.Resource
     , P.HasEmail (..)
     , P.HasEnableSslVerification (..)
     , P.HasIsAdmin (..)
+    , P.HasIsExternal (..)
     , P.HasIssuesEnabled (..)
     , P.HasIssuesEvents (..)
     , P.HasJobEvents (..)
@@ -67,6 +72,7 @@ module Terrafomo.Gitlab.Resource
     , P.HasPath (..)
     , P.HasPipelineEvents (..)
     , P.HasProject (..)
+    , P.HasProjectId (..)
     , P.HasProjectsLimit (..)
     , P.HasPushEvents (..)
     , P.HasRequestAccessEnabled (..)
@@ -76,12 +82,14 @@ module Terrafomo.Gitlab.Resource
     , P.HasTitle (..)
     , P.HasToken (..)
     , P.HasUrl (..)
+    , P.HasUserId (..)
     , P.HasUsername (..)
     , P.HasVisibilityLevel (..)
     , P.HasWikiEnabled (..)
     , P.HasWikiPageEvents (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAccessLevel (..)
     , P.HasComputedCanCreateGroup (..)
     , P.HasComputedCanPush (..)
     , P.HasComputedColor (..)
@@ -92,6 +100,7 @@ module Terrafomo.Gitlab.Resource
     , P.HasComputedHttpUrlToRepo (..)
     , P.HasComputedId (..)
     , P.HasComputedIsAdmin (..)
+    , P.HasComputedIsExternal (..)
     , P.HasComputedIssuesEnabled (..)
     , P.HasComputedIssuesEvents (..)
     , P.HasComputedJobEvents (..)
@@ -107,6 +116,7 @@ module Terrafomo.Gitlab.Resource
     , P.HasComputedPath (..)
     , P.HasComputedPipelineEvents (..)
     , P.HasComputedProject (..)
+    , P.HasComputedProjectId (..)
     , P.HasComputedProjectsLimit (..)
     , P.HasComputedPushEvents (..)
     , P.HasComputedRequestAccessEnabled (..)
@@ -117,6 +127,7 @@ module Terrafomo.Gitlab.Resource
     , P.HasComputedTitle (..)
     , P.HasComputedToken (..)
     , P.HasComputedUrl (..)
+    , P.HasComputedUserId (..)
     , P.HasComputedUsername (..)
     , P.HasComputedVisibilityLevel (..)
     , P.HasComputedWebUrl (..)
@@ -612,6 +623,69 @@ projectHookResource =
             , _wiki_page_events = TF.Nil
             }
 
+{- | The @gitlab_project_membership@ Gitlab resource.
+
+This resource allows you to add a current user to an existing project with a
+set access level.
+-}
+data ProjectMembershipResource s = ProjectMembershipResource {
+      _access_level :: !(TF.Attr s P.Text)
+    {- ^ (Required) One of five levels of access to the project. -}
+    , _project_id   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The id of the project. -}
+    , _user_id      :: !(TF.Attr s P.Text)
+    {- ^ (Required) The id of the user. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ProjectMembershipResource s) where
+    toHCL ProjectMembershipResource{..} = TF.inline $ catMaybes
+        [ TF.assign "access_level" <$> TF.attribute _access_level
+        , TF.assign "project_id" <$> TF.attribute _project_id
+        , TF.assign "user_id" <$> TF.attribute _user_id
+        ]
+
+instance P.HasAccessLevel (ProjectMembershipResource s) (TF.Attr s P.Text) where
+    accessLevel =
+        lens (_access_level :: ProjectMembershipResource s -> TF.Attr s P.Text)
+             (\s a -> s { _access_level = a } :: ProjectMembershipResource s)
+
+instance P.HasProjectId (ProjectMembershipResource s) (TF.Attr s P.Text) where
+    projectId =
+        lens (_project_id :: ProjectMembershipResource s -> TF.Attr s P.Text)
+             (\s a -> s { _project_id = a } :: ProjectMembershipResource s)
+
+instance P.HasUserId (ProjectMembershipResource s) (TF.Attr s P.Text) where
+    userId =
+        lens (_user_id :: ProjectMembershipResource s -> TF.Attr s P.Text)
+             (\s a -> s { _user_id = a } :: ProjectMembershipResource s)
+
+instance s ~ s' => P.HasComputedAccessLevel (TF.Ref s' (ProjectMembershipResource s)) (TF.Attr s P.Text) where
+    computedAccessLevel =
+        (_access_level :: ProjectMembershipResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectMembershipResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (ProjectMembershipResource s)) (TF.Attr s P.Text) where
+    computedProjectId =
+        (_project_id :: ProjectMembershipResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUserId (TF.Ref s' (ProjectMembershipResource s)) (TF.Attr s P.Text) where
+    computedUserId =
+        (_user_id :: ProjectMembershipResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+projectMembershipResource :: TF.Resource P.Gitlab (ProjectMembershipResource s)
+projectMembershipResource =
+    TF.newResource "gitlab_project_membership" $
+        ProjectMembershipResource {
+              _access_level = TF.Nil
+            , _project_id = TF.Nil
+            , _user_id = TF.Nil
+            }
+
 {- | The @gitlab_project@ Gitlab resource.
 
 This resource allows you to create and manage projects within your GitLab
@@ -795,6 +869,8 @@ data UserResource s = UserResource {
     {- ^ (Required) The e-mail address of the user. -}
     , _is_admin          :: !(TF.Attr s P.Text)
     {- ^ (Optional) Boolean, defaults to false.  Whether to enable administrative priviledges for the user. -}
+    , _is_external       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Boolean, defaults to false. Whether a user has access only to some internal or private projects. External users can only access projects to which they are explicitly granted access. -}
     , _name              :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the user. -}
     , _password          :: !(TF.Attr s P.Text)
@@ -812,6 +888,7 @@ instance TF.ToHCL (UserResource s) where
         [ TF.assign "can_create_group" <$> TF.attribute _can_create_group
         , TF.assign "email" <$> TF.attribute _email
         , TF.assign "is_admin" <$> TF.attribute _is_admin
+        , TF.assign "is_external" <$> TF.attribute _is_external
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "password" <$> TF.attribute _password
         , TF.assign "projects_limit" <$> TF.attribute _projects_limit
@@ -833,6 +910,11 @@ instance P.HasIsAdmin (UserResource s) (TF.Attr s P.Text) where
     isAdmin =
         lens (_is_admin :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _is_admin = a } :: UserResource s)
+
+instance P.HasIsExternal (UserResource s) (TF.Attr s P.Text) where
+    isExternal =
+        lens (_is_external :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _is_external = a } :: UserResource s)
 
 instance P.HasName (UserResource s) (TF.Attr s P.Text) where
     name =
@@ -877,6 +959,11 @@ instance s ~ s' => P.HasComputedIsAdmin (TF.Ref s' (UserResource s)) (TF.Attr s 
         (_is_admin :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedIsExternal (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
+    computedIsExternal =
+        (_is_external :: UserResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: UserResource s -> TF.Attr s P.Text)
@@ -909,6 +996,7 @@ userResource =
               _can_create_group = TF.Nil
             , _email = TF.Nil
             , _is_admin = TF.Nil
+            , _is_external = TF.Nil
             , _name = TF.Nil
             , _password = TF.Nil
             , _projects_limit = TF.Nil

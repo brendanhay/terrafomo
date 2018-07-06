@@ -33,6 +33,7 @@ module Terrafomo.OpenStack.Lens
     , HasAttachMode (..)
     , HasAttributes (..)
     , HasAudited (..)
+    , HasAuthAlgorithm (..)
     , HasAvailabilityZone (..)
     , HasAvailabilityZoneHints (..)
     , HasBlockDevice (..)
@@ -82,29 +83,41 @@ module Terrafomo.OpenStack.Lens
     , HasDistributed (..)
     , HasDnsNameservers (..)
     , HasDomainId (..)
+    , HasDpd (..)
     , HasEmail (..)
     , HasEnableDhcp (..)
+    , HasEnableOnlineResize (..)
     , HasEnableSnat (..)
     , HasEnabled (..)
+    , HasEncapsulationMode (..)
+    , HasEncryptionAlgorithm (..)
+    , HasEndpoints (..)
     , HasEtag (..)
     , HasEthertype (..)
     , HasExpectedCodes (..)
+    , HasExternal (..)
     , HasExternalFixedIp (..)
     , HasExternalNetworkId (..)
     , HasExtra (..)
+    , HasExtraSpecs (..)
     , HasFixedIp (..)
     , HasFlavor (..)
     , HasFlavorId (..)
     , HasFlavorName (..)
     , HasFloatingIp (..)
     , HasForceDelete (..)
+    , HasForceDestroy (..)
     , HasGatewayIp (..)
+    , HasGroupId (..)
     , HasHostName (..)
     , HasHostRoutes (..)
     , HasHttpMethod (..)
+    , HasIdpId (..)
     , HasIgnoreChangePasswordUponFirstUse (..)
     , HasIgnoreLockoutFailureAttempts (..)
     , HasIgnorePasswordExpiry (..)
+    , HasIkeVersion (..)
+    , HasIkepolicyId (..)
     , HasImageCachePath (..)
     , HasImageId (..)
     , HasImageName (..)
@@ -114,6 +127,7 @@ module Terrafomo.OpenStack.Lens
     , HasInstanceId (..)
     , HasIpAddress (..)
     , HasIpVersion (..)
+    , HasIpsecpolicyId (..)
     , HasIpv6AddressMode (..)
     , HasIpv6RaMode (..)
     , HasIsDefault (..)
@@ -122,16 +136,20 @@ module Terrafomo.OpenStack.Lens
     , HasKeyPair (..)
     , HasLbMethod (..)
     , HasLbProvider (..)
+    , HasLifetime (..)
     , HasListenerId (..)
     , HasLoadbalancerId (..)
     , HasLoadbalancerProvider (..)
+    , HasLocalEpGroupId (..)
     , HasLocalFilePath (..)
+    , HasLocalId (..)
     , HasMacAddress (..)
     , HasMasters (..)
     , HasMatchingSubnetCidr (..)
     , HasMaxPrefixlen (..)
     , HasMaxRetries (..)
     , HasMember (..)
+    , HasMemberStatus (..)
     , HasMetadata (..)
     , HasMinDisk (..)
     , HasMinDiskGb (..)
@@ -140,6 +158,7 @@ module Terrafomo.OpenStack.Lens
     , HasMinRamMb (..)
     , HasMonitorIds (..)
     , HasMostRecent (..)
+    , HasMtu (..)
     , HasMultiFactorAuthEnabled (..)
     , HasMultiFactorAuthRule (..)
     , HasMultipath (..)
@@ -155,8 +174,15 @@ module Terrafomo.OpenStack.Lens
     , HasOwner (..)
     , HasParentId (..)
     , HasPassword (..)
+    , HasPasswordExpiresAt (..)
+    , HasPeerAddress (..)
+    , HasPeerCidrs (..)
+    , HasPeerEpGroupId (..)
+    , HasPeerId (..)
     , HasPersistence (..)
     , HasPersonality (..)
+    , HasPfs (..)
+    , HasPhase1NegotiationMode (..)
     , HasPlatform (..)
     , HasPolicies (..)
     , HasPolicyId (..)
@@ -166,18 +192,22 @@ module Terrafomo.OpenStack.Lens
     , HasPortId (..)
     , HasPortRangeMax (..)
     , HasPortRangeMin (..)
+    , HasPowerState (..)
     , HasPrefixes (..)
     , HasProjectId (..)
     , HasProperties (..)
     , HasProtected (..)
     , HasProtocol (..)
+    , HasProtocolId (..)
     , HasProtocolPort (..)
+    , HasPsk (..)
     , HasPublicKey (..)
     , HasRam (..)
     , HasRecords (..)
     , HasRegion (..)
     , HasRemoteGroupId (..)
     , HasRemoteIpPrefix (..)
+    , HasRoleId (..)
     , HasRouterId (..)
     , HasRule (..)
     , HasRules (..)
@@ -210,19 +240,25 @@ module Terrafomo.OpenStack.Lens
     , HasTags (..)
     , HasTenantId (..)
     , HasTimeout (..)
+    , HasTransformProtocol (..)
     , HasTtl (..)
     , HasType' (..)
+    , HasUniqueId (..)
     , HasUrlPath (..)
     , HasUser (..)
     , HasUserData (..)
+    , HasUserId (..)
     , HasValueSpecs (..)
     , HasVcpus (..)
     , HasVendorOptions (..)
+    , HasVerifyChecksum (..)
     , HasVipAddress (..)
     , HasVipSubnetId (..)
     , HasVisibility (..)
     , HasVolumeId (..)
     , HasVolumeType (..)
+    , HasVpnserviceId (..)
+    , HasWaitUntilAssociated (..)
     , HasWeight (..)
     , HasWwnn (..)
     , HasWwpn (..)
@@ -246,6 +282,7 @@ module Terrafomo.OpenStack.Lens
     , HasComputedAttachment (..)
     , HasComputedAttributes (..)
     , HasComputedAudited (..)
+    , HasComputedAuthAlgorithm (..)
     , HasComputedAvailabilityZone (..)
     , HasComputedAvailabilityZoneHints (..)
     , HasComputedBlockDevice (..)
@@ -303,18 +340,27 @@ module Terrafomo.OpenStack.Lens
     , HasComputedDistributed (..)
     , HasComputedDnsNameservers (..)
     , HasComputedDomainId (..)
+    , HasComputedDpd (..)
     , HasComputedDriverVolumeType (..)
     , HasComputedEmail (..)
     , HasComputedEnableDhcp (..)
+    , HasComputedEnableOnlineResize (..)
     , HasComputedEnableSnat (..)
     , HasComputedEnabled (..)
+    , HasComputedEncapsulationMode (..)
+    , HasComputedEncryptionAlgorithm (..)
+    , HasComputedEndpoints (..)
     , HasComputedEtag (..)
     , HasComputedEthertype (..)
     , HasComputedExpectedCodes (..)
+    , HasComputedExternal (..)
     , HasComputedExternalFixedIp (..)
     , HasComputedExternalGateway (..)
     , HasComputedExternalNetworkId (..)
+    , HasComputedExternalV4Ip (..)
+    , HasComputedExternalV6Ip (..)
     , HasComputedExtra (..)
+    , HasComputedExtraSpecs (..)
     , HasComputedFile (..)
     , HasComputedFingerprint (..)
     , HasComputedFixedIp (..)
@@ -325,15 +371,20 @@ module Terrafomo.OpenStack.Lens
     , HasComputedFlavorName (..)
     , HasComputedFloatingIp (..)
     , HasComputedForceDelete (..)
+    , HasComputedForceDestroy (..)
     , HasComputedGatewayIp (..)
+    , HasComputedGroupId (..)
     , HasComputedHost (..)
     , HasComputedHostName (..)
     , HasComputedHostRoutes (..)
     , HasComputedHttpMethod (..)
     , HasComputedId (..)
+    , HasComputedIdpId (..)
     , HasComputedIgnoreChangePasswordUponFirstUse (..)
     , HasComputedIgnoreLockoutFailureAttempts (..)
     , HasComputedIgnorePasswordExpiry (..)
+    , HasComputedIkeVersion (..)
+    , HasComputedIkepolicyId (..)
     , HasComputedImageCachePath (..)
     , HasComputedImageId (..)
     , HasComputedImageName (..)
@@ -343,6 +394,7 @@ module Terrafomo.OpenStack.Lens
     , HasComputedInstanceId (..)
     , HasComputedIpAddress (..)
     , HasComputedIpVersion (..)
+    , HasComputedIpsecpolicyId (..)
     , HasComputedIpv6AddressMode (..)
     , HasComputedIpv6RaMode (..)
     , HasComputedIsDefault (..)
@@ -352,10 +404,13 @@ module Terrafomo.OpenStack.Lens
     , HasComputedLastModified (..)
     , HasComputedLbMethod (..)
     , HasComputedLbProvider (..)
+    , HasComputedLifetime (..)
     , HasComputedListenerId (..)
     , HasComputedLoadbalancerId (..)
     , HasComputedLoadbalancerProvider (..)
+    , HasComputedLocalEpGroupId (..)
     , HasComputedLocalFilePath (..)
+    , HasComputedLocalId (..)
     , HasComputedMac (..)
     , HasComputedMacAddress (..)
     , HasComputedMasters (..)
@@ -363,6 +418,7 @@ module Terrafomo.OpenStack.Lens
     , HasComputedMaxPrefixlen (..)
     , HasComputedMaxRetries (..)
     , HasComputedMember (..)
+    , HasComputedMemberStatus (..)
     , HasComputedMembers (..)
     , HasComputedMetadata (..)
     , HasComputedMinDisk (..)
@@ -374,6 +430,7 @@ module Terrafomo.OpenStack.Lens
     , HasComputedMonitorIds (..)
     , HasComputedMostRecent (..)
     , HasComputedMountPointBase (..)
+    , HasComputedMtu (..)
     , HasComputedMultiFactorAuthEnabled (..)
     , HasComputedMultiFactorAuthRule (..)
     , HasComputedMultipath (..)
@@ -389,8 +446,15 @@ module Terrafomo.OpenStack.Lens
     , HasComputedOwner (..)
     , HasComputedParentId (..)
     , HasComputedPassword (..)
+    , HasComputedPasswordExpiresAt (..)
+    , HasComputedPeerAddress (..)
+    , HasComputedPeerCidrs (..)
+    , HasComputedPeerEpGroupId (..)
+    , HasComputedPeerId (..)
     , HasComputedPersistence (..)
     , HasComputedPersonality (..)
+    , HasComputedPfs (..)
+    , HasComputedPhase1NegotiationMode (..)
     , HasComputedPlatform (..)
     , HasComputedPolicies (..)
     , HasComputedPolicyId (..)
@@ -400,13 +464,19 @@ module Terrafomo.OpenStack.Lens
     , HasComputedPortId (..)
     , HasComputedPortRangeMax (..)
     , HasComputedPortRangeMin (..)
+    , HasComputedPowerState (..)
     , HasComputedPrefixes (..)
     , HasComputedPrivateKey (..)
+    , HasComputedProjectDomainId (..)
+    , HasComputedProjectDomainName (..)
     , HasComputedProjectId (..)
+    , HasComputedProjectName (..)
     , HasComputedProperties (..)
     , HasComputedProtected (..)
     , HasComputedProtocol (..)
+    , HasComputedProtocolId (..)
     , HasComputedProtocolPort (..)
+    , HasComputedPsk (..)
     , HasComputedPublicKey (..)
     , HasComputedRam (..)
     , HasComputedRecords (..)
@@ -414,6 +484,8 @@ module Terrafomo.OpenStack.Lens
     , HasComputedRemoteGroupId (..)
     , HasComputedRemoteIpPrefix (..)
     , HasComputedRevisionNumber (..)
+    , HasComputedRoleId (..)
+    , HasComputedRoles (..)
     , HasComputedRouterId (..)
     , HasComputedRule (..)
     , HasComputedRules (..)
@@ -452,18 +524,25 @@ module Terrafomo.OpenStack.Lens
     , HasComputedTimeout (..)
     , HasComputedTransId (..)
     , HasComputedTransferredAt (..)
+    , HasComputedTransformProtocol (..)
     , HasComputedTtl (..)
     , HasComputedType' (..)
+    , HasComputedUniqueId (..)
     , HasComputedUpdateAt (..)
     , HasComputedUpdatedAt (..)
     , HasComputedUrlPath (..)
     , HasComputedUser (..)
     , HasComputedUserData (..)
+    , HasComputedUserDomainId (..)
+    , HasComputedUserDomainName (..)
+    , HasComputedUserId (..)
+    , HasComputedUserName (..)
     , HasComputedUuid (..)
     , HasComputedValue (..)
     , HasComputedValueSpecs (..)
     , HasComputedVcpus (..)
     , HasComputedVendorOptions (..)
+    , HasComputedVerifyChecksum (..)
     , HasComputedVersion (..)
     , HasComputedVipAddress (..)
     , HasComputedVipPortId (..)
@@ -471,6 +550,8 @@ module Terrafomo.OpenStack.Lens
     , HasComputedVisibility (..)
     , HasComputedVolumeId (..)
     , HasComputedVolumeType (..)
+    , HasComputedVpnserviceId (..)
+    , HasComputedWaitUntilAssociated (..)
     , HasComputedWeight (..)
     , HasComputedWwnn (..)
     , HasComputedWwpn (..)
@@ -549,6 +630,12 @@ class HasAudited a b | a -> b where
 
 instance HasAudited a b => HasAudited (TF.Schema l p a) b where
     audited = TF.configuration . audited
+
+class HasAuthAlgorithm a b | a -> b where
+    authAlgorithm :: Lens' a b
+
+instance HasAuthAlgorithm a b => HasAuthAlgorithm (TF.Schema l p a) b where
+    authAlgorithm = TF.configuration . authAlgorithm
 
 class HasAvailabilityZone a b | a -> b where
     availabilityZone :: Lens' a b
@@ -844,6 +931,12 @@ class HasDomainId a b | a -> b where
 instance HasDomainId a b => HasDomainId (TF.Schema l p a) b where
     domainId = TF.configuration . domainId
 
+class HasDpd a b | a -> b where
+    dpd :: Lens' a b
+
+instance HasDpd a b => HasDpd (TF.Schema l p a) b where
+    dpd = TF.configuration . dpd
+
 class HasEmail a b | a -> b where
     email :: Lens' a b
 
@@ -856,6 +949,12 @@ class HasEnableDhcp a b | a -> b where
 instance HasEnableDhcp a b => HasEnableDhcp (TF.Schema l p a) b where
     enableDhcp = TF.configuration . enableDhcp
 
+class HasEnableOnlineResize a b | a -> b where
+    enableOnlineResize :: Lens' a b
+
+instance HasEnableOnlineResize a b => HasEnableOnlineResize (TF.Schema l p a) b where
+    enableOnlineResize = TF.configuration . enableOnlineResize
+
 class HasEnableSnat a b | a -> b where
     enableSnat :: Lens' a b
 
@@ -867,6 +966,24 @@ class HasEnabled a b | a -> b where
 
 instance HasEnabled a b => HasEnabled (TF.Schema l p a) b where
     enabled = TF.configuration . enabled
+
+class HasEncapsulationMode a b | a -> b where
+    encapsulationMode :: Lens' a b
+
+instance HasEncapsulationMode a b => HasEncapsulationMode (TF.Schema l p a) b where
+    encapsulationMode = TF.configuration . encapsulationMode
+
+class HasEncryptionAlgorithm a b | a -> b where
+    encryptionAlgorithm :: Lens' a b
+
+instance HasEncryptionAlgorithm a b => HasEncryptionAlgorithm (TF.Schema l p a) b where
+    encryptionAlgorithm = TF.configuration . encryptionAlgorithm
+
+class HasEndpoints a b | a -> b where
+    endpoints :: Lens' a b
+
+instance HasEndpoints a b => HasEndpoints (TF.Schema l p a) b where
+    endpoints = TF.configuration . endpoints
 
 class HasEtag a b | a -> b where
     etag :: Lens' a b
@@ -886,6 +1003,12 @@ class HasExpectedCodes a b | a -> b where
 instance HasExpectedCodes a b => HasExpectedCodes (TF.Schema l p a) b where
     expectedCodes = TF.configuration . expectedCodes
 
+class HasExternal a b | a -> b where
+    external :: Lens' a b
+
+instance HasExternal a b => HasExternal (TF.Schema l p a) b where
+    external = TF.configuration . external
+
 class HasExternalFixedIp a b | a -> b where
     externalFixedIp :: Lens' a b
 
@@ -903,6 +1026,12 @@ class HasExtra a b | a -> b where
 
 instance HasExtra a b => HasExtra (TF.Schema l p a) b where
     extra = TF.configuration . extra
+
+class HasExtraSpecs a b | a -> b where
+    extraSpecs :: Lens' a b
+
+instance HasExtraSpecs a b => HasExtraSpecs (TF.Schema l p a) b where
+    extraSpecs = TF.configuration . extraSpecs
 
 class HasFixedIp a b | a -> b where
     fixedIp :: Lens' a b
@@ -940,11 +1069,23 @@ class HasForceDelete a b | a -> b where
 instance HasForceDelete a b => HasForceDelete (TF.Schema l p a) b where
     forceDelete = TF.configuration . forceDelete
 
+class HasForceDestroy a b | a -> b where
+    forceDestroy :: Lens' a b
+
+instance HasForceDestroy a b => HasForceDestroy (TF.Schema l p a) b where
+    forceDestroy = TF.configuration . forceDestroy
+
 class HasGatewayIp a b | a -> b where
     gatewayIp :: Lens' a b
 
 instance HasGatewayIp a b => HasGatewayIp (TF.Schema l p a) b where
     gatewayIp = TF.configuration . gatewayIp
+
+class HasGroupId a b | a -> b where
+    groupId :: Lens' a b
+
+instance HasGroupId a b => HasGroupId (TF.Schema l p a) b where
+    groupId = TF.configuration . groupId
 
 class HasHostName a b | a -> b where
     hostName :: Lens' a b
@@ -964,6 +1105,12 @@ class HasHttpMethod a b | a -> b where
 instance HasHttpMethod a b => HasHttpMethod (TF.Schema l p a) b where
     httpMethod = TF.configuration . httpMethod
 
+class HasIdpId a b | a -> b where
+    idpId :: Lens' a b
+
+instance HasIdpId a b => HasIdpId (TF.Schema l p a) b where
+    idpId = TF.configuration . idpId
+
 class HasIgnoreChangePasswordUponFirstUse a b | a -> b where
     ignoreChangePasswordUponFirstUse :: Lens' a b
 
@@ -981,6 +1128,18 @@ class HasIgnorePasswordExpiry a b | a -> b where
 
 instance HasIgnorePasswordExpiry a b => HasIgnorePasswordExpiry (TF.Schema l p a) b where
     ignorePasswordExpiry = TF.configuration . ignorePasswordExpiry
+
+class HasIkeVersion a b | a -> b where
+    ikeVersion :: Lens' a b
+
+instance HasIkeVersion a b => HasIkeVersion (TF.Schema l p a) b where
+    ikeVersion = TF.configuration . ikeVersion
+
+class HasIkepolicyId a b | a -> b where
+    ikepolicyId :: Lens' a b
+
+instance HasIkepolicyId a b => HasIkepolicyId (TF.Schema l p a) b where
+    ikepolicyId = TF.configuration . ikepolicyId
 
 class HasImageCachePath a b | a -> b where
     imageCachePath :: Lens' a b
@@ -1036,6 +1195,12 @@ class HasIpVersion a b | a -> b where
 instance HasIpVersion a b => HasIpVersion (TF.Schema l p a) b where
     ipVersion = TF.configuration . ipVersion
 
+class HasIpsecpolicyId a b | a -> b where
+    ipsecpolicyId :: Lens' a b
+
+instance HasIpsecpolicyId a b => HasIpsecpolicyId (TF.Schema l p a) b where
+    ipsecpolicyId = TF.configuration . ipsecpolicyId
+
 class HasIpv6AddressMode a b | a -> b where
     ipv6AddressMode :: Lens' a b
 
@@ -1084,6 +1249,12 @@ class HasLbProvider a b | a -> b where
 instance HasLbProvider a b => HasLbProvider (TF.Schema l p a) b where
     lbProvider = TF.configuration . lbProvider
 
+class HasLifetime a b | a -> b where
+    lifetime :: Lens' a b
+
+instance HasLifetime a b => HasLifetime (TF.Schema l p a) b where
+    lifetime = TF.configuration . lifetime
+
 class HasListenerId a b | a -> b where
     listenerId :: Lens' a b
 
@@ -1102,11 +1273,23 @@ class HasLoadbalancerProvider a b | a -> b where
 instance HasLoadbalancerProvider a b => HasLoadbalancerProvider (TF.Schema l p a) b where
     loadbalancerProvider = TF.configuration . loadbalancerProvider
 
+class HasLocalEpGroupId a b | a -> b where
+    localEpGroupId :: Lens' a b
+
+instance HasLocalEpGroupId a b => HasLocalEpGroupId (TF.Schema l p a) b where
+    localEpGroupId = TF.configuration . localEpGroupId
+
 class HasLocalFilePath a b | a -> b where
     localFilePath :: Lens' a b
 
 instance HasLocalFilePath a b => HasLocalFilePath (TF.Schema l p a) b where
     localFilePath = TF.configuration . localFilePath
+
+class HasLocalId a b | a -> b where
+    localId :: Lens' a b
+
+instance HasLocalId a b => HasLocalId (TF.Schema l p a) b where
+    localId = TF.configuration . localId
 
 class HasMacAddress a b | a -> b where
     macAddress :: Lens' a b
@@ -1143,6 +1326,12 @@ class HasMember a b | a -> b where
 
 instance HasMember a b => HasMember (TF.Schema l p a) b where
     member = TF.configuration . member
+
+class HasMemberStatus a b | a -> b where
+    memberStatus :: Lens' a b
+
+instance HasMemberStatus a b => HasMemberStatus (TF.Schema l p a) b where
+    memberStatus = TF.configuration . memberStatus
 
 class HasMetadata a b | a -> b where
     metadata :: Lens' a b
@@ -1191,6 +1380,12 @@ class HasMostRecent a b | a -> b where
 
 instance HasMostRecent a b => HasMostRecent (TF.Schema l p a) b where
     mostRecent = TF.configuration . mostRecent
+
+class HasMtu a b | a -> b where
+    mtu :: Lens' a b
+
+instance HasMtu a b => HasMtu (TF.Schema l p a) b where
+    mtu = TF.configuration . mtu
 
 class HasMultiFactorAuthEnabled a b | a -> b where
     multiFactorAuthEnabled :: Lens' a b
@@ -1282,6 +1477,36 @@ class HasPassword a b | a -> b where
 instance HasPassword a b => HasPassword (TF.Schema l p a) b where
     password = TF.configuration . password
 
+class HasPasswordExpiresAt a b | a -> b where
+    passwordExpiresAt :: Lens' a b
+
+instance HasPasswordExpiresAt a b => HasPasswordExpiresAt (TF.Schema l p a) b where
+    passwordExpiresAt = TF.configuration . passwordExpiresAt
+
+class HasPeerAddress a b | a -> b where
+    peerAddress :: Lens' a b
+
+instance HasPeerAddress a b => HasPeerAddress (TF.Schema l p a) b where
+    peerAddress = TF.configuration . peerAddress
+
+class HasPeerCidrs a b | a -> b where
+    peerCidrs :: Lens' a b
+
+instance HasPeerCidrs a b => HasPeerCidrs (TF.Schema l p a) b where
+    peerCidrs = TF.configuration . peerCidrs
+
+class HasPeerEpGroupId a b | a -> b where
+    peerEpGroupId :: Lens' a b
+
+instance HasPeerEpGroupId a b => HasPeerEpGroupId (TF.Schema l p a) b where
+    peerEpGroupId = TF.configuration . peerEpGroupId
+
+class HasPeerId a b | a -> b where
+    peerId :: Lens' a b
+
+instance HasPeerId a b => HasPeerId (TF.Schema l p a) b where
+    peerId = TF.configuration . peerId
+
 class HasPersistence a b | a -> b where
     persistence :: Lens' a b
 
@@ -1293,6 +1518,18 @@ class HasPersonality a b | a -> b where
 
 instance HasPersonality a b => HasPersonality (TF.Schema l p a) b where
     personality = TF.configuration . personality
+
+class HasPfs a b | a -> b where
+    pfs :: Lens' a b
+
+instance HasPfs a b => HasPfs (TF.Schema l p a) b where
+    pfs = TF.configuration . pfs
+
+class HasPhase1NegotiationMode a b | a -> b where
+    phase1NegotiationMode :: Lens' a b
+
+instance HasPhase1NegotiationMode a b => HasPhase1NegotiationMode (TF.Schema l p a) b where
+    phase1NegotiationMode = TF.configuration . phase1NegotiationMode
 
 class HasPlatform a b | a -> b where
     platform :: Lens' a b
@@ -1348,6 +1585,12 @@ class HasPortRangeMin a b | a -> b where
 instance HasPortRangeMin a b => HasPortRangeMin (TF.Schema l p a) b where
     portRangeMin = TF.configuration . portRangeMin
 
+class HasPowerState a b | a -> b where
+    powerState :: Lens' a b
+
+instance HasPowerState a b => HasPowerState (TF.Schema l p a) b where
+    powerState = TF.configuration . powerState
+
 class HasPrefixes a b | a -> b where
     prefixes :: Lens' a b
 
@@ -1378,11 +1621,23 @@ class HasProtocol a b | a -> b where
 instance HasProtocol a b => HasProtocol (TF.Schema l p a) b where
     protocol = TF.configuration . protocol
 
+class HasProtocolId a b | a -> b where
+    protocolId :: Lens' a b
+
+instance HasProtocolId a b => HasProtocolId (TF.Schema l p a) b where
+    protocolId = TF.configuration . protocolId
+
 class HasProtocolPort a b | a -> b where
     protocolPort :: Lens' a b
 
 instance HasProtocolPort a b => HasProtocolPort (TF.Schema l p a) b where
     protocolPort = TF.configuration . protocolPort
+
+class HasPsk a b | a -> b where
+    psk :: Lens' a b
+
+instance HasPsk a b => HasPsk (TF.Schema l p a) b where
+    psk = TF.configuration . psk
 
 class HasPublicKey a b | a -> b where
     publicKey :: Lens' a b
@@ -1419,6 +1674,12 @@ class HasRemoteIpPrefix a b | a -> b where
 
 instance HasRemoteIpPrefix a b => HasRemoteIpPrefix (TF.Schema l p a) b where
     remoteIpPrefix = TF.configuration . remoteIpPrefix
+
+class HasRoleId a b | a -> b where
+    roleId :: Lens' a b
+
+instance HasRoleId a b => HasRoleId (TF.Schema l p a) b where
+    roleId = TF.configuration . roleId
 
 class HasRouterId a b | a -> b where
     routerId :: Lens' a b
@@ -1612,6 +1873,12 @@ class HasTimeout a b | a -> b where
 instance HasTimeout a b => HasTimeout (TF.Schema l p a) b where
     timeout = TF.configuration . timeout
 
+class HasTransformProtocol a b | a -> b where
+    transformProtocol :: Lens' a b
+
+instance HasTransformProtocol a b => HasTransformProtocol (TF.Schema l p a) b where
+    transformProtocol = TF.configuration . transformProtocol
+
 class HasTtl a b | a -> b where
     ttl :: Lens' a b
 
@@ -1623,6 +1890,12 @@ class HasType' a b | a -> b where
 
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
+
+class HasUniqueId a b | a -> b where
+    uniqueId :: Lens' a b
+
+instance HasUniqueId a b => HasUniqueId (TF.Schema l p a) b where
+    uniqueId = TF.configuration . uniqueId
 
 class HasUrlPath a b | a -> b where
     urlPath :: Lens' a b
@@ -1642,6 +1915,12 @@ class HasUserData a b | a -> b where
 instance HasUserData a b => HasUserData (TF.Schema l p a) b where
     userData = TF.configuration . userData
 
+class HasUserId a b | a -> b where
+    userId :: Lens' a b
+
+instance HasUserId a b => HasUserId (TF.Schema l p a) b where
+    userId = TF.configuration . userId
+
 class HasValueSpecs a b | a -> b where
     valueSpecs :: Lens' a b
 
@@ -1659,6 +1938,12 @@ class HasVendorOptions a b | a -> b where
 
 instance HasVendorOptions a b => HasVendorOptions (TF.Schema l p a) b where
     vendorOptions = TF.configuration . vendorOptions
+
+class HasVerifyChecksum a b | a -> b where
+    verifyChecksum :: Lens' a b
+
+instance HasVerifyChecksum a b => HasVerifyChecksum (TF.Schema l p a) b where
+    verifyChecksum = TF.configuration . verifyChecksum
 
 class HasVipAddress a b | a -> b where
     vipAddress :: Lens' a b
@@ -1689,6 +1974,18 @@ class HasVolumeType a b | a -> b where
 
 instance HasVolumeType a b => HasVolumeType (TF.Schema l p a) b where
     volumeType = TF.configuration . volumeType
+
+class HasVpnserviceId a b | a -> b where
+    vpnserviceId :: Lens' a b
+
+instance HasVpnserviceId a b => HasVpnserviceId (TF.Schema l p a) b where
+    vpnserviceId = TF.configuration . vpnserviceId
+
+class HasWaitUntilAssociated a b | a -> b where
+    waitUntilAssociated :: Lens' a b
+
+instance HasWaitUntilAssociated a b => HasWaitUntilAssociated (TF.Schema l p a) b where
+    waitUntilAssociated = TF.configuration . waitUntilAssociated
 
 class HasWeight a b | a -> b where
     weight :: Lens' a b
@@ -1764,6 +2061,9 @@ class HasComputedAttributes a b | a -> b where
 
 class HasComputedAudited a b | a -> b where
     computedAudited :: a -> b
+
+class HasComputedAuthAlgorithm a b | a -> b where
+    computedAuthAlgorithm :: a -> b
 
 class HasComputedAvailabilityZone a b | a -> b where
     computedAvailabilityZone :: a -> b
@@ -1936,6 +2236,9 @@ class HasComputedDnsNameservers a b | a -> b where
 class HasComputedDomainId a b | a -> b where
     computedDomainId :: a -> b
 
+class HasComputedDpd a b | a -> b where
+    computedDpd :: a -> b
+
 class HasComputedDriverVolumeType a b | a -> b where
     computedDriverVolumeType :: a -> b
 
@@ -1945,11 +2248,23 @@ class HasComputedEmail a b | a -> b where
 class HasComputedEnableDhcp a b | a -> b where
     computedEnableDhcp :: a -> b
 
+class HasComputedEnableOnlineResize a b | a -> b where
+    computedEnableOnlineResize :: a -> b
+
 class HasComputedEnableSnat a b | a -> b where
     computedEnableSnat :: a -> b
 
 class HasComputedEnabled a b | a -> b where
     computedEnabled :: a -> b
+
+class HasComputedEncapsulationMode a b | a -> b where
+    computedEncapsulationMode :: a -> b
+
+class HasComputedEncryptionAlgorithm a b | a -> b where
+    computedEncryptionAlgorithm :: a -> b
+
+class HasComputedEndpoints a b | a -> b where
+    computedEndpoints :: a -> b
 
 class HasComputedEtag a b | a -> b where
     computedEtag :: a -> b
@@ -1960,6 +2275,9 @@ class HasComputedEthertype a b | a -> b where
 class HasComputedExpectedCodes a b | a -> b where
     computedExpectedCodes :: a -> b
 
+class HasComputedExternal a b | a -> b where
+    computedExternal :: a -> b
+
 class HasComputedExternalFixedIp a b | a -> b where
     computedExternalFixedIp :: a -> b
 
@@ -1969,8 +2287,17 @@ class HasComputedExternalGateway a b | a -> b where
 class HasComputedExternalNetworkId a b | a -> b where
     computedExternalNetworkId :: a -> b
 
+class HasComputedExternalV4Ip a b | a -> b where
+    computedExternalV4Ip :: a -> b
+
+class HasComputedExternalV6Ip a b | a -> b where
+    computedExternalV6Ip :: a -> b
+
 class HasComputedExtra a b | a -> b where
     computedExtra :: a -> b
+
+class HasComputedExtraSpecs a b | a -> b where
+    computedExtraSpecs :: a -> b
 
 class HasComputedFile a b | a -> b where
     computedFile :: a -> b
@@ -2002,8 +2329,14 @@ class HasComputedFloatingIp a b | a -> b where
 class HasComputedForceDelete a b | a -> b where
     computedForceDelete :: a -> b
 
+class HasComputedForceDestroy a b | a -> b where
+    computedForceDestroy :: a -> b
+
 class HasComputedGatewayIp a b | a -> b where
     computedGatewayIp :: a -> b
+
+class HasComputedGroupId a b | a -> b where
+    computedGroupId :: a -> b
 
 class HasComputedHost a b | a -> b where
     computedHost :: a -> b
@@ -2020,6 +2353,9 @@ class HasComputedHttpMethod a b | a -> b where
 class HasComputedId a b | a -> b where
     computedId :: a -> b
 
+class HasComputedIdpId a b | a -> b where
+    computedIdpId :: a -> b
+
 class HasComputedIgnoreChangePasswordUponFirstUse a b | a -> b where
     computedIgnoreChangePasswordUponFirstUse :: a -> b
 
@@ -2028,6 +2364,12 @@ class HasComputedIgnoreLockoutFailureAttempts a b | a -> b where
 
 class HasComputedIgnorePasswordExpiry a b | a -> b where
     computedIgnorePasswordExpiry :: a -> b
+
+class HasComputedIkeVersion a b | a -> b where
+    computedIkeVersion :: a -> b
+
+class HasComputedIkepolicyId a b | a -> b where
+    computedIkepolicyId :: a -> b
 
 class HasComputedImageCachePath a b | a -> b where
     computedImageCachePath :: a -> b
@@ -2056,6 +2398,9 @@ class HasComputedIpAddress a b | a -> b where
 class HasComputedIpVersion a b | a -> b where
     computedIpVersion :: a -> b
 
+class HasComputedIpsecpolicyId a b | a -> b where
+    computedIpsecpolicyId :: a -> b
+
 class HasComputedIpv6AddressMode a b | a -> b where
     computedIpv6AddressMode :: a -> b
 
@@ -2083,6 +2428,9 @@ class HasComputedLbMethod a b | a -> b where
 class HasComputedLbProvider a b | a -> b where
     computedLbProvider :: a -> b
 
+class HasComputedLifetime a b | a -> b where
+    computedLifetime :: a -> b
+
 class HasComputedListenerId a b | a -> b where
     computedListenerId :: a -> b
 
@@ -2092,8 +2440,14 @@ class HasComputedLoadbalancerId a b | a -> b where
 class HasComputedLoadbalancerProvider a b | a -> b where
     computedLoadbalancerProvider :: a -> b
 
+class HasComputedLocalEpGroupId a b | a -> b where
+    computedLocalEpGroupId :: a -> b
+
 class HasComputedLocalFilePath a b | a -> b where
     computedLocalFilePath :: a -> b
+
+class HasComputedLocalId a b | a -> b where
+    computedLocalId :: a -> b
 
 class HasComputedMac a b | a -> b where
     computedMac :: a -> b
@@ -2115,6 +2469,9 @@ class HasComputedMaxRetries a b | a -> b where
 
 class HasComputedMember a b | a -> b where
     computedMember :: a -> b
+
+class HasComputedMemberStatus a b | a -> b where
+    computedMemberStatus :: a -> b
 
 class HasComputedMembers a b | a -> b where
     computedMembers :: a -> b
@@ -2148,6 +2505,9 @@ class HasComputedMostRecent a b | a -> b where
 
 class HasComputedMountPointBase a b | a -> b where
     computedMountPointBase :: a -> b
+
+class HasComputedMtu a b | a -> b where
+    computedMtu :: a -> b
 
 class HasComputedMultiFactorAuthEnabled a b | a -> b where
     computedMultiFactorAuthEnabled :: a -> b
@@ -2194,11 +2554,32 @@ class HasComputedParentId a b | a -> b where
 class HasComputedPassword a b | a -> b where
     computedPassword :: a -> b
 
+class HasComputedPasswordExpiresAt a b | a -> b where
+    computedPasswordExpiresAt :: a -> b
+
+class HasComputedPeerAddress a b | a -> b where
+    computedPeerAddress :: a -> b
+
+class HasComputedPeerCidrs a b | a -> b where
+    computedPeerCidrs :: a -> b
+
+class HasComputedPeerEpGroupId a b | a -> b where
+    computedPeerEpGroupId :: a -> b
+
+class HasComputedPeerId a b | a -> b where
+    computedPeerId :: a -> b
+
 class HasComputedPersistence a b | a -> b where
     computedPersistence :: a -> b
 
 class HasComputedPersonality a b | a -> b where
     computedPersonality :: a -> b
+
+class HasComputedPfs a b | a -> b where
+    computedPfs :: a -> b
+
+class HasComputedPhase1NegotiationMode a b | a -> b where
+    computedPhase1NegotiationMode :: a -> b
 
 class HasComputedPlatform a b | a -> b where
     computedPlatform :: a -> b
@@ -2227,14 +2608,26 @@ class HasComputedPortRangeMax a b | a -> b where
 class HasComputedPortRangeMin a b | a -> b where
     computedPortRangeMin :: a -> b
 
+class HasComputedPowerState a b | a -> b where
+    computedPowerState :: a -> b
+
 class HasComputedPrefixes a b | a -> b where
     computedPrefixes :: a -> b
 
 class HasComputedPrivateKey a b | a -> b where
     computedPrivateKey :: a -> b
 
+class HasComputedProjectDomainId a b | a -> b where
+    computedProjectDomainId :: a -> b
+
+class HasComputedProjectDomainName a b | a -> b where
+    computedProjectDomainName :: a -> b
+
 class HasComputedProjectId a b | a -> b where
     computedProjectId :: a -> b
+
+class HasComputedProjectName a b | a -> b where
+    computedProjectName :: a -> b
 
 class HasComputedProperties a b | a -> b where
     computedProperties :: a -> b
@@ -2245,8 +2638,14 @@ class HasComputedProtected a b | a -> b where
 class HasComputedProtocol a b | a -> b where
     computedProtocol :: a -> b
 
+class HasComputedProtocolId a b | a -> b where
+    computedProtocolId :: a -> b
+
 class HasComputedProtocolPort a b | a -> b where
     computedProtocolPort :: a -> b
+
+class HasComputedPsk a b | a -> b where
+    computedPsk :: a -> b
 
 class HasComputedPublicKey a b | a -> b where
     computedPublicKey :: a -> b
@@ -2268,6 +2667,12 @@ class HasComputedRemoteIpPrefix a b | a -> b where
 
 class HasComputedRevisionNumber a b | a -> b where
     computedRevisionNumber :: a -> b
+
+class HasComputedRoleId a b | a -> b where
+    computedRoleId :: a -> b
+
+class HasComputedRoles a b | a -> b where
+    computedRoles :: a -> b
 
 class HasComputedRouterId a b | a -> b where
     computedRouterId :: a -> b
@@ -2383,11 +2788,17 @@ class HasComputedTransId a b | a -> b where
 class HasComputedTransferredAt a b | a -> b where
     computedTransferredAt :: a -> b
 
+class HasComputedTransformProtocol a b | a -> b where
+    computedTransformProtocol :: a -> b
+
 class HasComputedTtl a b | a -> b where
     computedTtl :: a -> b
 
 class HasComputedType' a b | a -> b where
     computedType' :: a -> b
+
+class HasComputedUniqueId a b | a -> b where
+    computedUniqueId :: a -> b
 
 class HasComputedUpdateAt a b | a -> b where
     computedUpdateAt :: a -> b
@@ -2404,6 +2815,18 @@ class HasComputedUser a b | a -> b where
 class HasComputedUserData a b | a -> b where
     computedUserData :: a -> b
 
+class HasComputedUserDomainId a b | a -> b where
+    computedUserDomainId :: a -> b
+
+class HasComputedUserDomainName a b | a -> b where
+    computedUserDomainName :: a -> b
+
+class HasComputedUserId a b | a -> b where
+    computedUserId :: a -> b
+
+class HasComputedUserName a b | a -> b where
+    computedUserName :: a -> b
+
 class HasComputedUuid a b | a -> b where
     computedUuid :: a -> b
 
@@ -2418,6 +2841,9 @@ class HasComputedVcpus a b | a -> b where
 
 class HasComputedVendorOptions a b | a -> b where
     computedVendorOptions :: a -> b
+
+class HasComputedVerifyChecksum a b | a -> b where
+    computedVerifyChecksum :: a -> b
 
 class HasComputedVersion a b | a -> b where
     computedVersion :: a -> b
@@ -2439,6 +2865,12 @@ class HasComputedVolumeId a b | a -> b where
 
 class HasComputedVolumeType a b | a -> b where
     computedVolumeType :: a -> b
+
+class HasComputedVpnserviceId a b | a -> b where
+    computedVpnserviceId :: a -> b
+
+class HasComputedWaitUntilAssociated a b | a -> b where
+    computedWaitUntilAssociated :: a -> b
 
 class HasComputedWeight a b | a -> b where
     computedWeight :: a -> b

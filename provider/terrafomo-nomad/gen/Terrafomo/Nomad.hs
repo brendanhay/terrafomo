@@ -15,9 +15,11 @@ module Terrafomo.Nomad
     ( module Terrafomo.Nomad.Types
     , module Terrafomo.Nomad.Provider
     , module Terrafomo.Nomad.Lens
+    , module Terrafomo.Nomad.DataSource
     , module Terrafomo.Nomad.Resource
     ) where
 
+import Terrafomo.Nomad.DataSource
 import Terrafomo.Nomad.Lens
 import Terrafomo.Nomad.Provider
 import Terrafomo.Nomad.Resource

@@ -33,6 +33,7 @@ module Terrafomo.OneAndOne.Lens
     , HasFileName (..)
     , HasFirewallPolicyId (..)
     , HasFixedInstanceSize (..)
+    , HasFrequency (..)
     , HasHdds (..)
     , HasHealthCheckInterval (..)
     , HasHealthCheckPath (..)
@@ -47,17 +48,24 @@ module Terrafomo.OneAndOne.Lens
     , HasMonitoringPolicyId (..)
     , HasName (..)
     , HasNetworkAddress (..)
+    , HasNumImages (..)
+    , HasOsId (..)
     , HasPassword (..)
     , HasPersistence (..)
     , HasPersistenceTime (..)
+    , HasPublicKey (..)
     , HasRam (..)
     , HasReverseDns (..)
+    , HasServerId (..)
     , HasServerIds (..)
     , HasSize (..)
+    , HasSource (..)
     , HasSshKeyPath (..)
     , HasSshKeyPublic (..)
     , HasStorageServers (..)
     , HasSubnetMask (..)
+    , HasType' (..)
+    , HasUrl (..)
     , HasVcores (..)
 
     -- ** Computed Attributes
@@ -72,6 +80,7 @@ module Terrafomo.OneAndOne.Lens
     , HasComputedFileName (..)
     , HasComputedFirewallPolicyId (..)
     , HasComputedFixedInstanceSize (..)
+    , HasComputedFrequency (..)
     , HasComputedHdds (..)
     , HasComputedHealthCheckInterval (..)
     , HasComputedHealthCheckPath (..)
@@ -86,17 +95,24 @@ module Terrafomo.OneAndOne.Lens
     , HasComputedMonitoringPolicyId (..)
     , HasComputedName (..)
     , HasComputedNetworkAddress (..)
+    , HasComputedNumImages (..)
+    , HasComputedOsId (..)
     , HasComputedPassword (..)
     , HasComputedPersistence (..)
     , HasComputedPersistenceTime (..)
+    , HasComputedPublicKey (..)
     , HasComputedRam (..)
     , HasComputedReverseDns (..)
+    , HasComputedServerId (..)
     , HasComputedServerIds (..)
     , HasComputedSize (..)
+    , HasComputedSource (..)
     , HasComputedSshKeyPath (..)
     , HasComputedSshKeyPublic (..)
     , HasComputedStorageServers (..)
     , HasComputedSubnetMask (..)
+    , HasComputedType' (..)
+    , HasComputedUrl (..)
     , HasComputedVcores (..)
     ) where
 
@@ -172,6 +188,12 @@ class HasFixedInstanceSize a b | a -> b where
 
 instance HasFixedInstanceSize a b => HasFixedInstanceSize (TF.Schema l p a) b where
     fixedInstanceSize = TF.configuration . fixedInstanceSize
+
+class HasFrequency a b | a -> b where
+    frequency :: Lens' a b
+
+instance HasFrequency a b => HasFrequency (TF.Schema l p a) b where
+    frequency = TF.configuration . frequency
 
 class HasHdds a b | a -> b where
     hdds :: Lens' a b
@@ -257,6 +279,18 @@ class HasNetworkAddress a b | a -> b where
 instance HasNetworkAddress a b => HasNetworkAddress (TF.Schema l p a) b where
     networkAddress = TF.configuration . networkAddress
 
+class HasNumImages a b | a -> b where
+    numImages :: Lens' a b
+
+instance HasNumImages a b => HasNumImages (TF.Schema l p a) b where
+    numImages = TF.configuration . numImages
+
+class HasOsId a b | a -> b where
+    osId :: Lens' a b
+
+instance HasOsId a b => HasOsId (TF.Schema l p a) b where
+    osId = TF.configuration . osId
+
 class HasPassword a b | a -> b where
     password :: Lens' a b
 
@@ -275,6 +309,12 @@ class HasPersistenceTime a b | a -> b where
 instance HasPersistenceTime a b => HasPersistenceTime (TF.Schema l p a) b where
     persistenceTime = TF.configuration . persistenceTime
 
+class HasPublicKey a b | a -> b where
+    publicKey :: Lens' a b
+
+instance HasPublicKey a b => HasPublicKey (TF.Schema l p a) b where
+    publicKey = TF.configuration . publicKey
+
 class HasRam a b | a -> b where
     ram :: Lens' a b
 
@@ -287,6 +327,12 @@ class HasReverseDns a b | a -> b where
 instance HasReverseDns a b => HasReverseDns (TF.Schema l p a) b where
     reverseDns = TF.configuration . reverseDns
 
+class HasServerId a b | a -> b where
+    serverId :: Lens' a b
+
+instance HasServerId a b => HasServerId (TF.Schema l p a) b where
+    serverId = TF.configuration . serverId
+
 class HasServerIds a b | a -> b where
     serverIds :: Lens' a b
 
@@ -298,6 +344,12 @@ class HasSize a b | a -> b where
 
 instance HasSize a b => HasSize (TF.Schema l p a) b where
     size = TF.configuration . size
+
+class HasSource a b | a -> b where
+    source :: Lens' a b
+
+instance HasSource a b => HasSource (TF.Schema l p a) b where
+    source = TF.configuration . source
 
 class HasSshKeyPath a b | a -> b where
     sshKeyPath :: Lens' a b
@@ -322,6 +374,18 @@ class HasSubnetMask a b | a -> b where
 
 instance HasSubnetMask a b => HasSubnetMask (TF.Schema l p a) b where
     subnetMask = TF.configuration . subnetMask
+
+class HasType' a b | a -> b where
+    type' :: Lens' a b
+
+instance HasType' a b => HasType' (TF.Schema l p a) b where
+    type' = TF.configuration . type'
+
+class HasUrl a b | a -> b where
+    url :: Lens' a b
+
+instance HasUrl a b => HasUrl (TF.Schema l p a) b where
+    url = TF.configuration . url
 
 class HasVcores a b | a -> b where
     vcores :: Lens' a b
@@ -361,6 +425,9 @@ class HasComputedFirewallPolicyId a b | a -> b where
 
 class HasComputedFixedInstanceSize a b | a -> b where
     computedFixedInstanceSize :: a -> b
+
+class HasComputedFrequency a b | a -> b where
+    computedFrequency :: a -> b
 
 class HasComputedHdds a b | a -> b where
     computedHdds :: a -> b
@@ -404,6 +471,12 @@ class HasComputedName a b | a -> b where
 class HasComputedNetworkAddress a b | a -> b where
     computedNetworkAddress :: a -> b
 
+class HasComputedNumImages a b | a -> b where
+    computedNumImages :: a -> b
+
+class HasComputedOsId a b | a -> b where
+    computedOsId :: a -> b
+
 class HasComputedPassword a b | a -> b where
     computedPassword :: a -> b
 
@@ -413,17 +486,26 @@ class HasComputedPersistence a b | a -> b where
 class HasComputedPersistenceTime a b | a -> b where
     computedPersistenceTime :: a -> b
 
+class HasComputedPublicKey a b | a -> b where
+    computedPublicKey :: a -> b
+
 class HasComputedRam a b | a -> b where
     computedRam :: a -> b
 
 class HasComputedReverseDns a b | a -> b where
     computedReverseDns :: a -> b
 
+class HasComputedServerId a b | a -> b where
+    computedServerId :: a -> b
+
 class HasComputedServerIds a b | a -> b where
     computedServerIds :: a -> b
 
 class HasComputedSize a b | a -> b where
     computedSize :: a -> b
+
+class HasComputedSource a b | a -> b where
+    computedSource :: a -> b
 
 class HasComputedSshKeyPath a b | a -> b where
     computedSshKeyPath :: a -> b
@@ -436,6 +518,12 @@ class HasComputedStorageServers a b | a -> b where
 
 class HasComputedSubnetMask a b | a -> b where
     computedSubnetMask :: a -> b
+
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b
+
+class HasComputedUrl a b | a -> b where
+    computedUrl :: a -> b
 
 class HasComputedVcores a b | a -> b where
     computedVcores :: a -> b

@@ -22,21 +22,19 @@ module Terrafomo.Docker.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasCapabilities (..)
+      HasAuth (..)
     , HasCheckDuplicate (..)
     , HasCommand (..)
-    , HasCpuShares (..)
-    , HasDestroyGraceSeconds (..)
+    , HasConvergeConfig (..)
+    , HasData' (..)
     , HasDns (..)
     , HasDnsOpts (..)
     , HasDnsSearch (..)
-    , HasDomainname (..)
     , HasDriver (..)
     , HasDriverOpts (..)
+    , HasEndpointSpec (..)
     , HasEntrypoint (..)
     , HasEnv (..)
-    , HasHost (..)
-    , HasHostname (..)
     , HasImage (..)
     , HasInternal (..)
     , HasIpamConfig (..)
@@ -44,45 +42,32 @@ module Terrafomo.Docker.Lens
     , HasKeepLocally (..)
     , HasLabels (..)
     , HasLinks (..)
-    , HasLogDriver (..)
-    , HasLogOpts (..)
-    , HasMaxRetryCount (..)
-    , HasMemory (..)
-    , HasMemorySwap (..)
-    , HasMustRun (..)
+    , HasMode (..)
     , HasName (..)
-    , HasNetworkAlias (..)
-    , HasNetworkMode (..)
-    , HasNetworks (..)
     , HasOptions (..)
-    , HasPorts (..)
-    , HasPrivileged (..)
-    , HasPublishAllPorts (..)
     , HasPullTrigger (..)
     , HasPullTriggers (..)
-    , HasRestart (..)
-    , HasUpload (..)
+    , HasRollbackConfig (..)
+    , HasTaskSpec (..)
+    , HasUpdateConfig (..)
     , HasUser (..)
-    , HasVolumes (..)
 
     -- ** Computed Attributes
+    , HasComputedAuth (..)
     , HasComputedBridge (..)
-    , HasComputedCapabilities (..)
     , HasComputedCheckDuplicate (..)
     , HasComputedCommand (..)
-    , HasComputedCpuShares (..)
-    , HasComputedDestroyGraceSeconds (..)
+    , HasComputedConvergeConfig (..)
+    , HasComputedData' (..)
     , HasComputedDns (..)
     , HasComputedDnsOpts (..)
     , HasComputedDnsSearch (..)
-    , HasComputedDomainname (..)
     , HasComputedDriver (..)
     , HasComputedDriverOpts (..)
+    , HasComputedEndpointSpec (..)
     , HasComputedEntrypoint (..)
     , HasComputedEnv (..)
     , HasComputedGateway (..)
-    , HasComputedHost (..)
-    , HasComputedHostname (..)
     , HasComputedId (..)
     , HasComputedImage (..)
     , HasComputedInternal (..)
@@ -94,29 +79,18 @@ module Terrafomo.Docker.Lens
     , HasComputedLabels (..)
     , HasComputedLatest (..)
     , HasComputedLinks (..)
-    , HasComputedLogDriver (..)
-    , HasComputedLogOpts (..)
-    , HasComputedMaxRetryCount (..)
-    , HasComputedMemory (..)
-    , HasComputedMemorySwap (..)
+    , HasComputedMode (..)
     , HasComputedMountpoint (..)
-    , HasComputedMustRun (..)
     , HasComputedName (..)
-    , HasComputedNetworkAlias (..)
-    , HasComputedNetworkMode (..)
-    , HasComputedNetworks (..)
     , HasComputedOptions (..)
-    , HasComputedPorts (..)
-    , HasComputedPrivileged (..)
-    , HasComputedPublishAllPorts (..)
     , HasComputedPullTrigger (..)
     , HasComputedPullTriggers (..)
-    , HasComputedRestart (..)
+    , HasComputedRollbackConfig (..)
     , HasComputedScope (..)
     , HasComputedSha256Digest (..)
-    , HasComputedUpload (..)
+    , HasComputedTaskSpec (..)
+    , HasComputedUpdateConfig (..)
     , HasComputedUser (..)
-    , HasComputedVolumes (..)
     ) where
 
 import GHC.Base ((.))
@@ -126,11 +100,11 @@ import Lens.Micro (Lens')
 import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
 
-class HasCapabilities a b | a -> b where
-    capabilities :: Lens' a b
+class HasAuth a b | a -> b where
+    auth :: Lens' a b
 
-instance HasCapabilities a b => HasCapabilities (TF.Schema l p a) b where
-    capabilities = TF.configuration . capabilities
+instance HasAuth a b => HasAuth (TF.Schema l p a) b where
+    auth = TF.configuration . auth
 
 class HasCheckDuplicate a b | a -> b where
     checkDuplicate :: Lens' a b
@@ -144,17 +118,17 @@ class HasCommand a b | a -> b where
 instance HasCommand a b => HasCommand (TF.Schema l p a) b where
     command = TF.configuration . command
 
-class HasCpuShares a b | a -> b where
-    cpuShares :: Lens' a b
+class HasConvergeConfig a b | a -> b where
+    convergeConfig :: Lens' a b
 
-instance HasCpuShares a b => HasCpuShares (TF.Schema l p a) b where
-    cpuShares = TF.configuration . cpuShares
+instance HasConvergeConfig a b => HasConvergeConfig (TF.Schema l p a) b where
+    convergeConfig = TF.configuration . convergeConfig
 
-class HasDestroyGraceSeconds a b | a -> b where
-    destroyGraceSeconds :: Lens' a b
+class HasData' a b | a -> b where
+    data' :: Lens' a b
 
-instance HasDestroyGraceSeconds a b => HasDestroyGraceSeconds (TF.Schema l p a) b where
-    destroyGraceSeconds = TF.configuration . destroyGraceSeconds
+instance HasData' a b => HasData' (TF.Schema l p a) b where
+    data' = TF.configuration . data'
 
 class HasDns a b | a -> b where
     dns :: Lens' a b
@@ -174,12 +148,6 @@ class HasDnsSearch a b | a -> b where
 instance HasDnsSearch a b => HasDnsSearch (TF.Schema l p a) b where
     dnsSearch = TF.configuration . dnsSearch
 
-class HasDomainname a b | a -> b where
-    domainname :: Lens' a b
-
-instance HasDomainname a b => HasDomainname (TF.Schema l p a) b where
-    domainname = TF.configuration . domainname
-
 class HasDriver a b | a -> b where
     driver :: Lens' a b
 
@@ -192,6 +160,12 @@ class HasDriverOpts a b | a -> b where
 instance HasDriverOpts a b => HasDriverOpts (TF.Schema l p a) b where
     driverOpts = TF.configuration . driverOpts
 
+class HasEndpointSpec a b | a -> b where
+    endpointSpec :: Lens' a b
+
+instance HasEndpointSpec a b => HasEndpointSpec (TF.Schema l p a) b where
+    endpointSpec = TF.configuration . endpointSpec
+
 class HasEntrypoint a b | a -> b where
     entrypoint :: Lens' a b
 
@@ -203,18 +177,6 @@ class HasEnv a b | a -> b where
 
 instance HasEnv a b => HasEnv (TF.Schema l p a) b where
     env = TF.configuration . env
-
-class HasHost a b | a -> b where
-    host :: Lens' a b
-
-instance HasHost a b => HasHost (TF.Schema l p a) b where
-    host = TF.configuration . host
-
-class HasHostname a b | a -> b where
-    hostname :: Lens' a b
-
-instance HasHostname a b => HasHostname (TF.Schema l p a) b where
-    hostname = TF.configuration . hostname
 
 class HasImage a b | a -> b where
     image :: Lens' a b
@@ -258,41 +220,11 @@ class HasLinks a b | a -> b where
 instance HasLinks a b => HasLinks (TF.Schema l p a) b where
     links = TF.configuration . links
 
-class HasLogDriver a b | a -> b where
-    logDriver :: Lens' a b
+class HasMode a b | a -> b where
+    mode :: Lens' a b
 
-instance HasLogDriver a b => HasLogDriver (TF.Schema l p a) b where
-    logDriver = TF.configuration . logDriver
-
-class HasLogOpts a b | a -> b where
-    logOpts :: Lens' a b
-
-instance HasLogOpts a b => HasLogOpts (TF.Schema l p a) b where
-    logOpts = TF.configuration . logOpts
-
-class HasMaxRetryCount a b | a -> b where
-    maxRetryCount :: Lens' a b
-
-instance HasMaxRetryCount a b => HasMaxRetryCount (TF.Schema l p a) b where
-    maxRetryCount = TF.configuration . maxRetryCount
-
-class HasMemory a b | a -> b where
-    memory :: Lens' a b
-
-instance HasMemory a b => HasMemory (TF.Schema l p a) b where
-    memory = TF.configuration . memory
-
-class HasMemorySwap a b | a -> b where
-    memorySwap :: Lens' a b
-
-instance HasMemorySwap a b => HasMemorySwap (TF.Schema l p a) b where
-    memorySwap = TF.configuration . memorySwap
-
-class HasMustRun a b | a -> b where
-    mustRun :: Lens' a b
-
-instance HasMustRun a b => HasMustRun (TF.Schema l p a) b where
-    mustRun = TF.configuration . mustRun
+instance HasMode a b => HasMode (TF.Schema l p a) b where
+    mode = TF.configuration . mode
 
 class HasName a b | a -> b where
     name :: Lens' a b
@@ -300,47 +232,11 @@ class HasName a b | a -> b where
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasNetworkAlias a b | a -> b where
-    networkAlias :: Lens' a b
-
-instance HasNetworkAlias a b => HasNetworkAlias (TF.Schema l p a) b where
-    networkAlias = TF.configuration . networkAlias
-
-class HasNetworkMode a b | a -> b where
-    networkMode :: Lens' a b
-
-instance HasNetworkMode a b => HasNetworkMode (TF.Schema l p a) b where
-    networkMode = TF.configuration . networkMode
-
-class HasNetworks a b | a -> b where
-    networks :: Lens' a b
-
-instance HasNetworks a b => HasNetworks (TF.Schema l p a) b where
-    networks = TF.configuration . networks
-
 class HasOptions a b | a -> b where
     options :: Lens' a b
 
 instance HasOptions a b => HasOptions (TF.Schema l p a) b where
     options = TF.configuration . options
-
-class HasPorts a b | a -> b where
-    ports :: Lens' a b
-
-instance HasPorts a b => HasPorts (TF.Schema l p a) b where
-    ports = TF.configuration . ports
-
-class HasPrivileged a b | a -> b where
-    privileged :: Lens' a b
-
-instance HasPrivileged a b => HasPrivileged (TF.Schema l p a) b where
-    privileged = TF.configuration . privileged
-
-class HasPublishAllPorts a b | a -> b where
-    publishAllPorts :: Lens' a b
-
-instance HasPublishAllPorts a b => HasPublishAllPorts (TF.Schema l p a) b where
-    publishAllPorts = TF.configuration . publishAllPorts
 
 class HasPullTrigger a b | a -> b where
     pullTrigger :: Lens' a b
@@ -354,17 +250,23 @@ class HasPullTriggers a b | a -> b where
 instance HasPullTriggers a b => HasPullTriggers (TF.Schema l p a) b where
     pullTriggers = TF.configuration . pullTriggers
 
-class HasRestart a b | a -> b where
-    restart :: Lens' a b
+class HasRollbackConfig a b | a -> b where
+    rollbackConfig :: Lens' a b
 
-instance HasRestart a b => HasRestart (TF.Schema l p a) b where
-    restart = TF.configuration . restart
+instance HasRollbackConfig a b => HasRollbackConfig (TF.Schema l p a) b where
+    rollbackConfig = TF.configuration . rollbackConfig
 
-class HasUpload a b | a -> b where
-    upload :: Lens' a b
+class HasTaskSpec a b | a -> b where
+    taskSpec :: Lens' a b
 
-instance HasUpload a b => HasUpload (TF.Schema l p a) b where
-    upload = TF.configuration . upload
+instance HasTaskSpec a b => HasTaskSpec (TF.Schema l p a) b where
+    taskSpec = TF.configuration . taskSpec
+
+class HasUpdateConfig a b | a -> b where
+    updateConfig :: Lens' a b
+
+instance HasUpdateConfig a b => HasUpdateConfig (TF.Schema l p a) b where
+    updateConfig = TF.configuration . updateConfig
 
 class HasUser a b | a -> b where
     user :: Lens' a b
@@ -372,17 +274,11 @@ class HasUser a b | a -> b where
 instance HasUser a b => HasUser (TF.Schema l p a) b where
     user = TF.configuration . user
 
-class HasVolumes a b | a -> b where
-    volumes :: Lens' a b
-
-instance HasVolumes a b => HasVolumes (TF.Schema l p a) b where
-    volumes = TF.configuration . volumes
+class HasComputedAuth a b | a -> b where
+    computedAuth :: a -> b
 
 class HasComputedBridge a b | a -> b where
     computedBridge :: a -> b
-
-class HasComputedCapabilities a b | a -> b where
-    computedCapabilities :: a -> b
 
 class HasComputedCheckDuplicate a b | a -> b where
     computedCheckDuplicate :: a -> b
@@ -390,11 +286,11 @@ class HasComputedCheckDuplicate a b | a -> b where
 class HasComputedCommand a b | a -> b where
     computedCommand :: a -> b
 
-class HasComputedCpuShares a b | a -> b where
-    computedCpuShares :: a -> b
+class HasComputedConvergeConfig a b | a -> b where
+    computedConvergeConfig :: a -> b
 
-class HasComputedDestroyGraceSeconds a b | a -> b where
-    computedDestroyGraceSeconds :: a -> b
+class HasComputedData' a b | a -> b where
+    computedData' :: a -> b
 
 class HasComputedDns a b | a -> b where
     computedDns :: a -> b
@@ -405,14 +301,14 @@ class HasComputedDnsOpts a b | a -> b where
 class HasComputedDnsSearch a b | a -> b where
     computedDnsSearch :: a -> b
 
-class HasComputedDomainname a b | a -> b where
-    computedDomainname :: a -> b
-
 class HasComputedDriver a b | a -> b where
     computedDriver :: a -> b
 
 class HasComputedDriverOpts a b | a -> b where
     computedDriverOpts :: a -> b
+
+class HasComputedEndpointSpec a b | a -> b where
+    computedEndpointSpec :: a -> b
 
 class HasComputedEntrypoint a b | a -> b where
     computedEntrypoint :: a -> b
@@ -422,12 +318,6 @@ class HasComputedEnv a b | a -> b where
 
 class HasComputedGateway a b | a -> b where
     computedGateway :: a -> b
-
-class HasComputedHost a b | a -> b where
-    computedHost :: a -> b
-
-class HasComputedHostname a b | a -> b where
-    computedHostname :: a -> b
 
 class HasComputedId a b | a -> b where
     computedId :: a -> b
@@ -462,50 +352,17 @@ class HasComputedLatest a b | a -> b where
 class HasComputedLinks a b | a -> b where
     computedLinks :: a -> b
 
-class HasComputedLogDriver a b | a -> b where
-    computedLogDriver :: a -> b
-
-class HasComputedLogOpts a b | a -> b where
-    computedLogOpts :: a -> b
-
-class HasComputedMaxRetryCount a b | a -> b where
-    computedMaxRetryCount :: a -> b
-
-class HasComputedMemory a b | a -> b where
-    computedMemory :: a -> b
-
-class HasComputedMemorySwap a b | a -> b where
-    computedMemorySwap :: a -> b
+class HasComputedMode a b | a -> b where
+    computedMode :: a -> b
 
 class HasComputedMountpoint a b | a -> b where
     computedMountpoint :: a -> b
 
-class HasComputedMustRun a b | a -> b where
-    computedMustRun :: a -> b
-
 class HasComputedName a b | a -> b where
     computedName :: a -> b
 
-class HasComputedNetworkAlias a b | a -> b where
-    computedNetworkAlias :: a -> b
-
-class HasComputedNetworkMode a b | a -> b where
-    computedNetworkMode :: a -> b
-
-class HasComputedNetworks a b | a -> b where
-    computedNetworks :: a -> b
-
 class HasComputedOptions a b | a -> b where
     computedOptions :: a -> b
-
-class HasComputedPorts a b | a -> b where
-    computedPorts :: a -> b
-
-class HasComputedPrivileged a b | a -> b where
-    computedPrivileged :: a -> b
-
-class HasComputedPublishAllPorts a b | a -> b where
-    computedPublishAllPorts :: a -> b
 
 class HasComputedPullTrigger a b | a -> b where
     computedPullTrigger :: a -> b
@@ -513,8 +370,8 @@ class HasComputedPullTrigger a b | a -> b where
 class HasComputedPullTriggers a b | a -> b where
     computedPullTriggers :: a -> b
 
-class HasComputedRestart a b | a -> b where
-    computedRestart :: a -> b
+class HasComputedRollbackConfig a b | a -> b where
+    computedRollbackConfig :: a -> b
 
 class HasComputedScope a b | a -> b where
     computedScope :: a -> b
@@ -522,11 +379,11 @@ class HasComputedScope a b | a -> b where
 class HasComputedSha256Digest a b | a -> b where
     computedSha256Digest :: a -> b
 
-class HasComputedUpload a b | a -> b where
-    computedUpload :: a -> b
+class HasComputedTaskSpec a b | a -> b where
+    computedTaskSpec :: a -> b
+
+class HasComputedUpdateConfig a b | a -> b where
+    computedUpdateConfig :: a -> b
 
 class HasComputedUser a b | a -> b where
     computedUser :: a -> b
-
-class HasComputedVolumes a b | a -> b where
-    computedVolumes :: a -> b

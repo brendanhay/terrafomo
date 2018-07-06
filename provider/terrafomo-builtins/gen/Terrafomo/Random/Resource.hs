@@ -48,6 +48,10 @@ module Terrafomo.Random.Resource
     , P.HasLower (..)
     , P.HasMax (..)
     , P.HasMin (..)
+    , P.HasMinLower (..)
+    , P.HasMinNumeric (..)
+    , P.HasMinSpecial (..)
+    , P.HasMinUpper (..)
     , P.HasNumber (..)
     , P.HasOverrideSpecial (..)
     , P.HasPrefix (..)
@@ -70,6 +74,10 @@ module Terrafomo.Random.Resource
     , P.HasComputedLower (..)
     , P.HasComputedMax (..)
     , P.HasComputedMin (..)
+    , P.HasComputedMinLower (..)
+    , P.HasComputedMinNumeric (..)
+    , P.HasComputedMinSpecial (..)
+    , P.HasComputedMinUpper (..)
     , P.HasComputedNumber (..)
     , P.HasComputedOverrideSpecial (..)
     , P.HasComputedPrefix (..)
@@ -429,10 +437,7 @@ shuffleResource =
 {- | The @random_string@ Random resource.
 
 The resource @random_string@ generates a random permutation of alphanumeric
-characters and optionally special characters.  This resource does not
-provide any guarantee that the random string will contain specific
-characters. ie. if length = 4 and special = true, output could be 'Aa0#' or
-'1111'
+characters and optionally special characters.
 -}
 data StringResource s = StringResource {
       _keepers          :: !(TF.Attr s (P.Keepers s))
@@ -441,6 +446,14 @@ data StringResource s = StringResource {
     {- ^ (Required) The length of the string desired -}
     , _lower            :: !(TF.Attr s P.Bool)
     {- ^ (Optional) (default true) Include lowercase alphabet characters in random string. -}
+    , _min_lower        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) (default 0) Minimum number of lowercase alphabet characters in random string. -}
+    , _min_numeric      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) (default 0) Minimum number of numeric characters in random string. -}
+    , _min_special      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) (default 0) Minimum number of special characters in random string. -}
+    , _min_upper        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) (default 0) Minimum number of uppercase alphabet characters in random string. -}
     , _number           :: !(TF.Attr s P.Bool)
     {- ^ (Optional) (default true) Include numeric characters in random string. -}
     , _override_special :: !(TF.Attr s P.Text)
@@ -456,6 +469,10 @@ instance TF.ToHCL (StringResource s) where
         [ TF.assign "keepers" <$> TF.attribute _keepers
         , TF.assign "length" <$> TF.attribute _length
         , TF.assign "lower" <$> TF.attribute _lower
+        , TF.assign "min_lower" <$> TF.attribute _min_lower
+        , TF.assign "min_numeric" <$> TF.attribute _min_numeric
+        , TF.assign "min_special" <$> TF.attribute _min_special
+        , TF.assign "min_upper" <$> TF.attribute _min_upper
         , TF.assign "number" <$> TF.attribute _number
         , TF.assign "override_special" <$> TF.attribute _override_special
         , TF.assign "special" <$> TF.attribute _special
@@ -476,6 +493,26 @@ instance P.HasLower (StringResource s) (TF.Attr s P.Bool) where
     lower =
         lens (_lower :: StringResource s -> TF.Attr s P.Bool)
              (\s a -> s { _lower = a } :: StringResource s)
+
+instance P.HasMinLower (StringResource s) (TF.Attr s P.Text) where
+    minLower =
+        lens (_min_lower :: StringResource s -> TF.Attr s P.Text)
+             (\s a -> s { _min_lower = a } :: StringResource s)
+
+instance P.HasMinNumeric (StringResource s) (TF.Attr s P.Text) where
+    minNumeric =
+        lens (_min_numeric :: StringResource s -> TF.Attr s P.Text)
+             (\s a -> s { _min_numeric = a } :: StringResource s)
+
+instance P.HasMinSpecial (StringResource s) (TF.Attr s P.Text) where
+    minSpecial =
+        lens (_min_special :: StringResource s -> TF.Attr s P.Text)
+             (\s a -> s { _min_special = a } :: StringResource s)
+
+instance P.HasMinUpper (StringResource s) (TF.Attr s P.Text) where
+    minUpper =
+        lens (_min_upper :: StringResource s -> TF.Attr s P.Text)
+             (\s a -> s { _min_upper = a } :: StringResource s)
 
 instance P.HasNumber (StringResource s) (TF.Attr s P.Bool) where
     number =
@@ -512,6 +549,26 @@ instance s ~ s' => P.HasComputedLower (TF.Ref s' (StringResource s)) (TF.Attr s 
         (_lower :: StringResource s -> TF.Attr s P.Bool)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedMinLower (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
+    computedMinLower =
+        (_min_lower :: StringResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMinNumeric (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
+    computedMinNumeric =
+        (_min_numeric :: StringResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMinSpecial (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
+    computedMinSpecial =
+        (_min_special :: StringResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMinUpper (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
+    computedMinUpper =
+        (_min_upper :: StringResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedNumber (TF.Ref s' (StringResource s)) (TF.Attr s P.Bool) where
     computedNumber =
         (_number :: StringResource s -> TF.Attr s P.Bool)
@@ -542,6 +599,10 @@ stringResource =
               _keepers = TF.Nil
             , _length = TF.Nil
             , _lower = TF.Nil
+            , _min_lower = TF.Nil
+            , _min_numeric = TF.Nil
+            , _min_special = TF.Nil
+            , _min_upper = TF.Nil
             , _number = TF.Nil
             , _override_special = TF.Nil
             , _special = TF.Nil

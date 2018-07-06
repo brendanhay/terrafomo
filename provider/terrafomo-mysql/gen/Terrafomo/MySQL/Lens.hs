@@ -22,7 +22,8 @@ module Terrafomo.MySQL.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasDatabase (..)
+      HasAuthPlugin (..)
+    , HasDatabase (..)
     , HasDefaultCharacterSet (..)
     , HasDefaultCollation (..)
     , HasGrant (..)
@@ -34,6 +35,7 @@ module Terrafomo.MySQL.Lens
     , HasUser (..)
 
     -- ** Computed Attributes
+    , HasComputedAuthPlugin (..)
     , HasComputedDatabase (..)
     , HasComputedDefaultCharacterSet (..)
     , HasComputedDefaultCollation (..)
@@ -52,6 +54,12 @@ import Lens.Micro (Lens')
 
 import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
+
+class HasAuthPlugin a b | a -> b where
+    authPlugin :: Lens' a b
+
+instance HasAuthPlugin a b => HasAuthPlugin (TF.Schema l p a) b where
+    authPlugin = TF.configuration . authPlugin
 
 class HasDatabase a b | a -> b where
     database :: Lens' a b
@@ -112,6 +120,9 @@ class HasUser a b | a -> b where
 
 instance HasUser a b => HasUser (TF.Schema l p a) b where
     user = TF.configuration . user
+
+class HasComputedAuthPlugin a b | a -> b where
+    computedAuthPlugin :: a -> b
 
 class HasComputedDatabase a b | a -> b where
     computedDatabase :: a -> b

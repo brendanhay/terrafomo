@@ -24,11 +24,17 @@
 module Terrafomo.VSphere.DataSource
     (
     -- * Types
-      CustomAttributeData (..)
+      ComputeClusterData (..)
+    , computeClusterData
+
+    , CustomAttributeData (..)
     , customAttributeData
 
     , DatacenterData (..)
     , datacenterData
+
+    , DatastoreClusterData (..)
+    , datastoreClusterData
 
     , DatastoreData (..)
     , datastoreData
@@ -74,12 +80,14 @@ module Terrafomo.VSphere.DataSource
     , P.HasComputedDisks (..)
     , P.HasComputedEagerlyScrub (..)
     , P.HasComputedFilter (..)
+    , P.HasComputedFirmware (..)
     , P.HasComputedGuestId (..)
     , P.HasComputedHostSystemId (..)
     , P.HasComputedId (..)
     , P.HasComputedName (..)
     , P.HasComputedNetworkInterfaceTypes (..)
     , P.HasComputedRescan (..)
+    , P.HasComputedResourcePoolId (..)
     , P.HasComputedScsiControllerScanCount (..)
     , P.HasComputedScsiType (..)
     , P.HasComputedSize (..)
@@ -113,6 +121,65 @@ import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
+
+{- | The @vsphere_compute_cluster@ VSphere datasource.
+
+The @vsphere_compute_cluster@ data source can be used to discover the ID of
+a cluster in vSphere. This is useful to fetch the ID of a cluster that you
+want to use for virtual machine placement via the
+</docs/providers/vsphere/r/virtual_machine.html> resource, allowing you to
+specify the cluster's root resource pool directly versus using the alias
+available through the </docs/providers/vsphere/d/resource_pool.html> data
+source. -> You may also wish to see the
+</docs/providers/vsphere/r/compute_cluster.html> resource for further
+details about clusters or how to work with them in Terraform.
+-}
+data ComputeClusterData s = ComputeClusterData {
+      _datacenter_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datacenter the cluster is located in.  This can be omitted if the search path used in @name@ is an absolute path.  For default datacenters, use the id attribute from an empty @vsphere_datacenter@ data source. -}
+    , _name          :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name or absolute path to the cluster. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeClusterData s) where
+    toHCL ComputeClusterData{..} = TF.inline $ catMaybes
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasDatacenterId (ComputeClusterData s) (TF.Attr s P.Text) where
+    datacenterId =
+        lens (_datacenter_id :: ComputeClusterData s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter_id = a } :: ComputeClusterData s)
+
+instance P.HasName (ComputeClusterData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeClusterData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeClusterData s)
+
+instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (ComputeClusterData s)) (TF.Attr s P.Text) where
+    computedDatacenterId =
+        (_datacenter_id :: ComputeClusterData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeClusterData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeClusterData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (ComputeClusterData s)) (TF.Attr s P.Text) where
+    computedResourcePoolId x = TF.compute (TF.refKey x) "resource_pool_id"
+
+computeClusterData :: TF.DataSource P.VSphere (ComputeClusterData s)
+computeClusterData =
+    TF.newDataSource "vsphere_compute_cluster" $
+        ComputeClusterData {
+              _datacenter_id = TF.Nil
+            , _name = TF.Nil
+            }
 
 {- | The @vsphere_custom_attribute@ VSphere datasource.
 
@@ -183,6 +250,57 @@ datacenterData =
     TF.newDataSource "vsphere_datacenter" $
         DatacenterData {
               _name = TF.Nil
+            }
+
+{- | The @vsphere_datastore_cluster@ VSphere datasource.
+
+The @vsphere_datastore_cluster@ data source can be used to discover the ID
+of a datastore cluster in vSphere. This is useful to fetch the ID of a
+datastore cluster that you want to use to assign datastores to using the
+</docs/providers/vsphere/r/nas_datastore.html> or
+</docs/providers/vsphere/r/vmfs_datastore.html> resources, or create virtual
+machines in using the </docs/providers/vsphere/r/virtual_machine.html>
+resource.
+-}
+data DatastoreClusterData s = DatastoreClusterData {
+      _datacenter_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datacenter the datastore cluster is located in. This can be omitted if the search path used in @name@ is an absolute path. For default datacenters, use the id attribute from an empty @vsphere_datacenter@ data source. -}
+    , _name          :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name or absolute path to the datastore cluster. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DatastoreClusterData s) where
+    toHCL DatastoreClusterData{..} = TF.inline $ catMaybes
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasDatacenterId (DatastoreClusterData s) (TF.Attr s P.Text) where
+    datacenterId =
+        lens (_datacenter_id :: DatastoreClusterData s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter_id = a } :: DatastoreClusterData s)
+
+instance P.HasName (DatastoreClusterData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: DatastoreClusterData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DatastoreClusterData s)
+
+instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (DatastoreClusterData s)) (TF.Attr s P.Text) where
+    computedDatacenterId =
+        (_datacenter_id :: DatastoreClusterData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatastoreClusterData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: DatastoreClusterData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+datastoreClusterData :: TF.DataSource P.VSphere (DatastoreClusterData s)
+datastoreClusterData =
+    TF.newDataSource "vsphere_datastore_cluster" $
+        DatastoreClusterData {
+              _datacenter_id = TF.Nil
+            , _name = TF.Nil
             }
 
 {- | The @vsphere_datastore@ VSphere datasource.
@@ -323,10 +441,16 @@ instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (HostData s)) (TF.Attr s
         (_datacenter_id :: HostData s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (HostData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (HostData s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: HostData s -> TF.Attr s P.Text)
             . TF.refValue
+
+instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (HostData s)) (TF.Attr s P.Text) where
+    computedResourcePoolId x = TF.compute (TF.refKey x) "resource_pool_id"
 
 hostData :: TF.DataSource P.VSphere (HostData s)
 hostData =
@@ -579,6 +703,9 @@ instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualMachineData s)) (TF.Att
 
 instance s ~ s' => P.HasComputedEagerlyScrub (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
     computedEagerlyScrub x = TF.compute (TF.refKey x) "eagerly_scrub"
+
+instance s ~ s' => P.HasComputedFirmware (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
+    computedFirmware x = TF.compute (TF.refKey x) "firmware"
 
 instance s ~ s' => P.HasComputedGuestId (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
     computedGuestId x = TF.compute (TF.refKey x) "guest_id"

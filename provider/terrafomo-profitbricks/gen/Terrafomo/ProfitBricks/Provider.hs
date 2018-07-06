@@ -44,8 +44,8 @@ import qualified Terrafomo.Provider as TF
 {- | ProfitBricks Terraform provider.
 
 The ProfitBricks provider gives the ability to deploy and configure
-resources using ProfitBricks Cloud API. Use the navigation to the left to
-read about the available resources.
+resources using the ProfitBricks Cloud API. Use the navigation to the left
+to read about the available data sources and resources.
 -}
 data ProfitBricks = ProfitBricks {
     } deriving (Show, Eq, Generic)

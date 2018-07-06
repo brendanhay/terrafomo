@@ -23,11 +23,14 @@ module Terrafomo.NewRelic.Lens
     -- * Overloaded Fields
     -- ** Arguments
       HasChannelId (..)
+    , HasComparison (..)
     , HasConditionScope (..)
     , HasConfiguration (..)
+    , HasCritical (..)
     , HasEditable (..)
     , HasEnabled (..)
     , HasEntities (..)
+    , HasEvent (..)
     , HasGcMetric (..)
     , HasIcon (..)
     , HasIncidentPreference (..)
@@ -35,7 +38,9 @@ module Terrafomo.NewRelic.Lens
     , HasName (..)
     , HasNrql (..)
     , HasPolicyId (..)
+    , HasProcessWhere (..)
     , HasRunbookUrl (..)
+    , HasSelect (..)
     , HasTerm (..)
     , HasTitle (..)
     , HasType' (..)
@@ -44,16 +49,21 @@ module Terrafomo.NewRelic.Lens
     , HasValueFunction (..)
     , HasViolationCloseTimer (..)
     , HasVisibility (..)
+    , HasWarning (..)
+    , HasWhere (..)
     , HasWidget (..)
 
     -- ** Computed Attributes
     , HasComputedChannelId (..)
+    , HasComputedComparison (..)
     , HasComputedConditionScope (..)
     , HasComputedConfiguration (..)
     , HasComputedCreatedAt (..)
+    , HasComputedCritical (..)
     , HasComputedEditable (..)
     , HasComputedEnabled (..)
     , HasComputedEntities (..)
+    , HasComputedEvent (..)
     , HasComputedGcMetric (..)
     , HasComputedHostIds (..)
     , HasComputedIcon (..)
@@ -64,7 +74,9 @@ module Terrafomo.NewRelic.Lens
     , HasComputedName (..)
     , HasComputedNrql (..)
     , HasComputedPolicyId (..)
+    , HasComputedProcessWhere (..)
     , HasComputedRunbookUrl (..)
+    , HasComputedSelect (..)
     , HasComputedTerm (..)
     , HasComputedTitle (..)
     , HasComputedType' (..)
@@ -74,6 +86,8 @@ module Terrafomo.NewRelic.Lens
     , HasComputedValueFunction (..)
     , HasComputedViolationCloseTimer (..)
     , HasComputedVisibility (..)
+    , HasComputedWarning (..)
+    , HasComputedWhere (..)
     , HasComputedWidget (..)
     ) where
 
@@ -90,6 +104,12 @@ class HasChannelId a b | a -> b where
 instance HasChannelId a b => HasChannelId (TF.Schema l p a) b where
     channelId = TF.configuration . channelId
 
+class HasComparison a b | a -> b where
+    comparison :: Lens' a b
+
+instance HasComparison a b => HasComparison (TF.Schema l p a) b where
+    comparison = TF.configuration . comparison
+
 class HasConditionScope a b | a -> b where
     conditionScope :: Lens' a b
 
@@ -101,6 +121,12 @@ class HasConfiguration a b | a -> b where
 
 instance HasConfiguration a b => HasConfiguration (TF.Schema l p a) b where
     configuration = TF.configuration . configuration
+
+class HasCritical a b | a -> b where
+    critical :: Lens' a b
+
+instance HasCritical a b => HasCritical (TF.Schema l p a) b where
+    critical = TF.configuration . critical
 
 class HasEditable a b | a -> b where
     editable :: Lens' a b
@@ -119,6 +145,12 @@ class HasEntities a b | a -> b where
 
 instance HasEntities a b => HasEntities (TF.Schema l p a) b where
     entities = TF.configuration . entities
+
+class HasEvent a b | a -> b where
+    event :: Lens' a b
+
+instance HasEvent a b => HasEvent (TF.Schema l p a) b where
+    event = TF.configuration . event
 
 class HasGcMetric a b | a -> b where
     gcMetric :: Lens' a b
@@ -162,11 +194,23 @@ class HasPolicyId a b | a -> b where
 instance HasPolicyId a b => HasPolicyId (TF.Schema l p a) b where
     policyId = TF.configuration . policyId
 
+class HasProcessWhere a b | a -> b where
+    processWhere :: Lens' a b
+
+instance HasProcessWhere a b => HasProcessWhere (TF.Schema l p a) b where
+    processWhere = TF.configuration . processWhere
+
 class HasRunbookUrl a b | a -> b where
     runbookUrl :: Lens' a b
 
 instance HasRunbookUrl a b => HasRunbookUrl (TF.Schema l p a) b where
     runbookUrl = TF.configuration . runbookUrl
+
+class HasSelect a b | a -> b where
+    select :: Lens' a b
+
+instance HasSelect a b => HasSelect (TF.Schema l p a) b where
+    select = TF.configuration . select
 
 class HasTerm a b | a -> b where
     term :: Lens' a b
@@ -216,6 +260,18 @@ class HasVisibility a b | a -> b where
 instance HasVisibility a b => HasVisibility (TF.Schema l p a) b where
     visibility = TF.configuration . visibility
 
+class HasWarning a b | a -> b where
+    warning :: Lens' a b
+
+instance HasWarning a b => HasWarning (TF.Schema l p a) b where
+    warning = TF.configuration . warning
+
+class HasWhere a b | a -> b where
+    where :: Lens' a b
+
+instance HasWhere a b => HasWhere (TF.Schema l p a) b where
+    where = TF.configuration . where
+
 class HasWidget a b | a -> b where
     widget :: Lens' a b
 
@@ -224,6 +280,9 @@ instance HasWidget a b => HasWidget (TF.Schema l p a) b where
 
 class HasComputedChannelId a b | a -> b where
     computedChannelId :: a -> b
+
+class HasComputedComparison a b | a -> b where
+    computedComparison :: a -> b
 
 class HasComputedConditionScope a b | a -> b where
     computedConditionScope :: a -> b
@@ -234,6 +293,9 @@ class HasComputedConfiguration a b | a -> b where
 class HasComputedCreatedAt a b | a -> b where
     computedCreatedAt :: a -> b
 
+class HasComputedCritical a b | a -> b where
+    computedCritical :: a -> b
+
 class HasComputedEditable a b | a -> b where
     computedEditable :: a -> b
 
@@ -242,6 +304,9 @@ class HasComputedEnabled a b | a -> b where
 
 class HasComputedEntities a b | a -> b where
     computedEntities :: a -> b
+
+class HasComputedEvent a b | a -> b where
+    computedEvent :: a -> b
 
 class HasComputedGcMetric a b | a -> b where
     computedGcMetric :: a -> b
@@ -273,8 +338,14 @@ class HasComputedNrql a b | a -> b where
 class HasComputedPolicyId a b | a -> b where
     computedPolicyId :: a -> b
 
+class HasComputedProcessWhere a b | a -> b where
+    computedProcessWhere :: a -> b
+
 class HasComputedRunbookUrl a b | a -> b where
     computedRunbookUrl :: a -> b
+
+class HasComputedSelect a b | a -> b where
+    computedSelect :: a -> b
 
 class HasComputedTerm a b | a -> b where
     computedTerm :: a -> b
@@ -302,6 +373,12 @@ class HasComputedViolationCloseTimer a b | a -> b where
 
 class HasComputedVisibility a b | a -> b where
     computedVisibility :: a -> b
+
+class HasComputedWarning a b | a -> b where
+    computedWarning :: a -> b
+
+class HasComputedWhere a b | a -> b where
+    computedWhere :: a -> b
 
 class HasComputedWidget a b | a -> b where
     computedWidget :: a -> b

@@ -33,32 +33,46 @@ module Terrafomo.Nomad.Resource
     , JobResource (..)
     , jobResource
 
+    , NamespaceResource (..)
+    , namespaceResource
+
     , QuotaSpecificationResource (..)
     , quotaSpecificationResource
+
+    , SentinelPolicyResource (..)
+    , sentinelPolicyResource
 
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasDeregisterOnDestroy (..)
     , P.HasDeregisterOnIdChange (..)
     , P.HasDescription (..)
+    , P.HasEnforcementLevel (..)
     , P.HasGlobal (..)
     , P.HasJobspec (..)
     , P.HasLimits (..)
     , P.HasName (..)
     , P.HasPolicies (..)
+    , P.HasPolicy (..)
+    , P.HasPolicyOverride (..)
     , P.HasRulesHcl (..)
+    , P.HasScope (..)
     , P.HasType' (..)
 
     -- ** Computed Attributes
     , P.HasComputedDeregisterOnDestroy (..)
     , P.HasComputedDeregisterOnIdChange (..)
     , P.HasComputedDescription (..)
+    , P.HasComputedEnforcementLevel (..)
     , P.HasComputedGlobal (..)
     , P.HasComputedJobspec (..)
     , P.HasComputedLimits (..)
     , P.HasComputedName (..)
     , P.HasComputedPolicies (..)
+    , P.HasComputedPolicy (..)
+    , P.HasComputedPolicyOverride (..)
     , P.HasComputedRulesHcl (..)
+    , P.HasComputedScope (..)
     , P.HasComputedType' (..)
 
     -- * Re-exported Types
@@ -239,6 +253,8 @@ data JobResource s = JobResource {
     {- ^  @(bool: true)@ - Determines if the job will be deregistered if the ID of the job in the jobspec changes. -}
     , _jobspec                 :: !(TF.Attr s P.Text)
     {- ^  @(string: <required>)@ - The contents of the jobspec to register. -}
+    , _policy_override         :: !(TF.Attr s P.Text)
+    {- ^  @(bool: false)@ - Determins if the job will override any soft-mandatory Sentinel policies and register even if they fail. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (JobResource s) where
@@ -246,6 +262,7 @@ instance TF.ToHCL (JobResource s) where
         [ TF.assign "deregister_on_destroy" <$> TF.attribute _deregister_on_destroy
         , TF.assign "deregister_on_id_change" <$> TF.attribute _deregister_on_id_change
         , TF.assign "jobspec" <$> TF.attribute _jobspec
+        , TF.assign "policy_override" <$> TF.attribute _policy_override
         ]
 
 instance P.HasDeregisterOnDestroy (JobResource s) (TF.Attr s P.Text) where
@@ -263,6 +280,11 @@ instance P.HasJobspec (JobResource s) (TF.Attr s P.Text) where
         lens (_jobspec :: JobResource s -> TF.Attr s P.Text)
              (\s a -> s { _jobspec = a } :: JobResource s)
 
+instance P.HasPolicyOverride (JobResource s) (TF.Attr s P.Text) where
+    policyOverride =
+        lens (_policy_override :: JobResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policy_override = a } :: JobResource s)
+
 instance s ~ s' => P.HasComputedDeregisterOnDestroy (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedDeregisterOnDestroy =
         (_deregister_on_destroy :: JobResource s -> TF.Attr s P.Text)
@@ -278,6 +300,11 @@ instance s ~ s' => P.HasComputedJobspec (TF.Ref s' (JobResource s)) (TF.Attr s P
         (_jobspec :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedPolicyOverride (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
+    computedPolicyOverride =
+        (_policy_override :: JobResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 jobResource :: TF.Resource P.Nomad (JobResource s)
 jobResource =
     TF.newResource "nomad_job" $
@@ -285,6 +312,54 @@ jobResource =
               _deregister_on_destroy = TF.Nil
             , _deregister_on_id_change = TF.Nil
             , _jobspec = TF.Nil
+            , _policy_override = TF.Nil
+            }
+
+{- | The @nomad_namespace@ Nomad resource.
+
+Provisions a namespace within a Nomad cluster. ~> Enterprise Only! This API
+endpoint and functionality only exists in Nomad Enterprise. This is not
+present in the open source version of Nomad.
+-}
+data NamespaceResource s = NamespaceResource {
+      _description :: !(TF.Attr s P.Text)
+    {- ^  @(string: "")@ - A description of the namespace. -}
+    , _name        :: !(TF.Attr s P.Text)
+    {- ^  @(string: <required>)@ - A unique name for the namespace. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (NamespaceResource s) where
+    toHCL NamespaceResource{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasDescription (NamespaceResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: NamespaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: NamespaceResource s)
+
+instance P.HasName (NamespaceResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: NamespaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: NamespaceResource s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (NamespaceResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: NamespaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NamespaceResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: NamespaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+namespaceResource :: TF.Resource P.Nomad (NamespaceResource s)
+namespaceResource =
+    TF.newResource "nomad_namespace" $
+        NamespaceResource {
+              _description = TF.Nil
+            , _name = TF.Nil
             }
 
 {- | The @nomad_quota_specification@ Nomad resource.
@@ -344,4 +419,93 @@ quotaSpecificationResource =
               _description = TF.Nil
             , _limits = TF.Nil
             , _name = TF.Nil
+            }
+
+{- | The @nomad_sentinel_policy@ Nomad resource.
+
+Manages a Sentinel policy registered in Nomad. ~> Enterprise Only! This API
+endpoint and functionality only exists in Nomad Enterprise. This is not
+present in the open source version of Nomad.
+-}
+data SentinelPolicyResource s = SentinelPolicyResource {
+      _description       :: !(TF.Attr s P.Text)
+    {- ^  @(string: "")@ - A description of the policy. -}
+    , _enforcement_level :: !(TF.Attr s P.Text)
+    {- ^  @(strings: <required>)@ - The <https://www.nomadproject.io/guides/sentinel-policy.html#enforcement-level> for this policy. -}
+    , _name              :: !(TF.Attr s P.Text)
+    {- ^  @(string: <required>)@ - A unique name for the policy. -}
+    , _policy            :: !(TF.Attr s P.Text)
+    {- ^  @(string: <required>)@ - The contents of the policy to register. -}
+    , _scope             :: !(TF.Attr s P.Text)
+    {- ^  @(strings: <required>)@ - The <https://www.nomadproject.io/guides/sentinel-policy.html#policy-scope> for this policy. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SentinelPolicyResource s) where
+    toHCL SentinelPolicyResource{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "enforcement_level" <$> TF.attribute _enforcement_level
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "policy" <$> TF.attribute _policy
+        , TF.assign "scope" <$> TF.attribute _scope
+        ]
+
+instance P.HasDescription (SentinelPolicyResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: SentinelPolicyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: SentinelPolicyResource s)
+
+instance P.HasEnforcementLevel (SentinelPolicyResource s) (TF.Attr s P.Text) where
+    enforcementLevel =
+        lens (_enforcement_level :: SentinelPolicyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enforcement_level = a } :: SentinelPolicyResource s)
+
+instance P.HasName (SentinelPolicyResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: SentinelPolicyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SentinelPolicyResource s)
+
+instance P.HasPolicy (SentinelPolicyResource s) (TF.Attr s P.Text) where
+    policy =
+        lens (_policy :: SentinelPolicyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policy = a } :: SentinelPolicyResource s)
+
+instance P.HasScope (SentinelPolicyResource s) (TF.Attr s P.Text) where
+    scope =
+        lens (_scope :: SentinelPolicyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _scope = a } :: SentinelPolicyResource s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SentinelPolicyResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: SentinelPolicyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEnforcementLevel (TF.Ref s' (SentinelPolicyResource s)) (TF.Attr s P.Text) where
+    computedEnforcementLevel =
+        (_enforcement_level :: SentinelPolicyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SentinelPolicyResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: SentinelPolicyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SentinelPolicyResource s)) (TF.Attr s P.Text) where
+    computedPolicy =
+        (_policy :: SentinelPolicyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedScope (TF.Ref s' (SentinelPolicyResource s)) (TF.Attr s P.Text) where
+    computedScope =
+        (_scope :: SentinelPolicyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+sentinelPolicyResource :: TF.Resource P.Nomad (SentinelPolicyResource s)
+sentinelPolicyResource =
+    TF.newResource "nomad_sentinel_policy" $
+        SentinelPolicyResource {
+              _description = TF.Nil
+            , _enforcement_level = TF.Nil
+            , _name = TF.Nil
+            , _policy = TF.Nil
+            , _scope = TF.Nil
             }

@@ -27,6 +27,9 @@ module Terrafomo.LogicMonitor.Resource
       CollectorGroupResource (..)
     , collectorGroupResource
 
+    , CollectorResource (..)
+    , collectorResource
+
     , DeviceGroupResource (..)
     , deviceGroupResource
 
@@ -36,27 +39,41 @@ module Terrafomo.LogicMonitor.Resource
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasAppliesTo (..)
+    , P.HasBackupCollectorId (..)
     , P.HasCollector (..)
+    , P.HasCollectorGroupId (..)
     , P.HasDescription (..)
     , P.HasDisableAlerting (..)
     , P.HasDisplayName (..)
+    , P.HasEnableCollectorDeviceFailover (..)
+    , P.HasEnableFailback (..)
+    , P.HasEscalationChainId (..)
     , P.HasHostgroupId (..)
     , P.HasIpAddr (..)
     , P.HasName (..)
     , P.HasParentId (..)
     , P.HasProperties (..)
+    , P.HasResendInterval (..)
+    , P.HasSuppressAlertClear (..)
 
     -- ** Computed Attributes
     , P.HasComputedAppliesTo (..)
+    , P.HasComputedBackupCollectorId (..)
     , P.HasComputedCollector (..)
+    , P.HasComputedCollectorGroupId (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDisableAlerting (..)
     , P.HasComputedDisplayName (..)
+    , P.HasComputedEnableCollectorDeviceFailover (..)
+    , P.HasComputedEnableFailback (..)
+    , P.HasComputedEscalationChainId (..)
     , P.HasComputedHostgroupId (..)
     , P.HasComputedIpAddr (..)
     , P.HasComputedName (..)
     , P.HasComputedParentId (..)
     , P.HasComputedProperties (..)
+    , P.HasComputedResendInterval (..)
+    , P.HasComputedSuppressAlertClear (..)
 
     -- * Re-exported Types
     , module P
@@ -88,7 +105,7 @@ import qualified Terrafomo.Schema    as TF
 {- | The @logicmonitor_collector_group@ LogicMonitor resource.
 
 Provides a LogicMonitor collector group resource. This can be used to create
-and manage LogicMonitor users
+and manage LogicMonitor collector groups
 -}
 data CollectorGroupResource s = CollectorGroupResource {
       _description :: !(TF.Attr s P.Text)
@@ -129,6 +146,139 @@ collectorGroupResource =
         CollectorGroupResource {
               _description = TF.Nil
             , _name = TF.Nil
+            }
+
+{- | The @logicmonitor_collector@ LogicMonitor resource.
+
+Provides a LogicMonitor collector resource. This can be used to create and
+manage LogicMonitor collectors. Note: This resource will only create the
+collector device in your account. See
+<https://www.logicmonitor.com/support/rest-api-developers-guide/collectors/downloading-a-collector-installer/>
+for information on how to download and install an existing collector.
+-}
+data CollectorResource s = CollectorResource {
+      _backup_collector_id              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Id of the failover Collector configured for this Collector -}
+    , _collector_group_id               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Id of the group the Collector is in -}
+    , _description                      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Collector's description -}
+    , _enable_collector_device_failover :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether or not the device the Collector is installed on is enabled for fail over -}
+    , _enable_failback                  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether or not automatic failback is enabled for the Collector -}
+    , _escalation_chain_id              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Id of the escalation chain associated with this Collector -}
+    , _resend_interval                  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The interval, in minutes, after which alert notifications for the Collector will be resent -}
+    , _suppress_alert_clear             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether alert clear notifications are suppressed for the Collector -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (CollectorResource s) where
+    toHCL CollectorResource{..} = TF.inline $ catMaybes
+        [ TF.assign "backup_collector_id" <$> TF.attribute _backup_collector_id
+        , TF.assign "collector_group_id" <$> TF.attribute _collector_group_id
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "enable_collector_device_failover" <$> TF.attribute _enable_collector_device_failover
+        , TF.assign "enable_failback" <$> TF.attribute _enable_failback
+        , TF.assign "escalation_chain_id" <$> TF.attribute _escalation_chain_id
+        , TF.assign "resend_interval" <$> TF.attribute _resend_interval
+        , TF.assign "suppress_alert_clear" <$> TF.attribute _suppress_alert_clear
+        ]
+
+instance P.HasBackupCollectorId (CollectorResource s) (TF.Attr s P.Text) where
+    backupCollectorId =
+        lens (_backup_collector_id :: CollectorResource s -> TF.Attr s P.Text)
+             (\s a -> s { _backup_collector_id = a } :: CollectorResource s)
+
+instance P.HasCollectorGroupId (CollectorResource s) (TF.Attr s P.Text) where
+    collectorGroupId =
+        lens (_collector_group_id :: CollectorResource s -> TF.Attr s P.Text)
+             (\s a -> s { _collector_group_id = a } :: CollectorResource s)
+
+instance P.HasDescription (CollectorResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: CollectorResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: CollectorResource s)
+
+instance P.HasEnableCollectorDeviceFailover (CollectorResource s) (TF.Attr s P.Text) where
+    enableCollectorDeviceFailover =
+        lens (_enable_collector_device_failover :: CollectorResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enable_collector_device_failover = a } :: CollectorResource s)
+
+instance P.HasEnableFailback (CollectorResource s) (TF.Attr s P.Text) where
+    enableFailback =
+        lens (_enable_failback :: CollectorResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enable_failback = a } :: CollectorResource s)
+
+instance P.HasEscalationChainId (CollectorResource s) (TF.Attr s P.Text) where
+    escalationChainId =
+        lens (_escalation_chain_id :: CollectorResource s -> TF.Attr s P.Text)
+             (\s a -> s { _escalation_chain_id = a } :: CollectorResource s)
+
+instance P.HasResendInterval (CollectorResource s) (TF.Attr s P.Text) where
+    resendInterval =
+        lens (_resend_interval :: CollectorResource s -> TF.Attr s P.Text)
+             (\s a -> s { _resend_interval = a } :: CollectorResource s)
+
+instance P.HasSuppressAlertClear (CollectorResource s) (TF.Attr s P.Text) where
+    suppressAlertClear =
+        lens (_suppress_alert_clear :: CollectorResource s -> TF.Attr s P.Text)
+             (\s a -> s { _suppress_alert_clear = a } :: CollectorResource s)
+
+instance s ~ s' => P.HasComputedBackupCollectorId (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
+    computedBackupCollectorId =
+        (_backup_collector_id :: CollectorResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCollectorGroupId (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
+    computedCollectorGroupId =
+        (_collector_group_id :: CollectorResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: CollectorResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEnableCollectorDeviceFailover (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
+    computedEnableCollectorDeviceFailover =
+        (_enable_collector_device_failover :: CollectorResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEnableFailback (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
+    computedEnableFailback =
+        (_enable_failback :: CollectorResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEscalationChainId (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
+    computedEscalationChainId =
+        (_escalation_chain_id :: CollectorResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResendInterval (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
+    computedResendInterval =
+        (_resend_interval :: CollectorResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSuppressAlertClear (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
+    computedSuppressAlertClear =
+        (_suppress_alert_clear :: CollectorResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+collectorResource :: TF.Resource P.LogicMonitor (CollectorResource s)
+collectorResource =
+    TF.newResource "logicmonitor_collector" $
+        CollectorResource {
+              _backup_collector_id = TF.Nil
+            , _collector_group_id = TF.Nil
+            , _description = TF.Nil
+            , _enable_collector_device_failover = TF.Nil
+            , _enable_failback = TF.Nil
+            , _escalation_chain_id = TF.Nil
+            , _resend_interval = TF.Nil
+            , _suppress_alert_clear = TF.Nil
             }
 
 {- | The @logicmonitor_device_group@ LogicMonitor resource.

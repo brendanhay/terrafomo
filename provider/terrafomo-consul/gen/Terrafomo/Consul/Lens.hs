@@ -22,11 +22,15 @@ module Terrafomo.Consul.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasAddress (..)
+      HasAction (..)
+    , HasAddress (..)
     , HasDatacenter (..)
+    , HasDescription (..)
+    , HasDestinationName (..)
     , HasDns (..)
     , HasFailover (..)
     , HasKey (..)
+    , HasMeta (..)
     , HasName (..)
     , HasNear (..)
     , HasNode (..)
@@ -37,6 +41,7 @@ module Terrafomo.Consul.Lens
     , HasService (..)
     , HasServiceId (..)
     , HasSession (..)
+    , HasSourceName (..)
     , HasStoredToken (..)
     , HasSubkey (..)
     , HasSubkeys (..)
@@ -46,25 +51,34 @@ module Terrafomo.Consul.Lens
     , HasToken (..)
 
     -- ** Computed Attributes
+    , HasComputedAction (..)
     , HasComputedAddress (..)
     , HasComputedDatacenter (..)
+    , HasComputedDescription (..)
+    , HasComputedDestinationName (..)
     , HasComputedDns (..)
     , HasComputedFailover (..)
     , HasComputedId (..)
     , HasComputedKey (..)
+    , HasComputedMeta (..)
     , HasComputedName (..)
     , HasComputedNear (..)
     , HasComputedNode (..)
+    , HasComputedNodeId (..)
     , HasComputedNodeIds (..)
+    , HasComputedNodeName (..)
     , HasComputedNodeNames (..)
     , HasComputedNodes (..)
     , HasComputedOnlyPassing (..)
     , HasComputedPathPrefix (..)
     , HasComputedPort (..)
     , HasComputedQueryOptions (..)
+    , HasComputedRevision (..)
+    , HasComputedServer (..)
     , HasComputedService (..)
     , HasComputedServiceId (..)
     , HasComputedSession (..)
+    , HasComputedSourceName (..)
     , HasComputedStoredToken (..)
     , HasComputedSubkey (..)
     , HasComputedSubkeys (..)
@@ -73,6 +87,7 @@ module Terrafomo.Consul.Lens
     , HasComputedTemplate (..)
     , HasComputedToken (..)
     , HasComputedVar<name> (..)
+    , HasComputedVersion (..)
     ) where
 
 import GHC.Base ((.))
@@ -81,6 +96,12 @@ import Lens.Micro (Lens')
 
 import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
+
+class HasAction a b | a -> b where
+    action :: Lens' a b
+
+instance HasAction a b => HasAction (TF.Schema l p a) b where
+    action = TF.configuration . action
 
 class HasAddress a b | a -> b where
     address :: Lens' a b
@@ -93,6 +114,18 @@ class HasDatacenter a b | a -> b where
 
 instance HasDatacenter a b => HasDatacenter (TF.Schema l p a) b where
     datacenter = TF.configuration . datacenter
+
+class HasDescription a b | a -> b where
+    description :: Lens' a b
+
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
+    description = TF.configuration . description
+
+class HasDestinationName a b | a -> b where
+    destinationName :: Lens' a b
+
+instance HasDestinationName a b => HasDestinationName (TF.Schema l p a) b where
+    destinationName = TF.configuration . destinationName
 
 class HasDns a b | a -> b where
     dns :: Lens' a b
@@ -111,6 +144,12 @@ class HasKey a b | a -> b where
 
 instance HasKey a b => HasKey (TF.Schema l p a) b where
     key = TF.configuration . key
+
+class HasMeta a b | a -> b where
+    meta :: Lens' a b
+
+instance HasMeta a b => HasMeta (TF.Schema l p a) b where
+    meta = TF.configuration . meta
 
 class HasName a b | a -> b where
     name :: Lens' a b
@@ -172,6 +211,12 @@ class HasSession a b | a -> b where
 instance HasSession a b => HasSession (TF.Schema l p a) b where
     session = TF.configuration . session
 
+class HasSourceName a b | a -> b where
+    sourceName :: Lens' a b
+
+instance HasSourceName a b => HasSourceName (TF.Schema l p a) b where
+    sourceName = TF.configuration . sourceName
+
 class HasStoredToken a b | a -> b where
     storedToken :: Lens' a b
 
@@ -214,11 +259,20 @@ class HasToken a b | a -> b where
 instance HasToken a b => HasToken (TF.Schema l p a) b where
     token = TF.configuration . token
 
+class HasComputedAction a b | a -> b where
+    computedAction :: a -> b
+
 class HasComputedAddress a b | a -> b where
     computedAddress :: a -> b
 
 class HasComputedDatacenter a b | a -> b where
     computedDatacenter :: a -> b
+
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
+
+class HasComputedDestinationName a b | a -> b where
+    computedDestinationName :: a -> b
 
 class HasComputedDns a b | a -> b where
     computedDns :: a -> b
@@ -232,6 +286,9 @@ class HasComputedId a b | a -> b where
 class HasComputedKey a b | a -> b where
     computedKey :: a -> b
 
+class HasComputedMeta a b | a -> b where
+    computedMeta :: a -> b
+
 class HasComputedName a b | a -> b where
     computedName :: a -> b
 
@@ -241,8 +298,14 @@ class HasComputedNear a b | a -> b where
 class HasComputedNode a b | a -> b where
     computedNode :: a -> b
 
+class HasComputedNodeId a b | a -> b where
+    computedNodeId :: a -> b
+
 class HasComputedNodeIds a b | a -> b where
     computedNodeIds :: a -> b
+
+class HasComputedNodeName a b | a -> b where
+    computedNodeName :: a -> b
 
 class HasComputedNodeNames a b | a -> b where
     computedNodeNames :: a -> b
@@ -262,6 +325,12 @@ class HasComputedPort a b | a -> b where
 class HasComputedQueryOptions a b | a -> b where
     computedQueryOptions :: a -> b
 
+class HasComputedRevision a b | a -> b where
+    computedRevision :: a -> b
+
+class HasComputedServer a b | a -> b where
+    computedServer :: a -> b
+
 class HasComputedService a b | a -> b where
     computedService :: a -> b
 
@@ -270,6 +339,9 @@ class HasComputedServiceId a b | a -> b where
 
 class HasComputedSession a b | a -> b where
     computedSession :: a -> b
+
+class HasComputedSourceName a b | a -> b where
+    computedSourceName :: a -> b
 
 class HasComputedStoredToken a b | a -> b where
     computedStoredToken :: a -> b
@@ -294,3 +366,6 @@ class HasComputedToken a b | a -> b where
 
 class HasComputedVar<name> a b | a -> b where
     computedVar<name> :: a -> b
+
+class HasComputedVersion a b | a -> b where
+    computedVersion :: a -> b

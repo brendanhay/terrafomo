@@ -24,7 +24,10 @@
 module Terrafomo.Docker.Resource
     (
     -- * Types
-      ContainerResource (..)
+      ConfigResource (..)
+    , configResource
+
+    , ContainerResource (..)
     , containerResource
 
     , ImageResource (..)
@@ -33,26 +36,30 @@ module Terrafomo.Docker.Resource
     , NetworkResource (..)
     , networkResource
 
+    , SecretResource (..)
+    , secretResource
+
+    , ServiceResource (..)
+    , serviceResource
+
     , VolumeResource (..)
     , volumeResource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , P.HasCapabilities (..)
+    , P.HasAuth (..)
     , P.HasCheckDuplicate (..)
     , P.HasCommand (..)
-    , P.HasCpuShares (..)
-    , P.HasDestroyGraceSeconds (..)
+    , P.HasConvergeConfig (..)
+    , P.HasData' (..)
     , P.HasDns (..)
     , P.HasDnsOpts (..)
     , P.HasDnsSearch (..)
-    , P.HasDomainname (..)
     , P.HasDriver (..)
     , P.HasDriverOpts (..)
+    , P.HasEndpointSpec (..)
     , P.HasEntrypoint (..)
     , P.HasEnv (..)
-    , P.HasHost (..)
-    , P.HasHostname (..)
     , P.HasImage (..)
     , P.HasInternal (..)
     , P.HasIpamConfig (..)
@@ -60,45 +67,32 @@ module Terrafomo.Docker.Resource
     , P.HasKeepLocally (..)
     , P.HasLabels (..)
     , P.HasLinks (..)
-    , P.HasLogDriver (..)
-    , P.HasLogOpts (..)
-    , P.HasMaxRetryCount (..)
-    , P.HasMemory (..)
-    , P.HasMemorySwap (..)
-    , P.HasMustRun (..)
+    , P.HasMode (..)
     , P.HasName (..)
-    , P.HasNetworkAlias (..)
-    , P.HasNetworkMode (..)
-    , P.HasNetworks (..)
     , P.HasOptions (..)
-    , P.HasPorts (..)
-    , P.HasPrivileged (..)
-    , P.HasPublishAllPorts (..)
     , P.HasPullTrigger (..)
     , P.HasPullTriggers (..)
-    , P.HasRestart (..)
-    , P.HasUpload (..)
+    , P.HasRollbackConfig (..)
+    , P.HasTaskSpec (..)
+    , P.HasUpdateConfig (..)
     , P.HasUser (..)
-    , P.HasVolumes (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAuth (..)
     , P.HasComputedBridge (..)
-    , P.HasComputedCapabilities (..)
     , P.HasComputedCheckDuplicate (..)
     , P.HasComputedCommand (..)
-    , P.HasComputedCpuShares (..)
-    , P.HasComputedDestroyGraceSeconds (..)
+    , P.HasComputedConvergeConfig (..)
+    , P.HasComputedData' (..)
     , P.HasComputedDns (..)
     , P.HasComputedDnsOpts (..)
     , P.HasComputedDnsSearch (..)
-    , P.HasComputedDomainname (..)
     , P.HasComputedDriver (..)
     , P.HasComputedDriverOpts (..)
+    , P.HasComputedEndpointSpec (..)
     , P.HasComputedEntrypoint (..)
     , P.HasComputedEnv (..)
     , P.HasComputedGateway (..)
-    , P.HasComputedHost (..)
-    , P.HasComputedHostname (..)
     , P.HasComputedId (..)
     , P.HasComputedImage (..)
     , P.HasComputedInternal (..)
@@ -110,28 +104,17 @@ module Terrafomo.Docker.Resource
     , P.HasComputedLabels (..)
     , P.HasComputedLatest (..)
     , P.HasComputedLinks (..)
-    , P.HasComputedLogDriver (..)
-    , P.HasComputedLogOpts (..)
-    , P.HasComputedMaxRetryCount (..)
-    , P.HasComputedMemory (..)
-    , P.HasComputedMemorySwap (..)
+    , P.HasComputedMode (..)
     , P.HasComputedMountpoint (..)
-    , P.HasComputedMustRun (..)
     , P.HasComputedName (..)
-    , P.HasComputedNetworkAlias (..)
-    , P.HasComputedNetworkMode (..)
-    , P.HasComputedNetworks (..)
     , P.HasComputedOptions (..)
-    , P.HasComputedPorts (..)
-    , P.HasComputedPrivileged (..)
-    , P.HasComputedPublishAllPorts (..)
     , P.HasComputedPullTrigger (..)
     , P.HasComputedPullTriggers (..)
-    , P.HasComputedRestart (..)
+    , P.HasComputedRollbackConfig (..)
     , P.HasComputedScope (..)
-    , P.HasComputedUpload (..)
+    , P.HasComputedTaskSpec (..)
+    , P.HasComputedUpdateConfig (..)
     , P.HasComputedUser (..)
-    , P.HasComputedVolumes (..)
 
     -- * Re-exported Types
     , module P
@@ -160,132 +143,102 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
+{- | The @docker_config@ Docker resource.
+
+Manages the configuration of a Docker service in a swarm.
+-}
+data ConfigResource s = ConfigResource {
+      _data' :: !(TF.Attr s P.Text)
+    {- ^ (Required, string) The base64 encoded data of the config. -}
+    , _name  :: !(TF.Attr s P.Text)
+    {- ^ (Required, string) The name of the Docker config. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ConfigResource s) where
+    toHCL ConfigResource{..} = TF.inline $ catMaybes
+        [ TF.assign "data" <$> TF.attribute _data'
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasData' (ConfigResource s) (TF.Attr s P.Text) where
+    data' =
+        lens (_data' :: ConfigResource s -> TF.Attr s P.Text)
+             (\s a -> s { _data' = a } :: ConfigResource s)
+
+instance P.HasName (ConfigResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ConfigResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ConfigResource s)
+
+instance s ~ s' => P.HasComputedData' (TF.Ref s' (ConfigResource s)) (TF.Attr s P.Text) where
+    computedData' =
+        (_data' :: ConfigResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ConfigResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ConfigResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ConfigResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+configResource :: TF.Resource P.Docker (ConfigResource s)
+configResource =
+    TF.newResource "docker_config" $
+        ConfigResource {
+              _data' = TF.Nil
+            , _name = TF.Nil
+            }
+
 {- | The @docker_container@ Docker resource.
 
 Manages the lifecycle of a Docker container.
 -}
 data ContainerResource s = ContainerResource {
-      _capabilities          :: !(TF.Attr s P.Text)
-    {- ^ (Optional, block) See <#capabilities> below for details. -}
-    , _command               :: !(TF.Attr s P.Text)
+      _command    :: !(TF.Attr s P.Text)
     {- ^ (Optional, list of strings) The command to use to start the container. For example, to run @/usr/bin/myprogram -f baz.conf@ set the command to be @["/usr/bin/myprogram", "-f", "baz.conf"]@ . -}
-    , _cpu_shares            :: !(TF.Attr s P.Text)
-    {- ^ (Optional, int) CPU shares (relative weight) for the container. -}
-    , _destroy_grace_seconds :: !(TF.Attr s P.Text)
-    {- ^ (Optional, int) If defined will attempt to stop the container before destroying. Container will be destroyed after @n@ seconds or on successful stop. -}
-    , _dns                   :: !(TF.Attr s P.Text)
+    , _dns        :: !(TF.Attr s P.Text)
     {- ^ (Optional, set of strings) Set of DNS servers. -}
-    , _dns_opts              :: !(TF.Attr s P.Text)
+    , _dns_opts   :: !(TF.Attr s P.Text)
     {- ^ (Optional, set of strings) Set of DNS options used by the DNS provider(s), see @resolv.conf@ documentation for valid list of options. -}
-    , _dns_search            :: !(TF.Attr s P.Text)
+    , _dns_search :: !(TF.Attr s P.Text)
     {- ^ (Optional, set of strings) Set of DNS search domains that are used when bare unqualified hostnames are used inside of the container. -}
-    , _domainname            :: !(TF.Attr s P.Text)
-    {- ^ (Optional, string) Domain name of the container. -}
-    , _entrypoint            :: !(TF.Attr s P.Text)
+    , _entrypoint :: !(TF.Attr s P.Text)
     {- ^ (Optional, list of strings) The command to use as the Entrypoint for the container. The Entrypoint allows you to configure a container to run as an executable. For example, to run @/usr/bin/myprogram@ when starting a container, set the entrypoint to be @["/usr/bin/myprogram"]@ . -}
-    , _env                   :: !(TF.Attr s P.Text)
+    , _env        :: !(TF.Attr s P.Text)
     {- ^ (Optional, set of strings) Environment variables to set. -}
-    , _host                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional, block) See <#extra_hosts> below for details. -}
-    , _hostname              :: !(TF.Attr s P.Text)
-    {- ^ (Optional, string) Hostname of the container. -}
-    , _image                 :: !(TF.Attr s P.Text)
+    , _image      :: !(TF.Attr s P.Text)
     {- ^ (Required, string) The ID of the image to back this container. The easiest way to get this value is to use the @docker_image@ resource as is shown in the example above. -}
-    , _labels                :: !(TF.Attr s P.Text)
+    , _labels     :: !(TF.Attr s P.Text)
     {- ^ (Optional, map of strings) Key/value pairs to set as labels on the container. -}
-    , _links                 :: !(TF.Attr s P.Text)
+    , _links      :: !(TF.Attr s P.Text)
     {- ^ (Optional, set of strings) Set of links for link based connectivity between containers that are running on the same host. -}
-    , _log_driver            :: !(TF.Attr s P.Text)
-    {- ^ (Optional, string) The logging driver to use for the container. Defaults to "json-file". -}
-    , _log_opts              :: !(TF.Attr s P.Text)
-    {- ^ (Optional, map of strings) Key/value pairs to use as options for the logging driver. -}
-    , _max_retry_count       :: !(TF.Attr s P.Text)
-    {- ^ (Optional, int) The maximum amount of times to an attempt a restart when @restart@ is set to "on-failure" -}
-    , _memory                :: !(TF.Attr s P.Text)
-    {- ^ (Optional, int) The memory limit for the container in MBs. -}
-    , _memory_swap           :: !(TF.Attr s P.Text)
-    {- ^ (Optional, int) The total memory limit (memory + swap) for the container in MBs. This setting may compute to @-1@ after @terraform apply@ if the target host doesn't support memory swap, when that is the case docker will use a soft limitation. -}
-    , _must_run              :: !(TF.Attr s P.Text)
-    {- ^ (Optional, bool) If true, then the Docker container will be kept running. If false, then as long as the container exists, Terraform assumes it is successful. -}
-    , _name                  :: !(TF.Attr s P.Text)
+    , _name       :: !(TF.Attr s P.Text)
     {- ^ (Required, string) The name of the Docker container. -}
-    , _network_alias         :: !(TF.Attr s P.Text)
-    {- ^ (Optional, set of strings) Network aliases of the container for user-defined networks only. -}
-    , _network_mode          :: !(TF.Attr s P.Text)
-    {- ^ (Optional, string) Network mode of the container. -}
-    , _networks              :: !(TF.Attr s P.Text)
-    {- ^ (Optional, set of strings) Id of the networks in which the container is. -}
-    , _ports                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional, block) See <#ports> below for details. -}
-    , _privileged            :: !(TF.Attr s P.Text)
-    {- ^ (Optional, bool) Run container in privileged mode. -}
-    , _publish_all_ports     :: !(TF.Attr s P.Text)
-    {- ^ (Optional, bool) Publish all ports of the container. -}
-    , _restart               :: !(TF.Attr s P.Text)
-    {- ^ (Optional, string) The restart policy for the container. Must be one of "no", "on-failure", "always", "unless-stopped". -}
-    , _upload                :: !(TF.Attr s P.Text)
-    {- ^ (Optional, block) See <#upload> below for details. -}
-    , _user                  :: !(TF.Attr s P.Text)
+    , _user       :: !(TF.Attr s P.Text)
     {- ^ (Optional, string) User used for run the first process. Format is @user@ or @user:group@ which user and group can be passed literraly or by name. -}
-    , _volumes               :: !(TF.Attr s P.Text)
-    {- ^ (Optional, block) See <#volumes> below for details. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ContainerResource s) where
     toHCL ContainerResource{..} = TF.inline $ catMaybes
-        [ TF.assign "capabilities" <$> TF.attribute _capabilities
-        , TF.assign "command" <$> TF.attribute _command
-        , TF.assign "cpu_shares" <$> TF.attribute _cpu_shares
-        , TF.assign "destroy_grace_seconds" <$> TF.attribute _destroy_grace_seconds
+        [ TF.assign "command" <$> TF.attribute _command
         , TF.assign "dns" <$> TF.attribute _dns
         , TF.assign "dns_opts" <$> TF.attribute _dns_opts
         , TF.assign "dns_search" <$> TF.attribute _dns_search
-        , TF.assign "domainname" <$> TF.attribute _domainname
         , TF.assign "entrypoint" <$> TF.attribute _entrypoint
         , TF.assign "env" <$> TF.attribute _env
-        , TF.assign "host" <$> TF.attribute _host
-        , TF.assign "hostname" <$> TF.attribute _hostname
         , TF.assign "image" <$> TF.attribute _image
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "links" <$> TF.attribute _links
-        , TF.assign "log_driver" <$> TF.attribute _log_driver
-        , TF.assign "log_opts" <$> TF.attribute _log_opts
-        , TF.assign "max_retry_count" <$> TF.attribute _max_retry_count
-        , TF.assign "memory" <$> TF.attribute _memory
-        , TF.assign "memory_swap" <$> TF.attribute _memory_swap
-        , TF.assign "must_run" <$> TF.attribute _must_run
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "network_alias" <$> TF.attribute _network_alias
-        , TF.assign "network_mode" <$> TF.attribute _network_mode
-        , TF.assign "networks" <$> TF.attribute _networks
-        , TF.assign "ports" <$> TF.attribute _ports
-        , TF.assign "privileged" <$> TF.attribute _privileged
-        , TF.assign "publish_all_ports" <$> TF.attribute _publish_all_ports
-        , TF.assign "restart" <$> TF.attribute _restart
-        , TF.assign "upload" <$> TF.attribute _upload
         , TF.assign "user" <$> TF.attribute _user
-        , TF.assign "volumes" <$> TF.attribute _volumes
         ]
-
-instance P.HasCapabilities (ContainerResource s) (TF.Attr s P.Text) where
-    capabilities =
-        lens (_capabilities :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _capabilities = a } :: ContainerResource s)
 
 instance P.HasCommand (ContainerResource s) (TF.Attr s P.Text) where
     command =
         lens (_command :: ContainerResource s -> TF.Attr s P.Text)
              (\s a -> s { _command = a } :: ContainerResource s)
-
-instance P.HasCpuShares (ContainerResource s) (TF.Attr s P.Text) where
-    cpuShares =
-        lens (_cpu_shares :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpu_shares = a } :: ContainerResource s)
-
-instance P.HasDestroyGraceSeconds (ContainerResource s) (TF.Attr s P.Text) where
-    destroyGraceSeconds =
-        lens (_destroy_grace_seconds :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _destroy_grace_seconds = a } :: ContainerResource s)
 
 instance P.HasDns (ContainerResource s) (TF.Attr s P.Text) where
     dns =
@@ -302,11 +255,6 @@ instance P.HasDnsSearch (ContainerResource s) (TF.Attr s P.Text) where
         lens (_dns_search :: ContainerResource s -> TF.Attr s P.Text)
              (\s a -> s { _dns_search = a } :: ContainerResource s)
 
-instance P.HasDomainname (ContainerResource s) (TF.Attr s P.Text) where
-    domainname =
-        lens (_domainname :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _domainname = a } :: ContainerResource s)
-
 instance P.HasEntrypoint (ContainerResource s) (TF.Attr s P.Text) where
     entrypoint =
         lens (_entrypoint :: ContainerResource s -> TF.Attr s P.Text)
@@ -316,16 +264,6 @@ instance P.HasEnv (ContainerResource s) (TF.Attr s P.Text) where
     env =
         lens (_env :: ContainerResource s -> TF.Attr s P.Text)
              (\s a -> s { _env = a } :: ContainerResource s)
-
-instance P.HasHost (ContainerResource s) (TF.Attr s P.Text) where
-    host =
-        lens (_host :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _host = a } :: ContainerResource s)
-
-instance P.HasHostname (ContainerResource s) (TF.Attr s P.Text) where
-    hostname =
-        lens (_hostname :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _hostname = a } :: ContainerResource s)
 
 instance P.HasImage (ContainerResource s) (TF.Attr s P.Text) where
     image =
@@ -342,112 +280,22 @@ instance P.HasLinks (ContainerResource s) (TF.Attr s P.Text) where
         lens (_links :: ContainerResource s -> TF.Attr s P.Text)
              (\s a -> s { _links = a } :: ContainerResource s)
 
-instance P.HasLogDriver (ContainerResource s) (TF.Attr s P.Text) where
-    logDriver =
-        lens (_log_driver :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _log_driver = a } :: ContainerResource s)
-
-instance P.HasLogOpts (ContainerResource s) (TF.Attr s P.Text) where
-    logOpts =
-        lens (_log_opts :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _log_opts = a } :: ContainerResource s)
-
-instance P.HasMaxRetryCount (ContainerResource s) (TF.Attr s P.Text) where
-    maxRetryCount =
-        lens (_max_retry_count :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _max_retry_count = a } :: ContainerResource s)
-
-instance P.HasMemory (ContainerResource s) (TF.Attr s P.Text) where
-    memory =
-        lens (_memory :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory = a } :: ContainerResource s)
-
-instance P.HasMemorySwap (ContainerResource s) (TF.Attr s P.Text) where
-    memorySwap =
-        lens (_memory_swap :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory_swap = a } :: ContainerResource s)
-
-instance P.HasMustRun (ContainerResource s) (TF.Attr s P.Text) where
-    mustRun =
-        lens (_must_run :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _must_run = a } :: ContainerResource s)
-
 instance P.HasName (ContainerResource s) (TF.Attr s P.Text) where
     name =
         lens (_name :: ContainerResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ContainerResource s)
-
-instance P.HasNetworkAlias (ContainerResource s) (TF.Attr s P.Text) where
-    networkAlias =
-        lens (_network_alias :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network_alias = a } :: ContainerResource s)
-
-instance P.HasNetworkMode (ContainerResource s) (TF.Attr s P.Text) where
-    networkMode =
-        lens (_network_mode :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network_mode = a } :: ContainerResource s)
-
-instance P.HasNetworks (ContainerResource s) (TF.Attr s P.Text) where
-    networks =
-        lens (_networks :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _networks = a } :: ContainerResource s)
-
-instance P.HasPorts (ContainerResource s) (TF.Attr s P.Text) where
-    ports =
-        lens (_ports :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ports = a } :: ContainerResource s)
-
-instance P.HasPrivileged (ContainerResource s) (TF.Attr s P.Text) where
-    privileged =
-        lens (_privileged :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _privileged = a } :: ContainerResource s)
-
-instance P.HasPublishAllPorts (ContainerResource s) (TF.Attr s P.Text) where
-    publishAllPorts =
-        lens (_publish_all_ports :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _publish_all_ports = a } :: ContainerResource s)
-
-instance P.HasRestart (ContainerResource s) (TF.Attr s P.Text) where
-    restart =
-        lens (_restart :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _restart = a } :: ContainerResource s)
-
-instance P.HasUpload (ContainerResource s) (TF.Attr s P.Text) where
-    upload =
-        lens (_upload :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _upload = a } :: ContainerResource s)
 
 instance P.HasUser (ContainerResource s) (TF.Attr s P.Text) where
     user =
         lens (_user :: ContainerResource s -> TF.Attr s P.Text)
              (\s a -> s { _user = a } :: ContainerResource s)
 
-instance P.HasVolumes (ContainerResource s) (TF.Attr s P.Text) where
-    volumes =
-        lens (_volumes :: ContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _volumes = a } :: ContainerResource s)
-
 instance s ~ s' => P.HasComputedBridge (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
     computedBridge x = TF.compute (TF.refKey x) "bridge"
-
-instance s ~ s' => P.HasComputedCapabilities (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedCapabilities =
-        (_capabilities :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
 
 instance s ~ s' => P.HasComputedCommand (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
     computedCommand =
         (_command :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCpuShares (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedCpuShares =
-        (_cpu_shares :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDestroyGraceSeconds (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedDestroyGraceSeconds =
-        (_destroy_grace_seconds :: ContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedDns (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
@@ -465,11 +313,6 @@ instance s ~ s' => P.HasComputedDnsSearch (TF.Ref s' (ContainerResource s)) (TF.
         (_dns_search :: ContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDomainname (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedDomainname =
-        (_domainname :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
 instance s ~ s' => P.HasComputedEntrypoint (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
     computedEntrypoint =
         (_entrypoint :: ContainerResource s -> TF.Attr s P.Text)
@@ -482,16 +325,6 @@ instance s ~ s' => P.HasComputedEnv (TF.Ref s' (ContainerResource s)) (TF.Attr s
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
     computedGateway x = TF.compute (TF.refKey x) "gateway"
-
-instance s ~ s' => P.HasComputedHost (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedHost =
-        (_host :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedHostname =
-        (_hostname :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
 
 instance s ~ s' => P.HasComputedImage (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
     computedImage =
@@ -514,79 +347,9 @@ instance s ~ s' => P.HasComputedLinks (TF.Ref s' (ContainerResource s)) (TF.Attr
         (_links :: ContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLogDriver (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedLogDriver =
-        (_log_driver :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedLogOpts (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedLogOpts =
-        (_log_opts :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMaxRetryCount (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedMaxRetryCount =
-        (_max_retry_count :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemory (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedMemory =
-        (_memory :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemorySwap (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedMemorySwap =
-        (_memory_swap :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMustRun (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedMustRun =
-        (_must_run :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNetworkAlias (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedNetworkAlias =
-        (_network_alias :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNetworkMode (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedNetworkMode =
-        (_network_mode :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNetworks (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedNetworks =
-        (_networks :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPorts (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedPorts =
-        (_ports :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPrivileged (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedPrivileged =
-        (_privileged :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPublishAllPorts (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedPublishAllPorts =
-        (_publish_all_ports :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRestart (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedRestart =
-        (_restart :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUpload (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedUpload =
-        (_upload :: ContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedUser (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
@@ -594,47 +357,21 @@ instance s ~ s' => P.HasComputedUser (TF.Ref s' (ContainerResource s)) (TF.Attr 
         (_user :: ContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedVolumes (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedVolumes =
-        (_volumes :: ContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
 containerResource :: TF.Resource P.Docker (ContainerResource s)
 containerResource =
     TF.newResource "docker_container" $
         ContainerResource {
-              _capabilities = TF.Nil
-            , _command = TF.Nil
-            , _cpu_shares = TF.Nil
-            , _destroy_grace_seconds = TF.Nil
+              _command = TF.Nil
             , _dns = TF.Nil
             , _dns_opts = TF.Nil
             , _dns_search = TF.Nil
-            , _domainname = TF.Nil
             , _entrypoint = TF.Nil
             , _env = TF.Nil
-            , _host = TF.Nil
-            , _hostname = TF.Nil
             , _image = TF.Nil
             , _labels = TF.Nil
             , _links = TF.Nil
-            , _log_driver = TF.Nil
-            , _log_opts = TF.Nil
-            , _max_retry_count = TF.Nil
-            , _memory = TF.Nil
-            , _memory_swap = TF.Nil
-            , _must_run = TF.Nil
             , _name = TF.Nil
-            , _network_alias = TF.Nil
-            , _network_mode = TF.Nil
-            , _networks = TF.Nil
-            , _ports = TF.Nil
-            , _privileged = TF.Nil
-            , _publish_all_ports = TF.Nil
-            , _restart = TF.Nil
-            , _upload = TF.Nil
             , _user = TF.Nil
-            , _volumes = TF.Nil
             }
 
 {- | The @docker_image@ Docker resource.
@@ -837,6 +574,191 @@ networkResource =
             , _ipam_driver = TF.Nil
             , _name = TF.Nil
             , _options = TF.Nil
+            }
+
+{- | The @docker_secret@ Docker resource.
+
+Manages the secrets of a Docker service in a swarm.
+-}
+data SecretResource s = SecretResource {
+      _data' :: !(TF.Attr s P.Text)
+    {- ^ (Required, string) The base64 encoded data of the secret. -}
+    , _name  :: !(TF.Attr s P.Text)
+    {- ^ (Required, string) The name of the Docker secret. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SecretResource s) where
+    toHCL SecretResource{..} = TF.inline $ catMaybes
+        [ TF.assign "data" <$> TF.attribute _data'
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasData' (SecretResource s) (TF.Attr s P.Text) where
+    data' =
+        lens (_data' :: SecretResource s -> TF.Attr s P.Text)
+             (\s a -> s { _data' = a } :: SecretResource s)
+
+instance P.HasName (SecretResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: SecretResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SecretResource s)
+
+instance s ~ s' => P.HasComputedData' (TF.Ref s' (SecretResource s)) (TF.Attr s P.Text) where
+    computedData' =
+        (_data' :: SecretResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SecretResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: SecretResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+secretResource :: TF.Resource P.Docker (SecretResource s)
+secretResource =
+    TF.newResource "docker_secret" $
+        SecretResource {
+              _data' = TF.Nil
+            , _name = TF.Nil
+            }
+
+{- | The @docker_service@ Docker resource.
+
+This resource manages the lifecycle of a Docker service. By default, the
+creation, update and delete of services are detached. With the
+<#convergeconfig> the behavior of the @docker cli@ is imitated to guarantee
+that for example, all tasks of a service are running or successfully updated
+or to inform @terraform@ that a service could not be updated and was
+successfully rolled back.
+-}
+data ServiceResource s = ServiceResource {
+      _auth            :: !(TF.Attr s P.Text)
+    {- ^ (Optional, block) See <#auth> below for details. -}
+    , _converge_config :: !(TF.Attr s P.Text)
+    {- ^ (Optional, block) See <#converge-config> below for details. -}
+    , _endpoint_spec   :: !(TF.Attr s P.Text)
+    {- ^ (Optional, block) See <#endpoint-spec> below for details. -}
+    , _mode            :: !(TF.Attr s P.Text)
+    {- ^ (Optional, block) See <#mode> below for details. -}
+    , _name            :: !(TF.Attr s P.Text)
+    {- ^ (Required, string) The name of the Docker service. -}
+    , _rollback_config :: !(TF.Attr s P.Text)
+    {- ^ (Optional, block) See <#update-rollback-config> below for details. -}
+    , _task_spec       :: !(TF.Attr s P.Text)
+    {- ^ (Required, block) See <#task-spec> below for details. -}
+    , _update_config   :: !(TF.Attr s P.Text)
+    {- ^ (Optional, block) See <#update-rollback-config> below for details. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ServiceResource s) where
+    toHCL ServiceResource{..} = TF.inline $ catMaybes
+        [ TF.assign "auth" <$> TF.attribute _auth
+        , TF.assign "converge_config" <$> TF.attribute _converge_config
+        , TF.assign "endpoint_spec" <$> TF.attribute _endpoint_spec
+        , TF.assign "mode" <$> TF.attribute _mode
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "rollback_config" <$> TF.attribute _rollback_config
+        , TF.assign "task_spec" <$> TF.attribute _task_spec
+        , TF.assign "update_config" <$> TF.attribute _update_config
+        ]
+
+instance P.HasAuth (ServiceResource s) (TF.Attr s P.Text) where
+    auth =
+        lens (_auth :: ServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _auth = a } :: ServiceResource s)
+
+instance P.HasConvergeConfig (ServiceResource s) (TF.Attr s P.Text) where
+    convergeConfig =
+        lens (_converge_config :: ServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _converge_config = a } :: ServiceResource s)
+
+instance P.HasEndpointSpec (ServiceResource s) (TF.Attr s P.Text) where
+    endpointSpec =
+        lens (_endpoint_spec :: ServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _endpoint_spec = a } :: ServiceResource s)
+
+instance P.HasMode (ServiceResource s) (TF.Attr s P.Text) where
+    mode =
+        lens (_mode :: ServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _mode = a } :: ServiceResource s)
+
+instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ServiceResource s)
+
+instance P.HasRollbackConfig (ServiceResource s) (TF.Attr s P.Text) where
+    rollbackConfig =
+        lens (_rollback_config :: ServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _rollback_config = a } :: ServiceResource s)
+
+instance P.HasTaskSpec (ServiceResource s) (TF.Attr s P.Text) where
+    taskSpec =
+        lens (_task_spec :: ServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _task_spec = a } :: ServiceResource s)
+
+instance P.HasUpdateConfig (ServiceResource s) (TF.Attr s P.Text) where
+    updateConfig =
+        lens (_update_config :: ServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _update_config = a } :: ServiceResource s)
+
+instance s ~ s' => P.HasComputedAuth (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedAuth =
+        (_auth :: ServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedConvergeConfig (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedConvergeConfig =
+        (_converge_config :: ServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEndpointSpec (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedEndpointSpec =
+        (_endpoint_spec :: ServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedMode (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedMode =
+        (_mode :: ServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRollbackConfig (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedRollbackConfig =
+        (_rollback_config :: ServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTaskSpec (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedTaskSpec =
+        (_task_spec :: ServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUpdateConfig (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedUpdateConfig =
+        (_update_config :: ServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+serviceResource :: TF.Resource P.Docker (ServiceResource s)
+serviceResource =
+    TF.newResource "docker_service" $
+        ServiceResource {
+              _auth = TF.Nil
+            , _converge_config = TF.Nil
+            , _endpoint_spec = TF.Nil
+            , _mode = TF.Nil
+            , _name = TF.Nil
+            , _rollback_config = TF.Nil
+            , _task_spec = TF.Nil
+            , _update_config = TF.Nil
             }
 
 {- | The @docker_volume@ Docker resource.

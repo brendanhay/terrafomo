@@ -23,10 +23,15 @@ module Terrafomo.LogicMonitor.Lens
     -- * Overloaded Fields
     -- ** Arguments
       HasAppliesTo (..)
+    , HasBackupCollectorId (..)
     , HasCollector (..)
+    , HasCollectorGroupId (..)
     , HasDescription (..)
     , HasDisableAlerting (..)
     , HasDisplayName (..)
+    , HasEnableCollectorDeviceFailover (..)
+    , HasEnableFailback (..)
+    , HasEscalationChainId (..)
     , HasFilters (..)
     , HasHostgroupId (..)
     , HasIpAddr (..)
@@ -35,14 +40,21 @@ module Terrafomo.LogicMonitor.Lens
     , HasOffset (..)
     , HasParentId (..)
     , HasProperties (..)
+    , HasResendInterval (..)
     , HasSize (..)
+    , HasSuppressAlertClear (..)
 
     -- ** Computed Attributes
     , HasComputedAppliesTo (..)
+    , HasComputedBackupCollectorId (..)
     , HasComputedCollector (..)
+    , HasComputedCollectorGroupId (..)
     , HasComputedDescription (..)
     , HasComputedDisableAlerting (..)
     , HasComputedDisplayName (..)
+    , HasComputedEnableCollectorDeviceFailover (..)
+    , HasComputedEnableFailback (..)
+    , HasComputedEscalationChainId (..)
     , HasComputedFilters (..)
     , HasComputedHostgroupId (..)
     , HasComputedIpAddr (..)
@@ -51,7 +63,9 @@ module Terrafomo.LogicMonitor.Lens
     , HasComputedOffset (..)
     , HasComputedParentId (..)
     , HasComputedProperties (..)
+    , HasComputedResendInterval (..)
     , HasComputedSize (..)
+    , HasComputedSuppressAlertClear (..)
     ) where
 
 import GHC.Base ((.))
@@ -67,11 +81,23 @@ class HasAppliesTo a b | a -> b where
 instance HasAppliesTo a b => HasAppliesTo (TF.Schema l p a) b where
     appliesTo = TF.configuration . appliesTo
 
+class HasBackupCollectorId a b | a -> b where
+    backupCollectorId :: Lens' a b
+
+instance HasBackupCollectorId a b => HasBackupCollectorId (TF.Schema l p a) b where
+    backupCollectorId = TF.configuration . backupCollectorId
+
 class HasCollector a b | a -> b where
     collector :: Lens' a b
 
 instance HasCollector a b => HasCollector (TF.Schema l p a) b where
     collector = TF.configuration . collector
+
+class HasCollectorGroupId a b | a -> b where
+    collectorGroupId :: Lens' a b
+
+instance HasCollectorGroupId a b => HasCollectorGroupId (TF.Schema l p a) b where
+    collectorGroupId = TF.configuration . collectorGroupId
 
 class HasDescription a b | a -> b where
     description :: Lens' a b
@@ -90,6 +116,24 @@ class HasDisplayName a b | a -> b where
 
 instance HasDisplayName a b => HasDisplayName (TF.Schema l p a) b where
     displayName = TF.configuration . displayName
+
+class HasEnableCollectorDeviceFailover a b | a -> b where
+    enableCollectorDeviceFailover :: Lens' a b
+
+instance HasEnableCollectorDeviceFailover a b => HasEnableCollectorDeviceFailover (TF.Schema l p a) b where
+    enableCollectorDeviceFailover = TF.configuration . enableCollectorDeviceFailover
+
+class HasEnableFailback a b | a -> b where
+    enableFailback :: Lens' a b
+
+instance HasEnableFailback a b => HasEnableFailback (TF.Schema l p a) b where
+    enableFailback = TF.configuration . enableFailback
+
+class HasEscalationChainId a b | a -> b where
+    escalationChainId :: Lens' a b
+
+instance HasEscalationChainId a b => HasEscalationChainId (TF.Schema l p a) b where
+    escalationChainId = TF.configuration . escalationChainId
 
 class HasFilters a b | a -> b where
     filters :: Lens' a b
@@ -139,17 +183,35 @@ class HasProperties a b | a -> b where
 instance HasProperties a b => HasProperties (TF.Schema l p a) b where
     properties = TF.configuration . properties
 
+class HasResendInterval a b | a -> b where
+    resendInterval :: Lens' a b
+
+instance HasResendInterval a b => HasResendInterval (TF.Schema l p a) b where
+    resendInterval = TF.configuration . resendInterval
+
 class HasSize a b | a -> b where
     size :: Lens' a b
 
 instance HasSize a b => HasSize (TF.Schema l p a) b where
     size = TF.configuration . size
 
+class HasSuppressAlertClear a b | a -> b where
+    suppressAlertClear :: Lens' a b
+
+instance HasSuppressAlertClear a b => HasSuppressAlertClear (TF.Schema l p a) b where
+    suppressAlertClear = TF.configuration . suppressAlertClear
+
 class HasComputedAppliesTo a b | a -> b where
     computedAppliesTo :: a -> b
 
+class HasComputedBackupCollectorId a b | a -> b where
+    computedBackupCollectorId :: a -> b
+
 class HasComputedCollector a b | a -> b where
     computedCollector :: a -> b
+
+class HasComputedCollectorGroupId a b | a -> b where
+    computedCollectorGroupId :: a -> b
 
 class HasComputedDescription a b | a -> b where
     computedDescription :: a -> b
@@ -159,6 +221,15 @@ class HasComputedDisableAlerting a b | a -> b where
 
 class HasComputedDisplayName a b | a -> b where
     computedDisplayName :: a -> b
+
+class HasComputedEnableCollectorDeviceFailover a b | a -> b where
+    computedEnableCollectorDeviceFailover :: a -> b
+
+class HasComputedEnableFailback a b | a -> b where
+    computedEnableFailback :: a -> b
+
+class HasComputedEscalationChainId a b | a -> b where
+    computedEscalationChainId :: a -> b
 
 class HasComputedFilters a b | a -> b where
     computedFilters :: a -> b
@@ -184,5 +255,11 @@ class HasComputedParentId a b | a -> b where
 class HasComputedProperties a b | a -> b where
     computedProperties :: a -> b
 
+class HasComputedResendInterval a b | a -> b where
+    computedResendInterval :: a -> b
+
 class HasComputedSize a b | a -> b where
     computedSize :: a -> b
+
+class HasComputedSuppressAlertClear a b | a -> b where
+    computedSuppressAlertClear :: a -> b

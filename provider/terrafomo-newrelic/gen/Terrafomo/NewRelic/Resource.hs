@@ -7,8 +7,8 @@
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
 {-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -39,17 +39,23 @@ module Terrafomo.NewRelic.Resource
     , DashboardResource (..)
     , dashboardResource
 
+    , InfraAlertConditionResource (..)
+    , infraAlertConditionResource
+
     , NrqlAlertConditionResource (..)
     , nrqlAlertConditionResource
 
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasChannelId (..)
+    , P.HasComparison (..)
     , P.HasConditionScope (..)
     , P.HasConfiguration (..)
+    , P.HasCritical (..)
     , P.HasEditable (..)
     , P.HasEnabled (..)
     , P.HasEntities (..)
+    , P.HasEvent (..)
     , P.HasGcMetric (..)
     , P.HasIcon (..)
     , P.HasIncidentPreference (..)
@@ -57,7 +63,9 @@ module Terrafomo.NewRelic.Resource
     , P.HasName (..)
     , P.HasNrql (..)
     , P.HasPolicyId (..)
+    , P.HasProcessWhere (..)
     , P.HasRunbookUrl (..)
+    , P.HasSelect (..)
     , P.HasTerm (..)
     , P.HasTitle (..)
     , P.HasType' (..)
@@ -66,16 +74,21 @@ module Terrafomo.NewRelic.Resource
     , P.HasValueFunction (..)
     , P.HasViolationCloseTimer (..)
     , P.HasVisibility (..)
+    , P.HasWarning (..)
+    , P.HasWhere (..)
     , P.HasWidget (..)
 
     -- ** Computed Attributes
     , P.HasComputedChannelId (..)
+    , P.HasComputedComparison (..)
     , P.HasComputedConditionScope (..)
     , P.HasComputedConfiguration (..)
     , P.HasComputedCreatedAt (..)
+    , P.HasComputedCritical (..)
     , P.HasComputedEditable (..)
     , P.HasComputedEnabled (..)
     , P.HasComputedEntities (..)
+    , P.HasComputedEvent (..)
     , P.HasComputedGcMetric (..)
     , P.HasComputedIcon (..)
     , P.HasComputedId (..)
@@ -84,7 +97,9 @@ module Terrafomo.NewRelic.Resource
     , P.HasComputedName (..)
     , P.HasComputedNrql (..)
     , P.HasComputedPolicyId (..)
+    , P.HasComputedProcessWhere (..)
     , P.HasComputedRunbookUrl (..)
+    , P.HasComputedSelect (..)
     , P.HasComputedTerm (..)
     , P.HasComputedTitle (..)
     , P.HasComputedType' (..)
@@ -94,6 +109,8 @@ module Terrafomo.NewRelic.Resource
     , P.HasComputedValueFunction (..)
     , P.HasComputedViolationCloseTimer (..)
     , P.HasComputedVisibility (..)
+    , P.HasComputedWarning (..)
+    , P.HasComputedWhere (..)
     , P.HasComputedWidget (..)
 
     -- * Re-exported Types
@@ -110,12 +127,12 @@ import Lens.Micro (lens)
 
 import Terrafomo.NewRelic.Types as P
 
-import qualified Data.Text                   as P
-import qualified Data.Word                   as P
-import qualified GHC.Base                    as P
-import qualified Numeric.Natural             as P
-import qualified Terrafomo.NewRelic.Lens     as P
 import qualified Terrafomo.NewRelic.Provider as P
+import qualified Terrafomo.NewRelic.Lens as P
+import qualified Data.Text       as P
+import qualified Data.Word       as P
+import qualified GHC.Base        as P
+import qualified Numeric.Natural as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -130,9 +147,9 @@ import qualified Terrafomo.Schema    as TF
 data AlertChannelResource s = AlertChannelResource {
       _configuration :: !(TF.Attr s P.Text)
     {- ^ (Required) A map of key / value pairs with channel type specific values. -}
-    , _name          :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the channel. -}
-    , _type'         :: !(TF.Attr s P.Text)
+    , _type' :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of channel.  One of: @campfire@ , @email@ , @hipchat@ , @opsgenie@ , @pagerduty@ , @slack@ , @victorops@ , or @webhook@ . -}
     } deriving (Show, Eq)
 
@@ -190,29 +207,29 @@ alertChannelResource =
 
 -}
 data AlertConditionResource s = AlertConditionResource {
-      _condition_scope             :: !(TF.Attr s P.Text)
+      _condition_scope :: !(TF.Attr s P.Text)
     {- ^ (Optional) @instance@ or @application@ .  This is required if you are using the JVM plugin in New Relic. -}
-    , _entities                    :: !(TF.Attr s P.Text)
+    , _entities :: !(TF.Attr s P.Text)
     {- ^ (Required) The instance IDS associated with this condition. -}
-    , _gc_metric                   :: !(TF.Attr s P.Text)
+    , _gc_metric :: !(TF.Attr s P.Text)
     {- ^ (Optional) A valid Garbage Collection metric e.g. @GC/G1 Young Generation@ . This is required if you are using @apm_jvm_metric@ with @gc_cpu_time@ condition type. -}
-    , _metric                      :: !(TF.Attr s P.Text)
+    , _metric :: !(TF.Attr s P.Text)
     {- ^ (Required) The metric field accepts parameters based on the @type@ set. -}
-    , _name                        :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The title of the condition -}
-    , _policy_id                   :: !(TF.Attr s P.Text)
+    , _policy_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the policy where this condition should be used. -}
-    , _runbook_url                 :: !(TF.Attr s P.Text)
+    , _runbook_url :: !(TF.Attr s P.Text)
     {- ^ (Optional) Runbook URL to display in notifications. -}
-    , _term                        :: !(TF.Attr s P.Text)
+    , _term :: !(TF.Attr s P.Text)
     {- ^ (Required) A list of terms for this condition. See <#terms> below for details. -}
-    , _type'                       :: !(TF.Attr s P.Text)
+    , _type' :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of condition. One of: @apm_app_metric@ , @apm_jvm_metric@ , @apm_kt_metric@ , @servers_metric@ , @browser_metric@ , @mobile_metric@ -}
-    , _user_defined_metric         :: !(TF.Attr s P.Text)
+    , _user_defined_metric :: !(TF.Attr s P.Text)
     {- ^ (Optional) A custom metric to be evaluated. -}
     , _user_defined_value_function :: !(TF.Attr s P.Text)
     {- ^ (Optional) One of: @average@ , @min@ , @max@ , @total@ , or @sample_size@ . -}
-    , _violation_close_timer       :: !(TF.Attr s P.Text)
+    , _violation_close_timer :: !(TF.Attr s P.Text)
     {- ^ (Optional) Automatically close instance-based violations, including JVM health metric violations, after the number of hours specified. Must be: @1@ , @2@ , @4@ , @8@ , @12@ or @24@ . -}
     } deriving (Show, Eq)
 
@@ -380,7 +397,7 @@ alertConditionResource =
 data AlertPolicyChannelResource s = AlertPolicyChannelResource {
       _channel_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the channel. -}
-    , _policy_id  :: !(TF.Attr s P.Text)
+    , _policy_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the policy. -}
     } deriving (Show, Eq)
 
@@ -425,7 +442,7 @@ alertPolicyChannelResource =
 data AlertPolicyResource s = AlertPolicyResource {
       _incident_preference :: !(TF.Attr s P.Text)
     {- ^ (Optional) The rollup strategy for the policy.  Options include: @PER_POLICY@ , @PER_CONDITION@ , or @PER_CONDITION_AND_TARGET@ .  The default is @PER_POLICY@ . -}
-    , _name                :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the policy. -}
     } deriving (Show, Eq)
 
@@ -477,15 +494,15 @@ alertPolicyResource =
 
 -}
 data DashboardResource s = DashboardResource {
-      _editable   :: !(TF.Attr s P.Text)
+      _editable :: !(TF.Attr s P.Text)
     {- ^ (Optional) Who can edit the dashboard in an account. Must be @read_only@ , @editable_by_owner@ , @editable_by_all@ , or @all@ . Defaults to @editable_by_all@ . -}
-    , _icon       :: !(TF.Attr s P.Text)
+    , _icon :: !(TF.Attr s P.Text)
     {- ^ (Optional) The icon for the dashboard.  Defaults to @bar-chart@ . -}
-    , _title      :: !(TF.Attr s P.Text)
+    , _title :: !(TF.Attr s P.Text)
     {- ^ (Required) The title of the dashboard. -}
     , _visibility :: !(TF.Attr s P.Text)
     {- ^ (Optional) Who can see the dashboard in an account. Must be @owner@ or @all@ . Defaults to @all@ . -}
-    , _widget     :: !(TF.Attr s P.Text)
+    , _widget :: !(TF.Attr s P.Text)
     {- ^ (Optional) A widget that describes a visualization. See <#widgets> below for details. -}
     } deriving (Show, Eq)
 
@@ -562,22 +579,196 @@ dashboardResource =
             , _widget = TF.Nil
             }
 
+{- | The @newrelic_infra_alert_condition@ NewRelic resource.
+
+
+-}
+data InfraAlertConditionResource s = InfraAlertConditionResource {
+      _comparison :: !(TF.Attr s P.Text)
+    {- ^ (Required) The operator used to evaluate the threshold value; "above", "below", "equal". -}
+    , _critical :: !(TF.Attr s P.Text)
+    {- ^ (Required) Identifies the critical threshold parameters for triggering an alert notification. See <#thresholds> below for details. -}
+    , _enabled :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Set whether to enable the alert condition. Defaults to @true@ . -}
+    , _event :: !(TF.Attr s P.Text)
+    {- ^ (Required) The metric event; for example, system metrics, process metrics, storage metrics, or network metrics. -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The Infrastructure alert condition's name. -}
+    , _policy_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the alert policy where this condition should be used. -}
+    , _process_where :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Any filters applied to processes; for example: @"commandName = 'java'"@ . -}
+    , _select :: !(TF.Attr s P.Text)
+    {- ^ (Required) The attribute name to identify the type of metric condition; for example, "network", "process", "system", or "storage". -}
+    , _type' :: !(TF.Attr s P.Text)
+    {- ^ (Required) The type of Infrastructure alert condition: "infra_process_running", "infra_metric", or "infra_host_not_reporting". -}
+    , _warning :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Identifies the warning threshold parameters. See <#thresholds> below for details. -}
+    , _where :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Infrastructure host filter for the alert condition. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (InfraAlertConditionResource s) where
+    toHCL InfraAlertConditionResource{..} = TF.inline $ catMaybes
+        [ TF.assign "comparison" <$> TF.attribute _comparison
+        , TF.assign "critical" <$> TF.attribute _critical
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "event" <$> TF.attribute _event
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "policy_id" <$> TF.attribute _policy_id
+        , TF.assign "process_where" <$> TF.attribute _process_where
+        , TF.assign "select" <$> TF.attribute _select
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "warning" <$> TF.attribute _warning
+        , TF.assign "where" <$> TF.attribute _where
+        ]
+
+instance P.HasComparison (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+    comparison =
+        lens (_comparison :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _comparison = a } :: InfraAlertConditionResource s)
+
+instance P.HasCritical (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+    critical =
+        lens (_critical :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _critical = a } :: InfraAlertConditionResource s)
+
+instance P.HasEnabled (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+    enabled =
+        lens (_enabled :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: InfraAlertConditionResource s)
+
+instance P.HasEvent (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+    event =
+        lens (_event :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _event = a } :: InfraAlertConditionResource s)
+
+instance P.HasName (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: InfraAlertConditionResource s)
+
+instance P.HasPolicyId (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+    policyId =
+        lens (_policy_id :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policy_id = a } :: InfraAlertConditionResource s)
+
+instance P.HasProcessWhere (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+    processWhere =
+        lens (_process_where :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _process_where = a } :: InfraAlertConditionResource s)
+
+instance P.HasSelect (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+    select =
+        lens (_select :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _select = a } :: InfraAlertConditionResource s)
+
+instance P.HasType' (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+    type' =
+        lens (_type' :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: InfraAlertConditionResource s)
+
+instance P.HasWarning (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+    warning =
+        lens (_warning :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _warning = a } :: InfraAlertConditionResource s)
+
+instance P.HasWhere (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+    where =
+        lens (_where :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _where = a } :: InfraAlertConditionResource s)
+
+instance s ~ s' => P.HasComputedComparison (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedComparison =
+        (_comparison :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCritical (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedCritical =
+        (_critical :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedEnabled =
+        (_enabled :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEvent (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedEvent =
+        (_event :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPolicyId (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedPolicyId =
+        (_policy_id :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedProcessWhere (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedProcessWhere =
+        (_process_where :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSelect (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedSelect =
+        (_select :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedType' =
+        (_type' :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedWarning (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedWarning =
+        (_warning :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedWhere (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
+    computedWhere =
+        (_where :: InfraAlertConditionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+infraAlertConditionResource :: TF.Resource P.NewRelic (InfraAlertConditionResource s)
+infraAlertConditionResource =
+    TF.newResource "newrelic_infra_alert_condition" $
+        InfraAlertConditionResource {
+              _comparison = TF.Nil
+            , _critical = TF.Nil
+            , _enabled = TF.Nil
+            , _event = TF.Nil
+            , _name = TF.Nil
+            , _policy_id = TF.Nil
+            , _process_where = TF.Nil
+            , _select = TF.Nil
+            , _type' = TF.Nil
+            , _warning = TF.Nil
+            , _where = TF.Nil
+            }
+
 {- | The @newrelic_nrql_alert_condition@ NewRelic resource.
 
 
 -}
 data NrqlAlertConditionResource s = NrqlAlertConditionResource {
-      _enabled        :: !(TF.Attr s P.Text)
+      _enabled :: !(TF.Attr s P.Text)
     {- ^ (Optional) Set whether to enable the alert condition. Defaults to @true@ . -}
-    , _name           :: !(TF.Attr s P.Text)
+    , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The title of the condition -}
-    , _nrql           :: !(TF.Attr s P.Text)
+    , _nrql :: !(TF.Attr s P.Text)
     {- ^ (Required) A NRQL query. See <#nrql> below for details. -}
-    , _policy_id      :: !(TF.Attr s P.Text)
+    , _policy_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the policy where this condition should be used. -}
-    , _runbook_url    :: !(TF.Attr s P.Text)
+    , _runbook_url :: !(TF.Attr s P.Text)
     {- ^ (Optional) Runbook URL to display in notifications. -}
-    , _term           :: !(TF.Attr s P.Text)
+    , _term :: !(TF.Attr s P.Text)
     {- ^ (Required) A list of terms for this condition. See <#terms> below for details. -}
     , _value_function :: !(TF.Attr s P.Text)
     {- ^ (Optional) Possible values are @single_value@ , @sum@ . -}

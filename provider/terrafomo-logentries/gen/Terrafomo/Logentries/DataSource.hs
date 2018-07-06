@@ -14,26 +14,24 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Cloudflare.DataSource
+-- Module      : Terrafomo.Logentries.DataSource
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Cloudflare.DataSource
+module Terrafomo.Logentries.DataSource
     (
     -- * Types
-      IpRangesData (..)
-    , ipRangesData
+      LogsetData (..)
+    , logsetData
 
     -- * Overloaded Fields
     -- ** Arguments
 
     -- ** Computed Attributes
-    , P.HasComputedCidrBlocks (..)
-    , P.HasComputedIpv4CidrBlocks (..)
-    , P.HasComputedIpv6CidrBlocks (..)
+    , P.HasComputedName (..)
 
     -- * Re-exported Types
     , module P
@@ -47,14 +45,14 @@ import GHC.Show (Show)
 
 import Lens.Micro (lens)
 
-import Terrafomo.Cloudflare.Types as P
+import Terrafomo.Logentries.Types as P
 
 import qualified Data.Text                     as P
 import qualified Data.Word                     as P
 import qualified GHC.Base                      as P
 import qualified Numeric.Natural               as P
-import qualified Terrafomo.Cloudflare.Lens     as P
-import qualified Terrafomo.Cloudflare.Provider as P
+import qualified Terrafomo.Logentries.Lens     as P
+import qualified Terrafomo.Logentries.Provider as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -62,28 +60,22 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
-{- | The @cloudflare_ip_ranges@ Cloudflare datasource.
+{- | The @logentries_logset@ Logentries datasource.
 
-Use this data source to get the <https://www.cloudflare.com/ips/> of
-Cloudflare edge nodes.
+Use this data source to get information (like ID) of already existing
+Logentries LogSets.
 -}
-data IpRangesData s = IpRangesData {
+data LogsetData s = LogsetData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpRangesData s) where
+instance TF.ToHCL (LogsetData s) where
     toHCL _ = TF.empty
 
-instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
-    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LogsetData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedIpv4CidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
-    computedIpv4CidrBlocks x = TF.compute (TF.refKey x) "ipv4_cidr_blocks"
-
-instance s ~ s' => P.HasComputedIpv6CidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
-    computedIpv6CidrBlocks x = TF.compute (TF.refKey x) "ipv6_cidr_blocks"
-
-ipRangesData :: TF.DataSource P.Cloudflare (IpRangesData s)
-ipRangesData =
-    TF.newDataSource "cloudflare_ip_ranges" $
-        IpRangesData {
+logsetData :: TF.DataSource P.Logentries (LogsetData s)
+logsetData =
+    TF.newDataSource "logentries_logset" $
+        LogsetData {
             }

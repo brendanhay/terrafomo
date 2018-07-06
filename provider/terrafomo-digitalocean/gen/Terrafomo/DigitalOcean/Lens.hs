@@ -30,6 +30,7 @@ module Terrafomo.DigitalOcean.Lens
     , HasDropletId (..)
     , HasDropletIds (..)
     , HasDropletTag (..)
+    , HasFlags (..)
     , HasForwardingRule (..)
     , HasHealthcheck (..)
     , HasImage (..)
@@ -51,6 +52,7 @@ module Terrafomo.DigitalOcean.Lens
     , HasSize (..)
     , HasSshKeys (..)
     , HasStickySessions (..)
+    , HasTag (..)
     , HasTags (..)
     , HasTtl (..)
     , HasType' (..)
@@ -64,6 +66,7 @@ module Terrafomo.DigitalOcean.Lens
     , HasComputedBackups (..)
     , HasComputedCertificateChain (..)
     , HasComputedCreatedAt (..)
+    , HasComputedData' (..)
     , HasComputedDescription (..)
     , HasComputedDisk (..)
     , HasComputedDomain (..)
@@ -71,6 +74,7 @@ module Terrafomo.DigitalOcean.Lens
     , HasComputedDropletIds (..)
     , HasComputedDropletTag (..)
     , HasComputedFingerprint (..)
+    , HasComputedFlags (..)
     , HasComputedForwardingRule (..)
     , HasComputedFqdn (..)
     , HasComputedHealthcheck (..)
@@ -112,6 +116,7 @@ module Terrafomo.DigitalOcean.Lens
     , HasComputedSshKeys (..)
     , HasComputedStatus (..)
     , HasComputedStickySessions (..)
+    , HasComputedTag (..)
     , HasComputedTags (..)
     , HasComputedTtl (..)
     , HasComputedType' (..)
@@ -120,6 +125,7 @@ module Terrafomo.DigitalOcean.Lens
     , HasComputedVcpus (..)
     , HasComputedVolumeIds (..)
     , HasComputedWeight (..)
+    , HasComputedZoneFile (..)
     ) where
 
 import GHC.Base ((.))
@@ -176,6 +182,12 @@ class HasDropletTag a b | a -> b where
 
 instance HasDropletTag a b => HasDropletTag (TF.Schema l p a) b where
     dropletTag = TF.configuration . dropletTag
+
+class HasFlags a b | a -> b where
+    flags :: Lens' a b
+
+instance HasFlags a b => HasFlags (TF.Schema l p a) b where
+    flags = TF.configuration . flags
 
 class HasForwardingRule a b | a -> b where
     forwardingRule :: Lens' a b
@@ -303,6 +315,12 @@ class HasStickySessions a b | a -> b where
 instance HasStickySessions a b => HasStickySessions (TF.Schema l p a) b where
     stickySessions = TF.configuration . stickySessions
 
+class HasTag a b | a -> b where
+    tag :: Lens' a b
+
+instance HasTag a b => HasTag (TF.Schema l p a) b where
+    tag = TF.configuration . tag
+
 class HasTags a b | a -> b where
     tags :: Lens' a b
 
@@ -357,6 +375,9 @@ class HasComputedCertificateChain a b | a -> b where
 class HasComputedCreatedAt a b | a -> b where
     computedCreatedAt :: a -> b
 
+class HasComputedData' a b | a -> b where
+    computedData' :: a -> b
+
 class HasComputedDescription a b | a -> b where
     computedDescription :: a -> b
 
@@ -377,6 +398,9 @@ class HasComputedDropletTag a b | a -> b where
 
 class HasComputedFingerprint a b | a -> b where
     computedFingerprint :: a -> b
+
+class HasComputedFlags a b | a -> b where
+    computedFlags :: a -> b
 
 class HasComputedForwardingRule a b | a -> b where
     computedForwardingRule :: a -> b
@@ -501,6 +525,9 @@ class HasComputedStatus a b | a -> b where
 class HasComputedStickySessions a b | a -> b where
     computedStickySessions :: a -> b
 
+class HasComputedTag a b | a -> b where
+    computedTag :: a -> b
+
 class HasComputedTags a b | a -> b where
     computedTags :: a -> b
 
@@ -524,3 +551,6 @@ class HasComputedVolumeIds a b | a -> b where
 
 class HasComputedWeight a b | a -> b where
     computedWeight :: a -> b
+
+class HasComputedZoneFile a b | a -> b where
+    computedZoneFile :: a -> b

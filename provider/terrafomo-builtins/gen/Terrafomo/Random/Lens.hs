@@ -29,6 +29,10 @@ module Terrafomo.Random.Lens
     , HasLower (..)
     , HasMax (..)
     , HasMin (..)
+    , HasMinLower (..)
+    , HasMinNumeric (..)
+    , HasMinSpecial (..)
+    , HasMinUpper (..)
     , HasNumber (..)
     , HasOverrideSpecial (..)
     , HasPrefix (..)
@@ -51,6 +55,10 @@ module Terrafomo.Random.Lens
     , HasComputedLower (..)
     , HasComputedMax (..)
     , HasComputedMin (..)
+    , HasComputedMinLower (..)
+    , HasComputedMinNumeric (..)
+    , HasComputedMinSpecial (..)
+    , HasComputedMinUpper (..)
     , HasComputedNumber (..)
     , HasComputedOverrideSpecial (..)
     , HasComputedPrefix (..)
@@ -110,6 +118,30 @@ class HasMin a b | a -> b where
 
 instance HasMin a b => HasMin (TF.Schema l p a) b where
     min = TF.configuration . min
+
+class HasMinLower a b | a -> b where
+    minLower :: Lens' a b
+
+instance HasMinLower a b => HasMinLower (TF.Schema l p a) b where
+    minLower = TF.configuration . minLower
+
+class HasMinNumeric a b | a -> b where
+    minNumeric :: Lens' a b
+
+instance HasMinNumeric a b => HasMinNumeric (TF.Schema l p a) b where
+    minNumeric = TF.configuration . minNumeric
+
+class HasMinSpecial a b | a -> b where
+    minSpecial :: Lens' a b
+
+instance HasMinSpecial a b => HasMinSpecial (TF.Schema l p a) b where
+    minSpecial = TF.configuration . minSpecial
+
+class HasMinUpper a b | a -> b where
+    minUpper :: Lens' a b
+
+instance HasMinUpper a b => HasMinUpper (TF.Schema l p a) b where
+    minUpper = TF.configuration . minUpper
 
 class HasNumber a b | a -> b where
     number :: Lens' a b
@@ -194,6 +226,18 @@ class HasComputedMax a b | a -> b where
 
 class HasComputedMin a b | a -> b where
     computedMin :: a -> b
+
+class HasComputedMinLower a b | a -> b where
+    computedMinLower :: a -> b
+
+class HasComputedMinNumeric a b | a -> b where
+    computedMinNumeric :: a -> b
+
+class HasComputedMinSpecial a b | a -> b where
+    computedMinSpecial :: a -> b
+
+class HasComputedMinUpper a b | a -> b where
+    computedMinUpper :: a -> b
 
 class HasComputedNumber a b | a -> b where
     computedNumber :: a -> b

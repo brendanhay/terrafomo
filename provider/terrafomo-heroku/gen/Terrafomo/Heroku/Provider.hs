@@ -25,6 +25,7 @@ module Terrafomo.Heroku.Provider
     -- * Lenses
     , providerApiKey
     , providerEmail
+    , providerHeaders
     ) where
 
 import Data.Hashable      (Hashable)
@@ -55,6 +56,8 @@ data Heroku = Heroku {
     {- ^ (Required) Heroku API token. It must be provided, but it can also be sourced from the @HEROKU_API_KEY@ environment variable. -}
     , _email   :: !(Maybe P.Text)
     {- ^ (Required) Email to be notified by Heroku. It must be provided, but it can also be sourced from the @HEROKU_EMAIL@ environment variable. -}
+    , _headers :: !(Maybe P.Text)
+    {- ^ (Optional) Additional Headers to be sent to Heroku. If not provided, it can also be sourced from the @HEROKU_HEADERS@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable Heroku
@@ -67,6 +70,7 @@ instance TF.ToHCL Heroku where
             [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
             , TF.assign "api_key" <$> _api_key x
             , TF.assign "email" <$> _email x
+            , TF.assign "headers" <$> _headers x
             ]
 
 instance TF.IsProvider Heroku where
@@ -76,6 +80,7 @@ emptyHeroku :: Heroku
 emptyHeroku = Heroku {
         _api_key = Nothing
       , _email = Nothing
+      , _headers = Nothing
     }
 
 providerApiKey :: Lens' Heroku (Maybe P.Text)
@@ -85,3 +90,7 @@ providerApiKey =
 providerEmail :: Lens' Heroku (Maybe P.Text)
 providerEmail =
     lens _email (\s a -> s { _email = a })
+
+providerHeaders :: Lens' Heroku (Maybe P.Text)
+providerHeaders =
+    lens _headers (\s a -> s { _headers = a })

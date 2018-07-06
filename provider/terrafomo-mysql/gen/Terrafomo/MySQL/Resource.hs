@@ -35,6 +35,7 @@ module Terrafomo.MySQL.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
+    , P.HasAuthPlugin (..)
     , P.HasDatabase (..)
     , P.HasDefaultCharacterSet (..)
     , P.HasDefaultCollation (..)
@@ -47,6 +48,7 @@ module Terrafomo.MySQL.Resource
     , P.HasUser (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAuthPlugin (..)
     , P.HasComputedDatabase (..)
     , P.HasComputedDefaultCharacterSet (..)
     , P.HasComputedDefaultCollation (..)
@@ -244,23 +246,31 @@ by an unsalted hash in the state </docs/state/sensitive-data.html> . Care is
 required when using this resource, to avoid disclosing the password.
 -}
 data UserResource s = UserResource {
-      _host               :: !(TF.Attr s P.Text)
+      _auth_plugin        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Use an <https://dev.mysql.com/doc/refman/5.7/en/authentication-plugins.html> to authenticate the user instead of using password authentication. Description of the fields allowed in the block below. Conflicts with @password@ and @plaintext_password@ . -}
+    , _host               :: !(TF.Attr s P.Text)
     {- ^ (Optional) The source host of the user. Defaults to "localhost". -}
     , _password           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Deprecated alias of @plaintext_password@ , whose value is stored as plaintext in state . Prefer to use @plaintext_password@ instead, which stores the password as an unsalted hash. -}
+    {- ^ (Optional) Deprecated alias of @plaintext_password@ , whose value is stored as plaintext in state . Prefer to use @plaintext_password@ instead, which stores the password as an unsalted hash. Conflicts with @auth_plugin@ . -}
     , _plaintext_password :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The password for the user. This must be provided in plain text, so the data source for it must be secured. An unsalted hash of the provided password is stored in state. -}
+    {- ^ (Optional) The password for the user. This must be provided in plain text, so the data source for it must be secured. An unsalted hash of the provided password is stored in state. Conflicts with @auth_plugin@ . -}
     , _user               :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the user. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (UserResource s) where
     toHCL UserResource{..} = TF.inline $ catMaybes
-        [ TF.assign "host" <$> TF.attribute _host
+        [ TF.assign "auth_plugin" <$> TF.attribute _auth_plugin
+        , TF.assign "host" <$> TF.attribute _host
         , TF.assign "password" <$> TF.attribute _password
         , TF.assign "plaintext_password" <$> TF.attribute _plaintext_password
         , TF.assign "user" <$> TF.attribute _user
         ]
+
+instance P.HasAuthPlugin (UserResource s) (TF.Attr s P.Text) where
+    authPlugin =
+        lens (_auth_plugin :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _auth_plugin = a } :: UserResource s)
 
 instance P.HasHost (UserResource s) (TF.Attr s P.Text) where
     host =
@@ -281,6 +291,11 @@ instance P.HasUser (UserResource s) (TF.Attr s P.Text) where
     user =
         lens (_user :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _user = a } :: UserResource s)
+
+instance s ~ s' => P.HasComputedAuthPlugin (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
+    computedAuthPlugin =
+        (_auth_plugin :: UserResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedHost (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedHost =
@@ -306,7 +321,8 @@ userResource :: TF.Resource P.MySQL (UserResource s)
 userResource =
     TF.newResource "mysql_user" $
         UserResource {
-              _host = TF.Nil
+              _auth_plugin = TF.Nil
+            , _host = TF.Nil
             , _password = TF.Nil
             , _plaintext_password = TF.Nil
             , _user = TF.Nil

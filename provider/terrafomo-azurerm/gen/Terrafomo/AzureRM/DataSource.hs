@@ -24,14 +24,29 @@
 module Terrafomo.AzureRM.DataSource
     (
     -- * Types
-      AppServicePlanData (..)
+      AppServiceData (..)
+    , appServiceData
+
+    , AppServicePlanData (..)
     , appServicePlanData
+
+    , ApplicationSecurityGroupData (..)
+    , applicationSecurityGroupData
 
     , BuiltinRoleDefinitionData (..)
     , builtinRoleDefinitionData
 
+    , CdnProfileData (..)
+    , cdnProfileData
+
     , ClientConfigData (..)
     , clientConfigData
+
+    , CosmosdbAccountData (..)
+    , cosmosdbAccountData
+
+    , DataLakeStoreData (..)
+    , dataLakeStoreData
 
     , DnsZoneData (..)
     , dnsZoneData
@@ -45,8 +60,20 @@ module Terrafomo.AzureRM.DataSource
     , KeyVaultAccessPolicyData (..)
     , keyVaultAccessPolicyData
 
+    , KeyVaultData (..)
+    , keyVaultData
+
+    , KeyVaultSecretData (..)
+    , keyVaultSecretData
+
+    , KubernetesClusterData (..)
+    , kubernetesClusterData
+
     , ManagedDiskData (..)
     , managedDiskData
+
+    , NetworkInterfaceData (..)
+    , networkInterfaceData
 
     , NetworkSecurityGroupData (..)
     , networkSecurityGroupData
@@ -57,11 +84,23 @@ module Terrafomo.AzureRM.DataSource
     , PublicIpData (..)
     , publicIpData
 
+    , PublicIpsData (..)
+    , publicIpsData
+
+    , RecoveryServicesVaultData (..)
+    , recoveryServicesVaultData
+
     , ResourceGroupData (..)
     , resourceGroupData
 
     , RoleDefinitionData (..)
     , roleDefinitionData
+
+    , RouteTableData (..)
+    , routeTableData
+
+    , SchedulerJobCollectionData (..)
+    , schedulerJobCollectionData
 
     , SnapshotData (..)
     , snapshotData
@@ -69,11 +108,20 @@ module Terrafomo.AzureRM.DataSource
     , StorageAccountData (..)
     , storageAccountData
 
+    , StorageAccountSasData (..)
+    , storageAccountSasData
+
     , SubnetData (..)
     , subnetData
 
     , SubscriptionData (..)
     , subscriptionData
+
+    , SubscriptionsData (..)
+    , subscriptionsData
+
+    , TrafficManagerGeographicalLocationData (..)
+    , trafficManagerGeographicalLocationData
 
     , VirtualNetworkData (..)
     , virtualNetworkData
@@ -83,22 +131,35 @@ module Terrafomo.AzureRM.DataSource
 
     -- * Overloaded Fields
     -- ** Arguments
+    , P.HasAllocationType (..)
+    , P.HasAttached (..)
     , P.HasClientId (..)
+    , P.HasConnectionString (..)
+    , P.HasExpiry (..)
+    , P.HasHttpsOnly (..)
     , P.HasLocation (..)
     , P.HasName (..)
+    , P.HasNamePrefix (..)
     , P.HasNameRegex (..)
     , P.HasOffer (..)
+    , P.HasPermissions (..)
     , P.HasPublisher (..)
     , P.HasResourceGroupName (..)
+    , P.HasResourceTypes (..)
     , P.HasRoleDefinitionId (..)
     , P.HasScope (..)
+    , P.HasServices (..)
     , P.HasSku (..)
     , P.HasSortDescending (..)
+    , P.HasStart (..)
     , P.HasSubscriptionId (..)
+    , P.HasSubscriptions (..)
     , P.HasTenantId (..)
+    , P.HasVaultUri (..)
     , P.HasVirtualNetworkName (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAccessPolicy (..)
     , P.HasComputedAccessTier (..)
     , P.HasComputedAccountEncryptionSource (..)
     , P.HasComputedAccountKind (..)
@@ -107,11 +168,21 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedActiveActive (..)
     , P.HasComputedAddressPrefix (..)
     , P.HasComputedAddressSpaces (..)
+    , P.HasComputedAgentPoolProfile (..)
+    , P.HasComputedAllocationType (..)
+    , P.HasComputedAppServicePlanId (..)
+    , P.HasComputedAppSettings (..)
+    , P.HasComputedAppliedDnsServers (..)
     , P.HasComputedAssignableScopes (..)
+    , P.HasComputedAttached (..)
     , P.HasComputedAutoInflateEnabled (..)
+    , P.HasComputedCapabilities (..)
     , P.HasComputedCapacity (..)
     , P.HasComputedCertificatePermissions (..)
+    , P.HasComputedClientAffinityEnabled (..)
     , P.HasComputedClientId (..)
+    , P.HasComputedConnectionString (..)
+    , P.HasComputedContentType (..)
     , P.HasComputedCreateOption (..)
     , P.HasComputedCustomDomain (..)
     , P.HasComputedDataDisk (..)
@@ -119,31 +190,51 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedDescription (..)
     , P.HasComputedDiskSizeGb (..)
     , P.HasComputedDisplayName (..)
+    , P.HasComputedDnsPrefix (..)
     , P.HasComputedDnsServers (..)
     , P.HasComputedDomainNameLabel (..)
+    , P.HasComputedEnableAcceleratedNetworking (..)
+    , P.HasComputedEnableAutomaticFailover (..)
     , P.HasComputedEnableBgp (..)
     , P.HasComputedEnableBlobEncryption (..)
     , P.HasComputedEnableFileEncryption (..)
     , P.HasComputedEnableHttpsTrafficOnly (..)
+    , P.HasComputedEnableIpForwarding (..)
+    , P.HasComputedEnabled (..)
+    , P.HasComputedEnabledForDeployment (..)
+    , P.HasComputedEnabledForDiskEncryption (..)
+    , P.HasComputedEnabledForTemplateDeployment (..)
+    , P.HasComputedExpiry (..)
     , P.HasComputedFqdn (..)
+    , P.HasComputedHttpsOnly (..)
     , P.HasComputedId (..)
     , P.HasComputedIdleTimeoutInMinutes (..)
+    , P.HasComputedInternalDnsNameLabel (..)
+    , P.HasComputedInternalFqdn (..)
     , P.HasComputedIpAddress (..)
     , P.HasComputedIpConfiguration (..)
     , P.HasComputedIpConfigurations (..)
+    , P.HasComputedIpRangeFilter (..)
     , P.HasComputedKeyPermissions (..)
     , P.HasComputedKind (..)
+    , P.HasComputedKubeConfig (..)
+    , P.HasComputedKubeConfigRaw (..)
+    , P.HasComputedKubernetesVersion (..)
+    , P.HasComputedLinuxProfile (..)
     , P.HasComputedLocation (..)
     , P.HasComputedLocationPlacementId (..)
+    , P.HasComputedMacAddress (..)
     , P.HasComputedMaxNumberOfRecordSets (..)
     , P.HasComputedMaximumNumberOfWorkers (..)
     , P.HasComputedMaximumThroughputUnits (..)
     , P.HasComputedName (..)
+    , P.HasComputedNamePrefix (..)
     , P.HasComputedNameRegex (..)
     , P.HasComputedNameServers (..)
     , P.HasComputedNetworkSecurityGroupId (..)
     , P.HasComputedNumberOfRecordSets (..)
     , P.HasComputedOffer (..)
+    , P.HasComputedOfferType (..)
     , P.HasComputedOsDisk (..)
     , P.HasComputedOsType (..)
     , P.HasComputedPermissions (..)
@@ -155,12 +246,21 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedPrimaryLocation (..)
     , P.HasComputedPrimaryQueueEndpoint (..)
     , P.HasComputedPrimaryTableEndpoint (..)
+    , P.HasComputedPrivateIpAddress (..)
+    , P.HasComputedPrivateIpAddresses (..)
     , P.HasComputedProperties (..)
+    , P.HasComputedPublicIps (..)
     , P.HasComputedPublisher (..)
+    , P.HasComputedQuota (..)
     , P.HasComputedQuotaId (..)
+    , P.HasComputedRegistrationVirtualNetworkIds (..)
+    , P.HasComputedResolutionVirtualNetworkIds (..)
     , P.HasComputedResourceGroupName (..)
+    , P.HasComputedResourceTypes (..)
     , P.HasComputedRoleDefinitionId (..)
+    , P.HasComputedRoute (..)
     , P.HasComputedRouteTableId (..)
+    , P.HasComputedSas (..)
     , P.HasComputedScope (..)
     , P.HasComputedSecondaryAccessKey (..)
     , P.HasComputedSecondaryBlobConnectionString (..)
@@ -171,24 +271,35 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedSecondaryTableEndpoint (..)
     , P.HasComputedSecretPermissions (..)
     , P.HasComputedSecurityRule (..)
+    , P.HasComputedServicePrincipal (..)
+    , P.HasComputedServices (..)
+    , P.HasComputedSiteConfig (..)
     , P.HasComputedSku (..)
     , P.HasComputedSortDescending (..)
     , P.HasComputedSourceResourceId (..)
     , P.HasComputedSourceUri (..)
     , P.HasComputedSpendingLimit (..)
+    , P.HasComputedStart (..)
     , P.HasComputedState (..)
     , P.HasComputedStorageAccountId (..)
     , P.HasComputedStorageAccountType (..)
     , P.HasComputedSubnets (..)
     , P.HasComputedSubscriptionId (..)
+    , P.HasComputedSubscriptions (..)
     , P.HasComputedTags (..)
     , P.HasComputedTenantId (..)
+    , P.HasComputedTier (..)
     , P.HasComputedType' (..)
+    , P.HasComputedValue (..)
+    , P.HasComputedVaultUri (..)
     , P.HasComputedVersion (..)
+    , P.HasComputedVirtualMachineId (..)
     , P.HasComputedVirtualNetworkName (..)
     , P.HasComputedVnetPeerings (..)
     , P.HasComputedVpnClientConfiguration (..)
     , P.HasComputedVpnType (..)
+    , P.HasComputedZoneType (..)
+    , P.HasComputedZones (..)
 
     -- * Re-exported Types
     , module P
@@ -216,6 +327,81 @@ import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
+
+{- | The @azurerm_app_service@ AzureRM datasource.
+
+Use this data source to obtain information about an App Service.
+-}
+data AppServiceData s = AppServiceData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the App Service. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The Name of the Resource Group where the App Service exists. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (AppServiceData s) where
+    toHCL AppServiceData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (AppServiceData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: AppServiceData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: AppServiceData s)
+
+instance P.HasResourceGroupName (AppServiceData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: AppServiceData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: AppServiceData s)
+
+instance s ~ s' => P.HasComputedAppServicePlanId (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
+    computedAppServicePlanId x = TF.compute (TF.refKey x) "app_service_plan_id"
+
+instance s ~ s' => P.HasComputedAppSettings (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
+    computedAppSettings x = TF.compute (TF.refKey x) "app_settings"
+
+instance s ~ s' => P.HasComputedClientAffinityEnabled (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
+    computedClientAffinityEnabled x = TF.compute (TF.refKey x) "client_affinity_enabled"
+
+instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
+    computedConnectionString x = TF.compute (TF.refKey x) "connection_string"
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+
+instance s ~ s' => P.HasComputedHttpsOnly (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
+    computedHttpsOnly x = TF.compute (TF.refKey x) "https_only"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: AppServiceData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: AppServiceData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSiteConfig (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
+    computedSiteConfig x = TF.compute (TF.refKey x) "site_config"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+appServiceData :: TF.DataSource P.AzureRM (AppServiceData s)
+appServiceData =
+    TF.newDataSource "azurerm_app_service" $
+        AppServiceData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
 
 {- | The @azurerm_app_service_plan@ AzureRM datasource.
 
@@ -284,6 +470,60 @@ appServicePlanData =
             , _resource_group_name = TF.Nil
             }
 
+{- | The @azurerm_application_security_group@ AzureRM datasource.
+
+Get information about an Application Security Group.
+-}
+data ApplicationSecurityGroupData s = ApplicationSecurityGroupData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ - The name of the Application Security Group. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ - The name of the resource group in which the Application Security Group exists. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ApplicationSecurityGroupData s) where
+    toHCL ApplicationSecurityGroupData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (ApplicationSecurityGroupData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ApplicationSecurityGroupData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ApplicationSecurityGroupData s)
+
+instance P.HasResourceGroupName (ApplicationSecurityGroupData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: ApplicationSecurityGroupData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: ApplicationSecurityGroupData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApplicationSecurityGroupData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ApplicationSecurityGroupData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ApplicationSecurityGroupData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ApplicationSecurityGroupData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (ApplicationSecurityGroupData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: ApplicationSecurityGroupData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ApplicationSecurityGroupData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+applicationSecurityGroupData :: TF.DataSource P.AzureRM (ApplicationSecurityGroupData s)
+applicationSecurityGroupData =
+    TF.newDataSource "azurerm_application_security_group" $
+        ApplicationSecurityGroupData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
 {- | The @azurerm_builtin_role_definition@ AzureRM datasource.
 
 Use this data source to access the properties of a built-in Role Definition.
@@ -330,6 +570,60 @@ builtinRoleDefinitionData =
     TF.newDataSource "azurerm_builtin_role_definition" $
         BuiltinRoleDefinitionData {
               _name = TF.Nil
+            }
+
+{- | The @azurerm_cdn_profile@ AzureRM datasource.
+
+Use this data source to access information about a CDN Profile.
+-}
+data CdnProfileData s = CdnProfileData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the CDN Profile. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the resource group in which the CDN Profile exists. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (CdnProfileData s) where
+    toHCL CdnProfileData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (CdnProfileData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: CdnProfileData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: CdnProfileData s)
+
+instance P.HasResourceGroupName (CdnProfileData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: CdnProfileData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: CdnProfileData s)
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (CdnProfileData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CdnProfileData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: CdnProfileData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (CdnProfileData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: CdnProfileData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSku (TF.Ref s' (CdnProfileData s)) (TF.Attr s P.Text) where
+    computedSku x = TF.compute (TF.refKey x) "sku"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (CdnProfileData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+cdnProfileData :: TF.DataSource P.AzureRM (CdnProfileData s)
+cdnProfileData =
+    TF.newDataSource "azurerm_cdn_profile" $
+        CdnProfileData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
             }
 
 {- | The @azurerm_client_config@ AzureRM datasource.
@@ -392,6 +686,130 @@ clientConfigData =
             , _tenant_id = TF.Nil
             }
 
+{- | The @azurerm_cosmosdb_account@ AzureRM datasource.
+
+Use this data source to access the properties of an Azure CosmosDB (formally
+DocumentDB) Account.
+-}
+data CosmosdbAccountData s = CosmosdbAccountData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the name of the CosmosDB Account. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the name of the resource group in which the CosmosDB Account resides. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (CosmosdbAccountData s) where
+    toHCL CosmosdbAccountData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (CosmosdbAccountData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: CosmosdbAccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: CosmosdbAccountData s)
+
+instance P.HasResourceGroupName (CosmosdbAccountData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: CosmosdbAccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: CosmosdbAccountData s)
+
+instance s ~ s' => P.HasComputedCapabilities (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
+    computedCapabilities x = TF.compute (TF.refKey x) "capabilities"
+
+instance s ~ s' => P.HasComputedEnableAutomaticFailover (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
+    computedEnableAutomaticFailover x = TF.compute (TF.refKey x) "enable_automatic_failover"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedIpRangeFilter (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
+    computedIpRangeFilter x = TF.compute (TF.refKey x) "ip_range_filter"
+
+instance s ~ s' => P.HasComputedKind (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
+    computedKind x = TF.compute (TF.refKey x) "kind"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: CosmosdbAccountData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedOfferType (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
+    computedOfferType x = TF.compute (TF.refKey x) "offer_type"
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: CosmosdbAccountData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+cosmosdbAccountData :: TF.DataSource P.AzureRM (CosmosdbAccountData s)
+cosmosdbAccountData =
+    TF.newDataSource "azurerm_cosmosdb_account" $
+        CosmosdbAccountData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
+{- | The @azurerm_data_lake_store@ AzureRM datasource.
+
+Use this data source to obtain information about a Data Lake Store.
+-}
+data DataLakeStoreData s = DataLakeStoreData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Data Lake Store. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The Name of the Resource Group where the Data Lake Store exists. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DataLakeStoreData s) where
+    toHCL DataLakeStoreData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (DataLakeStoreData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: DataLakeStoreData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DataLakeStoreData s)
+
+instance P.HasResourceGroupName (DataLakeStoreData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: DataLakeStoreData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: DataLakeStoreData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataLakeStoreData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataLakeStoreData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: DataLakeStoreData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DataLakeStoreData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: DataLakeStoreData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DataLakeStoreData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedTier (TF.Ref s' (DataLakeStoreData s)) (TF.Attr s P.Text) where
+    computedTier x = TF.compute (TF.refKey x) "tier"
+
+dataLakeStoreData :: TF.DataSource P.AzureRM (DataLakeStoreData s)
+dataLakeStoreData =
+    TF.newDataSource "azurerm_data_lake_store" $
+        DataLakeStoreData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
 {- | The @azurerm_dns_zone@ AzureRM datasource.
 
 Use this data source to obtain information about a DNS Zone.
@@ -400,7 +818,7 @@ data DnsZoneData s = DnsZoneData {
       _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the DNS Zone. -}
     , _resource_group_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Name of the Resource Group where the DNS Zone exists. -}
+    {- ^ (Optional) The Name of the Resource Group where the DNS Zone exists. If the Name of the Resource Group is not provided, the first DNS Zone from the list of DNS Zones in your subscription that matches @name@ will be returned. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DnsZoneData s) where
@@ -436,6 +854,12 @@ instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DnsZoneData s)) (TF.Attr
 instance s ~ s' => P.HasComputedNumberOfRecordSets (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
     computedNumberOfRecordSets x = TF.compute (TF.refKey x) "number_of_record_sets"
 
+instance s ~ s' => P.HasComputedRegistrationVirtualNetworkIds (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
+    computedRegistrationVirtualNetworkIds x = TF.compute (TF.refKey x) "registration_virtual_network_ids"
+
+instance s ~ s' => P.HasComputedResolutionVirtualNetworkIds (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
+    computedResolutionVirtualNetworkIds x = TF.compute (TF.refKey x) "resolution_virtual_network_ids"
+
 instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
         (_resource_group_name :: DnsZoneData s -> TF.Attr s P.Text)
@@ -443,6 +867,9 @@ instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (DnsZoneData s)) (T
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedZoneType (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
+    computedZoneType x = TF.compute (TF.refKey x) "zone_type"
 
 dnsZoneData :: TF.DataSource P.AzureRM (DnsZoneData s)
 dnsZoneData =
@@ -608,7 +1035,7 @@ Management Key Vault Templates.
 -}
 data KeyVaultAccessPolicyData s = KeyVaultAccessPolicyData {
       _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) Specifies the name of the Management Tempalte. Possible values are: @Key Management@ , @Secret Management@ , @Certificate Management@ , @Key & Secret Management@ , @Key & Certificate Management@ , @Secret & Certificate Management@ , @Key, Secret, & Certificate Management@ -}
+    {- ^ (Required) Specifies the name of the Management Template. Possible values are: @Key Management@ , @Secret Management@ , @Certificate Management@ , @Key & Secret Management@ , @Key & Certificate Management@ , @Secret & Certificate Management@ , @Key, Secret, & Certificate Management@ -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (KeyVaultAccessPolicyData s) where
@@ -643,6 +1070,223 @@ keyVaultAccessPolicyData =
     TF.newDataSource "azurerm_key_vault_access_policy" $
         KeyVaultAccessPolicyData {
               _name = TF.Nil
+            }
+
+{- | The @azurerm_key_vault@ AzureRM datasource.
+
+Gets information about a Key Vault.
+-}
+data KeyVaultData s = KeyVaultData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the name of the Key Vault. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Resource Group in which the Key Vault exists. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (KeyVaultData s) where
+    toHCL KeyVaultData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (KeyVaultData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: KeyVaultData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: KeyVaultData s)
+
+instance P.HasResourceGroupName (KeyVaultData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: KeyVaultData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: KeyVaultData s)
+
+instance s ~ s' => P.HasComputedAccessPolicy (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
+    computedAccessPolicy x = TF.compute (TF.refKey x) "access_policy"
+
+instance s ~ s' => P.HasComputedEnabledForDeployment (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
+    computedEnabledForDeployment x = TF.compute (TF.refKey x) "enabled_for_deployment"
+
+instance s ~ s' => P.HasComputedEnabledForDiskEncryption (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
+    computedEnabledForDiskEncryption x = TF.compute (TF.refKey x) "enabled_for_disk_encryption"
+
+instance s ~ s' => P.HasComputedEnabledForTemplateDeployment (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
+    computedEnabledForTemplateDeployment x = TF.compute (TF.refKey x) "enabled_for_template_deployment"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: KeyVaultData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: KeyVaultData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSku (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
+    computedSku x = TF.compute (TF.refKey x) "sku"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
+    computedTenantId x = TF.compute (TF.refKey x) "tenant_id"
+
+instance s ~ s' => P.HasComputedVaultUri (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
+    computedVaultUri x = TF.compute (TF.refKey x) "vault_uri"
+
+keyVaultData :: TF.DataSource P.AzureRM (KeyVaultData s)
+keyVaultData =
+    TF.newDataSource "azurerm_key_vault" $
+        KeyVaultData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
+{- | The @azurerm_key_vault_secret@ AzureRM datasource.
+
+Returns information about the specified Key Vault Secret. ~> Note: All
+arguments including the secret value will be stored in the raw state as
+plain-text. </docs/state/sensitive-data.html> .
+-}
+data KeyVaultSecretData s = KeyVaultSecretData {
+      _name      :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the name of the Key Vault Secret. -}
+    , _vault_uri :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the URI used to access the Key Vault instance, available on the @azurerm_key_vault@ Data Source / Resource. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (KeyVaultSecretData s) where
+    toHCL KeyVaultSecretData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "vault_uri" <$> TF.attribute _vault_uri
+        ]
+
+instance P.HasName (KeyVaultSecretData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: KeyVaultSecretData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: KeyVaultSecretData s)
+
+instance P.HasVaultUri (KeyVaultSecretData s) (TF.Attr s P.Text) where
+    vaultUri =
+        lens (_vault_uri :: KeyVaultSecretData s -> TF.Attr s P.Text)
+             (\s a -> s { _vault_uri = a } :: KeyVaultSecretData s)
+
+instance s ~ s' => P.HasComputedContentType (TF.Ref s' (KeyVaultSecretData s)) (TF.Attr s P.Text) where
+    computedContentType x = TF.compute (TF.refKey x) "content_type"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyVaultSecretData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (KeyVaultSecretData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: KeyVaultSecretData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (KeyVaultSecretData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (KeyVaultSecretData s)) (TF.Attr s P.Text) where
+    computedValue x = TF.compute (TF.refKey x) "value"
+
+instance s ~ s' => P.HasComputedVaultUri (TF.Ref s' (KeyVaultSecretData s)) (TF.Attr s P.Text) where
+    computedVaultUri =
+        (_vault_uri :: KeyVaultSecretData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (KeyVaultSecretData s)) (TF.Attr s P.Text) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
+
+keyVaultSecretData :: TF.DataSource P.AzureRM (KeyVaultSecretData s)
+keyVaultSecretData =
+    TF.newDataSource "azurerm_key_vault_secret" $
+        KeyVaultSecretData {
+              _name = TF.Nil
+            , _vault_uri = TF.Nil
+            }
+
+{- | The @azurerm_kubernetes_cluster@ AzureRM datasource.
+
+Gets information about a managed Kubernetes Cluster (AKS) ~> Note: All
+arguments including the client secret will be stored in the raw state as
+plain-text. </docs/state/sensitive-data.html> .
+-}
+data KubernetesClusterData s = KubernetesClusterData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the managed Kubernetes Cluster. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Resource Group in which the managed Kubernetes Cluster exists. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (KubernetesClusterData s) where
+    toHCL KubernetesClusterData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (KubernetesClusterData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: KubernetesClusterData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: KubernetesClusterData s)
+
+instance P.HasResourceGroupName (KubernetesClusterData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: KubernetesClusterData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: KubernetesClusterData s)
+
+instance s ~ s' => P.HasComputedAgentPoolProfile (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedAgentPoolProfile x = TF.compute (TF.refKey x) "agent_pool_profile"
+
+instance s ~ s' => P.HasComputedDnsPrefix (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedDnsPrefix x = TF.compute (TF.refKey x) "dns_prefix"
+
+instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedFqdn x = TF.compute (TF.refKey x) "fqdn"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedKubeConfig (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedKubeConfig x = TF.compute (TF.refKey x) "kube_config"
+
+instance s ~ s' => P.HasComputedKubeConfigRaw (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedKubeConfigRaw x = TF.compute (TF.refKey x) "kube_config_raw"
+
+instance s ~ s' => P.HasComputedKubernetesVersion (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedKubernetesVersion x = TF.compute (TF.refKey x) "kubernetes_version"
+
+instance s ~ s' => P.HasComputedLinuxProfile (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedLinuxProfile x = TF.compute (TF.refKey x) "linux_profile"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: KubernetesClusterData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: KubernetesClusterData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedServicePrincipal (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedServicePrincipal x = TF.compute (TF.refKey x) "service_principal"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+kubernetesClusterData :: TF.DataSource P.AzureRM (KubernetesClusterData s)
+kubernetesClusterData =
+    TF.newDataSource "azurerm_kubernetes_cluster" $
+        KubernetesClusterData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
             }
 
 {- | The @azurerm_managed_disk@ AzureRM datasource.
@@ -701,10 +1345,103 @@ instance s ~ s' => P.HasComputedStorageAccountType (TF.Ref s' (ManagedDiskData s
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ManagedDiskData s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
+instance s ~ s' => P.HasComputedZones (TF.Ref s' (ManagedDiskData s)) (TF.Attr s P.Text) where
+    computedZones x = TF.compute (TF.refKey x) "zones"
+
 managedDiskData :: TF.DataSource P.AzureRM (ManagedDiskData s)
 managedDiskData =
     TF.newDataSource "azurerm_managed_disk" $
         ManagedDiskData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
+{- | The @azurerm_network_interface@ AzureRM datasource.
+
+Use this data source to access the properties of an Azure Network Interface.
+-}
+data NetworkInterfaceData s = NetworkInterfaceData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the name of the Network Interface. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the name of the resource group the Network Interface is located in. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (NetworkInterfaceData s) where
+    toHCL NetworkInterfaceData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (NetworkInterfaceData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: NetworkInterfaceData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: NetworkInterfaceData s)
+
+instance P.HasResourceGroupName (NetworkInterfaceData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: NetworkInterfaceData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: NetworkInterfaceData s)
+
+instance s ~ s' => P.HasComputedAppliedDnsServers (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedAppliedDnsServers x = TF.compute (TF.refKey x) "applied_dns_servers"
+
+instance s ~ s' => P.HasComputedDnsServers (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedDnsServers x = TF.compute (TF.refKey x) "dns_servers"
+
+instance s ~ s' => P.HasComputedEnableAcceleratedNetworking (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedEnableAcceleratedNetworking x = TF.compute (TF.refKey x) "enable_accelerated_networking"
+
+instance s ~ s' => P.HasComputedEnableIpForwarding (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedEnableIpForwarding x = TF.compute (TF.refKey x) "enable_ip_forwarding"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInternalDnsNameLabel (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedInternalDnsNameLabel x = TF.compute (TF.refKey x) "internal_dns_name_label"
+
+instance s ~ s' => P.HasComputedInternalFqdn (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedInternalFqdn x = TF.compute (TF.refKey x) "internal_fqdn"
+
+instance s ~ s' => P.HasComputedIpConfiguration (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedIpConfiguration x = TF.compute (TF.refKey x) "ip_configuration"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedMacAddress x = TF.compute (TF.refKey x) "mac_address"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: NetworkInterfaceData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNetworkSecurityGroupId (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedNetworkSecurityGroupId x = TF.compute (TF.refKey x) "network_security_group_id"
+
+instance s ~ s' => P.HasComputedPrivateIpAddress (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedPrivateIpAddress x = TF.compute (TF.refKey x) "private_ip_address"
+
+instance s ~ s' => P.HasComputedPrivateIpAddresses (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedPrivateIpAddresses x = TF.compute (TF.refKey x) "private_ip_addresses"
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: NetworkInterfaceData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedVirtualMachineId (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedVirtualMachineId x = TF.compute (TF.refKey x) "virtual_machine_id"
+
+networkInterfaceData :: TF.DataSource P.AzureRM (NetworkInterfaceData s)
+networkInterfaceData =
+    TF.newDataSource "azurerm_network_interface" $
+        NetworkInterfaceData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
@@ -906,6 +1643,139 @@ publicIpData =
             , _resource_group_name = TF.Nil
             }
 
+{- | The @azurerm_public_ips@ AzureRM datasource.
+
+Use this data source to access a filtered list of Public IP Addresses
+-}
+data PublicIpsData s = PublicIpsData {
+      _allocation_type     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Allocation Type for the Public IP Address. Possible values include @Static@ or @Dynamic@ . -}
+    , _attached            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Filter to include IP Addresses which are attached to a device, such as a VM/LB ( @true@ ) or unattached ( @false@ ). -}
+    , _name_prefix         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A prefix match used for the IP Addresses @name@ field, case sensitive. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the name of the resource group. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (PublicIpsData s) where
+    toHCL PublicIpsData{..} = TF.inline $ catMaybes
+        [ TF.assign "allocation_type" <$> TF.attribute _allocation_type
+        , TF.assign "attached" <$> TF.attribute _attached
+        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasAllocationType (PublicIpsData s) (TF.Attr s P.Text) where
+    allocationType =
+        lens (_allocation_type :: PublicIpsData s -> TF.Attr s P.Text)
+             (\s a -> s { _allocation_type = a } :: PublicIpsData s)
+
+instance P.HasAttached (PublicIpsData s) (TF.Attr s P.Text) where
+    attached =
+        lens (_attached :: PublicIpsData s -> TF.Attr s P.Text)
+             (\s a -> s { _attached = a } :: PublicIpsData s)
+
+instance P.HasNamePrefix (PublicIpsData s) (TF.Attr s P.Text) where
+    namePrefix =
+        lens (_name_prefix :: PublicIpsData s -> TF.Attr s P.Text)
+             (\s a -> s { _name_prefix = a } :: PublicIpsData s)
+
+instance P.HasResourceGroupName (PublicIpsData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: PublicIpsData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: PublicIpsData s)
+
+instance s ~ s' => P.HasComputedAllocationType (TF.Ref s' (PublicIpsData s)) (TF.Attr s P.Text) where
+    computedAllocationType =
+        (_allocation_type :: PublicIpsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedAttached (TF.Ref s' (PublicIpsData s)) (TF.Attr s P.Text) where
+    computedAttached =
+        (_attached :: PublicIpsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (PublicIpsData s)) (TF.Attr s P.Text) where
+    computedNamePrefix =
+        (_name_prefix :: PublicIpsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPublicIps (TF.Ref s' (PublicIpsData s)) (TF.Attr s P.Text) where
+    computedPublicIps x = TF.compute (TF.refKey x) "public_ips"
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (PublicIpsData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: PublicIpsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+publicIpsData :: TF.DataSource P.AzureRM (PublicIpsData s)
+publicIpsData =
+    TF.newDataSource "azurerm_public_ips" $
+        PublicIpsData {
+              _allocation_type = TF.Nil
+            , _attached = TF.Nil
+            , _name_prefix = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
+{- | The @azurerm_recovery_services_vault@ AzureRM datasource.
+
+Use this data source to access the properties of a Recovery Services Vault.
+-}
+data RecoveryServicesVaultData s = RecoveryServicesVaultData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the name of the Recovery Services Vault. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the resource group in which the Recovery Services Vault resides. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (RecoveryServicesVaultData s) where
+    toHCL RecoveryServicesVaultData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (RecoveryServicesVaultData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: RecoveryServicesVaultData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: RecoveryServicesVaultData s)
+
+instance P.HasResourceGroupName (RecoveryServicesVaultData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: RecoveryServicesVaultData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: RecoveryServicesVaultData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RecoveryServicesVaultData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (RecoveryServicesVaultData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RecoveryServicesVaultData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: RecoveryServicesVaultData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (RecoveryServicesVaultData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: RecoveryServicesVaultData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSku (TF.Ref s' (RecoveryServicesVaultData s)) (TF.Attr s P.Text) where
+    computedSku x = TF.compute (TF.refKey x) "sku"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (RecoveryServicesVaultData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+recoveryServicesVaultData :: TF.DataSource P.AzureRM (RecoveryServicesVaultData s)
+recoveryServicesVaultData =
+    TF.newDataSource "azurerm_recovery_services_vault" $
+        RecoveryServicesVaultData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
 {- | The @azurerm_resource_group@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure resource group.
@@ -1003,6 +1873,130 @@ roleDefinitionData =
         RoleDefinitionData {
               _role_definition_id = TF.Nil
             , _scope = TF.Nil
+            }
+
+{- | The @azurerm_route_table@ AzureRM datasource.
+
+Gets information about a Route Table
+-}
+data RouteTableData s = RouteTableData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Route Table. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Resource Group in which the Route Table exists. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (RouteTableData s) where
+    toHCL RouteTableData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (RouteTableData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: RouteTableData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: RouteTableData s)
+
+instance P.HasResourceGroupName (RouteTableData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: RouteTableData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: RouteTableData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: RouteTableData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: RouteTableData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRoute (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
+    computedRoute x = TF.compute (TF.refKey x) "route"
+
+instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
+    computedSubnets x = TF.compute (TF.refKey x) "subnets"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+routeTableData :: TF.DataSource P.AzureRM (RouteTableData s)
+routeTableData =
+    TF.newDataSource "azurerm_route_table" $
+        RouteTableData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
+{- | The @azurerm_scheduler_job_collection@ AzureRM datasource.
+
+Use this data source to access the properties of an Azure scheduler job
+collection.
+-}
+data SchedulerJobCollectionData s = SchedulerJobCollectionData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the name of the Scheduler Job Collection. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the name of the resource group in which the Scheduler Job Collection resides. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SchedulerJobCollectionData s) where
+    toHCL SchedulerJobCollectionData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (SchedulerJobCollectionData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: SchedulerJobCollectionData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SchedulerJobCollectionData s)
+
+instance P.HasResourceGroupName (SchedulerJobCollectionData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: SchedulerJobCollectionData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: SchedulerJobCollectionData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: SchedulerJobCollectionData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedQuota (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s P.Text) where
+    computedQuota x = TF.compute (TF.refKey x) "quota"
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: SchedulerJobCollectionData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSku (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s P.Text) where
+    computedSku x = TF.compute (TF.refKey x) "sku"
+
+instance s ~ s' => P.HasComputedState (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s P.Text) where
+    computedState x = TF.compute (TF.refKey x) "state"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+schedulerJobCollectionData :: TF.DataSource P.AzureRM (SchedulerJobCollectionData s)
+schedulerJobCollectionData =
+    TF.newDataSource "azurerm_scheduler_job_collection" $
+        SchedulerJobCollectionData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
             }
 
 {- | The @azurerm_snapshot@ AzureRM datasource.
@@ -1192,6 +2186,131 @@ storageAccountData =
             , _resource_group_name = TF.Nil
             }
 
+{- | The @azurerm_storage_account_sas@ AzureRM datasource.
+
+Use this data source to create a Shared Access Signature (SAS) for an Azure
+Storage Account. Shared access signatures allow fine-grained, ephemeral
+access control to various aspects of an Azure Storage Account. Note that
+this is an
+<https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-an-account-sas>
+and not a
+<https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas>
+.
+-}
+data StorageAccountSasData s = StorageAccountSasData {
+      _connection_string :: !(TF.Attr s P.Text)
+    {- ^ (Required) The connection string for the storage account to which this SAS applies. Typically directly from the @primary_connection_string@ attribute of a terraform created @azurerm_storage_account@ resource. -}
+    , _expiry            :: !(TF.Attr s P.Text)
+    {- ^ (Required) The expiration time and date of this SAS. Must be a valid ISO-8601 format time/date string. -}
+    , _https_only        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Only permit @https@ access. If @false@ , both @http@ and @https@ are permitted. Defaults to @true@ . -}
+    , _permissions       :: !(TF.Attr s P.Text)
+    {- ^ (Required) A @permissions@ block as defined below. -}
+    , _resource_types    :: !(TF.Attr s P.Text)
+    {- ^ (Required) A @resource_types@ block as defined below. -}
+    , _services          :: !(TF.Attr s P.Text)
+    {- ^ (Required) A @services@ block as defined below. -}
+    , _start             :: !(TF.Attr s P.Text)
+    {- ^ (Required) The starting time and date of validity of this SAS. Must be a valid ISO-8601 format time/date string. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (StorageAccountSasData s) where
+    toHCL StorageAccountSasData{..} = TF.inline $ catMaybes
+        [ TF.assign "connection_string" <$> TF.attribute _connection_string
+        , TF.assign "expiry" <$> TF.attribute _expiry
+        , TF.assign "https_only" <$> TF.attribute _https_only
+        , TF.assign "permissions" <$> TF.attribute _permissions
+        , TF.assign "resource_types" <$> TF.attribute _resource_types
+        , TF.assign "services" <$> TF.attribute _services
+        , TF.assign "start" <$> TF.attribute _start
+        ]
+
+instance P.HasConnectionString (StorageAccountSasData s) (TF.Attr s P.Text) where
+    connectionString =
+        lens (_connection_string :: StorageAccountSasData s -> TF.Attr s P.Text)
+             (\s a -> s { _connection_string = a } :: StorageAccountSasData s)
+
+instance P.HasExpiry (StorageAccountSasData s) (TF.Attr s P.Text) where
+    expiry =
+        lens (_expiry :: StorageAccountSasData s -> TF.Attr s P.Text)
+             (\s a -> s { _expiry = a } :: StorageAccountSasData s)
+
+instance P.HasHttpsOnly (StorageAccountSasData s) (TF.Attr s P.Text) where
+    httpsOnly =
+        lens (_https_only :: StorageAccountSasData s -> TF.Attr s P.Text)
+             (\s a -> s { _https_only = a } :: StorageAccountSasData s)
+
+instance P.HasPermissions (StorageAccountSasData s) (TF.Attr s P.Text) where
+    permissions =
+        lens (_permissions :: StorageAccountSasData s -> TF.Attr s P.Text)
+             (\s a -> s { _permissions = a } :: StorageAccountSasData s)
+
+instance P.HasResourceTypes (StorageAccountSasData s) (TF.Attr s P.Text) where
+    resourceTypes =
+        lens (_resource_types :: StorageAccountSasData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_types = a } :: StorageAccountSasData s)
+
+instance P.HasServices (StorageAccountSasData s) (TF.Attr s P.Text) where
+    services =
+        lens (_services :: StorageAccountSasData s -> TF.Attr s P.Text)
+             (\s a -> s { _services = a } :: StorageAccountSasData s)
+
+instance P.HasStart (StorageAccountSasData s) (TF.Attr s P.Text) where
+    start =
+        lens (_start :: StorageAccountSasData s -> TF.Attr s P.Text)
+             (\s a -> s { _start = a } :: StorageAccountSasData s)
+
+instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (StorageAccountSasData s)) (TF.Attr s P.Text) where
+    computedConnectionString =
+        (_connection_string :: StorageAccountSasData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedExpiry (TF.Ref s' (StorageAccountSasData s)) (TF.Attr s P.Text) where
+    computedExpiry =
+        (_expiry :: StorageAccountSasData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHttpsOnly (TF.Ref s' (StorageAccountSasData s)) (TF.Attr s P.Text) where
+    computedHttpsOnly =
+        (_https_only :: StorageAccountSasData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (StorageAccountSasData s)) (TF.Attr s P.Text) where
+    computedPermissions =
+        (_permissions :: StorageAccountSasData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResourceTypes (TF.Ref s' (StorageAccountSasData s)) (TF.Attr s P.Text) where
+    computedResourceTypes =
+        (_resource_types :: StorageAccountSasData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSas (TF.Ref s' (StorageAccountSasData s)) (TF.Attr s P.Text) where
+    computedSas x = TF.compute (TF.refKey x) "sas"
+
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (StorageAccountSasData s)) (TF.Attr s P.Text) where
+    computedServices =
+        (_services :: StorageAccountSasData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedStart (TF.Ref s' (StorageAccountSasData s)) (TF.Attr s P.Text) where
+    computedStart =
+        (_start :: StorageAccountSasData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+storageAccountSasData :: TF.DataSource P.AzureRM (StorageAccountSasData s)
+storageAccountSasData =
+    TF.newDataSource "azurerm_storage_account_sas" $
+        StorageAccountSasData {
+              _connection_string = TF.Nil
+            , _expiry = TF.Nil
+            , _https_only = TF.Nil
+            , _permissions = TF.Nil
+            , _resource_types = TF.Nil
+            , _services = TF.Nil
+            , _start = TF.Nil
+            }
+
 {- | The @azurerm_subnet@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure Subnet located
@@ -1311,6 +2430,73 @@ subscriptionData =
     TF.newDataSource "azurerm_subscription" $
         SubscriptionData {
               _subscription_id = TF.Nil
+            }
+
+{- | The @azurerm_subscriptions@ AzureRM datasource.
+
+Use this data source to access a list of all Azure subscriptions currently
+available.
+-}
+data SubscriptionsData s = SubscriptionsData {
+      _subscriptions :: !(TF.Attr s P.Text)
+    {- ^ - One or more @subscription@ blocks as defined below. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SubscriptionsData s) where
+    toHCL SubscriptionsData{..} = TF.inline $ catMaybes
+        [ TF.assign "subscriptions" <$> TF.attribute _subscriptions
+        ]
+
+instance P.HasSubscriptions (SubscriptionsData s) (TF.Attr s P.Text) where
+    subscriptions =
+        lens (_subscriptions :: SubscriptionsData s -> TF.Attr s P.Text)
+             (\s a -> s { _subscriptions = a } :: SubscriptionsData s)
+
+instance s ~ s' => P.HasComputedSubscriptions (TF.Ref s' (SubscriptionsData s)) (TF.Attr s P.Text) where
+    computedSubscriptions =
+        (_subscriptions :: SubscriptionsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+subscriptionsData :: TF.DataSource P.AzureRM (SubscriptionsData s)
+subscriptionsData =
+    TF.newDataSource "azurerm_subscriptions" $
+        SubscriptionsData {
+              _subscriptions = TF.Nil
+            }
+
+{- | The @azurerm_traffic_manager_geographical_location@ AzureRM datasource.
+
+Use this data source to access the ID of a specified Traffic Manager
+Geographical Location within the Geographical Hierarchy.
+-}
+data TrafficManagerGeographicalLocationData s = TrafficManagerGeographicalLocationData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the name of the Location, for example @World@ , @Europe@ or @Germany@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (TrafficManagerGeographicalLocationData s) where
+    toHCL TrafficManagerGeographicalLocationData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (TrafficManagerGeographicalLocationData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: TrafficManagerGeographicalLocationData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: TrafficManagerGeographicalLocationData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TrafficManagerGeographicalLocationData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (TrafficManagerGeographicalLocationData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: TrafficManagerGeographicalLocationData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+trafficManagerGeographicalLocationData :: TF.DataSource P.AzureRM (TrafficManagerGeographicalLocationData s)
+trafficManagerGeographicalLocationData =
+    TF.newDataSource "azurerm_traffic_manager_geographical_location" $
+        TrafficManagerGeographicalLocationData {
+              _name = TF.Nil
             }
 
 {- | The @azurerm_virtual_network@ AzureRM datasource.

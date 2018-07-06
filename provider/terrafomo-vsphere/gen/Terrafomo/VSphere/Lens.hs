@@ -24,21 +24,36 @@ module Terrafomo.VSphere.Lens
     -- ** Arguments
       HasAccessMode (..)
     , HasAdapterType (..)
+    , HasAffinityHostGroupName (..)
+    , HasAntiAffinityHostGroupName (..)
     , HasAssociableTypes (..)
     , HasAutoExpand (..)
     , HasCardinality (..)
     , HasCategoryId (..)
+    , HasComputeClusterId (..)
     , HasConsolidate (..)
     , HasContactDetail (..)
     , HasContactName (..)
+    , HasCpuExpandable (..)
+    , HasCpuLimit (..)
+    , HasCpuReservation (..)
+    , HasCpuShareLevel (..)
+    , HasCpuShares (..)
     , HasCreateDirectories (..)
     , HasDatacenter (..)
     , HasDatacenterId (..)
     , HasDatastore (..)
+    , HasDatastoreClusterId (..)
+    , HasDependencyVmGroupName (..)
     , HasDescription (..)
     , HasDestinationFile (..)
     , HasDisks (..)
     , HasDistributedVirtualSwitchUuid (..)
+    , HasDpmAutomationLevel (..)
+    , HasDpmEnabled (..)
+    , HasDrsAutomationLevel (..)
+    , HasDrsEnabled (..)
+    , HasEnabled (..)
     , HasFilter (..)
     , HasFolder (..)
     , HasHostSystemId (..)
@@ -50,12 +65,19 @@ module Terrafomo.VSphere.Lens
     , HasLinkDiscoveryOperation (..)
     , HasLinkDiscoveryProtocol (..)
     , HasManagedObjectType (..)
+    , HasMandatory (..)
     , HasMaxMtu (..)
     , HasMemory (..)
+    , HasMemoryExpandable (..)
+    , HasMemoryLimit (..)
+    , HasMemoryReservation (..)
+    , HasMemoryShareLevel (..)
+    , HasMemoryShares (..)
     , HasMtu (..)
     , HasMulticastFilteringMode (..)
     , HasName (..)
     , HasNumberOfPorts (..)
+    , HasParentResourcePoolId (..)
     , HasPath (..)
     , HasQuiesce (..)
     , HasRemoteHosts (..)
@@ -64,6 +86,9 @@ module Terrafomo.VSphere.Lens
     , HasRescan (..)
     , HasResourcePoolId (..)
     , HasScsiControllerScanCount (..)
+    , HasSdrsAutomationLevel (..)
+    , HasSdrsEnabled (..)
+    , HasSdrsIntraVmAffinity (..)
     , HasSecurityType (..)
     , HasSize (..)
     , HasSnapshotName (..)
@@ -73,39 +98,58 @@ module Terrafomo.VSphere.Lens
     , HasTags (..)
     , HasType' (..)
     , HasVersion (..)
+    , HasVirtualMachineId (..)
+    , HasVirtualMachineIds (..)
     , HasVirtualMachineUuid (..)
     , HasVirtualSwitchName (..)
     , HasVlanId (..)
+    , HasVmGroupName (..)
     , HasVmdkPath (..)
 
     -- ** Computed Attributes
     , HasComputedAccessMode (..)
     , HasComputedAccessible (..)
     , HasComputedAdapterType (..)
+    , HasComputedAffinityHostGroupName (..)
     , HasComputedAlternateGuestName (..)
+    , HasComputedAntiAffinityHostGroupName (..)
     , HasComputedAssociableTypes (..)
     , HasComputedAutoExpand (..)
     , HasComputedCapacity (..)
     , HasComputedCardinality (..)
     , HasComputedCategoryId (..)
     , HasComputedChangeVersion (..)
+    , HasComputedComputeClusterId (..)
     , HasComputedComputedPolicy (..)
     , HasComputedConfigVersion (..)
     , HasComputedConsolidate (..)
     , HasComputedContactDetail (..)
     , HasComputedContactName (..)
+    , HasComputedCpuExpandable (..)
+    , HasComputedCpuLimit (..)
+    , HasComputedCpuReservation (..)
+    , HasComputedCpuShareLevel (..)
+    , HasComputedCpuShares (..)
     , HasComputedCreateDirectories (..)
     , HasComputedDatacenter (..)
     , HasComputedDatacenterId (..)
     , HasComputedDatastore (..)
+    , HasComputedDatastoreClusterId (..)
     , HasComputedDefaultIpAddress (..)
+    , HasComputedDependencyVmGroupName (..)
     , HasComputedDescription (..)
     , HasComputedDestinationFile (..)
     , HasComputedDisks (..)
     , HasComputedDistributedVirtualSwitchUuid (..)
+    , HasComputedDpmAutomationLevel (..)
+    , HasComputedDpmEnabled (..)
+    , HasComputedDrsAutomationLevel (..)
+    , HasComputedDrsEnabled (..)
     , HasComputedEagerlyScrub (..)
     , HasComputedEditionKey (..)
+    , HasComputedEnabled (..)
     , HasComputedFilter (..)
+    , HasComputedFirmware (..)
     , HasComputedFolder (..)
     , HasComputedFreeSpace (..)
     , HasComputedGuestId (..)
@@ -123,8 +167,14 @@ module Terrafomo.VSphere.Lens
     , HasComputedLinkDiscoveryProtocol (..)
     , HasComputedMaintenanceMode (..)
     , HasComputedManagedObjectType (..)
+    , HasComputedMandatory (..)
     , HasComputedMaxMtu (..)
     , HasComputedMemory (..)
+    , HasComputedMemoryExpandable (..)
+    , HasComputedMemoryLimit (..)
+    , HasComputedMemoryReservation (..)
+    , HasComputedMemoryShareLevel (..)
+    , HasComputedMemoryShares (..)
     , HasComputedMoid (..)
     , HasComputedMtu (..)
     , HasComputedMulticastFilteringMode (..)
@@ -132,6 +182,7 @@ module Terrafomo.VSphere.Lens
     , HasComputedName (..)
     , HasComputedNetworkInterfaceTypes (..)
     , HasComputedNumberOfPorts (..)
+    , HasComputedParentResourcePoolId (..)
     , HasComputedPath (..)
     , HasComputedPorts (..)
     , HasComputedProtocolEndpoint (..)
@@ -144,6 +195,9 @@ module Terrafomo.VSphere.Lens
     , HasComputedResourcePoolId (..)
     , HasComputedScsiControllerScanCount (..)
     , HasComputedScsiType (..)
+    , HasComputedSdrsAutomationLevel (..)
+    , HasComputedSdrsEnabled (..)
+    , HasComputedSdrsIntraVmAffinity (..)
     , HasComputedSecurityType (..)
     , HasComputedSize (..)
     , HasComputedSnapshotName (..)
@@ -159,10 +213,14 @@ module Terrafomo.VSphere.Lens
     , HasComputedUrl (..)
     , HasComputedUsed (..)
     , HasComputedUuid (..)
+    , HasComputedVappTransport (..)
     , HasComputedVersion (..)
+    , HasComputedVirtualMachineId (..)
+    , HasComputedVirtualMachineIds (..)
     , HasComputedVirtualMachineUuid (..)
     , HasComputedVirtualSwitchName (..)
     , HasComputedVlanId (..)
+    , HasComputedVmGroupName (..)
     , HasComputedVmdkPath (..)
     , HasComputedVmwareToolsStatus (..)
     , HasComputedVmxPath (..)
@@ -186,6 +244,18 @@ class HasAdapterType a b | a -> b where
 
 instance HasAdapterType a b => HasAdapterType (TF.Schema l p a) b where
     adapterType = TF.configuration . adapterType
+
+class HasAffinityHostGroupName a b | a -> b where
+    affinityHostGroupName :: Lens' a b
+
+instance HasAffinityHostGroupName a b => HasAffinityHostGroupName (TF.Schema l p a) b where
+    affinityHostGroupName = TF.configuration . affinityHostGroupName
+
+class HasAntiAffinityHostGroupName a b | a -> b where
+    antiAffinityHostGroupName :: Lens' a b
+
+instance HasAntiAffinityHostGroupName a b => HasAntiAffinityHostGroupName (TF.Schema l p a) b where
+    antiAffinityHostGroupName = TF.configuration . antiAffinityHostGroupName
 
 class HasAssociableTypes a b | a -> b where
     associableTypes :: Lens' a b
@@ -211,6 +281,12 @@ class HasCategoryId a b | a -> b where
 instance HasCategoryId a b => HasCategoryId (TF.Schema l p a) b where
     categoryId = TF.configuration . categoryId
 
+class HasComputeClusterId a b | a -> b where
+    computeClusterId :: Lens' a b
+
+instance HasComputeClusterId a b => HasComputeClusterId (TF.Schema l p a) b where
+    computeClusterId = TF.configuration . computeClusterId
+
 class HasConsolidate a b | a -> b where
     consolidate :: Lens' a b
 
@@ -228,6 +304,36 @@ class HasContactName a b | a -> b where
 
 instance HasContactName a b => HasContactName (TF.Schema l p a) b where
     contactName = TF.configuration . contactName
+
+class HasCpuExpandable a b | a -> b where
+    cpuExpandable :: Lens' a b
+
+instance HasCpuExpandable a b => HasCpuExpandable (TF.Schema l p a) b where
+    cpuExpandable = TF.configuration . cpuExpandable
+
+class HasCpuLimit a b | a -> b where
+    cpuLimit :: Lens' a b
+
+instance HasCpuLimit a b => HasCpuLimit (TF.Schema l p a) b where
+    cpuLimit = TF.configuration . cpuLimit
+
+class HasCpuReservation a b | a -> b where
+    cpuReservation :: Lens' a b
+
+instance HasCpuReservation a b => HasCpuReservation (TF.Schema l p a) b where
+    cpuReservation = TF.configuration . cpuReservation
+
+class HasCpuShareLevel a b | a -> b where
+    cpuShareLevel :: Lens' a b
+
+instance HasCpuShareLevel a b => HasCpuShareLevel (TF.Schema l p a) b where
+    cpuShareLevel = TF.configuration . cpuShareLevel
+
+class HasCpuShares a b | a -> b where
+    cpuShares :: Lens' a b
+
+instance HasCpuShares a b => HasCpuShares (TF.Schema l p a) b where
+    cpuShares = TF.configuration . cpuShares
 
 class HasCreateDirectories a b | a -> b where
     createDirectories :: Lens' a b
@@ -253,6 +359,18 @@ class HasDatastore a b | a -> b where
 instance HasDatastore a b => HasDatastore (TF.Schema l p a) b where
     datastore = TF.configuration . datastore
 
+class HasDatastoreClusterId a b | a -> b where
+    datastoreClusterId :: Lens' a b
+
+instance HasDatastoreClusterId a b => HasDatastoreClusterId (TF.Schema l p a) b where
+    datastoreClusterId = TF.configuration . datastoreClusterId
+
+class HasDependencyVmGroupName a b | a -> b where
+    dependencyVmGroupName :: Lens' a b
+
+instance HasDependencyVmGroupName a b => HasDependencyVmGroupName (TF.Schema l p a) b where
+    dependencyVmGroupName = TF.configuration . dependencyVmGroupName
+
 class HasDescription a b | a -> b where
     description :: Lens' a b
 
@@ -276,6 +394,36 @@ class HasDistributedVirtualSwitchUuid a b | a -> b where
 
 instance HasDistributedVirtualSwitchUuid a b => HasDistributedVirtualSwitchUuid (TF.Schema l p a) b where
     distributedVirtualSwitchUuid = TF.configuration . distributedVirtualSwitchUuid
+
+class HasDpmAutomationLevel a b | a -> b where
+    dpmAutomationLevel :: Lens' a b
+
+instance HasDpmAutomationLevel a b => HasDpmAutomationLevel (TF.Schema l p a) b where
+    dpmAutomationLevel = TF.configuration . dpmAutomationLevel
+
+class HasDpmEnabled a b | a -> b where
+    dpmEnabled :: Lens' a b
+
+instance HasDpmEnabled a b => HasDpmEnabled (TF.Schema l p a) b where
+    dpmEnabled = TF.configuration . dpmEnabled
+
+class HasDrsAutomationLevel a b | a -> b where
+    drsAutomationLevel :: Lens' a b
+
+instance HasDrsAutomationLevel a b => HasDrsAutomationLevel (TF.Schema l p a) b where
+    drsAutomationLevel = TF.configuration . drsAutomationLevel
+
+class HasDrsEnabled a b | a -> b where
+    drsEnabled :: Lens' a b
+
+instance HasDrsEnabled a b => HasDrsEnabled (TF.Schema l p a) b where
+    drsEnabled = TF.configuration . drsEnabled
+
+class HasEnabled a b | a -> b where
+    enabled :: Lens' a b
+
+instance HasEnabled a b => HasEnabled (TF.Schema l p a) b where
+    enabled = TF.configuration . enabled
 
 class HasFilter a b | a -> b where
     filter :: Lens' a b
@@ -343,6 +491,12 @@ class HasManagedObjectType a b | a -> b where
 instance HasManagedObjectType a b => HasManagedObjectType (TF.Schema l p a) b where
     managedObjectType = TF.configuration . managedObjectType
 
+class HasMandatory a b | a -> b where
+    mandatory :: Lens' a b
+
+instance HasMandatory a b => HasMandatory (TF.Schema l p a) b where
+    mandatory = TF.configuration . mandatory
+
 class HasMaxMtu a b | a -> b where
     maxMtu :: Lens' a b
 
@@ -354,6 +508,36 @@ class HasMemory a b | a -> b where
 
 instance HasMemory a b => HasMemory (TF.Schema l p a) b where
     memory = TF.configuration . memory
+
+class HasMemoryExpandable a b | a -> b where
+    memoryExpandable :: Lens' a b
+
+instance HasMemoryExpandable a b => HasMemoryExpandable (TF.Schema l p a) b where
+    memoryExpandable = TF.configuration . memoryExpandable
+
+class HasMemoryLimit a b | a -> b where
+    memoryLimit :: Lens' a b
+
+instance HasMemoryLimit a b => HasMemoryLimit (TF.Schema l p a) b where
+    memoryLimit = TF.configuration . memoryLimit
+
+class HasMemoryReservation a b | a -> b where
+    memoryReservation :: Lens' a b
+
+instance HasMemoryReservation a b => HasMemoryReservation (TF.Schema l p a) b where
+    memoryReservation = TF.configuration . memoryReservation
+
+class HasMemoryShareLevel a b | a -> b where
+    memoryShareLevel :: Lens' a b
+
+instance HasMemoryShareLevel a b => HasMemoryShareLevel (TF.Schema l p a) b where
+    memoryShareLevel = TF.configuration . memoryShareLevel
+
+class HasMemoryShares a b | a -> b where
+    memoryShares :: Lens' a b
+
+instance HasMemoryShares a b => HasMemoryShares (TF.Schema l p a) b where
+    memoryShares = TF.configuration . memoryShares
 
 class HasMtu a b | a -> b where
     mtu :: Lens' a b
@@ -378,6 +562,12 @@ class HasNumberOfPorts a b | a -> b where
 
 instance HasNumberOfPorts a b => HasNumberOfPorts (TF.Schema l p a) b where
     numberOfPorts = TF.configuration . numberOfPorts
+
+class HasParentResourcePoolId a b | a -> b where
+    parentResourcePoolId :: Lens' a b
+
+instance HasParentResourcePoolId a b => HasParentResourcePoolId (TF.Schema l p a) b where
+    parentResourcePoolId = TF.configuration . parentResourcePoolId
 
 class HasPath a b | a -> b where
     path :: Lens' a b
@@ -426,6 +616,24 @@ class HasScsiControllerScanCount a b | a -> b where
 
 instance HasScsiControllerScanCount a b => HasScsiControllerScanCount (TF.Schema l p a) b where
     scsiControllerScanCount = TF.configuration . scsiControllerScanCount
+
+class HasSdrsAutomationLevel a b | a -> b where
+    sdrsAutomationLevel :: Lens' a b
+
+instance HasSdrsAutomationLevel a b => HasSdrsAutomationLevel (TF.Schema l p a) b where
+    sdrsAutomationLevel = TF.configuration . sdrsAutomationLevel
+
+class HasSdrsEnabled a b | a -> b where
+    sdrsEnabled :: Lens' a b
+
+instance HasSdrsEnabled a b => HasSdrsEnabled (TF.Schema l p a) b where
+    sdrsEnabled = TF.configuration . sdrsEnabled
+
+class HasSdrsIntraVmAffinity a b | a -> b where
+    sdrsIntraVmAffinity :: Lens' a b
+
+instance HasSdrsIntraVmAffinity a b => HasSdrsIntraVmAffinity (TF.Schema l p a) b where
+    sdrsIntraVmAffinity = TF.configuration . sdrsIntraVmAffinity
 
 class HasSecurityType a b | a -> b where
     securityType :: Lens' a b
@@ -481,6 +689,18 @@ class HasVersion a b | a -> b where
 instance HasVersion a b => HasVersion (TF.Schema l p a) b where
     version = TF.configuration . version
 
+class HasVirtualMachineId a b | a -> b where
+    virtualMachineId :: Lens' a b
+
+instance HasVirtualMachineId a b => HasVirtualMachineId (TF.Schema l p a) b where
+    virtualMachineId = TF.configuration . virtualMachineId
+
+class HasVirtualMachineIds a b | a -> b where
+    virtualMachineIds :: Lens' a b
+
+instance HasVirtualMachineIds a b => HasVirtualMachineIds (TF.Schema l p a) b where
+    virtualMachineIds = TF.configuration . virtualMachineIds
+
 class HasVirtualMachineUuid a b | a -> b where
     virtualMachineUuid :: Lens' a b
 
@@ -499,6 +719,12 @@ class HasVlanId a b | a -> b where
 instance HasVlanId a b => HasVlanId (TF.Schema l p a) b where
     vlanId = TF.configuration . vlanId
 
+class HasVmGroupName a b | a -> b where
+    vmGroupName :: Lens' a b
+
+instance HasVmGroupName a b => HasVmGroupName (TF.Schema l p a) b where
+    vmGroupName = TF.configuration . vmGroupName
+
 class HasVmdkPath a b | a -> b where
     vmdkPath :: Lens' a b
 
@@ -514,8 +740,14 @@ class HasComputedAccessible a b | a -> b where
 class HasComputedAdapterType a b | a -> b where
     computedAdapterType :: a -> b
 
+class HasComputedAffinityHostGroupName a b | a -> b where
+    computedAffinityHostGroupName :: a -> b
+
 class HasComputedAlternateGuestName a b | a -> b where
     computedAlternateGuestName :: a -> b
+
+class HasComputedAntiAffinityHostGroupName a b | a -> b where
+    computedAntiAffinityHostGroupName :: a -> b
 
 class HasComputedAssociableTypes a b | a -> b where
     computedAssociableTypes :: a -> b
@@ -535,6 +767,9 @@ class HasComputedCategoryId a b | a -> b where
 class HasComputedChangeVersion a b | a -> b where
     computedChangeVersion :: a -> b
 
+class HasComputedComputeClusterId a b | a -> b where
+    computedComputeClusterId :: a -> b
+
 class HasComputedComputedPolicy a b | a -> b where
     computedComputedPolicy :: a -> b
 
@@ -550,6 +785,21 @@ class HasComputedContactDetail a b | a -> b where
 class HasComputedContactName a b | a -> b where
     computedContactName :: a -> b
 
+class HasComputedCpuExpandable a b | a -> b where
+    computedCpuExpandable :: a -> b
+
+class HasComputedCpuLimit a b | a -> b where
+    computedCpuLimit :: a -> b
+
+class HasComputedCpuReservation a b | a -> b where
+    computedCpuReservation :: a -> b
+
+class HasComputedCpuShareLevel a b | a -> b where
+    computedCpuShareLevel :: a -> b
+
+class HasComputedCpuShares a b | a -> b where
+    computedCpuShares :: a -> b
+
 class HasComputedCreateDirectories a b | a -> b where
     computedCreateDirectories :: a -> b
 
@@ -562,8 +812,14 @@ class HasComputedDatacenterId a b | a -> b where
 class HasComputedDatastore a b | a -> b where
     computedDatastore :: a -> b
 
+class HasComputedDatastoreClusterId a b | a -> b where
+    computedDatastoreClusterId :: a -> b
+
 class HasComputedDefaultIpAddress a b | a -> b where
     computedDefaultIpAddress :: a -> b
+
+class HasComputedDependencyVmGroupName a b | a -> b where
+    computedDependencyVmGroupName :: a -> b
 
 class HasComputedDescription a b | a -> b where
     computedDescription :: a -> b
@@ -577,14 +833,32 @@ class HasComputedDisks a b | a -> b where
 class HasComputedDistributedVirtualSwitchUuid a b | a -> b where
     computedDistributedVirtualSwitchUuid :: a -> b
 
+class HasComputedDpmAutomationLevel a b | a -> b where
+    computedDpmAutomationLevel :: a -> b
+
+class HasComputedDpmEnabled a b | a -> b where
+    computedDpmEnabled :: a -> b
+
+class HasComputedDrsAutomationLevel a b | a -> b where
+    computedDrsAutomationLevel :: a -> b
+
+class HasComputedDrsEnabled a b | a -> b where
+    computedDrsEnabled :: a -> b
+
 class HasComputedEagerlyScrub a b | a -> b where
     computedEagerlyScrub :: a -> b
 
 class HasComputedEditionKey a b | a -> b where
     computedEditionKey :: a -> b
 
+class HasComputedEnabled a b | a -> b where
+    computedEnabled :: a -> b
+
 class HasComputedFilter a b | a -> b where
     computedFilter :: a -> b
+
+class HasComputedFirmware a b | a -> b where
+    computedFirmware :: a -> b
 
 class HasComputedFolder a b | a -> b where
     computedFolder :: a -> b
@@ -637,11 +911,29 @@ class HasComputedMaintenanceMode a b | a -> b where
 class HasComputedManagedObjectType a b | a -> b where
     computedManagedObjectType :: a -> b
 
+class HasComputedMandatory a b | a -> b where
+    computedMandatory :: a -> b
+
 class HasComputedMaxMtu a b | a -> b where
     computedMaxMtu :: a -> b
 
 class HasComputedMemory a b | a -> b where
     computedMemory :: a -> b
+
+class HasComputedMemoryExpandable a b | a -> b where
+    computedMemoryExpandable :: a -> b
+
+class HasComputedMemoryLimit a b | a -> b where
+    computedMemoryLimit :: a -> b
+
+class HasComputedMemoryReservation a b | a -> b where
+    computedMemoryReservation :: a -> b
+
+class HasComputedMemoryShareLevel a b | a -> b where
+    computedMemoryShareLevel :: a -> b
+
+class HasComputedMemoryShares a b | a -> b where
+    computedMemoryShares :: a -> b
 
 class HasComputedMoid a b | a -> b where
     computedMoid :: a -> b
@@ -663,6 +955,9 @@ class HasComputedNetworkInterfaceTypes a b | a -> b where
 
 class HasComputedNumberOfPorts a b | a -> b where
     computedNumberOfPorts :: a -> b
+
+class HasComputedParentResourcePoolId a b | a -> b where
+    computedParentResourcePoolId :: a -> b
 
 class HasComputedPath a b | a -> b where
     computedPath :: a -> b
@@ -699,6 +994,15 @@ class HasComputedScsiControllerScanCount a b | a -> b where
 
 class HasComputedScsiType a b | a -> b where
     computedScsiType :: a -> b
+
+class HasComputedSdrsAutomationLevel a b | a -> b where
+    computedSdrsAutomationLevel :: a -> b
+
+class HasComputedSdrsEnabled a b | a -> b where
+    computedSdrsEnabled :: a -> b
+
+class HasComputedSdrsIntraVmAffinity a b | a -> b where
+    computedSdrsIntraVmAffinity :: a -> b
 
 class HasComputedSecurityType a b | a -> b where
     computedSecurityType :: a -> b
@@ -745,8 +1049,17 @@ class HasComputedUsed a b | a -> b where
 class HasComputedUuid a b | a -> b where
     computedUuid :: a -> b
 
+class HasComputedVappTransport a b | a -> b where
+    computedVappTransport :: a -> b
+
 class HasComputedVersion a b | a -> b where
     computedVersion :: a -> b
+
+class HasComputedVirtualMachineId a b | a -> b where
+    computedVirtualMachineId :: a -> b
+
+class HasComputedVirtualMachineIds a b | a -> b where
+    computedVirtualMachineIds :: a -> b
 
 class HasComputedVirtualMachineUuid a b | a -> b where
     computedVirtualMachineUuid :: a -> b
@@ -756,6 +1069,9 @@ class HasComputedVirtualSwitchName a b | a -> b where
 
 class HasComputedVlanId a b | a -> b where
     computedVlanId :: a -> b
+
+class HasComputedVmGroupName a b | a -> b where
+    computedVmGroupName :: a -> b
 
 class HasComputedVmdkPath a b | a -> b where
     computedVmdkPath :: a -> b

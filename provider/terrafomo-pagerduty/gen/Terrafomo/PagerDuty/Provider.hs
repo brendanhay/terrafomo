@@ -55,7 +55,7 @@ data PagerDuty = PagerDuty {
       _skip_credentials_validation :: !(Maybe P.Text)
     {- ^ (Optional) Skip validation of the token against the PagerDuty API. -}
     , _token                       :: !(Maybe P.Text)
-    {- ^ (Required) The v2 authorization token. See <https://v2.developer.pagerduty.com/docs/authentication> for more information. -}
+    {- ^ (Required) The v2 authorization token. It can also be sourced from the PAGERDUTY_TOKEN environment variable. See <https://v2.developer.pagerduty.com/docs/authentication> for more information. -}
     } deriving (Show, Eq, Generic)
 
 instance Hashable PagerDuty

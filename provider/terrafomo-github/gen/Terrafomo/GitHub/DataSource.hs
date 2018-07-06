@@ -24,7 +24,10 @@
 module Terrafomo.GitHub.DataSource
     (
     -- * Types
-      TeamData (..)
+      IpRangesData (..)
+    , ipRangesData
+
+    , TeamData (..)
     , teamData
 
     , UserData (..)
@@ -45,13 +48,16 @@ module Terrafomo.GitHub.DataSource
     , P.HasComputedEmail (..)
     , P.HasComputedFollowers (..)
     , P.HasComputedFollowing (..)
+    , P.HasComputedGit (..)
     , P.HasComputedGpgKeys (..)
     , P.HasComputedGravatarId (..)
+    , P.HasComputedHooks (..)
     , P.HasComputedId (..)
     , P.HasComputedLocation (..)
     , P.HasComputedLogin (..)
     , P.HasComputedMembers (..)
     , P.HasComputedName (..)
+    , P.HasComputedPages (..)
     , P.HasComputedPermission (..)
     , P.HasComputedPrivacy (..)
     , P.HasComputedPublicGists (..)
@@ -88,6 +94,31 @@ import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
+
+{- | The @github_ip_ranges@ GitHub datasource.
+
+Use this data source to retrieve information about a Github's IP addresses.
+-}
+data IpRangesData s = IpRangesData {
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (IpRangesData s) where
+    toHCL _ = TF.empty
+
+instance s ~ s' => P.HasComputedGit (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
+    computedGit x = TF.compute (TF.refKey x) "git"
+
+instance s ~ s' => P.HasComputedHooks (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
+    computedHooks x = TF.compute (TF.refKey x) "hooks"
+
+instance s ~ s' => P.HasComputedPages (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
+    computedPages x = TF.compute (TF.refKey x) "pages"
+
+ipRangesData :: TF.DataSource P.GitHub (IpRangesData s)
+ipRangesData =
+    TF.newDataSource "github_ip_ranges" $
+        IpRangesData {
+            }
 
 {- | The @github_team@ GitHub datasource.
 

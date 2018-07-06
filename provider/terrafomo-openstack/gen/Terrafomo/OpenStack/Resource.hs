@@ -27,11 +27,17 @@ module Terrafomo.OpenStack.Resource
       BlockstorageVolumeAttachV2Resource (..)
     , blockstorageVolumeAttachV2Resource
 
+    , BlockstorageVolumeAttachV3Resource (..)
+    , blockstorageVolumeAttachV3Resource
+
     , BlockstorageVolumeV1Resource (..)
     , blockstorageVolumeV1Resource
 
     , BlockstorageVolumeV2Resource (..)
     , blockstorageVolumeV2Resource
+
+    , BlockstorageVolumeV3Resource (..)
+    , blockstorageVolumeV3Resource
 
     , ComputeFlavorV2Resource (..)
     , computeFlavorV2Resource
@@ -87,6 +93,12 @@ module Terrafomo.OpenStack.Resource
     , IdentityProjectV3Resource (..)
     , identityProjectV3Resource
 
+    , IdentityRoleAssignmentV3Resource (..)
+    , identityRoleAssignmentV3Resource
+
+    , IdentityRoleV3Resource (..)
+    , identityRoleV3Resource
+
     , IdentityUserV3Resource (..)
     , identityUserV3Resource
 
@@ -120,6 +132,9 @@ module Terrafomo.OpenStack.Resource
     , LbVipV1Resource (..)
     , lbVipV1Resource
 
+    , NetworkingFloatingipAssociateV2Resource (..)
+    , networkingFloatingipAssociateV2Resource
+
     , NetworkingFloatingipV2Resource (..)
     , networkingFloatingipV2Resource
 
@@ -144,6 +159,9 @@ module Terrafomo.OpenStack.Resource
     , NetworkingSecgroupV2Resource (..)
     , networkingSecgroupV2Resource
 
+    , NetworkingSubnetRouteV2Resource (..)
+    , networkingSubnetRouteV2Resource
+
     , NetworkingSubnetV2Resource (..)
     , networkingSubnetV2Resource
 
@@ -155,6 +173,21 @@ module Terrafomo.OpenStack.Resource
 
     , ObjectstorageObjectV1Resource (..)
     , objectstorageObjectV1Resource
+
+    , VpnaasEndpointGroupV2Resource (..)
+    , vpnaasEndpointGroupV2Resource
+
+    , VpnaasIkePolicyV2Resource (..)
+    , vpnaasIkePolicyV2Resource
+
+    , VpnaasIpsecPolicyV2Resource (..)
+    , vpnaasIpsecPolicyV2Resource
+
+    , VpnaasServiceV2Resource (..)
+    , vpnaasServiceV2Resource
+
+    , VpnaasSiteConnectionV2Resource (..)
+    , vpnaasSiteConnectionV2Resource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -169,6 +202,7 @@ module Terrafomo.OpenStack.Resource
     , P.HasAttachMode (..)
     , P.HasAttributes (..)
     , P.HasAudited (..)
+    , P.HasAuthAlgorithm (..)
     , P.HasAvailabilityZone (..)
     , P.HasAvailabilityZoneHints (..)
     , P.HasBlockDevice (..)
@@ -216,29 +250,40 @@ module Terrafomo.OpenStack.Resource
     , P.HasDistributed (..)
     , P.HasDnsNameservers (..)
     , P.HasDomainId (..)
+    , P.HasDpd (..)
     , P.HasEmail (..)
     , P.HasEnableDhcp (..)
+    , P.HasEnableOnlineResize (..)
     , P.HasEnableSnat (..)
     , P.HasEnabled (..)
+    , P.HasEncapsulationMode (..)
+    , P.HasEncryptionAlgorithm (..)
+    , P.HasEndpoints (..)
     , P.HasEtag (..)
     , P.HasEthertype (..)
     , P.HasExpectedCodes (..)
+    , P.HasExternal (..)
     , P.HasExternalFixedIp (..)
     , P.HasExternalNetworkId (..)
     , P.HasExtra (..)
+    , P.HasExtraSpecs (..)
     , P.HasFixedIp (..)
     , P.HasFlavor (..)
     , P.HasFlavorId (..)
     , P.HasFlavorName (..)
     , P.HasFloatingIp (..)
     , P.HasForceDelete (..)
+    , P.HasForceDestroy (..)
     , P.HasGatewayIp (..)
+    , P.HasGroupId (..)
     , P.HasHostName (..)
     , P.HasHostRoutes (..)
     , P.HasHttpMethod (..)
     , P.HasIgnoreChangePasswordUponFirstUse (..)
     , P.HasIgnoreLockoutFailureAttempts (..)
     , P.HasIgnorePasswordExpiry (..)
+    , P.HasIkeVersion (..)
+    , P.HasIkepolicyId (..)
     , P.HasImageCachePath (..)
     , P.HasImageId (..)
     , P.HasImageName (..)
@@ -248,6 +293,7 @@ module Terrafomo.OpenStack.Resource
     , P.HasInstanceId (..)
     , P.HasIpAddress (..)
     , P.HasIpVersion (..)
+    , P.HasIpsecpolicyId (..)
     , P.HasIpv6AddressMode (..)
     , P.HasIpv6RaMode (..)
     , P.HasIsDefault (..)
@@ -256,10 +302,13 @@ module Terrafomo.OpenStack.Resource
     , P.HasKeyPair (..)
     , P.HasLbMethod (..)
     , P.HasLbProvider (..)
+    , P.HasLifetime (..)
     , P.HasListenerId (..)
     , P.HasLoadbalancerId (..)
     , P.HasLoadbalancerProvider (..)
+    , P.HasLocalEpGroupId (..)
     , P.HasLocalFilePath (..)
+    , P.HasLocalId (..)
     , P.HasMacAddress (..)
     , P.HasMasters (..)
     , P.HasMaxPrefixlen (..)
@@ -270,6 +319,7 @@ module Terrafomo.OpenStack.Resource
     , P.HasMinPrefixlen (..)
     , P.HasMinRamMb (..)
     , P.HasMonitorIds (..)
+    , P.HasMtu (..)
     , P.HasMultiFactorAuthEnabled (..)
     , P.HasMultiFactorAuthRule (..)
     , P.HasMultipath (..)
@@ -284,8 +334,14 @@ module Terrafomo.OpenStack.Resource
     , P.HasOsType (..)
     , P.HasParentId (..)
     , P.HasPassword (..)
+    , P.HasPeerAddress (..)
+    , P.HasPeerCidrs (..)
+    , P.HasPeerEpGroupId (..)
+    , P.HasPeerId (..)
     , P.HasPersistence (..)
     , P.HasPersonality (..)
+    , P.HasPfs (..)
+    , P.HasPhase1NegotiationMode (..)
     , P.HasPlatform (..)
     , P.HasPolicies (..)
     , P.HasPolicyId (..)
@@ -295,18 +351,21 @@ module Terrafomo.OpenStack.Resource
     , P.HasPortId (..)
     , P.HasPortRangeMax (..)
     , P.HasPortRangeMin (..)
+    , P.HasPowerState (..)
     , P.HasPrefixes (..)
     , P.HasProjectId (..)
     , P.HasProperties (..)
     , P.HasProtected (..)
     , P.HasProtocol (..)
     , P.HasProtocolPort (..)
+    , P.HasPsk (..)
     , P.HasPublicKey (..)
     , P.HasRam (..)
     , P.HasRecords (..)
     , P.HasRegion (..)
     , P.HasRemoteGroupId (..)
     , P.HasRemoteIpPrefix (..)
+    , P.HasRoleId (..)
     , P.HasRouterId (..)
     , P.HasRule (..)
     , P.HasRules (..)
@@ -332,19 +391,24 @@ module Terrafomo.OpenStack.Resource
     , P.HasTags (..)
     , P.HasTenantId (..)
     , P.HasTimeout (..)
+    , P.HasTransformProtocol (..)
     , P.HasTtl (..)
     , P.HasType' (..)
     , P.HasUrlPath (..)
     , P.HasUser (..)
     , P.HasUserData (..)
+    , P.HasUserId (..)
     , P.HasValueSpecs (..)
     , P.HasVcpus (..)
     , P.HasVendorOptions (..)
+    , P.HasVerifyChecksum (..)
     , P.HasVipAddress (..)
     , P.HasVipSubnetId (..)
     , P.HasVisibility (..)
     , P.HasVolumeId (..)
     , P.HasVolumeType (..)
+    , P.HasVpnserviceId (..)
+    , P.HasWaitUntilAssociated (..)
     , P.HasWeight (..)
     , P.HasWwnn (..)
     , P.HasWwpn (..)
@@ -368,6 +432,7 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedAttachment (..)
     , P.HasComputedAttributes (..)
     , P.HasComputedAudited (..)
+    , P.HasComputedAuthAlgorithm (..)
     , P.HasComputedAvailabilityZone (..)
     , P.HasComputedAvailabilityZoneHints (..)
     , P.HasComputedBlockDevice (..)
@@ -423,18 +488,27 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedDistributed (..)
     , P.HasComputedDnsNameservers (..)
     , P.HasComputedDomainId (..)
+    , P.HasComputedDpd (..)
     , P.HasComputedDriverVolumeType (..)
     , P.HasComputedEmail (..)
     , P.HasComputedEnableDhcp (..)
+    , P.HasComputedEnableOnlineResize (..)
     , P.HasComputedEnableSnat (..)
     , P.HasComputedEnabled (..)
+    , P.HasComputedEncapsulationMode (..)
+    , P.HasComputedEncryptionAlgorithm (..)
+    , P.HasComputedEndpoints (..)
     , P.HasComputedEtag (..)
     , P.HasComputedEthertype (..)
     , P.HasComputedExpectedCodes (..)
+    , P.HasComputedExternal (..)
     , P.HasComputedExternalFixedIp (..)
     , P.HasComputedExternalGateway (..)
     , P.HasComputedExternalNetworkId (..)
+    , P.HasComputedExternalV4Ip (..)
+    , P.HasComputedExternalV6Ip (..)
     , P.HasComputedExtra (..)
+    , P.HasComputedExtraSpecs (..)
     , P.HasComputedFile (..)
     , P.HasComputedFingerprint (..)
     , P.HasComputedFixedIp (..)
@@ -445,7 +519,9 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedFlavorName (..)
     , P.HasComputedFloatingIp (..)
     , P.HasComputedForceDelete (..)
+    , P.HasComputedForceDestroy (..)
     , P.HasComputedGatewayIp (..)
+    , P.HasComputedGroupId (..)
     , P.HasComputedHost (..)
     , P.HasComputedHostName (..)
     , P.HasComputedHostRoutes (..)
@@ -454,6 +530,8 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedIgnoreChangePasswordUponFirstUse (..)
     , P.HasComputedIgnoreLockoutFailureAttempts (..)
     , P.HasComputedIgnorePasswordExpiry (..)
+    , P.HasComputedIkeVersion (..)
+    , P.HasComputedIkepolicyId (..)
     , P.HasComputedImageCachePath (..)
     , P.HasComputedImageId (..)
     , P.HasComputedImageName (..)
@@ -463,6 +541,7 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedInstanceId (..)
     , P.HasComputedIpAddress (..)
     , P.HasComputedIpVersion (..)
+    , P.HasComputedIpsecpolicyId (..)
     , P.HasComputedIpv6AddressMode (..)
     , P.HasComputedIpv6RaMode (..)
     , P.HasComputedIsDefault (..)
@@ -472,10 +551,13 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedLastModified (..)
     , P.HasComputedLbMethod (..)
     , P.HasComputedLbProvider (..)
+    , P.HasComputedLifetime (..)
     , P.HasComputedListenerId (..)
     , P.HasComputedLoadbalancerId (..)
     , P.HasComputedLoadbalancerProvider (..)
+    , P.HasComputedLocalEpGroupId (..)
     , P.HasComputedLocalFilePath (..)
+    , P.HasComputedLocalId (..)
     , P.HasComputedMac (..)
     , P.HasComputedMacAddress (..)
     , P.HasComputedMasters (..)
@@ -490,6 +572,7 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedMonitorId (..)
     , P.HasComputedMonitorIds (..)
     , P.HasComputedMountPointBase (..)
+    , P.HasComputedMtu (..)
     , P.HasComputedMultiFactorAuthEnabled (..)
     , P.HasComputedMultiFactorAuthRule (..)
     , P.HasComputedMultipath (..)
@@ -505,8 +588,14 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedOwner (..)
     , P.HasComputedParentId (..)
     , P.HasComputedPassword (..)
+    , P.HasComputedPeerAddress (..)
+    , P.HasComputedPeerCidrs (..)
+    , P.HasComputedPeerEpGroupId (..)
+    , P.HasComputedPeerId (..)
     , P.HasComputedPersistence (..)
     , P.HasComputedPersonality (..)
+    , P.HasComputedPfs (..)
+    , P.HasComputedPhase1NegotiationMode (..)
     , P.HasComputedPlatform (..)
     , P.HasComputedPolicies (..)
     , P.HasComputedPolicyId (..)
@@ -516,6 +605,7 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedPortId (..)
     , P.HasComputedPortRangeMax (..)
     , P.HasComputedPortRangeMin (..)
+    , P.HasComputedPowerState (..)
     , P.HasComputedPrefixes (..)
     , P.HasComputedPrivateKey (..)
     , P.HasComputedProjectId (..)
@@ -523,6 +613,7 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedProtected (..)
     , P.HasComputedProtocol (..)
     , P.HasComputedProtocolPort (..)
+    , P.HasComputedPsk (..)
     , P.HasComputedPublicKey (..)
     , P.HasComputedRam (..)
     , P.HasComputedRecords (..)
@@ -530,6 +621,7 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedRemoteGroupId (..)
     , P.HasComputedRemoteIpPrefix (..)
     , P.HasComputedRevisionNumber (..)
+    , P.HasComputedRoleId (..)
     , P.HasComputedRouterId (..)
     , P.HasComputedRule (..)
     , P.HasComputedRules (..)
@@ -560,6 +652,7 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedTenantId (..)
     , P.HasComputedTimeout (..)
     , P.HasComputedTransId (..)
+    , P.HasComputedTransformProtocol (..)
     , P.HasComputedTtl (..)
     , P.HasComputedType' (..)
     , P.HasComputedUpdateAt (..)
@@ -567,11 +660,13 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedUrlPath (..)
     , P.HasComputedUser (..)
     , P.HasComputedUserData (..)
+    , P.HasComputedUserId (..)
     , P.HasComputedUuid (..)
     , P.HasComputedValue (..)
     , P.HasComputedValueSpecs (..)
     , P.HasComputedVcpus (..)
     , P.HasComputedVendorOptions (..)
+    , P.HasComputedVerifyChecksum (..)
     , P.HasComputedVersion (..)
     , P.HasComputedVipAddress (..)
     , P.HasComputedVipPortId (..)
@@ -579,6 +674,8 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedVisibility (..)
     , P.HasComputedVolumeId (..)
     , P.HasComputedVolumeType (..)
+    , P.HasComputedVpnserviceId (..)
+    , P.HasComputedWaitUntilAssociated (..)
     , P.HasComputedWeight (..)
     , P.HasComputedWwnn (..)
     , P.HasComputedWwpn (..)
@@ -799,6 +896,208 @@ blockstorageVolumeAttachV2Resource :: TF.Resource P.OpenStack (BlockstorageVolum
 blockstorageVolumeAttachV2Resource =
     TF.newResource "openstack_blockstorage_volume_attach_v2" $
         BlockstorageVolumeAttachV2Resource {
+              _attach_mode = TF.Nil
+            , _device = TF.Nil
+            , _host_name = TF.Nil
+            , _initiator = TF.Nil
+            , _ip_address = TF.Nil
+            , _multipath = TF.Nil
+            , _os_type = TF.Nil
+            , _platform = TF.Nil
+            , _region = TF.Nil
+            , _volume_id = TF.Nil
+            , _wwnn = TF.Nil
+            , _wwpn = TF.Nil
+            }
+
+{- | The @openstack_blockstorage_volume_attach_v3@ OpenStack resource.
+
+This resource is experimental and may be removed in the future! Feedback is
+requested if you find this resource useful or if you find any problems with
+it. Creates a general purpose attachment connection to a Block Storage
+volume using the OpenStack Block Storage (Cinder) v3 API. Depending on your
+Block Storage service configuration, this resource can assist in attaching a
+volume to a non-OpenStack resource such as a bare-metal server or a remote
+virtual machine in a different cloud provider. This does not actually attach
+a volume to an instance. Please use the @openstack_compute_volume_attach_v3@
+resource for that.
+-}
+data BlockstorageVolumeAttachV3Resource s = BlockstorageVolumeAttachV3Resource {
+      _attach_mode :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Specify whether to attach the volume as Read-Only ( @ro@ ) or Read-Write ( @rw@ ). Only values of @ro@ and @rw@ are accepted. If left unspecified, the Block Storage API will apply a default of @rw@ . -}
+    , _device      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The device to tell the Block Storage service this volume will be attached as. This is purely for informational purposes. You can specify @auto@ or a device such as @/dev/vdc@ . -}
+    , _host_name   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The host to attach the volume to. -}
+    , _initiator   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The iSCSI initiator string to make the connection. -}
+    , _ip_address  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IP address of the @host_name@ above. -}
+    , _multipath   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether to connect to this volume via multipath. -}
+    , _os_type     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The iSCSI initiator OS type. -}
+    , _platform    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The iSCSI initiator platform. -}
+    , _region      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V3 Block Storage client. A Block Storage client is needed to create a volume attachment. If omitted, the @region@ argument of the provider is used. Changing this creates a new volume attachment. -}
+    , _volume_id   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the Volume to attach to an Instance. -}
+    , _wwnn        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A wwnn name. Used for Fibre Channel connections. -}
+    , _wwpn        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) An array of wwpn strings. Used for Fibre Channel connections. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (BlockstorageVolumeAttachV3Resource s) where
+    toHCL BlockstorageVolumeAttachV3Resource{..} = TF.inline $ catMaybes
+        [ TF.assign "attach_mode" <$> TF.attribute _attach_mode
+        , TF.assign "device" <$> TF.attribute _device
+        , TF.assign "host_name" <$> TF.attribute _host_name
+        , TF.assign "initiator" <$> TF.attribute _initiator
+        , TF.assign "ip_address" <$> TF.attribute _ip_address
+        , TF.assign "multipath" <$> TF.attribute _multipath
+        , TF.assign "os_type" <$> TF.attribute _os_type
+        , TF.assign "platform" <$> TF.attribute _platform
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "volume_id" <$> TF.attribute _volume_id
+        , TF.assign "wwnn" <$> TF.attribute _wwnn
+        , TF.assign "wwpn" <$> TF.attribute _wwpn
+        ]
+
+instance P.HasAttachMode (BlockstorageVolumeAttachV3Resource s) (TF.Attr s P.Text) where
+    attachMode =
+        lens (_attach_mode :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _attach_mode = a } :: BlockstorageVolumeAttachV3Resource s)
+
+instance P.HasDevice (BlockstorageVolumeAttachV3Resource s) (TF.Attr s P.Text) where
+    device =
+        lens (_device :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _device = a } :: BlockstorageVolumeAttachV3Resource s)
+
+instance P.HasHostName (BlockstorageVolumeAttachV3Resource s) (TF.Attr s P.Text) where
+    hostName =
+        lens (_host_name :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _host_name = a } :: BlockstorageVolumeAttachV3Resource s)
+
+instance P.HasInitiator (BlockstorageVolumeAttachV3Resource s) (TF.Attr s P.Text) where
+    initiator =
+        lens (_initiator :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _initiator = a } :: BlockstorageVolumeAttachV3Resource s)
+
+instance P.HasIpAddress (BlockstorageVolumeAttachV3Resource s) (TF.Attr s P.Text) where
+    ipAddress =
+        lens (_ip_address :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_address = a } :: BlockstorageVolumeAttachV3Resource s)
+
+instance P.HasMultipath (BlockstorageVolumeAttachV3Resource s) (TF.Attr s P.Text) where
+    multipath =
+        lens (_multipath :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _multipath = a } :: BlockstorageVolumeAttachV3Resource s)
+
+instance P.HasOsType (BlockstorageVolumeAttachV3Resource s) (TF.Attr s P.Text) where
+    osType =
+        lens (_os_type :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _os_type = a } :: BlockstorageVolumeAttachV3Resource s)
+
+instance P.HasPlatform (BlockstorageVolumeAttachV3Resource s) (TF.Attr s P.Text) where
+    platform =
+        lens (_platform :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _platform = a } :: BlockstorageVolumeAttachV3Resource s)
+
+instance P.HasRegion (BlockstorageVolumeAttachV3Resource s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: BlockstorageVolumeAttachV3Resource s)
+
+instance P.HasVolumeId (BlockstorageVolumeAttachV3Resource s) (TF.Attr s P.Text) where
+    volumeId =
+        lens (_volume_id :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _volume_id = a } :: BlockstorageVolumeAttachV3Resource s)
+
+instance P.HasWwnn (BlockstorageVolumeAttachV3Resource s) (TF.Attr s P.Text) where
+    wwnn =
+        lens (_wwnn :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _wwnn = a } :: BlockstorageVolumeAttachV3Resource s)
+
+instance P.HasWwpn (BlockstorageVolumeAttachV3Resource s) (TF.Attr s P.Text) where
+    wwpn =
+        lens (_wwpn :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _wwpn = a } :: BlockstorageVolumeAttachV3Resource s)
+
+instance s ~ s' => P.HasComputedAttachMode (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedAttachMode =
+        (_attach_mode :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedData' (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedData' x = TF.compute (TF.refKey x) "data"
+
+instance s ~ s' => P.HasComputedDevice (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedDevice =
+        (_device :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDriverVolumeType (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedDriverVolumeType x = TF.compute (TF.refKey x) "driver_volume_type"
+
+instance s ~ s' => P.HasComputedHostName (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedHostName =
+        (_host_name :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedInitiator (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedInitiator =
+        (_initiator :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedIpAddress =
+        (_ip_address :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMountPointBase (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedMountPointBase x = TF.compute (TF.refKey x) "mount_point_base"
+
+instance s ~ s' => P.HasComputedMultipath (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedMultipath =
+        (_multipath :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedOsType (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedOsType =
+        (_os_type :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedPlatform =
+        (_platform :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedRegion =
+        (_region :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVolumeId (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedVolumeId =
+        (_volume_id :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedWwnn (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedWwnn =
+        (_wwnn :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedWwpn (TF.Ref s' (BlockstorageVolumeAttachV3Resource s)) (TF.Attr s P.Text) where
+    computedWwpn =
+        (_wwpn :: BlockstorageVolumeAttachV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+blockstorageVolumeAttachV3Resource :: TF.Resource P.OpenStack (BlockstorageVolumeAttachV3Resource s)
+blockstorageVolumeAttachV3Resource =
+    TF.newResource "openstack_blockstorage_volume_attach_v3" $
+        BlockstorageVolumeAttachV3Resource {
               _attach_mode = TF.Nil
             , _device = TF.Nil
             , _host_name = TF.Nil
@@ -1121,6 +1420,188 @@ blockstorageVolumeV2Resource =
             , _volume_type = TF.Nil
             }
 
+{- | The @openstack_blockstorage_volume_v3@ OpenStack resource.
+
+Manages a V3 volume resource within OpenStack.
+-}
+data BlockstorageVolumeV3Resource s = BlockstorageVolumeV3Resource {
+      _availability_zone    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The availability zone for the volume. Changing this creates a new volume. -}
+    , _consistency_group_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The consistency group to place the volume in. -}
+    , _description          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A description of the volume. Changing this updates the volume's description. -}
+    , _enable_online_resize :: !(TF.Attr s P.Text)
+    {- ^ (Optional) When this option is set it allows extending attached volumes. Note: updating size of an attached volume requires Cinder support for version 3.42 and a compatible storage driver. -}
+    , _image_id             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The image ID from which to create the volume. Changing this creates a new volume. -}
+    , _metadata             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Metadata key/value pairs to associate with the volume. Changing this updates the existing volume metadata. -}
+    , _name                 :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A unique name for the volume. Changing this updates the volume's name. -}
+    , _region               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to create the volume. If omitted, the @region@ argument of the provider is used. Changing this creates a new volume. -}
+    , _size                 :: !(TF.Attr s P.Text)
+    {- ^ (Required) The size of the volume to create (in gigabytes). -}
+    , _snapshot_id          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The snapshot ID from which to create the volume. Changing this creates a new volume. -}
+    , _source_replica       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The volume ID to replicate with. -}
+    , _source_vol_id        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The volume ID from which to create the volume. Changing this creates a new volume. -}
+    , _volume_type          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The type of volume to create. Changing this creates a new volume. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (BlockstorageVolumeV3Resource s) where
+    toHCL BlockstorageVolumeV3Resource{..} = TF.inline $ catMaybes
+        [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
+        , TF.assign "consistency_group_id" <$> TF.attribute _consistency_group_id
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "enable_online_resize" <$> TF.attribute _enable_online_resize
+        , TF.assign "image_id" <$> TF.attribute _image_id
+        , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "snapshot_id" <$> TF.attribute _snapshot_id
+        , TF.assign "source_replica" <$> TF.attribute _source_replica
+        , TF.assign "source_vol_id" <$> TF.attribute _source_vol_id
+        , TF.assign "volume_type" <$> TF.attribute _volume_type
+        ]
+
+instance P.HasAvailabilityZone (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
+    availabilityZone =
+        lens (_availability_zone :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _availability_zone = a } :: BlockstorageVolumeV3Resource s)
+
+instance P.HasConsistencyGroupId (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
+    consistencyGroupId =
+        lens (_consistency_group_id :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _consistency_group_id = a } :: BlockstorageVolumeV3Resource s)
+
+instance P.HasDescription (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: BlockstorageVolumeV3Resource s)
+
+instance P.HasEnableOnlineResize (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
+    enableOnlineResize =
+        lens (_enable_online_resize :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _enable_online_resize = a } :: BlockstorageVolumeV3Resource s)
+
+instance P.HasImageId (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
+    imageId =
+        lens (_image_id :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _image_id = a } :: BlockstorageVolumeV3Resource s)
+
+instance P.HasMetadata (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
+    metadata =
+        lens (_metadata :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _metadata = a } :: BlockstorageVolumeV3Resource s)
+
+instance P.HasName (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: BlockstorageVolumeV3Resource s)
+
+instance P.HasRegion (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: BlockstorageVolumeV3Resource s)
+
+instance P.HasSize (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
+    size =
+        lens (_size :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _size = a } :: BlockstorageVolumeV3Resource s)
+
+instance P.HasSnapshotId (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
+    snapshotId =
+        lens (_snapshot_id :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _snapshot_id = a } :: BlockstorageVolumeV3Resource s)
+
+instance P.HasSourceReplica (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
+    sourceReplica =
+        lens (_source_replica :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _source_replica = a } :: BlockstorageVolumeV3Resource s)
+
+instance P.HasSourceVolId (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
+    sourceVolId =
+        lens (_source_vol_id :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _source_vol_id = a } :: BlockstorageVolumeV3Resource s)
+
+instance P.HasVolumeType (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) where
+    volumeType =
+        lens (_volume_type :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _volume_type = a } :: BlockstorageVolumeV3Resource s)
+
+instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedAttachment x = TF.compute (TF.refKey x) "attachment"
+
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
+
+instance s ~ s' => P.HasComputedConsistencyGroupId (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedConsistencyGroupId =
+        (_consistency_group_id :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedEnableOnlineResize (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedEnableOnlineResize =
+        (_enable_online_resize :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedImageId (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedImageId x = TF.compute (TF.refKey x) "image_id"
+
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedMetadata x = TF.compute (TF.refKey x) "metadata"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedSize x = TF.compute (TF.refKey x) "size"
+
+instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
+
+instance s ~ s' => P.HasComputedSourceReplica (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedSourceReplica =
+        (_source_replica :: BlockstorageVolumeV3Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSourceVolId (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedSourceVolId x = TF.compute (TF.refKey x) "source_vol_id"
+
+instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
+    computedVolumeType x = TF.compute (TF.refKey x) "volume_type"
+
+blockstorageVolumeV3Resource :: TF.Resource P.OpenStack (BlockstorageVolumeV3Resource s)
+blockstorageVolumeV3Resource =
+    TF.newResource "openstack_blockstorage_volume_v3" $
+        BlockstorageVolumeV3Resource {
+              _availability_zone = TF.Nil
+            , _consistency_group_id = TF.Nil
+            , _description = TF.Nil
+            , _enable_online_resize = TF.Nil
+            , _image_id = TF.Nil
+            , _metadata = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _size = TF.Nil
+            , _snapshot_id = TF.Nil
+            , _source_replica = TF.Nil
+            , _source_vol_id = TF.Nil
+            , _volume_type = TF.Nil
+            }
+
 {- | The @openstack_compute_flavor_v2@ OpenStack resource.
 
 Manages a V2 flavor resource within OpenStack.
@@ -1128,6 +1609,8 @@ Manages a V2 flavor resource within OpenStack.
 data ComputeFlavorV2Resource s = ComputeFlavorV2Resource {
       _disk         :: !(TF.Attr s P.Text)
     {- ^ (Required) The amount of disk space in gigabytes to use for the root (/) partition. Changing this creates a new flavor. -}
+    , _extra_specs  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Key/Value pairs of metadata for the flavor. -}
     , _is_public    :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether the flavor is public. Changing this creates a new flavor. -}
     , _name         :: !(TF.Attr s P.Text)
@@ -1147,6 +1630,7 @@ data ComputeFlavorV2Resource s = ComputeFlavorV2Resource {
 instance TF.ToHCL (ComputeFlavorV2Resource s) where
     toHCL ComputeFlavorV2Resource{..} = TF.inline $ catMaybes
         [ TF.assign "disk" <$> TF.attribute _disk
+        , TF.assign "extra_specs" <$> TF.attribute _extra_specs
         , TF.assign "is_public" <$> TF.attribute _is_public
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "ram" <$> TF.attribute _ram
@@ -1160,6 +1644,11 @@ instance P.HasDisk (ComputeFlavorV2Resource s) (TF.Attr s P.Text) where
     disk =
         lens (_disk :: ComputeFlavorV2Resource s -> TF.Attr s P.Text)
              (\s a -> s { _disk = a } :: ComputeFlavorV2Resource s)
+
+instance P.HasExtraSpecs (ComputeFlavorV2Resource s) (TF.Attr s P.Text) where
+    extraSpecs =
+        lens (_extra_specs :: ComputeFlavorV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _extra_specs = a } :: ComputeFlavorV2Resource s)
 
 instance P.HasIsPublic (ComputeFlavorV2Resource s) (TF.Attr s P.Text) where
     isPublic =
@@ -1199,6 +1688,9 @@ instance P.HasVcpus (ComputeFlavorV2Resource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedDisk (TF.Ref s' (ComputeFlavorV2Resource s)) (TF.Attr s P.Text) where
     computedDisk x = TF.compute (TF.refKey x) "disk"
 
+instance s ~ s' => P.HasComputedExtraSpecs (TF.Ref s' (ComputeFlavorV2Resource s)) (TF.Attr s P.Text) where
+    computedExtraSpecs x = TF.compute (TF.refKey x) "extra_specs"
+
 instance s ~ s' => P.HasComputedIsPublic (TF.Ref s' (ComputeFlavorV2Resource s)) (TF.Attr s P.Text) where
     computedIsPublic x = TF.compute (TF.refKey x) "is_public"
 
@@ -1225,6 +1717,7 @@ computeFlavorV2Resource =
     TF.newResource "openstack_compute_flavor_v2" $
         ComputeFlavorV2Resource {
               _disk = TF.Nil
+            , _extra_specs = TF.Nil
             , _is_public = TF.Nil
             , _name = TF.Nil
             , _ram = TF.Nil
@@ -1240,14 +1733,16 @@ Associate a floating IP to an instance. This can be used instead of the
 @floating_ip@ options in @openstack_compute_instance_v2@ .
 -}
 data ComputeFloatingipAssociateV2Resource s = ComputeFloatingipAssociateV2Resource {
-      _fixed_ip    :: !(TF.Attr s P.Text)
+      _fixed_ip              :: !(TF.Attr s P.Text)
     {- ^ (Optional) The specific IP address to direct traffic to. -}
-    , _floating_ip :: !(TF.Attr s P.Text)
+    , _floating_ip           :: !(TF.Attr s P.Text)
     {- ^ (Required) The floating IP to associate. -}
-    , _instance_id :: !(TF.Attr s P.Text)
+    , _instance_id           :: !(TF.Attr s P.Text)
     {- ^ (Required) The instance to associte the floating IP with. -}
-    , _region      :: !(TF.Attr s P.Text)
+    , _region                :: !(TF.Attr s P.Text)
     {- ^ (Optional) The region in which to obtain the V2 Compute client. Keypairs are associated with accounts, but a Compute client is needed to create one. If omitted, the @region@ argument of the provider is used. Changing this creates a new floatingip_associate. -}
+    , _wait_until_associated :: !(TF.Attr s P.Text)
+    {- ^ (Optional) In cases where the OpenStack environment does not automatically wait until the association has finished, set this option to have Terraform poll the instance until the floating IP has been associated. Defaults to false. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeFloatingipAssociateV2Resource s) where
@@ -1256,6 +1751,7 @@ instance TF.ToHCL (ComputeFloatingipAssociateV2Resource s) where
         , TF.assign "floating_ip" <$> TF.attribute _floating_ip
         , TF.assign "instance_id" <$> TF.attribute _instance_id
         , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "wait_until_associated" <$> TF.attribute _wait_until_associated
         ]
 
 instance P.HasFixedIp (ComputeFloatingipAssociateV2Resource s) (TF.Attr s P.Text) where
@@ -1278,6 +1774,11 @@ instance P.HasRegion (ComputeFloatingipAssociateV2Resource s) (TF.Attr s P.Text)
         lens (_region :: ComputeFloatingipAssociateV2Resource s -> TF.Attr s P.Text)
              (\s a -> s { _region = a } :: ComputeFloatingipAssociateV2Resource s)
 
+instance P.HasWaitUntilAssociated (ComputeFloatingipAssociateV2Resource s) (TF.Attr s P.Text) where
+    waitUntilAssociated =
+        lens (_wait_until_associated :: ComputeFloatingipAssociateV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _wait_until_associated = a } :: ComputeFloatingipAssociateV2Resource s)
+
 instance s ~ s' => P.HasComputedFixedIp (TF.Ref s' (ComputeFloatingipAssociateV2Resource s)) (TF.Attr s P.Text) where
     computedFixedIp x = TF.compute (TF.refKey x) "fixed_ip"
 
@@ -1290,6 +1791,11 @@ instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (ComputeFloatingipAssociat
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeFloatingipAssociateV2Resource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
+instance s ~ s' => P.HasComputedWaitUntilAssociated (TF.Ref s' (ComputeFloatingipAssociateV2Resource s)) (TF.Attr s P.Text) where
+    computedWaitUntilAssociated =
+        (_wait_until_associated :: ComputeFloatingipAssociateV2Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 computeFloatingipAssociateV2Resource :: TF.Resource P.OpenStack (ComputeFloatingipAssociateV2Resource s)
 computeFloatingipAssociateV2Resource =
     TF.newResource "openstack_compute_floatingip_associate_v2" $
@@ -1298,6 +1804,7 @@ computeFloatingipAssociateV2Resource =
             , _floating_ip = TF.Nil
             , _instance_id = TF.Nil
             , _region = TF.Nil
+            , _wait_until_associated = TF.Nil
             }
 
 {- | The @openstack_compute_floatingip_v2@ OpenStack resource.
@@ -1388,6 +1895,8 @@ data ComputeInstanceV2Resource s = ComputeInstanceV2Resource {
     {- ^ (Optional) An array of one or more networks to attach to the instance. The network object structure is documented below. Changing this creates a new server. -}
     , _personality         :: !(TF.Attr s P.Text)
     {- ^ (Optional) Customize the personality of an instance by defining one or more files and their contents. The personality structure is described below. -}
+    , _power_state         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Provide the VM state. Only 'active' and 'shutoff' are supported values. Note : If the initial power_state is the shutoff the VM will be stopped immediately after build and the provisioners like remote-exec or files are not supported. -}
     , _region              :: !(TF.Attr s P.Text)
     {- ^ (Optional) The region in which to create the server instance. If omitted, the @region@ argument of the provider is used. Changing this creates a new server. -}
     , _scheduler_hints     :: !(TF.Attr s P.Text)
@@ -1416,6 +1925,7 @@ instance TF.ToHCL (ComputeInstanceV2Resource s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network" <$> TF.attribute _network
         , TF.assign "personality" <$> TF.attribute _personality
+        , TF.assign "power_state" <$> TF.attribute _power_state
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "scheduler_hints" <$> TF.attribute _scheduler_hints
         , TF.assign "security_groups" <$> TF.attribute _security_groups
@@ -1492,6 +2002,11 @@ instance P.HasPersonality (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
     personality =
         lens (_personality :: ComputeInstanceV2Resource s -> TF.Attr s P.Text)
              (\s a -> s { _personality = a } :: ComputeInstanceV2Resource s)
+
+instance P.HasPowerState (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
+    powerState =
+        lens (_power_state :: ComputeInstanceV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _power_state = a } :: ComputeInstanceV2Resource s)
 
 instance P.HasRegion (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
     region =
@@ -1601,6 +2116,11 @@ instance s ~ s' => P.HasComputedPersonality (TF.Ref s' (ComputeInstanceV2Resourc
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s P.Text) where
     computedPort x = TF.compute (TF.refKey x) "network/port"
 
+instance s ~ s' => P.HasComputedPowerState (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s P.Text) where
+    computedPowerState =
+        (_power_state :: ComputeInstanceV2Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
@@ -1643,6 +2163,7 @@ computeInstanceV2Resource =
             , _name = TF.Nil
             , _network = TF.Nil
             , _personality = TF.Nil
+            , _power_state = TF.Nil
             , _region = TF.Nil
             , _scheduler_hints = TF.Nil
             , _security_groups = TF.Nil
@@ -3059,6 +3580,138 @@ identityProjectV3Resource =
             , _region = TF.Nil
             }
 
+{- | The @openstack_identity_role_assignment_v3@ OpenStack resource.
+
+Manages a V3 Role assignment within OpenStack Keystone. Note: You must have
+admin privileges in your OpenStack cloud to use this resource.
+-}
+data IdentityRoleAssignmentV3Resource s = IdentityRoleAssignmentV3Resource {
+      _domain_id  :: !(TF.Attr s P.Text)
+    {- ^ (Optional; Required if @project_id@ is empty) The domain to assign the role in. -}
+    , _group_id   :: !(TF.Attr s P.Text)
+    {- ^ (Optional; Required if @user_id@ is empty) The group to assign the role to. -}
+    , _project_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional; Required if @domain_id@ is empty) The project to assign the role in. -}
+    , _role_id    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The role to assign. -}
+    , _user_id    :: !(TF.Attr s P.Text)
+    {- ^ (Optional; Required if @group_id@ is empty) The user to assign the role to. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (IdentityRoleAssignmentV3Resource s) where
+    toHCL IdentityRoleAssignmentV3Resource{..} = TF.inline $ catMaybes
+        [ TF.assign "domain_id" <$> TF.attribute _domain_id
+        , TF.assign "group_id" <$> TF.attribute _group_id
+        , TF.assign "project_id" <$> TF.attribute _project_id
+        , TF.assign "role_id" <$> TF.attribute _role_id
+        , TF.assign "user_id" <$> TF.attribute _user_id
+        ]
+
+instance P.HasDomainId (IdentityRoleAssignmentV3Resource s) (TF.Attr s P.Text) where
+    domainId =
+        lens (_domain_id :: IdentityRoleAssignmentV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _domain_id = a } :: IdentityRoleAssignmentV3Resource s)
+
+instance P.HasGroupId (IdentityRoleAssignmentV3Resource s) (TF.Attr s P.Text) where
+    groupId =
+        lens (_group_id :: IdentityRoleAssignmentV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _group_id = a } :: IdentityRoleAssignmentV3Resource s)
+
+instance P.HasProjectId (IdentityRoleAssignmentV3Resource s) (TF.Attr s P.Text) where
+    projectId =
+        lens (_project_id :: IdentityRoleAssignmentV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _project_id = a } :: IdentityRoleAssignmentV3Resource s)
+
+instance P.HasRoleId (IdentityRoleAssignmentV3Resource s) (TF.Attr s P.Text) where
+    roleId =
+        lens (_role_id :: IdentityRoleAssignmentV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _role_id = a } :: IdentityRoleAssignmentV3Resource s)
+
+instance P.HasUserId (IdentityRoleAssignmentV3Resource s) (TF.Attr s P.Text) where
+    userId =
+        lens (_user_id :: IdentityRoleAssignmentV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _user_id = a } :: IdentityRoleAssignmentV3Resource s)
+
+instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (IdentityRoleAssignmentV3Resource s)) (TF.Attr s P.Text) where
+    computedDomainId x = TF.compute (TF.refKey x) "domain_id"
+
+instance s ~ s' => P.HasComputedGroupId (TF.Ref s' (IdentityRoleAssignmentV3Resource s)) (TF.Attr s P.Text) where
+    computedGroupId x = TF.compute (TF.refKey x) "group_id"
+
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (IdentityRoleAssignmentV3Resource s)) (TF.Attr s P.Text) where
+    computedProjectId x = TF.compute (TF.refKey x) "project_id"
+
+instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (IdentityRoleAssignmentV3Resource s)) (TF.Attr s P.Text) where
+    computedRoleId x = TF.compute (TF.refKey x) "role_id"
+
+instance s ~ s' => P.HasComputedUserId (TF.Ref s' (IdentityRoleAssignmentV3Resource s)) (TF.Attr s P.Text) where
+    computedUserId x = TF.compute (TF.refKey x) "user_id"
+
+identityRoleAssignmentV3Resource :: TF.Resource P.OpenStack (IdentityRoleAssignmentV3Resource s)
+identityRoleAssignmentV3Resource =
+    TF.newResource "openstack_identity_role_assignment_v3" $
+        IdentityRoleAssignmentV3Resource {
+              _domain_id = TF.Nil
+            , _group_id = TF.Nil
+            , _project_id = TF.Nil
+            , _role_id = TF.Nil
+            , _user_id = TF.Nil
+            }
+
+{- | The @openstack_identity_role_v3@ OpenStack resource.
+
+Manages a V3 Role resource within OpenStack Keystone. Note: You must have
+admin privileges in your OpenStack cloud to use this resource.
+-}
+data IdentityRoleV3Resource s = IdentityRoleV3Resource {
+      _domain_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The domain the role belongs to. -}
+    , _name      :: !(TF.Attr s P.Text)
+    {- ^ - The name of the role. -}
+    , _region    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V3 Keystone client. If omitted, the @region@ argument of the provider is used. Changing this creates a new Role. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (IdentityRoleV3Resource s) where
+    toHCL IdentityRoleV3Resource{..} = TF.inline $ catMaybes
+        [ TF.assign "domain_id" <$> TF.attribute _domain_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance P.HasDomainId (IdentityRoleV3Resource s) (TF.Attr s P.Text) where
+    domainId =
+        lens (_domain_id :: IdentityRoleV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _domain_id = a } :: IdentityRoleV3Resource s)
+
+instance P.HasName (IdentityRoleV3Resource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: IdentityRoleV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: IdentityRoleV3Resource s)
+
+instance P.HasRegion (IdentityRoleV3Resource s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: IdentityRoleV3Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: IdentityRoleV3Resource s)
+
+instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (IdentityRoleV3Resource s)) (TF.Attr s P.Text) where
+    computedDomainId x = TF.compute (TF.refKey x) "domain_id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (IdentityRoleV3Resource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityRoleV3Resource s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+identityRoleV3Resource :: TF.Resource P.OpenStack (IdentityRoleV3Resource s)
+identityRoleV3Resource =
+    TF.newResource "openstack_identity_role_v3" $
+        IdentityRoleV3Resource {
+              _domain_id = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            }
+
 {- | The @openstack_identity_user_v3@ OpenStack resource.
 
 Manages a V3 User resource within OpenStack Keystone. Note: You must have
@@ -3286,6 +3939,8 @@ data ImagesImageV2Resource s = ImagesImageV2Resource {
     {- ^ (Optional) The region in which to obtain the V2 Glance client. A Glance client is needed to create an Image that can be used with a compute instance. If omitted, the @region@ argument of the provider is used. Changing this creates a new Image. -}
     , _tags             :: !(TF.Attr s P.Text)
     {- ^ (Optional) The tags of the image. It must be a list of strings. At this time, it is not possible to delete all tags of an image. -}
+    , _verify_checksum  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) If false, the checksum will not be verified once the image is finished uploading. Defaults to true. -}
     , _visibility       :: !(TF.Attr s P.Text)
     {- ^ (Optional) The visibility of the image. Must be one of "public", "private", "community", or "shared". The ability to set the visibility depends upon the configuration of the OpenStack cloud. -}
     } deriving (Show, Eq)
@@ -3304,6 +3959,7 @@ instance TF.ToHCL (ImagesImageV2Resource s) where
         , TF.assign "protected" <$> TF.attribute _protected
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "verify_checksum" <$> TF.attribute _verify_checksum
         , TF.assign "visibility" <$> TF.attribute _visibility
         ]
 
@@ -3366,6 +4022,11 @@ instance P.HasTags (ImagesImageV2Resource s) (TF.Attr s P.Text) where
     tags =
         lens (_tags :: ImagesImageV2Resource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ImagesImageV2Resource s)
+
+instance P.HasVerifyChecksum (ImagesImageV2Resource s) (TF.Attr s P.Text) where
+    verifyChecksum =
+        lens (_verify_checksum :: ImagesImageV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _verify_checksum = a } :: ImagesImageV2Resource s)
 
 instance P.HasVisibility (ImagesImageV2Resource s) (TF.Attr s P.Text) where
     visibility =
@@ -3444,6 +4105,11 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (ImagesImageV2Resource s)) (TF.A
 instance s ~ s' => P.HasComputedUpdateAt (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s P.Text) where
     computedUpdateAt x = TF.compute (TF.refKey x) "update_at"
 
+instance s ~ s' => P.HasComputedVerifyChecksum (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s P.Text) where
+    computedVerifyChecksum =
+        (_verify_checksum :: ImagesImageV2Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedVisibility (TF.Ref s' (ImagesImageV2Resource s)) (TF.Attr s P.Text) where
     computedVisibility x = TF.compute (TF.refKey x) "visibility"
 
@@ -3463,6 +4129,7 @@ imagesImageV2Resource =
             , _protected = TF.Nil
             , _region = TF.Nil
             , _tags = TF.Nil
+            , _verify_checksum = TF.Nil
             , _visibility = TF.Nil
             }
 
@@ -4762,6 +5429,61 @@ lbVipV1Resource =
             , _tenant_id = TF.Nil
             }
 
+{- | The @openstack_networking_floatingip_associate_v2@ OpenStack resource.
+
+Associates a floating IP to a port. This is useful for situations where you
+have a pre-allocated floating IP or are unable to use the
+@openstack_networking_floatingip_v2@ resource to create a floating IP.
+-}
+data NetworkingFloatingipAssociateV2Resource s = NetworkingFloatingipAssociateV2Resource {
+      _floating_ip :: !(TF.Attr s P.Text)
+    {- ^ (Required) IP Address of an existing floating IP. -}
+    , _port_id     :: !(TF.Attr s P.Text)
+    {- ^ (Required) ID of an existing port with at least one IP address to associate with this floating IP. -}
+    , _region      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V2 Networking client. A Networking client is needed to create a floating IP that can be used with another networking resource, such as a load balancer. If omitted, the @region@ argument of the provider is used. Changing this creates a new floating IP (which may or may not have a different address). -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (NetworkingFloatingipAssociateV2Resource s) where
+    toHCL NetworkingFloatingipAssociateV2Resource{..} = TF.inline $ catMaybes
+        [ TF.assign "floating_ip" <$> TF.attribute _floating_ip
+        , TF.assign "port_id" <$> TF.attribute _port_id
+        , TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance P.HasFloatingIp (NetworkingFloatingipAssociateV2Resource s) (TF.Attr s P.Text) where
+    floatingIp =
+        lens (_floating_ip :: NetworkingFloatingipAssociateV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _floating_ip = a } :: NetworkingFloatingipAssociateV2Resource s)
+
+instance P.HasPortId (NetworkingFloatingipAssociateV2Resource s) (TF.Attr s P.Text) where
+    portId =
+        lens (_port_id :: NetworkingFloatingipAssociateV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _port_id = a } :: NetworkingFloatingipAssociateV2Resource s)
+
+instance P.HasRegion (NetworkingFloatingipAssociateV2Resource s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: NetworkingFloatingipAssociateV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: NetworkingFloatingipAssociateV2Resource s)
+
+instance s ~ s' => P.HasComputedFloatingIp (TF.Ref s' (NetworkingFloatingipAssociateV2Resource s)) (TF.Attr s P.Text) where
+    computedFloatingIp x = TF.compute (TF.refKey x) "floating_ip"
+
+instance s ~ s' => P.HasComputedPortId (TF.Ref s' (NetworkingFloatingipAssociateV2Resource s)) (TF.Attr s P.Text) where
+    computedPortId x = TF.compute (TF.refKey x) "port_id"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingFloatingipAssociateV2Resource s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+networkingFloatingipAssociateV2Resource :: TF.Resource P.OpenStack (NetworkingFloatingipAssociateV2Resource s)
+networkingFloatingipAssociateV2Resource =
+    TF.newResource "openstack_networking_floatingip_associate_v2" $
+        NetworkingFloatingipAssociateV2Resource {
+              _floating_ip = TF.Nil
+            , _port_id = TF.Nil
+            , _region = TF.Nil
+            }
+
 {- | The @openstack_networking_floatingip_v2@ OpenStack resource.
 
 Manages a V2 floating IP resource within OpenStack Neutron (networking) that
@@ -4778,6 +5500,8 @@ data NetworkingFloatingipV2Resource s = NetworkingFloatingipV2Resource {
     {- ^ (Optional) ID of an existing port with at least one IP address to associate with this floating IP. -}
     , _region      :: !(TF.Attr s P.Text)
     {- ^ (Optional) The region in which to obtain the V2 Networking client. A Networking client is needed to create a floating IP that can be used with another networking resource, such as a load balancer. If omitted, the @region@ argument of the provider is used. Changing this creates a new floating IP (which may or may not have a different address). -}
+    , _subnet_id   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The subnet ID of the floating IP pool. Specify this if the floating IP network has multiple subnets. -}
     , _tenant_id   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The target tenant ID in which to allocate the floating IP, if you specify this together with a port_id, make sure the target port belongs to the same tenant. Changing this creates a new floating IP (which may or may not have a different address) -}
     , _value_specs :: !(TF.Attr s P.Text)
@@ -4790,6 +5514,7 @@ instance TF.ToHCL (NetworkingFloatingipV2Resource s) where
         , TF.assign "pool" <$> TF.attribute _pool
         , TF.assign "port_id" <$> TF.attribute _port_id
         , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
         , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         , TF.assign "value_specs" <$> TF.attribute _value_specs
         ]
@@ -4813,6 +5538,11 @@ instance P.HasRegion (NetworkingFloatingipV2Resource s) (TF.Attr s P.Text) where
     region =
         lens (_region :: NetworkingFloatingipV2Resource s -> TF.Attr s P.Text)
              (\s a -> s { _region = a } :: NetworkingFloatingipV2Resource s)
+
+instance P.HasSubnetId (NetworkingFloatingipV2Resource s) (TF.Attr s P.Text) where
+    subnetId =
+        lens (_subnet_id :: NetworkingFloatingipV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _subnet_id = a } :: NetworkingFloatingipV2Resource s)
 
 instance P.HasTenantId (NetworkingFloatingipV2Resource s) (TF.Attr s P.Text) where
     tenantId =
@@ -4839,6 +5569,11 @@ instance s ~ s' => P.HasComputedPortId (TF.Ref s' (NetworkingFloatingipV2Resourc
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingFloatingipV2Resource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
+instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (NetworkingFloatingipV2Resource s)) (TF.Attr s P.Text) where
+    computedSubnetId =
+        (_subnet_id :: NetworkingFloatingipV2Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (NetworkingFloatingipV2Resource s)) (TF.Attr s P.Text) where
     computedTenantId x = TF.compute (TF.refKey x) "tenant_id"
 
@@ -4855,6 +5590,7 @@ networkingFloatingipV2Resource =
             , _pool = TF.Nil
             , _port_id = TF.Nil
             , _region = TF.Nil
+            , _subnet_id = TF.Nil
             , _tenant_id = TF.Nil
             , _value_specs = TF.Nil
             }
@@ -4868,6 +5604,8 @@ data NetworkingNetworkV2Resource s = NetworkingNetworkV2Resource {
     {- ^ (Optional) The administrative state of the network. Acceptable values are "true" and "false". Changing this value updates the state of the existing network. -}
     , _availability_zone_hints :: !(TF.Attr s P.Text)
     {- ^ -  (Optional) An availability zone is used to make network resources highly available. Used for resources with high availability so that they are scheduled on different availability zones. Changing this creates a new network. -}
+    , _external                :: !(TF.Attr s P.Text)
+    {- ^ (Optional)  Specifies whether the network resource has the external routing facility. Valid values are true and false. Defaults to false. Changing this updates the external attribute of the existing network. -}
     , _name                    :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the network. Changing this updates the name of the existing network. -}
     , _region                  :: !(TF.Attr s P.Text)
@@ -4886,6 +5624,7 @@ instance TF.ToHCL (NetworkingNetworkV2Resource s) where
     toHCL NetworkingNetworkV2Resource{..} = TF.inline $ catMaybes
         [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "availability_zone_hints" <$> TF.attribute _availability_zone_hints
+        , TF.assign "external" <$> TF.attribute _external
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "segments" <$> TF.attribute _segments
@@ -4903,6 +5642,11 @@ instance P.HasAvailabilityZoneHints (NetworkingNetworkV2Resource s) (TF.Attr s P
     availabilityZoneHints =
         lens (_availability_zone_hints :: NetworkingNetworkV2Resource s -> TF.Attr s P.Text)
              (\s a -> s { _availability_zone_hints = a } :: NetworkingNetworkV2Resource s)
+
+instance P.HasExternal (NetworkingNetworkV2Resource s) (TF.Attr s P.Text) where
+    external =
+        lens (_external :: NetworkingNetworkV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _external = a } :: NetworkingNetworkV2Resource s)
 
 instance P.HasName (NetworkingNetworkV2Resource s) (TF.Attr s P.Text) where
     name =
@@ -4940,6 +5684,9 @@ instance s ~ s' => P.HasComputedAdminStateUp (TF.Ref s' (NetworkingNetworkV2Reso
 instance s ~ s' => P.HasComputedAvailabilityZoneHints (TF.Ref s' (NetworkingNetworkV2Resource s)) (TF.Attr s P.Text) where
     computedAvailabilityZoneHints x = TF.compute (TF.refKey x) "availability_zone_hints"
 
+instance s ~ s' => P.HasComputedExternal (TF.Ref s' (NetworkingNetworkV2Resource s)) (TF.Attr s P.Text) where
+    computedExternal x = TF.compute (TF.refKey x) "external"
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkingNetworkV2Resource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
@@ -4968,6 +5715,7 @@ networkingNetworkV2Resource =
         NetworkingNetworkV2Resource {
               _admin_state_up = TF.Nil
             , _availability_zone_hints = TF.Nil
+            , _external = TF.Nil
             , _name = TF.Nil
             , _region = TF.Nil
             , _segments = TF.Nil
@@ -5674,6 +6422,71 @@ networkingSecgroupV2Resource =
             , _tenant_id = TF.Nil
             }
 
+{- | The @openstack_networking_subnet_route_v2@ OpenStack resource.
+
+Creates a routing entry on a OpenStack V2 subnet.
+-}
+data NetworkingSubnetRouteV2Resource s = NetworkingSubnetRouteV2Resource {
+      _destination_cidr :: !(TF.Attr s P.Text)
+    {- ^ (Required) CIDR block to match on the packet’s destination IP. Changing this creates a new routing entry. -}
+    , _next_hop         :: !(TF.Attr s P.Text)
+    {- ^ (Required) IP address of the next hop gateway.  Changing this creates a new routing entry. -}
+    , _region           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V2 networking client. A networking client is needed to configure a routing entry on a subnet. If omitted, the @region@ argument of the provider is used. Changing this creates a new routing entry. -}
+    , _subnet_id        :: !(TF.Attr s P.Text)
+    {- ^ (Required) ID of the subnet this routing entry belongs to. Changing this creates a new routing entry. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (NetworkingSubnetRouteV2Resource s) where
+    toHCL NetworkingSubnetRouteV2Resource{..} = TF.inline $ catMaybes
+        [ TF.assign "destination_cidr" <$> TF.attribute _destination_cidr
+        , TF.assign "next_hop" <$> TF.attribute _next_hop
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
+        ]
+
+instance P.HasDestinationCidr (NetworkingSubnetRouteV2Resource s) (TF.Attr s P.Text) where
+    destinationCidr =
+        lens (_destination_cidr :: NetworkingSubnetRouteV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _destination_cidr = a } :: NetworkingSubnetRouteV2Resource s)
+
+instance P.HasNextHop (NetworkingSubnetRouteV2Resource s) (TF.Attr s P.Text) where
+    nextHop =
+        lens (_next_hop :: NetworkingSubnetRouteV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _next_hop = a } :: NetworkingSubnetRouteV2Resource s)
+
+instance P.HasRegion (NetworkingSubnetRouteV2Resource s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: NetworkingSubnetRouteV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: NetworkingSubnetRouteV2Resource s)
+
+instance P.HasSubnetId (NetworkingSubnetRouteV2Resource s) (TF.Attr s P.Text) where
+    subnetId =
+        lens (_subnet_id :: NetworkingSubnetRouteV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _subnet_id = a } :: NetworkingSubnetRouteV2Resource s)
+
+instance s ~ s' => P.HasComputedDestinationCidr (TF.Ref s' (NetworkingSubnetRouteV2Resource s)) (TF.Attr s P.Text) where
+    computedDestinationCidr x = TF.compute (TF.refKey x) "destination_cidr"
+
+instance s ~ s' => P.HasComputedNextHop (TF.Ref s' (NetworkingSubnetRouteV2Resource s)) (TF.Attr s P.Text) where
+    computedNextHop x = TF.compute (TF.refKey x) "next_hop"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingSubnetRouteV2Resource s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (NetworkingSubnetRouteV2Resource s)) (TF.Attr s P.Text) where
+    computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
+
+networkingSubnetRouteV2Resource :: TF.Resource P.OpenStack (NetworkingSubnetRouteV2Resource s)
+networkingSubnetRouteV2Resource =
+    TF.newResource "openstack_networking_subnet_route_v2" $
+        NetworkingSubnetRouteV2Resource {
+              _destination_cidr = TF.Nil
+            , _next_hop = TF.Nil
+            , _region = TF.Nil
+            , _subnet_id = TF.Nil
+            }
+
 {- | The @openstack_networking_subnet_v2@ OpenStack resource.
 
 Manages a V2 Neutron subnet resource within OpenStack.
@@ -6091,6 +6904,8 @@ data ObjectstorageContainerV1Resource s = ObjectstorageContainerV1Resource {
     {- ^ (Optional) Sets an ACL that grants write access. Changing this updates the access control list write access. -}
     , _content_type       :: !(TF.Attr s P.Text)
     {- ^ (Optional) The MIME type for the container. Changing this updates the MIME type. -}
+    , _force_destroy      :: !(TF.Attr s P.Text)
+    {- ^ -  (Optional, Default:false ) A boolean that indicates all objects should be deleted from the container so that the container can be destroyed without error. These objects are not recoverable. -}
     , _metadata           :: !(TF.Attr s P.Text)
     {- ^ (Optional) Custom key/value pairs to associate with the container. Changing this updates the existing container metadata. -}
     , _name               :: !(TF.Attr s P.Text)
@@ -6106,6 +6921,7 @@ instance TF.ToHCL (ObjectstorageContainerV1Resource s) where
         , TF.assign "container_sync_to" <$> TF.attribute _container_sync_to
         , TF.assign "container_write" <$> TF.attribute _container_write
         , TF.assign "content_type" <$> TF.attribute _content_type
+        , TF.assign "force_destroy" <$> TF.attribute _force_destroy
         , TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "region" <$> TF.attribute _region
@@ -6135,6 +6951,11 @@ instance P.HasContentType (ObjectstorageContainerV1Resource s) (TF.Attr s P.Text
     contentType =
         lens (_content_type :: ObjectstorageContainerV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _content_type = a } :: ObjectstorageContainerV1Resource s)
+
+instance P.HasForceDestroy (ObjectstorageContainerV1Resource s) (TF.Attr s P.Text) where
+    forceDestroy =
+        lens (_force_destroy :: ObjectstorageContainerV1Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _force_destroy = a } :: ObjectstorageContainerV1Resource s)
 
 instance P.HasMetadata (ObjectstorageContainerV1Resource s) (TF.Attr s P.Text) where
     metadata =
@@ -6166,6 +6987,11 @@ instance s ~ s' => P.HasComputedContainerWrite (TF.Ref s' (ObjectstorageContaine
 instance s ~ s' => P.HasComputedContentType (TF.Ref s' (ObjectstorageContainerV1Resource s)) (TF.Attr s P.Text) where
     computedContentType x = TF.compute (TF.refKey x) "content_type"
 
+instance s ~ s' => P.HasComputedForceDestroy (TF.Ref s' (ObjectstorageContainerV1Resource s)) (TF.Attr s P.Text) where
+    computedForceDestroy =
+        (_force_destroy :: ObjectstorageContainerV1Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ObjectstorageContainerV1Resource s)) (TF.Attr s P.Text) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
@@ -6184,6 +7010,7 @@ objectstorageContainerV1Resource =
             , _container_sync_to = TF.Nil
             , _container_write = TF.Nil
             , _content_type = TF.Nil
+            , _force_destroy = TF.Nil
             , _metadata = TF.Nil
             , _name = TF.Nil
             , _region = TF.Nil
@@ -6387,4 +7214,782 @@ objectstorageObjectV1Resource =
             , _object_manifest = TF.Nil
             , _region = TF.Nil
             , _source = TF.Nil
+            }
+
+{- | The @openstack_vpnaas_endpoint_group_v2@ OpenStack resource.
+
+Manages a V2 Neutron Endpoint Group resource within OpenStack.
+-}
+data VpnaasEndpointGroupV2Resource s = VpnaasEndpointGroupV2Resource {
+      _description :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The human-readable description for the group. Changing this updates the description of the existing group. -}
+    , _endpoints   :: !(TF.Attr s P.Text)
+    {- ^ - List of endpoints of the same type, for the endpoint group. The values will depend on the type. Changing this creates a new group. -}
+    , _name        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the group. Changing this updates the name of the existing group. -}
+    , _region      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V2 Networking client. A Networking client is needed to create an endpoint group. If omitted, the @region@ argument of the provider is used. Changing this creates a new group. -}
+    , _tenant_id   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The owner of the group. Required if admin wants to create an endpoint group for another project. Changing this creates a new group. -}
+    , _type'       :: !(TF.Attr s P.Text)
+    {- ^ -  The type of the endpoints in the group. A valid value is subnet, cidr, network, router, or vlan. Changing this creates a new group. -}
+    , _value_specs :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Map of additional options. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (VpnaasEndpointGroupV2Resource s) where
+    toHCL VpnaasEndpointGroupV2Resource{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "endpoints" <$> TF.attribute _endpoints
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
+        ]
+
+instance P.HasDescription (VpnaasEndpointGroupV2Resource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: VpnaasEndpointGroupV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: VpnaasEndpointGroupV2Resource s)
+
+instance P.HasEndpoints (VpnaasEndpointGroupV2Resource s) (TF.Attr s P.Text) where
+    endpoints =
+        lens (_endpoints :: VpnaasEndpointGroupV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _endpoints = a } :: VpnaasEndpointGroupV2Resource s)
+
+instance P.HasName (VpnaasEndpointGroupV2Resource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: VpnaasEndpointGroupV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: VpnaasEndpointGroupV2Resource s)
+
+instance P.HasRegion (VpnaasEndpointGroupV2Resource s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: VpnaasEndpointGroupV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: VpnaasEndpointGroupV2Resource s)
+
+instance P.HasTenantId (VpnaasEndpointGroupV2Resource s) (TF.Attr s P.Text) where
+    tenantId =
+        lens (_tenant_id :: VpnaasEndpointGroupV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _tenant_id = a } :: VpnaasEndpointGroupV2Resource s)
+
+instance P.HasType' (VpnaasEndpointGroupV2Resource s) (TF.Attr s P.Text) where
+    type' =
+        lens (_type' :: VpnaasEndpointGroupV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: VpnaasEndpointGroupV2Resource s)
+
+instance P.HasValueSpecs (VpnaasEndpointGroupV2Resource s) (TF.Attr s P.Text) where
+    valueSpecs =
+        lens (_value_specs :: VpnaasEndpointGroupV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _value_specs = a } :: VpnaasEndpointGroupV2Resource s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VpnaasEndpointGroupV2Resource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedEndpoints (TF.Ref s' (VpnaasEndpointGroupV2Resource s)) (TF.Attr s P.Text) where
+    computedEndpoints x = TF.compute (TF.refKey x) "endpoints"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VpnaasEndpointGroupV2Resource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (VpnaasEndpointGroupV2Resource s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (VpnaasEndpointGroupV2Resource s)) (TF.Attr s P.Text) where
+    computedTenantId x = TF.compute (TF.refKey x) "tenant_id"
+
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (VpnaasEndpointGroupV2Resource s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
+
+instance s ~ s' => P.HasComputedValueSpecs (TF.Ref s' (VpnaasEndpointGroupV2Resource s)) (TF.Attr s P.Text) where
+    computedValueSpecs x = TF.compute (TF.refKey x) "value_specs"
+
+vpnaasEndpointGroupV2Resource :: TF.Resource P.OpenStack (VpnaasEndpointGroupV2Resource s)
+vpnaasEndpointGroupV2Resource =
+    TF.newResource "openstack_vpnaas_endpoint_group_v2" $
+        VpnaasEndpointGroupV2Resource {
+              _description = TF.Nil
+            , _endpoints = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
+            , _type' = TF.Nil
+            , _value_specs = TF.Nil
+            }
+
+{- | The @openstack_vpnaas_ike_policy_v2@ OpenStack resource.
+
+Manages a V2 Neutron IKE policy resource within OpenStack.
+-}
+data VpnaasIkePolicyV2Resource s = VpnaasIkePolicyV2Resource {
+      _auth_algorithm          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The authentication hash algorithm. Valid values are sha1, sha256, sha384, sha512. Default is sha1. Changing this updates the algorithm of the existing policy. -}
+    , _description             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The human-readable description for the policy. Changing this updates the description of the existing policy. -}
+    , _encryption_algorithm    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The encryption algorithm. Valid values are 3des, aes-128, aes-192 and so on. The default value is aes-128. Changing this updates the existing policy. -}
+    , _ike_version             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IKE mode. A valid value is v1 or v2. Default is v1. Changing this updates the existing policy. -}
+    , _lifetime                :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The lifetime of the security association. Consists of Unit and Value. -}
+    , _name                    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the policy. Changing this updates the name of the existing policy. -}
+    , _pfs                     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The perfect forward secrecy mode. Valid values are Group2, Group5 and Group14. Default is Group5. Changing this updates the existing policy. -}
+    , _phase1_negotiation_mode :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IKE mode. A valid value is main, which is the default. Changing this updates the existing policy. -}
+    , _region                  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V2 Networking client. A Networking client is needed to create a VPN service. If omitted, the @region@ argument of the provider is used. Changing this creates a new service. -}
+    , _tenant_id               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The owner of the policy. Required if admin wants to create a service for another policy. Changing this creates a new policy. -}
+    , _value_specs             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Map of additional options. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (VpnaasIkePolicyV2Resource s) where
+    toHCL VpnaasIkePolicyV2Resource{..} = TF.inline $ catMaybes
+        [ TF.assign "auth_algorithm" <$> TF.attribute _auth_algorithm
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "encryption_algorithm" <$> TF.attribute _encryption_algorithm
+        , TF.assign "ike_version" <$> TF.attribute _ike_version
+        , TF.assign "lifetime" <$> TF.attribute _lifetime
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "pfs" <$> TF.attribute _pfs
+        , TF.assign "phase1_negotiation_mode" <$> TF.attribute _phase1_negotiation_mode
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
+        ]
+
+instance P.HasAuthAlgorithm (VpnaasIkePolicyV2Resource s) (TF.Attr s P.Text) where
+    authAlgorithm =
+        lens (_auth_algorithm :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _auth_algorithm = a } :: VpnaasIkePolicyV2Resource s)
+
+instance P.HasDescription (VpnaasIkePolicyV2Resource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: VpnaasIkePolicyV2Resource s)
+
+instance P.HasEncryptionAlgorithm (VpnaasIkePolicyV2Resource s) (TF.Attr s P.Text) where
+    encryptionAlgorithm =
+        lens (_encryption_algorithm :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _encryption_algorithm = a } :: VpnaasIkePolicyV2Resource s)
+
+instance P.HasIkeVersion (VpnaasIkePolicyV2Resource s) (TF.Attr s P.Text) where
+    ikeVersion =
+        lens (_ike_version :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _ike_version = a } :: VpnaasIkePolicyV2Resource s)
+
+instance P.HasLifetime (VpnaasIkePolicyV2Resource s) (TF.Attr s P.Text) where
+    lifetime =
+        lens (_lifetime :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _lifetime = a } :: VpnaasIkePolicyV2Resource s)
+
+instance P.HasName (VpnaasIkePolicyV2Resource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: VpnaasIkePolicyV2Resource s)
+
+instance P.HasPfs (VpnaasIkePolicyV2Resource s) (TF.Attr s P.Text) where
+    pfs =
+        lens (_pfs :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _pfs = a } :: VpnaasIkePolicyV2Resource s)
+
+instance P.HasPhase1NegotiationMode (VpnaasIkePolicyV2Resource s) (TF.Attr s P.Text) where
+    phase1NegotiationMode =
+        lens (_phase1_negotiation_mode :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _phase1_negotiation_mode = a } :: VpnaasIkePolicyV2Resource s)
+
+instance P.HasRegion (VpnaasIkePolicyV2Resource s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: VpnaasIkePolicyV2Resource s)
+
+instance P.HasTenantId (VpnaasIkePolicyV2Resource s) (TF.Attr s P.Text) where
+    tenantId =
+        lens (_tenant_id :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _tenant_id = a } :: VpnaasIkePolicyV2Resource s)
+
+instance P.HasValueSpecs (VpnaasIkePolicyV2Resource s) (TF.Attr s P.Text) where
+    valueSpecs =
+        lens (_value_specs :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _value_specs = a } :: VpnaasIkePolicyV2Resource s)
+
+instance s ~ s' => P.HasComputedAuthAlgorithm (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedAuthAlgorithm x = TF.compute (TF.refKey x) "auth_algorithm"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedEncapsulationMode (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedEncapsulationMode x = TF.compute (TF.refKey x) "encapsulation_mode"
+
+instance s ~ s' => P.HasComputedEncryptionAlgorithm (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedEncryptionAlgorithm x = TF.compute (TF.refKey x) "encryption_algorithm"
+
+instance s ~ s' => P.HasComputedIkeVersion (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedIkeVersion =
+        (_ike_version :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedLifetime (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedLifetime x = TF.compute (TF.refKey x) "lifetime"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedPfs (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedPfs x = TF.compute (TF.refKey x) "pfs"
+
+instance s ~ s' => P.HasComputedPhase1NegotiationMode (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedPhase1NegotiationMode =
+        (_phase1_negotiation_mode :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedTenantId x = TF.compute (TF.refKey x) "tenant_id"
+
+instance s ~ s' => P.HasComputedTransformProtocol (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedTransformProtocol x = TF.compute (TF.refKey x) "transform_protocol"
+
+instance s ~ s' => P.HasComputedValueSpecs (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedValueSpecs x = TF.compute (TF.refKey x) "value_specs"
+
+vpnaasIkePolicyV2Resource :: TF.Resource P.OpenStack (VpnaasIkePolicyV2Resource s)
+vpnaasIkePolicyV2Resource =
+    TF.newResource "openstack_vpnaas_ike_policy_v2" $
+        VpnaasIkePolicyV2Resource {
+              _auth_algorithm = TF.Nil
+            , _description = TF.Nil
+            , _encryption_algorithm = TF.Nil
+            , _ike_version = TF.Nil
+            , _lifetime = TF.Nil
+            , _name = TF.Nil
+            , _pfs = TF.Nil
+            , _phase1_negotiation_mode = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
+            , _value_specs = TF.Nil
+            }
+
+{- | The @openstack_vpnaas_ipsec_policy_v2@ OpenStack resource.
+
+Manages a V2 Neutron IPSec policy resource within OpenStack.
+-}
+data VpnaasIpsecPolicyV2Resource s = VpnaasIpsecPolicyV2Resource {
+      _auth_algorithm       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The authentication hash algorithm. Valid values are sha1, sha256, sha384, sha512. Default is sha1. Changing this updates the algorithm of the existing policy. -}
+    , _description          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The human-readable description for the policy. Changing this updates the description of the existing policy. -}
+    , _encapsulation_mode   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The encapsulation mode. Valid values are tunnel and transport. Default is tunnel. Changing this updates the existing policy. -}
+    , _encryption_algorithm :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The encryption algorithm. Valid values are 3des, aes-128, aes-192 and so on. The default value is aes-128. Changing this updates the existing policy. -}
+    , _lifetime             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The lifetime of the security association. Consists of Unit and Value. -}
+    , _name                 :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the policy. Changing this updates the name of the existing policy. -}
+    , _pfs                  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The perfect forward secrecy mode. Valid values are Group2, Group5 and Group14. Default is Group5. Changing this updates the existing policy. -}
+    , _region               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V2 Networking client. A Networking client is needed to create an IPSec policy. If omitted, the @region@ argument of the provider is used. Changing this creates a new policy. -}
+    , _tenant_id            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The owner of the policy. Required if admin wants to create a policy for another project. Changing this creates a new policy. -}
+    , _transform_protocol   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The transform protocol. Valid values are ESP, AH and AH-ESP. Changing this updates the existing policy. Default is ESP. -}
+    , _value_specs          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Map of additional options. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (VpnaasIpsecPolicyV2Resource s) where
+    toHCL VpnaasIpsecPolicyV2Resource{..} = TF.inline $ catMaybes
+        [ TF.assign "auth_algorithm" <$> TF.attribute _auth_algorithm
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "encapsulation_mode" <$> TF.attribute _encapsulation_mode
+        , TF.assign "encryption_algorithm" <$> TF.attribute _encryption_algorithm
+        , TF.assign "lifetime" <$> TF.attribute _lifetime
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "pfs" <$> TF.attribute _pfs
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "transform_protocol" <$> TF.attribute _transform_protocol
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
+        ]
+
+instance P.HasAuthAlgorithm (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.Text) where
+    authAlgorithm =
+        lens (_auth_algorithm :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _auth_algorithm = a } :: VpnaasIpsecPolicyV2Resource s)
+
+instance P.HasDescription (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: VpnaasIpsecPolicyV2Resource s)
+
+instance P.HasEncapsulationMode (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.Text) where
+    encapsulationMode =
+        lens (_encapsulation_mode :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _encapsulation_mode = a } :: VpnaasIpsecPolicyV2Resource s)
+
+instance P.HasEncryptionAlgorithm (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.Text) where
+    encryptionAlgorithm =
+        lens (_encryption_algorithm :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _encryption_algorithm = a } :: VpnaasIpsecPolicyV2Resource s)
+
+instance P.HasLifetime (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.Text) where
+    lifetime =
+        lens (_lifetime :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _lifetime = a } :: VpnaasIpsecPolicyV2Resource s)
+
+instance P.HasName (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: VpnaasIpsecPolicyV2Resource s)
+
+instance P.HasPfs (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.Text) where
+    pfs =
+        lens (_pfs :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _pfs = a } :: VpnaasIpsecPolicyV2Resource s)
+
+instance P.HasRegion (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: VpnaasIpsecPolicyV2Resource s)
+
+instance P.HasTenantId (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.Text) where
+    tenantId =
+        lens (_tenant_id :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _tenant_id = a } :: VpnaasIpsecPolicyV2Resource s)
+
+instance P.HasTransformProtocol (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.Text) where
+    transformProtocol =
+        lens (_transform_protocol :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _transform_protocol = a } :: VpnaasIpsecPolicyV2Resource s)
+
+instance P.HasValueSpecs (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.Text) where
+    valueSpecs =
+        lens (_value_specs :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _value_specs = a } :: VpnaasIpsecPolicyV2Resource s)
+
+instance s ~ s' => P.HasComputedAuthAlgorithm (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedAuthAlgorithm x = TF.compute (TF.refKey x) "auth_algorithm"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedEncapsulationMode (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedEncapsulationMode x = TF.compute (TF.refKey x) "encapsulation_mode"
+
+instance s ~ s' => P.HasComputedEncryptionAlgorithm (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedEncryptionAlgorithm x = TF.compute (TF.refKey x) "encryption_algorithm"
+
+instance s ~ s' => P.HasComputedLifetime (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedLifetime x = TF.compute (TF.refKey x) "lifetime"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedPfs (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedPfs x = TF.compute (TF.refKey x) "pfs"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedTenantId x = TF.compute (TF.refKey x) "tenant_id"
+
+instance s ~ s' => P.HasComputedTransformProtocol (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedTransformProtocol x = TF.compute (TF.refKey x) "transform_protocol"
+
+instance s ~ s' => P.HasComputedValueSpecs (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
+    computedValueSpecs x = TF.compute (TF.refKey x) "value_specs"
+
+vpnaasIpsecPolicyV2Resource :: TF.Resource P.OpenStack (VpnaasIpsecPolicyV2Resource s)
+vpnaasIpsecPolicyV2Resource =
+    TF.newResource "openstack_vpnaas_ipsec_policy_v2" $
+        VpnaasIpsecPolicyV2Resource {
+              _auth_algorithm = TF.Nil
+            , _description = TF.Nil
+            , _encapsulation_mode = TF.Nil
+            , _encryption_algorithm = TF.Nil
+            , _lifetime = TF.Nil
+            , _name = TF.Nil
+            , _pfs = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
+            , _transform_protocol = TF.Nil
+            , _value_specs = TF.Nil
+            }
+
+{- | The @openstack_vpnaas_service_v2@ OpenStack resource.
+
+Manages a V2 Neutron VPN service resource within OpenStack.
+-}
+data VpnaasServiceV2Resource s = VpnaasServiceV2Resource {
+      _admin_state_up :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The administrative state of the resource. Can either be up(true) or down(false). Changing this updates the administrative state of the existing service. -}
+    , _description    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The human-readable description for the service. Changing this updates the description of the existing service. -}
+    , _name           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the service. Changing this updates the name of the existing service. -}
+    , _region         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V2 Networking client. A Networking client is needed to create a VPN service. If omitted, the @region@ argument of the provider is used. Changing this creates a new service. -}
+    , _router_id      :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the router. Changing this creates a new service. -}
+    , _subnet_id      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) SubnetID is the ID of the subnet. Default is null. -}
+    , _tenant_id      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The owner of the service. Required if admin wants to create a service for another project. Changing this creates a new service. -}
+    , _value_specs    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Map of additional options. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (VpnaasServiceV2Resource s) where
+    toHCL VpnaasServiceV2Resource{..} = TF.inline $ catMaybes
+        [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "router_id" <$> TF.attribute _router_id
+        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
+        ]
+
+instance P.HasAdminStateUp (VpnaasServiceV2Resource s) (TF.Attr s P.Text) where
+    adminStateUp =
+        lens (_admin_state_up :: VpnaasServiceV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _admin_state_up = a } :: VpnaasServiceV2Resource s)
+
+instance P.HasDescription (VpnaasServiceV2Resource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: VpnaasServiceV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: VpnaasServiceV2Resource s)
+
+instance P.HasName (VpnaasServiceV2Resource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: VpnaasServiceV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: VpnaasServiceV2Resource s)
+
+instance P.HasRegion (VpnaasServiceV2Resource s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: VpnaasServiceV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: VpnaasServiceV2Resource s)
+
+instance P.HasRouterId (VpnaasServiceV2Resource s) (TF.Attr s P.Text) where
+    routerId =
+        lens (_router_id :: VpnaasServiceV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _router_id = a } :: VpnaasServiceV2Resource s)
+
+instance P.HasSubnetId (VpnaasServiceV2Resource s) (TF.Attr s P.Text) where
+    subnetId =
+        lens (_subnet_id :: VpnaasServiceV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _subnet_id = a } :: VpnaasServiceV2Resource s)
+
+instance P.HasTenantId (VpnaasServiceV2Resource s) (TF.Attr s P.Text) where
+    tenantId =
+        lens (_tenant_id :: VpnaasServiceV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _tenant_id = a } :: VpnaasServiceV2Resource s)
+
+instance P.HasValueSpecs (VpnaasServiceV2Resource s) (TF.Attr s P.Text) where
+    valueSpecs =
+        lens (_value_specs :: VpnaasServiceV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _value_specs = a } :: VpnaasServiceV2Resource s)
+
+instance s ~ s' => P.HasComputedAdminStateUp (TF.Ref s' (VpnaasServiceV2Resource s)) (TF.Attr s P.Text) where
+    computedAdminStateUp x = TF.compute (TF.refKey x) "admin_state_up"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VpnaasServiceV2Resource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedExternalV4Ip (TF.Ref s' (VpnaasServiceV2Resource s)) (TF.Attr s P.Text) where
+    computedExternalV4Ip x = TF.compute (TF.refKey x) "external_v4_ip"
+
+instance s ~ s' => P.HasComputedExternalV6Ip (TF.Ref s' (VpnaasServiceV2Resource s)) (TF.Attr s P.Text) where
+    computedExternalV6Ip x = TF.compute (TF.refKey x) "external_v6_ip"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VpnaasServiceV2Resource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (VpnaasServiceV2Resource s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance s ~ s' => P.HasComputedRouterId (TF.Ref s' (VpnaasServiceV2Resource s)) (TF.Attr s P.Text) where
+    computedRouterId x = TF.compute (TF.refKey x) "router_id"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (VpnaasServiceV2Resource s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (VpnaasServiceV2Resource s)) (TF.Attr s P.Text) where
+    computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
+
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (VpnaasServiceV2Resource s)) (TF.Attr s P.Text) where
+    computedTenantId x = TF.compute (TF.refKey x) "tenant_id"
+
+instance s ~ s' => P.HasComputedValueSpecs (TF.Ref s' (VpnaasServiceV2Resource s)) (TF.Attr s P.Text) where
+    computedValueSpecs x = TF.compute (TF.refKey x) "value_specs"
+
+vpnaasServiceV2Resource :: TF.Resource P.OpenStack (VpnaasServiceV2Resource s)
+vpnaasServiceV2Resource =
+    TF.newResource "openstack_vpnaas_service_v2" $
+        VpnaasServiceV2Resource {
+              _admin_state_up = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            , _router_id = TF.Nil
+            , _subnet_id = TF.Nil
+            , _tenant_id = TF.Nil
+            , _value_specs = TF.Nil
+            }
+
+{- | The @openstack_vpnaas_site_connection_v2@ OpenStack resource.
+
+Manages a V2 Neutron IPSec site connection resource within OpenStack.
+-}
+data VpnaasSiteConnectionV2Resource s = VpnaasSiteConnectionV2Resource {
+      _admin_state_up    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The administrative state of the resource. Can either be up(true) or down(false). Changing this updates the administrative state of the existing connection. -}
+    , _description       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The human-readable description for the connection. Changing this updates the description of the existing connection. -}
+    , _dpd               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A dictionary with dead peer detection (DPD) protocol controls. -}
+    , _ikepolicy_id      :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the IKE policy. Changing this creates a new connection. -}
+    , _initiator         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A valid value is response-only or bi-directional. Default is bi-directional. -}
+    , _ipsecpolicy_id    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the IPsec policy. Changing this creates a new connection. -}
+    , _local_ep_group_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID for the endpoint group that contains private subnets for the local side of the connection. You must specify this parameter with the peer_ep_group_id parameter unless in backward- compatible mode where peer_cidrs is provided with a subnet_id for the VPN service. Changing this updates the existing connection. -}
+    , _local_id          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) An ID to be used instead of the external IP address for a virtual router used in traffic between instances on different networks in east-west traffic. Most often, local ID would be domain name, email address, etc. If this is not configured then the external IP address will be used as the ID. -}
+    , _mtu               :: !(TF.Attr s P.Text)
+    {- ^ -  (Optional) The maximum transmission unit (MTU) value to address fragmentation. Minimum value is 68 for IPv4, and 1280 for IPv6. -}
+    , _name              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the connection. Changing this updates the name of the existing connection. -}
+    , _peer_address      :: !(TF.Attr s P.Text)
+    {- ^ (Required) The peer gateway public IPv4 or IPv6 address or FQDN. -}
+    , _peer_cidrs        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Unique list of valid peer private CIDRs in the form < net_address > / < prefix > . -}
+    , _peer_ep_group_id  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID for the endpoint group that contains private CIDRs in the form < net_address > / < prefix > for the peer side of the connection. You must specify this parameter with the local_ep_group_id parameter unless in backward-compatible mode where peer_cidrs is provided with a subnet_id for the VPN service. -}
+    , _peer_id           :: !(TF.Attr s P.Text)
+    {- ^ (Required) The peer router identity for authentication. A valid value is an IPv4 address, IPv6 address, e-mail address, key ID, or FQDN. Typically, this value matches the peer_address value. Changing this updates the existing policy. -}
+    , _psk               :: !(TF.Attr s P.Text)
+    {- ^ (Required) The pre-shared key. A valid value is any string. -}
+    , _region            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V2 Networking client. A Networking client is needed to create an IPSec site connection. If omitted, the @region@ argument of the provider is used. Changing this creates a new site connection. -}
+    , _tenant_id         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The owner of the connection. Required if admin wants to create a connection for another project. Changing this creates a new connection. -}
+    , _value_specs       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Map of additional options. -}
+    , _vpnservice_id     :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the VPN service. Changing this creates a new connection. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (VpnaasSiteConnectionV2Resource s) where
+    toHCL VpnaasSiteConnectionV2Resource{..} = TF.inline $ catMaybes
+        [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "dpd" <$> TF.attribute _dpd
+        , TF.assign "ikepolicy_id" <$> TF.attribute _ikepolicy_id
+        , TF.assign "initiator" <$> TF.attribute _initiator
+        , TF.assign "ipsecpolicy_id" <$> TF.attribute _ipsecpolicy_id
+        , TF.assign "local_ep_group_id" <$> TF.attribute _local_ep_group_id
+        , TF.assign "local_id" <$> TF.attribute _local_id
+        , TF.assign "mtu" <$> TF.attribute _mtu
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "peer_address" <$> TF.attribute _peer_address
+        , TF.assign "peer_cidrs" <$> TF.attribute _peer_cidrs
+        , TF.assign "peer_ep_group_id" <$> TF.attribute _peer_ep_group_id
+        , TF.assign "peer_id" <$> TF.attribute _peer_id
+        , TF.assign "psk" <$> TF.attribute _psk
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
+        , TF.assign "vpnservice_id" <$> TF.attribute _vpnservice_id
+        ]
+
+instance P.HasAdminStateUp (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    adminStateUp =
+        lens (_admin_state_up :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _admin_state_up = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasDescription (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasDpd (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    dpd =
+        lens (_dpd :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _dpd = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasIkepolicyId (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    ikepolicyId =
+        lens (_ikepolicy_id :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _ikepolicy_id = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasInitiator (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    initiator =
+        lens (_initiator :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _initiator = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasIpsecpolicyId (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    ipsecpolicyId =
+        lens (_ipsecpolicy_id :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _ipsecpolicy_id = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasLocalEpGroupId (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    localEpGroupId =
+        lens (_local_ep_group_id :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _local_ep_group_id = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasLocalId (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    localId =
+        lens (_local_id :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _local_id = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasMtu (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    mtu =
+        lens (_mtu :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _mtu = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasName (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasPeerAddress (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    peerAddress =
+        lens (_peer_address :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _peer_address = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasPeerCidrs (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    peerCidrs =
+        lens (_peer_cidrs :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _peer_cidrs = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasPeerEpGroupId (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    peerEpGroupId =
+        lens (_peer_ep_group_id :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _peer_ep_group_id = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasPeerId (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    peerId =
+        lens (_peer_id :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _peer_id = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasPsk (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    psk =
+        lens (_psk :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _psk = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasRegion (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasTenantId (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    tenantId =
+        lens (_tenant_id :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _tenant_id = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasValueSpecs (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    valueSpecs =
+        lens (_value_specs :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _value_specs = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance P.HasVpnserviceId (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
+    vpnserviceId =
+        lens (_vpnservice_id :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _vpnservice_id = a } :: VpnaasSiteConnectionV2Resource s)
+
+instance s ~ s' => P.HasComputedAdminStateUp (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedAdminStateUp x = TF.compute (TF.refKey x) "admin_state_up"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedDpd (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedDpd x = TF.compute (TF.refKey x) "dpd"
+
+instance s ~ s' => P.HasComputedIkepolicyId (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedIkepolicyId x = TF.compute (TF.refKey x) "ikepolicy_id"
+
+instance s ~ s' => P.HasComputedInitiator (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedInitiator x = TF.compute (TF.refKey x) "initiator"
+
+instance s ~ s' => P.HasComputedIpsecpolicyId (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedIpsecpolicyId x = TF.compute (TF.refKey x) "ipsecpolicy_id"
+
+instance s ~ s' => P.HasComputedLocalEpGroupId (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedLocalEpGroupId =
+        (_local_ep_group_id :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedLocalId (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedLocalId x = TF.compute (TF.refKey x) "local_id"
+
+instance s ~ s' => P.HasComputedMtu (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedMtu x = TF.compute (TF.refKey x) "mtu"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedPeerAddress (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedPeerAddress x = TF.compute (TF.refKey x) "peer_address"
+
+instance s ~ s' => P.HasComputedPeerCidrs (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedPeerCidrs x = TF.compute (TF.refKey x) "peer_cidrs"
+
+instance s ~ s' => P.HasComputedPeerEpGroupId (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedPeerEpGroupId x = TF.compute (TF.refKey x) "peer_ep_group_id"
+
+instance s ~ s' => P.HasComputedPeerId (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedPeerId x = TF.compute (TF.refKey x) "peer_id"
+
+instance s ~ s' => P.HasComputedPsk (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedPsk x = TF.compute (TF.refKey x) "psk"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedTenantId x = TF.compute (TF.refKey x) "tenant_id"
+
+instance s ~ s' => P.HasComputedValueSpecs (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedValueSpecs x = TF.compute (TF.refKey x) "value_specs"
+
+instance s ~ s' => P.HasComputedVpnserviceId (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
+    computedVpnserviceId x = TF.compute (TF.refKey x) "vpnservice_id"
+
+vpnaasSiteConnectionV2Resource :: TF.Resource P.OpenStack (VpnaasSiteConnectionV2Resource s)
+vpnaasSiteConnectionV2Resource =
+    TF.newResource "openstack_vpnaas_site_connection_v2" $
+        VpnaasSiteConnectionV2Resource {
+              _admin_state_up = TF.Nil
+            , _description = TF.Nil
+            , _dpd = TF.Nil
+            , _ikepolicy_id = TF.Nil
+            , _initiator = TF.Nil
+            , _ipsecpolicy_id = TF.Nil
+            , _local_ep_group_id = TF.Nil
+            , _local_id = TF.Nil
+            , _mtu = TF.Nil
+            , _name = TF.Nil
+            , _peer_address = TF.Nil
+            , _peer_cidrs = TF.Nil
+            , _peer_ep_group_id = TF.Nil
+            , _peer_id = TF.Nil
+            , _psk = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
+            , _value_specs = TF.Nil
+            , _vpnservice_id = TF.Nil
             }

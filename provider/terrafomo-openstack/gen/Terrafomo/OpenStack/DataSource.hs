@@ -27,8 +27,23 @@ module Terrafomo.OpenStack.DataSource
       ComputeFlavorV2Data (..)
     , computeFlavorV2Data
 
+    , ComputeKeypairV2Data (..)
+    , computeKeypairV2Data
+
     , DnsZoneV2Data (..)
     , dnsZoneV2Data
+
+    , IdentityAuthScopeV3Data (..)
+    , identityAuthScopeV3Data
+
+    , IdentityProjectV3Data (..)
+    , identityProjectV3Data
+
+    , IdentityRoleV3Data (..)
+    , identityRoleV3Data
+
+    , IdentityUserV3Data (..)
+    , identityUserV3Data
 
     , ImagesImageV2Data (..)
     , imagesImageV2Data
@@ -51,19 +66,25 @@ module Terrafomo.OpenStack.DataSource
     , P.HasAvailabilityZoneHints (..)
     , P.HasCidr (..)
     , P.HasDefaultPrefixlen (..)
+    , P.HasDefaultProjectId (..)
     , P.HasDefaultQuota (..)
     , P.HasDescription (..)
     , P.HasDhcpDisabled (..)
     , P.HasDhcpEnabled (..)
     , P.HasDisk (..)
+    , P.HasDomainId (..)
     , P.HasEmail (..)
+    , P.HasEnabled (..)
     , P.HasGatewayIp (..)
+    , P.HasIdpId (..)
     , P.HasIpVersion (..)
     , P.HasIpv6AddressMode (..)
     , P.HasIpv6RaMode (..)
     , P.HasIsDefault (..)
+    , P.HasIsDomain (..)
     , P.HasMatchingSubnetCidr (..)
     , P.HasMaxPrefixlen (..)
+    , P.HasMemberStatus (..)
     , P.HasMinDisk (..)
     , P.HasMinPrefixlen (..)
     , P.HasMinRam (..)
@@ -71,9 +92,12 @@ module Terrafomo.OpenStack.DataSource
     , P.HasName (..)
     , P.HasNetworkId (..)
     , P.HasOwner (..)
+    , P.HasParentId (..)
+    , P.HasPasswordExpiresAt (..)
     , P.HasPrefixes (..)
     , P.HasProjectId (..)
     , P.HasProperties (..)
+    , P.HasProtocolId (..)
     , P.HasRam (..)
     , P.HasRegion (..)
     , P.HasRxTxFactor (..)
@@ -91,6 +115,7 @@ module Terrafomo.OpenStack.DataSource
     , P.HasTenantId (..)
     , P.HasTtl (..)
     , P.HasType' (..)
+    , P.HasUniqueId (..)
     , P.HasVcpus (..)
     , P.HasVisibility (..)
 
@@ -105,6 +130,7 @@ module Terrafomo.OpenStack.DataSource
     , P.HasComputedContainerFormat (..)
     , P.HasComputedCreatedAt (..)
     , P.HasComputedDefaultPrefixlen (..)
+    , P.HasComputedDefaultProjectId (..)
     , P.HasComputedDefaultQuota (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDhcpDisabled (..)
@@ -112,19 +138,24 @@ module Terrafomo.OpenStack.DataSource
     , P.HasComputedDisk (..)
     , P.HasComputedDiskFormat (..)
     , P.HasComputedDnsNameservers (..)
+    , P.HasComputedDomainId (..)
     , P.HasComputedEmail (..)
     , P.HasComputedEnableDhcp (..)
+    , P.HasComputedEnabled (..)
     , P.HasComputedFile (..)
     , P.HasComputedGatewayIp (..)
     , P.HasComputedHostRoutes (..)
+    , P.HasComputedIdpId (..)
     , P.HasComputedIpVersion (..)
     , P.HasComputedIpv6AddressMode (..)
     , P.HasComputedIpv6RaMode (..)
     , P.HasComputedIsDefault (..)
+    , P.HasComputedIsDomain (..)
     , P.HasComputedIsPublic (..)
     , P.HasComputedMasters (..)
     , P.HasComputedMatchingSubnetCidr (..)
     , P.HasComputedMaxPrefixlen (..)
+    , P.HasComputedMemberStatus (..)
     , P.HasComputedMetadata (..)
     , P.HasComputedMinDisk (..)
     , P.HasComputedMinDiskGb (..)
@@ -135,14 +166,22 @@ module Terrafomo.OpenStack.DataSource
     , P.HasComputedName (..)
     , P.HasComputedNetworkId (..)
     , P.HasComputedOwner (..)
+    , P.HasComputedParentId (..)
+    , P.HasComputedPasswordExpiresAt (..)
     , P.HasComputedPoolId (..)
     , P.HasComputedPrefixes (..)
+    , P.HasComputedProjectDomainId (..)
+    , P.HasComputedProjectDomainName (..)
     , P.HasComputedProjectId (..)
+    , P.HasComputedProjectName (..)
     , P.HasComputedProperties (..)
     , P.HasComputedProtected (..)
+    , P.HasComputedProtocolId (..)
+    , P.HasComputedPublicKey (..)
     , P.HasComputedRam (..)
     , P.HasComputedRegion (..)
     , P.HasComputedRevisionNumber (..)
+    , P.HasComputedRoles (..)
     , P.HasComputedRxTxFactor (..)
     , P.HasComputedSchema (..)
     , P.HasComputedSecgroupId (..)
@@ -163,8 +202,13 @@ module Terrafomo.OpenStack.DataSource
     , P.HasComputedTransferredAt (..)
     , P.HasComputedTtl (..)
     , P.HasComputedType' (..)
+    , P.HasComputedUniqueId (..)
     , P.HasComputedUpdateAt (..)
     , P.HasComputedUpdatedAt (..)
+    , P.HasComputedUserDomainId (..)
+    , P.HasComputedUserDomainName (..)
+    , P.HasComputedUserId (..)
+    , P.HasComputedUserName (..)
     , P.HasComputedVcpus (..)
     , P.HasComputedVersion (..)
     , P.HasComputedVisibility (..)
@@ -342,6 +386,50 @@ computeFlavorV2Data =
             , _vcpus = TF.Nil
             }
 
+{- | The @openstack_compute_keypair_v2@ OpenStack datasource.
+
+Use this data source to get the ID and public key of an OpenStack keypair.
+-}
+data ComputeKeypairV2Data s = ComputeKeypairV2Data {
+      _name   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The unique name of the keypair. -}
+    , _region :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V2 Compute client. If omitted, the @region@ argument of the provider is used. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeKeypairV2Data s) where
+    toHCL ComputeKeypairV2Data{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance P.HasName (ComputeKeypairV2Data s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeKeypairV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeKeypairV2Data s)
+
+instance P.HasRegion (ComputeKeypairV2Data s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: ComputeKeypairV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: ComputeKeypairV2Data s)
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeKeypairV2Data s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (ComputeKeypairV2Data s)) (TF.Attr s P.Text) where
+    computedPublicKey x = TF.compute (TF.refKey x) "public_key"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeKeypairV2Data s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+computeKeypairV2Data :: TF.DataSource P.OpenStack (ComputeKeypairV2Data s)
+computeKeypairV2Data =
+    TF.newDataSource "openstack_compute_keypair_v2" $
+        ComputeKeypairV2Data {
+              _name = TF.Nil
+            , _region = TF.Nil
+            }
+
 {- | The @openstack_dns_zone_v2@ OpenStack datasource.
 
 Use this data source to get the ID of an available OpenStack DNS zone.
@@ -470,12 +558,354 @@ dnsZoneV2Data =
             , _type' = TF.Nil
             }
 
+{- | The @openstack_identity_auth_scope_v3@ OpenStack datasource.
+
+Use this data source to get authentication information about the current
+auth scope in use. This can be used as self-discovery or introspection of
+the username or project name currently in use.
+-}
+data IdentityAuthScopeV3Data s = IdentityAuthScopeV3Data {
+      _name   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the scope. This is an arbitrary name which is only used as a unique identifier so an actual token isn't used as the ID. -}
+    , _region :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V3 Identity client. A Identity client is needed to retrieve tokens IDs. If omitted, the @region@ argument of the provider is used. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (IdentityAuthScopeV3Data s) where
+    toHCL IdentityAuthScopeV3Data{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance P.HasName (IdentityAuthScopeV3Data s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: IdentityAuthScopeV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: IdentityAuthScopeV3Data s)
+
+instance P.HasRegion (IdentityAuthScopeV3Data s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: IdentityAuthScopeV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: IdentityAuthScopeV3Data s)
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: IdentityAuthScopeV3Data s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedProjectDomainId (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
+    computedProjectDomainId x = TF.compute (TF.refKey x) "project_domain_id"
+
+instance s ~ s' => P.HasComputedProjectDomainName (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
+    computedProjectDomainName x = TF.compute (TF.refKey x) "project_domain_name"
+
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
+    computedProjectId x = TF.compute (TF.refKey x) "project_id"
+
+instance s ~ s' => P.HasComputedProjectName (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
+    computedProjectName x = TF.compute (TF.refKey x) "project_name"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
+    computedRegion =
+        (_region :: IdentityAuthScopeV3Data s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRoles (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
+    computedRoles x = TF.compute (TF.refKey x) "roles"
+
+instance s ~ s' => P.HasComputedUserDomainId (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
+    computedUserDomainId x = TF.compute (TF.refKey x) "user_domain_id"
+
+instance s ~ s' => P.HasComputedUserDomainName (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
+    computedUserDomainName x = TF.compute (TF.refKey x) "user_domain_name"
+
+instance s ~ s' => P.HasComputedUserId (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
+    computedUserId x = TF.compute (TF.refKey x) "user_id"
+
+instance s ~ s' => P.HasComputedUserName (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
+    computedUserName x = TF.compute (TF.refKey x) "user_name"
+
+identityAuthScopeV3Data :: TF.DataSource P.OpenStack (IdentityAuthScopeV3Data s)
+identityAuthScopeV3Data =
+    TF.newDataSource "openstack_identity_auth_scope_v3" $
+        IdentityAuthScopeV3Data {
+              _name = TF.Nil
+            , _region = TF.Nil
+            }
+
+{- | The @openstack_identity_project_v3@ OpenStack datasource.
+
+Use this data source to get the ID of an OpenStack project.
+-}
+data IdentityProjectV3Data s = IdentityProjectV3Data {
+      _domain_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The domain this project belongs to. -}
+    , _enabled   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether the project is enabled or disabled. Valid values are @true@ and @false@ . -}
+    , _is_domain :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether this project is a domain. Valid values are @true@ and @false@ . -}
+    , _name      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the project. -}
+    , _parent_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The parent of this project. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (IdentityProjectV3Data s) where
+    toHCL IdentityProjectV3Data{..} = TF.inline $ catMaybes
+        [ TF.assign "domain_id" <$> TF.attribute _domain_id
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "is_domain" <$> TF.attribute _is_domain
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_id" <$> TF.attribute _parent_id
+        ]
+
+instance P.HasDomainId (IdentityProjectV3Data s) (TF.Attr s P.Text) where
+    domainId =
+        lens (_domain_id :: IdentityProjectV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _domain_id = a } :: IdentityProjectV3Data s)
+
+instance P.HasEnabled (IdentityProjectV3Data s) (TF.Attr s P.Text) where
+    enabled =
+        lens (_enabled :: IdentityProjectV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: IdentityProjectV3Data s)
+
+instance P.HasIsDomain (IdentityProjectV3Data s) (TF.Attr s P.Text) where
+    isDomain =
+        lens (_is_domain :: IdentityProjectV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _is_domain = a } :: IdentityProjectV3Data s)
+
+instance P.HasName (IdentityProjectV3Data s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: IdentityProjectV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: IdentityProjectV3Data s)
+
+instance P.HasParentId (IdentityProjectV3Data s) (TF.Attr s P.Text) where
+    parentId =
+        lens (_parent_id :: IdentityProjectV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _parent_id = a } :: IdentityProjectV3Data s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (IdentityProjectV3Data s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (IdentityProjectV3Data s)) (TF.Attr s P.Text) where
+    computedDomainId x = TF.compute (TF.refKey x) "domain_id"
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (IdentityProjectV3Data s)) (TF.Attr s P.Text) where
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+
+instance s ~ s' => P.HasComputedIsDomain (TF.Ref s' (IdentityProjectV3Data s)) (TF.Attr s P.Text) where
+    computedIsDomain x = TF.compute (TF.refKey x) "is_domain"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (IdentityProjectV3Data s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedParentId (TF.Ref s' (IdentityProjectV3Data s)) (TF.Attr s P.Text) where
+    computedParentId x = TF.compute (TF.refKey x) "parent_id"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityProjectV3Data s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+identityProjectV3Data :: TF.DataSource P.OpenStack (IdentityProjectV3Data s)
+identityProjectV3Data =
+    TF.newDataSource "openstack_identity_project_v3" $
+        IdentityProjectV3Data {
+              _domain_id = TF.Nil
+            , _enabled = TF.Nil
+            , _is_domain = TF.Nil
+            , _name = TF.Nil
+            , _parent_id = TF.Nil
+            }
+
+{- | The @openstack_identity_role_v3@ OpenStack datasource.
+
+Use this data source to get the ID of an OpenStack role.
+-}
+data IdentityRoleV3Data s = IdentityRoleV3Data {
+      _domain_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The domain the role belongs to. -}
+    , _name      :: !(TF.Attr s P.Text)
+    {- ^ - The name of the role. -}
+    , _region    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V3 Keystone client. If omitted, the @region@ argument of the provider is used. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (IdentityRoleV3Data s) where
+    toHCL IdentityRoleV3Data{..} = TF.inline $ catMaybes
+        [ TF.assign "domain_id" <$> TF.attribute _domain_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance P.HasDomainId (IdentityRoleV3Data s) (TF.Attr s P.Text) where
+    domainId =
+        lens (_domain_id :: IdentityRoleV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _domain_id = a } :: IdentityRoleV3Data s)
+
+instance P.HasName (IdentityRoleV3Data s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: IdentityRoleV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: IdentityRoleV3Data s)
+
+instance P.HasRegion (IdentityRoleV3Data s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: IdentityRoleV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: IdentityRoleV3Data s)
+
+instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (IdentityRoleV3Data s)) (TF.Attr s P.Text) where
+    computedDomainId x = TF.compute (TF.refKey x) "domain_id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (IdentityRoleV3Data s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityRoleV3Data s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+identityRoleV3Data :: TF.DataSource P.OpenStack (IdentityRoleV3Data s)
+identityRoleV3Data =
+    TF.newDataSource "openstack_identity_role_v3" $
+        IdentityRoleV3Data {
+              _domain_id = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            }
+
+{- | The @openstack_identity_user_v3@ OpenStack datasource.
+
+Use this data source to get the ID of an OpenStack user.
+-}
+data IdentityUserV3Data s = IdentityUserV3Data {
+      _default_project_id  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The default project this user belongs to. -}
+    , _description         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A description of the user. -}
+    , _domain_id           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The domain this user belongs to. -}
+    , _enabled             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether the user is enabled or disabled. Valid values are @true@ and @false@ . -}
+    , _idp_id              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The identity provider ID of the user. -}
+    , _name                :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the user. -}
+    , _password_expires_at :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Query for expired passwords. See the <https://developer.openstack.org/api-ref/identity/v3/#list-users> for more information on the query format. -}
+    , _protocol_id         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The protocol ID of the user. -}
+    , _unique_id           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The unique ID of the user. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (IdentityUserV3Data s) where
+    toHCL IdentityUserV3Data{..} = TF.inline $ catMaybes
+        [ TF.assign "default_project_id" <$> TF.attribute _default_project_id
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "domain_id" <$> TF.attribute _domain_id
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "idp_id" <$> TF.attribute _idp_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "password_expires_at" <$> TF.attribute _password_expires_at
+        , TF.assign "protocol_id" <$> TF.attribute _protocol_id
+        , TF.assign "unique_id" <$> TF.attribute _unique_id
+        ]
+
+instance P.HasDefaultProjectId (IdentityUserV3Data s) (TF.Attr s P.Text) where
+    defaultProjectId =
+        lens (_default_project_id :: IdentityUserV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _default_project_id = a } :: IdentityUserV3Data s)
+
+instance P.HasDescription (IdentityUserV3Data s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: IdentityUserV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: IdentityUserV3Data s)
+
+instance P.HasDomainId (IdentityUserV3Data s) (TF.Attr s P.Text) where
+    domainId =
+        lens (_domain_id :: IdentityUserV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _domain_id = a } :: IdentityUserV3Data s)
+
+instance P.HasEnabled (IdentityUserV3Data s) (TF.Attr s P.Text) where
+    enabled =
+        lens (_enabled :: IdentityUserV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: IdentityUserV3Data s)
+
+instance P.HasIdpId (IdentityUserV3Data s) (TF.Attr s P.Text) where
+    idpId =
+        lens (_idp_id :: IdentityUserV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _idp_id = a } :: IdentityUserV3Data s)
+
+instance P.HasName (IdentityUserV3Data s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: IdentityUserV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: IdentityUserV3Data s)
+
+instance P.HasPasswordExpiresAt (IdentityUserV3Data s) (TF.Attr s P.Text) where
+    passwordExpiresAt =
+        lens (_password_expires_at :: IdentityUserV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _password_expires_at = a } :: IdentityUserV3Data s)
+
+instance P.HasProtocolId (IdentityUserV3Data s) (TF.Attr s P.Text) where
+    protocolId =
+        lens (_protocol_id :: IdentityUserV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _protocol_id = a } :: IdentityUserV3Data s)
+
+instance P.HasUniqueId (IdentityUserV3Data s) (TF.Attr s P.Text) where
+    uniqueId =
+        lens (_unique_id :: IdentityUserV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _unique_id = a } :: IdentityUserV3Data s)
+
+instance s ~ s' => P.HasComputedDefaultProjectId (TF.Ref s' (IdentityUserV3Data s)) (TF.Attr s P.Text) where
+    computedDefaultProjectId x = TF.compute (TF.refKey x) "default_project_id"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (IdentityUserV3Data s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: IdentityUserV3Data s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (IdentityUserV3Data s)) (TF.Attr s P.Text) where
+    computedDomainId x = TF.compute (TF.refKey x) "domain_id"
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (IdentityUserV3Data s)) (TF.Attr s P.Text) where
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+
+instance s ~ s' => P.HasComputedIdpId (TF.Ref s' (IdentityUserV3Data s)) (TF.Attr s P.Text) where
+    computedIdpId x = TF.compute (TF.refKey x) "idp_id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (IdentityUserV3Data s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedPasswordExpiresAt (TF.Ref s' (IdentityUserV3Data s)) (TF.Attr s P.Text) where
+    computedPasswordExpiresAt x = TF.compute (TF.refKey x) "password_expires_at"
+
+instance s ~ s' => P.HasComputedProtocolId (TF.Ref s' (IdentityUserV3Data s)) (TF.Attr s P.Text) where
+    computedProtocolId x = TF.compute (TF.refKey x) "protocol_id"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityUserV3Data s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IdentityUserV3Data s)) (TF.Attr s P.Text) where
+    computedUniqueId x = TF.compute (TF.refKey x) "unique_id"
+
+identityUserV3Data :: TF.DataSource P.OpenStack (IdentityUserV3Data s)
+identityUserV3Data =
+    TF.newDataSource "openstack_identity_user_v3" $
+        IdentityUserV3Data {
+              _default_project_id = TF.Nil
+            , _description = TF.Nil
+            , _domain_id = TF.Nil
+            , _enabled = TF.Nil
+            , _idp_id = TF.Nil
+            , _name = TF.Nil
+            , _password_expires_at = TF.Nil
+            , _protocol_id = TF.Nil
+            , _unique_id = TF.Nil
+            }
+
 {- | The @openstack_images_image_v2@ OpenStack datasource.
 
 Use this data source to get the ID of an available OpenStack image.
 -}
 data ImagesImageV2Data s = ImagesImageV2Data {
-      _most_recent    :: !(TF.Attr s P.Text)
+      _member_status  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The status of the image. Must be one of "accepted", "pending", "rejected", or "all". -}
+    , _most_recent    :: !(TF.Attr s P.Text)
     {- ^ (Optional) If more than one result is returned, use the most recent image. -}
     , _name           :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the image. -}
@@ -501,7 +931,8 @@ data ImagesImageV2Data s = ImagesImageV2Data {
 
 instance TF.ToHCL (ImagesImageV2Data s) where
     toHCL ImagesImageV2Data{..} = TF.inline $ catMaybes
-        [ TF.assign "most_recent" <$> TF.attribute _most_recent
+        [ TF.assign "member_status" <$> TF.attribute _member_status
+        , TF.assign "most_recent" <$> TF.attribute _most_recent
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "owner" <$> TF.attribute _owner
         , TF.assign "properties" <$> TF.attribute _properties
@@ -513,6 +944,11 @@ instance TF.ToHCL (ImagesImageV2Data s) where
         , TF.assign "tag" <$> TF.attribute _tag
         , TF.assign "visibility" <$> TF.attribute _visibility
         ]
+
+instance P.HasMemberStatus (ImagesImageV2Data s) (TF.Attr s P.Text) where
+    memberStatus =
+        lens (_member_status :: ImagesImageV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _member_status = a } :: ImagesImageV2Data s)
 
 instance P.HasMostRecent (ImagesImageV2Data s) (TF.Attr s P.Text) where
     mostRecent =
@@ -583,6 +1019,11 @@ instance s ~ s' => P.HasComputedDiskFormat (TF.Ref s' (ImagesImageV2Data s)) (TF
 
 instance s ~ s' => P.HasComputedFile (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedFile x = TF.compute (TF.refKey x) "file"
+
+instance s ~ s' => P.HasComputedMemberStatus (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
+    computedMemberStatus =
+        (_member_status :: ImagesImageV2Data s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
@@ -665,7 +1106,8 @@ imagesImageV2Data :: TF.DataSource P.OpenStack (ImagesImageV2Data s)
 imagesImageV2Data =
     TF.newDataSource "openstack_images_image_v2" $
         ImagesImageV2Data {
-              _most_recent = TF.Nil
+              _member_status = TF.Nil
+            , _most_recent = TF.Nil
             , _name = TF.Nil
             , _owner = TF.Nil
             , _properties = TF.Nil

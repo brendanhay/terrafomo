@@ -30,6 +30,9 @@ module Terrafomo.PagerDuty.Resource
     , EscalationPolicyResource (..)
     , escalationPolicyResource
 
+    , ExtensionResource (..)
+    , extensionResource
+
     , MaintenanceWindowResource (..)
     , maintenanceWindowResource
 
@@ -65,7 +68,10 @@ module Terrafomo.PagerDuty.Resource
     , P.HasDescription (..)
     , P.HasEmail (..)
     , P.HasEndTime (..)
+    , P.HasEndpointUrl (..)
     , P.HasEscalationPolicy (..)
+    , P.HasExtensionObjects (..)
+    , P.HasExtensionSchema (..)
     , P.HasIntegrationEmail (..)
     , P.HasIntegrationKey (..)
     , P.HasJobTitle (..)
@@ -102,7 +108,10 @@ module Terrafomo.PagerDuty.Resource
     , P.HasComputedEmail (..)
     , P.HasComputedEnabled (..)
     , P.HasComputedEndTime (..)
+    , P.HasComputedEndpointUrl (..)
     , P.HasComputedEscalationPolicy (..)
+    , P.HasComputedExtensionObjects (..)
+    , P.HasComputedExtensionSchema (..)
     , P.HasComputedHtmlUrl (..)
     , P.HasComputedId (..)
     , P.HasComputedIntegrationEmail (..)
@@ -301,6 +310,87 @@ escalationPolicyResource =
             , _num_loops = TF.Nil
             , _rule = TF.Nil
             , _teams = TF.Nil
+            }
+
+{- | The @pagerduty_extension@ PagerDuty resource.
+
+An
+<https://v2.developer.pagerduty.com/v2/page/api-reference#!/Extensions/post_extensions>
+can be associated with a service.
+-}
+data ExtensionResource s = ExtensionResource {
+      _endpoint_url      :: !(TF.Attr s P.Text)
+    {- ^ (Required) The url of the extension. -}
+    , _extension_objects :: !(TF.Attr s P.Text)
+    {- ^ (Required) This is the objects for which the extension applies (An array of service ids). -}
+    , _extension_schema  :: !(TF.Attr s P.Text)
+    {- ^ (Required) This is the schema for this extension. -}
+    , _name              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the service extension. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ExtensionResource s) where
+    toHCL ExtensionResource{..} = TF.inline $ catMaybes
+        [ TF.assign "endpoint_url" <$> TF.attribute _endpoint_url
+        , TF.assign "extension_objects" <$> TF.attribute _extension_objects
+        , TF.assign "extension_schema" <$> TF.attribute _extension_schema
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasEndpointUrl (ExtensionResource s) (TF.Attr s P.Text) where
+    endpointUrl =
+        lens (_endpoint_url :: ExtensionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _endpoint_url = a } :: ExtensionResource s)
+
+instance P.HasExtensionObjects (ExtensionResource s) (TF.Attr s P.Text) where
+    extensionObjects =
+        lens (_extension_objects :: ExtensionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _extension_objects = a } :: ExtensionResource s)
+
+instance P.HasExtensionSchema (ExtensionResource s) (TF.Attr s P.Text) where
+    extensionSchema =
+        lens (_extension_schema :: ExtensionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _extension_schema = a } :: ExtensionResource s)
+
+instance P.HasName (ExtensionResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ExtensionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ExtensionResource s)
+
+instance s ~ s' => P.HasComputedEndpointUrl (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
+    computedEndpointUrl =
+        (_endpoint_url :: ExtensionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedExtensionObjects (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
+    computedExtensionObjects =
+        (_extension_objects :: ExtensionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedExtensionSchema (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
+    computedExtensionSchema =
+        (_extension_schema :: ExtensionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
+    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ExtensionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+extensionResource :: TF.Resource P.PagerDuty (ExtensionResource s)
+extensionResource =
+    TF.newResource "pagerduty_extension" $
+        ExtensionResource {
+              _endpoint_url = TF.Nil
+            , _extension_objects = TF.Nil
+            , _extension_schema = TF.Nil
+            , _name = TF.Nil
             }
 
 {- | The @pagerduty_maintenance_window@ PagerDuty resource.

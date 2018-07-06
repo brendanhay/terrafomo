@@ -374,7 +374,7 @@ data DirectoryData s = DirectoryData {
     , _gid        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The group ID of the owner. -}
     , _mode       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The directory's permission mode. Note that the mode must be properly specified as a decimal value (i.e. 0755 -> 493). -}
+    {- ^ (Optional) The directory's permission mode. Note that the mode can be specified as a decimal value (i.e. 0755 -> 493) or an octal value(i.e 0755). -}
     , _path       :: !(TF.Attr s P.Text)
     {- ^ (Required) The absolute path to the directory. -}
     , _uid        :: !(TF.Attr s P.Text)
@@ -1001,7 +1001,7 @@ data SystemdUnitData s = SystemdUnitData {
     , _mask    :: !(TF.Attr s P.Bool)
     {- ^ (Optional) Whether or not the service shall be masked. When true, the service is masked by symlinking it to /dev/null . -}
     , _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) Tthe name of the unit. This must be suffixed with a valid unit type (e.g. thing.service ). -}
+    {- ^ (Required) The name of the unit. This must be suffixed with a valid unit type (e.g. thing.service ). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SystemdUnitData s) where

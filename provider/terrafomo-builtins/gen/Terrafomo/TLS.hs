@@ -14,9 +14,11 @@
 module Terrafomo.TLS
     ( module Terrafomo.TLS.Types
     , module Terrafomo.TLS.Lens
+    , module Terrafomo.TLS.DataSource
     , module Terrafomo.TLS.Resource
     ) where
 
+import Terrafomo.TLS.DataSource
 import Terrafomo.TLS.Lens
 import Terrafomo.TLS.Resource
 import Terrafomo.TLS.Types

@@ -30,18 +30,27 @@ module Terrafomo.Heroku.Lens
     , HasCertificateChain (..)
     , HasConfig (..)
     , HasConfigVars (..)
+    , HasDescription (..)
+    , HasEmail (..)
     , HasEnabled (..)
     , HasHostname (..)
     , HasName (..)
     , HasOrganization (..)
+    , HasPermissions (..)
     , HasPipeline (..)
     , HasPlan (..)
     , HasPrivateKey (..)
+    , HasQuantity (..)
     , HasRegion (..)
+    , HasShield (..)
+    , HasSize (..)
+    , HasSlugId (..)
     , HasSpace (..)
     , HasStack (..)
     , HasStage (..)
+    , HasType' (..)
     , HasUrl (..)
+    , HasVpcPeeringConnectionId (..)
 
     -- ** Computed Attributes
     , HasComputedAcm (..)
@@ -49,11 +58,16 @@ module Terrafomo.Heroku.Lens
     , HasComputedAllConfigVars (..)
     , HasComputedApp (..)
     , HasComputedAppId (..)
+    , HasComputedAwsAccountId (..)
+    , HasComputedAwsRegion (..)
     , HasComputedBuildpacks (..)
     , HasComputedCertificateChain (..)
     , HasComputedCname (..)
     , HasComputedConfig (..)
     , HasComputedConfigVars (..)
+    , HasComputedDescription (..)
+    , HasComputedDynoCidrBlocks (..)
+    , HasComputedEmail (..)
     , HasComputedEnabled (..)
     , HasComputedGitUrl (..)
     , HasComputedHerokuHostname (..)
@@ -61,16 +75,29 @@ module Terrafomo.Heroku.Lens
     , HasComputedId (..)
     , HasComputedName (..)
     , HasComputedOrganization (..)
+    , HasComputedOutboundIps (..)
+    , HasComputedPermissions (..)
     , HasComputedPipeline (..)
     , HasComputedPlan (..)
     , HasComputedPrivateKey (..)
     , HasComputedProviderId (..)
+    , HasComputedQuantity (..)
     , HasComputedRegion (..)
+    , HasComputedShield (..)
+    , HasComputedSize (..)
+    , HasComputedSlugId (..)
     , HasComputedSpace (..)
     , HasComputedStack (..)
     , HasComputedStage (..)
+    , HasComputedState (..)
+    , HasComputedStatus (..)
     , HasComputedToken (..)
+    , HasComputedType' (..)
+    , HasComputedUnavailableCidrBlocks (..)
     , HasComputedUrl (..)
+    , HasComputedVpcCidr (..)
+    , HasComputedVpcId (..)
+    , HasComputedVpcPeeringConnectionId (..)
     , HasComputedWebUrl (..)
     ) where
 
@@ -129,6 +156,18 @@ class HasConfigVars a b | a -> b where
 instance HasConfigVars a b => HasConfigVars (TF.Schema l p a) b where
     configVars = TF.configuration . configVars
 
+class HasDescription a b | a -> b where
+    description :: Lens' a b
+
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
+    description = TF.configuration . description
+
+class HasEmail a b | a -> b where
+    email :: Lens' a b
+
+instance HasEmail a b => HasEmail (TF.Schema l p a) b where
+    email = TF.configuration . email
+
 class HasEnabled a b | a -> b where
     enabled :: Lens' a b
 
@@ -153,6 +192,12 @@ class HasOrganization a b | a -> b where
 instance HasOrganization a b => HasOrganization (TF.Schema l p a) b where
     organization = TF.configuration . organization
 
+class HasPermissions a b | a -> b where
+    permissions :: Lens' a b
+
+instance HasPermissions a b => HasPermissions (TF.Schema l p a) b where
+    permissions = TF.configuration . permissions
+
 class HasPipeline a b | a -> b where
     pipeline :: Lens' a b
 
@@ -171,11 +216,35 @@ class HasPrivateKey a b | a -> b where
 instance HasPrivateKey a b => HasPrivateKey (TF.Schema l p a) b where
     privateKey = TF.configuration . privateKey
 
+class HasQuantity a b | a -> b where
+    quantity :: Lens' a b
+
+instance HasQuantity a b => HasQuantity (TF.Schema l p a) b where
+    quantity = TF.configuration . quantity
+
 class HasRegion a b | a -> b where
     region :: Lens' a b
 
 instance HasRegion a b => HasRegion (TF.Schema l p a) b where
     region = TF.configuration . region
+
+class HasShield a b | a -> b where
+    shield :: Lens' a b
+
+instance HasShield a b => HasShield (TF.Schema l p a) b where
+    shield = TF.configuration . shield
+
+class HasSize a b | a -> b where
+    size :: Lens' a b
+
+instance HasSize a b => HasSize (TF.Schema l p a) b where
+    size = TF.configuration . size
+
+class HasSlugId a b | a -> b where
+    slugId :: Lens' a b
+
+instance HasSlugId a b => HasSlugId (TF.Schema l p a) b where
+    slugId = TF.configuration . slugId
 
 class HasSpace a b | a -> b where
     space :: Lens' a b
@@ -195,11 +264,23 @@ class HasStage a b | a -> b where
 instance HasStage a b => HasStage (TF.Schema l p a) b where
     stage = TF.configuration . stage
 
+class HasType' a b | a -> b where
+    type' :: Lens' a b
+
+instance HasType' a b => HasType' (TF.Schema l p a) b where
+    type' = TF.configuration . type'
+
 class HasUrl a b | a -> b where
     url :: Lens' a b
 
 instance HasUrl a b => HasUrl (TF.Schema l p a) b where
     url = TF.configuration . url
+
+class HasVpcPeeringConnectionId a b | a -> b where
+    vpcPeeringConnectionId :: Lens' a b
+
+instance HasVpcPeeringConnectionId a b => HasVpcPeeringConnectionId (TF.Schema l p a) b where
+    vpcPeeringConnectionId = TF.configuration . vpcPeeringConnectionId
 
 class HasComputedAcm a b | a -> b where
     computedAcm :: a -> b
@@ -216,6 +297,12 @@ class HasComputedApp a b | a -> b where
 class HasComputedAppId a b | a -> b where
     computedAppId :: a -> b
 
+class HasComputedAwsAccountId a b | a -> b where
+    computedAwsAccountId :: a -> b
+
+class HasComputedAwsRegion a b | a -> b where
+    computedAwsRegion :: a -> b
+
 class HasComputedBuildpacks a b | a -> b where
     computedBuildpacks :: a -> b
 
@@ -230,6 +317,15 @@ class HasComputedConfig a b | a -> b where
 
 class HasComputedConfigVars a b | a -> b where
     computedConfigVars :: a -> b
+
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
+
+class HasComputedDynoCidrBlocks a b | a -> b where
+    computedDynoCidrBlocks :: a -> b
+
+class HasComputedEmail a b | a -> b where
+    computedEmail :: a -> b
 
 class HasComputedEnabled a b | a -> b where
     computedEnabled :: a -> b
@@ -252,6 +348,12 @@ class HasComputedName a b | a -> b where
 class HasComputedOrganization a b | a -> b where
     computedOrganization :: a -> b
 
+class HasComputedOutboundIps a b | a -> b where
+    computedOutboundIps :: a -> b
+
+class HasComputedPermissions a b | a -> b where
+    computedPermissions :: a -> b
+
 class HasComputedPipeline a b | a -> b where
     computedPipeline :: a -> b
 
@@ -264,8 +366,20 @@ class HasComputedPrivateKey a b | a -> b where
 class HasComputedProviderId a b | a -> b where
     computedProviderId :: a -> b
 
+class HasComputedQuantity a b | a -> b where
+    computedQuantity :: a -> b
+
 class HasComputedRegion a b | a -> b where
     computedRegion :: a -> b
+
+class HasComputedShield a b | a -> b where
+    computedShield :: a -> b
+
+class HasComputedSize a b | a -> b where
+    computedSize :: a -> b
+
+class HasComputedSlugId a b | a -> b where
+    computedSlugId :: a -> b
 
 class HasComputedSpace a b | a -> b where
     computedSpace :: a -> b
@@ -276,11 +390,32 @@ class HasComputedStack a b | a -> b where
 class HasComputedStage a b | a -> b where
     computedStage :: a -> b
 
+class HasComputedState a b | a -> b where
+    computedState :: a -> b
+
+class HasComputedStatus a b | a -> b where
+    computedStatus :: a -> b
+
 class HasComputedToken a b | a -> b where
     computedToken :: a -> b
 
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b
+
+class HasComputedUnavailableCidrBlocks a b | a -> b where
+    computedUnavailableCidrBlocks :: a -> b
+
 class HasComputedUrl a b | a -> b where
     computedUrl :: a -> b
+
+class HasComputedVpcCidr a b | a -> b where
+    computedVpcCidr :: a -> b
+
+class HasComputedVpcId a b | a -> b where
+    computedVpcId :: a -> b
+
+class HasComputedVpcPeeringConnectionId a b | a -> b where
+    computedVpcPeeringConnectionId :: a -> b
 
 class HasComputedWebUrl a b | a -> b where
     computedWebUrl :: a -> b

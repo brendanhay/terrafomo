@@ -24,7 +24,10 @@
 module Terrafomo.AliCloud.DataSource
     (
     -- * Types
-      DnsDomainsData (..)
+      DbInstancesData (..)
+    , dbInstancesData
+
+    , DnsDomainsData (..)
     , dnsDomainsData
 
     , DnsGroupsData (..)
@@ -72,6 +75,12 @@ module Terrafomo.AliCloud.DataSource
     , RegionsData (..)
     , regionsData
 
+    , SecurityGroupRulesData (..)
+    , securityGroupRulesData
+
+    , SecurityGroupsData (..)
+    , securityGroupsData
+
     , VpcsData (..)
     , vpcsData
 
@@ -89,33 +98,45 @@ module Terrafomo.AliCloud.DataSource
     , P.HasAvailableInstanceType (..)
     , P.HasAvailableResourceCreation (..)
     , P.HasCidrBlock (..)
+    , P.HasConnectionMode (..)
     , P.HasCpuCoreCount (..)
     , P.HasCurrent (..)
+    , P.HasDbType (..)
     , P.HasDescriptionRegex (..)
+    , P.HasDirection (..)
     , P.HasDomainName (..)
     , P.HasDomainNameRegex (..)
+    , P.HasEngine (..)
     , P.HasFingerPrint (..)
+    , P.HasGroupId (..)
     , P.HasGroupName (..)
     , P.HasGroupNameRegex (..)
     , P.HasHostRecordRegex (..)
     , P.HasIds (..)
     , P.HasImageId (..)
+    , P.HasInstanceChargeType (..)
     , P.HasInstanceId (..)
     , P.HasInstanceTypeFamily (..)
     , P.HasIpAddresses (..)
+    , P.HasIpProtocol (..)
     , P.HasIsDefault (..)
     , P.HasIsLocked (..)
     , P.HasIsOutdated (..)
     , P.HasLine (..)
     , P.HasMemorySize (..)
     , P.HasMostRecent (..)
+    , P.HasMulti (..)
     , P.HasName (..)
     , P.HasNameRegex (..)
+    , P.HasNetworkType (..)
+    , P.HasNicType (..)
     , P.HasOutputFile (..)
     , P.HasOwners (..)
+    , P.HasPolicy (..)
     , P.HasPolicyName (..)
     , P.HasPolicyType (..)
     , P.HasRoleName (..)
+    , P.HasSpotStrategy (..)
     , P.HasStatus (..)
     , P.HasTags (..)
     , P.HasType' (..)
@@ -134,23 +155,28 @@ module Terrafomo.AliCloud.DataSource
     , P.HasComputedAssumeRolePolicyDocument (..)
     , P.HasComputedAttachmentCount (..)
     , P.HasComputedAvailabilityZone (..)
+    , P.HasComputedAvailabilityZones (..)
     , P.HasComputedAvailableDiskCategories (..)
     , P.HasComputedAvailableDiskCategory (..)
     , P.HasComputedAvailableInstanceType (..)
     , P.HasComputedAvailableInstanceTypes (..)
     , P.HasComputedAvailableResourceCreation (..)
+    , P.HasComputedBurstableInstance (..)
     , P.HasComputedCidrBlock (..)
     , P.HasComputedComments (..)
+    , P.HasComputedConnectionMode (..)
     , P.HasComputedCpuCoreCount (..)
     , P.HasComputedCreateDate (..)
     , P.HasComputedCreationDate (..)
     , P.HasComputedCreationTime (..)
     , P.HasComputedCreator (..)
     , P.HasComputedCurrent (..)
+    , P.HasComputedDbType (..)
     , P.HasComputedDefaultVersion (..)
     , P.HasComputedDeleteDate (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDescriptionRegex (..)
+    , P.HasComputedDirection (..)
     , P.HasComputedDiskDeviceMappings (..)
     , P.HasComputedDnsServers (..)
     , P.HasComputedDocument (..)
@@ -158,8 +184,12 @@ module Terrafomo.AliCloud.DataSource
     , P.HasComputedDomainName (..)
     , P.HasComputedDomainNameRegex (..)
     , P.HasComputedEips (..)
+    , P.HasComputedEngine (..)
+    , P.HasComputedEniAmount (..)
     , P.HasComputedFamily' (..)
     , P.HasComputedFingerPrint (..)
+    , P.HasComputedGpu (..)
+    , P.HasComputedGroupDesc (..)
     , P.HasComputedGroupId (..)
     , P.HasComputedGroupName (..)
     , P.HasComputedGroupNameRegex (..)
@@ -170,10 +200,13 @@ module Terrafomo.AliCloud.DataSource
     , P.HasComputedImageId (..)
     , P.HasComputedImageOwnerAlias (..)
     , P.HasComputedImageVersion (..)
+    , P.HasComputedInnerAccess (..)
+    , P.HasComputedInstanceChargeType (..)
     , P.HasComputedInstanceId (..)
     , P.HasComputedInstanceTypeFamily (..)
     , P.HasComputedInstances (..)
     , P.HasComputedIpAddresses (..)
+    , P.HasComputedIpProtocol (..)
     , P.HasComputedIsDefault (..)
     , P.HasComputedIsLocked (..)
     , P.HasComputedIsOutdated (..)
@@ -182,14 +215,19 @@ module Terrafomo.AliCloud.DataSource
     , P.HasComputedLastLoginDate (..)
     , P.HasComputedLine (..)
     , P.HasComputedLocalName (..)
+    , P.HasComputedLocalStorage (..)
     , P.HasComputedLocked (..)
     , P.HasComputedMemorySize (..)
     , P.HasComputedMostRecent (..)
+    , P.HasComputedMulti (..)
     , P.HasComputedName (..)
     , P.HasComputedNameRegex (..)
+    , P.HasComputedNetworkType (..)
+    , P.HasComputedNicType (..)
     , P.HasComputedOsName (..)
     , P.HasComputedOutputFile (..)
     , P.HasComputedOwners (..)
+    , P.HasComputedPolicy (..)
     , P.HasComputedPolicyName (..)
     , P.HasComputedPolicyType (..)
     , P.HasComputedPriority (..)
@@ -200,7 +238,9 @@ module Terrafomo.AliCloud.DataSource
     , P.HasComputedRegionId (..)
     , P.HasComputedRoleName (..)
     , P.HasComputedRouteTableId (..)
+    , P.HasComputedRules (..)
     , P.HasComputedSize (..)
+    , P.HasComputedSpotStrategy (..)
     , P.HasComputedStatus (..)
     , P.HasComputedTags (..)
     , P.HasComputedTtl (..)
@@ -244,6 +284,155 @@ import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
+
+{- | The @alicloud_db_instances@ AliCloud datasource.
+
+The @alicloud_db_instances@ data source provides a collection of RDS
+instances available in Alicloud account. Filters support regular expression
+for the instance name, searches by tags, and other filters which are listed
+below.
+-}
+data DbInstancesData s = DbInstancesData {
+      _connection_mode :: !(TF.Attr s P.Text)
+    {- ^ (Optional) @Standard@ for standard access mode and @Safe@ for high security access mode. -}
+    , _db_type         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) @Primary@ for primary instance, @ReadOnly@ for read-only instance, @Guard@ for disaster recovery instance, and @Temp@ for temporary instance. -}
+    , _engine          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Database type. Options are @MySQL@ , @SQLServer@ , @PostgreSQL@ and @PPAS@ . If no value is specified, all types are returned. -}
+    , _name_regex      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A regex string to apply to the instance name. -}
+    , _output_file     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of file that can save the collection of instances after running @terraform plan@ . -}
+    , _status          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Status of the instance. -}
+    , _tags            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Query the instance bound to the tag. The format of the incoming value is @json@ string, including @TagKey@ and @TagValue@ . @TagKey@ cannot be null, and @TagValue@ can be empty. Format example @{"key1":"value1"}@ . -}
+    , _vpc_id          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Used to retrieve instances belong to specified VPC. -}
+    , _vswitch_id      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Used to retrieve instances belong to specified @vswitch@ resources. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DbInstancesData s) where
+    toHCL DbInstancesData{..} = TF.inline $ catMaybes
+        [ TF.assign "connection_mode" <$> TF.attribute _connection_mode
+        , TF.assign "db_type" <$> TF.attribute _db_type
+        , TF.assign "engine" <$> TF.attribute _engine
+        , TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        , TF.assign "vswitch_id" <$> TF.attribute _vswitch_id
+        ]
+
+instance P.HasConnectionMode (DbInstancesData s) (TF.Attr s P.Text) where
+    connectionMode =
+        lens (_connection_mode :: DbInstancesData s -> TF.Attr s P.Text)
+             (\s a -> s { _connection_mode = a } :: DbInstancesData s)
+
+instance P.HasDbType (DbInstancesData s) (TF.Attr s P.Text) where
+    dbType =
+        lens (_db_type :: DbInstancesData s -> TF.Attr s P.Text)
+             (\s a -> s { _db_type = a } :: DbInstancesData s)
+
+instance P.HasEngine (DbInstancesData s) (TF.Attr s P.Text) where
+    engine =
+        lens (_engine :: DbInstancesData s -> TF.Attr s P.Text)
+             (\s a -> s { _engine = a } :: DbInstancesData s)
+
+instance P.HasNameRegex (DbInstancesData s) (TF.Attr s P.Text) where
+    nameRegex =
+        lens (_name_regex :: DbInstancesData s -> TF.Attr s P.Text)
+             (\s a -> s { _name_regex = a } :: DbInstancesData s)
+
+instance P.HasOutputFile (DbInstancesData s) (TF.Attr s P.Text) where
+    outputFile =
+        lens (_output_file :: DbInstancesData s -> TF.Attr s P.Text)
+             (\s a -> s { _output_file = a } :: DbInstancesData s)
+
+instance P.HasStatus (DbInstancesData s) (TF.Attr s P.Text) where
+    status =
+        lens (_status :: DbInstancesData s -> TF.Attr s P.Text)
+             (\s a -> s { _status = a } :: DbInstancesData s)
+
+instance P.HasTags (DbInstancesData s) (TF.Attr s P.Text) where
+    tags =
+        lens (_tags :: DbInstancesData s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: DbInstancesData s)
+
+instance P.HasVpcId (DbInstancesData s) (TF.Attr s P.Text) where
+    vpcId =
+        lens (_vpc_id :: DbInstancesData s -> TF.Attr s P.Text)
+             (\s a -> s { _vpc_id = a } :: DbInstancesData s)
+
+instance P.HasVswitchId (DbInstancesData s) (TF.Attr s P.Text) where
+    vswitchId =
+        lens (_vswitch_id :: DbInstancesData s -> TF.Attr s P.Text)
+             (\s a -> s { _vswitch_id = a } :: DbInstancesData s)
+
+instance s ~ s' => P.HasComputedConnectionMode (TF.Ref s' (DbInstancesData s)) (TF.Attr s P.Text) where
+    computedConnectionMode =
+        (_connection_mode :: DbInstancesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDbType (TF.Ref s' (DbInstancesData s)) (TF.Attr s P.Text) where
+    computedDbType =
+        (_db_type :: DbInstancesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEngine (TF.Ref s' (DbInstancesData s)) (TF.Attr s P.Text) where
+    computedEngine =
+        (_engine :: DbInstancesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (DbInstancesData s)) (TF.Attr s P.Text) where
+    computedInstances x = TF.compute (TF.refKey x) "instances"
+
+instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (DbInstancesData s)) (TF.Attr s P.Text) where
+    computedNameRegex =
+        (_name_regex :: DbInstancesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (DbInstancesData s)) (TF.Attr s P.Text) where
+    computedOutputFile =
+        (_output_file :: DbInstancesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DbInstancesData s)) (TF.Attr s P.Text) where
+    computedStatus =
+        (_status :: DbInstancesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DbInstancesData s)) (TF.Attr s P.Text) where
+    computedTags =
+        (_tags :: DbInstancesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DbInstancesData s)) (TF.Attr s P.Text) where
+    computedVpcId =
+        (_vpc_id :: DbInstancesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (DbInstancesData s)) (TF.Attr s P.Text) where
+    computedVswitchId =
+        (_vswitch_id :: DbInstancesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+dbInstancesData :: TF.DataSource P.AliCloud (DbInstancesData s)
+dbInstancesData =
+    TF.newDataSource "alicloud_db_instances" $
+        DbInstancesData {
+              _connection_mode = TF.Nil
+            , _db_type = TF.Nil
+            , _engine = TF.Nil
+            , _name_regex = TF.Nil
+            , _output_file = TF.Nil
+            , _status = TF.Nil
+            , _tags = TF.Nil
+            , _vpc_id = TF.Nil
+            , _vswitch_id = TF.Nil
+            }
 
 {- | The @alicloud_dns_domains@ AliCloud datasource.
 
@@ -733,31 +922,41 @@ imagesData =
 
 The Instance Types data source list the ecs_instance_types of Alicloud. ~>
 NOTE: Default to provide upgraded instance types. If you want to get
-outdated instance types, you should set @is_outdated@ to true.
+outdated instance types, you should set @is_outdated@ to true. ~> NOTE: If
+one instance type is sold out, it will not be exported.
 -}
 data InstanceTypesData s = InstanceTypesData {
       _availability_zone    :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Zone that supports available instance types. -}
     , _cpu_core_count       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Limit search to specific cpu core count. -}
+    , _instance_charge_type :: !(TF.Attr s P.Text)
+    {- ^ (Optional) According to ECS instance charge type to filter all results. Valid values: @PrePaid@ and @PostPaid@ . Default to @PostPaid@ . -}
     , _instance_type_family :: !(TF.Attr s P.Text)
     {- ^ (Optional) Allows to filter list of Instance Types based on their family name, for example 'ecs.n4'. -}
     , _is_outdated          :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to export outdated instance types. Default to false. -}
     , _memory_size          :: !(TF.Attr s P.Text)
     {- ^ (Optional) Limit search to specific memory size. -}
+    , _network_type         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) According to network type to filter all results. Valid values: @Classic@ and @Vpc@ . -}
     , _output_file          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of file that can save instance types data source after running @terraform plan@ . -}
+    , _spot_strategy        :: !(TF.Attr s P.Text)
+    {- ^ - - (Optional) According to ECS spot type to filter all results. Valid values: @NoSpot@ , @SpotWithPriceLimit@ and @SpotAsPriceGo@ . Default to @NoSpot@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (InstanceTypesData s) where
     toHCL InstanceTypesData{..} = TF.inline $ catMaybes
         [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "cpu_core_count" <$> TF.attribute _cpu_core_count
+        , TF.assign "instance_charge_type" <$> TF.attribute _instance_charge_type
         , TF.assign "instance_type_family" <$> TF.attribute _instance_type_family
         , TF.assign "is_outdated" <$> TF.attribute _is_outdated
         , TF.assign "memory_size" <$> TF.attribute _memory_size
+        , TF.assign "network_type" <$> TF.attribute _network_type
         , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "spot_strategy" <$> TF.attribute _spot_strategy
         ]
 
 instance P.HasAvailabilityZone (InstanceTypesData s) (TF.Attr s P.Text) where
@@ -769,6 +968,11 @@ instance P.HasCpuCoreCount (InstanceTypesData s) (TF.Attr s P.Text) where
     cpuCoreCount =
         lens (_cpu_core_count :: InstanceTypesData s -> TF.Attr s P.Text)
              (\s a -> s { _cpu_core_count = a } :: InstanceTypesData s)
+
+instance P.HasInstanceChargeType (InstanceTypesData s) (TF.Attr s P.Text) where
+    instanceChargeType =
+        lens (_instance_charge_type :: InstanceTypesData s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_charge_type = a } :: InstanceTypesData s)
 
 instance P.HasInstanceTypeFamily (InstanceTypesData s) (TF.Attr s P.Text) where
     instanceTypeFamily =
@@ -785,24 +989,51 @@ instance P.HasMemorySize (InstanceTypesData s) (TF.Attr s P.Text) where
         lens (_memory_size :: InstanceTypesData s -> TF.Attr s P.Text)
              (\s a -> s { _memory_size = a } :: InstanceTypesData s)
 
+instance P.HasNetworkType (InstanceTypesData s) (TF.Attr s P.Text) where
+    networkType =
+        lens (_network_type :: InstanceTypesData s -> TF.Attr s P.Text)
+             (\s a -> s { _network_type = a } :: InstanceTypesData s)
+
 instance P.HasOutputFile (InstanceTypesData s) (TF.Attr s P.Text) where
     outputFile =
         lens (_output_file :: InstanceTypesData s -> TF.Attr s P.Text)
              (\s a -> s { _output_file = a } :: InstanceTypesData s)
+
+instance P.HasSpotStrategy (InstanceTypesData s) (TF.Attr s P.Text) where
+    spotStrategy =
+        lens (_spot_strategy :: InstanceTypesData s -> TF.Attr s P.Text)
+             (\s a -> s { _spot_strategy = a } :: InstanceTypesData s)
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
     computedAvailabilityZone =
         (_availability_zone :: InstanceTypesData s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
+    computedAvailabilityZones x = TF.compute (TF.refKey x) "availability_zones"
+
+instance s ~ s' => P.HasComputedBurstableInstance (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
+    computedBurstableInstance x = TF.compute (TF.refKey x) "burstable_instance"
+
 instance s ~ s' => P.HasComputedCpuCoreCount (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
     computedCpuCoreCount x = TF.compute (TF.refKey x) "cpu_core_count"
+
+instance s ~ s' => P.HasComputedEniAmount (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
+    computedEniAmount x = TF.compute (TF.refKey x) "eni_amount"
 
 instance s ~ s' => P.HasComputedFamily' (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
     computedFamily' x = TF.compute (TF.refKey x) "family"
 
+instance s ~ s' => P.HasComputedGpu (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
+    computedGpu x = TF.compute (TF.refKey x) "gpu"
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstanceChargeType (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
+    computedInstanceChargeType =
+        (_instance_charge_type :: InstanceTypesData s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedInstanceTypeFamily (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
     computedInstanceTypeFamily =
@@ -814,12 +1045,25 @@ instance s ~ s' => P.HasComputedIsOutdated (TF.Ref s' (InstanceTypesData s)) (TF
         (_is_outdated :: InstanceTypesData s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedLocalStorage (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
+    computedLocalStorage x = TF.compute (TF.refKey x) "local_storage"
+
 instance s ~ s' => P.HasComputedMemorySize (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
     computedMemorySize x = TF.compute (TF.refKey x) "memory_size"
+
+instance s ~ s' => P.HasComputedNetworkType (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
+    computedNetworkType =
+        (_network_type :: InstanceTypesData s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
     computedOutputFile =
         (_output_file :: InstanceTypesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSpotStrategy (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
+    computedSpotStrategy =
+        (_spot_strategy :: InstanceTypesData s -> TF.Attr s P.Text)
             . TF.refValue
 
 instanceTypesData :: TF.DataSource P.AliCloud (InstanceTypesData s)
@@ -828,10 +1072,13 @@ instanceTypesData =
         InstanceTypesData {
               _availability_zone = TF.Nil
             , _cpu_core_count = TF.Nil
+            , _instance_charge_type = TF.Nil
             , _instance_type_family = TF.Nil
             , _is_outdated = TF.Nil
             , _memory_size = TF.Nil
+            , _network_type = TF.Nil
             , _output_file = TF.Nil
+            , _spot_strategy = TF.Nil
             }
 
 {- | The @alicloud_instances@ AliCloud datasource.
@@ -1669,6 +1916,193 @@ regionsData =
             , _output_file = TF.Nil
             }
 
+{- | The @alicloud_security_group_rules@ AliCloud datasource.
+
+The @alicloud_security_group_rules@ data source provides a collection of
+security permissions of a specific security group. Each collection item
+represents a single @ingress@ or @egress@ permission rule. The id of the
+security group can be provided via variable or filtered by another data
+source @alicloud_security_groups@ .
+-}
+data SecurityGroupRulesData s = SecurityGroupRulesData {
+      _direction   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Authorization direction, @ingress@ or @egress@ . -}
+    , _group_id    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The id of security group wich owns the rules. -}
+    , _ip_protocol :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The protocol. Can be @tcp@ , @udp@ , @icmp@ , @gre@ or @all@ . -}
+    , _nic_type    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Refers to the network type. Can be either @internet@ or @intranet@ . The default value is @internet@ . -}
+    , _output_file :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of file that can save security group rules after running @terraform plan@ . -}
+    , _policy      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Authorization policy. Can be either @accept@ or @drop@ . The default value is @accept@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SecurityGroupRulesData s) where
+    toHCL SecurityGroupRulesData{..} = TF.inline $ catMaybes
+        [ TF.assign "direction" <$> TF.attribute _direction
+        , TF.assign "group_id" <$> TF.attribute _group_id
+        , TF.assign "ip_protocol" <$> TF.attribute _ip_protocol
+        , TF.assign "nic_type" <$> TF.attribute _nic_type
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "policy" <$> TF.attribute _policy
+        ]
+
+instance P.HasDirection (SecurityGroupRulesData s) (TF.Attr s P.Text) where
+    direction =
+        lens (_direction :: SecurityGroupRulesData s -> TF.Attr s P.Text)
+             (\s a -> s { _direction = a } :: SecurityGroupRulesData s)
+
+instance P.HasGroupId (SecurityGroupRulesData s) (TF.Attr s P.Text) where
+    groupId =
+        lens (_group_id :: SecurityGroupRulesData s -> TF.Attr s P.Text)
+             (\s a -> s { _group_id = a } :: SecurityGroupRulesData s)
+
+instance P.HasIpProtocol (SecurityGroupRulesData s) (TF.Attr s P.Text) where
+    ipProtocol =
+        lens (_ip_protocol :: SecurityGroupRulesData s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_protocol = a } :: SecurityGroupRulesData s)
+
+instance P.HasNicType (SecurityGroupRulesData s) (TF.Attr s P.Text) where
+    nicType =
+        lens (_nic_type :: SecurityGroupRulesData s -> TF.Attr s P.Text)
+             (\s a -> s { _nic_type = a } :: SecurityGroupRulesData s)
+
+instance P.HasOutputFile (SecurityGroupRulesData s) (TF.Attr s P.Text) where
+    outputFile =
+        lens (_output_file :: SecurityGroupRulesData s -> TF.Attr s P.Text)
+             (\s a -> s { _output_file = a } :: SecurityGroupRulesData s)
+
+instance P.HasPolicy (SecurityGroupRulesData s) (TF.Attr s P.Text) where
+    policy =
+        lens (_policy :: SecurityGroupRulesData s -> TF.Attr s P.Text)
+             (\s a -> s { _policy = a } :: SecurityGroupRulesData s)
+
+instance s ~ s' => P.HasComputedDirection (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
+    computedDirection =
+        (_direction :: SecurityGroupRulesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedGroupDesc (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
+    computedGroupDesc x = TF.compute (TF.refKey x) "group_desc"
+
+instance s ~ s' => P.HasComputedGroupId (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
+    computedGroupId =
+        (_group_id :: SecurityGroupRulesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
+    computedGroupName x = TF.compute (TF.refKey x) "group_name"
+
+instance s ~ s' => P.HasComputedIpProtocol (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
+    computedIpProtocol =
+        (_ip_protocol :: SecurityGroupRulesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNicType (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
+    computedNicType =
+        (_nic_type :: SecurityGroupRulesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
+    computedOutputFile =
+        (_output_file :: SecurityGroupRulesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
+    computedPolicy =
+        (_policy :: SecurityGroupRulesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRules (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
+    computedRules x = TF.compute (TF.refKey x) "rules"
+
+securityGroupRulesData :: TF.DataSource P.AliCloud (SecurityGroupRulesData s)
+securityGroupRulesData =
+    TF.newDataSource "alicloud_security_group_rules" $
+        SecurityGroupRulesData {
+              _direction = TF.Nil
+            , _group_id = TF.Nil
+            , _ip_protocol = TF.Nil
+            , _nic_type = TF.Nil
+            , _output_file = TF.Nil
+            , _policy = TF.Nil
+            }
+
+{- | The @alicloud_security_groups@ AliCloud datasource.
+
+The Security Groups data source provides a list of Security Groups in an
+Alicloud account according to the specified filters.
+-}
+data SecurityGroupsData s = SecurityGroupsData {
+      _name_regex  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A regex string to apply to the security groups list returned by Alicloud. -}
+    , _output_file :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of file that can save security groups data source after running @terraform plan@ . -}
+    , _vpc_id      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Used to retrieve security groups belong to specified VPC ID. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SecurityGroupsData s) where
+    toHCL SecurityGroupsData{..} = TF.inline $ catMaybes
+        [ TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        ]
+
+instance P.HasNameRegex (SecurityGroupsData s) (TF.Attr s P.Text) where
+    nameRegex =
+        lens (_name_regex :: SecurityGroupsData s -> TF.Attr s P.Text)
+             (\s a -> s { _name_regex = a } :: SecurityGroupsData s)
+
+instance P.HasOutputFile (SecurityGroupsData s) (TF.Attr s P.Text) where
+    outputFile =
+        lens (_output_file :: SecurityGroupsData s -> TF.Attr s P.Text)
+             (\s a -> s { _output_file = a } :: SecurityGroupsData s)
+
+instance P.HasVpcId (SecurityGroupsData s) (TF.Attr s P.Text) where
+    vpcId =
+        lens (_vpc_id :: SecurityGroupsData s -> TF.Attr s P.Text)
+             (\s a -> s { _vpc_id = a } :: SecurityGroupsData s)
+
+instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
+    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInnerAccess (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
+    computedInnerAccess x = TF.compute (TF.refKey x) "inner_access"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedNameRegex (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
+    computedNameRegex =
+        (_name_regex :: SecurityGroupsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
+    computedOutputFile =
+        (_output_file :: SecurityGroupsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
+
+securityGroupsData :: TF.DataSource P.AliCloud (SecurityGroupsData s)
+securityGroupsData =
+    TF.newDataSource "alicloud_security_groups" $
+        SecurityGroupsData {
+              _name_regex = TF.Nil
+            , _output_file = TF.Nil
+            , _vpc_id = TF.Nil
+            }
+
 {- | The @alicloud_vpcs@ AliCloud datasource.
 
 The VPCs data source lists a number of VPCs resource information owned by an
@@ -1899,7 +2333,7 @@ vswitchesData =
 
 The Zones data source allows access to the list of Alicloud Zones which can
 be accessed by an Alicloud account within the region configured in the
-provider.
+provider. ~> NOTE: If one zone is sold out, it will not be exported.
 -}
 data ZonesData s = ZonesData {
       _available_disk_category     :: !(TF.Attr s P.Text)
@@ -1908,8 +2342,16 @@ data ZonesData s = ZonesData {
     {- ^ (Optional) Limit search to specific instance type. -}
     , _available_resource_creation :: !(TF.Attr s P.Text)
     {- ^ (Optional) Limit search to specific resource type. The following values are allowed @Instance@ , @Disk@ , @VSwitch@ and @Rds@ . -}
+    , _instance_charge_type        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) According to ECS instance charge type to filter all availability zones. Valid values: @PrePaid@ and @PostPaid@ . Default to @PostPaid@ . -}
+    , _multi                       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether to retrieve multiple availability. Default to @false@ . Multiple zone usually is used to launch RDS. -}
+    , _network_type                :: !(TF.Attr s P.Text)
+    {- ^ (Optional) According to network type to filter all availability zones. Valid values: @Classic@ and @Vpc@ . -}
     , _output_file                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of file that can save zones data source after running @terraform plan@ . -}
+    , _spot_strategy               :: !(TF.Attr s P.Text)
+    {- ^ - - (Optional) According to ECS spot type to filter all availability zones. Valid values: @NoSpot@ , @SpotWithPriceLimit@ and @SpotAsPriceGo@ . Default to @NoSpot@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ZonesData s) where
@@ -1917,7 +2359,11 @@ instance TF.ToHCL (ZonesData s) where
         [ TF.assign "available_disk_category" <$> TF.attribute _available_disk_category
         , TF.assign "available_instance_type" <$> TF.attribute _available_instance_type
         , TF.assign "available_resource_creation" <$> TF.attribute _available_resource_creation
+        , TF.assign "instance_charge_type" <$> TF.attribute _instance_charge_type
+        , TF.assign "multi" <$> TF.attribute _multi
+        , TF.assign "network_type" <$> TF.attribute _network_type
         , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "spot_strategy" <$> TF.attribute _spot_strategy
         ]
 
 instance P.HasAvailableDiskCategory (ZonesData s) (TF.Attr s P.Text) where
@@ -1935,10 +2381,30 @@ instance P.HasAvailableResourceCreation (ZonesData s) (TF.Attr s P.Text) where
         lens (_available_resource_creation :: ZonesData s -> TF.Attr s P.Text)
              (\s a -> s { _available_resource_creation = a } :: ZonesData s)
 
+instance P.HasInstanceChargeType (ZonesData s) (TF.Attr s P.Text) where
+    instanceChargeType =
+        lens (_instance_charge_type :: ZonesData s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_charge_type = a } :: ZonesData s)
+
+instance P.HasMulti (ZonesData s) (TF.Attr s P.Text) where
+    multi =
+        lens (_multi :: ZonesData s -> TF.Attr s P.Text)
+             (\s a -> s { _multi = a } :: ZonesData s)
+
+instance P.HasNetworkType (ZonesData s) (TF.Attr s P.Text) where
+    networkType =
+        lens (_network_type :: ZonesData s -> TF.Attr s P.Text)
+             (\s a -> s { _network_type = a } :: ZonesData s)
+
 instance P.HasOutputFile (ZonesData s) (TF.Attr s P.Text) where
     outputFile =
         lens (_output_file :: ZonesData s -> TF.Attr s P.Text)
              (\s a -> s { _output_file = a } :: ZonesData s)
+
+instance P.HasSpotStrategy (ZonesData s) (TF.Attr s P.Text) where
+    spotStrategy =
+        lens (_spot_strategy :: ZonesData s -> TF.Attr s P.Text)
+             (\s a -> s { _spot_strategy = a } :: ZonesData s)
 
 instance s ~ s' => P.HasComputedAvailableDiskCategories (TF.Ref s' (ZonesData s)) (TF.Attr s P.Text) where
     computedAvailableDiskCategories x = TF.compute (TF.refKey x) "available_disk_categories"
@@ -1962,12 +2428,32 @@ instance s ~ s' => P.HasComputedAvailableResourceCreation (TF.Ref s' (ZonesData 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ZonesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+instance s ~ s' => P.HasComputedInstanceChargeType (TF.Ref s' (ZonesData s)) (TF.Attr s P.Text) where
+    computedInstanceChargeType =
+        (_instance_charge_type :: ZonesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedLocalName (TF.Ref s' (ZonesData s)) (TF.Attr s P.Text) where
     computedLocalName x = TF.compute (TF.refKey x) "local_name"
+
+instance s ~ s' => P.HasComputedMulti (TF.Ref s' (ZonesData s)) (TF.Attr s P.Text) where
+    computedMulti =
+        (_multi :: ZonesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNetworkType (TF.Ref s' (ZonesData s)) (TF.Attr s P.Text) where
+    computedNetworkType =
+        (_network_type :: ZonesData s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedOutputFile (TF.Ref s' (ZonesData s)) (TF.Attr s P.Text) where
     computedOutputFile =
         (_output_file :: ZonesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSpotStrategy (TF.Ref s' (ZonesData s)) (TF.Attr s P.Text) where
+    computedSpotStrategy =
+        (_spot_strategy :: ZonesData s -> TF.Attr s P.Text)
             . TF.refValue
 
 zonesData :: TF.DataSource P.AliCloud (ZonesData s)
@@ -1977,5 +2463,9 @@ zonesData =
               _available_disk_category = TF.Nil
             , _available_instance_type = TF.Nil
             , _available_resource_creation = TF.Nil
+            , _instance_charge_type = TF.Nil
+            , _multi = TF.Nil
+            , _network_type = TF.Nil
             , _output_file = TF.Nil
+            , _spot_strategy = TF.Nil
             }

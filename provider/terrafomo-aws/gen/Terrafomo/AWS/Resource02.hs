@@ -30,41 +30,35 @@ module Terrafomo.AWS.Resource02
     , AmiCopyResource (..)
     , amiCopyResource
 
-    , ApiGatewayApiKeyResource (..)
-    , apiGatewayApiKeyResource
-
     , ApiGatewayClientCertificateResource (..)
     , apiGatewayClientCertificateResource
-
-    , ApiGatewayDocumentationPartResource (..)
-    , apiGatewayDocumentationPartResource
 
     , ApiGatewayDocumentationVersionResource (..)
     , apiGatewayDocumentationVersionResource
 
-    , ApiGatewayGatewayResponseResource (..)
-    , apiGatewayGatewayResponseResource
-
     , ApiGatewayMethodResource (..)
     , apiGatewayMethodResource
 
-    , ApiGatewayUsagePlanResource (..)
-    , apiGatewayUsagePlanResource
+    , ApiGatewayModelResource (..)
+    , apiGatewayModelResource
 
-    , AppautoscalingPolicyResource (..)
-    , appautoscalingPolicyResource
+    , ApiGatewayStageResource (..)
+    , apiGatewayStageResource
+
+    , ApiGatewayVpcLinkResource (..)
+    , apiGatewayVpcLinkResource
+
+    , AppautoscalingScheduledActionResource (..)
+    , appautoscalingScheduledActionResource
 
     , AthenaDatabaseResource (..)
     , athenaDatabaseResource
 
-    , AthenaNamedQueryResource (..)
-    , athenaNamedQueryResource
+    , AutoscalingNotificationResource (..)
+    , autoscalingNotificationResource
 
-    , AutoscalingAttachmentResource (..)
-    , autoscalingAttachmentResource
-
-    , AutoscalingGroupResource (..)
-    , autoscalingGroupResource
+    , AutoscalingScheduleResource (..)
+    , autoscalingScheduleResource
 
     , BatchJobDefinitionResource (..)
     , batchJobDefinitionResource
@@ -72,23 +66,8 @@ module Terrafomo.AWS.Resource02
     , Cloud9EnvironmentEc2Resource (..)
     , cloud9EnvironmentEc2Resource
 
-    , CloudfrontOriginAccessIdentityResource (..)
-    , cloudfrontOriginAccessIdentityResource
-
-    , CloudwatchLogDestinationPolicyResource (..)
-    , cloudwatchLogDestinationPolicyResource
-
-    , CloudwatchLogGroupResource (..)
-    , cloudwatchLogGroupResource
-
-    , CloudwatchLogStreamResource (..)
-    , cloudwatchLogStreamResource
-
-    , CloudwatchLogSubscriptionFilterResource (..)
-    , cloudwatchLogSubscriptionFilterResource
-
-    , CodedeployAppResource (..)
-    , codedeployAppResource
+    , CodecommitTriggerResource (..)
+    , codecommitTriggerResource
 
     , CodedeployDeploymentGroupResource (..)
     , codedeployDeploymentGroupResource
@@ -99,20 +78,23 @@ module Terrafomo.AWS.Resource02
     , CognitoUserPoolResource (..)
     , cognitoUserPoolResource
 
+    , ConfigConfigRuleResource (..)
+    , configConfigRuleResource
+
     , ConfigConfigurationRecorderStatusResource (..)
     , configConfigurationRecorderStatusResource
 
     , ConfigDeliveryChannelResource (..)
     , configDeliveryChannelResource
 
-    , DbSnapshotResource (..)
-    , dbSnapshotResource
+    , DaxClusterResource (..)
+    , daxClusterResource
 
-    , DefaultRouteTableResource (..)
-    , defaultRouteTableResource
+    , DefaultVpcResource (..)
+    , defaultVpcResource
 
-    , DevicefarmProjectResource (..)
-    , devicefarmProjectResource
+    , DirectoryServiceConditionalForwarderResource (..)
+    , directoryServiceConditionalForwarderResource
 
     , DmsEndpointResource (..)
     , dmsEndpointResource
@@ -120,44 +102,47 @@ module Terrafomo.AWS.Resource02
     , DmsReplicationTaskResource (..)
     , dmsReplicationTaskResource
 
-    , DxConnectionAssociationResource (..)
-    , dxConnectionAssociationResource
+    , DxHostedPublicVirtualInterfaceResource (..)
+    , dxHostedPublicVirtualInterfaceResource
 
     , DxLagResource (..)
     , dxLagResource
 
+    , DxPrivateVirtualInterfaceResource (..)
+    , dxPrivateVirtualInterfaceResource
+
+    , DynamodbTableItemResource (..)
+    , dynamodbTableItemResource
+
     , EbsVolumeResource (..)
     , ebsVolumeResource
 
-    , EcrLifecyclePolicyResource (..)
-    , ecrLifecyclePolicyResource
+    , EcsClusterResource (..)
+    , ecsClusterResource
 
     , EcsServiceResource (..)
     , ecsServiceResource
 
-    , EfsMountTargetResource (..)
-    , efsMountTargetResource
-
-    , EgressOnlyInternetGatewayResource (..)
-    , egressOnlyInternetGatewayResource
-
     , ElasticBeanstalkConfigurationTemplateResource (..)
     , elasticBeanstalkConfigurationTemplateResource
-
-    , ElasticBeanstalkEnvironmentResource (..)
-    , elasticBeanstalkEnvironmentResource
 
     , ElasticacheParameterGroupResource (..)
     , elasticacheParameterGroupResource
 
-    , ElasticacheSubnetGroupResource (..)
-    , elasticacheSubnetGroupResource
+    , ElasticacheSecurityGroupResource (..)
+    , elasticacheSecurityGroupResource
+
+    , ElasticsearchDomainPolicyResource (..)
+    , elasticsearchDomainPolicyResource
 
     , ElasticsearchDomainResource (..)
     , elasticsearchDomainResource
 
     , ElastictranscoderPipelineResource (..)
     , elastictranscoderPipelineResource
+
+    , ElastictranscoderPresetResource (..)
+    , elastictranscoderPresetResource
 
     , ElbAttachmentResource (..)
     , elbAttachmentResource
@@ -168,8 +153,8 @@ module Terrafomo.AWS.Resource02
     , ElbResource (..)
     , elbResource
 
-    , EmrSecurityConfigurationResource (..)
-    , emrSecurityConfigurationResource
+    , EmrClusterResource (..)
+    , emrClusterResource
 
     , GameliftAliasResource (..)
     , gameliftAliasResource
@@ -180,14 +165,11 @@ module Terrafomo.AWS.Resource02
     , GlacierVaultResource (..)
     , glacierVaultResource
 
-    , GlueCatalogDatabaseResource (..)
-    , glueCatalogDatabaseResource
+    , GlueClassifierResource (..)
+    , glueClassifierResource
 
-    , GuarddutyIpsetResource (..)
-    , guarddutyIpsetResource
-
-    , GuarddutyMemberResource (..)
-    , guarddutyMemberResource
+    , GlueCrawlerResource (..)
+    , glueCrawlerResource
 
     , IamGroupPolicyResource (..)
     , iamGroupPolicyResource
@@ -195,38 +177,38 @@ module Terrafomo.AWS.Resource02
     , IamRolePolicyResource (..)
     , iamRolePolicyResource
 
-    , IamRoleResource (..)
-    , iamRoleResource
-
     , IamSamlProviderResource (..)
     , iamSamlProviderResource
 
-    , InspectorAssessmentTemplateResource (..)
-    , inspectorAssessmentTemplateResource
+    , IamUserLoginProfileResource (..)
+    , iamUserLoginProfileResource
+
+    , IamUserSshKeyResource (..)
+    , iamUserSshKeyResource
 
     , InspectorResourceGroupResource (..)
     , inspectorResourceGroupResource
 
-    , InstanceResource (..)
-    , instanceResource
-
     , InternetGatewayResource (..)
     , internetGatewayResource
 
-    , IotTopicRuleResource (..)
-    , iotTopicRuleResource
+    , KinesisStreamResource (..)
+    , kinesisStreamResource
 
     , LambdaEventSourceMappingResource (..)
     , lambdaEventSourceMappingResource
 
-    , LambdaFunctionResource (..)
-    , lambdaFunctionResource
+    , LambdaPermissionResource (..)
+    , lambdaPermissionResource
+
+    , LbListenerCertificateResource (..)
+    , lbListenerCertificateResource
 
     , LbListenerRuleResource (..)
     , lbListenerRuleResource
 
-    , LbTargetGroupResource (..)
-    , lbTargetGroupResource
+    , LbTargetGroupAttachmentResource (..)
+    , lbTargetGroupAttachmentResource
 
     , LightsailDomainResource (..)
     , lightsailDomainResource
@@ -237,17 +219,14 @@ module Terrafomo.AWS.Resource02
     , MqConfigurationResource (..)
     , mqConfigurationResource
 
-    , NatGatewayResource (..)
-    , natGatewayResource
-
-    , NetworkAclResource (..)
-    , networkAclResource
+    , NeptuneParameterGroupResource (..)
+    , neptuneParameterGroupResource
 
     , NetworkInterfaceSgAttachmentResource (..)
     , networkInterfaceSgAttachmentResource
 
-    , OpsworksJavaAppLayerResource (..)
-    , opsworksJavaAppLayerResource
+    , OpsworksGangliaLayerResource (..)
+    , opsworksGangliaLayerResource
 
     , OpsworksMemcachedLayerResource (..)
     , opsworksMemcachedLayerResource
@@ -261,41 +240,47 @@ module Terrafomo.AWS.Resource02
     , OpsworksUserProfileResource (..)
     , opsworksUserProfileResource
 
-    , RdsClusterResource (..)
-    , rdsClusterResource
+    , OrganizationsPolicyAttachmentResource (..)
+    , organizationsPolicyAttachmentResource
 
-    , Route53HealthCheckResource (..)
-    , route53HealthCheckResource
+    , RedshiftClusterResource (..)
+    , redshiftClusterResource
+
+    , Route53QueryLogResource (..)
+    , route53QueryLogResource
 
     , Route53RecordResource (..)
     , route53RecordResource
 
-    , Route53ZoneResource (..)
-    , route53ZoneResource
-
-    , RouteResource (..)
-    , routeResource
-
     , RouteTableAssociationResource (..)
     , routeTableAssociationResource
 
-    , S3BucketMetricResource (..)
-    , s3BucketMetricResource
+    , S3BucketInventoryResource (..)
+    , s3BucketInventoryResource
 
     , S3BucketResource (..)
     , s3BucketResource
 
+    , SecretsmanagerSecretResource (..)
+    , secretsmanagerSecretResource
+
     , SesEventDestinationResource (..)
     , sesEventDestinationResource
 
-    , SesReceiptRuleResource (..)
-    , sesReceiptRuleResource
+    , SesReceiptRuleSetResource (..)
+    , sesReceiptRuleSetResource
 
-    , SesTemplateResource (..)
-    , sesTemplateResource
+    , SnsSmsPreferencesResource (..)
+    , snsSmsPreferencesResource
 
-    , SpotDatafeedSubscriptionResource (..)
-    , spotDatafeedSubscriptionResource
+    , SnsTopicResource (..)
+    , snsTopicResource
+
+    , SpotFleetRequestResource (..)
+    , spotFleetRequestResource
+
+    , SqsQueueResource (..)
+    , sqsQueueResource
 
     , SsmAssociationResource (..)
     , ssmAssociationResource
@@ -303,14 +288,11 @@ module Terrafomo.AWS.Resource02
     , SsmParameterResource (..)
     , ssmParameterResource
 
-    , VpcEndpointConnectionNotificationResource (..)
-    , vpcEndpointConnectionNotificationResource
-
-    , VpcEndpointResource (..)
-    , vpcEndpointResource
-
     , VpcEndpointServiceAllowedPrincipalResource (..)
     , vpcEndpointServiceAllowedPrincipalResource
+
+    , VpcPeeringConnectionOptionsResource (..)
+    , vpcPeeringConnectionOptionsResource
 
     , VpcPeeringConnectionResource (..)
     , vpcPeeringConnectionResource
@@ -318,50 +300,63 @@ module Terrafomo.AWS.Resource02
     , VpnConnectionRouteResource (..)
     , vpnConnectionRouteResource
 
-    , WafIpsetResource (..)
-    , wafIpsetResource
+    , WafByteMatchSetResource (..)
+    , wafByteMatchSetResource
 
     , WafRateBasedRuleResource (..)
     , wafRateBasedRuleResource
+
+    , WafRegexPatternSetResource (..)
+    , wafRegexPatternSetResource
+
+    , WafregionalRateBasedRuleResource (..)
+    , wafregionalRateBasedRuleResource
+
+    , WafregionalRegexPatternSetResource (..)
+    , wafregionalRegexPatternSetResource
+
+    , WafregionalSizeConstraintSetResource (..)
+    , wafregionalSizeConstraintSetResource
 
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasAccelerationStatus (..)
     , P.HasAccepter (..)
+    , P.HasAccessLogSettings (..)
     , P.HasAccessLogs (..)
     , P.HasAccessPolicies (..)
     , P.HasAccessPolicy (..)
-    , P.HasAccountId (..)
     , P.HasAcl (..)
     , P.HasAction (..)
-    , P.HasActivate (..)
-    , P.HasAddHeaderAction (..)
+    , P.HasAdditionalInfo (..)
+    , P.HasAddressFamily (..)
     , P.HasAdminCreateUserConfig (..)
     , P.HasAdvancedOptions (..)
-    , P.HasAfter (..)
     , P.HasAlarmConfiguration (..)
-    , P.HasAlbTargetGroupArn (..)
     , P.HasAlias (..)
     , P.HasAliasAttributes (..)
     , P.HasAllocatedMemory (..)
-    , P.HasAllocationId (..)
+    , P.HasAllocationStrategy (..)
     , P.HasAllowOverwrite (..)
     , P.HasAllowSelfManagement (..)
     , P.HasAllowSsh (..)
     , P.HasAllowSudo (..)
-    , P.HasAmi (..)
+    , P.HasAllowVersionUpgrade (..)
+    , P.HasAllowedPattern (..)
+    , P.HasAmazonAddress (..)
     , P.HasApiKeyRequired (..)
-    , P.HasApiStages (..)
     , P.HasAppName (..)
-    , P.HasAppServer (..)
-    , P.HasAppServerVersion (..)
     , P.HasApplication (..)
-    , P.HasApplyImmediately (..)
+    , P.HasApplicationFailureFeedbackRoleArn (..)
+    , P.HasApplicationSuccessFeedbackRoleArn (..)
+    , P.HasApplicationSuccessFeedbackSampleRate (..)
+    , P.HasApplications (..)
     , P.HasArtifactStore (..)
-    , P.HasAssociatePublicIpAddress (..)
     , P.HasAssociationName (..)
-    , P.HasAssumeRolePolicy (..)
+    , P.HasAudio (..)
+    , P.HasAudioCodecOptions (..)
     , P.HasAuthorization (..)
+    , P.HasAuthorizationScopes (..)
     , P.HasAuthorizerId (..)
     , P.HasAutoAccept (..)
     , P.HasAutoAssignElasticIps (..)
@@ -369,172 +364,182 @@ module Terrafomo.AWS.Resource02
     , P.HasAutoHealing (..)
     , P.HasAutoRollbackConfiguration (..)
     , P.HasAutoVerifiedAttributes (..)
+    , P.HasAutomatedSnapshotRetentionPeriod (..)
     , P.HasAutomaticStopTimeMinutes (..)
     , P.HasAutoscalingGroupName (..)
     , P.HasAutoscalingGroups (..)
+    , P.HasAutoscalingRole (..)
     , P.HasAvailabilityZone (..)
     , P.HasAvailabilityZones (..)
     , P.HasAwsKmsKeyArn (..)
-    , P.HasBackupRetentionPeriod (..)
     , P.HasBatchSize (..)
+    , P.HasBgpAsn (..)
+    , P.HasBgpAuthKey (..)
     , P.HasBlueGreenDeploymentConfig (..)
-    , P.HasBounceAction (..)
+    , P.HasBootstrapAction (..)
+    , P.HasBranches (..)
     , P.HasBucket (..)
     , P.HasBucketPrefix (..)
-    , P.HasCatalogId (..)
+    , P.HasByteMatchTuples (..)
+    , P.HasCacheClusterEnabled (..)
+    , P.HasCacheClusterSize (..)
     , P.HasCdcStartTime (..)
     , P.HasCertificateArn (..)
-    , P.HasChildHealthThreshold (..)
-    , P.HasChildHealthchecks (..)
-    , P.HasCloudwatchAlarmName (..)
-    , P.HasCloudwatchAlarmRegion (..)
+    , P.HasClassifiers (..)
+    , P.HasClientCertificateId (..)
     , P.HasCloudwatchDestination (..)
+    , P.HasCloudwatchLogGroupArn (..)
     , P.HasCluster (..)
     , P.HasClusterConfig (..)
     , P.HasClusterIdentifier (..)
-    , P.HasClusterIdentifierPrefix (..)
-    , P.HasCnamePrefix (..)
-    , P.HasComment (..)
+    , P.HasClusterName (..)
+    , P.HasClusterParameterGroupName (..)
+    , P.HasClusterSecurityGroups (..)
+    , P.HasClusterSubnetGroupName (..)
+    , P.HasClusterType (..)
+    , P.HasClusterVersion (..)
     , P.HasCondition (..)
     , P.HasConfiguration (..)
     , P.HasConfigurationSetName (..)
+    , P.HasConfigurations (..)
     , P.HasConnectionDraining (..)
     , P.HasConnectionDrainingTimeout (..)
-    , P.HasConnectionEvents (..)
     , P.HasConnectionId (..)
-    , P.HasConnectionNotificationArn (..)
     , P.HasConnectionsBandwidth (..)
+    , P.HasContainer (..)
     , P.HasContainerProperties (..)
+    , P.HasContentBasedDeduplication (..)
     , P.HasContentConfig (..)
     , P.HasContentConfigPermissions (..)
+    , P.HasContentType (..)
+    , P.HasCoreInstanceCount (..)
+    , P.HasCoreInstanceType (..)
     , P.HasCorsRule (..)
     , P.HasCrossZoneLoadBalancing (..)
+    , P.HasCustomAmiId (..)
+    , P.HasCustomData (..)
     , P.HasCustomInstanceProfileArn (..)
     , P.HasCustomJson (..)
     , P.HasCustomSecurityGroupIds (..)
+    , P.HasCustomerAddress (..)
     , P.HasData' (..)
-    , P.HasDatabase (..)
     , P.HasDatabaseName (..)
-    , P.HasDbClusterParameterGroupName (..)
-    , P.HasDbInstanceIdentifier (..)
-    , P.HasDbSnapshotIdentifier (..)
-    , P.HasDbSubnetGroupName (..)
-    , P.HasDeadLetterConfig (..)
-    , P.HasDefaultCooldown (..)
-    , P.HasDefaultRouteTableId (..)
-    , P.HasDelegationSetId (..)
+    , P.HasDefaultSenderId (..)
+    , P.HasDefaultSmsType (..)
+    , P.HasDelaySeconds (..)
+    , P.HasDeliveryPolicy (..)
+    , P.HasDeliveryStatusIamRoleArn (..)
+    , P.HasDeliveryStatusSuccessSamplingRate (..)
     , P.HasDeploymentConfigName (..)
     , P.HasDeploymentGroupName (..)
+    , P.HasDeploymentId (..)
     , P.HasDeploymentMaximumPercent (..)
     , P.HasDeploymentMinimumHealthyPercent (..)
     , P.HasDeploymentStyle (..)
-    , P.HasDeregistrationDelay (..)
     , P.HasDescription (..)
     , P.HasDesiredCapacity (..)
     , P.HasDesiredCount (..)
+    , P.HasDestination (..)
     , P.HasDestinationArn (..)
     , P.HasDestinationCidrBlock (..)
-    , P.HasDestinationIpv6CidrBlock (..)
-    , P.HasDestinationName (..)
-    , P.HasDetectorId (..)
     , P.HasDeviceConfiguration (..)
-    , P.HasDisableApiTermination (..)
-    , P.HasDistribution (..)
+    , P.HasDirectoryId (..)
+    , P.HasDisplayName (..)
+    , P.HasDnsIps (..)
     , P.HasDocumentVersion (..)
+    , P.HasDocumentationVersion (..)
     , P.HasDomainName (..)
     , P.HasDrainElbOnShutdown (..)
-    , P.HasDuration (..)
-    , P.HasEbsBlockDevice (..)
-    , P.HasEbsOptimized (..)
+    , P.HasDxGatewayId (..)
     , P.HasEbsOptions (..)
+    , P.HasEbsRootVolumeSize (..)
     , P.HasEbsVolume (..)
+    , P.HasEc2Attributes (..)
     , P.HasEc2TagFilter (..)
-    , P.HasEgress (..)
-    , P.HasEgressOnlyGatewayId (..)
+    , P.HasEc2TagSet (..)
+    , P.HasElasticIp (..)
     , P.HasElasticLoadBalancer (..)
     , P.HasElasticsearchVersion (..)
     , P.HasElb (..)
-    , P.HasEmail (..)
     , P.HasEmailConfiguration (..)
     , P.HasEmailVerificationMessage (..)
     , P.HasEmailVerificationSubject (..)
-    , P.HasEnableSni (..)
+    , P.HasEnableClassiclink (..)
+    , P.HasEnableDnsHostnames (..)
+    , P.HasEnableDnsSupport (..)
     , P.HasEnabled (..)
-    , P.HasEnabledMetrics (..)
+    , P.HasEncoding (..)
     , P.HasEncryptAtRest (..)
     , P.HasEncrypted (..)
+    , P.HasEncryptionType (..)
+    , P.HasEndTime (..)
     , P.HasEndpointId (..)
     , P.HasEndpointType (..)
-    , P.HasEngine (..)
     , P.HasEngineName (..)
     , P.HasEngineType (..)
     , P.HasEngineVersion (..)
-    , P.HasEnvironment (..)
+    , P.HasEnhancedVpcRouting (..)
     , P.HasEnvironmentId (..)
-    , P.HasEphemeralBlockDevice (..)
     , P.HasEventSourceArn (..)
+    , P.HasEvents (..)
+    , P.HasExcessCapacityTerminationPolicy (..)
     , P.HasExtraConnectionAttributes (..)
     , P.HasFailoverRoutingPolicy (..)
-    , P.HasFailureThreshold (..)
     , P.HasFamily' (..)
-    , P.HasFileSystemId (..)
-    , P.HasFilename (..)
+    , P.HasFifoQueue (..)
     , P.HasFilter (..)
-    , P.HasFilterPattern (..)
     , P.HasFinalSnapshotIdentifier (..)
-    , P.HasForceDelete (..)
+    , P.HasFleetType (..)
     , P.HasForceDestroy (..)
-    , P.HasFormat (..)
-    , P.HasFqdn (..)
     , P.HasFunctionName (..)
-    , P.HasGatewayId (..)
     , P.HasGeolocationRoutingPolicy (..)
+    , P.HasGrokClassifier (..)
     , P.HasGroup (..)
-    , P.HasHandler (..)
+    , P.HasGroupNames (..)
+    , P.HasHashKey (..)
     , P.HasHealthCheck (..)
-    , P.HasHealthCheckGracePeriod (..)
     , P.HasHealthCheckGracePeriodSeconds (..)
     , P.HasHealthCheckId (..)
-    , P.HasHealthCheckType (..)
-    , P.HasHtml (..)
+    , P.HasHttpFailureFeedbackRoleArn (..)
     , P.HasHttpMethod (..)
-    , P.HasIamDatabaseAuthenticationEnabled (..)
-    , P.HasIamInstanceProfile (..)
+    , P.HasHttpSuccessFeedbackRoleArn (..)
+    , P.HasHttpSuccessFeedbackSampleRate (..)
+    , P.HasIamFleetRole (..)
     , P.HasIamRole (..)
+    , P.HasIamRoleArn (..)
     , P.HasIamRoles (..)
     , P.HasIdleTimeout (..)
-    , P.HasIngress (..)
-    , P.HasInitialLifecycleHook (..)
+    , P.HasIncludedObjectVersions (..)
     , P.HasInputBucket (..)
+    , P.HasInputParameters (..)
     , P.HasInstallUpdatesOnBoot (..)
     , P.HasInstance' (..)
+    , P.HasInstanceGroup (..)
     , P.HasInstanceId (..)
-    , P.HasInstanceInitiatedShutdownBehavior (..)
+    , P.HasInstanceInterruptionBehaviour (..)
     , P.HasInstanceShutdownTimeout (..)
     , P.HasInstanceType (..)
     , P.HasInstances (..)
-    , P.HasInsufficientDataHealthStatus (..)
     , P.HasInternal (..)
-    , P.HasInvertHealthcheck (..)
     , P.HasIops (..)
-    , P.HasIpAddress (..)
-    , P.HasIpSetDescriptors (..)
-    , P.HasIpv6AddressCount (..)
-    , P.HasIpv6Addresses (..)
     , P.HasIsEnabled (..)
-    , P.HasJvmOptions (..)
-    , P.HasJvmType (..)
-    , P.HasJvmVersion (..)
+    , P.HasItem (..)
+    , P.HasJdbcTarget (..)
+    , P.HasJsonClassifier (..)
+    , P.HasKeepJobFlowAliveWhenNoSteps (..)
+    , P.HasKerberosAttributes (..)
     , P.HasKeyId (..)
-    , P.HasKeyName (..)
     , P.HasKinesisDestination (..)
+    , P.HasKmsDataKeyReusePeriodSeconds (..)
     , P.HasKmsKeyArn (..)
     , P.HasKmsKeyId (..)
-    , P.HasLagId (..)
-    , P.HasLambdaAction (..)
+    , P.HasKmsMasterKeyId (..)
     , P.HasLambdaConfig (..)
+    , P.HasLambdaFailureFeedbackRoleArn (..)
+    , P.HasLambdaSuccessFeedbackRoleArn (..)
+    , P.HasLambdaSuccessFeedbackSampleRate (..)
     , P.HasLatencyRoutingPolicy (..)
-    , P.HasLaunchConfiguration (..)
+    , P.HasLaunchSpecification (..)
     , P.HasLaunchType (..)
     , P.HasLevel (..)
     , P.HasLifecycleRule (..)
@@ -546,268 +551,278 @@ module Terrafomo.AWS.Resource02
     , P.HasLoadBalancerPort (..)
     , P.HasLoadBalancers (..)
     , P.HasLocation (..)
-    , P.HasLocationUri (..)
-    , P.HasLogGroupName (..)
     , P.HasLogPublishingOptions (..)
+    , P.HasLogUri (..)
     , P.HasLogging (..)
+    , P.HasMaintenanceWindow (..)
+    , P.HasMasterInstanceType (..)
     , P.HasMasterPassword (..)
     , P.HasMasterUsername (..)
     , P.HasMatchingTypes (..)
+    , P.HasMaxMessageSize (..)
     , P.HasMaxSize (..)
-    , P.HasMeasureLatency (..)
-    , P.HasMemorySize (..)
+    , P.HasMaximumExecutionFrequency (..)
+    , P.HasMessageRetentionSeconds (..)
     , P.HasMetricName (..)
-    , P.HasMetricsGranularity (..)
     , P.HasMfaConfiguration (..)
     , P.HasMigrationType (..)
-    , P.HasMinElbCapacity (..)
     , P.HasMinSize (..)
-    , P.HasMonitoring (..)
+    , P.HasMongodbSettings (..)
+    , P.HasMonthlySpendLimit (..)
     , P.HasMultivalueAnswerRoutingPolicy (..)
     , P.HasName (..)
     , P.HasNamePrefix (..)
-    , P.HasNatGatewayId (..)
     , P.HasNetworkConfiguration (..)
-    , P.HasNetworkInterface (..)
     , P.HasNetworkInterfaceId (..)
+    , P.HasNodeType (..)
     , P.HasNotification (..)
+    , P.HasNotificationTopicArn (..)
     , P.HasNotifications (..)
     , P.HasNumberOfConnections (..)
+    , P.HasNumberOfNodes (..)
     , P.HasOnPremisesInstanceTagFilter (..)
     , P.HasOperatingSystem (..)
+    , P.HasOptionalFields (..)
+    , P.HasOrderedPlacementStrategy (..)
     , P.HasOutputBucket (..)
     , P.HasOutputLocation (..)
     , P.HasOverwrite (..)
+    , P.HasOwnerAccount (..)
+    , P.HasOwnerAccountId (..)
     , P.HasOwnerArn (..)
     , P.HasParameter (..)
+    , P.HasParameterGroupName (..)
     , P.HasParameters (..)
     , P.HasPassword (..)
+    , P.HasPasswordLength (..)
     , P.HasPasswordPolicy (..)
+    , P.HasPasswordResetRequired (..)
     , P.HasPeerOwnerId (..)
     , P.HasPeerRegion (..)
     , P.HasPeerVpcId (..)
+    , P.HasPgpKey (..)
     , P.HasPlacementConstraints (..)
-    , P.HasPlacementGroup (..)
     , P.HasPlacementStrategy (..)
     , P.HasPolicy (..)
+    , P.HasPolicyId (..)
     , P.HasPolicyNames (..)
-    , P.HasPolicyType (..)
-    , P.HasPollInterval (..)
     , P.HasPort (..)
+    , P.HasPredicate (..)
     , P.HasPredicates (..)
-    , P.HasPreferredBackupWindow (..)
     , P.HasPreferredMaintenanceWindow (..)
-    , P.HasPrefix (..)
+    , P.HasPrincipal (..)
     , P.HasPrincipalArn (..)
     , P.HasPriority (..)
-    , P.HasPrivateDnsEnabled (..)
-    , P.HasPrivateIp (..)
-    , P.HasProductCode (..)
-    , P.HasPropagatingVgws (..)
-    , P.HasProperties (..)
-    , P.HasProtectFromScaleIn (..)
-    , P.HasProtocol (..)
-    , P.HasPublish (..)
-    , P.HasQuery (..)
-    , P.HasQuotaSettings (..)
+    , P.HasPublicKey (..)
+    , P.HasPubliclyAccessible (..)
+    , P.HasQualifier (..)
+    , P.HasRangeKey (..)
     , P.HasRateKey (..)
     , P.HasRateLimit (..)
-    , P.HasRecipients (..)
+    , P.HasReceiveWaitTimeSeconds (..)
     , P.HasRecords (..)
-    , P.HasReferenceName (..)
+    , P.HasRecoveryWindowInDays (..)
+    , P.HasRecurrence (..)
+    , P.HasRedrivePolicy (..)
+    , P.HasRegexPatternStrings (..)
     , P.HasRegion (..)
-    , P.HasRegions (..)
+    , P.HasReleaseLabel (..)
+    , P.HasRemoteDomainName (..)
+    , P.HasReplaceUnhealthyInstances (..)
     , P.HasReplicationConfiguration (..)
+    , P.HasReplicationFactor (..)
     , P.HasReplicationInstanceArn (..)
     , P.HasReplicationTaskId (..)
     , P.HasReplicationTaskSettings (..)
-    , P.HasRepository (..)
-    , P.HasRequestInterval (..)
+    , P.HasRepositoryName (..)
     , P.HasRequestModels (..)
     , P.HasRequestParameters (..)
     , P.HasRequestPayer (..)
     , P.HasRequestValidatorId (..)
     , P.HasRequester (..)
-    , P.HasReservedConcurrentExecutions (..)
     , P.HasResourceId (..)
-    , P.HasResourcePath (..)
-    , P.HasResponseParameters (..)
-    , P.HasResponseTemplates (..)
-    , P.HasResponseType (..)
     , P.HasRestApiId (..)
-    , P.HasRetentionInDays (..)
+    , P.HasRetentionPeriod (..)
     , P.HasRetryStrategy (..)
     , P.HasRole (..)
     , P.HasRoleArn (..)
-    , P.HasRootBlockDevice (..)
     , P.HasRootPassword (..)
     , P.HasRootPasswordOnAllInstances (..)
-    , P.HasRoute (..)
+    , P.HasRotationLambdaArn (..)
+    , P.HasRotationRules (..)
+    , P.HasRouteFilterPrefixes (..)
     , P.HasRouteTableId (..)
-    , P.HasRouteTableIds (..)
     , P.HasRoutingStrategy (..)
     , P.HasRuleSetName (..)
-    , P.HasRulesPackageArns (..)
-    , P.HasRuntime (..)
-    , P.HasS3Action (..)
-    , P.HasS3Bucket (..)
     , P.HasS3BucketName (..)
-    , P.HasS3Key (..)
     , P.HasS3KeyPrefix (..)
-    , P.HasS3ObjectVersion (..)
+    , P.HasS3Settings (..)
+    , P.HasS3Target (..)
     , P.HasSamlMetadataDocument (..)
     , P.HasScalableDimension (..)
-    , P.HasScanEnabled (..)
+    , P.HasScalableTargetAction (..)
+    , P.HasScaleDownBehavior (..)
+    , P.HasSchedule (..)
     , P.HasScheduleExpression (..)
+    , P.HasScheduledActionName (..)
+    , P.HasSchedulingStrategy (..)
     , P.HasSchema (..)
-    , P.HasSearchString (..)
+    , P.HasSchemaChangePolicy (..)
+    , P.HasScope (..)
+    , P.HasSecurityConfiguration (..)
     , P.HasSecurityGroupId (..)
     , P.HasSecurityGroupIds (..)
+    , P.HasSecurityGroupNames (..)
     , P.HasSecurityGroups (..)
     , P.HasServerName (..)
     , P.HasServerSideEncryptionConfiguration (..)
     , P.HasServiceAccessRole (..)
-    , P.HasServiceName (..)
     , P.HasServiceNamespace (..)
+    , P.HasServiceRegistries (..)
+    , P.HasServiceRole (..)
     , P.HasServiceRoleArn (..)
     , P.HasSetIdentifier (..)
     , P.HasSetting (..)
+    , P.HasShardCount (..)
+    , P.HasShardLevelMetrics (..)
     , P.HasSize (..)
+    , P.HasSizeConstraints (..)
     , P.HasSkipFinalSnapshot (..)
     , P.HasSmsAuthenticationMessage (..)
     , P.HasSmsConfiguration (..)
     , P.HasSmsVerificationMessage (..)
+    , P.HasSnapshotClusterIdentifier (..)
+    , P.HasSnapshotCopy (..)
     , P.HasSnapshotDeliveryProperties (..)
     , P.HasSnapshotId (..)
     , P.HasSnapshotIdentifier (..)
     , P.HasSnapshotOptions (..)
-    , P.HasSnsAction (..)
     , P.HasSnsDestination (..)
     , P.HasSnsTopicArn (..)
     , P.HasSolutionStackName (..)
+    , P.HasSource (..)
+    , P.HasSourceAccount (..)
     , P.HasSourceAmiId (..)
     , P.HasSourceAmiRegion (..)
-    , P.HasSourceCodeHash (..)
-    , P.HasSourceDestCheck (..)
+    , P.HasSourceArn (..)
     , P.HasSourceEndpointArn (..)
-    , P.HasSql (..)
-    , P.HasSqlVersion (..)
+    , P.HasSpotPrice (..)
+    , P.HasSqsFailureFeedbackRoleArn (..)
+    , P.HasSqsSuccessFeedbackRoleArn (..)
+    , P.HasSqsSuccessFeedbackSampleRate (..)
     , P.HasSshPublicKey (..)
     , P.HasSshUsername (..)
     , P.HasSslMode (..)
     , P.HasStackId (..)
     , P.HasStage (..)
-    , P.HasStageKey (..)
+    , P.HasStageName (..)
+    , P.HasStartTime (..)
     , P.HasStartingPosition (..)
-    , P.HasStatusCode (..)
-    , P.HasStepScalingPolicyConfiguration (..)
-    , P.HasStickiness (..)
-    , P.HasStopAction (..)
-    , P.HasStorageEncrypted (..)
+    , P.HasStatementId (..)
+    , P.HasStatementIdPrefix (..)
+    , P.HasStatus (..)
+    , P.HasStep (..)
     , P.HasStorageLocation (..)
-    , P.HasSubject (..)
+    , P.HasSubnetGroupName (..)
     , P.HasSubnetId (..)
-    , P.HasSubnetIds (..)
     , P.HasSubnets (..)
-    , P.HasSuspendedProcesses (..)
     , P.HasSystemPackages (..)
     , P.HasTableMappings (..)
-    , P.HasTag (..)
+    , P.HasTableName (..)
+    , P.HasTablePrefix (..)
     , P.HasTags (..)
-    , P.HasTargetArn (..)
+    , P.HasTargetArns (..)
+    , P.HasTargetCapacity (..)
     , P.HasTargetEndpointArn (..)
+    , P.HasTargetGroupArn (..)
     , P.HasTargetGroupArns (..)
-    , P.HasTargetTrackingScalingPolicyConfiguration (..)
-    , P.HasTargetType (..)
+    , P.HasTargetId (..)
     , P.HasTargets (..)
     , P.HasTaskDefinition (..)
-    , P.HasTemplateName (..)
-    , P.HasTenancy (..)
-    , P.HasTerminationPolicies (..)
-    , P.HasText (..)
-    , P.HasThrottleSettings (..)
+    , P.HasTerminateInstancesWithExpiration (..)
+    , P.HasTerminationProtection (..)
     , P.HasThumbnailConfig (..)
     , P.HasThumbnailConfigPermissions (..)
-    , P.HasTier (..)
+    , P.HasThumbnails (..)
     , P.HasTimeout (..)
-    , P.HasTlsPolicy (..)
+    , P.HasTopicArn (..)
     , P.HasTriggerConfiguration (..)
     , P.HasTtl (..)
     , P.HasType' (..)
+    , P.HasUrl (..)
+    , P.HasUsageReportS3Bucket (..)
     , P.HasUseEbsOptimizedInstances (..)
+    , P.HasUser (..)
     , P.HasUserArn (..)
-    , P.HasUserData (..)
-    , P.HasUserDataBase64 (..)
     , P.HasUsername (..)
     , P.HasUsernameAttributes (..)
+    , P.HasValidFrom (..)
+    , P.HasValidUntil (..)
     , P.HasValue (..)
+    , P.HasVariables (..)
     , P.HasVerificationMessageTemplate (..)
     , P.HasVersion (..)
-    , P.HasVersionLabel (..)
     , P.HasVersioning (..)
-    , P.HasVolumeTags (..)
-    , P.HasVpcConfig (..)
-    , P.HasVpcEndpointId (..)
+    , P.HasVideo (..)
+    , P.HasVideoCodecOptions (..)
+    , P.HasVideoWatermarks (..)
+    , P.HasVisibilityTimeoutSeconds (..)
+    , P.HasVisibleToAllUsers (..)
+    , P.HasVlan (..)
     , P.HasVpcEndpointServiceId (..)
-    , P.HasVpcEndpointType (..)
     , P.HasVpcId (..)
     , P.HasVpcOptions (..)
     , P.HasVpcPeeringConnectionId (..)
-    , P.HasVpcRegion (..)
     , P.HasVpcSecurityGroupIds (..)
-    , P.HasVpcZoneIdentifier (..)
     , P.HasVpnConnectionId (..)
-    , P.HasWaitForCapacityTimeout (..)
-    , P.HasWaitForElbCapacity (..)
-    , P.HasWaitForReadyTimeout (..)
+    , P.HasVpnGatewayId (..)
+    , P.HasWaitForFulfillment (..)
     , P.HasWebsite (..)
     , P.HasWeightedRoutingPolicy (..)
-    , P.HasWorkmailAction (..)
+    , P.HasXmlClassifier (..)
     , P.HasZoneId (..)
 
     -- ** Computed Attributes
     , P.HasComputedAccelerationStatus (..)
     , P.HasComputedAcceptStatus (..)
     , P.HasComputedAccepter (..)
+    , P.HasComputedAccessLogSettings (..)
     , P.HasComputedAccessLogs (..)
     , P.HasComputedAccessPolicies (..)
     , P.HasComputedAccessPolicy (..)
-    , P.HasComputedAccountId (..)
     , P.HasComputedAcl (..)
     , P.HasComputedAction (..)
-    , P.HasComputedActivate (..)
-    , P.HasComputedAddHeaderAction (..)
-    , P.HasComputedAdjustmentType (..)
+    , P.HasComputedAdditionalInfo (..)
+    , P.HasComputedAddressFamily (..)
     , P.HasComputedAdminCreateUserConfig (..)
     , P.HasComputedAdvancedOptions (..)
-    , P.HasComputedAfter (..)
     , P.HasComputedAlarmConfiguration (..)
-    , P.HasComputedAlbTargetGroupArn (..)
     , P.HasComputedAlias (..)
     , P.HasComputedAliasAttributes (..)
-    , P.HasComputedAllSettings (..)
     , P.HasComputedAllocatedMemory (..)
-    , P.HasComputedAllocatedStorage (..)
-    , P.HasComputedAllocationId (..)
+    , P.HasComputedAllocationStrategy (..)
     , P.HasComputedAllowOverwrite (..)
     , P.HasComputedAllowSelfManagement (..)
     , P.HasComputedAllowSsh (..)
     , P.HasComputedAllowSudo (..)
-    , P.HasComputedAmi (..)
+    , P.HasComputedAllowVersionUpgrade (..)
+    , P.HasComputedAllowedPattern (..)
+    , P.HasComputedAmazonAddress (..)
     , P.HasComputedApiKeyRequired (..)
-    , P.HasComputedApiStages (..)
     , P.HasComputedAppName (..)
-    , P.HasComputedAppServer (..)
-    , P.HasComputedAppServerVersion (..)
     , P.HasComputedApplication (..)
-    , P.HasComputedApplyImmediately (..)
+    , P.HasComputedApplicationFailureFeedbackRoleArn (..)
+    , P.HasComputedApplicationSuccessFeedbackRoleArn (..)
+    , P.HasComputedApplicationSuccessFeedbackSampleRate (..)
+    , P.HasComputedApplications (..)
     , P.HasComputedArn (..)
-    , P.HasComputedArnSuffix (..)
     , P.HasComputedArtifactStore (..)
-    , P.HasComputedAssociatePublicIpAddress (..)
+    , P.HasComputedAssignGeneratedIpv6CidrBlock (..)
     , P.HasComputedAssociationName (..)
-    , P.HasComputedAssumeRolePolicy (..)
+    , P.HasComputedAudio (..)
+    , P.HasComputedAudioCodecOptions (..)
     , P.HasComputedAuthorization (..)
+    , P.HasComputedAuthorizationScopes (..)
     , P.HasComputedAuthorizerId (..)
     , P.HasComputedAutoAccept (..)
     , P.HasComputedAutoAssignElasticIps (..)
@@ -815,206 +830,220 @@ module Terrafomo.AWS.Resource02
     , P.HasComputedAutoHealing (..)
     , P.HasComputedAutoRollbackConfiguration (..)
     , P.HasComputedAutoVerifiedAttributes (..)
+    , P.HasComputedAutomatedSnapshotRetentionPeriod (..)
     , P.HasComputedAutomaticStopTimeMinutes (..)
     , P.HasComputedAutoscalingGroupName (..)
     , P.HasComputedAutoscalingGroups (..)
+    , P.HasComputedAutoscalingRole (..)
     , P.HasComputedAvailabilityZone (..)
     , P.HasComputedAvailabilityZones (..)
     , P.HasComputedAwsKmsKeyArn (..)
-    , P.HasComputedBackupRetentionPeriod (..)
     , P.HasComputedBatchSize (..)
+    , P.HasComputedBgpAsn (..)
+    , P.HasComputedBgpAuthKey (..)
     , P.HasComputedBlueGreenDeploymentConfig (..)
-    , P.HasComputedBounceAction (..)
+    , P.HasComputedBootstrapAction (..)
+    , P.HasComputedBranches (..)
     , P.HasComputedBucket (..)
     , P.HasComputedBucketDomainName (..)
     , P.HasComputedBucketPrefix (..)
-    , P.HasComputedCallerReference (..)
-    , P.HasComputedCatalogId (..)
+    , P.HasComputedBucketRegionalDomainName (..)
+    , P.HasComputedByteMatchTuples (..)
+    , P.HasComputedCacheClusterEnabled (..)
+    , P.HasComputedCacheClusterSize (..)
     , P.HasComputedCdcStartTime (..)
     , P.HasComputedCertificateArn (..)
-    , P.HasComputedChildHealthThreshold (..)
-    , P.HasComputedChildHealthchecks (..)
-    , P.HasComputedCidrBlocks (..)
-    , P.HasComputedCloudfrontAccessIdentityPath (..)
-    , P.HasComputedCloudwatchAlarmName (..)
-    , P.HasComputedCloudwatchAlarmRegion (..)
+    , P.HasComputedCidrBlock (..)
+    , P.HasComputedClassifiers (..)
+    , P.HasComputedClientCertificateId (..)
     , P.HasComputedCloudwatchDestination (..)
+    , P.HasComputedCloudwatchLogGroupArn (..)
     , P.HasComputedCluster (..)
+    , P.HasComputedClusterAddress (..)
     , P.HasComputedClusterConfig (..)
     , P.HasComputedClusterIdentifier (..)
-    , P.HasComputedClusterIdentifierPrefix (..)
-    , P.HasComputedClusterMembers (..)
-    , P.HasComputedClusterResourceId (..)
-    , P.HasComputedCname (..)
-    , P.HasComputedCnamePrefix (..)
-    , P.HasComputedComment (..)
+    , P.HasComputedClusterName (..)
+    , P.HasComputedClusterParameterGroupName (..)
+    , P.HasComputedClusterPublicKey (..)
+    , P.HasComputedClusterRevisionNumber (..)
+    , P.HasComputedClusterSecurityGroups (..)
+    , P.HasComputedClusterSubnetGroupName (..)
+    , P.HasComputedClusterType (..)
+    , P.HasComputedClusterVersion (..)
     , P.HasComputedCondition (..)
     , P.HasComputedConfiguration (..)
+    , P.HasComputedConfigurationEndpoint (..)
     , P.HasComputedConfigurationSetName (..)
+    , P.HasComputedConfigurations (..)
     , P.HasComputedConnectionDraining (..)
     , P.HasComputedConnectionDrainingTimeout (..)
-    , P.HasComputedConnectionEvents (..)
     , P.HasComputedConnectionId (..)
-    , P.HasComputedConnectionNotificationArn (..)
     , P.HasComputedConnectionsBandwidth (..)
+    , P.HasComputedContainer (..)
     , P.HasComputedContainerProperties (..)
+    , P.HasComputedContentBasedDeduplication (..)
     , P.HasComputedContentConfig (..)
     , P.HasComputedContentConfigPermissions (..)
+    , P.HasComputedContentType (..)
+    , P.HasComputedCoreInstanceCount (..)
+    , P.HasComputedCoreInstanceType (..)
     , P.HasComputedCorsRule (..)
-    , P.HasComputedCreateDate (..)
     , P.HasComputedCreatedDate (..)
     , P.HasComputedCreationDate (..)
     , P.HasComputedCrossZoneLoadBalancing (..)
+    , P.HasComputedCustomAmiId (..)
+    , P.HasComputedCustomData (..)
     , P.HasComputedCustomInstanceProfileArn (..)
     , P.HasComputedCustomJson (..)
     , P.HasComputedCustomSecurityGroupIds (..)
+    , P.HasComputedCustomerAddress (..)
     , P.HasComputedData' (..)
-    , P.HasComputedDatabase (..)
     , P.HasComputedDatabaseName (..)
-    , P.HasComputedDbClusterParameterGroupName (..)
-    , P.HasComputedDbInstanceIdentifier (..)
-    , P.HasComputedDbSnapshotArn (..)
-    , P.HasComputedDbSnapshotIdentifier (..)
-    , P.HasComputedDbSubnetGroupName (..)
-    , P.HasComputedDeadLetterConfig (..)
-    , P.HasComputedDefaultCooldown (..)
+    , P.HasComputedDefaultNetworkAclId (..)
     , P.HasComputedDefaultRouteTableId (..)
-    , P.HasComputedDelegationSetId (..)
+    , P.HasComputedDefaultSecurityGroupId (..)
+    , P.HasComputedDefaultSenderId (..)
+    , P.HasComputedDefaultSmsType (..)
+    , P.HasComputedDelaySeconds (..)
+    , P.HasComputedDeliveryPolicy (..)
+    , P.HasComputedDeliveryStatusIamRoleArn (..)
+    , P.HasComputedDeliveryStatusSuccessSamplingRate (..)
     , P.HasComputedDeploymentConfigName (..)
     , P.HasComputedDeploymentGroupName (..)
+    , P.HasComputedDeploymentId (..)
     , P.HasComputedDeploymentMaximumPercent (..)
     , P.HasComputedDeploymentMinimumHealthyPercent (..)
     , P.HasComputedDeploymentStyle (..)
-    , P.HasComputedDeregistrationDelay (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDesiredCapacity (..)
     , P.HasComputedDesiredCount (..)
+    , P.HasComputedDestination (..)
     , P.HasComputedDestinationArn (..)
     , P.HasComputedDestinationCidrBlock (..)
-    , P.HasComputedDestinationIpv6CidrBlock (..)
-    , P.HasComputedDestinationName (..)
-    , P.HasComputedDetectorId (..)
     , P.HasComputedDeviceConfiguration (..)
-    , P.HasComputedDisableApiTermination (..)
-    , P.HasComputedDistribution (..)
-    , P.HasComputedDnsEntry (..)
+    , P.HasComputedDirectoryId (..)
+    , P.HasComputedDisplayName (..)
+    , P.HasComputedDnsIps (..)
     , P.HasComputedDnsName (..)
     , P.HasComputedDocumentVersion (..)
+    , P.HasComputedDocumentationVersion (..)
     , P.HasComputedDomainId (..)
     , P.HasComputedDomainName (..)
     , P.HasComputedDrainElbOnShutdown (..)
-    , P.HasComputedDuration (..)
-    , P.HasComputedEbsBlockDevice (..)
-    , P.HasComputedEbsOptimized (..)
+    , P.HasComputedDxGatewayId (..)
     , P.HasComputedEbsOptions (..)
+    , P.HasComputedEbsRootVolumeSize (..)
     , P.HasComputedEbsVolume (..)
+    , P.HasComputedEc2Attributes (..)
     , P.HasComputedEc2TagFilter (..)
-    , P.HasComputedEgress (..)
-    , P.HasComputedEgressOnlyGatewayId (..)
+    , P.HasComputedEc2TagSet (..)
+    , P.HasComputedElasticIp (..)
     , P.HasComputedElasticLoadBalancer (..)
     , P.HasComputedElasticsearchVersion (..)
     , P.HasComputedElb (..)
-    , P.HasComputedEmail (..)
     , P.HasComputedEmailConfiguration (..)
     , P.HasComputedEmailVerificationMessage (..)
     , P.HasComputedEmailVerificationSubject (..)
-    , P.HasComputedEnableSni (..)
+    , P.HasComputedEnableClassiclink (..)
+    , P.HasComputedEnableDnsHostnames (..)
+    , P.HasComputedEnableDnsSupport (..)
     , P.HasComputedEnabled (..)
-    , P.HasComputedEnabledMetrics (..)
+    , P.HasComputedEncoding (..)
     , P.HasComputedEncryptAtRest (..)
     , P.HasComputedEncrypted (..)
+    , P.HasComputedEncryptedPassword (..)
+    , P.HasComputedEncryptionType (..)
+    , P.HasComputedEndTime (..)
     , P.HasComputedEndpoint (..)
     , P.HasComputedEndpointArn (..)
     , P.HasComputedEndpointId (..)
     , P.HasComputedEndpointType (..)
-    , P.HasComputedEngine (..)
     , P.HasComputedEngineName (..)
     , P.HasComputedEngineType (..)
     , P.HasComputedEngineVersion (..)
-    , P.HasComputedEnvironment (..)
+    , P.HasComputedEnhancedVpcRouting (..)
     , P.HasComputedEnvironmentId (..)
-    , P.HasComputedEphemeralBlockDevice (..)
-    , P.HasComputedEtag (..)
     , P.HasComputedEventSourceArn (..)
+    , P.HasComputedEvents (..)
+    , P.HasComputedExcessCapacityTerminationPolicy (..)
+    , P.HasComputedExecutionArn (..)
     , P.HasComputedExpirationDate (..)
     , P.HasComputedExtraConnectionAttributes (..)
     , P.HasComputedFailoverRoutingPolicy (..)
-    , P.HasComputedFailureThreshold (..)
     , P.HasComputedFamily' (..)
-    , P.HasComputedFileSystemId (..)
-    , P.HasComputedFilename (..)
+    , P.HasComputedFifoQueue (..)
     , P.HasComputedFilter (..)
-    , P.HasComputedFilterPattern (..)
     , P.HasComputedFinalSnapshotIdentifier (..)
-    , P.HasComputedForceDelete (..)
+    , P.HasComputedFingerprint (..)
+    , P.HasComputedFleetType (..)
     , P.HasComputedForceDestroy (..)
-    , P.HasComputedFormat (..)
     , P.HasComputedFqdn (..)
     , P.HasComputedFunctionArn (..)
     , P.HasComputedFunctionName (..)
-    , P.HasComputedGatewayId (..)
     , P.HasComputedGeolocationRoutingPolicy (..)
+    , P.HasComputedGrokClassifier (..)
     , P.HasComputedGroup (..)
-    , P.HasComputedHandler (..)
+    , P.HasComputedGroupNames (..)
+    , P.HasComputedHashKey (..)
     , P.HasComputedHealthCheck (..)
-    , P.HasComputedHealthCheckGracePeriod (..)
     , P.HasComputedHealthCheckGracePeriodSeconds (..)
     , P.HasComputedHealthCheckId (..)
-    , P.HasComputedHealthCheckType (..)
     , P.HasComputedHostedZoneId (..)
-    , P.HasComputedHtml (..)
+    , P.HasComputedHttpFailureFeedbackRoleArn (..)
     , P.HasComputedHttpMethod (..)
-    , P.HasComputedIamArn (..)
-    , P.HasComputedIamDatabaseAuthenticationEnabled (..)
-    , P.HasComputedIamInstanceProfile (..)
+    , P.HasComputedHttpSuccessFeedbackRoleArn (..)
+    , P.HasComputedHttpSuccessFeedbackSampleRate (..)
+    , P.HasComputedIamFleetRole (..)
     , P.HasComputedIamRole (..)
+    , P.HasComputedIamRoleArn (..)
     , P.HasComputedIamRoles (..)
     , P.HasComputedId (..)
     , P.HasComputedIdleTimeout (..)
-    , P.HasComputedIngress (..)
-    , P.HasComputedInitialLifecycleHook (..)
+    , P.HasComputedIncludedObjectVersions (..)
     , P.HasComputedInputBucket (..)
+    , P.HasComputedInputParameters (..)
     , P.HasComputedInstallUpdatesOnBoot (..)
     , P.HasComputedInstance' (..)
+    , P.HasComputedInstanceGroup (..)
     , P.HasComputedInstanceId (..)
     , P.HasComputedInstanceIds (..)
-    , P.HasComputedInstanceInitiatedShutdownBehavior (..)
+    , P.HasComputedInstanceInterruptionBehaviour (..)
     , P.HasComputedInstanceShutdownTimeout (..)
+    , P.HasComputedInstanceTenancy (..)
     , P.HasComputedInstanceType (..)
     , P.HasComputedInstances (..)
-    , P.HasComputedInsufficientDataHealthStatus (..)
     , P.HasComputedInternal (..)
-    , P.HasComputedInvertHealthcheck (..)
-    , P.HasComputedInvokeArn (..)
+    , P.HasComputedInvokeUrl (..)
     , P.HasComputedIops (..)
     , P.HasComputedIpAddress (..)
-    , P.HasComputedIpSetDescriptors (..)
-    , P.HasComputedIpv6AddressCount (..)
-    , P.HasComputedIpv6Addresses (..)
+    , P.HasComputedIpv6AssociationId (..)
+    , P.HasComputedIpv6CidrBlock (..)
     , P.HasComputedIsEnabled (..)
-    , P.HasComputedJvmOptions (..)
-    , P.HasComputedJvmType (..)
-    , P.HasComputedJvmVersion (..)
+    , P.HasComputedItem (..)
+    , P.HasComputedJdbcTarget (..)
+    , P.HasComputedJsonClassifier (..)
+    , P.HasComputedKeepJobFlowAliveWhenNoSteps (..)
+    , P.HasComputedKerberosAttributes (..)
+    , P.HasComputedKeyFingerprint (..)
     , P.HasComputedKeyId (..)
-    , P.HasComputedKeyName (..)
     , P.HasComputedKibanaEndpoint (..)
     , P.HasComputedKinesisDestination (..)
+    , P.HasComputedKmsDataKeyReusePeriodSeconds (..)
     , P.HasComputedKmsKeyArn (..)
     , P.HasComputedKmsKeyId (..)
-    , P.HasComputedLagId (..)
-    , P.HasComputedLambdaAction (..)
+    , P.HasComputedKmsMasterKeyId (..)
     , P.HasComputedLambdaConfig (..)
+    , P.HasComputedLambdaFailureFeedbackRoleArn (..)
+    , P.HasComputedLambdaSuccessFeedbackRoleArn (..)
+    , P.HasComputedLambdaSuccessFeedbackSampleRate (..)
     , P.HasComputedLastModified (..)
     , P.HasComputedLastModifiedDate (..)
     , P.HasComputedLastProcessingResult (..)
-    , P.HasComputedLastUpdatedDate (..)
     , P.HasComputedLatencyRoutingPolicy (..)
     , P.HasComputedLatestRevision (..)
-    , P.HasComputedLaunchConfiguration (..)
-    , P.HasComputedLaunchConfigurations (..)
+    , P.HasComputedLaunchSpecification (..)
     , P.HasComputedLaunchType (..)
     , P.HasComputedLevel (..)
-    , P.HasComputedLicenseModel (..)
     , P.HasComputedLifecycleRule (..)
     , P.HasComputedListener (..)
     , P.HasComputedListenerArn (..)
@@ -1024,259 +1053,255 @@ module Terrafomo.AWS.Resource02
     , P.HasComputedLoadBalancerPort (..)
     , P.HasComputedLoadBalancers (..)
     , P.HasComputedLocation (..)
-    , P.HasComputedLocationUri (..)
-    , P.HasComputedLogGroupName (..)
     , P.HasComputedLogPublishingOptions (..)
+    , P.HasComputedLogUri (..)
     , P.HasComputedLogging (..)
+    , P.HasComputedMainRouteTableId (..)
     , P.HasComputedMaintenanceWindow (..)
+    , P.HasComputedMasterInstanceType (..)
     , P.HasComputedMasterPassword (..)
+    , P.HasComputedMasterPublicDns (..)
     , P.HasComputedMasterUsername (..)
     , P.HasComputedMatchingTypes (..)
+    , P.HasComputedMaxMessageSize (..)
     , P.HasComputedMaxSize (..)
-    , P.HasComputedMeasureLatency (..)
-    , P.HasComputedMemorySize (..)
+    , P.HasComputedMaximumExecutionFrequency (..)
+    , P.HasComputedMessageRetentionSeconds (..)
     , P.HasComputedMetricName (..)
-    , P.HasComputedMetricsGranularity (..)
     , P.HasComputedMfaConfiguration (..)
     , P.HasComputedMigrationType (..)
-    , P.HasComputedMinElbCapacity (..)
     , P.HasComputedMinSize (..)
-    , P.HasComputedMonitoring (..)
+    , P.HasComputedMongodbSettings (..)
+    , P.HasComputedMonthlySpendLimit (..)
     , P.HasComputedMultivalueAnswerRoutingPolicy (..)
     , P.HasComputedName (..)
     , P.HasComputedNamePrefix (..)
-    , P.HasComputedNameServers (..)
-    , P.HasComputedNatGatewayId (..)
     , P.HasComputedNetworkConfiguration (..)
-    , P.HasComputedNetworkInterface (..)
     , P.HasComputedNetworkInterfaceId (..)
-    , P.HasComputedNetworkInterfaceIds (..)
+    , P.HasComputedNodeType (..)
+    , P.HasComputedNodes (..)
     , P.HasComputedNotification (..)
-    , P.HasComputedNotificationType (..)
+    , P.HasComputedNotificationTopicArn (..)
     , P.HasComputedNotifications (..)
     , P.HasComputedNumberOfConnections (..)
+    , P.HasComputedNumberOfNodes (..)
     , P.HasComputedOnPremisesInstanceTagFilter (..)
     , P.HasComputedOperatingSystem (..)
-    , P.HasComputedOptionGroupName (..)
+    , P.HasComputedOptionalFields (..)
+    , P.HasComputedOrderedPlacementStrategy (..)
     , P.HasComputedOutputBucket (..)
     , P.HasComputedOutputLocation (..)
     , P.HasComputedOverwrite (..)
+    , P.HasComputedOwnerAccount (..)
+    , P.HasComputedOwnerAccountId (..)
     , P.HasComputedOwnerArn (..)
     , P.HasComputedParameter (..)
+    , P.HasComputedParameterGroupName (..)
     , P.HasComputedParameters (..)
     , P.HasComputedPassword (..)
+    , P.HasComputedPasswordLength (..)
     , P.HasComputedPasswordPolicy (..)
+    , P.HasComputedPasswordResetRequired (..)
     , P.HasComputedPeerOwnerId (..)
     , P.HasComputedPeerRegion (..)
     , P.HasComputedPeerVpcId (..)
     , P.HasComputedPemEncodedCertificate (..)
+    , P.HasComputedPgpKey (..)
     , P.HasComputedPlacementConstraints (..)
-    , P.HasComputedPlacementGroup (..)
     , P.HasComputedPlacementStrategy (..)
     , P.HasComputedPolicy (..)
+    , P.HasComputedPolicyId (..)
     , P.HasComputedPolicyNames (..)
-    , P.HasComputedPolicyType (..)
-    , P.HasComputedPollInterval (..)
     , P.HasComputedPort (..)
+    , P.HasComputedPredicate (..)
     , P.HasComputedPredicates (..)
-    , P.HasComputedPreferredBackupWindow (..)
     , P.HasComputedPreferredMaintenanceWindow (..)
-    , P.HasComputedPrefix (..)
-    , P.HasComputedPrefixListId (..)
-    , P.HasComputedPrimaryNetworkInterfaceId (..)
+    , P.HasComputedPrincipal (..)
     , P.HasComputedPrincipalArn (..)
     , P.HasComputedPriority (..)
-    , P.HasComputedPrivateDns (..)
-    , P.HasComputedPrivateDnsEnabled (..)
-    , P.HasComputedPrivateIp (..)
-    , P.HasComputedProductCode (..)
-    , P.HasComputedPropagatingVgws (..)
-    , P.HasComputedProperties (..)
-    , P.HasComputedProtectFromScaleIn (..)
-    , P.HasComputedProtocol (..)
-    , P.HasComputedPublicDns (..)
-    , P.HasComputedPublicIp (..)
-    , P.HasComputedPublish (..)
-    , P.HasComputedQualifiedArn (..)
-    , P.HasComputedQuery (..)
-    , P.HasComputedQueues (..)
-    , P.HasComputedQuotaSettings (..)
+    , P.HasComputedPublicKey (..)
+    , P.HasComputedPubliclyAccessible (..)
+    , P.HasComputedQualifier (..)
+    , P.HasComputedRangeKey (..)
     , P.HasComputedRateKey (..)
     , P.HasComputedRateLimit (..)
-    , P.HasComputedReaderEndpoint (..)
-    , P.HasComputedRecipients (..)
+    , P.HasComputedReceiveWaitTimeSeconds (..)
     , P.HasComputedRecords (..)
-    , P.HasComputedReferenceName (..)
+    , P.HasComputedRecoveryWindowInDays (..)
+    , P.HasComputedRecurrence (..)
+    , P.HasComputedRedrivePolicy (..)
+    , P.HasComputedRegexPatternStrings (..)
     , P.HasComputedRegion (..)
-    , P.HasComputedRegions (..)
-    , P.HasComputedRegistryId (..)
+    , P.HasComputedReleaseLabel (..)
+    , P.HasComputedRemoteDomainName (..)
+    , P.HasComputedReplaceUnhealthyInstances (..)
     , P.HasComputedReplicationConfiguration (..)
+    , P.HasComputedReplicationFactor (..)
     , P.HasComputedReplicationInstanceArn (..)
-    , P.HasComputedReplicationSourceIdentifier (..)
     , P.HasComputedReplicationTaskArn (..)
     , P.HasComputedReplicationTaskId (..)
     , P.HasComputedReplicationTaskSettings (..)
-    , P.HasComputedRepository (..)
-    , P.HasComputedRequestInterval (..)
+    , P.HasComputedRepositoryName (..)
     , P.HasComputedRequestModels (..)
     , P.HasComputedRequestParameters (..)
     , P.HasComputedRequestPayer (..)
     , P.HasComputedRequestValidatorId (..)
     , P.HasComputedRequester (..)
-    , P.HasComputedReservedConcurrentExecutions (..)
     , P.HasComputedResourceId (..)
-    , P.HasComputedResourcePath (..)
-    , P.HasComputedResponseParameters (..)
-    , P.HasComputedResponseTemplates (..)
-    , P.HasComputedResponseType (..)
     , P.HasComputedRestApiId (..)
-    , P.HasComputedRetentionInDays (..)
+    , P.HasComputedRetentionPeriod (..)
     , P.HasComputedRetryStrategy (..)
     , P.HasComputedRevision (..)
     , P.HasComputedRole (..)
     , P.HasComputedRoleArn (..)
-    , P.HasComputedRootBlockDevice (..)
     , P.HasComputedRootPassword (..)
     , P.HasComputedRootPasswordOnAllInstances (..)
-    , P.HasComputedRoute (..)
+    , P.HasComputedRotationEnabled (..)
+    , P.HasComputedRotationLambdaArn (..)
+    , P.HasComputedRotationRules (..)
+    , P.HasComputedRouteFilterPrefixes (..)
     , P.HasComputedRouteTableId (..)
-    , P.HasComputedRouteTableIds (..)
     , P.HasComputedRoutingStrategy (..)
+    , P.HasComputedRuleId (..)
     , P.HasComputedRuleSetName (..)
-    , P.HasComputedRulesPackageArns (..)
-    , P.HasComputedRuntime (..)
-    , P.HasComputedS3Action (..)
-    , P.HasComputedS3Bucket (..)
     , P.HasComputedS3BucketName (..)
-    , P.HasComputedS3CanonicalUserId (..)
-    , P.HasComputedS3Key (..)
     , P.HasComputedS3KeyPrefix (..)
-    , P.HasComputedS3ObjectVersion (..)
+    , P.HasComputedS3Settings (..)
+    , P.HasComputedS3Target (..)
     , P.HasComputedSamlMetadataDocument (..)
     , P.HasComputedScalableDimension (..)
-    , P.HasComputedScanEnabled (..)
+    , P.HasComputedScalableTargetAction (..)
+    , P.HasComputedScaleDownBehavior (..)
+    , P.HasComputedSchedule (..)
     , P.HasComputedScheduleExpression (..)
+    , P.HasComputedScheduledActionName (..)
+    , P.HasComputedSchedulingStrategy (..)
     , P.HasComputedSchema (..)
-    , P.HasComputedSearchString (..)
+    , P.HasComputedSchemaChangePolicy (..)
+    , P.HasComputedScope (..)
+    , P.HasComputedSecurityConfiguration (..)
     , P.HasComputedSecurityGroupId (..)
     , P.HasComputedSecurityGroupIds (..)
+    , P.HasComputedSecurityGroupNames (..)
     , P.HasComputedSecurityGroups (..)
     , P.HasComputedServerName (..)
     , P.HasComputedServerSideEncryptionConfiguration (..)
     , P.HasComputedServiceAccessRole (..)
-    , P.HasComputedServiceName (..)
     , P.HasComputedServiceNamespace (..)
+    , P.HasComputedServiceRegistries (..)
+    , P.HasComputedServiceRole (..)
     , P.HasComputedServiceRoleArn (..)
     , P.HasComputedSetIdentifier (..)
     , P.HasComputedSetting (..)
+    , P.HasComputedShardCount (..)
+    , P.HasComputedShardLevelMetrics (..)
     , P.HasComputedSize (..)
+    , P.HasComputedSizeConstraints (..)
     , P.HasComputedSkipFinalSnapshot (..)
     , P.HasComputedSmsAuthenticationMessage (..)
     , P.HasComputedSmsConfiguration (..)
     , P.HasComputedSmsVerificationMessage (..)
+    , P.HasComputedSnapshotClusterIdentifier (..)
+    , P.HasComputedSnapshotCopy (..)
     , P.HasComputedSnapshotDeliveryProperties (..)
     , P.HasComputedSnapshotId (..)
     , P.HasComputedSnapshotIdentifier (..)
     , P.HasComputedSnapshotOptions (..)
-    , P.HasComputedSnsAction (..)
     , P.HasComputedSnsDestination (..)
     , P.HasComputedSnsTopicArn (..)
     , P.HasComputedSolutionStackName (..)
+    , P.HasComputedSource (..)
+    , P.HasComputedSourceAccount (..)
     , P.HasComputedSourceAmiId (..)
     , P.HasComputedSourceAmiRegion (..)
-    , P.HasComputedSourceCodeHash (..)
-    , P.HasComputedSourceDbSnapshotIdentifier (..)
-    , P.HasComputedSourceDestCheck (..)
+    , P.HasComputedSourceArn (..)
     , P.HasComputedSourceEndpointArn (..)
-    , P.HasComputedSourceRegion (..)
     , P.HasComputedSourceSecurityGroup (..)
     , P.HasComputedSourceSecurityGroupId (..)
-    , P.HasComputedSql (..)
-    , P.HasComputedSqlVersion (..)
+    , P.HasComputedSpotPrice (..)
+    , P.HasComputedSpotRequestState (..)
+    , P.HasComputedSqsFailureFeedbackRoleArn (..)
+    , P.HasComputedSqsSuccessFeedbackRoleArn (..)
+    , P.HasComputedSqsSuccessFeedbackSampleRate (..)
     , P.HasComputedSshPublicKey (..)
+    , P.HasComputedSshPublicKeyId (..)
     , P.HasComputedSshUsername (..)
     , P.HasComputedSslMode (..)
     , P.HasComputedStackId (..)
     , P.HasComputedStage (..)
-    , P.HasComputedStageKey (..)
+    , P.HasComputedStageName (..)
+    , P.HasComputedStartTime (..)
     , P.HasComputedStartingPosition (..)
     , P.HasComputedState (..)
     , P.HasComputedStateTransitionReason (..)
+    , P.HasComputedStatementId (..)
+    , P.HasComputedStatementIdPrefix (..)
     , P.HasComputedStatus (..)
-    , P.HasComputedStatusCode (..)
-    , P.HasComputedStepScalingPolicyConfiguration (..)
-    , P.HasComputedStickiness (..)
-    , P.HasComputedStopAction (..)
-    , P.HasComputedStorageEncrypted (..)
+    , P.HasComputedStep (..)
     , P.HasComputedStorageLocation (..)
-    , P.HasComputedStorageType (..)
-    , P.HasComputedSubject (..)
+    , P.HasComputedSubnetGroupName (..)
     , P.HasComputedSubnetId (..)
-    , P.HasComputedSubnetIds (..)
     , P.HasComputedSubnets (..)
     , P.HasComputedSupportCode (..)
-    , P.HasComputedSuspendedProcesses (..)
     , P.HasComputedSystemPackages (..)
     , P.HasComputedTableMappings (..)
-    , P.HasComputedTag (..)
+    , P.HasComputedTableName (..)
+    , P.HasComputedTablePrefix (..)
     , P.HasComputedTags (..)
-    , P.HasComputedTargetArn (..)
+    , P.HasComputedTargetArns (..)
+    , P.HasComputedTargetCapacity (..)
     , P.HasComputedTargetEndpointArn (..)
+    , P.HasComputedTargetGroupArn (..)
     , P.HasComputedTargetGroupArns (..)
-    , P.HasComputedTargetTrackingScalingPolicyConfiguration (..)
-    , P.HasComputedTargetType (..)
+    , P.HasComputedTargetId (..)
     , P.HasComputedTargets (..)
     , P.HasComputedTaskDefinition (..)
-    , P.HasComputedTemplateName (..)
-    , P.HasComputedTenancy (..)
-    , P.HasComputedTerminationPolicies (..)
-    , P.HasComputedText (..)
-    , P.HasComputedThrottleSettings (..)
+    , P.HasComputedTerminateInstancesWithExpiration (..)
+    , P.HasComputedTerminationProtection (..)
     , P.HasComputedThumbnailConfig (..)
     , P.HasComputedThumbnailConfigPermissions (..)
-    , P.HasComputedTier (..)
+    , P.HasComputedThumbnails (..)
     , P.HasComputedTimeout (..)
-    , P.HasComputedTlsPolicy (..)
+    , P.HasComputedTopicArn (..)
     , P.HasComputedTriggerConfiguration (..)
-    , P.HasComputedTriggers (..)
     , P.HasComputedTtl (..)
     , P.HasComputedType' (..)
-    , P.HasComputedUniqueId (..)
+    , P.HasComputedUrl (..)
+    , P.HasComputedUsageReportS3Bucket (..)
     , P.HasComputedUseEbsOptimizedInstances (..)
+    , P.HasComputedUser (..)
     , P.HasComputedUserArn (..)
-    , P.HasComputedUserData (..)
-    , P.HasComputedUserDataBase64 (..)
     , P.HasComputedUsername (..)
     , P.HasComputedUsernameAttributes (..)
     , P.HasComputedUuid (..)
+    , P.HasComputedValidFrom (..)
     , P.HasComputedValidUntil (..)
     , P.HasComputedValue (..)
+    , P.HasComputedVariables (..)
     , P.HasComputedVerificationMessageTemplate (..)
     , P.HasComputedVersion (..)
-    , P.HasComputedVersionLabel (..)
     , P.HasComputedVersioning (..)
-    , P.HasComputedVolumeTags (..)
-    , P.HasComputedVpcConfig (..)
-    , P.HasComputedVpcEndpointId (..)
+    , P.HasComputedVideo (..)
+    , P.HasComputedVideoCodecOptions (..)
+    , P.HasComputedVideoWatermarks (..)
+    , P.HasComputedVisibilityTimeoutSeconds (..)
+    , P.HasComputedVisibleToAllUsers (..)
+    , P.HasComputedVlan (..)
     , P.HasComputedVpcEndpointServiceId (..)
-    , P.HasComputedVpcEndpointType (..)
     , P.HasComputedVpcId (..)
     , P.HasComputedVpcOptions (..)
     , P.HasComputedVpcOptions0AvailabilityZones (..)
     , P.HasComputedVpcOptions0VpcId (..)
     , P.HasComputedVpcPeeringConnectionId (..)
-    , P.HasComputedVpcRegion (..)
     , P.HasComputedVpcSecurityGroupIds (..)
-    , P.HasComputedVpcZoneIdentifier (..)
     , P.HasComputedVpnConnectionId (..)
-    , P.HasComputedWaitForCapacityTimeout (..)
-    , P.HasComputedWaitForElbCapacity (..)
-    , P.HasComputedWaitForReadyTimeout (..)
+    , P.HasComputedVpnGatewayId (..)
+    , P.HasComputedWaitForFulfillment (..)
     , P.HasComputedWebsite (..)
     , P.HasComputedWebsiteDomain (..)
     , P.HasComputedWebsiteEndpoint (..)
     , P.HasComputedWeightedRoutingPolicy (..)
-    , P.HasComputedWorkmailAction (..)
+    , P.HasComputedXmlClassifier (..)
     , P.HasComputedZoneId (..)
 
     -- * Re-exported Types
@@ -1437,102 +1462,6 @@ amiCopyResource =
             , _source_ami_region = TF.Nil
             }
 
-{- | The @aws_api_gateway_api_key@ AWS resource.
-
-Provides an API Gateway API Key. ~> Warning: Since the API Gateway usage
-plans feature was launched on August 11, 2016, usage plans are now required
-to associate an API key with an API stage.
--}
-data ApiGatewayApiKeyResource s = ApiGatewayApiKeyResource {
-      _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The API key description. Defaults to "Managed by Terraform". -}
-    , _enabled     :: !(TF.Attr s P.Bool)
-    {- ^ (Optional) Specifies whether the API key can be used by callers. Defaults to @true@ . -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the API key -}
-    , _stage_key   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of stage keys associated with the API key - see below -}
-    , _value       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The value of the API key. If not specified, it will be automatically generated by AWS on creation. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ApiGatewayApiKeyResource s) where
-    toHCL ApiGatewayApiKeyResource{..} = TF.inline $ catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "stage_key" <$> TF.attribute _stage_key
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
-instance P.HasDescription (ApiGatewayApiKeyResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: ApiGatewayApiKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ApiGatewayApiKeyResource s)
-
-instance P.HasEnabled (ApiGatewayApiKeyResource s) (TF.Attr s P.Bool) where
-    enabled =
-        lens (_enabled :: ApiGatewayApiKeyResource s -> TF.Attr s P.Bool)
-             (\s a -> s { _enabled = a } :: ApiGatewayApiKeyResource s)
-
-instance P.HasName (ApiGatewayApiKeyResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ApiGatewayApiKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ApiGatewayApiKeyResource s)
-
-instance P.HasStageKey (ApiGatewayApiKeyResource s) (TF.Attr s P.Text) where
-    stageKey =
-        lens (_stage_key :: ApiGatewayApiKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _stage_key = a } :: ApiGatewayApiKeyResource s)
-
-instance P.HasValue (ApiGatewayApiKeyResource s) (TF.Attr s P.Text) where
-    value =
-        lens (_value :: ApiGatewayApiKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _value = a } :: ApiGatewayApiKeyResource s)
-
-instance s ~ s' => P.HasComputedCreatedDate (TF.Ref s' (ApiGatewayApiKeyResource s)) (TF.Attr s P.Text) where
-    computedCreatedDate x = TF.compute (TF.refKey x) "created_date"
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ApiGatewayApiKeyResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ApiGatewayApiKeyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ApiGatewayApiKeyResource s)) (TF.Attr s P.Bool) where
-    computedEnabled =
-        (_enabled :: ApiGatewayApiKeyResource s -> TF.Attr s P.Bool)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ApiGatewayApiKeyResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedLastUpdatedDate (TF.Ref s' (ApiGatewayApiKeyResource s)) (TF.Attr s P.Text) where
-    computedLastUpdatedDate x = TF.compute (TF.refKey x) "last_updated_date"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ApiGatewayApiKeyResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ApiGatewayApiKeyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedStageKey (TF.Ref s' (ApiGatewayApiKeyResource s)) (TF.Attr s P.Text) where
-    computedStageKey =
-        (_stage_key :: ApiGatewayApiKeyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedValue (TF.Ref s' (ApiGatewayApiKeyResource s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "value"
-
-apiGatewayApiKeyResource :: TF.Resource P.AWS (ApiGatewayApiKeyResource s)
-apiGatewayApiKeyResource =
-    TF.newResource "aws_api_gateway_api_key" $
-        ApiGatewayApiKeyResource {
-              _description = TF.Nil
-            , _enabled = TF.Nil
-            , _name = TF.Nil
-            , _stage_key = TF.Nil
-            , _value = TF.Nil
-            }
-
 {- | The @aws_api_gateway_client_certificate@ AWS resource.
 
 Provides an API Gateway Client Certificate.
@@ -1574,68 +1503,6 @@ apiGatewayClientCertificateResource =
     TF.newResource "aws_api_gateway_client_certificate" $
         ApiGatewayClientCertificateResource {
               _description = TF.Nil
-            }
-
-{- | The @aws_api_gateway_documentation_part@ AWS resource.
-
-Provides a settings of an API Gateway Documentation Part.
--}
-data ApiGatewayDocumentationPartResource s = ApiGatewayDocumentationPartResource {
-      _location    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The location of the targeted API entity of the to-be-created documentation part. See below. -}
-    , _properties  :: !(TF.Attr s P.Text)
-    {- ^ (Required) A content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., "{ "description": "The API does ..." }". Only Swagger-compliant key-value pairs can be exported and, hence, published. -}
-    , _rest_api_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the associated Rest API -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ApiGatewayDocumentationPartResource s) where
-    toHCL ApiGatewayDocumentationPartResource{..} = TF.inline $ catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
-        , TF.assign "properties" <$> TF.attribute _properties
-        , TF.assign "rest_api_id" <$> TF.attribute _rest_api_id
-        ]
-
-instance P.HasLocation (ApiGatewayDocumentationPartResource s) (TF.Attr s P.Text) where
-    location =
-        lens (_location :: ApiGatewayDocumentationPartResource s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: ApiGatewayDocumentationPartResource s)
-
-instance P.HasProperties (ApiGatewayDocumentationPartResource s) (TF.Attr s P.Text) where
-    properties =
-        lens (_properties :: ApiGatewayDocumentationPartResource s -> TF.Attr s P.Text)
-             (\s a -> s { _properties = a } :: ApiGatewayDocumentationPartResource s)
-
-instance P.HasRestApiId (ApiGatewayDocumentationPartResource s) (TF.Attr s P.Text) where
-    restApiId =
-        lens (_rest_api_id :: ApiGatewayDocumentationPartResource s -> TF.Attr s P.Text)
-             (\s a -> s { _rest_api_id = a } :: ApiGatewayDocumentationPartResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ApiGatewayDocumentationPartResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ApiGatewayDocumentationPartResource s)) (TF.Attr s P.Text) where
-    computedLocation =
-        (_location :: ApiGatewayDocumentationPartResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedProperties (TF.Ref s' (ApiGatewayDocumentationPartResource s)) (TF.Attr s P.Text) where
-    computedProperties =
-        (_properties :: ApiGatewayDocumentationPartResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRestApiId (TF.Ref s' (ApiGatewayDocumentationPartResource s)) (TF.Attr s P.Text) where
-    computedRestApiId =
-        (_rest_api_id :: ApiGatewayDocumentationPartResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-apiGatewayDocumentationPartResource :: TF.Resource P.AWS (ApiGatewayDocumentationPartResource s)
-apiGatewayDocumentationPartResource =
-    TF.newResource "aws_api_gateway_documentation_part" $
-        ApiGatewayDocumentationPartResource {
-              _location = TF.Nil
-            , _properties = TF.Nil
-            , _rest_api_id = TF.Nil
             }
 
 {- | The @aws_api_gateway_documentation_version@ AWS resource.
@@ -1697,93 +1564,6 @@ apiGatewayDocumentationVersionResource =
             , _version = TF.Nil
             }
 
-{- | The @aws_api_gateway_gateway_response@ AWS resource.
-
-Provides an API Gateway Gateway Response for a REST API Gateway.
--}
-data ApiGatewayGatewayResponseResource s = ApiGatewayGatewayResponseResource {
-      _response_parameters :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A map specifying the templates used to transform the response body. -}
-    , _response_templates  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A map specifying the parameters (paths, query strings and headers) of the Gateway Response. -}
-    , _response_type       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The response type of the associated GatewayResponse. -}
-    , _rest_api_id         :: !(TF.Attr s P.Text)
-    {- ^ (Required) The string identifier of the associated REST API. -}
-    , _status_code         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The HTTP status code of the Gateway Response. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ApiGatewayGatewayResponseResource s) where
-    toHCL ApiGatewayGatewayResponseResource{..} = TF.inline $ catMaybes
-        [ TF.assign "response_parameters" <$> TF.attribute _response_parameters
-        , TF.assign "response_templates" <$> TF.attribute _response_templates
-        , TF.assign "response_type" <$> TF.attribute _response_type
-        , TF.assign "rest_api_id" <$> TF.attribute _rest_api_id
-        , TF.assign "status_code" <$> TF.attribute _status_code
-        ]
-
-instance P.HasResponseParameters (ApiGatewayGatewayResponseResource s) (TF.Attr s P.Text) where
-    responseParameters =
-        lens (_response_parameters :: ApiGatewayGatewayResponseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _response_parameters = a } :: ApiGatewayGatewayResponseResource s)
-
-instance P.HasResponseTemplates (ApiGatewayGatewayResponseResource s) (TF.Attr s P.Text) where
-    responseTemplates =
-        lens (_response_templates :: ApiGatewayGatewayResponseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _response_templates = a } :: ApiGatewayGatewayResponseResource s)
-
-instance P.HasResponseType (ApiGatewayGatewayResponseResource s) (TF.Attr s P.Text) where
-    responseType =
-        lens (_response_type :: ApiGatewayGatewayResponseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _response_type = a } :: ApiGatewayGatewayResponseResource s)
-
-instance P.HasRestApiId (ApiGatewayGatewayResponseResource s) (TF.Attr s P.Text) where
-    restApiId =
-        lens (_rest_api_id :: ApiGatewayGatewayResponseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _rest_api_id = a } :: ApiGatewayGatewayResponseResource s)
-
-instance P.HasStatusCode (ApiGatewayGatewayResponseResource s) (TF.Attr s P.Text) where
-    statusCode =
-        lens (_status_code :: ApiGatewayGatewayResponseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _status_code = a } :: ApiGatewayGatewayResponseResource s)
-
-instance s ~ s' => P.HasComputedResponseParameters (TF.Ref s' (ApiGatewayGatewayResponseResource s)) (TF.Attr s P.Text) where
-    computedResponseParameters =
-        (_response_parameters :: ApiGatewayGatewayResponseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedResponseTemplates (TF.Ref s' (ApiGatewayGatewayResponseResource s)) (TF.Attr s P.Text) where
-    computedResponseTemplates =
-        (_response_templates :: ApiGatewayGatewayResponseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedResponseType (TF.Ref s' (ApiGatewayGatewayResponseResource s)) (TF.Attr s P.Text) where
-    computedResponseType =
-        (_response_type :: ApiGatewayGatewayResponseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRestApiId (TF.Ref s' (ApiGatewayGatewayResponseResource s)) (TF.Attr s P.Text) where
-    computedRestApiId =
-        (_rest_api_id :: ApiGatewayGatewayResponseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedStatusCode (TF.Ref s' (ApiGatewayGatewayResponseResource s)) (TF.Attr s P.Text) where
-    computedStatusCode =
-        (_status_code :: ApiGatewayGatewayResponseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-apiGatewayGatewayResponseResource :: TF.Resource P.AWS (ApiGatewayGatewayResponseResource s)
-apiGatewayGatewayResponseResource =
-    TF.newResource "aws_api_gateway_gateway_response" $
-        ApiGatewayGatewayResponseResource {
-              _response_parameters = TF.Nil
-            , _response_templates = TF.Nil
-            , _response_type = TF.Nil
-            , _rest_api_id = TF.Nil
-            , _status_code = TF.Nil
-            }
-
 {- | The @aws_api_gateway_method@ AWS resource.
 
 Provides a HTTP Method for an API Gateway Resource.
@@ -1792,9 +1572,11 @@ data ApiGatewayMethodResource s = ApiGatewayMethodResource {
       _api_key_required     :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specify if the method requires an API key -}
     , _authorization        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The type of authorization used for the method ( @NONE@ , @CUSTOM@ , @AWS_IAM@ ) -}
+    {- ^ (Required) The type of authorization used for the method ( @NONE@ , @CUSTOM@ , @AWS_IAM@ , @COGNITO_USER_POOLS@ ) -}
+    , _authorization_scopes :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The authorization scopes used when the authorization is @COGNITO_USER_POOLS@ -}
     , _authorizer_id        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The authorizer id to be used when the authorization is @CUSTOM@ -}
+    {- ^ (Optional) The authorizer id to be used when the authorization is @CUSTOM@ or @COGNITO_USER_POOLS@ -}
     , _http_method          :: !(TF.Attr s P.Text)
     {- ^ (Required) The HTTP Method ( @GET@ , @POST@ , @PUT@ , @DELETE@ , @HEAD@ , @OPTIONS@ , @ANY@ ) -}
     , _request_models       :: !(TF.Attr s P.Text)
@@ -1813,6 +1595,7 @@ instance TF.ToHCL (ApiGatewayMethodResource s) where
     toHCL ApiGatewayMethodResource{..} = TF.inline $ catMaybes
         [ TF.assign "api_key_required" <$> TF.attribute _api_key_required
         , TF.assign "authorization" <$> TF.attribute _authorization
+        , TF.assign "authorization_scopes" <$> TF.attribute _authorization_scopes
         , TF.assign "authorizer_id" <$> TF.attribute _authorizer_id
         , TF.assign "http_method" <$> TF.attribute _http_method
         , TF.assign "request_models" <$> TF.attribute _request_models
@@ -1831,6 +1614,11 @@ instance P.HasAuthorization (ApiGatewayMethodResource s) (TF.Attr s P.Text) wher
     authorization =
         lens (_authorization :: ApiGatewayMethodResource s -> TF.Attr s P.Text)
              (\s a -> s { _authorization = a } :: ApiGatewayMethodResource s)
+
+instance P.HasAuthorizationScopes (ApiGatewayMethodResource s) (TF.Attr s P.Text) where
+    authorizationScopes =
+        lens (_authorization_scopes :: ApiGatewayMethodResource s -> TF.Attr s P.Text)
+             (\s a -> s { _authorization_scopes = a } :: ApiGatewayMethodResource s)
 
 instance P.HasAuthorizerId (ApiGatewayMethodResource s) (TF.Attr s P.Text) where
     authorizerId =
@@ -1877,6 +1665,11 @@ instance s ~ s' => P.HasComputedAuthorization (TF.Ref s' (ApiGatewayMethodResour
         (_authorization :: ApiGatewayMethodResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedAuthorizationScopes (TF.Ref s' (ApiGatewayMethodResource s)) (TF.Attr s P.Text) where
+    computedAuthorizationScopes =
+        (_authorization_scopes :: ApiGatewayMethodResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedAuthorizerId (TF.Ref s' (ApiGatewayMethodResource s)) (TF.Attr s P.Text) where
     computedAuthorizerId =
         (_authorizer_id :: ApiGatewayMethodResource s -> TF.Attr s P.Text)
@@ -1918,6 +1711,7 @@ apiGatewayMethodResource =
         ApiGatewayMethodResource {
               _api_key_required = TF.Nil
             , _authorization = TF.Nil
+            , _authorization_scopes = TF.Nil
             , _authorizer_id = TF.Nil
             , _http_method = TF.Nil
             , _request_models = TF.Nil
@@ -1927,213 +1721,468 @@ apiGatewayMethodResource =
             , _rest_api_id = TF.Nil
             }
 
-{- | The @aws_api_gateway_usage_plan@ AWS resource.
+{- | The @aws_api_gateway_model@ AWS resource.
 
-Provides an API Gateway Usage Plan.
+Provides a Model for a API Gateway.
 -}
-data ApiGatewayUsagePlanResource s = ApiGatewayUsagePlanResource {
-      _api_stages        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The associated <#api-stages-arguments> of the usage plan. -}
-    , _description       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The description of a usage plan. -}
-    , _name              :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the usage plan. -}
-    , _product_code      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The AWS Markeplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace. -}
-    , _quota_settings    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The <#quota-settings-arguments> of the usage plan. -}
-    , _throttle_settings :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The <#throttling-settings-arguments> of the usage plan. -}
+data ApiGatewayModelResource s = ApiGatewayModelResource {
+      _content_type :: !(TF.Attr s P.Text)
+    {- ^ (Required) The content type of the model -}
+    , _description  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The description of the model -}
+    , _name         :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the model -}
+    , _rest_api_id  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the associated REST API -}
+    , _schema       :: !(TF.Attr s P.Text)
+    {- ^ (Required) The schema of the model in a JSON form -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ApiGatewayUsagePlanResource s) where
-    toHCL ApiGatewayUsagePlanResource{..} = TF.inline $ catMaybes
-        [ TF.assign "api_stages" <$> TF.attribute _api_stages
+instance TF.ToHCL (ApiGatewayModelResource s) where
+    toHCL ApiGatewayModelResource{..} = TF.inline $ catMaybes
+        [ TF.assign "content_type" <$> TF.attribute _content_type
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "product_code" <$> TF.attribute _product_code
-        , TF.assign "quota_settings" <$> TF.attribute _quota_settings
-        , TF.assign "throttle_settings" <$> TF.attribute _throttle_settings
+        , TF.assign "rest_api_id" <$> TF.attribute _rest_api_id
+        , TF.assign "schema" <$> TF.attribute _schema
         ]
 
-instance P.HasApiStages (ApiGatewayUsagePlanResource s) (TF.Attr s P.Text) where
-    apiStages =
-        lens (_api_stages :: ApiGatewayUsagePlanResource s -> TF.Attr s P.Text)
-             (\s a -> s { _api_stages = a } :: ApiGatewayUsagePlanResource s)
+instance P.HasContentType (ApiGatewayModelResource s) (TF.Attr s P.Text) where
+    contentType =
+        lens (_content_type :: ApiGatewayModelResource s -> TF.Attr s P.Text)
+             (\s a -> s { _content_type = a } :: ApiGatewayModelResource s)
 
-instance P.HasDescription (ApiGatewayUsagePlanResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ApiGatewayModelResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ApiGatewayUsagePlanResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ApiGatewayUsagePlanResource s)
+        lens (_description :: ApiGatewayModelResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ApiGatewayModelResource s)
 
-instance P.HasName (ApiGatewayUsagePlanResource s) (TF.Attr s P.Text) where
+instance P.HasName (ApiGatewayModelResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ApiGatewayUsagePlanResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ApiGatewayUsagePlanResource s)
+        lens (_name :: ApiGatewayModelResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ApiGatewayModelResource s)
 
-instance P.HasProductCode (ApiGatewayUsagePlanResource s) (TF.Attr s P.Text) where
-    productCode =
-        lens (_product_code :: ApiGatewayUsagePlanResource s -> TF.Attr s P.Text)
-             (\s a -> s { _product_code = a } :: ApiGatewayUsagePlanResource s)
+instance P.HasRestApiId (ApiGatewayModelResource s) (TF.Attr s P.Text) where
+    restApiId =
+        lens (_rest_api_id :: ApiGatewayModelResource s -> TF.Attr s P.Text)
+             (\s a -> s { _rest_api_id = a } :: ApiGatewayModelResource s)
 
-instance P.HasQuotaSettings (ApiGatewayUsagePlanResource s) (TF.Attr s P.Text) where
-    quotaSettings =
-        lens (_quota_settings :: ApiGatewayUsagePlanResource s -> TF.Attr s P.Text)
-             (\s a -> s { _quota_settings = a } :: ApiGatewayUsagePlanResource s)
+instance P.HasSchema (ApiGatewayModelResource s) (TF.Attr s P.Text) where
+    schema =
+        lens (_schema :: ApiGatewayModelResource s -> TF.Attr s P.Text)
+             (\s a -> s { _schema = a } :: ApiGatewayModelResource s)
 
-instance P.HasThrottleSettings (ApiGatewayUsagePlanResource s) (TF.Attr s P.Text) where
-    throttleSettings =
-        lens (_throttle_settings :: ApiGatewayUsagePlanResource s -> TF.Attr s P.Text)
-             (\s a -> s { _throttle_settings = a } :: ApiGatewayUsagePlanResource s)
+instance s ~ s' => P.HasComputedContentType (TF.Ref s' (ApiGatewayModelResource s)) (TF.Attr s P.Text) where
+    computedContentType =
+        (_content_type :: ApiGatewayModelResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
-instance s ~ s' => P.HasComputedApiStages (TF.Ref s' (ApiGatewayUsagePlanResource s)) (TF.Attr s P.Text) where
-    computedApiStages x = TF.compute (TF.refKey x) "api_stages"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ApiGatewayModelResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: ApiGatewayModelResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ApiGatewayUsagePlanResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ApiGatewayUsagePlanResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApiGatewayModelResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ApiGatewayUsagePlanResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ApiGatewayModelResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ApiGatewayModelResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
-instance s ~ s' => P.HasComputedProductCode (TF.Ref s' (ApiGatewayUsagePlanResource s)) (TF.Attr s P.Text) where
-    computedProductCode x = TF.compute (TF.refKey x) "product_code"
+instance s ~ s' => P.HasComputedRestApiId (TF.Ref s' (ApiGatewayModelResource s)) (TF.Attr s P.Text) where
+    computedRestApiId =
+        (_rest_api_id :: ApiGatewayModelResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
-instance s ~ s' => P.HasComputedQuotaSettings (TF.Ref s' (ApiGatewayUsagePlanResource s)) (TF.Attr s P.Text) where
-    computedQuotaSettings x = TF.compute (TF.refKey x) "quota_settings"
+instance s ~ s' => P.HasComputedSchema (TF.Ref s' (ApiGatewayModelResource s)) (TF.Attr s P.Text) where
+    computedSchema =
+        (_schema :: ApiGatewayModelResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
-instance s ~ s' => P.HasComputedThrottleSettings (TF.Ref s' (ApiGatewayUsagePlanResource s)) (TF.Attr s P.Text) where
-    computedThrottleSettings x = TF.compute (TF.refKey x) "throttle_settings"
-
-apiGatewayUsagePlanResource :: TF.Resource P.AWS (ApiGatewayUsagePlanResource s)
-apiGatewayUsagePlanResource =
-    TF.newResource "aws_api_gateway_usage_plan" $
-        ApiGatewayUsagePlanResource {
-              _api_stages = TF.Nil
+apiGatewayModelResource :: TF.Resource P.AWS (ApiGatewayModelResource s)
+apiGatewayModelResource =
+    TF.newResource "aws_api_gateway_model" $
+        ApiGatewayModelResource {
+              _content_type = TF.Nil
             , _description = TF.Nil
             , _name = TF.Nil
-            , _product_code = TF.Nil
-            , _quota_settings = TF.Nil
-            , _throttle_settings = TF.Nil
+            , _rest_api_id = TF.Nil
+            , _schema = TF.Nil
             }
 
-{- | The @aws_appautoscaling_policy@ AWS resource.
+{- | The @aws_api_gateway_stage@ AWS resource.
 
-Provides an Application AutoScaling Policy resource.
+Provides an API Gateway Stage.
 -}
-data AppautoscalingPolicyResource s = AppautoscalingPolicyResource {
-      _name                                         :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the policy. -}
-    , _policy_type                                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) For DynamoDB, only @TargetTrackingScaling@ is supported. For any other service, only @StepScaling@ is supported. Defaults to @StepScaling@ . -}
-    , _resource_id                                  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The resource type and unique identifier string for the resource associated with the scaling policy. Documentation can be found in the @ResourceId@ parameter at: <http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html#API_RegisterScalableTarget_RequestParameters> -}
-    , _scalable_dimension                           :: !(TF.Attr s P.Text)
-    {- ^ (Required) The scalable dimension of the scalable target. Documentation can be found in the @ScalableDimension@ parameter at: <http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html#API_RegisterScalableTarget_RequestParameters> -}
-    , _service_namespace                            :: !(TF.Attr s P.Text)
-    {- ^ (Required) The AWS service namespace of the scalable target. Documentation can be found in the @ServiceNamespace@ parameter at: <http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html#API_RegisterScalableTarget_RequestParameters> -}
-    , _step_scaling_policy_configuration            :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Step scaling policy configuration, requires @policy_type = "StepScaling"@ (default). See supported fields below. -}
-    , _target_tracking_scaling_policy_configuration :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A target tracking policy, requires @policy_type = "TargetTrackingScaling"@ . See supported fields below. -}
+data ApiGatewayStageResource s = ApiGatewayStageResource {
+      _access_log_settings   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Enables access logs for the API stage. Detailed below. -}
+    , _cache_cluster_enabled :: !(TF.Attr s P.Bool)
+    {- ^ (Optional) Specifies whether a cache cluster is enabled for the stage -}
+    , _cache_cluster_size    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The size of the cache cluster for the stage, if enabled. Allowed values include @0.5@ , @1.6@ , @6.1@ , @13.5@ , @28.4@ , @58.2@ , @118@ and @237@ . -}
+    , _client_certificate_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The identifier of a client certificate for the stage. -}
+    , _deployment_id         :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the deployment that the stage points to -}
+    , _description           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The description of the stage -}
+    , _documentation_version :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The version of the associated API documentation -}
+    , _rest_api_id           :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the associated REST API -}
+    , _stage_name            :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the stage -}
+    , _tags                  :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) A mapping of tags to assign to the resource. -}
+    , _variables             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A map that defines the stage variables -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AppautoscalingPolicyResource s) where
-    toHCL AppautoscalingPolicyResource{..} = TF.inline $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "policy_type" <$> TF.attribute _policy_type
-        , TF.assign "resource_id" <$> TF.attribute _resource_id
-        , TF.assign "scalable_dimension" <$> TF.attribute _scalable_dimension
-        , TF.assign "service_namespace" <$> TF.attribute _service_namespace
-        , TF.assign "step_scaling_policy_configuration" <$> TF.attribute _step_scaling_policy_configuration
-        , TF.assign "target_tracking_scaling_policy_configuration" <$> TF.attribute _target_tracking_scaling_policy_configuration
+instance TF.ToHCL (ApiGatewayStageResource s) where
+    toHCL ApiGatewayStageResource{..} = TF.inline $ catMaybes
+        [ TF.assign "access_log_settings" <$> TF.attribute _access_log_settings
+        , TF.assign "cache_cluster_enabled" <$> TF.attribute _cache_cluster_enabled
+        , TF.assign "cache_cluster_size" <$> TF.attribute _cache_cluster_size
+        , TF.assign "client_certificate_id" <$> TF.attribute _client_certificate_id
+        , TF.assign "deployment_id" <$> TF.attribute _deployment_id
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "documentation_version" <$> TF.attribute _documentation_version
+        , TF.assign "rest_api_id" <$> TF.attribute _rest_api_id
+        , TF.assign "stage_name" <$> TF.attribute _stage_name
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "variables" <$> TF.attribute _variables
         ]
 
-instance P.HasName (AppautoscalingPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasAccessLogSettings (ApiGatewayStageResource s) (TF.Attr s P.Text) where
+    accessLogSettings =
+        lens (_access_log_settings :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _access_log_settings = a } :: ApiGatewayStageResource s)
+
+instance P.HasCacheClusterEnabled (ApiGatewayStageResource s) (TF.Attr s P.Bool) where
+    cacheClusterEnabled =
+        lens (_cache_cluster_enabled :: ApiGatewayStageResource s -> TF.Attr s P.Bool)
+             (\s a -> s { _cache_cluster_enabled = a } :: ApiGatewayStageResource s)
+
+instance P.HasCacheClusterSize (ApiGatewayStageResource s) (TF.Attr s P.Text) where
+    cacheClusterSize =
+        lens (_cache_cluster_size :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cache_cluster_size = a } :: ApiGatewayStageResource s)
+
+instance P.HasClientCertificateId (ApiGatewayStageResource s) (TF.Attr s P.Text) where
+    clientCertificateId =
+        lens (_client_certificate_id :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _client_certificate_id = a } :: ApiGatewayStageResource s)
+
+instance P.HasDeploymentId (ApiGatewayStageResource s) (TF.Attr s P.Text) where
+    deploymentId =
+        lens (_deployment_id :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _deployment_id = a } :: ApiGatewayStageResource s)
+
+instance P.HasDescription (ApiGatewayStageResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ApiGatewayStageResource s)
+
+instance P.HasDocumentationVersion (ApiGatewayStageResource s) (TF.Attr s P.Text) where
+    documentationVersion =
+        lens (_documentation_version :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _documentation_version = a } :: ApiGatewayStageResource s)
+
+instance P.HasRestApiId (ApiGatewayStageResource s) (TF.Attr s P.Text) where
+    restApiId =
+        lens (_rest_api_id :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _rest_api_id = a } :: ApiGatewayStageResource s)
+
+instance P.HasStageName (ApiGatewayStageResource s) (TF.Attr s P.Text) where
+    stageName =
+        lens (_stage_name :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _stage_name = a } :: ApiGatewayStageResource s)
+
+instance P.HasTags (ApiGatewayStageResource s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: ApiGatewayStageResource s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: ApiGatewayStageResource s)
+
+instance P.HasVariables (ApiGatewayStageResource s) (TF.Attr s P.Text) where
+    variables =
+        lens (_variables :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _variables = a } :: ApiGatewayStageResource s)
+
+instance s ~ s' => P.HasComputedAccessLogSettings (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
+    computedAccessLogSettings =
+        (_access_log_settings :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCacheClusterEnabled (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Bool) where
+    computedCacheClusterEnabled =
+        (_cache_cluster_enabled :: ApiGatewayStageResource s -> TF.Attr s P.Bool)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCacheClusterSize (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
+    computedCacheClusterSize =
+        (_cache_cluster_size :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedClientCertificateId (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
+    computedClientCertificateId =
+        (_client_certificate_id :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDeploymentId (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
+    computedDeploymentId =
+        (_deployment_id :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDocumentationVersion (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
+    computedDocumentationVersion =
+        (_documentation_version :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedExecutionArn (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
+    computedExecutionArn x = TF.compute (TF.refKey x) "execution_arn"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInvokeUrl (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
+    computedInvokeUrl x = TF.compute (TF.refKey x) "invoke_url"
+
+instance s ~ s' => P.HasComputedRestApiId (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
+    computedRestApiId =
+        (_rest_api_id :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedStageName (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
+    computedStageName =
+        (_stage_name :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
+        (_tags :: ApiGatewayStageResource s -> TF.Attr s (P.Tags s))
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVariables (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
+    computedVariables =
+        (_variables :: ApiGatewayStageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+apiGatewayStageResource :: TF.Resource P.AWS (ApiGatewayStageResource s)
+apiGatewayStageResource =
+    TF.newResource "aws_api_gateway_stage" $
+        ApiGatewayStageResource {
+              _access_log_settings = TF.Nil
+            , _cache_cluster_enabled = TF.Nil
+            , _cache_cluster_size = TF.Nil
+            , _client_certificate_id = TF.Nil
+            , _deployment_id = TF.Nil
+            , _description = TF.Nil
+            , _documentation_version = TF.Nil
+            , _rest_api_id = TF.Nil
+            , _stage_name = TF.Nil
+            , _tags = TF.Nil
+            , _variables = TF.Nil
+            }
+
+{- | The @aws_api_gateway_vpc_link@ AWS resource.
+
+Provides an API Gateway VPC Link.
+-}
+data ApiGatewayVpcLinkResource s = ApiGatewayVpcLinkResource {
+      _description :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The description of the VPC link. -}
+    , _name        :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name used to label and identify the VPC link. -}
+    , _target_arns :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The list of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ApiGatewayVpcLinkResource s) where
+    toHCL ApiGatewayVpcLinkResource{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "target_arns" <$> TF.attribute _target_arns
+        ]
+
+instance P.HasDescription (ApiGatewayVpcLinkResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: ApiGatewayVpcLinkResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ApiGatewayVpcLinkResource s)
+
+instance P.HasName (ApiGatewayVpcLinkResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: AppautoscalingPolicyResource s)
+        lens (_name :: ApiGatewayVpcLinkResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ApiGatewayVpcLinkResource s)
 
-instance P.HasPolicyType (AppautoscalingPolicyResource s) (TF.Attr s P.Text) where
-    policyType =
-        lens (_policy_type :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _policy_type = a } :: AppautoscalingPolicyResource s)
+instance P.HasTargetArns (ApiGatewayVpcLinkResource s) (TF.Attr s P.Text) where
+    targetArns =
+        lens (_target_arns :: ApiGatewayVpcLinkResource s -> TF.Attr s P.Text)
+             (\s a -> s { _target_arns = a } :: ApiGatewayVpcLinkResource s)
 
-instance P.HasResourceId (AppautoscalingPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ApiGatewayVpcLinkResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: ApiGatewayVpcLinkResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApiGatewayVpcLinkResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ApiGatewayVpcLinkResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ApiGatewayVpcLinkResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTargetArns (TF.Ref s' (ApiGatewayVpcLinkResource s)) (TF.Attr s P.Text) where
+    computedTargetArns =
+        (_target_arns :: ApiGatewayVpcLinkResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+apiGatewayVpcLinkResource :: TF.Resource P.AWS (ApiGatewayVpcLinkResource s)
+apiGatewayVpcLinkResource =
+    TF.newResource "aws_api_gateway_vpc_link" $
+        ApiGatewayVpcLinkResource {
+              _description = TF.Nil
+            , _name = TF.Nil
+            , _target_arns = TF.Nil
+            }
+
+{- | The @aws_appautoscaling_scheduled_action@ AWS resource.
+
+Provides an Application AutoScaling ScheduledAction resource.
+-}
+data AppautoscalingScheduledActionResource s = AppautoscalingScheduledActionResource {
+      _end_time               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The date and time for the scheduled action to end. Specify the following format: 2006-01-02T15:04:05Z -}
+    , _name                   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the scheduled action. -}
+    , _resource_id            :: !(TF.Attr s P.Text)
+    {- ^ (Required) The identifier of the resource associated with the scheduled action. Documentation can be found in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-ResourceId> -}
+    , _scalable_dimension     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The scalable dimension. Documentation can be found in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-ScalableDimension> Example: ecs:service:DesiredCount -}
+    , _scalable_target_action :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The new minimum and maximum capacity. You can set both values or just one. See <#scalable-target-action-arguments> -}
+    , _schedule               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The schedule for this action. The following formats are supported: At expressions - at(yyyy-mm-ddThh:mm:ss), Rate expressions - rate(valueunit), Cron expressions - cron(fields). In UTC. Documentation can be found in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-Schedule> -}
+    , _service_namespace      :: !(TF.Attr s P.Text)
+    {- ^ (Required) The namespace of the AWS service. Documentation can be found in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-ServiceNamespace> Example: ecs -}
+    , _start_time             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The date and time for the scheduled action to start. Specify the following format: 2006-01-02T15:04:05Z -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (AppautoscalingScheduledActionResource s) where
+    toHCL AppautoscalingScheduledActionResource{..} = TF.inline $ catMaybes
+        [ TF.assign "end_time" <$> TF.attribute _end_time
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_id" <$> TF.attribute _resource_id
+        , TF.assign "scalable_dimension" <$> TF.attribute _scalable_dimension
+        , TF.assign "scalable_target_action" <$> TF.attribute _scalable_target_action
+        , TF.assign "schedule" <$> TF.attribute _schedule
+        , TF.assign "service_namespace" <$> TF.attribute _service_namespace
+        , TF.assign "start_time" <$> TF.attribute _start_time
+        ]
+
+instance P.HasEndTime (AppautoscalingScheduledActionResource s) (TF.Attr s P.Text) where
+    endTime =
+        lens (_end_time :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _end_time = a } :: AppautoscalingScheduledActionResource s)
+
+instance P.HasName (AppautoscalingScheduledActionResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: AppautoscalingScheduledActionResource s)
+
+instance P.HasResourceId (AppautoscalingScheduledActionResource s) (TF.Attr s P.Text) where
     resourceId =
-        lens (_resource_id :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_id = a } :: AppautoscalingPolicyResource s)
+        lens (_resource_id :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_id = a } :: AppautoscalingScheduledActionResource s)
 
-instance P.HasScalableDimension (AppautoscalingPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasScalableDimension (AppautoscalingScheduledActionResource s) (TF.Attr s P.Text) where
     scalableDimension =
-        lens (_scalable_dimension :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _scalable_dimension = a } :: AppautoscalingPolicyResource s)
+        lens (_scalable_dimension :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _scalable_dimension = a } :: AppautoscalingScheduledActionResource s)
 
-instance P.HasServiceNamespace (AppautoscalingPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasScalableTargetAction (AppautoscalingScheduledActionResource s) (TF.Attr s P.Text) where
+    scalableTargetAction =
+        lens (_scalable_target_action :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _scalable_target_action = a } :: AppautoscalingScheduledActionResource s)
+
+instance P.HasSchedule (AppautoscalingScheduledActionResource s) (TF.Attr s P.Text) where
+    schedule =
+        lens (_schedule :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _schedule = a } :: AppautoscalingScheduledActionResource s)
+
+instance P.HasServiceNamespace (AppautoscalingScheduledActionResource s) (TF.Attr s P.Text) where
     serviceNamespace =
-        lens (_service_namespace :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _service_namespace = a } :: AppautoscalingPolicyResource s)
+        lens (_service_namespace :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _service_namespace = a } :: AppautoscalingScheduledActionResource s)
 
-instance P.HasStepScalingPolicyConfiguration (AppautoscalingPolicyResource s) (TF.Attr s P.Text) where
-    stepScalingPolicyConfiguration =
-        lens (_step_scaling_policy_configuration :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _step_scaling_policy_configuration = a } :: AppautoscalingPolicyResource s)
+instance P.HasStartTime (AppautoscalingScheduledActionResource s) (TF.Attr s P.Text) where
+    startTime =
+        lens (_start_time :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _start_time = a } :: AppautoscalingScheduledActionResource s)
 
-instance P.HasTargetTrackingScalingPolicyConfiguration (AppautoscalingPolicyResource s) (TF.Attr s P.Text) where
-    targetTrackingScalingPolicyConfiguration =
-        lens (_target_tracking_scaling_policy_configuration :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target_tracking_scaling_policy_configuration = a } :: AppautoscalingPolicyResource s)
-
-instance s ~ s' => P.HasComputedAdjustmentType (TF.Ref s' (AppautoscalingPolicyResource s)) (TF.Attr s P.Text) where
-    computedAdjustmentType x = TF.compute (TF.refKey x) "adjustment_type"
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (AppautoscalingPolicyResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (AppautoscalingScheduledActionResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (AppautoscalingPolicyResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedEndTime (TF.Ref s' (AppautoscalingScheduledActionResource s)) (TF.Attr s P.Text) where
+    computedEndTime =
+        (_end_time :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
-instance s ~ s' => P.HasComputedPolicyType (TF.Ref s' (AppautoscalingPolicyResource s)) (TF.Attr s P.Text) where
-    computedPolicyType x = TF.compute (TF.refKey x) "policy_type"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AppautoscalingScheduledActionResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
-instance s ~ s' => P.HasComputedResourceId (TF.Ref s' (AppautoscalingPolicyResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceId (TF.Ref s' (AppautoscalingScheduledActionResource s)) (TF.Attr s P.Text) where
     computedResourceId =
-        (_resource_id :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
+        (_resource_id :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedScalableDimension (TF.Ref s' (AppautoscalingPolicyResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScalableDimension (TF.Ref s' (AppautoscalingScheduledActionResource s)) (TF.Attr s P.Text) where
     computedScalableDimension =
-        (_scalable_dimension :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
+        (_scalable_dimension :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedServiceNamespace (TF.Ref s' (AppautoscalingPolicyResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScalableTargetAction (TF.Ref s' (AppautoscalingScheduledActionResource s)) (TF.Attr s P.Text) where
+    computedScalableTargetAction =
+        (_scalable_target_action :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSchedule (TF.Ref s' (AppautoscalingScheduledActionResource s)) (TF.Attr s P.Text) where
+    computedSchedule =
+        (_schedule :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedServiceNamespace (TF.Ref s' (AppautoscalingScheduledActionResource s)) (TF.Attr s P.Text) where
     computedServiceNamespace =
-        (_service_namespace :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
+        (_service_namespace :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStepScalingPolicyConfiguration (TF.Ref s' (AppautoscalingPolicyResource s)) (TF.Attr s P.Text) where
-    computedStepScalingPolicyConfiguration =
-        (_step_scaling_policy_configuration :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (AppautoscalingScheduledActionResource s)) (TF.Attr s P.Text) where
+    computedStartTime =
+        (_start_time :: AppautoscalingScheduledActionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTargetTrackingScalingPolicyConfiguration (TF.Ref s' (AppautoscalingPolicyResource s)) (TF.Attr s P.Text) where
-    computedTargetTrackingScalingPolicyConfiguration =
-        (_target_tracking_scaling_policy_configuration :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-appautoscalingPolicyResource :: TF.Resource P.AWS (AppautoscalingPolicyResource s)
-appautoscalingPolicyResource =
-    TF.newResource "aws_appautoscaling_policy" $
-        AppautoscalingPolicyResource {
-              _name = TF.Nil
-            , _policy_type = TF.Nil
+appautoscalingScheduledActionResource :: TF.Resource P.AWS (AppautoscalingScheduledActionResource s)
+appautoscalingScheduledActionResource =
+    TF.newResource "aws_appautoscaling_scheduled_action" $
+        AppautoscalingScheduledActionResource {
+              _end_time = TF.Nil
+            , _name = TF.Nil
             , _resource_id = TF.Nil
             , _scalable_dimension = TF.Nil
+            , _scalable_target_action = TF.Nil
+            , _schedule = TF.Nil
             , _service_namespace = TF.Nil
-            , _step_scaling_policy_configuration = TF.Nil
-            , _target_tracking_scaling_policy_configuration = TF.Nil
+            , _start_time = TF.Nil
             }
 
 {- | The @aws_athena_database@ AWS resource.
@@ -2198,508 +2247,199 @@ athenaDatabaseResource =
             , _name = TF.Nil
             }
 
-{- | The @aws_athena_named_query@ AWS resource.
+{- | The @aws_autoscaling_notification@ AWS resource.
 
-Provides an Athena Named Query resource.
+Provides an AutoScaling Group with Notification support, via SNS Topics.
+Each of the @notifications@ map to a
+<https://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_DescribeNotificationConfigurations.html>
+inside Amazon Web Services, and are applied to each AutoScaling Group you
+supply.
 -}
-data AthenaNamedQueryResource s = AthenaNamedQueryResource {
-      _database    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The database to which the query belongs. -}
-    , _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A brief explanation of the query. Maximum length of 1024. -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The plain language name for the query. Maximum length of 128. -}
-    , _query       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The text of the query itself. In other words, all query statements. Maximum length of 262144. -}
+data AutoscalingNotificationResource s = AutoscalingNotificationResource {
+      _group_names   :: !(TF.Attr s P.Text)
+    {- ^ (Required) A list of AutoScaling Group Names -}
+    , _notifications :: !(TF.Attr s P.Text)
+    {- ^ (Required) A list of Notification Types that trigger notifications. Acceptable values are documented <https://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_NotificationConfiguration.html> -}
+    , _topic_arn     :: !(TF.Attr s P.Text)
+    {- ^ (Required) The Topic ARN for notifications to be sent through -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AthenaNamedQueryResource s) where
-    toHCL AthenaNamedQueryResource{..} = TF.inline $ catMaybes
-        [ TF.assign "database" <$> TF.attribute _database
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "query" <$> TF.attribute _query
+instance TF.ToHCL (AutoscalingNotificationResource s) where
+    toHCL AutoscalingNotificationResource{..} = TF.inline $ catMaybes
+        [ TF.assign "group_names" <$> TF.attribute _group_names
+        , TF.assign "notifications" <$> TF.attribute _notifications
+        , TF.assign "topic_arn" <$> TF.attribute _topic_arn
         ]
 
-instance P.HasDatabase (AthenaNamedQueryResource s) (TF.Attr s P.Text) where
-    database =
-        lens (_database :: AthenaNamedQueryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _database = a } :: AthenaNamedQueryResource s)
+instance P.HasGroupNames (AutoscalingNotificationResource s) (TF.Attr s P.Text) where
+    groupNames =
+        lens (_group_names :: AutoscalingNotificationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _group_names = a } :: AutoscalingNotificationResource s)
 
-instance P.HasDescription (AthenaNamedQueryResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: AthenaNamedQueryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: AthenaNamedQueryResource s)
+instance P.HasNotifications (AutoscalingNotificationResource s) (TF.Attr s P.Text) where
+    notifications =
+        lens (_notifications :: AutoscalingNotificationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _notifications = a } :: AutoscalingNotificationResource s)
 
-instance P.HasName (AthenaNamedQueryResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: AthenaNamedQueryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: AthenaNamedQueryResource s)
+instance P.HasTopicArn (AutoscalingNotificationResource s) (TF.Attr s P.Text) where
+    topicArn =
+        lens (_topic_arn :: AutoscalingNotificationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _topic_arn = a } :: AutoscalingNotificationResource s)
 
-instance P.HasQuery (AthenaNamedQueryResource s) (TF.Attr s P.Text) where
-    query =
-        lens (_query :: AthenaNamedQueryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _query = a } :: AthenaNamedQueryResource s)
-
-instance s ~ s' => P.HasComputedDatabase (TF.Ref s' (AthenaNamedQueryResource s)) (TF.Attr s P.Text) where
-    computedDatabase =
-        (_database :: AthenaNamedQueryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedGroupNames (TF.Ref s' (AutoscalingNotificationResource s)) (TF.Attr s P.Text) where
+    computedGroupNames =
+        (_group_names :: AutoscalingNotificationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AthenaNamedQueryResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: AthenaNamedQueryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedNotifications (TF.Ref s' (AutoscalingNotificationResource s)) (TF.Attr s P.Text) where
+    computedNotifications =
+        (_notifications :: AutoscalingNotificationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AthenaNamedQueryResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (AthenaNamedQueryResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: AthenaNamedQueryResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedTopicArn (TF.Ref s' (AutoscalingNotificationResource s)) (TF.Attr s P.Text) where
+    computedTopicArn =
+        (_topic_arn :: AutoscalingNotificationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedQuery (TF.Ref s' (AthenaNamedQueryResource s)) (TF.Attr s P.Text) where
-    computedQuery =
-        (_query :: AthenaNamedQueryResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-athenaNamedQueryResource :: TF.Resource P.AWS (AthenaNamedQueryResource s)
-athenaNamedQueryResource =
-    TF.newResource "aws_athena_named_query" $
-        AthenaNamedQueryResource {
-              _database = TF.Nil
-            , _description = TF.Nil
-            , _name = TF.Nil
-            , _query = TF.Nil
+autoscalingNotificationResource :: TF.Resource P.AWS (AutoscalingNotificationResource s)
+autoscalingNotificationResource =
+    TF.newResource "aws_autoscaling_notification" $
+        AutoscalingNotificationResource {
+              _group_names = TF.Nil
+            , _notifications = TF.Nil
+            , _topic_arn = TF.Nil
             }
 
-{- | The @aws_autoscaling_attachment@ AWS resource.
+{- | The @aws_autoscaling_schedule@ AWS resource.
 
-Provides an AutoScaling Attachment resource. ~> NOTE on AutoScaling Groups
-and ASG Attachments: Terraform currently provides both a standalone ASG
-Attachment resource (describing an ASG attached to an ELB), and an
-<autoscaling_group.html> with @load_balancers@ defined in-line. At this time
-you cannot use an ASG with in-line load balancers in conjunction with an ASG
-Attachment resource. Doing so will cause a conflict and will overwrite
-attachments.
+Provides an AutoScaling Schedule resource.
 -}
-data AutoscalingAttachmentResource s = AutoscalingAttachmentResource {
-      _alb_target_group_arn   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ARN of an ALB Target Group. -}
-    , _autoscaling_group_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) Name of ASG to associate with the ELB. -}
-    , _elb                    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the ELB. -}
+data AutoscalingScheduleResource s = AutoscalingScheduleResource {
+      _autoscaling_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name or Amazon Resource Name (ARN) of the Auto Scaling group. -}
+    , _desired_capacity       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The number of EC2 instances that should be running in the group. Default 0.  Set to -1 if you don't want to change the desired capacity at the scheduled time. -}
+    , _end_time               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The time for this action to end, in "YYYY-MM-DDThh:mm:ssZ" format in UTC/GMT only (for example, 2014-06-01T00:00:00Z ). If you try to schedule your action in the past, Auto Scaling returns an error message. -}
+    , _max_size               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The maximum size for the Auto Scaling group. Default 0. Set to -1 if you don't want to change the maximum size at the scheduled time. -}
+    , _min_size               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The minimum size for the Auto Scaling group. Default 0. Set to -1 if you don't want to change the minimum size at the scheduled time. -}
+    , _recurrence             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. -}
+    , _scheduled_action_name  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of this scaling action. -}
+    , _start_time             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ" format in UTC/GMT only (for example, 2014-06-01T00:00:00Z ). If you try to schedule your action in the past, Auto Scaling returns an error message. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AutoscalingAttachmentResource s) where
-    toHCL AutoscalingAttachmentResource{..} = TF.inline $ catMaybes
-        [ TF.assign "alb_target_group_arn" <$> TF.attribute _alb_target_group_arn
-        , TF.assign "autoscaling_group_name" <$> TF.attribute _autoscaling_group_name
-        , TF.assign "elb" <$> TF.attribute _elb
-        ]
-
-instance P.HasAlbTargetGroupArn (AutoscalingAttachmentResource s) (TF.Attr s P.Text) where
-    albTargetGroupArn =
-        lens (_alb_target_group_arn :: AutoscalingAttachmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _alb_target_group_arn = a } :: AutoscalingAttachmentResource s)
-
-instance P.HasAutoscalingGroupName (AutoscalingAttachmentResource s) (TF.Attr s P.Text) where
-    autoscalingGroupName =
-        lens (_autoscaling_group_name :: AutoscalingAttachmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _autoscaling_group_name = a } :: AutoscalingAttachmentResource s)
-
-instance P.HasElb (AutoscalingAttachmentResource s) (TF.Attr s P.Text) where
-    elb =
-        lens (_elb :: AutoscalingAttachmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _elb = a } :: AutoscalingAttachmentResource s)
-
-instance s ~ s' => P.HasComputedAlbTargetGroupArn (TF.Ref s' (AutoscalingAttachmentResource s)) (TF.Attr s P.Text) where
-    computedAlbTargetGroupArn =
-        (_alb_target_group_arn :: AutoscalingAttachmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedAutoscalingGroupName (TF.Ref s' (AutoscalingAttachmentResource s)) (TF.Attr s P.Text) where
-    computedAutoscalingGroupName =
-        (_autoscaling_group_name :: AutoscalingAttachmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedElb (TF.Ref s' (AutoscalingAttachmentResource s)) (TF.Attr s P.Text) where
-    computedElb =
-        (_elb :: AutoscalingAttachmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-autoscalingAttachmentResource :: TF.Resource P.AWS (AutoscalingAttachmentResource s)
-autoscalingAttachmentResource =
-    TF.newResource "aws_autoscaling_attachment" $
-        AutoscalingAttachmentResource {
-              _alb_target_group_arn = TF.Nil
-            , _autoscaling_group_name = TF.Nil
-            , _elb = TF.Nil
-            }
-
-{- | The @aws_autoscaling_group@ AWS resource.
-
-Provides an AutoScaling Group resource.
--}
-data AutoscalingGroupResource s = AutoscalingGroupResource {
-      _availability_zones        :: !(TF.Attr s [TF.Attr s P.Text])
-    {- ^ (Optional) A list of AZs to launch resources in. Required only if you do not specify any @vpc_zone_identifier@ -}
-    , _default_cooldown          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The amount of time, in seconds, after a scaling activity completes before another scaling activity can start. -}
-    , _desired_capacity          :: !(TF.Attr s P.Int)
-    {- ^ (Optional) The number of Amazon EC2 instances that should be running in the group. (See also <#waiting-for-capacity> below.) -}
-    , _enabled_metrics           :: !(TF.Attr s P.Bool)
-    {- ^ (Optional) A list of metrics to collect. The allowed values are @GroupMinSize@ , @GroupMaxSize@ , @GroupDesiredCapacity@ , @GroupInServiceInstances@ , @GroupPendingInstances@ , @GroupStandbyInstances@ , @GroupTerminatingInstances@ , @GroupTotalInstances@ . -}
-    , _force_delete              :: !(TF.Attr s P.Bool)
-    {- ^ (Optional) Allows deleting the autoscaling group without waiting for all instances in the pool to terminate.  You can force an autoscaling group to delete even if it's in the process of scaling a resource. Normally, Terraform drains all the instances before deleting the group.  This bypasses that behavior and potentially leaves resources dangling. -}
-    , _health_check_grace_period :: !(TF.Attr s P.Int)
-    {- ^ (Optional, Default: 300) Time (in seconds) after instance comes into service before checking health. -}
-    , _health_check_type         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) "EC2" or "ELB". Controls how health checking is done. -}
-    , _initial_lifecycle_hook    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) One or more <http://docs.aws.amazon.com/autoscaling/latest/userguide/lifecycle-hooks.html> to attach to the autoscaling group before instances are launched. The syntax is exactly the same as the separate </docs/providers/aws/r/autoscaling_lifecycle_hooks.html> resource, without the @autoscaling_group_name@ attribute. Please note that this will only work when creating a new autoscaling group. For all other use-cases, please use @aws_autoscaling_lifecycle_hook@ resource. -}
-    , _launch_configuration      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the launch configuration to use. -}
-    , _load_balancers            :: !(TF.Attr s [TF.Attr s P.Text])
-    {- ^ (Optional) A list of elastic load balancer names to add to the autoscaling group names. Only valid for classic load balancers. For ALBs, use @target_group_arns@ instead. -}
-    , _max_size                  :: !(TF.Attr s P.Int)
-    {- ^ (Required) The maximum size of the auto scale group. -}
-    , _metrics_granularity       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The granularity to associate with the metrics to collect. The only valid value is @1Minute@ . Default is @1Minute@ . -}
-    , _min_elb_capacity          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Setting this causes Terraform to wait for this number of instances to show up healthy in the ELB only on creation. Updates will not wait on ELB instance number changes. (See also <#waiting-for-capacity> below.) -}
-    , _min_size                  :: !(TF.Attr s P.Int)
-    {- ^ (Required) The minimum size of the auto scale group. (See also <#waiting-for-capacity> below.) -}
-    , _name                      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the auto scaling group. By default generated by Terraform. -}
-    , _name_prefix               :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _placement_group           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the placement group into which you'll launch your instances, if any. -}
-    , _protect_from_scale_in     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Allows setting instance protection. The autoscaling group will not select instances with this setting for terminination during scale in events. -}
-    , _suspended_processes       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of processes to suspend for the AutoScaling Group. The allowed values are @Launch@ , @Terminate@ , @HealthCheck@ , @ReplaceUnhealthy@ , @AZRebalance@ , @AlarmNotification@ , @ScheduledActions@ , @AddToLoadBalancer@ . Note that if you suspend either the @Launch@ or @Terminate@ process types, it can prevent your autoscaling group from functioning properly. -}
-    , _tag                       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of tag blocks. Tags documented below. -}
-    , _tags                      :: !(TF.Attr s (P.Tags s))
-    {- ^ (Optional) A list of tag blocks (maps). Tags documented below. -}
-    , _target_group_arns         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of @aws_alb_target_group@ ARNs, for use with Application Load Balancing. -}
-    , _termination_policies      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of policies to decide how the instances in the auto scale group should be terminated. The allowed values are @OldestInstance@ , @NewestInstance@ , @OldestLaunchConfiguration@ , @ClosestToNextInstanceHour@ , @Default@ . -}
-    , _vpc_zone_identifier       :: !(TF.Attr s [TF.Attr s P.Text])
-    {- ^ (Optional) A list of subnet IDs to launch resources in. -}
-    , _wait_for_capacity_timeout :: !(TF.Attr s P.Text)
-    {- ^ (Default: "10m") A maximum <https://golang.org/pkg/time/#ParseDuration> that Terraform should wait for ASG instances to be healthy before timing out.  (See also <#waiting-for-capacity> below.) Setting this to "0" causes Terraform to skip all Capacity Waiting behavior. -}
-    , _wait_for_elb_capacity     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Setting this will cause Terraform to wait for exactly this number of healthy instances in all attached load balancers on both create and update operations. (Takes precedence over @min_elb_capacity@ behavior.) (See also <#waiting-for-capacity> below.) -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (AutoscalingGroupResource s) where
-    toHCL AutoscalingGroupResource{..} = TF.inline $ catMaybes
-        [ TF.assign "availability_zones" <$> TF.attribute _availability_zones
-        , TF.assign "default_cooldown" <$> TF.attribute _default_cooldown
+instance TF.ToHCL (AutoscalingScheduleResource s) where
+    toHCL AutoscalingScheduleResource{..} = TF.inline $ catMaybes
+        [ TF.assign "autoscaling_group_name" <$> TF.attribute _autoscaling_group_name
         , TF.assign "desired_capacity" <$> TF.attribute _desired_capacity
-        , TF.assign "enabled_metrics" <$> TF.attribute _enabled_metrics
-        , TF.assign "force_delete" <$> TF.attribute _force_delete
-        , TF.assign "health_check_grace_period" <$> TF.attribute _health_check_grace_period
-        , TF.assign "health_check_type" <$> TF.attribute _health_check_type
-        , TF.assign "initial_lifecycle_hook" <$> TF.attribute _initial_lifecycle_hook
-        , TF.assign "launch_configuration" <$> TF.attribute _launch_configuration
-        , TF.assign "load_balancers" <$> TF.attribute _load_balancers
+        , TF.assign "end_time" <$> TF.attribute _end_time
         , TF.assign "max_size" <$> TF.attribute _max_size
-        , TF.assign "metrics_granularity" <$> TF.attribute _metrics_granularity
-        , TF.assign "min_elb_capacity" <$> TF.attribute _min_elb_capacity
         , TF.assign "min_size" <$> TF.attribute _min_size
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
-        , TF.assign "placement_group" <$> TF.attribute _placement_group
-        , TF.assign "protect_from_scale_in" <$> TF.attribute _protect_from_scale_in
-        , TF.assign "suspended_processes" <$> TF.attribute _suspended_processes
-        , TF.assign "tag" <$> TF.attribute _tag
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "target_group_arns" <$> TF.attribute _target_group_arns
-        , TF.assign "termination_policies" <$> TF.attribute _termination_policies
-        , TF.assign "vpc_zone_identifier" <$> TF.attribute _vpc_zone_identifier
-        , TF.assign "wait_for_capacity_timeout" <$> TF.attribute _wait_for_capacity_timeout
-        , TF.assign "wait_for_elb_capacity" <$> TF.attribute _wait_for_elb_capacity
+        , TF.assign "recurrence" <$> TF.attribute _recurrence
+        , TF.assign "scheduled_action_name" <$> TF.attribute _scheduled_action_name
+        , TF.assign "start_time" <$> TF.attribute _start_time
         ]
 
-instance P.HasAvailabilityZones (AutoscalingGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    availabilityZones =
-        lens (_availability_zones :: AutoscalingGroupResource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _availability_zones = a } :: AutoscalingGroupResource s)
+instance P.HasAutoscalingGroupName (AutoscalingScheduleResource s) (TF.Attr s P.Text) where
+    autoscalingGroupName =
+        lens (_autoscaling_group_name :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _autoscaling_group_name = a } :: AutoscalingScheduleResource s)
 
-instance P.HasDefaultCooldown (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    defaultCooldown =
-        lens (_default_cooldown :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _default_cooldown = a } :: AutoscalingGroupResource s)
-
-instance P.HasDesiredCapacity (AutoscalingGroupResource s) (TF.Attr s P.Int) where
+instance P.HasDesiredCapacity (AutoscalingScheduleResource s) (TF.Attr s P.Text) where
     desiredCapacity =
-        lens (_desired_capacity :: AutoscalingGroupResource s -> TF.Attr s P.Int)
-             (\s a -> s { _desired_capacity = a } :: AutoscalingGroupResource s)
+        lens (_desired_capacity :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _desired_capacity = a } :: AutoscalingScheduleResource s)
 
-instance P.HasEnabledMetrics (AutoscalingGroupResource s) (TF.Attr s P.Bool) where
-    enabledMetrics =
-        lens (_enabled_metrics :: AutoscalingGroupResource s -> TF.Attr s P.Bool)
-             (\s a -> s { _enabled_metrics = a } :: AutoscalingGroupResource s)
+instance P.HasEndTime (AutoscalingScheduleResource s) (TF.Attr s P.Text) where
+    endTime =
+        lens (_end_time :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _end_time = a } :: AutoscalingScheduleResource s)
 
-instance P.HasForceDelete (AutoscalingGroupResource s) (TF.Attr s P.Bool) where
-    forceDelete =
-        lens (_force_delete :: AutoscalingGroupResource s -> TF.Attr s P.Bool)
-             (\s a -> s { _force_delete = a } :: AutoscalingGroupResource s)
-
-instance P.HasHealthCheckGracePeriod (AutoscalingGroupResource s) (TF.Attr s P.Int) where
-    healthCheckGracePeriod =
-        lens (_health_check_grace_period :: AutoscalingGroupResource s -> TF.Attr s P.Int)
-             (\s a -> s { _health_check_grace_period = a } :: AutoscalingGroupResource s)
-
-instance P.HasHealthCheckType (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    healthCheckType =
-        lens (_health_check_type :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _health_check_type = a } :: AutoscalingGroupResource s)
-
-instance P.HasInitialLifecycleHook (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    initialLifecycleHook =
-        lens (_initial_lifecycle_hook :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _initial_lifecycle_hook = a } :: AutoscalingGroupResource s)
-
-instance P.HasLaunchConfiguration (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    launchConfiguration =
-        lens (_launch_configuration :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _launch_configuration = a } :: AutoscalingGroupResource s)
-
-instance P.HasLoadBalancers (AutoscalingGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    loadBalancers =
-        lens (_load_balancers :: AutoscalingGroupResource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _load_balancers = a } :: AutoscalingGroupResource s)
-
-instance P.HasMaxSize (AutoscalingGroupResource s) (TF.Attr s P.Int) where
+instance P.HasMaxSize (AutoscalingScheduleResource s) (TF.Attr s P.Text) where
     maxSize =
-        lens (_max_size :: AutoscalingGroupResource s -> TF.Attr s P.Int)
-             (\s a -> s { _max_size = a } :: AutoscalingGroupResource s)
+        lens (_max_size :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _max_size = a } :: AutoscalingScheduleResource s)
 
-instance P.HasMetricsGranularity (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    metricsGranularity =
-        lens (_metrics_granularity :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _metrics_granularity = a } :: AutoscalingGroupResource s)
-
-instance P.HasMinElbCapacity (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    minElbCapacity =
-        lens (_min_elb_capacity :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _min_elb_capacity = a } :: AutoscalingGroupResource s)
-
-instance P.HasMinSize (AutoscalingGroupResource s) (TF.Attr s P.Int) where
+instance P.HasMinSize (AutoscalingScheduleResource s) (TF.Attr s P.Text) where
     minSize =
-        lens (_min_size :: AutoscalingGroupResource s -> TF.Attr s P.Int)
-             (\s a -> s { _min_size = a } :: AutoscalingGroupResource s)
+        lens (_min_size :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _min_size = a } :: AutoscalingScheduleResource s)
 
-instance P.HasName (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: AutoscalingGroupResource s)
+instance P.HasRecurrence (AutoscalingScheduleResource s) (TF.Attr s P.Text) where
+    recurrence =
+        lens (_recurrence :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _recurrence = a } :: AutoscalingScheduleResource s)
 
-instance P.HasNamePrefix (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    namePrefix =
-        lens (_name_prefix :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name_prefix = a } :: AutoscalingGroupResource s)
+instance P.HasScheduledActionName (AutoscalingScheduleResource s) (TF.Attr s P.Text) where
+    scheduledActionName =
+        lens (_scheduled_action_name :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _scheduled_action_name = a } :: AutoscalingScheduleResource s)
 
-instance P.HasPlacementGroup (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    placementGroup =
-        lens (_placement_group :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _placement_group = a } :: AutoscalingGroupResource s)
+instance P.HasStartTime (AutoscalingScheduleResource s) (TF.Attr s P.Text) where
+    startTime =
+        lens (_start_time :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _start_time = a } :: AutoscalingScheduleResource s)
 
-instance P.HasProtectFromScaleIn (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    protectFromScaleIn =
-        lens (_protect_from_scale_in :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _protect_from_scale_in = a } :: AutoscalingGroupResource s)
-
-instance P.HasSuspendedProcesses (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    suspendedProcesses =
-        lens (_suspended_processes :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _suspended_processes = a } :: AutoscalingGroupResource s)
-
-instance P.HasTag (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    tag =
-        lens (_tag :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tag = a } :: AutoscalingGroupResource s)
-
-instance P.HasTags (AutoscalingGroupResource s) (TF.Attr s (P.Tags s)) where
-    tags =
-        lens (_tags :: AutoscalingGroupResource s -> TF.Attr s (P.Tags s))
-             (\s a -> s { _tags = a } :: AutoscalingGroupResource s)
-
-instance P.HasTargetGroupArns (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    targetGroupArns =
-        lens (_target_group_arns :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target_group_arns = a } :: AutoscalingGroupResource s)
-
-instance P.HasTerminationPolicies (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    terminationPolicies =
-        lens (_termination_policies :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _termination_policies = a } :: AutoscalingGroupResource s)
-
-instance P.HasVpcZoneIdentifier (AutoscalingGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    vpcZoneIdentifier =
-        lens (_vpc_zone_identifier :: AutoscalingGroupResource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _vpc_zone_identifier = a } :: AutoscalingGroupResource s)
-
-instance P.HasWaitForCapacityTimeout (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    waitForCapacityTimeout =
-        lens (_wait_for_capacity_timeout :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _wait_for_capacity_timeout = a } :: AutoscalingGroupResource s)
-
-instance P.HasWaitForElbCapacity (AutoscalingGroupResource s) (TF.Attr s P.Text) where
-    waitForElbCapacity =
-        lens (_wait_for_elb_capacity :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _wait_for_elb_capacity = a } :: AutoscalingGroupResource s)
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAvailabilityZones x = TF.compute (TF.refKey x) "availability_zones"
-
-instance s ~ s' => P.HasComputedDefaultCooldown (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedDefaultCooldown x = TF.compute (TF.refKey x) "default_cooldown"
-
-instance s ~ s' => P.HasComputedDesiredCapacity (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedDesiredCapacity x = TF.compute (TF.refKey x) "desired_capacity"
-
-instance s ~ s' => P.HasComputedEnabledMetrics (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Bool) where
-    computedEnabledMetrics =
-        (_enabled_metrics :: AutoscalingGroupResource s -> TF.Attr s P.Bool)
+instance s ~ s' => P.HasComputedAutoscalingGroupName (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
+    computedAutoscalingGroupName =
+        (_autoscaling_group_name :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedForceDelete (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Bool) where
-    computedForceDelete =
-        (_force_delete :: AutoscalingGroupResource s -> TF.Attr s P.Bool)
+instance s ~ s' => P.HasComputedDesiredCapacity (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
+    computedDesiredCapacity =
+        (_desired_capacity :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHealthCheckGracePeriod (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedHealthCheckGracePeriod x = TF.compute (TF.refKey x) "health_check_grace_period"
-
-instance s ~ s' => P.HasComputedHealthCheckType (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedHealthCheckType x = TF.compute (TF.refKey x) "health_check_type"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedInitialLifecycleHook (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedInitialLifecycleHook =
-        (_initial_lifecycle_hook :: AutoscalingGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedEndTime (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
+    computedEndTime =
+        (_end_time :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLaunchConfiguration (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedLaunchConfiguration x = TF.compute (TF.refKey x) "launch_configuration"
-
-instance s ~ s' => P.HasComputedLoadBalancers (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedLoadBalancers x = TF.compute (TF.refKey x) "load_balancers"
-
-instance s ~ s' => P.HasComputedMaxSize (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedMaxSize x = TF.compute (TF.refKey x) "max_size"
-
-instance s ~ s' => P.HasComputedMetricsGranularity (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedMetricsGranularity =
-        (_metrics_granularity :: AutoscalingGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedMaxSize (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
+    computedMaxSize =
+        (_max_size :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMinElbCapacity (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedMinElbCapacity =
-        (_min_elb_capacity :: AutoscalingGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedMinSize (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
+    computedMinSize =
+        (_min_size :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMinSize (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedMinSize x = TF.compute (TF.refKey x) "min_size"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedNamePrefix =
-        (_name_prefix :: AutoscalingGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedRecurrence (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
+    computedRecurrence =
+        (_recurrence :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPlacementGroup (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedPlacementGroup =
-        (_placement_group :: AutoscalingGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedScheduledActionName (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
+    computedScheduledActionName =
+        (_scheduled_action_name :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProtectFromScaleIn (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedProtectFromScaleIn =
-        (_protect_from_scale_in :: AutoscalingGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
+    computedStartTime =
+        (_start_time :: AutoscalingScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSuspendedProcesses (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedSuspendedProcesses =
-        (_suspended_processes :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTag (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedTag =
-        (_tag :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s (P.Tags s)) where
-    computedTags =
-        (_tags :: AutoscalingGroupResource s -> TF.Attr s (P.Tags s))
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTargetGroupArns (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedTargetGroupArns x = TF.compute (TF.refKey x) "target_group_arns"
-
-instance s ~ s' => P.HasComputedTerminationPolicies (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedTerminationPolicies =
-        (_termination_policies :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVpcZoneIdentifier (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedVpcZoneIdentifier x = TF.compute (TF.refKey x) "vpc_zone_identifier"
-
-instance s ~ s' => P.HasComputedWaitForCapacityTimeout (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedWaitForCapacityTimeout =
-        (_wait_for_capacity_timeout :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedWaitForElbCapacity (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedWaitForElbCapacity =
-        (_wait_for_elb_capacity :: AutoscalingGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-autoscalingGroupResource :: TF.Resource P.AWS (AutoscalingGroupResource s)
-autoscalingGroupResource =
-    TF.newResource "aws_autoscaling_group" $
-        AutoscalingGroupResource {
-              _availability_zones = TF.Nil
-            , _default_cooldown = TF.Nil
+autoscalingScheduleResource :: TF.Resource P.AWS (AutoscalingScheduleResource s)
+autoscalingScheduleResource =
+    TF.newResource "aws_autoscaling_schedule" $
+        AutoscalingScheduleResource {
+              _autoscaling_group_name = TF.Nil
             , _desired_capacity = TF.Nil
-            , _enabled_metrics = TF.Nil
-            , _force_delete = TF.Nil
-            , _health_check_grace_period = TF.Nil
-            , _health_check_type = TF.Nil
-            , _initial_lifecycle_hook = TF.Nil
-            , _launch_configuration = TF.Nil
-            , _load_balancers = TF.Nil
+            , _end_time = TF.Nil
             , _max_size = TF.Nil
-            , _metrics_granularity = TF.Nil
-            , _min_elb_capacity = TF.Nil
             , _min_size = TF.Nil
-            , _name = TF.Nil
-            , _name_prefix = TF.Nil
-            , _placement_group = TF.Nil
-            , _protect_from_scale_in = TF.Nil
-            , _suspended_processes = TF.Nil
-            , _tag = TF.Nil
-            , _tags = TF.Nil
-            , _target_group_arns = TF.Nil
-            , _termination_policies = TF.Nil
-            , _vpc_zone_identifier = TF.Nil
-            , _wait_for_capacity_timeout = TF.Nil
-            , _wait_for_elb_capacity = TF.Nil
+            , _recurrence = TF.Nil
+            , _scheduled_action_name = TF.Nil
+            , _start_time = TF.Nil
             }
 
 {- | The @aws_batch_job_definition@ AWS resource.
@@ -2715,6 +2455,8 @@ data BatchJobDefinitionResource s = BatchJobDefinitionResource {
     {- ^ (Optional) Specifies the parameter substitution placeholders to set in the job definition. -}
     , _retry_strategy       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies the retry strategy to use for failed jobs that are submitted with this job definition. Maximum number of @retry_strategy@ is @1@ .  Defined below. -}
+    , _timeout              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Specifies the timeout for jobs so that if a job runs longer, AWS Batch terminates the job. Maximum number of @timeout@ is @1@ . Defined below. -}
     , _type'                :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of job definition.  Must be @container@ -}
     } deriving (Show, Eq)
@@ -2725,6 +2467,7 @@ instance TF.ToHCL (BatchJobDefinitionResource s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "parameters" <$> TF.attribute _parameters
         , TF.assign "retry_strategy" <$> TF.attribute _retry_strategy
+        , TF.assign "timeout" <$> TF.attribute _timeout
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
@@ -2747,6 +2490,11 @@ instance P.HasRetryStrategy (BatchJobDefinitionResource s) (TF.Attr s P.Text) wh
     retryStrategy =
         lens (_retry_strategy :: BatchJobDefinitionResource s -> TF.Attr s P.Text)
              (\s a -> s { _retry_strategy = a } :: BatchJobDefinitionResource s)
+
+instance P.HasTimeout (BatchJobDefinitionResource s) (TF.Attr s P.Text) where
+    timeout =
+        lens (_timeout :: BatchJobDefinitionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _timeout = a } :: BatchJobDefinitionResource s)
 
 instance P.HasType' (BatchJobDefinitionResource s) (TF.Attr s P.Text) where
     type' =
@@ -2779,6 +2527,11 @@ instance s ~ s' => P.HasComputedRetryStrategy (TF.Ref s' (BatchJobDefinitionReso
 instance s ~ s' => P.HasComputedRevision (TF.Ref s' (BatchJobDefinitionResource s)) (TF.Attr s P.Text) where
     computedRevision x = TF.compute (TF.refKey x) "revision"
 
+instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (BatchJobDefinitionResource s)) (TF.Attr s P.Text) where
+    computedTimeout =
+        (_timeout :: BatchJobDefinitionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedType' (TF.Ref s' (BatchJobDefinitionResource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: BatchJobDefinitionResource s -> TF.Attr s P.Text)
@@ -2792,6 +2545,7 @@ batchJobDefinitionResource =
             , _name = TF.Nil
             , _parameters = TF.Nil
             , _retry_strategy = TF.Nil
+            , _timeout = TF.Nil
             , _type' = TF.Nil
             }
 
@@ -2905,374 +2659,109 @@ cloud9EnvironmentEc2Resource =
             , _subnet_id = TF.Nil
             }
 
-{- | The @aws_cloudfront_origin_access_identity@ AWS resource.
+{- | The @aws_codecommit_trigger@ AWS resource.
 
-Creates an Amazon CloudFront origin access identity. For information about
-CloudFront distributions, see the
-<http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html>
-. For more information on generating origin access identities, see
-<http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html>
+Provides a CodeCommit Trigger Resource. ~> NOTE on CodeCommit : The
+CodeCommit is not yet rolled out in all regions - available regions are
+listed
+<https://docs.aws.amazon.com/general/latest/gr/rande.html#codecommit_region>
 .
 -}
-data CloudfrontOriginAccessIdentityResource s = CloudfrontOriginAccessIdentityResource {
-      _comment :: !(TF.Attr s P.Text)
-    {- ^ (Optional) - An optional comment for the origin access identity. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (CloudfrontOriginAccessIdentityResource s) where
-    toHCL CloudfrontOriginAccessIdentityResource{..} = TF.inline $ catMaybes
-        [ TF.assign "comment" <$> TF.attribute _comment
-        ]
-
-instance P.HasComment (CloudfrontOriginAccessIdentityResource s) (TF.Attr s P.Text) where
-    comment =
-        lens (_comment :: CloudfrontOriginAccessIdentityResource s -> TF.Attr s P.Text)
-             (\s a -> s { _comment = a } :: CloudfrontOriginAccessIdentityResource s)
-
-instance s ~ s' => P.HasComputedCallerReference (TF.Ref s' (CloudfrontOriginAccessIdentityResource s)) (TF.Attr s P.Text) where
-    computedCallerReference x = TF.compute (TF.refKey x) "caller_reference"
-
-instance s ~ s' => P.HasComputedCloudfrontAccessIdentityPath (TF.Ref s' (CloudfrontOriginAccessIdentityResource s)) (TF.Attr s P.Text) where
-    computedCloudfrontAccessIdentityPath x = TF.compute (TF.refKey x) "cloudfront_access_identity_path"
-
-instance s ~ s' => P.HasComputedComment (TF.Ref s' (CloudfrontOriginAccessIdentityResource s)) (TF.Attr s P.Text) where
-    computedComment =
-        (_comment :: CloudfrontOriginAccessIdentityResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEtag (TF.Ref s' (CloudfrontOriginAccessIdentityResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
-
-instance s ~ s' => P.HasComputedIamArn (TF.Ref s' (CloudfrontOriginAccessIdentityResource s)) (TF.Attr s P.Text) where
-    computedIamArn x = TF.compute (TF.refKey x) "iam_arn"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudfrontOriginAccessIdentityResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedS3CanonicalUserId (TF.Ref s' (CloudfrontOriginAccessIdentityResource s)) (TF.Attr s P.Text) where
-    computedS3CanonicalUserId x = TF.compute (TF.refKey x) "s3_canonical_user_id"
-
-cloudfrontOriginAccessIdentityResource :: TF.Resource P.AWS (CloudfrontOriginAccessIdentityResource s)
-cloudfrontOriginAccessIdentityResource =
-    TF.newResource "aws_cloudfront_origin_access_identity" $
-        CloudfrontOriginAccessIdentityResource {
-              _comment = TF.Nil
-            }
-
-{- | The @aws_cloudwatch_log_destination_policy@ AWS resource.
-
-Provides a CloudWatch Logs destination policy resource.
--}
-data CloudwatchLogDestinationPolicyResource s = CloudwatchLogDestinationPolicyResource {
-      _access_policy    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The policy document. This is a JSON formatted string. -}
-    , _destination_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) A name for the subscription filter -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (CloudwatchLogDestinationPolicyResource s) where
-    toHCL CloudwatchLogDestinationPolicyResource{..} = TF.inline $ catMaybes
-        [ TF.assign "access_policy" <$> TF.attribute _access_policy
-        , TF.assign "destination_name" <$> TF.attribute _destination_name
-        ]
-
-instance P.HasAccessPolicy (CloudwatchLogDestinationPolicyResource s) (TF.Attr s P.Text) where
-    accessPolicy =
-        lens (_access_policy :: CloudwatchLogDestinationPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _access_policy = a } :: CloudwatchLogDestinationPolicyResource s)
-
-instance P.HasDestinationName (CloudwatchLogDestinationPolicyResource s) (TF.Attr s P.Text) where
-    destinationName =
-        lens (_destination_name :: CloudwatchLogDestinationPolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _destination_name = a } :: CloudwatchLogDestinationPolicyResource s)
-
-instance s ~ s' => P.HasComputedAccessPolicy (TF.Ref s' (CloudwatchLogDestinationPolicyResource s)) (TF.Attr s P.Text) where
-    computedAccessPolicy =
-        (_access_policy :: CloudwatchLogDestinationPolicyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDestinationName (TF.Ref s' (CloudwatchLogDestinationPolicyResource s)) (TF.Attr s P.Text) where
-    computedDestinationName =
-        (_destination_name :: CloudwatchLogDestinationPolicyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-cloudwatchLogDestinationPolicyResource :: TF.Resource P.AWS (CloudwatchLogDestinationPolicyResource s)
-cloudwatchLogDestinationPolicyResource =
-    TF.newResource "aws_cloudwatch_log_destination_policy" $
-        CloudwatchLogDestinationPolicyResource {
-              _access_policy = TF.Nil
-            , _destination_name = TF.Nil
-            }
-
-{- | The @aws_cloudwatch_log_group@ AWS resource.
-
-Provides a CloudWatch Log Group resource.
--}
-data CloudwatchLogGroupResource s = CloudwatchLogGroupResource {
-      _kms_key_id        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ARN of the KMS Key to use when encrypting log data. Please note, after the AWS KMS CMK is disassociated from the log group, AWS CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data remains encrypted, and AWS CloudWatch Logs requires permissions for the CMK whenever the encrypted data is requested. -}
-    , _name              :: !(TF.Attr s P.Text)
-    {- ^ (Optional, Forces new resource) The name of the log group. If omitted, Terraform will assign a random, unique name. -}
-    , _name_prefix       :: !(TF.Attr s P.Text)
-    {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _retention_in_days :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Specifies the number of days you want to retain log events in the specified log group. -}
-    , _tags              :: !(TF.Attr s (P.Tags s))
-    {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (CloudwatchLogGroupResource s) where
-    toHCL CloudwatchLogGroupResource{..} = TF.inline $ catMaybes
-        [ TF.assign "kms_key_id" <$> TF.attribute _kms_key_id
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
-        , TF.assign "retention_in_days" <$> TF.attribute _retention_in_days
-        , TF.assign "tags" <$> TF.attribute _tags
-        ]
-
-instance P.HasKmsKeyId (CloudwatchLogGroupResource s) (TF.Attr s P.Text) where
-    kmsKeyId =
-        lens (_kms_key_id :: CloudwatchLogGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _kms_key_id = a } :: CloudwatchLogGroupResource s)
-
-instance P.HasName (CloudwatchLogGroupResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: CloudwatchLogGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: CloudwatchLogGroupResource s)
-
-instance P.HasNamePrefix (CloudwatchLogGroupResource s) (TF.Attr s P.Text) where
-    namePrefix =
-        lens (_name_prefix :: CloudwatchLogGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name_prefix = a } :: CloudwatchLogGroupResource s)
-
-instance P.HasRetentionInDays (CloudwatchLogGroupResource s) (TF.Attr s P.Text) where
-    retentionInDays =
-        lens (_retention_in_days :: CloudwatchLogGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _retention_in_days = a } :: CloudwatchLogGroupResource s)
-
-instance P.HasTags (CloudwatchLogGroupResource s) (TF.Attr s (P.Tags s)) where
-    tags =
-        lens (_tags :: CloudwatchLogGroupResource s -> TF.Attr s (P.Tags s))
-             (\s a -> s { _tags = a } :: CloudwatchLogGroupResource s)
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudwatchLogGroupResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
-
-instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (CloudwatchLogGroupResource s)) (TF.Attr s P.Text) where
-    computedKmsKeyId =
-        (_kms_key_id :: CloudwatchLogGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CloudwatchLogGroupResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: CloudwatchLogGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (CloudwatchLogGroupResource s)) (TF.Attr s P.Text) where
-    computedNamePrefix =
-        (_name_prefix :: CloudwatchLogGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRetentionInDays (TF.Ref s' (CloudwatchLogGroupResource s)) (TF.Attr s P.Text) where
-    computedRetentionInDays =
-        (_retention_in_days :: CloudwatchLogGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (CloudwatchLogGroupResource s)) (TF.Attr s (P.Tags s)) where
-    computedTags =
-        (_tags :: CloudwatchLogGroupResource s -> TF.Attr s (P.Tags s))
-            . TF.refValue
-
-cloudwatchLogGroupResource :: TF.Resource P.AWS (CloudwatchLogGroupResource s)
-cloudwatchLogGroupResource =
-    TF.newResource "aws_cloudwatch_log_group" $
-        CloudwatchLogGroupResource {
-              _kms_key_id = TF.Nil
-            , _name = TF.Nil
-            , _name_prefix = TF.Nil
-            , _retention_in_days = TF.Nil
-            , _tags = TF.Nil
-            }
-
-{- | The @aws_cloudwatch_log_stream@ AWS resource.
-
-Provides a CloudWatch Log Stream resource.
--}
-data CloudwatchLogStreamResource s = CloudwatchLogStreamResource {
-      _log_group_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the log group under which the log stream is to be created. -}
-    , _name           :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the log stream. Must not be longer than 512 characters and must not contain @:@ -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (CloudwatchLogStreamResource s) where
-    toHCL CloudwatchLogStreamResource{..} = TF.inline $ catMaybes
-        [ TF.assign "log_group_name" <$> TF.attribute _log_group_name
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance P.HasLogGroupName (CloudwatchLogStreamResource s) (TF.Attr s P.Text) where
-    logGroupName =
-        lens (_log_group_name :: CloudwatchLogStreamResource s -> TF.Attr s P.Text)
-             (\s a -> s { _log_group_name = a } :: CloudwatchLogStreamResource s)
-
-instance P.HasName (CloudwatchLogStreamResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: CloudwatchLogStreamResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: CloudwatchLogStreamResource s)
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudwatchLogStreamResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
-
-instance s ~ s' => P.HasComputedLogGroupName (TF.Ref s' (CloudwatchLogStreamResource s)) (TF.Attr s P.Text) where
-    computedLogGroupName =
-        (_log_group_name :: CloudwatchLogStreamResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CloudwatchLogStreamResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: CloudwatchLogStreamResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-cloudwatchLogStreamResource :: TF.Resource P.AWS (CloudwatchLogStreamResource s)
-cloudwatchLogStreamResource =
-    TF.newResource "aws_cloudwatch_log_stream" $
-        CloudwatchLogStreamResource {
-              _log_group_name = TF.Nil
-            , _name = TF.Nil
-            }
-
-{- | The @aws_cloudwatch_log_subscription_filter@ AWS resource.
-
-Provides a CloudWatch Logs subscription filter resource.
--}
-data CloudwatchLogSubscriptionFilterResource s = CloudwatchLogSubscriptionFilterResource {
-      _destination_arn :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN. -}
-    , _distribution    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. Valid values are "Random" and "ByLogStream". -}
-    , _filter_pattern  :: !(TF.Attr s P.Text)
-    {- ^ (Required) A valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events. -}
-    , _log_group_name  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the log group to associate the subscription filter with -}
+data CodecommitTriggerResource s = CodecommitTriggerResource {
+      _branches        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The branches that will be included in the trigger configuration. If no branches are specified, the trigger will apply to all branches. -}
+    , _custom_data     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Any custom data associated with the trigger that will be included in the information sent to the target of the trigger. -}
+    , _destination_arn :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon Simple Notification Service (SNS). -}
+    , _events          :: !(TF.Attr s P.Text)
+    {- ^ (Required) The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). If no events are specified, the trigger will run for all repository events. Event types include: @all@ , @updateReference@ , @createReference@ , @deleteReference@ . -}
     , _name            :: !(TF.Attr s P.Text)
-    {- ^ (Required) A name for the subscription filter -}
-    , _role_arn        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to deliver ingested log events to the destination. If you use Lambda as a destination, you should skip this argument and use @aws_lambda_permission@ resource for granting access from CloudWatch logs to the destination Lambda function. -}
+    {- ^ (Required) The name of the trigger. -}
+    , _repository_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name for the repository. This needs to be less than 100 characters. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudwatchLogSubscriptionFilterResource s) where
-    toHCL CloudwatchLogSubscriptionFilterResource{..} = TF.inline $ catMaybes
-        [ TF.assign "destination_arn" <$> TF.attribute _destination_arn
-        , TF.assign "distribution" <$> TF.attribute _distribution
-        , TF.assign "filter_pattern" <$> TF.attribute _filter_pattern
-        , TF.assign "log_group_name" <$> TF.attribute _log_group_name
+instance TF.ToHCL (CodecommitTriggerResource s) where
+    toHCL CodecommitTriggerResource{..} = TF.inline $ catMaybes
+        [ TF.assign "branches" <$> TF.attribute _branches
+        , TF.assign "custom_data" <$> TF.attribute _custom_data
+        , TF.assign "destination_arn" <$> TF.attribute _destination_arn
+        , TF.assign "events" <$> TF.attribute _events
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "role_arn" <$> TF.attribute _role_arn
+        , TF.assign "repository_name" <$> TF.attribute _repository_name
         ]
 
-instance P.HasDestinationArn (CloudwatchLogSubscriptionFilterResource s) (TF.Attr s P.Text) where
+instance P.HasBranches (CodecommitTriggerResource s) (TF.Attr s P.Text) where
+    branches =
+        lens (_branches :: CodecommitTriggerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _branches = a } :: CodecommitTriggerResource s)
+
+instance P.HasCustomData (CodecommitTriggerResource s) (TF.Attr s P.Text) where
+    customData =
+        lens (_custom_data :: CodecommitTriggerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _custom_data = a } :: CodecommitTriggerResource s)
+
+instance P.HasDestinationArn (CodecommitTriggerResource s) (TF.Attr s P.Text) where
     destinationArn =
-        lens (_destination_arn :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _destination_arn = a } :: CloudwatchLogSubscriptionFilterResource s)
+        lens (_destination_arn :: CodecommitTriggerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _destination_arn = a } :: CodecommitTriggerResource s)
 
-instance P.HasDistribution (CloudwatchLogSubscriptionFilterResource s) (TF.Attr s P.Text) where
-    distribution =
-        lens (_distribution :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _distribution = a } :: CloudwatchLogSubscriptionFilterResource s)
+instance P.HasEvents (CodecommitTriggerResource s) (TF.Attr s P.Text) where
+    events =
+        lens (_events :: CodecommitTriggerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _events = a } :: CodecommitTriggerResource s)
 
-instance P.HasFilterPattern (CloudwatchLogSubscriptionFilterResource s) (TF.Attr s P.Text) where
-    filterPattern =
-        lens (_filter_pattern :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _filter_pattern = a } :: CloudwatchLogSubscriptionFilterResource s)
-
-instance P.HasLogGroupName (CloudwatchLogSubscriptionFilterResource s) (TF.Attr s P.Text) where
-    logGroupName =
-        lens (_log_group_name :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _log_group_name = a } :: CloudwatchLogSubscriptionFilterResource s)
-
-instance P.HasName (CloudwatchLogSubscriptionFilterResource s) (TF.Attr s P.Text) where
+instance P.HasName (CodecommitTriggerResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: CloudwatchLogSubscriptionFilterResource s)
+        lens (_name :: CodecommitTriggerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: CodecommitTriggerResource s)
 
-instance P.HasRoleArn (CloudwatchLogSubscriptionFilterResource s) (TF.Attr s P.Text) where
-    roleArn =
-        lens (_role_arn :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role_arn = a } :: CloudwatchLogSubscriptionFilterResource s)
+instance P.HasRepositoryName (CodecommitTriggerResource s) (TF.Attr s P.Text) where
+    repositoryName =
+        lens (_repository_name :: CodecommitTriggerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _repository_name = a } :: CodecommitTriggerResource s)
 
-instance s ~ s' => P.HasComputedDestinationArn (TF.Ref s' (CloudwatchLogSubscriptionFilterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBranches (TF.Ref s' (CodecommitTriggerResource s)) (TF.Attr s P.Text) where
+    computedBranches =
+        (_branches :: CodecommitTriggerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCustomData (TF.Ref s' (CodecommitTriggerResource s)) (TF.Attr s P.Text) where
+    computedCustomData =
+        (_custom_data :: CodecommitTriggerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDestinationArn (TF.Ref s' (CodecommitTriggerResource s)) (TF.Attr s P.Text) where
     computedDestinationArn =
-        (_destination_arn :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
+        (_destination_arn :: CodecommitTriggerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDistribution (TF.Ref s' (CloudwatchLogSubscriptionFilterResource s)) (TF.Attr s P.Text) where
-    computedDistribution =
-        (_distribution :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedEvents (TF.Ref s' (CodecommitTriggerResource s)) (TF.Attr s P.Text) where
+    computedEvents =
+        (_events :: CodecommitTriggerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFilterPattern (TF.Ref s' (CloudwatchLogSubscriptionFilterResource s)) (TF.Attr s P.Text) where
-    computedFilterPattern =
-        (_filter_pattern :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedLogGroupName (TF.Ref s' (CloudwatchLogSubscriptionFilterResource s)) (TF.Attr s P.Text) where
-    computedLogGroupName =
-        (_log_group_name :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CloudwatchLogSubscriptionFilterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CodecommitTriggerResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
+        (_name :: CodecommitTriggerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRoleArn (TF.Ref s' (CloudwatchLogSubscriptionFilterResource s)) (TF.Attr s P.Text) where
-    computedRoleArn =
-        (_role_arn :: CloudwatchLogSubscriptionFilterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedRepositoryName (TF.Ref s' (CodecommitTriggerResource s)) (TF.Attr s P.Text) where
+    computedRepositoryName =
+        (_repository_name :: CodecommitTriggerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-cloudwatchLogSubscriptionFilterResource :: TF.Resource P.AWS (CloudwatchLogSubscriptionFilterResource s)
-cloudwatchLogSubscriptionFilterResource =
-    TF.newResource "aws_cloudwatch_log_subscription_filter" $
-        CloudwatchLogSubscriptionFilterResource {
-              _destination_arn = TF.Nil
-            , _distribution = TF.Nil
-            , _filter_pattern = TF.Nil
-            , _log_group_name = TF.Nil
+codecommitTriggerResource :: TF.Resource P.AWS (CodecommitTriggerResource s)
+codecommitTriggerResource =
+    TF.newResource "aws_codecommit_trigger" $
+        CodecommitTriggerResource {
+              _branches = TF.Nil
+            , _custom_data = TF.Nil
+            , _destination_arn = TF.Nil
+            , _events = TF.Nil
             , _name = TF.Nil
-            , _role_arn = TF.Nil
-            }
-
-{- | The @aws_codedeploy_app@ AWS resource.
-
-Provides a CodeDeploy application to be used as a basis for deployments
--}
-data CodedeployAppResource s = CodedeployAppResource {
-      _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the application. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (CodedeployAppResource s) where
-    toHCL CodedeployAppResource{..} = TF.inline $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance P.HasName (CodedeployAppResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: CodedeployAppResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: CodedeployAppResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (CodedeployAppResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CodedeployAppResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-codedeployAppResource :: TF.Resource P.AWS (CodedeployAppResource s)
-codedeployAppResource =
-    TF.newResource "aws_codedeploy_app" $
-        CodedeployAppResource {
-              _name = TF.Nil
+            , _repository_name = TF.Nil
             }
 
 {- | The @aws_codedeploy_deployment_group@ AWS resource.
@@ -3297,7 +2786,9 @@ data CodedeployDeploymentGroupResource s = CodedeployDeploymentGroupResource {
     , _deployment_style                :: !(TF.Attr s P.Text)
     {- ^ (Optional) Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer (documented below). -}
     , _ec2_tag_filter                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Tag filters associated with the group. See the AWS docs for details. -}
+    {- ^ (Optional) Tag filters associated with the deployment group. See the AWS docs for details. -}
+    , _ec2_tag_set                     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Sets of Tag filters associated with the deployment group, which are referred to as tag groups in the document.  See the AWS docs for details. -}
     , _load_balancer_info              :: !(TF.Attr s P.Text)
     {- ^ (Optional) Information about the load balancer to use in a blue/green deployment (documented below). -}
     , _on_premises_instance_tag_filter :: !(TF.Attr s P.Text)
@@ -3319,6 +2810,7 @@ instance TF.ToHCL (CodedeployDeploymentGroupResource s) where
         , TF.assign "deployment_group_name" <$> TF.attribute _deployment_group_name
         , TF.assign "deployment_style" <$> TF.attribute _deployment_style
         , TF.assign "ec2_tag_filter" <$> TF.attribute _ec2_tag_filter
+        , TF.assign "ec2_tag_set" <$> TF.attribute _ec2_tag_set
         , TF.assign "load_balancer_info" <$> TF.attribute _load_balancer_info
         , TF.assign "on_premises_instance_tag_filter" <$> TF.attribute _on_premises_instance_tag_filter
         , TF.assign "service_role_arn" <$> TF.attribute _service_role_arn
@@ -3369,6 +2861,11 @@ instance P.HasEc2TagFilter (CodedeployDeploymentGroupResource s) (TF.Attr s P.Te
     ec2TagFilter =
         lens (_ec2_tag_filter :: CodedeployDeploymentGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _ec2_tag_filter = a } :: CodedeployDeploymentGroupResource s)
+
+instance P.HasEc2TagSet (CodedeployDeploymentGroupResource s) (TF.Attr s P.Text) where
+    ec2TagSet =
+        lens (_ec2_tag_set :: CodedeployDeploymentGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ec2_tag_set = a } :: CodedeployDeploymentGroupResource s)
 
 instance P.HasLoadBalancerInfo (CodedeployDeploymentGroupResource s) (TF.Attr s P.Text) where
     loadBalancerInfo =
@@ -3427,6 +2924,11 @@ instance s ~ s' => P.HasComputedEc2TagFilter (TF.Ref s' (CodedeployDeploymentGro
         (_ec2_tag_filter :: CodedeployDeploymentGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedEc2TagSet (TF.Ref s' (CodedeployDeploymentGroupResource s)) (TF.Attr s P.Text) where
+    computedEc2TagSet =
+        (_ec2_tag_set :: CodedeployDeploymentGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CodedeployDeploymentGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -3461,6 +2963,7 @@ codedeployDeploymentGroupResource =
             , _deployment_group_name = TF.Nil
             , _deployment_style = TF.Nil
             , _ec2_tag_filter = TF.Nil
+            , _ec2_tag_set = TF.Nil
             , _load_balancer_info = TF.Nil
             , _on_premises_instance_tag_filter = TF.Nil
             , _service_role_arn = TF.Nil
@@ -3744,6 +3247,9 @@ instance s ~ s' => P.HasComputedEmailVerificationSubject (TF.Ref s' (CognitoUser
         (_email_verification_subject :: CognitoUserPoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s P.Text) where
+    computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -3827,6 +3333,116 @@ cognitoUserPoolResource =
             , _tags = TF.Nil
             , _username_attributes = TF.Nil
             , _verification_message_template = TF.Nil
+            }
+
+{- | The @aws_config_config_rule@ AWS resource.
+
+Provides an AWS Config Rule. ~> Note: Config Rule requires an existing
+</docs/providers/aws/r/config_configuration_recorder.html> to be present.
+Use of @depends_on@ is recommended (as shown below) to avoid race
+conditions.
+-}
+data ConfigConfigRuleResource s = ConfigConfigRuleResource {
+      _description                 :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Description of the rule -}
+    , _input_parameters            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A string in JSON format that is passed to the AWS Config rule Lambda function. -}
+    , _maximum_execution_frequency :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The maximum frequency with which AWS Config runs evaluations for a rule. -}
+    , _name                        :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the rule -}
+    , _scope                       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Scope defines which resources can trigger an evaluation for the rule as documented below. -}
+    , _source                      :: !(TF.Attr s P.Text)
+    {- ^ (Required) Source specifies the rule owner, the rule identifier, and the notifications that cause the function to evaluate your AWS resources as documented below. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ConfigConfigRuleResource s) where
+    toHCL ConfigConfigRuleResource{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "input_parameters" <$> TF.attribute _input_parameters
+        , TF.assign "maximum_execution_frequency" <$> TF.attribute _maximum_execution_frequency
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "scope" <$> TF.attribute _scope
+        , TF.assign "source" <$> TF.attribute _source
+        ]
+
+instance P.HasDescription (ConfigConfigRuleResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: ConfigConfigRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ConfigConfigRuleResource s)
+
+instance P.HasInputParameters (ConfigConfigRuleResource s) (TF.Attr s P.Text) where
+    inputParameters =
+        lens (_input_parameters :: ConfigConfigRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _input_parameters = a } :: ConfigConfigRuleResource s)
+
+instance P.HasMaximumExecutionFrequency (ConfigConfigRuleResource s) (TF.Attr s P.Text) where
+    maximumExecutionFrequency =
+        lens (_maximum_execution_frequency :: ConfigConfigRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _maximum_execution_frequency = a } :: ConfigConfigRuleResource s)
+
+instance P.HasName (ConfigConfigRuleResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ConfigConfigRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ConfigConfigRuleResource s)
+
+instance P.HasScope (ConfigConfigRuleResource s) (TF.Attr s P.Text) where
+    scope =
+        lens (_scope :: ConfigConfigRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _scope = a } :: ConfigConfigRuleResource s)
+
+instance P.HasSource (ConfigConfigRuleResource s) (TF.Attr s P.Text) where
+    source =
+        lens (_source :: ConfigConfigRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _source = a } :: ConfigConfigRuleResource s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (ConfigConfigRuleResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ConfigConfigRuleResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: ConfigConfigRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedInputParameters (TF.Ref s' (ConfigConfigRuleResource s)) (TF.Attr s P.Text) where
+    computedInputParameters =
+        (_input_parameters :: ConfigConfigRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMaximumExecutionFrequency (TF.Ref s' (ConfigConfigRuleResource s)) (TF.Attr s P.Text) where
+    computedMaximumExecutionFrequency =
+        (_maximum_execution_frequency :: ConfigConfigRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ConfigConfigRuleResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ConfigConfigRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRuleId (TF.Ref s' (ConfigConfigRuleResource s)) (TF.Attr s P.Text) where
+    computedRuleId x = TF.compute (TF.refKey x) "rule_id"
+
+instance s ~ s' => P.HasComputedScope (TF.Ref s' (ConfigConfigRuleResource s)) (TF.Attr s P.Text) where
+    computedScope =
+        (_scope :: ConfigConfigRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (ConfigConfigRuleResource s)) (TF.Attr s P.Text) where
+    computedSource =
+        (_source :: ConfigConfigRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+configConfigRuleResource :: TF.Resource P.AWS (ConfigConfigRuleResource s)
+configConfigRuleResource =
+    TF.newResource "aws_config_config_rule" $
+        ConfigConfigRuleResource {
+              _description = TF.Nil
+            , _input_parameters = TF.Nil
+            , _maximum_execution_frequency = TF.Nil
+            , _name = TF.Nil
+            , _scope = TF.Nil
+            , _source = TF.Nil
             }
 
 {- | The @aws_config_configuration_recorder_status@ AWS resource.
@@ -3970,232 +3586,368 @@ configDeliveryChannelResource =
             , _sns_topic_arn = TF.Nil
             }
 
-{- | The @aws_db_snapshot@ AWS resource.
+{- | The @aws_dax_cluster@ AWS resource.
 
-Creates a Snapshot of an DB Instance.
+Provides a DAX Cluster resource.
 -}
-data DbSnapshotResource s = DbSnapshotResource {
-      _db_instance_identifier :: !(TF.Attr s P.Text)
-    {- ^ (Required) The DB Instance Identifier from which to take the snapshot. -}
-    , _db_snapshot_identifier :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Identifier for the snapshot. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (DbSnapshotResource s) where
-    toHCL DbSnapshotResource{..} = TF.inline $ catMaybes
-        [ TF.assign "db_instance_identifier" <$> TF.attribute _db_instance_identifier
-        , TF.assign "db_snapshot_identifier" <$> TF.attribute _db_snapshot_identifier
-        ]
-
-instance P.HasDbInstanceIdentifier (DbSnapshotResource s) (TF.Attr s P.Text) where
-    dbInstanceIdentifier =
-        lens (_db_instance_identifier :: DbSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _db_instance_identifier = a } :: DbSnapshotResource s)
-
-instance P.HasDbSnapshotIdentifier (DbSnapshotResource s) (TF.Attr s P.Text) where
-    dbSnapshotIdentifier =
-        lens (_db_snapshot_identifier :: DbSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _db_snapshot_identifier = a } :: DbSnapshotResource s)
-
-instance s ~ s' => P.HasComputedAllocatedStorage (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedAllocatedStorage x = TF.compute (TF.refKey x) "allocated_storage"
-
-instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Zone) where
-    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
-
-instance s ~ s' => P.HasComputedDbInstanceIdentifier (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedDbInstanceIdentifier =
-        (_db_instance_identifier :: DbSnapshotResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDbSnapshotArn (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedDbSnapshotArn x = TF.compute (TF.refKey x) "db_snapshot_arn"
-
-instance s ~ s' => P.HasComputedDbSnapshotIdentifier (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedDbSnapshotIdentifier =
-        (_db_snapshot_identifier :: DbSnapshotResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedEncrypted x = TF.compute (TF.refKey x) "encrypted"
-
-instance s ~ s' => P.HasComputedEngine (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedEngine x = TF.compute (TF.refKey x) "engine"
-
-instance s ~ s' => P.HasComputedEngineVersion (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedEngineVersion x = TF.compute (TF.refKey x) "engine_version"
-
-instance s ~ s' => P.HasComputedIops (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedIops x = TF.compute (TF.refKey x) "iops"
-
-instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedKmsKeyId x = TF.compute (TF.refKey x) "kms_key_id"
-
-instance s ~ s' => P.HasComputedLicenseModel (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedLicenseModel x = TF.compute (TF.refKey x) "license_model"
-
-instance s ~ s' => P.HasComputedOptionGroupName (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedOptionGroupName x = TF.compute (TF.refKey x) "option_group_name"
-
-instance s ~ s' => P.HasComputedSourceDbSnapshotIdentifier (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSourceDbSnapshotIdentifier x = TF.compute (TF.refKey x) "source_db_snapshot_identifier"
-
-instance s ~ s' => P.HasComputedSourceRegion (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Region) where
-    computedSourceRegion x = TF.compute (TF.refKey x) "source_region"
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
-
-instance s ~ s' => P.HasComputedStorageType (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedStorageType x = TF.compute (TF.refKey x) "storage_type"
-
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DbSnapshotResource s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
-
-dbSnapshotResource :: TF.Resource P.AWS (DbSnapshotResource s)
-dbSnapshotResource =
-    TF.newResource "aws_db_snapshot" $
-        DbSnapshotResource {
-              _db_instance_identifier = TF.Nil
-            , _db_snapshot_identifier = TF.Nil
-            }
-
-{- | The @aws_default_route_table@ AWS resource.
-
-Provides a resource to manage a Default VPC Routing Table. Each VPC created
-in AWS comes with a Default Route Table that can be managed, but not
-destroyed. This is an advanced resource , and has special caveats to be
-aware of when using it. Please read this document in its entirety before
-using this resource. It is recommended you do not use both
-@aws_default_route_table@ to manage the default route table and use the
-@aws_main_route_table_association@ , due to possible conflict in routes. The
-@aws_default_route_table@ behaves differently from normal resources, in that
-Terraform does not create this resource, but instead attempts to "adopt" it
-into management. We can do this because each VPC created has a Default Route
-Table that cannot be destroyed, and is created with a single route. When
-Terraform first adopts the Default Route Table, it immediately removes all
-defined routes . It then proceeds to create any routes specified in the
-configuration. This step is required so that only the routes specified in
-the configuration present in the Default Route Table. For more information
-about Route Tables, see the AWS Documentation on
-<http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html#Route_Replacing_Main_Table>
-. For more information about managing normal Route Tables in Terraform, see
-our documentation on </docs/providers/aws/r/route_table.html> . ~> NOTE on
-Route Tables and Routes: Terraform currently provides both a standalone
-<route.html> and a Route Table resource with routes defined in-line. At this
-time you cannot use a Route Table with in-line routes in conjunction with
-any Route resources. Doing so will cause a conflict of rule settings and
-will overwrite routes.
--}
-data DefaultRouteTableResource s = DefaultRouteTableResource {
-      _default_route_table_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the Default Routing Table. -}
-    , _propagating_vgws       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of virtual gateways for propagation. -}
-    , _route                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of route objects. Their keys are documented below. -}
+data DaxClusterResource s = DaxClusterResource {
+      _availability_zones     :: !(TF.Attr s [TF.Attr s P.Text])
+    {- ^ (Optional) List of Availability Zones in which the nodes will be created -}
+    , _cluster_name           :: !(TF.Attr s P.Text)
+    {- ^ – (Required) Group identifier. DAX converts this name to lowercase -}
+    , _description            :: !(TF.Attr s P.Text)
+    {- ^ – (Optional) Description for the cluster -}
+    , _iam_role_arn           :: !(TF.Attr s P.Text)
+    {- ^ (Required) A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX will assume this role and use the role's permissions to access DynamoDB on your behalf -}
+    , _maintenance_window     :: !(TF.Attr s P.Text)
+    {- ^ – (Optional) Specifies the weekly time range for when maintenance on the cluster is performed. The format is @ddd:hh24:mi-ddd:hh24:mi@ (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: @sun:05:00-sun:09:00@ -}
+    , _node_type              :: !(TF.Attr s P.Text)
+    {- ^ – (Required) The compute and memory capacity of the nodes. See <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.concepts.cluster.html#DAX.concepts.nodes> for supported node types -}
+    , _notification_topic_arn :: !(TF.Attr s P.Text)
+    {- ^ – (Optional) An Amazon Resource Name (ARN) of an SNS topic to send DAX notifications to. Example: @arn:aws:sns:us-east-1:012345678999:my_sns_topic@ -}
+    , _parameter_group_name   :: !(TF.Attr s P.Text)
+    {- ^ – (Optional) Name of the parameter group to associate with this DAX cluster -}
+    , _replication_factor     :: !(TF.Attr s P.Text)
+    {- ^ – (Required) The number of nodes in the DAX cluster. A replication factor of 1 will create a single-node cluster, without any read replicas -}
+    , _security_group_ids     :: !(TF.Attr s [TF.Attr s P.Text])
+    {- ^ – (Optional) One or more VPC security groups associated with the cluster -}
+    , _subnet_group_name      :: !(TF.Attr s P.Text)
+    {- ^ – (Optional) Name of the subnet group to be used for the cluster -}
     , _tags                   :: !(TF.Attr s (P.Tags s))
-    {- ^ (Optional) A mapping of tags to assign to the resource. -}
+    {- ^ (Optional) A mapping of tags to assign to the resource -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DefaultRouteTableResource s) where
-    toHCL DefaultRouteTableResource{..} = TF.inline $ catMaybes
-        [ TF.assign "default_route_table_id" <$> TF.attribute _default_route_table_id
-        , TF.assign "propagating_vgws" <$> TF.attribute _propagating_vgws
-        , TF.assign "route" <$> TF.attribute _route
+instance TF.ToHCL (DaxClusterResource s) where
+    toHCL DaxClusterResource{..} = TF.inline $ catMaybes
+        [ TF.assign "availability_zones" <$> TF.attribute _availability_zones
+        , TF.assign "cluster_name" <$> TF.attribute _cluster_name
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "iam_role_arn" <$> TF.attribute _iam_role_arn
+        , TF.assign "maintenance_window" <$> TF.attribute _maintenance_window
+        , TF.assign "node_type" <$> TF.attribute _node_type
+        , TF.assign "notification_topic_arn" <$> TF.attribute _notification_topic_arn
+        , TF.assign "parameter_group_name" <$> TF.attribute _parameter_group_name
+        , TF.assign "replication_factor" <$> TF.attribute _replication_factor
+        , TF.assign "security_group_ids" <$> TF.attribute _security_group_ids
+        , TF.assign "subnet_group_name" <$> TF.attribute _subnet_group_name
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasDefaultRouteTableId (DefaultRouteTableResource s) (TF.Attr s P.Text) where
-    defaultRouteTableId =
-        lens (_default_route_table_id :: DefaultRouteTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _default_route_table_id = a } :: DefaultRouteTableResource s)
+instance P.HasAvailabilityZones (DaxClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    availabilityZones =
+        lens (_availability_zones :: DaxClusterResource s -> TF.Attr s [TF.Attr s P.Text])
+             (\s a -> s { _availability_zones = a } :: DaxClusterResource s)
 
-instance P.HasPropagatingVgws (DefaultRouteTableResource s) (TF.Attr s P.Text) where
-    propagatingVgws =
-        lens (_propagating_vgws :: DefaultRouteTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _propagating_vgws = a } :: DefaultRouteTableResource s)
+instance P.HasClusterName (DaxClusterResource s) (TF.Attr s P.Text) where
+    clusterName =
+        lens (_cluster_name :: DaxClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_name = a } :: DaxClusterResource s)
 
-instance P.HasRoute (DefaultRouteTableResource s) (TF.Attr s P.Text) where
-    route =
-        lens (_route :: DefaultRouteTableResource s -> TF.Attr s P.Text)
-             (\s a -> s { _route = a } :: DefaultRouteTableResource s)
+instance P.HasDescription (DaxClusterResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: DaxClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: DaxClusterResource s)
 
-instance P.HasTags (DefaultRouteTableResource s) (TF.Attr s (P.Tags s)) where
+instance P.HasIamRoleArn (DaxClusterResource s) (TF.Attr s P.Text) where
+    iamRoleArn =
+        lens (_iam_role_arn :: DaxClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _iam_role_arn = a } :: DaxClusterResource s)
+
+instance P.HasMaintenanceWindow (DaxClusterResource s) (TF.Attr s P.Text) where
+    maintenanceWindow =
+        lens (_maintenance_window :: DaxClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _maintenance_window = a } :: DaxClusterResource s)
+
+instance P.HasNodeType (DaxClusterResource s) (TF.Attr s P.Text) where
+    nodeType =
+        lens (_node_type :: DaxClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _node_type = a } :: DaxClusterResource s)
+
+instance P.HasNotificationTopicArn (DaxClusterResource s) (TF.Attr s P.Text) where
+    notificationTopicArn =
+        lens (_notification_topic_arn :: DaxClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _notification_topic_arn = a } :: DaxClusterResource s)
+
+instance P.HasParameterGroupName (DaxClusterResource s) (TF.Attr s P.Text) where
+    parameterGroupName =
+        lens (_parameter_group_name :: DaxClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _parameter_group_name = a } :: DaxClusterResource s)
+
+instance P.HasReplicationFactor (DaxClusterResource s) (TF.Attr s P.Text) where
+    replicationFactor =
+        lens (_replication_factor :: DaxClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _replication_factor = a } :: DaxClusterResource s)
+
+instance P.HasSecurityGroupIds (DaxClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    securityGroupIds =
+        lens (_security_group_ids :: DaxClusterResource s -> TF.Attr s [TF.Attr s P.Text])
+             (\s a -> s { _security_group_ids = a } :: DaxClusterResource s)
+
+instance P.HasSubnetGroupName (DaxClusterResource s) (TF.Attr s P.Text) where
+    subnetGroupName =
+        lens (_subnet_group_name :: DaxClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _subnet_group_name = a } :: DaxClusterResource s)
+
+instance P.HasTags (DaxClusterResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DefaultRouteTableResource s -> TF.Attr s (P.Tags s))
-             (\s a -> s { _tags = a } :: DefaultRouteTableResource s)
+        lens (_tags :: DaxClusterResource s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: DaxClusterResource s)
 
-instance s ~ s' => P.HasComputedDefaultRouteTableId (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s P.Text) where
-    computedDefaultRouteTableId =
-        (_default_route_table_id :: DefaultRouteTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (DaxClusterResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedAvailabilityZones =
+        (_availability_zones :: DaxClusterResource s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedClusterAddress (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedClusterAddress x = TF.compute (TF.refKey x) "cluster_address"
 
-instance s ~ s' => P.HasComputedPropagatingVgws (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s P.Text) where
-    computedPropagatingVgws =
-        (_propagating_vgws :: DefaultRouteTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedClusterName (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedClusterName =
+        (_cluster_name :: DaxClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRoute (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s P.Text) where
-    computedRoute =
-        (_route :: DefaultRouteTableResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedConfigurationEndpoint (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedConfigurationEndpoint x = TF.compute (TF.refKey x) "configuration_endpoint"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: DaxClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s (P.Tags s)) where
+instance s ~ s' => P.HasComputedIamRoleArn (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedIamRoleArn =
+        (_iam_role_arn :: DaxClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMaintenanceWindow (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedMaintenanceWindow =
+        (_maintenance_window :: DaxClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNodeType (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedNodeType =
+        (_node_type :: DaxClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedNodes x = TF.compute (TF.refKey x) "nodes"
+
+instance s ~ s' => P.HasComputedNotificationTopicArn (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedNotificationTopicArn =
+        (_notification_topic_arn :: DaxClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedParameterGroupName (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedParameterGroupName =
+        (_parameter_group_name :: DaxClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedPort x = TF.compute (TF.refKey x) "port"
+
+instance s ~ s' => P.HasComputedReplicationFactor (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedReplicationFactor =
+        (_replication_factor :: DaxClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSecurityGroupIds (TF.Ref s' (DaxClusterResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedSecurityGroupIds =
+        (_security_group_ids :: DaxClusterResource s -> TF.Attr s [TF.Attr s P.Text])
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSubnetGroupName (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
+    computedSubnetGroupName =
+        (_subnet_group_name :: DaxClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DaxClusterResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DefaultRouteTableResource s -> TF.Attr s (P.Tags s))
+        (_tags :: DaxClusterResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
-defaultRouteTableResource :: TF.Resource P.AWS (DefaultRouteTableResource s)
-defaultRouteTableResource =
-    TF.newResource "aws_default_route_table" $
-        DefaultRouteTableResource {
-              _default_route_table_id = TF.Nil
-            , _propagating_vgws = TF.Nil
-            , _route = TF.Nil
+daxClusterResource :: TF.Resource P.AWS (DaxClusterResource s)
+daxClusterResource =
+    TF.newResource "aws_dax_cluster" $
+        DaxClusterResource {
+              _availability_zones = TF.Nil
+            , _cluster_name = TF.Nil
+            , _description = TF.Nil
+            , _iam_role_arn = TF.Nil
+            , _maintenance_window = TF.Nil
+            , _node_type = TF.Nil
+            , _notification_topic_arn = TF.Nil
+            , _parameter_group_name = TF.Nil
+            , _replication_factor = TF.Nil
+            , _security_group_ids = TF.Nil
+            , _subnet_group_name = TF.Nil
             , _tags = TF.Nil
             }
 
-{- | The @aws_devicefarm_project@ AWS resource.
+{- | The @aws_default_vpc@ AWS resource.
 
-Provides a resource to manage AWS Device Farm Projects. Please keep in mind
-that this feature is only supported on the "us-west-2" region. This resource
-will error if you try to create a project in another region. For more
-information about Device Farm Projects, see the AWS Documentation on
-<http://docs.aws.amazon.com/devicefarm/latest/APIReference/API_GetProject.html>
-.
+Provides a resource to manage the
+<http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html> in
+the current region. For AWS accounts created after 2013-12-04, each region
+comes with a Default VPC. This is an advanced resource , and has special
+caveats to be aware of when using it. Please read this document in its
+entirety before using this resource. The @aws_default_vpc@ behaves
+differently from normal resources, in that Terraform does not create this
+resource, but instead "adopts" it into management.
 -}
-data DevicefarmProjectResource s = DevicefarmProjectResource {
-      _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the project -}
+data DefaultVpcResource s = DefaultVpcResource {
+      _enable_classiclink   :: !(TF.Attr s P.Bool)
+    {- ^ (Optional) A boolean flag to enable/disable ClassicLink for the VPC. Only valid in regions and accounts that support EC2 Classic. See the <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html> for more information. Defaults false. -}
+    , _enable_dns_hostnames :: !(TF.Attr s P.Bool)
+    {- ^ (Optional) A boolean flag to enable/disable DNS hostnames in the VPC. Defaults false. -}
+    , _enable_dns_support   :: !(TF.Attr s P.Bool)
+    {- ^ (Optional) A boolean flag to enable/disable DNS support in the VPC. Defaults true. -}
+    , _tags                 :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DevicefarmProjectResource s) where
-    toHCL DevicefarmProjectResource{..} = TF.inline $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+instance TF.ToHCL (DefaultVpcResource s) where
+    toHCL DefaultVpcResource{..} = TF.inline $ catMaybes
+        [ TF.assign "enable_classiclink" <$> TF.attribute _enable_classiclink
+        , TF.assign "enable_dns_hostnames" <$> TF.attribute _enable_dns_hostnames
+        , TF.assign "enable_dns_support" <$> TF.attribute _enable_dns_support
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasName (DevicefarmProjectResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: DevicefarmProjectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DevicefarmProjectResource s)
+instance P.HasEnableClassiclink (DefaultVpcResource s) (TF.Attr s P.Bool) where
+    enableClassiclink =
+        lens (_enable_classiclink :: DefaultVpcResource s -> TF.Attr s P.Bool)
+             (\s a -> s { _enable_classiclink = a } :: DefaultVpcResource s)
 
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (DevicefarmProjectResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+instance P.HasEnableDnsHostnames (DefaultVpcResource s) (TF.Attr s P.Bool) where
+    enableDnsHostnames =
+        lens (_enable_dns_hostnames :: DefaultVpcResource s -> TF.Attr s P.Bool)
+             (\s a -> s { _enable_dns_hostnames = a } :: DefaultVpcResource s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DevicefarmProjectResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DevicefarmProjectResource s -> TF.Attr s P.Text)
+instance P.HasEnableDnsSupport (DefaultVpcResource s) (TF.Attr s P.Bool) where
+    enableDnsSupport =
+        lens (_enable_dns_support :: DefaultVpcResource s -> TF.Attr s P.Bool)
+             (\s a -> s { _enable_dns_support = a } :: DefaultVpcResource s)
+
+instance P.HasTags (DefaultVpcResource s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: DefaultVpcResource s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: DefaultVpcResource s)
+
+instance s ~ s' => P.HasComputedAssignGeneratedIpv6CidrBlock (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.IPRange) where
+    computedAssignGeneratedIpv6CidrBlock x = TF.compute (TF.refKey x) "assign_generated_ipv6_cidr_block"
+
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.IPRange) where
+    computedCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
+
+instance s ~ s' => P.HasComputedDefaultNetworkAclId (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Text) where
+    computedDefaultNetworkAclId x = TF.compute (TF.refKey x) "default_network_acl_id"
+
+instance s ~ s' => P.HasComputedDefaultRouteTableId (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Text) where
+    computedDefaultRouteTableId x = TF.compute (TF.refKey x) "default_route_table_id"
+
+instance s ~ s' => P.HasComputedDefaultSecurityGroupId (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Text) where
+    computedDefaultSecurityGroupId x = TF.compute (TF.refKey x) "default_security_group_id"
+
+instance s ~ s' => P.HasComputedEnableClassiclink (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Bool) where
+    computedEnableClassiclink x = TF.compute (TF.refKey x) "enable_classiclink"
+
+instance s ~ s' => P.HasComputedEnableDnsHostnames (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Bool) where
+    computedEnableDnsHostnames x = TF.compute (TF.refKey x) "enable_dns_hostnames"
+
+instance s ~ s' => P.HasComputedEnableDnsSupport (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Bool) where
+    computedEnableDnsSupport x = TF.compute (TF.refKey x) "enable_dns_support"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstanceTenancy (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Text) where
+    computedInstanceTenancy x = TF.compute (TF.refKey x) "instance_tenancy"
+
+instance s ~ s' => P.HasComputedIpv6AssociationId (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Text) where
+    computedIpv6AssociationId x = TF.compute (TF.refKey x) "ipv6_association_id"
+
+instance s ~ s' => P.HasComputedIpv6CidrBlock (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.IPRange) where
+    computedIpv6CidrBlock x = TF.compute (TF.refKey x) "ipv6_cidr_block"
+
+instance s ~ s' => P.HasComputedMainRouteTableId (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Text) where
+    computedMainRouteTableId x = TF.compute (TF.refKey x) "main_route_table_id"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
+        (_tags :: DefaultVpcResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
-devicefarmProjectResource :: TF.Resource P.AWS (DevicefarmProjectResource s)
-devicefarmProjectResource =
-    TF.newResource "aws_devicefarm_project" $
-        DevicefarmProjectResource {
-              _name = TF.Nil
+defaultVpcResource :: TF.Resource P.AWS (DefaultVpcResource s)
+defaultVpcResource =
+    TF.newResource "aws_default_vpc" $
+        DefaultVpcResource {
+              _enable_classiclink = TF.Nil
+            , _enable_dns_hostnames = TF.Nil
+            , _enable_dns_support = TF.Nil
+            , _tags = TF.Nil
+            }
+
+{- | The @aws_directory_service_conditional_forwarder@ AWS resource.
+
+Provides a conditional forwarder for managed Microsoft AD in AWS Directory
+Service.
+-}
+data DirectoryServiceConditionalForwarderResource s = DirectoryServiceConditionalForwarderResource {
+      _directory_id       :: !(TF.Attr s P.Text)
+    {- ^ (Required) The id of directory. -}
+    , _dns_ips            :: !(TF.Attr s P.Text)
+    {- ^ (Required) A list of forwarder IP addresses. -}
+    , _remote_domain_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The fully qualified domain name of the remote domain for which forwarders will be used. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DirectoryServiceConditionalForwarderResource s) where
+    toHCL DirectoryServiceConditionalForwarderResource{..} = TF.inline $ catMaybes
+        [ TF.assign "directory_id" <$> TF.attribute _directory_id
+        , TF.assign "dns_ips" <$> TF.attribute _dns_ips
+        , TF.assign "remote_domain_name" <$> TF.attribute _remote_domain_name
+        ]
+
+instance P.HasDirectoryId (DirectoryServiceConditionalForwarderResource s) (TF.Attr s P.Text) where
+    directoryId =
+        lens (_directory_id :: DirectoryServiceConditionalForwarderResource s -> TF.Attr s P.Text)
+             (\s a -> s { _directory_id = a } :: DirectoryServiceConditionalForwarderResource s)
+
+instance P.HasDnsIps (DirectoryServiceConditionalForwarderResource s) (TF.Attr s P.Text) where
+    dnsIps =
+        lens (_dns_ips :: DirectoryServiceConditionalForwarderResource s -> TF.Attr s P.Text)
+             (\s a -> s { _dns_ips = a } :: DirectoryServiceConditionalForwarderResource s)
+
+instance P.HasRemoteDomainName (DirectoryServiceConditionalForwarderResource s) (TF.Attr s P.Text) where
+    remoteDomainName =
+        lens (_remote_domain_name :: DirectoryServiceConditionalForwarderResource s -> TF.Attr s P.Text)
+             (\s a -> s { _remote_domain_name = a } :: DirectoryServiceConditionalForwarderResource s)
+
+instance s ~ s' => P.HasComputedDirectoryId (TF.Ref s' (DirectoryServiceConditionalForwarderResource s)) (TF.Attr s P.Text) where
+    computedDirectoryId =
+        (_directory_id :: DirectoryServiceConditionalForwarderResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDnsIps (TF.Ref s' (DirectoryServiceConditionalForwarderResource s)) (TF.Attr s P.Text) where
+    computedDnsIps =
+        (_dns_ips :: DirectoryServiceConditionalForwarderResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRemoteDomainName (TF.Ref s' (DirectoryServiceConditionalForwarderResource s)) (TF.Attr s P.Text) where
+    computedRemoteDomainName =
+        (_remote_domain_name :: DirectoryServiceConditionalForwarderResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+directoryServiceConditionalForwarderResource :: TF.Resource P.AWS (DirectoryServiceConditionalForwarderResource s)
+directoryServiceConditionalForwarderResource =
+    TF.newResource "aws_directory_service_conditional_forwarder" $
+        DirectoryServiceConditionalForwarderResource {
+              _directory_id = TF.Nil
+            , _dns_ips = TF.Nil
+            , _remote_domain_name = TF.Nil
             }
 
 {- | The @aws_dms_endpoint@ AWS resource.
@@ -4215,15 +3967,19 @@ data DmsEndpointResource s = DmsEndpointResource {
     , _endpoint_type               :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of endpoint. Can be one of @source | target@ . -}
     , _engine_name                 :: !(TF.Attr s P.Text)
-    {- ^ (Required) The type of engine for the endpoint. Can be one of @mysql | oracle | postgres | mariadb | aurora | redshift | sybase | sqlserver | dynamodb@ . -}
+    {- ^ (Required) The type of engine for the endpoint. Can be one of @mysql | oracle | postgres | mariadb | aurora | redshift | sybase | sqlserver | dynamodb | mongodb | s3 | azuredb@ . -}
     , _extra_connection_attributes :: !(TF.Attr s P.Text)
     {- ^ (Optional) Additional attributes associated with the connection. For available attributes see <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.ConnectionAttributes.html> . -}
     , _kms_key_arn                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The Amazon Resource Name (ARN) for the KMS key that will be used to encrypt the connection parameters. If you do not specify a value for @kms_key_arn@ , then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region. -}
+    {- ^ (Required when @engine_name@ is @mongodb@ , optional otherwise) The Amazon Resource Name (ARN) for the KMS key that will be used to encrypt the connection parameters. If you do not specify a value for @kms_key_arn@ , then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region. -}
+    , _mongodb_settings            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Settings for the source MongoDB endpoint. Available settings are @auth_type@ (default: @PASSWORD@ ), @auth_mechanism@ (default: @DEFAULT@ ), @nesting_level@ (default: @NONE@ ), @extract_doc_id@ (default: @false@ ), @docs_to_investigate@ (default: @1000@ ) and @auth_source@ (default: @admin@ ). For more details, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html> . -}
     , _password                    :: !(TF.Attr s P.Text)
     {- ^ (Optional) The password to be used to login to the endpoint database. -}
     , _port                        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The port used by the endpoint database. -}
+    , _s3_settings                 :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Settings for the target S3 endpoint. Available settings are @service_access_role_arn@ , @external_table_definition@ , @csv_row_delimiter@ (default: @\\n@ ), @csv_delimiter@ (default: @,@ ), @bucket_folder@ , @bucket_name@ and @compression_type@ (default: @NONE@ ). For more details, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html> . -}
     , _server_name                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) The host name of the server. -}
     , _service_access_role         :: !(TF.Attr s P.Text)
@@ -4245,8 +4001,10 @@ instance TF.ToHCL (DmsEndpointResource s) where
         , TF.assign "engine_name" <$> TF.attribute _engine_name
         , TF.assign "extra_connection_attributes" <$> TF.attribute _extra_connection_attributes
         , TF.assign "kms_key_arn" <$> TF.attribute _kms_key_arn
+        , TF.assign "mongodb_settings" <$> TF.attribute _mongodb_settings
         , TF.assign "password" <$> TF.attribute _password
         , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "s3_settings" <$> TF.attribute _s3_settings
         , TF.assign "server_name" <$> TF.attribute _server_name
         , TF.assign "service_access_role" <$> TF.attribute _service_access_role
         , TF.assign "ssl_mode" <$> TF.attribute _ssl_mode
@@ -4289,6 +4047,11 @@ instance P.HasKmsKeyArn (DmsEndpointResource s) (TF.Attr s P.Text) where
         lens (_kms_key_arn :: DmsEndpointResource s -> TF.Attr s P.Text)
              (\s a -> s { _kms_key_arn = a } :: DmsEndpointResource s)
 
+instance P.HasMongodbSettings (DmsEndpointResource s) (TF.Attr s P.Text) where
+    mongodbSettings =
+        lens (_mongodb_settings :: DmsEndpointResource s -> TF.Attr s P.Text)
+             (\s a -> s { _mongodb_settings = a } :: DmsEndpointResource s)
+
 instance P.HasPassword (DmsEndpointResource s) (TF.Attr s P.Text) where
     password =
         lens (_password :: DmsEndpointResource s -> TF.Attr s P.Text)
@@ -4298,6 +4061,11 @@ instance P.HasPort (DmsEndpointResource s) (TF.Attr s P.Text) where
     port =
         lens (_port :: DmsEndpointResource s -> TF.Attr s P.Text)
              (\s a -> s { _port = a } :: DmsEndpointResource s)
+
+instance P.HasS3Settings (DmsEndpointResource s) (TF.Attr s P.Text) where
+    s3Settings =
+        lens (_s3_settings :: DmsEndpointResource s -> TF.Attr s P.Text)
+             (\s a -> s { _s3_settings = a } :: DmsEndpointResource s)
 
 instance P.HasServerName (DmsEndpointResource s) (TF.Attr s P.Text) where
     serverName =
@@ -4362,6 +4130,11 @@ instance s ~ s' => P.HasComputedKmsKeyArn (TF.Ref s' (DmsEndpointResource s)) (T
         (_kms_key_arn :: DmsEndpointResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedMongodbSettings (TF.Ref s' (DmsEndpointResource s)) (TF.Attr s P.Text) where
+    computedMongodbSettings =
+        (_mongodb_settings :: DmsEndpointResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (DmsEndpointResource s)) (TF.Attr s P.Text) where
     computedPassword =
         (_password :: DmsEndpointResource s -> TF.Attr s P.Text)
@@ -4370,6 +4143,11 @@ instance s ~ s' => P.HasComputedPassword (TF.Ref s' (DmsEndpointResource s)) (TF
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (DmsEndpointResource s)) (TF.Attr s P.Text) where
     computedPort =
         (_port :: DmsEndpointResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedS3Settings (TF.Ref s' (DmsEndpointResource s)) (TF.Attr s P.Text) where
+    computedS3Settings =
+        (_s3_settings :: DmsEndpointResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedServerName (TF.Ref s' (DmsEndpointResource s)) (TF.Attr s P.Text) where
@@ -4408,8 +4186,10 @@ dmsEndpointResource =
             , _engine_name = TF.Nil
             , _extra_connection_attributes = TF.Nil
             , _kms_key_arn = TF.Nil
+            , _mongodb_settings = TF.Nil
             , _password = TF.Nil
             , _port = TF.Nil
+            , _s3_settings = TF.Nil
             , _server_name = TF.Nil
             , _service_access_role = TF.Nil
             , _ssl_mode = TF.Nil
@@ -4564,49 +4344,170 @@ dmsReplicationTaskResource =
             , _target_endpoint_arn = TF.Nil
             }
 
-{- | The @aws_dx_connection_association@ AWS resource.
+{- | The @aws_dx_hosted_public_virtual_interface@ AWS resource.
 
-Associates a Direct Connect Connection with a LAG.
+Provides a Direct Connect hosted public virtual interface resource. This
+resource represents the allocator's side of the hosted virtual interface. A
+hosted virtual interface is a virtual interface that is owned by another AWS
+account.
 -}
-data DxConnectionAssociationResource s = DxConnectionAssociationResource {
-      _connection_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the connection. -}
-    , _lag_id        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the LAG with which to associate the connection. -}
+data DxHostedPublicVirtualInterfaceResource s = DxHostedPublicVirtualInterfaceResource {
+      _address_family        :: !(TF.Attr s P.Text)
+    {- ^ (Required) The address family for the BGP peer. @ipv4@ or @ipv6@ . -}
+    , _amazon_address        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IPv4 CIDR address to use to send traffic to Amazon. Required for IPv4 BGP peers. -}
+    , _bgp_asn               :: !(TF.Attr s P.Text)
+    {- ^ (Required) The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration. -}
+    , _bgp_auth_key          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The authentication key for BGP configuration. -}
+    , _connection_id         :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the Direct Connect connection (or LAG) on which to create the virtual interface. -}
+    , _customer_address      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers. -}
+    , _name                  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name for the virtual interface. -}
+    , _owner_account_id      :: !(TF.Attr s P.Text)
+    {- ^ (Required) The AWS account that will own the new virtual interface. -}
+    , _route_filter_prefixes :: !(TF.Attr s P.Text)
+    {- ^ (Required) A list of routes to be advertised to the AWS network in this region. -}
+    , _vlan                  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The VLAN ID. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DxConnectionAssociationResource s) where
-    toHCL DxConnectionAssociationResource{..} = TF.inline $ catMaybes
-        [ TF.assign "connection_id" <$> TF.attribute _connection_id
-        , TF.assign "lag_id" <$> TF.attribute _lag_id
+instance TF.ToHCL (DxHostedPublicVirtualInterfaceResource s) where
+    toHCL DxHostedPublicVirtualInterfaceResource{..} = TF.inline $ catMaybes
+        [ TF.assign "address_family" <$> TF.attribute _address_family
+        , TF.assign "amazon_address" <$> TF.attribute _amazon_address
+        , TF.assign "bgp_asn" <$> TF.attribute _bgp_asn
+        , TF.assign "bgp_auth_key" <$> TF.attribute _bgp_auth_key
+        , TF.assign "connection_id" <$> TF.attribute _connection_id
+        , TF.assign "customer_address" <$> TF.attribute _customer_address
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "owner_account_id" <$> TF.attribute _owner_account_id
+        , TF.assign "route_filter_prefixes" <$> TF.attribute _route_filter_prefixes
+        , TF.assign "vlan" <$> TF.attribute _vlan
         ]
 
-instance P.HasConnectionId (DxConnectionAssociationResource s) (TF.Attr s P.Text) where
+instance P.HasAddressFamily (DxHostedPublicVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    addressFamily =
+        lens (_address_family :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _address_family = a } :: DxHostedPublicVirtualInterfaceResource s)
+
+instance P.HasAmazonAddress (DxHostedPublicVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    amazonAddress =
+        lens (_amazon_address :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _amazon_address = a } :: DxHostedPublicVirtualInterfaceResource s)
+
+instance P.HasBgpAsn (DxHostedPublicVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    bgpAsn =
+        lens (_bgp_asn :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bgp_asn = a } :: DxHostedPublicVirtualInterfaceResource s)
+
+instance P.HasBgpAuthKey (DxHostedPublicVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    bgpAuthKey =
+        lens (_bgp_auth_key :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bgp_auth_key = a } :: DxHostedPublicVirtualInterfaceResource s)
+
+instance P.HasConnectionId (DxHostedPublicVirtualInterfaceResource s) (TF.Attr s P.Text) where
     connectionId =
-        lens (_connection_id :: DxConnectionAssociationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _connection_id = a } :: DxConnectionAssociationResource s)
+        lens (_connection_id :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _connection_id = a } :: DxHostedPublicVirtualInterfaceResource s)
 
-instance P.HasLagId (DxConnectionAssociationResource s) (TF.Attr s P.Text) where
-    lagId =
-        lens (_lag_id :: DxConnectionAssociationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _lag_id = a } :: DxConnectionAssociationResource s)
+instance P.HasCustomerAddress (DxHostedPublicVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    customerAddress =
+        lens (_customer_address :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _customer_address = a } :: DxHostedPublicVirtualInterfaceResource s)
 
-instance s ~ s' => P.HasComputedConnectionId (TF.Ref s' (DxConnectionAssociationResource s)) (TF.Attr s P.Text) where
+instance P.HasName (DxHostedPublicVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DxHostedPublicVirtualInterfaceResource s)
+
+instance P.HasOwnerAccountId (DxHostedPublicVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    ownerAccountId =
+        lens (_owner_account_id :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _owner_account_id = a } :: DxHostedPublicVirtualInterfaceResource s)
+
+instance P.HasRouteFilterPrefixes (DxHostedPublicVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    routeFilterPrefixes =
+        lens (_route_filter_prefixes :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _route_filter_prefixes = a } :: DxHostedPublicVirtualInterfaceResource s)
+
+instance P.HasVlan (DxHostedPublicVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    vlan =
+        lens (_vlan :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vlan = a } :: DxHostedPublicVirtualInterfaceResource s)
+
+instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedAddressFamily =
+        (_address_family :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedAmazonAddress (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedAmazonAddress =
+        (_amazon_address :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedBgpAsn (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedBgpAsn =
+        (_bgp_asn :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedBgpAuthKey (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedBgpAuthKey =
+        (_bgp_auth_key :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedConnectionId (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
     computedConnectionId =
-        (_connection_id :: DxConnectionAssociationResource s -> TF.Attr s P.Text)
+        (_connection_id :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLagId (TF.Ref s' (DxConnectionAssociationResource s)) (TF.Attr s P.Text) where
-    computedLagId =
-        (_lag_id :: DxConnectionAssociationResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedCustomerAddress (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedCustomerAddress =
+        (_customer_address :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-dxConnectionAssociationResource :: TF.Resource P.AWS (DxConnectionAssociationResource s)
-dxConnectionAssociationResource =
-    TF.newResource "aws_dx_connection_association" $
-        DxConnectionAssociationResource {
-              _connection_id = TF.Nil
-            , _lag_id = TF.Nil
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedOwnerAccountId (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedOwnerAccountId =
+        (_owner_account_id :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRouteFilterPrefixes (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedRouteFilterPrefixes =
+        (_route_filter_prefixes :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVlan (TF.Ref s' (DxHostedPublicVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedVlan =
+        (_vlan :: DxHostedPublicVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+dxHostedPublicVirtualInterfaceResource :: TF.Resource P.AWS (DxHostedPublicVirtualInterfaceResource s)
+dxHostedPublicVirtualInterfaceResource =
+    TF.newResource "aws_dx_hosted_public_virtual_interface" $
+        DxHostedPublicVirtualInterfaceResource {
+              _address_family = TF.Nil
+            , _amazon_address = TF.Nil
+            , _bgp_asn = TF.Nil
+            , _bgp_auth_key = TF.Nil
+            , _connection_id = TF.Nil
+            , _customer_address = TF.Nil
+            , _name = TF.Nil
+            , _owner_account_id = TF.Nil
+            , _route_filter_prefixes = TF.Nil
+            , _vlan = TF.Nil
             }
 
 {- | The @aws_dx_lag@ AWS resource.
@@ -4714,6 +4615,261 @@ dxLagResource =
             , _name = TF.Nil
             , _number_of_connections = TF.Nil
             , _tags = TF.Nil
+            }
+
+{- | The @aws_dx_private_virtual_interface@ AWS resource.
+
+Provides a Direct Connect private virtual interface resource.
+-}
+data DxPrivateVirtualInterfaceResource s = DxPrivateVirtualInterfaceResource {
+      _address_family   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The address family for the BGP peer. @ipv4@ or @ipv6@ . -}
+    , _amazon_address   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IPv4 CIDR address to use to send traffic to Amazon. Required for IPv4 BGP peers. -}
+    , _bgp_asn          :: !(TF.Attr s P.Text)
+    {- ^ (Required) The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration. -}
+    , _bgp_auth_key     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The authentication key for BGP configuration. -}
+    , _connection_id    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the Direct Connect connection (or LAG) on which to create the virtual interface. -}
+    , _customer_address :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers. -}
+    , _dx_gateway_id    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID of the Direct Connect gateway to which to connect the virtual interface. -}
+    , _name             :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name for the virtual interface. -}
+    , _tags             :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) A mapping of tags to assign to the resource. -}
+    , _vlan             :: !(TF.Attr s P.Text)
+    {- ^ (Required) The VLAN ID. -}
+    , _vpn_gateway_id   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID of the <vpn_gateway.html> to which to connect the virtual interface. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DxPrivateVirtualInterfaceResource s) where
+    toHCL DxPrivateVirtualInterfaceResource{..} = TF.inline $ catMaybes
+        [ TF.assign "address_family" <$> TF.attribute _address_family
+        , TF.assign "amazon_address" <$> TF.attribute _amazon_address
+        , TF.assign "bgp_asn" <$> TF.attribute _bgp_asn
+        , TF.assign "bgp_auth_key" <$> TF.attribute _bgp_auth_key
+        , TF.assign "connection_id" <$> TF.attribute _connection_id
+        , TF.assign "customer_address" <$> TF.attribute _customer_address
+        , TF.assign "dx_gateway_id" <$> TF.attribute _dx_gateway_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vlan" <$> TF.attribute _vlan
+        , TF.assign "vpn_gateway_id" <$> TF.attribute _vpn_gateway_id
+        ]
+
+instance P.HasAddressFamily (DxPrivateVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    addressFamily =
+        lens (_address_family :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _address_family = a } :: DxPrivateVirtualInterfaceResource s)
+
+instance P.HasAmazonAddress (DxPrivateVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    amazonAddress =
+        lens (_amazon_address :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _amazon_address = a } :: DxPrivateVirtualInterfaceResource s)
+
+instance P.HasBgpAsn (DxPrivateVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    bgpAsn =
+        lens (_bgp_asn :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bgp_asn = a } :: DxPrivateVirtualInterfaceResource s)
+
+instance P.HasBgpAuthKey (DxPrivateVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    bgpAuthKey =
+        lens (_bgp_auth_key :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bgp_auth_key = a } :: DxPrivateVirtualInterfaceResource s)
+
+instance P.HasConnectionId (DxPrivateVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    connectionId =
+        lens (_connection_id :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _connection_id = a } :: DxPrivateVirtualInterfaceResource s)
+
+instance P.HasCustomerAddress (DxPrivateVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    customerAddress =
+        lens (_customer_address :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _customer_address = a } :: DxPrivateVirtualInterfaceResource s)
+
+instance P.HasDxGatewayId (DxPrivateVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    dxGatewayId =
+        lens (_dx_gateway_id :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _dx_gateway_id = a } :: DxPrivateVirtualInterfaceResource s)
+
+instance P.HasName (DxPrivateVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DxPrivateVirtualInterfaceResource s)
+
+instance P.HasTags (DxPrivateVirtualInterfaceResource s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: DxPrivateVirtualInterfaceResource s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: DxPrivateVirtualInterfaceResource s)
+
+instance P.HasVlan (DxPrivateVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    vlan =
+        lens (_vlan :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vlan = a } :: DxPrivateVirtualInterfaceResource s)
+
+instance P.HasVpnGatewayId (DxPrivateVirtualInterfaceResource s) (TF.Attr s P.Text) where
+    vpnGatewayId =
+        lens (_vpn_gateway_id :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vpn_gateway_id = a } :: DxPrivateVirtualInterfaceResource s)
+
+instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedAddressFamily =
+        (_address_family :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedAmazonAddress (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedAmazonAddress =
+        (_amazon_address :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedBgpAsn (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedBgpAsn =
+        (_bgp_asn :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedBgpAuthKey (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedBgpAuthKey =
+        (_bgp_auth_key :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedConnectionId (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedConnectionId =
+        (_connection_id :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCustomerAddress (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedCustomerAddress =
+        (_customer_address :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDxGatewayId (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedDxGatewayId =
+        (_dx_gateway_id :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
+        (_tags :: DxPrivateVirtualInterfaceResource s -> TF.Attr s (P.Tags s))
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVlan (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedVlan =
+        (_vlan :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVpnGatewayId (TF.Ref s' (DxPrivateVirtualInterfaceResource s)) (TF.Attr s P.Text) where
+    computedVpnGatewayId =
+        (_vpn_gateway_id :: DxPrivateVirtualInterfaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+dxPrivateVirtualInterfaceResource :: TF.Resource P.AWS (DxPrivateVirtualInterfaceResource s)
+dxPrivateVirtualInterfaceResource =
+    TF.newResource "aws_dx_private_virtual_interface" $
+        DxPrivateVirtualInterfaceResource {
+              _address_family = TF.Nil
+            , _amazon_address = TF.Nil
+            , _bgp_asn = TF.Nil
+            , _bgp_auth_key = TF.Nil
+            , _connection_id = TF.Nil
+            , _customer_address = TF.Nil
+            , _dx_gateway_id = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            , _vlan = TF.Nil
+            , _vpn_gateway_id = TF.Nil
+            }
+
+{- | The @aws_dynamodb_table_item@ AWS resource.
+
+Provides a DynamoDB table item resource -> Note: This resource is not meant
+to be used for managing large amounts of data in your table, it is not
+designed to scale. You should perform regular backups of all data in the
+table, see
+<https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/BackupRestore.html>
+.
+-}
+data DynamodbTableItemResource s = DynamodbTableItemResource {
+      _hash_key   :: !(TF.Attr s P.Text)
+    {- ^ (Required) Hash key to use for lookups and identification of the item -}
+    , _item       :: !(TF.Attr s P.Text)
+    {- ^ (Required) JSON representation of a map of attribute name/value pairs, one for each attribute. Only the primary key attributes are required; you can optionally provide other attribute name-value pairs for the item. -}
+    , _range_key  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Range key to use for lookups and identification of the item. Required if there is range key defined in the table. -}
+    , _table_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the table to contain the item. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DynamodbTableItemResource s) where
+    toHCL DynamodbTableItemResource{..} = TF.inline $ catMaybes
+        [ TF.assign "hash_key" <$> TF.attribute _hash_key
+        , TF.assign "item" <$> TF.attribute _item
+        , TF.assign "range_key" <$> TF.attribute _range_key
+        , TF.assign "table_name" <$> TF.attribute _table_name
+        ]
+
+instance P.HasHashKey (DynamodbTableItemResource s) (TF.Attr s P.Text) where
+    hashKey =
+        lens (_hash_key :: DynamodbTableItemResource s -> TF.Attr s P.Text)
+             (\s a -> s { _hash_key = a } :: DynamodbTableItemResource s)
+
+instance P.HasItem (DynamodbTableItemResource s) (TF.Attr s P.Text) where
+    item =
+        lens (_item :: DynamodbTableItemResource s -> TF.Attr s P.Text)
+             (\s a -> s { _item = a } :: DynamodbTableItemResource s)
+
+instance P.HasRangeKey (DynamodbTableItemResource s) (TF.Attr s P.Text) where
+    rangeKey =
+        lens (_range_key :: DynamodbTableItemResource s -> TF.Attr s P.Text)
+             (\s a -> s { _range_key = a } :: DynamodbTableItemResource s)
+
+instance P.HasTableName (DynamodbTableItemResource s) (TF.Attr s P.Text) where
+    tableName =
+        lens (_table_name :: DynamodbTableItemResource s -> TF.Attr s P.Text)
+             (\s a -> s { _table_name = a } :: DynamodbTableItemResource s)
+
+instance s ~ s' => P.HasComputedHashKey (TF.Ref s' (DynamodbTableItemResource s)) (TF.Attr s P.Text) where
+    computedHashKey =
+        (_hash_key :: DynamodbTableItemResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedItem (TF.Ref s' (DynamodbTableItemResource s)) (TF.Attr s P.Text) where
+    computedItem =
+        (_item :: DynamodbTableItemResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRangeKey (TF.Ref s' (DynamodbTableItemResource s)) (TF.Attr s P.Text) where
+    computedRangeKey =
+        (_range_key :: DynamodbTableItemResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTableName (TF.Ref s' (DynamodbTableItemResource s)) (TF.Attr s P.Text) where
+    computedTableName =
+        (_table_name :: DynamodbTableItemResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+dynamodbTableItemResource :: TF.Resource P.AWS (DynamodbTableItemResource s)
+dynamodbTableItemResource =
+    TF.newResource "aws_dynamodb_table_item" $
+        DynamodbTableItemResource {
+              _hash_key = TF.Nil
+            , _item = TF.Nil
+            , _range_key = TF.Nil
+            , _table_name = TF.Nil
             }
 
 {- | The @aws_ebs_volume@ AWS resource.
@@ -4851,50 +5007,41 @@ ebsVolumeResource =
             , _type' = TF.Nil
             }
 
-{- | The @aws_ecr_lifecycle_policy@ AWS resource.
+{- | The @aws_ecs_cluster@ AWS resource.
 
-Provides an ECR lifecycle policy.
+Provides an ECS cluster.
 -}
-data EcrLifecyclePolicyResource s = EcrLifecyclePolicyResource {
-      _policy     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The policy document. This is a JSON formatted string. See more details about <http://docs.aws.amazon.com/ja_jp/AmazonECR/latest/userguide/LifecyclePolicies.html#lifecycle_policy_parameters> in the official AWS docs. -}
-    , _repository :: !(TF.Attr s P.Text)
-    {- ^ (Required) Name of the repository to apply the policy. -}
+data EcsClusterResource s = EcsClusterResource {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the cluster (up to 255 letters, numbers, hyphens, and underscores) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EcrLifecyclePolicyResource s) where
-    toHCL EcrLifecyclePolicyResource{..} = TF.inline $ catMaybes
-        [ TF.assign "policy" <$> TF.attribute _policy
-        , TF.assign "repository" <$> TF.attribute _repository
+instance TF.ToHCL (EcsClusterResource s) where
+    toHCL EcsClusterResource{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasPolicy (EcrLifecyclePolicyResource s) (TF.Attr s P.Text) where
-    policy =
-        lens (_policy :: EcrLifecyclePolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _policy = a } :: EcrLifecyclePolicyResource s)
+instance P.HasName (EcsClusterResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: EcsClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: EcsClusterResource s)
 
-instance P.HasRepository (EcrLifecyclePolicyResource s) (TF.Attr s P.Text) where
-    repository =
-        lens (_repository :: EcrLifecyclePolicyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _repository = a } :: EcrLifecyclePolicyResource s)
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (EcsClusterResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (EcrLifecyclePolicyResource s)) (TF.Attr s P.Text) where
-    computedPolicy =
-        (_policy :: EcrLifecyclePolicyResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EcsClusterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (EcsClusterResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: EcsClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRegistryId (TF.Ref s' (EcrLifecyclePolicyResource s)) (TF.Attr s P.Text) where
-    computedRegistryId x = TF.compute (TF.refKey x) "registry_id"
-
-instance s ~ s' => P.HasComputedRepository (TF.Ref s' (EcrLifecyclePolicyResource s)) (TF.Attr s P.Text) where
-    computedRepository x = TF.compute (TF.refKey x) "repository"
-
-ecrLifecyclePolicyResource :: TF.Resource P.AWS (EcrLifecyclePolicyResource s)
-ecrLifecyclePolicyResource =
-    TF.newResource "aws_ecr_lifecycle_policy" $
-        EcrLifecyclePolicyResource {
-              _policy = TF.Nil
-            , _repository = TF.Nil
+ecsClusterResource :: TF.Resource P.AWS (EcsClusterResource s)
+ecsClusterResource =
+    TF.newResource "aws_ecs_cluster" $
+        EcsClusterResource {
+              _name = TF.Nil
             }
 
 {- | The @aws_ecs_service@ AWS resource.
@@ -4912,15 +5059,15 @@ data EcsServiceResource s = EcsServiceResource {
       _cluster                            :: !(TF.Attr s P.Text)
     {- ^ (Optional) ARN of an ECS cluster -}
     , _deployment_maximum_percent         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment. -}
+    {- ^ (Optional) The upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment. Not valid when using the @DAEMON@ scheduling strategy. -}
     , _deployment_minimum_healthy_percent :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment. -}
+    {- ^ (Optional) The lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment. Not valid when using the @DAEMON@ scheduling strategy. -}
     , _desired_count                      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The number of instances of the task definition to place and keep running -}
+    {- ^ (Optional) The number of instances of the task definition to place and keep running. Defaults to 0. Do not specify if using the @DAEMON@ scheduling strategy. -}
     , _health_check_grace_period_seconds  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 1800. Only valid for services configured to use load balancers. -}
+    {- ^ (Optional) Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 7200. Only valid for services configured to use load balancers. -}
     , _iam_role                           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ARN of IAM role that allows your Amazon ECS container agent to make calls to your load balancer on your behalf. This parameter is only required if you are using a load balancer with your service. -}
+    {- ^ (Optional) ARN of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is required if you are using a load balancer with your service, but only if your task definition does not use the @awsvpc@ network mode. If using @awsvpc@ network mode, do not specify this role. If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here. -}
     , _launch_type                        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The launch type on which to run your service. The valid values are @EC2@ and @FARGATE@ . Defaults to @EC2@ . -}
     , _load_balancer                      :: !(TF.Attr s P.Text)
@@ -4928,11 +5075,17 @@ data EcsServiceResource s = EcsServiceResource {
     , _name                               :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the service (up to 255 letters, numbers, hyphens, and underscores) -}
     , _network_configuration              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The network configuration for the service. This parameter is required for task definitions that use the awsvpc network mode to receive their own Elastic Network Interface, and it is not supported for other network modes. -}
+    {- ^ (Optional) The network configuration for the service. This parameter is required for task definitions that use the @awsvpc@ network mode to receive their own Elastic Network Interface, and it is not supported for other network modes. -}
+    , _ordered_placement_strategy         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Service level strategy rules that are taken into consideration during task placement. List from top to bottom in order of precedence. The maximum number of @ordered_placement_strategy@ blocks is @5@ . Defined below. -}
     , _placement_constraints              :: !(TF.Attr s P.Text)
     {- ^ (Optional) rules that are taken into consideration during task placement. Maximum number of @placement_constraints@ is @10@ . Defined below. -}
     , _placement_strategy                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Service level strategy rules that are taken into consideration during task placement. The maximum number of @placement_strategy@ blocks is @5@ . Defined below. -}
+    {- ^ (Optional) Deprecated , use @ordered_placement_strategy@ instead. -}
+    , _scheduling_strategy                :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The scheduling strategy to use for the service. The valid values are @REPLICA@ and @DAEMON@ . Defaults to @REPLICA@ . Note that <https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html> . -}
+    , _service_registries                 :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The service discovery registries for the service. The maximum number of @service_registries@ blocks is @1@ . -}
     , _task_definition                    :: !(TF.Attr s P.Text)
     {- ^ (Required) The family and revision ( @family:revision@ ) or full ARN of the task definition that you want to run in your service. -}
     } deriving (Show, Eq)
@@ -4949,8 +5102,11 @@ instance TF.ToHCL (EcsServiceResource s) where
         , TF.assign "load_balancer" <$> TF.attribute _load_balancer
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network_configuration" <$> TF.attribute _network_configuration
+        , TF.assign "ordered_placement_strategy" <$> TF.attribute _ordered_placement_strategy
         , TF.assign "placement_constraints" <$> TF.attribute _placement_constraints
         , TF.assign "placement_strategy" <$> TF.attribute _placement_strategy
+        , TF.assign "scheduling_strategy" <$> TF.attribute _scheduling_strategy
+        , TF.assign "service_registries" <$> TF.attribute _service_registries
         , TF.assign "task_definition" <$> TF.attribute _task_definition
         ]
 
@@ -5004,6 +5160,11 @@ instance P.HasNetworkConfiguration (EcsServiceResource s) (TF.Attr s P.Text) whe
         lens (_network_configuration :: EcsServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _network_configuration = a } :: EcsServiceResource s)
 
+instance P.HasOrderedPlacementStrategy (EcsServiceResource s) (TF.Attr s P.Text) where
+    orderedPlacementStrategy =
+        lens (_ordered_placement_strategy :: EcsServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ordered_placement_strategy = a } :: EcsServiceResource s)
+
 instance P.HasPlacementConstraints (EcsServiceResource s) (TF.Attr s P.Text) where
     placementConstraints =
         lens (_placement_constraints :: EcsServiceResource s -> TF.Attr s P.Text)
@@ -5013,6 +5174,16 @@ instance P.HasPlacementStrategy (EcsServiceResource s) (TF.Attr s P.Text) where
     placementStrategy =
         lens (_placement_strategy :: EcsServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _placement_strategy = a } :: EcsServiceResource s)
+
+instance P.HasSchedulingStrategy (EcsServiceResource s) (TF.Attr s P.Text) where
+    schedulingStrategy =
+        lens (_scheduling_strategy :: EcsServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _scheduling_strategy = a } :: EcsServiceResource s)
+
+instance P.HasServiceRegistries (EcsServiceResource s) (TF.Attr s P.Text) where
+    serviceRegistries =
+        lens (_service_registries :: EcsServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _service_registries = a } :: EcsServiceResource s)
 
 instance P.HasTaskDefinition (EcsServiceResource s) (TF.Attr s P.Text) where
     taskDefinition =
@@ -5064,6 +5235,11 @@ instance s ~ s' => P.HasComputedNetworkConfiguration (TF.Ref s' (EcsServiceResou
         (_network_configuration :: EcsServiceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedOrderedPlacementStrategy (TF.Ref s' (EcsServiceResource s)) (TF.Attr s P.Text) where
+    computedOrderedPlacementStrategy =
+        (_ordered_placement_strategy :: EcsServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedPlacementConstraints (TF.Ref s' (EcsServiceResource s)) (TF.Attr s P.Text) where
     computedPlacementConstraints =
         (_placement_constraints :: EcsServiceResource s -> TF.Attr s P.Text)
@@ -5072,6 +5248,16 @@ instance s ~ s' => P.HasComputedPlacementConstraints (TF.Ref s' (EcsServiceResou
 instance s ~ s' => P.HasComputedPlacementStrategy (TF.Ref s' (EcsServiceResource s)) (TF.Attr s P.Text) where
     computedPlacementStrategy =
         (_placement_strategy :: EcsServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSchedulingStrategy (TF.Ref s' (EcsServiceResource s)) (TF.Attr s P.Text) where
+    computedSchedulingStrategy =
+        (_scheduling_strategy :: EcsServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedServiceRegistries (TF.Ref s' (EcsServiceResource s)) (TF.Attr s P.Text) where
+    computedServiceRegistries =
+        (_service_registries :: EcsServiceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedTaskDefinition (TF.Ref s' (EcsServiceResource s)) (TF.Attr s P.Text) where
@@ -5093,128 +5279,12 @@ ecsServiceResource =
             , _load_balancer = TF.Nil
             , _name = TF.Nil
             , _network_configuration = TF.Nil
+            , _ordered_placement_strategy = TF.Nil
             , _placement_constraints = TF.Nil
             , _placement_strategy = TF.Nil
+            , _scheduling_strategy = TF.Nil
+            , _service_registries = TF.Nil
             , _task_definition = TF.Nil
-            }
-
-{- | The @aws_efs_mount_target@ AWS resource.
-
-Provides an Elastic File System (EFS) mount target.
--}
-data EfsMountTargetResource s = EfsMountTargetResource {
-      _file_system_id  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the file system for which the mount target is intended. -}
-    , _ip_address      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The address (within the address range of the specified subnet) at which the file system may be mounted via the mount target. -}
-    , _security_groups :: !(TF.Attr s [TF.Attr s P.Text])
-    {- ^ (Optional) A list of up to 5 VPC security group IDs (that must be for the same VPC as subnet specified) in effect for the mount target. -}
-    , _subnet_id       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the subnet to add the mount target in. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (EfsMountTargetResource s) where
-    toHCL EfsMountTargetResource{..} = TF.inline $ catMaybes
-        [ TF.assign "file_system_id" <$> TF.attribute _file_system_id
-        , TF.assign "ip_address" <$> TF.attribute _ip_address
-        , TF.assign "security_groups" <$> TF.attribute _security_groups
-        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
-        ]
-
-instance P.HasFileSystemId (EfsMountTargetResource s) (TF.Attr s P.Text) where
-    fileSystemId =
-        lens (_file_system_id :: EfsMountTargetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _file_system_id = a } :: EfsMountTargetResource s)
-
-instance P.HasIpAddress (EfsMountTargetResource s) (TF.Attr s P.Text) where
-    ipAddress =
-        lens (_ip_address :: EfsMountTargetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_address = a } :: EfsMountTargetResource s)
-
-instance P.HasSecurityGroups (EfsMountTargetResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    securityGroups =
-        lens (_security_groups :: EfsMountTargetResource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _security_groups = a } :: EfsMountTargetResource s)
-
-instance P.HasSubnetId (EfsMountTargetResource s) (TF.Attr s P.Text) where
-    subnetId =
-        lens (_subnet_id :: EfsMountTargetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subnet_id = a } :: EfsMountTargetResource s)
-
-instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (EfsMountTargetResource s)) (TF.Attr s P.Text) where
-    computedDnsName x = TF.compute (TF.refKey x) "dns_name"
-
-instance s ~ s' => P.HasComputedFileSystemId (TF.Ref s' (EfsMountTargetResource s)) (TF.Attr s P.Text) where
-    computedFileSystemId =
-        (_file_system_id :: EfsMountTargetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (EfsMountTargetResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (EfsMountTargetResource s)) (TF.Attr s P.Text) where
-    computedIpAddress =
-        (_ip_address :: EfsMountTargetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNetworkInterfaceId (TF.Ref s' (EfsMountTargetResource s)) (TF.Attr s P.Text) where
-    computedNetworkInterfaceId x = TF.compute (TF.refKey x) "network_interface_id"
-
-instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (EfsMountTargetResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSecurityGroups =
-        (_security_groups :: EfsMountTargetResource s -> TF.Attr s [TF.Attr s P.Text])
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (EfsMountTargetResource s)) (TF.Attr s P.Text) where
-    computedSubnetId =
-        (_subnet_id :: EfsMountTargetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-efsMountTargetResource :: TF.Resource P.AWS (EfsMountTargetResource s)
-efsMountTargetResource =
-    TF.newResource "aws_efs_mount_target" $
-        EfsMountTargetResource {
-              _file_system_id = TF.Nil
-            , _ip_address = TF.Nil
-            , _security_groups = TF.Nil
-            , _subnet_id = TF.Nil
-            }
-
-{- | The @aws_egress_only_internet_gateway@ AWS resource.
-
-[IPv6 only] Creates an egress-only Internet gateway for your VPC. An
-egress-only Internet gateway is used to enable outbound communication over
-IPv6 from instances in your VPC to the Internet, and prevents hosts outside
-of your VPC from initiating an IPv6 connection with your instance.
--}
-data EgressOnlyInternetGatewayResource s = EgressOnlyInternetGatewayResource {
-      _vpc_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The VPC ID to create in. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (EgressOnlyInternetGatewayResource s) where
-    toHCL EgressOnlyInternetGatewayResource{..} = TF.inline $ catMaybes
-        [ TF.assign "vpc_id" <$> TF.attribute _vpc_id
-        ]
-
-instance P.HasVpcId (EgressOnlyInternetGatewayResource s) (TF.Attr s P.Text) where
-    vpcId =
-        lens (_vpc_id :: EgressOnlyInternetGatewayResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vpc_id = a } :: EgressOnlyInternetGatewayResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (EgressOnlyInternetGatewayResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (EgressOnlyInternetGatewayResource s)) (TF.Attr s P.Text) where
-    computedVpcId =
-        (_vpc_id :: EgressOnlyInternetGatewayResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-egressOnlyInternetGatewayResource :: TF.Resource P.AWS (EgressOnlyInternetGatewayResource s)
-egressOnlyInternetGatewayResource =
-    TF.newResource "aws_egress_only_internet_gateway" $
-        EgressOnlyInternetGatewayResource {
-              _vpc_id = TF.Nil
             }
 
 {- | The @aws_elastic_beanstalk_configuration_template@ AWS resource.
@@ -5233,9 +5303,9 @@ data ElasticBeanstalkConfigurationTemplateResource s = ElasticBeanstalkConfigura
     , _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) A unique name for this Template. -}
     , _setting             :: !(TF.Attr s P.Text)
-    {- ^ – (Optional) Option settings to configure the new Environment. These override specific values that are set as defaults. The format is detailed below in <#option-settings> -}
+    {- ^ – (Optional) Option settings to configure the new Environment. These override specific values that are set as defaults. The format is detailed below in <#option-settings> -}
     , _solution_stack_name :: !(TF.Attr s P.Text)
-    {- ^ – (Optional) A solution stack to base your Template off of. Example stacks can be found in the <https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> -}
+    {- ^ – (Optional) A solution stack to base your Template off of. Example stacks can be found in the <https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ElasticBeanstalkConfigurationTemplateResource s) where
@@ -5320,211 +5390,6 @@ elasticBeanstalkConfigurationTemplateResource =
             , _solution_stack_name = TF.Nil
             }
 
-{- | The @aws_elastic_beanstalk_environment@ AWS resource.
-
-Provides an Elastic Beanstalk Environment Resource. Elastic Beanstalk allows
-you to deploy and manage applications in the AWS cloud without worrying
-about the infrastructure that runs those applications. Environments are
-often things such as @development@ , @integration@ , or @production@ .
--}
-data ElasticBeanstalkEnvironmentResource s = ElasticBeanstalkEnvironmentResource {
-      _application            :: !(TF.Attr s P.Text)
-    {- ^ – (Required) Name of the application that contains the version to be deployed -}
-    , _cname_prefix           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Prefix to use for the fully qualified DNS name of the Environment. -}
-    , _description            :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Short description of the Environment -}
-    , _name                   :: !(TF.Attr s P.Text)
-    {- ^ (Required) A unique name for this Environment. This name is used in the application URL -}
-    , _poll_interval          :: !(TF.Attr s P.Text)
-    {- ^ – The time between polling the AWS API to check if changes have been applied. Use this to adjust the rate of API calls for any @create@ or @update@ action. Minimum @10s@ , maximum @180s@ . Omit this to use the default behavior, which is an exponential backoff -}
-    , _setting                :: !(TF.Attr s [P.ElasticBeanstalkSetting s])
-    {- ^ – (Optional) Option settings to configure the new Environment. These override specific values that are set as defaults. The format is detailed below in <#option-settings> -}
-    , _solution_stack_name    :: !(TF.Attr s P.Text)
-    {- ^ – (Optional) A solution stack to base your environment off of. Example stacks can be found in the <https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> -}
-    , _tags                   :: !(TF.Attr s (P.Tags s))
-    {- ^ – (Optional) A set of tags to apply to the Environment. Note: at this time the Elastic Beanstalk API does not provide a programatic way of changing these tags after initial application -}
-    , _template_name          :: !(TF.Attr s P.Text)
-    {- ^ – (Optional) The name of the Elastic Beanstalk Configuration template to use in deployment -}
-    , _tier                   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Elastic Beanstalk Environment tier. Valid values are @Worker@ or @WebServer@ . If tier is left blank @WebServer@ will be used. -}
-    , _version_label          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the Elastic Beanstalk Application Version to use in deployment. -}
-    , _wait_for_ready_timeout :: !(TF.Attr s P.Text)
-    {- ^ - (Default: @20m@ ) The maximum <https://golang.org/pkg/time/#ParseDuration> that Terraform should wait for an Elastic Beanstalk Environment to be in a ready state before timing out. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (ElasticBeanstalkEnvironmentResource s) where
-    toHCL ElasticBeanstalkEnvironmentResource{..} = TF.inline $ catMaybes
-        [ TF.assign "application" <$> TF.attribute _application
-        , TF.assign "cname_prefix" <$> TF.attribute _cname_prefix
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "poll_interval" <$> TF.attribute _poll_interval
-        , TF.assign "setting" <$> TF.attribute _setting
-        , TF.assign "solution_stack_name" <$> TF.attribute _solution_stack_name
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "template_name" <$> TF.attribute _template_name
-        , TF.assign "tier" <$> TF.attribute _tier
-        , TF.assign "version_label" <$> TF.attribute _version_label
-        , TF.assign "wait_for_ready_timeout" <$> TF.attribute _wait_for_ready_timeout
-        ]
-
-instance P.HasApplication (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Text) where
-    application =
-        lens (_application :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _application = a } :: ElasticBeanstalkEnvironmentResource s)
-
-instance P.HasCnamePrefix (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Text) where
-    cnamePrefix =
-        lens (_cname_prefix :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cname_prefix = a } :: ElasticBeanstalkEnvironmentResource s)
-
-instance P.HasDescription (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ElasticBeanstalkEnvironmentResource s)
-
-instance P.HasName (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ElasticBeanstalkEnvironmentResource s)
-
-instance P.HasPollInterval (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Text) where
-    pollInterval =
-        lens (_poll_interval :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _poll_interval = a } :: ElasticBeanstalkEnvironmentResource s)
-
-instance P.HasSetting (ElasticBeanstalkEnvironmentResource s) (TF.Attr s [P.ElasticBeanstalkSetting s]) where
-    setting =
-        lens (_setting :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s [P.ElasticBeanstalkSetting s])
-             (\s a -> s { _setting = a } :: ElasticBeanstalkEnvironmentResource s)
-
-instance P.HasSolutionStackName (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Text) where
-    solutionStackName =
-        lens (_solution_stack_name :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _solution_stack_name = a } :: ElasticBeanstalkEnvironmentResource s)
-
-instance P.HasTags (ElasticBeanstalkEnvironmentResource s) (TF.Attr s (P.Tags s)) where
-    tags =
-        lens (_tags :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s (P.Tags s))
-             (\s a -> s { _tags = a } :: ElasticBeanstalkEnvironmentResource s)
-
-instance P.HasTemplateName (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Text) where
-    templateName =
-        lens (_template_name :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _template_name = a } :: ElasticBeanstalkEnvironmentResource s)
-
-instance P.HasTier (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Text) where
-    tier =
-        lens (_tier :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tier = a } :: ElasticBeanstalkEnvironmentResource s)
-
-instance P.HasVersionLabel (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Text) where
-    versionLabel =
-        lens (_version_label :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _version_label = a } :: ElasticBeanstalkEnvironmentResource s)
-
-instance P.HasWaitForReadyTimeout (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Text) where
-    waitForReadyTimeout =
-        lens (_wait_for_ready_timeout :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _wait_for_ready_timeout = a } :: ElasticBeanstalkEnvironmentResource s)
-
-instance s ~ s' => P.HasComputedAllSettings (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedAllSettings x = TF.compute (TF.refKey x) "all_settings"
-
-instance s ~ s' => P.HasComputedApplication (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedApplication x = TF.compute (TF.refKey x) "application"
-
-instance s ~ s' => P.HasComputedAutoscalingGroups (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedAutoscalingGroups x = TF.compute (TF.refKey x) "autoscaling_groups"
-
-instance s ~ s' => P.HasComputedCname (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedCname x = TF.compute (TF.refKey x) "cname"
-
-instance s ~ s' => P.HasComputedCnamePrefix (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedCnamePrefix =
-        (_cname_prefix :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedInstances x = TF.compute (TF.refKey x) "instances"
-
-instance s ~ s' => P.HasComputedLaunchConfigurations (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedLaunchConfigurations x = TF.compute (TF.refKey x) "launch_configurations"
-
-instance s ~ s' => P.HasComputedLoadBalancers (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedLoadBalancers x = TF.compute (TF.refKey x) "load_balancers"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedPollInterval (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedPollInterval =
-        (_poll_interval :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedQueues (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedQueues x = TF.compute (TF.refKey x) "queues"
-
-instance s ~ s' => P.HasComputedSetting (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedSetting x = TF.compute (TF.refKey x) "setting"
-
-instance s ~ s' => P.HasComputedSolutionStackName (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedSolutionStackName =
-        (_solution_stack_name :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s (P.Tags s)) where
-    computedTags =
-        (_tags :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s (P.Tags s))
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTemplateName (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedTemplateName =
-        (_template_name :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTier (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedTier x = TF.compute (TF.refKey x) "tier"
-
-instance s ~ s' => P.HasComputedTriggers (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedTriggers x = TF.compute (TF.refKey x) "triggers"
-
-instance s ~ s' => P.HasComputedVersionLabel (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedVersionLabel =
-        (_version_label :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedWaitForReadyTimeout (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedWaitForReadyTimeout =
-        (_wait_for_ready_timeout :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-elasticBeanstalkEnvironmentResource :: TF.Resource P.AWS (ElasticBeanstalkEnvironmentResource s)
-elasticBeanstalkEnvironmentResource =
-    TF.newResource "aws_elastic_beanstalk_environment" $
-        ElasticBeanstalkEnvironmentResource {
-              _application = TF.Nil
-            , _cname_prefix = TF.Nil
-            , _description = TF.Nil
-            , _name = TF.Nil
-            , _poll_interval = TF.Nil
-            , _setting = TF.Nil
-            , _solution_stack_name = TF.Nil
-            , _tags = TF.Nil
-            , _template_name = TF.Nil
-            , _tier = TF.Nil
-            , _version_label = TF.Nil
-            , _wait_for_ready_timeout = TF.Nil
-            }
-
 {- | The @aws_elasticache_parameter_group@ AWS resource.
 
 Provides an ElastiCache parameter group resource.
@@ -5601,65 +5466,112 @@ elasticacheParameterGroupResource =
             , _parameter = TF.Nil
             }
 
-{- | The @aws_elasticache_subnet_group@ AWS resource.
+{- | The @aws_elasticache_security_group@ AWS resource.
 
-Provides an ElastiCache Subnet Group resource. ~> NOTE: ElastiCache Subnet
-Groups are only for use when working with an ElastiCache cluster inside of a
-VPC. If you are on EC2 Classic, see the <elasticache_security_group.html> .
+Provides an ElastiCache Security Group to control access to one or more
+cache clusters. ~> NOTE: ElastiCache Security Groups are for use only when
+working with an ElastiCache cluster outside of a VPC. If you are using a
+VPC, see the <elasticache_subnet_group.html> .
 -}
-data ElasticacheSubnetGroupResource s = ElasticacheSubnetGroupResource {
-      _description :: !(TF.Attr s P.Text)
-    {- ^ – (Optional) Description for the cache subnet group. Defaults to "Managed by Terraform". -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ – (Required) Name for the cache subnet group. Elasticache converts this name to lowercase. -}
-    , _subnet_ids  :: !(TF.Attr s P.Text)
-    {- ^ – (Required) List of VPC Subnet IDs for the cache subnet group -}
+data ElasticacheSecurityGroupResource s = ElasticacheSecurityGroupResource {
+      _description          :: !(TF.Attr s P.Text)
+    {- ^ – (Optional) description for the cache security group. Defaults to "Managed by Terraform". -}
+    , _name                 :: !(TF.Attr s P.Text)
+    {- ^ – (Required) Name for the cache security group. This value is stored as a lowercase string. -}
+    , _security_group_names :: !(TF.Attr s P.Text)
+    {- ^ – (Required) List of EC2 security group names to be authorized for ingress to the cache security group -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElasticacheSubnetGroupResource s) where
-    toHCL ElasticacheSubnetGroupResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (ElasticacheSecurityGroupResource s) where
+    toHCL ElasticacheSecurityGroupResource{..} = TF.inline $ catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "subnet_ids" <$> TF.attribute _subnet_ids
+        , TF.assign "security_group_names" <$> TF.attribute _security_group_names
         ]
 
-instance P.HasDescription (ElasticacheSubnetGroupResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ElasticacheSecurityGroupResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ElasticacheSubnetGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ElasticacheSubnetGroupResource s)
+        lens (_description :: ElasticacheSecurityGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ElasticacheSecurityGroupResource s)
 
-instance P.HasName (ElasticacheSubnetGroupResource s) (TF.Attr s P.Text) where
+instance P.HasName (ElasticacheSecurityGroupResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ElasticacheSubnetGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ElasticacheSubnetGroupResource s)
+        lens (_name :: ElasticacheSecurityGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ElasticacheSecurityGroupResource s)
 
-instance P.HasSubnetIds (ElasticacheSubnetGroupResource s) (TF.Attr s P.Text) where
-    subnetIds =
-        lens (_subnet_ids :: ElasticacheSubnetGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subnet_ids = a } :: ElasticacheSubnetGroupResource s)
+instance P.HasSecurityGroupNames (ElasticacheSecurityGroupResource s) (TF.Attr s P.Text) where
+    securityGroupNames =
+        lens (_security_group_names :: ElasticacheSecurityGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _security_group_names = a } :: ElasticacheSecurityGroupResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ElasticacheSubnetGroupResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ElasticacheSecurityGroupResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: ElasticacheSubnetGroupResource s -> TF.Attr s P.Text)
+        (_description :: ElasticacheSecurityGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ElasticacheSubnetGroupResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ElasticacheSecurityGroupResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: ElasticacheSubnetGroupResource s -> TF.Attr s P.Text)
+        (_name :: ElasticacheSecurityGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (ElasticacheSubnetGroupResource s)) (TF.Attr s P.Text) where
-    computedSubnetIds =
-        (_subnet_ids :: ElasticacheSubnetGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedSecurityGroupNames (TF.Ref s' (ElasticacheSecurityGroupResource s)) (TF.Attr s P.Text) where
+    computedSecurityGroupNames =
+        (_security_group_names :: ElasticacheSecurityGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-elasticacheSubnetGroupResource :: TF.Resource P.AWS (ElasticacheSubnetGroupResource s)
-elasticacheSubnetGroupResource =
-    TF.newResource "aws_elasticache_subnet_group" $
-        ElasticacheSubnetGroupResource {
+elasticacheSecurityGroupResource :: TF.Resource P.AWS (ElasticacheSecurityGroupResource s)
+elasticacheSecurityGroupResource =
+    TF.newResource "aws_elasticache_security_group" $
+        ElasticacheSecurityGroupResource {
               _description = TF.Nil
             , _name = TF.Nil
-            , _subnet_ids = TF.Nil
+            , _security_group_names = TF.Nil
+            }
+
+{- | The @aws_elasticsearch_domain_policy@ AWS resource.
+
+Allows setting policy to an ElasticSearch domain while referencing domain
+attributes (e.g. ARN)
+-}
+data ElasticsearchDomainPolicyResource s = ElasticsearchDomainPolicyResource {
+      _access_policies :: !(TF.Attr s P.Text)
+    {- ^ (Optional) IAM policy document specifying the access policies for the domain -}
+    , _domain_name     :: !(TF.Attr s P.Text)
+    {- ^ (Required) Name of the domain. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ElasticsearchDomainPolicyResource s) where
+    toHCL ElasticsearchDomainPolicyResource{..} = TF.inline $ catMaybes
+        [ TF.assign "access_policies" <$> TF.attribute _access_policies
+        , TF.assign "domain_name" <$> TF.attribute _domain_name
+        ]
+
+instance P.HasAccessPolicies (ElasticsearchDomainPolicyResource s) (TF.Attr s P.Text) where
+    accessPolicies =
+        lens (_access_policies :: ElasticsearchDomainPolicyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _access_policies = a } :: ElasticsearchDomainPolicyResource s)
+
+instance P.HasDomainName (ElasticsearchDomainPolicyResource s) (TF.Attr s P.Text) where
+    domainName =
+        lens (_domain_name :: ElasticsearchDomainPolicyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _domain_name = a } :: ElasticsearchDomainPolicyResource s)
+
+instance s ~ s' => P.HasComputedAccessPolicies (TF.Ref s' (ElasticsearchDomainPolicyResource s)) (TF.Attr s P.Text) where
+    computedAccessPolicies =
+        (_access_policies :: ElasticsearchDomainPolicyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDomainName (TF.Ref s' (ElasticsearchDomainPolicyResource s)) (TF.Attr s P.Text) where
+    computedDomainName =
+        (_domain_name :: ElasticsearchDomainPolicyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+elasticsearchDomainPolicyResource :: TF.Resource P.AWS (ElasticsearchDomainPolicyResource s)
+elasticsearchDomainPolicyResource =
+    TF.newResource "aws_elasticsearch_domain_policy" $
+        ElasticsearchDomainPolicyResource {
+              _access_policies = TF.Nil
+            , _domain_name = TF.Nil
             }
 
 {- | The @aws_elasticsearch_domain@ AWS resource.
@@ -5670,7 +5582,7 @@ data ElasticsearchDomainResource s = ElasticsearchDomainResource {
       _access_policies        :: !(TF.Attr s P.Text)
     {- ^ (Optional) IAM policy document specifying the access policies for the domain -}
     , _advanced_options       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Key-value string pairs to specify advanced configuration options. -}
+    {- ^ (Optional) Key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply. -}
     , _cluster_config         :: !(TF.Attr s P.Text)
     {- ^ (Optional) Cluster configuration of the domain, see below. -}
     , _domain_name            :: !(TF.Attr s P.Text)
@@ -6006,6 +5918,149 @@ elastictranscoderPipelineResource =
             , _role = TF.Nil
             , _thumbnail_config = TF.Nil
             , _thumbnail_config_permissions = TF.Nil
+            }
+
+{- | The @aws_elastictranscoder_preset@ AWS resource.
+
+Provides an Elastic Transcoder preset resource.
+-}
+data ElastictranscoderPresetResource s = ElastictranscoderPresetResource {
+      _audio               :: !(TF.Attr s P.Text)
+    {- ^ (Optional, Forces new resource) Audio parameters object (documented below). -}
+    , _audio_codec_options :: !(TF.Attr s P.Text)
+    {- ^ (Optional, Forces new resource) Codec options for the audio parameters (documented below) -}
+    , _container           :: !(TF.Attr s P.Text)
+    {- ^ (Required, Forces new resource) The container type for the output file. Valid values are @flac@ , @flv@ , @fmp4@ , @gif@ , @mp3@ , @mp4@ , @mpg@ , @mxf@ , @oga@ , @ogg@ , @ts@ , and @webm@ . -}
+    , _description         :: !(TF.Attr s P.Text)
+    {- ^ (Optional, Forces new resource) A description of the preset (maximum 255 characters) -}
+    , _name                :: !(TF.Attr s P.Text)
+    {- ^ (Optional, Forces new resource) The name of the preset. (maximum 40 characters) -}
+    , _thumbnails          :: !(TF.Attr s P.Text)
+    {- ^ (Optional, Forces new resource) Thumbnail parameters object (documented below) -}
+    , _video               :: !(TF.Attr s P.Text)
+    {- ^ (Optional, Forces new resource) Video parameters object (documented below) -}
+    , _video_codec_options :: !(TF.Attr s P.Text)
+    {- ^ (Optional, Forces new resource) Codec options for the video parameters -}
+    , _video_watermarks    :: !(TF.Attr s P.Text)
+    {- ^ (Optional, Forces new resource) Watermark parameters for the video parameters (documented below) -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ElastictranscoderPresetResource s) where
+    toHCL ElastictranscoderPresetResource{..} = TF.inline $ catMaybes
+        [ TF.assign "audio" <$> TF.attribute _audio
+        , TF.assign "audio_codec_options" <$> TF.attribute _audio_codec_options
+        , TF.assign "container" <$> TF.attribute _container
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "thumbnails" <$> TF.attribute _thumbnails
+        , TF.assign "video" <$> TF.attribute _video
+        , TF.assign "video_codec_options" <$> TF.attribute _video_codec_options
+        , TF.assign "video_watermarks" <$> TF.attribute _video_watermarks
+        ]
+
+instance P.HasAudio (ElastictranscoderPresetResource s) (TF.Attr s P.Text) where
+    audio =
+        lens (_audio :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _audio = a } :: ElastictranscoderPresetResource s)
+
+instance P.HasAudioCodecOptions (ElastictranscoderPresetResource s) (TF.Attr s P.Text) where
+    audioCodecOptions =
+        lens (_audio_codec_options :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _audio_codec_options = a } :: ElastictranscoderPresetResource s)
+
+instance P.HasContainer (ElastictranscoderPresetResource s) (TF.Attr s P.Text) where
+    container =
+        lens (_container :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _container = a } :: ElastictranscoderPresetResource s)
+
+instance P.HasDescription (ElastictranscoderPresetResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ElastictranscoderPresetResource s)
+
+instance P.HasName (ElastictranscoderPresetResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ElastictranscoderPresetResource s)
+
+instance P.HasThumbnails (ElastictranscoderPresetResource s) (TF.Attr s P.Text) where
+    thumbnails =
+        lens (_thumbnails :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _thumbnails = a } :: ElastictranscoderPresetResource s)
+
+instance P.HasVideo (ElastictranscoderPresetResource s) (TF.Attr s P.Text) where
+    video =
+        lens (_video :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _video = a } :: ElastictranscoderPresetResource s)
+
+instance P.HasVideoCodecOptions (ElastictranscoderPresetResource s) (TF.Attr s P.Text) where
+    videoCodecOptions =
+        lens (_video_codec_options :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _video_codec_options = a } :: ElastictranscoderPresetResource s)
+
+instance P.HasVideoWatermarks (ElastictranscoderPresetResource s) (TF.Attr s P.Text) where
+    videoWatermarks =
+        lens (_video_watermarks :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _video_watermarks = a } :: ElastictranscoderPresetResource s)
+
+instance s ~ s' => P.HasComputedAudio (TF.Ref s' (ElastictranscoderPresetResource s)) (TF.Attr s P.Text) where
+    computedAudio =
+        (_audio :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedAudioCodecOptions (TF.Ref s' (ElastictranscoderPresetResource s)) (TF.Attr s P.Text) where
+    computedAudioCodecOptions =
+        (_audio_codec_options :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedContainer (TF.Ref s' (ElastictranscoderPresetResource s)) (TF.Attr s P.Text) where
+    computedContainer =
+        (_container :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ElastictranscoderPresetResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ElastictranscoderPresetResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedThumbnails (TF.Ref s' (ElastictranscoderPresetResource s)) (TF.Attr s P.Text) where
+    computedThumbnails =
+        (_thumbnails :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVideo (TF.Ref s' (ElastictranscoderPresetResource s)) (TF.Attr s P.Text) where
+    computedVideo =
+        (_video :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVideoCodecOptions (TF.Ref s' (ElastictranscoderPresetResource s)) (TF.Attr s P.Text) where
+    computedVideoCodecOptions =
+        (_video_codec_options :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVideoWatermarks (TF.Ref s' (ElastictranscoderPresetResource s)) (TF.Attr s P.Text) where
+    computedVideoWatermarks =
+        (_video_watermarks :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+elastictranscoderPresetResource :: TF.Resource P.AWS (ElastictranscoderPresetResource s)
+elastictranscoderPresetResource =
+    TF.newResource "aws_elastictranscoder_preset" $
+        ElastictranscoderPresetResource {
+              _audio = TF.Nil
+            , _audio_codec_options = TF.Nil
+            , _container = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _thumbnails = TF.Nil
+            , _video = TF.Nil
+            , _video_codec_options = TF.Nil
+            , _video_watermarks = TF.Nil
             }
 
 {- | The @aws_elb_attachment@ AWS resource.
@@ -6365,65 +6420,340 @@ elbResource =
             , _tags = TF.Nil
             }
 
-{- | The @aws_emr_security_configuration@ AWS resource.
+{- | The @aws_emr_cluster@ AWS resource.
 
-Provides a resource to manage AWS EMR Security Configurations
+Provides an Elastic MapReduce Cluster, a web service that makes it easy to
+process large amounts of data efficiently. See
+<https://aws.amazon.com/documentation/elastic-mapreduce/> for more
+information.
 -}
-data EmrSecurityConfigurationResource s = EmrSecurityConfigurationResource {
-      _configuration :: !(TF.Attr s P.Text)
-    {- ^ (Required) A JSON formatted Security Configuration -}
-    , _name          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the EMR Security Configuration. By default generated by Terraform. -}
-    , _name_prefix   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
+data EmrClusterResource s = EmrClusterResource {
+      _additional_info                   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A JSON string for selecting additional features such as adding proxy information. Note: Currently there is no API to retrieve the value of this argument after EMR cluster creation from provider, therefore Terraform cannot detect drift from the actual EMR cluster if its value is changed outside Terraform. -}
+    , _applications                      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of applications for the cluster. Valid values are: @Flink@ , @Hadoop@ , @Hive@ , @Mahout@ , @Pig@ , and @Spark@ . Case insensitive -}
+    , _autoscaling_role                  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) An IAM role for automatic scaling policies. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate EC2 instances in an instance group. -}
+    , _bootstrap_action                  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of bootstrap actions that will be run before Hadoop is started on the cluster nodes. Defined below -}
+    , _configurations                    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of configurations supplied for the EMR cluster you are creating -}
+    , _core_instance_count               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Number of Amazon EC2 instances used to execute the job flow. EMR will use one node as the cluster's master node and use the remainder of the nodes ( @core_instance_count@ -1) as core nodes. Cannot be specified if @instance_groups@ is set. Default @1@ -}
+    , _core_instance_type                :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The EC2 instance type of the slave nodes. Cannot be specified if @instance_groups@ is set -}
+    , _custom_ami_id                     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A custom Amazon Linux AMI for the cluster (instead of an EMR-owned AMI). Available in Amazon EMR version 5.7.0 and later. -}
+    , _ebs_root_volume_size              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Size in GiB of the EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later. -}
+    , _ec2_attributes                    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Attributes for the EC2 instances running the job flow. Defined below -}
+    , _instance_group                    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of @instance_group@ objects for each instance group in the cluster. Exactly one of @master_instance_type@ and @instance_group@ must be specified. If @instance_group@ is set, then it must contain a configuration block for at least the @MASTER@ instance group type (as well as any additional instance groups). Defined below -}
+    , _keep_job_flow_alive_when_no_steps :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Switch on/off run cluster with no steps or when all steps are complete (default is on) -}
+    , _kerberos_attributes               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Kerberos configuration for the cluster. Defined below -}
+    , _log_uri                           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) S3 bucket to write the log files of the job flow. If a value is not provided, logs are not created -}
+    , _master_instance_type              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The EC2 instance type of the master node. Exactly one of @master_instance_type@ and @instance_group@ must be specified. -}
+    , _name                              :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the job flow -}
+    , _release_label                     :: !(TF.Attr s P.Text)
+    {- ^ (Required) The release label for the Amazon EMR release -}
+    , _scale_down_behavior               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an @instance group@ is resized. -}
+    , _security_configuration            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The security configuration name to attach to the EMR cluster. Only valid for EMR clusters with @release_label@ 4.8.0 or greater -}
+    , _service_role                      :: !(TF.Attr s P.Text)
+    {- ^ (Required) IAM role that will be assumed by the Amazon EMR service to access AWS resources -}
+    , _step                              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of steps to run when creating the cluster. Defined below. It is highly recommended to utilize the </docs/configuration/resources.html> with @ignore_changes@ if other steps are being managed outside of Terraform. -}
+    , _tags                              :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) list of tags to apply to the EMR Cluster -}
+    , _termination_protection            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Switch on/off termination protection (default is off) -}
+    , _visible_to_all_users              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether the job flow is visible to all IAM users of the AWS account associated with the job flow. Default @true@ -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EmrSecurityConfigurationResource s) where
-    toHCL EmrSecurityConfigurationResource{..} = TF.inline $ catMaybes
-        [ TF.assign "configuration" <$> TF.attribute _configuration
+instance TF.ToHCL (EmrClusterResource s) where
+    toHCL EmrClusterResource{..} = TF.inline $ catMaybes
+        [ TF.assign "additional_info" <$> TF.attribute _additional_info
+        , TF.assign "applications" <$> TF.attribute _applications
+        , TF.assign "autoscaling_role" <$> TF.attribute _autoscaling_role
+        , TF.assign "bootstrap_action" <$> TF.attribute _bootstrap_action
+        , TF.assign "configurations" <$> TF.attribute _configurations
+        , TF.assign "core_instance_count" <$> TF.attribute _core_instance_count
+        , TF.assign "core_instance_type" <$> TF.attribute _core_instance_type
+        , TF.assign "custom_ami_id" <$> TF.attribute _custom_ami_id
+        , TF.assign "ebs_root_volume_size" <$> TF.attribute _ebs_root_volume_size
+        , TF.assign "ec2_attributes" <$> TF.attribute _ec2_attributes
+        , TF.assign "instance_group" <$> TF.attribute _instance_group
+        , TF.assign "keep_job_flow_alive_when_no_steps" <$> TF.attribute _keep_job_flow_alive_when_no_steps
+        , TF.assign "kerberos_attributes" <$> TF.attribute _kerberos_attributes
+        , TF.assign "log_uri" <$> TF.attribute _log_uri
+        , TF.assign "master_instance_type" <$> TF.attribute _master_instance_type
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
+        , TF.assign "release_label" <$> TF.attribute _release_label
+        , TF.assign "scale_down_behavior" <$> TF.attribute _scale_down_behavior
+        , TF.assign "security_configuration" <$> TF.attribute _security_configuration
+        , TF.assign "service_role" <$> TF.attribute _service_role
+        , TF.assign "step" <$> TF.attribute _step
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "termination_protection" <$> TF.attribute _termination_protection
+        , TF.assign "visible_to_all_users" <$> TF.attribute _visible_to_all_users
         ]
 
-instance P.HasConfiguration (EmrSecurityConfigurationResource s) (TF.Attr s P.Text) where
-    configuration =
-        lens (_configuration :: EmrSecurityConfigurationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _configuration = a } :: EmrSecurityConfigurationResource s)
+instance P.HasAdditionalInfo (EmrClusterResource s) (TF.Attr s P.Text) where
+    additionalInfo =
+        lens (_additional_info :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _additional_info = a } :: EmrClusterResource s)
 
-instance P.HasName (EmrSecurityConfigurationResource s) (TF.Attr s P.Text) where
+instance P.HasApplications (EmrClusterResource s) (TF.Attr s P.Text) where
+    applications =
+        lens (_applications :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _applications = a } :: EmrClusterResource s)
+
+instance P.HasAutoscalingRole (EmrClusterResource s) (TF.Attr s P.Text) where
+    autoscalingRole =
+        lens (_autoscaling_role :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _autoscaling_role = a } :: EmrClusterResource s)
+
+instance P.HasBootstrapAction (EmrClusterResource s) (TF.Attr s P.Text) where
+    bootstrapAction =
+        lens (_bootstrap_action :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bootstrap_action = a } :: EmrClusterResource s)
+
+instance P.HasConfigurations (EmrClusterResource s) (TF.Attr s P.Text) where
+    configurations =
+        lens (_configurations :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _configurations = a } :: EmrClusterResource s)
+
+instance P.HasCoreInstanceCount (EmrClusterResource s) (TF.Attr s P.Text) where
+    coreInstanceCount =
+        lens (_core_instance_count :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _core_instance_count = a } :: EmrClusterResource s)
+
+instance P.HasCoreInstanceType (EmrClusterResource s) (TF.Attr s P.Text) where
+    coreInstanceType =
+        lens (_core_instance_type :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _core_instance_type = a } :: EmrClusterResource s)
+
+instance P.HasCustomAmiId (EmrClusterResource s) (TF.Attr s P.Text) where
+    customAmiId =
+        lens (_custom_ami_id :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _custom_ami_id = a } :: EmrClusterResource s)
+
+instance P.HasEbsRootVolumeSize (EmrClusterResource s) (TF.Attr s P.Text) where
+    ebsRootVolumeSize =
+        lens (_ebs_root_volume_size :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ebs_root_volume_size = a } :: EmrClusterResource s)
+
+instance P.HasEc2Attributes (EmrClusterResource s) (TF.Attr s P.Text) where
+    ec2Attributes =
+        lens (_ec2_attributes :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ec2_attributes = a } :: EmrClusterResource s)
+
+instance P.HasInstanceGroup (EmrClusterResource s) (TF.Attr s P.Text) where
+    instanceGroup =
+        lens (_instance_group :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_group = a } :: EmrClusterResource s)
+
+instance P.HasKeepJobFlowAliveWhenNoSteps (EmrClusterResource s) (TF.Attr s P.Text) where
+    keepJobFlowAliveWhenNoSteps =
+        lens (_keep_job_flow_alive_when_no_steps :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _keep_job_flow_alive_when_no_steps = a } :: EmrClusterResource s)
+
+instance P.HasKerberosAttributes (EmrClusterResource s) (TF.Attr s P.Text) where
+    kerberosAttributes =
+        lens (_kerberos_attributes :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _kerberos_attributes = a } :: EmrClusterResource s)
+
+instance P.HasLogUri (EmrClusterResource s) (TF.Attr s P.Text) where
+    logUri =
+        lens (_log_uri :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _log_uri = a } :: EmrClusterResource s)
+
+instance P.HasMasterInstanceType (EmrClusterResource s) (TF.Attr s P.Text) where
+    masterInstanceType =
+        lens (_master_instance_type :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _master_instance_type = a } :: EmrClusterResource s)
+
+instance P.HasName (EmrClusterResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: EmrSecurityConfigurationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: EmrSecurityConfigurationResource s)
+        lens (_name :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: EmrClusterResource s)
 
-instance P.HasNamePrefix (EmrSecurityConfigurationResource s) (TF.Attr s P.Text) where
-    namePrefix =
-        lens (_name_prefix :: EmrSecurityConfigurationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name_prefix = a } :: EmrSecurityConfigurationResource s)
+instance P.HasReleaseLabel (EmrClusterResource s) (TF.Attr s P.Text) where
+    releaseLabel =
+        lens (_release_label :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _release_label = a } :: EmrClusterResource s)
 
-instance s ~ s' => P.HasComputedConfiguration (TF.Ref s' (EmrSecurityConfigurationResource s)) (TF.Attr s P.Text) where
-    computedConfiguration x = TF.compute (TF.refKey x) "configuration"
+instance P.HasScaleDownBehavior (EmrClusterResource s) (TF.Attr s P.Text) where
+    scaleDownBehavior =
+        lens (_scale_down_behavior :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _scale_down_behavior = a } :: EmrClusterResource s)
 
-instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (EmrSecurityConfigurationResource s)) (TF.Attr s P.Text) where
-    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
+instance P.HasSecurityConfiguration (EmrClusterResource s) (TF.Attr s P.Text) where
+    securityConfiguration =
+        lens (_security_configuration :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _security_configuration = a } :: EmrClusterResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (EmrSecurityConfigurationResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance P.HasServiceRole (EmrClusterResource s) (TF.Attr s P.Text) where
+    serviceRole =
+        lens (_service_role :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _service_role = a } :: EmrClusterResource s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (EmrSecurityConfigurationResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance P.HasStep (EmrClusterResource s) (TF.Attr s P.Text) where
+    step =
+        lens (_step :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _step = a } :: EmrClusterResource s)
 
-instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (EmrSecurityConfigurationResource s)) (TF.Attr s P.Text) where
-    computedNamePrefix =
-        (_name_prefix :: EmrSecurityConfigurationResource s -> TF.Attr s P.Text)
+instance P.HasTags (EmrClusterResource s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: EmrClusterResource s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: EmrClusterResource s)
+
+instance P.HasTerminationProtection (EmrClusterResource s) (TF.Attr s P.Text) where
+    terminationProtection =
+        lens (_termination_protection :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _termination_protection = a } :: EmrClusterResource s)
+
+instance P.HasVisibleToAllUsers (EmrClusterResource s) (TF.Attr s P.Text) where
+    visibleToAllUsers =
+        lens (_visible_to_all_users :: EmrClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _visible_to_all_users = a } :: EmrClusterResource s)
+
+instance s ~ s' => P.HasComputedAdditionalInfo (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedAdditionalInfo =
+        (_additional_info :: EmrClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-emrSecurityConfigurationResource :: TF.Resource P.AWS (EmrSecurityConfigurationResource s)
-emrSecurityConfigurationResource =
-    TF.newResource "aws_emr_security_configuration" $
-        EmrSecurityConfigurationResource {
-              _configuration = TF.Nil
+instance s ~ s' => P.HasComputedApplications (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedApplications x = TF.compute (TF.refKey x) "applications"
+
+instance s ~ s' => P.HasComputedAutoscalingRole (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedAutoscalingRole =
+        (_autoscaling_role :: EmrClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedBootstrapAction (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedBootstrapAction x = TF.compute (TF.refKey x) "bootstrap_action"
+
+instance s ~ s' => P.HasComputedConfigurations (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedConfigurations x = TF.compute (TF.refKey x) "configurations"
+
+instance s ~ s' => P.HasComputedCoreInstanceCount (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedCoreInstanceCount x = TF.compute (TF.refKey x) "core_instance_count"
+
+instance s ~ s' => P.HasComputedCoreInstanceType (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedCoreInstanceType x = TF.compute (TF.refKey x) "core_instance_type"
+
+instance s ~ s' => P.HasComputedCustomAmiId (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedCustomAmiId =
+        (_custom_ami_id :: EmrClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEbsRootVolumeSize (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedEbsRootVolumeSize =
+        (_ebs_root_volume_size :: EmrClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEc2Attributes (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedEc2Attributes x = TF.compute (TF.refKey x) "ec2_attributes"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstanceGroup (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedInstanceGroup =
+        (_instance_group :: EmrClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedKeepJobFlowAliveWhenNoSteps (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedKeepJobFlowAliveWhenNoSteps =
+        (_keep_job_flow_alive_when_no_steps :: EmrClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedKerberosAttributes (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedKerberosAttributes =
+        (_kerberos_attributes :: EmrClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedLogUri (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedLogUri x = TF.compute (TF.refKey x) "log_uri"
+
+instance s ~ s' => P.HasComputedMasterInstanceType (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedMasterInstanceType x = TF.compute (TF.refKey x) "master_instance_type"
+
+instance s ~ s' => P.HasComputedMasterPublicDns (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedMasterPublicDns x = TF.compute (TF.refKey x) "master_public_dns"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedReleaseLabel (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedReleaseLabel x = TF.compute (TF.refKey x) "release_label"
+
+instance s ~ s' => P.HasComputedScaleDownBehavior (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedScaleDownBehavior =
+        (_scale_down_behavior :: EmrClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSecurityConfiguration (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedSecurityConfiguration =
+        (_security_configuration :: EmrClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedServiceRole (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedServiceRole x = TF.compute (TF.refKey x) "service_role"
+
+instance s ~ s' => P.HasComputedStep (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedStep =
+        (_step :: EmrClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (EmrClusterResource s)) (TF.Attr s (P.Tags s)) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedTerminationProtection (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedTerminationProtection =
+        (_termination_protection :: EmrClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVisibleToAllUsers (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
+    computedVisibleToAllUsers x = TF.compute (TF.refKey x) "visible_to_all_users"
+
+emrClusterResource :: TF.Resource P.AWS (EmrClusterResource s)
+emrClusterResource =
+    TF.newResource "aws_emr_cluster" $
+        EmrClusterResource {
+              _additional_info = TF.Nil
+            , _applications = TF.Nil
+            , _autoscaling_role = TF.Nil
+            , _bootstrap_action = TF.Nil
+            , _configurations = TF.Nil
+            , _core_instance_count = TF.Nil
+            , _core_instance_type = TF.Nil
+            , _custom_ami_id = TF.Nil
+            , _ebs_root_volume_size = TF.Nil
+            , _ec2_attributes = TF.Nil
+            , _instance_group = TF.Nil
+            , _keep_job_flow_alive_when_no_steps = TF.Nil
+            , _kerberos_attributes = TF.Nil
+            , _log_uri = TF.Nil
+            , _master_instance_type = TF.Nil
             , _name = TF.Nil
-            , _name_prefix = TF.Nil
+            , _release_label = TF.Nil
+            , _scale_down_behavior = TF.Nil
+            , _security_configuration = TF.Nil
+            , _service_role = TF.Nil
+            , _step = TF.Nil
+            , _tags = TF.Nil
+            , _termination_protection = TF.Nil
+            , _visible_to_all_users = TF.Nil
             }
 
 {- | The @aws_gamelift_alias@ AWS resource.
@@ -6649,258 +6979,257 @@ glacierVaultResource =
             , _tags = TF.Nil
             }
 
-{- | The @aws_glue_catalog_database@ AWS resource.
+{- | The @aws_glue_classifier@ AWS resource.
 
-Provides a Glue Catalog Database Resource. You can refer to the
-<http://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html> for a
-full explanation of the Glue Data Catalog functionality
+Provides a Glue Classifier resource. ~> NOTE: It is only valid to create one
+type of classifier (grok, JSON, or XML). Changing classifier types will
+recreate the classifier.
 -}
-data GlueCatalogDatabaseResource s = GlueCatalogDatabaseResource {
-      _catalog_id   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) ID of the Glue Catalog to create the database in. If omitted, this defaults to the AWS Account ID. -}
-    , _description  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Description of the database. -}
-    , _location_uri :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The location of the database (for example, an HDFS path). -}
-    , _name         :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the database. -}
-    , _parameters   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of key-value pairs that define parameters and properties of the database. -}
+data GlueClassifierResource s = GlueClassifierResource {
+      _grok_classifier :: !(TF.Attr s P.Text)
+    {- ^ – (Optional) A classifier that uses grok patterns. Defined below. -}
+    , _json_classifier :: !(TF.Attr s P.Text)
+    {- ^ – (Optional) A classifier for JSON content. Defined below. -}
+    , _name            :: !(TF.Attr s P.Text)
+    {- ^ – (Required) The name of the classifier. -}
+    , _xml_classifier  :: !(TF.Attr s P.Text)
+    {- ^ – (Optional) A classifier for XML content. Defined below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (GlueCatalogDatabaseResource s) where
-    toHCL GlueCatalogDatabaseResource{..} = TF.inline $ catMaybes
-        [ TF.assign "catalog_id" <$> TF.attribute _catalog_id
+instance TF.ToHCL (GlueClassifierResource s) where
+    toHCL GlueClassifierResource{..} = TF.inline $ catMaybes
+        [ TF.assign "grok_classifier" <$> TF.attribute _grok_classifier
+        , TF.assign "json_classifier" <$> TF.attribute _json_classifier
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "xml_classifier" <$> TF.attribute _xml_classifier
+        ]
+
+instance P.HasGrokClassifier (GlueClassifierResource s) (TF.Attr s P.Text) where
+    grokClassifier =
+        lens (_grok_classifier :: GlueClassifierResource s -> TF.Attr s P.Text)
+             (\s a -> s { _grok_classifier = a } :: GlueClassifierResource s)
+
+instance P.HasJsonClassifier (GlueClassifierResource s) (TF.Attr s P.Text) where
+    jsonClassifier =
+        lens (_json_classifier :: GlueClassifierResource s -> TF.Attr s P.Text)
+             (\s a -> s { _json_classifier = a } :: GlueClassifierResource s)
+
+instance P.HasName (GlueClassifierResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: GlueClassifierResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: GlueClassifierResource s)
+
+instance P.HasXmlClassifier (GlueClassifierResource s) (TF.Attr s P.Text) where
+    xmlClassifier =
+        lens (_xml_classifier :: GlueClassifierResource s -> TF.Attr s P.Text)
+             (\s a -> s { _xml_classifier = a } :: GlueClassifierResource s)
+
+instance s ~ s' => P.HasComputedGrokClassifier (TF.Ref s' (GlueClassifierResource s)) (TF.Attr s P.Text) where
+    computedGrokClassifier =
+        (_grok_classifier :: GlueClassifierResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GlueClassifierResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedJsonClassifier (TF.Ref s' (GlueClassifierResource s)) (TF.Attr s P.Text) where
+    computedJsonClassifier =
+        (_json_classifier :: GlueClassifierResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (GlueClassifierResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: GlueClassifierResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedXmlClassifier (TF.Ref s' (GlueClassifierResource s)) (TF.Attr s P.Text) where
+    computedXmlClassifier =
+        (_xml_classifier :: GlueClassifierResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+glueClassifierResource :: TF.Resource P.AWS (GlueClassifierResource s)
+glueClassifierResource =
+    TF.newResource "aws_glue_classifier" $
+        GlueClassifierResource {
+              _grok_classifier = TF.Nil
+            , _json_classifier = TF.Nil
+            , _name = TF.Nil
+            , _xml_classifier = TF.Nil
+            }
+
+{- | The @aws_glue_crawler@ AWS resource.
+
+Manages a Glue Crawler. More information can be found in the
+<https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html>
+-}
+data GlueCrawlerResource s = GlueCrawlerResource {
+      _classifiers          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of custom classifiers. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification. -}
+    , _configuration        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) JSON string of configuration information. -}
+    , _database_name        :: !(TF.Attr s P.Text)
+    {- ^ (Required) Glue database where results are written. -}
+    , _description          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Description of the crawler. -}
+    , _jdbc_target          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of nested JBDC target arguments. See below. -}
+    , _name                 :: !(TF.Attr s P.Text)
+    {- ^ (Required) Name of the crawler. -}
+    , _role                 :: !(TF.Attr s P.Text)
+    {- ^ (Required) The IAM role (or ARN of an IAM role) used by the crawler to access other resources. -}
+    , _s3_target            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List nested Amazon S3 target arguments. See below. -}
+    , _schedule             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A cron expression used to specify the schedule. For more information, see <https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html> . For example, to run something every day at 12:15 UTC, you would specify: @cron(15 12 * * ? *)@ . -}
+    , _schema_change_policy :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Policy for the crawler's update and deletion behavior. -}
+    , _table_prefix         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The table prefix used for catalog tables that are created. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (GlueCrawlerResource s) where
+    toHCL GlueCrawlerResource{..} = TF.inline $ catMaybes
+        [ TF.assign "classifiers" <$> TF.attribute _classifiers
+        , TF.assign "configuration" <$> TF.attribute _configuration
+        , TF.assign "database_name" <$> TF.attribute _database_name
         , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "location_uri" <$> TF.attribute _location_uri
+        , TF.assign "jdbc_target" <$> TF.attribute _jdbc_target
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "parameters" <$> TF.attribute _parameters
+        , TF.assign "role" <$> TF.attribute _role
+        , TF.assign "s3_target" <$> TF.attribute _s3_target
+        , TF.assign "schedule" <$> TF.attribute _schedule
+        , TF.assign "schema_change_policy" <$> TF.attribute _schema_change_policy
+        , TF.assign "table_prefix" <$> TF.attribute _table_prefix
         ]
 
-instance P.HasCatalogId (GlueCatalogDatabaseResource s) (TF.Attr s P.Text) where
-    catalogId =
-        lens (_catalog_id :: GlueCatalogDatabaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _catalog_id = a } :: GlueCatalogDatabaseResource s)
+instance P.HasClassifiers (GlueCrawlerResource s) (TF.Attr s P.Text) where
+    classifiers =
+        lens (_classifiers :: GlueCrawlerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _classifiers = a } :: GlueCrawlerResource s)
 
-instance P.HasDescription (GlueCatalogDatabaseResource s) (TF.Attr s P.Text) where
+instance P.HasConfiguration (GlueCrawlerResource s) (TF.Attr s P.Text) where
+    configuration =
+        lens (_configuration :: GlueCrawlerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _configuration = a } :: GlueCrawlerResource s)
+
+instance P.HasDatabaseName (GlueCrawlerResource s) (TF.Attr s P.Text) where
+    databaseName =
+        lens (_database_name :: GlueCrawlerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _database_name = a } :: GlueCrawlerResource s)
+
+instance P.HasDescription (GlueCrawlerResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: GlueCatalogDatabaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: GlueCatalogDatabaseResource s)
+        lens (_description :: GlueCrawlerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: GlueCrawlerResource s)
 
-instance P.HasLocationUri (GlueCatalogDatabaseResource s) (TF.Attr s P.Text) where
-    locationUri =
-        lens (_location_uri :: GlueCatalogDatabaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _location_uri = a } :: GlueCatalogDatabaseResource s)
+instance P.HasJdbcTarget (GlueCrawlerResource s) (TF.Attr s P.Text) where
+    jdbcTarget =
+        lens (_jdbc_target :: GlueCrawlerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _jdbc_target = a } :: GlueCrawlerResource s)
 
-instance P.HasName (GlueCatalogDatabaseResource s) (TF.Attr s P.Text) where
+instance P.HasName (GlueCrawlerResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: GlueCatalogDatabaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: GlueCatalogDatabaseResource s)
+        lens (_name :: GlueCrawlerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: GlueCrawlerResource s)
 
-instance P.HasParameters (GlueCatalogDatabaseResource s) (TF.Attr s P.Text) where
-    parameters =
-        lens (_parameters :: GlueCatalogDatabaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _parameters = a } :: GlueCatalogDatabaseResource s)
+instance P.HasRole (GlueCrawlerResource s) (TF.Attr s P.Text) where
+    role =
+        lens (_role :: GlueCrawlerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: GlueCrawlerResource s)
 
-instance s ~ s' => P.HasComputedCatalogId (TF.Ref s' (GlueCatalogDatabaseResource s)) (TF.Attr s P.Text) where
-    computedCatalogId =
-        (_catalog_id :: GlueCatalogDatabaseResource s -> TF.Attr s P.Text)
+instance P.HasS3Target (GlueCrawlerResource s) (TF.Attr s P.Text) where
+    s3Target =
+        lens (_s3_target :: GlueCrawlerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _s3_target = a } :: GlueCrawlerResource s)
+
+instance P.HasSchedule (GlueCrawlerResource s) (TF.Attr s P.Text) where
+    schedule =
+        lens (_schedule :: GlueCrawlerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _schedule = a } :: GlueCrawlerResource s)
+
+instance P.HasSchemaChangePolicy (GlueCrawlerResource s) (TF.Attr s P.Text) where
+    schemaChangePolicy =
+        lens (_schema_change_policy :: GlueCrawlerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _schema_change_policy = a } :: GlueCrawlerResource s)
+
+instance P.HasTablePrefix (GlueCrawlerResource s) (TF.Attr s P.Text) where
+    tablePrefix =
+        lens (_table_prefix :: GlueCrawlerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _table_prefix = a } :: GlueCrawlerResource s)
+
+instance s ~ s' => P.HasComputedClassifiers (TF.Ref s' (GlueCrawlerResource s)) (TF.Attr s P.Text) where
+    computedClassifiers =
+        (_classifiers :: GlueCrawlerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (GlueCatalogDatabaseResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConfiguration (TF.Ref s' (GlueCrawlerResource s)) (TF.Attr s P.Text) where
+    computedConfiguration =
+        (_configuration :: GlueCrawlerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDatabaseName (TF.Ref s' (GlueCrawlerResource s)) (TF.Attr s P.Text) where
+    computedDatabaseName =
+        (_database_name :: GlueCrawlerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (GlueCrawlerResource s)) (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: GlueCatalogDatabaseResource s -> TF.Attr s P.Text)
+        (_description :: GlueCrawlerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLocationUri (TF.Ref s' (GlueCatalogDatabaseResource s)) (TF.Attr s P.Text) where
-    computedLocationUri =
-        (_location_uri :: GlueCatalogDatabaseResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GlueCrawlerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedJdbcTarget (TF.Ref s' (GlueCrawlerResource s)) (TF.Attr s P.Text) where
+    computedJdbcTarget =
+        (_jdbc_target :: GlueCrawlerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (GlueCatalogDatabaseResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (GlueCrawlerResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: GlueCatalogDatabaseResource s -> TF.Attr s P.Text)
+        (_name :: GlueCrawlerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedParameters (TF.Ref s' (GlueCatalogDatabaseResource s)) (TF.Attr s P.Text) where
-    computedParameters =
-        (_parameters :: GlueCatalogDatabaseResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (GlueCrawlerResource s)) (TF.Attr s P.Text) where
+    computedRole =
+        (_role :: GlueCrawlerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-glueCatalogDatabaseResource :: TF.Resource P.AWS (GlueCatalogDatabaseResource s)
-glueCatalogDatabaseResource =
-    TF.newResource "aws_glue_catalog_database" $
-        GlueCatalogDatabaseResource {
-              _catalog_id = TF.Nil
+instance s ~ s' => P.HasComputedS3Target (TF.Ref s' (GlueCrawlerResource s)) (TF.Attr s P.Text) where
+    computedS3Target =
+        (_s3_target :: GlueCrawlerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSchedule (TF.Ref s' (GlueCrawlerResource s)) (TF.Attr s P.Text) where
+    computedSchedule =
+        (_schedule :: GlueCrawlerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSchemaChangePolicy (TF.Ref s' (GlueCrawlerResource s)) (TF.Attr s P.Text) where
+    computedSchemaChangePolicy =
+        (_schema_change_policy :: GlueCrawlerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTablePrefix (TF.Ref s' (GlueCrawlerResource s)) (TF.Attr s P.Text) where
+    computedTablePrefix =
+        (_table_prefix :: GlueCrawlerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+glueCrawlerResource :: TF.Resource P.AWS (GlueCrawlerResource s)
+glueCrawlerResource =
+    TF.newResource "aws_glue_crawler" $
+        GlueCrawlerResource {
+              _classifiers = TF.Nil
+            , _configuration = TF.Nil
+            , _database_name = TF.Nil
             , _description = TF.Nil
-            , _location_uri = TF.Nil
+            , _jdbc_target = TF.Nil
             , _name = TF.Nil
-            , _parameters = TF.Nil
-            }
-
-{- | The @aws_guardduty_ipset@ AWS resource.
-
-Provides a resource to manage a GuardDuty IPSet. ~> Note: Currently in
-GuardDuty, users from member accounts cannot upload and further manage
-IPSets. IPSets that are uploaded by the master account are imposed on
-GuardDuty functionality in its member accounts. See the
-<https://docs.aws.amazon.com/guardduty/latest/ug/create-ip-set.html>
--}
-data GuarddutyIpsetResource s = GuarddutyIpsetResource {
-      _activate    :: !(TF.Attr s P.Text)
-    {- ^ (Required) Specifies whether GuardDuty is to start using the uploaded IPSet. -}
-    , _detector_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The detector ID of the GuardDuty. -}
-    , _format      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The format of the file that contains the IPSet. Valid values: @TXT@ | @STIX@ | @OTX_CSV@ | @ALIEN_VAULT@ | @PROOF_POINT@ | @FIRE_EYE@ -}
-    , _location    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The URI of the file that contains the IPSet. -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The friendly name to identify the IPSet. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (GuarddutyIpsetResource s) where
-    toHCL GuarddutyIpsetResource{..} = TF.inline $ catMaybes
-        [ TF.assign "activate" <$> TF.attribute _activate
-        , TF.assign "detector_id" <$> TF.attribute _detector_id
-        , TF.assign "format" <$> TF.attribute _format
-        , TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance P.HasActivate (GuarddutyIpsetResource s) (TF.Attr s P.Text) where
-    activate =
-        lens (_activate :: GuarddutyIpsetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _activate = a } :: GuarddutyIpsetResource s)
-
-instance P.HasDetectorId (GuarddutyIpsetResource s) (TF.Attr s P.Text) where
-    detectorId =
-        lens (_detector_id :: GuarddutyIpsetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _detector_id = a } :: GuarddutyIpsetResource s)
-
-instance P.HasFormat (GuarddutyIpsetResource s) (TF.Attr s P.Text) where
-    format =
-        lens (_format :: GuarddutyIpsetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _format = a } :: GuarddutyIpsetResource s)
-
-instance P.HasLocation (GuarddutyIpsetResource s) (TF.Attr s P.Text) where
-    location =
-        lens (_location :: GuarddutyIpsetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: GuarddutyIpsetResource s)
-
-instance P.HasName (GuarddutyIpsetResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: GuarddutyIpsetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: GuarddutyIpsetResource s)
-
-instance s ~ s' => P.HasComputedActivate (TF.Ref s' (GuarddutyIpsetResource s)) (TF.Attr s P.Text) where
-    computedActivate =
-        (_activate :: GuarddutyIpsetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDetectorId (TF.Ref s' (GuarddutyIpsetResource s)) (TF.Attr s P.Text) where
-    computedDetectorId =
-        (_detector_id :: GuarddutyIpsetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFormat (TF.Ref s' (GuarddutyIpsetResource s)) (TF.Attr s P.Text) where
-    computedFormat =
-        (_format :: GuarddutyIpsetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (GuarddutyIpsetResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (GuarddutyIpsetResource s)) (TF.Attr s P.Text) where
-    computedLocation =
-        (_location :: GuarddutyIpsetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (GuarddutyIpsetResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: GuarddutyIpsetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-guarddutyIpsetResource :: TF.Resource P.AWS (GuarddutyIpsetResource s)
-guarddutyIpsetResource =
-    TF.newResource "aws_guardduty_ipset" $
-        GuarddutyIpsetResource {
-              _activate = TF.Nil
-            , _detector_id = TF.Nil
-            , _format = TF.Nil
-            , _location = TF.Nil
-            , _name = TF.Nil
-            }
-
-{- | The @aws_guardduty_member@ AWS resource.
-
-Provides a resource to manage a GuardDuty member. ~> NOTE: Currently after
-using this resource, you must manually invite and accept member account
-invitations before GuardDuty will begin sending cross-account events. More
-information for how to accomplish this via the AWS Console or API can be
-found in the
-<https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_accounts.html> .
-Terraform implementation of member invitation and acceptance resources can
-be tracked in
-<https://github.com/terraform-providers/terraform-provider-aws/issues/2489>
-.
--}
-data GuarddutyMemberResource s = GuarddutyMemberResource {
-      _account_id  :: !(TF.Attr s P.Text)
-    {- ^ (Required) AWS account ID for member account. -}
-    , _detector_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The detector ID of the GuardDuty account where you want to create member accounts. -}
-    , _email       :: !(TF.Attr s P.Text)
-    {- ^ (Required) Email address for member account. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (GuarddutyMemberResource s) where
-    toHCL GuarddutyMemberResource{..} = TF.inline $ catMaybes
-        [ TF.assign "account_id" <$> TF.attribute _account_id
-        , TF.assign "detector_id" <$> TF.attribute _detector_id
-        , TF.assign "email" <$> TF.attribute _email
-        ]
-
-instance P.HasAccountId (GuarddutyMemberResource s) (TF.Attr s P.Text) where
-    accountId =
-        lens (_account_id :: GuarddutyMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _account_id = a } :: GuarddutyMemberResource s)
-
-instance P.HasDetectorId (GuarddutyMemberResource s) (TF.Attr s P.Text) where
-    detectorId =
-        lens (_detector_id :: GuarddutyMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _detector_id = a } :: GuarddutyMemberResource s)
-
-instance P.HasEmail (GuarddutyMemberResource s) (TF.Attr s P.Text) where
-    email =
-        lens (_email :: GuarddutyMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _email = a } :: GuarddutyMemberResource s)
-
-instance s ~ s' => P.HasComputedAccountId (TF.Ref s' (GuarddutyMemberResource s)) (TF.Attr s P.Text) where
-    computedAccountId =
-        (_account_id :: GuarddutyMemberResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDetectorId (TF.Ref s' (GuarddutyMemberResource s)) (TF.Attr s P.Text) where
-    computedDetectorId =
-        (_detector_id :: GuarddutyMemberResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (GuarddutyMemberResource s)) (TF.Attr s P.Text) where
-    computedEmail =
-        (_email :: GuarddutyMemberResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (GuarddutyMemberResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-guarddutyMemberResource :: TF.Resource P.AWS (GuarddutyMemberResource s)
-guarddutyMemberResource =
-    TF.newResource "aws_guardduty_member" $
-        GuarddutyMemberResource {
-              _account_id = TF.Nil
-            , _detector_id = TF.Nil
-            , _email = TF.Nil
+            , _role = TF.Nil
+            , _s3_target = TF.Nil
+            , _schedule = TF.Nil
+            , _schema_change_policy = TF.Nil
+            , _table_prefix = TF.Nil
             }
 
 {- | The @aws_iam_group_policy@ AWS resource.
@@ -7043,75 +7372,6 @@ iamRolePolicyResource =
             , _role = TF.Nil
             }
 
-{- | The @aws_iam_role@ AWS resource.
-
-Provides an IAM role.
--}
-data IamRoleResource s = IamRoleResource {
-      _assume_role_policy :: !(TF.Attr s P.IamPolicy)
-    {- ^ (Required) The policy that grants an entity permission to assume the role. -}
-    , _name               :: !(TF.Attr s P.Text)
-    {- ^ (Optional, Forces new resource) The name of the role. If omitted, Terraform will assign a random, unique name. -}
-    , _name_prefix        :: !(TF.Attr s P.Text)
-    {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (IamRoleResource s) where
-    toHCL IamRoleResource{..} = TF.inline $ catMaybes
-        [ TF.assign "assume_role_policy" <$> TF.attribute _assume_role_policy
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
-        ]
-
-instance P.HasAssumeRolePolicy (IamRoleResource s) (TF.Attr s P.IamPolicy) where
-    assumeRolePolicy =
-        lens (_assume_role_policy :: IamRoleResource s -> TF.Attr s P.IamPolicy)
-             (\s a -> s { _assume_role_policy = a } :: IamRoleResource s)
-
-instance P.HasName (IamRoleResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: IamRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: IamRoleResource s)
-
-instance P.HasNamePrefix (IamRoleResource s) (TF.Attr s P.Text) where
-    namePrefix =
-        lens (_name_prefix :: IamRoleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name_prefix = a } :: IamRoleResource s)
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamRoleResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
-
-instance s ~ s' => P.HasComputedAssumeRolePolicy (TF.Ref s' (IamRoleResource s)) (TF.Attr s P.IamPolicy) where
-    computedAssumeRolePolicy =
-        (_assume_role_policy :: IamRoleResource s -> TF.Attr s P.IamPolicy)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (IamRoleResource s)) (TF.Attr s P.Text) where
-    computedCreateDate x = TF.compute (TF.refKey x) "create_date"
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (IamRoleResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (IamRoleResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (IamRoleResource s)) (TF.Attr s P.Text) where
-    computedNamePrefix =
-        (_name_prefix :: IamRoleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamRoleResource s)) (TF.Attr s P.Text) where
-    computedUniqueId x = TF.compute (TF.refKey x) "unique_id"
-
-iamRoleResource :: TF.Resource P.AWS (IamRoleResource s)
-iamRoleResource =
-    TF.newResource "aws_iam_role" $
-        IamRoleResource {
-              _assume_role_policy = TF.Nil
-            , _name = TF.Nil
-            , _name_prefix = TF.Nil
-            }
-
 {- | The @aws_iam_saml_provider@ AWS resource.
 
 Provides an IAM SAML provider.
@@ -7163,80 +7423,164 @@ iamSamlProviderResource =
             , _saml_metadata_document = TF.Nil
             }
 
-{- | The @aws_inspector_assessment_template@ AWS resource.
+{- | The @aws_iam_user_login_profile@ AWS resource.
 
-Provides a Inspector assessment template
+Provides one-time creation of a IAM user login profile, and uses PGP to
+encrypt the password for safe transport to the user. PGP keys can be
+obtained from Keybase.
 -}
-data InspectorAssessmentTemplateResource s = InspectorAssessmentTemplateResource {
-      _duration           :: !(TF.Attr s P.Text)
-    {- ^ (Required) The duration of the inspector run. -}
-    , _name               :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the assessment template. -}
-    , _rules_package_arns :: !(TF.Attr s P.Text)
-    {- ^ (Required) The rules to be used during the run. -}
-    , _target_arn         :: !(TF.Attr s P.Text)
-    {- ^ (Required) The assessment target ARN to attach the template to. -}
+data IamUserLoginProfileResource s = IamUserLoginProfileResource {
+      _password_length         :: !(TF.Attr s P.Text)
+    {- ^ (Optional, default 20) The length of the generated password. -}
+    , _password_reset_required :: !(TF.Attr s P.Text)
+    {- ^ (Optional, default "true") Whether the user should be forced to reset the generated password on first login. -}
+    , _pgp_key                 :: !(TF.Attr s P.Text)
+    {- ^ (Required) Either a base-64 encoded PGP public key, or a keybase username in the form @keybase:username@ . -}
+    , _user                    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The IAM user's name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InspectorAssessmentTemplateResource s) where
-    toHCL InspectorAssessmentTemplateResource{..} = TF.inline $ catMaybes
-        [ TF.assign "duration" <$> TF.attribute _duration
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "rules_package_arns" <$> TF.attribute _rules_package_arns
-        , TF.assign "target_arn" <$> TF.attribute _target_arn
+instance TF.ToHCL (IamUserLoginProfileResource s) where
+    toHCL IamUserLoginProfileResource{..} = TF.inline $ catMaybes
+        [ TF.assign "password_length" <$> TF.attribute _password_length
+        , TF.assign "password_reset_required" <$> TF.attribute _password_reset_required
+        , TF.assign "pgp_key" <$> TF.attribute _pgp_key
+        , TF.assign "user" <$> TF.attribute _user
         ]
 
-instance P.HasDuration (InspectorAssessmentTemplateResource s) (TF.Attr s P.Text) where
-    duration =
-        lens (_duration :: InspectorAssessmentTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _duration = a } :: InspectorAssessmentTemplateResource s)
+instance P.HasPasswordLength (IamUserLoginProfileResource s) (TF.Attr s P.Text) where
+    passwordLength =
+        lens (_password_length :: IamUserLoginProfileResource s -> TF.Attr s P.Text)
+             (\s a -> s { _password_length = a } :: IamUserLoginProfileResource s)
 
-instance P.HasName (InspectorAssessmentTemplateResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: InspectorAssessmentTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: InspectorAssessmentTemplateResource s)
+instance P.HasPasswordResetRequired (IamUserLoginProfileResource s) (TF.Attr s P.Text) where
+    passwordResetRequired =
+        lens (_password_reset_required :: IamUserLoginProfileResource s -> TF.Attr s P.Text)
+             (\s a -> s { _password_reset_required = a } :: IamUserLoginProfileResource s)
 
-instance P.HasRulesPackageArns (InspectorAssessmentTemplateResource s) (TF.Attr s P.Text) where
-    rulesPackageArns =
-        lens (_rules_package_arns :: InspectorAssessmentTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _rules_package_arns = a } :: InspectorAssessmentTemplateResource s)
+instance P.HasPgpKey (IamUserLoginProfileResource s) (TF.Attr s P.Text) where
+    pgpKey =
+        lens (_pgp_key :: IamUserLoginProfileResource s -> TF.Attr s P.Text)
+             (\s a -> s { _pgp_key = a } :: IamUserLoginProfileResource s)
 
-instance P.HasTargetArn (InspectorAssessmentTemplateResource s) (TF.Attr s P.Text) where
-    targetArn =
-        lens (_target_arn :: InspectorAssessmentTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target_arn = a } :: InspectorAssessmentTemplateResource s)
+instance P.HasUser (IamUserLoginProfileResource s) (TF.Attr s P.Text) where
+    user =
+        lens (_user :: IamUserLoginProfileResource s -> TF.Attr s P.Text)
+             (\s a -> s { _user = a } :: IamUserLoginProfileResource s)
 
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (InspectorAssessmentTemplateResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+instance s ~ s' => P.HasComputedEncryptedPassword (TF.Ref s' (IamUserLoginProfileResource s)) (TF.Attr s P.Text) where
+    computedEncryptedPassword x = TF.compute (TF.refKey x) "encrypted_password"
 
-instance s ~ s' => P.HasComputedDuration (TF.Ref s' (InspectorAssessmentTemplateResource s)) (TF.Attr s P.Text) where
-    computedDuration =
-        (_duration :: InspectorAssessmentTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedKeyFingerprint (TF.Ref s' (IamUserLoginProfileResource s)) (TF.Attr s P.Text) where
+    computedKeyFingerprint x = TF.compute (TF.refKey x) "key_fingerprint"
+
+instance s ~ s' => P.HasComputedPasswordLength (TF.Ref s' (IamUserLoginProfileResource s)) (TF.Attr s P.Text) where
+    computedPasswordLength =
+        (_password_length :: IamUserLoginProfileResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (InspectorAssessmentTemplateResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: InspectorAssessmentTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedPasswordResetRequired (TF.Ref s' (IamUserLoginProfileResource s)) (TF.Attr s P.Text) where
+    computedPasswordResetRequired =
+        (_password_reset_required :: IamUserLoginProfileResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRulesPackageArns (TF.Ref s' (InspectorAssessmentTemplateResource s)) (TF.Attr s P.Text) where
-    computedRulesPackageArns =
-        (_rules_package_arns :: InspectorAssessmentTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedPgpKey (TF.Ref s' (IamUserLoginProfileResource s)) (TF.Attr s P.Text) where
+    computedPgpKey =
+        (_pgp_key :: IamUserLoginProfileResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTargetArn (TF.Ref s' (InspectorAssessmentTemplateResource s)) (TF.Attr s P.Text) where
-    computedTargetArn =
-        (_target_arn :: InspectorAssessmentTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedUser (TF.Ref s' (IamUserLoginProfileResource s)) (TF.Attr s P.Text) where
+    computedUser =
+        (_user :: IamUserLoginProfileResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-inspectorAssessmentTemplateResource :: TF.Resource P.AWS (InspectorAssessmentTemplateResource s)
-inspectorAssessmentTemplateResource =
-    TF.newResource "aws_inspector_assessment_template" $
-        InspectorAssessmentTemplateResource {
-              _duration = TF.Nil
-            , _name = TF.Nil
-            , _rules_package_arns = TF.Nil
-            , _target_arn = TF.Nil
+iamUserLoginProfileResource :: TF.Resource P.AWS (IamUserLoginProfileResource s)
+iamUserLoginProfileResource =
+    TF.newResource "aws_iam_user_login_profile" $
+        IamUserLoginProfileResource {
+              _password_length = TF.Nil
+            , _password_reset_required = TF.Nil
+            , _pgp_key = TF.Nil
+            , _user = TF.Nil
+            }
+
+{- | The @aws_iam_user_ssh_key@ AWS resource.
+
+Uploads an SSH public key and associates it with the specified IAM user.
+-}
+data IamUserSshKeyResource s = IamUserSshKeyResource {
+      _encoding   :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use @SSH@ . To retrieve the public key in PEM format, use @PEM@ . -}
+    , _public_key :: !(TF.Attr s P.Text)
+    {- ^ (Required) The SSH public key. The public key must be encoded in ssh-rsa format or PEM format. -}
+    , _status     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The status to assign to the SSH public key. Active means the key can be used for authentication with an AWS CodeCommit repository. Inactive means the key cannot be used. Default is @active@ . -}
+    , _username   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the IAM user to associate the SSH public key with. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (IamUserSshKeyResource s) where
+    toHCL IamUserSshKeyResource{..} = TF.inline $ catMaybes
+        [ TF.assign "encoding" <$> TF.attribute _encoding
+        , TF.assign "public_key" <$> TF.attribute _public_key
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "username" <$> TF.attribute _username
+        ]
+
+instance P.HasEncoding (IamUserSshKeyResource s) (TF.Attr s P.Text) where
+    encoding =
+        lens (_encoding :: IamUserSshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _encoding = a } :: IamUserSshKeyResource s)
+
+instance P.HasPublicKey (IamUserSshKeyResource s) (TF.Attr s P.Text) where
+    publicKey =
+        lens (_public_key :: IamUserSshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _public_key = a } :: IamUserSshKeyResource s)
+
+instance P.HasStatus (IamUserSshKeyResource s) (TF.Attr s P.Text) where
+    status =
+        lens (_status :: IamUserSshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _status = a } :: IamUserSshKeyResource s)
+
+instance P.HasUsername (IamUserSshKeyResource s) (TF.Attr s P.Text) where
+    username =
+        lens (_username :: IamUserSshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _username = a } :: IamUserSshKeyResource s)
+
+instance s ~ s' => P.HasComputedEncoding (TF.Ref s' (IamUserSshKeyResource s)) (TF.Attr s P.Text) where
+    computedEncoding =
+        (_encoding :: IamUserSshKeyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (IamUserSshKeyResource s)) (TF.Attr s P.Text) where
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+
+instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (IamUserSshKeyResource s)) (TF.Attr s P.Text) where
+    computedPublicKey =
+        (_public_key :: IamUserSshKeyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSshPublicKeyId (TF.Ref s' (IamUserSshKeyResource s)) (TF.Attr s P.Text) where
+    computedSshPublicKeyId x = TF.compute (TF.refKey x) "ssh_public_key_id"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (IamUserSshKeyResource s)) (TF.Attr s P.Text) where
+    computedStatus =
+        (_status :: IamUserSshKeyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (IamUserSshKeyResource s)) (TF.Attr s P.Text) where
+    computedUsername =
+        (_username :: IamUserSshKeyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+iamUserSshKeyResource :: TF.Resource P.AWS (IamUserSshKeyResource s)
+iamUserSshKeyResource =
+    TF.newResource "aws_iam_user_ssh_key" $
+        IamUserSshKeyResource {
+              _encoding = TF.Nil
+            , _public_key = TF.Nil
+            , _status = TF.Nil
+            , _username = TF.Nil
             }
 
 {- | The @aws_inspector_resource_group@ AWS resource.
@@ -7271,405 +7615,6 @@ inspectorResourceGroupResource =
     TF.newResource "aws_inspector_resource_group" $
         InspectorResourceGroupResource {
               _tags = TF.Nil
-            }
-
-{- | The @aws_instance@ AWS resource.
-
-Provides an EC2 instance resource. This allows instances to be created,
-updated, and deleted. Instances also support </docs/provisioners/index.html>
-.
--}
-data InstanceResource s = InstanceResource {
-      _ami :: !(TF.Attr s P.Text)
-    {- ^ (Required) The AMI to use for the instance. -}
-    , _associate_public_ip_address :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Associate a public ip address with an instance in a VPC.  Boolean value. -}
-    , _availability_zone :: !(TF.Attr s P.Zone)
-    {- ^ (Optional) The AZ to start the instance in. -}
-    , _disable_api_termination :: !(TF.Attr s P.Text)
-    {- ^ (Optional) If true, enables <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#Using_ChangingDisableAPITermination> -}
-    , _ebs_block_device :: !(TF.Attr s [P.Ec2EbsBlockDevice s])
-    {- ^ (Optional) Additional EBS block devices to attach to the instance.  See <#block-devices> below for details. -}
-    , _ebs_optimized :: !(TF.Attr s P.Text)
-    {- ^ (Optional) If true, the launched EC2 instance will be EBS-optimized. -}
-    , _ephemeral_block_device :: !(TF.Attr s [P.Ec2EphemeralBlockDevice s])
-    {- ^ (Optional) Customize Ephemeral (also known as "Instance Store") volumes on the instance. See <#block-devices> below for details. -}
-    , _iam_instance_profile :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile. Ensure your credentials have the correct permission to assign the instance profile according to the <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html#roles-usingrole-ec2instance-permissions> , notably @iam:PassRole@ . -}
-    , _instance_initiated_shutdown_behavior :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Shutdown behavior for the instance. Amazon defaults this to @stop@ for EBS-backed instances and @terminate@ for instance-store instances. Cannot be set on instance-store instances. See <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#Using_ChangingInstanceInitiatedShutdownBehavior> for more information. -}
-    , _instance_type :: !(TF.Attr s P.Text)
-    {- ^ (Required) The type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance. -}
-    , _ipv6_address_count :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet. -}
-    , _ipv6_addresses :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Specify one or more IPv6 addresses from the range of the subnet to associate with the primary network interface -}
-    , _key_name :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The key name to use for the instance. -}
-    , _monitoring :: !(TF.Attr s P.Text)
-    {- ^ (Optional) If true, the launched EC2 instance will have detailed monitoring enabled. (Available since v0.6.0) -}
-    , _network_interface :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Customize network interfaces to be attached at instance boot time. See <#network-interfaces> below for more details. -}
-    , _placement_group :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The Placement Group to start the instance in. -}
-    , _private_ip :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Private IP address to associate with the instance in a VPC. -}
-    , _root_block_device :: !(TF.Attr s (P.Ec2RootBlockDevice s))
-    {- ^ (Optional) Customize details about the root block device of the instance. See <#block-devices> below for details. -}
-    , _security_groups :: !(TF.Attr s [TF.Attr s P.Text])
-    {- ^ (Optional) A list of security group names to associate with. If you are creating Instances in a VPC, use @vpc_security_group_ids@ instead. -}
-    , _source_dest_check :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs. Defaults true. -}
-    , _subnet_id :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The VPC Subnet ID to launch in. -}
-    , _tags :: !(TF.Attr s (P.Tags s))
-    {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _tenancy :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command. -}
-    , _user_data :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The user data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see @user_data_base64@ instead. -}
-    , _user_data_base64 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Can be used instead of @user_data@ to pass base64-encoded binary data directly. Use this instead of @user_data@ whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. -}
-    , _volume_tags :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A mapping of tags to assign to the devices created by the instance at launch time. -}
-    , _vpc_security_group_ids :: !(TF.Attr s [TF.Attr s P.Text])
-    {- ^ (Optional) A list of security group IDs to associate with. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (InstanceResource s) where
-    toHCL InstanceResource{..} = TF.inline $ catMaybes
-        [ TF.assign "ami" <$> TF.attribute _ami
-        , TF.assign "associate_public_ip_address" <$> TF.attribute _associate_public_ip_address
-        , TF.assign "availability_zone" <$> TF.attribute _availability_zone
-        , TF.assign "disable_api_termination" <$> TF.attribute _disable_api_termination
-        , TF.assign "ebs_block_device" <$> TF.attribute _ebs_block_device
-        , TF.assign "ebs_optimized" <$> TF.attribute _ebs_optimized
-        , TF.assign "ephemeral_block_device" <$> TF.attribute _ephemeral_block_device
-        , TF.assign "iam_instance_profile" <$> TF.attribute _iam_instance_profile
-        , TF.assign "instance_initiated_shutdown_behavior" <$> TF.attribute _instance_initiated_shutdown_behavior
-        , TF.assign "instance_type" <$> TF.attribute _instance_type
-        , TF.assign "ipv6_address_count" <$> TF.attribute _ipv6_address_count
-        , TF.assign "ipv6_addresses" <$> TF.attribute _ipv6_addresses
-        , TF.assign "key_name" <$> TF.attribute _key_name
-        , TF.assign "monitoring" <$> TF.attribute _monitoring
-        , TF.assign "network_interface" <$> TF.attribute _network_interface
-        , TF.assign "placement_group" <$> TF.attribute _placement_group
-        , TF.assign "private_ip" <$> TF.attribute _private_ip
-        , TF.assign "root_block_device" <$> TF.attribute _root_block_device
-        , TF.assign "security_groups" <$> TF.attribute _security_groups
-        , TF.assign "source_dest_check" <$> TF.attribute _source_dest_check
-        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "tenancy" <$> TF.attribute _tenancy
-        , TF.assign "user_data" <$> TF.attribute _user_data
-        , TF.assign "user_data_base64" <$> TF.attribute _user_data_base64
-        , TF.assign "volume_tags" <$> TF.attribute _volume_tags
-        , TF.assign "vpc_security_group_ids" <$> TF.attribute _vpc_security_group_ids
-        ]
-
-instance P.HasAmi (InstanceResource s) (TF.Attr s P.Text) where
-    ami =
-        lens (_ami :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ami = a } :: InstanceResource s)
-
-instance P.HasAssociatePublicIpAddress (InstanceResource s) (TF.Attr s P.Text) where
-    associatePublicIpAddress =
-        lens (_associate_public_ip_address :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _associate_public_ip_address = a } :: InstanceResource s)
-
-instance P.HasAvailabilityZone (InstanceResource s) (TF.Attr s P.Zone) where
-    availabilityZone =
-        lens (_availability_zone :: InstanceResource s -> TF.Attr s P.Zone)
-             (\s a -> s { _availability_zone = a } :: InstanceResource s)
-
-instance P.HasDisableApiTermination (InstanceResource s) (TF.Attr s P.Text) where
-    disableApiTermination =
-        lens (_disable_api_termination :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _disable_api_termination = a } :: InstanceResource s)
-
-instance P.HasEbsBlockDevice (InstanceResource s) (TF.Attr s [P.Ec2EbsBlockDevice s]) where
-    ebsBlockDevice =
-        lens (_ebs_block_device :: InstanceResource s -> TF.Attr s [P.Ec2EbsBlockDevice s])
-             (\s a -> s { _ebs_block_device = a } :: InstanceResource s)
-
-instance P.HasEbsOptimized (InstanceResource s) (TF.Attr s P.Text) where
-    ebsOptimized =
-        lens (_ebs_optimized :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ebs_optimized = a } :: InstanceResource s)
-
-instance P.HasEphemeralBlockDevice (InstanceResource s) (TF.Attr s [P.Ec2EphemeralBlockDevice s]) where
-    ephemeralBlockDevice =
-        lens (_ephemeral_block_device :: InstanceResource s -> TF.Attr s [P.Ec2EphemeralBlockDevice s])
-             (\s a -> s { _ephemeral_block_device = a } :: InstanceResource s)
-
-instance P.HasIamInstanceProfile (InstanceResource s) (TF.Attr s P.Text) where
-    iamInstanceProfile =
-        lens (_iam_instance_profile :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _iam_instance_profile = a } :: InstanceResource s)
-
-instance P.HasInstanceInitiatedShutdownBehavior (InstanceResource s) (TF.Attr s P.Text) where
-    instanceInitiatedShutdownBehavior =
-        lens (_instance_initiated_shutdown_behavior :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_initiated_shutdown_behavior = a } :: InstanceResource s)
-
-instance P.HasInstanceType (InstanceResource s) (TF.Attr s P.Text) where
-    instanceType =
-        lens (_instance_type :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_type = a } :: InstanceResource s)
-
-instance P.HasIpv6AddressCount (InstanceResource s) (TF.Attr s P.Text) where
-    ipv6AddressCount =
-        lens (_ipv6_address_count :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ipv6_address_count = a } :: InstanceResource s)
-
-instance P.HasIpv6Addresses (InstanceResource s) (TF.Attr s P.Text) where
-    ipv6Addresses =
-        lens (_ipv6_addresses :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ipv6_addresses = a } :: InstanceResource s)
-
-instance P.HasKeyName (InstanceResource s) (TF.Attr s P.Text) where
-    keyName =
-        lens (_key_name :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _key_name = a } :: InstanceResource s)
-
-instance P.HasMonitoring (InstanceResource s) (TF.Attr s P.Text) where
-    monitoring =
-        lens (_monitoring :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _monitoring = a } :: InstanceResource s)
-
-instance P.HasNetworkInterface (InstanceResource s) (TF.Attr s P.Text) where
-    networkInterface =
-        lens (_network_interface :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network_interface = a } :: InstanceResource s)
-
-instance P.HasPlacementGroup (InstanceResource s) (TF.Attr s P.Text) where
-    placementGroup =
-        lens (_placement_group :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _placement_group = a } :: InstanceResource s)
-
-instance P.HasPrivateIp (InstanceResource s) (TF.Attr s P.Text) where
-    privateIp =
-        lens (_private_ip :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _private_ip = a } :: InstanceResource s)
-
-instance P.HasRootBlockDevice (InstanceResource s) (TF.Attr s (P.Ec2RootBlockDevice s)) where
-    rootBlockDevice =
-        lens (_root_block_device :: InstanceResource s -> TF.Attr s (P.Ec2RootBlockDevice s))
-             (\s a -> s { _root_block_device = a } :: InstanceResource s)
-
-instance P.HasSecurityGroups (InstanceResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    securityGroups =
-        lens (_security_groups :: InstanceResource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _security_groups = a } :: InstanceResource s)
-
-instance P.HasSourceDestCheck (InstanceResource s) (TF.Attr s P.Text) where
-    sourceDestCheck =
-        lens (_source_dest_check :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_dest_check = a } :: InstanceResource s)
-
-instance P.HasSubnetId (InstanceResource s) (TF.Attr s P.Text) where
-    subnetId =
-        lens (_subnet_id :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subnet_id = a } :: InstanceResource s)
-
-instance P.HasTags (InstanceResource s) (TF.Attr s (P.Tags s)) where
-    tags =
-        lens (_tags :: InstanceResource s -> TF.Attr s (P.Tags s))
-             (\s a -> s { _tags = a } :: InstanceResource s)
-
-instance P.HasTenancy (InstanceResource s) (TF.Attr s P.Text) where
-    tenancy =
-        lens (_tenancy :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tenancy = a } :: InstanceResource s)
-
-instance P.HasUserData (InstanceResource s) (TF.Attr s P.Text) where
-    userData =
-        lens (_user_data :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _user_data = a } :: InstanceResource s)
-
-instance P.HasUserDataBase64 (InstanceResource s) (TF.Attr s P.Text) where
-    userDataBase64 =
-        lens (_user_data_base64 :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _user_data_base64 = a } :: InstanceResource s)
-
-instance P.HasVolumeTags (InstanceResource s) (TF.Attr s P.Text) where
-    volumeTags =
-        lens (_volume_tags :: InstanceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _volume_tags = a } :: InstanceResource s)
-
-instance P.HasVpcSecurityGroupIds (InstanceResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    vpcSecurityGroupIds =
-        lens (_vpc_security_group_ids :: InstanceResource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _vpc_security_group_ids = a } :: InstanceResource s)
-
-instance s ~ s' => P.HasComputedAmi (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedAmi =
-        (_ami :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedAssociatePublicIpAddress (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedAssociatePublicIpAddress =
-        (_associate_public_ip_address :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Zone) where
-    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
-
-instance s ~ s' => P.HasComputedDisableApiTermination (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedDisableApiTermination =
-        (_disable_api_termination :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEbsBlockDevice (TF.Ref s' (InstanceResource s)) (TF.Attr s [P.Ec2EbsBlockDevice s]) where
-    computedEbsBlockDevice =
-        (_ebs_block_device :: InstanceResource s -> TF.Attr s [P.Ec2EbsBlockDevice s])
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEbsOptimized (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedEbsOptimized =
-        (_ebs_optimized :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEphemeralBlockDevice (TF.Ref s' (InstanceResource s)) (TF.Attr s [P.Ec2EphemeralBlockDevice s]) where
-    computedEphemeralBlockDevice =
-        (_ephemeral_block_device :: InstanceResource s -> TF.Attr s [P.Ec2EphemeralBlockDevice s])
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedIamInstanceProfile (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedIamInstanceProfile =
-        (_iam_instance_profile :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedInstanceInitiatedShutdownBehavior (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedInstanceInitiatedShutdownBehavior =
-        (_instance_initiated_shutdown_behavior :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedInstanceType =
-        (_instance_type :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedIpv6AddressCount (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedIpv6AddressCount =
-        (_ipv6_address_count :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedIpv6Addresses (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedIpv6Addresses x = TF.compute (TF.refKey x) "ipv6_addresses"
-
-instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedKeyName x = TF.compute (TF.refKey x) "key_name"
-
-instance s ~ s' => P.HasComputedMonitoring (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedMonitoring =
-        (_monitoring :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNetworkInterface (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedNetworkInterface =
-        (_network_interface :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNetworkInterfaceId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedNetworkInterfaceId x = TF.compute (TF.refKey x) "network_interface_id"
-
-instance s ~ s' => P.HasComputedPlacementGroup (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedPlacementGroup x = TF.compute (TF.refKey x) "placement_group"
-
-instance s ~ s' => P.HasComputedPrimaryNetworkInterfaceId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedPrimaryNetworkInterfaceId x = TF.compute (TF.refKey x) "primary_network_interface_id"
-
-instance s ~ s' => P.HasComputedPrivateDns (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedPrivateDns x = TF.compute (TF.refKey x) "private_dns"
-
-instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
-
-instance s ~ s' => P.HasComputedPublicDns (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedPublicDns x = TF.compute (TF.refKey x) "public_dns"
-
-instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
-
-instance s ~ s' => P.HasComputedRootBlockDevice (TF.Ref s' (InstanceResource s)) (TF.Attr s (P.Ec2RootBlockDevice s)) where
-    computedRootBlockDevice =
-        (_root_block_device :: InstanceResource s -> TF.Attr s (P.Ec2RootBlockDevice s))
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (InstanceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSecurityGroups x = TF.compute (TF.refKey x) "security_groups"
-
-instance s ~ s' => P.HasComputedSourceDestCheck (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedSourceDestCheck =
-        (_source_dest_check :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceResource s)) (TF.Attr s (P.Tags s)) where
-    computedTags =
-        (_tags :: InstanceResource s -> TF.Attr s (P.Tags s))
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTenancy (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedTenancy =
-        (_tenancy :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUserData (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedUserData =
-        (_user_data :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUserDataBase64 (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedUserDataBase64 =
-        (_user_data_base64 :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVolumeTags (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedVolumeTags =
-        (_volume_tags :: InstanceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "vpc_security_group_ids"
-
-instanceResource :: TF.Resource P.AWS (InstanceResource s)
-instanceResource =
-    TF.newResource "aws_instance" $
-        InstanceResource {
-              _ami = TF.Nil
-            , _associate_public_ip_address = TF.Nil
-            , _availability_zone = TF.Nil
-            , _disable_api_termination = TF.Nil
-            , _ebs_block_device = TF.Nil
-            , _ebs_optimized = TF.Nil
-            , _ephemeral_block_device = TF.Nil
-            , _iam_instance_profile = TF.Nil
-            , _instance_initiated_shutdown_behavior = TF.Nil
-            , _instance_type = TF.Nil
-            , _ipv6_address_count = TF.Nil
-            , _ipv6_addresses = TF.Nil
-            , _key_name = TF.Nil
-            , _monitoring = TF.Nil
-            , _network_interface = TF.Nil
-            , _placement_group = TF.Nil
-            , _private_ip = TF.Nil
-            , _root_block_device = TF.Nil
-            , _security_groups = TF.Nil
-            , _source_dest_check = TF.Nil
-            , _subnet_id = TF.Nil
-            , _tags = TF.Nil
-            , _tenancy = TF.Nil
-            , _user_data = TF.Nil
-            , _user_data_base64 = TF.Nil
-            , _volume_tags = TF.Nil
-            , _vpc_security_group_ids = TF.Nil
             }
 
 {- | The @aws_internet_gateway@ AWS resource.
@@ -7720,111 +7665,137 @@ internetGatewayResource =
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_iot_topic_rule@ AWS resource.
+{- | The @aws_kinesis_stream@ AWS resource.
 
-
+Provides a Kinesis Stream resource. Amazon Kinesis is a managed service that
+scales elastically for real-time processing of streaming big data. For more
+details, see the <https://aws.amazon.com/documentation/kinesis/> .
 -}
-data IotTopicRuleResource s = IotTopicRuleResource {
-      _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The description of the rule. -}
-    , _enabled     :: !(TF.Attr s P.Bool)
-    {- ^ (Required) Specifies whether the rule is enabled. -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the rule. -}
-    , _sql         :: !(TF.Attr s P.Text)
-    {- ^ (Required) The SQL statement used to query the topic. For more information, see AWS IoT SQL Reference (http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference) in the AWS IoT Developer Guide. -}
-    , _sql_version :: !(TF.Attr s P.Text)
-    {- ^ (Required) The version of the SQL rules engine to use when evaluating the rule. -}
+data KinesisStreamResource s = KinesisStreamResource {
+      _encryption_type     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The encryption type to use. The only acceptable values are @NONE@ or @KMS@ . The default value is @NONE@ . -}
+    , _kms_key_id          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The GUID for the customer-managed KMS key to use for encryption. You can also use a Kinesis-owned master key by specifying the alias aws/kinesis. -}
+    , _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) A name to identify the stream. This is unique to the AWS account and region the Stream is created in. -}
+    , _retention_period    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Length of time data records are accessible after they are added to the stream. The maximum value of a stream's retention period is 168 hours. Minimum value is 24. Default is 24. -}
+    , _shard_count         :: !(TF.Attr s P.Text)
+    {- ^ – (Required) The number of shards that the stream will use. Amazon has guidlines for specifying the Stream size that should be referenced when creating a Kinesis stream. See <https://docs.aws.amazon.com/kinesis/latest/dev/amazon-kinesis-streams.html> for more. -}
+    , _shard_level_metrics :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of shard-level CloudWatch metrics which can be enabled for the stream. See <https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html> for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable. -}
+    , _tags                :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IotTopicRuleResource s) where
-    toHCL IotTopicRuleResource{..} = TF.inline $ catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "enabled" <$> TF.attribute _enabled
+instance TF.ToHCL (KinesisStreamResource s) where
+    toHCL KinesisStreamResource{..} = TF.inline $ catMaybes
+        [ TF.assign "encryption_type" <$> TF.attribute _encryption_type
+        , TF.assign "kms_key_id" <$> TF.attribute _kms_key_id
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "sql" <$> TF.attribute _sql
-        , TF.assign "sql_version" <$> TF.attribute _sql_version
+        , TF.assign "retention_period" <$> TF.attribute _retention_period
+        , TF.assign "shard_count" <$> TF.attribute _shard_count
+        , TF.assign "shard_level_metrics" <$> TF.attribute _shard_level_metrics
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasDescription (IotTopicRuleResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: IotTopicRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: IotTopicRuleResource s)
+instance P.HasEncryptionType (KinesisStreamResource s) (TF.Attr s P.Text) where
+    encryptionType =
+        lens (_encryption_type :: KinesisStreamResource s -> TF.Attr s P.Text)
+             (\s a -> s { _encryption_type = a } :: KinesisStreamResource s)
 
-instance P.HasEnabled (IotTopicRuleResource s) (TF.Attr s P.Bool) where
-    enabled =
-        lens (_enabled :: IotTopicRuleResource s -> TF.Attr s P.Bool)
-             (\s a -> s { _enabled = a } :: IotTopicRuleResource s)
+instance P.HasKmsKeyId (KinesisStreamResource s) (TF.Attr s P.Text) where
+    kmsKeyId =
+        lens (_kms_key_id :: KinesisStreamResource s -> TF.Attr s P.Text)
+             (\s a -> s { _kms_key_id = a } :: KinesisStreamResource s)
 
-instance P.HasName (IotTopicRuleResource s) (TF.Attr s P.Text) where
+instance P.HasName (KinesisStreamResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: IotTopicRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: IotTopicRuleResource s)
+        lens (_name :: KinesisStreamResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: KinesisStreamResource s)
 
-instance P.HasSql (IotTopicRuleResource s) (TF.Attr s P.Text) where
-    sql =
-        lens (_sql :: IotTopicRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _sql = a } :: IotTopicRuleResource s)
+instance P.HasRetentionPeriod (KinesisStreamResource s) (TF.Attr s P.Text) where
+    retentionPeriod =
+        lens (_retention_period :: KinesisStreamResource s -> TF.Attr s P.Text)
+             (\s a -> s { _retention_period = a } :: KinesisStreamResource s)
 
-instance P.HasSqlVersion (IotTopicRuleResource s) (TF.Attr s P.Text) where
-    sqlVersion =
-        lens (_sql_version :: IotTopicRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _sql_version = a } :: IotTopicRuleResource s)
+instance P.HasShardCount (KinesisStreamResource s) (TF.Attr s P.Text) where
+    shardCount =
+        lens (_shard_count :: KinesisStreamResource s -> TF.Attr s P.Text)
+             (\s a -> s { _shard_count = a } :: KinesisStreamResource s)
 
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (IotTopicRuleResource s)) (TF.Attr s P.Text) where
+instance P.HasShardLevelMetrics (KinesisStreamResource s) (TF.Attr s P.Text) where
+    shardLevelMetrics =
+        lens (_shard_level_metrics :: KinesisStreamResource s -> TF.Attr s P.Text)
+             (\s a -> s { _shard_level_metrics = a } :: KinesisStreamResource s)
+
+instance P.HasTags (KinesisStreamResource s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: KinesisStreamResource s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: KinesisStreamResource s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (KinesisStreamResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (IotTopicRuleResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: IotTopicRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedEncryptionType (TF.Ref s' (KinesisStreamResource s)) (TF.Attr s P.Text) where
+    computedEncryptionType =
+        (_encryption_type :: KinesisStreamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (IotTopicRuleResource s)) (TF.Attr s P.Bool) where
-    computedEnabled =
-        (_enabled :: IotTopicRuleResource s -> TF.Attr s P.Bool)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (IotTopicRuleResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KinesisStreamResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (IotTopicRuleResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: IotTopicRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (KinesisStreamResource s)) (TF.Attr s P.Text) where
+    computedKmsKeyId =
+        (_kms_key_id :: KinesisStreamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSql (TF.Ref s' (IotTopicRuleResource s)) (TF.Attr s P.Text) where
-    computedSql =
-        (_sql :: IotTopicRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedName (TF.Ref s' (KinesisStreamResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedRetentionPeriod (TF.Ref s' (KinesisStreamResource s)) (TF.Attr s P.Text) where
+    computedRetentionPeriod =
+        (_retention_period :: KinesisStreamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSqlVersion (TF.Ref s' (IotTopicRuleResource s)) (TF.Attr s P.Text) where
-    computedSqlVersion =
-        (_sql_version :: IotTopicRuleResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedShardCount (TF.Ref s' (KinesisStreamResource s)) (TF.Attr s P.Text) where
+    computedShardCount x = TF.compute (TF.refKey x) "shard_count"
+
+instance s ~ s' => P.HasComputedShardLevelMetrics (TF.Ref s' (KinesisStreamResource s)) (TF.Attr s P.Text) where
+    computedShardLevelMetrics =
+        (_shard_level_metrics :: KinesisStreamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-iotTopicRuleResource :: TF.Resource P.AWS (IotTopicRuleResource s)
-iotTopicRuleResource =
-    TF.newResource "aws_iot_topic_rule" $
-        IotTopicRuleResource {
-              _description = TF.Nil
-            , _enabled = TF.Nil
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (KinesisStreamResource s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
+        (_tags :: KinesisStreamResource s -> TF.Attr s (P.Tags s))
+            . TF.refValue
+
+kinesisStreamResource :: TF.Resource P.AWS (KinesisStreamResource s)
+kinesisStreamResource =
+    TF.newResource "aws_kinesis_stream" $
+        KinesisStreamResource {
+              _encryption_type = TF.Nil
+            , _kms_key_id = TF.Nil
             , _name = TF.Nil
-            , _sql = TF.Nil
-            , _sql_version = TF.Nil
+            , _retention_period = TF.Nil
+            , _shard_count = TF.Nil
+            , _shard_level_metrics = TF.Nil
+            , _tags = TF.Nil
             }
 
 {- | The @aws_lambda_event_source_mapping@ AWS resource.
 
 Provides a Lambda event source mapping. This allows Lambda functions to get
-events from Kinesis and DynamoDB. For information about Lambda and how to
-use it, see <http://docs.aws.amazon.com/lambda/latest/dg/welcome.html> For
-information about event source mappings, see
+events from Kinesis, DynamoDB and SQS For information about Lambda and how
+to use it, see <http://docs.aws.amazon.com/lambda/latest/dg/welcome.html>
+For information about event source mappings, see
 <http://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html>
 in the API docs.
 -}
 data LambdaEventSourceMappingResource s = LambdaEventSourceMappingResource {
       _batch_size        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The largest number of records that Lambda will retrieve from your event source at the time of invocation. Defaults to @100@ . -}
+    {- ^ (Optional) The largest number of records that Lambda will retrieve from your event source at the time of invocation. Defaults to @100@ for DynamoDB and Kinesis, @10@ for SQS. -}
     , _enabled           :: !(TF.Attr s P.Bool)
     {- ^ (Optional) Determines if the mapping will be enabled on creation. Defaults to @true@ . -}
     , _event_source_arn  :: !(TF.Attr s P.Text)
@@ -7832,7 +7803,7 @@ data LambdaEventSourceMappingResource s = LambdaEventSourceMappingResource {
     , _function_name     :: !(TF.Attr s P.Text)
     {- ^ (Required) The name or the ARN of the Lambda function that will be subscribing to events. -}
     , _starting_position :: !(TF.Attr s P.Text)
-    {- ^ (Required) The position in the stream where AWS Lambda should start reading. Can be one of either @TRIM_HORIZON@ or @LATEST@ . -}
+    {- ^ (Optional) The position in the stream where AWS Lambda should start reading. Must be one of either @TRIM_HORIZON@ or @LATEST@ if getting events from Kinesis or DynamoDB.  Must not be provided if getting events from SQS. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LambdaEventSourceMappingResource s) where
@@ -7923,301 +7894,182 @@ lambdaEventSourceMappingResource =
             , _starting_position = TF.Nil
             }
 
-{- | The @aws_lambda_function@ AWS resource.
+{- | The @aws_lambda_permission@ AWS resource.
 
-Provides a Lambda Function resource. Lambda allows you to trigger execution
-of code in response to events in AWS. The Lambda Function itself includes
-source code and runtime configuration. For information about Lambda and how
-to use it, see <https://docs.aws.amazon.com/lambda/latest/dg/welcome.html>
+Creates a Lambda permission to allow external sources invoking the Lambda
+function (e.g. CloudWatch Event Rule, SNS or S3).
 -}
-data LambdaFunctionResource s = LambdaFunctionResource {
-      _dead_letter_config             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Nested block to configure the function's dead letter queue . See details below. -}
-    , _description                    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Description of what your Lambda Function does. -}
-    , _environment                    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The Lambda environment's configuration settings. Fields documented below. -}
-    , _filename                       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The path to the function's deployment package within the local filesystem. If defined, The @s3_@ -prefixed options cannot be used. -}
-    , _function_name                  :: !(TF.Attr s P.Text)
-    {- ^ (Required) A unique name for your Lambda Function. -}
-    , _handler                        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The function <https://docs.aws.amazon.com/lambda/latest/dg/walkthrough-custom-events-create-test-function.html> in your code. -}
-    , _kms_key_arn                    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ARN for the KMS encryption key. -}
-    , _memory_size                    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Amount of memory in MB your Lambda Function can use at runtime. Defaults to @128@ . See <https://docs.aws.amazon.com/lambda/latest/dg/limits.html> -}
-    , _publish                        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Whether to publish creation/change as new Lambda Function Version. Defaults to @false@ . -}
-    , _reserved_concurrent_executions :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The amount of reserved concurrent executions for this lambda function. Defaults to Unreserved Concurrency Limits. See <https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html> -}
-    , _role                           :: !(TF.Attr s P.Text)
-    {- ^ (Required) IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access to. See <https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html> for more details. -}
-    , _runtime                        :: !(TF.Attr s P.Text)
-    {- ^ (Required) See <https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunction.html#SSS-CreateFunction-request-Runtime> for valid values. -}
-    , _s3_bucket                      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The S3 bucket location containing the function's deployment package. Conflicts with @filename@ . -}
-    , _s3_key                         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The S3 key of an object containing the function's deployment package. Conflicts with @filename@ . -}
-    , _s3_object_version              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The object version containing the function's deployment package. Conflicts with @filename@ . -}
-    , _source_code_hash               :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file specified with either @filename@ or @s3_key@ . The usual way to set this is @${base64sha256(file("file.zip"))}@ , where "file.zip" is the local filename of the lambda function source archive. -}
-    , _tags                           :: !(TF.Attr s (P.Tags s))
-    {- ^ (Optional) A mapping of tags to assign to the object. -}
-    , _timeout                        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The amount of time your Lambda Function has to run in seconds. Defaults to @3@ . See <https://docs.aws.amazon.com/lambda/latest/dg/limits.html> -}
-    , _vpc_config                     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Provide this to allow your function to access your VPC. Fields documented below. See <http://docs.aws.amazon.com/lambda/latest/dg/vpc.html> -}
+data LambdaPermissionResource s = LambdaPermissionResource {
+      _action              :: !(TF.Attr s P.Text)
+    {- ^ (Required) The AWS Lambda action you want to allow in this statement. (e.g. @lambda:InvokeFunction@ ) -}
+    , _function_name       :: !(TF.Attr s P.Text)
+    {- ^ (Required) Name of the Lambda function whose resource policy you are updating -}
+    , _principal           :: !(TF.Attr s P.Text)
+    {- ^ (Required) The principal who is getting this permission. e.g. @s3.amazonaws.com@ , an AWS account ID, or any valid AWS service principal such as @events.amazonaws.com@ or @sns.amazonaws.com@ . -}
+    , _qualifier           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Query parameter to specify function version or alias name. The permission will then apply to the specific qualified ARN. e.g. @arn:aws:lambda:aws-region:acct-id:function:function-name:2@ -}
+    , _source_account      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) This parameter is used for S3 and SES. The AWS account ID (without a hyphen) of the source owner. -}
+    , _source_arn          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) When granting Amazon S3 or CloudWatch Events permission to invoke your function, you should specify this field with the Amazon Resource Name (ARN) for the S3 Bucket or CloudWatch Events Rule as its value.  This ensures that only events generated from the specified bucket or rule can invoke the function. API Gateway ARNs have a unique structure described <http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html> . -}
+    , _statement_id        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A unique statement identifier. By default generated by Terraform. -}
+    , _statement_id_prefix :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A statement identifier prefix. Terraform will generate a unique suffix. Conflicts with @statement_id@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LambdaFunctionResource s) where
-    toHCL LambdaFunctionResource{..} = TF.inline $ catMaybes
-        [ TF.assign "dead_letter_config" <$> TF.attribute _dead_letter_config
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "environment" <$> TF.attribute _environment
-        , TF.assign "filename" <$> TF.attribute _filename
+instance TF.ToHCL (LambdaPermissionResource s) where
+    toHCL LambdaPermissionResource{..} = TF.inline $ catMaybes
+        [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "function_name" <$> TF.attribute _function_name
-        , TF.assign "handler" <$> TF.attribute _handler
-        , TF.assign "kms_key_arn" <$> TF.attribute _kms_key_arn
-        , TF.assign "memory_size" <$> TF.attribute _memory_size
-        , TF.assign "publish" <$> TF.attribute _publish
-        , TF.assign "reserved_concurrent_executions" <$> TF.attribute _reserved_concurrent_executions
-        , TF.assign "role" <$> TF.attribute _role
-        , TF.assign "runtime" <$> TF.attribute _runtime
-        , TF.assign "s3_bucket" <$> TF.attribute _s3_bucket
-        , TF.assign "s3_key" <$> TF.attribute _s3_key
-        , TF.assign "s3_object_version" <$> TF.attribute _s3_object_version
-        , TF.assign "source_code_hash" <$> TF.attribute _source_code_hash
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "timeout" <$> TF.attribute _timeout
-        , TF.assign "vpc_config" <$> TF.attribute _vpc_config
+        , TF.assign "principal" <$> TF.attribute _principal
+        , TF.assign "qualifier" <$> TF.attribute _qualifier
+        , TF.assign "source_account" <$> TF.attribute _source_account
+        , TF.assign "source_arn" <$> TF.attribute _source_arn
+        , TF.assign "statement_id" <$> TF.attribute _statement_id
+        , TF.assign "statement_id_prefix" <$> TF.attribute _statement_id_prefix
         ]
 
-instance P.HasDeadLetterConfig (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    deadLetterConfig =
-        lens (_dead_letter_config :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dead_letter_config = a } :: LambdaFunctionResource s)
+instance P.HasAction (LambdaPermissionResource s) (TF.Attr s P.Text) where
+    action =
+        lens (_action :: LambdaPermissionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _action = a } :: LambdaPermissionResource s)
 
-instance P.HasDescription (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: LambdaFunctionResource s)
-
-instance P.HasEnvironment (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    environment =
-        lens (_environment :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _environment = a } :: LambdaFunctionResource s)
-
-instance P.HasFilename (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    filename =
-        lens (_filename :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _filename = a } :: LambdaFunctionResource s)
-
-instance P.HasFunctionName (LambdaFunctionResource s) (TF.Attr s P.Text) where
+instance P.HasFunctionName (LambdaPermissionResource s) (TF.Attr s P.Text) where
     functionName =
-        lens (_function_name :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _function_name = a } :: LambdaFunctionResource s)
+        lens (_function_name :: LambdaPermissionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _function_name = a } :: LambdaPermissionResource s)
 
-instance P.HasHandler (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    handler =
-        lens (_handler :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _handler = a } :: LambdaFunctionResource s)
+instance P.HasPrincipal (LambdaPermissionResource s) (TF.Attr s P.Text) where
+    principal =
+        lens (_principal :: LambdaPermissionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _principal = a } :: LambdaPermissionResource s)
 
-instance P.HasKmsKeyArn (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    kmsKeyArn =
-        lens (_kms_key_arn :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _kms_key_arn = a } :: LambdaFunctionResource s)
+instance P.HasQualifier (LambdaPermissionResource s) (TF.Attr s P.Text) where
+    qualifier =
+        lens (_qualifier :: LambdaPermissionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _qualifier = a } :: LambdaPermissionResource s)
 
-instance P.HasMemorySize (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    memorySize =
-        lens (_memory_size :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory_size = a } :: LambdaFunctionResource s)
+instance P.HasSourceAccount (LambdaPermissionResource s) (TF.Attr s P.Text) where
+    sourceAccount =
+        lens (_source_account :: LambdaPermissionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _source_account = a } :: LambdaPermissionResource s)
 
-instance P.HasPublish (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    publish =
-        lens (_publish :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _publish = a } :: LambdaFunctionResource s)
+instance P.HasSourceArn (LambdaPermissionResource s) (TF.Attr s P.Text) where
+    sourceArn =
+        lens (_source_arn :: LambdaPermissionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _source_arn = a } :: LambdaPermissionResource s)
 
-instance P.HasReservedConcurrentExecutions (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    reservedConcurrentExecutions =
-        lens (_reserved_concurrent_executions :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _reserved_concurrent_executions = a } :: LambdaFunctionResource s)
+instance P.HasStatementId (LambdaPermissionResource s) (TF.Attr s P.Text) where
+    statementId =
+        lens (_statement_id :: LambdaPermissionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _statement_id = a } :: LambdaPermissionResource s)
 
-instance P.HasRole (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    role =
-        lens (_role :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: LambdaFunctionResource s)
+instance P.HasStatementIdPrefix (LambdaPermissionResource s) (TF.Attr s P.Text) where
+    statementIdPrefix =
+        lens (_statement_id_prefix :: LambdaPermissionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _statement_id_prefix = a } :: LambdaPermissionResource s)
 
-instance P.HasRuntime (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    runtime =
-        lens (_runtime :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _runtime = a } :: LambdaFunctionResource s)
-
-instance P.HasS3Bucket (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    s3Bucket =
-        lens (_s3_bucket :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _s3_bucket = a } :: LambdaFunctionResource s)
-
-instance P.HasS3Key (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    s3Key =
-        lens (_s3_key :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _s3_key = a } :: LambdaFunctionResource s)
-
-instance P.HasS3ObjectVersion (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    s3ObjectVersion =
-        lens (_s3_object_version :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _s3_object_version = a } :: LambdaFunctionResource s)
-
-instance P.HasSourceCodeHash (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    sourceCodeHash =
-        lens (_source_code_hash :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_code_hash = a } :: LambdaFunctionResource s)
-
-instance P.HasTags (LambdaFunctionResource s) (TF.Attr s (P.Tags s)) where
-    tags =
-        lens (_tags :: LambdaFunctionResource s -> TF.Attr s (P.Tags s))
-             (\s a -> s { _tags = a } :: LambdaFunctionResource s)
-
-instance P.HasTimeout (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    timeout =
-        lens (_timeout :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _timeout = a } :: LambdaFunctionResource s)
-
-instance P.HasVpcConfig (LambdaFunctionResource s) (TF.Attr s P.Text) where
-    vpcConfig =
-        lens (_vpc_config :: LambdaFunctionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vpc_config = a } :: LambdaFunctionResource s)
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
-
-instance s ~ s' => P.HasComputedDeadLetterConfig (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedDeadLetterConfig =
-        (_dead_letter_config :: LambdaFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedAction (TF.Ref s' (LambdaPermissionResource s)) (TF.Attr s P.Text) where
+    computedAction =
+        (_action :: LambdaPermissionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: LambdaFunctionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEnvironment (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedEnvironment =
-        (_environment :: LambdaFunctionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFilename (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedFilename =
-        (_filename :: LambdaFunctionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFunctionName (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFunctionName (TF.Ref s' (LambdaPermissionResource s)) (TF.Attr s P.Text) where
     computedFunctionName =
-        (_function_name :: LambdaFunctionResource s -> TF.Attr s P.Text)
+        (_function_name :: LambdaPermissionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHandler (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedHandler =
-        (_handler :: LambdaFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedPrincipal (TF.Ref s' (LambdaPermissionResource s)) (TF.Attr s P.Text) where
+    computedPrincipal =
+        (_principal :: LambdaPermissionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInvokeArn (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedInvokeArn x = TF.compute (TF.refKey x) "invoke_arn"
-
-instance s ~ s' => P.HasComputedKmsKeyArn (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedKmsKeyArn x = TF.compute (TF.refKey x) "kms_key_arn"
-
-instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedLastModified x = TF.compute (TF.refKey x) "last_modified"
-
-instance s ~ s' => P.HasComputedMemorySize (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedMemorySize =
-        (_memory_size :: LambdaFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedQualifier (TF.Ref s' (LambdaPermissionResource s)) (TF.Attr s P.Text) where
+    computedQualifier =
+        (_qualifier :: LambdaPermissionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPublish (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedPublish =
-        (_publish :: LambdaFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedSourceAccount (TF.Ref s' (LambdaPermissionResource s)) (TF.Attr s P.Text) where
+    computedSourceAccount =
+        (_source_account :: LambdaPermissionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedQualifiedArn (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedQualifiedArn x = TF.compute (TF.refKey x) "qualified_arn"
-
-instance s ~ s' => P.HasComputedReservedConcurrentExecutions (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedReservedConcurrentExecutions =
-        (_reserved_concurrent_executions :: LambdaFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedSourceArn (TF.Ref s' (LambdaPermissionResource s)) (TF.Attr s P.Text) where
+    computedSourceArn =
+        (_source_arn :: LambdaPermissionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedRole =
-        (_role :: LambdaFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedStatementId (TF.Ref s' (LambdaPermissionResource s)) (TF.Attr s P.Text) where
+    computedStatementId =
+        (_statement_id :: LambdaPermissionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRuntime (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedRuntime =
-        (_runtime :: LambdaFunctionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedStatementIdPrefix (TF.Ref s' (LambdaPermissionResource s)) (TF.Attr s P.Text) where
+    computedStatementIdPrefix =
+        (_statement_id_prefix :: LambdaPermissionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedS3Bucket (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedS3Bucket =
-        (_s3_bucket :: LambdaFunctionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedS3Key (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedS3Key =
-        (_s3_key :: LambdaFunctionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedS3ObjectVersion (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedS3ObjectVersion =
-        (_s3_object_version :: LambdaFunctionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSourceCodeHash (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedSourceCodeHash x = TF.compute (TF.refKey x) "source_code_hash"
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s (P.Tags s)) where
-    computedTags =
-        (_tags :: LambdaFunctionResource s -> TF.Attr s (P.Tags s))
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedTimeout =
-        (_timeout :: LambdaFunctionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
-
-instance s ~ s' => P.HasComputedVpcConfig (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
-    computedVpcConfig =
-        (_vpc_config :: LambdaFunctionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-lambdaFunctionResource :: TF.Resource P.AWS (LambdaFunctionResource s)
-lambdaFunctionResource =
-    TF.newResource "aws_lambda_function" $
-        LambdaFunctionResource {
-              _dead_letter_config = TF.Nil
-            , _description = TF.Nil
-            , _environment = TF.Nil
-            , _filename = TF.Nil
+lambdaPermissionResource :: TF.Resource P.AWS (LambdaPermissionResource s)
+lambdaPermissionResource =
+    TF.newResource "aws_lambda_permission" $
+        LambdaPermissionResource {
+              _action = TF.Nil
             , _function_name = TF.Nil
-            , _handler = TF.Nil
-            , _kms_key_arn = TF.Nil
-            , _memory_size = TF.Nil
-            , _publish = TF.Nil
-            , _reserved_concurrent_executions = TF.Nil
-            , _role = TF.Nil
-            , _runtime = TF.Nil
-            , _s3_bucket = TF.Nil
-            , _s3_key = TF.Nil
-            , _s3_object_version = TF.Nil
-            , _source_code_hash = TF.Nil
-            , _tags = TF.Nil
-            , _timeout = TF.Nil
-            , _vpc_config = TF.Nil
+            , _principal = TF.Nil
+            , _qualifier = TF.Nil
+            , _source_account = TF.Nil
+            , _source_arn = TF.Nil
+            , _statement_id = TF.Nil
+            , _statement_id_prefix = TF.Nil
+            }
+
+{- | The @aws_lb_listener_certificate@ AWS resource.
+
+Provides a Load Balancer Listener Certificate resource. This resource is for
+additional certificates and does not replace the default certificate on the
+listener. ~> Note:  @aws_alb_listener_certificate@ is known as
+@aws_lb_listener_certificate@ . The functionality is identical.
+-}
+data LbListenerCertificateResource s = LbListenerCertificateResource {
+      _certificate_arn :: !(TF.Attr s P.Text)
+    {- ^ (Required, Forces New Resource) The ARN of the certificate to attach to the listener. -}
+    , _listener_arn    :: !(TF.Attr s P.Text)
+    {- ^ (Required, Forces New Resource) The ARN of the listener to which to attach the certificate. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (LbListenerCertificateResource s) where
+    toHCL LbListenerCertificateResource{..} = TF.inline $ catMaybes
+        [ TF.assign "certificate_arn" <$> TF.attribute _certificate_arn
+        , TF.assign "listener_arn" <$> TF.attribute _listener_arn
+        ]
+
+instance P.HasCertificateArn (LbListenerCertificateResource s) (TF.Attr s P.Text) where
+    certificateArn =
+        lens (_certificate_arn :: LbListenerCertificateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _certificate_arn = a } :: LbListenerCertificateResource s)
+
+instance P.HasListenerArn (LbListenerCertificateResource s) (TF.Attr s P.Text) where
+    listenerArn =
+        lens (_listener_arn :: LbListenerCertificateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _listener_arn = a } :: LbListenerCertificateResource s)
+
+instance s ~ s' => P.HasComputedCertificateArn (TF.Ref s' (LbListenerCertificateResource s)) (TF.Attr s P.Text) where
+    computedCertificateArn =
+        (_certificate_arn :: LbListenerCertificateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedListenerArn (TF.Ref s' (LbListenerCertificateResource s)) (TF.Attr s P.Text) where
+    computedListenerArn =
+        (_listener_arn :: LbListenerCertificateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+lbListenerCertificateResource :: TF.Resource P.AWS (LbListenerCertificateResource s)
+lbListenerCertificateResource =
+    TF.newResource "aws_lb_listener_certificate" $
+        LbListenerCertificateResource {
+              _certificate_arn = TF.Nil
+            , _listener_arn = TF.Nil
             }
 
 {- | The @aws_lb_listener_rule@ AWS resource.
@@ -8301,170 +8153,82 @@ lbListenerRuleResource =
             , _priority = TF.Nil
             }
 
-{- | The @aws_lb_target_group@ AWS resource.
+{- | The @aws_lb_target_group_attachment@ AWS resource.
 
-Provides a Target Group resource for use with Load Balancer resources. ~>
-Note:  @aws_alb_target_group@ is known as @aws_lb_target_group@ . The
-functionality is identical.
+Provides the ability to register instances and containers with a LB target
+group ~> Note:  @aws_alb_target_group_attachment@ is known as
+@aws_lb_target_group_attachment@ . The functionality is identical.
 -}
-data LbTargetGroupResource s = LbTargetGroupResource {
-      _deregistration_delay :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds. The default value is 300 seconds. -}
-    , _health_check         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A Health Check block. Health Check blocks are documented below. -}
-    , _name                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional, Forces new resource) The name of the target group. If omitted, Terraform will assign a random, unique name. -}
-    , _name_prefix          :: !(TF.Attr s P.Text)
-    {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . Cannot be longer than 6 characters. -}
-    , _port                 :: !(TF.Attr s P.Text)
-    {- ^ (Required) The port on which targets receive traffic, unless overridden when registering a specific target. -}
-    , _protocol             :: !(TF.Attr s P.Text)
-    {- ^ (Required) The protocol to use for routing traffic to the targets. -}
-    , _stickiness           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A Stickiness block. Stickiness blocks are documented below. @stickiness@ is only valid if used with Load Balancers of type @Application@ -}
-    , _tags                 :: !(TF.Attr s (P.Tags s))
-    {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _target_type          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The type of target that you must specify when registering targets with this target group. The possible values are @instance@ (targets are specified by instance ID) or @ip@ (targets are specified by IP address). The default is @instance@ . Note that you can't specify targets for a target group using both instance IDs and IP addresses. If the target type is @ip@ , specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses. -}
-    , _vpc_id               :: !(TF.Attr s P.Text)
-    {- ^ (Required) The identifier of the VPC in which to create the target group. -}
+data LbTargetGroupAttachmentResource s = LbTargetGroupAttachmentResource {
+      _availability_zone :: !(TF.Attr s P.Zone)
+    {- ^ (Optional) The Availability Zone where the IP address of the target is to be registered. -}
+    , _port              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The port on which targets receive traffic. -}
+    , _target_group_arn  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ARN of the target group with which to register targets -}
+    , _target_id         :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbTargetGroupResource s) where
-    toHCL LbTargetGroupResource{..} = TF.inline $ catMaybes
-        [ TF.assign "deregistration_delay" <$> TF.attribute _deregistration_delay
-        , TF.assign "health_check" <$> TF.attribute _health_check
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
+instance TF.ToHCL (LbTargetGroupAttachmentResource s) where
+    toHCL LbTargetGroupAttachmentResource{..} = TF.inline $ catMaybes
+        [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "protocol" <$> TF.attribute _protocol
-        , TF.assign "stickiness" <$> TF.attribute _stickiness
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "target_type" <$> TF.attribute _target_type
-        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        , TF.assign "target_group_arn" <$> TF.attribute _target_group_arn
+        , TF.assign "target_id" <$> TF.attribute _target_id
         ]
 
-instance P.HasDeregistrationDelay (LbTargetGroupResource s) (TF.Attr s P.Text) where
-    deregistrationDelay =
-        lens (_deregistration_delay :: LbTargetGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _deregistration_delay = a } :: LbTargetGroupResource s)
+instance P.HasAvailabilityZone (LbTargetGroupAttachmentResource s) (TF.Attr s P.Zone) where
+    availabilityZone =
+        lens (_availability_zone :: LbTargetGroupAttachmentResource s -> TF.Attr s P.Zone)
+             (\s a -> s { _availability_zone = a } :: LbTargetGroupAttachmentResource s)
 
-instance P.HasHealthCheck (LbTargetGroupResource s) (TF.Attr s P.Text) where
-    healthCheck =
-        lens (_health_check :: LbTargetGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _health_check = a } :: LbTargetGroupResource s)
-
-instance P.HasName (LbTargetGroupResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: LbTargetGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: LbTargetGroupResource s)
-
-instance P.HasNamePrefix (LbTargetGroupResource s) (TF.Attr s P.Text) where
-    namePrefix =
-        lens (_name_prefix :: LbTargetGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name_prefix = a } :: LbTargetGroupResource s)
-
-instance P.HasPort (LbTargetGroupResource s) (TF.Attr s P.Text) where
+instance P.HasPort (LbTargetGroupAttachmentResource s) (TF.Attr s P.Text) where
     port =
-        lens (_port :: LbTargetGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _port = a } :: LbTargetGroupResource s)
+        lens (_port :: LbTargetGroupAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _port = a } :: LbTargetGroupAttachmentResource s)
 
-instance P.HasProtocol (LbTargetGroupResource s) (TF.Attr s P.Text) where
-    protocol =
-        lens (_protocol :: LbTargetGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _protocol = a } :: LbTargetGroupResource s)
+instance P.HasTargetGroupArn (LbTargetGroupAttachmentResource s) (TF.Attr s P.Text) where
+    targetGroupArn =
+        lens (_target_group_arn :: LbTargetGroupAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _target_group_arn = a } :: LbTargetGroupAttachmentResource s)
 
-instance P.HasStickiness (LbTargetGroupResource s) (TF.Attr s P.Text) where
-    stickiness =
-        lens (_stickiness :: LbTargetGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _stickiness = a } :: LbTargetGroupResource s)
+instance P.HasTargetId (LbTargetGroupAttachmentResource s) (TF.Attr s P.Text) where
+    targetId =
+        lens (_target_id :: LbTargetGroupAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _target_id = a } :: LbTargetGroupAttachmentResource s)
 
-instance P.HasTags (LbTargetGroupResource s) (TF.Attr s (P.Tags s)) where
-    tags =
-        lens (_tags :: LbTargetGroupResource s -> TF.Attr s (P.Tags s))
-             (\s a -> s { _tags = a } :: LbTargetGroupResource s)
-
-instance P.HasTargetType (LbTargetGroupResource s) (TF.Attr s P.Text) where
-    targetType =
-        lens (_target_type :: LbTargetGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target_type = a } :: LbTargetGroupResource s)
-
-instance P.HasVpcId (LbTargetGroupResource s) (TF.Attr s P.Text) where
-    vpcId =
-        lens (_vpc_id :: LbTargetGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vpc_id = a } :: LbTargetGroupResource s)
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
-
-instance s ~ s' => P.HasComputedArnSuffix (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Text) where
-    computedArnSuffix x = TF.compute (TF.refKey x) "arn_suffix"
-
-instance s ~ s' => P.HasComputedDeregistrationDelay (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Text) where
-    computedDeregistrationDelay =
-        (_deregistration_delay :: LbTargetGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (LbTargetGroupAttachmentResource s)) (TF.Attr s P.Zone) where
+    computedAvailabilityZone =
+        (_availability_zone :: LbTargetGroupAttachmentResource s -> TF.Attr s P.Zone)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHealthCheck (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Text) where
-    computedHealthCheck =
-        (_health_check :: LbTargetGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LbTargetGroupAttachmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Text) where
-    computedNamePrefix =
-        (_name_prefix :: LbTargetGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (LbTargetGroupAttachmentResource s)) (TF.Attr s P.Text) where
     computedPort =
-        (_port :: LbTargetGroupResource s -> TF.Attr s P.Text)
+        (_port :: LbTargetGroupAttachmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Text) where
-    computedProtocol =
-        (_protocol :: LbTargetGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedTargetGroupArn (TF.Ref s' (LbTargetGroupAttachmentResource s)) (TF.Attr s P.Text) where
+    computedTargetGroupArn =
+        (_target_group_arn :: LbTargetGroupAttachmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStickiness (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Text) where
-    computedStickiness =
-        (_stickiness :: LbTargetGroupResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedTargetId (TF.Ref s' (LbTargetGroupAttachmentResource s)) (TF.Attr s P.Text) where
+    computedTargetId =
+        (_target_id :: LbTargetGroupAttachmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s (P.Tags s)) where
-    computedTags =
-        (_tags :: LbTargetGroupResource s -> TF.Attr s (P.Tags s))
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTargetType (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Text) where
-    computedTargetType =
-        (_target_type :: LbTargetGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Text) where
-    computedVpcId =
-        (_vpc_id :: LbTargetGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-lbTargetGroupResource :: TF.Resource P.AWS (LbTargetGroupResource s)
-lbTargetGroupResource =
-    TF.newResource "aws_lb_target_group" $
-        LbTargetGroupResource {
-              _deregistration_delay = TF.Nil
-            , _health_check = TF.Nil
-            , _name = TF.Nil
-            , _name_prefix = TF.Nil
+lbTargetGroupAttachmentResource :: TF.Resource P.AWS (LbTargetGroupAttachmentResource s)
+lbTargetGroupAttachmentResource =
+    TF.newResource "aws_lb_target_group_attachment" $
+        LbTargetGroupAttachmentResource {
+              _availability_zone = TF.Nil
             , _port = TF.Nil
-            , _protocol = TF.Nil
-            , _stickiness = TF.Nil
-            , _tags = TF.Nil
-            , _target_type = TF.Nil
-            , _vpc_id = TF.Nil
+            , _target_group_arn = TF.Nil
+            , _target_id = TF.Nil
             }
 
 {- | The @aws_lightsail_domain@ AWS resource.
@@ -8653,182 +8417,97 @@ mqConfigurationResource =
             , _name = TF.Nil
             }
 
-{- | The @aws_nat_gateway@ AWS resource.
+{- | The @aws_neptune_parameter_group@ AWS resource.
 
-Provides a resource to create a VPC NAT Gateway.
+Manages a Neptune Parameter Group
 -}
-data NatGatewayResource s = NatGatewayResource {
-      _allocation_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Allocation ID of the Elastic IP address for the gateway. -}
-    , _subnet_id     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Subnet ID of the subnet in which to place the gateway. -}
-    , _tags          :: !(TF.Attr s (P.Tags s))
+data NeptuneParameterGroupResource s = NeptuneParameterGroupResource {
+      _description :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The description of the Neptune parameter group. Defaults to "Managed by Terraform". -}
+    , _family'     :: !(TF.Attr s P.Text)
+    {- ^ (Required) The family of the Neptune parameter group. -}
+    , _name        :: !(TF.Attr s P.Text)
+    {- ^ (Required, Forces new resource) The name of the Neptune parameter group. -}
+    , _parameter   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of Neptune parameters to apply. -}
+    , _tags        :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NatGatewayResource s) where
-    toHCL NatGatewayResource{..} = TF.inline $ catMaybes
-        [ TF.assign "allocation_id" <$> TF.attribute _allocation_id
-        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
+instance TF.ToHCL (NeptuneParameterGroupResource s) where
+    toHCL NeptuneParameterGroupResource{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "family" <$> TF.attribute _family'
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parameter" <$> TF.attribute _parameter
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasAllocationId (NatGatewayResource s) (TF.Attr s P.Text) where
-    allocationId =
-        lens (_allocation_id :: NatGatewayResource s -> TF.Attr s P.Text)
-             (\s a -> s { _allocation_id = a } :: NatGatewayResource s)
+instance P.HasDescription (NeptuneParameterGroupResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: NeptuneParameterGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: NeptuneParameterGroupResource s)
 
-instance P.HasSubnetId (NatGatewayResource s) (TF.Attr s P.Text) where
-    subnetId =
-        lens (_subnet_id :: NatGatewayResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subnet_id = a } :: NatGatewayResource s)
+instance P.HasFamily' (NeptuneParameterGroupResource s) (TF.Attr s P.Text) where
+    family' =
+        lens (_family' :: NeptuneParameterGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _family' = a } :: NeptuneParameterGroupResource s)
 
-instance P.HasTags (NatGatewayResource s) (TF.Attr s (P.Tags s)) where
+instance P.HasName (NeptuneParameterGroupResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: NeptuneParameterGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: NeptuneParameterGroupResource s)
+
+instance P.HasParameter (NeptuneParameterGroupResource s) (TF.Attr s P.Text) where
+    parameter =
+        lens (_parameter :: NeptuneParameterGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _parameter = a } :: NeptuneParameterGroupResource s)
+
+instance P.HasTags (NeptuneParameterGroupResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: NatGatewayResource s -> TF.Attr s (P.Tags s))
-             (\s a -> s { _tags = a } :: NatGatewayResource s)
+        lens (_tags :: NeptuneParameterGroupResource s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: NeptuneParameterGroupResource s)
 
-instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
-    computedAllocationId x = TF.compute (TF.refKey x) "allocation_id"
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (NeptuneParameterGroupResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (NeptuneParameterGroupResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: NeptuneParameterGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedFamily' (TF.Ref s' (NeptuneParameterGroupResource s)) (TF.Attr s P.Text) where
+    computedFamily' =
+        (_family' :: NeptuneParameterGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NeptuneParameterGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedNetworkInterfaceId (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
-    computedNetworkInterfaceId x = TF.compute (TF.refKey x) "network_interface_id"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NeptuneParameterGroupResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: NeptuneParameterGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
-instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
-    computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
+instance s ~ s' => P.HasComputedParameter (TF.Ref s' (NeptuneParameterGroupResource s)) (TF.Attr s P.Text) where
+    computedParameter =
+        (_parameter :: NeptuneParameterGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
-instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
-    computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
-
-instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
-    computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (NatGatewayResource s)) (TF.Attr s (P.Tags s)) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (NeptuneParameterGroupResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: NatGatewayResource s -> TF.Attr s (P.Tags s))
+        (_tags :: NeptuneParameterGroupResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
-natGatewayResource :: TF.Resource P.AWS (NatGatewayResource s)
-natGatewayResource =
-    TF.newResource "aws_nat_gateway" $
-        NatGatewayResource {
-              _allocation_id = TF.Nil
-            , _subnet_id = TF.Nil
+neptuneParameterGroupResource :: TF.Resource P.AWS (NeptuneParameterGroupResource s)
+neptuneParameterGroupResource =
+    TF.newResource "aws_neptune_parameter_group" $
+        NeptuneParameterGroupResource {
+              _description = TF.Nil
+            , _family' = TF.Nil
+            , _name = TF.Nil
+            , _parameter = TF.Nil
             , _tags = TF.Nil
-            }
-
-{- | The @aws_network_acl@ AWS resource.
-
-Provides an network ACL resource. You might set up network ACLs with rules
-similar to your security groups in order to add an additional layer of
-security to your VPC. ~> NOTE on Network ACLs and Network ACL Rules:
-Terraform currently provides both a standalone <network_acl_rule.html>
-resource and a Network ACL resource with rules defined in-line. At this time
-you cannot use a Network ACL with in-line rules in conjunction with any
-Network ACL Rule resources. Doing so will cause a conflict of rule settings
-and will overwrite rules.
--}
-data NetworkAclResource s = NetworkAclResource {
-      _egress     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Specifies an egress rule. Parameters defined below. -}
-    , _ingress    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Specifies an ingress rule. Parameters defined below. -}
-    , _subnet_id  :: !(TF.Attr s P.Text)
-    {- ^ (Optional, Deprecated) The ID of the associated Subnet. This attribute is deprecated, please use the @subnet_ids@ attribute instead -}
-    , _subnet_ids :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of Subnet IDs to apply the ACL to -}
-    , _tags       :: !(TF.Attr s (P.Tags s))
-    {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _vpc_id     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the associated VPC. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (NetworkAclResource s) where
-    toHCL NetworkAclResource{..} = TF.inline $ catMaybes
-        [ TF.assign "egress" <$> TF.attribute _egress
-        , TF.assign "ingress" <$> TF.attribute _ingress
-        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
-        , TF.assign "subnet_ids" <$> TF.attribute _subnet_ids
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
-        ]
-
-instance P.HasEgress (NetworkAclResource s) (TF.Attr s P.Text) where
-    egress =
-        lens (_egress :: NetworkAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _egress = a } :: NetworkAclResource s)
-
-instance P.HasIngress (NetworkAclResource s) (TF.Attr s P.Text) where
-    ingress =
-        lens (_ingress :: NetworkAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ingress = a } :: NetworkAclResource s)
-
-instance P.HasSubnetId (NetworkAclResource s) (TF.Attr s P.Text) where
-    subnetId =
-        lens (_subnet_id :: NetworkAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subnet_id = a } :: NetworkAclResource s)
-
-instance P.HasSubnetIds (NetworkAclResource s) (TF.Attr s P.Text) where
-    subnetIds =
-        lens (_subnet_ids :: NetworkAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subnet_ids = a } :: NetworkAclResource s)
-
-instance P.HasTags (NetworkAclResource s) (TF.Attr s (P.Tags s)) where
-    tags =
-        lens (_tags :: NetworkAclResource s -> TF.Attr s (P.Tags s))
-             (\s a -> s { _tags = a } :: NetworkAclResource s)
-
-instance P.HasVpcId (NetworkAclResource s) (TF.Attr s P.Text) where
-    vpcId =
-        lens (_vpc_id :: NetworkAclResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vpc_id = a } :: NetworkAclResource s)
-
-instance s ~ s' => P.HasComputedEgress (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
-    computedEgress =
-        (_egress :: NetworkAclResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedIngress (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
-    computedIngress =
-        (_ingress :: NetworkAclResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
-    computedSubnetId =
-        (_subnet_id :: NetworkAclResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
-    computedSubnetIds =
-        (_subnet_ids :: NetworkAclResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkAclResource s)) (TF.Attr s (P.Tags s)) where
-    computedTags =
-        (_tags :: NetworkAclResource s -> TF.Attr s (P.Tags s))
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
-    computedVpcId =
-        (_vpc_id :: NetworkAclResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-networkAclResource :: TF.Resource P.AWS (NetworkAclResource s)
-networkAclResource =
-    TF.newResource "aws_network_acl" $
-        NetworkAclResource {
-              _egress = TF.Nil
-            , _ingress = TF.Nil
-            , _subnet_id = TF.Nil
-            , _subnet_ids = TF.Nil
-            , _tags = TF.Nil
-            , _vpc_id = TF.Nil
             }
 
 {- | The @aws_network_interface_sg_attachment@ AWS resource.
@@ -8885,16 +8564,12 @@ networkInterfaceSgAttachmentResource =
             , _security_group_id = TF.Nil
             }
 
-{- | The @aws_opsworks_java_app_layer@ AWS resource.
+{- | The @aws_opsworks_ganglia_layer@ AWS resource.
 
-Provides an OpsWorks Java application layer resource.
+Provides an OpsWorks Ganglia layer resource.
 -}
-data OpsworksJavaAppLayerResource s = OpsworksJavaAppLayerResource {
-      _app_server                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Keyword for the application container to use. Defaults to "tomcat". -}
-    , _app_server_version          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Version of the selected application container to use. Defaults to "7". -}
-    , _auto_assign_elastic_ips     :: !(TF.Attr s P.Text)
+data OpsworksGangliaLayerResource s = OpsworksGangliaLayerResource {
+      _auto_assign_elastic_ips     :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to automatically assign an elastic IP address to the layer's instances. -}
     , _auto_assign_public_ips      :: !(TF.Attr s P.Text)
     {- ^ (Optional) For stacks belonging to a VPC, whether to automatically assign a public IP address to each of the layer's instances. -}
@@ -8916,27 +8591,25 @@ data OpsworksJavaAppLayerResource s = OpsworksJavaAppLayerResource {
     {- ^ (Optional) Whether to install OS and package updates on each instance when it boots. -}
     , _instance_shutdown_timeout   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The time, in seconds, that OpsWorks will wait for Chef to complete after triggering the Shutdown event. -}
-    , _jvm_options                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Options to set for the JVM. -}
-    , _jvm_type                    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Keyword for the type of JVM to use. Defaults to @openjdk@ . -}
-    , _jvm_version                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Version of JVM to use. Defaults to "7". -}
     , _name                        :: !(TF.Attr s P.Text)
     {- ^ (Optional) A human-readable name for the layer. -}
+    , _password                    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The password to use for Ganglia. -}
     , _stack_id                    :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the stack the layer will belong to. -}
     , _system_packages             :: !(TF.Attr s P.Text)
     {- ^ (Optional) Names of a set of system packages to install on the layer's instances. -}
+    , _url                         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The URL path to use for Ganglia. Defaults to "/ganglia". -}
     , _use_ebs_optimized_instances :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to use EBS-optimized instances. -}
+    , _username                    :: !(TF.Attr s P.Text)
+    {- ^ - (Optiona) The username to use for Ganglia. Defaults to "opsworks". -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OpsworksJavaAppLayerResource s) where
-    toHCL OpsworksJavaAppLayerResource{..} = TF.inline $ catMaybes
-        [ TF.assign "app_server" <$> TF.attribute _app_server
-        , TF.assign "app_server_version" <$> TF.attribute _app_server_version
-        , TF.assign "auto_assign_elastic_ips" <$> TF.attribute _auto_assign_elastic_ips
+instance TF.ToHCL (OpsworksGangliaLayerResource s) where
+    toHCL OpsworksGangliaLayerResource{..} = TF.inline $ catMaybes
+        [ TF.assign "auto_assign_elastic_ips" <$> TF.attribute _auto_assign_elastic_ips
         , TF.assign "auto_assign_public_ips" <$> TF.attribute _auto_assign_public_ips
         , TF.assign "auto_healing" <$> TF.attribute _auto_healing
         , TF.assign "custom_instance_profile_arn" <$> TF.attribute _custom_instance_profile_arn
@@ -8947,225 +8620,203 @@ instance TF.ToHCL (OpsworksJavaAppLayerResource s) where
         , TF.assign "elastic_load_balancer" <$> TF.attribute _elastic_load_balancer
         , TF.assign "install_updates_on_boot" <$> TF.attribute _install_updates_on_boot
         , TF.assign "instance_shutdown_timeout" <$> TF.attribute _instance_shutdown_timeout
-        , TF.assign "jvm_options" <$> TF.attribute _jvm_options
-        , TF.assign "jvm_type" <$> TF.attribute _jvm_type
-        , TF.assign "jvm_version" <$> TF.attribute _jvm_version
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "password" <$> TF.attribute _password
         , TF.assign "stack_id" <$> TF.attribute _stack_id
         , TF.assign "system_packages" <$> TF.attribute _system_packages
+        , TF.assign "url" <$> TF.attribute _url
         , TF.assign "use_ebs_optimized_instances" <$> TF.attribute _use_ebs_optimized_instances
+        , TF.assign "username" <$> TF.attribute _username
         ]
 
-instance P.HasAppServer (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
-    appServer =
-        lens (_app_server :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _app_server = a } :: OpsworksJavaAppLayerResource s)
-
-instance P.HasAppServerVersion (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
-    appServerVersion =
-        lens (_app_server_version :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _app_server_version = a } :: OpsworksJavaAppLayerResource s)
-
-instance P.HasAutoAssignElasticIps (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasAutoAssignElasticIps (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     autoAssignElasticIps =
-        lens (_auto_assign_elastic_ips :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _auto_assign_elastic_ips = a } :: OpsworksJavaAppLayerResource s)
+        lens (_auto_assign_elastic_ips :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _auto_assign_elastic_ips = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasAutoAssignPublicIps (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasAutoAssignPublicIps (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     autoAssignPublicIps =
-        lens (_auto_assign_public_ips :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _auto_assign_public_ips = a } :: OpsworksJavaAppLayerResource s)
+        lens (_auto_assign_public_ips :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _auto_assign_public_ips = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasAutoHealing (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasAutoHealing (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     autoHealing =
-        lens (_auto_healing :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _auto_healing = a } :: OpsworksJavaAppLayerResource s)
+        lens (_auto_healing :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _auto_healing = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasCustomInstanceProfileArn (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasCustomInstanceProfileArn (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     customInstanceProfileArn =
-        lens (_custom_instance_profile_arn :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _custom_instance_profile_arn = a } :: OpsworksJavaAppLayerResource s)
+        lens (_custom_instance_profile_arn :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _custom_instance_profile_arn = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasCustomJson (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasCustomJson (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     customJson =
-        lens (_custom_json :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _custom_json = a } :: OpsworksJavaAppLayerResource s)
+        lens (_custom_json :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _custom_json = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasCustomSecurityGroupIds (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasCustomSecurityGroupIds (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     customSecurityGroupIds =
-        lens (_custom_security_group_ids :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _custom_security_group_ids = a } :: OpsworksJavaAppLayerResource s)
+        lens (_custom_security_group_ids :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _custom_security_group_ids = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasDrainElbOnShutdown (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasDrainElbOnShutdown (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     drainElbOnShutdown =
-        lens (_drain_elb_on_shutdown :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _drain_elb_on_shutdown = a } :: OpsworksJavaAppLayerResource s)
+        lens (_drain_elb_on_shutdown :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _drain_elb_on_shutdown = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasEbsVolume (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasEbsVolume (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     ebsVolume =
-        lens (_ebs_volume :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ebs_volume = a } :: OpsworksJavaAppLayerResource s)
+        lens (_ebs_volume :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ebs_volume = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasElasticLoadBalancer (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasElasticLoadBalancer (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     elasticLoadBalancer =
-        lens (_elastic_load_balancer :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _elastic_load_balancer = a } :: OpsworksJavaAppLayerResource s)
+        lens (_elastic_load_balancer :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _elastic_load_balancer = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasInstallUpdatesOnBoot (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasInstallUpdatesOnBoot (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     installUpdatesOnBoot =
-        lens (_install_updates_on_boot :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _install_updates_on_boot = a } :: OpsworksJavaAppLayerResource s)
+        lens (_install_updates_on_boot :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _install_updates_on_boot = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasInstanceShutdownTimeout (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasInstanceShutdownTimeout (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     instanceShutdownTimeout =
-        lens (_instance_shutdown_timeout :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_shutdown_timeout = a } :: OpsworksJavaAppLayerResource s)
+        lens (_instance_shutdown_timeout :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_shutdown_timeout = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasJvmOptions (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
-    jvmOptions =
-        lens (_jvm_options :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _jvm_options = a } :: OpsworksJavaAppLayerResource s)
-
-instance P.HasJvmType (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
-    jvmType =
-        lens (_jvm_type :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _jvm_type = a } :: OpsworksJavaAppLayerResource s)
-
-instance P.HasJvmVersion (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
-    jvmVersion =
-        lens (_jvm_version :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _jvm_version = a } :: OpsworksJavaAppLayerResource s)
-
-instance P.HasName (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasName (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: OpsworksJavaAppLayerResource s)
+        lens (_name :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasStackId (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasPassword (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
+    password =
+        lens (_password :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _password = a } :: OpsworksGangliaLayerResource s)
+
+instance P.HasStackId (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     stackId =
-        lens (_stack_id :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _stack_id = a } :: OpsworksJavaAppLayerResource s)
+        lens (_stack_id :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _stack_id = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasSystemPackages (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasSystemPackages (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     systemPackages =
-        lens (_system_packages :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _system_packages = a } :: OpsworksJavaAppLayerResource s)
+        lens (_system_packages :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _system_packages = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasUseEbsOptimizedInstances (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
+instance P.HasUrl (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
+    url =
+        lens (_url :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _url = a } :: OpsworksGangliaLayerResource s)
+
+instance P.HasUseEbsOptimizedInstances (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     useEbsOptimizedInstances =
-        lens (_use_ebs_optimized_instances :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _use_ebs_optimized_instances = a } :: OpsworksJavaAppLayerResource s)
+        lens (_use_ebs_optimized_instances :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _use_ebs_optimized_instances = a } :: OpsworksGangliaLayerResource s)
 
-instance s ~ s' => P.HasComputedAppServer (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
-    computedAppServer =
-        (_app_server :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance P.HasUsername (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
+    username =
+        lens (_username :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _username = a } :: OpsworksGangliaLayerResource s)
 
-instance s ~ s' => P.HasComputedAppServerVersion (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
-    computedAppServerVersion =
-        (_app_server_version :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedAutoAssignElasticIps (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAutoAssignElasticIps (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedAutoAssignElasticIps =
-        (_auto_assign_elastic_ips :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_auto_assign_elastic_ips :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedAutoAssignPublicIps (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAutoAssignPublicIps (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedAutoAssignPublicIps =
-        (_auto_assign_public_ips :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_auto_assign_public_ips :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedAutoHealing (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAutoHealing (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedAutoHealing =
-        (_auto_healing :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_auto_healing :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCustomInstanceProfileArn (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCustomInstanceProfileArn (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedCustomInstanceProfileArn =
-        (_custom_instance_profile_arn :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_custom_instance_profile_arn :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCustomJson (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCustomJson (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedCustomJson =
-        (_custom_json :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_custom_json :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCustomSecurityGroupIds (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCustomSecurityGroupIds (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedCustomSecurityGroupIds =
-        (_custom_security_group_ids :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_custom_security_group_ids :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDrainElbOnShutdown (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDrainElbOnShutdown (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedDrainElbOnShutdown =
-        (_drain_elb_on_shutdown :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_drain_elb_on_shutdown :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEbsVolume (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEbsVolume (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedEbsVolume =
-        (_ebs_volume :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_ebs_volume :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedElasticLoadBalancer (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedElasticLoadBalancer (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedElasticLoadBalancer =
-        (_elastic_load_balancer :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_elastic_load_balancer :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInstallUpdatesOnBoot (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstallUpdatesOnBoot (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedInstallUpdatesOnBoot =
-        (_install_updates_on_boot :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_install_updates_on_boot :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInstanceShutdownTimeout (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceShutdownTimeout (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedInstanceShutdownTimeout =
-        (_instance_shutdown_timeout :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_instance_shutdown_timeout :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedJvmOptions (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
-    computedJvmOptions =
-        (_jvm_options :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedJvmType (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
-    computedJvmType =
-        (_jvm_type :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedJvmVersion (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
-    computedJvmVersion =
-        (_jvm_version :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_name :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStackId (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
+    computedPassword =
+        (_password :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedStackId (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedStackId =
-        (_stack_id :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_stack_id :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSystemPackages (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSystemPackages (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedSystemPackages =
-        (_system_packages :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_system_packages :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedUseEbsOptimizedInstances (TF.Ref s' (OpsworksJavaAppLayerResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
+    computedUrl =
+        (_url :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUseEbsOptimizedInstances (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
     computedUseEbsOptimizedInstances =
-        (_use_ebs_optimized_instances :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
+        (_use_ebs_optimized_instances :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-opsworksJavaAppLayerResource :: TF.Resource P.AWS (OpsworksJavaAppLayerResource s)
-opsworksJavaAppLayerResource =
-    TF.newResource "aws_opsworks_java_app_layer" $
-        OpsworksJavaAppLayerResource {
-              _app_server = TF.Nil
-            , _app_server_version = TF.Nil
-            , _auto_assign_elastic_ips = TF.Nil
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (OpsworksGangliaLayerResource s)) (TF.Attr s P.Text) where
+    computedUsername =
+        (_username :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+opsworksGangliaLayerResource :: TF.Resource P.AWS (OpsworksGangliaLayerResource s)
+opsworksGangliaLayerResource =
+    TF.newResource "aws_opsworks_ganglia_layer" $
+        OpsworksGangliaLayerResource {
+              _auto_assign_elastic_ips = TF.Nil
             , _auto_assign_public_ips = TF.Nil
             , _auto_healing = TF.Nil
             , _custom_instance_profile_arn = TF.Nil
@@ -9176,13 +8827,13 @@ opsworksJavaAppLayerResource =
             , _elastic_load_balancer = TF.Nil
             , _install_updates_on_boot = TF.Nil
             , _instance_shutdown_timeout = TF.Nil
-            , _jvm_options = TF.Nil
-            , _jvm_type = TF.Nil
-            , _jvm_version = TF.Nil
             , _name = TF.Nil
+            , _password = TF.Nil
             , _stack_id = TF.Nil
             , _system_packages = TF.Nil
+            , _url = TF.Nil
             , _use_ebs_optimized_instances = TF.Nil
+            , _username = TF.Nil
             }
 
 {- | The @aws_opsworks_memcached_layer@ AWS resource.
@@ -9855,650 +9506,544 @@ opsworksUserProfileResource =
             , _user_arn = TF.Nil
             }
 
-{- | The @aws_rds_cluster@ AWS resource.
+{- | The @aws_organizations_policy_attachment@ AWS resource.
 
-Provides an RDS Cluster Resource. A Cluster Resource defines attributes that
-are applied to the entire cluster of
-</docs/providers/aws/r/rds_cluster_instance.html> . Use the RDS Cluster
-resource and RDS Cluster Instances to create and use Amazon Aurora, a
-MySQL-compatible database engine. For more information on Amazon Aurora, see
-<https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html> in
-the Amazon RDS User Guide. Changes to a RDS Cluster can occur when you
-manually change a parameter, such as @port@ , and are reflected in the next
-maintenance window. Because of this, Terraform may report a difference in
-its planning phase because a modification has not yet taken place. You can
-use the @apply_immediately@ flag to instruct the service to apply the change
-immediately (see documentation below). ~> Note: using @apply_immediately@
-can result in a brief downtime as the server reboots. See the AWS Docs on
-<https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html>
-for more information. ~> Note: All arguments including the username and
-password will be stored in the raw state as plain-text.
-</docs/state/sensitive-data.html> .
+Provides a resource to attach an AWS Organizations policy to an organization
+account, root, or unit.
 -}
-data RdsClusterResource s = RdsClusterResource {
-      _apply_immediately                   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is @false@ . See <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html> -}
-    , _availability_zones                  :: !(TF.Attr s [TF.Attr s P.Text])
-    {- ^ (Optional) A list of EC2 Availability Zones that instances in the DB cluster can be created in -}
-    , _backup_retention_period             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The days to retain backups for. Default 1 -}
-    , _cluster_identifier                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional, Forces new resources) The cluster identifier. If omitted, Terraform will assign a random, unique identifier. -}
-    , _cluster_identifier_prefix           :: !(TF.Attr s P.Text)
-    {- ^ (Optional, Forces new resource) Creates a unique cluster identifier beginning with the specified prefix. Conflicts with @cluster_identifer@ . -}
-    , _database_name                       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Name for an automatically created database on cluster creation. There are different naming restrictions per database engine: <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.Constraints> -}
-    , _db_cluster_parameter_group_name     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A cluster parameter group to associate with the cluster. -}
-    , _db_subnet_group_name                :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A DB subnet group to associate with this DB instance. NOTE: This must match the @db_subnet_group_name@ specified on every </docs/providers/aws/r/rds_cluster_instance.html> in the cluster. -}
-    , _engine                              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the database engine to be used for this DB cluster. Defaults to @aurora@ . -}
-    , _engine_version                      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The database engine version. -}
-    , _final_snapshot_identifier           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of your final DB snapshot when this DB cluster is deleted. If omitted, no final snapshot will be made. -}
-    , _iam_database_authentication_enabled :: !(TF.Attr s P.Bool)
-    {- ^ (Optional) Specifies whether or mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled. -}
-    , _iam_roles                           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A List of ARNs for the IAM roles to associate to the RDS Cluster. -}
-    , _kms_key_id                          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ARN for the KMS encryption key. When specifying @kms_key_id@ , @storage_encrypted@ needs to be set to true. -}
-    , _master_password                     :: !(TF.Attr s P.Text)
-    {- ^ (Required unless a @snapshot_identifier@ is provided) Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Please refer to the <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.Constraints> -}
-    , _master_username                     :: !(TF.Attr s P.Text)
-    {- ^ (Required unless a @snapshot_identifier@ is provided) Username for the master DB user. Please refer to the <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.Constraints> -}
-    , _port                                :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The port on which the DB accepts connections -}
-    , _preferred_backup_window             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC Default: A 30-minute window selected at random from an 8-hour block of time per region. e.g. 04:00-09:00 -}
-    , _preferred_maintenance_window        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The weekly time range during which system maintenance can occur, in (UTC) e.g. wed:04:00-wed:04:30 -}
-    , _skip_final_snapshot                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB cluster is deleted, using the value from @final_snapshot_identifier@ . Default is @false@ . -}
-    , _snapshot_identifier                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Specifies whether or not to create this cluster from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05. -}
-    , _storage_encrypted                   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Specifies whether the DB cluster is encrypted. The default is @false@ if not specified. -}
-    , _vpc_security_group_ids              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) List of VPC security groups to associate with the Cluster -}
+data OrganizationsPolicyAttachmentResource s = OrganizationsPolicyAttachmentResource {
+      _policy_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The unique identifier (ID) of the policy that you want to attach to the target. -}
+    , _target_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The unique identifier (ID) of the root, organizational unit, or account number that you want to attach the policy to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RdsClusterResource s) where
-    toHCL RdsClusterResource{..} = TF.inline $ catMaybes
-        [ TF.assign "apply_immediately" <$> TF.attribute _apply_immediately
-        , TF.assign "availability_zones" <$> TF.attribute _availability_zones
-        , TF.assign "backup_retention_period" <$> TF.attribute _backup_retention_period
+instance TF.ToHCL (OrganizationsPolicyAttachmentResource s) where
+    toHCL OrganizationsPolicyAttachmentResource{..} = TF.inline $ catMaybes
+        [ TF.assign "policy_id" <$> TF.attribute _policy_id
+        , TF.assign "target_id" <$> TF.attribute _target_id
+        ]
+
+instance P.HasPolicyId (OrganizationsPolicyAttachmentResource s) (TF.Attr s P.Text) where
+    policyId =
+        lens (_policy_id :: OrganizationsPolicyAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policy_id = a } :: OrganizationsPolicyAttachmentResource s)
+
+instance P.HasTargetId (OrganizationsPolicyAttachmentResource s) (TF.Attr s P.Text) where
+    targetId =
+        lens (_target_id :: OrganizationsPolicyAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _target_id = a } :: OrganizationsPolicyAttachmentResource s)
+
+instance s ~ s' => P.HasComputedPolicyId (TF.Ref s' (OrganizationsPolicyAttachmentResource s)) (TF.Attr s P.Text) where
+    computedPolicyId =
+        (_policy_id :: OrganizationsPolicyAttachmentResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTargetId (TF.Ref s' (OrganizationsPolicyAttachmentResource s)) (TF.Attr s P.Text) where
+    computedTargetId =
+        (_target_id :: OrganizationsPolicyAttachmentResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+organizationsPolicyAttachmentResource :: TF.Resource P.AWS (OrganizationsPolicyAttachmentResource s)
+organizationsPolicyAttachmentResource =
+    TF.newResource "aws_organizations_policy_attachment" $
+        OrganizationsPolicyAttachmentResource {
+              _policy_id = TF.Nil
+            , _target_id = TF.Nil
+            }
+
+{- | The @aws_redshift_cluster@ AWS resource.
+
+Provides a Redshift Cluster Resource. ~> Note: All arguments including the
+username and password will be stored in the raw state as plain-text.
+</docs/state/sensitive-data.html> .
+-}
+data RedshiftClusterResource s = RedshiftClusterResource {
+      _allow_version_upgrade               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) If true , major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. Default is true -}
+    , _automated_snapshot_retention_period :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with create-cluster-snapshot. Default is 1. -}
+    , _availability_zone                   :: !(TF.Attr s P.Zone)
+    {- ^ (Optional) The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency. -}
+    , _cluster_identifier                  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The Cluster Identifier. Must be a lower case string. -}
+    , _cluster_parameter_group_name        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the parameter group to be associated with this cluster. -}
+    , _cluster_security_groups             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of security groups to be associated with this cluster. -}
+    , _cluster_subnet_group_name           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC). -}
+    , _cluster_type                        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The cluster type to use. Either @single-node@ or @multi-node@ . -}
+    , _cluster_version                     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The version of the Amazon Redshift engine software that you want to deploy on the cluster. The version selected runs on all the nodes in the cluster. -}
+    , _database_name                       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the first database to be created when the cluster is created. If you do not provide a name, Amazon Redshift will create a default database called @dev@ . -}
+    , _elastic_ip                          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Elastic IP (EIP) address for the cluster. -}
+    , _encrypted                           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) If true , the data in the cluster is encrypted at rest. -}
+    , _enhanced_vpc_routing                :: !(TF.Attr s P.Text)
+    {- ^ (Optional) If true , enhanced VPC routing is enabled. -}
+    , _final_snapshot_identifier           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The identifier of the final snapshot that is to be created immediately before deleting the cluster. If this parameter is provided, @skip_final_snapshot@ must be false. -}
+    , _iam_roles                           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of IAM Role ARNs to associate with the cluster. A Maximum of 10 can be associated to the cluster at any time. -}
+    , _kms_key_id                          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ARN for the KMS encryption key. When specifying @kms_key_id@ , @encrypted@ needs to be set to true. -}
+    , _logging                             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Logging, documented below. -}
+    , _master_password                     :: !(TF.Attr s P.Text)
+    {- ^ (Required unless a @snapshot_identifier@ is provided) Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Password must contain at least 8 chars and contain at least one uppercase letter, one lowercase letter, and one number. -}
+    , _master_username                     :: !(TF.Attr s P.Text)
+    {- ^ (Required unless a @snapshot_identifier@ is provided) Username for the master DB user. -}
+    , _node_type                           :: !(TF.Attr s P.Text)
+    {- ^ (Required) The node type to be provisioned for the cluster. -}
+    , _number_of_nodes                     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node. Default is 1. -}
+    , _owner_account                       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot. -}
+    , _port                                :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings. Part of the connection string requires the port on which the cluster will listen for incoming connections. Default port is 5439. -}
+    , _preferred_maintenance_window        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The weekly time range (in UTC) during which automated cluster maintenance can occur. Format: ddd:hh24:mi-ddd:hh24:mi -}
+    , _publicly_accessible                 :: !(TF.Attr s P.Text)
+    {- ^ (Optional) If true, the cluster can be accessed from a public network. Default is @true@ . -}
+    , _skip_final_snapshot                 :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Determines whether a final snapshot of the cluster is created before Amazon Redshift deletes the cluster. If true , a final cluster snapshot is not created. If false , a final cluster snapshot is created before the cluster is deleted. Default is false. -}
+    , _snapshot_cluster_identifier         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the cluster the source snapshot was created from. -}
+    , _snapshot_copy                       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Configuration of automatic copy of snapshots from one region to another. Documented below. -}
+    , _snapshot_identifier                 :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the snapshot from which to create the new cluster. -}
+    , _tags                                :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) A mapping of tags to assign to the resource. -}
+    , _vpc_security_group_ids              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (RedshiftClusterResource s) where
+    toHCL RedshiftClusterResource{..} = TF.inline $ catMaybes
+        [ TF.assign "allow_version_upgrade" <$> TF.attribute _allow_version_upgrade
+        , TF.assign "automated_snapshot_retention_period" <$> TF.attribute _automated_snapshot_retention_period
+        , TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "cluster_identifier" <$> TF.attribute _cluster_identifier
-        , TF.assign "cluster_identifier_prefix" <$> TF.attribute _cluster_identifier_prefix
+        , TF.assign "cluster_parameter_group_name" <$> TF.attribute _cluster_parameter_group_name
+        , TF.assign "cluster_security_groups" <$> TF.attribute _cluster_security_groups
+        , TF.assign "cluster_subnet_group_name" <$> TF.attribute _cluster_subnet_group_name
+        , TF.assign "cluster_type" <$> TF.attribute _cluster_type
+        , TF.assign "cluster_version" <$> TF.attribute _cluster_version
         , TF.assign "database_name" <$> TF.attribute _database_name
-        , TF.assign "db_cluster_parameter_group_name" <$> TF.attribute _db_cluster_parameter_group_name
-        , TF.assign "db_subnet_group_name" <$> TF.attribute _db_subnet_group_name
-        , TF.assign "engine" <$> TF.attribute _engine
-        , TF.assign "engine_version" <$> TF.attribute _engine_version
+        , TF.assign "elastic_ip" <$> TF.attribute _elastic_ip
+        , TF.assign "encrypted" <$> TF.attribute _encrypted
+        , TF.assign "enhanced_vpc_routing" <$> TF.attribute _enhanced_vpc_routing
         , TF.assign "final_snapshot_identifier" <$> TF.attribute _final_snapshot_identifier
-        , TF.assign "iam_database_authentication_enabled" <$> TF.attribute _iam_database_authentication_enabled
         , TF.assign "iam_roles" <$> TF.attribute _iam_roles
         , TF.assign "kms_key_id" <$> TF.attribute _kms_key_id
+        , TF.assign "logging" <$> TF.attribute _logging
         , TF.assign "master_password" <$> TF.attribute _master_password
         , TF.assign "master_username" <$> TF.attribute _master_username
+        , TF.assign "node_type" <$> TF.attribute _node_type
+        , TF.assign "number_of_nodes" <$> TF.attribute _number_of_nodes
+        , TF.assign "owner_account" <$> TF.attribute _owner_account
         , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "preferred_backup_window" <$> TF.attribute _preferred_backup_window
         , TF.assign "preferred_maintenance_window" <$> TF.attribute _preferred_maintenance_window
+        , TF.assign "publicly_accessible" <$> TF.attribute _publicly_accessible
         , TF.assign "skip_final_snapshot" <$> TF.attribute _skip_final_snapshot
+        , TF.assign "snapshot_cluster_identifier" <$> TF.attribute _snapshot_cluster_identifier
+        , TF.assign "snapshot_copy" <$> TF.attribute _snapshot_copy
         , TF.assign "snapshot_identifier" <$> TF.attribute _snapshot_identifier
-        , TF.assign "storage_encrypted" <$> TF.attribute _storage_encrypted
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vpc_security_group_ids" <$> TF.attribute _vpc_security_group_ids
         ]
 
-instance P.HasApplyImmediately (RdsClusterResource s) (TF.Attr s P.Text) where
-    applyImmediately =
-        lens (_apply_immediately :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _apply_immediately = a } :: RdsClusterResource s)
+instance P.HasAllowVersionUpgrade (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    allowVersionUpgrade =
+        lens (_allow_version_upgrade :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _allow_version_upgrade = a } :: RedshiftClusterResource s)
 
-instance P.HasAvailabilityZones (RdsClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    availabilityZones =
-        lens (_availability_zones :: RdsClusterResource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _availability_zones = a } :: RdsClusterResource s)
+instance P.HasAutomatedSnapshotRetentionPeriod (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    automatedSnapshotRetentionPeriod =
+        lens (_automated_snapshot_retention_period :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _automated_snapshot_retention_period = a } :: RedshiftClusterResource s)
 
-instance P.HasBackupRetentionPeriod (RdsClusterResource s) (TF.Attr s P.Text) where
-    backupRetentionPeriod =
-        lens (_backup_retention_period :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _backup_retention_period = a } :: RdsClusterResource s)
+instance P.HasAvailabilityZone (RedshiftClusterResource s) (TF.Attr s P.Zone) where
+    availabilityZone =
+        lens (_availability_zone :: RedshiftClusterResource s -> TF.Attr s P.Zone)
+             (\s a -> s { _availability_zone = a } :: RedshiftClusterResource s)
 
-instance P.HasClusterIdentifier (RdsClusterResource s) (TF.Attr s P.Text) where
+instance P.HasClusterIdentifier (RedshiftClusterResource s) (TF.Attr s P.Text) where
     clusterIdentifier =
-        lens (_cluster_identifier :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cluster_identifier = a } :: RdsClusterResource s)
+        lens (_cluster_identifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_identifier = a } :: RedshiftClusterResource s)
 
-instance P.HasClusterIdentifierPrefix (RdsClusterResource s) (TF.Attr s P.Text) where
-    clusterIdentifierPrefix =
-        lens (_cluster_identifier_prefix :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cluster_identifier_prefix = a } :: RdsClusterResource s)
+instance P.HasClusterParameterGroupName (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    clusterParameterGroupName =
+        lens (_cluster_parameter_group_name :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_parameter_group_name = a } :: RedshiftClusterResource s)
 
-instance P.HasDatabaseName (RdsClusterResource s) (TF.Attr s P.Text) where
+instance P.HasClusterSecurityGroups (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    clusterSecurityGroups =
+        lens (_cluster_security_groups :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_security_groups = a } :: RedshiftClusterResource s)
+
+instance P.HasClusterSubnetGroupName (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    clusterSubnetGroupName =
+        lens (_cluster_subnet_group_name :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_subnet_group_name = a } :: RedshiftClusterResource s)
+
+instance P.HasClusterType (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    clusterType =
+        lens (_cluster_type :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_type = a } :: RedshiftClusterResource s)
+
+instance P.HasClusterVersion (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    clusterVersion =
+        lens (_cluster_version :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_version = a } :: RedshiftClusterResource s)
+
+instance P.HasDatabaseName (RedshiftClusterResource s) (TF.Attr s P.Text) where
     databaseName =
-        lens (_database_name :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _database_name = a } :: RdsClusterResource s)
+        lens (_database_name :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _database_name = a } :: RedshiftClusterResource s)
 
-instance P.HasDbClusterParameterGroupName (RdsClusterResource s) (TF.Attr s P.Text) where
-    dbClusterParameterGroupName =
-        lens (_db_cluster_parameter_group_name :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _db_cluster_parameter_group_name = a } :: RdsClusterResource s)
+instance P.HasElasticIp (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    elasticIp =
+        lens (_elastic_ip :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _elastic_ip = a } :: RedshiftClusterResource s)
 
-instance P.HasDbSubnetGroupName (RdsClusterResource s) (TF.Attr s P.Text) where
-    dbSubnetGroupName =
-        lens (_db_subnet_group_name :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _db_subnet_group_name = a } :: RdsClusterResource s)
+instance P.HasEncrypted (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    encrypted =
+        lens (_encrypted :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _encrypted = a } :: RedshiftClusterResource s)
 
-instance P.HasEngine (RdsClusterResource s) (TF.Attr s P.Text) where
-    engine =
-        lens (_engine :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _engine = a } :: RdsClusterResource s)
+instance P.HasEnhancedVpcRouting (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    enhancedVpcRouting =
+        lens (_enhanced_vpc_routing :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enhanced_vpc_routing = a } :: RedshiftClusterResource s)
 
-instance P.HasEngineVersion (RdsClusterResource s) (TF.Attr s P.Text) where
-    engineVersion =
-        lens (_engine_version :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _engine_version = a } :: RdsClusterResource s)
-
-instance P.HasFinalSnapshotIdentifier (RdsClusterResource s) (TF.Attr s P.Text) where
+instance P.HasFinalSnapshotIdentifier (RedshiftClusterResource s) (TF.Attr s P.Text) where
     finalSnapshotIdentifier =
-        lens (_final_snapshot_identifier :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _final_snapshot_identifier = a } :: RdsClusterResource s)
+        lens (_final_snapshot_identifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _final_snapshot_identifier = a } :: RedshiftClusterResource s)
 
-instance P.HasIamDatabaseAuthenticationEnabled (RdsClusterResource s) (TF.Attr s P.Bool) where
-    iamDatabaseAuthenticationEnabled =
-        lens (_iam_database_authentication_enabled :: RdsClusterResource s -> TF.Attr s P.Bool)
-             (\s a -> s { _iam_database_authentication_enabled = a } :: RdsClusterResource s)
-
-instance P.HasIamRoles (RdsClusterResource s) (TF.Attr s P.Text) where
+instance P.HasIamRoles (RedshiftClusterResource s) (TF.Attr s P.Text) where
     iamRoles =
-        lens (_iam_roles :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _iam_roles = a } :: RdsClusterResource s)
+        lens (_iam_roles :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _iam_roles = a } :: RedshiftClusterResource s)
 
-instance P.HasKmsKeyId (RdsClusterResource s) (TF.Attr s P.Text) where
+instance P.HasKmsKeyId (RedshiftClusterResource s) (TF.Attr s P.Text) where
     kmsKeyId =
-        lens (_kms_key_id :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _kms_key_id = a } :: RdsClusterResource s)
+        lens (_kms_key_id :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _kms_key_id = a } :: RedshiftClusterResource s)
 
-instance P.HasMasterPassword (RdsClusterResource s) (TF.Attr s P.Text) where
+instance P.HasLogging (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    logging =
+        lens (_logging :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _logging = a } :: RedshiftClusterResource s)
+
+instance P.HasMasterPassword (RedshiftClusterResource s) (TF.Attr s P.Text) where
     masterPassword =
-        lens (_master_password :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _master_password = a } :: RdsClusterResource s)
+        lens (_master_password :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _master_password = a } :: RedshiftClusterResource s)
 
-instance P.HasMasterUsername (RdsClusterResource s) (TF.Attr s P.Text) where
+instance P.HasMasterUsername (RedshiftClusterResource s) (TF.Attr s P.Text) where
     masterUsername =
-        lens (_master_username :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _master_username = a } :: RdsClusterResource s)
+        lens (_master_username :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _master_username = a } :: RedshiftClusterResource s)
 
-instance P.HasPort (RdsClusterResource s) (TF.Attr s P.Text) where
+instance P.HasNodeType (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    nodeType =
+        lens (_node_type :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _node_type = a } :: RedshiftClusterResource s)
+
+instance P.HasNumberOfNodes (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    numberOfNodes =
+        lens (_number_of_nodes :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _number_of_nodes = a } :: RedshiftClusterResource s)
+
+instance P.HasOwnerAccount (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    ownerAccount =
+        lens (_owner_account :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _owner_account = a } :: RedshiftClusterResource s)
+
+instance P.HasPort (RedshiftClusterResource s) (TF.Attr s P.Text) where
     port =
-        lens (_port :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _port = a } :: RdsClusterResource s)
+        lens (_port :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _port = a } :: RedshiftClusterResource s)
 
-instance P.HasPreferredBackupWindow (RdsClusterResource s) (TF.Attr s P.Text) where
-    preferredBackupWindow =
-        lens (_preferred_backup_window :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _preferred_backup_window = a } :: RdsClusterResource s)
-
-instance P.HasPreferredMaintenanceWindow (RdsClusterResource s) (TF.Attr s P.Text) where
+instance P.HasPreferredMaintenanceWindow (RedshiftClusterResource s) (TF.Attr s P.Text) where
     preferredMaintenanceWindow =
-        lens (_preferred_maintenance_window :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _preferred_maintenance_window = a } :: RdsClusterResource s)
+        lens (_preferred_maintenance_window :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _preferred_maintenance_window = a } :: RedshiftClusterResource s)
 
-instance P.HasSkipFinalSnapshot (RdsClusterResource s) (TF.Attr s P.Text) where
+instance P.HasPubliclyAccessible (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    publiclyAccessible =
+        lens (_publicly_accessible :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _publicly_accessible = a } :: RedshiftClusterResource s)
+
+instance P.HasSkipFinalSnapshot (RedshiftClusterResource s) (TF.Attr s P.Text) where
     skipFinalSnapshot =
-        lens (_skip_final_snapshot :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _skip_final_snapshot = a } :: RdsClusterResource s)
+        lens (_skip_final_snapshot :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _skip_final_snapshot = a } :: RedshiftClusterResource s)
 
-instance P.HasSnapshotIdentifier (RdsClusterResource s) (TF.Attr s P.Text) where
+instance P.HasSnapshotClusterIdentifier (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    snapshotClusterIdentifier =
+        lens (_snapshot_cluster_identifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _snapshot_cluster_identifier = a } :: RedshiftClusterResource s)
+
+instance P.HasSnapshotCopy (RedshiftClusterResource s) (TF.Attr s P.Text) where
+    snapshotCopy =
+        lens (_snapshot_copy :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _snapshot_copy = a } :: RedshiftClusterResource s)
+
+instance P.HasSnapshotIdentifier (RedshiftClusterResource s) (TF.Attr s P.Text) where
     snapshotIdentifier =
-        lens (_snapshot_identifier :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _snapshot_identifier = a } :: RdsClusterResource s)
+        lens (_snapshot_identifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _snapshot_identifier = a } :: RedshiftClusterResource s)
 
-instance P.HasStorageEncrypted (RdsClusterResource s) (TF.Attr s P.Text) where
-    storageEncrypted =
-        lens (_storage_encrypted :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _storage_encrypted = a } :: RdsClusterResource s)
+instance P.HasTags (RedshiftClusterResource s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: RedshiftClusterResource s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: RedshiftClusterResource s)
 
-instance P.HasVpcSecurityGroupIds (RdsClusterResource s) (TF.Attr s P.Text) where
+instance P.HasVpcSecurityGroupIds (RedshiftClusterResource s) (TF.Attr s P.Text) where
     vpcSecurityGroupIds =
-        lens (_vpc_security_group_ids :: RdsClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vpc_security_group_ids = a } :: RdsClusterResource s)
+        lens (_vpc_security_group_ids :: RedshiftClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vpc_security_group_ids = a } :: RedshiftClusterResource s)
 
-instance s ~ s' => P.HasComputedAllocatedStorage (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedAllocatedStorage x = TF.compute (TF.refKey x) "allocated_storage"
-
-instance s ~ s' => P.HasComputedApplyImmediately (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedApplyImmediately =
-        (_apply_immediately :: RdsClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedAllowVersionUpgrade (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedAllowVersionUpgrade =
+        (_allow_version_upgrade :: RedshiftClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (RdsClusterResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAvailabilityZones x = TF.compute (TF.refKey x) "availability_zones"
+instance s ~ s' => P.HasComputedAutomatedSnapshotRetentionPeriod (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedAutomatedSnapshotRetentionPeriod x = TF.compute (TF.refKey x) "automated_snapshot_retention_period"
 
-instance s ~ s' => P.HasComputedBackupRetentionPeriod (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedBackupRetentionPeriod x = TF.compute (TF.refKey x) "backup_retention_period"
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Zone) where
+    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
-instance s ~ s' => P.HasComputedClusterIdentifier (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedClusterIdentifier (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedClusterIdentifier x = TF.compute (TF.refKey x) "cluster_identifier"
 
-instance s ~ s' => P.HasComputedClusterIdentifierPrefix (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedClusterIdentifierPrefix =
-        (_cluster_identifier_prefix :: RdsClusterResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedClusterParameterGroupName (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedClusterParameterGroupName x = TF.compute (TF.refKey x) "cluster_parameter_group_name"
 
-instance s ~ s' => P.HasComputedClusterMembers (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedClusterMembers x = TF.compute (TF.refKey x) "cluster_members"
+instance s ~ s' => P.HasComputedClusterPublicKey (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedClusterPublicKey x = TF.compute (TF.refKey x) "cluster_public_key"
 
-instance s ~ s' => P.HasComputedClusterResourceId (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedClusterResourceId x = TF.compute (TF.refKey x) "cluster_resource_id"
+instance s ~ s' => P.HasComputedClusterRevisionNumber (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedClusterRevisionNumber x = TF.compute (TF.refKey x) "cluster_revision_number"
 
-instance s ~ s' => P.HasComputedDatabaseName (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedClusterSecurityGroups (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedClusterSecurityGroups x = TF.compute (TF.refKey x) "cluster_security_groups"
+
+instance s ~ s' => P.HasComputedClusterSubnetGroupName (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedClusterSubnetGroupName x = TF.compute (TF.refKey x) "cluster_subnet_group_name"
+
+instance s ~ s' => P.HasComputedClusterType (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedClusterType x = TF.compute (TF.refKey x) "cluster_type"
+
+instance s ~ s' => P.HasComputedClusterVersion (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedClusterVersion x = TF.compute (TF.refKey x) "cluster_version"
+
+instance s ~ s' => P.HasComputedDatabaseName (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedDatabaseName x = TF.compute (TF.refKey x) "database_name"
 
-instance s ~ s' => P.HasComputedDbClusterParameterGroupName (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedDbClusterParameterGroupName =
-        (_db_cluster_parameter_group_name :: RdsClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedDnsName x = TF.compute (TF.refKey x) "dns_name"
+
+instance s ~ s' => P.HasComputedElasticIp (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedElasticIp =
+        (_elastic_ip :: RedshiftClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDbSubnetGroupName (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedDbSubnetGroupName =
-        (_db_subnet_group_name :: RdsClusterResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedEncrypted x = TF.compute (TF.refKey x) "encrypted"
 
-instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
 
-instance s ~ s' => P.HasComputedEngine (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedEngine x = TF.compute (TF.refKey x) "engine"
+instance s ~ s' => P.HasComputedEnhancedVpcRouting (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedEnhancedVpcRouting =
+        (_enhanced_vpc_routing :: RedshiftClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
-instance s ~ s' => P.HasComputedEngineVersion (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedEngineVersion x = TF.compute (TF.refKey x) "engine_version"
-
-instance s ~ s' => P.HasComputedFinalSnapshotIdentifier (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFinalSnapshotIdentifier (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedFinalSnapshotIdentifier =
-        (_final_snapshot_identifier :: RdsClusterResource s -> TF.Attr s P.Text)
+        (_final_snapshot_identifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedHostedZoneId (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedHostedZoneId x = TF.compute (TF.refKey x) "hosted_zone_id"
-
-instance s ~ s' => P.HasComputedIamDatabaseAuthenticationEnabled (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Bool) where
-    computedIamDatabaseAuthenticationEnabled =
-        (_iam_database_authentication_enabled :: RdsClusterResource s -> TF.Attr s P.Bool)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedIamRoles (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIamRoles (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedIamRoles =
-        (_iam_roles :: RdsClusterResource s -> TF.Attr s P.Text)
+        (_iam_roles :: RedshiftClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedKmsKeyId =
-        (_kms_key_id :: RdsClusterResource s -> TF.Attr s P.Text)
+        (_kms_key_id :: RedshiftClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMaintenanceWindow (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedMaintenanceWindow x = TF.compute (TF.refKey x) "maintenance_window"
+instance s ~ s' => P.HasComputedLogging (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedLogging =
+        (_logging :: RedshiftClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
-instance s ~ s' => P.HasComputedMasterPassword (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMasterPassword (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedMasterPassword =
-        (_master_password :: RdsClusterResource s -> TF.Attr s P.Text)
+        (_master_password :: RedshiftClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMasterUsername (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedMasterUsername x = TF.compute (TF.refKey x) "master_username"
+instance s ~ s' => P.HasComputedMasterUsername (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedMasterUsername =
+        (_master_username :: RedshiftClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNodeType (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedNodeType x = TF.compute (TF.refKey x) "node_type"
+
+instance s ~ s' => P.HasComputedNumberOfNodes (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedNumberOfNodes =
+        (_number_of_nodes :: RedshiftClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedOwnerAccount (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedOwnerAccount =
+        (_owner_account :: RedshiftClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedPort x = TF.compute (TF.refKey x) "port"
 
-instance s ~ s' => P.HasComputedPreferredBackupWindow (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedPreferredBackupWindow x = TF.compute (TF.refKey x) "preferred_backup_window"
-
-instance s ~ s' => P.HasComputedPreferredMaintenanceWindow (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPreferredMaintenanceWindow (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedPreferredMaintenanceWindow x = TF.compute (TF.refKey x) "preferred_maintenance_window"
 
-instance s ~ s' => P.HasComputedReaderEndpoint (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedReaderEndpoint x = TF.compute (TF.refKey x) "reader_endpoint"
+instance s ~ s' => P.HasComputedPubliclyAccessible (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedPubliclyAccessible =
+        (_publicly_accessible :: RedshiftClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
-instance s ~ s' => P.HasComputedReplicationSourceIdentifier (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedReplicationSourceIdentifier x = TF.compute (TF.refKey x) "replication_source_identifier"
-
-instance s ~ s' => P.HasComputedSkipFinalSnapshot (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSkipFinalSnapshot (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedSkipFinalSnapshot =
-        (_skip_final_snapshot :: RdsClusterResource s -> TF.Attr s P.Text)
+        (_skip_final_snapshot :: RedshiftClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSnapshotIdentifier (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSnapshotClusterIdentifier (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedSnapshotClusterIdentifier =
+        (_snapshot_cluster_identifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSnapshotCopy (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedSnapshotCopy =
+        (_snapshot_copy :: RedshiftClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSnapshotIdentifier (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedSnapshotIdentifier =
-        (_snapshot_identifier :: RdsClusterResource s -> TF.Attr s P.Text)
+        (_snapshot_identifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
-
-instance s ~ s' => P.HasComputedStorageEncrypted (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedStorageEncrypted x = TF.compute (TF.refKey x) "storage_encrypted"
-
-instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Text) where
-    computedVpcSecurityGroupIds =
-        (_vpc_security_group_ids :: RdsClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
+        (_tags :: RedshiftClusterResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
-rdsClusterResource :: TF.Resource P.AWS (RdsClusterResource s)
-rdsClusterResource =
-    TF.newResource "aws_rds_cluster" $
-        RdsClusterResource {
-              _apply_immediately = TF.Nil
-            , _availability_zones = TF.Nil
-            , _backup_retention_period = TF.Nil
+instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
+    computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "vpc_security_group_ids"
+
+redshiftClusterResource :: TF.Resource P.AWS (RedshiftClusterResource s)
+redshiftClusterResource =
+    TF.newResource "aws_redshift_cluster" $
+        RedshiftClusterResource {
+              _allow_version_upgrade = TF.Nil
+            , _automated_snapshot_retention_period = TF.Nil
+            , _availability_zone = TF.Nil
             , _cluster_identifier = TF.Nil
-            , _cluster_identifier_prefix = TF.Nil
+            , _cluster_parameter_group_name = TF.Nil
+            , _cluster_security_groups = TF.Nil
+            , _cluster_subnet_group_name = TF.Nil
+            , _cluster_type = TF.Nil
+            , _cluster_version = TF.Nil
             , _database_name = TF.Nil
-            , _db_cluster_parameter_group_name = TF.Nil
-            , _db_subnet_group_name = TF.Nil
-            , _engine = TF.Nil
-            , _engine_version = TF.Nil
+            , _elastic_ip = TF.Nil
+            , _encrypted = TF.Nil
+            , _enhanced_vpc_routing = TF.Nil
             , _final_snapshot_identifier = TF.Nil
-            , _iam_database_authentication_enabled = TF.Nil
             , _iam_roles = TF.Nil
             , _kms_key_id = TF.Nil
+            , _logging = TF.Nil
             , _master_password = TF.Nil
             , _master_username = TF.Nil
+            , _node_type = TF.Nil
+            , _number_of_nodes = TF.Nil
+            , _owner_account = TF.Nil
             , _port = TF.Nil
-            , _preferred_backup_window = TF.Nil
             , _preferred_maintenance_window = TF.Nil
+            , _publicly_accessible = TF.Nil
             , _skip_final_snapshot = TF.Nil
+            , _snapshot_cluster_identifier = TF.Nil
+            , _snapshot_copy = TF.Nil
             , _snapshot_identifier = TF.Nil
-            , _storage_encrypted = TF.Nil
+            , _tags = TF.Nil
             , _vpc_security_group_ids = TF.Nil
             }
 
-{- | The @aws_route53_health_check@ AWS resource.
+{- | The @aws_route53_query_log@ AWS resource.
 
-Provides a Route53 health check.
+Provides a Route53 query logging configuration resource. ~> NOTE: There are
+restrictions on the configuration of query logging. Notably, the CloudWatch
+log group must be in the @us-east-1@ region, a permissive CloudWatch log
+resource policy must be in place, and the Route53 hosted zone must be
+public. See
+<https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html?console_help=true#query-logs-configuring>
+for additional details.
 -}
-data Route53HealthCheckResource s = Route53HealthCheckResource {
-      _child_health_threshold          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The minimum number of child health checks that must be healthy for Route 53 to consider the parent health check to be healthy. Valid values are integers between 0 and 256, inclusive -}
-    , _child_healthchecks              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) For a specified parent health check, a list of HealthCheckId values for the associated child health checks. -}
-    , _cloudwatch_alarm_name           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the CloudWatch alarm. -}
-    , _cloudwatch_alarm_region         :: !(TF.Attr s P.Region)
-    {- ^ (Optional) The CloudWatchRegion that the CloudWatch alarm was created in. -}
-    , _enable_sni                      :: !(TF.Attr s P.Bool)
-    {- ^ (Optional) A boolean value that indicates whether Route53 should send the @fqdn@ to the endpoint when performing the health check. This defaults to AWS' defaults: when the @type@ is "HTTPS" @enable_sni@ defaults to @true@ , when @type@ is anything else @enable_sni@ defaults to @false@ . -}
-    , _failure_threshold               :: !(TF.Attr s P.Text)
-    {- ^ (Required) The number of consecutive health checks that an endpoint must pass or fail. -}
-    , _fqdn                            :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The fully qualified domain name of the endpoint to be checked. -}
-    , _insufficient_data_health_status :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The status of the health check when CloudWatch has insufficient data about the state of associated alarm. Valid values are @Healthy@ , @Unhealthy@ and @LastKnownStatus@ . -}
-    , _invert_healthcheck              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A boolean value that indicates whether the status of health check should be inverted. For example, if a health check is healthy but Inverted is True , then Route 53 considers the health check to be unhealthy. -}
-    , _ip_address                      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The IP address of the endpoint to be checked. -}
-    , _measure_latency                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A Boolean value that indicates whether you want Route 53 to measure the latency between health checkers in multiple AWS regions and your endpoint and to display CloudWatch latency graphs in the Route 53 console. -}
-    , _port                            :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The port of the endpoint to be checked. -}
-    , _reference_name                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) This is a reference name used in Caller Reference (helpful for identifying single health_check set amongst others) -}
-    , _regions                         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of AWS regions that you want Amazon Route 53 health checkers to check the specified endpoint from. -}
-    , _request_interval                :: !(TF.Attr s P.Text)
-    {- ^ (Required) The number of seconds between the time that Amazon Route 53 gets a response from your endpoint and the time that it sends the next health-check request. -}
-    , _resource_path                   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The path that you want Amazon Route 53 to request when performing health checks. -}
-    , _search_string                   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) String searched in the first 5120 bytes of the response body for check to be considered healthy. -}
-    , _tags                            :: !(TF.Attr s (P.Tags s))
-    {- ^ (Optional) A mapping of tags to assign to the health check. -}
-    , _type'                           :: !(TF.Attr s P.Text)
-    {- ^ (Required) The protocol to use when performing health checks. Valid values are @HTTP@ , @HTTPS@ , @HTTP_STR_MATCH@ , @HTTPS_STR_MATCH@ , @TCP@ , @CALCULATED@ and @CLOUDWATCH_METRIC@ . -}
+data Route53QueryLogResource s = Route53QueryLogResource {
+      _cloudwatch_log_group_arn :: !(TF.Attr s P.Text)
+    {- ^ (Required) CloudWatch log group ARN to send query logs. -}
+    , _zone_id                  :: !(TF.Attr s P.Text)
+    {- ^ (Required) Route53 hosted zone ID to enable query logs. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (Route53HealthCheckResource s) where
-    toHCL Route53HealthCheckResource{..} = TF.inline $ catMaybes
-        [ TF.assign "child_health_threshold" <$> TF.attribute _child_health_threshold
-        , TF.assign "child_healthchecks" <$> TF.attribute _child_healthchecks
-        , TF.assign "cloudwatch_alarm_name" <$> TF.attribute _cloudwatch_alarm_name
-        , TF.assign "cloudwatch_alarm_region" <$> TF.attribute _cloudwatch_alarm_region
-        , TF.assign "enable_sni" <$> TF.attribute _enable_sni
-        , TF.assign "failure_threshold" <$> TF.attribute _failure_threshold
-        , TF.assign "fqdn" <$> TF.attribute _fqdn
-        , TF.assign "insufficient_data_health_status" <$> TF.attribute _insufficient_data_health_status
-        , TF.assign "invert_healthcheck" <$> TF.attribute _invert_healthcheck
-        , TF.assign "ip_address" <$> TF.attribute _ip_address
-        , TF.assign "measure_latency" <$> TF.attribute _measure_latency
-        , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "reference_name" <$> TF.attribute _reference_name
-        , TF.assign "regions" <$> TF.attribute _regions
-        , TF.assign "request_interval" <$> TF.attribute _request_interval
-        , TF.assign "resource_path" <$> TF.attribute _resource_path
-        , TF.assign "search_string" <$> TF.attribute _search_string
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "type" <$> TF.attribute _type'
+instance TF.ToHCL (Route53QueryLogResource s) where
+    toHCL Route53QueryLogResource{..} = TF.inline $ catMaybes
+        [ TF.assign "cloudwatch_log_group_arn" <$> TF.attribute _cloudwatch_log_group_arn
+        , TF.assign "zone_id" <$> TF.attribute _zone_id
         ]
 
-instance P.HasChildHealthThreshold (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    childHealthThreshold =
-        lens (_child_health_threshold :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _child_health_threshold = a } :: Route53HealthCheckResource s)
+instance P.HasCloudwatchLogGroupArn (Route53QueryLogResource s) (TF.Attr s P.Text) where
+    cloudwatchLogGroupArn =
+        lens (_cloudwatch_log_group_arn :: Route53QueryLogResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cloudwatch_log_group_arn = a } :: Route53QueryLogResource s)
 
-instance P.HasChildHealthchecks (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    childHealthchecks =
-        lens (_child_healthchecks :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _child_healthchecks = a } :: Route53HealthCheckResource s)
+instance P.HasZoneId (Route53QueryLogResource s) (TF.Attr s P.Text) where
+    zoneId =
+        lens (_zone_id :: Route53QueryLogResource s -> TF.Attr s P.Text)
+             (\s a -> s { _zone_id = a } :: Route53QueryLogResource s)
 
-instance P.HasCloudwatchAlarmName (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    cloudwatchAlarmName =
-        lens (_cloudwatch_alarm_name :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cloudwatch_alarm_name = a } :: Route53HealthCheckResource s)
-
-instance P.HasCloudwatchAlarmRegion (Route53HealthCheckResource s) (TF.Attr s P.Region) where
-    cloudwatchAlarmRegion =
-        lens (_cloudwatch_alarm_region :: Route53HealthCheckResource s -> TF.Attr s P.Region)
-             (\s a -> s { _cloudwatch_alarm_region = a } :: Route53HealthCheckResource s)
-
-instance P.HasEnableSni (Route53HealthCheckResource s) (TF.Attr s P.Bool) where
-    enableSni =
-        lens (_enable_sni :: Route53HealthCheckResource s -> TF.Attr s P.Bool)
-             (\s a -> s { _enable_sni = a } :: Route53HealthCheckResource s)
-
-instance P.HasFailureThreshold (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    failureThreshold =
-        lens (_failure_threshold :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _failure_threshold = a } :: Route53HealthCheckResource s)
-
-instance P.HasFqdn (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    fqdn =
-        lens (_fqdn :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _fqdn = a } :: Route53HealthCheckResource s)
-
-instance P.HasInsufficientDataHealthStatus (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    insufficientDataHealthStatus =
-        lens (_insufficient_data_health_status :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _insufficient_data_health_status = a } :: Route53HealthCheckResource s)
-
-instance P.HasInvertHealthcheck (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    invertHealthcheck =
-        lens (_invert_healthcheck :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _invert_healthcheck = a } :: Route53HealthCheckResource s)
-
-instance P.HasIpAddress (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    ipAddress =
-        lens (_ip_address :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_address = a } :: Route53HealthCheckResource s)
-
-instance P.HasMeasureLatency (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    measureLatency =
-        lens (_measure_latency :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _measure_latency = a } :: Route53HealthCheckResource s)
-
-instance P.HasPort (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    port =
-        lens (_port :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _port = a } :: Route53HealthCheckResource s)
-
-instance P.HasReferenceName (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    referenceName =
-        lens (_reference_name :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _reference_name = a } :: Route53HealthCheckResource s)
-
-instance P.HasRegions (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    regions =
-        lens (_regions :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _regions = a } :: Route53HealthCheckResource s)
-
-instance P.HasRequestInterval (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    requestInterval =
-        lens (_request_interval :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _request_interval = a } :: Route53HealthCheckResource s)
-
-instance P.HasResourcePath (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    resourcePath =
-        lens (_resource_path :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_path = a } :: Route53HealthCheckResource s)
-
-instance P.HasSearchString (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    searchString =
-        lens (_search_string :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _search_string = a } :: Route53HealthCheckResource s)
-
-instance P.HasTags (Route53HealthCheckResource s) (TF.Attr s (P.Tags s)) where
-    tags =
-        lens (_tags :: Route53HealthCheckResource s -> TF.Attr s (P.Tags s))
-             (\s a -> s { _tags = a } :: Route53HealthCheckResource s)
-
-instance P.HasType' (Route53HealthCheckResource s) (TF.Attr s P.Text) where
-    type' =
-        lens (_type' :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: Route53HealthCheckResource s)
-
-instance s ~ s' => P.HasComputedChildHealthThreshold (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedChildHealthThreshold =
-        (_child_health_threshold :: Route53HealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedCloudwatchLogGroupArn (TF.Ref s' (Route53QueryLogResource s)) (TF.Attr s P.Text) where
+    computedCloudwatchLogGroupArn =
+        (_cloudwatch_log_group_arn :: Route53QueryLogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedChildHealthchecks (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedChildHealthchecks =
-        (_child_healthchecks :: Route53HealthCheckResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedId (TF.Ref s' (Route53QueryLogResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (Route53QueryLogResource s)) (TF.Attr s P.Text) where
+    computedZoneId =
+        (_zone_id :: Route53QueryLogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedCloudwatchAlarmName (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedCloudwatchAlarmName =
-        (_cloudwatch_alarm_name :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCloudwatchAlarmRegion (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Region) where
-    computedCloudwatchAlarmRegion =
-        (_cloudwatch_alarm_region :: Route53HealthCheckResource s -> TF.Attr s P.Region)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEnableSni (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Bool) where
-    computedEnableSni =
-        (_enable_sni :: Route53HealthCheckResource s -> TF.Attr s P.Bool)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFailureThreshold (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedFailureThreshold =
-        (_failure_threshold :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedFqdn =
-        (_fqdn :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedInsufficientDataHealthStatus (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedInsufficientDataHealthStatus =
-        (_insufficient_data_health_status :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedInvertHealthcheck (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedInvertHealthcheck =
-        (_invert_healthcheck :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedIpAddress =
-        (_ip_address :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMeasureLatency (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedMeasureLatency =
-        (_measure_latency :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedPort =
-        (_port :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedReferenceName (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedReferenceName =
-        (_reference_name :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRegions (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedRegions =
-        (_regions :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRequestInterval (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedRequestInterval =
-        (_request_interval :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedResourcePath (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedResourcePath =
-        (_resource_path :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSearchString (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedSearchString =
-        (_search_string :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s (P.Tags s)) where
-    computedTags =
-        (_tags :: Route53HealthCheckResource s -> TF.Attr s (P.Tags s))
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-route53HealthCheckResource :: TF.Resource P.AWS (Route53HealthCheckResource s)
-route53HealthCheckResource =
-    TF.newResource "aws_route53_health_check" $
-        Route53HealthCheckResource {
-              _child_health_threshold = TF.Nil
-            , _child_healthchecks = TF.Nil
-            , _cloudwatch_alarm_name = TF.Nil
-            , _cloudwatch_alarm_region = TF.Nil
-            , _enable_sni = TF.Nil
-            , _failure_threshold = TF.Nil
-            , _fqdn = TF.Nil
-            , _insufficient_data_health_status = TF.Nil
-            , _invert_healthcheck = TF.Nil
-            , _ip_address = TF.Nil
-            , _measure_latency = TF.Nil
-            , _port = TF.Nil
-            , _reference_name = TF.Nil
-            , _regions = TF.Nil
-            , _request_interval = TF.Nil
-            , _resource_path = TF.Nil
-            , _search_string = TF.Nil
-            , _tags = TF.Nil
-            , _type' = TF.Nil
+route53QueryLogResource :: TF.Resource P.AWS (Route53QueryLogResource s)
+route53QueryLogResource =
+    TF.newResource "aws_route53_query_log" $
+        Route53QueryLogResource {
+              _cloudwatch_log_group_arn = TF.Nil
+            , _zone_id = TF.Nil
             }
 
 {- | The @aws_route53_record@ AWS resource.
@@ -10519,7 +10064,7 @@ data Route53RecordResource s = Route53RecordResource {
     , _latency_routing_policy           :: !(TF.Attr s P.Text)
     {- ^ (Optional) A block indicating a routing policy based on the latency between the requestor and an AWS region. Conflicts with any other routing policy. Documented below. -}
     , _multivalue_answer_routing_policy :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A block indicating a multivalue answer routing policy. Conflicts with any other routing policy. -}
+    {- ^ (Optional) Set to @true@ to indicate a multivalue answer routing policy. Conflicts with any other routing policy. -}
     , _name                             :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the record. -}
     , _records                          :: !(TF.Attr s [TF.Attr s P.Text])
@@ -10663,9 +10208,7 @@ instance s ~ s' => P.HasComputedMultivalueAnswerRoutingPolicy (TF.Ref s' (Route5
             . TF.refValue
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Route53RecordResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: Route53RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedRecords (TF.Ref s' (Route53RecordResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedRecords =
@@ -10717,257 +10260,6 @@ route53RecordResource =
             , _zone_id = TF.Nil
             }
 
-{- | The @aws_route53_zone@ AWS resource.
-
-Provides a Route53 Hosted Zone resource.
--}
-data Route53ZoneResource s = Route53ZoneResource {
-      _comment           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A comment for the hosted zone. Defaults to 'Managed by Terraform'. -}
-    , _delegation_set_id :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of the reusable delegation set whose NS records you want to assign to the hosted zone. Conflicts w/ @vpc_id@ as delegation sets can only be used for public zones. -}
-    , _force_destroy     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Whether to destroy all records (possibly managed outside of Terraform) in the zone when destroying the zone. -}
-    , _name              :: !(TF.Attr s P.Text)
-    {- ^ (Required) This is the name of the hosted zone. -}
-    , _tags              :: !(TF.Attr s (P.Tags s))
-    {- ^ (Optional) A mapping of tags to assign to the zone. -}
-    , _vpc_id            :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The VPC to associate with a private hosted zone. Specifying @vpc_id@ will create a private hosted zone. Conflicts w/ @delegation_set_id@ as delegation sets can only be used for public zones. -}
-    , _vpc_region        :: !(TF.Attr s P.Region)
-    {- ^ (Optional) The VPC's region. Defaults to the region of the AWS provider. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (Route53ZoneResource s) where
-    toHCL Route53ZoneResource{..} = TF.inline $ catMaybes
-        [ TF.assign "comment" <$> TF.attribute _comment
-        , TF.assign "delegation_set_id" <$> TF.attribute _delegation_set_id
-        , TF.assign "force_destroy" <$> TF.attribute _force_destroy
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
-        , TF.assign "vpc_region" <$> TF.attribute _vpc_region
-        ]
-
-instance P.HasComment (Route53ZoneResource s) (TF.Attr s P.Text) where
-    comment =
-        lens (_comment :: Route53ZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _comment = a } :: Route53ZoneResource s)
-
-instance P.HasDelegationSetId (Route53ZoneResource s) (TF.Attr s P.Text) where
-    delegationSetId =
-        lens (_delegation_set_id :: Route53ZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _delegation_set_id = a } :: Route53ZoneResource s)
-
-instance P.HasForceDestroy (Route53ZoneResource s) (TF.Attr s P.Text) where
-    forceDestroy =
-        lens (_force_destroy :: Route53ZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _force_destroy = a } :: Route53ZoneResource s)
-
-instance P.HasName (Route53ZoneResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: Route53ZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: Route53ZoneResource s)
-
-instance P.HasTags (Route53ZoneResource s) (TF.Attr s (P.Tags s)) where
-    tags =
-        lens (_tags :: Route53ZoneResource s -> TF.Attr s (P.Tags s))
-             (\s a -> s { _tags = a } :: Route53ZoneResource s)
-
-instance P.HasVpcId (Route53ZoneResource s) (TF.Attr s P.Text) where
-    vpcId =
-        lens (_vpc_id :: Route53ZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vpc_id = a } :: Route53ZoneResource s)
-
-instance P.HasVpcRegion (Route53ZoneResource s) (TF.Attr s P.Region) where
-    vpcRegion =
-        lens (_vpc_region :: Route53ZoneResource s -> TF.Attr s P.Region)
-             (\s a -> s { _vpc_region = a } :: Route53ZoneResource s)
-
-instance s ~ s' => P.HasComputedComment (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s P.Text) where
-    computedComment =
-        (_comment :: Route53ZoneResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDelegationSetId (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s P.Text) where
-    computedDelegationSetId =
-        (_delegation_set_id :: Route53ZoneResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedForceDestroy (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s P.Text) where
-    computedForceDestroy =
-        (_force_destroy :: Route53ZoneResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: Route53ZoneResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s P.Text) where
-    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s (P.Tags s)) where
-    computedTags =
-        (_tags :: Route53ZoneResource s -> TF.Attr s (P.Tags s))
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s P.Text) where
-    computedVpcId =
-        (_vpc_id :: Route53ZoneResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVpcRegion (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s P.Region) where
-    computedVpcRegion =
-        (_vpc_region :: Route53ZoneResource s -> TF.Attr s P.Region)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s P.Text) where
-    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
-
-route53ZoneResource :: TF.Resource P.AWS (Route53ZoneResource s)
-route53ZoneResource =
-    TF.newResource "aws_route53_zone" $
-        Route53ZoneResource {
-              _comment = TF.Nil
-            , _delegation_set_id = TF.Nil
-            , _force_destroy = TF.Nil
-            , _name = TF.Nil
-            , _tags = TF.Nil
-            , _vpc_id = TF.Nil
-            , _vpc_region = TF.Nil
-            }
-
-{- | The @aws_route@ AWS resource.
-
-Provides a resource to create a routing table entry (a route) in a VPC
-routing table. ~> NOTE on Route Tables and Routes: Terraform currently
-provides both a standalone Route resource and a <route_table.html> resource
-with routes defined in-line. At this time you cannot use a Route Table with
-in-line routes in conjunction with any Route resources. Doing so will cause
-a conflict of rule settings and will overwrite rules.
--}
-data RouteResource s = RouteResource {
-      _destination_cidr_block      :: !(TF.Attr s P.IPRange)
-    {- ^ (Optional) The destination CIDR block. -}
-    , _destination_ipv6_cidr_block :: !(TF.Attr s P.IPRange)
-    {- ^ (Optional) The destination IPv6 CIDR block. -}
-    , _egress_only_gateway_id      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) An ID of a VPC Egress Only Internet Gateway. -}
-    , _gateway_id                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) An ID of a VPC internet gateway or a virtual private gateway. -}
-    , _instance_id                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) An ID of an EC2 instance. -}
-    , _nat_gateway_id              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) An ID of a VPC NAT gateway. -}
-    , _network_interface_id        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) An ID of a network interface. -}
-    , _route_table_id              :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the routing table. -}
-    , _vpc_peering_connection_id   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) An ID of a VPC peering connection. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (RouteResource s) where
-    toHCL RouteResource{..} = TF.inline $ catMaybes
-        [ TF.assign "destination_cidr_block" <$> TF.attribute _destination_cidr_block
-        , TF.assign "destination_ipv6_cidr_block" <$> TF.attribute _destination_ipv6_cidr_block
-        , TF.assign "egress_only_gateway_id" <$> TF.attribute _egress_only_gateway_id
-        , TF.assign "gateway_id" <$> TF.attribute _gateway_id
-        , TF.assign "instance_id" <$> TF.attribute _instance_id
-        , TF.assign "nat_gateway_id" <$> TF.attribute _nat_gateway_id
-        , TF.assign "network_interface_id" <$> TF.attribute _network_interface_id
-        , TF.assign "route_table_id" <$> TF.attribute _route_table_id
-        , TF.assign "vpc_peering_connection_id" <$> TF.attribute _vpc_peering_connection_id
-        ]
-
-instance P.HasDestinationCidrBlock (RouteResource s) (TF.Attr s P.IPRange) where
-    destinationCidrBlock =
-        lens (_destination_cidr_block :: RouteResource s -> TF.Attr s P.IPRange)
-             (\s a -> s { _destination_cidr_block = a } :: RouteResource s)
-
-instance P.HasDestinationIpv6CidrBlock (RouteResource s) (TF.Attr s P.IPRange) where
-    destinationIpv6CidrBlock =
-        lens (_destination_ipv6_cidr_block :: RouteResource s -> TF.Attr s P.IPRange)
-             (\s a -> s { _destination_ipv6_cidr_block = a } :: RouteResource s)
-
-instance P.HasEgressOnlyGatewayId (RouteResource s) (TF.Attr s P.Text) where
-    egressOnlyGatewayId =
-        lens (_egress_only_gateway_id :: RouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _egress_only_gateway_id = a } :: RouteResource s)
-
-instance P.HasGatewayId (RouteResource s) (TF.Attr s P.Text) where
-    gatewayId =
-        lens (_gateway_id :: RouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _gateway_id = a } :: RouteResource s)
-
-instance P.HasInstanceId (RouteResource s) (TF.Attr s P.Text) where
-    instanceId =
-        lens (_instance_id :: RouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_id = a } :: RouteResource s)
-
-instance P.HasNatGatewayId (RouteResource s) (TF.Attr s P.Text) where
-    natGatewayId =
-        lens (_nat_gateway_id :: RouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _nat_gateway_id = a } :: RouteResource s)
-
-instance P.HasNetworkInterfaceId (RouteResource s) (TF.Attr s P.Text) where
-    networkInterfaceId =
-        lens (_network_interface_id :: RouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network_interface_id = a } :: RouteResource s)
-
-instance P.HasRouteTableId (RouteResource s) (TF.Attr s P.Text) where
-    routeTableId =
-        lens (_route_table_id :: RouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _route_table_id = a } :: RouteResource s)
-
-instance P.HasVpcPeeringConnectionId (RouteResource s) (TF.Attr s P.Text) where
-    vpcPeeringConnectionId =
-        lens (_vpc_peering_connection_id :: RouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vpc_peering_connection_id = a } :: RouteResource s)
-
-instance s ~ s' => P.HasComputedDestinationCidrBlock (TF.Ref s' (RouteResource s)) (TF.Attr s P.IPRange) where
-    computedDestinationCidrBlock x = TF.compute (TF.refKey x) "destination_cidr_block"
-
-instance s ~ s' => P.HasComputedDestinationIpv6CidrBlock (TF.Ref s' (RouteResource s)) (TF.Attr s P.IPRange) where
-    computedDestinationIpv6CidrBlock x = TF.compute (TF.refKey x) "destination_ipv6_cidr_block"
-
-instance s ~ s' => P.HasComputedEgressOnlyGatewayId (TF.Ref s' (RouteResource s)) (TF.Attr s P.Text) where
-    computedEgressOnlyGatewayId x = TF.compute (TF.refKey x) "egress_only_gateway_id"
-
-instance s ~ s' => P.HasComputedGatewayId (TF.Ref s' (RouteResource s)) (TF.Attr s P.Text) where
-    computedGatewayId x = TF.compute (TF.refKey x) "gateway_id"
-
-instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (RouteResource s)) (TF.Attr s P.Text) where
-    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
-
-instance s ~ s' => P.HasComputedNatGatewayId (TF.Ref s' (RouteResource s)) (TF.Attr s P.Text) where
-    computedNatGatewayId x = TF.compute (TF.refKey x) "nat_gateway_id"
-
-instance s ~ s' => P.HasComputedNetworkInterfaceId (TF.Ref s' (RouteResource s)) (TF.Attr s P.Text) where
-    computedNetworkInterfaceId x = TF.compute (TF.refKey x) "network_interface_id"
-
-instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (RouteResource s)) (TF.Attr s P.Text) where
-    computedRouteTableId x = TF.compute (TF.refKey x) "route_table_id"
-
-instance s ~ s' => P.HasComputedVpcPeeringConnectionId (TF.Ref s' (RouteResource s)) (TF.Attr s P.Text) where
-    computedVpcPeeringConnectionId x = TF.compute (TF.refKey x) "vpc_peering_connection_id"
-
-routeResource :: TF.Resource P.AWS (RouteResource s)
-routeResource =
-    TF.newResource "aws_route" $
-        RouteResource {
-              _destination_cidr_block = TF.Nil
-            , _destination_ipv6_cidr_block = TF.Nil
-            , _egress_only_gateway_id = TF.Nil
-            , _gateway_id = TF.Nil
-            , _instance_id = TF.Nil
-            , _nat_gateway_id = TF.Nil
-            , _network_interface_id = TF.Nil
-            , _route_table_id = TF.Nil
-            , _vpc_peering_connection_id = TF.Nil
-            }
-
 {- | The @aws_route_table_association@ AWS resource.
 
 Provides a resource to create an association between a subnet and routing
@@ -11017,65 +10309,135 @@ routeTableAssociationResource =
             , _subnet_id = TF.Nil
             }
 
-{- | The @aws_s3_bucket_metric@ AWS resource.
+{- | The @aws_s3_bucket_inventory@ AWS resource.
 
 Provides a S3 bucket
-<http://docs.aws.amazon.com/AmazonS3/latest/dev/metrics-configurations.html>
+<https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html>
 resource.
 -}
-data S3BucketMetricResource s = S3BucketMetricResource {
-      _bucket :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the bucket to put metric configuration. -}
-    , _filter :: !(TF.Attr s P.Text)
-    {- ^ (Optional) <http://docs.aws.amazon.com/AmazonS3/latest/dev/metrics-configurations.html#metrics-configurations-filter> that accepts a prefix, tags, or a logical AND of prefix and tags (documented below). -}
-    , _name   :: !(TF.Attr s P.Text)
-    {- ^ (Required) Unique identifier of the metrics configuration for the bucket. -}
+data S3BucketInventoryResource s = S3BucketInventoryResource {
+      _bucket                   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the bucket to put inventory configuration. -}
+    , _destination              :: !(TF.Attr s P.Text)
+    {- ^ (Required) Destination bucket where inventory list files are written (documented below). -}
+    , _enabled                  :: !(TF.Attr s P.Bool)
+    {- ^ (Optional, Default: true) Specifies whether the inventory is enabled or disabled. -}
+    , _filter                   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Object filtering that accepts a prefix (documented below). -}
+    , _included_object_versions :: !(TF.Attr s P.Text)
+    {- ^ (Required) Object filtering that accepts a prefix (documented below). Can be @All@ or @Current@ . -}
+    , _name                     :: !(TF.Attr s P.Text)
+    {- ^ (Required) Unique identifier of the inventory configuration for the bucket. -}
+    , _optional_fields          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Contains the optional fields that are included in the inventory results. -}
+    , _schedule                 :: !(TF.Attr s P.Text)
+    {- ^ (Required) Contains the frequency for generating inventory results (documented below). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (S3BucketMetricResource s) where
-    toHCL S3BucketMetricResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (S3BucketInventoryResource s) where
+    toHCL S3BucketInventoryResource{..} = TF.inline $ catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "destination" <$> TF.attribute _destination
+        , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "included_object_versions" <$> TF.attribute _included_object_versions
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "optional_fields" <$> TF.attribute _optional_fields
+        , TF.assign "schedule" <$> TF.attribute _schedule
         ]
 
-instance P.HasBucket (S3BucketMetricResource s) (TF.Attr s P.Text) where
+instance P.HasBucket (S3BucketInventoryResource s) (TF.Attr s P.Text) where
     bucket =
-        lens (_bucket :: S3BucketMetricResource s -> TF.Attr s P.Text)
-             (\s a -> s { _bucket = a } :: S3BucketMetricResource s)
+        lens (_bucket :: S3BucketInventoryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bucket = a } :: S3BucketInventoryResource s)
 
-instance P.HasFilter (S3BucketMetricResource s) (TF.Attr s P.Text) where
+instance P.HasDestination (S3BucketInventoryResource s) (TF.Attr s P.Text) where
+    destination =
+        lens (_destination :: S3BucketInventoryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _destination = a } :: S3BucketInventoryResource s)
+
+instance P.HasEnabled (S3BucketInventoryResource s) (TF.Attr s P.Bool) where
+    enabled =
+        lens (_enabled :: S3BucketInventoryResource s -> TF.Attr s P.Bool)
+             (\s a -> s { _enabled = a } :: S3BucketInventoryResource s)
+
+instance P.HasFilter (S3BucketInventoryResource s) (TF.Attr s P.Text) where
     filter =
-        lens (_filter :: S3BucketMetricResource s -> TF.Attr s P.Text)
-             (\s a -> s { _filter = a } :: S3BucketMetricResource s)
+        lens (_filter :: S3BucketInventoryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _filter = a } :: S3BucketInventoryResource s)
 
-instance P.HasName (S3BucketMetricResource s) (TF.Attr s P.Text) where
+instance P.HasIncludedObjectVersions (S3BucketInventoryResource s) (TF.Attr s P.Text) where
+    includedObjectVersions =
+        lens (_included_object_versions :: S3BucketInventoryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _included_object_versions = a } :: S3BucketInventoryResource s)
+
+instance P.HasName (S3BucketInventoryResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: S3BucketMetricResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: S3BucketMetricResource s)
+        lens (_name :: S3BucketInventoryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: S3BucketInventoryResource s)
 
-instance s ~ s' => P.HasComputedBucket (TF.Ref s' (S3BucketMetricResource s)) (TF.Attr s P.Text) where
+instance P.HasOptionalFields (S3BucketInventoryResource s) (TF.Attr s P.Text) where
+    optionalFields =
+        lens (_optional_fields :: S3BucketInventoryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _optional_fields = a } :: S3BucketInventoryResource s)
+
+instance P.HasSchedule (S3BucketInventoryResource s) (TF.Attr s P.Text) where
+    schedule =
+        lens (_schedule :: S3BucketInventoryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _schedule = a } :: S3BucketInventoryResource s)
+
+instance s ~ s' => P.HasComputedBucket (TF.Ref s' (S3BucketInventoryResource s)) (TF.Attr s P.Text) where
     computedBucket =
-        (_bucket :: S3BucketMetricResource s -> TF.Attr s P.Text)
+        (_bucket :: S3BucketInventoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedFilter (TF.Ref s' (S3BucketMetricResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDestination (TF.Ref s' (S3BucketInventoryResource s)) (TF.Attr s P.Text) where
+    computedDestination =
+        (_destination :: S3BucketInventoryResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (S3BucketInventoryResource s)) (TF.Attr s P.Bool) where
+    computedEnabled =
+        (_enabled :: S3BucketInventoryResource s -> TF.Attr s P.Bool)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedFilter (TF.Ref s' (S3BucketInventoryResource s)) (TF.Attr s P.Text) where
     computedFilter =
-        (_filter :: S3BucketMetricResource s -> TF.Attr s P.Text)
+        (_filter :: S3BucketInventoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (S3BucketMetricResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIncludedObjectVersions (TF.Ref s' (S3BucketInventoryResource s)) (TF.Attr s P.Text) where
+    computedIncludedObjectVersions =
+        (_included_object_versions :: S3BucketInventoryResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (S3BucketInventoryResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: S3BucketMetricResource s -> TF.Attr s P.Text)
+        (_name :: S3BucketInventoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-s3BucketMetricResource :: TF.Resource P.AWS (S3BucketMetricResource s)
-s3BucketMetricResource =
-    TF.newResource "aws_s3_bucket_metric" $
-        S3BucketMetricResource {
+instance s ~ s' => P.HasComputedOptionalFields (TF.Ref s' (S3BucketInventoryResource s)) (TF.Attr s P.Text) where
+    computedOptionalFields =
+        (_optional_fields :: S3BucketInventoryResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSchedule (TF.Ref s' (S3BucketInventoryResource s)) (TF.Attr s P.Text) where
+    computedSchedule =
+        (_schedule :: S3BucketInventoryResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+s3BucketInventoryResource :: TF.Resource P.AWS (S3BucketInventoryResource s)
+s3BucketInventoryResource =
+    TF.newResource "aws_s3_bucket_inventory" $
+        S3BucketInventoryResource {
               _bucket = TF.Nil
+            , _destination = TF.Nil
+            , _enabled = TF.Nil
             , _filter = TF.Nil
+            , _included_object_versions = TF.Nil
             , _name = TF.Nil
+            , _optional_fields = TF.Nil
+            , _schedule = TF.Nil
             }
 
 {- | The @aws_s3_bucket@ AWS resource.
@@ -11243,6 +10605,9 @@ instance s ~ s' => P.HasComputedBucketPrefix (TF.Ref s' (S3BucketResource s)) (T
         (_bucket_prefix :: S3BucketResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedBucketRegionalDomainName (TF.Ref s' (S3BucketResource s)) (TF.Attr s P.Text) where
+    computedBucketRegionalDomainName x = TF.compute (TF.refKey x) "bucket_regional_domain_name"
+
 instance s ~ s' => P.HasComputedCorsRule (TF.Ref s' (S3BucketResource s)) (TF.Attr s P.Text) where
     computedCorsRule =
         (_cors_rule :: S3BucketResource s -> TF.Attr s P.Text)
@@ -11333,6 +10698,132 @@ s3BucketResource =
             , _tags = TF.Nil
             , _versioning = TF.Nil
             , _website = TF.Nil
+            }
+
+{- | The @aws_secretsmanager_secret@ AWS resource.
+
+Provides a resource to manage AWS Secrets Manager secret metadata. To manage
+a secret value, see the
+</docs/providers/aws/r/secretsmanager_secret_version.html> .
+-}
+data SecretsmanagerSecretResource s = SecretsmanagerSecretResource {
+      _description             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A description of the secret. -}
+    , _kms_key_id              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Specifies the ARN or alias of the AWS KMS customer master key (CMK) to be used to encrypt the secret values in the versions stored in this secret. If you don't specify this value, then Secrets Manager defaults to using the AWS account's default CMK (the one named @aws/secretsmanager@ ). If the default KMS CMK with that name doesn't yet exist, then AWS Secrets Manager creates it for you automatically the first time. -}
+    , _name                    :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the friendly name of the new secret. The secret name can consist of uppercase letters, lowercase letters, digits, and any of the following characters: @/_+=.@-@ Spaces are not permitted. -}
+    , _recovery_window_in_days :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Specifies the number of days that AWS Secrets Manager waits before it can delete the secret. This value can range from 7 to 30 days. The default value is 30. -}
+    , _rotation_lambda_arn     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Specifies the ARN of the Lambda function that can rotate the secret. -}
+    , _rotation_rules          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A structure that defines the rotation configuration for this secret. Defined below. -}
+    , _tags                    :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) Specifies a key-value map of user-defined tags that are attached to the secret. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SecretsmanagerSecretResource s) where
+    toHCL SecretsmanagerSecretResource{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "kms_key_id" <$> TF.attribute _kms_key_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "recovery_window_in_days" <$> TF.attribute _recovery_window_in_days
+        , TF.assign "rotation_lambda_arn" <$> TF.attribute _rotation_lambda_arn
+        , TF.assign "rotation_rules" <$> TF.attribute _rotation_rules
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance P.HasDescription (SecretsmanagerSecretResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: SecretsmanagerSecretResource s)
+
+instance P.HasKmsKeyId (SecretsmanagerSecretResource s) (TF.Attr s P.Text) where
+    kmsKeyId =
+        lens (_kms_key_id :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
+             (\s a -> s { _kms_key_id = a } :: SecretsmanagerSecretResource s)
+
+instance P.HasName (SecretsmanagerSecretResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SecretsmanagerSecretResource s)
+
+instance P.HasRecoveryWindowInDays (SecretsmanagerSecretResource s) (TF.Attr s P.Text) where
+    recoveryWindowInDays =
+        lens (_recovery_window_in_days :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
+             (\s a -> s { _recovery_window_in_days = a } :: SecretsmanagerSecretResource s)
+
+instance P.HasRotationLambdaArn (SecretsmanagerSecretResource s) (TF.Attr s P.Text) where
+    rotationLambdaArn =
+        lens (_rotation_lambda_arn :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
+             (\s a -> s { _rotation_lambda_arn = a } :: SecretsmanagerSecretResource s)
+
+instance P.HasRotationRules (SecretsmanagerSecretResource s) (TF.Attr s P.Text) where
+    rotationRules =
+        lens (_rotation_rules :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
+             (\s a -> s { _rotation_rules = a } :: SecretsmanagerSecretResource s)
+
+instance P.HasTags (SecretsmanagerSecretResource s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: SecretsmanagerSecretResource s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: SecretsmanagerSecretResource s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (SecretsmanagerSecretResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecretsmanagerSecretResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretsmanagerSecretResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (SecretsmanagerSecretResource s)) (TF.Attr s P.Text) where
+    computedKmsKeyId =
+        (_kms_key_id :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SecretsmanagerSecretResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRecoveryWindowInDays (TF.Ref s' (SecretsmanagerSecretResource s)) (TF.Attr s P.Text) where
+    computedRecoveryWindowInDays =
+        (_recovery_window_in_days :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRotationEnabled (TF.Ref s' (SecretsmanagerSecretResource s)) (TF.Attr s P.Bool) where
+    computedRotationEnabled x = TF.compute (TF.refKey x) "rotation_enabled"
+
+instance s ~ s' => P.HasComputedRotationLambdaArn (TF.Ref s' (SecretsmanagerSecretResource s)) (TF.Attr s P.Text) where
+    computedRotationLambdaArn =
+        (_rotation_lambda_arn :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRotationRules (TF.Ref s' (SecretsmanagerSecretResource s)) (TF.Attr s P.Text) where
+    computedRotationRules =
+        (_rotation_rules :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecretsmanagerSecretResource s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
+        (_tags :: SecretsmanagerSecretResource s -> TF.Attr s (P.Tags s))
+            . TF.refValue
+
+secretsmanagerSecretResource :: TF.Resource P.AWS (SecretsmanagerSecretResource s)
+secretsmanagerSecretResource =
+    TF.newResource "aws_secretsmanager_secret" $
+        SecretsmanagerSecretResource {
+              _description = TF.Nil
+            , _kms_key_id = TF.Nil
+            , _name = TF.Nil
+            , _recovery_window_in_days = TF.Nil
+            , _rotation_lambda_arn = TF.Nil
+            , _rotation_rules = TF.Nil
+            , _tags = TF.Nil
             }
 
 {- | The @aws_ses_event_destination@ AWS resource.
@@ -11450,342 +10941,850 @@ sesEventDestinationResource =
             , _sns_destination = TF.Nil
             }
 
-{- | The @aws_ses_receipt_rule@ AWS resource.
+{- | The @aws_ses_receipt_rule_set@ AWS resource.
 
-Provides an SES receipt rule resource
+Provides an SES receipt rule set resource
 -}
-data SesReceiptRuleResource s = SesReceiptRuleResource {
-      _add_header_action :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of Add Header Action blocks. Documented below. -}
-    , _after             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the rule to place this rule after -}
-    , _bounce_action     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of Bounce Action blocks. Documented below. -}
-    , _enabled           :: !(TF.Attr s P.Bool)
-    {- ^ (Optional) If true, the rule will be enabled -}
-    , _lambda_action     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of Lambda Action blocks. Documented below. -}
-    , _name              :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the rule -}
-    , _recipients        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of email addresses -}
-    , _rule_set_name     :: !(TF.Attr s P.Text)
+data SesReceiptRuleSetResource s = SesReceiptRuleSetResource {
+      _rule_set_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the rule set -}
-    , _s3_action         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of S3 Action blocks. Documented below. -}
-    , _scan_enabled      :: !(TF.Attr s P.Bool)
-    {- ^ (Optional) If true, incoming emails will be scanned for spam and viruses -}
-    , _sns_action        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of SNS Action blocks. Documented below. -}
-    , _stop_action       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of Stop Action blocks. Documented below. -}
-    , _tls_policy        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Require or Optional -}
-    , _workmail_action   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of WorkMail Action blocks. Documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SesReceiptRuleResource s) where
-    toHCL SesReceiptRuleResource{..} = TF.inline $ catMaybes
-        [ TF.assign "add_header_action" <$> TF.attribute _add_header_action
-        , TF.assign "after" <$> TF.attribute _after
-        , TF.assign "bounce_action" <$> TF.attribute _bounce_action
-        , TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "lambda_action" <$> TF.attribute _lambda_action
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "recipients" <$> TF.attribute _recipients
-        , TF.assign "rule_set_name" <$> TF.attribute _rule_set_name
-        , TF.assign "s3_action" <$> TF.attribute _s3_action
-        , TF.assign "scan_enabled" <$> TF.attribute _scan_enabled
-        , TF.assign "sns_action" <$> TF.attribute _sns_action
-        , TF.assign "stop_action" <$> TF.attribute _stop_action
-        , TF.assign "tls_policy" <$> TF.attribute _tls_policy
-        , TF.assign "workmail_action" <$> TF.attribute _workmail_action
+instance TF.ToHCL (SesReceiptRuleSetResource s) where
+    toHCL SesReceiptRuleSetResource{..} = TF.inline $ catMaybes
+        [ TF.assign "rule_set_name" <$> TF.attribute _rule_set_name
         ]
 
-instance P.HasAddHeaderAction (SesReceiptRuleResource s) (TF.Attr s P.Text) where
-    addHeaderAction =
-        lens (_add_header_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _add_header_action = a } :: SesReceiptRuleResource s)
-
-instance P.HasAfter (SesReceiptRuleResource s) (TF.Attr s P.Text) where
-    after =
-        lens (_after :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _after = a } :: SesReceiptRuleResource s)
-
-instance P.HasBounceAction (SesReceiptRuleResource s) (TF.Attr s P.Text) where
-    bounceAction =
-        lens (_bounce_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _bounce_action = a } :: SesReceiptRuleResource s)
-
-instance P.HasEnabled (SesReceiptRuleResource s) (TF.Attr s P.Bool) where
-    enabled =
-        lens (_enabled :: SesReceiptRuleResource s -> TF.Attr s P.Bool)
-             (\s a -> s { _enabled = a } :: SesReceiptRuleResource s)
-
-instance P.HasLambdaAction (SesReceiptRuleResource s) (TF.Attr s P.Text) where
-    lambdaAction =
-        lens (_lambda_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _lambda_action = a } :: SesReceiptRuleResource s)
-
-instance P.HasName (SesReceiptRuleResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SesReceiptRuleResource s)
-
-instance P.HasRecipients (SesReceiptRuleResource s) (TF.Attr s P.Text) where
-    recipients =
-        lens (_recipients :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _recipients = a } :: SesReceiptRuleResource s)
-
-instance P.HasRuleSetName (SesReceiptRuleResource s) (TF.Attr s P.Text) where
+instance P.HasRuleSetName (SesReceiptRuleSetResource s) (TF.Attr s P.Text) where
     ruleSetName =
-        lens (_rule_set_name :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _rule_set_name = a } :: SesReceiptRuleResource s)
+        lens (_rule_set_name :: SesReceiptRuleSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _rule_set_name = a } :: SesReceiptRuleSetResource s)
 
-instance P.HasS3Action (SesReceiptRuleResource s) (TF.Attr s P.Text) where
-    s3Action =
-        lens (_s3_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _s3_action = a } :: SesReceiptRuleResource s)
-
-instance P.HasScanEnabled (SesReceiptRuleResource s) (TF.Attr s P.Bool) where
-    scanEnabled =
-        lens (_scan_enabled :: SesReceiptRuleResource s -> TF.Attr s P.Bool)
-             (\s a -> s { _scan_enabled = a } :: SesReceiptRuleResource s)
-
-instance P.HasSnsAction (SesReceiptRuleResource s) (TF.Attr s P.Text) where
-    snsAction =
-        lens (_sns_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _sns_action = a } :: SesReceiptRuleResource s)
-
-instance P.HasStopAction (SesReceiptRuleResource s) (TF.Attr s P.Text) where
-    stopAction =
-        lens (_stop_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _stop_action = a } :: SesReceiptRuleResource s)
-
-instance P.HasTlsPolicy (SesReceiptRuleResource s) (TF.Attr s P.Text) where
-    tlsPolicy =
-        lens (_tls_policy :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tls_policy = a } :: SesReceiptRuleResource s)
-
-instance P.HasWorkmailAction (SesReceiptRuleResource s) (TF.Attr s P.Text) where
-    workmailAction =
-        lens (_workmail_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _workmail_action = a } :: SesReceiptRuleResource s)
-
-instance s ~ s' => P.HasComputedAddHeaderAction (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Text) where
-    computedAddHeaderAction =
-        (_add_header_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedAfter (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Text) where
-    computedAfter =
-        (_after :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedBounceAction (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Text) where
-    computedBounceAction =
-        (_bounce_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Bool) where
-    computedEnabled =
-        (_enabled :: SesReceiptRuleResource s -> TF.Attr s P.Bool)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedLambdaAction (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Text) where
-    computedLambdaAction =
-        (_lambda_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRecipients (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Text) where
-    computedRecipients =
-        (_recipients :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRuleSetName (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRuleSetName (TF.Ref s' (SesReceiptRuleSetResource s)) (TF.Attr s P.Text) where
     computedRuleSetName =
-        (_rule_set_name :: SesReceiptRuleResource s -> TF.Attr s P.Text)
+        (_rule_set_name :: SesReceiptRuleSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedS3Action (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Text) where
-    computedS3Action =
-        (_s3_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedScanEnabled (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Bool) where
-    computedScanEnabled =
-        (_scan_enabled :: SesReceiptRuleResource s -> TF.Attr s P.Bool)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSnsAction (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Text) where
-    computedSnsAction =
-        (_sns_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedStopAction (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Text) where
-    computedStopAction =
-        (_stop_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTlsPolicy (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Text) where
-    computedTlsPolicy =
-        (_tls_policy :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedWorkmailAction (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Text) where
-    computedWorkmailAction =
-        (_workmail_action :: SesReceiptRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-sesReceiptRuleResource :: TF.Resource P.AWS (SesReceiptRuleResource s)
-sesReceiptRuleResource =
-    TF.newResource "aws_ses_receipt_rule" $
-        SesReceiptRuleResource {
-              _add_header_action = TF.Nil
-            , _after = TF.Nil
-            , _bounce_action = TF.Nil
-            , _enabled = TF.Nil
-            , _lambda_action = TF.Nil
-            , _name = TF.Nil
-            , _recipients = TF.Nil
-            , _rule_set_name = TF.Nil
-            , _s3_action = TF.Nil
-            , _scan_enabled = TF.Nil
-            , _sns_action = TF.Nil
-            , _stop_action = TF.Nil
-            , _tls_policy = TF.Nil
-            , _workmail_action = TF.Nil
+sesReceiptRuleSetResource :: TF.Resource P.AWS (SesReceiptRuleSetResource s)
+sesReceiptRuleSetResource =
+    TF.newResource "aws_ses_receipt_rule_set" $
+        SesReceiptRuleSetResource {
+              _rule_set_name = TF.Nil
             }
 
-{- | The @aws_ses_template@ AWS resource.
+{- | The @aws_sns_sms_preferences@ AWS resource.
 
-Provides a resource to create a SES template.
+Provides a way to set SNS SMS preferences.
 -}
-data SesTemplateResource s = SesTemplateResource {
-      _html    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The HTML body of the email. Must be less than 500KB in size, including both the text and HTML parts. -}
-    , _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the template. Cannot exceed 64 characters. You will refer to this name when you send email. -}
-    , _subject :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The subject line of the email. -}
-    , _text    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The email body that will be visible to recipients whose email clients do not display HTML. Must be less than 500KB in size, including both the text and HTML parts. -}
+data SnsSmsPreferencesResource s = SnsSmsPreferencesResource {
+      _default_sender_id                     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A string, such as your business brand, that is displayed as the sender on the receiving device. -}
+    , _default_sms_type                      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The type of SMS message that you will send by default. Possible values are: Promotional, Transactional -}
+    , _delivery_status_iam_role_arn          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ARN of the IAM role that allows Amazon SNS to write logs about SMS deliveries in CloudWatch Logs. -}
+    , _delivery_status_success_sampling_rate :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The percentage of successful SMS deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value must be between 0 and 100. -}
+    , _monthly_spend_limit                   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The maximum amount in USD that you are willing to spend each month to send SMS messages. -}
+    , _usage_report_s3_bucket                :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the Amazon S3 bucket to receive daily SMS usage reports from Amazon SNS. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SesTemplateResource s) where
-    toHCL SesTemplateResource{..} = TF.inline $ catMaybes
-        [ TF.assign "html" <$> TF.attribute _html
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "subject" <$> TF.attribute _subject
-        , TF.assign "text" <$> TF.attribute _text
+instance TF.ToHCL (SnsSmsPreferencesResource s) where
+    toHCL SnsSmsPreferencesResource{..} = TF.inline $ catMaybes
+        [ TF.assign "default_sender_id" <$> TF.attribute _default_sender_id
+        , TF.assign "default_sms_type" <$> TF.attribute _default_sms_type
+        , TF.assign "delivery_status_iam_role_arn" <$> TF.attribute _delivery_status_iam_role_arn
+        , TF.assign "delivery_status_success_sampling_rate" <$> TF.attribute _delivery_status_success_sampling_rate
+        , TF.assign "monthly_spend_limit" <$> TF.attribute _monthly_spend_limit
+        , TF.assign "usage_report_s3_bucket" <$> TF.attribute _usage_report_s3_bucket
         ]
 
-instance P.HasHtml (SesTemplateResource s) (TF.Attr s P.Text) where
-    html =
-        lens (_html :: SesTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _html = a } :: SesTemplateResource s)
+instance P.HasDefaultSenderId (SnsSmsPreferencesResource s) (TF.Attr s P.Text) where
+    defaultSenderId =
+        lens (_default_sender_id :: SnsSmsPreferencesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _default_sender_id = a } :: SnsSmsPreferencesResource s)
 
-instance P.HasName (SesTemplateResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: SesTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SesTemplateResource s)
+instance P.HasDefaultSmsType (SnsSmsPreferencesResource s) (TF.Attr s P.Text) where
+    defaultSmsType =
+        lens (_default_sms_type :: SnsSmsPreferencesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _default_sms_type = a } :: SnsSmsPreferencesResource s)
 
-instance P.HasSubject (SesTemplateResource s) (TF.Attr s P.Text) where
-    subject =
-        lens (_subject :: SesTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subject = a } :: SesTemplateResource s)
+instance P.HasDeliveryStatusIamRoleArn (SnsSmsPreferencesResource s) (TF.Attr s P.Text) where
+    deliveryStatusIamRoleArn =
+        lens (_delivery_status_iam_role_arn :: SnsSmsPreferencesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _delivery_status_iam_role_arn = a } :: SnsSmsPreferencesResource s)
 
-instance P.HasText (SesTemplateResource s) (TF.Attr s P.Text) where
-    text =
-        lens (_text :: SesTemplateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _text = a } :: SesTemplateResource s)
+instance P.HasDeliveryStatusSuccessSamplingRate (SnsSmsPreferencesResource s) (TF.Attr s P.Text) where
+    deliveryStatusSuccessSamplingRate =
+        lens (_delivery_status_success_sampling_rate :: SnsSmsPreferencesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _delivery_status_success_sampling_rate = a } :: SnsSmsPreferencesResource s)
 
-instance s ~ s' => P.HasComputedHtml (TF.Ref s' (SesTemplateResource s)) (TF.Attr s P.Text) where
-    computedHtml =
-        (_html :: SesTemplateResource s -> TF.Attr s P.Text)
+instance P.HasMonthlySpendLimit (SnsSmsPreferencesResource s) (TF.Attr s P.Text) where
+    monthlySpendLimit =
+        lens (_monthly_spend_limit :: SnsSmsPreferencesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _monthly_spend_limit = a } :: SnsSmsPreferencesResource s)
+
+instance P.HasUsageReportS3Bucket (SnsSmsPreferencesResource s) (TF.Attr s P.Text) where
+    usageReportS3Bucket =
+        lens (_usage_report_s3_bucket :: SnsSmsPreferencesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _usage_report_s3_bucket = a } :: SnsSmsPreferencesResource s)
+
+instance s ~ s' => P.HasComputedDefaultSenderId (TF.Ref s' (SnsSmsPreferencesResource s)) (TF.Attr s P.Text) where
+    computedDefaultSenderId =
+        (_default_sender_id :: SnsSmsPreferencesResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SesTemplateResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultSmsType (TF.Ref s' (SnsSmsPreferencesResource s)) (TF.Attr s P.Text) where
+    computedDefaultSmsType =
+        (_default_sms_type :: SnsSmsPreferencesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDeliveryStatusIamRoleArn (TF.Ref s' (SnsSmsPreferencesResource s)) (TF.Attr s P.Text) where
+    computedDeliveryStatusIamRoleArn =
+        (_delivery_status_iam_role_arn :: SnsSmsPreferencesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDeliveryStatusSuccessSamplingRate (TF.Ref s' (SnsSmsPreferencesResource s)) (TF.Attr s P.Text) where
+    computedDeliveryStatusSuccessSamplingRate =
+        (_delivery_status_success_sampling_rate :: SnsSmsPreferencesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMonthlySpendLimit (TF.Ref s' (SnsSmsPreferencesResource s)) (TF.Attr s P.Text) where
+    computedMonthlySpendLimit =
+        (_monthly_spend_limit :: SnsSmsPreferencesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUsageReportS3Bucket (TF.Ref s' (SnsSmsPreferencesResource s)) (TF.Attr s P.Text) where
+    computedUsageReportS3Bucket =
+        (_usage_report_s3_bucket :: SnsSmsPreferencesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+snsSmsPreferencesResource :: TF.Resource P.AWS (SnsSmsPreferencesResource s)
+snsSmsPreferencesResource =
+    TF.newResource "aws_sns_sms_preferences" $
+        SnsSmsPreferencesResource {
+              _default_sender_id = TF.Nil
+            , _default_sms_type = TF.Nil
+            , _delivery_status_iam_role_arn = TF.Nil
+            , _delivery_status_success_sampling_rate = TF.Nil
+            , _monthly_spend_limit = TF.Nil
+            , _usage_report_s3_bucket = TF.Nil
+            }
+
+{- | The @aws_sns_topic@ AWS resource.
+
+Provides an SNS topic resource
+-}
+data SnsTopicResource s = SnsTopicResource {
+      _application_failure_feedback_role_arn    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) IAM role for failure feedback -}
+    , _application_success_feedback_role_arn    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IAM role permitted to receive success feedback for this topic -}
+    , _application_success_feedback_sample_rate :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Percentage of success to sample -}
+    , _delivery_policy                          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The SNS delivery policy. More on <https://docs.aws.amazon.com/sns/latest/dg/DeliveryPolicies.html> -}
+    , _display_name                             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The display name for the SNS topic -}
+    , _http_failure_feedback_role_arn           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) IAM role for failure feedback -}
+    , _http_success_feedback_role_arn           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IAM role permitted to receive success feedback for this topic -}
+    , _http_success_feedback_sample_rate        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Percentage of success to sample -}
+    , _lambda_failure_feedback_role_arn         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) IAM role for failure feedback -}
+    , _lambda_success_feedback_role_arn         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IAM role permitted to receive success feedback for this topic -}
+    , _lambda_success_feedback_sample_rate      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Percentage of success to sample -}
+    , _name                                     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The friendly name for the SNS topic. By default generated by Terraform. -}
+    , _name_prefix                              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The friendly name for the SNS topic. Conflicts with @name@ . -}
+    , _policy                                   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The fully-formed AWS policy as JSON -}
+    , _sqs_failure_feedback_role_arn            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) IAM role for failure feedback -}
+    , _sqs_success_feedback_role_arn            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IAM role permitted to receive success feedback for this topic -}
+    , _sqs_success_feedback_sample_rate         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Percentage of success to sample -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SnsTopicResource s) where
+    toHCL SnsTopicResource{..} = TF.inline $ catMaybes
+        [ TF.assign "application_failure_feedback_role_arn" <$> TF.attribute _application_failure_feedback_role_arn
+        , TF.assign "application_success_feedback_role_arn" <$> TF.attribute _application_success_feedback_role_arn
+        , TF.assign "application_success_feedback_sample_rate" <$> TF.attribute _application_success_feedback_sample_rate
+        , TF.assign "delivery_policy" <$> TF.attribute _delivery_policy
+        , TF.assign "display_name" <$> TF.attribute _display_name
+        , TF.assign "http_failure_feedback_role_arn" <$> TF.attribute _http_failure_feedback_role_arn
+        , TF.assign "http_success_feedback_role_arn" <$> TF.attribute _http_success_feedback_role_arn
+        , TF.assign "http_success_feedback_sample_rate" <$> TF.attribute _http_success_feedback_sample_rate
+        , TF.assign "lambda_failure_feedback_role_arn" <$> TF.attribute _lambda_failure_feedback_role_arn
+        , TF.assign "lambda_success_feedback_role_arn" <$> TF.attribute _lambda_success_feedback_role_arn
+        , TF.assign "lambda_success_feedback_sample_rate" <$> TF.attribute _lambda_success_feedback_sample_rate
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
+        , TF.assign "policy" <$> TF.attribute _policy
+        , TF.assign "sqs_failure_feedback_role_arn" <$> TF.attribute _sqs_failure_feedback_role_arn
+        , TF.assign "sqs_success_feedback_role_arn" <$> TF.attribute _sqs_success_feedback_role_arn
+        , TF.assign "sqs_success_feedback_sample_rate" <$> TF.attribute _sqs_success_feedback_sample_rate
+        ]
+
+instance P.HasApplicationFailureFeedbackRoleArn (SnsTopicResource s) (TF.Attr s P.Text) where
+    applicationFailureFeedbackRoleArn =
+        lens (_application_failure_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _application_failure_feedback_role_arn = a } :: SnsTopicResource s)
+
+instance P.HasApplicationSuccessFeedbackRoleArn (SnsTopicResource s) (TF.Attr s P.Text) where
+    applicationSuccessFeedbackRoleArn =
+        lens (_application_success_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _application_success_feedback_role_arn = a } :: SnsTopicResource s)
+
+instance P.HasApplicationSuccessFeedbackSampleRate (SnsTopicResource s) (TF.Attr s P.Text) where
+    applicationSuccessFeedbackSampleRate =
+        lens (_application_success_feedback_sample_rate :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _application_success_feedback_sample_rate = a } :: SnsTopicResource s)
+
+instance P.HasDeliveryPolicy (SnsTopicResource s) (TF.Attr s P.Text) where
+    deliveryPolicy =
+        lens (_delivery_policy :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _delivery_policy = a } :: SnsTopicResource s)
+
+instance P.HasDisplayName (SnsTopicResource s) (TF.Attr s P.Text) where
+    displayName =
+        lens (_display_name :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _display_name = a } :: SnsTopicResource s)
+
+instance P.HasHttpFailureFeedbackRoleArn (SnsTopicResource s) (TF.Attr s P.Text) where
+    httpFailureFeedbackRoleArn =
+        lens (_http_failure_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _http_failure_feedback_role_arn = a } :: SnsTopicResource s)
+
+instance P.HasHttpSuccessFeedbackRoleArn (SnsTopicResource s) (TF.Attr s P.Text) where
+    httpSuccessFeedbackRoleArn =
+        lens (_http_success_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _http_success_feedback_role_arn = a } :: SnsTopicResource s)
+
+instance P.HasHttpSuccessFeedbackSampleRate (SnsTopicResource s) (TF.Attr s P.Text) where
+    httpSuccessFeedbackSampleRate =
+        lens (_http_success_feedback_sample_rate :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _http_success_feedback_sample_rate = a } :: SnsTopicResource s)
+
+instance P.HasLambdaFailureFeedbackRoleArn (SnsTopicResource s) (TF.Attr s P.Text) where
+    lambdaFailureFeedbackRoleArn =
+        lens (_lambda_failure_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _lambda_failure_feedback_role_arn = a } :: SnsTopicResource s)
+
+instance P.HasLambdaSuccessFeedbackRoleArn (SnsTopicResource s) (TF.Attr s P.Text) where
+    lambdaSuccessFeedbackRoleArn =
+        lens (_lambda_success_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _lambda_success_feedback_role_arn = a } :: SnsTopicResource s)
+
+instance P.HasLambdaSuccessFeedbackSampleRate (SnsTopicResource s) (TF.Attr s P.Text) where
+    lambdaSuccessFeedbackSampleRate =
+        lens (_lambda_success_feedback_sample_rate :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _lambda_success_feedback_sample_rate = a } :: SnsTopicResource s)
+
+instance P.HasName (SnsTopicResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SnsTopicResource s)
+
+instance P.HasNamePrefix (SnsTopicResource s) (TF.Attr s P.Text) where
+    namePrefix =
+        lens (_name_prefix :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name_prefix = a } :: SnsTopicResource s)
+
+instance P.HasPolicy (SnsTopicResource s) (TF.Attr s P.Text) where
+    policy =
+        lens (_policy :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policy = a } :: SnsTopicResource s)
+
+instance P.HasSqsFailureFeedbackRoleArn (SnsTopicResource s) (TF.Attr s P.Text) where
+    sqsFailureFeedbackRoleArn =
+        lens (_sqs_failure_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _sqs_failure_feedback_role_arn = a } :: SnsTopicResource s)
+
+instance P.HasSqsSuccessFeedbackRoleArn (SnsTopicResource s) (TF.Attr s P.Text) where
+    sqsSuccessFeedbackRoleArn =
+        lens (_sqs_success_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _sqs_success_feedback_role_arn = a } :: SnsTopicResource s)
+
+instance P.HasSqsSuccessFeedbackSampleRate (SnsTopicResource s) (TF.Attr s P.Text) where
+    sqsSuccessFeedbackSampleRate =
+        lens (_sqs_success_feedback_sample_rate :: SnsTopicResource s -> TF.Attr s P.Text)
+             (\s a -> s { _sqs_success_feedback_sample_rate = a } :: SnsTopicResource s)
+
+instance s ~ s' => P.HasComputedApplicationFailureFeedbackRoleArn (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedApplicationFailureFeedbackRoleArn =
+        (_application_failure_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedApplicationSuccessFeedbackRoleArn (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedApplicationSuccessFeedbackRoleArn =
+        (_application_success_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedApplicationSuccessFeedbackSampleRate (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedApplicationSuccessFeedbackSampleRate =
+        (_application_success_feedback_sample_rate :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedDeliveryPolicy (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedDeliveryPolicy =
+        (_delivery_policy :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedDisplayName =
+        (_display_name :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHttpFailureFeedbackRoleArn (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedHttpFailureFeedbackRoleArn =
+        (_http_failure_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHttpSuccessFeedbackRoleArn (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedHttpSuccessFeedbackRoleArn =
+        (_http_success_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHttpSuccessFeedbackSampleRate (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedHttpSuccessFeedbackSampleRate =
+        (_http_success_feedback_sample_rate :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SesTemplateResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLambdaFailureFeedbackRoleArn (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedLambdaFailureFeedbackRoleArn =
+        (_lambda_failure_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedLambdaSuccessFeedbackRoleArn (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedLambdaSuccessFeedbackRoleArn =
+        (_lambda_success_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedLambdaSuccessFeedbackSampleRate (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedLambdaSuccessFeedbackSampleRate =
+        (_lambda_success_feedback_sample_rate :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: SesTemplateResource s -> TF.Attr s P.Text)
+        (_name :: SnsTopicResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSubject (TF.Ref s' (SesTemplateResource s)) (TF.Attr s P.Text) where
-    computedSubject =
-        (_subject :: SesTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedNamePrefix =
+        (_name_prefix :: SnsTopicResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedText (TF.Ref s' (SesTemplateResource s)) (TF.Attr s P.Text) where
-    computedText =
-        (_text :: SesTemplateResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedPolicy =
+        (_policy :: SnsTopicResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-sesTemplateResource :: TF.Resource P.AWS (SesTemplateResource s)
-sesTemplateResource =
-    TF.newResource "aws_ses_template" $
-        SesTemplateResource {
-              _html = TF.Nil
+instance s ~ s' => P.HasComputedSqsFailureFeedbackRoleArn (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedSqsFailureFeedbackRoleArn =
+        (_sqs_failure_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSqsSuccessFeedbackRoleArn (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedSqsSuccessFeedbackRoleArn =
+        (_sqs_success_feedback_role_arn :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSqsSuccessFeedbackSampleRate (TF.Ref s' (SnsTopicResource s)) (TF.Attr s P.Text) where
+    computedSqsSuccessFeedbackSampleRate =
+        (_sqs_success_feedback_sample_rate :: SnsTopicResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+snsTopicResource :: TF.Resource P.AWS (SnsTopicResource s)
+snsTopicResource =
+    TF.newResource "aws_sns_topic" $
+        SnsTopicResource {
+              _application_failure_feedback_role_arn = TF.Nil
+            , _application_success_feedback_role_arn = TF.Nil
+            , _application_success_feedback_sample_rate = TF.Nil
+            , _delivery_policy = TF.Nil
+            , _display_name = TF.Nil
+            , _http_failure_feedback_role_arn = TF.Nil
+            , _http_success_feedback_role_arn = TF.Nil
+            , _http_success_feedback_sample_rate = TF.Nil
+            , _lambda_failure_feedback_role_arn = TF.Nil
+            , _lambda_success_feedback_role_arn = TF.Nil
+            , _lambda_success_feedback_sample_rate = TF.Nil
             , _name = TF.Nil
-            , _subject = TF.Nil
-            , _text = TF.Nil
+            , _name_prefix = TF.Nil
+            , _policy = TF.Nil
+            , _sqs_failure_feedback_role_arn = TF.Nil
+            , _sqs_success_feedback_role_arn = TF.Nil
+            , _sqs_success_feedback_sample_rate = TF.Nil
             }
 
-{- | The @aws_spot_datafeed_subscription@ AWS resource.
+{- | The @aws_spot_fleet_request@ AWS resource.
 
--> Note: There is only a single subscription allowed per account. To help
-you understand the charges for your Spot instances, Amazon EC2 provides a
-data feed that describes your Spot instance usage and pricing. This data
-feed is sent to an Amazon S3 bucket that you specify when you subscribe to
-the data feed.
+Provides an EC2 Spot Fleet Request resource. This allows a fleet of Spot
+instances to be requested on the Spot market.
 -}
-data SpotDatafeedSubscriptionResource s = SpotDatafeedSubscriptionResource {
-      _bucket :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Amazon S3 bucket in which to store the Spot instance data feed. -}
-    , _prefix :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Path of folder inside bucket to place spot pricing data. -}
+data SpotFleetRequestResource s = SpotFleetRequestResource {
+      _allocation_strategy                 :: !(TF.Attr s P.Text)
+    {- ^ - Indicates how to allocate the target capacity across the Spot pools specified by the Spot fleet request. The default is lowestPrice. -}
+    , _excess_capacity_termination_policy  :: !(TF.Attr s P.Text)
+    {- ^ - Indicates whether running Spot instances should be terminated if the target capacity of the Spot fleet request is decreased below the current size of the Spot fleet. -}
+    , _fleet_type                          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The type of fleet request. Indicates whether the Spot Fleet only requests the target capacity or also attempts to maintain it. Default is @maintain@ . -}
+    , _iam_fleet_role                      :: !(TF.Attr s P.Text)
+    {- ^ (Required) Grants the Spot fleet permission to terminate Spot instances on your behalf when you cancel its Spot fleet request using CancelSpotFleetRequests or when the Spot fleet request expires, if you set terminateInstancesWithExpiration. -}
+    , _instance_interruption_behaviour     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Indicates whether a Spot instance stops or terminates when it is interrupted. Default is @terminate@ . -}
+    , _launch_specification                :: !(TF.Attr s P.Text)
+    {- ^ - Used to define the launch configuration of the spot-fleet request. Can be specified multiple times to define different bids across different markets and instance types. -}
+    , _load_balancers                      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of elastic load balancer names to add to the Spot fleet. -}
+    , _replace_unhealthy_instances         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Indicates whether Spot fleet should replace unhealthy instances. Default @false@ . -}
+    , _spot_price                          :: !(TF.Attr s P.Text)
+    {- ^ (Optional; Default: On-demand price) The maximum bid price per unit hour. -}
+    , _target_capacity                     :: !(TF.Attr s P.Text)
+    {- ^ - The number of units to request. You can choose to set the target capacity in terms of instances or a performance characteristic that is important to your application workload, such as vCPUs, memory, or I/O. -}
+    , _target_group_arns                   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of @aws_alb_target_group@ ARNs, for use with Application Load Balancing. -}
+    , _terminate_instances_with_expiration :: !(TF.Attr s P.Text)
+    {- ^ - Indicates whether running Spot instances should be terminated when the Spot fleet request expires. -}
+    , _valid_from                          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The start date and time of the request, in UTC <https://tools.ietf.org/html/rfc3339#section-5.8> format(for example, YYYY-MM-DDTHH:MM:SSZ). The default is to start fulfilling the request immediately. -}
+    , _valid_until                         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The end date and time of the request, in UTC <https://tools.ietf.org/html/rfc3339#section-5.8> format(for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new Spot instance requests are placed or enabled to fulfill the request. Defaults to 24 hours. -}
+    , _wait_for_fulfillment                :: !(TF.Attr s P.Text)
+    {- ^ (Optional; Default: false) If set, Terraform will wait for the Spot Request to be fulfilled, and will throw an error if the timeout of 10m is reached. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SpotDatafeedSubscriptionResource s) where
-    toHCL SpotDatafeedSubscriptionResource{..} = TF.inline $ catMaybes
-        [ TF.assign "bucket" <$> TF.attribute _bucket
-        , TF.assign "prefix" <$> TF.attribute _prefix
+instance TF.ToHCL (SpotFleetRequestResource s) where
+    toHCL SpotFleetRequestResource{..} = TF.inline $ catMaybes
+        [ TF.assign "allocation_strategy" <$> TF.attribute _allocation_strategy
+        , TF.assign "excess_capacity_termination_policy" <$> TF.attribute _excess_capacity_termination_policy
+        , TF.assign "fleet_type" <$> TF.attribute _fleet_type
+        , TF.assign "iam_fleet_role" <$> TF.attribute _iam_fleet_role
+        , TF.assign "instance_interruption_behaviour" <$> TF.attribute _instance_interruption_behaviour
+        , TF.assign "launch_specification" <$> TF.attribute _launch_specification
+        , TF.assign "load_balancers" <$> TF.attribute _load_balancers
+        , TF.assign "replace_unhealthy_instances" <$> TF.attribute _replace_unhealthy_instances
+        , TF.assign "spot_price" <$> TF.attribute _spot_price
+        , TF.assign "target_capacity" <$> TF.attribute _target_capacity
+        , TF.assign "target_group_arns" <$> TF.attribute _target_group_arns
+        , TF.assign "terminate_instances_with_expiration" <$> TF.attribute _terminate_instances_with_expiration
+        , TF.assign "valid_from" <$> TF.attribute _valid_from
+        , TF.assign "valid_until" <$> TF.attribute _valid_until
+        , TF.assign "wait_for_fulfillment" <$> TF.attribute _wait_for_fulfillment
         ]
 
-instance P.HasBucket (SpotDatafeedSubscriptionResource s) (TF.Attr s P.Text) where
-    bucket =
-        lens (_bucket :: SpotDatafeedSubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _bucket = a } :: SpotDatafeedSubscriptionResource s)
+instance P.HasAllocationStrategy (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    allocationStrategy =
+        lens (_allocation_strategy :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _allocation_strategy = a } :: SpotFleetRequestResource s)
 
-instance P.HasPrefix (SpotDatafeedSubscriptionResource s) (TF.Attr s P.Text) where
-    prefix =
-        lens (_prefix :: SpotDatafeedSubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _prefix = a } :: SpotDatafeedSubscriptionResource s)
+instance P.HasExcessCapacityTerminationPolicy (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    excessCapacityTerminationPolicy =
+        lens (_excess_capacity_termination_policy :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _excess_capacity_termination_policy = a } :: SpotFleetRequestResource s)
 
-instance s ~ s' => P.HasComputedBucket (TF.Ref s' (SpotDatafeedSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedBucket =
-        (_bucket :: SpotDatafeedSubscriptionResource s -> TF.Attr s P.Text)
+instance P.HasFleetType (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    fleetType =
+        lens (_fleet_type :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _fleet_type = a } :: SpotFleetRequestResource s)
+
+instance P.HasIamFleetRole (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    iamFleetRole =
+        lens (_iam_fleet_role :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _iam_fleet_role = a } :: SpotFleetRequestResource s)
+
+instance P.HasInstanceInterruptionBehaviour (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    instanceInterruptionBehaviour =
+        lens (_instance_interruption_behaviour :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_interruption_behaviour = a } :: SpotFleetRequestResource s)
+
+instance P.HasLaunchSpecification (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    launchSpecification =
+        lens (_launch_specification :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _launch_specification = a } :: SpotFleetRequestResource s)
+
+instance P.HasLoadBalancers (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    loadBalancers =
+        lens (_load_balancers :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _load_balancers = a } :: SpotFleetRequestResource s)
+
+instance P.HasReplaceUnhealthyInstances (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    replaceUnhealthyInstances =
+        lens (_replace_unhealthy_instances :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _replace_unhealthy_instances = a } :: SpotFleetRequestResource s)
+
+instance P.HasSpotPrice (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    spotPrice =
+        lens (_spot_price :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _spot_price = a } :: SpotFleetRequestResource s)
+
+instance P.HasTargetCapacity (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    targetCapacity =
+        lens (_target_capacity :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _target_capacity = a } :: SpotFleetRequestResource s)
+
+instance P.HasTargetGroupArns (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    targetGroupArns =
+        lens (_target_group_arns :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _target_group_arns = a } :: SpotFleetRequestResource s)
+
+instance P.HasTerminateInstancesWithExpiration (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    terminateInstancesWithExpiration =
+        lens (_terminate_instances_with_expiration :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _terminate_instances_with_expiration = a } :: SpotFleetRequestResource s)
+
+instance P.HasValidFrom (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    validFrom =
+        lens (_valid_from :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _valid_from = a } :: SpotFleetRequestResource s)
+
+instance P.HasValidUntil (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    validUntil =
+        lens (_valid_until :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _valid_until = a } :: SpotFleetRequestResource s)
+
+instance P.HasWaitForFulfillment (SpotFleetRequestResource s) (TF.Attr s P.Text) where
+    waitForFulfillment =
+        lens (_wait_for_fulfillment :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+             (\s a -> s { _wait_for_fulfillment = a } :: SpotFleetRequestResource s)
+
+instance s ~ s' => P.HasComputedAllocationStrategy (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedAllocationStrategy =
+        (_allocation_strategy :: SpotFleetRequestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrefix (TF.Ref s' (SpotDatafeedSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedPrefix =
-        (_prefix :: SpotDatafeedSubscriptionResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedExcessCapacityTerminationPolicy (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedExcessCapacityTerminationPolicy =
+        (_excess_capacity_termination_policy :: SpotFleetRequestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-spotDatafeedSubscriptionResource :: TF.Resource P.AWS (SpotDatafeedSubscriptionResource s)
-spotDatafeedSubscriptionResource =
-    TF.newResource "aws_spot_datafeed_subscription" $
-        SpotDatafeedSubscriptionResource {
-              _bucket = TF.Nil
-            , _prefix = TF.Nil
+instance s ~ s' => P.HasComputedFleetType (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedFleetType =
+        (_fleet_type :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedIamFleetRole (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedIamFleetRole =
+        (_iam_fleet_role :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstanceInterruptionBehaviour (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedInstanceInterruptionBehaviour =
+        (_instance_interruption_behaviour :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedLaunchSpecification (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedLaunchSpecification =
+        (_launch_specification :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedLoadBalancers (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedLoadBalancers =
+        (_load_balancers :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedReplaceUnhealthyInstances (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedReplaceUnhealthyInstances =
+        (_replace_unhealthy_instances :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSpotPrice (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedSpotPrice =
+        (_spot_price :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSpotRequestState (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedSpotRequestState x = TF.compute (TF.refKey x) "spot_request_state"
+
+instance s ~ s' => P.HasComputedTargetCapacity (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedTargetCapacity =
+        (_target_capacity :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTargetGroupArns (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedTargetGroupArns =
+        (_target_group_arns :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTerminateInstancesWithExpiration (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedTerminateInstancesWithExpiration =
+        (_terminate_instances_with_expiration :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedValidFrom (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedValidFrom =
+        (_valid_from :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedValidUntil (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedValidUntil =
+        (_valid_until :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedWaitForFulfillment (TF.Ref s' (SpotFleetRequestResource s)) (TF.Attr s P.Text) where
+    computedWaitForFulfillment =
+        (_wait_for_fulfillment :: SpotFleetRequestResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+spotFleetRequestResource :: TF.Resource P.AWS (SpotFleetRequestResource s)
+spotFleetRequestResource =
+    TF.newResource "aws_spot_fleet_request" $
+        SpotFleetRequestResource {
+              _allocation_strategy = TF.Nil
+            , _excess_capacity_termination_policy = TF.Nil
+            , _fleet_type = TF.Nil
+            , _iam_fleet_role = TF.Nil
+            , _instance_interruption_behaviour = TF.Nil
+            , _launch_specification = TF.Nil
+            , _load_balancers = TF.Nil
+            , _replace_unhealthy_instances = TF.Nil
+            , _spot_price = TF.Nil
+            , _target_capacity = TF.Nil
+            , _target_group_arns = TF.Nil
+            , _terminate_instances_with_expiration = TF.Nil
+            , _valid_from = TF.Nil
+            , _valid_until = TF.Nil
+            , _wait_for_fulfillment = TF.Nil
+            }
+
+{- | The @aws_sqs_queue@ AWS resource.
+
+
+-}
+data SqsQueueResource s = SqsQueueResource {
+      _content_based_deduplication       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Enables content-based deduplication for FIFO queues. For more information, see the <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing> -}
+    , _delay_seconds                     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The time in seconds that the delivery of all messages in the queue will be delayed. An integer from 0 to 900 (15 minutes). The default for this attribute is 0 seconds. -}
+    , _fifo_queue                        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Boolean designating a FIFO queue. If not set, it defaults to @false@ making it standard. -}
+    , _kms_data_key_reuse_period_seconds :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again. An integer representing seconds, between 60 seconds (1 minute) and 86,400 seconds (24 hours). The default is 300 (5 minutes). -}
+    , _kms_master_key_id                 :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID of an AWS-managed customer master key (CMK) for Amazon SQS or a custom CMK. For more information, see <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms> . -}
+    , _max_message_size                  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The limit of how many bytes a message can contain before Amazon SQS rejects it. An integer from 1024 bytes (1 KiB) up to 262144 bytes (256 KiB). The default for this attribute is 262144 (256 KiB). -}
+    , _message_retention_seconds         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The number of seconds Amazon SQS retains a message. Integer representing seconds, from 60 (1 minute) to 1209600 (14 days). The default for this attribute is 345600 (4 days). -}
+    , _name                              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) This is the human-readable name of the queue. If omitted, Terraform will assign a random name. -}
+    , _name_prefix                       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
+    , _policy                            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The JSON policy for the SQS queue -}
+    , _receive_wait_time_seconds         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The time for which a ReceiveMessage call will wait for a message to arrive (long polling) before returning. An integer from 0 to 20 (seconds). The default for this attribute is 0, meaning that the call will return immediately. -}
+    , _redrive_policy                    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The JSON policy to set up the Dead Letter Queue, see <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSDeadLetterQueue.html> . Note: when specifying @maxReceiveCount@ , you must specify it as an integer ( @5@ ), and not a string ( @"5"@ ). -}
+    , _tags                              :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) A mapping of tags to assign to the queue. -}
+    , _visibility_timeout_seconds        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The visibility timeout for the queue. An integer from 0 to 43200 (12 hours). The default for this attribute is 30. For more information about visibility timeout, see <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html> . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SqsQueueResource s) where
+    toHCL SqsQueueResource{..} = TF.inline $ catMaybes
+        [ TF.assign "content_based_deduplication" <$> TF.attribute _content_based_deduplication
+        , TF.assign "delay_seconds" <$> TF.attribute _delay_seconds
+        , TF.assign "fifo_queue" <$> TF.attribute _fifo_queue
+        , TF.assign "kms_data_key_reuse_period_seconds" <$> TF.attribute _kms_data_key_reuse_period_seconds
+        , TF.assign "kms_master_key_id" <$> TF.attribute _kms_master_key_id
+        , TF.assign "max_message_size" <$> TF.attribute _max_message_size
+        , TF.assign "message_retention_seconds" <$> TF.attribute _message_retention_seconds
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
+        , TF.assign "policy" <$> TF.attribute _policy
+        , TF.assign "receive_wait_time_seconds" <$> TF.attribute _receive_wait_time_seconds
+        , TF.assign "redrive_policy" <$> TF.attribute _redrive_policy
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "visibility_timeout_seconds" <$> TF.attribute _visibility_timeout_seconds
+        ]
+
+instance P.HasContentBasedDeduplication (SqsQueueResource s) (TF.Attr s P.Text) where
+    contentBasedDeduplication =
+        lens (_content_based_deduplication :: SqsQueueResource s -> TF.Attr s P.Text)
+             (\s a -> s { _content_based_deduplication = a } :: SqsQueueResource s)
+
+instance P.HasDelaySeconds (SqsQueueResource s) (TF.Attr s P.Text) where
+    delaySeconds =
+        lens (_delay_seconds :: SqsQueueResource s -> TF.Attr s P.Text)
+             (\s a -> s { _delay_seconds = a } :: SqsQueueResource s)
+
+instance P.HasFifoQueue (SqsQueueResource s) (TF.Attr s P.Text) where
+    fifoQueue =
+        lens (_fifo_queue :: SqsQueueResource s -> TF.Attr s P.Text)
+             (\s a -> s { _fifo_queue = a } :: SqsQueueResource s)
+
+instance P.HasKmsDataKeyReusePeriodSeconds (SqsQueueResource s) (TF.Attr s P.Text) where
+    kmsDataKeyReusePeriodSeconds =
+        lens (_kms_data_key_reuse_period_seconds :: SqsQueueResource s -> TF.Attr s P.Text)
+             (\s a -> s { _kms_data_key_reuse_period_seconds = a } :: SqsQueueResource s)
+
+instance P.HasKmsMasterKeyId (SqsQueueResource s) (TF.Attr s P.Text) where
+    kmsMasterKeyId =
+        lens (_kms_master_key_id :: SqsQueueResource s -> TF.Attr s P.Text)
+             (\s a -> s { _kms_master_key_id = a } :: SqsQueueResource s)
+
+instance P.HasMaxMessageSize (SqsQueueResource s) (TF.Attr s P.Text) where
+    maxMessageSize =
+        lens (_max_message_size :: SqsQueueResource s -> TF.Attr s P.Text)
+             (\s a -> s { _max_message_size = a } :: SqsQueueResource s)
+
+instance P.HasMessageRetentionSeconds (SqsQueueResource s) (TF.Attr s P.Text) where
+    messageRetentionSeconds =
+        lens (_message_retention_seconds :: SqsQueueResource s -> TF.Attr s P.Text)
+             (\s a -> s { _message_retention_seconds = a } :: SqsQueueResource s)
+
+instance P.HasName (SqsQueueResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: SqsQueueResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SqsQueueResource s)
+
+instance P.HasNamePrefix (SqsQueueResource s) (TF.Attr s P.Text) where
+    namePrefix =
+        lens (_name_prefix :: SqsQueueResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name_prefix = a } :: SqsQueueResource s)
+
+instance P.HasPolicy (SqsQueueResource s) (TF.Attr s P.Text) where
+    policy =
+        lens (_policy :: SqsQueueResource s -> TF.Attr s P.Text)
+             (\s a -> s { _policy = a } :: SqsQueueResource s)
+
+instance P.HasReceiveWaitTimeSeconds (SqsQueueResource s) (TF.Attr s P.Text) where
+    receiveWaitTimeSeconds =
+        lens (_receive_wait_time_seconds :: SqsQueueResource s -> TF.Attr s P.Text)
+             (\s a -> s { _receive_wait_time_seconds = a } :: SqsQueueResource s)
+
+instance P.HasRedrivePolicy (SqsQueueResource s) (TF.Attr s P.Text) where
+    redrivePolicy =
+        lens (_redrive_policy :: SqsQueueResource s -> TF.Attr s P.Text)
+             (\s a -> s { _redrive_policy = a } :: SqsQueueResource s)
+
+instance P.HasTags (SqsQueueResource s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: SqsQueueResource s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: SqsQueueResource s)
+
+instance P.HasVisibilityTimeoutSeconds (SqsQueueResource s) (TF.Attr s P.Text) where
+    visibilityTimeoutSeconds =
+        lens (_visibility_timeout_seconds :: SqsQueueResource s -> TF.Attr s P.Text)
+             (\s a -> s { _visibility_timeout_seconds = a } :: SqsQueueResource s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedContentBasedDeduplication (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedContentBasedDeduplication =
+        (_content_based_deduplication :: SqsQueueResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDelaySeconds (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedDelaySeconds =
+        (_delay_seconds :: SqsQueueResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedFifoQueue (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedFifoQueue =
+        (_fifo_queue :: SqsQueueResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedKmsDataKeyReusePeriodSeconds (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedKmsDataKeyReusePeriodSeconds =
+        (_kms_data_key_reuse_period_seconds :: SqsQueueResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedKmsMasterKeyId (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedKmsMasterKeyId =
+        (_kms_master_key_id :: SqsQueueResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMaxMessageSize (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedMaxMessageSize =
+        (_max_message_size :: SqsQueueResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMessageRetentionSeconds (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedMessageRetentionSeconds =
+        (_message_retention_seconds :: SqsQueueResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: SqsQueueResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedNamePrefix =
+        (_name_prefix :: SqsQueueResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedPolicy =
+        (_policy :: SqsQueueResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedReceiveWaitTimeSeconds (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedReceiveWaitTimeSeconds =
+        (_receive_wait_time_seconds :: SqsQueueResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRedrivePolicy (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedRedrivePolicy =
+        (_redrive_policy :: SqsQueueResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (SqsQueueResource s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
+        (_tags :: SqsQueueResource s -> TF.Attr s (P.Tags s))
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVisibilityTimeoutSeconds (TF.Ref s' (SqsQueueResource s)) (TF.Attr s P.Text) where
+    computedVisibilityTimeoutSeconds =
+        (_visibility_timeout_seconds :: SqsQueueResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+sqsQueueResource :: TF.Resource P.AWS (SqsQueueResource s)
+sqsQueueResource =
+    TF.newResource "aws_sqs_queue" $
+        SqsQueueResource {
+              _content_based_deduplication = TF.Nil
+            , _delay_seconds = TF.Nil
+            , _fifo_queue = TF.Nil
+            , _kms_data_key_reuse_period_seconds = TF.Nil
+            , _kms_master_key_id = TF.Nil
+            , _max_message_size = TF.Nil
+            , _message_retention_seconds = TF.Nil
+            , _name = TF.Nil
+            , _name_prefix = TF.Nil
+            , _policy = TF.Nil
+            , _receive_wait_time_seconds = TF.Nil
+            , _redrive_policy = TF.Nil
+            , _tags = TF.Nil
+            , _visibility_timeout_seconds = TF.Nil
             }
 
 {- | The @aws_ssm_association@ AWS resource.
@@ -11798,7 +11797,7 @@ data SsmAssociationResource s = SsmAssociationResource {
     , _document_version    :: !(TF.Attr s P.Text)
     {- ^ (Optional) The document version you want to associate with the target(s). Can be a specific version or the default version. -}
     , _instance_id         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The instance ID to apply an SSM document to. -}
+    {- ^ (Optional) The instance ID to apply an SSM document to. Use @targets@ with key @InstanceIds@ for document schema versions 2.0 and above. -}
     , _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the SSM document to apply. -}
     , _output_location     :: !(TF.Attr s P.Text)
@@ -11921,26 +11920,45 @@ ssmAssociationResource =
 Provides an SSM Parameter resource.
 -}
 data SsmParameterResource s = SsmParameterResource {
-      _key_id    :: !(TF.Attr s P.Text)
+      _allowed_pattern :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A regular expression used to validate the parameter value. -}
+    , _description     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The description of the parameter. -}
+    , _key_id          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The KMS key id or arn for encrypting a SecureString. -}
-    , _name      :: !(TF.Attr s P.Text)
+    , _name            :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the parameter. -}
-    , _overwrite :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Overwrite an existing parameter. If not specified, will default to @false@ . -}
-    , _type'     :: !(TF.Attr s P.Text)
+    , _overwrite       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Overwrite an existing parameter. If not specified, will default to @false@ if the resource has not been created by terraform to avoid overwrite of existing resource and will default to @true@ otherwise (terraform lifecycle rules should then be used to manage the update behavior). -}
+    , _tags            :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) A mapping of tags to assign to the object. -}
+    , _type'           :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of the parameter. Valid types are @String@ , @StringList@ and @SecureString@ . -}
-    , _value     :: !(TF.Attr s P.Text)
+    , _value           :: !(TF.Attr s P.Text)
     {- ^ (Required) The value of the parameter. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SsmParameterResource s) where
     toHCL SsmParameterResource{..} = TF.inline $ catMaybes
-        [ TF.assign "key_id" <$> TF.attribute _key_id
+        [ TF.assign "allowed_pattern" <$> TF.attribute _allowed_pattern
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "key_id" <$> TF.attribute _key_id
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "overwrite" <$> TF.attribute _overwrite
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "value" <$> TF.attribute _value
         ]
+
+instance P.HasAllowedPattern (SsmParameterResource s) (TF.Attr s P.Text) where
+    allowedPattern =
+        lens (_allowed_pattern :: SsmParameterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _allowed_pattern = a } :: SsmParameterResource s)
+
+instance P.HasDescription (SsmParameterResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: SsmParameterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: SsmParameterResource s)
 
 instance P.HasKeyId (SsmParameterResource s) (TF.Attr s P.Text) where
     keyId =
@@ -11957,6 +11975,11 @@ instance P.HasOverwrite (SsmParameterResource s) (TF.Attr s P.Text) where
         lens (_overwrite :: SsmParameterResource s -> TF.Attr s P.Text)
              (\s a -> s { _overwrite = a } :: SsmParameterResource s)
 
+instance P.HasTags (SsmParameterResource s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: SsmParameterResource s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: SsmParameterResource s)
+
 instance P.HasType' (SsmParameterResource s) (TF.Attr s P.Text) where
     type' =
         lens (_type' :: SsmParameterResource s -> TF.Attr s P.Text)
@@ -11967,8 +11990,16 @@ instance P.HasValue (SsmParameterResource s) (TF.Attr s P.Text) where
         lens (_value :: SsmParameterResource s -> TF.Attr s P.Text)
              (\s a -> s { _value = a } :: SsmParameterResource s)
 
+instance s ~ s' => P.HasComputedAllowedPattern (TF.Ref s' (SsmParameterResource s)) (TF.Attr s P.Text) where
+    computedAllowedPattern =
+        (_allowed_pattern :: SsmParameterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SsmParameterResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SsmParameterResource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedKeyId (TF.Ref s' (SsmParameterResource s)) (TF.Attr s P.Text) where
     computedKeyId =
@@ -11983,6 +12014,11 @@ instance s ~ s' => P.HasComputedOverwrite (TF.Ref s' (SsmParameterResource s)) (
         (_overwrite :: SsmParameterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (SsmParameterResource s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
+        (_tags :: SsmParameterResource s -> TF.Attr s (P.Tags s))
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedType' (TF.Ref s' (SsmParameterResource s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
@@ -11993,264 +12029,14 @@ ssmParameterResource :: TF.Resource P.AWS (SsmParameterResource s)
 ssmParameterResource =
     TF.newResource "aws_ssm_parameter" $
         SsmParameterResource {
-              _key_id = TF.Nil
+              _allowed_pattern = TF.Nil
+            , _description = TF.Nil
+            , _key_id = TF.Nil
             , _name = TF.Nil
             , _overwrite = TF.Nil
+            , _tags = TF.Nil
             , _type' = TF.Nil
             , _value = TF.Nil
-            }
-
-{- | The @aws_vpc_endpoint_connection_notification@ AWS resource.
-
-Provides a VPC Endpoint connection notification resource. Connection
-notifications notify subscribers of VPC Endpoint events.
--}
-data VpcEndpointConnectionNotificationResource s = VpcEndpointConnectionNotificationResource {
-      _connection_events           :: !(TF.Attr s P.Text)
-    {- ^ (Required) One or more endpoint <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpcEndpointConnectionNotification.html#API_CreateVpcEndpointConnectionNotification_RequestParameters> for which to receive notifications. -}
-    , _connection_notification_arn :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ARN of the SNS topic for the notifications. -}
-    , _vpc_endpoint_id             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of the VPC Endpoint to receive notifications for. -}
-    , _vpc_endpoint_service_id     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of the VPC Endpoint Service to receive notifications for. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (VpcEndpointConnectionNotificationResource s) where
-    toHCL VpcEndpointConnectionNotificationResource{..} = TF.inline $ catMaybes
-        [ TF.assign "connection_events" <$> TF.attribute _connection_events
-        , TF.assign "connection_notification_arn" <$> TF.attribute _connection_notification_arn
-        , TF.assign "vpc_endpoint_id" <$> TF.attribute _vpc_endpoint_id
-        , TF.assign "vpc_endpoint_service_id" <$> TF.attribute _vpc_endpoint_service_id
-        ]
-
-instance P.HasConnectionEvents (VpcEndpointConnectionNotificationResource s) (TF.Attr s P.Text) where
-    connectionEvents =
-        lens (_connection_events :: VpcEndpointConnectionNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _connection_events = a } :: VpcEndpointConnectionNotificationResource s)
-
-instance P.HasConnectionNotificationArn (VpcEndpointConnectionNotificationResource s) (TF.Attr s P.Text) where
-    connectionNotificationArn =
-        lens (_connection_notification_arn :: VpcEndpointConnectionNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _connection_notification_arn = a } :: VpcEndpointConnectionNotificationResource s)
-
-instance P.HasVpcEndpointId (VpcEndpointConnectionNotificationResource s) (TF.Attr s P.Text) where
-    vpcEndpointId =
-        lens (_vpc_endpoint_id :: VpcEndpointConnectionNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vpc_endpoint_id = a } :: VpcEndpointConnectionNotificationResource s)
-
-instance P.HasVpcEndpointServiceId (VpcEndpointConnectionNotificationResource s) (TF.Attr s P.Text) where
-    vpcEndpointServiceId =
-        lens (_vpc_endpoint_service_id :: VpcEndpointConnectionNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vpc_endpoint_service_id = a } :: VpcEndpointConnectionNotificationResource s)
-
-instance s ~ s' => P.HasComputedConnectionEvents (TF.Ref s' (VpcEndpointConnectionNotificationResource s)) (TF.Attr s P.Text) where
-    computedConnectionEvents =
-        (_connection_events :: VpcEndpointConnectionNotificationResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedConnectionNotificationArn (TF.Ref s' (VpcEndpointConnectionNotificationResource s)) (TF.Attr s P.Text) where
-    computedConnectionNotificationArn =
-        (_connection_notification_arn :: VpcEndpointConnectionNotificationResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcEndpointConnectionNotificationResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedNotificationType (TF.Ref s' (VpcEndpointConnectionNotificationResource s)) (TF.Attr s P.Text) where
-    computedNotificationType x = TF.compute (TF.refKey x) "notification_type"
-
-instance s ~ s' => P.HasComputedState (TF.Ref s' (VpcEndpointConnectionNotificationResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
-
-instance s ~ s' => P.HasComputedVpcEndpointId (TF.Ref s' (VpcEndpointConnectionNotificationResource s)) (TF.Attr s P.Text) where
-    computedVpcEndpointId =
-        (_vpc_endpoint_id :: VpcEndpointConnectionNotificationResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVpcEndpointServiceId (TF.Ref s' (VpcEndpointConnectionNotificationResource s)) (TF.Attr s P.Text) where
-    computedVpcEndpointServiceId =
-        (_vpc_endpoint_service_id :: VpcEndpointConnectionNotificationResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-vpcEndpointConnectionNotificationResource :: TF.Resource P.AWS (VpcEndpointConnectionNotificationResource s)
-vpcEndpointConnectionNotificationResource =
-    TF.newResource "aws_vpc_endpoint_connection_notification" $
-        VpcEndpointConnectionNotificationResource {
-              _connection_events = TF.Nil
-            , _connection_notification_arn = TF.Nil
-            , _vpc_endpoint_id = TF.Nil
-            , _vpc_endpoint_service_id = TF.Nil
-            }
-
-{- | The @aws_vpc_endpoint@ AWS resource.
-
-Provides a VPC Endpoint resource. ~> NOTE on VPC Endpoints and VPC Endpoint
-Associations: Terraform provides both standalone VPC Endpoint Associations
-for <vpc_endpoint_route_table_association.html> - (an association between a
-VPC endpoint and a single @route_table_id@ ) and
-<vpc_endpoint_subnet_association.html> - (an association between a VPC
-endpoint and a single @subnet_id@ ) and a VPC Endpoint resource with
-@route_table_ids@ and @subnet_ids@ attributes. Do not use the same resource
-ID in both a VPC Endpoint resource and a VPC Endpoint Association resource.
-Doing so will cause a conflict of associations and will overwrite the
-association.
--}
-data VpcEndpointResource s = VpcEndpointResource {
-      _auto_accept         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account). -}
-    , _policy              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A policy to attach to the endpoint that controls access to the service. Applicable for endpoints of type @Gateway@ . Defaults to full access. -}
-    , _private_dns_enabled :: !(TF.Attr s P.Bool)
-    {- ^ (Optional) Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type @Interface@ . Defaults to @false@ . -}
-    , _route_table_ids     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) One or more route table IDs. Applicable for endpoints of type @Gateway@ . -}
-    , _security_group_ids  :: !(TF.Attr s [TF.Attr s P.Text])
-    {- ^ (Optional) The ID of one or more security groups to associate with the network interface. Required for endpoints of type @Interface@ . -}
-    , _service_name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The service name, in the form @com.amazonaws.region.service@ for AWS services. -}
-    , _subnet_ids          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of one or more subnets in which to create a network interface for the endpoint. Applicable for endpoints of type @Interface@ . -}
-    , _vpc_endpoint_type   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The VPC endpoint type, @Gateway@ or @Interface@ . Defaults to @Gateway@ . -}
-    , _vpc_id              :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the VPC in which the endpoint will be used. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (VpcEndpointResource s) where
-    toHCL VpcEndpointResource{..} = TF.inline $ catMaybes
-        [ TF.assign "auto_accept" <$> TF.attribute _auto_accept
-        , TF.assign "policy" <$> TF.attribute _policy
-        , TF.assign "private_dns_enabled" <$> TF.attribute _private_dns_enabled
-        , TF.assign "route_table_ids" <$> TF.attribute _route_table_ids
-        , TF.assign "security_group_ids" <$> TF.attribute _security_group_ids
-        , TF.assign "service_name" <$> TF.attribute _service_name
-        , TF.assign "subnet_ids" <$> TF.attribute _subnet_ids
-        , TF.assign "vpc_endpoint_type" <$> TF.attribute _vpc_endpoint_type
-        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
-        ]
-
-instance P.HasAutoAccept (VpcEndpointResource s) (TF.Attr s P.Text) where
-    autoAccept =
-        lens (_auto_accept :: VpcEndpointResource s -> TF.Attr s P.Text)
-             (\s a -> s { _auto_accept = a } :: VpcEndpointResource s)
-
-instance P.HasPolicy (VpcEndpointResource s) (TF.Attr s P.Text) where
-    policy =
-        lens (_policy :: VpcEndpointResource s -> TF.Attr s P.Text)
-             (\s a -> s { _policy = a } :: VpcEndpointResource s)
-
-instance P.HasPrivateDnsEnabled (VpcEndpointResource s) (TF.Attr s P.Bool) where
-    privateDnsEnabled =
-        lens (_private_dns_enabled :: VpcEndpointResource s -> TF.Attr s P.Bool)
-             (\s a -> s { _private_dns_enabled = a } :: VpcEndpointResource s)
-
-instance P.HasRouteTableIds (VpcEndpointResource s) (TF.Attr s P.Text) where
-    routeTableIds =
-        lens (_route_table_ids :: VpcEndpointResource s -> TF.Attr s P.Text)
-             (\s a -> s { _route_table_ids = a } :: VpcEndpointResource s)
-
-instance P.HasSecurityGroupIds (VpcEndpointResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    securityGroupIds =
-        lens (_security_group_ids :: VpcEndpointResource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _security_group_ids = a } :: VpcEndpointResource s)
-
-instance P.HasServiceName (VpcEndpointResource s) (TF.Attr s P.Text) where
-    serviceName =
-        lens (_service_name :: VpcEndpointResource s -> TF.Attr s P.Text)
-             (\s a -> s { _service_name = a } :: VpcEndpointResource s)
-
-instance P.HasSubnetIds (VpcEndpointResource s) (TF.Attr s P.Text) where
-    subnetIds =
-        lens (_subnet_ids :: VpcEndpointResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subnet_ids = a } :: VpcEndpointResource s)
-
-instance P.HasVpcEndpointType (VpcEndpointResource s) (TF.Attr s P.Text) where
-    vpcEndpointType =
-        lens (_vpc_endpoint_type :: VpcEndpointResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vpc_endpoint_type = a } :: VpcEndpointResource s)
-
-instance P.HasVpcId (VpcEndpointResource s) (TF.Attr s P.Text) where
-    vpcId =
-        lens (_vpc_id :: VpcEndpointResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vpc_id = a } :: VpcEndpointResource s)
-
-instance s ~ s' => P.HasComputedAutoAccept (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Text) where
-    computedAutoAccept =
-        (_auto_accept :: VpcEndpointResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Text) where
-    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
-
-instance s ~ s' => P.HasComputedDnsEntry (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Text) where
-    computedDnsEntry x = TF.compute (TF.refKey x) "dns_entry"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedNetworkInterfaceIds (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Text) where
-    computedNetworkInterfaceIds x = TF.compute (TF.refKey x) "network_interface_ids"
-
-instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Text) where
-    computedPolicy =
-        (_policy :: VpcEndpointResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPrefixListId (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Text) where
-    computedPrefixListId x = TF.compute (TF.refKey x) "prefix_list_id"
-
-instance s ~ s' => P.HasComputedPrivateDnsEnabled (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Bool) where
-    computedPrivateDnsEnabled =
-        (_private_dns_enabled :: VpcEndpointResource s -> TF.Attr s P.Bool)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRouteTableIds (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Text) where
-    computedRouteTableIds =
-        (_route_table_ids :: VpcEndpointResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSecurityGroupIds (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSecurityGroupIds =
-        (_security_group_ids :: VpcEndpointResource s -> TF.Attr s [TF.Attr s P.Text])
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Text) where
-    computedServiceName =
-        (_service_name :: VpcEndpointResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedState (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
-
-instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Text) where
-    computedSubnetIds =
-        (_subnet_ids :: VpcEndpointResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVpcEndpointType (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Text) where
-    computedVpcEndpointType =
-        (_vpc_endpoint_type :: VpcEndpointResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s P.Text) where
-    computedVpcId =
-        (_vpc_id :: VpcEndpointResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-vpcEndpointResource :: TF.Resource P.AWS (VpcEndpointResource s)
-vpcEndpointResource =
-    TF.newResource "aws_vpc_endpoint" $
-        VpcEndpointResource {
-              _auto_accept = TF.Nil
-            , _policy = TF.Nil
-            , _private_dns_enabled = TF.Nil
-            , _route_table_ids = TF.Nil
-            , _security_group_ids = TF.Nil
-            , _service_name = TF.Nil
-            , _subnet_ids = TF.Nil
-            , _vpc_endpoint_type = TF.Nil
-            , _vpc_id = TF.Nil
             }
 
 {- | The @aws_vpc_endpoint_service_allowed_principal@ AWS resource.
@@ -12308,14 +12094,94 @@ vpcEndpointServiceAllowedPrincipalResource =
             , _vpc_endpoint_service_id = TF.Nil
             }
 
+{- | The @aws_vpc_peering_connection_options@ AWS resource.
+
+Provides a resource to manage VPC peering connection options. ~> NOTE on VPC
+Peering Connections and VPC Peering Connection Options: Terraform provides
+both a standalone VPC Peering Connection Options and a <vpc_peering.html>
+resource with @accepter@ and @requester@ attributes. Do not manage options
+for the same VPC peering connection in both a VPC Peering Connection
+resource and a VPC Peering Connection Options resource. Doing so will cause
+a conflict of options and will overwrite the options. Using a VPC Peering
+Connection Options resource decouples management of the connection options
+from management of the VPC Peering Connection and allows options to be set
+correctly in cross-account scenarios. Basic usage:
+-}
+data VpcPeeringConnectionOptionsResource s = VpcPeeringConnectionOptionsResource {
+      _accepter                  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) - An optional configuration block that allows for [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options to be set for the VPC that accepts the peering connection (a maximum of one). -}
+    , _requester                 :: !(TF.Attr s P.Text)
+    {- ^ (Optional) - A optional configuration block that allows for [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options to be set for the VPC that requests the peering connection (a maximum of one). -}
+    , _vpc_peering_connection_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ID of the requester VPC peering connection. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (VpcPeeringConnectionOptionsResource s) where
+    toHCL VpcPeeringConnectionOptionsResource{..} = TF.inline $ catMaybes
+        [ TF.assign "accepter" <$> TF.attribute _accepter
+        , TF.assign "requester" <$> TF.attribute _requester
+        , TF.assign "vpc_peering_connection_id" <$> TF.attribute _vpc_peering_connection_id
+        ]
+
+instance P.HasAccepter (VpcPeeringConnectionOptionsResource s) (TF.Attr s P.Text) where
+    accepter =
+        lens (_accepter :: VpcPeeringConnectionOptionsResource s -> TF.Attr s P.Text)
+             (\s a -> s { _accepter = a } :: VpcPeeringConnectionOptionsResource s)
+
+instance P.HasRequester (VpcPeeringConnectionOptionsResource s) (TF.Attr s P.Text) where
+    requester =
+        lens (_requester :: VpcPeeringConnectionOptionsResource s -> TF.Attr s P.Text)
+             (\s a -> s { _requester = a } :: VpcPeeringConnectionOptionsResource s)
+
+instance P.HasVpcPeeringConnectionId (VpcPeeringConnectionOptionsResource s) (TF.Attr s P.Text) where
+    vpcPeeringConnectionId =
+        lens (_vpc_peering_connection_id :: VpcPeeringConnectionOptionsResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vpc_peering_connection_id = a } :: VpcPeeringConnectionOptionsResource s)
+
+instance s ~ s' => P.HasComputedAccepter (TF.Ref s' (VpcPeeringConnectionOptionsResource s)) (TF.Attr s P.Text) where
+    computedAccepter =
+        (_accepter :: VpcPeeringConnectionOptionsResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcPeeringConnectionOptionsResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionOptionsResource s)) (TF.Attr s P.Text) where
+    computedRequester =
+        (_requester :: VpcPeeringConnectionOptionsResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVpcPeeringConnectionId (TF.Ref s' (VpcPeeringConnectionOptionsResource s)) (TF.Attr s P.Text) where
+    computedVpcPeeringConnectionId =
+        (_vpc_peering_connection_id :: VpcPeeringConnectionOptionsResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+vpcPeeringConnectionOptionsResource :: TF.Resource P.AWS (VpcPeeringConnectionOptionsResource s)
+vpcPeeringConnectionOptionsResource =
+    TF.newResource "aws_vpc_peering_connection_options" $
+        VpcPeeringConnectionOptionsResource {
+              _accepter = TF.Nil
+            , _requester = TF.Nil
+            , _vpc_peering_connection_id = TF.Nil
+            }
+
 {- | The @aws_vpc_peering_connection@ AWS resource.
 
-Provides a resource to manage a VPC Peering Connection resource. -> Note:
-For cross-account (requester's AWS account differs from the accepter's AWS
-account) or inter-region VPC Peering Connections use the
-@aws_vpc_peering_connection@ resource to manage the requester's side of the
-connection and use the @aws_vpc_peering_connection_accepter@ resource to
-manage the accepter's side of the connection.
+Provides a resource to manage a VPC peering connection. ~> NOTE on VPC
+Peering Connections and VPC Peering Connection Options: Terraform provides
+both a standalone <vpc_peering_options.html> and a VPC Peering Connection
+resource with @accepter@ and @requester@ attributes. Do not manage options
+for the same VPC peering connection in both a VPC Peering Connection
+resource and a VPC Peering Connection Options resource. Doing so will cause
+a conflict of options and will overwrite the options. Using a VPC Peering
+Connection Options resource decouples management of the connection options
+from management of the VPC Peering Connection and allows options to be set
+correctly in cross-account scenarios. -> Note: For cross-account
+(requester's AWS account differs from the accepter's AWS account) or
+inter-region VPC Peering Connections use the @aws_vpc_peering_connection@
+resource to manage the requester's side of the connection and use the
+@aws_vpc_peering_connection_accepter@ resource to manage the accepter's side
+of the connection.
 -}
 data VpcPeeringConnectionResource s = VpcPeeringConnectionResource {
       _accepter      :: !(TF.Attr s P.Text)
@@ -12489,51 +12355,51 @@ vpnConnectionRouteResource =
             , _vpn_connection_id = TF.Nil
             }
 
-{- | The @aws_waf_ipset@ AWS resource.
+{- | The @aws_waf_byte_match_set@ AWS resource.
 
-Provides a WAF IPSet Resource
+Provides a WAF Byte Match Set Resource
 -}
-data WafIpsetResource s = WafIpsetResource {
-      _ip_set_descriptors :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Specifies the IP address type (IPV4 or IPV6) and the IP address range (in CIDR format) that web requests originate from. -}
-    , _name               :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name or description of the IPSet. -}
+data WafByteMatchSetResource s = WafByteMatchSetResource {
+      _byte_match_tuples :: !(TF.Attr s P.Text)
+    {- ^ - Specifies the bytes (typically a string that corresponds with ASCII characters) that you want to search for in web requests, the location in requests that you want to search, and other settings. -}
+    , _name              :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name or description of the Byte Match Set. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (WafIpsetResource s) where
-    toHCL WafIpsetResource{..} = TF.inline $ catMaybes
-        [ TF.assign "ip_set_descriptors" <$> TF.attribute _ip_set_descriptors
+instance TF.ToHCL (WafByteMatchSetResource s) where
+    toHCL WafByteMatchSetResource{..} = TF.inline $ catMaybes
+        [ TF.assign "byte_match_tuples" <$> TF.attribute _byte_match_tuples
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasIpSetDescriptors (WafIpsetResource s) (TF.Attr s P.Text) where
-    ipSetDescriptors =
-        lens (_ip_set_descriptors :: WafIpsetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_set_descriptors = a } :: WafIpsetResource s)
+instance P.HasByteMatchTuples (WafByteMatchSetResource s) (TF.Attr s P.Text) where
+    byteMatchTuples =
+        lens (_byte_match_tuples :: WafByteMatchSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _byte_match_tuples = a } :: WafByteMatchSetResource s)
 
-instance P.HasName (WafIpsetResource s) (TF.Attr s P.Text) where
+instance P.HasName (WafByteMatchSetResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: WafIpsetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: WafIpsetResource s)
+        lens (_name :: WafByteMatchSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: WafByteMatchSetResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (WafIpsetResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedByteMatchTuples (TF.Ref s' (WafByteMatchSetResource s)) (TF.Attr s P.Text) where
+    computedByteMatchTuples =
+        (_byte_match_tuples :: WafByteMatchSetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (WafByteMatchSetResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedIpSetDescriptors (TF.Ref s' (WafIpsetResource s)) (TF.Attr s P.Text) where
-    computedIpSetDescriptors =
-        (_ip_set_descriptors :: WafIpsetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (WafIpsetResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (WafByteMatchSetResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: WafIpsetResource s -> TF.Attr s P.Text)
+        (_name :: WafByteMatchSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-wafIpsetResource :: TF.Resource P.AWS (WafIpsetResource s)
-wafIpsetResource =
-    TF.newResource "aws_waf_ipset" $
-        WafIpsetResource {
-              _ip_set_descriptors = TF.Nil
+wafByteMatchSetResource :: TF.Resource P.AWS (WafByteMatchSetResource s)
+wafByteMatchSetResource =
+    TF.newResource "aws_waf_byte_match_set" $
+        WafByteMatchSetResource {
+              _byte_match_tuples = TF.Nil
             , _name = TF.Nil
             }
 
@@ -12625,4 +12491,239 @@ wafRateBasedRuleResource =
             , _predicates = TF.Nil
             , _rate_key = TF.Nil
             , _rate_limit = TF.Nil
+            }
+
+{- | The @aws_waf_regex_pattern_set@ AWS resource.
+
+Provides a WAF Regex Pattern Set Resource
+-}
+data WafRegexPatternSetResource s = WafRegexPatternSetResource {
+      _name                  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name or description of the Regex Pattern Set. -}
+    , _regex_pattern_strings :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of regular expression (regex) patterns that you want AWS WAF to search for, such as @B[a@]dB[o0]t@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (WafRegexPatternSetResource s) where
+    toHCL WafRegexPatternSetResource{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "regex_pattern_strings" <$> TF.attribute _regex_pattern_strings
+        ]
+
+instance P.HasName (WafRegexPatternSetResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: WafRegexPatternSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: WafRegexPatternSetResource s)
+
+instance P.HasRegexPatternStrings (WafRegexPatternSetResource s) (TF.Attr s P.Text) where
+    regexPatternStrings =
+        lens (_regex_pattern_strings :: WafRegexPatternSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _regex_pattern_strings = a } :: WafRegexPatternSetResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (WafRegexPatternSetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (WafRegexPatternSetResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: WafRegexPatternSetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRegexPatternStrings (TF.Ref s' (WafRegexPatternSetResource s)) (TF.Attr s P.Text) where
+    computedRegexPatternStrings =
+        (_regex_pattern_strings :: WafRegexPatternSetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+wafRegexPatternSetResource :: TF.Resource P.AWS (WafRegexPatternSetResource s)
+wafRegexPatternSetResource =
+    TF.newResource "aws_waf_regex_pattern_set" $
+        WafRegexPatternSetResource {
+              _name = TF.Nil
+            , _regex_pattern_strings = TF.Nil
+            }
+
+{- | The @aws_wafregional_rate_based_rule@ AWS resource.
+
+Provides a WAF Rate Based Rule Resource
+-}
+data WafregionalRateBasedRuleResource s = WafregionalRateBasedRuleResource {
+      _metric_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name or description for the Amazon CloudWatch metric of this rule. -}
+    , _name        :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name or description of the rule. -}
+    , _predicate   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) One of ByteMatchSet, IPSet, SizeConstraintSet, SqlInjectionMatchSet, or XssMatchSet objects to include in a rule. -}
+    , _rate_key    :: !(TF.Attr s P.Text)
+    {- ^ (Required) Valid value is IP. -}
+    , _rate_limit  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The maximum number of requests, which have an identical value in the field specified by the RateKey, allowed in a five-minute period. Minimum value is 2000. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (WafregionalRateBasedRuleResource s) where
+    toHCL WafregionalRateBasedRuleResource{..} = TF.inline $ catMaybes
+        [ TF.assign "metric_name" <$> TF.attribute _metric_name
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "predicate" <$> TF.attribute _predicate
+        , TF.assign "rate_key" <$> TF.attribute _rate_key
+        , TF.assign "rate_limit" <$> TF.attribute _rate_limit
+        ]
+
+instance P.HasMetricName (WafregionalRateBasedRuleResource s) (TF.Attr s P.Text) where
+    metricName =
+        lens (_metric_name :: WafregionalRateBasedRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _metric_name = a } :: WafregionalRateBasedRuleResource s)
+
+instance P.HasName (WafregionalRateBasedRuleResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: WafregionalRateBasedRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: WafregionalRateBasedRuleResource s)
+
+instance P.HasPredicate (WafregionalRateBasedRuleResource s) (TF.Attr s P.Text) where
+    predicate =
+        lens (_predicate :: WafregionalRateBasedRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _predicate = a } :: WafregionalRateBasedRuleResource s)
+
+instance P.HasRateKey (WafregionalRateBasedRuleResource s) (TF.Attr s P.Text) where
+    rateKey =
+        lens (_rate_key :: WafregionalRateBasedRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _rate_key = a } :: WafregionalRateBasedRuleResource s)
+
+instance P.HasRateLimit (WafregionalRateBasedRuleResource s) (TF.Attr s P.Text) where
+    rateLimit =
+        lens (_rate_limit :: WafregionalRateBasedRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _rate_limit = a } :: WafregionalRateBasedRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalRateBasedRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedMetricName (TF.Ref s' (WafregionalRateBasedRuleResource s)) (TF.Attr s P.Text) where
+    computedMetricName =
+        (_metric_name :: WafregionalRateBasedRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (WafregionalRateBasedRuleResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: WafregionalRateBasedRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPredicate (TF.Ref s' (WafregionalRateBasedRuleResource s)) (TF.Attr s P.Text) where
+    computedPredicate =
+        (_predicate :: WafregionalRateBasedRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRateKey (TF.Ref s' (WafregionalRateBasedRuleResource s)) (TF.Attr s P.Text) where
+    computedRateKey =
+        (_rate_key :: WafregionalRateBasedRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRateLimit (TF.Ref s' (WafregionalRateBasedRuleResource s)) (TF.Attr s P.Text) where
+    computedRateLimit =
+        (_rate_limit :: WafregionalRateBasedRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+wafregionalRateBasedRuleResource :: TF.Resource P.AWS (WafregionalRateBasedRuleResource s)
+wafregionalRateBasedRuleResource =
+    TF.newResource "aws_wafregional_rate_based_rule" $
+        WafregionalRateBasedRuleResource {
+              _metric_name = TF.Nil
+            , _name = TF.Nil
+            , _predicate = TF.Nil
+            , _rate_key = TF.Nil
+            , _rate_limit = TF.Nil
+            }
+
+{- | The @aws_wafregional_regex_pattern_set@ AWS resource.
+
+Provides a WAF Regional Regex Pattern Set Resource
+-}
+data WafregionalRegexPatternSetResource s = WafregionalRegexPatternSetResource {
+      _name                  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name or description of the Regex Pattern Set. -}
+    , _regex_pattern_strings :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of regular expression (regex) patterns that you want AWS WAF to search for, such as @B[a@]dB[o0]t@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (WafregionalRegexPatternSetResource s) where
+    toHCL WafregionalRegexPatternSetResource{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "regex_pattern_strings" <$> TF.attribute _regex_pattern_strings
+        ]
+
+instance P.HasName (WafregionalRegexPatternSetResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: WafregionalRegexPatternSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: WafregionalRegexPatternSetResource s)
+
+instance P.HasRegexPatternStrings (WafregionalRegexPatternSetResource s) (TF.Attr s P.Text) where
+    regexPatternStrings =
+        lens (_regex_pattern_strings :: WafregionalRegexPatternSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _regex_pattern_strings = a } :: WafregionalRegexPatternSetResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalRegexPatternSetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (WafregionalRegexPatternSetResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: WafregionalRegexPatternSetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRegexPatternStrings (TF.Ref s' (WafregionalRegexPatternSetResource s)) (TF.Attr s P.Text) where
+    computedRegexPatternStrings =
+        (_regex_pattern_strings :: WafregionalRegexPatternSetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+wafregionalRegexPatternSetResource :: TF.Resource P.AWS (WafregionalRegexPatternSetResource s)
+wafregionalRegexPatternSetResource =
+    TF.newResource "aws_wafregional_regex_pattern_set" $
+        WafregionalRegexPatternSetResource {
+              _name = TF.Nil
+            , _regex_pattern_strings = TF.Nil
+            }
+
+{- | The @aws_wafregional_size_constraint_set@ AWS resource.
+
+Provides a WAF Regional Size Constraint Set Resource for use with
+Application Load Balancer.
+-}
+data WafregionalSizeConstraintSetResource s = WafregionalSizeConstraintSetResource {
+      _name             :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name or description of the Size Constraint Set. -}
+    , _size_constraints :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Specifies the parts of web requests that you want to inspect the size of. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (WafregionalSizeConstraintSetResource s) where
+    toHCL WafregionalSizeConstraintSetResource{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "size_constraints" <$> TF.attribute _size_constraints
+        ]
+
+instance P.HasName (WafregionalSizeConstraintSetResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: WafregionalSizeConstraintSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: WafregionalSizeConstraintSetResource s)
+
+instance P.HasSizeConstraints (WafregionalSizeConstraintSetResource s) (TF.Attr s P.Text) where
+    sizeConstraints =
+        lens (_size_constraints :: WafregionalSizeConstraintSetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _size_constraints = a } :: WafregionalSizeConstraintSetResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalSizeConstraintSetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (WafregionalSizeConstraintSetResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: WafregionalSizeConstraintSetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSizeConstraints (TF.Ref s' (WafregionalSizeConstraintSetResource s)) (TF.Attr s P.Text) where
+    computedSizeConstraints =
+        (_size_constraints :: WafregionalSizeConstraintSetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+wafregionalSizeConstraintSetResource :: TF.Resource P.AWS (WafregionalSizeConstraintSetResource s)
+wafregionalSizeConstraintSetResource =
+    TF.newResource "aws_wafregional_size_constraint_set" $
+        WafregionalSizeConstraintSetResource {
+              _name = TF.Nil
+            , _size_constraints = TF.Nil
             }

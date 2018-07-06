@@ -31,10 +31,12 @@ module Terrafomo.Local.Resource
     -- ** Arguments
     , P.HasContent (..)
     , P.HasFilename (..)
+    , P.HasSensitiveContent (..)
 
     -- ** Computed Attributes
     , P.HasComputedContent (..)
     , P.HasComputedFilename (..)
+    , P.HasComputedSensitiveContent (..)
 
     -- * Re-exported Types
     , module P
@@ -72,16 +74,19 @@ diffs in environments where configurations are routinely applied by many
 different users or within automation systems.
 -}
 data FileResource s = FileResource {
-      _content  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The content of file to create. -}
-    , _filename :: !(TF.Attr s P.Text)
+      _content           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The content of file to create. Conflicts with @sensitive_content@ . -}
+    , _filename          :: !(TF.Attr s P.Text)
     {- ^ (Required) The path of the file to create. -}
+    , _sensitive_content :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The content of file to create. Will not be displayed in diffs. Conflicts with @content@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (FileResource s) where
     toHCL FileResource{..} = TF.inline $ catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "filename" <$> TF.attribute _filename
+        , TF.assign "sensitive_content" <$> TF.attribute _sensitive_content
         ]
 
 instance P.HasContent (FileResource s) (TF.Attr s P.Text) where
@@ -94,6 +99,11 @@ instance P.HasFilename (FileResource s) (TF.Attr s P.Text) where
         lens (_filename :: FileResource s -> TF.Attr s P.Text)
              (\s a -> s { _filename = a } :: FileResource s)
 
+instance P.HasSensitiveContent (FileResource s) (TF.Attr s P.Text) where
+    sensitiveContent =
+        lens (_sensitive_content :: FileResource s -> TF.Attr s P.Text)
+             (\s a -> s { _sensitive_content = a } :: FileResource s)
+
 instance s ~ s' => P.HasComputedContent (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedContent =
         (_content :: FileResource s -> TF.Attr s P.Text)
@@ -104,10 +114,16 @@ instance s ~ s' => P.HasComputedFilename (TF.Ref s' (FileResource s)) (TF.Attr s
         (_filename :: FileResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedSensitiveContent (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
+    computedSensitiveContent =
+        (_sensitive_content :: FileResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 fileResource :: TF.Resource TF.NoProvider (FileResource s)
 fileResource =
     TF.newResource "local_file" $
         FileResource {
               _content = TF.Nil
             , _filename = TF.Nil
+            , _sensitive_content = TF.Nil
             }

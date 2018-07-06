@@ -26,6 +26,7 @@ module Terrafomo.GitHub.Lens
     , HasAllowMergeCommit (..)
     , HasAllowRebaseMerge (..)
     , HasAllowSquashMerge (..)
+    , HasArchived (..)
     , HasAutoInit (..)
     , HasBranch (..)
     , HasColor (..)
@@ -37,12 +38,14 @@ module Terrafomo.GitHub.Lens
     , HasGitignoreTemplate (..)
     , HasHasDownloads (..)
     , HasHasIssues (..)
+    , HasHasProjects (..)
     , HasHasWiki (..)
     , HasHomepageUrl (..)
     , HasKey (..)
     , HasLdapDn (..)
     , HasLicenseTemplate (..)
     , HasName (..)
+    , HasParentTeamId (..)
     , HasPermission (..)
     , HasPrivacy (..)
     , HasPrivate (..)
@@ -63,6 +66,7 @@ module Terrafomo.GitHub.Lens
     , HasComputedAllowMergeCommit (..)
     , HasComputedAllowRebaseMerge (..)
     , HasComputedAllowSquashMerge (..)
+    , HasComputedArchived (..)
     , HasComputedAutoInit (..)
     , HasComputedAvatarUrl (..)
     , HasComputedBio (..)
@@ -80,14 +84,18 @@ module Terrafomo.GitHub.Lens
     , HasComputedFollowers (..)
     , HasComputedFollowing (..)
     , HasComputedFullName (..)
+    , HasComputedGit (..)
     , HasComputedGitCloneUrl (..)
     , HasComputedGitignoreTemplate (..)
     , HasComputedGpgKeys (..)
     , HasComputedGravatarId (..)
     , HasComputedHasDownloads (..)
     , HasComputedHasIssues (..)
+    , HasComputedHasProjects (..)
     , HasComputedHasWiki (..)
     , HasComputedHomepageUrl (..)
+    , HasComputedHooks (..)
+    , HasComputedHtmlUrl (..)
     , HasComputedHttpCloneUrl (..)
     , HasComputedId (..)
     , HasComputedKey (..)
@@ -97,6 +105,8 @@ module Terrafomo.GitHub.Lens
     , HasComputedLogin (..)
     , HasComputedMembers (..)
     , HasComputedName (..)
+    , HasComputedPages (..)
+    , HasComputedParentTeamId (..)
     , HasComputedPermission (..)
     , HasComputedPrivacy (..)
     , HasComputedPrivate (..)
@@ -150,6 +160,12 @@ class HasAllowSquashMerge a b | a -> b where
 
 instance HasAllowSquashMerge a b => HasAllowSquashMerge (TF.Schema l p a) b where
     allowSquashMerge = TF.configuration . allowSquashMerge
+
+class HasArchived a b | a -> b where
+    archived :: Lens' a b
+
+instance HasArchived a b => HasArchived (TF.Schema l p a) b where
+    archived = TF.configuration . archived
 
 class HasAutoInit a b | a -> b where
     autoInit :: Lens' a b
@@ -217,6 +233,12 @@ class HasHasIssues a b | a -> b where
 instance HasHasIssues a b => HasHasIssues (TF.Schema l p a) b where
     hasIssues = TF.configuration . hasIssues
 
+class HasHasProjects a b | a -> b where
+    hasProjects :: Lens' a b
+
+instance HasHasProjects a b => HasHasProjects (TF.Schema l p a) b where
+    hasProjects = TF.configuration . hasProjects
+
 class HasHasWiki a b | a -> b where
     hasWiki :: Lens' a b
 
@@ -252,6 +274,12 @@ class HasName a b | a -> b where
 
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
+
+class HasParentTeamId a b | a -> b where
+    parentTeamId :: Lens' a b
+
+instance HasParentTeamId a b => HasParentTeamId (TF.Schema l p a) b where
+    parentTeamId = TF.configuration . parentTeamId
 
 class HasPermission a b | a -> b where
     permission :: Lens' a b
@@ -349,6 +377,9 @@ class HasComputedAllowRebaseMerge a b | a -> b where
 class HasComputedAllowSquashMerge a b | a -> b where
     computedAllowSquashMerge :: a -> b
 
+class HasComputedArchived a b | a -> b where
+    computedArchived :: a -> b
+
 class HasComputedAutoInit a b | a -> b where
     computedAutoInit :: a -> b
 
@@ -400,6 +431,9 @@ class HasComputedFollowing a b | a -> b where
 class HasComputedFullName a b | a -> b where
     computedFullName :: a -> b
 
+class HasComputedGit a b | a -> b where
+    computedGit :: a -> b
+
 class HasComputedGitCloneUrl a b | a -> b where
     computedGitCloneUrl :: a -> b
 
@@ -418,11 +452,20 @@ class HasComputedHasDownloads a b | a -> b where
 class HasComputedHasIssues a b | a -> b where
     computedHasIssues :: a -> b
 
+class HasComputedHasProjects a b | a -> b where
+    computedHasProjects :: a -> b
+
 class HasComputedHasWiki a b | a -> b where
     computedHasWiki :: a -> b
 
 class HasComputedHomepageUrl a b | a -> b where
     computedHomepageUrl :: a -> b
+
+class HasComputedHooks a b | a -> b where
+    computedHooks :: a -> b
+
+class HasComputedHtmlUrl a b | a -> b where
+    computedHtmlUrl :: a -> b
 
 class HasComputedHttpCloneUrl a b | a -> b where
     computedHttpCloneUrl :: a -> b
@@ -450,6 +493,12 @@ class HasComputedMembers a b | a -> b where
 
 class HasComputedName a b | a -> b where
     computedName :: a -> b
+
+class HasComputedPages a b | a -> b where
+    computedPages :: a -> b
+
+class HasComputedParentTeamId a b | a -> b where
+    computedParentTeamId :: a -> b
 
 class HasComputedPermission a b | a -> b where
     computedPermission :: a -> b

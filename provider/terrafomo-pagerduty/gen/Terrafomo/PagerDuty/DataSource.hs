@@ -27,8 +27,14 @@ module Terrafomo.PagerDuty.DataSource
       EscalationPolicyData (..)
     , escalationPolicyData
 
+    , ExtensionSchemaData (..)
+    , extensionSchemaData
+
     , ScheduleData (..)
     , scheduleData
+
+    , TeamData (..)
+    , teamData
 
     , UserData (..)
     , userData
@@ -42,6 +48,7 @@ module Terrafomo.PagerDuty.DataSource
     , P.HasName (..)
 
     -- ** Computed Attributes
+    , P.HasComputedDescription (..)
     , P.HasComputedEmail (..)
     , P.HasComputedName (..)
     , P.HasComputedType' (..)
@@ -104,6 +111,41 @@ escalationPolicyData =
               _name = TF.Nil
             }
 
+{- | The @pagerduty_extension_schema@ PagerDuty datasource.
+
+Use this data source to get information about a specific
+<https://v2.developer.pagerduty.com/v2/page/api-reference#!/Extension_Schemas/get_extension_schemas>
+vendor that you can use for a service (e.g: Slack, Generic Webhook,
+ServiceNow).
+-}
+data ExtensionSchemaData s = ExtensionSchemaData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The extension name to use to find an extension vendor in the PagerDuty API. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ExtensionSchemaData s) where
+    toHCL ExtensionSchemaData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (ExtensionSchemaData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ExtensionSchemaData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ExtensionSchemaData s)
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ExtensionSchemaData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ExtensionSchemaData s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
+
+extensionSchemaData :: TF.DataSource P.PagerDuty (ExtensionSchemaData s)
+extensionSchemaData =
+    TF.newDataSource "pagerduty_extension_schema" $
+        ExtensionSchemaData {
+              _name = TF.Nil
+            }
+
 {- | The @pagerduty_schedule@ PagerDuty datasource.
 
 Use this data source to get information about a specific
@@ -132,6 +174,40 @@ scheduleData :: TF.DataSource P.PagerDuty (ScheduleData s)
 scheduleData =
     TF.newDataSource "pagerduty_schedule" $
         ScheduleData {
+              _name = TF.Nil
+            }
+
+{- | The @pagerduty_team@ PagerDuty datasource.
+
+Use this data source to get information about a specific
+<https://v1.developer.pagerduty.com/documentation/rest/teams/list> that you
+can use for other PagerDuty resources.
+-}
+data TeamData s = TeamData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the team to find in the PagerDuty API. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (TeamData s) where
+    toHCL TeamData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (TeamData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: TeamData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: TeamData s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+teamData :: TF.DataSource P.PagerDuty (TeamData s)
+teamData =
+    TF.newDataSource "pagerduty_team" $
+        TeamData {
               _name = TF.Nil
             }
 

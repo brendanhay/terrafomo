@@ -36,6 +36,15 @@ module Terrafomo.Scaleway.Resource
     , ServerResource (..)
     , serverResource
 
+    , SshKeyResource (..)
+    , sshKeyResource
+
+    , TokenResource (..)
+    , tokenResource
+
+    , UserDataResource (..)
+    , userDataResource
+
     , VolumeAttachmentResource (..)
     , volumeAttachmentResource
 
@@ -45,18 +54,25 @@ module Terrafomo.Scaleway.Resource
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasAction (..)
+    , P.HasBootType (..)
     , P.HasBootscript (..)
     , P.HasDescription (..)
     , P.HasDirection (..)
     , P.HasDynamicIpRequired (..)
+    , P.HasEmail (..)
     , P.HasEnableDefaultSecurity (..)
     , P.HasEnableIpv6 (..)
+    , P.HasExpires (..)
     , P.HasImage (..)
     , P.HasIpRange (..)
+    , P.HasKey (..)
     , P.HasName (..)
+    , P.HasPassword (..)
     , P.HasPort (..)
     , P.HasProtocol (..)
+    , P.HasPublicIp (..)
     , P.HasPublicIpv6 (..)
+    , P.HasReverse (..)
     , P.HasSecurityGroup (..)
     , P.HasServer (..)
     , P.HasSizeInGb (..)
@@ -64,26 +80,34 @@ module Terrafomo.Scaleway.Resource
     , P.HasStateDetail (..)
     , P.HasTags (..)
     , P.HasType' (..)
+    , P.HasValue (..)
     , P.HasVolume (..)
 
     -- ** Computed Attributes
     , P.HasComputedAction (..)
+    , P.HasComputedBootType (..)
     , P.HasComputedBootscript (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDirection (..)
     , P.HasComputedDynamicIpRequired (..)
+    , P.HasComputedEmail (..)
     , P.HasComputedEnableDefaultSecurity (..)
     , P.HasComputedEnableIpv6 (..)
+    , P.HasComputedExpirationDate (..)
+    , P.HasComputedExpires (..)
     , P.HasComputedId (..)
     , P.HasComputedImage (..)
     , P.HasComputedIp (..)
     , P.HasComputedIpRange (..)
+    , P.HasComputedKey (..)
     , P.HasComputedName (..)
+    , P.HasComputedPassword (..)
     , P.HasComputedPort (..)
     , P.HasComputedPrivateIp (..)
     , P.HasComputedProtocol (..)
     , P.HasComputedPublicIp (..)
     , P.HasComputedPublicIpv6 (..)
+    , P.HasComputedReverse (..)
     , P.HasComputedSecurityGroup (..)
     , P.HasComputedServer (..)
     , P.HasComputedSizeInGb (..)
@@ -91,6 +115,7 @@ module Terrafomo.Scaleway.Resource
     , P.HasComputedStateDetail (..)
     , P.HasComputedTags (..)
     , P.HasComputedType' (..)
+    , P.HasComputedValue (..)
     , P.HasComputedVolume (..)
 
     -- * Re-exported Types
@@ -127,14 +152,22 @@ deleted. For additional details please refer to
 <https://developer.scaleway.com/#ips> .
 -}
 data IpResource s = IpResource {
-      _server :: !(TF.Attr s P.Text)
+      _reverse :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Reverse DNS of the IP -}
+    , _server  :: !(TF.Attr s P.Text)
     {- ^ (Optional) ID of server to associate IP with -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (IpResource s) where
     toHCL IpResource{..} = TF.inline $ catMaybes
-        [ TF.assign "server" <$> TF.attribute _server
+        [ TF.assign "reverse" <$> TF.attribute _reverse
+        , TF.assign "server" <$> TF.attribute _server
         ]
+
+instance P.HasReverse (IpResource s) (TF.Attr s P.Text) where
+    reverse =
+        lens (_reverse :: IpResource s -> TF.Attr s P.Text)
+             (\s a -> s { _reverse = a } :: IpResource s)
 
 instance P.HasServer (IpResource s) (TF.Attr s P.Text) where
     server =
@@ -147,16 +180,18 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (IpResource s)) (TF.Attr s P.Text)
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
     computedIp x = TF.compute (TF.refKey x) "ip"
 
+instance s ~ s' => P.HasComputedReverse (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
+    computedReverse x = TF.compute (TF.refKey x) "reverse"
+
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
-    computedServer =
-        (_server :: IpResource s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedServer x = TF.compute (TF.refKey x) "server"
 
 ipResource :: TF.Resource P.Scaleway (IpResource s)
 ipResource =
     TF.newResource "scaleway_ip" $
         IpResource {
-              _server = TF.Nil
+              _reverse = TF.Nil
+            , _server = TF.Nil
             }
 
 {- | The @scaleway_security_group@ Scaleway resource.
@@ -336,7 +371,9 @@ For additional details please refer to
 <https://developer.scaleway.com/#servers> .
 -}
 data ServerResource s = ServerResource {
-      _bootscript          :: !(TF.Attr s P.Text)
+      _boot_type           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) the boot mechanism for this server. Possible values include @local@ and @bootscript@ -}
+    , _bootscript          :: !(TF.Attr s P.Text)
     {- ^ (Optional) server bootscript -}
     , _dynamic_ip_required :: !(TF.Attr s P.Text)
     {- ^ (Optional) make server publicly available -}
@@ -346,6 +383,8 @@ data ServerResource s = ServerResource {
     {- ^ (Required) base image of server -}
     , _name                :: !(TF.Attr s P.Text)
     {- ^ (Required) name of server -}
+    , _public_ip           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) set a public ip previously created (a real ip is expected here, not its resource id) -}
     , _public_ipv6         :: !(TF.Attr s P.Text)
     {- ^ - (Read Only) if @enable_ipv6@ is set this contains the ipv6 address of your instance -}
     , _security_group      :: !(TF.Attr s P.Text)
@@ -364,11 +403,13 @@ data ServerResource s = ServerResource {
 
 instance TF.ToHCL (ServerResource s) where
     toHCL ServerResource{..} = TF.inline $ catMaybes
-        [ TF.assign "bootscript" <$> TF.attribute _bootscript
+        [ TF.assign "boot_type" <$> TF.attribute _boot_type
+        , TF.assign "bootscript" <$> TF.attribute _bootscript
         , TF.assign "dynamic_ip_required" <$> TF.attribute _dynamic_ip_required
         , TF.assign "enable_ipv6" <$> TF.attribute _enable_ipv6
         , TF.assign "image" <$> TF.attribute _image
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "public_ip" <$> TF.attribute _public_ip
         , TF.assign "public_ipv6" <$> TF.attribute _public_ipv6
         , TF.assign "security_group" <$> TF.attribute _security_group
         , TF.assign "state" <$> TF.attribute _state
@@ -377,6 +418,11 @@ instance TF.ToHCL (ServerResource s) where
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "volume" <$> TF.attribute _volume
         ]
+
+instance P.HasBootType (ServerResource s) (TF.Attr s P.Text) where
+    bootType =
+        lens (_boot_type :: ServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _boot_type = a } :: ServerResource s)
 
 instance P.HasBootscript (ServerResource s) (TF.Attr s P.Text) where
     bootscript =
@@ -402,6 +448,11 @@ instance P.HasName (ServerResource s) (TF.Attr s P.Text) where
     name =
         lens (_name :: ServerResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ServerResource s)
+
+instance P.HasPublicIp (ServerResource s) (TF.Attr s P.Text) where
+    publicIp =
+        lens (_public_ip :: ServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _public_ip = a } :: ServerResource s)
 
 instance P.HasPublicIpv6 (ServerResource s) (TF.Attr s P.Text) where
     publicIpv6 =
@@ -437,6 +488,11 @@ instance P.HasVolume (ServerResource s) (TF.Attr s P.Text) where
     volume =
         lens (_volume :: ServerResource s -> TF.Attr s P.Text)
              (\s a -> s { _volume = a } :: ServerResource s)
+
+instance s ~ s' => P.HasComputedBootType (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
+    computedBootType =
+        (_boot_type :: ServerResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedBootscript (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedBootscript =
@@ -511,11 +567,13 @@ serverResource :: TF.Resource P.Scaleway (ServerResource s)
 serverResource =
     TF.newResource "scaleway_server" $
         ServerResource {
-              _bootscript = TF.Nil
+              _boot_type = TF.Nil
+            , _bootscript = TF.Nil
             , _dynamic_ip_required = TF.Nil
             , _enable_ipv6 = TF.Nil
             , _image = TF.Nil
             , _name = TF.Nil
+            , _public_ip = TF.Nil
             , _public_ipv6 = TF.Nil
             , _security_group = TF.Nil
             , _state = TF.Nil
@@ -523,6 +581,182 @@ serverResource =
             , _tags = TF.Nil
             , _type' = TF.Nil
             , _volume = TF.Nil
+            }
+
+{- | The @scaleway_ssh_key@ Scaleway resource.
+
+Manages user SSH Keys to access servers provisioned on scaleway. For
+additional details please refer to
+<https://developer.scaleway.com/#users-user-get> .
+-}
+data SshKeyResource s = SshKeyResource {
+      _key :: !(TF.Attr s P.Text)
+    {- ^ (Required) public key of the SSH key to be added -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SshKeyResource s) where
+    toHCL SshKeyResource{..} = TF.inline $ catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        ]
+
+instance P.HasKey (SshKeyResource s) (TF.Attr s P.Text) where
+    key =
+        lens (_key :: SshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _key = a } :: SshKeyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
+    computedKey =
+        (_key :: SshKeyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+sshKeyResource :: TF.Resource P.Scaleway (SshKeyResource s)
+sshKeyResource =
+    TF.newResource "scaleway_ssh_key" $
+        SshKeyResource {
+              _key = TF.Nil
+            }
+
+{- | The @scaleway_token@ Scaleway resource.
+
+Provides Tokens for scaleway API access. For additional details please refer
+to <https://developer.scaleway.com/#tokens-tokens-post> .
+-}
+data TokenResource s = TokenResource {
+      _description :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Token description -}
+    , _email       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Scaleway account email. Defaults to registered account -}
+    , _expires     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Define if the token should automatically expire or not -}
+    , _password    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Scaleway account password. Required for cross-account token management -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (TokenResource s) where
+    toHCL TokenResource{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "email" <$> TF.attribute _email
+        , TF.assign "expires" <$> TF.attribute _expires
+        , TF.assign "password" <$> TF.attribute _password
+        ]
+
+instance P.HasDescription (TokenResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: TokenResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: TokenResource s)
+
+instance P.HasEmail (TokenResource s) (TF.Attr s P.Text) where
+    email =
+        lens (_email :: TokenResource s -> TF.Attr s P.Text)
+             (\s a -> s { _email = a } :: TokenResource s)
+
+instance P.HasExpires (TokenResource s) (TF.Attr s P.Text) where
+    expires =
+        lens (_expires :: TokenResource s -> TF.Attr s P.Text)
+             (\s a -> s { _expires = a } :: TokenResource s)
+
+instance P.HasPassword (TokenResource s) (TF.Attr s P.Text) where
+    password =
+        lens (_password :: TokenResource s -> TF.Attr s P.Text)
+             (\s a -> s { _password = a } :: TokenResource s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: TokenResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
+    computedEmail =
+        (_email :: TokenResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedExpirationDate (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
+    computedExpirationDate x = TF.compute (TF.refKey x) "expiration_date"
+
+instance s ~ s' => P.HasComputedExpires (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
+    computedExpires =
+        (_expires :: TokenResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
+    computedPassword =
+        (_password :: TokenResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+tokenResource :: TF.Resource P.Scaleway (TokenResource s)
+tokenResource =
+    TF.newResource "scaleway_token" $
+        TokenResource {
+              _description = TF.Nil
+            , _email = TF.Nil
+            , _expires = TF.Nil
+            , _password = TF.Nil
+            }
+
+{- | The @scaleway_user_data@ Scaleway resource.
+
+Provides user data for servers. For additional details please refer to
+<https://developer.scaleway.com/#user-data> .
+-}
+data UserDataResource s = UserDataResource {
+      _key    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The key of the user data object -}
+    , _server :: !(TF.Attr s P.Text)
+    {- ^ (Required) ID of server to associate the user data with -}
+    , _value  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The value of the user data object -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (UserDataResource s) where
+    toHCL UserDataResource{..} = TF.inline $ catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "server" <$> TF.attribute _server
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance P.HasKey (UserDataResource s) (TF.Attr s P.Text) where
+    key =
+        lens (_key :: UserDataResource s -> TF.Attr s P.Text)
+             (\s a -> s { _key = a } :: UserDataResource s)
+
+instance P.HasServer (UserDataResource s) (TF.Attr s P.Text) where
+    server =
+        lens (_server :: UserDataResource s -> TF.Attr s P.Text)
+             (\s a -> s { _server = a } :: UserDataResource s)
+
+instance P.HasValue (UserDataResource s) (TF.Attr s P.Text) where
+    value =
+        lens (_value :: UserDataResource s -> TF.Attr s P.Text)
+             (\s a -> s { _value = a } :: UserDataResource s)
+
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (UserDataResource s)) (TF.Attr s P.Text) where
+    computedKey =
+        (_key :: UserDataResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedServer (TF.Ref s' (UserDataResource s)) (TF.Attr s P.Text) where
+    computedServer =
+        (_server :: UserDataResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (UserDataResource s)) (TF.Attr s P.Text) where
+    computedValue =
+        (_value :: UserDataResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+userDataResource :: TF.Resource P.Scaleway (UserDataResource s)
+userDataResource =
+    TF.newResource "scaleway_user_data" $
+        UserDataResource {
+              _key = TF.Nil
+            , _server = TF.Nil
+            , _value = TF.Nil
             }
 
 {- | The @scaleway_volume_attachment@ Scaleway resource.

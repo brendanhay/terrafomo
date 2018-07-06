@@ -39,6 +39,12 @@ module Terrafomo.Google.DataSource
     , ComputeAddressData (..)
     , computeAddressData
 
+    , ComputeBackendServiceData (..)
+    , computeBackendServiceData
+
+    , ComputeDefaultServiceAccountData (..)
+    , computeDefaultServiceAccountData
+
     , ComputeForwardingRuleData (..)
     , computeForwardingRuleData
 
@@ -59,6 +65,12 @@ module Terrafomo.Google.DataSource
 
     , ComputeRegionInstanceGroupData (..)
     , computeRegionInstanceGroupData
+
+    , ComputeRegionsData (..)
+    , computeRegionsData
+
+    , ComputeSslPolicyData (..)
+    , computeSslPolicyData
 
     , ComputeSubnetworkData (..)
     , computeSubnetworkData
@@ -84,17 +96,29 @@ module Terrafomo.Google.DataSource
     , DnsManagedZoneData (..)
     , dnsManagedZoneData
 
+    , FolderData (..)
+    , folderData
+
     , IamPolicyData (..)
     , iamPolicyData
 
     , KmsSecretData (..)
     , kmsSecretData
 
+    , NetblockIpRangesData (..)
+    , netblockIpRangesData
+
     , OrganizationData (..)
     , organizationData
 
     , ProjectData (..)
     , projectData
+
+    , ServiceAccountData (..)
+    , serviceAccountData
+
+    , ServiceAccountKeyData (..)
+    , serviceAccountKeyData
 
     , StorageObjectSignedUrlData (..)
     , storageObjectSignedUrlData
@@ -104,6 +128,8 @@ module Terrafomo.Google.DataSource
 
     -- * Overloaded Fields
     -- ** Arguments
+    , P.HasAccessToken (..)
+    , P.HasAccountId (..)
     , P.HasBillingAccount (..)
     , P.HasBinding (..)
     , P.HasBucket (..)
@@ -114,9 +140,10 @@ module Terrafomo.Google.DataSource
     , P.HasDisplayName (..)
     , P.HasDomain (..)
     , P.HasDuration (..)
+    , P.HasFolder (..)
     , P.HasHttpMethod (..)
     , P.HasHttpSslTcpInternal (..)
-    , P.HasId (..)
+    , P.HasLookupOrganization (..)
     , P.HasName (..)
     , P.HasNetwork (..)
     , P.HasOpen (..)
@@ -125,25 +152,36 @@ module Terrafomo.Google.DataSource
     , P.HasPath (..)
     , P.HasProject (..)
     , P.HasProjectId (..)
+    , P.HasPublicKeyType (..)
     , P.HasRegion (..)
     , P.HasSelfLink (..)
+    , P.HasServiceAccountId (..)
     , P.HasStatus (..)
     , P.HasTag (..)
     , P.HasZone (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAccessToken (..)
+    , P.HasComputedAccountId (..)
     , P.HasComputedAddress (..)
     , P.HasComputedArchiveSizeBytes (..)
     , P.HasComputedAvailableMemoryMb (..)
+    , P.HasComputedBackend (..)
     , P.HasComputedBackendService (..)
     , P.HasComputedBillingAccount (..)
     , P.HasComputedBinding (..)
     , P.HasComputedBucket (..)
+    , P.HasComputedCidrBlocks (..)
+    , P.HasComputedCidrBlocksIpv4 (..)
+    , P.HasComputedCidrBlocksIpv6 (..)
     , P.HasComputedCiphertext (..)
+    , P.HasComputedConnectionDrainingTimeoutSec (..)
     , P.HasComputedCreateTime (..)
     , P.HasComputedCreationTimestamp (..)
     , P.HasComputedCredentials (..)
     , P.HasComputedCryptoKey (..)
+    , P.HasComputedCustomFeatures (..)
+    , P.HasComputedDefaultClusterVersion (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDigest (..)
     , P.HasComputedDirectoryCustomerId (..)
@@ -152,10 +190,16 @@ module Terrafomo.Google.DataSource
     , P.HasComputedDnsName (..)
     , P.HasComputedDomain (..)
     , P.HasComputedDuration (..)
+    , P.HasComputedEmail (..)
+    , P.HasComputedEnableCdn (..)
+    , P.HasComputedEnabledFeatures (..)
     , P.HasComputedEntryPoint (..)
     , P.HasComputedFamily' (..)
+    , P.HasComputedFingerprint (..)
+    , P.HasComputedFolder (..)
     , P.HasComputedGatewayAddress (..)
     , P.HasComputedGatewayIpv4 (..)
+    , P.HasComputedHealthChecks (..)
     , P.HasComputedHttpMethod (..)
     , P.HasComputedHttpSslTcpInternal (..)
     , P.HasComputedHttpsTriggerUrl (..)
@@ -174,6 +218,8 @@ module Terrafomo.Google.DataSource
     , P.HasComputedLicenses (..)
     , P.HasComputedLifecycleState (..)
     , P.HasComputedLoadBalancingScheme (..)
+    , P.HasComputedLookupOrganization (..)
+    , P.HasComputedMinTlsVersion (..)
     , P.HasComputedName (..)
     , P.HasComputedNameServers (..)
     , P.HasComputedNamedPort (..)
@@ -185,16 +231,23 @@ module Terrafomo.Google.DataSource
     , P.HasComputedPath (..)
     , P.HasComputedPlaintext (..)
     , P.HasComputedPolicyData (..)
+    , P.HasComputedPortName (..)
     , P.HasComputedPortRange (..)
     , P.HasComputedPorts (..)
     , P.HasComputedPrivateIpGoogleAccess (..)
+    , P.HasComputedProfile (..)
     , P.HasComputedProject (..)
     , P.HasComputedProjectId (..)
     , P.HasComputedProjectIds (..)
+    , P.HasComputedProtocol (..)
+    , P.HasComputedPublicKey (..)
+    , P.HasComputedPublicKeyType (..)
     , P.HasComputedRegion (..)
     , P.HasComputedRepositoryUrl (..)
     , P.HasComputedSecondaryIpRange (..)
     , P.HasComputedSelfLink (..)
+    , P.HasComputedServiceAccountId (..)
+    , P.HasComputedSessionAffinity (..)
     , P.HasComputedSignedUrl (..)
     , P.HasComputedSize (..)
     , P.HasComputedSourceArchiveBucket (..)
@@ -209,9 +262,11 @@ module Terrafomo.Google.DataSource
     , P.HasComputedTag (..)
     , P.HasComputedTarget (..)
     , P.HasComputedTimeout (..)
+    , P.HasComputedTimeoutSec (..)
     , P.HasComputedTriggerBucket (..)
     , P.HasComputedTriggerHttp (..)
     , P.HasComputedTriggerTopic (..)
+    , P.HasComputedUniqueId (..)
     , P.HasComputedValidMasterVersions (..)
     , P.HasComputedValidNodeVersions (..)
     , P.HasComputedZone (..)
@@ -365,17 +420,25 @@ Use this data source to access the configuration of the Google Cloud
 provider.
 -}
 data ClientConfigData s = ClientConfigData {
-      _project :: !(TF.Attr s P.Text)
+      _access_token :: !(TF.Attr s P.Text)
+    {- ^ - The OAuth2 access token used by the client to authenticate against the Google Cloud API. -}
+    , _project      :: !(TF.Attr s P.Text)
     {- ^ - The ID of the project to apply any resources to. -}
-    , _region  :: !(TF.Attr s P.Text)
+    , _region       :: !(TF.Attr s P.Text)
     {- ^ - The region to operate under. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ClientConfigData s) where
     toHCL ClientConfigData{..} = TF.inline $ catMaybes
-        [ TF.assign "project" <$> TF.attribute _project
+        [ TF.assign "access_token" <$> TF.attribute _access_token
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
         ]
+
+instance P.HasAccessToken (ClientConfigData s) (TF.Attr s P.Text) where
+    accessToken =
+        lens (_access_token :: ClientConfigData s -> TF.Attr s P.Text)
+             (\s a -> s { _access_token = a } :: ClientConfigData s)
 
 instance P.HasProject (ClientConfigData s) (TF.Attr s P.Text) where
     project =
@@ -386,6 +449,11 @@ instance P.HasRegion (ClientConfigData s) (TF.Attr s P.Text) where
     region =
         lens (_region :: ClientConfigData s -> TF.Attr s P.Text)
              (\s a -> s { _region = a } :: ClientConfigData s)
+
+instance s ~ s' => P.HasComputedAccessToken (TF.Ref s' (ClientConfigData s)) (TF.Attr s P.Text) where
+    computedAccessToken =
+        (_access_token :: ClientConfigData s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ClientConfigData s)) (TF.Attr s P.Text) where
     computedProject =
@@ -401,7 +469,8 @@ clientConfigData :: TF.DataSource P.Google (ClientConfigData s)
 clientConfigData =
     TF.newDataSource "google_client_config" $
         ClientConfigData {
-              _project = TF.Nil
+              _access_token = TF.Nil
+            , _project = TF.Nil
             , _region = TF.Nil
             }
 
@@ -568,6 +637,121 @@ computeAddressData =
             , _region = TF.Nil
             }
 
+{- | The @google_compute_backend_service@ Google datasource.
+
+Provide acces to a Backend Service's attribute. For more information see
+<https://cloud.google.com/compute/docs/load-balancing/http/backend-service>
+and the
+<https://cloud.google.com/compute/docs/reference/latest/backendServices> .
+-}
+data ComputeBackendServiceData s = ComputeBackendServiceData {
+      _name    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Backend Service. -}
+    , _project :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeBackendServiceData s) where
+    toHCL ComputeBackendServiceData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        ]
+
+instance P.HasName (ComputeBackendServiceData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeBackendServiceData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeBackendServiceData s)
+
+instance P.HasProject (ComputeBackendServiceData s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: ComputeBackendServiceData s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ComputeBackendServiceData s)
+
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedBackend x = TF.compute (TF.refKey x) "backend"
+
+instance s ~ s' => P.HasComputedConnectionDrainingTimeoutSec (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedConnectionDrainingTimeoutSec x = TF.compute (TF.refKey x) "connection_draining_timeout_sec"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedEnableCdn (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedEnableCdn x = TF.compute (TF.refKey x) "enable_cdn"
+
+instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+
+instance s ~ s' => P.HasComputedHealthChecks (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedHealthChecks x = TF.compute (TF.refKey x) "health_checks"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeBackendServiceData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPortName (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedPortName x = TF.compute (TF.refKey x) "port_name"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedProject =
+        (_project :: ComputeBackendServiceData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedProtocol x = TF.compute (TF.refKey x) "protocol"
+
+instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+
+instance s ~ s' => P.HasComputedSessionAffinity (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedSessionAffinity x = TF.compute (TF.refKey x) "session_affinity"
+
+instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedTimeoutSec x = TF.compute (TF.refKey x) "timeout_sec"
+
+computeBackendServiceData :: TF.DataSource P.Google (ComputeBackendServiceData s)
+computeBackendServiceData =
+    TF.newDataSource "google_compute_backend_service" $
+        ComputeBackendServiceData {
+              _name = TF.Nil
+            , _project = TF.Nil
+            }
+
+{- | The @google_compute_default_service_account@ Google datasource.
+
+Use this data source to retrieve default service account for this project
+-}
+data ComputeDefaultServiceAccountData s = ComputeDefaultServiceAccountData {
+      _project :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The project ID. If it is not provided, the provider project is used. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeDefaultServiceAccountData s) where
+    toHCL ComputeDefaultServiceAccountData{..} = TF.inline $ catMaybes
+        [ TF.assign "project" <$> TF.attribute _project
+        ]
+
+instance P.HasProject (ComputeDefaultServiceAccountData s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: ComputeDefaultServiceAccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ComputeDefaultServiceAccountData s)
+
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ComputeDefaultServiceAccountData s)) (TF.Attr s P.Text) where
+    computedEmail x = TF.compute (TF.refKey x) "email"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeDefaultServiceAccountData s)) (TF.Attr s P.Text) where
+    computedProject =
+        (_project :: ComputeDefaultServiceAccountData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+computeDefaultServiceAccountData :: TF.DataSource P.Google (ComputeDefaultServiceAccountData s)
+computeDefaultServiceAccountData =
+    TF.newDataSource "google_compute_default_service_account" $
+        ComputeDefaultServiceAccountData {
+              _project = TF.Nil
+            }
+
 {- | The @google_compute_forwarding_rule@ Google datasource.
 
 Get a forwarding rule within GCE from its name.
@@ -731,7 +915,7 @@ data ComputeImageData s = ComputeImageData {
       _name    :: !(TF.Attr s P.Text)
     {- ^ or @family@ - (Required) The name of a specific image or a family. Exactly one of @name@ of @family@ must be specified. If @name@ is specified, it will fetch the corresponding image. If @family@ is specified, it will returns the latest image that is part of an image family and is not deprecated. -}
     , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
+    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. If you are using a <https://cloud.google.com/compute/docs/images#os-compute-support> , be sure to specify the correct Image Project. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeImageData s) where
@@ -821,18 +1005,21 @@ Get a Compute Instance Group within GCE. For more information, see
 and <https://cloud.google.com/compute/docs/reference/latest/instanceGroups>
 -}
 data ComputeInstanceGroupData s = ComputeInstanceGroupData {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the instance group. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _zone    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The zone of the instance group. -}
+      _name      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the instance group. Either @name@ or @self_link@ must be provided. -}
+    , _project   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
+    , _self_link :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The self link of the instance group. Either @name@ or @self_link@ must be provided. -}
+    , _zone      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The zone of the instance group. If referencing the instance group by name and @zone@ is not provided, the provider zone is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeInstanceGroupData s) where
     toHCL ComputeInstanceGroupData{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "self_link" <$> TF.attribute _self_link
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
@@ -845,6 +1032,11 @@ instance P.HasProject (ComputeInstanceGroupData s) (TF.Attr s P.Text) where
     project =
         lens (_project :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
              (\s a -> s { _project = a } :: ComputeInstanceGroupData s)
+
+instance P.HasSelfLink (ComputeInstanceGroupData s) (TF.Attr s P.Text) where
+    selfLink =
+        lens (_self_link :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
+             (\s a -> s { _self_link = a } :: ComputeInstanceGroupData s)
 
 instance P.HasZone (ComputeInstanceGroupData s) (TF.Attr s P.Text) where
     zone =
@@ -890,6 +1082,7 @@ computeInstanceGroupData =
         ComputeInstanceGroupData {
               _name = TF.Nil
             , _project = TF.Nil
+            , _self_link = TF.Nil
             , _zone = TF.Nil
             }
 
@@ -947,7 +1140,7 @@ data ComputeNetworkData s = ComputeNetworkData {
       _name    :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the network. -}
     , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
+    {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeNetworkData s) where
@@ -1082,6 +1275,124 @@ computeRegionInstanceGroupData =
             , _self_link = TF.Nil
             }
 
+{- | The @google_compute_regions@ Google datasource.
+
+Provides access to available Google Compute regions for a given project. See
+more about <https://cloud.google.com/compute/docs/regions-zones/> in the
+upstream docs.
+-}
+data ComputeRegionsData s = ComputeRegionsData {
+      _project :: !(TF.Attr s P.Text)
+    {- ^ (Optional) - Project from which to list available regions. Defaults to project declared in the provider. -}
+    , _status  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) - Allows to filter list of regions based on their current status. Status can be either @UP@ or @DOWN@ . Defaults to no filtering (all available regions - both @UP@ and @DOWN@ ). -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeRegionsData s) where
+    toHCL ComputeRegionsData{..} = TF.inline $ catMaybes
+        [ TF.assign "project" <$> TF.attribute _project
+        , TF.assign "status" <$> TF.attribute _status
+        ]
+
+instance P.HasProject (ComputeRegionsData s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: ComputeRegionsData s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ComputeRegionsData s)
+
+instance P.HasStatus (ComputeRegionsData s) (TF.Attr s P.Text) where
+    status =
+        lens (_status :: ComputeRegionsData s -> TF.Attr s P.Text)
+             (\s a -> s { _status = a } :: ComputeRegionsData s)
+
+instance s ~ s' => P.HasComputedNames (TF.Ref s' (ComputeRegionsData s)) (TF.Attr s P.Text) where
+    computedNames x = TF.compute (TF.refKey x) "names"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRegionsData s)) (TF.Attr s P.Text) where
+    computedProject =
+        (_project :: ComputeRegionsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeRegionsData s)) (TF.Attr s P.Text) where
+    computedStatus =
+        (_status :: ComputeRegionsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+computeRegionsData :: TF.DataSource P.Google (ComputeRegionsData s)
+computeRegionsData =
+    TF.newDataSource "google_compute_regions" $
+        ComputeRegionsData {
+              _project = TF.Nil
+            , _status = TF.Nil
+            }
+
+{- | The @google_compute_ssl_policy@ Google datasource.
+
+Gets an SSL Policy within GCE from its name, for use with Target HTTPS and
+Target SSL Proxies. For more information see
+<https://cloud.google.com/compute/docs/load-balancing/ssl-policies> .
+-}
+data ComputeSslPolicyData s = ComputeSslPolicyData {
+      _name    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the SSL Policy. -}
+    , _project :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeSslPolicyData s) where
+    toHCL ComputeSslPolicyData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        ]
+
+instance P.HasName (ComputeSslPolicyData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeSslPolicyData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeSslPolicyData s)
+
+instance P.HasProject (ComputeSslPolicyData s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: ComputeSslPolicyData s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ComputeSslPolicyData s)
+
+instance s ~ s' => P.HasComputedCustomFeatures (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
+    computedCustomFeatures x = TF.compute (TF.refKey x) "custom_features"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedEnabledFeatures (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
+    computedEnabledFeatures x = TF.compute (TF.refKey x) "enabled_features"
+
+instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+
+instance s ~ s' => P.HasComputedMinTlsVersion (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
+    computedMinTlsVersion x = TF.compute (TF.refKey x) "min_tls_version"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeSslPolicyData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedProfile (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
+    computedProfile x = TF.compute (TF.refKey x) "profile"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
+    computedProject =
+        (_project :: ComputeSslPolicyData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+
+computeSslPolicyData :: TF.DataSource P.Google (ComputeSslPolicyData s)
+computeSslPolicyData =
+    TF.newDataSource "google_compute_ssl_policy" $
+        ComputeSslPolicyData {
+              _name = TF.Nil
+            , _project = TF.Nil
+            }
+
 {- | The @google_compute_subnetwork@ Google datasource.
 
 Get a subnetwork within GCE from its name and region.
@@ -1090,7 +1401,7 @@ data ComputeSubnetworkData s = ComputeSubnetworkData {
       _name    :: !(TF.Attr s P.Text)
     {- ^ - The name of the subnetwork. -}
     , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
+    {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _region  :: !(TF.Attr s P.Text)
     {- ^ (Optional) The region this subnetwork has been created in. If unspecified, this defaults to the region configured in the provider. -}
     } deriving (Show, Eq)
@@ -1236,17 +1547,25 @@ project. See more about
 upstream docs.
 -}
 data ComputeZonesData s = ComputeZonesData {
-      _region :: !(TF.Attr s P.Text)
+      _project :: !(TF.Attr s P.Text)
+    {- ^ (Optional) - Project from which to list available zones. Defaults to project declared in the provider. -}
+    , _region  :: !(TF.Attr s P.Text)
     {- ^ (Optional) - Region from which to list available zones. Defaults to region declared in the provider. -}
-    , _status :: !(TF.Attr s P.Text)
+    , _status  :: !(TF.Attr s P.Text)
     {- ^ (Optional) - Allows to filter list of zones based on their current status. Status can be either @UP@ or @DOWN@ . Defaults to no filtering (all available zones - both @UP@ and @DOWN@ ). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeZonesData s) where
     toHCL ComputeZonesData{..} = TF.inline $ catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
+        [ TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "status" <$> TF.attribute _status
         ]
+
+instance P.HasProject (ComputeZonesData s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: ComputeZonesData s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ComputeZonesData s)
 
 instance P.HasRegion (ComputeZonesData s) (TF.Attr s P.Text) where
     region =
@@ -1260,6 +1579,11 @@ instance P.HasStatus (ComputeZonesData s) (TF.Attr s P.Text) where
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (ComputeZonesData s)) (TF.Attr s P.Text) where
     computedNames x = TF.compute (TF.refKey x) "names"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeZonesData s)) (TF.Attr s P.Text) where
+    computedProject =
+        (_project :: ComputeZonesData s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeZonesData s)) (TF.Attr s P.Text) where
     computedRegion =
@@ -1275,7 +1599,8 @@ computeZonesData :: TF.DataSource P.Google (ComputeZonesData s)
 computeZonesData =
     TF.newDataSource "google_compute_zones" $
         ComputeZonesData {
-              _region = TF.Nil
+              _project = TF.Nil
+            , _region = TF.Nil
             , _status = TF.Nil
             }
 
@@ -1289,7 +1614,7 @@ data ContainerClusterData s = ContainerClusterData {
     , _project :: !(TF.Attr s P.Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _zone    :: !(TF.Attr s P.Text)
-    {- ^ - The zones this cluster has been created in. -}
+    {- ^ or @region@ - The zone or region this cluster has been created in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ContainerClusterData s) where
@@ -1365,6 +1690,9 @@ instance P.HasZone (ContainerEngineVersionsData s) (TF.Attr s P.Text) where
     zone =
         lens (_zone :: ContainerEngineVersionsData s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: ContainerEngineVersionsData s)
+
+instance s ~ s' => P.HasComputedDefaultClusterVersion (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s P.Text) where
+    computedDefaultClusterVersion x = TF.compute (TF.refKey x) "default_cluster_version"
 
 instance s ~ s' => P.HasComputedLatestMasterVersion (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s P.Text) where
     computedLatestMasterVersion x = TF.compute (TF.refKey x) "latest_master_version"
@@ -1552,7 +1880,7 @@ data DnsManagedZoneData s = DnsManagedZoneData {
       _name    :: !(TF.Attr s P.Text)
     {- ^ (Required) A unique name for the resource. -}
     , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) ID of the project for the Google Cloud DNS zone. -}
+    {- ^ (Optional) The ID of the project for the Google Cloud DNS zone. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DnsManagedZoneData s) where
@@ -1596,6 +1924,72 @@ dnsManagedZoneData =
         DnsManagedZoneData {
               _name = TF.Nil
             , _project = TF.Nil
+            }
+
+{- | The @google_folder@ Google datasource.
+
+Use this data source to get information about a Google Cloud Folder.
+-}
+data FolderData s = FolderData {
+      _folder              :: !(TF.Attr s P.Text)
+    {- ^ (Required) - The name of the Folder in the form @{folder_id}@ or @folders/{folder_id}@ . -}
+    , _lookup_organization :: !(TF.Attr s P.Text)
+    {- ^ (Optional) - @true@ to find the organization that the folder belongs, @false@ to avoid the lookup. It searches up the tree. (defaults to @false@ ) -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (FolderData s) where
+    toHCL FolderData{..} = TF.inline $ catMaybes
+        [ TF.assign "folder" <$> TF.attribute _folder
+        , TF.assign "lookup_organization" <$> TF.attribute _lookup_organization
+        ]
+
+instance P.HasFolder (FolderData s) (TF.Attr s P.Text) where
+    folder =
+        lens (_folder :: FolderData s -> TF.Attr s P.Text)
+             (\s a -> s { _folder = a } :: FolderData s)
+
+instance P.HasLookupOrganization (FolderData s) (TF.Attr s P.Text) where
+    lookupOrganization =
+        lens (_lookup_organization :: FolderData s -> TF.Attr s P.Text)
+             (\s a -> s { _lookup_organization = a } :: FolderData s)
+
+instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
+    computedCreateTime x = TF.compute (TF.refKey x) "create_time"
+
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
+    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
+
+instance s ~ s' => P.HasComputedFolder (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
+    computedFolder =
+        (_folder :: FolderData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLifecycleState (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
+    computedLifecycleState x = TF.compute (TF.refKey x) "lifecycle_state"
+
+instance s ~ s' => P.HasComputedLookupOrganization (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
+    computedLookupOrganization =
+        (_lookup_organization :: FolderData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
+    computedOrganization x = TF.compute (TF.refKey x) "organization"
+
+instance s ~ s' => P.HasComputedParent (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
+    computedParent x = TF.compute (TF.refKey x) "parent"
+
+folderData :: TF.DataSource P.Google (FolderData s)
+folderData =
+    TF.newDataSource "google_folder" $
+        FolderData {
+              _folder = TF.Nil
+            , _lookup_organization = TF.Nil
             }
 
 {- | The @google_iam_policy@ Google datasource.
@@ -1688,6 +2082,33 @@ kmsSecretData =
             , _crypto_key = TF.Nil
             }
 
+{- | The @google_netblock_ip_ranges@ Google datasource.
+
+Use this data source to get the IP ranges from the sender policy framework
+(SPF) record of _cloud-netblocks.googleusercontent
+https://cloud.google.com/compute/docs/faq#where_can_i_find_product_name_short_ip_ranges
+-}
+data NetblockIpRangesData s = NetblockIpRangesData {
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (NetblockIpRangesData s) where
+    toHCL _ = TF.empty
+
+instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (NetblockIpRangesData s)) (TF.Attr s P.Text) where
+    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
+
+instance s ~ s' => P.HasComputedCidrBlocksIpv4 (TF.Ref s' (NetblockIpRangesData s)) (TF.Attr s P.Text) where
+    computedCidrBlocksIpv4 x = TF.compute (TF.refKey x) "cidr_blocks_ipv4"
+
+instance s ~ s' => P.HasComputedCidrBlocksIpv6 (TF.Ref s' (NetblockIpRangesData s)) (TF.Attr s P.Text) where
+    computedCidrBlocksIpv6 x = TF.compute (TF.refKey x) "cidr_blocks_ipv6"
+
+netblockIpRangesData :: TF.DataSource P.Google (NetblockIpRangesData s)
+netblockIpRangesData =
+    TF.newDataSource "google_netblock_ip_ranges" $
+        NetblockIpRangesData {
+            }
+
 {- | The @google_organization@ Google datasource.
 
 Use this data source to get information about a Google Cloud Organization.
@@ -1778,6 +2199,134 @@ projectData =
     TF.newDataSource "google_project" $
         ProjectData {
               _project_id = TF.Nil
+            }
+
+{- | The @google_service_account@ Google datasource.
+
+Get the service account from a project. For more information see the
+official <https://cloud.google.com/compute/docs/access/service-accounts>
+documentation.
+-}
+data ServiceAccountData s = ServiceAccountData {
+      _account_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The Service account id. -}
+    , _project    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID of the project that the service account will be created in. Defaults to the provider project configuration. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ServiceAccountData s) where
+    toHCL ServiceAccountData{..} = TF.inline $ catMaybes
+        [ TF.assign "account_id" <$> TF.attribute _account_id
+        , TF.assign "project" <$> TF.attribute _project
+        ]
+
+instance P.HasAccountId (ServiceAccountData s) (TF.Attr s P.Text) where
+    accountId =
+        lens (_account_id :: ServiceAccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _account_id = a } :: ServiceAccountData s)
+
+instance P.HasProject (ServiceAccountData s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: ServiceAccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ServiceAccountData s)
+
+instance s ~ s' => P.HasComputedAccountId (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
+    computedAccountId =
+        (_account_id :: ServiceAccountData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
+    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
+
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
+    computedEmail x = TF.compute (TF.refKey x) "email"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
+    computedProject =
+        (_project :: ServiceAccountData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
+    computedUniqueId x = TF.compute (TF.refKey x) "unique_id"
+
+serviceAccountData :: TF.DataSource P.Google (ServiceAccountData s)
+serviceAccountData =
+    TF.newDataSource "google_service_account" $
+        ServiceAccountData {
+              _account_id = TF.Nil
+            , _project = TF.Nil
+            }
+
+{- | The @google_service_account_key@ Google datasource.
+
+Get service account public key. For more information, see
+<https://cloud.google.com/iam/docs/creating-managing-service-account-keys>
+and
+<https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys/get>
+.
+-}
+data ServiceAccountKeyData s = ServiceAccountKeyData {
+      _project            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID of the project that the service account will be created in. Defaults to the provider project configuration. -}
+    , _public_key_type    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The output format of the public key requested. X509_PEM is the default output format. -}
+    , _service_account_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The Service account id of the Key Pair. This can be a string in the format @{ACCOUNT}@ or @projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}@ , where @{ACCOUNT}@ is the email address or unique id of the service account. If the @{ACCOUNT}@ syntax is used, the project will be inferred from the account. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ServiceAccountKeyData s) where
+    toHCL ServiceAccountKeyData{..} = TF.inline $ catMaybes
+        [ TF.assign "project" <$> TF.attribute _project
+        , TF.assign "public_key_type" <$> TF.attribute _public_key_type
+        , TF.assign "service_account_id" <$> TF.attribute _service_account_id
+        ]
+
+instance P.HasProject (ServiceAccountKeyData s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: ServiceAccountKeyData s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: ServiceAccountKeyData s)
+
+instance P.HasPublicKeyType (ServiceAccountKeyData s) (TF.Attr s P.Text) where
+    publicKeyType =
+        lens (_public_key_type :: ServiceAccountKeyData s -> TF.Attr s P.Text)
+             (\s a -> s { _public_key_type = a } :: ServiceAccountKeyData s)
+
+instance P.HasServiceAccountId (ServiceAccountKeyData s) (TF.Attr s P.Text) where
+    serviceAccountId =
+        lens (_service_account_id :: ServiceAccountKeyData s -> TF.Attr s P.Text)
+             (\s a -> s { _service_account_id = a } :: ServiceAccountKeyData s)
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
+    computedProject =
+        (_project :: ServiceAccountKeyData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
+    computedPublicKey x = TF.compute (TF.refKey x) "public_key"
+
+instance s ~ s' => P.HasComputedPublicKeyType (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
+    computedPublicKeyType =
+        (_public_key_type :: ServiceAccountKeyData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedServiceAccountId (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
+    computedServiceAccountId =
+        (_service_account_id :: ServiceAccountKeyData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+serviceAccountKeyData :: TF.DataSource P.Google (ServiceAccountKeyData s)
+serviceAccountKeyData =
+    TF.newDataSource "google_service_account_key" $
+        ServiceAccountKeyData {
+              _project = TF.Nil
+            , _public_key_type = TF.Nil
+            , _service_account_id = TF.Nil
             }
 
 {- | The @google_storage_object_signed_url@ Google datasource.
@@ -1882,28 +2431,31 @@ Storage service account. For more information see
 .
 -}
 data StorageProjectServiceAccountData s = StorageProjectServiceAccountData {
-      _id :: !(TF.Attr s P.Text)
-    {- ^ - The ID of the service account, which is its email address -}
+      _project :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (StorageProjectServiceAccountData s) where
     toHCL StorageProjectServiceAccountData{..} = TF.inline $ catMaybes
-        [ TF.assign "id" <$> TF.attribute _id
+        [ TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasId (StorageProjectServiceAccountData s) (TF.Attr s P.Text) where
-    id =
-        lens (_id :: StorageProjectServiceAccountData s -> TF.Attr s P.Text)
-             (\s a -> s { _id = a } :: StorageProjectServiceAccountData s)
+instance P.HasProject (StorageProjectServiceAccountData s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: StorageProjectServiceAccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: StorageProjectServiceAccountData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageProjectServiceAccountData s)) (TF.Attr s P.Text) where
-    computedId =
-        (_id :: StorageProjectServiceAccountData s -> TF.Attr s P.Text)
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (StorageProjectServiceAccountData s)) (TF.Attr s P.Text) where
+    computedProject =
+        (_project :: StorageProjectServiceAccountData s -> TF.Attr s P.Text)
             . TF.refValue
 
 storageProjectServiceAccountData :: TF.DataSource P.Google (StorageProjectServiceAccountData s)
 storageProjectServiceAccountData =
     TF.newDataSource "google_storage_project_service_account" $
         StorageProjectServiceAccountData {
-              _id = TF.Nil
+              _project = TF.Nil
             }

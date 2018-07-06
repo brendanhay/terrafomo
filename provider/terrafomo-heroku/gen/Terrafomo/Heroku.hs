@@ -15,9 +15,11 @@ module Terrafomo.Heroku
     ( module Terrafomo.Heroku.Types
     , module Terrafomo.Heroku.Provider
     , module Terrafomo.Heroku.Lens
+    , module Terrafomo.Heroku.DataSource
     , module Terrafomo.Heroku.Resource
     ) where
 
+import Terrafomo.Heroku.DataSource
 import Terrafomo.Heroku.Lens
 import Terrafomo.Heroku.Provider
 import Terrafomo.Heroku.Resource

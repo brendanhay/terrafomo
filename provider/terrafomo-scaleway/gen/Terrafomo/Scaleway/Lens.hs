@@ -24,19 +24,26 @@ module Terrafomo.Scaleway.Lens
     -- ** Arguments
       HasAction (..)
     , HasArchitecture (..)
+    , HasBootType (..)
     , HasBootscript (..)
     , HasDescription (..)
     , HasDirection (..)
     , HasDynamicIpRequired (..)
+    , HasEmail (..)
     , HasEnableDefaultSecurity (..)
     , HasEnableIpv6 (..)
+    , HasExpires (..)
     , HasImage (..)
     , HasIpRange (..)
+    , HasKey (..)
     , HasName (..)
     , HasNameFilter (..)
+    , HasPassword (..)
     , HasPort (..)
     , HasProtocol (..)
+    , HasPublicIp (..)
     , HasPublicIpv6 (..)
+    , HasReverse (..)
     , HasSecurityGroup (..)
     , HasServer (..)
     , HasSizeInGb (..)
@@ -44,35 +51,43 @@ module Terrafomo.Scaleway.Lens
     , HasStateDetail (..)
     , HasTags (..)
     , HasType' (..)
+    , HasValue (..)
     , HasVolume (..)
 
     -- ** Computed Attributes
     , HasComputedAction (..)
     , HasComputedArchitecture (..)
     , HasComputedBootCmdArgs (..)
+    , HasComputedBootType (..)
     , HasComputedBootscript (..)
     , HasComputedCreationDate (..)
     , HasComputedDescription (..)
     , HasComputedDirection (..)
     , HasComputedDtb (..)
     , HasComputedDynamicIpRequired (..)
+    , HasComputedEmail (..)
     , HasComputedEnableDefaultSecurity (..)
     , HasComputedEnableIpv6 (..)
+    , HasComputedExpirationDate (..)
+    , HasComputedExpires (..)
     , HasComputedId (..)
     , HasComputedImage (..)
     , HasComputedInitrd (..)
     , HasComputedIp (..)
     , HasComputedIpRange (..)
     , HasComputedKernel (..)
+    , HasComputedKey (..)
     , HasComputedName (..)
     , HasComputedNameFilter (..)
     , HasComputedOrganization (..)
+    , HasComputedPassword (..)
     , HasComputedPort (..)
     , HasComputedPrivateIp (..)
     , HasComputedProtocol (..)
     , HasComputedPublic (..)
     , HasComputedPublicIp (..)
     , HasComputedPublicIpv6 (..)
+    , HasComputedReverse (..)
     , HasComputedSecurityGroup (..)
     , HasComputedServer (..)
     , HasComputedSizeInGb (..)
@@ -80,6 +95,7 @@ module Terrafomo.Scaleway.Lens
     , HasComputedStateDetail (..)
     , HasComputedTags (..)
     , HasComputedType' (..)
+    , HasComputedValue (..)
     , HasComputedVolume (..)
     ) where
 
@@ -101,6 +117,12 @@ class HasArchitecture a b | a -> b where
 
 instance HasArchitecture a b => HasArchitecture (TF.Schema l p a) b where
     architecture = TF.configuration . architecture
+
+class HasBootType a b | a -> b where
+    bootType :: Lens' a b
+
+instance HasBootType a b => HasBootType (TF.Schema l p a) b where
+    bootType = TF.configuration . bootType
 
 class HasBootscript a b | a -> b where
     bootscript :: Lens' a b
@@ -126,6 +148,12 @@ class HasDynamicIpRequired a b | a -> b where
 instance HasDynamicIpRequired a b => HasDynamicIpRequired (TF.Schema l p a) b where
     dynamicIpRequired = TF.configuration . dynamicIpRequired
 
+class HasEmail a b | a -> b where
+    email :: Lens' a b
+
+instance HasEmail a b => HasEmail (TF.Schema l p a) b where
+    email = TF.configuration . email
+
 class HasEnableDefaultSecurity a b | a -> b where
     enableDefaultSecurity :: Lens' a b
 
@@ -137,6 +165,12 @@ class HasEnableIpv6 a b | a -> b where
 
 instance HasEnableIpv6 a b => HasEnableIpv6 (TF.Schema l p a) b where
     enableIpv6 = TF.configuration . enableIpv6
+
+class HasExpires a b | a -> b where
+    expires :: Lens' a b
+
+instance HasExpires a b => HasExpires (TF.Schema l p a) b where
+    expires = TF.configuration . expires
 
 class HasImage a b | a -> b where
     image :: Lens' a b
@@ -150,6 +184,12 @@ class HasIpRange a b | a -> b where
 instance HasIpRange a b => HasIpRange (TF.Schema l p a) b where
     ipRange = TF.configuration . ipRange
 
+class HasKey a b | a -> b where
+    key :: Lens' a b
+
+instance HasKey a b => HasKey (TF.Schema l p a) b where
+    key = TF.configuration . key
+
 class HasName a b | a -> b where
     name :: Lens' a b
 
@@ -161,6 +201,12 @@ class HasNameFilter a b | a -> b where
 
 instance HasNameFilter a b => HasNameFilter (TF.Schema l p a) b where
     nameFilter = TF.configuration . nameFilter
+
+class HasPassword a b | a -> b where
+    password :: Lens' a b
+
+instance HasPassword a b => HasPassword (TF.Schema l p a) b where
+    password = TF.configuration . password
 
 class HasPort a b | a -> b where
     port :: Lens' a b
@@ -174,11 +220,23 @@ class HasProtocol a b | a -> b where
 instance HasProtocol a b => HasProtocol (TF.Schema l p a) b where
     protocol = TF.configuration . protocol
 
+class HasPublicIp a b | a -> b where
+    publicIp :: Lens' a b
+
+instance HasPublicIp a b => HasPublicIp (TF.Schema l p a) b where
+    publicIp = TF.configuration . publicIp
+
 class HasPublicIpv6 a b | a -> b where
     publicIpv6 :: Lens' a b
 
 instance HasPublicIpv6 a b => HasPublicIpv6 (TF.Schema l p a) b where
     publicIpv6 = TF.configuration . publicIpv6
+
+class HasReverse a b | a -> b where
+    reverse :: Lens' a b
+
+instance HasReverse a b => HasReverse (TF.Schema l p a) b where
+    reverse = TF.configuration . reverse
 
 class HasSecurityGroup a b | a -> b where
     securityGroup :: Lens' a b
@@ -222,6 +280,12 @@ class HasType' a b | a -> b where
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
+class HasValue a b | a -> b where
+    value :: Lens' a b
+
+instance HasValue a b => HasValue (TF.Schema l p a) b where
+    value = TF.configuration . value
+
 class HasVolume a b | a -> b where
     volume :: Lens' a b
 
@@ -236,6 +300,9 @@ class HasComputedArchitecture a b | a -> b where
 
 class HasComputedBootCmdArgs a b | a -> b where
     computedBootCmdArgs :: a -> b
+
+class HasComputedBootType a b | a -> b where
+    computedBootType :: a -> b
 
 class HasComputedBootscript a b | a -> b where
     computedBootscript :: a -> b
@@ -255,11 +322,20 @@ class HasComputedDtb a b | a -> b where
 class HasComputedDynamicIpRequired a b | a -> b where
     computedDynamicIpRequired :: a -> b
 
+class HasComputedEmail a b | a -> b where
+    computedEmail :: a -> b
+
 class HasComputedEnableDefaultSecurity a b | a -> b where
     computedEnableDefaultSecurity :: a -> b
 
 class HasComputedEnableIpv6 a b | a -> b where
     computedEnableIpv6 :: a -> b
+
+class HasComputedExpirationDate a b | a -> b where
+    computedExpirationDate :: a -> b
+
+class HasComputedExpires a b | a -> b where
+    computedExpires :: a -> b
 
 class HasComputedId a b | a -> b where
     computedId :: a -> b
@@ -279,6 +355,9 @@ class HasComputedIpRange a b | a -> b where
 class HasComputedKernel a b | a -> b where
     computedKernel :: a -> b
 
+class HasComputedKey a b | a -> b where
+    computedKey :: a -> b
+
 class HasComputedName a b | a -> b where
     computedName :: a -> b
 
@@ -287,6 +366,9 @@ class HasComputedNameFilter a b | a -> b where
 
 class HasComputedOrganization a b | a -> b where
     computedOrganization :: a -> b
+
+class HasComputedPassword a b | a -> b where
+    computedPassword :: a -> b
 
 class HasComputedPort a b | a -> b where
     computedPort :: a -> b
@@ -305,6 +387,9 @@ class HasComputedPublicIp a b | a -> b where
 
 class HasComputedPublicIpv6 a b | a -> b where
     computedPublicIpv6 :: a -> b
+
+class HasComputedReverse a b | a -> b where
+    computedReverse :: a -> b
 
 class HasComputedSecurityGroup a b | a -> b where
     computedSecurityGroup :: a -> b
@@ -326,6 +411,9 @@ class HasComputedTags a b | a -> b where
 
 class HasComputedType' a b | a -> b where
     computedType' :: a -> b
+
+class HasComputedValue a b | a -> b where
+    computedValue :: a -> b
 
 class HasComputedVolume a b | a -> b where
     computedVolume :: a -> b

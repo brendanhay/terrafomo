@@ -63,6 +63,7 @@ module Terrafomo.GitHub.Resource
     , P.HasAllowMergeCommit (..)
     , P.HasAllowRebaseMerge (..)
     , P.HasAllowSquashMerge (..)
+    , P.HasArchived (..)
     , P.HasAutoInit (..)
     , P.HasBranch (..)
     , P.HasColor (..)
@@ -74,12 +75,14 @@ module Terrafomo.GitHub.Resource
     , P.HasGitignoreTemplate (..)
     , P.HasHasDownloads (..)
     , P.HasHasIssues (..)
+    , P.HasHasProjects (..)
     , P.HasHasWiki (..)
     , P.HasHomepageUrl (..)
     , P.HasKey (..)
     , P.HasLdapDn (..)
     , P.HasLicenseTemplate (..)
     , P.HasName (..)
+    , P.HasParentTeamId (..)
     , P.HasPermission (..)
     , P.HasPrivacy (..)
     , P.HasPrivate (..)
@@ -99,6 +102,7 @@ module Terrafomo.GitHub.Resource
     , P.HasComputedAllowMergeCommit (..)
     , P.HasComputedAllowRebaseMerge (..)
     , P.HasComputedAllowSquashMerge (..)
+    , P.HasComputedArchived (..)
     , P.HasComputedAutoInit (..)
     , P.HasComputedBranch (..)
     , P.HasComputedColor (..)
@@ -112,14 +116,17 @@ module Terrafomo.GitHub.Resource
     , P.HasComputedGitignoreTemplate (..)
     , P.HasComputedHasDownloads (..)
     , P.HasComputedHasIssues (..)
+    , P.HasComputedHasProjects (..)
     , P.HasComputedHasWiki (..)
     , P.HasComputedHomepageUrl (..)
+    , P.HasComputedHtmlUrl (..)
     , P.HasComputedHttpCloneUrl (..)
     , P.HasComputedId (..)
     , P.HasComputedKey (..)
     , P.HasComputedLdapDn (..)
     , P.HasComputedLicenseTemplate (..)
     , P.HasComputedName (..)
+    , P.HasComputedParentTeamId (..)
     , P.HasComputedPermission (..)
     , P.HasComputedPrivacy (..)
     , P.HasComputedPrivate (..)
@@ -630,6 +637,8 @@ data RepositoryResource s = RepositoryResource {
     {- ^ (Optional) Set to @false@ to disable rebase merges on the repository. -}
     , _allow_squash_merge :: !(TF.Attr s P.Text)
     {- ^ (Optional) Set to @false@ to disable squash merges on the repository. -}
+    , _archived           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Specifies if the repository should be archived. Defaults to @false@ . -}
     , _auto_init          :: !(TF.Attr s P.Text)
     {- ^ (Optional) Meaningful only during create; set to @true@ to produce an initial commit in the repository. -}
     , _default_branch     :: !(TF.Attr s P.Text)
@@ -642,6 +651,8 @@ data RepositoryResource s = RepositoryResource {
     {- ^ (Optional) Set to @true@ to enable the (deprecated) downloads features on the repository. -}
     , _has_issues         :: !(TF.Attr s P.Text)
     {- ^ (Optional) Set to @true@ to enable the Github Issues features on the repository. -}
+    , _has_projects       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Set to @true@ to enable the Github Projects features on the repository. Per the github <https://developer.github.com/v3/repos/#create> when in an organization that has disabled repository projects it will default to @false@ and will otherwise default to @true@ . If you specify @true@ when it has been disabled it will return an error. -}
     , _has_wiki           :: !(TF.Attr s P.Text)
     {- ^ (Optional) Set to @true@ to enable the Github Wiki features on the repository. -}
     , _homepage_url       :: !(TF.Attr s P.Text)
@@ -659,12 +670,14 @@ instance TF.ToHCL (RepositoryResource s) where
         [ TF.assign "allow_merge_commit" <$> TF.attribute _allow_merge_commit
         , TF.assign "allow_rebase_merge" <$> TF.attribute _allow_rebase_merge
         , TF.assign "allow_squash_merge" <$> TF.attribute _allow_squash_merge
+        , TF.assign "archived" <$> TF.attribute _archived
         , TF.assign "auto_init" <$> TF.attribute _auto_init
         , TF.assign "default_branch" <$> TF.attribute _default_branch
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "gitignore_template" <$> TF.attribute _gitignore_template
         , TF.assign "has_downloads" <$> TF.attribute _has_downloads
         , TF.assign "has_issues" <$> TF.attribute _has_issues
+        , TF.assign "has_projects" <$> TF.attribute _has_projects
         , TF.assign "has_wiki" <$> TF.attribute _has_wiki
         , TF.assign "homepage_url" <$> TF.attribute _homepage_url
         , TF.assign "license_template" <$> TF.attribute _license_template
@@ -686,6 +699,11 @@ instance P.HasAllowSquashMerge (RepositoryResource s) (TF.Attr s P.Text) where
     allowSquashMerge =
         lens (_allow_squash_merge :: RepositoryResource s -> TF.Attr s P.Text)
              (\s a -> s { _allow_squash_merge = a } :: RepositoryResource s)
+
+instance P.HasArchived (RepositoryResource s) (TF.Attr s P.Text) where
+    archived =
+        lens (_archived :: RepositoryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _archived = a } :: RepositoryResource s)
 
 instance P.HasAutoInit (RepositoryResource s) (TF.Attr s P.Text) where
     autoInit =
@@ -716,6 +734,11 @@ instance P.HasHasIssues (RepositoryResource s) (TF.Attr s P.Text) where
     hasIssues =
         lens (_has_issues :: RepositoryResource s -> TF.Attr s P.Text)
              (\s a -> s { _has_issues = a } :: RepositoryResource s)
+
+instance P.HasHasProjects (RepositoryResource s) (TF.Attr s P.Text) where
+    hasProjects =
+        lens (_has_projects :: RepositoryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _has_projects = a } :: RepositoryResource s)
 
 instance P.HasHasWiki (RepositoryResource s) (TF.Attr s P.Text) where
     hasWiki =
@@ -757,6 +780,11 @@ instance s ~ s' => P.HasComputedAllowSquashMerge (TF.Ref s' (RepositoryResource 
         (_allow_squash_merge :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedArchived (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
+    computedArchived =
+        (_archived :: RepositoryResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedAutoInit (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedAutoInit =
         (_auto_init :: RepositoryResource s -> TF.Attr s P.Text)
@@ -793,6 +821,11 @@ instance s ~ s' => P.HasComputedHasIssues (TF.Ref s' (RepositoryResource s)) (TF
         (_has_issues :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedHasProjects (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
+    computedHasProjects =
+        (_has_projects :: RepositoryResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedHasWiki (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedHasWiki =
         (_has_wiki :: RepositoryResource s -> TF.Attr s P.Text)
@@ -802,6 +835,9 @@ instance s ~ s' => P.HasComputedHomepageUrl (TF.Ref s' (RepositoryResource s)) (
     computedHomepageUrl =
         (_homepage_url :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
+
+instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
+    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
 
 instance s ~ s' => P.HasComputedHttpCloneUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedHttpCloneUrl x = TF.compute (TF.refKey x) "http_clone_url"
@@ -834,12 +870,14 @@ repositoryResource =
               _allow_merge_commit = TF.Nil
             , _allow_rebase_merge = TF.Nil
             , _allow_squash_merge = TF.Nil
+            , _archived = TF.Nil
             , _auto_init = TF.Nil
             , _default_branch = TF.Nil
             , _description = TF.Nil
             , _gitignore_template = TF.Nil
             , _has_downloads = TF.Nil
             , _has_issues = TF.Nil
+            , _has_projects = TF.Nil
             , _has_wiki = TF.Nil
             , _homepage_url = TF.Nil
             , _license_template = TF.Nil
@@ -1072,13 +1110,15 @@ teams from your organization. When applied, a new team will be created. When
 destroyed, that team will be removed.
 -}
 data TeamResource s = TeamResource {
-      _description :: !(TF.Attr s P.Text)
+      _description    :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of the team. -}
-    , _ldap_dn     :: !(TF.Attr s P.Text)
+    , _ldap_dn        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The LDAP Distinguished Name of the group where membership will be synchronized. Only available in GitHub Enterprise. -}
-    , _name        :: !(TF.Attr s P.Text)
+    , _name           :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the team. -}
-    , _privacy     :: !(TF.Attr s P.Text)
+    , _parent_team_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID of the parent team, if this is a nested team. -}
+    , _privacy        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The level of privacy for the team. Must be one of @secret@ or @closed@ . Defaults to @secret@ . -}
     } deriving (Show, Eq)
 
@@ -1087,6 +1127,7 @@ instance TF.ToHCL (TeamResource s) where
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ldap_dn" <$> TF.attribute _ldap_dn
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_team_id" <$> TF.attribute _parent_team_id
         , TF.assign "privacy" <$> TF.attribute _privacy
         ]
 
@@ -1104,6 +1145,11 @@ instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
     name =
         lens (_name :: TeamResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: TeamResource s)
+
+instance P.HasParentTeamId (TeamResource s) (TF.Attr s P.Text) where
+    parentTeamId =
+        lens (_parent_team_id :: TeamResource s -> TF.Attr s P.Text)
+             (\s a -> s { _parent_team_id = a } :: TeamResource s)
 
 instance P.HasPrivacy (TeamResource s) (TF.Attr s P.Text) where
     privacy =
@@ -1128,6 +1174,11 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (TeamResource s)) (TF.Attr s P.T
         (_name :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedParentTeamId (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
+    computedParentTeamId =
+        (_parent_team_id :: TeamResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedPrivacy (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
     computedPrivacy =
         (_privacy :: TeamResource s -> TF.Attr s P.Text)
@@ -1140,5 +1191,6 @@ teamResource =
               _description = TF.Nil
             , _ldap_dn = TF.Nil
             , _name = TF.Nil
+            , _parent_team_id = TF.Nil
             , _privacy = TF.Nil
             }

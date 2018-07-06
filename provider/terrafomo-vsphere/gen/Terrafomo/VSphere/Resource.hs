@@ -24,11 +24,38 @@
 module Terrafomo.VSphere.Resource
     (
     -- * Types
-      CustomAttributeResource (..)
+      ComputeClusterHostGroupResource (..)
+    , computeClusterHostGroupResource
+
+    , ComputeClusterResource (..)
+    , computeClusterResource
+
+    , ComputeClusterVmAffinityRuleResource (..)
+    , computeClusterVmAffinityRuleResource
+
+    , ComputeClusterVmAntiAffinityRuleResource (..)
+    , computeClusterVmAntiAffinityRuleResource
+
+    , ComputeClusterVmDependencyRuleResource (..)
+    , computeClusterVmDependencyRuleResource
+
+    , ComputeClusterVmGroupResource (..)
+    , computeClusterVmGroupResource
+
+    , ComputeClusterVmHostRuleResource (..)
+    , computeClusterVmHostRuleResource
+
+    , CustomAttributeResource (..)
     , customAttributeResource
 
     , DatacenterResource (..)
     , datacenterResource
+
+    , DatastoreClusterResource (..)
+    , datastoreClusterResource
+
+    , DatastoreClusterVmAntiAffinityRuleResource (..)
+    , datastoreClusterVmAntiAffinityRuleResource
 
     , DistributedPortGroupResource (..)
     , distributedPortGroupResource
@@ -36,11 +63,20 @@ module Terrafomo.VSphere.Resource
     , DistributedVirtualSwitchResource (..)
     , distributedVirtualSwitchResource
 
+    , DpmHostOverrideResource (..)
+    , dpmHostOverrideResource
+
+    , DrsVmOverrideResource (..)
+    , drsVmOverrideResource
+
     , FileResource (..)
     , fileResource
 
     , FolderResource (..)
     , folderResource
+
+    , HaVmOverrideResource (..)
+    , haVmOverrideResource
 
     , HostPortGroupResource (..)
     , hostPortGroupResource
@@ -53,6 +89,12 @@ module Terrafomo.VSphere.Resource
 
     , NasDatastoreResource (..)
     , nasDatastoreResource
+
+    , ResourcePoolResource (..)
+    , resourcePoolResource
+
+    , StorageDrsVmOverrideResource (..)
+    , storageDrsVmOverrideResource
 
     , TagCategoryResource (..)
     , tagCategoryResource
@@ -76,21 +118,36 @@ module Terrafomo.VSphere.Resource
     -- ** Arguments
     , P.HasAccessMode (..)
     , P.HasAdapterType (..)
+    , P.HasAffinityHostGroupName (..)
+    , P.HasAntiAffinityHostGroupName (..)
     , P.HasAssociableTypes (..)
     , P.HasAutoExpand (..)
     , P.HasCardinality (..)
     , P.HasCategoryId (..)
+    , P.HasComputeClusterId (..)
     , P.HasConsolidate (..)
     , P.HasContactDetail (..)
     , P.HasContactName (..)
+    , P.HasCpuExpandable (..)
+    , P.HasCpuLimit (..)
+    , P.HasCpuReservation (..)
+    , P.HasCpuShareLevel (..)
+    , P.HasCpuShares (..)
     , P.HasCreateDirectories (..)
     , P.HasDatacenter (..)
     , P.HasDatacenterId (..)
     , P.HasDatastore (..)
+    , P.HasDatastoreClusterId (..)
+    , P.HasDependencyVmGroupName (..)
     , P.HasDescription (..)
     , P.HasDestinationFile (..)
     , P.HasDisks (..)
     , P.HasDistributedVirtualSwitchUuid (..)
+    , P.HasDpmAutomationLevel (..)
+    , P.HasDpmEnabled (..)
+    , P.HasDrsAutomationLevel (..)
+    , P.HasDrsEnabled (..)
+    , P.HasEnabled (..)
     , P.HasFolder (..)
     , P.HasHostSystemId (..)
     , P.HasHostSystemIds (..)
@@ -101,18 +158,28 @@ module Terrafomo.VSphere.Resource
     , P.HasLinkDiscoveryOperation (..)
     , P.HasLinkDiscoveryProtocol (..)
     , P.HasManagedObjectType (..)
+    , P.HasMandatory (..)
     , P.HasMaxMtu (..)
     , P.HasMemory (..)
+    , P.HasMemoryExpandable (..)
+    , P.HasMemoryLimit (..)
+    , P.HasMemoryReservation (..)
+    , P.HasMemoryShareLevel (..)
+    , P.HasMemoryShares (..)
     , P.HasMtu (..)
     , P.HasMulticastFilteringMode (..)
     , P.HasName (..)
     , P.HasNumberOfPorts (..)
+    , P.HasParentResourcePoolId (..)
     , P.HasPath (..)
     , P.HasQuiesce (..)
     , P.HasRemoteHosts (..)
     , P.HasRemotePath (..)
     , P.HasRemoveChildren (..)
     , P.HasResourcePoolId (..)
+    , P.HasSdrsAutomationLevel (..)
+    , P.HasSdrsEnabled (..)
+    , P.HasSdrsIntraVmAffinity (..)
     , P.HasSecurityType (..)
     , P.HasSize (..)
     , P.HasSnapshotName (..)
@@ -122,36 +189,54 @@ module Terrafomo.VSphere.Resource
     , P.HasTags (..)
     , P.HasType' (..)
     , P.HasVersion (..)
+    , P.HasVirtualMachineId (..)
+    , P.HasVirtualMachineIds (..)
     , P.HasVirtualMachineUuid (..)
     , P.HasVirtualSwitchName (..)
     , P.HasVlanId (..)
+    , P.HasVmGroupName (..)
     , P.HasVmdkPath (..)
 
     -- ** Computed Attributes
     , P.HasComputedAccessMode (..)
     , P.HasComputedAccessible (..)
     , P.HasComputedAdapterType (..)
+    , P.HasComputedAffinityHostGroupName (..)
+    , P.HasComputedAntiAffinityHostGroupName (..)
     , P.HasComputedAssociableTypes (..)
     , P.HasComputedAutoExpand (..)
     , P.HasComputedCapacity (..)
     , P.HasComputedCardinality (..)
     , P.HasComputedCategoryId (..)
     , P.HasComputedChangeVersion (..)
+    , P.HasComputedComputeClusterId (..)
     , P.HasComputedComputedPolicy (..)
     , P.HasComputedConfigVersion (..)
     , P.HasComputedConsolidate (..)
     , P.HasComputedContactDetail (..)
     , P.HasComputedContactName (..)
+    , P.HasComputedCpuExpandable (..)
+    , P.HasComputedCpuLimit (..)
+    , P.HasComputedCpuReservation (..)
+    , P.HasComputedCpuShareLevel (..)
+    , P.HasComputedCpuShares (..)
     , P.HasComputedCreateDirectories (..)
     , P.HasComputedDatacenter (..)
     , P.HasComputedDatacenterId (..)
     , P.HasComputedDatastore (..)
+    , P.HasComputedDatastoreClusterId (..)
     , P.HasComputedDefaultIpAddress (..)
+    , P.HasComputedDependencyVmGroupName (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDestinationFile (..)
     , P.HasComputedDisks (..)
     , P.HasComputedDistributedVirtualSwitchUuid (..)
+    , P.HasComputedDpmAutomationLevel (..)
+    , P.HasComputedDpmEnabled (..)
+    , P.HasComputedDrsAutomationLevel (..)
+    , P.HasComputedDrsEnabled (..)
     , P.HasComputedEditionKey (..)
+    , P.HasComputedEnabled (..)
     , P.HasComputedFolder (..)
     , P.HasComputedFreeSpace (..)
     , P.HasComputedGuestIpAddresses (..)
@@ -168,14 +253,21 @@ module Terrafomo.VSphere.Resource
     , P.HasComputedLinkDiscoveryProtocol (..)
     , P.HasComputedMaintenanceMode (..)
     , P.HasComputedManagedObjectType (..)
+    , P.HasComputedMandatory (..)
     , P.HasComputedMaxMtu (..)
     , P.HasComputedMemory (..)
+    , P.HasComputedMemoryExpandable (..)
+    , P.HasComputedMemoryLimit (..)
+    , P.HasComputedMemoryReservation (..)
+    , P.HasComputedMemoryShareLevel (..)
+    , P.HasComputedMemoryShares (..)
     , P.HasComputedMoid (..)
     , P.HasComputedMtu (..)
     , P.HasComputedMulticastFilteringMode (..)
     , P.HasComputedMultipleHostAccess (..)
     , P.HasComputedName (..)
     , P.HasComputedNumberOfPorts (..)
+    , P.HasComputedParentResourcePoolId (..)
     , P.HasComputedPath (..)
     , P.HasComputedPorts (..)
     , P.HasComputedProtocolEndpoint (..)
@@ -185,6 +277,9 @@ module Terrafomo.VSphere.Resource
     , P.HasComputedRemotePath (..)
     , P.HasComputedRemoveChildren (..)
     , P.HasComputedResourcePoolId (..)
+    , P.HasComputedSdrsAutomationLevel (..)
+    , P.HasComputedSdrsEnabled (..)
+    , P.HasComputedSdrsIntraVmAffinity (..)
     , P.HasComputedSecurityType (..)
     , P.HasComputedSize (..)
     , P.HasComputedSnapshotName (..)
@@ -198,10 +293,14 @@ module Terrafomo.VSphere.Resource
     , P.HasComputedUrl (..)
     , P.HasComputedUsed (..)
     , P.HasComputedUuid (..)
+    , P.HasComputedVappTransport (..)
     , P.HasComputedVersion (..)
+    , P.HasComputedVirtualMachineId (..)
+    , P.HasComputedVirtualMachineIds (..)
     , P.HasComputedVirtualMachineUuid (..)
     , P.HasComputedVirtualSwitchName (..)
     , P.HasComputedVlanId (..)
+    , P.HasComputedVmGroupName (..)
     , P.HasComputedVmdkPath (..)
     , P.HasComputedVmwareToolsStatus (..)
     , P.HasComputedVmxPath (..)
@@ -232,6 +331,680 @@ import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
+
+{- | The @vsphere_compute_cluster_host_group@ VSphere resource.
+
+The @vsphere_compute_cluster_host_group@ resource can be used to manage
+groups of hosts in a cluster, either created by the
+</docs/providers/vsphere/r/compute_cluster.html> resource or looked up by
+the </docs/providers/vsphere/d/compute_cluster.html> data source. This
+resource mainly serves as an input to the
+</docs/providers/vsphere/r/compute_cluster_vm_host_rule.html> resource - see
+the documentation for that resource for further details on how to use host
+groups. ~> NOTE: This resource requires vCenter and is not available on
+direct ESXi connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise
+Plus license.
+-}
+data ComputeClusterHostGroupResource s = ComputeClusterHostGroupResource {
+      _compute_cluster_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the group in.  Forces a new resource if changed. -}
+    , _host_system_ids    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the hosts to put in the cluster. -}
+    , _name               :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the host group. This must be unique in the cluster. Forces a new resource if changed. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeClusterHostGroupResource s) where
+    toHCL ComputeClusterHostGroupResource{..} = TF.inline $ catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
+        , TF.assign "host_system_ids" <$> TF.attribute _host_system_ids
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasComputeClusterId (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
+    computeClusterId =
+        lens (_compute_cluster_id :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _compute_cluster_id = a } :: ComputeClusterHostGroupResource s)
+
+instance P.HasHostSystemIds (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
+    hostSystemIds =
+        lens (_host_system_ids :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _host_system_ids = a } :: ComputeClusterHostGroupResource s)
+
+instance P.HasName (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeClusterHostGroupResource s)
+
+instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (ComputeClusterHostGroupResource s)) (TF.Attr s P.Text) where
+    computedComputeClusterId =
+        (_compute_cluster_id :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHostSystemIds (TF.Ref s' (ComputeClusterHostGroupResource s)) (TF.Attr s P.Text) where
+    computedHostSystemIds =
+        (_host_system_ids :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterHostGroupResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+computeClusterHostGroupResource :: TF.Resource P.VSphere (ComputeClusterHostGroupResource s)
+computeClusterHostGroupResource =
+    TF.newResource "vsphere_compute_cluster_host_group" $
+        ComputeClusterHostGroupResource {
+              _compute_cluster_id = TF.Nil
+            , _host_system_ids = TF.Nil
+            , _name = TF.Nil
+            }
+
+{- | The @vsphere_compute_cluster@ VSphere resource.
+
+-> A note on the naming of this resource: VMware refers to clusters of hosts
+in the UI and documentation as clusters , HA clusters , or DRS clusters .
+All of these refer to the same kind of resource (with the latter two
+referring to specific features of clustering). In Terraform, we use
+@vsphere_compute_cluster@ to differentiate host clusters from datastore
+clusters , which are clusters of datastores that can be used to distribute
+load and ensure fault tolerance via distribution of virtual machines.
+Datastore clusters can also be managed through Terraform, via the
+</docs/providers/vsphere/r/datastore_cluster.html> . The
+@vsphere_compute_cluster@ resource can be used to create and manage clusters
+of hosts allowing for resource control of compute resources, load balancing
+through DRS, and high availability through vSphere HA. For more information
+on vSphere clusters and DRS, see
+<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-8ACF3502-5314-469F-8CC9-4A9BD5925BC2.html>
+. For more information on vSphere HA, see
+<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.avail.doc/GUID-5432CA24-14F1-44E3-87FB-61D937831CF6.html>
+. ~> NOTE: This resource requires vCenter and is not available on direct
+ESXi connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
+license.
+-}
+data ComputeClusterResource s = ComputeClusterResource {
+      _datacenter_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datacenter to create the cluster in. Forces a new resource if changed. -}
+    , _folder        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The relative path to a folder to put this cluster in. This is a path relative to the datacenter you are deploying the cluster to. Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a cluster named @terraform-compute-cluster-test@ in a host folder located at @/dc1/host/foo/bar@ , with the final inventory path being @/dc1/host/foo/bar/terraform-datastore-cluster-test@ . -}
+    , _name          :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the cluster. -}
+    , _tags          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeClusterResource s) where
+    toHCL ComputeClusterResource{..} = TF.inline $ catMaybes
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
+        , TF.assign "folder" <$> TF.attribute _folder
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance P.HasDatacenterId (ComputeClusterResource s) (TF.Attr s P.Text) where
+    datacenterId =
+        lens (_datacenter_id :: ComputeClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter_id = a } :: ComputeClusterResource s)
+
+instance P.HasFolder (ComputeClusterResource s) (TF.Attr s P.Text) where
+    folder =
+        lens (_folder :: ComputeClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _folder = a } :: ComputeClusterResource s)
+
+instance P.HasName (ComputeClusterResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeClusterResource s)
+
+instance P.HasTags (ComputeClusterResource s) (TF.Attr s P.Text) where
+    tags =
+        lens (_tags :: ComputeClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ComputeClusterResource s)
+
+instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
+    computedDatacenterId =
+        (_datacenter_id :: ComputeClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedFolder (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
+    computedFolder =
+        (_folder :: ComputeClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
+    computedResourcePoolId x = TF.compute (TF.refKey x) "resource_pool_id"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
+    computedTags =
+        (_tags :: ComputeClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+computeClusterResource :: TF.Resource P.VSphere (ComputeClusterResource s)
+computeClusterResource =
+    TF.newResource "vsphere_compute_cluster" $
+        ComputeClusterResource {
+              _datacenter_id = TF.Nil
+            , _folder = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            }
+
+{- | The @vsphere_compute_cluster_vm_affinity_rule@ VSphere resource.
+
+The @vsphere_compute_cluster_vm_affinity_rule@ resource can be used to
+manage VM affinity rules in a cluster, either created by the
+</docs/providers/vsphere/r/compute_cluster.html> resource or looked up by
+the </docs/providers/vsphere/d/compute_cluster.html> data source. This rule
+can be used to tell a set to virtual machines to run together on a single
+host within a cluster. When configured, DRS will make a best effort to
+ensure that the virtual machines run on the same host, or prevent any
+operation that would keep that from happening, depending on the value of the
+<#mandatory> flag. -> Keep in mind that this rule can only be used to tell
+VMs to run together on a non-specific host - it can't be used to pin VMs to
+a host. For that, see the
+</docs/providers/vsphere/r/compute_cluster_vm_host_rule.html> resource. ~>
+NOTE: This resource requires vCenter and is not available on direct ESXi
+connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
+license.
+-}
+data ComputeClusterVmAffinityRuleResource s = ComputeClusterVmAffinityRuleResource {
+      _compute_cluster_id  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the group in.  Forces a new resource if changed. -}
+    , _enabled             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Enable this rule in the cluster. Default: @true@ . -}
+    , _mandatory           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) When this value is @true@ , prevents any virtual machine operations that may violate this rule. Default: @false@ . -}
+    , _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the rule. This must be unique in the cluster. -}
+    , _virtual_machine_ids :: !(TF.Attr s P.Text)
+    {- ^ (Required) The UUIDs of the virtual machines to run on the same host together. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeClusterVmAffinityRuleResource s) where
+    toHCL ComputeClusterVmAffinityRuleResource{..} = TF.inline $ catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "mandatory" <$> TF.attribute _mandatory
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "virtual_machine_ids" <$> TF.attribute _virtual_machine_ids
+        ]
+
+instance P.HasComputeClusterId (ComputeClusterVmAffinityRuleResource s) (TF.Attr s P.Text) where
+    computeClusterId =
+        lens (_compute_cluster_id :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _compute_cluster_id = a } :: ComputeClusterVmAffinityRuleResource s)
+
+instance P.HasEnabled (ComputeClusterVmAffinityRuleResource s) (TF.Attr s P.Text) where
+    enabled =
+        lens (_enabled :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: ComputeClusterVmAffinityRuleResource s)
+
+instance P.HasMandatory (ComputeClusterVmAffinityRuleResource s) (TF.Attr s P.Text) where
+    mandatory =
+        lens (_mandatory :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _mandatory = a } :: ComputeClusterVmAffinityRuleResource s)
+
+instance P.HasName (ComputeClusterVmAffinityRuleResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeClusterVmAffinityRuleResource s)
+
+instance P.HasVirtualMachineIds (ComputeClusterVmAffinityRuleResource s) (TF.Attr s P.Text) where
+    virtualMachineIds =
+        lens (_virtual_machine_ids :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _virtual_machine_ids = a } :: ComputeClusterVmAffinityRuleResource s)
+
+instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (ComputeClusterVmAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedComputeClusterId =
+        (_compute_cluster_id :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeClusterVmAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedEnabled =
+        (_enabled :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMandatory (TF.Ref s' (ComputeClusterVmAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedMandatory =
+        (_mandatory :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterVmAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVirtualMachineIds (TF.Ref s' (ComputeClusterVmAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedVirtualMachineIds =
+        (_virtual_machine_ids :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+computeClusterVmAffinityRuleResource :: TF.Resource P.VSphere (ComputeClusterVmAffinityRuleResource s)
+computeClusterVmAffinityRuleResource =
+    TF.newResource "vsphere_compute_cluster_vm_affinity_rule" $
+        ComputeClusterVmAffinityRuleResource {
+              _compute_cluster_id = TF.Nil
+            , _enabled = TF.Nil
+            , _mandatory = TF.Nil
+            , _name = TF.Nil
+            , _virtual_machine_ids = TF.Nil
+            }
+
+{- | The @vsphere_compute_cluster_vm_anti_affinity_rule@ VSphere resource.
+
+The @vsphere_compute_cluster_vm_anti_affinity_rule@ resource can be used to
+manage VM anti-affinity rules in a cluster, either created by the
+</docs/providers/vsphere/r/compute_cluster.html> resource or looked up by
+the </docs/providers/vsphere/d/compute_cluster.html> data source. This rule
+can be used to tell a set to virtual machines to run on different hosts
+within a cluster, useful for preventing single points of failure in
+application cluster scenarios. When configured, DRS will make a best effort
+to ensure that the virtual machines run on different hosts, or prevent any
+operation that would keep that from happening, depending on the value of the
+<#mandatory> flag. -> Keep in mind that this rule can only be used to tell
+VMs to run separately on non-specific hosts - specific hosts cannot be
+specified with this rule. For that, see the
+</docs/providers/vsphere/r/compute_cluster_vm_host_rule.html> resource. ~>
+NOTE: This resource requires vCenter and is not available on direct ESXi
+connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
+license.
+-}
+data ComputeClusterVmAntiAffinityRuleResource s = ComputeClusterVmAntiAffinityRuleResource {
+      _compute_cluster_id  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the group in.  Forces a new resource if changed. -}
+    , _enabled             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Enable this rule in the cluster. Default: @true@ . -}
+    , _mandatory           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) When this value is @true@ , prevents any virtual machine operations that may violate this rule. Default: @false@ . -}
+    , _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the rule. This must be unique in the cluster. -}
+    , _virtual_machine_ids :: !(TF.Attr s P.Text)
+    {- ^ (Required) The UUIDs of the virtual machines to run on hosts different from each other. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeClusterVmAntiAffinityRuleResource s) where
+    toHCL ComputeClusterVmAntiAffinityRuleResource{..} = TF.inline $ catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "mandatory" <$> TF.attribute _mandatory
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "virtual_machine_ids" <$> TF.attribute _virtual_machine_ids
+        ]
+
+instance P.HasComputeClusterId (ComputeClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
+    computeClusterId =
+        lens (_compute_cluster_id :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _compute_cluster_id = a } :: ComputeClusterVmAntiAffinityRuleResource s)
+
+instance P.HasEnabled (ComputeClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
+    enabled =
+        lens (_enabled :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: ComputeClusterVmAntiAffinityRuleResource s)
+
+instance P.HasMandatory (ComputeClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
+    mandatory =
+        lens (_mandatory :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _mandatory = a } :: ComputeClusterVmAntiAffinityRuleResource s)
+
+instance P.HasName (ComputeClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeClusterVmAntiAffinityRuleResource s)
+
+instance P.HasVirtualMachineIds (ComputeClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
+    virtualMachineIds =
+        lens (_virtual_machine_ids :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _virtual_machine_ids = a } :: ComputeClusterVmAntiAffinityRuleResource s)
+
+instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (ComputeClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedComputeClusterId =
+        (_compute_cluster_id :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedEnabled =
+        (_enabled :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMandatory (TF.Ref s' (ComputeClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedMandatory =
+        (_mandatory :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVirtualMachineIds (TF.Ref s' (ComputeClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedVirtualMachineIds =
+        (_virtual_machine_ids :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+computeClusterVmAntiAffinityRuleResource :: TF.Resource P.VSphere (ComputeClusterVmAntiAffinityRuleResource s)
+computeClusterVmAntiAffinityRuleResource =
+    TF.newResource "vsphere_compute_cluster_vm_anti_affinity_rule" $
+        ComputeClusterVmAntiAffinityRuleResource {
+              _compute_cluster_id = TF.Nil
+            , _enabled = TF.Nil
+            , _mandatory = TF.Nil
+            , _name = TF.Nil
+            , _virtual_machine_ids = TF.Nil
+            }
+
+{- | The @vsphere_compute_cluster_vm_dependency_rule@ VSphere resource.
+
+The @vsphere_compute_cluster_vm_dependency_rule@ resource can be used to
+manage VM dependency rules in a cluster, either created by the
+</docs/providers/vsphere/r/compute_cluster.html> resource or looked up by
+the </docs/providers/vsphere/d/compute_cluster.html> data source. A virtual
+machine dependency rule applies to vSphere HA, and allows user-defined
+startup orders for virtual machines in the case of host failure. Virtual
+machines are supplied via groups, which can be managed via the
+</docs/providers/vsphere/r/compute_cluster_vm_group.html> resource. ~> NOTE:
+This resource requires vCenter and is not available on direct ESXi
+connections.
+-}
+data ComputeClusterVmDependencyRuleResource s = ComputeClusterVmDependencyRuleResource {
+      _compute_cluster_id       :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the group in.  Forces a new resource if changed. -}
+    , _dependency_vm_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the VM group that this rule depends on. The VMs defined in the group specified by <#vm_group_name> will not be started until the VMs in this group are started. -}
+    , _enabled                  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Enable this rule in the cluster. Default: @true@ . -}
+    , _mandatory                :: !(TF.Attr s P.Text)
+    {- ^ (Optional) When this value is @true@ , prevents any virtual machine operations that may violate this rule. Default: @false@ . -}
+    , _name                     :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the rule. This must be unique in the cluster. -}
+    , _vm_group_name            :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the VM group that is the subject of this rule. The VMs defined in this group will not be started until the VMs in the group specified by <#dependency_vm_group_name> are started. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeClusterVmDependencyRuleResource s) where
+    toHCL ComputeClusterVmDependencyRuleResource{..} = TF.inline $ catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
+        , TF.assign "dependency_vm_group_name" <$> TF.attribute _dependency_vm_group_name
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "mandatory" <$> TF.attribute _mandatory
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "vm_group_name" <$> TF.attribute _vm_group_name
+        ]
+
+instance P.HasComputeClusterId (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Text) where
+    computeClusterId =
+        lens (_compute_cluster_id :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _compute_cluster_id = a } :: ComputeClusterVmDependencyRuleResource s)
+
+instance P.HasDependencyVmGroupName (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Text) where
+    dependencyVmGroupName =
+        lens (_dependency_vm_group_name :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _dependency_vm_group_name = a } :: ComputeClusterVmDependencyRuleResource s)
+
+instance P.HasEnabled (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Text) where
+    enabled =
+        lens (_enabled :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: ComputeClusterVmDependencyRuleResource s)
+
+instance P.HasMandatory (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Text) where
+    mandatory =
+        lens (_mandatory :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _mandatory = a } :: ComputeClusterVmDependencyRuleResource s)
+
+instance P.HasName (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeClusterVmDependencyRuleResource s)
+
+instance P.HasVmGroupName (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Text) where
+    vmGroupName =
+        lens (_vm_group_name :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vm_group_name = a } :: ComputeClusterVmDependencyRuleResource s)
+
+instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (ComputeClusterVmDependencyRuleResource s)) (TF.Attr s P.Text) where
+    computedComputeClusterId =
+        (_compute_cluster_id :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDependencyVmGroupName (TF.Ref s' (ComputeClusterVmDependencyRuleResource s)) (TF.Attr s P.Text) where
+    computedDependencyVmGroupName =
+        (_dependency_vm_group_name :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeClusterVmDependencyRuleResource s)) (TF.Attr s P.Text) where
+    computedEnabled =
+        (_enabled :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMandatory (TF.Ref s' (ComputeClusterVmDependencyRuleResource s)) (TF.Attr s P.Text) where
+    computedMandatory =
+        (_mandatory :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterVmDependencyRuleResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVmGroupName (TF.Ref s' (ComputeClusterVmDependencyRuleResource s)) (TF.Attr s P.Text) where
+    computedVmGroupName =
+        (_vm_group_name :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+computeClusterVmDependencyRuleResource :: TF.Resource P.VSphere (ComputeClusterVmDependencyRuleResource s)
+computeClusterVmDependencyRuleResource =
+    TF.newResource "vsphere_compute_cluster_vm_dependency_rule" $
+        ComputeClusterVmDependencyRuleResource {
+              _compute_cluster_id = TF.Nil
+            , _dependency_vm_group_name = TF.Nil
+            , _enabled = TF.Nil
+            , _mandatory = TF.Nil
+            , _name = TF.Nil
+            , _vm_group_name = TF.Nil
+            }
+
+{- | The @vsphere_compute_cluster_vm_group@ VSphere resource.
+
+The @vsphere_compute_cluster_vm_group@ resource can be used to manage groups
+of virtual machines in a cluster, either created by the
+</docs/providers/vsphere/r/compute_cluster.html> resource or looked up by
+the </docs/providers/vsphere/d/compute_cluster.html> data source. This
+resource mainly serves as an input to the
+</docs/providers/vsphere/r/compute_cluster_vm_dependency_rule.html> and
+</docs/providers/vsphere/r/compute_cluster_vm_host_rule.html> resources. See
+the individual resource documentation pages for more information. ~> NOTE:
+This resource requires vCenter and is not available on direct ESXi
+connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
+license.
+-}
+data ComputeClusterVmGroupResource s = ComputeClusterVmGroupResource {
+      _compute_cluster_id  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the group in.  Forces a new resource if changed. -}
+    , _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the VM group. This must be unique in the cluster. Forces a new resource if changed. -}
+    , _virtual_machine_ids :: !(TF.Attr s P.Text)
+    {- ^ (Required) The UUIDs of the virtual machines in this group. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeClusterVmGroupResource s) where
+    toHCL ComputeClusterVmGroupResource{..} = TF.inline $ catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "virtual_machine_ids" <$> TF.attribute _virtual_machine_ids
+        ]
+
+instance P.HasComputeClusterId (ComputeClusterVmGroupResource s) (TF.Attr s P.Text) where
+    computeClusterId =
+        lens (_compute_cluster_id :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _compute_cluster_id = a } :: ComputeClusterVmGroupResource s)
+
+instance P.HasName (ComputeClusterVmGroupResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeClusterVmGroupResource s)
+
+instance P.HasVirtualMachineIds (ComputeClusterVmGroupResource s) (TF.Attr s P.Text) where
+    virtualMachineIds =
+        lens (_virtual_machine_ids :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _virtual_machine_ids = a } :: ComputeClusterVmGroupResource s)
+
+instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (ComputeClusterVmGroupResource s)) (TF.Attr s P.Text) where
+    computedComputeClusterId =
+        (_compute_cluster_id :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterVmGroupResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVirtualMachineIds (TF.Ref s' (ComputeClusterVmGroupResource s)) (TF.Attr s P.Text) where
+    computedVirtualMachineIds =
+        (_virtual_machine_ids :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+computeClusterVmGroupResource :: TF.Resource P.VSphere (ComputeClusterVmGroupResource s)
+computeClusterVmGroupResource =
+    TF.newResource "vsphere_compute_cluster_vm_group" $
+        ComputeClusterVmGroupResource {
+              _compute_cluster_id = TF.Nil
+            , _name = TF.Nil
+            , _virtual_machine_ids = TF.Nil
+            }
+
+{- | The @vsphere_compute_cluster_vm_host_rule@ VSphere resource.
+
+The @vsphere_compute_cluster_vm_host_rule@ resource can be used to manage
+VM-to-host rules in a cluster, either created by the
+</docs/providers/vsphere/r/compute_cluster.html> resource or looked up by
+the </docs/providers/vsphere/d/compute_cluster.html> data source. This
+resource can create both affinity rules , where virtual machines run on
+specified hosts, or anti-affinity rules, where virtual machines run on hosts
+outside of the ones specified in the rule. Virtual machines and hosts are
+supplied via groups, which can be managed via the
+</docs/providers/vsphere/r/compute_cluster_vm_group.html> and
+</docs/providers/vsphere/r/compute_cluster_host_group.html> resources. ~>
+NOTE: This resource requires vCenter and is not available on direct ESXi
+connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
+license.
+-}
+data ComputeClusterVmHostRuleResource s = ComputeClusterVmHostRuleResource {
+      _affinity_host_group_name      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) When this field is used, the virtual machines defined in <#vm_group_name> will be run on the hosts defined in this host group. -}
+    , _anti_affinity_host_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Optional) When this field is used, the virtual machines defined in <#vm_group_name> will not be run on the hosts defined in this host group. -}
+    , _compute_cluster_id            :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the group in.  Forces a new resource if changed. -}
+    , _enabled                       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Enable this rule in the cluster. Default: @true@ . -}
+    , _mandatory                     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) When this value is @true@ , prevents any virtual machine operations that may violate this rule. Default: @false@ . -}
+    , _name                          :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the rule. This must be unique in the cluster. -}
+    , _vm_group_name                 :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the virtual machine group to use with this rule. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ComputeClusterVmHostRuleResource s) where
+    toHCL ComputeClusterVmHostRuleResource{..} = TF.inline $ catMaybes
+        [ TF.assign "affinity_host_group_name" <$> TF.attribute _affinity_host_group_name
+        , TF.assign "anti_affinity_host_group_name" <$> TF.attribute _anti_affinity_host_group_name
+        , TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "mandatory" <$> TF.attribute _mandatory
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "vm_group_name" <$> TF.attribute _vm_group_name
+        ]
+
+instance P.HasAffinityHostGroupName (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
+    affinityHostGroupName =
+        lens (_affinity_host_group_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _affinity_host_group_name = a } :: ComputeClusterVmHostRuleResource s)
+
+instance P.HasAntiAffinityHostGroupName (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
+    antiAffinityHostGroupName =
+        lens (_anti_affinity_host_group_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _anti_affinity_host_group_name = a } :: ComputeClusterVmHostRuleResource s)
+
+instance P.HasComputeClusterId (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
+    computeClusterId =
+        lens (_compute_cluster_id :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _compute_cluster_id = a } :: ComputeClusterVmHostRuleResource s)
+
+instance P.HasEnabled (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
+    enabled =
+        lens (_enabled :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: ComputeClusterVmHostRuleResource s)
+
+instance P.HasMandatory (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
+    mandatory =
+        lens (_mandatory :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _mandatory = a } :: ComputeClusterVmHostRuleResource s)
+
+instance P.HasName (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ComputeClusterVmHostRuleResource s)
+
+instance P.HasVmGroupName (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
+    vmGroupName =
+        lens (_vm_group_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vm_group_name = a } :: ComputeClusterVmHostRuleResource s)
+
+instance s ~ s' => P.HasComputedAffinityHostGroupName (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
+    computedAffinityHostGroupName =
+        (_affinity_host_group_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedAntiAffinityHostGroupName (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
+    computedAntiAffinityHostGroupName =
+        (_anti_affinity_host_group_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
+    computedComputeClusterId =
+        (_compute_cluster_id :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
+    computedEnabled =
+        (_enabled :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMandatory (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
+    computedMandatory =
+        (_mandatory :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVmGroupName (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
+    computedVmGroupName =
+        (_vm_group_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+computeClusterVmHostRuleResource :: TF.Resource P.VSphere (ComputeClusterVmHostRuleResource s)
+computeClusterVmHostRuleResource =
+    TF.newResource "vsphere_compute_cluster_vm_host_rule" $
+        ComputeClusterVmHostRuleResource {
+              _affinity_host_group_name = TF.Nil
+            , _anti_affinity_host_group_name = TF.Nil
+            , _compute_cluster_id = TF.Nil
+            , _enabled = TF.Nil
+            , _mandatory = TF.Nil
+            , _name = TF.Nil
+            , _vm_group_name = TF.Nil
+            }
 
 {- | The @vsphere_custom_attribute@ VSphere resource.
 
@@ -343,6 +1116,171 @@ datacenterResource =
               _folder = TF.Nil
             , _name = TF.Nil
             , _tags = TF.Nil
+            }
+
+{- | The @vsphere_datastore_cluster@ VSphere resource.
+
+The @vsphere_datastore_cluster@ resource can be used to create and manage
+datastore clusters. This can be used to create groups of datastores with a
+shared management interface, allowing for resource control and load
+balancing through Storage DRS. For more information on vSphere datastore
+clusters and Storage DRS, see
+<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-598DF695-107E-406B-9C95-0AF961FC227A.html>
+. ~> NOTE: This resource requires vCenter and is not available on direct
+ESXi connections. ~> NOTE: Storage DRS requires a vSphere Enterprise Plus
+license.
+-}
+data DatastoreClusterResource s = DatastoreClusterResource {
+      _datacenter_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datacenter to create the datastore cluster in. Forces a new resource if changed. -}
+    , _folder        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The relative path to a folder to put this datastore cluster in.  This is a path relative to the datacenter you are deploying the datastore to.  Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a datastore cluster named @terraform-datastore-cluster-test@ in a datastore folder located at @/dc1/datastore/foo/bar@ , with the final inventory path being @/dc1/datastore/foo/bar/terraform-datastore-cluster-test@ . -}
+    , _name          :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the datastore cluster. -}
+    , _sdrs_enabled  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Enable Storage DRS for this datastore cluster. Default: @false@ . -}
+    , _tags          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DatastoreClusterResource s) where
+    toHCL DatastoreClusterResource{..} = TF.inline $ catMaybes
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
+        , TF.assign "folder" <$> TF.attribute _folder
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "sdrs_enabled" <$> TF.attribute _sdrs_enabled
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance P.HasDatacenterId (DatastoreClusterResource s) (TF.Attr s P.Text) where
+    datacenterId =
+        lens (_datacenter_id :: DatastoreClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter_id = a } :: DatastoreClusterResource s)
+
+instance P.HasFolder (DatastoreClusterResource s) (TF.Attr s P.Text) where
+    folder =
+        lens (_folder :: DatastoreClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _folder = a } :: DatastoreClusterResource s)
+
+instance P.HasName (DatastoreClusterResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: DatastoreClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsEnabled (DatastoreClusterResource s) (TF.Attr s P.Text) where
+    sdrsEnabled =
+        lens (_sdrs_enabled :: DatastoreClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _sdrs_enabled = a } :: DatastoreClusterResource s)
+
+instance P.HasTags (DatastoreClusterResource s) (TF.Attr s P.Text) where
+    tags =
+        lens (_tags :: DatastoreClusterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: DatastoreClusterResource s)
+
+instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (DatastoreClusterResource s)) (TF.Attr s P.Text) where
+    computedDatacenterId =
+        (_datacenter_id :: DatastoreClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedFolder (TF.Ref s' (DatastoreClusterResource s)) (TF.Attr s P.Text) where
+    computedFolder =
+        (_folder :: DatastoreClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatastoreClusterResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: DatastoreClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSdrsEnabled (TF.Ref s' (DatastoreClusterResource s)) (TF.Attr s P.Text) where
+    computedSdrsEnabled =
+        (_sdrs_enabled :: DatastoreClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DatastoreClusterResource s)) (TF.Attr s P.Text) where
+    computedTags =
+        (_tags :: DatastoreClusterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+datastoreClusterResource :: TF.Resource P.VSphere (DatastoreClusterResource s)
+datastoreClusterResource =
+    TF.newResource "vsphere_datastore_cluster" $
+        DatastoreClusterResource {
+              _datacenter_id = TF.Nil
+            , _folder = TF.Nil
+            , _name = TF.Nil
+            , _sdrs_enabled = TF.Nil
+            , _tags = TF.Nil
+            }
+
+{- | The @vsphere_datastore_cluster_vm_anti_affinity_rule@ VSphere resource.
+
+The @vsphere_datastore_cluster_vm_anti_affinity_rule@ resource can be used
+to manage VM anti-affinity rules in a datastore cluster, either created by
+the </docs/providers/vsphere/r/datastore_cluster.html> resource or looked up
+by the </docs/providers/vsphere/d/datastore_cluster.html> data source. This
+rule can be used to tell a set to virtual machines to run on different
+datastores within a cluster, useful for preventing single points of failure
+in application cluster scenarios. When configured, Storage DRS will make a
+best effort to ensure that the virtual machines run on different datastores,
+or prevent any operation that would keep that from happening, depending on
+the value of the <#mandatory> flag. ~> NOTE: This resource requires vCenter
+and is not available on direct ESXi connections. ~> NOTE: Storage DRS
+requires a vSphere Enterprise Plus license.
+-}
+data DatastoreClusterVmAntiAffinityRuleResource s = DatastoreClusterVmAntiAffinityRuleResource {
+      _datastore_cluster_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datastore cluster to put the group in.  Forces a new resource if changed. -}
+    , _name                 :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the rule. This must be unique in the cluster. -}
+    , _virtual_machine_ids  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The UUIDs of the virtual machines to run on different datastores from each other. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DatastoreClusterVmAntiAffinityRuleResource s) where
+    toHCL DatastoreClusterVmAntiAffinityRuleResource{..} = TF.inline $ catMaybes
+        [ TF.assign "datastore_cluster_id" <$> TF.attribute _datastore_cluster_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "virtual_machine_ids" <$> TF.attribute _virtual_machine_ids
+        ]
+
+instance P.HasDatastoreClusterId (DatastoreClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
+    datastoreClusterId =
+        lens (_datastore_cluster_id :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _datastore_cluster_id = a } :: DatastoreClusterVmAntiAffinityRuleResource s)
+
+instance P.HasName (DatastoreClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DatastoreClusterVmAntiAffinityRuleResource s)
+
+instance P.HasVirtualMachineIds (DatastoreClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
+    virtualMachineIds =
+        lens (_virtual_machine_ids :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _virtual_machine_ids = a } :: DatastoreClusterVmAntiAffinityRuleResource s)
+
+instance s ~ s' => P.HasComputedDatastoreClusterId (TF.Ref s' (DatastoreClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedDatastoreClusterId =
+        (_datastore_cluster_id :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatastoreClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVirtualMachineIds (TF.Ref s' (DatastoreClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
+    computedVirtualMachineIds =
+        (_virtual_machine_ids :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+datastoreClusterVmAntiAffinityRuleResource :: TF.Resource P.VSphere (DatastoreClusterVmAntiAffinityRuleResource s)
+datastoreClusterVmAntiAffinityRuleResource =
+    TF.newResource "vsphere_datastore_cluster_vm_anti_affinity_rule" $
+        DatastoreClusterVmAntiAffinityRuleResource {
+              _datastore_cluster_id = TF.Nil
+            , _name = TF.Nil
+            , _virtual_machine_ids = TF.Nil
             }
 
 {- | The @vsphere_distributed_port_group@ VSphere resource.
@@ -697,6 +1635,168 @@ distributedVirtualSwitchResource =
             , _version = TF.Nil
             }
 
+{- | The @vsphere_dpm_host_override@ VSphere resource.
+
+The @vsphere_dpm_host_override@ resource can be used to add a DPM override
+to a cluster for a particular host. This allows you to control the power
+management settings for individual hosts in the cluster while leaving any
+unspecified ones at the default power management settings. For more
+information on DPM within vSphere clusters, see
+<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-5E5E349A-4644-4C9C-B434-1C0243EBDC80.html>
+. ~> NOTE: This resource requires vCenter and is not available on direct
+ESXi connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
+license.
+-}
+data DpmHostOverrideResource s = DpmHostOverrideResource {
+      _compute_cluster_id   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the override in.  Forces a new resource if changed. -}
+    , _dpm_automation_level :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The automation level for host power operations on this host. Can be one of @manual@ or @automated@ . Default: @manual@ . -}
+    , _dpm_enabled          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Enable DPM support for this host. Default: @false@ . -}
+    , _host_system_ids      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the host to create the override for. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DpmHostOverrideResource s) where
+    toHCL DpmHostOverrideResource{..} = TF.inline $ catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
+        , TF.assign "dpm_automation_level" <$> TF.attribute _dpm_automation_level
+        , TF.assign "dpm_enabled" <$> TF.attribute _dpm_enabled
+        , TF.assign "host_system_ids" <$> TF.attribute _host_system_ids
+        ]
+
+instance P.HasComputeClusterId (DpmHostOverrideResource s) (TF.Attr s P.Text) where
+    computeClusterId =
+        lens (_compute_cluster_id :: DpmHostOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _compute_cluster_id = a } :: DpmHostOverrideResource s)
+
+instance P.HasDpmAutomationLevel (DpmHostOverrideResource s) (TF.Attr s P.Text) where
+    dpmAutomationLevel =
+        lens (_dpm_automation_level :: DpmHostOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _dpm_automation_level = a } :: DpmHostOverrideResource s)
+
+instance P.HasDpmEnabled (DpmHostOverrideResource s) (TF.Attr s P.Text) where
+    dpmEnabled =
+        lens (_dpm_enabled :: DpmHostOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _dpm_enabled = a } :: DpmHostOverrideResource s)
+
+instance P.HasHostSystemIds (DpmHostOverrideResource s) (TF.Attr s P.Text) where
+    hostSystemIds =
+        lens (_host_system_ids :: DpmHostOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _host_system_ids = a } :: DpmHostOverrideResource s)
+
+instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (DpmHostOverrideResource s)) (TF.Attr s P.Text) where
+    computedComputeClusterId =
+        (_compute_cluster_id :: DpmHostOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDpmAutomationLevel (TF.Ref s' (DpmHostOverrideResource s)) (TF.Attr s P.Text) where
+    computedDpmAutomationLevel =
+        (_dpm_automation_level :: DpmHostOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDpmEnabled (TF.Ref s' (DpmHostOverrideResource s)) (TF.Attr s P.Text) where
+    computedDpmEnabled =
+        (_dpm_enabled :: DpmHostOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHostSystemIds (TF.Ref s' (DpmHostOverrideResource s)) (TF.Attr s P.Text) where
+    computedHostSystemIds =
+        (_host_system_ids :: DpmHostOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+dpmHostOverrideResource :: TF.Resource P.VSphere (DpmHostOverrideResource s)
+dpmHostOverrideResource =
+    TF.newResource "vsphere_dpm_host_override" $
+        DpmHostOverrideResource {
+              _compute_cluster_id = TF.Nil
+            , _dpm_automation_level = TF.Nil
+            , _dpm_enabled = TF.Nil
+            , _host_system_ids = TF.Nil
+            }
+
+{- | The @vsphere_drs_vm_override@ VSphere resource.
+
+The @vsphere_drs_vm_override@ resource can be used to add a DRS override to
+a cluster for a specific virtual machine. With this resource, one can enable
+or disable DRS and control the automation level for a single virtual machine
+without affecting the rest of the cluster. For more information on vSphere
+clusters and DRS, see
+<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-8ACF3502-5314-469F-8CC9-4A9BD5925BC2.html>
+. ~> NOTE: This resource requires vCenter and is not available on direct
+ESXi connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
+license.
+-}
+data DrsVmOverrideResource s = DrsVmOverrideResource {
+      _compute_cluster_id   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the override in.  Forces a new resource if changed. -}
+    , _drs_automation_level :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Overrides the automation level for this virtual machine in the cluster. Can be one of @manual@ , @partiallyAutomated@ , or @fullyAutomated@ . Default: @manual@ . -}
+    , _drs_enabled          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Overrides the default DRS setting for this virtual machine. Can be either @true@ or @false@ . Default: @false@ . -}
+    , _virtual_machine_id   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The UUID of the virtual machine to create the override for.  Forces a new resource if changed. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DrsVmOverrideResource s) where
+    toHCL DrsVmOverrideResource{..} = TF.inline $ catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
+        , TF.assign "drs_automation_level" <$> TF.attribute _drs_automation_level
+        , TF.assign "drs_enabled" <$> TF.attribute _drs_enabled
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
+        ]
+
+instance P.HasComputeClusterId (DrsVmOverrideResource s) (TF.Attr s P.Text) where
+    computeClusterId =
+        lens (_compute_cluster_id :: DrsVmOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _compute_cluster_id = a } :: DrsVmOverrideResource s)
+
+instance P.HasDrsAutomationLevel (DrsVmOverrideResource s) (TF.Attr s P.Text) where
+    drsAutomationLevel =
+        lens (_drs_automation_level :: DrsVmOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _drs_automation_level = a } :: DrsVmOverrideResource s)
+
+instance P.HasDrsEnabled (DrsVmOverrideResource s) (TF.Attr s P.Text) where
+    drsEnabled =
+        lens (_drs_enabled :: DrsVmOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _drs_enabled = a } :: DrsVmOverrideResource s)
+
+instance P.HasVirtualMachineId (DrsVmOverrideResource s) (TF.Attr s P.Text) where
+    virtualMachineId =
+        lens (_virtual_machine_id :: DrsVmOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _virtual_machine_id = a } :: DrsVmOverrideResource s)
+
+instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (DrsVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedComputeClusterId =
+        (_compute_cluster_id :: DrsVmOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDrsAutomationLevel (TF.Ref s' (DrsVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedDrsAutomationLevel =
+        (_drs_automation_level :: DrsVmOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDrsEnabled (TF.Ref s' (DrsVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedDrsEnabled =
+        (_drs_enabled :: DrsVmOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVirtualMachineId (TF.Ref s' (DrsVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedVirtualMachineId =
+        (_virtual_machine_id :: DrsVmOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+drsVmOverrideResource :: TF.Resource P.VSphere (DrsVmOverrideResource s)
+drsVmOverrideResource =
+    TF.newResource "vsphere_drs_vm_override" $
+        DrsVmOverrideResource {
+              _compute_cluster_id = TF.Nil
+            , _drs_automation_level = TF.Nil
+            , _drs_enabled = TF.Nil
+            , _virtual_machine_id = TF.Nil
+            }
+
 {- | The @vsphere_file@ VSphere resource.
 
 The @vsphere_file@ resource can be used to upload files (such as virtual
@@ -829,7 +1929,7 @@ folders. The resource supports creating folders of the 5 major types -
 datacenter folders, host and cluster folders, virtual machine folders,
 datastore folders, and network folders. Paths are always relative to the
 specific type of folder you are creating. Subfolders are discovered by
-parsing the relative path specified in @name@ , so @foo/bar@ will create a
+parsing the relative path specified in @path@ , so @foo/bar@ will create a
 folder named @bar@ in the parent folder @foo@ , as long as that folder
 exists.
 -}
@@ -858,6 +1958,59 @@ folderResource =
     TF.newResource "vsphere_folder" $
         FolderResource {
               _path = TF.Nil
+            }
+
+{- | The @vsphere_ha_vm_override@ VSphere resource.
+
+The @vsphere_ha_vm_override@ resource can be used to add an override for
+vSphere HA settings on a cluster for a specific virtual machine. With this
+resource, one can control specific HA settings so that they are different
+than the cluster default, accommodating the needs of that specific virtual
+machine, while not affecting the rest of the cluster. For more information
+on vSphere HA, see
+<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.avail.doc/GUID-5432CA24-14F1-44E3-87FB-61D937831CF6.html>
+. ~> NOTE: This resource requires vCenter and is not available on direct
+ESXi connections.
+-}
+data HaVmOverrideResource s = HaVmOverrideResource {
+      _compute_cluster_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the override in.  Forces a new resource if changed. -}
+    , _virtual_machine_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The UUID of the virtual machine to create the override for.  Forces a new resource if changed. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (HaVmOverrideResource s) where
+    toHCL HaVmOverrideResource{..} = TF.inline $ catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
+        ]
+
+instance P.HasComputeClusterId (HaVmOverrideResource s) (TF.Attr s P.Text) where
+    computeClusterId =
+        lens (_compute_cluster_id :: HaVmOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _compute_cluster_id = a } :: HaVmOverrideResource s)
+
+instance P.HasVirtualMachineId (HaVmOverrideResource s) (TF.Attr s P.Text) where
+    virtualMachineId =
+        lens (_virtual_machine_id :: HaVmOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _virtual_machine_id = a } :: HaVmOverrideResource s)
+
+instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (HaVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedComputeClusterId =
+        (_compute_cluster_id :: HaVmOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVirtualMachineId (TF.Ref s' (HaVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedVirtualMachineId =
+        (_virtual_machine_id :: HaVmOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+haVmOverrideResource :: TF.Resource P.VSphere (HaVmOverrideResource s)
+haVmOverrideResource =
+    TF.newResource "vsphere_ha_vm_override" $
+        HaVmOverrideResource {
+              _compute_cluster_id = TF.Nil
+            , _virtual_machine_id = TF.Nil
             }
 
 {- | The @vsphere_host_port_group@ VSphere resource.
@@ -1099,29 +2252,32 @@ you must specify each host that you want to add in the @host_system_ids@
 argument.
 -}
 data NasDatastoreResource s = NasDatastoreResource {
-      _access_mode     :: !(TF.Attr s P.Text)
+      _access_mode          :: !(TF.Attr s P.Text)
     {- ^ (Optional) Access mode for the mount point. Can be one of @readOnly@ or @readWrite@ . Note that @readWrite@ does not necessarily mean that the datastore will be read-write depending on the permissions of the actual share. Default: @readWrite@ . Forces a new resource if changed. -}
-    , _folder          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The relative path to a folder to put this datastore in. This is a path relative to the datacenter you are deploying the datastore to. Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a datastore named @terraform-test@ in a datastore folder located at @/dc1/datastore/foo/bar@ , with the final inventory path being @/dc1/datastore/foo/bar/terraform-test@ . -}
-    , _host_system_ids :: !(TF.Attr s P.Text)
+    , _datastore_cluster_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of a datastore cluster to put this datastore in. Conflicts with @folder@ . -}
+    , _folder               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The relative path to a folder to put this datastore in. This is a path relative to the datacenter you are deploying the datastore to. Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a datastore named @terraform-test@ in a datastore folder located at @/dc1/datastore/foo/bar@ , with the final inventory path being @/dc1/datastore/foo/bar/terraform-test@ . Conflicts with @datastore_cluster_id@ . -}
+    , _host_system_ids      :: !(TF.Attr s P.Text)
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the hosts to mount the datastore on. -}
-    , _name            :: !(TF.Attr s P.Text)
+    , _name                 :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the datastore. Forces a new resource if changed. -}
-    , _remote_hosts    :: !(TF.Attr s P.Text)
+    , _remote_hosts         :: !(TF.Attr s P.Text)
     {- ^ (Required) The hostnames or IP addresses of the remote server or servers. Only one element should be present for NFS v3 but multiple can be present for NFS v4.1. Forces a new resource if changed. -}
-    , _remote_path     :: !(TF.Attr s P.Text)
+    , _remote_path          :: !(TF.Attr s P.Text)
     {- ^ (Required) The remote path of the mount point. Forces a new resource if changed. -}
-    , _security_type   :: !(TF.Attr s P.Text)
+    , _security_type        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The security type to use when using NFS v4.1. Can be one of @AUTH_SYS@ , @SEC_KRB5@ , or @SEC_KRB5I@ . Forces a new resource if changed. -}
-    , _tags            :: !(TF.Attr s P.Text)
+    , _tags                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    , _type'           :: !(TF.Attr s P.Text)
+    , _type'                :: !(TF.Attr s P.Text)
     {- ^ (Optional) The type of NAS volume. Can be one of @NFS@ (to denote v3) or @NFS41@ (to denote NFS v4.1). Default: @NFS@ . Forces a new resource if changed. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NasDatastoreResource s) where
     toHCL NasDatastoreResource{..} = TF.inline $ catMaybes
         [ TF.assign "access_mode" <$> TF.attribute _access_mode
+        , TF.assign "datastore_cluster_id" <$> TF.attribute _datastore_cluster_id
         , TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "host_system_ids" <$> TF.attribute _host_system_ids
         , TF.assign "name" <$> TF.attribute _name
@@ -1136,6 +2292,11 @@ instance P.HasAccessMode (NasDatastoreResource s) (TF.Attr s P.Text) where
     accessMode =
         lens (_access_mode :: NasDatastoreResource s -> TF.Attr s P.Text)
              (\s a -> s { _access_mode = a } :: NasDatastoreResource s)
+
+instance P.HasDatastoreClusterId (NasDatastoreResource s) (TF.Attr s P.Text) where
+    datastoreClusterId =
+        lens (_datastore_cluster_id :: NasDatastoreResource s -> TF.Attr s P.Text)
+             (\s a -> s { _datastore_cluster_id = a } :: NasDatastoreResource s)
 
 instance P.HasFolder (NasDatastoreResource s) (TF.Attr s P.Text) where
     folder =
@@ -1187,6 +2348,11 @@ instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (NasDatastoreResource s)) 
 
 instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedCapacity x = TF.compute (TF.refKey x) "capacity"
+
+instance s ~ s' => P.HasComputedDatastoreClusterId (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
+    computedDatastoreClusterId =
+        (_datastore_cluster_id :: NasDatastoreResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedFolder (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedFolder =
@@ -1254,6 +2420,7 @@ nasDatastoreResource =
     TF.newResource "vsphere_nas_datastore" $
         NasDatastoreResource {
               _access_mode = TF.Nil
+            , _datastore_cluster_id = TF.Nil
             , _folder = TF.Nil
             , _host_system_ids = TF.Nil
             , _name = TF.Nil
@@ -1262,6 +2429,303 @@ nasDatastoreResource =
             , _security_type = TF.Nil
             , _tags = TF.Nil
             , _type' = TF.Nil
+            }
+
+{- | The @vsphere_resource_pool@ VSphere resource.
+
+The @vsphere_resource_pool@ resource can be used to create and manage
+resource pools in standalone hosts or on compute clusters. For more
+information on vSphere resource pools, see
+<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-60077B40-66FF-4625-934A-641703ED7601.html>
+.
+-}
+data ResourcePoolResource s = ResourcePoolResource {
+      _cpu_expandable          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Determines if the reservation on a resource pool can grow beyond the specified value if the parent resource pool has unreserved resources. Default: @true@ -}
+    , _cpu_limit               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The CPU utilization of a resource pool will not exceed this limit, even if there are available resources. Set to @-1@ for unlimited. Default: @-1@ -}
+    , _cpu_reservation         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Amount of CPU (MHz) that is guaranteed available to the resource pool. Default: @0@ -}
+    , _cpu_share_level         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The CPU allocation level. The level is a simplified view of shares. Levels map to a pre-determined set of numeric values for shares. Can be one of @low@ , @normal@ , @high@ , or @custom@ . When @low@ , @normal@ , or @high@ are specified values in @cpu_shares@ will be ignored.  Default: @normal@ -}
+    , _cpu_shares              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The number of shares allocated for CPU. Used to determine resource allocation in case of resource contention. If this is set, @cpu_share_level@ must be @custom@ . -}
+    , _memory_expandable       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Determines if the reservation on a resource pool can grow beyond the specified value if the parent resource pool has unreserved resources. Default: @true@ -}
+    , _memory_limit            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The CPU utilization of a resource pool will not exceed this limit, even if there are available resources. Set to @-1@ for unlimited. Default: @-1@ -}
+    , _memory_reservation      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Amount of CPU (MHz) that is guaranteed available to the resource pool. Default: @0@ -}
+    , _memory_share_level      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The CPU allocation level. The level is a simplified view of shares. Levels map to a pre-determined set of numeric values for shares. Can be one of @low@ , @normal@ , @high@ , or @custom@ . When @low@ , @normal@ , or @high@ are specified values in @memory_shares@ will be ignored.  Default: @normal@ -}
+    , _memory_shares           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The number of shares allocated for CPU. Used to determine resource allocation in case of resource contention. If this is set, @memory_share_level@ must be @custom@ . -}
+    , _name                    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the resource pool. -}
+    , _parent_resource_pool_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the parent resource pool. This can be the root resource pool for a cluster or standalone host, or a resource pool itself. When moving a resource pool from one parent resource pool to another, both must share a common root resource pool or the move will fail. -}
+    , _tags                    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ResourcePoolResource s) where
+    toHCL ResourcePoolResource{..} = TF.inline $ catMaybes
+        [ TF.assign "cpu_expandable" <$> TF.attribute _cpu_expandable
+        , TF.assign "cpu_limit" <$> TF.attribute _cpu_limit
+        , TF.assign "cpu_reservation" <$> TF.attribute _cpu_reservation
+        , TF.assign "cpu_share_level" <$> TF.attribute _cpu_share_level
+        , TF.assign "cpu_shares" <$> TF.attribute _cpu_shares
+        , TF.assign "memory_expandable" <$> TF.attribute _memory_expandable
+        , TF.assign "memory_limit" <$> TF.attribute _memory_limit
+        , TF.assign "memory_reservation" <$> TF.attribute _memory_reservation
+        , TF.assign "memory_share_level" <$> TF.attribute _memory_share_level
+        , TF.assign "memory_shares" <$> TF.attribute _memory_shares
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_resource_pool_id" <$> TF.attribute _parent_resource_pool_id
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance P.HasCpuExpandable (ResourcePoolResource s) (TF.Attr s P.Text) where
+    cpuExpandable =
+        lens (_cpu_expandable :: ResourcePoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cpu_expandable = a } :: ResourcePoolResource s)
+
+instance P.HasCpuLimit (ResourcePoolResource s) (TF.Attr s P.Text) where
+    cpuLimit =
+        lens (_cpu_limit :: ResourcePoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cpu_limit = a } :: ResourcePoolResource s)
+
+instance P.HasCpuReservation (ResourcePoolResource s) (TF.Attr s P.Text) where
+    cpuReservation =
+        lens (_cpu_reservation :: ResourcePoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cpu_reservation = a } :: ResourcePoolResource s)
+
+instance P.HasCpuShareLevel (ResourcePoolResource s) (TF.Attr s P.Text) where
+    cpuShareLevel =
+        lens (_cpu_share_level :: ResourcePoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cpu_share_level = a } :: ResourcePoolResource s)
+
+instance P.HasCpuShares (ResourcePoolResource s) (TF.Attr s P.Text) where
+    cpuShares =
+        lens (_cpu_shares :: ResourcePoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cpu_shares = a } :: ResourcePoolResource s)
+
+instance P.HasMemoryExpandable (ResourcePoolResource s) (TF.Attr s P.Text) where
+    memoryExpandable =
+        lens (_memory_expandable :: ResourcePoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _memory_expandable = a } :: ResourcePoolResource s)
+
+instance P.HasMemoryLimit (ResourcePoolResource s) (TF.Attr s P.Text) where
+    memoryLimit =
+        lens (_memory_limit :: ResourcePoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _memory_limit = a } :: ResourcePoolResource s)
+
+instance P.HasMemoryReservation (ResourcePoolResource s) (TF.Attr s P.Text) where
+    memoryReservation =
+        lens (_memory_reservation :: ResourcePoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _memory_reservation = a } :: ResourcePoolResource s)
+
+instance P.HasMemoryShareLevel (ResourcePoolResource s) (TF.Attr s P.Text) where
+    memoryShareLevel =
+        lens (_memory_share_level :: ResourcePoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _memory_share_level = a } :: ResourcePoolResource s)
+
+instance P.HasMemoryShares (ResourcePoolResource s) (TF.Attr s P.Text) where
+    memoryShares =
+        lens (_memory_shares :: ResourcePoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _memory_shares = a } :: ResourcePoolResource s)
+
+instance P.HasName (ResourcePoolResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ResourcePoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ResourcePoolResource s)
+
+instance P.HasParentResourcePoolId (ResourcePoolResource s) (TF.Attr s P.Text) where
+    parentResourcePoolId =
+        lens (_parent_resource_pool_id :: ResourcePoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _parent_resource_pool_id = a } :: ResourcePoolResource s)
+
+instance P.HasTags (ResourcePoolResource s) (TF.Attr s P.Text) where
+    tags =
+        lens (_tags :: ResourcePoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: ResourcePoolResource s)
+
+instance s ~ s' => P.HasComputedCpuExpandable (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedCpuExpandable =
+        (_cpu_expandable :: ResourcePoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCpuLimit (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedCpuLimit =
+        (_cpu_limit :: ResourcePoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCpuReservation (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedCpuReservation =
+        (_cpu_reservation :: ResourcePoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCpuShareLevel (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedCpuShareLevel =
+        (_cpu_share_level :: ResourcePoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCpuShares (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedCpuShares =
+        (_cpu_shares :: ResourcePoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMemoryExpandable (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedMemoryExpandable =
+        (_memory_expandable :: ResourcePoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMemoryLimit (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedMemoryLimit =
+        (_memory_limit :: ResourcePoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMemoryReservation (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedMemoryReservation =
+        (_memory_reservation :: ResourcePoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMemoryShareLevel (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedMemoryShareLevel =
+        (_memory_share_level :: ResourcePoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMemoryShares (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedMemoryShares =
+        (_memory_shares :: ResourcePoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ResourcePoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedParentResourcePoolId (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedParentResourcePoolId =
+        (_parent_resource_pool_id :: ResourcePoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
+    computedTags =
+        (_tags :: ResourcePoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+resourcePoolResource :: TF.Resource P.VSphere (ResourcePoolResource s)
+resourcePoolResource =
+    TF.newResource "vsphere_resource_pool" $
+        ResourcePoolResource {
+              _cpu_expandable = TF.Nil
+            , _cpu_limit = TF.Nil
+            , _cpu_reservation = TF.Nil
+            , _cpu_share_level = TF.Nil
+            , _cpu_shares = TF.Nil
+            , _memory_expandable = TF.Nil
+            , _memory_limit = TF.Nil
+            , _memory_reservation = TF.Nil
+            , _memory_share_level = TF.Nil
+            , _memory_shares = TF.Nil
+            , _name = TF.Nil
+            , _parent_resource_pool_id = TF.Nil
+            , _tags = TF.Nil
+            }
+
+{- | The @vsphere_storage_drs_vm_override@ VSphere resource.
+
+The @vsphere_storage_drs_vm_override@ resource can be used to add a Storage
+DRS override to a datastore cluster for a specific virtual machine. With
+this resource, one can enable or disable Storage DRS, and control the
+automation level and disk affinity for a single virtual machine without
+affecting the rest of the datastore cluster. For more information on vSphere
+datastore clusters and Storage DRS, see
+<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-598DF695-107E-406B-9C95-0AF961FC227A.html>
+.
+-}
+data StorageDrsVmOverrideResource s = StorageDrsVmOverrideResource {
+      _datastore_cluster_id   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datastore cluster to put the override in. Forces a new resource if changed. -}
+    , _sdrs_automation_level  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Overrides any Storage DRS automation levels for this virtual machine. Can be one of @automated@ or @manual@ . When not specified, the datastore cluster's settings are used according to the </docs/providers/vsphere/r/datastore_cluster.html#storage-drs-automation-options> . -}
+    , _sdrs_enabled           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Overrides the default Storage DRS setting for this virtual machine. When not specified, the datastore cluster setting is used. -}
+    , _sdrs_intra_vm_affinity :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Overrides the intra-VM affinity setting for this virtual machine. When @true@ , all disks for this virtual machine will be kept on the same datastore. When @false@ , Storage DRS may locate individual disks on different datastores if it helps satisfy cluster requirements. When not specified, the datastore cluster's settings are used. -}
+    , _virtual_machine_id     :: !(TF.Attr s P.Text)
+    {- ^ (Required) The UUID of the virtual machine to create the override for.  Forces a new resource if changed. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (StorageDrsVmOverrideResource s) where
+    toHCL StorageDrsVmOverrideResource{..} = TF.inline $ catMaybes
+        [ TF.assign "datastore_cluster_id" <$> TF.attribute _datastore_cluster_id
+        , TF.assign "sdrs_automation_level" <$> TF.attribute _sdrs_automation_level
+        , TF.assign "sdrs_enabled" <$> TF.attribute _sdrs_enabled
+        , TF.assign "sdrs_intra_vm_affinity" <$> TF.attribute _sdrs_intra_vm_affinity
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
+        ]
+
+instance P.HasDatastoreClusterId (StorageDrsVmOverrideResource s) (TF.Attr s P.Text) where
+    datastoreClusterId =
+        lens (_datastore_cluster_id :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _datastore_cluster_id = a } :: StorageDrsVmOverrideResource s)
+
+instance P.HasSdrsAutomationLevel (StorageDrsVmOverrideResource s) (TF.Attr s P.Text) where
+    sdrsAutomationLevel =
+        lens (_sdrs_automation_level :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _sdrs_automation_level = a } :: StorageDrsVmOverrideResource s)
+
+instance P.HasSdrsEnabled (StorageDrsVmOverrideResource s) (TF.Attr s P.Text) where
+    sdrsEnabled =
+        lens (_sdrs_enabled :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _sdrs_enabled = a } :: StorageDrsVmOverrideResource s)
+
+instance P.HasSdrsIntraVmAffinity (StorageDrsVmOverrideResource s) (TF.Attr s P.Text) where
+    sdrsIntraVmAffinity =
+        lens (_sdrs_intra_vm_affinity :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _sdrs_intra_vm_affinity = a } :: StorageDrsVmOverrideResource s)
+
+instance P.HasVirtualMachineId (StorageDrsVmOverrideResource s) (TF.Attr s P.Text) where
+    virtualMachineId =
+        lens (_virtual_machine_id :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+             (\s a -> s { _virtual_machine_id = a } :: StorageDrsVmOverrideResource s)
+
+instance s ~ s' => P.HasComputedDatastoreClusterId (TF.Ref s' (StorageDrsVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedDatastoreClusterId =
+        (_datastore_cluster_id :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSdrsAutomationLevel (TF.Ref s' (StorageDrsVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedSdrsAutomationLevel =
+        (_sdrs_automation_level :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSdrsEnabled (TF.Ref s' (StorageDrsVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedSdrsEnabled =
+        (_sdrs_enabled :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSdrsIntraVmAffinity (TF.Ref s' (StorageDrsVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedSdrsIntraVmAffinity =
+        (_sdrs_intra_vm_affinity :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVirtualMachineId (TF.Ref s' (StorageDrsVmOverrideResource s)) (TF.Attr s P.Text) where
+    computedVirtualMachineId =
+        (_virtual_machine_id :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+storageDrsVmOverrideResource :: TF.Resource P.VSphere (StorageDrsVmOverrideResource s)
+storageDrsVmOverrideResource =
+    TF.newResource "vsphere_storage_drs_vm_override" $
+        StorageDrsVmOverrideResource {
+              _datastore_cluster_id = TF.Nil
+            , _sdrs_automation_level = TF.Nil
+            , _sdrs_enabled = TF.Nil
+            , _sdrs_intra_vm_affinity = TF.Nil
+            , _virtual_machine_id = TF.Nil
             }
 
 {- | The @vsphere_tag_category@ VSphere resource.
@@ -1581,6 +3045,9 @@ instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (VirtualMachineResourc
 instance s ~ s' => P.HasComputedUuid (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedUuid x = TF.compute (TF.refKey x) "uuid"
 
+instance s ~ s' => P.HasComputedVappTransport (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
+    computedVappTransport x = TF.compute (TF.refKey x) "vapp_transport"
+
 instance s ~ s' => P.HasComputedVmwareToolsStatus (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedVmwareToolsStatus x = TF.compute (TF.refKey x) "vmware_tools_status"
 
@@ -1737,26 +3204,34 @@ iSCSI. Devices can be specified manually, or discovered using the
 </docs/providers/vsphere/d/vmfs_disks.html> data source.
 -}
 data VmfsDatastoreResource s = VmfsDatastoreResource {
-      _disks          :: !(TF.Attr s P.Text)
+      _datastore_cluster_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of a datastore cluster to put this datastore in. Conflicts with @folder@ . -}
+    , _disks                :: !(TF.Attr s P.Text)
     {- ^ (Required) The disks to use with the datastore. -}
-    , _folder         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The relative path to a folder to put this datastore in. This is a path relative to the datacenter you are deploying the datastore to. Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a datastore named @terraform-test@ in a datastore folder located at @/dc1/datastore/foo/bar@ , with the final inventory path being @/dc1/datastore/foo/bar/terraform-test@ . -}
-    , _host_system_id :: !(TF.Attr s P.Text)
+    , _folder               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The relative path to a folder to put this datastore in. This is a path relative to the datacenter you are deploying the datastore to. Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a datastore named @terraform-test@ in a datastore folder located at @/dc1/datastore/foo/bar@ , with the final inventory path being @/dc1/datastore/foo/bar/terraform-test@ . Conflicts with @datastore_cluster_id@ . -}
+    , _host_system_id       :: !(TF.Attr s P.Text)
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the host to set the datastore up on. Note that this is not necessarily the only host that the datastore will be set up on - see <#auto-mounting-of-datastores-within-vcenter> for more info. Forces a new resource if changed. -}
-    , _name           :: !(TF.Attr s P.Text)
+    , _name                 :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the datastore. Forces a new resource if changed. -}
-    , _tags           :: !(TF.Attr s P.Text)
+    , _tags                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VmfsDatastoreResource s) where
     toHCL VmfsDatastoreResource{..} = TF.inline $ catMaybes
-        [ TF.assign "disks" <$> TF.attribute _disks
+        [ TF.assign "datastore_cluster_id" <$> TF.attribute _datastore_cluster_id
+        , TF.assign "disks" <$> TF.attribute _disks
         , TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "host_system_id" <$> TF.attribute _host_system_id
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "tags" <$> TF.attribute _tags
         ]
+
+instance P.HasDatastoreClusterId (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+    datastoreClusterId =
+        lens (_datastore_cluster_id :: VmfsDatastoreResource s -> TF.Attr s P.Text)
+             (\s a -> s { _datastore_cluster_id = a } :: VmfsDatastoreResource s)
 
 instance P.HasDisks (VmfsDatastoreResource s) (TF.Attr s P.Text) where
     disks =
@@ -1788,6 +3263,11 @@ instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (VmfsDatastoreResource s))
 
 instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedCapacity x = TF.compute (TF.refKey x) "capacity"
+
+instance s ~ s' => P.HasComputedDatastoreClusterId (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
+    computedDatastoreClusterId =
+        (_datastore_cluster_id :: VmfsDatastoreResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedDisks =
@@ -1836,7 +3316,8 @@ vmfsDatastoreResource :: TF.Resource P.VSphere (VmfsDatastoreResource s)
 vmfsDatastoreResource =
     TF.newResource "vsphere_vmfs_datastore" $
         VmfsDatastoreResource {
-              _disks = TF.Nil
+              _datastore_cluster_id = TF.Nil
+            , _disks = TF.Nil
             , _folder = TF.Nil
             , _host_system_id = TF.Nil
             , _name = TF.Nil

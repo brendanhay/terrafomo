@@ -31,7 +31,10 @@ module Terrafomo.PagerDuty.Lens
     , HasDescription (..)
     , HasEmail (..)
     , HasEndTime (..)
+    , HasEndpointUrl (..)
     , HasEscalationPolicy (..)
+    , HasExtensionObjects (..)
+    , HasExtensionSchema (..)
     , HasIntegrationEmail (..)
     , HasIntegrationKey (..)
     , HasJobTitle (..)
@@ -68,7 +71,10 @@ module Terrafomo.PagerDuty.Lens
     , HasComputedEmail (..)
     , HasComputedEnabled (..)
     , HasComputedEndTime (..)
+    , HasComputedEndpointUrl (..)
     , HasComputedEscalationPolicy (..)
+    , HasComputedExtensionObjects (..)
+    , HasComputedExtensionSchema (..)
     , HasComputedHtmlUrl (..)
     , HasComputedId (..)
     , HasComputedIntegrationEmail (..)
@@ -158,11 +164,29 @@ class HasEndTime a b | a -> b where
 instance HasEndTime a b => HasEndTime (TF.Schema l p a) b where
     endTime = TF.configuration . endTime
 
+class HasEndpointUrl a b | a -> b where
+    endpointUrl :: Lens' a b
+
+instance HasEndpointUrl a b => HasEndpointUrl (TF.Schema l p a) b where
+    endpointUrl = TF.configuration . endpointUrl
+
 class HasEscalationPolicy a b | a -> b where
     escalationPolicy :: Lens' a b
 
 instance HasEscalationPolicy a b => HasEscalationPolicy (TF.Schema l p a) b where
     escalationPolicy = TF.configuration . escalationPolicy
+
+class HasExtensionObjects a b | a -> b where
+    extensionObjects :: Lens' a b
+
+instance HasExtensionObjects a b => HasExtensionObjects (TF.Schema l p a) b where
+    extensionObjects = TF.configuration . extensionObjects
+
+class HasExtensionSchema a b | a -> b where
+    extensionSchema :: Lens' a b
+
+instance HasExtensionSchema a b => HasExtensionSchema (TF.Schema l p a) b where
+    extensionSchema = TF.configuration . extensionSchema
 
 class HasIntegrationEmail a b | a -> b where
     integrationEmail :: Lens' a b
@@ -329,8 +353,17 @@ class HasComputedEnabled a b | a -> b where
 class HasComputedEndTime a b | a -> b where
     computedEndTime :: a -> b
 
+class HasComputedEndpointUrl a b | a -> b where
+    computedEndpointUrl :: a -> b
+
 class HasComputedEscalationPolicy a b | a -> b where
     computedEscalationPolicy :: a -> b
+
+class HasComputedExtensionObjects a b | a -> b where
+    computedExtensionObjects :: a -> b
+
+class HasComputedExtensionSchema a b | a -> b where
+    computedExtensionSchema :: a -> b
 
 class HasComputedHtmlUrl a b | a -> b where
     computedHtmlUrl :: a -> b

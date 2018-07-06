@@ -157,6 +157,7 @@ module Terrafomo.OPC.Lens
     , HasComputedInstanceId (..)
     , HasComputedInstanceName (..)
     , HasComputedInterface (..)
+    , HasComputedIp (..)
     , HasComputedIpAddress (..)
     , HasComputedIpAddressPool (..)
     , HasComputedIpAddressPrefix (..)
@@ -233,6 +234,7 @@ module Terrafomo.OPC.Lens
     , HasComputedTags (..)
     , HasComputedTransitFlag (..)
     , HasComputedUri (..)
+    , HasComputedUsed (..)
     , HasComputedVcable (..)
     , HasComputedVcableId (..)
     , HasComputedVersion (..)
@@ -912,6 +914,9 @@ class HasComputedInstanceName a b | a -> b where
 class HasComputedInterface a b | a -> b where
     computedInterface :: a -> b
 
+class HasComputedIp a b | a -> b where
+    computedIp :: a -> b
+
 class HasComputedIpAddress a b | a -> b where
     computedIpAddress :: a -> b
 
@@ -1139,6 +1144,9 @@ class HasComputedTransitFlag a b | a -> b where
 
 class HasComputedUri a b | a -> b where
     computedUri :: a -> b
+
+class HasComputedUsed a b | a -> b where
+    computedUsed :: a -> b
 
 class HasComputedVcable a b | a -> b where
     computedVcable :: a -> b

@@ -721,6 +721,9 @@ instance s ~ s' => P.HasComputedGraph (TF.Ref s' (TimeboardResource s)) (TF.Attr
         (_graph :: TimeboardResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TimeboardResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedReadOnly (TF.Ref s' (TimeboardResource s)) (TF.Attr s P.Text) where
     computedReadOnly =
         (_read_only :: TimeboardResource s -> TF.Attr s P.Text)

@@ -14,24 +14,33 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.AWS.DataSource
+-- Module      : Terrafomo.AWS.DataSource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AWS.DataSource
+module Terrafomo.AWS.DataSource01
     (
     -- * Types
       AcmCertificateData (..)
     , acmCertificateData
+
+    , AcmpcaCertificateAuthorityData (..)
+    , acmpcaCertificateAuthorityData
 
     , AmiData (..)
     , amiData
 
     , AmiIdsData (..)
     , amiIdsData
+
+    , ApiGatewayRestApiData (..)
+    , apiGatewayRestApiData
+
+    , ArnData (..)
+    , arnData
 
     , AutoscalingGroupsData (..)
     , autoscalingGroupsData
@@ -42,6 +51,12 @@ module Terrafomo.AWS.DataSource
     , AvailabilityZonesData (..)
     , availabilityZonesData
 
+    , BatchComputeEnvironmentData (..)
+    , batchComputeEnvironmentData
+
+    , BatchJobQueueData (..)
+    , batchJobQueueData
+
     , BillingServiceAccountData (..)
     , billingServiceAccountData
 
@@ -51,17 +66,32 @@ module Terrafomo.AWS.DataSource
     , CanonicalUserIdData (..)
     , canonicalUserIdData
 
+    , CloudformationExportData (..)
+    , cloudformationExportData
+
     , CloudformationStackData (..)
     , cloudformationStackData
 
     , CloudtrailServiceAccountData (..)
     , cloudtrailServiceAccountData
 
+    , CloudwatchLogGroupData (..)
+    , cloudwatchLogGroupData
+
+    , CodecommitRepositoryData (..)
+    , codecommitRepositoryData
+
+    , CognitoUserPoolsData (..)
+    , cognitoUserPoolsData
+
     , DbInstanceData (..)
     , dbInstanceData
 
     , DbSnapshotData (..)
     , dbSnapshotData
+
+    , DxGatewayData (..)
+    , dxGatewayData
 
     , DynamodbTableData (..)
     , dynamodbTableData
@@ -78,11 +108,11 @@ module Terrafomo.AWS.DataSource
     , EcrRepositoryData (..)
     , ecrRepositoryData
 
-    , EcsClusterData (..)
-    , ecsClusterData
-
     , EcsContainerDefinitionData (..)
     , ecsContainerDefinitionData
+
+    , EcsServiceData (..)
+    , ecsServiceData
 
     , EcsTaskDefinitionData (..)
     , ecsTaskDefinitionData
@@ -95,6 +125,9 @@ module Terrafomo.AWS.DataSource
 
     , EipData (..)
     , eipData
+
+    , EksClusterData (..)
+    , eksClusterData
 
     , ElasticBeanstalkHostedZoneData (..)
     , elasticBeanstalkHostedZoneData
@@ -116,6 +149,9 @@ module Terrafomo.AWS.DataSource
 
     , ElbServiceAccountData (..)
     , elbServiceAccountData
+
+    , GlueScriptData (..)
+    , glueScriptData
 
     , IamAccountAliasData (..)
     , iamAccountAliasData
@@ -153,6 +189,9 @@ module Terrafomo.AWS.DataSource
     , InternetGatewayData (..)
     , internetGatewayData
 
+    , IotEndpointData (..)
+    , iotEndpointData
+
     , IpRangesData (..)
     , ipRangesData
 
@@ -171,6 +210,15 @@ module Terrafomo.AWS.DataSource
     , KmsSecretData (..)
     , kmsSecretData
 
+    , LambdaFunctionData (..)
+    , lambdaFunctionData
+
+    , LambdaInvocationData (..)
+    , lambdaInvocationData
+
+    , LaunchConfigurationData (..)
+    , launchConfigurationData
+
     , LbData (..)
     , lbData
 
@@ -180,8 +228,14 @@ module Terrafomo.AWS.DataSource
     , LbTargetGroupData (..)
     , lbTargetGroupData
 
+    , MqBrokerData (..)
+    , mqBrokerData
+
     , NatGatewayData (..)
     , natGatewayData
+
+    , NetworkAclsData (..)
+    , networkAclsData
 
     , NetworkInterfaceData (..)
     , networkInterfaceData
@@ -192,11 +246,14 @@ module Terrafomo.AWS.DataSource
     , PrefixListData (..)
     , prefixListData
 
+    , PricingProductData (..)
+    , pricingProductData
+
     , RdsClusterData (..)
     , rdsClusterData
 
-    , RedshiftServiceAccountData (..)
-    , redshiftServiceAccountData
+    , RedshiftClusterData (..)
+    , redshiftClusterData
 
     , RegionData (..)
     , regionData
@@ -204,8 +261,14 @@ module Terrafomo.AWS.DataSource
     , Route53ZoneData (..)
     , route53ZoneData
 
+    , RouteData (..)
+    , routeData
+
     , RouteTableData (..)
     , routeTableData
+
+    , RouteTablesData (..)
+    , routeTablesData
 
     , S3BucketData (..)
     , s3BucketData
@@ -213,11 +276,23 @@ module Terrafomo.AWS.DataSource
     , S3BucketObjectData (..)
     , s3BucketObjectData
 
+    , SecretsmanagerSecretData (..)
+    , secretsmanagerSecretData
+
+    , SecretsmanagerSecretVersionData (..)
+    , secretsmanagerSecretVersionData
+
     , SecurityGroupData (..)
     , securityGroupData
 
+    , SecurityGroupsData (..)
+    , securityGroupsData
+
     , SnsTopicData (..)
     , snsTopicData
+
+    , SqsQueueData (..)
+    , sqsQueueData
 
     , SsmParameterData (..)
     , ssmParameterData
@@ -231,6 +306,9 @@ module Terrafomo.AWS.DataSource
     , VpcData (..)
     , vpcData
 
+    , VpcDhcpOptionsData (..)
+    , vpcDhcpOptionsData
+
     , VpcEndpointData (..)
     , vpcEndpointData
 
@@ -239,6 +317,9 @@ module Terrafomo.AWS.DataSource
 
     , VpcPeeringConnectionData (..)
     , vpcPeeringConnectionData
+
+    , VpcsData (..)
+    , vpcsData
 
     , VpnGatewayData (..)
     , vpnGatewayData
@@ -251,36 +332,52 @@ module Terrafomo.AWS.DataSource
     , P.HasArn (..)
     , P.HasAttachedVpcId (..)
     , P.HasAvailabilityZone (..)
+    , P.HasBrokerId (..)
+    , P.HasBrokerName (..)
     , P.HasBucket (..)
     , P.HasCidrBlock (..)
+    , P.HasClusterArn (..)
     , P.HasClusterId (..)
     , P.HasClusterIdentifier (..)
-    , P.HasClusterName (..)
+    , P.HasComputeEnvironmentName (..)
     , P.HasContainerName (..)
     , P.HasContext (..)
     , P.HasCreationToken (..)
+    , P.HasDagEdge (..)
+    , P.HasDagNode (..)
     , P.HasDbInstanceIdentifier (..)
     , P.HasDbSnapshotIdentifier (..)
     , P.HasDefault' (..)
     , P.HasDefaultForAz (..)
+    , P.HasDestinationCidrBlock (..)
+    , P.HasDestinationIpv6CidrBlock (..)
     , P.HasDhcpOptionsId (..)
     , P.HasDisplayName (..)
     , P.HasDomain (..)
+    , P.HasEgressOnlyGatewayId (..)
     , P.HasEndpoint (..)
+    , P.HasEndpointAddress (..)
     , P.HasExecutableUsers (..)
     , P.HasFileSystemId (..)
     , P.HasFilter (..)
+    , P.HasFilters (..)
+    , P.HasFunctionName (..)
+    , P.HasGatewayId (..)
+    , P.HasGetPasswordData (..)
     , P.HasGrantTokens (..)
     , P.HasGroupName (..)
     , P.HasId (..)
     , P.HasIncludePublic (..)
     , P.HasIncludeShared (..)
+    , P.HasInput (..)
     , P.HasInstanceId (..)
+    , P.HasInstanceStateNames (..)
     , P.HasInstanceTags (..)
     , P.HasInternetGatewayId (..)
     , P.HasIpv6CidrBlock (..)
     , P.HasKey (..)
     , P.HasKeyId (..)
+    , P.HasLanguage (..)
     , P.HasLatest (..)
     , P.HasLoadBalancerArn (..)
     , P.HasMostRecent (..)
@@ -288,9 +385,12 @@ module Terrafomo.AWS.DataSource
     , P.HasName (..)
     , P.HasNamePrefix (..)
     , P.HasNameRegex (..)
+    , P.HasNatGatewayId (..)
+    , P.HasNetworkInterfaceId (..)
     , P.HasOverrideJson (..)
     , P.HasOwnerId (..)
     , P.HasOwners (..)
+    , P.HasPathPrefix (..)
     , P.HasPeerCidrBlock (..)
     , P.HasPeerOwnerId (..)
     , P.HasPeerRegion (..)
@@ -301,13 +401,17 @@ module Terrafomo.AWS.DataSource
     , P.HasPrefixListId (..)
     , P.HasPrivateZone (..)
     , P.HasPublicIp (..)
+    , P.HasQualifier (..)
     , P.HasRegion (..)
     , P.HasRegions (..)
     , P.HasReplicationGroupId (..)
+    , P.HasRepositoryName (..)
     , P.HasRestorableByUserIds (..)
     , P.HasRouteTableId (..)
     , P.HasSecret (..)
+    , P.HasSecretId (..)
     , P.HasService (..)
+    , P.HasServiceCode (..)
     , P.HasServiceName (..)
     , P.HasServices (..)
     , P.HasSnapshotIds (..)
@@ -325,18 +429,22 @@ module Terrafomo.AWS.DataSource
     , P.HasUserName (..)
     , P.HasValues (..)
     , P.HasVersionId (..)
+    , P.HasVersionStage (..)
     , P.HasVpcId (..)
+    , P.HasVpcPeeringConnectionId (..)
     , P.HasWithDecryption (..)
     , P.HasZoneId (..)
 
     -- ** Computed Attributes
     , P.HasComputedAcceptanceRequired (..)
     , P.HasComputedAccepter (..)
+    , P.HasComputedAccount (..)
     , P.HasComputedAccountAlias (..)
     , P.HasComputedAccountId (..)
     , P.HasComputedAddress (..)
     , P.HasComputedAllocatedStorage (..)
     , P.HasComputedAllocationId (..)
+    , P.HasComputedAllowVersionUpgrade (..)
     , P.HasComputedAmazonSideAsn (..)
     , P.HasComputedAmi (..)
     , P.HasComputedArchitecture (..)
@@ -348,6 +456,7 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedAttachedVpcId (..)
     , P.HasComputedAuthTokenEnabled (..)
     , P.HasComputedAutoMinorVersionUpgrade (..)
+    , P.HasComputedAutomatedSnapshotRetentionPeriod (..)
     , P.HasComputedAutomaticFailoverEnabled (..)
     , P.HasComputedAvailabilityZone (..)
     , P.HasComputedAvailabilityZones (..)
@@ -356,24 +465,40 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedBaseEndpointDnsNames (..)
     , P.HasComputedBlockDeviceMappings (..)
     , P.HasComputedBody (..)
+    , P.HasComputedBrokerId (..)
+    , P.HasComputedBrokerName (..)
     , P.HasComputedBucket (..)
     , P.HasComputedBucketDomainName (..)
+    , P.HasComputedBucketName (..)
     , P.HasComputedCaCertIdentifier (..)
     , P.HasComputedCacheControl (..)
     , P.HasComputedCacheNodes (..)
     , P.HasComputedCallerReference (..)
     , P.HasComputedCapabilities (..)
+    , P.HasComputedCertificate (..)
+    , P.HasComputedCertificateAuthority (..)
     , P.HasComputedCertificateBody (..)
     , P.HasComputedCertificateChain (..)
+    , P.HasComputedCertificateSigningRequest (..)
     , P.HasComputedCidrBlock (..)
     , P.HasComputedCidrBlocks (..)
     , P.HasComputedCiphertextBlob (..)
+    , P.HasComputedCloneUrlHttp (..)
+    , P.HasComputedCloneUrlSsh (..)
     , P.HasComputedClosedShards (..)
     , P.HasComputedClusterAddress (..)
+    , P.HasComputedClusterArn (..)
     , P.HasComputedClusterId (..)
     , P.HasComputedClusterIdentifier (..)
-    , P.HasComputedClusterName (..)
+    , P.HasComputedClusterParameterGroupName (..)
+    , P.HasComputedClusterPublicKey (..)
+    , P.HasComputedClusterRevisionNumber (..)
+    , P.HasComputedClusterSecurityGroups (..)
+    , P.HasComputedClusterSubnetGroupName (..)
+    , P.HasComputedClusterType (..)
     , P.HasComputedComment (..)
+    , P.HasComputedComputeEnvironmentName (..)
+    , P.HasComputedComputeEnvironmentOrder (..)
     , P.HasComputedConfigurationEndpoint (..)
     , P.HasComputedConfigurationEndpointAddress (..)
     , P.HasComputedContainerName (..)
@@ -385,11 +510,17 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedContext (..)
     , P.HasComputedCpu (..)
     , P.HasComputedCreateDate (..)
+    , P.HasComputedCreatedAt (..)
     , P.HasComputedCreationDate (..)
+    , P.HasComputedCreationTime (..)
     , P.HasComputedCreationTimestamp (..)
     , P.HasComputedCreationToken (..)
+    , P.HasComputedCreditSpecification (..)
     , P.HasComputedCurrent (..)
+    , P.HasComputedDagEdge (..)
+    , P.HasComputedDagNode (..)
     , P.HasComputedDataEncryptionKeyId (..)
+    , P.HasComputedDatabaseName (..)
     , P.HasComputedDbClusterIdentifier (..)
     , P.HasComputedDbInstanceArn (..)
     , P.HasComputedDbInstanceClass (..)
@@ -401,10 +532,14 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedDbSnapshotArn (..)
     , P.HasComputedDbSnapshotIdentifier (..)
     , P.HasComputedDbSubnetGroup (..)
+    , P.HasComputedDeadLetterConfig (..)
     , P.HasComputedDefault' (..)
     , P.HasComputedDefaultForAz (..)
     , P.HasComputedDeletionDate (..)
     , P.HasComputedDescription (..)
+    , P.HasComputedDesiredCount (..)
+    , P.HasComputedDestinationCidrBlock (..)
+    , P.HasComputedDestinationIpv6CidrBlock (..)
     , P.HasComputedDhcpOptionsId (..)
     , P.HasComputedDisableNetworking (..)
     , P.HasComputedDisableRollback (..)
@@ -413,16 +548,24 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedDnsName (..)
     , P.HasComputedDockerLabels (..)
     , P.HasComputedDomain (..)
+    , P.HasComputedDomainName (..)
+    , P.HasComputedDomainNameServers (..)
     , P.HasComputedEbsBlockDevice (..)
     , P.HasComputedEbsOptimized (..)
+    , P.HasComputedEcsClusterArn (..)
     , P.HasComputedEgressOnlyGatewayId (..)
+    , P.HasComputedElasticIp (..)
     , P.HasComputedEnableDnsHostnames (..)
     , P.HasComputedEnableDnsSupport (..)
+    , P.HasComputedEnableLogging (..)
+    , P.HasComputedEnableMonitoring (..)
     , P.HasComputedEnabled (..)
     , P.HasComputedEncrypted (..)
     , P.HasComputedEndpoint (..)
+    , P.HasComputedEndpointAddress (..)
     , P.HasComputedEngine (..)
     , P.HasComputedEngineVersion (..)
+    , P.HasComputedEnhancedVpcRouting (..)
     , P.HasComputedEnvironment (..)
     , P.HasComputedEphemeralBlockDevice (..)
     , P.HasComputedEtag (..)
@@ -431,17 +574,23 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedExpirationDate (..)
     , P.HasComputedExpirationModel (..)
     , P.HasComputedExpires (..)
+    , P.HasComputedExportingStackId (..)
     , P.HasComputedFamily' (..)
     , P.HasComputedFileSystemId (..)
     , P.HasComputedFilter (..)
+    , P.HasComputedFilters (..)
+    , P.HasComputedFunctionName (..)
     , P.HasComputedGatewayId (..)
+    , P.HasComputedGetPasswordData (..)
     , P.HasComputedGrantTokens (..)
     , P.HasComputedGroupId (..)
     , P.HasComputedGroupName (..)
+    , P.HasComputedHandler (..)
     , P.HasComputedHostedZoneId (..)
     , P.HasComputedHypervisor (..)
     , P.HasComputedIamInstanceProfile (..)
     , P.HasComputedIamRoleArn (..)
+    , P.HasComputedIamRoles (..)
     , P.HasComputedId (..)
     , P.HasComputedIds (..)
     , P.HasComputedImage (..)
@@ -452,12 +601,15 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedImageType (..)
     , P.HasComputedIncludePublic (..)
     , P.HasComputedIncludeShared (..)
+    , P.HasComputedInput (..)
     , P.HasComputedInstanceId (..)
+    , P.HasComputedInstanceStateNames (..)
     , P.HasComputedInstanceTags (..)
     , P.HasComputedInstanceTenancy (..)
     , P.HasComputedInstanceType (..)
     , P.HasComputedInterfaceType (..)
     , P.HasComputedInternetGatewayId (..)
+    , P.HasComputedInvokeArn (..)
     , P.HasComputedIops (..)
     , P.HasComputedIpAddress (..)
     , P.HasComputedIpv6Addresses (..)
@@ -471,16 +623,21 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedKeyName (..)
     , P.HasComputedKeyState (..)
     , P.HasComputedKeyUsage (..)
+    , P.HasComputedKmsKeyArn (..)
     , P.HasComputedKmsKeyId (..)
+    , P.HasComputedLanguage (..)
     , P.HasComputedLastModified (..)
     , P.HasComputedLatest (..)
+    , P.HasComputedLaunchType (..)
     , P.HasComputedLicenseModel (..)
     , P.HasComputedLoadBalancerArn (..)
     , P.HasComputedMacAddress (..)
     , P.HasComputedMaintenanceWindow (..)
     , P.HasComputedMasterUsername (..)
+    , P.HasComputedMemberClusters (..)
     , P.HasComputedMemory (..)
     , P.HasComputedMemoryReservation (..)
+    , P.HasComputedMemorySize (..)
     , P.HasComputedMetadata (..)
     , P.HasComputedMonitoring (..)
     , P.HasComputedMonitoringInterval (..)
@@ -491,17 +648,24 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedName (..)
     , P.HasComputedNamePrefix (..)
     , P.HasComputedNameRegex (..)
+    , P.HasComputedNameServers (..)
     , P.HasComputedNameSuffix (..)
     , P.HasComputedNames (..)
     , P.HasComputedNatGatewayId (..)
+    , P.HasComputedNetbiosNameServers (..)
+    , P.HasComputedNetbiosNodeType (..)
     , P.HasComputedNetworkInterfaceId (..)
     , P.HasComputedNetworkInterfaceIds (..)
     , P.HasComputedNetworkMode (..)
     , P.HasComputedNodeType (..)
+    , P.HasComputedNotAfter (..)
+    , P.HasComputedNotBefore (..)
     , P.HasComputedNotificationArns (..)
     , P.HasComputedNotificationTopicArn (..)
+    , P.HasComputedNtpServers (..)
     , P.HasComputedNumCacheNodes (..)
     , P.HasComputedNumberCacheClusters (..)
+    , P.HasComputedNumberOfNodes (..)
     , P.HasComputedOpenShards (..)
     , P.HasComputedOptionGroupMemberships (..)
     , P.HasComputedOptionGroupName (..)
@@ -514,14 +678,17 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedOwners (..)
     , P.HasComputedParameterGroupName (..)
     , P.HasComputedParameters (..)
+    , P.HasComputedPartition (..)
+    , P.HasComputedPasswordData (..)
     , P.HasComputedPath (..)
+    , P.HasComputedPathPrefix (..)
     , P.HasComputedPeerCidrBlock (..)
     , P.HasComputedPeerOwnerId (..)
     , P.HasComputedPeerRegion (..)
     , P.HasComputedPeerVpcId (..)
-    , P.HasComputedPendingTasksCount (..)
     , P.HasComputedPerformanceMode (..)
     , P.HasComputedPlacementGroup (..)
+    , P.HasComputedPlacementTenancy (..)
     , P.HasComputedPlaintext (..)
     , P.HasComputedPlatform (..)
     , P.HasComputedPolicy (..)
@@ -531,6 +698,7 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedPreferredMaintenanceWindow (..)
     , P.HasComputedPrefixListId (..)
     , P.HasComputedPrimaryEndpointAddress (..)
+    , P.HasComputedPriority (..)
     , P.HasComputedPrivateDns (..)
     , P.HasComputedPrivateDnsEnabled (..)
     , P.HasComputedPrivateDnsName (..)
@@ -543,36 +711,60 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedPublicIp (..)
     , P.HasComputedPublicIps (..)
     , P.HasComputedPubliclyAccessible (..)
+    , P.HasComputedPythonScript (..)
+    , P.HasComputedQualifiedArn (..)
+    , P.HasComputedQualifier (..)
     , P.HasComputedRamdiskId (..)
     , P.HasComputedRegion (..)
     , P.HasComputedRegions (..)
-    , P.HasComputedRegisteredContainerInstancesCount (..)
     , P.HasComputedRegistryId (..)
     , P.HasComputedReplicateSourceDb (..)
     , P.HasComputedReplicationGroupDescription (..)
     , P.HasComputedReplicationGroupId (..)
+    , P.HasComputedRepositoryId (..)
+    , P.HasComputedRepositoryName (..)
     , P.HasComputedRepositoryUrl (..)
     , P.HasComputedRequester (..)
     , P.HasComputedRequesterId (..)
+    , P.HasComputedReservedConcurrentExecutions (..)
+    , P.HasComputedResource (..)
     , P.HasComputedResourceRecordSetCount (..)
     , P.HasComputedRestorableByUserIds (..)
+    , P.HasComputedResult (..)
+    , P.HasComputedResultMap (..)
     , P.HasComputedRetentionPeriod (..)
     , P.HasComputedRevision (..)
+    , P.HasComputedRevocationConfiguration (..)
+    , P.HasComputedRole (..)
+    , P.HasComputedRoleArn (..)
     , P.HasComputedRoleId (..)
+    , P.HasComputedRoleName (..)
     , P.HasComputedRootBlockDevice (..)
     , P.HasComputedRootDeviceName (..)
     , P.HasComputedRootDeviceType (..)
+    , P.HasComputedRootResourceId (..)
     , P.HasComputedRootSnapshotId (..)
+    , P.HasComputedRotationEnabled (..)
+    , P.HasComputedRotationLambdaArn (..)
+    , P.HasComputedRotationRules (..)
     , P.HasComputedRouteTableId (..)
     , P.HasComputedRouteTableIds (..)
-    , P.HasComputedRunningTasksCount (..)
+    , P.HasComputedRuntime (..)
+    , P.HasComputedS3KeyPrefix (..)
+    , P.HasComputedScalaCode (..)
+    , P.HasComputedSchedulingStrategy (..)
     , P.HasComputedSecret (..)
+    , P.HasComputedSecretId (..)
+    , P.HasComputedSecretString (..)
     , P.HasComputedSecurityGroupIds (..)
     , P.HasComputedSecurityGroupNames (..)
     , P.HasComputedSecurityGroups (..)
+    , P.HasComputedSerial (..)
     , P.HasComputedServerSideEncryption (..)
     , P.HasComputedService (..)
+    , P.HasComputedServiceCode (..)
     , P.HasComputedServiceName (..)
+    , P.HasComputedServiceRole (..)
     , P.HasComputedServiceType (..)
     , P.HasComputedServices (..)
     , P.HasComputedShardLevelMetrics (..)
@@ -583,16 +775,20 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedSnapshotRetentionLimit (..)
     , P.HasComputedSnapshotType (..)
     , P.HasComputedSnapshotWindow (..)
+    , P.HasComputedSourceCodeHash (..)
+    , P.HasComputedSourceCodeSize (..)
     , P.HasComputedSourceDbSnapshotIdentifier (..)
     , P.HasComputedSourceDestCheck (..)
     , P.HasComputedSourceJson (..)
     , P.HasComputedSourceRegion (..)
+    , P.HasComputedSpotPrice (..)
     , P.HasComputedSriovNetSupport (..)
     , P.HasComputedSseKmsKeyId (..)
     , P.HasComputedState (..)
     , P.HasComputedStateReason (..)
     , P.HasComputedStatement (..)
     , P.HasComputedStatus (..)
+    , P.HasComputedStatusReason (..)
     , P.HasComputedStatuses (..)
     , P.HasComputedStorageClass (..)
     , P.HasComputedStorageEncrypted (..)
@@ -608,24 +804,35 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedTaskRoleArn (..)
     , P.HasComputedTemplateBody (..)
     , P.HasComputedTenancy (..)
+    , P.HasComputedTimeout (..)
     , P.HasComputedTimeoutInMinutes (..)
     , P.HasComputedTimezone (..)
+    , P.HasComputedTracingConfig (..)
+    , P.HasComputedType' (..)
     , P.HasComputedTypes (..)
     , P.HasComputedUniqueId (..)
     , P.HasComputedUploadDate (..)
+    , P.HasComputedUrl (..)
     , P.HasComputedUserData (..)
     , P.HasComputedUserId (..)
     , P.HasComputedUserName (..)
     , P.HasComputedValidTo (..)
+    , P.HasComputedValue (..)
     , P.HasComputedValues (..)
+    , P.HasComputedVersion (..)
     , P.HasComputedVersionId (..)
+    , P.HasComputedVersionStage (..)
     , P.HasComputedVirtualizationType (..)
     , P.HasComputedVolumeId (..)
     , P.HasComputedVolumeSize (..)
     , P.HasComputedVolumeType (..)
+    , P.HasComputedVpcClassicLinkId (..)
+    , P.HasComputedVpcClassicLinkSecurityGroups (..)
+    , P.HasComputedVpcConfig (..)
     , P.HasComputedVpcEndpointPolicySupported (..)
     , P.HasComputedVpcEndpointType (..)
     , P.HasComputedVpcId (..)
+    , P.HasComputedVpcIds (..)
     , P.HasComputedVpcPeeringConnectionId (..)
     , P.HasComputedVpcSecurityGroupIds (..)
     , P.HasComputedVpcSecurityGroups (..)
@@ -740,6 +947,71 @@ acmCertificateData =
             , _most_recent = TF.Nil
             , _statuses = TF.Nil
             , _types = TF.Nil
+            }
+
+{- | The @aws_acmpca_certificate_authority@ AWS datasource.
+
+Get information on a AWS Certificate Manager Private Certificate Authority
+(ACM PCA Certificate Authority).
+-}
+data AcmpcaCertificateAuthorityData s = AcmpcaCertificateAuthorityData {
+      _arn :: !(TF.Attr s P.Text)
+    {- ^ (Required) Amazon Resource Name (ARN) of the certificate authority. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (AcmpcaCertificateAuthorityData s) where
+    toHCL AcmpcaCertificateAuthorityData{..} = TF.inline $ catMaybes
+        [ TF.assign "arn" <$> TF.attribute _arn
+        ]
+
+instance P.HasArn (AcmpcaCertificateAuthorityData s) (TF.Attr s P.Text) where
+    arn =
+        lens (_arn :: AcmpcaCertificateAuthorityData s -> TF.Attr s P.Text)
+             (\s a -> s { _arn = a } :: AcmpcaCertificateAuthorityData s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
+    computedArn =
+        (_arn :: AcmpcaCertificateAuthorityData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCertificate (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
+    computedCertificate x = TF.compute (TF.refKey x) "certificate"
+
+instance s ~ s' => P.HasComputedCertificateChain (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
+    computedCertificateChain x = TF.compute (TF.refKey x) "certificate_chain"
+
+instance s ~ s' => P.HasComputedCertificateSigningRequest (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
+    computedCertificateSigningRequest x = TF.compute (TF.refKey x) "certificate_signing_request"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedNotAfter (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
+    computedNotAfter x = TF.compute (TF.refKey x) "not_after"
+
+instance s ~ s' => P.HasComputedNotBefore (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
+    computedNotBefore x = TF.compute (TF.refKey x) "not_before"
+
+instance s ~ s' => P.HasComputedRevocationConfiguration (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
+    computedRevocationConfiguration x = TF.compute (TF.refKey x) "revocation_configuration"
+
+instance s ~ s' => P.HasComputedSerial (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
+    computedSerial x = TF.compute (TF.refKey x) "serial"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s (P.Tags s)) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
+
+acmpcaCertificateAuthorityData :: TF.DataSource P.AWS (AcmpcaCertificateAuthorityData s)
+acmpcaCertificateAuthorityData =
+    TF.newDataSource "aws_acmpca_certificate_authority" $
+        AcmpcaCertificateAuthorityData {
+              _arn = TF.Nil
             }
 
 {- | The @aws_ami@ AWS datasource.
@@ -976,6 +1248,92 @@ amiIdsData =
             , _owners = TF.Nil
             }
 
+{- | The @aws_api_gateway_rest_api@ AWS datasource.
+
+Use this data source to get the id and root_resource_id of a REST API in API
+Gateway. To fetch the REST API you must provide a name to match against. As
+there is no unique name constraint on REST APIs this data source will error
+if there is more than one match.
+-}
+data ApiGatewayRestApiData s = ApiGatewayRestApiData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the REST API to look up. If no REST API is found with this name, an error will be returned. If multiple REST APIs are found with this name, an error will be returned. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ApiGatewayRestApiData s) where
+    toHCL ApiGatewayRestApiData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (ApiGatewayRestApiData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ApiGatewayRestApiData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ApiGatewayRestApiData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApiGatewayRestApiData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ApiGatewayRestApiData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ApiGatewayRestApiData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRootResourceId (TF.Ref s' (ApiGatewayRestApiData s)) (TF.Attr s P.Text) where
+    computedRootResourceId x = TF.compute (TF.refKey x) "root_resource_id"
+
+apiGatewayRestApiData :: TF.DataSource P.AWS (ApiGatewayRestApiData s)
+apiGatewayRestApiData =
+    TF.newDataSource "aws_api_gateway_rest_api" $
+        ApiGatewayRestApiData {
+              _name = TF.Nil
+            }
+
+{- | The @aws_arn@ AWS datasource.
+
+Parses an Amazon Resource Name (ARN) into its constituent parts.
+-}
+data ArnData s = ArnData {
+      _arn :: !(TF.Attr s P.Text)
+    {- ^ (Required) The ARN to parse. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ArnData s) where
+    toHCL ArnData{..} = TF.inline $ catMaybes
+        [ TF.assign "arn" <$> TF.attribute _arn
+        ]
+
+instance P.HasArn (ArnData s) (TF.Attr s P.Text) where
+    arn =
+        lens (_arn :: ArnData s -> TF.Attr s P.Text)
+             (\s a -> s { _arn = a } :: ArnData s)
+
+instance s ~ s' => P.HasComputedAccount (TF.Ref s' (ArnData s)) (TF.Attr s P.Text) where
+    computedAccount x = TF.compute (TF.refKey x) "account"
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (ArnData s)) (TF.Attr s P.Text) where
+    computedArn =
+        (_arn :: ArnData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPartition (TF.Ref s' (ArnData s)) (TF.Attr s P.Text) where
+    computedPartition x = TF.compute (TF.refKey x) "partition"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ArnData s)) (TF.Attr s P.Region) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance s ~ s' => P.HasComputedResource (TF.Ref s' (ArnData s)) (TF.Attr s P.Text) where
+    computedResource x = TF.compute (TF.refKey x) "resource"
+
+instance s ~ s' => P.HasComputedService (TF.Ref s' (ArnData s)) (TF.Attr s P.Text) where
+    computedService x = TF.compute (TF.refKey x) "service"
+
+arnData :: TF.DataSource P.AWS (ArnData s)
+arnData =
+    TF.newDataSource "aws_arn" $
+        ArnData {
+              _arn = TF.Nil
+            }
+
 {- | The @aws_autoscaling_groups@ AWS datasource.
 
 The Autoscaling Groups data source allows access to the list of AWS ASGs
@@ -1102,6 +1460,109 @@ availabilityZonesData =
     TF.newDataSource "aws_availability_zones" $
         AvailabilityZonesData {
               _state = TF.Nil
+            }
+
+{- | The @aws_batch_compute_environment@ AWS datasource.
+
+The Batch Compute Environment data source allows access to details of a
+specific compute environment within AWS Batch.
+-}
+data BatchComputeEnvironmentData s = BatchComputeEnvironmentData {
+      _compute_environment_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Batch Compute Environment -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (BatchComputeEnvironmentData s) where
+    toHCL BatchComputeEnvironmentData{..} = TF.inline $ catMaybes
+        [ TF.assign "compute_environment_name" <$> TF.attribute _compute_environment_name
+        ]
+
+instance P.HasComputeEnvironmentName (BatchComputeEnvironmentData s) (TF.Attr s P.Text) where
+    computeEnvironmentName =
+        lens (_compute_environment_name :: BatchComputeEnvironmentData s -> TF.Attr s P.Text)
+             (\s a -> s { _compute_environment_name = a } :: BatchComputeEnvironmentData s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (BatchComputeEnvironmentData s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedComputeEnvironmentName (TF.Ref s' (BatchComputeEnvironmentData s)) (TF.Attr s P.Text) where
+    computedComputeEnvironmentName =
+        (_compute_environment_name :: BatchComputeEnvironmentData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEcsClusterArn (TF.Ref s' (BatchComputeEnvironmentData s)) (TF.Attr s P.Text) where
+    computedEcsClusterArn x = TF.compute (TF.refKey x) "ecs_cluster_arn"
+
+instance s ~ s' => P.HasComputedServiceRole (TF.Ref s' (BatchComputeEnvironmentData s)) (TF.Attr s P.Text) where
+    computedServiceRole x = TF.compute (TF.refKey x) "service_role"
+
+instance s ~ s' => P.HasComputedState (TF.Ref s' (BatchComputeEnvironmentData s)) (TF.Attr s P.Text) where
+    computedState x = TF.compute (TF.refKey x) "state"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (BatchComputeEnvironmentData s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedStatusReason (TF.Ref s' (BatchComputeEnvironmentData s)) (TF.Attr s P.Text) where
+    computedStatusReason x = TF.compute (TF.refKey x) "status_reason"
+
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (BatchComputeEnvironmentData s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
+
+batchComputeEnvironmentData :: TF.DataSource P.AWS (BatchComputeEnvironmentData s)
+batchComputeEnvironmentData =
+    TF.newDataSource "aws_batch_compute_environment" $
+        BatchComputeEnvironmentData {
+              _compute_environment_name = TF.Nil
+            }
+
+{- | The @aws_batch_job_queue@ AWS datasource.
+
+The Batch Job Queue data source allows access to details of a specific job
+queue within AWS Batch.
+-}
+data BatchJobQueueData s = BatchJobQueueData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the job queue. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (BatchJobQueueData s) where
+    toHCL BatchJobQueueData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (BatchJobQueueData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: BatchJobQueueData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: BatchJobQueueData s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedComputeEnvironmentOrder (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s P.Text) where
+    computedComputeEnvironmentOrder x = TF.compute (TF.refKey x) "compute_environment_order"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: BatchJobQueueData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s P.Text) where
+    computedPriority x = TF.compute (TF.refKey x) "priority"
+
+instance s ~ s' => P.HasComputedState (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s P.Text) where
+    computedState x = TF.compute (TF.refKey x) "state"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedStatusReason (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s P.Text) where
+    computedStatusReason x = TF.compute (TF.refKey x) "status_reason"
+
+batchJobQueueData :: TF.DataSource P.AWS (BatchJobQueueData s)
+batchJobQueueData =
+    TF.newDataSource "aws_batch_job_queue" $
+        BatchJobQueueData {
+              _name = TF.Nil
             }
 
 {- | The @aws_billing_service_account@ AWS datasource.
@@ -1235,6 +1696,49 @@ canonicalUserIdData =
             , _id = TF.Nil
             }
 
+{- | The @aws_cloudformation_export@ AWS datasource.
+
+The CloudFormation Export data source allows access to stack exports
+specified in the
+<http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html>
+section of the Cloudformation Template using the optional Export Property.
+-> Note: If you are trying to use a value from a Cloudformation Stack in the
+same Terraform run please use normal interpolation or Cloudformation
+Outputs.
+-}
+data CloudformationExportData s = CloudformationExportData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the cross stack reference -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (CloudformationExportData s) where
+    toHCL CloudformationExportData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (CloudformationExportData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: CloudformationExportData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: CloudformationExportData s)
+
+instance s ~ s' => P.HasComputedExportingStackId (TF.Ref s' (CloudformationExportData s)) (TF.Attr s P.Text) where
+    computedExportingStackId x = TF.compute (TF.refKey x) "exporting_stack_id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CloudformationExportData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: CloudformationExportData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (CloudformationExportData s)) (TF.Attr s P.Text) where
+    computedValue x = TF.compute (TF.refKey x) "value"
+
+cloudformationExportData :: TF.DataSource P.AWS (CloudformationExportData s)
+cloudformationExportData =
+    TF.newDataSource "aws_cloudformation_export" $
+        CloudformationExportData {
+              _name = TF.Nil
+            }
+
 {- | The @aws_cloudformation_stack@ AWS datasource.
 
 The CloudFormation Stack data source allows access to stack outputs and
@@ -1335,6 +1839,122 @@ cloudtrailServiceAccountData =
     TF.newDataSource "aws_cloudtrail_service_account" $
         CloudtrailServiceAccountData {
               _region = TF.Nil
+            }
+
+{- | The @aws_cloudwatch_log_group@ AWS datasource.
+
+Use this data source to get information about an AWS Cloudwatch Log Group
+-}
+data CloudwatchLogGroupData s = CloudwatchLogGroupData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Cloudwatch log group -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (CloudwatchLogGroupData s) where
+    toHCL CloudwatchLogGroupData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (CloudwatchLogGroupData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: CloudwatchLogGroupData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: CloudwatchLogGroupData s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudwatchLogGroupData s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (CloudwatchLogGroupData s)) (TF.Attr s P.Text) where
+    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CloudwatchLogGroupData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: CloudwatchLogGroupData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+cloudwatchLogGroupData :: TF.DataSource P.AWS (CloudwatchLogGroupData s)
+cloudwatchLogGroupData =
+    TF.newDataSource "aws_cloudwatch_log_group" $
+        CloudwatchLogGroupData {
+              _name = TF.Nil
+            }
+
+{- | The @aws_codecommit_repository@ AWS datasource.
+
+The CodeCommit Repository data source allows the ARN, Repository ID,
+Repository URL for HTTP and Repository URL for SSH to be retrieved for an
+CodeCommit repository.
+-}
+data CodecommitRepositoryData s = CodecommitRepositoryData {
+      _repository_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name for the repository. This needs to be less than 100 characters. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (CodecommitRepositoryData s) where
+    toHCL CodecommitRepositoryData{..} = TF.inline $ catMaybes
+        [ TF.assign "repository_name" <$> TF.attribute _repository_name
+        ]
+
+instance P.HasRepositoryName (CodecommitRepositoryData s) (TF.Attr s P.Text) where
+    repositoryName =
+        lens (_repository_name :: CodecommitRepositoryData s -> TF.Attr s P.Text)
+             (\s a -> s { _repository_name = a } :: CodecommitRepositoryData s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (CodecommitRepositoryData s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedCloneUrlHttp (TF.Ref s' (CodecommitRepositoryData s)) (TF.Attr s P.Text) where
+    computedCloneUrlHttp x = TF.compute (TF.refKey x) "clone_url_http"
+
+instance s ~ s' => P.HasComputedCloneUrlSsh (TF.Ref s' (CodecommitRepositoryData s)) (TF.Attr s P.Text) where
+    computedCloneUrlSsh x = TF.compute (TF.refKey x) "clone_url_ssh"
+
+instance s ~ s' => P.HasComputedRepositoryId (TF.Ref s' (CodecommitRepositoryData s)) (TF.Attr s P.Text) where
+    computedRepositoryId x = TF.compute (TF.refKey x) "repository_id"
+
+instance s ~ s' => P.HasComputedRepositoryName (TF.Ref s' (CodecommitRepositoryData s)) (TF.Attr s P.Text) where
+    computedRepositoryName =
+        (_repository_name :: CodecommitRepositoryData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+codecommitRepositoryData :: TF.DataSource P.AWS (CodecommitRepositoryData s)
+codecommitRepositoryData =
+    TF.newDataSource "aws_codecommit_repository" $
+        CodecommitRepositoryData {
+              _repository_name = TF.Nil
+            }
+
+{- | The @aws_cognito_user_pools@ AWS datasource.
+
+Use this data source to get a list of cognito user pools.
+-}
+data CognitoUserPoolsData s = CognitoUserPoolsData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ - (required) Name of the cognito user pools. Name is not a unique attribute for cognito user pool, so multiple pools might be returned with given name. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (CognitoUserPoolsData s) where
+    toHCL CognitoUserPoolsData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (CognitoUserPoolsData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: CognitoUserPoolsData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: CognitoUserPoolsData s)
+
+instance s ~ s' => P.HasComputedIds (TF.Ref s' (CognitoUserPoolsData s)) (TF.Attr s P.Text) where
+    computedIds x = TF.compute (TF.refKey x) "ids"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CognitoUserPoolsData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: CognitoUserPoolsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+cognitoUserPoolsData :: TF.DataSource P.AWS (CognitoUserPoolsData s)
+cognitoUserPoolsData =
+    TF.newDataSource "aws_cognito_user_pools" $
+        CognitoUserPoolsData {
+              _name = TF.Nil
             }
 
 {- | The @aws_db_instance@ AWS datasource.
@@ -1625,6 +2245,43 @@ dbSnapshotData =
             , _include_shared = TF.Nil
             , _most_recent = TF.Nil
             , _snapshot_type = TF.Nil
+            }
+
+{- | The @aws_dx_gateway@ AWS datasource.
+
+Retrieve information about a Direct Connect Gateway.
+-}
+data DxGatewayData s = DxGatewayData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the gateway to retrieve. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DxGatewayData s) where
+    toHCL DxGatewayData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (DxGatewayData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: DxGatewayData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: DxGatewayData s)
+
+instance s ~ s' => P.HasComputedAmazonSideAsn (TF.Ref s' (DxGatewayData s)) (TF.Attr s P.Text) where
+    computedAmazonSideAsn x = TF.compute (TF.refKey x) "amazon_side_asn"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DxGatewayData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DxGatewayData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: DxGatewayData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+dxGatewayData :: TF.DataSource P.AWS (DxGatewayData s)
+dxGatewayData =
+    TF.newDataSource "aws_dx_gateway" $
+        DxGatewayData {
+              _name = TF.Nil
             }
 
 {- | The @aws_dynamodb_table@ AWS datasource.
@@ -1962,53 +2619,6 @@ ecrRepositoryData =
               _name = TF.Nil
             }
 
-{- | The @aws_ecs_cluster@ AWS datasource.
-
-The ECS Cluster data source allows access to details of a specific cluster
-within an AWS ECS service.
--}
-data EcsClusterData s = EcsClusterData {
-      _cluster_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the ECS Cluster -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (EcsClusterData s) where
-    toHCL EcsClusterData{..} = TF.inline $ catMaybes
-        [ TF.assign "cluster_name" <$> TF.attribute _cluster_name
-        ]
-
-instance P.HasClusterName (EcsClusterData s) (TF.Attr s P.Text) where
-    clusterName =
-        lens (_cluster_name :: EcsClusterData s -> TF.Attr s P.Text)
-             (\s a -> s { _cluster_name = a } :: EcsClusterData s)
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (EcsClusterData s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
-
-instance s ~ s' => P.HasComputedClusterName (TF.Ref s' (EcsClusterData s)) (TF.Attr s P.Text) where
-    computedClusterName =
-        (_cluster_name :: EcsClusterData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPendingTasksCount (TF.Ref s' (EcsClusterData s)) (TF.Attr s P.Text) where
-    computedPendingTasksCount x = TF.compute (TF.refKey x) "pending_tasks_count"
-
-instance s ~ s' => P.HasComputedRegisteredContainerInstancesCount (TF.Ref s' (EcsClusterData s)) (TF.Attr s P.Text) where
-    computedRegisteredContainerInstancesCount x = TF.compute (TF.refKey x) "registered_container_instances_count"
-
-instance s ~ s' => P.HasComputedRunningTasksCount (TF.Ref s' (EcsClusterData s)) (TF.Attr s P.Text) where
-    computedRunningTasksCount x = TF.compute (TF.refKey x) "running_tasks_count"
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (EcsClusterData s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
-
-ecsClusterData :: TF.DataSource P.AWS (EcsClusterData s)
-ecsClusterData =
-    TF.newDataSource "aws_ecs_cluster" $
-        EcsClusterData {
-              _cluster_name = TF.Nil
-            }
-
 {- | The @aws_ecs_container_definition@ AWS datasource.
 
 The ECS container definition data source allows access to details of a
@@ -2077,6 +2687,67 @@ ecsContainerDefinitionData =
         EcsContainerDefinitionData {
               _container_name = TF.Nil
             , _task_definition = TF.Nil
+            }
+
+{- | The @aws_ecs_service@ AWS datasource.
+
+The ECS Service data source allows access to details of a specific Service
+within a AWS ECS Cluster.
+-}
+data EcsServiceData s = EcsServiceData {
+      _cluster_arn  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The arn of the ECS Cluster -}
+    , _service_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the ECS Service -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (EcsServiceData s) where
+    toHCL EcsServiceData{..} = TF.inline $ catMaybes
+        [ TF.assign "cluster_arn" <$> TF.attribute _cluster_arn
+        , TF.assign "service_name" <$> TF.attribute _service_name
+        ]
+
+instance P.HasClusterArn (EcsServiceData s) (TF.Attr s P.Text) where
+    clusterArn =
+        lens (_cluster_arn :: EcsServiceData s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_arn = a } :: EcsServiceData s)
+
+instance P.HasServiceName (EcsServiceData s) (TF.Attr s P.Text) where
+    serviceName =
+        lens (_service_name :: EcsServiceData s -> TF.Attr s P.Text)
+             (\s a -> s { _service_name = a } :: EcsServiceData s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (EcsServiceData s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedClusterArn (TF.Ref s' (EcsServiceData s)) (TF.Attr s P.Text) where
+    computedClusterArn =
+        (_cluster_arn :: EcsServiceData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDesiredCount (TF.Ref s' (EcsServiceData s)) (TF.Attr s P.Text) where
+    computedDesiredCount x = TF.compute (TF.refKey x) "desired_count"
+
+instance s ~ s' => P.HasComputedLaunchType (TF.Ref s' (EcsServiceData s)) (TF.Attr s P.Text) where
+    computedLaunchType x = TF.compute (TF.refKey x) "launch_type"
+
+instance s ~ s' => P.HasComputedSchedulingStrategy (TF.Ref s' (EcsServiceData s)) (TF.Attr s P.Text) where
+    computedSchedulingStrategy x = TF.compute (TF.refKey x) "scheduling_strategy"
+
+instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (EcsServiceData s)) (TF.Attr s P.Text) where
+    computedServiceName =
+        (_service_name :: EcsServiceData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTaskDefinition (TF.Ref s' (EcsServiceData s)) (TF.Attr s P.Text) where
+    computedTaskDefinition x = TF.compute (TF.refKey x) "task_definition"
+
+ecsServiceData :: TF.DataSource P.AWS (EcsServiceData s)
+ecsServiceData =
+    TF.newDataSource "aws_ecs_service" $
+        EcsServiceData {
+              _cluster_arn = TF.Nil
+            , _service_name = TF.Nil
             }
 
 {- | The @aws_ecs_task_definition@ AWS datasource.
@@ -2282,6 +2953,61 @@ eipData =
             , _public_ip = TF.Nil
             }
 
+{- | The @aws_eks_cluster@ AWS datasource.
+
+Retrieve information about an EKS Cluster.
+-}
+data EksClusterData s = EksClusterData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the cluster -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (EksClusterData s) where
+    toHCL EksClusterData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (EksClusterData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: EksClusterData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: EksClusterData s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (EksClusterData s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedCertificateAuthority (TF.Ref s' (EksClusterData s)) (TF.Attr s P.Text) where
+    computedCertificateAuthority x = TF.compute (TF.refKey x) "certificate_authority"
+
+instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (EksClusterData s)) (TF.Attr s P.Text) where
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
+
+instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (EksClusterData s)) (TF.Attr s P.Text) where
+    computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EksClusterData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (EksClusterData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: EksClusterData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRoleArn (TF.Ref s' (EksClusterData s)) (TF.Attr s P.Text) where
+    computedRoleArn x = TF.compute (TF.refKey x) "role_arn"
+
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (EksClusterData s)) (TF.Attr s P.Text) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
+
+instance s ~ s' => P.HasComputedVpcConfig (TF.Ref s' (EksClusterData s)) (TF.Attr s P.Text) where
+    computedVpcConfig x = TF.compute (TF.refKey x) "vpc_config"
+
+eksClusterData :: TF.DataSource P.AWS (EksClusterData s)
+eksClusterData =
+    TF.newDataSource "aws_eks_cluster" $
+        EksClusterData {
+              _name = TF.Nil
+            }
+
 {- | The @aws_elastic_beanstalk_hosted_zone@ AWS datasource.
 
 Use this data source to get the ID of an
@@ -2481,6 +3207,9 @@ instance s ~ s' => P.HasComputedAutomaticFailoverEnabled (TF.Ref s' (Elasticache
 instance s ~ s' => P.HasComputedConfigurationEndpointAddress (TF.Ref s' (ElasticacheReplicationGroupData s)) (TF.Attr s P.Text) where
     computedConfigurationEndpointAddress x = TF.compute (TF.refKey x) "configuration_endpoint_address"
 
+instance s ~ s' => P.HasComputedMemberClusters (TF.Ref s' (ElasticacheReplicationGroupData s)) (TF.Attr s P.Text) where
+    computedMemberClusters x = TF.compute (TF.refKey x) "member_clusters"
+
 instance s ~ s' => P.HasComputedNodeType (TF.Ref s' (ElasticacheReplicationGroupData s)) (TF.Attr s P.Text) where
     computedNodeType x = TF.compute (TF.refKey x) "node_type"
 
@@ -2622,6 +3351,72 @@ elbServiceAccountData =
               _region = TF.Nil
             }
 
+{- | The @aws_glue_script@ AWS datasource.
+
+Use this data source to generate a Glue script from a Directed Acyclic Graph
+(DAG).
+-}
+data GlueScriptData s = GlueScriptData {
+      _dag_edge :: !(TF.Attr s P.Text)
+    {- ^ (Required) A list of the edges in the DAG. Defined below. -}
+    , _dag_node :: !(TF.Attr s P.Text)
+    {- ^ (Required) A list of the nodes in the DAG. Defined below. -}
+    , _language :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The programming language of the resulting code from the DAG. Defaults to @PYTHON@ . Valid values are @PYTHON@ and @SCALA@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (GlueScriptData s) where
+    toHCL GlueScriptData{..} = TF.inline $ catMaybes
+        [ TF.assign "dag_edge" <$> TF.attribute _dag_edge
+        , TF.assign "dag_node" <$> TF.attribute _dag_node
+        , TF.assign "language" <$> TF.attribute _language
+        ]
+
+instance P.HasDagEdge (GlueScriptData s) (TF.Attr s P.Text) where
+    dagEdge =
+        lens (_dag_edge :: GlueScriptData s -> TF.Attr s P.Text)
+             (\s a -> s { _dag_edge = a } :: GlueScriptData s)
+
+instance P.HasDagNode (GlueScriptData s) (TF.Attr s P.Text) where
+    dagNode =
+        lens (_dag_node :: GlueScriptData s -> TF.Attr s P.Text)
+             (\s a -> s { _dag_node = a } :: GlueScriptData s)
+
+instance P.HasLanguage (GlueScriptData s) (TF.Attr s P.Text) where
+    language =
+        lens (_language :: GlueScriptData s -> TF.Attr s P.Text)
+             (\s a -> s { _language = a } :: GlueScriptData s)
+
+instance s ~ s' => P.HasComputedDagEdge (TF.Ref s' (GlueScriptData s)) (TF.Attr s P.Text) where
+    computedDagEdge =
+        (_dag_edge :: GlueScriptData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDagNode (TF.Ref s' (GlueScriptData s)) (TF.Attr s P.Text) where
+    computedDagNode =
+        (_dag_node :: GlueScriptData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedLanguage (TF.Ref s' (GlueScriptData s)) (TF.Attr s P.Text) where
+    computedLanguage =
+        (_language :: GlueScriptData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPythonScript (TF.Ref s' (GlueScriptData s)) (TF.Attr s P.Text) where
+    computedPythonScript x = TF.compute (TF.refKey x) "python_script"
+
+instance s ~ s' => P.HasComputedScalaCode (TF.Ref s' (GlueScriptData s)) (TF.Attr s P.Text) where
+    computedScalaCode x = TF.compute (TF.refKey x) "scala_code"
+
+glueScriptData :: TF.DataSource P.AWS (GlueScriptData s)
+glueScriptData =
+    TF.newDataSource "aws_glue_script" $
+        GlueScriptData {
+              _dag_edge = TF.Nil
+            , _dag_node = TF.Nil
+            , _language = TF.Nil
+            }
+
 {- | The @aws_iam_account_alias@ AWS datasource.
 
 The IAM Account Alias data source allows access to the account alias for the
@@ -2731,8 +3526,14 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (IamInstanceProfileData s)) (TF.
 instance s ~ s' => P.HasComputedPath (TF.Ref s' (IamInstanceProfileData s)) (TF.Attr s P.Text) where
     computedPath x = TF.compute (TF.refKey x) "path"
 
+instance s ~ s' => P.HasComputedRoleArn (TF.Ref s' (IamInstanceProfileData s)) (TF.Attr s P.Text) where
+    computedRoleArn x = TF.compute (TF.refKey x) "role_arn"
+
 instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (IamInstanceProfileData s)) (TF.Attr s P.Text) where
     computedRoleId x = TF.compute (TF.refKey x) "role_id"
+
+instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (IamInstanceProfileData s)) (TF.Attr s P.Text) where
+    computedRoleName x = TF.compute (TF.refKey x) "role_name"
 
 iamInstanceProfileData :: TF.DataSource P.AWS (IamInstanceProfileData s)
 iamInstanceProfileData =
@@ -2921,6 +3722,8 @@ data IamServerCertificateData s = IamServerCertificateData {
     {- ^ - exact name of the cert to lookup -}
     , _name_prefix :: !(TF.Attr s P.Text)
     {- ^ - prefix of cert to filter by -}
+    , _path_prefix :: !(TF.Attr s P.Text)
+    {- ^ - prefix of path to filter by -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (IamServerCertificateData s) where
@@ -2928,6 +3731,7 @@ instance TF.ToHCL (IamServerCertificateData s) where
         [ TF.assign "latest" <$> TF.attribute _latest
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _name_prefix
+        , TF.assign "path_prefix" <$> TF.attribute _path_prefix
         ]
 
 instance P.HasLatest (IamServerCertificateData s) (TF.Attr s P.Text) where
@@ -2944,6 +3748,11 @@ instance P.HasNamePrefix (IamServerCertificateData s) (TF.Attr s P.Text) where
     namePrefix =
         lens (_name_prefix :: IamServerCertificateData s -> TF.Attr s P.Text)
              (\s a -> s { _name_prefix = a } :: IamServerCertificateData s)
+
+instance P.HasPathPrefix (IamServerCertificateData s) (TF.Attr s P.Text) where
+    pathPrefix =
+        lens (_path_prefix :: IamServerCertificateData s -> TF.Attr s P.Text)
+             (\s a -> s { _path_prefix = a } :: IamServerCertificateData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamServerCertificateData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -2975,6 +3784,11 @@ instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (IamServerCertificateData 
 instance s ~ s' => P.HasComputedPath (TF.Ref s' (IamServerCertificateData s)) (TF.Attr s P.Text) where
     computedPath x = TF.compute (TF.refKey x) "path"
 
+instance s ~ s' => P.HasComputedPathPrefix (TF.Ref s' (IamServerCertificateData s)) (TF.Attr s P.Text) where
+    computedPathPrefix =
+        (_path_prefix :: IamServerCertificateData s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedUploadDate (TF.Ref s' (IamServerCertificateData s)) (TF.Attr s P.Text) where
     computedUploadDate x = TF.compute (TF.refKey x) "upload_date"
 
@@ -2985,6 +3799,7 @@ iamServerCertificateData =
               _latest = TF.Nil
             , _name = TF.Nil
             , _name_prefix = TF.Nil
+            , _path_prefix = TF.Nil
             }
 
 {- | The @aws_iam_user@ AWS datasource.
@@ -3056,17 +3871,20 @@ Use this data source to get the ID of an Amazon EC2 Instance for use in
 other resources.
 -}
 data InstanceData s = InstanceData {
-      _filter        :: !(TF.Attr s P.Text)
+      _filter            :: !(TF.Attr s P.Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
-    , _instance_id   :: !(TF.Attr s P.Text)
+    , _get_password_data :: !(TF.Attr s P.Text)
+    {- ^ (Optional) If true, wait for password data to become available and retrieve it. Useful for getting the administrator password for instances running Microsoft Windows. The password data is exported to the @password_data@ attribute. See <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetPasswordData.html> for more information. -}
+    , _instance_id       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specify the exact Instance ID with which to populate the data source. -}
-    , _instance_tags :: !(TF.Attr s P.Text)
+    , _instance_tags     :: !(TF.Attr s P.Text)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Instance. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (InstanceData s) where
     toHCL InstanceData{..} = TF.inline $ catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "get_password_data" <$> TF.attribute _get_password_data
         , TF.assign "instance_id" <$> TF.attribute _instance_id
         , TF.assign "instance_tags" <$> TF.attribute _instance_tags
         ]
@@ -3075,6 +3893,11 @@ instance P.HasFilter (InstanceData s) (TF.Attr s P.Text) where
     filter =
         lens (_filter :: InstanceData s -> TF.Attr s P.Text)
              (\s a -> s { _filter = a } :: InstanceData s)
+
+instance P.HasGetPasswordData (InstanceData s) (TF.Attr s P.Text) where
+    getPasswordData =
+        lens (_get_password_data :: InstanceData s -> TF.Attr s P.Text)
+             (\s a -> s { _get_password_data = a } :: InstanceData s)
 
 instance P.HasInstanceId (InstanceData s) (TF.Attr s P.Text) where
     instanceId =
@@ -3095,6 +3918,9 @@ instance s ~ s' => P.HasComputedAssociatePublicIpAddress (TF.Ref s' (InstanceDat
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (InstanceData s)) (TF.Attr s P.Zone) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
+instance s ~ s' => P.HasComputedCreditSpecification (TF.Ref s' (InstanceData s)) (TF.Attr s P.Text) where
+    computedCreditSpecification x = TF.compute (TF.refKey x) "credit_specification"
+
 instance s ~ s' => P.HasComputedEbsBlockDevice (TF.Ref s' (InstanceData s)) (TF.Attr s P.Text) where
     computedEbsBlockDevice x = TF.compute (TF.refKey x) "ebs_block_device"
 
@@ -3107,6 +3933,11 @@ instance s ~ s' => P.HasComputedEphemeralBlockDevice (TF.Ref s' (InstanceData s)
 instance s ~ s' => P.HasComputedFilter (TF.Ref s' (InstanceData s)) (TF.Attr s P.Text) where
     computedFilter =
         (_filter :: InstanceData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedGetPasswordData (TF.Ref s' (InstanceData s)) (TF.Attr s P.Text) where
+    computedGetPasswordData =
+        (_get_password_data :: InstanceData s -> TF.Attr s P.Text)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedIamInstanceProfile (TF.Ref s' (InstanceData s)) (TF.Attr s P.Text) where
@@ -3136,6 +3967,9 @@ instance s ~ s' => P.HasComputedMonitoring (TF.Ref s' (InstanceData s)) (TF.Attr
 
 instance s ~ s' => P.HasComputedNetworkInterfaceId (TF.Ref s' (InstanceData s)) (TF.Attr s P.Text) where
     computedNetworkInterfaceId x = TF.compute (TF.refKey x) "network_interface_id"
+
+instance s ~ s' => P.HasComputedPasswordData (TF.Ref s' (InstanceData s)) (TF.Attr s P.Text) where
+    computedPasswordData x = TF.compute (TF.refKey x) "password_data"
 
 instance s ~ s' => P.HasComputedPlacementGroup (TF.Ref s' (InstanceData s)) (TF.Attr s P.Text) where
     computedPlacementGroup x = TF.compute (TF.refKey x) "placement_group"
@@ -3181,6 +4015,7 @@ instanceData =
     TF.newDataSource "aws_instance" $
         InstanceData {
               _filter = TF.Nil
+            , _get_password_data = TF.Nil
             , _instance_id = TF.Nil
             , _instance_tags = TF.Nil
             }
@@ -3201,15 +4036,18 @@ any time and you'd need to re-run @apply@ every time an instance comes up or
 dies.
 -}
 data InstancesData s = InstancesData {
-      _filter        :: !(TF.Attr s P.Text)
+      _filter               :: !(TF.Attr s P.Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
-    , _instance_tags :: !(TF.Attr s P.Text)
+    , _instance_state_names :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of instance states that should be applicable to the desired instances. The permitted values are: @pending, running, shutting-down, stopped, stopping, terminated@ . The default value is @running@ . -}
+    , _instance_tags        :: !(TF.Attr s P.Text)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on desired instances. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (InstancesData s) where
     toHCL InstancesData{..} = TF.inline $ catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "instance_state_names" <$> TF.attribute _instance_state_names
         , TF.assign "instance_tags" <$> TF.attribute _instance_tags
         ]
 
@@ -3217,6 +4055,11 @@ instance P.HasFilter (InstancesData s) (TF.Attr s P.Text) where
     filter =
         lens (_filter :: InstancesData s -> TF.Attr s P.Text)
              (\s a -> s { _filter = a } :: InstancesData s)
+
+instance P.HasInstanceStateNames (InstancesData s) (TF.Attr s P.Text) where
+    instanceStateNames =
+        lens (_instance_state_names :: InstancesData s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_state_names = a } :: InstancesData s)
 
 instance P.HasInstanceTags (InstancesData s) (TF.Attr s P.Text) where
     instanceTags =
@@ -3230,6 +4073,11 @@ instance s ~ s' => P.HasComputedFilter (TF.Ref s' (InstancesData s)) (TF.Attr s 
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (InstancesData s)) (TF.Attr s P.Text) where
     computedIds x = TF.compute (TF.refKey x) "ids"
+
+instance s ~ s' => P.HasComputedInstanceStateNames (TF.Ref s' (InstancesData s)) (TF.Attr s P.Text) where
+    computedInstanceStateNames =
+        (_instance_state_names :: InstancesData s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedInstanceTags (TF.Ref s' (InstancesData s)) (TF.Attr s P.Text) where
     computedInstanceTags =
@@ -3247,6 +4095,7 @@ instancesData =
     TF.newDataSource "aws_instances" $
         InstancesData {
               _filter = TF.Nil
+            , _instance_state_names = TF.Nil
             , _instance_tags = TF.Nil
             }
 
@@ -3313,6 +4162,37 @@ internetGatewayData =
               _filter = TF.Nil
             , _internet_gateway_id = TF.Nil
             , _tags = TF.Nil
+            }
+
+{- | The @aws_iot_endpoint@ AWS datasource.
+
+Returns a unique endpoint specific to the AWS account making the call.
+-}
+data IotEndpointData s = IotEndpointData {
+      _endpoint_address :: !(TF.Attr s P.Text)
+    {- ^ - The endpoint. The format of the endpoint is as follows: @IDENTIFIER.iot.REGION.amazonaws.com@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (IotEndpointData s) where
+    toHCL IotEndpointData{..} = TF.inline $ catMaybes
+        [ TF.assign "endpoint_address" <$> TF.attribute _endpoint_address
+        ]
+
+instance P.HasEndpointAddress (IotEndpointData s) (TF.Attr s P.Text) where
+    endpointAddress =
+        lens (_endpoint_address :: IotEndpointData s -> TF.Attr s P.Text)
+             (\s a -> s { _endpoint_address = a } :: IotEndpointData s)
+
+instance s ~ s' => P.HasComputedEndpointAddress (TF.Ref s' (IotEndpointData s)) (TF.Attr s P.Text) where
+    computedEndpointAddress =
+        (_endpoint_address :: IotEndpointData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+iotEndpointData :: TF.DataSource P.AWS (IotEndpointData s)
+iotEndpointData =
+    TF.newDataSource "aws_iot_endpoint" $
+        IotEndpointData {
+              _endpoint_address = TF.Nil
             }
 
 {- | The @aws_ip_ranges@ AWS datasource.
@@ -3655,6 +4535,256 @@ kmsSecretData =
               _secret = TF.Nil
             }
 
+{- | The @aws_lambda_function@ AWS datasource.
+
+Provides information about a Lambda Function.
+-}
+data LambdaFunctionData s = LambdaFunctionData {
+      _function_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) Name of the lambda function. -}
+    , _qualifier     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Qualifier of the lambda function. Defaults to @$LATEST@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (LambdaFunctionData s) where
+    toHCL LambdaFunctionData{..} = TF.inline $ catMaybes
+        [ TF.assign "function_name" <$> TF.attribute _function_name
+        , TF.assign "qualifier" <$> TF.attribute _qualifier
+        ]
+
+instance P.HasFunctionName (LambdaFunctionData s) (TF.Attr s P.Text) where
+    functionName =
+        lens (_function_name :: LambdaFunctionData s -> TF.Attr s P.Text)
+             (\s a -> s { _function_name = a } :: LambdaFunctionData s)
+
+instance P.HasQualifier (LambdaFunctionData s) (TF.Attr s P.Text) where
+    qualifier =
+        lens (_qualifier :: LambdaFunctionData s -> TF.Attr s P.Text)
+             (\s a -> s { _qualifier = a } :: LambdaFunctionData s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedDeadLetterConfig (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedDeadLetterConfig x = TF.compute (TF.refKey x) "dead_letter_config"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedEnvironment (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedEnvironment x = TF.compute (TF.refKey x) "environment"
+
+instance s ~ s' => P.HasComputedFunctionName (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedFunctionName =
+        (_function_name :: LambdaFunctionData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHandler (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedHandler x = TF.compute (TF.refKey x) "handler"
+
+instance s ~ s' => P.HasComputedInvokeArn (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedInvokeArn x = TF.compute (TF.refKey x) "invoke_arn"
+
+instance s ~ s' => P.HasComputedKmsKeyArn (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedKmsKeyArn x = TF.compute (TF.refKey x) "kms_key_arn"
+
+instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedLastModified x = TF.compute (TF.refKey x) "last_modified"
+
+instance s ~ s' => P.HasComputedMemorySize (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedMemorySize x = TF.compute (TF.refKey x) "memory_size"
+
+instance s ~ s' => P.HasComputedQualifiedArn (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedQualifiedArn x = TF.compute (TF.refKey x) "qualified_arn"
+
+instance s ~ s' => P.HasComputedQualifier (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedQualifier =
+        (_qualifier :: LambdaFunctionData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedReservedConcurrentExecutions (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedReservedConcurrentExecutions x = TF.compute (TF.refKey x) "reserved_concurrent_executions"
+
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedRole x = TF.compute (TF.refKey x) "role"
+
+instance s ~ s' => P.HasComputedRuntime (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedRuntime x = TF.compute (TF.refKey x) "runtime"
+
+instance s ~ s' => P.HasComputedSourceCodeHash (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedSourceCodeHash x = TF.compute (TF.refKey x) "source_code_hash"
+
+instance s ~ s' => P.HasComputedSourceCodeSize (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedSourceCodeSize x = TF.compute (TF.refKey x) "source_code_size"
+
+instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedTimeout x = TF.compute (TF.refKey x) "timeout"
+
+instance s ~ s' => P.HasComputedTracingConfig (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedTracingConfig x = TF.compute (TF.refKey x) "tracing_config"
+
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
+
+instance s ~ s' => P.HasComputedVpcConfig (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
+    computedVpcConfig x = TF.compute (TF.refKey x) "vpc_config"
+
+lambdaFunctionData :: TF.DataSource P.AWS (LambdaFunctionData s)
+lambdaFunctionData =
+    TF.newDataSource "aws_lambda_function" $
+        LambdaFunctionData {
+              _function_name = TF.Nil
+            , _qualifier = TF.Nil
+            }
+
+{- | The @aws_lambda_invocation@ AWS datasource.
+
+Use this data source to invoke custom lambda functions as data source. The
+lambda function is invoked with
+<https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestSyntax>
+invocation type.
+-}
+data LambdaInvocationData s = LambdaInvocationData {
+      _function_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the lambda function. -}
+    , _input         :: !(TF.Attr s P.Text)
+    {- ^ (Required) A string in JSON format that is passed as payload to the lambda function. -}
+    , _qualifier     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The qualifier (a.k.a version) of the lambda function. Defaults to @$LATEST@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (LambdaInvocationData s) where
+    toHCL LambdaInvocationData{..} = TF.inline $ catMaybes
+        [ TF.assign "function_name" <$> TF.attribute _function_name
+        , TF.assign "input" <$> TF.attribute _input
+        , TF.assign "qualifier" <$> TF.attribute _qualifier
+        ]
+
+instance P.HasFunctionName (LambdaInvocationData s) (TF.Attr s P.Text) where
+    functionName =
+        lens (_function_name :: LambdaInvocationData s -> TF.Attr s P.Text)
+             (\s a -> s { _function_name = a } :: LambdaInvocationData s)
+
+instance P.HasInput (LambdaInvocationData s) (TF.Attr s P.Text) where
+    input =
+        lens (_input :: LambdaInvocationData s -> TF.Attr s P.Text)
+             (\s a -> s { _input = a } :: LambdaInvocationData s)
+
+instance P.HasQualifier (LambdaInvocationData s) (TF.Attr s P.Text) where
+    qualifier =
+        lens (_qualifier :: LambdaInvocationData s -> TF.Attr s P.Text)
+             (\s a -> s { _qualifier = a } :: LambdaInvocationData s)
+
+instance s ~ s' => P.HasComputedFunctionName (TF.Ref s' (LambdaInvocationData s)) (TF.Attr s P.Text) where
+    computedFunctionName =
+        (_function_name :: LambdaInvocationData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedInput (TF.Ref s' (LambdaInvocationData s)) (TF.Attr s P.Text) where
+    computedInput =
+        (_input :: LambdaInvocationData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedQualifier (TF.Ref s' (LambdaInvocationData s)) (TF.Attr s P.Text) where
+    computedQualifier =
+        (_qualifier :: LambdaInvocationData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResult (TF.Ref s' (LambdaInvocationData s)) (TF.Attr s P.Text) where
+    computedResult x = TF.compute (TF.refKey x) "result"
+
+instance s ~ s' => P.HasComputedResultMap (TF.Ref s' (LambdaInvocationData s)) (TF.Attr s P.Text) where
+    computedResultMap x = TF.compute (TF.refKey x) "result_map"
+
+lambdaInvocationData :: TF.DataSource P.AWS (LambdaInvocationData s)
+lambdaInvocationData =
+    TF.newDataSource "aws_lambda_invocation" $
+        LambdaInvocationData {
+              _function_name = TF.Nil
+            , _input = TF.Nil
+            , _qualifier = TF.Nil
+            }
+
+{- | The @aws_launch_configuration@ AWS datasource.
+
+Provides information about a Launch Configuration.
+-}
+data LaunchConfigurationData s = LaunchConfigurationData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the launch configuration. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (LaunchConfigurationData s) where
+    toHCL LaunchConfigurationData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (LaunchConfigurationData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: LaunchConfigurationData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: LaunchConfigurationData s)
+
+instance s ~ s' => P.HasComputedAssociatePublicIpAddress (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedAssociatePublicIpAddress x = TF.compute (TF.refKey x) "associate_public_ip_address"
+
+instance s ~ s' => P.HasComputedEbsBlockDevice (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedEbsBlockDevice x = TF.compute (TF.refKey x) "ebs_block_device"
+
+instance s ~ s' => P.HasComputedEbsOptimized (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedEbsOptimized x = TF.compute (TF.refKey x) "ebs_optimized"
+
+instance s ~ s' => P.HasComputedEnableMonitoring (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Bool) where
+    computedEnableMonitoring x = TF.compute (TF.refKey x) "enable_monitoring"
+
+instance s ~ s' => P.HasComputedEphemeralBlockDevice (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedEphemeralBlockDevice x = TF.compute (TF.refKey x) "ephemeral_block_device"
+
+instance s ~ s' => P.HasComputedIamInstanceProfile (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedIamInstanceProfile x = TF.compute (TF.refKey x) "iam_instance_profile"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedImageId (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedImageId x = TF.compute (TF.refKey x) "image_id"
+
+instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedInstanceType x = TF.compute (TF.refKey x) "instance_type"
+
+instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedKeyName x = TF.compute (TF.refKey x) "key_name"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedPlacementTenancy (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedPlacementTenancy x = TF.compute (TF.refKey x) "placement_tenancy"
+
+instance s ~ s' => P.HasComputedRootBlockDevice (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedRootBlockDevice x = TF.compute (TF.refKey x) "root_block_device"
+
+instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedSecurityGroups x = TF.compute (TF.refKey x) "security_groups"
+
+instance s ~ s' => P.HasComputedSpotPrice (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedSpotPrice x = TF.compute (TF.refKey x) "spot_price"
+
+instance s ~ s' => P.HasComputedUserData (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedUserData x = TF.compute (TF.refKey x) "user_data"
+
+instance s ~ s' => P.HasComputedVpcClassicLinkId (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedVpcClassicLinkId x = TF.compute (TF.refKey x) "vpc_classic_link_id"
+
+instance s ~ s' => P.HasComputedVpcClassicLinkSecurityGroups (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
+    computedVpcClassicLinkSecurityGroups x = TF.compute (TF.refKey x) "vpc_classic_link_security_groups"
+
+launchConfigurationData :: TF.DataSource P.AWS (LaunchConfigurationData s)
+launchConfigurationData =
+    TF.newDataSource "aws_launch_configuration" $
+        LaunchConfigurationData {
+              _name = TF.Nil
+            }
+
 {- | The @aws_lb@ AWS datasource.
 
 ~> Note:  @aws_alb@ is known as @aws_lb@ . The functionality is identical.
@@ -3816,6 +4946,51 @@ lbTargetGroupData =
             , _name = TF.Nil
             }
 
+{- | The @aws_mq_broker@ AWS datasource.
+
+Provides information about a MQ Broker.
+-}
+data MqBrokerData s = MqBrokerData {
+      _broker_id   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The unique id of the mq broker. -}
+    , _broker_name :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The unique name of the mq broker. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (MqBrokerData s) where
+    toHCL MqBrokerData{..} = TF.inline $ catMaybes
+        [ TF.assign "broker_id" <$> TF.attribute _broker_id
+        , TF.assign "broker_name" <$> TF.attribute _broker_name
+        ]
+
+instance P.HasBrokerId (MqBrokerData s) (TF.Attr s P.Text) where
+    brokerId =
+        lens (_broker_id :: MqBrokerData s -> TF.Attr s P.Text)
+             (\s a -> s { _broker_id = a } :: MqBrokerData s)
+
+instance P.HasBrokerName (MqBrokerData s) (TF.Attr s P.Text) where
+    brokerName =
+        lens (_broker_name :: MqBrokerData s -> TF.Attr s P.Text)
+             (\s a -> s { _broker_name = a } :: MqBrokerData s)
+
+instance s ~ s' => P.HasComputedBrokerId (TF.Ref s' (MqBrokerData s)) (TF.Attr s P.Text) where
+    computedBrokerId =
+        (_broker_id :: MqBrokerData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedBrokerName (TF.Ref s' (MqBrokerData s)) (TF.Attr s P.Text) where
+    computedBrokerName =
+        (_broker_name :: MqBrokerData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+mqBrokerData :: TF.DataSource P.AWS (MqBrokerData s)
+mqBrokerData =
+    TF.newDataSource "aws_mq_broker" $
+        MqBrokerData {
+              _broker_id = TF.Nil
+            , _broker_name = TF.Nil
+            }
+
 {- | The @aws_nat_gateway@ AWS datasource.
 
 Provides details about a specific Nat Gateway.
@@ -3940,6 +5115,68 @@ natGatewayData =
             , _state = TF.Nil
             , _subnet_id = TF.Nil
             , _values = TF.Nil
+            , _vpc_id = TF.Nil
+            }
+
+{- | The @aws_network_acls@ AWS datasource.
+
+
+-}
+data NetworkAclsData s = NetworkAclsData {
+      _filter :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Custom filter block as described below. -}
+    , _tags   :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired network ACLs. -}
+    , _vpc_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The VPC ID that you want to filter from. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (NetworkAclsData s) where
+    toHCL NetworkAclsData{..} = TF.inline $ catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        ]
+
+instance P.HasFilter (NetworkAclsData s) (TF.Attr s P.Text) where
+    filter =
+        lens (_filter :: NetworkAclsData s -> TF.Attr s P.Text)
+             (\s a -> s { _filter = a } :: NetworkAclsData s)
+
+instance P.HasTags (NetworkAclsData s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: NetworkAclsData s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: NetworkAclsData s)
+
+instance P.HasVpcId (NetworkAclsData s) (TF.Attr s P.Text) where
+    vpcId =
+        lens (_vpc_id :: NetworkAclsData s -> TF.Attr s P.Text)
+             (\s a -> s { _vpc_id = a } :: NetworkAclsData s)
+
+instance s ~ s' => P.HasComputedFilter (TF.Ref s' (NetworkAclsData s)) (TF.Attr s P.Text) where
+    computedFilter =
+        (_filter :: NetworkAclsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedIds (TF.Ref s' (NetworkAclsData s)) (TF.Attr s P.Text) where
+    computedIds x = TF.compute (TF.refKey x) "ids"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkAclsData s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
+        (_tags :: NetworkAclsData s -> TF.Attr s (P.Tags s))
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (NetworkAclsData s)) (TF.Attr s P.Text) where
+    computedVpcId =
+        (_vpc_id :: NetworkAclsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+networkAclsData :: TF.DataSource P.AWS (NetworkAclsData s)
+networkAclsData =
+    TF.newDataSource "aws_network_acls" $
+        NetworkAclsData {
+              _filter = TF.Nil
+            , _tags = TF.Nil
             , _vpc_id = TF.Nil
             }
 
@@ -4079,6 +5316,55 @@ prefixListData =
             , _prefix_list_id = TF.Nil
             }
 
+{- | The @aws_pricing_product@ AWS datasource.
+
+Use this data source to get the pricing information of all products in AWS.
+This data source is only available in a us-east-1 or ap-south-1 provider.
+-}
+data PricingProductData s = PricingProductData {
+      _filters      :: !(TF.Attr s P.Text)
+    {- ^ (Required) A list of filters. Passed directly to the API (see GetProducts API reference). These filters must describe a single product, this resource will fail if more than one product is returned by the API. -}
+    , _service_code :: !(TF.Attr s P.Text)
+    {- ^ (Required) The code of the service. Available service codes can be fetched using the DescribeServices pricing API call. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (PricingProductData s) where
+    toHCL PricingProductData{..} = TF.inline $ catMaybes
+        [ TF.assign "filters" <$> TF.attribute _filters
+        , TF.assign "service_code" <$> TF.attribute _service_code
+        ]
+
+instance P.HasFilters (PricingProductData s) (TF.Attr s P.Text) where
+    filters =
+        lens (_filters :: PricingProductData s -> TF.Attr s P.Text)
+             (\s a -> s { _filters = a } :: PricingProductData s)
+
+instance P.HasServiceCode (PricingProductData s) (TF.Attr s P.Text) where
+    serviceCode =
+        lens (_service_code :: PricingProductData s -> TF.Attr s P.Text)
+             (\s a -> s { _service_code = a } :: PricingProductData s)
+
+instance s ~ s' => P.HasComputedFilters (TF.Ref s' (PricingProductData s)) (TF.Attr s P.Text) where
+    computedFilters =
+        (_filters :: PricingProductData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResult (TF.Ref s' (PricingProductData s)) (TF.Attr s P.Text) where
+    computedResult x = TF.compute (TF.refKey x) "result"
+
+instance s ~ s' => P.HasComputedServiceCode (TF.Ref s' (PricingProductData s)) (TF.Attr s P.Text) where
+    computedServiceCode =
+        (_service_code :: PricingProductData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+pricingProductData :: TF.DataSource P.AWS (PricingProductData s)
+pricingProductData =
+    TF.newDataSource "aws_pricing_product" $
+        PricingProductData {
+              _filters = TF.Nil
+            , _service_code = TF.Nil
+            }
+
 {- | The @aws_rds_cluster@ AWS datasource.
 
 Provides information about a RDS cluster.
@@ -4110,44 +5396,117 @@ rdsClusterData =
               _cluster_identifier = TF.Nil
             }
 
-{- | The @aws_redshift_service_account@ AWS datasource.
+{- | The @aws_redshift_cluster@ AWS datasource.
 
-Use this data source to get the Account ID of the
-<http://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing.html#db-auditing-enable-logging>
-in a given region for the purpose of allowing Redshift to store audit data
-in S3.
+Provides details about a specific redshift cluster.
 -}
-data RedshiftServiceAccountData s = RedshiftServiceAccountData {
-      _region :: !(TF.Attr s P.Region)
-    {- ^ (Optional) Name of the region whose AWS Redshift account ID is desired. Defaults to the region from the AWS provider configuration. -}
+data RedshiftClusterData s = RedshiftClusterData {
+      _cluster_identifier :: !(TF.Attr s P.Text)
+    {- ^ (Required) The cluster identifier -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RedshiftServiceAccountData s) where
-    toHCL RedshiftServiceAccountData{..} = TF.inline $ catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
+instance TF.ToHCL (RedshiftClusterData s) where
+    toHCL RedshiftClusterData{..} = TF.inline $ catMaybes
+        [ TF.assign "cluster_identifier" <$> TF.attribute _cluster_identifier
         ]
 
-instance P.HasRegion (RedshiftServiceAccountData s) (TF.Attr s P.Region) where
-    region =
-        lens (_region :: RedshiftServiceAccountData s -> TF.Attr s P.Region)
-             (\s a -> s { _region = a } :: RedshiftServiceAccountData s)
+instance P.HasClusterIdentifier (RedshiftClusterData s) (TF.Attr s P.Text) where
+    clusterIdentifier =
+        lens (_cluster_identifier :: RedshiftClusterData s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_identifier = a } :: RedshiftClusterData s)
 
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (RedshiftServiceAccountData s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+instance s ~ s' => P.HasComputedAllowVersionUpgrade (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedAllowVersionUpgrade x = TF.compute (TF.refKey x) "allow_version_upgrade"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RedshiftServiceAccountData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedAutomatedSnapshotRetentionPeriod (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedAutomatedSnapshotRetentionPeriod x = TF.compute (TF.refKey x) "automated_snapshot_retention_period"
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (RedshiftServiceAccountData s)) (TF.Attr s P.Region) where
-    computedRegion =
-        (_region :: RedshiftServiceAccountData s -> TF.Attr s P.Region)
-            . TF.refValue
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Zone) where
+    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
-redshiftServiceAccountData :: TF.DataSource P.AWS (RedshiftServiceAccountData s)
-redshiftServiceAccountData =
-    TF.newDataSource "aws_redshift_service_account" $
-        RedshiftServiceAccountData {
-              _region = TF.Nil
+instance s ~ s' => P.HasComputedBucketName (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedBucketName x = TF.compute (TF.refKey x) "bucket_name"
+
+instance s ~ s' => P.HasComputedClusterIdentifier (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedClusterIdentifier x = TF.compute (TF.refKey x) "cluster_identifier"
+
+instance s ~ s' => P.HasComputedClusterParameterGroupName (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedClusterParameterGroupName x = TF.compute (TF.refKey x) "cluster_parameter_group_name"
+
+instance s ~ s' => P.HasComputedClusterPublicKey (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedClusterPublicKey x = TF.compute (TF.refKey x) "cluster_public_key"
+
+instance s ~ s' => P.HasComputedClusterRevisionNumber (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedClusterRevisionNumber x = TF.compute (TF.refKey x) "cluster_revision_number"
+
+instance s ~ s' => P.HasComputedClusterSecurityGroups (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedClusterSecurityGroups x = TF.compute (TF.refKey x) "cluster_security_groups"
+
+instance s ~ s' => P.HasComputedClusterSubnetGroupName (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedClusterSubnetGroupName x = TF.compute (TF.refKey x) "cluster_subnet_group_name"
+
+instance s ~ s' => P.HasComputedClusterType (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedClusterType x = TF.compute (TF.refKey x) "cluster_type"
+
+instance s ~ s' => P.HasComputedDatabaseName (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedDatabaseName x = TF.compute (TF.refKey x) "database_name"
+
+instance s ~ s' => P.HasComputedElasticIp (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedElasticIp x = TF.compute (TF.refKey x) "elastic_ip"
+
+instance s ~ s' => P.HasComputedEnableLogging (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Bool) where
+    computedEnableLogging x = TF.compute (TF.refKey x) "enable_logging"
+
+instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedEncrypted x = TF.compute (TF.refKey x) "encrypted"
+
+instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
+
+instance s ~ s' => P.HasComputedEnhancedVpcRouting (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedEnhancedVpcRouting x = TF.compute (TF.refKey x) "enhanced_vpc_routing"
+
+instance s ~ s' => P.HasComputedIamRoles (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedIamRoles x = TF.compute (TF.refKey x) "iam_roles"
+
+instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedKmsKeyId x = TF.compute (TF.refKey x) "kms_key_id"
+
+instance s ~ s' => P.HasComputedMasterUsername (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedMasterUsername x = TF.compute (TF.refKey x) "master_username"
+
+instance s ~ s' => P.HasComputedNodeType (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedNodeType x = TF.compute (TF.refKey x) "node_type"
+
+instance s ~ s' => P.HasComputedNumberOfNodes (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedNumberOfNodes x = TF.compute (TF.refKey x) "number_of_nodes"
+
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedPort x = TF.compute (TF.refKey x) "port"
+
+instance s ~ s' => P.HasComputedPreferredMaintenanceWindow (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedPreferredMaintenanceWindow x = TF.compute (TF.refKey x) "preferred_maintenance_window"
+
+instance s ~ s' => P.HasComputedPubliclyAccessible (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedPubliclyAccessible x = TF.compute (TF.refKey x) "publicly_accessible"
+
+instance s ~ s' => P.HasComputedS3KeyPrefix (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedS3KeyPrefix x = TF.compute (TF.refKey x) "s3_key_prefix"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s (P.Tags s)) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
+
+instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "vpc_security_group_ids"
+
+redshiftClusterData :: TF.DataSource P.AWS (RedshiftClusterData s)
+redshiftClusterData =
+    TF.newDataSource "aws_redshift_cluster" $
+        RedshiftClusterData {
+              _cluster_identifier = TF.Nil
             }
 
 {- | The @aws_region@ AWS datasource.
@@ -4262,6 +5621,9 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (Route53ZoneData s)) (TF.Attr s 
         (_name :: Route53ZoneData s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (Route53ZoneData s)) (TF.Attr s P.Text) where
+    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
+
 instance s ~ s' => P.HasComputedPrivateZone (TF.Ref s' (Route53ZoneData s)) (TF.Attr s P.Text) where
     computedPrivateZone =
         (_private_zone :: Route53ZoneData s -> TF.Attr s P.Text)
@@ -4294,6 +5656,151 @@ route53ZoneData =
             , _tags = TF.Nil
             , _vpc_id = TF.Nil
             , _zone_id = TF.Nil
+            }
+
+{- | The @aws_route@ AWS datasource.
+
+@aws_route@ provides details about a specific Route. This resource can prove
+useful when finding the resource associated with a CIDR. For example,
+finding the peering connection associated with a CIDR value.
+-}
+data RouteData s = RouteData {
+      _destination_cidr_block      :: !(TF.Attr s P.IPRange)
+    {- ^ (Optional) The CIDR block of the Route belonging to the Route Table. -}
+    , _destination_ipv6_cidr_block :: !(TF.Attr s P.IPRange)
+    {- ^ (Optional) The IPv6 CIDR block of the Route belonging to the Route Table. -}
+    , _egress_only_gateway_id      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Egress Only Gateway ID of the Route belonging to the Route Table. -}
+    , _gateway_id                  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Gateway ID of the Route belonging to the Route Table. -}
+    , _instance_id                 :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Instance ID of the Route belonging to the Route Table. -}
+    , _nat_gateway_id              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The NAT Gateway ID of the Route belonging to the Route Table. -}
+    , _network_interface_id        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Network Interface ID of the Route belonging to the Route Table. -}
+    , _route_table_id              :: !(TF.Attr s P.Text)
+    {- ^ (Required) The id of the specific Route Table containing the Route entry. -}
+    , _vpc_peering_connection_id   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The VPC Peering Connection ID of the Route belonging to the Route Table. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (RouteData s) where
+    toHCL RouteData{..} = TF.inline $ catMaybes
+        [ TF.assign "destination_cidr_block" <$> TF.attribute _destination_cidr_block
+        , TF.assign "destination_ipv6_cidr_block" <$> TF.attribute _destination_ipv6_cidr_block
+        , TF.assign "egress_only_gateway_id" <$> TF.attribute _egress_only_gateway_id
+        , TF.assign "gateway_id" <$> TF.attribute _gateway_id
+        , TF.assign "instance_id" <$> TF.attribute _instance_id
+        , TF.assign "nat_gateway_id" <$> TF.attribute _nat_gateway_id
+        , TF.assign "network_interface_id" <$> TF.attribute _network_interface_id
+        , TF.assign "route_table_id" <$> TF.attribute _route_table_id
+        , TF.assign "vpc_peering_connection_id" <$> TF.attribute _vpc_peering_connection_id
+        ]
+
+instance P.HasDestinationCidrBlock (RouteData s) (TF.Attr s P.IPRange) where
+    destinationCidrBlock =
+        lens (_destination_cidr_block :: RouteData s -> TF.Attr s P.IPRange)
+             (\s a -> s { _destination_cidr_block = a } :: RouteData s)
+
+instance P.HasDestinationIpv6CidrBlock (RouteData s) (TF.Attr s P.IPRange) where
+    destinationIpv6CidrBlock =
+        lens (_destination_ipv6_cidr_block :: RouteData s -> TF.Attr s P.IPRange)
+             (\s a -> s { _destination_ipv6_cidr_block = a } :: RouteData s)
+
+instance P.HasEgressOnlyGatewayId (RouteData s) (TF.Attr s P.Text) where
+    egressOnlyGatewayId =
+        lens (_egress_only_gateway_id :: RouteData s -> TF.Attr s P.Text)
+             (\s a -> s { _egress_only_gateway_id = a } :: RouteData s)
+
+instance P.HasGatewayId (RouteData s) (TF.Attr s P.Text) where
+    gatewayId =
+        lens (_gateway_id :: RouteData s -> TF.Attr s P.Text)
+             (\s a -> s { _gateway_id = a } :: RouteData s)
+
+instance P.HasInstanceId (RouteData s) (TF.Attr s P.Text) where
+    instanceId =
+        lens (_instance_id :: RouteData s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_id = a } :: RouteData s)
+
+instance P.HasNatGatewayId (RouteData s) (TF.Attr s P.Text) where
+    natGatewayId =
+        lens (_nat_gateway_id :: RouteData s -> TF.Attr s P.Text)
+             (\s a -> s { _nat_gateway_id = a } :: RouteData s)
+
+instance P.HasNetworkInterfaceId (RouteData s) (TF.Attr s P.Text) where
+    networkInterfaceId =
+        lens (_network_interface_id :: RouteData s -> TF.Attr s P.Text)
+             (\s a -> s { _network_interface_id = a } :: RouteData s)
+
+instance P.HasRouteTableId (RouteData s) (TF.Attr s P.Text) where
+    routeTableId =
+        lens (_route_table_id :: RouteData s -> TF.Attr s P.Text)
+             (\s a -> s { _route_table_id = a } :: RouteData s)
+
+instance P.HasVpcPeeringConnectionId (RouteData s) (TF.Attr s P.Text) where
+    vpcPeeringConnectionId =
+        lens (_vpc_peering_connection_id :: RouteData s -> TF.Attr s P.Text)
+             (\s a -> s { _vpc_peering_connection_id = a } :: RouteData s)
+
+instance s ~ s' => P.HasComputedDestinationCidrBlock (TF.Ref s' (RouteData s)) (TF.Attr s P.IPRange) where
+    computedDestinationCidrBlock =
+        (_destination_cidr_block :: RouteData s -> TF.Attr s P.IPRange)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDestinationIpv6CidrBlock (TF.Ref s' (RouteData s)) (TF.Attr s P.IPRange) where
+    computedDestinationIpv6CidrBlock =
+        (_destination_ipv6_cidr_block :: RouteData s -> TF.Attr s P.IPRange)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEgressOnlyGatewayId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
+    computedEgressOnlyGatewayId =
+        (_egress_only_gateway_id :: RouteData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedGatewayId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
+    computedGatewayId =
+        (_gateway_id :: RouteData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
+    computedInstanceId =
+        (_instance_id :: RouteData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNatGatewayId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
+    computedNatGatewayId =
+        (_nat_gateway_id :: RouteData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNetworkInterfaceId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
+    computedNetworkInterfaceId =
+        (_network_interface_id :: RouteData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
+    computedRouteTableId =
+        (_route_table_id :: RouteData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVpcPeeringConnectionId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
+    computedVpcPeeringConnectionId =
+        (_vpc_peering_connection_id :: RouteData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+routeData :: TF.DataSource P.AWS (RouteData s)
+routeData =
+    TF.newDataSource "aws_route" $
+        RouteData {
+              _destination_cidr_block = TF.Nil
+            , _destination_ipv6_cidr_block = TF.Nil
+            , _egress_only_gateway_id = TF.Nil
+            , _gateway_id = TF.Nil
+            , _instance_id = TF.Nil
+            , _nat_gateway_id = TF.Nil
+            , _network_interface_id = TF.Nil
+            , _route_table_id = TF.Nil
+            , _vpc_peering_connection_id = TF.Nil
             }
 
 {- | The @aws_route_table@ AWS datasource.
@@ -4405,6 +5912,69 @@ routeTableData =
               _filter = TF.Nil
             , _route_table_id = TF.Nil
             , _subnet_id = TF.Nil
+            , _tags = TF.Nil
+            , _vpc_id = TF.Nil
+            }
+
+{- | The @aws_route_tables@ AWS datasource.
+
+This resource can be useful for getting back a list of route table ids to be
+referenced elsewhere.
+-}
+data RouteTablesData s = RouteTablesData {
+      _filter :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Custom filter block as described below. -}
+    , _tags   :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired route tables. -}
+    , _vpc_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The VPC ID that you want to filter from. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (RouteTablesData s) where
+    toHCL RouteTablesData{..} = TF.inline $ catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        ]
+
+instance P.HasFilter (RouteTablesData s) (TF.Attr s P.Text) where
+    filter =
+        lens (_filter :: RouteTablesData s -> TF.Attr s P.Text)
+             (\s a -> s { _filter = a } :: RouteTablesData s)
+
+instance P.HasTags (RouteTablesData s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: RouteTablesData s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: RouteTablesData s)
+
+instance P.HasVpcId (RouteTablesData s) (TF.Attr s P.Text) where
+    vpcId =
+        lens (_vpc_id :: RouteTablesData s -> TF.Attr s P.Text)
+             (\s a -> s { _vpc_id = a } :: RouteTablesData s)
+
+instance s ~ s' => P.HasComputedFilter (TF.Ref s' (RouteTablesData s)) (TF.Attr s P.Text) where
+    computedFilter =
+        (_filter :: RouteTablesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedIds (TF.Ref s' (RouteTablesData s)) (TF.Attr s P.Text) where
+    computedIds x = TF.compute (TF.refKey x) "ids"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (RouteTablesData s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
+        (_tags :: RouteTablesData s -> TF.Attr s (P.Tags s))
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (RouteTablesData s)) (TF.Attr s P.Text) where
+    computedVpcId =
+        (_vpc_id :: RouteTablesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+routeTablesData :: TF.DataSource P.AWS (RouteTablesData s)
+routeTablesData =
+    TF.newDataSource "aws_route_tables" $
+        RouteTablesData {
+              _filter = TF.Nil
             , _tags = TF.Nil
             , _vpc_id = TF.Nil
             }
@@ -4576,6 +6146,137 @@ s3BucketObjectData =
             , _version_id = TF.Nil
             }
 
+{- | The @aws_secretsmanager_secret@ AWS datasource.
+
+Retrieve metadata information about a Secrets Manager secret. To retrieve a
+secret value, see the
+</docs/providers/aws/d/secretsmanager_secret_version.html> .
+-}
+data SecretsmanagerSecretData s = SecretsmanagerSecretData {
+      _arn  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Amazon Resource Name (ARN) of the secret to retrieve. -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the secret to retrieve. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SecretsmanagerSecretData s) where
+    toHCL SecretsmanagerSecretData{..} = TF.inline $ catMaybes
+        [ TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasArn (SecretsmanagerSecretData s) (TF.Attr s P.Text) where
+    arn =
+        lens (_arn :: SecretsmanagerSecretData s -> TF.Attr s P.Text)
+             (\s a -> s { _arn = a } :: SecretsmanagerSecretData s)
+
+instance P.HasName (SecretsmanagerSecretData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: SecretsmanagerSecretData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SecretsmanagerSecretData s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
+    computedKmsKeyId x = TF.compute (TF.refKey x) "kms_key_id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: SecretsmanagerSecretData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRotationEnabled (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Bool) where
+    computedRotationEnabled x = TF.compute (TF.refKey x) "rotation_enabled"
+
+instance s ~ s' => P.HasComputedRotationLambdaArn (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
+    computedRotationLambdaArn x = TF.compute (TF.refKey x) "rotation_lambda_arn"
+
+instance s ~ s' => P.HasComputedRotationRules (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
+    computedRotationRules x = TF.compute (TF.refKey x) "rotation_rules"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s (P.Tags s)) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+secretsmanagerSecretData :: TF.DataSource P.AWS (SecretsmanagerSecretData s)
+secretsmanagerSecretData =
+    TF.newDataSource "aws_secretsmanager_secret" $
+        SecretsmanagerSecretData {
+              _arn = TF.Nil
+            , _name = TF.Nil
+            }
+
+{- | The @aws_secretsmanager_secret_version@ AWS datasource.
+
+Retrieve information about a Secrets Manager secret version includings its
+secret value. To retrieve secret metadata, see the
+</docs/providers/aws/d/secretsmanager_secret.html> .
+-}
+data SecretsmanagerSecretVersionData s = SecretsmanagerSecretVersionData {
+      _secret_id     :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the secret containing the version that you want to retrieve. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. -}
+    , _version_id    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Specifies the unique identifier of the version of the secret that you want to retrieve. Overrides @version_stage@ . -}
+    , _version_stage :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Specifies the secret version that you want to retrieve by the staging label attached to the version. Defaults to @AWSCURRENT@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SecretsmanagerSecretVersionData s) where
+    toHCL SecretsmanagerSecretVersionData{..} = TF.inline $ catMaybes
+        [ TF.assign "secret_id" <$> TF.attribute _secret_id
+        , TF.assign "version_id" <$> TF.attribute _version_id
+        , TF.assign "version_stage" <$> TF.attribute _version_stage
+        ]
+
+instance P.HasSecretId (SecretsmanagerSecretVersionData s) (TF.Attr s P.Text) where
+    secretId =
+        lens (_secret_id :: SecretsmanagerSecretVersionData s -> TF.Attr s P.Text)
+             (\s a -> s { _secret_id = a } :: SecretsmanagerSecretVersionData s)
+
+instance P.HasVersionId (SecretsmanagerSecretVersionData s) (TF.Attr s P.Text) where
+    versionId =
+        lens (_version_id :: SecretsmanagerSecretVersionData s -> TF.Attr s P.Text)
+             (\s a -> s { _version_id = a } :: SecretsmanagerSecretVersionData s)
+
+instance P.HasVersionStage (SecretsmanagerSecretVersionData s) (TF.Attr s P.Text) where
+    versionStage =
+        lens (_version_stage :: SecretsmanagerSecretVersionData s -> TF.Attr s P.Text)
+             (\s a -> s { _version_stage = a } :: SecretsmanagerSecretVersionData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedSecretId (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s P.Text) where
+    computedSecretId =
+        (_secret_id :: SecretsmanagerSecretVersionData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSecretString (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s P.Text) where
+    computedSecretString x = TF.compute (TF.refKey x) "secret_string"
+
+instance s ~ s' => P.HasComputedVersionId (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s P.Text) where
+    computedVersionId x = TF.compute (TF.refKey x) "version_id"
+
+instance s ~ s' => P.HasComputedVersionStage (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s P.Text) where
+    computedVersionStage =
+        (_version_stage :: SecretsmanagerSecretVersionData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+secretsmanagerSecretVersionData :: TF.DataSource P.AWS (SecretsmanagerSecretVersionData s)
+secretsmanagerSecretVersionData =
+    TF.newDataSource "aws_secretsmanager_secret_version" $
+        SecretsmanagerSecretVersionData {
+              _secret_id = TF.Nil
+            , _version_id = TF.Nil
+            , _version_stage = TF.Nil
+            }
+
 {- | The @aws_security_group@ AWS datasource.
 
 @aws_security_group@ provides details about a specific Security Group. This
@@ -4672,6 +6373,58 @@ securityGroupData =
             , _vpc_id = TF.Nil
             }
 
+{- | The @aws_security_groups@ AWS datasource.
+
+Use this data source to get IDs and VPC membership of Security Groups that
+are created outside of Terraform.
+-}
+data SecurityGroupsData s = SecurityGroupsData {
+      _filter :: !(TF.Attr s P.Text)
+    {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-security-groups.html> . -}
+    , _tags   :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) A mapping of tags, each pair of which must exactly match for desired security groups. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SecurityGroupsData s) where
+    toHCL SecurityGroupsData{..} = TF.inline $ catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance P.HasFilter (SecurityGroupsData s) (TF.Attr s P.Text) where
+    filter =
+        lens (_filter :: SecurityGroupsData s -> TF.Attr s P.Text)
+             (\s a -> s { _filter = a } :: SecurityGroupsData s)
+
+instance P.HasTags (SecurityGroupsData s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: SecurityGroupsData s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: SecurityGroupsData s)
+
+instance s ~ s' => P.HasComputedFilter (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
+    computedFilter =
+        (_filter :: SecurityGroupsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedIds (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
+    computedIds x = TF.compute (TF.refKey x) "ids"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
+        (_tags :: SecurityGroupsData s -> TF.Attr s (P.Tags s))
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVpcIds (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
+    computedVpcIds x = TF.compute (TF.refKey x) "vpc_ids"
+
+securityGroupsData :: TF.DataSource P.AWS (SecurityGroupsData s)
+securityGroupsData =
+    TF.newDataSource "aws_security_groups" $
+        SecurityGroupsData {
+              _filter = TF.Nil
+            , _tags = TF.Nil
+            }
+
 {- | The @aws_sns_topic@ AWS datasource.
 
 Use this data source to get the ARN of a topic in AWS Simple Notification
@@ -4705,6 +6458,45 @@ snsTopicData :: TF.DataSource P.AWS (SnsTopicData s)
 snsTopicData =
     TF.newDataSource "aws_sns_topic" $
         SnsTopicData {
+              _name = TF.Nil
+            }
+
+{- | The @aws_sqs_queue@ AWS datasource.
+
+Use this data source to get the ARN and URL of queue in AWS Simple Queue
+Service (SQS). By using this data source, you can reference SQS queues
+without having to hardcode the ARNs as input.
+-}
+data SqsQueueData s = SqsQueueData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the queue to match. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SqsQueueData s) where
+    toHCL SqsQueueData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (SqsQueueData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: SqsQueueData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SqsQueueData s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (SqsQueueData s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SqsQueueData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: SqsQueueData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (SqsQueueData s)) (TF.Attr s P.Text) where
+    computedUrl x = TF.compute (TF.refKey x) "url"
+
+sqsQueueData :: TF.DataSource P.AWS (SqsQueueData s)
+sqsQueueData =
+    TF.newDataSource "aws_sqs_queue" $
+        SqsQueueData {
               _name = TF.Nil
             }
 
@@ -5080,6 +6872,70 @@ vpcData =
             , _tags = TF.Nil
             }
 
+{- | The @aws_vpc_dhcp_options@ AWS datasource.
+
+Retrieve information about an EC2 DHCP Options configuration.
+-}
+data VpcDhcpOptionsData s = VpcDhcpOptionsData {
+      _dhcp_options_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The EC2 DHCP Options ID. -}
+    , _filter          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of custom filters as described below. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (VpcDhcpOptionsData s) where
+    toHCL VpcDhcpOptionsData{..} = TF.inline $ catMaybes
+        [ TF.assign "dhcp_options_id" <$> TF.attribute _dhcp_options_id
+        , TF.assign "filter" <$> TF.attribute _filter
+        ]
+
+instance P.HasDhcpOptionsId (VpcDhcpOptionsData s) (TF.Attr s P.Text) where
+    dhcpOptionsId =
+        lens (_dhcp_options_id :: VpcDhcpOptionsData s -> TF.Attr s P.Text)
+             (\s a -> s { _dhcp_options_id = a } :: VpcDhcpOptionsData s)
+
+instance P.HasFilter (VpcDhcpOptionsData s) (TF.Attr s P.Text) where
+    filter =
+        lens (_filter :: VpcDhcpOptionsData s -> TF.Attr s P.Text)
+             (\s a -> s { _filter = a } :: VpcDhcpOptionsData s)
+
+instance s ~ s' => P.HasComputedDhcpOptionsId (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
+    computedDhcpOptionsId x = TF.compute (TF.refKey x) "dhcp_options_id"
+
+instance s ~ s' => P.HasComputedDomainName (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
+    computedDomainName x = TF.compute (TF.refKey x) "domain_name"
+
+instance s ~ s' => P.HasComputedDomainNameServers (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
+    computedDomainNameServers x = TF.compute (TF.refKey x) "domain_name_servers"
+
+instance s ~ s' => P.HasComputedFilter (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
+    computedFilter =
+        (_filter :: VpcDhcpOptionsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedNetbiosNameServers (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
+    computedNetbiosNameServers x = TF.compute (TF.refKey x) "netbios_name_servers"
+
+instance s ~ s' => P.HasComputedNetbiosNodeType (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
+    computedNetbiosNodeType x = TF.compute (TF.refKey x) "netbios_node_type"
+
+instance s ~ s' => P.HasComputedNtpServers (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
+    computedNtpServers x = TF.compute (TF.refKey x) "ntp_servers"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s (P.Tags s)) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+vpcDhcpOptionsData :: TF.DataSource P.AWS (VpcDhcpOptionsData s)
+vpcDhcpOptionsData =
+    TF.newDataSource "aws_vpc_dhcp_options" $
+        VpcDhcpOptionsData {
+              _dhcp_options_id = TF.Nil
+            , _filter = TF.Nil
+            }
+
 {- | The @aws_vpc_endpoint@ AWS datasource.
 
 The VPC Endpoint data source provides details about a specific VPC endpoint.
@@ -5441,6 +7297,56 @@ vpcPeeringConnectionData =
             , _status = TF.Nil
             , _tags = TF.Nil
             , _vpc_id = TF.Nil
+            }
+
+{- | The @aws_vpcs@ AWS datasource.
+
+This resource can be useful for getting back a list of VPC Ids for a region.
+The following example retrieves a list of VPC Ids with a custom tag of
+@service@ set to a value of "production".
+-}
+data VpcsData s = VpcsData {
+      _filter :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Custom filter block as described below. -}
+    , _tags   :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired vpcs. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (VpcsData s) where
+    toHCL VpcsData{..} = TF.inline $ catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance P.HasFilter (VpcsData s) (TF.Attr s P.Text) where
+    filter =
+        lens (_filter :: VpcsData s -> TF.Attr s P.Text)
+             (\s a -> s { _filter = a } :: VpcsData s)
+
+instance P.HasTags (VpcsData s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: VpcsData s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: VpcsData s)
+
+instance s ~ s' => P.HasComputedFilter (TF.Ref s' (VpcsData s)) (TF.Attr s P.Text) where
+    computedFilter =
+        (_filter :: VpcsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedIds (TF.Ref s' (VpcsData s)) (TF.Attr s P.Text) where
+    computedIds x = TF.compute (TF.refKey x) "ids"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcsData s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
+        (_tags :: VpcsData s -> TF.Attr s (P.Tags s))
+            . TF.refValue
+
+vpcsData :: TF.DataSource P.AWS (VpcsData s)
+vpcsData =
+    TF.newDataSource "aws_vpcs" $
+        VpcsData {
+              _filter = TF.Nil
+            , _tags = TF.Nil
             }
 
 {- | The @aws_vpn_gateway@ AWS datasource.

@@ -24,7 +24,13 @@
 module Terrafomo.OneAndOne.Resource
     (
     -- * Types
-      InstanceSizeResource (..)
+      BlockStorageResource (..)
+    , blockStorageResource
+
+    , ImageResource (..)
+    , imageResource
+
+    , InstanceSizeResource (..)
     , instanceSizeResource
 
     , IpResource (..)
@@ -32,6 +38,9 @@ module Terrafomo.OneAndOne.Resource
 
     , ServerResource (..)
     , serverResource
+
+    , SshKeyResource (..)
+    , sshKeyResource
 
     , VpnResource (..)
     , vpnResource
@@ -49,6 +58,7 @@ module Terrafomo.OneAndOne.Resource
     , P.HasFileName (..)
     , P.HasFirewallPolicyId (..)
     , P.HasFixedInstanceSize (..)
+    , P.HasFrequency (..)
     , P.HasHdds (..)
     , P.HasHealthCheckInterval (..)
     , P.HasHealthCheckPath (..)
@@ -63,17 +73,24 @@ module Terrafomo.OneAndOne.Resource
     , P.HasMonitoringPolicyId (..)
     , P.HasName (..)
     , P.HasNetworkAddress (..)
+    , P.HasNumImages (..)
+    , P.HasOsId (..)
     , P.HasPassword (..)
     , P.HasPersistence (..)
     , P.HasPersistenceTime (..)
+    , P.HasPublicKey (..)
     , P.HasRam (..)
     , P.HasReverseDns (..)
+    , P.HasServerId (..)
     , P.HasServerIds (..)
     , P.HasSize (..)
+    , P.HasSource (..)
     , P.HasSshKeyPath (..)
     , P.HasSshKeyPublic (..)
     , P.HasStorageServers (..)
     , P.HasSubnetMask (..)
+    , P.HasType' (..)
+    , P.HasUrl (..)
     , P.HasVcores (..)
 
     -- ** Computed Attributes
@@ -88,6 +105,7 @@ module Terrafomo.OneAndOne.Resource
     , P.HasComputedFileName (..)
     , P.HasComputedFirewallPolicyId (..)
     , P.HasComputedFixedInstanceSize (..)
+    , P.HasComputedFrequency (..)
     , P.HasComputedHdds (..)
     , P.HasComputedHealthCheckInterval (..)
     , P.HasComputedHealthCheckPath (..)
@@ -102,17 +120,24 @@ module Terrafomo.OneAndOne.Resource
     , P.HasComputedMonitoringPolicyId (..)
     , P.HasComputedName (..)
     , P.HasComputedNetworkAddress (..)
+    , P.HasComputedNumImages (..)
+    , P.HasComputedOsId (..)
     , P.HasComputedPassword (..)
     , P.HasComputedPersistence (..)
     , P.HasComputedPersistenceTime (..)
+    , P.HasComputedPublicKey (..)
     , P.HasComputedRam (..)
     , P.HasComputedReverseDns (..)
+    , P.HasComputedServerId (..)
     , P.HasComputedServerIds (..)
     , P.HasComputedSize (..)
+    , P.HasComputedSource (..)
     , P.HasComputedSshKeyPath (..)
     , P.HasComputedSshKeyPublic (..)
     , P.HasComputedStorageServers (..)
     , P.HasComputedSubnetMask (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedUrl (..)
     , P.HasComputedVcores (..)
 
     -- * Re-exported Types
@@ -141,6 +166,250 @@ import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
+
+{- | The @oneandone_block_storage@ OneAndOne resource.
+
+Manages a Block Storage on 1&1
+-}
+data BlockStorageResource s = BlockStorageResource {
+      _datacenter :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Location of desired 1and1 datacenter, where the block storage will be created. Can be @DE@ , @GB@ , @US@ or @ES@ -}
+    , _description :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Description for the block storage -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the storage -}
+    , _server_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) ID of the server that the block storage will be attached to -}
+    , _size :: !(TF.Attr s P.Text)
+    {- ^ (Required) Size of the block storage ( @min: 20, max: 500, multipleOf: 10@ ) -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (BlockStorageResource s) where
+    toHCL BlockStorageResource{..} = TF.inline $ catMaybes
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "server_id" <$> TF.attribute _server_id
+        , TF.assign "size" <$> TF.attribute _size
+        ]
+
+instance P.HasDatacenter (BlockStorageResource s) (TF.Attr s P.Text) where
+    datacenter =
+        lens (_datacenter :: BlockStorageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter = a } :: BlockStorageResource s)
+
+instance P.HasDescription (BlockStorageResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: BlockStorageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: BlockStorageResource s)
+
+instance P.HasName (BlockStorageResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: BlockStorageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: BlockStorageResource s)
+
+instance P.HasServerId (BlockStorageResource s) (TF.Attr s P.Text) where
+    serverId =
+        lens (_server_id :: BlockStorageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _server_id = a } :: BlockStorageResource s)
+
+instance P.HasSize (BlockStorageResource s) (TF.Attr s P.Text) where
+    size =
+        lens (_size :: BlockStorageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _size = a } :: BlockStorageResource s)
+
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (BlockStorageResource s)) (TF.Attr s P.Text) where
+    computedDatacenter =
+        (_datacenter :: BlockStorageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (BlockStorageResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: BlockStorageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (BlockStorageResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: BlockStorageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedServerId (TF.Ref s' (BlockStorageResource s)) (TF.Attr s P.Text) where
+    computedServerId =
+        (_server_id :: BlockStorageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (BlockStorageResource s)) (TF.Attr s P.Text) where
+    computedSize =
+        (_size :: BlockStorageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+blockStorageResource :: TF.Resource P.OneAndOne (BlockStorageResource s)
+blockStorageResource =
+    TF.newResource "oneandone_block_storage" $
+        BlockStorageResource {
+              _datacenter = TF.Nil
+            , _description = TF.Nil
+            , _name = TF.Nil
+            , _server_id = TF.Nil
+            , _size = TF.Nil
+            }
+
+{- | The @oneandone_image@ OneAndOne resource.
+
+Manages Images on 1&1
+-}
+data ImageResource s = ImageResource {
+      _datacenter :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Country code of the datacenter where the image will be created ( @US@ , @DE@ , @GB@ , and @ES@ ). -}
+    , _description :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Image description. -}
+    , _frequency :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Creation policy frequency. Frecuency policy is only allowed in default datacenter. ( @ONCE@ , @DAILY@ , @WEEKLY@ ) -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the image. -}
+    , _num_images :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Maximum number of images. Required when image is created with frequency policy. -}
+    , _os_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) ID of the Operating System to import. -}
+    , _server_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Server ID - Required when image @source@ is @server@ . -}
+    , _source :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Source of the new image: @server@ (from an existing server), @image@ (from an imported image) or @iso@ (from an imported iso). -}
+    , _type' :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Type of the ISO to import: @os@ (Operating System) or @app@ (Application). It is required when the source is iso. -}
+    , _url :: !(TF.Attr s P.Text)
+    {- ^ (Optional) URL where the image can be downloaded. It is required when the source is image or iso. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ImageResource s) where
+    toHCL ImageResource{..} = TF.inline $ catMaybes
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "frequency" <$> TF.attribute _frequency
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "num_images" <$> TF.attribute _num_images
+        , TF.assign "os_id" <$> TF.attribute _os_id
+        , TF.assign "server_id" <$> TF.attribute _server_id
+        , TF.assign "source" <$> TF.attribute _source
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "url" <$> TF.attribute _url
+        ]
+
+instance P.HasDatacenter (ImageResource s) (TF.Attr s P.Text) where
+    datacenter =
+        lens (_datacenter :: ImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter = a } :: ImageResource s)
+
+instance P.HasDescription (ImageResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: ImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: ImageResource s)
+
+instance P.HasFrequency (ImageResource s) (TF.Attr s P.Text) where
+    frequency =
+        lens (_frequency :: ImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _frequency = a } :: ImageResource s)
+
+instance P.HasName (ImageResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ImageResource s)
+
+instance P.HasNumImages (ImageResource s) (TF.Attr s P.Text) where
+    numImages =
+        lens (_num_images :: ImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _num_images = a } :: ImageResource s)
+
+instance P.HasOsId (ImageResource s) (TF.Attr s P.Text) where
+    osId =
+        lens (_os_id :: ImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _os_id = a } :: ImageResource s)
+
+instance P.HasServerId (ImageResource s) (TF.Attr s P.Text) where
+    serverId =
+        lens (_server_id :: ImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _server_id = a } :: ImageResource s)
+
+instance P.HasSource (ImageResource s) (TF.Attr s P.Text) where
+    source =
+        lens (_source :: ImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _source = a } :: ImageResource s)
+
+instance P.HasType' (ImageResource s) (TF.Attr s P.Text) where
+    type' =
+        lens (_type' :: ImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: ImageResource s)
+
+instance P.HasUrl (ImageResource s) (TF.Attr s P.Text) where
+    url =
+        lens (_url :: ImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _url = a } :: ImageResource s)
+
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
+    computedDatacenter =
+        (_datacenter :: ImageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: ImageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedFrequency (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
+    computedFrequency =
+        (_frequency :: ImageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ImageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNumImages (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
+    computedNumImages =
+        (_num_images :: ImageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedOsId (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
+    computedOsId =
+        (_os_id :: ImageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedServerId (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
+    computedServerId =
+        (_server_id :: ImageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
+    computedSource =
+        (_source :: ImageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
+    computedType' =
+        (_type' :: ImageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
+    computedUrl =
+        (_url :: ImageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+imageResource :: TF.Resource P.OneAndOne (ImageResource s)
+imageResource =
+    TF.newResource "oneandone_image" $
+        ImageResource {
+              _datacenter = TF.Nil
+            , _description = TF.Nil
+            , _frequency = TF.Nil
+            , _name = TF.Nil
+            , _num_images = TF.Nil
+            , _os_id = TF.Nil
+            , _server_id = TF.Nil
+            , _source = TF.Nil
+            , _type' = TF.Nil
+            , _url = TF.Nil
+            }
 
 {- | The @oneandone_instance_size@ OneAndOne resource.
 
@@ -429,6 +698,65 @@ serverResource =
             , _name = TF.Nil
             , _persistence = TF.Nil
             , _persistence_time = TF.Nil
+            }
+
+{- | The @oneandone_ssh_key@ OneAndOne resource.
+
+Manages SSH Keys on 1&1
+-}
+data SshKeyResource s = SshKeyResource {
+      _description :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Description for the ssh key -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the storage -}
+    , _public_key :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Public key to import. If not given, new SSH key pair will be created and the private key is returned in the response -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SshKeyResource s) where
+    toHCL SshKeyResource{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "public_key" <$> TF.attribute _public_key
+        ]
+
+instance P.HasDescription (SshKeyResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: SshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: SshKeyResource s)
+
+instance P.HasName (SshKeyResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: SshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SshKeyResource s)
+
+instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
+    publicKey =
+        lens (_public_key :: SshKeyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _public_key = a } :: SshKeyResource s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: SshKeyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: SshKeyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
+    computedPublicKey =
+        (_public_key :: SshKeyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+sshKeyResource :: TF.Resource P.OneAndOne (SshKeyResource s)
+sshKeyResource =
+    TF.newResource "oneandone_ssh_key" $
+        SshKeyResource {
+              _description = TF.Nil
+            , _name = TF.Nil
+            , _public_key = TF.Nil
             }
 
 {- | The @oneandone_vpn@ OneAndOne resource.

@@ -30,6 +30,9 @@ module Terrafomo.Consul.Resource
     , CatalogEntryResource (..)
     , catalogEntryResource
 
+    , IntentionResource (..)
+    , intentionResource
+
     , KeyPrefixResource (..)
     , keyPrefixResource
 
@@ -47,11 +50,15 @@ module Terrafomo.Consul.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
+    , P.HasAction (..)
     , P.HasAddress (..)
     , P.HasDatacenter (..)
+    , P.HasDescription (..)
+    , P.HasDestinationName (..)
     , P.HasDns (..)
     , P.HasFailover (..)
     , P.HasKey (..)
+    , P.HasMeta (..)
     , P.HasName (..)
     , P.HasNear (..)
     , P.HasNode (..)
@@ -61,6 +68,7 @@ module Terrafomo.Consul.Resource
     , P.HasService (..)
     , P.HasServiceId (..)
     , P.HasSession (..)
+    , P.HasSourceName (..)
     , P.HasStoredToken (..)
     , P.HasSubkeys (..)
     , P.HasTags (..)
@@ -68,12 +76,16 @@ module Terrafomo.Consul.Resource
     , P.HasToken (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAction (..)
     , P.HasComputedAddress (..)
     , P.HasComputedDatacenter (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDestinationName (..)
     , P.HasComputedDns (..)
     , P.HasComputedFailover (..)
     , P.HasComputedId (..)
     , P.HasComputedKey (..)
+    , P.HasComputedMeta (..)
     , P.HasComputedName (..)
     , P.HasComputedNear (..)
     , P.HasComputedNode (..)
@@ -83,6 +95,7 @@ module Terrafomo.Consul.Resource
     , P.HasComputedService (..)
     , P.HasComputedServiceId (..)
     , P.HasComputedSession (..)
+    , P.HasComputedSourceName (..)
     , P.HasComputedStoredToken (..)
     , P.HasComputedSubkeys (..)
     , P.HasComputedTags (..)
@@ -118,9 +131,12 @@ import qualified Terrafomo.Schema    as TF
 
 {- | The @consul_agent_service@ Consul resource.
 
-Provides access to the agent service data in Consul. This can be used to
-define a service associated with a particular agent. Currently, defining
-health checks for an agent service is not supported.
+!> The @consul_agent_service@ resource has been deprecated in version 2.0.0
+of the provider and will be removed in a future release. Please read the
+</docs/providers/consul/upgrading.html#deprecation-of-consul_agent_service>
+for more information. Provides access to the agent service data in Consul.
+This can be used to define a service associated with a particular agent.
+Currently, defining health checks for an agent service is not supported.
 -}
 data AgentServiceResource s = AgentServiceResource {
       _address :: !(TF.Attr s P.Text)
@@ -188,7 +204,10 @@ agentServiceResource =
 
 {- | The @consul_catalog_entry@ Consul resource.
 
-Registers a node or service with the
+!> The @consul_catalog_entry@ resource has been deprecated in version 2.0.0
+of the provider and will be removed in a future release. Please read the
+</docs/providers/consul/upgrading.html#deprecation-of-consul_catalog_entry>
+for more information. Registers a node or service with the
 <https://www.consul.io/docs/agent/http/catalog.html#catalog_register> .
 Currently, defining health checks is not supported.
 -}
@@ -269,6 +288,108 @@ catalogEntryResource =
             , _node = TF.Nil
             , _service = TF.Nil
             , _token = TF.Nil
+            }
+
+{- | The @consul_intention@ Consul resource.
+
+<https://www.consul.io/docs/connect/intentions.html> are used to define
+rules for which services may connect to one another when using
+<https://www.consul.io/docs/connect/index.html> . It is appropriate to
+either reference existing services or specify non-existent services that
+will be created in the future when creating intentions. This resource can be
+used in conjunction with the @consul_service@ datasource when referencing
+services registered on nodes that have a running Consul agent.
+-}
+data IntentionResource s = IntentionResource {
+      _action           :: !(TF.Attr s P.Text)
+    {- ^ (Required, string) The intention action. Must be one of @allow@ or @deny@ . -}
+    , _datacenter       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
+    , _description      :: !(TF.Attr s P.Text)
+    {- ^ (Optional, string) Optional description that can be used by Consul tooling, but is not used internally. -}
+    , _destination_name :: !(TF.Attr s P.Text)
+    {- ^ (Required, string) The name of the destination service for the intention. This service does not have to exist. -}
+    , _meta             :: !(TF.Attr s P.Text)
+    {- ^ (Optional, map) Key/value pairs that are opaque to Consul and are associated with the intention. -}
+    , _source_name      :: !(TF.Attr s P.Text)
+    {- ^ (Required, string) The name of the source service for the intention. This service does not have to exist. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (IntentionResource s) where
+    toHCL IntentionResource{..} = TF.inline $ catMaybes
+        [ TF.assign "action" <$> TF.attribute _action
+        , TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "destination_name" <$> TF.attribute _destination_name
+        , TF.assign "meta" <$> TF.attribute _meta
+        , TF.assign "source_name" <$> TF.attribute _source_name
+        ]
+
+instance P.HasAction (IntentionResource s) (TF.Attr s P.Text) where
+    action =
+        lens (_action :: IntentionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _action = a } :: IntentionResource s)
+
+instance P.HasDatacenter (IntentionResource s) (TF.Attr s P.Text) where
+    datacenter =
+        lens (_datacenter :: IntentionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter = a } :: IntentionResource s)
+
+instance P.HasDescription (IntentionResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: IntentionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: IntentionResource s)
+
+instance P.HasDestinationName (IntentionResource s) (TF.Attr s P.Text) where
+    destinationName =
+        lens (_destination_name :: IntentionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _destination_name = a } :: IntentionResource s)
+
+instance P.HasMeta (IntentionResource s) (TF.Attr s P.Text) where
+    meta =
+        lens (_meta :: IntentionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _meta = a } :: IntentionResource s)
+
+instance P.HasSourceName (IntentionResource s) (TF.Attr s P.Text) where
+    sourceName =
+        lens (_source_name :: IntentionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _source_name = a } :: IntentionResource s)
+
+instance s ~ s' => P.HasComputedAction (TF.Ref s' (IntentionResource s)) (TF.Attr s P.Text) where
+    computedAction =
+        (_action :: IntentionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (IntentionResource s)) (TF.Attr s P.Text) where
+    computedDatacenter =
+        (_datacenter :: IntentionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (IntentionResource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedDestinationName (TF.Ref s' (IntentionResource s)) (TF.Attr s P.Text) where
+    computedDestinationName x = TF.compute (TF.refKey x) "destination_name"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IntentionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedMeta (TF.Ref s' (IntentionResource s)) (TF.Attr s P.Text) where
+    computedMeta x = TF.compute (TF.refKey x) "meta"
+
+instance s ~ s' => P.HasComputedSourceName (TF.Ref s' (IntentionResource s)) (TF.Attr s P.Text) where
+    computedSourceName x = TF.compute (TF.refKey x) "source_name"
+
+intentionResource :: TF.Resource P.Consul (IntentionResource s)
+intentionResource =
+    TF.newResource "consul_intention" $
+        IntentionResource {
+              _action = TF.Nil
+            , _datacenter = TF.Nil
+            , _description = TF.Nil
+            , _destination_name = TF.Nil
+            , _meta = TF.Nil
+            , _source_name = TF.Nil
             }
 
 {- | The @consul_key_prefix@ Consul resource.
@@ -656,26 +777,27 @@ preparedQueryResource =
 
 {- | The @consul_service@ Consul resource.
 
-A high-level resource for creating a Service in Consul. Currently, defining
-health checks for a service is not supported. Most users should not use this
-resource . When using Consul with compute instances, it's better to install
-<https://www.consul.io/docs/agent/basics.html> on these machines and
-register services via the agent. This ensures that services get assigned to
-the appropriate Consul "nodes" and allows service health to integrate with
-general node health as reported by the agent. To register a non-compute
-resource, such as a hosted database, as a service, as described in
-<https://www.consul.io/docs/guides/external.html> , use <catalog_entry.html>
-instead, which can create an arbitrary service record in the Consul catalog.
+A high-level resource for creating a Service in Consul in the Consul
+catalog. This is appropriate for registering
+<https://www.consul.io/docs/guides/external.html> and can be used to create
+services addressable by Consul that cannot be registered with a
+<https://www.consul.io/docs/agent/basics.html> . If the Consul agent is
+running on the node where this service is registered, it is not recommended
+to use this resource.
 -}
 data ServiceResource s = ServiceResource {
       _address    :: !(TF.Attr s P.Text)
-    {- ^ (Optional, string) The address of the service. Defaults to the address of the agent. -}
+    {- ^ (Optional, string) The address of the service. Defaults to the address of the node. -}
+    , _datacenter :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
     , _name       :: !(TF.Attr s P.Text)
     {- ^ (Required, string) The name of the service. -}
+    , _node       :: !(TF.Attr s P.Text)
+    {- ^ (Required, string) The name of the node the to register the service on. -}
     , _port       :: !(TF.Attr s P.Text)
     {- ^ (Optional, int) The port of the service. -}
     , _service_id :: !(TF.Attr s P.Text)
-    {- ^ (Optional, string) The ID of the service, defaults to the value of @name@ if not supplied. -}
+    {- ^ (Optional, string) - If the service ID is not provided, it will be defaulted to the value of the @name@ attribute. -}
     , _tags       :: !(TF.Attr s P.Text)
     {- ^ (Optional, set of strings) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
     } deriving (Show, Eq)
@@ -683,7 +805,9 @@ data ServiceResource s = ServiceResource {
 instance TF.ToHCL (ServiceResource s) where
     toHCL ServiceResource{..} = TF.inline $ catMaybes
         [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "node" <$> TF.attribute _node
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "service_id" <$> TF.attribute _service_id
         , TF.assign "tags" <$> TF.attribute _tags
@@ -694,10 +818,20 @@ instance P.HasAddress (ServiceResource s) (TF.Attr s P.Text) where
         lens (_address :: ServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _address = a } :: ServiceResource s)
 
+instance P.HasDatacenter (ServiceResource s) (TF.Attr s P.Text) where
+    datacenter =
+        lens (_datacenter :: ServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter = a } :: ServiceResource s)
+
 instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
     name =
         lens (_name :: ServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ServiceResource s)
+
+instance P.HasNode (ServiceResource s) (TF.Attr s P.Text) where
+    node =
+        lens (_node :: ServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _node = a } :: ServiceResource s)
 
 instance P.HasPort (ServiceResource s) (TF.Attr s P.Text) where
     port =
@@ -717,8 +851,16 @@ instance P.HasTags (ServiceResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedDatacenter =
+        (_datacenter :: ServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedNode (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedNode x = TF.compute (TF.refKey x) "node"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedPort x = TF.compute (TF.refKey x) "port"
@@ -734,7 +876,9 @@ serviceResource =
     TF.newResource "consul_service" $
         ServiceResource {
               _address = TF.Nil
+            , _datacenter = TF.Nil
             , _name = TF.Nil
+            , _node = TF.Nil
             , _port = TF.Nil
             , _service_id = TF.Nil
             , _tags = TF.Nil

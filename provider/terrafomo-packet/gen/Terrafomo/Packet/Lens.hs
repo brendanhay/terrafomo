@@ -32,8 +32,12 @@ module Terrafomo.Packet.Lens
     , HasHardwareReservationId (..)
     , HasHostname (..)
     , HasIpxeScriptUrl (..)
+    , HasLocked (..)
+    , HasLogo (..)
     , HasName (..)
     , HasOperatingSystem (..)
+    , HasOrganizationId (..)
+    , HasPaymentMethodId (..)
     , HasPlan (..)
     , HasProjectId (..)
     , HasPublic (..)
@@ -43,8 +47,11 @@ module Terrafomo.Packet.Lens
     , HasSize (..)
     , HasSnapshotPolicies (..)
     , HasStorage (..)
+    , HasTags (..)
+    , HasTwitter (..)
     , HasUserData (..)
     , HasVolumeId (..)
+    , HasWebsite (..)
 
     -- ** Computed Attributes
     , HasComputedAccessPrivateIpv4 (..)
@@ -67,10 +74,13 @@ module Terrafomo.Packet.Lens
     , HasComputedId (..)
     , HasComputedIpxeScriptUrl (..)
     , HasComputedLocked (..)
+    , HasComputedLogo (..)
     , HasComputedName (..)
     , HasComputedNetmask (..)
     , HasComputedNetwork (..)
     , HasComputedOperatingSystem (..)
+    , HasComputedOrganizationId (..)
+    , HasComputedPaymentMethodId (..)
     , HasComputedPlan (..)
     , HasComputedProjectId (..)
     , HasComputedPublic (..)
@@ -83,9 +93,11 @@ module Terrafomo.Packet.Lens
     , HasComputedState (..)
     , HasComputedStorage (..)
     , HasComputedTags (..)
+    , HasComputedTwitter (..)
     , HasComputedUpdated (..)
     , HasComputedUserData (..)
     , HasComputedVolumeId (..)
+    , HasComputedWebsite (..)
     ) where
 
 import GHC.Base ((.))
@@ -155,6 +167,18 @@ class HasIpxeScriptUrl a b | a -> b where
 instance HasIpxeScriptUrl a b => HasIpxeScriptUrl (TF.Schema l p a) b where
     ipxeScriptUrl = TF.configuration . ipxeScriptUrl
 
+class HasLocked a b | a -> b where
+    locked :: Lens' a b
+
+instance HasLocked a b => HasLocked (TF.Schema l p a) b where
+    locked = TF.configuration . locked
+
+class HasLogo a b | a -> b where
+    logo :: Lens' a b
+
+instance HasLogo a b => HasLogo (TF.Schema l p a) b where
+    logo = TF.configuration . logo
+
 class HasName a b | a -> b where
     name :: Lens' a b
 
@@ -166,6 +190,18 @@ class HasOperatingSystem a b | a -> b where
 
 instance HasOperatingSystem a b => HasOperatingSystem (TF.Schema l p a) b where
     operatingSystem = TF.configuration . operatingSystem
+
+class HasOrganizationId a b | a -> b where
+    organizationId :: Lens' a b
+
+instance HasOrganizationId a b => HasOrganizationId (TF.Schema l p a) b where
+    organizationId = TF.configuration . organizationId
+
+class HasPaymentMethodId a b | a -> b where
+    paymentMethodId :: Lens' a b
+
+instance HasPaymentMethodId a b => HasPaymentMethodId (TF.Schema l p a) b where
+    paymentMethodId = TF.configuration . paymentMethodId
 
 class HasPlan a b | a -> b where
     plan :: Lens' a b
@@ -221,6 +257,18 @@ class HasStorage a b | a -> b where
 instance HasStorage a b => HasStorage (TF.Schema l p a) b where
     storage = TF.configuration . storage
 
+class HasTags a b | a -> b where
+    tags :: Lens' a b
+
+instance HasTags a b => HasTags (TF.Schema l p a) b where
+    tags = TF.configuration . tags
+
+class HasTwitter a b | a -> b where
+    twitter :: Lens' a b
+
+instance HasTwitter a b => HasTwitter (TF.Schema l p a) b where
+    twitter = TF.configuration . twitter
+
 class HasUserData a b | a -> b where
     userData :: Lens' a b
 
@@ -232,6 +280,12 @@ class HasVolumeId a b | a -> b where
 
 instance HasVolumeId a b => HasVolumeId (TF.Schema l p a) b where
     volumeId = TF.configuration . volumeId
+
+class HasWebsite a b | a -> b where
+    website :: Lens' a b
+
+instance HasWebsite a b => HasWebsite (TF.Schema l p a) b where
+    website = TF.configuration . website
 
 class HasComputedAccessPrivateIpv4 a b | a -> b where
     computedAccessPrivateIpv4 :: a -> b
@@ -293,6 +347,9 @@ class HasComputedIpxeScriptUrl a b | a -> b where
 class HasComputedLocked a b | a -> b where
     computedLocked :: a -> b
 
+class HasComputedLogo a b | a -> b where
+    computedLogo :: a -> b
+
 class HasComputedName a b | a -> b where
     computedName :: a -> b
 
@@ -304,6 +361,12 @@ class HasComputedNetwork a b | a -> b where
 
 class HasComputedOperatingSystem a b | a -> b where
     computedOperatingSystem :: a -> b
+
+class HasComputedOrganizationId a b | a -> b where
+    computedOrganizationId :: a -> b
+
+class HasComputedPaymentMethodId a b | a -> b where
+    computedPaymentMethodId :: a -> b
 
 class HasComputedPlan a b | a -> b where
     computedPlan :: a -> b
@@ -341,6 +404,9 @@ class HasComputedStorage a b | a -> b where
 class HasComputedTags a b | a -> b where
     computedTags :: a -> b
 
+class HasComputedTwitter a b | a -> b where
+    computedTwitter :: a -> b
+
 class HasComputedUpdated a b | a -> b where
     computedUpdated :: a -> b
 
@@ -349,3 +415,6 @@ class HasComputedUserData a b | a -> b where
 
 class HasComputedVolumeId a b | a -> b where
     computedVolumeId :: a -> b
+
+class HasComputedWebsite a b | a -> b where
+    computedWebsite :: a -> b

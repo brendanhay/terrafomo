@@ -30,6 +30,9 @@ module Terrafomo.Packet.Resource
     , IpAttachmentResource (..)
     , ipAttachmentResource
 
+    , OrganizationResource (..)
+    , organizationResource
+
     , ProjectResource (..)
     , projectResource
 
@@ -56,8 +59,12 @@ module Terrafomo.Packet.Resource
     , P.HasHardwareReservationId (..)
     , P.HasHostname (..)
     , P.HasIpxeScriptUrl (..)
+    , P.HasLocked (..)
+    , P.HasLogo (..)
     , P.HasName (..)
     , P.HasOperatingSystem (..)
+    , P.HasOrganizationId (..)
+    , P.HasPaymentMethodId (..)
     , P.HasPlan (..)
     , P.HasProjectId (..)
     , P.HasPublicIpv4SubnetSize (..)
@@ -66,8 +73,11 @@ module Terrafomo.Packet.Resource
     , P.HasSize (..)
     , P.HasSnapshotPolicies (..)
     , P.HasStorage (..)
+    , P.HasTags (..)
+    , P.HasTwitter (..)
     , P.HasUserData (..)
     , P.HasVolumeId (..)
+    , P.HasWebsite (..)
 
     -- ** Computed Attributes
     , P.HasComputedAccessPrivateIpv4 (..)
@@ -90,10 +100,13 @@ module Terrafomo.Packet.Resource
     , P.HasComputedId (..)
     , P.HasComputedIpxeScriptUrl (..)
     , P.HasComputedLocked (..)
+    , P.HasComputedLogo (..)
     , P.HasComputedName (..)
     , P.HasComputedNetmask (..)
     , P.HasComputedNetwork (..)
     , P.HasComputedOperatingSystem (..)
+    , P.HasComputedOrganizationId (..)
+    , P.HasComputedPaymentMethodId (..)
     , P.HasComputedPlan (..)
     , P.HasComputedProjectId (..)
     , P.HasComputedPublic (..)
@@ -106,9 +119,11 @@ module Terrafomo.Packet.Resource
     , P.HasComputedState (..)
     , P.HasComputedStorage (..)
     , P.HasComputedTags (..)
+    , P.HasComputedTwitter (..)
     , P.HasComputedUpdated (..)
     , P.HasComputedUserData (..)
     , P.HasComputedVolumeId (..)
+    , P.HasComputedWebsite (..)
 
     -- * Re-exported Types
     , module P
@@ -149,6 +164,8 @@ data DeviceResource s = DeviceResource {
     {- ^ (Optional) - If true, a device with OS @custom_ipxe@ will continue to boot via iPXE on reboots. -}
     , _billing_cycle           :: !(TF.Attr s P.Text)
     {- ^ (Required) monthly or hourly -}
+    , _description             :: !(TF.Attr s P.Text)
+    {- ^ - Description string for the device -}
     , _facility                :: !(TF.Attr s P.Text)
     {- ^ (Required) The facility in which to create the device -}
     , _hardware_reservation_id :: !(TF.Attr s P.Text)
@@ -167,6 +184,8 @@ data DeviceResource s = DeviceResource {
     {- ^ (Optional) - Size of allocated subnet, more information is in the <https://help.packet.net/technical/networking/custom-subnet-size> doc. -}
     , _storage                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) - JSON for custom partitioning. Only usable on reserved hardware. More information in in the <https://help.packet.net/technical/storage/custom-partitioning-raid> doc. -}
+    , _tags                    :: !(TF.Attr s P.Text)
+    {- ^ - Tags attached to the device -}
     , _user_data               :: !(TF.Attr s P.Text)
     {- ^ (Optional) - A string of the desired User Data for the device. -}
     } deriving (Show, Eq)
@@ -175,6 +194,7 @@ instance TF.ToHCL (DeviceResource s) where
     toHCL DeviceResource{..} = TF.inline $ catMaybes
         [ TF.assign "always_pxe" <$> TF.attribute _always_pxe
         , TF.assign "billing_cycle" <$> TF.attribute _billing_cycle
+        , TF.assign "description" <$> TF.attribute _description
         , TF.assign "facility" <$> TF.attribute _facility
         , TF.assign "hardware_reservation_id" <$> TF.attribute _hardware_reservation_id
         , TF.assign "hostname" <$> TF.attribute _hostname
@@ -184,6 +204,7 @@ instance TF.ToHCL (DeviceResource s) where
         , TF.assign "project_id" <$> TF.attribute _project_id
         , TF.assign "public_ipv4_subnet_size" <$> TF.attribute _public_ipv4_subnet_size
         , TF.assign "storage" <$> TF.attribute _storage
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "user_data" <$> TF.attribute _user_data
         ]
 
@@ -196,6 +217,11 @@ instance P.HasBillingCycle (DeviceResource s) (TF.Attr s P.Text) where
     billingCycle =
         lens (_billing_cycle :: DeviceResource s -> TF.Attr s P.Text)
              (\s a -> s { _billing_cycle = a } :: DeviceResource s)
+
+instance P.HasDescription (DeviceResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: DeviceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: DeviceResource s)
 
 instance P.HasFacility (DeviceResource s) (TF.Attr s P.Text) where
     facility =
@@ -242,6 +268,11 @@ instance P.HasStorage (DeviceResource s) (TF.Attr s P.Text) where
         lens (_storage :: DeviceResource s -> TF.Attr s P.Text)
              (\s a -> s { _storage = a } :: DeviceResource s)
 
+instance P.HasTags (DeviceResource s) (TF.Attr s P.Text) where
+    tags =
+        lens (_tags :: DeviceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: DeviceResource s)
+
 instance P.HasUserData (DeviceResource s) (TF.Attr s P.Text) where
     userData =
         lens (_user_data :: DeviceResource s -> TF.Attr s P.Text)
@@ -266,6 +297,9 @@ instance s ~ s' => P.HasComputedBillingCycle (TF.Ref s' (DeviceResource s)) (TF.
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
     computedCreated x = TF.compute (TF.refKey x) "created"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedFacility (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
     computedFacility x = TF.compute (TF.refKey x) "facility"
@@ -332,6 +366,7 @@ deviceResource =
         DeviceResource {
               _always_pxe = TF.Nil
             , _billing_cycle = TF.Nil
+            , _description = TF.Nil
             , _facility = TF.Nil
             , _hardware_reservation_id = TF.Nil
             , _hostname = TF.Nil
@@ -341,6 +376,7 @@ deviceResource =
             , _project_id = TF.Nil
             , _public_ipv4_subnet_size = TF.Nil
             , _storage = TF.Nil
+            , _tags = TF.Nil
             , _user_data = TF.Nil
             }
 
@@ -415,25 +451,121 @@ ipAttachmentResource =
             , _device_id = TF.Nil
             }
 
+{- | The @packet_organization@ Packet resource.
+
+Provides a resource to manage organization resource in Packet.
+-}
+data OrganizationResource s = OrganizationResource {
+      _description :: !(TF.Attr s P.Text)
+    {- ^ - Description string. -}
+    , _logo        :: !(TF.Attr s P.Text)
+    {- ^ - Logo URL. -}
+    , _name        :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Organization. -}
+    , _twitter     :: !(TF.Attr s P.Text)
+    {- ^ - Twitter handle. -}
+    , _website     :: !(TF.Attr s P.Text)
+    {- ^ - Website link. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (OrganizationResource s) where
+    toHCL OrganizationResource{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "logo" <$> TF.attribute _logo
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "twitter" <$> TF.attribute _twitter
+        , TF.assign "website" <$> TF.attribute _website
+        ]
+
+instance P.HasDescription (OrganizationResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: OrganizationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: OrganizationResource s)
+
+instance P.HasLogo (OrganizationResource s) (TF.Attr s P.Text) where
+    logo =
+        lens (_logo :: OrganizationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _logo = a } :: OrganizationResource s)
+
+instance P.HasName (OrganizationResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: OrganizationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: OrganizationResource s)
+
+instance P.HasTwitter (OrganizationResource s) (TF.Attr s P.Text) where
+    twitter =
+        lens (_twitter :: OrganizationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _twitter = a } :: OrganizationResource s)
+
+instance P.HasWebsite (OrganizationResource s) (TF.Attr s P.Text) where
+    website =
+        lens (_website :: OrganizationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _website = a } :: OrganizationResource s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLogo (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedLogo x = TF.compute (TF.refKey x) "logo"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedTwitter (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedTwitter x = TF.compute (TF.refKey x) "twitter"
+
+instance s ~ s' => P.HasComputedWebsite (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedWebsite x = TF.compute (TF.refKey x) "website"
+
+organizationResource :: TF.Resource P.Packet (OrganizationResource s)
+organizationResource =
+    TF.newResource "packet_organization" $
+        OrganizationResource {
+              _description = TF.Nil
+            , _logo = TF.Nil
+            , _name = TF.Nil
+            , _twitter = TF.Nil
+            , _website = TF.Nil
+            }
+
 {- | The @packet_project@ Packet resource.
 
 Provides a Packet Project resource to allow you manage devices in your
 projects.
 -}
 data ProjectResource s = ProjectResource {
-      _name :: !(TF.Attr s P.Text)
+      _name              :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the Project on Packet.net -}
+    , _organization_id   :: !(TF.Attr s P.Text)
+    {- ^ - The UUID of Organization under which you want to create the project. If you leave it out, the project will be create under your the default Organization of your account. -}
+    , _payment_method_id :: !(TF.Attr s P.Text)
+    {- ^ - The UUID of payment method for this project. If you keep it empty, Packet API will pick your default Payment Method. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ProjectResource s) where
     toHCL ProjectResource{..} = TF.inline $ catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "organization_id" <$> TF.attribute _organization_id
+        , TF.assign "payment_method_id" <$> TF.attribute _payment_method_id
         ]
 
 instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
     name =
         lens (_name :: ProjectResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ProjectResource s)
+
+instance P.HasOrganizationId (ProjectResource s) (TF.Attr s P.Text) where
+    organizationId =
+        lens (_organization_id :: ProjectResource s -> TF.Attr s P.Text)
+             (\s a -> s { _organization_id = a } :: ProjectResource s)
+
+instance P.HasPaymentMethodId (ProjectResource s) (TF.Attr s P.Text) where
+    paymentMethodId =
+        lens (_payment_method_id :: ProjectResource s -> TF.Attr s P.Text)
+             (\s a -> s { _payment_method_id = a } :: ProjectResource s)
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedCreated x = TF.compute (TF.refKey x) "created"
@@ -446,6 +578,12 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (ProjectResource s)) (TF.Attr s 
         (_name :: ProjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedOrganizationId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedOrganizationId x = TF.compute (TF.refKey x) "organization_id"
+
+instance s ~ s' => P.HasComputedPaymentMethodId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
+    computedPaymentMethodId x = TF.compute (TF.refKey x) "payment_method_id"
+
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedUpdated x = TF.compute (TF.refKey x) "updated"
 
@@ -454,6 +592,8 @@ projectResource =
     TF.newResource "packet_project" $
         ProjectResource {
               _name = TF.Nil
+            , _organization_id = TF.Nil
+            , _payment_method_id = TF.Nil
             }
 
 {- | The @packet_reserved_ip_block@ Packet resource.
@@ -660,6 +800,8 @@ data VolumeResource s = VolumeResource {
     {- ^ - Optional description for the volume -}
     , _facility          :: !(TF.Attr s P.Text)
     {- ^ (Required) The facility to create the volume in -}
+    , _locked            :: !(TF.Attr s P.Text)
+    {- ^ - Lock or unlock the volume -}
     , _plan              :: !(TF.Attr s P.Text)
     {- ^ (Required) The service plan slug of the volume -}
     , _project_id        :: !(TF.Attr s P.Text)
@@ -675,6 +817,7 @@ instance TF.ToHCL (VolumeResource s) where
         [ TF.assign "billing_cycle" <$> TF.attribute _billing_cycle
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "facility" <$> TF.attribute _facility
+        , TF.assign "locked" <$> TF.attribute _locked
         , TF.assign "plan" <$> TF.attribute _plan
         , TF.assign "project_id" <$> TF.attribute _project_id
         , TF.assign "size" <$> TF.attribute _size
@@ -695,6 +838,11 @@ instance P.HasFacility (VolumeResource s) (TF.Attr s P.Text) where
     facility =
         lens (_facility :: VolumeResource s -> TF.Attr s P.Text)
              (\s a -> s { _facility = a } :: VolumeResource s)
+
+instance P.HasLocked (VolumeResource s) (TF.Attr s P.Text) where
+    locked =
+        lens (_locked :: VolumeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _locked = a } :: VolumeResource s)
 
 instance P.HasPlan (VolumeResource s) (TF.Attr s P.Text) where
     plan =
@@ -767,6 +915,7 @@ volumeResource =
               _billing_cycle = TF.Nil
             , _description = TF.Nil
             , _facility = TF.Nil
+            , _locked = TF.Nil
             , _plan = TF.Nil
             , _project_id = TF.Nil
             , _size = TF.Nil

@@ -27,8 +27,20 @@ module Terrafomo.AliCloud.Resource
       CdnDomainResource (..)
     , cdnDomainResource
 
+    , CmsAlarmResource (..)
+    , cmsAlarmResource
+
     , ContainerClusterResource (..)
     , containerClusterResource
+
+    , CsApplicationResource (..)
+    , csApplicationResource
+
+    , CsKubernetesResource (..)
+    , csKubernetesResource
+
+    , CsSwarmResource (..)
+    , csSwarmResource
 
     , DbAccountPrivilegeResource (..)
     , dbAccountPrivilegeResource
@@ -96,6 +108,18 @@ module Terrafomo.AliCloud.Resource
     , KmsKeyResource (..)
     , kmsKeyResource
 
+    , LogMachineGroupResource (..)
+    , logMachineGroupResource
+
+    , LogProjectResource (..)
+    , logProjectResource
+
+    , LogStoreIndexResource (..)
+    , logStoreIndexResource
+
+    , LogStoreResource (..)
+    , logStoreResource
+
     , NatGatewayResource (..)
     , natGatewayResource
 
@@ -104,6 +128,9 @@ module Terrafomo.AliCloud.Resource
 
     , OssBucketResource (..)
     , ossBucketResource
+
+    , OtsTableResource (..)
+    , otsTableResource
 
     , RamAccessKeyResource (..)
     , ramAccessKeyResource
@@ -190,11 +217,14 @@ module Terrafomo.AliCloud.Resource
     , P.HasAdjustmentType (..)
     , P.HasAdjustmentValue (..)
     , P.HasAllocationId (..)
+    , P.HasAutoRenewPeriod (..)
     , P.HasAvailabilityZone (..)
     , P.HasBackendPort (..)
     , P.HasBackupPeriod (..)
     , P.HasBackupTime (..)
     , P.HasBandwidth (..)
+    , P.HasBlueGreen (..)
+    , P.HasBlueGreenConfirm (..)
     , P.HasBucket (..)
     , P.HasCacheControl (..)
     , P.HasCategory (..)
@@ -202,8 +232,13 @@ module Terrafomo.AliCloud.Resource
     , P.HasCharacterSet (..)
     , P.HasCidrBlock (..)
     , P.HasCidrIp (..)
+    , P.HasClientCert (..)
+    , P.HasClientKey (..)
+    , P.HasClusterCaCert (..)
+    , P.HasClusterName (..)
     , P.HasComments (..)
     , P.HasConnectionPrefix (..)
+    , P.HasContactGroups (..)
     , P.HasContent (..)
     , P.HasContentDisposition (..)
     , P.HasContentEncoding (..)
@@ -220,6 +255,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasDeletionWindowInDays (..)
     , P.HasDescription (..)
     , P.HasDestinationCidrblock (..)
+    , P.HasDimensions (..)
     , P.HasDiskCategory (..)
     , P.HasDiskId (..)
     , P.HasDiskSize (..)
@@ -230,15 +266,22 @@ module Terrafomo.AliCloud.Resource
     , P.HasDryRun (..)
     , P.HasEmail (..)
     , P.HasEnable (..)
+    , P.HasEnableSsh (..)
+    , P.HasEnabled (..)
+    , P.HasEncrypted (..)
+    , P.HasEndTime (..)
     , P.HasEngine (..)
     , P.HasEngineVersion (..)
+    , P.HasEnvironment (..)
     , P.HasExpires (..)
     , P.HasExternalIp (..)
     , P.HasExternalPort (..)
+    , P.HasFieldSearch (..)
     , P.HasForce (..)
     , P.HasForceDelete (..)
     , P.HasForwardTableId (..)
     , P.HasFrontendPort (..)
+    , P.HasFullText (..)
     , P.HasGroupId (..)
     , P.HasGroupName (..)
     , P.HasHealthCheck (..)
@@ -254,9 +297,12 @@ module Terrafomo.AliCloud.Resource
     , P.HasHealthyThreshold (..)
     , P.HasHostName (..)
     , P.HasHostRecord (..)
+    , P.HasIdentifyList (..)
+    , P.HasIdentifyType (..)
     , P.HasImageId (..)
     , P.HasIncludeDataDisks (..)
     , P.HasInnerAccess (..)
+    , P.HasInstallCloudMonitor (..)
     , P.HasInstanceChargeType (..)
     , P.HasInstanceId (..)
     , P.HasInstanceIds (..)
@@ -277,6 +323,8 @@ module Terrafomo.AliCloud.Resource
     , P.HasKeyName (..)
     , P.HasKeyNamePrefix (..)
     , P.HasKeyUsage (..)
+    , P.HasKubeConfig (..)
+    , P.HasLatestImage (..)
     , P.HasLaunchExpirationTime (..)
     , P.HasLaunchTime (..)
     , P.HasLifecycleRule (..)
@@ -286,16 +334,26 @@ module Terrafomo.AliCloud.Resource
     , P.HasLogRetentionPeriod (..)
     , P.HasLogging (..)
     , P.HasLoggingIsenable (..)
+    , P.HasLogstore (..)
+    , P.HasMasterDiskCategory (..)
+    , P.HasMasterDiskSize (..)
+    , P.HasMasterInstanceType (..)
     , P.HasMaxSize (..)
+    , P.HasMaxVersion (..)
+    , P.HasMetric (..)
     , P.HasMfaBindRequired (..)
     , P.HasMinSize (..)
     , P.HasMobile (..)
     , P.HasMultiAz (..)
     , P.HasName (..)
     , P.HasNamePrefix (..)
+    , P.HasNewNatGateway (..)
     , P.HasNexthopId (..)
     , P.HasNexthopType (..)
     , P.HasNicType (..)
+    , P.HasNodeNumber (..)
+    , P.HasNotifyType (..)
+    , P.HasOperator (..)
     , P.HasOppositeAccessPointId (..)
     , P.HasOppositeInterfaceId (..)
     , P.HasOppositeInterfaceOwnerId (..)
@@ -307,14 +365,17 @@ module Terrafomo.AliCloud.Resource
     , P.HasPeriod (..)
     , P.HasPeriodUnit (..)
     , P.HasPersistenceTimeout (..)
+    , P.HasPodCidr (..)
     , P.HasPolicy (..)
     , P.HasPolicyName (..)
     , P.HasPolicyType (..)
     , P.HasPort (..)
     , P.HasPortRange (..)
+    , P.HasPrimaryKey (..)
     , P.HasPriority (..)
     , P.HasPrivateIp (..)
     , P.HasPrivilege (..)
+    , P.HasProject (..)
     , P.HasProtocol (..)
     , P.HasPublicKey (..)
     , P.HasRamUsers (..)
@@ -322,7 +383,9 @@ module Terrafomo.AliCloud.Resource
     , P.HasRecurrenceType (..)
     , P.HasRecurrenceValue (..)
     , P.HasRefererConfig (..)
+    , P.HasReleaseEip (..)
     , P.HasRemovalPolicies (..)
+    , P.HasRenewalStatus (..)
     , P.HasRetentionPeriod (..)
     , P.HasRole (..)
     , P.HasRoleName (..)
@@ -345,7 +408,10 @@ module Terrafomo.AliCloud.Resource
     , P.HasServerGroupId (..)
     , P.HasServerSideEncryption (..)
     , P.HasServers (..)
+    , P.HasServiceCidr (..)
     , P.HasServices (..)
+    , P.HasShardCount (..)
+    , P.HasSilenceTime (..)
     , P.HasSize (..)
     , P.HasSnapshotId (..)
     , P.HasSnatIp (..)
@@ -361,15 +427,23 @@ module Terrafomo.AliCloud.Resource
     , P.HasSpotPriceLimit (..)
     , P.HasSpotStrategy (..)
     , P.HasSslCertificateId (..)
+    , P.HasStartTime (..)
     , P.HasStatement (..)
+    , P.HasStatistics (..)
     , P.HasStatus (..)
     , P.HasStickySession (..)
     , P.HasStickySessionType (..)
     , P.HasSubstitute (..)
     , P.HasSystemDiskCategory (..)
     , P.HasSystemDiskSize (..)
+    , P.HasTableName (..)
     , P.HasTags (..)
     , P.HasTaskEnabled (..)
+    , P.HasTemplate (..)
+    , P.HasThreshold (..)
+    , P.HasTimeToLive (..)
+    , P.HasTopic (..)
+    , P.HasTriggeredCount (..)
     , P.HasTtl (..)
     , P.HasType' (..)
     , P.HasUnhealthyThreshold (..)
@@ -384,6 +458,10 @@ module Terrafomo.AliCloud.Resource
     , P.HasVswitchIds (..)
     , P.HasWebsite (..)
     , P.HasWeight (..)
+    , P.HasWorkerDiskCategory (..)
+    , P.HasWorkerDiskSize (..)
+    , P.HasWorkerInstanceType (..)
+    , P.HasWorkerNumber (..)
     , P.HasZoneId (..)
 
     -- ** Computed Attributes
@@ -395,11 +473,13 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedAddress (..)
     , P.HasComputedAdjustmentType (..)
     , P.HasComputedAdjustmentValue (..)
+    , P.HasComputedAgentVersion (..)
     , P.HasComputedAllocationId (..)
     , P.HasComputedAri (..)
     , P.HasComputedArn (..)
     , P.HasComputedAttachmentCount (..)
     , P.HasComputedAuthConfig (..)
+    , P.HasComputedAutoRenewPeriod (..)
     , P.HasComputedAvailabilityZone (..)
     , P.HasComputedBackendPort (..)
     , P.HasComputedBackendServers (..)
@@ -408,6 +488,8 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedBackupTime (..)
     , P.HasComputedBandwidth (..)
     , P.HasComputedBandwidthPackageIds (..)
+    , P.HasComputedBlueGreen (..)
+    , P.HasComputedBlueGreenConfirm (..)
     , P.HasComputedBucket (..)
     , P.HasComputedCacheConfig (..)
     , P.HasComputedCacheControl (..)
@@ -416,10 +498,15 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedCharacterSet (..)
     , P.HasComputedCidrBlock (..)
     , P.HasComputedCidrIp (..)
+    , P.HasComputedClientCert (..)
+    , P.HasComputedClientKey (..)
+    , P.HasComputedClusterCaCert (..)
+    , P.HasComputedClusterName (..)
     , P.HasComputedComments (..)
     , P.HasComputedConnectionPrefix (..)
     , P.HasComputedConnectionString (..)
     , P.HasComputedConnections (..)
+    , P.HasComputedContactGroups (..)
     , P.HasComputedContent (..)
     , P.HasComputedContentDisposition (..)
     , P.HasComputedContentEncoding (..)
@@ -439,10 +526,12 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedDbMappings (..)
     , P.HasComputedDbNames (..)
     , P.HasComputedDefaultCooldown (..)
+    , P.HasComputedDefaultDomain (..)
     , P.HasComputedDeletionWindowInDays (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDestinationCidrblock (..)
     , P.HasComputedDeviceName (..)
+    , P.HasComputedDimensions (..)
     , P.HasComputedDiskCategory (..)
     , P.HasComputedDiskId (..)
     , P.HasComputedDiskSize (..)
@@ -454,13 +543,19 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedDryRun (..)
     , P.HasComputedEmail (..)
     , P.HasComputedEnable (..)
+    , P.HasComputedEnableSsh (..)
+    , P.HasComputedEnabled (..)
+    , P.HasComputedEncrypted (..)
+    , P.HasComputedEndTime (..)
     , P.HasComputedEngine (..)
     , P.HasComputedEngineVersion (..)
+    , P.HasComputedEnvironment (..)
     , P.HasComputedEtag (..)
     , P.HasComputedExpires (..)
     , P.HasComputedExternalIp (..)
     , P.HasComputedExternalPort (..)
     , P.HasComputedExtranetEndpoint (..)
+    , P.HasComputedFieldSearch (..)
     , P.HasComputedFingerprint (..)
     , P.HasComputedForce (..)
     , P.HasComputedForceDelete (..)
@@ -468,6 +563,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedForwardTableId (..)
     , P.HasComputedForwardTableIds (..)
     , P.HasComputedFrontendPort (..)
+    , P.HasComputedFullText (..)
     , P.HasComputedGroupId (..)
     , P.HasComputedGroupName (..)
     , P.HasComputedHealthCheck (..)
@@ -485,9 +581,12 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedHostRecord (..)
     , P.HasComputedHttpHeaderConfig (..)
     , P.HasComputedId (..)
+    , P.HasComputedIdentifyList (..)
+    , P.HasComputedIdentifyType (..)
     , P.HasComputedImageId (..)
     , P.HasComputedIncludeDataDisks (..)
     , P.HasComputedInnerAccess (..)
+    , P.HasComputedInstallCloudMonitor (..)
     , P.HasComputedInstanceChargeType (..)
     , P.HasComputedInstanceId (..)
     , P.HasComputedInstanceIds (..)
@@ -511,6 +610,8 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedKeyName (..)
     , P.HasComputedKeyNamePrefix (..)
     , P.HasComputedKeyUsage (..)
+    , P.HasComputedKubeConfig (..)
+    , P.HasComputedLatestImage (..)
     , P.HasComputedLaunchExpirationTime (..)
     , P.HasComputedLaunchTime (..)
     , P.HasComputedLifecycleRule (..)
@@ -522,17 +623,30 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedLogRetentionPeriod (..)
     , P.HasComputedLogging (..)
     , P.HasComputedLoggingIsenable (..)
+    , P.HasComputedLogstore (..)
+    , P.HasComputedMasterDiskCategory (..)
+    , P.HasComputedMasterDiskSize (..)
+    , P.HasComputedMasterInstanceType (..)
+    , P.HasComputedMasterNodes (..)
     , P.HasComputedMasterUserName (..)
     , P.HasComputedMaxSize (..)
+    , P.HasComputedMaxVersion (..)
+    , P.HasComputedMetric (..)
     , P.HasComputedMfaBindRequired (..)
     , P.HasComputedMinSize (..)
     , P.HasComputedMobile (..)
     , P.HasComputedMultiAz (..)
     , P.HasComputedName (..)
     , P.HasComputedNamePrefix (..)
+    , P.HasComputedNatGatewayId (..)
+    , P.HasComputedNewNatGateway (..)
     , P.HasComputedNexthopId (..)
     , P.HasComputedNexthopType (..)
     , P.HasComputedNicType (..)
+    , P.HasComputedNodeNumber (..)
+    , P.HasComputedNodes (..)
+    , P.HasComputedNotifyType (..)
+    , P.HasComputedOperator (..)
     , P.HasComputedOppositeAccessPointId (..)
     , P.HasComputedOppositeInterfaceId (..)
     , P.HasComputedOppositeInterfaceOwnerId (..)
@@ -549,6 +663,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedPeriod (..)
     , P.HasComputedPeriodUnit (..)
     , P.HasComputedPersistenceTimeout (..)
+    , P.HasComputedPodCidr (..)
     , P.HasComputedPolicy (..)
     , P.HasComputedPolicyName (..)
     , P.HasComputedPolicyType (..)
@@ -556,9 +671,11 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedPortRange (..)
     , P.HasComputedPreferredBackupPeriod (..)
     , P.HasComputedPreferredBackupTime (..)
+    , P.HasComputedPrimaryKey (..)
     , P.HasComputedPriority (..)
     , P.HasComputedPrivateIp (..)
     , P.HasComputedPrivilege (..)
+    , P.HasComputedProject (..)
     , P.HasComputedProtocol (..)
     , P.HasComputedPublicIp (..)
     , P.HasComputedPublicKey (..)
@@ -569,7 +686,9 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedRecurrenceValue (..)
     , P.HasComputedReferConfig (..)
     , P.HasComputedRefererConfig (..)
+    , P.HasComputedReleaseEip (..)
     , P.HasComputedRemovalPolicies (..)
+    , P.HasComputedRenewalStatus (..)
     , P.HasComputedRetentionPeriod (..)
     , P.HasComputedRole (..)
     , P.HasComputedRoleName (..)
@@ -592,8 +711,14 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedServerGroupId (..)
     , P.HasComputedServerSideEncryption (..)
     , P.HasComputedServers (..)
+    , P.HasComputedServiceCidr (..)
     , P.HasComputedServices (..)
+    , P.HasComputedShardCount (..)
+    , P.HasComputedSilenceTime (..)
     , P.HasComputedSize (..)
+    , P.HasComputedSlbId (..)
+    , P.HasComputedSlbInternet (..)
+    , P.HasComputedSlbIntranet (..)
     , P.HasComputedSnapshotId (..)
     , P.HasComputedSnatIp (..)
     , P.HasComputedSnatTableId (..)
@@ -610,7 +735,9 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedSpotPriceLimit (..)
     , P.HasComputedSpotStrategy (..)
     , P.HasComputedSslCertificateId (..)
+    , P.HasComputedStartTime (..)
     , P.HasComputedStatement (..)
+    , P.HasComputedStatistics (..)
     , P.HasComputedStatus (..)
     , P.HasComputedStickySession (..)
     , P.HasComputedStickySessionType (..)
@@ -618,8 +745,14 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedSubstitute (..)
     , P.HasComputedSystemDiskCategory (..)
     , P.HasComputedSystemDiskSize (..)
+    , P.HasComputedTableName (..)
     , P.HasComputedTags (..)
     , P.HasComputedTaskEnabled (..)
+    , P.HasComputedTemplate (..)
+    , P.HasComputedThreshold (..)
+    , P.HasComputedTimeToLive (..)
+    , P.HasComputedTopic (..)
+    , P.HasComputedTriggeredCount (..)
     , P.HasComputedTtl (..)
     , P.HasComputedType' (..)
     , P.HasComputedUnhealthyThreshold (..)
@@ -635,6 +768,11 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedVswitchIds (..)
     , P.HasComputedWebsite (..)
     , P.HasComputedWeight (..)
+    , P.HasComputedWorkerDiskCategory (..)
+    , P.HasComputedWorkerDiskSize (..)
+    , P.HasComputedWorkerInstanceType (..)
+    , P.HasComputedWorkerNodes (..)
+    , P.HasComputedWorkerNumber (..)
     , P.HasComputedZoneId (..)
 
     -- * Re-exported Types
@@ -785,13 +923,740 @@ cdnDomainResource =
             , _sources = TF.Nil
             }
 
+{- | The @alicloud_cms_alarm@ AliCloud resource.
+
+This resource provides a alarm rule resource and it can be used to monitor
+several cloud services according different metrics. Details for
+<https://www.alibabacloud.com/help/doc-detail/28608.htm> .
+-}
+data CmsAlarmResource s = CmsAlarmResource {
+      _contact_groups  :: !(TF.Attr s P.Text)
+    {- ^ (Required) List contact groups of the alarm rule, which must have been created on the console. -}
+    , _dimensions      :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) Map of the resources associated with the alarm rule, such as "instanceId", "device" and "port". Each key's value is a string and it uses comma to split multiple items. For more information, see <https://www.alibabacloud.com/help/doc-detail/28619.htm> . -}
+    , _enabled         :: !(TF.Attr s P.Text)
+    {- ^ - Whether to enable alarm rule. Default to true. -}
+    , _end_time        :: !(TF.Attr s P.Text)
+    {- ^ - End time of the alarm effective period. Default value 24 and it indicates the time 24:00. Valid value range: [0, 24]. -}
+    , _metric          :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) Name of the monitoring metrics corresponding to a project, such as "CPUUtilization" and "networkin_rate". For more information, see <https://www.alibabacloud.com/help/doc-detail/28619.htm> . -}
+    , _name            :: !(TF.Attr s P.Text)
+    {- ^ (Required) The alarm rule name. -}
+    , _notify_type     :: !(TF.Attr s P.Text)
+    {- ^ - Notification type. Valid value [0, 1]. The value 0 indicates TradeManager+email, and the value 1 indicates that TradeManager+email+SMS -}
+    , _operator        :: !(TF.Attr s P.Text)
+    {- ^ - Alarm comparison operator. Valid values: ["<=", "<", ">", ">=", "==", "!="]. Default to "==". -}
+    , _period          :: !(TF.Attr s P.Text)
+    {- ^ - Index query cycle, which must be consistent with that defined for metrics. Default to 300, in seconds. -}
+    , _project         :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) Monitor project name, such as "acs_ecs_dashboard" and "acs_rds_dashboard". For more information, see <https://www.alibabacloud.com/help/doc-detail/28619.htm> . -}
+    , _silence_time    :: !(TF.Attr s P.Text)
+    {- ^ - Notification silence period in the alarm state, in seconds. Valid value range: [300, 86400]. Default to 86400 -}
+    , _start_time      :: !(TF.Attr s P.Text)
+    {- ^ - Start time of the alarm effective period. Default to 0 and it indicates the time 00:00. Valid value range: [0, 24]. -}
+    , _statistics      :: !(TF.Attr s P.Text)
+    {- ^ - Statistical method. It must be consistent with that defined for metrics. Valid values: ["Average", "Minimum", "Maximum"]. Default to "Average". -}
+    , _threshold       :: !(TF.Attr s P.Text)
+    {- ^ (Required) Alarm threshold value, which must be a numeric value currently. -}
+    , _triggered_count :: !(TF.Attr s P.Text)
+    {- ^ - Number of consecutive times it has been detected that the values exceed the threshold. Default to 3. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (CmsAlarmResource s) where
+    toHCL CmsAlarmResource{..} = TF.inline $ catMaybes
+        [ TF.assign "contact_groups" <$> TF.attribute _contact_groups
+        , TF.assign "dimensions" <$> TF.attribute _dimensions
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "end_time" <$> TF.attribute _end_time
+        , TF.assign "metric" <$> TF.attribute _metric
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "notify_type" <$> TF.attribute _notify_type
+        , TF.assign "operator" <$> TF.attribute _operator
+        , TF.assign "period" <$> TF.attribute _period
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "silence_time" <$> TF.attribute _silence_time
+        , TF.assign "start_time" <$> TF.attribute _start_time
+        , TF.assign "statistics" <$> TF.attribute _statistics
+        , TF.assign "threshold" <$> TF.attribute _threshold
+        , TF.assign "triggered_count" <$> TF.attribute _triggered_count
+        ]
+
+instance P.HasContactGroups (CmsAlarmResource s) (TF.Attr s P.Text) where
+    contactGroups =
+        lens (_contact_groups :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _contact_groups = a } :: CmsAlarmResource s)
+
+instance P.HasDimensions (CmsAlarmResource s) (TF.Attr s P.Text) where
+    dimensions =
+        lens (_dimensions :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _dimensions = a } :: CmsAlarmResource s)
+
+instance P.HasEnabled (CmsAlarmResource s) (TF.Attr s P.Text) where
+    enabled =
+        lens (_enabled :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: CmsAlarmResource s)
+
+instance P.HasEndTime (CmsAlarmResource s) (TF.Attr s P.Text) where
+    endTime =
+        lens (_end_time :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _end_time = a } :: CmsAlarmResource s)
+
+instance P.HasMetric (CmsAlarmResource s) (TF.Attr s P.Text) where
+    metric =
+        lens (_metric :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _metric = a } :: CmsAlarmResource s)
+
+instance P.HasName (CmsAlarmResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: CmsAlarmResource s)
+
+instance P.HasNotifyType (CmsAlarmResource s) (TF.Attr s P.Text) where
+    notifyType =
+        lens (_notify_type :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _notify_type = a } :: CmsAlarmResource s)
+
+instance P.HasOperator (CmsAlarmResource s) (TF.Attr s P.Text) where
+    operator =
+        lens (_operator :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _operator = a } :: CmsAlarmResource s)
+
+instance P.HasPeriod (CmsAlarmResource s) (TF.Attr s P.Text) where
+    period =
+        lens (_period :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _period = a } :: CmsAlarmResource s)
+
+instance P.HasProject (CmsAlarmResource s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: CmsAlarmResource s)
+
+instance P.HasSilenceTime (CmsAlarmResource s) (TF.Attr s P.Text) where
+    silenceTime =
+        lens (_silence_time :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _silence_time = a } :: CmsAlarmResource s)
+
+instance P.HasStartTime (CmsAlarmResource s) (TF.Attr s P.Text) where
+    startTime =
+        lens (_start_time :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _start_time = a } :: CmsAlarmResource s)
+
+instance P.HasStatistics (CmsAlarmResource s) (TF.Attr s P.Text) where
+    statistics =
+        lens (_statistics :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _statistics = a } :: CmsAlarmResource s)
+
+instance P.HasThreshold (CmsAlarmResource s) (TF.Attr s P.Text) where
+    threshold =
+        lens (_threshold :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _threshold = a } :: CmsAlarmResource s)
+
+instance P.HasTriggeredCount (CmsAlarmResource s) (TF.Attr s P.Text) where
+    triggeredCount =
+        lens (_triggered_count :: CmsAlarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _triggered_count = a } :: CmsAlarmResource s)
+
+instance s ~ s' => P.HasComputedContactGroups (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedContactGroups x = TF.compute (TF.refKey x) "contact_groups"
+
+instance s ~ s' => P.HasComputedDimensions (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedDimensions x = TF.compute (TF.refKey x) "dimensions"
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+
+instance s ~ s' => P.HasComputedEndTime (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedEndTime x = TF.compute (TF.refKey x) "end_time"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedMetric (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedMetric x = TF.compute (TF.refKey x) "metric"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedNotifyType (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedNotifyType x = TF.compute (TF.refKey x) "notify_type"
+
+instance s ~ s' => P.HasComputedOperator (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedOperator x = TF.compute (TF.refKey x) "operator"
+
+instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedPeriod x = TF.compute (TF.refKey x) "period"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"
+
+instance s ~ s' => P.HasComputedSilenceTime (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedSilenceTime x = TF.compute (TF.refKey x) "silence_time"
+
+instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedStartTime x = TF.compute (TF.refKey x) "start_time"
+
+instance s ~ s' => P.HasComputedStatistics (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedStatistics x = TF.compute (TF.refKey x) "statistics"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedThreshold (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedThreshold x = TF.compute (TF.refKey x) "threshold"
+
+instance s ~ s' => P.HasComputedTriggeredCount (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedTriggeredCount x = TF.compute (TF.refKey x) "triggered_count"
+
+cmsAlarmResource :: TF.Resource P.AliCloud (CmsAlarmResource s)
+cmsAlarmResource =
+    TF.newResource "alicloud_cms_alarm" $
+        CmsAlarmResource {
+              _contact_groups = TF.Nil
+            , _dimensions = TF.Nil
+            , _enabled = TF.Nil
+            , _end_time = TF.Nil
+            , _metric = TF.Nil
+            , _name = TF.Nil
+            , _notify_type = TF.Nil
+            , _operator = TF.Nil
+            , _period = TF.Nil
+            , _project = TF.Nil
+            , _silence_time = TF.Nil
+            , _start_time = TF.Nil
+            , _statistics = TF.Nil
+            , _threshold = TF.Nil
+            , _triggered_count = TF.Nil
+            }
+
 {- | The @alicloud_container_cluster@ AliCloud resource.
 
-Provides a container cluster resource.
+~> NOTE: This resource name has been replaced by
+<https://www.terraform.io/docs/providers/alicloud/r/cs_swarm.html> from
+<https://releases.hashicorp.com/terraform-provider-alicloud/1.8.2/> . Please
+update it.
 -}
 data ContainerClusterResource s = ContainerClusterResource {
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ContainerClusterResource s) where
+    toHCL _ = TF.empty
+
+containerClusterResource :: TF.Resource P.AliCloud (ContainerClusterResource s)
+containerClusterResource =
+    TF.newResource "alicloud_container_cluster" $
+        ContainerClusterResource {
+            }
+
+{- | The @alicloud_cs_application@ AliCloud resource.
+
+This resource use an orchestration template to define and deploy a
+multi-container application. An application is created by using an
+orchestration template. Each application can contain one or more services.
+-> NOTE: Application orchestration template must be a valid Docker Compose
+YAML template. -> NOTE: At present, this resource only support swarm
+cluster.
+-}
+data CsApplicationResource s = CsApplicationResource {
+      _blue_green         :: !(TF.Attr s P.Text)
+    {- ^ - Wherther to use "Blue Green" method when release a new version. Default to false. -}
+    , _blue_green_confirm :: !(TF.Attr s P.Text)
+    {- ^ - Whether to confirm a "Blue Green" application. Default to false. It will be ignored when @blue_green@ is false. -}
+    , _cluster_name       :: !(TF.Attr s P.Text)
+    {- ^ (Required, Force new resource) The swarm cluster's name. -}
+    , _description        :: !(TF.Attr s P.Text)
+    {- ^ - The description of application. -}
+    , _environment        :: !(TF.Attr s P.Text)
+    {- ^ - A key/value map used to replace the variable parameter in the Compose template. -}
+    , _latest_image       :: !(TF.Attr s P.Text)
+    {- ^ - Whether to use latest docker image while each updating application. Default to false. -}
+    , _name               :: !(TF.Attr s P.Text)
+    {- ^ (Required, Force new resource) The application name. It should be 1-64 characters long, and can contain numbers, English letters and hyphens, but cannot start with hyphens. -}
+    , _template           :: !(TF.Attr s P.Text)
+    {- ^ - The application deployment template and it must be <https://docs.docker.com/compose/> . -}
+    , _version            :: !(TF.Attr s P.Text)
+    {- ^ - The application deploying version. Each updating, it must be different with current. Default to "1.0" -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (CsApplicationResource s) where
+    toHCL CsApplicationResource{..} = TF.inline $ catMaybes
+        [ TF.assign "blue_green" <$> TF.attribute _blue_green
+        , TF.assign "blue_green_confirm" <$> TF.attribute _blue_green_confirm
+        , TF.assign "cluster_name" <$> TF.attribute _cluster_name
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "environment" <$> TF.attribute _environment
+        , TF.assign "latest_image" <$> TF.attribute _latest_image
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "template" <$> TF.attribute _template
+        , TF.assign "version" <$> TF.attribute _version
+        ]
+
+instance P.HasBlueGreen (CsApplicationResource s) (TF.Attr s P.Text) where
+    blueGreen =
+        lens (_blue_green :: CsApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _blue_green = a } :: CsApplicationResource s)
+
+instance P.HasBlueGreenConfirm (CsApplicationResource s) (TF.Attr s P.Text) where
+    blueGreenConfirm =
+        lens (_blue_green_confirm :: CsApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _blue_green_confirm = a } :: CsApplicationResource s)
+
+instance P.HasClusterName (CsApplicationResource s) (TF.Attr s P.Text) where
+    clusterName =
+        lens (_cluster_name :: CsApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_name = a } :: CsApplicationResource s)
+
+instance P.HasDescription (CsApplicationResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: CsApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: CsApplicationResource s)
+
+instance P.HasEnvironment (CsApplicationResource s) (TF.Attr s P.Text) where
+    environment =
+        lens (_environment :: CsApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _environment = a } :: CsApplicationResource s)
+
+instance P.HasLatestImage (CsApplicationResource s) (TF.Attr s P.Text) where
+    latestImage =
+        lens (_latest_image :: CsApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _latest_image = a } :: CsApplicationResource s)
+
+instance P.HasName (CsApplicationResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: CsApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: CsApplicationResource s)
+
+instance P.HasTemplate (CsApplicationResource s) (TF.Attr s P.Text) where
+    template =
+        lens (_template :: CsApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _template = a } :: CsApplicationResource s)
+
+instance P.HasVersion (CsApplicationResource s) (TF.Attr s P.Text) where
+    version =
+        lens (_version :: CsApplicationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _version = a } :: CsApplicationResource s)
+
+instance s ~ s' => P.HasComputedBlueGreen (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
+    computedBlueGreen =
+        (_blue_green :: CsApplicationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedBlueGreenConfirm (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
+    computedBlueGreenConfirm =
+        (_blue_green_confirm :: CsApplicationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedClusterName (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
+    computedClusterName x = TF.compute (TF.refKey x) "cluster_name"
+
+instance s ~ s' => P.HasComputedDefaultDomain (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
+    computedDefaultDomain x = TF.compute (TF.refKey x) "default_domain"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedEnvironment (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
+    computedEnvironment x = TF.compute (TF.refKey x) "environment"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLatestImage (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
+    computedLatestImage =
+        (_latest_image :: CsApplicationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
+    computedServices x = TF.compute (TF.refKey x) "services"
+
+instance s ~ s' => P.HasComputedTemplate (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
+    computedTemplate x = TF.compute (TF.refKey x) "template"
+
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
+    computedVersion =
+        (_version :: CsApplicationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+csApplicationResource :: TF.Resource P.AliCloud (CsApplicationResource s)
+csApplicationResource =
+    TF.newResource "alicloud_cs_application" $
+        CsApplicationResource {
+              _blue_green = TF.Nil
+            , _blue_green_confirm = TF.Nil
+            , _cluster_name = TF.Nil
+            , _description = TF.Nil
+            , _environment = TF.Nil
+            , _latest_image = TF.Nil
+            , _name = TF.Nil
+            , _template = TF.Nil
+            , _version = TF.Nil
+            }
+
+{- | The @alicloud_cs_kubernetes@ AliCloud resource.
+
+This resource will help you to manager a Kubernetes Cluster. The cluster is
+same as container service created by web console. -> NOTE: Kubernetes
+cluster only supports VPC network and it can access internet while creating
+kubernetes cluster. A Nat Gateway and configuring a SNAT for it can ensure
+one VPC network access internet. If there is no nat gateway in the VPC, you
+can set @new_nat_gateway@ to "true" to create one automatically. -> NOTE: If
+there is no specified @vswitch_id@ , the resource will create a new VPC and
+VSwitch while creating kubernetes cluster. -> NOTE: Each kubernetes cluster
+contains 3 master nodes and those number cannot be changed at now. -> NOTE:
+Creating kubernetes cluster need to install several packages and it will
+cost more than one hour. Please be patient. -> NOTE: From version 1.9.4, the
+provider supports to download kube config, client certificate, client key
+and cluster ca certificate after creating cluster successfully, and you can
+put them into the specified location, like '~/.kube/config'.
+-}
+data CsKubernetesResource s = CsKubernetesResource {
+      _availability_zone     :: !(TF.Attr s P.Text)
+    {- ^ - (Force new resource) The Zone where new kubernetes cluster will be located. If it is not be specified, the value will be vswitch's zone. -}
+    , _client_cert           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The path of client certificate, like @~/.kube/client-cert.pem@ . -}
+    , _client_key            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The path of client key, like @~/.kube/client-key.pem@ . -}
+    , _cluster_ca_cert       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The path of cluster ca certificate, like @~/.kube/cluster-ca-cert.pem@ -}
+    , _enable_ssh            :: !(TF.Attr s P.Text)
+    {- ^ - (Force new resource) Whether to allow to SSH login kubernetes. Default to false. -}
+    , _install_cloud_monitor :: !(TF.Attr s P.Text)
+    {- ^ - (Force new resource) Whether to install cloud monitor for the kubernetes' node. -}
+    , _is_outdated           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether to use outdated instance type. Default to false. -}
+    , _kube_config           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The path of kube config, like @~/.kube/config@ . -}
+    , _master_disk_category  :: !(TF.Attr s P.Text)
+    {- ^ - (Force new resource) The system disk category of master node. Its valid value are @cloud_ssd@ and @cloud_efficiency@ . Default to @cloud_efficiency@ . -}
+    , _master_disk_size      :: !(TF.Attr s P.Text)
+    {- ^ - (Force new resource) The system disk size of master node. Its valid value range [20~32768] in GB. Default to 20. -}
+    , _master_instance_type  :: !(TF.Attr s P.Text)
+    {- ^ (Required, Force new resource) The instance type of master node. -}
+    , _name                  :: !(TF.Attr s P.Text)
+    {- ^ - The kubernetes cluster's name. It is the only in one Alicloud account. -}
+    , _name_prefix           :: !(TF.Attr s P.Text)
+    {- ^ - The kubernetes cluster name's prefix. It is conflict with @name@ . If it is specified, terraform will using it to build the only cluster name. Default to "Terraform-Creation". -}
+    , _new_nat_gateway       :: !(TF.Attr s P.Text)
+    {- ^ - (Force new resource) Whether to create a new nat gateway while creating kubernetes cluster. Default to true. -}
+    , _password              :: !(TF.Attr s P.Text)
+    {- ^ (Required, Force new resource) The password of ssh login cluster node. -}
+    , _pod_cidr              :: !(TF.Attr s P.Text)
+    {- ^ (Required, Force new resource) The CIDR block for the pod network. It will be allocated automatically when @vswitch_id@ is not specified. It cannot be duplicated with the VPC CIDR and CIDR used by Kubernetes cluster in VPC, cannot be modified after creation. Maximum number of hosts allowed in the cluster: 256. Refer to <https://www.alibabacloud.com/help/doc-detail/64530.htm> . -}
+    , _service_cidr          :: !(TF.Attr s P.Text)
+    {- ^ (Required, Force new resource) The CIDR block for the service network.  It will be allocated automatically when @vswitch_id@ is not specified. It cannot be duplicated with the VPC CIDR and CIDR used by Kubernetes cluster in VPC, cannot be modified after creation. -}
+    , _vswitch_id            :: !(TF.Attr s P.Text)
+    {- ^ - (Force new resource) The vswitch where new kubernetes cluster will be located. If it is not specified, a new VPC and VSwicth will be built. It must be in the zone which @availability_zone@ specified. -}
+    , _worker_disk_category  :: !(TF.Attr s P.Text)
+    {- ^ - (Force new resource) The system disk category of worker node. Its valid value are @cloud_ssd@ and @cloud_efficiency@ . Default to @cloud_efficiency@ . -}
+    , _worker_disk_size      :: !(TF.Attr s P.Text)
+    {- ^ - (Force new resource) The system disk size of worker node. Its valid value range [20~32768] in GB. Default to 20. -}
+    , _worker_instance_type  :: !(TF.Attr s P.Text)
+    {- ^ (Required, Force new resource) The instance type of worker node. -}
+    , _worker_number         :: !(TF.Attr s P.Text)
+    {- ^ - The worker node number of the kubernetes cluster. Default to 3. It is limited up to 50 and if you want to enlarge it, please apply white list or contact with us. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (CsKubernetesResource s) where
+    toHCL CsKubernetesResource{..} = TF.inline $ catMaybes
+        [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
+        , TF.assign "client_cert" <$> TF.attribute _client_cert
+        , TF.assign "client_key" <$> TF.attribute _client_key
+        , TF.assign "cluster_ca_cert" <$> TF.attribute _cluster_ca_cert
+        , TF.assign "enable_ssh" <$> TF.attribute _enable_ssh
+        , TF.assign "install_cloud_monitor" <$> TF.attribute _install_cloud_monitor
+        , TF.assign "is_outdated" <$> TF.attribute _is_outdated
+        , TF.assign "kube_config" <$> TF.attribute _kube_config
+        , TF.assign "master_disk_category" <$> TF.attribute _master_disk_category
+        , TF.assign "master_disk_size" <$> TF.attribute _master_disk_size
+        , TF.assign "master_instance_type" <$> TF.attribute _master_instance_type
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
+        , TF.assign "new_nat_gateway" <$> TF.attribute _new_nat_gateway
+        , TF.assign "password" <$> TF.attribute _password
+        , TF.assign "pod_cidr" <$> TF.attribute _pod_cidr
+        , TF.assign "service_cidr" <$> TF.attribute _service_cidr
+        , TF.assign "vswitch_id" <$> TF.attribute _vswitch_id
+        , TF.assign "worker_disk_category" <$> TF.attribute _worker_disk_category
+        , TF.assign "worker_disk_size" <$> TF.attribute _worker_disk_size
+        , TF.assign "worker_instance_type" <$> TF.attribute _worker_instance_type
+        , TF.assign "worker_number" <$> TF.attribute _worker_number
+        ]
+
+instance P.HasAvailabilityZone (CsKubernetesResource s) (TF.Attr s P.Text) where
+    availabilityZone =
+        lens (_availability_zone :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _availability_zone = a } :: CsKubernetesResource s)
+
+instance P.HasClientCert (CsKubernetesResource s) (TF.Attr s P.Text) where
+    clientCert =
+        lens (_client_cert :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _client_cert = a } :: CsKubernetesResource s)
+
+instance P.HasClientKey (CsKubernetesResource s) (TF.Attr s P.Text) where
+    clientKey =
+        lens (_client_key :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _client_key = a } :: CsKubernetesResource s)
+
+instance P.HasClusterCaCert (CsKubernetesResource s) (TF.Attr s P.Text) where
+    clusterCaCert =
+        lens (_cluster_ca_cert :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cluster_ca_cert = a } :: CsKubernetesResource s)
+
+instance P.HasEnableSsh (CsKubernetesResource s) (TF.Attr s P.Text) where
+    enableSsh =
+        lens (_enable_ssh :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enable_ssh = a } :: CsKubernetesResource s)
+
+instance P.HasInstallCloudMonitor (CsKubernetesResource s) (TF.Attr s P.Text) where
+    installCloudMonitor =
+        lens (_install_cloud_monitor :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _install_cloud_monitor = a } :: CsKubernetesResource s)
+
+instance P.HasIsOutdated (CsKubernetesResource s) (TF.Attr s P.Text) where
+    isOutdated =
+        lens (_is_outdated :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _is_outdated = a } :: CsKubernetesResource s)
+
+instance P.HasKubeConfig (CsKubernetesResource s) (TF.Attr s P.Text) where
+    kubeConfig =
+        lens (_kube_config :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _kube_config = a } :: CsKubernetesResource s)
+
+instance P.HasMasterDiskCategory (CsKubernetesResource s) (TF.Attr s P.Text) where
+    masterDiskCategory =
+        lens (_master_disk_category :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _master_disk_category = a } :: CsKubernetesResource s)
+
+instance P.HasMasterDiskSize (CsKubernetesResource s) (TF.Attr s P.Text) where
+    masterDiskSize =
+        lens (_master_disk_size :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _master_disk_size = a } :: CsKubernetesResource s)
+
+instance P.HasMasterInstanceType (CsKubernetesResource s) (TF.Attr s P.Text) where
+    masterInstanceType =
+        lens (_master_instance_type :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _master_instance_type = a } :: CsKubernetesResource s)
+
+instance P.HasName (CsKubernetesResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: CsKubernetesResource s)
+
+instance P.HasNamePrefix (CsKubernetesResource s) (TF.Attr s P.Text) where
+    namePrefix =
+        lens (_name_prefix :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name_prefix = a } :: CsKubernetesResource s)
+
+instance P.HasNewNatGateway (CsKubernetesResource s) (TF.Attr s P.Text) where
+    newNatGateway =
+        lens (_new_nat_gateway :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _new_nat_gateway = a } :: CsKubernetesResource s)
+
+instance P.HasPassword (CsKubernetesResource s) (TF.Attr s P.Text) where
+    password =
+        lens (_password :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _password = a } :: CsKubernetesResource s)
+
+instance P.HasPodCidr (CsKubernetesResource s) (TF.Attr s P.Text) where
+    podCidr =
+        lens (_pod_cidr :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _pod_cidr = a } :: CsKubernetesResource s)
+
+instance P.HasServiceCidr (CsKubernetesResource s) (TF.Attr s P.Text) where
+    serviceCidr =
+        lens (_service_cidr :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _service_cidr = a } :: CsKubernetesResource s)
+
+instance P.HasVswitchId (CsKubernetesResource s) (TF.Attr s P.Text) where
+    vswitchId =
+        lens (_vswitch_id :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vswitch_id = a } :: CsKubernetesResource s)
+
+instance P.HasWorkerDiskCategory (CsKubernetesResource s) (TF.Attr s P.Text) where
+    workerDiskCategory =
+        lens (_worker_disk_category :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _worker_disk_category = a } :: CsKubernetesResource s)
+
+instance P.HasWorkerDiskSize (CsKubernetesResource s) (TF.Attr s P.Text) where
+    workerDiskSize =
+        lens (_worker_disk_size :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _worker_disk_size = a } :: CsKubernetesResource s)
+
+instance P.HasWorkerInstanceType (CsKubernetesResource s) (TF.Attr s P.Text) where
+    workerInstanceType =
+        lens (_worker_instance_type :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _worker_instance_type = a } :: CsKubernetesResource s)
+
+instance P.HasWorkerNumber (CsKubernetesResource s) (TF.Attr s P.Text) where
+    workerNumber =
+        lens (_worker_number :: CsKubernetesResource s -> TF.Attr s P.Text)
+             (\s a -> s { _worker_number = a } :: CsKubernetesResource s)
+
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
+
+instance s ~ s' => P.HasComputedClientCert (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedClientCert =
+        (_client_cert :: CsKubernetesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedClientKey (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedClientKey =
+        (_client_key :: CsKubernetesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedClusterCaCert (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedClusterCaCert =
+        (_cluster_ca_cert :: CsKubernetesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedConnections (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedConnections x = TF.compute (TF.refKey x) "connections"
+
+instance s ~ s' => P.HasComputedEnableSsh (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedEnableSsh =
+        (_enable_ssh :: CsKubernetesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedImageId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedImageId x = TF.compute (TF.refKey x) "image_id"
+
+instance s ~ s' => P.HasComputedInstallCloudMonitor (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedInstallCloudMonitor =
+        (_install_cloud_monitor :: CsKubernetesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedIsOutdated (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedIsOutdated =
+        (_is_outdated :: CsKubernetesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedKubeConfig (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedKubeConfig =
+        (_kube_config :: CsKubernetesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMasterDiskCategory (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedMasterDiskCategory x = TF.compute (TF.refKey x) "master_disk_category"
+
+instance s ~ s' => P.HasComputedMasterDiskSize (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedMasterDiskSize x = TF.compute (TF.refKey x) "master_disk_size"
+
+instance s ~ s' => P.HasComputedMasterInstanceType (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedMasterInstanceType x = TF.compute (TF.refKey x) "master_instance_type"
+
+instance s ~ s' => P.HasComputedMasterNodes (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedMasterNodes x = TF.compute (TF.refKey x) "master_nodes"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedNamePrefix =
+        (_name_prefix :: CsKubernetesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNatGatewayId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedNatGatewayId x = TF.compute (TF.refKey x) "nat_gateway_id"
+
+instance s ~ s' => P.HasComputedNewNatGateway (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedNewNatGateway =
+        (_new_nat_gateway :: CsKubernetesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedNodes x = TF.compute (TF.refKey x) "nodes"
+
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedPassword =
+        (_password :: CsKubernetesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPodCidr (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedPodCidr =
+        (_pod_cidr :: CsKubernetesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSecurityGroupId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedSecurityGroupId x = TF.compute (TF.refKey x) "security_group_id"
+
+instance s ~ s' => P.HasComputedServiceCidr (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedServiceCidr =
+        (_service_cidr :: CsKubernetesResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSlbId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedSlbId x = TF.compute (TF.refKey x) "slb_id"
+
+instance s ~ s' => P.HasComputedSlbInternet (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedSlbInternet x = TF.compute (TF.refKey x) "slb_internet"
+
+instance s ~ s' => P.HasComputedSlbIntranet (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedSlbIntranet x = TF.compute (TF.refKey x) "slb_intranet"
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
+
+instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedVswitchId x = TF.compute (TF.refKey x) "vswitch_id"
+
+instance s ~ s' => P.HasComputedWorkerDiskCategory (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedWorkerDiskCategory x = TF.compute (TF.refKey x) "worker_disk_category"
+
+instance s ~ s' => P.HasComputedWorkerDiskSize (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedWorkerDiskSize x = TF.compute (TF.refKey x) "worker_disk_size"
+
+instance s ~ s' => P.HasComputedWorkerInstanceType (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedWorkerInstanceType x = TF.compute (TF.refKey x) "worker_instance_type"
+
+instance s ~ s' => P.HasComputedWorkerNodes (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedWorkerNodes x = TF.compute (TF.refKey x) "worker_nodes"
+
+instance s ~ s' => P.HasComputedWorkerNumber (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedWorkerNumber x = TF.compute (TF.refKey x) "worker_number"
+
+csKubernetesResource :: TF.Resource P.AliCloud (CsKubernetesResource s)
+csKubernetesResource =
+    TF.newResource "alicloud_cs_kubernetes" $
+        CsKubernetesResource {
+              _availability_zone = TF.Nil
+            , _client_cert = TF.Nil
+            , _client_key = TF.Nil
+            , _cluster_ca_cert = TF.Nil
+            , _enable_ssh = TF.Nil
+            , _install_cloud_monitor = TF.Nil
+            , _is_outdated = TF.Nil
+            , _kube_config = TF.Nil
+            , _master_disk_category = TF.Nil
+            , _master_disk_size = TF.Nil
+            , _master_instance_type = TF.Nil
+            , _name = TF.Nil
+            , _name_prefix = TF.Nil
+            , _new_nat_gateway = TF.Nil
+            , _password = TF.Nil
+            , _pod_cidr = TF.Nil
+            , _service_cidr = TF.Nil
+            , _vswitch_id = TF.Nil
+            , _worker_disk_category = TF.Nil
+            , _worker_disk_size = TF.Nil
+            , _worker_instance_type = TF.Nil
+            , _worker_number = TF.Nil
+            }
+
+{- | The @alicloud_cs_swarm@ AliCloud resource.
+
+This resource will help you to manager a Swarm Cluster. -> NOTE: Swarm
+cluster only supports VPC network and you can specify a VPC network by filed
+@vswitch_id@ .
+-}
+data CsSwarmResource s = CsSwarmResource {
       _cidr_block    :: !(TF.Attr s P.Text)
-    {- ^ (Required, Force new resource) The CIDR block for the Container. Its valid value are @192.168.X.0/24@ or @172.18.X.0/24@ ~ @172.31.X.0/24@ . And it cannot be equal to vswitch's cidr_block and sub cidr block. -}
+    {- ^ (Required, Force new resource) The CIDR block for the Container. It can not be same as the CIDR used by the VPC. Valid value: -}
     , _disk_category :: !(TF.Attr s P.Text)
     {- ^ - (Force new resource) The data disk category of ECS instance node. Its valid value are @cloud_ssd@ and @cloud_efficiency@ . Default to @cloud_efficiency@ . -}
     , _disk_size     :: !(TF.Attr s P.Text)
@@ -800,144 +1665,190 @@ data ContainerClusterResource s = ContainerClusterResource {
     {- ^ - (Force new resource) The image ID of ECS instance node used. Default to System automate allocated. -}
     , _instance_type :: !(TF.Attr s P.Text)
     {- ^ (Required, Force new resource) The type of ECS instance node. -}
+    , _is_outdated   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether to use outdated instance type. Default to false. -}
     , _name          :: !(TF.Attr s P.Text)
-    {- ^ - (Force new resource) The container cluster's name. It is the only in one Alicloud account. -}
+    {- ^ - The container cluster's name. It is the only in one Alicloud account. -}
     , _name_prefix   :: !(TF.Attr s P.Text)
-    {- ^ - (Force new resource) The container cluster name's prefix. It is conflict with @name@ . If it is specified, terraform will using it to build the only cluster name. -}
+    {- ^ - The container cluster name's prefix. It is conflict with @name@ . If it is specified, terraform will using it to build the only cluster name. Default to 'Terraform-Creation'. -}
+    , _node_number   :: !(TF.Attr s P.Text)
+    {- ^ - The ECS node number of the container cluster. Its value choices are 1~50, and default to 1. -}
     , _password      :: !(TF.Attr s P.Text)
     {- ^ (Required, Force new resource) The password of ECS instance node. -}
+    , _release_eip   :: !(TF.Attr s P.Text)
+    {- ^ - Whether to release EIP after creating swarm cluster successfully. Default to false. -}
     , _size          :: !(TF.Attr s P.Text)
-    {- ^ - The ECS node number of the container cluster. Its value choices are 1~20, and default to 1. -}
+    {- ^ - Field 'size' has been deprecated from provider version 1.9.1. New field 'node_number' replaces it. -}
     , _vswitch_id    :: !(TF.Attr s P.Text)
-    {- ^ - (Force new resource) The password of ECS instance node. If it is not specified, the container cluster's network mode will be @Classic@ . -}
+    {- ^ (Required, Force new resource) The password of ECS instance node. If it is not specified, the container cluster's network mode will be @Classic@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ContainerClusterResource s) where
-    toHCL ContainerClusterResource{..} = TF.inline $ catMaybes
+instance TF.ToHCL (CsSwarmResource s) where
+    toHCL CsSwarmResource{..} = TF.inline $ catMaybes
         [ TF.assign "cidr_block" <$> TF.attribute _cidr_block
         , TF.assign "disk_category" <$> TF.attribute _disk_category
         , TF.assign "disk_size" <$> TF.attribute _disk_size
         , TF.assign "image_id" <$> TF.attribute _image_id
         , TF.assign "instance_type" <$> TF.attribute _instance_type
+        , TF.assign "is_outdated" <$> TF.attribute _is_outdated
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _name_prefix
+        , TF.assign "node_number" <$> TF.attribute _node_number
         , TF.assign "password" <$> TF.attribute _password
+        , TF.assign "release_eip" <$> TF.attribute _release_eip
         , TF.assign "size" <$> TF.attribute _size
         , TF.assign "vswitch_id" <$> TF.attribute _vswitch_id
         ]
 
-instance P.HasCidrBlock (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasCidrBlock (CsSwarmResource s) (TF.Attr s P.Text) where
     cidrBlock =
-        lens (_cidr_block :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cidr_block = a } :: ContainerClusterResource s)
+        lens (_cidr_block :: CsSwarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cidr_block = a } :: CsSwarmResource s)
 
-instance P.HasDiskCategory (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasDiskCategory (CsSwarmResource s) (TF.Attr s P.Text) where
     diskCategory =
-        lens (_disk_category :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _disk_category = a } :: ContainerClusterResource s)
+        lens (_disk_category :: CsSwarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _disk_category = a } :: CsSwarmResource s)
 
-instance P.HasDiskSize (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasDiskSize (CsSwarmResource s) (TF.Attr s P.Text) where
     diskSize =
-        lens (_disk_size :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _disk_size = a } :: ContainerClusterResource s)
+        lens (_disk_size :: CsSwarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _disk_size = a } :: CsSwarmResource s)
 
-instance P.HasImageId (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasImageId (CsSwarmResource s) (TF.Attr s P.Text) where
     imageId =
-        lens (_image_id :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _image_id = a } :: ContainerClusterResource s)
+        lens (_image_id :: CsSwarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _image_id = a } :: CsSwarmResource s)
 
-instance P.HasInstanceType (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasInstanceType (CsSwarmResource s) (TF.Attr s P.Text) where
     instanceType =
-        lens (_instance_type :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_type = a } :: ContainerClusterResource s)
+        lens (_instance_type :: CsSwarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_type = a } :: CsSwarmResource s)
 
-instance P.HasName (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasIsOutdated (CsSwarmResource s) (TF.Attr s P.Text) where
+    isOutdated =
+        lens (_is_outdated :: CsSwarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _is_outdated = a } :: CsSwarmResource s)
+
+instance P.HasName (CsSwarmResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ContainerClusterResource s)
+        lens (_name :: CsSwarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: CsSwarmResource s)
 
-instance P.HasNamePrefix (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasNamePrefix (CsSwarmResource s) (TF.Attr s P.Text) where
     namePrefix =
-        lens (_name_prefix :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name_prefix = a } :: ContainerClusterResource s)
+        lens (_name_prefix :: CsSwarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name_prefix = a } :: CsSwarmResource s)
 
-instance P.HasPassword (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasNodeNumber (CsSwarmResource s) (TF.Attr s P.Text) where
+    nodeNumber =
+        lens (_node_number :: CsSwarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _node_number = a } :: CsSwarmResource s)
+
+instance P.HasPassword (CsSwarmResource s) (TF.Attr s P.Text) where
     password =
-        lens (_password :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _password = a } :: ContainerClusterResource s)
+        lens (_password :: CsSwarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _password = a } :: CsSwarmResource s)
 
-instance P.HasSize (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasReleaseEip (CsSwarmResource s) (TF.Attr s P.Text) where
+    releaseEip =
+        lens (_release_eip :: CsSwarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _release_eip = a } :: CsSwarmResource s)
+
+instance P.HasSize (CsSwarmResource s) (TF.Attr s P.Text) where
     size =
-        lens (_size :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: ContainerClusterResource s)
+        lens (_size :: CsSwarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _size = a } :: CsSwarmResource s)
 
-instance P.HasVswitchId (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance P.HasVswitchId (CsSwarmResource s) (TF.Attr s P.Text) where
     vswitchId =
-        lens (_vswitch_id :: ContainerClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vswitch_id = a } :: ContainerClusterResource s)
+        lens (_vswitch_id :: CsSwarmResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vswitch_id = a } :: CsSwarmResource s)
 
-instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAgentVersion (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
+    computedAgentVersion x = TF.compute (TF.refKey x) "agent_version"
+
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
     computedCidrBlock =
-        (_cidr_block :: ContainerClusterResource s -> TF.Attr s P.Text)
+        (_cidr_block :: CsSwarmResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDiskCategory (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedDiskCategory =
-        (_disk_category :: ContainerClusterResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedDiskCategory (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
+    computedDiskCategory x = TF.compute (TF.refKey x) "disk_category"
 
-instance s ~ s' => P.HasComputedDiskSize (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedDiskSize =
-        (_disk_size :: ContainerClusterResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedDiskSize (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
+    computedDiskSize x = TF.compute (TF.refKey x) "disk_size"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedImageId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImageId (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
     computedImageId =
-        (_image_id :: ContainerClusterResource s -> TF.Attr s P.Text)
+        (_image_id :: CsSwarmResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedInstanceType =
-        (_instance_type :: ContainerClusterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
+    computedInstanceType x = TF.compute (TF.refKey x) "instance_type"
+
+instance s ~ s' => P.HasComputedIsOutdated (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
+    computedIsOutdated =
+        (_is_outdated :: CsSwarmResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
     computedNamePrefix =
-        (_name_prefix :: ContainerClusterResource s -> TF.Attr s P.Text)
+        (_name_prefix :: CsSwarmResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNodeNumber (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
+    computedNodeNumber x = TF.compute (TF.refKey x) "node_number"
+
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
+    computedNodes x = TF.compute (TF.refKey x) "nodes"
+
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
     computedPassword =
-        (_password :: ContainerClusterResource s -> TF.Attr s P.Text)
+        (_password :: CsSwarmResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedReleaseEip (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
+    computedReleaseEip =
+        (_release_eip :: CsSwarmResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSecurityGroupId (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
+    computedSecurityGroupId x = TF.compute (TF.refKey x) "security_group_id"
+
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSlbId (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
+    computedSlbId x = TF.compute (TF.refKey x) "slb_id"
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
-instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
     computedVswitchId x = TF.compute (TF.refKey x) "vswitch_id"
 
-containerClusterResource :: TF.Resource P.AliCloud (ContainerClusterResource s)
-containerClusterResource =
-    TF.newResource "alicloud_container_cluster" $
-        ContainerClusterResource {
+csSwarmResource :: TF.Resource P.AliCloud (CsSwarmResource s)
+csSwarmResource =
+    TF.newResource "alicloud_cs_swarm" $
+        CsSwarmResource {
               _cidr_block = TF.Nil
             , _disk_category = TF.Nil
             , _disk_size = TF.Nil
             , _image_id = TF.Nil
             , _instance_type = TF.Nil
+            , _is_outdated = TF.Nil
             , _name = TF.Nil
             , _name_prefix = TF.Nil
+            , _node_number = TF.Nil
             , _password = TF.Nil
+            , _release_eip = TF.Nil
             , _size = TF.Nil
             , _vswitch_id = TF.Nil
             }
@@ -1260,7 +2171,9 @@ dbConnectionResource =
 {- | The @alicloud_db_database@ AliCloud resource.
 
 Provides an RDS database resource. A DB database deployed in a DB instance.
-A DB instance can own multiple databases.
+A DB instance can own multiple databases. ~> NOTE: At present, it does not
+support creating 'PostgreSQL' and 'PPAS' database. You have to login RDS
+instance to create manually.
 -}
 data DbDatabaseResource s = DbDatabaseResource {
       _character_set :: !(TF.Attr s P.Text)
@@ -1346,7 +2259,7 @@ data DbInstanceResource s = DbInstanceResource {
     , _instance_type        :: !(TF.Attr s P.Text)
     {- ^ (Required) DB Instance type. For details, see <https://www.alibabacloud.com/help/doc-detail/26312.htm> . -}
     , _multi_az             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Whether to use multiple availability zone in specified region. It conflict with @zone_id@ . -}
+    {- ^ (Optional) It has been deprecated from version 1.8.1, and @zone_id@ can support multiple zone. -}
     , _period               :: !(TF.Attr s P.Text)
     {- ^ (Optional) The duration that you will buy DB instance (in month). It is valid when instance_charge_type is @PrePaid@ . Valid values: [1~9], 12, 24, 36. Default to 1. -}
     , _security_ips         :: !(TF.Attr s P.Text)
@@ -1354,7 +2267,7 @@ data DbInstanceResource s = DbInstanceResource {
     , _vswitch_id           :: !(TF.Attr s P.Text)
     {- ^ (Optional) The virtual switch ID to launch DB instances in one VPC. -}
     , _zone_id              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The Zone to launch the DB instance. It is ignored and will be computed when set @vswitch_id@ . It conflict with @multi_az@ . -}
+    {- ^ (Optional) The Zone to launch the DB instance. From version 1.8.1, it supports multiple zone. If it is a multi-zone and @vswitch_id@ is specified, the vswitch must in the one of them. The multiple zone ID can be retrieved by setting @multi@ to "true" in the data source @alicloud_zones@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DbInstanceResource s) where
@@ -1577,6 +2490,8 @@ data DiskResource s = DiskResource {
     {- ^ (Optional, Forces new resource) Category of the disk. Valid values are @cloud@ , @cloud_efficiency@ and @cloud_ssd@ . Default is @cloud_efficiency@ . -}
     , _description       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Description of the disk. This description can have a string of 2 to 256 characters, It cannot begin with http:// or https://. Default value is null. -}
+    , _encrypted         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) If true, the disk will be encrypted -}
     , _name              :: !(TF.Attr s P.Text)
     {- ^ (Optional) Name of the ECS disk. This name can have a string of 2 to 128 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin or end with a hyphen, and must not begin with http:// or https://. Default value is null. -}
     , _size              :: !(TF.Attr s P.Text)
@@ -1592,6 +2507,7 @@ instance TF.ToHCL (DiskResource s) where
         [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "category" <$> TF.attribute _category
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "encrypted" <$> TF.attribute _encrypted
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "size" <$> TF.attribute _size
         , TF.assign "snapshot_id" <$> TF.attribute _snapshot_id
@@ -1612,6 +2528,11 @@ instance P.HasDescription (DiskResource s) (TF.Attr s P.Text) where
     description =
         lens (_description :: DiskResource s -> TF.Attr s P.Text)
              (\s a -> s { _description = a } :: DiskResource s)
+
+instance P.HasEncrypted (DiskResource s) (TF.Attr s P.Text) where
+    encrypted =
+        lens (_encrypted :: DiskResource s -> TF.Attr s P.Text)
+             (\s a -> s { _encrypted = a } :: DiskResource s)
 
 instance P.HasName (DiskResource s) (TF.Attr s P.Text) where
     name =
@@ -1642,6 +2563,9 @@ instance s ~ s' => P.HasComputedCategory (TF.Ref s' (DiskResource s)) (TF.Attr s
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
+instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
+    computedEncrypted x = TF.compute (TF.refKey x) "encrypted"
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -1667,6 +2591,7 @@ diskResource =
               _availability_zone = TF.Nil
             , _category = TF.Nil
             , _description = TF.Nil
+            , _encrypted = TF.Nil
             , _name = TF.Nil
             , _size = TF.Nil
             , _snapshot_id = TF.Nil
@@ -2654,14 +3579,16 @@ must wait it to be outdated and release it automatically. ~> NOTE: The
 resource supports Spot Instance from version 1.5.4.
 -}
 data InstanceResource s = InstanceResource {
-      _availability_zone          :: !(TF.Attr s P.Text)
+      _auto_renew_period          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Auto renewal period of an instance, in the unit of month. It is valid when @instance_charge_type@ is @PrePaid@ . Default to 1. Valid value: -}
+    , _availability_zone          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Zone to start the instance in. It is ignored and will be computed when set @vswitch_id@ . -}
     , _description                :: !(TF.Attr s P.Text)
     {- ^ (Optional) Description of the instance, This description can have a string of 2 to 256 characters, It cannot begin with http:// or https://. Default value is null. -}
     , _dry_run                    :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to pre-detection. When it is true, only pre-detection and not actually modify the payment type operation. It is valid when @instance_charge_type@ is 'PrePaid'. Default to false. -}
     , _host_name                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Host name of the ECS, which is a string of at least two characters. “hostname” cannot start or end with “.” or “-“. In addition, two or more consecutive “.” or “-“ symbols are not allowed. On Windows, the host name can contain a maximum of 15 characters, which can be a combination of uppercase/lowercase letters, numerals, and “-“. The host name cannot contain dots (“.”) or contain only numeric characters. On other OSs such as Linux, the host name can contain a maximum of 30 characters, which can be segments separated by dots (“.”), where each segment can contain uppercase/lowercase letters, numerals, or “_“. -}
+    {- ^ (Optional) Host name of the ECS, which is a string of at least two characters. “hostname” cannot start or end with “.” or “-“. In addition, two or more consecutive “.” or “-“ symbols are not allowed. On Windows, the host name can contain a maximum of 15 characters, which can be a combination of uppercase/lowercase letters, numerals, and “-“. The host name cannot contain dots (“.”) or contain only numeric characters. On other OSs such as Linux, the host name can contain a maximum of 30 characters, which can be segments separated by dots (“.”), where each segment can contain uppercase/lowercase letters, numerals, or “_“. When it is changed, the instance will reboot to make the change take effect. -}
     , _image_id                   :: !(TF.Attr s P.Text)
     {- ^ (Required) The Image to use for the instance. ECS instance's image can be replaced via changing 'image_id'. When it is changed, the instance will reboot to make the change take effect. -}
     , _include_data_disks         :: !(TF.Attr s P.Text)
@@ -2685,11 +3612,13 @@ data InstanceResource s = InstanceResource {
     , _password                   :: !(TF.Attr s P.Text)
     {- ^ (Optional) Password to an instance is a string of 8 to 30 characters. It must contain uppercase/lowercase letters and numerals, but cannot contain special symbols. When it is changed, the instance will reboot to make the change take effect. -}
     , _period                     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The duration that you will buy the resource, in month. It is valid when instance_charge_type is set as @PrePaid@ . Default to 1. Valid values: -}
+    {- ^ (Optional) The duration that you will buy the resource, in month. It is valid when @instance_charge_type@ is @PrePaid@ . Default to 1. Valid values: -}
     , _period_unit                :: !(TF.Attr s P.Text)
     {- ^ (Optional) The duration unit that you will buy the resource. It is valid when @instance_charge_type@ is 'PrePaid'. Valid value: ["Week", "Month"]. Default to "Month". -}
     , _private_ip                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) Instance private IP address can be specified when you creating new instance. It is valid when @vswitch_id@ is specified. -}
+    , _renewal_status             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether to renew an ECS instance automatically or not. It is valid when @instance_charge_type@ is @PrePaid@ . Default to "Normal". Valid values: -}
     , _role_name                  :: !(TF.Attr s P.Text)
     {- ^ (Optional, Force new resource) Instance RAM role name. The name is provided and maintained by RAM. You can use @alicloud_ram_role@ to create a new one. -}
     , _security_groups            :: !(TF.Attr s P.Text)
@@ -2712,7 +3641,8 @@ data InstanceResource s = InstanceResource {
 
 instance TF.ToHCL (InstanceResource s) where
     toHCL InstanceResource{..} = TF.inline $ catMaybes
-        [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
+        [ TF.assign "auto_renew_period" <$> TF.attribute _auto_renew_period
+        , TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "dry_run" <$> TF.attribute _dry_run
         , TF.assign "host_name" <$> TF.attribute _host_name
@@ -2730,6 +3660,7 @@ instance TF.ToHCL (InstanceResource s) where
         , TF.assign "period" <$> TF.attribute _period
         , TF.assign "period_unit" <$> TF.attribute _period_unit
         , TF.assign "private_ip" <$> TF.attribute _private_ip
+        , TF.assign "renewal_status" <$> TF.attribute _renewal_status
         , TF.assign "role_name" <$> TF.attribute _role_name
         , TF.assign "security_groups" <$> TF.attribute _security_groups
         , TF.assign "spot_price_limit" <$> TF.attribute _spot_price_limit
@@ -2740,6 +3671,11 @@ instance TF.ToHCL (InstanceResource s) where
         , TF.assign "user_data" <$> TF.attribute _user_data
         , TF.assign "vswitch_id" <$> TF.attribute _vswitch_id
         ]
+
+instance P.HasAutoRenewPeriod (InstanceResource s) (TF.Attr s P.Text) where
+    autoRenewPeriod =
+        lens (_auto_renew_period :: InstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _auto_renew_period = a } :: InstanceResource s)
 
 instance P.HasAvailabilityZone (InstanceResource s) (TF.Attr s P.Text) where
     availabilityZone =
@@ -2831,6 +3767,11 @@ instance P.HasPrivateIp (InstanceResource s) (TF.Attr s P.Text) where
         lens (_private_ip :: InstanceResource s -> TF.Attr s P.Text)
              (\s a -> s { _private_ip = a } :: InstanceResource s)
 
+instance P.HasRenewalStatus (InstanceResource s) (TF.Attr s P.Text) where
+    renewalStatus =
+        lens (_renewal_status :: InstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _renewal_status = a } :: InstanceResource s)
+
 instance P.HasRoleName (InstanceResource s) (TF.Attr s P.Text) where
     roleName =
         lens (_role_name :: InstanceResource s -> TF.Attr s P.Text)
@@ -2875,6 +3816,9 @@ instance P.HasVswitchId (InstanceResource s) (TF.Attr s P.Text) where
     vswitchId =
         lens (_vswitch_id :: InstanceResource s -> TF.Attr s P.Text)
              (\s a -> s { _vswitch_id = a } :: InstanceResource s)
+
+instance s ~ s' => P.HasComputedAutoRenewPeriod (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
+    computedAutoRenewPeriod x = TF.compute (TF.refKey x) "auto_renew_period"
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
@@ -2950,6 +3894,9 @@ instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (InstanceResource s)) (TF.A
 instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
 
+instance s ~ s' => P.HasComputedRenewalStatus (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
+    computedRenewalStatus x = TF.compute (TF.refKey x) "renewal_status"
+
 instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedRoleName x = TF.compute (TF.refKey x) "role_name"
 
@@ -2990,7 +3937,8 @@ instanceResource :: TF.Resource P.AliCloud (InstanceResource s)
 instanceResource =
     TF.newResource "alicloud_instance" $
         InstanceResource {
-              _availability_zone = TF.Nil
+              _auto_renew_period = TF.Nil
+            , _availability_zone = TF.Nil
             , _description = TF.Nil
             , _dry_run = TF.Nil
             , _host_name = TF.Nil
@@ -3008,6 +3956,7 @@ instanceResource =
             , _period = TF.Nil
             , _period_unit = TF.Nil
             , _private_ip = TF.Nil
+            , _renewal_status = TF.Nil
             , _role_name = TF.Nil
             , _security_groups = TF.Nil
             , _spot_price_limit = TF.Nil
@@ -3205,6 +4154,276 @@ kmsKeyResource =
             , _description = TF.Nil
             , _is_enabled = TF.Nil
             , _key_usage = TF.Nil
+            }
+
+{- | The @alicloud_log_machine_group@ AliCloud resource.
+
+Log Service manages all the ECS instances whose logs need to be collected by
+using the Logtail client in the form of machine groups.
+<https://www.alibabacloud.com/help/doc-detail/28966.htm>
+-}
+data LogMachineGroupResource s = LogMachineGroupResource {
+      _identify_list :: !(TF.Attr s P.Text)
+    {- ^ -  The specific machine identification, which can be an IP address or user-defined identity. -}
+    , _identify_type :: !(TF.Attr s P.Text)
+    {- ^ - The machine identification type, including IP and user-defined identity. Valid values are "ip" and "userdefined". Default to "ip". -}
+    , _name          :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The machine group name, which is unique in the same project. -}
+    , _project       :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The project name to the machine group belongs. -}
+    , _topic         :: !(TF.Attr s P.Text)
+    {- ^ - The topic of a machine group. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (LogMachineGroupResource s) where
+    toHCL LogMachineGroupResource{..} = TF.inline $ catMaybes
+        [ TF.assign "identify_list" <$> TF.attribute _identify_list
+        , TF.assign "identify_type" <$> TF.attribute _identify_type
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "topic" <$> TF.attribute _topic
+        ]
+
+instance P.HasIdentifyList (LogMachineGroupResource s) (TF.Attr s P.Text) where
+    identifyList =
+        lens (_identify_list :: LogMachineGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _identify_list = a } :: LogMachineGroupResource s)
+
+instance P.HasIdentifyType (LogMachineGroupResource s) (TF.Attr s P.Text) where
+    identifyType =
+        lens (_identify_type :: LogMachineGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _identify_type = a } :: LogMachineGroupResource s)
+
+instance P.HasName (LogMachineGroupResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: LogMachineGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: LogMachineGroupResource s)
+
+instance P.HasProject (LogMachineGroupResource s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: LogMachineGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: LogMachineGroupResource s)
+
+instance P.HasTopic (LogMachineGroupResource s) (TF.Attr s P.Text) where
+    topic =
+        lens (_topic :: LogMachineGroupResource s -> TF.Attr s P.Text)
+             (\s a -> s { _topic = a } :: LogMachineGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogMachineGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedIdentifyList (TF.Ref s' (LogMachineGroupResource s)) (TF.Attr s P.Text) where
+    computedIdentifyList x = TF.compute (TF.refKey x) "identify_list"
+
+instance s ~ s' => P.HasComputedIdentifyType (TF.Ref s' (LogMachineGroupResource s)) (TF.Attr s P.Text) where
+    computedIdentifyType x = TF.compute (TF.refKey x) "identify_type"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LogMachineGroupResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (LogMachineGroupResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"
+
+instance s ~ s' => P.HasComputedTopic (TF.Ref s' (LogMachineGroupResource s)) (TF.Attr s P.Text) where
+    computedTopic x = TF.compute (TF.refKey x) "topic"
+
+logMachineGroupResource :: TF.Resource P.AliCloud (LogMachineGroupResource s)
+logMachineGroupResource =
+    TF.newResource "alicloud_log_machine_group" $
+        LogMachineGroupResource {
+              _identify_list = TF.Nil
+            , _identify_type = TF.Nil
+            , _name = TF.Nil
+            , _project = TF.Nil
+            , _topic = TF.Nil
+            }
+
+{- | The @alicloud_log_project@ AliCloud resource.
+
+The project is the resource management unit in Log Service and is used to
+isolate and control resources. You can manage all the logs and the related
+log sources of an application by using projects.
+<https://www.alibabacloud.com/help/doc-detail/48873.htm> .
+-}
+data LogProjectResource s = LogProjectResource {
+      _description :: !(TF.Attr s P.Text)
+    {- ^ - (ForceNew) Description of the log project. At present, it is not modified by terraform. -}
+    , _name        :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The name of the log project. It is the only in one Alicloud account. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (LogProjectResource s) where
+    toHCL LogProjectResource{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasDescription (LogProjectResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: LogProjectResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: LogProjectResource s)
+
+instance P.HasName (LogProjectResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: LogProjectResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: LogProjectResource s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (LogProjectResource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogProjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LogProjectResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+logProjectResource :: TF.Resource P.AliCloud (LogProjectResource s)
+logProjectResource =
+    TF.newResource "alicloud_log_project" $
+        LogProjectResource {
+              _description = TF.Nil
+            , _name = TF.Nil
+            }
+
+{- | The @alicloud_log_store_index@ AliCloud resource.
+
+Log Service provides the LogSearch/Analytics function to query and analyze
+large amounts of logs in real time. You can use this function by enabling
+the index and field statistics.
+<https://www.alibabacloud.com/help/doc-detail/43772.htm>
+-}
+data LogStoreIndexResource s = LogStoreIndexResource {
+      _field_search :: !(TF.Attr s P.Text)
+    {- ^ - List configurations of field search index. Valid item as follows: -}
+    , _full_text    :: !(TF.Attr s P.Text)
+    {- ^ - The configuration of full text index. Valid item as follows: -}
+    , _logstore     :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The log store name to the query index belongs. -}
+    , _project      :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The project name to the log store belongs. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (LogStoreIndexResource s) where
+    toHCL LogStoreIndexResource{..} = TF.inline $ catMaybes
+        [ TF.assign "field_search" <$> TF.attribute _field_search
+        , TF.assign "full_text" <$> TF.attribute _full_text
+        , TF.assign "logstore" <$> TF.attribute _logstore
+        , TF.assign "project" <$> TF.attribute _project
+        ]
+
+instance P.HasFieldSearch (LogStoreIndexResource s) (TF.Attr s P.Text) where
+    fieldSearch =
+        lens (_field_search :: LogStoreIndexResource s -> TF.Attr s P.Text)
+             (\s a -> s { _field_search = a } :: LogStoreIndexResource s)
+
+instance P.HasFullText (LogStoreIndexResource s) (TF.Attr s P.Text) where
+    fullText =
+        lens (_full_text :: LogStoreIndexResource s -> TF.Attr s P.Text)
+             (\s a -> s { _full_text = a } :: LogStoreIndexResource s)
+
+instance P.HasLogstore (LogStoreIndexResource s) (TF.Attr s P.Text) where
+    logstore =
+        lens (_logstore :: LogStoreIndexResource s -> TF.Attr s P.Text)
+             (\s a -> s { _logstore = a } :: LogStoreIndexResource s)
+
+instance P.HasProject (LogStoreIndexResource s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: LogStoreIndexResource s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: LogStoreIndexResource s)
+
+instance s ~ s' => P.HasComputedFieldSearch (TF.Ref s' (LogStoreIndexResource s)) (TF.Attr s P.Text) where
+    computedFieldSearch x = TF.compute (TF.refKey x) "field_search"
+
+instance s ~ s' => P.HasComputedFullText (TF.Ref s' (LogStoreIndexResource s)) (TF.Attr s P.Text) where
+    computedFullText x = TF.compute (TF.refKey x) "full_text"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogStoreIndexResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLogstore (TF.Ref s' (LogStoreIndexResource s)) (TF.Attr s P.Text) where
+    computedLogstore x = TF.compute (TF.refKey x) "logstore"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (LogStoreIndexResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"
+
+logStoreIndexResource :: TF.Resource P.AliCloud (LogStoreIndexResource s)
+logStoreIndexResource =
+    TF.newResource "alicloud_log_store_index" $
+        LogStoreIndexResource {
+              _field_search = TF.Nil
+            , _full_text = TF.Nil
+            , _logstore = TF.Nil
+            , _project = TF.Nil
+            }
+
+{- | The @alicloud_log_store@ AliCloud resource.
+
+The log store is a unit in Log Service to collect, store, and query the log
+data. Each log store belongs to a project, and each project can create
+multiple Logstores. <https://www.alibabacloud.com/help/doc-detail/48874.htm>
+-}
+data LogStoreResource s = LogStoreResource {
+      _name             :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The log store, which is unique in the same project. -}
+    , _project          :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The project name to the log store belongs. -}
+    , _retention_period :: !(TF.Attr s P.Text)
+    {- ^ - The data retention time (in days). Valid values: [1-3650]. Default to 30. Log store data will be stored permanently when the value is "3650". -}
+    , _shard_count      :: !(TF.Attr s P.Text)
+    {- ^ - The number of shards in this log store. Default to 2. You can modify it by "Split" or "Merge" operations. <https://www.alibabacloud.com/help/doc-detail/28976.htm> -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (LogStoreResource s) where
+    toHCL LogStoreResource{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "retention_period" <$> TF.attribute _retention_period
+        , TF.assign "shard_count" <$> TF.attribute _shard_count
+        ]
+
+instance P.HasName (LogStoreResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: LogStoreResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: LogStoreResource s)
+
+instance P.HasProject (LogStoreResource s) (TF.Attr s P.Text) where
+    project =
+        lens (_project :: LogStoreResource s -> TF.Attr s P.Text)
+             (\s a -> s { _project = a } :: LogStoreResource s)
+
+instance P.HasRetentionPeriod (LogStoreResource s) (TF.Attr s P.Text) where
+    retentionPeriod =
+        lens (_retention_period :: LogStoreResource s -> TF.Attr s P.Text)
+             (\s a -> s { _retention_period = a } :: LogStoreResource s)
+
+instance P.HasShardCount (LogStoreResource s) (TF.Attr s P.Text) where
+    shardCount =
+        lens (_shard_count :: LogStoreResource s -> TF.Attr s P.Text)
+             (\s a -> s { _shard_count = a } :: LogStoreResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogStoreResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LogStoreResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (LogStoreResource s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "project"
+
+instance s ~ s' => P.HasComputedRetentionPeriod (TF.Ref s' (LogStoreResource s)) (TF.Attr s P.Text) where
+    computedRetentionPeriod x = TF.compute (TF.refKey x) "retention_period"
+
+instance s ~ s' => P.HasComputedShardCount (TF.Ref s' (LogStoreResource s)) (TF.Attr s P.Text) where
+    computedShardCount x = TF.compute (TF.refKey x) "shard_count"
+
+logStoreResource :: TF.Resource P.AliCloud (LogStoreResource s)
+logStoreResource =
+    TF.newResource "alicloud_log_store" $
+        LogStoreResource {
+              _name = TF.Nil
+            , _project = TF.Nil
+            , _retention_period = TF.Nil
+            , _shard_count = TF.Nil
             }
 
 {- | The @alicloud_nat_gateway@ AliCloud resource.
@@ -3636,6 +4855,73 @@ ossBucketResource =
             , _logging_isenable = TF.Nil
             , _referer_config = TF.Nil
             , _website = TF.Nil
+            }
+
+{- | The @alicloud_ots_table@ AliCloud resource.
+
+Provides an OTS table resource. ~> NOTE: Before creating an OTS table,
+@OTS_INSTANCE_NAME@ needs to be passed by Environment Variable, or by
+setting the argument @ots_instance_name@ under provider @alicloud@ .
+-}
+data OtsTableResource s = OtsTableResource {
+      _max_version  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The maximum number of versions stored in this table. -}
+    , _primary_key  :: !(TF.Attr s P.Text)
+    {- ^ (Required, Type: List) The property of @TableMeta@ which indicates the structure information of a table. It describes the attribute value of primary key. The number of @primary_key@ should not be less than one and not be more than four. -}
+    , _table_name   :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The table name of the OTS instance. If changed, a new table would be created. -}
+    , _time_to_live :: !(TF.Attr s P.Text)
+    {- ^ (Required) The retention time of data stored in this table (unit: second). -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (OtsTableResource s) where
+    toHCL OtsTableResource{..} = TF.inline $ catMaybes
+        [ TF.assign "max_version" <$> TF.attribute _max_version
+        , TF.assign "primary_key" <$> TF.attribute _primary_key
+        , TF.assign "table_name" <$> TF.attribute _table_name
+        , TF.assign "time_to_live" <$> TF.attribute _time_to_live
+        ]
+
+instance P.HasMaxVersion (OtsTableResource s) (TF.Attr s P.Text) where
+    maxVersion =
+        lens (_max_version :: OtsTableResource s -> TF.Attr s P.Text)
+             (\s a -> s { _max_version = a } :: OtsTableResource s)
+
+instance P.HasPrimaryKey (OtsTableResource s) (TF.Attr s P.Text) where
+    primaryKey =
+        lens (_primary_key :: OtsTableResource s -> TF.Attr s P.Text)
+             (\s a -> s { _primary_key = a } :: OtsTableResource s)
+
+instance P.HasTableName (OtsTableResource s) (TF.Attr s P.Text) where
+    tableName =
+        lens (_table_name :: OtsTableResource s -> TF.Attr s P.Text)
+             (\s a -> s { _table_name = a } :: OtsTableResource s)
+
+instance P.HasTimeToLive (OtsTableResource s) (TF.Attr s P.Text) where
+    timeToLive =
+        lens (_time_to_live :: OtsTableResource s -> TF.Attr s P.Text)
+             (\s a -> s { _time_to_live = a } :: OtsTableResource s)
+
+instance s ~ s' => P.HasComputedMaxVersion (TF.Ref s' (OtsTableResource s)) (TF.Attr s P.Text) where
+    computedMaxVersion x = TF.compute (TF.refKey x) "max_version"
+
+instance s ~ s' => P.HasComputedPrimaryKey (TF.Ref s' (OtsTableResource s)) (TF.Attr s P.Text) where
+    computedPrimaryKey x = TF.compute (TF.refKey x) "primary_key"
+
+instance s ~ s' => P.HasComputedTableName (TF.Ref s' (OtsTableResource s)) (TF.Attr s P.Text) where
+    computedTableName x = TF.compute (TF.refKey x) "table_name"
+
+instance s ~ s' => P.HasComputedTimeToLive (TF.Ref s' (OtsTableResource s)) (TF.Attr s P.Text) where
+    computedTimeToLive x = TF.compute (TF.refKey x) "time_to_live"
+
+otsTableResource :: TF.Resource P.AliCloud (OtsTableResource s)
+otsTableResource =
+    TF.newResource "alicloud_ots_table" $
+        OtsTableResource {
+              _max_version = TF.Nil
+            , _primary_key = TF.Nil
+            , _table_name = TF.Nil
+            , _time_to_live = TF.Nil
             }
 
 {- | The @alicloud_ram_access_key@ AliCloud resource.
@@ -5057,7 +6343,7 @@ data SlbListenerResource s = SlbListenerResource {
     , _scheduler                 :: !(TF.Attr s P.Text)
     {- ^ - (Optinal) Scheduling algorithm, Valid values are @wrr@ and @wlc@ .  Default to "wrr". -}
     , _ssl_certificate_id        :: !(TF.Attr s P.Text)
-    {- ^ - (Optinal) Security certificate ID. -}
+    {- ^ - (Optinal) Security certificate ID. It is required when @protocol@ is @https@ . -}
     , _sticky_session            :: !(TF.Attr s P.Text)
     {- ^ - (Optinal) Whether to enable session persistence, Valid values are @on@ and @off@ . Default to @off@ . -}
     , _sticky_session_type       :: !(TF.Attr s P.Text)

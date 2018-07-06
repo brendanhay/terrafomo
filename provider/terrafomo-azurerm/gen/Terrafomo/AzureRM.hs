@@ -16,11 +16,13 @@ module Terrafomo.AzureRM
     , module Terrafomo.AzureRM.Provider
     , module Terrafomo.AzureRM.Lens
     , module Terrafomo.AzureRM.DataSource
-    , module Terrafomo.AzureRM.Resource
+    , module Terrafomo.AzureRM.Resource01
+    , module Terrafomo.AzureRM.Resource02
     ) where
 
 import Terrafomo.AzureRM.DataSource
 import Terrafomo.AzureRM.Lens
 import Terrafomo.AzureRM.Provider
-import Terrafomo.AzureRM.Resource
+import Terrafomo.AzureRM.Resource01
+import Terrafomo.AzureRM.Resource02
 import Terrafomo.AzureRM.Types

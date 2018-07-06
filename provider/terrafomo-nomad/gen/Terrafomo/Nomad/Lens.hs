@@ -25,24 +25,33 @@ module Terrafomo.Nomad.Lens
       HasDeregisterOnDestroy (..)
     , HasDeregisterOnIdChange (..)
     , HasDescription (..)
+    , HasEnforcementLevel (..)
     , HasGlobal (..)
     , HasJobspec (..)
     , HasLimits (..)
     , HasName (..)
     , HasPolicies (..)
+    , HasPolicy (..)
+    , HasPolicyOverride (..)
     , HasRulesHcl (..)
+    , HasScope (..)
     , HasType' (..)
 
     -- ** Computed Attributes
     , HasComputedDeregisterOnDestroy (..)
     , HasComputedDeregisterOnIdChange (..)
     , HasComputedDescription (..)
+    , HasComputedEnforcementLevel (..)
     , HasComputedGlobal (..)
     , HasComputedJobspec (..)
     , HasComputedLimits (..)
     , HasComputedName (..)
     , HasComputedPolicies (..)
+    , HasComputedPolicy (..)
+    , HasComputedPolicyOverride (..)
+    , HasComputedRegions (..)
     , HasComputedRulesHcl (..)
+    , HasComputedScope (..)
     , HasComputedType' (..)
     ) where
 
@@ -70,6 +79,12 @@ class HasDescription a b | a -> b where
 
 instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
+
+class HasEnforcementLevel a b | a -> b where
+    enforcementLevel :: Lens' a b
+
+instance HasEnforcementLevel a b => HasEnforcementLevel (TF.Schema l p a) b where
+    enforcementLevel = TF.configuration . enforcementLevel
 
 class HasGlobal a b | a -> b where
     global :: Lens' a b
@@ -101,11 +116,29 @@ class HasPolicies a b | a -> b where
 instance HasPolicies a b => HasPolicies (TF.Schema l p a) b where
     policies = TF.configuration . policies
 
+class HasPolicy a b | a -> b where
+    policy :: Lens' a b
+
+instance HasPolicy a b => HasPolicy (TF.Schema l p a) b where
+    policy = TF.configuration . policy
+
+class HasPolicyOverride a b | a -> b where
+    policyOverride :: Lens' a b
+
+instance HasPolicyOverride a b => HasPolicyOverride (TF.Schema l p a) b where
+    policyOverride = TF.configuration . policyOverride
+
 class HasRulesHcl a b | a -> b where
     rulesHcl :: Lens' a b
 
 instance HasRulesHcl a b => HasRulesHcl (TF.Schema l p a) b where
     rulesHcl = TF.configuration . rulesHcl
+
+class HasScope a b | a -> b where
+    scope :: Lens' a b
+
+instance HasScope a b => HasScope (TF.Schema l p a) b where
+    scope = TF.configuration . scope
 
 class HasType' a b | a -> b where
     type' :: Lens' a b
@@ -122,6 +155,9 @@ class HasComputedDeregisterOnIdChange a b | a -> b where
 class HasComputedDescription a b | a -> b where
     computedDescription :: a -> b
 
+class HasComputedEnforcementLevel a b | a -> b where
+    computedEnforcementLevel :: a -> b
+
 class HasComputedGlobal a b | a -> b where
     computedGlobal :: a -> b
 
@@ -137,8 +173,20 @@ class HasComputedName a b | a -> b where
 class HasComputedPolicies a b | a -> b where
     computedPolicies :: a -> b
 
+class HasComputedPolicy a b | a -> b where
+    computedPolicy :: a -> b
+
+class HasComputedPolicyOverride a b | a -> b where
+    computedPolicyOverride :: a -> b
+
+class HasComputedRegions a b | a -> b where
+    computedRegions :: a -> b
+
 class HasComputedRulesHcl a b | a -> b where
     computedRulesHcl :: a -> b
+
+class HasComputedScope a b | a -> b where
+    computedScope :: a -> b
 
 class HasComputedType' a b | a -> b where
     computedType' :: a -> b

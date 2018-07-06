@@ -33,6 +33,9 @@ module Terrafomo.Heroku.Resource
     , AppFeatureResource (..)
     , appFeatureResource
 
+    , AppReleaseResource (..)
+    , appReleaseResource
+
     , AppResource (..)
     , appResource
 
@@ -45,14 +48,23 @@ module Terrafomo.Heroku.Resource
     , DrainResource (..)
     , drainResource
 
+    , FormationResource (..)
+    , formationResource
+
     , PipelineCouplingResource (..)
     , pipelineCouplingResource
 
     , PipelineResource (..)
     , pipelineResource
 
+    , SpacePeeringConnectionAccepterResource (..)
+    , spacePeeringConnectionAccepterResource
+
     , SpaceResource (..)
     , spaceResource
+
+    , TeamCollaboratorResource (..)
+    , teamCollaboratorResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -64,18 +76,27 @@ module Terrafomo.Heroku.Resource
     , P.HasCertificateChain (..)
     , P.HasConfig (..)
     , P.HasConfigVars (..)
+    , P.HasDescription (..)
+    , P.HasEmail (..)
     , P.HasEnabled (..)
     , P.HasHostname (..)
     , P.HasName (..)
     , P.HasOrganization (..)
+    , P.HasPermissions (..)
     , P.HasPipeline (..)
     , P.HasPlan (..)
     , P.HasPrivateKey (..)
+    , P.HasQuantity (..)
     , P.HasRegion (..)
+    , P.HasShield (..)
+    , P.HasSize (..)
+    , P.HasSlugId (..)
     , P.HasSpace (..)
     , P.HasStack (..)
     , P.HasStage (..)
+    , P.HasType' (..)
     , P.HasUrl (..)
+    , P.HasVpcPeeringConnectionId (..)
 
     -- ** Computed Attributes
     , P.HasComputedAcm (..)
@@ -88,6 +109,8 @@ module Terrafomo.Heroku.Resource
     , P.HasComputedCname (..)
     , P.HasComputedConfig (..)
     , P.HasComputedConfigVars (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedEmail (..)
     , P.HasComputedEnabled (..)
     , P.HasComputedGitUrl (..)
     , P.HasComputedHerokuHostname (..)
@@ -95,16 +118,25 @@ module Terrafomo.Heroku.Resource
     , P.HasComputedId (..)
     , P.HasComputedName (..)
     , P.HasComputedOrganization (..)
+    , P.HasComputedOutboundIps (..)
+    , P.HasComputedPermissions (..)
     , P.HasComputedPipeline (..)
     , P.HasComputedPlan (..)
     , P.HasComputedPrivateKey (..)
     , P.HasComputedProviderId (..)
+    , P.HasComputedQuantity (..)
     , P.HasComputedRegion (..)
+    , P.HasComputedShield (..)
+    , P.HasComputedSize (..)
+    , P.HasComputedSlugId (..)
     , P.HasComputedSpace (..)
     , P.HasComputedStack (..)
     , P.HasComputedStage (..)
+    , P.HasComputedStatus (..)
     , P.HasComputedToken (..)
+    , P.HasComputedType' (..)
     , P.HasComputedUrl (..)
+    , P.HasComputedVpcPeeringConnectionId (..)
     , P.HasComputedWebUrl (..)
 
     -- * Re-exported Types
@@ -324,6 +356,72 @@ appFeatureResource =
               _app = TF.Nil
             , _enabled = TF.Nil
             , _name = TF.Nil
+            }
+
+{- | The @heroku_app_release@ Heroku resource.
+
+Provides a
+<https://devcenter.heroku.com/articles/platform-api-reference#release>
+resource. An app release represents a combination of code, config vars and
+add-ons for an app on Heroku. ~> NOTE: This resource requires the slug be
+uploaded to Heroku prior to running terraform.
+-}
+data AppReleaseResource s = AppReleaseResource {
+      _app         :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the application -}
+    , _description :: !(TF.Attr s P.Text)
+    {- ^ - description of changes in this release -}
+    , _slug_id     :: !(TF.Attr s P.Text)
+    {- ^ - unique identifier of slug -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (AppReleaseResource s) where
+    toHCL AppReleaseResource{..} = TF.inline $ catMaybes
+        [ TF.assign "app" <$> TF.attribute _app
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "slug_id" <$> TF.attribute _slug_id
+        ]
+
+instance P.HasApp (AppReleaseResource s) (TF.Attr s P.Text) where
+    app =
+        lens (_app :: AppReleaseResource s -> TF.Attr s P.Text)
+             (\s a -> s { _app = a } :: AppReleaseResource s)
+
+instance P.HasDescription (AppReleaseResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: AppReleaseResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: AppReleaseResource s)
+
+instance P.HasSlugId (AppReleaseResource s) (TF.Attr s P.Text) where
+    slugId =
+        lens (_slug_id :: AppReleaseResource s -> TF.Attr s P.Text)
+             (\s a -> s { _slug_id = a } :: AppReleaseResource s)
+
+instance s ~ s' => P.HasComputedApp (TF.Ref s' (AppReleaseResource s)) (TF.Attr s P.Text) where
+    computedApp =
+        (_app :: AppReleaseResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AppReleaseResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: AppReleaseResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AppReleaseResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedSlugId (TF.Ref s' (AppReleaseResource s)) (TF.Attr s P.Text) where
+    computedSlugId =
+        (_slug_id :: AppReleaseResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+appReleaseResource :: TF.Resource P.Heroku (AppReleaseResource s)
+appReleaseResource =
+    TF.newResource "heroku_app_release" $
+        AppReleaseResource {
+              _app = TF.Nil
+            , _description = TF.Nil
+            , _slug_id = TF.Nil
             }
 
 {- | The @heroku_app@ Heroku resource.
@@ -631,6 +729,85 @@ drainResource =
             , _url = TF.Nil
             }
 
+{- | The @heroku_formation@ Heroku resource.
+
+Provides a
+<https://devcenter.heroku.com/articles/platform-api-reference#formation>
+resource. A formation represents the formation of processes that should be
+set for an application. ~> NOTE:
+-}
+data FormationResource s = FormationResource {
+      _app      :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the application -}
+    , _quantity :: !(TF.Attr s P.Text)
+    {- ^ - number of processes to maintain -}
+    , _size     :: !(TF.Attr s P.Text)
+    {- ^ - dyno size (Example: “standard-1X”). Capitalization does not matter. -}
+    , _type'    :: !(TF.Attr s P.Text)
+    {- ^ - type of process such as "web" -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (FormationResource s) where
+    toHCL FormationResource{..} = TF.inline $ catMaybes
+        [ TF.assign "app" <$> TF.attribute _app
+        , TF.assign "quantity" <$> TF.attribute _quantity
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance P.HasApp (FormationResource s) (TF.Attr s P.Text) where
+    app =
+        lens (_app :: FormationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _app = a } :: FormationResource s)
+
+instance P.HasQuantity (FormationResource s) (TF.Attr s P.Text) where
+    quantity =
+        lens (_quantity :: FormationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _quantity = a } :: FormationResource s)
+
+instance P.HasSize (FormationResource s) (TF.Attr s P.Text) where
+    size =
+        lens (_size :: FormationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _size = a } :: FormationResource s)
+
+instance P.HasType' (FormationResource s) (TF.Attr s P.Text) where
+    type' =
+        lens (_type' :: FormationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: FormationResource s)
+
+instance s ~ s' => P.HasComputedApp (TF.Ref s' (FormationResource s)) (TF.Attr s P.Text) where
+    computedApp =
+        (_app :: FormationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FormationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedQuantity (TF.Ref s' (FormationResource s)) (TF.Attr s P.Text) where
+    computedQuantity =
+        (_quantity :: FormationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (FormationResource s)) (TF.Attr s P.Text) where
+    computedSize =
+        (_size :: FormationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (FormationResource s)) (TF.Attr s P.Text) where
+    computedType' =
+        (_type' :: FormationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+formationResource :: TF.Resource P.Heroku (FormationResource s)
+formationResource =
+    TF.newResource "heroku_formation" $
+        FormationResource {
+              _app = TF.Nil
+            , _quantity = TF.Nil
+            , _size = TF.Nil
+            , _type' = TF.Nil
+            }
+
 {- | The @heroku_pipeline_coupling@ Heroku resource.
 
 Provides a <https://devcenter.heroku.com/articles/pipelines> resource. A
@@ -729,6 +906,58 @@ pipelineResource =
               _name = TF.Nil
             }
 
+{- | The @heroku_space_peering_connection_accepter@ Heroku resource.
+
+Provides a resource for accepting VPC peering requests to Heroku Private
+Spaces.
+-}
+data SpacePeeringConnectionAccepterResource s = SpacePeeringConnectionAccepterResource {
+      _space                     :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the space. -}
+    , _vpc_peering_connection_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The peering connection request ID. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SpacePeeringConnectionAccepterResource s) where
+    toHCL SpacePeeringConnectionAccepterResource{..} = TF.inline $ catMaybes
+        [ TF.assign "space" <$> TF.attribute _space
+        , TF.assign "vpc_peering_connection_id" <$> TF.attribute _vpc_peering_connection_id
+        ]
+
+instance P.HasSpace (SpacePeeringConnectionAccepterResource s) (TF.Attr s P.Text) where
+    space =
+        lens (_space :: SpacePeeringConnectionAccepterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _space = a } :: SpacePeeringConnectionAccepterResource s)
+
+instance P.HasVpcPeeringConnectionId (SpacePeeringConnectionAccepterResource s) (TF.Attr s P.Text) where
+    vpcPeeringConnectionId =
+        lens (_vpc_peering_connection_id :: SpacePeeringConnectionAccepterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vpc_peering_connection_id = a } :: SpacePeeringConnectionAccepterResource s)
+
+instance s ~ s' => P.HasComputedSpace (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
+    computedSpace =
+        (_space :: SpacePeeringConnectionAccepterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
+
+instance s ~ s' => P.HasComputedVpcPeeringConnectionId (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
+    computedVpcPeeringConnectionId =
+        (_vpc_peering_connection_id :: SpacePeeringConnectionAccepterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+spacePeeringConnectionAccepterResource :: TF.Resource P.Heroku (SpacePeeringConnectionAccepterResource s)
+spacePeeringConnectionAccepterResource =
+    TF.newResource "heroku_space_peering_connection_accepter" $
+        SpacePeeringConnectionAccepterResource {
+              _space = TF.Nil
+            , _vpc_peering_connection_id = TF.Nil
+            }
+
 {- | The @heroku_space@ Heroku resource.
 
 Provides a Heroku Space resource for running apps in isolated, highly
@@ -741,6 +970,8 @@ data SpaceResource s = SpaceResource {
     {- ^ (Required) The name of the organization which will own the space. -}
     , _region       :: !(TF.Attr s P.Text)
     {- ^ (Optional) The region that the space should be created in. -}
+    , _shield       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether or not the private space should be <https://devcenter.heroku.com/articles/private-spaces#shield-private-spaces> . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SpaceResource s) where
@@ -748,6 +979,7 @@ instance TF.ToHCL (SpaceResource s) where
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "organization" <$> TF.attribute _organization
         , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "shield" <$> TF.attribute _shield
         ]
 
 instance P.HasName (SpaceResource s) (TF.Attr s P.Text) where
@@ -765,6 +997,11 @@ instance P.HasRegion (SpaceResource s) (TF.Attr s P.Text) where
         lens (_region :: SpaceResource s -> TF.Attr s P.Text)
              (\s a -> s { _region = a } :: SpaceResource s)
 
+instance P.HasShield (SpaceResource s) (TF.Attr s P.Text) where
+    shield =
+        lens (_shield :: SpaceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _shield = a } :: SpaceResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -774,8 +1011,16 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (SpaceResource s)) (TF.Attr s P.
 instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
     computedOrganization x = TF.compute (TF.refKey x) "organization"
 
+instance s ~ s' => P.HasComputedOutboundIps (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
+    computedOutboundIps x = TF.compute (TF.refKey x) "outbound_ips"
+
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance s ~ s' => P.HasComputedShield (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
+    computedShield =
+        (_shield :: SpaceResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
 spaceResource :: TF.Resource P.Heroku (SpaceResource s)
 spaceResource =
@@ -784,4 +1029,71 @@ spaceResource =
               _name = TF.Nil
             , _organization = TF.Nil
             , _region = TF.Nil
+            , _shield = TF.Nil
+            }
+
+{- | The @heroku_team_collaborator@ Heroku resource.
+
+Provides a
+<https://devcenter.heroku.com/articles/platform-api-reference#team-app-collaborator>
+resource. A team collaborator represents an account that has been given
+access to a team app on Heroku. ~> NOTE: Please only use this resource if
+you have team/organization apps
+-}
+data TeamCollaboratorResource s = TeamCollaboratorResource {
+      _app         :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the team app that the team collaborator will be added to. -}
+    , _email       :: !(TF.Attr s P.Text)
+    {- ^ (Required) Email address of the team collaborator -}
+    , _permissions :: !(TF.Attr s P.Text)
+    {- ^ (Required) List of permissions that will be granted to the team collaborator. The order in which individual permissions are set here does not matter. Please <https://devcenter.heroku.com/articles/app-permissions> for more information on available permissions. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (TeamCollaboratorResource s) where
+    toHCL TeamCollaboratorResource{..} = TF.inline $ catMaybes
+        [ TF.assign "app" <$> TF.attribute _app
+        , TF.assign "email" <$> TF.attribute _email
+        , TF.assign "permissions" <$> TF.attribute _permissions
+        ]
+
+instance P.HasApp (TeamCollaboratorResource s) (TF.Attr s P.Text) where
+    app =
+        lens (_app :: TeamCollaboratorResource s -> TF.Attr s P.Text)
+             (\s a -> s { _app = a } :: TeamCollaboratorResource s)
+
+instance P.HasEmail (TeamCollaboratorResource s) (TF.Attr s P.Text) where
+    email =
+        lens (_email :: TeamCollaboratorResource s -> TF.Attr s P.Text)
+             (\s a -> s { _email = a } :: TeamCollaboratorResource s)
+
+instance P.HasPermissions (TeamCollaboratorResource s) (TF.Attr s P.Text) where
+    permissions =
+        lens (_permissions :: TeamCollaboratorResource s -> TF.Attr s P.Text)
+             (\s a -> s { _permissions = a } :: TeamCollaboratorResource s)
+
+instance s ~ s' => P.HasComputedApp (TF.Ref s' (TeamCollaboratorResource s)) (TF.Attr s P.Text) where
+    computedApp =
+        (_app :: TeamCollaboratorResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (TeamCollaboratorResource s)) (TF.Attr s P.Text) where
+    computedEmail =
+        (_email :: TeamCollaboratorResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamCollaboratorResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (TeamCollaboratorResource s)) (TF.Attr s P.Text) where
+    computedPermissions =
+        (_permissions :: TeamCollaboratorResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+teamCollaboratorResource :: TF.Resource P.Heroku (TeamCollaboratorResource s)
+teamCollaboratorResource =
+    TF.newResource "heroku_team_collaborator" $
+        TeamCollaboratorResource {
+              _app = TF.Nil
+            , _email = TF.Nil
+            , _permissions = TF.Nil
             }

@@ -64,6 +64,7 @@ module Terrafomo.DigitalOcean.Resource
     , P.HasDropletId (..)
     , P.HasDropletIds (..)
     , P.HasDropletTag (..)
+    , P.HasFlags (..)
     , P.HasForwardingRule (..)
     , P.HasHealthcheck (..)
     , P.HasImage (..)
@@ -85,6 +86,7 @@ module Terrafomo.DigitalOcean.Resource
     , P.HasSize (..)
     , P.HasSshKeys (..)
     , P.HasStickySessions (..)
+    , P.HasTag (..)
     , P.HasTags (..)
     , P.HasTtl (..)
     , P.HasType' (..)
@@ -105,6 +107,7 @@ module Terrafomo.DigitalOcean.Resource
     , P.HasComputedDropletIds (..)
     , P.HasComputedDropletTag (..)
     , P.HasComputedFingerprint (..)
+    , P.HasComputedFlags (..)
     , P.HasComputedForwardingRule (..)
     , P.HasComputedFqdn (..)
     , P.HasComputedHealthcheck (..)
@@ -142,6 +145,7 @@ module Terrafomo.DigitalOcean.Resource
     , P.HasComputedSshKeys (..)
     , P.HasComputedStatus (..)
     , P.HasComputedStickySessions (..)
+    , P.HasComputedTag (..)
     , P.HasComputedTags (..)
     , P.HasComputedTtl (..)
     , P.HasComputedType' (..)
@@ -333,7 +337,7 @@ data DropletResource s = DropletResource {
     , _resize_disk        :: !(TF.Attr s P.Text)
     {- ^ (Optional) Boolean controlling whether to increase the disk size when resizing a Droplet. It defaults to @true@ . When set to @false@ , only the Droplet's RAM and CPU will be resized. Increasing a Droplet's disk size is a permanent change . Increasing only RAM and CPU is reversible. -}
     , _size               :: !(TF.Attr s P.Text)
-    {- ^ (Required) The instance size to start -}
+    {- ^ (Required) The unique slug that indentifies the type of Droplet. You can find a list of available slugs on <https://developers.digitalocean.com/documentation/v2/#list-all-sizes> -}
     , _ssh_keys           :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of SSH IDs or fingerprints to enable in the format @[12345, 123456]@ . To retrieve this info, use a tool such as @curl@ with the <https://developers.digitalocean.com/#keys> , to retrieve them. -}
     , _tags               :: !(TF.Attr s P.Text)
@@ -833,12 +837,16 @@ Provides a DigitalOcean DNS record resource.
 data RecordResource s = RecordResource {
       _domain   :: !(TF.Attr s P.Text)
     {- ^ (Required) The domain to add the record to -}
+    , _flags    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The flags of the record (integer between 0-255), for CAA records. -}
     , _name     :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the record -}
     , _port     :: !(TF.Attr s P.Text)
     {- ^ (Optional) The port of the record, for SRV records. -}
     , _priority :: !(TF.Attr s P.Text)
     {- ^ (Optional) The priority of the record, for MX and SRV records. -}
+    , _tag      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The tag of the record (one of @issue@ , @wildissue@ , or @iodef@ ), for CAA records. -}
     , _ttl      :: !(TF.Attr s P.Text)
     {- ^ (Optional) The time to live for the record, in seconds. -}
     , _type'    :: !(TF.Attr s P.Text)
@@ -852,9 +860,11 @@ data RecordResource s = RecordResource {
 instance TF.ToHCL (RecordResource s) where
     toHCL RecordResource{..} = TF.inline $ catMaybes
         [ TF.assign "domain" <$> TF.attribute _domain
+        , TF.assign "flags" <$> TF.attribute _flags
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "priority" <$> TF.attribute _priority
+        , TF.assign "tag" <$> TF.attribute _tag
         , TF.assign "ttl" <$> TF.attribute _ttl
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "value" <$> TF.attribute _value
@@ -865,6 +875,11 @@ instance P.HasDomain (RecordResource s) (TF.Attr s P.Text) where
     domain =
         lens (_domain :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _domain = a } :: RecordResource s)
+
+instance P.HasFlags (RecordResource s) (TF.Attr s P.Text) where
+    flags =
+        lens (_flags :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _flags = a } :: RecordResource s)
 
 instance P.HasName (RecordResource s) (TF.Attr s P.Text) where
     name =
@@ -880,6 +895,11 @@ instance P.HasPriority (RecordResource s) (TF.Attr s P.Text) where
     priority =
         lens (_priority :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _priority = a } :: RecordResource s)
+
+instance P.HasTag (RecordResource s) (TF.Attr s P.Text) where
+    tag =
+        lens (_tag :: RecordResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tag = a } :: RecordResource s)
 
 instance P.HasTtl (RecordResource s) (TF.Attr s P.Text) where
     ttl =
@@ -906,6 +926,11 @@ instance s ~ s' => P.HasComputedDomain (TF.Ref s' (RecordResource s)) (TF.Attr s
         (_domain :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedFlags (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
+    computedFlags =
+        (_flags :: RecordResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedFqdn x = TF.compute (TF.refKey x) "fqdn"
 
@@ -925,6 +950,11 @@ instance s ~ s' => P.HasComputedPort (TF.Ref s' (RecordResource s)) (TF.Attr s P
 instance s ~ s' => P.HasComputedPriority (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedPriority =
         (_priority :: RecordResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTag (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
+    computedTag =
+        (_tag :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
@@ -952,9 +982,11 @@ recordResource =
     TF.newResource "digitalocean_record" $
         RecordResource {
               _domain = TF.Nil
+            , _flags = TF.Nil
             , _name = TF.Nil
             , _port = TF.Nil
             , _priority = TF.Nil
+            , _tag = TF.Nil
             , _ttl = TF.Nil
             , _type' = TF.Nil
             , _value = TF.Nil

@@ -22,22 +22,25 @@ module Terrafomo.Triton.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasAdministratorPw (..)
+      Has(Deprecated) locality (..)
+    , HasAdministratorPw (..)
     , HasAffinity (..)
+    , HasCapacity (..)
     , HasCloudConfig (..)
     , HasCns (..)
     , HasCnsEnabled (..)
+    , HasDeletionProtectionEnabled (..)
     , HasDescription (..)
     , HasEmail (..)
     , HasEnabled (..)
     , HasEndpoint (..)
     , HasFirewallEnabled (..)
     , HasGateway (..)
+    , HasGroupName (..)
     , HasId (..)
     , HasImage (..)
     , HasInternetNat (..)
     , HasKey (..)
-    , HasLocality (..)
     , HasLogin (..)
     , HasMachineId (..)
     , HasMetadata (..)
@@ -57,21 +60,27 @@ module Terrafomo.Triton.Lens
     , HasState (..)
     , HasSubnet (..)
     , HasTags (..)
+    , HasTemplate (..)
+    , HasTemplateName (..)
     , HasType' (..)
     , HasUserData (..)
     , HasUserScript (..)
+    , HasUserdata (..)
     , HasVersion (..)
     , HasVlanId (..)
 
     -- ** Computed Attributes
+    , HasComputed(Deprecated) locality (..)
     , HasComputedAdministratorPw (..)
     , HasComputedAffinity (..)
+    , HasComputedCapacity (..)
     , HasComputedCloudConfig (..)
     , HasComputedCns (..)
     , HasComputedCnsEnabled (..)
     , HasComputedComputeNode (..)
     , HasComputedCreated (..)
     , HasComputedDataset (..)
+    , HasComputedDeletionProtectionEnabled (..)
     , HasComputedDescription (..)
     , HasComputedDisk (..)
     , HasComputedEmail (..)
@@ -80,13 +89,13 @@ module Terrafomo.Triton.Lens
     , HasComputedFabric (..)
     , HasComputedFirewallEnabled (..)
     , HasComputedGateway (..)
+    , HasComputedGroupName (..)
     , HasComputedId (..)
     , HasComputedImage (..)
     , HasComputedInternetNat (..)
     , HasComputedIp (..)
     , HasComputedIps (..)
     , HasComputedKey (..)
-    , HasComputedLocality (..)
     , HasComputedLogin (..)
     , HasComputedMac (..)
     , HasComputedMachineId (..)
@@ -113,10 +122,13 @@ module Terrafomo.Triton.Lens
     , HasComputedState (..)
     , HasComputedSubnet (..)
     , HasComputedTags (..)
+    , HasComputedTemplate (..)
+    , HasComputedTemplateName (..)
     , HasComputedType' (..)
     , HasComputedUpdated (..)
     , HasComputedUserData (..)
     , HasComputedUserScript (..)
+    , HasComputedUserdata (..)
     , HasComputedVersion (..)
     , HasComputedVlanId (..)
     ) where
@@ -127,6 +139,12 @@ import Lens.Micro (Lens')
 
 import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
+
+class Has(Deprecated) locality a b | a -> b where
+    (Deprecated) locality :: Lens' a b
+
+instance Has(Deprecated) locality a b => Has(Deprecated) locality (TF.Schema l p a) b where
+    (Deprecated) locality = TF.configuration . (Deprecated) locality
 
 class HasAdministratorPw a b | a -> b where
     administratorPw :: Lens' a b
@@ -139,6 +157,12 @@ class HasAffinity a b | a -> b where
 
 instance HasAffinity a b => HasAffinity (TF.Schema l p a) b where
     affinity = TF.configuration . affinity
+
+class HasCapacity a b | a -> b where
+    capacity :: Lens' a b
+
+instance HasCapacity a b => HasCapacity (TF.Schema l p a) b where
+    capacity = TF.configuration . capacity
 
 class HasCloudConfig a b | a -> b where
     cloudConfig :: Lens' a b
@@ -157,6 +181,12 @@ class HasCnsEnabled a b | a -> b where
 
 instance HasCnsEnabled a b => HasCnsEnabled (TF.Schema l p a) b where
     cnsEnabled = TF.configuration . cnsEnabled
+
+class HasDeletionProtectionEnabled a b | a -> b where
+    deletionProtectionEnabled :: Lens' a b
+
+instance HasDeletionProtectionEnabled a b => HasDeletionProtectionEnabled (TF.Schema l p a) b where
+    deletionProtectionEnabled = TF.configuration . deletionProtectionEnabled
 
 class HasDescription a b | a -> b where
     description :: Lens' a b
@@ -194,6 +224,12 @@ class HasGateway a b | a -> b where
 instance HasGateway a b => HasGateway (TF.Schema l p a) b where
     gateway = TF.configuration . gateway
 
+class HasGroupName a b | a -> b where
+    groupName :: Lens' a b
+
+instance HasGroupName a b => HasGroupName (TF.Schema l p a) b where
+    groupName = TF.configuration . groupName
+
 class HasId a b | a -> b where
     id :: Lens' a b
 
@@ -217,12 +253,6 @@ class HasKey a b | a -> b where
 
 instance HasKey a b => HasKey (TF.Schema l p a) b where
     key = TF.configuration . key
-
-class HasLocality a b | a -> b where
-    locality :: Lens' a b
-
-instance HasLocality a b => HasLocality (TF.Schema l p a) b where
-    locality = TF.configuration . locality
 
 class HasLogin a b | a -> b where
     login :: Lens' a b
@@ -338,6 +368,18 @@ class HasTags a b | a -> b where
 instance HasTags a b => HasTags (TF.Schema l p a) b where
     tags = TF.configuration . tags
 
+class HasTemplate a b | a -> b where
+    template :: Lens' a b
+
+instance HasTemplate a b => HasTemplate (TF.Schema l p a) b where
+    template = TF.configuration . template
+
+class HasTemplateName a b | a -> b where
+    templateName :: Lens' a b
+
+instance HasTemplateName a b => HasTemplateName (TF.Schema l p a) b where
+    templateName = TF.configuration . templateName
+
 class HasType' a b | a -> b where
     type' :: Lens' a b
 
@@ -356,6 +398,12 @@ class HasUserScript a b | a -> b where
 instance HasUserScript a b => HasUserScript (TF.Schema l p a) b where
     userScript = TF.configuration . userScript
 
+class HasUserdata a b | a -> b where
+    userdata :: Lens' a b
+
+instance HasUserdata a b => HasUserdata (TF.Schema l p a) b where
+    userdata = TF.configuration . userdata
+
 class HasVersion a b | a -> b where
     version :: Lens' a b
 
@@ -368,11 +416,17 @@ class HasVlanId a b | a -> b where
 instance HasVlanId a b => HasVlanId (TF.Schema l p a) b where
     vlanId = TF.configuration . vlanId
 
+class HasComputed(Deprecated) locality a b | a -> b where
+    computed(Deprecated) locality :: a -> b
+
 class HasComputedAdministratorPw a b | a -> b where
     computedAdministratorPw :: a -> b
 
 class HasComputedAffinity a b | a -> b where
     computedAffinity :: a -> b
+
+class HasComputedCapacity a b | a -> b where
+    computedCapacity :: a -> b
 
 class HasComputedCloudConfig a b | a -> b where
     computedCloudConfig :: a -> b
@@ -391,6 +445,9 @@ class HasComputedCreated a b | a -> b where
 
 class HasComputedDataset a b | a -> b where
     computedDataset :: a -> b
+
+class HasComputedDeletionProtectionEnabled a b | a -> b where
+    computedDeletionProtectionEnabled :: a -> b
 
 class HasComputedDescription a b | a -> b where
     computedDescription :: a -> b
@@ -416,6 +473,9 @@ class HasComputedFirewallEnabled a b | a -> b where
 class HasComputedGateway a b | a -> b where
     computedGateway :: a -> b
 
+class HasComputedGroupName a b | a -> b where
+    computedGroupName :: a -> b
+
 class HasComputedId a b | a -> b where
     computedId :: a -> b
 
@@ -433,9 +493,6 @@ class HasComputedIps a b | a -> b where
 
 class HasComputedKey a b | a -> b where
     computedKey :: a -> b
-
-class HasComputedLocality a b | a -> b where
-    computedLocality :: a -> b
 
 class HasComputedLogin a b | a -> b where
     computedLogin :: a -> b
@@ -515,6 +572,12 @@ class HasComputedSubnet a b | a -> b where
 class HasComputedTags a b | a -> b where
     computedTags :: a -> b
 
+class HasComputedTemplate a b | a -> b where
+    computedTemplate :: a -> b
+
+class HasComputedTemplateName a b | a -> b where
+    computedTemplateName :: a -> b
+
 class HasComputedType' a b | a -> b where
     computedType' :: a -> b
 
@@ -526,6 +589,9 @@ class HasComputedUserData a b | a -> b where
 
 class HasComputedUserScript a b | a -> b where
     computedUserScript :: a -> b
+
+class HasComputedUserdata a b | a -> b where
+    computedUserdata :: a -> b
 
 class HasComputedVersion a b | a -> b where
     computedVersion :: a -> b

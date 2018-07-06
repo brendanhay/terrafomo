@@ -24,17 +24,20 @@
 module Terrafomo.Consul.DataSource
     (
     -- * Types
-      AgentSelfData (..)
+      AgentConfigData (..)
+    , agentConfigData
+
+    , AgentSelfData (..)
     , agentSelfData
-
-    , CatalogNodesData (..)
-    , catalogNodesData
-
-    , CatalogServiceData (..)
-    , catalogServiceData
 
     , KeyPrefixData (..)
     , keyPrefixData
+
+    , NodesData (..)
+    , nodesData
+
+    , ServiceData (..)
+    , serviceData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -49,17 +52,22 @@ module Terrafomo.Consul.DataSource
     -- ** Computed Attributes
     , P.HasComputedDatacenter (..)
     , P.HasComputedName (..)
+    , P.HasComputedNodeId (..)
     , P.HasComputedNodeIds (..)
+    , P.HasComputedNodeName (..)
     , P.HasComputedNodeNames (..)
     , P.HasComputedNodes (..)
     , P.HasComputedPathPrefix (..)
     , P.HasComputedQueryOptions (..)
+    , P.HasComputedRevision (..)
+    , P.HasComputedServer (..)
     , P.HasComputedService (..)
     , P.HasComputedSubkey (..)
     , P.HasComputedSubkeys (..)
     , P.HasComputedTag (..)
     , P.HasComputedToken (..)
     , P.HasComputedVar<name> (..)
+    , P.HasComputedVersion (..)
 
     -- * Re-exported Types
     , module P
@@ -88,9 +96,51 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
+{- | The @consul_agent_config@ Consul datasource.
+
+-> Note: The @consul_agent_config@ resource differs from
+</docs/providers/consul/d/agent_self.html> , providing less information but
+utilizing stable APIs. @consul_agent_self@ will be deprecated in a future
+release. The @consul_agent_config@ data source returns
+<https://www.consul.io/api/agent.html#read-configuration> from the agent
+specified in the @provider@ .
+-}
+data AgentConfigData s = AgentConfigData {
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (AgentConfigData s) where
+    toHCL _ = TF.empty
+
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
+
+instance s ~ s' => P.HasComputedNodeId (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
+    computedNodeId x = TF.compute (TF.refKey x) "node_id"
+
+instance s ~ s' => P.HasComputedNodeName (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
+    computedNodeName x = TF.compute (TF.refKey x) "node_name"
+
+instance s ~ s' => P.HasComputedRevision (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
+    computedRevision x = TF.compute (TF.refKey x) "revision"
+
+instance s ~ s' => P.HasComputedServer (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
+    computedServer x = TF.compute (TF.refKey x) "server"
+
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
+
+agentConfigData :: TF.DataSource P.Consul (AgentConfigData s)
+agentConfigData =
+    TF.newDataSource "consul_agent_config" $
+        AgentConfigData {
+            }
+
 {- | The @consul_agent_self@ Consul datasource.
 
-The @consul_agent_self@ data source returns
+~> Warning: The @consul_agent_self@ resource has been deprecated and will be
+removed from a future release of the provider. Read the
+</docs/providers/consul/upgrading.html#deprecation-of-consul_agent_self> for
+more information. The @consul_agent_self@ data source returns
 <https://www.consul.io/docs/agent/http/agent.html#agent_self> from the agent
 specified in the @provider@ .
 -}
@@ -104,137 +154,6 @@ agentSelfData :: TF.DataSource P.Consul (AgentSelfData s)
 agentSelfData =
     TF.newDataSource "consul_agent_self" $
         AgentSelfData {
-            }
-
-{- | The @consul_catalog_nodes@ Consul datasource.
-
-The @consul_catalog_nodes@ data source returns a list of Consul nodes that
-have been registered with the Consul cluster in a given datacenter.  By
-specifying a different datacenter in the @query_options@ it is possible to
-retrieve a list of nodes from a different WAN-attached Consul datacenter.
--}
-data CatalogNodesData s = CatalogNodesData {
-      _datacenter :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
-    , _query_options :: !(TF.Attr s P.Text)
-    {- ^ (Optional) See below. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (CatalogNodesData s) where
-    toHCL CatalogNodesData{..} = TF.inline $ catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "query_options" <$> TF.attribute _query_options
-        ]
-
-instance P.HasDatacenter (CatalogNodesData s) (TF.Attr s P.Text) where
-    datacenter =
-        lens (_datacenter :: CatalogNodesData s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter = a } :: CatalogNodesData s)
-
-instance P.HasQueryOptions (CatalogNodesData s) (TF.Attr s P.Text) where
-    queryOptions =
-        lens (_query_options :: CatalogNodesData s -> TF.Attr s P.Text)
-             (\s a -> s { _query_options = a } :: CatalogNodesData s)
-
-instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (CatalogNodesData s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
-
-instance s ~ s' => P.HasComputedNodeIds (TF.Ref s' (CatalogNodesData s)) (TF.Attr s P.Text) where
-    computedNodeIds x = TF.compute (TF.refKey x) "node_ids"
-
-instance s ~ s' => P.HasComputedNodeNames (TF.Ref s' (CatalogNodesData s)) (TF.Attr s P.Text) where
-    computedNodeNames x = TF.compute (TF.refKey x) "node_names"
-
-instance s ~ s' => P.HasComputedNodes (TF.Ref s' (CatalogNodesData s)) (TF.Attr s P.Text) where
-    computedNodes x = TF.compute (TF.refKey x) "nodes"
-
-instance s ~ s' => P.HasComputedQueryOptions (TF.Ref s' (CatalogNodesData s)) (TF.Attr s P.Text) where
-    computedQueryOptions =
-        (_query_options :: CatalogNodesData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-catalogNodesData :: TF.DataSource P.Consul (CatalogNodesData s)
-catalogNodesData =
-    TF.newDataSource "consul_catalog_nodes" $
-        CatalogNodesData {
-              _datacenter = TF.Nil
-            , _query_options = TF.Nil
-            }
-
-{- | The @consul_catalog_service@ Consul datasource.
-
-@consul_catalog_service@ provides details about a specific Consul service in
-a given datacenter.  The results include a list of nodes advertising the
-specified service, the node's IP address, port number, node ID, etc.  By
-specifying a different datacenter in the @query_options@ it is possible to
-retrieve a list of services from a different WAN-attached Consul datacenter.
-This data source is different from the @consul_catalog_services@ (plural)
-data source, which provides a summary of the current Consul services.
--}
-data CatalogServiceData s = CatalogServiceData {
-      _datacenter :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The service name to select. -}
-    , _query_options :: !(TF.Attr s P.Text)
-    {- ^ (Optional) See below. -}
-    , _tag :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A single tag that can be used to filter the list of nodes to return based on a single matching tag.. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (CatalogServiceData s) where
-    toHCL CatalogServiceData{..} = TF.inline $ catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "query_options" <$> TF.attribute _query_options
-        , TF.assign "tag" <$> TF.attribute _tag
-        ]
-
-instance P.HasDatacenter (CatalogServiceData s) (TF.Attr s P.Text) where
-    datacenter =
-        lens (_datacenter :: CatalogServiceData s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter = a } :: CatalogServiceData s)
-
-instance P.HasName (CatalogServiceData s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: CatalogServiceData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: CatalogServiceData s)
-
-instance P.HasQueryOptions (CatalogServiceData s) (TF.Attr s P.Text) where
-    queryOptions =
-        lens (_query_options :: CatalogServiceData s -> TF.Attr s P.Text)
-             (\s a -> s { _query_options = a } :: CatalogServiceData s)
-
-instance P.HasTag (CatalogServiceData s) (TF.Attr s P.Text) where
-    tag =
-        lens (_tag :: CatalogServiceData s -> TF.Attr s P.Text)
-             (\s a -> s { _tag = a } :: CatalogServiceData s)
-
-instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (CatalogServiceData s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CatalogServiceData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedQueryOptions (TF.Ref s' (CatalogServiceData s)) (TF.Attr s P.Text) where
-    computedQueryOptions =
-        (_query_options :: CatalogServiceData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedService (TF.Ref s' (CatalogServiceData s)) (TF.Attr s P.Text) where
-    computedService x = TF.compute (TF.refKey x) "service"
-
-instance s ~ s' => P.HasComputedTag (TF.Ref s' (CatalogServiceData s)) (TF.Attr s P.Text) where
-    computedTag x = TF.compute (TF.refKey x) "tag"
-
-catalogServiceData :: TF.DataSource P.Consul (CatalogServiceData s)
-catalogServiceData =
-    TF.newDataSource "consul_catalog_service" $
-        CatalogServiceData {
-              _datacenter = TF.Nil
-            , _name = TF.Nil
-            , _query_options = TF.Nil
-            , _tag = TF.Nil
             }
 
 {- | The @consul_key_prefix@ Consul datasource.
@@ -311,4 +230,135 @@ keyPrefixData =
             , _path_prefix = TF.Nil
             , _subkey = TF.Nil
             , _token = TF.Nil
+            }
+
+{- | The @consul_nodes@ Consul datasource.
+
+The @consul_nodes@ data source returns a list of Consul nodes that have been
+registered with the Consul cluster in a given datacenter.  By specifying a
+different datacenter in the @query_options@ it is possible to retrieve a
+list of nodes from a different WAN-attached Consul datacenter.
+-}
+data NodesData s = NodesData {
+      _datacenter :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
+    , _query_options :: !(TF.Attr s P.Text)
+    {- ^ (Optional) See below. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (NodesData s) where
+    toHCL NodesData{..} = TF.inline $ catMaybes
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "query_options" <$> TF.attribute _query_options
+        ]
+
+instance P.HasDatacenter (NodesData s) (TF.Attr s P.Text) where
+    datacenter =
+        lens (_datacenter :: NodesData s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter = a } :: NodesData s)
+
+instance P.HasQueryOptions (NodesData s) (TF.Attr s P.Text) where
+    queryOptions =
+        lens (_query_options :: NodesData s -> TF.Attr s P.Text)
+             (\s a -> s { _query_options = a } :: NodesData s)
+
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (NodesData s)) (TF.Attr s P.Text) where
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
+
+instance s ~ s' => P.HasComputedNodeIds (TF.Ref s' (NodesData s)) (TF.Attr s P.Text) where
+    computedNodeIds x = TF.compute (TF.refKey x) "node_ids"
+
+instance s ~ s' => P.HasComputedNodeNames (TF.Ref s' (NodesData s)) (TF.Attr s P.Text) where
+    computedNodeNames x = TF.compute (TF.refKey x) "node_names"
+
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (NodesData s)) (TF.Attr s P.Text) where
+    computedNodes x = TF.compute (TF.refKey x) "nodes"
+
+instance s ~ s' => P.HasComputedQueryOptions (TF.Ref s' (NodesData s)) (TF.Attr s P.Text) where
+    computedQueryOptions =
+        (_query_options :: NodesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+nodesData :: TF.DataSource P.Consul (NodesData s)
+nodesData =
+    TF.newDataSource "consul_nodes" $
+        NodesData {
+              _datacenter = TF.Nil
+            , _query_options = TF.Nil
+            }
+
+{- | The @consul_service@ Consul datasource.
+
+@consul_service@ provides details about a specific Consul service in a given
+datacenter.  The results include a list of nodes advertising the specified
+service, the node's IP address, port number, node ID, etc.  By specifying a
+different datacenter in the @query_options@ it is possible to retrieve a
+list of services from a different WAN-attached Consul datacenter. This data
+source is different from the @consul_services@ (plural) data source, which
+provides a summary of the current Consul services.
+-}
+data ServiceData s = ServiceData {
+      _datacenter :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Consul datacenter to query.  Defaults to the same value found in @query_options@ parameter specified below, or if that is empty, the @datacenter@ value found in the Consul agent that this provider is configured to talk to. -}
+    , _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The service name to select. -}
+    , _query_options :: !(TF.Attr s P.Text)
+    {- ^ (Optional) See below. -}
+    , _tag :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A single tag that can be used to filter the list of nodes to return based on a single matching tag.. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ServiceData s) where
+    toHCL ServiceData{..} = TF.inline $ catMaybes
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "query_options" <$> TF.attribute _query_options
+        , TF.assign "tag" <$> TF.attribute _tag
+        ]
+
+instance P.HasDatacenter (ServiceData s) (TF.Attr s P.Text) where
+    datacenter =
+        lens (_datacenter :: ServiceData s -> TF.Attr s P.Text)
+             (\s a -> s { _datacenter = a } :: ServiceData s)
+
+instance P.HasName (ServiceData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ServiceData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ServiceData s)
+
+instance P.HasQueryOptions (ServiceData s) (TF.Attr s P.Text) where
+    queryOptions =
+        lens (_query_options :: ServiceData s -> TF.Attr s P.Text)
+             (\s a -> s { _query_options = a } :: ServiceData s)
+
+instance P.HasTag (ServiceData s) (TF.Attr s P.Text) where
+    tag =
+        lens (_tag :: ServiceData s -> TF.Attr s P.Text)
+             (\s a -> s { _tag = a } :: ServiceData s)
+
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ServiceData s)) (TF.Attr s P.Text) where
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedQueryOptions (TF.Ref s' (ServiceData s)) (TF.Attr s P.Text) where
+    computedQueryOptions =
+        (_query_options :: ServiceData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedService (TF.Ref s' (ServiceData s)) (TF.Attr s P.Text) where
+    computedService x = TF.compute (TF.refKey x) "service"
+
+instance s ~ s' => P.HasComputedTag (TF.Ref s' (ServiceData s)) (TF.Attr s P.Text) where
+    computedTag x = TF.compute (TF.refKey x) "tag"
+
+serviceData :: TF.DataSource P.Consul (ServiceData s)
+serviceData =
+    TF.newDataSource "consul_service" $
+        ServiceData {
+              _datacenter = TF.Nil
+            , _name = TF.Nil
+            , _query_options = TF.Nil
+            , _tag = TF.Nil
             }
