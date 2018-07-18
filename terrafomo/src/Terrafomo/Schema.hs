@@ -1,15 +1,16 @@
 {-# LANGUAGE FlexibleInstances     #-}
+{-# LANGUAGE GADTs                 #-}
 {-# LANGUAGE LambdaCase            #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE OverloadedStrings     #-}
 {-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE StandaloneDeriving    #-}
 
 -- | Shared type representing datasources and resources.
 --
 -- FIXME: come up with a better name - maybe 'Schema'?
 module Terrafomo.Schema
     ( Dependency (..)
-
     , DataSource
     , Resource
     , Schema     (..)
@@ -28,8 +29,9 @@ import Data.Maybe         (catMaybes)
 import Data.Set           (Set)
 import Data.Text          (Text)
 
-import Lens.Micro (Lens, Lens', lens)
+import Lens.Micro (Lens', lens)
 
+import Terrafomo.Provider (IsProvider, providerKey)
 import Terrafomo.HCL       (ToHCL)
 import Terrafomo.Lifecycle
 import Terrafomo.Name
@@ -51,42 +53,44 @@ instance ToHCL Dependency where
 type DataSource p a = Schema ()            p a
 type Resource   p a = Schema (Lifecycle a) p a
 
-data Schema l p a = Schema
-    { _schemaProvider  :: !(Maybe p)
-    , _schemaLifecycle :: !l
-    , _schemaDependsOn :: !(Set Dependency)
-    , _schemaKeywords  :: !(NonEmpty HCL.Id)
-    , _schemaType      :: !Type
-    , _schemaConfig    :: !a
-    } deriving (Show, Eq)
+data Schema l p a where
+    Schema
+        :: (Eq l, Monoid l, ToHCL l, IsProvider p, ToHCL a)
+        => { _schemaProvider  :: !(Maybe p)
+           , _schemaLifecycle :: !l
+           , _schemaDependsOn :: !(Set Dependency)
+           , _schemaKeywords  :: !(NonEmpty HCL.Id)
+           , _schemaType      :: !Type
+           , _schemaConfig    :: !a
+           }
+        -> Schema l p a
+
+deriving instance (Show l, Show p, Show a) => Show (Schema l p a)
+deriving instance (Eq   l, Eq   p, Eq   a) => Eq   (Schema l p a)
 
 instance HasLifecycle (Resource p a) a where
     lifecycle = lens _schemaLifecycle (\s a -> s { _schemaLifecycle = a })
 
-instance ToHCL a => ToHCL (DataSource Key a) where
+instance ToHCL (Schema l p a) where
     toHCL Schema{..} =
         HCL.object _schemaKeywords $ catMaybes
-            [ HCL.assign "provider" <$> _schemaProvider
+            [ HCL.assign "provider" . providerKey <$> _schemaProvider
             , Just (HCL.toHCL _schemaConfig)
             , if _schemaDependsOn == mempty
                   then Nothing
                   else Just (HCL.assign "depends_on" (HCL.list _schemaDependsOn))
-             ]
-
-instance ToHCL a => ToHCL (Resource Key a) where
-    toHCL Schema{..} =
-        HCL.object _schemaKeywords $ catMaybes
-            [ HCL.assign "provider" <$> _schemaProvider
-            , Just (HCL.toHCL _schemaConfig)
             , if _schemaLifecycle == mempty
                   then Nothing
                   else Just (HCL.assign "lifecycle" _schemaLifecycle)
-            , if _schemaDependsOn == mempty
-                  then Nothing
-                  else Just (HCL.assign "depends_on" (HCL.list _schemaDependsOn))
              ]
 
-newDataSource :: Text -> a -> DataSource p a
+newDataSource
+    :: ( IsProvider p
+       , ToHCL a
+       )
+    => Text
+    -> a
+    -> DataSource p a
 newDataSource name cfg =
     Schema { _schemaProvider  = Nothing
            , _schemaLifecycle = ()
@@ -96,7 +100,13 @@ newDataSource name cfg =
            , _schemaConfig    = cfg
            }
 
-newResource :: Text -> a -> Resource p a
+newResource
+    :: ( IsProvider p
+       , ToHCL a
+       )
+    => Text
+    -> a
+    -> Resource p a
 newResource name cfg =
     Schema { _schemaProvider  = Nothing
            , _schemaLifecycle = mempty
@@ -110,7 +120,7 @@ newResource name cfg =
 
 -- | The specific provider configuration to use for this resource or
 -- datasource. If none is specified an inferred default will be used.
-provider :: Lens (Schema l p a) (Schema l p' a) (Maybe p) (Maybe p')
+provider :: Lens' (Schema l p a) (Maybe p)
 provider = lens _schemaProvider (\s a -> s { _schemaProvider = a })
 
 -- | The underlying type/data config representing the specific resource or

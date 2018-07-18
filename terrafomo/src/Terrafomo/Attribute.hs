@@ -37,8 +37,10 @@ data Attr s a
     | Infix    !Text !(Attr s a) !(Attr s a)
       deriving (Show, Eq, Generic)
 
--- Flatten above is really a sign of some expression language - rather than a
--- special one off case. For instance, doing a join(strs, ',')
+-- FIXME: Flatten above is really a sign of some expression language - rather
+-- than a special one off case. For instance, doing a join(strs, ',')
+--
+-- The expression language and HCL serialization needs to be re/thought/worked.
 
 instance Hashable a => Hashable (Attr s a)
 

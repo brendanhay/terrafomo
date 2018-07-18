@@ -283,6 +283,10 @@ instance ToHCL Value where
     toHCL = id
     {-# INLINEABLE toHCL #-}
 
+instance ToHCL () where
+    toHCL = const empty
+    {-# INLINEABLE toHCL #-}
+
 instance ToHCL Bool where
     toHCL = Bool
     {-# INLINEABLE toHCL #-}

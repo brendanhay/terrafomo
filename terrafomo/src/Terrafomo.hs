@@ -25,6 +25,7 @@ module Terrafomo
     -- * Syntax
     , Name           (..)
     , Attr
+    , Key
 
     -- ** Functions
     , join

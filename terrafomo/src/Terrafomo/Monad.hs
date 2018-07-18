@@ -6,6 +6,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE MultiParamTypeClasses      #-}
+{-# LANGUAGE NamedFieldPuns             #-}
 {-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE RankNTypes                 #-}
 {-# LANGUAGE ScopedTypeVariables        #-}
@@ -265,11 +266,11 @@ withProvider
     -> m a
 withProvider p m =
     insertProvider (Just p) >>= \case
-        Nothing    -> m
-        Just alias ->
+        Nothing  -> m
+        Just key ->
             flip localTerraform m $ \s ->
                 s { aliases =
-                      Map.insert (providerType (Proxy :: Proxy p)) alias
+                      Map.insert (providerType (Proxy :: Proxy p)) key
                                  (aliases s)
                   }
 
@@ -295,25 +296,21 @@ insertProvider = \case
 -- Values
 
 define
-    :: ( MonadTerraform s m
-       , IsProvider p
-       , HCL.ToHCL (Schema l Key a)
-       )
+    :: MonadTerraform s m
     => Name
     -> Schema l p a
     -> m (Ref s a)
-define name x =
+define name x@Schema{_schemaProvider, _schemaConfig} =
     liftTerraform $ do
-        alias <- insertProvider (_schemaProvider x)
+        void $ insertProvider _schemaProvider
 
         let typ    = _schemaType x
             key   = Key typ name
             value = HCL.toHCL $
-                        x { _schemaProvider = alias
-                          , _schemaKeywords =
-                                 _schemaKeywords x
-                              <> pure (HCL.type_ typ)
-                              <> pure (HCL.name  name)
+                        x { _schemaKeywords =
+                              _schemaKeywords x
+                                  <> pure (HCL.type_ typ)
+                                  <> pure (HCL.name  name)
                           }
 
         unique <- insertValue key value references (\s w -> w { references = s })
@@ -321,7 +318,7 @@ define name x =
         unless unique $
             MTL.throwError (NonUniqueRef key value)
 
-        pure $! UnsafeRef key (_schemaConfig x)
+        pure $! UnsafeRef key _schemaConfig
 
 -- * Use a unique supply / incrementing counter to generate unique output names
 --   for values and key/name for computed attributes.
