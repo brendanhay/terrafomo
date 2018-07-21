@@ -7,8 +7,8 @@
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -59,12 +59,12 @@ import Lens.Micro (lens)
 
 import Terrafomo.AWS.Types as P
 
+import qualified Data.Text              as P
+import qualified Data.Word              as P
+import qualified GHC.Base               as P
+import qualified Numeric.Natural        as P
+import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Terrafomo.AWS.Lens as P
-import qualified Data.Text       as P
-import qualified Data.Word       as P
-import qualified GHC.Base        as P
-import qualified Numeric.Natural as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF

@@ -57,12 +57,12 @@ instance Num a => Num (Attr s a) where
 
 compute :: Key -> Name -> Attr s a
 compute k v = Compute k v (Name (typeName (keyType k) <> "_" <> fromName v))
-{-# INLINE compute #-}
+{-# INLINEABLE compute #-}
 
 -- | Joins the list with the delimiter for a resultant string.
 join :: Text -> [Attr s a] -> Attr s a
 join = Join
-{-# INLINE join #-}
+{-# INLINEABLE join #-}
 
 -- | Reads the contents of a file into the string. Variables in this file are
 -- not interpolated. The contents of the file are read as-is.
@@ -70,24 +70,24 @@ join = Join
 -- The path is interpreted relative to the working directory.
 file :: FilePath -> Attr s Text
 file = Apply "file" . pure . Constant . fromString
-{-# INLINE file #-}
+{-# INLINEABLE file #-}
 
 -- | Supply a constant Haskell value as an attribute. Equivalent to 'Just'.
 value :: a -> Attr s a
 value = Constant
-{-# INLINE value #-}
+{-# INLINEABLE value #-}
 
 -- | Omit an attribute. Equivalent to 'Nothing'.
 nil :: Attr s a
 nil = Nil
-{-# INLINE nil #-}
+{-# INLINEABLE nil #-}
 
 -- | Specify a boolean attribute value. Equivalent to @value True@.
 true :: Attr s Bool
 true = Constant True
-{-# INLINE true #-}
+{-# INLINEABLE true #-}
 
 -- | Specify a boolean attribute value. Equivalent to @value False@.
 false :: Attr s Bool
 false = Constant False
-{-# INLINE false #-}
+{-# INLINEABLE false #-}

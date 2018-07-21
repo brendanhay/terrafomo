@@ -295,6 +295,10 @@ insertProvider = \case
 
 -- Values
 
+-- | Define a 'Teraform.Schema.DataSource' or 'Teraform.Schema.Resource' by
+-- adding it to the current output and returning a reference that is used in
+-- conjunction with accessors/lenses to obtain the terraform computed
+-- attributes and values.
 define
     :: MonadTerraform s m
     => Name
@@ -328,6 +332,8 @@ define name x@Schema{_schemaProvider, _schemaConfig} =
 -- @
 -- output (nformat (freference % "_id") ref) (view R.computedId ref)
 -- @
+--
+-- This effectively serializes an 'TF.Attr' into an 'TF.Output'.
 output
     :: ( MonadTerraform s m
        , HCL.ToHCL a
@@ -354,8 +360,10 @@ output attr =
 
         pure out
 
--- | Refer to another block of terraform's output variable, and automagically
+-- | Refer to another terraform block of terraform's output variable, and automagically
 -- introduce the appropriate remote state datasource.
+--
+-- This reifies an 'Output' into an 'TF.Attr'.
 remote
     :: MonadTerraform s m
     => Output a
