@@ -376,10 +376,8 @@ remote x@(Output _ _ attr) =
             value = HCL.toHCL state
 
         exists <- MTL.gets (VMap.member key . remotes)
-
-        if exists
-            then MTL.throwError (NonUniqueRef key value)
-            else void (insertValue key value remotes (\s w -> w { remotes = s }))
+        unless exists $
+            void $ insertValue key value remotes (\s w -> w { remotes = s })
 
         pure $!
             case attr of
