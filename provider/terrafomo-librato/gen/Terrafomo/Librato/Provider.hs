@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -27,6 +21,7 @@ module Terrafomo.Librato.Provider
     , providerToken
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -59,15 +54,17 @@ data Librato = Librato {
 
 instance Hashable Librato
 
-instance TF.ToHCL Librato where
-    toHCL x =
+instance TF.IsSection Librato where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Librato))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "email" <$> _email x
-            , TF.assign "token" <$> _token x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "email" <$> _email x
+                  , TF.assign "token" <$> _token x
+                  ])
 
 instance TF.IsProvider Librato where
     type ProviderType Librato = "librato"

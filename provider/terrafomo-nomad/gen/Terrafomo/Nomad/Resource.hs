@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -115,8 +108,8 @@ data AclPolicyResource s = AclPolicyResource {
     {- ^  @(string: <required>)@ - The contents of the policy to register, as HCL or JSON. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AclPolicyResource s) where
-    toHCL AclPolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AclPolicyResource s) where
+    toObject AclPolicyResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "rules_hcl" <$> TF.attribute _rules_hcl
@@ -178,8 +171,8 @@ data AclTokenResource s = AclTokenResource {
     {- ^  @(string: <required>)@ - The type of token this is. Use @client@ for tokens that will have policies associated with them. Use @management@ for tokens that can perform any action. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AclTokenResource s) where
-    toHCL AclTokenResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AclTokenResource s) where
+    toObject AclTokenResource{..} = catMaybes
         [ TF.assign "global" <$> TF.attribute _global
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "policies" <$> TF.attribute _policies
@@ -257,8 +250,8 @@ data JobResource s = JobResource {
     {- ^  @(bool: false)@ - Determins if the job will override any soft-mandatory Sentinel policies and register even if they fail. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (JobResource s) where
-    toHCL JobResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (JobResource s) where
+    toObject JobResource{..} = catMaybes
         [ TF.assign "deregister_on_destroy" <$> TF.attribute _deregister_on_destroy
         , TF.assign "deregister_on_id_change" <$> TF.attribute _deregister_on_id_change
         , TF.assign "jobspec" <$> TF.attribute _jobspec
@@ -328,8 +321,8 @@ data NamespaceResource s = NamespaceResource {
     {- ^  @(string: <required>)@ - A unique name for the namespace. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NamespaceResource s) where
-    toHCL NamespaceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NamespaceResource s) where
+    toObject NamespaceResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -375,8 +368,8 @@ data QuotaSpecificationResource s = QuotaSpecificationResource {
     {- ^  @(string: <required>)@ - A unique name for the quota specification. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (QuotaSpecificationResource s) where
-    toHCL QuotaSpecificationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (QuotaSpecificationResource s) where
+    toObject QuotaSpecificationResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "limits" <$> TF.attribute _limits
         , TF.assign "name" <$> TF.attribute _name
@@ -440,8 +433,8 @@ data SentinelPolicyResource s = SentinelPolicyResource {
     {- ^  @(strings: <required>)@ - The <https://www.nomadproject.io/guides/sentinel-policy.html#policy-scope> for this policy. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SentinelPolicyResource s) where
-    toHCL SentinelPolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SentinelPolicyResource s) where
+    toObject SentinelPolicyResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "enforcement_level" <$> TF.attribute _enforcement_level
         , TF.assign "name" <$> TF.attribute _name

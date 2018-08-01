@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -108,8 +101,8 @@ specified in the @provider@ .
 data AgentConfigData s = AgentConfigData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AgentConfigData s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (AgentConfigData s) where
+    toObject _ = []
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
@@ -147,8 +140,8 @@ specified in the @provider@ .
 data AgentSelfData s = AgentSelfData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AgentSelfData s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (AgentSelfData s) where
+    toObject _ = []
 
 agentSelfData :: TF.DataSource P.Consul (AgentSelfData s)
 agentSelfData =
@@ -172,8 +165,8 @@ data KeyPrefixData s = KeyPrefixData {
     {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KeyPrefixData s) where
-    toHCL KeyPrefixData{..} = TF.inline $ catMaybes
+instance TF.IsObject (KeyPrefixData s) where
+    toObject KeyPrefixData{..} = catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "path_prefix" <$> TF.attribute _path_prefix
         , TF.assign "subkey" <$> TF.attribute _subkey
@@ -246,8 +239,8 @@ data NodesData s = NodesData {
     {- ^ (Optional) See below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NodesData s) where
-    toHCL NodesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (NodesData s) where
+    toObject NodesData{..} = catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "query_options" <$> TF.attribute _query_options
         ]
@@ -308,8 +301,8 @@ data ServiceData s = ServiceData {
     {- ^ (Optional) A single tag that can be used to filter the list of nodes to return based on a single matching tag.. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceData s) where
-    toHCL ServiceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceData s) where
+    toObject ServiceData{..} = catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "query_options" <$> TF.attribute _query_options

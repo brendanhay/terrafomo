@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -354,8 +347,8 @@ data ComputeClusterHostGroupResource s = ComputeClusterHostGroupResource {
     {- ^ (Required) The name of the host group. This must be unique in the cluster. Forces a new resource if changed. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeClusterHostGroupResource s) where
-    toHCL ComputeClusterHostGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeClusterHostGroupResource s) where
+    toObject ComputeClusterHostGroupResource{..} = catMaybes
         [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
         , TF.assign "host_system_ids" <$> TF.attribute _host_system_ids
         , TF.assign "name" <$> TF.attribute _name
@@ -433,8 +426,8 @@ data ComputeClusterResource s = ComputeClusterResource {
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeClusterResource s) where
-    toHCL ComputeClusterResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeClusterResource s) where
+    toObject ComputeClusterResource{..} = catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "name" <$> TF.attribute _name
@@ -528,8 +521,8 @@ data ComputeClusterVmAffinityRuleResource s = ComputeClusterVmAffinityRuleResour
     {- ^ (Required) The UUIDs of the virtual machines to run on the same host together. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeClusterVmAffinityRuleResource s) where
-    toHCL ComputeClusterVmAffinityRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeClusterVmAffinityRuleResource s) where
+    toObject ComputeClusterVmAffinityRuleResource{..} = catMaybes
         [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "mandatory" <$> TF.attribute _mandatory
@@ -630,8 +623,8 @@ data ComputeClusterVmAntiAffinityRuleResource s = ComputeClusterVmAntiAffinityRu
     {- ^ (Required) The UUIDs of the virtual machines to run on hosts different from each other. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeClusterVmAntiAffinityRuleResource s) where
-    toHCL ComputeClusterVmAntiAffinityRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeClusterVmAntiAffinityRuleResource s) where
+    toObject ComputeClusterVmAntiAffinityRuleResource{..} = catMaybes
         [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "mandatory" <$> TF.attribute _mandatory
@@ -728,8 +721,8 @@ data ComputeClusterVmDependencyRuleResource s = ComputeClusterVmDependencyRuleRe
     {- ^ (Required) The name of the VM group that is the subject of this rule. The VMs defined in this group will not be started until the VMs in the group specified by <#dependency_vm_group_name> are started. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeClusterVmDependencyRuleResource s) where
-    toHCL ComputeClusterVmDependencyRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeClusterVmDependencyRuleResource s) where
+    toObject ComputeClusterVmDependencyRuleResource{..} = catMaybes
         [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
         , TF.assign "dependency_vm_group_name" <$> TF.attribute _dependency_vm_group_name
         , TF.assign "enabled" <$> TF.attribute _enabled
@@ -833,8 +826,8 @@ data ComputeClusterVmGroupResource s = ComputeClusterVmGroupResource {
     {- ^ (Required) The UUIDs of the virtual machines in this group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeClusterVmGroupResource s) where
-    toHCL ComputeClusterVmGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeClusterVmGroupResource s) where
+    toObject ComputeClusterVmGroupResource{..} = catMaybes
         [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "virtual_machine_ids" <$> TF.attribute _virtual_machine_ids
@@ -912,8 +905,8 @@ data ComputeClusterVmHostRuleResource s = ComputeClusterVmHostRuleResource {
     {- ^ (Required) The name of the virtual machine group to use with this rule. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeClusterVmHostRuleResource s) where
-    toHCL ComputeClusterVmHostRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeClusterVmHostRuleResource s) where
+    toObject ComputeClusterVmHostRuleResource{..} = catMaybes
         [ TF.assign "affinity_host_group_name" <$> TF.attribute _affinity_host_group_name
         , TF.assign "anti_affinity_host_group_name" <$> TF.attribute _anti_affinity_host_group_name
         , TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
@@ -1024,8 +1017,8 @@ data CustomAttributeResource s = CustomAttributeResource {
     {- ^ (Required) The name of the custom attribute. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CustomAttributeResource s) where
-    toHCL CustomAttributeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CustomAttributeResource s) where
+    toObject CustomAttributeResource{..} = catMaybes
         [ TF.assign "managed_object_type" <$> TF.attribute _managed_object_type
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -1072,8 +1065,8 @@ data DatacenterResource s = DatacenterResource {
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatacenterResource s) where
-    toHCL DatacenterResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatacenterResource s) where
+    toObject DatacenterResource{..} = catMaybes
         [ TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "tags" <$> TF.attribute _tags
@@ -1098,6 +1091,12 @@ instance s ~ s' => P.HasComputedFolder (TF.Ref s' (DatacenterResource s)) (TF.At
     computedFolder =
         (_folder :: DatacenterResource s -> TF.Attr s P.Text)
             . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedMoid (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
+    computedMoid x = TF.compute (TF.refKey x) "moid"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
     computedName =
@@ -1143,8 +1142,8 @@ data DatastoreClusterResource s = DatastoreClusterResource {
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatastoreClusterResource s) where
-    toHCL DatastoreClusterResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatastoreClusterResource s) where
+    toObject DatastoreClusterResource{..} = catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "name" <$> TF.attribute _name
@@ -1237,8 +1236,8 @@ data DatastoreClusterVmAntiAffinityRuleResource s = DatastoreClusterVmAntiAffini
     {- ^ (Required) The UUIDs of the virtual machines to run on different datastores from each other. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatastoreClusterVmAntiAffinityRuleResource s) where
-    toHCL DatastoreClusterVmAntiAffinityRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatastoreClusterVmAntiAffinityRuleResource s) where
+    toObject DatastoreClusterVmAntiAffinityRuleResource{..} = catMaybes
         [ TF.assign "datastore_cluster_id" <$> TF.attribute _datastore_cluster_id
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "virtual_machine_ids" <$> TF.attribute _virtual_machine_ids
@@ -1314,8 +1313,8 @@ data DistributedPortGroupResource s = DistributedPortGroupResource {
     {- ^ (Optional) The port group type. Can be one of @earlyBinding@ (static binding) or @ephemeral@ . Default: @earlyBinding@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DistributedPortGroupResource s) where
-    toHCL DistributedPortGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DistributedPortGroupResource s) where
+    toObject DistributedPortGroupResource{..} = catMaybes
         [ TF.assign "auto_expand" <$> TF.attribute _auto_expand
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "distributed_virtual_switch_uuid" <$> TF.attribute _distributed_virtual_switch_uuid
@@ -1451,8 +1450,8 @@ data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource {
     {- ^ (Optional) - The version of the DVS to create. The default is to create the DVS at the latest version supported by the version of vSphere being used. A DVS can be upgraded to another version, but cannot be downgraded. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DistributedVirtualSwitchResource s) where
-    toHCL DistributedVirtualSwitchResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DistributedVirtualSwitchResource s) where
+    toObject DistributedVirtualSwitchResource{..} = catMaybes
         [ TF.assign "contact_detail" <$> TF.attribute _contact_detail
         , TF.assign "contact_name" <$> TF.attribute _contact_name
         , TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
@@ -1658,8 +1657,8 @@ data DpmHostOverrideResource s = DpmHostOverrideResource {
     {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the host to create the override for. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DpmHostOverrideResource s) where
-    toHCL DpmHostOverrideResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DpmHostOverrideResource s) where
+    toObject DpmHostOverrideResource{..} = catMaybes
         [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
         , TF.assign "dpm_automation_level" <$> TF.attribute _dpm_automation_level
         , TF.assign "dpm_enabled" <$> TF.attribute _dpm_enabled
@@ -1739,8 +1738,8 @@ data DrsVmOverrideResource s = DrsVmOverrideResource {
     {- ^ (Required) The UUID of the virtual machine to create the override for.  Forces a new resource if changed. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DrsVmOverrideResource s) where
-    toHCL DrsVmOverrideResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DrsVmOverrideResource s) where
+    toObject DrsVmOverrideResource{..} = catMaybes
         [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
         , TF.assign "drs_automation_level" <$> TF.attribute _drs_automation_level
         , TF.assign "drs_enabled" <$> TF.attribute _drs_enabled
@@ -1828,8 +1827,8 @@ data FileResource s = FileResource {
     {- ^ (Required) The path to the file being uploaded from the Terraform host to vSphere or copied within vSphere. Forces a new resource if changed. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FileResource s) where
-    toHCL FileResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FileResource s) where
+    toObject FileResource{..} = catMaybes
         [ TF.assign "create_directories" <$> TF.attribute _create_directories
         , TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "datastore" <$> TF.attribute _datastore
@@ -1938,8 +1937,8 @@ data FolderResource s = FolderResource {
     {- ^ (Required) The path of the folder to be created. This is relative to the root of the type of folder you are creating, and the supplied datacenter. For example, given a default datacenter of @default-dc@ , a folder of type @vm@ (denoting a virtual machine folder), and a supplied folder of @terraform-test-folder@ , the resulting path would be @/default-dc/vm/terraform-test-folder@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FolderResource s) where
-    toHCL FolderResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FolderResource s) where
+    toObject FolderResource{..} = catMaybes
         [ TF.assign "path" <$> TF.attribute _path
         ]
 
@@ -1979,8 +1978,8 @@ data HaVmOverrideResource s = HaVmOverrideResource {
     {- ^ (Required) The UUID of the virtual machine to create the override for.  Forces a new resource if changed. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HaVmOverrideResource s) where
-    toHCL HaVmOverrideResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (HaVmOverrideResource s) where
+    toObject HaVmOverrideResource{..} = catMaybes
         [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
         , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
         ]
@@ -2034,8 +2033,8 @@ data HostPortGroupResource s = HostPortGroupResource {
     {- ^ (Optional) The VLAN ID/trunk mode for this port group.  An ID of @0@ denotes no tagging, an ID of @1@ - @4094@ tags with the specific ID, and an ID of @4095@ enables trunk mode, allowing the guest to manage its own tagging. Default: @0@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HostPortGroupResource s) where
-    toHCL HostPortGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (HostPortGroupResource s) where
+    toObject HostPortGroupResource{..} = catMaybes
         [ TF.assign "host_system_id" <$> TF.attribute _host_system_id
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "virtual_switch_name" <$> TF.attribute _virtual_switch_name
@@ -2125,8 +2124,8 @@ data HostVirtualSwitchResource s = HostVirtualSwitchResource {
     {- ^ (Optional) The number of ports to create with this virtual switch. Default: @128@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HostVirtualSwitchResource s) where
-    toHCL HostVirtualSwitchResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (HostVirtualSwitchResource s) where
+    toObject HostVirtualSwitchResource{..} = catMaybes
         [ TF.assign "host_system_id" <$> TF.attribute _host_system_id
         , TF.assign "mtu" <$> TF.attribute _mtu
         , TF.assign "name" <$> TF.attribute _name
@@ -2195,8 +2194,8 @@ data LicenseResource s = LicenseResource {
     {- ^ (Required) The license key to add. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LicenseResource s) where
-    toHCL LicenseResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LicenseResource s) where
+    toObject LicenseResource{..} = catMaybes
         [ TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "license_key" <$> TF.attribute _license_key
         ]
@@ -2274,8 +2273,8 @@ data NasDatastoreResource s = NasDatastoreResource {
     {- ^ (Optional) The type of NAS volume. Can be one of @NFS@ (to denote v3) or @NFS41@ (to denote NFS v4.1). Default: @NFS@ . Forces a new resource if changed. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NasDatastoreResource s) where
-    toHCL NasDatastoreResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NasDatastoreResource s) where
+    toObject NasDatastoreResource{..} = catMaybes
         [ TF.assign "access_mode" <$> TF.attribute _access_mode
         , TF.assign "datastore_cluster_id" <$> TF.attribute _datastore_cluster_id
         , TF.assign "folder" <$> TF.attribute _folder
@@ -2468,8 +2467,8 @@ data ResourcePoolResource s = ResourcePoolResource {
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourcePoolResource s) where
-    toHCL ResourcePoolResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ResourcePoolResource s) where
+    toObject ResourcePoolResource{..} = catMaybes
         [ TF.assign "cpu_expandable" <$> TF.attribute _cpu_expandable
         , TF.assign "cpu_limit" <$> TF.attribute _cpu_limit
         , TF.assign "cpu_reservation" <$> TF.attribute _cpu_reservation
@@ -2658,8 +2657,8 @@ data StorageDrsVmOverrideResource s = StorageDrsVmOverrideResource {
     {- ^ (Required) The UUID of the virtual machine to create the override for.  Forces a new resource if changed. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageDrsVmOverrideResource s) where
-    toHCL StorageDrsVmOverrideResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageDrsVmOverrideResource s) where
+    toObject StorageDrsVmOverrideResource{..} = catMaybes
         [ TF.assign "datastore_cluster_id" <$> TF.attribute _datastore_cluster_id
         , TF.assign "sdrs_automation_level" <$> TF.attribute _sdrs_automation_level
         , TF.assign "sdrs_enabled" <$> TF.attribute _sdrs_enabled
@@ -2750,8 +2749,8 @@ data TagCategoryResource s = TagCategoryResource {
     {- ^ (Required) The name of the category. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TagCategoryResource s) where
-    toHCL TagCategoryResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TagCategoryResource s) where
+    toObject TagCategoryResource{..} = catMaybes
         [ TF.assign "associable_types" <$> TF.attribute _associable_types
         , TF.assign "cardinality" <$> TF.attribute _cardinality
         , TF.assign "description" <$> TF.attribute _description
@@ -2827,8 +2826,8 @@ data TagResource s = TagResource {
     {- ^ (Required) The display name of the tag. The name must be unique within its category. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TagResource s) where
-    toHCL TagResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TagResource s) where
+    toObject TagResource{..} = catMaybes
         [ TF.assign "category_id" <$> TF.attribute _category_id
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -2896,8 +2895,8 @@ data VirtualDiskResource s = VirtualDiskResource {
     {- ^ (Required) The path, including filename, of the virtual disk to be created.  This needs to end in @.vmdk@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VirtualDiskResource s) where
-    toHCL VirtualDiskResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VirtualDiskResource s) where
+    toObject VirtualDiskResource{..} = catMaybes
         [ TF.assign "adapter_type" <$> TF.attribute _adapter_type
         , TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "datastore" <$> TF.attribute _datastore
@@ -2995,8 +2994,8 @@ data VirtualMachineResource s = VirtualMachineResource {
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the resource pool to put this virtual machine in. See the section on <#virtual-machine-migration> for details on changing this value. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VirtualMachineResource s) where
-    toHCL VirtualMachineResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VirtualMachineResource s) where
+    toObject VirtualMachineResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_pool_id" <$> TF.attribute _resource_pool_id
         ]
@@ -3100,8 +3099,8 @@ data VirtualMachineSnapshotResource s = VirtualMachineSnapshotResource {
     {- ^ (Required) The virtual machine UUID. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VirtualMachineSnapshotResource s) where
-    toHCL VirtualMachineSnapshotResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VirtualMachineSnapshotResource s) where
+    toObject VirtualMachineSnapshotResource{..} = catMaybes
         [ TF.assign "consolidate" <$> TF.attribute _consolidate
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "memory" <$> TF.attribute _memory
@@ -3218,8 +3217,8 @@ data VmfsDatastoreResource s = VmfsDatastoreResource {
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VmfsDatastoreResource s) where
-    toHCL VmfsDatastoreResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VmfsDatastoreResource s) where
+    toObject VmfsDatastoreResource{..} = catMaybes
         [ TF.assign "datastore_cluster_id" <$> TF.attribute _datastore_cluster_id
         , TF.assign "disks" <$> TF.attribute _disks
         , TF.assign "folder" <$> TF.attribute _folder

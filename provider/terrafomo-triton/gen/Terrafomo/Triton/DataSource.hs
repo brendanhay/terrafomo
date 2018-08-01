@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -129,8 +122,8 @@ data AccountData s = AccountData {
     {- ^ - (string) The login name associated with the Account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AccountData s) where
-    toHCL AccountData{..} = TF.inline $ catMaybes
+instance TF.IsObject (AccountData s) where
+    toObject AccountData{..} = catMaybes
         [ TF.assign "cns_enabled" <$> TF.attribute _cns_enabled
         , TF.assign "email" <$> TF.attribute _email
         , TF.assign "id" <$> TF.attribute _id
@@ -200,8 +193,8 @@ data DatacenterData s = DatacenterData {
     {- ^ - (string) The name of the Data Center. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatacenterData s) where
-    toHCL DatacenterData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatacenterData s) where
+    toObject DatacenterData{..} = catMaybes
         [ TF.assign "endpoint" <$> TF.attribute _endpoint
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -248,8 +241,8 @@ data FabricNetworkData s = FabricNetworkData {
     {- ^ - (integer) Required. The unique identifier (VLAN ID) of the Fabric VLAN. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FabricNetworkData s) where
-    toHCL FabricNetworkData{..} = TF.inline $ catMaybes
+instance TF.IsObject (FabricNetworkData s) where
+    toObject FabricNetworkData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "vlan_id" <$> TF.attribute _vlan_id
         ]
@@ -324,8 +317,8 @@ data FabricVlanData s = FabricVlanData {
     {- ^ - (integer) Optional. The unique identifier (VLAN ID) of the Fabric VLAN. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FabricVlanData s) where
-    toHCL FabricVlanData{..} = TF.inline $ catMaybes
+instance TF.IsObject (FabricVlanData s) where
+    toObject FabricVlanData{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "vlan_id" <$> TF.attribute _vlan_id
@@ -388,8 +381,8 @@ data ImageData s = ImageData {
     {- ^ - (string) The version for the image -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImageData s) where
-    toHCL ImageData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ImageData s) where
+    toObject ImageData{..} = catMaybes
         [ TF.assign "most_recent" <$> TF.attribute _most_recent
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "os" <$> TF.attribute _os
@@ -507,8 +500,8 @@ data NetworkData s = NetworkData {
     {- ^ - (string) Required. The name of the Network. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkData s) where
-    toHCL NetworkData{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkData s) where
+    toObject NetworkData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 

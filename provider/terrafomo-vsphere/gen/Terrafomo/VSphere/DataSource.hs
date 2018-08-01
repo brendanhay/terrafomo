@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -141,8 +134,8 @@ data ComputeClusterData s = ComputeClusterData {
     {- ^ (Required) The name or absolute path to the cluster. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeClusterData s) where
-    toHCL ComputeClusterData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeClusterData s) where
+    toObject ComputeClusterData{..} = catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -196,8 +189,8 @@ data CustomAttributeData s = CustomAttributeData {
     {- ^ (Required) The name of the custom attribute. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CustomAttributeData s) where
-    toHCL CustomAttributeData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CustomAttributeData s) where
+    toObject CustomAttributeData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -230,8 +223,8 @@ data DatacenterData s = DatacenterData {
     {- ^ (Optional) The name of the datacenter. This can be a name or path. Can be omitted if there is only one datacenter in your inventory. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatacenterData s) where
-    toHCL DatacenterData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatacenterData s) where
+    toObject DatacenterData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -269,8 +262,8 @@ data DatastoreClusterData s = DatastoreClusterData {
     {- ^ (Required) The name or absolute path to the datastore cluster. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatastoreClusterData s) where
-    toHCL DatastoreClusterData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatastoreClusterData s) where
+    toObject DatastoreClusterData{..} = catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -317,8 +310,8 @@ data DatastoreData s = DatastoreData {
     {- ^ (Required) The name of the datastore. This can be a name or path. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatastoreData s) where
-    toHCL DatastoreData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatastoreData s) where
+    toObject DatastoreData{..} = catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -367,8 +360,8 @@ data DistributedVirtualSwitchData s = DistributedVirtualSwitchData {
     {- ^ (Required) The name of the distributed virtual switch. This can be a name or path. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DistributedVirtualSwitchData s) where
-    toHCL DistributedVirtualSwitchData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DistributedVirtualSwitchData s) where
+    toObject DistributedVirtualSwitchData{..} = catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -420,8 +413,8 @@ data HostData s = HostData {
     {- ^ (Optional) The name of the host. This can be a name or path. Can be omitted if there is only one host in your inventory. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HostData s) where
-    toHCL HostData{..} = TF.inline $ catMaybes
+instance TF.IsObject (HostData s) where
+    toObject HostData{..} = catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -475,8 +468,8 @@ data NetworkData s = NetworkData {
     {- ^ (Required) The name of the network. This can be a name or path. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkData s) where
-    toHCL NetworkData{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkData s) where
+    toObject NetworkData{..} = catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -529,8 +522,8 @@ data ResourcePoolData s = ResourcePoolData {
     {- ^ (Optional) The name of the resource pool. This can be a name or path. This is required when using vCenter. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourcePoolData s) where
-    toHCL ResourcePoolData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ResourcePoolData s) where
+    toObject ResourcePoolData{..} = catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -578,8 +571,8 @@ data TagCategoryData s = TagCategoryData {
     {- ^ (Required) The name of the tag category. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TagCategoryData s) where
-    toHCL TagCategoryData{..} = TF.inline $ catMaybes
+instance TF.IsObject (TagCategoryData s) where
+    toObject TagCategoryData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -617,8 +610,8 @@ data TagData s = TagData {
     {- ^ (Required) The name of the tag. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TagData s) where
-    toHCL TagData{..} = TF.inline $ catMaybes
+instance TF.IsObject (TagData s) where
+    toObject TagData{..} = catMaybes
         [ TF.assign "category_id" <$> TF.attribute _category_id
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -668,8 +661,8 @@ data VirtualMachineData s = VirtualMachineData {
     {- ^ (Optional) The number of SCSI controllers to scan for disk attributes and controller types on. Default: @1@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VirtualMachineData s) where
-    toHCL VirtualMachineData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VirtualMachineData s) where
+    toObject VirtualMachineData{..} = catMaybes
         [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "scsi_controller_scan_count" <$> TF.attribute _scsi_controller_scan_count
@@ -760,8 +753,8 @@ data VmfsDisksData s = VmfsDisksData {
     {- ^ (Optional) Whether or not to rescan storage adapters before searching for disks. This may lengthen the time it takes to perform the search. Default: @false@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VmfsDisksData s) where
-    toHCL VmfsDisksData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VmfsDisksData s) where
+    toObject VmfsDisksData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "host_system_id" <$> TF.attribute _host_system_id
         , TF.assign "rescan" <$> TF.attribute _rescan

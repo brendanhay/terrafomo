@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -85,8 +78,8 @@ data CloudinitConfigData s = CloudinitConfigData {
     {- ^ (Required) One may specify this many times, this creates a fragment of the rendered cloud-init config file. The order of the parts is maintained in the configuration is maintained in the rendered template. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudinitConfigData s) where
-    toHCL CloudinitConfigData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CloudinitConfigData s) where
+    toObject CloudinitConfigData{..} = catMaybes
         [ TF.assign "base64_encode" <$> TF.attribute _base64_encode
         , TF.assign "gzip" <$> TF.attribute _gzip
         , TF.assign "part" <$> TF.attribute _part
@@ -145,8 +138,8 @@ data FileData s = FileData {
     {- ^ (Optional) Variables for interpolation within the template. Note that variables must all be primitives. Direct references to lists or maps will cause a validation error. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FileData s) where
-    toHCL FileData{..} = TF.inline $ catMaybes
+instance TF.IsObject (FileData s) where
+    toObject FileData{..} = catMaybes
         [ TF.assign "template" <$> TF.attribute _template
         , TF.assign "vars" <$> TF.attribute _vars
         ]

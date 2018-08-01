@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -48,6 +41,9 @@ module Terrafomo.OVH.Resource
     , IploadbalancingTcpFarmResource (..)
     , iploadbalancingTcpFarmResource
 
+    , IploadbalancingTcpFarmServerResource (..)
+    , iploadbalancingTcpFarmServerResource
+
     , PubliccloudPrivateNetworkResource (..)
     , publiccloudPrivateNetworkResource
 
@@ -84,7 +80,7 @@ module Terrafomo.OVH.Resource
     , P.HasNetwork (..)
     , P.HasNetworkId (..)
     , P.HasNoGateway (..)
-    , P.HasPattern (..)
+    , P.HasPattern' (..)
     , P.HasPort (..)
     , P.HasProbe (..)
     , P.HasProjectId (..)
@@ -142,7 +138,7 @@ module Terrafomo.OVH.Resource
     , P.HasComputedNoGateway (..)
     , P.HasComputedOpenstackRc (..)
     , P.HasComputedPassword (..)
-    , P.HasComputedPattern (..)
+    , P.HasComputedPattern' (..)
     , P.HasComputedPort (..)
     , P.HasComputedProbe (..)
     , P.HasComputedProjectId (..)
@@ -184,12 +180,12 @@ import Lens.Micro (lens)
 
 import Terrafomo.OVH.Types as P
 
+import qualified Data.Text              as P
+import qualified Data.Word              as P
+import qualified GHC.Base               as P
+import qualified Numeric.Natural        as P
+import qualified Terrafomo.OVH.Lens     as P
 import qualified Terrafomo.OVH.Provider as P
-import qualified Terrafomo.OVH.Lens as P
-import qualified Data.Text       as P
-import qualified Data.Word       as P
-import qualified GHC.Base        as P
-import qualified Numeric.Natural as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -202,18 +198,18 @@ import qualified Terrafomo.Schema    as TF
 Creates a private network in a public cloud project.
 -}
 data CloudNetworkPrivateResource s = CloudNetworkPrivateResource {
-      _name :: !(TF.Attr s P.Text)
+      _name       :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the network. -}
     , _project_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _regions :: !(TF.Attr s P.Text)
+    , _regions    :: !(TF.Attr s P.Text)
     {- ^ - an array of valid OVH public cloud region ID in which the network will be available. Ex.: "GRA1". Defaults to all public cloud regions. -}
-    , _vlan_id :: !(TF.Attr s P.Text)
+    , _vlan_id    :: !(TF.Attr s P.Text)
     {- ^ - a vlan id to associate with the network. Changing this value recreates the resource. Defaults to 0. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudNetworkPrivateResource s) where
-    toHCL CloudNetworkPrivateResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CloudNetworkPrivateResource s) where
+    toObject CloudNetworkPrivateResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project_id" <$> TF.attribute _project_id
         , TF.assign "regions" <$> TF.attribute _regions
@@ -279,11 +275,11 @@ cloudNetworkPrivateResource =
 Creates a subnet in a private network of a public cloud project.
 -}
 data CloudNetworkPrivateSubnetResource s = CloudNetworkPrivateSubnetResource {
-      _dhcp :: !(TF.Attr s P.Text)
+      _dhcp       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Enable DHCP. Changing this forces a new resource to be created. Defaults to false. _ -}
-    , _end :: !(TF.Attr s P.Text)
+    , _end        :: !(TF.Attr s P.Text)
     {- ^ (Required) Last ip for this region. Changing this value recreates the subnet. -}
-    , _network :: !(TF.Attr s P.Text)
+    , _network    :: !(TF.Attr s P.Text)
     {- ^ (Required) Global network in CIDR format. Changing this value recreates the subnet -}
     , _network_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the network. Changing this forces a new resource to be created. -}
@@ -291,14 +287,14 @@ data CloudNetworkPrivateSubnetResource s = CloudNetworkPrivateSubnetResource {
     {- ^ - Set to true if you don't want to set a default gateway IP. Changing this value recreates the resource. Defaults to false. -}
     , _project_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. Changing this forces a new resource to be created. -}
-    , _region :: !(TF.Attr s P.Text)
+    , _region     :: !(TF.Attr s P.Text)
     {- ^ - The region in which the network subnet will be created. Ex.: "GRA1". Changing this value recreates the resource. -}
-    , _start :: !(TF.Attr s P.Text)
+    , _start      :: !(TF.Attr s P.Text)
     {- ^ (Required) First ip for this region. Changing this value recreates the subnet. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudNetworkPrivateSubnetResource s) where
-    toHCL CloudNetworkPrivateSubnetResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CloudNetworkPrivateSubnetResource s) where
+    toObject CloudNetworkPrivateSubnetResource{..} = catMaybes
         [ TF.assign "dhcp" <$> TF.attribute _dhcp
         , TF.assign "end" <$> TF.attribute _end
         , TF.assign "network" <$> TF.attribute _network
@@ -406,12 +402,12 @@ Creates a user in a public cloud project.
 data CloudUserResource s = CloudUserResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ - A description associated with the user. -}
-    , _project_id :: !(TF.Attr s P.Text)
+    , _project_id  :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudUserResource s) where
-    toHCL CloudUserResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CloudUserResource s) where
+    toObject CloudUserResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "project_id" <$> TF.attribute _project_id
         ]
@@ -464,16 +460,16 @@ data DomainZoneRecordResource s = DomainZoneRecordResource {
     {- ^ (Required) The type of the record -}
     , _subdomain :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the record -}
-    , _target :: !(TF.Attr s P.Text)
+    , _target    :: !(TF.Attr s P.Text)
     {- ^ (Required) The value of the record -}
-    , _ttl :: !(TF.Attr s P.Text)
+    , _ttl       :: !(TF.Attr s P.Text)
     {- ^ (Optional) The TTL of the record -}
-    , _zone :: !(TF.Attr s P.Text)
+    , _zone      :: !(TF.Attr s P.Text)
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DomainZoneRecordResource s) where
-    toHCL DomainZoneRecordResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DomainZoneRecordResource s) where
+    toObject DomainZoneRecordResource{..} = catMaybes
         [ TF.assign "fieldtype" <$> TF.attribute _fieldtype
         , TF.assign "subdomain" <$> TF.attribute _subdomain
         , TF.assign "target" <$> TF.attribute _target
@@ -552,22 +548,22 @@ Provides a OVH domain zone redirection.
 data DomainZoneRedirectionResource s = DomainZoneRedirectionResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ (Optional) A description of this redirection -}
-    , _keywords :: !(TF.Attr s P.Text)
+    , _keywords    :: !(TF.Attr s P.Text)
     {- ^ (Optional) Keywords to describe this redirection -}
-    , _subdomain :: !(TF.Attr s P.Text)
+    , _subdomain   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the redirection -}
-    , _target :: !(TF.Attr s P.Text)
+    , _target      :: !(TF.Attr s P.Text)
     {- ^ (Required) The value of the redirection -}
-    , _title :: !(TF.Attr s P.Text)
+    , _title       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Title of this redirection -}
-    , _type' :: !(TF.Attr s P.Text)
+    , _type'       :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of the redirection, with values: -}
-    , _zone :: !(TF.Attr s P.Text)
+    , _zone        :: !(TF.Attr s P.Text)
     {- ^ (Required) The domain to add the redirection to -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DomainZoneRedirectionResource s) where
-    toHCL DomainZoneRedirectionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DomainZoneRedirectionResource s) where
+    toObject DomainZoneRedirectionResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "keywords" <$> TF.attribute _keywords
         , TF.assign "subdomain" <$> TF.attribute _subdomain
@@ -659,20 +655,20 @@ domainZoneRedirectionResource =
 Manage http route for a loadbalancer service
 -}
 data IploadbalancingHttpRouteResource s = IploadbalancingHttpRouteResource {
-      _action :: !(TF.Attr s P.ActionType)
+      _action       :: !(TF.Attr s P.ActionType)
     {- ^ (Optional) See datatype documentation. -}
     , _display_name :: !(TF.Attr s P.Text)
     {- ^ - Human readable name for your route, this field is for you -}
-    , _frontend_id :: !(TF.Attr s P.Text)
+    , _frontend_id  :: !(TF.Attr s P.Text)
     {- ^ - Route traffic for this frontend -}
     , _service_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The internal name of your IP load balancing -}
-    , _weight :: !(TF.Attr s P.Text)
+    , _weight       :: !(TF.Attr s P.Text)
     {- ^ - Route priority ([0..255]). 0 if null. Highest priority routes are evaluated first. Only the first matching route will trigger an action -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IploadbalancingHttpRouteResource s) where
-    toHCL IploadbalancingHttpRouteResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IploadbalancingHttpRouteResource s) where
+    toObject IploadbalancingHttpRouteResource{..} = catMaybes
         [ TF.assign "action.type" <$> TF.attribute _action
         , TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "frontend_id" <$> TF.attribute _frontend_id
@@ -749,29 +745,29 @@ Manage rules for HTTP route.
 data IploadbalancingHttpRouteRuleResource s = IploadbalancingHttpRouteRuleResource {
       _display_name :: !(TF.Attr s P.Text)
     {- ^ - Human readable name for your rule, this field is for you -}
-    , _field :: !(TF.Attr s P.Text)
+    , _field        :: !(TF.Attr s P.Text)
     {- ^ (Required) Name of the field to match like "protocol" or "host". See "/ipLoadbalancing/{serviceName}/availableRouteRules" for a list of available rules -}
-    , _match :: !(TF.Attr s P.Text)
+    , _match        :: !(TF.Attr s P.Text)
     {- ^ (Required) Matching operator. Not all operators are available for all fields. See "/ipLoadbalancing/{serviceName}/availableRouteRules" -}
-    , _negate :: !(TF.Attr s P.Text)
+    , _negate       :: !(TF.Attr s P.Text)
     {- ^ - Invert the matching operator effect -}
-    , _pattern :: !(TF.Attr s P.Text)
+    , _pattern'     :: !(TF.Attr s P.Text)
     {- ^ - Value to match against this match. Interpretation if this field depends on the match and field -}
-    , _route_id :: !(TF.Attr s P.Text)
+    , _route_id     :: !(TF.Attr s P.Text)
     {- ^ (Required) The route to apply this rule -}
     , _service_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The internal name of your IP load balancing -}
-    , _sub_field :: !(TF.Attr s P.Text)
+    , _sub_field    :: !(TF.Attr s P.Text)
     {- ^ - Name of sub-field, if applicable. This may be a Cookie or Header name for instance -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IploadbalancingHttpRouteRuleResource s) where
-    toHCL IploadbalancingHttpRouteRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IploadbalancingHttpRouteRuleResource s) where
+    toObject IploadbalancingHttpRouteRuleResource{..} = catMaybes
         [ TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "field" <$> TF.attribute _field
         , TF.assign "match" <$> TF.attribute _match
         , TF.assign "negate" <$> TF.attribute _negate
-        , TF.assign "pattern" <$> TF.attribute _pattern
+        , TF.assign "pattern" <$> TF.attribute _pattern'
         , TF.assign "route_id" <$> TF.attribute _route_id
         , TF.assign "service_name" <$> TF.attribute _service_name
         , TF.assign "sub_field" <$> TF.attribute _sub_field
@@ -797,10 +793,10 @@ instance P.HasNegate (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Text)
         lens (_negate :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
              (\s a -> s { _negate = a } :: IploadbalancingHttpRouteRuleResource s)
 
-instance P.HasPattern (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Text) where
-    pattern =
-        lens (_pattern :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _pattern = a } :: IploadbalancingHttpRouteRuleResource s)
+instance P.HasPattern' (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Text) where
+    pattern' =
+        lens (_pattern' :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _pattern' = a } :: IploadbalancingHttpRouteRuleResource s)
 
 instance P.HasRouteId (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Text) where
     routeId =
@@ -829,8 +825,8 @@ instance s ~ s' => P.HasComputedMatch (TF.Ref s' (IploadbalancingHttpRouteRuleRe
 instance s ~ s' => P.HasComputedNegate (TF.Ref s' (IploadbalancingHttpRouteRuleResource s)) (TF.Attr s P.Text) where
     computedNegate x = TF.compute (TF.refKey x) "negate"
 
-instance s ~ s' => P.HasComputedPattern (TF.Ref s' (IploadbalancingHttpRouteRuleResource s)) (TF.Attr s P.Text) where
-    computedPattern x = TF.compute (TF.refKey x) "pattern"
+instance s ~ s' => P.HasComputedPattern' (TF.Ref s' (IploadbalancingHttpRouteRuleResource s)) (TF.Attr s P.Text) where
+    computedPattern' x = TF.compute (TF.refKey x) "pattern"
 
 instance s ~ s' => P.HasComputedRouteId (TF.Ref s' (IploadbalancingHttpRouteRuleResource s)) (TF.Attr s P.Text) where
     computedRouteId x = TF.compute (TF.refKey x) "route_id"
@@ -849,7 +845,7 @@ iploadbalancingHttpRouteRuleResource =
             , _field = TF.Nil
             , _match = TF.Nil
             , _negate = TF.Nil
-            , _pattern = TF.Nil
+            , _pattern' = TF.Nil
             , _route_id = TF.Nil
             , _service_name = TF.Nil
             , _sub_field = TF.Nil
@@ -861,26 +857,26 @@ Creates a backend server group (farm) to be used by loadbalancing
 frontend(s)
 -}
 data IploadbalancingTcpFarmResource s = IploadbalancingTcpFarmResource {
-      _balance :: !(TF.Attr s P.Text)
+      _balance          :: !(TF.Attr s P.Text)
     {- ^ - Load balancing algorithm. @roundrobin@ if null ( @first@ , @leastconn@ , @roundrobin@ , @source@ ) -}
-    , _display_name :: !(TF.Attr s P.Text)
+    , _display_name     :: !(TF.Attr s P.Text)
     {- ^ - Readable label for loadbalancer farm -}
-    , _port :: !(TF.Attr s P.Text)
+    , _port             :: !(TF.Attr s P.Text)
     {- ^ - Port attached to your farm ([1..49151]). Inherited from frontend if null -}
-    , _probe :: !(TF.Attr s P.Text)
+    , _probe            :: !(TF.Attr s P.Text)
     {- ^ - define a backend healthcheck probe -}
-    , _service_name :: !(TF.Attr s P.Text)
+    , _service_name     :: !(TF.Attr s P.Text)
     {- ^ (Required) The internal name of your IP load balancing -}
-    , _stickiness :: !(TF.Attr s P.Text)
+    , _stickiness       :: !(TF.Attr s P.Text)
     {- ^ - 	Stickiness type. No stickiness if null ( @sourceIp@ ) -}
     , _vrack_network_id :: !(TF.Attr s P.Text)
     {- ^ - Internal Load Balancer identifier of the vRack private network to attach to your farm, mandatory when your Load Balancer is attached to a vRack -}
-    , _zone :: !(TF.Attr s P.Text)
+    , _zone             :: !(TF.Attr s P.Text)
     {- ^ (Required) Zone where the farm will be defined (ie. @GRA@ , @BHS@ also supports @ALL@ ) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IploadbalancingTcpFarmResource s) where
-    toHCL IploadbalancingTcpFarmResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IploadbalancingTcpFarmResource s) where
+    toObject IploadbalancingTcpFarmResource{..} = catMaybes
         [ TF.assign "balance" <$> TF.attribute _balance
         , TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "port" <$> TF.attribute _port
@@ -969,24 +965,176 @@ iploadbalancingTcpFarmResource =
             , _zone = TF.Nil
             }
 
+{- | The @ovh_iploadbalancing_tcp_farm_server@ OVH resource.
+
+Creates a backend server entry linked to loadbalancing group (farm)
+-}
+data IploadbalancingTcpFarmServerResource s = IploadbalancingTcpFarmServerResource {
+      _address                :: !(TF.Attr s P.Text)
+    {- ^ - Address of the backend server (IP from either internal or OVH network) -}
+    , _backup                 :: !(TF.Attr s P.Text)
+    {- ^ - is it a backup server used in case of failure of all the non-backup backends -}
+    , _display_name           :: !(TF.Attr s P.Text)
+    {- ^ - Label for the server -}
+    , _farm_id                :: !(TF.Attr s P.Text)
+    {- ^ - ID of the farm this server is attached to -}
+    , _port                   :: !(TF.Attr s P.Text)
+    {- ^ - Port that backend will respond on -}
+    , _probe                  :: !(TF.Attr s P.Text)
+    {- ^ - defines if backend will be probed to determine health and keep as active in farm if healthy -}
+    , _proxy_protocol_version :: !(TF.Attr s P.Text)
+    {- ^ - version of the PROXY protocol used to pass origin connection information from loadbalancer to recieving service ( @v1@ , @v2@ , @v2-ssl@ , @v2-ssl-cn@ ) -}
+    , _service_name           :: !(TF.Attr s P.Text)
+    {- ^ (Required) The internal name of your IP load balancing -}
+    , _ssl                    :: !(TF.Attr s P.Text)
+    {- ^ - is the connection ciphered with SSL (TLS) -}
+    , _status                 :: !(TF.Attr s P.Text)
+    {- ^ - backend status - @active@ or @inactive@ -}
+    , _weight                 :: !(TF.Attr s P.Text)
+    {- ^ - used in loadbalancing algorithm -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (IploadbalancingTcpFarmServerResource s) where
+    toObject IploadbalancingTcpFarmServerResource{..} = catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "backup" <$> TF.attribute _backup
+        , TF.assign "display_name" <$> TF.attribute _display_name
+        , TF.assign "farm_id" <$> TF.attribute _farm_id
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "probe" <$> TF.attribute _probe
+        , TF.assign "proxy_protocol_version" <$> TF.attribute _proxy_protocol_version
+        , TF.assign "service_name" <$> TF.attribute _service_name
+        , TF.assign "ssl" <$> TF.attribute _ssl
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "weight" <$> TF.attribute _weight
+        ]
+
+instance P.HasAddress (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+    address =
+        lens (_address :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _address = a } :: IploadbalancingTcpFarmServerResource s)
+
+instance P.HasBackup (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+    backup =
+        lens (_backup :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _backup = a } :: IploadbalancingTcpFarmServerResource s)
+
+instance P.HasDisplayName (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+    displayName =
+        lens (_display_name :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _display_name = a } :: IploadbalancingTcpFarmServerResource s)
+
+instance P.HasFarmId (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+    farmId =
+        lens (_farm_id :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _farm_id = a } :: IploadbalancingTcpFarmServerResource s)
+
+instance P.HasPort (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+    port =
+        lens (_port :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _port = a } :: IploadbalancingTcpFarmServerResource s)
+
+instance P.HasProbe (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+    probe =
+        lens (_probe :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _probe = a } :: IploadbalancingTcpFarmServerResource s)
+
+instance P.HasProxyProtocolVersion (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+    proxyProtocolVersion =
+        lens (_proxy_protocol_version :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _proxy_protocol_version = a } :: IploadbalancingTcpFarmServerResource s)
+
+instance P.HasServiceName (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+    serviceName =
+        lens (_service_name :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _service_name = a } :: IploadbalancingTcpFarmServerResource s)
+
+instance P.HasSsl (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+    ssl =
+        lens (_ssl :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ssl = a } :: IploadbalancingTcpFarmServerResource s)
+
+instance P.HasStatus (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+    status =
+        lens (_status :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _status = a } :: IploadbalancingTcpFarmServerResource s)
+
+instance P.HasWeight (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+    weight =
+        lens (_weight :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _weight = a } :: IploadbalancingTcpFarmServerResource s)
+
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
+    computedAddress x = TF.compute (TF.refKey x) "address"
+
+instance s ~ s' => P.HasComputedBackup (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
+    computedBackup x = TF.compute (TF.refKey x) "backup"
+
+instance s ~ s' => P.HasComputedCookie (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
+    computedCookie x = TF.compute (TF.refKey x) "cookie"
+
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
+    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
+
+instance s ~ s' => P.HasComputedFarmId (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
+    computedFarmId x = TF.compute (TF.refKey x) "farm_id"
+
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
+    computedPort x = TF.compute (TF.refKey x) "port"
+
+instance s ~ s' => P.HasComputedProbe (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
+    computedProbe x = TF.compute (TF.refKey x) "probe"
+
+instance s ~ s' => P.HasComputedProxyProtocolVersion (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
+    computedProxyProtocolVersion x = TF.compute (TF.refKey x) "proxy_protocol_version"
+
+instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
+    computedServiceName x = TF.compute (TF.refKey x) "service_name"
+
+instance s ~ s' => P.HasComputedSsl (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
+    computedSsl x = TF.compute (TF.refKey x) "ssl"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedWeight (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
+    computedWeight x = TF.compute (TF.refKey x) "weight"
+
+iploadbalancingTcpFarmServerResource :: TF.Resource P.OVH (IploadbalancingTcpFarmServerResource s)
+iploadbalancingTcpFarmServerResource =
+    TF.newResource "ovh_iploadbalancing_tcp_farm_server" $
+        IploadbalancingTcpFarmServerResource {
+              _address = TF.Nil
+            , _backup = TF.Nil
+            , _display_name = TF.Nil
+            , _farm_id = TF.Nil
+            , _port = TF.Nil
+            , _probe = TF.Nil
+            , _proxy_protocol_version = TF.Nil
+            , _service_name = TF.Nil
+            , _ssl = TF.Nil
+            , _status = TF.Nil
+            , _weight = TF.Nil
+            }
+
 {- | The @ovh_publiccloud_private_network@ OVH resource.
 
 DEPRECATED use @ovh_cloud_network_private@ instead. Creates a private
 network in a public cloud project.
 -}
 data PubliccloudPrivateNetworkResource s = PubliccloudPrivateNetworkResource {
-      _name :: !(TF.Attr s P.Text)
+      _name       :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the network. -}
     , _project_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _regions :: !(TF.Attr s P.Text)
+    , _regions    :: !(TF.Attr s P.Text)
     {- ^ - an array of valid OVH public cloud region ID in which the network will be available. Ex.: "GRA1". Defaults to all public cloud regions. -}
-    , _vlan_id :: !(TF.Attr s P.Text)
+    , _vlan_id    :: !(TF.Attr s P.Text)
     {- ^ - a vlan id to associate with the network. Changing this value recreates the resource. Defaults to 0. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PubliccloudPrivateNetworkResource s) where
-    toHCL PubliccloudPrivateNetworkResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PubliccloudPrivateNetworkResource s) where
+    toObject PubliccloudPrivateNetworkResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project_id" <$> TF.attribute _project_id
         , TF.assign "regions" <$> TF.attribute _regions
@@ -1053,11 +1201,11 @@ DEPRECATED use @ovh_cloud_network_private_subnet@ instead. Creates a subnet
 in a private network of a public cloud project.
 -}
 data PubliccloudPrivateNetworkSubnetResource s = PubliccloudPrivateNetworkSubnetResource {
-      _dhcp :: !(TF.Attr s P.Text)
+      _dhcp       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Enable DHCP. Changing this forces a new resource to be created. Defaults to false. _ -}
-    , _end :: !(TF.Attr s P.Text)
+    , _end        :: !(TF.Attr s P.Text)
     {- ^ (Required) Last ip for this region. Changing this value recreates the subnet. -}
-    , _network :: !(TF.Attr s P.Text)
+    , _network    :: !(TF.Attr s P.Text)
     {- ^ (Required) Global network in CIDR format. Changing this value recreates the subnet -}
     , _network_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the network. Changing this forces a new resource to be created. -}
@@ -1065,14 +1213,14 @@ data PubliccloudPrivateNetworkSubnetResource s = PubliccloudPrivateNetworkSubnet
     {- ^ - Set to true if you don't want to set a default gateway IP. Changing this value recreates the resource. Defaults to false. -}
     , _project_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. Changing this forces a new resource to be created. -}
-    , _region :: !(TF.Attr s P.Text)
+    , _region     :: !(TF.Attr s P.Text)
     {- ^ - The region in which the network subnet will be created. Ex.: "GRA1". Changing this value recreates the resource. -}
-    , _start :: !(TF.Attr s P.Text)
+    , _start      :: !(TF.Attr s P.Text)
     {- ^ (Required) First ip for this region. Changing this value recreates the subnet. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PubliccloudPrivateNetworkSubnetResource s) where
-    toHCL PubliccloudPrivateNetworkSubnetResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PubliccloudPrivateNetworkSubnetResource s) where
+    toObject PubliccloudPrivateNetworkSubnetResource{..} = catMaybes
         [ TF.assign "dhcp" <$> TF.attribute _dhcp
         , TF.assign "end" <$> TF.attribute _end
         , TF.assign "network" <$> TF.attribute _network
@@ -1181,12 +1329,12 @@ project.
 data PubliccloudUserResource s = PubliccloudUserResource {
       _description :: !(TF.Attr s P.Text)
     {- ^ - A description associated with the user. -}
-    , _project_id :: !(TF.Attr s P.Text)
+    , _project_id  :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PubliccloudUserResource s) where
-    toHCL PubliccloudUserResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PubliccloudUserResource s) where
+    toObject PubliccloudUserResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "project_id" <$> TF.attribute _project_id
         ]
@@ -1237,12 +1385,12 @@ Attach an existing public cloud project to an existing VRack.
 data VrackCloudprojectResource s = VrackCloudprojectResource {
       _project_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _vrack_id :: !(TF.Attr s P.Text)
+    , _vrack_id   :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the vrack. If omitted, the @OVH_VRACK_ID@ environment variable is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VrackCloudprojectResource s) where
-    toHCL VrackCloudprojectResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VrackCloudprojectResource s) where
+    toObject VrackCloudprojectResource{..} = catMaybes
         [ TF.assign "project_id" <$> TF.attribute _project_id
         , TF.assign "vrack_id" <$> TF.attribute _vrack_id
         ]
@@ -1279,12 +1427,12 @@ PublicCloud project to an existing VRack.
 data VrackPubliccloudAttachmentResource s = VrackPubliccloudAttachmentResource {
       _project_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _vrack_id :: !(TF.Attr s P.Text)
+    , _vrack_id   :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the vrack. If omitted, the @OVH_VRACK_ID@ environment variable is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VrackPubliccloudAttachmentResource s) where
-    toHCL VrackPubliccloudAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VrackPubliccloudAttachmentResource s) where
+    toObject VrackPubliccloudAttachmentResource{..} = catMaybes
         [ TF.assign "project_id" <$> TF.attribute _project_id
         , TF.assign "vrack_id" <$> TF.attribute _vrack_id
         ]

@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -149,8 +142,8 @@ data DatabaseResource s = DatabaseResource {
     {- ^ (Optional) The name of the template database from which to create the database, or @DEFAULT@ to use the default template ( @template0@ ).  NOTE: the default in Terraform is @template0@ , not @template1@ .  Changing this value will force the creation of a new resource as this value can only be changed when a database is created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatabaseResource s) where
-    toHCL DatabaseResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatabaseResource s) where
+    toObject DatabaseResource{..} = catMaybes
         [ TF.assign "allow_connections" <$> TF.attribute _allow_connections
         , TF.assign "connection_limit" <$> TF.attribute _connection_limit
         , TF.assign "encoding" <$> TF.attribute _encoding
@@ -293,8 +286,8 @@ data ExtensionResource s = ExtensionResource {
     {- ^ (Optional) Sets the version number of the extension. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ExtensionResource s) where
-    toHCL ExtensionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ExtensionResource s) where
+    toObject ExtensionResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "schema" <$> TF.attribute _schema
         , TF.assign "version" <$> TF.attribute _version
@@ -385,8 +378,8 @@ data RoleResource s = RoleResource {
     {- ^ (Optional) Defines the date and time after which the role's password is no longer valid.  Established connections past this @valid_time@ will have to be manually terminated.  This value corresponds to a PostgreSQL datetime. If omitted or the magic value @NULL@ is used, @valid_until@ will be set to @infinity@ .  Default is @NULL@ , therefore @infinity@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RoleResource s) where
-    toHCL RoleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RoleResource s) where
+    toObject RoleResource{..} = catMaybes
         [ TF.assign "bypass_row_level_security" <$> TF.attribute _bypass_row_level_security
         , TF.assign "connection_limit" <$> TF.attribute _connection_limit
         , TF.assign "create_database" <$> TF.attribute _create_database
@@ -580,8 +573,8 @@ data SchemaResource s = SchemaResource {
     {- ^ (Optional) Can be specified multiple times for each policy.  Each policy block supports fields documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SchemaResource s) where
-    toHCL SchemaResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SchemaResource s) where
+    toObject SchemaResource{..} = catMaybes
         [ TF.assign "if_not_exists" <$> TF.attribute _if_not_exists
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "owner" <$> TF.attribute _owner

@@ -1,14 +1,7 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RankNTypes             #-}
-{-# LANGUAGE UndecidableInstances   #-}
-
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 -- |
 -- Module      : Terrafomo.Datadog.Lens
@@ -48,7 +41,6 @@ module Terrafomo.Datadog.Lens
     , HasRecurrence (..)
     , HasRenotifyInterval (..)
     , HasRequireFullWindow (..)
-    , HasRole (..)
     , HasScope (..)
     , HasShortName (..)
     , HasSilenced (..)
@@ -90,7 +82,6 @@ module Terrafomo.Datadog.Lens
     , HasComputedRecurrence (..)
     , HasComputedRenotifyInterval (..)
     , HasComputedRequireFullWindow (..)
-    , HasComputedRole (..)
     , HasComputedScope (..)
     , HasComputedShortName (..)
     , HasComputedSilenced (..)
@@ -110,7 +101,6 @@ import GHC.Base ((.))
 
 import Lens.Micro (Lens')
 
-import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasActive a b | a -> b where
@@ -269,12 +259,6 @@ class HasRequireFullWindow a b | a -> b where
 instance HasRequireFullWindow a b => HasRequireFullWindow (TF.Schema l p a) b where
     requireFullWindow = TF.configuration . requireFullWindow
 
-class HasRole a b | a -> b where
-    role :: Lens' a b
-
-instance HasRole a b => HasRole (TF.Schema l p a) b where
-    role = TF.configuration . role
-
 class HasScope a b | a -> b where
     scope :: Lens' a b
 
@@ -427,9 +411,6 @@ class HasComputedRenotifyInterval a b | a -> b where
 
 class HasComputedRequireFullWindow a b | a -> b where
     computedRequireFullWindow :: a -> b
-
-class HasComputedRole a b | a -> b where
-    computedRole :: a -> b
 
 class HasComputedScope a b | a -> b where
     computedScope :: a -> b

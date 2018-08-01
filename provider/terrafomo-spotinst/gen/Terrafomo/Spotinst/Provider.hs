@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -27,6 +21,7 @@ module Terrafomo.Spotinst.Provider
     , providerToken
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -59,15 +54,17 @@ data Spotinst = Spotinst {
 
 instance Hashable Spotinst
 
-instance TF.ToHCL Spotinst where
-    toHCL x =
+instance TF.IsSection Spotinst where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Spotinst))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "account" <$> _account x
-            , TF.assign "token" <$> _token x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "account" <$> _account x
+                  , TF.assign "token" <$> _token x
+                  ])
 
 instance TF.IsProvider Spotinst where
     type ProviderType Spotinst = "spotinst"

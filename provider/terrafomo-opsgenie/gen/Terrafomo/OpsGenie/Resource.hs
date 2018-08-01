@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -92,8 +85,8 @@ data TeamResource s = TeamResource {
     {- ^ (Required) The name associated with this team. OpsGenie defines that this must not be longer than 100 characters. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TeamResource s) where
-    toHCL TeamResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TeamResource s) where
+    toObject TeamResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "member" <$> TF.attribute _member
         , TF.assign "name" <$> TF.attribute _name
@@ -158,8 +151,8 @@ data UserResource s = UserResource {
     {- ^ (Required) The email address associated with this user. OpsGenie defines that this must not be longer than 100 characters. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserResource s) where
-    toHCL UserResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserResource s) where
+    toObject UserResource{..} = catMaybes
         [ TF.assign "full_name" <$> TF.attribute _full_name
         , TF.assign "locale" <$> TF.attribute _locale
         , TF.assign "role" <$> TF.attribute _role

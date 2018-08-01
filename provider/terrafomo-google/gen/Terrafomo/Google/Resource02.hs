@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -60,6 +53,9 @@ module Terrafomo.Google.Resource02
     , Resource (..)
     , resource
 
+    , StorageNotificationResource (..)
+    , storageNotificationResource
+
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasAdditionalZones (..)
@@ -69,8 +65,12 @@ module Terrafomo.Google.Resource02
     , P.HasBackendService (..)
     , P.HasBaseInstanceName (..)
     , P.HasBillingAccount (..)
+    , P.HasBucket (..)
     , P.HasBucketName (..)
     , P.HasClusterIpv4Cidr (..)
+    , P.HasCooldownPeriod (..)
+    , P.HasCpuUtilization (..)
+    , P.HasCustomAttributes (..)
     , P.HasDatasetId (..)
     , P.HasDescription (..)
     , P.HasDestRange (..)
@@ -79,6 +79,7 @@ module Terrafomo.Google.Resource02
     , P.HasEnableCdn (..)
     , P.HasEnableKubernetesAlpha (..)
     , P.HasEnableLegacyAbac (..)
+    , P.HasEventTypes (..)
     , P.HasExpirationTime (..)
     , P.HasFamily' (..)
     , P.HasFilter (..)
@@ -90,14 +91,19 @@ module Terrafomo.Google.Resource02
     , P.HasIpAllocationPolicy (..)
     , P.HasKey (..)
     , P.HasLabels (..)
+    , P.HasLicenses (..)
+    , P.HasLoadBalancingUtilization (..)
     , P.HasLocation (..)
     , P.HasLoggingService (..)
     , P.HasMaintenancePolicy (..)
     , P.HasMasterAuth (..)
     , P.HasMasterAuthorizedNetworksConfig (..)
     , P.HasMasterIpv4CidrBlock (..)
+    , P.HasMaxReplicas (..)
     , P.HasMembers (..)
+    , P.HasMetric (..)
     , P.HasMinMasterVersion (..)
+    , P.HasMinReplicas (..)
     , P.HasMonitoringService (..)
     , P.HasName (..)
     , P.HasNamedPort (..)
@@ -111,7 +117,9 @@ module Terrafomo.Google.Resource02
     , P.HasNodeConfig (..)
     , P.HasNodePool (..)
     , P.HasNodeVersion (..)
+    , P.HasObjectNamePrefix (..)
     , P.HasOrgId (..)
+    , P.HasPayloadFormat (..)
     , P.HasPodSecurityPolicyConfig (..)
     , P.HasPriority (..)
     , P.HasPrivateCluster (..)
@@ -139,6 +147,7 @@ module Terrafomo.Google.Resource02
     , P.HasTargetPools (..)
     , P.HasTargetSize (..)
     , P.HasTimePartitioning (..)
+    , P.HasTopic (..)
     , P.HasType' (..)
     , P.HasUpdateStrategy (..)
     , P.HasValue (..)
@@ -155,10 +164,14 @@ module Terrafomo.Google.Resource02
     , P.HasComputedBackendService (..)
     , P.HasComputedBaseInstanceName (..)
     , P.HasComputedBillingAccount (..)
+    , P.HasComputedBucket (..)
     , P.HasComputedBucketName (..)
     , P.HasComputedClusterIpv4Cidr (..)
+    , P.HasComputedCooldownPeriod (..)
+    , P.HasComputedCpuUtilization (..)
     , P.HasComputedCreationTime (..)
     , P.HasComputedCreationTimestamp (..)
+    , P.HasComputedCustomAttributes (..)
     , P.HasComputedDatasetId (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDestRange (..)
@@ -169,6 +182,7 @@ module Terrafomo.Google.Resource02
     , P.HasComputedEnableLegacyAbac (..)
     , P.HasComputedEndpoint (..)
     , P.HasComputedEtag (..)
+    , P.HasComputedEventTypes (..)
     , P.HasComputedExpirationTime (..)
     , P.HasComputedFamily' (..)
     , P.HasComputedFilter (..)
@@ -186,6 +200,8 @@ module Terrafomo.Google.Resource02
     , P.HasComputedLabelFingerprint (..)
     , P.HasComputedLabels (..)
     , P.HasComputedLastModifiedTime (..)
+    , P.HasComputedLicenses (..)
+    , P.HasComputedLoadBalancingUtilization (..)
     , P.HasComputedLocation (..)
     , P.HasComputedLoggingService (..)
     , P.HasComputedMaintenancePolicy (..)
@@ -197,8 +213,11 @@ module Terrafomo.Google.Resource02
     , P.HasComputedMasterAuthorizedNetworksConfig (..)
     , P.HasComputedMasterIpv4CidrBlock (..)
     , P.HasComputedMasterVersion (..)
+    , P.HasComputedMaxReplicas (..)
     , P.HasComputedMembers (..)
+    , P.HasComputedMetric (..)
     , P.HasComputedMinMasterVersion (..)
+    , P.HasComputedMinReplicas (..)
     , P.HasComputedMonitoringService (..)
     , P.HasComputedName (..)
     , P.HasComputedNamedPort (..)
@@ -216,7 +235,9 @@ module Terrafomo.Google.Resource02
     , P.HasComputedNumBytes (..)
     , P.HasComputedNumLongTermBytes (..)
     , P.HasComputedNumRows (..)
+    , P.HasComputedObjectNamePrefix (..)
     , P.HasComputedOrgId (..)
+    , P.HasComputedPayloadFormat (..)
     , P.HasComputedPodSecurityPolicyConfig (..)
     , P.HasComputedPriority (..)
     , P.HasComputedPrivateCluster (..)
@@ -246,6 +267,7 @@ module Terrafomo.Google.Resource02
     , P.HasComputedTargetPools (..)
     , P.HasComputedTargetSize (..)
     , P.HasComputedTimePartitioning (..)
+    , P.HasComputedTopic (..)
     , P.HasComputedType' (..)
     , P.HasComputedUpdateStrategy (..)
     , P.HasComputedValue (..)
@@ -310,8 +332,8 @@ data BigqueryTableResource s = BigqueryTableResource {
     {- ^ (Optional) If specified, configures this table as a view. Structure is documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BigqueryTableResource s) where
-    toHCL BigqueryTableResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (BigqueryTableResource s) where
+    toObject BigqueryTableResource{..} = catMaybes
         [ TF.assign "dataset_id" <$> TF.attribute _dataset_id
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "expiration_time" <$> TF.attribute _expiration_time
@@ -481,6 +503,8 @@ data ComputeImageResource s = ComputeImageResource {
     {- ^ (Optional) The name of the image family to which this image belongs. -}
     , _labels      :: !(TF.Attr s P.Text)
     {- ^ (Optional) A set of key/value label pairs to assign to the image. -}
+    , _licenses    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of license URIs to apply to this image. Changing this forces a new resource to be created. -}
     , _name        :: !(TF.Attr s P.Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
     , _project     :: !(TF.Attr s P.Text)
@@ -491,11 +515,12 @@ data ComputeImageResource s = ComputeImageResource {
     {- ^ (Optional) The URL of a disk that will be used as the source of the image. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeImageResource s) where
-    toHCL ComputeImageResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeImageResource s) where
+    toObject ComputeImageResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "family" <$> TF.attribute _family'
         , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "licenses" <$> TF.attribute _licenses
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "raw_disk" <$> TF.attribute _raw_disk
@@ -516,6 +541,11 @@ instance P.HasLabels (ComputeImageResource s) (TF.Attr s P.Text) where
     labels =
         lens (_labels :: ComputeImageResource s -> TF.Attr s P.Text)
              (\s a -> s { _labels = a } :: ComputeImageResource s)
+
+instance P.HasLicenses (ComputeImageResource s) (TF.Attr s P.Text) where
+    licenses =
+        lens (_licenses :: ComputeImageResource s -> TF.Attr s P.Text)
+             (\s a -> s { _licenses = a } :: ComputeImageResource s)
 
 instance P.HasName (ComputeImageResource s) (TF.Attr s P.Text) where
     name =
@@ -555,6 +585,11 @@ instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeImageResource s)) (TF.
         (_labels :: ComputeImageResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedLicenses (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
+    computedLicenses =
+        (_licenses :: ComputeImageResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeImageResource s -> TF.Attr s P.Text)
@@ -585,6 +620,7 @@ computeImageResource =
               _description = TF.Nil
             , _family' = TF.Nil
             , _labels = TF.Nil
+            , _licenses = TF.Nil
             , _name = TF.Nil
             , _project = TF.Nil
             , _raw_disk = TF.Nil
@@ -633,8 +669,8 @@ data ComputeInstanceGroupManagerResource s = ComputeInstanceGroupManagerResource
     {- ^ (Required) The zone that instances in this group should be created in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeInstanceGroupManagerResource s) where
-    toHCL ComputeInstanceGroupManagerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeInstanceGroupManagerResource s) where
+    toObject ComputeInstanceGroupManagerResource{..} = catMaybes
         [ TF.assign "auto_healing_policies" <$> TF.attribute _auto_healing_policies
         , TF.assign "base_instance_name" <$> TF.attribute _base_instance_name
         , TF.assign "description" <$> TF.attribute _description
@@ -836,8 +872,8 @@ data ComputeProjectMetadataItemResource s = ComputeProjectMetadataItemResource {
     {- ^ (Required) The value to set for the given metadata key. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeProjectMetadataItemResource s) where
-    toHCL ComputeProjectMetadataItemResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeProjectMetadataItemResource s) where
+    toObject ComputeProjectMetadataItemResource{..} = catMaybes
         [ TF.assign "key" <$> TF.attribute _key
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "value" <$> TF.attribute _value
@@ -903,8 +939,8 @@ data ComputeSecurityPolicyResource s = ComputeSecurityPolicyResource {
     {- ^ (Optional) The set of rules that belong to this policy. There must always be a default rule (rule with priority 2147483647 and match "*"). If no rules are provided when creating a security policy, a default rule with action "allow" will be added. Structure is documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSecurityPolicyResource s) where
-    toHCL ComputeSecurityPolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSecurityPolicyResource s) where
+    toObject ComputeSecurityPolicyResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -1036,8 +1072,8 @@ data ContainerClusterResource s = ContainerClusterResource {
     {- ^ (Optional) The zone that the master and the number of nodes specified in @initial_node_count@ should be created in. Only one of @zone@ and @region@ may be set. If neither zone nor region are set, the provider zone is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ContainerClusterResource s) where
-    toHCL ContainerClusterResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ContainerClusterResource s) where
+    toObject ContainerClusterResource{..} = catMaybes
         [ TF.assign "additional_zones" <$> TF.attribute _additional_zones
         , TF.assign "addons_config" <$> TF.attribute _addons_config
         , TF.assign "cluster_ipv4_cidr" <$> TF.attribute _cluster_ipv4_cidr
@@ -1435,8 +1471,8 @@ data KmsKeyRingResource s = KmsKeyRingResource {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsKeyRingResource s) where
-    toHCL KmsKeyRingResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (KmsKeyRingResource s) where
+    toObject KmsKeyRingResource{..} = catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -1505,8 +1541,8 @@ data LoggingBillingAccountExclusionResource s = LoggingBillingAccountExclusionRe
     {- ^ (Required) The name of the logging exclusion. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoggingBillingAccountExclusionResource s) where
-    toHCL LoggingBillingAccountExclusionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoggingBillingAccountExclusionResource s) where
+    toObject LoggingBillingAccountExclusionResource{..} = catMaybes
         [ TF.assign "billing_account" <$> TF.attribute _billing_account
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "disabled" <$> TF.attribute _disabled
@@ -1596,8 +1632,8 @@ data LoggingFolderExclusionResource s = LoggingFolderExclusionResource {
     {- ^ (Required) The name of the logging exclusion. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoggingFolderExclusionResource s) where
-    toHCL LoggingFolderExclusionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoggingFolderExclusionResource s) where
+    toObject LoggingFolderExclusionResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "disabled" <$> TF.attribute _disabled
         , TF.assign "filter" <$> TF.attribute _filter
@@ -1687,8 +1723,8 @@ data LoggingProjectExclusionResource s = LoggingProjectExclusionResource {
     {- ^ (Optional) The project to create the exclusion in. If omitted, the project associated with the provider is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoggingProjectExclusionResource s) where
-    toHCL LoggingProjectExclusionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoggingProjectExclusionResource s) where
+    toObject LoggingProjectExclusionResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "disabled" <$> TF.attribute _disabled
         , TF.assign "filter" <$> TF.attribute _filter
@@ -1773,8 +1809,8 @@ data OrganizationIamBindingResource s = OrganizationIamBindingResource {
     {- ^ (Required) The role that should be applied. Only one @google_organization_iam_binding@ can be used per role. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OrganizationIamBindingResource s) where
-    toHCL OrganizationIamBindingResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (OrganizationIamBindingResource s) where
+    toObject OrganizationIamBindingResource{..} = catMaybes
         [ TF.assign "members" <$> TF.attribute _members
         , TF.assign "org_id" <$> TF.attribute _org_id
         , TF.assign "role" <$> TF.attribute _role
@@ -1853,8 +1889,8 @@ data Resource s = Resource {
     {- ^ (Optional) A list of instance tags to which this route applies. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (Resource s) where
-    toHCL Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (Resource s) where
+    toObject Resource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "dest_range" <$> TF.attribute _dest_range
         , TF.assign "name" <$> TF.attribute _name
@@ -2011,4 +2047,111 @@ resource =
             , _priority = TF.Nil
             , _project = TF.Nil
             , _tags = TF.Nil
+            }
+
+{- | The @google_storage_notification@ Google resource.
+
+Creates a new notification configuration on a specified bucket, establishing
+a flow of event notifications from GCS to a Cloud Pub/Sub topic. For more
+information see <https://cloud.google.com/storage/docs/pubsub-notifications>
+and <https://cloud.google.com/storage/docs/json_api/v1/notifications> .
+-}
+data StorageNotificationResource s = StorageNotificationResource {
+      _bucket             :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the bucket. -}
+    , _custom_attributes  :: !(TF.Attr s P.Text)
+    {- ^ (Optional)  A set of key/value attribute pairs to attach to each Cloud PubSub message published for this notification subscription -}
+    , _event_types        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of event type filters for this notification config. If not specified, Cloud Storage will send notifications for all event types. The valid types are: @"OBJECT_FINALIZE"@ , @"OBJECT_METADATA_UPDATE"@ , @"OBJECT_DELETE"@ , @"OBJECT_ARCHIVE"@ -}
+    , _object_name_prefix :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Specifies a prefix path filter for this notification config. Cloud Storage will only send notifications for objects in this bucket whose names begin with the specified prefix. -}
+    , _payload_format     :: !(TF.Attr s P.Text)
+    {- ^ (Required) The desired content of the Payload. One of @"JSON_API_V1"@ or @"NONE"@ . -}
+    , _topic              :: !(TF.Attr s P.Text)
+    {- ^ (Required) The Cloud PubSub topic to which this subscription publishes. Expects either the topic name, assumed to belong to the default GCP provider project, or the project-level name, i.e. @projects/my-gcp-project/topics/my-topic@ or @my-topic@ . -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (StorageNotificationResource s) where
+    toObject StorageNotificationResource{..} = catMaybes
+        [ TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "custom_attributes" <$> TF.attribute _custom_attributes
+        , TF.assign "event_types" <$> TF.attribute _event_types
+        , TF.assign "object_name_prefix" <$> TF.attribute _object_name_prefix
+        , TF.assign "payload_format" <$> TF.attribute _payload_format
+        , TF.assign "topic" <$> TF.attribute _topic
+        ]
+
+instance P.HasBucket (StorageNotificationResource s) (TF.Attr s P.Text) where
+    bucket =
+        lens (_bucket :: StorageNotificationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _bucket = a } :: StorageNotificationResource s)
+
+instance P.HasCustomAttributes (StorageNotificationResource s) (TF.Attr s P.Text) where
+    customAttributes =
+        lens (_custom_attributes :: StorageNotificationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _custom_attributes = a } :: StorageNotificationResource s)
+
+instance P.HasEventTypes (StorageNotificationResource s) (TF.Attr s P.Text) where
+    eventTypes =
+        lens (_event_types :: StorageNotificationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _event_types = a } :: StorageNotificationResource s)
+
+instance P.HasObjectNamePrefix (StorageNotificationResource s) (TF.Attr s P.Text) where
+    objectNamePrefix =
+        lens (_object_name_prefix :: StorageNotificationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _object_name_prefix = a } :: StorageNotificationResource s)
+
+instance P.HasPayloadFormat (StorageNotificationResource s) (TF.Attr s P.Text) where
+    payloadFormat =
+        lens (_payload_format :: StorageNotificationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _payload_format = a } :: StorageNotificationResource s)
+
+instance P.HasTopic (StorageNotificationResource s) (TF.Attr s P.Text) where
+    topic =
+        lens (_topic :: StorageNotificationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _topic = a } :: StorageNotificationResource s)
+
+instance s ~ s' => P.HasComputedBucket (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
+    computedBucket =
+        (_bucket :: StorageNotificationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCustomAttributes (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
+    computedCustomAttributes =
+        (_custom_attributes :: StorageNotificationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEventTypes (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
+    computedEventTypes =
+        (_event_types :: StorageNotificationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedObjectNamePrefix (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
+    computedObjectNamePrefix =
+        (_object_name_prefix :: StorageNotificationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPayloadFormat (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
+    computedPayloadFormat =
+        (_payload_format :: StorageNotificationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+
+instance s ~ s' => P.HasComputedTopic (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
+    computedTopic =
+        (_topic :: StorageNotificationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+storageNotificationResource :: TF.Resource P.Google (StorageNotificationResource s)
+storageNotificationResource =
+    TF.newResource "google_storage_notification" $
+        StorageNotificationResource {
+              _bucket = TF.Nil
+            , _custom_attributes = TF.Nil
+            , _event_types = TF.Nil
+            , _object_name_prefix = TF.Nil
+            , _payload_format = TF.Nil
+            , _topic = TF.Nil
             }

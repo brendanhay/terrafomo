@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -102,6 +95,21 @@ module Terrafomo.OPC.Resource
     , ComputeVnicSetResource (..)
     , computeVnicSetResource
 
+    , LbaasCertificateResource (..)
+    , lbaasCertificateResource
+
+    , LbaasListenerResource (..)
+    , lbaasListenerResource
+
+    , LbaasLoadBalancerResource (..)
+    , lbaasLoadBalancerResource
+
+    , LbaasPolicyResource (..)
+    , lbaasPolicyResource
+
+    , LbaasServerPoolResource (..)
+    , lbaasServerPoolResource
+
     , StorageContainerResource (..)
     , storageContainerResource
 
@@ -118,8 +126,12 @@ module Terrafomo.OPC.Resource
     , P.HasApplication (..)
     , P.HasAppliedAcls (..)
     , P.HasAttributes (..)
+    , P.HasBalancerProtocol (..)
     , P.HasBootOrder (..)
     , P.HasBootable (..)
+    , P.HasCertificateBody (..)
+    , P.HasCertificateChain (..)
+    , P.HasCertificates (..)
     , P.HasCollocated (..)
     , P.HasContainer (..)
     , P.HasDefault' (..)
@@ -135,6 +147,7 @@ module Terrafomo.OPC.Resource
     , P.HasExposedHeaders (..)
     , P.HasFile (..)
     , P.HasFlowDirection (..)
+    , P.HasHealthCheck (..)
     , P.HasHostname (..)
     , P.HasIcmpcode (..)
     , P.HasIcmptype (..)
@@ -147,10 +160,12 @@ module Terrafomo.OPC.Resource
     , P.HasIpAddressPrefix (..)
     , P.HasIpAddressReservation (..)
     , P.HasIpEntries (..)
+    , P.HasIpNetwork (..)
     , P.HasIpNetworkExchange (..)
     , P.HasIpProtocol (..)
     , P.HasKey (..)
     , P.HasLabel (..)
+    , P.HasLoadBalancer (..)
     , P.HasMachineImages (..)
     , P.HasMaxAge (..)
     , P.HasMetadata (..)
@@ -158,21 +173,33 @@ module Terrafomo.OPC.Resource
     , P.HasNetworkingInfo (..)
     , P.HasNextHopVnicSet (..)
     , P.HasOutputCidrPolicy (..)
+    , P.HasParentLoadBalancer (..)
     , P.HasParentPool (..)
     , P.HasParentVolumeBootable (..)
+    , P.HasPathPrefixes (..)
     , P.HasPermanent (..)
+    , P.HasPermittedClients (..)
+    , P.HasPermittedMethods (..)
+    , P.HasPolices (..)
     , P.HasPolicy (..)
+    , P.HasPort (..)
     , P.HasPrefixes (..)
     , P.HasPrimaryKey (..)
+    , P.HasPrivateKey (..)
     , P.HasProtocol (..)
     , P.HasPublicNaptEnabled (..)
     , P.HasQuotaBytes (..)
     , P.HasQuotaCount (..)
     , P.HasReadAcls (..)
+    , P.HasRegion (..)
     , P.HasReverseDns (..)
+    , P.HasScheme (..)
     , P.HasSeclist (..)
     , P.HasSecondaryKey (..)
     , P.HasSecurityProtocols (..)
+    , P.HasServerPool (..)
+    , P.HasServerProtocol (..)
+    , P.HasServers (..)
     , P.HasShape (..)
     , P.HasSize (..)
     , P.HasSnapshot (..)
@@ -187,10 +214,13 @@ module Terrafomo.OPC.Resource
     , P.HasStorageType (..)
     , P.HasStorageVolume (..)
     , P.HasTags (..)
+    , P.HasType' (..)
     , P.HasVcable (..)
     , P.HasVersion (..)
+    , P.HasVirtualHosts (..)
     , P.HasVirtualNics (..)
     , P.HasVnic (..)
+    , P.HasVnicSet (..)
     , P.HasVolumeName (..)
     , P.HasWriteAcls (..)
 
@@ -204,8 +234,12 @@ module Terrafomo.OPC.Resource
     , P.HasComputedAppliedAcls (..)
     , P.HasComputedAttributes (..)
     , P.HasComputedAvailabilityDomain (..)
+    , P.HasComputedBalancerProtocol (..)
     , P.HasComputedBootOrder (..)
     , P.HasComputedBootable (..)
+    , P.HasComputedCertificateBody (..)
+    , P.HasComputedCertificateChain (..)
+    , P.HasComputedCertificates (..)
     , P.HasComputedCollocated (..)
     , P.HasComputedContainer (..)
     , P.HasComputedDefault' (..)
@@ -225,6 +259,7 @@ module Terrafomo.OPC.Resource
     , P.HasComputedFingerprint (..)
     , P.HasComputedFlowDirection (..)
     , P.HasComputedFqdn (..)
+    , P.HasComputedHealthCheck (..)
     , P.HasComputedHostname (..)
     , P.HasComputedHypervisor (..)
     , P.HasComputedIcmpcode (..)
@@ -242,10 +277,12 @@ module Terrafomo.OPC.Resource
     , P.HasComputedIpAddressPrefix (..)
     , P.HasComputedIpAddressReservation (..)
     , P.HasComputedIpEntries (..)
+    , P.HasComputedIpNetwork (..)
     , P.HasComputedIpNetworkExchange (..)
     , P.HasComputedIpProtocol (..)
     , P.HasComputedKey (..)
     , P.HasComputedLabel (..)
+    , P.HasComputedLoadBalancer (..)
     , P.HasComputedMachineImage (..)
     , P.HasComputedMachineImageName (..)
     , P.HasComputedMachineImages (..)
@@ -256,15 +293,22 @@ module Terrafomo.OPC.Resource
     , P.HasComputedNetworkingInfo (..)
     , P.HasComputedNextHopVnicSet (..)
     , P.HasComputedOutputCidrPolicy (..)
+    , P.HasComputedParentLoadBalancer (..)
     , P.HasComputedParentPool (..)
     , P.HasComputedParentVolumeBootable (..)
+    , P.HasComputedPathPrefixes (..)
     , P.HasComputedPermanent (..)
+    , P.HasComputedPermittedClients (..)
+    , P.HasComputedPermittedMethods (..)
     , P.HasComputedPlacementRequirements (..)
     , P.HasComputedPlatform (..)
+    , P.HasComputedPolices (..)
     , P.HasComputedPolicy (..)
+    , P.HasComputedPort (..)
     , P.HasComputedPrefixes (..)
     , P.HasComputedPrimaryKey (..)
     , P.HasComputedPriority (..)
+    , P.HasComputedPrivateKey (..)
     , P.HasComputedProperty (..)
     , P.HasComputedProtocol (..)
     , P.HasComputedPublicNaptEnabled (..)
@@ -273,12 +317,17 @@ module Terrafomo.OPC.Resource
     , P.HasComputedQuotaReservation (..)
     , P.HasComputedReadAcls (..)
     , P.HasComputedReadonly (..)
+    , P.HasComputedRegion (..)
     , P.HasComputedRelationships (..)
     , P.HasComputedResolvers (..)
     , P.HasComputedReverseDns (..)
+    , P.HasComputedScheme (..)
     , P.HasComputedSeclist (..)
     , P.HasComputedSecondaryKey (..)
     , P.HasComputedSecurityProtocols (..)
+    , P.HasComputedServerPool (..)
+    , P.HasComputedServerProtocol (..)
+    , P.HasComputedServers (..)
     , P.HasComputedShape (..)
     , P.HasComputedSite (..)
     , P.HasComputedSize (..)
@@ -302,15 +351,18 @@ module Terrafomo.OPC.Resource
     , P.HasComputedStorageType (..)
     , P.HasComputedStorageVolume (..)
     , P.HasComputedTags (..)
+    , P.HasComputedType' (..)
     , P.HasComputedUri (..)
     , P.HasComputedUsed (..)
     , P.HasComputedVcable (..)
     , P.HasComputedVcableId (..)
     , P.HasComputedVersion (..)
     , P.HasComputedVirtio (..)
+    , P.HasComputedVirtualHosts (..)
     , P.HasComputedVirtualNics (..)
     , P.HasComputedVncAddress (..)
     , P.HasComputedVnic (..)
+    , P.HasComputedVnicSet (..)
     , P.HasComputedVolumeName (..)
     , P.HasComputedWriteAcls (..)
 
@@ -357,8 +409,8 @@ data ComputeAclResource s = ComputeAclResource {
     {- ^ (Optional) List of tags that may be applied to the ACL. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeAclResource s) where
-    toHCL ComputeAclResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeAclResource s) where
+    toObject ComputeAclResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "name" <$> TF.attribute _name
@@ -432,8 +484,8 @@ data ComputeImageListEntryResource s = ComputeImageListEntryResource {
     {- ^ (Required) The unique version of the image list entry, as an integer. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeImageListEntryResource s) where
-    toHCL ComputeImageListEntryResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeImageListEntryResource s) where
+    toObject ComputeImageListEntryResource{..} = catMaybes
         [ TF.assign "attributes" <$> TF.attribute _attributes
         , TF.assign "machine_images" <$> TF.attribute _machine_images
         , TF.assign "name" <$> TF.attribute _name
@@ -507,8 +559,8 @@ data ComputeImageListResource s = ComputeImageListResource {
     {- ^ (Required) The name of the Image List. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeImageListResource s) where
-    toHCL ComputeImageListResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeImageListResource s) where
+    toObject ComputeImageListResource{..} = catMaybes
         [ TF.assign "default" <$> TF.attribute _default'
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -591,8 +643,8 @@ data ComputeInstanceResource s = ComputeInstanceResource {
     {- ^ (Optional) A list of strings that should be supplied to the instance as tags. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeInstanceResource s) where
-    toHCL ComputeInstanceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeInstanceResource s) where
+    toObject ComputeInstanceResource{..} = catMaybes
         [ TF.assign "boot_order" <$> TF.attribute _boot_order
         , TF.assign "desired_state" <$> TF.attribute _desired_state
         , TF.assign "hostname" <$> TF.attribute _hostname
@@ -840,8 +892,8 @@ data ComputeIpAddressAssociationResource s = ComputeIpAddressAssociationResource
     {- ^ (Optional) The name of the virtual NIC associated with this NAT IP reservation. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeIpAddressAssociationResource s) where
-    toHCL ComputeIpAddressAssociationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeIpAddressAssociationResource s) where
+    toObject ComputeIpAddressAssociationResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address_reservation" <$> TF.attribute _ip_address_reservation
         , TF.assign "name" <$> TF.attribute _name
@@ -927,8 +979,8 @@ data ComputeIpAddressPrefixSetResource s = ComputeIpAddressPrefixSetResource {
     {- ^ (Optional) List of tags that may be applied to the ip address prefix set. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeIpAddressPrefixSetResource s) where
-    toHCL ComputeIpAddressPrefixSetResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeIpAddressPrefixSetResource s) where
+    toObject ComputeIpAddressPrefixSetResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "prefixes" <$> TF.attribute _prefixes
@@ -1002,8 +1054,8 @@ data ComputeIpAddressReservationResource s = ComputeIpAddressReservationResource
     {- ^ (Optional) List of tags that may be applied to the IP address reservation. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeIpAddressReservationResource s) where
-    toHCL ComputeIpAddressReservationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeIpAddressReservationResource s) where
+    toObject ComputeIpAddressReservationResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address_pool" <$> TF.attribute _ip_address_pool
         , TF.assign "name" <$> TF.attribute _name
@@ -1073,8 +1125,8 @@ data ComputeIpAssociationResource s = ComputeIpAssociationResource {
     {- ^ (Required) The vcable of the instance to associate the IP address with. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeIpAssociationResource s) where
-    toHCL ComputeIpAssociationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeIpAssociationResource s) where
+    toObject ComputeIpAssociationResource{..} = catMaybes
         [ TF.assign "parent_pool" <$> TF.attribute _parent_pool
         , TF.assign "vcable" <$> TF.attribute _vcable
         ]
@@ -1125,8 +1177,8 @@ data ComputeIpNetworkExchangeResource s = ComputeIpNetworkExchangeResource {
     {- ^ (Optional) List of tags that may be applied to the IP network exchange. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeIpNetworkExchangeResource s) where
-    toHCL ComputeIpNetworkExchangeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeIpNetworkExchangeResource s) where
+    toObject ComputeIpNetworkExchangeResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "tags" <$> TF.attribute _tags
@@ -1189,8 +1241,8 @@ data ComputeIpNetworkResource s = ComputeIpNetworkResource {
     {- ^ (Optional) If true, enable public internet access using NAPT for VNICs without any public IP Reservation. Defaults to @false@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeIpNetworkResource s) where
-    toHCL ComputeIpNetworkResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeIpNetworkResource s) where
+    toObject ComputeIpNetworkResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address_prefix" <$> TF.attribute _ip_address_prefix
         , TF.assign "ip_network_exchange" <$> TF.attribute _ip_network_exchange
@@ -1269,8 +1321,8 @@ data ComputeIpReservationResource s = ComputeIpReservationResource {
     {- ^ (Optional) List of tags that may be applied to the IP reservation. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeIpReservationResource s) where
-    toHCL ComputeIpReservationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeIpReservationResource s) where
+    toObject ComputeIpReservationResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "parent_pool" <$> TF.attribute _parent_pool
         , TF.assign "permanent" <$> TF.attribute _permanent
@@ -1354,8 +1406,8 @@ data ComputeMachineImageResource s = ComputeMachineImageResource {
     {- ^ (Required) The name of the Machine Image. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeMachineImageResource s) where
-    toHCL ComputeMachineImageResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeMachineImageResource s) where
+    toObject ComputeMachineImageResource{..} = catMaybes
         [ TF.assign "account" <$> TF.attribute _account
         , TF.assign "attributes" <$> TF.attribute _attributes
         , TF.assign "description" <$> TF.attribute _description
@@ -1441,8 +1493,8 @@ data ComputeOrchestratedInstanceResource s = ComputeOrchestratedInstanceResource
     {- ^ (Required) The name of the orchestration. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeOrchestratedInstanceResource s) where
-    toHCL ComputeOrchestratedInstanceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeOrchestratedInstanceResource s) where
+    toObject ComputeOrchestratedInstanceResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "desired_state" <$> TF.attribute _desired_state
         , TF.assign "instance" <$> TF.attribute _instance'
@@ -1517,8 +1569,8 @@ data ComputeRouteResource s = ComputeRouteResource {
     {- ^ (Required) Name of the virtual NIC set to route matching packets to. Routed flows are load-balanced among all the virtual NICs in the virtual NIC set. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeRouteResource s) where
-    toHCL ComputeRouteResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeRouteResource s) where
+    toObject ComputeRouteResource{..} = catMaybes
         [ TF.assign "admin_distance" <$> TF.attribute _admin_distance
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address_prefix" <$> TF.attribute _ip_address_prefix
@@ -1601,8 +1653,8 @@ data ComputeSecRuleResource s = ComputeSecRuleResource {
     {- ^ (Required) The source security list (prefixed with @seclist:@ ), or security IP list (prefixed with @seciplist:@ ). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSecRuleResource s) where
-    toHCL ComputeSecRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSecRuleResource s) where
+    toObject ComputeSecRuleResource{..} = catMaybes
         [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "application" <$> TF.attribute _application
         , TF.assign "description" <$> TF.attribute _description
@@ -1714,8 +1766,8 @@ data ComputeSecurityApplicationResource s = ComputeSecurityApplicationResource {
     {- ^ (Required) The protocol to enable for this application. Must be one of @tcp@ , @udp@ , @ah@ , @esp@ , @icmp@ , @icmpv6@ , @igmp@ , @ipip@ , @gre@ , @mplsip@ , @ospf@ , @pim@ , @rdp@ , @sctp@ or @all@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSecurityApplicationResource s) where
-    toHCL ComputeSecurityApplicationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSecurityApplicationResource s) where
+    toObject ComputeSecurityApplicationResource{..} = catMaybes
         [ TF.assign "dport" <$> TF.attribute _dport
         , TF.assign "icmpcode" <$> TF.attribute _icmpcode
         , TF.assign "icmptype" <$> TF.attribute _icmptype
@@ -1799,8 +1851,8 @@ data ComputeSecurityAssociationResource s = ComputeSecurityAssociationResource {
     {- ^ (Required) The @vcable@ of the instance to associate to the security list. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSecurityAssociationResource s) where
-    toHCL ComputeSecurityAssociationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSecurityAssociationResource s) where
+    toObject ComputeSecurityAssociationResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "seclist" <$> TF.attribute _seclist
         , TF.assign "vcable" <$> TF.attribute _vcable
@@ -1859,8 +1911,8 @@ data ComputeSecurityIpListResource s = ComputeSecurityIpListResource {
     {- ^ (Required) The unique (within the identity domain) name of the security IP list. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSecurityIpListResource s) where
-    toHCL ComputeSecurityIpListResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSecurityIpListResource s) where
+    toObject ComputeSecurityIpListResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_entries" <$> TF.attribute _ip_entries
         , TF.assign "name" <$> TF.attribute _name
@@ -1919,8 +1971,8 @@ data ComputeSecurityListResource s = ComputeSecurityListResource {
     {- ^ (Required) The policy to apply to instances associated with this list. Must be one of @permit@ , @reject@ (packets are dropped but a reply is sent) and @deny@ (packets are dropped and no reply is sent). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSecurityListResource s) where
-    toHCL ComputeSecurityListResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSecurityListResource s) where
+    toObject ComputeSecurityListResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "output_cidr_policy" <$> TF.attribute _output_cidr_policy
         , TF.assign "policy" <$> TF.attribute _policy
@@ -1985,8 +2037,8 @@ data ComputeSecurityProtocolResource s = ComputeSecurityProtocolResource {
     {- ^ (Optional) List of tags that may be applied to the security protocol. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSecurityProtocolResource s) where
-    toHCL ComputeSecurityProtocolResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSecurityProtocolResource s) where
+    toObject ComputeSecurityProtocolResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "dst_ports" <$> TF.attribute _dst_ports
         , TF.assign "ip_protocol" <$> TF.attribute _ip_protocol
@@ -2097,8 +2149,8 @@ data ComputeSecurityRuleResource s = ComputeSecurityRuleResource {
     {- ^ (Optional) List of tags that may be applied to the security rule. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSecurityRuleResource s) where
-    toHCL ComputeSecurityRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSecurityRuleResource s) where
+    toObject ComputeSecurityRuleResource{..} = catMaybes
         [ TF.assign "acl" <$> TF.attribute _acl
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "disabled" <$> TF.attribute _disabled
@@ -2256,8 +2308,8 @@ data ComputeSshKeyResource s = ComputeSshKeyResource {
     {- ^ (Required) The unique (within this identity domain) name of the SSH key. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSshKeyResource s) where
-    toHCL ComputeSshKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSshKeyResource s) where
+    toObject ComputeSshKeyResource{..} = catMaybes
         [ TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "key" <$> TF.attribute _key
         , TF.assign "name" <$> TF.attribute _name
@@ -2317,8 +2369,8 @@ data ComputeStorageVolumeAttachmentResource s = ComputeStorageVolumeAttachmentRe
     {- ^ (Required) The name of the storage volume that will be attached to the instance -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeStorageVolumeAttachmentResource s) where
-    toHCL ComputeStorageVolumeAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeStorageVolumeAttachmentResource s) where
+    toObject ComputeStorageVolumeAttachmentResource{..} = catMaybes
         [ TF.assign "index" <$> TF.attribute _index
         , TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "storage_volume" <$> TF.attribute _storage_volume
@@ -2398,8 +2450,8 @@ data ComputeStorageVolumeResource s = ComputeStorageVolumeResource {
     {- ^ (Optional) Comma-separated strings that tag the storage volume. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeStorageVolumeResource s) where
-    toHCL ComputeStorageVolumeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeStorageVolumeResource s) where
+    toObject ComputeStorageVolumeResource{..} = catMaybes
         [ TF.assign "bootable" <$> TF.attribute _bootable
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "image_list" <$> TF.attribute _image_list
@@ -2585,8 +2637,8 @@ data ComputeStorageVolumeSnapshotResource s = ComputeStorageVolumeSnapshotResour
     {- ^ (Required) The name of the storage volume to create the snapshot from. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeStorageVolumeSnapshotResource s) where
-    toHCL ComputeStorageVolumeSnapshotResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeStorageVolumeSnapshotResource s) where
+    toObject ComputeStorageVolumeSnapshotResource{..} = catMaybes
         [ TF.assign "collocated" <$> TF.attribute _collocated
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -2721,8 +2773,8 @@ data ComputeVnicSetResource s = ComputeVnicSetResource {
     {- ^ (Optional) List of virtual NICs associated with this virtual NIC set. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeVnicSetResource s) where
-    toHCL ComputeVnicSetResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeVnicSetResource s) where
+    toObject ComputeVnicSetResource{..} = catMaybes
         [ TF.assign "applied_acls" <$> TF.attribute _applied_acls
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -2791,6 +2843,608 @@ computeVnicSetResource =
             , _virtual_nics = TF.Nil
             }
 
+{- | The @opc_lbaas_certificate@ OPC resource.
+
+The @opc_lbaas_certificate@ resource creates and manages an Load Balancer
+Classic TLS/SSL Digital Certificate. Server certificates are used to secure
+the connection between clients and the load balancers. Trusted certificates
+are used to secure the connection between the load balancer and the origin
+servers in the server pool.
+-}
+data LbaasCertificateResource s = LbaasCertificateResource {
+      _certificate_body  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The Certificate data in PEM format. -}
+    , _certificate_chain :: !(TF.Attr s P.Text)
+    {- ^ (Optional) PEM encoded bodies of all certificates in the chain up to and including the CA certificate. This is not need when the certificate is self signed. -}
+    , _name              :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Certificate. -}
+    , _private_key       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The private key data in PEM format. Only required for Server Certificates -}
+    , _type'             :: !(TF.Attr s P.Text)
+    {- ^ (Required) Sets the Certificate Type. @TRUSTED@ or @SERVER@ . -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (LbaasCertificateResource s) where
+    toObject LbaasCertificateResource{..} = catMaybes
+        [ TF.assign "certificate_body" <$> TF.attribute _certificate_body
+        , TF.assign "certificate_chain" <$> TF.attribute _certificate_chain
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "private_key" <$> TF.attribute _private_key
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance P.HasCertificateBody (LbaasCertificateResource s) (TF.Attr s P.Text) where
+    certificateBody =
+        lens (_certificate_body :: LbaasCertificateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _certificate_body = a } :: LbaasCertificateResource s)
+
+instance P.HasCertificateChain (LbaasCertificateResource s) (TF.Attr s P.Text) where
+    certificateChain =
+        lens (_certificate_chain :: LbaasCertificateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _certificate_chain = a } :: LbaasCertificateResource s)
+
+instance P.HasName (LbaasCertificateResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: LbaasCertificateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: LbaasCertificateResource s)
+
+instance P.HasPrivateKey (LbaasCertificateResource s) (TF.Attr s P.Text) where
+    privateKey =
+        lens (_private_key :: LbaasCertificateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _private_key = a } :: LbaasCertificateResource s)
+
+instance P.HasType' (LbaasCertificateResource s) (TF.Attr s P.Text) where
+    type' =
+        lens (_type' :: LbaasCertificateResource s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: LbaasCertificateResource s)
+
+instance s ~ s' => P.HasComputedCertificateBody (TF.Ref s' (LbaasCertificateResource s)) (TF.Attr s P.Text) where
+    computedCertificateBody =
+        (_certificate_body :: LbaasCertificateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCertificateChain (TF.Ref s' (LbaasCertificateResource s)) (TF.Attr s P.Text) where
+    computedCertificateChain =
+        (_certificate_chain :: LbaasCertificateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LbaasCertificateResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: LbaasCertificateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPrivateKey (TF.Ref s' (LbaasCertificateResource s)) (TF.Attr s P.Text) where
+    computedPrivateKey =
+        (_private_key :: LbaasCertificateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (LbaasCertificateResource s)) (TF.Attr s P.Text) where
+    computedType' =
+        (_type' :: LbaasCertificateResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+lbaasCertificateResource :: TF.Resource P.OPC (LbaasCertificateResource s)
+lbaasCertificateResource =
+    TF.newResource "opc_lbaas_certificate" $
+        LbaasCertificateResource {
+              _certificate_body = TF.Nil
+            , _certificate_chain = TF.Nil
+            , _name = TF.Nil
+            , _private_key = TF.Nil
+            , _type' = TF.Nil
+            }
+
+{- | The @opc_lbaas_listener@ OPC resource.
+
+The @opc_lbaas_listener@ resource creates and manages a Load Balancer
+Classic Listener for a Load Balancer Classic instance.
+-}
+data LbaasListenerResource s = LbaasListenerResource {
+      _balancer_protocol :: !(TF.Attr s P.Text)
+    {- ^ (Required)  transport protocol that will be accepted for all incoming requests to the selected load balancer listener. @HTTP@ or @HTTPS@ . If set to HTTPS then you must also set the server @certificates@ . -}
+    , _certificates      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The URI of the server security certificate. -}
+    , _enabled           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Boolean flag to enable or disable the Listener. Default is @true@ (enabled). -}
+    , _load_balancer     :: !(TF.Attr s P.Text)
+    {- ^ (Required) The parent Load Balancer the Listener. -}
+    , _name              :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Listener. -}
+    , _path_prefixes     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of paths to configure the listener to accept only requests that are targeted to a specific path within the URI of the request. -}
+    , _polices           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of the Load Balancer Policy URIs to apply to the listener. -}
+    , _port              :: !(TF.Attr s P.Text)
+    {- ^ (Required) The port on which the Load Balancer is listening. -}
+    , _server_pool       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) URI of the Server Pool resource to which the load balancer distributes requests. -}
+    , _server_protocol   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The protocol to be used for routing traffic to the origin servers in the server pool. @HTTP@ or @HTTPS@ . If set to @HTTPS@ then you must include a Trusted Certificate Policy in the @policies@ -}
+    , _tags              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of tags. -}
+    , _virtual_hosts     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Configure the listener to only accept URI requests that include the host names listed in this field. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (LbaasListenerResource s) where
+    toObject LbaasListenerResource{..} = catMaybes
+        [ TF.assign "balancer_protocol" <$> TF.attribute _balancer_protocol
+        , TF.assign "certificates" <$> TF.attribute _certificates
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "load_balancer" <$> TF.attribute _load_balancer
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "path_prefixes" <$> TF.attribute _path_prefixes
+        , TF.assign "polices" <$> TF.attribute _polices
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "server_pool" <$> TF.attribute _server_pool
+        , TF.assign "server_protocol" <$> TF.attribute _server_protocol
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "virtual_hosts" <$> TF.attribute _virtual_hosts
+        ]
+
+instance P.HasBalancerProtocol (LbaasListenerResource s) (TF.Attr s P.Text) where
+    balancerProtocol =
+        lens (_balancer_protocol :: LbaasListenerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _balancer_protocol = a } :: LbaasListenerResource s)
+
+instance P.HasCertificates (LbaasListenerResource s) (TF.Attr s P.Text) where
+    certificates =
+        lens (_certificates :: LbaasListenerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _certificates = a } :: LbaasListenerResource s)
+
+instance P.HasEnabled (LbaasListenerResource s) (TF.Attr s P.Text) where
+    enabled =
+        lens (_enabled :: LbaasListenerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: LbaasListenerResource s)
+
+instance P.HasLoadBalancer (LbaasListenerResource s) (TF.Attr s P.Text) where
+    loadBalancer =
+        lens (_load_balancer :: LbaasListenerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _load_balancer = a } :: LbaasListenerResource s)
+
+instance P.HasName (LbaasListenerResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: LbaasListenerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: LbaasListenerResource s)
+
+instance P.HasPathPrefixes (LbaasListenerResource s) (TF.Attr s P.Text) where
+    pathPrefixes =
+        lens (_path_prefixes :: LbaasListenerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _path_prefixes = a } :: LbaasListenerResource s)
+
+instance P.HasPolices (LbaasListenerResource s) (TF.Attr s P.Text) where
+    polices =
+        lens (_polices :: LbaasListenerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _polices = a } :: LbaasListenerResource s)
+
+instance P.HasPort (LbaasListenerResource s) (TF.Attr s P.Text) where
+    port =
+        lens (_port :: LbaasListenerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _port = a } :: LbaasListenerResource s)
+
+instance P.HasServerPool (LbaasListenerResource s) (TF.Attr s P.Text) where
+    serverPool =
+        lens (_server_pool :: LbaasListenerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _server_pool = a } :: LbaasListenerResource s)
+
+instance P.HasServerProtocol (LbaasListenerResource s) (TF.Attr s P.Text) where
+    serverProtocol =
+        lens (_server_protocol :: LbaasListenerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _server_protocol = a } :: LbaasListenerResource s)
+
+instance P.HasTags (LbaasListenerResource s) (TF.Attr s P.Text) where
+    tags =
+        lens (_tags :: LbaasListenerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: LbaasListenerResource s)
+
+instance P.HasVirtualHosts (LbaasListenerResource s) (TF.Attr s P.Text) where
+    virtualHosts =
+        lens (_virtual_hosts :: LbaasListenerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _virtual_hosts = a } :: LbaasListenerResource s)
+
+instance s ~ s' => P.HasComputedBalancerProtocol (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
+    computedBalancerProtocol =
+        (_balancer_protocol :: LbaasListenerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCertificates (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
+    computedCertificates =
+        (_certificates :: LbaasListenerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
+    computedEnabled =
+        (_enabled :: LbaasListenerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedLoadBalancer (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
+    computedLoadBalancer =
+        (_load_balancer :: LbaasListenerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: LbaasListenerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPathPrefixes (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
+    computedPathPrefixes =
+        (_path_prefixes :: LbaasListenerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPolices (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
+    computedPolices =
+        (_polices :: LbaasListenerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
+    computedPort =
+        (_port :: LbaasListenerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedServerPool (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
+    computedServerPool =
+        (_server_pool :: LbaasListenerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedServerProtocol (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
+    computedServerProtocol =
+        (_server_protocol :: LbaasListenerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
+    computedTags =
+        (_tags :: LbaasListenerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVirtualHosts (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
+    computedVirtualHosts =
+        (_virtual_hosts :: LbaasListenerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+lbaasListenerResource :: TF.Resource P.OPC (LbaasListenerResource s)
+lbaasListenerResource =
+    TF.newResource "opc_lbaas_listener" $
+        LbaasListenerResource {
+              _balancer_protocol = TF.Nil
+            , _certificates = TF.Nil
+            , _enabled = TF.Nil
+            , _load_balancer = TF.Nil
+            , _name = TF.Nil
+            , _path_prefixes = TF.Nil
+            , _polices = TF.Nil
+            , _port = TF.Nil
+            , _server_pool = TF.Nil
+            , _server_protocol = TF.Nil
+            , _tags = TF.Nil
+            , _virtual_hosts = TF.Nil
+            }
+
+{- | The @opc_lbaas_load_balancer@ OPC resource.
+
+The @opc_lbaas_load_balancer@ resource creates and manages a Load Balancer
+Classic instance in an Oracle Cloud Infrastructure Classic Compute region.
+You must define server pools, create at least one listener, and optionally
+define the policies for the load balancer before it will be operational.
+-}
+data LbaasLoadBalancerResource s = LbaasLoadBalancerResource {
+      _description          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A short description for the load balancer. The description must not exceed 1000 characters. -}
+    , _enabled              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Boolean flag to enable or disable the Load Balancer. Default is @true@ (enabled). -}
+    , _ip_network           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Fully qualified three part name of the IP network to be associated with the load balancer. -}
+    , _name                 :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Load Balancer. -}
+    , _parent_load_balancer :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Select a parent load balancer if you want to create a dependent load balancer. -}
+    , _permitted_clients    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of permitted client IP addresses or CIDR ranges which can connect to this load balancer on the configured Listener ports. If not set all connections are permitted. -}
+    , _permitted_methods    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of permitted HTTP methods. e.g. @GET@ , @POST@ , @PUT@ , @PATCH@ , @DELETE@ , @HEAD@ or you can also create your own custom methods. Requests with methods not listed in this field will result in a 403 (unauthorized access) response. -}
+    , _region               :: !(TF.Attr s P.Text)
+    {- ^ (Required) The region in which to create the Load Balancer, e.g. @uscom-central-1@ -}
+    , _scheme               :: !(TF.Attr s P.Text)
+    {- ^ (Required) Set to either @INTERNET_FACING@ or @INTERNAL@ -}
+    , _tags                 :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of tags. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (LbaasLoadBalancerResource s) where
+    toObject LbaasLoadBalancerResource{..} = catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "ip_network" <$> TF.attribute _ip_network
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_load_balancer" <$> TF.attribute _parent_load_balancer
+        , TF.assign "permitted_clients" <$> TF.attribute _permitted_clients
+        , TF.assign "permitted_methods" <$> TF.attribute _permitted_methods
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "scheme" <$> TF.attribute _scheme
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance P.HasDescription (LbaasLoadBalancerResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: LbaasLoadBalancerResource s)
+
+instance P.HasEnabled (LbaasLoadBalancerResource s) (TF.Attr s P.Text) where
+    enabled =
+        lens (_enabled :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: LbaasLoadBalancerResource s)
+
+instance P.HasIpNetwork (LbaasLoadBalancerResource s) (TF.Attr s P.Text) where
+    ipNetwork =
+        lens (_ip_network :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_network = a } :: LbaasLoadBalancerResource s)
+
+instance P.HasName (LbaasLoadBalancerResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: LbaasLoadBalancerResource s)
+
+instance P.HasParentLoadBalancer (LbaasLoadBalancerResource s) (TF.Attr s P.Text) where
+    parentLoadBalancer =
+        lens (_parent_load_balancer :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _parent_load_balancer = a } :: LbaasLoadBalancerResource s)
+
+instance P.HasPermittedClients (LbaasLoadBalancerResource s) (TF.Attr s P.Text) where
+    permittedClients =
+        lens (_permitted_clients :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _permitted_clients = a } :: LbaasLoadBalancerResource s)
+
+instance P.HasPermittedMethods (LbaasLoadBalancerResource s) (TF.Attr s P.Text) where
+    permittedMethods =
+        lens (_permitted_methods :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _permitted_methods = a } :: LbaasLoadBalancerResource s)
+
+instance P.HasRegion (LbaasLoadBalancerResource s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: LbaasLoadBalancerResource s)
+
+instance P.HasScheme (LbaasLoadBalancerResource s) (TF.Attr s P.Text) where
+    scheme =
+        lens (_scheme :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _scheme = a } :: LbaasLoadBalancerResource s)
+
+instance P.HasTags (LbaasLoadBalancerResource s) (TF.Attr s P.Text) where
+    tags =
+        lens (_tags :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: LbaasLoadBalancerResource s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedEnabled =
+        (_enabled :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedIpNetwork (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedIpNetwork =
+        (_ip_network :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedParentLoadBalancer (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedParentLoadBalancer =
+        (_parent_load_balancer :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPermittedClients (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedPermittedClients =
+        (_permitted_clients :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPermittedMethods (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedPermittedMethods =
+        (_permitted_methods :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedRegion =
+        (_region :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedScheme (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedScheme =
+        (_scheme :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedTags =
+        (_tags :: LbaasLoadBalancerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+lbaasLoadBalancerResource :: TF.Resource P.OPC (LbaasLoadBalancerResource s)
+lbaasLoadBalancerResource =
+    TF.newResource "opc_lbaas_load_balancer" $
+        LbaasLoadBalancerResource {
+              _description = TF.Nil
+            , _enabled = TF.Nil
+            , _ip_network = TF.Nil
+            , _name = TF.Nil
+            , _parent_load_balancer = TF.Nil
+            , _permitted_clients = TF.Nil
+            , _permitted_methods = TF.Nil
+            , _region = TF.Nil
+            , _scheme = TF.Nil
+            , _tags = TF.Nil
+            }
+
+{- | The @opc_lbaas_policy@ OPC resource.
+
+The @opc_lbaas_policy@ resource creates and manages a Load Balancer Classic
+Policy for a Load Balancer Classic instance. The Policy resource supports
+the definition of distinct Policy types:
+-}
+data LbaasPolicyResource s = LbaasPolicyResource {
+      _load_balancer :: !(TF.Attr s P.Text)
+    {- ^ (Required) The parent Load Balancer the Listener. -}
+    , _name          :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Listener. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (LbaasPolicyResource s) where
+    toObject LbaasPolicyResource{..} = catMaybes
+        [ TF.assign "load_balancer" <$> TF.attribute _load_balancer
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasLoadBalancer (LbaasPolicyResource s) (TF.Attr s P.Text) where
+    loadBalancer =
+        lens (_load_balancer :: LbaasPolicyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _load_balancer = a } :: LbaasPolicyResource s)
+
+instance P.HasName (LbaasPolicyResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: LbaasPolicyResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: LbaasPolicyResource s)
+
+instance s ~ s' => P.HasComputedLoadBalancer (TF.Ref s' (LbaasPolicyResource s)) (TF.Attr s P.Text) where
+    computedLoadBalancer =
+        (_load_balancer :: LbaasPolicyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LbaasPolicyResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: LbaasPolicyResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+lbaasPolicyResource :: TF.Resource P.OPC (LbaasPolicyResource s)
+lbaasPolicyResource =
+    TF.newResource "opc_lbaas_policy" $
+        LbaasPolicyResource {
+              _load_balancer = TF.Nil
+            , _name = TF.Nil
+            }
+
+{- | The @opc_lbaas_server_pool@ OPC resource.
+
+The @opc_lbaas_server_pool@ resource creates and manages a Load Balancer
+Classic Origin Server Pool for a Load Balancer Classic instance. The Server
+Pool defines one or more servers (referred to as origin servers) to which
+the load balancer can distribute requests.
+-}
+data LbaasServerPoolResource s = LbaasServerPoolResource {
+      _enabled       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Boolean flag to enable or disable the Server Pool. Default is @true@ (enabled). -}
+    , _health_check  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Enables Load Balancer health check, see <#health-check-attributes> -}
+    , _load_balancer :: !(TF.Attr s P.Text)
+    {- ^ (Required) The parent Load Balancer the Origin Server Pool. -}
+    , _name          :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Server Pool. -}
+    , _servers       :: !(TF.Attr s P.Text)
+    {- ^ (Required) List of servers in the Server Pool. To define the server in the server pool, provide IP address or DNS name of the compute instances, and port for load balancer to direct traffic to, in the format @host:port@ -}
+    , _tags          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) List of tags. -}
+    , _vnic_set      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Fully qualified three part name of a vNICSet to be associated with the server pool vNIC. Load Balancer uses this vNICSet to set the right ACLs to allow egress traffic from the load balancer. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (LbaasServerPoolResource s) where
+    toObject LbaasServerPoolResource{..} = catMaybes
+        [ TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "health_check" <$> TF.attribute _health_check
+        , TF.assign "load_balancer" <$> TF.attribute _load_balancer
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "servers" <$> TF.attribute _servers
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vnic_set" <$> TF.attribute _vnic_set
+        ]
+
+instance P.HasEnabled (LbaasServerPoolResource s) (TF.Attr s P.Text) where
+    enabled =
+        lens (_enabled :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enabled = a } :: LbaasServerPoolResource s)
+
+instance P.HasHealthCheck (LbaasServerPoolResource s) (TF.Attr s P.Text) where
+    healthCheck =
+        lens (_health_check :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _health_check = a } :: LbaasServerPoolResource s)
+
+instance P.HasLoadBalancer (LbaasServerPoolResource s) (TF.Attr s P.Text) where
+    loadBalancer =
+        lens (_load_balancer :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _load_balancer = a } :: LbaasServerPoolResource s)
+
+instance P.HasName (LbaasServerPoolResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: LbaasServerPoolResource s)
+
+instance P.HasServers (LbaasServerPoolResource s) (TF.Attr s P.Text) where
+    servers =
+        lens (_servers :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _servers = a } :: LbaasServerPoolResource s)
+
+instance P.HasTags (LbaasServerPoolResource s) (TF.Attr s P.Text) where
+    tags =
+        lens (_tags :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: LbaasServerPoolResource s)
+
+instance P.HasVnicSet (LbaasServerPoolResource s) (TF.Attr s P.Text) where
+    vnicSet =
+        lens (_vnic_set :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vnic_set = a } :: LbaasServerPoolResource s)
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (LbaasServerPoolResource s)) (TF.Attr s P.Text) where
+    computedEnabled =
+        (_enabled :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHealthCheck (TF.Ref s' (LbaasServerPoolResource s)) (TF.Attr s P.Text) where
+    computedHealthCheck =
+        (_health_check :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedLoadBalancer (TF.Ref s' (LbaasServerPoolResource s)) (TF.Attr s P.Text) where
+    computedLoadBalancer =
+        (_load_balancer :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LbaasServerPoolResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedServers (TF.Ref s' (LbaasServerPoolResource s)) (TF.Attr s P.Text) where
+    computedServers =
+        (_servers :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (LbaasServerPoolResource s)) (TF.Attr s P.Text) where
+    computedTags =
+        (_tags :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVnicSet (TF.Ref s' (LbaasServerPoolResource s)) (TF.Attr s P.Text) where
+    computedVnicSet =
+        (_vnic_set :: LbaasServerPoolResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+lbaasServerPoolResource :: TF.Resource P.OPC (LbaasServerPoolResource s)
+lbaasServerPoolResource =
+    TF.newResource "opc_lbaas_server_pool" $
+        LbaasServerPoolResource {
+              _enabled = TF.Nil
+            , _health_check = TF.Nil
+            , _load_balancer = TF.Nil
+            , _name = TF.Nil
+            , _servers = TF.Nil
+            , _tags = TF.Nil
+            , _vnic_set = TF.Nil
+            }
+
 {- | The @opc_storage_container@ OPC resource.
 
 Creates and manages a Container in the Oracle Cloud Infrastructure Storage
@@ -2822,8 +3476,8 @@ data StorageContainerResource s = StorageContainerResource {
     {- ^ (Optional) The list of ACLs that grant write access. See <#setting-container-acls> . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageContainerResource s) where
-    toHCL StorageContainerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageContainerResource s) where
+    toObject StorageContainerResource{..} = catMaybes
         [ TF.assign "allowed_origins" <$> TF.attribute _allowed_origins
         , TF.assign "exposed_headers" <$> TF.attribute _exposed_headers
         , TF.assign "max_age" <$> TF.attribute _max_age
@@ -2977,8 +3631,8 @@ data StorageObjectResource s = StorageObjectResource {
     {- ^ (Required) The name of the Storage Object. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageObjectResource s) where
-    toHCL StorageObjectResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageObjectResource s) where
+    toObject StorageObjectResource{..} = catMaybes
         [ TF.assign "container" <$> TF.attribute _container
         , TF.assign "name" <$> TF.attribute _name
         ]

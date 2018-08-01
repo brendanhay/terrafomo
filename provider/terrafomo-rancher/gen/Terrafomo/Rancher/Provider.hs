@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -28,6 +22,7 @@ module Terrafomo.Rancher.Provider
     , providerSecretKey
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -62,16 +57,18 @@ data Rancher = Rancher {
 
 instance Hashable Rancher
 
-instance TF.ToHCL Rancher where
-    toHCL x =
+instance TF.IsSection Rancher where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Rancher))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "access_key" <$> _access_key x
-            , TF.assign "api_url" <$> _api_url x
-            , TF.assign "secret_key" <$> _secret_key x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "access_key" <$> _access_key x
+                  , TF.assign "api_url" <$> _api_url x
+                  , TF.assign "secret_key" <$> _secret_key x
+                  ])
 
 instance TF.IsProvider Rancher where
     type ProviderType Rancher = "rancher"

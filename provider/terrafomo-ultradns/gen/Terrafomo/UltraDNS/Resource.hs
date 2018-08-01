@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -139,8 +132,8 @@ data DirpoolResource s = DirpoolResource {
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DirpoolResource s) where
-    toHCL DirpoolResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DirpoolResource s) where
+    toObject DirpoolResource{..} = catMaybes
         [ TF.assign "conflict_resolve" <$> TF.attribute _conflict_resolve
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -272,8 +265,8 @@ data ProbeHttpResource s = ProbeHttpResource {
     {- ^ (Required) The domain of the pool to probe. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProbeHttpResource s) where
-    toHCL ProbeHttpResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProbeHttpResource s) where
+    toObject ProbeHttpResource{..} = catMaybes
         [ TF.assign "agents" <$> TF.attribute _agents
         , TF.assign "http_probe" <$> TF.attribute _http_probe
         , TF.assign "interval" <$> TF.attribute _interval
@@ -387,8 +380,8 @@ data ProbePingResource s = ProbePingResource {
     {- ^ (Required) The domain of the pool to probe. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProbePingResource s) where
-    toHCL ProbePingResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProbePingResource s) where
+    toObject ProbePingResource{..} = catMaybes
         [ TF.assign "agents" <$> TF.attribute _agents
         , TF.assign "interval" <$> TF.attribute _interval
         , TF.assign "name" <$> TF.attribute _name
@@ -502,8 +495,8 @@ data RdpoolResource s = RdpoolResource {
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RdpoolResource s) where
-    toHCL RdpoolResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RdpoolResource s) where
+    toObject RdpoolResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "order" <$> TF.attribute _order
@@ -607,8 +600,8 @@ data RecordResource s = RecordResource {
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RecordResource s) where
-    toHCL RecordResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RecordResource s) where
+    toObject RecordResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "rdata" <$> TF.attribute _rdata
         , TF.assign "ttl" <$> TF.attribute _ttl
@@ -700,8 +693,8 @@ data TcpoolResource s = TcpoolResource {
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TcpoolResource s) where
-    toHCL TcpoolResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TcpoolResource s) where
+    toObject TcpoolResource{..} = catMaybes
         [ TF.assign "act_on_probes" <$> TF.attribute _act_on_probes
         , TF.assign "backup_record_failover_delay" <$> TF.attribute _backup_record_failover_delay
         , TF.assign "backup_record_rdata" <$> TF.attribute _backup_record_rdata

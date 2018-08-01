@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -105,8 +98,8 @@ data DatacenterData s = DatacenterData {
     {- ^ (Required) Name or part of the name of an existing Virtual Data Center that you want to search for. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatacenterData s) where
-    toHCL DatacenterData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatacenterData s) where
+    toObject DatacenterData{..} = catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -158,8 +151,8 @@ data ImageData s = ImageData {
     {- ^ (Optional) Version of the image (see details below). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImageData s) where
-    toHCL ImageData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ImageData s) where
+    toObject ImageData{..} = catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "type" <$> TF.attribute _type'
@@ -231,8 +224,8 @@ data LocationData s = LocationData {
     {- ^ (Required) Name or part of the location name to search for. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LocationData s) where
-    toHCL LocationData{..} = TF.inline $ catMaybes
+instance TF.IsObject (LocationData s) where
+    toObject LocationData{..} = catMaybes
         [ TF.assign "feature" <$> TF.attribute _feature
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -286,8 +279,8 @@ data ResourceData s = ResourceData {
     {- ^ (Optional) The specific type of resources to retrieve information about. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceData s) where
-    toHCL ResourceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ResourceData s) where
+    toObject ResourceData{..} = catMaybes
         [ TF.assign "resource_id" <$> TF.attribute _resource_id
         , TF.assign "resource_type" <$> TF.attribute _resource_type
         ]
@@ -337,8 +330,8 @@ data SnapshotData s = SnapshotData {
     {- ^ (Optional) The size of the snapshot to look for. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SnapshotData s) where
-    toHCL SnapshotData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SnapshotData s) where
+    toObject SnapshotData{..} = catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "size" <$> TF.attribute _size

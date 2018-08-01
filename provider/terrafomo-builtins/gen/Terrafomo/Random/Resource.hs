@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -38,6 +31,9 @@ module Terrafomo.Random.Resource
 
     , StringResource (..)
     , stringResource
+
+    , UuidResource (..)
+    , uuidResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -117,14 +113,13 @@ import qualified Terrafomo.Schema    as TF
 {- | The @random_id@ Random resource.
 
 The resource @random_id@ generates random numbers that are intended to be
-used as unique identifiers for other resources. Unlike other resources in
-the "random" provider, this resource does use a cryptographic random number
-generator in order to minimize the chance of collisions, making the results
-of this resource when a 32-byte identifier is requested of equivalent
-uniqueness to a type-4 UUID. This resource can be used in conjunction with
-resources that have, the @create_before_destroy@ lifecycle flag set, to
-avoid conflicts with unique names during the brief period where both the old
-and new resources exist concurrently.
+used as unique identifiers for other resources. This resource does use a
+cryptographic random number generator in order to minimize the chance of
+collisions, making the results of this resource when a 32-byte identifier is
+requested of equivalent uniqueness to a type-4 UUID. This resource can be
+used in conjunction with resources that have the @create_before_destroy@
+lifecycle flag set to avoid conflicts with unique names during the brief
+period where both the old and new resources exist concurrently.
 -}
 data IdResource s = IdResource {
       _byte_length :: !(TF.Attr s P.Int)
@@ -135,8 +130,8 @@ data IdResource s = IdResource {
     {- ^ (Optional) Arbitrary string to prefix the output value with. This string is supplied as-is, meaning it is not guaranteed to be URL-safe or base64 encoded. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IdResource s) where
-    toHCL IdResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IdResource s) where
+    toObject IdResource{..} = catMaybes
         [ TF.assign "byte_length" <$> TF.attribute _byte_length
         , TF.assign "keepers" <$> TF.attribute _keepers
         , TF.assign "prefix" <$> TF.attribute _prefix
@@ -213,8 +208,8 @@ data IntegerResource s = IntegerResource {
     {- ^ (Optional) A custom seed to always produce the same value. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IntegerResource s) where
-    toHCL IntegerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IntegerResource s) where
+    toObject IntegerResource{..} = catMaybes
         [ TF.assign "keepers" <$> TF.attribute _keepers
         , TF.assign "max" <$> TF.attribute _max
         , TF.assign "min" <$> TF.attribute _min
@@ -296,8 +291,8 @@ data PetResource s = PetResource {
     {- ^ (Optional) The character to separate words in the pet name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PetResource s) where
-    toHCL PetResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PetResource s) where
+    toObject PetResource{..} = catMaybes
         [ TF.assign "keepers" <$> TF.attribute _keepers
         , TF.assign "length" <$> TF.attribute _length
         , TF.assign "prefix" <$> TF.attribute _prefix
@@ -373,8 +368,8 @@ data ShuffleResource s = ShuffleResource {
     {- ^ (Optional) Arbitrary string with which to seed the random number generator, in order to produce less-volatile permutations of the list. Important: Even with an identical seed, it is not guaranteed that the same permutation will be produced across different versions of Terraform. This argument causes the result to be less volatile , but not fixed for all time. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ShuffleResource s) where
-    toHCL ShuffleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ShuffleResource s) where
+    toObject ShuffleResource{..} = catMaybes
         [ TF.assign "input" <$> TF.attribute _input
         , TF.assign "keepers" <$> TF.attribute _keepers
         , TF.assign "result_count" <$> TF.attribute _result_count
@@ -437,7 +432,8 @@ shuffleResource =
 {- | The @random_string@ Random resource.
 
 The resource @random_string@ generates a random permutation of alphanumeric
-characters and optionally special characters.
+characters and optionally special characters. This resource does use a
+cryptographic random number generator.
 -}
 data StringResource s = StringResource {
       _keepers          :: !(TF.Attr s (P.Keepers s))
@@ -464,8 +460,8 @@ data StringResource s = StringResource {
     {- ^ (Optional) (default true) Include uppercase alphabet characters in random string. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StringResource s) where
-    toHCL StringResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (StringResource s) where
+    toObject StringResource{..} = catMaybes
         [ TF.assign "keepers" <$> TF.attribute _keepers
         , TF.assign "length" <$> TF.attribute _length
         , TF.assign "lower" <$> TF.attribute _lower
@@ -607,4 +603,41 @@ stringResource =
             , _override_special = TF.Nil
             , _special = TF.Nil
             , _upper = TF.Nil
+            }
+
+{- | The @random_uuid@ Random resource.
+
+The resource @random_uuid@ generates random uuid string that is intended to
+be used as unique identifiers for other resources. This resource uses the
+@hashicorp/go-uuid@ to generate a UUID-formatted string for use with
+services needed a unique string identifier.
+-}
+data UuidResource s = UuidResource {
+      _keepers :: !(TF.Attr s (P.Keepers s))
+    {- ^ (Optional) Arbitrary map of values that, when changed, will trigger a new uuid to be generated. See <../index.html> for more information. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (UuidResource s) where
+    toObject UuidResource{..} = catMaybes
+        [ TF.assign "keepers" <$> TF.attribute _keepers
+        ]
+
+instance P.HasKeepers (UuidResource s) (TF.Attr s (P.Keepers s)) where
+    keepers =
+        lens (_keepers :: UuidResource s -> TF.Attr s (P.Keepers s))
+             (\s a -> s { _keepers = a } :: UuidResource s)
+
+instance s ~ s' => P.HasComputedKeepers (TF.Ref s' (UuidResource s)) (TF.Attr s (P.Keepers s)) where
+    computedKeepers =
+        (_keepers :: UuidResource s -> TF.Attr s (P.Keepers s))
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResult (TF.Ref s' (UuidResource s)) (TF.Attr s P.Text) where
+    computedResult x = TF.compute (TF.refKey x) "result"
+
+uuidResource :: TF.Resource TF.NoProvider (UuidResource s)
+uuidResource =
+    TF.newResource "random_uuid" $
+        UuidResource {
+              _keepers = TF.Nil
             }

@@ -1,6 +1,6 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
-{-# LANGUAGE DeriveGeneric #-}
+
 
 -- |
 -- Module      : Terrafomo.Google.Types

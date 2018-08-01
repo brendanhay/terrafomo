@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -104,8 +97,8 @@ data DatabaseResource s = DatabaseResource {
     {- ^ (Required) The name of the database. This must be unique within a given MySQL server and may or may not be case-sensitive depending on the operating system on which the MySQL server is running. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatabaseResource s) where
-    toHCL DatabaseResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatabaseResource s) where
+    toObject DatabaseResource{..} = catMaybes
         [ TF.assign "default_character_set" <$> TF.attribute _default_character_set
         , TF.assign "default_collation" <$> TF.attribute _default_collation
         , TF.assign "name" <$> TF.attribute _name
@@ -168,8 +161,8 @@ data GrantResource s = GrantResource {
     {- ^ (Required) The name of the user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (GrantResource s) where
-    toHCL GrantResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (GrantResource s) where
+    toObject GrantResource{..} = catMaybes
         [ TF.assign "database" <$> TF.attribute _database
         , TF.assign "grant" <$> TF.attribute _grant
         , TF.assign "host" <$> TF.attribute _host
@@ -258,8 +251,8 @@ data UserResource s = UserResource {
     {- ^ (Required) The name of the user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserResource s) where
-    toHCL UserResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserResource s) where
+    toObject UserResource{..} = catMaybes
         [ TF.assign "auth_plugin" <$> TF.attribute _auth_plugin
         , TF.assign "host" <$> TF.attribute _host
         , TF.assign "password" <$> TF.attribute _password

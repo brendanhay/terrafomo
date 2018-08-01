@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -153,8 +146,8 @@ data AlertChannelResource s = AlertChannelResource {
     {- ^ (Required) The type of channel.  One of: @campfire@ , @email@ , @hipchat@ , @opsgenie@ , @pagerduty@ , @slack@ , @victorops@ , or @webhook@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AlertChannelResource s) where
-    toHCL AlertChannelResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AlertChannelResource s) where
+    toObject AlertChannelResource{..} = catMaybes
         [ TF.assign "configuration" <$> TF.attribute _configuration
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "type" <$> TF.attribute _type'
@@ -233,8 +226,8 @@ data AlertConditionResource s = AlertConditionResource {
     {- ^ (Optional) Automatically close instance-based violations, including JVM health metric violations, after the number of hours specified. Must be: @1@ , @2@ , @4@ , @8@ , @12@ or @24@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AlertConditionResource s) where
-    toHCL AlertConditionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AlertConditionResource s) where
+    toObject AlertConditionResource{..} = catMaybes
         [ TF.assign "condition_scope" <$> TF.attribute _condition_scope
         , TF.assign "entities" <$> TF.attribute _entities
         , TF.assign "gc_metric" <$> TF.attribute _gc_metric
@@ -401,8 +394,8 @@ data AlertPolicyChannelResource s = AlertPolicyChannelResource {
     {- ^ (Required) The ID of the policy. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AlertPolicyChannelResource s) where
-    toHCL AlertPolicyChannelResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AlertPolicyChannelResource s) where
+    toObject AlertPolicyChannelResource{..} = catMaybes
         [ TF.assign "channel_id" <$> TF.attribute _channel_id
         , TF.assign "policy_id" <$> TF.attribute _policy_id
         ]
@@ -446,8 +439,8 @@ data AlertPolicyResource s = AlertPolicyResource {
     {- ^ (Required) The name of the policy. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AlertPolicyResource s) where
-    toHCL AlertPolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AlertPolicyResource s) where
+    toObject AlertPolicyResource{..} = catMaybes
         [ TF.assign "incident_preference" <$> TF.attribute _incident_preference
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -506,8 +499,8 @@ data DashboardResource s = DashboardResource {
     {- ^ (Optional) A widget that describes a visualization. See <#widgets> below for details. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DashboardResource s) where
-    toHCL DashboardResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DashboardResource s) where
+    toObject DashboardResource{..} = catMaybes
         [ TF.assign "editable" <$> TF.attribute _editable
         , TF.assign "icon" <$> TF.attribute _icon
         , TF.assign "title" <$> TF.attribute _title
@@ -608,8 +601,8 @@ data InfraAlertConditionResource s = InfraAlertConditionResource {
     {- ^ (Optional) Infrastructure host filter for the alert condition. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InfraAlertConditionResource s) where
-    toHCL InfraAlertConditionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (InfraAlertConditionResource s) where
+    toObject InfraAlertConditionResource{..} = catMaybes
         [ TF.assign "comparison" <$> TF.attribute _comparison
         , TF.assign "critical" <$> TF.attribute _critical
         , TF.assign "enabled" <$> TF.attribute _enabled
@@ -774,8 +767,8 @@ data NrqlAlertConditionResource s = NrqlAlertConditionResource {
     {- ^ (Optional) Possible values are @single_value@ , @sum@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NrqlAlertConditionResource s) where
-    toHCL NrqlAlertConditionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NrqlAlertConditionResource s) where
+    toObject NrqlAlertConditionResource{..} = catMaybes
         [ TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "nrql" <$> TF.attribute _nrql

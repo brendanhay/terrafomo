@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -85,8 +78,8 @@ data CollectorsData s = CollectorsData {
     {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CollectorsData s) where
-    toHCL CollectorsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CollectorsData s) where
+    toObject CollectorsData{..} = catMaybes
         [ TF.assign "filters" <$> TF.attribute _filters
         , TF.assign "most_recent" <$> TF.attribute _most_recent
         , TF.assign "offset" <$> TF.attribute _offset
@@ -156,8 +149,8 @@ data DeviceGroupData s = DeviceGroupData {
     {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DeviceGroupData s) where
-    toHCL DeviceGroupData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DeviceGroupData s) where
+    toObject DeviceGroupData{..} = catMaybes
         [ TF.assign "filters" <$> TF.attribute _filters
         , TF.assign "offset" <$> TF.attribute _offset
         , TF.assign "size" <$> TF.attribute _size

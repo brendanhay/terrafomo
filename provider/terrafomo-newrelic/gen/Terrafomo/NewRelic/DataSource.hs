@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -77,8 +70,8 @@ data ApplicationData s = ApplicationData {
     {- ^ (Required) The name of the application in New Relic. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ApplicationData s) where
-    toHCL ApplicationData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ApplicationData s) where
+    toObject ApplicationData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -118,8 +111,8 @@ data KeyTransactionData s = KeyTransactionData {
     {- ^ (Required) The name of the application in New Relic. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KeyTransactionData s) where
-    toHCL KeyTransactionData{..} = TF.inline $ catMaybes
+instance TF.IsObject (KeyTransactionData s) where
+    toObject KeyTransactionData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 

@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -173,8 +166,8 @@ data ApikeyResource s = ApikeyResource {
     {- ^ (Required) The teams that the apikey belongs to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ApikeyResource s) where
-    toHCL ApikeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ApikeyResource s) where
+    toObject ApikeyResource{..} = catMaybes
         [ TF.assign "key" <$> TF.attribute _key
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "permissions" <$> TF.attribute _permissions
@@ -245,8 +238,8 @@ data DatafeedResource s = DatafeedResource {
     {- ^ (Required) The data source id that this feed is connected to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatafeedResource s) where
-    toHCL DatafeedResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatafeedResource s) where
+    toObject DatafeedResource{..} = catMaybes
         [ TF.assign "config" <$> TF.attribute _config
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "source_id" <$> TF.attribute _source_id
@@ -305,8 +298,8 @@ data DatasourceResource s = DatasourceResource {
     {- ^ (Required) The data sources type, listed in API endpoint https://api.nsone.net/v1/data/sourcetypes. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatasourceResource s) where
-    toHCL DatasourceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatasourceResource s) where
+    toObject DatasourceResource{..} = catMaybes
         [ TF.assign "config" <$> TF.attribute _config
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "sourcetype" <$> TF.attribute _sourcetype
@@ -389,8 +382,8 @@ data MonitoringjobResource s = MonitoringjobResource {
     {- ^ (Optional) A list of rules for determining failure conditions. Job Rules are documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (MonitoringjobResource s) where
-    toHCL MonitoringjobResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (MonitoringjobResource s) where
+    toObject MonitoringjobResource{..} = catMaybes
         [ TF.assign "active" <$> TF.attribute _active
         , TF.assign "config" <$> TF.attribute _config
         , TF.assign "frequency" <$> TF.attribute _frequency
@@ -591,8 +584,8 @@ data NotifylistResource s = NotifylistResource {
     {- ^ (Optional) A list of notifiers. All notifiers in a notification list will receive notifications whenever an event is send to the list (e.g., when a monitoring job fails). Notifiers are documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NotifylistResource s) where
-    toHCL NotifylistResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NotifylistResource s) where
+    toObject NotifylistResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "notifications" <$> TF.attribute _notifications
         ]
@@ -649,8 +642,8 @@ data RecordResource s = RecordResource {
     {- ^ (Required) The zone the record belongs to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RecordResource s) where
-    toHCL RecordResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RecordResource s) where
+    toObject RecordResource{..} = catMaybes
         [ TF.assign "answers" <$> TF.attribute _answers
         , TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "filters" <$> TF.attribute _filters
@@ -767,8 +760,8 @@ data TeamResource s = TeamResource {
     {- ^ (Optional) The allowed permissions of the team. Permissions documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TeamResource s) where
-    toHCL TeamResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TeamResource s) where
+    toObject TeamResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "permissions" <$> TF.attribute _permissions
         ]
@@ -822,8 +815,8 @@ data UserResource s = UserResource {
     {- ^ (Required) The users login name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserResource s) where
-    toHCL UserResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserResource s) where
+    toObject UserResource{..} = catMaybes
         [ TF.assign "email" <$> TF.attribute _email
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "notify" <$> TF.attribute _notify
@@ -928,8 +921,8 @@ data ZoneResource s = ZoneResource {
     {- ^ (Required) The domain name of the zone. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ZoneResource s) where
-    toHCL ZoneResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ZoneResource s) where
+    toObject ZoneResource{..} = catMaybes
         [ TF.assign "expiry" <$> TF.attribute _expiry
         , TF.assign "link" <$> TF.attribute _link
         , TF.assign "nx_ttl" <$> TF.attribute _nx_ttl

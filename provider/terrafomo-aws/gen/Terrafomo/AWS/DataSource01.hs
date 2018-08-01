@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -77,9 +70,6 @@ module Terrafomo.AWS.DataSource01
 
     , CloudwatchLogGroupData (..)
     , cloudwatchLogGroupData
-
-    , CodecommitRepositoryData (..)
-    , codecommitRepositoryData
 
     , CognitoUserPoolsData (..)
     , cognitoUserPoolsData
@@ -183,9 +173,6 @@ module Terrafomo.AWS.DataSource01
     , InstanceData (..)
     , instanceData
 
-    , InstancesData (..)
-    , instancesData
-
     , InternetGatewayData (..)
     , internetGatewayData
 
@@ -201,14 +188,14 @@ module Terrafomo.AWS.DataSource01
     , KmsAliasData (..)
     , kmsAliasData
 
-    , KmsCiphertextData (..)
-    , kmsCiphertextData
-
     , KmsKeyData (..)
     , kmsKeyData
 
     , KmsSecretData (..)
     , kmsSecretData
+
+    , KmsSecretsData (..)
+    , kmsSecretsData
 
     , LambdaFunctionData (..)
     , lambdaFunctionData
@@ -239,6 +226,9 @@ module Terrafomo.AWS.DataSource01
 
     , NetworkInterfaceData (..)
     , networkInterfaceData
+
+    , NetworkInterfacesData (..)
+    , networkInterfacesData
 
     , PartitionData (..)
     , partitionData
@@ -297,6 +287,9 @@ module Terrafomo.AWS.DataSource01
     , SsmParameterData (..)
     , ssmParameterData
 
+    , StoragegatewayLocalDiskData (..)
+    , storagegatewayLocalDiskData
+
     , SubnetData (..)
     , subnetData
 
@@ -341,7 +334,6 @@ module Terrafomo.AWS.DataSource01
     , P.HasClusterIdentifier (..)
     , P.HasComputeEnvironmentName (..)
     , P.HasContainerName (..)
-    , P.HasContext (..)
     , P.HasCreationToken (..)
     , P.HasDagEdge (..)
     , P.HasDagNode (..)
@@ -352,6 +344,7 @@ module Terrafomo.AWS.DataSource01
     , P.HasDestinationCidrBlock (..)
     , P.HasDestinationIpv6CidrBlock (..)
     , P.HasDhcpOptionsId (..)
+    , P.HasDiskPath (..)
     , P.HasDisplayName (..)
     , P.HasDomain (..)
     , P.HasEgressOnlyGatewayId (..)
@@ -362,6 +355,7 @@ module Terrafomo.AWS.DataSource01
     , P.HasFilter (..)
     , P.HasFilters (..)
     , P.HasFunctionName (..)
+    , P.HasGatewayArn (..)
     , P.HasGatewayId (..)
     , P.HasGetPasswordData (..)
     , P.HasGrantTokens (..)
@@ -371,7 +365,6 @@ module Terrafomo.AWS.DataSource01
     , P.HasIncludeShared (..)
     , P.HasInput (..)
     , P.HasInstanceId (..)
-    , P.HasInstanceStateNames (..)
     , P.HasInstanceTags (..)
     , P.HasInternetGatewayId (..)
     , P.HasIpv6CidrBlock (..)
@@ -395,7 +388,6 @@ module Terrafomo.AWS.DataSource01
     , P.HasPeerOwnerId (..)
     , P.HasPeerRegion (..)
     , P.HasPeerVpcId (..)
-    , P.HasPlaintext (..)
     , P.HasPolicyId (..)
     , P.HasPort (..)
     , P.HasPrefixListId (..)
@@ -405,7 +397,6 @@ module Terrafomo.AWS.DataSource01
     , P.HasRegion (..)
     , P.HasRegions (..)
     , P.HasReplicationGroupId (..)
-    , P.HasRepositoryName (..)
     , P.HasRestorableByUserIds (..)
     , P.HasRouteTableId (..)
     , P.HasSecret (..)
@@ -482,9 +473,6 @@ module Terrafomo.AWS.DataSource01
     , P.HasComputedCertificateSigningRequest (..)
     , P.HasComputedCidrBlock (..)
     , P.HasComputedCidrBlocks (..)
-    , P.HasComputedCiphertextBlob (..)
-    , P.HasComputedCloneUrlHttp (..)
-    , P.HasComputedCloneUrlSsh (..)
     , P.HasComputedClosedShards (..)
     , P.HasComputedClusterAddress (..)
     , P.HasComputedClusterArn (..)
@@ -507,7 +495,6 @@ module Terrafomo.AWS.DataSource01
     , P.HasComputedContentLanguage (..)
     , P.HasComputedContentLength (..)
     , P.HasComputedContentType (..)
-    , P.HasComputedContext (..)
     , P.HasComputedCpu (..)
     , P.HasComputedCreateDate (..)
     , P.HasComputedCreatedAt (..)
@@ -543,6 +530,8 @@ module Terrafomo.AWS.DataSource01
     , P.HasComputedDhcpOptionsId (..)
     , P.HasComputedDisableNetworking (..)
     , P.HasComputedDisableRollback (..)
+    , P.HasComputedDiskId (..)
+    , P.HasComputedDiskPath (..)
     , P.HasComputedDisplayName (..)
     , P.HasComputedDnsEntry (..)
     , P.HasComputedDnsName (..)
@@ -580,6 +569,7 @@ module Terrafomo.AWS.DataSource01
     , P.HasComputedFilter (..)
     , P.HasComputedFilters (..)
     , P.HasComputedFunctionName (..)
+    , P.HasComputedGatewayArn (..)
     , P.HasComputedGatewayId (..)
     , P.HasComputedGetPasswordData (..)
     , P.HasComputedGrantTokens (..)
@@ -603,7 +593,6 @@ module Terrafomo.AWS.DataSource01
     , P.HasComputedIncludeShared (..)
     , P.HasComputedInput (..)
     , P.HasComputedInstanceId (..)
-    , P.HasComputedInstanceStateNames (..)
     , P.HasComputedInstanceTags (..)
     , P.HasComputedInstanceTenancy (..)
     , P.HasComputedInstanceType (..)
@@ -687,6 +676,7 @@ module Terrafomo.AWS.DataSource01
     , P.HasComputedPeerRegion (..)
     , P.HasComputedPeerVpcId (..)
     , P.HasComputedPerformanceMode (..)
+    , P.HasComputedPermissionsBoundary (..)
     , P.HasComputedPlacementGroup (..)
     , P.HasComputedPlacementTenancy (..)
     , P.HasComputedPlaintext (..)
@@ -703,13 +693,11 @@ module Terrafomo.AWS.DataSource01
     , P.HasComputedPrivateDnsEnabled (..)
     , P.HasComputedPrivateDnsName (..)
     , P.HasComputedPrivateIp (..)
-    , P.HasComputedPrivateIps (..)
     , P.HasComputedPrivateZone (..)
     , P.HasComputedProductCodes (..)
     , P.HasComputedPublic (..)
     , P.HasComputedPublicDns (..)
     , P.HasComputedPublicIp (..)
-    , P.HasComputedPublicIps (..)
     , P.HasComputedPubliclyAccessible (..)
     , P.HasComputedPythonScript (..)
     , P.HasComputedQualifiedArn (..)
@@ -721,8 +709,6 @@ module Terrafomo.AWS.DataSource01
     , P.HasComputedReplicateSourceDb (..)
     , P.HasComputedReplicationGroupDescription (..)
     , P.HasComputedReplicationGroupId (..)
-    , P.HasComputedRepositoryId (..)
-    , P.HasComputedRepositoryName (..)
     , P.HasComputedRepositoryUrl (..)
     , P.HasComputedRequester (..)
     , P.HasComputedRequesterId (..)
@@ -872,10 +858,8 @@ import qualified Terrafomo.Schema    as TF
 {- | The @aws_acm_certificate@ AWS datasource.
 
 Use this data source to get the ARN of a certificate in AWS Certificate
-Manager (ACM). The process of requesting and verifying a certificate in ACM
-requires some manual steps, which means that Terraform cannot automate the
-creation of ACM certificates. But using this data source, you can reference
-them by domain without having to hard code the ARNs as input.
+Manager (ACM), you can reference it by domain without having to hard code
+the ARNs as input.
 -}
 data AcmCertificateData s = AcmCertificateData {
       _domain      :: !(TF.Attr s P.Text)
@@ -888,8 +872,8 @@ data AcmCertificateData s = AcmCertificateData {
     {- ^ (Optional) A list of types on which to filter the returned list. Valid values are @AMAZON_ISSUED@ and @IMPORTED@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AcmCertificateData s) where
-    toHCL AcmCertificateData{..} = TF.inline $ catMaybes
+instance TF.IsObject (AcmCertificateData s) where
+    toObject AcmCertificateData{..} = catMaybes
         [ TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "most_recent" <$> TF.attribute _most_recent
         , TF.assign "statuses" <$> TF.attribute _statuses
@@ -959,8 +943,8 @@ data AcmpcaCertificateAuthorityData s = AcmpcaCertificateAuthorityData {
     {- ^ (Required) Amazon Resource Name (ARN) of the certificate authority. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AcmpcaCertificateAuthorityData s) where
-    toHCL AcmpcaCertificateAuthorityData{..} = TF.inline $ catMaybes
+instance TF.IsObject (AcmpcaCertificateAuthorityData s) where
+    toObject AcmpcaCertificateAuthorityData{..} = catMaybes
         [ TF.assign "arn" <$> TF.attribute _arn
         ]
 
@@ -1032,8 +1016,8 @@ data AmiData s = AmiData {
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AmiData s) where
-    toHCL AmiData{..} = TF.inline $ catMaybes
+instance TF.IsObject (AmiData s) where
+    toObject AmiData{..} = catMaybes
         [ TF.assign "executable_users" <$> TF.attribute _executable_users
         , TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "most_recent" <$> TF.attribute _most_recent
@@ -1190,8 +1174,8 @@ data AmiIdsData s = AmiIdsData {
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AmiIdsData s) where
-    toHCL AmiIdsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (AmiIdsData s) where
+    toObject AmiIdsData{..} = catMaybes
         [ TF.assign "executable_users" <$> TF.attribute _executable_users
         , TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "name_regex" <$> TF.attribute _name_regex
@@ -1260,8 +1244,8 @@ data ApiGatewayRestApiData s = ApiGatewayRestApiData {
     {- ^ (Required) The name of the REST API to look up. If no REST API is found with this name, an error will be returned. If multiple REST APIs are found with this name, an error will be returned. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ApiGatewayRestApiData s) where
-    toHCL ApiGatewayRestApiData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ApiGatewayRestApiData s) where
+    toObject ApiGatewayRestApiData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -1297,8 +1281,8 @@ data ArnData s = ArnData {
     {- ^ (Required) The ARN to parse. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ArnData s) where
-    toHCL ArnData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ArnData s) where
+    toObject ArnData{..} = catMaybes
         [ TF.assign "arn" <$> TF.attribute _arn
         ]
 
@@ -1345,8 +1329,8 @@ data AutoscalingGroupsData s = AutoscalingGroupsData {
     {- ^ (Optional) A filter used to scope the list e.g. by tags. See <http://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_Filter.html> . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AutoscalingGroupsData s) where
-    toHCL AutoscalingGroupsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (AutoscalingGroupsData s) where
+    toObject AutoscalingGroupsData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         ]
 
@@ -1388,8 +1372,8 @@ data AvailabilityZoneData s = AvailabilityZoneData {
     {- ^ (Optional) A specific availability zone state to require. May be any of @"available"@ , @"information"@ or @"impaired"@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AvailabilityZoneData s) where
-    toHCL AvailabilityZoneData{..} = TF.inline $ catMaybes
+instance TF.IsObject (AvailabilityZoneData s) where
+    toObject AvailabilityZoneData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "state" <$> TF.attribute _state
         ]
@@ -1437,8 +1421,8 @@ data AvailabilityZonesData s = AvailabilityZonesData {
     {- ^ (Optional) Allows to filter list of Availability Zones based on their current state. Can be either @"available"@ , @"information"@ , @"impaired"@ or @"unavailable"@ . By default the list includes a complete set of Availability Zones to which the underlying AWS account has access, regardless of their state. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AvailabilityZonesData s) where
-    toHCL AvailabilityZonesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (AvailabilityZonesData s) where
+    toObject AvailabilityZonesData{..} = catMaybes
         [ TF.assign "state" <$> TF.attribute _state
         ]
 
@@ -1472,8 +1456,8 @@ data BatchComputeEnvironmentData s = BatchComputeEnvironmentData {
     {- ^ (Required) The name of the Batch Compute Environment -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BatchComputeEnvironmentData s) where
-    toHCL BatchComputeEnvironmentData{..} = TF.inline $ catMaybes
+instance TF.IsObject (BatchComputeEnvironmentData s) where
+    toObject BatchComputeEnvironmentData{..} = catMaybes
         [ TF.assign "compute_environment_name" <$> TF.attribute _compute_environment_name
         ]
 
@@ -1525,8 +1509,8 @@ data BatchJobQueueData s = BatchJobQueueData {
     {- ^ (Required) The name of the job queue. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BatchJobQueueData s) where
-    toHCL BatchJobQueueData{..} = TF.inline $ catMaybes
+instance TF.IsObject (BatchJobQueueData s) where
+    toObject BatchJobQueueData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -1574,8 +1558,8 @@ for the purpose of whitelisting in S3 bucket policy.
 data BillingServiceAccountData s = BillingServiceAccountData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BillingServiceAccountData s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (BillingServiceAccountData s) where
+    toObject _ = []
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (BillingServiceAccountData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1603,8 +1587,8 @@ data CallerIdentityData s = CallerIdentityData {
     {- ^ - The unique identifier of the calling entity. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CallerIdentityData s) where
-    toHCL CallerIdentityData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CallerIdentityData s) where
+    toObject CallerIdentityData{..} = catMaybes
         [ TF.assign "account_id" <$> TF.attribute _account_id
         , TF.assign "arn" <$> TF.attribute _arn
         , TF.assign "user_id" <$> TF.attribute _user_id
@@ -1662,8 +1646,8 @@ data CanonicalUserIdData s = CanonicalUserIdData {
     {- ^ - The canonical user ID associated with the AWS account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CanonicalUserIdData s) where
-    toHCL CanonicalUserIdData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CanonicalUserIdData s) where
+    toObject CanonicalUserIdData{..} = catMaybes
         [ TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "id" <$> TF.attribute _id
         ]
@@ -1711,8 +1695,8 @@ data CloudformationExportData s = CloudformationExportData {
     {- ^ (Required) The name of the cross stack reference -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudformationExportData s) where
-    toHCL CloudformationExportData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CloudformationExportData s) where
+    toObject CloudformationExportData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -1749,8 +1733,8 @@ data CloudformationStackData s = CloudformationStackData {
     {- ^ (Required) The name of the stack -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudformationStackData s) where
-    toHCL CloudformationStackData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CloudformationStackData s) where
+    toObject CloudformationStackData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -1813,8 +1797,8 @@ data CloudtrailServiceAccountData s = CloudtrailServiceAccountData {
     {- ^ (Optional) Name of the region whose AWS CloudTrail account ID is desired. Defaults to the region from the AWS provider configuration. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudtrailServiceAccountData s) where
-    toHCL CloudtrailServiceAccountData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CloudtrailServiceAccountData s) where
+    toObject CloudtrailServiceAccountData{..} = catMaybes
         [ TF.assign "region" <$> TF.attribute _region
         ]
 
@@ -1850,8 +1834,8 @@ data CloudwatchLogGroupData s = CloudwatchLogGroupData {
     {- ^ (Required) The name of the Cloudwatch log group -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudwatchLogGroupData s) where
-    toHCL CloudwatchLogGroupData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CloudwatchLogGroupData s) where
+    toObject CloudwatchLogGroupData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -1878,51 +1862,6 @@ cloudwatchLogGroupData =
               _name = TF.Nil
             }
 
-{- | The @aws_codecommit_repository@ AWS datasource.
-
-The CodeCommit Repository data source allows the ARN, Repository ID,
-Repository URL for HTTP and Repository URL for SSH to be retrieved for an
-CodeCommit repository.
--}
-data CodecommitRepositoryData s = CodecommitRepositoryData {
-      _repository_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name for the repository. This needs to be less than 100 characters. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (CodecommitRepositoryData s) where
-    toHCL CodecommitRepositoryData{..} = TF.inline $ catMaybes
-        [ TF.assign "repository_name" <$> TF.attribute _repository_name
-        ]
-
-instance P.HasRepositoryName (CodecommitRepositoryData s) (TF.Attr s P.Text) where
-    repositoryName =
-        lens (_repository_name :: CodecommitRepositoryData s -> TF.Attr s P.Text)
-             (\s a -> s { _repository_name = a } :: CodecommitRepositoryData s)
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (CodecommitRepositoryData s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
-
-instance s ~ s' => P.HasComputedCloneUrlHttp (TF.Ref s' (CodecommitRepositoryData s)) (TF.Attr s P.Text) where
-    computedCloneUrlHttp x = TF.compute (TF.refKey x) "clone_url_http"
-
-instance s ~ s' => P.HasComputedCloneUrlSsh (TF.Ref s' (CodecommitRepositoryData s)) (TF.Attr s P.Text) where
-    computedCloneUrlSsh x = TF.compute (TF.refKey x) "clone_url_ssh"
-
-instance s ~ s' => P.HasComputedRepositoryId (TF.Ref s' (CodecommitRepositoryData s)) (TF.Attr s P.Text) where
-    computedRepositoryId x = TF.compute (TF.refKey x) "repository_id"
-
-instance s ~ s' => P.HasComputedRepositoryName (TF.Ref s' (CodecommitRepositoryData s)) (TF.Attr s P.Text) where
-    computedRepositoryName =
-        (_repository_name :: CodecommitRepositoryData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-codecommitRepositoryData :: TF.DataSource P.AWS (CodecommitRepositoryData s)
-codecommitRepositoryData =
-    TF.newDataSource "aws_codecommit_repository" $
-        CodecommitRepositoryData {
-              _repository_name = TF.Nil
-            }
-
 {- | The @aws_cognito_user_pools@ AWS datasource.
 
 Use this data source to get a list of cognito user pools.
@@ -1932,8 +1871,8 @@ data CognitoUserPoolsData s = CognitoUserPoolsData {
     {- ^ - (required) Name of the cognito user pools. Name is not a unique attribute for cognito user pool, so multiple pools might be returned with given name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CognitoUserPoolsData s) where
-    toHCL CognitoUserPoolsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CognitoUserPoolsData s) where
+    toObject CognitoUserPoolsData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -1966,8 +1905,8 @@ data DbInstanceData s = DbInstanceData {
     {- ^ (Required) The name of the RDS instance -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbInstanceData s) where
-    toHCL DbInstanceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DbInstanceData s) where
+    toObject DbInstanceData{..} = catMaybes
         [ TF.assign "db_instance_identifier" <$> TF.attribute _db_instance_identifier
         ]
 
@@ -2114,8 +2053,8 @@ data DbSnapshotData s = DbSnapshotData {
     {- ^ (Optional) The type of snapshots to be returned. If you don't specify a SnapshotType value, then both automated and manual snapshots are returned. Shared and public DB snapshots are not included in the returned results by default. Possible values are, @automated@ , @manual@ , @shared@ and @public@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbSnapshotData s) where
-    toHCL DbSnapshotData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DbSnapshotData s) where
+    toObject DbSnapshotData{..} = catMaybes
         [ TF.assign "db_instance_identifier" <$> TF.attribute _db_instance_identifier
         , TF.assign "db_snapshot_identifier" <$> TF.attribute _db_snapshot_identifier
         , TF.assign "include_public" <$> TF.attribute _include_public
@@ -2256,8 +2195,8 @@ data DxGatewayData s = DxGatewayData {
     {- ^ (Required) The name of the gateway to retrieve. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DxGatewayData s) where
-    toHCL DxGatewayData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DxGatewayData s) where
+    toObject DxGatewayData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -2293,8 +2232,8 @@ data DynamodbTableData s = DynamodbTableData {
     {- ^ (Required) The name of the DynamoDB table. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DynamodbTableData s) where
-    toHCL DynamodbTableData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DynamodbTableData s) where
+    toObject DynamodbTableData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -2333,8 +2272,8 @@ data EbsSnapshotData s = EbsSnapshotData {
     {- ^ (Optional) Returns information on a specific snapshot_id. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EbsSnapshotData s) where
-    toHCL EbsSnapshotData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EbsSnapshotData s) where
+    toObject EbsSnapshotData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "most_recent" <$> TF.attribute _most_recent
         , TF.assign "owners" <$> TF.attribute _owners
@@ -2453,8 +2392,8 @@ data EbsSnapshotIdsData s = EbsSnapshotIdsData {
     {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EbsSnapshotIdsData s) where
-    toHCL EbsSnapshotIdsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EbsSnapshotIdsData s) where
+    toObject EbsSnapshotIdsData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "owners" <$> TF.attribute _owners
         , TF.assign "restorable_by_user_ids" <$> TF.attribute _restorable_by_user_ids
@@ -2511,8 +2450,8 @@ data EbsVolumeData s = EbsVolumeData {
     {- ^ (Optional) If more than one result is returned, use the most recent Volume. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EbsVolumeData s) where
-    toHCL EbsVolumeData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EbsVolumeData s) where
+    toObject EbsVolumeData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "most_recent" <$> TF.attribute _most_recent
         ]
@@ -2588,8 +2527,8 @@ data EcrRepositoryData s = EcrRepositoryData {
     {- ^ (Required) The name of the ECR Repository. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EcrRepositoryData s) where
-    toHCL EcrRepositoryData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EcrRepositoryData s) where
+    toObject EcrRepositoryData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -2631,8 +2570,8 @@ data EcsContainerDefinitionData s = EcsContainerDefinitionData {
     {- ^ (Required) The ARN of the task definition which contains the container -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EcsContainerDefinitionData s) where
-    toHCL EcsContainerDefinitionData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EcsContainerDefinitionData s) where
+    toObject EcsContainerDefinitionData{..} = catMaybes
         [ TF.assign "container_name" <$> TF.attribute _container_name
         , TF.assign "task_definition" <$> TF.attribute _task_definition
         ]
@@ -2701,8 +2640,8 @@ data EcsServiceData s = EcsServiceData {
     {- ^ (Required) The name of the ECS Service -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EcsServiceData s) where
-    toHCL EcsServiceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EcsServiceData s) where
+    toObject EcsServiceData{..} = catMaybes
         [ TF.assign "cluster_arn" <$> TF.attribute _cluster_arn
         , TF.assign "service_name" <$> TF.attribute _service_name
         ]
@@ -2760,8 +2699,8 @@ data EcsTaskDefinitionData s = EcsTaskDefinitionData {
     {- ^ (Required) The family for the latest ACTIVE revision, family and revision (family:revision) for a specific revision in the family, the ARN of the task definition to access to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EcsTaskDefinitionData s) where
-    toHCL EcsTaskDefinitionData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EcsTaskDefinitionData s) where
+    toObject EcsTaskDefinitionData{..} = catMaybes
         [ TF.assign "task_definition" <$> TF.attribute _task_definition
         ]
 
@@ -2808,8 +2747,8 @@ data EfsFileSystemData s = EfsFileSystemData {
     {- ^ (Optional) The ID that identifies the file system (e.g. fs-ccfc0d65). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EfsFileSystemData s) where
-    toHCL EfsFileSystemData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EfsFileSystemData s) where
+    toObject EfsFileSystemData{..} = catMaybes
         [ TF.assign "creation_token" <$> TF.attribute _creation_token
         , TF.assign "file_system_id" <$> TF.attribute _file_system_id
         ]
@@ -2866,8 +2805,8 @@ data EfsMountTargetData s = EfsMountTargetData {
     {- ^ (Required) ID of the mount target that you want to have described -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EfsMountTargetData s) where
-    toHCL EfsMountTargetData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EfsMountTargetData s) where
+    toObject EfsMountTargetData{..} = catMaybes
         [ TF.assign "mount_target_id" <$> TF.attribute _mount_target_id
         ]
 
@@ -2919,8 +2858,8 @@ data EipData s = EipData {
     {- ^ (Optional) The public IP of the specific EIP to retrieve. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EipData s) where
-    toHCL EipData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EipData s) where
+    toObject EipData{..} = catMaybes
         [ TF.assign "id" <$> TF.attribute _id
         , TF.assign "public_ip" <$> TF.attribute _public_ip
         ]
@@ -2962,8 +2901,8 @@ data EksClusterData s = EksClusterData {
     {- ^ (Required) The name of the cluster -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EksClusterData s) where
-    toHCL EksClusterData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EksClusterData s) where
+    toObject EksClusterData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -3019,8 +2958,8 @@ data ElasticBeanstalkHostedZoneData s = ElasticBeanstalkHostedZoneData {
     {- ^ (Optional) The region you'd like the zone for. By default, fetches the current region. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElasticBeanstalkHostedZoneData s) where
-    toHCL ElasticBeanstalkHostedZoneData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ElasticBeanstalkHostedZoneData s) where
+    toObject ElasticBeanstalkHostedZoneData{..} = catMaybes
         [ TF.assign "region" <$> TF.attribute _region
         ]
 
@@ -3053,8 +2992,8 @@ data ElasticBeanstalkSolutionStackData s = ElasticBeanstalkSolutionStackData {
     {- ^ - A regex string to apply to the solution stack list returned by AWS. See <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> from AWS documentation for reference solution stack names. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElasticBeanstalkSolutionStackData s) where
-    toHCL ElasticBeanstalkSolutionStackData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ElasticBeanstalkSolutionStackData s) where
+    toObject ElasticBeanstalkSolutionStackData{..} = catMaybes
         [ TF.assign "most_recent" <$> TF.attribute _most_recent
         , TF.assign "name_regex" <$> TF.attribute _name_regex
         ]
@@ -3099,8 +3038,8 @@ data ElasticacheClusterData s = ElasticacheClusterData {
     {- ^ – (Required) Group identifier. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElasticacheClusterData s) where
-    toHCL ElasticacheClusterData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ElasticacheClusterData s) where
+    toObject ElasticacheClusterData{..} = catMaybes
         [ TF.assign "cluster_id" <$> TF.attribute _cluster_id
         ]
 
@@ -3188,8 +3127,8 @@ data ElasticacheReplicationGroupData s = ElasticacheReplicationGroupData {
     {- ^ – (Required) The identifier for the replication group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElasticacheReplicationGroupData s) where
-    toHCL ElasticacheReplicationGroupData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ElasticacheReplicationGroupData s) where
+    toObject ElasticacheReplicationGroupData{..} = catMaybes
         [ TF.assign "replication_group_id" <$> TF.attribute _replication_group_id
         ]
 
@@ -3254,8 +3193,8 @@ data ElbData s = ElbData {
     {- ^ (Required) The unique name of the load balancer. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElbData s) where
-    toHCL ElbData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ElbData s) where
+    toObject ElbData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -3287,8 +3226,8 @@ data ElbHostedZoneIdData s = ElbHostedZoneIdData {
     {- ^ (Optional) Name of the region whose AWS ELB HostedZoneId is desired. Defaults to the region from the AWS provider configuration. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElbHostedZoneIdData s) where
-    toHCL ElbHostedZoneIdData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ElbHostedZoneIdData s) where
+    toObject ElbHostedZoneIdData{..} = catMaybes
         [ TF.assign "region" <$> TF.attribute _region
         ]
 
@@ -3323,8 +3262,8 @@ data ElbServiceAccountData s = ElbServiceAccountData {
     {- ^ (Optional) Name of the region whose AWS ELB account ID is desired. Defaults to the region from the AWS provider configuration. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElbServiceAccountData s) where
-    toHCL ElbServiceAccountData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ElbServiceAccountData s) where
+    toObject ElbServiceAccountData{..} = catMaybes
         [ TF.assign "region" <$> TF.attribute _region
         ]
 
@@ -3365,8 +3304,8 @@ data GlueScriptData s = GlueScriptData {
     {- ^ (Optional) The programming language of the resulting code from the DAG. Defaults to @PYTHON@ . Valid values are @PYTHON@ and @SCALA@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (GlueScriptData s) where
-    toHCL GlueScriptData{..} = TF.inline $ catMaybes
+instance TF.IsObject (GlueScriptData s) where
+    toObject GlueScriptData{..} = catMaybes
         [ TF.assign "dag_edge" <$> TF.attribute _dag_edge
         , TF.assign "dag_node" <$> TF.attribute _dag_node
         , TF.assign "language" <$> TF.attribute _language
@@ -3427,8 +3366,8 @@ data IamAccountAliasData s = IamAccountAliasData {
     {- ^ - The alias associated with the AWS account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamAccountAliasData s) where
-    toHCL IamAccountAliasData{..} = TF.inline $ catMaybes
+instance TF.IsObject (IamAccountAliasData s) where
+    toObject IamAccountAliasData{..} = catMaybes
         [ TF.assign "account_alias" <$> TF.attribute _account_alias
         ]
 
@@ -3460,8 +3399,8 @@ data IamGroupData s = IamGroupData {
     {- ^ (Required) The friendly IAM group name to match. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamGroupData s) where
-    toHCL IamGroupData{..} = TF.inline $ catMaybes
+instance TF.IsObject (IamGroupData s) where
+    toObject IamGroupData{..} = catMaybes
         [ TF.assign "group_name" <$> TF.attribute _group_name
         ]
 
@@ -3502,8 +3441,8 @@ data IamInstanceProfileData s = IamInstanceProfileData {
     {- ^ (Required) The friendly IAM instance profile name to match. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamInstanceProfileData s) where
-    toHCL IamInstanceProfileData{..} = TF.inline $ catMaybes
+instance TF.IsObject (IamInstanceProfileData s) where
+    toObject IamInstanceProfileData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -3552,8 +3491,8 @@ data IamPolicyData s = IamPolicyData {
     {- ^ (Required) ARN of the IAM policy. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamPolicyData s) where
-    toHCL IamPolicyData{..} = TF.inline $ catMaybes
+instance TF.IsObject (IamPolicyData s) where
+    toObject IamPolicyData{..} = catMaybes
         [ TF.assign "arn" <$> TF.attribute _arn
         ]
 
@@ -3602,8 +3541,8 @@ data IamPolicyDocumentData s = IamPolicyDocumentData {
     {- ^ (Required) - A nested configuration block (described below) configuring one statement to be included in the policy document. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamPolicyDocumentData s) where
-    toHCL IamPolicyDocumentData{..} = TF.inline $ catMaybes
+instance TF.IsObject (IamPolicyDocumentData s) where
+    toObject IamPolicyDocumentData{..} = catMaybes
         [ TF.assign "override_json" <$> TF.attribute _override_json
         , TF.assign "policy_id" <$> TF.attribute _policy_id
         , TF.assign "source_json" <$> TF.attribute _source_json
@@ -3674,8 +3613,8 @@ data IamRoleData s = IamRoleData {
     {- ^ (Required) The friendly IAM role name to match. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamRoleData s) where
-    toHCL IamRoleData{..} = TF.inline $ catMaybes
+instance TF.IsObject (IamRoleData s) where
+    toObject IamRoleData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -3700,6 +3639,9 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Te
 
 instance s ~ s' => P.HasComputedPath (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where
     computedPath x = TF.compute (TF.refKey x) "path"
+
+instance s ~ s' => P.HasComputedPermissionsBoundary (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where
+    computedPermissionsBoundary x = TF.compute (TF.refKey x) "permissions_boundary"
 
 instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where
     computedUniqueId x = TF.compute (TF.refKey x) "unique_id"
@@ -3726,8 +3668,8 @@ data IamServerCertificateData s = IamServerCertificateData {
     {- ^ - prefix of path to filter by -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamServerCertificateData s) where
-    toHCL IamServerCertificateData{..} = TF.inline $ catMaybes
+instance TF.IsObject (IamServerCertificateData s) where
+    toObject IamServerCertificateData{..} = catMaybes
         [ TF.assign "latest" <$> TF.attribute _latest
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_prefix" <$> TF.attribute _name_prefix
@@ -3813,8 +3755,8 @@ data IamUserData s = IamUserData {
     {- ^ (Required) The friendly IAM user name to match. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamUserData s) where
-    toHCL IamUserData{..} = TF.inline $ catMaybes
+instance TF.IsObject (IamUserData s) where
+    toObject IamUserData{..} = catMaybes
         [ TF.assign "user_name" <$> TF.attribute _user_name
         ]
 
@@ -3828,6 +3770,9 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamUserData s)) (TF.Attr s P.Tex
 
 instance s ~ s' => P.HasComputedPath (TF.Ref s' (IamUserData s)) (TF.Attr s P.Text) where
     computedPath x = TF.compute (TF.refKey x) "path"
+
+instance s ~ s' => P.HasComputedPermissionsBoundary (TF.Ref s' (IamUserData s)) (TF.Attr s P.Text) where
+    computedPermissionsBoundary x = TF.compute (TF.refKey x) "permissions_boundary"
 
 instance s ~ s' => P.HasComputedUserId (TF.Ref s' (IamUserData s)) (TF.Attr s P.Text) where
     computedUserId x = TF.compute (TF.refKey x) "user_id"
@@ -3853,8 +3798,8 @@ region configured in the provider.
 data InspectorRulesPackagesData s = InspectorRulesPackagesData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InspectorRulesPackagesData s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (InspectorRulesPackagesData s) where
+    toObject _ = []
 
 instance s ~ s' => P.HasComputedArns (TF.Ref s' (InspectorRulesPackagesData s)) (TF.Attr s P.Text) where
     computedArns x = TF.compute (TF.refKey x) "arns"
@@ -3881,8 +3826,8 @@ data InstanceData s = InstanceData {
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Instance. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InstanceData s) where
-    toHCL InstanceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (InstanceData s) where
+    toObject InstanceData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "get_password_data" <$> TF.attribute _get_password_data
         , TF.assign "instance_id" <$> TF.attribute _instance_id
@@ -4020,85 +3965,6 @@ instanceData =
             , _instance_tags = TF.Nil
             }
 
-{- | The @aws_instances@ AWS datasource.
-
-Use this data source to get IDs or IPs of Amazon EC2 instances to be
-referenced elsewhere, e.g. to allow easier migration from another management
-solution or to make it easier for an operator to connect through bastion
-host(s). -> Note: It's a best practice to expose instance details via
-<https://www.terraform.io/docs/configuration/outputs.html> and
-<https://www.terraform.io/docs/state/remote.html> and use
-<https://www.terraform.io/docs/providers/terraform/d/remote_state.html> data
-source instead if you manage referenced instances via Terraform. ~> Note:
-It's strongly discouraged to use this data source for querying ephemeral
-instances (e.g. managed via autoscaling group), as the output may change at
-any time and you'd need to re-run @apply@ every time an instance comes up or
-dies.
--}
-data InstancesData s = InstancesData {
-      _filter               :: !(TF.Attr s P.Text)
-    {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
-    , _instance_state_names :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of instance states that should be applicable to the desired instances. The permitted values are: @pending, running, shutting-down, stopped, stopping, terminated@ . The default value is @running@ . -}
-    , _instance_tags        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on desired instances. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (InstancesData s) where
-    toHCL InstancesData{..} = TF.inline $ catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "instance_state_names" <$> TF.attribute _instance_state_names
-        , TF.assign "instance_tags" <$> TF.attribute _instance_tags
-        ]
-
-instance P.HasFilter (InstancesData s) (TF.Attr s P.Text) where
-    filter =
-        lens (_filter :: InstancesData s -> TF.Attr s P.Text)
-             (\s a -> s { _filter = a } :: InstancesData s)
-
-instance P.HasInstanceStateNames (InstancesData s) (TF.Attr s P.Text) where
-    instanceStateNames =
-        lens (_instance_state_names :: InstancesData s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_state_names = a } :: InstancesData s)
-
-instance P.HasInstanceTags (InstancesData s) (TF.Attr s P.Text) where
-    instanceTags =
-        lens (_instance_tags :: InstancesData s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_tags = a } :: InstancesData s)
-
-instance s ~ s' => P.HasComputedFilter (TF.Ref s' (InstancesData s)) (TF.Attr s P.Text) where
-    computedFilter =
-        (_filter :: InstancesData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedIds (TF.Ref s' (InstancesData s)) (TF.Attr s P.Text) where
-    computedIds x = TF.compute (TF.refKey x) "ids"
-
-instance s ~ s' => P.HasComputedInstanceStateNames (TF.Ref s' (InstancesData s)) (TF.Attr s P.Text) where
-    computedInstanceStateNames =
-        (_instance_state_names :: InstancesData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedInstanceTags (TF.Ref s' (InstancesData s)) (TF.Attr s P.Text) where
-    computedInstanceTags =
-        (_instance_tags :: InstancesData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPrivateIps (TF.Ref s' (InstancesData s)) (TF.Attr s P.Text) where
-    computedPrivateIps x = TF.compute (TF.refKey x) "private_ips"
-
-instance s ~ s' => P.HasComputedPublicIps (TF.Ref s' (InstancesData s)) (TF.Attr s P.Text) where
-    computedPublicIps x = TF.compute (TF.refKey x) "public_ips"
-
-instancesData :: TF.DataSource P.AWS (InstancesData s)
-instancesData =
-    TF.newDataSource "aws_instances" $
-        InstancesData {
-              _filter = TF.Nil
-            , _instance_state_names = TF.Nil
-            , _instance_tags = TF.Nil
-            }
-
 {- | The @aws_internet_gateway@ AWS datasource.
 
 @aws_internet_gateway@ provides details about a specific Internet Gateway.
@@ -4112,8 +3978,8 @@ data InternetGatewayData s = InternetGatewayData {
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Internet Gateway. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InternetGatewayData s) where
-    toHCL InternetGatewayData{..} = TF.inline $ catMaybes
+instance TF.IsObject (InternetGatewayData s) where
+    toObject InternetGatewayData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "internet_gateway_id" <$> TF.attribute _internet_gateway_id
         , TF.assign "tags" <$> TF.attribute _tags
@@ -4173,8 +4039,8 @@ data IotEndpointData s = IotEndpointData {
     {- ^ - The endpoint. The format of the endpoint is as follows: @IDENTIFIER.iot.REGION.amazonaws.com@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IotEndpointData s) where
-    toHCL IotEndpointData{..} = TF.inline $ catMaybes
+instance TF.IsObject (IotEndpointData s) where
+    toObject IotEndpointData{..} = catMaybes
         [ TF.assign "endpoint_address" <$> TF.attribute _endpoint_address
         ]
 
@@ -4208,8 +4074,8 @@ data IpRangesData s = IpRangesData {
     {- ^ (Required) Filter IP ranges by services. Valid items are @amazon@ (for amazon.com), @cloudfront@ , @codebuild@ , @ec2@ , @route53@ , @route53_healthchecks@ and @S3@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpRangesData s) where
-    toHCL IpRangesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (IpRangesData s) where
+    toObject IpRangesData{..} = catMaybes
         [ TF.assign "regions" <$> TF.attribute _regions
         , TF.assign "services" <$> TF.attribute _services
         ]
@@ -4262,8 +4128,8 @@ data KinesisStreamData s = KinesisStreamData {
     {- ^ (Required) The name of the Kinesis Stream. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KinesisStreamData s) where
-    toHCL KinesisStreamData{..} = TF.inline $ catMaybes
+instance TF.IsObject (KinesisStreamData s) where
+    toObject KinesisStreamData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -4317,8 +4183,8 @@ data KmsAliasData s = KmsAliasData {
     {- ^ (Required) The display name of the alias. The name must start with the word "alias" followed by a forward slash (alias/) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsAliasData s) where
-    toHCL KmsAliasData{..} = TF.inline $ catMaybes
+instance TF.IsObject (KmsAliasData s) where
+    toObject KmsAliasData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -4348,71 +4214,6 @@ kmsAliasData =
               _name = TF.Nil
             }
 
-{- | The @aws_kms_ciphertext@ AWS datasource.
-
-The KMS ciphertext data source allows you to encrypt plaintext into
-ciphertext by using an AWS KMS customer master key. ~> Note: All arguments
-including the plaintext be stored in the raw state as plain-text.
-</docs/state/sensitive-data.html> .
--}
-data KmsCiphertextData s = KmsCiphertextData {
-      _context   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) An optional mapping that makes up the encryption context. -}
-    , _key_id    :: !(TF.Attr s P.Text)
-    {- ^ (Required) Globally unique key ID for the customer master key. -}
-    , _plaintext :: !(TF.Attr s P.Text)
-    {- ^ (Required) Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (KmsCiphertextData s) where
-    toHCL KmsCiphertextData{..} = TF.inline $ catMaybes
-        [ TF.assign "context" <$> TF.attribute _context
-        , TF.assign "key_id" <$> TF.attribute _key_id
-        , TF.assign "plaintext" <$> TF.attribute _plaintext
-        ]
-
-instance P.HasContext (KmsCiphertextData s) (TF.Attr s P.Text) where
-    context =
-        lens (_context :: KmsCiphertextData s -> TF.Attr s P.Text)
-             (\s a -> s { _context = a } :: KmsCiphertextData s)
-
-instance P.HasKeyId (KmsCiphertextData s) (TF.Attr s P.Text) where
-    keyId =
-        lens (_key_id :: KmsCiphertextData s -> TF.Attr s P.Text)
-             (\s a -> s { _key_id = a } :: KmsCiphertextData s)
-
-instance P.HasPlaintext (KmsCiphertextData s) (TF.Attr s P.Text) where
-    plaintext =
-        lens (_plaintext :: KmsCiphertextData s -> TF.Attr s P.Text)
-             (\s a -> s { _plaintext = a } :: KmsCiphertextData s)
-
-instance s ~ s' => P.HasComputedCiphertextBlob (TF.Ref s' (KmsCiphertextData s)) (TF.Attr s P.Text) where
-    computedCiphertextBlob x = TF.compute (TF.refKey x) "ciphertext_blob"
-
-instance s ~ s' => P.HasComputedContext (TF.Ref s' (KmsCiphertextData s)) (TF.Attr s P.Text) where
-    computedContext =
-        (_context :: KmsCiphertextData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedKeyId (TF.Ref s' (KmsCiphertextData s)) (TF.Attr s P.Text) where
-    computedKeyId =
-        (_key_id :: KmsCiphertextData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPlaintext (TF.Ref s' (KmsCiphertextData s)) (TF.Attr s P.Text) where
-    computedPlaintext =
-        (_plaintext :: KmsCiphertextData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-kmsCiphertextData :: TF.DataSource P.AWS (KmsCiphertextData s)
-kmsCiphertextData =
-    TF.newDataSource "aws_kms_ciphertext" $
-        KmsCiphertextData {
-              _context = TF.Nil
-            , _key_id = TF.Nil
-            , _plaintext = TF.Nil
-            }
-
 {- | The @aws_kms_key@ AWS datasource.
 
 Use this data source to get detailed information about the specified KMS Key
@@ -4426,8 +4227,8 @@ data KmsKeyData s = KmsKeyData {
     {- ^ (Required) Key identifier which can be one of the following format: -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsKeyData s) where
-    toHCL KmsKeyData{..} = TF.inline $ catMaybes
+instance TF.IsObject (KmsKeyData s) where
+    toObject KmsKeyData{..} = catMaybes
         [ TF.assign "grant_tokens" <$> TF.attribute _grant_tokens
         , TF.assign "key_id" <$> TF.attribute _key_id
         ]
@@ -4501,20 +4302,25 @@ kmsKeyData =
 
 {- | The @aws_kms_secret@ AWS datasource.
 
-The KMS secret data source allows you to use data encrypted with the AWS KMS
-service within your resource definitions. ~> NOTE : Using this data provider
-will allow you to conceal secret data within your resource definitions but
-does not take care of protecting that data in the logging output, plan
-output or state output. Please take care to secure your secret data outside
-of resource definitions.
+!> WARNING: This data source is deprecated and will be removed in the next
+major version. You can migrate existing configurations to the
+</docs/providers/aws/d/kms_secrets.html> following instructions available in
+the
+</docs/providers/aws/guides/version-2-upgrade.html#data-source-aws_kms_secret>
+. The KMS secret data source allows you to use data encrypted with the AWS
+KMS service within your resource definitions. ~> NOTE : Using this data
+provider will allow you to conceal secret data within your resource
+definitions but does not take care of protecting that data in the logging
+output, plan output or state output. Please take care to secure your secret
+data outside of resource definitions.
 -}
 data KmsSecretData s = KmsSecretData {
       _secret :: !(TF.Attr s P.Text)
     {- ^ (Required) One or more encrypted payload definitions from the KMS service.  See the Secret Definitions below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsSecretData s) where
-    toHCL KmsSecretData{..} = TF.inline $ catMaybes
+instance TF.IsObject (KmsSecretData s) where
+    toObject KmsSecretData{..} = catMaybes
         [ TF.assign "secret" <$> TF.attribute _secret
         ]
 
@@ -4535,6 +4341,44 @@ kmsSecretData =
               _secret = TF.Nil
             }
 
+{- | The @aws_kms_secrets@ AWS datasource.
+
+Decrypt multiple secrets from data encrypted with the AWS KMS service. ~>
+NOTE : Using this data provider will allow you to conceal secret data within
+your resource definitions but does not take care of protecting that data in
+all Terraform logging and state output. Please take care to secure your
+secret data beyond just the Terraform configuration.
+-}
+data KmsSecretsData s = KmsSecretsData {
+      _secret :: !(TF.Attr s P.Text)
+    {- ^ (Required) One or more encrypted payload definitions from the KMS service. See the Secret Definitions below. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (KmsSecretsData s) where
+    toObject KmsSecretsData{..} = catMaybes
+        [ TF.assign "secret" <$> TF.attribute _secret
+        ]
+
+instance P.HasSecret (KmsSecretsData s) (TF.Attr s P.Text) where
+    secret =
+        lens (_secret :: KmsSecretsData s -> TF.Attr s P.Text)
+             (\s a -> s { _secret = a } :: KmsSecretsData s)
+
+instance s ~ s' => P.HasComputedPlaintext (TF.Ref s' (KmsSecretsData s)) (TF.Attr s P.Text) where
+    computedPlaintext x = TF.compute (TF.refKey x) "plaintext"
+
+instance s ~ s' => P.HasComputedSecret (TF.Ref s' (KmsSecretsData s)) (TF.Attr s P.Text) where
+    computedSecret =
+        (_secret :: KmsSecretsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+kmsSecretsData :: TF.DataSource P.AWS (KmsSecretsData s)
+kmsSecretsData =
+    TF.newDataSource "aws_kms_secrets" $
+        KmsSecretsData {
+              _secret = TF.Nil
+            }
+
 {- | The @aws_lambda_function@ AWS datasource.
 
 Provides information about a Lambda Function.
@@ -4546,8 +4390,8 @@ data LambdaFunctionData s = LambdaFunctionData {
     {- ^ (Optional) Qualifier of the lambda function. Defaults to @$LATEST@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LambdaFunctionData s) where
-    toHCL LambdaFunctionData{..} = TF.inline $ catMaybes
+instance TF.IsObject (LambdaFunctionData s) where
+    toObject LambdaFunctionData{..} = catMaybes
         [ TF.assign "function_name" <$> TF.attribute _function_name
         , TF.assign "qualifier" <$> TF.attribute _qualifier
         ]
@@ -4653,8 +4497,8 @@ data LambdaInvocationData s = LambdaInvocationData {
     {- ^ (Optional) The qualifier (a.k.a version) of the lambda function. Defaults to @$LATEST@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LambdaInvocationData s) where
-    toHCL LambdaInvocationData{..} = TF.inline $ catMaybes
+instance TF.IsObject (LambdaInvocationData s) where
+    toObject LambdaInvocationData{..} = catMaybes
         [ TF.assign "function_name" <$> TF.attribute _function_name
         , TF.assign "input" <$> TF.attribute _input
         , TF.assign "qualifier" <$> TF.attribute _qualifier
@@ -4714,8 +4558,8 @@ data LaunchConfigurationData s = LaunchConfigurationData {
     {- ^ (Required) The name of the launch configuration. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LaunchConfigurationData s) where
-    toHCL LaunchConfigurationData{..} = TF.inline $ catMaybes
+instance TF.IsObject (LaunchConfigurationData s) where
+    toObject LaunchConfigurationData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -4799,8 +4643,8 @@ data LbData s = LbData {
     {- ^ (Optional) The unique name of the load balancer. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbData s) where
-    toHCL LbData{..} = TF.inline $ catMaybes
+instance TF.IsObject (LbData s) where
+    toObject LbData{..} = catMaybes
         [ TF.assign "arn" <$> TF.attribute _arn
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -4850,8 +4694,8 @@ data LbListenerData s = LbListenerData {
     {- ^ (Optional) The port of the listener. Required if @arn@ is not set. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbListenerData s) where
-    toHCL LbListenerData{..} = TF.inline $ catMaybes
+instance TF.IsObject (LbListenerData s) where
+    toObject LbListenerData{..} = catMaybes
         [ TF.assign "arn" <$> TF.attribute _arn
         , TF.assign "load_balancer_arn" <$> TF.attribute _load_balancer_arn
         , TF.assign "port" <$> TF.attribute _port
@@ -4912,8 +4756,8 @@ data LbTargetGroupData s = LbTargetGroupData {
     {- ^ (Optional) The unique name of the target group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbTargetGroupData s) where
-    toHCL LbTargetGroupData{..} = TF.inline $ catMaybes
+instance TF.IsObject (LbTargetGroupData s) where
+    toObject LbTargetGroupData{..} = catMaybes
         [ TF.assign "arn" <$> TF.attribute _arn
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -4957,8 +4801,8 @@ data MqBrokerData s = MqBrokerData {
     {- ^ (Optional) The unique name of the mq broker. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (MqBrokerData s) where
-    toHCL MqBrokerData{..} = TF.inline $ catMaybes
+instance TF.IsObject (MqBrokerData s) where
+    toObject MqBrokerData{..} = catMaybes
         [ TF.assign "broker_id" <$> TF.attribute _broker_id
         , TF.assign "broker_name" <$> TF.attribute _broker_name
         ]
@@ -5012,8 +4856,8 @@ data NatGatewayData s = NatGatewayData {
     {- ^ (Optional) The id of the VPC that the Nat Gateway resides in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NatGatewayData s) where
-    toHCL NatGatewayData{..} = TF.inline $ catMaybes
+instance TF.IsObject (NatGatewayData s) where
+    toObject NatGatewayData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "id" <$> TF.attribute _id
         , TF.assign "name" <$> TF.attribute _name
@@ -5131,8 +4975,8 @@ data NetworkAclsData s = NetworkAclsData {
     {- ^ (Optional) The VPC ID that you want to filter from. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkAclsData s) where
-    toHCL NetworkAclsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkAclsData s) where
+    toObject NetworkAclsData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vpc_id" <$> TF.attribute _vpc_id
@@ -5191,8 +5035,8 @@ data NetworkInterfaceData s = NetworkInterfaceData {
     {- ^ – (Optional) The identifier for the network interface. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkInterfaceData s) where
-    toHCL NetworkInterfaceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkInterfaceData s) where
+    toObject NetworkInterfaceData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "id" <$> TF.attribute _id
         ]
@@ -5246,6 +5090,54 @@ networkInterfaceData =
             , _id = TF.Nil
             }
 
+{- | The @aws_network_interfaces@ AWS datasource.
+
+
+-}
+data NetworkInterfacesData s = NetworkInterfacesData {
+      _filter :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Custom filter block as described below. -}
+    , _tags   :: !(TF.Attr s (P.Tags s))
+    {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired network interfaces. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (NetworkInterfacesData s) where
+    toObject NetworkInterfacesData{..} = catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance P.HasFilter (NetworkInterfacesData s) (TF.Attr s P.Text) where
+    filter =
+        lens (_filter :: NetworkInterfacesData s -> TF.Attr s P.Text)
+             (\s a -> s { _filter = a } :: NetworkInterfacesData s)
+
+instance P.HasTags (NetworkInterfacesData s) (TF.Attr s (P.Tags s)) where
+    tags =
+        lens (_tags :: NetworkInterfacesData s -> TF.Attr s (P.Tags s))
+             (\s a -> s { _tags = a } :: NetworkInterfacesData s)
+
+instance s ~ s' => P.HasComputedFilter (TF.Ref s' (NetworkInterfacesData s)) (TF.Attr s P.Text) where
+    computedFilter =
+        (_filter :: NetworkInterfacesData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedIds (TF.Ref s' (NetworkInterfacesData s)) (TF.Attr s P.Text) where
+    computedIds x = TF.compute (TF.refKey x) "ids"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkInterfacesData s)) (TF.Attr s (P.Tags s)) where
+    computedTags =
+        (_tags :: NetworkInterfacesData s -> TF.Attr s (P.Tags s))
+            . TF.refValue
+
+networkInterfacesData :: TF.DataSource P.AWS (NetworkInterfacesData s)
+networkInterfacesData =
+    TF.newDataSource "aws_network_interfaces" $
+        NetworkInterfacesData {
+              _filter = TF.Nil
+            , _tags = TF.Nil
+            }
+
 {- | The @aws_partition@ AWS datasource.
 
 Use this data source to lookup current AWS partition in which Terraform is
@@ -5254,8 +5146,8 @@ working
 data PartitionData s = PartitionData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PartitionData s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (PartitionData s) where
+    toObject _ = []
 
 partitionData :: TF.DataSource P.AWS (PartitionData s)
 partitionData =
@@ -5278,8 +5170,8 @@ data PrefixListData s = PrefixListData {
     {- ^ (Optional) The ID of the prefix list to select. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PrefixListData s) where
-    toHCL PrefixListData{..} = TF.inline $ catMaybes
+instance TF.IsObject (PrefixListData s) where
+    toObject PrefixListData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "prefix_list_id" <$> TF.attribute _prefix_list_id
         ]
@@ -5328,8 +5220,8 @@ data PricingProductData s = PricingProductData {
     {- ^ (Required) The code of the service. Available service codes can be fetched using the DescribeServices pricing API call. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PricingProductData s) where
-    toHCL PricingProductData{..} = TF.inline $ catMaybes
+instance TF.IsObject (PricingProductData s) where
+    toObject PricingProductData{..} = catMaybes
         [ TF.assign "filters" <$> TF.attribute _filters
         , TF.assign "service_code" <$> TF.attribute _service_code
         ]
@@ -5374,8 +5266,8 @@ data RdsClusterData s = RdsClusterData {
     {- ^ (Required) The cluster identifier of the RDS cluster. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RdsClusterData s) where
-    toHCL RdsClusterData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RdsClusterData s) where
+    toObject RdsClusterData{..} = catMaybes
         [ TF.assign "cluster_identifier" <$> TF.attribute _cluster_identifier
         ]
 
@@ -5405,8 +5297,8 @@ data RedshiftClusterData s = RedshiftClusterData {
     {- ^ (Required) The cluster identifier -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RedshiftClusterData s) where
-    toHCL RedshiftClusterData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RedshiftClusterData s) where
+    toObject RedshiftClusterData{..} = catMaybes
         [ TF.assign "cluster_identifier" <$> TF.attribute _cluster_identifier
         ]
 
@@ -5524,8 +5416,8 @@ data RegionData s = RegionData {
     {- ^ (Optional) The full name of the region to select. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RegionData s) where
-    toHCL RegionData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RegionData s) where
+    toObject RegionData{..} = catMaybes
         [ TF.assign "endpoint" <$> TF.attribute _endpoint
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -5542,6 +5434,9 @@ instance P.HasName (RegionData s) (TF.Attr s P.Text) where
 
 instance s ~ s' => P.HasComputedCurrent (TF.Ref s' (RegionData s)) (TF.Attr s P.Text) where
     computedCurrent x = TF.compute (TF.refKey x) "current"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RegionData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (RegionData s)) (TF.Attr s P.Text) where
     computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
@@ -5576,8 +5471,8 @@ data Route53ZoneData s = Route53ZoneData {
     {- ^ (Optional) The Hosted Zone id of the desired Hosted Zone. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (Route53ZoneData s) where
-    toHCL Route53ZoneData{..} = TF.inline $ catMaybes
+instance TF.IsObject (Route53ZoneData s) where
+    toObject Route53ZoneData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "private_zone" <$> TF.attribute _private_zone
         , TF.assign "tags" <$> TF.attribute _tags
@@ -5685,8 +5580,8 @@ data RouteData s = RouteData {
     {- ^ (Optional) The VPC Peering Connection ID of the Route belonging to the Route Table. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RouteData s) where
-    toHCL RouteData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RouteData s) where
+    toObject RouteData{..} = catMaybes
         [ TF.assign "destination_cidr_block" <$> TF.attribute _destination_cidr_block
         , TF.assign "destination_ipv6_cidr_block" <$> TF.attribute _destination_ipv6_cidr_block
         , TF.assign "egress_only_gateway_id" <$> TF.attribute _egress_only_gateway_id
@@ -5822,8 +5717,8 @@ data RouteTableData s = RouteTableData {
     {- ^ (Optional) The id of the VPC that the desired Route Table belongs to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RouteTableData s) where
-    toHCL RouteTableData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RouteTableData s) where
+    toObject RouteTableData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "route_table_id" <$> TF.attribute _route_table_id
         , TF.assign "subnet_id" <$> TF.attribute _subnet_id
@@ -5930,8 +5825,8 @@ data RouteTablesData s = RouteTablesData {
     {- ^ (Optional) The VPC ID that you want to filter from. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RouteTablesData s) where
-    toHCL RouteTablesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RouteTablesData s) where
+    toObject RouteTablesData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vpc_id" <$> TF.attribute _vpc_id
@@ -5990,8 +5885,8 @@ data S3BucketData s = S3BucketData {
     {- ^ (Required) The name of the bucket -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (S3BucketData s) where
-    toHCL S3BucketData{..} = TF.inline $ catMaybes
+instance TF.IsObject (S3BucketData s) where
+    toObject S3BucketData{..} = catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
         ]
 
@@ -6051,8 +5946,8 @@ data S3BucketObjectData s = S3BucketObjectData {
     {- ^ (Optional) Specific version ID of the object returned (defaults to latest version) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (S3BucketObjectData s) where
-    toHCL S3BucketObjectData{..} = TF.inline $ catMaybes
+instance TF.IsObject (S3BucketObjectData s) where
+    toObject S3BucketObjectData{..} = catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "key" <$> TF.attribute _key
         , TF.assign "version_id" <$> TF.attribute _version_id
@@ -6159,8 +6054,8 @@ data SecretsmanagerSecretData s = SecretsmanagerSecretData {
     {- ^ (Optional) The name of the secret to retrieve. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecretsmanagerSecretData s) where
-    toHCL SecretsmanagerSecretData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecretsmanagerSecretData s) where
+    toObject SecretsmanagerSecretData{..} = catMaybes
         [ TF.assign "arn" <$> TF.attribute _arn
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -6227,8 +6122,8 @@ data SecretsmanagerSecretVersionData s = SecretsmanagerSecretVersionData {
     {- ^ (Optional) Specifies the secret version that you want to retrieve by the staging label attached to the version. Defaults to @AWSCURRENT@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecretsmanagerSecretVersionData s) where
-    toHCL SecretsmanagerSecretVersionData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecretsmanagerSecretVersionData s) where
+    toObject SecretsmanagerSecretVersionData{..} = catMaybes
         [ TF.assign "secret_id" <$> TF.attribute _secret_id
         , TF.assign "version_id" <$> TF.attribute _version_id
         , TF.assign "version_stage" <$> TF.attribute _version_stage
@@ -6297,8 +6192,8 @@ data SecurityGroupData s = SecurityGroupData {
     {- ^ (Optional) The id of the VPC that the desired security group belongs to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecurityGroupData s) where
-    toHCL SecurityGroupData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecurityGroupData s) where
+    toObject SecurityGroupData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "id" <$> TF.attribute _id
         , TF.assign "name" <$> TF.attribute _name
@@ -6385,8 +6280,8 @@ data SecurityGroupsData s = SecurityGroupsData {
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match for desired security groups. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecurityGroupsData s) where
-    toHCL SecurityGroupsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecurityGroupsData s) where
+    toObject SecurityGroupsData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "tags" <$> TF.attribute _tags
         ]
@@ -6436,8 +6331,8 @@ data SnsTopicData s = SnsTopicData {
     {- ^ (Required) The friendly name of the topic to match. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SnsTopicData s) where
-    toHCL SnsTopicData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SnsTopicData s) where
+    toObject SnsTopicData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -6472,8 +6367,8 @@ data SqsQueueData s = SqsQueueData {
     {- ^ (Required) The name of the queue to match. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SqsQueueData s) where
-    toHCL SqsQueueData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SqsQueueData s) where
+    toObject SqsQueueData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -6511,8 +6406,8 @@ data SsmParameterData s = SsmParameterData {
     {- ^ (Optional) Whether to return decrypted @SecureString@ value. Defaults to @true@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SsmParameterData s) where
-    toHCL SsmParameterData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SsmParameterData s) where
+    toObject SsmParameterData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "with_decryption" <$> TF.attribute _with_decryption
         ]
@@ -6545,6 +6440,58 @@ ssmParameterData =
             , _with_decryption = TF.Nil
             }
 
+{- | The @aws_storagegateway_local_disk@ AWS datasource.
+
+Retrieve information about a Storage Gateway local disk. The disk identifier
+is useful for adding the disk as a cache or upload buffer to a gateway.
+-}
+data StoragegatewayLocalDiskData s = StoragegatewayLocalDiskData {
+      _disk_path   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The device path of the local disk to retrieve. For example, @/dev/sdb@ or @/dev/xvdb@ . -}
+    , _gateway_arn :: !(TF.Attr s P.Text)
+    {- ^ (Required) The Amazon Resource Name (ARN) of the gateway. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (StoragegatewayLocalDiskData s) where
+    toObject StoragegatewayLocalDiskData{..} = catMaybes
+        [ TF.assign "disk_path" <$> TF.attribute _disk_path
+        , TF.assign "gateway_arn" <$> TF.attribute _gateway_arn
+        ]
+
+instance P.HasDiskPath (StoragegatewayLocalDiskData s) (TF.Attr s P.Text) where
+    diskPath =
+        lens (_disk_path :: StoragegatewayLocalDiskData s -> TF.Attr s P.Text)
+             (\s a -> s { _disk_path = a } :: StoragegatewayLocalDiskData s)
+
+instance P.HasGatewayArn (StoragegatewayLocalDiskData s) (TF.Attr s P.Text) where
+    gatewayArn =
+        lens (_gateway_arn :: StoragegatewayLocalDiskData s -> TF.Attr s P.Text)
+             (\s a -> s { _gateway_arn = a } :: StoragegatewayLocalDiskData s)
+
+instance s ~ s' => P.HasComputedDiskId (TF.Ref s' (StoragegatewayLocalDiskData s)) (TF.Attr s P.Text) where
+    computedDiskId x = TF.compute (TF.refKey x) "disk_id"
+
+instance s ~ s' => P.HasComputedDiskPath (TF.Ref s' (StoragegatewayLocalDiskData s)) (TF.Attr s P.Text) where
+    computedDiskPath =
+        (_disk_path :: StoragegatewayLocalDiskData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedGatewayArn (TF.Ref s' (StoragegatewayLocalDiskData s)) (TF.Attr s P.Text) where
+    computedGatewayArn =
+        (_gateway_arn :: StoragegatewayLocalDiskData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StoragegatewayLocalDiskData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+storagegatewayLocalDiskData :: TF.DataSource P.AWS (StoragegatewayLocalDiskData s)
+storagegatewayLocalDiskData =
+    TF.newDataSource "aws_storagegateway_local_disk" $
+        StoragegatewayLocalDiskData {
+              _disk_path = TF.Nil
+            , _gateway_arn = TF.Nil
+            }
+
 {- | The @aws_subnet@ AWS datasource.
 
 @aws_subnet@ provides details about a specific VPC subnet. This resource can
@@ -6573,8 +6520,8 @@ data SubnetData s = SubnetData {
     {- ^ (Optional) The id of the VPC that the desired subnet belongs to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SubnetData s) where
-    toHCL SubnetData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SubnetData s) where
+    toObject SubnetData{..} = catMaybes
         [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "cidr_block" <$> TF.attribute _cidr_block
         , TF.assign "default_for_az" <$> TF.attribute _default_for_az
@@ -6703,8 +6650,8 @@ data SubnetIdsData s = SubnetIdsData {
     {- ^ (Required) The VPC ID that you want to filter from. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SubnetIdsData s) where
-    toHCL SubnetIdsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SubnetIdsData s) where
+    toObject SubnetIdsData{..} = catMaybes
         [ TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
@@ -6763,8 +6710,8 @@ data VpcData s = VpcData {
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpcData s) where
-    toHCL VpcData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpcData s) where
+    toObject VpcData{..} = catMaybes
         [ TF.assign "cidr_block" <$> TF.attribute _cidr_block
         , TF.assign "default" <$> TF.attribute _default'
         , TF.assign "dhcp_options_id" <$> TF.attribute _dhcp_options_id
@@ -6808,6 +6755,9 @@ instance P.HasTags (VpcData s) (TF.Attr s (P.Tags s)) where
     tags =
         lens (_tags :: VpcData s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: VpcData s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (VpcData s)) (TF.Attr s P.IPRange) where
     computedCidrBlock =
@@ -6883,8 +6833,8 @@ data VpcDhcpOptionsData s = VpcDhcpOptionsData {
     {- ^ (Optional) List of custom filters as described below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpcDhcpOptionsData s) where
-    toHCL VpcDhcpOptionsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpcDhcpOptionsData s) where
+    toObject VpcDhcpOptionsData{..} = catMaybes
         [ TF.assign "dhcp_options_id" <$> TF.attribute _dhcp_options_id
         , TF.assign "filter" <$> TF.attribute _filter
         ]
@@ -6951,8 +6901,8 @@ data VpcEndpointData s = VpcEndpointData {
     {- ^ (Optional) The ID of the VPC in which the specific VPC Endpoint is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpcEndpointData s) where
-    toHCL VpcEndpointData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpcEndpointData s) where
+    toObject VpcEndpointData{..} = catMaybes
         [ TF.assign "id" <$> TF.attribute _id
         , TF.assign "service_name" <$> TF.attribute _service_name
         , TF.assign "state" <$> TF.attribute _state
@@ -7052,8 +7002,8 @@ data VpcEndpointServiceData s = VpcEndpointServiceData {
     {- ^ (Optional) The service name that can be specified when creating a VPC endpoint. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpcEndpointServiceData s) where
-    toHCL VpcEndpointServiceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpcEndpointServiceData s) where
+    toObject VpcEndpointServiceData{..} = catMaybes
         [ TF.assign "service" <$> TF.attribute _service
         , TF.assign "service_name" <$> TF.attribute _service_name
         ]
@@ -7139,8 +7089,8 @@ data VpcPeeringConnectionData s = VpcPeeringConnectionData {
     {- ^ (Optional) The ID of the requester VPC of the specific VPC Peering Connection to retrieve. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpcPeeringConnectionData s) where
-    toHCL VpcPeeringConnectionData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpcPeeringConnectionData s) where
+    toObject VpcPeeringConnectionData{..} = catMaybes
         [ TF.assign "cidr_block" <$> TF.attribute _cidr_block
         , TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "id" <$> TF.attribute _id
@@ -7312,8 +7262,8 @@ data VpcsData s = VpcsData {
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired vpcs. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpcsData s) where
-    toHCL VpcsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpcsData s) where
+    toObject VpcsData{..} = catMaybes
         [ TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "tags" <$> TF.attribute _tags
         ]
@@ -7370,8 +7320,8 @@ data VpnGatewayData s = VpnGatewayData {
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPN Gateway. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpnGatewayData s) where
-    toHCL VpnGatewayData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpnGatewayData s) where
+    toObject VpnGatewayData{..} = catMaybes
         [ TF.assign "amazon_side_asn" <$> TF.attribute _amazon_side_asn
         , TF.assign "attached_vpc_id" <$> TF.attribute _attached_vpc_id
         , TF.assign "availability_zone" <$> TF.attribute _availability_zone

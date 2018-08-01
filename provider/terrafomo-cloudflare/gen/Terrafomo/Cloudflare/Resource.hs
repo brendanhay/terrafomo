@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -194,8 +187,8 @@ data LoadBalancerMonitorResource s = LoadBalancerMonitorResource {
     {- ^ (Optional) The protocol to use for the healthcheck. Currently supported protocols are 'HTTP' and 'HTTPS'. Default: "http". -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoadBalancerMonitorResource s) where
-    toHCL LoadBalancerMonitorResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoadBalancerMonitorResource s) where
+    toObject LoadBalancerMonitorResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "expected_body" <$> TF.attribute _expected_body
         , TF.assign "expected_codes" <$> TF.attribute _expected_codes
@@ -359,8 +352,8 @@ data LoadBalancerPoolResource s = LoadBalancerPoolResource {
     {- ^ (Required) The list of origins within this pool. Traffic directed at this pool is balanced across all currently healthy origins, provided the pool itself is healthy. The name and enabled fields follow the same conventions as they do for the pool itself (defined in this section), and address can be either an IPv4 or IPv6 address. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoadBalancerPoolResource s) where
-    toHCL LoadBalancerPoolResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoadBalancerPoolResource s) where
+    toObject LoadBalancerPoolResource{..} = catMaybes
         [ TF.assign "check_regions" <$> TF.attribute _check_regions
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "enabled" <$> TF.attribute _enabled
@@ -502,8 +495,8 @@ data LoadBalancerResource s = LoadBalancerResource {
     {- ^ (Required) The zone to add the load balancer to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoadBalancerResource s) where
-    toHCL LoadBalancerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoadBalancerResource s) where
+    toObject LoadBalancerResource{..} = catMaybes
         [ TF.assign "default_pool_ids" <$> TF.attribute _default_pool_ids
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "fallback_pool_id" <$> TF.attribute _fallback_pool_id
@@ -646,11 +639,11 @@ data PageruleResource s = PageruleResource {
     , _target   :: !(TF.Attr s P.Text)
     {- ^ (Required) The URL pattern to target with the page rule. -}
     , _zone     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The zone to which the page rule should be added. -}
+    {- ^ (Required) The DNS zone to which the page rule should be added. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PageruleResource s) where
-    toHCL PageruleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PageruleResource s) where
+    toObject PageruleResource{..} = catMaybes
         [ TF.assign "actions" <$> TF.attribute _actions
         , TF.assign "priority" <$> TF.attribute _priority
         , TF.assign "status" <$> TF.attribute _status
@@ -742,8 +735,8 @@ data RateLimitResource s = RateLimitResource {
     {- ^ (Required) The DNS zone to apply rate limiting to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RateLimitResource s) where
-    toHCL RateLimitResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RateLimitResource s) where
+    toObject RateLimitResource{..} = catMaybes
         [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "bypass_url_patterns" <$> TF.attribute _bypass_url_patterns
         , TF.assign "description" <$> TF.attribute _description
@@ -862,7 +855,7 @@ data RecordResource s = RecordResource {
       _data'    :: !(TF.Attr s P.Text)
     {- ^ (Optional) Map of attributes that constitute the record value. Primarily used for LOC and SRV record types. Either this or @value@ must be specified -}
     , _domain   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The domain to add the record to -}
+    {- ^ (Required) The DNS zone to add the record to -}
     , _name     :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the record -}
     , _priority :: !(TF.Attr s P.Text)
@@ -877,8 +870,8 @@ data RecordResource s = RecordResource {
     {- ^ (Optional) The (string) value of the record. Either this or @data@ must be specified -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RecordResource s) where
-    toHCL RecordResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RecordResource s) where
+    toObject RecordResource{..} = catMaybes
         [ TF.assign "data" <$> TF.attribute _data'
         , TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "name" <$> TF.attribute _name
@@ -1006,19 +999,19 @@ recordResource =
 
 {- | The @cloudflare_zone_settings_override@ Cloudflare resource.
 
-Provides a resource which customizes CloudFlare zone settings. Note that
+Provides a resource which customizes Cloudflare zone settings. Note that
 after destroying this resource Zone Settings will be reset to their initial
 values.
 -}
 data ZoneSettingsOverrideResource s = ZoneSettingsOverrideResource {
       _name     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the DNS zone to apply rate limiting to. -}
+    {- ^ (Required) The DNS zone to which apply settings. -}
     , _settings :: !(TF.Attr s P.Text)
     {- ^ (Optional) Settings overrides that will be applied to the zone. If a setting is not specified the existing setting will be used. For a full list of available settings see below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ZoneSettingsOverrideResource s) where
-    toHCL ZoneSettingsOverrideResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ZoneSettingsOverrideResource s) where
+    toObject ZoneSettingsOverrideResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "settings" <$> TF.attribute _settings
         ]

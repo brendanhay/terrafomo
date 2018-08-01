@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -91,8 +84,8 @@ data ProjectData s = ProjectData {
     {- ^ (Required) The integer that uniquely identifies the project within the gitlab install. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectData s) where
-    toHCL ProjectData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProjectData s) where
+    toObject ProjectData{..} = catMaybes
         [ TF.assign "id" <$> TF.attribute _id
         ]
 
@@ -157,8 +150,8 @@ data UserData s = UserData {
     {- ^ (Required) The e-mail address of the user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserData s) where
-    toHCL UserData{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserData s) where
+    toObject UserData{..} = catMaybes
         [ TF.assign "email" <$> TF.attribute _email
         ]
 

@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -193,8 +186,8 @@ data BranchProtectionResource s = BranchProtectionResource {
     {- ^ (Optional) Enforce restrictions for the users and teams that may push to the branch. See <#restrictions> below for details. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BranchProtectionResource s) where
-    toHCL BranchProtectionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (BranchProtectionResource s) where
+    toObject BranchProtectionResource{..} = catMaybes
         [ TF.assign "branch" <$> TF.attribute _branch
         , TF.assign "enforce_admins" <$> TF.attribute _enforce_admins
         , TF.assign "repository" <$> TF.attribute _repository
@@ -297,8 +290,8 @@ data IssueLabelResource s = IssueLabelResource {
     {- ^ - (Computed) The URL to the issue label -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IssueLabelResource s) where
-    toHCL IssueLabelResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IssueLabelResource s) where
+    toObject IssueLabelResource{..} = catMaybes
         [ TF.assign "color" <$> TF.attribute _color
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "repository" <$> TF.attribute _repository
@@ -369,8 +362,8 @@ data MembershipResource s = MembershipResource {
     {- ^ (Required) The user to add to the organization. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (MembershipResource s) where
-    toHCL MembershipResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (MembershipResource s) where
+    toObject MembershipResource{..} = catMaybes
         [ TF.assign "role" <$> TF.attribute _role
         , TF.assign "username" <$> TF.attribute _username
         ]
@@ -419,8 +412,8 @@ data OrganizationWebhookResource s = OrganizationWebhookResource {
     {- ^ (Required) The type of the webhook. See a list of <https://api.github.com/hooks> . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OrganizationWebhookResource s) where
-    toHCL OrganizationWebhookResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (OrganizationWebhookResource s) where
+    toObject OrganizationWebhookResource{..} = catMaybes
         [ TF.assign "active" <$> TF.attribute _active
         , TF.assign "configuration" <$> TF.attribute _configuration
         , TF.assign "events" <$> TF.attribute _events
@@ -501,8 +494,8 @@ data RepositoryCollaboratorResource s = RepositoryCollaboratorResource {
     {- ^ (Required) The user to add to the repository as a collaborator. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RepositoryCollaboratorResource s) where
-    toHCL RepositoryCollaboratorResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RepositoryCollaboratorResource s) where
+    toObject RepositoryCollaboratorResource{..} = catMaybes
         [ TF.assign "permission" <$> TF.attribute _permission
         , TF.assign "repository" <$> TF.attribute _repository
         , TF.assign "username" <$> TF.attribute _username
@@ -566,8 +559,8 @@ data RepositoryDeployKeyResource s = RepositoryDeployKeyResource {
     {- ^ (Required) A title. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RepositoryDeployKeyResource s) where
-    toHCL RepositoryDeployKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RepositoryDeployKeyResource s) where
+    toObject RepositoryDeployKeyResource{..} = catMaybes
         [ TF.assign "key" <$> TF.attribute _key
         , TF.assign "read_only" <$> TF.attribute _read_only
         , TF.assign "repository" <$> TF.attribute _repository
@@ -665,8 +658,8 @@ data RepositoryResource s = RepositoryResource {
     {- ^ (Optional) Set to @true@ to create a private repository. Repositories are created as public (e.g. open source) by default. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RepositoryResource s) where
-    toHCL RepositoryResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RepositoryResource s) where
+    toObject RepositoryResource{..} = catMaybes
         [ TF.assign "allow_merge_commit" <$> TF.attribute _allow_merge_commit
         , TF.assign "allow_rebase_merge" <$> TF.attribute _allow_rebase_merge
         , TF.assign "allow_squash_merge" <$> TF.attribute _allow_squash_merge
@@ -904,8 +897,8 @@ data RepositoryWebhookResource s = RepositoryWebhookResource {
     {- ^ (Required) The repository of the webhook. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RepositoryWebhookResource s) where
-    toHCL RepositoryWebhookResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RepositoryWebhookResource s) where
+    toObject RepositoryWebhookResource{..} = catMaybes
         [ TF.assign "active" <$> TF.attribute _active
         , TF.assign "configuration" <$> TF.attribute _configuration
         , TF.assign "events" <$> TF.attribute _events
@@ -994,8 +987,8 @@ data TeamMembershipResource s = TeamMembershipResource {
     {- ^ (Required) The user to add to the team. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TeamMembershipResource s) where
-    toHCL TeamMembershipResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TeamMembershipResource s) where
+    toObject TeamMembershipResource{..} = catMaybes
         [ TF.assign "role" <$> TF.attribute _role
         , TF.assign "team_id" <$> TF.attribute _team_id
         , TF.assign "username" <$> TF.attribute _username
@@ -1057,8 +1050,8 @@ data TeamRepositoryResource s = TeamRepositoryResource {
     {- ^ (Required) The GitHub team id -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TeamRepositoryResource s) where
-    toHCL TeamRepositoryResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TeamRepositoryResource s) where
+    toObject TeamRepositoryResource{..} = catMaybes
         [ TF.assign "permission" <$> TF.attribute _permission
         , TF.assign "repository" <$> TF.attribute _repository
         , TF.assign "team_id" <$> TF.attribute _team_id
@@ -1122,8 +1115,8 @@ data TeamResource s = TeamResource {
     {- ^ (Optional) The level of privacy for the team. Must be one of @secret@ or @closed@ . Defaults to @secret@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TeamResource s) where
-    toHCL TeamResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TeamResource s) where
+    toObject TeamResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ldap_dn" <$> TF.attribute _ldap_dn
         , TF.assign "name" <$> TF.attribute _name

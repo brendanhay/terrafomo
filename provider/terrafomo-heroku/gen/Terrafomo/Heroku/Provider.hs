@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -28,6 +22,7 @@ module Terrafomo.Heroku.Provider
     , providerHeaders
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -62,16 +57,18 @@ data Heroku = Heroku {
 
 instance Hashable Heroku
 
-instance TF.ToHCL Heroku where
-    toHCL x =
+instance TF.IsSection Heroku where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Heroku))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "api_key" <$> _api_key x
-            , TF.assign "email" <$> _email x
-            , TF.assign "headers" <$> _headers x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "api_key" <$> _api_key x
+                  , TF.assign "email" <$> _email x
+                  , TF.assign "headers" <$> _headers x
+                  ])
 
 instance TF.IsProvider Heroku where
     type ProviderType Heroku = "heroku"

@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -153,8 +146,8 @@ data ComputeImageListEntryData s = ComputeImageListEntryData {
     {- ^ (Required) - The version (integer) of the Image List to use. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeImageListEntryData s) where
-    toHCL ComputeImageListEntryData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeImageListEntryData s) where
+    toObject ComputeImageListEntryData{..} = catMaybes
         [ TF.assign "entry" <$> TF.attribute _entry
         , TF.assign "image_list" <$> TF.attribute _image_list
         , TF.assign "version" <$> TF.attribute _version
@@ -221,8 +214,8 @@ data ComputeIpAddressReservationData s = ComputeIpAddressReservationData {
     {- ^ (Required) The name of the ip address reservation. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeIpAddressReservationData s) where
-    toHCL ComputeIpAddressReservationData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeIpAddressReservationData s) where
+    toObject ComputeIpAddressReservationData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -268,8 +261,8 @@ data ComputeIpReservationData s = ComputeIpReservationData {
     {- ^ (Required) Name of the IP Reservation. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeIpReservationData s) where
-    toHCL ComputeIpReservationData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeIpReservationData s) where
+    toObject ComputeIpReservationData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -316,8 +309,8 @@ data ComputeMachineImageData s = ComputeMachineImageData {
     {- ^ (Required) The name of the Machine Image. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeMachineImageData s) where
-    toHCL ComputeMachineImageData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeMachineImageData s) where
+    toObject ComputeMachineImageData{..} = catMaybes
         [ TF.assign "account" <$> TF.attribute _account
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -391,8 +384,8 @@ data ComputeNetworkInterfaceData s = ComputeNetworkInterfaceData {
     {- ^ is the name of the attached interface. @eth0@ , @eth1@ , ... @eth9@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeNetworkInterfaceData s) where
-    toHCL ComputeNetworkInterfaceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeNetworkInterfaceData s) where
+    toObject ComputeNetworkInterfaceData{..} = catMaybes
         [ TF.assign "instance_id" <$> TF.attribute _instance_id
         , TF.assign "instance_name" <$> TF.attribute _instance_name
         , TF.assign "interface" <$> TF.attribute _interface
@@ -485,8 +478,8 @@ data ComputeSshKeyData s = ComputeSshKeyData {
     {- ^ (Required) The unique (within this identity domain) name of the SSH key. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSshKeyData s) where
-    toHCL ComputeSshKeyData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSshKeyData s) where
+    toObject ComputeSshKeyData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -523,8 +516,8 @@ data ComputeStorageVolumeSnapshotData s = ComputeStorageVolumeSnapshotData {
     {- ^ is the name of the storage volume snapshot. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeStorageVolumeSnapshotData s) where
-    toHCL ComputeStorageVolumeSnapshotData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeStorageVolumeSnapshotData s) where
+    toObject ComputeStorageVolumeSnapshotData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -605,8 +598,8 @@ data ComputeVnicData s = ComputeVnicData {
     {- ^ is the name of the Virtual NIC. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeVnicData s) where
-    toHCL ComputeVnicData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeVnicData s) where
+    toObject ComputeVnicData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 

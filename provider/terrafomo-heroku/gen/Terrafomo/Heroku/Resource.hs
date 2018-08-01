@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -57,6 +50,12 @@ module Terrafomo.Heroku.Resource
     , PipelineResource (..)
     , pipelineResource
 
+    , SpaceInboundRulesetResource (..)
+    , spaceInboundRulesetResource
+
+    , SpaceMemberResource (..)
+    , spaceMemberResource
+
     , SpacePeeringConnectionAccepterResource (..)
     , spacePeeringConnectionAccepterResource
 
@@ -80,6 +79,7 @@ module Terrafomo.Heroku.Resource
     , P.HasEmail (..)
     , P.HasEnabled (..)
     , P.HasHostname (..)
+    , P.HasInternalRouting (..)
     , P.HasName (..)
     , P.HasOrganization (..)
     , P.HasPermissions (..)
@@ -88,6 +88,7 @@ module Terrafomo.Heroku.Resource
     , P.HasPrivateKey (..)
     , P.HasQuantity (..)
     , P.HasRegion (..)
+    , P.HasRule (..)
     , P.HasShield (..)
     , P.HasSize (..)
     , P.HasSlugId (..)
@@ -116,6 +117,7 @@ module Terrafomo.Heroku.Resource
     , P.HasComputedHerokuHostname (..)
     , P.HasComputedHostname (..)
     , P.HasComputedId (..)
+    , P.HasComputedInternalRouting (..)
     , P.HasComputedName (..)
     , P.HasComputedOrganization (..)
     , P.HasComputedOutboundIps (..)
@@ -126,6 +128,7 @@ module Terrafomo.Heroku.Resource
     , P.HasComputedProviderId (..)
     , P.HasComputedQuantity (..)
     , P.HasComputedRegion (..)
+    , P.HasComputedRule (..)
     , P.HasComputedShield (..)
     , P.HasComputedSize (..)
     , P.HasComputedSlugId (..)
@@ -179,8 +182,8 @@ data AddonAttachmentResource s = AddonAttachmentResource {
     {- ^ (Optional) A friendly name for the Heroku Addon Attachment. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AddonAttachmentResource s) where
-    toHCL AddonAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AddonAttachmentResource s) where
+    toObject AddonAttachmentResource{..} = catMaybes
         [ TF.assign "addon_id" <$> TF.attribute _addon_id
         , TF.assign "app_id" <$> TF.attribute _app_id
         , TF.assign "name" <$> TF.attribute _name
@@ -242,8 +245,8 @@ data AddonResource s = AddonResource {
     {- ^ (Required) The addon to add. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AddonResource s) where
-    toHCL AddonResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AddonResource s) where
+    toObject AddonResource{..} = catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "config" <$> TF.attribute _config
         , TF.assign "plan" <$> TF.attribute _plan
@@ -312,8 +315,8 @@ data AppFeatureResource s = AppFeatureResource {
     {- ^ (Required) The name of the App Feature to manage. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AppFeatureResource s) where
-    toHCL AppFeatureResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AppFeatureResource s) where
+    toObject AppFeatureResource{..} = catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "name" <$> TF.attribute _name
@@ -375,8 +378,8 @@ data AppReleaseResource s = AppReleaseResource {
     {- ^ - unique identifier of slug -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AppReleaseResource s) where
-    toHCL AppReleaseResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AppReleaseResource s) where
+    toObject AppReleaseResource{..} = catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "slug_id" <$> TF.attribute _slug_id
@@ -430,29 +433,32 @@ Provides a Heroku App resource. This can be used to create and manage
 applications on Heroku.
 -}
 data AppResource s = AppResource {
-      _acm          :: !(TF.Attr s P.Text)
+      _acm              :: !(TF.Attr s P.Text)
     {- ^ (Optional) The flag representing Automated Certificate Management for the app. -}
-    , _buildpacks   :: !(TF.Attr s P.Text)
+    , _buildpacks       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Buildpack names or URLs for the application. Buildpacks configured externally won't be altered if this is not present. -}
-    , _config_vars  :: !(TF.Attr s P.Text)
+    , _config_vars      :: !(TF.Attr s P.Text)
     {- ^ (Optional) Configuration variables for the application. The config variables in this map are not the final set of configuration variables, but rather variables you want present. That is, other configuration variables set externally won't be removed by Terraform if they aren't present in this list. -}
-    , _name         :: !(TF.Attr s P.Text)
+    , _internal_routing :: !(TF.Attr s P.Text)
+    {- ^ (Optional) If true, the application will be routable only internally in a private space. This option is only available for apps that also specify @space@ . This feature is currently only available in private beta. Contact Heroku Support for more details. -}
+    , _name             :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the application. In Heroku, this is also the unique ID, so it must be unique and have a minimum of 3 characters. -}
-    , _organization :: !(TF.Attr s P.Text)
+    , _organization     :: !(TF.Attr s P.Text)
     {- ^ (Optional) A block that can be specified once to define organization settings for this app. The fields for this block are documented below. -}
-    , _region       :: !(TF.Attr s P.Text)
+    , _region           :: !(TF.Attr s P.Text)
     {- ^ (Required) The region that the app should be deployed in. -}
-    , _space        :: !(TF.Attr s P.Text)
+    , _space            :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of a private space to create the app in. -}
-    , _stack        :: !(TF.Attr s P.Text)
+    , _stack            :: !(TF.Attr s P.Text)
     {- ^ (Optional) The application stack is what platform to run the application in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AppResource s) where
-    toHCL AppResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AppResource s) where
+    toObject AppResource{..} = catMaybes
         [ TF.assign "acm" <$> TF.attribute _acm
         , TF.assign "buildpacks" <$> TF.attribute _buildpacks
         , TF.assign "config_vars" <$> TF.attribute _config_vars
+        , TF.assign "internal_routing" <$> TF.attribute _internal_routing
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "organization" <$> TF.attribute _organization
         , TF.assign "region" <$> TF.attribute _region
@@ -474,6 +480,11 @@ instance P.HasConfigVars (AppResource s) (TF.Attr s P.Text) where
     configVars =
         lens (_config_vars :: AppResource s -> TF.Attr s P.Text)
              (\s a -> s { _config_vars = a } :: AppResource s)
+
+instance P.HasInternalRouting (AppResource s) (TF.Attr s P.Text) where
+    internalRouting =
+        lens (_internal_routing :: AppResource s -> TF.Attr s P.Text)
+             (\s a -> s { _internal_routing = a } :: AppResource s)
 
 instance P.HasName (AppResource s) (TF.Attr s P.Text) where
     name =
@@ -527,6 +538,9 @@ instance s ~ s' => P.HasComputedHerokuHostname (TF.Ref s' (AppResource s)) (TF.A
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+instance s ~ s' => P.HasComputedInternalRouting (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
+    computedInternalRouting x = TF.compute (TF.refKey x) "internal_routing"
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
@@ -554,6 +568,7 @@ appResource =
               _acm = TF.Nil
             , _buildpacks = TF.Nil
             , _config_vars = TF.Nil
+            , _internal_routing = TF.Nil
             , _name = TF.Nil
             , _organization = TF.Nil
             , _region = TF.Nil
@@ -575,8 +590,8 @@ data CertResource s = CertResource {
     {- ^ (Required) The private key for a given certificate chain -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CertResource s) where
-    toHCL CertResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CertResource s) where
+    toObject CertResource{..} = catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "certificate_chain" <$> TF.attribute _certificate_chain
         , TF.assign "private_key" <$> TF.attribute _private_key
@@ -642,8 +657,8 @@ data DomainResource s = DomainResource {
     {- ^ (Required) The hostname to serve requests from. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DomainResource s) where
-    toHCL DomainResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DomainResource s) where
+    toObject DomainResource{..} = catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "hostname" <$> TF.attribute _hostname
         ]
@@ -692,8 +707,8 @@ data DrainResource s = DrainResource {
     {- ^ (Required) The URL for Heroku to drain your logs to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DrainResource s) where
-    toHCL DrainResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DrainResource s) where
+    toObject DrainResource{..} = catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "url" <$> TF.attribute _url
         ]
@@ -747,8 +762,8 @@ data FormationResource s = FormationResource {
     {- ^ - type of process such as "web" -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FormationResource s) where
-    toHCL FormationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FormationResource s) where
+    toObject FormationResource{..} = catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "quantity" <$> TF.attribute _quantity
         , TF.assign "size" <$> TF.attribute _size
@@ -825,8 +840,8 @@ data PipelineCouplingResource s = PipelineCouplingResource {
     {- ^ (Required) The stage to couple this app to. Must be one of @review@ , @development@ , @staging@ , or @production@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PipelineCouplingResource s) where
-    toHCL PipelineCouplingResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PipelineCouplingResource s) where
+    toObject PipelineCouplingResource{..} = catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "pipeline" <$> TF.attribute _pipeline
         , TF.assign "stage" <$> TF.attribute _stage
@@ -883,8 +898,8 @@ data PipelineResource s = PipelineResource {
     {- ^ (Required) The name of the pipeline. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PipelineResource s) where
-    toHCL PipelineResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PipelineResource s) where
+    toObject PipelineResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -906,6 +921,119 @@ pipelineResource =
               _name = TF.Nil
             }
 
+{- | The @heroku_space_inbound_ruleset@ Heroku resource.
+
+Provides a resource for managing
+<https://devcenter.heroku.com/articles/platform-api-reference#inbound-ruleset>
+for Heroku Private Spaces.
+-}
+data SpaceInboundRulesetResource s = SpaceInboundRulesetResource {
+      _rule  :: !(TF.Attr s P.Text)
+    {- ^ (Required) At least one @rule@ block. Rules are documented below. -}
+    , _space :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the space. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (SpaceInboundRulesetResource s) where
+    toObject SpaceInboundRulesetResource{..} = catMaybes
+        [ TF.assign "rule" <$> TF.attribute _rule
+        , TF.assign "space" <$> TF.attribute _space
+        ]
+
+instance P.HasRule (SpaceInboundRulesetResource s) (TF.Attr s P.Text) where
+    rule =
+        lens (_rule :: SpaceInboundRulesetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _rule = a } :: SpaceInboundRulesetResource s)
+
+instance P.HasSpace (SpaceInboundRulesetResource s) (TF.Attr s P.Text) where
+    space =
+        lens (_space :: SpaceInboundRulesetResource s -> TF.Attr s P.Text)
+             (\s a -> s { _space = a } :: SpaceInboundRulesetResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceInboundRulesetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedRule (TF.Ref s' (SpaceInboundRulesetResource s)) (TF.Attr s P.Text) where
+    computedRule =
+        (_rule :: SpaceInboundRulesetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSpace (TF.Ref s' (SpaceInboundRulesetResource s)) (TF.Attr s P.Text) where
+    computedSpace =
+        (_space :: SpaceInboundRulesetResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+spaceInboundRulesetResource :: TF.Resource P.Heroku (SpaceInboundRulesetResource s)
+spaceInboundRulesetResource =
+    TF.newResource "heroku_space_inbound_ruleset" $
+        SpaceInboundRulesetResource {
+              _rule = TF.Nil
+            , _space = TF.Nil
+            }
+
+{- | The @heroku_space_member@ Heroku resource.
+
+Provides a Heroku Space resource for managing app permissions for the entire
+space. Members with the admin role will always have full permissions to a
+Heroku Space, so using this resource on an admin will have no affect. The
+provided member must already exist in your Heroku organization. Currently
+the only supported permission is @create_apps@ .
+-}
+data SpaceMemberResource s = SpaceMemberResource {
+      _email       :: !(TF.Attr s P.Text)
+    {- ^ (Required) The email of the team member to set permissions for. -}
+    , _permissions :: !(TF.Attr s P.Text)
+    {- ^ (Required) The permissions to grant the team member for the space. Currently @create_apps@ is the only supported permission. If not provided the member will have no permissions to the space. Members with admin role will always have @create_apps@ permissions, which cannot be removed. -}
+    , _space       :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the space. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (SpaceMemberResource s) where
+    toObject SpaceMemberResource{..} = catMaybes
+        [ TF.assign "email" <$> TF.attribute _email
+        , TF.assign "permissions" <$> TF.attribute _permissions
+        , TF.assign "space" <$> TF.attribute _space
+        ]
+
+instance P.HasEmail (SpaceMemberResource s) (TF.Attr s P.Text) where
+    email =
+        lens (_email :: SpaceMemberResource s -> TF.Attr s P.Text)
+             (\s a -> s { _email = a } :: SpaceMemberResource s)
+
+instance P.HasPermissions (SpaceMemberResource s) (TF.Attr s P.Text) where
+    permissions =
+        lens (_permissions :: SpaceMemberResource s -> TF.Attr s P.Text)
+             (\s a -> s { _permissions = a } :: SpaceMemberResource s)
+
+instance P.HasSpace (SpaceMemberResource s) (TF.Attr s P.Text) where
+    space =
+        lens (_space :: SpaceMemberResource s -> TF.Attr s P.Text)
+             (\s a -> s { _space = a } :: SpaceMemberResource s)
+
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (SpaceMemberResource s)) (TF.Attr s P.Text) where
+    computedEmail =
+        (_email :: SpaceMemberResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (SpaceMemberResource s)) (TF.Attr s P.Text) where
+    computedPermissions =
+        (_permissions :: SpaceMemberResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSpace (TF.Ref s' (SpaceMemberResource s)) (TF.Attr s P.Text) where
+    computedSpace =
+        (_space :: SpaceMemberResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+spaceMemberResource :: TF.Resource P.Heroku (SpaceMemberResource s)
+spaceMemberResource =
+    TF.newResource "heroku_space_member" $
+        SpaceMemberResource {
+              _email = TF.Nil
+            , _permissions = TF.Nil
+            , _space = TF.Nil
+            }
+
 {- | The @heroku_space_peering_connection_accepter@ Heroku resource.
 
 Provides a resource for accepting VPC peering requests to Heroku Private
@@ -918,8 +1046,8 @@ data SpacePeeringConnectionAccepterResource s = SpacePeeringConnectionAccepterRe
     {- ^ (Required) The peering connection request ID. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SpacePeeringConnectionAccepterResource s) where
-    toHCL SpacePeeringConnectionAccepterResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SpacePeeringConnectionAccepterResource s) where
+    toObject SpacePeeringConnectionAccepterResource{..} = catMaybes
         [ TF.assign "space" <$> TF.attribute _space
         , TF.assign "vpc_peering_connection_id" <$> TF.attribute _vpc_peering_connection_id
         ]
@@ -974,8 +1102,8 @@ data SpaceResource s = SpaceResource {
     {- ^ (Optional) Whether or not the private space should be <https://devcenter.heroku.com/articles/private-spaces#shield-private-spaces> . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SpaceResource s) where
-    toHCL SpaceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SpaceResource s) where
+    toObject SpaceResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "organization" <$> TF.attribute _organization
         , TF.assign "region" <$> TF.attribute _region
@@ -1049,8 +1177,8 @@ data TeamCollaboratorResource s = TeamCollaboratorResource {
     {- ^ (Required) List of permissions that will be granted to the team collaborator. The order in which individual permissions are set here does not matter. Please <https://devcenter.heroku.com/articles/app-permissions> for more information on available permissions. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TeamCollaboratorResource s) where
-    toHCL TeamCollaboratorResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TeamCollaboratorResource s) where
+    toObject TeamCollaboratorResource{..} = catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "email" <$> TF.attribute _email
         , TF.assign "permissions" <$> TF.attribute _permissions

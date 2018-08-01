@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -26,6 +20,7 @@ module Terrafomo.NewRelic.Provider
     , providerApiKey
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -55,14 +50,16 @@ data NewRelic = NewRelic {
 
 instance Hashable NewRelic
 
-instance TF.ToHCL NewRelic where
-    toHCL x =
+instance TF.IsSection NewRelic where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (NewRelic))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "api_key" <$> _api_key x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "api_key" <$> _api_key x
+                  ])
 
 instance TF.IsProvider NewRelic where
     type ProviderType NewRelic = "newrelic"

@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -29,6 +23,7 @@ module Terrafomo.Chef.Provider
     , providerServerUrl
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -65,17 +60,19 @@ data Chef = Chef {
 
 instance Hashable Chef
 
-instance TF.ToHCL Chef where
-    toHCL x =
+instance TF.IsSection Chef where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Chef))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "allow_unverified_ssl" <$> _allow_unverified_ssl x
-            , TF.assign "client_name" <$> _client_name x
-            , TF.assign "key_material" <$> _key_material x
-            , TF.assign "server_url" <$> _server_url x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "allow_unverified_ssl" <$> _allow_unverified_ssl x
+                  , TF.assign "client_name" <$> _client_name x
+                  , TF.assign "key_material" <$> _key_material x
+                  , TF.assign "server_url" <$> _server_url x
+                  ])
 
 instance TF.IsProvider Chef where
     type ProviderType Chef = "chef"

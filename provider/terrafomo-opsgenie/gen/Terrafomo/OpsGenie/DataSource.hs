@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -73,8 +66,8 @@ data UserData s = UserData {
     {- ^ (Required) The username (email) to use to find a user in OpsGenie. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserData s) where
-    toHCL UserData{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserData s) where
+    toObject UserData{..} = catMaybes
         [ TF.assign "username" <$> TF.attribute _username
         ]
 

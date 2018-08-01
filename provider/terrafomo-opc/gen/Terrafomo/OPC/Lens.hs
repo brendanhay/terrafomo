@@ -1,14 +1,7 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RankNTypes             #-}
-{-# LANGUAGE UndecidableInstances   #-}
-
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 -- |
 -- Module      : Terrafomo.OPC.Lens
@@ -30,8 +23,12 @@ module Terrafomo.OPC.Lens
     , HasApplication (..)
     , HasAppliedAcls (..)
     , HasAttributes (..)
+    , HasBalancerProtocol (..)
     , HasBootOrder (..)
     , HasBootable (..)
+    , HasCertificateBody (..)
+    , HasCertificateChain (..)
+    , HasCertificates (..)
     , HasCollocated (..)
     , HasContainer (..)
     , HasDefault' (..)
@@ -48,6 +45,7 @@ module Terrafomo.OPC.Lens
     , HasExposedHeaders (..)
     , HasFile (..)
     , HasFlowDirection (..)
+    , HasHealthCheck (..)
     , HasHostname (..)
     , HasIcmpcode (..)
     , HasIcmptype (..)
@@ -63,10 +61,12 @@ module Terrafomo.OPC.Lens
     , HasIpAddressPrefix (..)
     , HasIpAddressReservation (..)
     , HasIpEntries (..)
+    , HasIpNetwork (..)
     , HasIpNetworkExchange (..)
     , HasIpProtocol (..)
     , HasKey (..)
     , HasLabel (..)
+    , HasLoadBalancer (..)
     , HasMachineImages (..)
     , HasMaxAge (..)
     , HasMetadata (..)
@@ -74,21 +74,33 @@ module Terrafomo.OPC.Lens
     , HasNetworkingInfo (..)
     , HasNextHopVnicSet (..)
     , HasOutputCidrPolicy (..)
+    , HasParentLoadBalancer (..)
     , HasParentPool (..)
     , HasParentVolumeBootable (..)
+    , HasPathPrefixes (..)
     , HasPermanent (..)
+    , HasPermittedClients (..)
+    , HasPermittedMethods (..)
+    , HasPolices (..)
     , HasPolicy (..)
+    , HasPort (..)
     , HasPrefixes (..)
     , HasPrimaryKey (..)
+    , HasPrivateKey (..)
     , HasProtocol (..)
     , HasPublicNaptEnabled (..)
     , HasQuotaBytes (..)
     , HasQuotaCount (..)
     , HasReadAcls (..)
+    , HasRegion (..)
     , HasReverseDns (..)
+    , HasScheme (..)
     , HasSeclist (..)
     , HasSecondaryKey (..)
     , HasSecurityProtocols (..)
+    , HasServerPool (..)
+    , HasServerProtocol (..)
+    , HasServers (..)
     , HasShape (..)
     , HasSize (..)
     , HasSnapshot (..)
@@ -103,10 +115,13 @@ module Terrafomo.OPC.Lens
     , HasStorageType (..)
     , HasStorageVolume (..)
     , HasTags (..)
+    , HasType' (..)
     , HasVcable (..)
     , HasVersion (..)
+    , HasVirtualHosts (..)
     , HasVirtualNics (..)
     , HasVnic (..)
+    , HasVnicSet (..)
     , HasVolumeName (..)
     , HasWriteAcls (..)
 
@@ -120,8 +135,12 @@ module Terrafomo.OPC.Lens
     , HasComputedAppliedAcls (..)
     , HasComputedAttributes (..)
     , HasComputedAvailabilityDomain (..)
+    , HasComputedBalancerProtocol (..)
     , HasComputedBootOrder (..)
     , HasComputedBootable (..)
+    , HasComputedCertificateBody (..)
+    , HasComputedCertificateChain (..)
+    , HasComputedCertificates (..)
     , HasComputedCollocated (..)
     , HasComputedContainer (..)
     , HasComputedDefault' (..)
@@ -143,6 +162,7 @@ module Terrafomo.OPC.Lens
     , HasComputedFingerprint (..)
     , HasComputedFlowDirection (..)
     , HasComputedFqdn (..)
+    , HasComputedHealthCheck (..)
     , HasComputedHostname (..)
     , HasComputedHypervisor (..)
     , HasComputedIcmpcode (..)
@@ -169,6 +189,7 @@ module Terrafomo.OPC.Lens
     , HasComputedIsDefaultGateway (..)
     , HasComputedKey (..)
     , HasComputedLabel (..)
+    , HasComputedLoadBalancer (..)
     , HasComputedMacAddress (..)
     , HasComputedMachineImage (..)
     , HasComputedMachineImageName (..)
@@ -183,15 +204,22 @@ module Terrafomo.OPC.Lens
     , HasComputedNetworkingInfo (..)
     , HasComputedNextHopVnicSet (..)
     , HasComputedOutputCidrPolicy (..)
+    , HasComputedParentLoadBalancer (..)
     , HasComputedParentPool (..)
     , HasComputedParentVolumeBootable (..)
+    , HasComputedPathPrefixes (..)
     , HasComputedPermanent (..)
+    , HasComputedPermittedClients (..)
+    , HasComputedPermittedMethods (..)
     , HasComputedPlacementRequirements (..)
     , HasComputedPlatform (..)
+    , HasComputedPolices (..)
     , HasComputedPolicy (..)
+    , HasComputedPort (..)
     , HasComputedPrefixes (..)
     , HasComputedPrimaryKey (..)
     , HasComputedPriority (..)
+    , HasComputedPrivateKey (..)
     , HasComputedProperty (..)
     , HasComputedProtocol (..)
     , HasComputedPublicNaptEnabled (..)
@@ -200,14 +228,19 @@ module Terrafomo.OPC.Lens
     , HasComputedQuotaReservation (..)
     , HasComputedReadAcls (..)
     , HasComputedReadonly (..)
+    , HasComputedRegion (..)
     , HasComputedRelationships (..)
     , HasComputedResolvers (..)
     , HasComputedReverseDns (..)
+    , HasComputedScheme (..)
     , HasComputedSearchDomains (..)
     , HasComputedSecLists (..)
     , HasComputedSeclist (..)
     , HasComputedSecondaryKey (..)
     , HasComputedSecurityProtocols (..)
+    , HasComputedServerPool (..)
+    , HasComputedServerProtocol (..)
+    , HasComputedServers (..)
     , HasComputedShape (..)
     , HasComputedSharedNetwork (..)
     , HasComputedSite (..)
@@ -233,15 +266,18 @@ module Terrafomo.OPC.Lens
     , HasComputedStorageVolume (..)
     , HasComputedTags (..)
     , HasComputedTransitFlag (..)
+    , HasComputedType' (..)
     , HasComputedUri (..)
     , HasComputedUsed (..)
     , HasComputedVcable (..)
     , HasComputedVcableId (..)
     , HasComputedVersion (..)
     , HasComputedVirtio (..)
+    , HasComputedVirtualHosts (..)
     , HasComputedVirtualNics (..)
     , HasComputedVncAddress (..)
     , HasComputedVnic (..)
+    , HasComputedVnicSet (..)
     , HasComputedVnicSets (..)
     , HasComputedVolumeName (..)
     , HasComputedWriteAcls (..)
@@ -251,7 +287,6 @@ import GHC.Base ((.))
 
 import Lens.Micro (Lens')
 
-import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasAccount a b | a -> b where
@@ -302,6 +337,12 @@ class HasAttributes a b | a -> b where
 instance HasAttributes a b => HasAttributes (TF.Schema l p a) b where
     attributes = TF.configuration . attributes
 
+class HasBalancerProtocol a b | a -> b where
+    balancerProtocol :: Lens' a b
+
+instance HasBalancerProtocol a b => HasBalancerProtocol (TF.Schema l p a) b where
+    balancerProtocol = TF.configuration . balancerProtocol
+
 class HasBootOrder a b | a -> b where
     bootOrder :: Lens' a b
 
@@ -313,6 +354,24 @@ class HasBootable a b | a -> b where
 
 instance HasBootable a b => HasBootable (TF.Schema l p a) b where
     bootable = TF.configuration . bootable
+
+class HasCertificateBody a b | a -> b where
+    certificateBody :: Lens' a b
+
+instance HasCertificateBody a b => HasCertificateBody (TF.Schema l p a) b where
+    certificateBody = TF.configuration . certificateBody
+
+class HasCertificateChain a b | a -> b where
+    certificateChain :: Lens' a b
+
+instance HasCertificateChain a b => HasCertificateChain (TF.Schema l p a) b where
+    certificateChain = TF.configuration . certificateChain
+
+class HasCertificates a b | a -> b where
+    certificates :: Lens' a b
+
+instance HasCertificates a b => HasCertificates (TF.Schema l p a) b where
+    certificates = TF.configuration . certificates
 
 class HasCollocated a b | a -> b where
     collocated :: Lens' a b
@@ -410,6 +469,12 @@ class HasFlowDirection a b | a -> b where
 instance HasFlowDirection a b => HasFlowDirection (TF.Schema l p a) b where
     flowDirection = TF.configuration . flowDirection
 
+class HasHealthCheck a b | a -> b where
+    healthCheck :: Lens' a b
+
+instance HasHealthCheck a b => HasHealthCheck (TF.Schema l p a) b where
+    healthCheck = TF.configuration . healthCheck
+
 class HasHostname a b | a -> b where
     hostname :: Lens' a b
 
@@ -500,6 +565,12 @@ class HasIpEntries a b | a -> b where
 instance HasIpEntries a b => HasIpEntries (TF.Schema l p a) b where
     ipEntries = TF.configuration . ipEntries
 
+class HasIpNetwork a b | a -> b where
+    ipNetwork :: Lens' a b
+
+instance HasIpNetwork a b => HasIpNetwork (TF.Schema l p a) b where
+    ipNetwork = TF.configuration . ipNetwork
+
 class HasIpNetworkExchange a b | a -> b where
     ipNetworkExchange :: Lens' a b
 
@@ -523,6 +594,12 @@ class HasLabel a b | a -> b where
 
 instance HasLabel a b => HasLabel (TF.Schema l p a) b where
     label = TF.configuration . label
+
+class HasLoadBalancer a b | a -> b where
+    loadBalancer :: Lens' a b
+
+instance HasLoadBalancer a b => HasLoadBalancer (TF.Schema l p a) b where
+    loadBalancer = TF.configuration . loadBalancer
 
 class HasMachineImages a b | a -> b where
     machineImages :: Lens' a b
@@ -566,6 +643,12 @@ class HasOutputCidrPolicy a b | a -> b where
 instance HasOutputCidrPolicy a b => HasOutputCidrPolicy (TF.Schema l p a) b where
     outputCidrPolicy = TF.configuration . outputCidrPolicy
 
+class HasParentLoadBalancer a b | a -> b where
+    parentLoadBalancer :: Lens' a b
+
+instance HasParentLoadBalancer a b => HasParentLoadBalancer (TF.Schema l p a) b where
+    parentLoadBalancer = TF.configuration . parentLoadBalancer
+
 class HasParentPool a b | a -> b where
     parentPool :: Lens' a b
 
@@ -578,17 +661,47 @@ class HasParentVolumeBootable a b | a -> b where
 instance HasParentVolumeBootable a b => HasParentVolumeBootable (TF.Schema l p a) b where
     parentVolumeBootable = TF.configuration . parentVolumeBootable
 
+class HasPathPrefixes a b | a -> b where
+    pathPrefixes :: Lens' a b
+
+instance HasPathPrefixes a b => HasPathPrefixes (TF.Schema l p a) b where
+    pathPrefixes = TF.configuration . pathPrefixes
+
 class HasPermanent a b | a -> b where
     permanent :: Lens' a b
 
 instance HasPermanent a b => HasPermanent (TF.Schema l p a) b where
     permanent = TF.configuration . permanent
 
+class HasPermittedClients a b | a -> b where
+    permittedClients :: Lens' a b
+
+instance HasPermittedClients a b => HasPermittedClients (TF.Schema l p a) b where
+    permittedClients = TF.configuration . permittedClients
+
+class HasPermittedMethods a b | a -> b where
+    permittedMethods :: Lens' a b
+
+instance HasPermittedMethods a b => HasPermittedMethods (TF.Schema l p a) b where
+    permittedMethods = TF.configuration . permittedMethods
+
+class HasPolices a b | a -> b where
+    polices :: Lens' a b
+
+instance HasPolices a b => HasPolices (TF.Schema l p a) b where
+    polices = TF.configuration . polices
+
 class HasPolicy a b | a -> b where
     policy :: Lens' a b
 
 instance HasPolicy a b => HasPolicy (TF.Schema l p a) b where
     policy = TF.configuration . policy
+
+class HasPort a b | a -> b where
+    port :: Lens' a b
+
+instance HasPort a b => HasPort (TF.Schema l p a) b where
+    port = TF.configuration . port
 
 class HasPrefixes a b | a -> b where
     prefixes :: Lens' a b
@@ -601,6 +714,12 @@ class HasPrimaryKey a b | a -> b where
 
 instance HasPrimaryKey a b => HasPrimaryKey (TF.Schema l p a) b where
     primaryKey = TF.configuration . primaryKey
+
+class HasPrivateKey a b | a -> b where
+    privateKey :: Lens' a b
+
+instance HasPrivateKey a b => HasPrivateKey (TF.Schema l p a) b where
+    privateKey = TF.configuration . privateKey
 
 class HasProtocol a b | a -> b where
     protocol :: Lens' a b
@@ -632,11 +751,23 @@ class HasReadAcls a b | a -> b where
 instance HasReadAcls a b => HasReadAcls (TF.Schema l p a) b where
     readAcls = TF.configuration . readAcls
 
+class HasRegion a b | a -> b where
+    region :: Lens' a b
+
+instance HasRegion a b => HasRegion (TF.Schema l p a) b where
+    region = TF.configuration . region
+
 class HasReverseDns a b | a -> b where
     reverseDns :: Lens' a b
 
 instance HasReverseDns a b => HasReverseDns (TF.Schema l p a) b where
     reverseDns = TF.configuration . reverseDns
+
+class HasScheme a b | a -> b where
+    scheme :: Lens' a b
+
+instance HasScheme a b => HasScheme (TF.Schema l p a) b where
+    scheme = TF.configuration . scheme
 
 class HasSeclist a b | a -> b where
     seclist :: Lens' a b
@@ -655,6 +786,24 @@ class HasSecurityProtocols a b | a -> b where
 
 instance HasSecurityProtocols a b => HasSecurityProtocols (TF.Schema l p a) b where
     securityProtocols = TF.configuration . securityProtocols
+
+class HasServerPool a b | a -> b where
+    serverPool :: Lens' a b
+
+instance HasServerPool a b => HasServerPool (TF.Schema l p a) b where
+    serverPool = TF.configuration . serverPool
+
+class HasServerProtocol a b | a -> b where
+    serverProtocol :: Lens' a b
+
+instance HasServerProtocol a b => HasServerProtocol (TF.Schema l p a) b where
+    serverProtocol = TF.configuration . serverProtocol
+
+class HasServers a b | a -> b where
+    servers :: Lens' a b
+
+instance HasServers a b => HasServers (TF.Schema l p a) b where
+    servers = TF.configuration . servers
 
 class HasShape a b | a -> b where
     shape :: Lens' a b
@@ -740,6 +889,12 @@ class HasTags a b | a -> b where
 instance HasTags a b => HasTags (TF.Schema l p a) b where
     tags = TF.configuration . tags
 
+class HasType' a b | a -> b where
+    type' :: Lens' a b
+
+instance HasType' a b => HasType' (TF.Schema l p a) b where
+    type' = TF.configuration . type'
+
 class HasVcable a b | a -> b where
     vcable :: Lens' a b
 
@@ -752,6 +907,12 @@ class HasVersion a b | a -> b where
 instance HasVersion a b => HasVersion (TF.Schema l p a) b where
     version = TF.configuration . version
 
+class HasVirtualHosts a b | a -> b where
+    virtualHosts :: Lens' a b
+
+instance HasVirtualHosts a b => HasVirtualHosts (TF.Schema l p a) b where
+    virtualHosts = TF.configuration . virtualHosts
+
 class HasVirtualNics a b | a -> b where
     virtualNics :: Lens' a b
 
@@ -763,6 +924,12 @@ class HasVnic a b | a -> b where
 
 instance HasVnic a b => HasVnic (TF.Schema l p a) b where
     vnic = TF.configuration . vnic
+
+class HasVnicSet a b | a -> b where
+    vnicSet :: Lens' a b
+
+instance HasVnicSet a b => HasVnicSet (TF.Schema l p a) b where
+    vnicSet = TF.configuration . vnicSet
 
 class HasVolumeName a b | a -> b where
     volumeName :: Lens' a b
@@ -803,11 +970,23 @@ class HasComputedAttributes a b | a -> b where
 class HasComputedAvailabilityDomain a b | a -> b where
     computedAvailabilityDomain :: a -> b
 
+class HasComputedBalancerProtocol a b | a -> b where
+    computedBalancerProtocol :: a -> b
+
 class HasComputedBootOrder a b | a -> b where
     computedBootOrder :: a -> b
 
 class HasComputedBootable a b | a -> b where
     computedBootable :: a -> b
+
+class HasComputedCertificateBody a b | a -> b where
+    computedCertificateBody :: a -> b
+
+class HasComputedCertificateChain a b | a -> b where
+    computedCertificateChain :: a -> b
+
+class HasComputedCertificates a b | a -> b where
+    computedCertificates :: a -> b
 
 class HasComputedCollocated a b | a -> b where
     computedCollocated :: a -> b
@@ -871,6 +1050,9 @@ class HasComputedFlowDirection a b | a -> b where
 
 class HasComputedFqdn a b | a -> b where
     computedFqdn :: a -> b
+
+class HasComputedHealthCheck a b | a -> b where
+    computedHealthCheck :: a -> b
 
 class HasComputedHostname a b | a -> b where
     computedHostname :: a -> b
@@ -950,6 +1132,9 @@ class HasComputedKey a b | a -> b where
 class HasComputedLabel a b | a -> b where
     computedLabel :: a -> b
 
+class HasComputedLoadBalancer a b | a -> b where
+    computedLoadBalancer :: a -> b
+
 class HasComputedMacAddress a b | a -> b where
     computedMacAddress :: a -> b
 
@@ -992,14 +1177,26 @@ class HasComputedNextHopVnicSet a b | a -> b where
 class HasComputedOutputCidrPolicy a b | a -> b where
     computedOutputCidrPolicy :: a -> b
 
+class HasComputedParentLoadBalancer a b | a -> b where
+    computedParentLoadBalancer :: a -> b
+
 class HasComputedParentPool a b | a -> b where
     computedParentPool :: a -> b
 
 class HasComputedParentVolumeBootable a b | a -> b where
     computedParentVolumeBootable :: a -> b
 
+class HasComputedPathPrefixes a b | a -> b where
+    computedPathPrefixes :: a -> b
+
 class HasComputedPermanent a b | a -> b where
     computedPermanent :: a -> b
+
+class HasComputedPermittedClients a b | a -> b where
+    computedPermittedClients :: a -> b
+
+class HasComputedPermittedMethods a b | a -> b where
+    computedPermittedMethods :: a -> b
 
 class HasComputedPlacementRequirements a b | a -> b where
     computedPlacementRequirements :: a -> b
@@ -1007,8 +1204,14 @@ class HasComputedPlacementRequirements a b | a -> b where
 class HasComputedPlatform a b | a -> b where
     computedPlatform :: a -> b
 
+class HasComputedPolices a b | a -> b where
+    computedPolices :: a -> b
+
 class HasComputedPolicy a b | a -> b where
     computedPolicy :: a -> b
+
+class HasComputedPort a b | a -> b where
+    computedPort :: a -> b
 
 class HasComputedPrefixes a b | a -> b where
     computedPrefixes :: a -> b
@@ -1018,6 +1221,9 @@ class HasComputedPrimaryKey a b | a -> b where
 
 class HasComputedPriority a b | a -> b where
     computedPriority :: a -> b
+
+class HasComputedPrivateKey a b | a -> b where
+    computedPrivateKey :: a -> b
 
 class HasComputedProperty a b | a -> b where
     computedProperty :: a -> b
@@ -1043,6 +1249,9 @@ class HasComputedReadAcls a b | a -> b where
 class HasComputedReadonly a b | a -> b where
     computedReadonly :: a -> b
 
+class HasComputedRegion a b | a -> b where
+    computedRegion :: a -> b
+
 class HasComputedRelationships a b | a -> b where
     computedRelationships :: a -> b
 
@@ -1051,6 +1260,9 @@ class HasComputedResolvers a b | a -> b where
 
 class HasComputedReverseDns a b | a -> b where
     computedReverseDns :: a -> b
+
+class HasComputedScheme a b | a -> b where
+    computedScheme :: a -> b
 
 class HasComputedSearchDomains a b | a -> b where
     computedSearchDomains :: a -> b
@@ -1066,6 +1278,15 @@ class HasComputedSecondaryKey a b | a -> b where
 
 class HasComputedSecurityProtocols a b | a -> b where
     computedSecurityProtocols :: a -> b
+
+class HasComputedServerPool a b | a -> b where
+    computedServerPool :: a -> b
+
+class HasComputedServerProtocol a b | a -> b where
+    computedServerProtocol :: a -> b
+
+class HasComputedServers a b | a -> b where
+    computedServers :: a -> b
 
 class HasComputedShape a b | a -> b where
     computedShape :: a -> b
@@ -1142,6 +1363,9 @@ class HasComputedTags a b | a -> b where
 class HasComputedTransitFlag a b | a -> b where
     computedTransitFlag :: a -> b
 
+class HasComputedType' a b | a -> b where
+    computedType' :: a -> b
+
 class HasComputedUri a b | a -> b where
     computedUri :: a -> b
 
@@ -1160,6 +1384,9 @@ class HasComputedVersion a b | a -> b where
 class HasComputedVirtio a b | a -> b where
     computedVirtio :: a -> b
 
+class HasComputedVirtualHosts a b | a -> b where
+    computedVirtualHosts :: a -> b
+
 class HasComputedVirtualNics a b | a -> b where
     computedVirtualNics :: a -> b
 
@@ -1168,6 +1395,9 @@ class HasComputedVncAddress a b | a -> b where
 
 class HasComputedVnic a b | a -> b where
     computedVnic :: a -> b
+
+class HasComputedVnicSet a b | a -> b where
+    computedVnicSet :: a -> b
 
 class HasComputedVnicSets a b | a -> b where
     computedVnicSets :: a -> b

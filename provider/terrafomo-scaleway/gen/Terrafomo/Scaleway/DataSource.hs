@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -30,6 +23,12 @@ module Terrafomo.Scaleway.DataSource
     , ImageData (..)
     , imageData
 
+    , SecurityGroupData (..)
+    , securityGroupData
+
+    , VolumeData (..)
+    , volumeData
+
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasArchitecture (..)
@@ -40,13 +39,18 @@ module Terrafomo.Scaleway.DataSource
     , P.HasComputedArchitecture (..)
     , P.HasComputedBootCmdArgs (..)
     , P.HasComputedCreationDate (..)
+    , P.HasComputedDescription (..)
     , P.HasComputedDtb (..)
+    , P.HasComputedEnableDefaultSecurity (..)
     , P.HasComputedInitrd (..)
     , P.HasComputedKernel (..)
     , P.HasComputedName (..)
     , P.HasComputedNameFilter (..)
     , P.HasComputedOrganization (..)
     , P.HasComputedPublic (..)
+    , P.HasComputedServer (..)
+    , P.HasComputedSizeInGb (..)
+    , P.HasComputedType' (..)
 
     -- * Re-exported Types
     , module P
@@ -89,8 +93,8 @@ data BootscriptData s = BootscriptData {
     {- ^ (Optional) Regexp to match Bootscript name by -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BootscriptData s) where
-    toHCL BootscriptData{..} = TF.inline $ catMaybes
+instance TF.IsObject (BootscriptData s) where
+    toObject BootscriptData{..} = catMaybes
         [ TF.assign "architecture" <$> TF.attribute _architecture
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_filter" <$> TF.attribute _name_filter
@@ -165,8 +169,8 @@ data ImageData s = ImageData {
     {- ^ (Optional) Regexp to match Image name by -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImageData s) where
-    toHCL ImageData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ImageData s) where
+    toObject ImageData{..} = catMaybes
         [ TF.assign "architecture" <$> TF.attribute _architecture
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_filter" <$> TF.attribute _name_filter
@@ -216,4 +220,81 @@ imageData =
               _architecture = TF.Nil
             , _name = TF.Nil
             , _name_filter = TF.Nil
+            }
+
+{- | The @scaleway_security_group@ Scaleway datasource.
+
+Gets information about a Security Group.
+-}
+data SecurityGroupData s = SecurityGroupData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) Exact name of desired Security Group -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (SecurityGroupData s) where
+    toObject SecurityGroupData{..} = catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (SecurityGroupData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: SecurityGroupData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SecurityGroupData s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedEnableDefaultSecurity (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
+    computedEnableDefaultSecurity x = TF.compute (TF.refKey x) "enable_default_security"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: SecurityGroupData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+securityGroupData :: TF.DataSource P.Scaleway (SecurityGroupData s)
+securityGroupData =
+    TF.newDataSource "scaleway_security_group" $
+        SecurityGroupData {
+              _name = TF.Nil
+            }
+
+{- | The @scaleway_volume@ Scaleway datasource.
+
+Gets information about a Volume.
+-}
+data VolumeData s = VolumeData {
+      _name :: !(TF.Attr s P.Text)
+    {- ^ (Required) Exact name of the Volume. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (VolumeData s) where
+    toObject VolumeData{..} = catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (VolumeData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: VolumeData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: VolumeData s)
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: VolumeData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedServer (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text) where
+    computedServer x = TF.compute (TF.refKey x) "server"
+
+instance s ~ s' => P.HasComputedSizeInGb (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text) where
+    computedSizeInGb x = TF.compute (TF.refKey x) "size_in_gb"
+
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
+
+volumeData :: TF.DataSource P.Scaleway (VolumeData s)
+volumeData =
+    TF.newDataSource "scaleway_volume" $
+        VolumeData {
+              _name = TF.Nil
             }

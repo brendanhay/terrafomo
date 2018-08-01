@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -101,8 +94,8 @@ data AccountData s = AccountData {
     {- ^ (Optional) The Circonus ID of a given account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AccountData s) where
-    toHCL AccountData{..} = TF.inline $ catMaybes
+instance TF.IsObject (AccountData s) where
+    toObject AccountData{..} = catMaybes
         [ TF.assign "current" <$> TF.attribute _current
         , TF.assign "id" <$> TF.attribute _id
         ]
@@ -200,8 +193,8 @@ data CollectorData s = CollectorData {
     {- ^ (Optional) The Circonus ID of a given collector. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CollectorData s) where
-    toHCL CollectorData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CollectorData s) where
+    toObject CollectorData{..} = catMaybes
         [ TF.assign "id" <$> TF.attribute _id
         ]
 

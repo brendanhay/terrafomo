@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -114,8 +107,8 @@ data CollectorGroupResource s = CollectorGroupResource {
     {- ^ (Required) Name of collector group -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CollectorGroupResource s) where
-    toHCL CollectorGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CollectorGroupResource s) where
+    toObject CollectorGroupResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -175,8 +168,8 @@ data CollectorResource s = CollectorResource {
     {- ^ (Optional) Whether alert clear notifications are suppressed for the Collector -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CollectorResource s) where
-    toHCL CollectorResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CollectorResource s) where
+    toObject CollectorResource{..} = catMaybes
         [ TF.assign "backup_collector_id" <$> TF.attribute _backup_collector_id
         , TF.assign "collector_group_id" <$> TF.attribute _collector_group_id
         , TF.assign "description" <$> TF.attribute _description
@@ -301,8 +294,8 @@ data DeviceGroupResource s = DeviceGroupResource {
     {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DeviceGroupResource s) where
-    toHCL DeviceGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DeviceGroupResource s) where
+    toObject DeviceGroupResource{..} = catMaybes
         [ TF.assign "applies_to" <$> TF.attribute _applies_to
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "disable_alerting" <$> TF.attribute _disable_alerting
@@ -403,8 +396,8 @@ data DeviceResource s = DeviceResource {
     {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DeviceResource s) where
-    toHCL DeviceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DeviceResource s) where
+    toObject DeviceResource{..} = catMaybes
         [ TF.assign "collector" <$> TF.attribute _collector
         , TF.assign "disable_alerting" <$> TF.attribute _disable_alerting
         , TF.assign "display_name" <$> TF.attribute _display_name

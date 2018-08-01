@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -85,8 +78,8 @@ data PrecreatedIpBlockData s = PrecreatedIpBlockData {
     {- ^ (Required) Whether to look for public or private block. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PrecreatedIpBlockData s) where
-    toHCL PrecreatedIpBlockData{..} = TF.inline $ catMaybes
+instance TF.IsObject (PrecreatedIpBlockData s) where
+    toObject PrecreatedIpBlockData{..} = catMaybes
         [ TF.assign "address_family" <$> TF.attribute _address_family
         , TF.assign "facility" <$> TF.attribute _facility
         , TF.assign "project_id" <$> TF.attribute _project_id

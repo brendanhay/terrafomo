@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -64,6 +57,7 @@ module Terrafomo.DigitalOcean.Resource
     , P.HasDropletId (..)
     , P.HasDropletIds (..)
     , P.HasDropletTag (..)
+    , P.HasFilesystemType (..)
     , P.HasFlags (..)
     , P.HasForwardingRule (..)
     , P.HasHealthcheck (..)
@@ -106,6 +100,7 @@ module Terrafomo.DigitalOcean.Resource
     , P.HasComputedDropletId (..)
     , P.HasComputedDropletIds (..)
     , P.HasComputedDropletTag (..)
+    , P.HasComputedFilesystemType (..)
     , P.HasComputedFingerprint (..)
     , P.HasComputedFlags (..)
     , P.HasComputedForwardingRule (..)
@@ -200,8 +195,8 @@ data CertificateResource s = CertificateResource {
     {- ^ (Required) The contents of a PEM-formatted private-key corresponding to the SSL certificate. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CertificateResource s) where
-    toHCL CertificateResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CertificateResource s) where
+    toObject CertificateResource{..} = catMaybes
         [ TF.assign "certificate_chain" <$> TF.attribute _certificate_chain
         , TF.assign "leaf_certificate" <$> TF.attribute _leaf_certificate
         , TF.assign "name" <$> TF.attribute _name
@@ -276,8 +271,8 @@ data DomainResource s = DomainResource {
     {- ^ (Required) The name of the domain -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DomainResource s) where
-    toHCL DomainResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DomainResource s) where
+    toObject DomainResource{..} = catMaybes
         [ TF.assign "ip_address" <$> TF.attribute _ip_address
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -348,8 +343,8 @@ data DropletResource s = DropletResource {
     {- ^ (Optional) - A list of the IDs of each </docs/providers/do/r/volume.html> to be attached to the Droplet. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DropletResource s) where
-    toHCL DropletResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DropletResource s) where
+    toObject DropletResource{..} = catMaybes
         [ TF.assign "backups" <$> TF.attribute _backups
         , TF.assign "image" <$> TF.attribute _image
         , TF.assign "ipv6" <$> TF.attribute _ipv6
@@ -549,8 +544,8 @@ data FirewallResource s = FirewallResource {
     {- ^ (Optional) - The names of the Tags assigned to the Firewall. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FirewallResource s) where
-    toHCL FirewallResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FirewallResource s) where
+    toObject FirewallResource{..} = catMaybes
         [ TF.assign "droplet_ids" <$> TF.attribute _droplet_ids
         , TF.assign "inbound_rule" <$> TF.attribute _inbound_rule
         , TF.assign "name" <$> TF.attribute _name
@@ -643,8 +638,8 @@ data FloatingIpResource s = FloatingIpResource {
     {- ^ (Required) The region that the Floating IP is reserved to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FloatingIpResource s) where
-    toHCL FloatingIpResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FloatingIpResource s) where
+    toObject FloatingIpResource{..} = catMaybes
         [ TF.assign "droplet_id" <$> TF.attribute _droplet_id
         , TF.assign "region" <$> TF.attribute _region
         ]
@@ -706,8 +701,8 @@ data LoadbalancerResource s = LoadbalancerResource {
     {- ^ (Optional) A @sticky_sessions@ block to be assigned to the Load Balancer. The @sticky_sessions@ block is documented below. Only 1 sticky_sessions block is allowed. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoadbalancerResource s) where
-    toHCL LoadbalancerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoadbalancerResource s) where
+    toObject LoadbalancerResource{..} = catMaybes
         [ TF.assign "algorithm" <$> TF.attribute _algorithm
         , TF.assign "droplet_ids" <$> TF.attribute _droplet_ids
         , TF.assign "droplet_tag" <$> TF.attribute _droplet_tag
@@ -857,8 +852,8 @@ data RecordResource s = RecordResource {
     {- ^ (Optional) The weight of the record, for SRV records. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RecordResource s) where
-    toHCL RecordResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RecordResource s) where
+    toObject RecordResource{..} = catMaybes
         [ TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "flags" <$> TF.attribute _flags
         , TF.assign "name" <$> TF.attribute _name
@@ -1006,8 +1001,8 @@ data SshKeyResource s = SshKeyResource {
     {- ^ (Required) The public key. If this is a file, it can be read using the file interpolation function -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SshKeyResource s) where
-    toHCL SshKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SshKeyResource s) where
+    toObject SshKeyResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "public_key" <$> TF.attribute _public_key
         ]
@@ -1054,8 +1049,8 @@ data TagResource s = TagResource {
     {- ^ (Required) The name of the tag -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TagResource s) where
-    toHCL TagResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TagResource s) where
+    toObject TagResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -1083,22 +1078,25 @@ Provides a DigitalOcean Block Storage volume which can be attached to a
 Droplet in order to provide expanded storage.
 -}
 data VolumeResource s = VolumeResource {
-      _description :: !(TF.Attr s P.Text)
+      _description     :: !(TF.Attr s P.Text)
     {- ^ (Optional) A free-form text field up to a limit of 1024 bytes to describe a block storage volume. -}
-    , _droplet_ids :: !(TF.Attr s P.Text)
+    , _droplet_ids     :: !(TF.Attr s P.Text)
     {- ^ - (Computed) A list of associated droplet ids -}
-    , _name        :: !(TF.Attr s P.Text)
+    , _filesystem_type :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Filesystem type ( @xfs@ or @ext4@ ) for the block storage volume. -}
+    , _name            :: !(TF.Attr s P.Text)
     {- ^ (Required) A name for the block storage volume. Must be lowercase and be composed only of numbers, letters and "-", up to a limit of 64 characters. -}
-    , _region      :: !(TF.Attr s P.Text)
+    , _region          :: !(TF.Attr s P.Text)
     {- ^ (Required) The region that the block storage volume will be created in. -}
-    , _size        :: !(TF.Attr s P.Text)
+    , _size            :: !(TF.Attr s P.Text)
     {- ^ (Required) The size of the block storage volume in GiB. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VolumeResource s) where
-    toHCL VolumeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VolumeResource s) where
+    toObject VolumeResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "droplet_ids" <$> TF.attribute _droplet_ids
+        , TF.assign "filesystem_type" <$> TF.attribute _filesystem_type
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "size" <$> TF.attribute _size
@@ -1113,6 +1111,11 @@ instance P.HasDropletIds (VolumeResource s) (TF.Attr s P.Text) where
     dropletIds =
         lens (_droplet_ids :: VolumeResource s -> TF.Attr s P.Text)
              (\s a -> s { _droplet_ids = a } :: VolumeResource s)
+
+instance P.HasFilesystemType (VolumeResource s) (TF.Attr s P.Text) where
+    filesystemType =
+        lens (_filesystem_type :: VolumeResource s -> TF.Attr s P.Text)
+             (\s a -> s { _filesystem_type = a } :: VolumeResource s)
 
 instance P.HasName (VolumeResource s) (TF.Attr s P.Text) where
     name =
@@ -1139,6 +1142,11 @@ instance s ~ s' => P.HasComputedDropletIds (TF.Ref s' (VolumeResource s)) (TF.At
         (_droplet_ids :: VolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedFilesystemType (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
+    computedFilesystemType =
+        (_filesystem_type :: VolumeResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -1163,6 +1171,7 @@ volumeResource =
         VolumeResource {
               _description = TF.Nil
             , _droplet_ids = TF.Nil
+            , _filesystem_type = TF.Nil
             , _name = TF.Nil
             , _region = TF.Nil
             , _size = TF.Nil

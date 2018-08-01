@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -97,8 +90,8 @@ data FileData s = FileData {
     {- ^ (Required) The type of archive to generate. NOTE: @zip@ is supported. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FileData s) where
-    toHCL FileData{..} = TF.inline $ catMaybes
+instance TF.IsObject (FileData s) where
+    toObject FileData{..} = catMaybes
         [ TF.assign "output_path" <$> TF.attribute _output_path
         , TF.assign "source" <$> TF.attribute _source
         , TF.assign "source_content" <$> TF.attribute _source_content

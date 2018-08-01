@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -239,8 +232,8 @@ data DistroResource s = DistroResource {
     {- ^ (Optional) File mappings for built-in config management. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DistroResource s) where
-    toHCL DistroResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DistroResource s) where
+    toObject DistroResource{..} = catMaybes
         [ TF.assign "arch" <$> TF.attribute _arch
         , TF.assign "boot_files" <$> TF.attribute _boot_files
         , TF.assign "breed" <$> TF.attribute _breed
@@ -452,8 +445,8 @@ data KickstartFileResource s = KickstartFileResource {
     {- ^ (Required) The name of the kickstart file. This must be the full path, including @/var/lib/cobbler/kickstarts@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KickstartFileResource s) where
-    toHCL KickstartFileResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (KickstartFileResource s) where
+    toObject KickstartFileResource{..} = catMaybes
         [ TF.assign "body" <$> TF.attribute _body
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -557,8 +550,8 @@ data ProfileResource s = ProfileResource {
     {- ^ (Optional) The type of virtual machine. Valid options are: xenpv, xenfv, qemu, kvm, vmware, openvz. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProfileResource s) where
-    toHCL ProfileResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProfileResource s) where
+    toObject ProfileResource{..} = catMaybes
         [ TF.assign "boot_files" <$> TF.attribute _boot_files
         , TF.assign "comment" <$> TF.attribute _comment
         , TF.assign "distro" <$> TF.attribute _distro
@@ -986,8 +979,8 @@ data RepoResource s = RepoResource {
     {- ^ (Optional) List of specific RPMs to mirror. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RepoResource s) where
-    toHCL RepoResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RepoResource s) where
+    toObject RepoResource{..} = catMaybes
         [ TF.assign "apt_components" <$> TF.attribute _apt_components
         , TF.assign "apt_dists" <$> TF.attribute _apt_dists
         , TF.assign "arch" <$> TF.attribute _arch
@@ -1175,8 +1168,8 @@ data SnippetResource s = SnippetResource {
     {- ^ (Required) The name of the snippet. This must be the full path, including @/var/lib/cobbler/snippets@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SnippetResource s) where
-    toHCL SnippetResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SnippetResource s) where
+    toObject SnippetResource{..} = catMaybes
         [ TF.assign "body" <$> TF.attribute _body
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -1302,8 +1295,8 @@ data SystemResource s = SystemResource {
     {- ^ (Optional) Virtualization technology to use: xenpv, xenfv, qemu, kvm, vmware, openvz. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SystemResource s) where
-    toHCL SystemResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SystemResource s) where
+    toObject SystemResource{..} = catMaybes
         [ TF.assign "boot_files" <$> TF.attribute _boot_files
         , TF.assign "comment" <$> TF.attribute _comment
         , TF.assign "enable_gpxe" <$> TF.attribute _enable_gpxe

@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -26,6 +20,7 @@ module Terrafomo.Packet.Provider
     , providerAuthToken
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -56,14 +51,16 @@ data Packet = Packet {
 
 instance Hashable Packet
 
-instance TF.ToHCL Packet where
-    toHCL x =
+instance TF.IsSection Packet where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Packet))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "auth_token" <$> _auth_token x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "auth_token" <$> _auth_token x
+                  ])
 
 instance TF.IsProvider Packet where
     type ProviderType Packet = "packet"

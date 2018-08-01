@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -158,8 +151,8 @@ data IpResource s = IpResource {
     {- ^ (Optional) ID of server to associate IP with -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpResource s) where
-    toHCL IpResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IpResource s) where
+    toObject IpResource{..} = catMaybes
         [ TF.assign "reverse" <$> TF.attribute _reverse
         , TF.assign "server" <$> TF.attribute _server
         ]
@@ -209,8 +202,8 @@ data SecurityGroupResource s = SecurityGroupResource {
     {- ^ (Required) name of security group -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecurityGroupResource s) where
-    toHCL SecurityGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecurityGroupResource s) where
+    toObject SecurityGroupResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "enable_default_security" <$> TF.attribute _enable_default_security
         , TF.assign "name" <$> TF.attribute _name
@@ -279,8 +272,8 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource {
     {- ^ (Required) the security group which should be associated with this rule -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecurityGroupRuleResource s) where
-    toHCL SecurityGroupRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecurityGroupRuleResource s) where
+    toObject SecurityGroupRuleResource{..} = catMaybes
         [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "direction" <$> TF.attribute _direction
         , TF.assign "ip_range" <$> TF.attribute _ip_range
@@ -401,8 +394,8 @@ data ServerResource s = ServerResource {
     {- ^ (Optional) attach additional volumes to your instance (see below) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServerResource s) where
-    toHCL ServerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServerResource s) where
+    toObject ServerResource{..} = catMaybes
         [ TF.assign "boot_type" <$> TF.attribute _boot_type
         , TF.assign "bootscript" <$> TF.attribute _bootscript
         , TF.assign "dynamic_ip_required" <$> TF.attribute _dynamic_ip_required
@@ -594,8 +587,8 @@ data SshKeyResource s = SshKeyResource {
     {- ^ (Required) public key of the SSH key to be added -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SshKeyResource s) where
-    toHCL SshKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SshKeyResource s) where
+    toObject SshKeyResource{..} = catMaybes
         [ TF.assign "key" <$> TF.attribute _key
         ]
 
@@ -635,8 +628,8 @@ data TokenResource s = TokenResource {
     {- ^ (Optional) Scaleway account password. Required for cross-account token management -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TokenResource s) where
-    toHCL TokenResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TokenResource s) where
+    toObject TokenResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "email" <$> TF.attribute _email
         , TF.assign "expires" <$> TF.attribute _expires
@@ -713,8 +706,8 @@ data UserDataResource s = UserDataResource {
     {- ^ (Required) The value of the user data object -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserDataResource s) where
-    toHCL UserDataResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserDataResource s) where
+    toObject UserDataResource{..} = catMaybes
         [ TF.assign "key" <$> TF.attribute _key
         , TF.assign "server" <$> TF.attribute _server
         , TF.assign "value" <$> TF.attribute _value
@@ -761,7 +754,7 @@ userDataResource =
 
 {- | The @scaleway_volume_attachment@ Scaleway resource.
 
-This allows volumes to be attached to servers. Warning: Attaching volumes
+This allows volumes to be attached to servers. ~> Warning: Attaching volumes
 requires the servers to be powered off. This will lead to downtime if the
 server is already in use.
 -}
@@ -772,8 +765,8 @@ data VolumeAttachmentResource s = VolumeAttachmentResource {
     {- ^ (Required) id of the volume to be attached -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VolumeAttachmentResource s) where
-    toHCL VolumeAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VolumeAttachmentResource s) where
+    toObject VolumeAttachmentResource{..} = catMaybes
         [ TF.assign "server" <$> TF.attribute _server
         , TF.assign "volume" <$> TF.attribute _volume
         ]
@@ -818,18 +811,15 @@ For additional details please refer to
 data VolumeResource s = VolumeResource {
       _name       :: !(TF.Attr s P.Text)
     {- ^ (Required) name of volume -}
-    , _server     :: !(TF.Attr s P.Text)
-    {- ^ - (Read Only) the @scaleway_server@ instance which has this volume mounted right now -}
     , _size_in_gb :: !(TF.Attr s P.Text)
     {- ^ (Required) size of the volume in GB -}
     , _type'      :: !(TF.Attr s P.Text)
     {- ^ (Required) type of volume -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VolumeResource s) where
-    toHCL VolumeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VolumeResource s) where
+    toObject VolumeResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "server" <$> TF.attribute _server
         , TF.assign "size_in_gb" <$> TF.attribute _size_in_gb
         , TF.assign "type" <$> TF.attribute _type'
         ]
@@ -838,11 +828,6 @@ instance P.HasName (VolumeResource s) (TF.Attr s P.Text) where
     name =
         lens (_name :: VolumeResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: VolumeResource s)
-
-instance P.HasServer (VolumeResource s) (TF.Attr s P.Text) where
-    server =
-        lens (_server :: VolumeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _server = a } :: VolumeResource s)
 
 instance P.HasSizeInGb (VolumeResource s) (TF.Attr s P.Text) where
     sizeInGb =
@@ -863,9 +848,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (VolumeResource s)) (TF.Attr s P
             . TF.refValue
 
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedServer =
-        (_server :: VolumeResource s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedServer x = TF.compute (TF.refKey x) "server"
 
 instance s ~ s' => P.HasComputedSizeInGb (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedSizeInGb =
@@ -882,7 +865,6 @@ volumeResource =
     TF.newResource "scaleway_volume" $
         VolumeResource {
               _name = TF.Nil
-            , _server = TF.Nil
             , _size_in_gb = TF.Nil
             , _type' = TF.Nil
             }

@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -295,8 +288,8 @@ data AffinityGroupResource s = AffinityGroupResource {
     {- ^ (Required) The affinity group type. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AffinityGroupResource s) where
-    toHCL AffinityGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AffinityGroupResource s) where
+    toObject AffinityGroupResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -380,8 +373,8 @@ data DiskResource s = DiskResource {
     {- ^ (Required) The name or ID of the zone where this disk volume will be available. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DiskResource s) where
-    toHCL DiskResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DiskResource s) where
+    toObject DiskResource{..} = catMaybes
         [ TF.assign "attach" <$> TF.attribute _attach
         , TF.assign "device_id" <$> TF.attribute _device_id
         , TF.assign "disk_offering" <$> TF.attribute _disk_offering
@@ -514,8 +507,8 @@ data EgressFirewallResource s = EgressFirewallResource {
     {- ^ (Optional) Can be specified multiple times. Each rule block supports fields documented below. If @managed = false@ at least one rule is required! -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EgressFirewallResource s) where
-    toHCL EgressFirewallResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (EgressFirewallResource s) where
+    toObject EgressFirewallResource{..} = catMaybes
         [ TF.assign "managed" <$> TF.attribute _managed
         , TF.assign "network_id" <$> TF.attribute _network_id
         , TF.assign "parallelism" <$> TF.attribute _parallelism
@@ -590,8 +583,8 @@ data FirewallResource s = FirewallResource {
     {- ^ (Optional) Can be specified multiple times. Each rule block supports fields documented below. If @managed = false@ at least one rule is required! -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FirewallResource s) where
-    toHCL FirewallResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FirewallResource s) where
+    toObject FirewallResource{..} = catMaybes
         [ TF.assign "ip_address_id" <$> TF.attribute _ip_address_id
         , TF.assign "managed" <$> TF.attribute _managed
         , TF.assign "parallelism" <$> TF.attribute _parallelism
@@ -693,8 +686,8 @@ data InstanceResource s = InstanceResource {
     {- ^ (Required) The name or ID of the zone where this instance will be created. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InstanceResource s) where
-    toHCL InstanceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (InstanceResource s) where
+    toObject InstanceResource{..} = catMaybes
         [ TF.assign "affinity_group_ids" <$> TF.attribute _affinity_group_ids
         , TF.assign "affinity_group_names" <$> TF.attribute _affinity_group_names
         , TF.assign "display_name" <$> TF.attribute _display_name
@@ -925,8 +918,8 @@ data IpaddressResource s = IpaddressResource {
     {- ^ (Optional) The name or ID of the zone for which an IP address should be acquired and associated. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpaddressResource s) where
-    toHCL IpaddressResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IpaddressResource s) where
+    toObject IpaddressResource{..} = catMaybes
         [ TF.assign "is_portable" <$> TF.attribute _is_portable
         , TF.assign "network_id" <$> TF.attribute _network_id
         , TF.assign "project" <$> TF.attribute _project
@@ -1028,8 +1021,8 @@ data LoadbalancerRuleResource s = LoadbalancerRuleResource {
     {- ^ (Required) The public port from where the network traffic will be load balanced from. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoadbalancerRuleResource s) where
-    toHCL LoadbalancerRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoadbalancerRuleResource s) where
+    toObject LoadbalancerRuleResource{..} = catMaybes
         [ TF.assign "algorithm" <$> TF.attribute _algorithm
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address_id" <$> TF.attribute _ip_address_id
@@ -1174,8 +1167,8 @@ data NetworkAclResource s = NetworkAclResource {
     {- ^ (Required) The ID of the VPC to create this ACL for. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkAclResource s) where
-    toHCL NetworkAclResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkAclResource s) where
+    toObject NetworkAclResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -1252,8 +1245,8 @@ data NetworkAclRuleResource s = NetworkAclRuleResource {
     {- ^ (Optional) Can be specified multiple times. Each rule block supports fields documented below. If @managed = false@ at least one rule is required! -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkAclRuleResource s) where
-    toHCL NetworkAclRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkAclRuleResource s) where
+    toObject NetworkAclRuleResource{..} = catMaybes
         [ TF.assign "acl_id" <$> TF.attribute _acl_id
         , TF.assign "managed" <$> TF.attribute _managed
         , TF.assign "parallelism" <$> TF.attribute _parallelism
@@ -1360,8 +1353,8 @@ data NetworkResource s = NetworkResource {
     {- ^ (Required) The name or ID of the zone where this network will be available. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkResource s) where
-    toHCL NetworkResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkResource s) where
+    toObject NetworkResource{..} = catMaybes
         [ TF.assign "acl_id" <$> TF.attribute _acl_id
         , TF.assign "cidr" <$> TF.attribute _cidr
         , TF.assign "display_text" <$> TF.attribute _display_text
@@ -1550,8 +1543,8 @@ data NicResource s = NicResource {
     {- ^ (Required) The ID of the virtual machine to which to attach the NIC. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NicResource s) where
-    toHCL NicResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NicResource s) where
+    toObject NicResource{..} = catMaybes
         [ TF.assign "ip_address" <$> TF.attribute _ip_address
         , TF.assign "network_id" <$> TF.attribute _network_id
         , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
@@ -1612,8 +1605,8 @@ data PortForwardResource s = PortForwardResource {
     {- ^ (Optional) The name or ID of the project to create this port forward in. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PortForwardResource s) where
-    toHCL PortForwardResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PortForwardResource s) where
+    toObject PortForwardResource{..} = catMaybes
         [ TF.assign "forward" <$> TF.attribute _forward
         , TF.assign "ip_address_id" <$> TF.attribute _ip_address_id
         , TF.assign "managed" <$> TF.attribute _managed
@@ -1700,8 +1693,8 @@ data PrivateGatewayResource s = PrivateGatewayResource {
     {- ^ (Required) The VPC ID in which to create this Private gateway. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PrivateGatewayResource s) where
-    toHCL PrivateGatewayResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PrivateGatewayResource s) where
+    toObject PrivateGatewayResource{..} = catMaybes
         [ TF.assign "acl_id" <$> TF.attribute _acl_id
         , TF.assign "gateway" <$> TF.attribute _gateway
         , TF.assign "ip_address" <$> TF.attribute _ip_address
@@ -1822,8 +1815,8 @@ data SecondaryIpaddressResource s = SecondaryIpaddressResource {
     {- ^ (Required) The ID of the virtual machine to which you want to attach the secondary IP address. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecondaryIpaddressResource s) where
-    toHCL SecondaryIpaddressResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecondaryIpaddressResource s) where
+    toObject SecondaryIpaddressResource{..} = catMaybes
         [ TF.assign "ip_address" <$> TF.attribute _ip_address
         , TF.assign "nic_id" <$> TF.attribute _nic_id
         , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
@@ -1882,8 +1875,8 @@ data SecurityGroupResource s = SecurityGroupResource {
     {- ^ (Optional) The name or ID of the project to create this security group in. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecurityGroupResource s) where
-    toHCL SecurityGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecurityGroupResource s) where
+    toObject SecurityGroupResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -1947,8 +1940,8 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource {
     {- ^ (Required) The security group ID for which to create the rules. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecurityGroupRuleResource s) where
-    toHCL SecurityGroupRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecurityGroupRuleResource s) where
+    toObject SecurityGroupRuleResource{..} = catMaybes
         [ TF.assign "parallelism" <$> TF.attribute _parallelism
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "rule" <$> TF.attribute _rule
@@ -2021,8 +2014,8 @@ data SshKeypairResource s = SshKeypairResource {
     {- ^ (Optional) The public key to register with CloudStack. If this is omitted, CloudStack will generate a new key pair. The key can be loaded from a file on disk using the </docs/configuration/interpolation.html#file_path_> . Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SshKeypairResource s) where
-    toHCL SshKeypairResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SshKeypairResource s) where
+    toObject SshKeypairResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "public_key" <$> TF.attribute _public_key
@@ -2091,8 +2084,8 @@ data StaticNatResource s = StaticNatResource {
     {- ^ (Optional) The virtual machine IP address to forward the static NAT traffic to (useful when the virtual machine has secondary NICs or IP addresses). Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StaticNatResource s) where
-    toHCL StaticNatResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (StaticNatResource s) where
+    toObject StaticNatResource{..} = catMaybes
         [ TF.assign "ip_address_id" <$> TF.attribute _ip_address_id
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
@@ -2161,8 +2154,8 @@ data StaticRouteResource s = StaticRouteResource {
     {- ^ (Required) The ID of the Private gateway. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StaticRouteResource s) where
-    toHCL StaticRouteResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (StaticRouteResource s) where
+    toObject StaticRouteResource{..} = catMaybes
         [ TF.assign "cidr" <$> TF.attribute _cidr
         , TF.assign "gateway_id" <$> TF.attribute _gateway_id
         ]
@@ -2233,8 +2226,8 @@ data TemplateResource s = TemplateResource {
     {- ^ (Required) The name or ID of the zone where this template will be created. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TemplateResource s) where
-    toHCL TemplateResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TemplateResource s) where
+    toObject TemplateResource{..} = catMaybes
         [ TF.assign "display_text" <$> TF.attribute _display_text
         , TF.assign "format" <$> TF.attribute _format
         , TF.assign "hypervisor" <$> TF.attribute _hypervisor
@@ -2426,8 +2419,8 @@ data VpcResource s = VpcResource {
     {- ^ (Required) The name or ID of the zone where this disk volume will be available. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpcResource s) where
-    toHCL VpcResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpcResource s) where
+    toObject VpcResource{..} = catMaybes
         [ TF.assign "cidr" <$> TF.attribute _cidr
         , TF.assign "display_text" <$> TF.attribute _display_text
         , TF.assign "name" <$> TF.attribute _name
@@ -2535,8 +2528,8 @@ data VpnConnectionResource s = VpnConnectionResource {
     {- ^ (Required) The VPN Gateway ID to connect. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpnConnectionResource s) where
-    toHCL VpnConnectionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpnConnectionResource s) where
+    toObject VpnConnectionResource{..} = catMaybes
         [ TF.assign "customer_gateway_id" <$> TF.attribute _customer_gateway_id
         , TF.assign "vpn_gateway_id" <$> TF.attribute _vpn_gateway_id
         ]
@@ -2599,8 +2592,8 @@ data VpnCustomerGatewayResource s = VpnCustomerGatewayResource {
     {- ^ (Optional) The name or ID of the project to create this VPN Customer Gateway in. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpnCustomerGatewayResource s) where
-    toHCL VpnCustomerGatewayResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpnCustomerGatewayResource s) where
+    toObject VpnCustomerGatewayResource{..} = catMaybes
         [ TF.assign "cidr" <$> TF.attribute _cidr
         , TF.assign "dpd" <$> TF.attribute _dpd
         , TF.assign "esp_lifetime" <$> TF.attribute _esp_lifetime
@@ -2735,8 +2728,8 @@ data VpnGatewayResource s = VpnGatewayResource {
     {- ^ (Required) The ID of the VPC for which to create the VPN Gateway. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpnGatewayResource s) where
-    toHCL VpnGatewayResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpnGatewayResource s) where
+    toObject VpnGatewayResource{..} = catMaybes
         [ TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 

@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -34,6 +28,7 @@ module Terrafomo.Cloudflare.Provider
     , providerUseOrgFromZone
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -80,22 +75,24 @@ data Cloudflare = Cloudflare {
 
 instance Hashable Cloudflare
 
-instance TF.ToHCL Cloudflare where
-    toHCL x =
+instance TF.IsSection Cloudflare where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Cloudflare))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "api_client_logging" <$> _api_client_logging x
-            , TF.assign "email" <$> _email x
-            , TF.assign "max_backoff" <$> _max_backoff x
-            , TF.assign "min_backoff" <$> _min_backoff x
-            , TF.assign "org_id" <$> _org_id x
-            , TF.assign "retries" <$> _retries x
-            , TF.assign "rps" <$> _rps x
-            , TF.assign "token" <$> _token x
-            , TF.assign "use_org_from_zone" <$> _use_org_from_zone x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "api_client_logging" <$> _api_client_logging x
+                  , TF.assign "email" <$> _email x
+                  , TF.assign "max_backoff" <$> _max_backoff x
+                  , TF.assign "min_backoff" <$> _min_backoff x
+                  , TF.assign "org_id" <$> _org_id x
+                  , TF.assign "retries" <$> _retries x
+                  , TF.assign "rps" <$> _rps x
+                  , TF.assign "token" <$> _token x
+                  , TF.assign "use_org_from_zone" <$> _use_org_from_zone x
+                  ])
 
 instance TF.IsProvider Cloudflare where
     type ProviderType Cloudflare = "cloudflare"

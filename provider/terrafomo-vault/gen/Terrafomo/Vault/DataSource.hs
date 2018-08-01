@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -96,8 +89,8 @@ data ApproleAuthBackendRoleData s = ApproleAuthBackendRoleData {
     {- ^ (Required) The name of the role to retrieve the Role ID for. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ApproleAuthBackendRoleData s) where
-    toHCL ApproleAuthBackendRoleData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ApproleAuthBackendRoleData s) where
+    toObject ApproleAuthBackendRoleData{..} = catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "role_name" <$> TF.attribute _role_name
         ]
@@ -151,8 +144,8 @@ data AwsAccessCredentialsData s = AwsAccessCredentialsData {
     {- ^ (Optional) The type of credentials to read. Defaults to @"creds"@ , which just returns an AWS Access Key ID and Secret Key. Can also be set to @"sts"@ , which will return a security token in addition to the keys. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AwsAccessCredentialsData s) where
-    toHCL AwsAccessCredentialsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (AwsAccessCredentialsData s) where
+    toObject AwsAccessCredentialsData{..} = catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "role" <$> TF.attribute _role
         , TF.assign "type" <$> TF.attribute _type'
@@ -235,8 +228,8 @@ data GenericSecretData s = GenericSecretData {
     {- ^ (Required) The full logical path from which to request data. To read data from the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Reading from other backends with this data source is possible; consult each backend's documentation to see which endpoints support the @GET@ method. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (GenericSecretData s) where
-    toHCL GenericSecretData{..} = TF.inline $ catMaybes
+instance TF.IsObject (GenericSecretData s) where
+    toObject GenericSecretData{..} = catMaybes
         [ TF.assign "path" <$> TF.attribute _path
         ]
 

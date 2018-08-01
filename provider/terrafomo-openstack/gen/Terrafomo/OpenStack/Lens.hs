@@ -1,14 +1,7 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RankNTypes             #-}
-{-# LANGUAGE UndecidableInstances   #-}
-
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 -- |
 -- Module      : Terrafomo.OpenStack.Lens
@@ -125,6 +118,7 @@ module Terrafomo.OpenStack.Lens
     , HasInitiator (..)
     , HasInstance' (..)
     , HasInstanceId (..)
+    , HasInterface (..)
     , HasIpAddress (..)
     , HasIpVersion (..)
     , HasIpsecpolicyId (..)
@@ -218,6 +212,8 @@ module Terrafomo.OpenStack.Lens
     , HasSecurityGroupIds (..)
     , HasSecurityGroups (..)
     , HasSegments (..)
+    , HasServiceId (..)
+    , HasServiceName (..)
     , HasShared (..)
     , HasSize (..)
     , HasSizeMax (..)
@@ -392,6 +388,7 @@ module Terrafomo.OpenStack.Lens
     , HasComputedInitiator (..)
     , HasComputedInstance' (..)
     , HasComputedInstanceId (..)
+    , HasComputedInterface (..)
     , HasComputedIpAddress (..)
     , HasComputedIpVersion (..)
     , HasComputedIpsecpolicyId (..)
@@ -498,6 +495,8 @@ module Terrafomo.OpenStack.Lens
     , HasComputedSecurityGroups (..)
     , HasComputedSegments (..)
     , HasComputedSerial (..)
+    , HasComputedServiceId (..)
+    , HasComputedServiceName (..)
     , HasComputedShared (..)
     , HasComputedSize (..)
     , HasComputedSizeBytes (..)
@@ -530,6 +529,7 @@ module Terrafomo.OpenStack.Lens
     , HasComputedUniqueId (..)
     , HasComputedUpdateAt (..)
     , HasComputedUpdatedAt (..)
+    , HasComputedUrl (..)
     , HasComputedUrlPath (..)
     , HasComputedUser (..)
     , HasComputedUserData (..)
@@ -562,7 +562,6 @@ import GHC.Base ((.))
 
 import Lens.Micro (Lens')
 
-import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasAction a b | a -> b where
@@ -1183,6 +1182,12 @@ class HasInstanceId a b | a -> b where
 instance HasInstanceId a b => HasInstanceId (TF.Schema l p a) b where
     instanceId = TF.configuration . instanceId
 
+class HasInterface a b | a -> b where
+    interface :: Lens' a b
+
+instance HasInterface a b => HasInterface (TF.Schema l p a) b where
+    interface = TF.configuration . interface
+
 class HasIpAddress a b | a -> b where
     ipAddress :: Lens' a b
 
@@ -1740,6 +1745,18 @@ class HasSegments a b | a -> b where
 
 instance HasSegments a b => HasSegments (TF.Schema l p a) b where
     segments = TF.configuration . segments
+
+class HasServiceId a b | a -> b where
+    serviceId :: Lens' a b
+
+instance HasServiceId a b => HasServiceId (TF.Schema l p a) b where
+    serviceId = TF.configuration . serviceId
+
+class HasServiceName a b | a -> b where
+    serviceName :: Lens' a b
+
+instance HasServiceName a b => HasServiceName (TF.Schema l p a) b where
+    serviceName = TF.configuration . serviceName
 
 class HasShared a b | a -> b where
     shared :: Lens' a b
@@ -2392,6 +2409,9 @@ class HasComputedInstance' a b | a -> b where
 class HasComputedInstanceId a b | a -> b where
     computedInstanceId :: a -> b
 
+class HasComputedInterface a b | a -> b where
+    computedInterface :: a -> b
+
 class HasComputedIpAddress a b | a -> b where
     computedIpAddress :: a -> b
 
@@ -2710,6 +2730,12 @@ class HasComputedSegments a b | a -> b where
 class HasComputedSerial a b | a -> b where
     computedSerial :: a -> b
 
+class HasComputedServiceId a b | a -> b where
+    computedServiceId :: a -> b
+
+class HasComputedServiceName a b | a -> b where
+    computedServiceName :: a -> b
+
 class HasComputedShared a b | a -> b where
     computedShared :: a -> b
 
@@ -2805,6 +2831,9 @@ class HasComputedUpdateAt a b | a -> b where
 
 class HasComputedUpdatedAt a b | a -> b where
     computedUpdatedAt :: a -> b
+
+class HasComputedUrl a b | a -> b where
+    computedUrl :: a -> b
 
 class HasComputedUrlPath a b | a -> b where
     computedUrlPath :: a -> b

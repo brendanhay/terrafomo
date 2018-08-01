@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -91,8 +84,8 @@ data EscalationPolicyData s = EscalationPolicyData {
     {- ^ (Required) The name to use to find an escalation policy in the PagerDuty API. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EscalationPolicyData s) where
-    toHCL EscalationPolicyData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EscalationPolicyData s) where
+    toObject EscalationPolicyData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -123,8 +116,8 @@ data ExtensionSchemaData s = ExtensionSchemaData {
     {- ^ (Required) The extension name to use to find an extension vendor in the PagerDuty API. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ExtensionSchemaData s) where
-    toHCL ExtensionSchemaData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ExtensionSchemaData s) where
+    toObject ExtensionSchemaData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -157,8 +150,8 @@ data ScheduleData s = ScheduleData {
     {- ^ (Required) The name to use to find a schedule in the PagerDuty API. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ScheduleData s) where
-    toHCL ScheduleData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ScheduleData s) where
+    toObject ScheduleData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -188,8 +181,8 @@ data TeamData s = TeamData {
     {- ^ (Required) The name of the team to find in the PagerDuty API. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TeamData s) where
-    toHCL TeamData{..} = TF.inline $ catMaybes
+instance TF.IsObject (TeamData s) where
+    toObject TeamData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -222,8 +215,8 @@ data UserData s = UserData {
     {- ^ (Required) The email to use to find a user in the PagerDuty API. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserData s) where
-    toHCL UserData{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserData s) where
+    toObject UserData{..} = catMaybes
         [ TF.assign "email" <$> TF.attribute _email
         ]
 
@@ -259,8 +252,8 @@ data VendorData s = VendorData {
     {- ^ (Required) The vendor name to use to find a vendor in the PagerDuty API. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VendorData s) where
-    toHCL VendorData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VendorData s) where
+    toObject VendorData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 

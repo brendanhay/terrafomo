@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -228,8 +221,8 @@ data CheckResource s = CheckResource {
     {- ^ (Optional) A floating point number representing the maximum number of seconds this check should wait for a result.  Defaults to @10.0@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CheckResource s) where
-    toHCL CheckResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CheckResource s) where
+    toObject CheckResource{..} = catMaybes
         [ TF.assign "active" <$> TF.attribute _active
         , TF.assign "caql" <$> TF.attribute _caql
         , TF.assign "cloudwatch" <$> TF.attribute _cloudwatch
@@ -530,8 +523,8 @@ data ContactGroupResource s = ContactGroupResource {
     {- ^ (Optional) Zero or more @victorops@ attributes may be present to dispatch to <https://login.circonus.com/user/docs/Alerting/ContactGroups#VictorOps> . See below for details on supported attributes. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ContactGroupResource s) where
-    toHCL ContactGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ContactGroupResource s) where
+    toObject ContactGroupResource{..} = catMaybes
         [ TF.assign "aggregation_window" <$> TF.attribute _aggregation_window
         , TF.assign "alert_option" <$> TF.attribute _alert_option
         , TF.assign "email" <$> TF.attribute _email
@@ -761,8 +754,8 @@ data GraphResource s = GraphResource {
     {- ^ (Optional) A list of tags assigned to this graph. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (GraphResource s) where
-    toHCL GraphResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (GraphResource s) where
+    toObject GraphResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "graph_style" <$> TF.attribute _graph_style
         , TF.assign "left" <$> TF.attribute _left
@@ -907,8 +900,8 @@ data MetricClusterResource s = MetricClusterResource {
     {- ^ (Optional) A list of tags attached to the metric cluster. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (MetricClusterResource s) where
-    toHCL MetricClusterResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (MetricClusterResource s) where
+    toObject MetricClusterResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "query" <$> TF.attribute _query
@@ -984,8 +977,8 @@ data MetricResource s = MetricResource {
     {- ^ (Optional) The unit of measurement for this @circonus_metric@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (MetricResource s) where
-    toHCL MetricResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (MetricResource s) where
+    toObject MetricResource{..} = catMaybes
         [ TF.assign "active" <$> TF.attribute _active
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "tags" <$> TF.attribute _tags
@@ -1078,8 +1071,8 @@ data RuleSetResource s = RuleSetResource {
     {- ^ (Optional) A list of tags assigned to this rule set. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RuleSetResource s) where
-    toHCL RuleSetResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RuleSetResource s) where
+    toObject RuleSetResource{..} = catMaybes
         [ TF.assign "check" <$> TF.attribute _check
         , TF.assign "if" <$> TF.attribute _if'
         , TF.assign "link" <$> TF.attribute _link

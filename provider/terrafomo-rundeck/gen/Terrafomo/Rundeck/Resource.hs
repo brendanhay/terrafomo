@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -169,8 +162,8 @@ data JobResource s = JobResource {
     {- ^ (Optional) The jobs schedule in Unix crontab format -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (JobResource s) where
-    toHCL JobResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (JobResource s) where
+    toObject JobResource{..} = catMaybes
         [ TF.assign "allow_concurrent_executions" <$> TF.attribute _allow_concurrent_executions
         , TF.assign "command" <$> TF.attribute _command
         , TF.assign "command_ordering_strategy" <$> TF.attribute _command_ordering_strategy
@@ -399,8 +392,8 @@ data PrivateKeyResource s = PrivateKeyResource {
     {- ^ (Required) The path within the key store where the key will be stored. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PrivateKeyResource s) where
-    toHCL PrivateKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PrivateKeyResource s) where
+    toObject PrivateKeyResource{..} = catMaybes
         [ TF.assign "key_material" <$> TF.attribute _key_material
         , TF.assign "path" <$> TF.attribute _path
         ]
@@ -460,8 +453,8 @@ data ProjectResource s = ProjectResource {
     {- ^ (Optional) When the SSH-based file copier and executor plugins are used, the location within Rundeck's key store where the SSH private key can be found. Private keys can be uploaded to rundeck using the @rundeck_private_key@ resource. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectResource s) where
-    toHCL ProjectResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProjectResource s) where
+    toObject ProjectResource{..} = catMaybes
         [ TF.assign "default_node_executor_plugin" <$> TF.attribute _default_node_executor_plugin
         , TF.assign "default_node_file_copier_plugin" <$> TF.attribute _default_node_file_copier_plugin
         , TF.assign "description" <$> TF.attribute _description
@@ -596,8 +589,8 @@ data PublicKeyResource s = PublicKeyResource {
     {- ^ (Required) The path within the key store where the key will be stored. By convention this path name normally ends with ".pub" and otherwise has the same name as the associated private key. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PublicKeyResource s) where
-    toHCL PublicKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PublicKeyResource s) where
+    toObject PublicKeyResource{..} = catMaybes
         [ TF.assign "delete" <$> TF.attribute _delete
         , TF.assign "key_material" <$> TF.attribute _key_material
         , TF.assign "path" <$> TF.attribute _path

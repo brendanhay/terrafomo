@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -32,6 +26,7 @@ module Terrafomo.CloudStack.Provider
     , providerTimeout
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -78,20 +73,22 @@ data CloudStack = CloudStack {
 
 instance Hashable CloudStack
 
-instance TF.ToHCL CloudStack where
-    toHCL x =
+instance TF.IsSection CloudStack where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (CloudStack))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "api_key" <$> _api_key x
-            , TF.assign "api_url" <$> _api_url x
-            , TF.assign "config" <$> _config x
-            , TF.assign "http_get_only" <$> _http_get_only x
-            , TF.assign "profile" <$> _profile x
-            , TF.assign "secret_key" <$> _secret_key x
-            , TF.assign "timeout" <$> _timeout x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "api_key" <$> _api_key x
+                  , TF.assign "api_url" <$> _api_url x
+                  , TF.assign "config" <$> _config x
+                  , TF.assign "http_get_only" <$> _http_get_only x
+                  , TF.assign "profile" <$> _profile x
+                  , TF.assign "secret_key" <$> _secret_key x
+                  , TF.assign "timeout" <$> _timeout x
+                  ])
 
 instance TF.IsProvider CloudStack where
     type ProviderType CloudStack = "cloudstack"

@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -35,6 +28,9 @@ module Terrafomo.OpenStack.DataSource
 
     , IdentityAuthScopeV3Data (..)
     , identityAuthScopeV3Data
+
+    , IdentityEndpointV3Data (..)
+    , identityEndpointV3Data
 
     , IdentityProjectV3Data (..)
     , identityProjectV3Data
@@ -75,8 +71,10 @@ module Terrafomo.OpenStack.DataSource
     , P.HasDomainId (..)
     , P.HasEmail (..)
     , P.HasEnabled (..)
+    , P.HasExternal (..)
     , P.HasGatewayIp (..)
     , P.HasIdpId (..)
+    , P.HasInterface (..)
     , P.HasIpVersion (..)
     , P.HasIpv6AddressMode (..)
     , P.HasIpv6RaMode (..)
@@ -102,6 +100,8 @@ module Terrafomo.OpenStack.DataSource
     , P.HasRegion (..)
     , P.HasRxTxFactor (..)
     , P.HasSecgroupId (..)
+    , P.HasServiceId (..)
+    , P.HasServiceName (..)
     , P.HasShared (..)
     , P.HasSizeMax (..)
     , P.HasSizeMin (..)
@@ -142,10 +142,12 @@ module Terrafomo.OpenStack.DataSource
     , P.HasComputedEmail (..)
     , P.HasComputedEnableDhcp (..)
     , P.HasComputedEnabled (..)
+    , P.HasComputedExternal (..)
     , P.HasComputedFile (..)
     , P.HasComputedGatewayIp (..)
     , P.HasComputedHostRoutes (..)
     , P.HasComputedIdpId (..)
+    , P.HasComputedInterface (..)
     , P.HasComputedIpVersion (..)
     , P.HasComputedIpv6AddressMode (..)
     , P.HasComputedIpv6RaMode (..)
@@ -186,6 +188,8 @@ module Terrafomo.OpenStack.DataSource
     , P.HasComputedSchema (..)
     , P.HasComputedSecgroupId (..)
     , P.HasComputedSerial (..)
+    , P.HasComputedServiceId (..)
+    , P.HasComputedServiceName (..)
     , P.HasComputedShared (..)
     , P.HasComputedSizeBytes (..)
     , P.HasComputedSizeMax (..)
@@ -205,6 +209,7 @@ module Terrafomo.OpenStack.DataSource
     , P.HasComputedUniqueId (..)
     , P.HasComputedUpdateAt (..)
     , P.HasComputedUpdatedAt (..)
+    , P.HasComputedUrl (..)
     , P.HasComputedUserDomainId (..)
     , P.HasComputedUserDomainName (..)
     , P.HasComputedUserId (..)
@@ -265,8 +270,8 @@ data ComputeFlavorV2Data s = ComputeFlavorV2Data {
     {- ^ (Optional) The amount of VCPUs. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeFlavorV2Data s) where
-    toHCL ComputeFlavorV2Data{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeFlavorV2Data s) where
+    toObject ComputeFlavorV2Data{..} = catMaybes
         [ TF.assign "disk" <$> TF.attribute _disk
         , TF.assign "min_disk" <$> TF.attribute _min_disk
         , TF.assign "min_ram" <$> TF.attribute _min_ram
@@ -397,8 +402,8 @@ data ComputeKeypairV2Data s = ComputeKeypairV2Data {
     {- ^ (Optional) The region in which to obtain the V2 Compute client. If omitted, the @region@ argument of the provider is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeKeypairV2Data s) where
-    toHCL ComputeKeypairV2Data{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeKeypairV2Data s) where
+    toObject ComputeKeypairV2Data{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "region" <$> TF.attribute _region
         ]
@@ -451,8 +456,8 @@ data DnsZoneV2Data s = DnsZoneV2Data {
     {- ^ (Optional) The type of the zone. Can either be @PRIMARY@ or @SECONDARY@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsZoneV2Data s) where
-    toHCL DnsZoneV2Data{..} = TF.inline $ catMaybes
+instance TF.IsObject (DnsZoneV2Data s) where
+    toObject DnsZoneV2Data{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "email" <$> TF.attribute _email
         , TF.assign "name" <$> TF.attribute _name
@@ -571,8 +576,8 @@ data IdentityAuthScopeV3Data s = IdentityAuthScopeV3Data {
     {- ^ (Optional) The region in which to obtain the V3 Identity client. A Identity client is needed to retrieve tokens IDs. If omitted, the @region@ argument of the provider is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IdentityAuthScopeV3Data s) where
-    toHCL IdentityAuthScopeV3Data{..} = TF.inline $ catMaybes
+instance TF.IsObject (IdentityAuthScopeV3Data s) where
+    toObject IdentityAuthScopeV3Data{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "region" <$> TF.attribute _region
         ]
@@ -632,6 +637,75 @@ identityAuthScopeV3Data =
             , _region = TF.Nil
             }
 
+{- | The @openstack_identity_endpoint_v3@ OpenStack datasource.
+
+Use this data source to get the ID of an OpenStack endpoint. Note: This
+usually requires admin privileges.
+-}
+data IdentityEndpointV3Data s = IdentityEndpointV3Data {
+      _interface    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The endpoint interface. Valid values are @public@ , @internal@ , and @admin@ . Default value is @public@ -}
+    , _region       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region the endpoint is located in. -}
+    , _service_id   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The service id this endpoint belongs to. -}
+    , _service_name :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The service name of the endpoint. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (IdentityEndpointV3Data s) where
+    toObject IdentityEndpointV3Data{..} = catMaybes
+        [ TF.assign "interface" <$> TF.attribute _interface
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "service_id" <$> TF.attribute _service_id
+        , TF.assign "service_name" <$> TF.attribute _service_name
+        ]
+
+instance P.HasInterface (IdentityEndpointV3Data s) (TF.Attr s P.Text) where
+    interface =
+        lens (_interface :: IdentityEndpointV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _interface = a } :: IdentityEndpointV3Data s)
+
+instance P.HasRegion (IdentityEndpointV3Data s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: IdentityEndpointV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: IdentityEndpointV3Data s)
+
+instance P.HasServiceId (IdentityEndpointV3Data s) (TF.Attr s P.Text) where
+    serviceId =
+        lens (_service_id :: IdentityEndpointV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _service_id = a } :: IdentityEndpointV3Data s)
+
+instance P.HasServiceName (IdentityEndpointV3Data s) (TF.Attr s P.Text) where
+    serviceName =
+        lens (_service_name :: IdentityEndpointV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _service_name = a } :: IdentityEndpointV3Data s)
+
+instance s ~ s' => P.HasComputedInterface (TF.Ref s' (IdentityEndpointV3Data s)) (TF.Attr s P.Text) where
+    computedInterface x = TF.compute (TF.refKey x) "interface"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityEndpointV3Data s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance s ~ s' => P.HasComputedServiceId (TF.Ref s' (IdentityEndpointV3Data s)) (TF.Attr s P.Text) where
+    computedServiceId x = TF.compute (TF.refKey x) "service_id"
+
+instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (IdentityEndpointV3Data s)) (TF.Attr s P.Text) where
+    computedServiceName x = TF.compute (TF.refKey x) "service_name"
+
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (IdentityEndpointV3Data s)) (TF.Attr s P.Text) where
+    computedUrl x = TF.compute (TF.refKey x) "url"
+
+identityEndpointV3Data :: TF.DataSource P.OpenStack (IdentityEndpointV3Data s)
+identityEndpointV3Data =
+    TF.newDataSource "openstack_identity_endpoint_v3" $
+        IdentityEndpointV3Data {
+              _interface = TF.Nil
+            , _region = TF.Nil
+            , _service_id = TF.Nil
+            , _service_name = TF.Nil
+            }
+
 {- | The @openstack_identity_project_v3@ OpenStack datasource.
 
 Use this data source to get the ID of an OpenStack project.
@@ -649,8 +723,8 @@ data IdentityProjectV3Data s = IdentityProjectV3Data {
     {- ^ (Optional) The parent of this project. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IdentityProjectV3Data s) where
-    toHCL IdentityProjectV3Data{..} = TF.inline $ catMaybes
+instance TF.IsObject (IdentityProjectV3Data s) where
+    toObject IdentityProjectV3Data{..} = catMaybes
         [ TF.assign "domain_id" <$> TF.attribute _domain_id
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "is_domain" <$> TF.attribute _is_domain
@@ -728,8 +802,8 @@ data IdentityRoleV3Data s = IdentityRoleV3Data {
     {- ^ (Optional) The region in which to obtain the V3 Keystone client. If omitted, the @region@ argument of the provider is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IdentityRoleV3Data s) where
-    toHCL IdentityRoleV3Data{..} = TF.inline $ catMaybes
+instance TF.IsObject (IdentityRoleV3Data s) where
+    toObject IdentityRoleV3Data{..} = catMaybes
         [ TF.assign "domain_id" <$> TF.attribute _domain_id
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "region" <$> TF.attribute _region
@@ -793,8 +867,8 @@ data IdentityUserV3Data s = IdentityUserV3Data {
     {- ^ (Optional) The unique ID of the user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IdentityUserV3Data s) where
-    toHCL IdentityUserV3Data{..} = TF.inline $ catMaybes
+instance TF.IsObject (IdentityUserV3Data s) where
+    toObject IdentityUserV3Data{..} = catMaybes
         [ TF.assign "default_project_id" <$> TF.attribute _default_project_id
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "domain_id" <$> TF.attribute _domain_id
@@ -929,8 +1003,8 @@ data ImagesImageV2Data s = ImagesImageV2Data {
     {- ^ (Optional) The visibility of the image. Must be one of "public", "private", "community", or "shared". Defaults to "private". -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImagesImageV2Data s) where
-    toHCL ImagesImageV2Data{..} = TF.inline $ catMaybes
+instance TF.IsObject (ImagesImageV2Data s) where
+    toObject ImagesImageV2Data{..} = catMaybes
         [ TF.assign "member_status" <$> TF.attribute _member_status
         , TF.assign "most_recent" <$> TF.attribute _most_recent
         , TF.assign "name" <$> TF.attribute _name
@@ -1127,6 +1201,8 @@ Use this data source to get the ID of an available OpenStack network.
 data NetworkingNetworkV2Data s = NetworkingNetworkV2Data {
       _availability_zone_hints :: !(TF.Attr s P.Text)
     {- ^ (Optional) The availability zone candidates for the network. -}
+    , _external                :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The external routing facility of the network. -}
     , _matching_subnet_cidr    :: !(TF.Attr s P.Text)
     {- ^ (Optional) The CIDR of a subnet within the network. -}
     , _name                    :: !(TF.Attr s P.Text)
@@ -1141,9 +1217,10 @@ data NetworkingNetworkV2Data s = NetworkingNetworkV2Data {
     {- ^ (Optional) The owner of the network. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingNetworkV2Data s) where
-    toHCL NetworkingNetworkV2Data{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingNetworkV2Data s) where
+    toObject NetworkingNetworkV2Data{..} = catMaybes
         [ TF.assign "availability_zone_hints" <$> TF.attribute _availability_zone_hints
+        , TF.assign "external" <$> TF.attribute _external
         , TF.assign "matching_subnet_cidr" <$> TF.attribute _matching_subnet_cidr
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network_id" <$> TF.attribute _network_id
@@ -1156,6 +1233,11 @@ instance P.HasAvailabilityZoneHints (NetworkingNetworkV2Data s) (TF.Attr s P.Tex
     availabilityZoneHints =
         lens (_availability_zone_hints :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
              (\s a -> s { _availability_zone_hints = a } :: NetworkingNetworkV2Data s)
+
+instance P.HasExternal (NetworkingNetworkV2Data s) (TF.Attr s P.Text) where
+    external =
+        lens (_external :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _external = a } :: NetworkingNetworkV2Data s)
 
 instance P.HasMatchingSubnetCidr (NetworkingNetworkV2Data s) (TF.Attr s P.Text) where
     matchingSubnetCidr =
@@ -1193,6 +1275,9 @@ instance s ~ s' => P.HasComputedAdminStateUp (TF.Ref s' (NetworkingNetworkV2Data
 instance s ~ s' => P.HasComputedAvailabilityZoneHints (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
     computedAvailabilityZoneHints x = TF.compute (TF.refKey x) "availability_zone_hints"
 
+instance s ~ s' => P.HasComputedExternal (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
+    computedExternal x = TF.compute (TF.refKey x) "external"
+
 instance s ~ s' => P.HasComputedMatchingSubnetCidr (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
     computedMatchingSubnetCidr =
         (_matching_subnet_cidr :: NetworkingNetworkV2Data s -> TF.Attr s P.Text)
@@ -1227,6 +1312,7 @@ networkingNetworkV2Data =
     TF.newDataSource "openstack_networking_network_v2" $
         NetworkingNetworkV2Data {
               _availability_zone_hints = TF.Nil
+            , _external = TF.Nil
             , _matching_subnet_cidr = TF.Nil
             , _name = TF.Nil
             , _network_id = TF.Nil
@@ -1250,8 +1336,8 @@ data NetworkingSecgroupV2Data s = NetworkingSecgroupV2Data {
     {- ^ (Optional) The owner of the security group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingSecgroupV2Data s) where
-    toHCL NetworkingSecgroupV2Data{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingSecgroupV2Data s) where
+    toObject NetworkingSecgroupV2Data{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "secgroup_id" <$> TF.attribute _secgroup_id
@@ -1340,8 +1426,8 @@ data NetworkingSubnetV2Data s = NetworkingSubnetV2Data {
     {- ^ (Optional) The owner of the subnet. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingSubnetV2Data s) where
-    toHCL NetworkingSubnetV2Data{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingSubnetV2Data s) where
+    toObject NetworkingSubnetV2Data{..} = catMaybes
         [ TF.assign "cidr" <$> TF.attribute _cidr
         , TF.assign "dhcp_disabled" <$> TF.attribute _dhcp_disabled
         , TF.assign "dhcp_enabled" <$> TF.attribute _dhcp_enabled
@@ -1549,8 +1635,8 @@ data NetworkingSubnetpoolV2Data s = NetworkingSubnetpoolV2Data {
     {- ^ (Optional) Whether this subnetpool is shared across all projects. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingSubnetpoolV2Data s) where
-    toHCL NetworkingSubnetpoolV2Data{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingSubnetpoolV2Data s) where
+    toObject NetworkingSubnetpoolV2Data{..} = catMaybes
         [ TF.assign "address_scope_id" <$> TF.attribute _address_scope_id
         , TF.assign "default_prefixlen" <$> TF.attribute _default_prefixlen
         , TF.assign "default_quota" <$> TF.attribute _default_quota

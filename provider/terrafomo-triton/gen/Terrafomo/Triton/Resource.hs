@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -195,8 +188,8 @@ data FabricResource s = FabricResource {
     {- ^ - (Int, Required, Change forces new resource) VLAN id the network is on. Number between 0-4095 indicating VLAN ID. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FabricResource s) where
-    toHCL FabricResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FabricResource s) where
+    toObject FabricResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "gateway" <$> TF.attribute _gateway
         , TF.assign "internet_nat" <$> TF.attribute _internet_nat
@@ -328,8 +321,8 @@ data FirewallRuleResource s = FirewallRuleResource {
     {- ^ - (string, Required) The firewall rule described using the Cloud API rule syntax defined at https://docs.joyent.com/public-cloud/network/firewall/cloud-firewall-rules-reference. Note: Cloud API will normalize rules based on case-sensitivity, parentheses, ordering of IP addresses, etc. This can result in Terraform updating rules repeatedly if the rule definition differs from the normalized value. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FirewallRuleResource s) where
-    toHCL FirewallRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FirewallRuleResource s) where
+    toObject FirewallRuleResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "rule" <$> TF.attribute _rule
@@ -403,8 +396,8 @@ data InstanceTemplateResource s = InstanceTemplateResource {
     {- ^ - (string, Optional) Data copied to instance on boot. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InstanceTemplateResource s) where
-    toHCL InstanceTemplateResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (InstanceTemplateResource s) where
+    toObject InstanceTemplateResource{..} = catMaybes
         [ TF.assign "firewall_enabled" <$> TF.attribute _firewall_enabled
         , TF.assign "image" <$> TF.attribute _image
         , TF.assign "metadata" <$> TF.attribute _metadata
@@ -523,8 +516,8 @@ data KeyResource s = KeyResource {
     {- ^ - (string, Change forces new resource) The name of the key. If this is left empty, the name is inferred from the comment in the SSH key material. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KeyResource s) where
-    toHCL KeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (KeyResource s) where
+    toObject KeyResource{..} = catMaybes
         [ TF.assign "key" <$> TF.attribute _key
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -599,8 +592,8 @@ data MachineResource s = MachineResource {
     {- ^ - (string) The user script to run on boot (every boot on SmartMachines). To learn more about both the user script and user data see the <https://docs.joyent.com/private-cloud/instances/using-mdata> documentation and the <https://eng.joyent.com/mdata/datadict.html> specification. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (MachineResource s) where
-    toHCL MachineResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (MachineResource s) where
+    toObject MachineResource{..} = catMaybes
         [ TF.assign "(Deprecated) locality" <$> TF.attribute _(Deprecated) locality
         , TF.assign "administrator_pw" <$> TF.attribute _administrator_pw
         , TF.assign "affinity" <$> TF.attribute _affinity
@@ -871,8 +864,8 @@ data ServiceGroupResource s = ServiceGroupResource {
     {- ^ - (string, Required)  Identifier of an instance template. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceGroupResource s) where
-    toHCL ServiceGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceGroupResource s) where
+    toObject ServiceGroupResource{..} = catMaybes
         [ TF.assign "capacity" <$> TF.attribute _capacity
         , TF.assign "group_name" <$> TF.attribute _group_name
         , TF.assign "template" <$> TF.attribute _template
@@ -934,8 +927,8 @@ data SnapshotResource s = SnapshotResource {
     {- ^ - (string, Required) The name for the snapshot. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SnapshotResource s) where
-    toHCL SnapshotResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SnapshotResource s) where
+    toObject SnapshotResource{..} = catMaybes
         [ TF.assign "machine_id" <$> TF.attribute _machine_id
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -989,8 +982,8 @@ data VlanResource s = VlanResource {
     {- ^ - (int, Required, Change forces new resource) Number between 0-4095 indicating VLAN ID -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VlanResource s) where
-    toHCL VlanResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VlanResource s) where
+    toObject VlanResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "vlan_id" <$> TF.attribute _vlan_id

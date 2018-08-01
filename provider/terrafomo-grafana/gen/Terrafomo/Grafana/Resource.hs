@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -33,14 +26,21 @@ module Terrafomo.Grafana.Resource
     , DataSourceResource (..)
     , dataSourceResource
 
+    , OrganizationResource (..)
+    , organizationResource
+
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasAccessMode (..)
+    , P.HasAdminUser (..)
+    , P.HasAdmins (..)
     , P.HasBasicAuthEnabled (..)
     , P.HasBasicAuthPassword (..)
     , P.HasBasicAuthUsername (..)
     , P.HasConfigJson (..)
+    , P.HasCreateUsers (..)
     , P.HasDatabaseName (..)
+    , P.HasEditors (..)
     , P.HasIsDefault (..)
     , P.HasJsonData (..)
     , P.HasName (..)
@@ -50,18 +50,24 @@ module Terrafomo.Grafana.Resource
     , P.HasType' (..)
     , P.HasUrl (..)
     , P.HasUsername (..)
+    , P.HasViewers (..)
 
     -- ** Computed Attributes
     , P.HasComputedAccessMode (..)
+    , P.HasComputedAdminUser (..)
+    , P.HasComputedAdmins (..)
     , P.HasComputedBasicAuthEnabled (..)
     , P.HasComputedBasicAuthPassword (..)
     , P.HasComputedBasicAuthUsername (..)
     , P.HasComputedConfigJson (..)
+    , P.HasComputedCreateUsers (..)
     , P.HasComputedDatabaseName (..)
+    , P.HasComputedEditors (..)
     , P.HasComputedId (..)
     , P.HasComputedIsDefault (..)
     , P.HasComputedJsonData (..)
     , P.HasComputedName (..)
+    , P.HasComputedOrgId (..)
     , P.HasComputedPassword (..)
     , P.HasComputedSecureJsonData (..)
     , P.HasComputedSettings (..)
@@ -69,6 +75,7 @@ module Terrafomo.Grafana.Resource
     , P.HasComputedType' (..)
     , P.HasComputedUrl (..)
     , P.HasComputedUsername (..)
+    , P.HasComputedViewers (..)
 
     -- * Re-exported Types
     , module P
@@ -113,8 +120,8 @@ data AlertNotificationResource s = AlertNotificationResource {
     {- ^ (Required) The type of the alert notification channel. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AlertNotificationResource s) where
-    toHCL AlertNotificationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AlertNotificationResource s) where
+    toObject AlertNotificationResource{..} = catMaybes
         [ TF.assign "is_default" <$> TF.attribute _is_default
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "settings" <$> TF.attribute _settings
@@ -183,8 +190,8 @@ data DashboardResource s = DashboardResource {
     {- ^ (Required) The JSON configuration for the dashboard. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DashboardResource s) where
-    toHCL DashboardResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DashboardResource s) where
+    toObject DashboardResource{..} = catMaybes
         [ TF.assign "config_json" <$> TF.attribute _config_json
         ]
 
@@ -242,8 +249,8 @@ data DataSourceResource s = DataSourceResource {
     {- ^ (Required by some data source types) The username to use to authenticate to the data source. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataSourceResource s) where
-    toHCL DataSourceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DataSourceResource s) where
+    toObject DataSourceResource{..} = catMaybes
         [ TF.assign "access_mode" <$> TF.attribute _access_mode
         , TF.assign "basic_auth_enabled" <$> TF.attribute _basic_auth_enabled
         , TF.assign "basic_auth_password" <$> TF.attribute _basic_auth_password
@@ -409,4 +416,109 @@ dataSourceResource =
             , _type' = TF.Nil
             , _url = TF.Nil
             , _username = TF.Nil
+            }
+
+{- | The @grafana_organization@ Grafana resource.
+
+The organization resource allows Grafana organizations and their membership
+to be created and managed.
+-}
+data OrganizationResource s = OrganizationResource {
+      _admin_user   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The login name of the configured <http://docs.grafana.org/installation/configuration/#admin-user> for the Grafana installation. If unset, this value defaults to @admin@ , the Grafana default. Grafana adds the default admin user to all organizations automatically upon creation, and this parameter keeps Terraform from removing it from organizations. -}
+    , _admins       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of email addresses corresponding to users who should be given @admin@ access to the organization. Note: users specified here must already exist in Grafana unless 'create_users' is set to true. -}
+    , _create_users :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether or not to create Grafana users specified in the organization's membership if they don't already exist in Grafana. If unspecified, this parameter defaults to @true@ , creating placeholder users with the @name@ , @login@ , and @email@ set to the email of the user, and a random password. Setting this option to @false@ will cause an error to be thrown for any users that do not already exist in Grafana. -}
+    , _editors      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of email addresses corresponding to users who should be given @editor@ access to the organization. Note: users specified here must already exist in Grafana unless 'create_users' is set to true. -}
+    , _name         :: !(TF.Attr s P.Text)
+    {- ^ (Required) The display name for the Grafana organization created. -}
+    , _viewers      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) A list of email addresses corresponding to users who should be given @viewer@ access to the organization. Note: users specified here must already exist in Grafana unless 'create_users' is set to true. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (OrganizationResource s) where
+    toObject OrganizationResource{..} = catMaybes
+        [ TF.assign "admin_user" <$> TF.attribute _admin_user
+        , TF.assign "admins" <$> TF.attribute _admins
+        , TF.assign "create_users" <$> TF.attribute _create_users
+        , TF.assign "editors" <$> TF.attribute _editors
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "viewers" <$> TF.attribute _viewers
+        ]
+
+instance P.HasAdminUser (OrganizationResource s) (TF.Attr s P.Text) where
+    adminUser =
+        lens (_admin_user :: OrganizationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _admin_user = a } :: OrganizationResource s)
+
+instance P.HasAdmins (OrganizationResource s) (TF.Attr s P.Text) where
+    admins =
+        lens (_admins :: OrganizationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _admins = a } :: OrganizationResource s)
+
+instance P.HasCreateUsers (OrganizationResource s) (TF.Attr s P.Text) where
+    createUsers =
+        lens (_create_users :: OrganizationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _create_users = a } :: OrganizationResource s)
+
+instance P.HasEditors (OrganizationResource s) (TF.Attr s P.Text) where
+    editors =
+        lens (_editors :: OrganizationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _editors = a } :: OrganizationResource s)
+
+instance P.HasName (OrganizationResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: OrganizationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: OrganizationResource s)
+
+instance P.HasViewers (OrganizationResource s) (TF.Attr s P.Text) where
+    viewers =
+        lens (_viewers :: OrganizationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _viewers = a } :: OrganizationResource s)
+
+instance s ~ s' => P.HasComputedAdminUser (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedAdminUser =
+        (_admin_user :: OrganizationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedAdmins (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedAdmins =
+        (_admins :: OrganizationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCreateUsers (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedCreateUsers =
+        (_create_users :: OrganizationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedEditors (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedEditors =
+        (_editors :: OrganizationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: OrganizationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedOrgId x = TF.compute (TF.refKey x) "org_id"
+
+instance s ~ s' => P.HasComputedViewers (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedViewers =
+        (_viewers :: OrganizationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+organizationResource :: TF.Resource P.Grafana (OrganizationResource s)
+organizationResource =
+    TF.newResource "grafana_organization" $
+        OrganizationResource {
+              _admin_user = TF.Nil
+            , _admins = TF.Nil
+            , _create_users = TF.Nil
+            , _editors = TF.Nil
+            , _name = TF.Nil
+            , _viewers = TF.Nil
             }

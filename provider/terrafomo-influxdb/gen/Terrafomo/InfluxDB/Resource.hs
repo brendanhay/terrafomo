@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -93,8 +86,8 @@ data ContinuousQueryResource s = ContinuousQueryResource {
     {- ^ (Required) The query for the continuous_query. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ContinuousQueryResource s) where
-    toHCL ContinuousQueryResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ContinuousQueryResource s) where
+    toObject ContinuousQueryResource{..} = catMaybes
         [ TF.assign "database" <$> TF.attribute _database
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "query" <$> TF.attribute _query
@@ -150,8 +143,8 @@ data DatabaseResource s = DatabaseResource {
     {- ^ (Optional) A list of retention policies for specified database -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatabaseResource s) where
-    toHCL DatabaseResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatabaseResource s) where
+    toObject DatabaseResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "retention_policies" <$> TF.attribute _retention_policies
         ]
@@ -199,8 +192,8 @@ data UserResource s = UserResource {
     {- ^ (Required) The password for the user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserResource s) where
-    toHCL UserResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserResource s) where
+    toObject UserResource{..} = catMaybes
         [ TF.assign "admin" <$> TF.attribute _admin
         , TF.assign "grant" <$> TF.attribute _grant
         , TF.assign "name" <$> TF.attribute _name

@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -309,8 +302,8 @@ data ActiveFolderData s = ActiveFolderData {
     {- ^ (Required) The resource name of the parent Folder or Organization. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ActiveFolderData s) where
-    toHCL ActiveFolderData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ActiveFolderData s) where
+    toObject ActiveFolderData{..} = catMaybes
         [ TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "parent" <$> TF.attribute _parent
         ]
@@ -359,8 +352,8 @@ data BillingAccountData s = BillingAccountData {
     {- ^ (Optional) - @true@ if the billing account is open, @false@ if the billing account is closed. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BillingAccountData s) where
-    toHCL BillingAccountData{..} = TF.inline $ catMaybes
+instance TF.IsObject (BillingAccountData s) where
+    toObject BillingAccountData{..} = catMaybes
         [ TF.assign "billing_account" <$> TF.attribute _billing_account
         , TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "open" <$> TF.attribute _open
@@ -428,8 +421,8 @@ data ClientConfigData s = ClientConfigData {
     {- ^ - The region to operate under. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ClientConfigData s) where
-    toHCL ClientConfigData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ClientConfigData s) where
+    toObject ClientConfigData{..} = catMaybes
         [ TF.assign "access_token" <$> TF.attribute _access_token
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
@@ -489,8 +482,8 @@ data CloudfunctionsFunctionData s = CloudfunctionsFunctionData {
     {- ^ (Optional) The region in which the resource belongs. If it is not provided, the provider region is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudfunctionsFunctionData s) where
-    toHCL CloudfunctionsFunctionData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CloudfunctionsFunctionData s) where
+    toObject CloudfunctionsFunctionData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
@@ -582,8 +575,8 @@ data ComputeAddressData s = ComputeAddressData {
     {- ^ (Optional) The Region in which the created address reside. If it is not provided, the provider region is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeAddressData s) where
-    toHCL ComputeAddressData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeAddressData s) where
+    toObject ComputeAddressData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
@@ -651,8 +644,8 @@ data ComputeBackendServiceData s = ComputeBackendServiceData {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeBackendServiceData s) where
-    toHCL ComputeBackendServiceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeBackendServiceData s) where
+    toObject ComputeBackendServiceData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
@@ -727,8 +720,8 @@ data ComputeDefaultServiceAccountData s = ComputeDefaultServiceAccountData {
     {- ^ (Optional) The project ID. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeDefaultServiceAccountData s) where
-    toHCL ComputeDefaultServiceAccountData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeDefaultServiceAccountData s) where
+    toObject ComputeDefaultServiceAccountData{..} = catMaybes
         [ TF.assign "project" <$> TF.attribute _project
         ]
 
@@ -765,8 +758,8 @@ data ComputeForwardingRuleData s = ComputeForwardingRuleData {
     {- ^ (Optional) The region in which the resource belongs. If it is not provided, the project region is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeForwardingRuleData s) where
-    toHCL ComputeForwardingRuleData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeForwardingRuleData s) where
+    toObject ComputeForwardingRuleData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
@@ -857,8 +850,8 @@ data ComputeGlobalAddressData s = ComputeGlobalAddressData {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeGlobalAddressData s) where
-    toHCL ComputeGlobalAddressData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeGlobalAddressData s) where
+    toObject ComputeGlobalAddressData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
@@ -918,8 +911,8 @@ data ComputeImageData s = ComputeImageData {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. If you are using a <https://cloud.google.com/compute/docs/images#os-compute-support> , be sure to specify the correct Image Project. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeImageData s) where
-    toHCL ComputeImageData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeImageData s) where
+    toObject ComputeImageData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
@@ -1015,8 +1008,8 @@ data ComputeInstanceGroupData s = ComputeInstanceGroupData {
     {- ^ (Optional) The zone of the instance group. If referencing the instance group by name and @zone@ is not provided, the provider zone is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeInstanceGroupData s) where
-    toHCL ComputeInstanceGroupData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeInstanceGroupData s) where
+    toObject ComputeInstanceGroupData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "self_link" <$> TF.attribute _self_link
@@ -1098,8 +1091,8 @@ data ComputeLbIpRangesData s = ComputeLbIpRangesData {
     {- ^ - The IP ranges used for health checks when Network load balancing is used -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeLbIpRangesData s) where
-    toHCL ComputeLbIpRangesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeLbIpRangesData s) where
+    toObject ComputeLbIpRangesData{..} = catMaybes
         [ TF.assign "http_ssl_tcp_internal" <$> TF.attribute _http_ssl_tcp_internal
         , TF.assign "network" <$> TF.attribute _network
         ]
@@ -1143,8 +1136,8 @@ data ComputeNetworkData s = ComputeNetworkData {
     {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeNetworkData s) where
-    toHCL ComputeNetworkData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeNetworkData s) where
+    toObject ComputeNetworkData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
@@ -1211,8 +1204,8 @@ data ComputeRegionInstanceGroupData s = ComputeRegionInstanceGroupData {
     {- ^ (Optional) The link to the instance group.  One of @name@ or @self_link@ must be provided. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeRegionInstanceGroupData s) where
-    toHCL ComputeRegionInstanceGroupData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeRegionInstanceGroupData s) where
+    toObject ComputeRegionInstanceGroupData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
@@ -1288,8 +1281,8 @@ data ComputeRegionsData s = ComputeRegionsData {
     {- ^ (Optional) - Allows to filter list of regions based on their current status. Status can be either @UP@ or @DOWN@ . Defaults to no filtering (all available regions - both @UP@ and @DOWN@ ). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeRegionsData s) where
-    toHCL ComputeRegionsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeRegionsData s) where
+    toObject ComputeRegionsData{..} = catMaybes
         [ TF.assign "project" <$> TF.attribute _project
         , TF.assign "status" <$> TF.attribute _status
         ]
@@ -1338,8 +1331,8 @@ data ComputeSslPolicyData s = ComputeSslPolicyData {
     {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSslPolicyData s) where
-    toHCL ComputeSslPolicyData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSslPolicyData s) where
+    toObject ComputeSslPolicyData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
@@ -1406,8 +1399,8 @@ data ComputeSubnetworkData s = ComputeSubnetworkData {
     {- ^ (Optional) The region this subnetwork has been created in. If unspecified, this defaults to the region configured in the provider. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSubnetworkData s) where
-    toHCL ComputeSubnetworkData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSubnetworkData s) where
+    toObject ComputeSubnetworkData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
@@ -1486,8 +1479,8 @@ data ComputeVpnGatewayData s = ComputeVpnGatewayData {
     {- ^ (Optional) The region in which the resource belongs. If it is not provided, the project region is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeVpnGatewayData s) where
-    toHCL ComputeVpnGatewayData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeVpnGatewayData s) where
+    toObject ComputeVpnGatewayData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
@@ -1555,8 +1548,8 @@ data ComputeZonesData s = ComputeZonesData {
     {- ^ (Optional) - Allows to filter list of zones based on their current status. Status can be either @UP@ or @DOWN@ . Defaults to no filtering (all available zones - both @UP@ and @DOWN@ ). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeZonesData s) where
-    toHCL ComputeZonesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeZonesData s) where
+    toObject ComputeZonesData{..} = catMaybes
         [ TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "status" <$> TF.attribute _status
@@ -1617,8 +1610,8 @@ data ContainerClusterData s = ContainerClusterData {
     {- ^ or @region@ - The zone or region this cluster has been created in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ContainerClusterData s) where
-    toHCL ContainerClusterData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ContainerClusterData s) where
+    toObject ContainerClusterData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "zone" <$> TF.attribute _zone
@@ -1675,8 +1668,8 @@ data ContainerEngineVersionsData s = ContainerEngineVersionsData {
     {- ^ (required) - Zone to list available cluster versions for. Should match the zone the cluster will be deployed in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ContainerEngineVersionsData s) where
-    toHCL ContainerEngineVersionsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ContainerEngineVersionsData s) where
+    toObject ContainerEngineVersionsData{..} = catMaybes
         [ TF.assign "project" <$> TF.attribute _project
         , TF.assign "zone" <$> TF.attribute _zone
         ]
@@ -1745,8 +1738,8 @@ data ContainerRegistryImageData s = ContainerRegistryImageData {
     {- ^ : (Optional) The tag to fetch, if any. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ContainerRegistryImageData s) where
-    toHCL ContainerRegistryImageData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ContainerRegistryImageData s) where
+    toObject ContainerRegistryImageData{..} = catMaybes
         [ TF.assign "digest" <$> TF.attribute _digest
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -1833,8 +1826,8 @@ data ContainerRegistryRepositoryData s = ContainerRegistryRepositoryData {
     {- ^ : (Optional) The GCR region to use.  As of this writing, one of @asia@ , @eu@ , and @us@ .  See <https://cloud.google.com/container-registry/docs/pushing-and-pulling> for additional information. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ContainerRegistryRepositoryData s) where
-    toHCL ContainerRegistryRepositoryData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ContainerRegistryRepositoryData s) where
+    toObject ContainerRegistryRepositoryData{..} = catMaybes
         [ TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
         ]
@@ -1883,8 +1876,8 @@ data DnsManagedZoneData s = DnsManagedZoneData {
     {- ^ (Optional) The ID of the project for the Google Cloud DNS zone. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsManagedZoneData s) where
-    toHCL DnsManagedZoneData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DnsManagedZoneData s) where
+    toObject DnsManagedZoneData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
@@ -1937,8 +1930,8 @@ data FolderData s = FolderData {
     {- ^ (Optional) - @true@ to find the organization that the folder belongs, @false@ to avoid the lookup. It searches up the tree. (defaults to @false@ ) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FolderData s) where
-    toHCL FolderData{..} = TF.inline $ catMaybes
+instance TF.IsObject (FolderData s) where
+    toObject FolderData{..} = catMaybes
         [ TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "lookup_organization" <$> TF.attribute _lookup_organization
         ]
@@ -2003,8 +1996,8 @@ data IamPolicyData s = IamPolicyData {
     {- ^ (Required) - A nested configuration block (described below) defining a binding to be included in the policy document. Multiple @binding@ arguments are supported. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamPolicyData s) where
-    toHCL IamPolicyData{..} = TF.inline $ catMaybes
+instance TF.IsObject (IamPolicyData s) where
+    toObject IamPolicyData{..} = catMaybes
         [ TF.assign "binding" <$> TF.attribute _binding
         ]
 
@@ -2045,8 +2038,8 @@ data KmsSecretData s = KmsSecretData {
     {- ^ (Required) - The id of the CryptoKey that will be used to decrypt the provided ciphertext. This is represented by the format @{projectId}/{location}/{keyRingName}/{cryptoKeyName}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsSecretData s) where
-    toHCL KmsSecretData{..} = TF.inline $ catMaybes
+instance TF.IsObject (KmsSecretData s) where
+    toObject KmsSecretData{..} = catMaybes
         [ TF.assign "ciphertext" <$> TF.attribute _ciphertext
         , TF.assign "crypto_key" <$> TF.attribute _crypto_key
         ]
@@ -2091,8 +2084,8 @@ https://cloud.google.com/compute/docs/faq#where_can_i_find_product_name_short_ip
 data NetblockIpRangesData s = NetblockIpRangesData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetblockIpRangesData s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (NetblockIpRangesData s) where
+    toObject _ = []
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (NetblockIpRangesData s)) (TF.Attr s P.Text) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
@@ -2120,8 +2113,8 @@ data OrganizationData s = OrganizationData {
     {- ^ (Optional) - The name of the Organization in the form @{organization_id}@ or @organizations/{organization_id}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OrganizationData s) where
-    toHCL OrganizationData{..} = TF.inline $ catMaybes
+instance TF.IsObject (OrganizationData s) where
+    toObject OrganizationData{..} = catMaybes
         [ TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "organization" <$> TF.attribute _organization
         ]
@@ -2179,8 +2172,8 @@ data ProjectData s = ProjectData {
     {- ^ (Optional) The project ID. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectData s) where
-    toHCL ProjectData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProjectData s) where
+    toObject ProjectData{..} = catMaybes
         [ TF.assign "project_id" <$> TF.attribute _project_id
         ]
 
@@ -2214,8 +2207,8 @@ data ServiceAccountData s = ServiceAccountData {
     {- ^ (Optional) The ID of the project that the service account will be created in. Defaults to the provider project configuration. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceAccountData s) where
-    toHCL ServiceAccountData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceAccountData s) where
+    toObject ServiceAccountData{..} = catMaybes
         [ TF.assign "account_id" <$> TF.attribute _account_id
         , TF.assign "project" <$> TF.attribute _project
         ]
@@ -2277,8 +2270,8 @@ data ServiceAccountKeyData s = ServiceAccountKeyData {
     {- ^ (Required) The Service account id of the Key Pair. This can be a string in the format @{ACCOUNT}@ or @projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}@ , where @{ACCOUNT}@ is the email address or unique id of the service account. If the @{ACCOUNT}@ syntax is used, the project will be inferred from the account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceAccountKeyData s) where
-    toHCL ServiceAccountKeyData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceAccountKeyData s) where
+    toObject ServiceAccountKeyData{..} = catMaybes
         [ TF.assign "project" <$> TF.attribute _project
         , TF.assign "public_key_type" <$> TF.attribute _public_key_type
         , TF.assign "service_account_id" <$> TF.attribute _service_account_id
@@ -2350,8 +2343,8 @@ data StorageObjectSignedUrlData s = StorageObjectSignedUrlData {
     {- ^ (Required) The full path to the object inside the bucket -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageObjectSignedUrlData s) where
-    toHCL StorageObjectSignedUrlData{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageObjectSignedUrlData s) where
+    toObject StorageObjectSignedUrlData{..} = catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "credentials" <$> TF.attribute _credentials
         , TF.assign "duration" <$> TF.attribute _duration
@@ -2435,8 +2428,8 @@ data StorageProjectServiceAccountData s = StorageProjectServiceAccountData {
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageProjectServiceAccountData s) where
-    toHCL StorageProjectServiceAccountData{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageProjectServiceAccountData s) where
+    toObject StorageProjectServiceAccountData{..} = catMaybes
         [ TF.assign "project" <$> TF.attribute _project
         ]
 

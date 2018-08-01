@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -149,8 +142,8 @@ data AgentServiceResource s = AgentServiceResource {
     {- ^ (Optional) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AgentServiceResource s) where
-    toHCL AgentServiceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AgentServiceResource s) where
+    toObject AgentServiceResource{..} = catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "port" <$> TF.attribute _port
@@ -224,8 +217,8 @@ data CatalogEntryResource s = CatalogEntryResource {
     {- ^ (Optional) ACL token. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CatalogEntryResource s) where
-    toHCL CatalogEntryResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CatalogEntryResource s) where
+    toObject CatalogEntryResource{..} = catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "node" <$> TF.attribute _node
@@ -315,8 +308,8 @@ data IntentionResource s = IntentionResource {
     {- ^ (Required, string) The name of the source service for the intention. This service does not have to exist. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IntentionResource s) where
-    toHCL IntentionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IntentionResource s) where
+    toObject IntentionResource{..} = catMaybes
         [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "description" <$> TF.attribute _description
@@ -422,8 +415,8 @@ data KeyPrefixResource s = KeyPrefixResource {
     {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KeyPrefixResource s) where
-    toHCL KeyPrefixResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (KeyPrefixResource s) where
+    toObject KeyPrefixResource{..} = catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "path_prefix" <$> TF.attribute _path_prefix
         , TF.assign "subkeys" <$> TF.attribute _subkeys
@@ -498,8 +491,8 @@ data KeysResource s = KeysResource {
     {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KeysResource s) where
-    toHCL KeysResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (KeysResource s) where
+    toObject KeysResource{..} = catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "key" <$> TF.attribute _key
         , TF.assign "token" <$> TF.attribute _token
@@ -554,8 +547,8 @@ data NodeResource s = NodeResource {
     {- ^ (Required) The name of the node being added to, or referenced in the catalog. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NodeResource s) where
-    toHCL NodeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NodeResource s) where
+    toObject NodeResource{..} = catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -618,8 +611,8 @@ data PreparedQueryResource s = PreparedQueryResource {
     {- ^ (Optional) The ACL token to use when saving the prepared query. This overrides the token that the agent provides by default. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PreparedQueryResource s) where
-    toHCL PreparedQueryResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PreparedQueryResource s) where
+    toObject PreparedQueryResource{..} = catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "dns" <$> TF.attribute _dns
         , TF.assign "failover" <$> TF.attribute _failover
@@ -802,8 +795,8 @@ data ServiceResource s = ServiceResource {
     {- ^ (Optional, set of strings) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceResource s) where
-    toHCL ServiceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceResource s) where
+    toObject ServiceResource{..} = catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "name" <$> TF.attribute _name

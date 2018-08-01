@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -75,8 +68,8 @@ data ServiceData s = ServiceData {
     {- ^ (Required) Standard service's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceData s) where
-    toHCL ServiceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceData s) where
+    toObject ServiceData{..} = catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         ]
 
@@ -109,8 +102,8 @@ data StorageClassData s = StorageClassData {
     {- ^ (Required) Standard storage class's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageClassData s) where
-    toHCL StorageClassData{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageClassData s) where
+    toObject StorageClassData{..} = catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         ]
 

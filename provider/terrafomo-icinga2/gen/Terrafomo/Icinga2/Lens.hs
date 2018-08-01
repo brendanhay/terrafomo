@@ -1,14 +1,7 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RankNTypes             #-}
-{-# LANGUAGE UndecidableInstances   #-}
-
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 -- |
 -- Module      : Terrafomo.Icinga2.Lens
@@ -27,9 +20,12 @@ module Terrafomo.Icinga2.Lens
     , HasCheckCommand (..)
     , HasCommand (..)
     , HasDisplayName (..)
+    , HasEmail (..)
     , HasHostname (..)
     , HasName (..)
+    , HasServicename (..)
     , HasTemplates (..)
+    , HasUsers (..)
     , HasVars (..)
 
     -- ** Computed Attributes
@@ -38,9 +34,12 @@ module Terrafomo.Icinga2.Lens
     , HasComputedCheckCommand (..)
     , HasComputedCommand (..)
     , HasComputedDisplayName (..)
+    , HasComputedEmail (..)
     , HasComputedHostname (..)
     , HasComputedName (..)
+    , HasComputedServicename (..)
     , HasComputedTemplates (..)
+    , HasComputedUsers (..)
     , HasComputedVars (..)
     ) where
 
@@ -48,7 +47,6 @@ import GHC.Base ((.))
 
 import Lens.Micro (Lens')
 
-import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasAddress a b | a -> b where
@@ -81,6 +79,12 @@ class HasDisplayName a b | a -> b where
 instance HasDisplayName a b => HasDisplayName (TF.Schema l p a) b where
     displayName = TF.configuration . displayName
 
+class HasEmail a b | a -> b where
+    email :: Lens' a b
+
+instance HasEmail a b => HasEmail (TF.Schema l p a) b where
+    email = TF.configuration . email
+
 class HasHostname a b | a -> b where
     hostname :: Lens' a b
 
@@ -93,11 +97,23 @@ class HasName a b | a -> b where
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
+class HasServicename a b | a -> b where
+    servicename :: Lens' a b
+
+instance HasServicename a b => HasServicename (TF.Schema l p a) b where
+    servicename = TF.configuration . servicename
+
 class HasTemplates a b | a -> b where
     templates :: Lens' a b
 
 instance HasTemplates a b => HasTemplates (TF.Schema l p a) b where
     templates = TF.configuration . templates
+
+class HasUsers a b | a -> b where
+    users :: Lens' a b
+
+instance HasUsers a b => HasUsers (TF.Schema l p a) b where
+    users = TF.configuration . users
 
 class HasVars a b | a -> b where
     vars :: Lens' a b
@@ -120,14 +136,23 @@ class HasComputedCommand a b | a -> b where
 class HasComputedDisplayName a b | a -> b where
     computedDisplayName :: a -> b
 
+class HasComputedEmail a b | a -> b where
+    computedEmail :: a -> b
+
 class HasComputedHostname a b | a -> b where
     computedHostname :: a -> b
 
 class HasComputedName a b | a -> b where
     computedName :: a -> b
 
+class HasComputedServicename a b | a -> b where
+    computedServicename :: a -> b
+
 class HasComputedTemplates a b | a -> b where
     computedTemplates :: a -> b
+
+class HasComputedUsers a b | a -> b where
+    computedUsers :: a -> b
 
 class HasComputedVars a b | a -> b where
     computedVars :: a -> b

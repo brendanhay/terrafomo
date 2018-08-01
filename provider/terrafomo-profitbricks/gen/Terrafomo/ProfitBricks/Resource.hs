@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -114,8 +107,8 @@ data DatacenterResource s = DatacenterResource {
     {- ^ (Required)[string] The name of the Virtual Data Center. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatacenterResource s) where
-    toHCL DatacenterResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatacenterResource s) where
+    toObject DatacenterResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
@@ -167,8 +160,8 @@ Manages a set of firewall rules on ProfitBricks.
 data FirewallResource s = FirewallResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FirewallResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (FirewallResource s) where
+    toObject _ = []
 
 firewallResource :: TF.Resource P.ProfitBricks (FirewallResource s)
 firewallResource =
@@ -183,8 +176,8 @@ Manages groups and group privileges on ProfitBricks.
 data GroupResource s = GroupResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (GroupResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (GroupResource s) where
+    toObject _ = []
 
 groupResource :: TF.Resource P.ProfitBricks (GroupResource s)
 groupResource =
@@ -200,8 +193,8 @@ addresses that can be assigned servers or other resources.
 data IpblockResource s = IpblockResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpblockResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (IpblockResource s) where
+    toObject _ = []
 
 ipblockResource :: TF.Resource P.ProfitBricks (IpblockResource s)
 ipblockResource =
@@ -216,8 +209,8 @@ Manages IP Failover groups on ProfitBricks.
 data IpfailoverResource s = IpfailoverResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpfailoverResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (IpfailoverResource s) where
+    toObject _ = []
 
 ipfailoverResource :: TF.Resource P.ProfitBricks (IpfailoverResource s)
 ipfailoverResource =
@@ -232,8 +225,8 @@ Manages a LAN on ProfitBricks.
 data LanResource s = LanResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LanResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (LanResource s) where
+    toObject _ = []
 
 lanResource :: TF.Resource P.ProfitBricks (LanResource s)
 lanResource =
@@ -248,8 +241,8 @@ Manages a Load Balancer on ProfitBricks.
 data LoadbalancerResource s = LoadbalancerResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoadbalancerResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (LoadbalancerResource s) where
+    toObject _ = []
 
 loadbalancerResource :: TF.Resource P.ProfitBricks (LoadbalancerResource s)
 loadbalancerResource =
@@ -264,8 +257,8 @@ Manages a NIC on ProfitBricks.
 data NicResource s = NicResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NicResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (NicResource s) where
+    toObject _ = []
 
 nicResource :: TF.Resource P.ProfitBricks (NicResource s)
 nicResource =
@@ -280,8 +273,8 @@ Manages a Server on ProfitBricks.
 data ServerResource s = ServerResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServerResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (ServerResource s) where
+    toObject _ = []
 
 serverResource :: TF.Resource P.ProfitBricks (ServerResource s)
 serverResource =
@@ -297,8 +290,8 @@ each shared resource.
 data ShareResource s = ShareResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ShareResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (ShareResource s) where
+    toObject _ = []
 
 shareResource :: TF.Resource P.ProfitBricks (ShareResource s)
 shareResource =
@@ -313,8 +306,8 @@ Manages snapshots on ProfitBricks.
 data SnapshotResource s = SnapshotResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SnapshotResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (SnapshotResource s) where
+    toObject _ = []
 
 snapshotResource :: TF.Resource P.ProfitBricks (SnapshotResource s)
 snapshotResource =
@@ -329,8 +322,8 @@ Manages users and list users and groups associated with that user.
 data UserResource s = UserResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (UserResource s) where
+    toObject _ = []
 
 userResource :: TF.Resource P.ProfitBricks (UserResource s)
 userResource =
@@ -345,8 +338,8 @@ Manages a volume on ProfitBricks.
 data VolumeResource s = VolumeResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VolumeResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (VolumeResource s) where
+    toObject _ = []
 
 volumeResource :: TF.Resource P.ProfitBricks (VolumeResource s)
 volumeResource =

@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -29,6 +23,7 @@ module Terrafomo.Gitlab.Provider
     , providerToken
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -64,17 +59,19 @@ data Gitlab = Gitlab {
 
 instance Hashable Gitlab
 
-instance TF.ToHCL Gitlab where
-    toHCL x =
+instance TF.IsSection Gitlab where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Gitlab))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "base_url" <$> _base_url x
-            , TF.assign "cacert_file" <$> _cacert_file x
-            , TF.assign "insecure" <$> _insecure x
-            , TF.assign "token" <$> _token x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "base_url" <$> _base_url x
+                  , TF.assign "cacert_file" <$> _cacert_file x
+                  , TF.assign "insecure" <$> _insecure x
+                  , TF.assign "token" <$> _token x
+                  ])
 
 instance TF.IsProvider Gitlab where
     type ProviderType Gitlab = "gitlab"

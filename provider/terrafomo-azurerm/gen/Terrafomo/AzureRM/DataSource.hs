@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -33,6 +26,12 @@ module Terrafomo.AzureRM.DataSource
     , ApplicationSecurityGroupData (..)
     , applicationSecurityGroupData
 
+    , AzureadApplicationData (..)
+    , azureadApplicationData
+
+    , AzureadServicePrincipalData (..)
+    , azureadServicePrincipalData
+
     , BuiltinRoleDefinitionData (..)
     , builtinRoleDefinitionData
 
@@ -41,6 +40,9 @@ module Terrafomo.AzureRM.DataSource
 
     , ClientConfigData (..)
     , clientConfigData
+
+    , ContainerRegistryData (..)
+    , containerRegistryData
 
     , CosmosdbAccountData (..)
     , cosmosdbAccountData
@@ -69,6 +71,9 @@ module Terrafomo.AzureRM.DataSource
     , KubernetesClusterData (..)
     , kubernetesClusterData
 
+    , LogicAppWorkflowData (..)
+    , logicAppWorkflowData
+
     , ManagedDiskData (..)
     , managedDiskData
 
@@ -77,6 +82,12 @@ module Terrafomo.AzureRM.DataSource
 
     , NetworkSecurityGroupData (..)
     , networkSecurityGroupData
+
+    , NotificationHubData (..)
+    , notificationHubData
+
+    , NotificationHubNamespaceData (..)
+    , notificationHubNamespaceData
 
     , PlatformImageData (..)
     , platformImageData
@@ -132,15 +143,19 @@ module Terrafomo.AzureRM.DataSource
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasAllocationType (..)
+    , P.HasApplicationId (..)
     , P.HasAttached (..)
     , P.HasClientId (..)
     , P.HasConnectionString (..)
+    , P.HasDisplayName (..)
     , P.HasExpiry (..)
     , P.HasHttpsOnly (..)
     , P.HasLocation (..)
     , P.HasName (..)
     , P.HasNamePrefix (..)
     , P.HasNameRegex (..)
+    , P.HasNamespaceName (..)
+    , P.HasObjectId (..)
     , P.HasOffer (..)
     , P.HasPermissions (..)
     , P.HasPublisher (..)
@@ -159,6 +174,7 @@ module Terrafomo.AzureRM.DataSource
     , P.HasVirtualNetworkName (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAccessEndpoint (..)
     , P.HasComputedAccessPolicy (..)
     , P.HasComputedAccessTier (..)
     , P.HasComputedAccountEncryptionSource (..)
@@ -168,14 +184,20 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedActiveActive (..)
     , P.HasComputedAddressPrefix (..)
     , P.HasComputedAddressSpaces (..)
+    , P.HasComputedAdminEnabled (..)
+    , P.HasComputedAdminPassword (..)
+    , P.HasComputedAdminUsername (..)
     , P.HasComputedAgentPoolProfile (..)
     , P.HasComputedAllocationType (..)
+    , P.HasComputedApnsCredential (..)
     , P.HasComputedAppServicePlanId (..)
     , P.HasComputedAppSettings (..)
+    , P.HasComputedApplicationId (..)
     , P.HasComputedAppliedDnsServers (..)
     , P.HasComputedAssignableScopes (..)
     , P.HasComputedAttached (..)
     , P.HasComputedAutoInflateEnabled (..)
+    , P.HasComputedAvailableToOtherTenants (..)
     , P.HasComputedCapabilities (..)
     , P.HasComputedCapacity (..)
     , P.HasComputedCertificatePermissions (..)
@@ -204,10 +226,16 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedEnabledForDeployment (..)
     , P.HasComputedEnabledForDiskEncryption (..)
     , P.HasComputedEnabledForTemplateDeployment (..)
+    , P.HasComputedEncryptionState (..)
+    , P.HasComputedEncryptionType (..)
     , P.HasComputedExpiry (..)
+    , P.HasComputedFirewallAllowAzureIps (..)
+    , P.HasComputedFirewallState (..)
     , P.HasComputedFqdn (..)
+    , P.HasComputedGcmCredential (..)
     , P.HasComputedHttpsOnly (..)
     , P.HasComputedId (..)
+    , P.HasComputedIdentifierUris (..)
     , P.HasComputedIdleTimeoutInMinutes (..)
     , P.HasComputedInternalDnsNameLabel (..)
     , P.HasComputedInternalFqdn (..)
@@ -223,6 +251,7 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedLinuxProfile (..)
     , P.HasComputedLocation (..)
     , P.HasComputedLocationPlacementId (..)
+    , P.HasComputedLoginServer (..)
     , P.HasComputedMacAddress (..)
     , P.HasComputedMaxNumberOfRecordSets (..)
     , P.HasComputedMaximumNumberOfWorkers (..)
@@ -231,12 +260,19 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedNamePrefix (..)
     , P.HasComputedNameRegex (..)
     , P.HasComputedNameServers (..)
+    , P.HasComputedNamespaceName (..)
+    , P.HasComputedNamespaceType (..)
+    , P.HasComputedNetworkProfile (..)
     , P.HasComputedNetworkSecurityGroupId (..)
+    , P.HasComputedNodeResourceGroup (..)
     , P.HasComputedNumberOfRecordSets (..)
+    , P.HasComputedOauth2AllowImplicitFlow (..)
+    , P.HasComputedObjectId (..)
     , P.HasComputedOffer (..)
     , P.HasComputedOfferType (..)
     , P.HasComputedOsDisk (..)
     , P.HasComputedOsType (..)
+    , P.HasComputedParameters (..)
     , P.HasComputedPermissions (..)
     , P.HasComputedPrimaryAccessKey (..)
     , P.HasComputedPrimaryBlobConnectionString (..)
@@ -254,6 +290,7 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedQuota (..)
     , P.HasComputedQuotaId (..)
     , P.HasComputedRegistrationVirtualNetworkIds (..)
+    , P.HasComputedReplyUrls (..)
     , P.HasComputedResolutionVirtualNetworkIds (..)
     , P.HasComputedResourceGroupName (..)
     , P.HasComputedResourceTypes (..)
@@ -298,6 +335,8 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedVnetPeerings (..)
     , P.HasComputedVpnClientConfiguration (..)
     , P.HasComputedVpnType (..)
+    , P.HasComputedWorkflowSchema (..)
+    , P.HasComputedWorkflowVersion (..)
     , P.HasComputedZoneType (..)
     , P.HasComputedZones (..)
 
@@ -339,8 +378,8 @@ data AppServiceData s = AppServiceData {
     {- ^ (Required) The Name of the Resource Group where the App Service exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AppServiceData s) where
-    toHCL AppServiceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (AppServiceData s) where
+    toObject AppServiceData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -415,8 +454,8 @@ data AppServicePlanData s = AppServicePlanData {
     {- ^ (Required) The Name of the Resource Group where the App Service Plan exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AppServicePlanData s) where
-    toHCL AppServicePlanData{..} = TF.inline $ catMaybes
+instance TF.IsObject (AppServicePlanData s) where
+    toObject AppServicePlanData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -481,8 +520,8 @@ data ApplicationSecurityGroupData s = ApplicationSecurityGroupData {
     {- ^ - The name of the resource group in which the Application Security Group exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ApplicationSecurityGroupData s) where
-    toHCL ApplicationSecurityGroupData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ApplicationSecurityGroupData s) where
+    toObject ApplicationSecurityGroupData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -524,6 +563,136 @@ applicationSecurityGroupData =
             , _resource_group_name = TF.Nil
             }
 
+{- | The @azurerm_azuread_application@ AzureRM datasource.
+
+Gets information about an Application within Azure Active Directory. ->
+NOTE: If you're authenticating using a Service Principal then it must have
+permissions to both @Read and write all applications@ and @Sign in and read
+user profile@ within the @Windows Azure Active Directory@ API.
+-}
+data AzureadApplicationData s = AzureadApplicationData {
+      _name      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Specifies the name of the Application within Azure Active Directory. -}
+    , _object_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Specifies the Object ID of the Application within Azure Active Directory. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (AzureadApplicationData s) where
+    toObject AzureadApplicationData{..} = catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "object_id" <$> TF.attribute _object_id
+        ]
+
+instance P.HasName (AzureadApplicationData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: AzureadApplicationData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: AzureadApplicationData s)
+
+instance P.HasObjectId (AzureadApplicationData s) (TF.Attr s P.Text) where
+    objectId =
+        lens (_object_id :: AzureadApplicationData s -> TF.Attr s P.Text)
+             (\s a -> s { _object_id = a } :: AzureadApplicationData s)
+
+instance s ~ s' => P.HasComputedApplicationId (TF.Ref s' (AzureadApplicationData s)) (TF.Attr s P.Text) where
+    computedApplicationId x = TF.compute (TF.refKey x) "application_id"
+
+instance s ~ s' => P.HasComputedAvailableToOtherTenants (TF.Ref s' (AzureadApplicationData s)) (TF.Attr s P.Text) where
+    computedAvailableToOtherTenants x = TF.compute (TF.refKey x) "available_to_other_tenants"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AzureadApplicationData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedIdentifierUris (TF.Ref s' (AzureadApplicationData s)) (TF.Attr s P.Text) where
+    computedIdentifierUris x = TF.compute (TF.refKey x) "identifier_uris"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AzureadApplicationData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: AzureadApplicationData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedOauth2AllowImplicitFlow (TF.Ref s' (AzureadApplicationData s)) (TF.Attr s P.Text) where
+    computedOauth2AllowImplicitFlow x = TF.compute (TF.refKey x) "oauth2_allow_implicit_flow"
+
+instance s ~ s' => P.HasComputedObjectId (TF.Ref s' (AzureadApplicationData s)) (TF.Attr s P.Text) where
+    computedObjectId x = TF.compute (TF.refKey x) "object_id"
+
+instance s ~ s' => P.HasComputedReplyUrls (TF.Ref s' (AzureadApplicationData s)) (TF.Attr s P.Text) where
+    computedReplyUrls x = TF.compute (TF.refKey x) "reply_urls"
+
+azureadApplicationData :: TF.DataSource P.AzureRM (AzureadApplicationData s)
+azureadApplicationData =
+    TF.newDataSource "azurerm_azuread_application" $
+        AzureadApplicationData {
+              _name = TF.Nil
+            , _object_id = TF.Nil
+            }
+
+{- | The @azurerm_azuread_service_principal@ AzureRM datasource.
+
+Gets information about a Service Principal associated with an Application
+within Azure Active Directory. -> NOTE: If you're authenticating using a
+Service Principal then it must have permissions to both @Read and write all
+applications@ and @Sign in and read user profile@ within the @Windows Azure
+Active Directory@ API.
+-}
+data AzureadServicePrincipalData s = AzureadServicePrincipalData {
+      _application_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID of the Azure AD Application for which to create a Service Principal. -}
+    , _display_name   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The Display Name of the Azure AD Application associated with this Service Principal. -}
+    , _object_id      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID of the Azure AD Service Principal. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (AzureadServicePrincipalData s) where
+    toObject AzureadServicePrincipalData{..} = catMaybes
+        [ TF.assign "application_id" <$> TF.attribute _application_id
+        , TF.assign "display_name" <$> TF.attribute _display_name
+        , TF.assign "object_id" <$> TF.attribute _object_id
+        ]
+
+instance P.HasApplicationId (AzureadServicePrincipalData s) (TF.Attr s P.Text) where
+    applicationId =
+        lens (_application_id :: AzureadServicePrincipalData s -> TF.Attr s P.Text)
+             (\s a -> s { _application_id = a } :: AzureadServicePrincipalData s)
+
+instance P.HasDisplayName (AzureadServicePrincipalData s) (TF.Attr s P.Text) where
+    displayName =
+        lens (_display_name :: AzureadServicePrincipalData s -> TF.Attr s P.Text)
+             (\s a -> s { _display_name = a } :: AzureadServicePrincipalData s)
+
+instance P.HasObjectId (AzureadServicePrincipalData s) (TF.Attr s P.Text) where
+    objectId =
+        lens (_object_id :: AzureadServicePrincipalData s -> TF.Attr s P.Text)
+             (\s a -> s { _object_id = a } :: AzureadServicePrincipalData s)
+
+instance s ~ s' => P.HasComputedApplicationId (TF.Ref s' (AzureadServicePrincipalData s)) (TF.Attr s P.Text) where
+    computedApplicationId =
+        (_application_id :: AzureadServicePrincipalData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (AzureadServicePrincipalData s)) (TF.Attr s P.Text) where
+    computedDisplayName =
+        (_display_name :: AzureadServicePrincipalData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AzureadServicePrincipalData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedObjectId (TF.Ref s' (AzureadServicePrincipalData s)) (TF.Attr s P.Text) where
+    computedObjectId =
+        (_object_id :: AzureadServicePrincipalData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+azureadServicePrincipalData :: TF.DataSource P.AzureRM (AzureadServicePrincipalData s)
+azureadServicePrincipalData =
+    TF.newDataSource "azurerm_azuread_service_principal" $
+        AzureadServicePrincipalData {
+              _application_id = TF.Nil
+            , _display_name = TF.Nil
+            , _object_id = TF.Nil
+            }
+
 {- | The @azurerm_builtin_role_definition@ AzureRM datasource.
 
 Use this data source to access the properties of a built-in Role Definition.
@@ -535,8 +704,8 @@ data BuiltinRoleDefinitionData s = BuiltinRoleDefinitionData {
     {- ^ (Required) Specifies the name of the built-in Role Definition. Possible values are: @Contributor@ , @Owner@ , @Reader@ and @VirtualMachineContributor@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BuiltinRoleDefinitionData s) where
-    toHCL BuiltinRoleDefinitionData{..} = TF.inline $ catMaybes
+instance TF.IsObject (BuiltinRoleDefinitionData s) where
+    toObject BuiltinRoleDefinitionData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -583,8 +752,8 @@ data CdnProfileData s = CdnProfileData {
     {- ^ (Required) The name of the resource group in which the CDN Profile exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CdnProfileData s) where
-    toHCL CdnProfileData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CdnProfileData s) where
+    toObject CdnProfileData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -640,8 +809,8 @@ data ClientConfigData s = ClientConfigData {
     {- ^ is set to the Azure Tenant ID. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ClientConfigData s) where
-    toHCL ClientConfigData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ClientConfigData s) where
+    toObject ClientConfigData{..} = catMaybes
         [ TF.assign "client_id" <$> TF.attribute _client_id
         , TF.assign "subscription_id" <$> TF.attribute _subscription_id
         , TF.assign "tenant_id" <$> TF.attribute _tenant_id
@@ -686,6 +855,78 @@ clientConfigData =
             , _tenant_id = TF.Nil
             }
 
+{- | The @azurerm_container_registry@ AzureRM datasource.
+
+Use this data source to access information about a Container Registry
+-}
+data ContainerRegistryData s = ContainerRegistryData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Container Registry. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The Name of the Resource Group where this Container Registry exists. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (ContainerRegistryData s) where
+    toObject ContainerRegistryData{..} = catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (ContainerRegistryData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: ContainerRegistryData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: ContainerRegistryData s)
+
+instance P.HasResourceGroupName (ContainerRegistryData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: ContainerRegistryData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: ContainerRegistryData s)
+
+instance s ~ s' => P.HasComputedAdminEnabled (TF.Ref s' (ContainerRegistryData s)) (TF.Attr s P.Text) where
+    computedAdminEnabled x = TF.compute (TF.refKey x) "admin_enabled"
+
+instance s ~ s' => P.HasComputedAdminPassword (TF.Ref s' (ContainerRegistryData s)) (TF.Attr s P.Text) where
+    computedAdminPassword x = TF.compute (TF.refKey x) "admin_password"
+
+instance s ~ s' => P.HasComputedAdminUsername (TF.Ref s' (ContainerRegistryData s)) (TF.Attr s P.Text) where
+    computedAdminUsername x = TF.compute (TF.refKey x) "admin_username"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerRegistryData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ContainerRegistryData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedLoginServer (TF.Ref s' (ContainerRegistryData s)) (TF.Attr s P.Text) where
+    computedLoginServer x = TF.compute (TF.refKey x) "login_server"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerRegistryData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: ContainerRegistryData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (ContainerRegistryData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: ContainerRegistryData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSku (TF.Ref s' (ContainerRegistryData s)) (TF.Attr s P.Text) where
+    computedSku x = TF.compute (TF.refKey x) "sku"
+
+instance s ~ s' => P.HasComputedStorageAccountId (TF.Ref s' (ContainerRegistryData s)) (TF.Attr s P.Text) where
+    computedStorageAccountId x = TF.compute (TF.refKey x) "storage_account_id"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ContainerRegistryData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+containerRegistryData :: TF.DataSource P.AzureRM (ContainerRegistryData s)
+containerRegistryData =
+    TF.newDataSource "azurerm_container_registry" $
+        ContainerRegistryData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
 {- | The @azurerm_cosmosdb_account@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure CosmosDB (formally
@@ -698,8 +939,8 @@ data CosmosdbAccountData s = CosmosdbAccountData {
     {- ^ (Required) Specifies the name of the resource group in which the CosmosDB Account resides. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CosmosdbAccountData s) where
-    toHCL CosmosdbAccountData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CosmosdbAccountData s) where
+    toObject CosmosdbAccountData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -767,8 +1008,8 @@ data DataLakeStoreData s = DataLakeStoreData {
     {- ^ (Required) The Name of the Resource Group where the Data Lake Store exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataLakeStoreData s) where
-    toHCL DataLakeStoreData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DataLakeStoreData s) where
+    toObject DataLakeStoreData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -782,6 +1023,18 @@ instance P.HasResourceGroupName (DataLakeStoreData s) (TF.Attr s P.Text) where
     resourceGroupName =
         lens (_resource_group_name :: DataLakeStoreData s -> TF.Attr s P.Text)
              (\s a -> s { _resource_group_name = a } :: DataLakeStoreData s)
+
+instance s ~ s' => P.HasComputedEncryptionState (TF.Ref s' (DataLakeStoreData s)) (TF.Attr s P.Text) where
+    computedEncryptionState x = TF.compute (TF.refKey x) "encryption_state"
+
+instance s ~ s' => P.HasComputedEncryptionType (TF.Ref s' (DataLakeStoreData s)) (TF.Attr s P.Text) where
+    computedEncryptionType x = TF.compute (TF.refKey x) "encryption_type"
+
+instance s ~ s' => P.HasComputedFirewallAllowAzureIps (TF.Ref s' (DataLakeStoreData s)) (TF.Attr s P.Text) where
+    computedFirewallAllowAzureIps x = TF.compute (TF.refKey x) "firewall_allow_azure_ips"
+
+instance s ~ s' => P.HasComputedFirewallState (TF.Ref s' (DataLakeStoreData s)) (TF.Attr s P.Text) where
+    computedFirewallState x = TF.compute (TF.refKey x) "firewall_state"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DataLakeStoreData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -821,8 +1074,8 @@ data DnsZoneData s = DnsZoneData {
     {- ^ (Optional) The Name of the Resource Group where the DNS Zone exists. If the Name of the Resource Group is not provided, the first DNS Zone from the list of DNS Zones in your subscription that matches @name@ will be returned. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsZoneData s) where
-    toHCL DnsZoneData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DnsZoneData s) where
+    toObject DnsZoneData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -890,8 +1143,8 @@ data EventhubNamespaceData s = EventhubNamespaceData {
     {- ^ (Required) The Name of the Resource Group where the EventHub Namespace exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EventhubNamespaceData s) where
-    toHCL EventhubNamespaceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EventhubNamespaceData s) where
+    toObject EventhubNamespaceData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -960,8 +1213,8 @@ data ImageData s = ImageData {
     {- ^ (Optional) By default when matching by regex, images are sorted by name in ascending order and the first match is chosen, to sort descending, set this flag. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImageData s) where
-    toHCL ImageData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ImageData s) where
+    toObject ImageData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_regex" <$> TF.attribute _name_regex
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
@@ -1038,8 +1291,8 @@ data KeyVaultAccessPolicyData s = KeyVaultAccessPolicyData {
     {- ^ (Required) Specifies the name of the Management Template. Possible values are: @Key Management@ , @Secret Management@ , @Certificate Management@ , @Key & Secret Management@ , @Key & Certificate Management@ , @Secret & Certificate Management@ , @Key, Secret, & Certificate Management@ -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KeyVaultAccessPolicyData s) where
-    toHCL KeyVaultAccessPolicyData{..} = TF.inline $ catMaybes
+instance TF.IsObject (KeyVaultAccessPolicyData s) where
+    toObject KeyVaultAccessPolicyData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -1083,8 +1336,8 @@ data KeyVaultData s = KeyVaultData {
     {- ^ (Required) The name of the Resource Group in which the Key Vault exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KeyVaultData s) where
-    toHCL KeyVaultData{..} = TF.inline $ catMaybes
+instance TF.IsObject (KeyVaultData s) where
+    toObject KeyVaultData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -1160,8 +1413,8 @@ data KeyVaultSecretData s = KeyVaultSecretData {
     {- ^ (Required) Specifies the URI used to access the Key Vault instance, available on the @azurerm_key_vault@ Data Source / Resource. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KeyVaultSecretData s) where
-    toHCL KeyVaultSecretData{..} = TF.inline $ catMaybes
+instance TF.IsObject (KeyVaultSecretData s) where
+    toObject KeyVaultSecretData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "vault_uri" <$> TF.attribute _vault_uri
         ]
@@ -1222,8 +1475,8 @@ data KubernetesClusterData s = KubernetesClusterData {
     {- ^ (Required) The name of the Resource Group in which the managed Kubernetes Cluster exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KubernetesClusterData s) where
-    toHCL KubernetesClusterData{..} = TF.inline $ catMaybes
+instance TF.IsObject (KubernetesClusterData s) where
+    toObject KubernetesClusterData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -1270,6 +1523,12 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (KubernetesClusterData s)) (TF.A
         (_name :: KubernetesClusterData s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedNetworkProfile (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedNetworkProfile x = TF.compute (TF.refKey x) "network_profile"
+
+instance s ~ s' => P.HasComputedNodeResourceGroup (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedNodeResourceGroup x = TF.compute (TF.refKey x) "node_resource_group"
+
 instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
         (_resource_group_name :: KubernetesClusterData s -> TF.Attr s P.Text)
@@ -1289,6 +1548,72 @@ kubernetesClusterData =
             , _resource_group_name = TF.Nil
             }
 
+{- | The @azurerm_logic_app_workflow@ AzureRM datasource.
+
+Gets information about a Logic App Workflow.
+-}
+data LogicAppWorkflowData s = LogicAppWorkflowData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Logic App Workflow. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Resource Group in which the Logic App Workflow exists. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (LogicAppWorkflowData s) where
+    toObject LogicAppWorkflowData{..} = catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (LogicAppWorkflowData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: LogicAppWorkflowData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: LogicAppWorkflowData s)
+
+instance P.HasResourceGroupName (LogicAppWorkflowData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: LogicAppWorkflowData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: LogicAppWorkflowData s)
+
+instance s ~ s' => P.HasComputedAccessEndpoint (TF.Ref s' (LogicAppWorkflowData s)) (TF.Attr s P.Text) where
+    computedAccessEndpoint x = TF.compute (TF.refKey x) "access_endpoint"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogicAppWorkflowData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (LogicAppWorkflowData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LogicAppWorkflowData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: LogicAppWorkflowData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedParameters (TF.Ref s' (LogicAppWorkflowData s)) (TF.Attr s P.Text) where
+    computedParameters x = TF.compute (TF.refKey x) "parameters"
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (LogicAppWorkflowData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: LogicAppWorkflowData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (LogicAppWorkflowData s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance s ~ s' => P.HasComputedWorkflowSchema (TF.Ref s' (LogicAppWorkflowData s)) (TF.Attr s P.Text) where
+    computedWorkflowSchema x = TF.compute (TF.refKey x) "workflow_schema"
+
+instance s ~ s' => P.HasComputedWorkflowVersion (TF.Ref s' (LogicAppWorkflowData s)) (TF.Attr s P.Text) where
+    computedWorkflowVersion x = TF.compute (TF.refKey x) "workflow_version"
+
+logicAppWorkflowData :: TF.DataSource P.AzureRM (LogicAppWorkflowData s)
+logicAppWorkflowData =
+    TF.newDataSource "azurerm_logic_app_workflow" $
+        LogicAppWorkflowData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
 {- | The @azurerm_managed_disk@ AzureRM datasource.
 
 Use this data source to access the properties of an existing Azure Managed
@@ -1301,8 +1626,8 @@ data ManagedDiskData s = ManagedDiskData {
     {- ^ (Required) Specifies the name of the resource group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ManagedDiskData s) where
-    toHCL ManagedDiskData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ManagedDiskData s) where
+    toObject ManagedDiskData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -1367,8 +1692,8 @@ data NetworkInterfaceData s = NetworkInterfaceData {
     {- ^ (Required) Specifies the name of the resource group the Network Interface is located in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkInterfaceData s) where
-    toHCL NetworkInterfaceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkInterfaceData s) where
+    toObject NetworkInterfaceData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -1457,8 +1782,8 @@ data NetworkSecurityGroupData s = NetworkSecurityGroupData {
     {- ^ (Required) Specifies the Name of the Resource Group within which the Network Security Group exists -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkSecurityGroupData s) where
-    toHCL NetworkSecurityGroupData{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkSecurityGroupData s) where
+    toObject NetworkSecurityGroupData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -1503,6 +1828,138 @@ networkSecurityGroupData =
             , _resource_group_name = TF.Nil
             }
 
+{- | The @azurerm_notification_hub@ AzureRM datasource.
+
+Gets information about the specified Notification Hub within a Notification
+Hub Namespace.
+-}
+data NotificationHubData s = NotificationHubData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the Name of the Notification Hub. -}
+    , _namespace_name      :: !(TF.Attr s P.Text)
+    {- ^ (Required)  Specifies the Name of the Notification Hub Namespace which contains the Notification Hub. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the Name of the Resource Group within which the Notification Hub exists. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (NotificationHubData s) where
+    toObject NotificationHubData{..} = catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "namespace_name" <$> TF.attribute _namespace_name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (NotificationHubData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: NotificationHubData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: NotificationHubData s)
+
+instance P.HasNamespaceName (NotificationHubData s) (TF.Attr s P.Text) where
+    namespaceName =
+        lens (_namespace_name :: NotificationHubData s -> TF.Attr s P.Text)
+             (\s a -> s { _namespace_name = a } :: NotificationHubData s)
+
+instance P.HasResourceGroupName (NotificationHubData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: NotificationHubData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: NotificationHubData s)
+
+instance s ~ s' => P.HasComputedApnsCredential (TF.Ref s' (NotificationHubData s)) (TF.Attr s P.Text) where
+    computedApnsCredential x = TF.compute (TF.refKey x) "apns_credential"
+
+instance s ~ s' => P.HasComputedGcmCredential (TF.Ref s' (NotificationHubData s)) (TF.Attr s P.Text) where
+    computedGcmCredential x = TF.compute (TF.refKey x) "gcm_credential"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NotificationHubData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (NotificationHubData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NotificationHubData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: NotificationHubData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNamespaceName (TF.Ref s' (NotificationHubData s)) (TF.Attr s P.Text) where
+    computedNamespaceName =
+        (_namespace_name :: NotificationHubData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (NotificationHubData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: NotificationHubData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+notificationHubData :: TF.DataSource P.AzureRM (NotificationHubData s)
+notificationHubData =
+    TF.newDataSource "azurerm_notification_hub" $
+        NotificationHubData {
+              _name = TF.Nil
+            , _namespace_name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
+{- | The @azurerm_notification_hub_namespace@ AzureRM datasource.
+
+Gets information about the specified Notification Hub Namespace.
+-}
+data NotificationHubNamespaceData s = NotificationHubNamespaceData {
+      _name                :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the Name of the Notification Hub Namespace. -}
+    , _resource_group_name :: !(TF.Attr s P.Text)
+    {- ^ (Required) Specifies the Name of the Resource Group within which the Notification Hub exists. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (NotificationHubNamespaceData s) where
+    toObject NotificationHubNamespaceData{..} = catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        ]
+
+instance P.HasName (NotificationHubNamespaceData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: NotificationHubNamespaceData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: NotificationHubNamespaceData s)
+
+instance P.HasResourceGroupName (NotificationHubNamespaceData s) (TF.Attr s P.Text) where
+    resourceGroupName =
+        lens (_resource_group_name :: NotificationHubNamespaceData s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: NotificationHubNamespaceData s)
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (NotificationHubNamespaceData s)) (TF.Attr s P.Text) where
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NotificationHubNamespaceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (NotificationHubNamespaceData s)) (TF.Attr s P.Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NotificationHubNamespaceData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: NotificationHubNamespaceData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNamespaceType (TF.Ref s' (NotificationHubNamespaceData s)) (TF.Attr s P.Text) where
+    computedNamespaceType x = TF.compute (TF.refKey x) "namespace_type"
+
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (NotificationHubNamespaceData s)) (TF.Attr s P.Text) where
+    computedResourceGroupName =
+        (_resource_group_name :: NotificationHubNamespaceData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSku (TF.Ref s' (NotificationHubNamespaceData s)) (TF.Attr s P.Text) where
+    computedSku x = TF.compute (TF.refKey x) "sku"
+
+notificationHubNamespaceData :: TF.DataSource P.AzureRM (NotificationHubNamespaceData s)
+notificationHubNamespaceData =
+    TF.newDataSource "azurerm_notification_hub_namespace" $
+        NotificationHubNamespaceData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
 {- | The @azurerm_platform_image@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure Platform Image.
@@ -1518,8 +1975,8 @@ data PlatformImageData s = PlatformImageData {
     {- ^ (Required) Specifies the SKU of the Platform Image. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PlatformImageData s) where
-    toHCL PlatformImageData{..} = TF.inline $ catMaybes
+instance TF.IsObject (PlatformImageData s) where
+    toObject PlatformImageData{..} = catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "offer" <$> TF.attribute _offer
         , TF.assign "publisher" <$> TF.attribute _publisher
@@ -1594,8 +2051,8 @@ data PublicIpData s = PublicIpData {
     {- ^ (Required) Specifies the name of the resource group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PublicIpData s) where
-    toHCL PublicIpData{..} = TF.inline $ catMaybes
+instance TF.IsObject (PublicIpData s) where
+    toObject PublicIpData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -1658,8 +2115,8 @@ data PublicIpsData s = PublicIpsData {
     {- ^ (Required) Specifies the name of the resource group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PublicIpsData s) where
-    toHCL PublicIpsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (PublicIpsData s) where
+    toObject PublicIpsData{..} = catMaybes
         [ TF.assign "allocation_type" <$> TF.attribute _allocation_type
         , TF.assign "attached" <$> TF.attribute _attached
         , TF.assign "name_prefix" <$> TF.attribute _name_prefix
@@ -1730,8 +2187,8 @@ data RecoveryServicesVaultData s = RecoveryServicesVaultData {
     {- ^ (Required) The name of the resource group in which the Recovery Services Vault resides. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RecoveryServicesVaultData s) where
-    toHCL RecoveryServicesVaultData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RecoveryServicesVaultData s) where
+    toObject RecoveryServicesVaultData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -1785,8 +2242,8 @@ data ResourceGroupData s = ResourceGroupData {
     {- ^ (Required) Specifies the name of the resource group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceGroupData s) where
-    toHCL ResourceGroupData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ResourceGroupData s) where
+    toObject ResourceGroupData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -1826,8 +2283,8 @@ data RoleDefinitionData s = RoleDefinitionData {
     {- ^ (Required) Specifies the Scope at which the Custom Role Definition exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RoleDefinitionData s) where
-    toHCL RoleDefinitionData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RoleDefinitionData s) where
+    toObject RoleDefinitionData{..} = catMaybes
         [ TF.assign "role_definition_id" <$> TF.attribute _role_definition_id
         , TF.assign "scope" <$> TF.attribute _scope
         ]
@@ -1886,8 +2343,8 @@ data RouteTableData s = RouteTableData {
     {- ^ (Required) The name of the Resource Group in which the Route Table exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RouteTableData s) where
-    toHCL RouteTableData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RouteTableData s) where
+    toObject RouteTableData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -1947,8 +2404,8 @@ data SchedulerJobCollectionData s = SchedulerJobCollectionData {
     {- ^ (Required) Specifies the name of the resource group in which the Scheduler Job Collection resides. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SchedulerJobCollectionData s) where
-    toHCL SchedulerJobCollectionData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SchedulerJobCollectionData s) where
+    toObject SchedulerJobCollectionData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -2010,8 +2467,8 @@ data SnapshotData s = SnapshotData {
     {- ^ (Required) Specifies the name of the resource group the Snapshot is located in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SnapshotData s) where
-    toHCL SnapshotData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SnapshotData s) where
+    toObject SnapshotData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -2073,8 +2530,8 @@ data StorageAccountData s = StorageAccountData {
     {- ^ (Required) Specifies the name of the resource group the Storage Account is located in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageAccountData s) where
-    toHCL StorageAccountData{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageAccountData s) where
+    toObject StorageAccountData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -2214,8 +2671,8 @@ data StorageAccountSasData s = StorageAccountSasData {
     {- ^ (Required) The starting time and date of validity of this SAS. Must be a valid ISO-8601 format time/date string. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageAccountSasData s) where
-    toHCL StorageAccountSasData{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageAccountSasData s) where
+    toObject StorageAccountSasData{..} = catMaybes
         [ TF.assign "connection_string" <$> TF.attribute _connection_string
         , TF.assign "expiry" <$> TF.attribute _expiry
         , TF.assign "https_only" <$> TF.attribute _https_only
@@ -2325,8 +2782,8 @@ data SubnetData s = SubnetData {
     {- ^ (Required) Specifies the name of the Virtual Network this Subnet is located within. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SubnetData s) where
-    toHCL SubnetData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SubnetData s) where
+    toObject SubnetData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         , TF.assign "virtual_network_name" <$> TF.attribute _virtual_network_name
@@ -2395,8 +2852,8 @@ data SubscriptionData s = SubscriptionData {
     {- ^ (Optional) Specifies the ID of the subscription. If this argument is omitted, the subscription ID of the current Azure Resource Manager provider is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SubscriptionData s) where
-    toHCL SubscriptionData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SubscriptionData s) where
+    toObject SubscriptionData{..} = catMaybes
         [ TF.assign "subscription_id" <$> TF.attribute _subscription_id
         ]
 
@@ -2442,8 +2899,8 @@ data SubscriptionsData s = SubscriptionsData {
     {- ^ - One or more @subscription@ blocks as defined below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SubscriptionsData s) where
-    toHCL SubscriptionsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SubscriptionsData s) where
+    toObject SubscriptionsData{..} = catMaybes
         [ TF.assign "subscriptions" <$> TF.attribute _subscriptions
         ]
 
@@ -2474,8 +2931,8 @@ data TrafficManagerGeographicalLocationData s = TrafficManagerGeographicalLocati
     {- ^ (Required) Specifies the name of the Location, for example @World@ , @Europe@ or @Germany@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TrafficManagerGeographicalLocationData s) where
-    toHCL TrafficManagerGeographicalLocationData{..} = TF.inline $ catMaybes
+instance TF.IsObject (TrafficManagerGeographicalLocationData s) where
+    toObject TrafficManagerGeographicalLocationData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -2510,8 +2967,8 @@ data VirtualNetworkData s = VirtualNetworkData {
     {- ^ (Required) Specifies the name of the resource group the Virtual Network is located in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VirtualNetworkData s) where
-    toHCL VirtualNetworkData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VirtualNetworkData s) where
+    toObject VirtualNetworkData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
@@ -2571,8 +3028,8 @@ data VirtualNetworkGatewayData s = VirtualNetworkGatewayData {
     {- ^ (Required) Specifies the name of the resource group the Virtual Network Gateway is located in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VirtualNetworkGatewayData s) where
-    toHCL VirtualNetworkGatewayData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VirtualNetworkGatewayData s) where
+    toObject VirtualNetworkGatewayData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]

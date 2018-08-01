@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -32,6 +26,7 @@ module Terrafomo.VCloudDirector.Provider
     , providerVdc
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -76,20 +71,22 @@ data VCloudDirector = VCloudDirector {
 
 instance Hashable VCloudDirector
 
-instance TF.ToHCL VCloudDirector where
-    toHCL x =
+instance TF.IsSection VCloudDirector where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (VCloudDirector))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "allow_unverified_ssl" <$> _allow_unverified_ssl x
-            , TF.assign "max_retry_timeout" <$> _max_retry_timeout x
-            , TF.assign "org" <$> _org x
-            , TF.assign "password" <$> _password x
-            , TF.assign "url" <$> _url x
-            , TF.assign "user" <$> _user x
-            , TF.assign "vdc" <$> _vdc x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "allow_unverified_ssl" <$> _allow_unverified_ssl x
+                  , TF.assign "max_retry_timeout" <$> _max_retry_timeout x
+                  , TF.assign "org" <$> _org x
+                  , TF.assign "password" <$> _password x
+                  , TF.assign "url" <$> _url x
+                  , TF.assign "user" <$> _user x
+                  , TF.assign "vdc" <$> _vdc x
+                  ])
 
 instance TF.IsProvider VCloudDirector where
     type ProviderType VCloudDirector = "vcd"

@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -184,8 +177,8 @@ data BlockStorageResource s = BlockStorageResource {
     {- ^ (Required) Size of the block storage ( @min: 20, max: 500, multipleOf: 10@ ) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BlockStorageResource s) where
-    toHCL BlockStorageResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (BlockStorageResource s) where
+    toObject BlockStorageResource{..} = catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -281,8 +274,8 @@ data ImageResource s = ImageResource {
     {- ^ (Optional) URL where the image can be downloaded. It is required when the source is image or iso. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImageResource s) where
-    toHCL ImageResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ImageResource s) where
+    toObject ImageResource{..} = catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "frequency" <$> TF.attribute _frequency
@@ -424,8 +417,8 @@ data InstanceSizeResource s = InstanceSizeResource {
     {- ^ (Optional)  Number of vcores -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InstanceSizeResource s) where
-    toHCL InstanceSizeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (InstanceSizeResource s) where
+    toObject InstanceSizeResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "ram" <$> TF.attribute _ram
         , TF.assign "vcores" <$> TF.attribute _vcores
@@ -485,8 +478,8 @@ data IpResource s = IpResource {
     {- ^ (Optional) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpResource s) where
-    toHCL IpResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IpResource s) where
+    toObject IpResource{..} = catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "ip_address" <$> TF.attribute _ip_address
         , TF.assign "ip_type" <$> TF.attribute _ip_type
@@ -570,8 +563,8 @@ data ServerResource s = ServerResource {
     {- ^ (Optional) Persistence duration in seconds -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServerResource s) where
-    toHCL ServerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServerResource s) where
+    toObject ServerResource{..} = catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "health_check_interval" <$> TF.attribute _health_check_interval
@@ -713,8 +706,8 @@ data SshKeyResource s = SshKeyResource {
     {- ^ (Optional) Public key to import. If not given, new SSH key pair will be created and the private key is returned in the response -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SshKeyResource s) where
-    toHCL SshKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SshKeyResource s) where
+    toObject SshKeyResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "public_key" <$> TF.attribute _public_key
@@ -776,8 +769,8 @@ data VpnResource s = VpnResource {
     {- ^ (Required) The name of the VPN -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpnResource s) where
-    toHCL VpnResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpnResource s) where
+    toObject VpnResource{..} = catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "download_path" <$> TF.attribute _download_path

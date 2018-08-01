@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -34,6 +28,7 @@ module Terrafomo.AzureRM.Provider
     , providerUseMsi
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -81,22 +76,24 @@ data AzureRM = AzureRM {
 
 instance Hashable AzureRM
 
-instance TF.ToHCL AzureRM where
-    toHCL x =
+instance TF.IsSection AzureRM where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (AzureRM))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "client_id" <$> _client_id x
-            , TF.assign "client_secret" <$> _client_secret x
-            , TF.assign "environment" <$> _environment x
-            , TF.assign "msi_endpoint" <$> _msi_endpoint x
-            , TF.assign "skip_credentials_validation" <$> _skip_credentials_validation x
-            , TF.assign "skip_provider_registration" <$> _skip_provider_registration x
-            , TF.assign "subscription_id" <$> _subscription_id x
-            , TF.assign "tenant_id" <$> _tenant_id x
-            , TF.assign "use_msi" <$> _use_msi x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "client_id" <$> _client_id x
+                  , TF.assign "client_secret" <$> _client_secret x
+                  , TF.assign "environment" <$> _environment x
+                  , TF.assign "msi_endpoint" <$> _msi_endpoint x
+                  , TF.assign "skip_credentials_validation" <$> _skip_credentials_validation x
+                  , TF.assign "skip_provider_registration" <$> _skip_provider_registration x
+                  , TF.assign "subscription_id" <$> _subscription_id x
+                  , TF.assign "tenant_id" <$> _tenant_id x
+                  , TF.assign "use_msi" <$> _use_msi x
+                  ])
 
 instance TF.IsProvider AzureRM where
     type ProviderType AzureRM = "azurerm"

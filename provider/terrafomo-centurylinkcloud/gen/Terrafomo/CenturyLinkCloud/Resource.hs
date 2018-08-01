@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -165,8 +158,8 @@ data GroupResource s = GroupResource {
     {- ^ - (Computed) The ID of the parent group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (GroupResource s) where
-    toHCL GroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (GroupResource s) where
+    toObject GroupResource{..} = catMaybes
         [ TF.assign "custom_fields" <$> TF.attribute _custom_fields
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "location_id" <$> TF.attribute _location_id
@@ -268,8 +261,8 @@ data LoadBalancerPoolResource s = LoadBalancerPoolResource {
     {- ^ (Required, int) Either 80 or 443 -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoadBalancerPoolResource s) where
-    toHCL LoadBalancerPoolResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoadBalancerPoolResource s) where
+    toObject LoadBalancerPoolResource{..} = catMaybes
         [ TF.assign "data_center" <$> TF.attribute _data_center
         , TF.assign "load_balancer" <$> TF.attribute _load_balancer
         , TF.assign "method" <$> TF.attribute _method
@@ -369,8 +362,8 @@ data LoadBalancerResource s = LoadBalancerResource {
     {- ^ (Required, string) Either "enabled" or "disabled" -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoadBalancerResource s) where
-    toHCL LoadBalancerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoadBalancerResource s) where
+    toObject LoadBalancerResource{..} = catMaybes
         [ TF.assign "data_center" <$> TF.attribute _data_center
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address" <$> TF.attribute _ip_address
@@ -455,8 +448,8 @@ data PublicIpResource s = PublicIpResource {
     {- ^ (Optional) See <#source_restrictions> below for details. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PublicIpResource s) where
-    toHCL PublicIpResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PublicIpResource s) where
+    toObject PublicIpResource{..} = catMaybes
         [ TF.assign "internal_ip_address" <$> TF.attribute _internal_ip_address
         , TF.assign "ports" <$> TF.attribute _ports
         , TF.assign "server_id" <$> TF.attribute _server_id
@@ -564,8 +557,8 @@ data ServerResource s = ServerResource {
     {- ^ (Required, string) The virtualization type One of "standard", "hyperscale", "bareMetal" -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServerResource s) where
-    toHCL ServerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServerResource s) where
+    toObject ServerResource{..} = catMaybes
         [ TF.assign "aa_policy_id" <$> TF.attribute _aa_policy_id
         , TF.assign "additional_disks" <$> TF.attribute _additional_disks
         , TF.assign "configuration_id" <$> TF.attribute _configuration_id

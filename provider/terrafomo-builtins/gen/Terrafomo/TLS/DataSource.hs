@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -72,8 +65,8 @@ data PublicKeyData s = PublicKeyData {
     {- ^ (Required) The private key to use. Currently-supported key types are "RSA" or "ECDSA". -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PublicKeyData s) where
-    toHCL PublicKeyData{..} = TF.inline $ catMaybes
+instance TF.IsObject (PublicKeyData s) where
+    toObject PublicKeyData{..} = catMaybes
         [ TF.assign "private_key_pem" <$> TF.attribute _private_key_pem
         ]
 

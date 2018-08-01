@@ -1,8 +1,5 @@
 -- This module is auto-generated.
 
--- {-# OPTIONS_GHC -fno-warn-dodgy-exports  #-}
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
-
 -- |
 -- Module      : Terrafomo.LogicMonitor
 -- Copyright   : (c) 2017-2018 Brendan Hay

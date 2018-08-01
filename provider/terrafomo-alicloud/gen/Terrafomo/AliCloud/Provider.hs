@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -24,12 +18,13 @@ module Terrafomo.AliCloud.Provider
 
     -- * Lenses
     , providerAccessKey
-    , providerLogEndpoint
+    , providerAccountId
     , providerRegion
     , providerSecretKey
     , providerSecurityToken
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -60,8 +55,8 @@ issue details can refer to
 data AliCloud = AliCloud {
       _access_key     :: !(Maybe P.Text)
     {- ^ - This is the Alicloud access key. It must be provided, but it can also be sourced from the @ALICLOUD_ACCESS_KEY@ environment variable. -}
-    , _log_endpoint   :: !(Maybe P.Text)
-    {- ^ -  The self-defined endpoint of log service, referring to <https://www.alibabacloud.com/help/doc-detail/29008.html> . It can be sourced from the @LOG_ENDPOINT@ -}
+    , _account_id     :: !(Maybe P.Text)
+    {- ^ (Optional) Alibaba Cloud Account ID. It is required for Function Compute Service. It can be sourced from the @ALICLOUD_ACCOUNT_ID@ -}
     , _region         :: !(Maybe P.Text)
     {- ^ - This is the Alicloud region. It must be provided, but it can also be sourced from the @ALICLOUD_REGION@ environment variables. -}
     , _secret_key     :: !(Maybe P.Text)
@@ -72,18 +67,20 @@ data AliCloud = AliCloud {
 
 instance Hashable AliCloud
 
-instance TF.ToHCL AliCloud where
-    toHCL x =
+instance TF.IsSection AliCloud where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (AliCloud))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "access_key" <$> _access_key x
-            , TF.assign "log_endpoint" <$> _log_endpoint x
-            , TF.assign "region" <$> _region x
-            , TF.assign "secret_key" <$> _secret_key x
-            , TF.assign "security_token" <$> _security_token x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "access_key" <$> _access_key x
+                  , TF.assign "account_id" <$> _account_id x
+                  , TF.assign "region" <$> _region x
+                  , TF.assign "secret_key" <$> _secret_key x
+                  , TF.assign "security_token" <$> _security_token x
+                  ])
 
 instance TF.IsProvider AliCloud where
     type ProviderType AliCloud = "alicloud"
@@ -91,7 +88,7 @@ instance TF.IsProvider AliCloud where
 emptyAliCloud :: AliCloud
 emptyAliCloud = AliCloud {
         _access_key = Nothing
-      , _log_endpoint = Nothing
+      , _account_id = Nothing
       , _region = Nothing
       , _secret_key = Nothing
       , _security_token = Nothing
@@ -101,9 +98,9 @@ providerAccessKey :: Lens' AliCloud (Maybe P.Text)
 providerAccessKey =
     lens _access_key (\s a -> s { _access_key = a })
 
-providerLogEndpoint :: Lens' AliCloud (Maybe P.Text)
-providerLogEndpoint =
-    lens _log_endpoint (\s a -> s { _log_endpoint = a })
+providerAccountId :: Lens' AliCloud (Maybe P.Text)
+providerAccountId =
+    lens _account_id (\s a -> s { _account_id = a })
 
 providerRegion :: Lens' AliCloud (Maybe P.Text)
 providerRegion =

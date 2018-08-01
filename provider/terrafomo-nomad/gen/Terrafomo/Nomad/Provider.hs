@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -32,6 +26,7 @@ module Terrafomo.Nomad.Provider
     , providerVaultToken
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -73,20 +68,22 @@ data Nomad = Nomad {
 
 instance Hashable Nomad
 
-instance TF.ToHCL Nomad where
-    toHCL x =
+instance TF.IsSection Nomad where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Nomad))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "address" <$> _address x
-            , TF.assign "ca_file" <$> _ca_file x
-            , TF.assign "cert_file" <$> _cert_file x
-            , TF.assign "key_file" <$> _key_file x
-            , TF.assign "region" <$> _region x
-            , TF.assign "secret_id" <$> _secret_id x
-            , TF.assign "vault_token" <$> _vault_token x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "address" <$> _address x
+                  , TF.assign "ca_file" <$> _ca_file x
+                  , TF.assign "cert_file" <$> _cert_file x
+                  , TF.assign "key_file" <$> _key_file x
+                  , TF.assign "region" <$> _region x
+                  , TF.assign "secret_id" <$> _secret_id x
+                  , TF.assign "vault_token" <$> _vault_token x
+                  ])
 
 instance TF.IsProvider Nomad where
     type ProviderType Nomad = "nomad"

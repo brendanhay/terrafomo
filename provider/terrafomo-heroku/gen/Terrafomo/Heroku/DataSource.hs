@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -96,8 +89,8 @@ data AppData s = AppData {
     {- ^ (Required) The name of the application. In Heroku, this is also the unique ID, so it must be unique and have a minimum of 3 characters. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AppData s) where
-    toHCL AppData{..} = TF.inline $ catMaybes
+instance TF.IsObject (AppData s) where
+    toObject AppData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -156,8 +149,8 @@ data SpaceData s = SpaceData {
     {- ^ (Required) The name of the Heroku Private Space. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SpaceData s) where
-    toHCL SpaceData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SpaceData s) where
+    toObject SpaceData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -204,8 +197,8 @@ data SpacePeeringInfoData s = SpacePeeringInfoData {
     {- ^ (Required) The name of the Heroku Private Space. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SpacePeeringInfoData s) where
-    toHCL SpacePeeringInfoData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SpacePeeringInfoData s) where
+    toObject SpacePeeringInfoData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 

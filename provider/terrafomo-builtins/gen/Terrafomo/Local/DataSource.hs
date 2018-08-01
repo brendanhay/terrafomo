@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -69,8 +62,8 @@ data FileData s = FileData {
     {- ^ (Required) The path to the file that will be read. The data source will return an error if the file does not exist. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FileData s) where
-    toHCL FileData{..} = TF.inline $ catMaybes
+instance TF.IsObject (FileData s) where
+    toObject FileData{..} = catMaybes
         [ TF.assign "filename" <$> TF.attribute _filename
         ]
 

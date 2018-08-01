@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -133,8 +126,8 @@ data AlertResource s = AlertResource {
     {- ^ - list of notification service IDs. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AlertResource s) where
-    toHCL AlertResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AlertResource s) where
+    toObject AlertResource{..} = catMaybes
         [ TF.assign "active" <$> TF.attribute _active
         , TF.assign "attributes" <$> TF.attribute _attributes
         , TF.assign "condition" <$> TF.attribute _condition
@@ -240,8 +233,8 @@ data MetricResource s = MetricResource {
     {- ^ (Required) The type of metric to create (gauge, counter, or composite). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (MetricResource s) where
-    toHCL MetricResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (MetricResource s) where
+    toObject MetricResource{..} = catMaybes
         [ TF.assign "attributes" <$> TF.attribute _attributes
         , TF.assign "composite" <$> TF.attribute _composite
         , TF.assign "description" <$> TF.attribute _description
@@ -339,8 +332,8 @@ data ServiceResource s = ServiceResource {
     {- ^ (Required) The type of notificaion. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceResource s) where
-    toHCL ServiceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceResource s) where
+    toObject ServiceResource{..} = catMaybes
         [ TF.assign "settings" <$> TF.attribute _settings
         , TF.assign "title" <$> TF.attribute _title
         , TF.assign "type" <$> TF.attribute _type'
@@ -406,8 +399,8 @@ data SpaceChartResource s = SpaceChartResource {
     {- ^ (Optional) Indicates the type of chart. Must be one of line or stacked (default to line). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SpaceChartResource s) where
-    toHCL SpaceChartResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SpaceChartResource s) where
+    toObject SpaceChartResource{..} = catMaybes
         [ TF.assign "label" <$> TF.attribute _label
         , TF.assign "max" <$> TF.attribute _max
         , TF.assign "min" <$> TF.attribute _min
@@ -526,8 +519,8 @@ data SpaceResource s = SpaceResource {
     {- ^ (Required) The name of the space. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SpaceResource s) where
-    toHCL SpaceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SpaceResource s) where
+    toObject SpaceResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 

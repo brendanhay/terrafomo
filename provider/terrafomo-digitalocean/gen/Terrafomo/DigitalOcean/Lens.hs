@@ -1,14 +1,7 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RankNTypes             #-}
-{-# LANGUAGE UndecidableInstances   #-}
-
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 -- |
 -- Module      : Terrafomo.DigitalOcean.Lens
@@ -30,6 +23,7 @@ module Terrafomo.DigitalOcean.Lens
     , HasDropletId (..)
     , HasDropletIds (..)
     , HasDropletTag (..)
+    , HasFilesystemType (..)
     , HasFlags (..)
     , HasForwardingRule (..)
     , HasHealthcheck (..)
@@ -73,6 +67,7 @@ module Terrafomo.DigitalOcean.Lens
     , HasComputedDropletId (..)
     , HasComputedDropletIds (..)
     , HasComputedDropletTag (..)
+    , HasComputedFilesystemType (..)
     , HasComputedFingerprint (..)
     , HasComputedFlags (..)
     , HasComputedForwardingRule (..)
@@ -132,7 +127,6 @@ import GHC.Base ((.))
 
 import Lens.Micro (Lens')
 
-import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasAlgorithm a b | a -> b where
@@ -182,6 +176,12 @@ class HasDropletTag a b | a -> b where
 
 instance HasDropletTag a b => HasDropletTag (TF.Schema l p a) b where
     dropletTag = TF.configuration . dropletTag
+
+class HasFilesystemType a b | a -> b where
+    filesystemType :: Lens' a b
+
+instance HasFilesystemType a b => HasFilesystemType (TF.Schema l p a) b where
+    filesystemType = TF.configuration . filesystemType
 
 class HasFlags a b | a -> b where
     flags :: Lens' a b
@@ -395,6 +395,9 @@ class HasComputedDropletIds a b | a -> b where
 
 class HasComputedDropletTag a b | a -> b where
     computedDropletTag :: a -> b
+
+class HasComputedFilesystemType a b | a -> b where
+    computedFilesystemType :: a -> b
 
 class HasComputedFingerprint a b | a -> b where
     computedFingerprint :: a -> b

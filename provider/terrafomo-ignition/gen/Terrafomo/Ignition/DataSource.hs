@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -207,8 +200,8 @@ data ConfigData s = ConfigData {
     {- ^ (Optional) The list of accounts to be added. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ConfigData s) where
-    toHCL ConfigData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ConfigData s) where
+    toObject ConfigData{..} = catMaybes
         [ TF.assign "append" <$> TF.attribute _append
         , TF.assign "arrays" <$> TF.attribute _arrays
         , TF.assign "directories" <$> TF.attribute _directories
@@ -381,8 +374,8 @@ data DirectoryData s = DirectoryData {
     {- ^ (Optional) The user ID of the owner. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DirectoryData s) where
-    toHCL DirectoryData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DirectoryData s) where
+    toObject DirectoryData{..} = catMaybes
         [ TF.assign "filesystem" <$> TF.attribute _filesystem
         , TF.assign "gid" <$> TF.attribute _gid
         , TF.assign "mode" <$> TF.attribute _mode
@@ -467,8 +460,8 @@ data DiskData s = DiskData {
     {- ^ (Optional) Whether or not the partition tables shall be wiped. When true, the partition tables are erased before any further manipulation. Otherwise, the existing entries are left intact. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DiskData s) where
-    toHCL DiskData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DiskData s) where
+    toObject DiskData{..} = catMaybes
         [ TF.assign "device" <$> TF.attribute _device
         , TF.assign "partition" <$> TF.attribute _partition
         , TF.assign "wipe_table" <$> TF.attribute _wipe_table
@@ -537,8 +530,8 @@ data FileData s = FileData {
     {- ^ (Optional) The user ID of the owner. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FileData s) where
-    toHCL FileData{..} = TF.inline $ catMaybes
+instance TF.IsObject (FileData s) where
+    toObject FileData{..} = catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "filesystem" <$> TF.attribute _filesystem
         , TF.assign "gid" <$> TF.attribute _gid
@@ -648,8 +641,8 @@ data FilesystemData s = FilesystemData {
     {- ^ (Optional) The mount-point of the filesystem. A non-null entry indicates that the filesystem has already been mounted by the system at the specified path. This is really only useful for /sysroot . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FilesystemData s) where
-    toHCL FilesystemData{..} = TF.inline $ catMaybes
+instance TF.IsObject (FilesystemData s) where
+    toObject FilesystemData{..} = catMaybes
         [ TF.assign "mount" <$> TF.attribute _mount
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "path" <$> TF.attribute _path
@@ -710,8 +703,8 @@ data GroupData s = GroupData {
     {- ^ (Optional) The encrypted password for the account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (GroupData s) where
-    toHCL GroupData{..} = TF.inline $ catMaybes
+instance TF.IsObject (GroupData s) where
+    toObject GroupData{..} = catMaybes
         [ TF.assign "gid" <$> TF.attribute _gid
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "password_hash" <$> TF.attribute _password_hash
@@ -778,8 +771,8 @@ data LinkData s = LinkData {
     {- ^ (Optional) The user ID of the owner. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LinkData s) where
-    toHCL LinkData{..} = TF.inline $ catMaybes
+instance TF.IsObject (LinkData s) where
+    toObject LinkData{..} = catMaybes
         [ TF.assign "filesystem" <$> TF.attribute _filesystem
         , TF.assign "gid" <$> TF.attribute _gid
         , TF.assign "hard" <$> TF.attribute _hard
@@ -874,8 +867,8 @@ data NetworkdUnitData s = NetworkdUnitData {
     {- ^ (Required) The name of the file. This must be suffixed with a valid unit type (e.g. 00-eth0.network ). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkdUnitData s) where
-    toHCL NetworkdUnitData{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkdUnitData s) where
+    toObject NetworkdUnitData{..} = catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -926,8 +919,8 @@ data RaidData s = RaidData {
     {- ^ (Optional) The number of spares (if applicable) in the array. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RaidData s) where
-    toHCL RaidData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RaidData s) where
+    toObject RaidData{..} = catMaybes
         [ TF.assign "devices" <$> TF.attribute _devices
         , TF.assign "level" <$> TF.attribute _level
         , TF.assign "name" <$> TF.attribute _name
@@ -1004,8 +997,8 @@ data SystemdUnitData s = SystemdUnitData {
     {- ^ (Required) The name of the unit. This must be suffixed with a valid unit type (e.g. thing.service ). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SystemdUnitData s) where
-    toHCL SystemdUnitData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SystemdUnitData s) where
+    toObject SystemdUnitData{..} = catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "dropin" <$> TF.attribute _dropin
         , TF.assign "enabled" <$> TF.attribute _enabled
@@ -1110,8 +1103,8 @@ data UserData s = UserData {
     {- ^ (Optional) The user ID of the new account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserData s) where
-    toHCL UserData{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserData s) where
+    toObject UserData{..} = catMaybes
         [ TF.assign "gecos" <$> TF.attribute _gecos
         , TF.assign "groups" <$> TF.attribute _groups
         , TF.assign "home_dir" <$> TF.attribute _home_dir

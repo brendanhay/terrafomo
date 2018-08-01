@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -123,8 +116,8 @@ data SshKeyResource s = SshKeyResource {
     {- ^ (Required) The public SSH key. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SshKeyResource s) where
-    toHCL SshKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SshKeyResource s) where
+    toObject SshKeyResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "notes" <$> TF.attribute _notes
         , TF.assign "public_key" <$> TF.attribute _public_key
@@ -224,8 +217,8 @@ data VirtualGuestResource s = VirtualGuestResource {
     {- ^ (Optional, string) Arbitrary data to be made available to the computing instance. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VirtualGuestResource s) where
-    toHCL VirtualGuestResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VirtualGuestResource s) where
+    toObject VirtualGuestResource{..} = catMaybes
         [ TF.assign "backend_vlan_id" <$> TF.attribute _backend_vlan_id
         , TF.assign "block_device_template_group_gid" <$> TF.attribute _block_device_template_group_gid
         , TF.assign "cpu" <$> TF.attribute _cpu

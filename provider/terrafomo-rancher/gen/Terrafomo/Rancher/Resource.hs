@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -173,8 +166,8 @@ data CertificateResource s = CertificateResource {
     {- ^ (Required) The name of the certificate. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CertificateResource s) where
-    toHCL CertificateResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CertificateResource s) where
+    toObject CertificateResource{..} = catMaybes
         [ TF.assign "cert" <$> TF.attribute _cert
         , TF.assign "cert_chain" <$> TF.attribute _cert_chain
         , TF.assign "description" <$> TF.attribute _description
@@ -306,8 +299,8 @@ data EnvironmentResource s = EnvironmentResource {
     {- ^ (Optional) This can be any valid project template ID. If this is set, then orchestration can not be. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EnvironmentResource s) where
-    toHCL EnvironmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (EnvironmentResource s) where
+    toObject EnvironmentResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "member" <$> TF.attribute _member
         , TF.assign "name" <$> TF.attribute _name
@@ -399,8 +392,8 @@ data HostResource s = HostResource {
     {- ^ (Required) The name of the host. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HostResource s) where
-    toHCL HostResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (HostResource s) where
+    toObject HostResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "environment_id" <$> TF.attribute _environment_id
         , TF.assign "hostname" <$> TF.attribute _hostname
@@ -499,8 +492,8 @@ data RegistrationTokenResource s = RegistrationTokenResource {
     {- ^ (Required) The name of the registration token. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RegistrationTokenResource s) where
-    toHCL RegistrationTokenResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RegistrationTokenResource s) where
+    toObject RegistrationTokenResource{..} = catMaybes
         [ TF.assign "agent_ip" <$> TF.attribute _agent_ip
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "environment_id" <$> TF.attribute _environment_id
@@ -603,8 +596,8 @@ data RegistryCredentialResource s = RegistryCredentialResource {
     {- ^ (Required) The secret value (password) of the account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RegistryCredentialResource s) where
-    toHCL RegistryCredentialResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RegistryCredentialResource s) where
+    toObject RegistryCredentialResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "public_value" <$> TF.attribute _public_value
@@ -692,8 +685,8 @@ data RegistryResource s = RegistryResource {
     {- ^ (Required) The server address for the registry. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RegistryResource s) where
-    toHCL RegistryResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RegistryResource s) where
+    toObject RegistryResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "environment_id" <$> TF.attribute _environment_id
         , TF.assign "name" <$> TF.attribute _name
@@ -769,8 +762,8 @@ data SecretsResource s = SecretsResource {
     {- ^ (Required) The secret value. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecretsResource s) where
-    toHCL SecretsResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecretsResource s) where
+    toObject SecretsResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "environment_id" <$> TF.attribute _environment_id
         , TF.assign "name" <$> TF.attribute _name
@@ -855,8 +848,8 @@ data StackResource s = StackResource {
     {- ^ (Optional) Whether to start the stack automatically. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StackResource s) where
-    toHCL StackResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (StackResource s) where
+    toObject StackResource{..} = catMaybes
         [ TF.assign "catalog_id" <$> TF.attribute _catalog_id
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "docker_compose" <$> TF.attribute _docker_compose
@@ -1010,8 +1003,8 @@ data VolumesResource s = VolumesResource {
     {- ^ (Required) The name of the volume. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VolumesResource s) where
-    toHCL VolumesResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VolumesResource s) where
+    toObject VolumesResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "driver" <$> TF.attribute _driver
         , TF.assign "environment_id" <$> TF.attribute _environment_id

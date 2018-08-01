@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -33,6 +27,7 @@ module Terrafomo.OPC.Provider
     , providerUser
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -80,21 +75,23 @@ data OPC = OPC {
 
 instance Hashable OPC
 
-instance TF.ToHCL OPC where
-    toHCL x =
+instance TF.IsSection OPC where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (OPC))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "endpoint" <$> _endpoint x
-            , TF.assign "identity_domain" <$> _identity_domain x
-            , TF.assign "insecure" <$> _insecure x
-            , TF.assign "max_retries" <$> _max_retries x
-            , TF.assign "password" <$> _password x
-            , TF.assign "storage_endpoint" <$> _storage_endpoint x
-            , TF.assign "storage_service_id" <$> _storage_service_id x
-            , TF.assign "user" <$> _user x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "endpoint" <$> _endpoint x
+                  , TF.assign "identity_domain" <$> _identity_domain x
+                  , TF.assign "insecure" <$> _insecure x
+                  , TF.assign "max_retries" <$> _max_retries x
+                  , TF.assign "password" <$> _password x
+                  , TF.assign "storage_endpoint" <$> _storage_endpoint x
+                  , TF.assign "storage_service_id" <$> _storage_service_id x
+                  , TF.assign "user" <$> _user x
+                  ])
 
 instance TF.IsProvider OPC where
     type ProviderType OPC = "opc"

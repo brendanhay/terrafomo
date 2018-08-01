@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -177,8 +170,8 @@ data DeployKeyResource s = DeployKeyResource {
     {- ^ (Required, string) A title to describe the deploy key with. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DeployKeyResource s) where
-    toHCL DeployKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DeployKeyResource s) where
+    toObject DeployKeyResource{..} = catMaybes
         [ TF.assign "can_push" <$> TF.attribute _can_push
         , TF.assign "key" <$> TF.attribute _key
         , TF.assign "project" <$> TF.attribute _project
@@ -258,8 +251,8 @@ data GroupResource s = GroupResource {
     {- ^ (Optional) Set to @public@ to create a public group. Valid values are @private@ , @internal@ , @public@ . Groups are created as private by default. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (GroupResource s) where
-    toHCL GroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (GroupResource s) where
+    toObject GroupResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "lfs_enabled" <$> TF.attribute _lfs_enabled
         , TF.assign "name" <$> TF.attribute _name
@@ -372,8 +365,8 @@ data LabelResource s = LabelResource {
     {- ^ (Required) The name or id of the project to add the label to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LabelResource s) where
-    toHCL LabelResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LabelResource s) where
+    toObject LabelResource{..} = catMaybes
         [ TF.assign "color" <$> TF.attribute _color
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -466,8 +459,8 @@ data ProjectHookResource s = ProjectHookResource {
     {- ^ (Optional) Invoke the hook for wiki page events. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectHookResource s) where
-    toHCL ProjectHookResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProjectHookResource s) where
+    toObject ProjectHookResource{..} = catMaybes
         [ TF.assign "enable_ssl_verification" <$> TF.attribute _enable_ssl_verification
         , TF.assign "issues_events" <$> TF.attribute _issues_events
         , TF.assign "job_events" <$> TF.attribute _job_events
@@ -637,8 +630,8 @@ data ProjectMembershipResource s = ProjectMembershipResource {
     {- ^ (Required) The id of the user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectMembershipResource s) where
-    toHCL ProjectMembershipResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProjectMembershipResource s) where
+    toObject ProjectMembershipResource{..} = catMaybes
         [ TF.assign "access_level" <$> TF.attribute _access_level
         , TF.assign "project_id" <$> TF.attribute _project_id
         , TF.assign "user_id" <$> TF.attribute _user_id
@@ -714,8 +707,8 @@ data ProjectResource s = ProjectResource {
     {- ^ (Optional) Enable wiki for the project. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectResource s) where
-    toHCL ProjectResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProjectResource s) where
+    toObject ProjectResource{..} = catMaybes
         [ TF.assign "default_branch" <$> TF.attribute _default_branch
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "issues_enabled" <$> TF.attribute _issues_enabled
@@ -883,8 +876,8 @@ data UserResource s = UserResource {
     {- ^ (Required) The username of the user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserResource s) where
-    toHCL UserResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserResource s) where
+    toObject UserResource{..} = catMaybes
         [ TF.assign "can_create_group" <$> TF.attribute _can_create_group
         , TF.assign "email" <$> TF.attribute _email
         , TF.assign "is_admin" <$> TF.attribute _is_admin

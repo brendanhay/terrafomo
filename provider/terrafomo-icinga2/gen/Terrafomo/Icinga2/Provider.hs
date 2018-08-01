@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -29,6 +23,7 @@ module Terrafomo.Icinga2.Provider
     , providerInsecureSkipTlsVerify
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -65,17 +60,19 @@ data Icinga2 = Icinga2 {
 
 instance Hashable Icinga2
 
-instance TF.ToHCL Icinga2 where
-    toHCL x =
+instance TF.IsSection Icinga2 where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Icinga2))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "api_password" <$> _api_password x
-            , TF.assign "api_url" <$> _api_url x
-            , TF.assign "api_user" <$> _api_user x
-            , TF.assign "insecure_skip_tls_verify" <$> _insecure_skip_tls_verify x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "api_password" <$> _api_password x
+                  , TF.assign "api_url" <$> _api_url x
+                  , TF.assign "api_user" <$> _api_user x
+                  , TF.assign "insecure_skip_tls_verify" <$> _insecure_skip_tls_verify x
+                  ])
 
 instance TF.IsProvider Icinga2 where
     type ProviderType Icinga2 = "icinga2"

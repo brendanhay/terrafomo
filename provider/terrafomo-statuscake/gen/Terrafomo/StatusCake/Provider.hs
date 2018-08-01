@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -25,6 +19,7 @@ module Terrafomo.StatusCake.Provider
     -- * Lenses
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -53,13 +48,15 @@ data StatusCake = StatusCake {
 
 instance Hashable StatusCake
 
-instance TF.ToHCL StatusCake where
-    toHCL x =
+instance TF.IsSection StatusCake where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (StatusCake))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  ])
 
 instance TF.IsProvider StatusCake where
     type ProviderType StatusCake = "statuscake"

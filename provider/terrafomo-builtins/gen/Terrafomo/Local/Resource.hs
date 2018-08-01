@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -82,8 +75,8 @@ data FileResource s = FileResource {
     {- ^ (Optional) The content of file to create. Will not be displayed in diffs. Conflicts with @content@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FileResource s) where
-    toHCL FileResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FileResource s) where
+    toObject FileResource{..} = catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "filename" <$> TF.attribute _filename
         , TF.assign "sensitive_content" <$> TF.attribute _sensitive_content

@@ -5,17 +5,19 @@ name: terrafomo-aws
 <<: *common
 <<: *version
 <<: *options
+<<: *extensions
 
 dependencies:
   - base
-  - containers
   - hashable
   - microlens
   - terrafomo
   - text
+  - aeson
   - amazonka-core
   - formatting
   - iproute
+  - unordered-containers
 
 library:
   source-dirs:

@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -30,6 +24,7 @@ module Terrafomo.RabbitMQ.Provider
     , providerUsername
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -68,18 +63,20 @@ data RabbitMQ = RabbitMQ {
 
 instance Hashable RabbitMQ
 
-instance TF.ToHCL RabbitMQ where
-    toHCL x =
+instance TF.IsSection RabbitMQ where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (RabbitMQ))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "cacert_file" <$> _cacert_file x
-            , TF.assign "endpoint" <$> _endpoint x
-            , TF.assign "insecure" <$> _insecure x
-            , TF.assign "password" <$> _password x
-            , TF.assign "username" <$> _username x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "cacert_file" <$> _cacert_file x
+                  , TF.assign "endpoint" <$> _endpoint x
+                  , TF.assign "insecure" <$> _insecure x
+                  , TF.assign "password" <$> _password x
+                  , TF.assign "username" <$> _username x
+                  ])
 
 instance TF.IsProvider RabbitMQ where
     type ProviderType RabbitMQ = "rabbitmq"

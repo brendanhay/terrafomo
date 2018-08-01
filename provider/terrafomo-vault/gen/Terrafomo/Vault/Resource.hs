@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -317,8 +310,8 @@ data ApproleAuthBackendRoleLoginResource s = ApproleAuthBackendRoleLoginResource
     {- ^ (Optional) The secret ID of the role to log in with. Required unless @bind_secret_id@ is set to false on the role. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ApproleAuthBackendRoleLoginResource s) where
-    toHCL ApproleAuthBackendRoleLoginResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ApproleAuthBackendRoleLoginResource s) where
+    toObject ApproleAuthBackendRoleLoginResource{..} = catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "role_id" <$> TF.attribute _role_id
         , TF.assign "secret_id" <$> TF.attribute _secret_id
@@ -414,8 +407,8 @@ data ApproleAuthBackendRoleResource s = ApproleAuthBackendRoleResource {
     {- ^ (Optional) The TTL period of tokens issued using this role, provided as a number of seconds. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ApproleAuthBackendRoleResource s) where
-    toHCL ApproleAuthBackendRoleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ApproleAuthBackendRoleResource s) where
+    toObject ApproleAuthBackendRoleResource{..} = catMaybes
         [ TF.assign "bind_secret_id" <$> TF.attribute _bind_secret_id
         , TF.assign "bound_cidr_list" <$> TF.attribute _bound_cidr_list
         , TF.assign "period" <$> TF.attribute _period
@@ -572,8 +565,8 @@ data ApproleAuthBackendRoleSecretIdResource s = ApproleAuthBackendRoleSecretIdRe
     {- ^ (Optional) The SecretID to be created. If set, uses "Push" mode.  Defaults to Vault auto-generating SecretIDs. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ApproleAuthBackendRoleSecretIdResource s) where
-    toHCL ApproleAuthBackendRoleSecretIdResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ApproleAuthBackendRoleSecretIdResource s) where
+    toObject ApproleAuthBackendRoleSecretIdResource{..} = catMaybes
         [ TF.assign "cidr_list" <$> TF.attribute _cidr_list
         , TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "role_name" <$> TF.attribute _role_name
@@ -646,8 +639,8 @@ data AuthBackendResource s = AuthBackendResource {
     {- ^ (Required) The name of the policy -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AuthBackendResource s) where
-    toHCL AuthBackendResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AuthBackendResource s) where
+    toObject AuthBackendResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "path" <$> TF.attribute _path
         , TF.assign "type" <$> TF.attribute _type'
@@ -715,8 +708,8 @@ data AwsAuthBackendCertResource s = AwsAuthBackendCertResource {
     {- ^ (Optional) Either "pkcs7" or "identity", indicating the type of document which can be verified using the given certificate. Defaults to "pkcs7". -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AwsAuthBackendCertResource s) where
-    toHCL AwsAuthBackendCertResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AwsAuthBackendCertResource s) where
+    toObject AwsAuthBackendCertResource{..} = catMaybes
         [ TF.assign "aws_public_cert" <$> TF.attribute _aws_public_cert
         , TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "cert_name" <$> TF.attribute _cert_name
@@ -803,8 +796,8 @@ data AwsAuthBackendClientResource s = AwsAuthBackendClientResource {
     {- ^ (Optional) Override the URL Vault uses when making STS API calls. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AwsAuthBackendClientResource s) where
-    toHCL AwsAuthBackendClientResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AwsAuthBackendClientResource s) where
+    toObject AwsAuthBackendClientResource{..} = catMaybes
         [ TF.assign "access_key" <$> TF.attribute _access_key
         , TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "ec2_endpoint" <$> TF.attribute _ec2_endpoint
@@ -913,8 +906,8 @@ data AwsAuthBackendIdentityWhitelistResource s = AwsAuthBackendIdentityWhitelist
     {- ^ (Optional) The amount of extra time, in minutes, that must have passed beyond the roletag expiration, before it is removed from the backend storage. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AwsAuthBackendIdentityWhitelistResource s) where
-    toHCL AwsAuthBackendIdentityWhitelistResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AwsAuthBackendIdentityWhitelistResource s) where
+    toObject AwsAuthBackendIdentityWhitelistResource{..} = catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "disable_periodic_tidy" <$> TF.attribute _disable_periodic_tidy
         , TF.assign "safety_buffer" <$> TF.attribute _safety_buffer
@@ -989,8 +982,8 @@ data AwsAuthBackendLoginResource s = AwsAuthBackendLoginResource {
     {- ^ (Optional) The base64-encoded SHA256 RSA signature of the instance identity document to authenticate with, with all newline characters removed. Can be retrieved from the EC2 metadata server. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AwsAuthBackendLoginResource s) where
-    toHCL AwsAuthBackendLoginResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AwsAuthBackendLoginResource s) where
+    toObject AwsAuthBackendLoginResource{..} = catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "iam_http_request_method" <$> TF.attribute _iam_http_request_method
         , TF.assign "iam_request_body" <$> TF.attribute _iam_request_body
@@ -1193,8 +1186,8 @@ data AwsAuthBackendRoleResource s = AwsAuthBackendRoleResource {
     {- ^ (Optional) The TTL period of tokens issued using this role, provided as a number of minutes. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AwsAuthBackendRoleResource s) where
-    toHCL AwsAuthBackendRoleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AwsAuthBackendRoleResource s) where
+    toObject AwsAuthBackendRoleResource{..} = catMaybes
         [ TF.assign "allow_instance_migration" <$> TF.attribute _allow_instance_migration
         , TF.assign "auth_type" <$> TF.attribute _auth_type
         , TF.assign "bound_account_id" <$> TF.attribute _bound_account_id
@@ -1464,8 +1457,8 @@ data AwsAuthBackendRoleTagResource s = AwsAuthBackendRoleTagResource {
     {- ^ (Required) The name of the AWS auth backend role to read role tags from, with no leading or trailing @/@ s. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AwsAuthBackendRoleTagResource s) where
-    toHCL AwsAuthBackendRoleTagResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AwsAuthBackendRoleTagResource s) where
+    toObject AwsAuthBackendRoleTagResource{..} = catMaybes
         [ TF.assign "allow_instance_migration" <$> TF.attribute _allow_instance_migration
         , TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "disallow_reauthentication" <$> TF.attribute _disallow_reauthentication
@@ -1585,8 +1578,8 @@ data AwsAuthBackendStsRoleResource s = AwsAuthBackendStsRoleResource {
     {- ^ (Optional) The STS role to assume when verifying requests made by EC2 instances in the account specified by @account_id@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AwsAuthBackendStsRoleResource s) where
-    toHCL AwsAuthBackendStsRoleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AwsAuthBackendStsRoleResource s) where
+    toObject AwsAuthBackendStsRoleResource{..} = catMaybes
         [ TF.assign "account_id" <$> TF.attribute _account_id
         , TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "sts_role" <$> TF.attribute _sts_role
@@ -1647,8 +1640,8 @@ data AwsSecretBackendResource s = AwsSecretBackendResource {
     {- ^ (Required) The AWS Secret Key this backend should use to issue new credentials. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AwsSecretBackendResource s) where
-    toHCL AwsSecretBackendResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AwsSecretBackendResource s) where
+    toObject AwsSecretBackendResource{..} = catMaybes
         [ TF.assign "access_key" <$> TF.attribute _access_key
         , TF.assign "secret_key" <$> TF.attribute _secret_key
         ]
@@ -1701,8 +1694,8 @@ data AwsSecretBackendRoleResource s = AwsSecretBackendRoleResource {
     {- ^ (Optional) The ARN for a pre-existing policy to associate with this role. Either @policy@ or @policy_arn@ must be specified. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AwsSecretBackendRoleResource s) where
-    toHCL AwsSecretBackendRoleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AwsSecretBackendRoleResource s) where
+    toObject AwsSecretBackendRoleResource{..} = catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "policy" <$> TF.attribute _policy
@@ -1793,8 +1786,8 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     {- ^ (Optional) Whether the connection should be verified on initial configuration or not. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatabaseSecretBackendConnectionResource s) where
-    toHCL DatabaseSecretBackendConnectionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatabaseSecretBackendConnectionResource s) where
+    toObject DatabaseSecretBackendConnectionResource{..} = catMaybes
         [ TF.assign "allowed_roles" <$> TF.attribute _allowed_roles
         , TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "cassandra" <$> TF.attribute _cassandra
@@ -1965,8 +1958,8 @@ data DatabaseSecretBackendRoleResource s = DatabaseSecretBackendRoleResource {
     {- ^ (Optional) The database statements to execute when rolling back creation due to an error. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatabaseSecretBackendRoleResource s) where
-    toHCL DatabaseSecretBackendRoleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DatabaseSecretBackendRoleResource s) where
+    toObject DatabaseSecretBackendRoleResource{..} = catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "creation_statements" <$> TF.attribute _creation_statements
         , TF.assign "db_name" <$> TF.attribute _db_name
@@ -2106,8 +2099,8 @@ data GenericSecretResource s = GenericSecretResource {
     {- ^ (Required) The full logical path at which to write the given data. To write data into the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Writing to other backends with this resource is possible; consult each backend's documentation to see which endpoints support the @PUT@ and @DELETE@ methods. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (GenericSecretResource s) where
-    toHCL GenericSecretResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (GenericSecretResource s) where
+    toObject GenericSecretResource{..} = catMaybes
         [ TF.assign "allow_read" <$> TF.attribute _allow_read
         , TF.assign "data_json" <$> TF.attribute _data_json
         , TF.assign "disable_read" <$> TF.attribute _disable_read
@@ -2181,8 +2174,8 @@ data MountResource s = MountResource {
     {- ^ (Required) Type of the backend, such as "aws" -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (MountResource s) where
-    toHCL MountResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (MountResource s) where
+    toObject MountResource{..} = catMaybes
         [ TF.assign "default_lease_ttl_seconds" <$> TF.attribute _default_lease_ttl_seconds
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "max_lease_ttl_seconds" <$> TF.attribute _max_lease_ttl_seconds
@@ -2265,8 +2258,8 @@ data OktaAuthBackendGroupResource s = OktaAuthBackendGroupResource {
     {- ^ (Optional) Vault policies to associate with this group -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OktaAuthBackendGroupResource s) where
-    toHCL OktaAuthBackendGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (OktaAuthBackendGroupResource s) where
+    toObject OktaAuthBackendGroupResource{..} = catMaybes
         [ TF.assign "group_name" <$> TF.attribute _group_name
         , TF.assign "path" <$> TF.attribute _path
         , TF.assign "policies" <$> TF.attribute _policies
@@ -2337,8 +2330,8 @@ data OktaAuthBackendResource s = OktaAuthBackendResource {
     {- ^ (Optional) Associate Okta users with groups or policies within Vault. <#okta-user> . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OktaAuthBackendResource s) where
-    toHCL OktaAuthBackendResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (OktaAuthBackendResource s) where
+    toObject OktaAuthBackendResource{..} = catMaybes
         [ TF.assign "base_url" <$> TF.attribute _base_url
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "group" <$> TF.attribute _group
@@ -2471,8 +2464,8 @@ data OktaAuthBackendUserResource s = OktaAuthBackendUserResource {
     {- ^ (Required Optional) Name of the user within Okta -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OktaAuthBackendUserResource s) where
-    toHCL OktaAuthBackendUserResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (OktaAuthBackendUserResource s) where
+    toObject OktaAuthBackendUserResource{..} = catMaybes
         [ TF.assign "groups" <$> TF.attribute _groups
         , TF.assign "path" <$> TF.attribute _path
         , TF.assign "policies" <$> TF.attribute _policies
@@ -2540,8 +2533,8 @@ data PolicyResource s = PolicyResource {
     {- ^ (Required) String containing a Vault policy -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PolicyResource s) where
-    toHCL PolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PolicyResource s) where
+    toObject PolicyResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "policy" <$> TF.attribute _policy
         ]

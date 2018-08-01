@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -86,8 +79,8 @@ data DirResource s = DirResource {
     {- ^ (Optional) Variables for interpolation within the template. Note that variables must all be primitives. Direct references to lists or maps will cause a validation error. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DirResource s) where
-    toHCL DirResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DirResource s) where
+    toObject DirResource{..} = catMaybes
         [ TF.assign "destination_dir" <$> TF.attribute _destination_dir
         , TF.assign "source_dir" <$> TF.attribute _source_dir
         , TF.assign "vars" <$> TF.attribute _vars

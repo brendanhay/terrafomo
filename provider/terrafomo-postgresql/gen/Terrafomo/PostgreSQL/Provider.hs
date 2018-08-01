@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -34,6 +28,7 @@ module Terrafomo.PostgreSQL.Provider
     , providerUsername
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -79,22 +74,24 @@ data PostgreSQL = PostgreSQL {
 
 instance Hashable PostgreSQL
 
-instance TF.ToHCL PostgreSQL where
-    toHCL x =
+instance TF.IsSection PostgreSQL where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (PostgreSQL))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "connect_timeout" <$> _connect_timeout x
-            , TF.assign "database" <$> _database x
-            , TF.assign "expected_version" <$> _expected_version x
-            , TF.assign "host" <$> _host x
-            , TF.assign "max_connections" <$> _max_connections x
-            , TF.assign "password" <$> _password x
-            , TF.assign "port" <$> _port x
-            , TF.assign "sslmode" <$> _sslmode x
-            , TF.assign "username" <$> _username x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "connect_timeout" <$> _connect_timeout x
+                  , TF.assign "database" <$> _database x
+                  , TF.assign "expected_version" <$> _expected_version x
+                  , TF.assign "host" <$> _host x
+                  , TF.assign "max_connections" <$> _max_connections x
+                  , TF.assign "password" <$> _password x
+                  , TF.assign "port" <$> _port x
+                  , TF.assign "sslmode" <$> _sslmode x
+                  , TF.assign "username" <$> _username x
+                  ])
 
 instance TF.IsProvider PostgreSQL where
     type ProviderType PostgreSQL = "postgresql"

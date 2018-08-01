@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -38,6 +32,7 @@ module Terrafomo.Kubernetes.Provider
     , providerUsername
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -92,26 +87,28 @@ data Kubernetes = Kubernetes {
 
 instance Hashable Kubernetes
 
-instance TF.ToHCL Kubernetes where
-    toHCL x =
+instance TF.IsSection Kubernetes where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Kubernetes))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "client_certificate" <$> _client_certificate x
-            , TF.assign "client_key" <$> _client_key x
-            , TF.assign "cluster_ca_certificate" <$> _cluster_ca_certificate x
-            , TF.assign "config_context" <$> _config_context x
-            , TF.assign "config_context_auth_info" <$> _config_context_auth_info x
-            , TF.assign "config_context_cluster" <$> _config_context_cluster x
-            , TF.assign "config_path" <$> _config_path x
-            , TF.assign "host" <$> _host x
-            , TF.assign "insecure" <$> _insecure x
-            , TF.assign "load_config_file" <$> _load_config_file x
-            , TF.assign "password" <$> _password x
-            , TF.assign "token" <$> _token x
-            , TF.assign "username" <$> _username x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "client_certificate" <$> _client_certificate x
+                  , TF.assign "client_key" <$> _client_key x
+                  , TF.assign "cluster_ca_certificate" <$> _cluster_ca_certificate x
+                  , TF.assign "config_context" <$> _config_context x
+                  , TF.assign "config_context_auth_info" <$> _config_context_auth_info x
+                  , TF.assign "config_context_cluster" <$> _config_context_cluster x
+                  , TF.assign "config_path" <$> _config_path x
+                  , TF.assign "host" <$> _host x
+                  , TF.assign "insecure" <$> _insecure x
+                  , TF.assign "load_config_file" <$> _load_config_file x
+                  , TF.assign "password" <$> _password x
+                  , TF.assign "token" <$> _token x
+                  , TF.assign "username" <$> _username x
+                  ])
 
 instance TF.IsProvider Kubernetes where
     type ProviderType Kubernetes = "kubernetes"

@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -33,8 +26,14 @@ module Terrafomo.Icinga2.Resource
     , HostgroupResource (..)
     , hostgroupResource
 
+    , NotificationResource (..)
+    , notificationResource
+
     , ServiceResource (..)
     , serviceResource
+
+    , UserResource (..)
+    , userResource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -43,9 +42,12 @@ module Terrafomo.Icinga2.Resource
     , P.HasCheckCommand (..)
     , P.HasCommand (..)
     , P.HasDisplayName (..)
+    , P.HasEmail (..)
     , P.HasHostname (..)
     , P.HasName (..)
+    , P.HasServicename (..)
     , P.HasTemplates (..)
+    , P.HasUsers (..)
     , P.HasVars (..)
 
     -- ** Computed Attributes
@@ -54,9 +56,12 @@ module Terrafomo.Icinga2.Resource
     , P.HasComputedCheckCommand (..)
     , P.HasComputedCommand (..)
     , P.HasComputedDisplayName (..)
+    , P.HasComputedEmail (..)
     , P.HasComputedHostname (..)
     , P.HasComputedName (..)
+    , P.HasComputedServicename (..)
     , P.HasComputedTemplates (..)
+    , P.HasComputedUsers (..)
     , P.HasComputedVars (..)
 
     -- * Re-exported Types
@@ -102,8 +107,8 @@ data CheckcommandResource s = CheckcommandResource {
     {- ^ (Optional) A list of Icinga2 templates to assign to the host. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CheckcommandResource s) where
-    toHCL CheckcommandResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CheckcommandResource s) where
+    toObject CheckcommandResource{..} = catMaybes
         [ TF.assign "arguments" <$> TF.attribute _arguments
         , TF.assign "command" <$> TF.attribute _command
         , TF.assign "name" <$> TF.attribute _name
@@ -178,8 +183,8 @@ data HostResource s = HostResource {
     {- ^ (Optional) A mapping of variables to assign to the host. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HostResource s) where
-    toHCL HostResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (HostResource s) where
+    toObject HostResource{..} = catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "check_command" <$> TF.attribute _check_command
         , TF.assign "hostname" <$> TF.attribute _hostname
@@ -260,8 +265,8 @@ data HostgroupResource s = HostgroupResource {
     {- ^ (Required) The name of the hostgroup. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HostgroupResource s) where
-    toHCL HostgroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (HostgroupResource s) where
+    toObject HostgroupResource{..} = catMaybes
         [ TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -294,6 +299,80 @@ hostgroupResource =
             , _name = TF.Nil
             }
 
+{- | The @icinga2_notification@ Icinga2 resource.
+
+Configures an Icinga2 notification resource. This allows notifications to be
+configured, updated, and deleted.
+-}
+data NotificationResource s = NotificationResource {
+      _command     :: !(TF.Attr s P.Text)
+    {- ^ (Required) Notification command to use. -}
+    , _hostname    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The hostname the notification applies to. -}
+    , _servicename :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Service to send notification for. -}
+    , _users       :: !(TF.Attr s P.Text)
+    {- ^ (Required) List of users to notification. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (NotificationResource s) where
+    toObject NotificationResource{..} = catMaybes
+        [ TF.assign "command" <$> TF.attribute _command
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "servicename" <$> TF.attribute _servicename
+        , TF.assign "users" <$> TF.attribute _users
+        ]
+
+instance P.HasCommand (NotificationResource s) (TF.Attr s P.Text) where
+    command =
+        lens (_command :: NotificationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _command = a } :: NotificationResource s)
+
+instance P.HasHostname (NotificationResource s) (TF.Attr s P.Text) where
+    hostname =
+        lens (_hostname :: NotificationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _hostname = a } :: NotificationResource s)
+
+instance P.HasServicename (NotificationResource s) (TF.Attr s P.Text) where
+    servicename =
+        lens (_servicename :: NotificationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _servicename = a } :: NotificationResource s)
+
+instance P.HasUsers (NotificationResource s) (TF.Attr s P.Text) where
+    users =
+        lens (_users :: NotificationResource s -> TF.Attr s P.Text)
+             (\s a -> s { _users = a } :: NotificationResource s)
+
+instance s ~ s' => P.HasComputedCommand (TF.Ref s' (NotificationResource s)) (TF.Attr s P.Text) where
+    computedCommand =
+        (_command :: NotificationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (NotificationResource s)) (TF.Attr s P.Text) where
+    computedHostname =
+        (_hostname :: NotificationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedServicename (TF.Ref s' (NotificationResource s)) (TF.Attr s P.Text) where
+    computedServicename =
+        (_servicename :: NotificationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUsers (TF.Ref s' (NotificationResource s)) (TF.Attr s P.Text) where
+    computedUsers =
+        (_users :: NotificationResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+notificationResource :: TF.Resource P.Icinga2 (NotificationResource s)
+notificationResource =
+    TF.newResource "icinga2_notification" $
+        NotificationResource {
+              _command = TF.Nil
+            , _hostname = TF.Nil
+            , _servicename = TF.Nil
+            , _users = TF.Nil
+            }
+
 {- | The @icinga2_service@ Icinga2 resource.
 
 Configures an Icinga2 service resource. This allows service to be
@@ -308,8 +387,8 @@ data ServiceResource s = ServiceResource {
     {- ^ (Required) The name of the Service object. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceResource s) where
-    toHCL ServiceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceResource s) where
+    toObject ServiceResource{..} = catMaybes
         [ TF.assign "check_command" <$> TF.attribute _check_command
         , TF.assign "hostname" <$> TF.attribute _hostname
         , TF.assign "name" <$> TF.attribute _name
@@ -351,5 +430,51 @@ serviceResource =
         ServiceResource {
               _check_command = TF.Nil
             , _hostname = TF.Nil
+            , _name = TF.Nil
+            }
+
+{- | The @icinga2_user@ Icinga2 resource.
+
+Configures an Icinga2 user resource. This allows users to be configured,
+updated, and deleted.
+-}
+data UserResource s = UserResource {
+      _email :: !(TF.Attr s P.Text)
+    {- ^ (Optional) An email string for this user. Useful for notification commands. -}
+    , _name  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The user. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (UserResource s) where
+    toObject UserResource{..} = catMaybes
+        [ TF.assign "email" <$> TF.attribute _email
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasEmail (UserResource s) (TF.Attr s P.Text) where
+    email =
+        lens (_email :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _email = a } :: UserResource s)
+
+instance P.HasName (UserResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: UserResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: UserResource s)
+
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
+    computedEmail =
+        (_email :: UserResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: UserResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+userResource :: TF.Resource P.Icinga2 (UserResource s)
+userResource =
+    TF.newResource "icinga2_user" $
+        UserResource {
+              _email = TF.Nil
             , _name = TF.Nil
             }

@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -154,8 +147,8 @@ data ConfigResource s = ConfigResource {
     {- ^ (Required, string) The name of the Docker config. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ConfigResource s) where
-    toHCL ConfigResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ConfigResource s) where
+    toObject ConfigResource{..} = catMaybes
         [ TF.assign "data" <$> TF.attribute _data'
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -220,8 +213,8 @@ data ContainerResource s = ContainerResource {
     {- ^ (Optional, string) User used for run the first process. Format is @user@ or @user:group@ which user and group can be passed literraly or by name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ContainerResource s) where
-    toHCL ContainerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ContainerResource s) where
+    toObject ContainerResource{..} = catMaybes
         [ TF.assign "command" <$> TF.attribute _command
         , TF.assign "dns" <$> TF.attribute _dns
         , TF.assign "dns_opts" <$> TF.attribute _dns_opts
@@ -392,8 +385,8 @@ data ImageResource s = ImageResource {
     {- ^ (Optional, list of strings) List of values which cause an image pull when changed. This is used to store the image digest from the registry when using the @docker_registry_image@  </docs/providers/docker/d/registry_image.html> to trigger an image update. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImageResource s) where
-    toHCL ImageResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ImageResource s) where
+    toObject ImageResource{..} = catMaybes
         [ TF.assign "keep_locally" <$> TF.attribute _keep_locally
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "pull_trigger" <$> TF.attribute _pull_trigger
@@ -476,8 +469,8 @@ data NetworkResource s = NetworkResource {
     {- ^ (Optional, map of strings) Network specific options to be used by the drivers. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkResource s) where
-    toHCL NetworkResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkResource s) where
+    toObject NetworkResource{..} = catMaybes
         [ TF.assign "check_duplicate" <$> TF.attribute _check_duplicate
         , TF.assign "driver" <$> TF.attribute _driver
         , TF.assign "internal" <$> TF.attribute _internal
@@ -587,8 +580,8 @@ data SecretResource s = SecretResource {
     {- ^ (Required, string) The name of the Docker secret. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecretResource s) where
-    toHCL SecretResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecretResource s) where
+    toObject SecretResource{..} = catMaybes
         [ TF.assign "data" <$> TF.attribute _data'
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -652,8 +645,8 @@ data ServiceResource s = ServiceResource {
     {- ^ (Optional, block) See <#update-rollback-config> below for details. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceResource s) where
-    toHCL ServiceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceResource s) where
+    toObject ServiceResource{..} = catMaybes
         [ TF.assign "auth" <$> TF.attribute _auth
         , TF.assign "converge_config" <$> TF.attribute _converge_config
         , TF.assign "endpoint_spec" <$> TF.attribute _endpoint_spec
@@ -776,8 +769,8 @@ data VolumeResource s = VolumeResource {
     {- ^ (Optional, string) The name of the Docker volume (generated if not provided). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VolumeResource s) where
-    toHCL VolumeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VolumeResource s) where
+    toObject VolumeResource{..} = catMaybes
         [ TF.assign "driver" <$> TF.attribute _driver
         , TF.assign "driver_opts" <$> TF.attribute _driver_opts
         , TF.assign "name" <$> TF.attribute _name

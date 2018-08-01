@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -97,8 +90,8 @@ data DomainData s = DomainData {
     {- ^ - The name of the domain. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DomainData s) where
-    toHCL DomainData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DomainData s) where
+    toObject DomainData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -134,8 +127,8 @@ data ImageData s = ImageData {
     {- ^ - The name of the image. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImageData s) where
-    toHCL ImageData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ImageData s) where
+    toObject ImageData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -187,8 +180,8 @@ data RecordData s = RecordData {
     {- ^ - The name of the record. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RecordData s) where
-    toHCL RecordData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RecordData s) where
+    toObject RecordData{..} = catMaybes
         [ TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "name" <$> TF.attribute _name
         ]

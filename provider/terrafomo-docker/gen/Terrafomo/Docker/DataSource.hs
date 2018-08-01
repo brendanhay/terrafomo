@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -73,8 +66,8 @@ data RegistryImageData s = RegistryImageData {
     {- ^ (Required, string) The name of the Docker image, including any tags. e.g. @alpine:latest@ -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RegistryImageData s) where
-    toHCL RegistryImageData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RegistryImageData s) where
+    toObject RegistryImageData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 

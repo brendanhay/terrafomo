@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -29,6 +23,7 @@ module Terrafomo.Docker.Provider
     , providerRegistryAuth
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -67,17 +62,19 @@ data Docker = Docker {
 
 instance Hashable Docker
 
-instance TF.ToHCL Docker where
-    toHCL x =
+instance TF.IsSection Docker where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Docker))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "ca_material" <$> _ca_material x
-            , TF.assign "cert_path" <$> _cert_path x
-            , TF.assign "host" <$> _host x
-            , TF.assign "registry_auth" <$> _registry_auth x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "ca_material" <$> _ca_material x
+                  , TF.assign "cert_path" <$> _cert_path x
+                  , TF.assign "host" <$> _host x
+                  , TF.assign "registry_auth" <$> _registry_auth x
+                  ])
 
 instance TF.IsProvider Docker where
     type ProviderType Docker = "docker"

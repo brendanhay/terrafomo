@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -30,6 +24,7 @@ module Terrafomo.Cobbler.Provider
     , providerUsername
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -68,18 +63,20 @@ data Cobbler = Cobbler {
 
 instance Hashable Cobbler
 
-instance TF.ToHCL Cobbler where
-    toHCL x =
+instance TF.IsSection Cobbler where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Cobbler))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "cacert_file" <$> _cacert_file x
-            , TF.assign "insecure" <$> _insecure x
-            , TF.assign "password" <$> _password x
-            , TF.assign "url" <$> _url x
-            , TF.assign "username" <$> _username x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "cacert_file" <$> _cacert_file x
+                  , TF.assign "insecure" <$> _insecure x
+                  , TF.assign "password" <$> _password x
+                  , TF.assign "url" <$> _url x
+                  , TF.assign "username" <$> _username x
+                  ])
 
 instance TF.IsProvider Cobbler where
     type ProviderType Cobbler = "cobbler"

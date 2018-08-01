@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -24,8 +17,17 @@
 module Terrafomo.OVH.DataSource
     (
     -- * Types
-      Data (..)
+      CloudRegionsData (..)
+    , cloudRegionsData
+
+    , Data (..)
     , data
+
+    , PaymentmeanBankaccountData (..)
+    , paymentmeanBankaccountData
+
+    , PaymentmeanCreditcardData (..)
+    , paymentmeanCreditcardData
 
     , RegionData (..)
     , regionData
@@ -38,6 +40,7 @@ module Terrafomo.OVH.DataSource
 
     -- * Overloaded Fields
     -- ** Arguments
+    , P.HasDescriptionRegexp (..)
     , P.HasDisplayName (..)
     , P.HasIpLoadbalancing (..)
     , P.HasIpv4 (..)
@@ -49,6 +52,10 @@ module Terrafomo.OVH.DataSource
     , P.HasServiceName (..)
     , P.HasSslConfiguration (..)
     , P.HasState (..)
+    , P.HasStates (..)
+    , P.HasUseDefault (..)
+    , P.HasUseLastToExpire (..)
+    , P.HasUseOldest (..)
     , P.HasVrackEligibility (..)
     , P.HasVrackName (..)
     , P.HasZone (..)
@@ -56,6 +63,9 @@ module Terrafomo.OVH.DataSource
     -- ** Computed Attributes
     , P.HasComputedContinentCode (..)
     , P.HasComputedDatacenterLocation (..)
+    , P.HasComputedDefault' (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDescriptionRegexp (..)
     , P.HasComputedDisplayName (..)
     , P.HasComputedDnssecSupported (..)
     , P.HasComputedHasDnsAnycast (..)
@@ -75,6 +85,10 @@ module Terrafomo.OVH.DataSource
     , P.HasComputedServices (..)
     , P.HasComputedSslConfiguration (..)
     , P.HasComputedState (..)
+    , P.HasComputedStates (..)
+    , P.HasComputedUseDefault (..)
+    , P.HasComputedUseLastToExpire (..)
+    , P.HasComputedUseOldest (..)
     , P.HasComputedVrackEligibility (..)
     , P.HasComputedVrackName (..)
     , P.HasComputedZone (..)
@@ -106,6 +120,40 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
+{- | The @ovh_cloud_regions@ OVH datasource.
+
+Use this data source to get the regions of a public cloud project.
+-}
+data CloudRegionsData s = CloudRegionsData {
+      _project_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (CloudRegionsData s) where
+    toObject CloudRegionsData{..} = catMaybes
+        [ TF.assign "project_id" <$> TF.attribute _project_id
+        ]
+
+instance P.HasProjectId (CloudRegionsData s) (TF.Attr s P.Text) where
+    projectId =
+        lens (_project_id :: CloudRegionsData s -> TF.Attr s P.Text)
+             (\s a -> s { _project_id = a } :: CloudRegionsData s)
+
+instance s ~ s' => P.HasComputedNames (TF.Ref s' (CloudRegionsData s)) (TF.Attr s P.Text) where
+    computedNames x = TF.compute (TF.refKey x) "names"
+
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (CloudRegionsData s)) (TF.Attr s P.Text) where
+    computedProjectId =
+        (_project_id :: CloudRegionsData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+cloudRegionsData :: TF.DataSource P.OVH (CloudRegionsData s)
+cloudRegionsData =
+    TF.newDataSource "ovh_cloud_regions" $
+        CloudRegionsData {
+              _project_id = TF.Nil
+            }
+
 {- | The @iploadbalancing@ OVH datasource.
 
 Use this data source to retrieve information about an iploadbalancing
@@ -136,8 +184,8 @@ data Data s = Data {
     {- ^ - Location where your service is. This takes an array of values. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (Data s) where
-    toHCL Data{..} = TF.inline $ catMaybes
+instance TF.IsObject (Data s) where
+    toObject Data{..} = catMaybes
         [ TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "ip_loadbalancing" <$> TF.attribute _ip_loadbalancing
         , TF.assign "ipv4" <$> TF.attribute _ipv4
@@ -284,6 +332,169 @@ data =
             , _zone = TF.Nil
             }
 
+{- | The @me_paymentmean_bankaccount@ OVH datasource.
+
+Use this data source to retrieve information about a bank account payment
+mean associated with an OVH account.
+-}
+data PaymentmeanBankaccountData s = PaymentmeanBankaccountData {
+      _description_regexp :: !(TF.Attr s P.Text)
+    {- ^ (Optional) a regexp used to filter bank accounts on their @description@ attributes. -}
+    , _state :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Filter bank accounts on their @state@ attribute. Can be "blockedForIncidents", "valid", "pendingValidation" -}
+    , _use_default :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Retrieve bank account marked as default payment mean. -}
+    , _use_oldest :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Retrieve oldest bank account. project. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (PaymentmeanBankaccountData s) where
+    toObject PaymentmeanBankaccountData{..} = catMaybes
+        [ TF.assign "description_regexp" <$> TF.attribute _description_regexp
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "use_default" <$> TF.attribute _use_default
+        , TF.assign "use_oldest" <$> TF.attribute _use_oldest
+        ]
+
+instance P.HasDescriptionRegexp (PaymentmeanBankaccountData s) (TF.Attr s P.Text) where
+    descriptionRegexp =
+        lens (_description_regexp :: PaymentmeanBankaccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _description_regexp = a } :: PaymentmeanBankaccountData s)
+
+instance P.HasState (PaymentmeanBankaccountData s) (TF.Attr s P.Text) where
+    state =
+        lens (_state :: PaymentmeanBankaccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _state = a } :: PaymentmeanBankaccountData s)
+
+instance P.HasUseDefault (PaymentmeanBankaccountData s) (TF.Attr s P.Text) where
+    useDefault =
+        lens (_use_default :: PaymentmeanBankaccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _use_default = a } :: PaymentmeanBankaccountData s)
+
+instance P.HasUseOldest (PaymentmeanBankaccountData s) (TF.Attr s P.Text) where
+    useOldest =
+        lens (_use_oldest :: PaymentmeanBankaccountData s -> TF.Attr s P.Text)
+             (\s a -> s { _use_oldest = a } :: PaymentmeanBankaccountData s)
+
+instance s ~ s' => P.HasComputedDefault' (TF.Ref s' (PaymentmeanBankaccountData s)) (TF.Attr s P.Text) where
+    computedDefault' x = TF.compute (TF.refKey x) "default"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (PaymentmeanBankaccountData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedDescriptionRegexp (TF.Ref s' (PaymentmeanBankaccountData s)) (TF.Attr s P.Text) where
+    computedDescriptionRegexp =
+        (_description_regexp :: PaymentmeanBankaccountData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedState (TF.Ref s' (PaymentmeanBankaccountData s)) (TF.Attr s P.Text) where
+    computedState =
+        (_state :: PaymentmeanBankaccountData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUseDefault (TF.Ref s' (PaymentmeanBankaccountData s)) (TF.Attr s P.Text) where
+    computedUseDefault =
+        (_use_default :: PaymentmeanBankaccountData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUseOldest (TF.Ref s' (PaymentmeanBankaccountData s)) (TF.Attr s P.Text) where
+    computedUseOldest =
+        (_use_oldest :: PaymentmeanBankaccountData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+paymentmeanBankaccountData :: TF.DataSource P.OVH (PaymentmeanBankaccountData s)
+paymentmeanBankaccountData =
+    TF.newDataSource "me_paymentmean_bankaccount" $
+        PaymentmeanBankaccountData {
+              _description_regexp = TF.Nil
+            , _state = TF.Nil
+            , _use_default = TF.Nil
+            , _use_oldest = TF.Nil
+            }
+
+{- | The @me_paymentmean_creditcard@ OVH datasource.
+
+Use this data source to retrieve information about a credit card payment
+mean associated with an OVH account.
+-}
+data PaymentmeanCreditcardData s = PaymentmeanCreditcardData {
+      _description_regexp :: !(TF.Attr s P.Text)
+    {- ^ (Optional) a regexp used to filter credit cards on their @description@ attributes. -}
+    , _states :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Filter credit cards on their @state@ attribute. Can be "expired", "valid", "tooManyFailures" -}
+    , _use_default :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Retrieve credit card marked as default payment mean. -}
+    , _use_last_to_expire :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Retrieve the credit card that will be the last to expire according to its expiration date. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (PaymentmeanCreditcardData s) where
+    toObject PaymentmeanCreditcardData{..} = catMaybes
+        [ TF.assign "description_regexp" <$> TF.attribute _description_regexp
+        , TF.assign "states" <$> TF.attribute _states
+        , TF.assign "use_default" <$> TF.attribute _use_default
+        , TF.assign "use_last_to_expire" <$> TF.attribute _use_last_to_expire
+        ]
+
+instance P.HasDescriptionRegexp (PaymentmeanCreditcardData s) (TF.Attr s P.Text) where
+    descriptionRegexp =
+        lens (_description_regexp :: PaymentmeanCreditcardData s -> TF.Attr s P.Text)
+             (\s a -> s { _description_regexp = a } :: PaymentmeanCreditcardData s)
+
+instance P.HasStates (PaymentmeanCreditcardData s) (TF.Attr s P.Text) where
+    states =
+        lens (_states :: PaymentmeanCreditcardData s -> TF.Attr s P.Text)
+             (\s a -> s { _states = a } :: PaymentmeanCreditcardData s)
+
+instance P.HasUseDefault (PaymentmeanCreditcardData s) (TF.Attr s P.Text) where
+    useDefault =
+        lens (_use_default :: PaymentmeanCreditcardData s -> TF.Attr s P.Text)
+             (\s a -> s { _use_default = a } :: PaymentmeanCreditcardData s)
+
+instance P.HasUseLastToExpire (PaymentmeanCreditcardData s) (TF.Attr s P.Text) where
+    useLastToExpire =
+        lens (_use_last_to_expire :: PaymentmeanCreditcardData s -> TF.Attr s P.Text)
+             (\s a -> s { _use_last_to_expire = a } :: PaymentmeanCreditcardData s)
+
+instance s ~ s' => P.HasComputedDefault' (TF.Ref s' (PaymentmeanCreditcardData s)) (TF.Attr s P.Text) where
+    computedDefault' x = TF.compute (TF.refKey x) "default"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (PaymentmeanCreditcardData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedDescriptionRegexp (TF.Ref s' (PaymentmeanCreditcardData s)) (TF.Attr s P.Text) where
+    computedDescriptionRegexp =
+        (_description_regexp :: PaymentmeanCreditcardData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedState (TF.Ref s' (PaymentmeanCreditcardData s)) (TF.Attr s P.Text) where
+    computedState x = TF.compute (TF.refKey x) "state"
+
+instance s ~ s' => P.HasComputedStates (TF.Ref s' (PaymentmeanCreditcardData s)) (TF.Attr s P.Text) where
+    computedStates =
+        (_states :: PaymentmeanCreditcardData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUseDefault (TF.Ref s' (PaymentmeanCreditcardData s)) (TF.Attr s P.Text) where
+    computedUseDefault =
+        (_use_default :: PaymentmeanCreditcardData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedUseLastToExpire (TF.Ref s' (PaymentmeanCreditcardData s)) (TF.Attr s P.Text) where
+    computedUseLastToExpire =
+        (_use_last_to_expire :: PaymentmeanCreditcardData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+paymentmeanCreditcardData :: TF.DataSource P.OVH (PaymentmeanCreditcardData s)
+paymentmeanCreditcardData =
+    TF.newDataSource "me_paymentmean_creditcard" $
+        PaymentmeanCreditcardData {
+              _description_regexp = TF.Nil
+            , _states = TF.Nil
+            , _use_default = TF.Nil
+            , _use_last_to_expire = TF.Nil
+            }
+
 {- | The @cloud_region@ OVH datasource.
 
 Use this data source to retrieve information about a region associated with
@@ -296,8 +507,8 @@ data RegionData s = RegionData {
     {- ^ (Required) The name of the region associated with the public cloud project. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RegionData s) where
-    toHCL RegionData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RegionData s) where
+    toObject RegionData{..} = catMaybes
         [ TF.assign "project_id" <$> TF.attribute _project_id
         , TF.assign "region" <$> TF.attribute _region
         ]
@@ -345,17 +556,18 @@ regionData =
             , _region = TF.Nil
             }
 
-{- | The @cloud_regions@ OVH datasource.
+{- | The @publiccloud_regions@ OVH datasource.
 
-Use this data source to get the regions of a public cloud project.
+DEPRECATED use @ovh_cloud_regions@ instead. Use this data source to get the
+regions of a public cloud project.
 -}
 data RegionsData s = RegionsData {
       _project_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RegionsData s) where
-    toHCL RegionsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RegionsData s) where
+    toObject RegionsData{..} = catMaybes
         [ TF.assign "project_id" <$> TF.attribute _project_id
         ]
 
@@ -374,7 +586,7 @@ instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (RegionsData s)) (TF.Attr s
 
 regionsData :: TF.DataSource P.OVH (RegionsData s)
 regionsData =
-    TF.newDataSource "cloud_regions" $
+    TF.newDataSource "publiccloud_regions" $
         RegionsData {
               _project_id = TF.Nil
             }
@@ -388,8 +600,8 @@ data ZoneData s = ZoneData {
     {- ^ (Required) The name of the domain zone. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ZoneData s) where
-    toHCL ZoneData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ZoneData s) where
+    toObject ZoneData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 

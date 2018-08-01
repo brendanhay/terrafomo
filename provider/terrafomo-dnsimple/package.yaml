@@ -5,10 +5,10 @@ name: terrafomo-dnsimple
 <<: *common
 <<: *version
 <<: *options
+<<: *extensions
 
 dependencies:
   - base
-  - containers
   - hashable
   - microlens
   - terrafomo

@@ -3,7 +3,7 @@
 {-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
+
 {-# LANGUAGE LambdaCase             #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE OverloadedStrings      #-}

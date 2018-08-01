@@ -1,14 +1,7 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RankNTypes             #-}
-{-# LANGUAGE UndecidableInstances   #-}
-
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 -- |
 -- Module      : Terrafomo.Heroku.Lens
@@ -34,6 +27,7 @@ module Terrafomo.Heroku.Lens
     , HasEmail (..)
     , HasEnabled (..)
     , HasHostname (..)
+    , HasInternalRouting (..)
     , HasName (..)
     , HasOrganization (..)
     , HasPermissions (..)
@@ -42,6 +36,7 @@ module Terrafomo.Heroku.Lens
     , HasPrivateKey (..)
     , HasQuantity (..)
     , HasRegion (..)
+    , HasRule (..)
     , HasShield (..)
     , HasSize (..)
     , HasSlugId (..)
@@ -73,6 +68,7 @@ module Terrafomo.Heroku.Lens
     , HasComputedHerokuHostname (..)
     , HasComputedHostname (..)
     , HasComputedId (..)
+    , HasComputedInternalRouting (..)
     , HasComputedName (..)
     , HasComputedOrganization (..)
     , HasComputedOutboundIps (..)
@@ -83,6 +79,7 @@ module Terrafomo.Heroku.Lens
     , HasComputedProviderId (..)
     , HasComputedQuantity (..)
     , HasComputedRegion (..)
+    , HasComputedRule (..)
     , HasComputedShield (..)
     , HasComputedSize (..)
     , HasComputedSlugId (..)
@@ -105,7 +102,6 @@ import GHC.Base ((.))
 
 import Lens.Micro (Lens')
 
-import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasAcm a b | a -> b where
@@ -180,6 +176,12 @@ class HasHostname a b | a -> b where
 instance HasHostname a b => HasHostname (TF.Schema l p a) b where
     hostname = TF.configuration . hostname
 
+class HasInternalRouting a b | a -> b where
+    internalRouting :: Lens' a b
+
+instance HasInternalRouting a b => HasInternalRouting (TF.Schema l p a) b where
+    internalRouting = TF.configuration . internalRouting
+
 class HasName a b | a -> b where
     name :: Lens' a b
 
@@ -227,6 +229,12 @@ class HasRegion a b | a -> b where
 
 instance HasRegion a b => HasRegion (TF.Schema l p a) b where
     region = TF.configuration . region
+
+class HasRule a b | a -> b where
+    rule :: Lens' a b
+
+instance HasRule a b => HasRule (TF.Schema l p a) b where
+    rule = TF.configuration . rule
 
 class HasShield a b | a -> b where
     shield :: Lens' a b
@@ -342,6 +350,9 @@ class HasComputedHostname a b | a -> b where
 class HasComputedId a b | a -> b where
     computedId :: a -> b
 
+class HasComputedInternalRouting a b | a -> b where
+    computedInternalRouting :: a -> b
+
 class HasComputedName a b | a -> b where
     computedName :: a -> b
 
@@ -371,6 +382,9 @@ class HasComputedQuantity a b | a -> b where
 
 class HasComputedRegion a b | a -> b where
     computedRegion :: a -> b
+
+class HasComputedRule a b | a -> b where
+    computedRule :: a -> b
 
 class HasComputedShield a b | a -> b where
     computedShield :: a -> b

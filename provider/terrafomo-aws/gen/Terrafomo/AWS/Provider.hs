@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -42,6 +36,7 @@ module Terrafomo.AWS.Provider
     , providerToken
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -104,30 +99,32 @@ data AWS = AWS {
 
 instance Hashable AWS
 
-instance TF.ToHCL AWS where
-    toHCL x =
+instance TF.IsSection AWS where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (AWS))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "access_key" <$> _access_key x
-            , TF.assign "allowed_account_ids" <$> _allowed_account_ids x
-            , TF.assign "assume_role" <$> _assume_role x
-            , TF.assign "forbidden_account_ids" <$> _forbidden_account_ids x
-            , TF.assign "insecure" <$> _insecure x
-            , TF.assign "max_retries" <$> _max_retries x
-            , TF.assign "profile" <$> _profile x
-            , TF.assign "region" <$> _region x
-            , TF.assign "s3_force_path_style" <$> _s3_force_path_style x
-            , TF.assign "secret_key" <$> _secret_key x
-            , TF.assign "shared_credentials_file" <$> _shared_credentials_file x
-            , TF.assign "skip_credentials_validation" <$> _skip_credentials_validation x
-            , TF.assign "skip_get_ec2_platforms" <$> _skip_get_ec2_platforms x
-            , TF.assign "skip_metadata_api_check" <$> _skip_metadata_api_check x
-            , TF.assign "skip_region_validation" <$> _skip_region_validation x
-            , TF.assign "skip_requesting_account_id" <$> _skip_requesting_account_id x
-            , TF.assign "token" <$> _token x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "access_key" <$> _access_key x
+                  , TF.assign "allowed_account_ids" <$> _allowed_account_ids x
+                  , TF.assign "assume_role" <$> _assume_role x
+                  , TF.assign "forbidden_account_ids" <$> _forbidden_account_ids x
+                  , TF.assign "insecure" <$> _insecure x
+                  , TF.assign "max_retries" <$> _max_retries x
+                  , TF.assign "profile" <$> _profile x
+                  , TF.assign "region" <$> _region x
+                  , TF.assign "s3_force_path_style" <$> _s3_force_path_style x
+                  , TF.assign "secret_key" <$> _secret_key x
+                  , TF.assign "shared_credentials_file" <$> _shared_credentials_file x
+                  , TF.assign "skip_credentials_validation" <$> _skip_credentials_validation x
+                  , TF.assign "skip_get_ec2_platforms" <$> _skip_get_ec2_platforms x
+                  , TF.assign "skip_metadata_api_check" <$> _skip_metadata_api_check x
+                  , TF.assign "skip_region_validation" <$> _skip_region_validation x
+                  , TF.assign "skip_requesting_account_id" <$> _skip_requesting_account_id x
+                  , TF.assign "token" <$> _token x
+                  ])
 
 instance TF.IsProvider AWS where
     type ProviderType AWS = "aws"

@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -28,6 +22,7 @@ module Terrafomo.MySQL.Provider
     , providerUsername
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -62,16 +57,18 @@ data MySQL = MySQL {
 
 instance Hashable MySQL
 
-instance TF.ToHCL MySQL where
-    toHCL x =
+instance TF.IsSection MySQL where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (MySQL))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "endpoint" <$> _endpoint x
-            , TF.assign "password" <$> _password x
-            , TF.assign "username" <$> _username x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "endpoint" <$> _endpoint x
+                  , TF.assign "password" <$> _password x
+                  , TF.assign "username" <$> _username x
+                  ])
 
 instance TF.IsProvider MySQL where
     type ProviderType MySQL = "mysql"

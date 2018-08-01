@@ -1,14 +1,7 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RankNTypes             #-}
-{-# LANGUAGE UndecidableInstances   #-}
-
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 -- |
 -- Module      : Terrafomo.Spotinst.Lens
@@ -29,7 +22,6 @@ module Terrafomo.Spotinst.Lens
     , HasDrainingTimeout (..)
     , HasEbsOptimized (..)
     , HasElasticIps (..)
-    , HasElasticLoadBalancers (..)
     , HasEnableMonitoring (..)
     , HasEndpoint (..)
     , HasEventType (..)
@@ -46,7 +38,6 @@ module Terrafomo.Spotinst.Lens
     , HasKeyName (..)
     , HasMaxSize (..)
     , HasMinSize (..)
-    , HasMultaiTargetSets (..)
     , HasName (..)
     , HasOndemandCount (..)
     , HasOrientation (..)
@@ -61,7 +52,6 @@ module Terrafomo.Spotinst.Lens
     , HasSpotPercentage (..)
     , HasSubnetIds (..)
     , HasTags (..)
-    , HasTargetGroupArns (..)
     , HasUserData (..)
     , HasUtilizeReservedInstances (..)
 
@@ -73,7 +63,6 @@ module Terrafomo.Spotinst.Lens
     , HasComputedDrainingTimeout (..)
     , HasComputedEbsOptimized (..)
     , HasComputedElasticIps (..)
-    , HasComputedElasticLoadBalancers (..)
     , HasComputedEnableMonitoring (..)
     , HasComputedEndpoint (..)
     , HasComputedEventType (..)
@@ -91,7 +80,6 @@ module Terrafomo.Spotinst.Lens
     , HasComputedKeyName (..)
     , HasComputedMaxSize (..)
     , HasComputedMinSize (..)
-    , HasComputedMultaiTargetSets (..)
     , HasComputedName (..)
     , HasComputedOndemandCount (..)
     , HasComputedOrientation (..)
@@ -106,7 +94,6 @@ module Terrafomo.Spotinst.Lens
     , HasComputedSpotPercentage (..)
     , HasComputedSubnetIds (..)
     , HasComputedTags (..)
-    , HasComputedTargetGroupArns (..)
     , HasComputedUserData (..)
     , HasComputedUtilizeReservedInstances (..)
     ) where
@@ -115,7 +102,6 @@ import GHC.Base ((.))
 
 import Lens.Micro (Lens')
 
-import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasAvailabilityZones a b | a -> b where
@@ -159,12 +145,6 @@ class HasElasticIps a b | a -> b where
 
 instance HasElasticIps a b => HasElasticIps (TF.Schema l p a) b where
     elasticIps = TF.configuration . elasticIps
-
-class HasElasticLoadBalancers a b | a -> b where
-    elasticLoadBalancers :: Lens' a b
-
-instance HasElasticLoadBalancers a b => HasElasticLoadBalancers (TF.Schema l p a) b where
-    elasticLoadBalancers = TF.configuration . elasticLoadBalancers
 
 class HasEnableMonitoring a b | a -> b where
     enableMonitoring :: Lens' a b
@@ -262,12 +242,6 @@ class HasMinSize a b | a -> b where
 instance HasMinSize a b => HasMinSize (TF.Schema l p a) b where
     minSize = TF.configuration . minSize
 
-class HasMultaiTargetSets a b | a -> b where
-    multaiTargetSets :: Lens' a b
-
-instance HasMultaiTargetSets a b => HasMultaiTargetSets (TF.Schema l p a) b where
-    multaiTargetSets = TF.configuration . multaiTargetSets
-
 class HasName a b | a -> b where
     name :: Lens' a b
 
@@ -352,12 +326,6 @@ class HasTags a b | a -> b where
 instance HasTags a b => HasTags (TF.Schema l p a) b where
     tags = TF.configuration . tags
 
-class HasTargetGroupArns a b | a -> b where
-    targetGroupArns :: Lens' a b
-
-instance HasTargetGroupArns a b => HasTargetGroupArns (TF.Schema l p a) b where
-    targetGroupArns = TF.configuration . targetGroupArns
-
 class HasUserData a b | a -> b where
     userData :: Lens' a b
 
@@ -390,9 +358,6 @@ class HasComputedEbsOptimized a b | a -> b where
 
 class HasComputedElasticIps a b | a -> b where
     computedElasticIps :: a -> b
-
-class HasComputedElasticLoadBalancers a b | a -> b where
-    computedElasticLoadBalancers :: a -> b
 
 class HasComputedEnableMonitoring a b | a -> b where
     computedEnableMonitoring :: a -> b
@@ -445,9 +410,6 @@ class HasComputedMaxSize a b | a -> b where
 class HasComputedMinSize a b | a -> b where
     computedMinSize :: a -> b
 
-class HasComputedMultaiTargetSets a b | a -> b where
-    computedMultaiTargetSets :: a -> b
-
 class HasComputedName a b | a -> b where
     computedName :: a -> b
 
@@ -489,9 +451,6 @@ class HasComputedSubnetIds a b | a -> b where
 
 class HasComputedTags a b | a -> b where
     computedTags :: a -> b
-
-class HasComputedTargetGroupArns a b | a -> b where
-    computedTargetGroupArns :: a -> b
 
 class HasComputedUserData a b | a -> b where
     computedUserData :: a -> b

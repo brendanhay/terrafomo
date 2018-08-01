@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -68,8 +61,8 @@ Logentries LogSets.
 data LogsetData s = LogsetData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LogsetData s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (LogsetData s) where
+    toObject _ = []
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (LogsetData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"

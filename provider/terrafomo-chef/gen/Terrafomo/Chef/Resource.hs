@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -109,8 +102,8 @@ data DataBagItemResource s = DataBagItemResource {
     {- ^ (Required) The name of the data bag into which this item will be placed. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataBagItemResource s) where
-    toHCL DataBagItemResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DataBagItemResource s) where
+    toObject DataBagItemResource{..} = catMaybes
         [ TF.assign "content_json" <$> TF.attribute _content_json
         , TF.assign "data_bag_name" <$> TF.attribute _data_bag_name
         ]
@@ -159,8 +152,8 @@ data DataBagResource s = DataBagResource {
     {- ^ (Required) The unique name to assign to the data bag. This is the name that other server clients will use to find and retrieve data from the data bag. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataBagResource s) where
-    toHCL DataBagResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DataBagResource s) where
+    toObject DataBagResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -203,8 +196,8 @@ data EnvironmentResource s = EnvironmentResource {
     {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the environment. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EnvironmentResource s) where
-    toHCL EnvironmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (EnvironmentResource s) where
+    toObject EnvironmentResource{..} = catMaybes
         [ TF.assign "cookbook_constraints" <$> TF.attribute _cookbook_constraints
         , TF.assign "default_attributes_json" <$> TF.attribute _default_attributes_json
         , TF.assign "description" <$> TF.attribute _description
@@ -299,8 +292,8 @@ data NodeResource s = NodeResource {
     {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for the node. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NodeResource s) where
-    toHCL NodeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NodeResource s) where
+    toObject NodeResource{..} = catMaybes
         [ TF.assign "automatic_attributes_json" <$> TF.attribute _automatic_attributes_json
         , TF.assign "default_attributes_json" <$> TF.attribute _default_attributes_json
         , TF.assign "environment_name" <$> TF.attribute _environment_name
@@ -411,8 +404,8 @@ data RoleResource s = RoleResource {
     {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for any nodes that belong to this role. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RoleResource s) where
-    toHCL RoleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RoleResource s) where
+    toObject RoleResource{..} = catMaybes
         [ TF.assign "default_attributes_json" <$> TF.attribute _default_attributes_json
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name

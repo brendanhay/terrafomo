@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -34,6 +28,7 @@ module Terrafomo.Consul.Provider
     , providerToken
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -85,22 +80,24 @@ data Consul = Consul {
 
 instance Hashable Consul
 
-instance TF.ToHCL Consul where
-    toHCL x =
+instance TF.IsSection Consul where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Consul))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "address" <$> _address x
-            , TF.assign "ca_file" <$> _ca_file x
-            , TF.assign "cert_file" <$> _cert_file x
-            , TF.assign "datacenter" <$> _datacenter x
-            , TF.assign "http_auth" <$> _http_auth x
-            , TF.assign "insecure_https" <$> _insecure_https x
-            , TF.assign "key_file" <$> _key_file x
-            , TF.assign "scheme" <$> _scheme x
-            , TF.assign "token" <$> _token x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "address" <$> _address x
+                  , TF.assign "ca_file" <$> _ca_file x
+                  , TF.assign "cert_file" <$> _cert_file x
+                  , TF.assign "datacenter" <$> _datacenter x
+                  , TF.assign "http_auth" <$> _http_auth x
+                  , TF.assign "insecure_https" <$> _insecure_https x
+                  , TF.assign "key_file" <$> _key_file x
+                  , TF.assign "scheme" <$> _scheme x
+                  , TF.assign "token" <$> _token x
+                  ])
 
 instance TF.IsProvider Consul where
     type ProviderType Consul = "consul"

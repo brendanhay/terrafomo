@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -27,6 +21,7 @@ module Terrafomo.DNSimple.Provider
     , providerToken
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -59,15 +54,17 @@ data DNSimple = DNSimple {
 
 instance Hashable DNSimple
 
-instance TF.ToHCL DNSimple where
-    toHCL x =
+instance TF.IsSection DNSimple where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (DNSimple))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "account" <$> _account x
-            , TF.assign "token" <$> _token x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "account" <$> _account x
+                  , TF.assign "token" <$> _token x
+                  ])
 
 instance TF.IsProvider DNSimple where
     type ProviderType DNSimple = "dnsimple"

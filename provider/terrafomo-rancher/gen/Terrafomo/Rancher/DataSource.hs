@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -95,8 +88,8 @@ data CertificateData s = CertificateData {
     {- ^ (Required) The setting name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CertificateData s) where
-    toHCL CertificateData{..} = TF.inline $ catMaybes
+instance TF.IsObject (CertificateData s) where
+    toObject CertificateData{..} = catMaybes
         [ TF.assign "environment_id" <$> TF.attribute _environment_id
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -168,8 +161,8 @@ data EnvironmentData s = EnvironmentData {
     {- ^ (Required) The setting name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EnvironmentData s) where
-    toHCL EnvironmentData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EnvironmentData s) where
+    toObject EnvironmentData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -214,8 +207,8 @@ data SettingData s = SettingData {
     {- ^ (Required) The setting name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SettingData s) where
-    toHCL SettingData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SettingData s) where
+    toObject SettingData{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 

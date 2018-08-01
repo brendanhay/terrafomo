@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -243,9 +236,6 @@ module Terrafomo.Google.Resource01
     , StorageDefaultObjectAclResource (..)
     , storageDefaultObjectAclResource
 
-    , StorageNotificationResource (..)
-    , storageNotificationResource
-
     , StorageObjectAclResource (..)
     , storageObjectAclResource
 
@@ -292,11 +282,12 @@ module Terrafomo.Google.Resource01
     , P.HasConfig (..)
     , P.HasConnectionDrainingTimeoutSec (..)
     , P.HasConstraint (..)
+    , P.HasCooldownPeriod (..)
     , P.HasCors (..)
+    , P.HasCpuUtilization (..)
     , P.HasCreateTimeout (..)
     , P.HasCredentials (..)
     , P.HasCryptoKeyId (..)
-    , P.HasCustomAttributes (..)
     , P.HasCustomFeatures (..)
     , P.HasCustomRequestHeaders (..)
     , P.HasDatabase (..)
@@ -317,6 +308,7 @@ module Terrafomo.Google.Resource01
     , P.HasDisableProject (..)
     , P.HasDisabled (..)
     , P.HasDisk (..)
+    , P.HasDiskEncryptionKey (..)
     , P.HasDisplayName (..)
     , P.HasDistributionPolicyZones (..)
     , P.HasDnsName (..)
@@ -324,7 +316,6 @@ module Terrafomo.Google.Resource01
     , P.HasEnableFlowLogs (..)
     , P.HasEntryPoint (..)
     , P.HasEventNotificationConfig (..)
-    , P.HasEventTypes (..)
     , P.HasFailoverRatio (..)
     , P.HasFilename (..)
     , P.HasFilter (..)
@@ -365,6 +356,7 @@ module Terrafomo.Google.Resource01
     , P.HasLifecycleRule (..)
     , P.HasListPolicy (..)
     , P.HasLoadBalancingScheme (..)
+    , P.HasLoadBalancingUtilization (..)
     , P.HasLocalTrafficSelector (..)
     , P.HasLocation (..)
     , P.HasLocationId (..)
@@ -372,13 +364,16 @@ module Terrafomo.Google.Resource01
     , P.HasMachineType (..)
     , P.HasManagedZone (..)
     , P.HasMasterInstanceName (..)
+    , P.HasMaxReplicas (..)
     , P.HasMaxWorkers (..)
     , P.HasMember (..)
     , P.HasMembers (..)
     , P.HasMemorySizeGb (..)
     , P.HasMetadata (..)
     , P.HasMetadataStartupScript (..)
+    , P.HasMetric (..)
     , P.HasMinCpuPlatform (..)
+    , P.HasMinReplicas (..)
     , P.HasMinTlsVersion (..)
     , P.HasMqttConfig (..)
     , P.HasName (..)
@@ -389,7 +384,6 @@ module Terrafomo.Google.Resource01
     , P.HasNetworkTier (..)
     , P.HasNumNodes (..)
     , P.HasObject (..)
-    , P.HasObjectNamePrefix (..)
     , P.HasOnDelete (..)
     , P.HasOpenapiConfig (..)
     , P.HasOrgId (..)
@@ -398,7 +392,6 @@ module Terrafomo.Google.Resource01
     , P.HasParent (..)
     , P.HasPassword (..)
     , P.HasPathMatcher (..)
-    , P.HasPayloadFormat (..)
     , P.HasPeerAsn (..)
     , P.HasPeerIp (..)
     , P.HasPeerIpAddress (..)
@@ -433,6 +426,7 @@ module Terrafomo.Google.Resource01
     , P.HasRegion (..)
     , P.HasRemoteTrafficSelector (..)
     , P.HasReplicaConfiguration (..)
+    , P.HasReplicaZones (..)
     , P.HasRequestPath (..)
     , P.HasReservedIpRange (..)
     , P.HasRestorePolicy (..)
@@ -460,7 +454,9 @@ module Terrafomo.Google.Resource01
     , P.HasSessionAffinity (..)
     , P.HasSettings (..)
     , P.HasSharedSecret (..)
+    , P.HasSize (..)
     , P.HasSkipDelete (..)
+    , P.HasSnapshot (..)
     , P.HasSnapshotEncryptionKeyRaw (..)
     , P.HasSourceArchiveBucket (..)
     , P.HasSourceArchiveObject (..)
@@ -469,6 +465,7 @@ module Terrafomo.Google.Resource01
     , P.HasSourceInstanceTemplate (..)
     , P.HasSourceRanges (..)
     , P.HasSourceServiceAccounts (..)
+    , P.HasSourceSnapshotEncryptionKey (..)
     , P.HasSourceTags (..)
     , P.HasSplitKeys (..)
     , P.HasSslCertificates (..)
@@ -480,6 +477,7 @@ module Terrafomo.Google.Resource01
     , P.HasStorageType (..)
     , P.HasSubnetwork (..)
     , P.HasSubscription (..)
+    , P.HasSubstitutions (..)
     , P.HasTags (..)
     , P.HasTarget (..)
     , P.HasTargetPools (..)
@@ -573,8 +571,10 @@ module Terrafomo.Google.Resource01
     , P.HasComputedConnectionDrainingTimeoutSec (..)
     , P.HasComputedConnectionName (..)
     , P.HasComputedConstraint (..)
+    , P.HasComputedCooldownPeriod (..)
     , P.HasComputedCors (..)
     , P.HasComputedCpuPlatform (..)
+    , P.HasComputedCpuUtilization (..)
     , P.HasComputedCrc32c (..)
     , P.HasComputedCreateTime (..)
     , P.HasComputedCreateTimeout (..)
@@ -583,7 +583,6 @@ module Terrafomo.Google.Resource01
     , P.HasComputedCredentials (..)
     , P.HasComputedCryptoKeyId (..)
     , P.HasComputedCurrentLocationId (..)
-    , P.HasComputedCustomAttributes (..)
     , P.HasComputedCustomFeatures (..)
     , P.HasComputedCustomRequestHeaders (..)
     , P.HasComputedDatabase (..)
@@ -606,6 +605,7 @@ module Terrafomo.Google.Resource01
     , P.HasComputedDisabled (..)
     , P.HasComputedDisk (..)
     , P.HasComputedDisk0DiskEncryptionKeySha256 (..)
+    , P.HasComputedDiskEncryptionKey (..)
     , P.HasComputedDisplayName (..)
     , P.HasComputedDistributionPolicyZones (..)
     , P.HasComputedDnsAddress (..)
@@ -620,7 +620,6 @@ module Terrafomo.Google.Resource01
     , P.HasComputedEntryPoint (..)
     , P.HasComputedEtag (..)
     , P.HasComputedEventNotificationConfig (..)
-    , P.HasComputedEventTypes (..)
     , P.HasComputedFailoverRatio (..)
     , P.HasComputedFilename (..)
     , P.HasComputedFilter (..)
@@ -669,11 +668,14 @@ module Terrafomo.Google.Resource01
     , P.HasComputedKeyRingId (..)
     , P.HasComputedLabelFingerprint (..)
     , P.HasComputedLabels (..)
+    , P.HasComputedLastAttachTimestamp (..)
+    , P.HasComputedLastDetachTimestamp (..)
     , P.HasComputedLastModifiedTime (..)
     , P.HasComputedLifecycleRule (..)
     , P.HasComputedLifecycleState (..)
     , P.HasComputedListPolicy (..)
     , P.HasComputedLoadBalancingScheme (..)
+    , P.HasComputedLoadBalancingUtilization (..)
     , P.HasComputedLocalTrafficSelector (..)
     , P.HasComputedLocation (..)
     , P.HasComputedLocationId (..)
@@ -682,6 +684,7 @@ module Terrafomo.Google.Resource01
     , P.HasComputedManagedZone (..)
     , P.HasComputedMapId (..)
     , P.HasComputedMasterInstanceName (..)
+    , P.HasComputedMaxReplicas (..)
     , P.HasComputedMaxWorkers (..)
     , P.HasComputedMd5hash (..)
     , P.HasComputedMember (..)
@@ -690,7 +693,9 @@ module Terrafomo.Google.Resource01
     , P.HasComputedMetadata (..)
     , P.HasComputedMetadataFingerprint (..)
     , P.HasComputedMetadataStartupScript (..)
+    , P.HasComputedMetric (..)
     , P.HasComputedMinCpuPlatform (..)
+    , P.HasComputedMinReplicas (..)
     , P.HasComputedMinTlsVersion (..)
     , P.HasComputedMqttConfig (..)
     , P.HasComputedName (..)
@@ -705,7 +710,6 @@ module Terrafomo.Google.Resource01
     , P.HasComputedNumNodes (..)
     , P.HasComputedNumber (..)
     , P.HasComputedObject (..)
-    , P.HasComputedObjectNamePrefix (..)
     , P.HasComputedOnDelete (..)
     , P.HasComputedOpenapiConfig (..)
     , P.HasComputedOrgId (..)
@@ -715,7 +719,6 @@ module Terrafomo.Google.Resource01
     , P.HasComputedPassword (..)
     , P.HasComputedPath (..)
     , P.HasComputedPathMatcher (..)
-    , P.HasComputedPayloadFormat (..)
     , P.HasComputedPeerAsn (..)
     , P.HasComputedPeerIp (..)
     , P.HasComputedPeerIpAddress (..)
@@ -756,6 +759,7 @@ module Terrafomo.Google.Resource01
     , P.HasComputedRegion (..)
     , P.HasComputedRemoteTrafficSelector (..)
     , P.HasComputedReplicaConfiguration (..)
+    , P.HasComputedReplicaZones (..)
     , P.HasComputedRequestPath (..)
     , P.HasComputedReservedIpRange (..)
     , P.HasComputedRestorePolicy (..)
@@ -793,6 +797,7 @@ module Terrafomo.Google.Resource01
     , P.HasComputedSharedSecretHash (..)
     , P.HasComputedSize (..)
     , P.HasComputedSkipDelete (..)
+    , P.HasComputedSnapshot (..)
     , P.HasComputedSnapshotEncryptionKeyRaw (..)
     , P.HasComputedSnapshotEncryptionKeySha256 (..)
     , P.HasComputedSourceArchiveBucket (..)
@@ -804,6 +809,8 @@ module Terrafomo.Google.Resource01
     , P.HasComputedSourceInstanceTemplate (..)
     , P.HasComputedSourceRanges (..)
     , P.HasComputedSourceServiceAccounts (..)
+    , P.HasComputedSourceSnapshotEncryptionKey (..)
+    , P.HasComputedSourceSnapshotId (..)
     , P.HasComputedSourceTags (..)
     , P.HasComputedSplitKeys (..)
     , P.HasComputedSslCertificates (..)
@@ -821,6 +828,7 @@ module Terrafomo.Google.Resource01
     , P.HasComputedStorageType (..)
     , P.HasComputedSubnetwork (..)
     , P.HasComputedSubscription (..)
+    , P.HasComputedSubstitutions (..)
     , P.HasComputedTags (..)
     , P.HasComputedTagsFingerprint (..)
     , P.HasComputedTarget (..)
@@ -913,8 +921,8 @@ data BigqueryDatasetResource s = BigqueryDatasetResource {
     {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BigqueryDatasetResource s) where
-    toHCL BigqueryDatasetResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (BigqueryDatasetResource s) where
+    toObject BigqueryDatasetResource{..} = catMaybes
         [ TF.assign "dataset_id" <$> TF.attribute _dataset_id
         , TF.assign "default_table_expiration_ms" <$> TF.attribute _default_table_expiration_ms
         , TF.assign "description" <$> TF.attribute _description
@@ -1044,8 +1052,8 @@ data BigtableInstanceResource s = BigtableInstanceResource {
     {- ^ (Required) The zone to create the Cloud Bigtable cluster in. Zones that support Bigtable instances are noted on the <https://cloud.google.com/bigtable/docs/locations> . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BigtableInstanceResource s) where
-    toHCL BigtableInstanceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (BigtableInstanceResource s) where
+    toObject BigtableInstanceResource{..} = catMaybes
         [ TF.assign "cluster_id" <$> TF.attribute _cluster_id
         , TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "instance_type" <$> TF.attribute _instance_type
@@ -1167,8 +1175,8 @@ data BigtableTableResource s = BigtableTableResource {
     {- ^ (Optional) A list of predefined keys to split the table on. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BigtableTableResource s) where
-    toHCL BigtableTableResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (BigtableTableResource s) where
+    toObject BigtableTableResource{..} = catMaybes
         [ TF.assign "instance_name" <$> TF.attribute _instance_name
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -1238,15 +1246,18 @@ data CloudbuildTriggerResource s = CloudbuildTriggerResource {
     {- ^ (Optional) A brief description of this resource. -}
     , _filename         :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specify the path to a Cloud Build configuration file in the Git repo. This is mutually exclusive with @build@ . This is typically @cloudbuild.yaml@ however it can be specified by the user. -}
+    , _substitutions    :: !(TF.Attr s P.Text)
+    {- ^ : (Optional) User-defined substitutions. User-defined substitutions must conform to the following rules: -}
     , _trigger_template :: !(TF.Attr s P.Text)
     {- ^ (Optional) Location of the source in a Google Cloud Source Repository. Structure is documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudbuildTriggerResource s) where
-    toHCL CloudbuildTriggerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CloudbuildTriggerResource s) where
+    toObject CloudbuildTriggerResource{..} = catMaybes
         [ TF.assign "build" <$> TF.attribute _build
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "filename" <$> TF.attribute _filename
+        , TF.assign "substitutions" <$> TF.attribute _substitutions
         , TF.assign "trigger_template" <$> TF.attribute _trigger_template
         ]
 
@@ -1264,6 +1275,11 @@ instance P.HasFilename (CloudbuildTriggerResource s) (TF.Attr s P.Text) where
     filename =
         lens (_filename :: CloudbuildTriggerResource s -> TF.Attr s P.Text)
              (\s a -> s { _filename = a } :: CloudbuildTriggerResource s)
+
+instance P.HasSubstitutions (CloudbuildTriggerResource s) (TF.Attr s P.Text) where
+    substitutions =
+        lens (_substitutions :: CloudbuildTriggerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _substitutions = a } :: CloudbuildTriggerResource s)
 
 instance P.HasTriggerTemplate (CloudbuildTriggerResource s) (TF.Attr s P.Text) where
     triggerTemplate =
@@ -1285,6 +1301,11 @@ instance s ~ s' => P.HasComputedFilename (TF.Ref s' (CloudbuildTriggerResource s
         (_filename :: CloudbuildTriggerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedSubstitutions (TF.Ref s' (CloudbuildTriggerResource s)) (TF.Attr s P.Text) where
+    computedSubstitutions =
+        (_substitutions :: CloudbuildTriggerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedTriggerTemplate (TF.Ref s' (CloudbuildTriggerResource s)) (TF.Attr s P.Text) where
     computedTriggerTemplate =
         (_trigger_template :: CloudbuildTriggerResource s -> TF.Attr s P.Text)
@@ -1297,6 +1318,7 @@ cloudbuildTriggerResource =
               _build = TF.Nil
             , _description = TF.Nil
             , _filename = TF.Nil
+            , _substitutions = TF.Nil
             , _trigger_template = TF.Nil
             }
 
@@ -1333,8 +1355,8 @@ data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource {
     {- ^ (Optional) Name of Pub/Sub topic. Every message published in this topic will trigger function execution with message contents passed as input data. Cannot be used with @trigger_http@ and @trigger_bucket@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudfunctionsFunctionResource s) where
-    toHCL CloudfunctionsFunctionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CloudfunctionsFunctionResource s) where
+    toObject CloudfunctionsFunctionResource{..} = catMaybes
         [ TF.assign "available_memory_mb" <$> TF.attribute _available_memory_mb
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "entry_point" <$> TF.attribute _entry_point
@@ -1522,8 +1544,8 @@ data CloudiotRegistryResource s = CloudiotRegistryResource {
     {- ^ (Optional) A PubSub topic to publish device state updates. Structure is documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudiotRegistryResource s) where
-    toHCL CloudiotRegistryResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CloudiotRegistryResource s) where
+    toObject CloudiotRegistryResource{..} = catMaybes
         [ TF.assign "credentials" <$> TF.attribute _credentials
         , TF.assign "event_notification_config" <$> TF.attribute _event_notification_config
         , TF.assign "http_config" <$> TF.attribute _http_config
@@ -1671,8 +1693,8 @@ data ComputeBackendServiceResource s = ComputeBackendServiceResource {
     {- ^ (Optional) The number of secs to wait for a backend to respond to a request before considering the request failed. Defaults to @30@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeBackendServiceResource s) where
-    toHCL ComputeBackendServiceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeBackendServiceResource s) where
+    toObject ComputeBackendServiceResource{..} = catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "cdn_policy" <$> TF.attribute _cdn_policy
         , TF.assign "connection_draining_timeout_sec" <$> TF.attribute _connection_draining_timeout_sec
@@ -1906,8 +1928,8 @@ data ComputeFirewallResource s = ComputeFirewallResource {
     {- ^ (Optional) A list of target tags for this firewall. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeFirewallResource s) where
-    toHCL ComputeFirewallResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeFirewallResource s) where
+    toObject ComputeFirewallResource{..} = catMaybes
         [ TF.assign "allow" <$> TF.attribute _allow
         , TF.assign "deny" <$> TF.attribute _deny
         , TF.assign "description" <$> TF.attribute _description
@@ -2129,8 +2151,8 @@ data ComputeGlobalForwardingRuleResource s = ComputeGlobalForwardingRuleResource
     {- ^ (Required) URL of target HTTP or HTTPS proxy. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeGlobalForwardingRuleResource s) where
-    toHCL ComputeGlobalForwardingRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeGlobalForwardingRuleResource s) where
+    toObject ComputeGlobalForwardingRuleResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ip_address" <$> TF.attribute _ip_address
         , TF.assign "ip_protocol" <$> TF.attribute _ip_protocol
@@ -2286,8 +2308,8 @@ data ComputeHealthCheckResource s = ComputeHealthCheckResource {
     {- ^ (Optional) Consecutive failures required (default 2). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeHealthCheckResource s) where
-    toHCL ComputeHealthCheckResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeHealthCheckResource s) where
+    toObject ComputeHealthCheckResource{..} = catMaybes
         [ TF.assign "check_interval_sec" <$> TF.attribute _check_interval_sec
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "healthy_threshold" <$> TF.attribute _healthy_threshold
@@ -2449,8 +2471,8 @@ data ComputeInstanceFromTemplateResource s = ComputeInstanceFromTemplateResource
     {- ^ (Optional) The zone that the machine should be created in. If not set, the provider zone is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeInstanceFromTemplateResource s) where
-    toHCL ComputeInstanceFromTemplateResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeInstanceFromTemplateResource s) where
+    toObject ComputeInstanceFromTemplateResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "source_instance_template" <$> TF.attribute _source_instance_template
         , TF.assign "zone" <$> TF.attribute _zone
@@ -2519,8 +2541,8 @@ data ComputeInstanceGroupResource s = ComputeInstanceGroupResource {
     {- ^ (Required) The zone that this instance group should be created in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeInstanceGroupResource s) where
-    toHCL ComputeInstanceGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeInstanceGroupResource s) where
+    toObject ComputeInstanceGroupResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "instances" <$> TF.attribute _instances
         , TF.assign "name" <$> TF.attribute _name
@@ -2670,8 +2692,8 @@ data ComputeInstanceResource s = ComputeInstanceResource {
     {- ^ (Required) The zone that the machine should be created in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeInstanceResource s) where
-    toHCL ComputeInstanceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeInstanceResource s) where
+    toObject ComputeInstanceResource{..} = catMaybes
         [ TF.assign "allow_stopping_for_update" <$> TF.attribute _allow_stopping_for_update
         , TF.assign "attached_disk" <$> TF.attribute _attached_disk
         , TF.assign "boot_disk" <$> TF.attribute _boot_disk
@@ -3010,8 +3032,8 @@ data ComputeInstanceTemplateResource s = ComputeInstanceTemplateResource {
     {- ^ (Optional) Tags to attach to the instance. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeInstanceTemplateResource s) where
-    toHCL ComputeInstanceTemplateResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeInstanceTemplateResource s) where
+    toObject ComputeInstanceTemplateResource{..} = catMaybes
         [ TF.assign "can_ip_forward" <$> TF.attribute _can_ip_forward
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "disk" <$> TF.attribute _disk
@@ -3265,8 +3287,8 @@ data ComputeNetworkPeeringResource s = ComputeNetworkPeeringResource {
     {- ^ (Required) Resource link of the peer network. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeNetworkPeeringResource s) where
-    toHCL ComputeNetworkPeeringResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeNetworkPeeringResource s) where
+    toObject ComputeNetworkPeeringResource{..} = catMaybes
         [ TF.assign "auto_create_routes" <$> TF.attribute _auto_create_routes
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network" <$> TF.attribute _network
@@ -3350,8 +3372,8 @@ data ComputeNetworkResource s = ComputeNetworkResource {
     {- ^ (Optional) Sets the network-wide routing mode for Cloud Routers to use. Accepted values are @"GLOBAL"@ or @"REGIONAL"@ . Defaults to @"REGIONAL"@ . Refer to the <https://cloud.google.com/router/docs/concepts/overview#dynamic-routing-mode> for more details. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeNetworkResource s) where
-    toHCL ComputeNetworkResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeNetworkResource s) where
+    toObject ComputeNetworkResource{..} = catMaybes
         [ TF.assign "auto_create_subnetworks" <$> TF.attribute _auto_create_subnetworks
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "ipv4_range" <$> TF.attribute _ipv4_range
@@ -3453,8 +3475,8 @@ data ComputeProjectMetadataResource s = ComputeProjectMetadataResource {
     {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeProjectMetadataResource s) where
-    toHCL ComputeProjectMetadataResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeProjectMetadataResource s) where
+    toObject ComputeProjectMetadataResource{..} = catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "project" <$> TF.attribute _project
         ]
@@ -3520,8 +3542,8 @@ data ComputeRegionBackendServiceResource s = ComputeRegionBackendServiceResource
     {- ^ (Optional) The number of secs to wait for a backend to respond to a request before considering the request failed. Defaults to @30@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeRegionBackendServiceResource s) where
-    toHCL ComputeRegionBackendServiceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeRegionBackendServiceResource s) where
+    toObject ComputeRegionBackendServiceResource{..} = catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "connection_draining_timeout_sec" <$> TF.attribute _connection_draining_timeout_sec
         , TF.assign "description" <$> TF.attribute _description
@@ -3677,7 +3699,7 @@ data ComputeRegionInstanceGroupManagerResource s = ComputeRegionInstanceGroupMan
     , _distribution_policy_zones :: !(TF.Attr s P.Text)
     {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) The distribution policy for this managed instance group. You can specify one or more values. For more information, see the <https://cloud.google.com/compute/docs/instance-groups/distributing-instances-with-regional-instance-groups#selectingzones> . -}
     , _instance_template         :: !(TF.Attr s P.Text)
-    {- ^ (Required) The full URL to an instance template from which all new instances will be created. -}
+    {- ^ (Optional) The full URL to an instance template from which all new instances will be created. Conflicts with @version@ (see <https://cloud.google.com/compute/docs/instance-groups/updating-managed-instance-groups#relationship_between_instancetemplate_properties_for_a_managed_instance_group> ) -}
     , _name                      :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the instance group manager. Must be 1-63 characters long and comply with <https://www.ietf.org/rfc/rfc1035.txt> . Supported characters include lowercase letters, numbers, and hyphens. -}
     , _named_port                :: !(TF.Attr s P.Text)
@@ -3694,12 +3716,14 @@ data ComputeRegionInstanceGroupManagerResource s = ComputeRegionInstanceGroupMan
     {- ^ (Optional) The target number of running instances for this managed instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set. Defaults to @0@ . -}
     , _update_strategy           :: !(TF.Attr s P.Text)
     {- ^ (Optional, Default @"NONE"@ ) If the @instance_template@ resource is modified, a value of @"NONE"@ will prevent any of the managed instances from being restarted by Terraform. A value of @"ROLLING_UPDATE"@ is supported as [Beta feature]. A value of @"ROLLING_UPDATE"@ requires @rolling_update_policy@ block to be set -}
+    , _version                   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Application versions managed by this instance group. Each version deals with a specific instance template, allowing canary release scenarios. Conflicts with @instance_template@ . Structure is documented below. Beware that exactly one version must not specify a target size. It means that versions with a target size will respect the setting, and the one without target size will be applied to all remaining Instances (top level target_size - each version target_size). -}
     , _wait_for_instances        :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to wait for all instances to be created/updated before returning. Note that if this is set to true and the operation does not succeed, Terraform will continue trying until it times out. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeRegionInstanceGroupManagerResource s) where
-    toHCL ComputeRegionInstanceGroupManagerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeRegionInstanceGroupManagerResource s) where
+    toObject ComputeRegionInstanceGroupManagerResource{..} = catMaybes
         [ TF.assign "auto_healing_policies" <$> TF.attribute _auto_healing_policies
         , TF.assign "base_instance_name" <$> TF.attribute _base_instance_name
         , TF.assign "description" <$> TF.attribute _description
@@ -3713,6 +3737,7 @@ instance TF.ToHCL (ComputeRegionInstanceGroupManagerResource s) where
         , TF.assign "target_pools" <$> TF.attribute _target_pools
         , TF.assign "target_size" <$> TF.attribute _target_size
         , TF.assign "update_strategy" <$> TF.attribute _update_strategy
+        , TF.assign "version" <$> TF.attribute _version
         , TF.assign "wait_for_instances" <$> TF.attribute _wait_for_instances
         ]
 
@@ -3780,6 +3805,11 @@ instance P.HasUpdateStrategy (ComputeRegionInstanceGroupManagerResource s) (TF.A
     updateStrategy =
         lens (_update_strategy :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
              (\s a -> s { _update_strategy = a } :: ComputeRegionInstanceGroupManagerResource s)
+
+instance P.HasVersion (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+    version =
+        lens (_version :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _version = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasWaitForInstances (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
     waitForInstances =
@@ -3860,6 +3890,11 @@ instance s ~ s' => P.HasComputedUpdateStrategy (TF.Ref s' (ComputeRegionInstance
         (_update_strategy :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
+    computedVersion =
+        (_version :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedWaitForInstances (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
     computedWaitForInstances =
         (_wait_for_instances :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
@@ -3882,6 +3917,7 @@ computeRegionInstanceGroupManagerResource =
             , _target_pools = TF.Nil
             , _target_size = TF.Nil
             , _update_strategy = TF.Nil
+            , _version = TF.Nil
             , _wait_for_instances = TF.Nil
             }
 
@@ -3906,8 +3942,8 @@ data ComputeRouterInterfaceResource s = ComputeRouterInterfaceResource {
     {- ^ (Required) The name or resource link to the VPN tunnel this interface will be linked to. Changing this forces a new interface to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeRouterInterfaceResource s) where
-    toHCL ComputeRouterInterfaceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeRouterInterfaceResource s) where
+    toObject ComputeRouterInterfaceResource{..} = catMaybes
         [ TF.assign "ip_range" <$> TF.attribute _ip_range
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -3990,54 +4026,65 @@ computeRouterInterfaceResource =
 
 {- | The @google_compute_router@ Google resource.
 
-Manages a Cloud Router resource. For more information see
+Manages a Cloud Router BGP peer. For more information see
 <https://cloud.google.com/compute/docs/cloudrouter> and
 <https://cloud.google.com/compute/docs/reference/latest/routers> .
 -}
 data ComputeRouterResource s = ComputeRouterResource {
-      _bgp         :: !(TF.Attr s P.Text)
-    {- ^ (Required) BGP information specific to this router. Changing this forces a new router to be created. Structure is documented below. -}
-    , _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A description of the resource. Changing this forces a new router to be created. -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) A unique name for the router, required by GCE. Changing this forces a new router to be created. -}
-    , _network     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name or resource link to the network this Cloud Router will use to learn and announce routes. Changing this forces a new router to be created. -}
-    , _project     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. Changing this forces a new router to be created. -}
-    , _region      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The region this router should sit in. If not specified, the project region will be used. Changing this forces a new router to be created. -}
+      _advertised_route_priority :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The priority of routes advertised to this BGP peer. Changing this forces a new peer to be created. -}
+    , _interface                 :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the interface the BGP peer is associated with. Changing this forces a new peer to be created. -}
+    , _name                      :: !(TF.Attr s P.Text)
+    {- ^ (Required) A unique name for BGP peer, required by GCE. Changing this forces a new peer to be created. -}
+    , _peer_asn                  :: !(TF.Attr s P.Text)
+    {- ^ (Required) Peer BGP Autonomous System Number (ASN). Changing this forces a new peer to be created. -}
+    , _peer_ip_address           :: !(TF.Attr s P.Text)
+    {- ^ (Required) IP address of the BGP interface outside Google Cloud. Changing this forces a new peer to be created. -}
+    , _project                   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID of the project in which this peer's router belongs. If it is not provided, the provider project is used. Changing this forces a new peer to be created. -}
+    , _region                    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region this peer's router sits in. If not specified, the project region will be used. Changing this forces a new peer to be created. -}
+    , _router                    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the router in which this BGP peer will be configured. Changing this forces a new peer to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeRouterResource s) where
-    toHCL ComputeRouterResource{..} = TF.inline $ catMaybes
-        [ TF.assign "bgp" <$> TF.attribute _bgp
-        , TF.assign "description" <$> TF.attribute _description
+instance TF.IsObject (ComputeRouterResource s) where
+    toObject ComputeRouterResource{..} = catMaybes
+        [ TF.assign "advertised_route_priority" <$> TF.attribute _advertised_route_priority
+        , TF.assign "interface" <$> TF.attribute _interface
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "network" <$> TF.attribute _network
+        , TF.assign "peer_asn" <$> TF.attribute _peer_asn
+        , TF.assign "peer_ip_address" <$> TF.attribute _peer_ip_address
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "router" <$> TF.attribute _router
         ]
 
-instance P.HasBgp (ComputeRouterResource s) (TF.Attr s P.Text) where
-    bgp =
-        lens (_bgp :: ComputeRouterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _bgp = a } :: ComputeRouterResource s)
+instance P.HasAdvertisedRoutePriority (ComputeRouterResource s) (TF.Attr s P.Text) where
+    advertisedRoutePriority =
+        lens (_advertised_route_priority :: ComputeRouterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _advertised_route_priority = a } :: ComputeRouterResource s)
 
-instance P.HasDescription (ComputeRouterResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: ComputeRouterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ComputeRouterResource s)
+instance P.HasInterface (ComputeRouterResource s) (TF.Attr s P.Text) where
+    interface =
+        lens (_interface :: ComputeRouterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _interface = a } :: ComputeRouterResource s)
 
 instance P.HasName (ComputeRouterResource s) (TF.Attr s P.Text) where
     name =
         lens (_name :: ComputeRouterResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ComputeRouterResource s)
 
-instance P.HasNetwork (ComputeRouterResource s) (TF.Attr s P.Text) where
-    network =
-        lens (_network :: ComputeRouterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network = a } :: ComputeRouterResource s)
+instance P.HasPeerAsn (ComputeRouterResource s) (TF.Attr s P.Text) where
+    peerAsn =
+        lens (_peer_asn :: ComputeRouterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _peer_asn = a } :: ComputeRouterResource s)
+
+instance P.HasPeerIpAddress (ComputeRouterResource s) (TF.Attr s P.Text) where
+    peerIpAddress =
+        lens (_peer_ip_address :: ComputeRouterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _peer_ip_address = a } :: ComputeRouterResource s)
 
 instance P.HasProject (ComputeRouterResource s) (TF.Attr s P.Text) where
     project =
@@ -4049,24 +4096,37 @@ instance P.HasRegion (ComputeRouterResource s) (TF.Attr s P.Text) where
         lens (_region :: ComputeRouterResource s -> TF.Attr s P.Text)
              (\s a -> s { _region = a } :: ComputeRouterResource s)
 
-instance s ~ s' => P.HasComputedBgp (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedBgp =
-        (_bgp :: ComputeRouterResource s -> TF.Attr s P.Text)
+instance P.HasRouter (ComputeRouterResource s) (TF.Attr s P.Text) where
+    router =
+        lens (_router :: ComputeRouterResource s -> TF.Attr s P.Text)
+             (\s a -> s { _router = a } :: ComputeRouterResource s)
+
+instance s ~ s' => P.HasComputedAdvertisedRoutePriority (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
+    computedAdvertisedRoutePriority =
+        (_advertised_route_priority :: ComputeRouterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ComputeRouterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedInterface (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
+    computedInterface =
+        (_interface :: ComputeRouterResource s -> TF.Attr s P.Text)
             . TF.refValue
+
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeRouterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedNetwork =
-        (_network :: ComputeRouterResource s -> TF.Attr s P.Text)
+instance s ~ s' => P.HasComputedPeerAsn (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
+    computedPeerAsn =
+        (_peer_asn :: ComputeRouterResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPeerIpAddress (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
+    computedPeerIpAddress =
+        (_peer_ip_address :: ComputeRouterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
@@ -4079,19 +4139,23 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRouterResource s)) (TF
         (_region :: ComputeRouterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+instance s ~ s' => P.HasComputedRouter (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
+    computedRouter =
+        (_router :: ComputeRouterResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
 computeRouterResource :: TF.Resource P.Google (ComputeRouterResource s)
 computeRouterResource =
     TF.newResource "google_compute_router" $
         ComputeRouterResource {
-              _bgp = TF.Nil
-            , _description = TF.Nil
+              _advertised_route_priority = TF.Nil
+            , _interface = TF.Nil
             , _name = TF.Nil
-            , _network = TF.Nil
+            , _peer_asn = TF.Nil
+            , _peer_ip_address = TF.Nil
             , _project = TF.Nil
             , _region = TF.Nil
+            , _router = TF.Nil
             }
 
 {- | The @google_compute_shared_vpc_host_project@ Google resource.
@@ -4107,8 +4171,8 @@ data ComputeSharedVpcHostProjectResource s = ComputeSharedVpcHostProjectResource
     {- ^ (Required) The ID of the project that will serve as a Shared VPC host project -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSharedVpcHostProjectResource s) where
-    toHCL ComputeSharedVpcHostProjectResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSharedVpcHostProjectResource s) where
+    toObject ComputeSharedVpcHostProjectResource{..} = catMaybes
         [ TF.assign "project" <$> TF.attribute _project
         ]
 
@@ -4145,8 +4209,8 @@ data ComputeSharedVpcServiceProjectResource s = ComputeSharedVpcServiceProjectRe
     {- ^ (Required) The ID of the project that will serve as a Shared VPC service project. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSharedVpcServiceProjectResource s) where
-    toHCL ComputeSharedVpcServiceProjectResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSharedVpcServiceProjectResource s) where
+    toObject ComputeSharedVpcServiceProjectResource{..} = catMaybes
         [ TF.assign "host_project" <$> TF.attribute _host_project
         , TF.assign "service_project" <$> TF.attribute _service_project
         ]
@@ -4202,8 +4266,8 @@ data ComputeSnapshotResource s = ComputeSnapshotResource {
     {- ^ (Required) The zone where the source disk is located. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSnapshotResource s) where
-    toHCL ComputeSnapshotResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSnapshotResource s) where
+    toObject ComputeSnapshotResource{..} = catMaybes
         [ TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -4334,8 +4398,8 @@ data ComputeSslCertificateResource s = ComputeSslCertificateResource {
     {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSslCertificateResource s) where
-    toHCL ComputeSslCertificateResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSslCertificateResource s) where
+    toObject ComputeSslCertificateResource{..} = catMaybes
         [ TF.assign "certificate" <$> TF.attribute _certificate
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -4451,8 +4515,8 @@ data ComputeTargetPoolResource s = ComputeTargetPoolResource {
     {- ^ (Optional) How to distribute load. Options are "NONE" (no affinity). "CLIENT_IP" (hash of the source/dest addresses / ports), and "CLIENT_IP_PROTO" also includes the protocol (default "NONE"). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeTargetPoolResource s) where
-    toHCL ComputeTargetPoolResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeTargetPoolResource s) where
+    toObject ComputeTargetPoolResource{..} = catMaybes
         [ TF.assign "backup_pool" <$> TF.attribute _backup_pool
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "failover_ratio" <$> TF.attribute _failover_ratio
@@ -4595,8 +4659,8 @@ data ComputeUrlMapResource s = ComputeUrlMapResource {
     {- ^ (Optional) The test to perform.  Multiple blocks of this type are permitted. Structure is documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeUrlMapResource s) where
-    toHCL ComputeUrlMapResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeUrlMapResource s) where
+    toObject ComputeUrlMapResource{..} = catMaybes
         [ TF.assign "default_service" <$> TF.attribute _default_service
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "host_rule" <$> TF.attribute _host_rule
@@ -4714,8 +4778,8 @@ data ContainerNodePoolResource s = ContainerNodePoolResource {
     {- ^ (Optional) The zone in which the cluster resides. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ContainerNodePoolResource s) where
-    toHCL ContainerNodePoolResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ContainerNodePoolResource s) where
+    toObject ContainerNodePoolResource{..} = catMaybes
         [ TF.assign "cluster" <$> TF.attribute _cluster
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "zone" <$> TF.attribute _zone
@@ -4786,8 +4850,8 @@ data DataflowJobResource s = DataflowJobResource {
     {- ^ (Optional) The zone in which the created job should run. If it is not provided, the provider zone is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataflowJobResource s) where
-    toHCL DataflowJobResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DataflowJobResource s) where
+    toObject DataflowJobResource{..} = catMaybes
         [ TF.assign "max_workers" <$> TF.attribute _max_workers
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "on_delete" <$> TF.attribute _on_delete
@@ -4917,8 +4981,8 @@ data DataprocClusterResource s = DataprocClusterResource {
     {- ^ (Optional) The region in which the cluster and associated nodes will be created in. Defaults to @global@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataprocClusterResource s) where
-    toHCL DataprocClusterResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DataprocClusterResource s) where
+    toObject DataprocClusterResource{..} = catMaybes
         [ TF.assign "cluster_config" <$> TF.attribute _cluster_config
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
@@ -5026,8 +5090,8 @@ data DataprocJobResource s = DataprocJobResource {
     {- ^ (Required) Exactly one of the specific job types to run on the cluster should be specified. If you want to submit multiple jobs, this will currently require the definition of multiple @google_dataproc_job@ resources as shown in the example above, or by setting the @count@ attribute. The following job configs are supported: -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DataprocJobResource s) where
-    toHCL DataprocJobResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DataprocJobResource s) where
+    toObject DataprocJobResource{..} = catMaybes
         [ TF.assign "force_delete" <$> TF.attribute _force_delete
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "placement.cluster_name" <$> TF.attribute _placement
@@ -5158,8 +5222,8 @@ data DnsManagedZoneResource s = DnsManagedZoneResource {
     {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsManagedZoneResource s) where
-    toHCL DnsManagedZoneResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DnsManagedZoneResource s) where
+    toObject DnsManagedZoneResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "dns_name" <$> TF.attribute _dns_name
         , TF.assign "name" <$> TF.attribute _name
@@ -5245,8 +5309,8 @@ data DnsRecordSetResource s = DnsRecordSetResource {
     {- ^ (Required) The DNS record set type. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsRecordSetResource s) where
-    toHCL DnsRecordSetResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DnsRecordSetResource s) where
+    toObject DnsRecordSetResource{..} = catMaybes
         [ TF.assign "managed_zone" <$> TF.attribute _managed_zone
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -5349,8 +5413,8 @@ data EndpointsServiceResource s = EndpointsServiceResource {
     {- ^ : (Required) The name of the service.  Usually of the form @$apiname.endpoints.$projectid.cloud.goog@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EndpointsServiceResource s) where
-    toHCL EndpointsServiceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (EndpointsServiceResource s) where
+    toObject EndpointsServiceResource{..} = catMaybes
         [ TF.assign "grpc_config" <$> TF.attribute _grpc_config
         , TF.assign "openapi_config" <$> TF.attribute _openapi_config
         , TF.assign "project" <$> TF.attribute _project
@@ -5459,8 +5523,8 @@ data FolderIamBindingResource s = FolderIamBindingResource {
     {- ^ (Required) The role that should be applied. Only one @google_folder_iam_binding@ can be used per role. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FolderIamBindingResource s) where
-    toHCL FolderIamBindingResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FolderIamBindingResource s) where
+    toObject FolderIamBindingResource{..} = catMaybes
         [ TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "members" <$> TF.attribute _members
         , TF.assign "role" <$> TF.attribute _role
@@ -5526,8 +5590,8 @@ data FolderIamMemberResource s = FolderIamMemberResource {
     {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FolderIamMemberResource s) where
-    toHCL FolderIamMemberResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FolderIamMemberResource s) where
+    toObject FolderIamMemberResource{..} = catMaybes
         [ TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "member" <$> TF.attribute _member
         , TF.assign "role" <$> TF.attribute _role
@@ -5587,8 +5651,8 @@ data FolderIamPolicyResource s = FolderIamPolicyResource {
     {- ^ (Required) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FolderIamPolicyResource s) where
-    toHCL FolderIamPolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FolderIamPolicyResource s) where
+    toObject FolderIamPolicyResource{..} = catMaybes
         [ TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "policy_data" <$> TF.attribute _policy_data
         ]
@@ -5648,8 +5712,8 @@ data FolderOrganizationPolicyResource s = FolderOrganizationPolicyResource {
     {- ^ (Optional) Version of the Policy. Default version is 0. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FolderOrganizationPolicyResource s) where
-    toHCL FolderOrganizationPolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FolderOrganizationPolicyResource s) where
+    toObject FolderOrganizationPolicyResource{..} = catMaybes
         [ TF.assign "boolean_policy" <$> TF.attribute _boolean_policy
         , TF.assign "constraint" <$> TF.attribute _constraint
         , TF.assign "folder" <$> TF.attribute _folder
@@ -5762,8 +5826,8 @@ data FolderResource s = FolderResource {
     {- ^ (Required) The resource name of the parent Folder or Organization. Must be of the form @folders/{folder_id}@ or @organizations/{org_id}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FolderResource s) where
-    toHCL FolderResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FolderResource s) where
+    toObject FolderResource{..} = catMaybes
         [ TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "parent" <$> TF.attribute _parent
         ]
@@ -5819,8 +5883,8 @@ data KmsCryptoKeyIamBindingResource s = KmsCryptoKeyIamBindingResource {
     {- ^ (Required) The role that should be applied. Only one @google_kms_crypto_key_iam_binding@ can be used per role. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsCryptoKeyIamBindingResource s) where
-    toHCL KmsCryptoKeyIamBindingResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (KmsCryptoKeyIamBindingResource s) where
+    toObject KmsCryptoKeyIamBindingResource{..} = catMaybes
         [ TF.assign "crypto_key_id" <$> TF.attribute _crypto_key_id
         , TF.assign "members" <$> TF.attribute _members
         , TF.assign "role" <$> TF.attribute _role
@@ -5887,8 +5951,8 @@ data KmsCryptoKeyIamMemberResource s = KmsCryptoKeyIamMemberResource {
     {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsCryptoKeyIamMemberResource s) where
-    toHCL KmsCryptoKeyIamMemberResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (KmsCryptoKeyIamMemberResource s) where
+    toObject KmsCryptoKeyIamMemberResource{..} = catMaybes
         [ TF.assign "crypto_key_id" <$> TF.attribute _crypto_key_id
         , TF.assign "member" <$> TF.attribute _member
         , TF.assign "role" <$> TF.attribute _role
@@ -5958,8 +6022,8 @@ data KmsCryptoKeyResource s = KmsCryptoKeyResource {
     {- ^ (Optional) Every time this period passes, generate a new CryptoKeyVersion and set it as the primary. The first rotation will take place after the specified period. The rotation period has the format of a decimal number with up to 9 fractional digits, followed by the letter s (seconds). It must be greater than a day (ie, 83400). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsCryptoKeyResource s) where
-    toHCL KmsCryptoKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (KmsCryptoKeyResource s) where
+    toObject KmsCryptoKeyResource{..} = catMaybes
         [ TF.assign "key_ring" <$> TF.attribute _key_ring
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "rotation_period" <$> TF.attribute _rotation_period
@@ -6025,8 +6089,8 @@ data LoggingBillingAccountSinkResource s = LoggingBillingAccountSinkResource {
     {- ^ (Required) The name of the logging sink. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoggingBillingAccountSinkResource s) where
-    toHCL LoggingBillingAccountSinkResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoggingBillingAccountSinkResource s) where
+    toObject LoggingBillingAccountSinkResource{..} = catMaybes
         [ TF.assign "billing_account" <$> TF.attribute _billing_account
         , TF.assign "destination" <$> TF.attribute _destination
         , TF.assign "name" <$> TF.attribute _name
@@ -6092,8 +6156,8 @@ data LoggingFolderSinkResource s = LoggingFolderSinkResource {
     {- ^ (Required) The name of the logging sink. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoggingFolderSinkResource s) where
-    toHCL LoggingFolderSinkResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoggingFolderSinkResource s) where
+    toObject LoggingFolderSinkResource{..} = catMaybes
         [ TF.assign "destination" <$> TF.attribute _destination
         , TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "name" <$> TF.attribute _name
@@ -6162,8 +6226,8 @@ data LoggingOrganizationExclusionResource s = LoggingOrganizationExclusionResour
     {- ^ (Required) The organization to create the exclusion in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoggingOrganizationExclusionResource s) where
-    toHCL LoggingOrganizationExclusionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoggingOrganizationExclusionResource s) where
+    toObject LoggingOrganizationExclusionResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "disabled" <$> TF.attribute _disabled
         , TF.assign "filter" <$> TF.attribute _filter
@@ -6250,8 +6314,8 @@ data LoggingOrganizationSinkResource s = LoggingOrganizationSinkResource {
     {- ^ (Required) The numeric ID of the organization to be exported to the sink. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoggingOrganizationSinkResource s) where
-    toHCL LoggingOrganizationSinkResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoggingOrganizationSinkResource s) where
+    toObject LoggingOrganizationSinkResource{..} = catMaybes
         [ TF.assign "destination" <$> TF.attribute _destination
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "org_id" <$> TF.attribute _org_id
@@ -6316,8 +6380,8 @@ data LoggingProjectSinkResource s = LoggingProjectSinkResource {
     {- ^ (Required) The name of the logging sink. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LoggingProjectSinkResource s) where
-    toHCL LoggingProjectSinkResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LoggingProjectSinkResource s) where
+    toObject LoggingProjectSinkResource{..} = catMaybes
         [ TF.assign "destination" <$> TF.attribute _destination
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -6377,8 +6441,8 @@ data OrganizationIamCustomRoleResource s = OrganizationIamCustomRoleResource {
     {- ^ (Required) A human-readable title for the role. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OrganizationIamCustomRoleResource s) where
-    toHCL OrganizationIamCustomRoleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (OrganizationIamCustomRoleResource s) where
+    toObject OrganizationIamCustomRoleResource{..} = catMaybes
         [ TF.assign "deleted" <$> TF.attribute _deleted
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "org_id" <$> TF.attribute _org_id
@@ -6488,8 +6552,8 @@ data OrganizationIamMemberResource s = OrganizationIamMemberResource {
     {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OrganizationIamMemberResource s) where
-    toHCL OrganizationIamMemberResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (OrganizationIamMemberResource s) where
+    toObject OrganizationIamMemberResource{..} = catMaybes
         [ TF.assign "member" <$> TF.attribute _member
         , TF.assign "org_id" <$> TF.attribute _org_id
         , TF.assign "role" <$> TF.attribute _role
@@ -6560,8 +6624,8 @@ data OrganizationIamPolicyResource s = OrganizationIamPolicyResource {
     {- ^ (Required) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the organization. This policy overrides any existing policy applied to the organization. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OrganizationIamPolicyResource s) where
-    toHCL OrganizationIamPolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (OrganizationIamPolicyResource s) where
+    toObject OrganizationIamPolicyResource{..} = catMaybes
         [ TF.assign "org_id" <$> TF.attribute _org_id
         , TF.assign "policy_data" <$> TF.attribute _policy_data
         ]
@@ -6618,8 +6682,8 @@ data OrganizationPolicyResource s = OrganizationPolicyResource {
     {- ^ (Optional) Version of the Policy. Default version is 0. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OrganizationPolicyResource s) where
-    toHCL OrganizationPolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (OrganizationPolicyResource s) where
+    toObject OrganizationPolicyResource{..} = catMaybes
         [ TF.assign "boolean_policy" <$> TF.attribute _boolean_policy
         , TF.assign "constraint" <$> TF.attribute _constraint
         , TF.assign "list_policy" <$> TF.attribute _list_policy
@@ -6730,8 +6794,8 @@ data ProjectIamCustomRoleResource s = ProjectIamCustomRoleResource {
     {- ^ (Required) A human-readable title for the role. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectIamCustomRoleResource s) where
-    toHCL ProjectIamCustomRoleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProjectIamCustomRoleResource s) where
+    toObject ProjectIamCustomRoleResource{..} = catMaybes
         [ TF.assign "deleted" <$> TF.attribute _deleted
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "permissions" <$> TF.attribute _permissions
@@ -6848,8 +6912,8 @@ data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource {
     {- ^ (Optional) Version of the Policy. Default version is 0. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectOrganizationPolicyResource s) where
-    toHCL ProjectOrganizationPolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProjectOrganizationPolicyResource s) where
+    toObject ProjectOrganizationPolicyResource{..} = catMaybes
         [ TF.assign "boolean_policy" <$> TF.attribute _boolean_policy
         , TF.assign "constraint" <$> TF.attribute _constraint
         , TF.assign "list_policy" <$> TF.attribute _list_policy
@@ -6971,8 +7035,8 @@ data ProjectResource s = ProjectResource {
     {- ^ (Optional) If true, the Terraform resource can be deleted without deleting the Project via the Google API. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectResource s) where
-    toHCL ProjectResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProjectResource s) where
+    toObject ProjectResource{..} = catMaybes
         [ TF.assign "app_engine" <$> TF.attribute _app_engine
         , TF.assign "auto_create_network" <$> TF.attribute _auto_create_network
         , TF.assign "billing_account" <$> TF.attribute _billing_account
@@ -7131,8 +7195,8 @@ data ProjectServiceResource s = ProjectServiceResource {
     {- ^ (Required) The service to enable. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectServiceResource s) where
-    toHCL ProjectServiceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProjectServiceResource s) where
+    toObject ProjectServiceResource{..} = catMaybes
         [ TF.assign "disable_on_destroy" <$> TF.attribute _disable_on_destroy
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "service" <$> TF.attribute _service
@@ -7184,9 +7248,10 @@ Platform project. Services in an existing project that are not defined in
 the config will be removed. For a list of services available, visit the
 <https://console.cloud.google.com/apis/library> or run @gcloud services
 list@ . ~> Note: This resource attempts to be the authoritative source on
-which APIs are enabled, which can lead to conflicts when certain APIs or
-actions enable other APIs. To just ensure that a specific API is enabled,
-use the <google_project_service.html> resource.
+all enabled APIs, which often leads to conflicts when certain actions enable
+other APIs. If you do not need to ensure that exclusively a particular set
+of APIs are enabled, you should most likely use the
+<google_project_service.html> resource, one resource per API.
 -}
 data ProjectServicesResource s = ProjectServicesResource {
       _project  :: !(TF.Attr s P.Text)
@@ -7195,8 +7260,8 @@ data ProjectServicesResource s = ProjectServicesResource {
     {- ^ (Required) The list of services that are enabled. Supports update. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectServicesResource s) where
-    toHCL ProjectServicesResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProjectServicesResource s) where
+    toObject ProjectServicesResource{..} = catMaybes
         [ TF.assign "project" <$> TF.attribute _project
         , TF.assign "services" <$> TF.attribute _services
         ]
@@ -7248,8 +7313,8 @@ data ProjectUsageExportBucketResource s = ProjectUsageExportBucketResource {
     {- ^ : (Required) The project to set the export bucket on. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectUsageExportBucketResource s) where
-    toHCL ProjectUsageExportBucketResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProjectUsageExportBucketResource s) where
+    toObject ProjectUsageExportBucketResource{..} = catMaybes
         [ TF.assign "bucket_name" <$> TF.attribute _bucket_name
         , TF.assign "prefix" <$> TF.attribute _prefix
         , TF.assign "project" <$> TF.attribute _project
@@ -7314,8 +7379,8 @@ data PubsubSubscriptionResource s = PubsubSubscriptionResource {
     {- ^ (Required) The topic name or id to bind this subscription to, required by pubsub. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PubsubSubscriptionResource s) where
-    toHCL PubsubSubscriptionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PubsubSubscriptionResource s) where
+    toObject PubsubSubscriptionResource{..} = catMaybes
         [ TF.assign "ack_deadline_seconds" <$> TF.attribute _ack_deadline_seconds
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -7400,8 +7465,8 @@ data PubsubTopicResource s = PubsubTopicResource {
     {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PubsubTopicResource s) where
-    toHCL PubsubTopicResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PubsubTopicResource s) where
+    toObject PubsubTopicResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
@@ -7448,8 +7513,8 @@ data Resource s = Resource {
     {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (Resource s) where
-    toHCL Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (Resource s) where
+    toObject Resource{..} = catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "member/members" <$> TF.attribute _members
         , TF.assign "role" <$> TF.attribute _role
@@ -7514,8 +7579,8 @@ data RuntimeconfigConfigResource s = RuntimeconfigConfigResource {
     {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RuntimeconfigConfigResource s) where
-    toHCL RuntimeconfigConfigResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RuntimeconfigConfigResource s) where
+    toObject RuntimeconfigConfigResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
@@ -7579,8 +7644,8 @@ data RuntimeconfigVariableResource s = RuntimeconfigVariableResource {
     {- ^ or @value@ - (Required) The content to associate with the variable. Exactly one of @text@ or @variable@ must be specified. If @text@ is specified, it must be a valid UTF-8 string and less than 4096 bytes in length. If @value@ is specified, it must be base64 encoded and less than 4096 bytes in length. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RuntimeconfigVariableResource s) where
-    toHCL RuntimeconfigVariableResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RuntimeconfigVariableResource s) where
+    toObject RuntimeconfigVariableResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "parent" <$> TF.attribute _parent
         , TF.assign "project" <$> TF.attribute _project
@@ -7663,8 +7728,8 @@ data ServiceAccountKeyResource s = ServiceAccountKeyResource {
     {- ^ (Required) The Service account id of the Key Pair. This can be a string in the format @{ACCOUNT}@ or @projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}@ , where @{ACCOUNT}@ is the email address or unique id of the service account. If the @{ACCOUNT}@ syntax is used, the project will be inferred from the account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceAccountKeyResource s) where
-    toHCL ServiceAccountKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceAccountKeyResource s) where
+    toObject ServiceAccountKeyResource{..} = catMaybes
         [ TF.assign "key_algorithm" <$> TF.attribute _key_algorithm
         , TF.assign "pgp_key" <$> TF.attribute _pgp_key
         , TF.assign "private_key_type" <$> TF.attribute _private_key_type
@@ -7770,8 +7835,8 @@ data ServiceAccountResource s = ServiceAccountResource {
     {- ^ (Optional) The ID of the project that the service account will be created in. Defaults to the provider project configuration. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceAccountResource s) where
-    toHCL ServiceAccountResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceAccountResource s) where
+    toObject ServiceAccountResource{..} = catMaybes
         [ TF.assign "account_id" <$> TF.attribute _account_id
         , TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "policy_data" <$> TF.attribute _policy_data
@@ -7850,8 +7915,8 @@ data SourcerepoRepositoryResource s = SourcerepoRepositoryResource {
     {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SourcerepoRepositoryResource s) where
-    toHCL SourcerepoRepositoryResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SourcerepoRepositoryResource s) where
+    toObject SourcerepoRepositoryResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
@@ -7912,8 +7977,8 @@ data SpannerInstanceResource s = SpannerInstanceResource {
     {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SpannerInstanceResource s) where
-    toHCL SpannerInstanceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SpannerInstanceResource s) where
+    toObject SpannerInstanceResource{..} = catMaybes
         [ TF.assign "config" <$> TF.attribute _config
         , TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "labels" <$> TF.attribute _labels
@@ -8024,8 +8089,8 @@ data SqlDatabaseInstanceResource s = SqlDatabaseInstanceResource {
     {- ^ (Required) The settings to use for the database. The configuration is detailed below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SqlDatabaseInstanceResource s) where
-    toHCL SqlDatabaseInstanceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SqlDatabaseInstanceResource s) where
+    toObject SqlDatabaseInstanceResource{..} = catMaybes
         [ TF.assign "database_version" <$> TF.attribute _database_version
         , TF.assign "master_instance_name" <$> TF.attribute _master_instance_name
         , TF.assign "name" <$> TF.attribute _name
@@ -8170,8 +8235,8 @@ data SqlDatabaseResource s = SqlDatabaseResource {
     {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SqlDatabaseResource s) where
-    toHCL SqlDatabaseResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SqlDatabaseResource s) where
+    toObject SqlDatabaseResource{..} = catMaybes
         [ TF.assign "charset" <$> TF.attribute _charset
         , TF.assign "collation" <$> TF.attribute _collation
         , TF.assign "instance" <$> TF.attribute _instance'
@@ -8265,8 +8330,8 @@ data SqlUserResource s = SqlUserResource {
     {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SqlUserResource s) where
-    toHCL SqlUserResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SqlUserResource s) where
+    toObject SqlUserResource{..} = catMaybes
         [ TF.assign "host" <$> TF.attribute _host
         , TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "name" <$> TF.attribute _name
@@ -8353,8 +8418,8 @@ data StorageBucketAclResource s = StorageBucketAclResource {
     {- ^ (Optional) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls> for more details. Must be set if @predefined_acl@ is not. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageBucketAclResource s) where
-    toHCL StorageBucketAclResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageBucketAclResource s) where
+    toObject StorageBucketAclResource{..} = catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "default_acl" <$> TF.attribute _default_acl
         , TF.assign "predefined_acl" <$> TF.attribute _predefined_acl
@@ -8426,8 +8491,8 @@ data StorageBucketObjectResource s = StorageBucketObjectResource {
     {- ^ (Required) The name of the object. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageBucketObjectResource s) where
-    toHCL StorageBucketObjectResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageBucketObjectResource s) where
+    toObject StorageBucketObjectResource{..} = catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -8500,8 +8565,8 @@ data StorageBucketResource s = StorageBucketResource {
     {- ^ (Optional) Configuration if the bucket acts as a website. Structure is documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageBucketResource s) where
-    toHCL StorageBucketResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageBucketResource s) where
+    toObject StorageBucketResource{..} = catMaybes
         [ TF.assign "cors" <$> TF.attribute _cors
         , TF.assign "force_destroy" <$> TF.attribute _force_destroy
         , TF.assign "labels" <$> TF.attribute _labels
@@ -8663,8 +8728,8 @@ data StorageDefaultObjectAclResource s = StorageDefaultObjectAclResource {
     {- ^ (Required) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls> for more details. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageDefaultObjectAclResource s) where
-    toHCL StorageDefaultObjectAclResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageDefaultObjectAclResource s) where
+    toObject StorageDefaultObjectAclResource{..} = catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "role_entity" <$> TF.attribute _role_entity
         ]
@@ -8697,113 +8762,6 @@ storageDefaultObjectAclResource =
             , _role_entity = TF.Nil
             }
 
-{- | The @google_storage_notification@ Google resource.
-
-Creates a new notification configuration on a specified bucket, establishing
-a flow of event notifications from GCS to a Cloud Pub/Sub topic. For more
-information see <https://cloud.google.com/storage/docs/pubsub-notifications>
-and <https://cloud.google.com/storage/docs/json_api/v1/notifications> .
--}
-data StorageNotificationResource s = StorageNotificationResource {
-      _bucket             :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the bucket. -}
-    , _custom_attributes  :: !(TF.Attr s P.Text)
-    {- ^ (Optional)  A set of key/value attribute pairs to attach to each Cloud PubSub message published for this notification subscription -}
-    , _event_types        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) List of event type filters for this notification config. If not specified, Cloud Storage will send notifications for all event types. The valid types are: @"OBJECT_FINALIZE"@ , @"OBJECT_METADATA_UPDATE"@ , @"OBJECT_DELETE"@ , @"OBJECT_ARCHIVE"@ -}
-    , _object_name_prefix :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Specifies a prefix path filter for this notification config. Cloud Storage will only send notifications for objects in this bucket whose names begin with the specified prefix. -}
-    , _payload_format     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The desired content of the Payload. One of @"JSON_API_V1"@ or @"NONE"@ . -}
-    , _topic              :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Cloud PubSub topic to which this subscription publishes. Expects either the topic name, assumed to belong to the default GCP provider project, or the project-level name, i.e. @projects/my-gcp-project/topics/my-topic@ or @my-topic@ . -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (StorageNotificationResource s) where
-    toHCL StorageNotificationResource{..} = TF.inline $ catMaybes
-        [ TF.assign "bucket" <$> TF.attribute _bucket
-        , TF.assign "custom_attributes" <$> TF.attribute _custom_attributes
-        , TF.assign "event_types" <$> TF.attribute _event_types
-        , TF.assign "object_name_prefix" <$> TF.attribute _object_name_prefix
-        , TF.assign "payload_format" <$> TF.attribute _payload_format
-        , TF.assign "topic" <$> TF.attribute _topic
-        ]
-
-instance P.HasBucket (StorageNotificationResource s) (TF.Attr s P.Text) where
-    bucket =
-        lens (_bucket :: StorageNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _bucket = a } :: StorageNotificationResource s)
-
-instance P.HasCustomAttributes (StorageNotificationResource s) (TF.Attr s P.Text) where
-    customAttributes =
-        lens (_custom_attributes :: StorageNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _custom_attributes = a } :: StorageNotificationResource s)
-
-instance P.HasEventTypes (StorageNotificationResource s) (TF.Attr s P.Text) where
-    eventTypes =
-        lens (_event_types :: StorageNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _event_types = a } :: StorageNotificationResource s)
-
-instance P.HasObjectNamePrefix (StorageNotificationResource s) (TF.Attr s P.Text) where
-    objectNamePrefix =
-        lens (_object_name_prefix :: StorageNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _object_name_prefix = a } :: StorageNotificationResource s)
-
-instance P.HasPayloadFormat (StorageNotificationResource s) (TF.Attr s P.Text) where
-    payloadFormat =
-        lens (_payload_format :: StorageNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _payload_format = a } :: StorageNotificationResource s)
-
-instance P.HasTopic (StorageNotificationResource s) (TF.Attr s P.Text) where
-    topic =
-        lens (_topic :: StorageNotificationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _topic = a } :: StorageNotificationResource s)
-
-instance s ~ s' => P.HasComputedBucket (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedBucket =
-        (_bucket :: StorageNotificationResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCustomAttributes (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedCustomAttributes =
-        (_custom_attributes :: StorageNotificationResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEventTypes (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedEventTypes =
-        (_event_types :: StorageNotificationResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedObjectNamePrefix (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedObjectNamePrefix =
-        (_object_name_prefix :: StorageNotificationResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPayloadFormat (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedPayloadFormat =
-        (_payload_format :: StorageNotificationResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
-
-instance s ~ s' => P.HasComputedTopic (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedTopic =
-        (_topic :: StorageNotificationResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-storageNotificationResource :: TF.Resource P.Google (StorageNotificationResource s)
-storageNotificationResource =
-    TF.newResource "google_storage_notification" $
-        StorageNotificationResource {
-              _bucket = TF.Nil
-            , _custom_attributes = TF.Nil
-            , _event_types = TF.Nil
-            , _object_name_prefix = TF.Nil
-            , _payload_format = TF.Nil
-            , _topic = TF.Nil
-            }
-
 {- | The @google_storage_object_acl@ Google resource.
 
 Creates a new object ACL in Google cloud storage service (GCS). For more
@@ -8822,8 +8780,8 @@ data StorageObjectAclResource s = StorageObjectAclResource {
     {- ^ (Optional) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls> for more details. Must be set if @predefined_acl@ is not. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageObjectAclResource s) where
-    toHCL StorageObjectAclResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageObjectAclResource s) where
+    toObject StorageObjectAclResource{..} = catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "object" <$> TF.attribute _object
         , TF.assign "predefined_acl" <$> TF.attribute _predefined_acl

@@ -1,7 +1,7 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
 {-# LANGUAGE LambdaCase   #-}
-{-# LANGUAGE TypeFamilies #-}
+
 
 -- |
 -- Module      : Terrafomo.Template.Types

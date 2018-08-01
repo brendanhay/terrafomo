@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -167,7 +160,7 @@ data DeviceResource s = DeviceResource {
     , _description             :: !(TF.Attr s P.Text)
     {- ^ - Description string for the device -}
     , _facility                :: !(TF.Attr s P.Text)
-    {- ^ (Required) The facility in which to create the device -}
+    {- ^ (Required) The facility in which to create the device. To find the facility code, visit <https://www.packet.net/developers/api/facilities/> , set your API auth token in the top of the page and see JSON from the API response. -}
     , _hardware_reservation_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) - The id of hardware reservation where you want this device deployed, or @next-available@ if you want to pick your next available reservation automatically. -}
     , _hostname                :: !(TF.Attr s P.Text)
@@ -175,9 +168,9 @@ data DeviceResource s = DeviceResource {
     , _ipxe_script_url         :: !(TF.Attr s P.Text)
     {- ^ (Optional) - URL pointing to a hosted iPXE script. More information is in the <https://help.packet.net/technical/infrastructure/custom-ipxe> doc. -}
     , _operating_system        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The operating system slug -}
+    {- ^ (Required) The operating system slug. To find the slug, or visit <https://www.packet.net/developers/api/operatingsystems/> , set your API auth token in the top of the page and see JSON from the API response. -}
     , _plan                    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The hardware config slug -}
+    {- ^ (Required) The device plan slug. To find the plan slug, visit <https://www.packet.net/developers/api/plans/> , set your auth token in the top of the page and see JSON from the API response. -}
     , _project_id              :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the project in which to create the device -}
     , _public_ipv4_subnet_size :: !(TF.Attr s P.Text)
@@ -190,8 +183,8 @@ data DeviceResource s = DeviceResource {
     {- ^ (Optional) - A string of the desired User Data for the device. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DeviceResource s) where
-    toHCL DeviceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DeviceResource s) where
+    toObject DeviceResource{..} = catMaybes
         [ TF.assign "always_pxe" <$> TF.attribute _always_pxe
         , TF.assign "billing_cycle" <$> TF.attribute _billing_cycle
         , TF.assign "description" <$> TF.attribute _description
@@ -400,8 +393,8 @@ data IpAttachmentResource s = IpAttachmentResource {
     {- ^ (Required) ID of device to which to assign the subnet -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpAttachmentResource s) where
-    toHCL IpAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IpAttachmentResource s) where
+    toObject IpAttachmentResource{..} = catMaybes
         [ TF.assign "cidr_notation" <$> TF.attribute _cidr_notation
         , TF.assign "device_id" <$> TF.attribute _device_id
         ]
@@ -468,8 +461,8 @@ data OrganizationResource s = OrganizationResource {
     {- ^ - Website link. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OrganizationResource s) where
-    toHCL OrganizationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (OrganizationResource s) where
+    toObject OrganizationResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "logo" <$> TF.attribute _logo
         , TF.assign "name" <$> TF.attribute _name
@@ -545,8 +538,8 @@ data ProjectResource s = ProjectResource {
     {- ^ - The UUID of payment method for this project. If you keep it empty, Packet API will pick your default Payment Method. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ProjectResource s) where
-    toHCL ProjectResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ProjectResource s) where
+    toObject ProjectResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "organization_id" <$> TF.attribute _organization_id
         , TF.assign "payment_method_id" <$> TF.attribute _payment_method_id
@@ -619,8 +612,8 @@ data ReservedIpBlockResource s = ReservedIpBlockResource {
     {- ^ (Required) The number of allocated /32 addresses, a power of 2 -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ReservedIpBlockResource s) where
-    toHCL ReservedIpBlockResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ReservedIpBlockResource s) where
+    toObject ReservedIpBlockResource{..} = catMaybes
         [ TF.assign "facility" <$> TF.attribute _facility
         , TF.assign "project_id" <$> TF.attribute _project_id
         , TF.assign "quantity" <$> TF.attribute _quantity
@@ -693,8 +686,8 @@ data SshKeyResource s = SshKeyResource {
     {- ^ (Required) The public key. If this is a file, it can be read using the file interpolation function -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SshKeyResource s) where
-    toHCL SshKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SshKeyResource s) where
+    toObject SshKeyResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "public_key" <$> TF.attribute _public_key
         ]
@@ -749,8 +742,8 @@ data VolumeAttachmentResource s = VolumeAttachmentResource {
     {- ^ (Required) The ID of the volume to attach -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VolumeAttachmentResource s) where
-    toHCL VolumeAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VolumeAttachmentResource s) where
+    toObject VolumeAttachmentResource{..} = catMaybes
         [ TF.assign "device_id" <$> TF.attribute _device_id
         , TF.assign "volume_id" <$> TF.attribute _volume_id
         ]
@@ -812,8 +805,8 @@ data VolumeResource s = VolumeResource {
     {- ^ - Optional list of snapshot policies -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VolumeResource s) where
-    toHCL VolumeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VolumeResource s) where
+    toObject VolumeResource{..} = catMaybes
         [ TF.assign "billing_cycle" <$> TF.attribute _billing_cycle
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "facility" <$> TF.attribute _facility

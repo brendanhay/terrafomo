@@ -1,14 +1,7 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RankNTypes             #-}
-{-# LANGUAGE UndecidableInstances   #-}
-
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 -- |
 -- Module      : Terrafomo.OVH.Lens
@@ -27,6 +20,7 @@ module Terrafomo.OVH.Lens
     , HasBackup (..)
     , HasBalance (..)
     , HasDescription (..)
+    , HasDescriptionRegexp (..)
     , HasDhcp (..)
     , HasDisplayName (..)
     , HasEnd (..)
@@ -45,7 +39,7 @@ module Terrafomo.OVH.Lens
     , HasNetworkId (..)
     , HasNoGateway (..)
     , HasOffer (..)
-    , HasPattern (..)
+    , HasPattern' (..)
     , HasPort (..)
     , HasProbe (..)
     , HasProjectId (..)
@@ -58,6 +52,7 @@ module Terrafomo.OVH.Lens
     , HasSslConfiguration (..)
     , HasStart (..)
     , HasState (..)
+    , HasStates (..)
     , HasStatus (..)
     , HasStickiness (..)
     , HasSubField (..)
@@ -66,6 +61,9 @@ module Terrafomo.OVH.Lens
     , HasTitle (..)
     , HasTtl (..)
     , HasType' (..)
+    , HasUseDefault (..)
+    , HasUseLastToExpire (..)
+    , HasUseOldest (..)
     , HasVlanId (..)
     , HasVrackEligibility (..)
     , HasVrackId (..)
@@ -87,7 +85,9 @@ module Terrafomo.OVH.Lens
     , HasComputedCookie (..)
     , HasComputedCreationDate (..)
     , HasComputedDatacenterLocation (..)
+    , HasComputedDefault' (..)
     , HasComputedDescription (..)
+    , HasComputedDescriptionRegexp (..)
     , HasComputedDhcp (..)
     , HasComputedDhcpId (..)
     , HasComputedDisplayName (..)
@@ -120,7 +120,7 @@ module Terrafomo.OVH.Lens
     , HasComputedOpenstackRc (..)
     , HasComputedOrderableZone (..)
     , HasComputedPassword (..)
-    , HasComputedPattern (..)
+    , HasComputedPattern' (..)
     , HasComputedPort (..)
     , HasComputedProbe (..)
     , HasComputedProjectId (..)
@@ -135,6 +135,7 @@ module Terrafomo.OVH.Lens
     , HasComputedSslConfiguration (..)
     , HasComputedStart (..)
     , HasComputedState (..)
+    , HasComputedStates (..)
     , HasComputedStatus (..)
     , HasComputedStickiness (..)
     , HasComputedSubDomain (..)
@@ -144,6 +145,9 @@ module Terrafomo.OVH.Lens
     , HasComputedTitle (..)
     , HasComputedTtl (..)
     , HasComputedType' (..)
+    , HasComputedUseDefault (..)
+    , HasComputedUseLastToExpire (..)
+    , HasComputedUseOldest (..)
     , HasComputedUsername (..)
     , HasComputedVlanId (..)
     , HasComputedVrackEligibility (..)
@@ -158,7 +162,6 @@ import GHC.Base ((.))
 
 import Lens.Micro (Lens')
 
-import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasAction a b | a -> b where
@@ -190,6 +193,12 @@ class HasDescription a b | a -> b where
 
 instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
+
+class HasDescriptionRegexp a b | a -> b where
+    descriptionRegexp :: Lens' a b
+
+instance HasDescriptionRegexp a b => HasDescriptionRegexp (TF.Schema l p a) b where
+    descriptionRegexp = TF.configuration . descriptionRegexp
 
 class HasDhcp a b | a -> b where
     dhcp :: Lens' a b
@@ -299,11 +308,11 @@ class HasOffer a b | a -> b where
 instance HasOffer a b => HasOffer (TF.Schema l p a) b where
     offer = TF.configuration . offer
 
-class HasPattern a b | a -> b where
-    pattern :: Lens' a b
+class HasPattern' a b | a -> b where
+    pattern' :: Lens' a b
 
-instance HasPattern a b => HasPattern (TF.Schema l p a) b where
-    pattern = TF.configuration . pattern
+instance HasPattern' a b => HasPattern' (TF.Schema l p a) b where
+    pattern' = TF.configuration . pattern'
 
 class HasPort a b | a -> b where
     port :: Lens' a b
@@ -377,6 +386,12 @@ class HasState a b | a -> b where
 instance HasState a b => HasState (TF.Schema l p a) b where
     state = TF.configuration . state
 
+class HasStates a b | a -> b where
+    states :: Lens' a b
+
+instance HasStates a b => HasStates (TF.Schema l p a) b where
+    states = TF.configuration . states
+
 class HasStatus a b | a -> b where
     status :: Lens' a b
 
@@ -424,6 +439,24 @@ class HasType' a b | a -> b where
 
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
+
+class HasUseDefault a b | a -> b where
+    useDefault :: Lens' a b
+
+instance HasUseDefault a b => HasUseDefault (TF.Schema l p a) b where
+    useDefault = TF.configuration . useDefault
+
+class HasUseLastToExpire a b | a -> b where
+    useLastToExpire :: Lens' a b
+
+instance HasUseLastToExpire a b => HasUseLastToExpire (TF.Schema l p a) b where
+    useLastToExpire = TF.configuration . useLastToExpire
+
+class HasUseOldest a b | a -> b where
+    useOldest :: Lens' a b
+
+instance HasUseOldest a b => HasUseOldest (TF.Schema l p a) b where
+    useOldest = TF.configuration . useOldest
 
 class HasVlanId a b | a -> b where
     vlanId :: Lens' a b
@@ -503,8 +536,14 @@ class HasComputedCreationDate a b | a -> b where
 class HasComputedDatacenterLocation a b | a -> b where
     computedDatacenterLocation :: a -> b
 
+class HasComputedDefault' a b | a -> b where
+    computedDefault' :: a -> b
+
 class HasComputedDescription a b | a -> b where
     computedDescription :: a -> b
+
+class HasComputedDescriptionRegexp a b | a -> b where
+    computedDescriptionRegexp :: a -> b
 
 class HasComputedDhcp a b | a -> b where
     computedDhcp :: a -> b
@@ -602,8 +641,8 @@ class HasComputedOrderableZone a b | a -> b where
 class HasComputedPassword a b | a -> b where
     computedPassword :: a -> b
 
-class HasComputedPattern a b | a -> b where
-    computedPattern :: a -> b
+class HasComputedPattern' a b | a -> b where
+    computedPattern' :: a -> b
 
 class HasComputedPort a b | a -> b where
     computedPort :: a -> b
@@ -647,6 +686,9 @@ class HasComputedStart a b | a -> b where
 class HasComputedState a b | a -> b where
     computedState :: a -> b
 
+class HasComputedStates a b | a -> b where
+    computedStates :: a -> b
+
 class HasComputedStatus a b | a -> b where
     computedStatus :: a -> b
 
@@ -673,6 +715,15 @@ class HasComputedTtl a b | a -> b where
 
 class HasComputedType' a b | a -> b where
     computedType' :: a -> b
+
+class HasComputedUseDefault a b | a -> b where
+    computedUseDefault :: a -> b
+
+class HasComputedUseLastToExpire a b | a -> b where
+    computedUseLastToExpire :: a -> b
+
+class HasComputedUseOldest a b | a -> b where
+    computedUseOldest :: a -> b
 
 class HasComputedUsername a b | a -> b where
     computedUsername :: a -> b

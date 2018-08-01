@@ -1,14 +1,7 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RankNTypes             #-}
-{-# LANGUAGE UndecidableInstances   #-}
-
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 -- |
 -- Module      : Terrafomo.Google.Lens
@@ -69,7 +62,9 @@ module Terrafomo.Google.Lens
     , HasConfig (..)
     , HasConnectionDrainingTimeoutSec (..)
     , HasConstraint (..)
+    , HasCooldownPeriod (..)
     , HasCors (..)
+    , HasCpuUtilization (..)
     , HasCreateTimeout (..)
     , HasCredentials (..)
     , HasCryptoKey (..)
@@ -155,9 +150,11 @@ module Terrafomo.Google.Lens
     , HasKeyRing (..)
     , HasKeyRingId (..)
     , HasLabels (..)
+    , HasLicenses (..)
     , HasLifecycleRule (..)
     , HasListPolicy (..)
     , HasLoadBalancingScheme (..)
+    , HasLoadBalancingUtilization (..)
     , HasLocalTrafficSelector (..)
     , HasLocation (..)
     , HasLocationId (..)
@@ -171,14 +168,17 @@ module Terrafomo.Google.Lens
     , HasMasterAuthorizedNetworksConfig (..)
     , HasMasterInstanceName (..)
     , HasMasterIpv4CidrBlock (..)
+    , HasMaxReplicas (..)
     , HasMaxWorkers (..)
     , HasMember (..)
     , HasMembers (..)
     , HasMemorySizeGb (..)
     , HasMetadata (..)
     , HasMetadataStartupScript (..)
+    , HasMetric (..)
     , HasMinCpuPlatform (..)
     , HasMinMasterVersion (..)
+    , HasMinReplicas (..)
     , HasMinTlsVersion (..)
     , HasMonitoringService (..)
     , HasMqttConfig (..)
@@ -250,6 +250,7 @@ module Terrafomo.Google.Lens
     , HasRemoteTrafficSelector (..)
     , HasRemoveDefaultNodePool (..)
     , HasReplicaConfiguration (..)
+    , HasReplicaZones (..)
     , HasRequestPath (..)
     , HasReservedIpRange (..)
     , HasResourceLabels (..)
@@ -306,6 +307,7 @@ module Terrafomo.Google.Lens
     , HasStorageType (..)
     , HasSubnetwork (..)
     , HasSubscription (..)
+    , HasSubstitutions (..)
     , HasTableId (..)
     , HasTag (..)
     , HasTags (..)
@@ -414,8 +416,10 @@ module Terrafomo.Google.Lens
     , HasComputedConnectionDrainingTimeoutSec (..)
     , HasComputedConnectionName (..)
     , HasComputedConstraint (..)
+    , HasComputedCooldownPeriod (..)
     , HasComputedCors (..)
     , HasComputedCpuPlatform (..)
+    , HasComputedCpuUtilization (..)
     , HasComputedCrc32c (..)
     , HasComputedCreateTime (..)
     , HasComputedCreateTimeout (..)
@@ -534,6 +538,8 @@ module Terrafomo.Google.Lens
     , HasComputedKeyRingId (..)
     , HasComputedLabelFingerprint (..)
     , HasComputedLabels (..)
+    , HasComputedLastAttachTimestamp (..)
+    , HasComputedLastDetachTimestamp (..)
     , HasComputedLastModifiedTime (..)
     , HasComputedLatestMasterVersion (..)
     , HasComputedLatestNodeVersion (..)
@@ -542,6 +548,7 @@ module Terrafomo.Google.Lens
     , HasComputedLifecycleState (..)
     , HasComputedListPolicy (..)
     , HasComputedLoadBalancingScheme (..)
+    , HasComputedLoadBalancingUtilization (..)
     , HasComputedLocalTrafficSelector (..)
     , HasComputedLocation (..)
     , HasComputedLocationId (..)
@@ -561,6 +568,7 @@ module Terrafomo.Google.Lens
     , HasComputedMasterInstanceName (..)
     , HasComputedMasterIpv4CidrBlock (..)
     , HasComputedMasterVersion (..)
+    , HasComputedMaxReplicas (..)
     , HasComputedMaxWorkers (..)
     , HasComputedMd5hash (..)
     , HasComputedMember (..)
@@ -569,8 +577,10 @@ module Terrafomo.Google.Lens
     , HasComputedMetadata (..)
     , HasComputedMetadataFingerprint (..)
     , HasComputedMetadataStartupScript (..)
+    , HasComputedMetric (..)
     , HasComputedMinCpuPlatform (..)
     , HasComputedMinMasterVersion (..)
+    , HasComputedMinReplicas (..)
     , HasComputedMinTlsVersion (..)
     , HasComputedMonitoringService (..)
     , HasComputedMqttConfig (..)
@@ -659,6 +669,7 @@ module Terrafomo.Google.Lens
     , HasComputedRemoteTrafficSelector (..)
     , HasComputedRemoveDefaultNodePool (..)
     , HasComputedReplicaConfiguration (..)
+    , HasComputedReplicaZones (..)
     , HasComputedRepositoryUrl (..)
     , HasComputedRequestPath (..)
     , HasComputedReservedIpRange (..)
@@ -717,6 +728,7 @@ module Terrafomo.Google.Lens
     , HasComputedSourceRanges (..)
     , HasComputedSourceServiceAccounts (..)
     , HasComputedSourceSnapshotEncryptionKey (..)
+    , HasComputedSourceSnapshotId (..)
     , HasComputedSourceTags (..)
     , HasComputedSplitKeys (..)
     , HasComputedSslCertificates (..)
@@ -736,6 +748,7 @@ module Terrafomo.Google.Lens
     , HasComputedSubnetwork (..)
     , HasComputedSubnetworksSelfLinks (..)
     , HasComputedSubscription (..)
+    , HasComputedSubstitutions (..)
     , HasComputedTableId (..)
     , HasComputedTag (..)
     , HasComputedTags (..)
@@ -790,7 +803,6 @@ import GHC.Base ((.))
 
 import Lens.Micro (Lens')
 
-import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasAccessToken a b | a -> b where
@@ -1075,11 +1087,23 @@ class HasConstraint a b | a -> b where
 instance HasConstraint a b => HasConstraint (TF.Schema l p a) b where
     constraint = TF.configuration . constraint
 
+class HasCooldownPeriod a b | a -> b where
+    cooldownPeriod :: Lens' a b
+
+instance HasCooldownPeriod a b => HasCooldownPeriod (TF.Schema l p a) b where
+    cooldownPeriod = TF.configuration . cooldownPeriod
+
 class HasCors a b | a -> b where
     cors :: Lens' a b
 
 instance HasCors a b => HasCors (TF.Schema l p a) b where
     cors = TF.configuration . cors
+
+class HasCpuUtilization a b | a -> b where
+    cpuUtilization :: Lens' a b
+
+instance HasCpuUtilization a b => HasCpuUtilization (TF.Schema l p a) b where
+    cpuUtilization = TF.configuration . cpuUtilization
 
 class HasCreateTimeout a b | a -> b where
     createTimeout :: Lens' a b
@@ -1591,6 +1615,12 @@ class HasLabels a b | a -> b where
 instance HasLabels a b => HasLabels (TF.Schema l p a) b where
     labels = TF.configuration . labels
 
+class HasLicenses a b | a -> b where
+    licenses :: Lens' a b
+
+instance HasLicenses a b => HasLicenses (TF.Schema l p a) b where
+    licenses = TF.configuration . licenses
+
 class HasLifecycleRule a b | a -> b where
     lifecycleRule :: Lens' a b
 
@@ -1608,6 +1638,12 @@ class HasLoadBalancingScheme a b | a -> b where
 
 instance HasLoadBalancingScheme a b => HasLoadBalancingScheme (TF.Schema l p a) b where
     loadBalancingScheme = TF.configuration . loadBalancingScheme
+
+class HasLoadBalancingUtilization a b | a -> b where
+    loadBalancingUtilization :: Lens' a b
+
+instance HasLoadBalancingUtilization a b => HasLoadBalancingUtilization (TF.Schema l p a) b where
+    loadBalancingUtilization = TF.configuration . loadBalancingUtilization
 
 class HasLocalTrafficSelector a b | a -> b where
     localTrafficSelector :: Lens' a b
@@ -1687,6 +1723,12 @@ class HasMasterIpv4CidrBlock a b | a -> b where
 instance HasMasterIpv4CidrBlock a b => HasMasterIpv4CidrBlock (TF.Schema l p a) b where
     masterIpv4CidrBlock = TF.configuration . masterIpv4CidrBlock
 
+class HasMaxReplicas a b | a -> b where
+    maxReplicas :: Lens' a b
+
+instance HasMaxReplicas a b => HasMaxReplicas (TF.Schema l p a) b where
+    maxReplicas = TF.configuration . maxReplicas
+
 class HasMaxWorkers a b | a -> b where
     maxWorkers :: Lens' a b
 
@@ -1723,6 +1765,12 @@ class HasMetadataStartupScript a b | a -> b where
 instance HasMetadataStartupScript a b => HasMetadataStartupScript (TF.Schema l p a) b where
     metadataStartupScript = TF.configuration . metadataStartupScript
 
+class HasMetric a b | a -> b where
+    metric :: Lens' a b
+
+instance HasMetric a b => HasMetric (TF.Schema l p a) b where
+    metric = TF.configuration . metric
+
 class HasMinCpuPlatform a b | a -> b where
     minCpuPlatform :: Lens' a b
 
@@ -1734,6 +1782,12 @@ class HasMinMasterVersion a b | a -> b where
 
 instance HasMinMasterVersion a b => HasMinMasterVersion (TF.Schema l p a) b where
     minMasterVersion = TF.configuration . minMasterVersion
+
+class HasMinReplicas a b | a -> b where
+    minReplicas :: Lens' a b
+
+instance HasMinReplicas a b => HasMinReplicas (TF.Schema l p a) b where
+    minReplicas = TF.configuration . minReplicas
 
 class HasMinTlsVersion a b | a -> b where
     minTlsVersion :: Lens' a b
@@ -2161,6 +2215,12 @@ class HasReplicaConfiguration a b | a -> b where
 instance HasReplicaConfiguration a b => HasReplicaConfiguration (TF.Schema l p a) b where
     replicaConfiguration = TF.configuration . replicaConfiguration
 
+class HasReplicaZones a b | a -> b where
+    replicaZones :: Lens' a b
+
+instance HasReplicaZones a b => HasReplicaZones (TF.Schema l p a) b where
+    replicaZones = TF.configuration . replicaZones
+
 class HasRequestPath a b | a -> b where
     requestPath :: Lens' a b
 
@@ -2496,6 +2556,12 @@ class HasSubscription a b | a -> b where
 
 instance HasSubscription a b => HasSubscription (TF.Schema l p a) b where
     subscription = TF.configuration . subscription
+
+class HasSubstitutions a b | a -> b where
+    substitutions :: Lens' a b
+
+instance HasSubstitutions a b => HasSubstitutions (TF.Schema l p a) b where
+    substitutions = TF.configuration . substitutions
 
 class HasTableId a b | a -> b where
     tableId :: Lens' a b
@@ -2929,11 +2995,17 @@ class HasComputedConnectionName a b | a -> b where
 class HasComputedConstraint a b | a -> b where
     computedConstraint :: a -> b
 
+class HasComputedCooldownPeriod a b | a -> b where
+    computedCooldownPeriod :: a -> b
+
 class HasComputedCors a b | a -> b where
     computedCors :: a -> b
 
 class HasComputedCpuPlatform a b | a -> b where
     computedCpuPlatform :: a -> b
+
+class HasComputedCpuUtilization a b | a -> b where
+    computedCpuUtilization :: a -> b
 
 class HasComputedCrc32c a b | a -> b where
     computedCrc32c :: a -> b
@@ -3289,6 +3361,12 @@ class HasComputedLabelFingerprint a b | a -> b where
 class HasComputedLabels a b | a -> b where
     computedLabels :: a -> b
 
+class HasComputedLastAttachTimestamp a b | a -> b where
+    computedLastAttachTimestamp :: a -> b
+
+class HasComputedLastDetachTimestamp a b | a -> b where
+    computedLastDetachTimestamp :: a -> b
+
 class HasComputedLastModifiedTime a b | a -> b where
     computedLastModifiedTime :: a -> b
 
@@ -3312,6 +3390,9 @@ class HasComputedListPolicy a b | a -> b where
 
 class HasComputedLoadBalancingScheme a b | a -> b where
     computedLoadBalancingScheme :: a -> b
+
+class HasComputedLoadBalancingUtilization a b | a -> b where
+    computedLoadBalancingUtilization :: a -> b
 
 class HasComputedLocalTrafficSelector a b | a -> b where
     computedLocalTrafficSelector :: a -> b
@@ -3370,6 +3451,9 @@ class HasComputedMasterIpv4CidrBlock a b | a -> b where
 class HasComputedMasterVersion a b | a -> b where
     computedMasterVersion :: a -> b
 
+class HasComputedMaxReplicas a b | a -> b where
+    computedMaxReplicas :: a -> b
+
 class HasComputedMaxWorkers a b | a -> b where
     computedMaxWorkers :: a -> b
 
@@ -3394,11 +3478,17 @@ class HasComputedMetadataFingerprint a b | a -> b where
 class HasComputedMetadataStartupScript a b | a -> b where
     computedMetadataStartupScript :: a -> b
 
+class HasComputedMetric a b | a -> b where
+    computedMetric :: a -> b
+
 class HasComputedMinCpuPlatform a b | a -> b where
     computedMinCpuPlatform :: a -> b
 
 class HasComputedMinMasterVersion a b | a -> b where
     computedMinMasterVersion :: a -> b
+
+class HasComputedMinReplicas a b | a -> b where
+    computedMinReplicas :: a -> b
 
 class HasComputedMinTlsVersion a b | a -> b where
     computedMinTlsVersion :: a -> b
@@ -3664,6 +3754,9 @@ class HasComputedRemoveDefaultNodePool a b | a -> b where
 class HasComputedReplicaConfiguration a b | a -> b where
     computedReplicaConfiguration :: a -> b
 
+class HasComputedReplicaZones a b | a -> b where
+    computedReplicaZones :: a -> b
+
 class HasComputedRepositoryUrl a b | a -> b where
     computedRepositoryUrl :: a -> b
 
@@ -3838,6 +3931,9 @@ class HasComputedSourceServiceAccounts a b | a -> b where
 class HasComputedSourceSnapshotEncryptionKey a b | a -> b where
     computedSourceSnapshotEncryptionKey :: a -> b
 
+class HasComputedSourceSnapshotId a b | a -> b where
+    computedSourceSnapshotId :: a -> b
+
 class HasComputedSourceTags a b | a -> b where
     computedSourceTags :: a -> b
 
@@ -3894,6 +3990,9 @@ class HasComputedSubnetworksSelfLinks a b | a -> b where
 
 class HasComputedSubscription a b | a -> b where
     computedSubscription :: a -> b
+
+class HasComputedSubstitutions a b | a -> b where
+    computedSubstitutions :: a -> b
 
 class HasComputedTableId a b | a -> b where
     computedTableId :: a -> b

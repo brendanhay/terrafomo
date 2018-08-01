@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -133,8 +126,8 @@ data CertRequestResource s = CertRequestResource {
     {- ^ (Required) The subject for which a certificate is being requested. This is a nested configuration block whose structure is described below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CertRequestResource s) where
-    toHCL CertRequestResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CertRequestResource s) where
+    toObject CertRequestResource{..} = catMaybes
         [ TF.assign "dns_names" <$> TF.attribute _dns_names
         , TF.assign "ip_addresses" <$> TF.attribute _ip_addresses
         , TF.assign "key_algorithm" <$> TF.attribute _key_algorithm
@@ -233,8 +226,8 @@ data LocallySignedCertResource s = LocallySignedCertResource {
     {- ^ (Required) The number of hours after initial issuing that the certificate will become invalid. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LocallySignedCertResource s) where
-    toHCL LocallySignedCertResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LocallySignedCertResource s) where
+    toObject LocallySignedCertResource{..} = catMaybes
         [ TF.assign "allowed_uses" <$> TF.attribute _allowed_uses
         , TF.assign "ca_cert_pem" <$> TF.attribute _ca_cert_pem
         , TF.assign "ca_key_algorithm" <$> TF.attribute _ca_key_algorithm
@@ -369,8 +362,8 @@ data PrivateKeyResource s = PrivateKeyResource {
     {- ^ (Optional) When @algorithm@ is "RSA", the size of the generated RSA key in bits. Defaults to 2048. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PrivateKeyResource s) where
-    toHCL PrivateKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PrivateKeyResource s) where
+    toObject PrivateKeyResource{..} = catMaybes
         [ TF.assign "algorithm" <$> TF.attribute _algorithm
         , TF.assign "ecdsa_curve" <$> TF.attribute _ecdsa_curve
         , TF.assign "rsa_bits" <$> TF.attribute _rsa_bits
@@ -455,8 +448,8 @@ data SelfSignedCertResource s = SelfSignedCertResource {
     {- ^ (Required) The number of hours after initial issuing that the certificate will become invalid. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SelfSignedCertResource s) where
-    toHCL SelfSignedCertResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SelfSignedCertResource s) where
+    toObject SelfSignedCertResource{..} = catMaybes
         [ TF.assign "allowed_uses" <$> TF.attribute _allowed_uses
         , TF.assign "dns_names" <$> TF.attribute _dns_names
         , TF.assign "early_renewal_hours" <$> TF.attribute _early_renewal_hours

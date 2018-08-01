@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -28,6 +22,7 @@ module Terrafomo.LogicMonitor.Provider
     , providerCompany
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -62,16 +57,18 @@ data LogicMonitor = LogicMonitor {
 
 instance Hashable LogicMonitor
 
-instance TF.ToHCL LogicMonitor where
-    toHCL x =
+instance TF.IsSection LogicMonitor where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (LogicMonitor))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "api_id" <$> _api_id x
-            , TF.assign "api_key" <$> _api_key x
-            , TF.assign "company" <$> _company x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "api_id" <$> _api_id x
+                  , TF.assign "api_key" <$> _api_key x
+                  , TF.assign "company" <$> _company x
+                  ])
 
 instance TF.IsProvider LogicMonitor where
     type ProviderType LogicMonitor = "logicmonitor"

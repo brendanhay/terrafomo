@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -124,8 +117,8 @@ data BindingResource s = BindingResource {
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BindingResource s) where
-    toHCL BindingResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (BindingResource s) where
+    toObject BindingResource{..} = catMaybes
         [ TF.assign "arguments" <$> TF.attribute _arguments
         , TF.assign "destination" <$> TF.attribute _destination
         , TF.assign "destination_type" <$> TF.attribute _destination_type
@@ -222,8 +215,8 @@ data ExchangeResource s = ExchangeResource {
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ExchangeResource s) where
-    toHCL ExchangeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ExchangeResource s) where
+    toObject ExchangeResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "settings" <$> TF.attribute _settings
         , TF.assign "vhost" <$> TF.attribute _vhost
@@ -282,8 +275,8 @@ data PermissionsResource s = PermissionsResource {
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PermissionsResource s) where
-    toHCL PermissionsResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PermissionsResource s) where
+    toObject PermissionsResource{..} = catMaybes
         [ TF.assign "permissions" <$> TF.attribute _permissions
         , TF.assign "user" <$> TF.attribute _user
         , TF.assign "vhost" <$> TF.attribute _vhost
@@ -342,8 +335,8 @@ data PolicyResource s = PolicyResource {
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PolicyResource s) where
-    toHCL PolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PolicyResource s) where
+    toObject PolicyResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "policy" <$> TF.attribute _policy
         , TF.assign "vhost" <$> TF.attribute _vhost
@@ -401,8 +394,8 @@ data QueueResource s = QueueResource {
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (QueueResource s) where
-    toHCL QueueResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (QueueResource s) where
+    toObject QueueResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "settings" <$> TF.attribute _settings
         , TF.assign "vhost" <$> TF.attribute _vhost
@@ -462,8 +455,8 @@ data UserResource s = UserResource {
     {- ^ (Optional) Which permission model to apply to the user. Valid options are: management, policymaker, monitoring, and administrator. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserResource s) where
-    toHCL UserResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserResource s) where
+    toObject UserResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "password" <$> TF.attribute _password
         , TF.assign "tags" <$> TF.attribute _tags
@@ -517,8 +510,8 @@ data VhostResource s = VhostResource {
     {- ^ (Required) The name of the vhost. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VhostResource s) where
-    toHCL VhostResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VhostResource s) where
+    toObject VhostResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 

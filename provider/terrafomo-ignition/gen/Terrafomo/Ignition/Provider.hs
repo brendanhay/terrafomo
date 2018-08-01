@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -25,6 +19,7 @@ module Terrafomo.Ignition.Provider
     -- * Lenses
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -55,13 +50,15 @@ data Ignition = Ignition {
 
 instance Hashable Ignition
 
-instance TF.ToHCL Ignition where
-    toHCL x =
+instance TF.IsSection Ignition where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Ignition))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  ])
 
 instance TF.IsProvider Ignition where
     type ProviderType Ignition = "ignition"

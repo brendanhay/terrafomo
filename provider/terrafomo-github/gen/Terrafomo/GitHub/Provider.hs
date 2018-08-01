@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -28,6 +22,7 @@ module Terrafomo.GitHub.Provider
     , providerToken
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -63,16 +58,18 @@ data GitHub = GitHub {
 
 instance Hashable GitHub
 
-instance TF.ToHCL GitHub where
-    toHCL x =
+instance TF.IsSection GitHub where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (GitHub))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "base_url" <$> _base_url x
-            , TF.assign "organization" <$> _organization x
-            , TF.assign "token" <$> _token x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "base_url" <$> _base_url x
+                  , TF.assign "organization" <$> _organization x
+                  , TF.assign "token" <$> _token x
+                  ])
 
 instance TF.IsProvider GitHub where
     type ProviderType GitHub = "github"

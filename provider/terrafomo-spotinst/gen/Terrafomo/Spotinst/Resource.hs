@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -39,7 +32,6 @@ module Terrafomo.Spotinst.Resource
     , P.HasDrainingTimeout (..)
     , P.HasEbsOptimized (..)
     , P.HasElasticIps (..)
-    , P.HasElasticLoadBalancers (..)
     , P.HasEnableMonitoring (..)
     , P.HasEndpoint (..)
     , P.HasEventType (..)
@@ -56,7 +48,6 @@ module Terrafomo.Spotinst.Resource
     , P.HasKeyName (..)
     , P.HasMaxSize (..)
     , P.HasMinSize (..)
-    , P.HasMultaiTargetSets (..)
     , P.HasName (..)
     , P.HasOndemandCount (..)
     , P.HasOrientation (..)
@@ -71,7 +62,6 @@ module Terrafomo.Spotinst.Resource
     , P.HasSpotPercentage (..)
     , P.HasSubnetIds (..)
     , P.HasTags (..)
-    , P.HasTargetGroupArns (..)
     , P.HasUserData (..)
     , P.HasUtilizeReservedInstances (..)
 
@@ -83,7 +73,6 @@ module Terrafomo.Spotinst.Resource
     , P.HasComputedDrainingTimeout (..)
     , P.HasComputedEbsOptimized (..)
     , P.HasComputedElasticIps (..)
-    , P.HasComputedElasticLoadBalancers (..)
     , P.HasComputedEnableMonitoring (..)
     , P.HasComputedEndpoint (..)
     , P.HasComputedEventType (..)
@@ -101,7 +90,6 @@ module Terrafomo.Spotinst.Resource
     , P.HasComputedKeyName (..)
     , P.HasComputedMaxSize (..)
     , P.HasComputedMinSize (..)
-    , P.HasComputedMultaiTargetSets (..)
     , P.HasComputedName (..)
     , P.HasComputedOndemandCount (..)
     , P.HasComputedOrientation (..)
@@ -116,7 +104,6 @@ module Terrafomo.Spotinst.Resource
     , P.HasComputedSpotPercentage (..)
     , P.HasComputedSubnetIds (..)
     , P.HasComputedTags (..)
-    , P.HasComputedTargetGroupArns (..)
     , P.HasComputedUserData (..)
     , P.HasComputedUtilizeReservedInstances (..)
 
@@ -166,8 +153,6 @@ data ElastigroupAwsResource s = ElastigroupAwsResource {
     {- ^ (Optional) Enable high bandwidth connectivity between instances and AWS’s Elastic Block Store (EBS). For instance types that are EBS-optimized by default this parameter will be ignored. -}
     , _elastic_ips                                        :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html> allocation IDs to associate to the group instances. -}
-    , _elastic_load_balancers                             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) List of Elastic Load Balancers names (ELB). -}
     , _enable_monitoring                                  :: !(TF.Attr s P.Text)
     {- ^ (Optional) Indicates whether monitoring is enabled for the instance. -}
     , _fallback_to_ondemand                               :: !(TF.Attr s P.Text)
@@ -175,11 +160,11 @@ data ElastigroupAwsResource s = ElastigroupAwsResource {
     , _health_check_grace_period                          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The amount of time, in seconds, after the instance has launched to starts and check its health. -}
     , _health_check_type                                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The service that will perform health checks for the instance. Valid values: @"ELB"@ , @"HCS"@ , @"TARGET_GROUP"@ , @"CUSTOM"@ , @"K8S_NODE"@ . -}
+    {- ^ (Optional) The service that will perform health checks for the instance. Valid values: @"ELB"@ , @"HCS"@ , @"TARGET_GROUP"@ , @"MLB"@ , @"EC2"@ , @"MULTAI_TARGET_SET"@ , @"MLB_RUNTIME"@ , @"K8S_NODE"@ , @"NOMAD_NODE"@ , @"ECS_CLUSTER_INSTANCE"@ . -}
     , _health_check_unhealthy_duration_before_replacement :: !(TF.Attr s P.Text)
     {- ^ (Optional) The amount of time, in seconds, that we will wait before replacing an instance that is running and became unhealthy (this is only applicable for instances that were once healthy). -}
     , _iam_instance_profile                               :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ARN of an IAM instance profile to associate with launched instances. -}
+    {- ^ (Optional) The ARN or name of an IAM instance profile to associate with launched instances. -}
     , _image_id                                           :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of the AMI used to launch the instance. -}
     , _instance_types_ondemand                            :: !(TF.Attr s P.Text)
@@ -194,8 +179,6 @@ data ElastigroupAwsResource s = ElastigroupAwsResource {
     {- ^ (Optional; Required if using scaling policies) The maximum number of instances the group should have at any time. -}
     , _min_size                                           :: !(TF.Attr s P.Text)
     {- ^ (Optional; Required if using scaling policies) The minimum number of instances the group should have at any time. -}
-    , _multai_target_sets                                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Set of targets to register. -}
     , _name                                               :: !(TF.Attr s P.Text)
     {- ^ (Required) The group name. -}
     , _ondemand_count                                     :: !(TF.Attr s P.Text)
@@ -219,17 +202,15 @@ data ElastigroupAwsResource s = ElastigroupAwsResource {
     , _subnet_ids                                         :: !(TF.Attr s P.Text)
     {- ^ (Optional) List of Strings of subnet identifiers. Note: When this parameter is set, @availability_zones@ should be left unused. -}
     , _tags                                               :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _target_group_arns                                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) List of Target Group ARNs to register the instances to. -}
+    {- ^ (Optional) A key/value mapping of tags to assign to the resource. -}
     , _user_data                                          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The user data to provide when launching the instance. -}
     , _utilize_reserved_instances                         :: !(TF.Attr s P.Text)
     {- ^ (Optional) In a case of any available reserved instances, Elastigroup will utilize them first before purchasing Spot instances. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElastigroupAwsResource s) where
-    toHCL ElastigroupAwsResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ElastigroupAwsResource s) where
+    toObject ElastigroupAwsResource{..} = catMaybes
         [ TF.assign "availability_zones" <$> TF.attribute _availability_zones
         , TF.assign "capacity_unit" <$> TF.attribute _capacity_unit
         , TF.assign "description" <$> TF.attribute _description
@@ -237,7 +218,6 @@ instance TF.ToHCL (ElastigroupAwsResource s) where
         , TF.assign "draining_timeout" <$> TF.attribute _draining_timeout
         , TF.assign "ebs_optimized" <$> TF.attribute _ebs_optimized
         , TF.assign "elastic_ips" <$> TF.attribute _elastic_ips
-        , TF.assign "elastic_load_balancers" <$> TF.attribute _elastic_load_balancers
         , TF.assign "enable_monitoring" <$> TF.attribute _enable_monitoring
         , TF.assign "fallback_to_ondemand" <$> TF.attribute _fallback_to_ondemand
         , TF.assign "health_check_grace_period" <$> TF.attribute _health_check_grace_period
@@ -251,7 +231,6 @@ instance TF.ToHCL (ElastigroupAwsResource s) where
         , TF.assign "key_name" <$> TF.attribute _key_name
         , TF.assign "max_size" <$> TF.attribute _max_size
         , TF.assign "min_size" <$> TF.attribute _min_size
-        , TF.assign "multai_target_sets" <$> TF.attribute _multai_target_sets
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "ondemand_count" <$> TF.attribute _ondemand_count
         , TF.assign "orientation" <$> TF.attribute _orientation
@@ -264,7 +243,6 @@ instance TF.ToHCL (ElastigroupAwsResource s) where
         , TF.assign "spot_percentage" <$> TF.attribute _spot_percentage
         , TF.assign "subnet_ids" <$> TF.attribute _subnet_ids
         , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "target_group_arns" <$> TF.attribute _target_group_arns
         , TF.assign "user_data" <$> TF.attribute _user_data
         , TF.assign "utilize_reserved_instances" <$> TF.attribute _utilize_reserved_instances
         ]
@@ -303,11 +281,6 @@ instance P.HasElasticIps (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     elasticIps =
         lens (_elastic_ips :: ElastigroupAwsResource s -> TF.Attr s P.Text)
              (\s a -> s { _elastic_ips = a } :: ElastigroupAwsResource s)
-
-instance P.HasElasticLoadBalancers (ElastigroupAwsResource s) (TF.Attr s P.Text) where
-    elasticLoadBalancers =
-        lens (_elastic_load_balancers :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _elastic_load_balancers = a } :: ElastigroupAwsResource s)
 
 instance P.HasEnableMonitoring (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     enableMonitoring =
@@ -374,11 +347,6 @@ instance P.HasMinSize (ElastigroupAwsResource s) (TF.Attr s P.Text) where
         lens (_min_size :: ElastigroupAwsResource s -> TF.Attr s P.Text)
              (\s a -> s { _min_size = a } :: ElastigroupAwsResource s)
 
-instance P.HasMultaiTargetSets (ElastigroupAwsResource s) (TF.Attr s P.Text) where
-    multaiTargetSets =
-        lens (_multai_target_sets :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _multai_target_sets = a } :: ElastigroupAwsResource s)
-
 instance P.HasName (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     name =
         lens (_name :: ElastigroupAwsResource s -> TF.Attr s P.Text)
@@ -439,11 +407,6 @@ instance P.HasTags (ElastigroupAwsResource s) (TF.Attr s P.Text) where
         lens (_tags :: ElastigroupAwsResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ElastigroupAwsResource s)
 
-instance P.HasTargetGroupArns (ElastigroupAwsResource s) (TF.Attr s P.Text) where
-    targetGroupArns =
-        lens (_target_group_arns :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target_group_arns = a } :: ElastigroupAwsResource s)
-
 instance P.HasUserData (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     userData =
         lens (_user_data :: ElastigroupAwsResource s -> TF.Attr s P.Text)
@@ -487,11 +450,6 @@ instance s ~ s' => P.HasComputedEbsOptimized (TF.Ref s' (ElastigroupAwsResource 
 instance s ~ s' => P.HasComputedElasticIps (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
     computedElasticIps =
         (_elastic_ips :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedElasticLoadBalancers (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedElasticLoadBalancers =
-        (_elastic_load_balancers :: ElastigroupAwsResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedEnableMonitoring (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
@@ -562,11 +520,6 @@ instance s ~ s' => P.HasComputedMinSize (TF.Ref s' (ElastigroupAwsResource s)) (
         (_min_size :: ElastigroupAwsResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedMultaiTargetSets (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedMultaiTargetSets =
-        (_multai_target_sets :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ElastigroupAwsResource s -> TF.Attr s P.Text)
@@ -627,11 +580,6 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElastigroupAwsResource s)) (TF.
         (_tags :: ElastigroupAwsResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTargetGroupArns (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedTargetGroupArns =
-        (_target_group_arns :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
 instance s ~ s' => P.HasComputedUserData (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
     computedUserData =
         (_user_data :: ElastigroupAwsResource s -> TF.Attr s P.Text)
@@ -653,7 +601,6 @@ elastigroupAwsResource =
             , _draining_timeout = TF.Nil
             , _ebs_optimized = TF.Nil
             , _elastic_ips = TF.Nil
-            , _elastic_load_balancers = TF.Nil
             , _enable_monitoring = TF.Nil
             , _fallback_to_ondemand = TF.Nil
             , _health_check_grace_period = TF.Nil
@@ -667,7 +614,6 @@ elastigroupAwsResource =
             , _key_name = TF.Nil
             , _max_size = TF.Nil
             , _min_size = TF.Nil
-            , _multai_target_sets = TF.Nil
             , _name = TF.Nil
             , _ondemand_count = TF.Nil
             , _orientation = TF.Nil
@@ -680,7 +626,6 @@ elastigroupAwsResource =
             , _spot_percentage = TF.Nil
             , _subnet_ids = TF.Nil
             , _tags = TF.Nil
-            , _target_group_arns = TF.Nil
             , _user_data = TF.Nil
             , _utilize_reserved_instances = TF.Nil
             }
@@ -693,17 +638,17 @@ data SubscriptionResource s = SubscriptionResource {
       _endpoint    :: !(TF.Attr s P.Text)
     {- ^ (Required) The endpoint the notification will be sent to: url in case of @"http"@ / @"https"@ , email address in case of @"email"@ / @"email-json"@ , sns-topic-arn in case of @"aws-sns"@ . -}
     , _event_type  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The event to send the notification when triggered. Valid values: @"AWS_EC2_INSTANCE_TERMINATE"@ , @"AWS_EC2_INSTANCE_TERMINATED"@ , @"AWS_EC2_INSTANCE_LAUNCH"@ , @"AWS_EC2_INSTANCE_UNHEALTHY_IN_ELB"@ , @"GROUP_ROLL_FAILED"@ , @"GROUP_ROLL_FINISHED"@ , @"CANT_SCALE_UP_GROUP_MAX_CAPACITY"@ , @"GROUP_UPDATED"@ . -}
+    {- ^ (Required) The event to send the notification when triggered. Valid values: @"AWS_EC2_INSTANCE_TERMINATE"@ , @"AWS_EC2_INSTANCE_TERMINATED"@ , @"AWS_EC2_INSTANCE_LAUNCH"@ , @"AWS_EC2_INSTANCE_UNHEALTHY_IN_ELB"@ , @"GROUP_ROLL_FAILED"@ , @"GROUP_ROLL_FINISHED"@ , @"CANT_SCALE_UP_GROUP_MAX_CAPACITY"@ , @"GROUP_UPDATED"@ , @"AWS_EC2_CANT_SPIN_OD"@ , @"AWS_EMR_PROVISION_TIMEOUT"@ , @"AWS_EC2_INSTANCE_READY_SIGNAL_TIMEOUT"@ . -}
     , _format      :: !(TF.Attr s P.Text)
     {- ^ (Optional) The format of the notification content (JSON Format - Key+Value). Valid values: @"%instance-id%"@ , @"%event%"@ , @"%resource-id%"@ , @"%resource-name%"@ . -}
     , _protocol    :: !(TF.Attr s P.Text)
     {- ^ (Required) The protocol to send the notification. Valid values: @"http"@ , @"https"@ , @"email"@ , @"email-json"@ , @"aws-sns"@ . -}
     , _resource_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) Spotinst Resource id (Elastigroup ID). -}
+    {- ^ (Required) Spotinst Resource ID (Elastigroup ID). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SubscriptionResource s) where
-    toHCL SubscriptionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SubscriptionResource s) where
+    toObject SubscriptionResource{..} = catMaybes
         [ TF.assign "endpoint" <$> TF.attribute _endpoint
         , TF.assign "event_type" <$> TF.attribute _event_type
         , TF.assign "format" <$> TF.attribute _format

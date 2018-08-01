@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -110,8 +103,8 @@ data DefaultReviewersResource s = DefaultReviewersResource {
     {- ^ (Required) A list of reviewers to use. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DefaultReviewersResource s) where
-    toHCL DefaultReviewersResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DefaultReviewersResource s) where
+    toObject DefaultReviewersResource{..} = catMaybes
         [ TF.assign "owner" <$> TF.attribute _owner
         , TF.assign "repository" <$> TF.attribute _repository
         , TF.assign "reviewers" <$> TF.attribute _reviewers
@@ -174,8 +167,8 @@ data HookResource s = HookResource {
     {- ^ (Required) Where to POST to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HookResource s) where
-    toHCL HookResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (HookResource s) where
+    toObject HookResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "events" <$> TF.attribute _events
         , TF.assign "owner" <$> TF.attribute _owner
@@ -277,8 +270,8 @@ data RepositoryResource s = RepositoryResource {
     {- ^ (Optional) URL of website associated with this repository. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RepositoryResource s) where
-    toHCL RepositoryResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RepositoryResource s) where
+    toObject RepositoryResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "fork_policy" <$> TF.attribute _fork_policy
         , TF.assign "has_issues" <$> TF.attribute _has_issues

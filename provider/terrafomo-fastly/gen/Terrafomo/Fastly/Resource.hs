@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -154,8 +147,8 @@ data ServiceV1Resource s = ServiceV1Resource {
     {- ^ (Optional) A set of custom VCL configuration blocks. The ability to upload custom VCL code is not enabled by default for new Fastly accounts (see the <https://docs.fastly.com/guides/vcl/uploading-custom-vcl> for details). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceV1Resource s) where
-    toHCL ServiceV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceV1Resource s) where
+    toObject ServiceV1Resource{..} = catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "cache_setting" <$> TF.attribute _cache_setting
         , TF.assign "condition" <$> TF.attribute _condition

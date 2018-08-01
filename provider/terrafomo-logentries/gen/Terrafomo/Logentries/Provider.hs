@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -26,6 +20,7 @@ module Terrafomo.Logentries.Provider
     , providerAccountKey
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -56,14 +51,16 @@ data Logentries = Logentries {
 
 instance Hashable Logentries
 
-instance TF.ToHCL Logentries where
-    toHCL x =
+instance TF.IsSection Logentries where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Logentries))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "account_key" <$> _account_key x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "account_key" <$> _account_key x
+                  ])
 
 instance TF.IsProvider Logentries where
     type ProviderType Logentries = "logentries"

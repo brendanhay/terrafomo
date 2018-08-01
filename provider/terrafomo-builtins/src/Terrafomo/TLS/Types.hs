@@ -1,6 +1,6 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
-{-# LANGUAGE TypeFamilies #-}
+
 
 -- |
 -- Module      : Terrafomo.TLS.Types

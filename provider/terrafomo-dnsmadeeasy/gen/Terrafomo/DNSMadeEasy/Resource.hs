@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -71,8 +64,8 @@ Provides a DNSMadeEasy record resource.
 data RecordResource s = RecordResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RecordResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (RecordResource s) where
+    toObject _ = []
 
 instance s ~ s' => P.HasComputedGtdLocation (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedGtdLocation x = TF.compute (TF.refKey x) "gtdLocation"

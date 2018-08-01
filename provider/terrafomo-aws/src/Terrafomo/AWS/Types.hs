@@ -1,17 +1,17 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
-{-# LANGUAGE DeriveGeneric              #-}
-{-# LANGUAGE DuplicateRecordFields      #-}
-{-# LANGUAGE FlexibleInstances          #-}
-{-# LANGUAGE FunctionalDependencies     #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase                 #-}
-{-# LANGUAGE MultiParamTypeClasses      #-}
-{-# LANGUAGE OverloadedStrings          #-}
-{-# LANGUAGE ScopedTypeVariables        #-}
-{-# LANGUAGE TemplateHaskell            #-}
-{-# LANGUAGE TypeFamilies               #-}
-{-# LANGUAGE UndecidableInstances       #-}
+{-# LANGUAGE DeriveGeneric          #-}
+{-# LANGUAGE DuplicateRecordFields  #-}
+{-# LANGUAGE FlexibleInstances      #-}
+{-# LANGUAGE FunctionalDependencies #-}
+
+{-# LANGUAGE LambdaCase             #-}
+{-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TemplateHaskell        #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
@@ -29,10 +29,10 @@ module Terrafomo.AWS.Types
     , Region (..)
     ) where
 
-import Data.IP         (IPRange)
-import Data.Map.Strict (Map)
-import Data.Text       (Text)
-import Data.Word       (Word16)
+import Data.HashMap.Strict (HashMap)
+import Data.IP             (IPRange)
+import Data.Text           (Text)
+import Data.Word           (Word16)
 
 import GHC.Base     (Bool)
 import GHC.Exts     (IsList (..))
@@ -45,17 +45,15 @@ import Terrafomo.AWS.Lens
 
 import Formatting (Format, (%))
 
+import qualified Data.Aeson             as JSON
 import qualified Data.Text.Lazy.Builder as Build
 import qualified Formatting             as Format
 import qualified Network.AWS.Data.Text  as AWS
 import qualified Terrafomo.HCL          as HCL
 import qualified Terrafomo.TH           as TH
 
-newtype Tags s = Tags { fromTags :: Map Text (Attr s Text) }
+newtype Tags s = Tags { fromTags :: HashMap Text (Attr s Text) }
     deriving (Show, Eq)
-
-instance ToHCL (Tags s) where
-    toHCL = HCL.pairs . fromTags
 
 instance IsList (Tags s) where
     type Item (Tags s) = (Text, Attr s Text)
@@ -63,20 +61,24 @@ instance IsList (Tags s) where
     toList   = toList . fromTags
     fromList = Tags   . fromList
 
+instance IsValue  (Tags s)
+instance IsObject (Tags s) where
+    toObject = HCL.object . fromTags
+
 -- | A specific AWS availability zone.
 data Zone = Zone !Region !Char
     deriving (Show, Eq)
 
-instance ToHCL Zone where
-    toHCL = HCL.toHCL . Format.bprint fzone
+instance IsValue Zone where
+    toValue = HCL.toValue . Format.bprint fzone
 
 -- | Format an AWS region name.
 fregion :: Format r (Region -> r)
 fregion = Format.later (Build.fromText . AWS.toText)
 
 -- Orphan instance for amazonka types.
-instance ToHCL Region where
-    toHCL = HCL.toHCL . Format.bprint fregion
+instance IsValue Region where
+    toValue = HCL.toValue . Format.bprint fregion
 
 -- | Format an AWS availability zone name.
 fzone :: Format r (Zone -> r)
@@ -97,8 +99,8 @@ data Ec2Traffic
     | Egress
       deriving (Show, Eq)
 
-instance ToHCL Ec2Traffic where
-    toHCL = HCL.string . \case
+instance IsValue Ec2Traffic where
+    toValue = HCL.string . \case
         Ingress -> "ingress"
         Egress  -> "egress"
 
@@ -109,8 +111,8 @@ data Ec2Protocol
     | AllowAll
       deriving (Show, Eq)
 
-instance ToHCL Ec2Protocol where
-    toHCL = HCL.string . \case
+instance IsValue Ec2Protocol where
+    toValue = HCL.string . \case
         AllowICMP -> "icmp"
         AllowTCP  -> "tcp"
         AllowUDP  -> "udp"
@@ -121,7 +123,7 @@ data Ec2Filter s = Ec2Filter
     , _values :: !(Attr s [Attr s Text])
     } deriving (Show, Eq, Generic)
 
-$(TH.makeBlock ''Ec2Filter)
+$(TH.makeObject ''Ec2Filter)
 
 data Ec2VolumeType
     = VolumeStandard
@@ -129,8 +131,8 @@ data Ec2VolumeType
     | VolumeIO1
       deriving (Show, Eq)
 
-instance ToHCL Ec2VolumeType where
-    toHCL = HCL.string . \case
+instance IsValue Ec2VolumeType where
+    toValue = HCL.string . \case
         VolumeStandard -> "standard"
         VolumeGP2      -> "gp2"
         VolumeIO1      -> "io1"
@@ -149,7 +151,7 @@ data Ec2RootBlockDevice s = Ec2RootBlockDevice
     -- termination (Default: true).
     } deriving (Show, Eq, Generic)
 
-$(TH.makeBlock ''Ec2RootBlockDevice)
+$(TH.makeObject ''Ec2RootBlockDevice)
 
 -- | If you use ebs_block_device on an aws_instance, Terraform will assume
 -- management over the full set of non-root EBS block devices for the instance,
@@ -176,7 +178,7 @@ data Ec2EbsBlockDevice s = Ec2EbsBlockDevice
     -- false). Cannot be used with snapshot_id.
     } deriving (Show, Eq, Generic)
 
-$(TH.makeBlock ''Ec2EbsBlockDevice)
+$(TH.makeObject ''Ec2EbsBlockDevice)
 
 -- | Each AWS Instance type has a different set of Instance Store block devices
 -- available for attachment. AWS publishes a list of which ephemeral devices are
@@ -191,7 +193,7 @@ data Ec2EphemeralBlockDevice s = Ec2EphemeralBlockDevice
     -- ^ (Optional) Suppresses the specified device included in the AMI's block device mapping.
     } deriving (Show, Eq, Generic)
 
-$(TH.makeBlock ''Ec2EphemeralBlockDevice)
+$(TH.makeObject ''Ec2EphemeralBlockDevice)
 
 -- S3
 
@@ -205,7 +207,7 @@ data S3BucketVersioning s = S3BucketVersioning
     -- bucket or Permanently delete an object version. Default is false.
     } deriving (Show, Eq, Generic)
 
-$(TH.makeBlock ''S3BucketVersioning)
+$(TH.makeObject ''S3BucketVersioning)
 
 -- DynamoDB
 
@@ -214,12 +216,13 @@ data DynamoTableAttribute = DynamoTableAttribute !Text !DynamoAttributeType
 
 -- FIXME: Convert to Generic + HasName + HasType
 
-instance ToHCL DynamoTableAttribute where
-    toHCL (DynamoTableAttribute k v) =
-        HCL.block
-            [ HCL.assign "name" k
-            , HCL.assign "type" v
-            ]
+
+instance IsValue  DynamoTableAttribute
+instance IsObject DynamoTableAttribute where
+    toObject (DynamoTableAttribute k v) =
+        [ HCL.assign "name" k
+        , HCL.assign "type" v
+        ]
 
 -- | One of: S, N, or B for (S)tring, (N)umber or (B)inary data.
 data DynamoAttributeType
@@ -228,8 +231,8 @@ data DynamoAttributeType
     | DynamoBinary
       deriving (Show, Eq)
 
-instance ToHCL DynamoAttributeType where
-    toHCL = HCL.string . \case
+instance IsValue DynamoAttributeType where
+    toValue = HCL.string . \case
         DynamoString -> "S"
         DynamoNumber -> "N"
         DynamoBinary -> "B"
@@ -245,7 +248,7 @@ data ElasticBeanstalkSetting s = ElasticBeanstalkSetting
     -- ^ Value for the configuration option.
     } deriving (Show, Eq, Generic)
 
-$(TH.makeBlock ''ElasticBeanstalkSetting)
+$(TH.makeObject ''ElasticBeanstalkSetting)
 
 -- Elastic Load Balancer
 
@@ -256,8 +259,8 @@ data ElbProtocol
     | ListenerSSL
       deriving (Show, Eq)
 
-instance ToHCL ElbProtocol where
-    toHCL = HCL.string . \case
+instance IsValue ElbProtocol where
+    toValue = HCL.string . \case
         ListenerHTTP -> "HTTP"
         ListenerHTTPS  -> "HTTPS"
         ListenerTCP  -> "TCP"
@@ -270,8 +273,8 @@ data ElbHealthCheckTarget
     | TargetSSL   !Word16
       deriving (Show, Eq)
 
-instance ToHCL ElbHealthCheckTarget where
-    toHCL = HCL.string . \case
+instance IsValue ElbHealthCheckTarget where
+    toValue = HCL.string . \case
         TargetHTTP  n p ->
             Format.format ("http://"  % Format.int % ":" % Format.stext) n p
         TargetHTTPS n p ->
@@ -292,7 +295,7 @@ data ElbAccessLogs s = ElbAccessLogs
     -- ^ (Optional) Boolean to enable / disable access_logs. Default is true
     } deriving (Show, Eq, Generic)
 
-$(TH.makeBlock ''ElbAccessLogs)
+$(TH.makeObject ''ElbAccessLogs)
 
 data ElbListener s = ElbListener
     { _instance_port      :: !(Attr s Word16)
@@ -309,7 +312,7 @@ data ElbListener s = ElbListener
     -- is either HTTPS or SSL
     } deriving (Show, Eq, Generic)
 
-$(TH.makeBlock ''ElbListener)
+$(TH.makeObject ''ElbListener)
 
 data ElbHealthCheck s = ElbHealthCheck
     { _healthy_threshold   :: !(Attr s Int)
@@ -324,12 +327,12 @@ data ElbHealthCheck s = ElbHealthCheck
     -- ^ (Required) The length of time before the check times out.
     } deriving (Show, Eq, Generic)
 
-$(TH.makeBlock ''ElbHealthCheck)
+$(TH.makeObject ''ElbHealthCheck)
 
 -- IAM
 
 -- FIXME: This should come from amazonka-iam-policy.
-type IamPolicy = HCL.JSON
+type IamPolicy = JSON.Value
 
 -- EKS
 
@@ -349,7 +352,7 @@ data EksVpcConfig s = EksVpcConfig
     -- Kubernetes control plane.
     } deriving (Show, Eq, Generic)
 
-$(TH.makeBlock ''EksVpcConfig)
+$(TH.makeObject ''EksVpcConfig)
 
 -- | Nested argument for the VPC associated with your cluster. Amazon EKS VPC
 -- resources have specific requirements to work properly with Kubernetes. For more
@@ -360,66 +363,4 @@ data EksVpcConfigId s = EksVpcConfigId
     -- ^ The VPC associated with your cluster.
     } deriving (Show, Eq, Generic)
 
-$(TH.makeBlock ''EksVpcConfigId)
-
--- Field Classes
-
--- $(TH.makeFields ''Ec2Filter)
--- $(TH.makeFields ''Ec2RootBlockDevice)
--- $(TH.makeFields ''Ec2EbsBlockDevice)
--- $(TH.makeFields ''Ec2EphemeralBlockDevice)
--- $(TH.makeFields ''S3BucketVersioning)
--- $(TH.makeFields ''ElasticBeanstalkSetting)
--- $(TH.makeFields ''ElbAccessLogs)
--- $(TH.makeFields ''ElbListener)
--- $(TH.makeFields ''ElbHealthCheck)
-
--- HasTarget
--- HasHealthyThreshold
--- HasUnhealthThreshold
--- HasSslCertificateId
--- HasLbProtocol
--- HasLbPort
--- HasInstanceProtocol
--- HasInterval
--- HasMfaDelete
--- HasNoDevice
--- HasVirtualName
--- HasVolumeSize
--- HasVolumeType
-
--- class HasVolumeType a b | a -> b where
---     volumeType :: Lens' a b
-
--- instance HasVolumeType a b => HasVolumeType (Schema l p a) b where
---     volumeType = TF.configuration . volumeType
-
--- -- class HasVolumeSize a b | a -> b where
--- --     volumeSize :: Lens' a b
-
--- instance HasVolumeSize a b => HasVolumeSize (Schema l p a) b where
---     volumeSize = TF.configuration . volumeSize
-
--- -- class HasDeleteOnTermination a b | a -> b where
--- --     deleteOnTermination :: Lens' a b
-
--- instance HasDeleteOnTermination a b => HasDeleteOnTermination (Schema l p a) b where
---     deleteOnTermination = TF.configuration . deleteOnTermination
-
--- -- class HasVirtualName a b | a -> b where
--- --     virtualName :: Lens' a b
-
--- instance HasVirtualName a b => HasVirtualName (Schema l p a) b where
---     virtualName = TF.configuration . virtualName
-
--- -- class HasNoDevice a b | a -> b where
--- --     noDevice :: Lens' a b
-
--- instance HasNoDevice a b => HasNoDevice (Schema l p a) b where
---     noDevice = TF.configuration . noDevice
-
--- -- class HasMfaDelete a b | a -> b where
--- --     mfaDelete :: Lens' a b
-
--- instance HasMfaDelete a b => HasMfaDelete (Schema l p a) b where
---     mfaDelete = TF.configuration . mfaDelete
+$(TH.makeObject ''EksVpcConfigId)

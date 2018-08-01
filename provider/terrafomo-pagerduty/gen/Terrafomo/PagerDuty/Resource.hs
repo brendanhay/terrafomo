@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -181,8 +174,8 @@ data AddonResource s = AddonResource {
     {- ^ (Required) The source URL to display in a frame in the PagerDuty UI. @HTTPS@ is required. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AddonResource s) where
-    toHCL AddonResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (AddonResource s) where
+    toObject AddonResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "src" <$> TF.attribute _src
         ]
@@ -239,8 +232,8 @@ data EscalationPolicyResource s = EscalationPolicyResource {
     {- ^ (Optional) Teams associated with the policy. Account must have the @teams@ ability to use this parameter. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EscalationPolicyResource s) where
-    toHCL EscalationPolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (EscalationPolicyResource s) where
+    toObject EscalationPolicyResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "num_loops" <$> TF.attribute _num_loops
@@ -320,7 +313,7 @@ can be associated with a service.
 -}
 data ExtensionResource s = ExtensionResource {
       _endpoint_url      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The url of the extension. -}
+    {- ^ (Optional) The url of the extension. -}
     , _extension_objects :: !(TF.Attr s P.Text)
     {- ^ (Required) This is the objects for which the extension applies (An array of service ids). -}
     , _extension_schema  :: !(TF.Attr s P.Text)
@@ -329,8 +322,8 @@ data ExtensionResource s = ExtensionResource {
     {- ^ (Optional) The name of the service extension. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ExtensionResource s) where
-    toHCL ExtensionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ExtensionResource s) where
+    toObject ExtensionResource{..} = catMaybes
         [ TF.assign "endpoint_url" <$> TF.attribute _endpoint_url
         , TF.assign "extension_objects" <$> TF.attribute _extension_objects
         , TF.assign "extension_schema" <$> TF.attribute _extension_schema
@@ -415,8 +408,8 @@ data MaintenanceWindowResource s = MaintenanceWindowResource {
     {- ^ (Required) The maintenance window's start time. This is when the services will stop creating incidents. If this date is in the past, it will be updated to be the current time. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (MaintenanceWindowResource s) where
-    toHCL MaintenanceWindowResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (MaintenanceWindowResource s) where
+    toObject MaintenanceWindowResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "end_time" <$> TF.attribute _end_time
         , TF.assign "services" <$> TF.attribute _services
@@ -496,8 +489,8 @@ data ScheduleResource s = ScheduleResource {
     {- ^ (Required) The time zone of the schedule (e.g Europe/Berlin). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ScheduleResource s) where
-    toHCL ScheduleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ScheduleResource s) where
+    toObject ScheduleResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "layer" <$> TF.attribute _layer
         , TF.assign "name" <$> TF.attribute _name
@@ -590,8 +583,8 @@ data ServiceIntegrationResource s = ServiceIntegrationResource {
     {- ^ (Optional) The ID of the vendor the integration should integrate with (e.g Datadog or Amazon Cloudwatch). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceIntegrationResource s) where
-    toHCL ServiceIntegrationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceIntegrationResource s) where
+    toObject ServiceIntegrationResource{..} = catMaybes
         [ TF.assign "integration_email" <$> TF.attribute _integration_email
         , TF.assign "integration_key" <$> TF.attribute _integration_key
         , TF.assign "name" <$> TF.attribute _name
@@ -697,8 +690,8 @@ data ServiceResource s = ServiceResource {
     {- ^ (Required) The name of the service. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceResource s) where
-    toHCL ServiceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceResource s) where
+    toObject ServiceResource{..} = catMaybes
         [ TF.assign "acknowledgement_timeout" <$> TF.attribute _acknowledgement_timeout
         , TF.assign "alert_creation" <$> TF.attribute _alert_creation
         , TF.assign "auto_resolve_timeout" <$> TF.attribute _auto_resolve_timeout
@@ -804,8 +797,8 @@ data TeamMembershipResource s = TeamMembershipResource {
     {- ^ (Required) The ID of the user to add to the team. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TeamMembershipResource s) where
-    toHCL TeamMembershipResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TeamMembershipResource s) where
+    toObject TeamMembershipResource{..} = catMaybes
         [ TF.assign "team_id" <$> TF.attribute _team_id
         , TF.assign "user_id" <$> TF.attribute _user_id
         ]
@@ -849,8 +842,8 @@ data TeamResource s = TeamResource {
     {- ^ (Required) The name of the group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TeamResource s) where
-    toHCL TeamResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TeamResource s) where
+    toObject TeamResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -907,8 +900,8 @@ data UserContactMethodResource s = UserContactMethodResource {
     {- ^ (Required) The ID of the user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserContactMethodResource s) where
-    toHCL UserContactMethodResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserContactMethodResource s) where
+    toObject UserContactMethodResource{..} = catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "country_code" <$> TF.attribute _country_code
         , TF.assign "label" <$> TF.attribute _label
@@ -1022,8 +1015,8 @@ data UserResource s = UserResource {
     {- ^ (Optional) A list of teams the user should belong to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserResource s) where
-    toHCL UserResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserResource s) where
+    toObject UserResource{..} = catMaybes
         [ TF.assign "color" <$> TF.attribute _color
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "email" <$> TF.attribute _email

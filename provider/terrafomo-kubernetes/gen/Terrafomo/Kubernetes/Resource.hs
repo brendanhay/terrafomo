@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -128,8 +121,8 @@ data ConfigMapResource s = ConfigMapResource {
     {- ^ (Required) Standard config map's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ConfigMapResource s) where
-    toHCL ConfigMapResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ConfigMapResource s) where
+    toObject ConfigMapResource{..} = catMaybes
         [ TF.assign "data" <$> TF.attribute _data'
         , TF.assign "metadata" <$> TF.attribute _metadata
         ]
@@ -175,8 +168,8 @@ data HorizontalPodAutoscalerResource s = HorizontalPodAutoscalerResource {
     {- ^ (Required) Behaviour of the autoscaler. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (HorizontalPodAutoscalerResource s) where
-    toHCL HorizontalPodAutoscalerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (HorizontalPodAutoscalerResource s) where
+    toObject HorizontalPodAutoscalerResource{..} = catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "spec" <$> TF.attribute _spec
         ]
@@ -223,8 +216,8 @@ data LimitRangeResource s = LimitRangeResource {
     {- ^ (Optional) Spec defines the limits enforced. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LimitRangeResource s) where
-    toHCL LimitRangeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LimitRangeResource s) where
+    toObject LimitRangeResource{..} = catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "spec" <$> TF.attribute _spec
         ]
@@ -268,8 +261,8 @@ data NamespaceResource s = NamespaceResource {
     {- ^ (Required) Standard namespace's <https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata> . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NamespaceResource s) where
-    toHCL NamespaceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NamespaceResource s) where
+    toObject NamespaceResource{..} = catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         ]
 
@@ -304,8 +297,8 @@ data PersistentVolumeClaimResource s = PersistentVolumeClaimResource {
     {- ^ (Optional) Whether to wait for the claim to reach @Bound@ state (to find volume in which to claim the space) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PersistentVolumeClaimResource s) where
-    toHCL PersistentVolumeClaimResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PersistentVolumeClaimResource s) where
+    toObject PersistentVolumeClaimResource{..} = catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "spec" <$> TF.attribute _spec
         , TF.assign "wait_until_bound" <$> TF.attribute _wait_until_bound
@@ -365,8 +358,8 @@ data PersistentVolumeResource s = PersistentVolumeResource {
     {- ^ (Required) Spec of the persistent volume owned by the cluster. See below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PersistentVolumeResource s) where
-    toHCL PersistentVolumeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PersistentVolumeResource s) where
+    toObject PersistentVolumeResource{..} = catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "spec" <$> TF.attribute _spec
         ]
@@ -413,8 +406,8 @@ data PodResource s = PodResource {
     {- ^ (Required) Spec of the pod owned by the cluster -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PodResource s) where
-    toHCL PodResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (PodResource s) where
+    toObject PodResource{..} = catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "spec" <$> TF.attribute _spec
         ]
@@ -462,8 +455,8 @@ data ReplicationControllerResource s = ReplicationControllerResource {
     {- ^ (Required) Spec defines the specification of the desired behavior of the replication controller. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ReplicationControllerResource s) where
-    toHCL ReplicationControllerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ReplicationControllerResource s) where
+    toObject ReplicationControllerResource{..} = catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "spec" <$> TF.attribute _spec
         ]
@@ -510,8 +503,8 @@ data ResourceQuotaResource s = ResourceQuotaResource {
     {- ^ (Optional) Spec defines the desired quota. https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceQuotaResource s) where
-    toHCL ResourceQuotaResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ResourceQuotaResource s) where
+    toObject ResourceQuotaResource{..} = catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "spec" <$> TF.attribute _spec
         ]
@@ -566,8 +559,8 @@ data SecretResource s = SecretResource {
     {- ^ (Optional) The secret type. Defaults to @Opaque@ . More info: https://github.com/kubernetes/community/blob/master/contributors/design-proposals/auth/secrets.md#proposed-design -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecretResource s) where
-    toHCL SecretResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecretResource s) where
+    toObject SecretResource{..} = catMaybes
         [ TF.assign "data" <$> TF.attribute _data'
         , TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "type" <$> TF.attribute _type'
@@ -626,8 +619,8 @@ data ServiceAccountResource s = ServiceAccountResource {
     {- ^ (Optional) A list of secrets allowed to be used by pods running using this Service Account. More info: http://kubernetes.io/docs/user-guide/secrets -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceAccountResource s) where
-    toHCL ServiceAccountResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceAccountResource s) where
+    toObject ServiceAccountResource{..} = catMaybes
         [ TF.assign "image_pull_secret" <$> TF.attribute _image_pull_secret
         , TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "secret" <$> TF.attribute _secret
@@ -687,8 +680,8 @@ data ServiceResource s = ServiceResource {
     {- ^ (Required) Spec defines the behavior of a service. https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ServiceResource s) where
-    toHCL ServiceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ServiceResource s) where
+    toObject ServiceResource{..} = catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "spec" <$> TF.attribute _spec
         ]
@@ -737,8 +730,8 @@ data StorageClassResource s = StorageClassResource {
     {- ^ (Required) Indicates the type of the provisioner -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (StorageClassResource s) where
-    toHCL StorageClassResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (StorageClassResource s) where
+    toObject StorageClassResource{..} = catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "parameters" <$> TF.attribute _parameters
         , TF.assign "storage_provisioner" <$> TF.attribute _storage_provisioner

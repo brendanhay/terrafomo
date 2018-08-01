@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -313,8 +306,8 @@ data DbInstancesData s = DbInstancesData {
     {- ^ (Optional) Used to retrieve instances belong to specified @vswitch@ resources. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbInstancesData s) where
-    toHCL DbInstancesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DbInstancesData s) where
+    toObject DbInstancesData{..} = catMaybes
         [ TF.assign "connection_mode" <$> TF.attribute _connection_mode
         , TF.assign "db_type" <$> TF.attribute _db_type
         , TF.assign "engine" <$> TF.attribute _engine
@@ -454,8 +447,8 @@ data DnsDomainsData s = DnsDomainsData {
     {- ^ (Optional) Limit search to specific cloud analysis version code. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsDomainsData s) where
-    toHCL DnsDomainsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DnsDomainsData s) where
+    toObject DnsDomainsData{..} = catMaybes
         [ TF.assign "ali_domain" <$> TF.attribute _ali_domain
         , TF.assign "domain_name_regex" <$> TF.attribute _domain_name_regex
         , TF.assign "group_name_regex" <$> TF.attribute _group_name_regex
@@ -560,8 +553,8 @@ data DnsGroupsData s = DnsGroupsData {
     {- ^ (Optional) The name of file that can save groups data source after running @terraform plan@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsGroupsData s) where
-    toHCL DnsGroupsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DnsGroupsData s) where
+    toObject DnsGroupsData{..} = catMaybes
         [ TF.assign "name_regex" <$> TF.attribute _name_regex
         , TF.assign "output_file" <$> TF.attribute _output_file
         ]
@@ -624,8 +617,8 @@ data DnsRecordsData s = DnsRecordsData {
     {- ^ (Optional) Limit search to provide host record value regex. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsRecordsData s) where
-    toHCL DnsRecordsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (DnsRecordsData s) where
+    toObject DnsRecordsData{..} = catMaybes
         [ TF.assign "domain_name" <$> TF.attribute _domain_name
         , TF.assign "host_record_regex" <$> TF.attribute _host_record_regex
         , TF.assign "is_locked" <$> TF.attribute _is_locked
@@ -755,8 +748,8 @@ data EipsData s = EipsData {
     {- ^ (Optional) The name of file that can save eips data source after running @terraform plan@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EipsData s) where
-    toHCL EipsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (EipsData s) where
+    toObject EipsData{..} = catMaybes
         [ TF.assign "ids" <$> TF.attribute _ids
         , TF.assign "ip_addresses" <$> TF.attribute _ip_addresses
         , TF.assign "output_file" <$> TF.attribute _output_file
@@ -821,8 +814,8 @@ data ImagesData s = ImagesData {
     {- ^ (Optional) Limit search to specific image owners. Valid items are @system@ , @self@ , @others@ , @marketplace@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImagesData s) where
-    toHCL ImagesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ImagesData s) where
+    toObject ImagesData{..} = catMaybes
         [ TF.assign "most_recent" <$> TF.attribute _most_recent
         , TF.assign "name_regex" <$> TF.attribute _name_regex
         , TF.assign "output_file" <$> TF.attribute _output_file
@@ -946,8 +939,8 @@ data InstanceTypesData s = InstanceTypesData {
     {- ^ - - (Optional) According to ECS spot type to filter all results. Valid values: @NoSpot@ , @SpotWithPriceLimit@ and @SpotAsPriceGo@ . Default to @NoSpot@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InstanceTypesData s) where
-    toHCL InstanceTypesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (InstanceTypesData s) where
+    toObject InstanceTypesData{..} = catMaybes
         [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "cpu_core_count" <$> TF.attribute _cpu_core_count
         , TF.assign "instance_charge_type" <$> TF.attribute _instance_charge_type
@@ -1107,8 +1100,8 @@ data InstancesData s = InstancesData {
     {- ^ (Optional) List several instances in the specified VSwitch. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InstancesData s) where
-    toHCL InstancesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (InstancesData s) where
+    toObject InstancesData{..} = catMaybes
         [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "ids" <$> TF.attribute _ids
         , TF.assign "image_id" <$> TF.attribute _image_id
@@ -1242,8 +1235,8 @@ data KeyPairsData s = KeyPairsData {
     {- ^ (Optional) The name of file that can save key pairs data source after running @terraform plan@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KeyPairsData s) where
-    toHCL KeyPairsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (KeyPairsData s) where
+    toObject KeyPairsData{..} = catMaybes
         [ TF.assign "finger_print" <$> TF.attribute _finger_print
         , TF.assign "name_regex" <$> TF.attribute _name_regex
         , TF.assign "output_file" <$> TF.attribute _output_file
@@ -1311,8 +1304,8 @@ data KmsKeysData s = KmsKeysData {
     {- ^ (Optional) The status of KMS key. Valid values: "Enabled", "Disabled", "PendingDeletion". Default to nil to get all keys. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsKeysData s) where
-    toHCL KmsKeysData{..} = TF.inline $ catMaybes
+instance TF.IsObject (KmsKeysData s) where
+    toObject KmsKeysData{..} = catMaybes
         [ TF.assign "description_regex" <$> TF.attribute _description_regex
         , TF.assign "ids" <$> TF.attribute _ids
         , TF.assign "output_file" <$> TF.attribute _output_file
@@ -1394,8 +1387,8 @@ datasource @alicloud_ram_account_aliases@ will replace.
 data RamAccountAliasData s = RamAccountAliasData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamAccountAliasData s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (RamAccountAliasData s) where
+    toObject _ = []
 
 ramAccountAliasData :: TF.DataSource P.AliCloud (RamAccountAliasData s)
 ramAccountAliasData =
@@ -1413,8 +1406,8 @@ data RamAccountAliasesData s = RamAccountAliasesData {
     {- ^ (Optional) The name of file that can save alias data source after running @terraform plan@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamAccountAliasesData s) where
-    toHCL RamAccountAliasesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamAccountAliasesData s) where
+    toObject RamAccountAliasesData{..} = catMaybes
         [ TF.assign "output_file" <$> TF.attribute _output_file
         ]
 
@@ -1456,8 +1449,8 @@ data RamGroupsData s = RamGroupsData {
     {- ^ (Optional) Limit search to specific the user name. Found the groups for the specified user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamGroupsData s) where
-    toHCL RamGroupsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamGroupsData s) where
+    toObject RamGroupsData{..} = catMaybes
         [ TF.assign "name_regex" <$> TF.attribute _name_regex
         , TF.assign "output_file" <$> TF.attribute _output_file
         , TF.assign "policy_name" <$> TF.attribute _policy_name
@@ -1552,8 +1545,8 @@ data RamPoliciesData s = RamPoliciesData {
     {- ^ (Optional) Limit search to specific the user name. Found the policies which attached with the specified user. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamPoliciesData s) where
-    toHCL RamPoliciesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamPoliciesData s) where
+    toObject RamPoliciesData{..} = catMaybes
         [ TF.assign "group_name" <$> TF.attribute _group_name
         , TF.assign "name_regex" <$> TF.attribute _name_regex
         , TF.assign "output_file" <$> TF.attribute _output_file
@@ -1669,8 +1662,8 @@ data RamRolesData s = RamRolesData {
     {- ^ (Optional) Limit search to specific the policy type. Valid items are @Custom@ and @System@ . If you set this parameter, you must set @policy_name@ at one time. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamRolesData s) where
-    toHCL RamRolesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamRolesData s) where
+    toObject RamRolesData{..} = catMaybes
         [ TF.assign "name_regex" <$> TF.attribute _name_regex
         , TF.assign "output_file" <$> TF.attribute _output_file
         , TF.assign "policy_name" <$> TF.attribute _policy_name
@@ -1769,8 +1762,8 @@ data RamUsersData s = RamUsersData {
     {- ^ (Optional) Limit search to specific the policy type. Valid items are @Custom@ and @System@ . If you set this parameter, you must set @policy_name@ at one time. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamUsersData s) where
-    toHCL RamUsersData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamUsersData s) where
+    toObject RamUsersData{..} = catMaybes
         [ TF.assign "group_name" <$> TF.attribute _group_name
         , TF.assign "name_regex" <$> TF.attribute _name_regex
         , TF.assign "output_file" <$> TF.attribute _output_file
@@ -1864,8 +1857,8 @@ data RegionsData s = RegionsData {
     {- ^ (Optional) The name of file that can save regions data source after running @terraform plan@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RegionsData s) where
-    toHCL RegionsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (RegionsData s) where
+    toObject RegionsData{..} = catMaybes
         [ TF.assign "current" <$> TF.attribute _current
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "output_file" <$> TF.attribute _output_file
@@ -1939,8 +1932,8 @@ data SecurityGroupRulesData s = SecurityGroupRulesData {
     {- ^ (Optional) Authorization policy. Can be either @accept@ or @drop@ . The default value is @accept@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecurityGroupRulesData s) where
-    toHCL SecurityGroupRulesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecurityGroupRulesData s) where
+    toObject SecurityGroupRulesData{..} = catMaybes
         [ TF.assign "direction" <$> TF.attribute _direction
         , TF.assign "group_id" <$> TF.attribute _group_id
         , TF.assign "ip_protocol" <$> TF.attribute _ip_protocol
@@ -2044,8 +2037,8 @@ data SecurityGroupsData s = SecurityGroupsData {
     {- ^ (Optional) Used to retrieve security groups belong to specified VPC ID. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecurityGroupsData s) where
-    toHCL SecurityGroupsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecurityGroupsData s) where
+    toObject SecurityGroupsData{..} = catMaybes
         [ TF.assign "name_regex" <$> TF.attribute _name_regex
         , TF.assign "output_file" <$> TF.attribute _output_file
         , TF.assign "vpc_id" <$> TF.attribute _vpc_id
@@ -2123,8 +2116,8 @@ data VpcsData s = VpcsData {
     {- ^ (Optional) Retrieving VPC according to the specified VSwitch. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpcsData s) where
-    toHCL VpcsData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpcsData s) where
+    toObject VpcsData{..} = catMaybes
         [ TF.assign "cidr_block" <$> TF.attribute _cidr_block
         , TF.assign "is_default" <$> TF.attribute _is_default
         , TF.assign "name_regex" <$> TF.attribute _name_regex
@@ -2244,8 +2237,8 @@ data VswitchesData s = VswitchesData {
     {- ^ (Optional) The availability zone for one vswitch. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VswitchesData s) where
-    toHCL VswitchesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (VswitchesData s) where
+    toObject VswitchesData{..} = catMaybes
         [ TF.assign "cidr_block" <$> TF.attribute _cidr_block
         , TF.assign "is_default" <$> TF.attribute _is_default
         , TF.assign "name_regex" <$> TF.attribute _name_regex
@@ -2354,8 +2347,8 @@ data ZonesData s = ZonesData {
     {- ^ - - (Optional) According to ECS spot type to filter all availability zones. Valid values: @NoSpot@ , @SpotWithPriceLimit@ and @SpotAsPriceGo@ . Default to @NoSpot@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ZonesData s) where
-    toHCL ZonesData{..} = TF.inline $ catMaybes
+instance TF.IsObject (ZonesData s) where
+    toObject ZonesData{..} = catMaybes
         [ TF.assign "available_disk_category" <$> TF.attribute _available_disk_category
         , TF.assign "available_instance_type" <$> TF.attribute _available_instance_type
         , TF.assign "available_resource_creation" <$> TF.attribute _available_resource_creation

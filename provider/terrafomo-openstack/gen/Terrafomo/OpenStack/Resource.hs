@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -747,8 +740,8 @@ data BlockstorageVolumeAttachV2Resource s = BlockstorageVolumeAttachV2Resource {
     {- ^ (Optional) An array of wwpn strings. Used for Fibre Channel connections. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BlockstorageVolumeAttachV2Resource s) where
-    toHCL BlockstorageVolumeAttachV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (BlockstorageVolumeAttachV2Resource s) where
+    toObject BlockstorageVolumeAttachV2Resource{..} = catMaybes
         [ TF.assign "attach_mode" <$> TF.attribute _attach_mode
         , TF.assign "device" <$> TF.attribute _device
         , TF.assign "host_name" <$> TF.attribute _host_name
@@ -949,8 +942,8 @@ data BlockstorageVolumeAttachV3Resource s = BlockstorageVolumeAttachV3Resource {
     {- ^ (Optional) An array of wwpn strings. Used for Fibre Channel connections. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BlockstorageVolumeAttachV3Resource s) where
-    toHCL BlockstorageVolumeAttachV3Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (BlockstorageVolumeAttachV3Resource s) where
+    toObject BlockstorageVolumeAttachV3Resource{..} = catMaybes
         [ TF.assign "attach_mode" <$> TF.attribute _attach_mode
         , TF.assign "device" <$> TF.attribute _device
         , TF.assign "host_name" <$> TF.attribute _host_name
@@ -1139,8 +1132,8 @@ data BlockstorageVolumeV1Resource s = BlockstorageVolumeV1Resource {
     {- ^ (Optional) The type of volume to create. Changing this creates a new volume. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BlockstorageVolumeV1Resource s) where
-    toHCL BlockstorageVolumeV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (BlockstorageVolumeV1Resource s) where
+    toObject BlockstorageVolumeV1Resource{..} = catMaybes
         [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "image_id" <$> TF.attribute _image_id
@@ -1283,8 +1276,8 @@ data BlockstorageVolumeV2Resource s = BlockstorageVolumeV2Resource {
     {- ^ (Optional) The type of volume to create. Changing this creates a new volume. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BlockstorageVolumeV2Resource s) where
-    toHCL BlockstorageVolumeV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (BlockstorageVolumeV2Resource s) where
+    toObject BlockstorageVolumeV2Resource{..} = catMaybes
         [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "consistency_group_id" <$> TF.attribute _consistency_group_id
         , TF.assign "description" <$> TF.attribute _description
@@ -1453,8 +1446,8 @@ data BlockstorageVolumeV3Resource s = BlockstorageVolumeV3Resource {
     {- ^ (Optional) The type of volume to create. Changing this creates a new volume. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BlockstorageVolumeV3Resource s) where
-    toHCL BlockstorageVolumeV3Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (BlockstorageVolumeV3Resource s) where
+    toObject BlockstorageVolumeV3Resource{..} = catMaybes
         [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "consistency_group_id" <$> TF.attribute _consistency_group_id
         , TF.assign "description" <$> TF.attribute _description
@@ -1627,8 +1620,8 @@ data ComputeFlavorV2Resource s = ComputeFlavorV2Resource {
     {- ^ (Required) The number of virtual CPUs to use. Changing this creates a new flavor. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeFlavorV2Resource s) where
-    toHCL ComputeFlavorV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeFlavorV2Resource s) where
+    toObject ComputeFlavorV2Resource{..} = catMaybes
         [ TF.assign "disk" <$> TF.attribute _disk
         , TF.assign "extra_specs" <$> TF.attribute _extra_specs
         , TF.assign "is_public" <$> TF.attribute _is_public
@@ -1745,8 +1738,8 @@ data ComputeFloatingipAssociateV2Resource s = ComputeFloatingipAssociateV2Resour
     {- ^ (Optional) In cases where the OpenStack environment does not automatically wait until the association has finished, set this option to have Terraform poll the instance until the floating IP has been associated. Defaults to false. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeFloatingipAssociateV2Resource s) where
-    toHCL ComputeFloatingipAssociateV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeFloatingipAssociateV2Resource s) where
+    toObject ComputeFloatingipAssociateV2Resource{..} = catMaybes
         [ TF.assign "fixed_ip" <$> TF.attribute _fixed_ip
         , TF.assign "floating_ip" <$> TF.attribute _floating_ip
         , TF.assign "instance_id" <$> TF.attribute _instance_id
@@ -1823,8 +1816,8 @@ data ComputeFloatingipV2Resource s = ComputeFloatingipV2Resource {
     {- ^ (Optional) The region in which to obtain the V2 Compute client. A Compute client is needed to create a floating IP that can be used with a compute instance. If omitted, the @region@ argument of the provider is used. Changing this creates a new floating IP (which may or may not have a different address). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeFloatingipV2Resource s) where
-    toHCL ComputeFloatingipV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeFloatingipV2Resource s) where
+    toObject ComputeFloatingipV2Resource{..} = catMaybes
         [ TF.assign "pool" <$> TF.attribute _pool
         , TF.assign "region" <$> TF.attribute _region
         ]
@@ -1909,8 +1902,8 @@ data ComputeInstanceV2Resource s = ComputeInstanceV2Resource {
     {- ^ (Optional) The user data to provide when launching the instance. Changing this creates a new server. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeInstanceV2Resource s) where
-    toHCL ComputeInstanceV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeInstanceV2Resource s) where
+    toObject ComputeInstanceV2Resource{..} = catMaybes
         [ TF.assign "admin_pass" <$> TF.attribute _admin_pass
         , TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "block_device" <$> TF.attribute _block_device
@@ -2191,8 +2184,8 @@ data ComputeKeypairV2Resource s = ComputeKeypairV2Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeKeypairV2Resource s) where
-    toHCL ComputeKeypairV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeKeypairV2Resource s) where
+    toObject ComputeKeypairV2Resource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "public_key" <$> TF.attribute _public_key
         , TF.assign "region" <$> TF.attribute _region
@@ -2269,8 +2262,8 @@ data ComputeSecgroupV2Resource s = ComputeSecgroupV2Resource {
     {- ^ (Optional) A rule describing how the security group operates. The rule object structure is documented below. Changing this updates the security group rules. As shown in the example above, multiple rule blocks may be used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeSecgroupV2Resource s) where
-    toHCL ComputeSecgroupV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeSecgroupV2Resource s) where
+    toObject ComputeSecgroupV2Resource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "region" <$> TF.attribute _region
@@ -2334,8 +2327,8 @@ data ComputeServergroupV2Resource s = ComputeServergroupV2Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeServergroupV2Resource s) where
-    toHCL ComputeServergroupV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeServergroupV2Resource s) where
+    toObject ComputeServergroupV2Resource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "policies" <$> TF.attribute _policies
         , TF.assign "region" <$> TF.attribute _region
@@ -2405,8 +2398,8 @@ data ComputeVolumeAttachV2Resource s = ComputeVolumeAttachV2Resource {
     {- ^ (Required) The ID of the Volume to attach to an Instance. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ComputeVolumeAttachV2Resource s) where
-    toHCL ComputeVolumeAttachV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ComputeVolumeAttachV2Resource s) where
+    toObject ComputeVolumeAttachV2Resource{..} = catMaybes
         [ TF.assign "device" <$> TF.attribute _device
         , TF.assign "instance_id" <$> TF.attribute _instance_id
         , TF.assign "region" <$> TF.attribute _region
@@ -2472,8 +2465,8 @@ data DbConfigurationV1Resource s = DbConfigurationV1Resource {
     {- ^ (Required) The region in which to create the db instance. Changing this creates a new instance. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbConfigurationV1Resource s) where
-    toHCL DbConfigurationV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DbConfigurationV1Resource s) where
+    toObject DbConfigurationV1Resource{..} = catMaybes
         [ TF.assign "configuration" <$> TF.attribute _configuration
         , TF.assign "datastore" <$> TF.attribute _datastore
         , TF.assign "description" <$> TF.attribute _description
@@ -2556,8 +2549,8 @@ data DbDatabaseV1Resource s = DbDatabaseV1Resource {
     {- ^ (Required) A unique name for the resource. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbDatabaseV1Resource s) where
-    toHCL DbDatabaseV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DbDatabaseV1Resource s) where
+    toObject DbDatabaseV1Resource{..} = catMaybes
         [ TF.assign "instance_id" <$> TF.attribute _instance_id
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -2614,8 +2607,8 @@ data DbInstanceV1Resource s = DbInstanceV1Resource {
     {- ^ (Optional) An array of username, password, host and databases. The user object structure is documented below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbInstanceV1Resource s) where
-    toHCL DbInstanceV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DbInstanceV1Resource s) where
+    toObject DbInstanceV1Resource{..} = catMaybes
         [ TF.assign "configuration_id" <$> TF.attribute _configuration_id
         , TF.assign "database" <$> TF.attribute _database
         , TF.assign "datastore" <$> TF.attribute _datastore
@@ -2770,8 +2763,8 @@ data DbUserV1Resource s = DbUserV1Resource {
     {- ^ (Required) User's password. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbUserV1Resource s) where
-    toHCL DbUserV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DbUserV1Resource s) where
+    toObject DbUserV1Resource{..} = catMaybes
         [ TF.assign "databases" <$> TF.attribute _databases
         , TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "name" <$> TF.attribute _name
@@ -2846,8 +2839,8 @@ data DnsRecordsetV2Resource s = DnsRecordsetV2Resource {
     {- ^ (Required) The ID of the zone in which to create the record set. Changing this creates a new DNS  record set. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsRecordsetV2Resource s) where
-    toHCL DnsRecordsetV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DnsRecordsetV2Resource s) where
+    toObject DnsRecordsetV2Resource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "records" <$> TF.attribute _records
@@ -2961,8 +2954,8 @@ data DnsZoneV2Resource s = DnsZoneV2Resource {
     {- ^ (Optional) Map of additional options. Changing this creates a new zone. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsZoneV2Resource s) where
-    toHCL DnsZoneV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DnsZoneV2Resource s) where
+    toObject DnsZoneV2Resource{..} = catMaybes
         [ TF.assign "attributes" <$> TF.attribute _attributes
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "email" <$> TF.attribute _email
@@ -3086,8 +3079,8 @@ data FwFirewallV1Resource s = FwFirewallV1Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FwFirewallV1Resource s) where
-    toHCL FwFirewallV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FwFirewallV1Resource s) where
+    toObject FwFirewallV1Resource{..} = catMaybes
         [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "associated_routers" <$> TF.attribute _associated_routers
         , TF.assign "description" <$> TF.attribute _description
@@ -3209,8 +3202,8 @@ data FwPolicyV1Resource s = FwPolicyV1Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FwPolicyV1Resource s) where
-    toHCL FwPolicyV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FwPolicyV1Resource s) where
+    toObject FwPolicyV1Resource{..} = catMaybes
         [ TF.assign "audited" <$> TF.attribute _audited
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -3326,8 +3319,8 @@ data FwRuleV1Resource s = FwRuleV1Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FwRuleV1Resource s) where
-    toHCL FwRuleV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FwRuleV1Resource s) where
+    toObject FwRuleV1Resource{..} = catMaybes
         [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "destination_ip_address" <$> TF.attribute _destination_ip_address
@@ -3490,8 +3483,8 @@ data IdentityProjectV3Resource s = IdentityProjectV3Resource {
     {- ^ (Optional) The region in which to obtain the V3 Keystone client. If omitted, the @region@ argument of the provider is used. Changing this creates a new User. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IdentityProjectV3Resource s) where
-    toHCL IdentityProjectV3Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IdentityProjectV3Resource s) where
+    toObject IdentityProjectV3Resource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "domain_id" <$> TF.attribute _domain_id
         , TF.assign "enabled" <$> TF.attribute _enabled
@@ -3598,8 +3591,8 @@ data IdentityRoleAssignmentV3Resource s = IdentityRoleAssignmentV3Resource {
     {- ^ (Optional; Required if @group_id@ is empty) The user to assign the role to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IdentityRoleAssignmentV3Resource s) where
-    toHCL IdentityRoleAssignmentV3Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IdentityRoleAssignmentV3Resource s) where
+    toObject IdentityRoleAssignmentV3Resource{..} = catMaybes
         [ TF.assign "domain_id" <$> TF.attribute _domain_id
         , TF.assign "group_id" <$> TF.attribute _group_id
         , TF.assign "project_id" <$> TF.attribute _project_id
@@ -3672,8 +3665,8 @@ data IdentityRoleV3Resource s = IdentityRoleV3Resource {
     {- ^ (Optional) The region in which to obtain the V3 Keystone client. If omitted, the @region@ argument of the provider is used. Changing this creates a new Role. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IdentityRoleV3Resource s) where
-    toHCL IdentityRoleV3Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IdentityRoleV3Resource s) where
+    toObject IdentityRoleV3Resource{..} = catMaybes
         [ TF.assign "domain_id" <$> TF.attribute _domain_id
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "region" <$> TF.attribute _region
@@ -3746,8 +3739,8 @@ data IdentityUserV3Resource s = IdentityUserV3Resource {
     {- ^ (Optional) The region in which to obtain the V3 Keystone client. If omitted, the @region@ argument of the provider is used. Changing this creates a new User. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IdentityUserV3Resource s) where
-    toHCL IdentityUserV3Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (IdentityUserV3Resource s) where
+    toObject IdentityUserV3Resource{..} = catMaybes
         [ TF.assign "default_project_id" <$> TF.attribute _default_project_id
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "domain_id" <$> TF.attribute _domain_id
@@ -3945,8 +3938,8 @@ data ImagesImageV2Resource s = ImagesImageV2Resource {
     {- ^ (Optional) The visibility of the image. Must be one of "public", "private", "community", or "shared". The ability to set the visibility depends upon the configuration of the OpenStack cloud. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImagesImageV2Resource s) where
-    toHCL ImagesImageV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ImagesImageV2Resource s) where
+    toObject ImagesImageV2Resource{..} = catMaybes
         [ TF.assign "container_format" <$> TF.attribute _container_format
         , TF.assign "disk_format" <$> TF.attribute _disk_format
         , TF.assign "image_cache_path" <$> TF.attribute _image_cache_path
@@ -4164,8 +4157,8 @@ data LbListenerV2Resource s = LbListenerV2Resource {
     {- ^ (Optional) Required for admins. The UUID of the tenant who owns the Listener.  Only administrative users can specify a tenant UUID other than their own. Changing this creates a new Listener. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbListenerV2Resource s) where
-    toHCL LbListenerV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LbListenerV2Resource s) where
+    toObject LbListenerV2Resource{..} = catMaybes
         [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "connection_limit" <$> TF.attribute _connection_limit
         , TF.assign "default_pool_id" <$> TF.attribute _default_pool_id
@@ -4333,8 +4326,8 @@ data LbLoadbalancerV2Resource s = LbLoadbalancerV2Resource {
     {- ^ (Required) The network on which to allocate the Loadbalancer's address. A tenant can only create Loadbalancers on networks authorized by policy (e.g. networks that belong to them or networks that are shared).  Changing this creates a new loadbalancer. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbLoadbalancerV2Resource s) where
-    toHCL LbLoadbalancerV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LbLoadbalancerV2Resource s) where
+    toObject LbLoadbalancerV2Resource{..} = catMaybes
         [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "flavor" <$> TF.attribute _flavor
@@ -4465,8 +4458,8 @@ data LbMemberV1Resource s = LbMemberV1Resource {
     {- ^ (Optional) The owner of the member. Required if admin wants to create a member for another tenant. Changing this creates a new member. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbMemberV1Resource s) where
-    toHCL LbMemberV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LbMemberV1Resource s) where
+    toObject LbMemberV1Resource{..} = catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "pool_id" <$> TF.attribute _pool_id
@@ -4565,8 +4558,8 @@ data LbMemberV2Resource s = LbMemberV2Resource {
     {- ^ (Optional)  A positive integer value that indicates the relative portion of traffic that this member should receive from the pool. For example, a member with a weight of 10 receives five times as much traffic as a member with a weight of 2. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbMemberV2Resource s) where
-    toHCL LbMemberV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LbMemberV2Resource s) where
+    toObject LbMemberV2Resource{..} = catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "name" <$> TF.attribute _name
@@ -4697,8 +4690,8 @@ data LbMonitorV1Resource s = LbMonitorV1Resource {
     {- ^ (Optional) Required for HTTP(S) types. URI path that will be accessed if monitor type is HTTP or HTTPS. Changing this updates the url_path of the existing monitor. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbMonitorV1Resource s) where
-    toHCL LbMonitorV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LbMonitorV1Resource s) where
+    toObject LbMonitorV1Resource{..} = catMaybes
         [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "delay" <$> TF.attribute _delay
         , TF.assign "expected_codes" <$> TF.attribute _expected_codes
@@ -4838,8 +4831,8 @@ data LbMonitorV2Resource s = LbMonitorV2Resource {
     {- ^ (Optional) Required for HTTP(S) types. URI path that will be accessed if monitor type is HTTP or HTTPS. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbMonitorV2Resource s) where
-    toHCL LbMonitorV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LbMonitorV2Resource s) where
+    toObject LbMonitorV2Resource{..} = catMaybes
         [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "delay" <$> TF.attribute _delay
         , TF.assign "expected_codes" <$> TF.attribute _expected_codes
@@ -5002,8 +4995,8 @@ data LbPoolV1Resource s = LbPoolV1Resource {
     {- ^ (Optional) The owner of the pool. Required if admin wants to create a pool member for another tenant. Changing this creates a new pool. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbPoolV1Resource s) where
-    toHCL LbPoolV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LbPoolV1Resource s) where
+    toObject LbPoolV1Resource{..} = catMaybes
         [ TF.assign "lb_method" <$> TF.attribute _lb_method
         , TF.assign "lb_provider" <$> TF.attribute _lb_provider
         , TF.assign "member" <$> TF.attribute _member
@@ -5127,15 +5120,15 @@ data LbPoolV2Resource s = LbPoolV2Resource {
     , _persistence     :: !(TF.Attr s P.Text)
     {- ^ - Omit this field to prevent session persistence.  Indicates whether connections in the same session will be processed by the same Pool member or not. Changing this creates a new pool. -}
     , _protocol        :: !(TF.Attr s P.Text)
-    {- ^ = (Required) The protocol - can either be TCP, HTTP or HTTPS. Changing this creates a new pool. -}
+    {- ^ = (Required) The protocol - can either be TCP, HTTP, HTTPS or PROXY. Changing this creates a new pool. -}
     , _region          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The region in which to obtain the V2 Networking client. A Networking client is needed to create an . If omitted, the @region@ argument of the provider is used. Changing this creates a new pool. -}
     , _tenant_id       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Required for admins. The UUID of the tenant who owns the pool.  Only administrative users can specify a tenant UUID other than their own. Changing this creates a new pool. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbPoolV2Resource s) where
-    toHCL LbPoolV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LbPoolV2Resource s) where
+    toObject LbPoolV2Resource{..} = catMaybes
         [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "lb_method" <$> TF.attribute _lb_method
@@ -5286,8 +5279,8 @@ data LbVipV1Resource s = LbVipV1Resource {
     {- ^ (Optional) The owner of the vip. Required if admin wants to create a vip member for another tenant. Changing this creates a new vip. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbVipV1Resource s) where
-    toHCL LbVipV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LbVipV1Resource s) where
+    toObject LbVipV1Resource{..} = catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "conn_limit" <$> TF.attribute _conn_limit
@@ -5444,8 +5437,8 @@ data NetworkingFloatingipAssociateV2Resource s = NetworkingFloatingipAssociateV2
     {- ^ (Optional) The region in which to obtain the V2 Networking client. A Networking client is needed to create a floating IP that can be used with another networking resource, such as a load balancer. If omitted, the @region@ argument of the provider is used. Changing this creates a new floating IP (which may or may not have a different address). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingFloatingipAssociateV2Resource s) where
-    toHCL NetworkingFloatingipAssociateV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingFloatingipAssociateV2Resource s) where
+    toObject NetworkingFloatingipAssociateV2Resource{..} = catMaybes
         [ TF.assign "floating_ip" <$> TF.attribute _floating_ip
         , TF.assign "port_id" <$> TF.attribute _port_id
         , TF.assign "region" <$> TF.attribute _region
@@ -5492,7 +5485,9 @@ IP resources, but only compute floating IPs can be used with compute
 instances.
 -}
 data NetworkingFloatingipV2Resource s = NetworkingFloatingipV2Resource {
-      _fixed_ip    :: !(TF.Attr s P.Text)
+      _address     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The actual/specific floating IP to obtain. By default, non-admin users are not able to specify a floating IP, so you must either be an admin user or have had a custom policy or role applied to your OpenStack user or project. -}
+    , _fixed_ip    :: !(TF.Attr s P.Text)
     {- ^ - Fixed IP of the port to associate with this floating IP. Required if the port has multiple fixed IPs. -}
     , _pool        :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the pool from which to obtain the floating IP. Changing this creates a new floating IP. -}
@@ -5508,9 +5503,10 @@ data NetworkingFloatingipV2Resource s = NetworkingFloatingipV2Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingFloatingipV2Resource s) where
-    toHCL NetworkingFloatingipV2Resource{..} = TF.inline $ catMaybes
-        [ TF.assign "fixed_ip" <$> TF.attribute _fixed_ip
+instance TF.IsObject (NetworkingFloatingipV2Resource s) where
+    toObject NetworkingFloatingipV2Resource{..} = catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "fixed_ip" <$> TF.attribute _fixed_ip
         , TF.assign "pool" <$> TF.attribute _pool
         , TF.assign "port_id" <$> TF.attribute _port_id
         , TF.assign "region" <$> TF.attribute _region
@@ -5518,6 +5514,11 @@ instance TF.ToHCL (NetworkingFloatingipV2Resource s) where
         , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         , TF.assign "value_specs" <$> TF.attribute _value_specs
         ]
+
+instance P.HasAddress (NetworkingFloatingipV2Resource s) (TF.Attr s P.Text) where
+    address =
+        lens (_address :: NetworkingFloatingipV2Resource s -> TF.Attr s P.Text)
+             (\s a -> s { _address = a } :: NetworkingFloatingipV2Resource s)
 
 instance P.HasFixedIp (NetworkingFloatingipV2Resource s) (TF.Attr s P.Text) where
     fixedIp =
@@ -5586,7 +5587,8 @@ networkingFloatingipV2Resource :: TF.Resource P.OpenStack (NetworkingFloatingipV
 networkingFloatingipV2Resource =
     TF.newResource "openstack_networking_floatingip_v2" $
         NetworkingFloatingipV2Resource {
-              _fixed_ip = TF.Nil
+              _address = TF.Nil
+            , _fixed_ip = TF.Nil
             , _pool = TF.Nil
             , _port_id = TF.Nil
             , _region = TF.Nil
@@ -5620,8 +5622,8 @@ data NetworkingNetworkV2Resource s = NetworkingNetworkV2Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingNetworkV2Resource s) where
-    toHCL NetworkingNetworkV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingNetworkV2Resource s) where
+    toObject NetworkingNetworkV2Resource{..} = catMaybes
         [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "availability_zone_hints" <$> TF.attribute _availability_zone_hints
         , TF.assign "external" <$> TF.attribute _external
@@ -5757,8 +5759,8 @@ data NetworkingPortV2Resource s = NetworkingPortV2Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingPortV2Resource s) where
-    toHCL NetworkingPortV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingPortV2Resource s) where
+    toObject NetworkingPortV2Resource{..} = catMaybes
         [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "allowed_address_pairs" <$> TF.attribute _allowed_address_pairs
         , TF.assign "device_id" <$> TF.attribute _device_id
@@ -5928,8 +5930,8 @@ data NetworkingRouterInterfaceV2Resource s = NetworkingRouterInterfaceV2Resource
     {- ^ - ID of the subnet this interface connects to. Changing this creates a new router interface. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingRouterInterfaceV2Resource s) where
-    toHCL NetworkingRouterInterfaceV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingRouterInterfaceV2Resource s) where
+    toObject NetworkingRouterInterfaceV2Resource{..} = catMaybes
         [ TF.assign "port_id" <$> TF.attribute _port_id
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "router_id" <$> TF.attribute _router_id
@@ -5993,8 +5995,8 @@ data NetworkingRouterRouteV2Resource s = NetworkingRouterRouteV2Resource {
     {- ^ (Required) ID of the router this routing entry belongs to. Changing this creates a new routing entry. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingRouterRouteV2Resource s) where
-    toHCL NetworkingRouterRouteV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingRouterRouteV2Resource s) where
+    toObject NetworkingRouterRouteV2Resource{..} = catMaybes
         [ TF.assign "destination_cidr" <$> TF.attribute _destination_cidr
         , TF.assign "next_hop" <$> TF.attribute _next_hop
         , TF.assign "region" <$> TF.attribute _region
@@ -6072,8 +6074,8 @@ data NetworkingRouterV2Resource s = NetworkingRouterV2Resource {
     {- ^ (Optional) Map of additional vendor-specific options. Supported options are described below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingRouterV2Resource s) where
-    toHCL NetworkingRouterV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingRouterV2Resource s) where
+    toObject NetworkingRouterV2Resource{..} = catMaybes
         [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "availability_zone_hints" <$> TF.attribute _availability_zone_hints
         , TF.assign "distributed" <$> TF.attribute _distributed
@@ -6231,8 +6233,8 @@ data NetworkingSecgroupRuleV2Resource s = NetworkingSecgroupRuleV2Resource {
     {- ^ (Optional) The owner of the security group. Required if admin wants to create a port for another tenant. Changing this creates a new security group rule. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingSecgroupRuleV2Resource s) where
-    toHCL NetworkingSecgroupRuleV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingSecgroupRuleV2Resource s) where
+    toObject NetworkingSecgroupRuleV2Resource{..} = catMaybes
         [ TF.assign "direction" <$> TF.attribute _direction
         , TF.assign "ethertype" <$> TF.attribute _ethertype
         , TF.assign "port_range_max" <$> TF.attribute _port_range_max
@@ -6360,8 +6362,8 @@ data NetworkingSecgroupV2Resource s = NetworkingSecgroupV2Resource {
     {- ^ (Optional) The owner of the security group. Required if admin wants to create a port for another tenant. Changing this creates a new security group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingSecgroupV2Resource s) where
-    toHCL NetworkingSecgroupV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingSecgroupV2Resource s) where
+    toObject NetworkingSecgroupV2Resource{..} = catMaybes
         [ TF.assign "delete_default_rules" <$> TF.attribute _delete_default_rules
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -6437,8 +6439,8 @@ data NetworkingSubnetRouteV2Resource s = NetworkingSubnetRouteV2Resource {
     {- ^ (Required) ID of the subnet this routing entry belongs to. Changing this creates a new routing entry. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingSubnetRouteV2Resource s) where
-    toHCL NetworkingSubnetRouteV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingSubnetRouteV2Resource s) where
+    toObject NetworkingSubnetRouteV2Resource{..} = catMaybes
         [ TF.assign "destination_cidr" <$> TF.attribute _destination_cidr
         , TF.assign "next_hop" <$> TF.attribute _next_hop
         , TF.assign "region" <$> TF.attribute _region
@@ -6526,8 +6528,8 @@ data NetworkingSubnetV2Resource s = NetworkingSubnetV2Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingSubnetV2Resource s) where
-    toHCL NetworkingSubnetV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingSubnetV2Resource s) where
+    toObject NetworkingSubnetV2Resource{..} = catMaybes
         [ TF.assign "allocation_pools" <$> TF.attribute _allocation_pools
         , TF.assign "cidr" <$> TF.attribute _cidr
         , TF.assign "dns_nameservers" <$> TF.attribute _dns_nameservers
@@ -6737,8 +6739,8 @@ data NetworkingSubnetpoolV2Resource s = NetworkingSubnetpoolV2Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkingSubnetpoolV2Resource s) where
-    toHCL NetworkingSubnetpoolV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkingSubnetpoolV2Resource s) where
+    toObject NetworkingSubnetpoolV2Resource{..} = catMaybes
         [ TF.assign "address_scope_id" <$> TF.attribute _address_scope_id
         , TF.assign "default_prefixlen" <$> TF.attribute _default_prefixlen
         , TF.assign "default_quota" <$> TF.attribute _default_quota
@@ -6914,8 +6916,8 @@ data ObjectstorageContainerV1Resource s = ObjectstorageContainerV1Resource {
     {- ^ (Optional) The region in which to create the container. If omitted, the @region@ argument of the provider is used. Changing this creates a new container. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ObjectstorageContainerV1Resource s) where
-    toHCL ObjectstorageContainerV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ObjectstorageContainerV1Resource s) where
+    toObject ObjectstorageContainerV1Resource{..} = catMaybes
         [ TF.assign "container_read" <$> TF.attribute _container_read
         , TF.assign "container_sync_key" <$> TF.attribute _container_sync_key
         , TF.assign "container_sync_to" <$> TF.attribute _container_sync_to
@@ -7051,8 +7053,8 @@ data ObjectstorageObjectV1Resource s = ObjectstorageObjectV1Resource {
     {- ^ (Optional) A string representing the local path of a file which will be used as the object's content. Conflicts with @source@ and @copy_from@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ObjectstorageObjectV1Resource s) where
-    toHCL ObjectstorageObjectV1Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ObjectstorageObjectV1Resource s) where
+    toObject ObjectstorageObjectV1Resource{..} = catMaybes
         [ TF.assign "container_name" <$> TF.attribute _container_name
         , TF.assign "content" <$> TF.attribute _content
         , TF.assign "content_disposition" <$> TF.attribute _content_disposition
@@ -7237,8 +7239,8 @@ data VpnaasEndpointGroupV2Resource s = VpnaasEndpointGroupV2Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpnaasEndpointGroupV2Resource s) where
-    toHCL VpnaasEndpointGroupV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpnaasEndpointGroupV2Resource s) where
+    toObject VpnaasEndpointGroupV2Resource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "endpoints" <$> TF.attribute _endpoints
         , TF.assign "name" <$> TF.attribute _name
@@ -7346,8 +7348,8 @@ data VpnaasIkePolicyV2Resource s = VpnaasIkePolicyV2Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpnaasIkePolicyV2Resource s) where
-    toHCL VpnaasIkePolicyV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpnaasIkePolicyV2Resource s) where
+    toObject VpnaasIkePolicyV2Resource{..} = catMaybes
         [ TF.assign "auth_algorithm" <$> TF.attribute _auth_algorithm
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "encryption_algorithm" <$> TF.attribute _encryption_algorithm
@@ -7505,8 +7507,8 @@ data VpnaasIpsecPolicyV2Resource s = VpnaasIpsecPolicyV2Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpnaasIpsecPolicyV2Resource s) where
-    toHCL VpnaasIpsecPolicyV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpnaasIpsecPolicyV2Resource s) where
+    toObject VpnaasIpsecPolicyV2Resource{..} = catMaybes
         [ TF.assign "auth_algorithm" <$> TF.attribute _auth_algorithm
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "encapsulation_mode" <$> TF.attribute _encapsulation_mode
@@ -7648,8 +7650,8 @@ data VpnaasServiceV2Resource s = VpnaasServiceV2Resource {
     {- ^ (Optional) Map of additional options. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpnaasServiceV2Resource s) where
-    toHCL VpnaasServiceV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpnaasServiceV2Resource s) where
+    toObject VpnaasServiceV2Resource{..} = catMaybes
         [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -7792,8 +7794,8 @@ data VpnaasSiteConnectionV2Resource s = VpnaasSiteConnectionV2Resource {
     {- ^ (Required) The ID of the VPN service. Changing this creates a new connection. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpnaasSiteConnectionV2Resource s) where
-    toHCL VpnaasSiteConnectionV2Resource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpnaasSiteConnectionV2Resource s) where
+    toObject VpnaasSiteConnectionV2Resource{..} = catMaybes
         [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "dpd" <$> TF.attribute _dpd

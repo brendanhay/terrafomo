@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -102,8 +95,8 @@ Use this data source to retrieve information about a Github's IP addresses.
 data IpRangesData s = IpRangesData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpRangesData s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (IpRangesData s) where
+    toObject _ = []
 
 instance s ~ s' => P.HasComputedGit (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
     computedGit x = TF.compute (TF.refKey x) "git"
@@ -129,8 +122,8 @@ data TeamData s = TeamData {
     {- ^ (Required) The team slug. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TeamData s) where
-    toHCL TeamData{..} = TF.inline $ catMaybes
+instance TF.IsObject (TeamData s) where
+    toObject TeamData{..} = catMaybes
         [ TF.assign "slug" <$> TF.attribute _slug
         ]
 
@@ -178,8 +171,8 @@ data UserData s = UserData {
     {- ^ (Required) The username. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserData s) where
-    toHCL UserData{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserData s) where
+    toObject UserData{..} = catMaybes
         [ TF.assign "username" <$> TF.attribute _username
         ]
 

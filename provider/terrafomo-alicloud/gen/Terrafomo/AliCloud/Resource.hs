@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -93,6 +86,12 @@ module Terrafomo.AliCloud.Resource
     , EssScheduleResource (..)
     , essScheduleResource
 
+    , FcFunctionResource (..)
+    , fcFunctionResource
+
+    , FcServiceResource (..)
+    , fcServiceResource
+
     , ForwardResource (..)
     , forwardResource
 
@@ -128,6 +127,12 @@ module Terrafomo.AliCloud.Resource
 
     , OssBucketResource (..)
     , ossBucketResource
+
+    , OtsInstanceAttachmentResource (..)
+    , otsInstanceAttachmentResource
+
+    , OtsInstanceResource (..)
+    , otsInstanceResource
 
     , OtsTableResource (..)
     , otsTableResource
@@ -210,6 +215,7 @@ module Terrafomo.AliCloud.Resource
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasAccessPointId (..)
+    , P.HasAccessedBy (..)
     , P.HasAccountAlias (..)
     , P.HasAccountName (..)
     , P.HasAcl (..)
@@ -237,6 +243,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasClusterCaCert (..)
     , P.HasClusterName (..)
     , P.HasComments (..)
+    , P.HasConfig (..)
     , P.HasConnectionPrefix (..)
     , P.HasContactGroups (..)
     , P.HasContent (..)
@@ -277,13 +284,16 @@ module Terrafomo.AliCloud.Resource
     , P.HasExternalIp (..)
     , P.HasExternalPort (..)
     , P.HasFieldSearch (..)
+    , P.HasFilename (..)
     , P.HasForce (..)
     , P.HasForceDelete (..)
     , P.HasForwardTableId (..)
     , P.HasFrontendPort (..)
     , P.HasFullText (..)
+    , P.HasFunction (..)
     , P.HasGroupId (..)
     , P.HasGroupName (..)
+    , P.HasHandler (..)
     , P.HasHealthCheck (..)
     , P.HasHealthCheckConnectPort (..)
     , P.HasHealthCheckDomain (..)
@@ -312,6 +322,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasInternalIp (..)
     , P.HasInternalPort (..)
     , P.HasInternet (..)
+    , P.HasInternetAccess (..)
     , P.HasInternetChargeType (..)
     , P.HasInternetMaxBandwidthIn (..)
     , P.HasInternetMaxBandwidthOut (..)
@@ -331,6 +342,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasLoadBalancerId (..)
     , P.HasLoadbalancerIds (..)
     , P.HasLogBackup (..)
+    , P.HasLogConfig (..)
     , P.HasLogRetentionPeriod (..)
     , P.HasLogging (..)
     , P.HasLoggingIsenable (..)
@@ -340,6 +352,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasMasterInstanceType (..)
     , P.HasMaxSize (..)
     , P.HasMaxVersion (..)
+    , P.HasMemorySize (..)
     , P.HasMetric (..)
     , P.HasMfaBindRequired (..)
     , P.HasMinSize (..)
@@ -360,6 +373,8 @@ module Terrafomo.AliCloud.Resource
     , P.HasOppositeRegion (..)
     , P.HasOppositeRouterId (..)
     , P.HasOppositeRouterType (..)
+    , P.HasOssBucket (..)
+    , P.HasOssKey (..)
     , P.HasPassword (..)
     , P.HasPasswordResetRequired (..)
     , P.HasPeriod (..)
@@ -393,6 +408,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasRouterId (..)
     , P.HasRouterType (..)
     , P.HasRouting (..)
+    , P.HasRuntime (..)
     , P.HasScalingConfigurationName (..)
     , P.HasScalingGroupId (..)
     , P.HasScalingGroupName (..)
@@ -408,6 +424,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasServerGroupId (..)
     , P.HasServerSideEncryption (..)
     , P.HasServers (..)
+    , P.HasService (..)
     , P.HasServiceCidr (..)
     , P.HasServices (..)
     , P.HasShardCount (..)
@@ -417,6 +434,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasSnatIp (..)
     , P.HasSnatTableId (..)
     , P.HasSource (..)
+    , P.HasSourceArn (..)
     , P.HasSourceGroupOwnerAccount (..)
     , P.HasSourcePort (..)
     , P.HasSourceSecurityGroupId (..)
@@ -442,6 +460,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasTemplate (..)
     , P.HasThreshold (..)
     , P.HasTimeToLive (..)
+    , P.HasTimeout (..)
     , P.HasTopic (..)
     , P.HasTriggeredCount (..)
     , P.HasTtl (..)
@@ -453,7 +472,9 @@ module Terrafomo.AliCloud.Resource
     , P.HasUserNames (..)
     , P.HasValue (..)
     , P.HasVersion (..)
+    , P.HasVpcConfig (..)
     , P.HasVpcId (..)
+    , P.HasVpcName (..)
     , P.HasVswitchId (..)
     , P.HasVswitchIds (..)
     , P.HasWebsite (..)
@@ -466,6 +487,7 @@ module Terrafomo.AliCloud.Resource
 
     -- ** Computed Attributes
     , P.HasComputedAccessPointId (..)
+    , P.HasComputedAccessedBy (..)
     , P.HasComputedAccountAlias (..)
     , P.HasComputedAccountName (..)
     , P.HasComputedAcl (..)
@@ -503,6 +525,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedClusterCaCert (..)
     , P.HasComputedClusterName (..)
     , P.HasComputedComments (..)
+    , P.HasComputedConfig (..)
     , P.HasComputedConnectionPrefix (..)
     , P.HasComputedConnectionString (..)
     , P.HasComputedConnections (..)
@@ -556,6 +579,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedExternalPort (..)
     , P.HasComputedExtranetEndpoint (..)
     , P.HasComputedFieldSearch (..)
+    , P.HasComputedFilename (..)
     , P.HasComputedFingerprint (..)
     , P.HasComputedForce (..)
     , P.HasComputedForceDelete (..)
@@ -564,8 +588,10 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedForwardTableIds (..)
     , P.HasComputedFrontendPort (..)
     , P.HasComputedFullText (..)
+    , P.HasComputedFunction (..)
     , P.HasComputedGroupId (..)
     , P.HasComputedGroupName (..)
+    , P.HasComputedHandler (..)
     , P.HasComputedHealthCheck (..)
     , P.HasComputedHealthCheckConnectPort (..)
     , P.HasComputedHealthCheckDomain (..)
@@ -597,6 +623,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedInternalIp (..)
     , P.HasComputedInternalPort (..)
     , P.HasComputedInternet (..)
+    , P.HasComputedInternetAccess (..)
     , P.HasComputedInternetChargeType (..)
     , P.HasComputedInternetMaxBandwidthIn (..)
     , P.HasComputedInternetMaxBandwidthOut (..)
@@ -611,6 +638,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedKeyNamePrefix (..)
     , P.HasComputedKeyUsage (..)
     , P.HasComputedKubeConfig (..)
+    , P.HasComputedLastModified (..)
     , P.HasComputedLatestImage (..)
     , P.HasComputedLaunchExpirationTime (..)
     , P.HasComputedLaunchTime (..)
@@ -620,6 +648,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedLocation (..)
     , P.HasComputedLocked (..)
     , P.HasComputedLogBackup (..)
+    , P.HasComputedLogConfig (..)
     , P.HasComputedLogRetentionPeriod (..)
     , P.HasComputedLogging (..)
     , P.HasComputedLoggingIsenable (..)
@@ -631,6 +660,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedMasterUserName (..)
     , P.HasComputedMaxSize (..)
     , P.HasComputedMaxVersion (..)
+    , P.HasComputedMemorySize (..)
     , P.HasComputedMetric (..)
     , P.HasComputedMfaBindRequired (..)
     , P.HasComputedMinSize (..)
@@ -654,6 +684,8 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedOppositeRouterId (..)
     , P.HasComputedOppositeRouterType (..)
     , P.HasComputedOptimizeEnable (..)
+    , P.HasComputedOssBucket (..)
+    , P.HasComputedOssKey (..)
     , P.HasComputedOwner (..)
     , P.HasComputedPage404Config (..)
     , P.HasComputedPageCompressEnable (..)
@@ -696,6 +728,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedRouterId (..)
     , P.HasComputedRouterType (..)
     , P.HasComputedRouting (..)
+    , P.HasComputedRuntime (..)
     , P.HasComputedScalingConfigurationName (..)
     , P.HasComputedScalingGroupId (..)
     , P.HasComputedScalingGroupName (..)
@@ -711,6 +744,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedServerGroupId (..)
     , P.HasComputedServerSideEncryption (..)
     , P.HasComputedServers (..)
+    , P.HasComputedService (..)
     , P.HasComputedServiceCidr (..)
     , P.HasComputedServices (..)
     , P.HasComputedShardCount (..)
@@ -724,6 +758,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedSnatTableId (..)
     , P.HasComputedSnatTableIds (..)
     , P.HasComputedSource (..)
+    , P.HasComputedSourceArn (..)
     , P.HasComputedSourceGroupOwnerAccount (..)
     , P.HasComputedSourcePort (..)
     , P.HasComputedSourceSecurityGroupId (..)
@@ -751,6 +786,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedTemplate (..)
     , P.HasComputedThreshold (..)
     , P.HasComputedTimeToLive (..)
+    , P.HasComputedTimeout (..)
     , P.HasComputedTopic (..)
     , P.HasComputedTriggeredCount (..)
     , P.HasComputedTtl (..)
@@ -763,7 +799,9 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedValue (..)
     , P.HasComputedVersion (..)
     , P.HasComputedVideoSeekEnable (..)
+    , P.HasComputedVpcConfig (..)
     , P.HasComputedVpcId (..)
+    , P.HasComputedVpcName (..)
     , P.HasComputedVswitchId (..)
     , P.HasComputedVswitchIds (..)
     , P.HasComputedWebsite (..)
@@ -821,8 +859,8 @@ data CdnDomainResource s = CdnDomainResource {
     {- ^ (Optional, Type: list) Sources of the accelerated domain. It's a list of domain names or IP address and consists of at most 20 items. You must set this parameter when @cdn_type@ value is not @liveStream@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CdnDomainResource s) where
-    toHCL CdnDomainResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CdnDomainResource s) where
+    toObject CdnDomainResource{..} = catMaybes
         [ TF.assign "cdn_type" <$> TF.attribute _cdn_type
         , TF.assign "domain_name" <$> TF.attribute _domain_name
         , TF.assign "scope" <$> TF.attribute _scope
@@ -962,8 +1000,8 @@ data CmsAlarmResource s = CmsAlarmResource {
     {- ^ - Number of consecutive times it has been detected that the values exceed the threshold. Default to 3. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CmsAlarmResource s) where
-    toHCL CmsAlarmResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CmsAlarmResource s) where
+    toObject CmsAlarmResource{..} = catMaybes
         [ TF.assign "contact_groups" <$> TF.attribute _contact_groups
         , TF.assign "dimensions" <$> TF.attribute _dimensions
         , TF.assign "enabled" <$> TF.attribute _enabled
@@ -1138,8 +1176,8 @@ update it.
 data ContainerClusterResource s = ContainerClusterResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ContainerClusterResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (ContainerClusterResource s) where
+    toObject _ = []
 
 containerClusterResource :: TF.Resource P.AliCloud (ContainerClusterResource s)
 containerClusterResource =
@@ -1177,8 +1215,8 @@ data CsApplicationResource s = CsApplicationResource {
     {- ^ - The application deploying version. Each updating, it must be different with current. Default to "1.0" -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CsApplicationResource s) where
-    toHCL CsApplicationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CsApplicationResource s) where
+    toObject CsApplicationResource{..} = catMaybes
         [ TF.assign "blue_green" <$> TF.attribute _blue_green
         , TF.assign "blue_green_confirm" <$> TF.attribute _blue_green_confirm
         , TF.assign "cluster_name" <$> TF.attribute _cluster_name
@@ -1358,8 +1396,8 @@ data CsKubernetesResource s = CsKubernetesResource {
     {- ^ - The worker node number of the kubernetes cluster. Default to 3. It is limited up to 50 and if you want to enlarge it, please apply white list or contact with us. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CsKubernetesResource s) where
-    toHCL CsKubernetesResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CsKubernetesResource s) where
+    toObject CsKubernetesResource{..} = catMaybes
         [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "client_cert" <$> TF.attribute _client_cert
         , TF.assign "client_key" <$> TF.attribute _client_key
@@ -1683,8 +1721,8 @@ data CsSwarmResource s = CsSwarmResource {
     {- ^ (Required, Force new resource) The password of ECS instance node. If it is not specified, the container cluster's network mode will be @Classic@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CsSwarmResource s) where
-    toHCL CsSwarmResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (CsSwarmResource s) where
+    toObject CsSwarmResource{..} = catMaybes
         [ TF.assign "cidr_block" <$> TF.attribute _cidr_block
         , TF.assign "disk_category" <$> TF.attribute _disk_category
         , TF.assign "disk_size" <$> TF.attribute _disk_size
@@ -1870,8 +1908,8 @@ data DbAccountPrivilegeResource s = DbAccountPrivilegeResource {
     {- ^ - The privilege of one account access database. Valid values: ["ReadOnly", "ReadWrite"]. Default to "ReadOnly". -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbAccountPrivilegeResource s) where
-    toHCL DbAccountPrivilegeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DbAccountPrivilegeResource s) where
+    toObject DbAccountPrivilegeResource{..} = catMaybes
         [ TF.assign "account_name" <$> TF.attribute _account_name
         , TF.assign "db_names" <$> TF.attribute _db_names
         , TF.assign "instance_id" <$> TF.attribute _instance_id
@@ -1941,8 +1979,8 @@ data DbAccountResource s = DbAccountResource {
     {- ^ - Privilege type of account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbAccountResource s) where
-    toHCL DbAccountResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DbAccountResource s) where
+    toObject DbAccountResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "instance_id" <$> TF.attribute _instance_id
         , TF.assign "name" <$> TF.attribute _name
@@ -2027,8 +2065,8 @@ data DbBackupPolicyResource s = DbBackupPolicyResource {
     {- ^ (Optional) Instance backup retention days. Valid values: [7-730]. Default to 7. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbBackupPolicyResource s) where
-    toHCL DbBackupPolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DbBackupPolicyResource s) where
+    toObject DbBackupPolicyResource{..} = catMaybes
         [ TF.assign "backup_period" <$> TF.attribute _backup_period
         , TF.assign "backup_time" <$> TF.attribute _backup_time
         , TF.assign "instance_id" <$> TF.attribute _instance_id
@@ -2117,8 +2155,8 @@ data DbConnectionResource s = DbConnectionResource {
     {- ^ (Optional) Internet connection port. Valid value: [3001-3999]. Default to 3306. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbConnectionResource s) where
-    toHCL DbConnectionResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DbConnectionResource s) where
+    toObject DbConnectionResource{..} = catMaybes
         [ TF.assign "connection_prefix" <$> TF.attribute _connection_prefix
         , TF.assign "instance_id" <$> TF.attribute _instance_id
         , TF.assign "port" <$> TF.attribute _port
@@ -2186,8 +2224,8 @@ data DbDatabaseResource s = DbDatabaseResource {
     {- ^ (Required) Name of the database requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 64 characters. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbDatabaseResource s) where
-    toHCL DbDatabaseResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DbDatabaseResource s) where
+    toObject DbDatabaseResource{..} = catMaybes
         [ TF.assign "character_set" <$> TF.attribute _character_set
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "instance_id" <$> TF.attribute _instance_id
@@ -2270,8 +2308,8 @@ data DbInstanceResource s = DbInstanceResource {
     {- ^ (Optional) The Zone to launch the DB instance. From version 1.8.1, it supports multiple zone. If it is a multi-zone and @vswitch_id@ is specified, the vswitch must in the one of them. The multiple zone ID can be retrieved by setting @multi@ to "true" in the data source @alicloud_zones@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbInstanceResource s) where
-    toHCL DbInstanceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DbInstanceResource s) where
+    toObject DbInstanceResource{..} = catMaybes
         [ TF.assign "engine" <$> TF.attribute _engine
         , TF.assign "engine_version" <$> TF.attribute _engine_version
         , TF.assign "instance_charge_type" <$> TF.attribute _instance_charge_type
@@ -2443,8 +2481,8 @@ data DiskAttachmentResource s = DiskAttachmentResource {
     {- ^ (Required, Forces new resource) ID of the Instance to attach to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DiskAttachmentResource s) where
-    toHCL DiskAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DiskAttachmentResource s) where
+    toObject DiskAttachmentResource{..} = catMaybes
         [ TF.assign "disk_id" <$> TF.attribute _disk_id
         , TF.assign "instance_id" <$> TF.attribute _instance_id
         ]
@@ -2502,8 +2540,8 @@ data DiskResource s = DiskResource {
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DiskResource s) where
-    toHCL DiskResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DiskResource s) where
+    toObject DiskResource{..} = catMaybes
         [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "category" <$> TF.attribute _category
         , TF.assign "description" <$> TF.attribute _description
@@ -2607,8 +2645,8 @@ data DnsGroupResource s = DnsGroupResource {
     {- ^ (Required) Name of the domain group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsGroupResource s) where
-    toHCL DnsGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DnsGroupResource s) where
+    toObject DnsGroupResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -2643,8 +2681,8 @@ data DnsResource s = DnsResource {
     {- ^ (Required) Name of the domain. This name without suffix can have a string of 1 to 63 characters, must contain only alphanumeric characters or "-", and must not begin or end with "-", and "-" must not in the 3th and 4th character positions at the same time. Suffix @.sh@ and @.tel@ are not supported. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsResource s) where
-    toHCL DnsResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DnsResource s) where
+    toObject DnsResource{..} = catMaybes
         [ TF.assign "group_id" <$> TF.attribute _group_id
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -2696,8 +2734,8 @@ data EipAssociationResource s = EipAssociationResource {
     {- ^ (Optional, Forces new resource) The ID of the ECS or SLB instance or Nat Gateway. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EipAssociationResource s) where
-    toHCL EipAssociationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (EipAssociationResource s) where
+    toObject EipAssociationResource{..} = catMaybes
         [ TF.assign "allocation_id" <$> TF.attribute _allocation_id
         , TF.assign "instance_id" <$> TF.attribute _instance_id
         ]
@@ -2741,8 +2779,8 @@ data EipResource s = EipResource {
     {- ^ (Optional, Forces new resource) Internet charge type of the EIP, Valid values are @PayByBandwidth@ , @PayByTraffic@ . Default is @PayByBandwidth@ . From version @1.7.1@ , default to @PayByTraffic@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EipResource s) where
-    toHCL EipResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (EipResource s) where
+    toObject EipResource{..} = catMaybes
         [ TF.assign "bandwidth" <$> TF.attribute _bandwidth
         , TF.assign "internet_charge_type" <$> TF.attribute _internet_charge_type
         ]
@@ -2798,8 +2836,8 @@ data EssAttachmentResource s = EssAttachmentResource {
     {- ^ (Required) ID of the scaling group of a scaling configuration. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EssAttachmentResource s) where
-    toHCL EssAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (EssAttachmentResource s) where
+    toObject EssAttachmentResource{..} = catMaybes
         [ TF.assign "force" <$> TF.attribute _force
         , TF.assign "instance_ids" <$> TF.attribute _instance_ids
         , TF.assign "scaling_group_id" <$> TF.attribute _scaling_group_id
@@ -2894,8 +2932,8 @@ data EssScalingConfigurationResource s = EssScalingConfigurationResource {
     {- ^ (Optional) User-defined data to customize the startup behaviors of the ECS instance and to pass data into the ECS instance. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EssScalingConfigurationResource s) where
-    toHCL EssScalingConfigurationResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (EssScalingConfigurationResource s) where
+    toObject EssScalingConfigurationResource{..} = catMaybes
         [ TF.assign "active" <$> TF.attribute _active
         , TF.assign "data_disk" <$> TF.attribute _data_disk
         , TF.assign "enable" <$> TF.attribute _enable
@@ -3151,8 +3189,8 @@ data EssScalingGroupResource s = EssScalingGroupResource {
     {- ^ (Optional) List of virtual switch IDs in which the ecs instances to be launched. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EssScalingGroupResource s) where
-    toHCL EssScalingGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (EssScalingGroupResource s) where
+    toObject EssScalingGroupResource{..} = catMaybes
         [ TF.assign "db_instance_ids" <$> TF.attribute _db_instance_ids
         , TF.assign "default_cooldown" <$> TF.attribute _default_cooldown
         , TF.assign "loadbalancer_ids" <$> TF.attribute _loadbalancer_ids
@@ -3261,8 +3299,8 @@ data EssScalingRuleResource s = EssScalingRuleResource {
     {- ^ (Optional) Name shown for the scaling rule, which is a string containing 2 to 40 English or Chinese characters. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EssScalingRuleResource s) where
-    toHCL EssScalingRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (EssScalingRuleResource s) where
+    toObject EssScalingRuleResource{..} = catMaybes
         [ TF.assign "adjustment_type" <$> TF.attribute _adjustment_type
         , TF.assign "adjustment_value" <$> TF.attribute _adjustment_value
         , TF.assign "cooldown" <$> TF.attribute _cooldown
@@ -3352,8 +3390,8 @@ data EssScheduleResource s = EssScheduleResource {
     {- ^ (Optional) Whether to enable the scheduled task. The default value is true. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EssScheduleResource s) where
-    toHCL EssScheduleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (EssScheduleResource s) where
+    toObject EssScheduleResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "launch_expiration_time" <$> TF.attribute _launch_expiration_time
         , TF.assign "launch_time" <$> TF.attribute _launch_time
@@ -3463,6 +3501,272 @@ essScheduleResource =
             , _task_enabled = TF.Nil
             }
 
+{- | The @alicloud_fc_function@ AliCloud resource.
+
+Provides a Alicloud Function Compute Trigger resource. Based on trigger,
+execute your code in response to events in Alibaba Cloud. For information
+about Service and how to use it, see
+<https://www.alibabacloud.com/help/doc-detail/52895.htm> . -> NOTE: The
+resource requires a provider field 'account_id'.
+<https://www.terraform.io/docs/providers/alicloud/index.html#account_id> .
+-}
+data FcFunctionResource s = FcFunctionResource {
+      _config      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The config of Function Compute trigger. See <https://www.alibabacloud.com/help/doc-detail/70140.htm> for more details. -}
+    , _function    :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The Function Compute function name. -}
+    , _name        :: !(TF.Attr s P.Text)
+    {- ^ - (ForceNew) The Function Compute trigger name. It is the only in one service and is conflict with "name_prefix". -}
+    , _name_prefix :: !(TF.Attr s P.Text)
+    {- ^ - (ForceNew) Setting a prefix to get a only trigger name. It is conflict with "name". -}
+    , _role        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) RAM role arn attached to the Function Compute trigger. Role used by the event source to call the function. The value format is "acs:ram::$account-id:role/$role-name". See <https://www.alibabacloud.com/help/doc-detail/53102.htm> for more details. -}
+    , _service     :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The Function Compute service name. -}
+    , _source_arn  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Event source resource address. See <https://www.alibabacloud.com/help/doc-detail/53102.htm> for more details. -}
+    , _type'       :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The Type of the trigger. Valid values: ["oss", "log", "timer", "http"]. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (FcFunctionResource s) where
+    toObject FcFunctionResource{..} = catMaybes
+        [ TF.assign "config" <$> TF.attribute _config
+        , TF.assign "function" <$> TF.attribute _function
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
+        , TF.assign "role" <$> TF.attribute _role
+        , TF.assign "service" <$> TF.attribute _service
+        , TF.assign "source_arn" <$> TF.attribute _source_arn
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance P.HasConfig (FcFunctionResource s) (TF.Attr s P.Text) where
+    config =
+        lens (_config :: FcFunctionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _config = a } :: FcFunctionResource s)
+
+instance P.HasFunction (FcFunctionResource s) (TF.Attr s P.Text) where
+    function =
+        lens (_function :: FcFunctionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _function = a } :: FcFunctionResource s)
+
+instance P.HasName (FcFunctionResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: FcFunctionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: FcFunctionResource s)
+
+instance P.HasNamePrefix (FcFunctionResource s) (TF.Attr s P.Text) where
+    namePrefix =
+        lens (_name_prefix :: FcFunctionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name_prefix = a } :: FcFunctionResource s)
+
+instance P.HasRole (FcFunctionResource s) (TF.Attr s P.Text) where
+    role =
+        lens (_role :: FcFunctionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: FcFunctionResource s)
+
+instance P.HasService (FcFunctionResource s) (TF.Attr s P.Text) where
+    service =
+        lens (_service :: FcFunctionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _service = a } :: FcFunctionResource s)
+
+instance P.HasSourceArn (FcFunctionResource s) (TF.Attr s P.Text) where
+    sourceArn =
+        lens (_source_arn :: FcFunctionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _source_arn = a } :: FcFunctionResource s)
+
+instance P.HasType' (FcFunctionResource s) (TF.Attr s P.Text) where
+    type' =
+        lens (_type' :: FcFunctionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _type' = a } :: FcFunctionResource s)
+
+instance s ~ s' => P.HasComputedConfig (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
+    computedConfig =
+        (_config :: FcFunctionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedFunction (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
+    computedFunction =
+        (_function :: FcFunctionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
+    computedLastModified x = TF.compute (TF.refKey x) "last_modified"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: FcFunctionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
+    computedNamePrefix =
+        (_name_prefix :: FcFunctionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
+    computedRole =
+        (_role :: FcFunctionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedService (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
+    computedService =
+        (_service :: FcFunctionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSourceArn (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
+    computedSourceArn =
+        (_source_arn :: FcFunctionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
+    computedType' =
+        (_type' :: FcFunctionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+fcFunctionResource :: TF.Resource P.AliCloud (FcFunctionResource s)
+fcFunctionResource =
+    TF.newResource "alicloud_fc_function" $
+        FcFunctionResource {
+              _config = TF.Nil
+            , _function = TF.Nil
+            , _name = TF.Nil
+            , _name_prefix = TF.Nil
+            , _role = TF.Nil
+            , _service = TF.Nil
+            , _source_arn = TF.Nil
+            , _type' = TF.Nil
+            }
+
+{- | The @alicloud_fc_service@ AliCloud resource.
+
+Provides a Alicloud Function Compute Service resource. The resource is the
+base of launching Function and Trigger configuration. For information about
+Service and how to use it, see
+<https://www.alibabacloud.com/help/doc-detail/52895.htm> . -> NOTE: The
+resource requires a provider field 'account_id'.
+<https://www.terraform.io/docs/providers/alicloud/index.html#account_id> .
+-}
+data FcServiceResource s = FcServiceResource {
+      _description     :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The function compute service description. -}
+    , _internet_access :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Whether to allow the service to access Internet. Default to "true". -}
+    , _log_config      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Provide this to store your FC service logs. Fields documented below. See <https://www.alibabacloud.com/help/doc-detail/51924.htm> . -}
+    , _name            :: !(TF.Attr s P.Text)
+    {- ^ - (ForceNew) The Function Compute service name. It is the only in one Alicloud account and is conflict with "name_prefix". -}
+    , _name_prefix     :: !(TF.Attr s P.Text)
+    {- ^ - (ForceNew) Setting a prefix to get a only name. It is conflict with "name". -}
+    , _role            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) RAM role arn attached to the Function Compute service. This governs both who / what can invoke your Function, as well as what resources our Function has access to. See <https://www.alibabacloud.com/help/doc-detail/52885.htm> for more details. -}
+    , _vpc_config      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Provide this to allow your FC service to access your VPC. Fields documented below. See <https://www.alibabacloud.com/help/faq-detail/72959.htm> . -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (FcServiceResource s) where
+    toObject FcServiceResource{..} = catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "internet_access" <$> TF.attribute _internet_access
+        , TF.assign "log_config" <$> TF.attribute _log_config
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
+        , TF.assign "role" <$> TF.attribute _role
+        , TF.assign "vpc_config" <$> TF.attribute _vpc_config
+        ]
+
+instance P.HasDescription (FcServiceResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: FcServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: FcServiceResource s)
+
+instance P.HasInternetAccess (FcServiceResource s) (TF.Attr s P.Text) where
+    internetAccess =
+        lens (_internet_access :: FcServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _internet_access = a } :: FcServiceResource s)
+
+instance P.HasLogConfig (FcServiceResource s) (TF.Attr s P.Text) where
+    logConfig =
+        lens (_log_config :: FcServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _log_config = a } :: FcServiceResource s)
+
+instance P.HasName (FcServiceResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: FcServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: FcServiceResource s)
+
+instance P.HasNamePrefix (FcServiceResource s) (TF.Attr s P.Text) where
+    namePrefix =
+        lens (_name_prefix :: FcServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name_prefix = a } :: FcServiceResource s)
+
+instance P.HasRole (FcServiceResource s) (TF.Attr s P.Text) where
+    role =
+        lens (_role :: FcServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _role = a } :: FcServiceResource s)
+
+instance P.HasVpcConfig (FcServiceResource s) (TF.Attr s P.Text) where
+    vpcConfig =
+        lens (_vpc_config :: FcServiceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vpc_config = a } :: FcServiceResource s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: FcServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInternetAccess (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
+    computedInternetAccess =
+        (_internet_access :: FcServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
+    computedLastModified x = TF.compute (TF.refKey x) "last_modified"
+
+instance s ~ s' => P.HasComputedLogConfig (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
+    computedLogConfig =
+        (_log_config :: FcServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: FcServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
+    computedNamePrefix =
+        (_name_prefix :: FcServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
+    computedRole =
+        (_role :: FcServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedVpcConfig (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
+    computedVpcConfig =
+        (_vpc_config :: FcServiceResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+fcServiceResource :: TF.Resource P.AliCloud (FcServiceResource s)
+fcServiceResource =
+    TF.newResource "alicloud_fc_service" $
+        FcServiceResource {
+              _description = TF.Nil
+            , _internet_access = TF.Nil
+            , _log_config = TF.Nil
+            , _name = TF.Nil
+            , _name_prefix = TF.Nil
+            , _role = TF.Nil
+            , _vpc_config = TF.Nil
+            }
+
 {- | The @alicloud_forward@ AliCloud resource.
 
 Provides a forward resource.
@@ -3482,8 +3786,8 @@ data ForwardResource s = ForwardResource {
     {- ^ (Required) The ip protocal, valid value is tcp|udp|any. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ForwardResource s) where
-    toHCL ForwardResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (ForwardResource s) where
+    toObject ForwardResource{..} = catMaybes
         [ TF.assign "external_ip" <$> TF.attribute _external_ip
         , TF.assign "external_port" <$> TF.attribute _external_port
         , TF.assign "forward_table_id" <$> TF.attribute _forward_table_id
@@ -3576,7 +3880,10 @@ If you want to keep them, you should set @is_outdated@ to true. For more
 about the upgraded instance type, refer to @alicloud_instance_types@
 datasource. ~> NOTE: At present, 'PrePaid' instance cannot be deleted and
 must wait it to be outdated and release it automatically. ~> NOTE: The
-resource supports Spot Instance from version 1.5.4.
+resource supports modifying instance charge type from 'PrePaid' to
+'PostPaid' from version 1.9.6. However, at present, this modification has
+some limitation about CPU core count in one month, so strongly recommand
+that @Don't modify instance charge type frequentlly in one month@ .
 -}
 data InstanceResource s = InstanceResource {
       _auto_renew_period          :: !(TF.Attr s P.Text)
@@ -3639,8 +3946,8 @@ data InstanceResource s = InstanceResource {
     {- ^ (Optional) The virtual switch ID to launch in VPC. If you want to create instances in VPC network, this parameter must be set. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InstanceResource s) where
-    toHCL InstanceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (InstanceResource s) where
+    toObject InstanceResource{..} = catMaybes
         [ TF.assign "auto_renew_period" <$> TF.attribute _auto_renew_period
         , TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "description" <$> TF.attribute _description
@@ -3980,8 +4287,8 @@ data KeyPairAttachmentResource s = KeyPairAttachmentResource {
     {- ^ (Required, Force new resource) The name of key pair used to bind. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KeyPairAttachmentResource s) where
-    toHCL KeyPairAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (KeyPairAttachmentResource s) where
+    toObject KeyPairAttachmentResource{..} = catMaybes
         [ TF.assign "instance_ids" <$> TF.attribute _instance_ids
         , TF.assign "key_name" <$> TF.attribute _key_name
         ]
@@ -4025,8 +4332,8 @@ data KeyPairResource s = KeyPairResource {
     {- ^ - (Force new resource) You can import an existing public key and using Alicloud key pair to manage it. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KeyPairResource s) where
-    toHCL KeyPairResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (KeyPairResource s) where
+    toObject KeyPairResource{..} = catMaybes
         [ TF.assign "key_file" <$> TF.attribute _key_file
         , TF.assign "key_name" <$> TF.attribute _key_name
         , TF.assign "key_name_prefix" <$> TF.attribute _key_name_prefix
@@ -4100,8 +4407,8 @@ data KmsKeyResource s = KmsKeyResource {
     {- ^ (Optional) Specifies the usage of CMK. Currently, default to 'ENCRYPT/DECRYPT', indicating that CMK is used for encryption and decryption. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsKeyResource s) where
-    toHCL KmsKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (KmsKeyResource s) where
+    toObject KmsKeyResource{..} = catMaybes
         [ TF.assign "deletion_window_in_days" <$> TF.attribute _deletion_window_in_days
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "is_enabled" <$> TF.attribute _is_enabled
@@ -4175,8 +4482,8 @@ data LogMachineGroupResource s = LogMachineGroupResource {
     {- ^ - The topic of a machine group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LogMachineGroupResource s) where
-    toHCL LogMachineGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LogMachineGroupResource s) where
+    toObject LogMachineGroupResource{..} = catMaybes
         [ TF.assign "identify_list" <$> TF.attribute _identify_list
         , TF.assign "identify_type" <$> TF.attribute _identify_type
         , TF.assign "name" <$> TF.attribute _name
@@ -4252,8 +4559,8 @@ data LogProjectResource s = LogProjectResource {
     {- ^ (Required, ForceNew) The name of the log project. It is the only in one Alicloud account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LogProjectResource s) where
-    toHCL LogProjectResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LogProjectResource s) where
+    toObject LogProjectResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         ]
@@ -4303,8 +4610,8 @@ data LogStoreIndexResource s = LogStoreIndexResource {
     {- ^ (Required, ForceNew) The project name to the log store belongs. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LogStoreIndexResource s) where
-    toHCL LogStoreIndexResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LogStoreIndexResource s) where
+    toObject LogStoreIndexResource{..} = catMaybes
         [ TF.assign "field_search" <$> TF.attribute _field_search
         , TF.assign "full_text" <$> TF.attribute _full_text
         , TF.assign "logstore" <$> TF.attribute _logstore
@@ -4373,8 +4680,8 @@ data LogStoreResource s = LogStoreResource {
     {- ^ - The number of shards in this log store. Default to 2. You can modify it by "Split" or "Merge" operations. <https://www.alibabacloud.com/help/doc-detail/28976.htm> -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LogStoreResource s) where
-    toHCL LogStoreResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LogStoreResource s) where
+    toObject LogStoreResource{..} = catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "retention_period" <$> TF.attribute _retention_period
@@ -4448,8 +4755,8 @@ data NatGatewayResource s = NatGatewayResource {
     {- ^ (Required, Forces New Resorce) The VPC ID. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NatGatewayResource s) where
-    toHCL NatGatewayResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NatGatewayResource s) where
+    toObject NatGatewayResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "specification" <$> TF.attribute _specification
@@ -4544,8 +4851,8 @@ data OssBucketObjectResource s = OssBucketObjectResource {
     {- ^ (Required) The path to the source file being uploaded to the bucket. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OssBucketObjectResource s) where
-    toHCL OssBucketObjectResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (OssBucketObjectResource s) where
+    toObject OssBucketObjectResource{..} = catMaybes
         [ TF.assign "acl" <$> TF.attribute _acl
         , TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "cache_control" <$> TF.attribute _cache_control
@@ -4732,8 +5039,8 @@ data OssBucketResource s = OssBucketResource {
     {- ^ (Optional) A website object(documented below). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OssBucketResource s) where
-    toHCL OssBucketResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (OssBucketResource s) where
+    toObject OssBucketResource{..} = catMaybes
         [ TF.assign "acl" <$> TF.attribute _acl
         , TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "core_rule" <$> TF.attribute _core_rule
@@ -4857,30 +5164,180 @@ ossBucketResource =
             , _website = TF.Nil
             }
 
-{- | The @alicloud_ots_table@ AliCloud resource.
+{- | The @alicloud_ots_instance_attachment@ AliCloud resource.
 
-Provides an OTS table resource. ~> NOTE: Before creating an OTS table,
-@OTS_INSTANCE_NAME@ needs to be passed by Environment Variable, or by
-setting the argument @ots_instance_name@ under provider @alicloud@ .
+This resource will help you to bind a VPC to an OTS instance.
 -}
-data OtsTableResource s = OtsTableResource {
-      _max_version  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The maximum number of versions stored in this table. -}
-    , _primary_key  :: !(TF.Attr s P.Text)
-    {- ^ (Required, Type: List) The property of @TableMeta@ which indicates the structure information of a table. It describes the attribute value of primary key. The number of @primary_key@ should not be less than one and not be more than four. -}
-    , _table_name   :: !(TF.Attr s P.Text)
-    {- ^ (Required, ForceNew) The table name of the OTS instance. If changed, a new table would be created. -}
-    , _time_to_live :: !(TF.Attr s P.Text)
-    {- ^ (Required) The retention time of data stored in this table (unit: second). -}
+data OtsInstanceAttachmentResource s = OtsInstanceAttachmentResource {
+      _instance_name :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The name of the OTS instance. -}
+    , _vpc_name      :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The name of attaching VPC to instance. -}
+    , _vswitch_id    :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The ID of attaching VSwitch to instance. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (OtsTableResource s) where
-    toHCL OtsTableResource{..} = TF.inline $ catMaybes
-        [ TF.assign "max_version" <$> TF.attribute _max_version
+instance TF.IsObject (OtsInstanceAttachmentResource s) where
+    toObject OtsInstanceAttachmentResource{..} = catMaybes
+        [ TF.assign "instance_name" <$> TF.attribute _instance_name
+        , TF.assign "vpc_name" <$> TF.attribute _vpc_name
+        , TF.assign "vswitch_id" <$> TF.attribute _vswitch_id
+        ]
+
+instance P.HasInstanceName (OtsInstanceAttachmentResource s) (TF.Attr s P.Text) where
+    instanceName =
+        lens (_instance_name :: OtsInstanceAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_name = a } :: OtsInstanceAttachmentResource s)
+
+instance P.HasVpcName (OtsInstanceAttachmentResource s) (TF.Attr s P.Text) where
+    vpcName =
+        lens (_vpc_name :: OtsInstanceAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vpc_name = a } :: OtsInstanceAttachmentResource s)
+
+instance P.HasVswitchId (OtsInstanceAttachmentResource s) (TF.Attr s P.Text) where
+    vswitchId =
+        lens (_vswitch_id :: OtsInstanceAttachmentResource s -> TF.Attr s P.Text)
+             (\s a -> s { _vswitch_id = a } :: OtsInstanceAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OtsInstanceAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstanceName (TF.Ref s' (OtsInstanceAttachmentResource s)) (TF.Attr s P.Text) where
+    computedInstanceName x = TF.compute (TF.refKey x) "instance_name"
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (OtsInstanceAttachmentResource s)) (TF.Attr s P.Text) where
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
+
+instance s ~ s' => P.HasComputedVpcName (TF.Ref s' (OtsInstanceAttachmentResource s)) (TF.Attr s P.Text) where
+    computedVpcName x = TF.compute (TF.refKey x) "vpc_name"
+
+instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (OtsInstanceAttachmentResource s)) (TF.Attr s P.Text) where
+    computedVswitchId x = TF.compute (TF.refKey x) "vswitch_id"
+
+otsInstanceAttachmentResource :: TF.Resource P.AliCloud (OtsInstanceAttachmentResource s)
+otsInstanceAttachmentResource =
+    TF.newResource "alicloud_ots_instance_attachment" $
+        OtsInstanceAttachmentResource {
+              _instance_name = TF.Nil
+            , _vpc_name = TF.Nil
+            , _vswitch_id = TF.Nil
+            }
+
+{- | The @alicloud_ots_instance@ AliCloud resource.
+
+This resource will help you to manager a
+<https://www.alibabacloud.com/help/doc-detail/27280.htm> Instance. It is
+foundation of creating data table.
+-}
+data OtsInstanceResource s = OtsInstanceResource {
+      _accessed_by   :: !(TF.Attr s P.Text)
+    {- ^ - The network limitation of accessing instance. Valid values: -}
+    , _description   :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The description of the instance. -}
+    , _instance_type :: !(TF.Attr s P.Text)
+    {- ^ - (ForceNew) The type of instance. Valid values are "Capacity" and "HighPerformance". Default to "HighPerformance". -}
+    , _name          :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The name of the instance. -}
+    , _tags          :: !(TF.Attr s P.Text)
+    {- ^ - A mapping of tags to assign to the instance. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (OtsInstanceResource s) where
+    toObject OtsInstanceResource{..} = catMaybes
+        [ TF.assign "accessed_by" <$> TF.attribute _accessed_by
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "instance_type" <$> TF.attribute _instance_type
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance P.HasAccessedBy (OtsInstanceResource s) (TF.Attr s P.Text) where
+    accessedBy =
+        lens (_accessed_by :: OtsInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _accessed_by = a } :: OtsInstanceResource s)
+
+instance P.HasDescription (OtsInstanceResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: OtsInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: OtsInstanceResource s)
+
+instance P.HasInstanceType (OtsInstanceResource s) (TF.Attr s P.Text) where
+    instanceType =
+        lens (_instance_type :: OtsInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_type = a } :: OtsInstanceResource s)
+
+instance P.HasName (OtsInstanceResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: OtsInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: OtsInstanceResource s)
+
+instance P.HasTags (OtsInstanceResource s) (TF.Attr s P.Text) where
+    tags =
+        lens (_tags :: OtsInstanceResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: OtsInstanceResource s)
+
+instance s ~ s' => P.HasComputedAccessedBy (TF.Ref s' (OtsInstanceResource s)) (TF.Attr s P.Text) where
+    computedAccessedBy x = TF.compute (TF.refKey x) "accessed_by"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (OtsInstanceResource s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OtsInstanceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (OtsInstanceResource s)) (TF.Attr s P.Text) where
+    computedInstanceType x = TF.compute (TF.refKey x) "instance_type"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (OtsInstanceResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (OtsInstanceResource s)) (TF.Attr s P.Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+otsInstanceResource :: TF.Resource P.AliCloud (OtsInstanceResource s)
+otsInstanceResource =
+    TF.newResource "alicloud_ots_instance" $
+        OtsInstanceResource {
+              _accessed_by = TF.Nil
+            , _description = TF.Nil
+            , _instance_type = TF.Nil
+            , _name = TF.Nil
+            , _tags = TF.Nil
+            }
+
+{- | The @alicloud_ots_table@ AliCloud resource.
+
+Provides an OTS table resource. ~> NOTE: From Provider version 1.9.7, the
+provider field 'ots_instance_name' has been deprecated and you should use
+resource alicloud_ots_table's new field 'instance_name' and 'table_name' to
+re-import this resource.
+-}
+data OtsTableResource s = OtsTableResource {
+      _instance_name :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The name of the OTS instance in which table will located. -}
+    , _max_version   :: !(TF.Attr s P.Text)
+    {- ^ (Required) The maximum number of versions stored in this table. The valid value is 1-2147483647. -}
+    , _primary_key   :: !(TF.Attr s P.Text)
+    {- ^ (Required, Type: List) The property of @TableMeta@ which indicates the structure information of a table. It describes the attribute value of primary key. The number of @primary_key@ should not be less than one and not be more than four. -}
+    , _table_name    :: !(TF.Attr s P.Text)
+    {- ^ (Required, ForceNew) The table name of the OTS instance. If changed, a new table would be created. -}
+    , _time_to_live  :: !(TF.Attr s P.Text)
+    {- ^ (Required) The retention time of data stored in this table (unit: second). The value maximum is 2147483647 and -1 means never expired. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (OtsTableResource s) where
+    toObject OtsTableResource{..} = catMaybes
+        [ TF.assign "instance_name" <$> TF.attribute _instance_name
+        , TF.assign "max_version" <$> TF.attribute _max_version
         , TF.assign "primary_key" <$> TF.attribute _primary_key
         , TF.assign "table_name" <$> TF.attribute _table_name
         , TF.assign "time_to_live" <$> TF.attribute _time_to_live
         ]
+
+instance P.HasInstanceName (OtsTableResource s) (TF.Attr s P.Text) where
+    instanceName =
+        lens (_instance_name :: OtsTableResource s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_name = a } :: OtsTableResource s)
 
 instance P.HasMaxVersion (OtsTableResource s) (TF.Attr s P.Text) where
     maxVersion =
@@ -4902,6 +5359,12 @@ instance P.HasTimeToLive (OtsTableResource s) (TF.Attr s P.Text) where
         lens (_time_to_live :: OtsTableResource s -> TF.Attr s P.Text)
              (\s a -> s { _time_to_live = a } :: OtsTableResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OtsTableResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstanceName (TF.Ref s' (OtsTableResource s)) (TF.Attr s P.Text) where
+    computedInstanceName x = TF.compute (TF.refKey x) "instance_name"
+
 instance s ~ s' => P.HasComputedMaxVersion (TF.Ref s' (OtsTableResource s)) (TF.Attr s P.Text) where
     computedMaxVersion x = TF.compute (TF.refKey x) "max_version"
 
@@ -4918,7 +5381,8 @@ otsTableResource :: TF.Resource P.AliCloud (OtsTableResource s)
 otsTableResource =
     TF.newResource "alicloud_ots_table" $
         OtsTableResource {
-              _max_version = TF.Nil
+              _instance_name = TF.Nil
+            , _max_version = TF.Nil
             , _primary_key = TF.Nil
             , _table_name = TF.Nil
             , _time_to_live = TF.Nil
@@ -4938,8 +5402,8 @@ data RamAccessKeyResource s = RamAccessKeyResource {
     {- ^ (Required, Forces new resource) Name of the RAM user. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamAccessKeyResource s) where
-    toHCL RamAccessKeyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamAccessKeyResource s) where
+    toObject RamAccessKeyResource{..} = catMaybes
         [ TF.assign "secret_file" <$> TF.attribute _secret_file
         , TF.assign "status" <$> TF.attribute _status
         , TF.assign "user_name" <$> TF.attribute _user_name
@@ -4994,8 +5458,8 @@ data RamAccountAliasResource s = RamAccountAliasResource {
     {- ^ (Required, Forces new resource) Alias of cloud account. This name can have a string of 3 to 32 characters, must contain only alphanumeric characters or hyphens, such as "-", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamAccountAliasResource s) where
-    toHCL RamAccountAliasResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamAccountAliasResource s) where
+    toObject RamAccountAliasResource{..} = catMaybes
         [ TF.assign "account_alias" <$> TF.attribute _account_alias
         ]
 
@@ -5023,8 +5487,8 @@ resource @alicloud_ram_account_alias@ will replace.
 data RamAliasResource s = RamAliasResource {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamAliasResource s) where
-    toHCL _ = TF.empty
+instance TF.IsObject (RamAliasResource s) where
+    toObject _ = []
 
 ramAliasResource :: TF.Resource P.AliCloud (RamAliasResource s)
 ramAliasResource =
@@ -5043,8 +5507,8 @@ data RamGroupMembershipResource s = RamGroupMembershipResource {
     {- ^ (Required) Set of user name which will be added to group. Each name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamGroupMembershipResource s) where
-    toHCL RamGroupMembershipResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamGroupMembershipResource s) where
+    toObject RamGroupMembershipResource{..} = catMaybes
         [ TF.assign "group_name" <$> TF.attribute _group_name
         , TF.assign "user_names" <$> TF.attribute _user_names
         ]
@@ -5089,8 +5553,8 @@ data RamGroupPolicyAttachmentResource s = RamGroupPolicyAttachmentResource {
     {- ^ (Required, Forces new resource) Type of the RAM policy. It must be @Custom@ or @System@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamGroupPolicyAttachmentResource s) where
-    toHCL RamGroupPolicyAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamGroupPolicyAttachmentResource s) where
+    toObject RamGroupPolicyAttachmentResource{..} = catMaybes
         [ TF.assign "group_name" <$> TF.attribute _group_name
         , TF.assign "policy_name" <$> TF.attribute _policy_name
         , TF.assign "policy_type" <$> TF.attribute _policy_type
@@ -5149,8 +5613,8 @@ data RamGroupResource s = RamGroupResource {
     {- ^ (Required) Name of the RAM group. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphen "-", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamGroupResource s) where
-    toHCL RamGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamGroupResource s) where
+    toObject RamGroupResource{..} = catMaybes
         [ TF.assign "comments" <$> TF.attribute _comments
         , TF.assign "force" <$> TF.attribute _force
         , TF.assign "name" <$> TF.attribute _name
@@ -5209,8 +5673,8 @@ data RamLoginProfileResource s = RamLoginProfileResource {
     {- ^ (Required, Forces new resource) Name of the RAM user. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamLoginProfileResource s) where
-    toHCL RamLoginProfileResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamLoginProfileResource s) where
+    toObject RamLoginProfileResource{..} = catMaybes
         [ TF.assign "mfa_bind_required" <$> TF.attribute _mfa_bind_required
         , TF.assign "password" <$> TF.attribute _password
         , TF.assign "password_reset_required" <$> TF.attribute _password_reset_required
@@ -5287,8 +5751,8 @@ data RamPolicyResource s = RamPolicyResource {
     {- ^ (Optional, Conflicts with @document@ ) Version of the RAM policy document. Valid value is @1@ . Default value is @1@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamPolicyResource s) where
-    toHCL RamPolicyResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamPolicyResource s) where
+    toObject RamPolicyResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "document" <$> TF.attribute _document
         , TF.assign "force" <$> TF.attribute _force
@@ -5380,8 +5844,8 @@ data RamRoleAttachmentResource s = RamRoleAttachmentResource {
     {- ^ (Required, Forces new resource) The name of role used to bind. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-", "_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamRoleAttachmentResource s) where
-    toHCL RamRoleAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamRoleAttachmentResource s) where
+    toObject RamRoleAttachmentResource{..} = catMaybes
         [ TF.assign "instance_ids" <$> TF.attribute _instance_ids
         , TF.assign "role_name" <$> TF.attribute _role_name
         ]
@@ -5423,8 +5887,8 @@ data RamRolePolicyAttachmentResource s = RamRolePolicyAttachmentResource {
     {- ^ (Required, Forces new resource) Name of the RAM Role. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-", "_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamRolePolicyAttachmentResource s) where
-    toHCL RamRolePolicyAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamRolePolicyAttachmentResource s) where
+    toObject RamRolePolicyAttachmentResource{..} = catMaybes
         [ TF.assign "policy_name" <$> TF.attribute _policy_name
         , TF.assign "policy_type" <$> TF.attribute _policy_type
         , TF.assign "role_name" <$> TF.attribute _role_name
@@ -5491,8 +5955,8 @@ data RamRoleResource s = RamRoleResource {
     {- ^ (Optional, Conflicts with @document@ ) Version of the RAM role policy document. Valid value is @1@ . Default value is @1@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamRoleResource s) where
-    toHCL RamRoleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamRoleResource s) where
+    toObject RamRoleResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "document" <$> TF.attribute _document
         , TF.assign "force" <$> TF.attribute _force
@@ -5592,8 +6056,8 @@ data RamUserPolicyAttachmentResource s = RamUserPolicyAttachmentResource {
     {- ^ (Required, Forces new resource) Name of the RAM user. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamUserPolicyAttachmentResource s) where
-    toHCL RamUserPolicyAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamUserPolicyAttachmentResource s) where
+    toObject RamUserPolicyAttachmentResource{..} = catMaybes
         [ TF.assign "policy_name" <$> TF.attribute _policy_name
         , TF.assign "policy_type" <$> TF.attribute _policy_type
         , TF.assign "user_name" <$> TF.attribute _user_name
@@ -5658,8 +6122,8 @@ data RamUserResource s = RamUserResource {
     {- ^ (Required) Name of the RAM user. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RamUserResource s) where
-    toHCL RamUserResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RamUserResource s) where
+    toObject RamUserResource{..} = catMaybes
         [ TF.assign "comments" <$> TF.attribute _comments
         , TF.assign "display_name" <$> TF.attribute _display_name
         , TF.assign "email" <$> TF.attribute _email
@@ -5749,8 +6213,8 @@ data RouteEntryResource s = RouteEntryResource {
     {- ^ (Required, Forces new resource) The ID of the route table. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RouteEntryResource s) where
-    toHCL RouteEntryResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RouteEntryResource s) where
+    toObject RouteEntryResource{..} = catMaybes
         [ TF.assign "destination_cidrblock" <$> TF.attribute _destination_cidrblock
         , TF.assign "nexthop_id" <$> TF.attribute _nexthop_id
         , TF.assign "nexthop_type" <$> TF.attribute _nexthop_type
@@ -5842,8 +6306,8 @@ data RouterInterfaceResource s = RouterInterfaceResource {
     {- ^ (Optional) Specification of router interfaces. If @role@ is @AcceptingSide@ , the value can be ignore or must be @Negative@ . For more about the specification, refer to <https://www.alibabacloud.com/help/doc-detail/52415.htm?spm=a3c0i.o52412zh.b99.10.698e566fdVCfKD> . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RouterInterfaceResource s) where
-    toHCL RouterInterfaceResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (RouterInterfaceResource s) where
+    toObject RouterInterfaceResource{..} = catMaybes
         [ TF.assign "access_point_id" <$> TF.attribute _access_point_id
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "health_check_source_ip" <$> TF.attribute _health_check_source_ip
@@ -6026,8 +6490,8 @@ data SecurityGroupResource s = SecurityGroupResource {
     {- ^ (Optional, Forces new resource) The VPC ID. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecurityGroupResource s) where
-    toHCL SecurityGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecurityGroupResource s) where
+    toObject SecurityGroupResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "inner_access" <$> TF.attribute _inner_access
         , TF.assign "name" <$> TF.attribute _name
@@ -6111,8 +6575,8 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource {
     {- ^ (Required) The type of rule being created. Valid options are @ingress@ (inbound) or @egress@ (outbound). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecurityGroupRuleResource s) where
-    toHCL SecurityGroupRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SecurityGroupRuleResource s) where
+    toObject SecurityGroupRuleResource{..} = catMaybes
         [ TF.assign "cidr_ip" <$> TF.attribute _cidr_ip
         , TF.assign "ip_protocol" <$> TF.attribute _ip_protocol
         , TF.assign "nic_type" <$> TF.attribute _nic_type
@@ -6255,8 +6719,8 @@ data SlbAttachmentResource s = SlbAttachmentResource {
     {- ^ (Optional) Weight of the instances. Valid value range: [0-100]. Default to 100. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SlbAttachmentResource s) where
-    toHCL SlbAttachmentResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SlbAttachmentResource s) where
+    toObject SlbAttachmentResource{..} = catMaybes
         [ TF.assign "instance_ids" <$> TF.attribute _instance_ids
         , TF.assign "load_balancer_id" <$> TF.attribute _load_balancer_id
         , TF.assign "weight" <$> TF.attribute _weight
@@ -6352,8 +6816,8 @@ data SlbListenerResource s = SlbListenerResource {
     {- ^ - (Optinal) Threshold determining the result of the health check is fail. It is required when @health_check@ is on. Valid value range: [1-10] in seconds. Default to 3. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SlbListenerResource s) where
-    toHCL SlbListenerResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SlbListenerResource s) where
+    toObject SlbListenerResource{..} = catMaybes
         [ TF.assign "backend_port" <$> TF.attribute _backend_port
         , TF.assign "bandwidth" <$> TF.attribute _bandwidth
         , TF.assign "cookie" <$> TF.attribute _cookie
@@ -6614,8 +7078,8 @@ data SlbResource s = SlbResource {
     {- ^ (Required for a VPC SLB, Forces New Resource) The VSwitch ID to launch in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SlbResource s) where
-    toHCL SlbResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SlbResource s) where
+    toObject SlbResource{..} = catMaybes
         [ TF.assign "bandwidth" <$> TF.attribute _bandwidth
         , TF.assign "internet" <$> TF.attribute _internet
         , TF.assign "internet_charge_type" <$> TF.attribute _internet_charge_type
@@ -6718,8 +7182,8 @@ data SlbRuleResource s = SlbRuleResource {
     {- ^ (Optional, ForceNew) Domain of the forwarding rule. It must be 2-80 characters in length. Only letters a-z, numbers 0-9, and characters '-' '/' '?' '%' '#' and '&' are allowed. URLs must be started with the character '/', but cannot be '/' alone. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SlbRuleResource s) where
-    toHCL SlbRuleResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SlbRuleResource s) where
+    toObject SlbRuleResource{..} = catMaybes
         [ TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "frontend_port" <$> TF.attribute _frontend_port
         , TF.assign "load_balancer_id" <$> TF.attribute _load_balancer_id
@@ -6818,8 +7282,8 @@ data SlbServerGroupResource s = SlbServerGroupResource {
     {- ^ (Required) A list of ECS instances to be added. At most 20 ECS instances can be supported in one resource. It contains three sub-fields as @Block server@ follows. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SlbServerGroupResource s) where
-    toHCL SlbServerGroupResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SlbServerGroupResource s) where
+    toObject SlbServerGroupResource{..} = catMaybes
         [ TF.assign "load_balancer_id" <$> TF.attribute _load_balancer_id
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "servers" <$> TF.attribute _servers
@@ -6874,8 +7338,8 @@ data SnatResource s = SnatResource {
     {- ^ (Required, Forces new resource) The vswitch ID. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SnatResource s) where
-    toHCL SnatResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SnatResource s) where
+    toObject SnatResource{..} = catMaybes
         [ TF.assign "snat_ip" <$> TF.attribute _snat_ip
         , TF.assign "snat_table_id" <$> TF.attribute _snat_table_id
         , TF.assign "source_vswitch_id" <$> TF.attribute _source_vswitch_id
@@ -6934,8 +7398,8 @@ data VpcResource s = VpcResource {
     {- ^ (Optional) The name of the VPC. Defaults to null. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpcResource s) where
-    toHCL VpcResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VpcResource s) where
+    toObject VpcResource{..} = catMaybes
         [ TF.assign "cidr_block" <$> TF.attribute _cidr_block
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
@@ -7000,8 +7464,8 @@ data VswitchResource s = VswitchResource {
     {- ^ (Required, Forces new resource) The VPC ID. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VswitchResource s) where
-    toHCL VswitchResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VswitchResource s) where
+    toObject VswitchResource{..} = catMaybes
         [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "cidr_block" <$> TF.attribute _cidr_block
         , TF.assign "description" <$> TF.attribute _description

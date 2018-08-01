@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -27,6 +21,7 @@ module Terrafomo.Datadog.Provider
     , providerAppKey
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -59,15 +54,17 @@ data Datadog = Datadog {
 
 instance Hashable Datadog
 
-instance TF.ToHCL Datadog where
-    toHCL x =
+instance TF.IsSection Datadog where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy (Datadog))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-            , TF.assign "api_key" <$> _api_key x
-            , TF.assign "app_key" <$> _app_key x
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "api_key" <$> _api_key x
+                  , TF.assign "app_key" <$> _app_key x
+                  ])
 
 instance TF.IsProvider Datadog where
     type ProviderType Datadog = "datadog"

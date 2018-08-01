@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -96,8 +89,8 @@ data LogResource s = LogResource {
     {- ^ (Optional) The log type. See the Logentries <https://logentries.com/doc/log-types/> for more information. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LogResource s) where
-    toHCL LogResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LogResource s) where
+    toObject LogResource{..} = catMaybes
         [ TF.assign "filename" <$> TF.attribute _filename
         , TF.assign "logset_id" <$> TF.attribute _logset_id
         , TF.assign "name" <$> TF.attribute _name
@@ -193,8 +186,8 @@ data LogsetResource s = LogsetResource {
     {- ^ (Required) The log set name, which should be short and descriptive. For example, www, db1. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LogsetResource s) where
-    toHCL LogsetResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (LogsetResource s) where
+    toObject LogsetResource{..} = catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         ]

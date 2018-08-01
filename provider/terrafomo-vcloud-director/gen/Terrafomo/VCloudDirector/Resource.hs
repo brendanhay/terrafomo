@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -166,8 +159,8 @@ data DnatResource s = DnatResource {
     {- ^ (Required) The port number to map -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnatResource s) where
-    toHCL DnatResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DnatResource s) where
+    toObject DnatResource{..} = catMaybes
         [ TF.assign "edge_gateway" <$> TF.attribute _edge_gateway
         , TF.assign "external_ip" <$> TF.attribute _external_ip
         , TF.assign "internal_ip" <$> TF.attribute _internal_ip
@@ -256,8 +249,8 @@ data EdgegatewayVpnResource s = EdgegatewayVpnResource {
     {- ^ (Required) - Shared Secret -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EdgegatewayVpnResource s) where
-    toHCL EdgegatewayVpnResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (EdgegatewayVpnResource s) where
+    toObject EdgegatewayVpnResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "edge_gateway" <$> TF.attribute _edge_gateway
         , TF.assign "encryption_protocol" <$> TF.attribute _encryption_protocol
@@ -424,8 +417,8 @@ data FirewallRulesResource s = FirewallRulesResource {
     {- ^ (Optional) Configures a firewall rule; see <#rules> below for details. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (FirewallRulesResource s) where
-    toHCL FirewallRulesResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (FirewallRulesResource s) where
+    toObject FirewallRulesResource{..} = catMaybes
         [ TF.assign "default_action" <$> TF.attribute _default_action
         , TF.assign "edge_gateway" <$> TF.attribute _edge_gateway
         , TF.assign "rule" <$> TF.attribute _rule
@@ -498,8 +491,8 @@ data NetworkResource s = NetworkResource {
     {- ^ (Optional) A range of IPs permitted to be used as static IPs for virtual machines; see <#ip-pools> below for details. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkResource s) where
-    toHCL NetworkResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (NetworkResource s) where
+    toObject NetworkResource{..} = catMaybes
         [ TF.assign "dhcp_pool" <$> TF.attribute _dhcp_pool
         , TF.assign "dns1" <$> TF.attribute _dns1
         , TF.assign "dns2" <$> TF.attribute _dns2
@@ -642,8 +635,8 @@ data SnatResource s = SnatResource {
     {- ^ (Required) The IP or IP Range of the VM(s) to map from -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SnatResource s) where
-    toHCL SnatResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (SnatResource s) where
+    toObject SnatResource{..} = catMaybes
         [ TF.assign "edge_gateway" <$> TF.attribute _edge_gateway
         , TF.assign "external_ip" <$> TF.attribute _external_ip
         , TF.assign "internal_ip" <$> TF.attribute _internal_ip
@@ -718,8 +711,8 @@ data VappResource s = VappResource {
     {- ^ (Optional) The name of the vApp Template to use -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VappResource s) where
-    toHCL VappResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VappResource s) where
+    toObject VappResource{..} = catMaybes
         [ TF.assign "catalog_name" <$> TF.attribute _catalog_name
         , TF.assign "cpus" <$> TF.attribute _cpus
         , TF.assign "initscript" <$> TF.attribute _initscript
@@ -889,8 +882,8 @@ data VappVmResource s = VappVmResource {
     {- ^ (Required) The vApp this VM should belong to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VappVmResource s) where
-    toHCL VappVmResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (VappVmResource s) where
+    toObject VappVmResource{..} = catMaybes
         [ TF.assign "catalog_name" <$> TF.attribute _catalog_name
         , TF.assign "cpus" <$> TF.attribute _cpus
         , TF.assign "initscript" <$> TF.attribute _initscript

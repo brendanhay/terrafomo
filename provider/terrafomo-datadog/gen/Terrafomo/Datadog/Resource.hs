@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -67,7 +60,6 @@ module Terrafomo.Datadog.Resource
     , P.HasRecurrence (..)
     , P.HasRenotifyInterval (..)
     , P.HasRequireFullWindow (..)
-    , P.HasRole (..)
     , P.HasScope (..)
     , P.HasShortName (..)
     , P.HasSilenced (..)
@@ -109,7 +101,6 @@ module Terrafomo.Datadog.Resource
     , P.HasComputedRecurrence (..)
     , P.HasComputedRenotifyInterval (..)
     , P.HasComputedRequireFullWindow (..)
-    , P.HasComputedRole (..)
     , P.HasComputedScope (..)
     , P.HasComputedShortName (..)
     , P.HasComputedSilenced (..)
@@ -175,8 +166,8 @@ data DowntimeResource s = DowntimeResource {
     {- ^ (Optional) POSIX timestamp to start the downtime. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DowntimeResource s) where
-    toHCL DowntimeResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (DowntimeResource s) where
+    toObject DowntimeResource{..} = catMaybes
         [ TF.assign "active" <$> TF.attribute _active
         , TF.assign "disabled" <$> TF.attribute _disabled
         , TF.assign "end" <$> TF.attribute _end
@@ -304,8 +295,8 @@ data MetricMetadataResource s = MetricMetadataResource {
     {- ^ (Optional) Primary unit of the metric such as 'byte' or 'operation'. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (MetricMetadataResource s) where
-    toHCL MetricMetadataResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (MetricMetadataResource s) where
+    toObject MetricMetadataResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "metric" <$> TF.attribute _metric
         , TF.assign "per_unit" <$> TF.attribute _per_unit
@@ -413,7 +404,7 @@ data MonitorResource s = MonitorResource {
     , _notify_no_data      :: !(TF.Attr s P.Text)
     {- ^ (Optional) A boolean indicating whether this monitor will notify when data stops reporting. Defaults to false. -}
     , _query               :: !(TF.Attr s P.Text)
-    {- ^ (Required) The monitor query to notify on with syntax varying depending on what type of monitor you are creating. See <http://docs.datadoghq.com/api> for options. -}
+    {- ^ (Required) The monitor query to notify on. Note this is not the same query you see in the UI and the syntax is different depending on the monitor @type@ , please see the <https://docs.datadoghq.com/api/?lang=python#create-a-monitor> for details. Warning:  @terraform plan@ won't perform any validation of the query contents. -}
     , _renotify_interval   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The number of minutes after the last notification before a monitor will re-notify on the current status. It will only re-notify if it's not resolved. -}
     , _require_full_window :: !(TF.Attr s P.Text)
@@ -430,8 +421,8 @@ data MonitorResource s = MonitorResource {
     {- ^ (Required) The type of the monitor, chosen from: -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (MonitorResource s) where
-    toHCL MonitorResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (MonitorResource s) where
+    toObject MonitorResource{..} = catMaybes
         [ TF.assign "escalation_message" <$> TF.attribute _escalation_message
         , TF.assign "evaluation_delay" <$> TF.attribute _evaluation_delay
         , TF.assign "include_tags" <$> TF.attribute _include_tags
@@ -677,8 +668,8 @@ data TimeboardResource s = TimeboardResource {
     {- ^ (Required) The name of the dashboard. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TimeboardResource s) where
-    toHCL TimeboardResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (TimeboardResource s) where
+    toObject TimeboardResource{..} = catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "graph" <$> TF.attribute _graph
         , TF.assign "read_only" <$> TF.attribute _read_only
@@ -766,18 +757,15 @@ data UserResource s = UserResource {
     {- ^ (Optional) Whether the user is an administrator -}
     , _name     :: !(TF.Attr s P.Text)
     {- ^ (Required) Name for user -}
-    , _role     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Role description for user (NOTE: can only be applied on user creation) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserResource s) where
-    toHCL UserResource{..} = TF.inline $ catMaybes
+instance TF.IsObject (UserResource s) where
+    toObject UserResource{..} = catMaybes
         [ TF.assign "disabled" <$> TF.attribute _disabled
         , TF.assign "email" <$> TF.attribute _email
         , TF.assign "handle" <$> TF.attribute _handle
         , TF.assign "is_admin" <$> TF.attribute _is_admin
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "role" <$> TF.attribute _role
         ]
 
 instance P.HasDisabled (UserResource s) (TF.Attr s P.Text) where
@@ -805,11 +793,6 @@ instance P.HasName (UserResource s) (TF.Attr s P.Text) where
         lens (_name :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: UserResource s)
 
-instance P.HasRole (UserResource s) (TF.Attr s P.Text) where
-    role =
-        lens (_role :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: UserResource s)
-
 instance s ~ s' => P.HasComputedDisabled (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedDisabled x = TF.compute (TF.refKey x) "disabled"
 
@@ -836,11 +819,6 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (UserResource s)) (TF.Attr s P.T
         (_name :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedRole =
-        (_role :: UserResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
 instance s ~ s' => P.HasComputedVerified (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedVerified x = TF.compute (TF.refKey x) "verified"
 
@@ -853,5 +831,4 @@ userResource =
             , _handle = TF.Nil
             , _is_admin = TF.Nil
             , _name = TF.Nil
-            , _role = TF.Nil
             }
