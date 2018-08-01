@@ -1,8 +1,3 @@
-{-# LANGUAGE DataKinds           #-}
-{-# LANGUAGE FlexibleContexts    #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeFamilies        #-}
-
 module Terrafomo.Provider
     ( NoProvider
     , IsProvider (..)
@@ -23,18 +18,18 @@ import qualified Terrafomo.HCL  as HCL
 data NoProvider = NoProvider
     deriving (Show, Eq)
 
+instance HCL.IsSection NoProvider where
+    toSection _ = HCL.section "no_provider" []
+
 instance Hashable NoProvider where
     hashWithSalt s NoProvider = s `hashWithSalt` (0 :: Int)
-
-instance HCL.ToHCL NoProvider where
-    toHCL = const HCL.empty
 
 instance IsProvider NoProvider where
     type ProviderType NoProvider = "no_provider"
 
 class ( KnownSymbol (ProviderType p)
       , Hashable p
-      , HCL.ToHCL p
+      , HCL.IsSection p
       ) => IsProvider p where
     type ProviderType p :: Symbol
 

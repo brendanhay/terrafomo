@@ -1,11 +1,3 @@
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE LambdaCase             #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RankNTypes             #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TypeFamilies           #-}
-
 module Terrafomo.Lifecycle
     ( Changes
     , ignoreAllChanges
@@ -52,8 +44,8 @@ instance Monoid (Changes a) where
     mempty  = Match mempty
     mappend = (<>)
 
-instance HCL.ToHCL (Changes a) where
-    toHCL = \case
+instance HCL.IsValue (Changes a) where
+    toValue = \case
         Wildcard -> HCL.list [HCL.string "*"]
         Match xs -> HCL.list xs
 
@@ -136,10 +128,9 @@ class HasLifecycle a b | a -> b where
             lens _ignoreChanges
                 (\s a -> s { _ignoreChanges = a })
 
-instance HCL.ToHCL (Lifecycle a) where
-   toHCL Lifecycle{..} =
-       HCL.block
-           [ HCL.assign "prevent_destroy"       _preventDestroy
-           , HCL.assign "create_before_destroy" _createBeforeDestroy
-           , HCL.assign "ignore_changes"        _ignoreChanges
-           ]
+instance HCL.IsObject (Lifecycle a) where
+   toObject x =
+       [ HCL.assign "prevent_destroy"       (_preventDestroy      x)
+       , HCL.assign "create_before_destroy" (_createBeforeDestroy x)
+       , HCL.assign "ignore_changes"        (_ignoreChanges       x)
+       ]

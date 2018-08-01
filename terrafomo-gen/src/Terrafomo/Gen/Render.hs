@@ -1,12 +1,3 @@
-{-# LANGUAGE DeriveFoldable       #-}
-{-# LANGUAGE DeriveFunctor        #-}
-{-# LANGUAGE DeriveTraversable    #-}
-{-# LANGUAGE ExtendedDefaultRules #-}
-{-# LANGUAGE LambdaCase           #-}
-{-# LANGUAGE NamedFieldPuns       #-}
-{-# LANGUAGE OverloadedStrings    #-}
-{-# LANGUAGE TupleSections        #-}
-
 module Terrafomo.Gen.Render where
 
 import Data.Aeson      ((.=))
@@ -33,8 +24,6 @@ import qualified Data.Text.Lazy          as LText
 import qualified Terrafomo.Gen.Namespace as NS
 import qualified Text.EDE                as EDE
 import qualified Text.Wrap               as Wrap
-
-default ([])
 
 data Templates a = Templates
     { packageTemplate  :: !a

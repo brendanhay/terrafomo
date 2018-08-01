@@ -4,9 +4,11 @@ datatype: true
 original: aws
 
 dependencies:
+  - aeson
   - amazonka-core
   - formatting
   - iproute
+  - unordered-containers
 
 rules:
   - mode: suffix

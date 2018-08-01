@@ -1,15 +1,8 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
-{-# LANGUAGE FlexibleInstances      #-}
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE NoImplicitPrelude      #-}
-{-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TypeFamilies           #-}
-{-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -77,13 +70,13 @@ data {{ schema.key }} s = {{ schema.key }} {
   {% endfor %}
     } deriving (Show, Eq)
 
-instance TF.ToHCL ({{ schema.key }} s) where
+instance TF.IsObject ({{ schema.key }} s) where
   {% for arg in schema.value.arguments %}
-    {% if arg.first %}toHCL {{ schema.key }}{..} = TF.inline $ catMaybes
+    {% if arg.first %}toObject {{ schema.key }}{..} = catMaybes
         [{% else %}    ,{% endif %} TF.assign "{{ arg.value.name }}" <$> {{ arg.value.type.encoder }} {{ arg.key }}{% if arg.last %}
         ]{% endif %}
   {% else %}
-    toHCL _ = TF.empty
+    toObject _ = []
   {% endfor %}
   {% for field in schema.value.argumentFields %}
 

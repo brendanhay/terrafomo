@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Terrafomo.Gen.Text where
 
 import Data.Maybe  (fromMaybe)
@@ -86,4 +84,5 @@ unreserved x
         , "let"
         , "in"
         , "do"
+        , "pattern"
         ]

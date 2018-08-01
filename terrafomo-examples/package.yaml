@@ -10,6 +10,7 @@ description: >
 <<: *common
 <<: *version
 <<: *options
+<<: *extensions
 
 library:
   source-dirs:

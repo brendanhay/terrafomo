@@ -1,13 +1,11 @@
-{-# LANGUAGE DeriveFunctor     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-
 -- | Remote state is a custom data source that doesn't support a provider.
 module Terrafomo.RemoteState
     ( RemoteState (..)
     , remoteStateKey
     , newRemoteState
     ) where
+
+import Data.Function ((&))
 
 import Terrafomo.Backend (Backend (..))
 import Terrafomo.Name
@@ -32,9 +30,10 @@ newRemoteState n x =
         , remoteStateName    = n
         }
 
-instance HCL.ToHCL b => HCL.ToHCL (RemoteState b) where
-    toHCL s@(RemoteState x _) =
-        HCL.object (HCL.key "data" (remoteStateKey s))
-            [ HCL.assign "backend" (backendName   x)
-            , HCL.assign "config"  (backendConfig x)
-            ]
+instance HCL.IsObject b => HCL.IsSection (RemoteState b) where
+    toSection s@(RemoteState x _) =
+        HCL.section "data" (HCL.key (remoteStateKey s))
+            & HCL.pairs
+                [ HCL.assign "backend" (backendName   x)
+                , HCL.block  "config"  (backendConfig x)
+                ]

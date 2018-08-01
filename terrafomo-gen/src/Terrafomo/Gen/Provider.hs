@@ -1,9 +1,4 @@
-{-# LANGUAGE DeriveFunctor     #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE LambdaCase        #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE RecordWildCards #-}
 
 module Terrafomo.Gen.Provider where
 
@@ -54,7 +49,7 @@ matchTypeRule rules name =
             Prefix | Text.isPrefixOf ruleMatch name -> Just ruleType
             Suffix | Text.isSuffixOf ruleMatch name -> Just ruleType
             Exact  | ruleMatch == name              -> Just ruleType
-            _      -> Nothing
+            _                                       -> Nothing
 
 data Provider a = Provider
     { providerName         :: !Text

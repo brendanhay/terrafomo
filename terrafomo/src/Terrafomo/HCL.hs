@@ -1,69 +1,65 @@
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleContexts  #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE LambdaCase        #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards   #-}
-{-# LANGUAGE TypeOperators     #-}
-{-# LANGUAGE ViewPatterns      #-}
-
 module Terrafomo.HCL
-    ( Id          (..)
-    , Value       (..)
+    (
+    -- * Syntactic Types
+      Id          (..)
     , Interpolate (..)
+    , Value       (..)
+    , Pair        (..)
+    , Section     (..)
 
-    -- * Pretty Printing
-    , renderHCL
+    -- * Rendering
+    , renderDocumentIO
+    , renderDocument
+    , renderValue
 
-    -- * Serialization
-    , ToHCL       (..)
+    -- * Adhoc Overloading
+    , IsValue     (..)
+    , IsObject    (..)
+    , IsSection   (..)
 
-    , object
+    -- ** Generics
+    , GToObject (..)
+    , genericObject
+
+    -- * Combinators
+
+    -- ** Sections
+    , section
+    , key
     , pairs
-    , block
-    , inline
-    , list
-    , empty
+    , children
 
+    -- ** Object Pairs
     , assign
---    , repeated
+    , block
+    , object
+
+    -- ** Values
+    , number
+    , string
+    , list
+    , name
+    , type_
     , attribute
 
-    , unquoted
-    , quoted
-
-    , key
-    , type_
-
-    , name
-    , number
-    , float
-    , string
-    , concat
-
-    -- ** JSON Heredocs
+    -- *** JSON Heredocs
     , ToJSON (..)
-    , JSON
     , json
-
-    -- * Generics
-    , GToAttributes (..)
-    , genericBlockAttributes
-    , genericInlineAttributes
     ) where
 
 import Prelude hiding (concat)
 
-import Data.Aeson             (ToJSON (..))
-import Data.Hashable          (Hashable)
+import Data.Aeson                (ToJSON (..))
+import Data.Hashable             (Hashable)
+import Data.HashMap.Strict       (HashMap)
 import Data.Int
-import Data.List.NonEmpty     (NonEmpty ((:|)))
-import Data.Map.Strict        (Map)
-import Data.Maybe             (fromMaybe, mapMaybe, maybeToList)
-import Data.Semigroup         ((<>))
-import Data.String            (IsString (fromString))
-import Data.Text              (Text)
-import Data.Text.Lazy.Builder (Builder)
+import Data.List.NonEmpty        (NonEmpty ((:|)))
+import Data.Maybe                (fromMaybe, mapMaybe, maybeToList)
+import Data.Semigroup            ((<>))
+import Data.String               (IsString (fromString))
+import Data.Text                 (Text)
+import Data.Text.Lazy.Builder    (Builder)
+import Data.Text.Prettyprint.Doc (Doc, Pretty (pretty, prettyList), (<+>))
 import Data.Word
 
 import Formatting ((%))
@@ -72,23 +68,22 @@ import GHC.Generics hiding (Infix)
 
 import Numeric.Natural (Natural)
 
-import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
-                                     (<+>))
-
 import Terrafomo.Attribute (Attr (..))
 import Terrafomo.Name
 
-import qualified Data.Aeson                   as JSON
-import qualified Data.Aeson.Encode.Pretty     as JSON (encodePretty)
-import qualified Data.Foldable                as Fold
-import qualified Data.IP                      as IP
-import qualified Data.List                    as List
-import qualified Data.Map.Strict              as Map
-import qualified Data.Text.Lazy               as LText
-import qualified Data.Text.Lazy.Builder       as Build
-import qualified Data.Text.Lazy.Encoding      as LText (decodeUtf8)
-import qualified Formatting                   as Format
-import qualified Text.PrettyPrint.Leijen.Text as PP
+import qualified Data.Aeson                            as JSON
+import qualified Data.Aeson.Encode.Pretty              as JSON (encodePretty)
+import qualified Data.Foldable                         as Fold
+import qualified Data.HashMap.Strict                   as Map
+import qualified Data.IP                               as IP
+import qualified Data.List                             as List
+import qualified Data.Text.Lazy                        as LText
+import qualified Data.Text.Lazy.Builder                as Build
+import qualified Data.Text.Lazy.Encoding               as LText (decodeUtf8)
+import qualified Data.Text.Prettyprint.Doc             as PP
+import qualified Data.Text.Prettyprint.Doc.Render.Text as Render
+import qualified Formatting                            as Format
+import qualified System.IO                             as IO
 
 -- FIXME: Alternative JSON serialization.
 
@@ -109,48 +104,11 @@ instance Pretty Id where
         Unquoted k -> pretty k
         Quoted   k -> PP.dquotes (pretty k)
 
-data Value
-    = Assign  !Id            !Value   -- foo = bar
-    | Object  !(NonEmpty Id) ![Value] -- foo bar { ... }
-    | Block   ![Value]                -- { ... }
-    | List    ![Value]                -- [ ... ]
-    | Inline  ![Value]                -- ...
-    | Bool    !Bool
-    | Number  !Integer
-    | Float   !Double
-    | String  !Interpolate
-    | HereDoc !Text !LText.Text
-    | Comment !LText.Text
-      deriving (Show, Eq, Generic)
+name :: Name -> Id
+name = Quoted . Format.sformat fname
 
-instance Hashable Value
-
-instance IsString Value where
-    fromString = String . fromString
-
-instance Pretty Value where
-    prettyList = pretty . List
-    pretty     = \case
-        Assign  k  v  -> pretty k <+> "=" <+> pretty v
-        Object  ks vs -> prettyList (Fold.toList ks) <+> prettyBlock vs
-        Block   vs    -> prettyBlock vs
-        Inline  vs    -> PP.vcat (map pretty vs)
-        Bool    x     -> prettyBool x
-        Number  x     -> pretty x
-        Float   x     -> pretty x
-        String  x     -> PP.dquotes (pretty x)
-        Comment x     -> "//" <+> pretty x
-
-        HereDoc (pretty -> k) x ->
-            "<<-" <> k <$$> pretty x <$$> k
-
-        List (reverse -> vs) ->
-            case vs of
-                []   -> "[]"
-                x:xs ->
-                    let ys = map (flip mappend ", " . pretty) xs
-                        y  = pretty x
-                     in PP.nest 2 ("[" <$$> PP.vcat (reverse (y : ys))) <$$> "]"
+type_ :: Type -> Id
+type_ = Quoted . Format.sformat Format.stext . typeName
 
 data Interpolate
     = Chunk  !LText.Text
@@ -177,31 +135,211 @@ instance Pretty Interpolate where
             Escape xs -> map unquote xs
             x         -> [pretty x]
 
-type JSON = JSON.Value
+data Value
+    = Null
+    -- ^ The special value null can now be assigned to any field to represent the
+    -- absence of a value. This causes Terraform to omit the field from upstream
+    -- API calls, which is important in some cases for triggering certain default
+    -- behaviors.
+    | String  !Interpolate
+    -- ^ Strings are in double-quotes.
+    --
+    -- Strings can interpolate other values using syntax wrapped in ${}, such
+    -- as ${var.foo}. The full syntax for interpolation is documented here.
+    | HereDoc !Text !LText.Text
+    -- ^ Multiline strings can use shell-style "here doc" syntax, with the
+    -- string starting with a marker like <<EOF and then the string ending with
+    -- EOF on a line of its own. The lines of the string and the end marker
+    -- must not be indented.
+    | Number  !Integer
+    -- ^ Numbers are assumed to be base 10. If you prefix a number with 0x, it is
+    -- treated as a hexadecimal number.
+    | Bool    !Bool
+    -- ^ Boolean values: true, false.
+    | List    ![Value]
+    -- ^ Lists of primitive types can be made with square brackets ([]). Example:
+    -- ["foo", "bar", "baz"].
+    | Map     !(HashMap Text Value)
+    -- ^ Maps can be made with braces ({}) and colons (:): { "foo": "bar",
+    -- "bar": "baz" }. Quotes may be omitted on keys, unless the key starts
+    -- with a number, in which case quotes are required. Commas are required
+    -- between key/value pairs for single line maps. A newline between
+    -- key/value pairs is sufficient in multi-line maps.
+    | Block  ![Pair]
+      deriving (Show, Eq, Generic)
 
-renderHCL :: [Value] -> Doc
-renderHCL = PP.vcat . List.intersperse (PP.text " ") . map pretty
+instance Hashable Value
 
-renderRaw :: Value -> LText.Text
-renderRaw = PP.displayT . PP.renderCompact . pretty
+instance IsString Value where
+    fromString = String . fromString
 
-prettyBlock :: [Value] -> Doc
-prettyBlock xs = PP.nest 2 ("{" <$$> PP.vcat (map pretty xs)) <$$> "}"
+instance Pretty Value where
+    prettyList = pretty . List
+    pretty     = \case
+        Null                    -> "null"
+        String  x               -> PP.dquotes (pretty x)
+        HereDoc (pretty -> k) x -> "<<-" <> PP.vcat [k, pretty x, k]
+        Number  x               -> pretty x
+        Bool    True            -> "true"
+        Bool    False           -> "false"
+        List    xs              -> PP.nest 2 (PP.list (map pretty xs))
+        Map     m               ->
+            let go (k, v) = PP.dquotes (pretty k) <> ": " <> pretty v
+             in prettyMap . PP.punctuate "," . map go $ Map.toList m
+        Block   xs              -> prettyMap (map pretty xs)
 
-prettyBool :: Bool -> Doc
-prettyBool = \case
-    True  -> "true"
-    False -> "false"
+-- | Values are assigned with the syntax of key = value (whitespace doesn't
+-- matter). The value can be any primitive (string, number, boolean), a
+-- list, or a map.
+data Pair = Assign !Id !Value
+    deriving (Show, Eq, Generic)
 
-assign :: ToHCL a => Id -> a -> Value
-assign k v = Assign k (toHCL v)
+instance Hashable Pair
+
+instance Pretty Pair where
+    prettyList = PP.vcat . map pretty
+    pretty     = \case
+        Assign k (Block as)  -> pretty k <+> prettyMap (map pretty as)
+        Assign k v           -> pretty k <+> "=" <+> pretty v
+
+-- | In addition to the basics, the syntax supports hierarchies of
+-- sections, such as the "resource" and "variable" in the example
+-- above. These sections are similar to maps, but visually look better.
+data Section = Section !(NonEmpty Id) ![Pair] ![Section]
+    deriving (Show, Eq, Generic)
+
+instance Hashable Section
+
+instance Pretty Section where
+    prettyList                = PP.vcat . map pretty
+    pretty (Section ks ps ss) =
+        prettyList (Fold.toList ks)
+            <+> prettyMap (map pretty ps ++ map pretty ss)
+
+-- Pretty Utilities
+
+(<$$>) :: Doc ann -> Doc ann -> Doc ann
+(<$$>) a b = PP.vcat [a, b]
+
+prettyMap :: [Doc ann] -> Doc ann
+prettyMap xs = PP.nest 2 ("{" <$$> PP.vcat xs) <$$> "}"
+
+-- Rendering
+
+renderDocumentIO :: IO.Handle -> [Section] -> IO ()
+renderDocumentIO hd =
+    Render.renderIO hd
+        . PP.layoutPretty PP.defaultLayoutOptions
+            . PP.vcat . map pretty
+
+renderDocument :: [Section] -> LText.Text
+renderDocument =
+    Render.renderLazy
+        . PP.layoutPretty PP.defaultLayoutOptions
+            . PP.vcat . List.intersperse mempty . map pretty
+
+renderValue :: Value -> LText.Text
+renderValue =
+    Render.renderLazy
+        . PP.layoutCompact
+            . pretty
+
+-- Overloaded Serialization
+
+-- FIXME: Provider lawful pairings of toValue, fromValue, etc.
+
+class IsValue a where
+    toValue :: a -> Value
+
+    default toValue :: IsObject a => a -> Value
+    toValue = Block . toObject
+
+instance IsValue Value      where toValue = id
+instance IsValue Bool       where toValue = Bool
+instance IsValue Char       where toValue = string . LText.singleton
+instance IsValue Int        where toValue = number
+instance IsValue Natural    where toValue = number
+instance IsValue Integer    where toValue = number
+instance IsValue Int8       where toValue = number
+instance IsValue Int16      where toValue = number
+instance IsValue Int32      where toValue = number
+instance IsValue Int64      where toValue = number
+instance IsValue Word8      where toValue = number
+instance IsValue Word16     where toValue = number
+instance IsValue Word32     where toValue = number
+instance IsValue Word64     where toValue = number
+instance IsValue Text       where toValue = string . LText.fromStrict
+instance IsValue LText.Text where toValue = string
+instance IsValue Builder    where toValue = string . Build.toLazyText
+instance IsValue IP.IP      where toValue = string . fromString . show
+instance IsValue IP.IPRange where toValue = string . fromString . show
+instance IsValue JSON.Value where toValue = json
+instance IsValue Name       where toValue = toValue . Format.sformat fname
+
+instance IsValue a => IsValue [a] where
+    toValue = list
+
+instance IsValue Key where
+    toValue (Key t n) = toValue (Format.sformat (ftype % "." % fname) t n)
+
+instance IsValue a => IsValue (Attr s a) where
+    toValue = fromMaybe Null . attribute
+
+class IsObject a where
+    toObject :: a -> [Pair]
+
+instance IsObject [Pair] where toObject = id
+instance IsObject ()     where toObject = const []
+
+class IsSection a where
+    toSection :: a -> Section
+
+instance IsSection Section where toSection = id
+
+-- Smart Constructors
+
+section :: Id -> [Id] -> Section
+section k ks = Section (k :| ks) [] []
+
+key :: Key -> [Id]
+key k = [type_ (keyType k), name (keyName k)]
+
+pairs :: [Pair] -> Section -> Section
+pairs ps' (Section ks ps ss) = Section ks (ps' ++ ps) ss
+
+children :: [Section] -> Section -> Section
+children ss' (Section ks ps ss) = Section ks ps (ss' ++ ss)
+
+assign :: IsValue a => Id -> a -> Pair
+assign k = Assign k . toValue
+
+block :: IsObject a => Id -> a -> Pair
+block k = Assign k . Block . toObject
+
+number :: Integral a => a -> Value
+number = Number . fromIntegral
+
+object :: IsValue a => HashMap Text a -> [Pair]
+object = map (\(k, v) -> assign (Unquoted k) v) . Map.toList
+
+list :: (Foldable f, IsValue a) => f a -> Value
+list = List . map toValue . Fold.toList
+
+string :: LText.Text -> Value
+string = String . Chunk
+
+concat :: [Interpolate] -> Value
+concat = String . Concat
+
+json :: ToJSON a => a -> Value
+json = HereDoc "JSON" . LText.decodeUtf8 . JSON.encodePretty
 
 -- FIXME: This is essentially a scratch pad. Need to revisit attributes and
 -- expressions specifically, along with general interpolation syntax (Interpolate).
-attribute :: ToHCL a => Attr s a -> Maybe Value
+attribute :: IsValue a => Attr s a -> Maybe Value
 attribute = \case
     Compute  k' v _ -> Just (compute k' v)
-    Constant    v   -> Just (toHCL      v)
+    Constant    v   -> Just (toValue    v)
     Nil             -> Nothing
 
     Join d vs -> Just (concat args)
@@ -212,7 +350,7 @@ attribute = \case
     Apply f xs -> Just . String $ Escape [concat (fun : "(" : args ++ [")"])]
       where
         fun  = Chunk (LText.fromStrict f)
-        args = List.intersperse ", " (mapMaybe (fmap (Chunk . renderRaw) . attribute) xs)
+        args = List.intersperse ", " (mapMaybe (fmap (Chunk . renderValue) . attribute) xs)
 
     -- FIXME: precedence - ${${${1 + 1} + 3} + 9} ...
     Infix  op a b -> Just . String $ Escape [a', " ", sym, " ", b']
@@ -228,195 +366,75 @@ compute (Key t n) v =
         Format.format (Format.stext % ftype % "." % fname % "." % fname)
             (maybe mempty (<> ".") (typePrefix t)) t n v
 
-object :: NonEmpty Id -> [Value] -> Value
-object = Object
+-- Generic Serializer for DataSource/Resource
 
-pairs :: ToHCL a => Map Text a -> Value
-pairs = block . map (\(k, v) -> assign (unquoted k) v) . Map.toList
+genericObject
+    :: (Generic a, GToObject (Rep a))
+    => a
+    -> [Pair]
+genericObject = gToObject . from
+{-# INLINEABLE genericObject #-}
 
-block :: [Value] -> Value
-block = Block
+class GToObject f where
+    gToObject :: f a -> [Pair]
 
-inline :: [Value] -> Value
-inline = Inline
-
-list :: (Foldable f, ToHCL a) => f a -> Value
-list = List . map toHCL . Fold.toList
-
-empty :: Value
-empty = Inline []
-
-unquoted :: Text -> Id
-unquoted = Unquoted
-
-quoted :: Text -> Id
-quoted = Quoted
-
-key :: Id -> Key -> NonEmpty Id
-key p k = p :| [type_ (keyType k), name (keyName k)]
-
-type_ :: Type -> Id
-type_ = Quoted . Format.sformat Format.stext . typeName
-
-name :: Name -> Id
-name = Quoted . Format.sformat fname
-
-number :: Integral a => a -> Value
-number = Number . fromIntegral
-
-float :: Real a => a -> Value
-float = Float . realToFrac
-
-string :: LText.Text -> Value
-string = String . Chunk
-
-concat :: [Interpolate] -> Value
-concat = String . Concat
-
-json :: ToJSON a => a -> Value
-json = HereDoc "JSON" . LText.decodeUtf8 . JSON.encodePretty
-
-class ToHCL a where
-    toHCL :: a -> Value
-
-instance ToHCL Value where
-    toHCL = id
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL () where
-    toHCL = const empty
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Bool where
-    toHCL = Bool
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL a => ToHCL [a] where
-    toHCL = list
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Char where
-    toHCL = string . LText.singleton
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Float where
-    toHCL = float
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Double where
-    toHCL = float
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Int where
-    toHCL = number
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Natural where
-    toHCL = number
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Integer where
-    toHCL = number
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Int8 where
-    toHCL = number
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Int16 where
-    toHCL = number
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Int32 where
-    toHCL = number
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Int64 where
-    toHCL = number
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Word8 where
-    toHCL = number
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Word16 where
-    toHCL = number
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Word32 where
-    toHCL = number
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Word64 where
-    toHCL = number
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Text where
-    toHCL = string . LText.fromStrict
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL LText.Text where
-    toHCL = string
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Builder where
-    toHCL = string . Build.toLazyText
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL IP.IP where
-    toHCL = String . fromString . show
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL IP.IPRange where
-    toHCL = String . fromString . show
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL JSON where
-    toHCL = json
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Name where
-    toHCL = toHCL . Format.sformat fname
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL Key where
-    toHCL (Key t n) = toHCL (Format.sformat (ftype % "." % fname) t n)
-    {-# INLINEABLE toHCL #-}
-
-instance ToHCL a => ToHCL (Attr s a) where
-    toHCL = fromMaybe empty . attribute
-    {-# INLINEABLE toHCL #-}
-
-genericBlockAttributes :: (Generic a, GToAttributes (Rep a)) => a -> Value
-genericBlockAttributes = block . gToValues . from
-{-# INLINEABLE genericBlockAttributes #-}
-
-genericInlineAttributes :: (Generic a, GToAttributes (Rep a)) => a -> Value
-genericInlineAttributes = inline . gToValues . from
-{-# INLINEABLE genericInlineAttributes #-}
-
-class GToAttributes f where
-    gToValues :: f a -> [Value]
+-- instance {-# OVERLAPPABLE #-}
+--          ( Selector s
+--          , IsObject a
+--          ) => GToObject (S1 s (K1 i (Attr t a))) where
+--     gToObject p =
+--         let k = fromString (case selName p of '_':x -> x; x -> x)
+--             v = unK1 (unM1 p)
+--           in maybeToList (block k (toObjects v))
+--     {-# INLINEABLE gToObject #-}
 
 instance ( Selector s
-         , ToHCL a
-         ) => GToAttributes (S1 s (K1 i (Attr t a))) where
-    gToValues p =
+         , IsValue a
+         ) => GToObject (S1 s (K1 i (Attr t a))) where
+    gToObject p =
         let k = fromString (case selName p of '_':x -> x; x -> x)
             v = unK1 (unM1 p)
           in maybeToList (assign k <$> attribute v)
-    {-# INLINEABLE gToValues #-}
+    {-# INLINEABLE gToObject #-}
 
-instance GToAttributes f => GToAttributes (D1 x f) where
-    gToValues = gToValues . unM1
-    {-# INLINEABLE gToValues #-}
+instance GToObject f => GToObject (D1 x f) where
+    gToObject = gToObject . unM1
+    {-# INLINEABLE gToObject #-}
 
-instance GToAttributes f => GToAttributes (C1 x f) where
-    gToValues = gToValues . unM1
-    {-# INLINEABLE gToValues #-}
+instance GToObject f => GToObject (C1 x f) where
+    gToObject = gToObject . unM1
+    {-# INLINEABLE gToObject #-}
 
-instance ( GToAttributes a
-         , GToAttributes b
-         ) => GToAttributes (a :*: b) where
-    gToValues (a :*: b) = gToValues a ++ gToValues b
-    {-# INLINEABLE gToValues #-}
+instance ( GToObject a
+         , GToObject b
+         ) => GToObject (a :*: b) where
+    gToObject (a :*: b) = gToObject a ++ gToObject b
+    {-# INLINEABLE gToObject #-}
+
+-- TODO
+
+-- block :: [Value] -> Value
+-- block = Object
+
+-- inline :: [Value] -> Value
+-- inline = Inline
+
+-- list :: (Foldable f, ToHCL a) => f a -> Value
+-- list = List . map toHCL . Fold.toList
+
+-- empty :: Value
+-- empty = Inline []
+
+-- float :: Real a => a -> Value
+-- float = Float . realToFrac
+
+-- class ToHCL a where
+--     toHCL :: a -> Value
+
+-- instance ToHCL Key where
+--     toHCL (Key t n) = toHCL (Format.sformat (ftype % "." % fname) t n)
+--     {-# INLINEABLE toHCL #-}
+
+-- instance ToHCL a => ToHCL (Attr s a) where
+--     toHCL = fromMaybe empty . attribute
+--     {-# INLINEABLE toHCL #-}

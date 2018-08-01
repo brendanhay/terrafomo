@@ -4,6 +4,7 @@ module Terrafomo
       Error          (..)
     , Config
     , Document
+    , renderDocumentIO
     , renderDocument
 
     , Terraform
@@ -63,16 +64,18 @@ module Terrafomo
     , remote
 
     -- * Serialization
-    , ToHCL
-    , renderHCL
+    , HCL.IsValue    (..)
+    , HCL.IsObject   (..)
+    , HCL.IsSection  (..)
     ) where
 
 import Terrafomo.Attribute
 import Terrafomo.Backend
-import Terrafomo.HCL       (ToHCL, renderHCL)
 import Terrafomo.Lifecycle
 import Terrafomo.Monad
 import Terrafomo.Name
 import Terrafomo.Output
 import Terrafomo.Provider
 import Terrafomo.Schema
+
+import qualified Terrafomo.HCL as HCL

@@ -1,14 +1,11 @@
-{-# LANGUAGE DeriveFunctor     #-}
-{-# LANGUAGE OverloadedStrings #-}
-
 module Terrafomo.Backend
     ( Backend (..)
     , Local   (..)
     , localBackend
     ) where
 
-import Data.Hashable  (Hashable (hashWithSalt))
-import Data.Semigroup ((<>))
+import Data.Function ((&))
+import Data.Hashable (Hashable (hashWithSalt))
 
 import Terrafomo.Name (Name)
 
@@ -27,18 +24,21 @@ instance Hashable b => Hashable (Backend b) where
         s `hashWithSalt` backendName   x
           `hashWithSalt` backendConfig x
 
-instance HCL.ToHCL a => HCL.ToHCL (Backend a) where
-    toHCL (Backend n x) =
-        HCL.object (pure "terraform")
-            [ HCL.object (pure "backend" <> pure (HCL.name n))
-                [ HCL.toHCL x
+instance HCL.IsObject b => HCL.IsSection (Backend b) where
+    toSection (Backend n x) =
+        HCL.section "terraform" []
+            & HCL.children
+                [ HCL.section "backend" [HCL.name n]
+                    & HCL.pairs (HCL.toObject x)
                 ]
-            ]
 
 newtype Local = Local FilePath
+    deriving (Show, Eq)
 
-instance HCL.ToHCL Local where
-    toHCL (Local path) = HCL.assign "path" (Text.pack path)
+instance HCL.IsObject Local where
+    toObject (Local path) =
+        [ HCL.assign "path" (Text.pack path)
+        ]
 
 localBackend :: FilePath -> Backend Local
 localBackend path =

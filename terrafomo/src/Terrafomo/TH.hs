@@ -1,10 +1,7 @@
-{-# LANGUAGE LambdaCase      #-}
 {-# LANGUAGE TemplateHaskell #-}
-{-# LANGUAGE TupleSections   #-}
 
 module Terrafomo.TH
-    ( makeInline
-    , makeBlock
+    ( makeObject
     , makeFields
     ) where
 
@@ -19,9 +16,8 @@ import qualified Lens.Micro.TH       as TH
 import qualified Terrafomo.Attribute as TF (nil)
 import qualified Terrafomo.HCL       as HCL
 
-makeInline, makeBlock :: TH.Name -> TH.DecsQ
-makeInline name = makeInstance name 'HCL.genericInlineAttributes
-makeBlock  name = makeInstance name 'HCL.genericBlockAttributes
+makeObject :: TH.Name -> TH.DecsQ
+makeObject name = makeInstance name 'HCL.genericObject
 
 makeInstance :: TH.Name -> TH.Name -> TH.DecsQ
 makeInstance name hcl = do
@@ -30,7 +26,8 @@ makeInstance name hcl = do
     fields     <- makeFields name
 
     serializer <-
-        [d| instance HCL.ToHCL ($(TH.conT name) s) where toHCL = $(TH.varE hcl) |]
+        [d| instance HCL.IsValue  ($(TH.conT name) s)
+            instance HCL.IsObject ($(TH.conT name) s) where toObject = $(TH.varE hcl) |]
 
     pure (sig : fun : serializer ++ fields)
   where

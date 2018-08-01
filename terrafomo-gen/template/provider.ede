@@ -1,11 +1,5 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeFamilies      #-}
-
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
@@ -22,6 +16,7 @@ module {{ namespace }}
   {% endfor %}
     ) where
 
+import Data.Function      ((&))
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -55,16 +50,18 @@ data {{ provider.name }} = {{ provider.name }} {
 
 instance Hashable {{ provider.name }}
 
-instance TF.ToHCL {{ provider.name }} where
-    toHCL x =
+instance TF.IsSection {{ provider.name }} where
+    toSection x =
         let typ = TF.providerType (Proxy :: Proxy ({{ provider.name }}))
             key = TF.providerKey x
-         in TF.object ("provider" :| [TF.type_ typ]) $ catMaybes
-            [ Just $ TF.assign "alias" (TF.toHCL (TF.keyName key))
-          {% for arg in schema.arguments %}
-            , TF.assign "{{ arg.value.name }}" <$> {{ arg.key }} x
-          {% endfor %}
-            ]
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (catMaybes
+                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                {% for arg in schema.arguments %}
+                  , TF.assign "{{ arg.value.name }}" <$> {{ arg.key }} x
+                {% endfor %}
+                  ])
 
 instance TF.IsProvider {{ provider.name }} where
     type ProviderType {{ provider.name }} = "{{ provider.original }}"

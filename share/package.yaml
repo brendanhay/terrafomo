@@ -18,3 +18,38 @@
     - -Wcompat
     - -Wnoncanonical-monad-instances
     - -Wnoncanonical-monadfail-instances
+
+- &extensions
+  default-extensions:
+    - BangPatterns
+    - ConstraintKinds
+    - DataKinds
+    - DefaultSignatures
+    - DeriveFoldable
+    - DeriveFunctor
+    - DeriveGeneric
+    - DeriveTraversable
+    - DerivingStrategies
+    - DuplicateRecordFields
+    - ExplicitNamespaces
+    - FlexibleContexts
+    - FlexibleInstances
+    - FunctionalDependencies
+    - GADTs
+    - GeneralizedNewtypeDeriving
+    - InstanceSigs
+    - KindSignatures
+    - LambdaCase
+    - MultiParamTypeClasses
+    - MultiWayIf
+    - NamedFieldPuns
+    - OverloadedStrings
+    - PatternSynonyms
+    - RankNTypes
+    - ScopedTypeVariables
+    - StandaloneDeriving
+    - TupleSections
+    - TypeApplications
+    - TypeFamilies
+    - TypeOperators
+    - ViewPatterns

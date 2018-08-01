@@ -1,5 +1,3 @@
-{-# LANGUAGE PatternSynonyms #-}
-
 module Terrafomo.Gen.Markdown where
 
 import CMark (Node, NodeType (..))

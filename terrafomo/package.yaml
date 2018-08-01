@@ -10,6 +10,10 @@ description: >
 <<: *common
 <<: *version
 <<: *options
+<<: *extensions
+
+dependencies:
+  - base >= 4.9
 
 library:
   source-dirs:
@@ -33,7 +37,6 @@ library:
   dependencies:
     - aeson
     - aeson-pretty
-    - base       >= 4.9
     - containers
     - formatting >= 6.2.5
     - hashable
@@ -42,8 +45,21 @@ library:
     - microlens-th
     - mmorph
     - mtl
+    - prettyprinter
     - random
     - template-haskell
     - text
     - transformers
-    - wl-pprint-text
+    - unordered-containers
+
+tests:
+  hspec:
+    main: Main.hs
+
+    source-dirs: test
+
+    dependencies:
+      - hspec
+      - hspec-discover
+      - terrafomo
+      - text

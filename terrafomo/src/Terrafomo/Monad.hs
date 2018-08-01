@@ -1,32 +1,20 @@
-{-# LANGUAGE DefaultSignatures          #-}
-{-# LANGUAGE DeriveFunctor              #-}
-{-# LANGUAGE FlexibleContexts           #-}
-{-# LANGUAGE FlexibleInstances          #-}
-{-# LANGUAGE FunctionalDependencies     #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase                 #-}
-{-# LANGUAGE MultiParamTypeClasses      #-}
-{-# LANGUAGE NamedFieldPuns             #-}
-{-# LANGUAGE OverloadedStrings          #-}
-{-# LANGUAGE RankNTypes                 #-}
-{-# LANGUAGE ScopedTypeVariables        #-}
-{-# LANGUAGE TupleSections              #-}
-{-# LANGUAGE TypeFamilies               #-}
-{-# LANGUAGE UndecidableInstances       #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 module Terrafomo.Monad
     (
     -- * Terraform Monad
       Error          (..)
     , Config
-    , Document
-    , renderDocument
-
     , Terraform
     , runTerraform
 
     -- ** Terraform Monad Class
     , MonadTerraform (..)
+
+    -- * Rendering
+    , Document
+    , renderDocumentIO
+    , renderDocument
 
     -- * Providers
     , withProvider
@@ -47,7 +35,6 @@ import Control.Monad.Except (Except)
 import Control.Monad.Morph  (MFunctor (hoist))
 import Control.Monad.Trans  (MonadTrans (lift))
 
-import Data.Bifunctor  (second)
 import Data.Map.Strict (Map)
 import Data.Proxy      (Proxy (..))
 import Data.Semigroup  (Semigroup ((<>)))
@@ -63,18 +50,9 @@ import Terrafomo.RemoteState
 import Terrafomo.Schema      (Schema (..))
 import Terrafomo.ValueMap    (ValueMap)
 
-import qualified Data.Map.Strict              as Map
-import qualified Data.Text.Lazy               as LText
-import qualified Terrafomo.Format             as Format
-import qualified Terrafomo.Hash               as Hash
-import qualified Terrafomo.HCL                as HCL
-import qualified Terrafomo.ValueMap           as VMap
-import qualified Text.PrettyPrint.Leijen.Text as PP
-
-import qualified Control.Monad.Except as MTL
-import qualified Control.Monad.Reader as MTL
-import qualified Control.Monad.State  as MTL
-
+import qualified Control.Monad.Except              as MTL
+import qualified Control.Monad.Reader              as MTL
+import qualified Control.Monad.State               as MTL
 import qualified Control.Monad.Trans.Identity      as Trans
 import qualified Control.Monad.Trans.Maybe         as Trans
 import qualified Control.Monad.Trans.RWS.Lazy      as Lazy
@@ -83,10 +61,17 @@ import qualified Control.Monad.Trans.State.Lazy    as Lazy
 import qualified Control.Monad.Trans.State.Strict  as Strict
 import qualified Control.Monad.Trans.Writer.Lazy   as Lazy
 import qualified Control.Monad.Trans.Writer.Strict as Strict
+import qualified Data.Map.Strict                   as Map
+import qualified Data.Text.Lazy                    as LText
+import qualified System.IO                         as IO
+import qualified Terrafomo.Format                  as Format
+import qualified Terrafomo.Hash                    as Hash
+import qualified Terrafomo.HCL                     as HCL
+import qualified Terrafomo.ValueMap                as VMap
 
 data Error
-    = NonUniqueRef    !Key  !HCL.Value
-    | NonUniqueOutput !Name !HCL.Value
+    = NonUniqueRef    !Key  !HCL.Section
+    | NonUniqueOutput !Name !HCL.Section
       deriving (Eq, Show, Typeable)
 
 instance Exception Error
@@ -96,61 +81,60 @@ newtype Config = Config
     }
 
 -- | Provides key uniquness invariants and ordering of output statements.
-data InternalState = UnsafeInternalState
-    { supply     :: !Int -- Deliberately using an 'Int' for overflow.
-    , backend    :: !(Backend HCL.Value)
-    , providers  :: !(ValueMap Key  HCL.Value)
-    , remotes    :: !(ValueMap Key  HCL.Value)
-    , references :: !(ValueMap Key  HCL.Value)
-    , outputs    :: !(ValueMap Name HCL.Value)
+data Document = UnsafeDocument
+    { supply     :: !Int -- Deliberate use of 'Int', for overflow.
+    , backend    :: !(Backend [HCL.Pair])
+    , providers  :: !(ValueMap Key  HCL.Section)
+    , remotes    :: !(ValueMap Key  HCL.Section)
+    , references :: !(ValueMap Key  HCL.Section)
+    , outputs    :: !(ValueMap Name HCL.Section)
     }
 
-renderState :: InternalState -> LText.Text
-renderState s =
-      PP.displayT
-    . PP.renderPretty 0.4 100
-    . HCL.renderHCL
-    . (HCL.toHCL (backend s) :)
-    $ concat
-         [ VMap.values (providers  s)
-         , VMap.values (remotes    s)
-         , VMap.values (references s)
-         , VMap.values (outputs    s)
-         ]
+renderDocumentIO :: IO.Handle -> Document -> IO ()
+renderDocumentIO hd =
+    HCL.renderDocumentIO hd . flattenState
 
-newtype Document = Document { renderDocument :: LText.Text }
-    deriving (Show, Eq)
+renderDocument :: Document -> LText.Text
+renderDocument =
+    HCL.renderDocument . flattenState
+
+flattenState :: Document -> [HCL.Section]
+flattenState s =
+    HCL.toSection (backend s) :
+        concat [ VMap.values (providers  s)
+               , VMap.values (remotes    s)
+               , VMap.values (references s)
+               , VMap.values (outputs    s)
+               ]
 
 -- Terraform CPS Monad
 
 newtype Terraform s a = Terraform
     { unTerraform
         :: Config
-        -> InternalState
-        -> Except Error (a, InternalState)
+        -> Document
+        -> Except Error (a, Document)
     } deriving (Functor)
 
 runTerraform
-    :: HCL.ToHCL b
+    :: HCL.IsObject b
     => Backend b
     -> (forall s. Terraform s a)
     -> Either Error (a, Document)
 runTerraform x m =
-    second (Document . renderState) <$>
-        MTL.runExcept
-            ( unTerraform m
-                Config
-                    { aliases = mempty
-                    }
-                UnsafeInternalState
-                    { supply     = 100000
-                    , backend    = HCL.toHCL <$> x
-                    , providers  = VMap.empty
-                    , remotes    = VMap.empty
-                    , references = VMap.empty
-                    , outputs    = VMap.empty
-                    }
-            )
+    MTL.runExcept $
+        unTerraform m
+            Config
+                { aliases = mempty
+                }
+            UnsafeDocument
+                { supply     = 100000
+                , backend    = HCL.toObject <$> x
+                , providers  = VMap.empty
+                , remotes    = VMap.empty
+                , references = VMap.empty
+                , outputs    = VMap.empty
+                }
 
 -- Instances
 
@@ -174,7 +158,7 @@ instance MTL.MonadReader Config (Terraform s) where
     local f m = Terraform (\r w -> unTerraform m (f r) w)
     {-# INLINEABLE local #-}
 
-instance MTL.MonadState InternalState (Terraform s) where
+instance MTL.MonadState Document (Terraform s) where
     get = Terraform (\_ w -> pure (w, w))
     {-# INLINEABLE get #-}
 
@@ -195,7 +179,8 @@ instance MTL.MonadError Error (Terraform s) where
 -- Monad Homomorphism
 
 class Monad m => MonadTerraform s m | m -> s where
-    liftTerraform  :: Terraform s a -> m a
+    liftTerraform  :: Terraform s a             -> m a
+    localTerraform :: (Config -> Config) -> m a -> m a
 
     default liftTerraform
         :: ( MonadTrans t
@@ -206,8 +191,6 @@ class Monad m => MonadTerraform s m | m -> s where
         -> m a
     liftTerraform = lift . liftTerraform
     {-# INLINEABLE liftTerraform #-}
-
-    localTerraform :: (Config -> Config) -> m a -> m a
 
     -- | Default instance for any transformer satisfying the 'MFunctor'
     -- constraint, with a 'MonadTerraform' instance for the wrapped monad.
@@ -287,7 +270,7 @@ insertProvider = \case
             MTL.asks (Map.lookup (providerType (Proxy :: Proxy p)) . aliases)
     Just p  -> do
         let key   = providerKey p
-            value = HCL.toHCL p
+            value = HCL.toSection p
 
         void $ insertValue key value providers (\s w -> w { providers = s })
 
@@ -308,9 +291,9 @@ define name x@Schema{_schemaProvider, _schemaConfig} =
     liftTerraform $ do
         void $ insertProvider _schemaProvider
 
-        let typ    = _schemaType x
+        let typ   = _schemaType x
             key   = Key typ name
-            value = HCL.toHCL $
+            value = HCL.toSection $
                         x { _schemaKeywords =
                               _schemaKeywords x
                                   <> pure (HCL.type_ typ)
@@ -336,7 +319,7 @@ define name x@Schema{_schemaProvider, _schemaConfig} =
 -- This effectively serializes an 'TF.Attr' into an 'TF.Output'.
 output
     :: ( MonadTerraform s m
-       , HCL.ToHCL a
+       , HCL.IsValue a
        )
     => Attr s a
     -> m (Output a)
@@ -351,7 +334,7 @@ output attr =
                   _             -> next
 
             out   = Output b name attr
-            value = HCL.toHCL out
+            value = HCL.toSection out
 
         unique <- insertValue name value outputs (\s w -> w { outputs = s })
 
@@ -373,9 +356,10 @@ remote x@(Output _ _ attr) =
         let hash  = Name (Hash.human (outputBackend x))
             state = newRemoteState hash (outputBackend x)
             key   = remoteStateKey state
-            value = HCL.toHCL state
+            value = HCL.toSection state
 
         exists <- MTL.gets (VMap.member key . remotes)
+
         unless exists $
             void $ insertValue key value remotes (\s w -> w { remotes = s })
 
@@ -390,11 +374,11 @@ insertValue
        )
     => k
     -- ^ The key.
-    -> HCL.Value
+    -> v
     -- ^ The raw HCL value.
-    -> (InternalState -> ValueMap k HCL.Value)
+    -> (Document -> ValueMap k v)
     -- ^ Get the affected value map from the state.
-    -> (ValueMap k HCL.Value -> InternalState -> InternalState)
+    -> (ValueMap k v -> Document -> Document)
     -- ^ Modify the state with the updated value map.
     -> m Bool
 insertValue key value state update =

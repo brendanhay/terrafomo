@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Terrafomo.Hash
     ( hashid
     , human

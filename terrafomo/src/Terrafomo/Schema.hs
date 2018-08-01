@@ -1,10 +1,4 @@
-{-# LANGUAGE FlexibleInstances     #-}
-{-# LANGUAGE GADTs                 #-}
-{-# LANGUAGE LambdaCase            #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE OverloadedStrings     #-}
-{-# LANGUAGE RecordWildCards       #-}
-{-# LANGUAGE StandaloneDeriving    #-}
+{-# LANGUAGE RecordWildCards #-}
 
 -- | Shared type representing datasources and resources.
 --
@@ -24,7 +18,8 @@ module Terrafomo.Schema
     , dependOn
     ) where
 
-import Data.List.NonEmpty (NonEmpty)
+import Data.Function ((&))
+import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Set           (Set)
 import Data.Text          (Text)
@@ -32,7 +27,6 @@ import Data.Text          (Text)
 import Lens.Micro (Lens', lens)
 
 import Terrafomo.Provider (IsProvider, providerKey)
-import Terrafomo.HCL       (ToHCL)
 import Terrafomo.Lifecycle
 import Terrafomo.Name
 
@@ -45,8 +39,8 @@ import qualified Terrafomo.HCL as HCL
 newtype Dependency = Dependency Key
    deriving (Show, Eq, Ord)
 
-instance ToHCL Dependency where
-    toHCL (Dependency k) = HCL.toHCL k
+instance HCL.IsValue Dependency where
+    toValue (Dependency k) = HCL.toValue k
 
 -- Schema Types
 
@@ -55,7 +49,7 @@ type Resource   p a = Schema (Lifecycle a) p a
 
 data Schema l p a where
     Schema
-        :: (Eq l, Monoid l, ToHCL l, IsProvider p, ToHCL a)
+        :: (Eq l, Monoid l, HCL.IsObject l, IsProvider p, HCL.IsObject a)
         => { _schemaProvider  :: !(Maybe p)
            , _schemaLifecycle :: !l
            , _schemaDependsOn :: !(Set Dependency)
@@ -71,22 +65,27 @@ deriving instance (Eq   l, Eq   p, Eq   a) => Eq   (Schema l p a)
 instance HasLifecycle (Resource p a) a where
     lifecycle = lens _schemaLifecycle (\s a -> s { _schemaLifecycle = a })
 
-instance ToHCL (Schema l p a) where
-    toHCL Schema{..} =
-        HCL.object _schemaKeywords $ catMaybes
-            [ HCL.assign "provider" . providerKey <$> _schemaProvider
-            , Just (HCL.toHCL _schemaConfig)
-            , if _schemaDependsOn == mempty
-                  then Nothing
-                  else Just (HCL.assign "depends_on" (HCL.list _schemaDependsOn))
-            , if _schemaLifecycle == mempty
-                  then Nothing
-                  else Just (HCL.assign "lifecycle" _schemaLifecycle)
-             ]
+instance ( HCL.IsObject l
+         , HCL.IsObject a
+         ) => HCL.IsSection (Schema l p a) where
+    toSection Schema{..} =
+        let k :| ks = _schemaKeywords
+            common  = catMaybes
+                [ HCL.assign "provider" . providerKey <$> _schemaProvider
+                , if _schemaDependsOn == mempty
+                    then Nothing
+                    else Just (HCL.assign "depends_on" (HCL.list _schemaDependsOn))
+                , if _schemaLifecycle == mempty
+                    then Nothing
+                    else Just (HCL.block "lifecycle" _schemaLifecycle)
+                ]
+
+         in HCL.section k ks
+                & HCL.pairs (HCL.toObject _schemaConfig ++ common)
 
 newDataSource
     :: ( IsProvider p
-       , ToHCL a
+       , HCL.IsObject a
        )
     => Text
     -> a
@@ -95,14 +94,14 @@ newDataSource name cfg =
     Schema { _schemaProvider  = Nothing
            , _schemaLifecycle = ()
            , _schemaDependsOn = mempty
-           , _schemaKeywords  = pure (HCL.unquoted "data")
+           , _schemaKeywords  = pure (HCL.Unquoted "data")
            , _schemaType      = Type (Just "data") name
            , _schemaConfig    = cfg
            }
 
 newResource
     :: ( IsProvider p
-       , ToHCL a
+       , HCL.IsObject a
        )
     => Text
     -> a
@@ -111,7 +110,7 @@ newResource name cfg =
     Schema { _schemaProvider  = Nothing
            , _schemaLifecycle = mempty
            , _schemaDependsOn = mempty
-           , _schemaKeywords  = pure (HCL.unquoted "resource")
+           , _schemaKeywords  = pure (HCL.Unquoted "resource")
            , _schemaType      = Type Nothing name
            , _schemaConfig    = cfg
            }
