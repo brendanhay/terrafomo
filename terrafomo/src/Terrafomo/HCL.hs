@@ -178,7 +178,7 @@ instance Pretty Value where
     pretty     = \case
         Null                    -> "null"
         String  x               -> PP.dquotes (pretty x)
-        HereDoc (pretty -> k) x -> "<<-" <> PP.vcat [k, pretty x, k]
+        HereDoc (pretty -> k) x -> "<<-" <> PP.vsep [k, pretty x, k]
         Number  x               -> pretty x
         Bool    True            -> "true"
         Bool    False           -> "false"
@@ -197,7 +197,7 @@ data Pair = Assign !Id !Value
 instance Hashable Pair
 
 instance Pretty Pair where
-    prettyList = PP.vcat . map pretty
+    prettyList = PP.vsep . map pretty
     pretty     = \case
         Assign k (Block as)  -> pretty k <+> prettyMap (map pretty as)
         Assign k v           -> pretty k <+> "=" <+> pretty v
@@ -211,18 +211,15 @@ data Section = Section !(NonEmpty Id) ![Pair] ![Section]
 instance Hashable Section
 
 instance Pretty Section where
-    prettyList                = PP.vcat . map pretty
+    prettyList                = PP.vsep . map pretty
     pretty (Section ks ps ss) =
         prettyList (Fold.toList ks)
             <+> prettyMap (map pretty ps ++ map pretty ss)
 
 -- Pretty Utilities
 
-(<$$>) :: Doc ann -> Doc ann -> Doc ann
-(<$$>) a b = PP.vcat [a, b]
-
 prettyMap :: [Doc ann] -> Doc ann
-prettyMap xs = PP.nest 2 ("{" <$$> PP.vcat xs) <$$> "}"
+prettyMap xs = PP.vsep [PP.nest 2 (PP.vsep ("{" : xs)), "}"]
 
 -- Rendering
 
@@ -230,18 +227,18 @@ renderDocumentIO :: IO.Handle -> [Section] -> IO ()
 renderDocumentIO hd =
     Render.renderIO hd
         . PP.layoutPretty PP.defaultLayoutOptions
-            . PP.vcat . map pretty
+            . PP.vsep . map pretty
 
 renderDocument :: [Section] -> LText.Text
 renderDocument =
     Render.renderLazy
         . PP.layoutPretty PP.defaultLayoutOptions
-            . PP.vcat . List.intersperse mempty . map pretty
+            . PP.vsep . List.intersperse mempty . map pretty
 
 renderValue :: Value -> LText.Text
 renderValue =
     Render.renderLazy
-        . PP.layoutCompact
+        . PP.layoutPretty PP.defaultLayoutOptions
             . pretty
 
 -- Overloaded Serialization

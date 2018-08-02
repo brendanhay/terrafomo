@@ -216,7 +216,6 @@ data DynamoTableAttribute = DynamoTableAttribute !Text !DynamoAttributeType
 
 -- FIXME: Convert to Generic + HasName + HasType
 
-
 instance IsValue  DynamoTableAttribute
 instance IsObject DynamoTableAttribute where
     toObject (DynamoTableAttribute k v) =
