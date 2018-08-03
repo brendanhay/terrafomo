@@ -35,6 +35,7 @@ module Terrafomo.HCL
     , object
 
     -- ** Values
+    , null
     , number
     , string
     , list
@@ -47,7 +48,7 @@ module Terrafomo.HCL
     , json
     ) where
 
-import Prelude hiding (concat)
+import Prelude hiding (concat, null)
 
 import Data.Aeson                (ToJSON (..))
 import Data.Hashable             (Hashable)
@@ -280,7 +281,7 @@ instance IsValue Key where
     toValue (Key t n) = toValue (Format.sformat (ftype % "." % fname) t n)
 
 instance IsValue a => IsValue (Attr s a) where
-    toValue = fromMaybe Null . attribute
+    toValue = fromMaybe null . attribute
 
 class IsObject a where
     toObject :: a -> [Pair]
@@ -312,6 +313,9 @@ assign k = Assign k . toValue
 
 block :: IsObject a => Id -> a -> Pair
 block k = Assign k . Block . toObject
+
+null :: Value
+null = Null
 
 number :: Integral a => a -> Value
 number = Number . fromIntegral
@@ -352,8 +356,8 @@ attribute = \case
     -- FIXME: precedence - ${${${1 + 1} + 3} + 9} ...
     Infix  op a b -> Just . String $ Escape [a', " ", sym, " ", b']
       where
-        a'  = fromMaybe "nil" (attribute a)
-        b'  = fromMaybe "nil" (attribute b)
+        a'  = fromMaybe "null" (attribute a)
+        b'  = fromMaybe "null" (attribute b)
 
         sym = string (LText.fromStrict op)
 

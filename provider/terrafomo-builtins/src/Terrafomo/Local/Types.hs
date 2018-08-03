@@ -8,4 +8,4 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Local.Types where
+module Terrafomo.Local.Types () where

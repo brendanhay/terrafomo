@@ -1,10 +1,6 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
-{-# LANGUAGE DeriveGeneric          #-}
-{-# LANGUAGE FlexibleInstances      #-}
-
-{-# LANGUAGE MultiParamTypeClasses  #-}
-{-# LANGUAGE TemplateHaskell        #-}
+{-# LANGUAGE TemplateHaskell #-}
 
 -- |
 -- Module      : Terrafomo.Archive.Types
@@ -14,24 +10,27 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Archive.Types where
+module Terrafomo.Archive.Types
+    ( ArchiveSource (..)
+    , archiveSource
 
-import Data.Map.Strict (Map)
-import Data.Text       (Text)
+    , HasFilename   (..)
+    , HasContent    (..)
+    ) where
+
+import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
 import Terrafomo
-import Terrafomo.Archive.Lens
 
-import qualified Terrafomo    as TF
 import qualified Terrafomo.TH as TH
 
 data ArchiveSource s = ArchiveSource
-    { _filename :: !(TF.Attr s Text)
+    { _filename :: !(Attr s Text)
     -- ^ Set this as the filename when declaring a source.
-    , _content  :: !(TF.Attr s Text)
+    , _content  :: !(Attr s Text)
     -- ^ Add this content to the archive with '_filename' as the filename.
     } deriving (Show, Eq, Generic)
 
-$(TH.makeBlock ''ArchiveSource)
+$(TH.makeObject ''ArchiveSource)

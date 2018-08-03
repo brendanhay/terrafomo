@@ -18,7 +18,7 @@ full-clean: $(addsuffix -full-clean,$(PROVIDERS)) clean
 
 clean:
 	rm -f $(GENERATE)
-	rm -rf provider/*/gen provider/*/package.yaml terrafomo/gen/*
+	rm -rf provider/*/gen provider/*/*.cabal terrafomo/gen/*
 	@script/generate
 
 format: $(STYLISH)

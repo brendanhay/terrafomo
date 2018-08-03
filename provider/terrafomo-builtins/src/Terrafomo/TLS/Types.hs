@@ -1,7 +1,5 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
-
-
 -- |
 -- Module      : Terrafomo.TLS.Types
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -10,23 +8,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.TLS.Types where
+module Terrafomo.TLS.Types
+    ( Subject (..)
+    ) where
 
-import Data.Map.Strict (Map)
-import Data.Text       (Text)
+import Data.HashMap.Strict (HashMap)
+import Data.Text           (Text)
 
 import GHC.Exts (IsList (..))
 
 import Terrafomo
 
-import qualified Terrafomo.HCL      as HCL
-import qualified Terrafomo.TLS.Lens as TF
+import qualified Terrafomo.HCL as HCL
 
-newtype Subject s = Subject { fromSubject :: Map Text (Attr s Text) }
+newtype Subject s = Subject { fromSubject :: HashMap Text (Attr s Text) }
     deriving (Show, Eq)
 
-instance ToHCL (Subject s) where
-    toHCL = HCL.pairs . fromSubject
+instance IsValue  (Subject s)
+instance IsObject (Subject s) where
+    toObject = HCL.object . fromSubject
 
 instance IsList (Subject s) where
     type Item (Subject s) = (Text, Attr s Text)

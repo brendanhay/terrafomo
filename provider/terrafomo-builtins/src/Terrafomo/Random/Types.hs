@@ -1,7 +1,5 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
-
-
 -- |
 -- Module      : Terrafomo.Random.Types
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -10,10 +8,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Random.Types where
+module Terrafomo.Random.Types
+    ( Keepers (..)
+    ) where
 
-import Data.Map.Strict (Map)
-import Data.Text       (Text)
+import Data.HashMap.Strict (HashMap)
+import Data.Text           (Text)
 
 import GHC.Exts (IsList (..))
 
@@ -21,11 +21,12 @@ import Terrafomo
 
 import qualified Terrafomo.HCL as HCL
 
-newtype Keepers s = Keepers { fromKeepers :: Map Text (Attr s Text) }
+newtype Keepers s = Keepers { fromKeepers :: HashMap Text (Attr s Text) }
     deriving (Show, Eq)
 
-instance ToHCL (Keepers s) where
-    toHCL = HCL.pairs . fromKeepers
+instance IsValue  (Keepers s)
+instance IsObject (Keepers s) where
+    toObject = HCL.object . fromKeepers
 
 instance IsList (Keepers s) where
     type Item (Keepers s) = (Text, Attr s Text)

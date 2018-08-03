@@ -1,7 +1,6 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
-{-# LANGUAGE LambdaCase   #-}
-
+{-# LANGUAGE TemplateHaskell #-}
 
 -- |
 -- Module      : Terrafomo.Template.Types
@@ -14,27 +13,25 @@
 module Terrafomo.Template.Types
     ( Variables (..)
     , Var       (..)
-    , Map
     ) where
 
-import Data.Map.Strict (Map)
-import Data.Maybe      (fromMaybe)
-import Data.String     (IsString (fromString))
-import Data.Text       (Text)
-import Data.Word       (Word16)
+import Data.HashMap.Strict (HashMap)
+import Data.String         (IsString (fromString))
+import Data.Text           (Text)
+import Data.Word           (Word16)
 
 import GHC.Exts (IsList (..))
 
 import Terrafomo
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as HCL
+import qualified Terrafomo.HCL as HCL
 
-newtype Variables s = Variables { fromVariables :: Map Text (Var s) }
+newtype Variables s = Variables { fromVariables :: HashMap Text (Var s) }
     deriving (Show, Eq)
 
-instance ToHCL (Variables s) where
-    toHCL = HCL.pairs . fromVariables
+instance IsValue  (Variables s)
+instance IsObject (Variables s) where
+    toObject = HCL.object . fromVariables
 
 instance IsList (Variables s) where
     type Item (Variables s) = (Text, Var s)
@@ -51,14 +48,14 @@ data Var s
     | Word16  (Attr s Word16)
       deriving (Show, Eq)
 
-instance ToHCL (Var s) where
-    toHCL = fromMaybe HCL.empty . \case
-        Text    x -> HCL.attribute x
-        Bool    x -> HCL.attribute x
-        Double  x -> HCL.attribute x
-        Int     x -> HCL.attribute x
-        Integer x -> HCL.attribute x
-        Word16  x -> HCL.attribute x
+instance IsValue (Var s) where
+    toValue = \case
+        Text    x -> HCL.toValue x
+        Bool    x -> HCL.toValue x
+        Double  x -> HCL.toValue (show x)
+        Int     x -> HCL.toValue x
+        Integer x -> HCL.toValue x
+        Word16  x -> HCL.toValue x
 
 instance IsString (Var s) where
     fromString = Text . fromString
