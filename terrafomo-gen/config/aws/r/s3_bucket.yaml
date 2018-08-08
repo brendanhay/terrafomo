@@ -1,3 +1,5 @@
 arguments:
   _versioning:
     type: '(P.S3BucketVersioning s)'
+  _logging:
+    type: '(P.S3BucketLogging s)'
