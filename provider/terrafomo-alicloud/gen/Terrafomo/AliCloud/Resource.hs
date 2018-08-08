@@ -2766,23 +2766,37 @@ eipAssociationResource =
 
 {- | The @alicloud_eip@ AliCloud resource.
 
-Provides an elastic IP resource. ~> NOTE: The resource only support to
+Provides an elastic IP resource. -> NOTE: The resource only support to
 create @PayByTraffic@ elastic IP for international account. Otherwise, you
 will happened error @COMMODITY.INVALID_COMPONENT@ . Your account is
 international if you can use it to login in
-<https://account.alibabacloud.com/login/login.htm> .
+<https://account.alibabacloud.com/login/login.htm> . -> NOTE: From version
+1.10.1, this resource supports creating "PrePaid" EIP. In addition, it
+supports setting EIP name and description.
 -}
 data EipResource s = EipResource {
       _bandwidth            :: !(TF.Attr s P.Text)
     {- ^ (Optional) Maximum bandwidth to the elastic public network, measured in Mbps (Mega bit per second). If this value is not specified, then automatically sets it to 5 Mbps. -}
+    , _description          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Description of the EIP instance, This description can have a string of 2 to 256 characters, It cannot begin with http:// or https://. Default value is null. -}
+    , _instance_charge_type :: !(TF.Attr s P.Text)
+    {- ^ (Optional, ForceNew) Elastic IP instance charge type. Valid values are "PrePaid" and "PostPaid". Default to "PostPaid". -}
     , _internet_charge_type :: !(TF.Attr s P.Text)
-    {- ^ (Optional, Forces new resource) Internet charge type of the EIP, Valid values are @PayByBandwidth@ , @PayByTraffic@ . Default is @PayByBandwidth@ . From version @1.7.1@ , default to @PayByTraffic@ . -}
+    {- ^ (Optional, ForceNew) Internet charge type of the EIP, Valid values are @PayByBandwidth@ , @PayByTraffic@ . Default to @PayByBandwidth@ . From version @1.7.1@ , default to @PayByTraffic@ . -}
+    , _name                 :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the EIP instance. This name can have a string of 2 to 128 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin or end with a hyphen, and must not begin with http:// or https://. -}
+    , _period               :: !(TF.Attr s P.Text)
+    {- ^ (Optional, ForceNew) The duration that you will buy the resource, in month. It is valid when @instance_charge_type@ is @PrePaid@ . Default to 1. Valid values: [1-9, 12, 24, 36]. At present, the provider does not support modify "period" and you can do that via web console. -}
     } deriving (Show, Eq)
 
 instance TF.IsObject (EipResource s) where
     toObject EipResource{..} = catMaybes
         [ TF.assign "bandwidth" <$> TF.attribute _bandwidth
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "instance_charge_type" <$> TF.attribute _instance_charge_type
         , TF.assign "internet_charge_type" <$> TF.attribute _internet_charge_type
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "period" <$> TF.attribute _period
         ]
 
 instance P.HasBandwidth (EipResource s) (TF.Attr s P.Text) where
@@ -2790,22 +2804,62 @@ instance P.HasBandwidth (EipResource s) (TF.Attr s P.Text) where
         lens (_bandwidth :: EipResource s -> TF.Attr s P.Text)
              (\s a -> s { _bandwidth = a } :: EipResource s)
 
+instance P.HasDescription (EipResource s) (TF.Attr s P.Text) where
+    description =
+        lens (_description :: EipResource s -> TF.Attr s P.Text)
+             (\s a -> s { _description = a } :: EipResource s)
+
+instance P.HasInstanceChargeType (EipResource s) (TF.Attr s P.Text) where
+    instanceChargeType =
+        lens (_instance_charge_type :: EipResource s -> TF.Attr s P.Text)
+             (\s a -> s { _instance_charge_type = a } :: EipResource s)
+
 instance P.HasInternetChargeType (EipResource s) (TF.Attr s P.Text) where
     internetChargeType =
         lens (_internet_charge_type :: EipResource s -> TF.Attr s P.Text)
              (\s a -> s { _internet_charge_type = a } :: EipResource s)
 
+instance P.HasName (EipResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: EipResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: EipResource s)
+
+instance P.HasPeriod (EipResource s) (TF.Attr s P.Text) where
+    period =
+        lens (_period :: EipResource s -> TF.Attr s P.Text)
+             (\s a -> s { _period = a } :: EipResource s)
+
 instance s ~ s' => P.HasComputedBandwidth (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedBandwidth x = TF.compute (TF.refKey x) "bandwidth"
 
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
+    computedDescription =
+        (_description :: EipResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstanceChargeType (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
+    computedInstanceChargeType =
+        (_instance_charge_type :: EipResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedInternetChargeType (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedInternetChargeType x = TF.compute (TF.refKey x) "internet_charge_type"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: EipResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
+    computedPeriod =
+        (_period :: EipResource s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
@@ -2815,7 +2869,11 @@ eipResource =
     TF.newResource "alicloud_eip" $
         EipResource {
               _bandwidth = TF.Nil
+            , _description = TF.Nil
+            , _instance_charge_type = TF.Nil
             , _internet_charge_type = TF.Nil
+            , _name = TF.Nil
+            , _period = TF.Nil
             }
 
 {- | The @alicloud_ess_attachment@ AliCloud resource.
@@ -5307,7 +5365,7 @@ otsInstanceResource =
 
 {- | The @alicloud_ots_table@ AliCloud resource.
 
-Provides an OTS table resource. ~> NOTE: From Provider version 1.9.7, the
+Provides an OTS table resource. ~> NOTE: From Provider version 1.10.0, the
 provider field 'ots_instance_name' has been deprecated and you should use
 resource alicloud_ots_table's new field 'instance_name' and 'table_name' to
 re-import this resource.
@@ -7069,7 +7127,7 @@ data SlbResource s = SlbResource {
     , _internet             :: !(TF.Attr s P.Text)
     {- ^ (Optional, Forces New Resource) If true, the SLB addressType will be internet, false will be intranet, Default is false. If load balancer launched in VPC, this value must be "false". -}
     , _internet_charge_type :: !(TF.Attr s P.Text)
-    {- ^ (Optional, Forces New Resource) Valid values are @paybybandwidth@ , @paybytraffic@ . If this value is "paybybandwidth", then argument "internet" must be "true". Default is "paybytraffic". If load balancer launched in VPC, this value must be "paybytraffic". -}
+    {- ^ (Optional, Forces New Resource) Valid values are @PayByBandwidth@ , @PayByTraffic@ . If this value is "PayByBandwidth", then argument "internet" must be "true". Default is "PayByTraffic". If load balancer launched in VPC, this value must be "PayByTraffic". Before version 1.10.1, the valid values are "paybybandwidth" and "paybytraffic". -}
     , _name                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the SLB. This name must be unique within your AliCloud account, can have a maximum of 80 characters, must contain only alphanumeric characters or hyphens, such as "-","/",".","_", and must not begin or end with a hyphen. If not specified, Terraform will autogenerate a name beginning with @tf-lb@ . -}
     , _specification        :: !(TF.Attr s P.Text)

@@ -48,8 +48,8 @@ by <https://www.aliyun.com> . The provider needs to be configured with the
 proper credentials before it can be used. Use the navigation to the left to
 read about the available resources. -> Note: When you use terraform on the
 @Windowns@ computer, please install <https://golang.org/dl/> in your
-computer. Otherwise, you may happen the issue from version 1.8.1 and the
-issue details can refer to
+computer. Otherwise, you may happen the issue from version 1.8.1 to 1.10.0
+and the issue details can refer to
 <https://github.com/alibaba/terraform-provider/issues/469> .
 -}
 data AliCloud = AliCloud {
