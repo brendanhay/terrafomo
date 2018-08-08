@@ -32,6 +32,9 @@ module Terrafomo.OpenStack.DataSource
     , IdentityEndpointV3Data (..)
     , identityEndpointV3Data
 
+    , IdentityGroupV3Data (..)
+    , identityGroupV3Data
+
     , IdentityProjectV3Data (..)
     , identityProjectV3Data
 
@@ -43,6 +46,9 @@ module Terrafomo.OpenStack.DataSource
 
     , ImagesImageV2Data (..)
     , imagesImageV2Data
+
+    , NetworkingFloatingipV2Data (..)
+    , networkingFloatingipV2Data
 
     , NetworkingNetworkV2Data (..)
     , networkingNetworkV2Data
@@ -58,6 +64,7 @@ module Terrafomo.OpenStack.DataSource
 
     -- * Overloaded Fields
     -- ** Arguments
+    , P.HasAddress (..)
     , P.HasAddressScopeId (..)
     , P.HasAvailabilityZoneHints (..)
     , P.HasCidr (..)
@@ -72,6 +79,7 @@ module Terrafomo.OpenStack.DataSource
     , P.HasEmail (..)
     , P.HasEnabled (..)
     , P.HasExternal (..)
+    , P.HasFixedIp (..)
     , P.HasGatewayIp (..)
     , P.HasIdpId (..)
     , P.HasInterface (..)
@@ -92,6 +100,8 @@ module Terrafomo.OpenStack.DataSource
     , P.HasOwner (..)
     , P.HasParentId (..)
     , P.HasPasswordExpiresAt (..)
+    , P.HasPool (..)
+    , P.HasPortId (..)
     , P.HasPrefixes (..)
     , P.HasProjectId (..)
     , P.HasProperties (..)
@@ -120,6 +130,7 @@ module Terrafomo.OpenStack.DataSource
     , P.HasVisibility (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAddress (..)
     , P.HasComputedAddressScopeId (..)
     , P.HasComputedAdminStateUp (..)
     , P.HasComputedAllocationPools (..)
@@ -144,6 +155,7 @@ module Terrafomo.OpenStack.DataSource
     , P.HasComputedEnabled (..)
     , P.HasComputedExternal (..)
     , P.HasComputedFile (..)
+    , P.HasComputedFixedIp (..)
     , P.HasComputedGatewayIp (..)
     , P.HasComputedHostRoutes (..)
     , P.HasComputedIdpId (..)
@@ -170,7 +182,9 @@ module Terrafomo.OpenStack.DataSource
     , P.HasComputedOwner (..)
     , P.HasComputedParentId (..)
     , P.HasComputedPasswordExpiresAt (..)
+    , P.HasComputedPool (..)
     , P.HasComputedPoolId (..)
+    , P.HasComputedPortId (..)
     , P.HasComputedPrefixes (..)
     , P.HasComputedProjectDomainId (..)
     , P.HasComputedProjectDomainName (..)
@@ -706,6 +720,60 @@ identityEndpointV3Data =
             , _service_name = TF.Nil
             }
 
+{- | The @openstack_identity_group_v3@ OpenStack datasource.
+
+Use this data source to get the ID of an OpenStack group. Note: This usually
+requires admin privileges.
+-}
+data IdentityGroupV3Data s = IdentityGroupV3Data {
+      _domain_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The domain the group belongs to. -}
+    , _name      :: !(TF.Attr s P.Text)
+    {- ^ - The name of the group. -}
+    , _region    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V3 Keystone client. If omitted, the @region@ argument of the provider is used. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (IdentityGroupV3Data s) where
+    toObject IdentityGroupV3Data{..} = catMaybes
+        [ TF.assign "domain_id" <$> TF.attribute _domain_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance P.HasDomainId (IdentityGroupV3Data s) (TF.Attr s P.Text) where
+    domainId =
+        lens (_domain_id :: IdentityGroupV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _domain_id = a } :: IdentityGroupV3Data s)
+
+instance P.HasName (IdentityGroupV3Data s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: IdentityGroupV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: IdentityGroupV3Data s)
+
+instance P.HasRegion (IdentityGroupV3Data s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: IdentityGroupV3Data s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: IdentityGroupV3Data s)
+
+instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (IdentityGroupV3Data s)) (TF.Attr s P.Text) where
+    computedDomainId x = TF.compute (TF.refKey x) "domain_id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (IdentityGroupV3Data s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityGroupV3Data s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+identityGroupV3Data :: TF.DataSource P.OpenStack (IdentityGroupV3Data s)
+identityGroupV3Data =
+    TF.newDataSource "openstack_identity_group_v3" $
+        IdentityGroupV3Data {
+              _domain_id = TF.Nil
+            , _name = TF.Nil
+            , _region = TF.Nil
+            }
+
 {- | The @openstack_identity_project_v3@ OpenStack datasource.
 
 Use this data source to get the ID of an OpenStack project.
@@ -1192,6 +1260,110 @@ imagesImageV2Data =
             , _sort_key = TF.Nil
             , _tag = TF.Nil
             , _visibility = TF.Nil
+            }
+
+{- | The @openstack_networking_floatingip_v2@ OpenStack datasource.
+
+Use this data source to get the ID of an available OpenStack floating IP.
+-}
+data NetworkingFloatingipV2Data s = NetworkingFloatingipV2Data {
+      _address   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IP address of the floating IP. -}
+    , _fixed_ip  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The specific IP address of the internal port which should be associated with the floating IP. -}
+    , _pool      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the pool from which the floating IP belongs to. -}
+    , _port_id   :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The ID of the port the floating IP is attached. -}
+    , _region    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The region in which to obtain the V2 Neutron client. A Neutron client is needed to retrieve floating IP ids. If omitted, the @region@ argument of the provider is used. -}
+    , _tenant_id :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The owner of the floating IP. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (NetworkingFloatingipV2Data s) where
+    toObject NetworkingFloatingipV2Data{..} = catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "fixed_ip" <$> TF.attribute _fixed_ip
+        , TF.assign "pool" <$> TF.attribute _pool
+        , TF.assign "port_id" <$> TF.attribute _port_id
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        ]
+
+instance P.HasAddress (NetworkingFloatingipV2Data s) (TF.Attr s P.Text) where
+    address =
+        lens (_address :: NetworkingFloatingipV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _address = a } :: NetworkingFloatingipV2Data s)
+
+instance P.HasFixedIp (NetworkingFloatingipV2Data s) (TF.Attr s P.Text) where
+    fixedIp =
+        lens (_fixed_ip :: NetworkingFloatingipV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _fixed_ip = a } :: NetworkingFloatingipV2Data s)
+
+instance P.HasPool (NetworkingFloatingipV2Data s) (TF.Attr s P.Text) where
+    pool =
+        lens (_pool :: NetworkingFloatingipV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _pool = a } :: NetworkingFloatingipV2Data s)
+
+instance P.HasPortId (NetworkingFloatingipV2Data s) (TF.Attr s P.Text) where
+    portId =
+        lens (_port_id :: NetworkingFloatingipV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _port_id = a } :: NetworkingFloatingipV2Data s)
+
+instance P.HasRegion (NetworkingFloatingipV2Data s) (TF.Attr s P.Text) where
+    region =
+        lens (_region :: NetworkingFloatingipV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: NetworkingFloatingipV2Data s)
+
+instance P.HasTenantId (NetworkingFloatingipV2Data s) (TF.Attr s P.Text) where
+    tenantId =
+        lens (_tenant_id :: NetworkingFloatingipV2Data s -> TF.Attr s P.Text)
+             (\s a -> s { _tenant_id = a } :: NetworkingFloatingipV2Data s)
+
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (NetworkingFloatingipV2Data s)) (TF.Attr s P.Text) where
+    computedAddress =
+        (_address :: NetworkingFloatingipV2Data s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedFixedIp (TF.Ref s' (NetworkingFloatingipV2Data s)) (TF.Attr s P.Text) where
+    computedFixedIp =
+        (_fixed_ip :: NetworkingFloatingipV2Data s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPool (TF.Ref s' (NetworkingFloatingipV2Data s)) (TF.Attr s P.Text) where
+    computedPool =
+        (_pool :: NetworkingFloatingipV2Data s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPortId (TF.Ref s' (NetworkingFloatingipV2Data s)) (TF.Attr s P.Text) where
+    computedPortId =
+        (_port_id :: NetworkingFloatingipV2Data s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingFloatingipV2Data s)) (TF.Attr s P.Text) where
+    computedRegion =
+        (_region :: NetworkingFloatingipV2Data s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (NetworkingFloatingipV2Data s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (NetworkingFloatingipV2Data s)) (TF.Attr s P.Text) where
+    computedTenantId =
+        (_tenant_id :: NetworkingFloatingipV2Data s -> TF.Attr s P.Text)
+            . TF.refValue
+
+networkingFloatingipV2Data :: TF.DataSource P.OpenStack (NetworkingFloatingipV2Data s)
+networkingFloatingipV2Data =
+    TF.newDataSource "openstack_networking_floatingip_v2" $
+        NetworkingFloatingipV2Data {
+              _address = TF.Nil
+            , _fixed_ip = TF.Nil
+            , _pool = TF.Nil
+            , _port_id = TF.Nil
+            , _region = TF.Nil
+            , _tenant_id = TF.Nil
             }
 
 {- | The @openstack_networking_network_v2@ OpenStack datasource.

@@ -6497,7 +6497,7 @@ data NetworkingSubnetV2Resource s = NetworkingSubnetV2Resource {
       _allocation_pools  :: !(TF.Attr s P.Text)
     {- ^ (Optional) An array of sub-ranges of CIDR available for dynamic allocation to ports. The allocation_pool object structure is documented below. Changing this creates a new subnet. -}
     , _cidr              :: !(TF.Attr s P.Text)
-    {- ^ (Required) CIDR representing IP range for this subnet, based on IP version. Changing this creates a new subnet. -}
+    {- ^ (Optional) CIDR representing IP range for this subnet, based on IP version. You can omit this option if you are creating a subnet from a subnet pool. -}
     , _dns_nameservers   :: !(TF.Attr s P.Text)
     {- ^ (Optional) An array of DNS name server names used by hosts in this subnet. Changing this updates the DNS name servers for the existing subnet. -}
     , _enable_dhcp       :: !(TF.Attr s P.Text)
