@@ -62,6 +62,9 @@ module Terrafomo.Heroku.Resource
     , SpaceResource (..)
     , spaceResource
 
+    , SpaceVpnConnectionResource (..)
+    , spaceVpnConnectionResource
+
     , TeamCollaboratorResource (..)
     , teamCollaboratorResource
 
@@ -86,8 +89,10 @@ module Terrafomo.Heroku.Resource
     , P.HasPipeline (..)
     , P.HasPlan (..)
     , P.HasPrivateKey (..)
+    , P.HasPublicIp (..)
     , P.HasQuantity (..)
     , P.HasRegion (..)
+    , P.HasRoutableCidrs (..)
     , P.HasRule (..)
     , P.HasShield (..)
     , P.HasSize (..)
@@ -117,6 +122,7 @@ module Terrafomo.Heroku.Resource
     , P.HasComputedHerokuHostname (..)
     , P.HasComputedHostname (..)
     , P.HasComputedId (..)
+    , P.HasComputedIkeVersion (..)
     , P.HasComputedInternalRouting (..)
     , P.HasComputedName (..)
     , P.HasComputedOrganization (..)
@@ -126,17 +132,21 @@ module Terrafomo.Heroku.Resource
     , P.HasComputedPlan (..)
     , P.HasComputedPrivateKey (..)
     , P.HasComputedProviderId (..)
+    , P.HasComputedPublicIp (..)
     , P.HasComputedQuantity (..)
     , P.HasComputedRegion (..)
+    , P.HasComputedRoutableCidrs (..)
     , P.HasComputedRule (..)
     , P.HasComputedShield (..)
     , P.HasComputedSize (..)
     , P.HasComputedSlugId (..)
     , P.HasComputedSpace (..)
+    , P.HasComputedSpaceCidrBlock (..)
     , P.HasComputedStack (..)
     , P.HasComputedStage (..)
     , P.HasComputedStatus (..)
     , P.HasComputedToken (..)
+    , P.HasComputedTunnels (..)
     , P.HasComputedType' (..)
     , P.HasComputedUrl (..)
     , P.HasComputedVpcPeeringConnectionId (..)
@@ -1158,6 +1168,94 @@ spaceResource =
             , _organization = TF.Nil
             , _region = TF.Nil
             , _shield = TF.Nil
+            }
+
+{- | The @heroku_space_vpn_connection@ Heroku resource.
+
+Provides a resource for creating a VPN connection between a network and a
+Heroku Private Space. For more information, see
+<https://devcenter.heroku.com/articles/private-space-vpn-connection?preview=1>
+in the Heroku DevCenter. ~> NOTE: VPN connections are currently a beta
+feature that requires you email Heroku Support to have it enabled.
+Attempting to create a VPN connection without the feature enabled by Heroku
+Support will fail.
+-}
+data SpaceVpnConnectionResource s = SpaceVpnConnectionResource {
+      _name           :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the VPN connection. -}
+    , _public_ip      :: !(TF.Attr s P.Text)
+    {- ^ (Required) The public IP address of the VPN endpoint on the network where the VPN connection will be established. -}
+    , _routable_cidrs :: !(TF.Attr s P.Text)
+    {- ^ (Required) A list of IPv4 CIDR blocks used by the network where the VPN connection will be established. -}
+    , _space          :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the Heroku Private Space where the VPN connection will be established. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (SpaceVpnConnectionResource s) where
+    toObject SpaceVpnConnectionResource{..} = catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "public_ip" <$> TF.attribute _public_ip
+        , TF.assign "routable_cidrs" <$> TF.attribute _routable_cidrs
+        , TF.assign "space" <$> TF.attribute _space
+        ]
+
+instance P.HasName (SpaceVpnConnectionResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: SpaceVpnConnectionResource s)
+
+instance P.HasPublicIp (SpaceVpnConnectionResource s) (TF.Attr s P.Text) where
+    publicIp =
+        lens (_public_ip :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _public_ip = a } :: SpaceVpnConnectionResource s)
+
+instance P.HasRoutableCidrs (SpaceVpnConnectionResource s) (TF.Attr s P.Text) where
+    routableCidrs =
+        lens (_routable_cidrs :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _routable_cidrs = a } :: SpaceVpnConnectionResource s)
+
+instance P.HasSpace (SpaceVpnConnectionResource s) (TF.Attr s P.Text) where
+    space =
+        lens (_space :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
+             (\s a -> s { _space = a } :: SpaceVpnConnectionResource s)
+
+instance s ~ s' => P.HasComputedIkeVersion (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
+    computedIkeVersion x = TF.compute (TF.refKey x) "ike_version"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
+    computedPublicIp =
+        (_public_ip :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedRoutableCidrs (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
+    computedRoutableCidrs =
+        (_routable_cidrs :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSpace (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
+    computedSpace =
+        (_space :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedSpaceCidrBlock (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
+    computedSpaceCidrBlock x = TF.compute (TF.refKey x) "space_cidr_block"
+
+instance s ~ s' => P.HasComputedTunnels (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
+    computedTunnels x = TF.compute (TF.refKey x) "tunnels"
+
+spaceVpnConnectionResource :: TF.Resource P.Heroku (SpaceVpnConnectionResource s)
+spaceVpnConnectionResource =
+    TF.newResource "heroku_space_vpn_connection" $
+        SpaceVpnConnectionResource {
+              _name = TF.Nil
+            , _public_ip = TF.Nil
+            , _routable_cidrs = TF.Nil
+            , _space = TF.Nil
             }
 
 {- | The @heroku_team_collaborator@ Heroku resource.

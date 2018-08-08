@@ -34,8 +34,10 @@ module Terrafomo.Heroku.Lens
     , HasPipeline (..)
     , HasPlan (..)
     , HasPrivateKey (..)
+    , HasPublicIp (..)
     , HasQuantity (..)
     , HasRegion (..)
+    , HasRoutableCidrs (..)
     , HasRule (..)
     , HasShield (..)
     , HasSize (..)
@@ -68,6 +70,7 @@ module Terrafomo.Heroku.Lens
     , HasComputedHerokuHostname (..)
     , HasComputedHostname (..)
     , HasComputedId (..)
+    , HasComputedIkeVersion (..)
     , HasComputedInternalRouting (..)
     , HasComputedName (..)
     , HasComputedOrganization (..)
@@ -77,18 +80,22 @@ module Terrafomo.Heroku.Lens
     , HasComputedPlan (..)
     , HasComputedPrivateKey (..)
     , HasComputedProviderId (..)
+    , HasComputedPublicIp (..)
     , HasComputedQuantity (..)
     , HasComputedRegion (..)
+    , HasComputedRoutableCidrs (..)
     , HasComputedRule (..)
     , HasComputedShield (..)
     , HasComputedSize (..)
     , HasComputedSlugId (..)
     , HasComputedSpace (..)
+    , HasComputedSpaceCidrBlock (..)
     , HasComputedStack (..)
     , HasComputedStage (..)
     , HasComputedState (..)
     , HasComputedStatus (..)
     , HasComputedToken (..)
+    , HasComputedTunnels (..)
     , HasComputedType' (..)
     , HasComputedUnavailableCidrBlocks (..)
     , HasComputedUrl (..)
@@ -218,6 +225,12 @@ class HasPrivateKey a b | a -> b where
 instance HasPrivateKey a b => HasPrivateKey (TF.Schema l p a) b where
     privateKey = TF.configuration . privateKey
 
+class HasPublicIp a b | a -> b where
+    publicIp :: Lens' a b
+
+instance HasPublicIp a b => HasPublicIp (TF.Schema l p a) b where
+    publicIp = TF.configuration . publicIp
+
 class HasQuantity a b | a -> b where
     quantity :: Lens' a b
 
@@ -229,6 +242,12 @@ class HasRegion a b | a -> b where
 
 instance HasRegion a b => HasRegion (TF.Schema l p a) b where
     region = TF.configuration . region
+
+class HasRoutableCidrs a b | a -> b where
+    routableCidrs :: Lens' a b
+
+instance HasRoutableCidrs a b => HasRoutableCidrs (TF.Schema l p a) b where
+    routableCidrs = TF.configuration . routableCidrs
 
 class HasRule a b | a -> b where
     rule :: Lens' a b
@@ -350,6 +369,9 @@ class HasComputedHostname a b | a -> b where
 class HasComputedId a b | a -> b where
     computedId :: a -> b
 
+class HasComputedIkeVersion a b | a -> b where
+    computedIkeVersion :: a -> b
+
 class HasComputedInternalRouting a b | a -> b where
     computedInternalRouting :: a -> b
 
@@ -377,11 +399,17 @@ class HasComputedPrivateKey a b | a -> b where
 class HasComputedProviderId a b | a -> b where
     computedProviderId :: a -> b
 
+class HasComputedPublicIp a b | a -> b where
+    computedPublicIp :: a -> b
+
 class HasComputedQuantity a b | a -> b where
     computedQuantity :: a -> b
 
 class HasComputedRegion a b | a -> b where
     computedRegion :: a -> b
+
+class HasComputedRoutableCidrs a b | a -> b where
+    computedRoutableCidrs :: a -> b
 
 class HasComputedRule a b | a -> b where
     computedRule :: a -> b
@@ -398,6 +426,9 @@ class HasComputedSlugId a b | a -> b where
 class HasComputedSpace a b | a -> b where
     computedSpace :: a -> b
 
+class HasComputedSpaceCidrBlock a b | a -> b where
+    computedSpaceCidrBlock :: a -> b
+
 class HasComputedStack a b | a -> b where
     computedStack :: a -> b
 
@@ -412,6 +443,9 @@ class HasComputedStatus a b | a -> b where
 
 class HasComputedToken a b | a -> b where
     computedToken :: a -> b
+
+class HasComputedTunnels a b | a -> b where
+    computedTunnels :: a -> b
 
 class HasComputedType' a b | a -> b where
     computedType' :: a -> b
