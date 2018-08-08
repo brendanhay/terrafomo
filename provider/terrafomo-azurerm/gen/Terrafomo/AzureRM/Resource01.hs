@@ -68,8 +68,8 @@ module Terrafomo.AzureRM.Resource01
     , ContainerServiceResource (..)
     , containerServiceResource
 
-    , CosmosDbAccountResource (..)
-    , cosmosDbAccountResource
+    , CosmosdbAccountResource (..)
+    , cosmosdbAccountResource
 
     , DataLakeAnalyticsAccountResource (..)
     , dataLakeAnalyticsAccountResource
@@ -2921,11 +2921,11 @@ containerServiceResource =
             , _tags = TF.Nil
             }
 
-{- | The @azurerm_cosmos_db_account@ AzureRM resource.
+{- | The @azurerm_cosmosdb_account@ AzureRM resource.
 
 Manages a CosmosDB (formally DocumentDB) Account.
 -}
-data CosmosDbAccountResource s = CosmosDbAccountResource {
+data CosmosdbAccountResource s = CosmosdbAccountResource {
       _capabilities :: !(TF.Attr s P.Text)
     {- ^ (Optional) Enable capabilities for this Cosmos DB account. Possible values are @EnableTable@ and @EnableGremlin@ . -}
     , _consistency_policy :: !(TF.Attr s P.Text)
@@ -2950,8 +2950,8 @@ data CosmosDbAccountResource s = CosmosDbAccountResource {
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
-instance TF.IsObject (CosmosDbAccountResource s) where
-    toObject CosmosDbAccountResource{..} = catMaybes
+instance TF.IsObject (CosmosdbAccountResource s) where
+    toObject CosmosdbAccountResource{..} = catMaybes
         [ TF.assign "capabilities" <$> TF.attribute _capabilities
         , TF.assign "consistency_policy" <$> TF.attribute _consistency_policy
         , TF.assign "enable_automatic_failover" <$> TF.attribute _enable_automatic_failover
@@ -2965,147 +2965,147 @@ instance TF.IsObject (CosmosDbAccountResource s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasCapabilities (CosmosDbAccountResource s) (TF.Attr s P.Text) where
+instance P.HasCapabilities (CosmosdbAccountResource s) (TF.Attr s P.Text) where
     capabilities =
-        lens (_capabilities :: CosmosDbAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _capabilities = a } :: CosmosDbAccountResource s)
+        lens (_capabilities :: CosmosdbAccountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _capabilities = a } :: CosmosdbAccountResource s)
 
-instance P.HasConsistencyPolicy (CosmosDbAccountResource s) (TF.Attr s P.Text) where
+instance P.HasConsistencyPolicy (CosmosdbAccountResource s) (TF.Attr s P.Text) where
     consistencyPolicy =
-        lens (_consistency_policy :: CosmosDbAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _consistency_policy = a } :: CosmosDbAccountResource s)
+        lens (_consistency_policy :: CosmosdbAccountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _consistency_policy = a } :: CosmosdbAccountResource s)
 
-instance P.HasEnableAutomaticFailover (CosmosDbAccountResource s) (TF.Attr s P.Text) where
+instance P.HasEnableAutomaticFailover (CosmosdbAccountResource s) (TF.Attr s P.Text) where
     enableAutomaticFailover =
-        lens (_enable_automatic_failover :: CosmosDbAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _enable_automatic_failover = a } :: CosmosDbAccountResource s)
+        lens (_enable_automatic_failover :: CosmosdbAccountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _enable_automatic_failover = a } :: CosmosdbAccountResource s)
 
-instance P.HasGeoLocation (CosmosDbAccountResource s) (TF.Attr s P.Text) where
+instance P.HasGeoLocation (CosmosdbAccountResource s) (TF.Attr s P.Text) where
     geoLocation =
-        lens (_geo_location :: CosmosDbAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _geo_location = a } :: CosmosDbAccountResource s)
+        lens (_geo_location :: CosmosdbAccountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _geo_location = a } :: CosmosdbAccountResource s)
 
-instance P.HasIpRangeFilter (CosmosDbAccountResource s) (TF.Attr s P.Text) where
+instance P.HasIpRangeFilter (CosmosdbAccountResource s) (TF.Attr s P.Text) where
     ipRangeFilter =
-        lens (_ip_range_filter :: CosmosDbAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_range_filter = a } :: CosmosDbAccountResource s)
+        lens (_ip_range_filter :: CosmosdbAccountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _ip_range_filter = a } :: CosmosdbAccountResource s)
 
-instance P.HasKind (CosmosDbAccountResource s) (TF.Attr s P.Text) where
+instance P.HasKind (CosmosdbAccountResource s) (TF.Attr s P.Text) where
     kind =
-        lens (_kind :: CosmosDbAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _kind = a } :: CosmosDbAccountResource s)
+        lens (_kind :: CosmosdbAccountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _kind = a } :: CosmosdbAccountResource s)
 
-instance P.HasLocation (CosmosDbAccountResource s) (TF.Attr s P.Text) where
+instance P.HasLocation (CosmosdbAccountResource s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: CosmosDbAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: CosmosDbAccountResource s)
+        lens (_location :: CosmosdbAccountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _location = a } :: CosmosdbAccountResource s)
 
-instance P.HasName (CosmosDbAccountResource s) (TF.Attr s P.Text) where
+instance P.HasName (CosmosdbAccountResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: CosmosDbAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: CosmosDbAccountResource s)
+        lens (_name :: CosmosdbAccountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: CosmosdbAccountResource s)
 
-instance P.HasOfferType (CosmosDbAccountResource s) (TF.Attr s P.Text) where
+instance P.HasOfferType (CosmosdbAccountResource s) (TF.Attr s P.Text) where
     offerType =
-        lens (_offer_type :: CosmosDbAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _offer_type = a } :: CosmosDbAccountResource s)
+        lens (_offer_type :: CosmosdbAccountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _offer_type = a } :: CosmosdbAccountResource s)
 
-instance P.HasResourceGroupName (CosmosDbAccountResource s) (TF.Attr s P.Text) where
+instance P.HasResourceGroupName (CosmosdbAccountResource s) (TF.Attr s P.Text) where
     resourceGroupName =
-        lens (_resource_group_name :: CosmosDbAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_group_name = a } :: CosmosDbAccountResource s)
+        lens (_resource_group_name :: CosmosdbAccountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _resource_group_name = a } :: CosmosdbAccountResource s)
 
-instance P.HasTags (CosmosDbAccountResource s) (TF.Attr s P.Text) where
+instance P.HasTags (CosmosdbAccountResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: CosmosDbAccountResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: CosmosDbAccountResource s)
+        lens (_tags :: CosmosdbAccountResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: CosmosdbAccountResource s)
 
-instance s ~ s' => P.HasComputedCapabilities (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCapabilities (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedCapabilities =
-        (_capabilities :: CosmosDbAccountResource s -> TF.Attr s P.Text)
+        (_capabilities :: CosmosdbAccountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedConnectionStrings (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConnectionStrings (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedConnectionStrings x = TF.compute (TF.refKey x) "connection_strings"
 
-instance s ~ s' => P.HasComputedConsistencyPolicy (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConsistencyPolicy (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedConsistencyPolicy =
-        (_consistency_policy :: CosmosDbAccountResource s -> TF.Attr s P.Text)
+        (_consistency_policy :: CosmosdbAccountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEnableAutomaticFailover (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnableAutomaticFailover (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedEnableAutomaticFailover =
-        (_enable_automatic_failover :: CosmosDbAccountResource s -> TF.Attr s P.Text)
+        (_enable_automatic_failover :: CosmosdbAccountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
 
-instance s ~ s' => P.HasComputedGeoLocation (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGeoLocation (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedGeoLocation =
-        (_geo_location :: CosmosDbAccountResource s -> TF.Attr s P.Text)
+        (_geo_location :: CosmosdbAccountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedIpRangeFilter (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpRangeFilter (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedIpRangeFilter =
-        (_ip_range_filter :: CosmosDbAccountResource s -> TF.Attr s P.Text)
+        (_ip_range_filter :: CosmosdbAccountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedKind (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKind (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedKind =
-        (_kind :: CosmosDbAccountResource s -> TF.Attr s P.Text)
+        (_kind :: CosmosdbAccountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedLocation =
-        (_location :: CosmosDbAccountResource s -> TF.Attr s P.Text)
+        (_location :: CosmosdbAccountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedName =
-        (_name :: CosmosDbAccountResource s -> TF.Attr s P.Text)
+        (_name :: CosmosdbAccountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedOfferType (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOfferType (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedOfferType =
-        (_offer_type :: CosmosDbAccountResource s -> TF.Attr s P.Text)
+        (_offer_type :: CosmosdbAccountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedPrimaryMasterKey (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimaryMasterKey (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedPrimaryMasterKey x = TF.compute (TF.refKey x) "primary_master_key"
 
-instance s ~ s' => P.HasComputedPrimaryReadonlyMasterKey (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimaryReadonlyMasterKey (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedPrimaryReadonlyMasterKey x = TF.compute (TF.refKey x) "primary_readonly_master_key"
 
-instance s ~ s' => P.HasComputedReadEndpoints (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedReadEndpoints (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedReadEndpoints x = TF.compute (TF.refKey x) "read_endpoints"
 
-instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceGroupName (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedResourceGroupName =
-        (_resource_group_name :: CosmosDbAccountResource s -> TF.Attr s P.Text)
+        (_resource_group_name :: CosmosdbAccountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedSecondaryMasterKey (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecondaryMasterKey (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedSecondaryMasterKey x = TF.compute (TF.refKey x) "secondary_master_key"
 
-instance s ~ s' => P.HasComputedSecondaryReadonlyMasterKey (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecondaryReadonlyMasterKey (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedSecondaryReadonlyMasterKey x = TF.compute (TF.refKey x) "secondary_readonly_master_key"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: CosmosDbAccountResource s -> TF.Attr s P.Text)
+        (_tags :: CosmosdbAccountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedWriteEndpoints (TF.Ref s' (CosmosDbAccountResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedWriteEndpoints (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedWriteEndpoints x = TF.compute (TF.refKey x) "write_endpoints"
 
-cosmosDbAccountResource :: TF.Resource P.AzureRM (CosmosDbAccountResource s)
-cosmosDbAccountResource =
-    TF.newResource "azurerm_cosmos_db_account" $
-        CosmosDbAccountResource {
+cosmosdbAccountResource :: TF.Resource P.AzureRM (CosmosdbAccountResource s)
+cosmosdbAccountResource =
+    TF.newResource "azurerm_cosmosdb_account" $
+        CosmosdbAccountResource {
               _capabilities = TF.Nil
             , _consistency_policy = TF.Nil
             , _enable_automatic_failover = TF.Nil
@@ -5967,7 +5967,7 @@ lbNatPoolResource =
 
 {- | The @azurerm_lb_nat_rule@ AzureRM resource.
 
-Create a LoadBalancer NAT Rule. ~> NOTE When using this resource, the
+Manages a LoadBalancer NAT Rule. ~> NOTE When using this resource, the
 LoadBalancer needs to have a FrontEnd IP Configuration Attached
 -}
 data LbNatRuleResource s = LbNatRuleResource {
@@ -5984,7 +5984,7 @@ data LbNatRuleResource s = LbNatRuleResource {
     , _name :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the name of the NAT Rule. -}
     , _protocol :: !(TF.Attr s P.Text)
-    {- ^ (Required) The transport protocol for the external endpoint. Possible values are @Udp@ or @Tcp@ . -}
+    {- ^ (Required) The transport protocol for the external endpoint. Possible values are @Udp@ , @Tcp@ or @All@ . -}
     , _resource_group_name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the resource group in which to create the resource. -}
     } deriving (Show, Eq)
@@ -9008,6 +9008,9 @@ roleAssignmentResource =
 {- | The @azurerm_role_definition@ AzureRM resource.
 
 Manages a custom Role Definition, used to assign Roles to Users/Principals.
+See
+<https://docs.microsoft.com/en-us/azure/role-based-access-control/role-definitions>
+in the Azure documentation for more details.
 -}
 data RoleDefinitionResource s = RoleDefinitionResource {
       _assignable_scopes :: !(TF.Attr s P.Text)
