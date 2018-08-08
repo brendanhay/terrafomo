@@ -28,6 +28,7 @@ module Terrafomo.GitHub.Lens
     , HasDescription (..)
     , HasEnforceAdmins (..)
     , HasEvents (..)
+    , HasFullName (..)
     , HasGitignoreTemplate (..)
     , HasHasDownloads (..)
     , HasHasIssues (..)
@@ -51,6 +52,7 @@ module Terrafomo.GitHub.Lens
     , HasSlug (..)
     , HasTeamId (..)
     , HasTitle (..)
+    , HasTopics (..)
     , HasUrl (..)
     , HasUsername (..)
 
@@ -91,6 +93,7 @@ module Terrafomo.GitHub.Lens
     , HasComputedHtmlUrl (..)
     , HasComputedHttpCloneUrl (..)
     , HasComputedId (..)
+    , HasComputedImporter (..)
     , HasComputedKey (..)
     , HasComputedLdapDn (..)
     , HasComputedLicenseTemplate (..)
@@ -118,6 +121,7 @@ module Terrafomo.GitHub.Lens
     , HasComputedSvnUrl (..)
     , HasComputedTeamId (..)
     , HasComputedTitle (..)
+    , HasComputedTopics (..)
     , HasComputedUpdatedAt (..)
     , HasComputedUrl (..)
     , HasComputedUsername (..)
@@ -206,6 +210,12 @@ class HasEvents a b | a -> b where
 
 instance HasEvents a b => HasEvents (TF.Schema l p a) b where
     events = TF.configuration . events
+
+class HasFullName a b | a -> b where
+    fullName :: Lens' a b
+
+instance HasFullName a b => HasFullName (TF.Schema l p a) b where
+    fullName = TF.configuration . fullName
 
 class HasGitignoreTemplate a b | a -> b where
     gitignoreTemplate :: Lens' a b
@@ -345,6 +355,12 @@ class HasTitle a b | a -> b where
 instance HasTitle a b => HasTitle (TF.Schema l p a) b where
     title = TF.configuration . title
 
+class HasTopics a b | a -> b where
+    topics :: Lens' a b
+
+instance HasTopics a b => HasTopics (TF.Schema l p a) b where
+    topics = TF.configuration . topics
+
 class HasUrl a b | a -> b where
     url :: Lens' a b
 
@@ -465,6 +481,9 @@ class HasComputedHttpCloneUrl a b | a -> b where
 class HasComputedId a b | a -> b where
     computedId :: a -> b
 
+class HasComputedImporter a b | a -> b where
+    computedImporter :: a -> b
+
 class HasComputedKey a b | a -> b where
     computedKey :: a -> b
 
@@ -545,6 +564,9 @@ class HasComputedTeamId a b | a -> b where
 
 class HasComputedTitle a b | a -> b where
     computedTitle :: a -> b
+
+class HasComputedTopics a b | a -> b where
+    computedTopics :: a -> b
 
 class HasComputedUpdatedAt a b | a -> b where
     computedUpdatedAt :: a -> b

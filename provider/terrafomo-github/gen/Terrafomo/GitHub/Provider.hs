@@ -18,6 +18,7 @@ module Terrafomo.GitHub.Provider
 
     -- * Lenses
     , providerBaseUrl
+    , providerInsecure
     , providerOrganization
     , providerToken
     ) where
@@ -50,6 +51,8 @@ resources.
 data GitHub = GitHub {
       _base_url     :: !(Maybe P.Text)
     {- ^ (Optional) This is the target GitHub base API endpoint. Providing a value is a requirement when working with GitHub Enterprise.  It is optional to provide this value and it can also be sourced from the @GITHUB_BASE_URL@ environment variable.  The value must end with a slash. -}
+    , _insecure     :: !(Maybe P.Text)
+    {- ^ (Optional) Whether server should be accessed without verifying the TLS certificate. As the name suggests this is insecure and should not be used beyond experiments, accessing local (non-production) GHE instance etc. There is a number of ways to obtain trusted certificate for free, e.g. from <https://letsencrypt.org/> . Such trusted certificate does not require this option to be enabled. Defaults to @false@ . -}
     , _organization :: !(Maybe P.Text)
     {- ^ (Optional) This is the target GitHub organization to manage. The account corresponding to the token will need "owner" privileges for this organization. It must be provided, but it can also be sourced from the @GITHUB_ORGANIZATION@ environment variable. -}
     , _token        :: !(Maybe P.Text)
@@ -67,6 +70,7 @@ instance TF.IsSection GitHub where
               (catMaybes
                   [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
                   , TF.assign "base_url" <$> _base_url x
+                  , TF.assign "insecure" <$> _insecure x
                   , TF.assign "organization" <$> _organization x
                   , TF.assign "token" <$> _token x
                   ])
@@ -77,6 +81,7 @@ instance TF.IsProvider GitHub where
 emptyGitHub :: GitHub
 emptyGitHub = GitHub {
         _base_url = Nothing
+      , _insecure = Nothing
       , _organization = Nothing
       , _token = Nothing
     }
@@ -84,6 +89,10 @@ emptyGitHub = GitHub {
 providerBaseUrl :: Lens' GitHub (Maybe P.Text)
 providerBaseUrl =
     lens _base_url (\s a -> s { _base_url = a })
+
+providerInsecure :: Lens' GitHub (Maybe P.Text)
+providerInsecure =
+    lens _insecure (\s a -> s { _insecure = a })
 
 providerOrganization :: Lens' GitHub (Maybe P.Text)
 providerOrganization =

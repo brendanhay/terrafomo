@@ -20,6 +20,9 @@ module Terrafomo.GitHub.DataSource
       IpRangesData (..)
     , ipRangesData
 
+    , RepositoryData (..)
+    , repositoryData
+
     , TeamData (..)
     , teamData
 
@@ -28,24 +31,41 @@ module Terrafomo.GitHub.DataSource
 
     -- * Overloaded Fields
     -- ** Arguments
+    , P.HasFullName (..)
+    , P.HasName (..)
     , P.HasSlug (..)
     , P.HasUsername (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAllowMergeCommit (..)
+    , P.HasComputedAllowRebaseMerge (..)
+    , P.HasComputedAllowSquashMerge (..)
+    , P.HasComputedArchived (..)
     , P.HasComputedAvatarUrl (..)
     , P.HasComputedBio (..)
     , P.HasComputedBlog (..)
     , P.HasComputedCompany (..)
     , P.HasComputedCreatedAt (..)
+    , P.HasComputedDefaultBranch (..)
     , P.HasComputedDescription (..)
     , P.HasComputedEmail (..)
     , P.HasComputedFollowers (..)
     , P.HasComputedFollowing (..)
+    , P.HasComputedFullName (..)
     , P.HasComputedGit (..)
+    , P.HasComputedGitCloneUrl (..)
     , P.HasComputedGpgKeys (..)
     , P.HasComputedGravatarId (..)
+    , P.HasComputedHasDownloads (..)
+    , P.HasComputedHasIssues (..)
+    , P.HasComputedHasProjects (..)
+    , P.HasComputedHasWiki (..)
+    , P.HasComputedHomepageUrl (..)
     , P.HasComputedHooks (..)
+    , P.HasComputedHtmlUrl (..)
+    , P.HasComputedHttpCloneUrl (..)
     , P.HasComputedId (..)
+    , P.HasComputedImporter (..)
     , P.HasComputedLocation (..)
     , P.HasComputedLogin (..)
     , P.HasComputedMembers (..)
@@ -53,11 +73,15 @@ module Terrafomo.GitHub.DataSource
     , P.HasComputedPages (..)
     , P.HasComputedPermission (..)
     , P.HasComputedPrivacy (..)
+    , P.HasComputedPrivate (..)
     , P.HasComputedPublicGists (..)
     , P.HasComputedPublicRepos (..)
     , P.HasComputedSiteAdmin (..)
     , P.HasComputedSlug (..)
+    , P.HasComputedSshCloneUrl (..)
     , P.HasComputedSshKeys (..)
+    , P.HasComputedSvnUrl (..)
+    , P.HasComputedTopics (..)
     , P.HasComputedUpdatedAt (..)
     , P.HasComputedUsername (..)
 
@@ -90,7 +114,7 @@ import qualified Terrafomo.Schema    as TF
 
 {- | The @github_ip_ranges@ GitHub datasource.
 
-Use this data source to retrieve information about a Github's IP addresses.
+Use this data source to retrieve information about a GitHub's IP addresses.
 -}
 data IpRangesData s = IpRangesData {
     } deriving (Show, Eq)
@@ -104,6 +128,9 @@ instance s ~ s' => P.HasComputedGit (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Te
 instance s ~ s' => P.HasComputedHooks (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
     computedHooks x = TF.compute (TF.refKey x) "hooks"
 
+instance s ~ s' => P.HasComputedImporter (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
+    computedImporter x = TF.compute (TF.refKey x) "importer"
+
 instance s ~ s' => P.HasComputedPages (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
     computedPages x = TF.compute (TF.refKey x) "pages"
 
@@ -113,9 +140,108 @@ ipRangesData =
         IpRangesData {
             }
 
+{- | The @github_repository@ GitHub datasource.
+
+Use this data source to retrieve information about a GitHub repository.
+-}
+data RepositoryData s = RepositoryData {
+      _full_name :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Full name of the repository (in @org/name@ format). -}
+    , _name      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The name of the repository. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (RepositoryData s) where
+    toObject RepositoryData{..} = catMaybes
+        [ TF.assign "full_name" <$> TF.attribute _full_name
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasFullName (RepositoryData s) (TF.Attr s P.Text) where
+    fullName =
+        lens (_full_name :: RepositoryData s -> TF.Attr s P.Text)
+             (\s a -> s { _full_name = a } :: RepositoryData s)
+
+instance P.HasName (RepositoryData s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: RepositoryData s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: RepositoryData s)
+
+instance s ~ s' => P.HasComputedAllowMergeCommit (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedAllowMergeCommit x = TF.compute (TF.refKey x) "allow_merge_commit"
+
+instance s ~ s' => P.HasComputedAllowRebaseMerge (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedAllowRebaseMerge x = TF.compute (TF.refKey x) "allow_rebase_merge"
+
+instance s ~ s' => P.HasComputedAllowSquashMerge (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedAllowSquashMerge x = TF.compute (TF.refKey x) "allow_squash_merge"
+
+instance s ~ s' => P.HasComputedArchived (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedArchived x = TF.compute (TF.refKey x) "archived"
+
+instance s ~ s' => P.HasComputedDefaultBranch (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedDefaultBranch x = TF.compute (TF.refKey x) "default_branch"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedFullName (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedFullName =
+        (_full_name :: RepositoryData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedGitCloneUrl (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedGitCloneUrl x = TF.compute (TF.refKey x) "git_clone_url"
+
+instance s ~ s' => P.HasComputedHasDownloads (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedHasDownloads x = TF.compute (TF.refKey x) "has_downloads"
+
+instance s ~ s' => P.HasComputedHasIssues (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedHasIssues x = TF.compute (TF.refKey x) "has_issues"
+
+instance s ~ s' => P.HasComputedHasProjects (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedHasProjects x = TF.compute (TF.refKey x) "has_projects"
+
+instance s ~ s' => P.HasComputedHasWiki (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedHasWiki x = TF.compute (TF.refKey x) "has_wiki"
+
+instance s ~ s' => P.HasComputedHomepageUrl (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedHomepageUrl x = TF.compute (TF.refKey x) "homepage_url"
+
+instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
+
+instance s ~ s' => P.HasComputedHttpCloneUrl (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedHttpCloneUrl x = TF.compute (TF.refKey x) "http_clone_url"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: RepositoryData s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPrivate (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedPrivate x = TF.compute (TF.refKey x) "private"
+
+instance s ~ s' => P.HasComputedSshCloneUrl (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedSshCloneUrl x = TF.compute (TF.refKey x) "ssh_clone_url"
+
+instance s ~ s' => P.HasComputedSvnUrl (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedSvnUrl x = TF.compute (TF.refKey x) "svn_url"
+
+instance s ~ s' => P.HasComputedTopics (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedTopics x = TF.compute (TF.refKey x) "topics"
+
+repositoryData :: TF.DataSource P.GitHub (RepositoryData s)
+repositoryData =
+    TF.newDataSource "github_repository" $
+        RepositoryData {
+              _full_name = TF.Nil
+            , _name = TF.Nil
+            }
+
 {- | The @github_team@ GitHub datasource.
 
-Use this data source to retrieve information about a Github team.
+Use this data source to retrieve information about a GitHub team.
 -}
 data TeamData s = TeamData {
       _slug :: !(TF.Attr s P.Text)
@@ -164,7 +290,7 @@ teamData =
 
 {- | The @github_user@ GitHub datasource.
 
-Use this data source to retrieve information about a Github user.
+Use this data source to retrieve information about a GitHub user.
 -}
 data UserData s = UserData {
       _username :: !(TF.Attr s P.Text)

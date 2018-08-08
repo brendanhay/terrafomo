@@ -87,6 +87,7 @@ module Terrafomo.GitHub.Resource
     , P.HasRole (..)
     , P.HasTeamId (..)
     , P.HasTitle (..)
+    , P.HasTopics (..)
     , P.HasUrl (..)
     , P.HasUsername (..)
 
@@ -133,6 +134,7 @@ module Terrafomo.GitHub.Resource
     , P.HasComputedSvnUrl (..)
     , P.HasComputedTeamId (..)
     , P.HasComputedTitle (..)
+    , P.HasComputedTopics (..)
     , P.HasComputedUrl (..)
     , P.HasComputedUsername (..)
 
@@ -271,7 +273,7 @@ branchProtectionResource =
 {- | The @github_issue_label@ GitHub resource.
 
 Provides a GitHub issue label resource. This resource allows you to create
-and manage issue labels within your Github organization. Issue labels are
+and manage issue labels within your GitHub organization. Issue labels are
 keyed off of their "name", so pre-existing issue labels result in a 422 HTTP
 error if they exist outside of Terraform. Normally this would not be an
 issue, except new repositories are created with a "default" set of labels,
@@ -398,7 +400,7 @@ membershipResource =
 
 {- | The @github_organization_webhook@ GitHub resource.
 
-This resource allows you to create and manage webhooks for Github
+This resource allows you to create and manage webhooks for GitHub
 organization.
 -}
 data OrganizationWebhookResource s = OrganizationWebhookResource {
@@ -554,7 +556,7 @@ data RepositoryDeployKeyResource s = RepositoryDeployKeyResource {
     , _read_only  :: !(TF.Attr s P.Text)
     {- ^ (Required) A boolean qualifying the key to be either read only or read/write. -}
     , _repository :: !(TF.Attr s P.Text)
-    {- ^ (Required) Name of the Github repository. -}
+    {- ^ (Required) Name of the GitHub repository. -}
     , _title      :: !(TF.Attr s P.Text)
     {- ^ (Required) A title. -}
     } deriving (Show, Eq)
@@ -620,7 +622,7 @@ repositoryDeployKeyResource =
 {- | The @github_repository@ GitHub resource.
 
 This resource allows you to create and manage repositories within your
-Github organization. This resource cannot currently be used to manage
+GitHub organization. This resource cannot currently be used to manage
 personal repositories, outside of organizations.
 -}
 data RepositoryResource s = RepositoryResource {
@@ -643,19 +645,21 @@ data RepositoryResource s = RepositoryResource {
     , _has_downloads      :: !(TF.Attr s P.Text)
     {- ^ (Optional) Set to @true@ to enable the (deprecated) downloads features on the repository. -}
     , _has_issues         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Set to @true@ to enable the Github Issues features on the repository. -}
+    {- ^ (Optional) Set to @true@ to enable the GitHub Issues features on the repository. -}
     , _has_projects       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Set to @true@ to enable the Github Projects features on the repository. Per the github <https://developer.github.com/v3/repos/#create> when in an organization that has disabled repository projects it will default to @false@ and will otherwise default to @true@ . If you specify @true@ when it has been disabled it will return an error. -}
+    {- ^ (Optional) Set to @true@ to enable the GitHub Projects features on the repository. Per the github <https://developer.github.com/v3/repos/#create> when in an organization that has disabled repository projects it will default to @false@ and will otherwise default to @true@ . If you specify @true@ when it has been disabled it will return an error. -}
     , _has_wiki           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Set to @true@ to enable the Github Wiki features on the repository. -}
+    {- ^ (Optional) Set to @true@ to enable the GitHub Wiki features on the repository. -}
     , _homepage_url       :: !(TF.Attr s P.Text)
     {- ^ (Optional) URL of a page describing the project. -}
     , _license_template   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Meaningful only during create, will be ignored after repository creation. Use the <https://github.com/github/choosealicense.com/tree/gh-pages/_licenses> without the extension. For example, "mit" or "mozilla". -}
+    {- ^ (Optional) Meaningful only during create, will be ignored after repository creation. Use the <https://github.com/github/choosealicense.com/tree/gh-pages/_licenses> without the extension. For example, "mit" or "mpl-2.0". -}
     , _name               :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the repository. -}
     , _private            :: !(TF.Attr s P.Text)
     {- ^ (Optional) Set to @true@ to create a private repository. Repositories are created as public (e.g. open source) by default. -}
+    , _topics             :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The list of topics of the repository. -}
     } deriving (Show, Eq)
 
 instance TF.IsObject (RepositoryResource s) where
@@ -676,6 +680,7 @@ instance TF.IsObject (RepositoryResource s) where
         , TF.assign "license_template" <$> TF.attribute _license_template
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "private" <$> TF.attribute _private
+        , TF.assign "topics" <$> TF.attribute _topics
         ]
 
 instance P.HasAllowMergeCommit (RepositoryResource s) (TF.Attr s P.Text) where
@@ -757,6 +762,11 @@ instance P.HasPrivate (RepositoryResource s) (TF.Attr s P.Text) where
     private =
         lens (_private :: RepositoryResource s -> TF.Attr s P.Text)
              (\s a -> s { _private = a } :: RepositoryResource s)
+
+instance P.HasTopics (RepositoryResource s) (TF.Attr s P.Text) where
+    topics =
+        lens (_topics :: RepositoryResource s -> TF.Attr s P.Text)
+             (\s a -> s { _topics = a } :: RepositoryResource s)
 
 instance s ~ s' => P.HasComputedAllowMergeCommit (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedAllowMergeCommit =
@@ -856,6 +866,11 @@ instance s ~ s' => P.HasComputedSshCloneUrl (TF.Ref s' (RepositoryResource s)) (
 instance s ~ s' => P.HasComputedSvnUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedSvnUrl x = TF.compute (TF.refKey x) "svn_url"
 
+instance s ~ s' => P.HasComputedTopics (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
+    computedTopics =
+        (_topics :: RepositoryResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
 repositoryResource :: TF.Resource P.GitHub (RepositoryResource s)
 repositoryResource =
     TF.newResource "github_repository" $
@@ -876,12 +891,13 @@ repositoryResource =
             , _license_template = TF.Nil
             , _name = TF.Nil
             , _private = TF.Nil
+            , _topics = TF.Nil
             }
 
 {- | The @github_repository_webhook@ GitHub resource.
 
 This resource allows you to create and manage webhooks for repositories
-within your Github organization. This resource cannot currently be used to
+within your GitHub organization. This resource cannot currently be used to
 manage webhooks for personal repositories, outside of organizations.
 -}
 data RepositoryWebhookResource s = RepositoryWebhookResource {
@@ -1036,9 +1052,9 @@ teamMembershipResource =
 {- | The @github_team_repository@ GitHub resource.
 
 This resource manages relationships between teams and repositories in your
-Github organization. Creating this resource grants a particular team
+GitHub organization. Creating this resource grants a particular team
 permissions on a particular repository. The repository and the team must
-both belong to the same organization on Github. This resource does not
+both belong to the same organization on GitHub. This resource does not
 actually create any repositories; to do that, see <repository.html> .
 -}
 data TeamRepositoryResource s = TeamRepositoryResource {
