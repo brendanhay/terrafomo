@@ -108,6 +108,7 @@ module Terrafomo.AWS.Lens
     , HasAudio (..)
     , HasAudioCodecOptions (..)
     , HasAuthToken (..)
+    , HasAuthentication (..)
     , HasAuthenticationType (..)
     , HasAuthorization (..)
     , HasAuthorizationScopes (..)
@@ -129,7 +130,6 @@ module Terrafomo.AWS.Lens
     , HasAutomaticStopTimeMinutes (..)
     , HasAutoscalingGroupName (..)
     , HasAutoscalingGroups (..)
-    , HasAutoscalingRole (..)
     , HasAvailabilityZone (..)
     , HasAvailabilityZones (..)
     , HasAwsFlowRubySettings (..)
@@ -236,6 +236,7 @@ module Terrafomo.AWS.Lens
     , HasConfigurationManagerVersion (..)
     , HasConfigurationSetName (..)
     , HasConfigurations (..)
+    , HasConfigurationsJson (..)
     , HasConfirmationTimeoutInMinutes (..)
     , HasConnectSettings (..)
     , HasConnectionDraining (..)
@@ -406,6 +407,7 @@ module Terrafomo.AWS.Lens
     , HasEmailConfiguration (..)
     , HasEmailVerificationMessage (..)
     , HasEmailVerificationSubject (..)
+    , HasEnaSupport (..)
     , HasEnable (..)
     , HasEnableClassiclink (..)
     , HasEnableClassiclinkDnsSupport (..)
@@ -586,6 +588,7 @@ module Terrafomo.AWS.Lens
     , HasIntegrationHttpMethod (..)
     , HasInternal (..)
     , HasInternetGatewayId (..)
+    , HasInvalidUserList (..)
     , HasInvertHealthcheck (..)
     , HasInvitationMessage (..)
     , HasInvite (..)
@@ -717,6 +720,7 @@ module Terrafomo.AWS.Lens
     , HasNamespace (..)
     , HasNatGatewayId (..)
     , HasNeptuneClusterParameterGroupName (..)
+    , HasNeptuneParameterGroupName (..)
     , HasNeptuneSubnetGroupName (..)
     , HasNetbiosNameServers (..)
     , HasNetbiosNodeType (..)
@@ -1030,6 +1034,9 @@ module Terrafomo.AWS.Lens
     , HasSkipDestroy (..)
     , HasSkipFinalSnapshot (..)
     , HasSlowStart (..)
+    , HasSmbActiveDirectorySettings (..)
+    , HasSmbFileShareDefaults (..)
+    , HasSmbGuestPassword (..)
     , HasSmsAuthenticationMessage (..)
     , HasSmsConfiguration (..)
     , HasSmsVerificationMessage (..)
@@ -1104,7 +1111,6 @@ module Terrafomo.AWS.Lens
     , HasStatus (..)
     , HasStatusCode (..)
     , HasStatuses (..)
-    , HasStep (..)
     , HasStepScalingPolicyConfiguration (..)
     , HasStickiness (..)
     , HasStopAction (..)
@@ -1212,6 +1218,7 @@ module Terrafomo.AWS.Lens
     , HasUsers (..)
     , HasValidFrom (..)
     , HasValidUntil (..)
+    , HasValidUserList (..)
     , HasValidateRequestBody (..)
     , HasValidateRequestParameters (..)
     , HasValidationMethod (..)
@@ -1234,7 +1241,6 @@ module Terrafomo.AWS.Lens
     , HasVirtualInterfaceId (..)
     , HasVirtualizationType (..)
     , HasVisibilityTimeoutSeconds (..)
-    , HasVisibleToAllUsers (..)
     , HasVlan (..)
     , HasVolumeId (..)
     , HasVpc (..)
@@ -1379,6 +1385,7 @@ module Terrafomo.AWS.Lens
     , HasComputedAudioCodecOptions (..)
     , HasComputedAuthToken (..)
     , HasComputedAuthTokenEnabled (..)
+    , HasComputedAuthentication (..)
     , HasComputedAuthenticationType (..)
     , HasComputedAuthorization (..)
     , HasComputedAuthorizationScopes (..)
@@ -1400,7 +1407,6 @@ module Terrafomo.AWS.Lens
     , HasComputedAutomaticStopTimeMinutes (..)
     , HasComputedAutoscalingGroupName (..)
     , HasComputedAutoscalingGroups (..)
-    , HasComputedAutoscalingRole (..)
     , HasComputedAvailabilityZone (..)
     , HasComputedAvailabilityZones (..)
     , HasComputedAwsAccountId (..)
@@ -1538,6 +1544,7 @@ module Terrafomo.AWS.Lens
     , HasComputedConfigurationManagerVersion (..)
     , HasComputedConfigurationSetName (..)
     , HasComputedConfigurations (..)
+    , HasComputedConfigurationsJson (..)
     , HasComputedConfirmationTimeoutInMinutes (..)
     , HasComputedConnectSettings (..)
     , HasComputedConnectionDraining (..)
@@ -1746,6 +1753,7 @@ module Terrafomo.AWS.Lens
     , HasComputedEmailConfiguration (..)
     , HasComputedEmailVerificationMessage (..)
     , HasComputedEmailVerificationSubject (..)
+    , HasComputedEnaSupport (..)
     , HasComputedEnable (..)
     , HasComputedEnableClassiclink (..)
     , HasComputedEnableClassiclinkDnsSupport (..)
@@ -1959,6 +1967,7 @@ module Terrafomo.AWS.Lens
     , HasComputedInterfaceType (..)
     , HasComputedInternal (..)
     , HasComputedInternetGatewayId (..)
+    , HasComputedInvalidUserList (..)
     , HasComputedInvertHealthcheck (..)
     , HasComputedInvitationMessage (..)
     , HasComputedInvite (..)
@@ -2121,6 +2130,7 @@ module Terrafomo.AWS.Lens
     , HasComputedNamespace (..)
     , HasComputedNatGatewayId (..)
     , HasComputedNeptuneClusterParameterGroupName (..)
+    , HasComputedNeptuneParameterGroupName (..)
     , HasComputedNeptuneSubnetGroupName (..)
     , HasComputedNetbiosNameServers (..)
     , HasComputedNetbiosNodeType (..)
@@ -2496,6 +2506,9 @@ module Terrafomo.AWS.Lens
     , HasComputedSkipDestroy (..)
     , HasComputedSkipFinalSnapshot (..)
     , HasComputedSlowStart (..)
+    , HasComputedSmbActiveDirectorySettings (..)
+    , HasComputedSmbFileShareDefaults (..)
+    , HasComputedSmbGuestPassword (..)
     , HasComputedSmsAuthenticationMessage (..)
     , HasComputedSmsConfiguration (..)
     , HasComputedSmsVerificationMessage (..)
@@ -2581,7 +2594,6 @@ module Terrafomo.AWS.Lens
     , HasComputedStatusCode (..)
     , HasComputedStatusReason (..)
     , HasComputedStatuses (..)
-    , HasComputedStep (..)
     , HasComputedStepScalingPolicyConfiguration (..)
     , HasComputedStickiness (..)
     , HasComputedStopAction (..)
@@ -2711,6 +2723,7 @@ module Terrafomo.AWS.Lens
     , HasComputedValidFrom (..)
     , HasComputedValidTo (..)
     , HasComputedValidUntil (..)
+    , HasComputedValidUserList (..)
     , HasComputedValidateRequestBody (..)
     , HasComputedValidateRequestParameters (..)
     , HasComputedValidationEmails (..)
@@ -3349,6 +3362,12 @@ class HasAuthToken a b | a -> b where
 instance HasAuthToken a b => HasAuthToken (TF.Schema l p a) b where
     authToken = TF.configuration . authToken
 
+class HasAuthentication a b | a -> b where
+    authentication :: Lens' a b
+
+instance HasAuthentication a b => HasAuthentication (TF.Schema l p a) b where
+    authentication = TF.configuration . authentication
+
 class HasAuthenticationType a b | a -> b where
     authenticationType :: Lens' a b
 
@@ -3474,12 +3493,6 @@ class HasAutoscalingGroups a b | a -> b where
 
 instance HasAutoscalingGroups a b => HasAutoscalingGroups (TF.Schema l p a) b where
     autoscalingGroups = TF.configuration . autoscalingGroups
-
-class HasAutoscalingRole a b | a -> b where
-    autoscalingRole :: Lens' a b
-
-instance HasAutoscalingRole a b => HasAutoscalingRole (TF.Schema l p a) b where
-    autoscalingRole = TF.configuration . autoscalingRole
 
 class HasAvailabilityZone a b | a -> b where
     availabilityZone :: Lens' a b
@@ -4116,6 +4129,12 @@ class HasConfigurations a b | a -> b where
 
 instance HasConfigurations a b => HasConfigurations (TF.Schema l p a) b where
     configurations = TF.configuration . configurations
+
+class HasConfigurationsJson a b | a -> b where
+    configurationsJson :: Lens' a b
+
+instance HasConfigurationsJson a b => HasConfigurationsJson (TF.Schema l p a) b where
+    configurationsJson = TF.configuration . configurationsJson
 
 class HasConfirmationTimeoutInMinutes a b | a -> b where
     confirmationTimeoutInMinutes :: Lens' a b
@@ -5136,6 +5155,12 @@ class HasEmailVerificationSubject a b | a -> b where
 
 instance HasEmailVerificationSubject a b => HasEmailVerificationSubject (TF.Schema l p a) b where
     emailVerificationSubject = TF.configuration . emailVerificationSubject
+
+class HasEnaSupport a b | a -> b where
+    enaSupport :: Lens' a b
+
+instance HasEnaSupport a b => HasEnaSupport (TF.Schema l p a) b where
+    enaSupport = TF.configuration . enaSupport
 
 class HasEnable a b | a -> b where
     enable :: Lens' a b
@@ -6217,6 +6242,12 @@ class HasInternetGatewayId a b | a -> b where
 instance HasInternetGatewayId a b => HasInternetGatewayId (TF.Schema l p a) b where
     internetGatewayId = TF.configuration . internetGatewayId
 
+class HasInvalidUserList a b | a -> b where
+    invalidUserList :: Lens' a b
+
+instance HasInvalidUserList a b => HasInvalidUserList (TF.Schema l p a) b where
+    invalidUserList = TF.configuration . invalidUserList
+
 class HasInvertHealthcheck a b | a -> b where
     invertHealthcheck :: Lens' a b
 
@@ -7002,6 +7033,12 @@ class HasNeptuneClusterParameterGroupName a b | a -> b where
 
 instance HasNeptuneClusterParameterGroupName a b => HasNeptuneClusterParameterGroupName (TF.Schema l p a) b where
     neptuneClusterParameterGroupName = TF.configuration . neptuneClusterParameterGroupName
+
+class HasNeptuneParameterGroupName a b | a -> b where
+    neptuneParameterGroupName :: Lens' a b
+
+instance HasNeptuneParameterGroupName a b => HasNeptuneParameterGroupName (TF.Schema l p a) b where
+    neptuneParameterGroupName = TF.configuration . neptuneParameterGroupName
 
 class HasNeptuneSubnetGroupName a b | a -> b where
     neptuneSubnetGroupName :: Lens' a b
@@ -8881,6 +8918,24 @@ class HasSlowStart a b | a -> b where
 instance HasSlowStart a b => HasSlowStart (TF.Schema l p a) b where
     slowStart = TF.configuration . slowStart
 
+class HasSmbActiveDirectorySettings a b | a -> b where
+    smbActiveDirectorySettings :: Lens' a b
+
+instance HasSmbActiveDirectorySettings a b => HasSmbActiveDirectorySettings (TF.Schema l p a) b where
+    smbActiveDirectorySettings = TF.configuration . smbActiveDirectorySettings
+
+class HasSmbFileShareDefaults a b | a -> b where
+    smbFileShareDefaults :: Lens' a b
+
+instance HasSmbFileShareDefaults a b => HasSmbFileShareDefaults (TF.Schema l p a) b where
+    smbFileShareDefaults = TF.configuration . smbFileShareDefaults
+
+class HasSmbGuestPassword a b | a -> b where
+    smbGuestPassword :: Lens' a b
+
+instance HasSmbGuestPassword a b => HasSmbGuestPassword (TF.Schema l p a) b where
+    smbGuestPassword = TF.configuration . smbGuestPassword
+
 class HasSmsAuthenticationMessage a b | a -> b where
     smsAuthenticationMessage :: Lens' a b
 
@@ -9324,12 +9379,6 @@ class HasStatuses a b | a -> b where
 
 instance HasStatuses a b => HasStatuses (TF.Schema l p a) b where
     statuses = TF.configuration . statuses
-
-class HasStep a b | a -> b where
-    step :: Lens' a b
-
-instance HasStep a b => HasStep (TF.Schema l p a) b where
-    step = TF.configuration . step
 
 class HasStepScalingPolicyConfiguration a b | a -> b where
     stepScalingPolicyConfiguration :: Lens' a b
@@ -9973,6 +10022,12 @@ class HasValidUntil a b | a -> b where
 instance HasValidUntil a b => HasValidUntil (TF.Schema l p a) b where
     validUntil = TF.configuration . validUntil
 
+class HasValidUserList a b | a -> b where
+    validUserList :: Lens' a b
+
+instance HasValidUserList a b => HasValidUserList (TF.Schema l p a) b where
+    validUserList = TF.configuration . validUserList
+
 class HasValidateRequestBody a b | a -> b where
     validateRequestBody :: Lens' a b
 
@@ -10104,12 +10159,6 @@ class HasVisibilityTimeoutSeconds a b | a -> b where
 
 instance HasVisibilityTimeoutSeconds a b => HasVisibilityTimeoutSeconds (TF.Schema l p a) b where
     visibilityTimeoutSeconds = TF.configuration . visibilityTimeoutSeconds
-
-class HasVisibleToAllUsers a b | a -> b where
-    visibleToAllUsers :: Lens' a b
-
-instance HasVisibleToAllUsers a b => HasVisibleToAllUsers (TF.Schema l p a) b where
-    visibleToAllUsers = TF.configuration . visibleToAllUsers
 
 class HasVlan a b | a -> b where
     vlan :: Lens' a b
@@ -10645,6 +10694,9 @@ class HasComputedAuthToken a b | a -> b where
 class HasComputedAuthTokenEnabled a b | a -> b where
     computedAuthTokenEnabled :: a -> b
 
+class HasComputedAuthentication a b | a -> b where
+    computedAuthentication :: a -> b
+
 class HasComputedAuthenticationType a b | a -> b where
     computedAuthenticationType :: a -> b
 
@@ -10707,9 +10759,6 @@ class HasComputedAutoscalingGroupName a b | a -> b where
 
 class HasComputedAutoscalingGroups a b | a -> b where
     computedAutoscalingGroups :: a -> b
-
-class HasComputedAutoscalingRole a b | a -> b where
-    computedAutoscalingRole :: a -> b
 
 class HasComputedAvailabilityZone a b | a -> b where
     computedAvailabilityZone :: a -> b
@@ -11121,6 +11170,9 @@ class HasComputedConfigurationSetName a b | a -> b where
 
 class HasComputedConfigurations a b | a -> b where
     computedConfigurations :: a -> b
+
+class HasComputedConfigurationsJson a b | a -> b where
+    computedConfigurationsJson :: a -> b
 
 class HasComputedConfirmationTimeoutInMinutes a b | a -> b where
     computedConfirmationTimeoutInMinutes :: a -> b
@@ -11745,6 +11797,9 @@ class HasComputedEmailVerificationMessage a b | a -> b where
 
 class HasComputedEmailVerificationSubject a b | a -> b where
     computedEmailVerificationSubject :: a -> b
+
+class HasComputedEnaSupport a b | a -> b where
+    computedEnaSupport :: a -> b
 
 class HasComputedEnable a b | a -> b where
     computedEnable :: a -> b
@@ -12385,6 +12440,9 @@ class HasComputedInternal a b | a -> b where
 class HasComputedInternetGatewayId a b | a -> b where
     computedInternetGatewayId :: a -> b
 
+class HasComputedInvalidUserList a b | a -> b where
+    computedInvalidUserList :: a -> b
+
 class HasComputedInvertHealthcheck a b | a -> b where
     computedInvertHealthcheck :: a -> b
 
@@ -12870,6 +12928,9 @@ class HasComputedNatGatewayId a b | a -> b where
 
 class HasComputedNeptuneClusterParameterGroupName a b | a -> b where
     computedNeptuneClusterParameterGroupName :: a -> b
+
+class HasComputedNeptuneParameterGroupName a b | a -> b where
+    computedNeptuneParameterGroupName :: a -> b
 
 class HasComputedNeptuneSubnetGroupName a b | a -> b where
     computedNeptuneSubnetGroupName :: a -> b
@@ -13996,6 +14057,15 @@ class HasComputedSkipFinalSnapshot a b | a -> b where
 class HasComputedSlowStart a b | a -> b where
     computedSlowStart :: a -> b
 
+class HasComputedSmbActiveDirectorySettings a b | a -> b where
+    computedSmbActiveDirectorySettings :: a -> b
+
+class HasComputedSmbFileShareDefaults a b | a -> b where
+    computedSmbFileShareDefaults :: a -> b
+
+class HasComputedSmbGuestPassword a b | a -> b where
+    computedSmbGuestPassword :: a -> b
+
 class HasComputedSmsAuthenticationMessage a b | a -> b where
     computedSmsAuthenticationMessage :: a -> b
 
@@ -14250,9 +14320,6 @@ class HasComputedStatusReason a b | a -> b where
 
 class HasComputedStatuses a b | a -> b where
     computedStatuses :: a -> b
-
-class HasComputedStep a b | a -> b where
-    computedStep :: a -> b
 
 class HasComputedStepScalingPolicyConfiguration a b | a -> b where
     computedStepScalingPolicyConfiguration :: a -> b
@@ -14640,6 +14707,9 @@ class HasComputedValidTo a b | a -> b where
 
 class HasComputedValidUntil a b | a -> b where
     computedValidUntil :: a -> b
+
+class HasComputedValidUserList a b | a -> b where
+    computedValidUserList :: a -> b
 
 class HasComputedValidateRequestBody a b | a -> b where
     computedValidateRequestBody :: a -> b
