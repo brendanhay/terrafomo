@@ -725,7 +725,7 @@ data StorageClassResource s = StorageClassResource {
       _metadata            :: !(TF.Attr s P.Text)
     {- ^ (Required) Standard storage class's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     , _parameters          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The parameters for the provisioner that should create volumes of this storage class. Read more about <https://kubernetes.io/docs/concepts/storage/persistent-volumes/#parameters> . -}
+    {- ^ (Optional) The parameters for the provisioner that should create volumes of this storage class. Read more about <https://kubernetes.io/docs/concepts/storage/storage-classes/#parameters> . -}
     , _storage_provisioner :: !(TF.Attr s P.Text)
     {- ^ (Required) Indicates the type of the provisioner -}
     } deriving (Show, Eq)
