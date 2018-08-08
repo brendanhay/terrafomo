@@ -32,6 +32,7 @@ module Terrafomo.Scaleway.DataSource
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasArchitecture (..)
+    , P.HasMostRecent (..)
     , P.HasName (..)
     , P.HasNameFilter (..)
 
@@ -44,6 +45,7 @@ module Terrafomo.Scaleway.DataSource
     , P.HasComputedEnableDefaultSecurity (..)
     , P.HasComputedInitrd (..)
     , P.HasComputedKernel (..)
+    , P.HasComputedMostRecent (..)
     , P.HasComputedName (..)
     , P.HasComputedNameFilter (..)
     , P.HasComputedOrganization (..)
@@ -163,6 +165,8 @@ Use this data source to get the ID of a registered Image for use with the
 data ImageData s = ImageData {
       _architecture :: !(TF.Attr s P.Text)
     {- ^ (Required) any supported Scaleway architecture, e.g. @x86_64@ , @arm@ -}
+    , _most_recent  :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Return most recent image if multiple exist. Can not be used together with name_filter. -}
     , _name         :: !(TF.Attr s P.Text)
     {- ^ (Optional) Exact name of desired Image -}
     , _name_filter  :: !(TF.Attr s P.Text)
@@ -172,6 +176,7 @@ data ImageData s = ImageData {
 instance TF.IsObject (ImageData s) where
     toObject ImageData{..} = catMaybes
         [ TF.assign "architecture" <$> TF.attribute _architecture
+        , TF.assign "most_recent" <$> TF.attribute _most_recent
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "name_filter" <$> TF.attribute _name_filter
         ]
@@ -180,6 +185,11 @@ instance P.HasArchitecture (ImageData s) (TF.Attr s P.Text) where
     architecture =
         lens (_architecture :: ImageData s -> TF.Attr s P.Text)
              (\s a -> s { _architecture = a } :: ImageData s)
+
+instance P.HasMostRecent (ImageData s) (TF.Attr s P.Text) where
+    mostRecent =
+        lens (_most_recent :: ImageData s -> TF.Attr s P.Text)
+             (\s a -> s { _most_recent = a } :: ImageData s)
 
 instance P.HasName (ImageData s) (TF.Attr s P.Text) where
     name =
@@ -196,6 +206,11 @@ instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (ImageData s)) (TF.Attr 
 
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
+
+instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
+    computedMostRecent =
+        (_most_recent :: ImageData s -> TF.Attr s P.Text)
+            . TF.refValue
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedName =
@@ -218,6 +233,7 @@ imageData =
     TF.newDataSource "scaleway_image" $
         ImageData {
               _architecture = TF.Nil
+            , _most_recent = TF.Nil
             , _name = TF.Nil
             , _name_filter = TF.Nil
             }

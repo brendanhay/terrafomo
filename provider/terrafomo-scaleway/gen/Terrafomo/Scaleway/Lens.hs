@@ -29,6 +29,7 @@ module Terrafomo.Scaleway.Lens
     , HasImage (..)
     , HasIpRange (..)
     , HasKey (..)
+    , HasMostRecent (..)
     , HasName (..)
     , HasNameFilter (..)
     , HasPassword (..)
@@ -48,12 +49,14 @@ module Terrafomo.Scaleway.Lens
     , HasVolume (..)
 
     -- ** Computed Attributes
+    , HasComputedAccessKey (..)
     , HasComputedAction (..)
     , HasComputedArchitecture (..)
     , HasComputedBootCmdArgs (..)
     , HasComputedBootType (..)
     , HasComputedBootscript (..)
     , HasComputedCreationDate (..)
+    , HasComputedCreationIp (..)
     , HasComputedDescription (..)
     , HasComputedDirection (..)
     , HasComputedDtb (..)
@@ -70,6 +73,7 @@ module Terrafomo.Scaleway.Lens
     , HasComputedIpRange (..)
     , HasComputedKernel (..)
     , HasComputedKey (..)
+    , HasComputedMostRecent (..)
     , HasComputedName (..)
     , HasComputedNameFilter (..)
     , HasComputedOrganization (..)
@@ -81,6 +85,7 @@ module Terrafomo.Scaleway.Lens
     , HasComputedPublicIp (..)
     , HasComputedPublicIpv6 (..)
     , HasComputedReverse (..)
+    , HasComputedSecretKey (..)
     , HasComputedSecurityGroup (..)
     , HasComputedServer (..)
     , HasComputedSizeInGb (..)
@@ -181,6 +186,12 @@ class HasKey a b | a -> b where
 
 instance HasKey a b => HasKey (TF.Schema l p a) b where
     key = TF.configuration . key
+
+class HasMostRecent a b | a -> b where
+    mostRecent :: Lens' a b
+
+instance HasMostRecent a b => HasMostRecent (TF.Schema l p a) b where
+    mostRecent = TF.configuration . mostRecent
 
 class HasName a b | a -> b where
     name :: Lens' a b
@@ -284,6 +295,9 @@ class HasVolume a b | a -> b where
 instance HasVolume a b => HasVolume (TF.Schema l p a) b where
     volume = TF.configuration . volume
 
+class HasComputedAccessKey a b | a -> b where
+    computedAccessKey :: a -> b
+
 class HasComputedAction a b | a -> b where
     computedAction :: a -> b
 
@@ -301,6 +315,9 @@ class HasComputedBootscript a b | a -> b where
 
 class HasComputedCreationDate a b | a -> b where
     computedCreationDate :: a -> b
+
+class HasComputedCreationIp a b | a -> b where
+    computedCreationIp :: a -> b
 
 class HasComputedDescription a b | a -> b where
     computedDescription :: a -> b
@@ -350,6 +367,9 @@ class HasComputedKernel a b | a -> b where
 class HasComputedKey a b | a -> b where
     computedKey :: a -> b
 
+class HasComputedMostRecent a b | a -> b where
+    computedMostRecent :: a -> b
+
 class HasComputedName a b | a -> b where
     computedName :: a -> b
 
@@ -382,6 +402,9 @@ class HasComputedPublicIpv6 a b | a -> b where
 
 class HasComputedReverse a b | a -> b where
     computedReverse :: a -> b
+
+class HasComputedSecretKey a b | a -> b where
+    computedSecretKey :: a -> b
 
 class HasComputedSecurityGroup a b | a -> b where
     computedSecurityGroup :: a -> b

@@ -77,9 +77,11 @@ module Terrafomo.Scaleway.Resource
     , P.HasVolume (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAccessKey (..)
     , P.HasComputedAction (..)
     , P.HasComputedBootType (..)
     , P.HasComputedBootscript (..)
+    , P.HasComputedCreationIp (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDirection (..)
     , P.HasComputedDynamicIpRequired (..)
@@ -101,6 +103,7 @@ module Terrafomo.Scaleway.Resource
     , P.HasComputedPublicIp (..)
     , P.HasComputedPublicIpv6 (..)
     , P.HasComputedReverse (..)
+    , P.HasComputedSecretKey (..)
     , P.HasComputedSecurityGroup (..)
     , P.HasComputedServer (..)
     , P.HasComputedSizeInGb (..)
@@ -656,6 +659,12 @@ instance P.HasPassword (TokenResource s) (TF.Attr s P.Text) where
         lens (_password :: TokenResource s -> TF.Attr s P.Text)
              (\s a -> s { _password = a } :: TokenResource s)
 
+instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
+    computedAccessKey x = TF.compute (TF.refKey x) "access_key"
+
+instance s ~ s' => P.HasComputedCreationIp (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
+    computedCreationIp x = TF.compute (TF.refKey x) "creation_ip"
+
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: TokenResource s -> TF.Attr s P.Text)
@@ -681,6 +690,9 @@ instance s ~ s' => P.HasComputedPassword (TF.Ref s' (TokenResource s)) (TF.Attr 
     computedPassword =
         (_password :: TokenResource s -> TF.Attr s P.Text)
             . TF.refValue
+
+instance s ~ s' => P.HasComputedSecretKey (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
+    computedSecretKey x = TF.compute (TF.refKey x) "secret_key"
 
 tokenResource :: TF.Resource P.Scaleway (TokenResource s)
 tokenResource =
