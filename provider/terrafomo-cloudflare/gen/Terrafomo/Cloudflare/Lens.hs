@@ -33,6 +33,7 @@ module Terrafomo.Cloudflare.Lens
     , HasMatch (..)
     , HasMethod (..)
     , HasMinimumOrigins (..)
+    , HasMode (..)
     , HasMonitor (..)
     , HasName (..)
     , HasNotificationEmail (..)
@@ -44,6 +45,7 @@ module Terrafomo.Cloudflare.Lens
     , HasProxied (..)
     , HasRegionPools (..)
     , HasRetries (..)
+    , HasRuleId (..)
     , HasSettings (..)
     , HasStatus (..)
     , HasTarget (..)
@@ -82,11 +84,13 @@ module Terrafomo.Cloudflare.Lens
     , HasComputedMetadata (..)
     , HasComputedMethod (..)
     , HasComputedMinimumOrigins (..)
+    , HasComputedMode (..)
     , HasComputedModifiedOn (..)
     , HasComputedMonitor (..)
     , HasComputedName (..)
     , HasComputedNotificationEmail (..)
     , HasComputedOrigins (..)
+    , HasComputedPackageId (..)
     , HasComputedPath (..)
     , HasComputedPeriod (..)
     , HasComputedPopPools (..)
@@ -96,6 +100,7 @@ module Terrafomo.Cloudflare.Lens
     , HasComputedReadonlySettings (..)
     , HasComputedRegionPools (..)
     , HasComputedRetries (..)
+    , HasComputedRuleId (..)
     , HasComputedSettings (..)
     , HasComputedStatus (..)
     , HasComputedTarget (..)
@@ -224,6 +229,12 @@ class HasMinimumOrigins a b | a -> b where
 instance HasMinimumOrigins a b => HasMinimumOrigins (TF.Schema l p a) b where
     minimumOrigins = TF.configuration . minimumOrigins
 
+class HasMode a b | a -> b where
+    mode :: Lens' a b
+
+instance HasMode a b => HasMode (TF.Schema l p a) b where
+    mode = TF.configuration . mode
+
 class HasMonitor a b | a -> b where
     monitor :: Lens' a b
 
@@ -289,6 +300,12 @@ class HasRetries a b | a -> b where
 
 instance HasRetries a b => HasRetries (TF.Schema l p a) b where
     retries = TF.configuration . retries
+
+class HasRuleId a b | a -> b where
+    ruleId :: Lens' a b
+
+instance HasRuleId a b => HasRuleId (TF.Schema l p a) b where
+    ruleId = TF.configuration . ruleId
 
 class HasSettings a b | a -> b where
     settings :: Lens' a b
@@ -425,6 +442,9 @@ class HasComputedMethod a b | a -> b where
 class HasComputedMinimumOrigins a b | a -> b where
     computedMinimumOrigins :: a -> b
 
+class HasComputedMode a b | a -> b where
+    computedMode :: a -> b
+
 class HasComputedModifiedOn a b | a -> b where
     computedModifiedOn :: a -> b
 
@@ -439,6 +459,9 @@ class HasComputedNotificationEmail a b | a -> b where
 
 class HasComputedOrigins a b | a -> b where
     computedOrigins :: a -> b
+
+class HasComputedPackageId a b | a -> b where
+    computedPackageId :: a -> b
 
 class HasComputedPath a b | a -> b where
     computedPath :: a -> b
@@ -466,6 +489,9 @@ class HasComputedRegionPools a b | a -> b where
 
 class HasComputedRetries a b | a -> b where
     computedRetries :: a -> b
+
+class HasComputedRuleId a b | a -> b where
+    computedRuleId :: a -> b
 
 class HasComputedSettings a b | a -> b where
     computedSettings :: a -> b

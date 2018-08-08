@@ -35,6 +35,9 @@ module Terrafomo.Cloudflare.Resource
     , RecordResource (..)
     , recordResource
 
+    , WafRuleResource (..)
+    , wafRuleResource
+
     , ZoneSettingsOverrideResource (..)
     , zoneSettingsOverrideResource
 
@@ -58,6 +61,7 @@ module Terrafomo.Cloudflare.Resource
     , P.HasMatch (..)
     , P.HasMethod (..)
     , P.HasMinimumOrigins (..)
+    , P.HasMode (..)
     , P.HasMonitor (..)
     , P.HasName (..)
     , P.HasNotificationEmail (..)
@@ -69,6 +73,7 @@ module Terrafomo.Cloudflare.Resource
     , P.HasProxied (..)
     , P.HasRegionPools (..)
     , P.HasRetries (..)
+    , P.HasRuleId (..)
     , P.HasSettings (..)
     , P.HasStatus (..)
     , P.HasTarget (..)
@@ -104,11 +109,13 @@ module Terrafomo.Cloudflare.Resource
     , P.HasComputedMetadata (..)
     , P.HasComputedMethod (..)
     , P.HasComputedMinimumOrigins (..)
+    , P.HasComputedMode (..)
     , P.HasComputedModifiedOn (..)
     , P.HasComputedMonitor (..)
     , P.HasComputedName (..)
     , P.HasComputedNotificationEmail (..)
     , P.HasComputedOrigins (..)
+    , P.HasComputedPackageId (..)
     , P.HasComputedPath (..)
     , P.HasComputedPeriod (..)
     , P.HasComputedPopPools (..)
@@ -118,6 +125,7 @@ module Terrafomo.Cloudflare.Resource
     , P.HasComputedReadonlySettings (..)
     , P.HasComputedRegionPools (..)
     , P.HasComputedRetries (..)
+    , P.HasComputedRuleId (..)
     , P.HasComputedSettings (..)
     , P.HasComputedStatus (..)
     , P.HasComputedTarget (..)
@@ -995,6 +1003,75 @@ recordResource =
             , _ttl = TF.Nil
             , _type' = TF.Nil
             , _value = TF.Nil
+            }
+
+{- | The @cloudflare_waf_rule@ Cloudflare resource.
+
+Provides a Cloudflare WAF rule resource for a particular zone. This can be
+used to configure firewall behaviour for pre-defined firewall rules.
+-}
+data WafRuleResource s = WafRuleResource {
+      _mode    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The mode of the rule, can be one of ["block", "challenge", "default", "disable, "simulate"]. -}
+    , _rule_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The WAF Rule ID. -}
+    , _zone    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The DNS zone to apply to. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (WafRuleResource s) where
+    toObject WafRuleResource{..} = catMaybes
+        [ TF.assign "mode" <$> TF.attribute _mode
+        , TF.assign "rule_id" <$> TF.attribute _rule_id
+        , TF.assign "zone" <$> TF.attribute _zone
+        ]
+
+instance P.HasMode (WafRuleResource s) (TF.Attr s P.Text) where
+    mode =
+        lens (_mode :: WafRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _mode = a } :: WafRuleResource s)
+
+instance P.HasRuleId (WafRuleResource s) (TF.Attr s P.Text) where
+    ruleId =
+        lens (_rule_id :: WafRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _rule_id = a } :: WafRuleResource s)
+
+instance P.HasZone (WafRuleResource s) (TF.Attr s P.Text) where
+    zone =
+        lens (_zone :: WafRuleResource s -> TF.Attr s P.Text)
+             (\s a -> s { _zone = a } :: WafRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (WafRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedMode (TF.Ref s' (WafRuleResource s)) (TF.Attr s P.Text) where
+    computedMode =
+        (_mode :: WafRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedPackageId (TF.Ref s' (WafRuleResource s)) (TF.Attr s P.Text) where
+    computedPackageId x = TF.compute (TF.refKey x) "package_id"
+
+instance s ~ s' => P.HasComputedRuleId (TF.Ref s' (WafRuleResource s)) (TF.Attr s P.Text) where
+    computedRuleId =
+        (_rule_id :: WafRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (WafRuleResource s)) (TF.Attr s P.Text) where
+    computedZone =
+        (_zone :: WafRuleResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (WafRuleResource s)) (TF.Attr s P.Text) where
+    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
+
+wafRuleResource :: TF.Resource P.Cloudflare (WafRuleResource s)
+wafRuleResource =
+    TF.newResource "cloudflare_waf_rule" $
+        WafRuleResource {
+              _mode = TF.Nil
+            , _rule_id = TF.Nil
+            , _zone = TF.Nil
             }
 
 {- | The @cloudflare_zone_settings_override@ Cloudflare resource.
