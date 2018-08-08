@@ -70,6 +70,7 @@ module Terrafomo.VSphere.Lens
     , HasMulticastFilteringMode (..)
     , HasName (..)
     , HasNumberOfPorts (..)
+    , HasParentFolderId (..)
     , HasParentResourcePoolId (..)
     , HasPath (..)
     , HasQuiesce (..)
@@ -175,6 +176,7 @@ module Terrafomo.VSphere.Lens
     , HasComputedName (..)
     , HasComputedNetworkInterfaceTypes (..)
     , HasComputedNumberOfPorts (..)
+    , HasComputedParentFolderId (..)
     , HasComputedParentResourcePoolId (..)
     , HasComputedPath (..)
     , HasComputedPorts (..)
@@ -186,6 +188,7 @@ module Terrafomo.VSphere.Lens
     , HasComputedRemoveChildren (..)
     , HasComputedRescan (..)
     , HasComputedResourcePoolId (..)
+    , HasComputedScsiBusSharing (..)
     , HasComputedScsiControllerScanCount (..)
     , HasComputedScsiType (..)
     , HasComputedSdrsAutomationLevel (..)
@@ -554,6 +557,12 @@ class HasNumberOfPorts a b | a -> b where
 
 instance HasNumberOfPorts a b => HasNumberOfPorts (TF.Schema l p a) b where
     numberOfPorts = TF.configuration . numberOfPorts
+
+class HasParentFolderId a b | a -> b where
+    parentFolderId :: Lens' a b
+
+instance HasParentFolderId a b => HasParentFolderId (TF.Schema l p a) b where
+    parentFolderId = TF.configuration . parentFolderId
 
 class HasParentResourcePoolId a b | a -> b where
     parentResourcePoolId :: Lens' a b
@@ -948,6 +957,9 @@ class HasComputedNetworkInterfaceTypes a b | a -> b where
 class HasComputedNumberOfPorts a b | a -> b where
     computedNumberOfPorts :: a -> b
 
+class HasComputedParentFolderId a b | a -> b where
+    computedParentFolderId :: a -> b
+
 class HasComputedParentResourcePoolId a b | a -> b where
     computedParentResourcePoolId :: a -> b
 
@@ -980,6 +992,9 @@ class HasComputedRescan a b | a -> b where
 
 class HasComputedResourcePoolId a b | a -> b where
     computedResourcePoolId :: a -> b
+
+class HasComputedScsiBusSharing a b | a -> b where
+    computedScsiBusSharing :: a -> b
 
 class HasComputedScsiControllerScanCount a b | a -> b where
     computedScsiControllerScanCount :: a -> b

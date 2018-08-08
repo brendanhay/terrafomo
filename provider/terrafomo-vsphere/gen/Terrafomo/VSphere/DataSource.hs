@@ -81,6 +81,7 @@ module Terrafomo.VSphere.DataSource
     , P.HasComputedNetworkInterfaceTypes (..)
     , P.HasComputedRescan (..)
     , P.HasComputedResourcePoolId (..)
+    , P.HasComputedScsiBusSharing (..)
     , P.HasComputedScsiControllerScanCount (..)
     , P.HasComputedScsiType (..)
     , P.HasComputedSize (..)
@@ -713,6 +714,9 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (VirtualMachineData s)) (TF.Attr
 
 instance s ~ s' => P.HasComputedNetworkInterfaceTypes (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
     computedNetworkInterfaceTypes x = TF.compute (TF.refKey x) "network_interface_types"
+
+instance s ~ s' => P.HasComputedScsiBusSharing (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
+    computedScsiBusSharing x = TF.compute (TF.refKey x) "scsi_bus_sharing"
 
 instance s ~ s' => P.HasComputedScsiControllerScanCount (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
     computedScsiControllerScanCount =

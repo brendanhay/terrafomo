@@ -95,6 +95,9 @@ module Terrafomo.VSphere.Resource
     , TagResource (..)
     , tagResource
 
+    , VappContainerResource (..)
+    , vappContainerResource
+
     , VirtualDiskResource (..)
     , virtualDiskResource
 
@@ -163,6 +166,7 @@ module Terrafomo.VSphere.Resource
     , P.HasMulticastFilteringMode (..)
     , P.HasName (..)
     , P.HasNumberOfPorts (..)
+    , P.HasParentFolderId (..)
     , P.HasParentResourcePoolId (..)
     , P.HasPath (..)
     , P.HasQuiesce (..)
@@ -260,6 +264,7 @@ module Terrafomo.VSphere.Resource
     , P.HasComputedMultipleHostAccess (..)
     , P.HasComputedName (..)
     , P.HasComputedNumberOfPorts (..)
+    , P.HasComputedParentFolderId (..)
     , P.HasComputedParentResourcePoolId (..)
     , P.HasComputedPath (..)
     , P.HasComputedPorts (..)
@@ -2870,6 +2875,222 @@ tagResource =
               _category_id = TF.Nil
             , _description = TF.Nil
             , _name = TF.Nil
+            }
+
+{- | The @vsphere_vapp_container@ VSphere resource.
+
+The @vsphere_vapp_container@ resource can be used to create and manage
+vApps. For more information on vSphere vApps, see
+<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-2A95EBB8-1779-40FA-B4FB-4D0845750879.html>
+.
+-}
+data VappContainerResource s = VappContainerResource {
+      _cpu_expandable          :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Determines if the reservation on a vApp container can grow beyond the specified value if the parent resource pool has unreserved resources. Default: @true@ -}
+    , _cpu_limit               :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The CPU utilization of a vApp container will not exceed this limit, even if there are available resources. Set to @-1@ for unlimited. Default: @-1@ -}
+    , _cpu_reservation         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Amount of CPU (MHz) that is guaranteed available to the vApp container. Default: @0@ -}
+    , _cpu_share_level         :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The CPU allocation level. The level is a simplified view of shares. Levels map to a pre-determined set of numeric values for shares. Can be one of @low@ , @normal@ , @high@ , or @custom@ . When @low@ , @normal@ , or @high@ are specified values in @cpu_shares@ will be ignored.  Default: @normal@ -}
+    , _cpu_shares              :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The number of shares allocated for CPU. Used to determine resource allocation in case of resource contention. If this is set, @cpu_share_level@ must be @custom@ . -}
+    , _memory_expandable       :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Determines if the reservation on a vApp container can grow beyond the specified value if the parent resource pool has unreserved resources. Default: @true@ -}
+    , _memory_limit            :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The CPU utilization of a vApp container will not exceed this limit, even if there are available resources. Set to @-1@ for unlimited. Default: @-1@ -}
+    , _memory_reservation      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) Amount of CPU (MHz) that is guaranteed available to the vApp container. Default: @0@ -}
+    , _memory_share_level      :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The CPU allocation level. The level is a simplified view of shares. Levels map to a pre-determined set of numeric values for shares. Can be one of @low@ , @normal@ , @high@ , or @custom@ . When @low@ , @normal@ , or @high@ are specified values in @memory_shares@ will be ignored.  Default: @normal@ -}
+    , _memory_shares           :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The number of shares allocated for CPU. Used to determine resource allocation in case of resource contention. If this is set, @memory_share_level@ must be @custom@ . -}
+    , _name                    :: !(TF.Attr s P.Text)
+    {- ^ (Required) The name of the vApp container. -}
+    , _parent_folder_id        :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the vApp container's parent folder. -}
+    , _parent_resource_pool_id :: !(TF.Attr s P.Text)
+    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the parent resource pool. This can be the root resource pool for a cluster or standalone host, or a resource pool itself. When moving a vApp container from one parent resource pool to another, both must share a common root resource pool or the move will fail. -}
+    , _tags                    :: !(TF.Attr s P.Text)
+    {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
+    } deriving (Show, Eq)
+
+instance TF.IsObject (VappContainerResource s) where
+    toObject VappContainerResource{..} = catMaybes
+        [ TF.assign "cpu_expandable" <$> TF.attribute _cpu_expandable
+        , TF.assign "cpu_limit" <$> TF.attribute _cpu_limit
+        , TF.assign "cpu_reservation" <$> TF.attribute _cpu_reservation
+        , TF.assign "cpu_share_level" <$> TF.attribute _cpu_share_level
+        , TF.assign "cpu_shares" <$> TF.attribute _cpu_shares
+        , TF.assign "memory_expandable" <$> TF.attribute _memory_expandable
+        , TF.assign "memory_limit" <$> TF.attribute _memory_limit
+        , TF.assign "memory_reservation" <$> TF.attribute _memory_reservation
+        , TF.assign "memory_share_level" <$> TF.attribute _memory_share_level
+        , TF.assign "memory_shares" <$> TF.attribute _memory_shares
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_folder_id" <$> TF.attribute _parent_folder_id
+        , TF.assign "parent_resource_pool_id" <$> TF.attribute _parent_resource_pool_id
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance P.HasCpuExpandable (VappContainerResource s) (TF.Attr s P.Text) where
+    cpuExpandable =
+        lens (_cpu_expandable :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cpu_expandable = a } :: VappContainerResource s)
+
+instance P.HasCpuLimit (VappContainerResource s) (TF.Attr s P.Text) where
+    cpuLimit =
+        lens (_cpu_limit :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cpu_limit = a } :: VappContainerResource s)
+
+instance P.HasCpuReservation (VappContainerResource s) (TF.Attr s P.Text) where
+    cpuReservation =
+        lens (_cpu_reservation :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cpu_reservation = a } :: VappContainerResource s)
+
+instance P.HasCpuShareLevel (VappContainerResource s) (TF.Attr s P.Text) where
+    cpuShareLevel =
+        lens (_cpu_share_level :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cpu_share_level = a } :: VappContainerResource s)
+
+instance P.HasCpuShares (VappContainerResource s) (TF.Attr s P.Text) where
+    cpuShares =
+        lens (_cpu_shares :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _cpu_shares = a } :: VappContainerResource s)
+
+instance P.HasMemoryExpandable (VappContainerResource s) (TF.Attr s P.Text) where
+    memoryExpandable =
+        lens (_memory_expandable :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _memory_expandable = a } :: VappContainerResource s)
+
+instance P.HasMemoryLimit (VappContainerResource s) (TF.Attr s P.Text) where
+    memoryLimit =
+        lens (_memory_limit :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _memory_limit = a } :: VappContainerResource s)
+
+instance P.HasMemoryReservation (VappContainerResource s) (TF.Attr s P.Text) where
+    memoryReservation =
+        lens (_memory_reservation :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _memory_reservation = a } :: VappContainerResource s)
+
+instance P.HasMemoryShareLevel (VappContainerResource s) (TF.Attr s P.Text) where
+    memoryShareLevel =
+        lens (_memory_share_level :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _memory_share_level = a } :: VappContainerResource s)
+
+instance P.HasMemoryShares (VappContainerResource s) (TF.Attr s P.Text) where
+    memoryShares =
+        lens (_memory_shares :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _memory_shares = a } :: VappContainerResource s)
+
+instance P.HasName (VappContainerResource s) (TF.Attr s P.Text) where
+    name =
+        lens (_name :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _name = a } :: VappContainerResource s)
+
+instance P.HasParentFolderId (VappContainerResource s) (TF.Attr s P.Text) where
+    parentFolderId =
+        lens (_parent_folder_id :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _parent_folder_id = a } :: VappContainerResource s)
+
+instance P.HasParentResourcePoolId (VappContainerResource s) (TF.Attr s P.Text) where
+    parentResourcePoolId =
+        lens (_parent_resource_pool_id :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _parent_resource_pool_id = a } :: VappContainerResource s)
+
+instance P.HasTags (VappContainerResource s) (TF.Attr s P.Text) where
+    tags =
+        lens (_tags :: VappContainerResource s -> TF.Attr s P.Text)
+             (\s a -> s { _tags = a } :: VappContainerResource s)
+
+instance s ~ s' => P.HasComputedCpuExpandable (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedCpuExpandable =
+        (_cpu_expandable :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCpuLimit (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedCpuLimit =
+        (_cpu_limit :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCpuReservation (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedCpuReservation =
+        (_cpu_reservation :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCpuShareLevel (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedCpuShareLevel =
+        (_cpu_share_level :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedCpuShares (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedCpuShares =
+        (_cpu_shares :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMemoryExpandable (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedMemoryExpandable =
+        (_memory_expandable :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMemoryLimit (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedMemoryLimit =
+        (_memory_limit :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMemoryReservation (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedMemoryReservation =
+        (_memory_reservation :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMemoryShareLevel (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedMemoryShareLevel =
+        (_memory_share_level :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedMemoryShares (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedMemoryShares =
+        (_memory_shares :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedName =
+        (_name :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedParentFolderId (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedParentFolderId =
+        (_parent_folder_id :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedParentResourcePoolId (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedParentResourcePoolId =
+        (_parent_resource_pool_id :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
+    computedTags =
+        (_tags :: VappContainerResource s -> TF.Attr s P.Text)
+            . TF.refValue
+
+vappContainerResource :: TF.Resource P.VSphere (VappContainerResource s)
+vappContainerResource =
+    TF.newResource "vsphere_vapp_container" $
+        VappContainerResource {
+              _cpu_expandable = TF.Nil
+            , _cpu_limit = TF.Nil
+            , _cpu_reservation = TF.Nil
+            , _cpu_share_level = TF.Nil
+            , _cpu_shares = TF.Nil
+            , _memory_expandable = TF.Nil
+            , _memory_limit = TF.Nil
+            , _memory_reservation = TF.Nil
+            , _memory_share_level = TF.Nil
+            , _memory_shares = TF.Nil
+            , _name = TF.Nil
+            , _parent_folder_id = TF.Nil
+            , _parent_resource_pool_id = TF.Nil
+            , _tags = TF.Nil
             }
 
 {- | The @vsphere_virtual_disk@ VSphere resource.
