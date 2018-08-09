@@ -66,7 +66,7 @@ getFields Schema{..} =
        <> attrs False (fmap attributeArgument schemaArguments)
         )
     )
-  where
+ where
     args = Set.fromList $
         mapMaybe (\(k, v) -> do
             val <- getLast (argName v)

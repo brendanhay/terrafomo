@@ -6,8 +6,7 @@ import Data.Semigroup     (Semigroup ((<>)))
 import Data.String        (IsString (fromString))
 import Data.Text          (Text)
 
-import Terrafomo.Gen.Provider
-import Terrafomo.Gen.Schema
+import Terrafomo.Gen.Haskell
 
 import Text.Printf (printf)
 
@@ -43,30 +42,29 @@ toPath = fromNS '/'
 
 -- Package Namespaces
 
-provider :: Provider a -> NS
+provider :: Provider -> NS
 provider p = "Terrafomo" <> NS (pure (providerName p))
 
-types :: Provider a -> NS
+types :: Provider -> NS
 types p = provider p <> "Types"
 
-lenses :: Provider a -> NS
+lenses :: Provider -> NS
 lenses p = provider p <> "Lens"
 
--- partitionSchemas :: Provider a -> SchemaType -> [b] -> [(NS, [b])]
--- partitionSchemas p typ = partition p (show typ)
+partitionResources :: Provider -> SchemaType -> [Resource] -> [(NS, [Resource])]
+partitionResources p typ = partition p (show typ)
 
-partitionSchemas :: Provider a -> SchemaType -> [Schema] -> [(NS, [Schema])]
-partitionSchemas p typ = partition p (show typ)
-
-partition :: Provider a -> String -> [b] -> [(NS, [b])]
-partition p@Provider{providerMaxPartition} root xs
-    | null   xs                         = []
-    | length xs <= providerMaxPartition = [single]
-    | otherwise                         =
-          zipWith multiple [1..]
-        . filter (not . null)
-        $ Split.chunksOf providerMaxPartition xs
+partition :: Provider -> String -> [b] -> [(NS, [b])]
+partition p root xs
+    | null   xs           = []
+    | length xs <= maxlen = [single]
+    | otherwise           =
+        zipWith multiple [1..]
+            . filter (not . null)
+                $ Split.chunksOf maxlen xs
   where
+    maxlen = 100
+
     single =
         (provider p <> fromString root, xs)
 

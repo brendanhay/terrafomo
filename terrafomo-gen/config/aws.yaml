@@ -1,60 +1,60 @@
 name: AWS
 package: terrafomo-aws
-datatype: true
-original: aws
 
-dependencies:
-  - aeson
-  - amazonka-core
-  - formatting
-  - iproute
-  - unordered-containers
+# datatype: true
 
-rules:
-  - mode: suffix
-    match: cidr_block
-    type: 'P.IPRange'
+# dependencies:
+#   - aeson
+#   - amazonka-core
+#   - formatting
+#   - iproute
+#   - unordered-containers
 
-  - mode: exact
-    match: tags
-    type: '(P.Tags s)'
+# rules:
+#   - mode: suffix
+#     match: cidr_block
+#     type: 'P.IPRange'
 
-  - mode: suffix
-    match: _port
-    type: 'P.Word16'
+#   - mode: exact
+#     match: tags
+#     type: '(P.Tags s)'
 
-  - mode: prefix
-    match: enable
-    type: 'P.Bool'
+#   - mode: suffix
+#     match: _port
+#     type: 'P.Word16'
 
-  - mode: suffix
-    match: enable
-    type: 'P.Bool'
+#   - mode: prefix
+#     match: enable
+#     type: 'P.Bool'
 
-  - mode: suffix
-    match: enabled
-    type: 'P.Bool'
+#   - mode: suffix
+#     match: enable
+#     type: 'P.Bool'
 
-  - mode: suffix
-    match: region
-    type: 'P.Region'
+#   - mode: suffix
+#     match: enabled
+#     type: 'P.Bool'
 
-  - mode: suffix
-    match: availability_zone
-    type: 'P.Zone'
+#   - mode: suffix
+#     match: region
+#     type: 'P.Region'
 
-  - mode: exact
-    match: availability_zones
-    type: '[TF.Attr s P.Text]'
+#   - mode: suffix
+#     match: availability_zone
+#     type: 'P.Zone'
 
-  - mode: exact
-    match: security_group_ids
-    type: '[TF.Attr s P.Text]'
+#   - mode: exact
+#     match: availability_zones
+#     type: '[TF.Attr s P.Text]'
 
-  - mode: exact
-    match: security_groups
-    type: '[TF.Attr s P.Text]'
+#   - mode: exact
+#     match: security_group_ids
+#     type: '[TF.Attr s P.Text]'
 
-  - mode: exact
-    match: subnets
-    type: '[TF.Attr s P.Text]'
+#   - mode: exact
+#     match: security_groups
+#     type: '[TF.Attr s P.Text]'
+
+#   - mode: exact
+#     match: subnets
+#     type: '[TF.Attr s P.Text]'

@@ -6,15 +6,15 @@ module Terrafomo.Gen.Parser where
 
 import CMark (Node, NodeType (..))
 
+import Control.Applicative (many, some, (<|>))
+import Control.Monad       (unless, void)
+
 import Data.Bifunctor     (first)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (fromMaybe)
 import Data.Semigroup     ((<>))
 import Data.Text          (Text)
 import Data.Void          (Void)
-
-import Control.Applicative (many, some, (<|>))
-import Control.Monad       (unless, void)
 
 import Terrafomo.Gen.Markdown
 import Terrafomo.Gen.Provider (Rule, matchTypeRule)

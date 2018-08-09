@@ -60,6 +60,12 @@ upperHead x =
         Nothing      -> x
         Just (y, ys) -> Char.toUpper y `Text.cons` ys
 
+lowerHead :: Text -> Text
+lowerHead x =
+    case Text.uncons x of
+        Nothing      -> x
+        Just (y, ys) -> Char.toLower y `Text.cons` ys
+
 surround :: Char -> Char -> Text -> Text
 surround start end x = Text.cons start x `Text.snoc` end
 

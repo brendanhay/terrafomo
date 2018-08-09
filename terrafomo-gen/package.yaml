@@ -22,6 +22,7 @@ executables:
     dependencies:
       - aeson
       - base       >= 4.9 && < 5
+      - bytestring
       - cmark
       - containers
       - directory
@@ -39,3 +40,4 @@ executables:
       - wl-pprint-text
       - word-wrap
       - yaml
+      - mtl

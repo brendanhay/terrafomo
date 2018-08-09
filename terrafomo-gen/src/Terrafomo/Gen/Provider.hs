@@ -2,9 +2,10 @@
 
 module Terrafomo.Gen.Provider where
 
-import Data.Aeson (FromJSON (..), ToJSON (..), (.!=), (.:), (.:?), (.=))
-import Data.Maybe (fromMaybe, isJust, listToMaybe, mapMaybe)
-import Data.Text  (Text)
+import Data.Aeson  (FromJSON (..), ToJSON (..), (.!=), (.:), (.:?), (.=))
+import Data.Maybe  (fromMaybe, isJust, listToMaybe, mapMaybe)
+import Data.String (IsString)
+import Data.Text   (Text)
 
 import GHC.Generics (Generic)
 
@@ -51,9 +52,12 @@ matchTypeRule rules name =
             Exact  | ruleMatch == name              -> Just ruleType
             _                                       -> Nothing
 
+newtype ProviderName = ProviderName { fromProviderName :: Text }
+    deriving (Show, Eq, IsString, ToJSON, FromJSON)
+
 data Provider a = Provider
     { providerName         :: !Text
-    , providerOriginal     :: !Text
+    , providerOriginal     :: !ProviderName
     , providerPackage      :: !(Maybe Text)
     , providerPackageYaml  :: !Bool
     , providerDependencies :: ![Text]
