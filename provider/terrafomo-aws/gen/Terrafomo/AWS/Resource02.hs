@@ -10302,7 +10302,7 @@ data S3BucketResource s = S3BucketResource {
     {- ^ (Optional, Default:false ) A boolean that indicates all objects should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable. -}
     , _lifecycle_rule :: !(TF.Attr s P.Text)
     {- ^ (Optional) A configuration of <http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html> (documented below). -}
-    , _logging :: !(TF.Attr s P.Text)
+    , _logging :: !(TF.Attr s (P.S3BucketLogging s))
     {- ^ (Optional) A settings of <https://docs.aws.amazon.com/AmazonS3/latest/UG/ManagingBucketLogging.html> (documented below). -}
     , _policy :: !(TF.Attr s P.Text)
     {- ^ (Optional) A valid <https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html> JSON document. Note that if the policy document is not specific enough (but still valid), Terraform may view the policy as constantly changing in a @terraform plan@ . In this case, please make sure you use the verbose/specific version of the policy. -}
@@ -10377,9 +10377,9 @@ instance P.HasLifecycleRule (S3BucketResource s) (TF.Attr s P.Text) where
         lens (_lifecycle_rule :: S3BucketResource s -> TF.Attr s P.Text)
              (\s a -> s { _lifecycle_rule = a } :: S3BucketResource s)
 
-instance P.HasLogging (S3BucketResource s) (TF.Attr s P.Text) where
+instance P.HasLogging (S3BucketResource s) (TF.Attr s (P.S3BucketLogging s)) where
     logging =
-        lens (_logging :: S3BucketResource s -> TF.Attr s P.Text)
+        lens (_logging :: S3BucketResource s -> TF.Attr s (P.S3BucketLogging s))
              (\s a -> s { _logging = a } :: S3BucketResource s)
 
 instance P.HasPolicy (S3BucketResource s) (TF.Attr s P.Text) where
@@ -10472,9 +10472,9 @@ instance s ~ s' => P.HasComputedLifecycleRule (TF.Ref s' (S3BucketResource s)) (
         (_lifecycle_rule :: S3BucketResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedLogging (TF.Ref s' (S3BucketResource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLogging (TF.Ref s' (S3BucketResource s)) (TF.Attr s (P.S3BucketLogging s)) where
     computedLogging =
-        (_logging :: S3BucketResource s -> TF.Attr s P.Text)
+        (_logging :: S3BucketResource s -> TF.Attr s (P.S3BucketLogging s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (S3BucketResource s)) (TF.Attr s P.Text) where
