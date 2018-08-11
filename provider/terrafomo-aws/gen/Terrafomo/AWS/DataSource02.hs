@@ -4,6 +4,8 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
+-- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.AWS.DataSource02
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -15,90 +17,119 @@
 module Terrafomo.AWS.DataSource02
     (
     -- * DataSource Datatypes
+    -- **  PrefixListData
       PrefixListData (..)
     , prefixListData
 
+    -- **  PricingProductData
     , PricingProductData (..)
     , pricingProductData
 
+    -- **  RdsClusterData
     , RdsClusterData (..)
     , rdsClusterData
 
+    -- **  RedshiftClusterData
     , RedshiftClusterData (..)
     , redshiftClusterData
 
+    -- **  RedshiftServiceAccountData
     , RedshiftServiceAccountData (..)
     , redshiftServiceAccountData
 
+    -- **  RegionData
     , RegionData (..)
     , regionData
 
+    -- **  RouteData
     , RouteData (..)
     , routeData
 
+    -- **  Route53ZoneData
     , Route53ZoneData (..)
     , route53ZoneData
 
+    -- **  RouteTableData
     , RouteTableData (..)
     , routeTableData
 
+    -- **  RouteTablesData
     , RouteTablesData (..)
     , routeTablesData
 
+    -- **  S3BucketData
     , S3BucketData (..)
     , s3BucketData
 
+    -- **  S3BucketObjectData
     , S3BucketObjectData (..)
     , s3BucketObjectData
 
+    -- **  SecretsmanagerSecretData
     , SecretsmanagerSecretData (..)
     , secretsmanagerSecretData
 
+    -- **  SecretsmanagerSecretVersionData
     , SecretsmanagerSecretVersionData (..)
     , secretsmanagerSecretVersionData
 
+    -- **  SecurityGroupData
     , SecurityGroupData (..)
     , securityGroupData
 
+    -- **  SecurityGroupsData
     , SecurityGroupsData (..)
     , securityGroupsData
 
+    -- **  SnsTopicData
     , SnsTopicData (..)
     , snsTopicData
 
+    -- **  SqsQueueData
     , SqsQueueData (..)
     , sqsQueueData
 
+    -- **  SsmParameterData
     , SsmParameterData (..)
     , ssmParameterData
 
+    -- **  StoragegatewayLocalDiskData
     , StoragegatewayLocalDiskData (..)
     , storagegatewayLocalDiskData
 
+    -- **  SubnetData
     , SubnetData (..)
     , subnetData
 
+    -- **  SubnetIdsData
     , SubnetIdsData (..)
     , subnetIdsData
 
+    -- **  VpcData
     , VpcData (..)
     , vpcData
 
+    -- **  VpcDhcpOptionsData
     , VpcDhcpOptionsData (..)
     , vpcDhcpOptionsData
 
+    -- **  VpcEndpointData
     , VpcEndpointData (..)
     , vpcEndpointData
 
+    -- **  VpcEndpointServiceData
     , VpcEndpointServiceData (..)
     , vpcEndpointServiceData
 
+    -- **  VpcPeeringConnectionData
     , VpcPeeringConnectionData (..)
     , vpcPeeringConnectionData
 
+    -- **  VpcsData
     , VpcsData (..)
     , vpcsData
 
+    -- **  VpnGatewayData
     , VpnGatewayData (..)
     , vpnGatewayData
 
@@ -109,26 +140,27 @@ import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
-import Terrafomo.AWS.Provider
 import Terrafomo.AWS.Settings
-import Terrafomo.AWS.Types
 
 import qualified Data.HashMap.Strict as P
+import qualified Data.Hashable as P
 import qualified Data.List.NonEmpty as P
 import qualified Data.Text as P
 import qualified GHC.Generics as P
 import qualified Lens.Micro as P
 import qualified Prelude as P
 import qualified Terrafomo.AWS.Lens as P
+import qualified Terrafomo.AWS.Provider as P
+import qualified Terrafomo.AWS.Types as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Provider as TF
 import qualified Terrafomo.Schema as TF
 
 -- | @aws_prefix_list@ DataSource.
 data PrefixListData s = PrefixListData'
     { _prefixListId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (PrefixListData s) where
@@ -137,7 +169,7 @@ instance TF.IsObject (PrefixListData s) where
         ]
 
 prefixListData
-    :: TF.DataSource AWS (PrefixListData s)
+    :: TF.DataSource P.Provider (PrefixListData s)
 prefixListData =
     TF.newDataSource "aws_prefix_list" $
         PrefixListData'
@@ -158,7 +190,9 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (PrefixListData s)) (TF.Attr s P
 -- | @aws_pricing_product@ DataSource.
 data PricingProductData s = PricingProductData'
     { _filters :: TF.Attr s (P.NonEmpty (Filters s))
+    -- ^ Undocumented.
     , _serviceCode :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (PricingProductData s) where
@@ -170,7 +204,7 @@ instance TF.IsObject (PricingProductData s) where
 pricingProductData
     :: TF.Attr s (P.NonEmpty (Filters s)) -- ^ @filters@
     -> TF.Attr s P.Text -- ^ @service_code@
-    -> TF.DataSource AWS (PricingProductData s)
+    -> TF.DataSource P.Provider (PricingProductData s)
 pricingProductData _filters _serviceCode =
     TF.newDataSource "aws_pricing_product" $
         PricingProductData'
@@ -194,6 +228,7 @@ instance s ~ s' => P.HasComputedResult (TF.Ref s' (PricingProductData s)) (TF.At
 -- | @aws_rds_cluster@ DataSource.
 data RdsClusterData s = RdsClusterData'
     { _clusterIdentifier :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RdsClusterData s) where
@@ -203,7 +238,7 @@ instance TF.IsObject (RdsClusterData s) where
 
 rdsClusterData
     :: TF.Attr s P.Text -- ^ @cluster_identifier@
-    -> TF.DataSource AWS (RdsClusterData s)
+    -> TF.DataSource P.Provider (RdsClusterData s)
 rdsClusterData _clusterIdentifier =
     TF.newDataSource "aws_rds_cluster" $
         RdsClusterData'
@@ -293,7 +328,9 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RdsClusterData s
 -- | @aws_redshift_cluster@ DataSource.
 data RedshiftClusterData s = RedshiftClusterData'
     { _clusterIdentifier :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RedshiftClusterData s) where
@@ -304,7 +341,7 @@ instance TF.IsObject (RedshiftClusterData s) where
 
 redshiftClusterData
     :: TF.Attr s P.Text -- ^ @cluster_identifier@
-    -> TF.DataSource AWS (RedshiftClusterData s)
+    -> TF.DataSource P.Provider (RedshiftClusterData s)
 redshiftClusterData _clusterIdentifier =
     TF.newDataSource "aws_redshift_cluster" $
         RedshiftClusterData'
@@ -409,6 +446,7 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RedshiftClusterD
 -- | @aws_redshift_service_account@ DataSource.
 data RedshiftServiceAccountData s = RedshiftServiceAccountData'
     { _region :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RedshiftServiceAccountData s) where
@@ -417,7 +455,7 @@ instance TF.IsObject (RedshiftServiceAccountData s) where
         ]
 
 redshiftServiceAccountData
-    :: TF.DataSource AWS (RedshiftServiceAccountData s)
+    :: TF.DataSource P.Provider (RedshiftServiceAccountData s)
 redshiftServiceAccountData =
     TF.newDataSource "aws_redshift_service_account" $
         RedshiftServiceAccountData'
@@ -440,7 +478,7 @@ instance TF.IsObject (RegionData s) where
     toObject _ = []
 
 regionData
-    :: TF.DataSource AWS (RegionData s)
+    :: TF.DataSource P.Provider (RegionData s)
 regionData =
     TF.newDataSource "aws_region" $
         RegionData'
@@ -460,6 +498,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (RegionData s)) (TF.Attr s P.Tex
 -- | @aws_route@ DataSource.
 data RouteData s = RouteData'
     { _routeTableId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RouteData s) where
@@ -469,7 +508,7 @@ instance TF.IsObject (RouteData s) where
 
 routeData
     :: TF.Attr s P.Text -- ^ @route_table_id@
-    -> TF.DataSource AWS (RouteData s)
+    -> TF.DataSource P.Provider (RouteData s)
 routeData _routeTableId =
     TF.newDataSource "aws_route" $
         RouteData'
@@ -508,6 +547,7 @@ instance s ~ s' => P.HasComputedVpcPeeringConnectionId (TF.Ref s' (RouteData s))
 -- | @aws_route53_zone@ DataSource.
 data Route53ZoneData s = Route53ZoneData'
     { _privateZone :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (Route53ZoneData s) where
@@ -516,7 +556,7 @@ instance TF.IsObject (Route53ZoneData s) where
         ]
 
 route53ZoneData
-    :: TF.DataSource AWS (Route53ZoneData s)
+    :: TF.DataSource P.Provider (Route53ZoneData s)
 route53ZoneData =
     TF.newDataSource "aws_route53_zone" $
         Route53ZoneData'
@@ -555,6 +595,7 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (Route53ZoneData s)) (TF.Attr 
 -- | @aws_route_table@ DataSource.
 data RouteTableData s = RouteTableData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RouteTableData s) where
@@ -563,7 +604,7 @@ instance TF.IsObject (RouteTableData s) where
         ]
 
 routeTableData
-    :: TF.DataSource AWS (RouteTableData s)
+    :: TF.DataSource P.Provider (RouteTableData s)
 routeTableData =
     TF.newDataSource "aws_route_table" $
         RouteTableData'
@@ -596,7 +637,9 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (RouteTableData s)) (TF.Attr s 
 -- | @aws_route_tables@ DataSource.
 data RouteTablesData s = RouteTablesData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     , _vpcId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RouteTablesData s) where
@@ -606,7 +649,7 @@ instance TF.IsObject (RouteTablesData s) where
         ]
 
 routeTablesData
-    :: TF.DataSource AWS (RouteTablesData s)
+    :: TF.DataSource P.Provider (RouteTablesData s)
 routeTablesData =
     TF.newDataSource "aws_route_tables" $
         RouteTablesData'
@@ -633,6 +676,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (RouteTablesData s)) (TF.Attr s 
 -- | @aws_s3_bucket@ DataSource.
 data S3BucketData s = S3BucketData'
     { _bucket :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (S3BucketData s) where
@@ -642,7 +686,7 @@ instance TF.IsObject (S3BucketData s) where
 
 s3BucketData
     :: TF.Attr s P.Text -- ^ @bucket@
-    -> TF.DataSource AWS (S3BucketData s)
+    -> TF.DataSource P.Provider (S3BucketData s)
 s3BucketData _bucket =
     TF.newDataSource "aws_s3_bucket" $
         S3BucketData'
@@ -675,8 +719,11 @@ instance s ~ s' => P.HasComputedWebsiteEndpoint (TF.Ref s' (S3BucketData s)) (TF
 -- | @aws_s3_bucket_object@ DataSource.
 data S3BucketObjectData s = S3BucketObjectData'
     { _bucket :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _key :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _range :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (S3BucketObjectData s) where
@@ -689,7 +736,7 @@ instance TF.IsObject (S3BucketObjectData s) where
 s3BucketObjectData
     :: TF.Attr s P.Text -- ^ @bucket@
     -> TF.Attr s P.Text -- ^ @key@
-    -> TF.DataSource AWS (S3BucketObjectData s)
+    -> TF.DataSource P.Provider (S3BucketObjectData s)
 s3BucketObjectData _bucket _key =
     TF.newDataSource "aws_s3_bucket_object" $
         S3BucketObjectData'
@@ -775,7 +822,7 @@ instance TF.IsObject (SecretsmanagerSecretData s) where
     toObject _ = []
 
 secretsmanagerSecretData
-    :: TF.DataSource AWS (SecretsmanagerSecretData s)
+    :: TF.DataSource P.Provider (SecretsmanagerSecretData s)
 secretsmanagerSecretData =
     TF.newDataSource "aws_secretsmanager_secret" $
         SecretsmanagerSecretData'
@@ -807,7 +854,9 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecretsmanagerSecretData s)) (T
 -- | @aws_secretsmanager_secret_version@ DataSource.
 data SecretsmanagerSecretVersionData s = SecretsmanagerSecretVersionData'
     { _secretId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _versionStage :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SecretsmanagerSecretVersionData s) where
@@ -818,7 +867,7 @@ instance TF.IsObject (SecretsmanagerSecretVersionData s) where
 
 secretsmanagerSecretVersionData
     :: TF.Attr s P.Text -- ^ @secret_id@
-    -> TF.DataSource AWS (SecretsmanagerSecretVersionData s)
+    -> TF.DataSource P.Provider (SecretsmanagerSecretVersionData s)
 secretsmanagerSecretVersionData _secretId =
     TF.newDataSource "aws_secretsmanager_secret_version" $
         SecretsmanagerSecretVersionData'
@@ -848,6 +897,7 @@ instance s ~ s' => P.HasComputedVersionStages (TF.Ref s' (SecretsmanagerSecretVe
 -- | @aws_security_group@ DataSource.
 data SecurityGroupData s = SecurityGroupData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SecurityGroupData s) where
@@ -856,7 +906,7 @@ instance TF.IsObject (SecurityGroupData s) where
         ]
 
 securityGroupData
-    :: TF.DataSource AWS (SecurityGroupData s)
+    :: TF.DataSource P.Provider (SecurityGroupData s)
 securityGroupData =
     TF.newDataSource "aws_security_group" $
         SecurityGroupData'
@@ -889,6 +939,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SecurityGroupData s)) (TF.Attr
 -- | @aws_security_groups@ DataSource.
 data SecurityGroupsData s = SecurityGroupsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SecurityGroupsData s) where
@@ -897,7 +948,7 @@ instance TF.IsObject (SecurityGroupsData s) where
         ]
 
 securityGroupsData
-    :: TF.DataSource AWS (SecurityGroupsData s)
+    :: TF.DataSource P.Provider (SecurityGroupsData s)
 securityGroupsData =
     TF.newDataSource "aws_security_groups" $
         SecurityGroupsData'
@@ -921,6 +972,7 @@ instance s ~ s' => P.HasComputedVpcIds (TF.Ref s' (SecurityGroupsData s)) (TF.At
 -- | @aws_sns_topic@ DataSource.
 data SnsTopicData s = SnsTopicData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SnsTopicData s) where
@@ -930,7 +982,7 @@ instance TF.IsObject (SnsTopicData s) where
 
 snsTopicData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (SnsTopicData s)
+    -> TF.DataSource P.Provider (SnsTopicData s)
 snsTopicData _name =
     TF.newDataSource "aws_sns_topic" $
         SnsTopicData'
@@ -948,6 +1000,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (SnsTopicData s)) (TF.Attr s P.Te
 -- | @aws_sqs_queue@ DataSource.
 data SqsQueueData s = SqsQueueData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SqsQueueData s) where
@@ -957,7 +1010,7 @@ instance TF.IsObject (SqsQueueData s) where
 
 sqsQueueData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (SqsQueueData s)
+    -> TF.DataSource P.Provider (SqsQueueData s)
 sqsQueueData _name =
     TF.newDataSource "aws_sqs_queue" $
         SqsQueueData'
@@ -978,7 +1031,9 @@ instance s ~ s' => P.HasComputedUrl (TF.Ref s' (SqsQueueData s)) (TF.Attr s P.Te
 -- | @aws_ssm_parameter@ DataSource.
 data SsmParameterData s = SsmParameterData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _withDecryption :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SsmParameterData s) where
@@ -989,7 +1044,7 @@ instance TF.IsObject (SsmParameterData s) where
 
 ssmParameterData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (SsmParameterData s)
+    -> TF.DataSource P.Provider (SsmParameterData s)
 ssmParameterData _name =
     TF.newDataSource "aws_ssm_parameter" $
         SsmParameterData'
@@ -1019,7 +1074,9 @@ instance s ~ s' => P.HasComputedValue (TF.Ref s' (SsmParameterData s)) (TF.Attr 
 -- | @aws_storagegateway_local_disk@ DataSource.
 data StoragegatewayLocalDiskData s = StoragegatewayLocalDiskData'
     { _diskPath :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _gatewayArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (StoragegatewayLocalDiskData s) where
@@ -1031,7 +1088,7 @@ instance TF.IsObject (StoragegatewayLocalDiskData s) where
 storagegatewayLocalDiskData
     :: TF.Attr s P.Text -- ^ @disk_path@
     -> TF.Attr s P.Text -- ^ @gateway_arn@
-    -> TF.DataSource AWS (StoragegatewayLocalDiskData s)
+    -> TF.DataSource P.Provider (StoragegatewayLocalDiskData s)
 storagegatewayLocalDiskData _diskPath _gatewayArn =
     TF.newDataSource "aws_storagegateway_local_disk" $
         StoragegatewayLocalDiskData'
@@ -1055,6 +1112,7 @@ instance s ~ s' => P.HasComputedDiskId (TF.Ref s' (StoragegatewayLocalDiskData s
 -- | @aws_subnet@ DataSource.
 data SubnetData s = SubnetData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SubnetData s) where
@@ -1063,7 +1121,7 @@ instance TF.IsObject (SubnetData s) where
         ]
 
 subnetData
-    :: TF.DataSource AWS (SubnetData s)
+    :: TF.DataSource P.Provider (SubnetData s)
 subnetData =
     TF.newDataSource "aws_subnet" $
         SubnetData'
@@ -1111,7 +1169,9 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SubnetData s)) (TF.Attr s P.Te
 -- | @aws_subnet_ids@ DataSource.
 data SubnetIdsData s = SubnetIdsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     , _vpcId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SubnetIdsData s) where
@@ -1122,7 +1182,7 @@ instance TF.IsObject (SubnetIdsData s) where
 
 subnetIdsData
     :: TF.Attr s P.Text -- ^ @vpc_id@
-    -> TF.DataSource AWS (SubnetIdsData s)
+    -> TF.DataSource P.Provider (SubnetIdsData s)
 subnetIdsData _vpcId =
     TF.newDataSource "aws_subnet_ids" $
         SubnetIdsData'
@@ -1149,6 +1209,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (SubnetIdsData s)) (TF.Attr s (P
 -- | @aws_vpc@ DataSource.
 data VpcData s = VpcData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcData s) where
@@ -1157,7 +1218,7 @@ instance TF.IsObject (VpcData s) where
         ]
 
 vpcData
-    :: TF.DataSource AWS (VpcData s)
+    :: TF.DataSource P.Provider (VpcData s)
 vpcData =
     TF.newDataSource "aws_vpc" $
         VpcData'
@@ -1211,6 +1272,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcData s)) (TF.Attr s (P.HashM
 -- | @aws_vpc_dhcp_options@ DataSource.
 data VpcDhcpOptionsData s = VpcDhcpOptionsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcDhcpOptionsData s) where
@@ -1219,7 +1281,7 @@ instance TF.IsObject (VpcDhcpOptionsData s) where
         ]
 
 vpcDhcpOptionsData
-    :: TF.DataSource AWS (VpcDhcpOptionsData s)
+    :: TF.DataSource P.Provider (VpcDhcpOptionsData s)
 vpcDhcpOptionsData =
     TF.newDataSource "aws_vpc_dhcp_options" $
         VpcDhcpOptionsData'
@@ -1260,7 +1322,7 @@ instance TF.IsObject (VpcEndpointData s) where
     toObject _ = []
 
 vpcEndpointData
-    :: TF.DataSource AWS (VpcEndpointData s)
+    :: TF.DataSource P.Provider (VpcEndpointData s)
 vpcEndpointData =
     TF.newDataSource "aws_vpc_endpoint" $
         VpcEndpointData'
@@ -1310,6 +1372,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcEndpointData s)) (TF.Attr s
 -- | @aws_vpc_endpoint_service@ DataSource.
 data VpcEndpointServiceData s = VpcEndpointServiceData'
     { _service :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcEndpointServiceData s) where
@@ -1318,7 +1381,7 @@ instance TF.IsObject (VpcEndpointServiceData s) where
         ]
 
 vpcEndpointServiceData
-    :: TF.DataSource AWS (VpcEndpointServiceData s)
+    :: TF.DataSource P.Provider (VpcEndpointServiceData s)
 vpcEndpointServiceData =
     TF.newDataSource "aws_vpc_endpoint_service" $
         VpcEndpointServiceData'
@@ -1357,6 +1420,7 @@ instance s ~ s' => P.HasComputedVpcEndpointPolicySupported (TF.Ref s' (VpcEndpoi
 -- | @aws_vpc_peering_connection@ DataSource.
 data VpcPeeringConnectionData s = VpcPeeringConnectionData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcPeeringConnectionData s) where
@@ -1365,7 +1429,7 @@ instance TF.IsObject (VpcPeeringConnectionData s) where
         ]
 
 vpcPeeringConnectionData
-    :: TF.DataSource AWS (VpcPeeringConnectionData s)
+    :: TF.DataSource P.Provider (VpcPeeringConnectionData s)
 vpcPeeringConnectionData =
     TF.newDataSource "aws_vpc_peering_connection" $
         VpcPeeringConnectionData'
@@ -1419,6 +1483,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcPeeringConnectionData s)) (
 -- | @aws_vpcs@ DataSource.
 data VpcsData s = VpcsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcsData s) where
@@ -1427,7 +1492,7 @@ instance TF.IsObject (VpcsData s) where
         ]
 
 vpcsData
-    :: TF.DataSource AWS (VpcsData s)
+    :: TF.DataSource P.Provider (VpcsData s)
 vpcsData =
     TF.newDataSource "aws_vpcs" $
         VpcsData'
@@ -1448,6 +1513,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcsData s)) (TF.Attr s (P.Hash
 -- | @aws_vpn_gateway@ DataSource.
 data VpnGatewayData s = VpnGatewayData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpnGatewayData s) where
@@ -1456,7 +1522,7 @@ instance TF.IsObject (VpnGatewayData s) where
         ]
 
 vpnGatewayData
-    :: TF.DataSource AWS (VpnGatewayData s)
+    :: TF.DataSource P.Provider (VpnGatewayData s)
 vpnGatewayData =
     TF.newDataSource "aws_vpn_gateway" $
         VpnGatewayData'

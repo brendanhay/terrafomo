@@ -4,6 +4,8 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
+-- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.AWS.DataSource01
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -15,243 +17,323 @@
 module Terrafomo.AWS.DataSource01
     (
     -- * DataSource Datatypes
+    -- **  AcmCertificateData
       AcmCertificateData (..)
     , acmCertificateData
 
+    -- **  AcmpcaCertificateAuthorityData
     , AcmpcaCertificateAuthorityData (..)
     , acmpcaCertificateAuthorityData
 
+    -- **  AlbData
     , AlbData (..)
     , albData
 
+    -- **  AlbListenerData
     , AlbListenerData (..)
     , albListenerData
 
+    -- **  AlbTargetGroupData
     , AlbTargetGroupData (..)
     , albTargetGroupData
 
+    -- **  AmiData
     , AmiData (..)
     , amiData
 
+    -- **  AmiIdsData
     , AmiIdsData (..)
     , amiIdsData
 
+    -- **  ApiGatewayRestApiData
     , ApiGatewayRestApiData (..)
     , apiGatewayRestApiData
 
+    -- **  ArnData
     , ArnData (..)
     , arnData
 
+    -- **  AutoscalingGroupsData
     , AutoscalingGroupsData (..)
     , autoscalingGroupsData
 
+    -- **  AvailabilityZoneData
     , AvailabilityZoneData (..)
     , availabilityZoneData
 
+    -- **  AvailabilityZonesData
     , AvailabilityZonesData (..)
     , availabilityZonesData
 
+    -- **  BatchComputeEnvironmentData
     , BatchComputeEnvironmentData (..)
     , batchComputeEnvironmentData
 
+    -- **  BatchJobQueueData
     , BatchJobQueueData (..)
     , batchJobQueueData
 
+    -- **  BillingServiceAccountData
     , BillingServiceAccountData (..)
     , billingServiceAccountData
 
+    -- **  CallerIdentityData
     , CallerIdentityData (..)
     , callerIdentityData
 
+    -- **  CanonicalUserIdData
     , CanonicalUserIdData (..)
     , canonicalUserIdData
 
+    -- **  CloudformationExportData
     , CloudformationExportData (..)
     , cloudformationExportData
 
+    -- **  CloudformationStackData
     , CloudformationStackData (..)
     , cloudformationStackData
 
+    -- **  CloudtrailServiceAccountData
     , CloudtrailServiceAccountData (..)
     , cloudtrailServiceAccountData
 
+    -- **  CloudwatchLogGroupData
     , CloudwatchLogGroupData (..)
     , cloudwatchLogGroupData
 
+    -- **  CodecommitRepositoryData
     , CodecommitRepositoryData (..)
     , codecommitRepositoryData
 
+    -- **  CognitoUserPoolsData
     , CognitoUserPoolsData (..)
     , cognitoUserPoolsData
 
+    -- **  DbClusterSnapshotData
     , DbClusterSnapshotData (..)
     , dbClusterSnapshotData
 
+    -- **  DbInstanceData
     , DbInstanceData (..)
     , dbInstanceData
 
+    -- **  DbSnapshotData
     , DbSnapshotData (..)
     , dbSnapshotData
 
+    -- **  DxGatewayData
     , DxGatewayData (..)
     , dxGatewayData
 
+    -- **  DynamodbTableData
     , DynamodbTableData (..)
     , dynamodbTableData
 
+    -- **  EbsSnapshotData
     , EbsSnapshotData (..)
     , ebsSnapshotData
 
+    -- **  EbsSnapshotIdsData
     , EbsSnapshotIdsData (..)
     , ebsSnapshotIdsData
 
+    -- **  EbsVolumeData
     , EbsVolumeData (..)
     , ebsVolumeData
 
+    -- **  EcrRepositoryData
     , EcrRepositoryData (..)
     , ecrRepositoryData
 
+    -- **  EcsClusterData
     , EcsClusterData (..)
     , ecsClusterData
 
+    -- **  EcsContainerDefinitionData
     , EcsContainerDefinitionData (..)
     , ecsContainerDefinitionData
 
+    -- **  EcsServiceData
     , EcsServiceData (..)
     , ecsServiceData
 
+    -- **  EcsTaskDefinitionData
     , EcsTaskDefinitionData (..)
     , ecsTaskDefinitionData
 
+    -- **  EfsFileSystemData
     , EfsFileSystemData (..)
     , efsFileSystemData
 
+    -- **  EfsMountTargetData
     , EfsMountTargetData (..)
     , efsMountTargetData
 
+    -- **  EipData
     , EipData (..)
     , eipData
 
+    -- **  EksClusterData
     , EksClusterData (..)
     , eksClusterData
 
+    -- **  ElasticBeanstalkHostedZoneData
     , ElasticBeanstalkHostedZoneData (..)
     , elasticBeanstalkHostedZoneData
 
+    -- **  ElasticBeanstalkSolutionStackData
     , ElasticBeanstalkSolutionStackData (..)
     , elasticBeanstalkSolutionStackData
 
+    -- **  ElasticacheClusterData
     , ElasticacheClusterData (..)
     , elasticacheClusterData
 
+    -- **  ElasticacheReplicationGroupData
     , ElasticacheReplicationGroupData (..)
     , elasticacheReplicationGroupData
 
+    -- **  ElbData
     , ElbData (..)
     , elbData
 
+    -- **  ElbHostedZoneIdData
     , ElbHostedZoneIdData (..)
     , elbHostedZoneIdData
 
+    -- **  ElbServiceAccountData
     , ElbServiceAccountData (..)
     , elbServiceAccountData
 
+    -- **  GlueScriptData
     , GlueScriptData (..)
     , glueScriptData
 
+    -- **  IamAccountAliasData
     , IamAccountAliasData (..)
     , iamAccountAliasData
 
+    -- **  IamGroupData
     , IamGroupData (..)
     , iamGroupData
 
+    -- **  IamInstanceProfileData
     , IamInstanceProfileData (..)
     , iamInstanceProfileData
 
+    -- **  IamPolicyData
     , IamPolicyData (..)
     , iamPolicyData
 
+    -- **  IamPolicyDocumentData
     , IamPolicyDocumentData (..)
     , iamPolicyDocumentData
 
+    -- **  IamRoleData
     , IamRoleData (..)
     , iamRoleData
 
+    -- **  IamServerCertificateData
     , IamServerCertificateData (..)
     , iamServerCertificateData
 
+    -- **  IamUserData
     , IamUserData (..)
     , iamUserData
 
+    -- **  InspectorRulesPackagesData
     , InspectorRulesPackagesData (..)
     , inspectorRulesPackagesData
 
+    -- **  InstanceData
     , InstanceData (..)
     , instanceData
 
+    -- **  InstancesData
     , InstancesData (..)
     , instancesData
 
+    -- **  InternetGatewayData
     , InternetGatewayData (..)
     , internetGatewayData
 
+    -- **  IotEndpointData
     , IotEndpointData (..)
     , iotEndpointData
 
+    -- **  IpRangesData
     , IpRangesData (..)
     , ipRangesData
 
+    -- **  KinesisStreamData
     , KinesisStreamData (..)
     , kinesisStreamData
 
+    -- **  KmsAliasData
     , KmsAliasData (..)
     , kmsAliasData
 
+    -- **  KmsCiphertextData
     , KmsCiphertextData (..)
     , kmsCiphertextData
 
+    -- **  KmsKeyData
     , KmsKeyData (..)
     , kmsKeyData
 
+    -- **  KmsSecretData
     , KmsSecretData (..)
     , kmsSecretData
 
+    -- **  KmsSecretsData
     , KmsSecretsData (..)
     , kmsSecretsData
 
+    -- **  LambdaFunctionData
     , LambdaFunctionData (..)
     , lambdaFunctionData
 
+    -- **  LambdaInvocationData
     , LambdaInvocationData (..)
     , lambdaInvocationData
 
+    -- **  LaunchConfigurationData
     , LaunchConfigurationData (..)
     , launchConfigurationData
 
+    -- **  LbData
     , LbData (..)
     , lbData
 
+    -- **  LbListenerData
     , LbListenerData (..)
     , lbListenerData
 
+    -- **  LbTargetGroupData
     , LbTargetGroupData (..)
     , lbTargetGroupData
 
+    -- **  MqBrokerData
     , MqBrokerData (..)
     , mqBrokerData
 
+    -- **  NatGatewayData
     , NatGatewayData (..)
     , natGatewayData
 
+    -- **  NetworkAclsData
     , NetworkAclsData (..)
     , networkAclsData
 
+    -- **  NetworkInterfaceData
     , NetworkInterfaceData (..)
     , networkInterfaceData
 
+    -- **  NetworkInterfacesData
     , NetworkInterfacesData (..)
     , networkInterfacesData
 
+    -- **  PartitionData
     , PartitionData (..)
     , partitionData
 
@@ -262,29 +344,33 @@ import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
-import Terrafomo.AWS.Provider
 import Terrafomo.AWS.Settings
-import Terrafomo.AWS.Types
 
 import qualified Data.HashMap.Strict as P
+import qualified Data.Hashable as P
 import qualified Data.List.NonEmpty as P
 import qualified Data.Text as P
 import qualified GHC.Generics as P
 import qualified Lens.Micro as P
 import qualified Prelude as P
 import qualified Terrafomo.AWS.Lens as P
+import qualified Terrafomo.AWS.Provider as P
+import qualified Terrafomo.AWS.Types as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Provider as TF
 import qualified Terrafomo.Schema as TF
 
 -- | @aws_acm_certificate@ DataSource.
 data AcmCertificateData s = AcmCertificateData'
     { _domain :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _mostRecent :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _statuses :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _types :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (AcmCertificateData s) where
@@ -297,7 +383,7 @@ instance TF.IsObject (AcmCertificateData s) where
 
 acmCertificateData
     :: TF.Attr s P.Text -- ^ @domain@
-    -> TF.DataSource AWS (AcmCertificateData s)
+    -> TF.DataSource P.Provider (AcmCertificateData s)
 acmCertificateData _domain =
     TF.newDataSource "aws_acm_certificate" $
         AcmCertificateData'
@@ -333,6 +419,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (AcmCertificateData s)) (TF.Attr 
 -- | @aws_acmpca_certificate_authority@ DataSource.
 data AcmpcaCertificateAuthorityData s = AcmpcaCertificateAuthorityData'
     { _arn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (AcmpcaCertificateAuthorityData s) where
@@ -342,7 +429,7 @@ instance TF.IsObject (AcmpcaCertificateAuthorityData s) where
 
 acmpcaCertificateAuthorityData
     :: TF.Attr s P.Text -- ^ @arn@
-    -> TF.DataSource AWS (AcmpcaCertificateAuthorityData s)
+    -> TF.DataSource P.Provider (AcmpcaCertificateAuthorityData s)
 acmpcaCertificateAuthorityData _arn =
     TF.newDataSource "aws_acmpca_certificate_authority" $
         AcmpcaCertificateAuthorityData'
@@ -392,7 +479,7 @@ instance TF.IsObject (AlbData s) where
     toObject _ = []
 
 albData
-    :: TF.DataSource AWS (AlbData s)
+    :: TF.DataSource P.Provider (AlbData s)
 albData =
     TF.newDataSource "aws_alb" $
         AlbData'
@@ -450,7 +537,7 @@ instance TF.IsObject (AlbListenerData s) where
     toObject _ = []
 
 albListenerData
-    :: TF.DataSource AWS (AlbListenerData s)
+    :: TF.DataSource P.Provider (AlbListenerData s)
 albListenerData =
     TF.newDataSource "aws_alb_listener" $
         AlbListenerData'
@@ -484,7 +571,7 @@ instance TF.IsObject (AlbTargetGroupData s) where
     toObject _ = []
 
 albTargetGroupData
-    :: TF.DataSource AWS (AlbTargetGroupData s)
+    :: TF.DataSource P.Provider (AlbTargetGroupData s)
 albTargetGroupData =
     TF.newDataSource "aws_alb_target_group" $
         AlbTargetGroupData'
@@ -525,10 +612,15 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (AlbTargetGroupData s)) (TF.Att
 -- | @aws_ami@ DataSource.
 data AmiData s = AmiData'
     { _executableUsers :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     , _mostRecent :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _nameRegex :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _owners :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (AmiData s) where
@@ -541,7 +633,7 @@ instance TF.IsObject (AmiData s) where
         ]
 
 amiData
-    :: TF.DataSource AWS (AmiData s)
+    :: TF.DataSource P.Provider (AmiData s)
 amiData =
     TF.newDataSource "aws_ami" $
         AmiData'
@@ -652,9 +744,13 @@ instance s ~ s' => P.HasComputedVirtualizationType (TF.Ref s' (AmiData s)) (TF.A
 -- | @aws_ami_ids@ DataSource.
 data AmiIdsData s = AmiIdsData'
     { _executableUsers :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     , _nameRegex :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _owners :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (AmiIdsData s) where
@@ -666,7 +762,7 @@ instance TF.IsObject (AmiIdsData s) where
         ]
 
 amiIdsData
-    :: TF.DataSource AWS (AmiIdsData s)
+    :: TF.DataSource P.Provider (AmiIdsData s)
 amiIdsData =
     TF.newDataSource "aws_ami_ids" $
         AmiIdsData'
@@ -702,6 +798,7 @@ instance s ~ s' => P.HasComputedIds (TF.Ref s' (AmiIdsData s)) (TF.Attr s [TF.At
 -- | @aws_api_gateway_rest_api@ DataSource.
 data ApiGatewayRestApiData s = ApiGatewayRestApiData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ApiGatewayRestApiData s) where
@@ -711,7 +808,7 @@ instance TF.IsObject (ApiGatewayRestApiData s) where
 
 apiGatewayRestApiData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (ApiGatewayRestApiData s)
+    -> TF.DataSource P.Provider (ApiGatewayRestApiData s)
 apiGatewayRestApiData _name =
     TF.newDataSource "aws_api_gateway_rest_api" $
         ApiGatewayRestApiData'
@@ -729,6 +826,7 @@ instance s ~ s' => P.HasComputedRootResourceId (TF.Ref s' (ApiGatewayRestApiData
 -- | @aws_arn@ DataSource.
 data ArnData s = ArnData'
     { _arn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ArnData s) where
@@ -738,7 +836,7 @@ instance TF.IsObject (ArnData s) where
 
 arnData
     :: TF.Attr s P.Text -- ^ @arn@
-    -> TF.DataSource AWS (ArnData s)
+    -> TF.DataSource P.Provider (ArnData s)
 arnData _arn =
     TF.newDataSource "aws_arn" $
         ArnData'
@@ -768,6 +866,7 @@ instance s ~ s' => P.HasComputedService (TF.Ref s' (ArnData s)) (TF.Attr s P.Tex
 -- | @aws_autoscaling_groups@ DataSource.
 data AutoscalingGroupsData s = AutoscalingGroupsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (AutoscalingGroupsData s) where
@@ -776,7 +875,7 @@ instance TF.IsObject (AutoscalingGroupsData s) where
         ]
 
 autoscalingGroupsData
-    :: TF.DataSource AWS (AutoscalingGroupsData s)
+    :: TF.DataSource P.Provider (AutoscalingGroupsData s)
 autoscalingGroupsData =
     TF.newDataSource "aws_autoscaling_groups" $
         AutoscalingGroupsData'
@@ -799,7 +898,7 @@ instance TF.IsObject (AvailabilityZoneData s) where
     toObject _ = []
 
 availabilityZoneData
-    :: TF.DataSource AWS (AvailabilityZoneData s)
+    :: TF.DataSource P.Provider (AvailabilityZoneData s)
 availabilityZoneData =
     TF.newDataSource "aws_availability_zone" $
         AvailabilityZoneData'
@@ -819,6 +918,7 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (AvailabilityZoneData s)) (TF.A
 -- | @aws_availability_zones@ DataSource.
 data AvailabilityZonesData s = AvailabilityZonesData'
     { _state :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (AvailabilityZonesData s) where
@@ -827,7 +927,7 @@ instance TF.IsObject (AvailabilityZonesData s) where
         ]
 
 availabilityZonesData
-    :: TF.DataSource AWS (AvailabilityZonesData s)
+    :: TF.DataSource P.Provider (AvailabilityZonesData s)
 availabilityZonesData =
     TF.newDataSource "aws_availability_zones" $
         AvailabilityZonesData'
@@ -845,6 +945,7 @@ instance s ~ s' => P.HasComputedNames (TF.Ref s' (AvailabilityZonesData s)) (TF.
 -- | @aws_batch_compute_environment@ DataSource.
 data BatchComputeEnvironmentData s = BatchComputeEnvironmentData'
     { _computeEnvironmentName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (BatchComputeEnvironmentData s) where
@@ -854,7 +955,7 @@ instance TF.IsObject (BatchComputeEnvironmentData s) where
 
 batchComputeEnvironmentData
     :: TF.Attr s P.Text -- ^ @compute_environment_name@
-    -> TF.DataSource AWS (BatchComputeEnvironmentData s)
+    -> TF.DataSource P.Provider (BatchComputeEnvironmentData s)
 batchComputeEnvironmentData _computeEnvironmentName =
     TF.newDataSource "aws_batch_compute_environment" $
         BatchComputeEnvironmentData'
@@ -890,6 +991,7 @@ instance s ~ s' => P.HasComputedType' (TF.Ref s' (BatchComputeEnvironmentData s)
 -- | @aws_batch_job_queue@ DataSource.
 data BatchJobQueueData s = BatchJobQueueData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (BatchJobQueueData s) where
@@ -899,7 +1001,7 @@ instance TF.IsObject (BatchJobQueueData s) where
 
 batchJobQueueData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (BatchJobQueueData s)
+    -> TF.DataSource P.Provider (BatchJobQueueData s)
 batchJobQueueData _name =
     TF.newDataSource "aws_batch_job_queue" $
         BatchJobQueueData'
@@ -937,7 +1039,7 @@ instance TF.IsObject (BillingServiceAccountData s) where
     toObject _ = []
 
 billingServiceAccountData
-    :: TF.DataSource AWS (BillingServiceAccountData s)
+    :: TF.DataSource P.Provider (BillingServiceAccountData s)
 billingServiceAccountData =
     TF.newDataSource "aws_billing_service_account" $
         BillingServiceAccountData'
@@ -953,7 +1055,7 @@ instance TF.IsObject (CallerIdentityData s) where
     toObject _ = []
 
 callerIdentityData
-    :: TF.DataSource AWS (CallerIdentityData s)
+    :: TF.DataSource P.Provider (CallerIdentityData s)
 callerIdentityData =
     TF.newDataSource "aws_caller_identity" $
         CallerIdentityData'
@@ -975,7 +1077,7 @@ instance TF.IsObject (CanonicalUserIdData s) where
     toObject _ = []
 
 canonicalUserIdData
-    :: TF.DataSource AWS (CanonicalUserIdData s)
+    :: TF.DataSource P.Provider (CanonicalUserIdData s)
 canonicalUserIdData =
     TF.newDataSource "aws_canonical_user_id" $
         CanonicalUserIdData'
@@ -986,6 +1088,7 @@ instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (CanonicalUserIdData s)) 
 -- | @aws_cloudformation_export@ DataSource.
 data CloudformationExportData s = CloudformationExportData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (CloudformationExportData s) where
@@ -995,7 +1098,7 @@ instance TF.IsObject (CloudformationExportData s) where
 
 cloudformationExportData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (CloudformationExportData s)
+    -> TF.DataSource P.Provider (CloudformationExportData s)
 cloudformationExportData _name =
     TF.newDataSource "aws_cloudformation_export" $
         CloudformationExportData'
@@ -1016,6 +1119,7 @@ instance s ~ s' => P.HasComputedValue (TF.Ref s' (CloudformationExportData s)) (
 -- | @aws_cloudformation_stack@ DataSource.
 data CloudformationStackData s = CloudformationStackData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (CloudformationStackData s) where
@@ -1025,7 +1129,7 @@ instance TF.IsObject (CloudformationStackData s) where
 
 cloudformationStackData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (CloudformationStackData s)
+    -> TF.DataSource P.Provider (CloudformationStackData s)
 cloudformationStackData _name =
     TF.newDataSource "aws_cloudformation_stack" $
         CloudformationStackData'
@@ -1070,6 +1174,7 @@ instance s ~ s' => P.HasComputedTimeoutInMinutes (TF.Ref s' (CloudformationStack
 -- | @aws_cloudtrail_service_account@ DataSource.
 data CloudtrailServiceAccountData s = CloudtrailServiceAccountData'
     { _region :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (CloudtrailServiceAccountData s) where
@@ -1078,7 +1183,7 @@ instance TF.IsObject (CloudtrailServiceAccountData s) where
         ]
 
 cloudtrailServiceAccountData
-    :: TF.DataSource AWS (CloudtrailServiceAccountData s)
+    :: TF.DataSource P.Provider (CloudtrailServiceAccountData s)
 cloudtrailServiceAccountData =
     TF.newDataSource "aws_cloudtrail_service_account" $
         CloudtrailServiceAccountData'
@@ -1096,6 +1201,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudtrailServiceAccountData s))
 -- | @aws_cloudwatch_log_group@ DataSource.
 data CloudwatchLogGroupData s = CloudwatchLogGroupData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (CloudwatchLogGroupData s) where
@@ -1105,7 +1211,7 @@ instance TF.IsObject (CloudwatchLogGroupData s) where
 
 cloudwatchLogGroupData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (CloudwatchLogGroupData s)
+    -> TF.DataSource P.Provider (CloudwatchLogGroupData s)
 cloudwatchLogGroupData _name =
     TF.newDataSource "aws_cloudwatch_log_group" $
         CloudwatchLogGroupData'
@@ -1126,6 +1232,7 @@ instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (CloudwatchLogGroupData 
 -- | @aws_codecommit_repository@ DataSource.
 data CodecommitRepositoryData s = CodecommitRepositoryData'
     { _repositoryName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (CodecommitRepositoryData s) where
@@ -1135,7 +1242,7 @@ instance TF.IsObject (CodecommitRepositoryData s) where
 
 codecommitRepositoryData
     :: TF.Attr s P.Text -- ^ @repository_name@
-    -> TF.DataSource AWS (CodecommitRepositoryData s)
+    -> TF.DataSource P.Provider (CodecommitRepositoryData s)
 codecommitRepositoryData _repositoryName =
     TF.newDataSource "aws_codecommit_repository" $
         CodecommitRepositoryData'
@@ -1162,6 +1269,7 @@ instance s ~ s' => P.HasComputedRepositoryId (TF.Ref s' (CodecommitRepositoryDat
 -- | @aws_cognito_user_pools@ DataSource.
 data CognitoUserPoolsData s = CognitoUserPoolsData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (CognitoUserPoolsData s) where
@@ -1171,7 +1279,7 @@ instance TF.IsObject (CognitoUserPoolsData s) where
 
 cognitoUserPoolsData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (CognitoUserPoolsData s)
+    -> TF.DataSource P.Provider (CognitoUserPoolsData s)
 cognitoUserPoolsData _name =
     TF.newDataSource "aws_cognito_user_pools" $
         CognitoUserPoolsData'
@@ -1192,11 +1300,17 @@ instance s ~ s' => P.HasComputedIds (TF.Ref s' (CognitoUserPoolsData s)) (TF.Att
 -- | @aws_db_cluster_snapshot@ DataSource.
 data DbClusterSnapshotData s = DbClusterSnapshotData'
     { _dbClusterIdentifier :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _dbClusterSnapshotIdentifier :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _includePublic :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _includeShared :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _mostRecent :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _snapshotType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (DbClusterSnapshotData s) where
@@ -1210,7 +1324,7 @@ instance TF.IsObject (DbClusterSnapshotData s) where
         ]
 
 dbClusterSnapshotData
-    :: TF.DataSource AWS (DbClusterSnapshotData s)
+    :: TF.DataSource P.Provider (DbClusterSnapshotData s)
 dbClusterSnapshotData =
     TF.newDataSource "aws_db_cluster_snapshot" $
         DbClusterSnapshotData'
@@ -1294,6 +1408,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DbClusterSnapshotData s)) (TF.
 -- | @aws_db_instance@ DataSource.
 data DbInstanceData s = DbInstanceData'
     { _dbInstanceIdentifier :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (DbInstanceData s) where
@@ -1303,7 +1418,7 @@ instance TF.IsObject (DbInstanceData s) where
 
 dbInstanceData
     :: TF.Attr s P.Text -- ^ @db_instance_identifier@
-    -> TF.DataSource AWS (DbInstanceData s)
+    -> TF.DataSource P.Provider (DbInstanceData s)
 dbInstanceData _dbInstanceIdentifier =
     TF.newDataSource "aws_db_instance" $
         DbInstanceData'
@@ -1423,11 +1538,17 @@ instance s ~ s' => P.HasComputedVpcSecurityGroups (TF.Ref s' (DbInstanceData s))
 -- | @aws_db_snapshot@ DataSource.
 data DbSnapshotData s = DbSnapshotData'
     { _dbInstanceIdentifier :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _dbSnapshotIdentifier :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _includePublic :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _includeShared :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _mostRecent :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _snapshotType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (DbSnapshotData s) where
@@ -1441,7 +1562,7 @@ instance TF.IsObject (DbSnapshotData s) where
         ]
 
 dbSnapshotData
-    :: TF.DataSource AWS (DbSnapshotData s)
+    :: TF.DataSource P.Provider (DbSnapshotData s)
 dbSnapshotData =
     TF.newDataSource "aws_db_snapshot" $
         DbSnapshotData'
@@ -1537,6 +1658,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DbSnapshotData s)) (TF.Attr s 
 -- | @aws_dx_gateway@ DataSource.
 data DxGatewayData s = DxGatewayData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (DxGatewayData s) where
@@ -1546,7 +1668,7 @@ instance TF.IsObject (DxGatewayData s) where
 
 dxGatewayData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (DxGatewayData s)
+    -> TF.DataSource P.Provider (DxGatewayData s)
 dxGatewayData _name =
     TF.newDataSource "aws_dx_gateway" $
         DxGatewayData'
@@ -1564,6 +1686,7 @@ instance s ~ s' => P.HasComputedAmazonSideAsn (TF.Ref s' (DxGatewayData s)) (TF.
 -- | @aws_dynamodb_table@ DataSource.
 data DynamodbTableData s = DynamodbTableData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (DynamodbTableData s) where
@@ -1573,7 +1696,7 @@ instance TF.IsObject (DynamodbTableData s) where
 
 dynamodbTableData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (DynamodbTableData s)
+    -> TF.DataSource P.Provider (DynamodbTableData s)
 dynamodbTableData _name =
     TF.newDataSource "aws_dynamodb_table" $
         DynamodbTableData'
@@ -1633,10 +1756,15 @@ instance s ~ s' => P.HasComputedWriteCapacity (TF.Ref s' (DynamodbTableData s)) 
 -- | @aws_ebs_snapshot@ DataSource.
 data EbsSnapshotData s = EbsSnapshotData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     , _mostRecent :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _owners :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _restorableByUserIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _snapshotIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EbsSnapshotData s) where
@@ -1649,7 +1777,7 @@ instance TF.IsObject (EbsSnapshotData s) where
         ]
 
 ebsSnapshotData
-    :: TF.DataSource AWS (EbsSnapshotData s)
+    :: TF.DataSource P.Provider (EbsSnapshotData s)
 ebsSnapshotData =
     TF.newDataSource "aws_ebs_snapshot" $
         EbsSnapshotData'
@@ -1721,8 +1849,11 @@ instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (EbsSnapshotData s)) (TF.A
 -- | @aws_ebs_snapshot_ids@ DataSource.
 data EbsSnapshotIdsData s = EbsSnapshotIdsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     , _owners :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _restorableByUserIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EbsSnapshotIdsData s) where
@@ -1733,7 +1864,7 @@ instance TF.IsObject (EbsSnapshotIdsData s) where
         ]
 
 ebsSnapshotIdsData
-    :: TF.DataSource AWS (EbsSnapshotIdsData s)
+    :: TF.DataSource P.Provider (EbsSnapshotIdsData s)
 ebsSnapshotIdsData =
     TF.newDataSource "aws_ebs_snapshot_ids" $
         EbsSnapshotIdsData'
@@ -1763,7 +1894,9 @@ instance s ~ s' => P.HasComputedIds (TF.Ref s' (EbsSnapshotIdsData s)) (TF.Attr 
 -- | @aws_ebs_volume@ DataSource.
 data EbsVolumeData s = EbsVolumeData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     , _mostRecent :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EbsVolumeData s) where
@@ -1773,7 +1906,7 @@ instance TF.IsObject (EbsVolumeData s) where
         ]
 
 ebsVolumeData
-    :: TF.DataSource AWS (EbsVolumeData s)
+    :: TF.DataSource P.Provider (EbsVolumeData s)
 ebsVolumeData =
     TF.newDataSource "aws_ebs_volume" $
         EbsVolumeData'
@@ -1824,6 +1957,7 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (EbsVolumeData s)) (TF.Att
 -- | @aws_ecr_repository@ DataSource.
 data EcrRepositoryData s = EcrRepositoryData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EcrRepositoryData s) where
@@ -1833,7 +1967,7 @@ instance TF.IsObject (EcrRepositoryData s) where
 
 ecrRepositoryData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (EcrRepositoryData s)
+    -> TF.DataSource P.Provider (EcrRepositoryData s)
 ecrRepositoryData _name =
     TF.newDataSource "aws_ecr_repository" $
         EcrRepositoryData'
@@ -1857,6 +1991,7 @@ instance s ~ s' => P.HasComputedRepositoryUrl (TF.Ref s' (EcrRepositoryData s)) 
 -- | @aws_ecs_cluster@ DataSource.
 data EcsClusterData s = EcsClusterData'
     { _clusterName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EcsClusterData s) where
@@ -1866,7 +2001,7 @@ instance TF.IsObject (EcsClusterData s) where
 
 ecsClusterData
     :: TF.Attr s P.Text -- ^ @cluster_name@
-    -> TF.DataSource AWS (EcsClusterData s)
+    -> TF.DataSource P.Provider (EcsClusterData s)
 ecsClusterData _clusterName =
     TF.newDataSource "aws_ecs_cluster" $
         EcsClusterData'
@@ -1896,7 +2031,9 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (EcsClusterData s)) (TF.Attr s
 -- | @aws_ecs_container_definition@ DataSource.
 data EcsContainerDefinitionData s = EcsContainerDefinitionData'
     { _containerName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _taskDefinition :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EcsContainerDefinitionData s) where
@@ -1908,7 +2045,7 @@ instance TF.IsObject (EcsContainerDefinitionData s) where
 ecsContainerDefinitionData
     :: TF.Attr s P.Text -- ^ @container_name@
     -> TF.Attr s P.Text -- ^ @task_definition@
-    -> TF.DataSource AWS (EcsContainerDefinitionData s)
+    -> TF.DataSource P.Provider (EcsContainerDefinitionData s)
 ecsContainerDefinitionData _containerName _taskDefinition =
     TF.newDataSource "aws_ecs_container_definition" $
         EcsContainerDefinitionData'
@@ -1953,7 +2090,9 @@ instance s ~ s' => P.HasComputedMemoryReservation (TF.Ref s' (EcsContainerDefini
 -- | @aws_ecs_service@ DataSource.
 data EcsServiceData s = EcsServiceData'
     { _clusterArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _serviceName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EcsServiceData s) where
@@ -1965,7 +2104,7 @@ instance TF.IsObject (EcsServiceData s) where
 ecsServiceData
     :: TF.Attr s P.Text -- ^ @cluster_arn@
     -> TF.Attr s P.Text -- ^ @service_name@
-    -> TF.DataSource AWS (EcsServiceData s)
+    -> TF.DataSource P.Provider (EcsServiceData s)
 ecsServiceData _clusterArn _serviceName =
     TF.newDataSource "aws_ecs_service" $
         EcsServiceData'
@@ -2001,6 +2140,7 @@ instance s ~ s' => P.HasComputedTaskDefinition (TF.Ref s' (EcsServiceData s)) (T
 -- | @aws_ecs_task_definition@ DataSource.
 data EcsTaskDefinitionData s = EcsTaskDefinitionData'
     { _taskDefinition :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EcsTaskDefinitionData s) where
@@ -2010,7 +2150,7 @@ instance TF.IsObject (EcsTaskDefinitionData s) where
 
 ecsTaskDefinitionData
     :: TF.Attr s P.Text -- ^ @task_definition@
-    -> TF.DataSource AWS (EcsTaskDefinitionData s)
+    -> TF.DataSource P.Provider (EcsTaskDefinitionData s)
 ecsTaskDefinitionData _taskDefinition =
     TF.newDataSource "aws_ecs_task_definition" $
         EcsTaskDefinitionData'
@@ -2045,7 +2185,7 @@ instance TF.IsObject (EfsFileSystemData s) where
     toObject _ = []
 
 efsFileSystemData
-    :: TF.DataSource AWS (EfsFileSystemData s)
+    :: TF.DataSource P.Provider (EfsFileSystemData s)
 efsFileSystemData =
     TF.newDataSource "aws_efs_file_system" $
         EfsFileSystemData'
@@ -2074,6 +2214,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (EfsFileSystemData s)) (TF.Attr 
 -- | @aws_efs_mount_target@ DataSource.
 data EfsMountTargetData s = EfsMountTargetData'
     { _mountTargetId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EfsMountTargetData s) where
@@ -2083,7 +2224,7 @@ instance TF.IsObject (EfsMountTargetData s) where
 
 efsMountTargetData
     :: TF.Attr s P.Text -- ^ @mount_target_id@
-    -> TF.DataSource AWS (EfsMountTargetData s)
+    -> TF.DataSource P.Provider (EfsMountTargetData s)
 efsMountTargetData _mountTargetId =
     TF.newDataSource "aws_efs_mount_target" $
         EfsMountTargetData'
@@ -2121,7 +2262,7 @@ instance TF.IsObject (EipData s) where
     toObject _ = []
 
 eipData
-    :: TF.DataSource AWS (EipData s)
+    :: TF.DataSource P.Provider (EipData s)
 eipData =
     TF.newDataSource "aws_eip" $
         EipData'
@@ -2135,6 +2276,7 @@ instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (EipData s)) (TF.Attr s P.Te
 -- | @aws_eks_cluster@ DataSource.
 data EksClusterData s = EksClusterData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EksClusterData s) where
@@ -2144,7 +2286,7 @@ instance TF.IsObject (EksClusterData s) where
 
 eksClusterData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (EksClusterData s)
+    -> TF.DataSource P.Provider (EksClusterData s)
 eksClusterData _name =
     TF.newDataSource "aws_eks_cluster" $
         EksClusterData'
@@ -2180,6 +2322,7 @@ instance s ~ s' => P.HasComputedVpcConfig (TF.Ref s' (EksClusterData s)) (TF.Att
 -- | @aws_elastic_beanstalk_hosted_zone@ DataSource.
 data ElasticBeanstalkHostedZoneData s = ElasticBeanstalkHostedZoneData'
     { _region :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElasticBeanstalkHostedZoneData s) where
@@ -2188,7 +2331,7 @@ instance TF.IsObject (ElasticBeanstalkHostedZoneData s) where
         ]
 
 elasticBeanstalkHostedZoneData
-    :: TF.DataSource AWS (ElasticBeanstalkHostedZoneData s)
+    :: TF.DataSource P.Provider (ElasticBeanstalkHostedZoneData s)
 elasticBeanstalkHostedZoneData =
     TF.newDataSource "aws_elastic_beanstalk_hosted_zone" $
         ElasticBeanstalkHostedZoneData'
@@ -2203,7 +2346,9 @@ instance P.HasRegion (ElasticBeanstalkHostedZoneData s) (TF.Attr s P.Text) where
 -- | @aws_elastic_beanstalk_solution_stack@ DataSource.
 data ElasticBeanstalkSolutionStackData s = ElasticBeanstalkSolutionStackData'
     { _mostRecent :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _nameRegex :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElasticBeanstalkSolutionStackData s) where
@@ -2214,7 +2359,7 @@ instance TF.IsObject (ElasticBeanstalkSolutionStackData s) where
 
 elasticBeanstalkSolutionStackData
     :: TF.Attr s P.Text -- ^ @name_regex@
-    -> TF.DataSource AWS (ElasticBeanstalkSolutionStackData s)
+    -> TF.DataSource P.Provider (ElasticBeanstalkSolutionStackData s)
 elasticBeanstalkSolutionStackData _nameRegex =
     TF.newDataSource "aws_elastic_beanstalk_solution_stack" $
         ElasticBeanstalkSolutionStackData'
@@ -2238,6 +2383,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (ElasticBeanstalkSolutionStackDa
 -- | @aws_elasticache_cluster@ DataSource.
 data ElasticacheClusterData s = ElasticacheClusterData'
     { _clusterId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElasticacheClusterData s) where
@@ -2247,7 +2393,7 @@ instance TF.IsObject (ElasticacheClusterData s) where
 
 elasticacheClusterData
     :: TF.Attr s P.Text -- ^ @cluster_id@
-    -> TF.DataSource AWS (ElasticacheClusterData s)
+    -> TF.DataSource P.Provider (ElasticacheClusterData s)
 elasticacheClusterData _clusterId =
     TF.newDataSource "aws_elasticache_cluster" $
         ElasticacheClusterData'
@@ -2322,6 +2468,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElasticacheClusterData s)) (TF.
 -- | @aws_elasticache_replication_group@ DataSource.
 data ElasticacheReplicationGroupData s = ElasticacheReplicationGroupData'
     { _replicationGroupId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElasticacheReplicationGroupData s) where
@@ -2331,7 +2478,7 @@ instance TF.IsObject (ElasticacheReplicationGroupData s) where
 
 elasticacheReplicationGroupData
     :: TF.Attr s P.Text -- ^ @replication_group_id@
-    -> TF.DataSource AWS (ElasticacheReplicationGroupData s)
+    -> TF.DataSource P.Provider (ElasticacheReplicationGroupData s)
 elasticacheReplicationGroupData _replicationGroupId =
     TF.newDataSource "aws_elasticache_replication_group" $
         ElasticacheReplicationGroupData'
@@ -2379,6 +2526,7 @@ instance s ~ s' => P.HasComputedSnapshotWindow (TF.Ref s' (ElasticacheReplicatio
 -- | @aws_elb@ DataSource.
 data ElbData s = ElbData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElbData s) where
@@ -2388,7 +2536,7 @@ instance TF.IsObject (ElbData s) where
 
 elbData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (ElbData s)
+    -> TF.DataSource P.Provider (ElbData s)
 elbData _name =
     TF.newDataSource "aws_elb" $
         ElbData'
@@ -2454,6 +2602,7 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (ElbData s)) (TF.Attr s P.Text
 -- | @aws_elb_hosted_zone_id@ DataSource.
 data ElbHostedZoneIdData s = ElbHostedZoneIdData'
     { _region :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElbHostedZoneIdData s) where
@@ -2462,7 +2611,7 @@ instance TF.IsObject (ElbHostedZoneIdData s) where
         ]
 
 elbHostedZoneIdData
-    :: TF.DataSource AWS (ElbHostedZoneIdData s)
+    :: TF.DataSource P.Provider (ElbHostedZoneIdData s)
 elbHostedZoneIdData =
     TF.newDataSource "aws_elb_hosted_zone_id" $
         ElbHostedZoneIdData'
@@ -2477,6 +2626,7 @@ instance P.HasRegion (ElbHostedZoneIdData s) (TF.Attr s P.Text) where
 -- | @aws_elb_service_account@ DataSource.
 data ElbServiceAccountData s = ElbServiceAccountData'
     { _region :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElbServiceAccountData s) where
@@ -2485,7 +2635,7 @@ instance TF.IsObject (ElbServiceAccountData s) where
         ]
 
 elbServiceAccountData
-    :: TF.DataSource AWS (ElbServiceAccountData s)
+    :: TF.DataSource P.Provider (ElbServiceAccountData s)
 elbServiceAccountData =
     TF.newDataSource "aws_elb_service_account" $
         ElbServiceAccountData'
@@ -2503,8 +2653,11 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElbServiceAccountData s)) (TF.At
 -- | @aws_glue_script@ DataSource.
 data GlueScriptData s = GlueScriptData'
     { _dagEdge :: TF.Attr s [DagEdge s]
+    -- ^ Undocumented.
     , _dagNode :: TF.Attr s [DagNode s]
+    -- ^ Undocumented.
     , _language :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (GlueScriptData s) where
@@ -2517,7 +2670,7 @@ instance TF.IsObject (GlueScriptData s) where
 glueScriptData
     :: TF.Attr s [DagEdge s] -- ^ @dag_edge@
     -> TF.Attr s [DagNode s] -- ^ @dag_node@
-    -> TF.DataSource AWS (GlueScriptData s)
+    -> TF.DataSource P.Provider (GlueScriptData s)
 glueScriptData _dagEdge _dagNode =
     TF.newDataSource "aws_glue_script" $
         GlueScriptData'
@@ -2555,7 +2708,7 @@ instance TF.IsObject (IamAccountAliasData s) where
     toObject _ = []
 
 iamAccountAliasData
-    :: TF.DataSource AWS (IamAccountAliasData s)
+    :: TF.DataSource P.Provider (IamAccountAliasData s)
 iamAccountAliasData =
     TF.newDataSource "aws_iam_account_alias" $
         IamAccountAliasData'
@@ -2566,6 +2719,7 @@ instance s ~ s' => P.HasComputedAccountAlias (TF.Ref s' (IamAccountAliasData s))
 -- | @aws_iam_group@ DataSource.
 data IamGroupData s = IamGroupData'
     { _groupName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamGroupData s) where
@@ -2575,7 +2729,7 @@ instance TF.IsObject (IamGroupData s) where
 
 iamGroupData
     :: TF.Attr s P.Text -- ^ @group_name@
-    -> TF.DataSource AWS (IamGroupData s)
+    -> TF.DataSource P.Provider (IamGroupData s)
 iamGroupData _groupName =
     TF.newDataSource "aws_iam_group" $
         IamGroupData'
@@ -2599,6 +2753,7 @@ instance s ~ s' => P.HasComputedPath (TF.Ref s' (IamGroupData s)) (TF.Attr s P.T
 -- | @aws_iam_instance_profile@ DataSource.
 data IamInstanceProfileData s = IamInstanceProfileData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamInstanceProfileData s) where
@@ -2608,7 +2763,7 @@ instance TF.IsObject (IamInstanceProfileData s) where
 
 iamInstanceProfileData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (IamInstanceProfileData s)
+    -> TF.DataSource P.Provider (IamInstanceProfileData s)
 iamInstanceProfileData _name =
     TF.newDataSource "aws_iam_instance_profile" $
         IamInstanceProfileData'
@@ -2641,6 +2796,7 @@ instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (IamInstanceProfileData s)) 
 -- | @aws_iam_policy@ DataSource.
 data IamPolicyData s = IamPolicyData'
     { _arn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamPolicyData s) where
@@ -2650,7 +2806,7 @@ instance TF.IsObject (IamPolicyData s) where
 
 iamPolicyData
     :: TF.Attr s P.Text -- ^ @arn@
-    -> TF.DataSource AWS (IamPolicyData s)
+    -> TF.DataSource P.Provider (IamPolicyData s)
 iamPolicyData _arn =
     TF.newDataSource "aws_iam_policy" $
         IamPolicyData'
@@ -2677,9 +2833,13 @@ instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (IamPolicyData s)) (TF.Attr s 
 -- | @aws_iam_policy_document@ DataSource.
 data IamPolicyDocumentData s = IamPolicyDocumentData'
     { _overrideJson :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _policyId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sourceJson :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _statement :: TF.Attr s [Statement s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamPolicyDocumentData s) where
@@ -2692,7 +2852,7 @@ instance TF.IsObject (IamPolicyDocumentData s) where
 
 iamPolicyDocumentData
     :: TF.Attr s [Statement s] -- ^ @statement@
-    -> TF.DataSource AWS (IamPolicyDocumentData s)
+    -> TF.DataSource P.Provider (IamPolicyDocumentData s)
 iamPolicyDocumentData _statement =
     TF.newDataSource "aws_iam_policy_document" $
         IamPolicyDocumentData'
@@ -2728,7 +2888,9 @@ instance s ~ s' => P.HasComputedJson (TF.Ref s' (IamPolicyDocumentData s)) (TF.A
 -- | @aws_iam_role@ DataSource.
 data IamRoleData s = IamRoleData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamRoleData s) where
@@ -2738,7 +2900,7 @@ instance TF.IsObject (IamRoleData s) where
         ]
 
 iamRoleData
-    :: TF.DataSource AWS (IamRoleData s)
+    :: TF.DataSource P.Provider (IamRoleData s)
 iamRoleData =
     TF.newDataSource "aws_iam_role" $
         IamRoleData'
@@ -2789,8 +2951,11 @@ instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamRoleData s)) (TF.Attr s 
 -- | @aws_iam_server_certificate@ DataSource.
 data IamServerCertificateData s = IamServerCertificateData'
     { _latest :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _namePrefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _pathPrefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamServerCertificateData s) where
@@ -2801,7 +2966,7 @@ instance TF.IsObject (IamServerCertificateData s) where
         ]
 
 iamServerCertificateData
-    :: TF.DataSource AWS (IamServerCertificateData s)
+    :: TF.DataSource P.Provider (IamServerCertificateData s)
 iamServerCertificateData =
     TF.newDataSource "aws_iam_server_certificate" $
         IamServerCertificateData'
@@ -2849,6 +3014,7 @@ instance s ~ s' => P.HasComputedUploadDate (TF.Ref s' (IamServerCertificateData 
 -- | @aws_iam_user@ DataSource.
 data IamUserData s = IamUserData'
     { _userName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamUserData s) where
@@ -2858,7 +3024,7 @@ instance TF.IsObject (IamUserData s) where
 
 iamUserData
     :: TF.Attr s P.Text -- ^ @user_name@
-    -> TF.DataSource AWS (IamUserData s)
+    -> TF.DataSource P.Provider (IamUserData s)
 iamUserData _userName =
     TF.newDataSource "aws_iam_user" $
         IamUserData'
@@ -2890,7 +3056,7 @@ instance TF.IsObject (InspectorRulesPackagesData s) where
     toObject _ = []
 
 inspectorRulesPackagesData
-    :: TF.DataSource AWS (InspectorRulesPackagesData s)
+    :: TF.DataSource P.Provider (InspectorRulesPackagesData s)
 inspectorRulesPackagesData =
     TF.newDataSource "aws_inspector_rules_packages" $
         InspectorRulesPackagesData'
@@ -2901,8 +3067,11 @@ instance s ~ s' => P.HasComputedArns (TF.Ref s' (InspectorRulesPackagesData s)) 
 -- | @aws_instance@ DataSource.
 data InstanceData s = InstanceData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     , _getPasswordData :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _instanceId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (InstanceData s) where
@@ -2913,7 +3082,7 @@ instance TF.IsObject (InstanceData s) where
         ]
 
 instanceData
-    :: TF.DataSource AWS (InstanceData s)
+    :: TF.DataSource P.Provider (InstanceData s)
 instanceData =
     TF.newDataSource "aws_instance" $
         InstanceData'
@@ -3030,7 +3199,9 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (InstanceData s))
 -- | @aws_instances@ DataSource.
 data InstancesData s = InstancesData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     , _instanceStateNames :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (InstancesData s) where
@@ -3040,7 +3211,7 @@ instance TF.IsObject (InstancesData s) where
         ]
 
 instancesData
-    :: TF.DataSource AWS (InstancesData s)
+    :: TF.DataSource P.Provider (InstancesData s)
 instancesData =
     TF.newDataSource "aws_instances" $
         InstancesData'
@@ -3073,6 +3244,7 @@ instance s ~ s' => P.HasComputedPublicIps (TF.Ref s' (InstancesData s)) (TF.Attr
 -- | @aws_internet_gateway@ DataSource.
 data InternetGatewayData s = InternetGatewayData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (InternetGatewayData s) where
@@ -3081,7 +3253,7 @@ instance TF.IsObject (InternetGatewayData s) where
         ]
 
 internetGatewayData
-    :: TF.DataSource AWS (InternetGatewayData s)
+    :: TF.DataSource P.Provider (InternetGatewayData s)
 internetGatewayData =
     TF.newDataSource "aws_internet_gateway" $
         InternetGatewayData'
@@ -3110,7 +3282,7 @@ instance TF.IsObject (IotEndpointData s) where
     toObject _ = []
 
 iotEndpointData
-    :: TF.DataSource AWS (IotEndpointData s)
+    :: TF.DataSource P.Provider (IotEndpointData s)
 iotEndpointData =
     TF.newDataSource "aws_iot_endpoint" $
         IotEndpointData'
@@ -3121,7 +3293,9 @@ instance s ~ s' => P.HasComputedEndpointAddress (TF.Ref s' (IotEndpointData s)) 
 -- | @aws_ip_ranges@ DataSource.
 data IpRangesData s = IpRangesData'
     { _regions :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _services :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IpRangesData s) where
@@ -3132,7 +3306,7 @@ instance TF.IsObject (IpRangesData s) where
 
 ipRangesData
     :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @services@
-    -> TF.DataSource AWS (IpRangesData s)
+    -> TF.DataSource P.Provider (IpRangesData s)
 ipRangesData _services =
     TF.newDataSource "aws_ip_ranges" $
         IpRangesData'
@@ -3162,6 +3336,7 @@ instance s ~ s' => P.HasComputedSyncToken (TF.Ref s' (IpRangesData s)) (TF.Attr 
 -- | @aws_kinesis_stream@ DataSource.
 data KinesisStreamData s = KinesisStreamData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (KinesisStreamData s) where
@@ -3171,7 +3346,7 @@ instance TF.IsObject (KinesisStreamData s) where
 
 kinesisStreamData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (KinesisStreamData s)
+    -> TF.DataSource P.Provider (KinesisStreamData s)
 kinesisStreamData _name =
     TF.newDataSource "aws_kinesis_stream" $
         KinesisStreamData'
@@ -3210,6 +3385,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (KinesisStreamData s)) (TF.Attr 
 -- | @aws_kms_alias@ DataSource.
 data KmsAliasData s = KmsAliasData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (KmsAliasData s) where
@@ -3219,7 +3395,7 @@ instance TF.IsObject (KmsAliasData s) where
 
 kmsAliasData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (KmsAliasData s)
+    -> TF.DataSource P.Provider (KmsAliasData s)
 kmsAliasData _name =
     TF.newDataSource "aws_kms_alias" $
         KmsAliasData'
@@ -3243,8 +3419,11 @@ instance s ~ s' => P.HasComputedTargetKeyId (TF.Ref s' (KmsAliasData s)) (TF.Att
 -- | @aws_kms_ciphertext@ DataSource.
 data KmsCiphertextData s = KmsCiphertextData'
     { _context :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _keyId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _plaintext :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (KmsCiphertextData s) where
@@ -3257,7 +3436,7 @@ instance TF.IsObject (KmsCiphertextData s) where
 kmsCiphertextData
     :: TF.Attr s P.Text -- ^ @key_id@
     -> TF.Attr s P.Text -- ^ @plaintext@
-    -> TF.DataSource AWS (KmsCiphertextData s)
+    -> TF.DataSource P.Provider (KmsCiphertextData s)
 kmsCiphertextData _keyId _plaintext =
     TF.newDataSource "aws_kms_ciphertext" $
         KmsCiphertextData'
@@ -3287,7 +3466,9 @@ instance s ~ s' => P.HasComputedCiphertextBlob (TF.Ref s' (KmsCiphertextData s))
 -- | @aws_kms_key@ DataSource.
 data KmsKeyData s = KmsKeyData'
     { _grantTokens :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _keyId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (KmsKeyData s) where
@@ -3298,7 +3479,7 @@ instance TF.IsObject (KmsKeyData s) where
 
 kmsKeyData
     :: TF.Attr s P.Text -- ^ @key_id@
-    -> TF.DataSource AWS (KmsKeyData s)
+    -> TF.DataSource P.Provider (KmsKeyData s)
 kmsKeyData _keyId =
     TF.newDataSource "aws_kms_key" $
         KmsKeyData'
@@ -3355,7 +3536,9 @@ instance s ~ s' => P.HasComputedValidTo (TF.Ref s' (KmsKeyData s)) (TF.Attr s P.
 -- | @aws_kms_secret@ DataSource.
 data KmsSecretData s = KmsSecretData'
     { _hasDynamicAttributes :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _secret :: TF.Attr s [TF.Attr s (Secret s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (KmsSecretData s) where
@@ -3366,7 +3549,7 @@ instance TF.IsObject (KmsSecretData s) where
 
 kmsSecretData
     :: TF.Attr s [TF.Attr s (Secret s)] -- ^ @secret@
-    -> TF.DataSource AWS (KmsSecretData s)
+    -> TF.DataSource P.Provider (KmsSecretData s)
 kmsSecretData _secret =
     TF.newDataSource "aws_kms_secret" $
         KmsSecretData'
@@ -3387,6 +3570,7 @@ instance P.HasSecret (KmsSecretData s) (TF.Attr s [TF.Attr s (Secret s)]) where
 -- | @aws_kms_secrets@ DataSource.
 data KmsSecretsData s = KmsSecretsData'
     { _secret :: TF.Attr s [TF.Attr s (Secret s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (KmsSecretsData s) where
@@ -3396,7 +3580,7 @@ instance TF.IsObject (KmsSecretsData s) where
 
 kmsSecretsData
     :: TF.Attr s [TF.Attr s (Secret s)] -- ^ @secret@
-    -> TF.DataSource AWS (KmsSecretsData s)
+    -> TF.DataSource P.Provider (KmsSecretsData s)
 kmsSecretsData _secret =
     TF.newDataSource "aws_kms_secrets" $
         KmsSecretsData'
@@ -3414,7 +3598,9 @@ instance s ~ s' => P.HasComputedPlaintext (TF.Ref s' (KmsSecretsData s)) (TF.Att
 -- | @aws_lambda_function@ DataSource.
 data LambdaFunctionData s = LambdaFunctionData'
     { _functionName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _qualifier :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (LambdaFunctionData s) where
@@ -3425,7 +3611,7 @@ instance TF.IsObject (LambdaFunctionData s) where
 
 lambdaFunctionData
     :: TF.Attr s P.Text -- ^ @function_name@
-    -> TF.DataSource AWS (LambdaFunctionData s)
+    -> TF.DataSource P.Provider (LambdaFunctionData s)
 lambdaFunctionData _functionName =
     TF.newDataSource "aws_lambda_function" $
         LambdaFunctionData'
@@ -3503,8 +3689,11 @@ instance s ~ s' => P.HasComputedVpcConfig (TF.Ref s' (LambdaFunctionData s)) (TF
 -- | @aws_lambda_invocation@ DataSource.
 data LambdaInvocationData s = LambdaInvocationData'
     { _functionName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _input :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _qualifier :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (LambdaInvocationData s) where
@@ -3517,7 +3706,7 @@ instance TF.IsObject (LambdaInvocationData s) where
 lambdaInvocationData
     :: TF.Attr s P.Text -- ^ @function_name@
     -> TF.Attr s P.Text -- ^ @input@
-    -> TF.DataSource AWS (LambdaInvocationData s)
+    -> TF.DataSource P.Provider (LambdaInvocationData s)
 lambdaInvocationData _functionName _input =
     TF.newDataSource "aws_lambda_invocation" $
         LambdaInvocationData'
@@ -3550,6 +3739,7 @@ instance s ~ s' => P.HasComputedResultMap (TF.Ref s' (LambdaInvocationData s)) (
 -- | @aws_launch_configuration@ DataSource.
 data LaunchConfigurationData s = LaunchConfigurationData'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (LaunchConfigurationData s) where
@@ -3559,7 +3749,7 @@ instance TF.IsObject (LaunchConfigurationData s) where
 
 launchConfigurationData
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.DataSource AWS (LaunchConfigurationData s)
+    -> TF.DataSource P.Provider (LaunchConfigurationData s)
 launchConfigurationData _name =
     TF.newDataSource "aws_launch_configuration" $
         LaunchConfigurationData'
@@ -3627,7 +3817,7 @@ instance TF.IsObject (LbData s) where
     toObject _ = []
 
 lbData
-    :: TF.DataSource AWS (LbData s)
+    :: TF.DataSource P.Provider (LbData s)
 lbData =
     TF.newDataSource "aws_lb" $
         LbData'
@@ -3685,7 +3875,7 @@ instance TF.IsObject (LbListenerData s) where
     toObject _ = []
 
 lbListenerData
-    :: TF.DataSource AWS (LbListenerData s)
+    :: TF.DataSource P.Provider (LbListenerData s)
 lbListenerData =
     TF.newDataSource "aws_lb_listener" $
         LbListenerData'
@@ -3719,7 +3909,7 @@ instance TF.IsObject (LbTargetGroupData s) where
     toObject _ = []
 
 lbTargetGroupData
-    :: TF.DataSource AWS (LbTargetGroupData s)
+    :: TF.DataSource P.Provider (LbTargetGroupData s)
 lbTargetGroupData =
     TF.newDataSource "aws_lb_target_group" $
         LbTargetGroupData'
@@ -3765,7 +3955,7 @@ instance TF.IsObject (MqBrokerData s) where
     toObject _ = []
 
 mqBrokerData
-    :: TF.DataSource AWS (MqBrokerData s)
+    :: TF.DataSource P.Provider (MqBrokerData s)
 mqBrokerData =
     TF.newDataSource "aws_mq_broker" $
         MqBrokerData'
@@ -3818,6 +4008,7 @@ instance s ~ s' => P.HasComputedUser (TF.Ref s' (MqBrokerData s)) (TF.Attr s [TF
 -- | @aws_nat_gateway@ DataSource.
 data NatGatewayData s = NatGatewayData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NatGatewayData s) where
@@ -3826,7 +4017,7 @@ instance TF.IsObject (NatGatewayData s) where
         ]
 
 natGatewayData
-    :: TF.DataSource AWS (NatGatewayData s)
+    :: TF.DataSource P.Provider (NatGatewayData s)
 natGatewayData =
     TF.newDataSource "aws_nat_gateway" $
         NatGatewayData'
@@ -3868,7 +4059,9 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (NatGatewayData s)) (TF.Attr s 
 -- | @aws_network_acls@ DataSource.
 data NetworkAclsData s = NetworkAclsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     , _vpcId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NetworkAclsData s) where
@@ -3878,7 +4071,7 @@ instance TF.IsObject (NetworkAclsData s) where
         ]
 
 networkAclsData
-    :: TF.DataSource AWS (NetworkAclsData s)
+    :: TF.DataSource P.Provider (NetworkAclsData s)
 networkAclsData =
     TF.newDataSource "aws_network_acls" $
         NetworkAclsData'
@@ -3905,6 +4098,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkAclsData s)) (TF.Attr s 
 -- | @aws_network_interface@ DataSource.
 data NetworkInterfaceData s = NetworkInterfaceData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NetworkInterfaceData s) where
@@ -3913,7 +4107,7 @@ instance TF.IsObject (NetworkInterfaceData s) where
         ]
 
 networkInterfaceData
-    :: TF.DataSource AWS (NetworkInterfaceData s)
+    :: TF.DataSource P.Provider (NetworkInterfaceData s)
 networkInterfaceData =
     TF.newDataSource "aws_network_interface" $
         NetworkInterfaceData'
@@ -3979,6 +4173,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (NetworkInterfaceData s)) (TF.A
 -- | @aws_network_interfaces@ DataSource.
 data NetworkInterfacesData s = NetworkInterfacesData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NetworkInterfacesData s) where
@@ -3987,7 +4182,7 @@ instance TF.IsObject (NetworkInterfacesData s) where
         ]
 
 networkInterfacesData
-    :: TF.DataSource AWS (NetworkInterfacesData s)
+    :: TF.DataSource P.Provider (NetworkInterfacesData s)
 networkInterfacesData =
     TF.newDataSource "aws_network_interfaces" $
         NetworkInterfacesData'
@@ -4013,7 +4208,7 @@ instance TF.IsObject (PartitionData s) where
     toObject _ = []
 
 partitionData
-    :: TF.DataSource AWS (PartitionData s)
+    :: TF.DataSource P.Provider (PartitionData s)
 partitionData =
     TF.newDataSource "aws_partition" $
         PartitionData'

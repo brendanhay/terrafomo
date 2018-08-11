@@ -4,6 +4,8 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.AWS.Settings
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -15,1074 +17,1426 @@
 module Terrafomo.AWS.Settings
     (
     -- * Settings Datatypes
+    -- ** Accepter
       Accepter (..)
     , newAccepter
 
+    -- ** AccessLogSettings
     , AccessLogSettings (..)
     , newAccessLogSettings
 
+    -- ** AccessLogs
     , AccessLogs (..)
     , newAccessLogs
 
+    -- ** AccountAggregationSource
     , AccountAggregationSource (..)
     , newAccountAggregationSource
 
+    -- ** Action
     , Action (..)
     , newAction
 
+    -- ** Actions
     , Actions (..)
     , newActions
 
+    -- ** ActivatedRule
     , ActivatedRule (..)
     , newActivatedRule
 
+    -- ** AddHeaderAction
     , AddHeaderAction (..)
     , newAddHeaderAction
 
+    -- ** AdminCreateUserConfig
     , AdminCreateUserConfig (..)
     , newAdminCreateUserConfig
 
+    -- ** AlarmConfiguration
     , AlarmConfiguration (..)
     , newAlarmConfiguration
 
+    -- ** Alias
     , Alias (..)
     , newAlias
 
+    -- ** AllSettings
     , AllSettings (..)
     , newAllSettings
 
+    -- ** ApiStages
     , ApiStages (..)
     , newApiStages
 
+    -- ** AppSource
     , AppSource (..)
     , newAppSource
 
+    -- ** ApplyServerSideEncryptionByDefault
     , ApplyServerSideEncryptionByDefault (..)
     , newApplyServerSideEncryptionByDefault
 
+    -- ** ApprovalRule
     , ApprovalRule (..)
     , newApprovalRule
 
+    -- ** AppversionLifecycle
     , AppversionLifecycle (..)
     , newAppversionLifecycle
 
+    -- ** Args
     , Args (..)
     , newArgs
 
+    -- ** ArtifactStore
     , ArtifactStore (..)
     , newArtifactStore
 
+    -- ** Artifacts
     , Artifacts (..)
     , newArtifacts
 
+    -- ** Association
     , Association (..)
     , newAssociation
 
+    -- ** Associations
     , Associations (..)
     , newAssociations
 
+    -- ** AssumeRole
     , AssumeRole (..)
     , newAssumeRole
 
+    -- ** Attachment
     , Attachment (..)
     , newAttachment
 
+    -- ** Attachments
     , Attachments (..)
     , newAttachments
 
+    -- ** Attribute
     , Attribute (..)
     , newAttribute
 
+    -- ** Audio
     , Audio (..)
     , newAudio
 
+    -- ** AudioCodecOptions
     , AudioCodecOptions (..)
     , newAudioCodecOptions
 
+    -- ** Auth
     , Auth (..)
     , newAuth
 
+    -- ** AutoRollbackConfiguration
     , AutoRollbackConfiguration (..)
     , newAutoRollbackConfiguration
 
+    -- ** BatchTarget
     , BatchTarget (..)
     , newBatchTarget
 
+    -- ** BlockDeviceMappings
     , BlockDeviceMappings (..)
     , newBlockDeviceMappings
 
+    -- ** BlueGreenDeploymentConfig
     , BlueGreenDeploymentConfig (..)
     , newBlueGreenDeploymentConfig
 
+    -- ** BootstrapAction
     , BootstrapAction (..)
     , newBootstrapAction
 
+    -- ** BounceAction
     , BounceAction (..)
     , newBounceAction
 
+    -- ** Bucket
     , Bucket (..)
     , newBucket
 
+    -- ** ByteMatchTuple
     , ByteMatchTuple (..)
     , newByteMatchTuple
 
+    -- ** ByteMatchTuples
     , ByteMatchTuples (..)
     , newByteMatchTuples
 
+    -- ** Cache
     , Cache (..)
     , newCache
 
+    -- ** CacheBehavior
     , CacheBehavior (..)
     , newCacheBehavior
 
+    -- ** CacheNodes
     , CacheNodes (..)
     , newCacheNodes
 
+    -- ** CertificateAuthority
     , CertificateAuthority (..)
     , newCertificateAuthority
 
+    -- ** CertificateAuthorityConfiguration
     , CertificateAuthorityConfiguration (..)
     , newCertificateAuthorityConfiguration
 
+    -- ** CidrBlockAssociations
     , CidrBlockAssociations (..)
     , newCidrBlockAssociations
 
+    -- ** ClassificationType
     , ClassificationType (..)
     , newClassificationType
 
+    -- ** CloudwatchAlarm
     , CloudwatchAlarm (..)
     , newCloudwatchAlarm
 
+    -- ** CloudwatchDestination
     , CloudwatchDestination (..)
     , newCloudwatchDestination
 
+    -- ** CloudwatchLoggingOptions
     , CloudwatchLoggingOptions (..)
     , newCloudwatchLoggingOptions
 
+    -- ** CloudwatchMetric
     , CloudwatchMetric (..)
     , newCloudwatchMetric
 
+    -- ** ClusterConfig
     , ClusterConfig (..)
     , newClusterConfig
 
+    -- ** ClusterMode
     , ClusterMode (..)
     , newClusterMode
 
+    -- ** CognitoIdentityProviders
     , CognitoIdentityProviders (..)
     , newCognitoIdentityProviders
 
+    -- ** CognitoOptions
     , CognitoOptions (..)
     , newCognitoOptions
 
+    -- ** Columns
     , Columns (..)
     , newColumns
 
+    -- ** Command
     , Command (..)
     , newCommand
 
+    -- ** ComputeEnvironmentOrder
     , ComputeEnvironmentOrder (..)
     , newComputeEnvironmentOrder
 
+    -- ** ComputeResources
     , ComputeResources (..)
     , newComputeResources
 
+    -- ** Condition
     , Condition (..)
     , newCondition
 
+    -- ** Conditions
     , Conditions (..)
     , newConditions
 
+    -- ** Configuration
     , Configuration (..)
     , newConfiguration
 
+    -- ** ConnectSettings
     , ConnectSettings (..)
     , newConnectSettings
 
+    -- ** Constraints
     , Constraints (..)
     , newConstraints
 
+    -- ** ContentConfig
     , ContentConfig (..)
     , newContentConfig
 
+    -- ** ContentConfigPermissions
     , ContentConfigPermissions (..)
     , newContentConfigPermissions
 
+    -- ** Cookies
     , Cookies (..)
     , newCookies
 
+    -- ** CorsRule
     , CorsRule (..)
     , newCorsRule
 
+    -- ** CostTypes
     , CostTypes (..)
     , newCostTypes
 
+    -- ** CreditSpecification
     , CreditSpecification (..)
     , newCreditSpecification
 
+    -- ** CrlConfiguration
     , CrlConfiguration (..)
     , newCrlConfiguration
 
+    -- ** CustomCookbooksSource
     , CustomCookbooksSource (..)
     , newCustomCookbooksSource
 
+    -- ** CustomErrorResponse
     , CustomErrorResponse (..)
     , newCustomErrorResponse
 
+    -- ** CustomHeader
     , CustomHeader (..)
     , newCustomHeader
 
+    -- ** CustomOriginConfig
     , CustomOriginConfig (..)
     , newCustomOriginConfig
 
+    -- ** CustomizedMetricSpecification
     , CustomizedMetricSpecification (..)
     , newCustomizedMetricSpecification
 
+    -- ** DagEdge
     , DagEdge (..)
     , newDagEdge
 
+    -- ** DagNode
     , DagNode (..)
     , newDagNode
 
+    -- ** DataFormatConversionConfiguration
     , DataFormatConversionConfiguration (..)
     , newDataFormatConversionConfiguration
 
+    -- ** DataResource
     , DataResource (..)
     , newDataResource
 
+    -- ** DeadLetterConfig
     , DeadLetterConfig (..)
     , newDeadLetterConfig
 
+    -- ** DefaultAction
     , DefaultAction (..)
     , newDefaultAction
 
+    -- ** DefaultCacheBehavior
     , DefaultCacheBehavior (..)
     , newDefaultCacheBehavior
 
+    -- ** DeploymentReadyOption
     , DeploymentReadyOption (..)
     , newDeploymentReadyOption
 
+    -- ** DeploymentStyle
     , DeploymentStyle (..)
     , newDeploymentStyle
 
+    -- ** Deserializer
     , Deserializer (..)
     , newDeserializer
 
+    -- ** Destination
     , Destination (..)
     , newDestination
 
+    -- ** DeviceConfiguration
     , DeviceConfiguration (..)
     , newDeviceConfiguration
 
+    -- ** Dimensions
     , Dimensions (..)
     , newDimensions
 
+    -- ** DnsConfig
     , DnsConfig (..)
     , newDnsConfig
 
+    -- ** DnsEntry
     , DnsEntry (..)
     , newDnsEntry
 
+    -- ** DnsRecords
     , DnsRecords (..)
     , newDnsRecords
 
+    -- ** DomainValidationOptions
     , DomainValidationOptions (..)
     , newDomainValidationOptions
 
+    -- ** Dynamodb
     , Dynamodb (..)
     , newDynamodb
 
+    -- ** DynamodbConfig
     , DynamodbConfig (..)
     , newDynamodbConfig
 
+    -- ** DynamodbTarget
     , DynamodbTarget (..)
     , newDynamodbTarget
 
+    -- ** Ebs
     , Ebs (..)
     , newEbs
 
+    -- ** EbsBlockDevice
     , EbsBlockDevice (..)
     , newEbsBlockDevice
 
+    -- ** EbsConfig
     , EbsConfig (..)
     , newEbsConfig
 
+    -- ** EbsOptions
     , EbsOptions (..)
     , newEbsOptions
 
+    -- ** EbsVolume
     , EbsVolume (..)
     , newEbsVolume
 
+    -- ** Ec2Attributes
     , Ec2Attributes (..)
     , newEc2Attributes
 
+    -- ** Ec2InboundPermission
     , Ec2InboundPermission (..)
     , newEc2InboundPermission
 
+    -- ** Ec2TagFilter
     , Ec2TagFilter (..)
     , newEc2TagFilter
 
+    -- ** Ec2TagSet
     , Ec2TagSet (..)
     , newEc2TagSet
 
+    -- ** EcsTarget
     , EcsTarget (..)
     , newEcsTarget
 
+    -- ** Egress
     , Egress (..)
     , newEgress
 
+    -- ** ElasticGpuSpecifications
     , ElasticGpuSpecifications (..)
     , newElasticGpuSpecifications
 
+    -- ** Elasticsearch
     , Elasticsearch (..)
     , newElasticsearch
 
+    -- ** ElasticsearchConfig
     , ElasticsearchConfig (..)
     , newElasticsearchConfig
 
+    -- ** ElasticsearchConfiguration
     , ElasticsearchConfiguration (..)
     , newElasticsearchConfiguration
 
+    -- ** ElbInfo
     , ElbInfo (..)
     , newElbInfo
 
+    -- ** EmailConfiguration
     , EmailConfiguration (..)
     , newEmailConfiguration
 
+    -- ** EncryptAtRest
     , EncryptAtRest (..)
     , newEncryptAtRest
 
+    -- ** Encryption
     , Encryption (..)
     , newEncryption
 
+    -- ** EncryptionKey
     , EncryptionKey (..)
     , newEncryptionKey
 
+    -- ** EndpointConfiguration
     , EndpointConfiguration (..)
     , newEndpointConfiguration
 
+    -- ** Endpoints
     , Endpoints (..)
     , newEndpoints
 
+    -- ** Environment
     , Environment (..)
     , newEnvironment
 
+    -- ** EnvironmentVariable
     , EnvironmentVariable (..)
     , newEnvironmentVariable
 
+    -- ** EphemeralBlockDevice
     , EphemeralBlockDevice (..)
     , newEphemeralBlockDevice
 
+    -- ** EventSelector
     , EventSelector (..)
     , newEventSelector
 
+    -- ** ExecutionProperty
     , ExecutionProperty (..)
     , newExecutionProperty
 
+    -- ** Expiration
     , Expiration (..)
     , newExpiration
 
+    -- ** ExtendedS3Configuration
     , ExtendedS3Configuration (..)
     , newExtendedS3Configuration
 
+    -- ** FailoverRoutingPolicy
     , FailoverRoutingPolicy (..)
     , newFailoverRoutingPolicy
 
+    -- ** FieldToMatch
     , FieldToMatch (..)
     , newFieldToMatch
 
+    -- ** Filter
     , Filter (..)
     , newFilter
 
+    -- ** Filters
     , Filters (..)
     , newFilters
 
+    -- ** Firehose
     , Firehose (..)
     , newFirehose
 
+    -- ** ForwardedValues
     , ForwardedValues (..)
     , newForwardedValues
 
+    -- ** GeoMatchConstraint
     , GeoMatchConstraint (..)
     , newGeoMatchConstraint
 
+    -- ** GeoRestriction
     , GeoRestriction (..)
     , newGeoRestriction
 
+    -- ** GeolocationRoutingPolicy
     , GeolocationRoutingPolicy (..)
     , newGeolocationRoutingPolicy
 
+    -- ** GlobalFilter
     , GlobalFilter (..)
     , newGlobalFilter
 
+    -- ** GlobalSecondaryIndex
     , GlobalSecondaryIndex (..)
     , newGlobalSecondaryIndex
 
+    -- ** GreenFleetProvisioningOption
     , GreenFleetProvisioningOption (..)
     , newGreenFleetProvisioningOption
 
+    -- ** GrokClassifier
     , GrokClassifier (..)
     , newGrokClassifier
 
+    -- ** HadoopJarStep
     , HadoopJarStep (..)
     , newHadoopJarStep
 
+    -- ** HealthCheck
     , HealthCheck (..)
     , newHealthCheck
 
+    -- ** HealthCheckConfig
     , HealthCheckConfig (..)
     , newHealthCheckConfig
 
+    -- ** HealthCheckCustomConfig
     , HealthCheckCustomConfig (..)
     , newHealthCheckCustomConfig
 
+    -- ** HiveJsonSerDe
     , HiveJsonSerDe (..)
     , newHiveJsonSerDe
 
+    -- ** IamInstanceProfile
     , IamInstanceProfile (..)
     , newIamInstanceProfile
 
+    -- ** Ingress
     , Ingress (..)
     , newIngress
 
+    -- ** InitialLifecycleHook
     , InitialLifecycleHook (..)
     , newInitialLifecycleHook
 
+    -- ** InputFormatConfiguration
     , InputFormatConfiguration (..)
     , newInputFormatConfiguration
 
+    -- ** InputTransformer
     , InputTransformer (..)
     , newInputTransformer
 
+    -- ** InstanceGroup
     , InstanceGroup (..)
     , newInstanceGroup
 
+    -- ** InstanceMarketOptions
     , InstanceMarketOptions (..)
     , newInstanceMarketOptions
 
+    -- ** Instances
     , Instances (..)
     , newInstances
 
+    -- ** InviteMessageTemplate
     , InviteMessageTemplate (..)
     , newInviteMessageTemplate
 
+    -- ** IpSetDescriptor
     , IpSetDescriptor (..)
     , newIpSetDescriptor
 
+    -- ** IpSetDescriptors
     , IpSetDescriptors (..)
     , newIpSetDescriptors
 
+    -- ** JdbcTarget
     , JdbcTarget (..)
     , newJdbcTarget
 
+    -- ** JsonClassifier
     , JsonClassifier (..)
     , newJsonClassifier
 
+    -- ** KerberosAttributes
     , KerberosAttributes (..)
     , newKerberosAttributes
 
+    -- ** Kinesis
     , Kinesis (..)
     , newKinesis
 
+    -- ** KinesisDestination
     , KinesisDestination (..)
     , newKinesisDestination
 
+    -- ** KinesisSourceConfiguration
     , KinesisSourceConfiguration (..)
     , newKinesisSourceConfiguration
 
+    -- ** KinesisTarget
     , KinesisTarget (..)
     , newKinesisTarget
 
+    -- ** Lambda
     , Lambda (..)
     , newLambda
 
+    -- ** LambdaAction
     , LambdaAction (..)
     , newLambdaAction
 
+    -- ** LambdaConfig
     , LambdaConfig (..)
     , newLambdaConfig
 
+    -- ** LambdaFunction
     , LambdaFunction (..)
     , newLambdaFunction
 
+    -- ** LambdaFunctionAssociation
     , LambdaFunctionAssociation (..)
     , newLambdaFunctionAssociation
 
+    -- ** LatencyRoutingPolicy
     , LatencyRoutingPolicy (..)
     , newLatencyRoutingPolicy
 
+    -- ** LaunchSpecification
     , LaunchSpecification (..)
     , newLaunchSpecification
 
+    -- ** LaunchTemplate
     , LaunchTemplate (..)
     , newLaunchTemplate
 
+    -- ** LifecycleRule
     , LifecycleRule (..)
     , newLifecycleRule
 
+    -- ** Listener
     , Listener (..)
     , newListener
 
+    -- ** LoadBalancer
     , LoadBalancer (..)
     , newLoadBalancer
 
+    -- ** LoadBalancerInfo
     , LoadBalancerInfo (..)
     , newLoadBalancerInfo
 
+    -- ** LocalSecondaryIndex
     , LocalSecondaryIndex (..)
     , newLocalSecondaryIndex
 
+    -- ** Location
     , Location (..)
     , newLocation
 
+    -- ** LogPublishingOptions
     , LogPublishingOptions (..)
     , newLogPublishingOptions
 
+    -- ** Logging
     , Logging (..)
     , newLogging
 
+    -- ** LoggingConfig
     , LoggingConfig (..)
     , newLoggingConfig
 
+    -- ** LoggingInfo
     , LoggingInfo (..)
     , newLoggingInfo
 
+    -- ** MaintenanceWindowStartTime
     , MaintenanceWindowStartTime (..)
     , newMaintenanceWindowStartTime
 
+    -- ** MappingRule
     , MappingRule (..)
     , newMappingRule
 
+    -- ** MetricDimension
     , MetricDimension (..)
     , newMetricDimension
 
+    -- ** MetricTransformation
     , MetricTransformation (..)
     , newMetricTransformation
 
+    -- ** MinimumHealthyHosts
     , MinimumHealthyHosts (..)
     , newMinimumHealthyHosts
 
+    -- ** MongodbSettings
     , MongodbSettings (..)
     , newMongodbSettings
 
+    -- ** Monitoring
     , Monitoring (..)
     , newMonitoring
 
+    -- ** NetworkConfiguration
     , NetworkConfiguration (..)
     , newNetworkConfiguration
 
+    -- ** NetworkInterface
     , NetworkInterface (..)
     , newNetworkInterface
 
+    -- ** NetworkInterfaces
     , NetworkInterfaces (..)
     , newNetworkInterfaces
 
+    -- ** NfsFileShareDefaults
     , NfsFileShareDefaults (..)
     , newNfsFileShareDefaults
 
+    -- ** Nodes
     , Nodes (..)
     , newNodes
 
+    -- ** NoncurrentVersionExpiration
     , NoncurrentVersionExpiration (..)
     , newNoncurrentVersionExpiration
 
+    -- ** NoncurrentVersionTransition
     , NoncurrentVersionTransition (..)
     , newNoncurrentVersionTransition
 
+    -- ** NotPrincipals
     , NotPrincipals (..)
     , newNotPrincipals
 
+    -- ** Notification
     , Notification (..)
     , newNotification
 
+    -- ** Notifications
     , Notifications (..)
     , newNotifications
 
+    -- ** NumberAttributeConstraints
     , NumberAttributeConstraints (..)
     , newNumberAttributeConstraints
 
+    -- ** OnPremisesInstanceTagFilter
     , OnPremisesInstanceTagFilter (..)
     , newOnPremisesInstanceTagFilter
 
+    -- ** OpenXJsonSerDe
     , OpenXJsonSerDe (..)
     , newOpenXJsonSerDe
 
+    -- ** Option
     , Option (..)
     , newOption
 
+    -- ** OptionSettings
     , OptionSettings (..)
     , newOptionSettings
 
+    -- ** OrcSerDe
     , OrcSerDe (..)
     , newOrcSerDe
 
+    -- ** OrderedCacheBehavior
     , OrderedCacheBehavior (..)
     , newOrderedCacheBehavior
 
+    -- ** OrderedPlacementStrategy
     , OrderedPlacementStrategy (..)
     , newOrderedPlacementStrategy
 
+    -- ** OrganizationAggregationSource
     , OrganizationAggregationSource (..)
     , newOrganizationAggregationSource
 
+    -- ** Origin
     , Origin (..)
     , newOrigin
 
+    -- ** OutputFormatConfiguration
     , OutputFormatConfiguration (..)
     , newOutputFormatConfiguration
 
+    -- ** OutputLocation
     , OutputLocation (..)
     , newOutputLocation
 
+    -- ** OverrideAction
     , OverrideAction (..)
     , newOverrideAction
 
+    -- ** Parameter
     , Parameter (..)
     , newParameter
 
+    -- ** Parameters
     , Parameters (..)
     , newParameters
 
+    -- ** ParquetSerDe
     , ParquetSerDe (..)
     , newParquetSerDe
 
+    -- ** PartitionKeys
     , PartitionKeys (..)
     , newPartitionKeys
 
+    -- ** PasswordPolicy
     , PasswordPolicy (..)
     , newPasswordPolicy
 
+    -- ** PatchFilter
     , PatchFilter (..)
     , newPatchFilter
 
+    -- ** Permissions
     , Permissions (..)
     , newPermissions
 
+    -- ** PhysicalConnectionRequirements
     , PhysicalConnectionRequirements (..)
     , newPhysicalConnectionRequirements
 
+    -- ** Placement
     , Placement (..)
     , newPlacement
 
+    -- ** PlacementConstraints
     , PlacementConstraints (..)
     , newPlacementConstraints
 
+    -- ** PlacementStrategy
     , PlacementStrategy (..)
     , newPlacementStrategy
 
+    -- ** PointInTimeRecovery
     , PointInTimeRecovery (..)
     , newPointInTimeRecovery
 
+    -- ** PolicyAttribute
     , PolicyAttribute (..)
     , newPolicyAttribute
 
+    -- ** PredefinedMetricSpecification
     , PredefinedMetricSpecification (..)
     , newPredefinedMetricSpecification
 
+    -- ** Predicate
     , Predicate (..)
     , newPredicate
 
+    -- ** Predicates
     , Predicates (..)
     , newPredicates
 
+    -- ** Principals
     , Principals (..)
     , newPrincipals
 
+    -- ** ProcessingConfiguration
     , ProcessingConfiguration (..)
     , newProcessingConfiguration
 
+    -- ** Processors
     , Processors (..)
     , newProcessors
 
+    -- ** ProductCodes
     , ProductCodes (..)
     , newProductCodes
 
+    -- ** Properties
     , Properties (..)
     , newProperties
 
+    -- ** Queue
     , Queue (..)
     , newQueue
 
+    -- ** QuotaSettings
     , QuotaSettings (..)
     , newQuotaSettings
 
+    -- ** RecordingGroup
     , RecordingGroup (..)
     , newRecordingGroup
 
+    -- ** RedshiftConfiguration
     , RedshiftConfiguration (..)
     , newRedshiftConfiguration
 
+    -- ** RegexMatchTuple
     , RegexMatchTuple (..)
     , newRegexMatchTuple
 
+    -- ** Replica
     , Replica (..)
     , newReplica
 
+    -- ** ReplicationConfiguration
     , ReplicationConfiguration (..)
     , newReplicationConfiguration
 
+    -- ** Republish
     , Republish (..)
     , newRepublish
 
+    -- ** Requester
     , Requester (..)
     , newRequester
 
+    -- ** ResourceCreationLimitPolicy
     , ResourceCreationLimitPolicy (..)
     , newResourceCreationLimitPolicy
 
+    -- ** Restrictions
     , Restrictions (..)
     , newRestrictions
 
+    -- ** RetryStrategy
     , RetryStrategy (..)
     , newRetryStrategy
 
+    -- ** RevocationConfiguration
     , RevocationConfiguration (..)
     , newRevocationConfiguration
 
+    -- ** RoleMapping
     , RoleMapping (..)
     , newRoleMapping
 
+    -- ** Roles
     , Roles (..)
     , newRoles
 
+    -- ** RootBlockDevice
     , RootBlockDevice (..)
     , newRootBlockDevice
 
+    -- ** RotationRules
     , RotationRules (..)
     , newRotationRules
 
+    -- ** Route
     , Route (..)
     , newRoute
 
+    -- ** Routes
     , Routes (..)
     , newRoutes
 
+    -- ** RoutingConfig
     , RoutingConfig (..)
     , newRoutingConfig
 
+    -- ** RoutingStrategy
     , RoutingStrategy (..)
     , newRoutingStrategy
 
+    -- ** Rule
     , Rule (..)
     , newRule
 
+    -- ** Rules
     , Rules (..)
     , newRules
 
+    -- ** RunCommandTargets
     , RunCommandTargets (..)
     , newRunCommandTargets
 
+    -- ** RuntimeConfiguration
     , RuntimeConfiguration (..)
     , newRuntimeConfiguration
 
+    -- ** S3
     , S3 (..)
     , newS3
 
+    -- ** S3Action
     , S3Action (..)
     , newS3Action
 
+    -- ** S3BackupConfiguration
     , S3BackupConfiguration (..)
     , newS3BackupConfiguration
 
+    -- ** S3Configuration
     , S3Configuration (..)
     , newS3Configuration
 
+    -- ** S3Destination
     , S3Destination (..)
     , newS3Destination
 
+    -- ** S3Import
     , S3Import (..)
     , newS3Import
 
+    -- ** S3OriginConfig
     , S3OriginConfig (..)
     , newS3OriginConfig
 
+    -- ** S3Settings
     , S3Settings (..)
     , newS3Settings
 
+    -- ** S3Target
     , S3Target (..)
     , newS3Target
 
+    -- ** ScalableTargetAction
     , ScalableTargetAction (..)
     , newScalableTargetAction
 
+    -- ** Schedule
     , Schedule (..)
     , newSchedule
 
+    -- ** Schema
     , Schema (..)
     , newSchema
 
+    -- ** SchemaChangePolicy
     , SchemaChangePolicy (..)
     , newSchemaChangePolicy
 
+    -- ** SchemaConfiguration
     , SchemaConfiguration (..)
     , newSchemaConfiguration
 
+    -- ** Scope
     , Scope (..)
     , newScope
 
+    -- ** Secret
     , Secret (..)
     , newSecret
 
+    -- ** SerDeInfo
     , SerDeInfo (..)
     , newSerDeInfo
 
+    -- ** Serializer
     , Serializer (..)
     , newSerializer
 
+    -- ** ServerProcess
     , ServerProcess (..)
     , newServerProcess
 
+    -- ** ServerSideEncryption
     , ServerSideEncryption (..)
     , newServerSideEncryption
 
+    -- ** ServerSideEncryptionConfiguration
     , ServerSideEncryptionConfiguration (..)
     , newServerSideEncryptionConfiguration
 
+    -- ** ServiceRegistries
     , ServiceRegistries (..)
     , newServiceRegistries
 
+    -- ** Setting
     , Setting (..)
     , newSetting
 
+    -- ** Settings
     , Settings (..)
     , newSettings
 
+    -- ** SizeConstraints
     , SizeConstraints (..)
     , newSizeConstraints
 
+    -- ** SkewedInfo
     , SkewedInfo (..)
     , newSkewedInfo
 
+    -- ** SmbActiveDirectorySettings
     , SmbActiveDirectorySettings (..)
     , newSmbActiveDirectorySettings
 
+    -- ** SmsConfiguration
     , SmsConfiguration (..)
     , newSmsConfiguration
 
+    -- ** SnapshotCopy
     , SnapshotCopy (..)
     , newSnapshotCopy
 
+    -- ** SnapshotDeliveryProperties
     , SnapshotDeliveryProperties (..)
     , newSnapshotDeliveryProperties
 
+    -- ** SnapshotOptions
     , SnapshotOptions (..)
     , newSnapshotOptions
 
+    -- ** Sns
     , Sns (..)
     , newSns
 
+    -- ** SnsAction
     , SnsAction (..)
     , newSnsAction
 
+    -- ** SnsDestination
     , SnsDestination (..)
     , newSnsDestination
 
+    -- ** SortColumns
     , SortColumns (..)
     , newSortColumns
 
+    -- ** Source
     , Source (..)
     , newSource
 
+    -- ** SourceDetail
     , SourceDetail (..)
     , newSourceDetail
 
+    -- ** SourceSelectionCriteria
     , SourceSelectionCriteria (..)
     , newSourceSelectionCriteria
 
+    -- ** SplunkConfiguration
     , SplunkConfiguration (..)
     , newSplunkConfiguration
 
+    -- ** SpotOptions
     , SpotOptions (..)
     , newSpotOptions
 
+    -- ** SqlInjectionMatchTuple
     , SqlInjectionMatchTuple (..)
     , newSqlInjectionMatchTuple
 
+    -- ** SqlInjectionMatchTuples
     , SqlInjectionMatchTuples (..)
     , newSqlInjectionMatchTuples
 
+    -- ** Sqs
     , Sqs (..)
     , newSqs
 
+    -- ** SqsTarget
     , SqsTarget (..)
     , newSqsTarget
 
+    -- ** SseKms
     , SseKms (..)
     , newSseKms
 
+    -- ** SseKmsEncryptedObjects
     , SseKmsEncryptedObjects (..)
     , newSseKmsEncryptedObjects
 
+    -- ** SseS3
     , SseS3 (..)
     , newSseS3
 
+    -- ** SslConfiguration
     , SslConfiguration (..)
     , newSslConfiguration
 
+    -- ** Stage
     , Stage (..)
     , newStage
 
+    -- ** StageKey
     , StageKey (..)
     , newStageKey
 
+    -- ** Statement
     , Statement (..)
     , newStatement
 
+    -- ** Step
     , Step (..)
     , newStep
 
+    -- ** StepAdjustment
     , StepAdjustment (..)
     , newStepAdjustment
 
+    -- ** StepScalingPolicyConfiguration
     , StepScalingPolicyConfiguration (..)
     , newStepScalingPolicyConfiguration
 
+    -- ** Stickiness
     , Stickiness (..)
     , newStickiness
 
+    -- ** StopAction
     , StopAction (..)
     , newStopAction
 
+    -- ** StorageDescriptor
     , StorageDescriptor (..)
     , newStorageDescriptor
 
+    -- ** StorageLocation
     , StorageLocation (..)
     , newStorageLocation
 
+    -- ** StringAttributeConstraints
     , StringAttributeConstraints (..)
     , newStringAttributeConstraints
 
+    -- ** Subject
     , Subject (..)
     , newSubject
 
+    -- ** SubnetMapping
     , SubnetMapping (..)
     , newSubnetMapping
 
+    -- ** Tag
     , Tag (..)
     , newTag
 
+    -- ** TagSpecifications
     , TagSpecifications (..)
     , newTagSpecifications
 
+    -- ** TargetGroupInfo
     , TargetGroupInfo (..)
     , newTargetGroupInfo
 
+    -- ** TargetTrackingConfiguration
     , TargetTrackingConfiguration (..)
     , newTargetTrackingConfiguration
 
+    -- ** TargetTrackingScalingPolicyConfiguration
     , TargetTrackingScalingPolicyConfiguration (..)
     , newTargetTrackingScalingPolicyConfiguration
 
+    -- ** Targets
     , Targets (..)
     , newTargets
 
+    -- ** TaskParameters
     , TaskParameters (..)
     , newTaskParameters
 
+    -- ** TerminateBlueInstancesOnDeploymentSuccess
     , TerminateBlueInstancesOnDeploymentSuccess (..)
     , newTerminateBlueInstancesOnDeploymentSuccess
 
+    -- ** ThrottleSettings
     , ThrottleSettings (..)
     , newThrottleSettings
 
+    -- ** ThumbnailConfig
     , ThumbnailConfig (..)
     , newThumbnailConfig
 
+    -- ** ThumbnailConfigPermissions
     , ThumbnailConfigPermissions (..)
     , newThumbnailConfigPermissions
 
+    -- ** Thumbnails
     , Thumbnails (..)
     , newThumbnails
 
+    -- ** Timeout
     , Timeout (..)
     , newTimeout
 
+    -- ** Topic
     , Topic (..)
     , newTopic
 
+    -- ** TracingConfig
     , TracingConfig (..)
     , newTracingConfig
 
+    -- ** Transition
     , Transition (..)
     , newTransition
 
+    -- ** Trigger
     , Trigger (..)
     , newTrigger
 
+    -- ** TriggerConfiguration
     , TriggerConfiguration (..)
     , newTriggerConfiguration
 
+    -- ** Ttl
     , Ttl (..)
     , newTtl
 
+    -- ** User
     , User (..)
     , newUser
 
+    -- ** UserPoolConfig
     , UserPoolConfig (..)
     , newUserPoolConfig
 
+    -- ** VerificationMessageTemplate
     , VerificationMessageTemplate (..)
     , newVerificationMessageTemplate
 
+    -- ** Versioning
     , Versioning (..)
     , newVersioning
 
+    -- ** VgwTelemetry
     , VgwTelemetry (..)
     , newVgwTelemetry
 
+    -- ** Video
     , Video (..)
     , newVideo
 
+    -- ** VideoWatermarks
     , VideoWatermarks (..)
     , newVideoWatermarks
 
+    -- ** ViewerCertificate
     , ViewerCertificate (..)
     , newViewerCertificate
 
+    -- ** Volume
     , Volume (..)
     , newVolume
 
+    -- ** VpcConfig
     , VpcConfig (..)
     , newVpcConfig
 
+    -- ** VpcOptions
     , VpcOptions (..)
     , newVpcOptions
 
+    -- ** VpcSettings
     , VpcSettings (..)
     , newVpcSettings
 
+    -- ** Website
     , Website (..)
     , newWebsite
 
+    -- ** WeightedRoutingPolicy
     , WeightedRoutingPolicy (..)
     , newWeightedRoutingPolicy
 
+    -- ** WorkmailAction
     , WorkmailAction (..)
     , newWorkmailAction
 
+    -- ** XmlClassifier
     , XmlClassifier (..)
     , newXmlClassifier
 
+    -- ** XssMatchTuple
     , XssMatchTuple (..)
     , newXssMatchTuple
 
+    -- ** XssMatchTuples
     , XssMatchTuples (..)
     , newXssMatchTuples
 
     ) where
 
-import Data.Functor  ((<$>))
-import Data.Hashable (Hashable)
-import Data.Maybe    (catMaybes)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
 
 import Terrafomo.AWS.Types
 
 import qualified Data.HashMap.Strict as P
+import qualified Data.Hashable as P
 import qualified Data.List.NonEmpty as P
 import qualified Data.Text as P
 import qualified GHC.Generics as P
 import qualified Lens.Micro as P
 import qualified Prelude as P
 import qualified Terrafomo.AWS.Lens as P
+import qualified Terrafomo.AWS.Types as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.Name as TF
@@ -1090,12 +1444,14 @@ import qualified Terrafomo.Name as TF
 -- | @accepter@ nested settings.
 data Accepter s = Accepter'
     { _allowClassicLinkToRemoteVpc :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _allowRemoteVpcDnsResolution :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _allowVpcToRemoteClassicLink :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Accepter s)
-
+instance P.Hashable  (Accepter s)
 instance TF.IsValue  (Accepter s)
 instance TF.IsObject (Accepter s) where
     toObject Accepter'{..} = catMaybes
@@ -1131,11 +1487,12 @@ instance P.HasAllowVpcToRemoteClassicLink (Accepter s) (TF.Attr s P.Bool) where
 -- | @access_log_settings@ nested settings.
 data AccessLogSettings s = AccessLogSettings'
     { _destinationArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _format :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (AccessLogSettings s)
-
+instance P.Hashable  (AccessLogSettings s)
 instance TF.IsValue  (AccessLogSettings s)
 instance TF.IsObject (AccessLogSettings s) where
     toObject AccessLogSettings'{..} = catMaybes
@@ -1167,11 +1524,10 @@ instance P.HasFormat (AccessLogSettings s) (TF.Attr s P.Text) where
 data AccessLogs s = AccessLogs'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (AccessLogs s)
-
+instance P.Hashable  (AccessLogs s)
 instance TF.IsValue  (AccessLogs s)
 instance TF.IsObject (AccessLogs s) where
-    toObject _ = []
+    toObject AccessLogs' = []
 
 newAccessLogs
     :: AccessLogs s
@@ -1190,12 +1546,14 @@ instance s ~ s' => P.HasComputedPrefix (TF.Ref s' (AccessLogs s)) (TF.Attr s P.T
 -- | @account_aggregation_source@ nested settings.
 data AccountAggregationSource s = AccountAggregationSource'
     { _accountIds :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _allRegions :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _regions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (AccountAggregationSource s)
-
+instance P.Hashable  (AccountAggregationSource s)
 instance TF.IsValue  (AccountAggregationSource s)
 instance TF.IsObject (AccountAggregationSource s) where
     toObject AccountAggregationSource'{..} = catMaybes
@@ -1232,10 +1590,10 @@ instance P.HasRegions (AccountAggregationSource s) (TF.Attr s (P.NonEmpty (TF.At
 -- | @action@ nested settings.
 data Action s = Action'
     { _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Action s)
-
+instance P.Hashable  (Action s)
 instance TF.IsValue  (Action s)
 instance TF.IsObject (Action s) where
     toObject Action'{..} = catMaybes
@@ -1258,12 +1616,14 @@ instance P.HasType' (Action s) (TF.Attr s P.Text) where
 -- | @actions@ nested settings.
 data Actions s = Actions'
     { _arguments :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _jobName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _timeout :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Actions s)
-
+instance P.Hashable  (Actions s)
 instance TF.IsValue  (Actions s)
 instance TF.IsObject (Actions s) where
     toObject Actions'{..} = catMaybes
@@ -1300,13 +1660,16 @@ instance P.HasTimeout (Actions s) (TF.Attr s P.Integer) where
 -- | @activated_rule@ nested settings.
 data ActivatedRule s = ActivatedRule'
     { _action :: TF.Attr s [Action s]
+    -- ^ Undocumented.
     , _priority :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _ruleId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ActivatedRule s)
-
+instance P.Hashable  (ActivatedRule s)
 instance TF.IsValue  (ActivatedRule s)
 instance TF.IsObject (ActivatedRule s) where
     toObject ActivatedRule'{..} = catMaybes
@@ -1352,12 +1715,14 @@ instance P.HasType' (ActivatedRule s) (TF.Attr s P.Text) where
 -- | @add_header_action@ nested settings.
 data AddHeaderAction s = AddHeaderAction'
     { _headerName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _headerValue :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _position :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (AddHeaderAction s)
-
+instance P.Hashable  (AddHeaderAction s)
 instance TF.IsValue  (AddHeaderAction s)
 instance TF.IsObject (AddHeaderAction s) where
     toObject AddHeaderAction'{..} = catMaybes
@@ -1396,12 +1761,14 @@ instance P.HasPosition (AddHeaderAction s) (TF.Attr s P.Integer) where
 -- | @admin_create_user_config@ nested settings.
 data AdminCreateUserConfig s = AdminCreateUserConfig'
     { _allowAdminCreateUserOnly :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _inviteMessageTemplate :: TF.Attr s [InviteMessageTemplate s]
+    -- ^ Undocumented.
     , _unusedAccountValidityDays :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (AdminCreateUserConfig s)
-
+instance P.Hashable  (AdminCreateUserConfig s)
 instance TF.IsValue  (AdminCreateUserConfig s)
 instance TF.IsObject (AdminCreateUserConfig s) where
     toObject AdminCreateUserConfig'{..} = catMaybes
@@ -1437,12 +1804,14 @@ instance P.HasUnusedAccountValidityDays (AdminCreateUserConfig s) (TF.Attr s P.I
 -- | @alarm_configuration@ nested settings.
 data AlarmConfiguration s = AlarmConfiguration'
     { _alarms :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _ignorePollAlarmFailure :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (AlarmConfiguration s)
-
+instance P.Hashable  (AlarmConfiguration s)
 instance TF.IsValue  (AlarmConfiguration s)
 instance TF.IsObject (AlarmConfiguration s) where
     toObject AlarmConfiguration'{..} = catMaybes
@@ -1478,12 +1847,14 @@ instance P.HasIgnorePollAlarmFailure (AlarmConfiguration s) (TF.Attr s P.Bool) w
 -- | @alias@ nested settings.
 data Alias s = Alias'
     { _evaluateTargetHealth :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _zoneId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Alias s)
-
+instance P.Hashable  (Alias s)
 instance TF.IsValue  (Alias s)
 instance TF.IsObject (Alias s) where
     toObject Alias'{..} = catMaybes
@@ -1522,13 +1893,16 @@ instance P.HasZoneId (Alias s) (TF.Attr s P.Text) where
 -- | @all_settings@ nested settings.
 data AllSettings s = AllSettings'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _namespace :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _resource :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (AllSettings s)
-
+instance P.Hashable  (AllSettings s)
 instance TF.IsValue  (AllSettings s)
 instance TF.IsObject (AllSettings s) where
     toObject AllSettings'{..} = catMaybes
@@ -1574,11 +1948,12 @@ instance P.HasValue (AllSettings s) (TF.Attr s P.Text) where
 -- | @api_stages@ nested settings.
 data ApiStages s = ApiStages'
     { _apiId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _stage :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ApiStages s)
-
+instance P.Hashable  (ApiStages s)
 instance TF.IsValue  (ApiStages s)
 instance TF.IsObject (ApiStages s) where
     toObject ApiStages'{..} = catMaybes
@@ -1609,15 +1984,20 @@ instance P.HasStage (ApiStages s) (TF.Attr s P.Text) where
 -- | @app_source@ nested settings.
 data AppSource s = AppSource'
     { _password :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _revision :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sshKey :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _url :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _username :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (AppSource s)
-
+instance P.Hashable  (AppSource s)
 instance TF.IsValue  (AppSource s)
 instance TF.IsObject (AppSource s) where
     toObject AppSource'{..} = catMaybes
@@ -1675,11 +2055,12 @@ instance P.HasUsername (AppSource s) (TF.Attr s P.Text) where
 -- | @apply_server_side_encryption_by_default@ nested settings.
 data ApplyServerSideEncryptionByDefault s = ApplyServerSideEncryptionByDefault'
     { _kmsMasterKeyId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sseAlgorithm :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ApplyServerSideEncryptionByDefault s)
-
+instance P.Hashable  (ApplyServerSideEncryptionByDefault s)
 instance TF.IsValue  (ApplyServerSideEncryptionByDefault s)
 instance TF.IsObject (ApplyServerSideEncryptionByDefault s) where
     toObject ApplyServerSideEncryptionByDefault'{..} = catMaybes
@@ -1709,13 +2090,16 @@ instance P.HasSseAlgorithm (ApplyServerSideEncryptionByDefault s) (TF.Attr s P.T
 -- | @approval_rule@ nested settings.
 data ApprovalRule s = ApprovalRule'
     { _approveAfterDays :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _complianceLevel :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _enableNonSecurity :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _patchFilter :: TF.Attr s [PatchFilter s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ApprovalRule s)
-
+instance P.Hashable  (ApprovalRule s)
 instance TF.IsValue  (ApprovalRule s)
 instance TF.IsObject (ApprovalRule s) where
     toObject ApprovalRule'{..} = catMaybes
@@ -1760,13 +2144,16 @@ instance P.HasPatchFilter (ApprovalRule s) (TF.Attr s [PatchFilter s]) where
 -- | @appversion_lifecycle@ nested settings.
 data AppversionLifecycle s = AppversionLifecycle'
     { _deleteSourceFromS3 :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _maxAgeInDays :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _maxCount :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _serviceRole :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (AppversionLifecycle s)
-
+instance P.Hashable  (AppversionLifecycle s)
 instance TF.IsValue  (AppversionLifecycle s)
 instance TF.IsObject (AppversionLifecycle s) where
     toObject AppversionLifecycle'{..} = catMaybes
@@ -1810,12 +2197,14 @@ instance P.HasServiceRole (AppversionLifecycle s) (TF.Attr s P.Text) where
 -- | @args@ nested settings.
 data Args s = Args'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _param :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Args s)
-
+instance P.Hashable  (Args s)
 instance TF.IsValue  (Args s)
 instance TF.IsObject (Args s) where
     toObject Args'{..} = catMaybes
@@ -1853,12 +2242,14 @@ instance P.HasValue (Args s) (TF.Attr s P.Text) where
 -- | @artifact_store@ nested settings.
 data ArtifactStore s = ArtifactStore'
     { _encryptionKey :: TF.Attr s [EncryptionKey s]
+    -- ^ Undocumented.
     , _location :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ArtifactStore s)
-
+instance P.Hashable  (ArtifactStore s)
 instance TF.IsValue  (ArtifactStore s)
 instance TF.IsObject (ArtifactStore s) where
     toObject ArtifactStore'{..} = catMaybes
@@ -1896,15 +2287,20 @@ instance P.HasType' (ArtifactStore s) (TF.Attr s P.Text) where
 -- | @artifacts@ nested settings.
 data Artifacts s = Artifacts'
     { _location :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _namespaceType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _packaging :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _path :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Artifacts s)
-
+instance P.Hashable  (Artifacts s)
 instance TF.IsValue  (Artifacts s)
 instance TF.IsObject (Artifacts s) where
     toObject Artifacts'{..} = catMaybes
@@ -1963,11 +2359,10 @@ instance P.HasType' (Artifacts s) (TF.Attr s P.Text) where
 data Association s = Association'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Association s)
-
+instance P.Hashable  (Association s)
 instance TF.IsValue  (Association s)
 instance TF.IsObject (Association s) where
-    toObject _ = []
+    toObject Association' = []
 
 newAssociation
     :: Association s
@@ -1993,11 +2388,10 @@ instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (Association s)) (TF.Attr s 
 data Associations s = Associations'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Associations s)
-
+instance P.Hashable  (Associations s)
 instance TF.IsValue  (Associations s)
 instance TF.IsObject (Associations s) where
-    toObject _ = []
+    toObject Associations' = []
 
 newAssociations
     :: Associations s
@@ -2019,13 +2413,16 @@ instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (Associations s)) (TF.Attr s
 -- | @assume_role@ nested settings.
 data AssumeRole = AssumeRole'
     { _externalId :: P.Maybe P.Text
+    -- ^ The external ID to use when assuming the role. If omitted, no external ID is passed to the AssumeRole call.
     , _policy :: P.Maybe P.Text
+    -- ^ The permissions applied when assuming a role. You cannot use, this policy to grant further permissions that are in excess to those of the,  role that is being assumed.
     , _roleArn :: P.Maybe P.Text
+    -- ^ The ARN of an IAM role to assume prior to making API calls.
     , _sessionName :: P.Maybe P.Text
+    -- ^ The session name to use when assuming the role. If omitted, no session name is passed to the AssumeRole call.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (AssumeRole)
-
+instance P.Hashable  (AssumeRole)
 instance TF.IsValue  (AssumeRole)
 instance TF.IsObject (AssumeRole) where
     toObject AssumeRole'{..} = catMaybes
@@ -2069,11 +2466,10 @@ instance P.HasSessionName (AssumeRole) (P.Maybe P.Text) where
 data Attachment s = Attachment'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Attachment s)
-
+instance P.Hashable  (Attachment s)
 instance TF.IsValue  (Attachment s)
 instance TF.IsObject (Attachment s) where
-    toObject _ = []
+    toObject Attachment' = []
 
 newAttachment
     :: Attachment s
@@ -2096,11 +2492,10 @@ instance s ~ s' => P.HasComputedInstanceOwnerId (TF.Ref s' (Attachment s)) (TF.A
 data Attachments s = Attachments'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Attachments s)
-
+instance P.Hashable  (Attachments s)
 instance TF.IsValue  (Attachments s)
 instance TF.IsObject (Attachments s) where
-    toObject _ = []
+    toObject Attachments' = []
 
 newAttachments
     :: Attachments s
@@ -2117,11 +2512,10 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (Attachments s)) (TF.Attr s P.T
 data Attribute s = Attribute'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Attribute s)
-
+instance P.Hashable  (Attribute s)
 instance TF.IsValue  (Attribute s)
 instance TF.IsObject (Attribute s) where
-    toObject _ = []
+    toObject Attribute' = []
 
 newAttribute
     :: Attribute s
@@ -2137,14 +2531,18 @@ instance s ~ s' => P.HasComputedType' (TF.Ref s' (Attribute s)) (TF.Attr s P.Tex
 -- | @audio@ nested settings.
 data Audio s = Audio'
     { _audioPackingMode :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _bitRate :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _channels :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _codec :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sampleRate :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Audio s)
-
+instance P.Hashable  (Audio s)
 instance TF.IsValue  (Audio s)
 instance TF.IsObject (Audio s) where
     toObject Audio'{..} = catMaybes
@@ -2194,13 +2592,16 @@ instance P.HasSampleRate (Audio s) (TF.Attr s P.Text) where
 -- | @audio_codec_options@ nested settings.
 data AudioCodecOptions s = AudioCodecOptions'
     { _bitDepth :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _bitOrder :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _profile :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _signed :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (AudioCodecOptions s)
-
+instance P.Hashable  (AudioCodecOptions s)
 instance TF.IsValue  (AudioCodecOptions s)
 instance TF.IsObject (AudioCodecOptions s) where
     toObject AudioCodecOptions'{..} = catMaybes
@@ -2243,11 +2644,12 @@ instance P.HasSigned (AudioCodecOptions s) (TF.Attr s P.Text) where
 -- | @auth@ nested settings.
 data Auth s = Auth'
     { _resource :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Auth s)
-
+instance P.Hashable  (Auth s)
 instance TF.IsValue  (Auth s)
 instance TF.IsObject (Auth s) where
     toObject Auth'{..} = catMaybes
@@ -2277,11 +2679,12 @@ instance P.HasType' (Auth s) (TF.Attr s P.Text) where
 -- | @auto_rollback_configuration@ nested settings.
 data AutoRollbackConfiguration s = AutoRollbackConfiguration'
     { _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _events :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (AutoRollbackConfiguration s)
-
+instance P.Hashable  (AutoRollbackConfiguration s)
 instance TF.IsValue  (AutoRollbackConfiguration s)
 instance TF.IsObject (AutoRollbackConfiguration s) where
     toObject AutoRollbackConfiguration'{..} = catMaybes
@@ -2310,13 +2713,16 @@ instance P.HasEvents (AutoRollbackConfiguration s) (TF.Attr s [TF.Attr s (TF.Att
 -- | @batch_target@ nested settings.
 data BatchTarget s = BatchTarget'
     { _arraySize :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _jobAttempts :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _jobDefinition :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _jobName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (BatchTarget s)
-
+instance P.Hashable  (BatchTarget s)
 instance TF.IsValue  (BatchTarget s)
 instance TF.IsObject (BatchTarget s) where
     toObject BatchTarget'{..} = catMaybes
@@ -2362,11 +2768,10 @@ instance P.HasJobName (BatchTarget s) (TF.Attr s P.Text) where
 data BlockDeviceMappings s = BlockDeviceMappings'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (BlockDeviceMappings s)
-
+instance P.Hashable  (BlockDeviceMappings s)
 instance TF.IsValue  (BlockDeviceMappings s)
 instance TF.IsObject (BlockDeviceMappings s) where
-    toObject _ = []
+    toObject BlockDeviceMappings' = []
 
 newBlockDeviceMappings
     :: BlockDeviceMappings s
@@ -2388,11 +2793,12 @@ instance s ~ s' => P.HasComputedVirtualName (TF.Ref s' (BlockDeviceMappings s)) 
 -- | @blue_green_deployment_config@ nested settings.
 data BlueGreenDeploymentConfig s = BlueGreenDeploymentConfig'
     { _deploymentReadyOption :: TF.Attr s [DeploymentReadyOption s]
+    -- ^ Undocumented.
     , _terminateBlueInstancesOnDeploymentSuccess :: TF.Attr s [TerminateBlueInstancesOnDeploymentSuccess s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (BlueGreenDeploymentConfig s)
-
+instance P.Hashable  (BlueGreenDeploymentConfig s)
 instance TF.IsValue  (BlueGreenDeploymentConfig s)
 instance TF.IsObject (BlueGreenDeploymentConfig s) where
     toObject BlueGreenDeploymentConfig'{..} = catMaybes
@@ -2424,12 +2830,14 @@ instance s ~ s' => P.HasComputedGreenFleetProvisioningOption (TF.Ref s' (BlueGre
 -- | @bootstrap_action@ nested settings.
 data BootstrapAction s = BootstrapAction'
     { _args :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _path :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (BootstrapAction s)
-
+instance P.Hashable  (BootstrapAction s)
 instance TF.IsValue  (BootstrapAction s)
 instance TF.IsObject (BootstrapAction s) where
     toObject BootstrapAction'{..} = catMaybes
@@ -2467,15 +2875,20 @@ instance P.HasPath (BootstrapAction s) (TF.Attr s P.Text) where
 -- | @bounce_action@ nested settings.
 data BounceAction s = BounceAction'
     { _message :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _position :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _sender :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _smtpReplyCode :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _statusCode :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _topicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (BounceAction s)
-
+instance P.Hashable  (BounceAction s)
 instance TF.IsValue  (BounceAction s)
 instance TF.IsObject (BounceAction s) where
     toObject BounceAction'{..} = catMaybes
@@ -2536,14 +2949,18 @@ instance P.HasTopicArn (BounceAction s) (TF.Attr s P.Text) where
 -- | @bucket@ nested settings.
 data Bucket s = Bucket'
     { _accountId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _bucketArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _encryption :: TF.Attr s [Encryption s]
+    -- ^ Undocumented.
     , _format :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _prefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Bucket s)
-
+instance P.Hashable  (Bucket s)
 instance TF.IsValue  (Bucket s)
 instance TF.IsObject (Bucket s) where
     toObject Bucket'{..} = catMaybes
@@ -2595,13 +3012,16 @@ instance P.HasPrefix (Bucket s) (TF.Attr s P.Text) where
 -- | @byte_match_tuple@ nested settings.
 data ByteMatchTuple s = ByteMatchTuple'
     { _fieldToMatch :: TF.Attr s (TF.Attr s (FieldToMatch s))
+    -- ^ Undocumented.
     , _positionalConstraint :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _targetString :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ByteMatchTuple s)
-
+instance P.Hashable  (ByteMatchTuple s)
 instance TF.IsValue  (ByteMatchTuple s)
 instance TF.IsObject (ByteMatchTuple s) where
     toObject ByteMatchTuple'{..} = catMaybes
@@ -2647,13 +3067,16 @@ instance P.HasTextTransformation (ByteMatchTuple s) (TF.Attr s P.Text) where
 -- | @byte_match_tuples@ nested settings.
 data ByteMatchTuples s = ByteMatchTuples'
     { _fieldToMatch :: TF.Attr s (TF.Attr s (FieldToMatch s))
+    -- ^ Undocumented.
     , _positionalConstraint :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _targetString :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ByteMatchTuples s)
-
+instance P.Hashable  (ByteMatchTuples s)
 instance TF.IsValue  (ByteMatchTuples s)
 instance TF.IsObject (ByteMatchTuples s) where
     toObject ByteMatchTuples'{..} = catMaybes
@@ -2699,11 +3122,12 @@ instance P.HasTextTransformation (ByteMatchTuples s) (TF.Attr s P.Text) where
 -- | @cache@ nested settings.
 data Cache s = Cache'
     { _location :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Cache s)
-
+instance P.Hashable  (Cache s)
 instance TF.IsValue  (Cache s)
 instance TF.IsObject (Cache s) where
     toObject Cache'{..} = catMaybes
@@ -2732,23 +3156,36 @@ instance P.HasType' (Cache s) (TF.Attr s P.Text) where
 -- | @cache_behavior@ nested settings.
 data CacheBehavior s = CacheBehavior'
     { _allowedMethods :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _cachedMethods :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _compress :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _defaultTtl :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _fieldLevelEncryptionId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _forwardedValues :: TF.Attr s (TF.Attr s (ForwardedValues s))
+    -- ^ Undocumented.
     , _lambdaFunctionAssociation :: TF.Attr s [TF.Attr s (LambdaFunctionAssociation s)]
+    -- ^ Undocumented.
     , _maxTtl :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _minTtl :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _pathPattern :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _smoothStreaming :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _targetOriginId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _trustedSigners :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _viewerProtocolPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CacheBehavior s)
-
+instance P.Hashable  (CacheBehavior s)
 instance TF.IsValue  (CacheBehavior s)
 instance TF.IsObject (CacheBehavior s) where
     toObject CacheBehavior'{..} = catMaybes
@@ -2868,11 +3305,10 @@ instance P.HasViewerProtocolPolicy (CacheBehavior s) (TF.Attr s P.Text) where
 data CacheNodes s = CacheNodes'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CacheNodes s)
-
+instance P.Hashable  (CacheNodes s)
 instance TF.IsValue  (CacheNodes s)
 instance TF.IsObject (CacheNodes s) where
-    toObject _ = []
+    toObject CacheNodes' = []
 
 newCacheNodes
     :: CacheNodes s
@@ -2895,11 +3331,10 @@ instance s ~ s' => P.HasComputedPort (TF.Ref s' (CacheNodes s)) (TF.Attr s P.Int
 data CertificateAuthority s = CertificateAuthority'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CertificateAuthority s)
-
+instance P.Hashable  (CertificateAuthority s)
 instance TF.IsValue  (CertificateAuthority s)
 instance TF.IsObject (CertificateAuthority s) where
-    toObject _ = []
+    toObject CertificateAuthority' = []
 
 newCertificateAuthority
     :: CertificateAuthority s
@@ -2912,12 +3347,14 @@ instance s ~ s' => P.HasComputedData' (TF.Ref s' (CertificateAuthority s)) (TF.A
 -- | @certificate_authority_configuration@ nested settings.
 data CertificateAuthorityConfiguration s = CertificateAuthorityConfiguration'
     { _keyAlgorithm :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _signingAlgorithm :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _subject :: TF.Attr s [Subject s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CertificateAuthorityConfiguration s)
-
+instance P.Hashable  (CertificateAuthorityConfiguration s)
 instance TF.IsValue  (CertificateAuthorityConfiguration s)
 instance TF.IsObject (CertificateAuthorityConfiguration s) where
     toObject CertificateAuthorityConfiguration'{..} = catMaybes
@@ -2957,11 +3394,10 @@ instance P.HasSubject (CertificateAuthorityConfiguration s) (TF.Attr s [Subject 
 data CidrBlockAssociations s = CidrBlockAssociations'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CidrBlockAssociations s)
-
+instance P.Hashable  (CidrBlockAssociations s)
 instance TF.IsValue  (CidrBlockAssociations s)
 instance TF.IsObject (CidrBlockAssociations s) where
-    toObject _ = []
+    toObject CidrBlockAssociations' = []
 
 newCidrBlockAssociations
     :: CidrBlockAssociations s
@@ -2980,11 +3416,12 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (CidrBlockAssociations s)) (TF.
 -- | @classification_type@ nested settings.
 data ClassificationType s = ClassificationType'
     { _continuous :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _oneTime :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ClassificationType s)
-
+instance P.Hashable  (ClassificationType s)
 instance TF.IsValue  (ClassificationType s)
 instance TF.IsObject (ClassificationType s) where
     toObject ClassificationType'{..} = catMaybes
@@ -3013,13 +3450,16 @@ instance P.HasOneTime (ClassificationType s) (TF.Attr s P.Text) where
 -- | @cloudwatch_alarm@ nested settings.
 data CloudwatchAlarm s = CloudwatchAlarm'
     { _alarmName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _stateReason :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _stateValue :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CloudwatchAlarm s)
-
+instance P.Hashable  (CloudwatchAlarm s)
 instance TF.IsValue  (CloudwatchAlarm s)
 instance TF.IsObject (CloudwatchAlarm s) where
     toObject CloudwatchAlarm'{..} = catMaybes
@@ -3066,12 +3506,14 @@ instance P.HasStateValue (CloudwatchAlarm s) (TF.Attr s P.Text) where
 -- | @cloudwatch_destination@ nested settings.
 data CloudwatchDestination s = CloudwatchDestination'
     { _defaultValue :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _dimensionName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _valueSource :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CloudwatchDestination s)
-
+instance P.Hashable  (CloudwatchDestination s)
 instance TF.IsValue  (CloudwatchDestination s)
 instance TF.IsObject (CloudwatchDestination s) where
     toObject CloudwatchDestination'{..} = catMaybes
@@ -3110,12 +3552,14 @@ instance P.HasValueSource (CloudwatchDestination s) (TF.Attr s P.Text) where
 -- | @cloudwatch_logging_options@ nested settings.
 data CloudwatchLoggingOptions s = CloudwatchLoggingOptions'
     { _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _logGroupName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _logStreamName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CloudwatchLoggingOptions s)
-
+instance P.Hashable  (CloudwatchLoggingOptions s)
 instance TF.IsValue  (CloudwatchLoggingOptions s)
 instance TF.IsObject (CloudwatchLoggingOptions s) where
     toObject CloudwatchLoggingOptions'{..} = catMaybes
@@ -3151,15 +3595,20 @@ instance P.HasLogStreamName (CloudwatchLoggingOptions s) (TF.Attr s P.Text) wher
 -- | @cloudwatch_metric@ nested settings.
 data CloudwatchMetric s = CloudwatchMetric'
     { _metricName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _metricNamespace :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _metricTimestamp :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _metricUnit :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _metricValue :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CloudwatchMetric s)
-
+instance P.Hashable  (CloudwatchMetric s)
 instance TF.IsValue  (CloudwatchMetric s)
 instance TF.IsObject (CloudwatchMetric s) where
     toObject CloudwatchMetric'{..} = catMaybes
@@ -3221,15 +3670,20 @@ instance P.HasRoleArn (CloudwatchMetric s) (TF.Attr s P.Text) where
 -- | @cluster_config@ nested settings.
 data ClusterConfig s = ClusterConfig'
     { _dedicatedMasterCount :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _dedicatedMasterEnabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _dedicatedMasterType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _instanceCount :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _instanceType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _zoneAwarenessEnabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ClusterConfig s)
-
+instance P.Hashable  (ClusterConfig s)
 instance TF.IsValue  (ClusterConfig s)
 instance TF.IsObject (ClusterConfig s) where
     toObject ClusterConfig'{..} = catMaybes
@@ -3286,11 +3740,12 @@ instance P.HasZoneAwarenessEnabled (ClusterConfig s) (TF.Attr s P.Bool) where
 -- | @cluster_mode@ nested settings.
 data ClusterMode s = ClusterMode'
     { _numNodeGroups :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _replicasPerNodeGroup :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ClusterMode s)
-
+instance P.Hashable  (ClusterMode s)
 instance TF.IsValue  (ClusterMode s)
 instance TF.IsObject (ClusterMode s) where
     toObject ClusterMode'{..} = catMaybes
@@ -3321,12 +3776,14 @@ instance P.HasReplicasPerNodeGroup (ClusterMode s) (TF.Attr s P.Integer) where
 -- | @cognito_identity_providers@ nested settings.
 data CognitoIdentityProviders s = CognitoIdentityProviders'
     { _clientId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _providerName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _serverSideTokenCheck :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CognitoIdentityProviders s)
-
+instance P.Hashable  (CognitoIdentityProviders s)
 instance TF.IsValue  (CognitoIdentityProviders s)
 instance TF.IsObject (CognitoIdentityProviders s) where
     toObject CognitoIdentityProviders'{..} = catMaybes
@@ -3362,13 +3819,16 @@ instance P.HasServerSideTokenCheck (CognitoIdentityProviders s) (TF.Attr s P.Boo
 -- | @cognito_options@ nested settings.
 data CognitoOptions s = CognitoOptions'
     { _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _identityPoolId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _userPoolId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CognitoOptions s)
-
+instance P.Hashable  (CognitoOptions s)
 instance TF.IsValue  (CognitoOptions s)
 instance TF.IsObject (CognitoOptions s) where
     toObject CognitoOptions'{..} = catMaybes
@@ -3414,12 +3874,14 @@ instance P.HasUserPoolId (CognitoOptions s) (TF.Attr s P.Text) where
 -- | @columns@ nested settings.
 data Columns s = Columns'
     { _comment :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Columns s)
-
+instance P.Hashable  (Columns s)
 instance TF.IsValue  (Columns s)
 instance TF.IsObject (Columns s) where
     toObject Columns'{..} = catMaybes
@@ -3456,11 +3918,12 @@ instance P.HasType' (Columns s) (TF.Attr s P.Text) where
 -- | @command@ nested settings.
 data Command s = Command'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _scriptLocation :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Command s)
-
+instance P.Hashable  (Command s)
 instance TF.IsValue  (Command s)
 instance TF.IsObject (Command s) where
     toObject Command'{..} = catMaybes
@@ -3491,11 +3954,10 @@ instance P.HasScriptLocation (Command s) (TF.Attr s P.Text) where
 data ComputeEnvironmentOrder s = ComputeEnvironmentOrder'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ComputeEnvironmentOrder s)
-
+instance P.Hashable  (ComputeEnvironmentOrder s)
 instance TF.IsValue  (ComputeEnvironmentOrder s)
 instance TF.IsObject (ComputeEnvironmentOrder s) where
-    toObject _ = []
+    toObject ComputeEnvironmentOrder' = []
 
 newComputeEnvironmentOrder
     :: ComputeEnvironmentOrder s
@@ -3511,22 +3973,34 @@ instance s ~ s' => P.HasComputedOrder (TF.Ref s' (ComputeEnvironmentOrder s)) (T
 -- | @compute_resources@ nested settings.
 data ComputeResources s = ComputeResources'
     { _bidPercentage :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _desiredVcpus :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _ec2KeyPair :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _imageId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _instanceRole :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _instanceType :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _maxVcpus :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _minVcpus :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _securityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _spotIamFleetRole :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _subnets :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ComputeResources s)
-
+instance P.Hashable  (ComputeResources s)
 instance TF.IsValue  (ComputeResources s)
 instance TF.IsObject (ComputeResources s) where
     toObject ComputeResources'{..} = catMaybes
@@ -3639,12 +4113,14 @@ instance P.HasType' (ComputeResources s) (TF.Attr s P.Text) where
 -- | @condition@ nested settings.
 data Condition s = Condition'
     { _test :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _variable :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Condition s)
-
+instance P.Hashable  (Condition s)
 instance TF.IsValue  (Condition s)
 instance TF.IsObject (Condition s) where
     toObject Condition'{..} = catMaybes
@@ -3683,12 +4159,14 @@ instance P.HasVariable (Condition s) (TF.Attr s P.Text) where
 -- | @conditions@ nested settings.
 data Conditions s = Conditions'
     { _jobName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _logicalOperator :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _state :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Conditions s)
-
+instance P.Hashable  (Conditions s)
 instance TF.IsValue  (Conditions s)
 instance TF.IsObject (Conditions s) where
     toObject Conditions'{..} = catMaybes
@@ -3727,11 +4205,10 @@ instance P.HasState (Conditions s) (TF.Attr s P.Text) where
 data Configuration s = Configuration'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Configuration s)
-
+instance P.Hashable  (Configuration s)
 instance TF.IsValue  (Configuration s)
 instance TF.IsObject (Configuration s) where
-    toObject _ = []
+    toObject Configuration' = []
 
 newConfiguration
     :: Configuration s
@@ -3747,13 +4224,16 @@ instance s ~ s' => P.HasComputedRevision (TF.Ref s' (Configuration s)) (TF.Attr 
 -- | @connect_settings@ nested settings.
 data ConnectSettings s = ConnectSettings'
     { _customerDnsIps :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _customerUsername :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _subnetIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _vpcId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ConnectSettings s)
-
+instance P.Hashable  (ConnectSettings s)
 instance TF.IsValue  (ConnectSettings s)
 instance TF.IsObject (ConnectSettings s) where
     toObject ConnectSettings'{..} = catMaybes
@@ -3800,11 +4280,12 @@ instance P.HasVpcId (ConnectSettings s) (TF.Attr s P.Text) where
 -- | @constraints@ nested settings.
 data Constraints s = Constraints'
     { _encryptionContextEquals :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _encryptionContextSubset :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Constraints s)
-
+instance P.Hashable  (Constraints s)
 instance TF.IsValue  (Constraints s)
 instance TF.IsObject (Constraints s) where
     toObject Constraints'{..} = catMaybes
@@ -3833,10 +4314,10 @@ instance P.HasEncryptionContextSubset (Constraints s) (TF.Attr s (P.HashMap P.Te
 -- | @content_config@ nested settings.
 data ContentConfig s = ContentConfig'
     { _storageClass :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ContentConfig s)
-
+instance P.Hashable  (ContentConfig s)
 instance TF.IsValue  (ContentConfig s)
 instance TF.IsObject (ContentConfig s) where
     toObject ContentConfig'{..} = catMaybes
@@ -3861,12 +4342,14 @@ instance s ~ s' => P.HasComputedBucket (TF.Ref s' (ContentConfig s)) (TF.Attr s 
 -- | @content_config_permissions@ nested settings.
 data ContentConfigPermissions s = ContentConfigPermissions'
     { _access :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _grantee :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _granteeType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ContentConfigPermissions s)
-
+instance P.Hashable  (ContentConfigPermissions s)
 instance TF.IsValue  (ContentConfigPermissions s)
 instance TF.IsObject (ContentConfigPermissions s) where
     toObject ContentConfigPermissions'{..} = catMaybes
@@ -3902,11 +4385,12 @@ instance P.HasGranteeType (ContentConfigPermissions s) (TF.Attr s P.Text) where
 -- | @cookies@ nested settings.
 data Cookies s = Cookies'
     { _forward :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _whitelistedNames :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Cookies s)
-
+instance P.Hashable  (Cookies s)
 instance TF.IsValue  (Cookies s)
 instance TF.IsObject (Cookies s) where
     toObject Cookies'{..} = catMaybes
@@ -3936,14 +4420,18 @@ instance P.HasWhitelistedNames (Cookies s) (TF.Attr s [TF.Attr s P.Text]) where
 -- | @cors_rule@ nested settings.
 data CorsRule s = CorsRule'
     { _allowedHeaders :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _allowedMethods :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _allowedOrigins :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _exposeHeaders :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _maxAgeSeconds :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CorsRule s)
-
+instance P.Hashable  (CorsRule s)
 instance TF.IsValue  (CorsRule s)
 instance TF.IsObject (CorsRule s) where
     toObject CorsRule'{..} = catMaybes
@@ -3995,20 +4483,30 @@ instance P.HasMaxAgeSeconds (CorsRule s) (TF.Attr s P.Integer) where
 -- | @cost_types@ nested settings.
 data CostTypes s = CostTypes'
     { _includeCredit :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _includeDiscount :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _includeOtherSubscription :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _includeRecurring :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _includeRefund :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _includeSubscription :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _includeSupport :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _includeTax :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _includeUpfront :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _useAmortized :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _useBlended :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CostTypes s)
-
+instance P.Hashable  (CostTypes s)
 instance TF.IsValue  (CostTypes s)
 instance TF.IsObject (CostTypes s) where
     toObject CostTypes'{..} = catMaybes
@@ -4101,11 +4599,10 @@ instance P.HasUseBlended (CostTypes s) (TF.Attr s P.Bool) where
 data CreditSpecification s = CreditSpecification'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CreditSpecification s)
-
+instance P.Hashable  (CreditSpecification s)
 instance TF.IsValue  (CreditSpecification s)
 instance TF.IsObject (CreditSpecification s) where
-    toObject _ = []
+    toObject CreditSpecification' = []
 
 newCreditSpecification
     :: CreditSpecification s
@@ -4119,11 +4616,10 @@ instance s ~ s' => P.HasComputedCpuCredits (TF.Ref s' (CreditSpecification s)) (
 data CrlConfiguration s = CrlConfiguration'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CrlConfiguration s)
-
+instance P.Hashable  (CrlConfiguration s)
 instance TF.IsValue  (CrlConfiguration s)
 instance TF.IsObject (CrlConfiguration s) where
-    toObject _ = []
+    toObject CrlConfiguration' = []
 
 newCrlConfiguration
     :: CrlConfiguration s
@@ -4145,15 +4641,20 @@ instance s ~ s' => P.HasComputedS3BucketName (TF.Ref s' (CrlConfiguration s)) (T
 -- | @custom_cookbooks_source@ nested settings.
 data CustomCookbooksSource s = CustomCookbooksSource'
     { _password :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _revision :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sshKey :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _url :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _username :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CustomCookbooksSource s)
-
+instance P.Hashable  (CustomCookbooksSource s)
 instance TF.IsValue  (CustomCookbooksSource s)
 instance TF.IsObject (CustomCookbooksSource s) where
     toObject CustomCookbooksSource'{..} = catMaybes
@@ -4212,13 +4713,16 @@ instance P.HasUsername (CustomCookbooksSource s) (TF.Attr s P.Text) where
 -- | @custom_error_response@ nested settings.
 data CustomErrorResponse s = CustomErrorResponse'
     { _errorCachingMinTtl :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _errorCode :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _responseCode :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _responsePagePath :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CustomErrorResponse s)
-
+instance P.Hashable  (CustomErrorResponse s)
 instance TF.IsValue  (CustomErrorResponse s)
 instance TF.IsObject (CustomErrorResponse s) where
     toObject CustomErrorResponse'{..} = catMaybes
@@ -4262,11 +4766,12 @@ instance P.HasResponsePagePath (CustomErrorResponse s) (TF.Attr s P.Text) where
 -- | @custom_header@ nested settings.
 data CustomHeader s = CustomHeader'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CustomHeader s)
-
+instance P.Hashable  (CustomHeader s)
 instance TF.IsValue  (CustomHeader s)
 instance TF.IsObject (CustomHeader s) where
     toObject CustomHeader'{..} = catMaybes
@@ -4297,15 +4802,20 @@ instance P.HasValue (CustomHeader s) (TF.Attr s P.Text) where
 -- | @custom_origin_config@ nested settings.
 data CustomOriginConfig s = CustomOriginConfig'
     { _httpPort :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _httpsPort :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _originKeepaliveTimeout :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _originProtocolPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _originReadTimeout :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _originSslProtocols :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CustomOriginConfig s)
-
+instance P.Hashable  (CustomOriginConfig s)
 instance TF.IsValue  (CustomOriginConfig s)
 instance TF.IsObject (CustomOriginConfig s) where
     toObject CustomOriginConfig'{..} = catMaybes
@@ -4366,14 +4876,18 @@ instance P.HasOriginSslProtocols (CustomOriginConfig s) (TF.Attr s [TF.Attr s P.
 -- | @customized_metric_specification@ nested settings.
 data CustomizedMetricSpecification s = CustomizedMetricSpecification'
     { _metricDimension :: TF.Attr s [MetricDimension s]
+    -- ^ Undocumented.
     , _metricName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _namespace :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _statistic :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _unit :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (CustomizedMetricSpecification s)
-
+instance P.Hashable  (CustomizedMetricSpecification s)
 instance TF.IsValue  (CustomizedMetricSpecification s)
 instance TF.IsObject (CustomizedMetricSpecification s) where
     toObject CustomizedMetricSpecification'{..} = catMaybes
@@ -4426,12 +4940,14 @@ instance P.HasUnit (CustomizedMetricSpecification s) (TF.Attr s P.Text) where
 -- | @dag_edge@ nested settings.
 data DagEdge s = DagEdge'
     { _source :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _target :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _targetParameter :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DagEdge s)
-
+instance P.Hashable  (DagEdge s)
 instance TF.IsValue  (DagEdge s)
 instance TF.IsObject (DagEdge s) where
     toObject DagEdge'{..} = catMaybes
@@ -4469,13 +4985,16 @@ instance P.HasTargetParameter (DagEdge s) (TF.Attr s P.Text) where
 -- | @dag_node@ nested settings.
 data DagNode s = DagNode'
     { _args :: TF.Attr s (P.NonEmpty (Args s))
+    -- ^ Undocumented.
     , _id :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _lineNumber :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _nodeType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DagNode s)
-
+instance P.Hashable  (DagNode s)
 instance TF.IsValue  (DagNode s)
 instance TF.IsObject (DagNode s) where
     toObject DagNode'{..} = catMaybes
@@ -4521,13 +5040,16 @@ instance P.HasNodeType (DagNode s) (TF.Attr s P.Text) where
 -- | @data_format_conversion_configuration@ nested settings.
 data DataFormatConversionConfiguration s = DataFormatConversionConfiguration'
     { _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _inputFormatConfiguration :: TF.Attr s [InputFormatConfiguration s]
+    -- ^ Undocumented.
     , _outputFormatConfiguration :: TF.Attr s [OutputFormatConfiguration s]
+    -- ^ Undocumented.
     , _schemaConfiguration :: TF.Attr s [SchemaConfiguration s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DataFormatConversionConfiguration s)
-
+instance P.Hashable  (DataFormatConversionConfiguration s)
 instance TF.IsValue  (DataFormatConversionConfiguration s)
 instance TF.IsObject (DataFormatConversionConfiguration s) where
     toObject DataFormatConversionConfiguration'{..} = catMaybes
@@ -4573,11 +5095,12 @@ instance P.HasSchemaConfiguration (DataFormatConversionConfiguration s) (TF.Attr
 -- | @data_resource@ nested settings.
 data DataResource s = DataResource'
     { _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DataResource s)
-
+instance P.Hashable  (DataResource s)
 instance TF.IsValue  (DataResource s)
 instance TF.IsObject (DataResource s) where
     toObject DataResource'{..} = catMaybes
@@ -4609,11 +5132,10 @@ instance P.HasValues (DataResource s) (TF.Attr s [TF.Attr s P.Text]) where
 data DeadLetterConfig s = DeadLetterConfig'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DeadLetterConfig s)
-
+instance P.Hashable  (DeadLetterConfig s)
 instance TF.IsValue  (DeadLetterConfig s)
 instance TF.IsObject (DeadLetterConfig s) where
-    toObject _ = []
+    toObject DeadLetterConfig' = []
 
 newDeadLetterConfig
     :: DeadLetterConfig s
@@ -4627,11 +5149,10 @@ instance s ~ s' => P.HasComputedTargetArn (TF.Ref s' (DeadLetterConfig s)) (TF.A
 data DefaultAction s = DefaultAction'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DefaultAction s)
-
+instance P.Hashable  (DefaultAction s)
 instance TF.IsValue  (DefaultAction s)
 instance TF.IsObject (DefaultAction s) where
-    toObject _ = []
+    toObject DefaultAction' = []
 
 newDefaultAction
     :: DefaultAction s
@@ -4647,22 +5168,34 @@ instance s ~ s' => P.HasComputedType' (TF.Ref s' (DefaultAction s)) (TF.Attr s P
 -- | @default_cache_behavior@ nested settings.
 data DefaultCacheBehavior s = DefaultCacheBehavior'
     { _allowedMethods :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _cachedMethods :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _compress :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _defaultTtl :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _fieldLevelEncryptionId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _forwardedValues :: TF.Attr s (TF.Attr s (ForwardedValues s))
+    -- ^ Undocumented.
     , _lambdaFunctionAssociation :: TF.Attr s [TF.Attr s (LambdaFunctionAssociation s)]
+    -- ^ Undocumented.
     , _maxTtl :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _minTtl :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _smoothStreaming :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _targetOriginId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _trustedSigners :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _viewerProtocolPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DefaultCacheBehavior s)
-
+instance P.Hashable  (DefaultCacheBehavior s)
 instance TF.IsValue  (DefaultCacheBehavior s)
 instance TF.IsObject (DefaultCacheBehavior s) where
     toObject DefaultCacheBehavior'{..} = catMaybes
@@ -4773,11 +5306,12 @@ instance P.HasViewerProtocolPolicy (DefaultCacheBehavior s) (TF.Attr s P.Text) w
 -- | @deployment_ready_option@ nested settings.
 data DeploymentReadyOption s = DeploymentReadyOption'
     { _actionOnTimeout :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _waitTimeInMinutes :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DeploymentReadyOption s)
-
+instance P.Hashable  (DeploymentReadyOption s)
 instance TF.IsValue  (DeploymentReadyOption s)
 instance TF.IsObject (DeploymentReadyOption s) where
     toObject DeploymentReadyOption'{..} = catMaybes
@@ -4806,11 +5340,12 @@ instance P.HasWaitTimeInMinutes (DeploymentReadyOption s) (TF.Attr s P.Integer) 
 -- | @deployment_style@ nested settings.
 data DeploymentStyle s = DeploymentStyle'
     { _deploymentOption :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _deploymentType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DeploymentStyle s)
-
+instance P.Hashable  (DeploymentStyle s)
 instance TF.IsValue  (DeploymentStyle s)
 instance TF.IsObject (DeploymentStyle s) where
     toObject DeploymentStyle'{..} = catMaybes
@@ -4839,11 +5374,12 @@ instance P.HasDeploymentType (DeploymentStyle s) (TF.Attr s P.Text) where
 -- | @deserializer@ nested settings.
 data Deserializer s = Deserializer'
     { _hiveJsonSerDe :: TF.Attr s [HiveJsonSerDe s]
+    -- ^ Undocumented.
     , _openXJsonSerDe :: TF.Attr s [OpenXJsonSerDe s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Deserializer s)
-
+instance P.Hashable  (Deserializer s)
 instance TF.IsValue  (Deserializer s)
 instance TF.IsObject (Deserializer s) where
     toObject Deserializer'{..} = catMaybes
@@ -4872,10 +5408,10 @@ instance P.HasOpenXJsonSerDe (Deserializer s) (TF.Attr s [OpenXJsonSerDe s]) whe
 -- | @destination@ nested settings.
 data Destination s = Destination'
     { _bucket :: TF.Attr s (P.NonEmpty (Bucket s))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Destination s)
-
+instance P.Hashable  (Destination s)
 instance TF.IsValue  (Destination s)
 instance TF.IsObject (Destination s) where
     toObject Destination'{..} = catMaybes
@@ -4898,11 +5434,12 @@ instance P.HasBucket (Destination s) (TF.Attr s (P.NonEmpty (Bucket s))) where
 -- | @device_configuration@ nested settings.
 data DeviceConfiguration s = DeviceConfiguration'
     { _challengeRequiredOnNewDevice :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _deviceOnlyRememberedOnUserPrompt :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DeviceConfiguration s)
-
+instance P.Hashable  (DeviceConfiguration s)
 instance TF.IsValue  (DeviceConfiguration s)
 instance TF.IsObject (DeviceConfiguration s) where
     toObject DeviceConfiguration'{..} = catMaybes
@@ -4931,11 +5468,12 @@ instance P.HasDeviceOnlyRememberedOnUserPrompt (DeviceConfiguration s) (TF.Attr 
 -- | @dimensions@ nested settings.
 data Dimensions s = Dimensions'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Dimensions s)
-
+instance P.Hashable  (Dimensions s)
 instance TF.IsValue  (Dimensions s)
 instance TF.IsObject (Dimensions s) where
     toObject Dimensions'{..} = catMaybes
@@ -4966,12 +5504,14 @@ instance P.HasValue (Dimensions s) (TF.Attr s P.Text) where
 -- | @dns_config@ nested settings.
 data DnsConfig s = DnsConfig'
     { _dnsRecords :: TF.Attr s [DnsRecords s]
+    -- ^ Undocumented.
     , _namespaceId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _routingPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DnsConfig s)
-
+instance P.Hashable  (DnsConfig s)
 instance TF.IsValue  (DnsConfig s)
 instance TF.IsObject (DnsConfig s) where
     toObject DnsConfig'{..} = catMaybes
@@ -5010,11 +5550,10 @@ instance P.HasRoutingPolicy (DnsConfig s) (TF.Attr s P.Text) where
 data DnsEntry s = DnsEntry'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DnsEntry s)
-
+instance P.Hashable  (DnsEntry s)
 instance TF.IsValue  (DnsEntry s)
 instance TF.IsObject (DnsEntry s) where
-    toObject _ = []
+    toObject DnsEntry' = []
 
 newDnsEntry
     :: DnsEntry s
@@ -5030,11 +5569,12 @@ instance s ~ s' => P.HasComputedHostedZoneId (TF.Ref s' (DnsEntry s)) (TF.Attr s
 -- | @dns_records@ nested settings.
 data DnsRecords s = DnsRecords'
     { _ttl :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DnsRecords s)
-
+instance P.Hashable  (DnsRecords s)
 instance TF.IsValue  (DnsRecords s)
 instance TF.IsObject (DnsRecords s) where
     toObject DnsRecords'{..} = catMaybes
@@ -5066,11 +5606,10 @@ instance P.HasType' (DnsRecords s) (TF.Attr s P.Text) where
 data DomainValidationOptions s = DomainValidationOptions'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DomainValidationOptions s)
-
+instance P.Hashable  (DomainValidationOptions s)
 instance TF.IsValue  (DomainValidationOptions s)
 instance TF.IsObject (DomainValidationOptions s) where
-    toObject _ = []
+    toObject DomainValidationOptions' = []
 
 newDomainValidationOptions
     :: DomainValidationOptions s
@@ -5092,18 +5631,26 @@ instance s ~ s' => P.HasComputedResourceRecordValue (TF.Ref s' (DomainValidation
 -- | @dynamodb@ nested settings.
 data Dynamodb s = Dynamodb'
     { _hashKeyField :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _hashKeyType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _hashKeyValue :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _payloadField :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _rangeKeyField :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _rangeKeyType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _rangeKeyValue :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tableName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Dynamodb s)
-
+instance P.Hashable  (Dynamodb s)
 instance TF.IsValue  (Dynamodb s)
 instance TF.IsObject (Dynamodb s) where
     toObject Dynamodb'{..} = catMaybes
@@ -5187,12 +5734,14 @@ instance P.HasTableName (Dynamodb s) (TF.Attr s P.Text) where
 -- | @dynamodb_config@ nested settings.
 data DynamodbConfig s = DynamodbConfig'
     { _region :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tableName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _useCallerCredentials :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DynamodbConfig s)
-
+instance P.Hashable  (DynamodbConfig s)
 instance TF.IsValue  (DynamodbConfig s)
 instance TF.IsObject (DynamodbConfig s) where
     toObject DynamodbConfig'{..} = catMaybes
@@ -5230,10 +5779,10 @@ instance P.HasUseCallerCredentials (DynamodbConfig s) (TF.Attr s P.Bool) where
 -- | @dynamodb_target@ nested settings.
 data DynamodbTarget s = DynamodbTarget'
     { _path :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (DynamodbTarget s)
-
+instance P.Hashable  (DynamodbTarget s)
 instance TF.IsValue  (DynamodbTarget s)
 instance TF.IsObject (DynamodbTarget s) where
     toObject DynamodbTarget'{..} = catMaybes
@@ -5256,13 +5805,16 @@ instance P.HasPath (DynamodbTarget s) (TF.Attr s P.Text) where
 -- | @ebs@ nested settings.
 data Ebs s = Ebs'
     { _deleteOnTermination :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _encrypted :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _kmsKeyId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _snapshotId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Ebs s)
-
+instance P.Hashable  (Ebs s)
 instance TF.IsValue  (Ebs s)
 instance TF.IsObject (Ebs s) where
     toObject Ebs'{..} = catMaybes
@@ -5315,11 +5867,10 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (Ebs s)) (TF.Attr s P.Text
 data EbsBlockDevice s = EbsBlockDevice'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (EbsBlockDevice s)
-
+instance P.Hashable  (EbsBlockDevice s)
 instance TF.IsValue  (EbsBlockDevice s)
 instance TF.IsObject (EbsBlockDevice s) where
-    toObject _ = []
+    toObject EbsBlockDevice' = []
 
 newEbsBlockDevice
     :: EbsBlockDevice s
@@ -5350,13 +5901,16 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (EbsBlockDevice s)) (TF.At
 -- | @ebs_config@ nested settings.
 data EbsConfig s = EbsConfig'
     { _iops :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _size :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _volumesPerInstance :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (EbsConfig s)
-
+instance P.Hashable  (EbsConfig s)
 instance TF.IsValue  (EbsConfig s)
 instance TF.IsObject (EbsConfig s) where
     toObject EbsConfig'{..} = catMaybes
@@ -5401,12 +5955,14 @@ instance P.HasVolumesPerInstance (EbsConfig s) (TF.Attr s P.Integer) where
 -- | @ebs_options@ nested settings.
 data EbsOptions s = EbsOptions'
     { _ebsEnabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _iops :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _volumeSize :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (EbsOptions s)
-
+instance P.Hashable  (EbsOptions s)
 instance TF.IsValue  (EbsOptions s)
 instance TF.IsObject (EbsOptions s) where
     toObject EbsOptions'{..} = catMaybes
@@ -5446,15 +6002,20 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (EbsOptions s)) (TF.Attr s
 -- | @ebs_volume@ nested settings.
 data EbsVolume s = EbsVolume'
     { _iops :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _mountPoint :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _numberOfDisks :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _raidLevel :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _size :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (EbsVolume s)
-
+instance P.Hashable  (EbsVolume s)
 instance TF.IsValue  (EbsVolume s)
 instance TF.IsObject (EbsVolume s) where
     toObject EbsVolume'{..} = catMaybes
@@ -5514,17 +6075,24 @@ instance P.HasType' (EbsVolume s) (TF.Attr s P.Text) where
 -- | @ec2_attributes@ nested settings.
 data Ec2Attributes s = Ec2Attributes'
     { _additionalMasterSecurityGroups :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _additionalSlaveSecurityGroups :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _emrManagedMasterSecurityGroup :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _emrManagedSlaveSecurityGroup :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _instanceProfile :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _keyName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _serviceAccessSecurityGroup :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _subnetId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Ec2Attributes s)
-
+instance P.Hashable  (Ec2Attributes s)
 instance TF.IsValue  (Ec2Attributes s)
 instance TF.IsObject (Ec2Attributes s) where
     toObject Ec2Attributes'{..} = catMaybes
@@ -5596,13 +6164,16 @@ instance P.HasSubnetId (Ec2Attributes s) (TF.Attr s P.Text) where
 -- | @ec2_inbound_permission@ nested settings.
 data Ec2InboundPermission s = Ec2InboundPermission'
     { _fromPort :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _ipRange :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _protocol :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _toPort :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Ec2InboundPermission s)
-
+instance P.Hashable  (Ec2InboundPermission s)
 instance TF.IsValue  (Ec2InboundPermission s)
 instance TF.IsObject (Ec2InboundPermission s) where
     toObject Ec2InboundPermission'{..} = catMaybes
@@ -5649,12 +6220,14 @@ instance P.HasToPort (Ec2InboundPermission s) (TF.Attr s P.Integer) where
 -- | @ec2_tag_filter@ nested settings.
 data Ec2TagFilter s = Ec2TagFilter'
     { _key :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Ec2TagFilter s)
-
+instance P.Hashable  (Ec2TagFilter s)
 instance TF.IsValue  (Ec2TagFilter s)
 instance TF.IsObject (Ec2TagFilter s) where
     toObject Ec2TagFilter'{..} = catMaybes
@@ -5690,10 +6263,10 @@ instance P.HasValue (Ec2TagFilter s) (TF.Attr s P.Text) where
 -- | @ec2_tag_set@ nested settings.
 data Ec2TagSet s = Ec2TagSet'
     { _ec2TagFilter :: TF.Attr s [TF.Attr s (Ec2TagFilter s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Ec2TagSet s)
-
+instance P.Hashable  (Ec2TagSet s)
 instance TF.IsValue  (Ec2TagSet s)
 instance TF.IsObject (Ec2TagSet s) where
     toObject Ec2TagSet'{..} = catMaybes
@@ -5715,11 +6288,12 @@ instance P.HasEc2TagFilter (Ec2TagSet s) (TF.Attr s [TF.Attr s (Ec2TagFilter s)]
 -- | @ecs_target@ nested settings.
 data EcsTarget s = EcsTarget'
     { _taskCount :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _taskDefinitionArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (EcsTarget s)
-
+instance P.Hashable  (EcsTarget s)
 instance TF.IsValue  (EcsTarget s)
 instance TF.IsObject (EcsTarget s) where
     toObject EcsTarget'{..} = catMaybes
@@ -5749,18 +6323,26 @@ instance P.HasTaskDefinitionArn (EcsTarget s) (TF.Attr s P.Text) where
 -- | @egress@ nested settings.
 data Egress s = Egress'
     { _cidrBlocks :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _description :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _fromPort :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _ipv6CidrBlocks :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _prefixListIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _protocol :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _securityGroups :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _self :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _toPort :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Egress s)
-
+instance P.Hashable  (Egress s)
 instance TF.IsValue  (Egress s)
 instance TF.IsObject (Egress s) where
     toObject Egress'{..} = catMaybes
@@ -5841,10 +6423,10 @@ instance P.HasToPort (Egress s) (TF.Attr s P.Integer) where
 -- | @elastic_gpu_specifications@ nested settings.
 data ElasticGpuSpecifications s = ElasticGpuSpecifications'
     { _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ElasticGpuSpecifications s)
-
+instance P.Hashable  (ElasticGpuSpecifications s)
 instance TF.IsValue  (ElasticGpuSpecifications s)
 instance TF.IsObject (ElasticGpuSpecifications s) where
     toObject ElasticGpuSpecifications'{..} = catMaybes
@@ -5867,14 +6449,18 @@ instance P.HasType' (ElasticGpuSpecifications s) (TF.Attr s P.Text) where
 -- | @elasticsearch@ nested settings.
 data Elasticsearch s = Elasticsearch'
     { _endpoint :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _id :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _index :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Elasticsearch s)
-
+instance P.Hashable  (Elasticsearch s)
 instance TF.IsValue  (Elasticsearch s)
 instance TF.IsObject (Elasticsearch s) where
     toObject Elasticsearch'{..} = catMaybes
@@ -5929,11 +6515,12 @@ instance P.HasType' (Elasticsearch s) (TF.Attr s P.Text) where
 -- | @elasticsearch_config@ nested settings.
 data ElasticsearchConfig s = ElasticsearchConfig'
     { _endpoint :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _region :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ElasticsearchConfig s)
-
+instance P.Hashable  (ElasticsearchConfig s)
 instance TF.IsValue  (ElasticsearchConfig s)
 instance TF.IsObject (ElasticsearchConfig s) where
     toObject ElasticsearchConfig'{..} = catMaybes
@@ -5964,19 +6551,28 @@ instance P.HasRegion (ElasticsearchConfig s) (TF.Attr s P.Text) where
 -- | @elasticsearch_configuration@ nested settings.
 data ElasticsearchConfiguration s = ElasticsearchConfiguration'
     { _bufferingInterval :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _bufferingSize :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _domainArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _indexName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _indexRotationPeriod :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _processingConfiguration :: TF.Attr s [ProcessingConfiguration s]
+    -- ^ Undocumented.
     , _retryDuration :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _s3BackupMode :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _typeName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ElasticsearchConfiguration s)
-
+instance P.Hashable  (ElasticsearchConfiguration s)
 instance TF.IsValue  (ElasticsearchConfiguration s)
 instance TF.IsObject (ElasticsearchConfiguration s) where
     toObject ElasticsearchConfiguration'{..} = catMaybes
@@ -6067,10 +6663,10 @@ instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (Elasticsear
 -- | @elb_info@ nested settings.
 data ElbInfo s = ElbInfo'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ElbInfo s)
-
+instance P.Hashable  (ElbInfo s)
 instance TF.IsValue  (ElbInfo s)
 instance TF.IsObject (ElbInfo s) where
     toObject ElbInfo'{..} = catMaybes
@@ -6092,11 +6688,12 @@ instance P.HasName (ElbInfo s) (TF.Attr s P.Text) where
 -- | @email_configuration@ nested settings.
 data EmailConfiguration s = EmailConfiguration'
     { _replyToEmailAddress :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sourceArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (EmailConfiguration s)
-
+instance P.Hashable  (EmailConfiguration s)
 instance TF.IsValue  (EmailConfiguration s)
 instance TF.IsObject (EmailConfiguration s) where
     toObject EmailConfiguration'{..} = catMaybes
@@ -6125,10 +6722,10 @@ instance P.HasSourceArn (EmailConfiguration s) (TF.Attr s P.Text) where
 -- | @encrypt_at_rest@ nested settings.
 data EncryptAtRest s = EncryptAtRest'
     { _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (EncryptAtRest s)
-
+instance P.Hashable  (EncryptAtRest s)
 instance TF.IsValue  (EncryptAtRest s)
 instance TF.IsObject (EncryptAtRest s) where
     toObject EncryptAtRest'{..} = catMaybes
@@ -6154,11 +6751,12 @@ instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (EncryptAtRest s)) (TF.Attr 
 -- | @encryption@ nested settings.
 data Encryption s = Encryption'
     { _sseKms :: TF.Attr s [SseKms s]
+    -- ^ Undocumented.
     , _sseS3 :: TF.Attr s [SseS3 s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Encryption s)
-
+instance P.Hashable  (Encryption s)
 instance TF.IsValue  (Encryption s)
 instance TF.IsObject (Encryption s) where
     toObject Encryption'{..} = catMaybes
@@ -6187,11 +6785,12 @@ instance P.HasSseS3 (Encryption s) (TF.Attr s [SseS3 s]) where
 -- | @encryption_key@ nested settings.
 data EncryptionKey s = EncryptionKey'
     { _id :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (EncryptionKey s)
-
+instance P.Hashable  (EncryptionKey s)
 instance TF.IsValue  (EncryptionKey s)
 instance TF.IsObject (EncryptionKey s) where
     toObject EncryptionKey'{..} = catMaybes
@@ -6222,10 +6821,10 @@ instance P.HasType' (EncryptionKey s) (TF.Attr s P.Text) where
 -- | @endpoint_configuration@ nested settings.
 data EndpointConfiguration s = EndpointConfiguration'
     { _types :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (EndpointConfiguration s)
-
+instance P.Hashable  (EndpointConfiguration s)
 instance TF.IsValue  (EndpointConfiguration s)
 instance TF.IsObject (EndpointConfiguration s) where
     toObject EndpointConfiguration'{..} = catMaybes
@@ -6248,35 +6847,60 @@ instance P.HasTypes (EndpointConfiguration s) (TF.Attr s (P.NonEmpty (TF.Attr s 
 -- | @endpoints@ nested settings.
 data Endpoints = Endpoints'
     { _acm :: P.Maybe P.Text
+    -- ^ Undocumented.
     , _apigateway :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _autoscaling :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _cloudformation :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _cloudwatch :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _cloudwatchevents :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _cloudwatchlogs :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _devicefarm :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _dynamodb :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`. It's typically used to connect to dynamodb-local.
     , _ec2 :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _ecr :: P.Maybe P.Text
+    -- ^ Undocumented.
     , _ecs :: P.Maybe P.Text
+    -- ^ Undocumented.
     , _efs :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _elb :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _es :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _iam :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _kinesis :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`. It's typically used to connect to kinesalite.
     , _kms :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _lambda :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`
     , _r53 :: P.Maybe P.Text
+    -- ^ Undocumented.
     , _rds :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _s3 :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _sns :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _sqs :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _ssm :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _sts :: P.Maybe P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Endpoints)
-
+instance P.Hashable  (Endpoints)
 instance TF.IsValue  (Endpoints)
 instance TF.IsObject (Endpoints) where
     toObject Endpoints'{..} = catMaybes
@@ -6474,11 +7098,10 @@ instance P.HasSts (Endpoints) (P.Maybe P.Text) where
 data Environment s = Environment'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Environment s)
-
+instance P.Hashable  (Environment s)
 instance TF.IsValue  (Environment s)
 instance TF.IsObject (Environment s) where
-    toObject _ = []
+    toObject Environment' = []
 
 newEnvironment
     :: Environment s
@@ -6491,12 +7114,14 @@ instance s ~ s' => P.HasComputedVariables (TF.Ref s' (Environment s)) (TF.Attr s
 -- | @environment_variable@ nested settings.
 data EnvironmentVariable s = EnvironmentVariable'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (EnvironmentVariable s)
-
+instance P.Hashable  (EnvironmentVariable s)
 instance TF.IsValue  (EnvironmentVariable s)
 instance TF.IsObject (EnvironmentVariable s) where
     toObject EnvironmentVariable'{..} = catMaybes
@@ -6535,11 +7160,10 @@ instance P.HasValue (EnvironmentVariable s) (TF.Attr s P.Text) where
 data EphemeralBlockDevice s = EphemeralBlockDevice'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (EphemeralBlockDevice s)
-
+instance P.Hashable  (EphemeralBlockDevice s)
 instance TF.IsValue  (EphemeralBlockDevice s)
 instance TF.IsObject (EphemeralBlockDevice s) where
-    toObject _ = []
+    toObject EphemeralBlockDevice' = []
 
 newEphemeralBlockDevice
     :: EphemeralBlockDevice s
@@ -6555,12 +7179,14 @@ instance s ~ s' => P.HasComputedVirtualName (TF.Ref s' (EphemeralBlockDevice s))
 -- | @event_selector@ nested settings.
 data EventSelector s = EventSelector'
     { _dataResource :: TF.Attr s [DataResource s]
+    -- ^ Undocumented.
     , _includeManagementEvents :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _readWriteType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (EventSelector s)
-
+instance P.Hashable  (EventSelector s)
 instance TF.IsValue  (EventSelector s)
 instance TF.IsObject (EventSelector s) where
     toObject EventSelector'{..} = catMaybes
@@ -6596,10 +7222,10 @@ instance P.HasReadWriteType (EventSelector s) (TF.Attr s P.Text) where
 -- | @execution_property@ nested settings.
 data ExecutionProperty s = ExecutionProperty'
     { _maxConcurrentRuns :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ExecutionProperty s)
-
+instance P.Hashable  (ExecutionProperty s)
 instance TF.IsValue  (ExecutionProperty s)
 instance TF.IsObject (ExecutionProperty s) where
     toObject ExecutionProperty'{..} = catMaybes
@@ -6621,12 +7247,14 @@ instance P.HasMaxConcurrentRuns (ExecutionProperty s) (TF.Attr s P.Integer) wher
 -- | @expiration@ nested settings.
 data Expiration s = Expiration'
     { _date :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _days :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _expiredObjectDeleteMarker :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Expiration s)
-
+instance P.Hashable  (Expiration s)
 instance TF.IsValue  (Expiration s)
 instance TF.IsObject (Expiration s) where
     toObject Expiration'{..} = catMaybes
@@ -6662,20 +7290,30 @@ instance P.HasExpiredObjectDeleteMarker (Expiration s) (TF.Attr s P.Bool) where
 -- | @extended_s3_configuration@ nested settings.
 data ExtendedS3Configuration s = ExtendedS3Configuration'
     { _bucketArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _bufferInterval :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _bufferSize :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _compressionFormat :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _dataFormatConversionConfiguration :: TF.Attr s [DataFormatConversionConfiguration s]
+    -- ^ Undocumented.
     , _kmsKeyArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _prefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _processingConfiguration :: TF.Attr s [ProcessingConfiguration s]
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _s3BackupConfiguration :: TF.Attr s [S3BackupConfiguration s]
+    -- ^ Undocumented.
     , _s3BackupMode :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ExtendedS3Configuration s)
-
+instance P.Hashable  (ExtendedS3Configuration s)
 instance TF.IsValue  (ExtendedS3Configuration s)
 instance TF.IsObject (ExtendedS3Configuration s) where
     toObject ExtendedS3Configuration'{..} = catMaybes
@@ -6772,10 +7410,10 @@ instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (ExtendedS3C
 -- | @failover_routing_policy@ nested settings.
 data FailoverRoutingPolicy s = FailoverRoutingPolicy'
     { _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (FailoverRoutingPolicy s)
-
+instance P.Hashable  (FailoverRoutingPolicy s)
 instance TF.IsValue  (FailoverRoutingPolicy s)
 instance TF.IsObject (FailoverRoutingPolicy s) where
     toObject FailoverRoutingPolicy'{..} = catMaybes
@@ -6798,11 +7436,12 @@ instance P.HasType' (FailoverRoutingPolicy s) (TF.Attr s P.Text) where
 -- | @field_to_match@ nested settings.
 data FieldToMatch s = FieldToMatch'
     { _data' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (FieldToMatch s)
-
+instance P.Hashable  (FieldToMatch s)
 instance TF.IsValue  (FieldToMatch s)
 instance TF.IsObject (FieldToMatch s) where
     toObject FieldToMatch'{..} = catMaybes
@@ -6832,11 +7471,12 @@ instance P.HasType' (FieldToMatch s) (TF.Attr s P.Text) where
 -- | @filter@ nested settings.
 data Filter s = Filter'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Filter s)
-
+instance P.Hashable  (Filter s)
 instance TF.IsValue  (Filter s)
 instance TF.IsObject (Filter s) where
     toObject Filter'{..} = catMaybes
@@ -6867,11 +7507,12 @@ instance P.HasValues (Filter s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
 -- | @filters@ nested settings.
 data Filters s = Filters'
     { _field :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Filters s)
-
+instance P.Hashable  (Filters s)
 instance TF.IsValue  (Filters s)
 instance TF.IsObject (Filters s) where
     toObject Filters'{..} = catMaybes
@@ -6902,11 +7543,12 @@ instance P.HasValue (Filters s) (TF.Attr s P.Text) where
 -- | @firehose@ nested settings.
 data Firehose s = Firehose'
     { _deliveryStreamName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Firehose s)
-
+instance P.Hashable  (Firehose s)
 instance TF.IsValue  (Firehose s)
 instance TF.IsObject (Firehose s) where
     toObject Firehose'{..} = catMaybes
@@ -6937,13 +7579,16 @@ instance P.HasRoleArn (Firehose s) (TF.Attr s P.Text) where
 -- | @forwarded_values@ nested settings.
 data ForwardedValues s = ForwardedValues'
     { _cookies :: TF.Attr s (TF.Attr s (Cookies s))
+    -- ^ Undocumented.
     , _headers :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _queryString :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _queryStringCacheKeys :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ForwardedValues s)
-
+instance P.Hashable  (ForwardedValues s)
 instance TF.IsValue  (ForwardedValues s)
 instance TF.IsObject (ForwardedValues s) where
     toObject ForwardedValues'{..} = catMaybes
@@ -6988,11 +7633,12 @@ instance P.HasQueryStringCacheKeys (ForwardedValues s) (TF.Attr s [TF.Attr s P.T
 -- | @geo_match_constraint@ nested settings.
 data GeoMatchConstraint s = GeoMatchConstraint'
     { _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (GeoMatchConstraint s)
-
+instance P.Hashable  (GeoMatchConstraint s)
 instance TF.IsValue  (GeoMatchConstraint s)
 instance TF.IsObject (GeoMatchConstraint s) where
     toObject GeoMatchConstraint'{..} = catMaybes
@@ -7023,11 +7669,12 @@ instance P.HasValue (GeoMatchConstraint s) (TF.Attr s P.Text) where
 -- | @geo_restriction@ nested settings.
 data GeoRestriction s = GeoRestriction'
     { _locations :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _restrictionType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (GeoRestriction s)
-
+instance P.Hashable  (GeoRestriction s)
 instance TF.IsValue  (GeoRestriction s)
 instance TF.IsObject (GeoRestriction s) where
     toObject GeoRestriction'{..} = catMaybes
@@ -7057,12 +7704,14 @@ instance P.HasRestrictionType (GeoRestriction s) (TF.Attr s P.Text) where
 -- | @geolocation_routing_policy@ nested settings.
 data GeolocationRoutingPolicy s = GeolocationRoutingPolicy'
     { _continent :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _country :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _subdivision :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (GeolocationRoutingPolicy s)
-
+instance P.Hashable  (GeolocationRoutingPolicy s)
 instance TF.IsValue  (GeolocationRoutingPolicy s)
 instance TF.IsObject (GeolocationRoutingPolicy s) where
     toObject GeolocationRoutingPolicy'{..} = catMaybes
@@ -7098,11 +7747,12 @@ instance P.HasSubdivision (GeolocationRoutingPolicy s) (TF.Attr s P.Text) where
 -- | @global_filter@ nested settings.
 data GlobalFilter s = GlobalFilter'
     { _key :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (GlobalFilter s)
-
+instance P.Hashable  (GlobalFilter s)
 instance TF.IsValue  (GlobalFilter s)
 instance TF.IsObject (GlobalFilter s) where
     toObject GlobalFilter'{..} = catMaybes
@@ -7134,11 +7784,10 @@ instance P.HasValues (GlobalFilter s) (TF.Attr s [TF.Attr s P.Text]) where
 data GlobalSecondaryIndex s = GlobalSecondaryIndex'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (GlobalSecondaryIndex s)
-
+instance P.Hashable  (GlobalSecondaryIndex s)
 instance TF.IsValue  (GlobalSecondaryIndex s)
 instance TF.IsObject (GlobalSecondaryIndex s) where
-    toObject _ = []
+    toObject GlobalSecondaryIndex' = []
 
 newGlobalSecondaryIndex
     :: GlobalSecondaryIndex s
@@ -7169,10 +7818,10 @@ instance s ~ s' => P.HasComputedWriteCapacity (TF.Ref s' (GlobalSecondaryIndex s
 -- | @green_fleet_provisioning_option@ nested settings.
 data GreenFleetProvisioningOption s = GreenFleetProvisioningOption'
     { _action :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (GreenFleetProvisioningOption s)
-
+instance P.Hashable  (GreenFleetProvisioningOption s)
 instance TF.IsValue  (GreenFleetProvisioningOption s)
 instance TF.IsObject (GreenFleetProvisioningOption s) where
     toObject GreenFleetProvisioningOption'{..} = catMaybes
@@ -7194,12 +7843,14 @@ instance P.HasAction (GreenFleetProvisioningOption s) (TF.Attr s P.Text) where
 -- | @grok_classifier@ nested settings.
 data GrokClassifier s = GrokClassifier'
     { _classification :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _customPatterns :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _grokPattern :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (GrokClassifier s)
-
+instance P.Hashable  (GrokClassifier s)
 instance TF.IsValue  (GrokClassifier s)
 instance TF.IsObject (GrokClassifier s) where
     toObject GrokClassifier'{..} = catMaybes
@@ -7237,13 +7888,16 @@ instance P.HasGrokPattern (GrokClassifier s) (TF.Attr s P.Text) where
 -- | @hadoop_jar_step@ nested settings.
 data HadoopJarStep s = HadoopJarStep'
     { _args :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _jar :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _mainClass :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _properties :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (HadoopJarStep s)
-
+instance P.Hashable  (HadoopJarStep s)
 instance TF.IsValue  (HadoopJarStep s)
 instance TF.IsObject (HadoopJarStep s) where
     toObject HadoopJarStep'{..} = catMaybes
@@ -7288,11 +7942,10 @@ instance P.HasProperties (HadoopJarStep s) (TF.Attr s (P.HashMap P.Text (TF.Attr
 data HealthCheck s = HealthCheck'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (HealthCheck s)
-
+instance P.Hashable  (HealthCheck s)
 instance TF.IsValue  (HealthCheck s)
 instance TF.IsObject (HealthCheck s) where
-    toObject _ = []
+    toObject HealthCheck' = []
 
 newHealthCheck
     :: HealthCheck s
@@ -7326,12 +7979,14 @@ instance s ~ s' => P.HasComputedUnhealthyThreshold (TF.Ref s' (HealthCheck s)) (
 -- | @health_check_config@ nested settings.
 data HealthCheckConfig s = HealthCheckConfig'
     { _failureThreshold :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _resourcePath :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (HealthCheckConfig s)
-
+instance P.Hashable  (HealthCheckConfig s)
 instance TF.IsValue  (HealthCheckConfig s)
 instance TF.IsObject (HealthCheckConfig s) where
     toObject HealthCheckConfig'{..} = catMaybes
@@ -7367,10 +8022,10 @@ instance P.HasType' (HealthCheckConfig s) (TF.Attr s P.Text) where
 -- | @health_check_custom_config@ nested settings.
 data HealthCheckCustomConfig s = HealthCheckCustomConfig'
     { _failureThreshold :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (HealthCheckCustomConfig s)
-
+instance P.Hashable  (HealthCheckCustomConfig s)
 instance TF.IsValue  (HealthCheckCustomConfig s)
 instance TF.IsObject (HealthCheckCustomConfig s) where
     toObject HealthCheckCustomConfig'{..} = catMaybes
@@ -7392,10 +8047,10 @@ instance P.HasFailureThreshold (HealthCheckCustomConfig s) (TF.Attr s P.Integer)
 -- | @hive_json_ser_de@ nested settings.
 data HiveJsonSerDe s = HiveJsonSerDe'
     { _timestampFormats :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (HiveJsonSerDe s)
-
+instance P.Hashable  (HiveJsonSerDe s)
 instance TF.IsValue  (HiveJsonSerDe s)
 instance TF.IsObject (HiveJsonSerDe s) where
     toObject HiveJsonSerDe'{..} = catMaybes
@@ -7417,11 +8072,12 @@ instance P.HasTimestampFormats (HiveJsonSerDe s) (TF.Attr s [TF.Attr s P.Text]) 
 -- | @iam_instance_profile@ nested settings.
 data IamInstanceProfile s = IamInstanceProfile'
     { _arn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (IamInstanceProfile s)
-
+instance P.Hashable  (IamInstanceProfile s)
 instance TF.IsValue  (IamInstanceProfile s)
 instance TF.IsObject (IamInstanceProfile s) where
     toObject IamInstanceProfile'{..} = catMaybes
@@ -7450,17 +8106,24 @@ instance P.HasName (IamInstanceProfile s) (TF.Attr s P.Text) where
 -- | @ingress@ nested settings.
 data Ingress s = Ingress'
     { _cidrBlocks :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _description :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _fromPort :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _ipv6CidrBlocks :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _protocol :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _securityGroups :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _self :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _toPort :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Ingress s)
-
+instance P.Hashable  (Ingress s)
 instance TF.IsValue  (Ingress s)
 instance TF.IsObject (Ingress s) where
     toObject Ingress'{..} = catMaybes
@@ -7534,15 +8197,20 @@ instance P.HasToPort (Ingress s) (TF.Attr s P.Integer) where
 -- | @initial_lifecycle_hook@ nested settings.
 data InitialLifecycleHook s = InitialLifecycleHook'
     { _heartbeatTimeout :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _lifecycleTransition :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _notificationMetadata :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _notificationTargetArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (InitialLifecycleHook s)
-
+instance P.Hashable  (InitialLifecycleHook s)
 instance TF.IsValue  (InitialLifecycleHook s)
 instance TF.IsObject (InitialLifecycleHook s) where
     toObject InitialLifecycleHook'{..} = catMaybes
@@ -7604,10 +8272,10 @@ instance s ~ s' => P.HasComputedDefaultResult (TF.Ref s' (InitialLifecycleHook s
 -- | @input_format_configuration@ nested settings.
 data InputFormatConfiguration s = InputFormatConfiguration'
     { _deserializer :: TF.Attr s [Deserializer s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (InputFormatConfiguration s)
-
+instance P.Hashable  (InputFormatConfiguration s)
 instance TF.IsValue  (InputFormatConfiguration s)
 instance TF.IsObject (InputFormatConfiguration s) where
     toObject InputFormatConfiguration'{..} = catMaybes
@@ -7630,11 +8298,12 @@ instance P.HasDeserializer (InputFormatConfiguration s) (TF.Attr s [Deserializer
 -- | @input_transformer@ nested settings.
 data InputTransformer s = InputTransformer'
     { _inputPaths :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _inputTemplate :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (InputTransformer s)
-
+instance P.Hashable  (InputTransformer s)
 instance TF.IsValue  (InputTransformer s)
 instance TF.IsObject (InputTransformer s) where
     toObject InputTransformer'{..} = catMaybes
@@ -7664,16 +8333,22 @@ instance P.HasInputTemplate (InputTransformer s) (TF.Attr s P.Text) where
 -- | @instance_group@ nested settings.
 data InstanceGroup s = InstanceGroup'
     { _autoscalingPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _bidPrice :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _ebsConfig :: TF.Attr s [TF.Attr s (EbsConfig s)]
+    -- ^ Undocumented.
     , _instanceCount :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _instanceRole :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _instanceType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (InstanceGroup s)
-
+instance P.Hashable  (InstanceGroup s)
 instance TF.IsValue  (InstanceGroup s)
 instance TF.IsObject (InstanceGroup s) where
     toObject InstanceGroup'{..} = catMaybes
@@ -7739,11 +8414,12 @@ instance P.HasName (InstanceGroup s) (TF.Attr s P.Text) where
 -- | @instance_market_options@ nested settings.
 data InstanceMarketOptions s = InstanceMarketOptions'
     { _marketType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _spotOptions :: TF.Attr s [SpotOptions s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (InstanceMarketOptions s)
-
+instance P.Hashable  (InstanceMarketOptions s)
 instance TF.IsValue  (InstanceMarketOptions s)
 instance TF.IsObject (InstanceMarketOptions s) where
     toObject InstanceMarketOptions'{..} = catMaybes
@@ -7773,11 +8449,10 @@ instance P.HasSpotOptions (InstanceMarketOptions s) (TF.Attr s [SpotOptions s]) 
 data Instances s = Instances'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Instances s)
-
+instance P.Hashable  (Instances s)
 instance TF.IsValue  (Instances s)
 instance TF.IsObject (Instances s) where
-    toObject _ = []
+    toObject Instances' = []
 
 newInstances
     :: Instances s
@@ -7793,12 +8468,14 @@ instance s ~ s' => P.HasComputedEndpoints (TF.Ref s' (Instances s)) (TF.Attr s [
 -- | @invite_message_template@ nested settings.
 data InviteMessageTemplate s = InviteMessageTemplate'
     { _emailMessage :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _emailSubject :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _smsMessage :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (InviteMessageTemplate s)
-
+instance P.Hashable  (InviteMessageTemplate s)
 instance TF.IsValue  (InviteMessageTemplate s)
 instance TF.IsObject (InviteMessageTemplate s) where
     toObject InviteMessageTemplate'{..} = catMaybes
@@ -7834,11 +8511,12 @@ instance P.HasSmsMessage (InviteMessageTemplate s) (TF.Attr s P.Text) where
 -- | @ip_set_descriptor@ nested settings.
 data IpSetDescriptor s = IpSetDescriptor'
     { _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (IpSetDescriptor s)
-
+instance P.Hashable  (IpSetDescriptor s)
 instance TF.IsValue  (IpSetDescriptor s)
 instance TF.IsObject (IpSetDescriptor s) where
     toObject IpSetDescriptor'{..} = catMaybes
@@ -7869,11 +8547,12 @@ instance P.HasValue (IpSetDescriptor s) (TF.Attr s P.Text) where
 -- | @ip_set_descriptors@ nested settings.
 data IpSetDescriptors s = IpSetDescriptors'
     { _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (IpSetDescriptors s)
-
+instance P.Hashable  (IpSetDescriptors s)
 instance TF.IsValue  (IpSetDescriptors s)
 instance TF.IsObject (IpSetDescriptors s) where
     toObject IpSetDescriptors'{..} = catMaybes
@@ -7904,12 +8583,14 @@ instance P.HasValue (IpSetDescriptors s) (TF.Attr s P.Text) where
 -- | @jdbc_target@ nested settings.
 data JdbcTarget s = JdbcTarget'
     { _connectionName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _exclusions :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _path :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (JdbcTarget s)
-
+instance P.Hashable  (JdbcTarget s)
 instance TF.IsValue  (JdbcTarget s)
 instance TF.IsObject (JdbcTarget s) where
     toObject JdbcTarget'{..} = catMaybes
@@ -7947,10 +8628,10 @@ instance P.HasPath (JdbcTarget s) (TF.Attr s P.Text) where
 -- | @json_classifier@ nested settings.
 data JsonClassifier s = JsonClassifier'
     { _jsonPath :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (JsonClassifier s)
-
+instance P.Hashable  (JsonClassifier s)
 instance TF.IsValue  (JsonClassifier s)
 instance TF.IsObject (JsonClassifier s) where
     toObject JsonClassifier'{..} = catMaybes
@@ -7973,14 +8654,18 @@ instance P.HasJsonPath (JsonClassifier s) (TF.Attr s P.Text) where
 -- | @kerberos_attributes@ nested settings.
 data KerberosAttributes s = KerberosAttributes'
     { _adDomainJoinPassword :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _adDomainJoinUser :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _crossRealmTrustPrincipalPassword :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _kdcAdminPassword :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _realm :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (KerberosAttributes s)
-
+instance P.Hashable  (KerberosAttributes s)
 instance TF.IsValue  (KerberosAttributes s)
 instance TF.IsObject (KerberosAttributes s) where
     toObject KerberosAttributes'{..} = catMaybes
@@ -8032,12 +8717,14 @@ instance P.HasRealm (KerberosAttributes s) (TF.Attr s P.Text) where
 -- | @kinesis@ nested settings.
 data Kinesis s = Kinesis'
     { _partitionKey :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _streamName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Kinesis s)
-
+instance P.Hashable  (Kinesis s)
 instance TF.IsValue  (Kinesis s)
 instance TF.IsObject (Kinesis s) where
     toObject Kinesis'{..} = catMaybes
@@ -8075,11 +8762,12 @@ instance P.HasStreamName (Kinesis s) (TF.Attr s P.Text) where
 -- | @kinesis_destination@ nested settings.
 data KinesisDestination s = KinesisDestination'
     { _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _streamArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (KinesisDestination s)
-
+instance P.Hashable  (KinesisDestination s)
 instance TF.IsValue  (KinesisDestination s)
 instance TF.IsObject (KinesisDestination s) where
     toObject KinesisDestination'{..} = catMaybes
@@ -8110,11 +8798,12 @@ instance P.HasStreamArn (KinesisDestination s) (TF.Attr s P.Text) where
 -- | @kinesis_source_configuration@ nested settings.
 data KinesisSourceConfiguration s = KinesisSourceConfiguration'
     { _kinesisStreamArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (KinesisSourceConfiguration s)
-
+instance P.Hashable  (KinesisSourceConfiguration s)
 instance TF.IsValue  (KinesisSourceConfiguration s)
 instance TF.IsObject (KinesisSourceConfiguration s) where
     toObject KinesisSourceConfiguration'{..} = catMaybes
@@ -8145,10 +8834,10 @@ instance P.HasRoleArn (KinesisSourceConfiguration s) (TF.Attr s P.Text) where
 -- | @kinesis_target@ nested settings.
 data KinesisTarget s = KinesisTarget'
     { _partitionKeyPath :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (KinesisTarget s)
-
+instance P.Hashable  (KinesisTarget s)
 instance TF.IsValue  (KinesisTarget s)
 instance TF.IsObject (KinesisTarget s) where
     toObject KinesisTarget'{..} = catMaybes
@@ -8170,10 +8859,10 @@ instance P.HasPartitionKeyPath (KinesisTarget s) (TF.Attr s P.Text) where
 -- | @lambda@ nested settings.
 data Lambda s = Lambda'
     { _functionArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Lambda s)
-
+instance P.Hashable  (Lambda s)
 instance TF.IsValue  (Lambda s)
 instance TF.IsObject (Lambda s) where
     toObject Lambda'{..} = catMaybes
@@ -8196,12 +8885,14 @@ instance P.HasFunctionArn (Lambda s) (TF.Attr s P.Text) where
 -- | @lambda_action@ nested settings.
 data LambdaAction s = LambdaAction'
     { _functionArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _position :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _topicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LambdaAction s)
-
+instance P.Hashable  (LambdaAction s)
 instance TF.IsValue  (LambdaAction s)
 instance TF.IsObject (LambdaAction s) where
     toObject LambdaAction'{..} = catMaybes
@@ -8242,19 +8933,28 @@ instance s ~ s' => P.HasComputedInvocationType (TF.Ref s' (LambdaAction s)) (TF.
 -- | @lambda_config@ nested settings.
 data LambdaConfig s = LambdaConfig'
     { _createAuthChallenge :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _customMessage :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _defineAuthChallenge :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _postAuthentication :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _postConfirmation :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _preAuthentication :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _preSignUp :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _preTokenGeneration :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _userMigration :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _verifyAuthChallengeResponse :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LambdaConfig s)
-
+instance P.Hashable  (LambdaConfig s)
 instance TF.IsValue  (LambdaConfig s)
 instance TF.IsObject (LambdaConfig s) where
     toObject LambdaConfig'{..} = catMaybes
@@ -8339,13 +9039,16 @@ instance P.HasVerifyAuthChallengeResponse (LambdaConfig s) (TF.Attr s P.Text) wh
 -- | @lambda_function@ nested settings.
 data LambdaFunction s = LambdaFunction'
     { _events :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _filterPrefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _filterSuffix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _lambdaFunctionArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LambdaFunction s)
-
+instance P.Hashable  (LambdaFunction s)
 instance TF.IsValue  (LambdaFunction s)
 instance TF.IsObject (LambdaFunction s) where
     toObject LambdaFunction'{..} = catMaybes
@@ -8392,11 +9095,12 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (LambdaFunction s)) (TF.Attr s P.T
 -- | @lambda_function_association@ nested settings.
 data LambdaFunctionAssociation s = LambdaFunctionAssociation'
     { _eventType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _lambdaArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LambdaFunctionAssociation s)
-
+instance P.Hashable  (LambdaFunctionAssociation s)
 instance TF.IsValue  (LambdaFunctionAssociation s)
 instance TF.IsObject (LambdaFunctionAssociation s) where
     toObject LambdaFunctionAssociation'{..} = catMaybes
@@ -8427,10 +9131,10 @@ instance P.HasLambdaArn (LambdaFunctionAssociation s) (TF.Attr s P.Text) where
 -- | @latency_routing_policy@ nested settings.
 data LatencyRoutingPolicy s = LatencyRoutingPolicy'
     { _region :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LatencyRoutingPolicy s)
-
+instance P.Hashable  (LatencyRoutingPolicy s)
 instance TF.IsValue  (LatencyRoutingPolicy s)
 instance TF.IsObject (LatencyRoutingPolicy s) where
     toObject LatencyRoutingPolicy'{..} = catMaybes
@@ -8453,21 +9157,32 @@ instance P.HasRegion (LatencyRoutingPolicy s) (TF.Attr s P.Text) where
 -- | @launch_specification@ nested settings.
 data LaunchSpecification s = LaunchSpecification'
     { _ami :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _associatePublicIpAddress :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _ebsOptimized :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _iamInstanceProfile :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _iamInstanceProfileArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _instanceType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _monitoring :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _placementTenancy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _spotPrice :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _userData :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _weightedCapacity :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LaunchSpecification s)
-
+instance P.Hashable  (LaunchSpecification s)
 instance TF.IsValue  (LaunchSpecification s)
 instance TF.IsObject (LaunchSpecification s) where
     toObject LaunchSpecification'{..} = catMaybes
@@ -8592,10 +9307,10 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (LaunchSpecificat
 -- | @launch_template@ nested settings.
 data LaunchTemplate s = LaunchTemplate'
     { _version :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LaunchTemplate s)
-
+instance P.Hashable  (LaunchTemplate s)
 instance TF.IsValue  (LaunchTemplate s)
 instance TF.IsObject (LaunchTemplate s) where
     toObject LaunchTemplate'{..} = catMaybes
@@ -8623,17 +9338,24 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (LaunchTemplate s)) (TF.Attr s P
 -- | @lifecycle_rule@ nested settings.
 data LifecycleRule s = LifecycleRule'
     { _abortIncompleteMultipartUploadDays :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _expiration :: TF.Attr s [TF.Attr s (Expiration s)]
+    -- ^ Undocumented.
     , _noncurrentVersionExpiration :: TF.Attr s [TF.Attr s (NoncurrentVersionExpiration s)]
+    -- ^ Undocumented.
     , _noncurrentVersionTransition :: TF.Attr s [TF.Attr s (NoncurrentVersionTransition s)]
+    -- ^ Undocumented.
     , _prefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _transition :: TF.Attr s [TF.Attr s (Transition s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LifecycleRule s)
-
+instance P.Hashable  (LifecycleRule s)
 instance TF.IsValue  (LifecycleRule s)
 instance TF.IsObject (LifecycleRule s) where
     toObject LifecycleRule'{..} = catMaybes
@@ -8709,11 +9431,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (LifecycleRule s)) (TF.Attr s P.Te
 data Listener s = Listener'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Listener s)
-
+instance P.Hashable  (Listener s)
 instance TF.IsValue  (Listener s)
 instance TF.IsObject (Listener s) where
-    toObject _ = []
+    toObject Listener' = []
 
 newListener
     :: Listener s
@@ -8738,13 +9459,16 @@ instance s ~ s' => P.HasComputedSslCertificateId (TF.Ref s' (Listener s)) (TF.At
 -- | @load_balancer@ nested settings.
 data LoadBalancer s = LoadBalancer'
     { _containerName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _containerPort :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _elbName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _targetGroupArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LoadBalancer s)
-
+instance P.Hashable  (LoadBalancer s)
 instance TF.IsValue  (LoadBalancer s)
 instance TF.IsObject (LoadBalancer s) where
     toObject LoadBalancer'{..} = catMaybes
@@ -8789,11 +9513,12 @@ instance P.HasTargetGroupArn (LoadBalancer s) (TF.Attr s P.Text) where
 -- | @load_balancer_info@ nested settings.
 data LoadBalancerInfo s = LoadBalancerInfo'
     { _elbInfo :: TF.Attr s [TF.Attr s (ElbInfo s)]
+    -- ^ Undocumented.
     , _targetGroupInfo :: TF.Attr s [TF.Attr s (TargetGroupInfo s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LoadBalancerInfo s)
-
+instance P.Hashable  (LoadBalancerInfo s)
 instance TF.IsValue  (LoadBalancerInfo s)
 instance TF.IsObject (LoadBalancerInfo s) where
     toObject LoadBalancerInfo'{..} = catMaybes
@@ -8823,11 +9548,10 @@ instance P.HasTargetGroupInfo (LoadBalancerInfo s) (TF.Attr s [TF.Attr s (Target
 data LocalSecondaryIndex s = LocalSecondaryIndex'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LocalSecondaryIndex s)
-
+instance P.Hashable  (LocalSecondaryIndex s)
 instance TF.IsValue  (LocalSecondaryIndex s)
 instance TF.IsObject (LocalSecondaryIndex s) where
-    toObject _ = []
+    toObject LocalSecondaryIndex' = []
 
 newLocalSecondaryIndex
     :: LocalSecondaryIndex s
@@ -8849,14 +9573,18 @@ instance s ~ s' => P.HasComputedRangeKey (TF.Ref s' (LocalSecondaryIndex s)) (TF
 -- | @location@ nested settings.
 data Location s = Location'
     { _method :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _path :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _statusCode :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Location s)
-
+instance P.Hashable  (Location s)
 instance TF.IsValue  (Location s)
 instance TF.IsObject (Location s) where
     toObject Location'{..} = catMaybes
@@ -8907,12 +9635,14 @@ instance P.HasType' (Location s) (TF.Attr s P.Text) where
 -- | @log_publishing_options@ nested settings.
 data LogPublishingOptions s = LogPublishingOptions'
     { _cloudwatchLogGroupArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _logType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LogPublishingOptions s)
-
+instance P.Hashable  (LogPublishingOptions s)
 instance TF.IsValue  (LogPublishingOptions s)
 instance TF.IsObject (LogPublishingOptions s) where
     toObject LogPublishingOptions'{..} = catMaybes
@@ -8950,11 +9680,12 @@ instance P.HasLogType (LogPublishingOptions s) (TF.Attr s P.Text) where
 -- | @logging@ nested settings.
 data Logging s = Logging'
     { _targetBucket :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _targetPrefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Logging s)
-
+instance P.Hashable  (Logging s)
 instance TF.IsValue  (Logging s)
 instance TF.IsObject (Logging s) where
     toObject Logging'{..} = catMaybes
@@ -8984,12 +9715,14 @@ instance P.HasTargetPrefix (Logging s) (TF.Attr s P.Text) where
 -- | @logging_config@ nested settings.
 data LoggingConfig s = LoggingConfig'
     { _bucket :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _includeCookies :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _prefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LoggingConfig s)
-
+instance P.Hashable  (LoggingConfig s)
 instance TF.IsValue  (LoggingConfig s)
 instance TF.IsObject (LoggingConfig s) where
     toObject LoggingConfig'{..} = catMaybes
@@ -9026,12 +9759,14 @@ instance P.HasPrefix (LoggingConfig s) (TF.Attr s P.Text) where
 -- | @logging_info@ nested settings.
 data LoggingInfo s = LoggingInfo'
     { _s3BucketName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _s3BucketPrefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _s3Region :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (LoggingInfo s)
-
+instance P.Hashable  (LoggingInfo s)
 instance TF.IsValue  (LoggingInfo s)
 instance TF.IsObject (LoggingInfo s) where
     toObject LoggingInfo'{..} = catMaybes
@@ -9070,11 +9805,10 @@ instance P.HasS3Region (LoggingInfo s) (TF.Attr s P.Text) where
 data MaintenanceWindowStartTime s = MaintenanceWindowStartTime'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (MaintenanceWindowStartTime s)
-
+instance P.Hashable  (MaintenanceWindowStartTime s)
 instance TF.IsValue  (MaintenanceWindowStartTime s)
 instance TF.IsObject (MaintenanceWindowStartTime s) where
-    toObject _ = []
+    toObject MaintenanceWindowStartTime' = []
 
 newMaintenanceWindowStartTime
     :: MaintenanceWindowStartTime s
@@ -9093,13 +9827,16 @@ instance s ~ s' => P.HasComputedTimeZone (TF.Ref s' (MaintenanceWindowStartTime 
 -- | @mapping_rule@ nested settings.
 data MappingRule s = MappingRule'
     { _claim :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _matchType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (MappingRule s)
-
+instance P.Hashable  (MappingRule s)
 instance TF.IsValue  (MappingRule s)
 instance TF.IsObject (MappingRule s) where
     toObject MappingRule'{..} = catMaybes
@@ -9146,11 +9883,12 @@ instance P.HasValue (MappingRule s) (TF.Attr s P.Text) where
 -- | @metric_dimension@ nested settings.
 data MetricDimension s = MetricDimension'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (MetricDimension s)
-
+instance P.Hashable  (MetricDimension s)
 instance TF.IsValue  (MetricDimension s)
 instance TF.IsObject (MetricDimension s) where
     toObject MetricDimension'{..} = catMaybes
@@ -9181,13 +9919,16 @@ instance P.HasValue (MetricDimension s) (TF.Attr s P.Text) where
 -- | @metric_transformation@ nested settings.
 data MetricTransformation s = MetricTransformation'
     { _defaultValue :: TF.Attr s P.Double
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _namespace :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (MetricTransformation s)
-
+instance P.Hashable  (MetricTransformation s)
 instance TF.IsValue  (MetricTransformation s)
 instance TF.IsObject (MetricTransformation s) where
     toObject MetricTransformation'{..} = catMaybes
@@ -9233,11 +9974,12 @@ instance P.HasValue (MetricTransformation s) (TF.Attr s P.Text) where
 -- | @minimum_healthy_hosts@ nested settings.
 data MinimumHealthyHosts s = MinimumHealthyHosts'
     { _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (MinimumHealthyHosts s)
-
+instance P.Hashable  (MinimumHealthyHosts s)
 instance TF.IsValue  (MinimumHealthyHosts s)
 instance TF.IsObject (MinimumHealthyHosts s) where
     toObject MinimumHealthyHosts'{..} = catMaybes
@@ -9267,15 +10009,20 @@ instance P.HasValue (MinimumHealthyHosts s) (TF.Attr s P.Integer) where
 -- | @mongodb_settings@ nested settings.
 data MongodbSettings s = MongodbSettings'
     { _authMechanism :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _authSource :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _authType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _docsToInvestigate :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _extractDocId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _nestingLevel :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (MongodbSettings s)
-
+instance P.Hashable  (MongodbSettings s)
 instance TF.IsValue  (MongodbSettings s)
 instance TF.IsObject (MongodbSettings s) where
     toObject MongodbSettings'{..} = catMaybes
@@ -9332,10 +10079,10 @@ instance P.HasNestingLevel (MongodbSettings s) (TF.Attr s P.Text) where
 -- | @monitoring@ nested settings.
 data Monitoring s = Monitoring'
     { _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Monitoring s)
-
+instance P.Hashable  (Monitoring s)
 instance TF.IsValue  (Monitoring s)
 instance TF.IsObject (Monitoring s) where
     toObject Monitoring'{..} = catMaybes
@@ -9357,12 +10104,14 @@ instance P.HasEnabled (Monitoring s) (TF.Attr s P.Bool) where
 -- | @network_configuration@ nested settings.
 data NetworkConfiguration s = NetworkConfiguration'
     { _assignPublicIp :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _securityGroups :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _subnets :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (NetworkConfiguration s)
-
+instance P.Hashable  (NetworkConfiguration s)
 instance TF.IsValue  (NetworkConfiguration s)
 instance TF.IsObject (NetworkConfiguration s) where
     toObject NetworkConfiguration'{..} = catMaybes
@@ -9399,12 +10148,14 @@ instance P.HasSubnets (NetworkConfiguration s) (TF.Attr s [TF.Attr s (TF.Attr s 
 -- | @network_interface@ nested settings.
 data NetworkInterface s = NetworkInterface'
     { _deleteOnTermination :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _deviceIndex :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _networkInterfaceId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (NetworkInterface s)
-
+instance P.Hashable  (NetworkInterface s)
 instance TF.IsValue  (NetworkInterface s)
 instance TF.IsObject (NetworkInterface s) where
     toObject NetworkInterface'{..} = catMaybes
@@ -9442,19 +10193,28 @@ instance P.HasNetworkInterfaceId (NetworkInterface s) (TF.Attr s P.Text) where
 -- | @network_interfaces@ nested settings.
 data NetworkInterfaces s = NetworkInterfaces'
     { _associatePublicIpAddress :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _deleteOnTermination :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _description :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _deviceIndex :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _ipv4Addresses :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _ipv6Addresses :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _networkInterfaceId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _privateIpAddress :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _securityGroups :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _subnetId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (NetworkInterfaces s)
-
+instance P.Hashable  (NetworkInterfaces s)
 instance TF.IsValue  (NetworkInterfaces s)
 instance TF.IsObject (NetworkInterfaces s) where
     toObject NetworkInterfaces'{..} = catMaybes
@@ -9545,13 +10305,16 @@ instance s ~ s' => P.HasComputedIpv6AddressCount (TF.Ref s' (NetworkInterfaces s
 -- | @nfs_file_share_defaults@ nested settings.
 data NfsFileShareDefaults s = NfsFileShareDefaults'
     { _directoryMode :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _fileMode :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _groupId :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _ownerId :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (NfsFileShareDefaults s)
-
+instance P.Hashable  (NfsFileShareDefaults s)
 instance TF.IsValue  (NfsFileShareDefaults s)
 instance TF.IsObject (NfsFileShareDefaults s) where
     toObject NfsFileShareDefaults'{..} = catMaybes
@@ -9595,11 +10358,10 @@ instance P.HasOwnerId (NfsFileShareDefaults s) (TF.Attr s P.Integer) where
 data Nodes s = Nodes'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Nodes s)
-
+instance P.Hashable  (Nodes s)
 instance TF.IsValue  (Nodes s)
 instance TF.IsObject (Nodes s) where
-    toObject _ = []
+    toObject Nodes' = []
 
 newNodes
     :: Nodes s
@@ -9621,10 +10383,10 @@ instance s ~ s' => P.HasComputedPort (TF.Ref s' (Nodes s)) (TF.Attr s P.Integer)
 -- | @noncurrent_version_expiration@ nested settings.
 data NoncurrentVersionExpiration s = NoncurrentVersionExpiration'
     { _days :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (NoncurrentVersionExpiration s)
-
+instance P.Hashable  (NoncurrentVersionExpiration s)
 instance TF.IsValue  (NoncurrentVersionExpiration s)
 instance TF.IsObject (NoncurrentVersionExpiration s) where
     toObject NoncurrentVersionExpiration'{..} = catMaybes
@@ -9646,11 +10408,12 @@ instance P.HasDays (NoncurrentVersionExpiration s) (TF.Attr s P.Integer) where
 -- | @noncurrent_version_transition@ nested settings.
 data NoncurrentVersionTransition s = NoncurrentVersionTransition'
     { _days :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _storageClass :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (NoncurrentVersionTransition s)
-
+instance P.Hashable  (NoncurrentVersionTransition s)
 instance TF.IsValue  (NoncurrentVersionTransition s)
 instance TF.IsObject (NoncurrentVersionTransition s) where
     toObject NoncurrentVersionTransition'{..} = catMaybes
@@ -9680,11 +10443,12 @@ instance P.HasStorageClass (NoncurrentVersionTransition s) (TF.Attr s P.Text) wh
 -- | @not_principals@ nested settings.
 data NotPrincipals s = NotPrincipals'
     { _identifiers :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (NotPrincipals s)
-
+instance P.Hashable  (NotPrincipals s)
 instance TF.IsValue  (NotPrincipals s)
 instance TF.IsObject (NotPrincipals s) where
     toObject NotPrincipals'{..} = catMaybes
@@ -9715,11 +10479,12 @@ instance P.HasType' (NotPrincipals s) (TF.Attr s P.Text) where
 -- | @notification@ nested settings.
 data Notification s = Notification'
     { _events :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _snsTopic :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Notification s)
-
+instance P.Hashable  (Notification s)
 instance TF.IsValue  (Notification s)
 instance TF.IsObject (Notification s) where
     toObject Notification'{..} = catMaybes
@@ -9750,13 +10515,16 @@ instance P.HasSnsTopic (Notification s) (TF.Attr s P.Text) where
 -- | @notifications@ nested settings.
 data Notifications s = Notifications'
     { _completed :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _error :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _progressing :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _warning :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Notifications s)
-
+instance P.Hashable  (Notifications s)
 instance TF.IsValue  (Notifications s)
 instance TF.IsObject (Notifications s) where
     toObject Notifications'{..} = catMaybes
@@ -9799,11 +10567,12 @@ instance P.HasWarning (Notifications s) (TF.Attr s P.Text) where
 -- | @number_attribute_constraints@ nested settings.
 data NumberAttributeConstraints s = NumberAttributeConstraints'
     { _maxValue :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _minValue :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (NumberAttributeConstraints s)
-
+instance P.Hashable  (NumberAttributeConstraints s)
 instance TF.IsValue  (NumberAttributeConstraints s)
 instance TF.IsObject (NumberAttributeConstraints s) where
     toObject NumberAttributeConstraints'{..} = catMaybes
@@ -9832,12 +10601,14 @@ instance P.HasMinValue (NumberAttributeConstraints s) (TF.Attr s P.Text) where
 -- | @on_premises_instance_tag_filter@ nested settings.
 data OnPremisesInstanceTagFilter s = OnPremisesInstanceTagFilter'
     { _key :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (OnPremisesInstanceTagFilter s)
-
+instance P.Hashable  (OnPremisesInstanceTagFilter s)
 instance TF.IsValue  (OnPremisesInstanceTagFilter s)
 instance TF.IsObject (OnPremisesInstanceTagFilter s) where
     toObject OnPremisesInstanceTagFilter'{..} = catMaybes
@@ -9873,12 +10644,14 @@ instance P.HasValue (OnPremisesInstanceTagFilter s) (TF.Attr s P.Text) where
 -- | @open_x_json_ser_de@ nested settings.
 data OpenXJsonSerDe s = OpenXJsonSerDe'
     { _caseInsensitive :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _columnToJsonKeyMappings :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _convertDotsInJsonKeysToUnderscores :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (OpenXJsonSerDe s)
-
+instance P.Hashable  (OpenXJsonSerDe s)
 instance TF.IsValue  (OpenXJsonSerDe s)
 instance TF.IsObject (OpenXJsonSerDe s) where
     toObject OpenXJsonSerDe'{..} = catMaybes
@@ -9914,15 +10687,20 @@ instance P.HasConvertDotsInJsonKeysToUnderscores (OpenXJsonSerDe s) (TF.Attr s P
 -- | @option@ nested settings.
 data Option s = Option'
     { _dbSecurityGroupMemberships :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _optionName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _optionSettings :: TF.Attr s [TF.Attr s (OptionSettings s)]
+    -- ^ Undocumented.
     , _port :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _version :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpcSecurityGroupMemberships :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Option s)
-
+instance P.Hashable  (Option s)
 instance TF.IsValue  (Option s)
 instance TF.IsObject (Option s) where
     toObject Option'{..} = catMaybes
@@ -9980,11 +10758,12 @@ instance P.HasVpcSecurityGroupMemberships (Option s) (TF.Attr s [TF.Attr s (TF.A
 -- | @option_settings@ nested settings.
 data OptionSettings s = OptionSettings'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (OptionSettings s)
-
+instance P.Hashable  (OptionSettings s)
 instance TF.IsValue  (OptionSettings s)
 instance TF.IsObject (OptionSettings s) where
     toObject OptionSettings'{..} = catMaybes
@@ -10015,19 +10794,28 @@ instance P.HasValue (OptionSettings s) (TF.Attr s P.Text) where
 -- | @orc_ser_de@ nested settings.
 data OrcSerDe s = OrcSerDe'
     { _blockSizeBytes :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _bloomFilterColumns :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _bloomFilterFalsePositiveProbability :: TF.Attr s P.Double
+    -- ^ Undocumented.
     , _compression :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _dictionaryKeyThreshold :: TF.Attr s P.Double
+    -- ^ Undocumented.
     , _enablePadding :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _formatVersion :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _paddingTolerance :: TF.Attr s P.Double
+    -- ^ Undocumented.
     , _rowIndexStride :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _stripeSizeBytes :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (OrcSerDe s)
-
+instance P.Hashable  (OrcSerDe s)
 instance TF.IsValue  (OrcSerDe s)
 instance TF.IsObject (OrcSerDe s) where
     toObject OrcSerDe'{..} = catMaybes
@@ -10112,23 +10900,36 @@ instance P.HasStripeSizeBytes (OrcSerDe s) (TF.Attr s P.Integer) where
 -- | @ordered_cache_behavior@ nested settings.
 data OrderedCacheBehavior s = OrderedCacheBehavior'
     { _allowedMethods :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _cachedMethods :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _compress :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _defaultTtl :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _fieldLevelEncryptionId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _forwardedValues :: TF.Attr s (TF.Attr s (ForwardedValues s))
+    -- ^ Undocumented.
     , _lambdaFunctionAssociation :: TF.Attr s [TF.Attr s (LambdaFunctionAssociation s)]
+    -- ^ Undocumented.
     , _maxTtl :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _minTtl :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _pathPattern :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _smoothStreaming :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _targetOriginId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _trustedSigners :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _viewerProtocolPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (OrderedCacheBehavior s)
-
+instance P.Hashable  (OrderedCacheBehavior s)
 instance TF.IsValue  (OrderedCacheBehavior s)
 instance TF.IsObject (OrderedCacheBehavior s) where
     toObject OrderedCacheBehavior'{..} = catMaybes
@@ -10247,11 +11048,12 @@ instance P.HasViewerProtocolPolicy (OrderedCacheBehavior s) (TF.Attr s P.Text) w
 -- | @ordered_placement_strategy@ nested settings.
 data OrderedPlacementStrategy s = OrderedPlacementStrategy'
     { _field :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (OrderedPlacementStrategy s)
-
+instance P.Hashable  (OrderedPlacementStrategy s)
 instance TF.IsValue  (OrderedPlacementStrategy s)
 instance TF.IsObject (OrderedPlacementStrategy s) where
     toObject OrderedPlacementStrategy'{..} = catMaybes
@@ -10281,12 +11083,14 @@ instance P.HasType' (OrderedPlacementStrategy s) (TF.Attr s P.Text) where
 -- | @organization_aggregation_source@ nested settings.
 data OrganizationAggregationSource s = OrganizationAggregationSource'
     { _allRegions :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _regions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (OrganizationAggregationSource s)
-
+instance P.Hashable  (OrganizationAggregationSource s)
 instance TF.IsValue  (OrganizationAggregationSource s)
 instance TF.IsObject (OrganizationAggregationSource s) where
     toObject OrganizationAggregationSource'{..} = catMaybes
@@ -10323,15 +11127,20 @@ instance P.HasRoleArn (OrganizationAggregationSource s) (TF.Attr s P.Text) where
 -- | @origin@ nested settings.
 data Origin s = Origin'
     { _customHeader :: TF.Attr s [TF.Attr s (CustomHeader s)]
+    -- ^ Undocumented.
     , _customOriginConfig :: TF.Attr s (TF.Attr s (CustomOriginConfig s))
+    -- ^ Undocumented.
     , _domainName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _originId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _originPath :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _s3OriginConfig :: TF.Attr s (TF.Attr s (S3OriginConfig s))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Origin s)
-
+instance P.Hashable  (Origin s)
 instance TF.IsValue  (Origin s)
 instance TF.IsObject (Origin s) where
     toObject Origin'{..} = catMaybes
@@ -10390,10 +11199,10 @@ instance P.HasS3OriginConfig (Origin s) (TF.Attr s (TF.Attr s (S3OriginConfig s)
 -- | @output_format_configuration@ nested settings.
 data OutputFormatConfiguration s = OutputFormatConfiguration'
     { _serializer :: TF.Attr s [Serializer s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (OutputFormatConfiguration s)
-
+instance P.Hashable  (OutputFormatConfiguration s)
 instance TF.IsValue  (OutputFormatConfiguration s)
 instance TF.IsObject (OutputFormatConfiguration s) where
     toObject OutputFormatConfiguration'{..} = catMaybes
@@ -10416,11 +11225,12 @@ instance P.HasSerializer (OutputFormatConfiguration s) (TF.Attr s [Serializer s]
 -- | @output_location@ nested settings.
 data OutputLocation s = OutputLocation'
     { _s3BucketName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _s3KeyPrefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (OutputLocation s)
-
+instance P.Hashable  (OutputLocation s)
 instance TF.IsValue  (OutputLocation s)
 instance TF.IsObject (OutputLocation s) where
     toObject OutputLocation'{..} = catMaybes
@@ -10450,10 +11260,10 @@ instance P.HasS3KeyPrefix (OutputLocation s) (TF.Attr s P.Text) where
 -- | @override_action@ nested settings.
 data OverrideAction s = OverrideAction'
     { _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (OverrideAction s)
-
+instance P.Hashable  (OverrideAction s)
 instance TF.IsValue  (OverrideAction s)
 instance TF.IsObject (OverrideAction s) where
     toObject OverrideAction'{..} = catMaybes
@@ -10476,13 +11286,16 @@ instance P.HasType' (OverrideAction s) (TF.Attr s P.Text) where
 -- | @parameter@ nested settings.
 data Parameter s = Parameter'
     { _defaultValue :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _description :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Parameter s)
-
+instance P.Hashable  (Parameter s)
 instance TF.IsValue  (Parameter s)
 instance TF.IsObject (Parameter s) where
     toObject Parameter'{..} = catMaybes
@@ -10525,11 +11338,12 @@ instance P.HasType' (Parameter s) (TF.Attr s P.Text) where
 -- | @parameters@ nested settings.
 data Parameters s = Parameters'
     { _parameterName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _parameterValue :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Parameters s)
-
+instance P.Hashable  (Parameters s)
 instance TF.IsValue  (Parameters s)
 instance TF.IsObject (Parameters s) where
     toObject Parameters'{..} = catMaybes
@@ -10560,15 +11374,20 @@ instance P.HasParameterValue (Parameters s) (TF.Attr s P.Text) where
 -- | @parquet_ser_de@ nested settings.
 data ParquetSerDe s = ParquetSerDe'
     { _blockSizeBytes :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _compression :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _enableDictionaryCompression :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _maxPaddingBytes :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _pageSizeBytes :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _writerVersion :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ParquetSerDe s)
-
+instance P.Hashable  (ParquetSerDe s)
 instance TF.IsValue  (ParquetSerDe s)
 instance TF.IsObject (ParquetSerDe s) where
     toObject ParquetSerDe'{..} = catMaybes
@@ -10625,12 +11444,14 @@ instance P.HasWriterVersion (ParquetSerDe s) (TF.Attr s P.Text) where
 -- | @partition_keys@ nested settings.
 data PartitionKeys s = PartitionKeys'
     { _comment :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (PartitionKeys s)
-
+instance P.Hashable  (PartitionKeys s)
 instance TF.IsValue  (PartitionKeys s)
 instance TF.IsObject (PartitionKeys s) where
     toObject PartitionKeys'{..} = catMaybes
@@ -10667,14 +11488,18 @@ instance P.HasType' (PartitionKeys s) (TF.Attr s P.Text) where
 -- | @password_policy@ nested settings.
 data PasswordPolicy s = PasswordPolicy'
     { _minimumLength :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _requireLowercase :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _requireNumbers :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _requireSymbols :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _requireUppercase :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (PasswordPolicy s)
-
+instance P.Hashable  (PasswordPolicy s)
 instance TF.IsValue  (PasswordPolicy s)
 instance TF.IsObject (PasswordPolicy s) where
     toObject PasswordPolicy'{..} = catMaybes
@@ -10724,11 +11549,12 @@ instance P.HasRequireUppercase (PasswordPolicy s) (TF.Attr s P.Bool) where
 -- | @patch_filter@ nested settings.
 data PatchFilter s = PatchFilter'
     { _key :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (PatchFilter s)
-
+instance P.Hashable  (PatchFilter s)
 instance TF.IsValue  (PatchFilter s)
 instance TF.IsObject (PatchFilter s) where
     toObject PatchFilter'{..} = catMaybes
@@ -10759,11 +11585,12 @@ instance P.HasValues (PatchFilter s) (TF.Attr s [TF.Attr s P.Text]) where
 -- | @permissions@ nested settings.
 data Permissions s = Permissions'
     { _accountIds :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Permissions s)
-
+instance P.Hashable  (Permissions s)
 instance TF.IsValue  (Permissions s)
 instance TF.IsObject (Permissions s) where
     toObject Permissions'{..} = catMaybes
@@ -10794,12 +11621,14 @@ instance P.HasType' (Permissions s) (TF.Attr s P.Text) where
 -- | @physical_connection_requirements@ nested settings.
 data PhysicalConnectionRequirements s = PhysicalConnectionRequirements'
     { _availabilityZone :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _securityGroupIdList :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _subnetId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (PhysicalConnectionRequirements s)
-
+instance P.Hashable  (PhysicalConnectionRequirements s)
 instance TF.IsValue  (PhysicalConnectionRequirements s)
 instance TF.IsObject (PhysicalConnectionRequirements s) where
     toObject PhysicalConnectionRequirements'{..} = catMaybes
@@ -10835,15 +11664,20 @@ instance P.HasSubnetId (PhysicalConnectionRequirements s) (TF.Attr s P.Text) whe
 -- | @placement@ nested settings.
 data Placement s = Placement'
     { _affinity :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _availabilityZone :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _groupName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _hostId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _spreadDomain :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tenancy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Placement s)
-
+instance P.Hashable  (Placement s)
 instance TF.IsValue  (Placement s)
 instance TF.IsObject (Placement s) where
     toObject Placement'{..} = catMaybes
@@ -10900,11 +11734,12 @@ instance P.HasTenancy (Placement s) (TF.Attr s P.Text) where
 -- | @placement_constraints@ nested settings.
 data PlacementConstraints s = PlacementConstraints'
     { _expression :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (PlacementConstraints s)
-
+instance P.Hashable  (PlacementConstraints s)
 instance TF.IsValue  (PlacementConstraints s)
 instance TF.IsObject (PlacementConstraints s) where
     toObject PlacementConstraints'{..} = catMaybes
@@ -10934,11 +11769,12 @@ instance P.HasType' (PlacementConstraints s) (TF.Attr s P.Text) where
 -- | @placement_strategy@ nested settings.
 data PlacementStrategy s = PlacementStrategy'
     { _field :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (PlacementStrategy s)
-
+instance P.Hashable  (PlacementStrategy s)
 instance TF.IsValue  (PlacementStrategy s)
 instance TF.IsObject (PlacementStrategy s) where
     toObject PlacementStrategy'{..} = catMaybes
@@ -10968,10 +11804,10 @@ instance P.HasType' (PlacementStrategy s) (TF.Attr s P.Text) where
 -- | @point_in_time_recovery@ nested settings.
 data PointInTimeRecovery s = PointInTimeRecovery'
     { _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (PointInTimeRecovery s)
-
+instance P.Hashable  (PointInTimeRecovery s)
 instance TF.IsValue  (PointInTimeRecovery s)
 instance TF.IsObject (PointInTimeRecovery s) where
     toObject PointInTimeRecovery'{..} = catMaybes
@@ -10994,11 +11830,12 @@ instance P.HasEnabled (PointInTimeRecovery s) (TF.Attr s P.Bool) where
 -- | @policy_attribute@ nested settings.
 data PolicyAttribute s = PolicyAttribute'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (PolicyAttribute s)
-
+instance P.Hashable  (PolicyAttribute s)
 instance TF.IsValue  (PolicyAttribute s)
 instance TF.IsObject (PolicyAttribute s) where
     toObject PolicyAttribute'{..} = catMaybes
@@ -11027,11 +11864,12 @@ instance P.HasValue (PolicyAttribute s) (TF.Attr s P.Text) where
 -- | @predefined_metric_specification@ nested settings.
 data PredefinedMetricSpecification s = PredefinedMetricSpecification'
     { _predefinedMetricType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _resourceLabel :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (PredefinedMetricSpecification s)
-
+instance P.Hashable  (PredefinedMetricSpecification s)
 instance TF.IsValue  (PredefinedMetricSpecification s)
 instance TF.IsObject (PredefinedMetricSpecification s) where
     toObject PredefinedMetricSpecification'{..} = catMaybes
@@ -11061,12 +11899,14 @@ instance P.HasResourceLabel (PredefinedMetricSpecification s) (TF.Attr s P.Text)
 -- | @predicate@ nested settings.
 data Predicate s = Predicate'
     { _dataId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _negated :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Predicate s)
-
+instance P.Hashable  (Predicate s)
 instance TF.IsValue  (Predicate s)
 instance TF.IsObject (Predicate s) where
     toObject Predicate'{..} = catMaybes
@@ -11105,12 +11945,14 @@ instance P.HasType' (Predicate s) (TF.Attr s P.Text) where
 -- | @predicates@ nested settings.
 data Predicates s = Predicates'
     { _dataId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _negated :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Predicates s)
-
+instance P.Hashable  (Predicates s)
 instance TF.IsValue  (Predicates s)
 instance TF.IsObject (Predicates s) where
     toObject Predicates'{..} = catMaybes
@@ -11149,11 +11991,12 @@ instance P.HasType' (Predicates s) (TF.Attr s P.Text) where
 -- | @principals@ nested settings.
 data Principals s = Principals'
     { _identifiers :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Principals s)
-
+instance P.Hashable  (Principals s)
 instance TF.IsValue  (Principals s)
 instance TF.IsObject (Principals s) where
     toObject Principals'{..} = catMaybes
@@ -11184,11 +12027,12 @@ instance P.HasType' (Principals s) (TF.Attr s P.Text) where
 -- | @processing_configuration@ nested settings.
 data ProcessingConfiguration s = ProcessingConfiguration'
     { _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _processors :: TF.Attr s [Processors s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ProcessingConfiguration s)
-
+instance P.Hashable  (ProcessingConfiguration s)
 instance TF.IsValue  (ProcessingConfiguration s)
 instance TF.IsObject (ProcessingConfiguration s) where
     toObject ProcessingConfiguration'{..} = catMaybes
@@ -11217,11 +12061,12 @@ instance P.HasProcessors (ProcessingConfiguration s) (TF.Attr s [Processors s]) 
 -- | @processors@ nested settings.
 data Processors s = Processors'
     { _parameters :: TF.Attr s [Parameters s]
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Processors s)
-
+instance P.Hashable  (Processors s)
 instance TF.IsValue  (Processors s)
 instance TF.IsObject (Processors s) where
     toObject Processors'{..} = catMaybes
@@ -11252,11 +12097,10 @@ instance P.HasType' (Processors s) (TF.Attr s P.Text) where
 data ProductCodes s = ProductCodes'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ProductCodes s)
-
+instance P.Hashable  (ProductCodes s)
 instance TF.IsValue  (ProductCodes s)
 instance TF.IsObject (ProductCodes s) where
-    toObject _ = []
+    toObject ProductCodes' = []
 
 newProductCodes
     :: ProductCodes s
@@ -11272,10 +12116,10 @@ instance s ~ s' => P.HasComputedProductCodeType (TF.Ref s' (ProductCodes s)) (TF
 -- | @properties@ nested settings.
 data Properties s = Properties'
     { _description :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Properties s)
-
+instance P.Hashable  (Properties s)
 instance TF.IsValue  (Properties s)
 instance TF.IsObject (Properties s) where
     toObject Properties'{..} = catMaybes
@@ -11300,13 +12144,16 @@ instance s ~ s' => P.HasComputedSearchableAttributes (TF.Ref s' (Properties s)) 
 -- | @queue@ nested settings.
 data Queue s = Queue'
     { _events :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _filterPrefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _filterSuffix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _queueArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Queue s)
-
+instance P.Hashable  (Queue s)
 instance TF.IsValue  (Queue s)
 instance TF.IsObject (Queue s) where
     toObject Queue'{..} = catMaybes
@@ -11354,12 +12201,14 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (Queue s)) (TF.Attr s P.Text) wher
 -- | @quota_settings@ nested settings.
 data QuotaSettings s = QuotaSettings'
     { _limit :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _offset :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _period :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (QuotaSettings s)
-
+instance P.Hashable  (QuotaSettings s)
 instance TF.IsValue  (QuotaSettings s)
 instance TF.IsObject (QuotaSettings s) where
     toObject QuotaSettings'{..} = catMaybes
@@ -11397,12 +12246,14 @@ instance P.HasPeriod (QuotaSettings s) (TF.Attr s P.Text) where
 -- | @recording_group@ nested settings.
 data RecordingGroup s = RecordingGroup'
     { _allSupported :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _includeGlobalResourceTypes :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _resourceTypes :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (RecordingGroup s)
-
+instance P.Hashable  (RecordingGroup s)
 instance TF.IsValue  (RecordingGroup s)
 instance TF.IsObject (RecordingGroup s) where
     toObject RecordingGroup'{..} = catMaybes
@@ -11438,20 +12289,30 @@ instance P.HasResourceTypes (RecordingGroup s) (TF.Attr s [TF.Attr s (TF.Attr s 
 -- | @redshift_configuration@ nested settings.
 data RedshiftConfiguration s = RedshiftConfiguration'
     { _clusterJdbcurl :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _copyOptions :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _dataTableColumns :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _dataTableName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _password :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _processingConfiguration :: TF.Attr s [ProcessingConfiguration s]
+    -- ^ Undocumented.
     , _retryDuration :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _s3BackupConfiguration :: TF.Attr s [S3BackupConfiguration s]
+    -- ^ Undocumented.
     , _s3BackupMode :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _username :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (RedshiftConfiguration s)
-
+instance P.Hashable  (RedshiftConfiguration s)
 instance TF.IsValue  (RedshiftConfiguration s)
 instance TF.IsObject (RedshiftConfiguration s) where
     toObject RedshiftConfiguration'{..} = catMaybes
@@ -11551,12 +12412,14 @@ instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (RedshiftCon
 -- | @regex_match_tuple@ nested settings.
 data RegexMatchTuple s = RegexMatchTuple'
     { _fieldToMatch :: TF.Attr s [FieldToMatch s]
+    -- ^ Undocumented.
     , _regexPatternSetId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (RegexMatchTuple s)
-
+instance P.Hashable  (RegexMatchTuple s)
 instance TF.IsValue  (RegexMatchTuple s)
 instance TF.IsObject (RegexMatchTuple s) where
     toObject RegexMatchTuple'{..} = catMaybes
@@ -11595,10 +12458,10 @@ instance P.HasTextTransformation (RegexMatchTuple s) (TF.Attr s P.Text) where
 -- | @replica@ nested settings.
 data Replica s = Replica'
     { _regionName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Replica s)
-
+instance P.Hashable  (Replica s)
 instance TF.IsValue  (Replica s)
 instance TF.IsObject (Replica s) where
     toObject Replica'{..} = catMaybes
@@ -11621,11 +12484,12 @@ instance P.HasRegionName (Replica s) (TF.Attr s P.Text) where
 -- | @replication_configuration@ nested settings.
 data ReplicationConfiguration s = ReplicationConfiguration'
     { _role :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _rules :: TF.Attr s [TF.Attr s (Rules s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ReplicationConfiguration s)
-
+instance P.Hashable  (ReplicationConfiguration s)
 instance TF.IsValue  (ReplicationConfiguration s)
 instance TF.IsObject (ReplicationConfiguration s) where
     toObject ReplicationConfiguration'{..} = catMaybes
@@ -11656,11 +12520,12 @@ instance P.HasRules (ReplicationConfiguration s) (TF.Attr s [TF.Attr s (Rules s)
 -- | @republish@ nested settings.
 data Republish s = Republish'
     { _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _topic :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Republish s)
-
+instance P.Hashable  (Republish s)
 instance TF.IsValue  (Republish s)
 instance TF.IsObject (Republish s) where
     toObject Republish'{..} = catMaybes
@@ -11691,12 +12556,14 @@ instance P.HasTopic (Republish s) (TF.Attr s P.Text) where
 -- | @requester@ nested settings.
 data Requester s = Requester'
     { _allowClassicLinkToRemoteVpc :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _allowRemoteVpcDnsResolution :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _allowVpcToRemoteClassicLink :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Requester s)
-
+instance P.Hashable  (Requester s)
 instance TF.IsValue  (Requester s)
 instance TF.IsObject (Requester s) where
     toObject Requester'{..} = catMaybes
@@ -11732,11 +12599,12 @@ instance P.HasAllowVpcToRemoteClassicLink (Requester s) (TF.Attr s P.Bool) where
 -- | @resource_creation_limit_policy@ nested settings.
 data ResourceCreationLimitPolicy s = ResourceCreationLimitPolicy'
     { _newGameSessionsPerCreator :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _policyPeriodInMinutes :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ResourceCreationLimitPolicy s)
-
+instance P.Hashable  (ResourceCreationLimitPolicy s)
 instance TF.IsValue  (ResourceCreationLimitPolicy s)
 instance TF.IsObject (ResourceCreationLimitPolicy s) where
     toObject ResourceCreationLimitPolicy'{..} = catMaybes
@@ -11765,10 +12633,10 @@ instance P.HasPolicyPeriodInMinutes (ResourceCreationLimitPolicy s) (TF.Attr s P
 -- | @restrictions@ nested settings.
 data Restrictions s = Restrictions'
     { _geoRestriction :: TF.Attr s (TF.Attr s (GeoRestriction s))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Restrictions s)
-
+instance P.Hashable  (Restrictions s)
 instance TF.IsValue  (Restrictions s)
 instance TF.IsObject (Restrictions s) where
     toObject Restrictions'{..} = catMaybes
@@ -11791,10 +12659,10 @@ instance P.HasGeoRestriction (Restrictions s) (TF.Attr s (TF.Attr s (GeoRestrict
 -- | @retry_strategy@ nested settings.
 data RetryStrategy s = RetryStrategy'
     { _attempts :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (RetryStrategy s)
-
+instance P.Hashable  (RetryStrategy s)
 instance TF.IsValue  (RetryStrategy s)
 instance TF.IsObject (RetryStrategy s) where
     toObject RetryStrategy'{..} = catMaybes
@@ -11817,11 +12685,10 @@ instance P.HasAttempts (RetryStrategy s) (TF.Attr s P.Integer) where
 data RevocationConfiguration s = RevocationConfiguration'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (RevocationConfiguration s)
-
+instance P.Hashable  (RevocationConfiguration s)
 instance TF.IsValue  (RevocationConfiguration s)
 instance TF.IsObject (RevocationConfiguration s) where
-    toObject _ = []
+    toObject RevocationConfiguration' = []
 
 newRevocationConfiguration
     :: RevocationConfiguration s
@@ -11834,13 +12701,16 @@ instance s ~ s' => P.HasComputedCrlConfiguration (TF.Ref s' (RevocationConfigura
 -- | @role_mapping@ nested settings.
 data RoleMapping s = RoleMapping'
     { _ambiguousRoleResolution :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _identityProvider :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _mappingRule :: TF.Attr s [MappingRule s]
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (RoleMapping s)
-
+instance P.Hashable  (RoleMapping s)
 instance TF.IsValue  (RoleMapping s)
 instance TF.IsObject (RoleMapping s) where
     toObject RoleMapping'{..} = catMaybes
@@ -11885,11 +12755,12 @@ instance P.HasType' (RoleMapping s) (TF.Attr s P.Text) where
 -- | @roles@ nested settings.
 data Roles s = Roles'
     { _authenticated :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _unauthenticated :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Roles s)
-
+instance P.Hashable  (Roles s)
 instance TF.IsValue  (Roles s)
 instance TF.IsObject (Roles s) where
     toObject Roles'{..} = catMaybes
@@ -11919,11 +12790,10 @@ instance P.HasUnauthenticated (Roles s) (TF.Attr s P.Text) where
 data RootBlockDevice s = RootBlockDevice'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (RootBlockDevice s)
-
+instance P.Hashable  (RootBlockDevice s)
 instance TF.IsValue  (RootBlockDevice s)
 instance TF.IsObject (RootBlockDevice s) where
-    toObject _ = []
+    toObject RootBlockDevice' = []
 
 newRootBlockDevice
     :: RootBlockDevice s
@@ -11946,11 +12816,10 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (RootBlockDevice s)) (TF.A
 data RotationRules s = RotationRules'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (RotationRules s)
-
+instance P.Hashable  (RotationRules s)
 instance TF.IsValue  (RotationRules s)
 instance TF.IsObject (RotationRules s) where
-    toObject _ = []
+    toObject RotationRules' = []
 
 newRotationRules
     :: RotationRules s
@@ -11963,17 +12832,24 @@ instance s ~ s' => P.HasComputedAutomaticallyAfterDays (TF.Ref s' (RotationRules
 -- | @route@ nested settings.
 data Route s = Route'
     { _cidrBlock :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _egressOnlyGatewayId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _gatewayId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _instanceId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _ipv6CidrBlock :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _natGatewayId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _networkInterfaceId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpcPeeringConnectionId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Route s)
-
+instance P.Hashable  (Route s)
 instance TF.IsValue  (Route s)
 instance TF.IsObject (Route s) where
     toObject Route'{..} = catMaybes
@@ -12045,11 +12921,10 @@ instance P.HasVpcPeeringConnectionId (Route s) (TF.Attr s P.Text) where
 data Routes s = Routes'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Routes s)
-
+instance P.Hashable  (Routes s)
 instance TF.IsValue  (Routes s)
 instance TF.IsObject (Routes s) where
-    toObject _ = []
+    toObject Routes' = []
 
 newRoutes
     :: Routes s
@@ -12083,10 +12958,10 @@ instance s ~ s' => P.HasComputedVpcPeeringConnectionId (TF.Ref s' (Routes s)) (T
 -- | @routing_config@ nested settings.
 data RoutingConfig s = RoutingConfig'
     { _additionalVersionWeights :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Double))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (RoutingConfig s)
-
+instance P.Hashable  (RoutingConfig s)
 instance TF.IsValue  (RoutingConfig s)
 instance TF.IsObject (RoutingConfig s) where
     toObject RoutingConfig'{..} = catMaybes
@@ -12108,12 +12983,14 @@ instance P.HasAdditionalVersionWeights (RoutingConfig s) (TF.Attr s (P.HashMap P
 -- | @routing_strategy@ nested settings.
 data RoutingStrategy s = RoutingStrategy'
     { _fleetId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _message :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (RoutingStrategy s)
-
+instance P.Hashable  (RoutingStrategy s)
 instance TF.IsValue  (RoutingStrategy s)
 instance TF.IsObject (RoutingStrategy s) where
     toObject RoutingStrategy'{..} = catMaybes
@@ -12150,14 +13027,18 @@ instance P.HasType' (RoutingStrategy s) (TF.Attr s P.Text) where
 -- | @rule@ nested settings.
 data Rule s = Rule'
     { _action :: TF.Attr s [Action s]
+    -- ^ Undocumented.
     , _overrideAction :: TF.Attr s [OverrideAction s]
+    -- ^ Undocumented.
     , _priority :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _ruleId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Rule s)
-
+instance P.Hashable  (Rule s)
 instance TF.IsValue  (Rule s)
 instance TF.IsObject (Rule s) where
     toObject Rule'{..} = catMaybes
@@ -12209,14 +13090,18 @@ instance P.HasType' (Rule s) (TF.Attr s P.Text) where
 -- | @rules@ nested settings.
 data Rules s = Rules'
     { _action :: TF.Attr s [Action s]
+    -- ^ Undocumented.
     , _overrideAction :: TF.Attr s [OverrideAction s]
+    -- ^ Undocumented.
     , _priority :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _ruleId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Rules s)
-
+instance P.Hashable  (Rules s)
 instance TF.IsValue  (Rules s)
 instance TF.IsObject (Rules s) where
     toObject Rules'{..} = catMaybes
@@ -12268,11 +13153,12 @@ instance P.HasType' (Rules s) (TF.Attr s P.Text) where
 -- | @run_command_targets@ nested settings.
 data RunCommandTargets s = RunCommandTargets'
     { _key :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (RunCommandTargets s)
-
+instance P.Hashable  (RunCommandTargets s)
 instance TF.IsValue  (RunCommandTargets s)
 instance TF.IsObject (RunCommandTargets s) where
     toObject RunCommandTargets'{..} = catMaybes
@@ -12303,12 +13189,14 @@ instance P.HasValues (RunCommandTargets s) (TF.Attr s [TF.Attr s P.Text]) where
 -- | @runtime_configuration@ nested settings.
 data RuntimeConfiguration s = RuntimeConfiguration'
     { _gameSessionActivationTimeoutSeconds :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _maxConcurrentGameSessionActivations :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _serverProcess :: TF.Attr s [ServerProcess s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (RuntimeConfiguration s)
-
+instance P.Hashable  (RuntimeConfiguration s)
 instance TF.IsValue  (RuntimeConfiguration s)
 instance TF.IsObject (RuntimeConfiguration s) where
     toObject RuntimeConfiguration'{..} = catMaybes
@@ -12344,12 +13232,14 @@ instance P.HasServerProcess (RuntimeConfiguration s) (TF.Attr s [ServerProcess s
 -- | @s3@ nested settings.
 data S3 s = S3'
     { _bucketName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _key :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (S3 s)
-
+instance P.Hashable  (S3 s)
 instance TF.IsValue  (S3 s)
 instance TF.IsObject (S3 s) where
     toObject S3'{..} = catMaybes
@@ -12388,14 +13278,18 @@ instance P.HasRoleArn (S3 s) (TF.Attr s P.Text) where
 -- | @s3_action@ nested settings.
 data S3Action s = S3Action'
     { _bucketName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _kmsKeyArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _objectKeyPrefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _position :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _topicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (S3Action s)
-
+instance P.Hashable  (S3Action s)
 instance TF.IsValue  (S3Action s)
 instance TF.IsObject (S3Action s) where
     toObject S3Action'{..} = catMaybes
@@ -12447,16 +13341,22 @@ instance P.HasTopicArn (S3Action s) (TF.Attr s P.Text) where
 -- | @s3_backup_configuration@ nested settings.
 data S3BackupConfiguration s = S3BackupConfiguration'
     { _bucketArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _bufferInterval :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _bufferSize :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _compressionFormat :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _kmsKeyArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _prefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (S3BackupConfiguration s)
-
+instance P.Hashable  (S3BackupConfiguration s)
 instance TF.IsValue  (S3BackupConfiguration s)
 instance TF.IsObject (S3BackupConfiguration s) where
     toObject S3BackupConfiguration'{..} = catMaybes
@@ -12525,16 +13425,22 @@ instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (S3BackupCon
 -- | @s3_configuration@ nested settings.
 data S3Configuration s = S3Configuration'
     { _bucketArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _bufferInterval :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _bufferSize :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _compressionFormat :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _kmsKeyArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _prefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (S3Configuration s)
-
+instance P.Hashable  (S3Configuration s)
 instance TF.IsValue  (S3Configuration s)
 instance TF.IsObject (S3Configuration s) where
     toObject S3Configuration'{..} = catMaybes
@@ -12603,14 +13509,18 @@ instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (S3Configura
 -- | @s3_destination@ nested settings.
 data S3Destination s = S3Destination'
     { _bucketName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _kmsKeyArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _prefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _region :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _syncFormat :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (S3Destination s)
-
+instance P.Hashable  (S3Destination s)
 instance TF.IsValue  (S3Destination s)
 instance TF.IsObject (S3Destination s) where
     toObject S3Destination'{..} = catMaybes
@@ -12662,14 +13572,18 @@ instance P.HasSyncFormat (S3Destination s) (TF.Attr s P.Text) where
 -- | @s3_import@ nested settings.
 data S3Import s = S3Import'
     { _bucketName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _bucketPrefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _ingestionRole :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sourceEngine :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sourceEngineVersion :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (S3Import s)
-
+instance P.Hashable  (S3Import s)
 instance TF.IsValue  (S3Import s)
 instance TF.IsObject (S3Import s) where
     toObject S3Import'{..} = catMaybes
@@ -12723,10 +13637,10 @@ instance P.HasSourceEngineVersion (S3Import s) (TF.Attr s P.Text) where
 -- | @s3_origin_config@ nested settings.
 data S3OriginConfig s = S3OriginConfig'
     { _originAccessIdentity :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (S3OriginConfig s)
-
+instance P.Hashable  (S3OriginConfig s)
 instance TF.IsValue  (S3OriginConfig s)
 instance TF.IsObject (S3OriginConfig s) where
     toObject S3OriginConfig'{..} = catMaybes
@@ -12749,16 +13663,22 @@ instance P.HasOriginAccessIdentity (S3OriginConfig s) (TF.Attr s P.Text) where
 -- | @s3_settings@ nested settings.
 data S3Settings s = S3Settings'
     { _bucketFolder :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _bucketName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _compressionType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _csvDelimiter :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _csvRowDelimiter :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _externalTableDefinition :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _serviceAccessRoleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (S3Settings s)
-
+instance P.Hashable  (S3Settings s)
 instance TF.IsValue  (S3Settings s)
 instance TF.IsObject (S3Settings s) where
     toObject S3Settings'{..} = catMaybes
@@ -12822,11 +13742,12 @@ instance P.HasServiceAccessRoleArn (S3Settings s) (TF.Attr s P.Text) where
 -- | @s3_target@ nested settings.
 data S3Target s = S3Target'
     { _exclusions :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _path :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (S3Target s)
-
+instance P.Hashable  (S3Target s)
 instance TF.IsValue  (S3Target s)
 instance TF.IsObject (S3Target s) where
     toObject S3Target'{..} = catMaybes
@@ -12856,11 +13777,12 @@ instance P.HasPath (S3Target s) (TF.Attr s P.Text) where
 -- | @scalable_target_action@ nested settings.
 data ScalableTargetAction s = ScalableTargetAction'
     { _maxCapacity :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _minCapacity :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ScalableTargetAction s)
-
+instance P.Hashable  (ScalableTargetAction s)
 instance TF.IsValue  (ScalableTargetAction s)
 instance TF.IsObject (ScalableTargetAction s) where
     toObject ScalableTargetAction'{..} = catMaybes
@@ -12889,10 +13811,10 @@ instance P.HasMinCapacity (ScalableTargetAction s) (TF.Attr s P.Integer) where
 -- | @schedule@ nested settings.
 data Schedule s = Schedule'
     { _frequency :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Schedule s)
-
+instance P.Hashable  (Schedule s)
 instance TF.IsValue  (Schedule s)
 instance TF.IsObject (Schedule s) where
     toObject Schedule'{..} = catMaybes
@@ -12915,16 +13837,22 @@ instance P.HasFrequency (Schedule s) (TF.Attr s P.Text) where
 -- | @schema@ nested settings.
 data Schema s = Schema'
     { _attributeDataType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _developerOnlyAttribute :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _mutable :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _numberAttributeConstraints :: TF.Attr s [NumberAttributeConstraints s]
+    -- ^ Undocumented.
     , _required :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _stringAttributeConstraints :: TF.Attr s [StringAttributeConstraints s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Schema s)
-
+instance P.Hashable  (Schema s)
 instance TF.IsValue  (Schema s)
 instance TF.IsObject (Schema s) where
     toObject Schema'{..} = catMaybes
@@ -12990,11 +13918,12 @@ instance P.HasStringAttributeConstraints (Schema s) (TF.Attr s [StringAttributeC
 -- | @schema_change_policy@ nested settings.
 data SchemaChangePolicy s = SchemaChangePolicy'
     { _deleteBehavior :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _updateBehavior :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SchemaChangePolicy s)
-
+instance P.Hashable  (SchemaChangePolicy s)
 instance TF.IsValue  (SchemaChangePolicy s)
 instance TF.IsObject (SchemaChangePolicy s) where
     toObject SchemaChangePolicy'{..} = catMaybes
@@ -13023,13 +13952,16 @@ instance P.HasUpdateBehavior (SchemaChangePolicy s) (TF.Attr s P.Text) where
 -- | @schema_configuration@ nested settings.
 data SchemaConfiguration s = SchemaConfiguration'
     { _databaseName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tableName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _versionId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SchemaConfiguration s)
-
+instance P.Hashable  (SchemaConfiguration s)
 instance TF.IsValue  (SchemaConfiguration s)
 instance TF.IsObject (SchemaConfiguration s) where
     toObject SchemaConfiguration'{..} = catMaybes
@@ -13081,13 +14013,16 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (SchemaConfiguration s)) (TF.A
 -- | @scope@ nested settings.
 data Scope s = Scope'
     { _complianceResourceId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _complianceResourceTypes :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _tagKey :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tagValue :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Scope s)
-
+instance P.Hashable  (Scope s)
 instance TF.IsValue  (Scope s)
 instance TF.IsObject (Scope s) where
     toObject Scope'{..} = catMaybes
@@ -13130,13 +14065,16 @@ instance P.HasTagValue (Scope s) (TF.Attr s P.Text) where
 -- | @secret@ nested settings.
 data Secret s = Secret'
     { _context :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _grantTokens :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _payload :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Secret s)
-
+instance P.Hashable  (Secret s)
 instance TF.IsValue  (Secret s)
 instance TF.IsObject (Secret s) where
     toObject Secret'{..} = catMaybes
@@ -13181,12 +14119,14 @@ instance P.HasPayload (Secret s) (TF.Attr s P.Text) where
 -- | @ser_de_info@ nested settings.
 data SerDeInfo s = SerDeInfo'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _parameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _serializationLibrary :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SerDeInfo s)
-
+instance P.Hashable  (SerDeInfo s)
 instance TF.IsValue  (SerDeInfo s)
 instance TF.IsObject (SerDeInfo s) where
     toObject SerDeInfo'{..} = catMaybes
@@ -13222,11 +14162,12 @@ instance P.HasSerializationLibrary (SerDeInfo s) (TF.Attr s P.Text) where
 -- | @serializer@ nested settings.
 data Serializer s = Serializer'
     { _orcSerDe :: TF.Attr s [OrcSerDe s]
+    -- ^ Undocumented.
     , _parquetSerDe :: TF.Attr s [ParquetSerDe s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Serializer s)
-
+instance P.Hashable  (Serializer s)
 instance TF.IsValue  (Serializer s)
 instance TF.IsObject (Serializer s) where
     toObject Serializer'{..} = catMaybes
@@ -13255,12 +14196,14 @@ instance P.HasParquetSerDe (Serializer s) (TF.Attr s [ParquetSerDe s]) where
 -- | @server_process@ nested settings.
 data ServerProcess s = ServerProcess'
     { _concurrentExecutions :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _launchPath :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _parameters :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ServerProcess s)
-
+instance P.Hashable  (ServerProcess s)
 instance TF.IsValue  (ServerProcess s)
 instance TF.IsObject (ServerProcess s) where
     toObject ServerProcess'{..} = catMaybes
@@ -13299,11 +14242,10 @@ instance P.HasParameters (ServerProcess s) (TF.Attr s P.Text) where
 data ServerSideEncryption s = ServerSideEncryption'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ServerSideEncryption s)
-
+instance P.Hashable  (ServerSideEncryption s)
 instance TF.IsValue  (ServerSideEncryption s)
 instance TF.IsObject (ServerSideEncryption s) where
-    toObject _ = []
+    toObject ServerSideEncryption' = []
 
 newServerSideEncryption
     :: ServerSideEncryption s
@@ -13316,10 +14258,10 @@ instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ServerSideEncryption s)) (TF
 -- | @server_side_encryption_configuration@ nested settings.
 data ServerSideEncryptionConfiguration s = ServerSideEncryptionConfiguration'
     { _rule :: TF.Attr s [Rule s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ServerSideEncryptionConfiguration s)
-
+instance P.Hashable  (ServerSideEncryptionConfiguration s)
 instance TF.IsValue  (ServerSideEncryptionConfiguration s)
 instance TF.IsObject (ServerSideEncryptionConfiguration s) where
     toObject ServerSideEncryptionConfiguration'{..} = catMaybes
@@ -13342,13 +14284,16 @@ instance P.HasRule (ServerSideEncryptionConfiguration s) (TF.Attr s [Rule s]) wh
 -- | @service_registries@ nested settings.
 data ServiceRegistries s = ServiceRegistries'
     { _containerName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _containerPort :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _port :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _registryArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ServiceRegistries s)
-
+instance P.Hashable  (ServiceRegistries s)
 instance TF.IsValue  (ServiceRegistries s)
 instance TF.IsObject (ServiceRegistries s) where
     toObject ServiceRegistries'{..} = catMaybes
@@ -13392,13 +14337,16 @@ instance P.HasRegistryArn (ServiceRegistries s) (TF.Attr s P.Text) where
 -- | @setting@ nested settings.
 data Setting s = Setting'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _namespace :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _resource :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Setting s)
-
+instance P.Hashable  (Setting s)
 instance TF.IsValue  (Setting s)
 instance TF.IsObject (Setting s) where
     toObject Setting'{..} = catMaybes
@@ -13444,19 +14392,28 @@ instance P.HasValue (Setting s) (TF.Attr s P.Text) where
 -- | @settings@ nested settings.
 data Settings s = Settings'
     { _cacheDataEncrypted :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _cacheTtlInSeconds :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _cachingEnabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _dataTraceEnabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _loggingLevel :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _metricsEnabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _requireAuthorizationForCacheControl :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _throttlingBurstLimit :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _throttlingRateLimit :: TF.Attr s P.Double
+    -- ^ Undocumented.
     , _unauthorizedCacheControlHeaderStrategy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Settings s)
-
+instance P.Hashable  (Settings s)
 instance TF.IsValue  (Settings s)
 instance TF.IsObject (Settings s) where
     toObject Settings'{..} = catMaybes
@@ -13541,13 +14498,16 @@ instance P.HasUnauthorizedCacheControlHeaderStrategy (Settings s) (TF.Attr s P.T
 -- | @size_constraints@ nested settings.
 data SizeConstraints s = SizeConstraints'
     { _comparisonOperator :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _fieldToMatch :: TF.Attr s (TF.Attr s (FieldToMatch s))
+    -- ^ Undocumented.
     , _size :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SizeConstraints s)
-
+instance P.Hashable  (SizeConstraints s)
 instance TF.IsValue  (SizeConstraints s)
 instance TF.IsObject (SizeConstraints s) where
     toObject SizeConstraints'{..} = catMaybes
@@ -13594,12 +14554,14 @@ instance P.HasTextTransformation (SizeConstraints s) (TF.Attr s P.Text) where
 -- | @skewed_info@ nested settings.
 data SkewedInfo s = SkewedInfo'
     { _skewedColumnNames :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _skewedColumnValueLocationMaps :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _skewedColumnValues :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SkewedInfo s)
-
+instance P.Hashable  (SkewedInfo s)
 instance TF.IsValue  (SkewedInfo s)
 instance TF.IsObject (SkewedInfo s) where
     toObject SkewedInfo'{..} = catMaybes
@@ -13635,12 +14597,14 @@ instance P.HasSkewedColumnValues (SkewedInfo s) (TF.Attr s [TF.Attr s P.Text]) w
 -- | @smb_active_directory_settings@ nested settings.
 data SmbActiveDirectorySettings s = SmbActiveDirectorySettings'
     { _domainName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _password :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _username :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SmbActiveDirectorySettings s)
-
+instance P.Hashable  (SmbActiveDirectorySettings s)
 instance TF.IsValue  (SmbActiveDirectorySettings s)
 instance TF.IsObject (SmbActiveDirectorySettings s) where
     toObject SmbActiveDirectorySettings'{..} = catMaybes
@@ -13679,11 +14643,12 @@ instance P.HasUsername (SmbActiveDirectorySettings s) (TF.Attr s P.Text) where
 -- | @sms_configuration@ nested settings.
 data SmsConfiguration s = SmsConfiguration'
     { _externalId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _snsCallerArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SmsConfiguration s)
-
+instance P.Hashable  (SmsConfiguration s)
 instance TF.IsValue  (SmsConfiguration s)
 instance TF.IsObject (SmsConfiguration s) where
     toObject SmsConfiguration'{..} = catMaybes
@@ -13714,12 +14679,14 @@ instance P.HasSnsCallerArn (SmsConfiguration s) (TF.Attr s P.Text) where
 -- | @snapshot_copy@ nested settings.
 data SnapshotCopy s = SnapshotCopy'
     { _destinationRegion :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _grantName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _retentionPeriod :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SnapshotCopy s)
-
+instance P.Hashable  (SnapshotCopy s)
 instance TF.IsValue  (SnapshotCopy s)
 instance TF.IsObject (SnapshotCopy s) where
     toObject SnapshotCopy'{..} = catMaybes
@@ -13756,10 +14723,10 @@ instance P.HasRetentionPeriod (SnapshotCopy s) (TF.Attr s P.Integer) where
 -- | @snapshot_delivery_properties@ nested settings.
 data SnapshotDeliveryProperties s = SnapshotDeliveryProperties'
     { _deliveryFrequency :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SnapshotDeliveryProperties s)
-
+instance P.Hashable  (SnapshotDeliveryProperties s)
 instance TF.IsValue  (SnapshotDeliveryProperties s)
 instance TF.IsObject (SnapshotDeliveryProperties s) where
     toObject SnapshotDeliveryProperties'{..} = catMaybes
@@ -13781,10 +14748,10 @@ instance P.HasDeliveryFrequency (SnapshotDeliveryProperties s) (TF.Attr s P.Text
 -- | @snapshot_options@ nested settings.
 data SnapshotOptions s = SnapshotOptions'
     { _automatedSnapshotStartHour :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SnapshotOptions s)
-
+instance P.Hashable  (SnapshotOptions s)
 instance TF.IsValue  (SnapshotOptions s)
 instance TF.IsObject (SnapshotOptions s) where
     toObject SnapshotOptions'{..} = catMaybes
@@ -13807,12 +14774,14 @@ instance P.HasAutomatedSnapshotStartHour (SnapshotOptions s) (TF.Attr s P.Intege
 -- | @sns@ nested settings.
 data Sns s = Sns'
     { _messageFormat :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _targetArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Sns s)
-
+instance P.Hashable  (Sns s)
 instance TF.IsValue  (Sns s)
 instance TF.IsObject (Sns s) where
     toObject Sns'{..} = catMaybes
@@ -13850,11 +14819,12 @@ instance P.HasTargetArn (Sns s) (TF.Attr s P.Text) where
 -- | @sns_action@ nested settings.
 data SnsAction s = SnsAction'
     { _position :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _topicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SnsAction s)
-
+instance P.Hashable  (SnsAction s)
 instance TF.IsValue  (SnsAction s)
 instance TF.IsObject (SnsAction s) where
     toObject SnsAction'{..} = catMaybes
@@ -13885,10 +14855,10 @@ instance P.HasTopicArn (SnsAction s) (TF.Attr s P.Text) where
 -- | @sns_destination@ nested settings.
 data SnsDestination s = SnsDestination'
     { _topicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SnsDestination s)
-
+instance P.Hashable  (SnsDestination s)
 instance TF.IsValue  (SnsDestination s)
 instance TF.IsObject (SnsDestination s) where
     toObject SnsDestination'{..} = catMaybes
@@ -13911,11 +14881,12 @@ instance P.HasTopicArn (SnsDestination s) (TF.Attr s P.Text) where
 -- | @sort_columns@ nested settings.
 data SortColumns s = SortColumns'
     { _column :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sortOrder :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SortColumns s)
-
+instance P.Hashable  (SortColumns s)
 instance TF.IsValue  (SortColumns s)
 instance TF.IsObject (SortColumns s) where
     toObject SortColumns'{..} = catMaybes
@@ -13946,12 +14917,14 @@ instance P.HasSortOrder (SortColumns s) (TF.Attr s P.Integer) where
 -- | @source@ nested settings.
 data Source s = Source'
     { _owner :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sourceDetail :: TF.Attr s [TF.Attr s (SourceDetail s)]
+    -- ^ Undocumented.
     , _sourceIdentifier :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Source s)
-
+instance P.Hashable  (Source s)
 instance TF.IsValue  (Source s)
 instance TF.IsObject (Source s) where
     toObject Source'{..} = catMaybes
@@ -13989,12 +14962,14 @@ instance P.HasSourceIdentifier (Source s) (TF.Attr s P.Text) where
 -- | @source_detail@ nested settings.
 data SourceDetail s = SourceDetail'
     { _eventSource :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _maximumExecutionFrequency :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _messageType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SourceDetail s)
-
+instance P.Hashable  (SourceDetail s)
 instance TF.IsValue  (SourceDetail s)
 instance TF.IsObject (SourceDetail s) where
     toObject SourceDetail'{..} = catMaybes
@@ -14030,10 +15005,10 @@ instance P.HasMessageType (SourceDetail s) (TF.Attr s P.Text) where
 -- | @source_selection_criteria@ nested settings.
 data SourceSelectionCriteria s = SourceSelectionCriteria'
     { _sseKmsEncryptedObjects :: TF.Attr s (TF.Attr s (SseKmsEncryptedObjects s))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SourceSelectionCriteria s)
-
+instance P.Hashable  (SourceSelectionCriteria s)
 instance TF.IsValue  (SourceSelectionCriteria s)
 instance TF.IsObject (SourceSelectionCriteria s) where
     toObject SourceSelectionCriteria'{..} = catMaybes
@@ -14055,16 +15030,22 @@ instance P.HasSseKmsEncryptedObjects (SourceSelectionCriteria s) (TF.Attr s (TF.
 -- | @splunk_configuration@ nested settings.
 data SplunkConfiguration s = SplunkConfiguration'
     { _hecAcknowledgmentTimeout :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _hecEndpoint :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _hecEndpointType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _hecToken :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _processingConfiguration :: TF.Attr s [ProcessingConfiguration s]
+    -- ^ Undocumented.
     , _retryDuration :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _s3BackupMode :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SplunkConfiguration s)
-
+instance P.Hashable  (SplunkConfiguration s)
 instance TF.IsValue  (SplunkConfiguration s)
 instance TF.IsObject (SplunkConfiguration s) where
     toObject SplunkConfiguration'{..} = catMaybes
@@ -14133,13 +15114,16 @@ instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (SplunkConfi
 -- | @spot_options@ nested settings.
 data SpotOptions s = SpotOptions'
     { _blockDurationMinutes :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _instanceInterruptionBehavior :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _maxPrice :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _spotInstanceType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SpotOptions s)
-
+instance P.Hashable  (SpotOptions s)
 instance TF.IsValue  (SpotOptions s)
 instance TF.IsObject (SpotOptions s) where
     toObject SpotOptions'{..} = catMaybes
@@ -14185,11 +15169,12 @@ instance s ~ s' => P.HasComputedValidUntil (TF.Ref s' (SpotOptions s)) (TF.Attr 
 -- | @sql_injection_match_tuple@ nested settings.
 data SqlInjectionMatchTuple s = SqlInjectionMatchTuple'
     { _fieldToMatch :: TF.Attr s [FieldToMatch s]
+    -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SqlInjectionMatchTuple s)
-
+instance P.Hashable  (SqlInjectionMatchTuple s)
 instance TF.IsValue  (SqlInjectionMatchTuple s)
 instance TF.IsObject (SqlInjectionMatchTuple s) where
     toObject SqlInjectionMatchTuple'{..} = catMaybes
@@ -14220,11 +15205,12 @@ instance P.HasTextTransformation (SqlInjectionMatchTuple s) (TF.Attr s P.Text) w
 -- | @sql_injection_match_tuples@ nested settings.
 data SqlInjectionMatchTuples s = SqlInjectionMatchTuples'
     { _fieldToMatch :: TF.Attr s (TF.Attr s (FieldToMatch s))
+    -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SqlInjectionMatchTuples s)
-
+instance P.Hashable  (SqlInjectionMatchTuples s)
 instance TF.IsValue  (SqlInjectionMatchTuples s)
 instance TF.IsObject (SqlInjectionMatchTuples s) where
     toObject SqlInjectionMatchTuples'{..} = catMaybes
@@ -14255,12 +15241,14 @@ instance P.HasTextTransformation (SqlInjectionMatchTuples s) (TF.Attr s P.Text) 
 -- | @sqs@ nested settings.
 data Sqs s = Sqs'
     { _queueUrl :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _useBase64 :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Sqs s)
-
+instance P.Hashable  (Sqs s)
 instance TF.IsValue  (Sqs s)
 instance TF.IsObject (Sqs s) where
     toObject Sqs'{..} = catMaybes
@@ -14299,10 +15287,10 @@ instance P.HasUseBase64 (Sqs s) (TF.Attr s P.Bool) where
 -- | @sqs_target@ nested settings.
 data SqsTarget s = SqsTarget'
     { _messageGroupId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SqsTarget s)
-
+instance P.Hashable  (SqsTarget s)
 instance TF.IsValue  (SqsTarget s)
 instance TF.IsObject (SqsTarget s) where
     toObject SqsTarget'{..} = catMaybes
@@ -14324,10 +15312,10 @@ instance P.HasMessageGroupId (SqsTarget s) (TF.Attr s P.Text) where
 -- | @sse_kms@ nested settings.
 data SseKms s = SseKms'
     { _keyId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SseKms s)
-
+instance P.Hashable  (SseKms s)
 instance TF.IsValue  (SseKms s)
 instance TF.IsObject (SseKms s) where
     toObject SseKms'{..} = catMaybes
@@ -14350,10 +15338,10 @@ instance P.HasKeyId (SseKms s) (TF.Attr s P.Text) where
 -- | @sse_kms_encrypted_objects@ nested settings.
 data SseKmsEncryptedObjects s = SseKmsEncryptedObjects'
     { _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SseKmsEncryptedObjects s)
-
+instance P.Hashable  (SseKmsEncryptedObjects s)
 instance TF.IsValue  (SseKmsEncryptedObjects s)
 instance TF.IsObject (SseKmsEncryptedObjects s) where
     toObject SseKmsEncryptedObjects'{..} = catMaybes
@@ -14377,11 +15365,10 @@ instance P.HasEnabled (SseKmsEncryptedObjects s) (TF.Attr s P.Bool) where
 data SseS3 s = SseS3'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SseS3 s)
-
+instance P.Hashable  (SseS3 s)
 instance TF.IsValue  (SseS3 s)
 instance TF.IsObject (SseS3 s) where
-    toObject _ = []
+    toObject SseS3' = []
 
 newSseS3
     :: SseS3 s
@@ -14391,12 +15378,14 @@ newSseS3 =
 -- | @ssl_configuration@ nested settings.
 data SslConfiguration s = SslConfiguration'
     { _certificate :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _chain :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _privateKey :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SslConfiguration s)
-
+instance P.Hashable  (SslConfiguration s)
 instance TF.IsValue  (SslConfiguration s)
 instance TF.IsObject (SslConfiguration s) where
     toObject SslConfiguration'{..} = catMaybes
@@ -14434,11 +15423,12 @@ instance P.HasPrivateKey (SslConfiguration s) (TF.Attr s P.Text) where
 -- | @stage@ nested settings.
 data Stage s = Stage'
     { _action :: TF.Attr s [Action s]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Stage s)
-
+instance P.Hashable  (Stage s)
 instance TF.IsValue  (Stage s)
 instance TF.IsObject (Stage s) where
     toObject Stage'{..} = catMaybes
@@ -14469,11 +15459,12 @@ instance P.HasName (Stage s) (TF.Attr s P.Text) where
 -- | @stage_key@ nested settings.
 data StageKey s = StageKey'
     { _restApiId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _stageName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (StageKey s)
-
+instance P.Hashable  (StageKey s)
 instance TF.IsValue  (StageKey s)
 instance TF.IsObject (StageKey s) where
     toObject StageKey'{..} = catMaybes
@@ -14504,18 +15495,26 @@ instance P.HasStageName (StageKey s) (TF.Attr s P.Text) where
 -- | @statement@ nested settings.
 data Statement s = Statement'
     { _actions :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _condition :: TF.Attr s [TF.Attr s (Condition s)]
+    -- ^ Undocumented.
     , _effect :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _notActions :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _notPrincipals :: TF.Attr s [TF.Attr s (NotPrincipals s)]
+    -- ^ Undocumented.
     , _notResources :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _principals :: TF.Attr s [TF.Attr s (Principals s)]
+    -- ^ Undocumented.
     , _resources :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _sid :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Statement s)
-
+instance P.Hashable  (Statement s)
 instance TF.IsValue  (Statement s)
 instance TF.IsObject (Statement s) where
     toObject Statement'{..} = catMaybes
@@ -14593,12 +15592,14 @@ instance P.HasSid (Statement s) (TF.Attr s P.Text) where
 -- | @step@ nested settings.
 data Step s = Step'
     { _actionOnFailure :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _hadoopJarStep :: TF.Attr s [HadoopJarStep s]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Step s)
-
+instance P.Hashable  (Step s)
 instance TF.IsValue  (Step s)
 instance TF.IsObject (Step s) where
     toObject Step'{..} = catMaybes
@@ -14637,12 +15638,14 @@ instance P.HasName (Step s) (TF.Attr s P.Text) where
 -- | @step_adjustment@ nested settings.
 data StepAdjustment s = StepAdjustment'
     { _metricIntervalLowerBound :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _metricIntervalUpperBound :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _scalingAdjustment :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (StepAdjustment s)
-
+instance P.Hashable  (StepAdjustment s)
 instance TF.IsValue  (StepAdjustment s)
 instance TF.IsObject (StepAdjustment s) where
     toObject StepAdjustment'{..} = catMaybes
@@ -14679,14 +15682,18 @@ instance P.HasScalingAdjustment (StepAdjustment s) (TF.Attr s P.Integer) where
 -- | @step_scaling_policy_configuration@ nested settings.
 data StepScalingPolicyConfiguration s = StepScalingPolicyConfiguration'
     { _adjustmentType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _cooldown :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _metricAggregationType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _minAdjustmentMagnitude :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _stepAdjustment :: TF.Attr s [TF.Attr s (StepAdjustment s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (StepScalingPolicyConfiguration s)
-
+instance P.Hashable  (StepScalingPolicyConfiguration s)
 instance TF.IsValue  (StepScalingPolicyConfiguration s)
 instance TF.IsObject (StepScalingPolicyConfiguration s) where
     toObject StepScalingPolicyConfiguration'{..} = catMaybes
@@ -14737,11 +15744,10 @@ instance P.HasStepAdjustment (StepScalingPolicyConfiguration s) (TF.Attr s [TF.A
 data Stickiness s = Stickiness'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Stickiness s)
-
+instance P.Hashable  (Stickiness s)
 instance TF.IsValue  (Stickiness s)
 instance TF.IsObject (Stickiness s) where
-    toObject _ = []
+    toObject Stickiness' = []
 
 newStickiness
     :: Stickiness s
@@ -14760,12 +15766,14 @@ instance s ~ s' => P.HasComputedType' (TF.Ref s' (Stickiness s)) (TF.Attr s P.Te
 -- | @stop_action@ nested settings.
 data StopAction s = StopAction'
     { _position :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _scope :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _topicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (StopAction s)
-
+instance P.Hashable  (StopAction s)
 instance TF.IsValue  (StopAction s)
 instance TF.IsObject (StopAction s) where
     toObject StopAction'{..} = catMaybes
@@ -14803,21 +15811,32 @@ instance P.HasTopicArn (StopAction s) (TF.Attr s P.Text) where
 -- | @storage_descriptor@ nested settings.
 data StorageDescriptor s = StorageDescriptor'
     { _bucketColumns :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _columns :: TF.Attr s [Columns s]
+    -- ^ Undocumented.
     , _compressed :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _inputFormat :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _location :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _numberOfBuckets :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _outputFormat :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _parameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _serDeInfo :: TF.Attr s [SerDeInfo s]
+    -- ^ Undocumented.
     , _skewedInfo :: TF.Attr s [SkewedInfo s]
+    -- ^ Undocumented.
     , _sortColumns :: TF.Attr s [SortColumns s]
+    -- ^ Undocumented.
     , _storedAsSubDirectories :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (StorageDescriptor s)
-
+instance P.Hashable  (StorageDescriptor s)
 instance TF.IsValue  (StorageDescriptor s)
 instance TF.IsObject (StorageDescriptor s) where
     toObject StorageDescriptor'{..} = catMaybes
@@ -14916,12 +15935,14 @@ instance P.HasStoredAsSubDirectories (StorageDescriptor s) (TF.Attr s P.Bool) wh
 -- | @storage_location@ nested settings.
 data StorageLocation s = StorageLocation'
     { _bucket :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _key :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (StorageLocation s)
-
+instance P.Hashable  (StorageLocation s)
 instance TF.IsValue  (StorageLocation s)
 instance TF.IsObject (StorageLocation s) where
     toObject StorageLocation'{..} = catMaybes
@@ -14960,11 +15981,12 @@ instance P.HasRoleArn (StorageLocation s) (TF.Attr s P.Text) where
 -- | @string_attribute_constraints@ nested settings.
 data StringAttributeConstraints s = StringAttributeConstraints'
     { _maxLength :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _minLength :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (StringAttributeConstraints s)
-
+instance P.Hashable  (StringAttributeConstraints s)
 instance TF.IsValue  (StringAttributeConstraints s)
 instance TF.IsObject (StringAttributeConstraints s) where
     toObject StringAttributeConstraints'{..} = catMaybes
@@ -14993,22 +16015,34 @@ instance P.HasMinLength (StringAttributeConstraints s) (TF.Attr s P.Text) where
 -- | @subject@ nested settings.
 data Subject s = Subject'
     { _commonName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _country :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _distinguishedNameQualifier :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _generationQualifier :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _givenName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _initials :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _locality :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _organization :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _organizationalUnit :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _pseudonym :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _state :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _surname :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _title :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Subject s)
-
+instance P.Hashable  (Subject s)
 instance TF.IsValue  (Subject s)
 instance TF.IsObject (Subject s) where
     toObject Subject'{..} = catMaybes
@@ -15114,11 +16148,12 @@ instance P.HasTitle (Subject s) (TF.Attr s P.Text) where
 -- | @subnet_mapping@ nested settings.
 data SubnetMapping s = SubnetMapping'
     { _allocationId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _subnetId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (SubnetMapping s)
-
+instance P.Hashable  (SubnetMapping s)
 instance TF.IsValue  (SubnetMapping s)
 instance TF.IsObject (SubnetMapping s) where
     toObject SubnetMapping'{..} = catMaybes
@@ -15148,12 +16183,14 @@ instance P.HasSubnetId (SubnetMapping s) (TF.Attr s P.Text) where
 -- | @tag@ nested settings.
 data Tag s = Tag'
     { _key :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _propagateAtLaunch :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Tag s)
-
+instance P.Hashable  (Tag s)
 instance TF.IsValue  (Tag s)
 instance TF.IsObject (Tag s) where
     toObject Tag'{..} = catMaybes
@@ -15192,11 +16229,12 @@ instance P.HasValue (Tag s) (TF.Attr s P.Text) where
 -- | @tag_specifications@ nested settings.
 data TagSpecifications s = TagSpecifications'
     { _resourceType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (TagSpecifications s)
-
+instance P.Hashable  (TagSpecifications s)
 instance TF.IsValue  (TagSpecifications s)
 instance TF.IsObject (TagSpecifications s) where
     toObject TagSpecifications'{..} = catMaybes
@@ -15225,10 +16263,10 @@ instance P.HasTags (TagSpecifications s) (TF.Attr s (P.HashMap P.Text (TF.Attr s
 -- | @target_group_info@ nested settings.
 data TargetGroupInfo s = TargetGroupInfo'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (TargetGroupInfo s)
-
+instance P.Hashable  (TargetGroupInfo s)
 instance TF.IsValue  (TargetGroupInfo s)
 instance TF.IsObject (TargetGroupInfo s) where
     toObject TargetGroupInfo'{..} = catMaybes
@@ -15250,13 +16288,16 @@ instance P.HasName (TargetGroupInfo s) (TF.Attr s P.Text) where
 -- | @target_tracking_configuration@ nested settings.
 data TargetTrackingConfiguration s = TargetTrackingConfiguration'
     { _customizedMetricSpecification :: TF.Attr s [CustomizedMetricSpecification s]
+    -- ^ Undocumented.
     , _disableScaleIn :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _predefinedMetricSpecification :: TF.Attr s [PredefinedMetricSpecification s]
+    -- ^ Undocumented.
     , _targetValue :: TF.Attr s P.Double
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (TargetTrackingConfiguration s)
-
+instance P.Hashable  (TargetTrackingConfiguration s)
 instance TF.IsValue  (TargetTrackingConfiguration s)
 instance TF.IsObject (TargetTrackingConfiguration s) where
     toObject TargetTrackingConfiguration'{..} = catMaybes
@@ -15300,15 +16341,20 @@ instance P.HasTargetValue (TargetTrackingConfiguration s) (TF.Attr s P.Double) w
 -- | @target_tracking_scaling_policy_configuration@ nested settings.
 data TargetTrackingScalingPolicyConfiguration s = TargetTrackingScalingPolicyConfiguration'
     { _customizedMetricSpecification :: TF.Attr s [CustomizedMetricSpecification s]
+    -- ^ Undocumented.
     , _disableScaleIn :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _predefinedMetricSpecification :: TF.Attr s [PredefinedMetricSpecification s]
+    -- ^ Undocumented.
     , _scaleInCooldown :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _scaleOutCooldown :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _targetValue :: TF.Attr s P.Double
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (TargetTrackingScalingPolicyConfiguration s)
-
+instance P.Hashable  (TargetTrackingScalingPolicyConfiguration s)
 instance TF.IsValue  (TargetTrackingScalingPolicyConfiguration s)
 instance TF.IsObject (TargetTrackingScalingPolicyConfiguration s) where
     toObject TargetTrackingScalingPolicyConfiguration'{..} = catMaybes
@@ -15366,11 +16412,12 @@ instance P.HasTargetValue (TargetTrackingScalingPolicyConfiguration s) (TF.Attr 
 -- | @targets@ nested settings.
 data Targets s = Targets'
     { _key :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Targets s)
-
+instance P.Hashable  (Targets s)
 instance TF.IsValue  (Targets s)
 instance TF.IsObject (Targets s) where
     toObject Targets'{..} = catMaybes
@@ -15401,11 +16448,12 @@ instance P.HasValues (Targets s) (TF.Attr s [TF.Attr s P.Text]) where
 -- | @task_parameters@ nested settings.
 data TaskParameters s = TaskParameters'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (TaskParameters s)
-
+instance P.Hashable  (TaskParameters s)
 instance TF.IsValue  (TaskParameters s)
 instance TF.IsObject (TaskParameters s) where
     toObject TaskParameters'{..} = catMaybes
@@ -15436,11 +16484,12 @@ instance P.HasValues (TaskParameters s) (TF.Attr s [TF.Attr s P.Text]) where
 -- | @terminate_blue_instances_on_deployment_success@ nested settings.
 data TerminateBlueInstancesOnDeploymentSuccess s = TerminateBlueInstancesOnDeploymentSuccess'
     { _action :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _terminationWaitTimeInMinutes :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (TerminateBlueInstancesOnDeploymentSuccess s)
-
+instance P.Hashable  (TerminateBlueInstancesOnDeploymentSuccess s)
 instance TF.IsValue  (TerminateBlueInstancesOnDeploymentSuccess s)
 instance TF.IsObject (TerminateBlueInstancesOnDeploymentSuccess s) where
     toObject TerminateBlueInstancesOnDeploymentSuccess'{..} = catMaybes
@@ -15469,11 +16518,12 @@ instance P.HasTerminationWaitTimeInMinutes (TerminateBlueInstancesOnDeploymentSu
 -- | @throttle_settings@ nested settings.
 data ThrottleSettings s = ThrottleSettings'
     { _burstLimit :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _rateLimit :: TF.Attr s P.Double
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ThrottleSettings s)
-
+instance P.Hashable  (ThrottleSettings s)
 instance TF.IsValue  (ThrottleSettings s)
 instance TF.IsObject (ThrottleSettings s) where
     toObject ThrottleSettings'{..} = catMaybes
@@ -15502,10 +16552,10 @@ instance P.HasRateLimit (ThrottleSettings s) (TF.Attr s P.Double) where
 -- | @thumbnail_config@ nested settings.
 data ThumbnailConfig s = ThumbnailConfig'
     { _storageClass :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ThumbnailConfig s)
-
+instance P.Hashable  (ThumbnailConfig s)
 instance TF.IsValue  (ThumbnailConfig s)
 instance TF.IsObject (ThumbnailConfig s) where
     toObject ThumbnailConfig'{..} = catMaybes
@@ -15530,12 +16580,14 @@ instance s ~ s' => P.HasComputedBucket (TF.Ref s' (ThumbnailConfig s)) (TF.Attr 
 -- | @thumbnail_config_permissions@ nested settings.
 data ThumbnailConfigPermissions s = ThumbnailConfigPermissions'
     { _access :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _grantee :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _granteeType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ThumbnailConfigPermissions s)
-
+instance P.Hashable  (ThumbnailConfigPermissions s)
 instance TF.IsValue  (ThumbnailConfigPermissions s)
 instance TF.IsObject (ThumbnailConfigPermissions s) where
     toObject ThumbnailConfigPermissions'{..} = catMaybes
@@ -15571,17 +16623,24 @@ instance P.HasGranteeType (ThumbnailConfigPermissions s) (TF.Attr s P.Text) wher
 -- | @thumbnails@ nested settings.
 data Thumbnails s = Thumbnails'
     { _aspectRatio :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _format :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _interval :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _maxHeight :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _maxWidth :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _paddingPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _resolution :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sizingPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Thumbnails s)
-
+instance P.Hashable  (Thumbnails s)
 instance TF.IsValue  (Thumbnails s)
 instance TF.IsObject (Thumbnails s) where
     toObject Thumbnails'{..} = catMaybes
@@ -15652,10 +16711,10 @@ instance P.HasSizingPolicy (Thumbnails s) (TF.Attr s P.Text) where
 -- | @timeout@ nested settings.
 data Timeout s = Timeout'
     { _attemptDurationSeconds :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Timeout s)
-
+instance P.Hashable  (Timeout s)
 instance TF.IsValue  (Timeout s)
 instance TF.IsObject (Timeout s) where
     toObject Timeout'{..} = catMaybes
@@ -15677,13 +16736,16 @@ instance P.HasAttemptDurationSeconds (Timeout s) (TF.Attr s P.Integer) where
 -- | @topic@ nested settings.
 data Topic s = Topic'
     { _events :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _filterPrefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _filterSuffix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _topicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Topic s)
-
+instance P.Hashable  (Topic s)
 instance TF.IsValue  (Topic s)
 instance TF.IsObject (Topic s) where
     toObject Topic'{..} = catMaybes
@@ -15732,11 +16794,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (Topic s)) (TF.Attr s P.Text) wher
 data TracingConfig s = TracingConfig'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (TracingConfig s)
-
+instance P.Hashable  (TracingConfig s)
 instance TF.IsValue  (TracingConfig s)
 instance TF.IsObject (TracingConfig s) where
-    toObject _ = []
+    toObject TracingConfig' = []
 
 newTracingConfig
     :: TracingConfig s
@@ -15749,12 +16810,14 @@ instance s ~ s' => P.HasComputedMode (TF.Ref s' (TracingConfig s)) (TF.Attr s P.
 -- | @transition@ nested settings.
 data Transition s = Transition'
     { _date :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _days :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _storageClass :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Transition s)
-
+instance P.Hashable  (Transition s)
 instance TF.IsValue  (Transition s)
 instance TF.IsObject (Transition s) where
     toObject Transition'{..} = catMaybes
@@ -15791,14 +16854,18 @@ instance P.HasStorageClass (Transition s) (TF.Attr s P.Text) where
 -- | @trigger@ nested settings.
 data Trigger s = Trigger'
     { _branches :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _customData :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _destinationArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _events :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Trigger s)
-
+instance P.Hashable  (Trigger s)
 instance TF.IsValue  (Trigger s)
 instance TF.IsObject (Trigger s) where
     toObject Trigger'{..} = catMaybes
@@ -15851,12 +16918,14 @@ instance P.HasName (Trigger s) (TF.Attr s P.Text) where
 -- | @trigger_configuration@ nested settings.
 data TriggerConfiguration s = TriggerConfiguration'
     { _triggerEvents :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _triggerName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _triggerTargetArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (TriggerConfiguration s)
-
+instance P.Hashable  (TriggerConfiguration s)
 instance TF.IsValue  (TriggerConfiguration s)
 instance TF.IsObject (TriggerConfiguration s) where
     toObject TriggerConfiguration'{..} = catMaybes
@@ -15896,11 +16965,10 @@ instance P.HasTriggerTargetArn (TriggerConfiguration s) (TF.Attr s P.Text) where
 data Ttl s = Ttl'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Ttl s)
-
+instance P.Hashable  (Ttl s)
 instance TF.IsValue  (Ttl s)
 instance TF.IsObject (Ttl s) where
-    toObject _ = []
+    toObject Ttl' = []
 
 newTtl
     :: Ttl s
@@ -15916,10 +16984,10 @@ instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (Ttl s)) (TF.Attr s P.Bool) w
 -- | @user@ nested settings.
 data User s = User'
     { _username :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (User s)
-
+instance P.Hashable  (User s)
 instance TF.IsValue  (User s)
 instance TF.IsObject (User s) where
     toObject User'{..} = catMaybes
@@ -15948,13 +17016,16 @@ instance s ~ s' => P.HasComputedGroups (TF.Ref s' (User s)) (TF.Attr s [TF.Attr 
 -- | @user_pool_config@ nested settings.
 data UserPoolConfig s = UserPoolConfig'
     { _appIdClientRegex :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _awsRegion :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _defaultAction :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _userPoolId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (UserPoolConfig s)
-
+instance P.Hashable  (UserPoolConfig s)
 instance TF.IsValue  (UserPoolConfig s)
 instance TF.IsObject (UserPoolConfig s) where
     toObject UserPoolConfig'{..} = catMaybes
@@ -16000,10 +17071,10 @@ instance P.HasUserPoolId (UserPoolConfig s) (TF.Attr s P.Text) where
 -- | @verification_message_template@ nested settings.
 data VerificationMessageTemplate s = VerificationMessageTemplate'
     { _defaultEmailOption :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (VerificationMessageTemplate s)
-
+instance P.Hashable  (VerificationMessageTemplate s)
 instance TF.IsValue  (VerificationMessageTemplate s)
 instance TF.IsObject (VerificationMessageTemplate s) where
     toObject VerificationMessageTemplate'{..} = catMaybes
@@ -16040,11 +17111,12 @@ instance s ~ s' => P.HasComputedSmsMessage (TF.Ref s' (VerificationMessageTempla
 -- | @versioning@ nested settings.
 data Versioning s = Versioning'
     { _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _mfaDelete :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Versioning s)
-
+instance P.Hashable  (Versioning s)
 instance TF.IsValue  (Versioning s)
 instance TF.IsObject (Versioning s) where
     toObject Versioning'{..} = catMaybes
@@ -16074,11 +17146,10 @@ instance P.HasMfaDelete (Versioning s) (TF.Attr s P.Bool) where
 data VgwTelemetry s = VgwTelemetry'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (VgwTelemetry s)
-
+instance P.Hashable  (VgwTelemetry s)
 instance TF.IsValue  (VgwTelemetry s)
 instance TF.IsObject (VgwTelemetry s) where
-    toObject _ = []
+    toObject VgwTelemetry' = []
 
 newVgwTelemetry
     :: VgwTelemetry s
@@ -16103,22 +17174,34 @@ instance s ~ s' => P.HasComputedStatusMessage (TF.Ref s' (VgwTelemetry s)) (TF.A
 -- | @video@ nested settings.
 data Video s = Video'
     { _aspectRatio :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _bitRate :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _codec :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _displayAspectRatio :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _fixedGop :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _frameRate :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _keyframesMaxDist :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _maxFrameRate :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _maxHeight :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _maxWidth :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _paddingPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _resolution :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sizingPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Video s)
-
+instance P.Hashable  (Video s)
 instance TF.IsValue  (Video s)
 instance TF.IsObject (Video s) where
     toObject Video'{..} = catMaybes
@@ -16224,19 +17307,28 @@ instance P.HasSizingPolicy (Video s) (TF.Attr s P.Text) where
 -- | @video_watermarks@ nested settings.
 data VideoWatermarks s = VideoWatermarks'
     { _horizontalAlign :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _horizontalOffset :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _id :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _maxHeight :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _maxWidth :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _opacity :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sizingPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _target :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _verticalAlign :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _verticalOffset :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (VideoWatermarks s)
-
+instance P.Hashable  (VideoWatermarks s)
 instance TF.IsValue  (VideoWatermarks s)
 instance TF.IsObject (VideoWatermarks s) where
     toObject VideoWatermarks'{..} = catMaybes
@@ -16321,14 +17413,18 @@ instance P.HasVerticalOffset (VideoWatermarks s) (TF.Attr s P.Text) where
 -- | @viewer_certificate@ nested settings.
 data ViewerCertificate s = ViewerCertificate'
     { _acmCertificateArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _cloudfrontDefaultCertificate :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _iamCertificateId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _minimumProtocolVersion :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sslSupportMethod :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (ViewerCertificate s)
-
+instance P.Hashable  (ViewerCertificate s)
 instance TF.IsValue  (ViewerCertificate s)
 instance TF.IsObject (ViewerCertificate s) where
     toObject ViewerCertificate'{..} = catMaybes
@@ -16378,11 +17474,12 @@ instance P.HasSslSupportMethod (ViewerCertificate s) (TF.Attr s P.Text) where
 -- | @volume@ nested settings.
 data Volume s = Volume'
     { _hostPath :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Volume s)
-
+instance P.Hashable  (Volume s)
 instance TF.IsValue  (Volume s)
 instance TF.IsObject (Volume s) where
     toObject Volume'{..} = catMaybes
@@ -16413,11 +17510,10 @@ instance P.HasName (Volume s) (TF.Attr s P.Text) where
 data VpcConfig s = VpcConfig'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (VpcConfig s)
-
+instance P.Hashable  (VpcConfig s)
 instance TF.IsValue  (VpcConfig s)
 instance TF.IsObject (VpcConfig s) where
-    toObject _ = []
+    toObject VpcConfig' = []
 
 newVpcConfig
     :: VpcConfig s
@@ -16436,11 +17532,12 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcConfig s)) (TF.Attr s P.Tex
 -- | @vpc_options@ nested settings.
 data VpcOptions s = VpcOptions'
     { _securityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _subnetIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (VpcOptions s)
-
+instance P.Hashable  (VpcOptions s)
 instance TF.IsValue  (VpcOptions s)
 instance TF.IsObject (VpcOptions s) where
     toObject VpcOptions'{..} = catMaybes
@@ -16475,11 +17572,12 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcOptions s)) (TF.Attr s P.Te
 -- | @vpc_settings@ nested settings.
 data VpcSettings s = VpcSettings'
     { _subnetIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _vpcId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (VpcSettings s)
-
+instance P.Hashable  (VpcSettings s)
 instance TF.IsValue  (VpcSettings s)
 instance TF.IsObject (VpcSettings s) where
     toObject VpcSettings'{..} = catMaybes
@@ -16510,13 +17608,16 @@ instance P.HasVpcId (VpcSettings s) (TF.Attr s P.Text) where
 -- | @website@ nested settings.
 data Website s = Website'
     { _errorDocument :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _indexDocument :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _redirectAllRequestsTo :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _routingRules :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (Website s)
-
+instance P.Hashable  (Website s)
 instance TF.IsValue  (Website s)
 instance TF.IsObject (Website s) where
     toObject Website'{..} = catMaybes
@@ -16559,10 +17660,10 @@ instance P.HasRoutingRules (Website s) (TF.Attr s P.Text) where
 -- | @weighted_routing_policy@ nested settings.
 data WeightedRoutingPolicy s = WeightedRoutingPolicy'
     { _weight :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (WeightedRoutingPolicy s)
-
+instance P.Hashable  (WeightedRoutingPolicy s)
 instance TF.IsValue  (WeightedRoutingPolicy s)
 instance TF.IsObject (WeightedRoutingPolicy s) where
     toObject WeightedRoutingPolicy'{..} = catMaybes
@@ -16585,12 +17686,14 @@ instance P.HasWeight (WeightedRoutingPolicy s) (TF.Attr s P.Integer) where
 -- | @workmail_action@ nested settings.
 data WorkmailAction s = WorkmailAction'
     { _organizationArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _position :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _topicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (WorkmailAction s)
-
+instance P.Hashable  (WorkmailAction s)
 instance TF.IsValue  (WorkmailAction s)
 instance TF.IsObject (WorkmailAction s) where
     toObject WorkmailAction'{..} = catMaybes
@@ -16628,11 +17731,12 @@ instance P.HasTopicArn (WorkmailAction s) (TF.Attr s P.Text) where
 -- | @xml_classifier@ nested settings.
 data XmlClassifier s = XmlClassifier'
     { _classification :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _rowTag :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (XmlClassifier s)
-
+instance P.Hashable  (XmlClassifier s)
 instance TF.IsValue  (XmlClassifier s)
 instance TF.IsObject (XmlClassifier s) where
     toObject XmlClassifier'{..} = catMaybes
@@ -16663,11 +17767,12 @@ instance P.HasRowTag (XmlClassifier s) (TF.Attr s P.Text) where
 -- | @xss_match_tuple@ nested settings.
 data XssMatchTuple s = XssMatchTuple'
     { _fieldToMatch :: TF.Attr s (TF.Attr s (FieldToMatch s))
+    -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (XssMatchTuple s)
-
+instance P.Hashable  (XssMatchTuple s)
 instance TF.IsValue  (XssMatchTuple s)
 instance TF.IsObject (XssMatchTuple s) where
     toObject XssMatchTuple'{..} = catMaybes
@@ -16698,11 +17803,12 @@ instance P.HasTextTransformation (XssMatchTuple s) (TF.Attr s P.Text) where
 -- | @xss_match_tuples@ nested settings.
 data XssMatchTuples s = XssMatchTuples'
     { _fieldToMatch :: TF.Attr s (TF.Attr s (FieldToMatch s))
+    -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable (XssMatchTuples s)
-
+instance P.Hashable  (XssMatchTuples s)
 instance TF.IsValue  (XssMatchTuples s)
 instance TF.IsObject (XssMatchTuples s) where
     toObject XssMatchTuples'{..} = catMaybes

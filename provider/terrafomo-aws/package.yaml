@@ -8,8 +8,11 @@ name: terrafomo-aws
 <<: *extensions
 
 dependencies:
+  - amazonka-core
   - base
+  - formatting
   - hashable
+  - iproute
   - microlens
   - terrafomo
   - text

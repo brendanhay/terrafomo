@@ -4,6 +4,8 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
+-- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.AWS.Resource05
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -15,243 +17,323 @@
 module Terrafomo.AWS.Resource05
     (
     -- * Resource Datatypes
+    -- **  SesEventDestinationResource
       SesEventDestinationResource (..)
     , sesEventDestinationResource
 
+    -- **  SesIdentityNotificationTopicResource
     , SesIdentityNotificationTopicResource (..)
     , sesIdentityNotificationTopicResource
 
+    -- **  SesReceiptFilterResource
     , SesReceiptFilterResource (..)
     , sesReceiptFilterResource
 
+    -- **  SesReceiptRuleResource
     , SesReceiptRuleResource (..)
     , sesReceiptRuleResource
 
+    -- **  SesReceiptRuleSetResource
     , SesReceiptRuleSetResource (..)
     , sesReceiptRuleSetResource
 
+    -- **  SesTemplateResource
     , SesTemplateResource (..)
     , sesTemplateResource
 
+    -- **  SfnActivityResource
     , SfnActivityResource (..)
     , sfnActivityResource
 
+    -- **  SfnStateMachineResource
     , SfnStateMachineResource (..)
     , sfnStateMachineResource
 
+    -- **  SimpledbDomainResource
     , SimpledbDomainResource (..)
     , simpledbDomainResource
 
+    -- **  SnapshotCreateVolumePermissionResource
     , SnapshotCreateVolumePermissionResource (..)
     , snapshotCreateVolumePermissionResource
 
+    -- **  SnsPlatformApplicationResource
     , SnsPlatformApplicationResource (..)
     , snsPlatformApplicationResource
 
+    -- **  SnsSmsPreferencesResource
     , SnsSmsPreferencesResource (..)
     , snsSmsPreferencesResource
 
+    -- **  SnsTopicResource
     , SnsTopicResource (..)
     , snsTopicResource
 
+    -- **  SnsTopicPolicyResource
     , SnsTopicPolicyResource (..)
     , snsTopicPolicyResource
 
+    -- **  SnsTopicSubscriptionResource
     , SnsTopicSubscriptionResource (..)
     , snsTopicSubscriptionResource
 
+    -- **  SpotDatafeedSubscriptionResource
     , SpotDatafeedSubscriptionResource (..)
     , spotDatafeedSubscriptionResource
 
+    -- **  SpotFleetRequestResource
     , SpotFleetRequestResource (..)
     , spotFleetRequestResource
 
+    -- **  SpotInstanceRequestResource
     , SpotInstanceRequestResource (..)
     , spotInstanceRequestResource
 
+    -- **  SqsQueueResource
     , SqsQueueResource (..)
     , sqsQueueResource
 
+    -- **  SqsQueuePolicyResource
     , SqsQueuePolicyResource (..)
     , sqsQueuePolicyResource
 
+    -- **  SsmActivationResource
     , SsmActivationResource (..)
     , ssmActivationResource
 
+    -- **  SsmAssociationResource
     , SsmAssociationResource (..)
     , ssmAssociationResource
 
+    -- **  SsmDocumentResource
     , SsmDocumentResource (..)
     , ssmDocumentResource
 
+    -- **  SsmMaintenanceWindowResource
     , SsmMaintenanceWindowResource (..)
     , ssmMaintenanceWindowResource
 
+    -- **  SsmMaintenanceWindowTargetResource
     , SsmMaintenanceWindowTargetResource (..)
     , ssmMaintenanceWindowTargetResource
 
+    -- **  SsmMaintenanceWindowTaskResource
     , SsmMaintenanceWindowTaskResource (..)
     , ssmMaintenanceWindowTaskResource
 
+    -- **  SsmParameterResource
     , SsmParameterResource (..)
     , ssmParameterResource
 
+    -- **  SsmPatchBaselineResource
     , SsmPatchBaselineResource (..)
     , ssmPatchBaselineResource
 
+    -- **  SsmPatchGroupResource
     , SsmPatchGroupResource (..)
     , ssmPatchGroupResource
 
+    -- **  SsmResourceDataSyncResource
     , SsmResourceDataSyncResource (..)
     , ssmResourceDataSyncResource
 
+    -- **  StoragegatewayCacheResource
     , StoragegatewayCacheResource (..)
     , storagegatewayCacheResource
 
+    -- **  StoragegatewayGatewayResource
     , StoragegatewayGatewayResource (..)
     , storagegatewayGatewayResource
 
+    -- **  StoragegatewayNfsFileShareResource
     , StoragegatewayNfsFileShareResource (..)
     , storagegatewayNfsFileShareResource
 
+    -- **  StoragegatewaySmbFileShareResource
     , StoragegatewaySmbFileShareResource (..)
     , storagegatewaySmbFileShareResource
 
+    -- **  StoragegatewayUploadBufferResource
     , StoragegatewayUploadBufferResource (..)
     , storagegatewayUploadBufferResource
 
+    -- **  StoragegatewayWorkingStorageResource
     , StoragegatewayWorkingStorageResource (..)
     , storagegatewayWorkingStorageResource
 
+    -- **  SubnetResource
     , SubnetResource (..)
     , subnetResource
 
+    -- **  SwfDomainResource
     , SwfDomainResource (..)
     , swfDomainResource
 
+    -- **  VolumeAttachmentResource
     , VolumeAttachmentResource (..)
     , volumeAttachmentResource
 
+    -- **  VpcResource
     , VpcResource (..)
     , vpcResource
 
+    -- **  VpcDhcpOptionsResource
     , VpcDhcpOptionsResource (..)
     , vpcDhcpOptionsResource
 
+    -- **  VpcDhcpOptionsAssociationResource
     , VpcDhcpOptionsAssociationResource (..)
     , vpcDhcpOptionsAssociationResource
 
+    -- **  VpcEndpointResource
     , VpcEndpointResource (..)
     , vpcEndpointResource
 
+    -- **  VpcEndpointConnectionNotificationResource
     , VpcEndpointConnectionNotificationResource (..)
     , vpcEndpointConnectionNotificationResource
 
+    -- **  VpcEndpointRouteTableAssociationResource
     , VpcEndpointRouteTableAssociationResource (..)
     , vpcEndpointRouteTableAssociationResource
 
+    -- **  VpcEndpointServiceResource
     , VpcEndpointServiceResource (..)
     , vpcEndpointServiceResource
 
+    -- **  VpcEndpointServiceAllowedPrincipalResource
     , VpcEndpointServiceAllowedPrincipalResource (..)
     , vpcEndpointServiceAllowedPrincipalResource
 
+    -- **  VpcEndpointSubnetAssociationResource
     , VpcEndpointSubnetAssociationResource (..)
     , vpcEndpointSubnetAssociationResource
 
+    -- **  VpcIpv4CidrBlockAssociationResource
     , VpcIpv4CidrBlockAssociationResource (..)
     , vpcIpv4CidrBlockAssociationResource
 
+    -- **  VpcPeeringConnectionResource
     , VpcPeeringConnectionResource (..)
     , vpcPeeringConnectionResource
 
+    -- **  VpcPeeringConnectionAccepterResource
     , VpcPeeringConnectionAccepterResource (..)
     , vpcPeeringConnectionAccepterResource
 
+    -- **  VpcPeeringConnectionOptionsResource
     , VpcPeeringConnectionOptionsResource (..)
     , vpcPeeringConnectionOptionsResource
 
+    -- **  VpnConnectionResource
     , VpnConnectionResource (..)
     , vpnConnectionResource
 
+    -- **  VpnConnectionRouteResource
     , VpnConnectionRouteResource (..)
     , vpnConnectionRouteResource
 
+    -- **  VpnGatewayResource
     , VpnGatewayResource (..)
     , vpnGatewayResource
 
+    -- **  VpnGatewayAttachmentResource
     , VpnGatewayAttachmentResource (..)
     , vpnGatewayAttachmentResource
 
+    -- **  VpnGatewayRoutePropagationResource
     , VpnGatewayRoutePropagationResource (..)
     , vpnGatewayRoutePropagationResource
 
+    -- **  WafByteMatchSetResource
     , WafByteMatchSetResource (..)
     , wafByteMatchSetResource
 
+    -- **  WafGeoMatchSetResource
     , WafGeoMatchSetResource (..)
     , wafGeoMatchSetResource
 
+    -- **  WafIpsetResource
     , WafIpsetResource (..)
     , wafIpsetResource
 
+    -- **  WafRateBasedRuleResource
     , WafRateBasedRuleResource (..)
     , wafRateBasedRuleResource
 
+    -- **  WafRegexMatchSetResource
     , WafRegexMatchSetResource (..)
     , wafRegexMatchSetResource
 
+    -- **  WafRegexPatternSetResource
     , WafRegexPatternSetResource (..)
     , wafRegexPatternSetResource
 
+    -- **  WafRuleResource
     , WafRuleResource (..)
     , wafRuleResource
 
+    -- **  WafRuleGroupResource
     , WafRuleGroupResource (..)
     , wafRuleGroupResource
 
+    -- **  WafSizeConstraintSetResource
     , WafSizeConstraintSetResource (..)
     , wafSizeConstraintSetResource
 
+    -- **  WafSqlInjectionMatchSetResource
     , WafSqlInjectionMatchSetResource (..)
     , wafSqlInjectionMatchSetResource
 
+    -- **  WafWebAclResource
     , WafWebAclResource (..)
     , wafWebAclResource
 
+    -- **  WafXssMatchSetResource
     , WafXssMatchSetResource (..)
     , wafXssMatchSetResource
 
+    -- **  WafregionalByteMatchSetResource
     , WafregionalByteMatchSetResource (..)
     , wafregionalByteMatchSetResource
 
+    -- **  WafregionalGeoMatchSetResource
     , WafregionalGeoMatchSetResource (..)
     , wafregionalGeoMatchSetResource
 
+    -- **  WafregionalIpsetResource
     , WafregionalIpsetResource (..)
     , wafregionalIpsetResource
 
+    -- **  WafregionalRateBasedRuleResource
     , WafregionalRateBasedRuleResource (..)
     , wafregionalRateBasedRuleResource
 
+    -- **  WafregionalRegexMatchSetResource
     , WafregionalRegexMatchSetResource (..)
     , wafregionalRegexMatchSetResource
 
+    -- **  WafregionalRegexPatternSetResource
     , WafregionalRegexPatternSetResource (..)
     , wafregionalRegexPatternSetResource
 
+    -- **  WafregionalRuleResource
     , WafregionalRuleResource (..)
     , wafregionalRuleResource
 
+    -- **  WafregionalRuleGroupResource
     , WafregionalRuleGroupResource (..)
     , wafregionalRuleGroupResource
 
+    -- **  WafregionalSizeConstraintSetResource
     , WafregionalSizeConstraintSetResource (..)
     , wafregionalSizeConstraintSetResource
 
+    -- **  WafregionalSqlInjectionMatchSetResource
     , WafregionalSqlInjectionMatchSetResource (..)
     , wafregionalSqlInjectionMatchSetResource
 
+    -- **  WafregionalWebAclResource
     , WafregionalWebAclResource (..)
     , wafregionalWebAclResource
 
@@ -262,32 +344,39 @@ import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
-import Terrafomo.AWS.Provider
 import Terrafomo.AWS.Settings
-import Terrafomo.AWS.Types
 
 import qualified Data.HashMap.Strict as P
+import qualified Data.Hashable as P
 import qualified Data.List.NonEmpty as P
 import qualified Data.Text as P
 import qualified GHC.Generics as P
 import qualified Lens.Micro as P
 import qualified Prelude as P
 import qualified Terrafomo.AWS.Lens as P
+import qualified Terrafomo.AWS.Provider as P
+import qualified Terrafomo.AWS.Types as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Provider as TF
 import qualified Terrafomo.Schema as TF
 
 -- | @aws_ses_event_destination@ Resource.
 data SesEventDestinationResource s = SesEventDestinationResource'
     { _cloudwatchDestination :: TF.Attr s (TF.Attr s (CloudwatchDestination s))
+    -- ^ Undocumented.
     , _configurationSetName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _kinesisDestination :: TF.Attr s (TF.Attr s (KinesisDestination s))
+    -- ^ Undocumented.
     , _matchingTypes :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _snsDestination :: TF.Attr s (TF.Attr s (SnsDestination s))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SesEventDestinationResource s) where
@@ -305,7 +394,7 @@ sesEventDestinationResource
     :: TF.Attr s P.Text -- ^ @configuration_set_name@
     -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @matching_types@
     -> TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (SesEventDestinationResource s)
+    -> TF.Resource P.Provider (SesEventDestinationResource s)
 sesEventDestinationResource _configurationSetName _matchingTypes _name =
     TF.newResource "aws_ses_event_destination" $
         SesEventDestinationResource'
@@ -356,8 +445,11 @@ instance P.HasSnsDestination (SesEventDestinationResource s) (TF.Attr s (TF.Attr
 -- | @aws_ses_identity_notification_topic@ Resource.
 data SesIdentityNotificationTopicResource s = SesIdentityNotificationTopicResource'
     { _identity :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _notificationType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _topicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SesIdentityNotificationTopicResource s) where
@@ -370,7 +462,7 @@ instance TF.IsObject (SesIdentityNotificationTopicResource s) where
 sesIdentityNotificationTopicResource
     :: TF.Attr s P.Text -- ^ @identity@
     -> TF.Attr s P.Text -- ^ @notification_type@
-    -> TF.Resource AWS (SesIdentityNotificationTopicResource s)
+    -> TF.Resource P.Provider (SesIdentityNotificationTopicResource s)
 sesIdentityNotificationTopicResource _identity _notificationType =
     TF.newResource "aws_ses_identity_notification_topic" $
         SesIdentityNotificationTopicResource'
@@ -397,8 +489,11 @@ instance P.HasTopicArn (SesIdentityNotificationTopicResource s) (TF.Attr s P.Tex
 -- | @aws_ses_receipt_filter@ Resource.
 data SesReceiptFilterResource s = SesReceiptFilterResource'
     { _cidr :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _policy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SesReceiptFilterResource s) where
@@ -412,7 +507,7 @@ sesReceiptFilterResource
     :: TF.Attr s P.Text -- ^ @cidr@
     -> TF.Attr s P.Text -- ^ @name@
     -> TF.Attr s P.Text -- ^ @policy@
-    -> TF.Resource AWS (SesReceiptFilterResource s)
+    -> TF.Resource P.Provider (SesReceiptFilterResource s)
 sesReceiptFilterResource _cidr _name _policy =
     TF.newResource "aws_ses_receipt_filter" $
         SesReceiptFilterResource'
@@ -439,16 +534,27 @@ instance P.HasPolicy (SesReceiptFilterResource s) (TF.Attr s P.Text) where
 -- | @aws_ses_receipt_rule@ Resource.
 data SesReceiptRuleResource s = SesReceiptRuleResource'
     { _addHeaderAction :: TF.Attr s [TF.Attr s (AddHeaderAction s)]
+    -- ^ Undocumented.
     , _after :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _bounceAction :: TF.Attr s [TF.Attr s (BounceAction s)]
+    -- ^ Undocumented.
     , _lambdaAction :: TF.Attr s [TF.Attr s (LambdaAction s)]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _recipients :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _ruleSetName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _s3Action :: TF.Attr s [TF.Attr s (S3Action s)]
+    -- ^ Undocumented.
     , _snsAction :: TF.Attr s [TF.Attr s (SnsAction s)]
+    -- ^ Undocumented.
     , _stopAction :: TF.Attr s [TF.Attr s (StopAction s)]
+    -- ^ Undocumented.
     , _workmailAction :: TF.Attr s [TF.Attr s (WorkmailAction s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SesReceiptRuleResource s) where
@@ -469,7 +575,7 @@ instance TF.IsObject (SesReceiptRuleResource s) where
 sesReceiptRuleResource
     :: TF.Attr s P.Text -- ^ @name@
     -> TF.Attr s P.Text -- ^ @rule_set_name@
-    -> TF.Resource AWS (SesReceiptRuleResource s)
+    -> TF.Resource P.Provider (SesReceiptRuleResource s)
 sesReceiptRuleResource _name _ruleSetName =
     TF.newResource "aws_ses_receipt_rule" $
         SesReceiptRuleResource'
@@ -553,6 +659,7 @@ instance s ~ s' => P.HasComputedTlsPolicy (TF.Ref s' (SesReceiptRuleResource s))
 -- | @aws_ses_receipt_rule_set@ Resource.
 data SesReceiptRuleSetResource s = SesReceiptRuleSetResource'
     { _ruleSetName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SesReceiptRuleSetResource s) where
@@ -562,7 +669,7 @@ instance TF.IsObject (SesReceiptRuleSetResource s) where
 
 sesReceiptRuleSetResource
     :: TF.Attr s P.Text -- ^ @rule_set_name@
-    -> TF.Resource AWS (SesReceiptRuleSetResource s)
+    -> TF.Resource P.Provider (SesReceiptRuleSetResource s)
 sesReceiptRuleSetResource _ruleSetName =
     TF.newResource "aws_ses_receipt_rule_set" $
         SesReceiptRuleSetResource'
@@ -577,9 +684,13 @@ instance P.HasRuleSetName (SesReceiptRuleSetResource s) (TF.Attr s P.Text) where
 -- | @aws_ses_template@ Resource.
 data SesTemplateResource s = SesTemplateResource'
     { _html :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _subject :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _text :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SesTemplateResource s) where
@@ -592,7 +703,7 @@ instance TF.IsObject (SesTemplateResource s) where
 
 sesTemplateResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (SesTemplateResource s)
+    -> TF.Resource P.Provider (SesTemplateResource s)
 sesTemplateResource _name =
     TF.newResource "aws_ses_template" $
         SesTemplateResource'
@@ -625,6 +736,7 @@ instance P.HasText (SesTemplateResource s) (TF.Attr s P.Text) where
 -- | @aws_sfn_activity@ Resource.
 data SfnActivityResource s = SfnActivityResource'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SfnActivityResource s) where
@@ -634,7 +746,7 @@ instance TF.IsObject (SfnActivityResource s) where
 
 sfnActivityResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (SfnActivityResource s)
+    -> TF.Resource P.Provider (SfnActivityResource s)
 sfnActivityResource _name =
     TF.newResource "aws_sfn_activity" $
         SfnActivityResource'
@@ -652,8 +764,11 @@ instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (SfnActivityResource s))
 -- | @aws_sfn_state_machine@ Resource.
 data SfnStateMachineResource s = SfnStateMachineResource'
     { _definition :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SfnStateMachineResource s) where
@@ -667,7 +782,7 @@ sfnStateMachineResource
     :: TF.Attr s P.Text -- ^ @definition@
     -> TF.Attr s P.Text -- ^ @name@
     -> TF.Attr s P.Text -- ^ @role_arn@
-    -> TF.Resource AWS (SfnStateMachineResource s)
+    -> TF.Resource P.Provider (SfnStateMachineResource s)
 sfnStateMachineResource _definition _name _roleArn =
     TF.newResource "aws_sfn_state_machine" $
         SfnStateMachineResource'
@@ -700,6 +815,7 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (SfnStateMachineResource s)) (
 -- | @aws_simpledb_domain@ Resource.
 data SimpledbDomainResource s = SimpledbDomainResource'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SimpledbDomainResource s) where
@@ -709,7 +825,7 @@ instance TF.IsObject (SimpledbDomainResource s) where
 
 simpledbDomainResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (SimpledbDomainResource s)
+    -> TF.Resource P.Provider (SimpledbDomainResource s)
 simpledbDomainResource _name =
     TF.newResource "aws_simpledb_domain" $
         SimpledbDomainResource'
@@ -724,7 +840,9 @@ instance P.HasName (SimpledbDomainResource s) (TF.Attr s P.Text) where
 -- | @aws_snapshot_create_volume_permission@ Resource.
 data SnapshotCreateVolumePermissionResource s = SnapshotCreateVolumePermissionResource'
     { _accountId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _snapshotId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SnapshotCreateVolumePermissionResource s) where
@@ -736,7 +854,7 @@ instance TF.IsObject (SnapshotCreateVolumePermissionResource s) where
 snapshotCreateVolumePermissionResource
     :: TF.Attr s P.Text -- ^ @account_id@
     -> TF.Attr s P.Text -- ^ @snapshot_id@
-    -> TF.Resource AWS (SnapshotCreateVolumePermissionResource s)
+    -> TF.Resource P.Provider (SnapshotCreateVolumePermissionResource s)
 snapshotCreateVolumePermissionResource _accountId _snapshotId =
     TF.newResource "aws_snapshot_create_volume_permission" $
         SnapshotCreateVolumePermissionResource'
@@ -757,16 +875,27 @@ instance P.HasSnapshotId (SnapshotCreateVolumePermissionResource s) (TF.Attr s P
 -- | @aws_sns_platform_application@ Resource.
 data SnsPlatformApplicationResource s = SnsPlatformApplicationResource'
     { _eventDeliveryFailureTopicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _eventEndpointCreatedTopicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _eventEndpointDeletedTopicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _eventEndpointUpdatedTopicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _failureFeedbackRoleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _platform :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _platformCredential :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _platformPrincipal :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _successFeedbackRoleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _successFeedbackSampleRate :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SnsPlatformApplicationResource s) where
@@ -788,7 +917,7 @@ snsPlatformApplicationResource
     :: TF.Attr s P.Text -- ^ @name@
     -> TF.Attr s P.Text -- ^ @platform@
     -> TF.Attr s P.Text -- ^ @platform_credential@
-    -> TF.Resource AWS (SnsPlatformApplicationResource s)
+    -> TF.Resource P.Provider (SnsPlatformApplicationResource s)
 snsPlatformApplicationResource _name _platform _platformCredential =
     TF.newResource "aws_sns_platform_application" $
         SnsPlatformApplicationResource'
@@ -866,11 +995,17 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (SnsPlatformApplicationResource s
 -- | @aws_sns_sms_preferences@ Resource.
 data SnsSmsPreferencesResource s = SnsSmsPreferencesResource'
     { _defaultSenderId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _defaultSmsType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _deliveryStatusIamRoleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _deliveryStatusSuccessSamplingRate :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _monthlySpendLimit :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _usageReportS3Bucket :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SnsSmsPreferencesResource s) where
@@ -884,7 +1019,7 @@ instance TF.IsObject (SnsSmsPreferencesResource s) where
         ]
 
 snsSmsPreferencesResource
-    :: TF.Resource AWS (SnsSmsPreferencesResource s)
+    :: TF.Resource P.Provider (SnsSmsPreferencesResource s)
 snsSmsPreferencesResource =
     TF.newResource "aws_sns_sms_preferences" $
         SnsSmsPreferencesResource'
@@ -929,20 +1064,35 @@ instance P.HasUsageReportS3Bucket (SnsSmsPreferencesResource s) (TF.Attr s P.Tex
 -- | @aws_sns_topic@ Resource.
 data SnsTopicResource s = SnsTopicResource'
     { _applicationFailureFeedbackRoleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _applicationSuccessFeedbackRoleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _applicationSuccessFeedbackSampleRate :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _deliveryPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _displayName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _httpFailureFeedbackRoleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _httpSuccessFeedbackRoleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _httpSuccessFeedbackSampleRate :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _lambdaFailureFeedbackRoleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _lambdaSuccessFeedbackRoleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _lambdaSuccessFeedbackSampleRate :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _namePrefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sqsFailureFeedbackRoleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sqsSuccessFeedbackRoleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sqsSuccessFeedbackSampleRate :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SnsTopicResource s) where
@@ -965,7 +1115,7 @@ instance TF.IsObject (SnsTopicResource s) where
         ]
 
 snsTopicResource
-    :: TF.Resource AWS (SnsTopicResource s)
+    :: TF.Resource P.Provider (SnsTopicResource s)
 snsTopicResource =
     TF.newResource "aws_sns_topic" $
         SnsTopicResource'
@@ -1073,7 +1223,9 @@ instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SnsTopicResource s)) (TF.Attr
 -- | @aws_sns_topic_policy@ Resource.
 data SnsTopicPolicyResource s = SnsTopicPolicyResource'
     { _arn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _policy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SnsTopicPolicyResource s) where
@@ -1085,7 +1237,7 @@ instance TF.IsObject (SnsTopicPolicyResource s) where
 snsTopicPolicyResource
     :: TF.Attr s P.Text -- ^ @arn@
     -> TF.Attr s P.Text -- ^ @policy@
-    -> TF.Resource AWS (SnsTopicPolicyResource s)
+    -> TF.Resource P.Provider (SnsTopicPolicyResource s)
 snsTopicPolicyResource _arn _policy =
     TF.newResource "aws_sns_topic_policy" $
         SnsTopicPolicyResource'
@@ -1106,13 +1258,21 @@ instance P.HasPolicy (SnsTopicPolicyResource s) (TF.Attr s P.Text) where
 -- | @aws_sns_topic_subscription@ Resource.
 data SnsTopicSubscriptionResource s = SnsTopicSubscriptionResource'
     { _confirmationTimeoutInMinutes :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _deliveryPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _endpoint :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _endpointAutoConfirms :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _filterPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _protocol :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _rawMessageDelivery :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _topicArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SnsTopicSubscriptionResource s) where
@@ -1131,7 +1291,7 @@ snsTopicSubscriptionResource
     :: TF.Attr s P.Text -- ^ @endpoint@
     -> TF.Attr s P.Text -- ^ @protocol@
     -> TF.Attr s P.Text -- ^ @topic_arn@
-    -> TF.Resource AWS (SnsTopicSubscriptionResource s)
+    -> TF.Resource P.Provider (SnsTopicSubscriptionResource s)
 snsTopicSubscriptionResource _endpoint _protocol _topicArn =
     TF.newResource "aws_sns_topic_subscription" $
         SnsTopicSubscriptionResource'
@@ -1191,7 +1351,9 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (SnsTopicSubscriptionResource s))
 -- | @aws_spot_datafeed_subscription@ Resource.
 data SpotDatafeedSubscriptionResource s = SpotDatafeedSubscriptionResource'
     { _bucket :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _prefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SpotDatafeedSubscriptionResource s) where
@@ -1202,7 +1364,7 @@ instance TF.IsObject (SpotDatafeedSubscriptionResource s) where
 
 spotDatafeedSubscriptionResource
     :: TF.Attr s P.Text -- ^ @bucket@
-    -> TF.Resource AWS (SpotDatafeedSubscriptionResource s)
+    -> TF.Resource P.Provider (SpotDatafeedSubscriptionResource s)
 spotDatafeedSubscriptionResource _bucket =
     TF.newResource "aws_spot_datafeed_subscription" $
         SpotDatafeedSubscriptionResource'
@@ -1223,18 +1385,31 @@ instance P.HasPrefix (SpotDatafeedSubscriptionResource s) (TF.Attr s P.Text) whe
 -- | @aws_spot_fleet_request@ Resource.
 data SpotFleetRequestResource s = SpotFleetRequestResource'
     { _allocationStrategy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _excessCapacityTerminationPolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _fleetType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _iamFleetRole :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _instanceInterruptionBehaviour :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _launchSpecification :: TF.Attr s [TF.Attr s (LaunchSpecification s)]
+    -- ^ Undocumented.
     , _replaceUnhealthyInstances :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _spotPrice :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _targetCapacity :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _terminateInstancesWithExpiration :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _validFrom :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _validUntil :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _waitForFulfillment :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SpotFleetRequestResource s) where
@@ -1258,7 +1433,7 @@ spotFleetRequestResource
     :: TF.Attr s P.Text -- ^ @iam_fleet_role@
     -> TF.Attr s [TF.Attr s (LaunchSpecification s)] -- ^ @launch_specification@
     -> TF.Attr s P.Integer -- ^ @target_capacity@
-    -> TF.Resource AWS (SpotFleetRequestResource s)
+    -> TF.Resource P.Provider (SpotFleetRequestResource s)
 spotFleetRequestResource _iamFleetRole _launchSpecification _targetCapacity =
     TF.newResource "aws_spot_fleet_request" $
         SpotFleetRequestResource'
@@ -1357,26 +1532,47 @@ instance s ~ s' => P.HasComputedTargetGroupArns (TF.Ref s' (SpotFleetRequestReso
 -- | @aws_spot_instance_request@ Resource.
 data SpotInstanceRequestResource s = SpotInstanceRequestResource'
     { _ami :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _blockDevice :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _blockDurationMinutes :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _creditSpecification :: TF.Attr s [CreditSpecification s]
+    -- ^ Undocumented.
     , _disableApiTermination :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _ebsOptimized :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _getPasswordData :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _iamInstanceProfile :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _instanceInitiatedShutdownBehavior :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _instanceInterruptionBehaviour :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _instanceType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _launchGroup :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _monitoring :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _sourceDestCheck :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _spotPrice :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _spotType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _userData :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _userDataBase64 :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _volumeTags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _waitForFulfillment :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SpotInstanceRequestResource s) where
@@ -1407,7 +1603,7 @@ instance TF.IsObject (SpotInstanceRequestResource s) where
 spotInstanceRequestResource
     :: TF.Attr s P.Text -- ^ @ami@
     -> TF.Attr s P.Text -- ^ @instance_type@
-    -> TF.Resource AWS (SpotInstanceRequestResource s)
+    -> TF.Resource P.Provider (SpotInstanceRequestResource s)
 spotInstanceRequestResource _ami _instanceType =
     TF.newResource "aws_spot_instance_request" $
         SpotInstanceRequestResource'
@@ -1632,16 +1828,27 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (SpotInstanceRequ
 -- | @aws_sqs_queue@ Resource.
 data SqsQueueResource s = SqsQueueResource'
     { _contentBasedDeduplication :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _delaySeconds :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _fifoQueue :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _kmsMasterKeyId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _maxMessageSize :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _messageRetentionSeconds :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _namePrefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _receiveWaitTimeSeconds :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _redrivePolicy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _visibilityTimeoutSeconds :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SqsQueueResource s) where
@@ -1660,7 +1867,7 @@ instance TF.IsObject (SqsQueueResource s) where
         ]
 
 sqsQueueResource
-    :: TF.Resource AWS (SqsQueueResource s)
+    :: TF.Resource P.Provider (SqsQueueResource s)
 sqsQueueResource =
     TF.newResource "aws_sqs_queue" $
         SqsQueueResource'
@@ -1747,7 +1954,9 @@ instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SqsQueueResource s)) (TF.Attr
 -- | @aws_sqs_queue_policy@ Resource.
 data SqsQueuePolicyResource s = SqsQueuePolicyResource'
     { _policy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _queueUrl :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SqsQueuePolicyResource s) where
@@ -1759,7 +1968,7 @@ instance TF.IsObject (SqsQueuePolicyResource s) where
 sqsQueuePolicyResource
     :: TF.Attr s P.Text -- ^ @policy@
     -> TF.Attr s P.Text -- ^ @queue_url@
-    -> TF.Resource AWS (SqsQueuePolicyResource s)
+    -> TF.Resource P.Provider (SqsQueuePolicyResource s)
 sqsQueuePolicyResource _policy _queueUrl =
     TF.newResource "aws_sqs_queue_policy" $
         SqsQueuePolicyResource'
@@ -1780,10 +1989,15 @@ instance P.HasQueueUrl (SqsQueuePolicyResource s) (TF.Attr s P.Text) where
 -- | @aws_ssm_activation@ Resource.
 data SsmActivationResource s = SsmActivationResource'
     { _description :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _expirationDate :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _iamRole :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _registrationLimit :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SsmActivationResource s) where
@@ -1797,7 +2011,7 @@ instance TF.IsObject (SsmActivationResource s) where
 
 ssmActivationResource
     :: TF.Attr s P.Text -- ^ @iam_role@
-    -> TF.Resource AWS (SsmActivationResource s)
+    -> TF.Resource P.Provider (SsmActivationResource s)
 ssmActivationResource _iamRole =
     TF.newResource "aws_ssm_activation" $
         SsmActivationResource'
@@ -1845,10 +2059,15 @@ instance s ~ s' => P.HasComputedRegistrationCount (TF.Ref s' (SsmActivationResou
 -- | @aws_ssm_association@ Resource.
 data SsmAssociationResource s = SsmAssociationResource'
     { _associationName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _instanceId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _outputLocation :: TF.Attr s [OutputLocation s]
+    -- ^ Undocumented.
     , _scheduleExpression :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SsmAssociationResource s) where
@@ -1862,7 +2081,7 @@ instance TF.IsObject (SsmAssociationResource s) where
 
 ssmAssociationResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (SsmAssociationResource s)
+    -> TF.Resource P.Provider (SsmAssociationResource s)
 ssmAssociationResource _name =
     TF.newResource "aws_ssm_association" $
         SsmAssociationResource'
@@ -1913,11 +2132,17 @@ instance s ~ s' => P.HasComputedTargets (TF.Ref s' (SsmAssociationResource s)) (
 -- | @aws_ssm_document@ Resource.
 data SsmDocumentResource s = SsmDocumentResource'
     { _content :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _documentFormat :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _documentType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _permissions :: TF.Attr s (P.HashMap P.Text (Permissions s))
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SsmDocumentResource s) where
@@ -1934,7 +2159,7 @@ ssmDocumentResource
     :: TF.Attr s P.Text -- ^ @content@
     -> TF.Attr s P.Text -- ^ @document_type@
     -> TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (SsmDocumentResource s)
+    -> TF.Resource P.Provider (SsmDocumentResource s)
 ssmDocumentResource _content _documentType _name =
     TF.newResource "aws_ssm_document" $
         SsmDocumentResource'
@@ -2015,11 +2240,17 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (SsmDocumentResource s)) (TF.A
 -- | @aws_ssm_maintenance_window@ Resource.
 data SsmMaintenanceWindowResource s = SsmMaintenanceWindowResource'
     { _allowUnassociatedTargets :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _cutoff :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _duration :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _enabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _schedule :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SsmMaintenanceWindowResource s) where
@@ -2037,7 +2268,7 @@ ssmMaintenanceWindowResource
     -> TF.Attr s P.Integer -- ^ @duration@
     -> TF.Attr s P.Text -- ^ @name@
     -> TF.Attr s P.Text -- ^ @schedule@
-    -> TF.Resource AWS (SsmMaintenanceWindowResource s)
+    -> TF.Resource P.Provider (SsmMaintenanceWindowResource s)
 ssmMaintenanceWindowResource _cutoff _duration _name _schedule =
     TF.newResource "aws_ssm_maintenance_window" $
         SsmMaintenanceWindowResource'
@@ -2082,9 +2313,13 @@ instance P.HasSchedule (SsmMaintenanceWindowResource s) (TF.Attr s P.Text) where
 -- | @aws_ssm_maintenance_window_target@ Resource.
 data SsmMaintenanceWindowTargetResource s = SsmMaintenanceWindowTargetResource'
     { _ownerInformation :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _resourceType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _targets :: TF.Attr s [Targets s]
+    -- ^ Undocumented.
     , _windowId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SsmMaintenanceWindowTargetResource s) where
@@ -2099,7 +2334,7 @@ ssmMaintenanceWindowTargetResource
     :: TF.Attr s P.Text -- ^ @resource_type@
     -> TF.Attr s [Targets s] -- ^ @targets@
     -> TF.Attr s P.Text -- ^ @window_id@
-    -> TF.Resource AWS (SsmMaintenanceWindowTargetResource s)
+    -> TF.Resource P.Provider (SsmMaintenanceWindowTargetResource s)
 ssmMaintenanceWindowTargetResource _resourceType _targets _windowId =
     TF.newResource "aws_ssm_maintenance_window_target" $
         SsmMaintenanceWindowTargetResource'
@@ -2132,15 +2367,25 @@ instance P.HasWindowId (SsmMaintenanceWindowTargetResource s) (TF.Attr s P.Text)
 -- | @aws_ssm_maintenance_window_task@ Resource.
 data SsmMaintenanceWindowTaskResource s = SsmMaintenanceWindowTaskResource'
     { _loggingInfo :: TF.Attr s [LoggingInfo s]
+    -- ^ Undocumented.
     , _maxConcurrency :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _maxErrors :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _priority :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     , _serviceRoleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _targets :: TF.Attr s [Targets s]
+    -- ^ Undocumented.
     , _taskArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _taskParameters :: TF.Attr s [TaskParameters s]
+    -- ^ Undocumented.
     , _taskType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _windowId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SsmMaintenanceWindowTaskResource s) where
@@ -2165,7 +2410,7 @@ ssmMaintenanceWindowTaskResource
     -> TF.Attr s P.Text -- ^ @task_arn@
     -> TF.Attr s P.Text -- ^ @task_type@
     -> TF.Attr s P.Text -- ^ @window_id@
-    -> TF.Resource AWS (SsmMaintenanceWindowTaskResource s)
+    -> TF.Resource P.Provider (SsmMaintenanceWindowTaskResource s)
 ssmMaintenanceWindowTaskResource _maxConcurrency _maxErrors _serviceRoleArn _targets _taskArn _taskType _windowId =
     TF.newResource "aws_ssm_maintenance_window_task" $
         SsmMaintenanceWindowTaskResource'
@@ -2234,12 +2479,19 @@ instance P.HasWindowId (SsmMaintenanceWindowTaskResource s) (TF.Attr s P.Text) w
 -- | @aws_ssm_parameter@ Resource.
 data SsmParameterResource s = SsmParameterResource'
     { _allowedPattern :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _description :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _overwrite :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SsmParameterResource s) where
@@ -2257,7 +2509,7 @@ ssmParameterResource
     :: TF.Attr s P.Text -- ^ @name@
     -> TF.Attr s P.Text -- ^ @type@
     -> TF.Attr s P.Text -- ^ @value@
-    -> TF.Resource AWS (SsmParameterResource s)
+    -> TF.Resource P.Provider (SsmParameterResource s)
 ssmParameterResource _name _type' _value =
     TF.newResource "aws_ssm_parameter" $
         SsmParameterResource'
@@ -2314,13 +2566,21 @@ instance s ~ s' => P.HasComputedKeyId (TF.Ref s' (SsmParameterResource s)) (TF.A
 -- | @aws_ssm_patch_baseline@ Resource.
 data SsmPatchBaselineResource s = SsmPatchBaselineResource'
     { _approvalRule :: TF.Attr s [ApprovalRule s]
+    -- ^ Undocumented.
     , _approvedPatches :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _approvedPatchesComplianceLevel :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _description :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _globalFilter :: TF.Attr s [GlobalFilter s]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _operatingSystem :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _rejectedPatches :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SsmPatchBaselineResource s) where
@@ -2337,7 +2597,7 @@ instance TF.IsObject (SsmPatchBaselineResource s) where
 
 ssmPatchBaselineResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (SsmPatchBaselineResource s)
+    -> TF.Resource P.Provider (SsmPatchBaselineResource s)
 ssmPatchBaselineResource _name =
     TF.newResource "aws_ssm_patch_baseline" $
         SsmPatchBaselineResource'
@@ -2394,7 +2654,9 @@ instance P.HasRejectedPatches (SsmPatchBaselineResource s) (TF.Attr s [TF.Attr s
 -- | @aws_ssm_patch_group@ Resource.
 data SsmPatchGroupResource s = SsmPatchGroupResource'
     { _baselineId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _patchGroup :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SsmPatchGroupResource s) where
@@ -2406,7 +2668,7 @@ instance TF.IsObject (SsmPatchGroupResource s) where
 ssmPatchGroupResource
     :: TF.Attr s P.Text -- ^ @baseline_id@
     -> TF.Attr s P.Text -- ^ @patch_group@
-    -> TF.Resource AWS (SsmPatchGroupResource s)
+    -> TF.Resource P.Provider (SsmPatchGroupResource s)
 ssmPatchGroupResource _baselineId _patchGroup =
     TF.newResource "aws_ssm_patch_group" $
         SsmPatchGroupResource'
@@ -2427,7 +2689,9 @@ instance P.HasPatchGroup (SsmPatchGroupResource s) (TF.Attr s P.Text) where
 -- | @aws_ssm_resource_data_sync@ Resource.
 data SsmResourceDataSyncResource s = SsmResourceDataSyncResource'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _s3Destination :: TF.Attr s [S3Destination s]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SsmResourceDataSyncResource s) where
@@ -2439,7 +2703,7 @@ instance TF.IsObject (SsmResourceDataSyncResource s) where
 ssmResourceDataSyncResource
     :: TF.Attr s P.Text -- ^ @name@
     -> TF.Attr s [S3Destination s] -- ^ @s3_destination@
-    -> TF.Resource AWS (SsmResourceDataSyncResource s)
+    -> TF.Resource P.Provider (SsmResourceDataSyncResource s)
 ssmResourceDataSyncResource _name _s3Destination =
     TF.newResource "aws_ssm_resource_data_sync" $
         SsmResourceDataSyncResource'
@@ -2460,7 +2724,9 @@ instance P.HasS3Destination (SsmResourceDataSyncResource s) (TF.Attr s [S3Destin
 -- | @aws_storagegateway_cache@ Resource.
 data StoragegatewayCacheResource s = StoragegatewayCacheResource'
     { _diskId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _gatewayArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (StoragegatewayCacheResource s) where
@@ -2472,7 +2738,7 @@ instance TF.IsObject (StoragegatewayCacheResource s) where
 storagegatewayCacheResource
     :: TF.Attr s P.Text -- ^ @disk_id@
     -> TF.Attr s P.Text -- ^ @gateway_arn@
-    -> TF.Resource AWS (StoragegatewayCacheResource s)
+    -> TF.Resource P.Provider (StoragegatewayCacheResource s)
 storagegatewayCacheResource _diskId _gatewayArn =
     TF.newResource "aws_storagegateway_cache" $
         StoragegatewayCacheResource'
@@ -2493,12 +2759,19 @@ instance P.HasGatewayArn (StoragegatewayCacheResource s) (TF.Attr s P.Text) wher
 -- | @aws_storagegateway_gateway@ Resource.
 data StoragegatewayGatewayResource s = StoragegatewayGatewayResource'
     { _gatewayName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _gatewayTimezone :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _gatewayType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _mediumChangerType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _smbActiveDirectorySettings :: TF.Attr s [SmbActiveDirectorySettings s]
+    -- ^ Undocumented.
     , _smbGuestPassword :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tapeDriveType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (StoragegatewayGatewayResource s) where
@@ -2515,7 +2788,7 @@ instance TF.IsObject (StoragegatewayGatewayResource s) where
 storagegatewayGatewayResource
     :: TF.Attr s P.Text -- ^ @gateway_name@
     -> TF.Attr s P.Text -- ^ @gateway_timezone@
-    -> TF.Resource AWS (StoragegatewayGatewayResource s)
+    -> TF.Resource P.Provider (StoragegatewayGatewayResource s)
 storagegatewayGatewayResource _gatewayName _gatewayTimezone =
     TF.newResource "aws_storagegateway_gateway" $
         StoragegatewayGatewayResource'
@@ -2578,18 +2851,31 @@ instance s ~ s' => P.HasComputedGatewayIpAddress (TF.Ref s' (StoragegatewayGatew
 -- | @aws_storagegateway_nfs_file_share@ Resource.
 data StoragegatewayNfsFileShareResource s = StoragegatewayNfsFileShareResource'
     { _clientList :: TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text)))
+    -- ^ Undocumented.
     , _defaultStorageClass :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _gatewayArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _guessMimeTypeEnabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _kmsEncrypted :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _kmsKeyArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _locationArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _nfsFileShareDefaults :: TF.Attr s [NfsFileShareDefaults s]
+    -- ^ Undocumented.
     , _objectAcl :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _readOnly :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _requesterPays :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _squash :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (StoragegatewayNfsFileShareResource s) where
@@ -2614,7 +2900,7 @@ storagegatewayNfsFileShareResource
     -> TF.Attr s P.Text -- ^ @gateway_arn@
     -> TF.Attr s P.Text -- ^ @location_arn@
     -> TF.Attr s P.Text -- ^ @role_arn@
-    -> TF.Resource AWS (StoragegatewayNfsFileShareResource s)
+    -> TF.Resource P.Provider (StoragegatewayNfsFileShareResource s)
 storagegatewayNfsFileShareResource _clientList _gatewayArn _locationArn _roleArn =
     TF.newResource "aws_storagegateway_nfs_file_share" $
         StoragegatewayNfsFileShareResource'
@@ -2707,18 +2993,31 @@ instance s ~ s' => P.HasComputedFileshareId (TF.Ref s' (StoragegatewayNfsFileSha
 -- | @aws_storagegateway_smb_file_share@ Resource.
 data StoragegatewaySmbFileShareResource s = StoragegatewaySmbFileShareResource'
     { _authentication :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _defaultStorageClass :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _gatewayArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _guessMimeTypeEnabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _invalidUserList :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     , _kmsEncrypted :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _kmsKeyArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _locationArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _objectAcl :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _readOnly :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _requesterPays :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _validUserList :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (StoragegatewaySmbFileShareResource s) where
@@ -2742,7 +3041,7 @@ storagegatewaySmbFileShareResource
     :: TF.Attr s P.Text -- ^ @gateway_arn@
     -> TF.Attr s P.Text -- ^ @location_arn@
     -> TF.Attr s P.Text -- ^ @role_arn@
-    -> TF.Resource AWS (StoragegatewaySmbFileShareResource s)
+    -> TF.Resource P.Provider (StoragegatewaySmbFileShareResource s)
 storagegatewaySmbFileShareResource _gatewayArn _locationArn _roleArn =
     TF.newResource "aws_storagegateway_smb_file_share" $
         StoragegatewaySmbFileShareResource'
@@ -2835,7 +3134,9 @@ instance s ~ s' => P.HasComputedFileshareId (TF.Ref s' (StoragegatewaySmbFileSha
 -- | @aws_storagegateway_upload_buffer@ Resource.
 data StoragegatewayUploadBufferResource s = StoragegatewayUploadBufferResource'
     { _diskId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _gatewayArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (StoragegatewayUploadBufferResource s) where
@@ -2847,7 +3148,7 @@ instance TF.IsObject (StoragegatewayUploadBufferResource s) where
 storagegatewayUploadBufferResource
     :: TF.Attr s P.Text -- ^ @disk_id@
     -> TF.Attr s P.Text -- ^ @gateway_arn@
-    -> TF.Resource AWS (StoragegatewayUploadBufferResource s)
+    -> TF.Resource P.Provider (StoragegatewayUploadBufferResource s)
 storagegatewayUploadBufferResource _diskId _gatewayArn =
     TF.newResource "aws_storagegateway_upload_buffer" $
         StoragegatewayUploadBufferResource'
@@ -2868,7 +3169,9 @@ instance P.HasGatewayArn (StoragegatewayUploadBufferResource s) (TF.Attr s P.Tex
 -- | @aws_storagegateway_working_storage@ Resource.
 data StoragegatewayWorkingStorageResource s = StoragegatewayWorkingStorageResource'
     { _diskId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _gatewayArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (StoragegatewayWorkingStorageResource s) where
@@ -2880,7 +3183,7 @@ instance TF.IsObject (StoragegatewayWorkingStorageResource s) where
 storagegatewayWorkingStorageResource
     :: TF.Attr s P.Text -- ^ @disk_id@
     -> TF.Attr s P.Text -- ^ @gateway_arn@
-    -> TF.Resource AWS (StoragegatewayWorkingStorageResource s)
+    -> TF.Resource P.Provider (StoragegatewayWorkingStorageResource s)
 storagegatewayWorkingStorageResource _diskId _gatewayArn =
     TF.newResource "aws_storagegateway_working_storage" $
         StoragegatewayWorkingStorageResource'
@@ -2901,10 +3204,15 @@ instance P.HasGatewayArn (StoragegatewayWorkingStorageResource s) (TF.Attr s P.T
 -- | @aws_subnet@ Resource.
 data SubnetResource s = SubnetResource'
     { _assignIpv6AddressOnCreation :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _cidrBlock :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _mapPublicIpOnLaunch :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _vpcId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SubnetResource s) where
@@ -2919,7 +3227,7 @@ instance TF.IsObject (SubnetResource s) where
 subnetResource
     :: TF.Attr s P.Text -- ^ @cidr_block@
     -> TF.Attr s P.Text -- ^ @vpc_id@
-    -> TF.Resource AWS (SubnetResource s)
+    -> TF.Resource P.Provider (SubnetResource s)
 subnetResource _cidrBlock _vpcId =
     TF.newResource "aws_subnet" $
         SubnetResource'
@@ -2967,8 +3275,11 @@ instance s ~ s' => P.HasComputedIpv6CidrBlockAssociationId (TF.Ref s' (SubnetRes
 -- | @aws_swf_domain@ Resource.
 data SwfDomainResource s = SwfDomainResource'
     { _description :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _namePrefix :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _workflowExecutionRetentionPeriodInDays :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SwfDomainResource s) where
@@ -2980,7 +3291,7 @@ instance TF.IsObject (SwfDomainResource s) where
 
 swfDomainResource
     :: TF.Attr s P.Text -- ^ @workflow_execution_retention_period_in_days@
-    -> TF.Resource AWS (SwfDomainResource s)
+    -> TF.Resource P.Provider (SwfDomainResource s)
 swfDomainResource _workflowExecutionRetentionPeriodInDays =
     TF.newResource "aws_swf_domain" $
         SwfDomainResource'
@@ -3010,10 +3321,15 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (SwfDomainResource s)) (TF.Attr 
 -- | @aws_volume_attachment@ Resource.
 data VolumeAttachmentResource s = VolumeAttachmentResource'
     { _deviceName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _forceDetach :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _instanceId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _skipDestroy :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _volumeId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VolumeAttachmentResource s) where
@@ -3029,7 +3345,7 @@ volumeAttachmentResource
     :: TF.Attr s P.Text -- ^ @device_name@
     -> TF.Attr s P.Text -- ^ @instance_id@
     -> TF.Attr s P.Text -- ^ @volume_id@
-    -> TF.Resource AWS (VolumeAttachmentResource s)
+    -> TF.Resource P.Provider (VolumeAttachmentResource s)
 volumeAttachmentResource _deviceName _instanceId _volumeId =
     TF.newResource "aws_volume_attachment" $
         VolumeAttachmentResource'
@@ -3068,10 +3384,15 @@ instance P.HasVolumeId (VolumeAttachmentResource s) (TF.Attr s P.Text) where
 -- | @aws_vpc@ Resource.
 data VpcResource s = VpcResource'
     { _assignGeneratedIpv6CidrBlock :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _cidrBlock :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _enableDnsSupport :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _instanceTenancy :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcResource s) where
@@ -3085,7 +3406,7 @@ instance TF.IsObject (VpcResource s) where
 
 vpcResource
     :: TF.Attr s P.Text -- ^ @cidr_block@
-    -> TF.Resource AWS (VpcResource s)
+    -> TF.Resource P.Provider (VpcResource s)
 vpcResource _cidrBlock =
     TF.newResource "aws_vpc" $
         VpcResource'
@@ -3157,11 +3478,17 @@ instance s ~ s' => P.HasComputedMainRouteTableId (TF.Ref s' (VpcResource s)) (TF
 -- | @aws_vpc_dhcp_options@ Resource.
 data VpcDhcpOptionsResource s = VpcDhcpOptionsResource'
     { _domainName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _domainNameServers :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _netbiosNameServers :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _netbiosNodeType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _ntpServers :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcDhcpOptionsResource s) where
@@ -3175,7 +3502,7 @@ instance TF.IsObject (VpcDhcpOptionsResource s) where
         ]
 
 vpcDhcpOptionsResource
-    :: TF.Resource AWS (VpcDhcpOptionsResource s)
+    :: TF.Resource P.Provider (VpcDhcpOptionsResource s)
 vpcDhcpOptionsResource =
     TF.newResource "aws_vpc_dhcp_options" $
         VpcDhcpOptionsResource'
@@ -3220,7 +3547,9 @@ instance P.HasTags (VpcDhcpOptionsResource s) (TF.Attr s (P.HashMap P.Text (TF.A
 -- | @aws_vpc_dhcp_options_association@ Resource.
 data VpcDhcpOptionsAssociationResource s = VpcDhcpOptionsAssociationResource'
     { _dhcpOptionsId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpcId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcDhcpOptionsAssociationResource s) where
@@ -3232,7 +3561,7 @@ instance TF.IsObject (VpcDhcpOptionsAssociationResource s) where
 vpcDhcpOptionsAssociationResource
     :: TF.Attr s P.Text -- ^ @dhcp_options_id@
     -> TF.Attr s P.Text -- ^ @vpc_id@
-    -> TF.Resource AWS (VpcDhcpOptionsAssociationResource s)
+    -> TF.Resource P.Provider (VpcDhcpOptionsAssociationResource s)
 vpcDhcpOptionsAssociationResource _dhcpOptionsId _vpcId =
     TF.newResource "aws_vpc_dhcp_options_association" $
         VpcDhcpOptionsAssociationResource'
@@ -3253,10 +3582,15 @@ instance P.HasVpcId (VpcDhcpOptionsAssociationResource s) (TF.Attr s P.Text) whe
 -- | @aws_vpc_endpoint@ Resource.
 data VpcEndpointResource s = VpcEndpointResource'
     { _autoAccept :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _privateDnsEnabled :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _serviceName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpcEndpointType :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpcId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcEndpointResource s) where
@@ -3271,7 +3605,7 @@ instance TF.IsObject (VpcEndpointResource s) where
 vpcEndpointResource
     :: TF.Attr s P.Text -- ^ @service_name@
     -> TF.Attr s P.Text -- ^ @vpc_id@
-    -> TF.Resource AWS (VpcEndpointResource s)
+    -> TF.Resource P.Provider (VpcEndpointResource s)
 vpcEndpointResource _serviceName _vpcId =
     TF.newResource "aws_vpc_endpoint" $
         VpcEndpointResource'
@@ -3337,9 +3671,13 @@ instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (VpcEndpointResource s)) (T
 -- | @aws_vpc_endpoint_connection_notification@ Resource.
 data VpcEndpointConnectionNotificationResource s = VpcEndpointConnectionNotificationResource'
     { _connectionEvents :: TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text)))
+    -- ^ Undocumented.
     , _connectionNotificationArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpcEndpointId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpcEndpointServiceId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcEndpointConnectionNotificationResource s) where
@@ -3353,7 +3691,7 @@ instance TF.IsObject (VpcEndpointConnectionNotificationResource s) where
 vpcEndpointConnectionNotificationResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text))) -- ^ @connection_events@
     -> TF.Attr s P.Text -- ^ @connection_notification_arn@
-    -> TF.Resource AWS (VpcEndpointConnectionNotificationResource s)
+    -> TF.Resource P.Provider (VpcEndpointConnectionNotificationResource s)
 vpcEndpointConnectionNotificationResource _connectionEvents _connectionNotificationArn =
     TF.newResource "aws_vpc_endpoint_connection_notification" $
         VpcEndpointConnectionNotificationResource'
@@ -3392,7 +3730,9 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (VpcEndpointConnectionNotificat
 -- | @aws_vpc_endpoint_route_table_association@ Resource.
 data VpcEndpointRouteTableAssociationResource s = VpcEndpointRouteTableAssociationResource'
     { _routeTableId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpcEndpointId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcEndpointRouteTableAssociationResource s) where
@@ -3404,7 +3744,7 @@ instance TF.IsObject (VpcEndpointRouteTableAssociationResource s) where
 vpcEndpointRouteTableAssociationResource
     :: TF.Attr s P.Text -- ^ @route_table_id@
     -> TF.Attr s P.Text -- ^ @vpc_endpoint_id@
-    -> TF.Resource AWS (VpcEndpointRouteTableAssociationResource s)
+    -> TF.Resource P.Provider (VpcEndpointRouteTableAssociationResource s)
 vpcEndpointRouteTableAssociationResource _routeTableId _vpcEndpointId =
     TF.newResource "aws_vpc_endpoint_route_table_association" $
         VpcEndpointRouteTableAssociationResource'
@@ -3425,7 +3765,9 @@ instance P.HasVpcEndpointId (VpcEndpointRouteTableAssociationResource s) (TF.Att
 -- | @aws_vpc_endpoint_service@ Resource.
 data VpcEndpointServiceResource s = VpcEndpointServiceResource'
     { _acceptanceRequired :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _networkLoadBalancerArns :: TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text)))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcEndpointServiceResource s) where
@@ -3437,7 +3779,7 @@ instance TF.IsObject (VpcEndpointServiceResource s) where
 vpcEndpointServiceResource
     :: TF.Attr s P.Bool -- ^ @acceptance_required@
     -> TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text))) -- ^ @network_load_balancer_arns@
-    -> TF.Resource AWS (VpcEndpointServiceResource s)
+    -> TF.Resource P.Provider (VpcEndpointServiceResource s)
 vpcEndpointServiceResource _acceptanceRequired _networkLoadBalancerArns =
     TF.newResource "aws_vpc_endpoint_service" $
         VpcEndpointServiceResource'
@@ -3479,7 +3821,9 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (VpcEndpointServiceResource s))
 -- | @aws_vpc_endpoint_service_allowed_principal@ Resource.
 data VpcEndpointServiceAllowedPrincipalResource s = VpcEndpointServiceAllowedPrincipalResource'
     { _principalArn :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpcEndpointServiceId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcEndpointServiceAllowedPrincipalResource s) where
@@ -3491,7 +3835,7 @@ instance TF.IsObject (VpcEndpointServiceAllowedPrincipalResource s) where
 vpcEndpointServiceAllowedPrincipalResource
     :: TF.Attr s P.Text -- ^ @principal_arn@
     -> TF.Attr s P.Text -- ^ @vpc_endpoint_service_id@
-    -> TF.Resource AWS (VpcEndpointServiceAllowedPrincipalResource s)
+    -> TF.Resource P.Provider (VpcEndpointServiceAllowedPrincipalResource s)
 vpcEndpointServiceAllowedPrincipalResource _principalArn _vpcEndpointServiceId =
     TF.newResource "aws_vpc_endpoint_service_allowed_principal" $
         VpcEndpointServiceAllowedPrincipalResource'
@@ -3512,7 +3856,9 @@ instance P.HasVpcEndpointServiceId (VpcEndpointServiceAllowedPrincipalResource s
 -- | @aws_vpc_endpoint_subnet_association@ Resource.
 data VpcEndpointSubnetAssociationResource s = VpcEndpointSubnetAssociationResource'
     { _subnetId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpcEndpointId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcEndpointSubnetAssociationResource s) where
@@ -3524,7 +3870,7 @@ instance TF.IsObject (VpcEndpointSubnetAssociationResource s) where
 vpcEndpointSubnetAssociationResource
     :: TF.Attr s P.Text -- ^ @subnet_id@
     -> TF.Attr s P.Text -- ^ @vpc_endpoint_id@
-    -> TF.Resource AWS (VpcEndpointSubnetAssociationResource s)
+    -> TF.Resource P.Provider (VpcEndpointSubnetAssociationResource s)
 vpcEndpointSubnetAssociationResource _subnetId _vpcEndpointId =
     TF.newResource "aws_vpc_endpoint_subnet_association" $
         VpcEndpointSubnetAssociationResource'
@@ -3545,7 +3891,9 @@ instance P.HasVpcEndpointId (VpcEndpointSubnetAssociationResource s) (TF.Attr s 
 -- | @aws_vpc_ipv4_cidr_block_association@ Resource.
 data VpcIpv4CidrBlockAssociationResource s = VpcIpv4CidrBlockAssociationResource'
     { _cidrBlock :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpcId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcIpv4CidrBlockAssociationResource s) where
@@ -3557,7 +3905,7 @@ instance TF.IsObject (VpcIpv4CidrBlockAssociationResource s) where
 vpcIpv4CidrBlockAssociationResource
     :: TF.Attr s P.Text -- ^ @cidr_block@
     -> TF.Attr s P.Text -- ^ @vpc_id@
-    -> TF.Resource AWS (VpcIpv4CidrBlockAssociationResource s)
+    -> TF.Resource P.Provider (VpcIpv4CidrBlockAssociationResource s)
 vpcIpv4CidrBlockAssociationResource _cidrBlock _vpcId =
     TF.newResource "aws_vpc_ipv4_cidr_block_association" $
         VpcIpv4CidrBlockAssociationResource'
@@ -3578,9 +3926,13 @@ instance P.HasVpcId (VpcIpv4CidrBlockAssociationResource s) (TF.Attr s P.Text) w
 -- | @aws_vpc_peering_connection@ Resource.
 data VpcPeeringConnectionResource s = VpcPeeringConnectionResource'
     { _autoAccept :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _peerVpcId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _vpcId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcPeeringConnectionResource s) where
@@ -3594,7 +3946,7 @@ instance TF.IsObject (VpcPeeringConnectionResource s) where
 vpcPeeringConnectionResource
     :: TF.Attr s P.Text -- ^ @peer_vpc_id@
     -> TF.Attr s P.Text -- ^ @vpc_id@
-    -> TF.Resource AWS (VpcPeeringConnectionResource s)
+    -> TF.Resource P.Provider (VpcPeeringConnectionResource s)
 vpcPeeringConnectionResource _peerVpcId _vpcId =
     TF.newResource "aws_vpc_peering_connection" $
         VpcPeeringConnectionResource'
@@ -3642,8 +3994,11 @@ instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionResour
 -- | @aws_vpc_peering_connection_accepter@ Resource.
 data VpcPeeringConnectionAccepterResource s = VpcPeeringConnectionAccepterResource'
     { _autoAccept :: TF.Attr s P.Bool
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _vpcPeeringConnectionId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcPeeringConnectionAccepterResource s) where
@@ -3655,7 +4010,7 @@ instance TF.IsObject (VpcPeeringConnectionAccepterResource s) where
 
 vpcPeeringConnectionAccepterResource
     :: TF.Attr s P.Text -- ^ @vpc_peering_connection_id@
-    -> TF.Resource AWS (VpcPeeringConnectionAccepterResource s)
+    -> TF.Resource P.Provider (VpcPeeringConnectionAccepterResource s)
 vpcPeeringConnectionAccepterResource _vpcPeeringConnectionId =
     TF.newResource "aws_vpc_peering_connection_accepter" $
         VpcPeeringConnectionAccepterResource'
@@ -3703,6 +4058,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcPeeringConnectionAccepterRe
 -- | @aws_vpc_peering_connection_options@ Resource.
 data VpcPeeringConnectionOptionsResource s = VpcPeeringConnectionOptionsResource'
     { _vpcPeeringConnectionId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcPeeringConnectionOptionsResource s) where
@@ -3712,7 +4068,7 @@ instance TF.IsObject (VpcPeeringConnectionOptionsResource s) where
 
 vpcPeeringConnectionOptionsResource
     :: TF.Attr s P.Text -- ^ @vpc_peering_connection_id@
-    -> TF.Resource AWS (VpcPeeringConnectionOptionsResource s)
+    -> TF.Resource P.Provider (VpcPeeringConnectionOptionsResource s)
 vpcPeeringConnectionOptionsResource _vpcPeeringConnectionId =
     TF.newResource "aws_vpc_peering_connection_options" $
         VpcPeeringConnectionOptionsResource'
@@ -3733,9 +4089,13 @@ instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionOption
 -- | @aws_vpn_connection@ Resource.
 data VpnConnectionResource s = VpnConnectionResource'
     { _customerGatewayId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpnGatewayId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpnConnectionResource s) where
@@ -3750,7 +4110,7 @@ vpnConnectionResource
     :: TF.Attr s P.Text -- ^ @customer_gateway_id@
     -> TF.Attr s P.Text -- ^ @type@
     -> TF.Attr s P.Text -- ^ @vpn_gateway_id@
-    -> TF.Resource AWS (VpnConnectionResource s)
+    -> TF.Resource P.Provider (VpnConnectionResource s)
 vpnConnectionResource _customerGatewayId _type' _vpnGatewayId =
     TF.newResource "aws_vpn_connection" $
         VpnConnectionResource'
@@ -3837,7 +4197,9 @@ instance s ~ s' => P.HasComputedVgwTelemetry (TF.Ref s' (VpnConnectionResource s
 -- | @aws_vpn_connection_route@ Resource.
 data VpnConnectionRouteResource s = VpnConnectionRouteResource'
     { _destinationCidrBlock :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpnConnectionId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpnConnectionRouteResource s) where
@@ -3849,7 +4211,7 @@ instance TF.IsObject (VpnConnectionRouteResource s) where
 vpnConnectionRouteResource
     :: TF.Attr s P.Text -- ^ @destination_cidr_block@
     -> TF.Attr s P.Text -- ^ @vpn_connection_id@
-    -> TF.Resource AWS (VpnConnectionRouteResource s)
+    -> TF.Resource P.Provider (VpnConnectionRouteResource s)
 vpnConnectionRouteResource _destinationCidrBlock _vpnConnectionId =
     TF.newResource "aws_vpn_connection_route" $
         VpnConnectionRouteResource'
@@ -3870,7 +4232,9 @@ instance P.HasVpnConnectionId (VpnConnectionRouteResource s) (TF.Attr s P.Text) 
 -- | @aws_vpn_gateway@ Resource.
 data VpnGatewayResource s = VpnGatewayResource'
     { _availabilityZone :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpnGatewayResource s) where
@@ -3880,7 +4244,7 @@ instance TF.IsObject (VpnGatewayResource s) where
         ]
 
 vpnGatewayResource
-    :: TF.Resource AWS (VpnGatewayResource s)
+    :: TF.Resource P.Provider (VpnGatewayResource s)
 vpnGatewayResource =
     TF.newResource "aws_vpn_gateway" $
         VpnGatewayResource'
@@ -3907,7 +4271,9 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpnGatewayResource s)) (TF.Att
 -- | @aws_vpn_gateway_attachment@ Resource.
 data VpnGatewayAttachmentResource s = VpnGatewayAttachmentResource'
     { _vpcId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpnGatewayId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpnGatewayAttachmentResource s) where
@@ -3919,7 +4285,7 @@ instance TF.IsObject (VpnGatewayAttachmentResource s) where
 vpnGatewayAttachmentResource
     :: TF.Attr s P.Text -- ^ @vpc_id@
     -> TF.Attr s P.Text -- ^ @vpn_gateway_id@
-    -> TF.Resource AWS (VpnGatewayAttachmentResource s)
+    -> TF.Resource P.Provider (VpnGatewayAttachmentResource s)
 vpnGatewayAttachmentResource _vpcId _vpnGatewayId =
     TF.newResource "aws_vpn_gateway_attachment" $
         VpnGatewayAttachmentResource'
@@ -3940,7 +4306,9 @@ instance P.HasVpnGatewayId (VpnGatewayAttachmentResource s) (TF.Attr s P.Text) w
 -- | @aws_vpn_gateway_route_propagation@ Resource.
 data VpnGatewayRoutePropagationResource s = VpnGatewayRoutePropagationResource'
     { _routeTableId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _vpnGatewayId :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpnGatewayRoutePropagationResource s) where
@@ -3952,7 +4320,7 @@ instance TF.IsObject (VpnGatewayRoutePropagationResource s) where
 vpnGatewayRoutePropagationResource
     :: TF.Attr s P.Text -- ^ @route_table_id@
     -> TF.Attr s P.Text -- ^ @vpn_gateway_id@
-    -> TF.Resource AWS (VpnGatewayRoutePropagationResource s)
+    -> TF.Resource P.Provider (VpnGatewayRoutePropagationResource s)
 vpnGatewayRoutePropagationResource _routeTableId _vpnGatewayId =
     TF.newResource "aws_vpn_gateway_route_propagation" $
         VpnGatewayRoutePropagationResource'
@@ -3973,7 +4341,9 @@ instance P.HasVpnGatewayId (VpnGatewayRoutePropagationResource s) (TF.Attr s P.T
 -- | @aws_waf_byte_match_set@ Resource.
 data WafByteMatchSetResource s = WafByteMatchSetResource'
     { _byteMatchTuples :: TF.Attr s [TF.Attr s (ByteMatchTuples s)]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafByteMatchSetResource s) where
@@ -3984,7 +4354,7 @@ instance TF.IsObject (WafByteMatchSetResource s) where
 
 wafByteMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafByteMatchSetResource s)
+    -> TF.Resource P.Provider (WafByteMatchSetResource s)
 wafByteMatchSetResource _name =
     TF.newResource "aws_waf_byte_match_set" $
         WafByteMatchSetResource'
@@ -4005,7 +4375,9 @@ instance P.HasName (WafByteMatchSetResource s) (TF.Attr s P.Text) where
 -- | @aws_waf_geo_match_set@ Resource.
 data WafGeoMatchSetResource s = WafGeoMatchSetResource'
     { _geoMatchConstraint :: TF.Attr s [TF.Attr s (GeoMatchConstraint s)]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafGeoMatchSetResource s) where
@@ -4016,7 +4388,7 @@ instance TF.IsObject (WafGeoMatchSetResource s) where
 
 wafGeoMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafGeoMatchSetResource s)
+    -> TF.Resource P.Provider (WafGeoMatchSetResource s)
 wafGeoMatchSetResource _name =
     TF.newResource "aws_waf_geo_match_set" $
         WafGeoMatchSetResource'
@@ -4037,7 +4409,9 @@ instance P.HasName (WafGeoMatchSetResource s) (TF.Attr s P.Text) where
 -- | @aws_waf_ipset@ Resource.
 data WafIpsetResource s = WafIpsetResource'
     { _ipSetDescriptors :: TF.Attr s [TF.Attr s (IpSetDescriptors s)]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafIpsetResource s) where
@@ -4048,7 +4422,7 @@ instance TF.IsObject (WafIpsetResource s) where
 
 wafIpsetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafIpsetResource s)
+    -> TF.Resource P.Provider (WafIpsetResource s)
 wafIpsetResource _name =
     TF.newResource "aws_waf_ipset" $
         WafIpsetResource'
@@ -4072,10 +4446,15 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (WafIpsetResource s)) (TF.Attr s 
 -- | @aws_waf_rate_based_rule@ Resource.
 data WafRateBasedRuleResource s = WafRateBasedRuleResource'
     { _metricName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _predicates :: TF.Attr s [TF.Attr s (Predicates s)]
+    -- ^ Undocumented.
     , _rateKey :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _rateLimit :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafRateBasedRuleResource s) where
@@ -4092,7 +4471,7 @@ wafRateBasedRuleResource
     -> TF.Attr s P.Text -- ^ @name@
     -> TF.Attr s P.Text -- ^ @rate_key@
     -> TF.Attr s P.Integer -- ^ @rate_limit@
-    -> TF.Resource AWS (WafRateBasedRuleResource s)
+    -> TF.Resource P.Provider (WafRateBasedRuleResource s)
 wafRateBasedRuleResource _metricName _name _rateKey _rateLimit =
     TF.newResource "aws_waf_rate_based_rule" $
         WafRateBasedRuleResource'
@@ -4131,7 +4510,9 @@ instance P.HasRateLimit (WafRateBasedRuleResource s) (TF.Attr s P.Integer) where
 -- | @aws_waf_regex_match_set@ Resource.
 data WafRegexMatchSetResource s = WafRegexMatchSetResource'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _regexMatchTuple :: TF.Attr s [TF.Attr s (RegexMatchTuple s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafRegexMatchSetResource s) where
@@ -4142,7 +4523,7 @@ instance TF.IsObject (WafRegexMatchSetResource s) where
 
 wafRegexMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafRegexMatchSetResource s)
+    -> TF.Resource P.Provider (WafRegexMatchSetResource s)
 wafRegexMatchSetResource _name =
     TF.newResource "aws_waf_regex_match_set" $
         WafRegexMatchSetResource'
@@ -4163,7 +4544,9 @@ instance P.HasRegexMatchTuple (WafRegexMatchSetResource s) (TF.Attr s [TF.Attr s
 -- | @aws_waf_regex_pattern_set@ Resource.
 data WafRegexPatternSetResource s = WafRegexPatternSetResource'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _regexPatternStrings :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafRegexPatternSetResource s) where
@@ -4174,7 +4557,7 @@ instance TF.IsObject (WafRegexPatternSetResource s) where
 
 wafRegexPatternSetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafRegexPatternSetResource s)
+    -> TF.Resource P.Provider (WafRegexPatternSetResource s)
 wafRegexPatternSetResource _name =
     TF.newResource "aws_waf_regex_pattern_set" $
         WafRegexPatternSetResource'
@@ -4195,8 +4578,11 @@ instance P.HasRegexPatternStrings (WafRegexPatternSetResource s) (TF.Attr s [TF.
 -- | @aws_waf_rule@ Resource.
 data WafRuleResource s = WafRuleResource'
     { _metricName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _predicates :: TF.Attr s [TF.Attr s (Predicates s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafRuleResource s) where
@@ -4209,7 +4595,7 @@ instance TF.IsObject (WafRuleResource s) where
 wafRuleResource
     :: TF.Attr s P.Text -- ^ @metric_name@
     -> TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafRuleResource s)
+    -> TF.Resource P.Provider (WafRuleResource s)
 wafRuleResource _metricName _name =
     TF.newResource "aws_waf_rule" $
         WafRuleResource'
@@ -4236,8 +4622,11 @@ instance P.HasPredicates (WafRuleResource s) (TF.Attr s [TF.Attr s (Predicates s
 -- | @aws_waf_rule_group@ Resource.
 data WafRuleGroupResource s = WafRuleGroupResource'
     { _activatedRule :: TF.Attr s [TF.Attr s (ActivatedRule s)]
+    -- ^ Undocumented.
     , _metricName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafRuleGroupResource s) where
@@ -4250,7 +4639,7 @@ instance TF.IsObject (WafRuleGroupResource s) where
 wafRuleGroupResource
     :: TF.Attr s P.Text -- ^ @metric_name@
     -> TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafRuleGroupResource s)
+    -> TF.Resource P.Provider (WafRuleGroupResource s)
 wafRuleGroupResource _metricName _name =
     TF.newResource "aws_waf_rule_group" $
         WafRuleGroupResource'
@@ -4277,7 +4666,9 @@ instance P.HasName (WafRuleGroupResource s) (TF.Attr s P.Text) where
 -- | @aws_waf_size_constraint_set@ Resource.
 data WafSizeConstraintSetResource s = WafSizeConstraintSetResource'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sizeConstraints :: TF.Attr s [TF.Attr s (SizeConstraints s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafSizeConstraintSetResource s) where
@@ -4288,7 +4679,7 @@ instance TF.IsObject (WafSizeConstraintSetResource s) where
 
 wafSizeConstraintSetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafSizeConstraintSetResource s)
+    -> TF.Resource P.Provider (WafSizeConstraintSetResource s)
 wafSizeConstraintSetResource _name =
     TF.newResource "aws_waf_size_constraint_set" $
         WafSizeConstraintSetResource'
@@ -4309,7 +4700,9 @@ instance P.HasSizeConstraints (WafSizeConstraintSetResource s) (TF.Attr s [TF.At
 -- | @aws_waf_sql_injection_match_set@ Resource.
 data WafSqlInjectionMatchSetResource s = WafSqlInjectionMatchSetResource'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sqlInjectionMatchTuples :: TF.Attr s [TF.Attr s (SqlInjectionMatchTuples s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafSqlInjectionMatchSetResource s) where
@@ -4320,7 +4713,7 @@ instance TF.IsObject (WafSqlInjectionMatchSetResource s) where
 
 wafSqlInjectionMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafSqlInjectionMatchSetResource s)
+    -> TF.Resource P.Provider (WafSqlInjectionMatchSetResource s)
 wafSqlInjectionMatchSetResource _name =
     TF.newResource "aws_waf_sql_injection_match_set" $
         WafSqlInjectionMatchSetResource'
@@ -4341,9 +4734,13 @@ instance P.HasSqlInjectionMatchTuples (WafSqlInjectionMatchSetResource s) (TF.At
 -- | @aws_waf_web_acl@ Resource.
 data WafWebAclResource s = WafWebAclResource'
     { _defaultAction :: TF.Attr s (TF.Attr s (DefaultAction s))
+    -- ^ Undocumented.
     , _metricName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _rules :: TF.Attr s [TF.Attr s (Rules s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafWebAclResource s) where
@@ -4358,7 +4755,7 @@ wafWebAclResource
     :: TF.Attr s (TF.Attr s (DefaultAction s)) -- ^ @default_action@
     -> TF.Attr s P.Text -- ^ @metric_name@
     -> TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafWebAclResource s)
+    -> TF.Resource P.Provider (WafWebAclResource s)
 wafWebAclResource _defaultAction _metricName _name =
     TF.newResource "aws_waf_web_acl" $
         WafWebAclResource'
@@ -4391,7 +4788,9 @@ instance P.HasRules (WafWebAclResource s) (TF.Attr s [TF.Attr s (Rules s)]) wher
 -- | @aws_waf_xss_match_set@ Resource.
 data WafXssMatchSetResource s = WafXssMatchSetResource'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _xssMatchTuples :: TF.Attr s [TF.Attr s (XssMatchTuples s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafXssMatchSetResource s) where
@@ -4402,7 +4801,7 @@ instance TF.IsObject (WafXssMatchSetResource s) where
 
 wafXssMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafXssMatchSetResource s)
+    -> TF.Resource P.Provider (WafXssMatchSetResource s)
 wafXssMatchSetResource _name =
     TF.newResource "aws_waf_xss_match_set" $
         WafXssMatchSetResource'
@@ -4423,8 +4822,11 @@ instance P.HasXssMatchTuples (WafXssMatchSetResource s) (TF.Attr s [TF.Attr s (X
 -- | @aws_wafregional_byte_match_set@ Resource.
 data WafregionalByteMatchSetResource s = WafregionalByteMatchSetResource'
     { _byteMatchTuple :: TF.Attr s [TF.Attr s (ByteMatchTuple s)]
+    -- ^ Undocumented.
     , _byteMatchTuples :: TF.Attr s [TF.Attr s (ByteMatchTuples s)]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafregionalByteMatchSetResource s) where
@@ -4436,7 +4838,7 @@ instance TF.IsObject (WafregionalByteMatchSetResource s) where
 
 wafregionalByteMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafregionalByteMatchSetResource s)
+    -> TF.Resource P.Provider (WafregionalByteMatchSetResource s)
 wafregionalByteMatchSetResource _name =
     TF.newResource "aws_wafregional_byte_match_set" $
         WafregionalByteMatchSetResource'
@@ -4463,7 +4865,9 @@ instance P.HasName (WafregionalByteMatchSetResource s) (TF.Attr s P.Text) where
 -- | @aws_wafregional_geo_match_set@ Resource.
 data WafregionalGeoMatchSetResource s = WafregionalGeoMatchSetResource'
     { _geoMatchConstraint :: TF.Attr s [TF.Attr s (GeoMatchConstraint s)]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafregionalGeoMatchSetResource s) where
@@ -4474,7 +4878,7 @@ instance TF.IsObject (WafregionalGeoMatchSetResource s) where
 
 wafregionalGeoMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafregionalGeoMatchSetResource s)
+    -> TF.Resource P.Provider (WafregionalGeoMatchSetResource s)
 wafregionalGeoMatchSetResource _name =
     TF.newResource "aws_wafregional_geo_match_set" $
         WafregionalGeoMatchSetResource'
@@ -4495,7 +4899,9 @@ instance P.HasName (WafregionalGeoMatchSetResource s) (TF.Attr s P.Text) where
 -- | @aws_wafregional_ipset@ Resource.
 data WafregionalIpsetResource s = WafregionalIpsetResource'
     { _ipSetDescriptor :: TF.Attr s [TF.Attr s (IpSetDescriptor s)]
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafregionalIpsetResource s) where
@@ -4506,7 +4912,7 @@ instance TF.IsObject (WafregionalIpsetResource s) where
 
 wafregionalIpsetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafregionalIpsetResource s)
+    -> TF.Resource P.Provider (WafregionalIpsetResource s)
 wafregionalIpsetResource _name =
     TF.newResource "aws_wafregional_ipset" $
         WafregionalIpsetResource'
@@ -4530,10 +4936,15 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (WafregionalIpsetResource s)) (TF
 -- | @aws_wafregional_rate_based_rule@ Resource.
 data WafregionalRateBasedRuleResource s = WafregionalRateBasedRuleResource'
     { _metricName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _predicate :: TF.Attr s [TF.Attr s (Predicate s)]
+    -- ^ Undocumented.
     , _rateKey :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _rateLimit :: TF.Attr s P.Integer
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafregionalRateBasedRuleResource s) where
@@ -4550,7 +4961,7 @@ wafregionalRateBasedRuleResource
     -> TF.Attr s P.Text -- ^ @name@
     -> TF.Attr s P.Text -- ^ @rate_key@
     -> TF.Attr s P.Integer -- ^ @rate_limit@
-    -> TF.Resource AWS (WafregionalRateBasedRuleResource s)
+    -> TF.Resource P.Provider (WafregionalRateBasedRuleResource s)
 wafregionalRateBasedRuleResource _metricName _name _rateKey _rateLimit =
     TF.newResource "aws_wafregional_rate_based_rule" $
         WafregionalRateBasedRuleResource'
@@ -4589,7 +5000,9 @@ instance P.HasRateLimit (WafregionalRateBasedRuleResource s) (TF.Attr s P.Intege
 -- | @aws_wafregional_regex_match_set@ Resource.
 data WafregionalRegexMatchSetResource s = WafregionalRegexMatchSetResource'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _regexMatchTuple :: TF.Attr s [TF.Attr s (RegexMatchTuple s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafregionalRegexMatchSetResource s) where
@@ -4600,7 +5013,7 @@ instance TF.IsObject (WafregionalRegexMatchSetResource s) where
 
 wafregionalRegexMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafregionalRegexMatchSetResource s)
+    -> TF.Resource P.Provider (WafregionalRegexMatchSetResource s)
 wafregionalRegexMatchSetResource _name =
     TF.newResource "aws_wafregional_regex_match_set" $
         WafregionalRegexMatchSetResource'
@@ -4621,7 +5034,9 @@ instance P.HasRegexMatchTuple (WafregionalRegexMatchSetResource s) (TF.Attr s [T
 -- | @aws_wafregional_regex_pattern_set@ Resource.
 data WafregionalRegexPatternSetResource s = WafregionalRegexPatternSetResource'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _regexPatternStrings :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafregionalRegexPatternSetResource s) where
@@ -4632,7 +5047,7 @@ instance TF.IsObject (WafregionalRegexPatternSetResource s) where
 
 wafregionalRegexPatternSetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafregionalRegexPatternSetResource s)
+    -> TF.Resource P.Provider (WafregionalRegexPatternSetResource s)
 wafregionalRegexPatternSetResource _name =
     TF.newResource "aws_wafregional_regex_pattern_set" $
         WafregionalRegexPatternSetResource'
@@ -4653,8 +5068,11 @@ instance P.HasRegexPatternStrings (WafregionalRegexPatternSetResource s) (TF.Att
 -- | @aws_wafregional_rule@ Resource.
 data WafregionalRuleResource s = WafregionalRuleResource'
     { _metricName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _predicate :: TF.Attr s [TF.Attr s (Predicate s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafregionalRuleResource s) where
@@ -4667,7 +5085,7 @@ instance TF.IsObject (WafregionalRuleResource s) where
 wafregionalRuleResource
     :: TF.Attr s P.Text -- ^ @metric_name@
     -> TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafregionalRuleResource s)
+    -> TF.Resource P.Provider (WafregionalRuleResource s)
 wafregionalRuleResource _metricName _name =
     TF.newResource "aws_wafregional_rule" $
         WafregionalRuleResource'
@@ -4694,8 +5112,11 @@ instance P.HasPredicate (WafregionalRuleResource s) (TF.Attr s [TF.Attr s (Predi
 -- | @aws_wafregional_rule_group@ Resource.
 data WafregionalRuleGroupResource s = WafregionalRuleGroupResource'
     { _activatedRule :: TF.Attr s [TF.Attr s (ActivatedRule s)]
+    -- ^ Undocumented.
     , _metricName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafregionalRuleGroupResource s) where
@@ -4708,7 +5129,7 @@ instance TF.IsObject (WafregionalRuleGroupResource s) where
 wafregionalRuleGroupResource
     :: TF.Attr s P.Text -- ^ @metric_name@
     -> TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafregionalRuleGroupResource s)
+    -> TF.Resource P.Provider (WafregionalRuleGroupResource s)
 wafregionalRuleGroupResource _metricName _name =
     TF.newResource "aws_wafregional_rule_group" $
         WafregionalRuleGroupResource'
@@ -4735,7 +5156,9 @@ instance P.HasName (WafregionalRuleGroupResource s) (TF.Attr s P.Text) where
 -- | @aws_wafregional_size_constraint_set@ Resource.
 data WafregionalSizeConstraintSetResource s = WafregionalSizeConstraintSetResource'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sizeConstraints :: TF.Attr s [TF.Attr s (SizeConstraints s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafregionalSizeConstraintSetResource s) where
@@ -4746,7 +5169,7 @@ instance TF.IsObject (WafregionalSizeConstraintSetResource s) where
 
 wafregionalSizeConstraintSetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafregionalSizeConstraintSetResource s)
+    -> TF.Resource P.Provider (WafregionalSizeConstraintSetResource s)
 wafregionalSizeConstraintSetResource _name =
     TF.newResource "aws_wafregional_size_constraint_set" $
         WafregionalSizeConstraintSetResource'
@@ -4767,7 +5190,9 @@ instance P.HasSizeConstraints (WafregionalSizeConstraintSetResource s) (TF.Attr 
 -- | @aws_wafregional_sql_injection_match_set@ Resource.
 data WafregionalSqlInjectionMatchSetResource s = WafregionalSqlInjectionMatchSetResource'
     { _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _sqlInjectionMatchTuple :: TF.Attr s [TF.Attr s (SqlInjectionMatchTuple s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafregionalSqlInjectionMatchSetResource s) where
@@ -4778,7 +5203,7 @@ instance TF.IsObject (WafregionalSqlInjectionMatchSetResource s) where
 
 wafregionalSqlInjectionMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafregionalSqlInjectionMatchSetResource s)
+    -> TF.Resource P.Provider (WafregionalSqlInjectionMatchSetResource s)
 wafregionalSqlInjectionMatchSetResource _name =
     TF.newResource "aws_wafregional_sql_injection_match_set" $
         WafregionalSqlInjectionMatchSetResource'
@@ -4799,9 +5224,13 @@ instance P.HasSqlInjectionMatchTuple (WafregionalSqlInjectionMatchSetResource s)
 -- | @aws_wafregional_web_acl@ Resource.
 data WafregionalWebAclResource s = WafregionalWebAclResource'
     { _defaultAction :: TF.Attr s [DefaultAction s]
+    -- ^ Undocumented.
     , _metricName :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
+    -- ^ Undocumented.
     , _rule :: TF.Attr s [TF.Attr s (Rule s)]
+    -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafregionalWebAclResource s) where
@@ -4816,7 +5245,7 @@ wafregionalWebAclResource
     :: TF.Attr s [DefaultAction s] -- ^ @default_action@
     -> TF.Attr s P.Text -- ^ @metric_name@
     -> TF.Attr s P.Text -- ^ @name@
-    -> TF.Resource AWS (WafregionalWebAclResource s)
+    -> TF.Resource P.Provider (WafregionalWebAclResource s)
 wafregionalWebAclResource _defaultAction _metricName _name =
     TF.newResource "aws_wafregional_web_acl" $
         WafregionalWebAclResource'

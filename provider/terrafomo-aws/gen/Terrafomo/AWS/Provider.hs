@@ -16,14 +16,14 @@
 --
 module Terrafomo.AWS.Provider
     (
-    -- * Provider Datatype
-      AWS (..)
+    -- * AWS Provider Datatype
+      Provider (..)
     , newProvider
     ) where
 
 import Data.Functor  ((<$>))
 import Data.Function ((&))
-import Data.Hashable (Hashable)
+import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,6 +32,7 @@ import Terrafomo.AWS.Settings
 import Terrafomo.AWS.Types
 
 import qualified Data.HashMap.Strict as P
+import qualified Data.Hashable as P
 import qualified Data.List.NonEmpty as P
 import qualified Data.Text as P
 import qualified GHC.Generics as P
@@ -42,35 +43,55 @@ import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.Name as TF
 import qualified Terrafomo.Provider as TF
 
--- The AWS Terraform provider configuration.
-data AWS = AWS'
+-- | The AWS Terraform provider configuration.
+data Provider = Provider'
     { _accessKey :: P.Maybe P.Text
+    -- ^ The access key for API operations. You can retrieve this from the 'Security & Credentials' section of the AWS console.
     , _allowedAccountIds :: P.Maybe [P.Text]
+    -- ^ Undocumented.
     , _assumeRole :: P.Maybe AssumeRole
+    -- ^ Undocumented.
     , _dynamodbEndpoint :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`. It's typically used to connect to dynamodb-local.
     , _endpoints :: P.Maybe [Endpoints]
+    -- ^ Undocumented.
     , _forbiddenAccountIds :: P.Maybe [P.Text]
+    -- ^ Undocumented.
     , _insecure :: P.Bool
+    -- ^ Explicitly allow the provider to perform "insecure" SSL requests. If omitted,default value is `false`
     , _kinesisEndpoint :: P.Maybe P.Text
+    -- ^ Use this to override the default endpoint URL constructed from the `region`. It's typically used to connect to kinesalite.
     , _maxRetries :: P.Integer
+    -- ^ The maximum number of times an AWS API request is being executed. If the API request still fails, an error is thrown.
     , _profile :: P.Maybe P.Text
+    -- ^ The profile for API operations. If not set, the default profile created with `aws configure` will be used.
     , _region :: P.Text
+    -- ^ The region where AWS operations will take place. Examples are us-east-1, us-west-2, etc.
     , _s3ForcePathStyle :: P.Bool
+    -- ^ Set this to true to force the request to use path-style addressing, i.e., http://s3.amazonaws.com/BUCKET/KEY. By default, the S3 client will use virtual hosted bucket addressing when possible (http://BUCKET.s3.amazonaws.com/KEY). Specific to the Amazon S3 service.
     , _secretKey :: P.Maybe P.Text
+    -- ^ The secret key for API operations. You can retrieve this from the 'Security & Credentials' section of the AWS console.
     , _sharedCredentialsFile :: P.Maybe P.Text
+    -- ^ The path to the shared credentials file. If not set this defaults to ~/.aws/credentials.
     , _skipCredentialsValidation :: P.Bool
+    -- ^ Skip the credentials validation via STS API. Used for AWS API implementations that do not have STS available/implemented.
     , _skipGetEc2Platforms :: P.Bool
+    -- ^ Skip getting the supported EC2 platforms. Used by users that don't have ec2:DescribeAccountAttributes permissions.
     , _skipMetadataApiCheck :: P.Bool
+    -- ^ Undocumented.
     , _skipRegionValidation :: P.Bool
+    -- ^ Skip static validation of region name. Used by users of alternative AWS-like APIs or users w/ access to regions that are not public (yet).
     , _skipRequestingAccountId :: P.Bool
+    -- ^ Skip requesting the account ID. Used for AWS API implementations that do not have IAM/STS API and/or metadata API.
     , _token :: P.Maybe P.Text
+    -- ^ Session token. A session token is only required if you are using temporary security credentials.
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance Hashable AWS
+instance P.Hashable Provider
 
-instance TF.IsSection AWS where
-    toSection x@AWS'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (AWS))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
@@ -98,14 +119,14 @@ instance TF.IsSection AWS where
                   , TF.assign "token" <$> _token
                   ])
 
-instance TF.IsProvider AWS where
-    type ProviderType AWS = "aws"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "aws"
 
 newProvider
     :: P.Text -- ^ @region@
-    -> AWS
+    -> Provider
 newProvider _region =
-    AWS'
+    Provider'
         { _accessKey = P.Nothing
         , _allowedAccountIds = P.Nothing
         , _assumeRole = P.Nothing
@@ -128,102 +149,102 @@ newProvider _region =
         , _token = P.Nothing
         }
 
-instance P.HasAccessKey (AWS) (P.Maybe P.Text) where
+instance P.HasAccessKey (Provider) (P.Maybe P.Text) where
     accessKey =
-        P.lens (_accessKey :: AWS -> P.Maybe P.Text)
-               (\s a -> s { _accessKey = a } :: AWS)
+        P.lens (_accessKey :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _accessKey = a } :: Provider)
 
-instance P.HasAllowedAccountIds (AWS) (P.Maybe [P.Text]) where
+instance P.HasAllowedAccountIds (Provider) (P.Maybe [P.Text]) where
     allowedAccountIds =
-        P.lens (_allowedAccountIds :: AWS -> P.Maybe [P.Text])
-               (\s a -> s { _allowedAccountIds = a } :: AWS)
+        P.lens (_allowedAccountIds :: Provider -> P.Maybe [P.Text])
+               (\s a -> s { _allowedAccountIds = a } :: Provider)
 
-instance P.HasAssumeRole (AWS) (P.Maybe AssumeRole) where
+instance P.HasAssumeRole (Provider) (P.Maybe AssumeRole) where
     assumeRole =
-        P.lens (_assumeRole :: AWS -> P.Maybe AssumeRole)
-               (\s a -> s { _assumeRole = a } :: AWS)
+        P.lens (_assumeRole :: Provider -> P.Maybe AssumeRole)
+               (\s a -> s { _assumeRole = a } :: Provider)
 
-instance P.HasDynamodbEndpoint (AWS) (P.Maybe P.Text) where
+instance P.HasDynamodbEndpoint (Provider) (P.Maybe P.Text) where
     dynamodbEndpoint =
-        P.lens (_dynamodbEndpoint :: AWS -> P.Maybe P.Text)
-               (\s a -> s { _dynamodbEndpoint = a } :: AWS)
+        P.lens (_dynamodbEndpoint :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _dynamodbEndpoint = a } :: Provider)
 
-instance P.HasEndpoints (AWS) (P.Maybe [Endpoints]) where
+instance P.HasEndpoints (Provider) (P.Maybe [Endpoints]) where
     endpoints =
-        P.lens (_endpoints :: AWS -> P.Maybe [Endpoints])
-               (\s a -> s { _endpoints = a } :: AWS)
+        P.lens (_endpoints :: Provider -> P.Maybe [Endpoints])
+               (\s a -> s { _endpoints = a } :: Provider)
 
-instance P.HasForbiddenAccountIds (AWS) (P.Maybe [P.Text]) where
+instance P.HasForbiddenAccountIds (Provider) (P.Maybe [P.Text]) where
     forbiddenAccountIds =
-        P.lens (_forbiddenAccountIds :: AWS -> P.Maybe [P.Text])
-               (\s a -> s { _forbiddenAccountIds = a } :: AWS)
+        P.lens (_forbiddenAccountIds :: Provider -> P.Maybe [P.Text])
+               (\s a -> s { _forbiddenAccountIds = a } :: Provider)
 
-instance P.HasInsecure (AWS) (P.Bool) where
+instance P.HasInsecure (Provider) (P.Bool) where
     insecure =
-        P.lens (_insecure :: AWS -> P.Bool)
-               (\s a -> s { _insecure = a } :: AWS)
+        P.lens (_insecure :: Provider -> P.Bool)
+               (\s a -> s { _insecure = a } :: Provider)
 
-instance P.HasKinesisEndpoint (AWS) (P.Maybe P.Text) where
+instance P.HasKinesisEndpoint (Provider) (P.Maybe P.Text) where
     kinesisEndpoint =
-        P.lens (_kinesisEndpoint :: AWS -> P.Maybe P.Text)
-               (\s a -> s { _kinesisEndpoint = a } :: AWS)
+        P.lens (_kinesisEndpoint :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _kinesisEndpoint = a } :: Provider)
 
-instance P.HasMaxRetries (AWS) (P.Integer) where
+instance P.HasMaxRetries (Provider) (P.Integer) where
     maxRetries =
-        P.lens (_maxRetries :: AWS -> P.Integer)
-               (\s a -> s { _maxRetries = a } :: AWS)
+        P.lens (_maxRetries :: Provider -> P.Integer)
+               (\s a -> s { _maxRetries = a } :: Provider)
 
-instance P.HasProfile (AWS) (P.Maybe P.Text) where
+instance P.HasProfile (Provider) (P.Maybe P.Text) where
     profile =
-        P.lens (_profile :: AWS -> P.Maybe P.Text)
-               (\s a -> s { _profile = a } :: AWS)
+        P.lens (_profile :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _profile = a } :: Provider)
 
-instance P.HasRegion (AWS) (P.Text) where
+instance P.HasRegion (Provider) (P.Text) where
     region =
-        P.lens (_region :: AWS -> P.Text)
-               (\s a -> s { _region = a } :: AWS)
+        P.lens (_region :: Provider -> P.Text)
+               (\s a -> s { _region = a } :: Provider)
 
-instance P.HasS3ForcePathStyle (AWS) (P.Bool) where
+instance P.HasS3ForcePathStyle (Provider) (P.Bool) where
     s3ForcePathStyle =
-        P.lens (_s3ForcePathStyle :: AWS -> P.Bool)
-               (\s a -> s { _s3ForcePathStyle = a } :: AWS)
+        P.lens (_s3ForcePathStyle :: Provider -> P.Bool)
+               (\s a -> s { _s3ForcePathStyle = a } :: Provider)
 
-instance P.HasSecretKey (AWS) (P.Maybe P.Text) where
+instance P.HasSecretKey (Provider) (P.Maybe P.Text) where
     secretKey =
-        P.lens (_secretKey :: AWS -> P.Maybe P.Text)
-               (\s a -> s { _secretKey = a } :: AWS)
+        P.lens (_secretKey :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _secretKey = a } :: Provider)
 
-instance P.HasSharedCredentialsFile (AWS) (P.Maybe P.Text) where
+instance P.HasSharedCredentialsFile (Provider) (P.Maybe P.Text) where
     sharedCredentialsFile =
-        P.lens (_sharedCredentialsFile :: AWS -> P.Maybe P.Text)
-               (\s a -> s { _sharedCredentialsFile = a } :: AWS)
+        P.lens (_sharedCredentialsFile :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _sharedCredentialsFile = a } :: Provider)
 
-instance P.HasSkipCredentialsValidation (AWS) (P.Bool) where
+instance P.HasSkipCredentialsValidation (Provider) (P.Bool) where
     skipCredentialsValidation =
-        P.lens (_skipCredentialsValidation :: AWS -> P.Bool)
-               (\s a -> s { _skipCredentialsValidation = a } :: AWS)
+        P.lens (_skipCredentialsValidation :: Provider -> P.Bool)
+               (\s a -> s { _skipCredentialsValidation = a } :: Provider)
 
-instance P.HasSkipGetEc2Platforms (AWS) (P.Bool) where
+instance P.HasSkipGetEc2Platforms (Provider) (P.Bool) where
     skipGetEc2Platforms =
-        P.lens (_skipGetEc2Platforms :: AWS -> P.Bool)
-               (\s a -> s { _skipGetEc2Platforms = a } :: AWS)
+        P.lens (_skipGetEc2Platforms :: Provider -> P.Bool)
+               (\s a -> s { _skipGetEc2Platforms = a } :: Provider)
 
-instance P.HasSkipMetadataApiCheck (AWS) (P.Bool) where
+instance P.HasSkipMetadataApiCheck (Provider) (P.Bool) where
     skipMetadataApiCheck =
-        P.lens (_skipMetadataApiCheck :: AWS -> P.Bool)
-               (\s a -> s { _skipMetadataApiCheck = a } :: AWS)
+        P.lens (_skipMetadataApiCheck :: Provider -> P.Bool)
+               (\s a -> s { _skipMetadataApiCheck = a } :: Provider)
 
-instance P.HasSkipRegionValidation (AWS) (P.Bool) where
+instance P.HasSkipRegionValidation (Provider) (P.Bool) where
     skipRegionValidation =
-        P.lens (_skipRegionValidation :: AWS -> P.Bool)
-               (\s a -> s { _skipRegionValidation = a } :: AWS)
+        P.lens (_skipRegionValidation :: Provider -> P.Bool)
+               (\s a -> s { _skipRegionValidation = a } :: Provider)
 
-instance P.HasSkipRequestingAccountId (AWS) (P.Bool) where
+instance P.HasSkipRequestingAccountId (Provider) (P.Bool) where
     skipRequestingAccountId =
-        P.lens (_skipRequestingAccountId :: AWS -> P.Bool)
-               (\s a -> s { _skipRequestingAccountId = a } :: AWS)
+        P.lens (_skipRequestingAccountId :: Provider -> P.Bool)
+               (\s a -> s { _skipRequestingAccountId = a } :: Provider)
 
-instance P.HasToken (AWS) (P.Maybe P.Text) where
+instance P.HasToken (Provider) (P.Maybe P.Text) where
     token =
-        P.lens (_token :: AWS -> P.Maybe P.Text)
-               (\s a -> s { _token = a } :: AWS)
+        P.lens (_token :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _token = a } :: Provider)
