@@ -155,6 +155,7 @@ data Value
     | Number  !Integer
     -- ^ Numbers are assumed to be base 10. If you prefix a number with 0x, it is
     -- treated as a hexadecimal number.
+    | Float   !Double
     | Bool    !Bool
     -- ^ Boolean values: true, false.
     | List    ![Value]
@@ -181,6 +182,7 @@ instance Pretty Value where
         String  x               -> PP.dquotes (pretty x)
         HereDoc (pretty -> k) x -> "<<-" <> PP.vsep [k, pretty x, k]
         Number  x               -> pretty x
+        Float   x               -> pretty x
         Bool    True            -> "true"
         Bool    False           -> "false"
         List    xs              -> PP.nest 2 (PP.list (map pretty xs))
@@ -255,6 +257,7 @@ class IsValue a where
 instance IsValue Value      where toValue = id
 instance IsValue Bool       where toValue = Bool
 instance IsValue Char       where toValue = string . LText.singleton
+instance IsValue Double     where toValue = Float
 instance IsValue Int        where toValue = number
 instance IsValue Natural    where toValue = number
 instance IsValue Integer    where toValue = number
@@ -274,11 +277,14 @@ instance IsValue IP.IPRange where toValue = string . fromString . show
 instance IsValue JSON.Value where toValue = json
 instance IsValue Name       where toValue = toValue . Format.sformat fname
 
+instance IsValue Key where
+    toValue (Key t n) = toValue (Format.sformat (ftype % "." % fname) t n)
+
 instance IsValue a => IsValue [a] where
     toValue = list
 
-instance IsValue Key where
-    toValue (Key t n) = toValue (Format.sformat (ftype % "." % fname) t n)
+instance IsValue a => IsValue (HashMap Text a) where
+    toValue = Map . Map.map toValue
 
 instance IsValue a => IsValue (Attr s a) where
     toValue = fromMaybe null . attribute

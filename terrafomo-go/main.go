@@ -126,7 +126,7 @@ func newSchema(k string, v *schema.Schema) *Schema {
 	s := Schema{
 		Name:          k,
 		Type:          v.Type.String(),
-		ConflictsWith: v.ConflictsWith,
+		ConflictsWith: []string{},
 		Optional:      v.Optional,
 		Required:      v.Required,
 		Computed:      v.Computed,
@@ -134,6 +134,10 @@ func newSchema(k string, v *schema.Schema) *Schema {
 		Sensitive:     v.Sensitive,
 		MinItems:      v.MinItems,
 		MaxItems:      v.MaxItems,
+	}
+
+	if v.ConflictsWith != nil {
+		s.ConflictsWith = v.ConflictsWith
 	}
 
 	des := v.Description
