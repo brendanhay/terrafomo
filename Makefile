@@ -20,9 +20,7 @@ default: $(PROVIDERS)
 $(GENERATE):
 	@stack install --nix terrafomo-gen 1>&2
 
-full-clean: $(addsuffix -full-clean,$(PROVIDERS)) clean
-
-clean:
+clean: $(addsuffix -clean,$(PROVIDERS))
 	rm -f $(GENERATE)
 	rm -rf provider/*/gen provider/*/*.cabal terrafomo/gen/*
 	@script/generate
@@ -49,21 +47,21 @@ define provider
 $1: $(GENERATE) $(GO_VENDOR)-$1 $(MODEL_DIR)/$1.json
 	$(GENERATE) \
  --template-dir=terrafomo-gen/template \
- --intermediate-dir=terrafomo-gen/schema \
+ --intermediate-dir=terrafomo-gen/ir \
  --config-yaml=terrafomo-gen/config/$1.yaml \
  --provider-json=$(MODEL_DIR)/$1.json
 
-$1-full-clean:
+$1-clean:
 	rm -rf $(GO_VENDOR)-$1/gen.go $(MODEL_DIR)/$1.json
 
 $(GO_VENDOR)-$1:
 	git clone https://github.com/terraform-providers/terraform-provider-$1 $$@
 
 $(GO_VENDOR)-$1/gen.go: $(GO_VENDOR)-$1 $(GO_TEMPLATE)
-	sed "s/{{ provider }}/$1/g" $(GO_TEMPLATE) > $$@
+	sed "s/replace_provider/$1/g" $(GO_TEMPLATE) > $$@
 
 $(MODEL_DIR)/$1.json: $(GO_VENDOR)-$1/gen.go $(MODEL_DIR)
-	-go run $(GO_VENDOR)-$1/gen.go > $$@
+	go run $(GO_VENDOR)-$1/gen.go > $$@
 endef
 
 $(foreach p,$(PROVIDERS),$(eval $(call provider,$p)))
