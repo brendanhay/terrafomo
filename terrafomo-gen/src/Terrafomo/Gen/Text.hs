@@ -8,23 +8,11 @@ import qualified Data.Char as Char
 import qualified Data.Set  as Set
 import qualified Data.Text as Text
 
-titleName :: Text -> Text
-titleName x
-    | Just y <- Text.stripPrefix "Data Source:" x = go y
-    | Just y <- Text.stripPrefix "Resource:"    x = go y
-    | otherwise                                   = go x
-  where
-    go = Text.filter (not . Char.isSpace)
-
 safeArgName :: Text -> Text
-safeArgName x =
-    Text.cons '_' . unreserved . Text.replace "." "_" $
-        case Text.split (== '/') (fromMaybe x (Text.stripPrefix "_" x)) of
-            [] -> x
-            xs -> last xs
+safeArgName = Text.cons '_' . fieldMethodName
 
 safeAttrName :: Text -> Text
-safeAttrName = mappend "_computed" . safeArgName
+safeAttrName = mappend "_computed" . upperHead . fieldMethodName
 
 resourceName :: Text -> Text
 resourceName = (<> "Resource") . schemaTypeName
@@ -48,9 +36,9 @@ fieldClassName :: Text -> Text
 fieldClassName = mappend "Has" . upperHead . fieldMethodName
 
 fieldMethodName :: Text -> Text
-fieldMethodName x =
+fieldMethodName (unreserved -> x) =
     let y = fromMaybe x (Text.stripPrefix "_" x)
-     in case Text.split (== '_') y of
+     in case filter (not . Text.null) $ Text.split (== '_') y of
            []   -> y
            z:zs -> mconcat (z : map upperHead zs)
 
@@ -66,8 +54,13 @@ lowerHead x =
         Nothing      -> x
         Just (y, ys) -> Char.toLower y `Text.cons` ys
 
+quotes, parens, brackets :: Text -> Text
+quotes   = surround '"' '"'
+parens   = surround '(' ')'
+brackets = surround '[' ']'
+
 surround :: Char -> Char -> Text -> Text
-surround start end x = Text.cons start x `Text.snoc` end
+surround start end x = start `Text.cons` x `Text.snoc` end
 
 unreserved :: Text -> Text
 unreserved x
@@ -75,9 +68,7 @@ unreserved x
      | otherwise               = x
   where
     reserved = Set.fromList
-        [
-        -- Keywords
-          "type"
+        [ "type"
         , "instance"
         , "family"
         , "data"

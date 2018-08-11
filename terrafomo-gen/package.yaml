@@ -21,23 +21,18 @@ executables:
 
     dependencies:
       - aeson
-      - base       >= 4.9 && < 5
+      - base >= 4.9 && < 5
       - bytestring
-      - cmark
       - containers
       - directory
       - ede
       - errors
       - filepath
-      - megaparsec >= 6.2
+      - mtl
       - optparse-applicative
       - pretty-show
-      - process
       - split
       - terrafomo
       - text
       - unordered-containers
-      - wl-pprint-text
-      - word-wrap
       - yaml
-      - mtl

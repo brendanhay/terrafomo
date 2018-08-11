@@ -39,21 +39,14 @@ import GHC.Show (Show)
 
 import Lens.Micro (lens)
 
-import {{ typesNamespace }} as P
-
-{% for import in imports %}
+x{% for import in imports %}
 import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Data.Text       as P
-import qualified Data.Word       as P
-import qualified GHC.Base        as P
-import qualified Numeric.Natural as P
-
 import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.Name as TF
+import qualified Terrafomo.Provider as TF
+import qualified Terrafomo.Schema as TF
 {% for schema in schemas %}
 
 {% let original = schema.value.name %}

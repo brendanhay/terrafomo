@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+
 {% include "_include/license.ede" %}
 --
 module {{ namespace }}

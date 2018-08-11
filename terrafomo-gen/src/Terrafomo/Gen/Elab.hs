@@ -1,141 +1,137 @@
 module Terrafomo.Gen.Elab where
 
-import Control.Applicative        (many, some, (<|>))
-import Control.Monad              (unless, void, (>=>))
+import Control.Applicative        ((<|>))
 import Control.Monad.Except       (Except)
+import Control.Monad.Reader       (ReaderT)
 import Control.Monad.State.Strict (StateT)
 
-import Data.Bifunctor     (bimap, first)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Map.Strict    (Map)
-import Data.Maybe         (fromMaybe)
-import Data.Semigroup     ((<>))
-import Data.Set           (Set)
-import Data.Text          (Text)
-import Data.Void          (Void)
-
-import GHC.Generics (Generic)
+import Data.Map.Strict (Map)
+import Data.Semigroup  ((<>))
+import Data.Set        (Set)
+import Data.Text       (Text)
 
 import Terrafomo.Gen.Haskell
 
 import Text.Show.Pretty (ppShow)
 
 import qualified Control.Monad.Except       as Except
+import qualified Control.Monad.Reader       as Reader
 import qualified Control.Monad.State.Strict as State
-import qualified Data.Foldable              as Fold
-import qualified Data.List                  as List
 import qualified Data.Map.Strict            as Map
 import qualified Data.Set                   as Set
-import qualified Data.Text                  as Text
-import qualified Data.Text.IO               as Text
-import qualified System.FilePath            as Path
+import qualified Data.Text.Read             as Text
 import qualified Terrafomo.Gen.Go           as Go
-import qualified Terrafomo.Gen.JSON         as JSON
 import qualified Terrafomo.Gen.Text         as Text
 
-type Elab = StateT (Map Text Settings) (Except String)
+type Elab = ReaderT Bool (StateT (Map Text Settings) (Except String))
 
 elab :: Config -> Go.Provider -> Either String Provider
 elab cfg p =
     Except.runExcept $
-        flip State.evalStateT mempty $ do
-            let name = Go.providerName p
+        flip State.evalStateT mempty $
+            flip Reader.runReaderT False $ do
+                let name = Go.providerName p
+                    deps = Set.fromList
+                         [ "base"
+                         , "hashable"
+                         , "microlens"
+                         , "terrafomo"
+                         , "text"
+                         , "unordered-containers"
+                         ]
 
-            args  <- arguments  (Go.providerSchemas p)
-            attrs <- attributes (Go.providerSchemas p)
+                args  <- arguments            (Go.providerSchemas     p)
+                rs    <- resources Resource   (Go.providerResources   p)
+                ds    <- resources DataSource (Go.providerDataSources p)
 
-            rs    <- resources Resource   (Go.providerResources   p)
-            ds    <- resources DataSource (Go.providerDataSources p)
+                types <- State.gets Map.elems
 
-            types <- State.get
+                pure $! Provider'
+                    { providerName         = configName cfg
+                    , providerPackage      = configPackage cfg
+                    , providerDependencies = configDependencies cfg <> deps
+                    , providerOriginal     = name
+                    , providerParameters   = parameters args
+                    , providerArguments    = args
+                    , providerResources    = rs
+                    , providerDataSources  = ds
+                    , providerSettings     = types
+                    }
 
-            pure $! Provider
-                { providerName        = configName cfg
-                , providerPackage     = configPackage cfg
-                , providerOriginal    = name
-                , providerArguments   = args
-                , providerAttributes  = attrs
-                , providerResources   = rs
-                , providerDataSources = ds
-                , providerTypes       = types
-                }
+classes :: Provider -> (Set Class, Set Class)
+classes p = (lenses, getters)
+  where
+    lenses  = Set.fromList (map go args)
+    getters = Set.fromList (map go attrs)
 
-resources :: SchemaType -> [Go.Resource] -> Elab (Map Text Resource)
-resources typ =
-    fmap Map.fromList
-        . traverse (\x -> resource typ (Go.resourceName x) (Go.resourceSchemas x))
+    go x =
+        Class' { className   = fieldClass  x
+               , classMethod = fieldMethod x
+               }
 
-resource :: SchemaType -> Text -> [Go.Schema] -> Elab (Text, Resource)
-resource typ name xs = do
-    args  <- arguments xs
-    attrs <- attributes xs
-    pure $! (name,)
-        Resource'
+    args =  providerArguments p
+         ++ concatMap resourceArguments (providerResources    p)
+         ++ concatMap resourceArguments (providerDataSources  p)
+         ++ concatMap settingsArguments (providerSettings     p)
+
+    attrs = concatMap resourceAttributes (providerResources   p)
+         ++ concatMap resourceAttributes (providerDataSources p)
+         ++ concatMap settingsAttributes (providerSettings    p)
+
+resources :: SchemaType -> [Go.Resource] -> Elab [Resource]
+resources styp =
+    traverse $ \x ->
+        resource styp (Go.resourceName x) (Go.resourceSchemas x)
+
+resource :: SchemaType -> Text -> [Go.Schema] -> Elab Resource
+resource styp orig xs =
+    threaded $ do
+        let name =
+                case styp of
+                    Resource   -> Text.resourceName   orig
+                    DataSource -> Text.dataSourceName orig
+
+        args  <- arguments xs
+        attrs <- attributes xs
+        con   <- newCon name
+
+        pure $! Resource'
             { resourceName       = name
-            , resourceType       = Type name
-            , resourceSchema     = typ
+            , resourceOriginal   = orig
+            , resourceType       = con
+            , resourceSchema     = styp
+            , resourceParameters = parameters args
             , resourceArguments  = args
             , resourceAttributes = attrs
             }
 
-arguments :: [Go.Schema] -> Elab (Map Text Field)
-arguments =
-    fmap Map.fromList . traverse field . filter (not . Go.schemaComputed)
+parameters :: [Field] -> [Field]
+parameters =
+    filter $ \x ->
+        case fieldDefault x of
+            DefaultParam{} -> True
+            _              -> False
 
-attributes :: [Go.Schema] -> Elab (Map Text Field)
-attributes =
-    fmap Map.fromList . traverse field . filter Go.schemaComputed
+arguments :: [Go.Schema] -> Elab [Field]
+arguments = traverse field . filter (not . Go.schemaComputed)
 
-field_ :: Go.Schema -> Elab Type
-field_ = fmap (fieldType . snd) . field
-
-field :: Go.Schema -> Elab (Text, Field)
-field s = do
-   typ <-
-       case Go.schemaType s of
-           Go.TypeString -> pure "Text"
-           Go.TypeInt    -> pure "Integer"
-           Go.TypeFloat  -> pure "Double"
-           Go.TypeBool   -> pure "Bool"
-           Go.TypeMap    -> nested s <|> pure "Map Text Text" -- Map Text
-           Go.TypeList   -> nested s -- []
-           Go.TypeSet    -> nested s
-
-   let name = Go.schemaName s
-
-   pure $! (name,) Field
-       { fieldName     = name
-       , fieldClass    = Text.fieldClassName  name
-       , fieldMethod   = Text.fieldMethodName name
-       , fieldLabel    = name
-       , fieldType     = typ
-       , fieldOptional = Go.schemaOptional s
-       , fieldRequired = Go.schemaRequired s
-       , fieldComputed = Go.schemaComputed s
-       }
-
-nested :: Go.Schema -> Elab Type
-nested s
-    | Just x <- Go.schemaSchema   s = field_ x
-    | Just x <- Go.schemaResource s =
-        settings_ (Go.resourceName x) (Go.resourceSchemas x)
-    | otherwise                     =
-        Except.throwError $
-            unlines [ "Expected Schema or Resource for " ++ show (Go.schemaType s)
-                    , ppShow s
-                    ]
+attributes :: [Go.Schema] -> Elab [Field]
+attributes = traverse field . filter Go.schemaComputed
 
 settings_ :: Text -> [Go.Schema] -> Elab Type
-settings_ name xs = fmap settingsType (settings name xs)
+settings_ name = fmap settingsType . settings name
 
 settings :: Text -> [Go.Schema] -> Elab Settings
 settings name xs = do
-    args  <- arguments xs
+    args  <- arguments  xs
     attrs <- attributes xs
+    con   <- newCon name
 
-    let s = Settings
-            { settingsName       = name
-            , settingsType       = Type name
+    let s = Settings'
+            { settingsName       = Text.dataTypeName name
+            , settingsOriginal   = name
+            , settingsType       = con
+            , settingsParameters = parameters args
             , settingsArguments  = args
             , settingsAttributes = attrs
             }
@@ -144,47 +140,125 @@ settings name xs = do
 
     pure s
 
-classes :: [a] -> (Set Class, Set Class)
-classes =
-    bimap Set.unions Set.unions . unzip . map (bimap go go . getFields)
+field_ :: Go.Schema -> Elab Type
+field_ = fmap fieldType . field
+
+field :: Go.Schema -> Elab Field
+field s = do
+    thread <- Reader.ask
+    def    <- traverse (defaulted (Go.schemaType s)) (Go.schemaDefault s)
+
+    let name     = Go.schemaName s
+
+        label    =
+            if Go.schemaComputed s
+                then Text.safeAttrName name
+                else Text.safeArgName  name
+
+        default_ =
+            case def of
+                Just x  | thread              -> DefaultAttr x
+                        | otherwise           -> x
+                Nothing | Go.schemaRequired s -> DefaultParam label
+                        | thread              -> DefaultNil "TF.Nil"
+                        | otherwise           -> DefaultNil "P.Nothing"
+
+        optional =
+            case default_ of
+                DefaultNil{}
+                    | not thread -> typeMay
+                _                -> id
+
+        encoder =
+            case default_ of
+                DefaultNil{}
+                   | not thread -> "TF.assign " <> Text.quotes name <> " <$>"
+                _  | thread     -> "TF.assign " <> Text.quotes name <> " <$> TF.attribute"
+                   | otherwise  -> "P.Just $ TF.assign " <> Text.quotes name
+
+    typ    <-
+        case Go.schemaType s of
+            Go.TypeString -> threadType Text
+            Go.TypeInt    -> threadType Integer
+            Go.TypeFloat  -> threadType Double
+            Go.TypeBool   -> threadType Bool
+            Go.TypeSet    ->
+                if thread
+                    then Thread <$> nested s
+                    else nested s
+            Go.TypeList   ->
+                threadType =<<
+                    typeList <$> nested s
+            Go.TypeMap    ->
+                threadType =<<
+                    typeMap <$> (nested s <|> threadType Text)
+
+    pure $! Field'
+        { fieldName     = name
+        , fieldClass    = Text.fieldClassName  label
+        , fieldMethod   = Text.fieldMethodName label
+        , fieldLabel    = label
+        , fieldType     = optional typ
+        , fieldOptional = Go.schemaOptional s
+        , fieldRequired = Go.schemaRequired s
+        , fieldComputed = Go.schemaComputed s
+        , fieldForceNew = Go.schemaForceNew s
+        , fieldEncoder  = encoder
+        , fieldDefault  = default_
+        }
+
+defaulted :: Go.Type -> Text -> Elab Default
+defaulted typ def =
+    case typ of
+        Go.TypeString -> pure $! DefaultText def
+        Go.TypeBool   -> DefaultBool    <$> parseBool
+        Go.TypeInt    -> DefaultInteger <$> parseInt
+        Go.TypeFloat  -> DefaultDouble  <$> parseFloat
+        _             -> failure
   where
-    go = Set.map $ \x ->
-        Class { className   = fieldClass  x
-              , classMethod = fieldMethod x
-              }
+    parseBool =
+        case def of
+            "true"  -> pure True
+            "false" -> pure False
+            _       -> failure
 
-getFields :: a -> (Set Field, Set Field)
-getFields _ = (mempty, mempty)
- --    ( args
- --    , Set.fromList $ Map.elems
- --        ( attrs True  schemaAttributes
- --       <> attrs False (fmap attributeArgument schemaArguments)
- --        )
- --    )
- -- where
- --    args = Set.fromList $
- --        mapMaybe (\(k, v) -> do
- --            val <- getLast (argName v)
- --            typ <- getLast (argType v)
- --            pure $! go k k False val typ) (Map.toList schemaArguments)
+    parseInt   =
+        case Text.signed Text.decimal def of
+            Right (x, "") -> pure x
+            _             -> failure
 
- --    attrs computed =
- --        Map.mapMaybeWithKey (\k v -> do
- --            val <- getLast (attrName v)
- --            typ <- getLast (attrType v)
- --            pure $! go k (safeAttrName k) computed val typ)
+    parseFloat =
+        case Text.signed Text.double def of
+            Right (x, "") -> pure x
+            _             -> failure
 
- --    go k k' computed name ty =
- --        Field { fieldClass    = fieldClassName  k'
- --              , fieldMethod   = fieldMethodName k'
- --              , fieldLabel    = k
- --              , fieldName     = name
- --              , fieldType     = ty
- --              , fieldComputed = computed
- --              }
+    failure :: Elab a
+    failure =
+        Except.throwError $
+            unwords [ "Unable to default"
+                    , show typ
+                    , "with value"
+                    , show def
+                    ]
 
- --    attributeArgument Arg{..} =
- --        Attr { attrName = argName
- --             , attrHelp = argHelp
- --             , attrType = argType
- --             }
+nested :: Go.Schema -> Elab Type
+nested s
+    | Just x <- Go.schemaSchema   s = field_ x
+    | Just x <- Go.schemaResource s = settings_ (Go.resourceName x) (Go.resourceSchemas x)
+    | otherwise                     =
+        Except.throwError $
+            unlines [ "Expected Schema or Resource for " ++ show (Go.schemaType s)
+                    , ppShow s
+                    ]
+
+threaded :: Elab a -> Elab a
+threaded = Reader.local (const True)
+
+newCon :: Text -> Elab Type
+newCon = threadType . Con . Text.dataTypeName
+
+threadType :: Type -> Elab Type
+threadType x =
+    Reader.ask >>= pure . \case
+        True  -> Thread x
+        False -> x

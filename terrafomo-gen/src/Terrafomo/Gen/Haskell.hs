@@ -1,51 +1,71 @@
+{-# LANGUAGE RecordWildCards #-}
+
 module Terrafomo.Gen.Haskell where
 
-import Control.Applicative (many, some, (<|>))
-import Control.Monad       (unless, void, (>=>))
-
-import Data.Bifunctor     (first)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Map.Strict    (Map)
-import Data.Maybe         (fromMaybe)
-import Data.Semigroup     ((<>))
-import Data.String        (IsString)
-import Data.Text          (Text)
-import Data.Void          (Void)
+import Data.Semigroup ((<>))
+import Data.Set       (Set)
+import Data.Text      (Text)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Gen.JSON ((.=))
+import Terrafomo.Gen.JSON ((.!=), (.:), (.:?))
 
-import qualified Data.Foldable      as Fold
-import qualified Data.List          as List
-import qualified Data.Map.Strict    as Map
-import qualified Data.Text          as Text
-import qualified Data.Text.IO       as Text
-import qualified System.FilePath    as Path
-import qualified Terrafomo.Gen.Go   as Go
-import qualified Terrafomo.Gen.JSON as JSON
-import qualified Terrafomo.Gen.Text as Text
+import qualified Data.Text.Lazy                   as LText
+import qualified Data.Text.Lazy.Builder           as Build
+import qualified Data.Text.Lazy.Builder.Int       as Build
+import qualified Data.Text.Lazy.Builder.RealFloat as Build
+import qualified Terrafomo.Gen.JSON               as JSON
+import qualified Terrafomo.Gen.Text               as Text
 
 -- FIXME: Move this
-data Config = Config
-    { configPackage :: !Text
-    , configName    :: !Text
-    } deriving (Show, Eq, Generic)
+data Config = Config'
+    { configPackage      :: !Text
+    , configName         :: !Text
+    , configDependencies :: !(Set Text)
+    } deriving (Show, Eq)
 
 instance JSON.FromJSON Config where
-    parseJSON = JSON.genericParseJSON (JSON.options "config")
+    parseJSON = JSON.withObject "Config" $ \o -> do
+        configPackage      <- o .: "package"
+        configName         <- o .: "name"
+        configDependencies <- o .:? "dependencies" .!= mempty
+        pure Config'{..}
 
-newtype Type = Type { typeName :: Text }
-    deriving (Show, Eq, Ord, IsString, JSON.ToJSON)
+data Type
+    = Text
+    | Integer
+    | Double
+    | Bool
+    | Con    !Text
+    | Thread !Type
+    | List   !Type
+    | Map    !Type
+    | May    !Type
+      deriving (Show, Eq, Ord)
 
--- instance JSON.ToJSON Type where
---     toJSON (Type name) = JSON.object
---         [ "name"       .= name
---         , "parametric" .= ("TF.Attr s b"        :: Text)
---         , "applied"    .= ("TF.Attr s " <> name :: Text)
---         , "encoder"    .= ("TF.attribute"       :: Text)
---         , "default"    .= ("TF.Nil"             :: Text)
---         ]
+typeName :: Type -> Text
+typeName = \case
+    Text           -> "P.Text"
+    Integer        -> "P.Integer"
+    Double         -> "P.Double"
+    Bool           -> "P.Bool"
+    Con    n       -> n
+    Thread (Con n) -> Text.parens (n <> " s")
+    Thread a       -> Text.parens ("TF.Attr s " <> typeName a)
+    List   a       -> Text.brackets (typeName a)
+    Map    a       -> Text.parens ("P.HashMap P.Text " <> typeName a)
+    May    a       -> Text.parens ("P.Maybe " <> typeName a)
+
+instance JSON.ToJSON Type where
+    toJSON = JSON.String . typeName
+
+typeMap, typeList, typeMay :: Type -> Type
+typeMap  = Map
+typeList = List
+typeMay  =
+    May . \case
+        May b -> b
+        a     -> a
 
 data SchemaType
     = Resource
@@ -55,15 +75,16 @@ data SchemaType
 instance JSON.ToJSON SchemaType where
     toJSON = JSON.toJSON . show
 
-data Provider = Provider
-    { providerName        :: !Text
-    , providerPackage     :: !Text
-    , providerOriginal    :: !Text
-    , providerArguments   :: !(Map Text Field)
-    , providerAttributes  :: !(Map Text Field)
-    , providerResources   :: !(Map Text Resource)
-    , providerDataSources :: !(Map Text Resource)
-    , providerTypes       :: !(Map Text Settings)
+data Provider = Provider'
+    { providerName         :: !Text
+    , providerPackage      :: !Text
+    , providerOriginal     :: !Text
+    , providerDependencies :: !(Set Text)
+    , providerParameters   :: ![Field]
+    , providerArguments    :: ![Field]
+    , providerResources    :: ![Resource]
+    , providerDataSources  :: ![Resource]
+    , providerSettings     :: ![Settings]
     } deriving (Show, Eq, Generic)
 
 instance JSON.ToJSON Provider where
@@ -71,26 +92,30 @@ instance JSON.ToJSON Provider where
 
 data Resource = Resource'
     { resourceName       :: !Text
+    , resourceOriginal   :: !Text
     , resourceType       :: !Type
     , resourceSchema     :: !SchemaType
-    , resourceArguments  :: !(Map Text Field)
-    , resourceAttributes :: !(Map Text Field)
+    , resourceParameters :: ![Field]
+    , resourceArguments  :: ![Field]
+    , resourceAttributes :: ![Field]
     } deriving (Show, Eq, Generic)
 
 instance JSON.ToJSON Resource where
     toJSON = JSON.genericToJSON (JSON.options "resource")
 
-data Settings = Settings
+data Settings = Settings'
     { settingsName       :: !Text
+    , settingsOriginal   :: !Text
     , settingsType       :: !Type
-    , settingsArguments  :: !(Map Text Field)
-    , settingsAttributes :: !(Map Text Field)
+    , settingsParameters :: ![Field]
+    , settingsArguments  :: ![Field]
+    , settingsAttributes :: ![Field]
     } deriving (Show, Eq, Generic)
 
 instance JSON.ToJSON Settings where
     toJSON = JSON.genericToJSON (JSON.options "settings")
 
-data Field = Field
+data Field = Field'
     { fieldName     :: !Text
     , fieldClass    :: !Text
     , fieldMethod   :: !Text
@@ -99,13 +124,45 @@ data Field = Field
     , fieldOptional :: !Bool
     , fieldRequired :: !Bool
     , fieldComputed :: !Bool
---    , fieldDefault  :: !(Maybe Text)
+    , fieldForceNew :: !Bool
+    , fieldDefault  :: !Default
+    , fieldEncoder  :: !Text
     } deriving (Show, Eq, Ord, Generic)
 
 instance JSON.ToJSON Field where
     toJSON = JSON.genericToJSON (JSON.options "field")
 
-data Class = Class
+data Default
+    = DefaultNil     !Text
+    | DefaultParam   !Text
+    | DefaultAttr    !Default
+    | DefaultText    !Text
+    | DefaultBool    !Bool
+    | DefaultInteger !Integer
+    | DefaultDouble  !Double
+      deriving (Show, Eq, Ord)
+
+instance JSON.ToJSON Default where
+    toJSON = JSON.String . go
+      where
+        go = \case
+            DefaultNil     x -> x
+            DefaultParam   x -> x
+            DefaultAttr    x -> "TF.value " <> go x
+            DefaultText    x -> Text.quotes x
+            DefaultBool    x -> if x then "P.True" else "P.False"
+            DefaultInteger x ->
+                (if x < 0
+                    then Text.parens
+                    else id) $ build (Build.decimal   x)
+            DefaultDouble  x ->
+                (if x < 0
+                    then Text.parens
+                    else id) $ build (Build.realFloat x)
+
+        build = LText.toStrict . Build.toLazyText
+
+data Class = Class'
     { className   :: !Text
     , classMethod :: !Text
     } deriving (Show, Eq, Ord, Generic)

@@ -51,6 +51,9 @@ types p = provider p <> "Types"
 lenses :: Provider -> NS
 lenses p = provider p <> "Lens"
 
+settings :: Provider -> NS
+settings p = provider p <> "Settings"
+
 partitionResources :: Provider -> SchemaType -> [Resource] -> [(NS, [Resource])]
 partitionResources p typ = partition p (show typ)
 

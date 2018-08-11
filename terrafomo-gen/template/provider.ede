@@ -1,5 +1,8 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
@@ -11,40 +14,38 @@ module {{ namespace }}
     , empty{{ provider.name }}
 
     -- * Lenses
-  {% for field in schema.argumentFields %}
+  {% for field in provider.arguments %}
     , provider{{ field.value.method | upperHead }}
   {% endfor %}
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Functor  ((<$>))
+import Data.Function ((&))
+import Data.Hashable (Hashable)
+import Data.Maybe    (catMaybes)
+import Data.Proxy    (Proxy (Proxy))
 
+import GHC.Base     (Eq, ($))
 import GHC.Generics (Generic)
+import GHC.Show     (Show)
 
 import Lens.Micro (Lens', lens)
 
-{% for import in imports %}
+{% for import in unqualified %}
+import {{ import.value }}
+{% endfor %}
+
+{% for import in qualified %}
 import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Data.Text as P
-
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.Name as TF
 import qualified Terrafomo.Provider as TF
 
-{- | {{ provider.name }} Terraform provider.
-{% if schema.about %}
-
-{{ schema.about | wrap }}
-{% endif %}
--}
-data {{ provider.name }} = {{ provider.name }} {
-  {% for arg in schema.arguments %}
-    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(Maybe {{ arg.value.type.name }})
-    {- ^ {{ arg.value.help }} -}
+-- The {{ provider.name }} Terraform provider configuration.
+data {{ provider.name }} = {{ provider.name }}' {
+  {% for field in provider.arguments %}
+    {% if field.first %}  {% else %}, {% endif %}{{ field.value.label }} :: {{ field.value.type }}
   {% endfor %}
     } deriving (Show, Eq, Generic)
 
@@ -57,24 +58,28 @@ instance TF.IsSection {{ provider.name }} where
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
               (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                {% for arg in schema.arguments %}
-                  , TF.assign "{{ arg.value.name }}" <$> {{ arg.key }} x
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                {% for field in provider.arguments %}
+                  , {{ field.value.encoder }}
+                      ({{ namespace }}.{{ field.value.label }} x)
                 {% endfor %}
                   ])
 
 instance TF.IsProvider {{ provider.name }} where
     type ProviderType {{ provider.name }} = "{{ provider.original }}"
 
-empty{{ provider.name }} :: {{ provider.name }}
-empty{{ provider.name }} = {{ provider.name }} {
-    {% for arg in schema.arguments %}
-      {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} = Nothing
-    {% endfor %}
-    }
-{% for field in schema.argumentFields %}
+empty{{ provider.name }}
+    ::{% for param in provider.parameters %} {{ param.value.type }} {-^ @{{param.value.name}}@ -} ->{% endfor %} {{ provider.name }}
+empty{{ provider.name }}{% for param in provider.parameters %} {{ param.value.label }}{% endfor %} =
+    {{ provider.name }}' {
+      {% for field in provider.arguments %}
+        {% if field.first %}  {% else %}, {% endif %}{{ field.value.label }} = {{ field.value.default }}
+      {% endfor %}
+        }
+{% for field in provider.arguments %}
 
-provider{{ field.value.method | upperHead }} :: Lens' {{ provider.name }} (Maybe {{ field.value.type.name }})
+provider{{ field.value.method | upperHead }} :: Lens' {{ provider.name }} {{ field.value.type }}
 provider{{ field.value.method | upperHead }} =
-    lens {{ field.value.label }} (\s a -> s { {{ field.value.label }} = a })
+    lens {{ namespace}}.{{ field.value.label }}
+         (\s a -> s { {{ field.value.label }} = a } :: {{ provider.name }})
 {% endfor %}

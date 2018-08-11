@@ -1,10 +1,9 @@
 module Terrafomo.Gen.Render where
 
 import Data.Aeson      ((.=))
-import Data.Bifunctor  (first, second)
-import Data.Map.Strict (Map)
+import Data.Bifunctor  (second)
 import Data.Semigroup  ((<>))
-import Data.Text       (Text)
+import Data.Set        (Set)
 
 import Terrafomo.Gen.Namespace (NS)
 import Terrafomo.Gen.Haskell
@@ -12,24 +11,22 @@ import Terrafomo.Gen.Haskell
 import Text.EDE.Filters ((@:))
 
 import qualified Data.Aeson.Types        as JSON
-import qualified Data.Foldable           as Fold
 import qualified Data.HashMap.Strict     as HashMap
-import qualified Data.Map.Strict         as Map
+import qualified Data.Set                as Set
 import qualified Data.Text               as Text
 import qualified Data.Text.Lazy          as LText
+import qualified Terrafomo.Gen.Elab      as Elab
 import qualified Terrafomo.Gen.Namespace as NS
 import qualified Text.EDE                as EDE
-import qualified Text.Wrap               as Wrap
-import qualified Terrafomo.Gen.Text as Text
-import qualified Terrafomo.Gen.Elab as Elab
 
 data Templates a = Templates
     { packageTemplate  :: !a
     , providerTemplate :: !a
-    , schemaTemplate   :: !a
+    , resourceTemplate :: !a
     , mainTemplate     :: !a
     , typesTemplate    :: !a
     , lensTemplate     :: !a
+    , settingsTemplate :: !a
     } deriving (Show, Functor, Foldable, Traversable)
 
 package
@@ -53,22 +50,35 @@ main tmpls p namespaces =
         [ "namespace"  .= ns
         , "provider"   .= p
         , "reexports"  .=
-            ( [ NS.types p
-              , NS.provider p <> "Provider"
-              ] ++ namespaces
-            )
+            ([ NS.lenses   p
+             , NS.provider p <> "Provider"
+             , NS.settings p
+             , NS.types    p
+             ] ++ namespaces)
         ]
 
 types
     :: Templates EDE.Template
     -> Provider
-    -> [NS]
     -> Either String (NS, LText.Text)
-types tmpls p namespaces =
+types tmpls p =
     let ns = NS.types p
      in second (ns,) $ render (typesTemplate tmpls)
-        [ "namespace" .= ns
-        , "imports"   .= namespaces
+        [ "namespace"   .= ns
+        , "unqualified" .= [NS.lenses p]
+        ]
+
+settings
+    :: Templates EDE.Template
+    -> Provider
+    -> Either String (NS, LText.Text)
+settings tmpls p =
+    let ns = NS.settings p
+     in second (ns,) $ render (settingsTemplate tmpls)
+        [ "namespace"   .= ns
+        , "settings"    .= providerSettings p
+        , "unqualified" .= Set.fromList [NS.types p]
+        , "qualified"   .= Set.insert (NS.lenses p) prelude
         ]
 
 provider
@@ -78,19 +88,20 @@ provider
 provider tmpls p =
     let ns = NS.provider p <> "Provider"
      in second (ns,) $ render (providerTemplate tmpls)
-        [ "namespace"  .= ns
-        , "provider"   .= p
-        , "imports"    .= [NS.types p]
+        [ "namespace"   .= ns
+        , "provider"    .= p
+        , "unqualified" .= Set.fromList [NS.settings p, NS.types p]
+        , "qualified"   .= prelude
         ]
 
 lenses
     :: Templates EDE.Template
-    -> NS
-    -> [Resource]
-    -> Either String LText.Text
-lenses tmpls ns xs =
-    let (args, attrs) = Elab.classes xs
-     in render (lensTemplate tmpls)
+    -> Provider
+    -> Either String (NS, LText.Text)
+lenses tmpls p =
+    let ns            = NS.lenses p
+        (args, attrs) = Elab.classes p
+     in second (ns,) $ render (lensTemplate tmpls)
         [ "namespace"        .= ns
         , "argumentClasses"  .= args
         , "attributeClasses" .= attrs
@@ -100,38 +111,39 @@ resources
     :: Templates EDE.Template
     -> Provider
     -> NS
-    -> [NS]
     -> SchemaType
     -> [Resource]
     -> Either String LText.Text
-resources tmpls p ns namespaces typ xs =
-    let (args, attrs) = Elab.classes xs
-     in render (schemaTemplate tmpls)
+resources tmpls p ns typ xs =
+    let (args, attrs) = Elab.classes p
+     in render (resourceTemplate tmpls)
         [ "namespace"        .= ns
-        , "provider"         .= p
+        , "provider"         .= providerName p
         , "type"             .= typ
-        , "resources"        .= createMap (getTypeName typ) xs
+        , "resources"        .= xs
         , "argumentClasses"  .= args
         , "attributeClasses" .= attrs
-        , "typesNamespace"   .= NS.types p
-        , "imports"          .=
-            ( NS.provider p <> "Provider"
-            : namespaces
-            )
+        , "unqualified"      .=
+            (Set.fromList
+                [ NS.provider p <> "Provider"
+                , NS.settings p
+                , NS.types    p
+                ] <> prelude)
+        , "qualified"        .= Set.insert (NS.lenses p) prelude
         ]
 
 render :: EDE.Template -> [JSON.Pair] -> Either String LText.Text
 render tmpl = EDE.eitherRenderWith filters tmpl . EDE.fromPairs
   where
     filters = HashMap.fromList
-        [ "wrap" @: Wrap.wrapText Wrap.defaultWrapSettings 76
-        , "drop" @: Text.drop 1
+        [ "drop" @: Text.drop 1
         ]
 
-getTypeName :: SchemaType -> Resource -> Text
-getTypeName = \case
-    Resource   -> Text.resourceName   . resourceName
-    DataSource -> Text.dataSourceName . resourceName
-
-createMap :: (Foldable f, Ord k) => (a -> k) -> f a -> Map k a
-createMap f xs = Map.fromList [(f x, x) | x <- Fold.toList xs]
+prelude :: Set NS
+prelude = Set.fromList
+    [ "Data.HashMap.Strict"
+    , "Data.Text"
+    , "Data.Word"
+    , "Numeric.Natural"
+    , "Prelude"
+    ]

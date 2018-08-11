@@ -1,0 +1,95 @@
+-- This module is auto-generated.
+
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
+{% include "_include/license.ede" %}
+--
+module {{ namespace }}
+    (
+    -- * Settings Datatypes
+  {% for setting in settings %}
+    {% if setting.first %} {% else %},{% endif %} {{ setting.value.name }} (..)
+    , new{{ setting.value.name }}
+
+  {% endfor %}
+    ) where
+
+import Data.Functor  ((<$>))
+import Data.Hashable (Hashable)
+import Data.Maybe    (catMaybes)
+
+import GHC.Base     (Eq, ($), (.))
+import GHC.Generics (Generic)
+import GHC.Show     (Show)
+
+import Lens.Micro (lens)
+
+{% for import in unqualified %}
+import {{ import.value }}
+{% endfor %}
+
+{% for import in qualified %}
+import qualified {{ import.value }} as P
+{% endfor %}
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.Name as TF
+import qualified Terrafomo.Provider as TF
+import qualified Terrafomo.Schema as TF
+{% for setting in settings %}
+
+-- | @{{ setting.value.original }}@ nested settings.
+data {{ setting.value.type }} = {{ setting.value.name }}'
+  {% for field in setting.value.arguments %}
+    {% if field.first %}{ {% else %}, {% endif %}{{ field.value.label }} :: {{ field.value.type }}{% if field.last %}
+    } deriving (Show, Eq, Generic){% endif %}
+  {% else %}
+    deriving (Show, Eq, Generic)
+  {% endfor %}
+
+instance Hashable {{ setting.value.type }}
+
+instance TF.IsValue  {{ setting.value.type }}
+instance TF.IsObject {{ setting.value.type }} where
+  {% for field in setting.value.arguments %}
+    {% if field.first %}toObject {{ setting.value.name }}'{..} = catMaybes
+        [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.label }}{% if field.last %}
+        ]{% endif %}
+  {% else %}
+    toObject _ = []
+  {% endfor %}
+
+new{{ setting.value.name }}
+  {% for param in setting.value.parameters %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{param.value.name}}@{% if param.last %}
+    -> {{ setting.value.type }}{% endif %}
+  {% else %}
+    :: {{ setting.value.type }}
+  {% endfor %}
+new{{ setting.value.name }}{% for param in setting.value.parameters %} {{ param.value.label }}{% endfor %} =
+    {{ setting.value.name }}'
+      {% for field in setting.value.arguments %}
+        {% if field.first %}{ {% else %}, {% endif %}{{ field.value.label }} = {{ field.value.default }}{% if field.last %}
+        }{% endif %}
+      {% endfor %}
+  {% for field in setting.value.arguments %}
+
+instance P.{{ field.value.class }} {{ setting.value.type }} {{ field.value.type }} where
+    {{ field.value.method }} =
+        lens ({{ field.value.label }} :: {{ setting.value.type }} -> {{ field.value.type }})
+             (\s a -> s { {{ field.value.label }} = a } :: {{ setting.value.type }})
+  {% endfor %}
+  {% for field in setting.value.attributes %}
+
+instance s ~ s' => P.{{ field.value.class }} (TF.Ref s' {{ setting.value.type }}) {{ field.value.type }} where
+    {% if field.value.computed %}
+    {{ field.value.method }} x = TF.compute (TF.refKey x) "{{ field.value.name }}"
+    {% else %}
+    {{ field.value.method }} =
+        ({{ field.value.label }} :: {{ setting.value.name }} s -> {{ field.value.type }})
+            . TF.refValue
+    {% endif %}
+  {% endfor %}
+{% endfor %}

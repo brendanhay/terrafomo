@@ -24,10 +24,10 @@ import qualified Terrafomo.Gen.Text as Text
 -- | The terraform field types.
 data Type
     = TypeString
-    | TypeList
     | TypeInt
     | TypeFloat
     | TypeBool
+    | TypeList
     | TypeMap
     | TypeSet -- Settings, aka a nested type.
       deriving (Show, Eq)
@@ -37,10 +37,10 @@ instance JSON.FromJSON Type where
       where
         go = \case
             "TypeString" -> pure TypeString
-            "TypeList"   -> pure TypeList
             "TypeInt"    -> pure TypeInt
             "TypeFloat"  -> pure TypeFloat
             "TypeBool"   -> pure TypeBool
+            "TypeList"   -> pure TypeList
             "TypeMap"    -> pure TypeMap
             "TypeSet"    -> pure TypeSet
             err          -> fail $ "Unable to parse Type from " ++ show err
@@ -56,21 +56,42 @@ instance JSON.FromJSON Provider where
     parseJSON = JSON.genericParseJSON (JSON.options "provider")
 
 data Resource = Resource
-    { resourceName    :: !Text
-    , resourceSchemas :: ![Schema]
+    { resourceName     :: !Text
+    , resourceSchemas  :: ![Schema]
+    , resourceTimeouts :: !(Maybe Timeouts)
     } deriving (Show, Eq, Generic)
 
 instance JSON.FromJSON Resource where
     parseJSON = JSON.genericParseJSON (JSON.options "resource")
 
+data Timeouts = Timeouts
+    { timeoutCreate  :: !(Maybe Integer)
+    , timeoutRead    :: !(Maybe Integer)
+    , timeoutUpdate  :: !(Maybe Integer)
+    , timeoutDelete  :: !(Maybe Integer)
+    , timeoutDefault :: !(Maybe Integer)
+    } deriving (Show, Eq, Generic)
+
+instance JSON.FromJSON Timeouts where
+    parseJSON = JSON.genericParseJSON (JSON.options "timeouts")
+
 data Schema = Schema
-    { schemaName     :: !Text
-    , schemaType     :: !Type
-    , schemaOptional :: !Bool
-    , schemaRequired :: !Bool
-    , schemaComputed :: !Bool
-    , schemaSchema   :: !(Maybe Schema)
-    , schemaResource :: !(Maybe Resource)
+    { schemaName          :: !Text
+    , schemaType          :: !Type
+    , schemaDescription   :: !(Maybe Text)
+    , schemaDeprecated    :: !(Maybe Text)
+    , schemaRemoved       :: !(Maybe Text)
+    , schemaConflictsWith :: ![Text]
+    , schemaOptional      :: !Bool
+    , schemaRequired      :: !Bool
+    , schemaComputed      :: !Bool
+    , schemaForceNew      :: !Bool
+    , schemaSensitive     :: !Bool
+    , schemaMinItems      :: !Integer
+    , schemaMaxItems      :: !Integer
+    , schemaDefault       :: !(Maybe Text)
+    , schemaSchema        :: !(Maybe Schema)
+    , schemaResource      :: !(Maybe Resource)
     } deriving (Show, Eq, Generic)
 
 instance JSON.FromJSON Schema where

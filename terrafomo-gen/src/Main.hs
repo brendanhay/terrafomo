@@ -2,46 +2,34 @@
 
 module Main (main) where
 
-import Control.Applicative (many)
-import Control.Error       (Script, runScript, scriptIO)
-import Control.Monad       (unless, when)
+import Control.Error (Script, runScript, scriptIO)
+import Control.Monad (unless, void)
 
 import Data.Aeson     (FromJSON)
 import Data.Bifunctor (first)
 import Data.Function  ((&))
-import Data.Maybe     (catMaybes, isJust)
 import Data.Semigroup (Semigroup ((<>)))
 
 import System.FilePath ((<.>), (</>))
 
 import Terrafomo.Gen.Haskell
 import Terrafomo.Gen.Namespace (NS)
-import Terrafomo.Gen.Parser    (Parser)
 import Terrafomo.Gen.Render    (Templates (Templates))
 
-import Text.Show.Pretty (ppShow)
-
 import qualified Control.Error           as Error
-import qualified Data.Aeson              as JSON
 import qualified Data.ByteString         as BS
-import qualified Data.Char               as Char
 import qualified Data.Foldable           as Fold
-import qualified Data.Map.Strict         as Map
 import qualified Data.Text               as Text
-import qualified Data.Text.IO            as Text
 import qualified Data.Text.Lazy          as LText
 import qualified Data.Text.Lazy.IO       as LText
 import qualified Data.Yaml               as YAML
 import qualified Options.Applicative     as Option
 import qualified System.Directory        as Dir
-import qualified System.Exit             as Exit
 import qualified System.FilePath         as Path
 import qualified System.IO               as IO
-import qualified System.Process          as Process
 import qualified Terrafomo.Gen.Elab      as Elab
-import qualified Terrafomo.Gen.Go        as Go
+import qualified Terrafomo.Gen.JSON      as JSON
 import qualified Terrafomo.Gen.Namespace as NS
-import qualified Terrafomo.Gen.Parser    as Parser
 import qualified Terrafomo.Gen.Render    as Render
 import qualified Text.EDE                as EDE
 
@@ -101,114 +89,79 @@ main = do
     runScript $ do
         echo "Program" "Starting..."
 
-        tmpls    <-
+        templates <-
             traverse (parseEDE . Path.combine (templateDir opts)) $
                 Templates
                     { packageTemplate  = "package.ede"
                     , providerTemplate = "provider.ede"
-                    , schemaTemplate   = "schema.ede"
+                    , resourceTemplate = "resource.ede"
                     , mainTemplate     = "main.ede"
                     , typesTemplate    = "types.ede"
                     , lensTemplate     = "lens.ede"
+                    , settingsTemplate = "settings.ede"
                     }
 
-        config   <- parseYAML "Config"   (configYAML   opts)
-        raw      <- parseJSON "Provider" (providerJSON opts)
+        config    <- parseYAML "Config"   (configYAML   opts)
+        raw       <- parseJSON "Provider" (providerJSON opts)
 
-        provider <- hoistEither (Elab.elab config raw)
+        provider  <- hoistEither (Elab.elab config raw)
 
-        scriptIO (putStrLn (ppShow provider))
+        dumpProvider (intermediateDir opts) provider
 
-        let datasources =
-                NS.partitionResources provider DataSource
-                    (Map.elems $ providerResources provider)
-
-            resources   =
+        let resources   =
                 NS.partitionResources provider Resource
-                    (Map.elems $ providerDataSources provider)
+                    (providerResources provider)
 
-            lensNS      = NS.lenses provider
-            schemas     = concatMap snd (datasources ++ resources)
+            datasources =
+                NS.partitionResources provider DataSource
+                    (providerDataSources provider)
 
-        dir         <-
-            renderProvider tmpls provider [lensNS]
-                (lensNS : map fst (datasources ++ resources))
+            schemas     = concatMap snd (resources ++ datasources)
+
+        (flip Path.combine "gen" -> dir) <-
+            renderProvider templates provider
+                (NS.lenses provider : map fst (resources ++ datasources))
+
+        void $ hoistEither (Render.settings templates provider)
+            >>= writeNS dir
 
         unless (null schemas) $
-            hoistEither (Render.lenses tmpls lensNS schemas)
-                >>= writeNS (dir </> "gen") . (lensNS,)
-
-        Fold.for_ datasources $ \(ns, xs) ->
-            hoistEither (Render.resources tmpls provider ns [lensNS] DataSource xs)
-                >>= writeNS (dir </> "gen") . (ns,)
+            hoistEither (Render.lenses templates provider)
+                >>= writeNS dir
 
         Fold.for_ resources $ \(ns, xs) ->
-            hoistEither (Render.resources tmpls provider ns [lensNS] Resource xs)
-                >>= writeNS (dir </> "gen") . (ns,)
+            hoistEither (Render.resources templates provider ns Resource xs)
+                >>= writeNS dir . (ns,)
+
+        Fold.for_ datasources $ \(ns, xs) ->
+            hoistEither (Render.resources templates provider ns DataSource xs)
+                >>= writeNS dir . (ns,)
 
         echo "Program" "Done."
 
--- Provider Configuraiton
+-- IR
 
-    -- if not (providerDatatype provider)
-    --     then pure (Nothing <$ provider)
-    --     else do
-    --         exists <- scriptIO (Dir.doesFileExist markdownFile)
-    --         echo "Provider" (markdownFile ++ " == " ++ show exists)
+dumpProvider
+    :: FilePath
+    -> Provider
+    -> Script ()
+dumpProvider dir p = do
+    let irFile = dir </> Text.unpack (providerOriginal p) <.> "json"
+    createDirectory dir
+    echo "IR" irFile
+    scriptIO (JSON.encodeFile irFile p)
 
-    --         schema <- loadSchema (Parser.providerParser (providerRules provider)) path
-    --         pure (applyDeprecations schema <$ provider)
-
--- loadResources :: [Rule] -> Options-> Script [Schema]
--- loadResources rules =
---       fmap catMaybes
---     . traverse (fmap applyDeprecations . loadSchema (Parser.schemaParser rules))
---     . resourcePaths
-
--- loadDataSources :: [Rule] -> Options -> Script [Schema]
--- loadDataSources rules =
---       fmap catMaybes
---     . traverse (fmap applyDeprecations . loadSchema (Parser.schemaParser rules))
---     . dataSourcePaths
-
--- -- Schema
-
--- -- loadSchema :: Parser Schema -> Path -> Script Schema
--- -- loadSchema parser path = do
--- --     parseMarkdown parser  path
--- --         >>= writeSchema   path
--- --         >>= applyOverride path
-
--- applyOverride :: Path -> Schema -> Script Schema
--- applyOverride Path{configFile} other = do
---     exists <- scriptIO (Dir.doesFileExist configFile)
---     echo "Override" (configFile ++ " == " ++ show exists)
-
---     if exists
---         then (other <>) <$> parseYAML "Override" configFile
---         else pure other
-
--- writeSchema :: Path -> Schema -> Script Schema
--- writeSchema Path{schemaFile} output = do
---     createDirectory (Path.takeDirectory schemaFile)
-
---     echo "Schema" schemaFile
---     scriptIO (YAML.encodeFile schemaFile output)
-
---     pure output
-
--- -- Rendering
+-- Rendering
 
 renderProvider
     :: Templates EDE.Template
     -> Provider
     -> [NS]
-    -> [NS]
     -> Script FilePath
-renderProvider tmpls p lenses namespaces = do
+renderProvider tmpls p namespaces = do
     let dir = "provider" </> Text.unpack (providerPackage p)
 
-    renderPackage tmpls dir p lenses namespaces
+    renderPackage tmpls dir p namespaces
 
     hoistEither (Render.provider tmpls p)
         >>= writeNS (dir </> "gen")
@@ -220,13 +173,12 @@ renderPackage
     -> FilePath
     -> Provider
     -> [NS]
-    -> [NS]
     -> Script ()
-renderPackage tmpls dir p lenses namespaces = do
-    let packageFile = dir    </> "package" <.> "yaml"
-        srcDir      = dir    </> "src"
-        genDir      = dir    </> "gen"
-        typesFile   = srcDir </> NS.toPath (NS.types p) <.> "hs"
+renderPackage tmpls dir p namespaces = do
+    let packageFile  = dir    </> "package" <.> "yaml"
+        srcDir       = dir    </> "src"
+        genDir       = dir    </> "gen"
+        typesFile    = srcDir </> NS.toPath (NS.types    p) <.> "hs"
 
     createDirectory dir
 
@@ -239,7 +191,7 @@ renderPackage tmpls dir p lenses namespaces = do
     typesExists <- scriptIO (Dir.doesFileExist typesFile)
     echo "Types" (typesFile ++ " == " ++ show typesExists)
     unless typesExists $
-        hoistEither (Render.types tmpls p lenses)
+        hoistEither (Render.types tmpls p)
             >>= writeNS srcDir
 
 writeNS :: FilePath -> (NS, LText.Text) -> Script ()
@@ -248,39 +200,6 @@ writeNS dir (ns, text) = do
     echo "Module" moduleFile
     createDirectory (Path.takeDirectory moduleFile)
     scriptIO (LText.writeFile moduleFile text)
-
--- -- Paths
-
--- data Path = Path
---     { markdownFile :: !FilePath
---     , schemaFile   :: !FilePath
---     , configFile   :: !FilePath
---     , patchFile    :: !FilePath
---     }
-
--- providerPath :: Options -> Path
--- providerPath Options{..} =
---     let markdownFile = providerFile
---         configFile   = configDir </> providerAlias <.> "yaml"
---         schemaFile   = schemaDir </> providerAlias <.> "yaml"
---         patchFile    = patchDir  </> providerAlias <.> "patch"
---      in Path{..}
-
--- resourcePaths :: Options -> [Path]
--- resourcePaths opts = map (schemaPath opts Resource) (resourceFiles opts)
-
--- dataSourcePaths :: Options -> [Path]
--- dataSourcePaths opts = map (schemaPath opts DataSource) (dataSourceFiles opts)
-
--- schemaPath :: Options -> SchemaType -> FilePath -> Path
--- schemaPath Options{configDir, providerAlias, schemaDir, patchDir} typ file =
---     let name         = Path.dropExtensions (Path.takeBaseName file)
---         prefix       = [Char.toLower (head (show typ))]
---         markdownFile = file
---         configFile   = configDir </> providerAlias </> prefix </> name <.> "yaml"
---         schemaFile   = schemaDir </> providerAlias </> prefix </> name <.> "yaml"
---         patchFile    = patchDir  </> providerAlias </> prefix </> name <.> "patch"
---      in Path{..}
 
 -- EDE Templating
 
