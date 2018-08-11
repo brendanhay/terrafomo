@@ -51,14 +51,8 @@ types p = provider p <> "Types"
 lenses :: Provider -> NS
 lenses p = provider p <> "Lens"
 
-settings :: Provider -> NS
-settings p = provider p <> "Settings"
-
-partitionResources :: Provider -> SchemaType -> [Resource] -> [(NS, [Resource])]
-partitionResources p typ = partition p (show typ)
-
-partition :: Provider -> String -> [b] -> [(NS, [b])]
-partition p root xs
+partition :: Int -> Provider -> String -> [b] -> [(NS, [b])]
+partition maxlen p root xs
     | null   xs           = []
     | length xs <= maxlen = [single]
     | otherwise           =
@@ -66,8 +60,6 @@ partition p root xs
             . filter (not . null)
                 $ Split.chunksOf maxlen xs
   where
-    maxlen = 100
-
     single =
         (provider p <> fromString root, xs)
 

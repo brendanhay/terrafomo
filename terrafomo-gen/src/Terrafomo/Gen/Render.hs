@@ -50,11 +50,11 @@ main tmpls p namespaces =
         [ "namespace"  .= ns
         , "provider"   .= p
         , "reexports"  .=
-            ([ NS.lenses   p
-             , NS.provider p <> "Provider"
-             , NS.settings p
-             , NS.types    p
-             ] ++ namespaces)
+            Set.fromList
+                ([ NS.lenses   p
+                 , NS.provider p <> "Provider"
+                 , NS.types    p
+                 ] ++ namespaces)
         ]
 
 types
@@ -68,30 +68,18 @@ types tmpls p =
         , "unqualified" .= [NS.lenses p]
         ]
 
-settings
-    :: Templates EDE.Template
-    -> Provider
-    -> Either String (NS, LText.Text)
-settings tmpls p =
-    let ns = NS.settings p
-     in second (ns,) $ render (settingsTemplate tmpls)
-        [ "namespace"   .= ns
-        , "settings"    .= providerSettings p
-        , "unqualified" .= Set.fromList [NS.types p]
-        , "qualified"   .= Set.insert (NS.lenses p) prelude
-        ]
-
 provider
     :: Templates EDE.Template
     -> Provider
+    -> [NS]
     -> Either String (NS, LText.Text)
-provider tmpls p =
+provider tmpls p namespaces =
     let ns = NS.provider p <> "Provider"
      in second (ns,) $ render (providerTemplate tmpls)
         [ "namespace"   .= ns
         , "provider"    .= p
-        , "unqualified" .= Set.fromList [NS.settings p, NS.types p]
-        , "qualified"   .= prelude
+        , "unqualified" .= Set.fromList (NS.types p : namespaces)
+        , "qualified"   .= Set.insert (NS.lenses p) prelude
         ]
 
 lenses
@@ -107,14 +95,29 @@ lenses tmpls p =
         , "attributeClasses" .= attrs
         ]
 
+settings
+    :: Templates EDE.Template
+    -> Provider
+    -> NS
+    -> [Settings]
+    -> Either String LText.Text
+settings tmpls p ns xs =
+    render (settingsTemplate tmpls)
+        [ "namespace"   .= ns
+        , "settings"    .= xs
+        , "unqualified" .= Set.fromList [NS.types p]
+        , "qualified"   .= Set.insert (NS.lenses p) prelude
+        ]
+
 resources
     :: Templates EDE.Template
     -> Provider
+    -> [NS]
     -> NS
     -> SchemaType
     -> [Resource]
     -> Either String LText.Text
-resources tmpls p ns typ xs =
+resources tmpls p namespaces ns typ xs =
     let (args, attrs) = Elab.classes p
      in render (resourceTemplate tmpls)
         [ "namespace"        .= ns
@@ -124,12 +127,12 @@ resources tmpls p ns typ xs =
         , "argumentClasses"  .= args
         , "attributeClasses" .= attrs
         , "unqualified"      .=
-            (Set.fromList
-                [ NS.provider p <> "Provider"
-                , NS.settings p
-                , NS.types    p
-                ] <> prelude)
+            Set.fromList
+                ([ NS.provider p <> "Provider"
+                 , NS.types    p
+                 ] ++ namespaces)
         , "qualified"        .= Set.insert (NS.lenses p) prelude
+
         ]
 
 render :: EDE.Template -> [JSON.Pair] -> Either String LText.Text
@@ -142,8 +145,9 @@ render tmpl = EDE.eitherRenderWith filters tmpl . EDE.fromPairs
 prelude :: Set NS
 prelude = Set.fromList
     [ "Data.HashMap.Strict"
+    , "Data.List.NonEmpty"
     , "Data.Text"
-    , "Data.Word"
-    , "Numeric.Natural"
+    , "GHC.Generics"
+    , "Lens.Micro"
     , "Prelude"
     ]

@@ -1,5 +1,7 @@
 {-# LANGUAGE RecordWildCards #-}
 
+{-# OPTIONS_GHC -fno-warn-missing-pattern-synonym-signatures #-}
+
 module Terrafomo.Gen.Haskell where
 
 import Data.Semigroup ((<>))
@@ -32,40 +34,53 @@ instance JSON.FromJSON Config where
         pure Config'{..}
 
 data Type
-    = Text
-    | Integer
-    | Double
-    | Bool
+    = Var    !Text
     | Con    !Text
     | Thread !Type
-    | List   !Type
-    | Map    !Type
-    | May    !Type
+    | App    !Type !Type
       deriving (Show, Eq, Ord)
 
 typeName :: Type -> Text
-typeName = \case
-    Text           -> "P.Text"
-    Integer        -> "P.Integer"
-    Double         -> "P.Double"
-    Bool           -> "P.Bool"
-    Con    n       -> n
-    Thread (Con n) -> Text.parens (n <> " s")
-    Thread a       -> Text.parens ("TF.Attr s " <> typeName a)
-    List   a       -> Text.brackets (typeName a)
-    Map    a       -> Text.parens ("P.HashMap P.Text " <> typeName a)
-    May    a       -> Text.parens ("P.Maybe " <> typeName a)
+typeName = go False
+  where
+    go p = \case
+        Var    v       -> v
+        Con    v       -> v
+        Thread (Con n) -> parens p (n <> " s")
+        Thread a       -> parens p ("TF.Attr s " <> go True a)
+        App    TList b -> Text.brackets (go False b)
+        App    a     b -> parens p (go False a <> " " <> go True b)
+
+    parens = \case
+        True  -> Text.parens
+        False -> id
 
 instance JSON.ToJSON Type where
-    toJSON = JSON.String . typeName
+    toJSON = JSON.String . typeName . reduce
 
-typeMap, typeList, typeMay :: Type -> Type
-typeMap  = Map
-typeList = List
-typeMay  =
-    May . \case
-        May b -> b
-        a     -> a
+pattern TText    = Var "P.Text"
+pattern TInteger = Var "P.Integer"
+pattern TDouble  = Var "P.Double"
+pattern TBool    = Var "P.Bool"
+pattern TList    = Var "P.[]"
+pattern TList1   = Var "P.NonEmpty"
+pattern TMap     = Var "P.HashMap"
+pattern TMaybe   = Var "P.Maybe"
+
+typeMap, typeList, typeList1, typeMaybe :: Type -> Type
+typeMap   = App (App TMap TText)
+typeList  = App TList
+typeList1 = App TList1
+typeMaybe =
+    App TMaybe . \case
+        App TMaybe b -> b
+        a            -> a
+
+reduce :: Type -> Type
+reduce = \case
+    App TMaybe b              -> App TMaybe (reduce b)
+    App a      (App TMaybe b) -> App a b
+    a                         -> a
 
 data SchemaType
     = Resource
@@ -79,6 +94,7 @@ data Provider = Provider'
     { providerName         :: !Text
     , providerPackage      :: !Text
     , providerOriginal     :: !Text
+    , providerType         :: !Type
     , providerDependencies :: !(Set Text)
     , providerParameters   :: ![Field]
     , providerArguments    :: ![Field]

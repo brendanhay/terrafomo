@@ -22,7 +22,7 @@ $(GENERATE):
 
 clean: $(addsuffix -clean,$(PROVIDERS))
 	rm -f $(GENERATE)
-	rm -rf provider/*/gen provider/*/*.cabal terrafomo/gen/*
+	rm -rf provider/*/gen provider/*/*.cabal
 	@script/generate
 
 format: $(STYLISH)
@@ -47,12 +47,12 @@ define provider
 $1: $(GENERATE) $(GO_VENDOR)-$1 $(MODEL_DIR)/$1.json
 	$(GENERATE) \
  --template-dir=terrafomo-gen/template \
- --intermediate-dir=terrafomo-gen/ir \
+ --ir-dir=terrafomo-gen/ir \
  --config-yaml=terrafomo-gen/config/$1.yaml \
  --provider-json=$(MODEL_DIR)/$1.json
 
 $1-clean:
-	rm -rf $(GO_VENDOR)-$1/gen.go $(MODEL_DIR)/$1.json
+	rm -rf $(GO_VENDOR)-$1/gen.go $(MODEL_DIR)/$1.json 
 
 $(GO_VENDOR)-$1:
 	git clone https://github.com/terraform-providers/terraform-provider-$1 $$@

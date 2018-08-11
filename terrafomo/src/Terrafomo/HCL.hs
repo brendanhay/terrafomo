@@ -283,6 +283,9 @@ instance IsValue Key where
 instance IsValue a => IsValue [a] where
     toValue = list
 
+instance IsValue a => IsValue (NonEmpty a) where
+    toValue = list . Fold.toList
+
 instance IsValue a => IsValue (HashMap Text a) where
     toValue = Map . Map.map toValue
 

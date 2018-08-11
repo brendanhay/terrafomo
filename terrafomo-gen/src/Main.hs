@@ -3,7 +3,7 @@
 module Main (main) where
 
 import Control.Error (Script, runScript, scriptIO)
-import Control.Monad (unless, void)
+import Control.Monad (unless)
 
 import Data.Aeson     (FromJSON)
 import Data.Bifunctor (first)
@@ -36,10 +36,10 @@ import qualified Text.EDE                as EDE
 -- Options Parsing
 
 data Options = Options
-    { templateDir     :: !FilePath
-    , intermediateDir :: !FilePath
-    , configYAML      :: !FilePath
-    , providerJSON    :: !FilePath
+    { templateDir  :: !FilePath
+    , irDir        :: !FilePath
+    , configYAML   :: !FilePath
+    , providerJSON :: !FilePath
     } deriving (Show)
 
 optionsParser :: Option.Parser Options
@@ -51,7 +51,7 @@ optionsParser = Options
          )
 
     <*> Option.strOption
-         ( Option.long "intermediate-dir"
+         ( Option.long "ir-dir"
         <> Option.help "The directory to write the intermediate representation."
         <> Option.metavar "DIR"
          )
@@ -106,93 +106,74 @@ main = do
 
         provider  <- hoistEither (Elab.elab config raw)
 
-        dumpProvider (intermediateDir opts) provider
+        let providerDir = "provider"  </> Text.unpack (providerPackage provider)
+            genDir      = providerDir </> "gen"
+            srcDir      = providerDir </> "src"
 
-        let resources   =
-                NS.partitionResources provider Resource
+        let irFile      = irDir opts  </> Text.unpack (providerOriginal provider) <.> "json"
+            packageFile = providerDir </> "package" <.> "yaml"
+            typesFile   = srcDir      </> NS.toPath (NS.types provider) <.> "hs"
+
+            settings    =
+                [ ( NS.provider provider <> "Settings"
+                  , providerSettings provider
+                  )
+                ]
+
+            resources   =
+                NS.partition 80 provider "Resource"
                     (providerResources provider)
-
             datasources =
-                NS.partitionResources provider DataSource
+                NS.partition 80 provider "DataSource"
                     (providerDataSources provider)
 
-            schemas     = concatMap snd (resources ++ datasources)
+            namespaces  =
+                map fst settings
 
-        (flip Path.combine "gen" -> dir) <-
-            renderProvider templates provider
-                (NS.lenses provider : map fst (resources ++ datasources))
+            render      =
+                Render.resources templates provider namespaces
 
-        void $ hoistEither (Render.settings templates provider)
-            >>= writeNS dir
 
-        unless (null schemas) $
-            hoistEither (Render.lenses templates provider)
-                >>= writeNS dir
+        createDirectory (irDir opts)
+        createDirectory providerDir
+
+        echo "IR" irFile
+        scriptIO (JSON.encodeFile irFile provider)
+
+        hoistEither (Render.lenses templates provider)
+            >>= writeNS genDir
+
+        Fold.for_ settings $ \(ns, xs) ->
+            hoistEither (Render.settings templates provider ns xs)
+                >>= writeNS genDir . (ns,)
 
         Fold.for_ resources $ \(ns, xs) ->
-            hoistEither (Render.resources templates provider ns Resource xs)
-                >>= writeNS dir . (ns,)
+            hoistEither (render ns Resource xs)
+                >>= writeNS genDir . (ns,)
 
         Fold.for_ datasources $ \(ns, xs) ->
-            hoistEither (Render.resources templates provider ns DataSource xs)
-                >>= writeNS dir . (ns,)
+            hoistEither (render ns DataSource xs)
+                >>= writeNS genDir . (ns,)
+
+        hoistEither (Render.provider templates provider namespaces)
+            >>= writeNS genDir
+
+        hoistEither (Render.package templates provider)
+            >>= scriptIO . LText.writeFile packageFile
+
+        hoistEither (Render.main templates provider
+            (namespaces ++ map fst (resources ++ datasources)))
+                >>= writeNS genDir
+
+        typesExists <- scriptIO (Dir.doesFileExist typesFile)
+        echo "Types" (typesFile ++ " == " ++ show typesExists)
+        unless typesExists $
+            hoistEither (Render.types templates provider)
+                >>= writeNS srcDir
 
         echo "Program" "Done."
 
--- IR
-
-dumpProvider
-    :: FilePath
-    -> Provider
-    -> Script ()
-dumpProvider dir p = do
-    let irFile = dir </> Text.unpack (providerOriginal p) <.> "json"
-    createDirectory dir
-    echo "IR" irFile
-    scriptIO (JSON.encodeFile irFile p)
-
 -- Rendering
-
-renderProvider
-    :: Templates EDE.Template
-    -> Provider
-    -> [NS]
-    -> Script FilePath
-renderProvider tmpls p namespaces = do
-    let dir = "provider" </> Text.unpack (providerPackage p)
-
-    renderPackage tmpls dir p namespaces
-
-    hoistEither (Render.provider tmpls p)
-        >>= writeNS (dir </> "gen")
-
-    pure dir
-
-renderPackage
-    :: Templates EDE.Template
-    -> FilePath
-    -> Provider
-    -> [NS]
-    -> Script ()
-renderPackage tmpls dir p namespaces = do
-    let packageFile  = dir    </> "package" <.> "yaml"
-        srcDir       = dir    </> "src"
-        genDir       = dir    </> "gen"
-        typesFile    = srcDir </> NS.toPath (NS.types    p) <.> "hs"
-
-    createDirectory dir
-
-    hoistEither (Render.package tmpls p)
-        >>= scriptIO . LText.writeFile packageFile
-
-    hoistEither (Render.main tmpls p namespaces)
-        >>= writeNS genDir
-
-    typesExists <- scriptIO (Dir.doesFileExist typesFile)
-    echo "Types" (typesFile ++ " == " ++ show typesExists)
-    unless typesExists $
-        hoistEither (Render.types tmpls p)
-            >>= writeNS srcDir
 
 writeNS :: FilePath -> (NS, LText.Text) -> Script ()
 writeNS dir (ns, text) = do

@@ -1,9 +1,10 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+-- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
 --
@@ -11,25 +12,15 @@ module {{ namespace }}
     (
     -- * Provider Datatype
       {{ provider.name }} (..)
-    , empty{{ provider.name }}
-
-    -- * Lenses
-  {% for field in provider.arguments %}
-    , provider{{ field.value.method | upperHead }}
-  {% endfor %}
+    , newProvider
     ) where
 
 import Data.Functor  ((<$>))
 import Data.Function ((&))
 import Data.Hashable (Hashable)
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Base     (Eq, ($))
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
-
-import Lens.Micro (Lens', lens)
+import GHC.Base (($))
 
 {% for import in unqualified %}
 import {{ import.value }}
@@ -43,43 +34,38 @@ import qualified Terrafomo.Name as TF
 import qualified Terrafomo.Provider as TF
 
 -- The {{ provider.name }} Terraform provider configuration.
-data {{ provider.name }} = {{ provider.name }}' {
-  {% for field in provider.arguments %}
-    {% if field.first %}  {% else %}, {% endif %}{{ field.value.label }} :: {{ field.value.type }}
-  {% endfor %}
-    } deriving (Show, Eq, Generic)
+data {{ provider.type }} = {{ provider.type }}'
+{% include "_include/record.ede" with arguments = provider.arguments %}
 
-instance Hashable {{ provider.name }}
+instance Hashable {{ provider.type }}
 
-instance TF.IsSection {{ provider.name }} where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy ({{ provider.name }}))
+instance TF.IsSection {{ provider.type }} where
+    toSection x@{{ provider.type }}'{..} =
+        let typ = TF.providerType (Proxy :: Proxy ({{ provider.type }}))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
               (catMaybes
                   [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
                 {% for field in provider.arguments %}
-                  , {{ field.value.encoder }}
-                      ({{ namespace }}.{{ field.value.label }} x)
+                  , {{ field.value.encoder }} {{ field.value.label }}
                 {% endfor %}
                   ])
 
-instance TF.IsProvider {{ provider.name }} where
-    type ProviderType {{ provider.name }} = "{{ provider.original }}"
+instance TF.IsProvider {{ provider.type }} where
+    type ProviderType {{ provider.type }} = "{{ provider.original }}"
 
-empty{{ provider.name }}
-    ::{% for param in provider.parameters %} {{ param.value.type }} {-^ @{{param.value.name}}@ -} ->{% endfor %} {{ provider.name }}
-empty{{ provider.name }}{% for param in provider.parameters %} {{ param.value.label }}{% endfor %} =
-    {{ provider.name }}' {
+newProvider
+  {% for param in provider.parameters %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{param.value.name}}@{% if param.last %}
+    -> {{ provider.type }}{% endif %}
+  {% else %}
+    :: {{ provider.type }}
+  {% endfor %}
+newProvider{% for param in provider.parameters %} {{ param.value.label }}{% endfor %} =
+    {{ provider.name }}'
       {% for field in provider.arguments %}
-        {% if field.first %}  {% else %}, {% endif %}{{ field.value.label }} = {{ field.value.default }}
+        {% if field.first %}{ {% else %}, {% endif %}{{ field.value.label }} = {{ field.value.default }}{% if field.last %}
+        }{% endif %}
       {% endfor %}
-        }
-{% for field in provider.arguments %}
-
-provider{{ field.value.method | upperHead }} :: Lens' {{ provider.name }} {{ field.value.type }}
-provider{{ field.value.method | upperHead }} =
-    lens {{ namespace}}.{{ field.value.label }}
-         (\s a -> s { {{ field.value.label }} = a } :: {{ provider.name }})
-{% endfor %}
+{% include "_include/lenses.ede" with schema = provider %}

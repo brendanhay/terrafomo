@@ -48,12 +48,6 @@ upperHead x =
         Nothing      -> x
         Just (y, ys) -> Char.toUpper y `Text.cons` ys
 
-lowerHead :: Text -> Text
-lowerHead x =
-    case Text.uncons x of
-        Nothing      -> x
-        Just (y, ys) -> Char.toLower y `Text.cons` ys
-
 quotes, parens, brackets :: Text -> Text
 quotes   = surround '"' '"'
 parens   = surround '(' ')'

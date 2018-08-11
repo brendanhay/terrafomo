@@ -1,4 +1,7 @@
-module Terrafomo.Gen.Elab where
+module Terrafomo.Gen.Elab
+    ( elab
+    , classes
+    ) where
 
 import Control.Applicative        ((<|>))
 import Control.Monad.Except       (Except)
@@ -30,7 +33,7 @@ elab cfg p =
     Except.runExcept $
         flip State.evalStateT mempty $
             flip Reader.runReaderT False $ do
-                let name = Go.providerName p
+                let name = configName cfg
                     deps = Set.fromList
                          [ "base"
                          , "hashable"
@@ -40,6 +43,7 @@ elab cfg p =
                          , "unordered-containers"
                          ]
 
+                con   <- newCon name
                 args  <- arguments            (Go.providerSchemas     p)
                 rs    <- resources Resource   (Go.providerResources   p)
                 ds    <- resources DataSource (Go.providerDataSources p)
@@ -47,10 +51,11 @@ elab cfg p =
                 types <- State.gets Map.elems
 
                 pure $! Provider'
-                    { providerName         = configName cfg
+                    { providerName         = name
                     , providerPackage      = configPackage cfg
                     , providerDependencies = configDependencies cfg <> deps
-                    , providerOriginal     = name
+                    , providerOriginal     = Go.providerName p
+                    , providerType         = con
                     , providerParameters   = parameters args
                     , providerArguments    = args
                     , providerResources    = rs
@@ -166,7 +171,7 @@ field s = do
         optional =
             case default_ of
                 DefaultNil{}
-                    | not thread -> typeMay
+                    | not thread -> typeMaybe
                 _                -> id
 
         encoder =
@@ -178,20 +183,26 @@ field s = do
 
     typ    <-
         case Go.schemaType s of
-            Go.TypeString -> threadType Text
-            Go.TypeInt    -> threadType Integer
-            Go.TypeFloat  -> threadType Double
-            Go.TypeBool   -> threadType Bool
+            Go.TypeString -> threadType TText
+            Go.TypeInt    -> threadType TInteger
+            Go.TypeFloat  -> threadType TDouble
+            Go.TypeBool   -> threadType TBool
             Go.TypeSet    ->
-                if thread
-                    then Thread <$> nested s
-                    else nested s
-            Go.TypeList   ->
+                let list | Go.schemaMaxItems s == 1 = id
+                         | Go.schemaMinItems s > 0  = typeList1
+                         | otherwise                = typeList
+
+                 in threadType . list =<< threadType =<< nested s
+
+            Go.TypeList ->
                 threadType =<<
-                    typeList <$> nested s
+                    (if Go.schemaMinItems s > 0
+                         then typeList1
+                         else typeList) <$> nested s
+
             Go.TypeMap    ->
                 threadType =<<
-                    typeMap <$> (nested s <|> threadType Text)
+                    typeMap <$> (nested s <|> threadType TText)
 
     pure $! Field'
         { fieldName     = name

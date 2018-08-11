@@ -1,25 +1,17 @@
-module Terrafomo.Gen.Go where
+-- | This is a mapping from @terraform-go/main.go@.
+module Terrafomo.Gen.Go
+    ( Type     (..)
+    , Provider (..)
+    , Resource (..)
+    , Timeouts (..)
+    , Schema   (..)
+    ) where
 
-import Control.Applicative (many, some, (<|>))
-import Control.Monad       (unless, void, (>=>))
-
-import Data.Bifunctor     (first)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (fromMaybe)
-import Data.Semigroup     ((<>))
-import Data.Text          (Text)
-import Data.Void          (Void)
+import Data.Text (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Data.Foldable      as Fold
-import qualified Data.List          as List
-import qualified Data.Map.Strict    as Map
-import qualified Data.Text          as Text
-import qualified Data.Text.IO       as Text
-import qualified System.FilePath    as Path
 import qualified Terrafomo.Gen.JSON as JSON
-import qualified Terrafomo.Gen.Text as Text
 
 -- | The terraform field types.
 data Type

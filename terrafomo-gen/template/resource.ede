@@ -19,11 +19,7 @@ module {{ namespace }}
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
-import GHC.Base     (Eq, ($), (.))
-import GHC.Generics (Generic)
-import GHC.Show     (Show)
-
-import Lens.Micro (lens)
+import GHC.Base (($))
 
 {% for import in unqualified %}
 import {{ import.value }}
@@ -41,14 +37,9 @@ import qualified Terrafomo.Schema as TF
 
 -- | @{{ resource.value.original }}@ {{ type }}.
 data {{ resource.value.type }} = {{ resource.value.name }}'
-  {% for field in resource.value.arguments %}
-    {% if field.first %}{ {% else %}, {% endif %}{{ field.value.label }} :: {{ field.value.type }}{% if field.last %}
-    } deriving (Show, Eq, Generic){% endif %}
-  {% else %}
-    deriving (Show, Eq)
-  {% endfor %}
+{% include "_include/record.ede" with arguments = resource.value.arguments %}
 
-instance TF.IsObject {{ resource.value.type }} where
+instance TF.IsObject ({{ resource.value.type }}) where
   {% for field in resource.value.arguments %}
     {% if field.first %}toObject {{ resource.value.name }}'{..} = catMaybes
         [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.label }}{% if field.last %}
@@ -61,9 +52,9 @@ instance TF.IsObject {{ resource.value.type }} where
 {{ constructor }}
   {% for param in resource.value.parameters %}
     {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{param.value.name}}@{% if param.last %}
-    -> TF.{{ type }} {{ provider }} {{ resource.value.type }}{% endif %}
+    -> TF.{{ type }} {{ provider }} ({{ resource.value.type }}){% endif %}
   {% else %}
-    :: TF.{{ type }} {{ provider }} {{ resource.value.type }}
+    :: TF.{{ type }} {{ provider }} ({{ resource.value.type }})
   {% endfor %}
 {{ constructor }}{% for param in resource.value.parameters %} {{ param.value.label }}{% endfor %} =
     TF.new{{ type }} "{{ resource.value.original }}" $
@@ -73,22 +64,5 @@ instance TF.IsObject {{ resource.value.type }} where
             }{% endif %}
           {% endfor %}
   {% endlet %}
-  {% for field in resource.value.arguments %}
-
-instance P.{{ field.value.class }} {{ resource.value.type }} {{ field.value.type }} where
-    {{ field.value.method }} =
-        lens ({{ field.value.label }} :: {{ resource.value.type }} -> {{ field.value.type }})
-             (\s a -> s { {{ field.value.label }} = a } :: {{ resource.value.type }})
-  {% endfor %}
-  {% for field in resource.value.attributes %}
-
-instance s ~ s' => P.{{ field.value.class }} (TF.Ref s' {{ resource.value.type }}) {{ field.value.type }} where
-    {% if field.value.computed %}
-    {{ field.value.method }} x = TF.compute (TF.refKey x) "{{ field.value.name }}"
-    {% else %}
-    {{ field.value.method }} =
-        ({{ field.value.label }} :: {{ resource.value.name }} s -> {{ field.value.type }})
-            . TF.refValue
-    {% endif %}
-  {% endfor %}
+{% include "_include/lenses.ede" with schema = resource.value %}
 {% endfor %}
