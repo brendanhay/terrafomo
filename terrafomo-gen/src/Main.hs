@@ -101,10 +101,12 @@ main = do
                     , settingsTemplate = "settings.ede"
                     }
 
-        config    <- parseYAML "Config"   (configYAML   opts)
-        raw       <- parseJSON "Provider" (providerJSON opts)
+        config    <-
+            parseYAML "Config" (configYAML opts)
 
-        provider  <- hoistEither (Elab.elab config raw)
+        provider  <-
+            parseJSON "Provider" (providerJSON opts)
+                >>= hoistEither . Elab.elab config
 
         let providerDir = "provider"  </> Text.unpack (providerPackage provider)
             genDir      = providerDir </> "gen"

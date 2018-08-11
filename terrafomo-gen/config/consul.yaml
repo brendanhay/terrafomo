@@ -1,4 +1,0 @@
-name: Consul
-package: terrafomo-consul
-datatype: true
-original: consul

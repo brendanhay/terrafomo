@@ -1,4 +1,0 @@
-name: PostgreSQL
-package: terrafomo-postgresql
-datatype: true
-original: postgresql

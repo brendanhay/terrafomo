@@ -1,7 +1,0 @@
-arguments:
-  _attribute:
-    type: '[P.DynamoTableAttribute]'
-  _read_capacity:
-    type: 'P.Natural'
-  _write_capacity:
-    type: 'P.Natural'

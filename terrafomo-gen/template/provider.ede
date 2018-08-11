@@ -10,14 +10,14 @@
 --
 module {{ namespace }}
     (
-    -- * Provider Datatype
-      {{ provider.name }} (..)
+    -- * {{ provider.name }} Provider Datatype
+      Provider (..)
     , newProvider
     ) where
 
 import Data.Functor  ((<$>))
 import Data.Function ((&))
-import Data.Hashable (Hashable)
+import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -33,15 +33,15 @@ import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.Name as TF
 import qualified Terrafomo.Provider as TF
 
--- The {{ provider.name }} Terraform provider configuration.
-data {{ provider.type }} = {{ provider.type }}'
+-- | The {{ provider.name }} Terraform provider configuration.
+data Provider = Provider'
 {% include "_include/record.ede" with arguments = provider.arguments %}
 
-instance Hashable {{ provider.type }}
+instance P.Hashable Provider
 
-instance TF.IsSection {{ provider.type }} where
-    toSection x@{{ provider.type }}'{..} =
-        let typ = TF.providerType (Proxy :: Proxy ({{ provider.type }}))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
@@ -52,18 +52,18 @@ instance TF.IsSection {{ provider.type }} where
                 {% endfor %}
                   ])
 
-instance TF.IsProvider {{ provider.type }} where
-    type ProviderType {{ provider.type }} = "{{ provider.original }}"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "{{ provider.original }}"
 
 newProvider
   {% for param in provider.parameters %}
     {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{param.value.name}}@{% if param.last %}
-    -> {{ provider.type }}{% endif %}
+    -> Provider{% endif %}
   {% else %}
-    :: {{ provider.type }}
+    :: Provider
   {% endfor %}
 newProvider{% for param in provider.parameters %} {{ param.value.label }}{% endfor %} =
-    {{ provider.name }}'
+    Provider'
       {% for field in provider.arguments %}
         {% if field.first %}{ {% else %}, {% endif %}{{ field.value.label }} = {{ field.value.default }}{% if field.last %}
         }{% endif %}

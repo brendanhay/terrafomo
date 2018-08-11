@@ -4,21 +4,23 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 {% include "_include/license.ede" %}
 --
 module {{ namespace }}
     (
     -- * Settings Datatypes
-  {% for setting in settings %}
+    {% for setting in settings %}
+    -- ** {{ setting.value.name }}
     {% if setting.first %} {% else %},{% endif %} {{ setting.value.name }} (..)
     , new{{ setting.value.name }}
 
   {% endfor %}
     ) where
 
-import Data.Functor  ((<$>))
-import Data.Hashable (Hashable)
-import Data.Maybe    (catMaybes)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
 
 {% for import in unqualified %}
 import {{ import.value }}
@@ -36,8 +38,7 @@ import qualified Terrafomo.Name as TF
 data {{ setting.value.type }} = {{ setting.value.name }}'
 {% include "_include/record.ede" with arguments = setting.value.arguments %}
 
-instance Hashable ({{ setting.value.type }})
-
+instance P.Hashable  ({{ setting.value.type }})
 instance TF.IsValue  ({{ setting.value.type }})
 instance TF.IsObject ({{ setting.value.type }}) where
   {% for field in setting.value.arguments %}
@@ -45,7 +46,7 @@ instance TF.IsObject ({{ setting.value.type }}) where
         [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.label }}{% if field.last %}
         ]{% endif %}
   {% else %}
-    toObject _ = []
+    toObject {{ setting.value.name }}' = []
   {% endfor %}
 
 new{{ setting.value.name }}

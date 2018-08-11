@@ -1,5 +1,0 @@
-name: Archive
-datatype: false
-original: archive
-package: terrafomo-builtins
-package-yaml: false

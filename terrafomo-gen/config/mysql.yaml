@@ -1,4 +1,0 @@
-name: MySQL
-package: terrafomo-mysql
-datatype: true
-original: mysql

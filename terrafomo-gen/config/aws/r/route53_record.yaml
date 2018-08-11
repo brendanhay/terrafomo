@@ -1,3 +1,0 @@
-arguments:
-  _records:
-    type: '[TF.Attr s P.Text]'

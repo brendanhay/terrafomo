@@ -1,5 +1,0 @@
-name: Local
-datatype: false
-original: local
-package: terrafomo-builtins
-package-yaml: false

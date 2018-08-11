@@ -4,15 +4,18 @@ module Terrafomo.Gen.Elab
     ) where
 
 import Control.Applicative        ((<|>))
+import Control.Monad              ((>=>))
 import Control.Monad.Except       (Except)
 import Control.Monad.Reader       (ReaderT)
 import Control.Monad.State.Strict (StateT)
 
+import Data.Bifunctor  (second)
 import Data.Map.Strict (Map)
 import Data.Semigroup  ((<>))
 import Data.Set        (Set)
 import Data.Text       (Text)
 
+import Terrafomo.Gen.Config
 import Terrafomo.Gen.Haskell
 
 import Text.Show.Pretty (ppShow)
@@ -26,37 +29,27 @@ import qualified Data.Text.Read             as Text
 import qualified Terrafomo.Gen.Go           as Go
 import qualified Terrafomo.Gen.Text         as Text
 
-type Elab = ReaderT Bool (StateT (Map Text Settings) (Except String))
+type Elab = ReaderT (Config, Bool) (StateT (Map Text Settings) (Except String))
 
 elab :: Config -> Go.Provider -> Either String Provider
 elab cfg p =
     Except.runExcept $
         flip State.evalStateT mempty $
-            flip Reader.runReaderT False $ do
-                let name = configName cfg
-                    deps = Set.fromList
-                         [ "base"
-                         , "hashable"
-                         , "microlens"
-                         , "terrafomo"
-                         , "text"
-                         , "unordered-containers"
-                         ]
+            flip Reader.runReaderT (cfg, False) $ do
 
-                con   <- newCon name
-                args  <- arguments            (Go.providerSchemas     p)
+                args  <- arguments "provider" (Go.providerSchemas     p)
                 rs    <- resources Resource   (Go.providerResources   p)
                 ds    <- resources DataSource (Go.providerDataSources p)
 
                 types <- State.gets Map.elems
 
                 pure $! Provider'
-                    { providerName         = name
-                    , providerPackage      = configPackage cfg
-                    , providerDependencies = configDependencies cfg <> deps
+                    { providerName         = configName         cfg
+                    , providerPackage      = configPackage      cfg
+                    , providerDependencies = configDependencies cfg
                     , providerOriginal     = Go.providerName p
-                    , providerType         = con
                     , providerParameters   = parameters args
+                    , providerType         = Con "Provider"
                     , providerArguments    = args
                     , providerResources    = rs
                     , providerDataSources  = ds
@@ -96,8 +89,8 @@ resource styp orig xs =
                     Resource   -> Text.resourceName   orig
                     DataSource -> Text.dataSourceName orig
 
-        args  <- arguments xs
-        attrs <- attributes xs
+        args  <- arguments  orig xs
+        attrs <- attributes orig xs
         con   <- newCon name
 
         pure $! Resource'
@@ -117,31 +110,47 @@ parameters =
             DefaultParam{} -> True
             _              -> False
 
-arguments :: [Go.Schema] -> Elab [Field]
-arguments = traverse field . filter (not . Go.schemaComputed)
+arguments :: Text -> [Go.Schema] -> Elab [Field]
+arguments name =
+    traverse (field >=> applyRules name)
+        . filter (not . Go.schemaComputed)
 
-attributes :: [Go.Schema] -> Elab [Field]
-attributes = traverse field . filter Go.schemaComputed
+attributes :: Text -> [Go.Schema] -> Elab [Field]
+attributes name =
+    traverse (field >=> applyRules name)
+        . filter Go.schemaComputed
+
+applyRules :: Text -> Field -> Elab Field
+applyRules name f = do
+    cfg <- Reader.asks fst
+    pure $! f
+        { fieldType =
+            maybe (fieldType f) Con
+                  (configApplyRules cfg name (fieldName f))
+        }
+
 
 settings_ :: Text -> [Go.Schema] -> Elab Type
-settings_ name = fmap settingsType . settings name
+settings_ orig = fmap settingsType . settings orig
 
 settings :: Text -> [Go.Schema] -> Elab Settings
-settings name xs = do
-    args  <- arguments  xs
-    attrs <- attributes xs
-    con   <- newCon name
+settings orig xs = do
+    thread <- isThreaded
+    args   <- arguments  orig xs
+    attrs  <- attributes orig xs
+    con    <- newCon orig
 
     let s = Settings'
-            { settingsName       = Text.dataTypeName name
-            , settingsOriginal   = name
+            { settingsName       = Text.dataTypeName orig
+            , settingsOriginal   = orig
             , settingsType       = con
+            , settingsHashable   = not thread
             , settingsParameters = parameters args
             , settingsArguments  = args
             , settingsAttributes = attrs
             }
 
-    State.modify' (Map.insert name s)
+    State.modify' (Map.insert orig s)
 
     pure s
 
@@ -150,7 +159,7 @@ field_ = fmap fieldType . field
 
 field :: Go.Schema -> Elab Field
 field s = do
-    thread <- Reader.ask
+    thread <- isThreaded
     def    <- traverse (defaulted (Go.schemaType s)) (Go.schemaDefault s)
 
     let name     = Go.schemaName s
@@ -206,6 +215,7 @@ field s = do
 
     pure $! Field'
         { fieldName     = name
+        , fieldHelp     = newHelp (Go.schemaDescription s)
         , fieldClass    = Text.fieldClassName  label
         , fieldMethod   = Text.fieldMethodName label
         , fieldLabel    = label
@@ -262,14 +272,17 @@ nested s
                     , ppShow s
                     ]
 
-threaded :: Elab a -> Elab a
-threaded = Reader.local (const True)
-
 newCon :: Text -> Elab Type
 newCon = threadType . Con . Text.dataTypeName
 
 threadType :: Type -> Elab Type
 threadType x =
-    Reader.ask >>= pure . \case
+    isThreaded >>= pure . \case
         True  -> Thread x
         False -> x
+
+threaded :: Elab a -> Elab a
+threaded = Reader.local (second (const True))
+
+isThreaded :: Elab Bool
+isThreaded = Reader.asks snd

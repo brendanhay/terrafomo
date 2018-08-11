@@ -1,4 +1,0 @@
-name: Grafana
-package: terrafomo-grafana
-datatype: true
-original: grafana

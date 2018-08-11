@@ -29,7 +29,6 @@
     - DeriveFunctor
     - DeriveGeneric
     - DeriveTraversable
-    - DerivingStrategies
     - DuplicateRecordFields
     - ExplicitNamespaces
     - FlexibleContexts

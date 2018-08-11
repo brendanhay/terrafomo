@@ -1,4 +1,0 @@
-name: Scaleway
-package: terrafomo-scaleway
-datatype: true
-original: scaleway

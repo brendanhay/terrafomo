@@ -106,7 +106,11 @@ settings tmpls p ns xs =
         [ "namespace"   .= ns
         , "settings"    .= xs
         , "unqualified" .= Set.fromList [NS.types p]
-        , "qualified"   .= Set.insert (NS.lenses p) prelude
+        , "qualified"   .=
+            (Set.fromList
+                [ NS.types  p
+                , NS.lenses p
+                ] <> prelude)
         ]
 
 resources
@@ -121,18 +125,17 @@ resources tmpls p namespaces ns typ xs =
     let (args, attrs) = Elab.classes p
      in render (resourceTemplate tmpls)
         [ "namespace"        .= ns
-        , "provider"         .= providerName p
         , "type"             .= typ
         , "resources"        .= xs
         , "argumentClasses"  .= args
         , "attributeClasses" .= attrs
-        , "unqualified"      .=
-            Set.fromList
-                ([ NS.provider p <> "Provider"
-                 , NS.types    p
-                 ] ++ namespaces)
-        , "qualified"        .= Set.insert (NS.lenses p) prelude
-
+        , "unqualified"      .= Set.fromList namespaces
+        , "qualified"        .=
+            (Set.fromList
+                [ NS.lenses   p
+                , NS.provider p <> "Provider"
+                , NS.types    p
+                ] <> prelude)
         ]
 
 render :: EDE.Template -> [JSON.Pair] -> Either String LText.Text
@@ -145,6 +148,7 @@ render tmpl = EDE.eitherRenderWith filters tmpl . EDE.fromPairs
 prelude :: Set NS
 prelude = Set.fromList
     [ "Data.HashMap.Strict"
+    , "Data.Hashable"
     , "Data.List.NonEmpty"
     , "Data.Text"
     , "GHC.Generics"

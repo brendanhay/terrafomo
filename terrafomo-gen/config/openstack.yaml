@@ -1,4 +1,0 @@
-name: OpenStack
-package: terrafomo-openstack
-datatype: true
-original: openstack

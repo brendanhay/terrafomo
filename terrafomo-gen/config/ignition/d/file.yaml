@@ -1,9 +1,0 @@
-arguments:
-  _uid:
-    type: 'P.Int'
-  _gid:
-    type: 'P.Int'
-  _content:
-    type: '(P.FileContent s)'
-  _source:
-    type: '(P.FileSource s)'

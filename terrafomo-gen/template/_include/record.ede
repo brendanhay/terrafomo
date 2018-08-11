@@ -1,5 +1,6 @@
 {% for field in arguments %}
-    {% if field.first %}{ {% else %}, {% endif %}{{ field.value.label }} :: {{ field.value.type }}{% if field.last %}
+    {% if field.first %}{ {% else %}, {% endif %}{{ field.value.label }} :: {{ field.value.type }}
+    -- ^ {{ field.value.help }}{% if field.last %}
     } deriving (P.Show, P.Eq, P.Generic){% endif %}
 {% else %}
     deriving (P.Show, P.Eq, P.Generic)

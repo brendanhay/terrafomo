@@ -1,8 +1,0 @@
-arguments:
-  _min:
-    type: 'P.Int'
-  _max:
-    type: 'P.Int'
-attributes:
-  _result:
-    type: 'P.Int'

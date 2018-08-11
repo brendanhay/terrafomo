@@ -1,4 +1,0 @@
-name: Fastly
-package: terrafomo-fastly
-datatype: true
-original: fastly

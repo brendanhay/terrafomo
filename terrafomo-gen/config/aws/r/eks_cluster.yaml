@@ -1,7 +1,0 @@
-arguments:
-  _vpc_config:
-    type: '(P.EksVpcConfig s)'
-attributes:
-  _vpc_config:
-    computed: true
-    type: '(P.EksVpcConfigId s)'

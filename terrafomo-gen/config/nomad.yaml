@@ -1,4 +1,0 @@
-name: Nomad
-package: terrafomo-nomad
-datatype: true
-original: nomad

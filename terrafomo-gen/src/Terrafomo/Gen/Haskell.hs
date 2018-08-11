@@ -10,8 +10,7 @@ import Data.Text      (Text)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Gen.JSON ((.!=), (.:), (.:?))
-
+import qualified Data.Text                        as Text
 import qualified Data.Text.Lazy                   as LText
 import qualified Data.Text.Lazy.Builder           as Build
 import qualified Data.Text.Lazy.Builder.Int       as Build
@@ -19,26 +18,12 @@ import qualified Data.Text.Lazy.Builder.RealFloat as Build
 import qualified Terrafomo.Gen.JSON               as JSON
 import qualified Terrafomo.Gen.Text               as Text
 
--- FIXME: Move this
-data Config = Config'
-    { configPackage      :: !Text
-    , configName         :: !Text
-    , configDependencies :: !(Set Text)
-    } deriving (Show, Eq)
-
-instance JSON.FromJSON Config where
-    parseJSON = JSON.withObject "Config" $ \o -> do
-        configPackage      <- o .: "package"
-        configName         <- o .: "name"
-        configDependencies <- o .:? "dependencies" .!= mempty
-        pure Config'{..}
-
 data Type
     = Var    !Text
     | Con    !Text
     | Thread !Type
     | App    !Type !Type
-      deriving (Show, Eq, Ord)
+      deriving (Show, Eq)
 
 typeName :: Type -> Text
 typeName = go False
@@ -85,7 +70,7 @@ reduce = \case
 data SchemaType
     = Resource
     | DataSource
-      deriving (Show, Eq, Ord)
+      deriving (Show, Eq)
 
 instance JSON.ToJSON SchemaType where
     toJSON = JSON.toJSON . show
@@ -123,6 +108,7 @@ data Settings = Settings'
     { settingsName       :: !Text
     , settingsOriginal   :: !Text
     , settingsType       :: !Type
+    , settingsHashable   :: !Bool
     , settingsParameters :: ![Field]
     , settingsArguments  :: ![Field]
     , settingsAttributes :: ![Field]
@@ -133,6 +119,7 @@ instance JSON.ToJSON Settings where
 
 data Field = Field'
     { fieldName     :: !Text
+    , fieldHelp     :: !Help
     , fieldClass    :: !Text
     , fieldMethod   :: !Text
     , fieldLabel    :: !Text
@@ -143,7 +130,7 @@ data Field = Field'
     , fieldForceNew :: !Bool
     , fieldDefault  :: !Default
     , fieldEncoder  :: !Text
-    } deriving (Show, Eq, Ord, Generic)
+    } deriving (Show, Eq, Generic)
 
 instance JSON.ToJSON Field where
     toJSON = JSON.genericToJSON (JSON.options "field")
@@ -156,7 +143,7 @@ data Default
     | DefaultBool    !Bool
     | DefaultInteger !Integer
     | DefaultDouble  !Double
-      deriving (Show, Eq, Ord)
+      deriving (Show, Eq)
 
 instance JSON.ToJSON Default where
     toJSON = JSON.String . go
@@ -185,3 +172,11 @@ data Class = Class'
 
 instance JSON.ToJSON Class where
     toJSON = JSON.genericToJSON (JSON.options "class")
+
+newtype Help = Help Text
+   deriving (Show, Eq, JSON.ToJSON)
+
+newHelp :: Maybe Text -> Help
+newHelp =
+    maybe (Help "Undocumented.")
+          (Help . Text.upperHead . Text.unwords . Text.lines)

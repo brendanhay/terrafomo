@@ -1,60 +1,15 @@
 name: AWS
 package: terrafomo-aws
 
-# datatype: true
+dependencies:
+  - amazonka-core
+  - formatting
+  - iproute
 
-# dependencies:
-#   - aeson
-#   - amazonka-core
-#   - formatting
-#   - iproute
-#   - unordered-containers
+# replace-datatype-fields:
+#   provider:
+#     region: P.Foo
 
-# rules:
-#   - mode: suffix
-#     match: cidr_block
-#     type: 'P.IPRange'
-
-#   - mode: exact
-#     match: tags
-#     type: '(P.Tags s)'
-
-#   - mode: suffix
-#     match: _port
-#     type: 'P.Word16'
-
-#   - mode: prefix
-#     match: enable
-#     type: 'P.Bool'
-
-#   - mode: suffix
-#     match: enable
-#     type: 'P.Bool'
-
-#   - mode: suffix
-#     match: enabled
-#     type: 'P.Bool'
-
-#   - mode: suffix
-#     match: region
-#     type: 'P.Region'
-
-#   - mode: suffix
-#     match: availability_zone
-#     type: 'P.Zone'
-
-#   - mode: exact
-#     match: availability_zones
-#     type: '[TF.Attr s P.Text]'
-
-#   - mode: exact
-#     match: security_group_ids
-#     type: '[TF.Attr s P.Text]'
-
-#   - mode: exact
-#     match: security_groups
-#     type: '[TF.Attr s P.Text]'
-
-#   - mode: exact
-#     match: subnets
-#     type: '[TF.Attr s P.Text]'
+# replace-matching-fields:
+#   - suffix: cidr_block
+#     type: TF.Attr s P.IPRange

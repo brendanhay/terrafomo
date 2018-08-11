@@ -4,12 +4,15 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
+-- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 {% include "_include/license.ede" %}
 --
 module {{ namespace }}
     (
     -- * {{ type }} Datatypes
-  {% for resource in resources %}
+    {% for resource in resources %}
+    -- **  {{ resource.value.name }}
     {% if resource.first %} {% else %},{% endif %} {{ resource.value.name }} (..)
     , {{ resource.value.name | lowerHead }}
 
@@ -31,7 +34,6 @@ import qualified {{ import.value }} as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Provider as TF
 import qualified Terrafomo.Schema as TF
 {% for resource in resources %}
 
@@ -52,9 +54,9 @@ instance TF.IsObject ({{ resource.value.type }}) where
 {{ constructor }}
   {% for param in resource.value.parameters %}
     {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{param.value.name}}@{% if param.last %}
-    -> TF.{{ type }} {{ provider }} ({{ resource.value.type }}){% endif %}
+    -> TF.{{ type }} P.Provider ({{ resource.value.type }}){% endif %}
   {% else %}
-    :: TF.{{ type }} {{ provider }} ({{ resource.value.type }})
+    :: TF.{{ type }} P.Provider ({{ resource.value.type }})
   {% endfor %}
 {{ constructor }}{% for param in resource.value.parameters %} {{ param.value.label }}{% endfor %} =
     TF.new{{ type }} "{{ resource.value.original }}" $

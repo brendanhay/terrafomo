@@ -1,3 +1,0 @@
-arguments:
-  _roles:
-    type: '[TF.Attr s P.Text]'

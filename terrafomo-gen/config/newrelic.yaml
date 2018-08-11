@@ -1,4 +1,0 @@
-name: NewRelic
-package: terrafomo-newrelic
-datatype: true
-original: newrelic

@@ -1,3 +1,0 @@
-arguments:
-  _setting:
-    type: '[P.ElasticBeanstalkSetting s]'
