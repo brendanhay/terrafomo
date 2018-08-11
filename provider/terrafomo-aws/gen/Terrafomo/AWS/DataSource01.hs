@@ -346,30 +346,30 @@ import GHC.Base (($))
 
 import Terrafomo.AWS.Settings
 
-import qualified Data.HashMap.Strict as P
-import qualified Data.Hashable as P
-import qualified Data.List.NonEmpty as P
-import qualified Data.Text as P
-import qualified GHC.Generics as P
-import qualified Lens.Micro as P
-import qualified Prelude as P
-import qualified Terrafomo.AWS.Lens as P
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Terrafomo.AWS.Types as P
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Schema as TF
+import qualified Terrafomo.AWS.Types    as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Schema       as TF
 
 -- | @aws_acm_certificate@ DataSource.
 data AcmCertificateData s = AcmCertificateData'
-    { _domain :: TF.Attr s P.Text
+    { _domain     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _mostRecent :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _statuses :: TF.Attr s [TF.Attr s P.Text]
+    , _statuses   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _types :: TF.Attr s [TF.Attr s P.Text]
+    , _types      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -613,13 +613,13 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (AlbTargetGroupData s)) (TF.Att
 data AmiData s = AmiData'
     { _executableUsers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    , _filter          :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ Undocumented.
-    , _mostRecent :: TF.Attr s P.Bool
+    , _mostRecent      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _nameRegex :: TF.Attr s P.Text
+    , _nameRegex       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _owners :: TF.Attr s [TF.Attr s P.Text]
+    , _owners          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -745,11 +745,11 @@ instance s ~ s' => P.HasComputedVirtualizationType (TF.Ref s' (AmiData s)) (TF.A
 data AmiIdsData s = AmiIdsData'
     { _executableUsers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    , _filter          :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ Undocumented.
-    , _nameRegex :: TF.Attr s P.Text
+    , _nameRegex       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _owners :: TF.Attr s [TF.Attr s P.Text]
+    , _owners          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1299,17 +1299,17 @@ instance s ~ s' => P.HasComputedIds (TF.Ref s' (CognitoUserPoolsData s)) (TF.Att
 
 -- | @aws_db_cluster_snapshot@ DataSource.
 data DbClusterSnapshotData s = DbClusterSnapshotData'
-    { _dbClusterIdentifier :: TF.Attr s P.Text
+    { _dbClusterIdentifier         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _dbClusterSnapshotIdentifier :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _includePublic :: TF.Attr s P.Bool
+    , _includePublic               :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _includeShared :: TF.Attr s P.Bool
+    , _includeShared               :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _mostRecent :: TF.Attr s P.Bool
+    , _mostRecent                  :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _snapshotType :: TF.Attr s P.Text
+    , _snapshotType                :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1541,13 +1541,13 @@ data DbSnapshotData s = DbSnapshotData'
     -- ^ Undocumented.
     , _dbSnapshotIdentifier :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _includePublic :: TF.Attr s P.Bool
+    , _includePublic        :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _includeShared :: TF.Attr s P.Bool
+    , _includeShared        :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _mostRecent :: TF.Attr s P.Bool
+    , _mostRecent           :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _snapshotType :: TF.Attr s P.Text
+    , _snapshotType         :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1755,15 +1755,15 @@ instance s ~ s' => P.HasComputedWriteCapacity (TF.Ref s' (DynamodbTableData s)) 
 
 -- | @aws_ebs_snapshot@ DataSource.
 data EbsSnapshotData s = EbsSnapshotData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter              :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ Undocumented.
-    , _mostRecent :: TF.Attr s P.Bool
+    , _mostRecent          :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _owners :: TF.Attr s [TF.Attr s P.Text]
+    , _owners              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _restorableByUserIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _snapshotIds :: TF.Attr s [TF.Attr s P.Text]
+    , _snapshotIds         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1848,9 +1848,9 @@ instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (EbsSnapshotData s)) (TF.A
 
 -- | @aws_ebs_snapshot_ids@ DataSource.
 data EbsSnapshotIdsData s = EbsSnapshotIdsData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter              :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ Undocumented.
-    , _owners :: TF.Attr s [TF.Attr s P.Text]
+    , _owners              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _restorableByUserIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
@@ -1893,7 +1893,7 @@ instance s ~ s' => P.HasComputedIds (TF.Ref s' (EbsSnapshotIdsData s)) (TF.Attr 
 
 -- | @aws_ebs_volume@ DataSource.
 data EbsVolumeData s = EbsVolumeData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter     :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ Undocumented.
     , _mostRecent :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -2030,7 +2030,7 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (EcsClusterData s)) (TF.Attr s
 
 -- | @aws_ecs_container_definition@ DataSource.
 data EcsContainerDefinitionData s = EcsContainerDefinitionData'
-    { _containerName :: TF.Attr s P.Text
+    { _containerName  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _taskDefinition :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -2089,7 +2089,7 @@ instance s ~ s' => P.HasComputedMemoryReservation (TF.Ref s' (EcsContainerDefini
 
 -- | @aws_ecs_service@ DataSource.
 data EcsServiceData s = EcsServiceData'
-    { _clusterArn :: TF.Attr s P.Text
+    { _clusterArn  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _serviceName :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -2347,7 +2347,7 @@ instance P.HasRegion (ElasticBeanstalkHostedZoneData s) (TF.Attr s P.Text) where
 data ElasticBeanstalkSolutionStackData s = ElasticBeanstalkSolutionStackData'
     { _mostRecent :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _nameRegex :: TF.Attr s P.Text
+    , _nameRegex  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2652,9 +2652,9 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElbServiceAccountData s)) (TF.At
 
 -- | @aws_glue_script@ DataSource.
 data GlueScriptData s = GlueScriptData'
-    { _dagEdge :: TF.Attr s [DagEdge s]
+    { _dagEdge  :: TF.Attr s [DagEdge s]
     -- ^ Undocumented.
-    , _dagNode :: TF.Attr s [DagNode s]
+    , _dagNode  :: TF.Attr s [DagNode s]
     -- ^ Undocumented.
     , _language :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -2834,11 +2834,11 @@ instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (IamPolicyData s)) (TF.Attr s 
 data IamPolicyDocumentData s = IamPolicyDocumentData'
     { _overrideJson :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _policyId :: TF.Attr s P.Text
+    , _policyId     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sourceJson :: TF.Attr s P.Text
+    , _sourceJson   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _statement :: TF.Attr s [Statement s]
+    , _statement    :: TF.Attr s [Statement s]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2887,7 +2887,7 @@ instance s ~ s' => P.HasComputedJson (TF.Ref s' (IamPolicyDocumentData s)) (TF.A
 
 -- | @aws_iam_role@ DataSource.
 data IamRoleData s = IamRoleData'
-    { _name :: TF.Attr s P.Text
+    { _name     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _roleName :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -2950,7 +2950,7 @@ instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamRoleData s)) (TF.Attr s 
 
 -- | @aws_iam_server_certificate@ DataSource.
 data IamServerCertificateData s = IamServerCertificateData'
-    { _latest :: TF.Attr s P.Bool
+    { _latest     :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _namePrefix :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -3066,11 +3066,11 @@ instance s ~ s' => P.HasComputedArns (TF.Ref s' (InspectorRulesPackagesData s)) 
 
 -- | @aws_instance@ DataSource.
 data InstanceData s = InstanceData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter          :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ Undocumented.
     , _getPasswordData :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _instanceId :: TF.Attr s P.Text
+    , _instanceId      :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3198,7 +3198,7 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (InstanceData s))
 
 -- | @aws_instances@ DataSource.
 data InstancesData s = InstancesData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter             :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ Undocumented.
     , _instanceStateNames :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
@@ -3292,7 +3292,7 @@ instance s ~ s' => P.HasComputedEndpointAddress (TF.Ref s' (IotEndpointData s)) 
 
 -- | @aws_ip_ranges@ DataSource.
 data IpRangesData s = IpRangesData'
-    { _regions :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _regions  :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _services :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
@@ -3418,9 +3418,9 @@ instance s ~ s' => P.HasComputedTargetKeyId (TF.Ref s' (KmsAliasData s)) (TF.Att
 
 -- | @aws_kms_ciphertext@ DataSource.
 data KmsCiphertextData s = KmsCiphertextData'
-    { _context :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _context   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _keyId :: TF.Attr s P.Text
+    , _keyId     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _plaintext :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -3467,7 +3467,7 @@ instance s ~ s' => P.HasComputedCiphertextBlob (TF.Ref s' (KmsCiphertextData s))
 data KmsKeyData s = KmsKeyData'
     { _grantTokens :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _keyId :: TF.Attr s P.Text
+    , _keyId       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3537,7 +3537,7 @@ instance s ~ s' => P.HasComputedValidTo (TF.Ref s' (KmsKeyData s)) (TF.Attr s P.
 data KmsSecretData s = KmsSecretData'
     { _hasDynamicAttributes :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _secret :: TF.Attr s [TF.Attr s (Secret s)]
+    , _secret               :: TF.Attr s [TF.Attr s (Secret s)]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3599,7 +3599,7 @@ instance s ~ s' => P.HasComputedPlaintext (TF.Ref s' (KmsSecretsData s)) (TF.Att
 data LambdaFunctionData s = LambdaFunctionData'
     { _functionName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _qualifier :: TF.Attr s P.Text
+    , _qualifier    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3690,9 +3690,9 @@ instance s ~ s' => P.HasComputedVpcConfig (TF.Ref s' (LambdaFunctionData s)) (TF
 data LambdaInvocationData s = LambdaInvocationData'
     { _functionName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _input :: TF.Attr s P.Text
+    , _input        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _qualifier :: TF.Attr s P.Text
+    , _qualifier    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4060,7 +4060,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (NatGatewayData s)) (TF.Attr s 
 data NetworkAclsData s = NetworkAclsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ Undocumented.
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 

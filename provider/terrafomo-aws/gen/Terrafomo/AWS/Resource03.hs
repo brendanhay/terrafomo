@@ -346,38 +346,38 @@ import GHC.Base (($))
 
 import Terrafomo.AWS.Settings
 
-import qualified Data.HashMap.Strict as P
-import qualified Data.Hashable as P
-import qualified Data.List.NonEmpty as P
-import qualified Data.Text as P
-import qualified GHC.Generics as P
-import qualified Lens.Micro as P
-import qualified Prelude as P
-import qualified Terrafomo.AWS.Lens as P
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Terrafomo.AWS.Types as P
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Schema as TF
+import qualified Terrafomo.AWS.Types    as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Schema       as TF
 
 -- | @aws_elastictranscoder_preset@ Resource.
 data ElastictranscoderPresetResource s = ElastictranscoderPresetResource'
-    { _audio :: TF.Attr s (TF.Attr s (Audio s))
+    { _audio             :: TF.Attr s (TF.Attr s (Audio s))
     -- ^ Undocumented.
     , _audioCodecOptions :: TF.Attr s (TF.Attr s (AudioCodecOptions s))
     -- ^ Undocumented.
-    , _container :: TF.Attr s P.Text
+    , _container         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _thumbnails :: TF.Attr s (TF.Attr s (Thumbnails s))
+    , _thumbnails        :: TF.Attr s (TF.Attr s (Thumbnails s))
     -- ^ Undocumented.
-    , _video :: TF.Attr s (TF.Attr s (Video s))
+    , _video             :: TF.Attr s (TF.Attr s (Video s))
     -- ^ Undocumented.
     , _videoCodecOptions :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _videoWatermarks :: TF.Attr s [TF.Attr s (VideoWatermarks s)]
+    , _videoWatermarks   :: TF.Attr s [TF.Attr s (VideoWatermarks s)]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -584,7 +584,7 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (ElbResource s)) (TF.Attr s P.
 
 -- | @aws_elb_attachment@ Resource.
 data ElbAttachmentResource s = ElbAttachmentResource'
-    { _elb :: TF.Attr s P.Text
+    { _elb       :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _instance' :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -619,45 +619,45 @@ instance P.HasInstance' (ElbAttachmentResource s) (TF.Attr s P.Text) where
 
 -- | @aws_emr_cluster@ Resource.
 data EmrClusterResource s = EmrClusterResource'
-    { _additionalInfo :: TF.Attr s P.Text
+    { _additionalInfo        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _applications :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _applications          :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _autoscalingRole :: TF.Attr s P.Text
+    , _autoscalingRole       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _bootstrapAction :: TF.Attr s [TF.Attr s (BootstrapAction s)]
+    , _bootstrapAction       :: TF.Attr s [TF.Attr s (BootstrapAction s)]
     -- ^ Undocumented.
-    , _configurations :: TF.Attr s P.Text
+    , _configurations        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _configurationsJson :: TF.Attr s P.Text
+    , _configurationsJson    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _coreInstanceCount :: TF.Attr s P.Integer
+    , _coreInstanceCount     :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _customAmiId :: TF.Attr s P.Text
+    , _customAmiId           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _ebsRootVolumeSize :: TF.Attr s P.Integer
+    , _ebsRootVolumeSize     :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _ec2Attributes :: TF.Attr s [Ec2Attributes s]
+    , _ec2Attributes         :: TF.Attr s [Ec2Attributes s]
     -- ^ Undocumented.
-    , _instanceGroup :: TF.Attr s [TF.Attr s (InstanceGroup s)]
+    , _instanceGroup         :: TF.Attr s [TF.Attr s (InstanceGroup s)]
     -- ^ Undocumented.
-    , _kerberosAttributes :: TF.Attr s [KerberosAttributes s]
+    , _kerberosAttributes    :: TF.Attr s [KerberosAttributes s]
     -- ^ Undocumented.
-    , _logUri :: TF.Attr s P.Text
+    , _logUri                :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _masterInstanceType :: TF.Attr s P.Text
+    , _masterInstanceType    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _releaseLabel :: TF.Attr s P.Text
+    , _releaseLabel          :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _securityConfiguration :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _serviceRole :: TF.Attr s P.Text
+    , _serviceRole           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags                  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _visibleToAllUsers :: TF.Attr s P.Bool
+    , _visibleToAllUsers     :: TF.Attr s P.Bool
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -838,17 +838,17 @@ instance s ~ s' => P.HasComputedTerminationProtection (TF.Ref s' (EmrClusterReso
 
 -- | @aws_emr_instance_group@ Resource.
 data EmrInstanceGroupResource s = EmrInstanceGroupResource'
-    { _clusterId :: TF.Attr s P.Text
+    { _clusterId     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _ebsConfig :: TF.Attr s [TF.Attr s (EbsConfig s)]
+    , _ebsConfig     :: TF.Attr s [TF.Attr s (EbsConfig s)]
     -- ^ Undocumented.
-    , _ebsOptimized :: TF.Attr s P.Bool
+    , _ebsOptimized  :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _instanceCount :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _instanceType :: TF.Attr s P.Text
+    , _instanceType  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name          :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -917,7 +917,7 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (EmrInstanceGroupResource s)) 
 data EmrSecurityConfigurationResource s = EmrSecurityConfigurationResource'
     { _configuration :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -955,17 +955,17 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (EmrSecurityConfigurationResourc
 
 -- | @aws_flow_log@ Resource.
 data FlowLogResource s = FlowLogResource'
-    { _eniId :: TF.Attr s P.Text
+    { _eniId        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _iamRoleArn :: TF.Attr s P.Text
+    , _iamRoleArn   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _logGroupName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _subnetId :: TF.Attr s P.Text
+    , _subnetId     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _trafficType :: TF.Attr s P.Text
+    , _trafficType  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1027,9 +1027,9 @@ instance P.HasVpcId (FlowLogResource s) (TF.Attr s P.Text) where
 
 -- | @aws_gamelift_alias@ Resource.
 data GameliftAliasResource s = GameliftAliasResource'
-    { _description :: TF.Attr s P.Text
+    { _description     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name            :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _routingStrategy :: TF.Attr s [RoutingStrategy s]
     -- ^ Undocumented.
@@ -1074,13 +1074,13 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (GameliftAliasResource s)) (TF.At
 
 -- | @aws_gamelift_build@ Resource.
 data GameliftBuildResource s = GameliftBuildResource'
-    { _name :: TF.Attr s P.Text
+    { _name            :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _operatingSystem :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _storageLocation :: TF.Attr s [StorageLocation s]
     -- ^ Undocumented.
-    , _version :: TF.Attr s P.Text
+    , _version         :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1232,11 +1232,11 @@ instance s ~ s' => P.HasComputedOperatingSystem (TF.Ref s' (GameliftFleetResourc
 data GlacierVaultResource s = GlacierVaultResource'
     { _accessPolicy :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _notification :: TF.Attr s [Notification s]
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1292,9 +1292,9 @@ data GlueCatalogDatabaseResource s = GlueCatalogDatabaseResource'
     -- ^ Undocumented.
     , _locationUri :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _parameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _parameters  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1343,27 +1343,27 @@ instance s ~ s' => P.HasComputedCatalogId (TF.Ref s' (GlueCatalogDatabaseResourc
 
 -- | @aws_glue_catalog_table@ Resource.
 data GlueCatalogTableResource s = GlueCatalogTableResource'
-    { _databaseName :: TF.Attr s P.Text
+    { _databaseName      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _owner :: TF.Attr s P.Text
+    , _owner             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _parameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _parameters        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _partitionKeys :: TF.Attr s [PartitionKeys s]
+    , _partitionKeys     :: TF.Attr s [PartitionKeys s]
     -- ^ Undocumented.
-    , _retention :: TF.Attr s P.Integer
+    , _retention         :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _storageDescriptor :: TF.Attr s [StorageDescriptor s]
     -- ^ Undocumented.
-    , _tableType :: TF.Attr s P.Text
+    , _tableType         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _viewExpandedText :: TF.Attr s P.Text
+    , _viewExpandedText  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _viewOriginalText :: TF.Attr s P.Text
+    , _viewOriginalText  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1466,9 +1466,9 @@ data GlueClassifierResource s = GlueClassifierResource'
     -- ^ Undocumented.
     , _jsonClassifier :: TF.Attr s [JsonClassifier s]
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _xmlClassifier :: TF.Attr s [XmlClassifier s]
+    , _xmlClassifier  :: TF.Attr s [XmlClassifier s]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1588,29 +1588,29 @@ instance s ~ s' => P.HasComputedCatalogId (TF.Ref s' (GlueConnectionResource s))
 
 -- | @aws_glue_crawler@ Resource.
 data GlueCrawlerResource s = GlueCrawlerResource'
-    { _classifiers :: TF.Attr s [TF.Attr s P.Text]
+    { _classifiers        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _configuration :: TF.Attr s P.Text
+    , _configuration      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _databaseName :: TF.Attr s P.Text
+    , _databaseName       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _dynamodbTarget :: TF.Attr s (P.NonEmpty (DynamodbTarget s))
+    , _dynamodbTarget     :: TF.Attr s (P.NonEmpty (DynamodbTarget s))
     -- ^ Undocumented.
-    , _jdbcTarget :: TF.Attr s (P.NonEmpty (JdbcTarget s))
+    , _jdbcTarget         :: TF.Attr s (P.NonEmpty (JdbcTarget s))
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _role :: TF.Attr s P.Text
+    , _role               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _s3Target :: TF.Attr s (P.NonEmpty (S3Target s))
+    , _s3Target           :: TF.Attr s (P.NonEmpty (S3Target s))
     -- ^ Undocumented.
-    , _schedule :: TF.Attr s P.Text
+    , _schedule           :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _schemaChangePolicy :: TF.Attr s [SchemaChangePolicy s]
     -- ^ Undocumented.
-    , _tablePrefix :: TF.Attr s P.Text
+    , _tablePrefix        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1716,21 +1716,21 @@ instance P.HasTablePrefix (GlueCrawlerResource s) (TF.Attr s P.Text) where
 data GlueJobResource s = GlueJobResource'
     { _allocatedCapacity :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _command :: TF.Attr s [Command s]
+    , _command           :: TF.Attr s [Command s]
     -- ^ Undocumented.
-    , _connections :: TF.Attr s [TF.Attr s P.Text]
+    , _connections       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _defaultArguments :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _defaultArguments  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _maxRetries :: TF.Attr s P.Integer
+    , _maxRetries        :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _timeout :: TF.Attr s P.Integer
+    , _timeout           :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1816,19 +1816,19 @@ instance s ~ s' => P.HasComputedExecutionProperty (TF.Ref s' (GlueJobResource s)
 
 -- | @aws_glue_trigger@ Resource.
 data GlueTriggerResource s = GlueTriggerResource'
-    { _actions :: TF.Attr s (P.NonEmpty (Actions s))
+    { _actions     :: TF.Attr s (P.NonEmpty (Actions s))
     -- ^ Undocumented.
     , _description :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _enabled :: TF.Attr s P.Bool
+    , _enabled     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _predicate :: TF.Attr s [Predicate s]
+    , _predicate   :: TF.Attr s [Predicate s]
     -- ^ Undocumented.
-    , _schedule :: TF.Attr s P.Text
+    , _schedule    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1924,15 +1924,15 @@ instance s ~ s' => P.HasComputedAccountId (TF.Ref s' (GuarddutyDetectorResource 
 
 -- | @aws_guardduty_ipset@ Resource.
 data GuarddutyIpsetResource s = GuarddutyIpsetResource'
-    { _activate :: TF.Attr s P.Bool
+    { _activate   :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _detectorId :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _format :: TF.Attr s P.Text
+    , _format     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _location :: TF.Attr s P.Text
+    , _location   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1989,17 +1989,17 @@ instance P.HasName (GuarddutyIpsetResource s) (TF.Attr s P.Text) where
 
 -- | @aws_guardduty_member@ Resource.
 data GuarddutyMemberResource s = GuarddutyMemberResource'
-    { _accountId :: TF.Attr s P.Text
+    { _accountId                :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _detectorId :: TF.Attr s P.Text
+    , _detectorId               :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _disableEmailNotification :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _email :: TF.Attr s P.Text
+    , _email                    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _invitationMessage :: TF.Attr s P.Text
+    , _invitationMessage        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _invite :: TF.Attr s P.Bool
+    , _invite                   :: TF.Attr s P.Bool
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2064,15 +2064,15 @@ instance s ~ s' => P.HasComputedRelationshipStatus (TF.Ref s' (GuarddutyMemberRe
 
 -- | @aws_guardduty_threatintelset@ Resource.
 data GuarddutyThreatintelsetResource s = GuarddutyThreatintelsetResource'
-    { _activate :: TF.Attr s P.Bool
+    { _activate   :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _detectorId :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _format :: TF.Attr s P.Text
+    , _format     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _location :: TF.Attr s P.Text
+    , _location   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2131,7 +2131,7 @@ instance P.HasName (GuarddutyThreatintelsetResource s) (TF.Attr s P.Text) where
 data IamAccessKeyResource s = IamAccessKeyResource'
     { _pgpKey :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _user :: TF.Attr s P.Text
+    , _user   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2205,7 +2205,7 @@ instance P.HasAccountAlias (IamAccountAliasResource s) (TF.Attr s P.Text) where
 data IamAccountPasswordPolicyResource s = IamAccountPasswordPolicyResource'
     { _allowUsersToChangePassword :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _minimumPasswordLength :: TF.Attr s P.Integer
+    , _minimumPasswordLength      :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2302,7 +2302,7 @@ instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamGroupResource s)) (TF.At
 data IamGroupMembershipResource s = IamGroupMembershipResource'
     { _group :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _users :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
@@ -2345,11 +2345,11 @@ instance P.HasUsers (IamGroupMembershipResource s) (TF.Attr s [TF.Attr s (TF.Att
 
 -- | @aws_iam_group_policy@ Resource.
 data IamGroupPolicyResource s = IamGroupPolicyResource'
-    { _group :: TF.Attr s P.Text
+    { _group      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _namePrefix :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _policy :: TF.Attr s P.Text
+    , _policy     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2392,7 +2392,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (IamGroupPolicyResource s)) (TF.
 
 -- | @aws_iam_group_policy_attachment@ Resource.
 data IamGroupPolicyAttachmentResource s = IamGroupPolicyAttachmentResource'
-    { _group :: TF.Attr s P.Text
+    { _group     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _policyArn :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -2429,7 +2429,7 @@ instance P.HasPolicyArn (IamGroupPolicyAttachmentResource s) (TF.Attr s P.Text) 
 data IamInstanceProfileResource s = IamInstanceProfileResource'
     { _namePrefix :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _path :: TF.Attr s P.Text
+    , _path       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2478,11 +2478,11 @@ instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamInstanceProfileResource 
 
 -- | @aws_iam_openid_connect_provider@ Resource.
 data IamOpenidConnectProviderResource s = IamOpenidConnectProviderResource'
-    { _clientIdList :: TF.Attr s [TF.Attr s P.Text]
+    { _clientIdList   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _thumbprintList :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _url :: TF.Attr s P.Text
+    , _url            :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2528,11 +2528,11 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamOpenidConnectProviderResource
 data IamPolicyResource s = IamPolicyResource'
     { _description :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _path :: TF.Attr s P.Text
+    , _path        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _policy :: TF.Attr s P.Text
+    , _policy      :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2584,15 +2584,15 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (IamPolicyResource s)) (TF.Attr 
 
 -- | @aws_iam_policy_attachment@ Resource.
 data IamPolicyAttachmentResource s = IamPolicyAttachmentResource'
-    { _groups :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _groups    :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _policyArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roles :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _roles     :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _users :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _users     :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2646,17 +2646,17 @@ instance P.HasUsers (IamPolicyAttachmentResource s) (TF.Attr s [TF.Attr s (TF.At
 
 -- | @aws_iam_role@ Resource.
 data IamRoleResource s = IamRoleResource'
-    { _assumeRolePolicy :: TF.Attr s P.Text
+    { _assumeRolePolicy    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _forceDetachPolicies :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _maxSessionDuration :: TF.Attr s P.Integer
+    , _maxSessionDuration  :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _path :: TF.Attr s P.Text
+    , _path                :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _permissionsBoundary :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -2739,9 +2739,9 @@ instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamRoleResource s)) (TF.Att
 data IamRolePolicyResource s = IamRolePolicyResource'
     { _namePrefix :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _policy :: TF.Attr s P.Text
+    , _policy     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _role :: TF.Attr s P.Text
+    , _role       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2786,7 +2786,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (IamRolePolicyResource s)) (TF.A
 data IamRolePolicyAttachmentResource s = IamRolePolicyAttachmentResource'
     { _policyArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _role :: TF.Attr s P.Text
+    , _role      :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2819,7 +2819,7 @@ instance P.HasRole (IamRolePolicyAttachmentResource s) (TF.Attr s P.Text) where
 
 -- | @aws_iam_saml_provider@ Resource.
 data IamSamlProviderResource s = IamSamlProviderResource'
-    { _name :: TF.Attr s P.Text
+    { _name                 :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _samlMetadataDocument :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -2860,15 +2860,15 @@ instance s ~ s' => P.HasComputedValidUntil (TF.Ref s' (IamSamlProviderResource s
 
 -- | @aws_iam_server_certificate@ Resource.
 data IamServerCertificateResource s = IamServerCertificateResource'
-    { _certificateBody :: TF.Attr s P.Text
+    { _certificateBody  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _certificateChain :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _path :: TF.Attr s P.Text
+    , _path             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _privateKey :: TF.Attr s P.Text
+    , _privateKey       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2930,9 +2930,9 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (IamServerCertificateResource s)
 data IamServiceLinkedRoleResource s = IamServiceLinkedRoleResource'
     { _awsServiceName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customSuffix :: TF.Attr s P.Text
+    , _customSuffix   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2986,11 +2986,11 @@ instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamServiceLinkedRoleResourc
 
 -- | @aws_iam_user@ Resource.
 data IamUserResource s = IamUserResource'
-    { _forceDestroy :: TF.Attr s P.Bool
+    { _forceDestroy        :: TF.Attr s P.Bool
     -- ^ Delete user even if it has non-Terraform-managed IAM access keys, login profile or MFA devices
-    , _name :: TF.Attr s P.Text
+    , _name                :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _path :: TF.Attr s P.Text
+    , _path                :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _permissionsBoundary :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -3046,7 +3046,7 @@ instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamUserResource s)) (TF.Att
 data IamUserGroupMembershipResource s = IamUserGroupMembershipResource'
     { _groups :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _user :: TF.Attr s P.Text
+    , _user   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3079,13 +3079,13 @@ instance P.HasUser (IamUserGroupMembershipResource s) (TF.Attr s P.Text) where
 
 -- | @aws_iam_user_login_profile@ Resource.
 data IamUserLoginProfileResource s = IamUserLoginProfileResource'
-    { _passwordLength :: TF.Attr s P.Integer
+    { _passwordLength        :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _passwordResetRequired :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _pgpKey :: TF.Attr s P.Text
+    , _pgpKey                :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _user :: TF.Attr s P.Text
+    , _user                  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3140,9 +3140,9 @@ instance s ~ s' => P.HasComputedKeyFingerprint (TF.Ref s' (IamUserLoginProfileRe
 data IamUserPolicyResource s = IamUserPolicyResource'
     { _namePrefix :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _policy :: TF.Attr s P.Text
+    , _policy     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _user :: TF.Attr s P.Text
+    , _user       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3187,7 +3187,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (IamUserPolicyResource s)) (TF.A
 data IamUserPolicyAttachmentResource s = IamUserPolicyAttachmentResource'
     { _policyArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _user :: TF.Attr s P.Text
+    , _user      :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3220,11 +3220,11 @@ instance P.HasUser (IamUserPolicyAttachmentResource s) (TF.Attr s P.Text) where
 
 -- | @aws_iam_user_ssh_key@ Resource.
 data IamUserSshKeyResource s = IamUserSshKeyResource'
-    { _encoding :: TF.Attr s P.Text
+    { _encoding  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _publicKey :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _username :: TF.Attr s P.Text
+    , _username  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3274,7 +3274,7 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (IamUserSshKeyResource s)) (TF
 
 -- | @aws_inspector_assessment_target@ Resource.
 data InspectorAssessmentTargetResource s = InspectorAssessmentTargetResource'
-    { _name :: TF.Attr s P.Text
+    { _name             :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _resourceGroupArn :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -3312,13 +3312,13 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (InspectorAssessmentTargetResourc
 
 -- | @aws_inspector_assessment_template@ Resource.
 data InspectorAssessmentTemplateResource s = InspectorAssessmentTemplateResource'
-    { _duration :: TF.Attr s P.Integer
+    { _duration         :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name             :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _rulesPackageArns :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _targetArn :: TF.Attr s P.Text
+    , _targetArn        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3619,7 +3619,7 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (InstanceResource
 
 -- | @aws_internet_gateway@ Resource.
 data InternetGatewayResource s = InternetGatewayResource'
-    { _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _tags  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     , _vpcId :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -3654,7 +3654,7 @@ instance P.HasVpcId (InternetGatewayResource s) (TF.Attr s P.Text) where
 data IotCertificateResource s = IotCertificateResource'
     { _active :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _csr :: TF.Attr s P.Text
+    , _csr    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3690,7 +3690,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (IotCertificateResource s)) (TF.A
 
 -- | @aws_iot_policy@ Resource.
 data IotPolicyResource s = IotPolicyResource'
-    { _name :: TF.Attr s P.Text
+    { _name   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _policy :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -3731,9 +3731,9 @@ instance s ~ s' => P.HasComputedDefaultVersionId (TF.Ref s' (IotPolicyResource s
 
 -- | @aws_iot_thing@ Resource.
 data IotThingResource s = IotThingResource'
-    { _attributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _attributes    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name          :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _thingTypeName :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -3785,7 +3785,7 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (IotThingResource s)) (TF.Att
 data IotThingTypeResource s = IotThingTypeResource'
     { _deprecated :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name       :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _properties :: TF.Attr s [Properties s]
     -- ^ Undocumented.
@@ -3829,37 +3829,37 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (IotThingTypeResource s)) (TF.Att
 
 -- | @aws_iot_topic_rule@ Resource.
 data IotTopicRuleResource s = IotTopicRuleResource'
-    { _cloudwatchAlarm :: TF.Attr s [TF.Attr s (CloudwatchAlarm s)]
+    { _cloudwatchAlarm  :: TF.Attr s [TF.Attr s (CloudwatchAlarm s)]
     -- ^ Undocumented.
     , _cloudwatchMetric :: TF.Attr s [TF.Attr s (CloudwatchMetric s)]
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _dynamodb :: TF.Attr s [TF.Attr s (Dynamodb s)]
+    , _dynamodb         :: TF.Attr s [TF.Attr s (Dynamodb s)]
     -- ^ Undocumented.
-    , _elasticsearch :: TF.Attr s [TF.Attr s (Elasticsearch s)]
+    , _elasticsearch    :: TF.Attr s [TF.Attr s (Elasticsearch s)]
     -- ^ Undocumented.
-    , _enabled :: TF.Attr s P.Bool
+    , _enabled          :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _firehose :: TF.Attr s [TF.Attr s (Firehose s)]
+    , _firehose         :: TF.Attr s [TF.Attr s (Firehose s)]
     -- ^ Undocumented.
-    , _kinesis :: TF.Attr s [TF.Attr s (Kinesis s)]
+    , _kinesis          :: TF.Attr s [TF.Attr s (Kinesis s)]
     -- ^ Undocumented.
-    , _lambda :: TF.Attr s [TF.Attr s (Lambda s)]
+    , _lambda           :: TF.Attr s [TF.Attr s (Lambda s)]
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _republish :: TF.Attr s [TF.Attr s (Republish s)]
+    , _republish        :: TF.Attr s [TF.Attr s (Republish s)]
     -- ^ Undocumented.
-    , _s3 :: TF.Attr s [TF.Attr s (S3 s)]
+    , _s3               :: TF.Attr s [TF.Attr s (S3 s)]
     -- ^ Undocumented.
-    , _sns :: TF.Attr s [TF.Attr s (Sns s)]
+    , _sns              :: TF.Attr s [TF.Attr s (Sns s)]
     -- ^ Undocumented.
-    , _sql :: TF.Attr s P.Text
+    , _sql              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sqlVersion :: TF.Attr s P.Text
+    , _sqlVersion       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sqs :: TF.Attr s [TF.Attr s (Sqs s)]
+    , _sqs              :: TF.Attr s [TF.Attr s (Sqs s)]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3997,7 +3997,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (IotTopicRuleResource s)) (TF.Att
 data KeyPairResource s = KeyPairResource'
     { _keyNamePrefix :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _publicKey :: TF.Attr s P.Text
+    , _publicKey     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4035,21 +4035,21 @@ instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (KeyPairResource s)) (TF.Attr
 
 -- | @aws_kinesis_firehose_delivery_stream@ Resource.
 data KinesisFirehoseDeliveryStreamResource s = KinesisFirehoseDeliveryStreamResource'
-    { _destination :: TF.Attr s P.Text
+    { _destination                :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _elasticsearchConfiguration :: TF.Attr s [ElasticsearchConfiguration s]
     -- ^ Undocumented.
-    , _extendedS3Configuration :: TF.Attr s [ExtendedS3Configuration s]
+    , _extendedS3Configuration    :: TF.Attr s [ExtendedS3Configuration s]
     -- ^ Undocumented.
     , _kinesisSourceConfiguration :: TF.Attr s [KinesisSourceConfiguration s]
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _redshiftConfiguration :: TF.Attr s [RedshiftConfiguration s]
+    , _redshiftConfiguration      :: TF.Attr s [RedshiftConfiguration s]
     -- ^ Undocumented.
-    , _s3Configuration :: TF.Attr s [S3Configuration s]
+    , _s3Configuration            :: TF.Attr s [S3Configuration s]
     -- ^ Undocumented.
-    , _splunkConfiguration :: TF.Attr s [SplunkConfiguration s]
+    , _splunkConfiguration        :: TF.Attr s [SplunkConfiguration s]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4133,19 +4133,19 @@ instance s ~ s' => P.HasComputedVersionId (TF.Ref s' (KinesisFirehoseDeliveryStr
 
 -- | @aws_kinesis_stream@ Resource.
 data KinesisStreamResource s = KinesisStreamResource'
-    { _encryptionType :: TF.Attr s P.Text
+    { _encryptionType    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _kmsKeyId :: TF.Attr s P.Text
+    , _kmsKeyId          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _retentionPeriod :: TF.Attr s P.Integer
+    , _retentionPeriod   :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _shardCount :: TF.Attr s P.Integer
+    , _shardCount        :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _shardLevelMetrics :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags              :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4216,9 +4216,9 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (KinesisStreamResource s)) (TF.At
 
 -- | @aws_kms_alias@ Resource.
 data KmsAliasResource s = KmsAliasResource'
-    { _name :: TF.Attr s P.Text
+    { _name        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _targetKeyId :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -4265,21 +4265,21 @@ instance s ~ s' => P.HasComputedTargetKeyArn (TF.Ref s' (KmsAliasResource s)) (T
 
 -- | @aws_kms_grant@ Resource.
 data KmsGrantResource s = KmsGrantResource'
-    { _constraints :: TF.Attr s [TF.Attr s (Constraints s)]
+    { _constraints         :: TF.Attr s [TF.Attr s (Constraints s)]
     -- ^ Undocumented.
     , _grantCreationTokens :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _granteePrincipal :: TF.Attr s P.Text
+    , _granteePrincipal    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _keyId :: TF.Attr s P.Text
+    , _keyId               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _operations :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _operations          :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _retireOnDelete :: TF.Attr s P.Bool
+    , _retireOnDelete      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _retiringPrincipal :: TF.Attr s P.Text
+    , _retiringPrincipal   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4363,11 +4363,11 @@ instance s ~ s' => P.HasComputedGrantToken (TF.Ref s' (KmsGrantResource s)) (TF.
 data KmsKeyResource s = KmsKeyResource'
     { _deletionWindowInDays :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _enableKeyRotation :: TF.Attr s P.Bool
+    , _enableKeyRotation    :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _isEnabled :: TF.Attr s P.Bool
+    , _isEnabled            :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags                 :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4427,15 +4427,15 @@ instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (KmsKeyResource s)) (TF.Attr s
 
 -- | @aws_lambda_alias@ Resource.
 data LambdaAliasResource s = LambdaAliasResource'
-    { _description :: TF.Attr s P.Text
+    { _description     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _functionName :: TF.Attr s P.Text
+    , _functionName    :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _functionVersion :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _routingConfig :: TF.Attr s [RoutingConfig s]
+    , _routingConfig   :: TF.Attr s [RoutingConfig s]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4493,13 +4493,13 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (LambdaAliasResource s)) (TF.Attr
 
 -- | @aws_lambda_event_source_mapping@ Resource.
 data LambdaEventSourceMappingResource s = LambdaEventSourceMappingResource'
-    { _batchSize :: TF.Attr s P.Integer
+    { _batchSize        :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _enabled :: TF.Attr s P.Bool
+    , _enabled          :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _eventSourceArn :: TF.Attr s P.Text
+    , _eventSourceArn   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _functionName :: TF.Attr s P.Text
+    , _functionName     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _startingPosition :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -4778,19 +4778,19 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (LambdaFunctionResource s)) (
 
 -- | @aws_lambda_permission@ Resource.
 data LambdaPermissionResource s = LambdaPermissionResource'
-    { _action :: TF.Attr s P.Text
+    { _action            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _eventSourceToken :: TF.Attr s P.Text
+    , _eventSourceToken  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _functionName :: TF.Attr s P.Text
+    , _functionName      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _principal :: TF.Attr s P.Text
+    , _principal         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _qualifier :: TF.Attr s P.Text
+    , _qualifier         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sourceAccount :: TF.Attr s P.Text
+    , _sourceAccount     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sourceArn :: TF.Attr s P.Text
+    , _sourceArn         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _statementIdPrefix :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -5379,11 +5379,11 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (LbResource s)) (TF.Attr s P.T
 data LbCookieStickinessPolicyResource s = LbCookieStickinessPolicyResource'
     { _cookieExpirationPeriod :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _lbPort :: TF.Attr s P.Integer
+    , _lbPort                 :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _loadBalancer :: TF.Attr s P.Text
+    , _loadBalancer           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5431,15 +5431,15 @@ instance P.HasName (LbCookieStickinessPolicyResource s) (TF.Attr s P.Text) where
 
 -- | @aws_lb_listener@ Resource.
 data LbListenerResource s = LbListenerResource'
-    { _certificateArn :: TF.Attr s P.Text
+    { _certificateArn  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _defaultAction :: TF.Attr s [DefaultAction s]
+    , _defaultAction   :: TF.Attr s [DefaultAction s]
     -- ^ Undocumented.
     , _loadBalancerArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _port :: TF.Attr s P.Integer
+    , _port            :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _protocol :: TF.Attr s P.Text
+    , _protocol        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5502,7 +5502,7 @@ instance s ~ s' => P.HasComputedSslPolicy (TF.Ref s' (LbListenerResource s)) (TF
 data LbListenerCertificateResource s = LbListenerCertificateResource'
     { _certificateArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _listenerArn :: TF.Attr s P.Text
+    , _listenerArn    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5535,9 +5535,9 @@ instance P.HasListenerArn (LbListenerCertificateResource s) (TF.Attr s P.Text) w
 
 -- | @aws_lb_listener_rule@ Resource.
 data LbListenerRuleResource s = LbListenerRuleResource'
-    { _action :: TF.Attr s [Action s]
+    { _action      :: TF.Attr s [Action s]
     -- ^ Undocumented.
-    , _condition :: TF.Attr s [TF.Attr s (Condition s)]
+    , _condition   :: TF.Attr s [TF.Attr s (Condition s)]
     -- ^ Undocumented.
     , _listenerArn :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -5586,13 +5586,13 @@ instance s ~ s' => P.HasComputedPriority (TF.Ref s' (LbListenerRuleResource s)) 
 
 -- | @aws_lb_ssl_negotiation_policy@ Resource.
 data LbSslNegotiationPolicyResource s = LbSslNegotiationPolicyResource'
-    { _attribute :: TF.Attr s [TF.Attr s (Attribute s)]
+    { _attribute    :: TF.Attr s [TF.Attr s (Attribute s)]
     -- ^ Undocumented.
-    , _lbPort :: TF.Attr s P.Integer
+    , _lbPort       :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _loadBalancer :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name         :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5642,21 +5642,21 @@ instance P.HasName (LbSslNegotiationPolicyResource s) (TF.Attr s P.Text) where
 data LbTargetGroupResource s = LbTargetGroupResource'
     { _deregistrationDelay :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _port :: TF.Attr s P.Integer
+    , _port                :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _protocol :: TF.Attr s P.Text
+    , _protocol            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _proxyProtocolV2 :: TF.Attr s P.Bool
+    , _proxyProtocolV2     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _slowStart :: TF.Attr s P.Integer
+    , _slowStart           :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags                :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _targetType :: TF.Attr s P.Text
+    , _targetType          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId               :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5756,11 +5756,11 @@ instance s ~ s' => P.HasComputedStickiness (TF.Ref s' (LbTargetGroupResource s))
 data LbTargetGroupAttachmentResource s = LbTargetGroupAttachmentResource'
     { _availabilityZone :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _port :: TF.Attr s P.Integer
+    , _port             :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _targetGroupArn :: TF.Attr s P.Text
+    , _targetGroupArn   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _targetId :: TF.Attr s P.Text
+    , _targetId         :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5837,15 +5837,15 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (LightsailDomainResource s)) (TF.
 data LightsailInstanceResource s = LightsailInstanceResource'
     { _availabilityZone :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _blueprintId :: TF.Attr s P.Text
+    , _blueprintId      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _bundleId :: TF.Attr s P.Text
+    , _bundleId         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _keyPairName :: TF.Attr s P.Text
+    , _keyPairName      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _userData :: TF.Attr s P.Text
+    , _userData         :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5937,7 +5937,7 @@ instance s ~ s' => P.HasComputedUsername (TF.Ref s' (LightsailInstanceResource s
 data LightsailKeyPairResource s = LightsailKeyPairResource'
     { _namePrefix :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _pgpKey :: TF.Attr s P.Text
+    , _pgpKey     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 

@@ -34,26 +34,26 @@ import GHC.Base (($))
 
 import Terrafomo.AWS.Settings
 
-import qualified Data.HashMap.Strict as P
-import qualified Data.Hashable as P
-import qualified Data.List.NonEmpty as P
-import qualified Data.Text as P
-import qualified GHC.Generics as P
-import qualified Lens.Micro as P
-import qualified Prelude as P
-import qualified Terrafomo.AWS.Lens as P
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Terrafomo.AWS.Types as P
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Schema as TF
+import qualified Terrafomo.AWS.Types    as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Schema       as TF
 
 -- | @aws_wafregional_web_acl_association@ Resource.
 data WafregionalWebAclAssociationResource s = WafregionalWebAclAssociationResource'
     { _resourceArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _webAclId :: TF.Attr s P.Text
+    , _webAclId    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -86,7 +86,7 @@ instance P.HasWebAclId (WafregionalWebAclAssociationResource s) (TF.Attr s P.Tex
 
 -- | @aws_wafregional_xss_match_set@ Resource.
 data WafregionalXssMatchSetResource s = WafregionalXssMatchSetResource'
-    { _name :: TF.Attr s P.Text
+    { _name          :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _xssMatchTuple :: TF.Attr s [TF.Attr s (XssMatchTuple s)]
     -- ^ Undocumented.

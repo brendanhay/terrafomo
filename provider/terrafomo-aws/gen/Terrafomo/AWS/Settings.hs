@@ -1428,18 +1428,18 @@ import Data.Maybe   (catMaybes)
 
 import Terrafomo.AWS.Types
 
+import qualified Data.Hashable       as P
 import qualified Data.HashMap.Strict as P
-import qualified Data.Hashable as P
-import qualified Data.List.NonEmpty as P
-import qualified Data.Text as P
-import qualified GHC.Generics as P
-import qualified Lens.Micro as P
-import qualified Prelude as P
-import qualified Terrafomo.AWS.Lens as P
-import qualified Terrafomo.AWS.Types as P
+import qualified Data.List.NonEmpty  as P
+import qualified Data.Text           as P
+import qualified GHC.Generics        as P
+import qualified Lens.Micro          as P
+import qualified Prelude             as P
 import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
+import qualified Terrafomo.AWS.Lens  as P
+import qualified Terrafomo.AWS.Types as P
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 
 -- | @accepter@ nested settings.
 data Accepter s = Accepter'
@@ -1488,7 +1488,7 @@ instance P.HasAllowVpcToRemoteClassicLink (Accepter s) (TF.Attr s P.Bool) where
 data AccessLogSettings s = AccessLogSettings'
     { _destinationArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _format :: TF.Attr s P.Text
+    , _format         :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1549,7 +1549,7 @@ data AccountAggregationSource s = AccountAggregationSource'
     -- ^ Undocumented.
     , _allRegions :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _regions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    , _regions    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1617,9 +1617,9 @@ instance P.HasType' (Action s) (TF.Attr s P.Text) where
 data Actions s = Actions'
     { _arguments :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _jobName :: TF.Attr s P.Text
+    , _jobName   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _timeout :: TF.Attr s P.Integer
+    , _timeout   :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1659,13 +1659,13 @@ instance P.HasTimeout (Actions s) (TF.Attr s P.Integer) where
 
 -- | @activated_rule@ nested settings.
 data ActivatedRule s = ActivatedRule'
-    { _action :: TF.Attr s [Action s]
+    { _action   :: TF.Attr s [Action s]
     -- ^ Undocumented.
     , _priority :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _ruleId :: TF.Attr s P.Text
+    , _ruleId   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1714,11 +1714,11 @@ instance P.HasType' (ActivatedRule s) (TF.Attr s P.Text) where
 
 -- | @add_header_action@ nested settings.
 data AddHeaderAction s = AddHeaderAction'
-    { _headerName :: TF.Attr s P.Text
+    { _headerName  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _headerValue :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _position :: TF.Attr s P.Integer
+    , _position    :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1760,9 +1760,9 @@ instance P.HasPosition (AddHeaderAction s) (TF.Attr s P.Integer) where
 
 -- | @admin_create_user_config@ nested settings.
 data AdminCreateUserConfig s = AdminCreateUserConfig'
-    { _allowAdminCreateUserOnly :: TF.Attr s P.Bool
+    { _allowAdminCreateUserOnly  :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _inviteMessageTemplate :: TF.Attr s [InviteMessageTemplate s]
+    , _inviteMessageTemplate     :: TF.Attr s [InviteMessageTemplate s]
     -- ^ Undocumented.
     , _unusedAccountValidityDays :: TF.Attr s P.Integer
     -- ^ Undocumented.
@@ -1803,9 +1803,9 @@ instance P.HasUnusedAccountValidityDays (AdminCreateUserConfig s) (TF.Attr s P.I
 
 -- | @alarm_configuration@ nested settings.
 data AlarmConfiguration s = AlarmConfiguration'
-    { _alarms :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _alarms                 :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _enabled :: TF.Attr s P.Bool
+    , _enabled                :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _ignorePollAlarmFailure :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -1848,9 +1848,9 @@ instance P.HasIgnorePollAlarmFailure (AlarmConfiguration s) (TF.Attr s P.Bool) w
 data Alias s = Alias'
     { _evaluateTargetHealth :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _zoneId :: TF.Attr s P.Text
+    , _zoneId               :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1892,13 +1892,13 @@ instance P.HasZoneId (Alias s) (TF.Attr s P.Text) where
 
 -- | @all_settings@ nested settings.
 data AllSettings s = AllSettings'
-    { _name :: TF.Attr s P.Text
+    { _name      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _namespace :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _resource :: TF.Attr s P.Text
+    , _resource  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _value :: TF.Attr s P.Text
+    , _value     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1987,11 +1987,11 @@ data AppSource s = AppSource'
     -- ^ Undocumented.
     , _revision :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sshKey :: TF.Attr s P.Text
+    , _sshKey   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _url :: TF.Attr s P.Text
+    , _url      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _username :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -2056,7 +2056,7 @@ instance P.HasUsername (AppSource s) (TF.Attr s P.Text) where
 data ApplyServerSideEncryptionByDefault s = ApplyServerSideEncryptionByDefault'
     { _kmsMasterKeyId :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sseAlgorithm :: TF.Attr s P.Text
+    , _sseAlgorithm   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2089,13 +2089,13 @@ instance P.HasSseAlgorithm (ApplyServerSideEncryptionByDefault s) (TF.Attr s P.T
 
 -- | @approval_rule@ nested settings.
 data ApprovalRule s = ApprovalRule'
-    { _approveAfterDays :: TF.Attr s P.Integer
+    { _approveAfterDays  :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _complianceLevel :: TF.Attr s P.Text
+    , _complianceLevel   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _enableNonSecurity :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _patchFilter :: TF.Attr s [PatchFilter s]
+    , _patchFilter       :: TF.Attr s [PatchFilter s]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2145,11 +2145,11 @@ instance P.HasPatchFilter (ApprovalRule s) (TF.Attr s [PatchFilter s]) where
 data AppversionLifecycle s = AppversionLifecycle'
     { _deleteSourceFromS3 :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _maxAgeInDays :: TF.Attr s P.Integer
+    , _maxAgeInDays       :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _maxCount :: TF.Attr s P.Integer
+    , _maxCount           :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _serviceRole :: TF.Attr s P.Text
+    , _serviceRole        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2196,7 +2196,7 @@ instance P.HasServiceRole (AppversionLifecycle s) (TF.Attr s P.Text) where
 
 -- | @args@ nested settings.
 data Args s = Args'
-    { _name :: TF.Attr s P.Text
+    { _name  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _param :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -2243,9 +2243,9 @@ instance P.HasValue (Args s) (TF.Attr s P.Text) where
 data ArtifactStore s = ArtifactStore'
     { _encryptionKey :: TF.Attr s [EncryptionKey s]
     -- ^ Undocumented.
-    , _location :: TF.Attr s P.Text
+    , _location      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'         :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2286,17 +2286,17 @@ instance P.HasType' (ArtifactStore s) (TF.Attr s P.Text) where
 
 -- | @artifacts@ nested settings.
 data Artifacts s = Artifacts'
-    { _location :: TF.Attr s P.Text
+    { _location      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name          :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _namespaceType :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _packaging :: TF.Attr s P.Text
+    , _packaging     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _path :: TF.Attr s P.Text
+    , _path          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'         :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2412,11 +2412,11 @@ instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (Associations s)) (TF.Attr s
 
 -- | @assume_role@ nested settings.
 data AssumeRole = AssumeRole'
-    { _externalId :: P.Maybe P.Text
+    { _externalId  :: P.Maybe P.Text
     -- ^ The external ID to use when assuming the role. If omitted, no external ID is passed to the AssumeRole call.
-    , _policy :: P.Maybe P.Text
+    , _policy      :: P.Maybe P.Text
     -- ^ The permissions applied when assuming a role. You cannot use, this policy to grant further permissions that are in excess to those of the,  role that is being assumed.
-    , _roleArn :: P.Maybe P.Text
+    , _roleArn     :: P.Maybe P.Text
     -- ^ The ARN of an IAM role to assume prior to making API calls.
     , _sessionName :: P.Maybe P.Text
     -- ^ The session name to use when assuming the role. If omitted, no session name is passed to the AssumeRole call.
@@ -2532,13 +2532,13 @@ instance s ~ s' => P.HasComputedType' (TF.Ref s' (Attribute s)) (TF.Attr s P.Tex
 data Audio s = Audio'
     { _audioPackingMode :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _bitRate :: TF.Attr s P.Text
+    , _bitRate          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _channels :: TF.Attr s P.Text
+    , _channels         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _codec :: TF.Attr s P.Text
+    , _codec            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sampleRate :: TF.Attr s P.Text
+    , _sampleRate       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2595,9 +2595,9 @@ data AudioCodecOptions s = AudioCodecOptions'
     -- ^ Undocumented.
     , _bitOrder :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _profile :: TF.Attr s P.Text
+    , _profile  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _signed :: TF.Attr s P.Text
+    , _signed   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2645,7 +2645,7 @@ instance P.HasSigned (AudioCodecOptions s) (TF.Attr s P.Text) where
 data Auth s = Auth'
     { _resource :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2680,7 +2680,7 @@ instance P.HasType' (Auth s) (TF.Attr s P.Text) where
 data AutoRollbackConfiguration s = AutoRollbackConfiguration'
     { _enabled :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _events :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _events  :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2712,13 +2712,13 @@ instance P.HasEvents (AutoRollbackConfiguration s) (TF.Attr s [TF.Attr s (TF.Att
 
 -- | @batch_target@ nested settings.
 data BatchTarget s = BatchTarget'
-    { _arraySize :: TF.Attr s P.Integer
+    { _arraySize     :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _jobAttempts :: TF.Attr s P.Integer
+    , _jobAttempts   :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _jobDefinition :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _jobName :: TF.Attr s P.Text
+    , _jobName       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2874,17 +2874,17 @@ instance P.HasPath (BootstrapAction s) (TF.Attr s P.Text) where
 
 -- | @bounce_action@ nested settings.
 data BounceAction s = BounceAction'
-    { _message :: TF.Attr s P.Text
+    { _message       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _position :: TF.Attr s P.Integer
+    , _position      :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _sender :: TF.Attr s P.Text
+    , _sender        :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _smtpReplyCode :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _statusCode :: TF.Attr s P.Text
+    , _statusCode    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _topicArn :: TF.Attr s P.Text
+    , _topicArn      :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2948,15 +2948,15 @@ instance P.HasTopicArn (BounceAction s) (TF.Attr s P.Text) where
 
 -- | @bucket@ nested settings.
 data Bucket s = Bucket'
-    { _accountId :: TF.Attr s P.Text
+    { _accountId  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _bucketArn :: TF.Attr s P.Text
+    , _bucketArn  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _encryption :: TF.Attr s [Encryption s]
     -- ^ Undocumented.
-    , _format :: TF.Attr s P.Text
+    , _format     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _prefix :: TF.Attr s P.Text
+    , _prefix     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3011,13 +3011,13 @@ instance P.HasPrefix (Bucket s) (TF.Attr s P.Text) where
 
 -- | @byte_match_tuple@ nested settings.
 data ByteMatchTuple s = ByteMatchTuple'
-    { _fieldToMatch :: TF.Attr s (TF.Attr s (FieldToMatch s))
+    { _fieldToMatch         :: TF.Attr s (TF.Attr s (FieldToMatch s))
     -- ^ Undocumented.
     , _positionalConstraint :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _targetString :: TF.Attr s P.Text
+    , _targetString         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _textTransformation :: TF.Attr s P.Text
+    , _textTransformation   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3066,13 +3066,13 @@ instance P.HasTextTransformation (ByteMatchTuple s) (TF.Attr s P.Text) where
 
 -- | @byte_match_tuples@ nested settings.
 data ByteMatchTuples s = ByteMatchTuples'
-    { _fieldToMatch :: TF.Attr s (TF.Attr s (FieldToMatch s))
+    { _fieldToMatch         :: TF.Attr s (TF.Attr s (FieldToMatch s))
     -- ^ Undocumented.
     , _positionalConstraint :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _targetString :: TF.Attr s P.Text
+    , _targetString         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _textTransformation :: TF.Attr s P.Text
+    , _textTransformation   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3123,7 +3123,7 @@ instance P.HasTextTransformation (ByteMatchTuples s) (TF.Attr s P.Text) where
 data Cache s = Cache'
     { _location :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3346,11 +3346,11 @@ instance s ~ s' => P.HasComputedData' (TF.Ref s' (CertificateAuthority s)) (TF.A
 
 -- | @certificate_authority_configuration@ nested settings.
 data CertificateAuthorityConfiguration s = CertificateAuthorityConfiguration'
-    { _keyAlgorithm :: TF.Attr s P.Text
+    { _keyAlgorithm     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _signingAlgorithm :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _subject :: TF.Attr s [Subject s]
+    , _subject          :: TF.Attr s [Subject s]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3417,7 +3417,7 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (CidrBlockAssociations s)) (TF.
 data ClassificationType s = ClassificationType'
     { _continuous :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _oneTime :: TF.Attr s P.Text
+    , _oneTime    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3449,13 +3449,13 @@ instance P.HasOneTime (ClassificationType s) (TF.Attr s P.Text) where
 
 -- | @cloudwatch_alarm@ nested settings.
 data CloudwatchAlarm s = CloudwatchAlarm'
-    { _alarmName :: TF.Attr s P.Text
+    { _alarmName   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _stateReason :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _stateValue :: TF.Attr s P.Text
+    , _stateValue  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3505,11 +3505,11 @@ instance P.HasStateValue (CloudwatchAlarm s) (TF.Attr s P.Text) where
 
 -- | @cloudwatch_destination@ nested settings.
 data CloudwatchDestination s = CloudwatchDestination'
-    { _defaultValue :: TF.Attr s P.Text
+    { _defaultValue  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _dimensionName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _valueSource :: TF.Attr s P.Text
+    , _valueSource   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3551,9 +3551,9 @@ instance P.HasValueSource (CloudwatchDestination s) (TF.Attr s P.Text) where
 
 -- | @cloudwatch_logging_options@ nested settings.
 data CloudwatchLoggingOptions s = CloudwatchLoggingOptions'
-    { _enabled :: TF.Attr s P.Bool
+    { _enabled       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _logGroupName :: TF.Attr s P.Text
+    , _logGroupName  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _logStreamName :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -3594,17 +3594,17 @@ instance P.HasLogStreamName (CloudwatchLoggingOptions s) (TF.Attr s P.Text) wher
 
 -- | @cloudwatch_metric@ nested settings.
 data CloudwatchMetric s = CloudwatchMetric'
-    { _metricName :: TF.Attr s P.Text
+    { _metricName      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _metricNamespace :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _metricTimestamp :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _metricUnit :: TF.Attr s P.Text
+    , _metricUnit      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _metricValue :: TF.Attr s P.Text
+    , _metricValue     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn         :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3669,17 +3669,17 @@ instance P.HasRoleArn (CloudwatchMetric s) (TF.Attr s P.Text) where
 
 -- | @cluster_config@ nested settings.
 data ClusterConfig s = ClusterConfig'
-    { _dedicatedMasterCount :: TF.Attr s P.Integer
+    { _dedicatedMasterCount   :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _dedicatedMasterEnabled :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _dedicatedMasterType :: TF.Attr s P.Text
+    , _dedicatedMasterType    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _instanceCount :: TF.Attr s P.Integer
+    , _instanceCount          :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _instanceType :: TF.Attr s P.Text
+    , _instanceType           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _zoneAwarenessEnabled :: TF.Attr s P.Bool
+    , _zoneAwarenessEnabled   :: TF.Attr s P.Bool
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3739,7 +3739,7 @@ instance P.HasZoneAwarenessEnabled (ClusterConfig s) (TF.Attr s P.Bool) where
 
 -- | @cluster_mode@ nested settings.
 data ClusterMode s = ClusterMode'
-    { _numNodeGroups :: TF.Attr s P.Integer
+    { _numNodeGroups        :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _replicasPerNodeGroup :: TF.Attr s P.Integer
     -- ^ Undocumented.
@@ -3775,9 +3775,9 @@ instance P.HasReplicasPerNodeGroup (ClusterMode s) (TF.Attr s P.Integer) where
 
 -- | @cognito_identity_providers@ nested settings.
 data CognitoIdentityProviders s = CognitoIdentityProviders'
-    { _clientId :: TF.Attr s P.Text
+    { _clientId             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _providerName :: TF.Attr s P.Text
+    , _providerName         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _serverSideTokenCheck :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -3818,13 +3818,13 @@ instance P.HasServerSideTokenCheck (CognitoIdentityProviders s) (TF.Attr s P.Boo
 
 -- | @cognito_options@ nested settings.
 data CognitoOptions s = CognitoOptions'
-    { _enabled :: TF.Attr s P.Bool
+    { _enabled        :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _identityPoolId :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _userPoolId :: TF.Attr s P.Text
+    , _userPoolId     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3875,9 +3875,9 @@ instance P.HasUserPoolId (CognitoOptions s) (TF.Attr s P.Text) where
 data Columns s = Columns'
     { _comment :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3917,7 +3917,7 @@ instance P.HasType' (Columns s) (TF.Attr s P.Text) where
 
 -- | @command@ nested settings.
 data Command s = Command'
-    { _name :: TF.Attr s P.Text
+    { _name           :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _scriptLocation :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -3972,31 +3972,31 @@ instance s ~ s' => P.HasComputedOrder (TF.Ref s' (ComputeEnvironmentOrder s)) (T
 
 -- | @compute_resources@ nested settings.
 data ComputeResources s = ComputeResources'
-    { _bidPercentage :: TF.Attr s P.Integer
+    { _bidPercentage    :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _desiredVcpus :: TF.Attr s P.Integer
+    , _desiredVcpus     :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _ec2KeyPair :: TF.Attr s P.Text
+    , _ec2KeyPair       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _imageId :: TF.Attr s P.Text
+    , _imageId          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _instanceRole :: TF.Attr s P.Text
+    , _instanceRole     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _instanceType :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _instanceType     :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _maxVcpus :: TF.Attr s P.Integer
+    , _maxVcpus         :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _minVcpus :: TF.Attr s P.Integer
+    , _minVcpus         :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _securityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _spotIamFleetRole :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _subnets :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _subnets          :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags             :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'            :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4112,9 +4112,9 @@ instance P.HasType' (ComputeResources s) (TF.Attr s P.Text) where
 
 -- | @condition@ nested settings.
 data Condition s = Condition'
-    { _test :: TF.Attr s P.Text
+    { _test     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _values :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _values   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _variable :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -4158,11 +4158,11 @@ instance P.HasVariable (Condition s) (TF.Attr s P.Text) where
 
 -- | @conditions@ nested settings.
 data Conditions s = Conditions'
-    { _jobName :: TF.Attr s P.Text
+    { _jobName         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _logicalOperator :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _state :: TF.Attr s P.Text
+    , _state           :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4223,13 +4223,13 @@ instance s ~ s' => P.HasComputedRevision (TF.Ref s' (Configuration s)) (TF.Attr 
 
 -- | @connect_settings@ nested settings.
 data ConnectSettings s = ConnectSettings'
-    { _customerDnsIps :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _customerDnsIps   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _customerUsername :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _subnetIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _subnetIds        :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId            :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4341,9 +4341,9 @@ instance s ~ s' => P.HasComputedBucket (TF.Ref s' (ContentConfig s)) (TF.Attr s 
 
 -- | @content_config_permissions@ nested settings.
 data ContentConfigPermissions s = ContentConfigPermissions'
-    { _access :: TF.Attr s [TF.Attr s P.Text]
+    { _access      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _grantee :: TF.Attr s P.Text
+    , _grantee     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _granteeType :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -4384,7 +4384,7 @@ instance P.HasGranteeType (ContentConfigPermissions s) (TF.Attr s P.Text) where
 
 -- | @cookies@ nested settings.
 data Cookies s = Cookies'
-    { _forward :: TF.Attr s P.Text
+    { _forward          :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _whitelistedNames :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
@@ -4425,9 +4425,9 @@ data CorsRule s = CorsRule'
     -- ^ Undocumented.
     , _allowedOrigins :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _exposeHeaders :: TF.Attr s [TF.Attr s P.Text]
+    , _exposeHeaders  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _maxAgeSeconds :: TF.Attr s P.Integer
+    , _maxAgeSeconds  :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4482,27 +4482,27 @@ instance P.HasMaxAgeSeconds (CorsRule s) (TF.Attr s P.Integer) where
 
 -- | @cost_types@ nested settings.
 data CostTypes s = CostTypes'
-    { _includeCredit :: TF.Attr s P.Bool
+    { _includeCredit            :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _includeDiscount :: TF.Attr s P.Bool
+    , _includeDiscount          :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _includeOtherSubscription :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _includeRecurring :: TF.Attr s P.Bool
+    , _includeRecurring         :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _includeRefund :: TF.Attr s P.Bool
+    , _includeRefund            :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _includeSubscription :: TF.Attr s P.Bool
+    , _includeSubscription      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _includeSupport :: TF.Attr s P.Bool
+    , _includeSupport           :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _includeTax :: TF.Attr s P.Bool
+    , _includeTax               :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _includeUpfront :: TF.Attr s P.Bool
+    , _includeUpfront           :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _useAmortized :: TF.Attr s P.Bool
+    , _useAmortized             :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _useBlended :: TF.Attr s P.Bool
+    , _useBlended               :: TF.Attr s P.Bool
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4644,11 +4644,11 @@ data CustomCookbooksSource s = CustomCookbooksSource'
     -- ^ Undocumented.
     , _revision :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sshKey :: TF.Attr s P.Text
+    , _sshKey   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _url :: TF.Attr s P.Text
+    , _url      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _username :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -4714,11 +4714,11 @@ instance P.HasUsername (CustomCookbooksSource s) (TF.Attr s P.Text) where
 data CustomErrorResponse s = CustomErrorResponse'
     { _errorCachingMinTtl :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _errorCode :: TF.Attr s P.Integer
+    , _errorCode          :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _responseCode :: TF.Attr s P.Integer
+    , _responseCode       :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _responsePagePath :: TF.Attr s P.Text
+    , _responsePagePath   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4765,7 +4765,7 @@ instance P.HasResponsePagePath (CustomErrorResponse s) (TF.Attr s P.Text) where
 
 -- | @custom_header@ nested settings.
 data CustomHeader s = CustomHeader'
-    { _name :: TF.Attr s P.Text
+    { _name  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -4801,17 +4801,17 @@ instance P.HasValue (CustomHeader s) (TF.Attr s P.Text) where
 
 -- | @custom_origin_config@ nested settings.
 data CustomOriginConfig s = CustomOriginConfig'
-    { _httpPort :: TF.Attr s P.Integer
+    { _httpPort               :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _httpsPort :: TF.Attr s P.Integer
+    , _httpsPort              :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _originKeepaliveTimeout :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _originProtocolPolicy :: TF.Attr s P.Text
+    , _originProtocolPolicy   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _originReadTimeout :: TF.Attr s P.Integer
+    , _originReadTimeout      :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _originSslProtocols :: TF.Attr s [TF.Attr s P.Text]
+    , _originSslProtocols     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4877,13 +4877,13 @@ instance P.HasOriginSslProtocols (CustomOriginConfig s) (TF.Attr s [TF.Attr s P.
 data CustomizedMetricSpecification s = CustomizedMetricSpecification'
     { _metricDimension :: TF.Attr s [MetricDimension s]
     -- ^ Undocumented.
-    , _metricName :: TF.Attr s P.Text
+    , _metricName      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _namespace :: TF.Attr s P.Text
+    , _namespace       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _statistic :: TF.Attr s P.Text
+    , _statistic       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _unit :: TF.Attr s P.Text
+    , _unit            :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4939,9 +4939,9 @@ instance P.HasUnit (CustomizedMetricSpecification s) (TF.Attr s P.Text) where
 
 -- | @dag_edge@ nested settings.
 data DagEdge s = DagEdge'
-    { _source :: TF.Attr s P.Text
+    { _source          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _target :: TF.Attr s P.Text
+    , _target          :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _targetParameter :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -4984,13 +4984,13 @@ instance P.HasTargetParameter (DagEdge s) (TF.Attr s P.Text) where
 
 -- | @dag_node@ nested settings.
 data DagNode s = DagNode'
-    { _args :: TF.Attr s (P.NonEmpty (Args s))
+    { _args       :: TF.Attr s (P.NonEmpty (Args s))
     -- ^ Undocumented.
-    , _id :: TF.Attr s P.Text
+    , _id         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _lineNumber :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _nodeType :: TF.Attr s P.Text
+    , _nodeType   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5039,13 +5039,13 @@ instance P.HasNodeType (DagNode s) (TF.Attr s P.Text) where
 
 -- | @data_format_conversion_configuration@ nested settings.
 data DataFormatConversionConfiguration s = DataFormatConversionConfiguration'
-    { _enabled :: TF.Attr s P.Bool
+    { _enabled                   :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _inputFormatConfiguration :: TF.Attr s [InputFormatConfiguration s]
+    , _inputFormatConfiguration  :: TF.Attr s [InputFormatConfiguration s]
     -- ^ Undocumented.
     , _outputFormatConfiguration :: TF.Attr s [OutputFormatConfiguration s]
     -- ^ Undocumented.
-    , _schemaConfiguration :: TF.Attr s [SchemaConfiguration s]
+    , _schemaConfiguration       :: TF.Attr s [SchemaConfiguration s]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5094,7 +5094,7 @@ instance P.HasSchemaConfiguration (DataFormatConversionConfiguration s) (TF.Attr
 
 -- | @data_resource@ nested settings.
 data DataResource s = DataResource'
-    { _type' :: TF.Attr s P.Text
+    { _type'  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
@@ -5305,7 +5305,7 @@ instance P.HasViewerProtocolPolicy (DefaultCacheBehavior s) (TF.Attr s P.Text) w
 
 -- | @deployment_ready_option@ nested settings.
 data DeploymentReadyOption s = DeploymentReadyOption'
-    { _actionOnTimeout :: TF.Attr s P.Text
+    { _actionOnTimeout   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _waitTimeInMinutes :: TF.Attr s P.Integer
     -- ^ Undocumented.
@@ -5341,7 +5341,7 @@ instance P.HasWaitTimeInMinutes (DeploymentReadyOption s) (TF.Attr s P.Integer) 
 data DeploymentStyle s = DeploymentStyle'
     { _deploymentOption :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _deploymentType :: TF.Attr s P.Text
+    , _deploymentType   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5373,7 +5373,7 @@ instance P.HasDeploymentType (DeploymentStyle s) (TF.Attr s P.Text) where
 
 -- | @deserializer@ nested settings.
 data Deserializer s = Deserializer'
-    { _hiveJsonSerDe :: TF.Attr s [HiveJsonSerDe s]
+    { _hiveJsonSerDe  :: TF.Attr s [HiveJsonSerDe s]
     -- ^ Undocumented.
     , _openXJsonSerDe :: TF.Attr s [OpenXJsonSerDe s]
     -- ^ Undocumented.
@@ -5433,7 +5433,7 @@ instance P.HasBucket (Destination s) (TF.Attr s (P.NonEmpty (Bucket s))) where
 
 -- | @device_configuration@ nested settings.
 data DeviceConfiguration s = DeviceConfiguration'
-    { _challengeRequiredOnNewDevice :: TF.Attr s P.Bool
+    { _challengeRequiredOnNewDevice     :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _deviceOnlyRememberedOnUserPrompt :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -5467,7 +5467,7 @@ instance P.HasDeviceOnlyRememberedOnUserPrompt (DeviceConfiguration s) (TF.Attr 
 
 -- | @dimensions@ nested settings.
 data Dimensions s = Dimensions'
-    { _name :: TF.Attr s P.Text
+    { _name  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -5503,9 +5503,9 @@ instance P.HasValue (Dimensions s) (TF.Attr s P.Text) where
 
 -- | @dns_config@ nested settings.
 data DnsConfig s = DnsConfig'
-    { _dnsRecords :: TF.Attr s [DnsRecords s]
+    { _dnsRecords    :: TF.Attr s [DnsRecords s]
     -- ^ Undocumented.
-    , _namespaceId :: TF.Attr s P.Text
+    , _namespaceId   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _routingPolicy :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -5568,7 +5568,7 @@ instance s ~ s' => P.HasComputedHostedZoneId (TF.Ref s' (DnsEntry s)) (TF.Attr s
 
 -- | @dns_records@ nested settings.
 data DnsRecords s = DnsRecords'
-    { _ttl :: TF.Attr s P.Integer
+    { _ttl   :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -5630,23 +5630,23 @@ instance s ~ s' => P.HasComputedResourceRecordValue (TF.Ref s' (DomainValidation
 
 -- | @dynamodb@ nested settings.
 data Dynamodb s = Dynamodb'
-    { _hashKeyField :: TF.Attr s P.Text
+    { _hashKeyField  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _hashKeyType :: TF.Attr s P.Text
+    , _hashKeyType   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _hashKeyValue :: TF.Attr s P.Text
+    , _hashKeyValue  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _payloadField :: TF.Attr s P.Text
+    , _payloadField  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _rangeKeyField :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _rangeKeyType :: TF.Attr s P.Text
+    , _rangeKeyType  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _rangeKeyValue :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tableName :: TF.Attr s P.Text
+    , _tableName     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5733,9 +5733,9 @@ instance P.HasTableName (Dynamodb s) (TF.Attr s P.Text) where
 
 -- | @dynamodb_config@ nested settings.
 data DynamodbConfig s = DynamodbConfig'
-    { _region :: TF.Attr s P.Text
+    { _region               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tableName :: TF.Attr s P.Text
+    , _tableName            :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _useCallerCredentials :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -5806,11 +5806,11 @@ instance P.HasPath (DynamodbTarget s) (TF.Attr s P.Text) where
 data Ebs s = Ebs'
     { _deleteOnTermination :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _encrypted :: TF.Attr s P.Bool
+    , _encrypted           :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _kmsKeyId :: TF.Attr s P.Text
+    , _kmsKeyId            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _snapshotId :: TF.Attr s P.Text
+    , _snapshotId          :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5900,11 +5900,11 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (EbsBlockDevice s)) (TF.At
 
 -- | @ebs_config@ nested settings.
 data EbsConfig s = EbsConfig'
-    { _iops :: TF.Attr s P.Integer
+    { _iops               :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _size :: TF.Attr s P.Integer
+    , _size               :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'              :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _volumesPerInstance :: TF.Attr s P.Integer
     -- ^ Undocumented.
@@ -5956,7 +5956,7 @@ instance P.HasVolumesPerInstance (EbsConfig s) (TF.Attr s P.Integer) where
 data EbsOptions s = EbsOptions'
     { _ebsEnabled :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _iops :: TF.Attr s P.Integer
+    , _iops       :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _volumeSize :: TF.Attr s P.Integer
     -- ^ Undocumented.
@@ -6001,17 +6001,17 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (EbsOptions s)) (TF.Attr s
 
 -- | @ebs_volume@ nested settings.
 data EbsVolume s = EbsVolume'
-    { _iops :: TF.Attr s P.Integer
+    { _iops          :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _mountPoint :: TF.Attr s P.Text
+    , _mountPoint    :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _numberOfDisks :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _raidLevel :: TF.Attr s P.Text
+    , _raidLevel     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _size :: TF.Attr s P.Integer
+    , _size          :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'         :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6076,19 +6076,19 @@ instance P.HasType' (EbsVolume s) (TF.Attr s P.Text) where
 data Ec2Attributes s = Ec2Attributes'
     { _additionalMasterSecurityGroups :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _additionalSlaveSecurityGroups :: TF.Attr s P.Text
+    , _additionalSlaveSecurityGroups  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _emrManagedMasterSecurityGroup :: TF.Attr s P.Text
+    , _emrManagedMasterSecurityGroup  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _emrManagedSlaveSecurityGroup :: TF.Attr s P.Text
+    , _emrManagedSlaveSecurityGroup   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _instanceProfile :: TF.Attr s P.Text
+    , _instanceProfile                :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _keyName :: TF.Attr s P.Text
+    , _keyName                        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _serviceAccessSecurityGroup :: TF.Attr s P.Text
+    , _serviceAccessSecurityGroup     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _subnetId :: TF.Attr s P.Text
+    , _subnetId                       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6165,11 +6165,11 @@ instance P.HasSubnetId (Ec2Attributes s) (TF.Attr s P.Text) where
 data Ec2InboundPermission s = Ec2InboundPermission'
     { _fromPort :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _ipRange :: TF.Attr s P.Text
+    , _ipRange  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _protocol :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _toPort :: TF.Attr s P.Integer
+    , _toPort   :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6219,7 +6219,7 @@ instance P.HasToPort (Ec2InboundPermission s) (TF.Attr s P.Integer) where
 
 -- | @ec2_tag_filter@ nested settings.
 data Ec2TagFilter s = Ec2TagFilter'
-    { _key :: TF.Attr s P.Text
+    { _key   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -6287,7 +6287,7 @@ instance P.HasEc2TagFilter (Ec2TagSet s) (TF.Attr s [TF.Attr s (Ec2TagFilter s)]
 
 -- | @ecs_target@ nested settings.
 data EcsTarget s = EcsTarget'
-    { _taskCount :: TF.Attr s P.Integer
+    { _taskCount         :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _taskDefinitionArn :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -6322,23 +6322,23 @@ instance P.HasTaskDefinitionArn (EcsTarget s) (TF.Attr s P.Text) where
 
 -- | @egress@ nested settings.
 data Egress s = Egress'
-    { _cidrBlocks :: TF.Attr s [TF.Attr s P.Text]
+    { _cidrBlocks     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _fromPort :: TF.Attr s P.Integer
+    , _fromPort       :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _ipv6CidrBlocks :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _prefixListIds :: TF.Attr s [TF.Attr s P.Text]
+    , _prefixListIds  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _protocol :: TF.Attr s P.Text
+    , _protocol       :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _securityGroups :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _self :: TF.Attr s P.Bool
+    , _self           :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _toPort :: TF.Attr s P.Integer
+    , _toPort         :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6450,13 +6450,13 @@ instance P.HasType' (ElasticGpuSpecifications s) (TF.Attr s P.Text) where
 data Elasticsearch s = Elasticsearch'
     { _endpoint :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _id :: TF.Attr s P.Text
+    , _id       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _index :: TF.Attr s P.Text
+    , _index    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6516,7 +6516,7 @@ instance P.HasType' (Elasticsearch s) (TF.Attr s P.Text) where
 data ElasticsearchConfig s = ElasticsearchConfig'
     { _endpoint :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _region :: TF.Attr s P.Text
+    , _region   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6550,25 +6550,25 @@ instance P.HasRegion (ElasticsearchConfig s) (TF.Attr s P.Text) where
 
 -- | @elasticsearch_configuration@ nested settings.
 data ElasticsearchConfiguration s = ElasticsearchConfiguration'
-    { _bufferingInterval :: TF.Attr s P.Integer
+    { _bufferingInterval       :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _bufferingSize :: TF.Attr s P.Integer
+    , _bufferingSize           :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _domainArn :: TF.Attr s P.Text
+    , _domainArn               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _indexName :: TF.Attr s P.Text
+    , _indexName               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _indexRotationPeriod :: TF.Attr s P.Text
+    , _indexRotationPeriod     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _processingConfiguration :: TF.Attr s [ProcessingConfiguration s]
     -- ^ Undocumented.
-    , _retryDuration :: TF.Attr s P.Integer
+    , _retryDuration           :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _s3BackupMode :: TF.Attr s P.Text
+    , _s3BackupMode            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _typeName :: TF.Attr s P.Text
+    , _typeName                :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6689,7 +6689,7 @@ instance P.HasName (ElbInfo s) (TF.Attr s P.Text) where
 data EmailConfiguration s = EmailConfiguration'
     { _replyToEmailAddress :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sourceArn :: TF.Attr s P.Text
+    , _sourceArn           :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6752,7 +6752,7 @@ instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (EncryptAtRest s)) (TF.Attr 
 data Encryption s = Encryption'
     { _sseKms :: TF.Attr s [SseKms s]
     -- ^ Undocumented.
-    , _sseS3 :: TF.Attr s [SseS3 s]
+    , _sseS3  :: TF.Attr s [SseS3 s]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6784,7 +6784,7 @@ instance P.HasSseS3 (Encryption s) (TF.Attr s [SseS3 s]) where
 
 -- | @encryption_key@ nested settings.
 data EncryptionKey s = EncryptionKey'
-    { _id :: TF.Attr s P.Text
+    { _id    :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -6846,57 +6846,57 @@ instance P.HasTypes (EndpointConfiguration s) (TF.Attr s (P.NonEmpty (TF.Attr s 
 
 -- | @endpoints@ nested settings.
 data Endpoints = Endpoints'
-    { _acm :: P.Maybe P.Text
+    { _acm              :: P.Maybe P.Text
     -- ^ Undocumented.
-    , _apigateway :: P.Maybe P.Text
+    , _apigateway       :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _autoscaling :: P.Maybe P.Text
+    , _autoscaling      :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _cloudformation :: P.Maybe P.Text
+    , _cloudformation   :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _cloudwatch :: P.Maybe P.Text
+    , _cloudwatch       :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
     , _cloudwatchevents :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _cloudwatchlogs :: P.Maybe P.Text
+    , _cloudwatchlogs   :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _devicefarm :: P.Maybe P.Text
+    , _devicefarm       :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _dynamodb :: P.Maybe P.Text
+    , _dynamodb         :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`. It's typically used to connect to dynamodb-local.
-    , _ec2 :: P.Maybe P.Text
+    , _ec2              :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _ecr :: P.Maybe P.Text
+    , _ecr              :: P.Maybe P.Text
     -- ^ Undocumented.
-    , _ecs :: P.Maybe P.Text
+    , _ecs              :: P.Maybe P.Text
     -- ^ Undocumented.
-    , _efs :: P.Maybe P.Text
+    , _efs              :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _elb :: P.Maybe P.Text
+    , _elb              :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _es :: P.Maybe P.Text
+    , _es               :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _iam :: P.Maybe P.Text
+    , _iam              :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _kinesis :: P.Maybe P.Text
+    , _kinesis          :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`. It's typically used to connect to kinesalite.
-    , _kms :: P.Maybe P.Text
+    , _kms              :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _lambda :: P.Maybe P.Text
+    , _lambda           :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`
-    , _r53 :: P.Maybe P.Text
+    , _r53              :: P.Maybe P.Text
     -- ^ Undocumented.
-    , _rds :: P.Maybe P.Text
+    , _rds              :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _s3 :: P.Maybe P.Text
+    , _s3               :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _sns :: P.Maybe P.Text
+    , _sns              :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _sqs :: P.Maybe P.Text
+    , _sqs              :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _ssm :: P.Maybe P.Text
+    , _ssm              :: P.Maybe P.Text
     -- ^ Use this to override the default endpoint URL constructed from the `region`.
-    , _sts :: P.Maybe P.Text
+    , _sts              :: P.Maybe P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7113,7 +7113,7 @@ instance s ~ s' => P.HasComputedVariables (TF.Ref s' (Environment s)) (TF.Attr s
 
 -- | @environment_variable@ nested settings.
 data EnvironmentVariable s = EnvironmentVariable'
-    { _name :: TF.Attr s P.Text
+    { _name  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -7178,11 +7178,11 @@ instance s ~ s' => P.HasComputedVirtualName (TF.Ref s' (EphemeralBlockDevice s))
 
 -- | @event_selector@ nested settings.
 data EventSelector s = EventSelector'
-    { _dataResource :: TF.Attr s [DataResource s]
+    { _dataResource            :: TF.Attr s [DataResource s]
     -- ^ Undocumented.
     , _includeManagementEvents :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _readWriteType :: TF.Attr s P.Text
+    , _readWriteType           :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7246,9 +7246,9 @@ instance P.HasMaxConcurrentRuns (ExecutionProperty s) (TF.Attr s P.Integer) wher
 
 -- | @expiration@ nested settings.
 data Expiration s = Expiration'
-    { _date :: TF.Attr s P.Text
+    { _date                      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _days :: TF.Attr s P.Integer
+    , _days                      :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _expiredObjectDeleteMarker :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -7470,7 +7470,7 @@ instance P.HasType' (FieldToMatch s) (TF.Attr s P.Text) where
 
 -- | @filter@ nested settings.
 data Filter s = Filter'
-    { _name :: TF.Attr s P.Text
+    { _name   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
@@ -7544,7 +7544,7 @@ instance P.HasValue (Filters s) (TF.Attr s P.Text) where
 data Firehose s = Firehose'
     { _deliveryStreamName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn            :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7578,11 +7578,11 @@ instance P.HasRoleArn (Firehose s) (TF.Attr s P.Text) where
 
 -- | @forwarded_values@ nested settings.
 data ForwardedValues s = ForwardedValues'
-    { _cookies :: TF.Attr s (TF.Attr s (Cookies s))
+    { _cookies              :: TF.Attr s (TF.Attr s (Cookies s))
     -- ^ Undocumented.
-    , _headers :: TF.Attr s [TF.Attr s P.Text]
+    , _headers              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _queryString :: TF.Attr s P.Bool
+    , _queryString          :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _queryStringCacheKeys :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
@@ -7668,7 +7668,7 @@ instance P.HasValue (GeoMatchConstraint s) (TF.Attr s P.Text) where
 
 -- | @geo_restriction@ nested settings.
 data GeoRestriction s = GeoRestriction'
-    { _locations :: TF.Attr s [TF.Attr s P.Text]
+    { _locations       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _restrictionType :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -7703,9 +7703,9 @@ instance P.HasRestrictionType (GeoRestriction s) (TF.Attr s P.Text) where
 
 -- | @geolocation_routing_policy@ nested settings.
 data GeolocationRoutingPolicy s = GeolocationRoutingPolicy'
-    { _continent :: TF.Attr s P.Text
+    { _continent   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _country :: TF.Attr s P.Text
+    , _country     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _subdivision :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -7746,7 +7746,7 @@ instance P.HasSubdivision (GeolocationRoutingPolicy s) (TF.Attr s P.Text) where
 
 -- | @global_filter@ nested settings.
 data GlobalFilter s = GlobalFilter'
-    { _key :: TF.Attr s P.Text
+    { _key    :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
@@ -7846,7 +7846,7 @@ data GrokClassifier s = GrokClassifier'
     -- ^ Undocumented.
     , _customPatterns :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _grokPattern :: TF.Attr s P.Text
+    , _grokPattern    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7887,11 +7887,11 @@ instance P.HasGrokPattern (GrokClassifier s) (TF.Attr s P.Text) where
 
 -- | @hadoop_jar_step@ nested settings.
 data HadoopJarStep s = HadoopJarStep'
-    { _args :: TF.Attr s [TF.Attr s P.Text]
+    { _args       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _jar :: TF.Attr s P.Text
+    , _jar        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _mainClass :: TF.Attr s P.Text
+    , _mainClass  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _properties :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
@@ -7980,9 +7980,9 @@ instance s ~ s' => P.HasComputedUnhealthyThreshold (TF.Ref s' (HealthCheck s)) (
 data HealthCheckConfig s = HealthCheckConfig'
     { _failureThreshold :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _resourcePath :: TF.Attr s P.Text
+    , _resourcePath     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'            :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -8071,7 +8071,7 @@ instance P.HasTimestampFormats (HiveJsonSerDe s) (TF.Attr s [TF.Attr s P.Text]) 
 
 -- | @iam_instance_profile@ nested settings.
 data IamInstanceProfile s = IamInstanceProfile'
-    { _arn :: TF.Attr s P.Text
+    { _arn  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _name :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -8105,21 +8105,21 @@ instance P.HasName (IamInstanceProfile s) (TF.Attr s P.Text) where
 
 -- | @ingress@ nested settings.
 data Ingress s = Ingress'
-    { _cidrBlocks :: TF.Attr s [TF.Attr s P.Text]
+    { _cidrBlocks     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _fromPort :: TF.Attr s P.Integer
+    , _fromPort       :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _ipv6CidrBlocks :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _protocol :: TF.Attr s P.Text
+    , _protocol       :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _securityGroups :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _self :: TF.Attr s P.Bool
+    , _self           :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _toPort :: TF.Attr s P.Integer
+    , _toPort         :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -8196,17 +8196,17 @@ instance P.HasToPort (Ingress s) (TF.Attr s P.Integer) where
 
 -- | @initial_lifecycle_hook@ nested settings.
 data InitialLifecycleHook s = InitialLifecycleHook'
-    { _heartbeatTimeout :: TF.Attr s P.Integer
+    { _heartbeatTimeout      :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _lifecycleTransition :: TF.Attr s P.Text
+    , _lifecycleTransition   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _notificationMetadata :: TF.Attr s P.Text
+    , _notificationMetadata  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _notificationTargetArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn               :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -8297,7 +8297,7 @@ instance P.HasDeserializer (InputFormatConfiguration s) (TF.Attr s [Deserializer
 
 -- | @input_transformer@ nested settings.
 data InputTransformer s = InputTransformer'
-    { _inputPaths :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _inputPaths    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     , _inputTemplate :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -8334,17 +8334,17 @@ instance P.HasInputTemplate (InputTransformer s) (TF.Attr s P.Text) where
 data InstanceGroup s = InstanceGroup'
     { _autoscalingPolicy :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _bidPrice :: TF.Attr s P.Text
+    , _bidPrice          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _ebsConfig :: TF.Attr s [TF.Attr s (EbsConfig s)]
+    , _ebsConfig         :: TF.Attr s [TF.Attr s (EbsConfig s)]
     -- ^ Undocumented.
-    , _instanceCount :: TF.Attr s P.Integer
+    , _instanceCount     :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _instanceRole :: TF.Attr s P.Text
+    , _instanceRole      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _instanceType :: TF.Attr s P.Text
+    , _instanceType      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name              :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -8413,7 +8413,7 @@ instance P.HasName (InstanceGroup s) (TF.Attr s P.Text) where
 
 -- | @instance_market_options@ nested settings.
 data InstanceMarketOptions s = InstanceMarketOptions'
-    { _marketType :: TF.Attr s P.Text
+    { _marketType  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _spotOptions :: TF.Attr s [SpotOptions s]
     -- ^ Undocumented.
@@ -8471,7 +8471,7 @@ data InviteMessageTemplate s = InviteMessageTemplate'
     -- ^ Undocumented.
     , _emailSubject :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _smsMessage :: TF.Attr s P.Text
+    , _smsMessage   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -8584,9 +8584,9 @@ instance P.HasValue (IpSetDescriptors s) (TF.Attr s P.Text) where
 data JdbcTarget s = JdbcTarget'
     { _connectionName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _exclusions :: TF.Attr s [TF.Attr s P.Text]
+    , _exclusions     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _path :: TF.Attr s P.Text
+    , _path           :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -8653,15 +8653,15 @@ instance P.HasJsonPath (JsonClassifier s) (TF.Attr s P.Text) where
 
 -- | @kerberos_attributes@ nested settings.
 data KerberosAttributes s = KerberosAttributes'
-    { _adDomainJoinPassword :: TF.Attr s P.Text
+    { _adDomainJoinPassword             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _adDomainJoinUser :: TF.Attr s P.Text
+    , _adDomainJoinUser                 :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _crossRealmTrustPrincipalPassword :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _kdcAdminPassword :: TF.Attr s P.Text
+    , _kdcAdminPassword                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _realm :: TF.Attr s P.Text
+    , _realm                            :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -8718,9 +8718,9 @@ instance P.HasRealm (KerberosAttributes s) (TF.Attr s P.Text) where
 data Kinesis s = Kinesis'
     { _partitionKey :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _streamName :: TF.Attr s P.Text
+    , _streamName   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -8761,7 +8761,7 @@ instance P.HasStreamName (Kinesis s) (TF.Attr s P.Text) where
 
 -- | @kinesis_destination@ nested settings.
 data KinesisDestination s = KinesisDestination'
-    { _roleArn :: TF.Attr s P.Text
+    { _roleArn   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _streamArn :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -8799,7 +8799,7 @@ instance P.HasStreamArn (KinesisDestination s) (TF.Attr s P.Text) where
 data KinesisSourceConfiguration s = KinesisSourceConfiguration'
     { _kinesisStreamArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn          :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -8886,9 +8886,9 @@ instance P.HasFunctionArn (Lambda s) (TF.Attr s P.Text) where
 data LambdaAction s = LambdaAction'
     { _functionArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _position :: TF.Attr s P.Integer
+    , _position    :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _topicArn :: TF.Attr s P.Text
+    , _topicArn    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -8932,23 +8932,23 @@ instance s ~ s' => P.HasComputedInvocationType (TF.Ref s' (LambdaAction s)) (TF.
 
 -- | @lambda_config@ nested settings.
 data LambdaConfig s = LambdaConfig'
-    { _createAuthChallenge :: TF.Attr s P.Text
+    { _createAuthChallenge         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customMessage :: TF.Attr s P.Text
+    , _customMessage               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _defineAuthChallenge :: TF.Attr s P.Text
+    , _defineAuthChallenge         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _postAuthentication :: TF.Attr s P.Text
+    , _postAuthentication          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _postConfirmation :: TF.Attr s P.Text
+    , _postConfirmation            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _preAuthentication :: TF.Attr s P.Text
+    , _preAuthentication           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _preSignUp :: TF.Attr s P.Text
+    , _preSignUp                   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _preTokenGeneration :: TF.Attr s P.Text
+    , _preTokenGeneration          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _userMigration :: TF.Attr s P.Text
+    , _userMigration               :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _verifyAuthChallengeResponse :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -9038,11 +9038,11 @@ instance P.HasVerifyAuthChallengeResponse (LambdaConfig s) (TF.Attr s P.Text) wh
 
 -- | @lambda_function@ nested settings.
 data LambdaFunction s = LambdaFunction'
-    { _events :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _events            :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _filterPrefix :: TF.Attr s P.Text
+    , _filterPrefix      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _filterSuffix :: TF.Attr s P.Text
+    , _filterSuffix      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _lambdaFunctionArn :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -9458,11 +9458,11 @@ instance s ~ s' => P.HasComputedSslCertificateId (TF.Ref s' (Listener s)) (TF.At
 
 -- | @load_balancer@ nested settings.
 data LoadBalancer s = LoadBalancer'
-    { _containerName :: TF.Attr s P.Text
+    { _containerName  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _containerPort :: TF.Attr s P.Integer
+    , _containerPort  :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _elbName :: TF.Attr s P.Text
+    , _elbName        :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _targetGroupArn :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -9512,7 +9512,7 @@ instance P.HasTargetGroupArn (LoadBalancer s) (TF.Attr s P.Text) where
 
 -- | @load_balancer_info@ nested settings.
 data LoadBalancerInfo s = LoadBalancerInfo'
-    { _elbInfo :: TF.Attr s [TF.Attr s (ElbInfo s)]
+    { _elbInfo         :: TF.Attr s [TF.Attr s (ElbInfo s)]
     -- ^ Undocumented.
     , _targetGroupInfo :: TF.Attr s [TF.Attr s (TargetGroupInfo s)]
     -- ^ Undocumented.
@@ -9572,15 +9572,15 @@ instance s ~ s' => P.HasComputedRangeKey (TF.Ref s' (LocalSecondaryIndex s)) (TF
 
 -- | @location@ nested settings.
 data Location s = Location'
-    { _method :: TF.Attr s P.Text
+    { _method     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _path :: TF.Attr s P.Text
+    , _path       :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _statusCode :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'      :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -9636,9 +9636,9 @@ instance P.HasType' (Location s) (TF.Attr s P.Text) where
 data LogPublishingOptions s = LogPublishingOptions'
     { _cloudwatchLogGroupArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _enabled :: TF.Attr s P.Bool
+    , _enabled               :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _logType :: TF.Attr s P.Text
+    , _logType               :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -9714,11 +9714,11 @@ instance P.HasTargetPrefix (Logging s) (TF.Attr s P.Text) where
 
 -- | @logging_config@ nested settings.
 data LoggingConfig s = LoggingConfig'
-    { _bucket :: TF.Attr s P.Text
+    { _bucket         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _includeCookies :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _prefix :: TF.Attr s P.Text
+    , _prefix         :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -9758,11 +9758,11 @@ instance P.HasPrefix (LoggingConfig s) (TF.Attr s P.Text) where
 
 -- | @logging_info@ nested settings.
 data LoggingInfo s = LoggingInfo'
-    { _s3BucketName :: TF.Attr s P.Text
+    { _s3BucketName   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _s3BucketPrefix :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _s3Region :: TF.Attr s P.Text
+    , _s3Region       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -9826,13 +9826,13 @@ instance s ~ s' => P.HasComputedTimeZone (TF.Ref s' (MaintenanceWindowStartTime 
 
 -- | @mapping_rule@ nested settings.
 data MappingRule s = MappingRule'
-    { _claim :: TF.Attr s P.Text
+    { _claim     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _matchType :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _value :: TF.Attr s P.Text
+    , _value     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -9882,7 +9882,7 @@ instance P.HasValue (MappingRule s) (TF.Attr s P.Text) where
 
 -- | @metric_dimension@ nested settings.
 data MetricDimension s = MetricDimension'
-    { _name :: TF.Attr s P.Text
+    { _name  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -9920,11 +9920,11 @@ instance P.HasValue (MetricDimension s) (TF.Attr s P.Text) where
 data MetricTransformation s = MetricTransformation'
     { _defaultValue :: TF.Attr s P.Double
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _namespace :: TF.Attr s P.Text
+    , _namespace    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _value :: TF.Attr s P.Text
+    , _value        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -10008,17 +10008,17 @@ instance P.HasValue (MinimumHealthyHosts s) (TF.Attr s P.Integer) where
 
 -- | @mongodb_settings@ nested settings.
 data MongodbSettings s = MongodbSettings'
-    { _authMechanism :: TF.Attr s P.Text
+    { _authMechanism     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _authSource :: TF.Attr s P.Text
+    , _authSource        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _authType :: TF.Attr s P.Text
+    , _authType          :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _docsToInvestigate :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _extractDocId :: TF.Attr s P.Text
+    , _extractDocId      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _nestingLevel :: TF.Attr s P.Text
+    , _nestingLevel      :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -10107,7 +10107,7 @@ data NetworkConfiguration s = NetworkConfiguration'
     -- ^ Undocumented.
     , _securityGroups :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _subnets :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _subnets        :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -10149,9 +10149,9 @@ instance P.HasSubnets (NetworkConfiguration s) (TF.Attr s [TF.Attr s (TF.Attr s 
 data NetworkInterface s = NetworkInterface'
     { _deleteOnTermination :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _deviceIndex :: TF.Attr s P.Integer
+    , _deviceIndex         :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _networkInterfaceId :: TF.Attr s P.Text
+    , _networkInterfaceId  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -10194,23 +10194,23 @@ instance P.HasNetworkInterfaceId (NetworkInterface s) (TF.Attr s P.Text) where
 data NetworkInterfaces s = NetworkInterfaces'
     { _associatePublicIpAddress :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _deleteOnTermination :: TF.Attr s P.Bool
+    , _deleteOnTermination      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _deviceIndex :: TF.Attr s P.Integer
+    , _deviceIndex              :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _ipv4Addresses :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _ipv4Addresses            :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _ipv6Addresses :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _ipv6Addresses            :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _networkInterfaceId :: TF.Attr s P.Text
+    , _networkInterfaceId       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _privateIpAddress :: TF.Attr s P.Text
+    , _privateIpAddress         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _securityGroups :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _securityGroups           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _subnetId :: TF.Attr s P.Text
+    , _subnetId                 :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -10306,11 +10306,11 @@ instance s ~ s' => P.HasComputedIpv6AddressCount (TF.Ref s' (NetworkInterfaces s
 data NfsFileShareDefaults s = NfsFileShareDefaults'
     { _directoryMode :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _fileMode :: TF.Attr s P.Text
+    , _fileMode      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _groupId :: TF.Attr s P.Integer
+    , _groupId       :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _ownerId :: TF.Attr s P.Integer
+    , _ownerId       :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -10407,7 +10407,7 @@ instance P.HasDays (NoncurrentVersionExpiration s) (TF.Attr s P.Integer) where
 
 -- | @noncurrent_version_transition@ nested settings.
 data NoncurrentVersionTransition s = NoncurrentVersionTransition'
-    { _days :: TF.Attr s P.Integer
+    { _days         :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _storageClass :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -10444,7 +10444,7 @@ instance P.HasStorageClass (NoncurrentVersionTransition s) (TF.Attr s P.Text) wh
 data NotPrincipals s = NotPrincipals'
     { _identifiers :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -10478,7 +10478,7 @@ instance P.HasType' (NotPrincipals s) (TF.Attr s P.Text) where
 
 -- | @notification@ nested settings.
 data Notification s = Notification'
-    { _events :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _events   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _snsTopic :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -10514,13 +10514,13 @@ instance P.HasSnsTopic (Notification s) (TF.Attr s P.Text) where
 
 -- | @notifications@ nested settings.
 data Notifications s = Notifications'
-    { _completed :: TF.Attr s P.Text
+    { _completed   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _error :: TF.Attr s P.Text
+    , _error       :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _progressing :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _warning :: TF.Attr s P.Text
+    , _warning     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -10600,7 +10600,7 @@ instance P.HasMinValue (NumberAttributeConstraints s) (TF.Attr s P.Text) where
 
 -- | @on_premises_instance_tag_filter@ nested settings.
 data OnPremisesInstanceTagFilter s = OnPremisesInstanceTagFilter'
-    { _key :: TF.Attr s P.Text
+    { _key   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _type' :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -10686,15 +10686,15 @@ instance P.HasConvertDotsInJsonKeysToUnderscores (OpenXJsonSerDe s) (TF.Attr s P
 
 -- | @option@ nested settings.
 data Option s = Option'
-    { _dbSecurityGroupMemberships :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _dbSecurityGroupMemberships  :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _optionName :: TF.Attr s P.Text
+    , _optionName                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _optionSettings :: TF.Attr s [TF.Attr s (OptionSettings s)]
+    , _optionSettings              :: TF.Attr s [TF.Attr s (OptionSettings s)]
     -- ^ Undocumented.
-    , _port :: TF.Attr s P.Integer
+    , _port                        :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _version :: TF.Attr s P.Text
+    , _version                     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _vpcSecurityGroupMemberships :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
@@ -10757,7 +10757,7 @@ instance P.HasVpcSecurityGroupMemberships (Option s) (TF.Attr s [TF.Attr s (TF.A
 
 -- | @option_settings@ nested settings.
 data OptionSettings s = OptionSettings'
-    { _name :: TF.Attr s P.Text
+    { _name  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -10793,25 +10793,25 @@ instance P.HasValue (OptionSettings s) (TF.Attr s P.Text) where
 
 -- | @orc_ser_de@ nested settings.
 data OrcSerDe s = OrcSerDe'
-    { _blockSizeBytes :: TF.Attr s P.Integer
+    { _blockSizeBytes                      :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _bloomFilterColumns :: TF.Attr s [TF.Attr s P.Text]
+    , _bloomFilterColumns                  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _bloomFilterFalsePositiveProbability :: TF.Attr s P.Double
     -- ^ Undocumented.
-    , _compression :: TF.Attr s P.Text
+    , _compression                         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _dictionaryKeyThreshold :: TF.Attr s P.Double
+    , _dictionaryKeyThreshold              :: TF.Attr s P.Double
     -- ^ Undocumented.
-    , _enablePadding :: TF.Attr s P.Bool
+    , _enablePadding                       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _formatVersion :: TF.Attr s P.Text
+    , _formatVersion                       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _paddingTolerance :: TF.Attr s P.Double
+    , _paddingTolerance                    :: TF.Attr s P.Double
     -- ^ Undocumented.
-    , _rowIndexStride :: TF.Attr s P.Integer
+    , _rowIndexStride                      :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _stripeSizeBytes :: TF.Attr s P.Integer
+    , _stripeSizeBytes                     :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11084,9 +11084,9 @@ instance P.HasType' (OrderedPlacementStrategy s) (TF.Attr s P.Text) where
 data OrganizationAggregationSource s = OrganizationAggregationSource'
     { _allRegions :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _regions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    , _regions    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11126,17 +11126,17 @@ instance P.HasRoleArn (OrganizationAggregationSource s) (TF.Attr s P.Text) where
 
 -- | @origin@ nested settings.
 data Origin s = Origin'
-    { _customHeader :: TF.Attr s [TF.Attr s (CustomHeader s)]
+    { _customHeader       :: TF.Attr s [TF.Attr s (CustomHeader s)]
     -- ^ Undocumented.
     , _customOriginConfig :: TF.Attr s (TF.Attr s (CustomOriginConfig s))
     -- ^ Undocumented.
-    , _domainName :: TF.Attr s P.Text
+    , _domainName         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _originId :: TF.Attr s P.Text
+    , _originId           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _originPath :: TF.Attr s P.Text
+    , _originPath         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _s3OriginConfig :: TF.Attr s (TF.Attr s (S3OriginConfig s))
+    , _s3OriginConfig     :: TF.Attr s (TF.Attr s (S3OriginConfig s))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11226,7 +11226,7 @@ instance P.HasSerializer (OutputFormatConfiguration s) (TF.Attr s [Serializer s]
 data OutputLocation s = OutputLocation'
     { _s3BucketName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _s3KeyPrefix :: TF.Attr s P.Text
+    , _s3KeyPrefix  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11287,11 +11287,11 @@ instance P.HasType' (OverrideAction s) (TF.Attr s P.Text) where
 data Parameter s = Parameter'
     { _defaultValue :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11337,7 +11337,7 @@ instance P.HasType' (Parameter s) (TF.Attr s P.Text) where
 
 -- | @parameters@ nested settings.
 data Parameters s = Parameters'
-    { _parameterName :: TF.Attr s P.Text
+    { _parameterName  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _parameterValue :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -11373,17 +11373,17 @@ instance P.HasParameterValue (Parameters s) (TF.Attr s P.Text) where
 
 -- | @parquet_ser_de@ nested settings.
 data ParquetSerDe s = ParquetSerDe'
-    { _blockSizeBytes :: TF.Attr s P.Integer
+    { _blockSizeBytes              :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _compression :: TF.Attr s P.Text
+    , _compression                 :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _enableDictionaryCompression :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _maxPaddingBytes :: TF.Attr s P.Integer
+    , _maxPaddingBytes             :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _pageSizeBytes :: TF.Attr s P.Integer
+    , _pageSizeBytes               :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _writerVersion :: TF.Attr s P.Text
+    , _writerVersion               :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11445,9 +11445,9 @@ instance P.HasWriterVersion (ParquetSerDe s) (TF.Attr s P.Text) where
 data PartitionKeys s = PartitionKeys'
     { _comment :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11487,13 +11487,13 @@ instance P.HasType' (PartitionKeys s) (TF.Attr s P.Text) where
 
 -- | @password_policy@ nested settings.
 data PasswordPolicy s = PasswordPolicy'
-    { _minimumLength :: TF.Attr s P.Integer
+    { _minimumLength    :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _requireLowercase :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _requireNumbers :: TF.Attr s P.Bool
+    , _requireNumbers   :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _requireSymbols :: TF.Attr s P.Bool
+    , _requireSymbols   :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _requireUppercase :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -11548,7 +11548,7 @@ instance P.HasRequireUppercase (PasswordPolicy s) (TF.Attr s P.Bool) where
 
 -- | @patch_filter@ nested settings.
 data PatchFilter s = PatchFilter'
-    { _key :: TF.Attr s P.Text
+    { _key    :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
@@ -11586,7 +11586,7 @@ instance P.HasValues (PatchFilter s) (TF.Attr s [TF.Attr s P.Text]) where
 data Permissions s = Permissions'
     { _accountIds :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'      :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11620,11 +11620,11 @@ instance P.HasType' (Permissions s) (TF.Attr s P.Text) where
 
 -- | @physical_connection_requirements@ nested settings.
 data PhysicalConnectionRequirements s = PhysicalConnectionRequirements'
-    { _availabilityZone :: TF.Attr s P.Text
+    { _availabilityZone    :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _securityGroupIdList :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _subnetId :: TF.Attr s P.Text
+    , _subnetId            :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11663,17 +11663,17 @@ instance P.HasSubnetId (PhysicalConnectionRequirements s) (TF.Attr s P.Text) whe
 
 -- | @placement@ nested settings.
 data Placement s = Placement'
-    { _affinity :: TF.Attr s P.Text
+    { _affinity         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _availabilityZone :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _groupName :: TF.Attr s P.Text
+    , _groupName        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _hostId :: TF.Attr s P.Text
+    , _hostId           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _spreadDomain :: TF.Attr s P.Text
+    , _spreadDomain     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tenancy :: TF.Attr s P.Text
+    , _tenancy          :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11735,7 +11735,7 @@ instance P.HasTenancy (Placement s) (TF.Attr s P.Text) where
 data PlacementConstraints s = PlacementConstraints'
     { _expression :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'      :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11829,7 +11829,7 @@ instance P.HasEnabled (PointInTimeRecovery s) (TF.Attr s P.Bool) where
 
 -- | @policy_attribute@ nested settings.
 data PolicyAttribute s = PolicyAttribute'
-    { _name :: TF.Attr s P.Text
+    { _name  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _value :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -11865,7 +11865,7 @@ instance P.HasValue (PolicyAttribute s) (TF.Attr s P.Text) where
 data PredefinedMetricSpecification s = PredefinedMetricSpecification'
     { _predefinedMetricType :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _resourceLabel :: TF.Attr s P.Text
+    , _resourceLabel        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11898,11 +11898,11 @@ instance P.HasResourceLabel (PredefinedMetricSpecification s) (TF.Attr s P.Text)
 
 -- | @predicate@ nested settings.
 data Predicate s = Predicate'
-    { _dataId :: TF.Attr s P.Text
+    { _dataId  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _negated :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11944,11 +11944,11 @@ instance P.HasType' (Predicate s) (TF.Attr s P.Text) where
 
 -- | @predicates@ nested settings.
 data Predicates s = Predicates'
-    { _dataId :: TF.Attr s P.Text
+    { _dataId  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _negated :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -11992,7 +11992,7 @@ instance P.HasType' (Predicates s) (TF.Attr s P.Text) where
 data Principals s = Principals'
     { _identifiers :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -12026,7 +12026,7 @@ instance P.HasType' (Principals s) (TF.Attr s P.Text) where
 
 -- | @processing_configuration@ nested settings.
 data ProcessingConfiguration s = ProcessingConfiguration'
-    { _enabled :: TF.Attr s P.Bool
+    { _enabled    :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _processors :: TF.Attr s [Processors s]
     -- ^ Undocumented.
@@ -12062,7 +12062,7 @@ instance P.HasProcessors (ProcessingConfiguration s) (TF.Attr s [Processors s]) 
 data Processors s = Processors'
     { _parameters :: TF.Attr s [Parameters s]
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'      :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -12143,13 +12143,13 @@ instance s ~ s' => P.HasComputedSearchableAttributes (TF.Ref s' (Properties s)) 
 
 -- | @queue@ nested settings.
 data Queue s = Queue'
-    { _events :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _events       :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _filterPrefix :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _filterSuffix :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _queueArn :: TF.Attr s P.Text
+    , _queueArn     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -12200,7 +12200,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (Queue s)) (TF.Attr s P.Text) wher
 
 -- | @quota_settings@ nested settings.
 data QuotaSettings s = QuotaSettings'
-    { _limit :: TF.Attr s P.Integer
+    { _limit  :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _offset :: TF.Attr s P.Integer
     -- ^ Undocumented.
@@ -12245,11 +12245,11 @@ instance P.HasPeriod (QuotaSettings s) (TF.Attr s P.Text) where
 
 -- | @recording_group@ nested settings.
 data RecordingGroup s = RecordingGroup'
-    { _allSupported :: TF.Attr s P.Bool
+    { _allSupported               :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _includeGlobalResourceTypes :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _resourceTypes :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _resourceTypes              :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -12288,27 +12288,27 @@ instance P.HasResourceTypes (RecordingGroup s) (TF.Attr s [TF.Attr s (TF.Attr s 
 
 -- | @redshift_configuration@ nested settings.
 data RedshiftConfiguration s = RedshiftConfiguration'
-    { _clusterJdbcurl :: TF.Attr s P.Text
+    { _clusterJdbcurl          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _copyOptions :: TF.Attr s P.Text
+    , _copyOptions             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _dataTableColumns :: TF.Attr s P.Text
+    , _dataTableColumns        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _dataTableName :: TF.Attr s P.Text
+    , _dataTableName           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _password :: TF.Attr s P.Text
+    , _password                :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _processingConfiguration :: TF.Attr s [ProcessingConfiguration s]
     -- ^ Undocumented.
-    , _retryDuration :: TF.Attr s P.Integer
+    , _retryDuration           :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _s3BackupConfiguration :: TF.Attr s [S3BackupConfiguration s]
+    , _s3BackupConfiguration   :: TF.Attr s [S3BackupConfiguration s]
     -- ^ Undocumented.
-    , _s3BackupMode :: TF.Attr s P.Text
+    , _s3BackupMode            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _username :: TF.Attr s P.Text
+    , _username                :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -12411,9 +12411,9 @@ instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (RedshiftCon
 
 -- | @regex_match_tuple@ nested settings.
 data RegexMatchTuple s = RegexMatchTuple'
-    { _fieldToMatch :: TF.Attr s [FieldToMatch s]
+    { _fieldToMatch       :: TF.Attr s [FieldToMatch s]
     -- ^ Undocumented.
-    , _regexPatternSetId :: TF.Attr s P.Text
+    , _regexPatternSetId  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -12483,7 +12483,7 @@ instance P.HasRegionName (Replica s) (TF.Attr s P.Text) where
 
 -- | @replication_configuration@ nested settings.
 data ReplicationConfiguration s = ReplicationConfiguration'
-    { _role :: TF.Attr s P.Text
+    { _role  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _rules :: TF.Attr s [TF.Attr s (Rules s)]
     -- ^ Undocumented.
@@ -12521,7 +12521,7 @@ instance P.HasRules (ReplicationConfiguration s) (TF.Attr s [TF.Attr s (Rules s)
 data Republish s = Republish'
     { _roleArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _topic :: TF.Attr s P.Text
+    , _topic   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -12600,7 +12600,7 @@ instance P.HasAllowVpcToRemoteClassicLink (Requester s) (TF.Attr s P.Bool) where
 data ResourceCreationLimitPolicy s = ResourceCreationLimitPolicy'
     { _newGameSessionsPerCreator :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _policyPeriodInMinutes :: TF.Attr s P.Integer
+    , _policyPeriodInMinutes     :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -12702,11 +12702,11 @@ instance s ~ s' => P.HasComputedCrlConfiguration (TF.Ref s' (RevocationConfigura
 data RoleMapping s = RoleMapping'
     { _ambiguousRoleResolution :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _identityProvider :: TF.Attr s P.Text
+    , _identityProvider        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _mappingRule :: TF.Attr s [MappingRule s]
+    , _mappingRule             :: TF.Attr s [MappingRule s]
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'                   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -12754,7 +12754,7 @@ instance P.HasType' (RoleMapping s) (TF.Attr s P.Text) where
 
 -- | @roles@ nested settings.
 data Roles s = Roles'
-    { _authenticated :: TF.Attr s P.Text
+    { _authenticated   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _unauthenticated :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -12831,19 +12831,19 @@ instance s ~ s' => P.HasComputedAutomaticallyAfterDays (TF.Ref s' (RotationRules
 
 -- | @route@ nested settings.
 data Route s = Route'
-    { _cidrBlock :: TF.Attr s P.Text
+    { _cidrBlock              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _egressOnlyGatewayId :: TF.Attr s P.Text
+    , _egressOnlyGatewayId    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _gatewayId :: TF.Attr s P.Text
+    , _gatewayId              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _instanceId :: TF.Attr s P.Text
+    , _instanceId             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _ipv6CidrBlock :: TF.Attr s P.Text
+    , _ipv6CidrBlock          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _natGatewayId :: TF.Attr s P.Text
+    , _natGatewayId           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _networkInterfaceId :: TF.Attr s P.Text
+    , _networkInterfaceId     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _vpcPeeringConnectionId :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -12986,7 +12986,7 @@ data RoutingStrategy s = RoutingStrategy'
     -- ^ Undocumented.
     , _message :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -13026,15 +13026,15 @@ instance P.HasType' (RoutingStrategy s) (TF.Attr s P.Text) where
 
 -- | @rule@ nested settings.
 data Rule s = Rule'
-    { _action :: TF.Attr s [Action s]
+    { _action         :: TF.Attr s [Action s]
     -- ^ Undocumented.
     , _overrideAction :: TF.Attr s [OverrideAction s]
     -- ^ Undocumented.
-    , _priority :: TF.Attr s P.Integer
+    , _priority       :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _ruleId :: TF.Attr s P.Text
+    , _ruleId         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'          :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -13089,15 +13089,15 @@ instance P.HasType' (Rule s) (TF.Attr s P.Text) where
 
 -- | @rules@ nested settings.
 data Rules s = Rules'
-    { _action :: TF.Attr s [Action s]
+    { _action         :: TF.Attr s [Action s]
     -- ^ Undocumented.
     , _overrideAction :: TF.Attr s [OverrideAction s]
     -- ^ Undocumented.
-    , _priority :: TF.Attr s P.Integer
+    , _priority       :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _ruleId :: TF.Attr s P.Text
+    , _ruleId         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'          :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -13152,7 +13152,7 @@ instance P.HasType' (Rules s) (TF.Attr s P.Text) where
 
 -- | @run_command_targets@ nested settings.
 data RunCommandTargets s = RunCommandTargets'
-    { _key :: TF.Attr s P.Text
+    { _key    :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
@@ -13192,7 +13192,7 @@ data RuntimeConfiguration s = RuntimeConfiguration'
     -- ^ Undocumented.
     , _maxConcurrentGameSessionActivations :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _serverProcess :: TF.Attr s [ServerProcess s]
+    , _serverProcess                       :: TF.Attr s [ServerProcess s]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -13233,9 +13233,9 @@ instance P.HasServerProcess (RuntimeConfiguration s) (TF.Attr s [ServerProcess s
 data S3 s = S3'
     { _bucketName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _key :: TF.Attr s P.Text
+    , _key        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -13277,15 +13277,15 @@ instance P.HasRoleArn (S3 s) (TF.Attr s P.Text) where
 
 -- | @s3_action@ nested settings.
 data S3Action s = S3Action'
-    { _bucketName :: TF.Attr s P.Text
+    { _bucketName      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _kmsKeyArn :: TF.Attr s P.Text
+    , _kmsKeyArn       :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _objectKeyPrefix :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _position :: TF.Attr s P.Integer
+    , _position        :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _topicArn :: TF.Attr s P.Text
+    , _topicArn        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -13340,19 +13340,19 @@ instance P.HasTopicArn (S3Action s) (TF.Attr s P.Text) where
 
 -- | @s3_backup_configuration@ nested settings.
 data S3BackupConfiguration s = S3BackupConfiguration'
-    { _bucketArn :: TF.Attr s P.Text
+    { _bucketArn         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _bufferInterval :: TF.Attr s P.Integer
+    , _bufferInterval    :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _bufferSize :: TF.Attr s P.Integer
+    , _bufferSize        :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _compressionFormat :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _kmsKeyArn :: TF.Attr s P.Text
+    , _kmsKeyArn         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _prefix :: TF.Attr s P.Text
+    , _prefix            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn           :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -13424,19 +13424,19 @@ instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (S3BackupCon
 
 -- | @s3_configuration@ nested settings.
 data S3Configuration s = S3Configuration'
-    { _bucketArn :: TF.Attr s P.Text
+    { _bucketArn         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _bufferInterval :: TF.Attr s P.Integer
+    , _bufferInterval    :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _bufferSize :: TF.Attr s P.Integer
+    , _bufferSize        :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _compressionFormat :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _kmsKeyArn :: TF.Attr s P.Text
+    , _kmsKeyArn         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _prefix :: TF.Attr s P.Text
+    , _prefix            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn           :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -13510,11 +13510,11 @@ instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (S3Configura
 data S3Destination s = S3Destination'
     { _bucketName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _kmsKeyArn :: TF.Attr s P.Text
+    , _kmsKeyArn  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _prefix :: TF.Attr s P.Text
+    , _prefix     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _region :: TF.Attr s P.Text
+    , _region     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _syncFormat :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -13571,13 +13571,13 @@ instance P.HasSyncFormat (S3Destination s) (TF.Attr s P.Text) where
 
 -- | @s3_import@ nested settings.
 data S3Import s = S3Import'
-    { _bucketName :: TF.Attr s P.Text
+    { _bucketName          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _bucketPrefix :: TF.Attr s P.Text
+    , _bucketPrefix        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _ingestionRole :: TF.Attr s P.Text
+    , _ingestionRole       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sourceEngine :: TF.Attr s P.Text
+    , _sourceEngine        :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _sourceEngineVersion :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -13662,19 +13662,19 @@ instance P.HasOriginAccessIdentity (S3OriginConfig s) (TF.Attr s P.Text) where
 
 -- | @s3_settings@ nested settings.
 data S3Settings s = S3Settings'
-    { _bucketFolder :: TF.Attr s P.Text
+    { _bucketFolder            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _bucketName :: TF.Attr s P.Text
+    , _bucketName              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _compressionType :: TF.Attr s P.Text
+    , _compressionType         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _csvDelimiter :: TF.Attr s P.Text
+    , _csvDelimiter            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _csvRowDelimiter :: TF.Attr s P.Text
+    , _csvRowDelimiter         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _externalTableDefinition :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _serviceAccessRoleArn :: TF.Attr s P.Text
+    , _serviceAccessRoleArn    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -13743,7 +13743,7 @@ instance P.HasServiceAccessRoleArn (S3Settings s) (TF.Attr s P.Text) where
 data S3Target s = S3Target'
     { _exclusions :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _path :: TF.Attr s P.Text
+    , _path       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -13836,17 +13836,17 @@ instance P.HasFrequency (Schedule s) (TF.Attr s P.Text) where
 
 -- | @schema@ nested settings.
 data Schema s = Schema'
-    { _attributeDataType :: TF.Attr s P.Text
+    { _attributeDataType          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _developerOnlyAttribute :: TF.Attr s P.Bool
+    , _developerOnlyAttribute     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _mutable :: TF.Attr s P.Bool
+    , _mutable                    :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                       :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _numberAttributeConstraints :: TF.Attr s [NumberAttributeConstraints s]
     -- ^ Undocumented.
-    , _required :: TF.Attr s P.Bool
+    , _required                   :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _stringAttributeConstraints :: TF.Attr s [StringAttributeConstraints s]
     -- ^ Undocumented.
@@ -13953,11 +13953,11 @@ instance P.HasUpdateBehavior (SchemaChangePolicy s) (TF.Attr s P.Text) where
 data SchemaConfiguration s = SchemaConfiguration'
     { _databaseName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tableName :: TF.Attr s P.Text
+    , _tableName    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _versionId :: TF.Attr s P.Text
+    , _versionId    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -14012,13 +14012,13 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (SchemaConfiguration s)) (TF.A
 
 -- | @scope@ nested settings.
 data Scope s = Scope'
-    { _complianceResourceId :: TF.Attr s P.Text
+    { _complianceResourceId    :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _complianceResourceTypes :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _tagKey :: TF.Attr s P.Text
+    , _tagKey                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tagValue :: TF.Attr s P.Text
+    , _tagValue                :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -14064,13 +14064,13 @@ instance P.HasTagValue (Scope s) (TF.Attr s P.Text) where
 
 -- | @secret@ nested settings.
 data Secret s = Secret'
-    { _context :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _context     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     , _grantTokens :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _payload :: TF.Attr s P.Text
+    , _payload     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -14118,9 +14118,9 @@ instance P.HasPayload (Secret s) (TF.Attr s P.Text) where
 
 -- | @ser_de_info@ nested settings.
 data SerDeInfo s = SerDeInfo'
-    { _name :: TF.Attr s P.Text
+    { _name                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _parameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _parameters           :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     , _serializationLibrary :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -14161,7 +14161,7 @@ instance P.HasSerializationLibrary (SerDeInfo s) (TF.Attr s P.Text) where
 
 -- | @serializer@ nested settings.
 data Serializer s = Serializer'
-    { _orcSerDe :: TF.Attr s [OrcSerDe s]
+    { _orcSerDe     :: TF.Attr s [OrcSerDe s]
     -- ^ Undocumented.
     , _parquetSerDe :: TF.Attr s [ParquetSerDe s]
     -- ^ Undocumented.
@@ -14197,9 +14197,9 @@ instance P.HasParquetSerDe (Serializer s) (TF.Attr s [ParquetSerDe s]) where
 data ServerProcess s = ServerProcess'
     { _concurrentExecutions :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _launchPath :: TF.Attr s P.Text
+    , _launchPath           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _parameters :: TF.Attr s P.Text
+    , _parameters           :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -14287,9 +14287,9 @@ data ServiceRegistries s = ServiceRegistries'
     -- ^ Undocumented.
     , _containerPort :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _port :: TF.Attr s P.Integer
+    , _port          :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _registryArn :: TF.Attr s P.Text
+    , _registryArn   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -14336,13 +14336,13 @@ instance P.HasRegistryArn (ServiceRegistries s) (TF.Attr s P.Text) where
 
 -- | @setting@ nested settings.
 data Setting s = Setting'
-    { _name :: TF.Attr s P.Text
+    { _name      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _namespace :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _resource :: TF.Attr s P.Text
+    , _resource  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _value :: TF.Attr s P.Text
+    , _value     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -14391,23 +14391,23 @@ instance P.HasValue (Setting s) (TF.Attr s P.Text) where
 
 -- | @settings@ nested settings.
 data Settings s = Settings'
-    { _cacheDataEncrypted :: TF.Attr s P.Bool
+    { _cacheDataEncrypted                     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _cacheTtlInSeconds :: TF.Attr s P.Integer
+    , _cacheTtlInSeconds                      :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _cachingEnabled :: TF.Attr s P.Bool
+    , _cachingEnabled                         :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _dataTraceEnabled :: TF.Attr s P.Bool
+    , _dataTraceEnabled                       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _loggingLevel :: TF.Attr s P.Text
+    , _loggingLevel                           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _metricsEnabled :: TF.Attr s P.Bool
+    , _metricsEnabled                         :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _requireAuthorizationForCacheControl :: TF.Attr s P.Bool
+    , _requireAuthorizationForCacheControl    :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _throttlingBurstLimit :: TF.Attr s P.Integer
+    , _throttlingBurstLimit                   :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _throttlingRateLimit :: TF.Attr s P.Double
+    , _throttlingRateLimit                    :: TF.Attr s P.Double
     -- ^ Undocumented.
     , _unauthorizedCacheControlHeaderStrategy :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -14499,9 +14499,9 @@ instance P.HasUnauthorizedCacheControlHeaderStrategy (Settings s) (TF.Attr s P.T
 data SizeConstraints s = SizeConstraints'
     { _comparisonOperator :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _fieldToMatch :: TF.Attr s (TF.Attr s (FieldToMatch s))
+    , _fieldToMatch       :: TF.Attr s (TF.Attr s (FieldToMatch s))
     -- ^ Undocumented.
-    , _size :: TF.Attr s P.Integer
+    , _size               :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -14598,9 +14598,9 @@ instance P.HasSkewedColumnValues (SkewedInfo s) (TF.Attr s [TF.Attr s P.Text]) w
 data SmbActiveDirectorySettings s = SmbActiveDirectorySettings'
     { _domainName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _password :: TF.Attr s P.Text
+    , _password   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _username :: TF.Attr s P.Text
+    , _username   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -14642,7 +14642,7 @@ instance P.HasUsername (SmbActiveDirectorySettings s) (TF.Attr s P.Text) where
 
 -- | @sms_configuration@ nested settings.
 data SmsConfiguration s = SmsConfiguration'
-    { _externalId :: TF.Attr s P.Text
+    { _externalId   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _snsCallerArn :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -14680,9 +14680,9 @@ instance P.HasSnsCallerArn (SmsConfiguration s) (TF.Attr s P.Text) where
 data SnapshotCopy s = SnapshotCopy'
     { _destinationRegion :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _grantName :: TF.Attr s P.Text
+    , _grantName         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _retentionPeriod :: TF.Attr s P.Integer
+    , _retentionPeriod   :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -14775,9 +14775,9 @@ instance P.HasAutomatedSnapshotStartHour (SnapshotOptions s) (TF.Attr s P.Intege
 data Sns s = Sns'
     { _messageFormat :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _targetArn :: TF.Attr s P.Text
+    , _targetArn     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -14880,7 +14880,7 @@ instance P.HasTopicArn (SnsDestination s) (TF.Attr s P.Text) where
 
 -- | @sort_columns@ nested settings.
 data SortColumns s = SortColumns'
-    { _column :: TF.Attr s P.Text
+    { _column    :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _sortOrder :: TF.Attr s P.Integer
     -- ^ Undocumented.
@@ -14916,9 +14916,9 @@ instance P.HasSortOrder (SortColumns s) (TF.Attr s P.Integer) where
 
 -- | @source@ nested settings.
 data Source s = Source'
-    { _owner :: TF.Attr s P.Text
+    { _owner            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sourceDetail :: TF.Attr s [TF.Attr s (SourceDetail s)]
+    , _sourceDetail     :: TF.Attr s [TF.Attr s (SourceDetail s)]
     -- ^ Undocumented.
     , _sourceIdentifier :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -14961,11 +14961,11 @@ instance P.HasSourceIdentifier (Source s) (TF.Attr s P.Text) where
 
 -- | @source_detail@ nested settings.
 data SourceDetail s = SourceDetail'
-    { _eventSource :: TF.Attr s P.Text
+    { _eventSource               :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _maximumExecutionFrequency :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _messageType :: TF.Attr s P.Text
+    , _messageType               :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -15031,17 +15031,17 @@ instance P.HasSseKmsEncryptedObjects (SourceSelectionCriteria s) (TF.Attr s (TF.
 data SplunkConfiguration s = SplunkConfiguration'
     { _hecAcknowledgmentTimeout :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _hecEndpoint :: TF.Attr s P.Text
+    , _hecEndpoint              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _hecEndpointType :: TF.Attr s P.Text
+    , _hecEndpointType          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _hecToken :: TF.Attr s P.Text
+    , _hecToken                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _processingConfiguration :: TF.Attr s [ProcessingConfiguration s]
+    , _processingConfiguration  :: TF.Attr s [ProcessingConfiguration s]
     -- ^ Undocumented.
-    , _retryDuration :: TF.Attr s P.Integer
+    , _retryDuration            :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _s3BackupMode :: TF.Attr s P.Text
+    , _s3BackupMode             :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -15113,13 +15113,13 @@ instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (SplunkConfi
 
 -- | @spot_options@ nested settings.
 data SpotOptions s = SpotOptions'
-    { _blockDurationMinutes :: TF.Attr s P.Integer
+    { _blockDurationMinutes         :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _instanceInterruptionBehavior :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _maxPrice :: TF.Attr s P.Text
+    , _maxPrice                     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _spotInstanceType :: TF.Attr s P.Text
+    , _spotInstanceType             :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -15168,7 +15168,7 @@ instance s ~ s' => P.HasComputedValidUntil (TF.Ref s' (SpotOptions s)) (TF.Attr 
 
 -- | @sql_injection_match_tuple@ nested settings.
 data SqlInjectionMatchTuple s = SqlInjectionMatchTuple'
-    { _fieldToMatch :: TF.Attr s [FieldToMatch s]
+    { _fieldToMatch       :: TF.Attr s [FieldToMatch s]
     -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -15204,7 +15204,7 @@ instance P.HasTextTransformation (SqlInjectionMatchTuple s) (TF.Attr s P.Text) w
 
 -- | @sql_injection_match_tuples@ nested settings.
 data SqlInjectionMatchTuples s = SqlInjectionMatchTuples'
-    { _fieldToMatch :: TF.Attr s (TF.Attr s (FieldToMatch s))
+    { _fieldToMatch       :: TF.Attr s (TF.Attr s (FieldToMatch s))
     -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -15240,9 +15240,9 @@ instance P.HasTextTransformation (SqlInjectionMatchTuples s) (TF.Attr s P.Text) 
 
 -- | @sqs@ nested settings.
 data Sqs s = Sqs'
-    { _queueUrl :: TF.Attr s P.Text
+    { _queueUrl  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _useBase64 :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -15379,9 +15379,9 @@ newSseS3 =
 data SslConfiguration s = SslConfiguration'
     { _certificate :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _chain :: TF.Attr s P.Text
+    , _chain       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _privateKey :: TF.Attr s P.Text
+    , _privateKey  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -15424,7 +15424,7 @@ instance P.HasPrivateKey (SslConfiguration s) (TF.Attr s P.Text) where
 data Stage s = Stage'
     { _action :: TF.Attr s [Action s]
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -15494,23 +15494,23 @@ instance P.HasStageName (StageKey s) (TF.Attr s P.Text) where
 
 -- | @statement@ nested settings.
 data Statement s = Statement'
-    { _actions :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _actions       :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _condition :: TF.Attr s [TF.Attr s (Condition s)]
+    , _condition     :: TF.Attr s [TF.Attr s (Condition s)]
     -- ^ Undocumented.
-    , _effect :: TF.Attr s P.Text
+    , _effect        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _notActions :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _notActions    :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _notPrincipals :: TF.Attr s [TF.Attr s (NotPrincipals s)]
     -- ^ Undocumented.
-    , _notResources :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _notResources  :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _principals :: TF.Attr s [TF.Attr s (Principals s)]
+    , _principals    :: TF.Attr s [TF.Attr s (Principals s)]
     -- ^ Undocumented.
-    , _resources :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _resources     :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _sid :: TF.Attr s P.Text
+    , _sid           :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -15593,9 +15593,9 @@ instance P.HasSid (Statement s) (TF.Attr s P.Text) where
 data Step s = Step'
     { _actionOnFailure :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _hadoopJarStep :: TF.Attr s [HadoopJarStep s]
+    , _hadoopJarStep   :: TF.Attr s [HadoopJarStep s]
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name            :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -15641,7 +15641,7 @@ data StepAdjustment s = StepAdjustment'
     -- ^ Undocumented.
     , _metricIntervalUpperBound :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _scalingAdjustment :: TF.Attr s P.Integer
+    , _scalingAdjustment        :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -15681,15 +15681,15 @@ instance P.HasScalingAdjustment (StepAdjustment s) (TF.Attr s P.Integer) where
 
 -- | @step_scaling_policy_configuration@ nested settings.
 data StepScalingPolicyConfiguration s = StepScalingPolicyConfiguration'
-    { _adjustmentType :: TF.Attr s P.Text
+    { _adjustmentType         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _cooldown :: TF.Attr s P.Integer
+    , _cooldown               :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _metricAggregationType :: TF.Attr s P.Text
+    , _metricAggregationType  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _minAdjustmentMagnitude :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _stepAdjustment :: TF.Attr s [TF.Attr s (StepAdjustment s)]
+    , _stepAdjustment         :: TF.Attr s [TF.Attr s (StepAdjustment s)]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -15767,7 +15767,7 @@ instance s ~ s' => P.HasComputedType' (TF.Ref s' (Stickiness s)) (TF.Attr s P.Te
 data StopAction s = StopAction'
     { _position :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _scope :: TF.Attr s P.Text
+    , _scope    :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _topicArn :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -15810,27 +15810,27 @@ instance P.HasTopicArn (StopAction s) (TF.Attr s P.Text) where
 
 -- | @storage_descriptor@ nested settings.
 data StorageDescriptor s = StorageDescriptor'
-    { _bucketColumns :: TF.Attr s [TF.Attr s P.Text]
+    { _bucketColumns          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _columns :: TF.Attr s [Columns s]
+    , _columns                :: TF.Attr s [Columns s]
     -- ^ Undocumented.
-    , _compressed :: TF.Attr s P.Bool
+    , _compressed             :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _inputFormat :: TF.Attr s P.Text
+    , _inputFormat            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _location :: TF.Attr s P.Text
+    , _location               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _numberOfBuckets :: TF.Attr s P.Integer
+    , _numberOfBuckets        :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _outputFormat :: TF.Attr s P.Text
+    , _outputFormat           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _parameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _parameters             :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _serDeInfo :: TF.Attr s [SerDeInfo s]
+    , _serDeInfo              :: TF.Attr s [SerDeInfo s]
     -- ^ Undocumented.
-    , _skewedInfo :: TF.Attr s [SkewedInfo s]
+    , _skewedInfo             :: TF.Attr s [SkewedInfo s]
     -- ^ Undocumented.
-    , _sortColumns :: TF.Attr s [SortColumns s]
+    , _sortColumns            :: TF.Attr s [SortColumns s]
     -- ^ Undocumented.
     , _storedAsSubDirectories :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -15934,9 +15934,9 @@ instance P.HasStoredAsSubDirectories (StorageDescriptor s) (TF.Attr s P.Bool) wh
 
 -- | @storage_location@ nested settings.
 data StorageLocation s = StorageLocation'
-    { _bucket :: TF.Attr s P.Text
+    { _bucket  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _key :: TF.Attr s P.Text
+    , _key     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _roleArn :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -16014,31 +16014,31 @@ instance P.HasMinLength (StringAttributeConstraints s) (TF.Attr s P.Text) where
 
 -- | @subject@ nested settings.
 data Subject s = Subject'
-    { _commonName :: TF.Attr s P.Text
+    { _commonName                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _country :: TF.Attr s P.Text
+    , _country                    :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _distinguishedNameQualifier :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _generationQualifier :: TF.Attr s P.Text
+    , _generationQualifier        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _givenName :: TF.Attr s P.Text
+    , _givenName                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _initials :: TF.Attr s P.Text
+    , _initials                   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _locality :: TF.Attr s P.Text
+    , _locality                   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _organization :: TF.Attr s P.Text
+    , _organization               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _organizationalUnit :: TF.Attr s P.Text
+    , _organizationalUnit         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _pseudonym :: TF.Attr s P.Text
+    , _pseudonym                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _state :: TF.Attr s P.Text
+    , _state                      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _surname :: TF.Attr s P.Text
+    , _surname                    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _title :: TF.Attr s P.Text
+    , _title                      :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -16149,7 +16149,7 @@ instance P.HasTitle (Subject s) (TF.Attr s P.Text) where
 data SubnetMapping s = SubnetMapping'
     { _allocationId :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _subnetId :: TF.Attr s P.Text
+    , _subnetId     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -16182,11 +16182,11 @@ instance P.HasSubnetId (SubnetMapping s) (TF.Attr s P.Text) where
 
 -- | @tag@ nested settings.
 data Tag s = Tag'
-    { _key :: TF.Attr s P.Text
+    { _key               :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _propagateAtLaunch :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _value :: TF.Attr s P.Text
+    , _value             :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -16230,7 +16230,7 @@ instance P.HasValue (Tag s) (TF.Attr s P.Text) where
 data TagSpecifications s = TagSpecifications'
     { _resourceType :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -16411,7 +16411,7 @@ instance P.HasTargetValue (TargetTrackingScalingPolicyConfiguration s) (TF.Attr 
 
 -- | @targets@ nested settings.
 data Targets s = Targets'
-    { _key :: TF.Attr s P.Text
+    { _key    :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
@@ -16447,7 +16447,7 @@ instance P.HasValues (Targets s) (TF.Attr s [TF.Attr s P.Text]) where
 
 -- | @task_parameters@ nested settings.
 data TaskParameters s = TaskParameters'
-    { _name :: TF.Attr s P.Text
+    { _name   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _values :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
@@ -16483,7 +16483,7 @@ instance P.HasValues (TaskParameters s) (TF.Attr s [TF.Attr s P.Text]) where
 
 -- | @terminate_blue_instances_on_deployment_success@ nested settings.
 data TerminateBlueInstancesOnDeploymentSuccess s = TerminateBlueInstancesOnDeploymentSuccess'
-    { _action :: TF.Attr s P.Text
+    { _action                       :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _terminationWaitTimeInMinutes :: TF.Attr s P.Integer
     -- ^ Undocumented.
@@ -16519,7 +16519,7 @@ instance P.HasTerminationWaitTimeInMinutes (TerminateBlueInstancesOnDeploymentSu
 data ThrottleSettings s = ThrottleSettings'
     { _burstLimit :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _rateLimit :: TF.Attr s P.Double
+    , _rateLimit  :: TF.Attr s P.Double
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -16579,9 +16579,9 @@ instance s ~ s' => P.HasComputedBucket (TF.Ref s' (ThumbnailConfig s)) (TF.Attr 
 
 -- | @thumbnail_config_permissions@ nested settings.
 data ThumbnailConfigPermissions s = ThumbnailConfigPermissions'
-    { _access :: TF.Attr s [TF.Attr s P.Text]
+    { _access      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _grantee :: TF.Attr s P.Text
+    , _grantee     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _granteeType :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -16622,21 +16622,21 @@ instance P.HasGranteeType (ThumbnailConfigPermissions s) (TF.Attr s P.Text) wher
 
 -- | @thumbnails@ nested settings.
 data Thumbnails s = Thumbnails'
-    { _aspectRatio :: TF.Attr s P.Text
+    { _aspectRatio   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _format :: TF.Attr s P.Text
+    , _format        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _interval :: TF.Attr s P.Text
+    , _interval      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _maxHeight :: TF.Attr s P.Text
+    , _maxHeight     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _maxWidth :: TF.Attr s P.Text
+    , _maxWidth      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _paddingPolicy :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _resolution :: TF.Attr s P.Text
+    , _resolution    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sizingPolicy :: TF.Attr s P.Text
+    , _sizingPolicy  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -16735,13 +16735,13 @@ instance P.HasAttemptDurationSeconds (Timeout s) (TF.Attr s P.Integer) where
 
 -- | @topic@ nested settings.
 data Topic s = Topic'
-    { _events :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _events       :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _filterPrefix :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _filterSuffix :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _topicArn :: TF.Attr s P.Text
+    , _topicArn     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -16809,9 +16809,9 @@ instance s ~ s' => P.HasComputedMode (TF.Ref s' (TracingConfig s)) (TF.Attr s P.
 
 -- | @transition@ nested settings.
 data Transition s = Transition'
-    { _date :: TF.Attr s P.Text
+    { _date         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _days :: TF.Attr s P.Integer
+    , _days         :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _storageClass :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -16853,15 +16853,15 @@ instance P.HasStorageClass (Transition s) (TF.Attr s P.Text) where
 
 -- | @trigger@ nested settings.
 data Trigger s = Trigger'
-    { _branches :: TF.Attr s [TF.Attr s P.Text]
+    { _branches       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customData :: TF.Attr s P.Text
+    , _customData     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _destinationArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _events :: TF.Attr s [TF.Attr s P.Text]
+    , _events         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name           :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -16917,9 +16917,9 @@ instance P.HasName (Trigger s) (TF.Attr s P.Text) where
 
 -- | @trigger_configuration@ nested settings.
 data TriggerConfiguration s = TriggerConfiguration'
-    { _triggerEvents :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _triggerEvents    :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _triggerName :: TF.Attr s P.Text
+    , _triggerName      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _triggerTargetArn :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -17017,11 +17017,11 @@ instance s ~ s' => P.HasComputedGroups (TF.Ref s' (User s)) (TF.Attr s [TF.Attr 
 data UserPoolConfig s = UserPoolConfig'
     { _appIdClientRegex :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _awsRegion :: TF.Attr s P.Text
+    , _awsRegion        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _defaultAction :: TF.Attr s P.Text
+    , _defaultAction    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _userPoolId :: TF.Attr s P.Text
+    , _userPoolId       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -17110,7 +17110,7 @@ instance s ~ s' => P.HasComputedSmsMessage (TF.Ref s' (VerificationMessageTempla
 
 -- | @versioning@ nested settings.
 data Versioning s = Versioning'
-    { _enabled :: TF.Attr s P.Bool
+    { _enabled   :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _mfaDelete :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -17173,31 +17173,31 @@ instance s ~ s' => P.HasComputedStatusMessage (TF.Ref s' (VgwTelemetry s)) (TF.A
 
 -- | @video@ nested settings.
 data Video s = Video'
-    { _aspectRatio :: TF.Attr s P.Text
+    { _aspectRatio        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _bitRate :: TF.Attr s P.Text
+    , _bitRate            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _codec :: TF.Attr s P.Text
+    , _codec              :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _displayAspectRatio :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _fixedGop :: TF.Attr s P.Text
+    , _fixedGop           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _frameRate :: TF.Attr s P.Text
+    , _frameRate          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _keyframesMaxDist :: TF.Attr s P.Text
+    , _keyframesMaxDist   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _maxFrameRate :: TF.Attr s P.Text
+    , _maxFrameRate       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _maxHeight :: TF.Attr s P.Text
+    , _maxHeight          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _maxWidth :: TF.Attr s P.Text
+    , _maxWidth           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _paddingPolicy :: TF.Attr s P.Text
+    , _paddingPolicy      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _resolution :: TF.Attr s P.Text
+    , _resolution         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sizingPolicy :: TF.Attr s P.Text
+    , _sizingPolicy       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -17306,25 +17306,25 @@ instance P.HasSizingPolicy (Video s) (TF.Attr s P.Text) where
 
 -- | @video_watermarks@ nested settings.
 data VideoWatermarks s = VideoWatermarks'
-    { _horizontalAlign :: TF.Attr s P.Text
+    { _horizontalAlign  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _horizontalOffset :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _id :: TF.Attr s P.Text
+    , _id               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _maxHeight :: TF.Attr s P.Text
+    , _maxHeight        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _maxWidth :: TF.Attr s P.Text
+    , _maxWidth         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _opacity :: TF.Attr s P.Text
+    , _opacity          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sizingPolicy :: TF.Attr s P.Text
+    , _sizingPolicy     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _target :: TF.Attr s P.Text
+    , _target           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _verticalAlign :: TF.Attr s P.Text
+    , _verticalAlign    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _verticalOffset :: TF.Attr s P.Text
+    , _verticalOffset   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -17412,15 +17412,15 @@ instance P.HasVerticalOffset (VideoWatermarks s) (TF.Attr s P.Text) where
 
 -- | @viewer_certificate@ nested settings.
 data ViewerCertificate s = ViewerCertificate'
-    { _acmCertificateArn :: TF.Attr s P.Text
+    { _acmCertificateArn            :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _cloudfrontDefaultCertificate :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _iamCertificateId :: TF.Attr s P.Text
+    , _iamCertificateId             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _minimumProtocolVersion :: TF.Attr s P.Text
+    , _minimumProtocolVersion       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sslSupportMethod :: TF.Attr s P.Text
+    , _sslSupportMethod             :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -17475,7 +17475,7 @@ instance P.HasSslSupportMethod (ViewerCertificate s) (TF.Attr s P.Text) where
 data Volume s = Volume'
     { _hostPath :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -17533,7 +17533,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcConfig s)) (TF.Attr s P.Tex
 data VpcOptions s = VpcOptions'
     { _securityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _subnetIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _subnetIds        :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -17573,7 +17573,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcOptions s)) (TF.Attr s P.Te
 data VpcSettings s = VpcSettings'
     { _subnetIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -17607,13 +17607,13 @@ instance P.HasVpcId (VpcSettings s) (TF.Attr s P.Text) where
 
 -- | @website@ nested settings.
 data Website s = Website'
-    { _errorDocument :: TF.Attr s P.Text
+    { _errorDocument         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _indexDocument :: TF.Attr s P.Text
+    , _indexDocument         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _redirectAllRequestsTo :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _routingRules :: TF.Attr s P.Text
+    , _routingRules          :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -17687,9 +17687,9 @@ instance P.HasWeight (WeightedRoutingPolicy s) (TF.Attr s P.Integer) where
 data WorkmailAction s = WorkmailAction'
     { _organizationArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _position :: TF.Attr s P.Integer
+    , _position        :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _topicArn :: TF.Attr s P.Text
+    , _topicArn        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -17732,7 +17732,7 @@ instance P.HasTopicArn (WorkmailAction s) (TF.Attr s P.Text) where
 data XmlClassifier s = XmlClassifier'
     { _classification :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _rowTag :: TF.Attr s P.Text
+    , _rowTag         :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -17766,7 +17766,7 @@ instance P.HasRowTag (XmlClassifier s) (TF.Attr s P.Text) where
 
 -- | @xss_match_tuple@ nested settings.
 data XssMatchTuple s = XssMatchTuple'
-    { _fieldToMatch :: TF.Attr s (TF.Attr s (FieldToMatch s))
+    { _fieldToMatch       :: TF.Attr s (TF.Attr s (FieldToMatch s))
     -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -17802,7 +17802,7 @@ instance P.HasTextTransformation (XssMatchTuple s) (TF.Attr s P.Text) where
 
 -- | @xss_match_tuples@ nested settings.
 data XssMatchTuples s = XssMatchTuples'
-    { _fieldToMatch :: TF.Attr s (TF.Attr s (FieldToMatch s))
+    { _fieldToMatch       :: TF.Attr s (TF.Attr s (FieldToMatch s))
     -- ^ Undocumented.
     , _textTransformation :: TF.Attr s P.Text
     -- ^ Undocumented.

@@ -346,28 +346,28 @@ import GHC.Base (($))
 
 import Terrafomo.AWS.Settings
 
-import qualified Data.HashMap.Strict as P
-import qualified Data.Hashable as P
-import qualified Data.List.NonEmpty as P
-import qualified Data.Text as P
-import qualified GHC.Generics as P
-import qualified Lens.Micro as P
-import qualified Prelude as P
-import qualified Terrafomo.AWS.Lens as P
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Terrafomo.AWS.Types as P
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Schema as TF
+import qualified Terrafomo.AWS.Types    as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Schema       as TF
 
 -- | @aws_load_balancer_backend_server_policy@ Resource.
 data LoadBalancerBackendServerPolicyResource s = LoadBalancerBackendServerPolicyResource'
-    { _instancePort :: TF.Attr s P.Integer
+    { _instancePort     :: TF.Attr s P.Integer
     -- ^ Undocumented.
     , _loadBalancerName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _policyNames :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _policyNames      :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -411,7 +411,7 @@ data LoadBalancerListenerPolicyResource s = LoadBalancerListenerPolicyResource'
     -- ^ Undocumented.
     , _loadBalancerPort :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _policyNames :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _policyNames      :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -453,11 +453,11 @@ instance P.HasPolicyNames (LoadBalancerListenerPolicyResource s) (TF.Attr s [TF.
 data LoadBalancerPolicyResource s = LoadBalancerPolicyResource'
     { _loadBalancerName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _policyAttribute :: TF.Attr s [TF.Attr s (PolicyAttribute s)]
+    , _policyAttribute  :: TF.Attr s [TF.Attr s (PolicyAttribute s)]
     -- ^ Undocumented.
-    , _policyName :: TF.Attr s P.Text
+    , _policyName       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _policyTypeName :: TF.Attr s P.Text
+    , _policyTypeName   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -530,11 +530,11 @@ instance P.HasMemberAccountId (MacieMemberAccountAssociationResource s) (TF.Attr
 
 -- | @aws_macie_s3_bucket_association@ Resource.
 data MacieS3BucketAssociationResource s = MacieS3BucketAssociationResource'
-    { _bucketName :: TF.Attr s P.Text
+    { _bucketName      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _memberAccountId :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _prefix :: TF.Attr s P.Text
+    , _prefix          :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -578,7 +578,7 @@ instance s ~ s' => P.HasComputedClassificationType (TF.Ref s' (MacieS3BucketAsso
 data MainRouteTableAssociationResource s = MainRouteTableAssociationResource'
     { _routeTableId :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -647,7 +647,7 @@ instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (MediaStoreContainerResource
 data MediaStoreContainerPolicyResource s = MediaStoreContainerPolicyResource'
     { _containerName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _policy :: TF.Attr s P.Text
+    , _policy        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -680,25 +680,25 @@ instance P.HasPolicy (MediaStoreContainerPolicyResource s) (TF.Attr s P.Text) wh
 
 -- | @aws_mq_broker@ Resource.
 data MqBrokerResource s = MqBrokerResource'
-    { _applyImmediately :: TF.Attr s P.Bool
+    { _applyImmediately        :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _autoMinorVersionUpgrade :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _brokerName :: TF.Attr s P.Text
+    , _brokerName              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _deploymentMode :: TF.Attr s P.Text
+    , _deploymentMode          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _engineType :: TF.Attr s P.Text
+    , _engineType              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _engineVersion :: TF.Attr s P.Text
+    , _engineVersion           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _hostInstanceType :: TF.Attr s P.Text
+    , _hostInstanceType        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _publiclyAccessible :: TF.Attr s P.Bool
+    , _publiclyAccessible      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _securityGroups :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _securityGroups          :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _user :: TF.Attr s [TF.Attr s (User s)]
+    , _user                    :: TF.Attr s [TF.Attr s (User s)]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -806,15 +806,15 @@ instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (MqBrokerResource s)) (TF.A
 
 -- | @aws_mq_configuration@ Resource.
 data MqConfigurationResource s = MqConfigurationResource'
-    { _data' :: TF.Attr s P.Text
+    { _data'         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _engineType :: TF.Attr s P.Text
+    , _engineType    :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _engineVersion :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name          :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -878,9 +878,9 @@ instance s ~ s' => P.HasComputedLatestRevision (TF.Ref s' (MqConfigurationResour
 data NatGatewayResource s = NatGatewayResource'
     { _allocationId :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _subnetId :: TF.Attr s P.Text
+    , _subnetId     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1245,11 +1245,11 @@ instance s ~ s' => P.HasComputedWriter (TF.Ref s' (NeptuneClusterInstanceResourc
 data NeptuneClusterParameterGroupResource s = NeptuneClusterParameterGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _family' :: TF.Attr s P.Text
+    , _family'     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _parameter :: TF.Attr s [TF.Attr s (Parameter s)]
+    , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1304,17 +1304,17 @@ instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (NeptuneClusterParameterGr
 
 -- | @aws_neptune_event_subscription@ Resource.
 data NeptuneEventSubscriptionResource s = NeptuneEventSubscriptionResource'
-    { _enabled :: TF.Attr s P.Bool
+    { _enabled         :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _eventCategories :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _snsTopicArn :: TF.Attr s P.Text
+    , _snsTopicArn     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sourceIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _sourceIds       :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _sourceType :: TF.Attr s P.Text
+    , _sourceType      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1388,13 +1388,13 @@ instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (NeptuneEventSubscriptionR
 data NeptuneParameterGroupResource s = NeptuneParameterGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _family' :: TF.Attr s P.Text
+    , _family'     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _parameter :: TF.Attr s [TF.Attr s (Parameter s)]
+    , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1453,9 +1453,9 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (NeptuneParameterGroupResource s)
 data NeptuneSubnetGroupResource s = NeptuneSubnetGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _subnetIds :: TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text)))
+    , _subnetIds   :: TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text)))
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1505,9 +1505,9 @@ instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (NeptuneSubnetGroupResourc
 data NetworkAclResource s = NetworkAclResource'
     { _subnetId :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1555,27 +1555,27 @@ instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (NetworkAclResource s)) (TF
 
 -- | @aws_network_acl_rule@ Resource.
 data NetworkAclRuleResource s = NetworkAclRuleResource'
-    { _cidrBlock :: TF.Attr s P.Text
+    { _cidrBlock     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _egress :: TF.Attr s P.Bool
+    , _egress        :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _fromPort :: TF.Attr s P.Integer
+    , _fromPort      :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _icmpCode :: TF.Attr s P.Text
+    , _icmpCode      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _icmpType :: TF.Attr s P.Text
+    , _icmpType      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _ipv6CidrBlock :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _networkAclId :: TF.Attr s P.Text
+    , _networkAclId  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _protocol :: TF.Attr s P.Text
+    , _protocol      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _ruleAction :: TF.Attr s P.Text
+    , _ruleAction    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _ruleNumber :: TF.Attr s P.Integer
+    , _ruleNumber    :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _toPort :: TF.Attr s P.Integer
+    , _toPort        :: TF.Attr s P.Integer
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1673,13 +1673,13 @@ instance P.HasToPort (NetworkAclRuleResource s) (TF.Attr s P.Integer) where
 
 -- | @aws_network_interface@ Resource.
 data NetworkInterfaceResource s = NetworkInterfaceResource'
-    { _description :: TF.Attr s P.Text
+    { _description     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _sourceDestCheck :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _subnetId :: TF.Attr s P.Text
+    , _subnetId        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1743,9 +1743,9 @@ instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (NetworkInterfaceResou
 
 -- | @aws_network_interface_attachment@ Resource.
 data NetworkInterfaceAttachmentResource s = NetworkInterfaceAttachmentResource'
-    { _deviceIndex :: TF.Attr s P.Integer
+    { _deviceIndex        :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _instanceId :: TF.Attr s P.Text
+    , _instanceId         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _networkInterfaceId :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -1796,7 +1796,7 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (NetworkInterfaceAttachmentRes
 data NetworkInterfaceSgAttachmentResource s = NetworkInterfaceSgAttachmentResource'
     { _networkInterfaceId :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _securityGroupId :: TF.Attr s P.Text
+    , _securityGroupId    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1829,35 +1829,35 @@ instance P.HasSecurityGroupId (NetworkInterfaceSgAttachmentResource s) (TF.Attr 
 
 -- | @aws_opsworks_application@ Resource.
 data OpsworksApplicationResource s = OpsworksApplicationResource'
-    { _autoBundleOnDeploy :: TF.Attr s P.Text
+    { _autoBundleOnDeploy     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _awsFlowRubySettings :: TF.Attr s P.Text
+    , _awsFlowRubySettings    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _dataSourceArn :: TF.Attr s P.Text
+    , _dataSourceArn          :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _dataSourceDatabaseName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _dataSourceType :: TF.Attr s P.Text
+    , _dataSourceType         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _documentRoot :: TF.Attr s P.Text
+    , _documentRoot           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _domains :: TF.Attr s [TF.Attr s P.Text]
+    , _domains                :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _enableSsl :: TF.Attr s P.Bool
+    , _enableSsl              :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _environment :: TF.Attr s [TF.Attr s (Environment s)]
+    , _environment            :: TF.Attr s [TF.Attr s (Environment s)]
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _railsEnv :: TF.Attr s P.Text
+    , _railsEnv               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sslConfiguration :: TF.Attr s [SslConfiguration s]
+    , _sslConfiguration       :: TF.Attr s [SslConfiguration s]
     -- ^ Undocumented.
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'                  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1988,45 +1988,45 @@ instance s ~ s' => P.HasComputedShortName (TF.Ref s' (OpsworksApplicationResourc
 
 -- | @aws_opsworks_custom_layer@ Resource.
 data OpsworksCustomLayerResource s = OpsworksCustomLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ Undocumented.
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _shortName :: TF.Attr s P.Text
+    , _shortName                :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _systemPackages :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -2195,51 +2195,51 @@ instance P.HasUseEbsOptimizedInstances (OpsworksCustomLayerResource s) (TF.Attr 
 
 -- | @aws_opsworks_ganglia_layer@ Resource.
 data OpsworksGangliaLayerResource s = OpsworksGangliaLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ Undocumented.
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _password :: TF.Attr s P.Text
+    , _password                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _systemPackages :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _url :: TF.Attr s P.Text
+    , _url                      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _username :: TF.Attr s P.Text
+    , _username                 :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2419,55 +2419,55 @@ instance P.HasUsername (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
 
 -- | @aws_opsworks_haproxy_layer@ Resource.
 data OpsworksHaproxyLayerResource s = OpsworksHaproxyLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ Undocumented.
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _healthcheckMethod :: TF.Attr s P.Text
+    , _healthcheckMethod        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _healthcheckUrl :: TF.Attr s P.Text
+    , _healthcheckUrl           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _statsEnabled :: TF.Attr s P.Bool
+    , _statsEnabled             :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _statsPassword :: TF.Attr s P.Text
+    , _statsPassword            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _statsUrl :: TF.Attr s P.Text
+    , _statsUrl                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _statsUser :: TF.Attr s P.Text
+    , _statsUser                :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _systemPackages :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -2670,27 +2670,27 @@ instance P.HasUseEbsOptimizedInstances (OpsworksHaproxyLayerResource s) (TF.Attr
 
 -- | @aws_opsworks_instance@ Resource.
 data OpsworksInstanceResource s = OpsworksInstanceResource'
-    { _agentVersion :: TF.Attr s P.Text
+    { _agentVersion         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _architecture :: TF.Attr s P.Text
+    , _architecture         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _autoScalingType :: TF.Attr s P.Text
+    , _autoScalingType      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _deleteEbs :: TF.Attr s P.Bool
+    , _deleteEbs            :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _deleteEip :: TF.Attr s P.Bool
+    , _deleteEip            :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _ebsOptimized :: TF.Attr s P.Bool
+    , _ebsOptimized         :: TF.Attr s P.Bool
     -- ^ Undocumented.
     , _installUpdatesOnBoot :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _instanceType :: TF.Attr s P.Text
+    , _instanceType         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _layerIds :: TF.Attr s [TF.Attr s P.Text]
+    , _layerIds             :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _stackId :: TF.Attr s P.Text
+    , _stackId              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _state :: TF.Attr s P.Text
+    , _state                :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2888,53 +2888,53 @@ instance s ~ s' => P.HasComputedVirtualizationType (TF.Ref s' (OpsworksInstanceR
 
 -- | @aws_opsworks_java_app_layer@ Resource.
 data OpsworksJavaAppLayerResource s = OpsworksJavaAppLayerResource'
-    { _appServer :: TF.Attr s P.Text
+    { _appServer                :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _appServerVersion :: TF.Attr s P.Text
+    , _appServerVersion         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _autoAssignElasticIps :: TF.Attr s P.Bool
+    , _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ Undocumented.
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _jvmOptions :: TF.Attr s P.Text
+    , _jvmOptions               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _jvmType :: TF.Attr s P.Text
+    , _jvmType                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _jvmVersion :: TF.Attr s P.Text
+    , _jvmVersion               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _systemPackages :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -3129,45 +3129,45 @@ instance P.HasUseEbsOptimizedInstances (OpsworksJavaAppLayerResource s) (TF.Attr
 
 -- | @aws_opsworks_memcached_layer@ Resource.
 data OpsworksMemcachedLayerResource s = OpsworksMemcachedLayerResource'
-    { _allocatedMemory :: TF.Attr s P.Integer
+    { _allocatedMemory          :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _autoAssignElasticIps :: TF.Attr s P.Bool
+    , _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ Undocumented.
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _systemPackages :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -3334,49 +3334,49 @@ instance P.HasUseEbsOptimizedInstances (OpsworksMemcachedLayerResource s) (TF.At
 
 -- | @aws_opsworks_mysql_layer@ Resource.
 data OpsworksMysqlLayerResource s = OpsworksMysqlLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps        :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing                :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customInstanceProfileArn :: TF.Attr s P.Text
+    , _customInstanceProfileArn   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customJson :: TF.Attr s P.Text
+    , _customJson                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _customSecurityGroupIds     :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown         :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                  :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ Undocumented.
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout    :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _rootPassword :: TF.Attr s P.Text
+    , _rootPassword               :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _rootPasswordOnAllInstances :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _systemPackages :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _systemPackages             :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _useEbsOptimizedInstances :: TF.Attr s P.Bool
+    , _useEbsOptimizedInstances   :: TF.Attr s P.Bool
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3548,45 +3548,45 @@ instance P.HasUseEbsOptimizedInstances (OpsworksMysqlLayerResource s) (TF.Attr s
 
 -- | @aws_opsworks_nodejs_app_layer@ Resource.
 data OpsworksNodejsAppLayerResource s = OpsworksNodejsAppLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ Undocumented.
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _nodejsVersion :: TF.Attr s P.Text
+    , _nodejsVersion            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _systemPackages :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -3790,43 +3790,43 @@ instance s ~ s' => P.HasComputedStackId (TF.Ref s' (OpsworksPermissionResource s
 
 -- | @aws_opsworks_php_app_layer@ Resource.
 data OpsworksPhpAppLayerResource s = OpsworksPhpAppLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ Undocumented.
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _systemPackages :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -3986,55 +3986,55 @@ instance P.HasUseEbsOptimizedInstances (OpsworksPhpAppLayerResource s) (TF.Attr 
 
 -- | @aws_opsworks_rails_app_layer@ Resource.
 data OpsworksRailsAppLayerResource s = OpsworksRailsAppLayerResource'
-    { _appServer :: TF.Attr s P.Text
+    { _appServer                :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _autoAssignElasticIps :: TF.Attr s P.Bool
+    , _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _bundlerVersion :: TF.Attr s P.Text
+    , _bundlerVersion           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ Undocumented.
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _manageBundler :: TF.Attr s P.Bool
+    , _manageBundler            :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _passengerVersion :: TF.Attr s P.Text
+    , _passengerVersion         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _rubyVersion :: TF.Attr s P.Text
+    , _rubyVersion              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _rubygemsVersion :: TF.Attr s P.Text
+    , _rubygemsVersion          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _systemPackages :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -4236,13 +4236,13 @@ instance P.HasUseEbsOptimizedInstances (OpsworksRailsAppLayerResource s) (TF.Att
 
 -- | @aws_opsworks_rds_db_instance@ Resource.
 data OpsworksRdsDbInstanceResource s = OpsworksRdsDbInstanceResource'
-    { _dbPassword :: TF.Attr s P.Text
+    { _dbPassword       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _dbUser :: TF.Attr s P.Text
+    , _dbUser           :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _rdsDbInstanceArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _stackId :: TF.Attr s P.Text
+    , _stackId          :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4484,43 +4484,43 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (OpsworksStackResource s)) (TF.
 
 -- | @aws_opsworks_static_web_layer@ Resource.
 data OpsworksStaticWebLayerResource s = OpsworksStaticWebLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ Undocumented.
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _systemPackages :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -4682,11 +4682,11 @@ instance P.HasUseEbsOptimizedInstances (OpsworksStaticWebLayerResource s) (TF.At
 data OpsworksUserProfileResource s = OpsworksUserProfileResource'
     { _allowSelfManagement :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _sshPublicKey :: TF.Attr s P.Text
+    , _sshPublicKey        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _sshUsername :: TF.Attr s P.Text
+    , _sshUsername         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _userArn :: TF.Attr s P.Text
+    , _userArn             :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4733,13 +4733,13 @@ instance P.HasUserArn (OpsworksUserProfileResource s) (TF.Attr s P.Text) where
 
 -- | @aws_organizations_account@ Resource.
 data OrganizationsAccountResource s = OrganizationsAccountResource'
-    { _email :: TF.Attr s P.Text
+    { _email                  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _iamUserAccessToBilling :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _roleName :: TF.Attr s P.Text
+    , _roleName               :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4834,13 +4834,13 @@ instance s ~ s' => P.HasComputedMasterAccountId (TF.Ref s' (OrganizationsOrganiz
 
 -- | @aws_organizations_policy@ Resource.
 data OrganizationsPolicyResource s = OrganizationsPolicyResource'
-    { _content :: TF.Attr s P.Text
+    { _content     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _description :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'       :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4925,7 +4925,7 @@ instance P.HasTargetId (OrganizationsPolicyAttachmentResource s) (TF.Attr s P.Te
 
 -- | @aws_placement_group@ Resource.
 data PlacementGroupResource s = PlacementGroupResource'
-    { _name :: TF.Attr s P.Text
+    { _name     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _strategy :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -4962,7 +4962,7 @@ instance P.HasStrategy (PlacementGroupResource s) (TF.Attr s P.Text) where
 data ProxyProtocolPolicyResource s = ProxyProtocolPolicyResource'
     { _instancePorts :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _loadBalancer :: TF.Attr s P.Text
+    , _loadBalancer  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5353,11 +5353,11 @@ instance s ~ s' => P.HasComputedWriter (TF.Ref s' (RdsClusterInstanceResource s)
 data RdsClusterParameterGroupResource s = RdsClusterParameterGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _family' :: TF.Attr s P.Text
+    , _family'     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _parameter :: TF.Attr s [TF.Attr s (Parameter s)]
+    , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5659,11 +5659,11 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RedshiftClusterR
 data RedshiftParameterGroupResource s = RedshiftParameterGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _family' :: TF.Attr s P.Text
+    , _family'     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _parameter :: TF.Attr s [TF.Attr s (Parameter s)]
+    , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5712,9 +5712,9 @@ instance P.HasParameter (RedshiftParameterGroupResource s) (TF.Attr s [TF.Attr s
 data RedshiftSecurityGroupResource s = RedshiftSecurityGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _ingress :: TF.Attr s [TF.Attr s (Ingress s)]
+    , _ingress     :: TF.Attr s [TF.Attr s (Ingress s)]
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5756,11 +5756,11 @@ instance P.HasName (RedshiftSecurityGroupResource s) (TF.Attr s P.Text) where
 data RedshiftSubnetGroupResource s = RedshiftSubnetGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _subnetIds :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _subnetIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5807,13 +5807,13 @@ instance P.HasTags (RedshiftSubnetGroupResource s) (TF.Attr s (P.HashMap P.Text 
 
 -- | @aws_route@ Resource.
 data RouteResource s = RouteResource'
-    { _destinationCidrBlock :: TF.Attr s P.Text
+    { _destinationCidrBlock     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _destinationIpv6CidrBlock :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _routeTableId :: TF.Attr s P.Text
+    , _routeTableId             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _vpcPeeringConnectionId :: TF.Attr s P.Text
+    , _vpcPeeringConnectionId   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6096,7 +6096,7 @@ instance s ~ s' => P.HasComputedEnableSni (TF.Ref s' (Route53HealthCheckResource
 data Route53QueryLogResource s = Route53QueryLogResource'
     { _cloudwatchLogGroupArn :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _zoneId :: TF.Attr s P.Text
+    , _zoneId                :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6129,37 +6129,37 @@ instance P.HasZoneId (Route53QueryLogResource s) (TF.Attr s P.Text) where
 
 -- | @aws_route53_record@ Resource.
 data Route53RecordResource s = Route53RecordResource'
-    { _alias :: TF.Attr s [TF.Attr s (Alias s)]
+    { _alias                         :: TF.Attr s [TF.Attr s (Alias s)]
     -- ^ Undocumented.
-    , _allowOverwrite :: TF.Attr s P.Bool
+    , _allowOverwrite                :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _failover :: TF.Attr s P.Text
+    , _failover                      :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _failoverRoutingPolicy :: TF.Attr s [FailoverRoutingPolicy s]
+    , _failoverRoutingPolicy         :: TF.Attr s [FailoverRoutingPolicy s]
     -- ^ Undocumented.
-    , _geolocationRoutingPolicy :: TF.Attr s [GeolocationRoutingPolicy s]
+    , _geolocationRoutingPolicy      :: TF.Attr s [GeolocationRoutingPolicy s]
     -- ^ Undocumented.
-    , _healthCheckId :: TF.Attr s P.Text
+    , _healthCheckId                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _latencyRoutingPolicy :: TF.Attr s [LatencyRoutingPolicy s]
+    , _latencyRoutingPolicy          :: TF.Attr s [LatencyRoutingPolicy s]
     -- ^ Undocumented.
     , _multivalueAnswerRoutingPolicy :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _records :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _records                       :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _setIdentifier :: TF.Attr s P.Text
+    , _setIdentifier                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _ttl :: TF.Attr s P.Integer
+    , _ttl                           :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'                         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _weight :: TF.Attr s P.Integer
+    , _weight                        :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _weightedRoutingPolicy :: TF.Attr s [WeightedRoutingPolicy s]
+    , _weightedRoutingPolicy         :: TF.Attr s [WeightedRoutingPolicy s]
     -- ^ Undocumented.
-    , _zoneId :: TF.Attr s P.Text
+    , _zoneId                        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6294,17 +6294,17 @@ instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (Route53RecordResource s)) (TF.A
 
 -- | @aws_route53_zone@ Resource.
 data Route53ZoneResource s = Route53ZoneResource'
-    { _comment :: TF.Attr s P.Text
+    { _comment         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _delegationSetId :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _forceDestroy :: TF.Attr s P.Bool
+    , _forceDestroy    :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId           :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6373,7 +6373,7 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (Route53ZoneResource s)) (TF.A
 
 -- | @aws_route53_zone_association@ Resource.
 data Route53ZoneAssociationResource s = Route53ZoneAssociationResource'
-    { _vpcId :: TF.Attr s P.Text
+    { _vpcId  :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _zoneId :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -6411,7 +6411,7 @@ instance s ~ s' => P.HasComputedVpcRegion (TF.Ref s' (Route53ZoneAssociationReso
 
 -- | @aws_route_table@ Resource.
 data RouteTableResource s = RouteTableResource'
-    { _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _tags  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     , _vpcId :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -6453,7 +6453,7 @@ instance s ~ s' => P.HasComputedRoute (TF.Ref s' (RouteTableResource s)) (TF.Att
 data RouteTableAssociationResource s = RouteTableAssociationResource'
     { _routeTableId :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _subnetId :: TF.Attr s P.Text
+    , _subnetId     :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6633,21 +6633,21 @@ instance s ~ s' => P.HasComputedWebsiteEndpoint (TF.Ref s' (S3BucketResource s))
 
 -- | @aws_s3_bucket_inventory@ Resource.
 data S3BucketInventoryResource s = S3BucketInventoryResource'
-    { _bucket :: TF.Attr s P.Text
+    { _bucket                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _destination :: TF.Attr s (P.NonEmpty (Destination s))
+    , _destination            :: TF.Attr s (P.NonEmpty (Destination s))
     -- ^ Undocumented.
-    , _enabled :: TF.Attr s P.Bool
+    , _enabled                :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _filter :: TF.Attr s [Filter s]
+    , _filter                 :: TF.Attr s [Filter s]
     -- ^ Undocumented.
     , _includedObjectVersions :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                   :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _optionalFields :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _optionalFields         :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ Undocumented.
-    , _schedule :: TF.Attr s (P.NonEmpty (Schedule s))
+    , _schedule               :: TF.Attr s (P.NonEmpty (Schedule s))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6729,7 +6729,7 @@ data S3BucketMetricResource s = S3BucketMetricResource'
     -- ^ Undocumented.
     , _filter :: TF.Attr s [Filter s]
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name   :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6769,13 +6769,13 @@ instance P.HasName (S3BucketMetricResource s) (TF.Attr s P.Text) where
 
 -- | @aws_s3_bucket_notification@ Resource.
 data S3BucketNotificationResource s = S3BucketNotificationResource'
-    { _bucket :: TF.Attr s P.Text
+    { _bucket         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _lambdaFunction :: TF.Attr s [LambdaFunction s]
     -- ^ Undocumented.
-    , _queue :: TF.Attr s [Queue s]
+    , _queue          :: TF.Attr s [Queue s]
     -- ^ Undocumented.
-    , _topic :: TF.Attr s [Topic s]
+    , _topic          :: TF.Attr s [Topic s]
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6821,31 +6821,31 @@ instance P.HasTopic (S3BucketNotificationResource s) (TF.Attr s [Topic s]) where
 
 -- | @aws_s3_bucket_object@ Resource.
 data S3BucketObjectResource s = S3BucketObjectResource'
-    { _acl :: TF.Attr s P.Text
+    { _acl                :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _bucket :: TF.Attr s P.Text
+    , _bucket             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _cacheControl :: TF.Attr s P.Text
+    , _cacheControl       :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _content :: TF.Attr s P.Text
+    , _content            :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _contentBase64 :: TF.Attr s P.Text
+    , _contentBase64      :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _contentDisposition :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _contentEncoding :: TF.Attr s P.Text
+    , _contentEncoding    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _contentLanguage :: TF.Attr s P.Text
+    , _contentLanguage    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _key :: TF.Attr s P.Text
+    , _key                :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _kmsKeyId :: TF.Attr s P.Text
+    , _kmsKeyId           :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _source :: TF.Attr s P.Text
+    , _source             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags               :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
-    , _websiteRedirect :: TF.Attr s P.Text
+    , _websiteRedirect    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7005,21 +7005,21 @@ instance P.HasPolicy (S3BucketPolicyResource s) (TF.Attr s P.Text) where
 
 -- | @aws_secretsmanager_secret@ Resource.
 data SecretsmanagerSecretResource s = SecretsmanagerSecretResource'
-    { _description :: TF.Attr s P.Text
+    { _description          :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _kmsKeyId :: TF.Attr s P.Text
+    , _kmsKeyId             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                 :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _policy :: TF.Attr s P.Text
+    , _policy               :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _recoveryWindowInDays :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _rotationLambdaArn :: TF.Attr s P.Text
+    , _rotationLambdaArn    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _rotationRules :: TF.Attr s [RotationRules s]
+    , _rotationRules        :: TF.Attr s [RotationRules s]
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags                 :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7099,7 +7099,7 @@ instance s ~ s' => P.HasComputedRotationEnabled (TF.Ref s' (SecretsmanagerSecret
 
 -- | @aws_secretsmanager_secret_version@ Resource.
 data SecretsmanagerSecretVersionResource s = SecretsmanagerSecretVersionResource'
-    { _secretId :: TF.Attr s P.Text
+    { _secretId     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _secretString :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -7140,13 +7140,13 @@ instance s ~ s' => P.HasComputedVersionStages (TF.Ref s' (SecretsmanagerSecretVe
 
 -- | @aws_security_group@ Resource.
 data SecurityGroupResource s = SecurityGroupResource'
-    { _description :: TF.Attr s P.Text
+    { _description         :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix          :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _revokeRulesOnDelete :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags                :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7209,25 +7209,25 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SecurityGroupResource s)) (TF.
 
 -- | @aws_security_group_rule@ Resource.
 data SecurityGroupRuleResource s = SecurityGroupRuleResource'
-    { _cidrBlocks :: TF.Attr s [TF.Attr s P.Text]
+    { _cidrBlocks      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _description :: TF.Attr s P.Text
+    , _description     :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _fromPort :: TF.Attr s P.Integer
+    , _fromPort        :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _ipv6CidrBlocks :: TF.Attr s [TF.Attr s P.Text]
+    , _ipv6CidrBlocks  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _prefixListIds :: TF.Attr s [TF.Attr s P.Text]
+    , _prefixListIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ Undocumented.
-    , _protocol :: TF.Attr s P.Text
+    , _protocol        :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _securityGroupId :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _self :: TF.Attr s P.Bool
+    , _self            :: TF.Attr s P.Bool
     -- ^ Undocumented.
-    , _toPort :: TF.Attr s P.Integer
+    , _toPort          :: TF.Attr s P.Integer
     -- ^ Undocumented.
-    , _type' :: TF.Attr s P.Text
+    , _type'           :: TF.Attr s P.Text
     -- ^ Type of rule, ingress (inbound) or egress (outbound).
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7324,9 +7324,9 @@ instance s ~ s' => P.HasComputedSourceSecurityGroupId (TF.Ref s' (SecurityGroupR
 data ServiceDiscoveryPrivateDnsNamespaceResource s = ServiceDiscoveryPrivateDnsNamespaceResource'
     { _description :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _vpc :: TF.Attr s P.Text
+    , _vpc         :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7374,7 +7374,7 @@ instance s ~ s' => P.HasComputedHostedZone (TF.Ref s' (ServiceDiscoveryPrivateDn
 data ServiceDiscoveryPublicDnsNamespaceResource s = ServiceDiscoveryPublicDnsNamespaceResource'
     { _description :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7412,15 +7412,15 @@ instance s ~ s' => P.HasComputedHostedZone (TF.Ref s' (ServiceDiscoveryPublicDns
 
 -- | @aws_service_discovery_service@ Resource.
 data ServiceDiscoveryServiceResource s = ServiceDiscoveryServiceResource'
-    { _description :: TF.Attr s P.Text
+    { _description             :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _dnsConfig :: TF.Attr s [DnsConfig s]
+    , _dnsConfig               :: TF.Attr s [DnsConfig s]
     -- ^ Undocumented.
-    , _healthCheckConfig :: TF.Attr s [HealthCheckConfig s]
+    , _healthCheckConfig       :: TF.Attr s [HealthCheckConfig s]
     -- ^ Undocumented.
     , _healthCheckCustomConfig :: TF.Attr s [HealthCheckCustomConfig s]
     -- ^ Undocumented.
-    , _name :: TF.Attr s P.Text
+    , _name                    :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7477,11 +7477,11 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (ServiceDiscoveryServiceResource 
 
 -- | @aws_servicecatalog_portfolio@ Resource.
 data ServicecatalogPortfolioResource s = ServicecatalogPortfolioResource'
-    { _name :: TF.Attr s P.Text
+    { _name         :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _providerName :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7668,9 +7668,9 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (SesDomainIdentityVerificationRes
 data SesDomainMailFromResource s = SesDomainMailFromResource'
     { _behaviorOnMxFailure :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _domain :: TF.Attr s P.Text
+    , _domain              :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _mailFromDomain :: TF.Attr s P.Text
+    , _mailFromDomain      :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 

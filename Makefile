@@ -28,7 +28,6 @@ clean: $(addsuffix -clean,$(PROVIDERS))
 format: $(STYLISH)
 	@echo -e '\nFormatting...'
 	@find \
- terrafomo/gen \
  $(wildcard provider/*/gen) \
  -type f \
  -name '*.hs' \

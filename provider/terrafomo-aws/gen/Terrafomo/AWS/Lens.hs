@@ -2524,7 +2524,7 @@ module Terrafomo.AWS.Lens
 
 import GHC.Base ((.))
 
-import qualified Lens.Micro as P
+import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
 class HasAbortIncompleteMultipartUploadDays a b | a -> b where

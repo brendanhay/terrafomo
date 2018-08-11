@@ -142,20 +142,20 @@ import GHC.Base (($))
 
 import Terrafomo.AWS.Settings
 
-import qualified Data.HashMap.Strict as P
-import qualified Data.Hashable as P
-import qualified Data.List.NonEmpty as P
-import qualified Data.Text as P
-import qualified GHC.Generics as P
-import qualified Lens.Micro as P
-import qualified Prelude as P
-import qualified Terrafomo.AWS.Lens as P
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Terrafomo.AWS.Types as P
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Schema as TF
+import qualified Terrafomo.AWS.Types    as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Schema       as TF
 
 -- | @aws_prefix_list@ DataSource.
 data PrefixListData s = PrefixListData'
@@ -189,7 +189,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (PrefixListData s)) (TF.Attr s P
 
 -- | @aws_pricing_product@ DataSource.
 data PricingProductData s = PricingProductData'
-    { _filters :: TF.Attr s (P.NonEmpty (Filters s))
+    { _filters     :: TF.Attr s (P.NonEmpty (Filters s))
     -- ^ Undocumented.
     , _serviceCode :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -329,7 +329,7 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RdsClusterData s
 data RedshiftClusterData s = RedshiftClusterData'
     { _clusterIdentifier :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags              :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -638,7 +638,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (RouteTableData s)) (TF.Attr s 
 data RouteTablesData s = RouteTablesData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ Undocumented.
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -720,9 +720,9 @@ instance s ~ s' => P.HasComputedWebsiteEndpoint (TF.Ref s' (S3BucketData s)) (TF
 data S3BucketObjectData s = S3BucketObjectData'
     { _bucket :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _key :: TF.Attr s P.Text
+    , _key    :: TF.Attr s P.Text
     -- ^ Undocumented.
-    , _range :: TF.Attr s P.Text
+    , _range  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -853,7 +853,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecretsmanagerSecretData s)) (T
 
 -- | @aws_secretsmanager_secret_version@ DataSource.
 data SecretsmanagerSecretVersionData s = SecretsmanagerSecretVersionData'
-    { _secretId :: TF.Attr s P.Text
+    { _secretId     :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _versionStage :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -1030,7 +1030,7 @@ instance s ~ s' => P.HasComputedUrl (TF.Ref s' (SqsQueueData s)) (TF.Attr s P.Te
 
 -- | @aws_ssm_parameter@ DataSource.
 data SsmParameterData s = SsmParameterData'
-    { _name :: TF.Attr s P.Text
+    { _name           :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _withDecryption :: TF.Attr s P.Bool
     -- ^ Undocumented.
@@ -1073,7 +1073,7 @@ instance s ~ s' => P.HasComputedValue (TF.Ref s' (SsmParameterData s)) (TF.Attr 
 
 -- | @aws_storagegateway_local_disk@ DataSource.
 data StoragegatewayLocalDiskData s = StoragegatewayLocalDiskData'
-    { _diskPath :: TF.Attr s P.Text
+    { _diskPath   :: TF.Attr s P.Text
     -- ^ Undocumented.
     , _gatewayArn :: TF.Attr s P.Text
     -- ^ Undocumented.
@@ -1170,7 +1170,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SubnetData s)) (TF.Attr s P.Te
 data SubnetIdsData s = SubnetIdsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ Undocumented.
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId  :: TF.Attr s P.Text
     -- ^ Undocumented.
     } deriving (P.Show, P.Eq, P.Generic)
 
