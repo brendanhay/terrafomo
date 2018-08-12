@@ -1,0 +1,436 @@
+-- This module is auto-generated.
+
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
+-- |
+-- Module      : Terrafomo.Triton.DataSource
+-- Copyright   : (c) 2017-2018 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
+module Terrafomo.Triton.DataSource
+    (
+    -- * DataSource Datatypes
+    -- ** triton_account
+      AccountData (..)
+    , accountData
+
+    -- ** triton_datacenter
+    , DatacenterData (..)
+    , datacenterData
+
+    -- ** triton_fabric_network
+    , FabricNetworkData (..)
+    , fabricNetworkData
+
+    -- ** triton_fabric_vlan
+    , FabricVlanData (..)
+    , fabricVlanData
+
+    -- ** triton_image
+    , ImageData (..)
+    , imageData
+
+    -- ** triton_network
+    , NetworkData (..)
+    , networkData
+
+    -- ** triton_package
+    , PackageData (..)
+    , packageData
+
+    ) where
+
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+
+import GHC.Base (($))
+
+import Terrafomo.Triton.Settings
+
+import qualified Data.Hashable             as P
+import qualified Data.HashMap.Strict       as P
+import qualified Data.List.NonEmpty        as P
+import qualified Data.Text                 as P
+import qualified GHC.Generics              as P
+import qualified Lens.Micro                as P
+import qualified Prelude                   as P
+import qualified Terrafomo.Attribute       as TF
+import qualified Terrafomo.HCL             as TF
+import qualified Terrafomo.Name            as TF
+import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Triton.Lens     as P
+import qualified Terrafomo.Triton.Provider as P
+import qualified Terrafomo.Triton.Types    as P
+
+-- | @triton_account@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Triton/triton_account terraform documentation>
+-- for more information.
+data AccountData s = AccountData'
+    deriving (P.Show, P.Eq, P.Generic)
+
+instance TF.IsObject (AccountData s) where
+    toObject _ = []
+
+accountData
+    :: TF.DataSource P.Provider (AccountData s)
+accountData =
+    TF.newDataSource "triton_account" $
+        AccountData'
+
+instance s ~ s' => P.HasComputedCnsEnabled (TF.Ref s' (AccountData s)) (TF.Attr s P.Bool) where
+    computedCnsEnabled x = TF.compute (TF.refKey x) "cns_enabled"
+
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
+    computedEmail x = TF.compute (TF.refKey x) "email"
+
+instance s ~ s' => P.HasComputedLogin (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
+    computedLogin x = TF.compute (TF.refKey x) "login"
+
+-- | @triton_datacenter@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Triton/triton_datacenter terraform documentation>
+-- for more information.
+data DatacenterData s = DatacenterData'
+    deriving (P.Show, P.Eq, P.Generic)
+
+instance TF.IsObject (DatacenterData s) where
+    toObject _ = []
+
+datacenterData
+    :: TF.DataSource P.Provider (DatacenterData s)
+datacenterData =
+    TF.newDataSource "triton_datacenter" $
+        DatacenterData'
+
+instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
+    computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+-- | @triton_fabric_network@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Triton/triton_fabric_network terraform documentation>
+-- for more information.
+data FabricNetworkData s = FabricNetworkData'
+    { _name   :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _vlanId :: TF.Attr s P.Integer
+    -- ^ @vlan_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+instance TF.IsObject (FabricNetworkData s) where
+    toObject FabricNetworkData'{..} = catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "vlan_id" <$> TF.attribute _vlanId
+        ]
+
+fabricNetworkData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Integer -- ^ @vlan_id@ - 'P.vlanId'
+    -> TF.DataSource P.Provider (FabricNetworkData s)
+fabricNetworkData _name _vlanId =
+    TF.newDataSource "triton_fabric_network" $
+        FabricNetworkData'
+            { _name = _name
+            , _vlanId = _vlanId
+            }
+
+instance P.HasName (FabricNetworkData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: FabricNetworkData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a
+                          } :: FabricNetworkData s)
+
+instance P.HasVlanId (FabricNetworkData s) (TF.Attr s P.Integer) where
+    vlanId =
+        P.lens (_vlanId :: FabricNetworkData s -> TF.Attr s P.Integer)
+               (\s a -> s { _vlanId = a
+                          } :: FabricNetworkData s)
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedFabric (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Bool) where
+    computedFabric x = TF.compute (TF.refKey x) "fabric"
+
+instance s ~ s' => P.HasComputedGateway (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedGateway x = TF.compute (TF.refKey x) "gateway"
+
+instance s ~ s' => P.HasComputedInternetNat (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Bool) where
+    computedInternetNat x = TF.compute (TF.refKey x) "internet_nat"
+
+instance s ~ s' => P.HasComputedProvisionEndIp (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedProvisionEndIp x = TF.compute (TF.refKey x) "provision_end_ip"
+
+instance s ~ s' => P.HasComputedProvisionStartIp (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedProvisionStartIp x = TF.compute (TF.refKey x) "provision_start_ip"
+
+instance s ~ s' => P.HasComputedPublic (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Bool) where
+    computedPublic x = TF.compute (TF.refKey x) "public"
+
+instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (FabricNetworkData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedResolvers x = TF.compute (TF.refKey x) "resolvers"
+
+instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (FabricNetworkData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedRoutes x = TF.compute (TF.refKey x) "routes"
+
+instance s ~ s' => P.HasComputedSubnet (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
+    computedSubnet x = TF.compute (TF.refKey x) "subnet"
+
+-- | @triton_fabric_vlan@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Triton/triton_fabric_vlan terraform documentation>
+-- for more information.
+data FabricVlanData s = FabricVlanData'
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _vlanId      :: TF.Attr s P.Integer
+    -- ^ @vlan_id@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+instance TF.IsObject (FabricVlanData s) where
+    toObject FabricVlanData'{..} = catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "vlan_id" <$> TF.attribute _vlanId
+        ]
+
+fabricVlanData
+    :: TF.DataSource P.Provider (FabricVlanData s)
+fabricVlanData =
+    TF.newDataSource "triton_fabric_vlan" $
+        FabricVlanData'
+            { _description = TF.Nil
+            , _name = TF.Nil
+            , _vlanId = TF.Nil
+            }
+
+instance P.HasDescription (FabricVlanData s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: FabricVlanData s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a
+                          } :: FabricVlanData s)
+
+instance P.HasName (FabricVlanData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: FabricVlanData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a
+                          } :: FabricVlanData s)
+
+instance P.HasVlanId (FabricVlanData s) (TF.Attr s P.Integer) where
+    vlanId =
+        P.lens (_vlanId :: FabricVlanData s -> TF.Attr s P.Integer)
+               (\s a -> s { _vlanId = a
+                          } :: FabricVlanData s)
+
+-- | @triton_image@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Triton/triton_image terraform documentation>
+-- for more information.
+data ImageData s = ImageData'
+    { _mostRecent :: TF.Attr s P.Bool
+    -- ^ @most_recent@ - (Optional)
+    --
+    , _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _os         :: TF.Attr s P.Text
+    -- ^ @os@ - (Optional)
+    --
+    , _owner      :: TF.Attr s P.Text
+    -- ^ @owner@ - (Optional)
+    --
+    , _public     :: TF.Attr s P.Bool
+    -- ^ @public@ - (Optional)
+    --
+    , _state      :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    --
+    , _type'      :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional)
+    --
+    , _version    :: TF.Attr s P.Text
+    -- ^ @version@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+instance TF.IsObject (ImageData s) where
+    toObject ImageData'{..} = catMaybes
+        [ TF.assign "most_recent" <$> TF.attribute _mostRecent
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "os" <$> TF.attribute _os
+        , TF.assign "owner" <$> TF.attribute _owner
+        , TF.assign "public" <$> TF.attribute _public
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "version" <$> TF.attribute _version
+        ]
+
+imageData
+    :: TF.DataSource P.Provider (ImageData s)
+imageData =
+    TF.newDataSource "triton_image" $
+        ImageData'
+            { _mostRecent = TF.value P.False
+            , _name = TF.Nil
+            , _os = TF.Nil
+            , _owner = TF.Nil
+            , _public = TF.Nil
+            , _state = TF.Nil
+            , _type' = TF.Nil
+            , _version = TF.Nil
+            }
+
+instance P.HasMostRecent (ImageData s) (TF.Attr s P.Bool) where
+    mostRecent =
+        P.lens (_mostRecent :: ImageData s -> TF.Attr s P.Bool)
+               (\s a -> s { _mostRecent = a
+                          } :: ImageData s)
+
+instance P.HasName (ImageData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a
+                          } :: ImageData s)
+
+instance P.HasOs (ImageData s) (TF.Attr s P.Text) where
+    os =
+        P.lens (_os :: ImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _os = a
+                          } :: ImageData s)
+
+instance P.HasOwner (ImageData s) (TF.Attr s P.Text) where
+    owner =
+        P.lens (_owner :: ImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _owner = a
+                          } :: ImageData s)
+
+instance P.HasPublic (ImageData s) (TF.Attr s P.Bool) where
+    public =
+        P.lens (_public :: ImageData s -> TF.Attr s P.Bool)
+               (\s a -> s { _public = a
+                          } :: ImageData s)
+
+instance P.HasState (ImageData s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: ImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a
+                          } :: ImageData s)
+
+instance P.HasType' (ImageData s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: ImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a
+                          } :: ImageData s)
+
+instance P.HasVersion (ImageData s) (TF.Attr s P.Text) where
+    version =
+        P.lens (_version :: ImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a
+                          } :: ImageData s)
+
+-- | @triton_network@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Triton/triton_network terraform documentation>
+-- for more information.
+data NetworkData s = NetworkData'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+instance TF.IsObject (NetworkData s) where
+    toObject NetworkData'{..} = catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+networkData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (NetworkData s)
+networkData _name =
+    TF.newDataSource "triton_network" $
+        NetworkData'
+            { _name = _name
+            }
+
+instance P.HasName (NetworkData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NetworkData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a
+                          } :: NetworkData s)
+
+instance s ~ s' => P.HasComputedFabric (TF.Ref s' (NetworkData s)) (TF.Attr s P.Bool) where
+    computedFabric x = TF.compute (TF.refKey x) "fabric"
+
+instance s ~ s' => P.HasComputedPublic (TF.Ref s' (NetworkData s)) (TF.Attr s P.Bool) where
+    computedPublic x = TF.compute (TF.refKey x) "public"
+
+-- | @triton_package@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Triton/triton_package terraform documentation>
+-- for more information.
+data PackageData s = PackageData'
+    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    -- ^ @filter@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+instance TF.IsObject (PackageData s) where
+    toObject PackageData'{..} = catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        ]
+
+packageData
+    :: TF.Attr s [TF.Attr s (Filter s)] -- ^ @filter@ - 'P.filter'
+    -> TF.DataSource P.Provider (PackageData s)
+packageData _filter =
+    TF.newDataSource "triton_package" $
+        PackageData'
+            { _filter = _filter
+            }
+
+instance P.HasFilter (PackageData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+    filter =
+        P.lens (_filter :: PackageData s -> TF.Attr s [TF.Attr s (Filter s)])
+               (\s a -> s { _filter = a
+                          } :: PackageData s)
+
+instance s ~ s' => P.HasComputedDisk (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
+    computedDisk x = TF.compute (TF.refKey x) "disk"
+
+instance s ~ s' => P.HasComputedGroup (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where
+    computedGroup x = TF.compute (TF.refKey x) "group"
+
+instance s ~ s' => P.HasComputedLwps (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
+    computedLwps x = TF.compute (TF.refKey x) "lwps"
+
+instance s ~ s' => P.HasComputedMemory (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
+    computedMemory x = TF.compute (TF.refKey x) "memory"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedSwap (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
+    computedSwap x = TF.compute (TF.refKey x) "swap"
+
+instance s ~ s' => P.HasComputedVcpus (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
+    computedVcpus x = TF.compute (TF.refKey x) "vcpus"
+
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
