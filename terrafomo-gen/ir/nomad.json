@@ -1,0 +1,972 @@
+{
+    "settings": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cpu\" <$> TF.attribute",
+                    "name": "cpu",
+                    "method": "cpu",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasCpu",
+                    "optional": true,
+                    "label": "_cpu"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"memory_mb\" <$> TF.attribute",
+                    "name": "memory_mb",
+                    "method": "memoryMb",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMemoryMb",
+                    "optional": true,
+                    "label": "_memoryMb"
+                }
+            ],
+            "name": "RegionLimit",
+            "attributes": [],
+            "parameters": [],
+            "hashable": false,
+            "type": "RegionLimit s",
+            "original": "region_limit"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_region",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Region in which this limit has affect."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"region\" <$> TF.attribute",
+                    "name": "region",
+                    "method": "region",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRegion",
+                    "optional": false,
+                    "label": "_region"
+                },
+                {
+                    "default": "_regionLimit",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The limit applied to this region."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"region_limit\" <$> TF.attribute",
+                    "name": "region_limit",
+                    "method": "regionLimit",
+                    "conflicts": [],
+                    "type": "TF.Attr s (TF.Attr s (RegionLimit s))",
+                    "class": "HasRegionLimit",
+                    "optional": false,
+                    "label": "_regionLimit"
+                }
+            ],
+            "name": "Limits",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_region",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Region in which this limit has affect."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"region\" <$> TF.attribute",
+                    "name": "region",
+                    "method": "region",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRegion",
+                    "optional": false,
+                    "label": "_region"
+                },
+                {
+                    "default": "_regionLimit",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The limit applied to this region."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"region_limit\" <$> TF.attribute",
+                    "name": "region_limit",
+                    "method": "regionLimit",
+                    "conflicts": [],
+                    "type": "TF.Attr s (TF.Attr s (RegionLimit s))",
+                    "class": "HasRegionLimit",
+                    "optional": false,
+                    "label": "_regionLimit"
+                }
+            ],
+            "hashable": false,
+            "type": "Limits s",
+            "original": "limits"
+        }
+    ],
+    "arguments": [
+        {
+            "default": "_address",
+            "computed": false,
+            "required": true,
+            "help": [
+                "URL of the root of the target Nomad agent."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"address\"",
+            "name": "address",
+            "method": "address",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasAddress",
+            "optional": false,
+            "label": "_address"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "A path to a PEM-encoded certificate authority used to verify the remote",
+                "agent's certificate."
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"ca_file\" <$>",
+            "name": "ca_file",
+            "method": "caFile",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasCaFile",
+            "optional": true,
+            "label": "_caFile"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "A path to a PEM-encoded certificate provided to the remote agent; requires",
+                "use of key_file."
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"cert_file\" <$>",
+            "name": "cert_file",
+            "method": "certFile",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasCertFile",
+            "optional": true,
+            "label": "_certFile"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "A path to a PEM-encoded private key, required if cert_file is specified."
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"key_file\" <$>",
+            "name": "key_file",
+            "method": "keyFile",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasKeyFile",
+            "optional": true,
+            "label": "_keyFile"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "Region of the target Nomad agent."
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"region\" <$>",
+            "name": "region",
+            "method": "region",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasRegion",
+            "optional": true,
+            "label": "_region"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "ACL token secret for API requests."
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"secret_id\" <$>",
+            "name": "secret_id",
+            "method": "secretId",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasSecretId",
+            "optional": true,
+            "label": "_secretId"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "Vault token if policies are specified in the job file."
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"vault_token\" <$>",
+            "name": "vault_token",
+            "method": "vaultToken",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasVaultToken",
+            "optional": true,
+            "label": "_vaultToken"
+        }
+    ],
+    "dataSources": [
+        {
+            "arguments": [],
+            "schema": "DataSource",
+            "name": "RegionsData",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"regions\" <$> TF.attribute",
+                    "name": "regions",
+                    "method": "computedRegions",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedRegions",
+                    "optional": false,
+                    "label": "_computedRegions"
+                }
+            ],
+            "parameters": [],
+            "type": "RegionsData s",
+            "original": "nomad_regions"
+        }
+    ],
+    "resources": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Description for this policy."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name for this policy."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_rulesHcl",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "HCL or JSON representation of the rules to enforce on this policy. Use",
+                        "file() to specify a file as input."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rules_hcl\" <$> TF.attribute",
+                    "name": "rules_hcl",
+                    "method": "rulesHcl",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRulesHcl",
+                    "optional": false,
+                    "label": "_rulesHcl"
+                }
+            ],
+            "schema": "Resource",
+            "name": "AclPolicyResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name for this policy."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_rulesHcl",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "HCL or JSON representation of the rules to enforce on this policy. Use",
+                        "file() to specify a file as input."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rules_hcl\" <$> TF.attribute",
+                    "name": "rules_hcl",
+                    "method": "rulesHcl",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRulesHcl",
+                    "optional": false,
+                    "label": "_rulesHcl"
+                }
+            ],
+            "type": "AclPolicyResource s",
+            "original": "nomad_acl_policy"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Whether the token should be replicated to all regions or not."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"global\" <$> TF.attribute",
+                    "name": "global",
+                    "method": "global",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasGlobal",
+                    "optional": true,
+                    "label": "_global"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Human-readable name for this token."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": true,
+                    "label": "_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The ACL policies to associate with the token, if it's a 'client' type."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"policies\" <$> TF.attribute",
+                    "name": "policies",
+                    "method": "policies",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "class": "HasPolicies",
+                    "optional": true,
+                    "label": "_policies"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The type of token to create, 'client' or 'management'."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "type",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "optional": false,
+                    "label": "_type'"
+                }
+            ],
+            "schema": "Resource",
+            "name": "AclTokenResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Nomad-generated ID for this token."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"accessor_id\" <$> TF.attribute",
+                    "name": "accessor_id",
+                    "method": "computedAccessorId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedAccessorId",
+                    "optional": false,
+                    "label": "_computedAccessorId"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The value that grants access to Nomad."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"secret_id\" <$> TF.attribute",
+                    "name": "secret_id",
+                    "method": "computedSecretId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedSecretId",
+                    "optional": false,
+                    "label": "_computedSecretId"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The type of token to create, 'client' or 'management'."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "type",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "optional": false,
+                    "label": "_type'"
+                }
+            ],
+            "type": "AclTokenResource s",
+            "original": "nomad_acl_token"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, the job will be deregistered on destroy."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"deregister_on_destroy\" <$> TF.attribute",
+                    "name": "deregister_on_destroy",
+                    "method": "deregisterOnDestroy",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDeregisterOnDestroy",
+                    "optional": true,
+                    "label": "_deregisterOnDestroy"
+                },
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, the job will be deregistered when the job ID changes."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"deregister_on_id_change\" <$> TF.attribute",
+                    "name": "deregister_on_id_change",
+                    "method": "deregisterOnIdChange",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDeregisterOnIdChange",
+                    "optional": true,
+                    "label": "_deregisterOnIdChange"
+                },
+                {
+                    "default": "_jobspec",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Job specification. If you want to point to a file use the file() function."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"jobspec\" <$> TF.attribute",
+                    "name": "jobspec",
+                    "method": "jobspec",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasJobspec",
+                    "optional": false,
+                    "label": "_jobspec"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Override any soft-mandatory Sentinel policies that fail."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"policy_override\" <$> TF.attribute",
+                    "name": "policy_override",
+                    "method": "policyOverride",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasPolicyOverride",
+                    "optional": true,
+                    "label": "_policyOverride"
+                }
+            ],
+            "schema": "Resource",
+            "name": "JobResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_jobspec",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Job specification. If you want to point to a file use the file() function."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"jobspec\" <$> TF.attribute",
+                    "name": "jobspec",
+                    "method": "jobspec",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasJobspec",
+                    "optional": false,
+                    "label": "_jobspec"
+                }
+            ],
+            "type": "JobResource s",
+            "original": "nomad_job"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Description for this namespace."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name for this namespace."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Quota to set for this namespace."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"quota\" <$> TF.attribute",
+                    "name": "quota",
+                    "method": "quota",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasQuota",
+                    "optional": true,
+                    "label": "_quota"
+                }
+            ],
+            "schema": "Resource",
+            "name": "NamespaceResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name for this namespace."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "NamespaceResource s",
+            "original": "nomad_namespace"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Description for this quota specification."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "_limits",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Limits encapsulated by this quota specification."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"limits\" <$> TF.attribute",
+                    "name": "limits",
+                    "method": "limits",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (Limits s)]",
+                    "class": "HasLimits",
+                    "optional": false,
+                    "label": "_limits"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name for this quota specification."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "schema": "Resource",
+            "name": "QuotaSpecificationResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_limits",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Limits encapsulated by this quota specification."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"limits\" <$> TF.attribute",
+                    "name": "limits",
+                    "method": "limits",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (Limits s)]",
+                    "class": "HasLimits",
+                    "optional": false,
+                    "label": "_limits"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name for this quota specification."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "QuotaSpecificationResource s",
+            "original": "nomad_quota_specification"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Description for this policy."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "_enforcementLevel",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Specifies the enforcement level of the policy."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"enforcement_level\" <$> TF.attribute",
+                    "name": "enforcement_level",
+                    "method": "enforcementLevel",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEnforcementLevel",
+                    "optional": false,
+                    "label": "_enforcementLevel"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name for this policy."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_policy",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The Sentinel policy."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"policy\" <$> TF.attribute",
+                    "name": "policy",
+                    "method": "policy",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPolicy",
+                    "optional": false,
+                    "label": "_policy"
+                },
+                {
+                    "default": "_scope",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Specifies the scope for this policy. Only 'submit-job' is currently",
+                        "supported."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"scope\" <$> TF.attribute",
+                    "name": "scope",
+                    "method": "scope",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasScope",
+                    "optional": false,
+                    "label": "_scope"
+                }
+            ],
+            "schema": "Resource",
+            "name": "SentinelPolicyResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_enforcementLevel",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Specifies the enforcement level of the policy."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"enforcement_level\" <$> TF.attribute",
+                    "name": "enforcement_level",
+                    "method": "enforcementLevel",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEnforcementLevel",
+                    "optional": false,
+                    "label": "_enforcementLevel"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name for this policy."
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_policy",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The Sentinel policy."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"policy\" <$> TF.attribute",
+                    "name": "policy",
+                    "method": "policy",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPolicy",
+                    "optional": false,
+                    "label": "_policy"
+                },
+                {
+                    "default": "_scope",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Specifies the scope for this policy. Only 'submit-job' is currently",
+                        "supported."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"scope\" <$> TF.attribute",
+                    "name": "scope",
+                    "method": "scope",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasScope",
+                    "optional": false,
+                    "label": "_scope"
+                }
+            ],
+            "type": "SentinelPolicyResource s",
+            "original": "nomad_sentinel_policy"
+        }
+    ],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "Nomad",
+    "parameters": [
+        {
+            "default": "_address",
+            "computed": false,
+            "required": true,
+            "help": [
+                "URL of the root of the target Nomad agent."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"address\"",
+            "name": "address",
+            "method": "address",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasAddress",
+            "optional": false,
+            "label": "_address"
+        }
+    ],
+    "package": "terrafomo-nomad",
+    "type": "Provider",
+    "original": "nomad"
+}
