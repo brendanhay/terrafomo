@@ -1,0 +1,2721 @@
+{
+    "settings": [
+        {
+            "arguments": [
+                {
+                    "default": "_network",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "ID of the network to which the NIC is attached"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"network\" <$> TF.attribute",
+                    "name": "network",
+                    "method": "network",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNetwork",
+                    "optional": false,
+                    "label": "_network"
+                }
+            ],
+            "name": "Nic",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "IPv4 gateway"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"gateway\" <$> TF.attribute",
+                    "name": "gateway",
+                    "method": "computedGateway",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedGateway",
+                    "optional": false,
+                    "label": "_computedGateway"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "NIC's IPv4 address"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
+                    "name": "ip",
+                    "method": "computedIp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedIp",
+                    "optional": false,
+                    "label": "_computedIp"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "NIC's MAC address"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"mac\" <$> TF.attribute",
+                    "name": "mac",
+                    "method": "computedMac",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedMac",
+                    "optional": false,
+                    "label": "_computedMac"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "IPv4 netmask"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"netmask\" <$> TF.attribute",
+                    "name": "netmask",
+                    "method": "computedNetmask",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedNetmask",
+                    "optional": false,
+                    "label": "_computedNetmask"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Whether this is the machine's primary NIC"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"primary\" <$> TF.attribute",
+                    "name": "primary",
+                    "method": "computedPrimary",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedPrimary",
+                    "optional": false,
+                    "label": "_computedPrimary"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Provisioning state of the NIC"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"state\" <$> TF.attribute",
+                    "name": "state",
+                    "method": "computedState",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedState",
+                    "optional": false,
+                    "label": "_computedState"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_network",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "ID of the network to which the NIC is attached"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"network\" <$> TF.attribute",
+                    "name": "network",
+                    "method": "network",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNetwork",
+                    "optional": false,
+                    "label": "_network"
+                }
+            ],
+            "hashable": false,
+            "type": "Nic s",
+            "original": "nic"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Disable CNS for this instance (after create)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"disable\" <$> TF.attribute",
+                    "name": "disable",
+                    "method": "disable",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDisable",
+                    "optional": true,
+                    "label": "_disable"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Assign CNS service names to this instance"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"services\" <$> TF.attribute",
+                    "name": "services",
+                    "method": "services",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasServices",
+                    "optional": true,
+                    "label": "_services"
+                }
+            ],
+            "name": "Cns",
+            "attributes": [],
+            "parameters": [],
+            "hashable": false,
+            "type": "Cns s",
+            "original": "cns"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "UUIDs of other instances to attempt to provision alongside"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"close_to\" <$> TF.attribute",
+                    "name": "close_to",
+                    "method": "closeTo",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasCloseTo",
+                    "optional": true,
+                    "label": "_closeTo"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "UUIDs of other instances to attempt not to provision alongside"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"far_from\" <$> TF.attribute",
+                    "name": "far_from",
+                    "method": "farFrom",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasFarFrom",
+                    "optional": true,
+                    "label": "_farFrom"
+                }
+            ],
+            "name": "Locality",
+            "attributes": [],
+            "parameters": [],
+            "hashable": false,
+            "type": "Locality s",
+            "original": "locality"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"disk\" <$> TF.attribute",
+                    "name": "disk",
+                    "method": "disk",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasDisk",
+                    "optional": true,
+                    "label": "_disk"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"group\" <$> TF.attribute",
+                    "name": "group",
+                    "method": "group",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasGroup",
+                    "optional": true,
+                    "label": "_group"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"lwps\" <$> TF.attribute",
+                    "name": "lwps",
+                    "method": "lwps",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasLwps",
+                    "optional": true,
+                    "label": "_lwps"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"memory\" <$> TF.attribute",
+                    "name": "memory",
+                    "method": "memory",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMemory",
+                    "optional": true,
+                    "label": "_memory"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": true,
+                    "label": "_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"swap\" <$> TF.attribute",
+                    "name": "swap",
+                    "method": "swap",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasSwap",
+                    "optional": true,
+                    "label": "_swap"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vcpus\" <$> TF.attribute",
+                    "name": "vcpus",
+                    "method": "vcpus",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasVcpus",
+                    "optional": true,
+                    "label": "_vcpus"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "version",
+                    "method": "version",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVersion",
+                    "optional": true,
+                    "label": "_version"
+                }
+            ],
+            "name": "Filter",
+            "attributes": [],
+            "parameters": [],
+            "hashable": false,
+            "type": "Filter s",
+            "original": "filter"
+        }
+    ],
+    "arguments": [
+        {
+            "default": "_account",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"account\"",
+            "name": "account",
+            "method": "account",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasAccount",
+            "optional": false,
+            "label": "_account"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [],
+            "forceNew": false,
+            "encoder": "TF.assign \"insecure_skip_tls_verify\" <$>",
+            "name": "insecure_skip_tls_verify",
+            "method": "insecureSkipTlsVerify",
+            "conflicts": [],
+            "type": "P.Maybe P.Bool",
+            "class": "HasInsecureSkipTlsVerify",
+            "optional": true,
+            "label": "_insecureSkipTlsVerify"
+        },
+        {
+            "default": "_keyId",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"key_id\"",
+            "name": "key_id",
+            "method": "keyId",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasKeyId",
+            "optional": false,
+            "label": "_keyId"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [],
+            "forceNew": false,
+            "encoder": "TF.assign \"key_material\" <$>",
+            "name": "key_material",
+            "method": "keyMaterial",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasKeyMaterial",
+            "optional": true,
+            "label": "_keyMaterial"
+        },
+        {
+            "default": "_url",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"url\"",
+            "name": "url",
+            "method": "url",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasUrl",
+            "optional": false,
+            "label": "_url"
+        },
+        {
+            "default": "_user",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"user\"",
+            "name": "user",
+            "method": "user",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasUser",
+            "optional": false,
+            "label": "_user"
+        }
+    ],
+    "dataSources": [
+        {
+            "arguments": [],
+            "schema": "DataSource",
+            "name": "AccountData",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cns_enabled\" <$> TF.attribute",
+                    "name": "cns_enabled",
+                    "method": "computedCnsEnabled",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedCnsEnabled",
+                    "optional": false,
+                    "label": "_computedCnsEnabled"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"email\" <$> TF.attribute",
+                    "name": "email",
+                    "method": "computedEmail",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedEmail",
+                    "optional": false,
+                    "label": "_computedEmail"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"login\" <$> TF.attribute",
+                    "name": "login",
+                    "method": "computedLogin",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedLogin",
+                    "optional": false,
+                    "label": "_computedLogin"
+                }
+            ],
+            "parameters": [],
+            "type": "AccountData s",
+            "original": "triton_account"
+        },
+        {
+            "arguments": [],
+            "schema": "DataSource",
+            "name": "DatacenterData",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"endpoint\" <$> TF.attribute",
+                    "name": "endpoint",
+                    "method": "computedEndpoint",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedEndpoint",
+                    "optional": false,
+                    "label": "_computedEndpoint"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "computedName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedName",
+                    "optional": false,
+                    "label": "_computedName"
+                }
+            ],
+            "parameters": [],
+            "type": "DatacenterData s",
+            "original": "triton_datacenter"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_vlanId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vlan_id\" <$> TF.attribute",
+                    "name": "vlan_id",
+                    "method": "vlanId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasVlanId",
+                    "optional": false,
+                    "label": "_vlanId"
+                }
+            ],
+            "schema": "DataSource",
+            "name": "FabricNetworkData",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "computedDescription",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedDescription",
+                    "optional": false,
+                    "label": "_computedDescription"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"fabric\" <$> TF.attribute",
+                    "name": "fabric",
+                    "method": "computedFabric",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedFabric",
+                    "optional": false,
+                    "label": "_computedFabric"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"gateway\" <$> TF.attribute",
+                    "name": "gateway",
+                    "method": "computedGateway",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedGateway",
+                    "optional": false,
+                    "label": "_computedGateway"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"internet_nat\" <$> TF.attribute",
+                    "name": "internet_nat",
+                    "method": "computedInternetNat",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedInternetNat",
+                    "optional": false,
+                    "label": "_computedInternetNat"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"provision_end_ip\" <$> TF.attribute",
+                    "name": "provision_end_ip",
+                    "method": "computedProvisionEndIp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedProvisionEndIp",
+                    "optional": false,
+                    "label": "_computedProvisionEndIp"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"provision_start_ip\" <$> TF.attribute",
+                    "name": "provision_start_ip",
+                    "method": "computedProvisionStartIp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedProvisionStartIp",
+                    "optional": false,
+                    "label": "_computedProvisionStartIp"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"public\" <$> TF.attribute",
+                    "name": "public",
+                    "method": "computedPublic",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedPublic",
+                    "optional": false,
+                    "label": "_computedPublic"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"resolvers\" <$> TF.attribute",
+                    "name": "resolvers",
+                    "method": "computedResolvers",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedResolvers",
+                    "optional": false,
+                    "label": "_computedResolvers"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"routes\" <$> TF.attribute",
+                    "name": "routes",
+                    "method": "computedRoutes",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasComputedRoutes",
+                    "optional": false,
+                    "label": "_computedRoutes"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"subnet\" <$> TF.attribute",
+                    "name": "subnet",
+                    "method": "computedSubnet",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedSubnet",
+                    "optional": false,
+                    "label": "_computedSubnet"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_vlanId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vlan_id\" <$> TF.attribute",
+                    "name": "vlan_id",
+                    "method": "vlanId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasVlanId",
+                    "optional": false,
+                    "label": "_vlanId"
+                }
+            ],
+            "type": "FabricNetworkData s",
+            "original": "triton_fabric_network"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": true,
+                    "label": "_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vlan_id\" <$> TF.attribute",
+                    "name": "vlan_id",
+                    "method": "vlanId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasVlanId",
+                    "optional": true,
+                    "label": "_vlanId"
+                }
+            ],
+            "schema": "DataSource",
+            "name": "FabricVlanData",
+            "attributes": [],
+            "parameters": [],
+            "type": "FabricVlanData s",
+            "original": "triton_fabric_vlan"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"most_recent\" <$> TF.attribute",
+                    "name": "most_recent",
+                    "method": "mostRecent",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasMostRecent",
+                    "optional": true,
+                    "label": "_mostRecent"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": true,
+                    "label": "_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"os\" <$> TF.attribute",
+                    "name": "os",
+                    "method": "os",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOs",
+                    "optional": true,
+                    "label": "_os"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"owner\" <$> TF.attribute",
+                    "name": "owner",
+                    "method": "owner",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOwner",
+                    "optional": true,
+                    "label": "_owner"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"public\" <$> TF.attribute",
+                    "name": "public",
+                    "method": "public",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasPublic",
+                    "optional": true,
+                    "label": "_public"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"state\" <$> TF.attribute",
+                    "name": "state",
+                    "method": "state",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasState",
+                    "optional": true,
+                    "label": "_state"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "type",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "optional": true,
+                    "label": "_type'"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "version",
+                    "method": "version",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVersion",
+                    "optional": true,
+                    "label": "_version"
+                }
+            ],
+            "schema": "DataSource",
+            "name": "ImageData",
+            "attributes": [],
+            "parameters": [],
+            "type": "ImageData s",
+            "original": "triton_image"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "schema": "DataSource",
+            "name": "NetworkData",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"fabric\" <$> TF.attribute",
+                    "name": "fabric",
+                    "method": "computedFabric",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedFabric",
+                    "optional": false,
+                    "label": "_computedFabric"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"public\" <$> TF.attribute",
+                    "name": "public",
+                    "method": "computedPublic",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedPublic",
+                    "optional": false,
+                    "label": "_computedPublic"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "NetworkData s",
+            "original": "triton_network"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_filter",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"filter\" <$> TF.attribute",
+                    "name": "filter",
+                    "method": "filter",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (Filter s)]",
+                    "class": "HasFilter",
+                    "optional": false,
+                    "label": "_filter"
+                }
+            ],
+            "schema": "DataSource",
+            "name": "PackageData",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"disk\" <$> TF.attribute",
+                    "name": "disk",
+                    "method": "computedDisk",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedDisk",
+                    "optional": false,
+                    "label": "_computedDisk"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"group\" <$> TF.attribute",
+                    "name": "group",
+                    "method": "computedGroup",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedGroup",
+                    "optional": false,
+                    "label": "_computedGroup"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"lwps\" <$> TF.attribute",
+                    "name": "lwps",
+                    "method": "computedLwps",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedLwps",
+                    "optional": false,
+                    "label": "_computedLwps"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"memory\" <$> TF.attribute",
+                    "name": "memory",
+                    "method": "computedMemory",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedMemory",
+                    "optional": false,
+                    "label": "_computedMemory"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "computedName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedName",
+                    "optional": false,
+                    "label": "_computedName"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"swap\" <$> TF.attribute",
+                    "name": "swap",
+                    "method": "computedSwap",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedSwap",
+                    "optional": false,
+                    "label": "_computedSwap"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vcpus\" <$> TF.attribute",
+                    "name": "vcpus",
+                    "method": "computedVcpus",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedVcpus",
+                    "optional": false,
+                    "label": "_computedVcpus"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "version",
+                    "method": "computedVersion",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedVersion",
+                    "optional": false,
+                    "label": "_computedVersion"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_filter",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"filter\" <$> TF.attribute",
+                    "name": "filter",
+                    "method": "filter",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (Filter s)]",
+                    "class": "HasFilter",
+                    "optional": false,
+                    "label": "_filter"
+                }
+            ],
+            "type": "PackageData s",
+            "original": "triton_package"
+        }
+    ],
+    "resources": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Description of network"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Gateway IP"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"gateway\" <$> TF.attribute",
+                    "name": "gateway",
+                    "method": "gateway",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasGateway",
+                    "optional": true,
+                    "label": "_gateway"
+                },
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Whether or not a NAT zone is provisioned at the Gateway IP address"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"internet_nat\" <$> TF.attribute",
+                    "name": "internet_nat",
+                    "method": "internetNat",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasInternetNat",
+                    "optional": true,
+                    "label": "_internetNat"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Network name"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_provisionEndIp",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Last assignable IP on the network"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"provision_end_ip\" <$> TF.attribute",
+                    "name": "provision_end_ip",
+                    "method": "provisionEndIp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProvisionEndIp",
+                    "optional": false,
+                    "label": "_provisionEndIp"
+                },
+                {
+                    "default": "_provisionStartIp",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "First IP on the network that can be assigned"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"provision_start_ip\" <$> TF.attribute",
+                    "name": "provision_start_ip",
+                    "method": "provisionStartIp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProvisionStartIp",
+                    "optional": false,
+                    "label": "_provisionStartIp"
+                },
+                {
+                    "default": "_subnet",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "CIDR formatted string describing network address space"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"subnet\" <$> TF.attribute",
+                    "name": "subnet",
+                    "method": "subnet",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSubnet",
+                    "optional": false,
+                    "label": "_subnet"
+                },
+                {
+                    "default": "_vlanId",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "VLAN on which the network exists"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vlan_id\" <$> TF.attribute",
+                    "name": "vlan_id",
+                    "method": "vlanId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasVlanId",
+                    "optional": false,
+                    "label": "_vlanId"
+                }
+            ],
+            "schema": "Resource",
+            "name": "FabricResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Whether or not this network is on a fabric"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"fabric\" <$> TF.attribute",
+                    "name": "fabric",
+                    "method": "computedFabric",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedFabric",
+                    "optional": false,
+                    "label": "_computedFabric"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Whether or not this is an RFC1918 network"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"public\" <$> TF.attribute",
+                    "name": "public",
+                    "method": "computedPublic",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedPublic",
+                    "optional": false,
+                    "label": "_computedPublic"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "List of IP addresses for DNS resolvers"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"resolvers\" <$> TF.attribute",
+                    "name": "resolvers",
+                    "method": "computedResolvers",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedResolvers",
+                    "optional": true,
+                    "label": "_computedResolvers"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Map of CIDR block to Gateway IP address"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"routes\" <$> TF.attribute",
+                    "name": "routes",
+                    "method": "computedRoutes",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasComputedRoutes",
+                    "optional": true,
+                    "label": "_computedRoutes"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Network name"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_provisionEndIp",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Last assignable IP on the network"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"provision_end_ip\" <$> TF.attribute",
+                    "name": "provision_end_ip",
+                    "method": "provisionEndIp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProvisionEndIp",
+                    "optional": false,
+                    "label": "_provisionEndIp"
+                },
+                {
+                    "default": "_provisionStartIp",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "First IP on the network that can be assigned"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"provision_start_ip\" <$> TF.attribute",
+                    "name": "provision_start_ip",
+                    "method": "provisionStartIp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProvisionStartIp",
+                    "optional": false,
+                    "label": "_provisionStartIp"
+                },
+                {
+                    "default": "_subnet",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "CIDR formatted string describing network address space"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"subnet\" <$> TF.attribute",
+                    "name": "subnet",
+                    "method": "subnet",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSubnet",
+                    "optional": false,
+                    "label": "_subnet"
+                },
+                {
+                    "default": "_vlanId",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "VLAN on which the network exists"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vlan_id\" <$> TF.attribute",
+                    "name": "vlan_id",
+                    "method": "vlanId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasVlanId",
+                    "optional": false,
+                    "label": "_vlanId"
+                }
+            ],
+            "type": "FabricResource s",
+            "original": "triton_fabric"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Human-readable description of the rule"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Indicates if the rule is enabled"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"enabled\" <$> TF.attribute",
+                    "name": "enabled",
+                    "method": "enabled",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEnabled",
+                    "optional": true,
+                    "label": "_enabled"
+                },
+                {
+                    "default": "_rule",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Firewall rule text"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rule\" <$> TF.attribute",
+                    "name": "rule",
+                    "method": "rule",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRule",
+                    "optional": false,
+                    "label": "_rule"
+                }
+            ],
+            "schema": "Resource",
+            "name": "FirewallRuleResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Indicates whether or not the rule is global"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"global\" <$> TF.attribute",
+                    "name": "global",
+                    "method": "computedGlobal",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedGlobal",
+                    "optional": false,
+                    "label": "_computedGlobal"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_rule",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Firewall rule text"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rule\" <$> TF.attribute",
+                    "name": "rule",
+                    "method": "rule",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRule",
+                    "optional": false,
+                    "label": "_rule"
+                }
+            ],
+            "type": "FirewallRuleResource s",
+            "original": "triton_firewall_rule"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Whether to enable the firewall for group instances"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"firewall_enabled\" <$> TF.attribute",
+                    "name": "firewall_enabled",
+                    "method": "firewallEnabled",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasFirewallEnabled",
+                    "optional": true,
+                    "label": "_firewallEnabled"
+                },
+                {
+                    "default": "_image",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "UUID of the image"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"image\" <$> TF.attribute",
+                    "name": "image",
+                    "method": "image",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasImage",
+                    "optional": false,
+                    "label": "_image"
+                },
+                {
+                    "default": "_package",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Package name used for provisioning"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"package\" <$> TF.attribute",
+                    "name": "package",
+                    "method": "package",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPackage",
+                    "optional": false,
+                    "label": "_package"
+                },
+                {
+                    "default": "_templateName",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Friendly name for the instance template"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"template_name\" <$> TF.attribute",
+                    "name": "template_name",
+                    "method": "templateName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTemplateName",
+                    "optional": false,
+                    "label": "_templateName"
+                }
+            ],
+            "schema": "Resource",
+            "name": "InstanceTemplateResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Metadata for group instances"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"metadata\" <$> TF.attribute",
+                    "name": "metadata",
+                    "method": "computedMetadata",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasComputedMetadata",
+                    "optional": true,
+                    "label": "_computedMetadata"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Network IDs for group instances"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"networks\" <$> TF.attribute",
+                    "name": "networks",
+                    "method": "computedNetworks",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedNetworks",
+                    "optional": true,
+                    "label": "_computedNetworks"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Tags for group instances"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"tags\" <$> TF.attribute",
+                    "name": "tags",
+                    "method": "computedTags",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasComputedTags",
+                    "optional": true,
+                    "label": "_computedTags"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Data copied to instance on boot"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"userdata\" <$> TF.attribute",
+                    "name": "userdata",
+                    "method": "computedUserdata",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedUserdata",
+                    "optional": true,
+                    "label": "_computedUserdata"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_image",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "UUID of the image"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"image\" <$> TF.attribute",
+                    "name": "image",
+                    "method": "image",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasImage",
+                    "optional": false,
+                    "label": "_image"
+                },
+                {
+                    "default": "_package",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Package name used for provisioning"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"package\" <$> TF.attribute",
+                    "name": "package",
+                    "method": "package",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPackage",
+                    "optional": false,
+                    "label": "_package"
+                },
+                {
+                    "default": "_templateName",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Friendly name for the instance template"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"template_name\" <$> TF.attribute",
+                    "name": "template_name",
+                    "method": "templateName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTemplateName",
+                    "optional": false,
+                    "label": "_templateName"
+                }
+            ],
+            "type": "InstanceTemplateResource s",
+            "original": "triton_instance_template"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Content of public key from disk in OpenSSH format"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "key",
+                    "method": "key",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "optional": false,
+                    "label": "_key"
+                }
+            ],
+            "schema": "Resource",
+            "name": "KeyResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Name of the key (generated from the key comment if not set)"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "computedName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedName",
+                    "optional": true,
+                    "label": "_computedName"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Content of public key from disk in OpenSSH format"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "key",
+                    "method": "key",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "optional": false,
+                    "label": "_key"
+                }
+            ],
+            "type": "KeyResource s",
+            "original": "triton_key"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Administrator's initial password (Windows only)"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"administrator_pw\" <$> TF.attribute",
+                    "name": "administrator_pw",
+                    "method": "administratorPw",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAdministratorPw",
+                    "optional": true,
+                    "label": "_administratorPw"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Label based affinity rules for assisting instance placement"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"affinity\" <$> TF.attribute",
+                    "name": "affinity",
+                    "method": "affinity",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasAffinity",
+                    "optional": true,
+                    "label": "_affinity"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Copied to machine on boot"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"cloud_config\" <$> TF.attribute",
+                    "name": "cloud_config",
+                    "method": "cloudConfig",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCloudConfig",
+                    "optional": true,
+                    "label": "_cloudConfig"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Container Name Service"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cns\" <$> TF.attribute",
+                    "name": "cns",
+                    "method": "cns",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Cns s]",
+                    "class": "HasCns",
+                    "optional": true,
+                    "label": "_cns"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Whether to enable deletion protection for this machine"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"deletion_protection_enabled\" <$> TF.attribute",
+                    "name": "deletion_protection_enabled",
+                    "method": "deletionProtectionEnabled",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDeletionProtectionEnabled",
+                    "optional": true,
+                    "label": "_deletionProtectionEnabled"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Whether to enable the firewall for this machine"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"firewall_enabled\" <$> TF.attribute",
+                    "name": "firewall_enabled",
+                    "method": "firewallEnabled",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasFirewallEnabled",
+                    "optional": true,
+                    "label": "_firewallEnabled"
+                },
+                {
+                    "default": "_image",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "UUID of the image"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"image\" <$> TF.attribute",
+                    "name": "image",
+                    "method": "image",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasImage",
+                    "optional": false,
+                    "label": "_image"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "UUID based locality hints for assisting placement behavior"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"locality\" <$> TF.attribute",
+                    "name": "locality",
+                    "method": "locality",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Locality s]",
+                    "class": "HasLocality",
+                    "optional": true,
+                    "label": "_locality"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Machine metadata"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"metadata\" <$> TF.attribute",
+                    "name": "metadata",
+                    "method": "metadata",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasMetadata",
+                    "optional": true,
+                    "label": "_metadata"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Desired network IDs"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"networks\" <$> TF.attribute",
+                    "name": "networks",
+                    "method": "networks",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasNetworks",
+                    "optional": true,
+                    "label": "_networks"
+                },
+                {
+                    "default": "_package",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The package for use for provisioning"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"package\" <$> TF.attribute",
+                    "name": "package",
+                    "method": "package",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPackage",
+                    "optional": false,
+                    "label": "_package"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Machine tags"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tags\" <$> TF.attribute",
+                    "name": "tags",
+                    "method": "tags",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasTags",
+                    "optional": true,
+                    "label": "_tags"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Data copied to machine on boot"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"user_data\" <$> TF.attribute",
+                    "name": "user_data",
+                    "method": "userData",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUserData",
+                    "optional": true,
+                    "label": "_userData"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "User script to run on boot (every boot on SmartMachines)"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"user_script\" <$> TF.attribute",
+                    "name": "user_script",
+                    "method": "userScript",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUserScript",
+                    "optional": true,
+                    "label": "_userScript"
+                }
+            ],
+            "schema": "Resource",
+            "name": "MachineResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "UUID of the server on which the instance is located"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"compute_node\" <$> TF.attribute",
+                    "name": "compute_node",
+                    "method": "computedComputeNode",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedComputeNode",
+                    "optional": false,
+                    "label": "_computedComputeNode"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "When the machine was created"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"created\" <$> TF.attribute",
+                    "name": "created",
+                    "method": "computedCreated",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedCreated",
+                    "optional": false,
+                    "label": "_computedCreated"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Dataset URN with which the machine was provisioned"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"dataset\" <$> TF.attribute",
+                    "name": "dataset",
+                    "method": "computedDataset",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedDataset",
+                    "optional": false,
+                    "label": "_computedDataset"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Amount of disk allocated to the machine (in Gb)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"disk\" <$> TF.attribute",
+                    "name": "disk",
+                    "method": "computedDisk",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedDisk",
+                    "optional": false,
+                    "label": "_computedDisk"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "List of domain names from Triton CNS"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"domain_names\" <$> TF.attribute",
+                    "name": "domain_names",
+                    "method": "computedDomainNames",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedDomainNames",
+                    "optional": false,
+                    "label": "_computedDomainNames"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "IP addresses assigned to the machine"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ips\" <$> TF.attribute",
+                    "name": "ips",
+                    "method": "computedIps",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedIps",
+                    "optional": false,
+                    "label": "_computedIps"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Amount of memory allocated to the machine (in Mb)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"memory\" <$> TF.attribute",
+                    "name": "memory",
+                    "method": "computedMemory",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedMemory",
+                    "optional": false,
+                    "label": "_computedMemory"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Friendly name for machine"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "computedName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedName",
+                    "optional": true,
+                    "label": "_computedName"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Network interface"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"nic\" <$> TF.attribute",
+                    "name": "nic",
+                    "method": "computedNic",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (Nic s)]",
+                    "class": "HasComputedNic",
+                    "optional": true,
+                    "label": "_computedNic"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Primary (public) IP address for the machine"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"primaryip\" <$> TF.attribute",
+                    "name": "primaryip",
+                    "method": "computedPrimaryip",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPrimaryip",
+                    "optional": false,
+                    "label": "_computedPrimaryip"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Authorized keys for the root user on this machine"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"root_authorized_keys\" <$> TF.attribute",
+                    "name": "root_authorized_keys",
+                    "method": "computedRootAuthorizedKeys",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRootAuthorizedKeys",
+                    "optional": true,
+                    "label": "_computedRootAuthorizedKeys"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Machine type (smartmachine or virtualmachine)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "type",
+                    "method": "computedType'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedType'",
+                    "optional": false,
+                    "label": "_computedType'"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "When the machine was updated"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"updated\" <$> TF.attribute",
+                    "name": "updated",
+                    "method": "computedUpdated",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedUpdated",
+                    "optional": false,
+                    "label": "_computedUpdated"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_image",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "UUID of the image"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"image\" <$> TF.attribute",
+                    "name": "image",
+                    "method": "image",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasImage",
+                    "optional": false,
+                    "label": "_image"
+                },
+                {
+                    "default": "_package",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The package for use for provisioning"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"package\" <$> TF.attribute",
+                    "name": "package",
+                    "method": "package",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPackage",
+                    "optional": false,
+                    "label": "_package"
+                }
+            ],
+            "type": "MachineResource s",
+            "original": "triton_machine"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_groupName",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Friendly name for the service group"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"group_name\" <$> TF.attribute",
+                    "name": "group_name",
+                    "method": "groupName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasGroupName",
+                    "optional": false,
+                    "label": "_groupName"
+                },
+                {
+                    "default": "_template",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Identifier of an instance template"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"template\" <$> TF.attribute",
+                    "name": "template",
+                    "method": "template",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTemplate",
+                    "optional": false,
+                    "label": "_template"
+                }
+            ],
+            "schema": "Resource",
+            "name": "ServiceGroupResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Number of instances to launch and monitor"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"capacity\" <$> TF.attribute",
+                    "name": "capacity",
+                    "method": "computedCapacity",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedCapacity",
+                    "optional": true,
+                    "label": "_computedCapacity"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_groupName",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Friendly name for the service group"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"group_name\" <$> TF.attribute",
+                    "name": "group_name",
+                    "method": "groupName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasGroupName",
+                    "optional": false,
+                    "label": "_groupName"
+                },
+                {
+                    "default": "_template",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Identifier of an instance template"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"template\" <$> TF.attribute",
+                    "name": "template",
+                    "method": "template",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTemplate",
+                    "optional": false,
+                    "label": "_template"
+                }
+            ],
+            "type": "ServiceGroupResource s",
+            "original": "triton_service_group"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_machineId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"machine_id\" <$> TF.attribute",
+                    "name": "machine_id",
+                    "method": "machineId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMachineId",
+                    "optional": false,
+                    "label": "_machineId"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "schema": "Resource",
+            "name": "SnapshotResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"state\" <$> TF.attribute",
+                    "name": "state",
+                    "method": "computedState",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedState",
+                    "optional": false,
+                    "label": "_computedState"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_machineId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"machine_id\" <$> TF.attribute",
+                    "name": "machine_id",
+                    "method": "machineId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMachineId",
+                    "optional": false,
+                    "label": "_machineId"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "SnapshotResource s",
+            "original": "triton_snapshot"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Description of the VLAN"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name to identify VLAN"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_vlanId",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Number between 0-4095 indicating VLAN ID"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vlan_id\" <$> TF.attribute",
+                    "name": "vlan_id",
+                    "method": "vlanId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasVlanId",
+                    "optional": false,
+                    "label": "_vlanId"
+                }
+            ],
+            "schema": "Resource",
+            "name": "VlanResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name to identify VLAN"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_vlanId",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Number between 0-4095 indicating VLAN ID"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vlan_id\" <$> TF.attribute",
+                    "name": "vlan_id",
+                    "method": "vlanId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasVlanId",
+                    "optional": false,
+                    "label": "_vlanId"
+                }
+            ],
+            "type": "VlanResource s",
+            "original": "triton_vlan"
+        }
+    ],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "Triton",
+    "parameters": [
+        {
+            "default": "_account",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"account\"",
+            "name": "account",
+            "method": "account",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasAccount",
+            "optional": false,
+            "label": "_account"
+        },
+        {
+            "default": "_keyId",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"key_id\"",
+            "name": "key_id",
+            "method": "keyId",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasKeyId",
+            "optional": false,
+            "label": "_keyId"
+        },
+        {
+            "default": "_url",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"url\"",
+            "name": "url",
+            "method": "url",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasUrl",
+            "optional": false,
+            "label": "_url"
+        },
+        {
+            "default": "_user",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"user\"",
+            "name": "user",
+            "method": "user",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasUser",
+            "optional": false,
+            "label": "_user"
+        }
+    ],
+    "package": "terrafomo-triton",
+    "type": "Provider",
+    "original": "triton"
+}
