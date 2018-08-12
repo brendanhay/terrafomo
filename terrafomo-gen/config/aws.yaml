@@ -1,15 +1,16 @@
-name: AWS
-package: terrafomo-aws
+package-name: terrafomo-aws
+provider-name: AWS
+partition-size: 80
 
-dependencies:
+extra-deps:
   - amazonka-core
   - formatting
   - iproute
 
-# replace-datatype-fields:
-#   provider:
-#     region: P.Foo
-
-# replace-matching-fields:
+# field-overrides:
 #   - suffix: cidr_block
-#     type: TF.Attr s P.IPRange
+#     type: TF.Attr s P.
+
+datatype-overrides:
+  provider:
+    region: P.Region
