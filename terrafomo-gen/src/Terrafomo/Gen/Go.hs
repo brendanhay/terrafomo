@@ -7,7 +7,8 @@ module Terrafomo.Gen.Go
     , Schema   (..)
     ) where
 
-import Data.Text (Text)
+import Data.HashSet (HashSet)
+import Data.Text    (Text)
 
 import GHC.Generics (Generic)
 
@@ -73,7 +74,7 @@ data Schema = Schema
     , schemaDescription   :: !(Maybe Text)
     , schemaDeprecated    :: !(Maybe Text)
     , schemaRemoved       :: !(Maybe Text)
-    , schemaConflictsWith :: ![Text]
+    , schemaConflictsWith :: !(HashSet Text)
     , schemaOptional      :: !Bool
     , schemaRequired      :: !Bool
     , schemaComputed      :: !Bool

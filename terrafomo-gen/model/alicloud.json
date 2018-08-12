@@ -5981,7 +5981,7 @@
           "sensitive": false,
           "minItems": 0,
           "maxItems": 0,
-          "default": "tf-oss-bucket-20180812161046796000000002"
+          "default": "tf-oss-bucket-20180812161704080400000002"
         },
         {
           "name": "cors_rule",
@@ -8445,7 +8445,7 @@
           "sensitive": false,
           "minItems": 0,
           "maxItems": 0,
-          "default": "tf-lb-20180812161046796000000001"
+          "default": "tf-lb-20180812161704080400000001"
         },
         {
           "name": "specification",

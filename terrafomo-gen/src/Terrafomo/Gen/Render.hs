@@ -3,7 +3,6 @@ module Terrafomo.Gen.Render where
 import Data.Aeson      ((.=))
 import Data.Bifunctor  (second)
 import Data.Semigroup  ((<>))
-import Data.Set        (Set)
 
 import Terrafomo.Gen.Namespace (NS)
 import Terrafomo.Gen.Haskell
@@ -11,11 +10,12 @@ import Terrafomo.Gen.Haskell
 import Text.EDE.Filters ((@:))
 
 import qualified Data.Aeson.Types        as JSON
-import qualified Data.HashMap.Strict     as HashMap
-import qualified Data.Set                as Set
+import qualified Data.HashMap.Strict     as Map
+import qualified Data.HashSet            as Set
 import qualified Data.Text               as Text
 import qualified Data.Text.Lazy          as LText
 import qualified Terrafomo.Gen.Elab      as Elab
+import qualified Terrafomo.Gen.Text      as Text
 import qualified Terrafomo.Gen.Namespace as NS
 import qualified Text.EDE                as EDE
 
@@ -78,8 +78,8 @@ provider tmpls p namespaces =
      in second (ns,) $ render (providerTemplate tmpls)
         [ "namespace"   .= ns
         , "provider"    .= p
-        , "unqualified" .= Set.fromList (NS.types p : namespaces)
-        , "qualified"   .= Set.insert (NS.lenses p) prelude
+        , "unqualified" .= Set.fromList namespaces
+        , "qualified"   .= Set.insert (NS.lenses p) NS.prelude
         ]
 
 lenses
@@ -105,12 +105,11 @@ settings tmpls p ns xs =
     render (settingsTemplate tmpls)
         [ "namespace"   .= ns
         , "settings"    .= xs
-        , "unqualified" .= Set.fromList [NS.types p]
         , "qualified"   .=
             (Set.fromList
                 [ NS.types  p
                 , NS.lenses p
-                ] <> prelude)
+                ] <> NS.prelude)
         ]
 
 resources
@@ -125,6 +124,7 @@ resources tmpls p namespaces ns typ xs =
     let (args, attrs) = Elab.classes p
      in render (resourceTemplate tmpls)
         [ "namespace"        .= ns
+        , "provider"         .= providerName p
         , "type"             .= typ
         , "resources"        .= xs
         , "argumentClasses"  .= args
@@ -135,23 +135,13 @@ resources tmpls p namespaces ns typ xs =
                 [ NS.lenses   p
                 , NS.provider p <> "Provider"
                 , NS.types    p
-                ] <> prelude)
+                ] <> NS.prelude)
         ]
 
 render :: EDE.Template -> [JSON.Pair] -> Either String LText.Text
 render tmpl = EDE.eitherRenderWith filters tmpl . EDE.fromPairs
   where
-    filters = HashMap.fromList
-        [ "drop" @: Text.drop 1
+    filters = Map.fromList
+        [ "drop"      @: Text.drop 1
+        , "smartctor" @: Text.smartCtorName
         ]
-
-prelude :: Set NS
-prelude = Set.fromList
-    [ "Data.HashMap.Strict"
-    , "Data.Hashable"
-    , "Data.List.NonEmpty"
-    , "Data.Text"
-    , "GHC.Generics"
-    , "Lens.Micro"
-    , "Prelude"
-    ]

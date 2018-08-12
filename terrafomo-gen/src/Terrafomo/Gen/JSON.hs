@@ -5,14 +5,15 @@ module Terrafomo.Gen.JSON
    ) where
 
 import Data.Aeson
-import Data.Maybe (fromMaybe)
+import Data.Aeson.Encode.Pretty (encodePretty)
+import Data.Maybe               (fromMaybe)
 
 import qualified Data.ByteString.Lazy as LBS
 import qualified Data.Char            as Char
 import qualified Data.List            as List
 
 encodeFile :: ToJSON a => FilePath -> a -> IO ()
-encodeFile path = LBS.writeFile path . encode
+encodeFile path = LBS.writeFile path . encodePretty
 
 options :: String -> Options
 options prefix =

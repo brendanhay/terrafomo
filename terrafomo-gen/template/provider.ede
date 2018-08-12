@@ -4,7 +4,7 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
 --
@@ -33,7 +33,10 @@ import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.Name as TF
 import qualified Terrafomo.Provider as TF
 
--- | The {{ provider.name }} Terraform provider configuration.
+-- | The @{{ provider.name }}@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/{{ provider.name }}/index.html terraform documenation>
+-- for more information.
 data Provider = Provider'
 {% include "_include/record.ede" with arguments = provider.arguments %}
 
@@ -57,7 +60,7 @@ instance TF.IsProvider Provider where
 
 newProvider
   {% for param in provider.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{param.value.name}}@{% if param.last %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{param.value.name}}@ - 'P.{{ param.value.method }}'{% if param.last %}
     -> Provider{% endif %}
   {% else %}
     :: Provider

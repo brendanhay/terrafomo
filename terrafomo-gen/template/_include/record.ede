@@ -1,6 +1,11 @@
 {% for field in arguments %}
     {% if field.first %}{ {% else %}, {% endif %}{{ field.value.label }} :: {{ field.value.type }}
-    -- ^ {{ field.value.help }}{% if field.last %}
+    -- ^ @{{ field.value.name }}@ - {% if field.value.required %}(Required){% else %}(Optional){% endif %}{% for line in field.value.help %}
+    -- {{ line.value }}{% endfor %}
+    {% for conflict in field.value.conflicts %}{% if conflict.first %}--
+    -- Conflicts with:
+    --{% endif %}
+    -- * '{{ conflict.value.method }}'{% else %}--{% endfor %}{% if field.last %}
     } deriving (P.Show, P.Eq, P.Generic){% endif %}
 {% else %}
     deriving (P.Show, P.Eq, P.Generic)

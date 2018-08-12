@@ -4,16 +4,18 @@ module Terrafomo.Gen.Elab
     ) where
 
 import Control.Applicative        ((<|>))
+import Control.Arrow              ((&&&))
 import Control.Monad              ((>=>))
 import Control.Monad.Except       (Except)
 import Control.Monad.Reader       (ReaderT)
 import Control.Monad.State.Strict (StateT)
 
-import Data.Bifunctor  (second)
-import Data.Map.Strict (Map)
-import Data.Semigroup  ((<>))
-import Data.Set        (Set)
-import Data.Text       (Text)
+import Data.Bifunctor      (second)
+import Data.HashMap.Strict (HashMap)
+import Data.HashSet        (HashSet)
+import Data.Maybe          (fromMaybe, mapMaybe)
+import Data.Semigroup      ((<>))
+import Data.Text           (Text)
 
 import Terrafomo.Gen.Config
 import Terrafomo.Gen.Haskell
@@ -23,13 +25,17 @@ import Text.Show.Pretty (ppShow)
 import qualified Control.Monad.Except       as Except
 import qualified Control.Monad.Reader       as Reader
 import qualified Control.Monad.State.Strict as State
-import qualified Data.Map.Strict            as Map
-import qualified Data.Set                   as Set
+import qualified Data.Foldable              as Fold
+import qualified Data.HashMap.Strict        as Map
+import qualified Data.HashSet               as Set
 import qualified Data.Text.Read             as Text
 import qualified Terrafomo.Gen.Go           as Go
 import qualified Terrafomo.Gen.Text         as Text
 
-type Elab = ReaderT (Config, Bool) (StateT (Map Text Settings) (Except String))
+type Elab =
+    ReaderT (Config, Bool)
+        (StateT (HashMap Text Settings)
+            (Except String))
 
 elab :: Config -> Go.Provider -> Either String Provider
 elab cfg p =
@@ -44,7 +50,7 @@ elab cfg p =
                 types <- State.gets Map.elems
 
                 pure $! Provider'
-                    { providerName         = configName         cfg
+                    { providerName         = configProviderName cfg
                     , providerPackage      = configPackage      cfg
                     , providerDependencies = configDependencies cfg
                     , providerOriginal     = Go.providerName p
@@ -56,7 +62,7 @@ elab cfg p =
                     , providerSettings     = types
                     }
 
-classes :: Provider -> (Set Class, Set Class)
+classes :: Provider -> (HashSet Class, HashSet Class)
 classes p = (lenses, getters)
   where
     lenses  = Set.fromList (map go args)
@@ -103,24 +109,25 @@ resource styp orig xs =
             , resourceAttributes = attrs
             }
 
-parameters :: [Field] -> [Field]
+parameters :: [Field a] -> [Field a]
 parameters =
     filter $ \x ->
         case fieldDefault x of
             DefaultParam{} -> True
             _              -> False
 
-arguments :: Text -> [Go.Schema] -> Elab [Field]
+arguments :: Text -> [Go.Schema] -> Elab [Field Conflict]
 arguments name =
-    traverse (field >=> applyRules name)
+    fmap conflictsWith
+        . traverse (field >=> applyRules name)
         . filter (not . Go.schemaComputed)
 
-attributes :: Text -> [Go.Schema] -> Elab [Field]
+attributes :: Text -> [Go.Schema] -> Elab [Field Text]
 attributes name =
     traverse (field >=> applyRules name)
         . filter Go.schemaComputed
 
-applyRules :: Text -> Field -> Elab Field
+applyRules :: Text -> Field a -> Elab (Field a)
 applyRules name f = do
     cfg <- Reader.asks fst
     pure $! f
@@ -129,6 +136,35 @@ applyRules name f = do
                   (configApplyRules cfg name (fieldName f))
         }
 
+conflictsWith :: [Field Text] -> [Field Conflict]
+conflictsWith xs = map go xs
+  where
+    go x = x
+        { fieldConflicts =
+            fromMaybe mempty (Map.lookup (fieldLabel x) conflicts)
+        }
+
+    !conflicts =
+        conflictIndex fieldConflicts (fieldMethod &&& fieldDefault) $
+            Map.fromList [(fieldLabel x, x) | x <- xs]
+
+conflictIndex
+    :: (v -> HashSet Text)
+    -> (v -> (Text, Default))
+    -> HashMap Text v
+    -> HashMap Text (HashSet Conflict)
+conflictIndex conflicts get xs =
+    Fold.foldr' (Map.unionWith (<>)) mempty $ map (uncurry item) (Map.toList xs)
+  where
+    -- create a reverse index keyed by the fields this field conflicts with.
+    item key value =
+        let cs     = Fold.toList (conflicts value)
+            mk k v = uncurry (Conflict k) (get v)
+            deps   = mapMaybe (\k -> mk k <$> Map.lookup k xs) cs
+            self   = Set.singleton (mk key value)
+            result = Map.singleton key (Set.fromList deps)
+
+         in Fold.foldr' (\k -> Map.insert k self) result cs
 
 settings_ :: Text -> [Go.Schema] -> Elab Type
 settings_ orig = fmap settingsType . settings orig
@@ -141,14 +177,14 @@ settings orig xs = do
     con    <- newCon orig
 
     let s = Settings'
-            { settingsName       = Text.dataTypeName orig
-            , settingsOriginal   = orig
-            , settingsType       = con
-            , settingsHashable   = not thread
-            , settingsParameters = parameters args
-            , settingsArguments  = args
-            , settingsAttributes = attrs
-            }
+          { settingsName       = Text.dataTypeName orig
+          , settingsOriginal   = orig
+          , settingsType       = con
+          , settingsHashable   = not thread
+          , settingsParameters = parameters args
+          , settingsArguments  = args
+          , settingsAttributes = attrs
+          }
 
     State.modify' (Map.insert orig s)
 
@@ -157,7 +193,7 @@ settings orig xs = do
 field_ :: Go.Schema -> Elab Type
 field_ = fmap fieldType . field
 
-field :: Go.Schema -> Elab Field
+field :: Go.Schema -> Elab (Field Text)
 field s = do
     thread <- isThreaded
     def    <- traverse (defaulted (Go.schemaType s)) (Go.schemaDefault s)
@@ -214,18 +250,19 @@ field s = do
                     typeMap <$> (nested s <|> threadType TText)
 
     pure $! Field'
-        { fieldName     = name
-        , fieldHelp     = newHelp (Go.schemaDescription s)
-        , fieldClass    = Text.fieldClassName  label
-        , fieldMethod   = Text.fieldMethodName label
-        , fieldLabel    = label
-        , fieldType     = optional typ
-        , fieldOptional = Go.schemaOptional s
-        , fieldRequired = Go.schemaRequired s
-        , fieldComputed = Go.schemaComputed s
-        , fieldForceNew = Go.schemaForceNew s
-        , fieldEncoder  = encoder
-        , fieldDefault  = default_
+        { fieldName      = name
+        , fieldHelp      = newHelp (Go.schemaDescription s)
+        , fieldClass     = Text.fieldClassName  label
+        , fieldMethod    = Text.fieldMethodName label
+        , fieldLabel     = label
+        , fieldType      = optional typ
+        , fieldConflicts = Set.map Text.conflictName (Go.schemaConflictsWith s)
+        , fieldOptional  = Go.schemaOptional s
+        , fieldRequired  = Go.schemaRequired s
+        , fieldComputed  = Go.schemaComputed s
+        , fieldForceNew  = Go.schemaForceNew s
+        , fieldEncoder   = encoder
+        , fieldDefault   = default_
         }
 
 defaulted :: Go.Type -> Text -> Elab Default
@@ -249,9 +286,12 @@ defaulted typ def =
             _             -> failure
 
     parseFloat =
-        case Text.signed Text.double def of
-            Right (x, "") -> pure x
-            _             -> failure
+        case def of
+            "NaN" -> pure (0 / 0)
+            _     ->
+                case Text.signed Text.double def of
+                    Right (x, "") -> pure x
+                    _             -> failure
 
     failure :: Elab a
     failure =

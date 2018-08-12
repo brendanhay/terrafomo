@@ -1,6 +1,8 @@
 module Terrafomo.Gen.Namespace where
 
 import Data.Aeson         (ToJSON, ToJSONKey)
+import Data.Hashable      (Hashable)
+import Data.HashSet       (HashSet)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Semigroup     (Semigroup ((<>)))
 import Data.String        (IsString (fromString))
@@ -13,13 +15,14 @@ import Text.Printf (printf)
 import qualified Data.Aeson       as JSON
 import qualified Data.Aeson.Types as JSON
 import qualified Data.Foldable    as Fold
+import qualified Data.HashSet     as Set
 import qualified Data.List.Split  as Split
 import qualified Data.Text        as Text
 
 -- Haskell Namespace
 
 newtype NS = NS (NonEmpty Text)
-    deriving (Show, Eq, Ord, Semigroup)
+    deriving (Show, Eq, Ord, Semigroup, Hashable)
 
 instance IsString NS where
     fromString x =
@@ -39,6 +42,17 @@ fromNS c (NS xs) =
 
 toPath :: NS -> String
 toPath = fromNS '/'
+
+prelude :: HashSet NS
+prelude = Set.fromList
+    [ "Data.HashMap.Strict"
+    , "Data.Hashable"
+    , "Data.List.NonEmpty"
+    , "Data.Text"
+    , "GHC.Generics"
+    , "Lens.Micro"
+    , "Prelude"
+    ]
 
 -- Package Namespaces
 

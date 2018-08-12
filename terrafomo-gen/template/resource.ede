@@ -4,7 +4,7 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
 --
@@ -12,9 +12,9 @@ module {{ namespace }}
     (
     -- * {{ type }} Datatypes
     {% for resource in resources %}
-    -- **  {{ resource.value.name }}
+    -- ** {{ resource.value.original }}
     {% if resource.first %} {% else %},{% endif %} {{ resource.value.name }} (..)
-    , {{ resource.value.name | lowerHead }}
+    , {{ resource.value.name | smartctor }}
 
   {% endfor %}
     ) where
@@ -38,6 +38,9 @@ import qualified Terrafomo.Schema as TF
 {% for resource in resources %}
 
 -- | @{{ resource.value.original }}@ {{ type }}.
+--
+-- See the <https://www.terraform.io/docs/providers/{{ provider }}/{{ resource.value.original }} terraform documentation>
+-- for more information.
 data {{ resource.value.type }} = {{ resource.value.name }}'
 {% include "_include/record.ede" with arguments = resource.value.arguments %}
 
@@ -50,21 +53,19 @@ instance TF.IsObject ({{ resource.value.type }}) where
     toObject _ = []
   {% endfor %}
 
-  {% let constructor = resource.value.name | lowerHead %}
-{{ constructor }}
+{{ resource.value.name | smartctor }}
   {% for param in resource.value.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{param.value.name}}@{% if param.last %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{param.value.name}}@ - 'P.{{ param.value.method }}'{% if param.last %}
     -> TF.{{ type }} P.Provider ({{ resource.value.type }}){% endif %}
   {% else %}
     :: TF.{{ type }} P.Provider ({{ resource.value.type }})
   {% endfor %}
-{{ constructor }}{% for param in resource.value.parameters %} {{ param.value.label }}{% endfor %} =
+{{ resource.value.name | smartctor }}{% for param in resource.value.parameters %} {{ param.value.label }}{% endfor %} =
     TF.new{{ type }} "{{ resource.value.original }}" $
         {{ resource.value.name }}'
           {% for field in resource.value.arguments %}
             {% if field.first %}{ {% else %}, {% endif %}{{ field.value.label }} = {{ field.value.default }}{% if field.last %}
             }{% endif %}
           {% endfor %}
-  {% endlet %}
 {% include "_include/lenses.ede" with schema = resource.value %}
 {% endfor %}

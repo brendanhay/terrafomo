@@ -6,20 +6,29 @@ import Control.Applicative ((<|>))
 import Control.Arrow       ((&&&))
 
 import Data.HashMap.Strict (HashMap)
+import Data.HashSet        (HashSet)
 import Data.Maybe          (listToMaybe)
-import Data.Set            (Set)
 import Data.Text           (Text)
 
 import GHC.Generics (Generic)
 
-import Debug.Trace
-
 import Terrafomo.Gen.JSON ((.!=), (.:), (.:?))
 
 import qualified Data.HashMap.Strict as Map
-import qualified Data.Set            as Set
+import qualified Data.HashSet        as Set
 import qualified Data.Text           as Text
 import qualified Terrafomo.Gen.JSON  as JSON
+
+dependencies :: HashSet Text
+dependencies =
+    Set.fromList
+        [ "base"
+        , "hashable"
+        , "microlens"
+        , "terrafomo"
+        , "text"
+        , "unordered-containers"
+        ]
 
 data Mode
    = Prefix
@@ -79,47 +88,33 @@ applyRule rs k
         fmap snd . listToMaybe . filter (f k . fst)
 
 data Config = Config'
-    { configName          :: !Text
-    , configPackage       :: !Text
-    -- , configPackageYAML   :: !Bool
-    -- , configProviderType  :: !Bool
-    , configDependencies  :: !(Set Text)
+    { configPackage       :: !Text
+    , configPackageYAML   :: !Bool
+    , configProviderName  :: !Text
     , configPartitionSize :: !Int
+    , configDependencies  :: !(HashSet Text)
     , configApplyRules    :: !(Text {- datatype -} -> Text {- field -} -> Maybe Text)
     }
 
--- configPackageYAML  <- o .:? "package-yaml"   .!= True
--- configProviderType <- o .:? "provider-type"  .!= True
-
 instance JSON.FromJSON Config where
     parseJSON = JSON.withObject "Config" $ \o -> do
-        configName          <- o .:  "name"
-        configPackage       <- o .:  "package"
-        configPartitionSize <- o .:? "partition-size" .!= 80
+        configPackage       <- o .:  "package-name"
+        configPackageYAML   <- o .:? "package-yaml"   .!= True
+        configProviderName  <- o .:  "provider-name"
+        configPartitionSize <- o .:? "partition-size" .!= 100
 
         configDependencies  <-
-            mappend defaultDependencies
-                <$> o .:? "dependencies" .!= mempty
+            mappend dependencies
+                <$> o .:? "extra-deps" .!= mempty
 
-        m <- fmap exactRules <$> o .:? "replace-datatype-fields" .!= mempty
-        a <- compileRules    <$> o .:? "replace-matching-fields" .!= []
+        m <- fmap exactRules <$> o .:? "datatype-overrides" .!= mempty
+        a <- compileRules    <$> o .:? "field-overrides"    .!= []
 
         let configApplyRules datatype field =
+                -- datatype-overrides take precedence over the more general
+                -- field-overrides
                 case Map.lookup datatype m of
-                    Nothing | datatype == "aws" -> trace (show field) $ applyRule a field
-                    Nothing | datatype == "AWS" -> trace (show field) $ applyRule a field
                     Nothing -> applyRule a field
                     Just b  -> applyRule b field
 
         pure Config'{..}
-
-defaultDependencies :: Set Text
-defaultDependencies =
-    Set.fromList
-        [ "base"
-        , "hashable"
-        , "microlens"
-        , "terrafomo"
-        , "text"
-        , "unordered-containers"
-        ]

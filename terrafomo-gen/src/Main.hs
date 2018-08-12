@@ -3,7 +3,7 @@
 module Main (main) where
 
 import Control.Error (Script, runScript, scriptIO)
-import Control.Monad (unless)
+import Control.Monad (unless, when)
 
 import Data.Aeson     (FromJSON)
 import Data.Bifunctor (first)
@@ -12,6 +12,7 @@ import Data.Semigroup (Semigroup ((<>)))
 
 import System.FilePath ((<.>), (</>))
 
+import Terrafomo.Gen.Config
 import Terrafomo.Gen.Haskell
 import Terrafomo.Gen.Namespace (NS)
 import Terrafomo.Gen.Render    (Templates (Templates))
@@ -160,8 +161,9 @@ main = do
         hoistEither (Render.provider templates provider namespaces)
             >>= writeNS genDir
 
-        hoistEither (Render.package templates provider)
-            >>= scriptIO . LText.writeFile packageFile
+        when (configPackageYAML config) $
+            hoistEither (Render.package templates provider)
+                >>= scriptIO . LText.writeFile packageFile
 
         hoistEither (Render.main templates provider
             (namespaces ++ map fst (resources ++ datasources)))

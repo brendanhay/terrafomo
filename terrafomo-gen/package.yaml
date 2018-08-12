@@ -21,17 +21,19 @@ executables:
 
     dependencies:
       - aeson
+      - aeson-pretty
       - base >= 4.9 && < 5
       - bytestring
-      - containers
       - directory
       - ede
       - errors
       - filepath
+      - hashable
       - mtl
       - optparse-applicative
       - pretty-show
       - split
       - text
       - unordered-containers
+      - word-wrap
       - yaml

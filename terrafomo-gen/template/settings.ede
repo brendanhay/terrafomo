@@ -12,7 +12,7 @@ module {{ namespace }}
     (
     -- * Settings Datatypes
     {% for setting in settings %}
-    -- ** {{ setting.value.name }}
+    -- ** {{ setting.value.original }}
     {% if setting.first %} {% else %},{% endif %} {{ setting.value.name }} (..)
     , new{{ setting.value.name }}
 
@@ -21,10 +21,6 @@ module {{ namespace }}
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
-
-{% for import in unqualified %}
-import {{ import.value }}
-{% endfor %}
 
 {% for import in qualified %}
 import qualified {{ import.value }} as P
@@ -51,7 +47,7 @@ instance TF.IsObject ({{ setting.value.type }}) where
 
 new{{ setting.value.name }}
   {% for param in setting.value.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{param.value.name}}@{% if param.last %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{param.value.name}}@ - 'P.{{ param.value.method }}'{% if param.last %}
     -> {{ setting.value.type }}{% endif %}
   {% else %}
     :: {{ setting.value.type }}
