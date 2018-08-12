@@ -1,0 +1,1442 @@
+{
+    "settings": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"inline_script\" <$> TF.attribute",
+                    "name": "inline_script",
+                    "method": "inlineScript",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasInlineScript",
+                    "optional": true,
+                    "label": "_inlineScript"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"job\" <$> TF.attribute",
+                    "name": "job",
+                    "method": "job",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Job s]",
+                    "class": "HasJob",
+                    "optional": true,
+                    "label": "_job"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"node_step_plugin\" <$> TF.attribute",
+                    "name": "node_step_plugin",
+                    "method": "nodeStepPlugin",
+                    "conflicts": [],
+                    "type": "TF.Attr s [NodeStepPlugin s]",
+                    "class": "HasNodeStepPlugin",
+                    "optional": true,
+                    "label": "_nodeStepPlugin"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"script_file\" <$> TF.attribute",
+                    "name": "script_file",
+                    "method": "scriptFile",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasScriptFile",
+                    "optional": true,
+                    "label": "_scriptFile"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"script_file_args\" <$> TF.attribute",
+                    "name": "script_file_args",
+                    "method": "scriptFileArgs",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasScriptFileArgs",
+                    "optional": true,
+                    "label": "_scriptFileArgs"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"shell_command\" <$> TF.attribute",
+                    "name": "shell_command",
+                    "method": "shellCommand",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasShellCommand",
+                    "optional": true,
+                    "label": "_shellCommand"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"step_plugin\" <$> TF.attribute",
+                    "name": "step_plugin",
+                    "method": "stepPlugin",
+                    "conflicts": [],
+                    "type": "TF.Attr s [StepPlugin s]",
+                    "class": "HasStepPlugin",
+                    "optional": true,
+                    "label": "_stepPlugin"
+                }
+            ],
+            "name": "Command",
+            "attributes": [],
+            "parameters": [],
+            "hashable": false,
+            "type": "Command s",
+            "original": "command"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_config",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Configuration parameters for the selected plugin"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"config\" <$> TF.attribute",
+                    "name": "config",
+                    "method": "config",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasConfig",
+                    "optional": false,
+                    "label": "_config"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the resource model plugin to use"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "type",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "optional": false,
+                    "label": "_type'"
+                }
+            ],
+            "name": "ResourceModelSource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_config",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Configuration parameters for the selected plugin"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"config\" <$> TF.attribute",
+                    "name": "config",
+                    "method": "config",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasConfig",
+                    "optional": false,
+                    "label": "_config"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the resource model plugin to use"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "type",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "optional": false,
+                    "label": "_type'"
+                }
+            ],
+            "hashable": false,
+            "type": "ResourceModelSource s",
+            "original": "resource_model_source"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"config\" <$> TF.attribute",
+                    "name": "config",
+                    "method": "config",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasConfig",
+                    "optional": true,
+                    "label": "_config"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "type",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "optional": false,
+                    "label": "_type'"
+                }
+            ],
+            "name": "StepPlugin",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "type",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "optional": false,
+                    "label": "_type'"
+                }
+            ],
+            "hashable": false,
+            "type": "StepPlugin s",
+            "original": "step_plugin"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"args\" <$> TF.attribute",
+                    "name": "args",
+                    "method": "args",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasArgs",
+                    "optional": true,
+                    "label": "_args"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"group_name\" <$> TF.attribute",
+                    "name": "group_name",
+                    "method": "groupName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasGroupName",
+                    "optional": true,
+                    "label": "_groupName"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"run_for_each_node\" <$> TF.attribute",
+                    "name": "run_for_each_node",
+                    "method": "runForEachNode",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasRunForEachNode",
+                    "optional": true,
+                    "label": "_runForEachNode"
+                }
+            ],
+            "name": "Job",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "hashable": false,
+            "type": "Job s",
+            "original": "job"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"allow_multiple_values\" <$> TF.attribute",
+                    "name": "allow_multiple_values",
+                    "method": "allowMultipleValues",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAllowMultipleValues",
+                    "optional": true,
+                    "label": "_allowMultipleValues"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"default_value\" <$> TF.attribute",
+                    "name": "default_value",
+                    "method": "defaultValue",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDefaultValue",
+                    "optional": true,
+                    "label": "_defaultValue"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"exposed_to_scripts\" <$> TF.attribute",
+                    "name": "exposed_to_scripts",
+                    "method": "exposedToScripts",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasExposedToScripts",
+                    "optional": true,
+                    "label": "_exposedToScripts"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"multi_value_delimiter\" <$> TF.attribute",
+                    "name": "multi_value_delimiter",
+                    "method": "multiValueDelimiter",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMultiValueDelimiter",
+                    "optional": true,
+                    "label": "_multiValueDelimiter"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"obscure_input\" <$> TF.attribute",
+                    "name": "obscure_input",
+                    "method": "obscureInput",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasObscureInput",
+                    "optional": true,
+                    "label": "_obscureInput"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"require_predefined_choice\" <$> TF.attribute",
+                    "name": "require_predefined_choice",
+                    "method": "requirePredefinedChoice",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasRequirePredefinedChoice",
+                    "optional": true,
+                    "label": "_requirePredefinedChoice"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"required\" <$> TF.attribute",
+                    "name": "required",
+                    "method": "required",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasRequired",
+                    "optional": true,
+                    "label": "_required"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"validation_regex\" <$> TF.attribute",
+                    "name": "validation_regex",
+                    "method": "validationRegex",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValidationRegex",
+                    "optional": true,
+                    "label": "_validationRegex"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value_choices\" <$> TF.attribute",
+                    "name": "value_choices",
+                    "method": "valueChoices",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasValueChoices",
+                    "optional": true,
+                    "label": "_valueChoices"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value_choices_url\" <$> TF.attribute",
+                    "name": "value_choices_url",
+                    "method": "valueChoicesUrl",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValueChoicesUrl",
+                    "optional": true,
+                    "label": "_valueChoicesUrl"
+                }
+            ],
+            "name": "Option",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "hashable": false,
+            "type": "Option s",
+            "original": "option"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"config\" <$> TF.attribute",
+                    "name": "config",
+                    "method": "config",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasConfig",
+                    "optional": true,
+                    "label": "_config"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "type",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "optional": false,
+                    "label": "_type'"
+                }
+            ],
+            "name": "NodeStepPlugin",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "type",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "optional": false,
+                    "label": "_type'"
+                }
+            ],
+            "hashable": false,
+            "type": "NodeStepPlugin s",
+            "original": "node_step_plugin"
+        }
+    ],
+    "arguments": [
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "If set, the Rundeck client will permit unverifiable SSL certificates."
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"allow_unverified_ssl\" <$>",
+            "name": "allow_unverified_ssl",
+            "method": "allowUnverifiedSsl",
+            "conflicts": [],
+            "type": "P.Maybe P.Bool",
+            "class": "HasAllowUnverifiedSsl",
+            "optional": true,
+            "label": "_allowUnverifiedSsl"
+        },
+        {
+            "default": "_authToken",
+            "computed": false,
+            "required": true,
+            "help": [
+                "Auth token to use with the Rundeck API."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"auth_token\"",
+            "name": "auth_token",
+            "method": "authToken",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasAuthToken",
+            "optional": false,
+            "label": "_authToken"
+        },
+        {
+            "default": "_url",
+            "computed": false,
+            "required": true,
+            "help": [
+                "URL of the root of the target Rundeck server."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"url\"",
+            "name": "url",
+            "method": "url",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasUrl",
+            "optional": false,
+            "label": "_url"
+        }
+    ],
+    "dataSources": [],
+    "resources": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"allow_concurrent_executions\" <$> TF.attribute",
+                    "name": "allow_concurrent_executions",
+                    "method": "allowConcurrentExecutions",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAllowConcurrentExecutions",
+                    "optional": true,
+                    "label": "_allowConcurrentExecutions"
+                },
+                {
+                    "default": "_command",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"command\" <$> TF.attribute",
+                    "name": "command",
+                    "method": "command",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Command s]",
+                    "class": "HasCommand",
+                    "optional": false,
+                    "label": "_command"
+                },
+                {
+                    "default": "TF.value \"node-first\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"command_ordering_strategy\" <$> TF.attribute",
+                    "name": "command_ordering_strategy",
+                    "method": "commandOrderingStrategy",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCommandOrderingStrategy",
+                    "optional": true,
+                    "label": "_commandOrderingStrategy"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"continue_on_error\" <$> TF.attribute",
+                    "name": "continue_on_error",
+                    "method": "continueOnError",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasContinueOnError",
+                    "optional": true,
+                    "label": "_continueOnError"
+                },
+                {
+                    "default": "_description",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": false,
+                    "label": "_description"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"group_name\" <$> TF.attribute",
+                    "name": "group_name",
+                    "method": "groupName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasGroupName",
+                    "optional": true,
+                    "label": "_groupName"
+                },
+                {
+                    "default": "TF.value \"INFO\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"log_level\" <$> TF.attribute",
+                    "name": "log_level",
+                    "method": "logLevel",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLogLevel",
+                    "optional": true,
+                    "label": "_logLevel"
+                },
+                {
+                    "default": "TF.value 1",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_thread_count\" <$> TF.attribute",
+                    "name": "max_thread_count",
+                    "method": "maxThreadCount",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxThreadCount",
+                    "optional": true,
+                    "label": "_maxThreadCount"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"node_filter_exclude_precedence\" <$> TF.attribute",
+                    "name": "node_filter_exclude_precedence",
+                    "method": "nodeFilterExcludePrecedence",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasNodeFilterExcludePrecedence",
+                    "optional": true,
+                    "label": "_nodeFilterExcludePrecedence"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"node_filter_query\" <$> TF.attribute",
+                    "name": "node_filter_query",
+                    "method": "nodeFilterQuery",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNodeFilterQuery",
+                    "optional": true,
+                    "label": "_nodeFilterQuery"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"option\" <$> TF.attribute",
+                    "name": "option",
+                    "method": "option",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Option s]",
+                    "class": "HasOption",
+                    "optional": true,
+                    "label": "_option"
+                },
+                {
+                    "default": "_projectName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"project_name\" <$> TF.attribute",
+                    "name": "project_name",
+                    "method": "projectName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProjectName",
+                    "optional": false,
+                    "label": "_projectName"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rank_attribute\" <$> TF.attribute",
+                    "name": "rank_attribute",
+                    "method": "rankAttribute",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRankAttribute",
+                    "optional": true,
+                    "label": "_rankAttribute"
+                },
+                {
+                    "default": "TF.value \"ascending\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rank_order\" <$> TF.attribute",
+                    "name": "rank_order",
+                    "method": "rankOrder",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRankOrder",
+                    "optional": true,
+                    "label": "_rankOrder"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"schedule\" <$> TF.attribute",
+                    "name": "schedule",
+                    "method": "schedule",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSchedule",
+                    "optional": true,
+                    "label": "_schedule"
+                }
+            ],
+            "schema": "Resource",
+            "name": "JobResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "id",
+                    "method": "computedId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "optional": false,
+                    "label": "_computedId"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"preserve_options_order\" <$> TF.attribute",
+                    "name": "preserve_options_order",
+                    "method": "computedPreserveOptionsOrder",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedPreserveOptionsOrder",
+                    "optional": true,
+                    "label": "_computedPreserveOptionsOrder"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_command",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"command\" <$> TF.attribute",
+                    "name": "command",
+                    "method": "command",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Command s]",
+                    "class": "HasCommand",
+                    "optional": false,
+                    "label": "_command"
+                },
+                {
+                    "default": "_description",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": false,
+                    "label": "_description"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_projectName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"project_name\" <$> TF.attribute",
+                    "name": "project_name",
+                    "method": "projectName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProjectName",
+                    "optional": false,
+                    "label": "_projectName"
+                }
+            ],
+            "type": "JobResource s",
+            "original": "rundeck_job"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_keyMaterial",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The private key material to store, in PEM format"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key_material\" <$> TF.attribute",
+                    "name": "key_material",
+                    "method": "keyMaterial",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKeyMaterial",
+                    "optional": false,
+                    "label": "_keyMaterial"
+                },
+                {
+                    "default": "_path",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to the key within the key store"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"path\" <$> TF.attribute",
+                    "name": "path",
+                    "method": "path",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPath",
+                    "optional": false,
+                    "label": "_path"
+                }
+            ],
+            "schema": "Resource",
+            "name": "PrivateKeyResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_keyMaterial",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The private key material to store, in PEM format"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key_material\" <$> TF.attribute",
+                    "name": "key_material",
+                    "method": "keyMaterial",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKeyMaterial",
+                    "optional": false,
+                    "label": "_keyMaterial"
+                },
+                {
+                    "default": "_path",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to the key within the key store"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"path\" <$> TF.attribute",
+                    "name": "path",
+                    "method": "path",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPath",
+                    "optional": false,
+                    "label": "_path"
+                }
+            ],
+            "type": "PrivateKeyResource s",
+            "original": "rundeck_private_key"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.value \"jsch-ssh\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"default_node_executor_plugin\" <$> TF.attribute",
+                    "name": "default_node_executor_plugin",
+                    "method": "defaultNodeExecutorPlugin",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDefaultNodeExecutorPlugin",
+                    "optional": true,
+                    "label": "_defaultNodeExecutorPlugin"
+                },
+                {
+                    "default": "TF.value \"jsch-scp\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"default_node_file_copier_plugin\" <$> TF.attribute",
+                    "name": "default_node_file_copier_plugin",
+                    "method": "defaultNodeFileCopierPlugin",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDefaultNodeFileCopierPlugin",
+                    "optional": true,
+                    "label": "_defaultNodeFileCopierPlugin"
+                },
+                {
+                    "default": "TF.value \"Managed by Terraform\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Description of the project to be shown in the Rundeck UI"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Additional raw configuration parameters to include in the project",
+                        "configuration, with dots replaced with slashes in the key names due to",
+                        "limitations in Terraform's config language."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"extra_config\" <$> TF.attribute",
+                    "name": "extra_config",
+                    "method": "extraConfig",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasExtraConfig",
+                    "optional": true,
+                    "label": "_extraConfig"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name for the project"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_resourceModelSource",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"resource_model_source\" <$> TF.attribute",
+                    "name": "resource_model_source",
+                    "method": "resourceModelSource",
+                    "conflicts": [],
+                    "type": "TF.Attr s [ResourceModelSource s]",
+                    "class": "HasResourceModelSource",
+                    "optional": false,
+                    "label": "_resourceModelSource"
+                },
+                {
+                    "default": "TF.value \"privateKey\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ssh_authentication_type\" <$> TF.attribute",
+                    "name": "ssh_authentication_type",
+                    "method": "sshAuthenticationType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSshAuthenticationType",
+                    "optional": true,
+                    "label": "_sshAuthenticationType"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ssh_key_file_path\" <$> TF.attribute",
+                    "name": "ssh_key_file_path",
+                    "method": "sshKeyFilePath",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSshKeyFilePath",
+                    "optional": true,
+                    "label": "_sshKeyFilePath"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ssh_key_storage_path\" <$> TF.attribute",
+                    "name": "ssh_key_storage_path",
+                    "method": "sshKeyStoragePath",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSshKeyStoragePath",
+                    "optional": true,
+                    "label": "_sshKeyStoragePath"
+                }
+            ],
+            "schema": "Resource",
+            "name": "ProjectResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ui_url\" <$> TF.attribute",
+                    "name": "ui_url",
+                    "method": "computedUiUrl",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedUiUrl",
+                    "optional": false,
+                    "label": "_computedUiUrl"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name for the project"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_resourceModelSource",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"resource_model_source\" <$> TF.attribute",
+                    "name": "resource_model_source",
+                    "method": "resourceModelSource",
+                    "conflicts": [],
+                    "type": "TF.Attr s [ResourceModelSource s]",
+                    "class": "HasResourceModelSource",
+                    "optional": false,
+                    "label": "_resourceModelSource"
+                }
+            ],
+            "type": "ProjectResource s",
+            "original": "rundeck_project"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_path",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to the key within the key store"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"path\" <$> TF.attribute",
+                    "name": "path",
+                    "method": "path",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPath",
+                    "optional": false,
+                    "label": "_path"
+                }
+            ],
+            "schema": "Resource",
+            "name": "PublicKeyResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "True if the key should be deleted when the resource is deleted. Defaults to",
+                        "true if key_material is provided in the configuration."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"delete\" <$> TF.attribute",
+                    "name": "delete",
+                    "method": "computedDelete",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedDelete",
+                    "optional": false,
+                    "label": "_computedDelete"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The public key data to store, in the usual OpenSSH public key file format"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"key_material\" <$> TF.attribute",
+                    "name": "key_material",
+                    "method": "computedKeyMaterial",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedKeyMaterial",
+                    "optional": true,
+                    "label": "_computedKeyMaterial"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "URL at which the key content can be retrieved"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"url\" <$> TF.attribute",
+                    "name": "url",
+                    "method": "computedUrl",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedUrl",
+                    "optional": false,
+                    "label": "_computedUrl"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_path",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to the key within the key store"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"path\" <$> TF.attribute",
+                    "name": "path",
+                    "method": "path",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPath",
+                    "optional": false,
+                    "label": "_path"
+                }
+            ],
+            "type": "PublicKeyResource s",
+            "original": "rundeck_public_key"
+        }
+    ],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "Rundeck",
+    "parameters": [
+        {
+            "default": "_authToken",
+            "computed": false,
+            "required": true,
+            "help": [
+                "Auth token to use with the Rundeck API."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"auth_token\"",
+            "name": "auth_token",
+            "method": "authToken",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasAuthToken",
+            "optional": false,
+            "label": "_authToken"
+        },
+        {
+            "default": "_url",
+            "computed": false,
+            "required": true,
+            "help": [
+                "URL of the root of the target Rundeck server."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"url\"",
+            "name": "url",
+            "method": "url",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasUrl",
+            "optional": false,
+            "label": "_url"
+        }
+    ],
+    "package": "terrafomo-rundeck",
+    "type": "Provider",
+    "original": "rundeck"
+}
