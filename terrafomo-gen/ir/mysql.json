@@ -1,0 +1,433 @@
+{
+    "settings": [],
+    "arguments": [
+        {
+            "default": "_endpoint",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"endpoint\"",
+            "name": "endpoint",
+            "method": "endpoint",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasEndpoint",
+            "optional": false,
+            "label": "_endpoint"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [],
+            "forceNew": false,
+            "encoder": "TF.assign \"password\" <$>",
+            "name": "password",
+            "method": "password",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasPassword",
+            "optional": true,
+            "label": "_password"
+        },
+        {
+            "default": "_username",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"username\"",
+            "name": "username",
+            "method": "username",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasUsername",
+            "optional": false,
+            "label": "_username"
+        }
+    ],
+    "dataSources": [],
+    "resources": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.value \"utf8\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"default_character_set\" <$> TF.attribute",
+                    "name": "default_character_set",
+                    "method": "defaultCharacterSet",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDefaultCharacterSet",
+                    "optional": true,
+                    "label": "_defaultCharacterSet"
+                },
+                {
+                    "default": "TF.value \"utf8_general_ci\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"default_collation\" <$> TF.attribute",
+                    "name": "default_collation",
+                    "method": "defaultCollation",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDefaultCollation",
+                    "optional": true,
+                    "label": "_defaultCollation"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "schema": "Resource",
+            "name": "DatabaseResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "DatabaseResource s",
+            "original": "mysql_database"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_database",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"database\" <$> TF.attribute",
+                    "name": "database",
+                    "method": "database",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatabase",
+                    "optional": false,
+                    "label": "_database"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"grant\" <$> TF.attribute",
+                    "name": "grant",
+                    "method": "grant",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasGrant",
+                    "optional": true,
+                    "label": "_grant"
+                },
+                {
+                    "default": "TF.value \"localhost\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"host\" <$> TF.attribute",
+                    "name": "host",
+                    "method": "host",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHost",
+                    "optional": true,
+                    "label": "_host"
+                },
+                {
+                    "default": "_privileges",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"privileges\" <$> TF.attribute",
+                    "name": "privileges",
+                    "method": "privileges",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "class": "HasPrivileges",
+                    "optional": false,
+                    "label": "_privileges"
+                },
+                {
+                    "default": "_user",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"user\" <$> TF.attribute",
+                    "name": "user",
+                    "method": "user",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUser",
+                    "optional": false,
+                    "label": "_user"
+                }
+            ],
+            "schema": "Resource",
+            "name": "GrantResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_database",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"database\" <$> TF.attribute",
+                    "name": "database",
+                    "method": "database",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatabase",
+                    "optional": false,
+                    "label": "_database"
+                },
+                {
+                    "default": "_privileges",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"privileges\" <$> TF.attribute",
+                    "name": "privileges",
+                    "method": "privileges",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "class": "HasPrivileges",
+                    "optional": false,
+                    "label": "_privileges"
+                },
+                {
+                    "default": "_user",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"user\" <$> TF.attribute",
+                    "name": "user",
+                    "method": "user",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUser",
+                    "optional": false,
+                    "label": "_user"
+                }
+            ],
+            "type": "GrantResource s",
+            "original": "mysql_grant"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"auth_plugin\" <$> TF.attribute",
+                    "name": "auth_plugin",
+                    "method": "authPlugin",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "method": "password",
+                            "label": "_password"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "method": "plaintextPassword",
+                            "label": "_plaintextPassword"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAuthPlugin",
+                    "optional": true,
+                    "label": "_authPlugin"
+                },
+                {
+                    "default": "TF.value \"localhost\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"host\" <$> TF.attribute",
+                    "name": "host",
+                    "method": "host",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHost",
+                    "optional": true,
+                    "label": "_host"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"password\" <$> TF.attribute",
+                    "name": "password",
+                    "method": "password",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "method": "authPlugin",
+                            "label": "_authPlugin"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "method": "plaintextPassword",
+                            "label": "_plaintextPassword"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPassword",
+                    "optional": true,
+                    "label": "_password"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"plaintext_password\" <$> TF.attribute",
+                    "name": "plaintext_password",
+                    "method": "plaintextPassword",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "method": "authPlugin",
+                            "label": "_authPlugin"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "method": "password",
+                            "label": "_password"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPlaintextPassword",
+                    "optional": true,
+                    "label": "_plaintextPassword"
+                },
+                {
+                    "default": "_user",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"user\" <$> TF.attribute",
+                    "name": "user",
+                    "method": "user",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUser",
+                    "optional": false,
+                    "label": "_user"
+                }
+            ],
+            "schema": "Resource",
+            "name": "UserResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_user",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"user\" <$> TF.attribute",
+                    "name": "user",
+                    "method": "user",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUser",
+                    "optional": false,
+                    "label": "_user"
+                }
+            ],
+            "type": "UserResource s",
+            "original": "mysql_user"
+        }
+    ],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "MySQL",
+    "parameters": [
+        {
+            "default": "_endpoint",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"endpoint\"",
+            "name": "endpoint",
+            "method": "endpoint",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasEndpoint",
+            "optional": false,
+            "label": "_endpoint"
+        },
+        {
+            "default": "_username",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"username\"",
+            "name": "username",
+            "method": "username",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasUsername",
+            "optional": false,
+            "label": "_username"
+        }
+    ],
+    "package": "terrafomo-mysql",
+    "type": "Provider",
+    "original": "mysql"
+}
