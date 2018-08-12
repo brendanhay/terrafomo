@@ -1,0 +1,384 @@
+{
+    "settings": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.value \"user\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"role\" <$> TF.attribute",
+                    "name": "role",
+                    "method": "role",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRole",
+                    "optional": true,
+                    "label": "_role"
+                },
+                {
+                    "default": "_username",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"username\" <$> TF.attribute",
+                    "name": "username",
+                    "method": "username",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUsername",
+                    "optional": false,
+                    "label": "_username"
+                }
+            ],
+            "name": "Member",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_username",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"username\" <$> TF.attribute",
+                    "name": "username",
+                    "method": "username",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUsername",
+                    "optional": false,
+                    "label": "_username"
+                }
+            ],
+            "hashable": false,
+            "type": "Member s",
+            "original": "member"
+        }
+    ],
+    "arguments": [
+        {
+            "default": "_apiKey",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"api_key\"",
+            "name": "api_key",
+            "method": "apiKey",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasApiKey",
+            "optional": false,
+            "label": "_apiKey"
+        }
+    ],
+    "dataSources": [
+        {
+            "arguments": [
+                {
+                    "default": "_username",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"username\" <$> TF.attribute",
+                    "name": "username",
+                    "method": "username",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUsername",
+                    "optional": false,
+                    "label": "_username"
+                }
+            ],
+            "schema": "DataSource",
+            "name": "UserData",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"full_name\" <$> TF.attribute",
+                    "name": "full_name",
+                    "method": "computedFullName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedFullName",
+                    "optional": false,
+                    "label": "_computedFullName"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"role\" <$> TF.attribute",
+                    "name": "role",
+                    "method": "computedRole",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRole",
+                    "optional": false,
+                    "label": "_computedRole"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_username",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"username\" <$> TF.attribute",
+                    "name": "username",
+                    "method": "username",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUsername",
+                    "optional": false,
+                    "label": "_username"
+                }
+            ],
+            "type": "UserData s",
+            "original": "opsgenie_user"
+        }
+    ],
+    "resources": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"member\" <$> TF.attribute",
+                    "name": "member",
+                    "method": "member",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Member s]",
+                    "class": "HasMember",
+                    "optional": true,
+                    "label": "_member"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "schema": "Resource",
+            "name": "TeamResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "TeamResource s",
+            "original": "opsgenie_team"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_fullName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"full_name\" <$> TF.attribute",
+                    "name": "full_name",
+                    "method": "fullName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFullName",
+                    "optional": false,
+                    "label": "_fullName"
+                },
+                {
+                    "default": "TF.value \"en_US\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"locale\" <$> TF.attribute",
+                    "name": "locale",
+                    "method": "locale",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLocale",
+                    "optional": true,
+                    "label": "_locale"
+                },
+                {
+                    "default": "_role",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"role\" <$> TF.attribute",
+                    "name": "role",
+                    "method": "role",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRole",
+                    "optional": false,
+                    "label": "_role"
+                },
+                {
+                    "default": "TF.value \"America/New_York\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"timezone\" <$> TF.attribute",
+                    "name": "timezone",
+                    "method": "timezone",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTimezone",
+                    "optional": true,
+                    "label": "_timezone"
+                },
+                {
+                    "default": "_username",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"username\" <$> TF.attribute",
+                    "name": "username",
+                    "method": "username",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUsername",
+                    "optional": false,
+                    "label": "_username"
+                }
+            ],
+            "schema": "Resource",
+            "name": "UserResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_fullName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"full_name\" <$> TF.attribute",
+                    "name": "full_name",
+                    "method": "fullName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFullName",
+                    "optional": false,
+                    "label": "_fullName"
+                },
+                {
+                    "default": "_role",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"role\" <$> TF.attribute",
+                    "name": "role",
+                    "method": "role",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRole",
+                    "optional": false,
+                    "label": "_role"
+                },
+                {
+                    "default": "_username",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"username\" <$> TF.attribute",
+                    "name": "username",
+                    "method": "username",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUsername",
+                    "optional": false,
+                    "label": "_username"
+                }
+            ],
+            "type": "UserResource s",
+            "original": "opsgenie_user"
+        }
+    ],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "OpsGenie",
+    "parameters": [
+        {
+            "default": "_apiKey",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"api_key\"",
+            "name": "api_key",
+            "method": "apiKey",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasApiKey",
+            "optional": false,
+            "label": "_apiKey"
+        }
+    ],
+    "package": "terrafomo-opsgenie",
+    "type": "Provider",
+    "original": "opsgenie"
+}
