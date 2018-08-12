@@ -1,0 +1,1132 @@
+{
+    "settings": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"common_name\" <$> TF.attribute",
+                    "name": "common_name",
+                    "method": "commonName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCommonName",
+                    "optional": true,
+                    "label": "_commonName"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"country\" <$> TF.attribute",
+                    "name": "country",
+                    "method": "country",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCountry",
+                    "optional": true,
+                    "label": "_country"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"locality\" <$> TF.attribute",
+                    "name": "locality",
+                    "method": "locality",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLocality",
+                    "optional": true,
+                    "label": "_locality"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"organization\" <$> TF.attribute",
+                    "name": "organization",
+                    "method": "organization",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOrganization",
+                    "optional": true,
+                    "label": "_organization"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"organizational_unit\" <$> TF.attribute",
+                    "name": "organizational_unit",
+                    "method": "organizationalUnit",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOrganizationalUnit",
+                    "optional": true,
+                    "label": "_organizationalUnit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"postal_code\" <$> TF.attribute",
+                    "name": "postal_code",
+                    "method": "postalCode",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPostalCode",
+                    "optional": true,
+                    "label": "_postalCode"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"province\" <$> TF.attribute",
+                    "name": "province",
+                    "method": "province",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProvince",
+                    "optional": true,
+                    "label": "_province"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"serial_number\" <$> TF.attribute",
+                    "name": "serial_number",
+                    "method": "serialNumber",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSerialNumber",
+                    "optional": true,
+                    "label": "_serialNumber"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"street_address\" <$> TF.attribute",
+                    "name": "street_address",
+                    "method": "streetAddress",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasStreetAddress",
+                    "optional": true,
+                    "label": "_streetAddress"
+                }
+            ],
+            "name": "Subject",
+            "attributes": [],
+            "parameters": [],
+            "hashable": false,
+            "type": "Subject s",
+            "original": "subject"
+        }
+    ],
+    "arguments": [],
+    "dataSources": [
+        {
+            "arguments": [
+                {
+                    "default": "_privateKeyPem",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "PEM formatted string to use as the private key"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
+                    "name": "private_key_pem",
+                    "method": "privateKeyPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivateKeyPem",
+                    "optional": false,
+                    "label": "_privateKeyPem"
+                }
+            ],
+            "schema": "DataSource",
+            "name": "PublicKeyData",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Name of the algorithm to use to generate the private key"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"algorithm\" <$> TF.attribute",
+                    "name": "algorithm",
+                    "method": "computedAlgorithm",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedAlgorithm",
+                    "optional": false,
+                    "label": "_computedAlgorithm"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"public_key_openssh\" <$> TF.attribute",
+                    "name": "public_key_openssh",
+                    "method": "computedPublicKeyOpenssh",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPublicKeyOpenssh",
+                    "optional": false,
+                    "label": "_computedPublicKeyOpenssh"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"public_key_pem\" <$> TF.attribute",
+                    "name": "public_key_pem",
+                    "method": "computedPublicKeyPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPublicKeyPem",
+                    "optional": false,
+                    "label": "_computedPublicKeyPem"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_privateKeyPem",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "PEM formatted string to use as the private key"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
+                    "name": "private_key_pem",
+                    "method": "privateKeyPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivateKeyPem",
+                    "optional": false,
+                    "label": "_privateKeyPem"
+                }
+            ],
+            "type": "PublicKeyData s",
+            "original": "tls_public_key"
+        }
+    ],
+    "resources": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "List of DNS names to use as subjects of the certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"dns_names\" <$> TF.attribute",
+                    "name": "dns_names",
+                    "method": "dnsNames",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasDnsNames",
+                    "optional": true,
+                    "label": "_dnsNames"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "List of IP addresses to use as subjects of the certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ip_addresses\" <$> TF.attribute",
+                    "name": "ip_addresses",
+                    "method": "ipAddresses",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasIpAddresses",
+                    "optional": true,
+                    "label": "_ipAddresses"
+                },
+                {
+                    "default": "_keyAlgorithm",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the algorithm to use to generate the certificate's private key"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"key_algorithm\" <$> TF.attribute",
+                    "name": "key_algorithm",
+                    "method": "keyAlgorithm",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKeyAlgorithm",
+                    "optional": false,
+                    "label": "_keyAlgorithm"
+                },
+                {
+                    "default": "_privateKeyPem",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "PEM-encoded private key that the certificate will belong to"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
+                    "name": "private_key_pem",
+                    "method": "privateKeyPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivateKeyPem",
+                    "optional": false,
+                    "label": "_privateKeyPem"
+                },
+                {
+                    "default": "_subject",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"subject\" <$> TF.attribute",
+                    "name": "subject",
+                    "method": "subject",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Subject s]",
+                    "class": "HasSubject",
+                    "optional": false,
+                    "label": "_subject"
+                }
+            ],
+            "schema": "Resource",
+            "name": "CertRequestResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cert_request_pem\" <$> TF.attribute",
+                    "name": "cert_request_pem",
+                    "method": "computedCertRequestPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedCertRequestPem",
+                    "optional": false,
+                    "label": "_computedCertRequestPem"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_keyAlgorithm",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the algorithm to use to generate the certificate's private key"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"key_algorithm\" <$> TF.attribute",
+                    "name": "key_algorithm",
+                    "method": "keyAlgorithm",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKeyAlgorithm",
+                    "optional": false,
+                    "label": "_keyAlgorithm"
+                },
+                {
+                    "default": "_privateKeyPem",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "PEM-encoded private key that the certificate will belong to"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
+                    "name": "private_key_pem",
+                    "method": "privateKeyPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivateKeyPem",
+                    "optional": false,
+                    "label": "_privateKeyPem"
+                },
+                {
+                    "default": "_subject",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"subject\" <$> TF.attribute",
+                    "name": "subject",
+                    "method": "subject",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Subject s]",
+                    "class": "HasSubject",
+                    "optional": false,
+                    "label": "_subject"
+                }
+            ],
+            "type": "CertRequestResource s",
+            "original": "tls_cert_request"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_allowedUses",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Uses that are allowed for the certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"allowed_uses\" <$> TF.attribute",
+                    "name": "allowed_uses",
+                    "method": "allowedUses",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasAllowedUses",
+                    "optional": false,
+                    "label": "_allowedUses"
+                },
+                {
+                    "default": "_caCertPem",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "PEM-encoded CA certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ca_cert_pem\" <$> TF.attribute",
+                    "name": "ca_cert_pem",
+                    "method": "caCertPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCaCertPem",
+                    "optional": false,
+                    "label": "_caCertPem"
+                },
+                {
+                    "default": "_caKeyAlgorithm",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the algorithm used to generate the certificate's private key"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ca_key_algorithm\" <$> TF.attribute",
+                    "name": "ca_key_algorithm",
+                    "method": "caKeyAlgorithm",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCaKeyAlgorithm",
+                    "optional": false,
+                    "label": "_caKeyAlgorithm"
+                },
+                {
+                    "default": "_caPrivateKeyPem",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "PEM-encoded CA private key used to sign the certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ca_private_key_pem\" <$> TF.attribute",
+                    "name": "ca_private_key_pem",
+                    "method": "caPrivateKeyPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCaPrivateKeyPem",
+                    "optional": false,
+                    "label": "_caPrivateKeyPem"
+                },
+                {
+                    "default": "_certRequestPem",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "PEM-encoded certificate request"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"cert_request_pem\" <$> TF.attribute",
+                    "name": "cert_request_pem",
+                    "method": "certRequestPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCertRequestPem",
+                    "optional": false,
+                    "label": "_certRequestPem"
+                },
+                {
+                    "default": "TF.value 0",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Number of hours before the certificates expiry when a new certificate will",
+                        "be generated"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"early_renewal_hours\" <$> TF.attribute",
+                    "name": "early_renewal_hours",
+                    "method": "earlyRenewalHours",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasEarlyRenewalHours",
+                    "optional": true,
+                    "label": "_earlyRenewalHours"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Whether the generated certificate will be usable as a CA certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"is_ca_certificate\" <$> TF.attribute",
+                    "name": "is_ca_certificate",
+                    "method": "isCaCertificate",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIsCaCertificate",
+                    "optional": true,
+                    "label": "_isCaCertificate"
+                },
+                {
+                    "default": "_validityPeriodHours",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Number of hours that the certificate will remain valid for"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"validity_period_hours\" <$> TF.attribute",
+                    "name": "validity_period_hours",
+                    "method": "validityPeriodHours",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValidityPeriodHours",
+                    "optional": false,
+                    "label": "_validityPeriodHours"
+                }
+            ],
+            "schema": "Resource",
+            "name": "LocallySignedCertResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cert_pem\" <$> TF.attribute",
+                    "name": "cert_pem",
+                    "method": "computedCertPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedCertPem",
+                    "optional": false,
+                    "label": "_computedCertPem"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"validity_end_time\" <$> TF.attribute",
+                    "name": "validity_end_time",
+                    "method": "computedValidityEndTime",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedValidityEndTime",
+                    "optional": false,
+                    "label": "_computedValidityEndTime"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"validity_start_time\" <$> TF.attribute",
+                    "name": "validity_start_time",
+                    "method": "computedValidityStartTime",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedValidityStartTime",
+                    "optional": false,
+                    "label": "_computedValidityStartTime"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_allowedUses",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Uses that are allowed for the certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"allowed_uses\" <$> TF.attribute",
+                    "name": "allowed_uses",
+                    "method": "allowedUses",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasAllowedUses",
+                    "optional": false,
+                    "label": "_allowedUses"
+                },
+                {
+                    "default": "_caCertPem",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "PEM-encoded CA certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ca_cert_pem\" <$> TF.attribute",
+                    "name": "ca_cert_pem",
+                    "method": "caCertPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCaCertPem",
+                    "optional": false,
+                    "label": "_caCertPem"
+                },
+                {
+                    "default": "_caKeyAlgorithm",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the algorithm used to generate the certificate's private key"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ca_key_algorithm\" <$> TF.attribute",
+                    "name": "ca_key_algorithm",
+                    "method": "caKeyAlgorithm",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCaKeyAlgorithm",
+                    "optional": false,
+                    "label": "_caKeyAlgorithm"
+                },
+                {
+                    "default": "_caPrivateKeyPem",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "PEM-encoded CA private key used to sign the certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ca_private_key_pem\" <$> TF.attribute",
+                    "name": "ca_private_key_pem",
+                    "method": "caPrivateKeyPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCaPrivateKeyPem",
+                    "optional": false,
+                    "label": "_caPrivateKeyPem"
+                },
+                {
+                    "default": "_certRequestPem",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "PEM-encoded certificate request"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"cert_request_pem\" <$> TF.attribute",
+                    "name": "cert_request_pem",
+                    "method": "certRequestPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCertRequestPem",
+                    "optional": false,
+                    "label": "_certRequestPem"
+                },
+                {
+                    "default": "_validityPeriodHours",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Number of hours that the certificate will remain valid for"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"validity_period_hours\" <$> TF.attribute",
+                    "name": "validity_period_hours",
+                    "method": "validityPeriodHours",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValidityPeriodHours",
+                    "optional": false,
+                    "label": "_validityPeriodHours"
+                }
+            ],
+            "type": "LocallySignedCertResource s",
+            "original": "tls_locally_signed_cert"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_algorithm",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the algorithm to use to generate the private key"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"algorithm\" <$> TF.attribute",
+                    "name": "algorithm",
+                    "method": "algorithm",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAlgorithm",
+                    "optional": false,
+                    "label": "_algorithm"
+                },
+                {
+                    "default": "TF.value \"P224\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "ECDSA curve to use when generating a key"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ecdsa_curve\" <$> TF.attribute",
+                    "name": "ecdsa_curve",
+                    "method": "ecdsaCurve",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEcdsaCurve",
+                    "optional": true,
+                    "label": "_ecdsaCurve"
+                },
+                {
+                    "default": "TF.value 2048",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Number of bits to use when generating an RSA key"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"rsa_bits\" <$> TF.attribute",
+                    "name": "rsa_bits",
+                    "method": "rsaBits",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasRsaBits",
+                    "optional": true,
+                    "label": "_rsaBits"
+                }
+            ],
+            "schema": "Resource",
+            "name": "PrivateKeyResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
+                    "name": "private_key_pem",
+                    "method": "computedPrivateKeyPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPrivateKeyPem",
+                    "optional": false,
+                    "label": "_computedPrivateKeyPem"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"public_key_openssh\" <$> TF.attribute",
+                    "name": "public_key_openssh",
+                    "method": "computedPublicKeyOpenssh",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPublicKeyOpenssh",
+                    "optional": false,
+                    "label": "_computedPublicKeyOpenssh"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"public_key_pem\" <$> TF.attribute",
+                    "name": "public_key_pem",
+                    "method": "computedPublicKeyPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPublicKeyPem",
+                    "optional": false,
+                    "label": "_computedPublicKeyPem"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_algorithm",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the algorithm to use to generate the private key"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"algorithm\" <$> TF.attribute",
+                    "name": "algorithm",
+                    "method": "algorithm",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAlgorithm",
+                    "optional": false,
+                    "label": "_algorithm"
+                }
+            ],
+            "type": "PrivateKeyResource s",
+            "original": "tls_private_key"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_allowedUses",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Uses that are allowed for the certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"allowed_uses\" <$> TF.attribute",
+                    "name": "allowed_uses",
+                    "method": "allowedUses",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasAllowedUses",
+                    "optional": false,
+                    "label": "_allowedUses"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "List of DNS names to use as subjects of the certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"dns_names\" <$> TF.attribute",
+                    "name": "dns_names",
+                    "method": "dnsNames",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasDnsNames",
+                    "optional": true,
+                    "label": "_dnsNames"
+                },
+                {
+                    "default": "TF.value 0",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Number of hours before the certificates expiry when a new certificate will",
+                        "be generated"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"early_renewal_hours\" <$> TF.attribute",
+                    "name": "early_renewal_hours",
+                    "method": "earlyRenewalHours",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasEarlyRenewalHours",
+                    "optional": true,
+                    "label": "_earlyRenewalHours"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "List of IP addresses to use as subjects of the certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"ip_addresses\" <$> TF.attribute",
+                    "name": "ip_addresses",
+                    "method": "ipAddresses",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasIpAddresses",
+                    "optional": true,
+                    "label": "_ipAddresses"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Whether the generated certificate will be usable as a CA certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"is_ca_certificate\" <$> TF.attribute",
+                    "name": "is_ca_certificate",
+                    "method": "isCaCertificate",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIsCaCertificate",
+                    "optional": true,
+                    "label": "_isCaCertificate"
+                },
+                {
+                    "default": "_keyAlgorithm",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the algorithm to use to generate the certificate's private key"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"key_algorithm\" <$> TF.attribute",
+                    "name": "key_algorithm",
+                    "method": "keyAlgorithm",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKeyAlgorithm",
+                    "optional": false,
+                    "label": "_keyAlgorithm"
+                },
+                {
+                    "default": "_privateKeyPem",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "PEM-encoded private key that the certificate will belong to"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
+                    "name": "private_key_pem",
+                    "method": "privateKeyPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivateKeyPem",
+                    "optional": false,
+                    "label": "_privateKeyPem"
+                },
+                {
+                    "default": "_subject",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"subject\" <$> TF.attribute",
+                    "name": "subject",
+                    "method": "subject",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Subject s]",
+                    "class": "HasSubject",
+                    "optional": false,
+                    "label": "_subject"
+                },
+                {
+                    "default": "_validityPeriodHours",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Number of hours that the certificate will remain valid for"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"validity_period_hours\" <$> TF.attribute",
+                    "name": "validity_period_hours",
+                    "method": "validityPeriodHours",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValidityPeriodHours",
+                    "optional": false,
+                    "label": "_validityPeriodHours"
+                }
+            ],
+            "schema": "Resource",
+            "name": "SelfSignedCertResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cert_pem\" <$> TF.attribute",
+                    "name": "cert_pem",
+                    "method": "computedCertPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedCertPem",
+                    "optional": false,
+                    "label": "_computedCertPem"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"validity_end_time\" <$> TF.attribute",
+                    "name": "validity_end_time",
+                    "method": "computedValidityEndTime",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedValidityEndTime",
+                    "optional": false,
+                    "label": "_computedValidityEndTime"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"validity_start_time\" <$> TF.attribute",
+                    "name": "validity_start_time",
+                    "method": "computedValidityStartTime",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedValidityStartTime",
+                    "optional": false,
+                    "label": "_computedValidityStartTime"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_allowedUses",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Uses that are allowed for the certificate"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"allowed_uses\" <$> TF.attribute",
+                    "name": "allowed_uses",
+                    "method": "allowedUses",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasAllowedUses",
+                    "optional": false,
+                    "label": "_allowedUses"
+                },
+                {
+                    "default": "_keyAlgorithm",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the algorithm to use to generate the certificate's private key"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"key_algorithm\" <$> TF.attribute",
+                    "name": "key_algorithm",
+                    "method": "keyAlgorithm",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKeyAlgorithm",
+                    "optional": false,
+                    "label": "_keyAlgorithm"
+                },
+                {
+                    "default": "_privateKeyPem",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "PEM-encoded private key that the certificate will belong to"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
+                    "name": "private_key_pem",
+                    "method": "privateKeyPem",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivateKeyPem",
+                    "optional": false,
+                    "label": "_privateKeyPem"
+                },
+                {
+                    "default": "_subject",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"subject\" <$> TF.attribute",
+                    "name": "subject",
+                    "method": "subject",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Subject s]",
+                    "class": "HasSubject",
+                    "optional": false,
+                    "label": "_subject"
+                },
+                {
+                    "default": "_validityPeriodHours",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Number of hours that the certificate will remain valid for"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"validity_period_hours\" <$> TF.attribute",
+                    "name": "validity_period_hours",
+                    "method": "validityPeriodHours",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValidityPeriodHours",
+                    "optional": false,
+                    "label": "_validityPeriodHours"
+                }
+            ],
+            "type": "SelfSignedCertResource s",
+            "original": "tls_self_signed_cert"
+        }
+    ],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "TLS",
+    "parameters": [],
+    "package": "terrafomo-builtins",
+    "type": "Provider",
+    "original": "tls"
+}
