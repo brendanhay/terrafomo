@@ -1,0 +1,340 @@
+{
+    "settings": [
+        {
+            "arguments": [],
+            "name": "ReceivingRecords",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"priority\" <$> TF.attribute",
+                    "name": "priority",
+                    "method": "computedPriority",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPriority",
+                    "optional": false,
+                    "label": "_computedPriority"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"record_type\" <$> TF.attribute",
+                    "name": "record_type",
+                    "method": "computedRecordType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRecordType",
+                    "optional": false,
+                    "label": "_computedRecordType"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"valid\" <$> TF.attribute",
+                    "name": "valid",
+                    "method": "computedValid",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedValid",
+                    "optional": false,
+                    "label": "_computedValid"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "value",
+                    "method": "computedValue",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedValue",
+                    "optional": false,
+                    "label": "_computedValue"
+                }
+            ],
+            "parameters": [],
+            "hashable": false,
+            "type": "ReceivingRecords s",
+            "original": "receiving_records"
+        },
+        {
+            "arguments": [],
+            "name": "SendingRecords",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "computedName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedName",
+                    "optional": false,
+                    "label": "_computedName"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"record_type\" <$> TF.attribute",
+                    "name": "record_type",
+                    "method": "computedRecordType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRecordType",
+                    "optional": false,
+                    "label": "_computedRecordType"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"valid\" <$> TF.attribute",
+                    "name": "valid",
+                    "method": "computedValid",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedValid",
+                    "optional": false,
+                    "label": "_computedValid"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "value",
+                    "method": "computedValue",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedValue",
+                    "optional": false,
+                    "label": "_computedValue"
+                }
+            ],
+            "parameters": [],
+            "hashable": false,
+            "type": "SendingRecords s",
+            "original": "sending_records"
+        }
+    ],
+    "arguments": [
+        {
+            "default": "_apiKey",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"api_key\"",
+            "name": "api_key",
+            "method": "apiKey",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasApiKey",
+            "optional": false,
+            "label": "_apiKey"
+        }
+    ],
+    "dataSources": [],
+    "resources": [
+        {
+            "arguments": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_smtpPassword",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"smtp_password\" <$> TF.attribute",
+                    "name": "smtp_password",
+                    "method": "smtpPassword",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSmtpPassword",
+                    "optional": false,
+                    "label": "_smtpPassword"
+                }
+            ],
+            "schema": "Resource",
+            "name": "DomainResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"receiving_records\" <$> TF.attribute",
+                    "name": "receiving_records",
+                    "method": "computedReceivingRecords",
+                    "conflicts": [],
+                    "type": "TF.Attr s [ReceivingRecords s]",
+                    "class": "HasComputedReceivingRecords",
+                    "optional": false,
+                    "label": "_computedReceivingRecords"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"sending_records\" <$> TF.attribute",
+                    "name": "sending_records",
+                    "method": "computedSendingRecords",
+                    "conflicts": [],
+                    "type": "TF.Attr s [SendingRecords s]",
+                    "class": "HasComputedSendingRecords",
+                    "optional": false,
+                    "label": "_computedSendingRecords"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"smtp_login\" <$> TF.attribute",
+                    "name": "smtp_login",
+                    "method": "computedSmtpLogin",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedSmtpLogin",
+                    "optional": true,
+                    "label": "_computedSmtpLogin"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"spam_action\" <$> TF.attribute",
+                    "name": "spam_action",
+                    "method": "computedSpamAction",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedSpamAction",
+                    "optional": true,
+                    "label": "_computedSpamAction"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"wildcard\" <$> TF.attribute",
+                    "name": "wildcard",
+                    "method": "computedWildcard",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedWildcard",
+                    "optional": true,
+                    "label": "_computedWildcard"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_smtpPassword",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"smtp_password\" <$> TF.attribute",
+                    "name": "smtp_password",
+                    "method": "smtpPassword",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSmtpPassword",
+                    "optional": false,
+                    "label": "_smtpPassword"
+                }
+            ],
+            "type": "DomainResource s",
+            "original": "mailgun_domain"
+        }
+    ],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "Lailgun",
+    "parameters": [
+        {
+            "default": "_apiKey",
+            "computed": false,
+            "required": true,
+            "help": [],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"api_key\"",
+            "name": "api_key",
+            "method": "apiKey",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasApiKey",
+            "optional": false,
+            "label": "_apiKey"
+        }
+    ],
+    "package": "terrafomo-mailgun",
+    "type": "Provider",
+    "original": "mailgun"
+}
