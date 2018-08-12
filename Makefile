@@ -51,7 +51,7 @@ $1: $(GENERATE) $(GO_VENDOR)-$1 $(MODEL_DIR)/$1.json
  --provider-json=$(MODEL_DIR)/$1.json
 
 $1-clean:
-	rm -rf $(GO_VENDOR)-$1/gen.go $(MODEL_DIR)/$1.json 
+	rm -rf $(GO_VENDOR)-$1/gen.go $(MODEL_DIR)/$1.json
 
 $(GO_VENDOR)-$1:
 	git clone https://github.com/terraform-providers/terraform-provider-$1 $$@

@@ -19,7 +19,7 @@ module Terrafomo.External.DataSource
     -- * DataSource Datatypes
     -- ** external
       Data (..)
-    , data
+    , data'
 
     ) where
 
@@ -30,30 +30,30 @@ import GHC.Base (($))
 
 import Terrafomo.External.Settings
 
-import qualified Data.HashMap.Strict as P
-import qualified GHC.Generics as P
-import qualified Data.Hashable as P
-import qualified Data.List.NonEmpty as P
-import qualified Data.Text as P
+import qualified Data.Hashable               as P
+import qualified Data.HashMap.Strict         as P
+import qualified Data.List.NonEmpty          as P
+import qualified Data.Text                   as P
+import qualified GHC.Generics                as P
+import qualified Lens.Micro                  as P
+import qualified Prelude                     as P
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.External.Lens     as P
 import qualified Terrafomo.External.Provider as P
-import qualified Prelude as P
-import qualified Lens.Micro as P
-import qualified Terrafomo.External.Types as P
-import qualified Terrafomo.External.Lens as P
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Schema as TF
+import qualified Terrafomo.External.Types    as P
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.Schema            as TF
 
 -- | @external@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/External/external terraform documentation>
 -- for more information.
 data Data s = Data'
-    { _program :: TF.Attr s [TF.Attr s P.Text]
+    { _program    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @program@ - (Required)
     --
-    , _query :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _query      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @query@ - (Optional)
     --
     , _workingDir :: TF.Attr s P.Text
@@ -68,10 +68,10 @@ instance TF.IsObject (Data s) where
         , TF.assign "working_dir" <$> TF.attribute _workingDir
         ]
 
-data
+data'
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @program@ - 'P.program'
     -> TF.DataSource P.Provider (Data s)
-data _program =
+data' _program =
     TF.newDataSource "external" $
         Data'
             { _program = _program

@@ -19,7 +19,7 @@ module Terrafomo.HTTP.DataSource
     -- * DataSource Datatypes
     -- ** http
       Data (..)
-    , data
+    , data'
 
     ) where
 
@@ -30,20 +30,20 @@ import GHC.Base (($))
 
 import Terrafomo.HTTP.Settings
 
-import qualified Terrafomo.HTTP.Lens as P
-import qualified Data.HashMap.Strict as P
-import qualified GHC.Generics as P
+import qualified Data.Hashable           as P
+import qualified Data.HashMap.Strict     as P
+import qualified Data.List.NonEmpty      as P
+import qualified Data.Text               as P
+import qualified GHC.Generics            as P
+import qualified Lens.Micro              as P
+import qualified Prelude                 as P
+import qualified Terrafomo.Attribute     as TF
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.HTTP.Lens     as P
 import qualified Terrafomo.HTTP.Provider as P
-import qualified Data.Hashable as P
-import qualified Data.List.NonEmpty as P
-import qualified Data.Text as P
-import qualified Prelude as P
-import qualified Lens.Micro as P
-import qualified Terrafomo.HTTP.Types as P
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Schema as TF
+import qualified Terrafomo.HTTP.Types    as P
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Schema        as TF
 
 -- | @http@ DataSource.
 --
@@ -53,7 +53,7 @@ data Data s = Data'
     { _requestHeaders :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @request_headers@ - (Optional)
     --
-    , _url :: TF.Attr s P.Text
+    , _url            :: TF.Attr s P.Text
     -- ^ @url@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -64,10 +64,10 @@ instance TF.IsObject (Data s) where
         , TF.assign "url" <$> TF.attribute _url
         ]
 
-data
+data'
     :: TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> TF.DataSource P.Provider (Data s)
-data _url =
+data' _url =
     TF.newDataSource "http" $
         Data'
             { _requestHeaders = TF.Nil
