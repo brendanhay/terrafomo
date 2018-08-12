@@ -1,0 +1,616 @@
+{
+    "settings": [],
+    "arguments": [
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "If set, the Chef client will permit unverifiable SSL certificates."
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"allow_unverified_ssl\" <$>",
+            "name": "allow_unverified_ssl",
+            "method": "allowUnverifiedSsl",
+            "conflicts": [],
+            "type": "P.Maybe P.Bool",
+            "class": "HasAllowUnverifiedSsl",
+            "optional": true,
+            "label": "_allowUnverifiedSsl"
+        },
+        {
+            "default": "_clientName",
+            "computed": false,
+            "required": true,
+            "help": [
+                "Name of a registered client within the Chef server."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"client_name\"",
+            "name": "client_name",
+            "method": "clientName",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasClientName",
+            "optional": false,
+            "label": "_clientName"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [],
+            "forceNew": false,
+            "encoder": "TF.assign \"key_material\" <$>",
+            "name": "key_material",
+            "method": "keyMaterial",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasKeyMaterial",
+            "optional": true,
+            "label": "_keyMaterial"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "PEM-formatted private key for client authentication."
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"private_key_pem\" <$>",
+            "name": "private_key_pem",
+            "method": "privateKeyPem",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasPrivateKeyPem",
+            "optional": true,
+            "label": "_privateKeyPem"
+        },
+        {
+            "default": "_serverUrl",
+            "computed": false,
+            "required": true,
+            "help": [
+                "URL of the root of the target Chef server or organization."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"server_url\"",
+            "name": "server_url",
+            "method": "serverUrl",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasServerUrl",
+            "optional": false,
+            "label": "_serverUrl"
+        }
+    ],
+    "dataSources": [],
+    "resources": [
+        {
+            "arguments": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "schema": "Resource",
+            "name": "DataBagResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"api_uri\" <$> TF.attribute",
+                    "name": "api_uri",
+                    "method": "computedApiUri",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedApiUri",
+                    "optional": false,
+                    "label": "_computedApiUri"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "DataBagResource s",
+            "original": "chef_data_bag"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_contentJson",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"content_json\" <$> TF.attribute",
+                    "name": "content_json",
+                    "method": "contentJson",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContentJson",
+                    "optional": false,
+                    "label": "_contentJson"
+                },
+                {
+                    "default": "_dataBagName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"data_bag_name\" <$> TF.attribute",
+                    "name": "data_bag_name",
+                    "method": "dataBagName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDataBagName",
+                    "optional": false,
+                    "label": "_dataBagName"
+                }
+            ],
+            "schema": "Resource",
+            "name": "DataBagItemResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "id",
+                    "method": "computedId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "optional": false,
+                    "label": "_computedId"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_contentJson",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"content_json\" <$> TF.attribute",
+                    "name": "content_json",
+                    "method": "contentJson",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContentJson",
+                    "optional": false,
+                    "label": "_contentJson"
+                },
+                {
+                    "default": "_dataBagName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"data_bag_name\" <$> TF.attribute",
+                    "name": "data_bag_name",
+                    "method": "dataBagName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDataBagName",
+                    "optional": false,
+                    "label": "_dataBagName"
+                }
+            ],
+            "type": "DataBagItemResource s",
+            "original": "chef_data_bag_item"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cookbook_constraints\" <$> TF.attribute",
+                    "name": "cookbook_constraints",
+                    "method": "cookbookConstraints",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasCookbookConstraints",
+                    "optional": true,
+                    "label": "_cookbookConstraints"
+                },
+                {
+                    "default": "TF.value \"{}\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"default_attributes_json\" <$> TF.attribute",
+                    "name": "default_attributes_json",
+                    "method": "defaultAttributesJson",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDefaultAttributesJson",
+                    "optional": true,
+                    "label": "_defaultAttributesJson"
+                },
+                {
+                    "default": "TF.value \"Managed by Terraform\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "TF.value \"{}\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"override_attributes_json\" <$> TF.attribute",
+                    "name": "override_attributes_json",
+                    "method": "overrideAttributesJson",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOverrideAttributesJson",
+                    "optional": true,
+                    "label": "_overrideAttributesJson"
+                }
+            ],
+            "schema": "Resource",
+            "name": "EnvironmentResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "EnvironmentResource s",
+            "original": "chef_environment"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.value \"{}\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"automatic_attributes_json\" <$> TF.attribute",
+                    "name": "automatic_attributes_json",
+                    "method": "automaticAttributesJson",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAutomaticAttributesJson",
+                    "optional": true,
+                    "label": "_automaticAttributesJson"
+                },
+                {
+                    "default": "TF.value \"{}\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"default_attributes_json\" <$> TF.attribute",
+                    "name": "default_attributes_json",
+                    "method": "defaultAttributesJson",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDefaultAttributesJson",
+                    "optional": true,
+                    "label": "_defaultAttributesJson"
+                },
+                {
+                    "default": "TF.value \"_default\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"environment_name\" <$> TF.attribute",
+                    "name": "environment_name",
+                    "method": "environmentName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEnvironmentName",
+                    "optional": true,
+                    "label": "_environmentName"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "TF.value \"{}\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"normal_attributes_json\" <$> TF.attribute",
+                    "name": "normal_attributes_json",
+                    "method": "normalAttributesJson",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNormalAttributesJson",
+                    "optional": true,
+                    "label": "_normalAttributesJson"
+                },
+                {
+                    "default": "TF.value \"{}\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"override_attributes_json\" <$> TF.attribute",
+                    "name": "override_attributes_json",
+                    "method": "overrideAttributesJson",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOverrideAttributesJson",
+                    "optional": true,
+                    "label": "_overrideAttributesJson"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"run_list\" <$> TF.attribute",
+                    "name": "run_list",
+                    "method": "runList",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasRunList",
+                    "optional": true,
+                    "label": "_runList"
+                }
+            ],
+            "schema": "Resource",
+            "name": "NodeResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "NodeResource s",
+            "original": "chef_node"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.value \"{}\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"default_attributes_json\" <$> TF.attribute",
+                    "name": "default_attributes_json",
+                    "method": "defaultAttributesJson",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDefaultAttributesJson",
+                    "optional": true,
+                    "label": "_defaultAttributesJson"
+                },
+                {
+                    "default": "TF.value \"Managed by Terraform\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "optional": true,
+                    "label": "_description"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "TF.value \"{}\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"override_attributes_json\" <$> TF.attribute",
+                    "name": "override_attributes_json",
+                    "method": "overrideAttributesJson",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOverrideAttributesJson",
+                    "optional": true,
+                    "label": "_overrideAttributesJson"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"run_list\" <$> TF.attribute",
+                    "name": "run_list",
+                    "method": "runList",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasRunList",
+                    "optional": true,
+                    "label": "_runList"
+                }
+            ],
+            "schema": "Resource",
+            "name": "RoleResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "RoleResource s",
+            "original": "chef_role"
+        }
+    ],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "Chef",
+    "parameters": [
+        {
+            "default": "_clientName",
+            "computed": false,
+            "required": true,
+            "help": [
+                "Name of a registered client within the Chef server."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"client_name\"",
+            "name": "client_name",
+            "method": "clientName",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasClientName",
+            "optional": false,
+            "label": "_clientName"
+        },
+        {
+            "default": "_serverUrl",
+            "computed": false,
+            "required": true,
+            "help": [
+                "URL of the root of the target Chef server or organization."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"server_url\"",
+            "name": "server_url",
+            "method": "serverUrl",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasServerUrl",
+            "optional": false,
+            "label": "_serverUrl"
+        }
+    ],
+    "package": "terrafomo-chef",
+    "type": "Provider",
+    "original": "chef"
+}
