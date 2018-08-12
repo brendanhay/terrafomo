@@ -1,0 +1,151 @@
+-- This module is auto-generated.
+
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE UndecidableInstances #-}
+
+-- |
+-- Module      : Terrafomo.DNSMadeEasy.Lens
+-- Copyright   : (c) 2017-2018 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
+module Terrafomo.DNSMadeEasy.Lens
+    (
+    -- * Overloaded Fields
+    -- ** Arguments
+      HasMxLevel (..)
+    , HasValue (..)
+    , HasType' (..)
+    , HasAkey (..)
+    , HasDescription (..)
+    , HasRedirectType (..)
+    , HasSkey (..)
+    , HasGtdLocation (..)
+    , HasPriority (..)
+    , HasDomainid (..)
+    , HasPort (..)
+    , HasKeywords (..)
+    , HasUsesandbox (..)
+    , HasTtl (..)
+    , HasName (..)
+    , HasHardLink (..)
+    , HasTitle (..)
+    , HasWeight (..)
+
+    -- ** Computed Attributes
+    ) where
+
+import GHC.Base ((.))
+
+import qualified Lens.Micro       as P
+import qualified Terrafomo.Schema as TF
+
+class HasMxLevel a b | a -> b where
+    mxLevel :: P.Lens' a b
+
+instance HasMxLevel a b => HasMxLevel (TF.Schema l p a) b where
+    mxLevel = TF.configuration . mxLevel
+
+class HasValue a b | a -> b where
+    value :: P.Lens' a b
+
+instance HasValue a b => HasValue (TF.Schema l p a) b where
+    value = TF.configuration . value
+
+class HasType' a b | a -> b where
+    type' :: P.Lens' a b
+
+instance HasType' a b => HasType' (TF.Schema l p a) b where
+    type' = TF.configuration . type'
+
+class HasAkey a b | a -> b where
+    akey :: P.Lens' a b
+
+instance HasAkey a b => HasAkey (TF.Schema l p a) b where
+    akey = TF.configuration . akey
+
+class HasDescription a b | a -> b where
+    description :: P.Lens' a b
+
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
+    description = TF.configuration . description
+
+class HasRedirectType a b | a -> b where
+    redirectType :: P.Lens' a b
+
+instance HasRedirectType a b => HasRedirectType (TF.Schema l p a) b where
+    redirectType = TF.configuration . redirectType
+
+class HasSkey a b | a -> b where
+    skey :: P.Lens' a b
+
+instance HasSkey a b => HasSkey (TF.Schema l p a) b where
+    skey = TF.configuration . skey
+
+class HasGtdLocation a b | a -> b where
+    gtdLocation :: P.Lens' a b
+
+instance HasGtdLocation a b => HasGtdLocation (TF.Schema l p a) b where
+    gtdLocation = TF.configuration . gtdLocation
+
+class HasPriority a b | a -> b where
+    priority :: P.Lens' a b
+
+instance HasPriority a b => HasPriority (TF.Schema l p a) b where
+    priority = TF.configuration . priority
+
+class HasDomainid a b | a -> b where
+    domainid :: P.Lens' a b
+
+instance HasDomainid a b => HasDomainid (TF.Schema l p a) b where
+    domainid = TF.configuration . domainid
+
+class HasPort a b | a -> b where
+    port :: P.Lens' a b
+
+instance HasPort a b => HasPort (TF.Schema l p a) b where
+    port = TF.configuration . port
+
+class HasKeywords a b | a -> b where
+    keywords :: P.Lens' a b
+
+instance HasKeywords a b => HasKeywords (TF.Schema l p a) b where
+    keywords = TF.configuration . keywords
+
+class HasUsesandbox a b | a -> b where
+    usesandbox :: P.Lens' a b
+
+instance HasUsesandbox a b => HasUsesandbox (TF.Schema l p a) b where
+    usesandbox = TF.configuration . usesandbox
+
+class HasTtl a b | a -> b where
+    ttl :: P.Lens' a b
+
+instance HasTtl a b => HasTtl (TF.Schema l p a) b where
+    ttl = TF.configuration . ttl
+
+class HasName a b | a -> b where
+    name :: P.Lens' a b
+
+instance HasName a b => HasName (TF.Schema l p a) b where
+    name = TF.configuration . name
+
+class HasHardLink a b | a -> b where
+    hardLink :: P.Lens' a b
+
+instance HasHardLink a b => HasHardLink (TF.Schema l p a) b where
+    hardLink = TF.configuration . hardLink
+
+class HasTitle a b | a -> b where
+    title :: P.Lens' a b
+
+instance HasTitle a b => HasTitle (TF.Schema l p a) b where
+    title = TF.configuration . title
+
+class HasWeight a b | a -> b where
+    weight :: P.Lens' a b
+
+instance HasWeight a b => HasWeight (TF.Schema l p a) b where
+    weight = TF.configuration . weight
