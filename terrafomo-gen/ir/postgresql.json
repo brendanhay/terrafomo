@@ -1,0 +1,974 @@
+{
+    "settings": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, allow the specified ROLEs to CREATE new objects within the",
+                        "schema(s)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"create\" <$> TF.attribute",
+                    "name": "create",
+                    "method": "create",
+                    "conflicts": [
+                        {
+                            "default": "TF.value P.False",
+                            "method": "createWithGrant",
+                            "label": "_createWithGrant"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasCreate",
+                    "optional": true,
+                    "label": "_create"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, allow the specified ROLEs to CREATE new objects within the",
+                        "schema(s) and GRANT the same CREATE privilege to different ROLEs"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"create_with_grant\" <$> TF.attribute",
+                    "name": "create_with_grant",
+                    "method": "createWithGrant",
+                    "conflicts": [
+                        {
+                            "default": "TF.value P.False",
+                            "method": "create",
+                            "label": "_create"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasCreateWithGrant",
+                    "optional": true,
+                    "label": "_createWithGrant"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "ROLE who will receive this policy (default: PUBLIC)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"role\" <$> TF.attribute",
+                    "name": "role",
+                    "method": "role",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRole",
+                    "optional": true,
+                    "label": "_role"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, allow the specified ROLEs to use objects within the schema(s)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"usage\" <$> TF.attribute",
+                    "name": "usage",
+                    "method": "usage",
+                    "conflicts": [
+                        {
+                            "default": "TF.value P.False",
+                            "method": "usageWithGrant",
+                            "label": "_usageWithGrant"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasUsage",
+                    "optional": true,
+                    "label": "_usage"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, allow the specified ROLEs to use objects within the schema(s) and",
+                        "GRANT the same USAGE privilege to different ROLEs"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"usage_with_grant\" <$> TF.attribute",
+                    "name": "usage_with_grant",
+                    "method": "usageWithGrant",
+                    "conflicts": [
+                        {
+                            "default": "TF.value P.False",
+                            "method": "usage",
+                            "label": "_usage"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasUsageWithGrant",
+                    "optional": true,
+                    "label": "_usageWithGrant"
+                }
+            ],
+            "name": "Policy",
+            "attributes": [],
+            "parameters": [],
+            "hashable": false,
+            "type": "Policy s",
+            "original": "policy"
+        }
+    ],
+    "arguments": [
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "Maximum wait for connection, in seconds. Zero or not specified means wait",
+                "indefinitely."
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"connect_timeout\" <$>",
+            "name": "connect_timeout",
+            "method": "connectTimeout",
+            "conflicts": [],
+            "type": "P.Maybe P.Integer",
+            "class": "HasConnectTimeout",
+            "optional": true,
+            "label": "_connectTimeout"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "The name of the database to connect to in order to conenct to (defaults to",
+                "`postgres`)."
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"database\" <$>",
+            "name": "database",
+            "method": "database",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasDatabase",
+            "optional": true,
+            "label": "_database"
+        },
+        {
+            "default": "\"9.0.0\"",
+            "computed": false,
+            "required": false,
+            "help": [
+                "Specify the expected version of PostgreSQL."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"expected_version\"",
+            "name": "expected_version",
+            "method": "expectedVersion",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasExpectedVersion",
+            "optional": true,
+            "label": "_expectedVersion"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "Name of PostgreSQL server address to connect to"
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"host\" <$>",
+            "name": "host",
+            "method": "host",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasHost",
+            "optional": true,
+            "label": "_host"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "Maximum number of connections to establish to the database. Zero means",
+                "unlimited."
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"max_connections\" <$>",
+            "name": "max_connections",
+            "method": "maxConnections",
+            "conflicts": [],
+            "type": "P.Maybe P.Integer",
+            "class": "HasMaxConnections",
+            "optional": true,
+            "label": "_maxConnections"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "Password to be used if the PostgreSQL server demands password authentication"
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"password\" <$>",
+            "name": "password",
+            "method": "password",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasPassword",
+            "optional": true,
+            "label": "_password"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "The PostgreSQL port number to connect to at the server host, or socket file",
+                "name extension for Unix-domain connections"
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"port\" <$>",
+            "name": "port",
+            "method": "port",
+            "conflicts": [],
+            "type": "P.Maybe P.Integer",
+            "class": "HasPort",
+            "optional": true,
+            "label": "_port"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [],
+            "forceNew": false,
+            "encoder": "TF.assign \"ssl_mode\" <$>",
+            "name": "ssl_mode",
+            "method": "sslMode",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasSslMode",
+            "optional": true,
+            "label": "_sslMode"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "This option determines whether or with what priority a secure SSL TCP/IP",
+                "connection will be negotiated with the PostgreSQL server"
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"sslmode\" <$>",
+            "name": "sslmode",
+            "method": "sslmode",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasSslmode",
+            "optional": true,
+            "label": "_sslmode"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "PostgreSQL user name to connect as"
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"username\" <$>",
+            "name": "username",
+            "method": "username",
+            "conflicts": [],
+            "type": "P.Maybe P.Text",
+            "class": "HasUsername",
+            "optional": true,
+            "label": "_username"
+        }
+    ],
+    "dataSources": [],
+    "resources": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If false then no one can connect to this database"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"allow_connections\" <$> TF.attribute",
+                    "name": "allow_connections",
+                    "method": "allowConnections",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAllowConnections",
+                    "optional": true,
+                    "label": "_allowConnections"
+                },
+                {
+                    "default": "TF.value (-1)",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "How many concurrent connections can be made to this database"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"connection_limit\" <$> TF.attribute",
+                    "name": "connection_limit",
+                    "method": "connectionLimit",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasConnectionLimit",
+                    "optional": true,
+                    "label": "_connectionLimit"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The PostgreSQL database name to connect to"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "schema": "Resource",
+            "name": "DatabaseResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Character set encoding to use in the new database"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"encoding\" <$> TF.attribute",
+                    "name": "encoding",
+                    "method": "computedEncoding",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedEncoding",
+                    "optional": true,
+                    "label": "_computedEncoding"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "If true, then this database can be cloned by any user with CREATEDB",
+                        "privileges"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"is_template\" <$> TF.attribute",
+                    "name": "is_template",
+                    "method": "computedIsTemplate",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedIsTemplate",
+                    "optional": true,
+                    "label": "_computedIsTemplate"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Collation order (LC_COLLATE) to use in the new database"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"lc_collate\" <$> TF.attribute",
+                    "name": "lc_collate",
+                    "method": "computedLcCollate",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedLcCollate",
+                    "optional": true,
+                    "label": "_computedLcCollate"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Character classification (LC_CTYPE) to use in the new database"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"lc_ctype\" <$> TF.attribute",
+                    "name": "lc_ctype",
+                    "method": "computedLcCtype",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedLcCtype",
+                    "optional": true,
+                    "label": "_computedLcCtype"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The ROLE which owns the database"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"owner\" <$> TF.attribute",
+                    "name": "owner",
+                    "method": "computedOwner",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedOwner",
+                    "optional": true,
+                    "label": "_computedOwner"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The name of the tablespace that will be associated with the new database"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tablespace_name\" <$> TF.attribute",
+                    "name": "tablespace_name",
+                    "method": "computedTablespaceName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedTablespaceName",
+                    "optional": true,
+                    "label": "_computedTablespaceName"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The name of the template from which to create the new database"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"template\" <$> TF.attribute",
+                    "name": "template",
+                    "method": "computedTemplate",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedTemplate",
+                    "optional": true,
+                    "label": "_computedTemplate"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The PostgreSQL database name to connect to"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "DatabaseResource s",
+            "original": "postgresql_database"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "schema": "Resource",
+            "name": "ExtensionResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Sets the schema of an extension"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"schema\" <$> TF.attribute",
+                    "name": "schema",
+                    "method": "computedSchema",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedSchema",
+                    "optional": true,
+                    "label": "_computedSchema"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Sets the version number of the extension"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "version",
+                    "method": "computedVersion",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedVersion",
+                    "optional": true,
+                    "label": "_computedVersion"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "ExtensionResource s",
+            "original": "postgresql_extension"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Determine whether a role bypasses every row-level security (RLS) policy"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"bypass_row_level_security\" <$> TF.attribute",
+                    "name": "bypass_row_level_security",
+                    "method": "bypassRowLevelSecurity",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasBypassRowLevelSecurity",
+                    "optional": true,
+                    "label": "_bypassRowLevelSecurity"
+                },
+                {
+                    "default": "TF.value (-1)",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "How many concurrent connections can be made with this role"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"connection_limit\" <$> TF.attribute",
+                    "name": "connection_limit",
+                    "method": "connectionLimit",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasConnectionLimit",
+                    "optional": true,
+                    "label": "_connectionLimit"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Define a role's ability to create databases"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"create_database\" <$> TF.attribute",
+                    "name": "create_database",
+                    "method": "createDatabase",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasCreateDatabase",
+                    "optional": true,
+                    "label": "_createDatabase"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Determine whether this role will be permitted to create new roles"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"create_role\" <$> TF.attribute",
+                    "name": "create_role",
+                    "method": "createRole",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasCreateRole",
+                    "optional": true,
+                    "label": "_createRole"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"encrypted\" <$> TF.attribute",
+                    "name": "encrypted",
+                    "method": "encrypted",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEncrypted",
+                    "optional": true,
+                    "label": "_encrypted"
+                },
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Control whether the password is stored encrypted in the system catalogs"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"encrypted_password\" <$> TF.attribute",
+                    "name": "encrypted_password",
+                    "method": "encryptedPassword",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEncryptedPassword",
+                    "optional": true,
+                    "label": "_encryptedPassword"
+                },
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Determine whether a role \"inherits\" the privileges of roles it is a member",
+                        "of"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"inherit\" <$> TF.attribute",
+                    "name": "inherit",
+                    "method": "inherit",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasInherit",
+                    "optional": true,
+                    "label": "_inherit"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Determine whether a role is allowed to log in"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"login\" <$> TF.attribute",
+                    "name": "login",
+                    "method": "login",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasLogin",
+                    "optional": true,
+                    "label": "_login"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the role"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Determine whether a role is allowed to initiate streaming replication or put",
+                        "the system in and out of backup mode"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"replication\" <$> TF.attribute",
+                    "name": "replication",
+                    "method": "replication",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasReplication",
+                    "optional": true,
+                    "label": "_replication"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Skip actually running the DROP ROLE command when removing a ROLE from",
+                        "PostgreSQL"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"skip_drop_role\" <$> TF.attribute",
+                    "name": "skip_drop_role",
+                    "method": "skipDropRole",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasSkipDropRole",
+                    "optional": true,
+                    "label": "_skipDropRole"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Skip actually running the REASSIGN OWNED command when removing a role from",
+                        "PostgreSQL"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"skip_reassign_owned\" <$> TF.attribute",
+                    "name": "skip_reassign_owned",
+                    "method": "skipReassignOwned",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasSkipReassignOwned",
+                    "optional": true,
+                    "label": "_skipReassignOwned"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Determine whether the new role is a \"superuser\""
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"superuser\" <$> TF.attribute",
+                    "name": "superuser",
+                    "method": "superuser",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasSuperuser",
+                    "optional": true,
+                    "label": "_superuser"
+                },
+                {
+                    "default": "TF.value \"infinity\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Sets a date and time after which the role's password is no longer valid"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"valid_until\" <$> TF.attribute",
+                    "name": "valid_until",
+                    "method": "validUntil",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValidUntil",
+                    "optional": true,
+                    "label": "_validUntil"
+                }
+            ],
+            "schema": "Resource",
+            "name": "RoleResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Sets the role's password"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"password\" <$> TF.attribute",
+                    "name": "password",
+                    "method": "computedPassword",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPassword",
+                    "optional": true,
+                    "label": "_computedPassword"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the role"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "RoleResource s",
+            "original": "postgresql_role"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "When true, use the existing schema if it exists"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"if_not_exists\" <$> TF.attribute",
+                    "name": "if_not_exists",
+                    "method": "ifNotExists",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIfNotExists",
+                    "optional": true,
+                    "label": "_ifNotExists"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the schema"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "schema": "Resource",
+            "name": "SchemaResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The ROLE name who owns the schema"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"owner\" <$> TF.attribute",
+                    "name": "owner",
+                    "method": "computedOwner",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedOwner",
+                    "optional": true,
+                    "label": "_computedOwner"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"policy\" <$> TF.attribute",
+                    "name": "policy",
+                    "method": "computedPolicy",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (Policy s)]",
+                    "class": "HasComputedPolicy",
+                    "optional": true,
+                    "label": "_computedPolicy"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the schema"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "SchemaResource s",
+            "original": "postgresql_schema"
+        }
+    ],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "PostgreSQL",
+    "parameters": [],
+    "package": "terrafomo-postgresql",
+    "type": "Provider",
+    "original": "postgresql"
+}
