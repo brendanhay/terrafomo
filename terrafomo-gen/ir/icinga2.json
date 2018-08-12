@@ -1,0 +1,809 @@
+{
+    "settings": [],
+    "arguments": [
+        {
+            "default": "_apiPassword",
+            "computed": false,
+            "required": true,
+            "help": [
+                "The password for authenticating to the Icinga2 server."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"api_password\"",
+            "name": "api_password",
+            "method": "apiPassword",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasApiPassword",
+            "optional": false,
+            "label": "_apiPassword"
+        },
+        {
+            "default": "_apiUrl",
+            "computed": false,
+            "required": true,
+            "help": [
+                "The address of the Icinga2 server."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"api_url\"",
+            "name": "api_url",
+            "method": "apiUrl",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasApiUrl",
+            "optional": false,
+            "label": "_apiUrl"
+        },
+        {
+            "default": "_apiUser",
+            "computed": false,
+            "required": true,
+            "help": [
+                "The user to authenticate to the Icinga2 Server as."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"api_user\"",
+            "name": "api_user",
+            "method": "apiUser",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasApiUser",
+            "optional": false,
+            "label": "_apiUser"
+        },
+        {
+            "default": "P.Nothing",
+            "computed": false,
+            "required": false,
+            "help": [
+                "Disable TLS verify when connecting to Icinga2 Server"
+            ],
+            "forceNew": false,
+            "encoder": "TF.assign \"insecure_skip_tls_verify\" <$>",
+            "name": "insecure_skip_tls_verify",
+            "method": "insecureSkipTlsVerify",
+            "conflicts": [],
+            "type": "P.Maybe P.Bool",
+            "class": "HasInsecureSkipTlsVerify",
+            "optional": true,
+            "label": "_insecureSkipTlsVerify"
+        }
+    ],
+    "dataSources": [],
+    "resources": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"arguments\" <$> TF.attribute",
+                    "name": "arguments",
+                    "method": "arguments",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasArguments",
+                    "optional": true,
+                    "label": "_arguments"
+                },
+                {
+                    "default": "_command",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"command\" <$> TF.attribute",
+                    "name": "command",
+                    "method": "command",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCommand",
+                    "optional": false,
+                    "label": "_command"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_templates",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"templates\" <$> TF.attribute",
+                    "name": "templates",
+                    "method": "templates",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasTemplates",
+                    "optional": false,
+                    "label": "_templates"
+                }
+            ],
+            "schema": "Resource",
+            "name": "CheckcommandResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_command",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"command\" <$> TF.attribute",
+                    "name": "command",
+                    "method": "command",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCommand",
+                    "optional": false,
+                    "label": "_command"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                },
+                {
+                    "default": "_templates",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"templates\" <$> TF.attribute",
+                    "name": "templates",
+                    "method": "templates",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasTemplates",
+                    "optional": false,
+                    "label": "_templates"
+                }
+            ],
+            "type": "CheckcommandResource s",
+            "original": "icinga2_checkcommand"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_address",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "address",
+                    "method": "address",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "optional": false,
+                    "label": "_address"
+                },
+                {
+                    "default": "_checkCommand",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"check_command\" <$> TF.attribute",
+                    "name": "check_command",
+                    "method": "checkCommand",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCheckCommand",
+                    "optional": false,
+                    "label": "_checkCommand"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"groups\" <$> TF.attribute",
+                    "name": "groups",
+                    "method": "groups",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasGroups",
+                    "optional": true,
+                    "label": "_groups"
+                },
+                {
+                    "default": "_hostname",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Hostname"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"hostname\" <$> TF.attribute",
+                    "name": "hostname",
+                    "method": "hostname",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostname",
+                    "optional": false,
+                    "label": "_hostname"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"templates\" <$> TF.attribute",
+                    "name": "templates",
+                    "method": "templates",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasTemplates",
+                    "optional": true,
+                    "label": "_templates"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vars\" <$> TF.attribute",
+                    "name": "vars",
+                    "method": "vars",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasVars",
+                    "optional": true,
+                    "label": "_vars"
+                }
+            ],
+            "schema": "Resource",
+            "name": "HostResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_address",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "address",
+                    "method": "address",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "optional": false,
+                    "label": "_address"
+                },
+                {
+                    "default": "_checkCommand",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"check_command\" <$> TF.attribute",
+                    "name": "check_command",
+                    "method": "checkCommand",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCheckCommand",
+                    "optional": false,
+                    "label": "_checkCommand"
+                },
+                {
+                    "default": "_hostname",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Hostname"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"hostname\" <$> TF.attribute",
+                    "name": "hostname",
+                    "method": "hostname",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostname",
+                    "optional": false,
+                    "label": "_hostname"
+                }
+            ],
+            "type": "HostResource s",
+            "original": "icinga2_host"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_displayName",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Display name of Host Group"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"display_name\" <$> TF.attribute",
+                    "name": "display_name",
+                    "method": "displayName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDisplayName",
+                    "optional": false,
+                    "label": "_displayName"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "schema": "Resource",
+            "name": "HostgroupResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_displayName",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Display name of Host Group"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"display_name\" <$> TF.attribute",
+                    "name": "display_name",
+                    "method": "displayName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDisplayName",
+                    "optional": false,
+                    "label": "_displayName"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "HostgroupResource s",
+            "original": "icinga2_hostgroup"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_command",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"command\" <$> TF.attribute",
+                    "name": "command",
+                    "method": "command",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCommand",
+                    "optional": false,
+                    "label": "_command"
+                },
+                {
+                    "default": "_hostname",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"hostname\" <$> TF.attribute",
+                    "name": "hostname",
+                    "method": "hostname",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostname",
+                    "optional": false,
+                    "label": "_hostname"
+                },
+                {
+                    "default": "TF.value 1800",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"interval\" <$> TF.attribute",
+                    "name": "interval",
+                    "method": "interval",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasInterval",
+                    "optional": true,
+                    "label": "_interval"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"servicename\" <$> TF.attribute",
+                    "name": "servicename",
+                    "method": "servicename",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServicename",
+                    "optional": true,
+                    "label": "_servicename"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"templates\" <$> TF.attribute",
+                    "name": "templates",
+                    "method": "templates",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasTemplates",
+                    "optional": true,
+                    "label": "_templates"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"users\" <$> TF.attribute",
+                    "name": "users",
+                    "method": "users",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasUsers",
+                    "optional": true,
+                    "label": "_users"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vars\" <$> TF.attribute",
+                    "name": "vars",
+                    "method": "vars",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasVars",
+                    "optional": true,
+                    "label": "_vars"
+                }
+            ],
+            "schema": "Resource",
+            "name": "NotificationResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_command",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"command\" <$> TF.attribute",
+                    "name": "command",
+                    "method": "command",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCommand",
+                    "optional": false,
+                    "label": "_command"
+                },
+                {
+                    "default": "_hostname",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"hostname\" <$> TF.attribute",
+                    "name": "hostname",
+                    "method": "hostname",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostname",
+                    "optional": false,
+                    "label": "_hostname"
+                }
+            ],
+            "type": "NotificationResource s",
+            "original": "icinga2_notification"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_checkCommand",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "CheckCommand"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"check_command\" <$> TF.attribute",
+                    "name": "check_command",
+                    "method": "checkCommand",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCheckCommand",
+                    "optional": false,
+                    "label": "_checkCommand"
+                },
+                {
+                    "default": "_hostname",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Hostname"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"hostname\" <$> TF.attribute",
+                    "name": "hostname",
+                    "method": "hostname",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostname",
+                    "optional": false,
+                    "label": "_hostname"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "ServiceName"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "schema": "Resource",
+            "name": "ServiceResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_checkCommand",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "CheckCommand"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"check_command\" <$> TF.attribute",
+                    "name": "check_command",
+                    "method": "checkCommand",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCheckCommand",
+                    "optional": false,
+                    "label": "_checkCommand"
+                },
+                {
+                    "default": "_hostname",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Hostname"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"hostname\" <$> TF.attribute",
+                    "name": "hostname",
+                    "method": "hostname",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHostname",
+                    "optional": false,
+                    "label": "_hostname"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "ServiceName"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "ServiceResource s",
+            "original": "icinga2_service"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"email\" <$> TF.attribute",
+                    "name": "email",
+                    "method": "email",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEmail",
+                    "optional": true,
+                    "label": "_email"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Username"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "schema": "Resource",
+            "name": "UserResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Username"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": false,
+                    "label": "_name"
+                }
+            ],
+            "type": "UserResource s",
+            "original": "icinga2_user"
+        }
+    ],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "Icinga2",
+    "parameters": [
+        {
+            "default": "_apiPassword",
+            "computed": false,
+            "required": true,
+            "help": [
+                "The password for authenticating to the Icinga2 server."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"api_password\"",
+            "name": "api_password",
+            "method": "apiPassword",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasApiPassword",
+            "optional": false,
+            "label": "_apiPassword"
+        },
+        {
+            "default": "_apiUrl",
+            "computed": false,
+            "required": true,
+            "help": [
+                "The address of the Icinga2 server."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"api_url\"",
+            "name": "api_url",
+            "method": "apiUrl",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasApiUrl",
+            "optional": false,
+            "label": "_apiUrl"
+        },
+        {
+            "default": "_apiUser",
+            "computed": false,
+            "required": true,
+            "help": [
+                "The user to authenticate to the Icinga2 Server as."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"api_user\"",
+            "name": "api_user",
+            "method": "apiUser",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasApiUser",
+            "optional": false,
+            "label": "_apiUser"
+        }
+    ],
+    "package": "terrafomo-icinga2",
+    "type": "Provider",
+    "original": "icinga2"
+}
