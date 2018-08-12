@@ -1,0 +1,564 @@
+{
+    "settings": [
+        {
+            "arguments": [
+                {
+                    "default": "_content",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"content\" <$> TF.attribute",
+                    "name": "content",
+                    "method": "content",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContent",
+                    "optional": false,
+                    "label": "_content"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"content_type\" <$> TF.attribute",
+                    "name": "content_type",
+                    "method": "contentType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContentType",
+                    "optional": true,
+                    "label": "_contentType"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"filename\" <$> TF.attribute",
+                    "name": "filename",
+                    "method": "filename",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFilename",
+                    "optional": true,
+                    "label": "_filename"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"merge_type\" <$> TF.attribute",
+                    "name": "merge_type",
+                    "method": "mergeType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMergeType",
+                    "optional": true,
+                    "label": "_mergeType"
+                }
+            ],
+            "name": "Part",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_content",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"content\" <$> TF.attribute",
+                    "name": "content",
+                    "method": "content",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContent",
+                    "optional": false,
+                    "label": "_content"
+                }
+            ],
+            "hashable": false,
+            "type": "Part s",
+            "original": "part"
+        }
+    ],
+    "arguments": [],
+    "dataSources": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"base64_encode\" <$> TF.attribute",
+                    "name": "base64_encode",
+                    "method": "base64Encode",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasBase64Encode",
+                    "optional": true,
+                    "label": "_base64Encode"
+                },
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"gzip\" <$> TF.attribute",
+                    "name": "gzip",
+                    "method": "gzip",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasGzip",
+                    "optional": true,
+                    "label": "_gzip"
+                },
+                {
+                    "default": "_part",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"part\" <$> TF.attribute",
+                    "name": "part",
+                    "method": "part",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Part s]",
+                    "class": "HasPart",
+                    "optional": false,
+                    "label": "_part"
+                }
+            ],
+            "schema": "DataSource",
+            "name": "CloudinitConfigData",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Rendered cloudinit configuration"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rendered\" <$> TF.attribute",
+                    "name": "rendered",
+                    "method": "computedRendered",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRendered",
+                    "optional": false,
+                    "label": "_computedRendered"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_part",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"part\" <$> TF.attribute",
+                    "name": "part",
+                    "method": "part",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Part s]",
+                    "class": "HasPart",
+                    "optional": false,
+                    "label": "_part"
+                }
+            ],
+            "type": "CloudinitConfigData s",
+            "original": "template_cloudinit_config"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "File to read template from"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"filename\" <$> TF.attribute",
+                    "name": "filename",
+                    "method": "filename",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "method": "template",
+                            "label": "_template"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFilename",
+                    "optional": true,
+                    "label": "_filename"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Contents of the template"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"template\" <$> TF.attribute",
+                    "name": "template",
+                    "method": "template",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "method": "filename",
+                            "label": "_filename"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTemplate",
+                    "optional": true,
+                    "label": "_template"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Variables to substitute"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vars\" <$> TF.attribute",
+                    "name": "vars",
+                    "method": "vars",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasVars",
+                    "optional": true,
+                    "label": "_vars"
+                }
+            ],
+            "schema": "DataSource",
+            "name": "FileData",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Rendered template"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rendered\" <$> TF.attribute",
+                    "name": "rendered",
+                    "method": "computedRendered",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRendered",
+                    "optional": false,
+                    "label": "_computedRendered"
+                }
+            ],
+            "parameters": [],
+            "type": "FileData s",
+            "original": "template_file"
+        }
+    ],
+    "resources": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"base64_encode\" <$> TF.attribute",
+                    "name": "base64_encode",
+                    "method": "base64Encode",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasBase64Encode",
+                    "optional": true,
+                    "label": "_base64Encode"
+                },
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"gzip\" <$> TF.attribute",
+                    "name": "gzip",
+                    "method": "gzip",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasGzip",
+                    "optional": true,
+                    "label": "_gzip"
+                },
+                {
+                    "default": "_part",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"part\" <$> TF.attribute",
+                    "name": "part",
+                    "method": "part",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Part s]",
+                    "class": "HasPart",
+                    "optional": false,
+                    "label": "_part"
+                }
+            ],
+            "schema": "Resource",
+            "name": "CloudinitConfigResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Rendered cloudinit configuration"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rendered\" <$> TF.attribute",
+                    "name": "rendered",
+                    "method": "computedRendered",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRendered",
+                    "optional": false,
+                    "label": "_computedRendered"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_part",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"part\" <$> TF.attribute",
+                    "name": "part",
+                    "method": "part",
+                    "conflicts": [],
+                    "type": "TF.Attr s [Part s]",
+                    "class": "HasPart",
+                    "optional": false,
+                    "label": "_part"
+                }
+            ],
+            "type": "CloudinitConfigResource s",
+            "original": "template_cloudinit_config"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "_destinationDir",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to the directory where the templated files will be written"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"destination_dir\" <$> TF.attribute",
+                    "name": "destination_dir",
+                    "method": "destinationDir",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDestinationDir",
+                    "optional": false,
+                    "label": "_destinationDir"
+                },
+                {
+                    "default": "_sourceDir",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to the directory where the files to template reside"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"source_dir\" <$> TF.attribute",
+                    "name": "source_dir",
+                    "method": "sourceDir",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceDir",
+                    "optional": false,
+                    "label": "_sourceDir"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Variables to substitute"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vars\" <$> TF.attribute",
+                    "name": "vars",
+                    "method": "vars",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasVars",
+                    "optional": true,
+                    "label": "_vars"
+                }
+            ],
+            "schema": "Resource",
+            "name": "DirResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_destinationDir",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to the directory where the templated files will be written"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"destination_dir\" <$> TF.attribute",
+                    "name": "destination_dir",
+                    "method": "destinationDir",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDestinationDir",
+                    "optional": false,
+                    "label": "_destinationDir"
+                },
+                {
+                    "default": "_sourceDir",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to the directory where the files to template reside"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"source_dir\" <$> TF.attribute",
+                    "name": "source_dir",
+                    "method": "sourceDir",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceDir",
+                    "optional": false,
+                    "label": "_sourceDir"
+                }
+            ],
+            "type": "DirResource s",
+            "original": "template_dir"
+        },
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "File to read template from"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"filename\" <$> TF.attribute",
+                    "name": "filename",
+                    "method": "filename",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "method": "template",
+                            "label": "_template"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFilename",
+                    "optional": true,
+                    "label": "_filename"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Contents of the template"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"template\" <$> TF.attribute",
+                    "name": "template",
+                    "method": "template",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "method": "filename",
+                            "label": "_filename"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTemplate",
+                    "optional": true,
+                    "label": "_template"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Variables to substitute"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vars\" <$> TF.attribute",
+                    "name": "vars",
+                    "method": "vars",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasVars",
+                    "optional": true,
+                    "label": "_vars"
+                }
+            ],
+            "schema": "Resource",
+            "name": "FileResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Rendered template"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rendered\" <$> TF.attribute",
+                    "name": "rendered",
+                    "method": "computedRendered",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRendered",
+                    "optional": false,
+                    "label": "_computedRendered"
+                }
+            ],
+            "parameters": [],
+            "type": "FileResource s",
+            "original": "template_file"
+        }
+    ],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "Template",
+    "parameters": [],
+    "package": "terrafomo-builtins",
+    "type": "Provider",
+    "original": "template"
+}
