@@ -1,2 +1,2 @@
-name: Google
-package: terrafomo-google
+package-name: terrafomo-google
+provider-name: Google
