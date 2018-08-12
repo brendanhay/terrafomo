@@ -1,0 +1,271 @@
+{
+    "settings": [],
+    "arguments": [
+        {
+            "default": "_customerName",
+            "computed": false,
+            "required": true,
+            "help": [
+                "A Dyn customer name."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"customer_name\"",
+            "name": "customer_name",
+            "method": "customerName",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasCustomerName",
+            "optional": false,
+            "label": "_customerName"
+        },
+        {
+            "default": "_password",
+            "computed": false,
+            "required": true,
+            "help": [
+                "The Dyn password."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"password\"",
+            "name": "password",
+            "method": "password",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasPassword",
+            "optional": false,
+            "label": "_password"
+        },
+        {
+            "default": "_username",
+            "computed": false,
+            "required": true,
+            "help": [
+                "A Dyn username."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"username\"",
+            "name": "username",
+            "method": "username",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasUsername",
+            "optional": false,
+            "label": "_username"
+        }
+    ],
+    "dataSources": [],
+    "resources": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "optional": true,
+                    "label": "_name"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "type",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "optional": false,
+                    "label": "_type'"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "optional": false,
+                    "label": "_value"
+                },
+                {
+                    "default": "_zone",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"zone\" <$> TF.attribute",
+                    "name": "zone",
+                    "method": "zone",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasZone",
+                    "optional": false,
+                    "label": "_zone"
+                }
+            ],
+            "schema": "Resource",
+            "name": "RecordResource",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"fqdn\" <$> TF.attribute",
+                    "name": "fqdn",
+                    "method": "computedFqdn",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedFqdn",
+                    "optional": false,
+                    "label": "_computedFqdn"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ttl\" <$> TF.attribute",
+                    "name": "ttl",
+                    "method": "computedTtl",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedTtl",
+                    "optional": true,
+                    "label": "_computedTtl"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "type",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "optional": false,
+                    "label": "_type'"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "optional": false,
+                    "label": "_value"
+                },
+                {
+                    "default": "_zone",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"zone\" <$> TF.attribute",
+                    "name": "zone",
+                    "method": "zone",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasZone",
+                    "optional": false,
+                    "label": "_zone"
+                }
+            ],
+            "type": "RecordResource s",
+            "original": "dyn_record"
+        }
+    ],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "Dyn",
+    "parameters": [
+        {
+            "default": "_customerName",
+            "computed": false,
+            "required": true,
+            "help": [
+                "A Dyn customer name."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"customer_name\"",
+            "name": "customer_name",
+            "method": "customerName",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasCustomerName",
+            "optional": false,
+            "label": "_customerName"
+        },
+        {
+            "default": "_password",
+            "computed": false,
+            "required": true,
+            "help": [
+                "The Dyn password."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"password\"",
+            "name": "password",
+            "method": "password",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasPassword",
+            "optional": false,
+            "label": "_password"
+        },
+        {
+            "default": "_username",
+            "computed": false,
+            "required": true,
+            "help": [
+                "A Dyn username."
+            ],
+            "forceNew": false,
+            "encoder": "P.Just $ TF.assign \"username\"",
+            "name": "username",
+            "method": "username",
+            "conflicts": [],
+            "type": "P.Text",
+            "class": "HasUsername",
+            "optional": false,
+            "label": "_username"
+        }
+    ],
+    "package": "terrafomo-dyn",
+    "type": "Provider",
+    "original": "dyn"
+}
