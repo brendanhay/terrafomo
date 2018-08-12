@@ -1,0 +1,28 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-digitalocean
+
+<<: *common
+<<: *version
+<<: *options
+<<: *extensions
+
+dependencies:
+  - base
+  - unordered-containers
+  - text
+  - terrafomo
+  - hashable
+  - microlens
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.DigitalOcean
+
+  reexported-modules: >
+    terrafomo:Terrafomo,
+    terrafomo:Terrafomo.Format
