@@ -1,0 +1,169 @@
+{
+    "settings": [],
+    "arguments": [],
+    "dataSources": [
+        {
+            "arguments": [
+                {
+                    "default": "_filename",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to the output file"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"filename\" <$> TF.attribute",
+                    "name": "filename",
+                    "method": "filename",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFilename",
+                    "optional": false,
+                    "label": "_filename"
+                }
+            ],
+            "schema": "DataSource",
+            "name": "FileData",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"content\" <$> TF.attribute",
+                    "name": "content",
+                    "method": "computedContent",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedContent",
+                    "optional": false,
+                    "label": "_computedContent"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_filename",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to the output file"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"filename\" <$> TF.attribute",
+                    "name": "filename",
+                    "method": "filename",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFilename",
+                    "optional": false,
+                    "label": "_filename"
+                }
+            ],
+            "type": "FileData s",
+            "original": "local_file"
+        }
+    ],
+    "resources": [
+        {
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"content\" <$> TF.attribute",
+                    "name": "content",
+                    "method": "content",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "method": "sensitiveContent",
+                            "label": "_sensitiveContent"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContent",
+                    "optional": true,
+                    "label": "_content"
+                },
+                {
+                    "default": "_filename",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to the output file"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"filename\" <$> TF.attribute",
+                    "name": "filename",
+                    "method": "filename",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFilename",
+                    "optional": false,
+                    "label": "_filename"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"sensitive_content\" <$> TF.attribute",
+                    "name": "sensitive_content",
+                    "method": "sensitiveContent",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "method": "content",
+                            "label": "_content"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSensitiveContent",
+                    "optional": true,
+                    "label": "_sensitiveContent"
+                }
+            ],
+            "schema": "Resource",
+            "name": "FileResource",
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_filename",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to the output file"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"filename\" <$> TF.attribute",
+                    "name": "filename",
+                    "method": "filename",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFilename",
+                    "optional": false,
+                    "label": "_filename"
+                }
+            ],
+            "type": "FileResource s",
+            "original": "local_file"
+        }
+    ],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "Local",
+    "parameters": [],
+    "package": "terrafomo-builtins",
+    "type": "Provider",
+    "original": "local"
+}
