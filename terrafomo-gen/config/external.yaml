@@ -1,0 +1,3 @@
+package-name: terrafomo-builtins
+provider-name: External
+package-yaml: false

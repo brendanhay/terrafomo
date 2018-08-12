@@ -1,0 +1,107 @@
+{
+    "settings": [],
+    "arguments": [],
+    "dataSources": [
+        {
+            "arguments": [
+                {
+                    "default": "_program",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"program\" <$> TF.attribute",
+                    "name": "program",
+                    "method": "program",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasProgram",
+                    "optional": false,
+                    "label": "_program"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"query\" <$> TF.attribute",
+                    "name": "query",
+                    "method": "query",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasQuery",
+                    "optional": true,
+                    "label": "_query"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"working_dir\" <$> TF.attribute",
+                    "name": "working_dir",
+                    "method": "workingDir",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasWorkingDir",
+                    "optional": true,
+                    "label": "_workingDir"
+                }
+            ],
+            "schema": "DataSource",
+            "name": "Data",
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"result\" <$> TF.attribute",
+                    "name": "result",
+                    "method": "computedResult",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasComputedResult",
+                    "optional": false,
+                    "label": "_computedResult"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_program",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"program\" <$> TF.attribute",
+                    "name": "program",
+                    "method": "program",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasProgram",
+                    "optional": false,
+                    "label": "_program"
+                }
+            ],
+            "type": "Data s",
+            "original": "external"
+        }
+    ],
+    "resources": [],
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "External",
+    "parameters": [],
+    "package": "terrafomo-builtins",
+    "type": "Provider",
+    "original": "external"
+}
