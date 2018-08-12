@@ -4,7 +4,7 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.AWS.DataSource02
@@ -17,119 +17,119 @@
 module Terrafomo.AWS.DataSource02
     (
     -- * DataSource Datatypes
-    -- **  PrefixListData
+    -- ** aws_prefix_list
       PrefixListData (..)
     , prefixListData
 
-    -- **  PricingProductData
+    -- ** aws_pricing_product
     , PricingProductData (..)
     , pricingProductData
 
-    -- **  RdsClusterData
+    -- ** aws_rds_cluster
     , RdsClusterData (..)
     , rdsClusterData
 
-    -- **  RedshiftClusterData
+    -- ** aws_redshift_cluster
     , RedshiftClusterData (..)
     , redshiftClusterData
 
-    -- **  RedshiftServiceAccountData
+    -- ** aws_redshift_service_account
     , RedshiftServiceAccountData (..)
     , redshiftServiceAccountData
 
-    -- **  RegionData
+    -- ** aws_region
     , RegionData (..)
     , regionData
 
-    -- **  RouteData
+    -- ** aws_route
     , RouteData (..)
     , routeData
 
-    -- **  Route53ZoneData
+    -- ** aws_route53_zone
     , Route53ZoneData (..)
     , route53ZoneData
 
-    -- **  RouteTableData
+    -- ** aws_route_table
     , RouteTableData (..)
     , routeTableData
 
-    -- **  RouteTablesData
+    -- ** aws_route_tables
     , RouteTablesData (..)
     , routeTablesData
 
-    -- **  S3BucketData
+    -- ** aws_s3_bucket
     , S3BucketData (..)
     , s3BucketData
 
-    -- **  S3BucketObjectData
+    -- ** aws_s3_bucket_object
     , S3BucketObjectData (..)
     , s3BucketObjectData
 
-    -- **  SecretsmanagerSecretData
+    -- ** aws_secretsmanager_secret
     , SecretsmanagerSecretData (..)
     , secretsmanagerSecretData
 
-    -- **  SecretsmanagerSecretVersionData
+    -- ** aws_secretsmanager_secret_version
     , SecretsmanagerSecretVersionData (..)
     , secretsmanagerSecretVersionData
 
-    -- **  SecurityGroupData
+    -- ** aws_security_group
     , SecurityGroupData (..)
     , securityGroupData
 
-    -- **  SecurityGroupsData
+    -- ** aws_security_groups
     , SecurityGroupsData (..)
     , securityGroupsData
 
-    -- **  SnsTopicData
+    -- ** aws_sns_topic
     , SnsTopicData (..)
     , snsTopicData
 
-    -- **  SqsQueueData
+    -- ** aws_sqs_queue
     , SqsQueueData (..)
     , sqsQueueData
 
-    -- **  SsmParameterData
+    -- ** aws_ssm_parameter
     , SsmParameterData (..)
     , ssmParameterData
 
-    -- **  StoragegatewayLocalDiskData
+    -- ** aws_storagegateway_local_disk
     , StoragegatewayLocalDiskData (..)
     , storagegatewayLocalDiskData
 
-    -- **  SubnetData
+    -- ** aws_subnet
     , SubnetData (..)
     , subnetData
 
-    -- **  SubnetIdsData
+    -- ** aws_subnet_ids
     , SubnetIdsData (..)
     , subnetIdsData
 
-    -- **  VpcData
+    -- ** aws_vpc
     , VpcData (..)
     , vpcData
 
-    -- **  VpcDhcpOptionsData
+    -- ** aws_vpc_dhcp_options
     , VpcDhcpOptionsData (..)
     , vpcDhcpOptionsData
 
-    -- **  VpcEndpointData
+    -- ** aws_vpc_endpoint
     , VpcEndpointData (..)
     , vpcEndpointData
 
-    -- **  VpcEndpointServiceData
+    -- ** aws_vpc_endpoint_service
     , VpcEndpointServiceData (..)
     , vpcEndpointServiceData
 
-    -- **  VpcPeeringConnectionData
+    -- ** aws_vpc_peering_connection
     , VpcPeeringConnectionData (..)
     , vpcPeeringConnectionData
 
-    -- **  VpcsData
+    -- ** aws_vpcs
     , VpcsData (..)
     , vpcsData
 
-    -- **  VpnGatewayData
+    -- ** aws_vpn_gateway
     , VpnGatewayData (..)
     , vpnGatewayData
 
@@ -158,9 +158,13 @@ import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Schema       as TF
 
 -- | @aws_prefix_list@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_prefix_list terraform documentation>
+-- for more information.
 data PrefixListData s = PrefixListData'
     { _prefixListId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @prefix_list_id@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (PrefixListData s) where
@@ -179,7 +183,8 @@ prefixListData =
 instance P.HasPrefixListId (PrefixListData s) (TF.Attr s P.Text) where
     prefixListId =
         P.lens (_prefixListId :: PrefixListData s -> TF.Attr s P.Text)
-               (\s a -> s { _prefixListId = a } :: PrefixListData s)
+               (\s a -> s { _prefixListId = a
+                          } :: PrefixListData s)
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (PrefixListData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
@@ -188,11 +193,16 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (PrefixListData s)) (TF.Attr s P
     computedName x = TF.compute (TF.refKey x) "name"
 
 -- | @aws_pricing_product@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_pricing_product terraform documentation>
+-- for more information.
 data PricingProductData s = PricingProductData'
     { _filters     :: TF.Attr s (P.NonEmpty (Filters s))
-    -- ^ Undocumented.
+    -- ^ @filters@ - (Required)
+    --
     , _serviceCode :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @service_code@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (PricingProductData s) where
@@ -202,8 +212,8 @@ instance TF.IsObject (PricingProductData s) where
         ]
 
 pricingProductData
-    :: TF.Attr s (P.NonEmpty (Filters s)) -- ^ @filters@
-    -> TF.Attr s P.Text -- ^ @service_code@
+    :: TF.Attr s (P.NonEmpty (Filters s)) -- ^ @filters@ - 'P.filters'
+    -> TF.Attr s P.Text -- ^ @service_code@ - 'P.serviceCode'
     -> TF.DataSource P.Provider (PricingProductData s)
 pricingProductData _filters _serviceCode =
     TF.newDataSource "aws_pricing_product" $
@@ -215,20 +225,26 @@ pricingProductData _filters _serviceCode =
 instance P.HasFilters (PricingProductData s) (TF.Attr s (P.NonEmpty (Filters s))) where
     filters =
         P.lens (_filters :: PricingProductData s -> TF.Attr s (P.NonEmpty (Filters s)))
-               (\s a -> s { _filters = a } :: PricingProductData s)
+               (\s a -> s { _filters = a
+                          } :: PricingProductData s)
 
 instance P.HasServiceCode (PricingProductData s) (TF.Attr s P.Text) where
     serviceCode =
         P.lens (_serviceCode :: PricingProductData s -> TF.Attr s P.Text)
-               (\s a -> s { _serviceCode = a } :: PricingProductData s)
+               (\s a -> s { _serviceCode = a
+                          } :: PricingProductData s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (PricingProductData s)) (TF.Attr s P.Text) where
     computedResult x = TF.compute (TF.refKey x) "result"
 
 -- | @aws_rds_cluster@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_rds_cluster terraform documentation>
+-- for more information.
 data RdsClusterData s = RdsClusterData'
     { _clusterIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cluster_identifier@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RdsClusterData s) where
@@ -237,7 +253,7 @@ instance TF.IsObject (RdsClusterData s) where
         ]
 
 rdsClusterData
-    :: TF.Attr s P.Text -- ^ @cluster_identifier@
+    :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
     -> TF.DataSource P.Provider (RdsClusterData s)
 rdsClusterData _clusterIdentifier =
     TF.newDataSource "aws_rds_cluster" $
@@ -248,7 +264,8 @@ rdsClusterData _clusterIdentifier =
 instance P.HasClusterIdentifier (RdsClusterData s) (TF.Attr s P.Text) where
     clusterIdentifier =
         P.lens (_clusterIdentifier :: RdsClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterIdentifier = a } :: RdsClusterData s)
+               (\s a -> s { _clusterIdentifier = a
+                          } :: RdsClusterData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -326,11 +343,16 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RdsClusterData s
     computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "vpc_security_group_ids"
 
 -- | @aws_redshift_cluster@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_redshift_cluster terraform documentation>
+-- for more information.
 data RedshiftClusterData s = RedshiftClusterData'
     { _clusterIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cluster_identifier@ - (Required)
+    --
     , _tags              :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RedshiftClusterData s) where
@@ -340,7 +362,7 @@ instance TF.IsObject (RedshiftClusterData s) where
         ]
 
 redshiftClusterData
-    :: TF.Attr s P.Text -- ^ @cluster_identifier@
+    :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
     -> TF.DataSource P.Provider (RedshiftClusterData s)
 redshiftClusterData _clusterIdentifier =
     TF.newDataSource "aws_redshift_cluster" $
@@ -352,12 +374,14 @@ redshiftClusterData _clusterIdentifier =
 instance P.HasClusterIdentifier (RedshiftClusterData s) (TF.Attr s P.Text) where
     clusterIdentifier =
         P.lens (_clusterIdentifier :: RedshiftClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterIdentifier = a } :: RedshiftClusterData s)
+               (\s a -> s { _clusterIdentifier = a
+                          } :: RedshiftClusterData s)
 
 instance P.HasTags (RedshiftClusterData s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: RedshiftClusterData s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: RedshiftClusterData s)
+               (\s a -> s { _tags = a
+                          } :: RedshiftClusterData s)
 
 instance s ~ s' => P.HasComputedAllowVersionUpgrade (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Bool) where
     computedAllowVersionUpgrade x = TF.compute (TF.refKey x) "allow_version_upgrade"
@@ -444,9 +468,13 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RedshiftClusterD
     computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "vpc_security_group_ids"
 
 -- | @aws_redshift_service_account@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_redshift_service_account terraform documentation>
+-- for more information.
 data RedshiftServiceAccountData s = RedshiftServiceAccountData'
     { _region :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @region@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RedshiftServiceAccountData s) where
@@ -465,12 +493,16 @@ redshiftServiceAccountData =
 instance P.HasRegion (RedshiftServiceAccountData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: RedshiftServiceAccountData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a } :: RedshiftServiceAccountData s)
+               (\s a -> s { _region = a
+                          } :: RedshiftServiceAccountData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (RedshiftServiceAccountData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
 -- | @aws_region@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_region terraform documentation>
+-- for more information.
 data RegionData s = RegionData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -496,9 +528,13 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (RegionData s)) (TF.Attr s P.Tex
     computedName x = TF.compute (TF.refKey x) "name"
 
 -- | @aws_route@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_route terraform documentation>
+-- for more information.
 data RouteData s = RouteData'
     { _routeTableId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @route_table_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RouteData s) where
@@ -507,7 +543,7 @@ instance TF.IsObject (RouteData s) where
         ]
 
 routeData
-    :: TF.Attr s P.Text -- ^ @route_table_id@
+    :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
     -> TF.DataSource P.Provider (RouteData s)
 routeData _routeTableId =
     TF.newDataSource "aws_route" $
@@ -518,7 +554,8 @@ routeData _routeTableId =
 instance P.HasRouteTableId (RouteData s) (TF.Attr s P.Text) where
     routeTableId =
         P.lens (_routeTableId :: RouteData s -> TF.Attr s P.Text)
-               (\s a -> s { _routeTableId = a } :: RouteData s)
+               (\s a -> s { _routeTableId = a
+                          } :: RouteData s)
 
 instance s ~ s' => P.HasComputedDestinationCidrBlock (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
     computedDestinationCidrBlock x = TF.compute (TF.refKey x) "destination_cidr_block"
@@ -545,9 +582,13 @@ instance s ~ s' => P.HasComputedVpcPeeringConnectionId (TF.Ref s' (RouteData s))
     computedVpcPeeringConnectionId x = TF.compute (TF.refKey x) "vpc_peering_connection_id"
 
 -- | @aws_route53_zone@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_route53_zone terraform documentation>
+-- for more information.
 data Route53ZoneData s = Route53ZoneData'
     { _privateZone :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @private_zone@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (Route53ZoneData s) where
@@ -566,7 +607,8 @@ route53ZoneData =
 instance P.HasPrivateZone (Route53ZoneData s) (TF.Attr s P.Bool) where
     privateZone =
         P.lens (_privateZone :: Route53ZoneData s -> TF.Attr s P.Bool)
-               (\s a -> s { _privateZone = a } :: Route53ZoneData s)
+               (\s a -> s { _privateZone = a
+                          } :: Route53ZoneData s)
 
 instance s ~ s' => P.HasComputedCallerReference (TF.Ref s' (Route53ZoneData s)) (TF.Attr s P.Text) where
     computedCallerReference x = TF.compute (TF.refKey x) "caller_reference"
@@ -593,9 +635,13 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (Route53ZoneData s)) (TF.Attr 
     computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
 -- | @aws_route_table@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_route_table terraform documentation>
+-- for more information.
 data RouteTableData s = RouteTableData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RouteTableData s) where
@@ -614,7 +660,8 @@ routeTableData =
 instance P.HasFilter (RouteTableData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: RouteTableData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: RouteTableData s)
+               (\s a -> s { _filter = a
+                          } :: RouteTableData s)
 
 instance s ~ s' => P.HasComputedAssociations (TF.Ref s' (RouteTableData s)) (TF.Attr s [Associations s]) where
     computedAssociations x = TF.compute (TF.refKey x) "associations"
@@ -635,11 +682,16 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (RouteTableData s)) (TF.Attr s 
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_route_tables@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_route_tables terraform documentation>
+-- for more information.
 data RouteTablesData s = RouteTablesData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     , _vpcId  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @vpc_id@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RouteTablesData s) where
@@ -660,12 +712,14 @@ routeTablesData =
 instance P.HasFilter (RouteTablesData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: RouteTablesData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: RouteTablesData s)
+               (\s a -> s { _filter = a
+                          } :: RouteTablesData s)
 
 instance P.HasVpcId (RouteTablesData s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: RouteTablesData s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a } :: RouteTablesData s)
+               (\s a -> s { _vpcId = a
+                          } :: RouteTablesData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (RouteTablesData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     computedIds x = TF.compute (TF.refKey x) "ids"
@@ -674,9 +728,13 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (RouteTablesData s)) (TF.Attr s 
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_s3_bucket@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_s3_bucket terraform documentation>
+-- for more information.
 data S3BucketData s = S3BucketData'
     { _bucket :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @bucket@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (S3BucketData s) where
@@ -685,7 +743,7 @@ instance TF.IsObject (S3BucketData s) where
         ]
 
 s3BucketData
-    :: TF.Attr s P.Text -- ^ @bucket@
+    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.DataSource P.Provider (S3BucketData s)
 s3BucketData _bucket =
     TF.newDataSource "aws_s3_bucket" $
@@ -696,7 +754,8 @@ s3BucketData _bucket =
 instance P.HasBucket (S3BucketData s) (TF.Attr s P.Text) where
     bucket =
         P.lens (_bucket :: S3BucketData s -> TF.Attr s P.Text)
-               (\s a -> s { _bucket = a } :: S3BucketData s)
+               (\s a -> s { _bucket = a
+                          } :: S3BucketData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (S3BucketData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -717,13 +776,19 @@ instance s ~ s' => P.HasComputedWebsiteEndpoint (TF.Ref s' (S3BucketData s)) (TF
     computedWebsiteEndpoint x = TF.compute (TF.refKey x) "website_endpoint"
 
 -- | @aws_s3_bucket_object@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_s3_bucket_object terraform documentation>
+-- for more information.
 data S3BucketObjectData s = S3BucketObjectData'
     { _bucket :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @bucket@ - (Required)
+    --
     , _key    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @key@ - (Required)
+    --
     , _range  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @range@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (S3BucketObjectData s) where
@@ -734,8 +799,8 @@ instance TF.IsObject (S3BucketObjectData s) where
         ]
 
 s3BucketObjectData
-    :: TF.Attr s P.Text -- ^ @bucket@
-    -> TF.Attr s P.Text -- ^ @key@
+    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
+    -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.DataSource P.Provider (S3BucketObjectData s)
 s3BucketObjectData _bucket _key =
     TF.newDataSource "aws_s3_bucket_object" $
@@ -748,17 +813,20 @@ s3BucketObjectData _bucket _key =
 instance P.HasBucket (S3BucketObjectData s) (TF.Attr s P.Text) where
     bucket =
         P.lens (_bucket :: S3BucketObjectData s -> TF.Attr s P.Text)
-               (\s a -> s { _bucket = a } :: S3BucketObjectData s)
+               (\s a -> s { _bucket = a
+                          } :: S3BucketObjectData s)
 
 instance P.HasKey (S3BucketObjectData s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: S3BucketObjectData s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a } :: S3BucketObjectData s)
+               (\s a -> s { _key = a
+                          } :: S3BucketObjectData s)
 
 instance P.HasRange (S3BucketObjectData s) (TF.Attr s P.Text) where
     range =
         P.lens (_range :: S3BucketObjectData s -> TF.Attr s P.Text)
-               (\s a -> s { _range = a } :: S3BucketObjectData s)
+               (\s a -> s { _range = a
+                          } :: S3BucketObjectData s)
 
 instance s ~ s' => P.HasComputedBody (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
     computedBody x = TF.compute (TF.refKey x) "body"
@@ -815,6 +883,9 @@ instance s ~ s' => P.HasComputedWebsiteRedirectLocation (TF.Ref s' (S3BucketObje
     computedWebsiteRedirectLocation x = TF.compute (TF.refKey x) "website_redirect_location"
 
 -- | @aws_secretsmanager_secret@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_secretsmanager_secret terraform documentation>
+-- for more information.
 data SecretsmanagerSecretData s = SecretsmanagerSecretData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -852,11 +923,16 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecretsmanagerSecretData s)) (T
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_secretsmanager_secret_version@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_secretsmanager_secret_version terraform documentation>
+-- for more information.
 data SecretsmanagerSecretVersionData s = SecretsmanagerSecretVersionData'
     { _secretId     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @secret_id@ - (Required)
+    --
     , _versionStage :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @version_stage@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SecretsmanagerSecretVersionData s) where
@@ -866,7 +942,7 @@ instance TF.IsObject (SecretsmanagerSecretVersionData s) where
         ]
 
 secretsmanagerSecretVersionData
-    :: TF.Attr s P.Text -- ^ @secret_id@
+    :: TF.Attr s P.Text -- ^ @secret_id@ - 'P.secretId'
     -> TF.DataSource P.Provider (SecretsmanagerSecretVersionData s)
 secretsmanagerSecretVersionData _secretId =
     TF.newDataSource "aws_secretsmanager_secret_version" $
@@ -878,12 +954,14 @@ secretsmanagerSecretVersionData _secretId =
 instance P.HasSecretId (SecretsmanagerSecretVersionData s) (TF.Attr s P.Text) where
     secretId =
         P.lens (_secretId :: SecretsmanagerSecretVersionData s -> TF.Attr s P.Text)
-               (\s a -> s { _secretId = a } :: SecretsmanagerSecretVersionData s)
+               (\s a -> s { _secretId = a
+                          } :: SecretsmanagerSecretVersionData s)
 
 instance P.HasVersionStage (SecretsmanagerSecretVersionData s) (TF.Attr s P.Text) where
     versionStage =
         P.lens (_versionStage :: SecretsmanagerSecretVersionData s -> TF.Attr s P.Text)
-               (\s a -> s { _versionStage = a } :: SecretsmanagerSecretVersionData s)
+               (\s a -> s { _versionStage = a
+                          } :: SecretsmanagerSecretVersionData s)
 
 instance s ~ s' => P.HasComputedSecretString (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s P.Text) where
     computedSecretString x = TF.compute (TF.refKey x) "secret_string"
@@ -895,9 +973,13 @@ instance s ~ s' => P.HasComputedVersionStages (TF.Ref s' (SecretsmanagerSecretVe
     computedVersionStages x = TF.compute (TF.refKey x) "version_stages"
 
 -- | @aws_security_group@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_security_group terraform documentation>
+-- for more information.
 data SecurityGroupData s = SecurityGroupData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SecurityGroupData s) where
@@ -916,7 +998,8 @@ securityGroupData =
 instance P.HasFilter (SecurityGroupData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: SecurityGroupData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: SecurityGroupData s)
+               (\s a -> s { _filter = a
+                          } :: SecurityGroupData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -937,9 +1020,13 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SecurityGroupData s)) (TF.Attr
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_security_groups@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_security_groups terraform documentation>
+-- for more information.
 data SecurityGroupsData s = SecurityGroupsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SecurityGroupsData s) where
@@ -958,7 +1045,8 @@ securityGroupsData =
 instance P.HasFilter (SecurityGroupsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: SecurityGroupsData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: SecurityGroupsData s)
+               (\s a -> s { _filter = a
+                          } :: SecurityGroupsData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "ids"
@@ -970,9 +1058,13 @@ instance s ~ s' => P.HasComputedVpcIds (TF.Ref s' (SecurityGroupsData s)) (TF.At
     computedVpcIds x = TF.compute (TF.refKey x) "vpc_ids"
 
 -- | @aws_sns_topic@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_sns_topic terraform documentation>
+-- for more information.
 data SnsTopicData s = SnsTopicData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SnsTopicData s) where
@@ -981,7 +1073,7 @@ instance TF.IsObject (SnsTopicData s) where
         ]
 
 snsTopicData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (SnsTopicData s)
 snsTopicData _name =
     TF.newDataSource "aws_sns_topic" $
@@ -992,15 +1084,20 @@ snsTopicData _name =
 instance P.HasName (SnsTopicData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SnsTopicData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SnsTopicData s)
+               (\s a -> s { _name = a
+                          } :: SnsTopicData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SnsTopicData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
 -- | @aws_sqs_queue@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_sqs_queue terraform documentation>
+-- for more information.
 data SqsQueueData s = SqsQueueData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SqsQueueData s) where
@@ -1009,7 +1106,7 @@ instance TF.IsObject (SqsQueueData s) where
         ]
 
 sqsQueueData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (SqsQueueData s)
 sqsQueueData _name =
     TF.newDataSource "aws_sqs_queue" $
@@ -1020,7 +1117,8 @@ sqsQueueData _name =
 instance P.HasName (SqsQueueData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SqsQueueData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SqsQueueData s)
+               (\s a -> s { _name = a
+                          } :: SqsQueueData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SqsQueueData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1029,11 +1127,16 @@ instance s ~ s' => P.HasComputedUrl (TF.Ref s' (SqsQueueData s)) (TF.Attr s P.Te
     computedUrl x = TF.compute (TF.refKey x) "url"
 
 -- | @aws_ssm_parameter@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ssm_parameter terraform documentation>
+-- for more information.
 data SsmParameterData s = SsmParameterData'
     { _name           :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _withDecryption :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @with_decryption@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SsmParameterData s) where
@@ -1043,7 +1146,7 @@ instance TF.IsObject (SsmParameterData s) where
         ]
 
 ssmParameterData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (SsmParameterData s)
 ssmParameterData _name =
     TF.newDataSource "aws_ssm_parameter" $
@@ -1055,12 +1158,14 @@ ssmParameterData _name =
 instance P.HasName (SsmParameterData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SsmParameterData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SsmParameterData s)
+               (\s a -> s { _name = a
+                          } :: SsmParameterData s)
 
 instance P.HasWithDecryption (SsmParameterData s) (TF.Attr s P.Bool) where
     withDecryption =
         P.lens (_withDecryption :: SsmParameterData s -> TF.Attr s P.Bool)
-               (\s a -> s { _withDecryption = a } :: SsmParameterData s)
+               (\s a -> s { _withDecryption = a
+                          } :: SsmParameterData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SsmParameterData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1072,11 +1177,16 @@ instance s ~ s' => P.HasComputedValue (TF.Ref s' (SsmParameterData s)) (TF.Attr 
     computedValue x = TF.compute (TF.refKey x) "value"
 
 -- | @aws_storagegateway_local_disk@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_storagegateway_local_disk terraform documentation>
+-- for more information.
 data StoragegatewayLocalDiskData s = StoragegatewayLocalDiskData'
     { _diskPath   :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @disk_path@ - (Required)
+    --
     , _gatewayArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @gateway_arn@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (StoragegatewayLocalDiskData s) where
@@ -1086,8 +1196,8 @@ instance TF.IsObject (StoragegatewayLocalDiskData s) where
         ]
 
 storagegatewayLocalDiskData
-    :: TF.Attr s P.Text -- ^ @disk_path@
-    -> TF.Attr s P.Text -- ^ @gateway_arn@
+    :: TF.Attr s P.Text -- ^ @disk_path@ - 'P.diskPath'
+    -> TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
     -> TF.DataSource P.Provider (StoragegatewayLocalDiskData s)
 storagegatewayLocalDiskData _diskPath _gatewayArn =
     TF.newDataSource "aws_storagegateway_local_disk" $
@@ -1099,20 +1209,26 @@ storagegatewayLocalDiskData _diskPath _gatewayArn =
 instance P.HasDiskPath (StoragegatewayLocalDiskData s) (TF.Attr s P.Text) where
     diskPath =
         P.lens (_diskPath :: StoragegatewayLocalDiskData s -> TF.Attr s P.Text)
-               (\s a -> s { _diskPath = a } :: StoragegatewayLocalDiskData s)
+               (\s a -> s { _diskPath = a
+                          } :: StoragegatewayLocalDiskData s)
 
 instance P.HasGatewayArn (StoragegatewayLocalDiskData s) (TF.Attr s P.Text) where
     gatewayArn =
         P.lens (_gatewayArn :: StoragegatewayLocalDiskData s -> TF.Attr s P.Text)
-               (\s a -> s { _gatewayArn = a } :: StoragegatewayLocalDiskData s)
+               (\s a -> s { _gatewayArn = a
+                          } :: StoragegatewayLocalDiskData s)
 
 instance s ~ s' => P.HasComputedDiskId (TF.Ref s' (StoragegatewayLocalDiskData s)) (TF.Attr s P.Text) where
     computedDiskId x = TF.compute (TF.refKey x) "disk_id"
 
 -- | @aws_subnet@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_subnet terraform documentation>
+-- for more information.
 data SubnetData s = SubnetData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SubnetData s) where
@@ -1131,7 +1247,8 @@ subnetData =
 instance P.HasFilter (SubnetData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: SubnetData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: SubnetData s)
+               (\s a -> s { _filter = a
+                          } :: SubnetData s)
 
 instance s ~ s' => P.HasComputedAssignIpv6AddressOnCreation (TF.Ref s' (SubnetData s)) (TF.Attr s P.Bool) where
     computedAssignIpv6AddressOnCreation x = TF.compute (TF.refKey x) "assign_ipv6_address_on_creation"
@@ -1167,11 +1284,16 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SubnetData s)) (TF.Attr s P.Te
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_subnet_ids@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_subnet_ids terraform documentation>
+-- for more information.
 data SubnetIdsData s = SubnetIdsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     , _vpcId  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @vpc_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SubnetIdsData s) where
@@ -1181,7 +1303,7 @@ instance TF.IsObject (SubnetIdsData s) where
         ]
 
 subnetIdsData
-    :: TF.Attr s P.Text -- ^ @vpc_id@
+    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> TF.DataSource P.Provider (SubnetIdsData s)
 subnetIdsData _vpcId =
     TF.newDataSource "aws_subnet_ids" $
@@ -1193,12 +1315,14 @@ subnetIdsData _vpcId =
 instance P.HasFilter (SubnetIdsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: SubnetIdsData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: SubnetIdsData s)
+               (\s a -> s { _filter = a
+                          } :: SubnetIdsData s)
 
 instance P.HasVpcId (SubnetIdsData s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: SubnetIdsData s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a } :: SubnetIdsData s)
+               (\s a -> s { _vpcId = a
+                          } :: SubnetIdsData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (SubnetIdsData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     computedIds x = TF.compute (TF.refKey x) "ids"
@@ -1207,9 +1331,13 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (SubnetIdsData s)) (TF.Attr s (P
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_vpc@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_vpc terraform documentation>
+-- for more information.
 data VpcData s = VpcData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcData s) where
@@ -1228,7 +1356,8 @@ vpcData =
 instance P.HasFilter (VpcData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: VpcData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: VpcData s)
+               (\s a -> s { _filter = a
+                          } :: VpcData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1270,9 +1399,13 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcData s)) (TF.Attr s (P.HashM
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_vpc_dhcp_options@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_vpc_dhcp_options terraform documentation>
+-- for more information.
 data VpcDhcpOptionsData s = VpcDhcpOptionsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcDhcpOptionsData s) where
@@ -1291,7 +1424,8 @@ vpcDhcpOptionsData =
 instance P.HasFilter (VpcDhcpOptionsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: VpcDhcpOptionsData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: VpcDhcpOptionsData s)
+               (\s a -> s { _filter = a
+                          } :: VpcDhcpOptionsData s)
 
 instance s ~ s' => P.HasComputedDhcpOptionsId (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
     computedDhcpOptionsId x = TF.compute (TF.refKey x) "dhcp_options_id"
@@ -1315,6 +1449,9 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_vpc_endpoint@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_vpc_endpoint terraform documentation>
+-- for more information.
 data VpcEndpointData s = VpcEndpointData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -1370,9 +1507,13 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcEndpointData s)) (TF.Attr s
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_vpc_endpoint_service@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_vpc_endpoint_service terraform documentation>
+-- for more information.
 data VpcEndpointServiceData s = VpcEndpointServiceData'
     { _service :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @service@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcEndpointServiceData s) where
@@ -1391,7 +1532,8 @@ vpcEndpointServiceData =
 instance P.HasService (VpcEndpointServiceData s) (TF.Attr s P.Text) where
     service =
         P.lens (_service :: VpcEndpointServiceData s -> TF.Attr s P.Text)
-               (\s a -> s { _service = a } :: VpcEndpointServiceData s)
+               (\s a -> s { _service = a
+                          } :: VpcEndpointServiceData s)
 
 instance s ~ s' => P.HasComputedAcceptanceRequired (TF.Ref s' (VpcEndpointServiceData s)) (TF.Attr s P.Bool) where
     computedAcceptanceRequired x = TF.compute (TF.refKey x) "acceptance_required"
@@ -1418,9 +1560,13 @@ instance s ~ s' => P.HasComputedVpcEndpointPolicySupported (TF.Ref s' (VpcEndpoi
     computedVpcEndpointPolicySupported x = TF.compute (TF.refKey x) "vpc_endpoint_policy_supported"
 
 -- | @aws_vpc_peering_connection@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_vpc_peering_connection terraform documentation>
+-- for more information.
 data VpcPeeringConnectionData s = VpcPeeringConnectionData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcPeeringConnectionData s) where
@@ -1439,7 +1585,8 @@ vpcPeeringConnectionData =
 instance P.HasFilter (VpcPeeringConnectionData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: VpcPeeringConnectionData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: VpcPeeringConnectionData s)
+               (\s a -> s { _filter = a
+                          } :: VpcPeeringConnectionData s)
 
 instance s ~ s' => P.HasComputedAccepter (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Bool))) where
     computedAccepter x = TF.compute (TF.refKey x) "accepter"
@@ -1481,9 +1628,13 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcPeeringConnectionData s)) (
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_vpcs@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_vpcs terraform documentation>
+-- for more information.
 data VpcsData s = VpcsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpcsData s) where
@@ -1502,7 +1653,8 @@ vpcsData =
 instance P.HasFilter (VpcsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: VpcsData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: VpcsData s)
+               (\s a -> s { _filter = a
+                          } :: VpcsData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (VpcsData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     computedIds x = TF.compute (TF.refKey x) "ids"
@@ -1511,9 +1663,13 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcsData s)) (TF.Attr s (P.Hash
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_vpn_gateway@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_vpn_gateway terraform documentation>
+-- for more information.
 data VpnGatewayData s = VpnGatewayData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (VpnGatewayData s) where
@@ -1532,7 +1688,8 @@ vpnGatewayData =
 instance P.HasFilter (VpnGatewayData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: VpnGatewayData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: VpnGatewayData s)
+               (\s a -> s { _filter = a
+                          } :: VpnGatewayData s)
 
 instance s ~ s' => P.HasComputedAmazonSideAsn (TF.Ref s' (VpnGatewayData s)) (TF.Attr s P.Text) where
     computedAmazonSideAsn x = TF.compute (TF.refKey x) "amazon_side_asn"

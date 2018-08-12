@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.AWS
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,18 +11,18 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.AWS
-    ( module Terrafomo.AWS.DataSource01
-    , module Terrafomo.AWS.DataSource02
-    , module Terrafomo.AWS.Lens
+    ( module Terrafomo.AWS.Resource02
     , module Terrafomo.AWS.Provider
-    , module Terrafomo.AWS.Resource01
-    , module Terrafomo.AWS.Resource02
-    , module Terrafomo.AWS.Resource03
-    , module Terrafomo.AWS.Resource04
-    , module Terrafomo.AWS.Resource05
+    , module Terrafomo.AWS.Types
+    , module Terrafomo.AWS.Lens
+    , module Terrafomo.AWS.DataSource01
     , module Terrafomo.AWS.Resource06
     , module Terrafomo.AWS.Settings
-    , module Terrafomo.AWS.Types
+    , module Terrafomo.AWS.Resource04
+    , module Terrafomo.AWS.Resource03
+    , module Terrafomo.AWS.Resource01
+    , module Terrafomo.AWS.DataSource02
+    , module Terrafomo.AWS.Resource05
     ) where
 
 import Terrafomo.AWS.DataSource01

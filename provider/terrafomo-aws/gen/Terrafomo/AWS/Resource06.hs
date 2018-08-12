@@ -4,7 +4,7 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.AWS.Resource06
@@ -17,11 +17,11 @@
 module Terrafomo.AWS.Resource06
     (
     -- * Resource Datatypes
-    -- **  WafregionalWebAclAssociationResource
+    -- ** aws_wafregional_web_acl_association
       WafregionalWebAclAssociationResource (..)
     , wafregionalWebAclAssociationResource
 
-    -- **  WafregionalXssMatchSetResource
+    -- ** aws_wafregional_xss_match_set
     , WafregionalXssMatchSetResource (..)
     , wafregionalXssMatchSetResource
 
@@ -50,11 +50,16 @@ import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Schema       as TF
 
 -- | @aws_wafregional_web_acl_association@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_wafregional_web_acl_association terraform documentation>
+-- for more information.
 data WafregionalWebAclAssociationResource s = WafregionalWebAclAssociationResource'
     { _resourceArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @resource_arn@ - (Required)
+    --
     , _webAclId    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @web_acl_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafregionalWebAclAssociationResource s) where
@@ -64,8 +69,8 @@ instance TF.IsObject (WafregionalWebAclAssociationResource s) where
         ]
 
 wafregionalWebAclAssociationResource
-    :: TF.Attr s P.Text -- ^ @resource_arn@
-    -> TF.Attr s P.Text -- ^ @web_acl_id@
+    :: TF.Attr s P.Text -- ^ @resource_arn@ - 'P.resourceArn'
+    -> TF.Attr s P.Text -- ^ @web_acl_id@ - 'P.webAclId'
     -> TF.Resource P.Provider (WafregionalWebAclAssociationResource s)
 wafregionalWebAclAssociationResource _resourceArn _webAclId =
     TF.newResource "aws_wafregional_web_acl_association" $
@@ -77,19 +82,26 @@ wafregionalWebAclAssociationResource _resourceArn _webAclId =
 instance P.HasResourceArn (WafregionalWebAclAssociationResource s) (TF.Attr s P.Text) where
     resourceArn =
         P.lens (_resourceArn :: WafregionalWebAclAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceArn = a } :: WafregionalWebAclAssociationResource s)
+               (\s a -> s { _resourceArn = a
+                          } :: WafregionalWebAclAssociationResource s)
 
 instance P.HasWebAclId (WafregionalWebAclAssociationResource s) (TF.Attr s P.Text) where
     webAclId =
         P.lens (_webAclId :: WafregionalWebAclAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _webAclId = a } :: WafregionalWebAclAssociationResource s)
+               (\s a -> s { _webAclId = a
+                          } :: WafregionalWebAclAssociationResource s)
 
 -- | @aws_wafregional_xss_match_set@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_wafregional_xss_match_set terraform documentation>
+-- for more information.
 data WafregionalXssMatchSetResource s = WafregionalXssMatchSetResource'
     { _name          :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _xssMatchTuple :: TF.Attr s [TF.Attr s (XssMatchTuple s)]
-    -- ^ Undocumented.
+    -- ^ @xss_match_tuple@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (WafregionalXssMatchSetResource s) where
@@ -99,7 +111,7 @@ instance TF.IsObject (WafregionalXssMatchSetResource s) where
         ]
 
 wafregionalXssMatchSetResource
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (WafregionalXssMatchSetResource s)
 wafregionalXssMatchSetResource _name =
     TF.newResource "aws_wafregional_xss_match_set" $
@@ -111,9 +123,11 @@ wafregionalXssMatchSetResource _name =
 instance P.HasName (WafregionalXssMatchSetResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: WafregionalXssMatchSetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: WafregionalXssMatchSetResource s)
+               (\s a -> s { _name = a
+                          } :: WafregionalXssMatchSetResource s)
 
 instance P.HasXssMatchTuple (WafregionalXssMatchSetResource s) (TF.Attr s [TF.Attr s (XssMatchTuple s)]) where
     xssMatchTuple =
         P.lens (_xssMatchTuple :: WafregionalXssMatchSetResource s -> TF.Attr s [TF.Attr s (XssMatchTuple s)])
-               (\s a -> s { _xssMatchTuple = a } :: WafregionalXssMatchSetResource s)
+               (\s a -> s { _xssMatchTuple = a
+                          } :: WafregionalXssMatchSetResource s)

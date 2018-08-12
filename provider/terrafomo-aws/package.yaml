@@ -8,15 +8,15 @@ name: terrafomo-aws
 <<: *extensions
 
 dependencies:
-  - amazonka-core
   - base
+  - unordered-containers
+  - text
+  - terrafomo
   - formatting
+  - amazonka-core
   - hashable
   - iproute
   - microlens
-  - terrafomo
-  - text
-  - unordered-containers
 
 library:
   source-dirs:

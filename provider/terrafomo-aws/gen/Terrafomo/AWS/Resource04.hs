@@ -4,7 +4,7 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.AWS.Resource04
@@ -17,323 +17,323 @@
 module Terrafomo.AWS.Resource04
     (
     -- * Resource Datatypes
-    -- **  LoadBalancerBackendServerPolicyResource
+    -- ** aws_load_balancer_backend_server_policy
       LoadBalancerBackendServerPolicyResource (..)
     , loadBalancerBackendServerPolicyResource
 
-    -- **  LoadBalancerListenerPolicyResource
+    -- ** aws_load_balancer_listener_policy
     , LoadBalancerListenerPolicyResource (..)
     , loadBalancerListenerPolicyResource
 
-    -- **  LoadBalancerPolicyResource
+    -- ** aws_load_balancer_policy
     , LoadBalancerPolicyResource (..)
     , loadBalancerPolicyResource
 
-    -- **  MacieMemberAccountAssociationResource
+    -- ** aws_macie_member_account_association
     , MacieMemberAccountAssociationResource (..)
     , macieMemberAccountAssociationResource
 
-    -- **  MacieS3BucketAssociationResource
+    -- ** aws_macie_s3_bucket_association
     , MacieS3BucketAssociationResource (..)
     , macieS3BucketAssociationResource
 
-    -- **  MainRouteTableAssociationResource
+    -- ** aws_main_route_table_association
     , MainRouteTableAssociationResource (..)
     , mainRouteTableAssociationResource
 
-    -- **  MediaStoreContainerResource
+    -- ** aws_media_store_container
     , MediaStoreContainerResource (..)
     , mediaStoreContainerResource
 
-    -- **  MediaStoreContainerPolicyResource
+    -- ** aws_media_store_container_policy
     , MediaStoreContainerPolicyResource (..)
     , mediaStoreContainerPolicyResource
 
-    -- **  MqBrokerResource
+    -- ** aws_mq_broker
     , MqBrokerResource (..)
     , mqBrokerResource
 
-    -- **  MqConfigurationResource
+    -- ** aws_mq_configuration
     , MqConfigurationResource (..)
     , mqConfigurationResource
 
-    -- **  NatGatewayResource
+    -- ** aws_nat_gateway
     , NatGatewayResource (..)
     , natGatewayResource
 
-    -- **  NeptuneClusterResource
+    -- ** aws_neptune_cluster
     , NeptuneClusterResource (..)
     , neptuneClusterResource
 
-    -- **  NeptuneClusterInstanceResource
+    -- ** aws_neptune_cluster_instance
     , NeptuneClusterInstanceResource (..)
     , neptuneClusterInstanceResource
 
-    -- **  NeptuneClusterParameterGroupResource
+    -- ** aws_neptune_cluster_parameter_group
     , NeptuneClusterParameterGroupResource (..)
     , neptuneClusterParameterGroupResource
 
-    -- **  NeptuneEventSubscriptionResource
+    -- ** aws_neptune_event_subscription
     , NeptuneEventSubscriptionResource (..)
     , neptuneEventSubscriptionResource
 
-    -- **  NeptuneParameterGroupResource
+    -- ** aws_neptune_parameter_group
     , NeptuneParameterGroupResource (..)
     , neptuneParameterGroupResource
 
-    -- **  NeptuneSubnetGroupResource
+    -- ** aws_neptune_subnet_group
     , NeptuneSubnetGroupResource (..)
     , neptuneSubnetGroupResource
 
-    -- **  NetworkAclResource
+    -- ** aws_network_acl
     , NetworkAclResource (..)
     , networkAclResource
 
-    -- **  NetworkAclRuleResource
+    -- ** aws_network_acl_rule
     , NetworkAclRuleResource (..)
     , networkAclRuleResource
 
-    -- **  NetworkInterfaceResource
+    -- ** aws_network_interface
     , NetworkInterfaceResource (..)
     , networkInterfaceResource
 
-    -- **  NetworkInterfaceAttachmentResource
+    -- ** aws_network_interface_attachment
     , NetworkInterfaceAttachmentResource (..)
     , networkInterfaceAttachmentResource
 
-    -- **  NetworkInterfaceSgAttachmentResource
+    -- ** aws_network_interface_sg_attachment
     , NetworkInterfaceSgAttachmentResource (..)
     , networkInterfaceSgAttachmentResource
 
-    -- **  OpsworksApplicationResource
+    -- ** aws_opsworks_application
     , OpsworksApplicationResource (..)
     , opsworksApplicationResource
 
-    -- **  OpsworksCustomLayerResource
+    -- ** aws_opsworks_custom_layer
     , OpsworksCustomLayerResource (..)
     , opsworksCustomLayerResource
 
-    -- **  OpsworksGangliaLayerResource
+    -- ** aws_opsworks_ganglia_layer
     , OpsworksGangliaLayerResource (..)
     , opsworksGangliaLayerResource
 
-    -- **  OpsworksHaproxyLayerResource
+    -- ** aws_opsworks_haproxy_layer
     , OpsworksHaproxyLayerResource (..)
     , opsworksHaproxyLayerResource
 
-    -- **  OpsworksInstanceResource
+    -- ** aws_opsworks_instance
     , OpsworksInstanceResource (..)
     , opsworksInstanceResource
 
-    -- **  OpsworksJavaAppLayerResource
+    -- ** aws_opsworks_java_app_layer
     , OpsworksJavaAppLayerResource (..)
     , opsworksJavaAppLayerResource
 
-    -- **  OpsworksMemcachedLayerResource
+    -- ** aws_opsworks_memcached_layer
     , OpsworksMemcachedLayerResource (..)
     , opsworksMemcachedLayerResource
 
-    -- **  OpsworksMysqlLayerResource
+    -- ** aws_opsworks_mysql_layer
     , OpsworksMysqlLayerResource (..)
     , opsworksMysqlLayerResource
 
-    -- **  OpsworksNodejsAppLayerResource
+    -- ** aws_opsworks_nodejs_app_layer
     , OpsworksNodejsAppLayerResource (..)
     , opsworksNodejsAppLayerResource
 
-    -- **  OpsworksPermissionResource
+    -- ** aws_opsworks_permission
     , OpsworksPermissionResource (..)
     , opsworksPermissionResource
 
-    -- **  OpsworksPhpAppLayerResource
+    -- ** aws_opsworks_php_app_layer
     , OpsworksPhpAppLayerResource (..)
     , opsworksPhpAppLayerResource
 
-    -- **  OpsworksRailsAppLayerResource
+    -- ** aws_opsworks_rails_app_layer
     , OpsworksRailsAppLayerResource (..)
     , opsworksRailsAppLayerResource
 
-    -- **  OpsworksRdsDbInstanceResource
+    -- ** aws_opsworks_rds_db_instance
     , OpsworksRdsDbInstanceResource (..)
     , opsworksRdsDbInstanceResource
 
-    -- **  OpsworksStackResource
+    -- ** aws_opsworks_stack
     , OpsworksStackResource (..)
     , opsworksStackResource
 
-    -- **  OpsworksStaticWebLayerResource
+    -- ** aws_opsworks_static_web_layer
     , OpsworksStaticWebLayerResource (..)
     , opsworksStaticWebLayerResource
 
-    -- **  OpsworksUserProfileResource
+    -- ** aws_opsworks_user_profile
     , OpsworksUserProfileResource (..)
     , opsworksUserProfileResource
 
-    -- **  OrganizationsAccountResource
+    -- ** aws_organizations_account
     , OrganizationsAccountResource (..)
     , organizationsAccountResource
 
-    -- **  OrganizationsOrganizationResource
+    -- ** aws_organizations_organization
     , OrganizationsOrganizationResource (..)
     , organizationsOrganizationResource
 
-    -- **  OrganizationsPolicyResource
+    -- ** aws_organizations_policy
     , OrganizationsPolicyResource (..)
     , organizationsPolicyResource
 
-    -- **  OrganizationsPolicyAttachmentResource
+    -- ** aws_organizations_policy_attachment
     , OrganizationsPolicyAttachmentResource (..)
     , organizationsPolicyAttachmentResource
 
-    -- **  PlacementGroupResource
+    -- ** aws_placement_group
     , PlacementGroupResource (..)
     , placementGroupResource
 
-    -- **  ProxyProtocolPolicyResource
+    -- ** aws_proxy_protocol_policy
     , ProxyProtocolPolicyResource (..)
     , proxyProtocolPolicyResource
 
-    -- **  RdsClusterResource
+    -- ** aws_rds_cluster
     , RdsClusterResource (..)
     , rdsClusterResource
 
-    -- **  RdsClusterInstanceResource
+    -- ** aws_rds_cluster_instance
     , RdsClusterInstanceResource (..)
     , rdsClusterInstanceResource
 
-    -- **  RdsClusterParameterGroupResource
+    -- ** aws_rds_cluster_parameter_group
     , RdsClusterParameterGroupResource (..)
     , rdsClusterParameterGroupResource
 
-    -- **  RedshiftClusterResource
+    -- ** aws_redshift_cluster
     , RedshiftClusterResource (..)
     , redshiftClusterResource
 
-    -- **  RedshiftParameterGroupResource
+    -- ** aws_redshift_parameter_group
     , RedshiftParameterGroupResource (..)
     , redshiftParameterGroupResource
 
-    -- **  RedshiftSecurityGroupResource
+    -- ** aws_redshift_security_group
     , RedshiftSecurityGroupResource (..)
     , redshiftSecurityGroupResource
 
-    -- **  RedshiftSubnetGroupResource
+    -- ** aws_redshift_subnet_group
     , RedshiftSubnetGroupResource (..)
     , redshiftSubnetGroupResource
 
-    -- **  RouteResource
+    -- ** aws_route
     , RouteResource (..)
     , routeResource
 
-    -- **  Route53DelegationSetResource
+    -- ** aws_route53_delegation_set
     , Route53DelegationSetResource (..)
     , route53DelegationSetResource
 
-    -- **  Route53HealthCheckResource
+    -- ** aws_route53_health_check
     , Route53HealthCheckResource (..)
     , route53HealthCheckResource
 
-    -- **  Route53QueryLogResource
+    -- ** aws_route53_query_log
     , Route53QueryLogResource (..)
     , route53QueryLogResource
 
-    -- **  Route53RecordResource
+    -- ** aws_route53_record
     , Route53RecordResource (..)
     , route53RecordResource
 
-    -- **  Route53ZoneResource
+    -- ** aws_route53_zone
     , Route53ZoneResource (..)
     , route53ZoneResource
 
-    -- **  Route53ZoneAssociationResource
+    -- ** aws_route53_zone_association
     , Route53ZoneAssociationResource (..)
     , route53ZoneAssociationResource
 
-    -- **  RouteTableResource
+    -- ** aws_route_table
     , RouteTableResource (..)
     , routeTableResource
 
-    -- **  RouteTableAssociationResource
+    -- ** aws_route_table_association
     , RouteTableAssociationResource (..)
     , routeTableAssociationResource
 
-    -- **  S3BucketResource
+    -- ** aws_s3_bucket
     , S3BucketResource (..)
     , s3BucketResource
 
-    -- **  S3BucketInventoryResource
+    -- ** aws_s3_bucket_inventory
     , S3BucketInventoryResource (..)
     , s3BucketInventoryResource
 
-    -- **  S3BucketMetricResource
+    -- ** aws_s3_bucket_metric
     , S3BucketMetricResource (..)
     , s3BucketMetricResource
 
-    -- **  S3BucketNotificationResource
+    -- ** aws_s3_bucket_notification
     , S3BucketNotificationResource (..)
     , s3BucketNotificationResource
 
-    -- **  S3BucketObjectResource
+    -- ** aws_s3_bucket_object
     , S3BucketObjectResource (..)
     , s3BucketObjectResource
 
-    -- **  S3BucketPolicyResource
+    -- ** aws_s3_bucket_policy
     , S3BucketPolicyResource (..)
     , s3BucketPolicyResource
 
-    -- **  SecretsmanagerSecretResource
+    -- ** aws_secretsmanager_secret
     , SecretsmanagerSecretResource (..)
     , secretsmanagerSecretResource
 
-    -- **  SecretsmanagerSecretVersionResource
+    -- ** aws_secretsmanager_secret_version
     , SecretsmanagerSecretVersionResource (..)
     , secretsmanagerSecretVersionResource
 
-    -- **  SecurityGroupResource
+    -- ** aws_security_group
     , SecurityGroupResource (..)
     , securityGroupResource
 
-    -- **  SecurityGroupRuleResource
+    -- ** aws_security_group_rule
     , SecurityGroupRuleResource (..)
     , securityGroupRuleResource
 
-    -- **  ServiceDiscoveryPrivateDnsNamespaceResource
+    -- ** aws_service_discovery_private_dns_namespace
     , ServiceDiscoveryPrivateDnsNamespaceResource (..)
     , serviceDiscoveryPrivateDnsNamespaceResource
 
-    -- **  ServiceDiscoveryPublicDnsNamespaceResource
+    -- ** aws_service_discovery_public_dns_namespace
     , ServiceDiscoveryPublicDnsNamespaceResource (..)
     , serviceDiscoveryPublicDnsNamespaceResource
 
-    -- **  ServiceDiscoveryServiceResource
+    -- ** aws_service_discovery_service
     , ServiceDiscoveryServiceResource (..)
     , serviceDiscoveryServiceResource
 
-    -- **  ServicecatalogPortfolioResource
+    -- ** aws_servicecatalog_portfolio
     , ServicecatalogPortfolioResource (..)
     , servicecatalogPortfolioResource
 
-    -- **  SesActiveReceiptRuleSetResource
+    -- ** aws_ses_active_receipt_rule_set
     , SesActiveReceiptRuleSetResource (..)
     , sesActiveReceiptRuleSetResource
 
-    -- **  SesConfigurationSetResource
+    -- ** aws_ses_configuration_set
     , SesConfigurationSetResource (..)
     , sesConfigurationSetResource
 
-    -- **  SesDomainDkimResource
+    -- ** aws_ses_domain_dkim
     , SesDomainDkimResource (..)
     , sesDomainDkimResource
 
-    -- **  SesDomainIdentityResource
+    -- ** aws_ses_domain_identity
     , SesDomainIdentityResource (..)
     , sesDomainIdentityResource
 
-    -- **  SesDomainIdentityVerificationResource
+    -- ** aws_ses_domain_identity_verification
     , SesDomainIdentityVerificationResource (..)
     , sesDomainIdentityVerificationResource
 
-    -- **  SesDomainMailFromResource
+    -- ** aws_ses_domain_mail_from
     , SesDomainMailFromResource (..)
     , sesDomainMailFromResource
 
@@ -362,13 +362,19 @@ import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Schema       as TF
 
 -- | @aws_load_balancer_backend_server_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_load_balancer_backend_server_policy terraform documentation>
+-- for more information.
 data LoadBalancerBackendServerPolicyResource s = LoadBalancerBackendServerPolicyResource'
     { _instancePort     :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @instance_port@ - (Required)
+    --
     , _loadBalancerName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @load_balancer_name@ - (Required)
+    --
     , _policyNames      :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @policy_names@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (LoadBalancerBackendServerPolicyResource s) where
@@ -379,8 +385,8 @@ instance TF.IsObject (LoadBalancerBackendServerPolicyResource s) where
         ]
 
 loadBalancerBackendServerPolicyResource
-    :: TF.Attr s P.Integer -- ^ @instance_port@
-    -> TF.Attr s P.Text -- ^ @load_balancer_name@
+    :: TF.Attr s P.Integer -- ^ @instance_port@ - 'P.instancePort'
+    -> TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
     -> TF.Resource P.Provider (LoadBalancerBackendServerPolicyResource s)
 loadBalancerBackendServerPolicyResource _instancePort _loadBalancerName =
     TF.newResource "aws_load_balancer_backend_server_policy" $
@@ -393,26 +399,35 @@ loadBalancerBackendServerPolicyResource _instancePort _loadBalancerName =
 instance P.HasInstancePort (LoadBalancerBackendServerPolicyResource s) (TF.Attr s P.Integer) where
     instancePort =
         P.lens (_instancePort :: LoadBalancerBackendServerPolicyResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _instancePort = a } :: LoadBalancerBackendServerPolicyResource s)
+               (\s a -> s { _instancePort = a
+                          } :: LoadBalancerBackendServerPolicyResource s)
 
 instance P.HasLoadBalancerName (LoadBalancerBackendServerPolicyResource s) (TF.Attr s P.Text) where
     loadBalancerName =
         P.lens (_loadBalancerName :: LoadBalancerBackendServerPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _loadBalancerName = a } :: LoadBalancerBackendServerPolicyResource s)
+               (\s a -> s { _loadBalancerName = a
+                          } :: LoadBalancerBackendServerPolicyResource s)
 
 instance P.HasPolicyNames (LoadBalancerBackendServerPolicyResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     policyNames =
         P.lens (_policyNames :: LoadBalancerBackendServerPolicyResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _policyNames = a } :: LoadBalancerBackendServerPolicyResource s)
+               (\s a -> s { _policyNames = a
+                          } :: LoadBalancerBackendServerPolicyResource s)
 
 -- | @aws_load_balancer_listener_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_load_balancer_listener_policy terraform documentation>
+-- for more information.
 data LoadBalancerListenerPolicyResource s = LoadBalancerListenerPolicyResource'
     { _loadBalancerName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @load_balancer_name@ - (Required)
+    --
     , _loadBalancerPort :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @load_balancer_port@ - (Required)
+    --
     , _policyNames      :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @policy_names@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (LoadBalancerListenerPolicyResource s) where
@@ -423,8 +438,8 @@ instance TF.IsObject (LoadBalancerListenerPolicyResource s) where
         ]
 
 loadBalancerListenerPolicyResource
-    :: TF.Attr s P.Text -- ^ @load_balancer_name@
-    -> TF.Attr s P.Integer -- ^ @load_balancer_port@
+    :: TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
+    -> TF.Attr s P.Integer -- ^ @load_balancer_port@ - 'P.loadBalancerPort'
     -> TF.Resource P.Provider (LoadBalancerListenerPolicyResource s)
 loadBalancerListenerPolicyResource _loadBalancerName _loadBalancerPort =
     TF.newResource "aws_load_balancer_listener_policy" $
@@ -437,28 +452,38 @@ loadBalancerListenerPolicyResource _loadBalancerName _loadBalancerPort =
 instance P.HasLoadBalancerName (LoadBalancerListenerPolicyResource s) (TF.Attr s P.Text) where
     loadBalancerName =
         P.lens (_loadBalancerName :: LoadBalancerListenerPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _loadBalancerName = a } :: LoadBalancerListenerPolicyResource s)
+               (\s a -> s { _loadBalancerName = a
+                          } :: LoadBalancerListenerPolicyResource s)
 
 instance P.HasLoadBalancerPort (LoadBalancerListenerPolicyResource s) (TF.Attr s P.Integer) where
     loadBalancerPort =
         P.lens (_loadBalancerPort :: LoadBalancerListenerPolicyResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _loadBalancerPort = a } :: LoadBalancerListenerPolicyResource s)
+               (\s a -> s { _loadBalancerPort = a
+                          } :: LoadBalancerListenerPolicyResource s)
 
 instance P.HasPolicyNames (LoadBalancerListenerPolicyResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     policyNames =
         P.lens (_policyNames :: LoadBalancerListenerPolicyResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _policyNames = a } :: LoadBalancerListenerPolicyResource s)
+               (\s a -> s { _policyNames = a
+                          } :: LoadBalancerListenerPolicyResource s)
 
 -- | @aws_load_balancer_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_load_balancer_policy terraform documentation>
+-- for more information.
 data LoadBalancerPolicyResource s = LoadBalancerPolicyResource'
     { _loadBalancerName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @load_balancer_name@ - (Required)
+    --
     , _policyAttribute  :: TF.Attr s [TF.Attr s (PolicyAttribute s)]
-    -- ^ Undocumented.
+    -- ^ @policy_attribute@ - (Optional)
+    --
     , _policyName       :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @policy_name@ - (Required)
+    --
     , _policyTypeName   :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @policy_type_name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (LoadBalancerPolicyResource s) where
@@ -470,9 +495,9 @@ instance TF.IsObject (LoadBalancerPolicyResource s) where
         ]
 
 loadBalancerPolicyResource
-    :: TF.Attr s P.Text -- ^ @load_balancer_name@
-    -> TF.Attr s P.Text -- ^ @policy_name@
-    -> TF.Attr s P.Text -- ^ @policy_type_name@
+    :: TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
+    -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
+    -> TF.Attr s P.Text -- ^ @policy_type_name@ - 'P.policyTypeName'
     -> TF.Resource P.Provider (LoadBalancerPolicyResource s)
 loadBalancerPolicyResource _loadBalancerName _policyName _policyTypeName =
     TF.newResource "aws_load_balancer_policy" $
@@ -486,27 +511,35 @@ loadBalancerPolicyResource _loadBalancerName _policyName _policyTypeName =
 instance P.HasLoadBalancerName (LoadBalancerPolicyResource s) (TF.Attr s P.Text) where
     loadBalancerName =
         P.lens (_loadBalancerName :: LoadBalancerPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _loadBalancerName = a } :: LoadBalancerPolicyResource s)
+               (\s a -> s { _loadBalancerName = a
+                          } :: LoadBalancerPolicyResource s)
 
 instance P.HasPolicyAttribute (LoadBalancerPolicyResource s) (TF.Attr s [TF.Attr s (PolicyAttribute s)]) where
     policyAttribute =
         P.lens (_policyAttribute :: LoadBalancerPolicyResource s -> TF.Attr s [TF.Attr s (PolicyAttribute s)])
-               (\s a -> s { _policyAttribute = a } :: LoadBalancerPolicyResource s)
+               (\s a -> s { _policyAttribute = a
+                          } :: LoadBalancerPolicyResource s)
 
 instance P.HasPolicyName (LoadBalancerPolicyResource s) (TF.Attr s P.Text) where
     policyName =
         P.lens (_policyName :: LoadBalancerPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policyName = a } :: LoadBalancerPolicyResource s)
+               (\s a -> s { _policyName = a
+                          } :: LoadBalancerPolicyResource s)
 
 instance P.HasPolicyTypeName (LoadBalancerPolicyResource s) (TF.Attr s P.Text) where
     policyTypeName =
         P.lens (_policyTypeName :: LoadBalancerPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policyTypeName = a } :: LoadBalancerPolicyResource s)
+               (\s a -> s { _policyTypeName = a
+                          } :: LoadBalancerPolicyResource s)
 
 -- | @aws_macie_member_account_association@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_macie_member_account_association terraform documentation>
+-- for more information.
 data MacieMemberAccountAssociationResource s = MacieMemberAccountAssociationResource'
     { _memberAccountId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @member_account_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (MacieMemberAccountAssociationResource s) where
@@ -515,7 +548,7 @@ instance TF.IsObject (MacieMemberAccountAssociationResource s) where
         ]
 
 macieMemberAccountAssociationResource
-    :: TF.Attr s P.Text -- ^ @member_account_id@
+    :: TF.Attr s P.Text -- ^ @member_account_id@ - 'P.memberAccountId'
     -> TF.Resource P.Provider (MacieMemberAccountAssociationResource s)
 macieMemberAccountAssociationResource _memberAccountId =
     TF.newResource "aws_macie_member_account_association" $
@@ -526,16 +559,23 @@ macieMemberAccountAssociationResource _memberAccountId =
 instance P.HasMemberAccountId (MacieMemberAccountAssociationResource s) (TF.Attr s P.Text) where
     memberAccountId =
         P.lens (_memberAccountId :: MacieMemberAccountAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _memberAccountId = a } :: MacieMemberAccountAssociationResource s)
+               (\s a -> s { _memberAccountId = a
+                          } :: MacieMemberAccountAssociationResource s)
 
 -- | @aws_macie_s3_bucket_association@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_macie_s3_bucket_association terraform documentation>
+-- for more information.
 data MacieS3BucketAssociationResource s = MacieS3BucketAssociationResource'
     { _bucketName      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @bucket_name@ - (Required)
+    --
     , _memberAccountId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @member_account_id@ - (Optional)
+    --
     , _prefix          :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @prefix@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (MacieS3BucketAssociationResource s) where
@@ -546,7 +586,7 @@ instance TF.IsObject (MacieS3BucketAssociationResource s) where
         ]
 
 macieS3BucketAssociationResource
-    :: TF.Attr s P.Text -- ^ @bucket_name@
+    :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> TF.Resource P.Provider (MacieS3BucketAssociationResource s)
 macieS3BucketAssociationResource _bucketName =
     TF.newResource "aws_macie_s3_bucket_association" $
@@ -559,27 +599,35 @@ macieS3BucketAssociationResource _bucketName =
 instance P.HasBucketName (MacieS3BucketAssociationResource s) (TF.Attr s P.Text) where
     bucketName =
         P.lens (_bucketName :: MacieS3BucketAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _bucketName = a } :: MacieS3BucketAssociationResource s)
+               (\s a -> s { _bucketName = a
+                          } :: MacieS3BucketAssociationResource s)
 
 instance P.HasMemberAccountId (MacieS3BucketAssociationResource s) (TF.Attr s P.Text) where
     memberAccountId =
         P.lens (_memberAccountId :: MacieS3BucketAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _memberAccountId = a } :: MacieS3BucketAssociationResource s)
+               (\s a -> s { _memberAccountId = a
+                          } :: MacieS3BucketAssociationResource s)
 
 instance P.HasPrefix (MacieS3BucketAssociationResource s) (TF.Attr s P.Text) where
     prefix =
         P.lens (_prefix :: MacieS3BucketAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _prefix = a } :: MacieS3BucketAssociationResource s)
+               (\s a -> s { _prefix = a
+                          } :: MacieS3BucketAssociationResource s)
 
 instance s ~ s' => P.HasComputedClassificationType (TF.Ref s' (MacieS3BucketAssociationResource s)) (TF.Attr s [ClassificationType s]) where
     computedClassificationType x = TF.compute (TF.refKey x) "classification_type"
 
 -- | @aws_main_route_table_association@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_main_route_table_association terraform documentation>
+-- for more information.
 data MainRouteTableAssociationResource s = MainRouteTableAssociationResource'
     { _routeTableId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @route_table_id@ - (Required)
+    --
     , _vpcId        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @vpc_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (MainRouteTableAssociationResource s) where
@@ -589,8 +637,8 @@ instance TF.IsObject (MainRouteTableAssociationResource s) where
         ]
 
 mainRouteTableAssociationResource
-    :: TF.Attr s P.Text -- ^ @route_table_id@
-    -> TF.Attr s P.Text -- ^ @vpc_id@
+    :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
+    -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> TF.Resource P.Provider (MainRouteTableAssociationResource s)
 mainRouteTableAssociationResource _routeTableId _vpcId =
     TF.newResource "aws_main_route_table_association" $
@@ -602,20 +650,26 @@ mainRouteTableAssociationResource _routeTableId _vpcId =
 instance P.HasRouteTableId (MainRouteTableAssociationResource s) (TF.Attr s P.Text) where
     routeTableId =
         P.lens (_routeTableId :: MainRouteTableAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _routeTableId = a } :: MainRouteTableAssociationResource s)
+               (\s a -> s { _routeTableId = a
+                          } :: MainRouteTableAssociationResource s)
 
 instance P.HasVpcId (MainRouteTableAssociationResource s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: MainRouteTableAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a } :: MainRouteTableAssociationResource s)
+               (\s a -> s { _vpcId = a
+                          } :: MainRouteTableAssociationResource s)
 
 instance s ~ s' => P.HasComputedOriginalRouteTableId (TF.Ref s' (MainRouteTableAssociationResource s)) (TF.Attr s P.Text) where
     computedOriginalRouteTableId x = TF.compute (TF.refKey x) "original_route_table_id"
 
 -- | @aws_media_store_container@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_media_store_container terraform documentation>
+-- for more information.
 data MediaStoreContainerResource s = MediaStoreContainerResource'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (MediaStoreContainerResource s) where
@@ -624,7 +678,7 @@ instance TF.IsObject (MediaStoreContainerResource s) where
         ]
 
 mediaStoreContainerResource
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (MediaStoreContainerResource s)
 mediaStoreContainerResource _name =
     TF.newResource "aws_media_store_container" $
@@ -635,7 +689,8 @@ mediaStoreContainerResource _name =
 instance P.HasName (MediaStoreContainerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: MediaStoreContainerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: MediaStoreContainerResource s)
+               (\s a -> s { _name = a
+                          } :: MediaStoreContainerResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (MediaStoreContainerResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -644,11 +699,16 @@ instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (MediaStoreContainerResource
     computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
 
 -- | @aws_media_store_container_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_media_store_container_policy terraform documentation>
+-- for more information.
 data MediaStoreContainerPolicyResource s = MediaStoreContainerPolicyResource'
     { _containerName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @container_name@ - (Required)
+    --
     , _policy        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @policy@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (MediaStoreContainerPolicyResource s) where
@@ -658,8 +718,8 @@ instance TF.IsObject (MediaStoreContainerPolicyResource s) where
         ]
 
 mediaStoreContainerPolicyResource
-    :: TF.Attr s P.Text -- ^ @container_name@
-    -> TF.Attr s P.Text -- ^ @policy@
+    :: TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
+    -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
     -> TF.Resource P.Provider (MediaStoreContainerPolicyResource s)
 mediaStoreContainerPolicyResource _containerName _policy =
     TF.newResource "aws_media_store_container_policy" $
@@ -671,35 +731,50 @@ mediaStoreContainerPolicyResource _containerName _policy =
 instance P.HasContainerName (MediaStoreContainerPolicyResource s) (TF.Attr s P.Text) where
     containerName =
         P.lens (_containerName :: MediaStoreContainerPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _containerName = a } :: MediaStoreContainerPolicyResource s)
+               (\s a -> s { _containerName = a
+                          } :: MediaStoreContainerPolicyResource s)
 
 instance P.HasPolicy (MediaStoreContainerPolicyResource s) (TF.Attr s P.Text) where
     policy =
         P.lens (_policy :: MediaStoreContainerPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policy = a } :: MediaStoreContainerPolicyResource s)
+               (\s a -> s { _policy = a
+                          } :: MediaStoreContainerPolicyResource s)
 
 -- | @aws_mq_broker@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_mq_broker terraform documentation>
+-- for more information.
 data MqBrokerResource s = MqBrokerResource'
     { _applyImmediately        :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @apply_immediately@ - (Optional)
+    --
     , _autoMinorVersionUpgrade :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_minor_version_upgrade@ - (Optional)
+    --
     , _brokerName              :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @broker_name@ - (Required)
+    --
     , _deploymentMode          :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @deployment_mode@ - (Optional)
+    --
     , _engineType              :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @engine_type@ - (Required)
+    --
     , _engineVersion           :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @engine_version@ - (Required)
+    --
     , _hostInstanceType        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @host_instance_type@ - (Required)
+    --
     , _publiclyAccessible      :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @publicly_accessible@ - (Optional)
+    --
     , _securityGroups          :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @security_groups@ - (Required)
+    --
     , _user                    :: TF.Attr s [TF.Attr s (User s)]
-    -- ^ Undocumented.
+    -- ^ @user@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (MqBrokerResource s) where
@@ -717,12 +792,12 @@ instance TF.IsObject (MqBrokerResource s) where
         ]
 
 mqBrokerResource
-    :: TF.Attr s P.Text -- ^ @broker_name@
-    -> TF.Attr s P.Text -- ^ @engine_type@
-    -> TF.Attr s P.Text -- ^ @engine_version@
-    -> TF.Attr s P.Text -- ^ @host_instance_type@
-    -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @security_groups@
-    -> TF.Attr s [TF.Attr s (User s)] -- ^ @user@
+    :: TF.Attr s P.Text -- ^ @broker_name@ - 'P.brokerName'
+    -> TF.Attr s P.Text -- ^ @engine_type@ - 'P.engineType'
+    -> TF.Attr s P.Text -- ^ @engine_version@ - 'P.engineVersion'
+    -> TF.Attr s P.Text -- ^ @host_instance_type@ - 'P.hostInstanceType'
+    -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @security_groups@ - 'P.securityGroups'
+    -> TF.Attr s [TF.Attr s (User s)] -- ^ @user@ - 'P.user'
     -> TF.Resource P.Provider (MqBrokerResource s)
 mqBrokerResource _brokerName _engineType _engineVersion _hostInstanceType _securityGroups _user =
     TF.newResource "aws_mq_broker" $
@@ -742,52 +817,62 @@ mqBrokerResource _brokerName _engineType _engineVersion _hostInstanceType _secur
 instance P.HasApplyImmediately (MqBrokerResource s) (TF.Attr s P.Bool) where
     applyImmediately =
         P.lens (_applyImmediately :: MqBrokerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _applyImmediately = a } :: MqBrokerResource s)
+               (\s a -> s { _applyImmediately = a
+                          } :: MqBrokerResource s)
 
 instance P.HasAutoMinorVersionUpgrade (MqBrokerResource s) (TF.Attr s P.Bool) where
     autoMinorVersionUpgrade =
         P.lens (_autoMinorVersionUpgrade :: MqBrokerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoMinorVersionUpgrade = a } :: MqBrokerResource s)
+               (\s a -> s { _autoMinorVersionUpgrade = a
+                          } :: MqBrokerResource s)
 
 instance P.HasBrokerName (MqBrokerResource s) (TF.Attr s P.Text) where
     brokerName =
         P.lens (_brokerName :: MqBrokerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _brokerName = a } :: MqBrokerResource s)
+               (\s a -> s { _brokerName = a
+                          } :: MqBrokerResource s)
 
 instance P.HasDeploymentMode (MqBrokerResource s) (TF.Attr s P.Text) where
     deploymentMode =
         P.lens (_deploymentMode :: MqBrokerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _deploymentMode = a } :: MqBrokerResource s)
+               (\s a -> s { _deploymentMode = a
+                          } :: MqBrokerResource s)
 
 instance P.HasEngineType (MqBrokerResource s) (TF.Attr s P.Text) where
     engineType =
         P.lens (_engineType :: MqBrokerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _engineType = a } :: MqBrokerResource s)
+               (\s a -> s { _engineType = a
+                          } :: MqBrokerResource s)
 
 instance P.HasEngineVersion (MqBrokerResource s) (TF.Attr s P.Text) where
     engineVersion =
         P.lens (_engineVersion :: MqBrokerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _engineVersion = a } :: MqBrokerResource s)
+               (\s a -> s { _engineVersion = a
+                          } :: MqBrokerResource s)
 
 instance P.HasHostInstanceType (MqBrokerResource s) (TF.Attr s P.Text) where
     hostInstanceType =
         P.lens (_hostInstanceType :: MqBrokerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _hostInstanceType = a } :: MqBrokerResource s)
+               (\s a -> s { _hostInstanceType = a
+                          } :: MqBrokerResource s)
 
 instance P.HasPubliclyAccessible (MqBrokerResource s) (TF.Attr s P.Bool) where
     publiclyAccessible =
         P.lens (_publiclyAccessible :: MqBrokerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _publiclyAccessible = a } :: MqBrokerResource s)
+               (\s a -> s { _publiclyAccessible = a
+                          } :: MqBrokerResource s)
 
 instance P.HasSecurityGroups (MqBrokerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     securityGroups =
         P.lens (_securityGroups :: MqBrokerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _securityGroups = a } :: MqBrokerResource s)
+               (\s a -> s { _securityGroups = a
+                          } :: MqBrokerResource s)
 
 instance P.HasUser (MqBrokerResource s) (TF.Attr s [TF.Attr s (User s)]) where
     user =
         P.lens (_user :: MqBrokerResource s -> TF.Attr s [TF.Attr s (User s)])
-               (\s a -> s { _user = a } :: MqBrokerResource s)
+               (\s a -> s { _user = a
+                          } :: MqBrokerResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (MqBrokerResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -805,17 +890,25 @@ instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (MqBrokerResource s)) (TF.A
     computedSubnetIds x = TF.compute (TF.refKey x) "subnet_ids"
 
 -- | @aws_mq_configuration@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_mq_configuration terraform documentation>
+-- for more information.
 data MqConfigurationResource s = MqConfigurationResource'
     { _data'         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @data@ - (Required)
+    --
     , _description   :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _engineType    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @engine_type@ - (Required)
+    --
     , _engineVersion :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @engine_version@ - (Required)
+    --
     , _name          :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (MqConfigurationResource s) where
@@ -828,10 +921,10 @@ instance TF.IsObject (MqConfigurationResource s) where
         ]
 
 mqConfigurationResource
-    :: TF.Attr s P.Text -- ^ @data@
-    -> TF.Attr s P.Text -- ^ @engine_type@
-    -> TF.Attr s P.Text -- ^ @engine_version@
-    -> TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @data@ - 'P.data''
+    -> TF.Attr s P.Text -- ^ @engine_type@ - 'P.engineType'
+    -> TF.Attr s P.Text -- ^ @engine_version@ - 'P.engineVersion'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (MqConfigurationResource s)
 mqConfigurationResource _data' _engineType _engineVersion _name =
     TF.newResource "aws_mq_configuration" $
@@ -846,27 +939,32 @@ mqConfigurationResource _data' _engineType _engineVersion _name =
 instance P.HasData' (MqConfigurationResource s) (TF.Attr s P.Text) where
     data' =
         P.lens (_data' :: MqConfigurationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _data' = a } :: MqConfigurationResource s)
+               (\s a -> s { _data' = a
+                          } :: MqConfigurationResource s)
 
 instance P.HasDescription (MqConfigurationResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: MqConfigurationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: MqConfigurationResource s)
+               (\s a -> s { _description = a
+                          } :: MqConfigurationResource s)
 
 instance P.HasEngineType (MqConfigurationResource s) (TF.Attr s P.Text) where
     engineType =
         P.lens (_engineType :: MqConfigurationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _engineType = a } :: MqConfigurationResource s)
+               (\s a -> s { _engineType = a
+                          } :: MqConfigurationResource s)
 
 instance P.HasEngineVersion (MqConfigurationResource s) (TF.Attr s P.Text) where
     engineVersion =
         P.lens (_engineVersion :: MqConfigurationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _engineVersion = a } :: MqConfigurationResource s)
+               (\s a -> s { _engineVersion = a
+                          } :: MqConfigurationResource s)
 
 instance P.HasName (MqConfigurationResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: MqConfigurationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: MqConfigurationResource s)
+               (\s a -> s { _name = a
+                          } :: MqConfigurationResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (MqConfigurationResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -875,13 +973,19 @@ instance s ~ s' => P.HasComputedLatestRevision (TF.Ref s' (MqConfigurationResour
     computedLatestRevision x = TF.compute (TF.refKey x) "latest_revision"
 
 -- | @aws_nat_gateway@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_nat_gateway terraform documentation>
+-- for more information.
 data NatGatewayResource s = NatGatewayResource'
     { _allocationId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @allocation_id@ - (Required)
+    --
     , _subnetId     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @subnet_id@ - (Required)
+    --
     , _tags         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NatGatewayResource s) where
@@ -892,8 +996,8 @@ instance TF.IsObject (NatGatewayResource s) where
         ]
 
 natGatewayResource
-    :: TF.Attr s P.Text -- ^ @allocation_id@
-    -> TF.Attr s P.Text -- ^ @subnet_id@
+    :: TF.Attr s P.Text -- ^ @allocation_id@ - 'P.allocationId'
+    -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> TF.Resource P.Provider (NatGatewayResource s)
 natGatewayResource _allocationId _subnetId =
     TF.newResource "aws_nat_gateway" $
@@ -906,17 +1010,20 @@ natGatewayResource _allocationId _subnetId =
 instance P.HasAllocationId (NatGatewayResource s) (TF.Attr s P.Text) where
     allocationId =
         P.lens (_allocationId :: NatGatewayResource s -> TF.Attr s P.Text)
-               (\s a -> s { _allocationId = a } :: NatGatewayResource s)
+               (\s a -> s { _allocationId = a
+                          } :: NatGatewayResource s)
 
 instance P.HasSubnetId (NatGatewayResource s) (TF.Attr s P.Text) where
     subnetId =
         P.lens (_subnetId :: NatGatewayResource s -> TF.Attr s P.Text)
-               (\s a -> s { _subnetId = a } :: NatGatewayResource s)
+               (\s a -> s { _subnetId = a
+                          } :: NatGatewayResource s)
 
 instance P.HasTags (NatGatewayResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: NatGatewayResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: NatGatewayResource s)
+               (\s a -> s { _tags = a
+                          } :: NatGatewayResource s)
 
 instance s ~ s' => P.HasComputedNetworkInterfaceId (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
     computedNetworkInterfaceId x = TF.compute (TF.refKey x) "network_interface_id"
@@ -928,31 +1035,46 @@ instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (NatGatewayResource s)) (TF.
     computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
 
 -- | @aws_neptune_cluster@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_neptune_cluster terraform documentation>
+-- for more information.
 data NeptuneClusterResource s = NeptuneClusterResource'
     { _backupRetentionPeriod :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @backup_retention_period@ - (Optional)
+    --
     , _engine :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @engine@ - (Optional)
+    --
     , _finalSnapshotIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @final_snapshot_identifier@ - (Optional)
+    --
     , _iamDatabaseAuthenticationEnabled :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @iam_database_authentication_enabled@ - (Optional)
+    --
     , _iamRoles :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @iam_roles@ - (Optional)
+    --
     , _neptuneClusterParameterGroupName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @neptune_cluster_parameter_group_name@ - (Optional)
+    --
     , _port :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @port@ - (Optional)
+    --
     , _replicationSourceIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @replication_source_identifier@ - (Optional)
+    --
     , _skipFinalSnapshot :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @skip_final_snapshot@ - (Optional)
+    --
     , _snapshotIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @snapshot_identifier@ - (Optional)
+    --
     , _storageEncrypted :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @storage_encrypted@ - (Optional)
+    --
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NeptuneClusterResource s) where
@@ -993,62 +1115,74 @@ neptuneClusterResource =
 instance P.HasBackupRetentionPeriod (NeptuneClusterResource s) (TF.Attr s P.Integer) where
     backupRetentionPeriod =
         P.lens (_backupRetentionPeriod :: NeptuneClusterResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _backupRetentionPeriod = a } :: NeptuneClusterResource s)
+               (\s a -> s { _backupRetentionPeriod = a
+                          } :: NeptuneClusterResource s)
 
 instance P.HasEngine (NeptuneClusterResource s) (TF.Attr s P.Text) where
     engine =
         P.lens (_engine :: NeptuneClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _engine = a } :: NeptuneClusterResource s)
+               (\s a -> s { _engine = a
+                          } :: NeptuneClusterResource s)
 
 instance P.HasFinalSnapshotIdentifier (NeptuneClusterResource s) (TF.Attr s P.Text) where
     finalSnapshotIdentifier =
         P.lens (_finalSnapshotIdentifier :: NeptuneClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _finalSnapshotIdentifier = a } :: NeptuneClusterResource s)
+               (\s a -> s { _finalSnapshotIdentifier = a
+                          } :: NeptuneClusterResource s)
 
 instance P.HasIamDatabaseAuthenticationEnabled (NeptuneClusterResource s) (TF.Attr s P.Bool) where
     iamDatabaseAuthenticationEnabled =
         P.lens (_iamDatabaseAuthenticationEnabled :: NeptuneClusterResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _iamDatabaseAuthenticationEnabled = a } :: NeptuneClusterResource s)
+               (\s a -> s { _iamDatabaseAuthenticationEnabled = a
+                          } :: NeptuneClusterResource s)
 
 instance P.HasIamRoles (NeptuneClusterResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     iamRoles =
         P.lens (_iamRoles :: NeptuneClusterResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _iamRoles = a } :: NeptuneClusterResource s)
+               (\s a -> s { _iamRoles = a
+                          } :: NeptuneClusterResource s)
 
 instance P.HasNeptuneClusterParameterGroupName (NeptuneClusterResource s) (TF.Attr s P.Text) where
     neptuneClusterParameterGroupName =
         P.lens (_neptuneClusterParameterGroupName :: NeptuneClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _neptuneClusterParameterGroupName = a } :: NeptuneClusterResource s)
+               (\s a -> s { _neptuneClusterParameterGroupName = a
+                          } :: NeptuneClusterResource s)
 
 instance P.HasPort (NeptuneClusterResource s) (TF.Attr s P.Integer) where
     port =
         P.lens (_port :: NeptuneClusterResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a } :: NeptuneClusterResource s)
+               (\s a -> s { _port = a
+                          } :: NeptuneClusterResource s)
 
 instance P.HasReplicationSourceIdentifier (NeptuneClusterResource s) (TF.Attr s P.Text) where
     replicationSourceIdentifier =
         P.lens (_replicationSourceIdentifier :: NeptuneClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _replicationSourceIdentifier = a } :: NeptuneClusterResource s)
+               (\s a -> s { _replicationSourceIdentifier = a
+                          } :: NeptuneClusterResource s)
 
 instance P.HasSkipFinalSnapshot (NeptuneClusterResource s) (TF.Attr s P.Bool) where
     skipFinalSnapshot =
         P.lens (_skipFinalSnapshot :: NeptuneClusterResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _skipFinalSnapshot = a } :: NeptuneClusterResource s)
+               (\s a -> s { _skipFinalSnapshot = a
+                          } :: NeptuneClusterResource s)
 
 instance P.HasSnapshotIdentifier (NeptuneClusterResource s) (TF.Attr s P.Text) where
     snapshotIdentifier =
         P.lens (_snapshotIdentifier :: NeptuneClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotIdentifier = a } :: NeptuneClusterResource s)
+               (\s a -> s { _snapshotIdentifier = a
+                          } :: NeptuneClusterResource s)
 
 instance P.HasStorageEncrypted (NeptuneClusterResource s) (TF.Attr s P.Bool) where
     storageEncrypted =
         P.lens (_storageEncrypted :: NeptuneClusterResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _storageEncrypted = a } :: NeptuneClusterResource s)
+               (\s a -> s { _storageEncrypted = a
+                          } :: NeptuneClusterResource s)
 
 instance P.HasTags (NeptuneClusterResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: NeptuneClusterResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: NeptuneClusterResource s)
+               (\s a -> s { _tags = a
+                          } :: NeptuneClusterResource s)
 
 instance s ~ s' => P.HasComputedApplyImmediately (TF.Ref s' (NeptuneClusterResource s)) (TF.Attr s P.Bool) where
     computedApplyImmediately x = TF.compute (TF.refKey x) "apply_immediately"
@@ -1099,25 +1233,37 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (NeptuneClusterRe
     computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "vpc_security_group_ids"
 
 -- | @aws_neptune_cluster_instance@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_neptune_cluster_instance terraform documentation>
+-- for more information.
 data NeptuneClusterInstanceResource s = NeptuneClusterInstanceResource'
     { _autoMinorVersionUpgrade :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_minor_version_upgrade@ - (Optional)
+    --
     , _clusterIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cluster_identifier@ - (Required)
+    --
     , _engine :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @engine@ - (Optional)
+    --
     , _instanceClass :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @instance_class@ - (Required)
+    --
     , _neptuneParameterGroupName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @neptune_parameter_group_name@ - (Optional)
+    --
     , _port :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @port@ - (Optional)
+    --
     , _promotionTier :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @promotion_tier@ - (Optional)
+    --
     , _publiclyAccessible :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @publicly_accessible@ - (Optional)
+    --
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NeptuneClusterInstanceResource s) where
@@ -1134,8 +1280,8 @@ instance TF.IsObject (NeptuneClusterInstanceResource s) where
         ]
 
 neptuneClusterInstanceResource
-    :: TF.Attr s P.Text -- ^ @cluster_identifier@
-    -> TF.Attr s P.Text -- ^ @instance_class@
+    :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
+    -> TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
     -> TF.Resource P.Provider (NeptuneClusterInstanceResource s)
 neptuneClusterInstanceResource _clusterIdentifier _instanceClass =
     TF.newResource "aws_neptune_cluster_instance" $
@@ -1154,47 +1300,56 @@ neptuneClusterInstanceResource _clusterIdentifier _instanceClass =
 instance P.HasAutoMinorVersionUpgrade (NeptuneClusterInstanceResource s) (TF.Attr s P.Bool) where
     autoMinorVersionUpgrade =
         P.lens (_autoMinorVersionUpgrade :: NeptuneClusterInstanceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoMinorVersionUpgrade = a } :: NeptuneClusterInstanceResource s)
+               (\s a -> s { _autoMinorVersionUpgrade = a
+                          } :: NeptuneClusterInstanceResource s)
 
 instance P.HasClusterIdentifier (NeptuneClusterInstanceResource s) (TF.Attr s P.Text) where
     clusterIdentifier =
         P.lens (_clusterIdentifier :: NeptuneClusterInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterIdentifier = a } :: NeptuneClusterInstanceResource s)
+               (\s a -> s { _clusterIdentifier = a
+                          } :: NeptuneClusterInstanceResource s)
 
 instance P.HasEngine (NeptuneClusterInstanceResource s) (TF.Attr s P.Text) where
     engine =
         P.lens (_engine :: NeptuneClusterInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _engine = a } :: NeptuneClusterInstanceResource s)
+               (\s a -> s { _engine = a
+                          } :: NeptuneClusterInstanceResource s)
 
 instance P.HasInstanceClass (NeptuneClusterInstanceResource s) (TF.Attr s P.Text) where
     instanceClass =
         P.lens (_instanceClass :: NeptuneClusterInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceClass = a } :: NeptuneClusterInstanceResource s)
+               (\s a -> s { _instanceClass = a
+                          } :: NeptuneClusterInstanceResource s)
 
 instance P.HasNeptuneParameterGroupName (NeptuneClusterInstanceResource s) (TF.Attr s P.Text) where
     neptuneParameterGroupName =
         P.lens (_neptuneParameterGroupName :: NeptuneClusterInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _neptuneParameterGroupName = a } :: NeptuneClusterInstanceResource s)
+               (\s a -> s { _neptuneParameterGroupName = a
+                          } :: NeptuneClusterInstanceResource s)
 
 instance P.HasPort (NeptuneClusterInstanceResource s) (TF.Attr s P.Integer) where
     port =
         P.lens (_port :: NeptuneClusterInstanceResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a } :: NeptuneClusterInstanceResource s)
+               (\s a -> s { _port = a
+                          } :: NeptuneClusterInstanceResource s)
 
 instance P.HasPromotionTier (NeptuneClusterInstanceResource s) (TF.Attr s P.Integer) where
     promotionTier =
         P.lens (_promotionTier :: NeptuneClusterInstanceResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _promotionTier = a } :: NeptuneClusterInstanceResource s)
+               (\s a -> s { _promotionTier = a
+                          } :: NeptuneClusterInstanceResource s)
 
 instance P.HasPubliclyAccessible (NeptuneClusterInstanceResource s) (TF.Attr s P.Bool) where
     publiclyAccessible =
         P.lens (_publiclyAccessible :: NeptuneClusterInstanceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _publiclyAccessible = a } :: NeptuneClusterInstanceResource s)
+               (\s a -> s { _publiclyAccessible = a
+                          } :: NeptuneClusterInstanceResource s)
 
 instance P.HasTags (NeptuneClusterInstanceResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: NeptuneClusterInstanceResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: NeptuneClusterInstanceResource s)
+               (\s a -> s { _tags = a
+                          } :: NeptuneClusterInstanceResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (NeptuneClusterInstanceResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
@@ -1242,15 +1397,22 @@ instance s ~ s' => P.HasComputedWriter (TF.Ref s' (NeptuneClusterInstanceResourc
     computedWriter x = TF.compute (TF.refKey x) "writer"
 
 -- | @aws_neptune_cluster_parameter_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_neptune_cluster_parameter_group terraform documentation>
+-- for more information.
 data NeptuneClusterParameterGroupResource s = NeptuneClusterParameterGroupResource'
     { _description :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _family'     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @family@ - (Required)
+    --
     , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
-    -- ^ Undocumented.
+    -- ^ @parameter@ - (Optional)
+    --
     , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NeptuneClusterParameterGroupResource s) where
@@ -1262,7 +1424,7 @@ instance TF.IsObject (NeptuneClusterParameterGroupResource s) where
         ]
 
 neptuneClusterParameterGroupResource
-    :: TF.Attr s P.Text -- ^ @family@
+    :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
     -> TF.Resource P.Provider (NeptuneClusterParameterGroupResource s)
 neptuneClusterParameterGroupResource _family' =
     TF.newResource "aws_neptune_cluster_parameter_group" $
@@ -1276,22 +1438,26 @@ neptuneClusterParameterGroupResource _family' =
 instance P.HasDescription (NeptuneClusterParameterGroupResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: NeptuneClusterParameterGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: NeptuneClusterParameterGroupResource s)
+               (\s a -> s { _description = a
+                          } :: NeptuneClusterParameterGroupResource s)
 
 instance P.HasFamily' (NeptuneClusterParameterGroupResource s) (TF.Attr s P.Text) where
     family' =
         P.lens (_family' :: NeptuneClusterParameterGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _family' = a } :: NeptuneClusterParameterGroupResource s)
+               (\s a -> s { _family' = a
+                          } :: NeptuneClusterParameterGroupResource s)
 
 instance P.HasParameter (NeptuneClusterParameterGroupResource s) (TF.Attr s [TF.Attr s (Parameter s)]) where
     parameter =
         P.lens (_parameter :: NeptuneClusterParameterGroupResource s -> TF.Attr s [TF.Attr s (Parameter s)])
-               (\s a -> s { _parameter = a } :: NeptuneClusterParameterGroupResource s)
+               (\s a -> s { _parameter = a
+                          } :: NeptuneClusterParameterGroupResource s)
 
 instance P.HasTags (NeptuneClusterParameterGroupResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: NeptuneClusterParameterGroupResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: NeptuneClusterParameterGroupResource s)
+               (\s a -> s { _tags = a
+                          } :: NeptuneClusterParameterGroupResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (NeptuneClusterParameterGroupResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1303,19 +1469,28 @@ instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (NeptuneClusterParameterGr
     computedNamePrefix x = TF.compute (TF.refKey x) "name_prefix"
 
 -- | @aws_neptune_event_subscription@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_neptune_event_subscription terraform documentation>
+-- for more information.
 data NeptuneEventSubscriptionResource s = NeptuneEventSubscriptionResource'
     { _enabled         :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @enabled@ - (Optional)
+    --
     , _eventCategories :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @event_categories@ - (Optional)
+    --
     , _snsTopicArn     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @sns_topic_arn@ - (Required)
+    --
     , _sourceIds       :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @source_ids@ - (Optional)
+    --
     , _sourceType      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @source_type@ - (Optional)
+    --
     , _tags            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NeptuneEventSubscriptionResource s) where
@@ -1329,7 +1504,7 @@ instance TF.IsObject (NeptuneEventSubscriptionResource s) where
         ]
 
 neptuneEventSubscriptionResource
-    :: TF.Attr s P.Text -- ^ @sns_topic_arn@
+    :: TF.Attr s P.Text -- ^ @sns_topic_arn@ - 'P.snsTopicArn'
     -> TF.Resource P.Provider (NeptuneEventSubscriptionResource s)
 neptuneEventSubscriptionResource _snsTopicArn =
     TF.newResource "aws_neptune_event_subscription" $
@@ -1345,32 +1520,38 @@ neptuneEventSubscriptionResource _snsTopicArn =
 instance P.HasEnabled (NeptuneEventSubscriptionResource s) (TF.Attr s P.Bool) where
     enabled =
         P.lens (_enabled :: NeptuneEventSubscriptionResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: NeptuneEventSubscriptionResource s)
+               (\s a -> s { _enabled = a
+                          } :: NeptuneEventSubscriptionResource s)
 
 instance P.HasEventCategories (NeptuneEventSubscriptionResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     eventCategories =
         P.lens (_eventCategories :: NeptuneEventSubscriptionResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _eventCategories = a } :: NeptuneEventSubscriptionResource s)
+               (\s a -> s { _eventCategories = a
+                          } :: NeptuneEventSubscriptionResource s)
 
 instance P.HasSnsTopicArn (NeptuneEventSubscriptionResource s) (TF.Attr s P.Text) where
     snsTopicArn =
         P.lens (_snsTopicArn :: NeptuneEventSubscriptionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _snsTopicArn = a } :: NeptuneEventSubscriptionResource s)
+               (\s a -> s { _snsTopicArn = a
+                          } :: NeptuneEventSubscriptionResource s)
 
 instance P.HasSourceIds (NeptuneEventSubscriptionResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     sourceIds =
         P.lens (_sourceIds :: NeptuneEventSubscriptionResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _sourceIds = a } :: NeptuneEventSubscriptionResource s)
+               (\s a -> s { _sourceIds = a
+                          } :: NeptuneEventSubscriptionResource s)
 
 instance P.HasSourceType (NeptuneEventSubscriptionResource s) (TF.Attr s P.Text) where
     sourceType =
         P.lens (_sourceType :: NeptuneEventSubscriptionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceType = a } :: NeptuneEventSubscriptionResource s)
+               (\s a -> s { _sourceType = a
+                          } :: NeptuneEventSubscriptionResource s)
 
 instance P.HasTags (NeptuneEventSubscriptionResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: NeptuneEventSubscriptionResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: NeptuneEventSubscriptionResource s)
+               (\s a -> s { _tags = a
+                          } :: NeptuneEventSubscriptionResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (NeptuneEventSubscriptionResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1385,17 +1566,25 @@ instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (NeptuneEventSubscriptionR
     computedNamePrefix x = TF.compute (TF.refKey x) "name_prefix"
 
 -- | @aws_neptune_parameter_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_neptune_parameter_group terraform documentation>
+-- for more information.
 data NeptuneParameterGroupResource s = NeptuneParameterGroupResource'
     { _description :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _family'     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @family@ - (Required)
+    --
     , _name        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
-    -- ^ Undocumented.
+    -- ^ @parameter@ - (Optional)
+    --
     , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NeptuneParameterGroupResource s) where
@@ -1408,8 +1597,8 @@ instance TF.IsObject (NeptuneParameterGroupResource s) where
         ]
 
 neptuneParameterGroupResource
-    :: TF.Attr s P.Text -- ^ @family@
-    -> TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (NeptuneParameterGroupResource s)
 neptuneParameterGroupResource _family' _name =
     TF.newResource "aws_neptune_parameter_group" $
@@ -1424,39 +1613,50 @@ neptuneParameterGroupResource _family' _name =
 instance P.HasDescription (NeptuneParameterGroupResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: NeptuneParameterGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: NeptuneParameterGroupResource s)
+               (\s a -> s { _description = a
+                          } :: NeptuneParameterGroupResource s)
 
 instance P.HasFamily' (NeptuneParameterGroupResource s) (TF.Attr s P.Text) where
     family' =
         P.lens (_family' :: NeptuneParameterGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _family' = a } :: NeptuneParameterGroupResource s)
+               (\s a -> s { _family' = a
+                          } :: NeptuneParameterGroupResource s)
 
 instance P.HasName (NeptuneParameterGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: NeptuneParameterGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: NeptuneParameterGroupResource s)
+               (\s a -> s { _name = a
+                          } :: NeptuneParameterGroupResource s)
 
 instance P.HasParameter (NeptuneParameterGroupResource s) (TF.Attr s [TF.Attr s (Parameter s)]) where
     parameter =
         P.lens (_parameter :: NeptuneParameterGroupResource s -> TF.Attr s [TF.Attr s (Parameter s)])
-               (\s a -> s { _parameter = a } :: NeptuneParameterGroupResource s)
+               (\s a -> s { _parameter = a
+                          } :: NeptuneParameterGroupResource s)
 
 instance P.HasTags (NeptuneParameterGroupResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: NeptuneParameterGroupResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: NeptuneParameterGroupResource s)
+               (\s a -> s { _tags = a
+                          } :: NeptuneParameterGroupResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (NeptuneParameterGroupResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
 -- | @aws_neptune_subnet_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_neptune_subnet_group terraform documentation>
+-- for more information.
 data NeptuneSubnetGroupResource s = NeptuneSubnetGroupResource'
     { _description :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _subnetIds   :: TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text)))
-    -- ^ Undocumented.
+    -- ^ @subnet_ids@ - (Required)
+    --
     , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NeptuneSubnetGroupResource s) where
@@ -1467,7 +1667,7 @@ instance TF.IsObject (NeptuneSubnetGroupResource s) where
         ]
 
 neptuneSubnetGroupResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text))) -- ^ @subnet_ids@
+    :: TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text))) -- ^ @subnet_ids@ - 'P.subnetIds'
     -> TF.Resource P.Provider (NeptuneSubnetGroupResource s)
 neptuneSubnetGroupResource _subnetIds =
     TF.newResource "aws_neptune_subnet_group" $
@@ -1480,17 +1680,20 @@ neptuneSubnetGroupResource _subnetIds =
 instance P.HasDescription (NeptuneSubnetGroupResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: NeptuneSubnetGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: NeptuneSubnetGroupResource s)
+               (\s a -> s { _description = a
+                          } :: NeptuneSubnetGroupResource s)
 
 instance P.HasSubnetIds (NeptuneSubnetGroupResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text)))) where
     subnetIds =
         P.lens (_subnetIds :: NeptuneSubnetGroupResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text))))
-               (\s a -> s { _subnetIds = a } :: NeptuneSubnetGroupResource s)
+               (\s a -> s { _subnetIds = a
+                          } :: NeptuneSubnetGroupResource s)
 
 instance P.HasTags (NeptuneSubnetGroupResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: NeptuneSubnetGroupResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: NeptuneSubnetGroupResource s)
+               (\s a -> s { _tags = a
+                          } :: NeptuneSubnetGroupResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (NeptuneSubnetGroupResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1502,13 +1705,19 @@ instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (NeptuneSubnetGroupResourc
     computedNamePrefix x = TF.compute (TF.refKey x) "name_prefix"
 
 -- | @aws_network_acl@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_network_acl terraform documentation>
+-- for more information.
 data NetworkAclResource s = NetworkAclResource'
     { _subnetId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @subnet_id@ - (Optional)
+    --
     , _tags     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     , _vpcId    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @vpc_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NetworkAclResource s) where
@@ -1519,7 +1728,7 @@ instance TF.IsObject (NetworkAclResource s) where
         ]
 
 networkAclResource
-    :: TF.Attr s P.Text -- ^ @vpc_id@
+    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> TF.Resource P.Provider (NetworkAclResource s)
 networkAclResource _vpcId =
     TF.newResource "aws_network_acl" $
@@ -1532,17 +1741,20 @@ networkAclResource _vpcId =
 instance P.HasSubnetId (NetworkAclResource s) (TF.Attr s P.Text) where
     subnetId =
         P.lens (_subnetId :: NetworkAclResource s -> TF.Attr s P.Text)
-               (\s a -> s { _subnetId = a } :: NetworkAclResource s)
+               (\s a -> s { _subnetId = a
+                          } :: NetworkAclResource s)
 
 instance P.HasTags (NetworkAclResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: NetworkAclResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: NetworkAclResource s)
+               (\s a -> s { _tags = a
+                          } :: NetworkAclResource s)
 
 instance P.HasVpcId (NetworkAclResource s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: NetworkAclResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a } :: NetworkAclResource s)
+               (\s a -> s { _vpcId = a
+                          } :: NetworkAclResource s)
 
 instance s ~ s' => P.HasComputedEgress (TF.Ref s' (NetworkAclResource s)) (TF.Attr s [TF.Attr s (Egress s)]) where
     computedEgress x = TF.compute (TF.refKey x) "egress"
@@ -1554,29 +1766,49 @@ instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (NetworkAclResource s)) (TF
     computedSubnetIds x = TF.compute (TF.refKey x) "subnet_ids"
 
 -- | @aws_network_acl_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_network_acl_rule terraform documentation>
+-- for more information.
 data NetworkAclRuleResource s = NetworkAclRuleResource'
     { _cidrBlock     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cidr_block@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'ipv6CidrBlock'
     , _egress        :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @egress@ - (Optional)
+    --
     , _fromPort      :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @from_port@ - (Optional)
+    --
     , _icmpCode      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @icmp_code@ - (Optional)
+    --
     , _icmpType      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @icmp_type@ - (Optional)
+    --
     , _ipv6CidrBlock :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @ipv6_cidr_block@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'cidrBlock'
     , _networkAclId  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @network_acl_id@ - (Required)
+    --
     , _protocol      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @protocol@ - (Required)
+    --
     , _ruleAction    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @rule_action@ - (Required)
+    --
     , _ruleNumber    :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @rule_number@ - (Required)
+    --
     , _toPort        :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @to_port@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NetworkAclRuleResource s) where
@@ -1595,10 +1827,10 @@ instance TF.IsObject (NetworkAclRuleResource s) where
         ]
 
 networkAclRuleResource
-    :: TF.Attr s P.Text -- ^ @network_acl_id@
-    -> TF.Attr s P.Text -- ^ @protocol@
-    -> TF.Attr s P.Text -- ^ @rule_action@
-    -> TF.Attr s P.Integer -- ^ @rule_number@
+    :: TF.Attr s P.Text -- ^ @network_acl_id@ - 'P.networkAclId'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    -> TF.Attr s P.Text -- ^ @rule_action@ - 'P.ruleAction'
+    -> TF.Attr s P.Integer -- ^ @rule_number@ - 'P.ruleNumber'
     -> TF.Resource P.Provider (NetworkAclRuleResource s)
 networkAclRuleResource _networkAclId _protocol _ruleAction _ruleNumber =
     TF.newResource "aws_network_acl_rule" $
@@ -1619,68 +1851,88 @@ networkAclRuleResource _networkAclId _protocol _ruleAction _ruleNumber =
 instance P.HasCidrBlock (NetworkAclRuleResource s) (TF.Attr s P.Text) where
     cidrBlock =
         P.lens (_cidrBlock :: NetworkAclRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _cidrBlock = a } :: NetworkAclRuleResource s)
+               (\s a -> s { _cidrBlock = a
+                          , _ipv6CidrBlock = TF.Nil
+                          } :: NetworkAclRuleResource s)
 
 instance P.HasEgress (NetworkAclRuleResource s) (TF.Attr s P.Bool) where
     egress =
         P.lens (_egress :: NetworkAclRuleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _egress = a } :: NetworkAclRuleResource s)
+               (\s a -> s { _egress = a
+                          } :: NetworkAclRuleResource s)
 
 instance P.HasFromPort (NetworkAclRuleResource s) (TF.Attr s P.Integer) where
     fromPort =
         P.lens (_fromPort :: NetworkAclRuleResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _fromPort = a } :: NetworkAclRuleResource s)
+               (\s a -> s { _fromPort = a
+                          } :: NetworkAclRuleResource s)
 
 instance P.HasIcmpCode (NetworkAclRuleResource s) (TF.Attr s P.Text) where
     icmpCode =
         P.lens (_icmpCode :: NetworkAclRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _icmpCode = a } :: NetworkAclRuleResource s)
+               (\s a -> s { _icmpCode = a
+                          } :: NetworkAclRuleResource s)
 
 instance P.HasIcmpType (NetworkAclRuleResource s) (TF.Attr s P.Text) where
     icmpType =
         P.lens (_icmpType :: NetworkAclRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _icmpType = a } :: NetworkAclRuleResource s)
+               (\s a -> s { _icmpType = a
+                          } :: NetworkAclRuleResource s)
 
 instance P.HasIpv6CidrBlock (NetworkAclRuleResource s) (TF.Attr s P.Text) where
     ipv6CidrBlock =
         P.lens (_ipv6CidrBlock :: NetworkAclRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ipv6CidrBlock = a } :: NetworkAclRuleResource s)
+               (\s a -> s { _ipv6CidrBlock = a
+                          , _cidrBlock = TF.Nil
+                          } :: NetworkAclRuleResource s)
 
 instance P.HasNetworkAclId (NetworkAclRuleResource s) (TF.Attr s P.Text) where
     networkAclId =
         P.lens (_networkAclId :: NetworkAclRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _networkAclId = a } :: NetworkAclRuleResource s)
+               (\s a -> s { _networkAclId = a
+                          } :: NetworkAclRuleResource s)
 
 instance P.HasProtocol (NetworkAclRuleResource s) (TF.Attr s P.Text) where
     protocol =
         P.lens (_protocol :: NetworkAclRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a } :: NetworkAclRuleResource s)
+               (\s a -> s { _protocol = a
+                          } :: NetworkAclRuleResource s)
 
 instance P.HasRuleAction (NetworkAclRuleResource s) (TF.Attr s P.Text) where
     ruleAction =
         P.lens (_ruleAction :: NetworkAclRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ruleAction = a } :: NetworkAclRuleResource s)
+               (\s a -> s { _ruleAction = a
+                          } :: NetworkAclRuleResource s)
 
 instance P.HasRuleNumber (NetworkAclRuleResource s) (TF.Attr s P.Integer) where
     ruleNumber =
         P.lens (_ruleNumber :: NetworkAclRuleResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _ruleNumber = a } :: NetworkAclRuleResource s)
+               (\s a -> s { _ruleNumber = a
+                          } :: NetworkAclRuleResource s)
 
 instance P.HasToPort (NetworkAclRuleResource s) (TF.Attr s P.Integer) where
     toPort =
         P.lens (_toPort :: NetworkAclRuleResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _toPort = a } :: NetworkAclRuleResource s)
+               (\s a -> s { _toPort = a
+                          } :: NetworkAclRuleResource s)
 
 -- | @aws_network_interface@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_network_interface terraform documentation>
+-- for more information.
 data NetworkInterfaceResource s = NetworkInterfaceResource'
     { _description     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _sourceDestCheck :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @source_dest_check@ - (Optional)
+    --
     , _subnetId        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @subnet_id@ - (Required)
+    --
     , _tags            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NetworkInterfaceResource s) where
@@ -1692,7 +1944,7 @@ instance TF.IsObject (NetworkInterfaceResource s) where
         ]
 
 networkInterfaceResource
-    :: TF.Attr s P.Text -- ^ @subnet_id@
+    :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> TF.Resource P.Provider (NetworkInterfaceResource s)
 networkInterfaceResource _subnetId =
     TF.newResource "aws_network_interface" $
@@ -1706,22 +1958,26 @@ networkInterfaceResource _subnetId =
 instance P.HasDescription (NetworkInterfaceResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: NetworkInterfaceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: NetworkInterfaceResource s)
+               (\s a -> s { _description = a
+                          } :: NetworkInterfaceResource s)
 
 instance P.HasSourceDestCheck (NetworkInterfaceResource s) (TF.Attr s P.Bool) where
     sourceDestCheck =
         P.lens (_sourceDestCheck :: NetworkInterfaceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _sourceDestCheck = a } :: NetworkInterfaceResource s)
+               (\s a -> s { _sourceDestCheck = a
+                          } :: NetworkInterfaceResource s)
 
 instance P.HasSubnetId (NetworkInterfaceResource s) (TF.Attr s P.Text) where
     subnetId =
         P.lens (_subnetId :: NetworkInterfaceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _subnetId = a } :: NetworkInterfaceResource s)
+               (\s a -> s { _subnetId = a
+                          } :: NetworkInterfaceResource s)
 
 instance P.HasTags (NetworkInterfaceResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: NetworkInterfaceResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: NetworkInterfaceResource s)
+               (\s a -> s { _tags = a
+                          } :: NetworkInterfaceResource s)
 
 instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s [TF.Attr s (Attachment s)]) where
     computedAttachment x = TF.compute (TF.refKey x) "attachment"
@@ -1742,13 +1998,19 @@ instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (NetworkInterfaceResou
     computedSecurityGroups x = TF.compute (TF.refKey x) "security_groups"
 
 -- | @aws_network_interface_attachment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_network_interface_attachment terraform documentation>
+-- for more information.
 data NetworkInterfaceAttachmentResource s = NetworkInterfaceAttachmentResource'
     { _deviceIndex        :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @device_index@ - (Required)
+    --
     , _instanceId         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @instance_id@ - (Required)
+    --
     , _networkInterfaceId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @network_interface_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NetworkInterfaceAttachmentResource s) where
@@ -1759,9 +2021,9 @@ instance TF.IsObject (NetworkInterfaceAttachmentResource s) where
         ]
 
 networkInterfaceAttachmentResource
-    :: TF.Attr s P.Integer -- ^ @device_index@
-    -> TF.Attr s P.Text -- ^ @instance_id@
-    -> TF.Attr s P.Text -- ^ @network_interface_id@
+    :: TF.Attr s P.Integer -- ^ @device_index@ - 'P.deviceIndex'
+    -> TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
+    -> TF.Attr s P.Text -- ^ @network_interface_id@ - 'P.networkInterfaceId'
     -> TF.Resource P.Provider (NetworkInterfaceAttachmentResource s)
 networkInterfaceAttachmentResource _deviceIndex _instanceId _networkInterfaceId =
     TF.newResource "aws_network_interface_attachment" $
@@ -1774,17 +2036,20 @@ networkInterfaceAttachmentResource _deviceIndex _instanceId _networkInterfaceId 
 instance P.HasDeviceIndex (NetworkInterfaceAttachmentResource s) (TF.Attr s P.Integer) where
     deviceIndex =
         P.lens (_deviceIndex :: NetworkInterfaceAttachmentResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _deviceIndex = a } :: NetworkInterfaceAttachmentResource s)
+               (\s a -> s { _deviceIndex = a
+                          } :: NetworkInterfaceAttachmentResource s)
 
 instance P.HasInstanceId (NetworkInterfaceAttachmentResource s) (TF.Attr s P.Text) where
     instanceId =
         P.lens (_instanceId :: NetworkInterfaceAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceId = a } :: NetworkInterfaceAttachmentResource s)
+               (\s a -> s { _instanceId = a
+                          } :: NetworkInterfaceAttachmentResource s)
 
 instance P.HasNetworkInterfaceId (NetworkInterfaceAttachmentResource s) (TF.Attr s P.Text) where
     networkInterfaceId =
         P.lens (_networkInterfaceId :: NetworkInterfaceAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _networkInterfaceId = a } :: NetworkInterfaceAttachmentResource s)
+               (\s a -> s { _networkInterfaceId = a
+                          } :: NetworkInterfaceAttachmentResource s)
 
 instance s ~ s' => P.HasComputedAttachmentId (TF.Ref s' (NetworkInterfaceAttachmentResource s)) (TF.Attr s P.Text) where
     computedAttachmentId x = TF.compute (TF.refKey x) "attachment_id"
@@ -1793,11 +2058,16 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (NetworkInterfaceAttachmentRes
     computedStatus x = TF.compute (TF.refKey x) "status"
 
 -- | @aws_network_interface_sg_attachment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_network_interface_sg_attachment terraform documentation>
+-- for more information.
 data NetworkInterfaceSgAttachmentResource s = NetworkInterfaceSgAttachmentResource'
     { _networkInterfaceId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @network_interface_id@ - (Required)
+    --
     , _securityGroupId    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @security_group_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NetworkInterfaceSgAttachmentResource s) where
@@ -1807,8 +2077,8 @@ instance TF.IsObject (NetworkInterfaceSgAttachmentResource s) where
         ]
 
 networkInterfaceSgAttachmentResource
-    :: TF.Attr s P.Text -- ^ @network_interface_id@
-    -> TF.Attr s P.Text -- ^ @security_group_id@
+    :: TF.Attr s P.Text -- ^ @network_interface_id@ - 'P.networkInterfaceId'
+    -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
     -> TF.Resource P.Provider (NetworkInterfaceSgAttachmentResource s)
 networkInterfaceSgAttachmentResource _networkInterfaceId _securityGroupId =
     TF.newResource "aws_network_interface_sg_attachment" $
@@ -1820,45 +2090,65 @@ networkInterfaceSgAttachmentResource _networkInterfaceId _securityGroupId =
 instance P.HasNetworkInterfaceId (NetworkInterfaceSgAttachmentResource s) (TF.Attr s P.Text) where
     networkInterfaceId =
         P.lens (_networkInterfaceId :: NetworkInterfaceSgAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _networkInterfaceId = a } :: NetworkInterfaceSgAttachmentResource s)
+               (\s a -> s { _networkInterfaceId = a
+                          } :: NetworkInterfaceSgAttachmentResource s)
 
 instance P.HasSecurityGroupId (NetworkInterfaceSgAttachmentResource s) (TF.Attr s P.Text) where
     securityGroupId =
         P.lens (_securityGroupId :: NetworkInterfaceSgAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _securityGroupId = a } :: NetworkInterfaceSgAttachmentResource s)
+               (\s a -> s { _securityGroupId = a
+                          } :: NetworkInterfaceSgAttachmentResource s)
 
 -- | @aws_opsworks_application@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_application terraform documentation>
+-- for more information.
 data OpsworksApplicationResource s = OpsworksApplicationResource'
     { _autoBundleOnDeploy     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @auto_bundle_on_deploy@ - (Optional)
+    --
     , _awsFlowRubySettings    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @aws_flow_ruby_settings@ - (Optional)
+    --
     , _dataSourceArn          :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @data_source_arn@ - (Optional)
+    --
     , _dataSourceDatabaseName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @data_source_database_name@ - (Optional)
+    --
     , _dataSourceType         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @data_source_type@ - (Optional)
+    --
     , _description            :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _documentRoot           :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @document_root@ - (Optional)
+    --
     , _domains                :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @domains@ - (Optional)
+    --
     , _enableSsl              :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @enable_ssl@ - (Optional)
+    --
     , _environment            :: TF.Attr s [TF.Attr s (Environment s)]
-    -- ^ Undocumented.
+    -- ^ @environment@ - (Optional)
+    --
     , _name                   :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _railsEnv               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @rails_env@ - (Optional)
+    --
     , _sslConfiguration       :: TF.Attr s [SslConfiguration s]
-    -- ^ Undocumented.
+    -- ^ @ssl_configuration@ - (Optional)
+    --
     , _stackId                :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stack_id@ - (Required)
+    --
     , _type'                  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @type@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksApplicationResource s) where
@@ -1881,9 +2171,9 @@ instance TF.IsObject (OpsworksApplicationResource s) where
         ]
 
 opsworksApplicationResource
-    :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Attr s P.Text -- ^ @stack_id@
-    -> TF.Attr s P.Text -- ^ @type@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Resource P.Provider (OpsworksApplicationResource s)
 opsworksApplicationResource _name _stackId _type' =
     TF.newResource "aws_opsworks_application" $
@@ -1908,77 +2198,92 @@ opsworksApplicationResource _name _stackId _type' =
 instance P.HasAutoBundleOnDeploy (OpsworksApplicationResource s) (TF.Attr s P.Text) where
     autoBundleOnDeploy =
         P.lens (_autoBundleOnDeploy :: OpsworksApplicationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _autoBundleOnDeploy = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _autoBundleOnDeploy = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasAwsFlowRubySettings (OpsworksApplicationResource s) (TF.Attr s P.Text) where
     awsFlowRubySettings =
         P.lens (_awsFlowRubySettings :: OpsworksApplicationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _awsFlowRubySettings = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _awsFlowRubySettings = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasDataSourceArn (OpsworksApplicationResource s) (TF.Attr s P.Text) where
     dataSourceArn =
         P.lens (_dataSourceArn :: OpsworksApplicationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _dataSourceArn = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _dataSourceArn = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasDataSourceDatabaseName (OpsworksApplicationResource s) (TF.Attr s P.Text) where
     dataSourceDatabaseName =
         P.lens (_dataSourceDatabaseName :: OpsworksApplicationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _dataSourceDatabaseName = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _dataSourceDatabaseName = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasDataSourceType (OpsworksApplicationResource s) (TF.Attr s P.Text) where
     dataSourceType =
         P.lens (_dataSourceType :: OpsworksApplicationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _dataSourceType = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _dataSourceType = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasDescription (OpsworksApplicationResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: OpsworksApplicationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _description = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasDocumentRoot (OpsworksApplicationResource s) (TF.Attr s P.Text) where
     documentRoot =
         P.lens (_documentRoot :: OpsworksApplicationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _documentRoot = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _documentRoot = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasDomains (OpsworksApplicationResource s) (TF.Attr s [TF.Attr s P.Text]) where
     domains =
         P.lens (_domains :: OpsworksApplicationResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _domains = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _domains = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasEnableSsl (OpsworksApplicationResource s) (TF.Attr s P.Bool) where
     enableSsl =
         P.lens (_enableSsl :: OpsworksApplicationResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _enableSsl = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _enableSsl = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasEnvironment (OpsworksApplicationResource s) (TF.Attr s [TF.Attr s (Environment s)]) where
     environment =
         P.lens (_environment :: OpsworksApplicationResource s -> TF.Attr s [TF.Attr s (Environment s)])
-               (\s a -> s { _environment = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _environment = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasName (OpsworksApplicationResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OpsworksApplicationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _name = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasRailsEnv (OpsworksApplicationResource s) (TF.Attr s P.Text) where
     railsEnv =
         P.lens (_railsEnv :: OpsworksApplicationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _railsEnv = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _railsEnv = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasSslConfiguration (OpsworksApplicationResource s) (TF.Attr s [SslConfiguration s]) where
     sslConfiguration =
         P.lens (_sslConfiguration :: OpsworksApplicationResource s -> TF.Attr s [SslConfiguration s])
-               (\s a -> s { _sslConfiguration = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _sslConfiguration = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasStackId (OpsworksApplicationResource s) (TF.Attr s P.Text) where
     stackId =
         P.lens (_stackId :: OpsworksApplicationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stackId = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _stackId = a
+                          } :: OpsworksApplicationResource s)
 
 instance P.HasType' (OpsworksApplicationResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: OpsworksApplicationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: OpsworksApplicationResource s)
+               (\s a -> s { _type' = a
+                          } :: OpsworksApplicationResource s)
 
 instance s ~ s' => P.HasComputedAppSource (TF.Ref s' (OpsworksApplicationResource s)) (TF.Attr s [AppSource s]) where
     computedAppSource x = TF.compute (TF.refKey x) "app_source"
@@ -1987,49 +2292,73 @@ instance s ~ s' => P.HasComputedShortName (TF.Ref s' (OpsworksApplicationResourc
     computedShortName x = TF.compute (TF.refKey x) "short_name"
 
 -- | @aws_opsworks_custom_layer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_custom_layer terraform documentation>
+-- for more information.
 data OpsworksCustomLayerResource s = OpsworksCustomLayerResource'
     { _autoAssignElasticIps     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_elastic_ips@ - (Optional)
+    --
     , _autoAssignPublicIps      :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_public_ips@ - (Optional)
+    --
     , _autoHealing              :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_healing@ - (Optional)
+    --
     , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_configure_recipes@ - (Optional)
+    --
     , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_deploy_recipes@ - (Optional)
+    --
     , _customInstanceProfileArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_instance_profile_arn@ - (Optional)
+    --
     , _customJson               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_json@ - (Optional)
+    --
     , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @custom_security_group_ids@ - (Optional)
+    --
     , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_setup_recipes@ - (Optional)
+    --
     , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_shutdown_recipes@ - (Optional)
+    --
     , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_undeploy_recipes@ - (Optional)
+    --
     , _drainElbOnShutdown       :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @drain_elb_on_shutdown@ - (Optional)
+    --
     , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
-    -- ^ Undocumented.
+    -- ^ @ebs_volume@ - (Optional)
+    --
     , _elasticLoadBalancer      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @elastic_load_balancer@ - (Optional)
+    --
     , _installUpdatesOnBoot     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @install_updates_on_boot@ - (Optional)
+    --
     , _instanceShutdownTimeout  :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @instance_shutdown_timeout@ - (Optional)
+    --
     , _name                     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _shortName                :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @short_name@ - (Required)
+    --
     , _stackId                  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stack_id@ - (Required)
+    --
     , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @system_packages@ - (Optional)
+    --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @use_ebs_optimized_instances@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksCustomLayerResource s) where
@@ -2058,9 +2387,9 @@ instance TF.IsObject (OpsworksCustomLayerResource s) where
         ]
 
 opsworksCustomLayerResource
-    :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Attr s P.Text -- ^ @short_name@
-    -> TF.Attr s P.Text -- ^ @stack_id@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @short_name@ - 'P.shortName'
+    -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Resource P.Provider (OpsworksCustomLayerResource s)
 opsworksCustomLayerResource _name _shortName _stackId =
     TF.newResource "aws_opsworks_custom_layer" $
@@ -2091,156 +2420,203 @@ opsworksCustomLayerResource _name _shortName _stackId =
 instance P.HasAutoAssignElasticIps (OpsworksCustomLayerResource s) (TF.Attr s P.Bool) where
     autoAssignElasticIps =
         P.lens (_autoAssignElasticIps :: OpsworksCustomLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignElasticIps = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _autoAssignElasticIps = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasAutoAssignPublicIps (OpsworksCustomLayerResource s) (TF.Attr s P.Bool) where
     autoAssignPublicIps =
         P.lens (_autoAssignPublicIps :: OpsworksCustomLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignPublicIps = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _autoAssignPublicIps = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasAutoHealing (OpsworksCustomLayerResource s) (TF.Attr s P.Bool) where
     autoHealing =
         P.lens (_autoHealing :: OpsworksCustomLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoHealing = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _autoHealing = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasCustomConfigureRecipes (OpsworksCustomLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customConfigureRecipes =
         P.lens (_customConfigureRecipes :: OpsworksCustomLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customConfigureRecipes = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _customConfigureRecipes = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasCustomDeployRecipes (OpsworksCustomLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customDeployRecipes =
         P.lens (_customDeployRecipes :: OpsworksCustomLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customDeployRecipes = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _customDeployRecipes = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasCustomInstanceProfileArn (OpsworksCustomLayerResource s) (TF.Attr s P.Text) where
     customInstanceProfileArn =
         P.lens (_customInstanceProfileArn :: OpsworksCustomLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customInstanceProfileArn = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _customInstanceProfileArn = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasCustomJson (OpsworksCustomLayerResource s) (TF.Attr s P.Text) where
     customJson =
         P.lens (_customJson :: OpsworksCustomLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customJson = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _customJson = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasCustomSecurityGroupIds (OpsworksCustomLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     customSecurityGroupIds =
         P.lens (_customSecurityGroupIds :: OpsworksCustomLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _customSecurityGroupIds = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _customSecurityGroupIds = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasCustomSetupRecipes (OpsworksCustomLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customSetupRecipes =
         P.lens (_customSetupRecipes :: OpsworksCustomLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customSetupRecipes = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _customSetupRecipes = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasCustomShutdownRecipes (OpsworksCustomLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customShutdownRecipes =
         P.lens (_customShutdownRecipes :: OpsworksCustomLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customShutdownRecipes = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _customShutdownRecipes = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasCustomUndeployRecipes (OpsworksCustomLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customUndeployRecipes =
         P.lens (_customUndeployRecipes :: OpsworksCustomLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customUndeployRecipes = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _customUndeployRecipes = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasDrainElbOnShutdown (OpsworksCustomLayerResource s) (TF.Attr s P.Bool) where
     drainElbOnShutdown =
         P.lens (_drainElbOnShutdown :: OpsworksCustomLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _drainElbOnShutdown = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _drainElbOnShutdown = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasEbsVolume (OpsworksCustomLayerResource s) (TF.Attr s [TF.Attr s (EbsVolume s)]) where
     ebsVolume =
         P.lens (_ebsVolume :: OpsworksCustomLayerResource s -> TF.Attr s [TF.Attr s (EbsVolume s)])
-               (\s a -> s { _ebsVolume = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _ebsVolume = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksCustomLayerResource s) (TF.Attr s P.Text) where
     elasticLoadBalancer =
         P.lens (_elasticLoadBalancer :: OpsworksCustomLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _elasticLoadBalancer = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _elasticLoadBalancer = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasInstallUpdatesOnBoot (OpsworksCustomLayerResource s) (TF.Attr s P.Bool) where
     installUpdatesOnBoot =
         P.lens (_installUpdatesOnBoot :: OpsworksCustomLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _installUpdatesOnBoot = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _installUpdatesOnBoot = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasInstanceShutdownTimeout (OpsworksCustomLayerResource s) (TF.Attr s P.Integer) where
     instanceShutdownTimeout =
         P.lens (_instanceShutdownTimeout :: OpsworksCustomLayerResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _instanceShutdownTimeout = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _instanceShutdownTimeout = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasName (OpsworksCustomLayerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OpsworksCustomLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _name = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasShortName (OpsworksCustomLayerResource s) (TF.Attr s P.Text) where
     shortName =
         P.lens (_shortName :: OpsworksCustomLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _shortName = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _shortName = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasStackId (OpsworksCustomLayerResource s) (TF.Attr s P.Text) where
     stackId =
         P.lens (_stackId :: OpsworksCustomLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stackId = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _stackId = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasSystemPackages (OpsworksCustomLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     systemPackages =
         P.lens (_systemPackages :: OpsworksCustomLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _systemPackages = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _systemPackages = a
+                          } :: OpsworksCustomLayerResource s)
 
 instance P.HasUseEbsOptimizedInstances (OpsworksCustomLayerResource s) (TF.Attr s P.Bool) where
     useEbsOptimizedInstances =
         P.lens (_useEbsOptimizedInstances :: OpsworksCustomLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _useEbsOptimizedInstances = a } :: OpsworksCustomLayerResource s)
+               (\s a -> s { _useEbsOptimizedInstances = a
+                          } :: OpsworksCustomLayerResource s)
 
 -- | @aws_opsworks_ganglia_layer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_ganglia_layer terraform documentation>
+-- for more information.
 data OpsworksGangliaLayerResource s = OpsworksGangliaLayerResource'
     { _autoAssignElasticIps     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_elastic_ips@ - (Optional)
+    --
     , _autoAssignPublicIps      :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_public_ips@ - (Optional)
+    --
     , _autoHealing              :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_healing@ - (Optional)
+    --
     , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_configure_recipes@ - (Optional)
+    --
     , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_deploy_recipes@ - (Optional)
+    --
     , _customInstanceProfileArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_instance_profile_arn@ - (Optional)
+    --
     , _customJson               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_json@ - (Optional)
+    --
     , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @custom_security_group_ids@ - (Optional)
+    --
     , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_setup_recipes@ - (Optional)
+    --
     , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_shutdown_recipes@ - (Optional)
+    --
     , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_undeploy_recipes@ - (Optional)
+    --
     , _drainElbOnShutdown       :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @drain_elb_on_shutdown@ - (Optional)
+    --
     , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
-    -- ^ Undocumented.
+    -- ^ @ebs_volume@ - (Optional)
+    --
     , _elasticLoadBalancer      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @elastic_load_balancer@ - (Optional)
+    --
     , _installUpdatesOnBoot     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @install_updates_on_boot@ - (Optional)
+    --
     , _instanceShutdownTimeout  :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @instance_shutdown_timeout@ - (Optional)
+    --
     , _name                     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Optional)
+    --
     , _password                 :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @password@ - (Required)
+    --
     , _stackId                  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stack_id@ - (Required)
+    --
     , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @system_packages@ - (Optional)
+    --
     , _url                      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @url@ - (Optional)
+    --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @use_ebs_optimized_instances@ - (Optional)
+    --
     , _username                 :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @username@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksGangliaLayerResource s) where
@@ -2271,8 +2647,8 @@ instance TF.IsObject (OpsworksGangliaLayerResource s) where
         ]
 
 opsworksGangliaLayerResource
-    :: TF.Attr s P.Text -- ^ @password@
-    -> TF.Attr s P.Text -- ^ @stack_id@
+    :: TF.Attr s P.Text -- ^ @password@ - 'P.password'
+    -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Resource P.Provider (OpsworksGangliaLayerResource s)
 opsworksGangliaLayerResource _password _stackId =
     TF.newResource "aws_opsworks_ganglia_layer" $
@@ -2305,172 +2681,224 @@ opsworksGangliaLayerResource _password _stackId =
 instance P.HasAutoAssignElasticIps (OpsworksGangliaLayerResource s) (TF.Attr s P.Bool) where
     autoAssignElasticIps =
         P.lens (_autoAssignElasticIps :: OpsworksGangliaLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignElasticIps = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _autoAssignElasticIps = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasAutoAssignPublicIps (OpsworksGangliaLayerResource s) (TF.Attr s P.Bool) where
     autoAssignPublicIps =
         P.lens (_autoAssignPublicIps :: OpsworksGangliaLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignPublicIps = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _autoAssignPublicIps = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasAutoHealing (OpsworksGangliaLayerResource s) (TF.Attr s P.Bool) where
     autoHealing =
         P.lens (_autoHealing :: OpsworksGangliaLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoHealing = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _autoHealing = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasCustomConfigureRecipes (OpsworksGangliaLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customConfigureRecipes =
         P.lens (_customConfigureRecipes :: OpsworksGangliaLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customConfigureRecipes = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _customConfigureRecipes = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasCustomDeployRecipes (OpsworksGangliaLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customDeployRecipes =
         P.lens (_customDeployRecipes :: OpsworksGangliaLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customDeployRecipes = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _customDeployRecipes = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasCustomInstanceProfileArn (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     customInstanceProfileArn =
         P.lens (_customInstanceProfileArn :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customInstanceProfileArn = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _customInstanceProfileArn = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasCustomJson (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     customJson =
         P.lens (_customJson :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customJson = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _customJson = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasCustomSecurityGroupIds (OpsworksGangliaLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     customSecurityGroupIds =
         P.lens (_customSecurityGroupIds :: OpsworksGangliaLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _customSecurityGroupIds = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _customSecurityGroupIds = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasCustomSetupRecipes (OpsworksGangliaLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customSetupRecipes =
         P.lens (_customSetupRecipes :: OpsworksGangliaLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customSetupRecipes = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _customSetupRecipes = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasCustomShutdownRecipes (OpsworksGangliaLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customShutdownRecipes =
         P.lens (_customShutdownRecipes :: OpsworksGangliaLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customShutdownRecipes = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _customShutdownRecipes = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasCustomUndeployRecipes (OpsworksGangliaLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customUndeployRecipes =
         P.lens (_customUndeployRecipes :: OpsworksGangliaLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customUndeployRecipes = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _customUndeployRecipes = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasDrainElbOnShutdown (OpsworksGangliaLayerResource s) (TF.Attr s P.Bool) where
     drainElbOnShutdown =
         P.lens (_drainElbOnShutdown :: OpsworksGangliaLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _drainElbOnShutdown = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _drainElbOnShutdown = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasEbsVolume (OpsworksGangliaLayerResource s) (TF.Attr s [TF.Attr s (EbsVolume s)]) where
     ebsVolume =
         P.lens (_ebsVolume :: OpsworksGangliaLayerResource s -> TF.Attr s [TF.Attr s (EbsVolume s)])
-               (\s a -> s { _ebsVolume = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _ebsVolume = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     elasticLoadBalancer =
         P.lens (_elasticLoadBalancer :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _elasticLoadBalancer = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _elasticLoadBalancer = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasInstallUpdatesOnBoot (OpsworksGangliaLayerResource s) (TF.Attr s P.Bool) where
     installUpdatesOnBoot =
         P.lens (_installUpdatesOnBoot :: OpsworksGangliaLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _installUpdatesOnBoot = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _installUpdatesOnBoot = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasInstanceShutdownTimeout (OpsworksGangliaLayerResource s) (TF.Attr s P.Integer) where
     instanceShutdownTimeout =
         P.lens (_instanceShutdownTimeout :: OpsworksGangliaLayerResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _instanceShutdownTimeout = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _instanceShutdownTimeout = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasName (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _name = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasPassword (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     password =
         P.lens (_password :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _password = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasStackId (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     stackId =
         P.lens (_stackId :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stackId = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _stackId = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasSystemPackages (OpsworksGangliaLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     systemPackages =
         P.lens (_systemPackages :: OpsworksGangliaLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _systemPackages = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _systemPackages = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasUrl (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     url =
         P.lens (_url :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _url = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _url = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasUseEbsOptimizedInstances (OpsworksGangliaLayerResource s) (TF.Attr s P.Bool) where
     useEbsOptimizedInstances =
         P.lens (_useEbsOptimizedInstances :: OpsworksGangliaLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _useEbsOptimizedInstances = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _useEbsOptimizedInstances = a
+                          } :: OpsworksGangliaLayerResource s)
 
 instance P.HasUsername (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
     username =
         P.lens (_username :: OpsworksGangliaLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: OpsworksGangliaLayerResource s)
+               (\s a -> s { _username = a
+                          } :: OpsworksGangliaLayerResource s)
 
 -- | @aws_opsworks_haproxy_layer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_haproxy_layer terraform documentation>
+-- for more information.
 data OpsworksHaproxyLayerResource s = OpsworksHaproxyLayerResource'
     { _autoAssignElasticIps     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_elastic_ips@ - (Optional)
+    --
     , _autoAssignPublicIps      :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_public_ips@ - (Optional)
+    --
     , _autoHealing              :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_healing@ - (Optional)
+    --
     , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_configure_recipes@ - (Optional)
+    --
     , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_deploy_recipes@ - (Optional)
+    --
     , _customInstanceProfileArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_instance_profile_arn@ - (Optional)
+    --
     , _customJson               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_json@ - (Optional)
+    --
     , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @custom_security_group_ids@ - (Optional)
+    --
     , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_setup_recipes@ - (Optional)
+    --
     , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_shutdown_recipes@ - (Optional)
+    --
     , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_undeploy_recipes@ - (Optional)
+    --
     , _drainElbOnShutdown       :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @drain_elb_on_shutdown@ - (Optional)
+    --
     , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
-    -- ^ Undocumented.
+    -- ^ @ebs_volume@ - (Optional)
+    --
     , _elasticLoadBalancer      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @elastic_load_balancer@ - (Optional)
+    --
     , _healthcheckMethod        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @healthcheck_method@ - (Optional)
+    --
     , _healthcheckUrl           :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @healthcheck_url@ - (Optional)
+    --
     , _installUpdatesOnBoot     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @install_updates_on_boot@ - (Optional)
+    --
     , _instanceShutdownTimeout  :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @instance_shutdown_timeout@ - (Optional)
+    --
     , _name                     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Optional)
+    --
     , _stackId                  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stack_id@ - (Required)
+    --
     , _statsEnabled             :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @stats_enabled@ - (Optional)
+    --
     , _statsPassword            :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stats_password@ - (Required)
+    --
     , _statsUrl                 :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stats_url@ - (Optional)
+    --
     , _statsUser                :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stats_user@ - (Optional)
+    --
     , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @system_packages@ - (Optional)
+    --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @use_ebs_optimized_instances@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksHaproxyLayerResource s) where
@@ -2504,8 +2932,8 @@ instance TF.IsObject (OpsworksHaproxyLayerResource s) where
         ]
 
 opsworksHaproxyLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@
-    -> TF.Attr s P.Text -- ^ @stats_password@
+    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
+    -> TF.Attr s P.Text -- ^ @stats_password@ - 'P.statsPassword'
     -> TF.Resource P.Provider (OpsworksHaproxyLayerResource s)
 opsworksHaproxyLayerResource _stackId _statsPassword =
     TF.newResource "aws_opsworks_haproxy_layer" $
@@ -2541,157 +2969,197 @@ opsworksHaproxyLayerResource _stackId _statsPassword =
 instance P.HasAutoAssignElasticIps (OpsworksHaproxyLayerResource s) (TF.Attr s P.Bool) where
     autoAssignElasticIps =
         P.lens (_autoAssignElasticIps :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignElasticIps = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _autoAssignElasticIps = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasAutoAssignPublicIps (OpsworksHaproxyLayerResource s) (TF.Attr s P.Bool) where
     autoAssignPublicIps =
         P.lens (_autoAssignPublicIps :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignPublicIps = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _autoAssignPublicIps = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasAutoHealing (OpsworksHaproxyLayerResource s) (TF.Attr s P.Bool) where
     autoHealing =
         P.lens (_autoHealing :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoHealing = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _autoHealing = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasCustomConfigureRecipes (OpsworksHaproxyLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customConfigureRecipes =
         P.lens (_customConfigureRecipes :: OpsworksHaproxyLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customConfigureRecipes = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _customConfigureRecipes = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasCustomDeployRecipes (OpsworksHaproxyLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customDeployRecipes =
         P.lens (_customDeployRecipes :: OpsworksHaproxyLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customDeployRecipes = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _customDeployRecipes = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasCustomInstanceProfileArn (OpsworksHaproxyLayerResource s) (TF.Attr s P.Text) where
     customInstanceProfileArn =
         P.lens (_customInstanceProfileArn :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customInstanceProfileArn = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _customInstanceProfileArn = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasCustomJson (OpsworksHaproxyLayerResource s) (TF.Attr s P.Text) where
     customJson =
         P.lens (_customJson :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customJson = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _customJson = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasCustomSecurityGroupIds (OpsworksHaproxyLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     customSecurityGroupIds =
         P.lens (_customSecurityGroupIds :: OpsworksHaproxyLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _customSecurityGroupIds = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _customSecurityGroupIds = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasCustomSetupRecipes (OpsworksHaproxyLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customSetupRecipes =
         P.lens (_customSetupRecipes :: OpsworksHaproxyLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customSetupRecipes = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _customSetupRecipes = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasCustomShutdownRecipes (OpsworksHaproxyLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customShutdownRecipes =
         P.lens (_customShutdownRecipes :: OpsworksHaproxyLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customShutdownRecipes = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _customShutdownRecipes = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasCustomUndeployRecipes (OpsworksHaproxyLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customUndeployRecipes =
         P.lens (_customUndeployRecipes :: OpsworksHaproxyLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customUndeployRecipes = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _customUndeployRecipes = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasDrainElbOnShutdown (OpsworksHaproxyLayerResource s) (TF.Attr s P.Bool) where
     drainElbOnShutdown =
         P.lens (_drainElbOnShutdown :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _drainElbOnShutdown = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _drainElbOnShutdown = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasEbsVolume (OpsworksHaproxyLayerResource s) (TF.Attr s [TF.Attr s (EbsVolume s)]) where
     ebsVolume =
         P.lens (_ebsVolume :: OpsworksHaproxyLayerResource s -> TF.Attr s [TF.Attr s (EbsVolume s)])
-               (\s a -> s { _ebsVolume = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _ebsVolume = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksHaproxyLayerResource s) (TF.Attr s P.Text) where
     elasticLoadBalancer =
         P.lens (_elasticLoadBalancer :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _elasticLoadBalancer = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _elasticLoadBalancer = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasHealthcheckMethod (OpsworksHaproxyLayerResource s) (TF.Attr s P.Text) where
     healthcheckMethod =
         P.lens (_healthcheckMethod :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _healthcheckMethod = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _healthcheckMethod = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasHealthcheckUrl (OpsworksHaproxyLayerResource s) (TF.Attr s P.Text) where
     healthcheckUrl =
         P.lens (_healthcheckUrl :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _healthcheckUrl = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _healthcheckUrl = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasInstallUpdatesOnBoot (OpsworksHaproxyLayerResource s) (TF.Attr s P.Bool) where
     installUpdatesOnBoot =
         P.lens (_installUpdatesOnBoot :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _installUpdatesOnBoot = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _installUpdatesOnBoot = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasInstanceShutdownTimeout (OpsworksHaproxyLayerResource s) (TF.Attr s P.Integer) where
     instanceShutdownTimeout =
         P.lens (_instanceShutdownTimeout :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _instanceShutdownTimeout = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _instanceShutdownTimeout = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasName (OpsworksHaproxyLayerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _name = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasStackId (OpsworksHaproxyLayerResource s) (TF.Attr s P.Text) where
     stackId =
         P.lens (_stackId :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stackId = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _stackId = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasStatsEnabled (OpsworksHaproxyLayerResource s) (TF.Attr s P.Bool) where
     statsEnabled =
         P.lens (_statsEnabled :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _statsEnabled = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _statsEnabled = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasStatsPassword (OpsworksHaproxyLayerResource s) (TF.Attr s P.Text) where
     statsPassword =
         P.lens (_statsPassword :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _statsPassword = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _statsPassword = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasStatsUrl (OpsworksHaproxyLayerResource s) (TF.Attr s P.Text) where
     statsUrl =
         P.lens (_statsUrl :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _statsUrl = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _statsUrl = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasStatsUser (OpsworksHaproxyLayerResource s) (TF.Attr s P.Text) where
     statsUser =
         P.lens (_statsUser :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _statsUser = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _statsUser = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasSystemPackages (OpsworksHaproxyLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     systemPackages =
         P.lens (_systemPackages :: OpsworksHaproxyLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _systemPackages = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _systemPackages = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasUseEbsOptimizedInstances (OpsworksHaproxyLayerResource s) (TF.Attr s P.Bool) where
     useEbsOptimizedInstances =
         P.lens (_useEbsOptimizedInstances :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _useEbsOptimizedInstances = a } :: OpsworksHaproxyLayerResource s)
+               (\s a -> s { _useEbsOptimizedInstances = a
+                          } :: OpsworksHaproxyLayerResource s)
 
 -- | @aws_opsworks_instance@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_instance terraform documentation>
+-- for more information.
 data OpsworksInstanceResource s = OpsworksInstanceResource'
     { _agentVersion         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @agent_version@ - (Optional)
+    --
     , _architecture         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @architecture@ - (Optional)
+    --
     , _autoScalingType      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @auto_scaling_type@ - (Optional)
+    --
     , _deleteEbs            :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @delete_ebs@ - (Optional)
+    --
     , _deleteEip            :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @delete_eip@ - (Optional)
+    --
     , _ebsOptimized         :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @ebs_optimized@ - (Optional)
+    --
     , _installUpdatesOnBoot :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @install_updates_on_boot@ - (Optional)
+    --
     , _instanceType         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @instance_type@ - (Optional)
+    --
     , _layerIds             :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @layer_ids@ - (Required)
+    --
     , _stackId              :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stack_id@ - (Required)
+    --
     , _state                :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @state@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksInstanceResource s) where
@@ -2710,8 +3178,8 @@ instance TF.IsObject (OpsworksInstanceResource s) where
         ]
 
 opsworksInstanceResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @layer_ids@
-    -> TF.Attr s P.Text -- ^ @stack_id@
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @layer_ids@ - 'P.layerIds'
+    -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Resource P.Provider (OpsworksInstanceResource s)
 opsworksInstanceResource _layerIds _stackId =
     TF.newResource "aws_opsworks_instance" $
@@ -2732,57 +3200,68 @@ opsworksInstanceResource _layerIds _stackId =
 instance P.HasAgentVersion (OpsworksInstanceResource s) (TF.Attr s P.Text) where
     agentVersion =
         P.lens (_agentVersion :: OpsworksInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _agentVersion = a } :: OpsworksInstanceResource s)
+               (\s a -> s { _agentVersion = a
+                          } :: OpsworksInstanceResource s)
 
 instance P.HasArchitecture (OpsworksInstanceResource s) (TF.Attr s P.Text) where
     architecture =
         P.lens (_architecture :: OpsworksInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _architecture = a } :: OpsworksInstanceResource s)
+               (\s a -> s { _architecture = a
+                          } :: OpsworksInstanceResource s)
 
 instance P.HasAutoScalingType (OpsworksInstanceResource s) (TF.Attr s P.Text) where
     autoScalingType =
         P.lens (_autoScalingType :: OpsworksInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _autoScalingType = a } :: OpsworksInstanceResource s)
+               (\s a -> s { _autoScalingType = a
+                          } :: OpsworksInstanceResource s)
 
 instance P.HasDeleteEbs (OpsworksInstanceResource s) (TF.Attr s P.Bool) where
     deleteEbs =
         P.lens (_deleteEbs :: OpsworksInstanceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _deleteEbs = a } :: OpsworksInstanceResource s)
+               (\s a -> s { _deleteEbs = a
+                          } :: OpsworksInstanceResource s)
 
 instance P.HasDeleteEip (OpsworksInstanceResource s) (TF.Attr s P.Bool) where
     deleteEip =
         P.lens (_deleteEip :: OpsworksInstanceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _deleteEip = a } :: OpsworksInstanceResource s)
+               (\s a -> s { _deleteEip = a
+                          } :: OpsworksInstanceResource s)
 
 instance P.HasEbsOptimized (OpsworksInstanceResource s) (TF.Attr s P.Bool) where
     ebsOptimized =
         P.lens (_ebsOptimized :: OpsworksInstanceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _ebsOptimized = a } :: OpsworksInstanceResource s)
+               (\s a -> s { _ebsOptimized = a
+                          } :: OpsworksInstanceResource s)
 
 instance P.HasInstallUpdatesOnBoot (OpsworksInstanceResource s) (TF.Attr s P.Bool) where
     installUpdatesOnBoot =
         P.lens (_installUpdatesOnBoot :: OpsworksInstanceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _installUpdatesOnBoot = a } :: OpsworksInstanceResource s)
+               (\s a -> s { _installUpdatesOnBoot = a
+                          } :: OpsworksInstanceResource s)
 
 instance P.HasInstanceType (OpsworksInstanceResource s) (TF.Attr s P.Text) where
     instanceType =
         P.lens (_instanceType :: OpsworksInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceType = a } :: OpsworksInstanceResource s)
+               (\s a -> s { _instanceType = a
+                          } :: OpsworksInstanceResource s)
 
 instance P.HasLayerIds (OpsworksInstanceResource s) (TF.Attr s [TF.Attr s P.Text]) where
     layerIds =
         P.lens (_layerIds :: OpsworksInstanceResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _layerIds = a } :: OpsworksInstanceResource s)
+               (\s a -> s { _layerIds = a
+                          } :: OpsworksInstanceResource s)
 
 instance P.HasStackId (OpsworksInstanceResource s) (TF.Attr s P.Text) where
     stackId =
         P.lens (_stackId :: OpsworksInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stackId = a } :: OpsworksInstanceResource s)
+               (\s a -> s { _stackId = a
+                          } :: OpsworksInstanceResource s)
 
 instance P.HasState (OpsworksInstanceResource s) (TF.Attr s P.Text) where
     state =
         P.lens (_state :: OpsworksInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _state = a } :: OpsworksInstanceResource s)
+               (\s a -> s { _state = a
+                          } :: OpsworksInstanceResource s)
 
 instance s ~ s' => P.HasComputedAmiId (TF.Ref s' (OpsworksInstanceResource s)) (TF.Attr s P.Text) where
     computedAmiId x = TF.compute (TF.refKey x) "ami_id"
@@ -2887,57 +3366,85 @@ instance s ~ s' => P.HasComputedVirtualizationType (TF.Ref s' (OpsworksInstanceR
     computedVirtualizationType x = TF.compute (TF.refKey x) "virtualization_type"
 
 -- | @aws_opsworks_java_app_layer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_java_app_layer terraform documentation>
+-- for more information.
 data OpsworksJavaAppLayerResource s = OpsworksJavaAppLayerResource'
     { _appServer                :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @app_server@ - (Optional)
+    --
     , _appServerVersion         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @app_server_version@ - (Optional)
+    --
     , _autoAssignElasticIps     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_elastic_ips@ - (Optional)
+    --
     , _autoAssignPublicIps      :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_public_ips@ - (Optional)
+    --
     , _autoHealing              :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_healing@ - (Optional)
+    --
     , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_configure_recipes@ - (Optional)
+    --
     , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_deploy_recipes@ - (Optional)
+    --
     , _customInstanceProfileArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_instance_profile_arn@ - (Optional)
+    --
     , _customJson               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_json@ - (Optional)
+    --
     , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @custom_security_group_ids@ - (Optional)
+    --
     , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_setup_recipes@ - (Optional)
+    --
     , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_shutdown_recipes@ - (Optional)
+    --
     , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_undeploy_recipes@ - (Optional)
+    --
     , _drainElbOnShutdown       :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @drain_elb_on_shutdown@ - (Optional)
+    --
     , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
-    -- ^ Undocumented.
+    -- ^ @ebs_volume@ - (Optional)
+    --
     , _elasticLoadBalancer      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @elastic_load_balancer@ - (Optional)
+    --
     , _installUpdatesOnBoot     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @install_updates_on_boot@ - (Optional)
+    --
     , _instanceShutdownTimeout  :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @instance_shutdown_timeout@ - (Optional)
+    --
     , _jvmOptions               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @jvm_options@ - (Optional)
+    --
     , _jvmType                  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @jvm_type@ - (Optional)
+    --
     , _jvmVersion               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @jvm_version@ - (Optional)
+    --
     , _name                     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Optional)
+    --
     , _stackId                  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stack_id@ - (Required)
+    --
     , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @system_packages@ - (Optional)
+    --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @use_ebs_optimized_instances@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksJavaAppLayerResource s) where
@@ -2970,7 +3477,7 @@ instance TF.IsObject (OpsworksJavaAppLayerResource s) where
         ]
 
 opsworksJavaAppLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@
+    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Resource P.Provider (OpsworksJavaAppLayerResource s)
 opsworksJavaAppLayerResource _stackId =
     TF.newResource "aws_opsworks_java_app_layer" $
@@ -3005,172 +3512,221 @@ opsworksJavaAppLayerResource _stackId =
 instance P.HasAppServer (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
     appServer =
         P.lens (_appServer :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _appServer = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _appServer = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasAppServerVersion (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
     appServerVersion =
         P.lens (_appServerVersion :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _appServerVersion = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _appServerVersion = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasAutoAssignElasticIps (OpsworksJavaAppLayerResource s) (TF.Attr s P.Bool) where
     autoAssignElasticIps =
         P.lens (_autoAssignElasticIps :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignElasticIps = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _autoAssignElasticIps = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasAutoAssignPublicIps (OpsworksJavaAppLayerResource s) (TF.Attr s P.Bool) where
     autoAssignPublicIps =
         P.lens (_autoAssignPublicIps :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignPublicIps = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _autoAssignPublicIps = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasAutoHealing (OpsworksJavaAppLayerResource s) (TF.Attr s P.Bool) where
     autoHealing =
         P.lens (_autoHealing :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoHealing = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _autoHealing = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasCustomConfigureRecipes (OpsworksJavaAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customConfigureRecipes =
         P.lens (_customConfigureRecipes :: OpsworksJavaAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customConfigureRecipes = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _customConfigureRecipes = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasCustomDeployRecipes (OpsworksJavaAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customDeployRecipes =
         P.lens (_customDeployRecipes :: OpsworksJavaAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customDeployRecipes = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _customDeployRecipes = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasCustomInstanceProfileArn (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
     customInstanceProfileArn =
         P.lens (_customInstanceProfileArn :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customInstanceProfileArn = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _customInstanceProfileArn = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasCustomJson (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
     customJson =
         P.lens (_customJson :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customJson = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _customJson = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasCustomSecurityGroupIds (OpsworksJavaAppLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     customSecurityGroupIds =
         P.lens (_customSecurityGroupIds :: OpsworksJavaAppLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _customSecurityGroupIds = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _customSecurityGroupIds = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasCustomSetupRecipes (OpsworksJavaAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customSetupRecipes =
         P.lens (_customSetupRecipes :: OpsworksJavaAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customSetupRecipes = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _customSetupRecipes = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasCustomShutdownRecipes (OpsworksJavaAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customShutdownRecipes =
         P.lens (_customShutdownRecipes :: OpsworksJavaAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customShutdownRecipes = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _customShutdownRecipes = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasCustomUndeployRecipes (OpsworksJavaAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customUndeployRecipes =
         P.lens (_customUndeployRecipes :: OpsworksJavaAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customUndeployRecipes = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _customUndeployRecipes = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasDrainElbOnShutdown (OpsworksJavaAppLayerResource s) (TF.Attr s P.Bool) where
     drainElbOnShutdown =
         P.lens (_drainElbOnShutdown :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _drainElbOnShutdown = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _drainElbOnShutdown = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasEbsVolume (OpsworksJavaAppLayerResource s) (TF.Attr s [TF.Attr s (EbsVolume s)]) where
     ebsVolume =
         P.lens (_ebsVolume :: OpsworksJavaAppLayerResource s -> TF.Attr s [TF.Attr s (EbsVolume s)])
-               (\s a -> s { _ebsVolume = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _ebsVolume = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
     elasticLoadBalancer =
         P.lens (_elasticLoadBalancer :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _elasticLoadBalancer = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _elasticLoadBalancer = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasInstallUpdatesOnBoot (OpsworksJavaAppLayerResource s) (TF.Attr s P.Bool) where
     installUpdatesOnBoot =
         P.lens (_installUpdatesOnBoot :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _installUpdatesOnBoot = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _installUpdatesOnBoot = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasInstanceShutdownTimeout (OpsworksJavaAppLayerResource s) (TF.Attr s P.Integer) where
     instanceShutdownTimeout =
         P.lens (_instanceShutdownTimeout :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _instanceShutdownTimeout = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _instanceShutdownTimeout = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasJvmOptions (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
     jvmOptions =
         P.lens (_jvmOptions :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _jvmOptions = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _jvmOptions = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasJvmType (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
     jvmType =
         P.lens (_jvmType :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _jvmType = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _jvmType = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasJvmVersion (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
     jvmVersion =
         P.lens (_jvmVersion :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _jvmVersion = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _jvmVersion = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasName (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _name = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasStackId (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
     stackId =
         P.lens (_stackId :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stackId = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _stackId = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasSystemPackages (OpsworksJavaAppLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     systemPackages =
         P.lens (_systemPackages :: OpsworksJavaAppLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _systemPackages = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _systemPackages = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasUseEbsOptimizedInstances (OpsworksJavaAppLayerResource s) (TF.Attr s P.Bool) where
     useEbsOptimizedInstances =
         P.lens (_useEbsOptimizedInstances :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _useEbsOptimizedInstances = a } :: OpsworksJavaAppLayerResource s)
+               (\s a -> s { _useEbsOptimizedInstances = a
+                          } :: OpsworksJavaAppLayerResource s)
 
 -- | @aws_opsworks_memcached_layer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_memcached_layer terraform documentation>
+-- for more information.
 data OpsworksMemcachedLayerResource s = OpsworksMemcachedLayerResource'
     { _allocatedMemory          :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @allocated_memory@ - (Optional)
+    --
     , _autoAssignElasticIps     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_elastic_ips@ - (Optional)
+    --
     , _autoAssignPublicIps      :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_public_ips@ - (Optional)
+    --
     , _autoHealing              :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_healing@ - (Optional)
+    --
     , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_configure_recipes@ - (Optional)
+    --
     , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_deploy_recipes@ - (Optional)
+    --
     , _customInstanceProfileArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_instance_profile_arn@ - (Optional)
+    --
     , _customJson               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_json@ - (Optional)
+    --
     , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @custom_security_group_ids@ - (Optional)
+    --
     , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_setup_recipes@ - (Optional)
+    --
     , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_shutdown_recipes@ - (Optional)
+    --
     , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_undeploy_recipes@ - (Optional)
+    --
     , _drainElbOnShutdown       :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @drain_elb_on_shutdown@ - (Optional)
+    --
     , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
-    -- ^ Undocumented.
+    -- ^ @ebs_volume@ - (Optional)
+    --
     , _elasticLoadBalancer      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @elastic_load_balancer@ - (Optional)
+    --
     , _installUpdatesOnBoot     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @install_updates_on_boot@ - (Optional)
+    --
     , _instanceShutdownTimeout  :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @instance_shutdown_timeout@ - (Optional)
+    --
     , _name                     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Optional)
+    --
     , _stackId                  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stack_id@ - (Required)
+    --
     , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @system_packages@ - (Optional)
+    --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @use_ebs_optimized_instances@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksMemcachedLayerResource s) where
@@ -3199,7 +3755,7 @@ instance TF.IsObject (OpsworksMemcachedLayerResource s) where
         ]
 
 opsworksMemcachedLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@
+    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Resource P.Provider (OpsworksMemcachedLayerResource s)
 opsworksMemcachedLayerResource _stackId =
     TF.newResource "aws_opsworks_memcached_layer" $
@@ -3230,154 +3786,200 @@ opsworksMemcachedLayerResource _stackId =
 instance P.HasAllocatedMemory (OpsworksMemcachedLayerResource s) (TF.Attr s P.Integer) where
     allocatedMemory =
         P.lens (_allocatedMemory :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _allocatedMemory = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _allocatedMemory = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasAutoAssignElasticIps (OpsworksMemcachedLayerResource s) (TF.Attr s P.Bool) where
     autoAssignElasticIps =
         P.lens (_autoAssignElasticIps :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignElasticIps = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _autoAssignElasticIps = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasAutoAssignPublicIps (OpsworksMemcachedLayerResource s) (TF.Attr s P.Bool) where
     autoAssignPublicIps =
         P.lens (_autoAssignPublicIps :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignPublicIps = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _autoAssignPublicIps = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasAutoHealing (OpsworksMemcachedLayerResource s) (TF.Attr s P.Bool) where
     autoHealing =
         P.lens (_autoHealing :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoHealing = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _autoHealing = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasCustomConfigureRecipes (OpsworksMemcachedLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customConfigureRecipes =
         P.lens (_customConfigureRecipes :: OpsworksMemcachedLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customConfigureRecipes = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _customConfigureRecipes = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasCustomDeployRecipes (OpsworksMemcachedLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customDeployRecipes =
         P.lens (_customDeployRecipes :: OpsworksMemcachedLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customDeployRecipes = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _customDeployRecipes = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasCustomInstanceProfileArn (OpsworksMemcachedLayerResource s) (TF.Attr s P.Text) where
     customInstanceProfileArn =
         P.lens (_customInstanceProfileArn :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customInstanceProfileArn = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _customInstanceProfileArn = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasCustomJson (OpsworksMemcachedLayerResource s) (TF.Attr s P.Text) where
     customJson =
         P.lens (_customJson :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customJson = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _customJson = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasCustomSecurityGroupIds (OpsworksMemcachedLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     customSecurityGroupIds =
         P.lens (_customSecurityGroupIds :: OpsworksMemcachedLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _customSecurityGroupIds = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _customSecurityGroupIds = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasCustomSetupRecipes (OpsworksMemcachedLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customSetupRecipes =
         P.lens (_customSetupRecipes :: OpsworksMemcachedLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customSetupRecipes = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _customSetupRecipes = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasCustomShutdownRecipes (OpsworksMemcachedLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customShutdownRecipes =
         P.lens (_customShutdownRecipes :: OpsworksMemcachedLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customShutdownRecipes = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _customShutdownRecipes = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasCustomUndeployRecipes (OpsworksMemcachedLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customUndeployRecipes =
         P.lens (_customUndeployRecipes :: OpsworksMemcachedLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customUndeployRecipes = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _customUndeployRecipes = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasDrainElbOnShutdown (OpsworksMemcachedLayerResource s) (TF.Attr s P.Bool) where
     drainElbOnShutdown =
         P.lens (_drainElbOnShutdown :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _drainElbOnShutdown = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _drainElbOnShutdown = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasEbsVolume (OpsworksMemcachedLayerResource s) (TF.Attr s [TF.Attr s (EbsVolume s)]) where
     ebsVolume =
         P.lens (_ebsVolume :: OpsworksMemcachedLayerResource s -> TF.Attr s [TF.Attr s (EbsVolume s)])
-               (\s a -> s { _ebsVolume = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _ebsVolume = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksMemcachedLayerResource s) (TF.Attr s P.Text) where
     elasticLoadBalancer =
         P.lens (_elasticLoadBalancer :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _elasticLoadBalancer = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _elasticLoadBalancer = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasInstallUpdatesOnBoot (OpsworksMemcachedLayerResource s) (TF.Attr s P.Bool) where
     installUpdatesOnBoot =
         P.lens (_installUpdatesOnBoot :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _installUpdatesOnBoot = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _installUpdatesOnBoot = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasInstanceShutdownTimeout (OpsworksMemcachedLayerResource s) (TF.Attr s P.Integer) where
     instanceShutdownTimeout =
         P.lens (_instanceShutdownTimeout :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _instanceShutdownTimeout = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _instanceShutdownTimeout = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasName (OpsworksMemcachedLayerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _name = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasStackId (OpsworksMemcachedLayerResource s) (TF.Attr s P.Text) where
     stackId =
         P.lens (_stackId :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stackId = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _stackId = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasSystemPackages (OpsworksMemcachedLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     systemPackages =
         P.lens (_systemPackages :: OpsworksMemcachedLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _systemPackages = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _systemPackages = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasUseEbsOptimizedInstances (OpsworksMemcachedLayerResource s) (TF.Attr s P.Bool) where
     useEbsOptimizedInstances =
         P.lens (_useEbsOptimizedInstances :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _useEbsOptimizedInstances = a } :: OpsworksMemcachedLayerResource s)
+               (\s a -> s { _useEbsOptimizedInstances = a
+                          } :: OpsworksMemcachedLayerResource s)
 
 -- | @aws_opsworks_mysql_layer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_mysql_layer terraform documentation>
+-- for more information.
 data OpsworksMysqlLayerResource s = OpsworksMysqlLayerResource'
     { _autoAssignElasticIps       :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_elastic_ips@ - (Optional)
+    --
     , _autoAssignPublicIps        :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_public_ips@ - (Optional)
+    --
     , _autoHealing                :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_healing@ - (Optional)
+    --
     , _customConfigureRecipes     :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_configure_recipes@ - (Optional)
+    --
     , _customDeployRecipes        :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_deploy_recipes@ - (Optional)
+    --
     , _customInstanceProfileArn   :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_instance_profile_arn@ - (Optional)
+    --
     , _customJson                 :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_json@ - (Optional)
+    --
     , _customSecurityGroupIds     :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @custom_security_group_ids@ - (Optional)
+    --
     , _customSetupRecipes         :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_setup_recipes@ - (Optional)
+    --
     , _customShutdownRecipes      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_shutdown_recipes@ - (Optional)
+    --
     , _customUndeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_undeploy_recipes@ - (Optional)
+    --
     , _drainElbOnShutdown         :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @drain_elb_on_shutdown@ - (Optional)
+    --
     , _ebsVolume                  :: TF.Attr s [TF.Attr s (EbsVolume s)]
-    -- ^ Undocumented.
+    -- ^ @ebs_volume@ - (Optional)
+    --
     , _elasticLoadBalancer        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @elastic_load_balancer@ - (Optional)
+    --
     , _installUpdatesOnBoot       :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @install_updates_on_boot@ - (Optional)
+    --
     , _instanceShutdownTimeout    :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @instance_shutdown_timeout@ - (Optional)
+    --
     , _name                       :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Optional)
+    --
     , _rootPassword               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @root_password@ - (Optional)
+    --
     , _rootPasswordOnAllInstances :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @root_password_on_all_instances@ - (Optional)
+    --
     , _stackId                    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stack_id@ - (Required)
+    --
     , _systemPackages             :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @system_packages@ - (Optional)
+    --
     , _useEbsOptimizedInstances   :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @use_ebs_optimized_instances@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksMysqlLayerResource s) where
@@ -3407,7 +4009,7 @@ instance TF.IsObject (OpsworksMysqlLayerResource s) where
         ]
 
 opsworksMysqlLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@
+    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Resource P.Provider (OpsworksMysqlLayerResource s)
 opsworksMysqlLayerResource _stackId =
     TF.newResource "aws_opsworks_mysql_layer" $
@@ -3439,157 +4041,203 @@ opsworksMysqlLayerResource _stackId =
 instance P.HasAutoAssignElasticIps (OpsworksMysqlLayerResource s) (TF.Attr s P.Bool) where
     autoAssignElasticIps =
         P.lens (_autoAssignElasticIps :: OpsworksMysqlLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignElasticIps = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _autoAssignElasticIps = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasAutoAssignPublicIps (OpsworksMysqlLayerResource s) (TF.Attr s P.Bool) where
     autoAssignPublicIps =
         P.lens (_autoAssignPublicIps :: OpsworksMysqlLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignPublicIps = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _autoAssignPublicIps = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasAutoHealing (OpsworksMysqlLayerResource s) (TF.Attr s P.Bool) where
     autoHealing =
         P.lens (_autoHealing :: OpsworksMysqlLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoHealing = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _autoHealing = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasCustomConfigureRecipes (OpsworksMysqlLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customConfigureRecipes =
         P.lens (_customConfigureRecipes :: OpsworksMysqlLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customConfigureRecipes = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _customConfigureRecipes = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasCustomDeployRecipes (OpsworksMysqlLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customDeployRecipes =
         P.lens (_customDeployRecipes :: OpsworksMysqlLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customDeployRecipes = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _customDeployRecipes = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasCustomInstanceProfileArn (OpsworksMysqlLayerResource s) (TF.Attr s P.Text) where
     customInstanceProfileArn =
         P.lens (_customInstanceProfileArn :: OpsworksMysqlLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customInstanceProfileArn = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _customInstanceProfileArn = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasCustomJson (OpsworksMysqlLayerResource s) (TF.Attr s P.Text) where
     customJson =
         P.lens (_customJson :: OpsworksMysqlLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customJson = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _customJson = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasCustomSecurityGroupIds (OpsworksMysqlLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     customSecurityGroupIds =
         P.lens (_customSecurityGroupIds :: OpsworksMysqlLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _customSecurityGroupIds = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _customSecurityGroupIds = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasCustomSetupRecipes (OpsworksMysqlLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customSetupRecipes =
         P.lens (_customSetupRecipes :: OpsworksMysqlLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customSetupRecipes = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _customSetupRecipes = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasCustomShutdownRecipes (OpsworksMysqlLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customShutdownRecipes =
         P.lens (_customShutdownRecipes :: OpsworksMysqlLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customShutdownRecipes = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _customShutdownRecipes = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasCustomUndeployRecipes (OpsworksMysqlLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customUndeployRecipes =
         P.lens (_customUndeployRecipes :: OpsworksMysqlLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customUndeployRecipes = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _customUndeployRecipes = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasDrainElbOnShutdown (OpsworksMysqlLayerResource s) (TF.Attr s P.Bool) where
     drainElbOnShutdown =
         P.lens (_drainElbOnShutdown :: OpsworksMysqlLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _drainElbOnShutdown = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _drainElbOnShutdown = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasEbsVolume (OpsworksMysqlLayerResource s) (TF.Attr s [TF.Attr s (EbsVolume s)]) where
     ebsVolume =
         P.lens (_ebsVolume :: OpsworksMysqlLayerResource s -> TF.Attr s [TF.Attr s (EbsVolume s)])
-               (\s a -> s { _ebsVolume = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _ebsVolume = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksMysqlLayerResource s) (TF.Attr s P.Text) where
     elasticLoadBalancer =
         P.lens (_elasticLoadBalancer :: OpsworksMysqlLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _elasticLoadBalancer = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _elasticLoadBalancer = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasInstallUpdatesOnBoot (OpsworksMysqlLayerResource s) (TF.Attr s P.Bool) where
     installUpdatesOnBoot =
         P.lens (_installUpdatesOnBoot :: OpsworksMysqlLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _installUpdatesOnBoot = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _installUpdatesOnBoot = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasInstanceShutdownTimeout (OpsworksMysqlLayerResource s) (TF.Attr s P.Integer) where
     instanceShutdownTimeout =
         P.lens (_instanceShutdownTimeout :: OpsworksMysqlLayerResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _instanceShutdownTimeout = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _instanceShutdownTimeout = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasName (OpsworksMysqlLayerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OpsworksMysqlLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _name = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasRootPassword (OpsworksMysqlLayerResource s) (TF.Attr s P.Text) where
     rootPassword =
         P.lens (_rootPassword :: OpsworksMysqlLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _rootPassword = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _rootPassword = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasRootPasswordOnAllInstances (OpsworksMysqlLayerResource s) (TF.Attr s P.Bool) where
     rootPasswordOnAllInstances =
         P.lens (_rootPasswordOnAllInstances :: OpsworksMysqlLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _rootPasswordOnAllInstances = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _rootPasswordOnAllInstances = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasStackId (OpsworksMysqlLayerResource s) (TF.Attr s P.Text) where
     stackId =
         P.lens (_stackId :: OpsworksMysqlLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stackId = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _stackId = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasSystemPackages (OpsworksMysqlLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     systemPackages =
         P.lens (_systemPackages :: OpsworksMysqlLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _systemPackages = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _systemPackages = a
+                          } :: OpsworksMysqlLayerResource s)
 
 instance P.HasUseEbsOptimizedInstances (OpsworksMysqlLayerResource s) (TF.Attr s P.Bool) where
     useEbsOptimizedInstances =
         P.lens (_useEbsOptimizedInstances :: OpsworksMysqlLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _useEbsOptimizedInstances = a } :: OpsworksMysqlLayerResource s)
+               (\s a -> s { _useEbsOptimizedInstances = a
+                          } :: OpsworksMysqlLayerResource s)
 
 -- | @aws_opsworks_nodejs_app_layer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_nodejs_app_layer terraform documentation>
+-- for more information.
 data OpsworksNodejsAppLayerResource s = OpsworksNodejsAppLayerResource'
     { _autoAssignElasticIps     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_elastic_ips@ - (Optional)
+    --
     , _autoAssignPublicIps      :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_public_ips@ - (Optional)
+    --
     , _autoHealing              :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_healing@ - (Optional)
+    --
     , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_configure_recipes@ - (Optional)
+    --
     , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_deploy_recipes@ - (Optional)
+    --
     , _customInstanceProfileArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_instance_profile_arn@ - (Optional)
+    --
     , _customJson               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_json@ - (Optional)
+    --
     , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @custom_security_group_ids@ - (Optional)
+    --
     , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_setup_recipes@ - (Optional)
+    --
     , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_shutdown_recipes@ - (Optional)
+    --
     , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_undeploy_recipes@ - (Optional)
+    --
     , _drainElbOnShutdown       :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @drain_elb_on_shutdown@ - (Optional)
+    --
     , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
-    -- ^ Undocumented.
+    -- ^ @ebs_volume@ - (Optional)
+    --
     , _elasticLoadBalancer      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @elastic_load_balancer@ - (Optional)
+    --
     , _installUpdatesOnBoot     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @install_updates_on_boot@ - (Optional)
+    --
     , _instanceShutdownTimeout  :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @instance_shutdown_timeout@ - (Optional)
+    --
     , _name                     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Optional)
+    --
     , _nodejsVersion            :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @nodejs_version@ - (Optional)
+    --
     , _stackId                  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stack_id@ - (Required)
+    --
     , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @system_packages@ - (Optional)
+    --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @use_ebs_optimized_instances@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksNodejsAppLayerResource s) where
@@ -3618,7 +4266,7 @@ instance TF.IsObject (OpsworksNodejsAppLayerResource s) where
         ]
 
 opsworksNodejsAppLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@
+    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Resource P.Provider (OpsworksNodejsAppLayerResource s)
 opsworksNodejsAppLayerResource _stackId =
     TF.newResource "aws_opsworks_nodejs_app_layer" $
@@ -3649,112 +4297,137 @@ opsworksNodejsAppLayerResource _stackId =
 instance P.HasAutoAssignElasticIps (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Bool) where
     autoAssignElasticIps =
         P.lens (_autoAssignElasticIps :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignElasticIps = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _autoAssignElasticIps = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasAutoAssignPublicIps (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Bool) where
     autoAssignPublicIps =
         P.lens (_autoAssignPublicIps :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignPublicIps = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _autoAssignPublicIps = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasAutoHealing (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Bool) where
     autoHealing =
         P.lens (_autoHealing :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoHealing = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _autoHealing = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasCustomConfigureRecipes (OpsworksNodejsAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customConfigureRecipes =
         P.lens (_customConfigureRecipes :: OpsworksNodejsAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customConfigureRecipes = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _customConfigureRecipes = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasCustomDeployRecipes (OpsworksNodejsAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customDeployRecipes =
         P.lens (_customDeployRecipes :: OpsworksNodejsAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customDeployRecipes = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _customDeployRecipes = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasCustomInstanceProfileArn (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Text) where
     customInstanceProfileArn =
         P.lens (_customInstanceProfileArn :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customInstanceProfileArn = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _customInstanceProfileArn = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasCustomJson (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Text) where
     customJson =
         P.lens (_customJson :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customJson = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _customJson = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasCustomSecurityGroupIds (OpsworksNodejsAppLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     customSecurityGroupIds =
         P.lens (_customSecurityGroupIds :: OpsworksNodejsAppLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _customSecurityGroupIds = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _customSecurityGroupIds = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasCustomSetupRecipes (OpsworksNodejsAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customSetupRecipes =
         P.lens (_customSetupRecipes :: OpsworksNodejsAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customSetupRecipes = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _customSetupRecipes = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasCustomShutdownRecipes (OpsworksNodejsAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customShutdownRecipes =
         P.lens (_customShutdownRecipes :: OpsworksNodejsAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customShutdownRecipes = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _customShutdownRecipes = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasCustomUndeployRecipes (OpsworksNodejsAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customUndeployRecipes =
         P.lens (_customUndeployRecipes :: OpsworksNodejsAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customUndeployRecipes = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _customUndeployRecipes = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasDrainElbOnShutdown (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Bool) where
     drainElbOnShutdown =
         P.lens (_drainElbOnShutdown :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _drainElbOnShutdown = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _drainElbOnShutdown = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasEbsVolume (OpsworksNodejsAppLayerResource s) (TF.Attr s [TF.Attr s (EbsVolume s)]) where
     ebsVolume =
         P.lens (_ebsVolume :: OpsworksNodejsAppLayerResource s -> TF.Attr s [TF.Attr s (EbsVolume s)])
-               (\s a -> s { _ebsVolume = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _ebsVolume = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Text) where
     elasticLoadBalancer =
         P.lens (_elasticLoadBalancer :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _elasticLoadBalancer = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _elasticLoadBalancer = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasInstallUpdatesOnBoot (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Bool) where
     installUpdatesOnBoot =
         P.lens (_installUpdatesOnBoot :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _installUpdatesOnBoot = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _installUpdatesOnBoot = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasInstanceShutdownTimeout (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Integer) where
     instanceShutdownTimeout =
         P.lens (_instanceShutdownTimeout :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _instanceShutdownTimeout = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _instanceShutdownTimeout = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasName (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _name = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasNodejsVersion (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Text) where
     nodejsVersion =
         P.lens (_nodejsVersion :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _nodejsVersion = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _nodejsVersion = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasStackId (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Text) where
     stackId =
         P.lens (_stackId :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stackId = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _stackId = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasSystemPackages (OpsworksNodejsAppLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     systemPackages =
         P.lens (_systemPackages :: OpsworksNodejsAppLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _systemPackages = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _systemPackages = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasUseEbsOptimizedInstances (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Bool) where
     useEbsOptimizedInstances =
         P.lens (_useEbsOptimizedInstances :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _useEbsOptimizedInstances = a } :: OpsworksNodejsAppLayerResource s)
+               (\s a -> s { _useEbsOptimizedInstances = a
+                          } :: OpsworksNodejsAppLayerResource s)
 
 -- | @aws_opsworks_permission@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_permission terraform documentation>
+-- for more information.
 data OpsworksPermissionResource s = OpsworksPermissionResource'
     { _userArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @user_arn@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksPermissionResource s) where
@@ -3763,7 +4436,7 @@ instance TF.IsObject (OpsworksPermissionResource s) where
         ]
 
 opsworksPermissionResource
-    :: TF.Attr s P.Text -- ^ @user_arn@
+    :: TF.Attr s P.Text -- ^ @user_arn@ - 'P.userArn'
     -> TF.Resource P.Provider (OpsworksPermissionResource s)
 opsworksPermissionResource _userArn =
     TF.newResource "aws_opsworks_permission" $
@@ -3774,7 +4447,8 @@ opsworksPermissionResource _userArn =
 instance P.HasUserArn (OpsworksPermissionResource s) (TF.Attr s P.Text) where
     userArn =
         P.lens (_userArn :: OpsworksPermissionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _userArn = a } :: OpsworksPermissionResource s)
+               (\s a -> s { _userArn = a
+                          } :: OpsworksPermissionResource s)
 
 instance s ~ s' => P.HasComputedAllowSsh (TF.Ref s' (OpsworksPermissionResource s)) (TF.Attr s P.Bool) where
     computedAllowSsh x = TF.compute (TF.refKey x) "allow_ssh"
@@ -3789,47 +4463,70 @@ instance s ~ s' => P.HasComputedStackId (TF.Ref s' (OpsworksPermissionResource s
     computedStackId x = TF.compute (TF.refKey x) "stack_id"
 
 -- | @aws_opsworks_php_app_layer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_php_app_layer terraform documentation>
+-- for more information.
 data OpsworksPhpAppLayerResource s = OpsworksPhpAppLayerResource'
     { _autoAssignElasticIps     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_elastic_ips@ - (Optional)
+    --
     , _autoAssignPublicIps      :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_public_ips@ - (Optional)
+    --
     , _autoHealing              :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_healing@ - (Optional)
+    --
     , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_configure_recipes@ - (Optional)
+    --
     , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_deploy_recipes@ - (Optional)
+    --
     , _customInstanceProfileArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_instance_profile_arn@ - (Optional)
+    --
     , _customJson               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_json@ - (Optional)
+    --
     , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @custom_security_group_ids@ - (Optional)
+    --
     , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_setup_recipes@ - (Optional)
+    --
     , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_shutdown_recipes@ - (Optional)
+    --
     , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_undeploy_recipes@ - (Optional)
+    --
     , _drainElbOnShutdown       :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @drain_elb_on_shutdown@ - (Optional)
+    --
     , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
-    -- ^ Undocumented.
+    -- ^ @ebs_volume@ - (Optional)
+    --
     , _elasticLoadBalancer      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @elastic_load_balancer@ - (Optional)
+    --
     , _installUpdatesOnBoot     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @install_updates_on_boot@ - (Optional)
+    --
     , _instanceShutdownTimeout  :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @instance_shutdown_timeout@ - (Optional)
+    --
     , _name                     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Optional)
+    --
     , _stackId                  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stack_id@ - (Required)
+    --
     , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @system_packages@ - (Optional)
+    --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @use_ebs_optimized_instances@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksPhpAppLayerResource s) where
@@ -3857,7 +4554,7 @@ instance TF.IsObject (OpsworksPhpAppLayerResource s) where
         ]
 
 opsworksPhpAppLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@
+    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Resource P.Provider (OpsworksPhpAppLayerResource s)
 opsworksPhpAppLayerResource _stackId =
     TF.newResource "aws_opsworks_php_app_layer" $
@@ -3887,157 +4584,206 @@ opsworksPhpAppLayerResource _stackId =
 instance P.HasAutoAssignElasticIps (OpsworksPhpAppLayerResource s) (TF.Attr s P.Bool) where
     autoAssignElasticIps =
         P.lens (_autoAssignElasticIps :: OpsworksPhpAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignElasticIps = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _autoAssignElasticIps = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasAutoAssignPublicIps (OpsworksPhpAppLayerResource s) (TF.Attr s P.Bool) where
     autoAssignPublicIps =
         P.lens (_autoAssignPublicIps :: OpsworksPhpAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignPublicIps = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _autoAssignPublicIps = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasAutoHealing (OpsworksPhpAppLayerResource s) (TF.Attr s P.Bool) where
     autoHealing =
         P.lens (_autoHealing :: OpsworksPhpAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoHealing = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _autoHealing = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasCustomConfigureRecipes (OpsworksPhpAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customConfigureRecipes =
         P.lens (_customConfigureRecipes :: OpsworksPhpAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customConfigureRecipes = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _customConfigureRecipes = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasCustomDeployRecipes (OpsworksPhpAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customDeployRecipes =
         P.lens (_customDeployRecipes :: OpsworksPhpAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customDeployRecipes = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _customDeployRecipes = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasCustomInstanceProfileArn (OpsworksPhpAppLayerResource s) (TF.Attr s P.Text) where
     customInstanceProfileArn =
         P.lens (_customInstanceProfileArn :: OpsworksPhpAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customInstanceProfileArn = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _customInstanceProfileArn = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasCustomJson (OpsworksPhpAppLayerResource s) (TF.Attr s P.Text) where
     customJson =
         P.lens (_customJson :: OpsworksPhpAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customJson = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _customJson = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasCustomSecurityGroupIds (OpsworksPhpAppLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     customSecurityGroupIds =
         P.lens (_customSecurityGroupIds :: OpsworksPhpAppLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _customSecurityGroupIds = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _customSecurityGroupIds = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasCustomSetupRecipes (OpsworksPhpAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customSetupRecipes =
         P.lens (_customSetupRecipes :: OpsworksPhpAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customSetupRecipes = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _customSetupRecipes = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasCustomShutdownRecipes (OpsworksPhpAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customShutdownRecipes =
         P.lens (_customShutdownRecipes :: OpsworksPhpAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customShutdownRecipes = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _customShutdownRecipes = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasCustomUndeployRecipes (OpsworksPhpAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customUndeployRecipes =
         P.lens (_customUndeployRecipes :: OpsworksPhpAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customUndeployRecipes = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _customUndeployRecipes = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasDrainElbOnShutdown (OpsworksPhpAppLayerResource s) (TF.Attr s P.Bool) where
     drainElbOnShutdown =
         P.lens (_drainElbOnShutdown :: OpsworksPhpAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _drainElbOnShutdown = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _drainElbOnShutdown = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasEbsVolume (OpsworksPhpAppLayerResource s) (TF.Attr s [TF.Attr s (EbsVolume s)]) where
     ebsVolume =
         P.lens (_ebsVolume :: OpsworksPhpAppLayerResource s -> TF.Attr s [TF.Attr s (EbsVolume s)])
-               (\s a -> s { _ebsVolume = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _ebsVolume = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksPhpAppLayerResource s) (TF.Attr s P.Text) where
     elasticLoadBalancer =
         P.lens (_elasticLoadBalancer :: OpsworksPhpAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _elasticLoadBalancer = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _elasticLoadBalancer = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasInstallUpdatesOnBoot (OpsworksPhpAppLayerResource s) (TF.Attr s P.Bool) where
     installUpdatesOnBoot =
         P.lens (_installUpdatesOnBoot :: OpsworksPhpAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _installUpdatesOnBoot = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _installUpdatesOnBoot = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasInstanceShutdownTimeout (OpsworksPhpAppLayerResource s) (TF.Attr s P.Integer) where
     instanceShutdownTimeout =
         P.lens (_instanceShutdownTimeout :: OpsworksPhpAppLayerResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _instanceShutdownTimeout = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _instanceShutdownTimeout = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasName (OpsworksPhpAppLayerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OpsworksPhpAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _name = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasStackId (OpsworksPhpAppLayerResource s) (TF.Attr s P.Text) where
     stackId =
         P.lens (_stackId :: OpsworksPhpAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stackId = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _stackId = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasSystemPackages (OpsworksPhpAppLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     systemPackages =
         P.lens (_systemPackages :: OpsworksPhpAppLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _systemPackages = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _systemPackages = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasUseEbsOptimizedInstances (OpsworksPhpAppLayerResource s) (TF.Attr s P.Bool) where
     useEbsOptimizedInstances =
         P.lens (_useEbsOptimizedInstances :: OpsworksPhpAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _useEbsOptimizedInstances = a } :: OpsworksPhpAppLayerResource s)
+               (\s a -> s { _useEbsOptimizedInstances = a
+                          } :: OpsworksPhpAppLayerResource s)
 
 -- | @aws_opsworks_rails_app_layer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_rails_app_layer terraform documentation>
+-- for more information.
 data OpsworksRailsAppLayerResource s = OpsworksRailsAppLayerResource'
     { _appServer                :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @app_server@ - (Optional)
+    --
     , _autoAssignElasticIps     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_elastic_ips@ - (Optional)
+    --
     , _autoAssignPublicIps      :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_public_ips@ - (Optional)
+    --
     , _autoHealing              :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_healing@ - (Optional)
+    --
     , _bundlerVersion           :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @bundler_version@ - (Optional)
+    --
     , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_configure_recipes@ - (Optional)
+    --
     , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_deploy_recipes@ - (Optional)
+    --
     , _customInstanceProfileArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_instance_profile_arn@ - (Optional)
+    --
     , _customJson               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_json@ - (Optional)
+    --
     , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @custom_security_group_ids@ - (Optional)
+    --
     , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_setup_recipes@ - (Optional)
+    --
     , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_shutdown_recipes@ - (Optional)
+    --
     , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_undeploy_recipes@ - (Optional)
+    --
     , _drainElbOnShutdown       :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @drain_elb_on_shutdown@ - (Optional)
+    --
     , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
-    -- ^ Undocumented.
+    -- ^ @ebs_volume@ - (Optional)
+    --
     , _elasticLoadBalancer      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @elastic_load_balancer@ - (Optional)
+    --
     , _installUpdatesOnBoot     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @install_updates_on_boot@ - (Optional)
+    --
     , _instanceShutdownTimeout  :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @instance_shutdown_timeout@ - (Optional)
+    --
     , _manageBundler            :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @manage_bundler@ - (Optional)
+    --
     , _name                     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Optional)
+    --
     , _passengerVersion         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @passenger_version@ - (Optional)
+    --
     , _rubyVersion              :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @ruby_version@ - (Optional)
+    --
     , _rubygemsVersion          :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @rubygems_version@ - (Optional)
+    --
     , _stackId                  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stack_id@ - (Required)
+    --
     , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @system_packages@ - (Optional)
+    --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @use_ebs_optimized_instances@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksRailsAppLayerResource s) where
@@ -4071,7 +4817,7 @@ instance TF.IsObject (OpsworksRailsAppLayerResource s) where
         ]
 
 opsworksRailsAppLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@
+    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Resource P.Provider (OpsworksRailsAppLayerResource s)
 opsworksRailsAppLayerResource _stackId =
     TF.newResource "aws_opsworks_rails_app_layer" $
@@ -4107,143 +4853,176 @@ opsworksRailsAppLayerResource _stackId =
 instance P.HasAppServer (OpsworksRailsAppLayerResource s) (TF.Attr s P.Text) where
     appServer =
         P.lens (_appServer :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _appServer = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _appServer = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasAutoAssignElasticIps (OpsworksRailsAppLayerResource s) (TF.Attr s P.Bool) where
     autoAssignElasticIps =
         P.lens (_autoAssignElasticIps :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignElasticIps = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _autoAssignElasticIps = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasAutoAssignPublicIps (OpsworksRailsAppLayerResource s) (TF.Attr s P.Bool) where
     autoAssignPublicIps =
         P.lens (_autoAssignPublicIps :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignPublicIps = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _autoAssignPublicIps = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasAutoHealing (OpsworksRailsAppLayerResource s) (TF.Attr s P.Bool) where
     autoHealing =
         P.lens (_autoHealing :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoHealing = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _autoHealing = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasBundlerVersion (OpsworksRailsAppLayerResource s) (TF.Attr s P.Text) where
     bundlerVersion =
         P.lens (_bundlerVersion :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _bundlerVersion = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _bundlerVersion = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasCustomConfigureRecipes (OpsworksRailsAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customConfigureRecipes =
         P.lens (_customConfigureRecipes :: OpsworksRailsAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customConfigureRecipes = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _customConfigureRecipes = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasCustomDeployRecipes (OpsworksRailsAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customDeployRecipes =
         P.lens (_customDeployRecipes :: OpsworksRailsAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customDeployRecipes = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _customDeployRecipes = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasCustomInstanceProfileArn (OpsworksRailsAppLayerResource s) (TF.Attr s P.Text) where
     customInstanceProfileArn =
         P.lens (_customInstanceProfileArn :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customInstanceProfileArn = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _customInstanceProfileArn = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasCustomJson (OpsworksRailsAppLayerResource s) (TF.Attr s P.Text) where
     customJson =
         P.lens (_customJson :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customJson = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _customJson = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasCustomSecurityGroupIds (OpsworksRailsAppLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     customSecurityGroupIds =
         P.lens (_customSecurityGroupIds :: OpsworksRailsAppLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _customSecurityGroupIds = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _customSecurityGroupIds = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasCustomSetupRecipes (OpsworksRailsAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customSetupRecipes =
         P.lens (_customSetupRecipes :: OpsworksRailsAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customSetupRecipes = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _customSetupRecipes = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasCustomShutdownRecipes (OpsworksRailsAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customShutdownRecipes =
         P.lens (_customShutdownRecipes :: OpsworksRailsAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customShutdownRecipes = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _customShutdownRecipes = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasCustomUndeployRecipes (OpsworksRailsAppLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customUndeployRecipes =
         P.lens (_customUndeployRecipes :: OpsworksRailsAppLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customUndeployRecipes = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _customUndeployRecipes = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasDrainElbOnShutdown (OpsworksRailsAppLayerResource s) (TF.Attr s P.Bool) where
     drainElbOnShutdown =
         P.lens (_drainElbOnShutdown :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _drainElbOnShutdown = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _drainElbOnShutdown = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasEbsVolume (OpsworksRailsAppLayerResource s) (TF.Attr s [TF.Attr s (EbsVolume s)]) where
     ebsVolume =
         P.lens (_ebsVolume :: OpsworksRailsAppLayerResource s -> TF.Attr s [TF.Attr s (EbsVolume s)])
-               (\s a -> s { _ebsVolume = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _ebsVolume = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksRailsAppLayerResource s) (TF.Attr s P.Text) where
     elasticLoadBalancer =
         P.lens (_elasticLoadBalancer :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _elasticLoadBalancer = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _elasticLoadBalancer = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasInstallUpdatesOnBoot (OpsworksRailsAppLayerResource s) (TF.Attr s P.Bool) where
     installUpdatesOnBoot =
         P.lens (_installUpdatesOnBoot :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _installUpdatesOnBoot = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _installUpdatesOnBoot = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasInstanceShutdownTimeout (OpsworksRailsAppLayerResource s) (TF.Attr s P.Integer) where
     instanceShutdownTimeout =
         P.lens (_instanceShutdownTimeout :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _instanceShutdownTimeout = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _instanceShutdownTimeout = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasManageBundler (OpsworksRailsAppLayerResource s) (TF.Attr s P.Bool) where
     manageBundler =
         P.lens (_manageBundler :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _manageBundler = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _manageBundler = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasName (OpsworksRailsAppLayerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _name = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasPassengerVersion (OpsworksRailsAppLayerResource s) (TF.Attr s P.Text) where
     passengerVersion =
         P.lens (_passengerVersion :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _passengerVersion = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _passengerVersion = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasRubyVersion (OpsworksRailsAppLayerResource s) (TF.Attr s P.Text) where
     rubyVersion =
         P.lens (_rubyVersion :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _rubyVersion = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _rubyVersion = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasRubygemsVersion (OpsworksRailsAppLayerResource s) (TF.Attr s P.Text) where
     rubygemsVersion =
         P.lens (_rubygemsVersion :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _rubygemsVersion = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _rubygemsVersion = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasStackId (OpsworksRailsAppLayerResource s) (TF.Attr s P.Text) where
     stackId =
         P.lens (_stackId :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stackId = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _stackId = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasSystemPackages (OpsworksRailsAppLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     systemPackages =
         P.lens (_systemPackages :: OpsworksRailsAppLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _systemPackages = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _systemPackages = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasUseEbsOptimizedInstances (OpsworksRailsAppLayerResource s) (TF.Attr s P.Bool) where
     useEbsOptimizedInstances =
         P.lens (_useEbsOptimizedInstances :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _useEbsOptimizedInstances = a } :: OpsworksRailsAppLayerResource s)
+               (\s a -> s { _useEbsOptimizedInstances = a
+                          } :: OpsworksRailsAppLayerResource s)
 
 -- | @aws_opsworks_rds_db_instance@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_rds_db_instance terraform documentation>
+-- for more information.
 data OpsworksRdsDbInstanceResource s = OpsworksRdsDbInstanceResource'
     { _dbPassword       :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @db_password@ - (Required)
+    --
     , _dbUser           :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @db_user@ - (Required)
+    --
     , _rdsDbInstanceArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @rds_db_instance_arn@ - (Required)
+    --
     , _stackId          :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stack_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksRdsDbInstanceResource s) where
@@ -4255,10 +5034,10 @@ instance TF.IsObject (OpsworksRdsDbInstanceResource s) where
         ]
 
 opsworksRdsDbInstanceResource
-    :: TF.Attr s P.Text -- ^ @db_password@
-    -> TF.Attr s P.Text -- ^ @db_user@
-    -> TF.Attr s P.Text -- ^ @rds_db_instance_arn@
-    -> TF.Attr s P.Text -- ^ @stack_id@
+    :: TF.Attr s P.Text -- ^ @db_password@ - 'P.dbPassword'
+    -> TF.Attr s P.Text -- ^ @db_user@ - 'P.dbUser'
+    -> TF.Attr s P.Text -- ^ @rds_db_instance_arn@ - 'P.rdsDbInstanceArn'
+    -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Resource P.Provider (OpsworksRdsDbInstanceResource s)
 opsworksRdsDbInstanceResource _dbPassword _dbUser _rdsDbInstanceArn _stackId =
     TF.newResource "aws_opsworks_rds_db_instance" $
@@ -4272,59 +5051,83 @@ opsworksRdsDbInstanceResource _dbPassword _dbUser _rdsDbInstanceArn _stackId =
 instance P.HasDbPassword (OpsworksRdsDbInstanceResource s) (TF.Attr s P.Text) where
     dbPassword =
         P.lens (_dbPassword :: OpsworksRdsDbInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _dbPassword = a } :: OpsworksRdsDbInstanceResource s)
+               (\s a -> s { _dbPassword = a
+                          } :: OpsworksRdsDbInstanceResource s)
 
 instance P.HasDbUser (OpsworksRdsDbInstanceResource s) (TF.Attr s P.Text) where
     dbUser =
         P.lens (_dbUser :: OpsworksRdsDbInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _dbUser = a } :: OpsworksRdsDbInstanceResource s)
+               (\s a -> s { _dbUser = a
+                          } :: OpsworksRdsDbInstanceResource s)
 
 instance P.HasRdsDbInstanceArn (OpsworksRdsDbInstanceResource s) (TF.Attr s P.Text) where
     rdsDbInstanceArn =
         P.lens (_rdsDbInstanceArn :: OpsworksRdsDbInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _rdsDbInstanceArn = a } :: OpsworksRdsDbInstanceResource s)
+               (\s a -> s { _rdsDbInstanceArn = a
+                          } :: OpsworksRdsDbInstanceResource s)
 
 instance P.HasStackId (OpsworksRdsDbInstanceResource s) (TF.Attr s P.Text) where
     stackId =
         P.lens (_stackId :: OpsworksRdsDbInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stackId = a } :: OpsworksRdsDbInstanceResource s)
+               (\s a -> s { _stackId = a
+                          } :: OpsworksRdsDbInstanceResource s)
 
 -- | @aws_opsworks_stack@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_stack terraform documentation>
+-- for more information.
 data OpsworksStackResource s = OpsworksStackResource'
     { _berkshelfVersion :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @berkshelf_version@ - (Optional)
+    --
     , _color :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @color@ - (Optional)
+    --
     , _configurationManagerName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @configuration_manager_name@ - (Optional)
+    --
     , _configurationManagerVersion :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @configuration_manager_version@ - (Optional)
+    --
     , _customJson :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_json@ - (Optional)
+    --
     , _defaultInstanceProfileArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @default_instance_profile_arn@ - (Required)
+    --
     , _defaultOs :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @default_os@ - (Optional)
+    --
     , _defaultRootDeviceType :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @default_root_device_type@ - (Optional)
+    --
     , _defaultSshKeyName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @default_ssh_key_name@ - (Optional)
+    --
     , _hostnameTheme :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @hostname_theme@ - (Optional)
+    --
     , _manageBerkshelf :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @manage_berkshelf@ - (Optional)
+    --
     , _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _region :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @region@ - (Required)
+    --
     , _serviceRoleArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @service_role_arn@ - (Required)
+    --
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     , _useCustomCookbooks :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @use_custom_cookbooks@ - (Optional)
+    --
     , _useOpsworksSecurityGroups :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @use_opsworks_security_groups@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksStackResource s) where
@@ -4349,10 +5152,10 @@ instance TF.IsObject (OpsworksStackResource s) where
         ]
 
 opsworksStackResource
-    :: TF.Attr s P.Text -- ^ @default_instance_profile_arn@
-    -> TF.Attr s P.Text -- ^ @name@
-    -> TF.Attr s P.Text -- ^ @region@
-    -> TF.Attr s P.Text -- ^ @service_role_arn@
+    :: TF.Attr s P.Text -- ^ @default_instance_profile_arn@ - 'P.defaultInstanceProfileArn'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    -> TF.Attr s P.Text -- ^ @service_role_arn@ - 'P.serviceRoleArn'
     -> TF.Resource P.Provider (OpsworksStackResource s)
 opsworksStackResource _defaultInstanceProfileArn _name _region _serviceRoleArn =
     TF.newResource "aws_opsworks_stack" $
@@ -4379,87 +5182,104 @@ opsworksStackResource _defaultInstanceProfileArn _name _region _serviceRoleArn =
 instance P.HasBerkshelfVersion (OpsworksStackResource s) (TF.Attr s P.Text) where
     berkshelfVersion =
         P.lens (_berkshelfVersion :: OpsworksStackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _berkshelfVersion = a } :: OpsworksStackResource s)
+               (\s a -> s { _berkshelfVersion = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasColor (OpsworksStackResource s) (TF.Attr s P.Text) where
     color =
         P.lens (_color :: OpsworksStackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _color = a } :: OpsworksStackResource s)
+               (\s a -> s { _color = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasConfigurationManagerName (OpsworksStackResource s) (TF.Attr s P.Text) where
     configurationManagerName =
         P.lens (_configurationManagerName :: OpsworksStackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _configurationManagerName = a } :: OpsworksStackResource s)
+               (\s a -> s { _configurationManagerName = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasConfigurationManagerVersion (OpsworksStackResource s) (TF.Attr s P.Text) where
     configurationManagerVersion =
         P.lens (_configurationManagerVersion :: OpsworksStackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _configurationManagerVersion = a } :: OpsworksStackResource s)
+               (\s a -> s { _configurationManagerVersion = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasCustomJson (OpsworksStackResource s) (TF.Attr s P.Text) where
     customJson =
         P.lens (_customJson :: OpsworksStackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customJson = a } :: OpsworksStackResource s)
+               (\s a -> s { _customJson = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasDefaultInstanceProfileArn (OpsworksStackResource s) (TF.Attr s P.Text) where
     defaultInstanceProfileArn =
         P.lens (_defaultInstanceProfileArn :: OpsworksStackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultInstanceProfileArn = a } :: OpsworksStackResource s)
+               (\s a -> s { _defaultInstanceProfileArn = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasDefaultOs (OpsworksStackResource s) (TF.Attr s P.Text) where
     defaultOs =
         P.lens (_defaultOs :: OpsworksStackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultOs = a } :: OpsworksStackResource s)
+               (\s a -> s { _defaultOs = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasDefaultRootDeviceType (OpsworksStackResource s) (TF.Attr s P.Text) where
     defaultRootDeviceType =
         P.lens (_defaultRootDeviceType :: OpsworksStackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultRootDeviceType = a } :: OpsworksStackResource s)
+               (\s a -> s { _defaultRootDeviceType = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasDefaultSshKeyName (OpsworksStackResource s) (TF.Attr s P.Text) where
     defaultSshKeyName =
         P.lens (_defaultSshKeyName :: OpsworksStackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultSshKeyName = a } :: OpsworksStackResource s)
+               (\s a -> s { _defaultSshKeyName = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasHostnameTheme (OpsworksStackResource s) (TF.Attr s P.Text) where
     hostnameTheme =
         P.lens (_hostnameTheme :: OpsworksStackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _hostnameTheme = a } :: OpsworksStackResource s)
+               (\s a -> s { _hostnameTheme = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasManageBerkshelf (OpsworksStackResource s) (TF.Attr s P.Bool) where
     manageBerkshelf =
         P.lens (_manageBerkshelf :: OpsworksStackResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _manageBerkshelf = a } :: OpsworksStackResource s)
+               (\s a -> s { _manageBerkshelf = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasName (OpsworksStackResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OpsworksStackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OpsworksStackResource s)
+               (\s a -> s { _name = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasRegion (OpsworksStackResource s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: OpsworksStackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a } :: OpsworksStackResource s)
+               (\s a -> s { _region = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasServiceRoleArn (OpsworksStackResource s) (TF.Attr s P.Text) where
     serviceRoleArn =
         P.lens (_serviceRoleArn :: OpsworksStackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _serviceRoleArn = a } :: OpsworksStackResource s)
+               (\s a -> s { _serviceRoleArn = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasTags (OpsworksStackResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: OpsworksStackResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: OpsworksStackResource s)
+               (\s a -> s { _tags = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasUseCustomCookbooks (OpsworksStackResource s) (TF.Attr s P.Bool) where
     useCustomCookbooks =
         P.lens (_useCustomCookbooks :: OpsworksStackResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _useCustomCookbooks = a } :: OpsworksStackResource s)
+               (\s a -> s { _useCustomCookbooks = a
+                          } :: OpsworksStackResource s)
 
 instance P.HasUseOpsworksSecurityGroups (OpsworksStackResource s) (TF.Attr s P.Bool) where
     useOpsworksSecurityGroups =
         P.lens (_useOpsworksSecurityGroups :: OpsworksStackResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _useOpsworksSecurityGroups = a } :: OpsworksStackResource s)
+               (\s a -> s { _useOpsworksSecurityGroups = a
+                          } :: OpsworksStackResource s)
 
 instance s ~ s' => P.HasComputedAgentVersion (TF.Ref s' (OpsworksStackResource s)) (TF.Attr s P.Text) where
     computedAgentVersion x = TF.compute (TF.refKey x) "agent_version"
@@ -4483,47 +5303,70 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (OpsworksStackResource s)) (TF.
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_opsworks_static_web_layer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_static_web_layer terraform documentation>
+-- for more information.
 data OpsworksStaticWebLayerResource s = OpsworksStaticWebLayerResource'
     { _autoAssignElasticIps     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_elastic_ips@ - (Optional)
+    --
     , _autoAssignPublicIps      :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_assign_public_ips@ - (Optional)
+    --
     , _autoHealing              :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_healing@ - (Optional)
+    --
     , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_configure_recipes@ - (Optional)
+    --
     , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_deploy_recipes@ - (Optional)
+    --
     , _customInstanceProfileArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_instance_profile_arn@ - (Optional)
+    --
     , _customJson               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @custom_json@ - (Optional)
+    --
     , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @custom_security_group_ids@ - (Optional)
+    --
     , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_setup_recipes@ - (Optional)
+    --
     , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_shutdown_recipes@ - (Optional)
+    --
     , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @custom_undeploy_recipes@ - (Optional)
+    --
     , _drainElbOnShutdown       :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @drain_elb_on_shutdown@ - (Optional)
+    --
     , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
-    -- ^ Undocumented.
+    -- ^ @ebs_volume@ - (Optional)
+    --
     , _elasticLoadBalancer      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @elastic_load_balancer@ - (Optional)
+    --
     , _installUpdatesOnBoot     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @install_updates_on_boot@ - (Optional)
+    --
     , _instanceShutdownTimeout  :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @instance_shutdown_timeout@ - (Optional)
+    --
     , _name                     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Optional)
+    --
     , _stackId                  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @stack_id@ - (Required)
+    --
     , _systemPackages           :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @system_packages@ - (Optional)
+    --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @use_ebs_optimized_instances@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksStaticWebLayerResource s) where
@@ -4551,7 +5394,7 @@ instance TF.IsObject (OpsworksStaticWebLayerResource s) where
         ]
 
 opsworksStaticWebLayerResource
-    :: TF.Attr s P.Text -- ^ @stack_id@
+    :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Resource P.Provider (OpsworksStaticWebLayerResource s)
 opsworksStaticWebLayerResource _stackId =
     TF.newResource "aws_opsworks_static_web_layer" $
@@ -4581,113 +5424,140 @@ opsworksStaticWebLayerResource _stackId =
 instance P.HasAutoAssignElasticIps (OpsworksStaticWebLayerResource s) (TF.Attr s P.Bool) where
     autoAssignElasticIps =
         P.lens (_autoAssignElasticIps :: OpsworksStaticWebLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignElasticIps = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _autoAssignElasticIps = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasAutoAssignPublicIps (OpsworksStaticWebLayerResource s) (TF.Attr s P.Bool) where
     autoAssignPublicIps =
         P.lens (_autoAssignPublicIps :: OpsworksStaticWebLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoAssignPublicIps = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _autoAssignPublicIps = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasAutoHealing (OpsworksStaticWebLayerResource s) (TF.Attr s P.Bool) where
     autoHealing =
         P.lens (_autoHealing :: OpsworksStaticWebLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoHealing = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _autoHealing = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasCustomConfigureRecipes (OpsworksStaticWebLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customConfigureRecipes =
         P.lens (_customConfigureRecipes :: OpsworksStaticWebLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customConfigureRecipes = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _customConfigureRecipes = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasCustomDeployRecipes (OpsworksStaticWebLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customDeployRecipes =
         P.lens (_customDeployRecipes :: OpsworksStaticWebLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customDeployRecipes = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _customDeployRecipes = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasCustomInstanceProfileArn (OpsworksStaticWebLayerResource s) (TF.Attr s P.Text) where
     customInstanceProfileArn =
         P.lens (_customInstanceProfileArn :: OpsworksStaticWebLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customInstanceProfileArn = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _customInstanceProfileArn = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasCustomJson (OpsworksStaticWebLayerResource s) (TF.Attr s P.Text) where
     customJson =
         P.lens (_customJson :: OpsworksStaticWebLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customJson = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _customJson = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasCustomSecurityGroupIds (OpsworksStaticWebLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     customSecurityGroupIds =
         P.lens (_customSecurityGroupIds :: OpsworksStaticWebLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _customSecurityGroupIds = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _customSecurityGroupIds = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasCustomSetupRecipes (OpsworksStaticWebLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customSetupRecipes =
         P.lens (_customSetupRecipes :: OpsworksStaticWebLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customSetupRecipes = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _customSetupRecipes = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasCustomShutdownRecipes (OpsworksStaticWebLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customShutdownRecipes =
         P.lens (_customShutdownRecipes :: OpsworksStaticWebLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customShutdownRecipes = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _customShutdownRecipes = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasCustomUndeployRecipes (OpsworksStaticWebLayerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     customUndeployRecipes =
         P.lens (_customUndeployRecipes :: OpsworksStaticWebLayerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _customUndeployRecipes = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _customUndeployRecipes = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasDrainElbOnShutdown (OpsworksStaticWebLayerResource s) (TF.Attr s P.Bool) where
     drainElbOnShutdown =
         P.lens (_drainElbOnShutdown :: OpsworksStaticWebLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _drainElbOnShutdown = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _drainElbOnShutdown = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasEbsVolume (OpsworksStaticWebLayerResource s) (TF.Attr s [TF.Attr s (EbsVolume s)]) where
     ebsVolume =
         P.lens (_ebsVolume :: OpsworksStaticWebLayerResource s -> TF.Attr s [TF.Attr s (EbsVolume s)])
-               (\s a -> s { _ebsVolume = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _ebsVolume = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksStaticWebLayerResource s) (TF.Attr s P.Text) where
     elasticLoadBalancer =
         P.lens (_elasticLoadBalancer :: OpsworksStaticWebLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _elasticLoadBalancer = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _elasticLoadBalancer = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasInstallUpdatesOnBoot (OpsworksStaticWebLayerResource s) (TF.Attr s P.Bool) where
     installUpdatesOnBoot =
         P.lens (_installUpdatesOnBoot :: OpsworksStaticWebLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _installUpdatesOnBoot = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _installUpdatesOnBoot = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasInstanceShutdownTimeout (OpsworksStaticWebLayerResource s) (TF.Attr s P.Integer) where
     instanceShutdownTimeout =
         P.lens (_instanceShutdownTimeout :: OpsworksStaticWebLayerResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _instanceShutdownTimeout = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _instanceShutdownTimeout = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasName (OpsworksStaticWebLayerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OpsworksStaticWebLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _name = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasStackId (OpsworksStaticWebLayerResource s) (TF.Attr s P.Text) where
     stackId =
         P.lens (_stackId :: OpsworksStaticWebLayerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _stackId = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _stackId = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasSystemPackages (OpsworksStaticWebLayerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     systemPackages =
         P.lens (_systemPackages :: OpsworksStaticWebLayerResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _systemPackages = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _systemPackages = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasUseEbsOptimizedInstances (OpsworksStaticWebLayerResource s) (TF.Attr s P.Bool) where
     useEbsOptimizedInstances =
         P.lens (_useEbsOptimizedInstances :: OpsworksStaticWebLayerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _useEbsOptimizedInstances = a } :: OpsworksStaticWebLayerResource s)
+               (\s a -> s { _useEbsOptimizedInstances = a
+                          } :: OpsworksStaticWebLayerResource s)
 
 -- | @aws_opsworks_user_profile@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_user_profile terraform documentation>
+-- for more information.
 data OpsworksUserProfileResource s = OpsworksUserProfileResource'
     { _allowSelfManagement :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @allow_self_management@ - (Optional)
+    --
     , _sshPublicKey        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @ssh_public_key@ - (Optional)
+    --
     , _sshUsername         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @ssh_username@ - (Required)
+    --
     , _userArn             :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @user_arn@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OpsworksUserProfileResource s) where
@@ -4699,8 +5569,8 @@ instance TF.IsObject (OpsworksUserProfileResource s) where
         ]
 
 opsworksUserProfileResource
-    :: TF.Attr s P.Text -- ^ @ssh_username@
-    -> TF.Attr s P.Text -- ^ @user_arn@
+    :: TF.Attr s P.Text -- ^ @ssh_username@ - 'P.sshUsername'
+    -> TF.Attr s P.Text -- ^ @user_arn@ - 'P.userArn'
     -> TF.Resource P.Provider (OpsworksUserProfileResource s)
 opsworksUserProfileResource _sshUsername _userArn =
     TF.newResource "aws_opsworks_user_profile" $
@@ -4714,33 +5584,44 @@ opsworksUserProfileResource _sshUsername _userArn =
 instance P.HasAllowSelfManagement (OpsworksUserProfileResource s) (TF.Attr s P.Bool) where
     allowSelfManagement =
         P.lens (_allowSelfManagement :: OpsworksUserProfileResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _allowSelfManagement = a } :: OpsworksUserProfileResource s)
+               (\s a -> s { _allowSelfManagement = a
+                          } :: OpsworksUserProfileResource s)
 
 instance P.HasSshPublicKey (OpsworksUserProfileResource s) (TF.Attr s P.Text) where
     sshPublicKey =
         P.lens (_sshPublicKey :: OpsworksUserProfileResource s -> TF.Attr s P.Text)
-               (\s a -> s { _sshPublicKey = a } :: OpsworksUserProfileResource s)
+               (\s a -> s { _sshPublicKey = a
+                          } :: OpsworksUserProfileResource s)
 
 instance P.HasSshUsername (OpsworksUserProfileResource s) (TF.Attr s P.Text) where
     sshUsername =
         P.lens (_sshUsername :: OpsworksUserProfileResource s -> TF.Attr s P.Text)
-               (\s a -> s { _sshUsername = a } :: OpsworksUserProfileResource s)
+               (\s a -> s { _sshUsername = a
+                          } :: OpsworksUserProfileResource s)
 
 instance P.HasUserArn (OpsworksUserProfileResource s) (TF.Attr s P.Text) where
     userArn =
         P.lens (_userArn :: OpsworksUserProfileResource s -> TF.Attr s P.Text)
-               (\s a -> s { _userArn = a } :: OpsworksUserProfileResource s)
+               (\s a -> s { _userArn = a
+                          } :: OpsworksUserProfileResource s)
 
 -- | @aws_organizations_account@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_organizations_account terraform documentation>
+-- for more information.
 data OrganizationsAccountResource s = OrganizationsAccountResource'
     { _email                  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @email@ - (Required)
+    --
     , _iamUserAccessToBilling :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @iam_user_access_to_billing@ - (Optional)
+    --
     , _name                   :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _roleName               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @role_name@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OrganizationsAccountResource s) where
@@ -4752,8 +5633,8 @@ instance TF.IsObject (OrganizationsAccountResource s) where
         ]
 
 organizationsAccountResource
-    :: TF.Attr s P.Text -- ^ @email@
-    -> TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (OrganizationsAccountResource s)
 organizationsAccountResource _email _name =
     TF.newResource "aws_organizations_account" $
@@ -4767,22 +5648,26 @@ organizationsAccountResource _email _name =
 instance P.HasEmail (OrganizationsAccountResource s) (TF.Attr s P.Text) where
     email =
         P.lens (_email :: OrganizationsAccountResource s -> TF.Attr s P.Text)
-               (\s a -> s { _email = a } :: OrganizationsAccountResource s)
+               (\s a -> s { _email = a
+                          } :: OrganizationsAccountResource s)
 
 instance P.HasIamUserAccessToBilling (OrganizationsAccountResource s) (TF.Attr s P.Text) where
     iamUserAccessToBilling =
         P.lens (_iamUserAccessToBilling :: OrganizationsAccountResource s -> TF.Attr s P.Text)
-               (\s a -> s { _iamUserAccessToBilling = a } :: OrganizationsAccountResource s)
+               (\s a -> s { _iamUserAccessToBilling = a
+                          } :: OrganizationsAccountResource s)
 
 instance P.HasName (OrganizationsAccountResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OrganizationsAccountResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OrganizationsAccountResource s)
+               (\s a -> s { _name = a
+                          } :: OrganizationsAccountResource s)
 
 instance P.HasRoleName (OrganizationsAccountResource s) (TF.Attr s P.Text) where
     roleName =
         P.lens (_roleName :: OrganizationsAccountResource s -> TF.Attr s P.Text)
-               (\s a -> s { _roleName = a } :: OrganizationsAccountResource s)
+               (\s a -> s { _roleName = a
+                          } :: OrganizationsAccountResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (OrganizationsAccountResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -4797,9 +5682,13 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (OrganizationsAccountResource 
     computedStatus x = TF.compute (TF.refKey x) "status"
 
 -- | @aws_organizations_organization@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_organizations_organization terraform documentation>
+-- for more information.
 data OrganizationsOrganizationResource s = OrganizationsOrganizationResource'
     { _featureSet :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @feature_set@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OrganizationsOrganizationResource s) where
@@ -4818,7 +5707,8 @@ organizationsOrganizationResource =
 instance P.HasFeatureSet (OrganizationsOrganizationResource s) (TF.Attr s P.Text) where
     featureSet =
         P.lens (_featureSet :: OrganizationsOrganizationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _featureSet = a } :: OrganizationsOrganizationResource s)
+               (\s a -> s { _featureSet = a
+                          } :: OrganizationsOrganizationResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (OrganizationsOrganizationResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -4833,15 +5723,22 @@ instance s ~ s' => P.HasComputedMasterAccountId (TF.Ref s' (OrganizationsOrganiz
     computedMasterAccountId x = TF.compute (TF.refKey x) "master_account_id"
 
 -- | @aws_organizations_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_organizations_policy terraform documentation>
+-- for more information.
 data OrganizationsPolicyResource s = OrganizationsPolicyResource'
     { _content     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @content@ - (Required)
+    --
     , _description :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _name        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _type'       :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @type@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OrganizationsPolicyResource s) where
@@ -4853,8 +5750,8 @@ instance TF.IsObject (OrganizationsPolicyResource s) where
         ]
 
 organizationsPolicyResource
-    :: TF.Attr s P.Text -- ^ @content@
-    -> TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (OrganizationsPolicyResource s)
 organizationsPolicyResource _content _name =
     TF.newResource "aws_organizations_policy" $
@@ -4868,32 +5765,41 @@ organizationsPolicyResource _content _name =
 instance P.HasContent (OrganizationsPolicyResource s) (TF.Attr s P.Text) where
     content =
         P.lens (_content :: OrganizationsPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: OrganizationsPolicyResource s)
+               (\s a -> s { _content = a
+                          } :: OrganizationsPolicyResource s)
 
 instance P.HasDescription (OrganizationsPolicyResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: OrganizationsPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: OrganizationsPolicyResource s)
+               (\s a -> s { _description = a
+                          } :: OrganizationsPolicyResource s)
 
 instance P.HasName (OrganizationsPolicyResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OrganizationsPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OrganizationsPolicyResource s)
+               (\s a -> s { _name = a
+                          } :: OrganizationsPolicyResource s)
 
 instance P.HasType' (OrganizationsPolicyResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: OrganizationsPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: OrganizationsPolicyResource s)
+               (\s a -> s { _type' = a
+                          } :: OrganizationsPolicyResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (OrganizationsPolicyResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
 -- | @aws_organizations_policy_attachment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_organizations_policy_attachment terraform documentation>
+-- for more information.
 data OrganizationsPolicyAttachmentResource s = OrganizationsPolicyAttachmentResource'
     { _policyId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @policy_id@ - (Required)
+    --
     , _targetId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @target_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (OrganizationsPolicyAttachmentResource s) where
@@ -4903,8 +5809,8 @@ instance TF.IsObject (OrganizationsPolicyAttachmentResource s) where
         ]
 
 organizationsPolicyAttachmentResource
-    :: TF.Attr s P.Text -- ^ @policy_id@
-    -> TF.Attr s P.Text -- ^ @target_id@
+    :: TF.Attr s P.Text -- ^ @policy_id@ - 'P.policyId'
+    -> TF.Attr s P.Text -- ^ @target_id@ - 'P.targetId'
     -> TF.Resource P.Provider (OrganizationsPolicyAttachmentResource s)
 organizationsPolicyAttachmentResource _policyId _targetId =
     TF.newResource "aws_organizations_policy_attachment" $
@@ -4916,19 +5822,26 @@ organizationsPolicyAttachmentResource _policyId _targetId =
 instance P.HasPolicyId (OrganizationsPolicyAttachmentResource s) (TF.Attr s P.Text) where
     policyId =
         P.lens (_policyId :: OrganizationsPolicyAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policyId = a } :: OrganizationsPolicyAttachmentResource s)
+               (\s a -> s { _policyId = a
+                          } :: OrganizationsPolicyAttachmentResource s)
 
 instance P.HasTargetId (OrganizationsPolicyAttachmentResource s) (TF.Attr s P.Text) where
     targetId =
         P.lens (_targetId :: OrganizationsPolicyAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _targetId = a } :: OrganizationsPolicyAttachmentResource s)
+               (\s a -> s { _targetId = a
+                          } :: OrganizationsPolicyAttachmentResource s)
 
 -- | @aws_placement_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_placement_group terraform documentation>
+-- for more information.
 data PlacementGroupResource s = PlacementGroupResource'
     { _name     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _strategy :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @strategy@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (PlacementGroupResource s) where
@@ -4938,8 +5851,8 @@ instance TF.IsObject (PlacementGroupResource s) where
         ]
 
 placementGroupResource
-    :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Attr s P.Text -- ^ @strategy@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @strategy@ - 'P.strategy'
     -> TF.Resource P.Provider (PlacementGroupResource s)
 placementGroupResource _name _strategy =
     TF.newResource "aws_placement_group" $
@@ -4951,19 +5864,26 @@ placementGroupResource _name _strategy =
 instance P.HasName (PlacementGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: PlacementGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: PlacementGroupResource s)
+               (\s a -> s { _name = a
+                          } :: PlacementGroupResource s)
 
 instance P.HasStrategy (PlacementGroupResource s) (TF.Attr s P.Text) where
     strategy =
         P.lens (_strategy :: PlacementGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _strategy = a } :: PlacementGroupResource s)
+               (\s a -> s { _strategy = a
+                          } :: PlacementGroupResource s)
 
 -- | @aws_proxy_protocol_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_proxy_protocol_policy terraform documentation>
+-- for more information.
 data ProxyProtocolPolicyResource s = ProxyProtocolPolicyResource'
     { _instancePorts :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @instance_ports@ - (Required)
+    --
     , _loadBalancer  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @load_balancer@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ProxyProtocolPolicyResource s) where
@@ -4973,8 +5893,8 @@ instance TF.IsObject (ProxyProtocolPolicyResource s) where
         ]
 
 proxyProtocolPolicyResource
-    :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @instance_ports@
-    -> TF.Attr s P.Text -- ^ @load_balancer@
+    :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @instance_ports@ - 'P.instancePorts'
+    -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Resource P.Provider (ProxyProtocolPolicyResource s)
 proxyProtocolPolicyResource _instancePorts _loadBalancer =
     TF.newResource "aws_proxy_protocol_policy" $
@@ -4986,45 +5906,71 @@ proxyProtocolPolicyResource _instancePorts _loadBalancer =
 instance P.HasInstancePorts (ProxyProtocolPolicyResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     instancePorts =
         P.lens (_instancePorts :: ProxyProtocolPolicyResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _instancePorts = a } :: ProxyProtocolPolicyResource s)
+               (\s a -> s { _instancePorts = a
+                          } :: ProxyProtocolPolicyResource s)
 
 instance P.HasLoadBalancer (ProxyProtocolPolicyResource s) (TF.Attr s P.Text) where
     loadBalancer =
         P.lens (_loadBalancer :: ProxyProtocolPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _loadBalancer = a } :: ProxyProtocolPolicyResource s)
+               (\s a -> s { _loadBalancer = a
+                          } :: ProxyProtocolPolicyResource s)
 
 -- | @aws_rds_cluster@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_rds_cluster terraform documentation>
+-- for more information.
 data RdsClusterResource s = RdsClusterResource'
     { _backtrackWindow :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @backtrack_window@ - (Optional)
+    --
     , _backupRetentionPeriod :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @backup_retention_period@ - (Optional)
+    --
     , _enabledCloudwatchLogsExports :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @enabled_cloudwatch_logs_exports@ - (Optional)
+    --
     , _engine :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @engine@ - (Optional)
+    --
     , _finalSnapshotIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @final_snapshot_identifier@ - (Optional)
+    --
     , _iamDatabaseAuthenticationEnabled :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @iam_database_authentication_enabled@ - (Optional)
+    --
     , _iamRoles :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @iam_roles@ - (Optional)
+    --
     , _masterPassword :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @master_password@ - (Optional)
+    --
     , _replicationSourceIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @replication_source_identifier@ - (Optional)
+    --
     , _s3Import :: TF.Attr s [S3Import s]
-    -- ^ Undocumented.
+    -- ^ @s3_import@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'snapshotIdentifier'
     , _skipFinalSnapshot :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @skip_final_snapshot@ - (Optional)
+    --
     , _snapshotIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @snapshot_identifier@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 's3Import'
     , _sourceRegion :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @source_region@ - (Optional)
+    --
     , _storageEncrypted :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @storage_encrypted@ - (Optional)
+    --
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RdsClusterResource s) where
@@ -5071,77 +6017,94 @@ rdsClusterResource =
 instance P.HasBacktrackWindow (RdsClusterResource s) (TF.Attr s P.Integer) where
     backtrackWindow =
         P.lens (_backtrackWindow :: RdsClusterResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _backtrackWindow = a } :: RdsClusterResource s)
+               (\s a -> s { _backtrackWindow = a
+                          } :: RdsClusterResource s)
 
 instance P.HasBackupRetentionPeriod (RdsClusterResource s) (TF.Attr s P.Integer) where
     backupRetentionPeriod =
         P.lens (_backupRetentionPeriod :: RdsClusterResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _backupRetentionPeriod = a } :: RdsClusterResource s)
+               (\s a -> s { _backupRetentionPeriod = a
+                          } :: RdsClusterResource s)
 
 instance P.HasEnabledCloudwatchLogsExports (RdsClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
     enabledCloudwatchLogsExports =
         P.lens (_enabledCloudwatchLogsExports :: RdsClusterResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _enabledCloudwatchLogsExports = a } :: RdsClusterResource s)
+               (\s a -> s { _enabledCloudwatchLogsExports = a
+                          } :: RdsClusterResource s)
 
 instance P.HasEngine (RdsClusterResource s) (TF.Attr s P.Text) where
     engine =
         P.lens (_engine :: RdsClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _engine = a } :: RdsClusterResource s)
+               (\s a -> s { _engine = a
+                          } :: RdsClusterResource s)
 
 instance P.HasFinalSnapshotIdentifier (RdsClusterResource s) (TF.Attr s P.Text) where
     finalSnapshotIdentifier =
         P.lens (_finalSnapshotIdentifier :: RdsClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _finalSnapshotIdentifier = a } :: RdsClusterResource s)
+               (\s a -> s { _finalSnapshotIdentifier = a
+                          } :: RdsClusterResource s)
 
 instance P.HasIamDatabaseAuthenticationEnabled (RdsClusterResource s) (TF.Attr s P.Bool) where
     iamDatabaseAuthenticationEnabled =
         P.lens (_iamDatabaseAuthenticationEnabled :: RdsClusterResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _iamDatabaseAuthenticationEnabled = a } :: RdsClusterResource s)
+               (\s a -> s { _iamDatabaseAuthenticationEnabled = a
+                          } :: RdsClusterResource s)
 
 instance P.HasIamRoles (RdsClusterResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     iamRoles =
         P.lens (_iamRoles :: RdsClusterResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _iamRoles = a } :: RdsClusterResource s)
+               (\s a -> s { _iamRoles = a
+                          } :: RdsClusterResource s)
 
 instance P.HasMasterPassword (RdsClusterResource s) (TF.Attr s P.Text) where
     masterPassword =
         P.lens (_masterPassword :: RdsClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _masterPassword = a } :: RdsClusterResource s)
+               (\s a -> s { _masterPassword = a
+                          } :: RdsClusterResource s)
 
 instance P.HasReplicationSourceIdentifier (RdsClusterResource s) (TF.Attr s P.Text) where
     replicationSourceIdentifier =
         P.lens (_replicationSourceIdentifier :: RdsClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _replicationSourceIdentifier = a } :: RdsClusterResource s)
+               (\s a -> s { _replicationSourceIdentifier = a
+                          } :: RdsClusterResource s)
 
 instance P.HasS3Import (RdsClusterResource s) (TF.Attr s [S3Import s]) where
     s3Import =
         P.lens (_s3Import :: RdsClusterResource s -> TF.Attr s [S3Import s])
-               (\s a -> s { _s3Import = a } :: RdsClusterResource s)
+               (\s a -> s { _s3Import = a
+                          , _snapshotIdentifier = TF.Nil
+                          } :: RdsClusterResource s)
 
 instance P.HasSkipFinalSnapshot (RdsClusterResource s) (TF.Attr s P.Bool) where
     skipFinalSnapshot =
         P.lens (_skipFinalSnapshot :: RdsClusterResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _skipFinalSnapshot = a } :: RdsClusterResource s)
+               (\s a -> s { _skipFinalSnapshot = a
+                          } :: RdsClusterResource s)
 
 instance P.HasSnapshotIdentifier (RdsClusterResource s) (TF.Attr s P.Text) where
     snapshotIdentifier =
         P.lens (_snapshotIdentifier :: RdsClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotIdentifier = a } :: RdsClusterResource s)
+               (\s a -> s { _snapshotIdentifier = a
+                          , _s3Import = TF.Nil
+                          } :: RdsClusterResource s)
 
 instance P.HasSourceRegion (RdsClusterResource s) (TF.Attr s P.Text) where
     sourceRegion =
         P.lens (_sourceRegion :: RdsClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceRegion = a } :: RdsClusterResource s)
+               (\s a -> s { _sourceRegion = a
+                          } :: RdsClusterResource s)
 
 instance P.HasStorageEncrypted (RdsClusterResource s) (TF.Attr s P.Bool) where
     storageEncrypted =
         P.lens (_storageEncrypted :: RdsClusterResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _storageEncrypted = a } :: RdsClusterResource s)
+               (\s a -> s { _storageEncrypted = a
+                          } :: RdsClusterResource s)
 
 instance P.HasTags (RdsClusterResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: RdsClusterResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: RdsClusterResource s)
+               (\s a -> s { _tags = a
+                          } :: RdsClusterResource s)
 
 instance s ~ s' => P.HasComputedApplyImmediately (TF.Ref s' (RdsClusterResource s)) (TF.Attr s P.Bool) where
     computedApplyImmediately x = TF.compute (TF.refKey x) "apply_immediately"
@@ -5204,23 +6167,34 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RdsClusterResour
     computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "vpc_security_group_ids"
 
 -- | @aws_rds_cluster_instance@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_rds_cluster_instance terraform documentation>
+-- for more information.
 data RdsClusterInstanceResource s = RdsClusterInstanceResource'
     { _autoMinorVersionUpgrade :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @auto_minor_version_upgrade@ - (Optional)
+    --
     , _clusterIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cluster_identifier@ - (Required)
+    --
     , _engine :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @engine@ - (Optional)
+    --
     , _instanceClass :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @instance_class@ - (Required)
+    --
     , _monitoringInterval :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @monitoring_interval@ - (Optional)
+    --
     , _promotionTier :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @promotion_tier@ - (Optional)
+    --
     , _publiclyAccessible :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @publicly_accessible@ - (Optional)
+    --
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RdsClusterInstanceResource s) where
@@ -5236,8 +6210,8 @@ instance TF.IsObject (RdsClusterInstanceResource s) where
         ]
 
 rdsClusterInstanceResource
-    :: TF.Attr s P.Text -- ^ @cluster_identifier@
-    -> TF.Attr s P.Text -- ^ @instance_class@
+    :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
+    -> TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
     -> TF.Resource P.Provider (RdsClusterInstanceResource s)
 rdsClusterInstanceResource _clusterIdentifier _instanceClass =
     TF.newResource "aws_rds_cluster_instance" $
@@ -5255,42 +6229,50 @@ rdsClusterInstanceResource _clusterIdentifier _instanceClass =
 instance P.HasAutoMinorVersionUpgrade (RdsClusterInstanceResource s) (TF.Attr s P.Bool) where
     autoMinorVersionUpgrade =
         P.lens (_autoMinorVersionUpgrade :: RdsClusterInstanceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoMinorVersionUpgrade = a } :: RdsClusterInstanceResource s)
+               (\s a -> s { _autoMinorVersionUpgrade = a
+                          } :: RdsClusterInstanceResource s)
 
 instance P.HasClusterIdentifier (RdsClusterInstanceResource s) (TF.Attr s P.Text) where
     clusterIdentifier =
         P.lens (_clusterIdentifier :: RdsClusterInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterIdentifier = a } :: RdsClusterInstanceResource s)
+               (\s a -> s { _clusterIdentifier = a
+                          } :: RdsClusterInstanceResource s)
 
 instance P.HasEngine (RdsClusterInstanceResource s) (TF.Attr s P.Text) where
     engine =
         P.lens (_engine :: RdsClusterInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _engine = a } :: RdsClusterInstanceResource s)
+               (\s a -> s { _engine = a
+                          } :: RdsClusterInstanceResource s)
 
 instance P.HasInstanceClass (RdsClusterInstanceResource s) (TF.Attr s P.Text) where
     instanceClass =
         P.lens (_instanceClass :: RdsClusterInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceClass = a } :: RdsClusterInstanceResource s)
+               (\s a -> s { _instanceClass = a
+                          } :: RdsClusterInstanceResource s)
 
 instance P.HasMonitoringInterval (RdsClusterInstanceResource s) (TF.Attr s P.Integer) where
     monitoringInterval =
         P.lens (_monitoringInterval :: RdsClusterInstanceResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _monitoringInterval = a } :: RdsClusterInstanceResource s)
+               (\s a -> s { _monitoringInterval = a
+                          } :: RdsClusterInstanceResource s)
 
 instance P.HasPromotionTier (RdsClusterInstanceResource s) (TF.Attr s P.Integer) where
     promotionTier =
         P.lens (_promotionTier :: RdsClusterInstanceResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _promotionTier = a } :: RdsClusterInstanceResource s)
+               (\s a -> s { _promotionTier = a
+                          } :: RdsClusterInstanceResource s)
 
 instance P.HasPubliclyAccessible (RdsClusterInstanceResource s) (TF.Attr s P.Bool) where
     publiclyAccessible =
         P.lens (_publiclyAccessible :: RdsClusterInstanceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _publiclyAccessible = a } :: RdsClusterInstanceResource s)
+               (\s a -> s { _publiclyAccessible = a
+                          } :: RdsClusterInstanceResource s)
 
 instance P.HasTags (RdsClusterInstanceResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: RdsClusterInstanceResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: RdsClusterInstanceResource s)
+               (\s a -> s { _tags = a
+                          } :: RdsClusterInstanceResource s)
 
 instance s ~ s' => P.HasComputedApplyImmediately (TF.Ref s' (RdsClusterInstanceResource s)) (TF.Attr s P.Bool) where
     computedApplyImmediately x = TF.compute (TF.refKey x) "apply_immediately"
@@ -5350,15 +6332,22 @@ instance s ~ s' => P.HasComputedWriter (TF.Ref s' (RdsClusterInstanceResource s)
     computedWriter x = TF.compute (TF.refKey x) "writer"
 
 -- | @aws_rds_cluster_parameter_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_rds_cluster_parameter_group terraform documentation>
+-- for more information.
 data RdsClusterParameterGroupResource s = RdsClusterParameterGroupResource'
     { _description :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _family'     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @family@ - (Required)
+    --
     , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
-    -- ^ Undocumented.
+    -- ^ @parameter@ - (Optional)
+    --
     , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RdsClusterParameterGroupResource s) where
@@ -5370,7 +6359,7 @@ instance TF.IsObject (RdsClusterParameterGroupResource s) where
         ]
 
 rdsClusterParameterGroupResource
-    :: TF.Attr s P.Text -- ^ @family@
+    :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
     -> TF.Resource P.Provider (RdsClusterParameterGroupResource s)
 rdsClusterParameterGroupResource _family' =
     TF.newResource "aws_rds_cluster_parameter_group" $
@@ -5384,22 +6373,26 @@ rdsClusterParameterGroupResource _family' =
 instance P.HasDescription (RdsClusterParameterGroupResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: RdsClusterParameterGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: RdsClusterParameterGroupResource s)
+               (\s a -> s { _description = a
+                          } :: RdsClusterParameterGroupResource s)
 
 instance P.HasFamily' (RdsClusterParameterGroupResource s) (TF.Attr s P.Text) where
     family' =
         P.lens (_family' :: RdsClusterParameterGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _family' = a } :: RdsClusterParameterGroupResource s)
+               (\s a -> s { _family' = a
+                          } :: RdsClusterParameterGroupResource s)
 
 instance P.HasParameter (RdsClusterParameterGroupResource s) (TF.Attr s [TF.Attr s (Parameter s)]) where
     parameter =
         P.lens (_parameter :: RdsClusterParameterGroupResource s -> TF.Attr s [TF.Attr s (Parameter s)])
-               (\s a -> s { _parameter = a } :: RdsClusterParameterGroupResource s)
+               (\s a -> s { _parameter = a
+                          } :: RdsClusterParameterGroupResource s)
 
 instance P.HasTags (RdsClusterParameterGroupResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: RdsClusterParameterGroupResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: RdsClusterParameterGroupResource s)
+               (\s a -> s { _tags = a
+                          } :: RdsClusterParameterGroupResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (RdsClusterParameterGroupResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -5411,45 +6404,67 @@ instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (RdsClusterParameterGroupR
     computedNamePrefix x = TF.compute (TF.refKey x) "name_prefix"
 
 -- | @aws_redshift_cluster@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_redshift_cluster terraform documentation>
+-- for more information.
 data RedshiftClusterResource s = RedshiftClusterResource'
     { _allowVersionUpgrade :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @allow_version_upgrade@ - (Optional)
+    --
     , _automatedSnapshotRetentionPeriod :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @automated_snapshot_retention_period@ - (Optional)
+    --
     , _clusterIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cluster_identifier@ - (Required)
+    --
     , _clusterVersion :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cluster_version@ - (Optional)
+    --
     , _elasticIp :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @elastic_ip@ - (Optional)
+    --
     , _finalSnapshotIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @final_snapshot_identifier@ - (Optional)
+    --
     , _logging :: TF.Attr s [Logging s]
-    -- ^ Undocumented.
+    -- ^ @logging@ - (Optional)
+    --
     , _masterPassword :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @master_password@ - (Optional)
+    --
     , _masterUsername :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @master_username@ - (Optional)
+    --
     , _nodeType :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @node_type@ - (Required)
+    --
     , _numberOfNodes :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @number_of_nodes@ - (Optional)
+    --
     , _ownerAccount :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @owner_account@ - (Optional)
+    --
     , _port :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @port@ - (Optional)
+    --
     , _publiclyAccessible :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @publicly_accessible@ - (Optional)
+    --
     , _skipFinalSnapshot :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @skip_final_snapshot@ - (Optional)
+    --
     , _snapshotClusterIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @snapshot_cluster_identifier@ - (Optional)
+    --
     , _snapshotCopy :: TF.Attr s [SnapshotCopy s]
-    -- ^ Undocumented.
+    -- ^ @snapshot_copy@ - (Optional)
+    --
     , _snapshotIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @snapshot_identifier@ - (Optional)
+    --
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RedshiftClusterResource s) where
@@ -5476,8 +6491,8 @@ instance TF.IsObject (RedshiftClusterResource s) where
         ]
 
 redshiftClusterResource
-    :: TF.Attr s P.Text -- ^ @cluster_identifier@
-    -> TF.Attr s P.Text -- ^ @node_type@
+    :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
+    -> TF.Attr s P.Text -- ^ @node_type@ - 'P.nodeType'
     -> TF.Resource P.Provider (RedshiftClusterResource s)
 redshiftClusterResource _clusterIdentifier _nodeType =
     TF.newResource "aws_redshift_cluster" $
@@ -5506,97 +6521,116 @@ redshiftClusterResource _clusterIdentifier _nodeType =
 instance P.HasAllowVersionUpgrade (RedshiftClusterResource s) (TF.Attr s P.Bool) where
     allowVersionUpgrade =
         P.lens (_allowVersionUpgrade :: RedshiftClusterResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _allowVersionUpgrade = a } :: RedshiftClusterResource s)
+               (\s a -> s { _allowVersionUpgrade = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasAutomatedSnapshotRetentionPeriod (RedshiftClusterResource s) (TF.Attr s P.Integer) where
     automatedSnapshotRetentionPeriod =
         P.lens (_automatedSnapshotRetentionPeriod :: RedshiftClusterResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _automatedSnapshotRetentionPeriod = a } :: RedshiftClusterResource s)
+               (\s a -> s { _automatedSnapshotRetentionPeriod = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasClusterIdentifier (RedshiftClusterResource s) (TF.Attr s P.Text) where
     clusterIdentifier =
         P.lens (_clusterIdentifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterIdentifier = a } :: RedshiftClusterResource s)
+               (\s a -> s { _clusterIdentifier = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasClusterVersion (RedshiftClusterResource s) (TF.Attr s P.Text) where
     clusterVersion =
         P.lens (_clusterVersion :: RedshiftClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterVersion = a } :: RedshiftClusterResource s)
+               (\s a -> s { _clusterVersion = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasElasticIp (RedshiftClusterResource s) (TF.Attr s P.Text) where
     elasticIp =
         P.lens (_elasticIp :: RedshiftClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _elasticIp = a } :: RedshiftClusterResource s)
+               (\s a -> s { _elasticIp = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasFinalSnapshotIdentifier (RedshiftClusterResource s) (TF.Attr s P.Text) where
     finalSnapshotIdentifier =
         P.lens (_finalSnapshotIdentifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _finalSnapshotIdentifier = a } :: RedshiftClusterResource s)
+               (\s a -> s { _finalSnapshotIdentifier = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasLogging (RedshiftClusterResource s) (TF.Attr s [Logging s]) where
     logging =
         P.lens (_logging :: RedshiftClusterResource s -> TF.Attr s [Logging s])
-               (\s a -> s { _logging = a } :: RedshiftClusterResource s)
+               (\s a -> s { _logging = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasMasterPassword (RedshiftClusterResource s) (TF.Attr s P.Text) where
     masterPassword =
         P.lens (_masterPassword :: RedshiftClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _masterPassword = a } :: RedshiftClusterResource s)
+               (\s a -> s { _masterPassword = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasMasterUsername (RedshiftClusterResource s) (TF.Attr s P.Text) where
     masterUsername =
         P.lens (_masterUsername :: RedshiftClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _masterUsername = a } :: RedshiftClusterResource s)
+               (\s a -> s { _masterUsername = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasNodeType (RedshiftClusterResource s) (TF.Attr s P.Text) where
     nodeType =
         P.lens (_nodeType :: RedshiftClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _nodeType = a } :: RedshiftClusterResource s)
+               (\s a -> s { _nodeType = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasNumberOfNodes (RedshiftClusterResource s) (TF.Attr s P.Integer) where
     numberOfNodes =
         P.lens (_numberOfNodes :: RedshiftClusterResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _numberOfNodes = a } :: RedshiftClusterResource s)
+               (\s a -> s { _numberOfNodes = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasOwnerAccount (RedshiftClusterResource s) (TF.Attr s P.Text) where
     ownerAccount =
         P.lens (_ownerAccount :: RedshiftClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ownerAccount = a } :: RedshiftClusterResource s)
+               (\s a -> s { _ownerAccount = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasPort (RedshiftClusterResource s) (TF.Attr s P.Integer) where
     port =
         P.lens (_port :: RedshiftClusterResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a } :: RedshiftClusterResource s)
+               (\s a -> s { _port = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasPubliclyAccessible (RedshiftClusterResource s) (TF.Attr s P.Bool) where
     publiclyAccessible =
         P.lens (_publiclyAccessible :: RedshiftClusterResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _publiclyAccessible = a } :: RedshiftClusterResource s)
+               (\s a -> s { _publiclyAccessible = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasSkipFinalSnapshot (RedshiftClusterResource s) (TF.Attr s P.Bool) where
     skipFinalSnapshot =
         P.lens (_skipFinalSnapshot :: RedshiftClusterResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _skipFinalSnapshot = a } :: RedshiftClusterResource s)
+               (\s a -> s { _skipFinalSnapshot = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasSnapshotClusterIdentifier (RedshiftClusterResource s) (TF.Attr s P.Text) where
     snapshotClusterIdentifier =
         P.lens (_snapshotClusterIdentifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotClusterIdentifier = a } :: RedshiftClusterResource s)
+               (\s a -> s { _snapshotClusterIdentifier = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasSnapshotCopy (RedshiftClusterResource s) (TF.Attr s [SnapshotCopy s]) where
     snapshotCopy =
         P.lens (_snapshotCopy :: RedshiftClusterResource s -> TF.Attr s [SnapshotCopy s])
-               (\s a -> s { _snapshotCopy = a } :: RedshiftClusterResource s)
+               (\s a -> s { _snapshotCopy = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasSnapshotIdentifier (RedshiftClusterResource s) (TF.Attr s P.Text) where
     snapshotIdentifier =
         P.lens (_snapshotIdentifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotIdentifier = a } :: RedshiftClusterResource s)
+               (\s a -> s { _snapshotIdentifier = a
+                          } :: RedshiftClusterResource s)
 
 instance P.HasTags (RedshiftClusterResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: RedshiftClusterResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: RedshiftClusterResource s)
+               (\s a -> s { _tags = a
+                          } :: RedshiftClusterResource s)
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
@@ -5656,15 +6690,22 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RedshiftClusterR
     computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "vpc_security_group_ids"
 
 -- | @aws_redshift_parameter_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_redshift_parameter_group terraform documentation>
+-- for more information.
 data RedshiftParameterGroupResource s = RedshiftParameterGroupResource'
     { _description :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _family'     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @family@ - (Required)
+    --
     , _name        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
-    -- ^ Undocumented.
+    -- ^ @parameter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RedshiftParameterGroupResource s) where
@@ -5676,8 +6717,8 @@ instance TF.IsObject (RedshiftParameterGroupResource s) where
         ]
 
 redshiftParameterGroupResource
-    :: TF.Attr s P.Text -- ^ @family@
-    -> TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (RedshiftParameterGroupResource s)
 redshiftParameterGroupResource _family' _name =
     TF.newResource "aws_redshift_parameter_group" $
@@ -5691,31 +6732,41 @@ redshiftParameterGroupResource _family' _name =
 instance P.HasDescription (RedshiftParameterGroupResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: RedshiftParameterGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: RedshiftParameterGroupResource s)
+               (\s a -> s { _description = a
+                          } :: RedshiftParameterGroupResource s)
 
 instance P.HasFamily' (RedshiftParameterGroupResource s) (TF.Attr s P.Text) where
     family' =
         P.lens (_family' :: RedshiftParameterGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _family' = a } :: RedshiftParameterGroupResource s)
+               (\s a -> s { _family' = a
+                          } :: RedshiftParameterGroupResource s)
 
 instance P.HasName (RedshiftParameterGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RedshiftParameterGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: RedshiftParameterGroupResource s)
+               (\s a -> s { _name = a
+                          } :: RedshiftParameterGroupResource s)
 
 instance P.HasParameter (RedshiftParameterGroupResource s) (TF.Attr s [TF.Attr s (Parameter s)]) where
     parameter =
         P.lens (_parameter :: RedshiftParameterGroupResource s -> TF.Attr s [TF.Attr s (Parameter s)])
-               (\s a -> s { _parameter = a } :: RedshiftParameterGroupResource s)
+               (\s a -> s { _parameter = a
+                          } :: RedshiftParameterGroupResource s)
 
 -- | @aws_redshift_security_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_redshift_security_group terraform documentation>
+-- for more information.
 data RedshiftSecurityGroupResource s = RedshiftSecurityGroupResource'
     { _description :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _ingress     :: TF.Attr s [TF.Attr s (Ingress s)]
-    -- ^ Undocumented.
+    -- ^ @ingress@ - (Required)
+    --
     , _name        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RedshiftSecurityGroupResource s) where
@@ -5726,8 +6777,8 @@ instance TF.IsObject (RedshiftSecurityGroupResource s) where
         ]
 
 redshiftSecurityGroupResource
-    :: TF.Attr s [TF.Attr s (Ingress s)] -- ^ @ingress@
-    -> TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s [TF.Attr s (Ingress s)] -- ^ @ingress@ - 'P.ingress'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (RedshiftSecurityGroupResource s)
 redshiftSecurityGroupResource _ingress _name =
     TF.newResource "aws_redshift_security_group" $
@@ -5740,28 +6791,38 @@ redshiftSecurityGroupResource _ingress _name =
 instance P.HasDescription (RedshiftSecurityGroupResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: RedshiftSecurityGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: RedshiftSecurityGroupResource s)
+               (\s a -> s { _description = a
+                          } :: RedshiftSecurityGroupResource s)
 
 instance P.HasIngress (RedshiftSecurityGroupResource s) (TF.Attr s [TF.Attr s (Ingress s)]) where
     ingress =
         P.lens (_ingress :: RedshiftSecurityGroupResource s -> TF.Attr s [TF.Attr s (Ingress s)])
-               (\s a -> s { _ingress = a } :: RedshiftSecurityGroupResource s)
+               (\s a -> s { _ingress = a
+                          } :: RedshiftSecurityGroupResource s)
 
 instance P.HasName (RedshiftSecurityGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RedshiftSecurityGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: RedshiftSecurityGroupResource s)
+               (\s a -> s { _name = a
+                          } :: RedshiftSecurityGroupResource s)
 
 -- | @aws_redshift_subnet_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_redshift_subnet_group terraform documentation>
+-- for more information.
 data RedshiftSubnetGroupResource s = RedshiftSubnetGroupResource'
     { _description :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _name        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _subnetIds   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @subnet_ids@ - (Required)
+    --
     , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RedshiftSubnetGroupResource s) where
@@ -5773,8 +6834,8 @@ instance TF.IsObject (RedshiftSubnetGroupResource s) where
         ]
 
 redshiftSubnetGroupResource
-    :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @subnet_ids@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @subnet_ids@ - 'P.subnetIds'
     -> TF.Resource P.Provider (RedshiftSubnetGroupResource s)
 redshiftSubnetGroupResource _name _subnetIds =
     TF.newResource "aws_redshift_subnet_group" $
@@ -5788,33 +6849,44 @@ redshiftSubnetGroupResource _name _subnetIds =
 instance P.HasDescription (RedshiftSubnetGroupResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: RedshiftSubnetGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: RedshiftSubnetGroupResource s)
+               (\s a -> s { _description = a
+                          } :: RedshiftSubnetGroupResource s)
 
 instance P.HasName (RedshiftSubnetGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RedshiftSubnetGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: RedshiftSubnetGroupResource s)
+               (\s a -> s { _name = a
+                          } :: RedshiftSubnetGroupResource s)
 
 instance P.HasSubnetIds (RedshiftSubnetGroupResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     subnetIds =
         P.lens (_subnetIds :: RedshiftSubnetGroupResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _subnetIds = a } :: RedshiftSubnetGroupResource s)
+               (\s a -> s { _subnetIds = a
+                          } :: RedshiftSubnetGroupResource s)
 
 instance P.HasTags (RedshiftSubnetGroupResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: RedshiftSubnetGroupResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: RedshiftSubnetGroupResource s)
+               (\s a -> s { _tags = a
+                          } :: RedshiftSubnetGroupResource s)
 
 -- | @aws_route@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_route terraform documentation>
+-- for more information.
 data RouteResource s = RouteResource'
     { _destinationCidrBlock     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @destination_cidr_block@ - (Optional)
+    --
     , _destinationIpv6CidrBlock :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @destination_ipv6_cidr_block@ - (Optional)
+    --
     , _routeTableId             :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @route_table_id@ - (Required)
+    --
     , _vpcPeeringConnectionId   :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @vpc_peering_connection_id@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RouteResource s) where
@@ -5826,7 +6898,7 @@ instance TF.IsObject (RouteResource s) where
         ]
 
 routeResource
-    :: TF.Attr s P.Text -- ^ @route_table_id@
+    :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
     -> TF.Resource P.Provider (RouteResource s)
 routeResource _routeTableId =
     TF.newResource "aws_route" $
@@ -5840,22 +6912,26 @@ routeResource _routeTableId =
 instance P.HasDestinationCidrBlock (RouteResource s) (TF.Attr s P.Text) where
     destinationCidrBlock =
         P.lens (_destinationCidrBlock :: RouteResource s -> TF.Attr s P.Text)
-               (\s a -> s { _destinationCidrBlock = a } :: RouteResource s)
+               (\s a -> s { _destinationCidrBlock = a
+                          } :: RouteResource s)
 
 instance P.HasDestinationIpv6CidrBlock (RouteResource s) (TF.Attr s P.Text) where
     destinationIpv6CidrBlock =
         P.lens (_destinationIpv6CidrBlock :: RouteResource s -> TF.Attr s P.Text)
-               (\s a -> s { _destinationIpv6CidrBlock = a } :: RouteResource s)
+               (\s a -> s { _destinationIpv6CidrBlock = a
+                          } :: RouteResource s)
 
 instance P.HasRouteTableId (RouteResource s) (TF.Attr s P.Text) where
     routeTableId =
         P.lens (_routeTableId :: RouteResource s -> TF.Attr s P.Text)
-               (\s a -> s { _routeTableId = a } :: RouteResource s)
+               (\s a -> s { _routeTableId = a
+                          } :: RouteResource s)
 
 instance P.HasVpcPeeringConnectionId (RouteResource s) (TF.Attr s P.Text) where
     vpcPeeringConnectionId =
         P.lens (_vpcPeeringConnectionId :: RouteResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcPeeringConnectionId = a } :: RouteResource s)
+               (\s a -> s { _vpcPeeringConnectionId = a
+                          } :: RouteResource s)
 
 instance s ~ s' => P.HasComputedDestinationPrefixListId (TF.Ref s' (RouteResource s)) (TF.Attr s P.Text) where
     computedDestinationPrefixListId x = TF.compute (TF.refKey x) "destination_prefix_list_id"
@@ -5885,9 +6961,13 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (RouteResource s)) (TF.Attr s P
     computedState x = TF.compute (TF.refKey x) "state"
 
 -- | @aws_route53_delegation_set@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_route53_delegation_set terraform documentation>
+-- for more information.
 data Route53DelegationSetResource s = Route53DelegationSetResource'
     { _referenceName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @reference_name@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (Route53DelegationSetResource s) where
@@ -5906,49 +6986,71 @@ route53DelegationSetResource =
 instance P.HasReferenceName (Route53DelegationSetResource s) (TF.Attr s P.Text) where
     referenceName =
         P.lens (_referenceName :: Route53DelegationSetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _referenceName = a } :: Route53DelegationSetResource s)
+               (\s a -> s { _referenceName = a
+                          } :: Route53DelegationSetResource s)
 
 instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (Route53DelegationSetResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNameServers x = TF.compute (TF.refKey x) "name_servers"
 
 -- | @aws_route53_health_check@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_route53_health_check terraform documentation>
+-- for more information.
 data Route53HealthCheckResource s = Route53HealthCheckResource'
     { _childHealthThreshold :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @child_health_threshold@ - (Optional)
+    --
     , _childHealthchecks :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @child_healthchecks@ - (Optional)
+    --
     , _cloudwatchAlarmName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cloudwatch_alarm_name@ - (Optional)
+    --
     , _cloudwatchAlarmRegion :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cloudwatch_alarm_region@ - (Optional)
+    --
     , _failureThreshold :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @failure_threshold@ - (Optional)
+    --
     , _fqdn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @fqdn@ - (Optional)
+    --
     , _insufficientDataHealthStatus :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @insufficient_data_health_status@ - (Optional)
+    --
     , _invertHealthcheck :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @invert_healthcheck@ - (Optional)
+    --
     , _ipAddress :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @ip_address@ - (Optional)
+    --
     , _measureLatency :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @measure_latency@ - (Optional)
+    --
     , _port :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @port@ - (Optional)
+    --
     , _referenceName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @reference_name@ - (Optional)
+    --
     , _regions :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @regions@ - (Optional)
+    --
     , _requestInterval :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @request_interval@ - (Optional)
+    --
     , _resourcePath :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @resource_path@ - (Optional)
+    --
     , _searchString :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @search_string@ - (Optional)
+    --
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     , _type' :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @type@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (Route53HealthCheckResource s) where
@@ -5974,7 +7076,7 @@ instance TF.IsObject (Route53HealthCheckResource s) where
         ]
 
 route53HealthCheckResource
-    :: TF.Attr s P.Text -- ^ @type@
+    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Resource P.Provider (Route53HealthCheckResource s)
 route53HealthCheckResource _type' =
     TF.newResource "aws_route53_health_check" $
@@ -6002,102 +7104,125 @@ route53HealthCheckResource _type' =
 instance P.HasChildHealthThreshold (Route53HealthCheckResource s) (TF.Attr s P.Integer) where
     childHealthThreshold =
         P.lens (_childHealthThreshold :: Route53HealthCheckResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _childHealthThreshold = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _childHealthThreshold = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasChildHealthchecks (Route53HealthCheckResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     childHealthchecks =
         P.lens (_childHealthchecks :: Route53HealthCheckResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _childHealthchecks = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _childHealthchecks = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasCloudwatchAlarmName (Route53HealthCheckResource s) (TF.Attr s P.Text) where
     cloudwatchAlarmName =
         P.lens (_cloudwatchAlarmName :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _cloudwatchAlarmName = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _cloudwatchAlarmName = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasCloudwatchAlarmRegion (Route53HealthCheckResource s) (TF.Attr s P.Text) where
     cloudwatchAlarmRegion =
         P.lens (_cloudwatchAlarmRegion :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _cloudwatchAlarmRegion = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _cloudwatchAlarmRegion = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasFailureThreshold (Route53HealthCheckResource s) (TF.Attr s P.Integer) where
     failureThreshold =
         P.lens (_failureThreshold :: Route53HealthCheckResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _failureThreshold = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _failureThreshold = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasFqdn (Route53HealthCheckResource s) (TF.Attr s P.Text) where
     fqdn =
         P.lens (_fqdn :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _fqdn = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _fqdn = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasInsufficientDataHealthStatus (Route53HealthCheckResource s) (TF.Attr s P.Text) where
     insufficientDataHealthStatus =
         P.lens (_insufficientDataHealthStatus :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _insufficientDataHealthStatus = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _insufficientDataHealthStatus = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasInvertHealthcheck (Route53HealthCheckResource s) (TF.Attr s P.Bool) where
     invertHealthcheck =
         P.lens (_invertHealthcheck :: Route53HealthCheckResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _invertHealthcheck = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _invertHealthcheck = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasIpAddress (Route53HealthCheckResource s) (TF.Attr s P.Text) where
     ipAddress =
         P.lens (_ipAddress :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ipAddress = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _ipAddress = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasMeasureLatency (Route53HealthCheckResource s) (TF.Attr s P.Bool) where
     measureLatency =
         P.lens (_measureLatency :: Route53HealthCheckResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _measureLatency = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _measureLatency = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasPort (Route53HealthCheckResource s) (TF.Attr s P.Integer) where
     port =
         P.lens (_port :: Route53HealthCheckResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _port = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasReferenceName (Route53HealthCheckResource s) (TF.Attr s P.Text) where
     referenceName =
         P.lens (_referenceName :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _referenceName = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _referenceName = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasRegions (Route53HealthCheckResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     regions =
         P.lens (_regions :: Route53HealthCheckResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _regions = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _regions = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasRequestInterval (Route53HealthCheckResource s) (TF.Attr s P.Integer) where
     requestInterval =
         P.lens (_requestInterval :: Route53HealthCheckResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _requestInterval = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _requestInterval = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasResourcePath (Route53HealthCheckResource s) (TF.Attr s P.Text) where
     resourcePath =
         P.lens (_resourcePath :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _resourcePath = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _resourcePath = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasSearchString (Route53HealthCheckResource s) (TF.Attr s P.Text) where
     searchString =
         P.lens (_searchString :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _searchString = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _searchString = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasTags (Route53HealthCheckResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: Route53HealthCheckResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _tags = a
+                          } :: Route53HealthCheckResource s)
 
 instance P.HasType' (Route53HealthCheckResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: Route53HealthCheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: Route53HealthCheckResource s)
+               (\s a -> s { _type' = a
+                          } :: Route53HealthCheckResource s)
 
 instance s ~ s' => P.HasComputedEnableSni (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Bool) where
     computedEnableSni x = TF.compute (TF.refKey x) "enable_sni"
 
 -- | @aws_route53_query_log@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_route53_query_log terraform documentation>
+-- for more information.
 data Route53QueryLogResource s = Route53QueryLogResource'
     { _cloudwatchLogGroupArn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cloudwatch_log_group_arn@ - (Required)
+    --
     , _zoneId                :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @zone_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (Route53QueryLogResource s) where
@@ -6107,8 +7232,8 @@ instance TF.IsObject (Route53QueryLogResource s) where
         ]
 
 route53QueryLogResource
-    :: TF.Attr s P.Text -- ^ @cloudwatch_log_group_arn@
-    -> TF.Attr s P.Text -- ^ @zone_id@
+    :: TF.Attr s P.Text -- ^ @cloudwatch_log_group_arn@ - 'P.cloudwatchLogGroupArn'
+    -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
     -> TF.Resource P.Provider (Route53QueryLogResource s)
 route53QueryLogResource _cloudwatchLogGroupArn _zoneId =
     TF.newResource "aws_route53_query_log" $
@@ -6120,47 +7245,108 @@ route53QueryLogResource _cloudwatchLogGroupArn _zoneId =
 instance P.HasCloudwatchLogGroupArn (Route53QueryLogResource s) (TF.Attr s P.Text) where
     cloudwatchLogGroupArn =
         P.lens (_cloudwatchLogGroupArn :: Route53QueryLogResource s -> TF.Attr s P.Text)
-               (\s a -> s { _cloudwatchLogGroupArn = a } :: Route53QueryLogResource s)
+               (\s a -> s { _cloudwatchLogGroupArn = a
+                          } :: Route53QueryLogResource s)
 
 instance P.HasZoneId (Route53QueryLogResource s) (TF.Attr s P.Text) where
     zoneId =
         P.lens (_zoneId :: Route53QueryLogResource s -> TF.Attr s P.Text)
-               (\s a -> s { _zoneId = a } :: Route53QueryLogResource s)
+               (\s a -> s { _zoneId = a
+                          } :: Route53QueryLogResource s)
 
 -- | @aws_route53_record@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_route53_record terraform documentation>
+-- for more information.
 data Route53RecordResource s = Route53RecordResource'
     { _alias                         :: TF.Attr s [TF.Attr s (Alias s)]
-    -- ^ Undocumented.
+    -- ^ @alias@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'ttl'
+    -- * 'records'
     , _allowOverwrite                :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @allow_overwrite@ - (Optional)
+    --
     , _failover                      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @failover@ - (Optional)
+    --
     , _failoverRoutingPolicy         :: TF.Attr s [FailoverRoutingPolicy s]
-    -- ^ Undocumented.
+    -- ^ @failover_routing_policy@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'geolocationRoutingPolicy'
+    -- * 'multivalueAnswerRoutingPolicy'
+    -- * 'latencyRoutingPolicy'
+    -- * 'weightedRoutingPolicy'
     , _geolocationRoutingPolicy      :: TF.Attr s [GeolocationRoutingPolicy s]
-    -- ^ Undocumented.
+    -- ^ @geolocation_routing_policy@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'failoverRoutingPolicy'
+    -- * 'multivalueAnswerRoutingPolicy'
+    -- * 'latencyRoutingPolicy'
+    -- * 'weightedRoutingPolicy'
     , _healthCheckId                 :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @health_check_id@ - (Optional)
+    --
     , _latencyRoutingPolicy          :: TF.Attr s [LatencyRoutingPolicy s]
-    -- ^ Undocumented.
+    -- ^ @latency_routing_policy@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'failoverRoutingPolicy'
+    -- * 'geolocationRoutingPolicy'
+    -- * 'multivalueAnswerRoutingPolicy'
+    -- * 'weightedRoutingPolicy'
     , _multivalueAnswerRoutingPolicy :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @multivalue_answer_routing_policy@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'failoverRoutingPolicy'
+    -- * 'geolocationRoutingPolicy'
+    -- * 'latencyRoutingPolicy'
+    -- * 'weightedRoutingPolicy'
     , _name                          :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _records                       :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @records@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'alias'
     , _setIdentifier                 :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @set_identifier@ - (Optional)
+    --
     , _ttl                           :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @ttl@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'alias'
     , _type'                         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @type@ - (Required)
+    --
     , _weight                        :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @weight@ - (Optional)
+    --
     , _weightedRoutingPolicy         :: TF.Attr s [WeightedRoutingPolicy s]
-    -- ^ Undocumented.
+    -- ^ @weighted_routing_policy@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'failoverRoutingPolicy'
+    -- * 'geolocationRoutingPolicy'
+    -- * 'multivalueAnswerRoutingPolicy'
+    -- * 'latencyRoutingPolicy'
     , _zoneId                        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @zone_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (Route53RecordResource s) where
@@ -6184,9 +7370,9 @@ instance TF.IsObject (Route53RecordResource s) where
         ]
 
 route53RecordResource
-    :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Attr s P.Text -- ^ @type@
-    -> TF.Attr s P.Text -- ^ @zone_id@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
     -> TF.Resource P.Provider (Route53RecordResource s)
 route53RecordResource _name _type' _zoneId =
     TF.newResource "aws_route53_record" $
@@ -6212,100 +7398,155 @@ route53RecordResource _name _type' _zoneId =
 instance P.HasAlias (Route53RecordResource s) (TF.Attr s [TF.Attr s (Alias s)]) where
     alias =
         P.lens (_alias :: Route53RecordResource s -> TF.Attr s [TF.Attr s (Alias s)])
-               (\s a -> s { _alias = a } :: Route53RecordResource s)
+               (\s a -> s { _alias = a
+                          , _ttl = TF.Nil
+                          , _records = TF.Nil
+                          } :: Route53RecordResource s)
 
 instance P.HasAllowOverwrite (Route53RecordResource s) (TF.Attr s P.Bool) where
     allowOverwrite =
         P.lens (_allowOverwrite :: Route53RecordResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _allowOverwrite = a } :: Route53RecordResource s)
+               (\s a -> s { _allowOverwrite = a
+                          } :: Route53RecordResource s)
 
 instance P.HasFailover (Route53RecordResource s) (TF.Attr s P.Text) where
     failover =
         P.lens (_failover :: Route53RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _failover = a } :: Route53RecordResource s)
+               (\s a -> s { _failover = a
+                          } :: Route53RecordResource s)
 
 instance P.HasFailoverRoutingPolicy (Route53RecordResource s) (TF.Attr s [FailoverRoutingPolicy s]) where
     failoverRoutingPolicy =
         P.lens (_failoverRoutingPolicy :: Route53RecordResource s -> TF.Attr s [FailoverRoutingPolicy s])
-               (\s a -> s { _failoverRoutingPolicy = a } :: Route53RecordResource s)
+               (\s a -> s { _failoverRoutingPolicy = a
+                          , _geolocationRoutingPolicy = TF.Nil
+                          , _multivalueAnswerRoutingPolicy = TF.Nil
+                          , _latencyRoutingPolicy = TF.Nil
+                          , _weightedRoutingPolicy = TF.Nil
+                          } :: Route53RecordResource s)
 
 instance P.HasGeolocationRoutingPolicy (Route53RecordResource s) (TF.Attr s [GeolocationRoutingPolicy s]) where
     geolocationRoutingPolicy =
         P.lens (_geolocationRoutingPolicy :: Route53RecordResource s -> TF.Attr s [GeolocationRoutingPolicy s])
-               (\s a -> s { _geolocationRoutingPolicy = a } :: Route53RecordResource s)
+               (\s a -> s { _geolocationRoutingPolicy = a
+                          , _failoverRoutingPolicy = TF.Nil
+                          , _multivalueAnswerRoutingPolicy = TF.Nil
+                          , _latencyRoutingPolicy = TF.Nil
+                          , _weightedRoutingPolicy = TF.Nil
+                          } :: Route53RecordResource s)
 
 instance P.HasHealthCheckId (Route53RecordResource s) (TF.Attr s P.Text) where
     healthCheckId =
         P.lens (_healthCheckId :: Route53RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _healthCheckId = a } :: Route53RecordResource s)
+               (\s a -> s { _healthCheckId = a
+                          } :: Route53RecordResource s)
 
 instance P.HasLatencyRoutingPolicy (Route53RecordResource s) (TF.Attr s [LatencyRoutingPolicy s]) where
     latencyRoutingPolicy =
         P.lens (_latencyRoutingPolicy :: Route53RecordResource s -> TF.Attr s [LatencyRoutingPolicy s])
-               (\s a -> s { _latencyRoutingPolicy = a } :: Route53RecordResource s)
+               (\s a -> s { _latencyRoutingPolicy = a
+                          , _failoverRoutingPolicy = TF.Nil
+                          , _geolocationRoutingPolicy = TF.Nil
+                          , _multivalueAnswerRoutingPolicy = TF.Nil
+                          , _weightedRoutingPolicy = TF.Nil
+                          } :: Route53RecordResource s)
 
 instance P.HasMultivalueAnswerRoutingPolicy (Route53RecordResource s) (TF.Attr s P.Bool) where
     multivalueAnswerRoutingPolicy =
         P.lens (_multivalueAnswerRoutingPolicy :: Route53RecordResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _multivalueAnswerRoutingPolicy = a } :: Route53RecordResource s)
+               (\s a -> s { _multivalueAnswerRoutingPolicy = a
+                          , _failoverRoutingPolicy = TF.Nil
+                          , _geolocationRoutingPolicy = TF.Nil
+                          , _latencyRoutingPolicy = TF.Nil
+                          , _weightedRoutingPolicy = TF.Nil
+                          } :: Route53RecordResource s)
 
 instance P.HasName (Route53RecordResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Route53RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Route53RecordResource s)
+               (\s a -> s { _name = a
+                          } :: Route53RecordResource s)
 
 instance P.HasRecords (Route53RecordResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     records =
         P.lens (_records :: Route53RecordResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _records = a } :: Route53RecordResource s)
+               (\s a -> s { _records = a
+                          , _alias = TF.Nil
+                          } :: Route53RecordResource s)
 
 instance P.HasSetIdentifier (Route53RecordResource s) (TF.Attr s P.Text) where
     setIdentifier =
         P.lens (_setIdentifier :: Route53RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _setIdentifier = a } :: Route53RecordResource s)
+               (\s a -> s { _setIdentifier = a
+                          } :: Route53RecordResource s)
 
 instance P.HasTtl (Route53RecordResource s) (TF.Attr s P.Integer) where
     ttl =
         P.lens (_ttl :: Route53RecordResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _ttl = a } :: Route53RecordResource s)
+               (\s a -> s { _ttl = a
+                          , _alias = TF.Nil
+                          } :: Route53RecordResource s)
 
 instance P.HasType' (Route53RecordResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: Route53RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: Route53RecordResource s)
+               (\s a -> s { _type' = a
+                          } :: Route53RecordResource s)
 
 instance P.HasWeight (Route53RecordResource s) (TF.Attr s P.Integer) where
     weight =
         P.lens (_weight :: Route53RecordResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _weight = a } :: Route53RecordResource s)
+               (\s a -> s { _weight = a
+                          } :: Route53RecordResource s)
 
 instance P.HasWeightedRoutingPolicy (Route53RecordResource s) (TF.Attr s [WeightedRoutingPolicy s]) where
     weightedRoutingPolicy =
         P.lens (_weightedRoutingPolicy :: Route53RecordResource s -> TF.Attr s [WeightedRoutingPolicy s])
-               (\s a -> s { _weightedRoutingPolicy = a } :: Route53RecordResource s)
+               (\s a -> s { _weightedRoutingPolicy = a
+                          , _failoverRoutingPolicy = TF.Nil
+                          , _geolocationRoutingPolicy = TF.Nil
+                          , _multivalueAnswerRoutingPolicy = TF.Nil
+                          , _latencyRoutingPolicy = TF.Nil
+                          } :: Route53RecordResource s)
 
 instance P.HasZoneId (Route53RecordResource s) (TF.Attr s P.Text) where
     zoneId =
         P.lens (_zoneId :: Route53RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _zoneId = a } :: Route53RecordResource s)
+               (\s a -> s { _zoneId = a
+                          } :: Route53RecordResource s)
 
 instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (Route53RecordResource s)) (TF.Attr s P.Text) where
     computedFqdn x = TF.compute (TF.refKey x) "fqdn"
 
 -- | @aws_route53_zone@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_route53_zone terraform documentation>
+-- for more information.
 data Route53ZoneResource s = Route53ZoneResource'
     { _comment         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @comment@ - (Optional)
+    --
     , _delegationSetId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @delegation_set_id@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'vpcId'
     , _forceDestroy    :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @force_destroy@ - (Optional)
+    --
     , _name            :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _tags            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     , _vpcId           :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @vpc_id@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'delegationSetId'
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (Route53ZoneResource s) where
@@ -6319,7 +7560,7 @@ instance TF.IsObject (Route53ZoneResource s) where
         ]
 
 route53ZoneResource
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (Route53ZoneResource s)
 route53ZoneResource _name =
     TF.newResource "aws_route53_zone" $
@@ -6335,32 +7576,40 @@ route53ZoneResource _name =
 instance P.HasComment (Route53ZoneResource s) (TF.Attr s P.Text) where
     comment =
         P.lens (_comment :: Route53ZoneResource s -> TF.Attr s P.Text)
-               (\s a -> s { _comment = a } :: Route53ZoneResource s)
+               (\s a -> s { _comment = a
+                          } :: Route53ZoneResource s)
 
 instance P.HasDelegationSetId (Route53ZoneResource s) (TF.Attr s P.Text) where
     delegationSetId =
         P.lens (_delegationSetId :: Route53ZoneResource s -> TF.Attr s P.Text)
-               (\s a -> s { _delegationSetId = a } :: Route53ZoneResource s)
+               (\s a -> s { _delegationSetId = a
+                          , _vpcId = TF.Nil
+                          } :: Route53ZoneResource s)
 
 instance P.HasForceDestroy (Route53ZoneResource s) (TF.Attr s P.Bool) where
     forceDestroy =
         P.lens (_forceDestroy :: Route53ZoneResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _forceDestroy = a } :: Route53ZoneResource s)
+               (\s a -> s { _forceDestroy = a
+                          } :: Route53ZoneResource s)
 
 instance P.HasName (Route53ZoneResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Route53ZoneResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Route53ZoneResource s)
+               (\s a -> s { _name = a
+                          } :: Route53ZoneResource s)
 
 instance P.HasTags (Route53ZoneResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: Route53ZoneResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: Route53ZoneResource s)
+               (\s a -> s { _tags = a
+                          } :: Route53ZoneResource s)
 
 instance P.HasVpcId (Route53ZoneResource s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: Route53ZoneResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a } :: Route53ZoneResource s)
+               (\s a -> s { _vpcId = a
+                          , _delegationSetId = TF.Nil
+                          } :: Route53ZoneResource s)
 
 instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNameServers x = TF.compute (TF.refKey x) "name_servers"
@@ -6372,11 +7621,16 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (Route53ZoneResource s)) (TF.A
     computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
 -- | @aws_route53_zone_association@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_route53_zone_association terraform documentation>
+-- for more information.
 data Route53ZoneAssociationResource s = Route53ZoneAssociationResource'
     { _vpcId  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @vpc_id@ - (Required)
+    --
     , _zoneId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @zone_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (Route53ZoneAssociationResource s) where
@@ -6386,8 +7640,8 @@ instance TF.IsObject (Route53ZoneAssociationResource s) where
         ]
 
 route53ZoneAssociationResource
-    :: TF.Attr s P.Text -- ^ @vpc_id@
-    -> TF.Attr s P.Text -- ^ @zone_id@
+    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
     -> TF.Resource P.Provider (Route53ZoneAssociationResource s)
 route53ZoneAssociationResource _vpcId _zoneId =
     TF.newResource "aws_route53_zone_association" $
@@ -6399,22 +7653,29 @@ route53ZoneAssociationResource _vpcId _zoneId =
 instance P.HasVpcId (Route53ZoneAssociationResource s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: Route53ZoneAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a } :: Route53ZoneAssociationResource s)
+               (\s a -> s { _vpcId = a
+                          } :: Route53ZoneAssociationResource s)
 
 instance P.HasZoneId (Route53ZoneAssociationResource s) (TF.Attr s P.Text) where
     zoneId =
         P.lens (_zoneId :: Route53ZoneAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _zoneId = a } :: Route53ZoneAssociationResource s)
+               (\s a -> s { _zoneId = a
+                          } :: Route53ZoneAssociationResource s)
 
 instance s ~ s' => P.HasComputedVpcRegion (TF.Ref s' (Route53ZoneAssociationResource s)) (TF.Attr s P.Text) where
     computedVpcRegion x = TF.compute (TF.refKey x) "vpc_region"
 
 -- | @aws_route_table@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_route_table terraform documentation>
+-- for more information.
 data RouteTableResource s = RouteTableResource'
     { _tags  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     , _vpcId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @vpc_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RouteTableResource s) where
@@ -6424,7 +7685,7 @@ instance TF.IsObject (RouteTableResource s) where
         ]
 
 routeTableResource
-    :: TF.Attr s P.Text -- ^ @vpc_id@
+    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> TF.Resource P.Provider (RouteTableResource s)
 routeTableResource _vpcId =
     TF.newResource "aws_route_table" $
@@ -6436,12 +7697,14 @@ routeTableResource _vpcId =
 instance P.HasTags (RouteTableResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: RouteTableResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: RouteTableResource s)
+               (\s a -> s { _tags = a
+                          } :: RouteTableResource s)
 
 instance P.HasVpcId (RouteTableResource s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: RouteTableResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a } :: RouteTableResource s)
+               (\s a -> s { _vpcId = a
+                          } :: RouteTableResource s)
 
 instance s ~ s' => P.HasComputedPropagatingVgws (TF.Ref s' (RouteTableResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     computedPropagatingVgws x = TF.compute (TF.refKey x) "propagating_vgws"
@@ -6450,11 +7713,16 @@ instance s ~ s' => P.HasComputedRoute (TF.Ref s' (RouteTableResource s)) (TF.Att
     computedRoute x = TF.compute (TF.refKey x) "route"
 
 -- | @aws_route_table_association@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_route_table_association terraform documentation>
+-- for more information.
 data RouteTableAssociationResource s = RouteTableAssociationResource'
     { _routeTableId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @route_table_id@ - (Required)
+    --
     , _subnetId     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @subnet_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (RouteTableAssociationResource s) where
@@ -6464,8 +7732,8 @@ instance TF.IsObject (RouteTableAssociationResource s) where
         ]
 
 routeTableAssociationResource
-    :: TF.Attr s P.Text -- ^ @route_table_id@
-    -> TF.Attr s P.Text -- ^ @subnet_id@
+    :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
+    -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> TF.Resource P.Provider (RouteTableAssociationResource s)
 routeTableAssociationResource _routeTableId _subnetId =
     TF.newResource "aws_route_table_association" $
@@ -6477,37 +7745,53 @@ routeTableAssociationResource _routeTableId _subnetId =
 instance P.HasRouteTableId (RouteTableAssociationResource s) (TF.Attr s P.Text) where
     routeTableId =
         P.lens (_routeTableId :: RouteTableAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _routeTableId = a } :: RouteTableAssociationResource s)
+               (\s a -> s { _routeTableId = a
+                          } :: RouteTableAssociationResource s)
 
 instance P.HasSubnetId (RouteTableAssociationResource s) (TF.Attr s P.Text) where
     subnetId =
         P.lens (_subnetId :: RouteTableAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _subnetId = a } :: RouteTableAssociationResource s)
+               (\s a -> s { _subnetId = a
+                          } :: RouteTableAssociationResource s)
 
 -- | @aws_s3_bucket@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_s3_bucket terraform documentation>
+-- for more information.
 data S3BucketResource s = S3BucketResource'
     { _acl :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @acl@ - (Optional)
+    --
     , _bucketPrefix :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @bucket_prefix@ - (Optional)
+    --
     , _corsRule :: TF.Attr s [CorsRule s]
-    -- ^ Undocumented.
+    -- ^ @cors_rule@ - (Optional)
+    --
     , _forceDestroy :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @force_destroy@ - (Optional)
+    --
     , _lifecycleRule :: TF.Attr s [LifecycleRule s]
-    -- ^ Undocumented.
+    -- ^ @lifecycle_rule@ - (Optional)
+    --
     , _logging :: TF.Attr s [TF.Attr s (Logging s)]
-    -- ^ Undocumented.
+    -- ^ @logging@ - (Optional)
+    --
     , _policy :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @policy@ - (Optional)
+    --
     , _replicationConfiguration :: TF.Attr s [ReplicationConfiguration s]
-    -- ^ Undocumented.
+    -- ^ @replication_configuration@ - (Optional)
+    --
     , _serverSideEncryptionConfiguration :: TF.Attr s [ServerSideEncryptionConfiguration s]
-    -- ^ Undocumented.
+    -- ^ @server_side_encryption_configuration@ - (Optional)
+    --
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     , _website :: TF.Attr s [Website s]
-    -- ^ Undocumented.
+    -- ^ @website@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (S3BucketResource s) where
@@ -6546,57 +7830,68 @@ s3BucketResource =
 instance P.HasAcl (S3BucketResource s) (TF.Attr s P.Text) where
     acl =
         P.lens (_acl :: S3BucketResource s -> TF.Attr s P.Text)
-               (\s a -> s { _acl = a } :: S3BucketResource s)
+               (\s a -> s { _acl = a
+                          } :: S3BucketResource s)
 
 instance P.HasBucketPrefix (S3BucketResource s) (TF.Attr s P.Text) where
     bucketPrefix =
         P.lens (_bucketPrefix :: S3BucketResource s -> TF.Attr s P.Text)
-               (\s a -> s { _bucketPrefix = a } :: S3BucketResource s)
+               (\s a -> s { _bucketPrefix = a
+                          } :: S3BucketResource s)
 
 instance P.HasCorsRule (S3BucketResource s) (TF.Attr s [CorsRule s]) where
     corsRule =
         P.lens (_corsRule :: S3BucketResource s -> TF.Attr s [CorsRule s])
-               (\s a -> s { _corsRule = a } :: S3BucketResource s)
+               (\s a -> s { _corsRule = a
+                          } :: S3BucketResource s)
 
 instance P.HasForceDestroy (S3BucketResource s) (TF.Attr s P.Bool) where
     forceDestroy =
         P.lens (_forceDestroy :: S3BucketResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _forceDestroy = a } :: S3BucketResource s)
+               (\s a -> s { _forceDestroy = a
+                          } :: S3BucketResource s)
 
 instance P.HasLifecycleRule (S3BucketResource s) (TF.Attr s [LifecycleRule s]) where
     lifecycleRule =
         P.lens (_lifecycleRule :: S3BucketResource s -> TF.Attr s [LifecycleRule s])
-               (\s a -> s { _lifecycleRule = a } :: S3BucketResource s)
+               (\s a -> s { _lifecycleRule = a
+                          } :: S3BucketResource s)
 
 instance P.HasLogging (S3BucketResource s) (TF.Attr s [TF.Attr s (Logging s)]) where
     logging =
         P.lens (_logging :: S3BucketResource s -> TF.Attr s [TF.Attr s (Logging s)])
-               (\s a -> s { _logging = a } :: S3BucketResource s)
+               (\s a -> s { _logging = a
+                          } :: S3BucketResource s)
 
 instance P.HasPolicy (S3BucketResource s) (TF.Attr s P.Text) where
     policy =
         P.lens (_policy :: S3BucketResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policy = a } :: S3BucketResource s)
+               (\s a -> s { _policy = a
+                          } :: S3BucketResource s)
 
 instance P.HasReplicationConfiguration (S3BucketResource s) (TF.Attr s [ReplicationConfiguration s]) where
     replicationConfiguration =
         P.lens (_replicationConfiguration :: S3BucketResource s -> TF.Attr s [ReplicationConfiguration s])
-               (\s a -> s { _replicationConfiguration = a } :: S3BucketResource s)
+               (\s a -> s { _replicationConfiguration = a
+                          } :: S3BucketResource s)
 
 instance P.HasServerSideEncryptionConfiguration (S3BucketResource s) (TF.Attr s [ServerSideEncryptionConfiguration s]) where
     serverSideEncryptionConfiguration =
         P.lens (_serverSideEncryptionConfiguration :: S3BucketResource s -> TF.Attr s [ServerSideEncryptionConfiguration s])
-               (\s a -> s { _serverSideEncryptionConfiguration = a } :: S3BucketResource s)
+               (\s a -> s { _serverSideEncryptionConfiguration = a
+                          } :: S3BucketResource s)
 
 instance P.HasTags (S3BucketResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: S3BucketResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: S3BucketResource s)
+               (\s a -> s { _tags = a
+                          } :: S3BucketResource s)
 
 instance P.HasWebsite (S3BucketResource s) (TF.Attr s [Website s]) where
     website =
         P.lens (_website :: S3BucketResource s -> TF.Attr s [Website s])
-               (\s a -> s { _website = a } :: S3BucketResource s)
+               (\s a -> s { _website = a
+                          } :: S3BucketResource s)
 
 instance s ~ s' => P.HasComputedAccelerationStatus (TF.Ref s' (S3BucketResource s)) (TF.Attr s P.Text) where
     computedAccelerationStatus x = TF.compute (TF.refKey x) "acceleration_status"
@@ -6632,23 +7927,34 @@ instance s ~ s' => P.HasComputedWebsiteEndpoint (TF.Ref s' (S3BucketResource s))
     computedWebsiteEndpoint x = TF.compute (TF.refKey x) "website_endpoint"
 
 -- | @aws_s3_bucket_inventory@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_s3_bucket_inventory terraform documentation>
+-- for more information.
 data S3BucketInventoryResource s = S3BucketInventoryResource'
     { _bucket                 :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @bucket@ - (Required)
+    --
     , _destination            :: TF.Attr s (P.NonEmpty (Destination s))
-    -- ^ Undocumented.
+    -- ^ @destination@ - (Required)
+    --
     , _enabled                :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @enabled@ - (Optional)
+    --
     , _filter                 :: TF.Attr s [Filter s]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     , _includedObjectVersions :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @included_object_versions@ - (Required)
+    --
     , _name                   :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _optionalFields         :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @optional_fields@ - (Optional)
+    --
     , _schedule               :: TF.Attr s (P.NonEmpty (Schedule s))
-    -- ^ Undocumented.
+    -- ^ @schedule@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (S3BucketInventoryResource s) where
@@ -6664,11 +7970,11 @@ instance TF.IsObject (S3BucketInventoryResource s) where
         ]
 
 s3BucketInventoryResource
-    :: TF.Attr s P.Text -- ^ @bucket@
-    -> TF.Attr s (P.NonEmpty (Destination s)) -- ^ @destination@
-    -> TF.Attr s P.Text -- ^ @included_object_versions@
-    -> TF.Attr s P.Text -- ^ @name@
-    -> TF.Attr s (P.NonEmpty (Schedule s)) -- ^ @schedule@
+    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
+    -> TF.Attr s (P.NonEmpty (Destination s)) -- ^ @destination@ - 'P.destination'
+    -> TF.Attr s P.Text -- ^ @included_object_versions@ - 'P.includedObjectVersions'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s (P.NonEmpty (Schedule s)) -- ^ @schedule@ - 'P.schedule'
     -> TF.Resource P.Provider (S3BucketInventoryResource s)
 s3BucketInventoryResource _bucket _destination _includedObjectVersions _name _schedule =
     TF.newResource "aws_s3_bucket_inventory" $
@@ -6686,51 +7992,65 @@ s3BucketInventoryResource _bucket _destination _includedObjectVersions _name _sc
 instance P.HasBucket (S3BucketInventoryResource s) (TF.Attr s P.Text) where
     bucket =
         P.lens (_bucket :: S3BucketInventoryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _bucket = a } :: S3BucketInventoryResource s)
+               (\s a -> s { _bucket = a
+                          } :: S3BucketInventoryResource s)
 
 instance P.HasDestination (S3BucketInventoryResource s) (TF.Attr s (P.NonEmpty (Destination s))) where
     destination =
         P.lens (_destination :: S3BucketInventoryResource s -> TF.Attr s (P.NonEmpty (Destination s)))
-               (\s a -> s { _destination = a } :: S3BucketInventoryResource s)
+               (\s a -> s { _destination = a
+                          } :: S3BucketInventoryResource s)
 
 instance P.HasEnabled (S3BucketInventoryResource s) (TF.Attr s P.Bool) where
     enabled =
         P.lens (_enabled :: S3BucketInventoryResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: S3BucketInventoryResource s)
+               (\s a -> s { _enabled = a
+                          } :: S3BucketInventoryResource s)
 
 instance P.HasFilter (S3BucketInventoryResource s) (TF.Attr s [Filter s]) where
     filter =
         P.lens (_filter :: S3BucketInventoryResource s -> TF.Attr s [Filter s])
-               (\s a -> s { _filter = a } :: S3BucketInventoryResource s)
+               (\s a -> s { _filter = a
+                          } :: S3BucketInventoryResource s)
 
 instance P.HasIncludedObjectVersions (S3BucketInventoryResource s) (TF.Attr s P.Text) where
     includedObjectVersions =
         P.lens (_includedObjectVersions :: S3BucketInventoryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _includedObjectVersions = a } :: S3BucketInventoryResource s)
+               (\s a -> s { _includedObjectVersions = a
+                          } :: S3BucketInventoryResource s)
 
 instance P.HasName (S3BucketInventoryResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: S3BucketInventoryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: S3BucketInventoryResource s)
+               (\s a -> s { _name = a
+                          } :: S3BucketInventoryResource s)
 
 instance P.HasOptionalFields (S3BucketInventoryResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     optionalFields =
         P.lens (_optionalFields :: S3BucketInventoryResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _optionalFields = a } :: S3BucketInventoryResource s)
+               (\s a -> s { _optionalFields = a
+                          } :: S3BucketInventoryResource s)
 
 instance P.HasSchedule (S3BucketInventoryResource s) (TF.Attr s (P.NonEmpty (Schedule s))) where
     schedule =
         P.lens (_schedule :: S3BucketInventoryResource s -> TF.Attr s (P.NonEmpty (Schedule s)))
-               (\s a -> s { _schedule = a } :: S3BucketInventoryResource s)
+               (\s a -> s { _schedule = a
+                          } :: S3BucketInventoryResource s)
 
 -- | @aws_s3_bucket_metric@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_s3_bucket_metric terraform documentation>
+-- for more information.
 data S3BucketMetricResource s = S3BucketMetricResource'
     { _bucket :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @bucket@ - (Required)
+    --
     , _filter :: TF.Attr s [Filter s]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     , _name   :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (S3BucketMetricResource s) where
@@ -6741,8 +8061,8 @@ instance TF.IsObject (S3BucketMetricResource s) where
         ]
 
 s3BucketMetricResource
-    :: TF.Attr s P.Text -- ^ @bucket@
-    -> TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (S3BucketMetricResource s)
 s3BucketMetricResource _bucket _name =
     TF.newResource "aws_s3_bucket_metric" $
@@ -6755,28 +8075,38 @@ s3BucketMetricResource _bucket _name =
 instance P.HasBucket (S3BucketMetricResource s) (TF.Attr s P.Text) where
     bucket =
         P.lens (_bucket :: S3BucketMetricResource s -> TF.Attr s P.Text)
-               (\s a -> s { _bucket = a } :: S3BucketMetricResource s)
+               (\s a -> s { _bucket = a
+                          } :: S3BucketMetricResource s)
 
 instance P.HasFilter (S3BucketMetricResource s) (TF.Attr s [Filter s]) where
     filter =
         P.lens (_filter :: S3BucketMetricResource s -> TF.Attr s [Filter s])
-               (\s a -> s { _filter = a } :: S3BucketMetricResource s)
+               (\s a -> s { _filter = a
+                          } :: S3BucketMetricResource s)
 
 instance P.HasName (S3BucketMetricResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: S3BucketMetricResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: S3BucketMetricResource s)
+               (\s a -> s { _name = a
+                          } :: S3BucketMetricResource s)
 
 -- | @aws_s3_bucket_notification@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_s3_bucket_notification terraform documentation>
+-- for more information.
 data S3BucketNotificationResource s = S3BucketNotificationResource'
     { _bucket         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @bucket@ - (Required)
+    --
     , _lambdaFunction :: TF.Attr s [LambdaFunction s]
-    -- ^ Undocumented.
+    -- ^ @lambda_function@ - (Optional)
+    --
     , _queue          :: TF.Attr s [Queue s]
-    -- ^ Undocumented.
+    -- ^ @queue@ - (Optional)
+    --
     , _topic          :: TF.Attr s [Topic s]
-    -- ^ Undocumented.
+    -- ^ @topic@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (S3BucketNotificationResource s) where
@@ -6788,7 +8118,7 @@ instance TF.IsObject (S3BucketNotificationResource s) where
         ]
 
 s3BucketNotificationResource
-    :: TF.Attr s P.Text -- ^ @bucket@
+    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Resource P.Provider (S3BucketNotificationResource s)
 s3BucketNotificationResource _bucket =
     TF.newResource "aws_s3_bucket_notification" $
@@ -6802,51 +8132,83 @@ s3BucketNotificationResource _bucket =
 instance P.HasBucket (S3BucketNotificationResource s) (TF.Attr s P.Text) where
     bucket =
         P.lens (_bucket :: S3BucketNotificationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _bucket = a } :: S3BucketNotificationResource s)
+               (\s a -> s { _bucket = a
+                          } :: S3BucketNotificationResource s)
 
 instance P.HasLambdaFunction (S3BucketNotificationResource s) (TF.Attr s [LambdaFunction s]) where
     lambdaFunction =
         P.lens (_lambdaFunction :: S3BucketNotificationResource s -> TF.Attr s [LambdaFunction s])
-               (\s a -> s { _lambdaFunction = a } :: S3BucketNotificationResource s)
+               (\s a -> s { _lambdaFunction = a
+                          } :: S3BucketNotificationResource s)
 
 instance P.HasQueue (S3BucketNotificationResource s) (TF.Attr s [Queue s]) where
     queue =
         P.lens (_queue :: S3BucketNotificationResource s -> TF.Attr s [Queue s])
-               (\s a -> s { _queue = a } :: S3BucketNotificationResource s)
+               (\s a -> s { _queue = a
+                          } :: S3BucketNotificationResource s)
 
 instance P.HasTopic (S3BucketNotificationResource s) (TF.Attr s [Topic s]) where
     topic =
         P.lens (_topic :: S3BucketNotificationResource s -> TF.Attr s [Topic s])
-               (\s a -> s { _topic = a } :: S3BucketNotificationResource s)
+               (\s a -> s { _topic = a
+                          } :: S3BucketNotificationResource s)
 
 -- | @aws_s3_bucket_object@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_s3_bucket_object terraform documentation>
+-- for more information.
 data S3BucketObjectResource s = S3BucketObjectResource'
     { _acl                :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @acl@ - (Optional)
+    --
     , _bucket             :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @bucket@ - (Required)
+    --
     , _cacheControl       :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cache_control@ - (Optional)
+    --
     , _content            :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @content@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'source'
+    -- * 'contentBase64'
     , _contentBase64      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @content_base64@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'source'
+    -- * 'content'
     , _contentDisposition :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @content_disposition@ - (Optional)
+    --
     , _contentEncoding    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @content_encoding@ - (Optional)
+    --
     , _contentLanguage    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @content_language@ - (Optional)
+    --
     , _key                :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @key@ - (Required)
+    --
     , _kmsKeyId           :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @kms_key_id@ - (Optional)
+    --
     , _source             :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @source@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'contentBase64'
+    -- * 'content'
     , _tags               :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     , _websiteRedirect    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @website_redirect@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (S3BucketObjectResource s) where
@@ -6867,8 +8229,8 @@ instance TF.IsObject (S3BucketObjectResource s) where
         ]
 
 s3BucketObjectResource
-    :: TF.Attr s P.Text -- ^ @bucket@
-    -> TF.Attr s P.Text -- ^ @key@
+    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
+    -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Resource P.Provider (S3BucketObjectResource s)
 s3BucketObjectResource _bucket _key =
     TF.newResource "aws_s3_bucket_object" $
@@ -6891,67 +8253,86 @@ s3BucketObjectResource _bucket _key =
 instance P.HasAcl (S3BucketObjectResource s) (TF.Attr s P.Text) where
     acl =
         P.lens (_acl :: S3BucketObjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _acl = a } :: S3BucketObjectResource s)
+               (\s a -> s { _acl = a
+                          } :: S3BucketObjectResource s)
 
 instance P.HasBucket (S3BucketObjectResource s) (TF.Attr s P.Text) where
     bucket =
         P.lens (_bucket :: S3BucketObjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _bucket = a } :: S3BucketObjectResource s)
+               (\s a -> s { _bucket = a
+                          } :: S3BucketObjectResource s)
 
 instance P.HasCacheControl (S3BucketObjectResource s) (TF.Attr s P.Text) where
     cacheControl =
         P.lens (_cacheControl :: S3BucketObjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheControl = a } :: S3BucketObjectResource s)
+               (\s a -> s { _cacheControl = a
+                          } :: S3BucketObjectResource s)
 
 instance P.HasContent (S3BucketObjectResource s) (TF.Attr s P.Text) where
     content =
         P.lens (_content :: S3BucketObjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: S3BucketObjectResource s)
+               (\s a -> s { _content = a
+                          , _source = TF.Nil
+                          , _contentBase64 = TF.Nil
+                          } :: S3BucketObjectResource s)
 
 instance P.HasContentBase64 (S3BucketObjectResource s) (TF.Attr s P.Text) where
     contentBase64 =
         P.lens (_contentBase64 :: S3BucketObjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _contentBase64 = a } :: S3BucketObjectResource s)
+               (\s a -> s { _contentBase64 = a
+                          , _source = TF.Nil
+                          , _content = TF.Nil
+                          } :: S3BucketObjectResource s)
 
 instance P.HasContentDisposition (S3BucketObjectResource s) (TF.Attr s P.Text) where
     contentDisposition =
         P.lens (_contentDisposition :: S3BucketObjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _contentDisposition = a } :: S3BucketObjectResource s)
+               (\s a -> s { _contentDisposition = a
+                          } :: S3BucketObjectResource s)
 
 instance P.HasContentEncoding (S3BucketObjectResource s) (TF.Attr s P.Text) where
     contentEncoding =
         P.lens (_contentEncoding :: S3BucketObjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _contentEncoding = a } :: S3BucketObjectResource s)
+               (\s a -> s { _contentEncoding = a
+                          } :: S3BucketObjectResource s)
 
 instance P.HasContentLanguage (S3BucketObjectResource s) (TF.Attr s P.Text) where
     contentLanguage =
         P.lens (_contentLanguage :: S3BucketObjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _contentLanguage = a } :: S3BucketObjectResource s)
+               (\s a -> s { _contentLanguage = a
+                          } :: S3BucketObjectResource s)
 
 instance P.HasKey (S3BucketObjectResource s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: S3BucketObjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a } :: S3BucketObjectResource s)
+               (\s a -> s { _key = a
+                          } :: S3BucketObjectResource s)
 
 instance P.HasKmsKeyId (S3BucketObjectResource s) (TF.Attr s P.Text) where
     kmsKeyId =
         P.lens (_kmsKeyId :: S3BucketObjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _kmsKeyId = a } :: S3BucketObjectResource s)
+               (\s a -> s { _kmsKeyId = a
+                          } :: S3BucketObjectResource s)
 
 instance P.HasSource (S3BucketObjectResource s) (TF.Attr s P.Text) where
     source =
         P.lens (_source :: S3BucketObjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _source = a } :: S3BucketObjectResource s)
+               (\s a -> s { _source = a
+                          , _contentBase64 = TF.Nil
+                          , _content = TF.Nil
+                          } :: S3BucketObjectResource s)
 
 instance P.HasTags (S3BucketObjectResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: S3BucketObjectResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: S3BucketObjectResource s)
+               (\s a -> s { _tags = a
+                          } :: S3BucketObjectResource s)
 
 instance P.HasWebsiteRedirect (S3BucketObjectResource s) (TF.Attr s P.Text) where
     websiteRedirect =
         P.lens (_websiteRedirect :: S3BucketObjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _websiteRedirect = a } :: S3BucketObjectResource s)
+               (\s a -> s { _websiteRedirect = a
+                          } :: S3BucketObjectResource s)
 
 instance s ~ s' => P.HasComputedContentType (TF.Ref s' (S3BucketObjectResource s)) (TF.Attr s P.Text) where
     computedContentType x = TF.compute (TF.refKey x) "content_type"
@@ -6969,11 +8350,16 @@ instance s ~ s' => P.HasComputedVersionId (TF.Ref s' (S3BucketObjectResource s))
     computedVersionId x = TF.compute (TF.refKey x) "version_id"
 
 -- | @aws_s3_bucket_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_s3_bucket_policy terraform documentation>
+-- for more information.
 data S3BucketPolicyResource s = S3BucketPolicyResource'
     { _bucket :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @bucket@ - (Required)
+    --
     , _policy :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @policy@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (S3BucketPolicyResource s) where
@@ -6983,8 +8369,8 @@ instance TF.IsObject (S3BucketPolicyResource s) where
         ]
 
 s3BucketPolicyResource
-    :: TF.Attr s P.Text -- ^ @bucket@
-    -> TF.Attr s P.Text -- ^ @policy@
+    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
+    -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
     -> TF.Resource P.Provider (S3BucketPolicyResource s)
 s3BucketPolicyResource _bucket _policy =
     TF.newResource "aws_s3_bucket_policy" $
@@ -6996,31 +8382,44 @@ s3BucketPolicyResource _bucket _policy =
 instance P.HasBucket (S3BucketPolicyResource s) (TF.Attr s P.Text) where
     bucket =
         P.lens (_bucket :: S3BucketPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _bucket = a } :: S3BucketPolicyResource s)
+               (\s a -> s { _bucket = a
+                          } :: S3BucketPolicyResource s)
 
 instance P.HasPolicy (S3BucketPolicyResource s) (TF.Attr s P.Text) where
     policy =
         P.lens (_policy :: S3BucketPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policy = a } :: S3BucketPolicyResource s)
+               (\s a -> s { _policy = a
+                          } :: S3BucketPolicyResource s)
 
 -- | @aws_secretsmanager_secret@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_secretsmanager_secret terraform documentation>
+-- for more information.
 data SecretsmanagerSecretResource s = SecretsmanagerSecretResource'
     { _description          :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _kmsKeyId             :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @kms_key_id@ - (Optional)
+    --
     , _name                 :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _policy               :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @policy@ - (Optional)
+    --
     , _recoveryWindowInDays :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @recovery_window_in_days@ - (Optional)
+    --
     , _rotationLambdaArn    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @rotation_lambda_arn@ - (Optional)
+    --
     , _rotationRules        :: TF.Attr s [RotationRules s]
-    -- ^ Undocumented.
+    -- ^ @rotation_rules@ - (Optional)
+    --
     , _tags                 :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SecretsmanagerSecretResource s) where
@@ -7036,7 +8435,7 @@ instance TF.IsObject (SecretsmanagerSecretResource s) where
         ]
 
 secretsmanagerSecretResource
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (SecretsmanagerSecretResource s)
 secretsmanagerSecretResource _name =
     TF.newResource "aws_secretsmanager_secret" $
@@ -7054,42 +8453,50 @@ secretsmanagerSecretResource _name =
 instance P.HasDescription (SecretsmanagerSecretResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: SecretsmanagerSecretResource s)
+               (\s a -> s { _description = a
+                          } :: SecretsmanagerSecretResource s)
 
 instance P.HasKmsKeyId (SecretsmanagerSecretResource s) (TF.Attr s P.Text) where
     kmsKeyId =
         P.lens (_kmsKeyId :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
-               (\s a -> s { _kmsKeyId = a } :: SecretsmanagerSecretResource s)
+               (\s a -> s { _kmsKeyId = a
+                          } :: SecretsmanagerSecretResource s)
 
 instance P.HasName (SecretsmanagerSecretResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SecretsmanagerSecretResource s)
+               (\s a -> s { _name = a
+                          } :: SecretsmanagerSecretResource s)
 
 instance P.HasPolicy (SecretsmanagerSecretResource s) (TF.Attr s P.Text) where
     policy =
         P.lens (_policy :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policy = a } :: SecretsmanagerSecretResource s)
+               (\s a -> s { _policy = a
+                          } :: SecretsmanagerSecretResource s)
 
 instance P.HasRecoveryWindowInDays (SecretsmanagerSecretResource s) (TF.Attr s P.Integer) where
     recoveryWindowInDays =
         P.lens (_recoveryWindowInDays :: SecretsmanagerSecretResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _recoveryWindowInDays = a } :: SecretsmanagerSecretResource s)
+               (\s a -> s { _recoveryWindowInDays = a
+                          } :: SecretsmanagerSecretResource s)
 
 instance P.HasRotationLambdaArn (SecretsmanagerSecretResource s) (TF.Attr s P.Text) where
     rotationLambdaArn =
         P.lens (_rotationLambdaArn :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
-               (\s a -> s { _rotationLambdaArn = a } :: SecretsmanagerSecretResource s)
+               (\s a -> s { _rotationLambdaArn = a
+                          } :: SecretsmanagerSecretResource s)
 
 instance P.HasRotationRules (SecretsmanagerSecretResource s) (TF.Attr s [RotationRules s]) where
     rotationRules =
         P.lens (_rotationRules :: SecretsmanagerSecretResource s -> TF.Attr s [RotationRules s])
-               (\s a -> s { _rotationRules = a } :: SecretsmanagerSecretResource s)
+               (\s a -> s { _rotationRules = a
+                          } :: SecretsmanagerSecretResource s)
 
 instance P.HasTags (SecretsmanagerSecretResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: SecretsmanagerSecretResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: SecretsmanagerSecretResource s)
+               (\s a -> s { _tags = a
+                          } :: SecretsmanagerSecretResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SecretsmanagerSecretResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -7098,11 +8505,16 @@ instance s ~ s' => P.HasComputedRotationEnabled (TF.Ref s' (SecretsmanagerSecret
     computedRotationEnabled x = TF.compute (TF.refKey x) "rotation_enabled"
 
 -- | @aws_secretsmanager_secret_version@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_secretsmanager_secret_version terraform documentation>
+-- for more information.
 data SecretsmanagerSecretVersionResource s = SecretsmanagerSecretVersionResource'
     { _secretId     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @secret_id@ - (Required)
+    --
     , _secretString :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @secret_string@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SecretsmanagerSecretVersionResource s) where
@@ -7112,8 +8524,8 @@ instance TF.IsObject (SecretsmanagerSecretVersionResource s) where
         ]
 
 secretsmanagerSecretVersionResource
-    :: TF.Attr s P.Text -- ^ @secret_id@
-    -> TF.Attr s P.Text -- ^ @secret_string@
+    :: TF.Attr s P.Text -- ^ @secret_id@ - 'P.secretId'
+    -> TF.Attr s P.Text -- ^ @secret_string@ - 'P.secretString'
     -> TF.Resource P.Provider (SecretsmanagerSecretVersionResource s)
 secretsmanagerSecretVersionResource _secretId _secretString =
     TF.newResource "aws_secretsmanager_secret_version" $
@@ -7125,12 +8537,14 @@ secretsmanagerSecretVersionResource _secretId _secretString =
 instance P.HasSecretId (SecretsmanagerSecretVersionResource s) (TF.Attr s P.Text) where
     secretId =
         P.lens (_secretId :: SecretsmanagerSecretVersionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _secretId = a } :: SecretsmanagerSecretVersionResource s)
+               (\s a -> s { _secretId = a
+                          } :: SecretsmanagerSecretVersionResource s)
 
 instance P.HasSecretString (SecretsmanagerSecretVersionResource s) (TF.Attr s P.Text) where
     secretString =
         P.lens (_secretString :: SecretsmanagerSecretVersionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _secretString = a } :: SecretsmanagerSecretVersionResource s)
+               (\s a -> s { _secretString = a
+                          } :: SecretsmanagerSecretVersionResource s)
 
 instance s ~ s' => P.HasComputedVersionId (TF.Ref s' (SecretsmanagerSecretVersionResource s)) (TF.Attr s P.Text) where
     computedVersionId x = TF.compute (TF.refKey x) "version_id"
@@ -7139,15 +8553,22 @@ instance s ~ s' => P.HasComputedVersionStages (TF.Ref s' (SecretsmanagerSecretVe
     computedVersionStages x = TF.compute (TF.refKey x) "version_stages"
 
 -- | @aws_security_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_security_group terraform documentation>
+-- for more information.
 data SecurityGroupResource s = SecurityGroupResource'
     { _description         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _namePrefix          :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name_prefix@ - (Optional)
+    --
     , _revokeRulesOnDelete :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @revoke_rules_on_delete@ - (Optional)
+    --
     , _tags                :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SecurityGroupResource s) where
@@ -7172,22 +8593,26 @@ securityGroupResource =
 instance P.HasDescription (SecurityGroupResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: SecurityGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: SecurityGroupResource s)
+               (\s a -> s { _description = a
+                          } :: SecurityGroupResource s)
 
 instance P.HasNamePrefix (SecurityGroupResource s) (TF.Attr s P.Text) where
     namePrefix =
         P.lens (_namePrefix :: SecurityGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _namePrefix = a } :: SecurityGroupResource s)
+               (\s a -> s { _namePrefix = a
+                          } :: SecurityGroupResource s)
 
 instance P.HasRevokeRulesOnDelete (SecurityGroupResource s) (TF.Attr s P.Bool) where
     revokeRulesOnDelete =
         P.lens (_revokeRulesOnDelete :: SecurityGroupResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _revokeRulesOnDelete = a } :: SecurityGroupResource s)
+               (\s a -> s { _revokeRulesOnDelete = a
+                          } :: SecurityGroupResource s)
 
 instance P.HasTags (SecurityGroupResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: SecurityGroupResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: SecurityGroupResource s)
+               (\s a -> s { _tags = a
+                          } :: SecurityGroupResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -7208,27 +8633,41 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SecurityGroupResource s)) (TF.
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_security_group_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_security_group_rule terraform documentation>
+-- for more information.
 data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     { _cidrBlocks      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @cidr_blocks@ - (Optional)
+    --
     , _description     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _fromPort        :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @from_port@ - (Required)
+    --
     , _ipv6CidrBlocks  :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @ipv6_cidr_blocks@ - (Optional)
+    --
     , _prefixListIds   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @prefix_list_ids@ - (Optional)
+    --
     , _protocol        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @protocol@ - (Required)
+    --
     , _securityGroupId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @security_group_id@ - (Required)
+    --
     , _self            :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @self@ - (Optional)
+    --
     , _toPort          :: TF.Attr s P.Integer
-    -- ^ Undocumented.
+    -- ^ @to_port@ - (Required)
+    --
     , _type'           :: TF.Attr s P.Text
-    -- ^ Type of rule, ingress (inbound) or egress (outbound).
+    -- ^ @type@ - (Required)
+    -- Type of rule, ingress (inbound) or egress (outbound).
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SecurityGroupRuleResource s) where
@@ -7246,11 +8685,11 @@ instance TF.IsObject (SecurityGroupRuleResource s) where
         ]
 
 securityGroupRuleResource
-    :: TF.Attr s P.Integer -- ^ @from_port@
-    -> TF.Attr s P.Text -- ^ @protocol@
-    -> TF.Attr s P.Text -- ^ @security_group_id@
-    -> TF.Attr s P.Integer -- ^ @to_port@
-    -> TF.Attr s P.Text -- ^ @type@
+    :: TF.Attr s P.Integer -- ^ @from_port@ - 'P.fromPort'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
+    -> TF.Attr s P.Integer -- ^ @to_port@ - 'P.toPort'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Resource P.Provider (SecurityGroupRuleResource s)
 securityGroupRuleResource _fromPort _protocol _securityGroupId _toPort _type' =
     TF.newResource "aws_security_group_rule" $
@@ -7270,64 +8709,80 @@ securityGroupRuleResource _fromPort _protocol _securityGroupId _toPort _type' =
 instance P.HasCidrBlocks (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
     cidrBlocks =
         P.lens (_cidrBlocks :: SecurityGroupRuleResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _cidrBlocks = a } :: SecurityGroupRuleResource s)
+               (\s a -> s { _cidrBlocks = a
+                          } :: SecurityGroupRuleResource s)
 
 instance P.HasDescription (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: SecurityGroupRuleResource s)
+               (\s a -> s { _description = a
+                          } :: SecurityGroupRuleResource s)
 
 instance P.HasFromPort (SecurityGroupRuleResource s) (TF.Attr s P.Integer) where
     fromPort =
         P.lens (_fromPort :: SecurityGroupRuleResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _fromPort = a } :: SecurityGroupRuleResource s)
+               (\s a -> s { _fromPort = a
+                          } :: SecurityGroupRuleResource s)
 
 instance P.HasIpv6CidrBlocks (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
     ipv6CidrBlocks =
         P.lens (_ipv6CidrBlocks :: SecurityGroupRuleResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _ipv6CidrBlocks = a } :: SecurityGroupRuleResource s)
+               (\s a -> s { _ipv6CidrBlocks = a
+                          } :: SecurityGroupRuleResource s)
 
 instance P.HasPrefixListIds (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
     prefixListIds =
         P.lens (_prefixListIds :: SecurityGroupRuleResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _prefixListIds = a } :: SecurityGroupRuleResource s)
+               (\s a -> s { _prefixListIds = a
+                          } :: SecurityGroupRuleResource s)
 
 instance P.HasProtocol (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     protocol =
         P.lens (_protocol :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a } :: SecurityGroupRuleResource s)
+               (\s a -> s { _protocol = a
+                          } :: SecurityGroupRuleResource s)
 
 instance P.HasSecurityGroupId (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     securityGroupId =
         P.lens (_securityGroupId :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _securityGroupId = a } :: SecurityGroupRuleResource s)
+               (\s a -> s { _securityGroupId = a
+                          } :: SecurityGroupRuleResource s)
 
 instance P.HasSelf (SecurityGroupRuleResource s) (TF.Attr s P.Bool) where
     self =
         P.lens (_self :: SecurityGroupRuleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _self = a } :: SecurityGroupRuleResource s)
+               (\s a -> s { _self = a
+                          } :: SecurityGroupRuleResource s)
 
 instance P.HasToPort (SecurityGroupRuleResource s) (TF.Attr s P.Integer) where
     toPort =
         P.lens (_toPort :: SecurityGroupRuleResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _toPort = a } :: SecurityGroupRuleResource s)
+               (\s a -> s { _toPort = a
+                          } :: SecurityGroupRuleResource s)
 
 instance P.HasType' (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: SecurityGroupRuleResource s)
+               (\s a -> s { _type' = a
+                          } :: SecurityGroupRuleResource s)
 
 instance s ~ s' => P.HasComputedSourceSecurityGroupId (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedSourceSecurityGroupId x = TF.compute (TF.refKey x) "source_security_group_id"
 
 -- | @aws_service_discovery_private_dns_namespace@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_service_discovery_private_dns_namespace terraform documentation>
+-- for more information.
 data ServiceDiscoveryPrivateDnsNamespaceResource s = ServiceDiscoveryPrivateDnsNamespaceResource'
     { _description :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _name        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _vpc         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @vpc@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ServiceDiscoveryPrivateDnsNamespaceResource s) where
@@ -7338,8 +8793,8 @@ instance TF.IsObject (ServiceDiscoveryPrivateDnsNamespaceResource s) where
         ]
 
 serviceDiscoveryPrivateDnsNamespaceResource
-    :: TF.Attr s P.Text -- ^ @name@
-    -> TF.Attr s P.Text -- ^ @vpc@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @vpc@ - 'P.vpc'
     -> TF.Resource P.Provider (ServiceDiscoveryPrivateDnsNamespaceResource s)
 serviceDiscoveryPrivateDnsNamespaceResource _name _vpc =
     TF.newResource "aws_service_discovery_private_dns_namespace" $
@@ -7352,17 +8807,20 @@ serviceDiscoveryPrivateDnsNamespaceResource _name _vpc =
 instance P.HasDescription (ServiceDiscoveryPrivateDnsNamespaceResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: ServiceDiscoveryPrivateDnsNamespaceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: ServiceDiscoveryPrivateDnsNamespaceResource s)
+               (\s a -> s { _description = a
+                          } :: ServiceDiscoveryPrivateDnsNamespaceResource s)
 
 instance P.HasName (ServiceDiscoveryPrivateDnsNamespaceResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ServiceDiscoveryPrivateDnsNamespaceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ServiceDiscoveryPrivateDnsNamespaceResource s)
+               (\s a -> s { _name = a
+                          } :: ServiceDiscoveryPrivateDnsNamespaceResource s)
 
 instance P.HasVpc (ServiceDiscoveryPrivateDnsNamespaceResource s) (TF.Attr s P.Text) where
     vpc =
         P.lens (_vpc :: ServiceDiscoveryPrivateDnsNamespaceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vpc = a } :: ServiceDiscoveryPrivateDnsNamespaceResource s)
+               (\s a -> s { _vpc = a
+                          } :: ServiceDiscoveryPrivateDnsNamespaceResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ServiceDiscoveryPrivateDnsNamespaceResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -7371,11 +8829,16 @@ instance s ~ s' => P.HasComputedHostedZone (TF.Ref s' (ServiceDiscoveryPrivateDn
     computedHostedZone x = TF.compute (TF.refKey x) "hosted_zone"
 
 -- | @aws_service_discovery_public_dns_namespace@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_service_discovery_public_dns_namespace terraform documentation>
+-- for more information.
 data ServiceDiscoveryPublicDnsNamespaceResource s = ServiceDiscoveryPublicDnsNamespaceResource'
     { _description :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _name        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ServiceDiscoveryPublicDnsNamespaceResource s) where
@@ -7385,7 +8848,7 @@ instance TF.IsObject (ServiceDiscoveryPublicDnsNamespaceResource s) where
         ]
 
 serviceDiscoveryPublicDnsNamespaceResource
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (ServiceDiscoveryPublicDnsNamespaceResource s)
 serviceDiscoveryPublicDnsNamespaceResource _name =
     TF.newResource "aws_service_discovery_public_dns_namespace" $
@@ -7397,12 +8860,14 @@ serviceDiscoveryPublicDnsNamespaceResource _name =
 instance P.HasDescription (ServiceDiscoveryPublicDnsNamespaceResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: ServiceDiscoveryPublicDnsNamespaceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: ServiceDiscoveryPublicDnsNamespaceResource s)
+               (\s a -> s { _description = a
+                          } :: ServiceDiscoveryPublicDnsNamespaceResource s)
 
 instance P.HasName (ServiceDiscoveryPublicDnsNamespaceResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ServiceDiscoveryPublicDnsNamespaceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ServiceDiscoveryPublicDnsNamespaceResource s)
+               (\s a -> s { _name = a
+                          } :: ServiceDiscoveryPublicDnsNamespaceResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ServiceDiscoveryPublicDnsNamespaceResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -7411,17 +8876,25 @@ instance s ~ s' => P.HasComputedHostedZone (TF.Ref s' (ServiceDiscoveryPublicDns
     computedHostedZone x = TF.compute (TF.refKey x) "hosted_zone"
 
 -- | @aws_service_discovery_service@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_service_discovery_service terraform documentation>
+-- for more information.
 data ServiceDiscoveryServiceResource s = ServiceDiscoveryServiceResource'
     { _description             :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @description@ - (Optional)
+    --
     , _dnsConfig               :: TF.Attr s [DnsConfig s]
-    -- ^ Undocumented.
+    -- ^ @dns_config@ - (Required)
+    --
     , _healthCheckConfig       :: TF.Attr s [HealthCheckConfig s]
-    -- ^ Undocumented.
+    -- ^ @health_check_config@ - (Optional)
+    --
     , _healthCheckCustomConfig :: TF.Attr s [HealthCheckCustomConfig s]
-    -- ^ Undocumented.
+    -- ^ @health_check_custom_config@ - (Optional)
+    --
     , _name                    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ServiceDiscoveryServiceResource s) where
@@ -7434,8 +8907,8 @@ instance TF.IsObject (ServiceDiscoveryServiceResource s) where
         ]
 
 serviceDiscoveryServiceResource
-    :: TF.Attr s [DnsConfig s] -- ^ @dns_config@
-    -> TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s [DnsConfig s] -- ^ @dns_config@ - 'P.dnsConfig'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (ServiceDiscoveryServiceResource s)
 serviceDiscoveryServiceResource _dnsConfig _name =
     TF.newResource "aws_service_discovery_service" $
@@ -7450,39 +8923,50 @@ serviceDiscoveryServiceResource _dnsConfig _name =
 instance P.HasDescription (ServiceDiscoveryServiceResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: ServiceDiscoveryServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: ServiceDiscoveryServiceResource s)
+               (\s a -> s { _description = a
+                          } :: ServiceDiscoveryServiceResource s)
 
 instance P.HasDnsConfig (ServiceDiscoveryServiceResource s) (TF.Attr s [DnsConfig s]) where
     dnsConfig =
         P.lens (_dnsConfig :: ServiceDiscoveryServiceResource s -> TF.Attr s [DnsConfig s])
-               (\s a -> s { _dnsConfig = a } :: ServiceDiscoveryServiceResource s)
+               (\s a -> s { _dnsConfig = a
+                          } :: ServiceDiscoveryServiceResource s)
 
 instance P.HasHealthCheckConfig (ServiceDiscoveryServiceResource s) (TF.Attr s [HealthCheckConfig s]) where
     healthCheckConfig =
         P.lens (_healthCheckConfig :: ServiceDiscoveryServiceResource s -> TF.Attr s [HealthCheckConfig s])
-               (\s a -> s { _healthCheckConfig = a } :: ServiceDiscoveryServiceResource s)
+               (\s a -> s { _healthCheckConfig = a
+                          } :: ServiceDiscoveryServiceResource s)
 
 instance P.HasHealthCheckCustomConfig (ServiceDiscoveryServiceResource s) (TF.Attr s [HealthCheckCustomConfig s]) where
     healthCheckCustomConfig =
         P.lens (_healthCheckCustomConfig :: ServiceDiscoveryServiceResource s -> TF.Attr s [HealthCheckCustomConfig s])
-               (\s a -> s { _healthCheckCustomConfig = a } :: ServiceDiscoveryServiceResource s)
+               (\s a -> s { _healthCheckCustomConfig = a
+                          } :: ServiceDiscoveryServiceResource s)
 
 instance P.HasName (ServiceDiscoveryServiceResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ServiceDiscoveryServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ServiceDiscoveryServiceResource s)
+               (\s a -> s { _name = a
+                          } :: ServiceDiscoveryServiceResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ServiceDiscoveryServiceResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
 -- | @aws_servicecatalog_portfolio@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_servicecatalog_portfolio terraform documentation>
+-- for more information.
 data ServicecatalogPortfolioResource s = ServicecatalogPortfolioResource'
     { _name         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     , _providerName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @provider_name@ - (Optional)
+    --
     , _tags         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @tags@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ServicecatalogPortfolioResource s) where
@@ -7493,7 +8977,7 @@ instance TF.IsObject (ServicecatalogPortfolioResource s) where
         ]
 
 servicecatalogPortfolioResource
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (ServicecatalogPortfolioResource s)
 servicecatalogPortfolioResource _name =
     TF.newResource "aws_servicecatalog_portfolio" $
@@ -7506,17 +8990,20 @@ servicecatalogPortfolioResource _name =
 instance P.HasName (ServicecatalogPortfolioResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ServicecatalogPortfolioResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ServicecatalogPortfolioResource s)
+               (\s a -> s { _name = a
+                          } :: ServicecatalogPortfolioResource s)
 
 instance P.HasProviderName (ServicecatalogPortfolioResource s) (TF.Attr s P.Text) where
     providerName =
         P.lens (_providerName :: ServicecatalogPortfolioResource s -> TF.Attr s P.Text)
-               (\s a -> s { _providerName = a } :: ServicecatalogPortfolioResource s)
+               (\s a -> s { _providerName = a
+                          } :: ServicecatalogPortfolioResource s)
 
 instance P.HasTags (ServicecatalogPortfolioResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: ServicecatalogPortfolioResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: ServicecatalogPortfolioResource s)
+               (\s a -> s { _tags = a
+                          } :: ServicecatalogPortfolioResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ServicecatalogPortfolioResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -7528,9 +9015,13 @@ instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ServicecatalogPortfolioR
     computedDescription x = TF.compute (TF.refKey x) "description"
 
 -- | @aws_ses_active_receipt_rule_set@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ses_active_receipt_rule_set terraform documentation>
+-- for more information.
 data SesActiveReceiptRuleSetResource s = SesActiveReceiptRuleSetResource'
     { _ruleSetName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @rule_set_name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SesActiveReceiptRuleSetResource s) where
@@ -7539,7 +9030,7 @@ instance TF.IsObject (SesActiveReceiptRuleSetResource s) where
         ]
 
 sesActiveReceiptRuleSetResource
-    :: TF.Attr s P.Text -- ^ @rule_set_name@
+    :: TF.Attr s P.Text -- ^ @rule_set_name@ - 'P.ruleSetName'
     -> TF.Resource P.Provider (SesActiveReceiptRuleSetResource s)
 sesActiveReceiptRuleSetResource _ruleSetName =
     TF.newResource "aws_ses_active_receipt_rule_set" $
@@ -7550,12 +9041,17 @@ sesActiveReceiptRuleSetResource _ruleSetName =
 instance P.HasRuleSetName (SesActiveReceiptRuleSetResource s) (TF.Attr s P.Text) where
     ruleSetName =
         P.lens (_ruleSetName :: SesActiveReceiptRuleSetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ruleSetName = a } :: SesActiveReceiptRuleSetResource s)
+               (\s a -> s { _ruleSetName = a
+                          } :: SesActiveReceiptRuleSetResource s)
 
 -- | @aws_ses_configuration_set@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ses_configuration_set terraform documentation>
+-- for more information.
 data SesConfigurationSetResource s = SesConfigurationSetResource'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SesConfigurationSetResource s) where
@@ -7564,7 +9060,7 @@ instance TF.IsObject (SesConfigurationSetResource s) where
         ]
 
 sesConfigurationSetResource
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (SesConfigurationSetResource s)
 sesConfigurationSetResource _name =
     TF.newResource "aws_ses_configuration_set" $
@@ -7575,12 +9071,17 @@ sesConfigurationSetResource _name =
 instance P.HasName (SesConfigurationSetResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SesConfigurationSetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SesConfigurationSetResource s)
+               (\s a -> s { _name = a
+                          } :: SesConfigurationSetResource s)
 
 -- | @aws_ses_domain_dkim@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ses_domain_dkim terraform documentation>
+-- for more information.
 data SesDomainDkimResource s = SesDomainDkimResource'
     { _domain :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @domain@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SesDomainDkimResource s) where
@@ -7589,7 +9090,7 @@ instance TF.IsObject (SesDomainDkimResource s) where
         ]
 
 sesDomainDkimResource
-    :: TF.Attr s P.Text -- ^ @domain@
+    :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Resource P.Provider (SesDomainDkimResource s)
 sesDomainDkimResource _domain =
     TF.newResource "aws_ses_domain_dkim" $
@@ -7600,15 +9101,20 @@ sesDomainDkimResource _domain =
 instance P.HasDomain (SesDomainDkimResource s) (TF.Attr s P.Text) where
     domain =
         P.lens (_domain :: SesDomainDkimResource s -> TF.Attr s P.Text)
-               (\s a -> s { _domain = a } :: SesDomainDkimResource s)
+               (\s a -> s { _domain = a
+                          } :: SesDomainDkimResource s)
 
 instance s ~ s' => P.HasComputedDkimTokens (TF.Ref s' (SesDomainDkimResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedDkimTokens x = TF.compute (TF.refKey x) "dkim_tokens"
 
 -- | @aws_ses_domain_identity@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ses_domain_identity terraform documentation>
+-- for more information.
 data SesDomainIdentityResource s = SesDomainIdentityResource'
     { _domain :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @domain@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SesDomainIdentityResource s) where
@@ -7617,7 +9123,7 @@ instance TF.IsObject (SesDomainIdentityResource s) where
         ]
 
 sesDomainIdentityResource
-    :: TF.Attr s P.Text -- ^ @domain@
+    :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Resource P.Provider (SesDomainIdentityResource s)
 sesDomainIdentityResource _domain =
     TF.newResource "aws_ses_domain_identity" $
@@ -7628,7 +9134,8 @@ sesDomainIdentityResource _domain =
 instance P.HasDomain (SesDomainIdentityResource s) (TF.Attr s P.Text) where
     domain =
         P.lens (_domain :: SesDomainIdentityResource s -> TF.Attr s P.Text)
-               (\s a -> s { _domain = a } :: SesDomainIdentityResource s)
+               (\s a -> s { _domain = a
+                          } :: SesDomainIdentityResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SesDomainIdentityResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -7637,9 +9144,13 @@ instance s ~ s' => P.HasComputedVerificationToken (TF.Ref s' (SesDomainIdentityR
     computedVerificationToken x = TF.compute (TF.refKey x) "verification_token"
 
 -- | @aws_ses_domain_identity_verification@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ses_domain_identity_verification terraform documentation>
+-- for more information.
 data SesDomainIdentityVerificationResource s = SesDomainIdentityVerificationResource'
     { _domain :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @domain@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SesDomainIdentityVerificationResource s) where
@@ -7648,7 +9159,7 @@ instance TF.IsObject (SesDomainIdentityVerificationResource s) where
         ]
 
 sesDomainIdentityVerificationResource
-    :: TF.Attr s P.Text -- ^ @domain@
+    :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Resource P.Provider (SesDomainIdentityVerificationResource s)
 sesDomainIdentityVerificationResource _domain =
     TF.newResource "aws_ses_domain_identity_verification" $
@@ -7659,19 +9170,26 @@ sesDomainIdentityVerificationResource _domain =
 instance P.HasDomain (SesDomainIdentityVerificationResource s) (TF.Attr s P.Text) where
     domain =
         P.lens (_domain :: SesDomainIdentityVerificationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _domain = a } :: SesDomainIdentityVerificationResource s)
+               (\s a -> s { _domain = a
+                          } :: SesDomainIdentityVerificationResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SesDomainIdentityVerificationResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
 -- | @aws_ses_domain_mail_from@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ses_domain_mail_from terraform documentation>
+-- for more information.
 data SesDomainMailFromResource s = SesDomainMailFromResource'
     { _behaviorOnMxFailure :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @behavior_on_mx_failure@ - (Optional)
+    --
     , _domain              :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @domain@ - (Required)
+    --
     , _mailFromDomain      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @mail_from_domain@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (SesDomainMailFromResource s) where
@@ -7682,8 +9200,8 @@ instance TF.IsObject (SesDomainMailFromResource s) where
         ]
 
 sesDomainMailFromResource
-    :: TF.Attr s P.Text -- ^ @domain@
-    -> TF.Attr s P.Text -- ^ @mail_from_domain@
+    :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
+    -> TF.Attr s P.Text -- ^ @mail_from_domain@ - 'P.mailFromDomain'
     -> TF.Resource P.Provider (SesDomainMailFromResource s)
 sesDomainMailFromResource _domain _mailFromDomain =
     TF.newResource "aws_ses_domain_mail_from" $
@@ -7696,14 +9214,17 @@ sesDomainMailFromResource _domain _mailFromDomain =
 instance P.HasBehaviorOnMxFailure (SesDomainMailFromResource s) (TF.Attr s P.Text) where
     behaviorOnMxFailure =
         P.lens (_behaviorOnMxFailure :: SesDomainMailFromResource s -> TF.Attr s P.Text)
-               (\s a -> s { _behaviorOnMxFailure = a } :: SesDomainMailFromResource s)
+               (\s a -> s { _behaviorOnMxFailure = a
+                          } :: SesDomainMailFromResource s)
 
 instance P.HasDomain (SesDomainMailFromResource s) (TF.Attr s P.Text) where
     domain =
         P.lens (_domain :: SesDomainMailFromResource s -> TF.Attr s P.Text)
-               (\s a -> s { _domain = a } :: SesDomainMailFromResource s)
+               (\s a -> s { _domain = a
+                          } :: SesDomainMailFromResource s)
 
 instance P.HasMailFromDomain (SesDomainMailFromResource s) (TF.Attr s P.Text) where
     mailFromDomain =
         P.lens (_mailFromDomain :: SesDomainMailFromResource s -> TF.Attr s P.Text)
-               (\s a -> s { _mailFromDomain = a } :: SesDomainMailFromResource s)
+               (\s a -> s { _mailFromDomain = a
+                          } :: SesDomainMailFromResource s)

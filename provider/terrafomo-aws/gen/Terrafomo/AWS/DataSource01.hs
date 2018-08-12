@@ -4,7 +4,7 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.AWS.DataSource01
@@ -17,323 +17,323 @@
 module Terrafomo.AWS.DataSource01
     (
     -- * DataSource Datatypes
-    -- **  AcmCertificateData
+    -- ** aws_acm_certificate
       AcmCertificateData (..)
     , acmCertificateData
 
-    -- **  AcmpcaCertificateAuthorityData
+    -- ** aws_acmpca_certificate_authority
     , AcmpcaCertificateAuthorityData (..)
     , acmpcaCertificateAuthorityData
 
-    -- **  AlbData
+    -- ** aws_alb
     , AlbData (..)
     , albData
 
-    -- **  AlbListenerData
+    -- ** aws_alb_listener
     , AlbListenerData (..)
     , albListenerData
 
-    -- **  AlbTargetGroupData
+    -- ** aws_alb_target_group
     , AlbTargetGroupData (..)
     , albTargetGroupData
 
-    -- **  AmiData
+    -- ** aws_ami
     , AmiData (..)
     , amiData
 
-    -- **  AmiIdsData
+    -- ** aws_ami_ids
     , AmiIdsData (..)
     , amiIdsData
 
-    -- **  ApiGatewayRestApiData
+    -- ** aws_api_gateway_rest_api
     , ApiGatewayRestApiData (..)
     , apiGatewayRestApiData
 
-    -- **  ArnData
+    -- ** aws_arn
     , ArnData (..)
     , arnData
 
-    -- **  AutoscalingGroupsData
+    -- ** aws_autoscaling_groups
     , AutoscalingGroupsData (..)
     , autoscalingGroupsData
 
-    -- **  AvailabilityZoneData
+    -- ** aws_availability_zone
     , AvailabilityZoneData (..)
     , availabilityZoneData
 
-    -- **  AvailabilityZonesData
+    -- ** aws_availability_zones
     , AvailabilityZonesData (..)
     , availabilityZonesData
 
-    -- **  BatchComputeEnvironmentData
+    -- ** aws_batch_compute_environment
     , BatchComputeEnvironmentData (..)
     , batchComputeEnvironmentData
 
-    -- **  BatchJobQueueData
+    -- ** aws_batch_job_queue
     , BatchJobQueueData (..)
     , batchJobQueueData
 
-    -- **  BillingServiceAccountData
+    -- ** aws_billing_service_account
     , BillingServiceAccountData (..)
     , billingServiceAccountData
 
-    -- **  CallerIdentityData
+    -- ** aws_caller_identity
     , CallerIdentityData (..)
     , callerIdentityData
 
-    -- **  CanonicalUserIdData
+    -- ** aws_canonical_user_id
     , CanonicalUserIdData (..)
     , canonicalUserIdData
 
-    -- **  CloudformationExportData
+    -- ** aws_cloudformation_export
     , CloudformationExportData (..)
     , cloudformationExportData
 
-    -- **  CloudformationStackData
+    -- ** aws_cloudformation_stack
     , CloudformationStackData (..)
     , cloudformationStackData
 
-    -- **  CloudtrailServiceAccountData
+    -- ** aws_cloudtrail_service_account
     , CloudtrailServiceAccountData (..)
     , cloudtrailServiceAccountData
 
-    -- **  CloudwatchLogGroupData
+    -- ** aws_cloudwatch_log_group
     , CloudwatchLogGroupData (..)
     , cloudwatchLogGroupData
 
-    -- **  CodecommitRepositoryData
+    -- ** aws_codecommit_repository
     , CodecommitRepositoryData (..)
     , codecommitRepositoryData
 
-    -- **  CognitoUserPoolsData
+    -- ** aws_cognito_user_pools
     , CognitoUserPoolsData (..)
     , cognitoUserPoolsData
 
-    -- **  DbClusterSnapshotData
+    -- ** aws_db_cluster_snapshot
     , DbClusterSnapshotData (..)
     , dbClusterSnapshotData
 
-    -- **  DbInstanceData
+    -- ** aws_db_instance
     , DbInstanceData (..)
     , dbInstanceData
 
-    -- **  DbSnapshotData
+    -- ** aws_db_snapshot
     , DbSnapshotData (..)
     , dbSnapshotData
 
-    -- **  DxGatewayData
+    -- ** aws_dx_gateway
     , DxGatewayData (..)
     , dxGatewayData
 
-    -- **  DynamodbTableData
+    -- ** aws_dynamodb_table
     , DynamodbTableData (..)
     , dynamodbTableData
 
-    -- **  EbsSnapshotData
+    -- ** aws_ebs_snapshot
     , EbsSnapshotData (..)
     , ebsSnapshotData
 
-    -- **  EbsSnapshotIdsData
+    -- ** aws_ebs_snapshot_ids
     , EbsSnapshotIdsData (..)
     , ebsSnapshotIdsData
 
-    -- **  EbsVolumeData
+    -- ** aws_ebs_volume
     , EbsVolumeData (..)
     , ebsVolumeData
 
-    -- **  EcrRepositoryData
+    -- ** aws_ecr_repository
     , EcrRepositoryData (..)
     , ecrRepositoryData
 
-    -- **  EcsClusterData
+    -- ** aws_ecs_cluster
     , EcsClusterData (..)
     , ecsClusterData
 
-    -- **  EcsContainerDefinitionData
+    -- ** aws_ecs_container_definition
     , EcsContainerDefinitionData (..)
     , ecsContainerDefinitionData
 
-    -- **  EcsServiceData
+    -- ** aws_ecs_service
     , EcsServiceData (..)
     , ecsServiceData
 
-    -- **  EcsTaskDefinitionData
+    -- ** aws_ecs_task_definition
     , EcsTaskDefinitionData (..)
     , ecsTaskDefinitionData
 
-    -- **  EfsFileSystemData
+    -- ** aws_efs_file_system
     , EfsFileSystemData (..)
     , efsFileSystemData
 
-    -- **  EfsMountTargetData
+    -- ** aws_efs_mount_target
     , EfsMountTargetData (..)
     , efsMountTargetData
 
-    -- **  EipData
+    -- ** aws_eip
     , EipData (..)
     , eipData
 
-    -- **  EksClusterData
+    -- ** aws_eks_cluster
     , EksClusterData (..)
     , eksClusterData
 
-    -- **  ElasticBeanstalkHostedZoneData
+    -- ** aws_elastic_beanstalk_hosted_zone
     , ElasticBeanstalkHostedZoneData (..)
     , elasticBeanstalkHostedZoneData
 
-    -- **  ElasticBeanstalkSolutionStackData
+    -- ** aws_elastic_beanstalk_solution_stack
     , ElasticBeanstalkSolutionStackData (..)
     , elasticBeanstalkSolutionStackData
 
-    -- **  ElasticacheClusterData
+    -- ** aws_elasticache_cluster
     , ElasticacheClusterData (..)
     , elasticacheClusterData
 
-    -- **  ElasticacheReplicationGroupData
+    -- ** aws_elasticache_replication_group
     , ElasticacheReplicationGroupData (..)
     , elasticacheReplicationGroupData
 
-    -- **  ElbData
+    -- ** aws_elb
     , ElbData (..)
     , elbData
 
-    -- **  ElbHostedZoneIdData
+    -- ** aws_elb_hosted_zone_id
     , ElbHostedZoneIdData (..)
     , elbHostedZoneIdData
 
-    -- **  ElbServiceAccountData
+    -- ** aws_elb_service_account
     , ElbServiceAccountData (..)
     , elbServiceAccountData
 
-    -- **  GlueScriptData
+    -- ** aws_glue_script
     , GlueScriptData (..)
     , glueScriptData
 
-    -- **  IamAccountAliasData
+    -- ** aws_iam_account_alias
     , IamAccountAliasData (..)
     , iamAccountAliasData
 
-    -- **  IamGroupData
+    -- ** aws_iam_group
     , IamGroupData (..)
     , iamGroupData
 
-    -- **  IamInstanceProfileData
+    -- ** aws_iam_instance_profile
     , IamInstanceProfileData (..)
     , iamInstanceProfileData
 
-    -- **  IamPolicyData
+    -- ** aws_iam_policy
     , IamPolicyData (..)
     , iamPolicyData
 
-    -- **  IamPolicyDocumentData
+    -- ** aws_iam_policy_document
     , IamPolicyDocumentData (..)
     , iamPolicyDocumentData
 
-    -- **  IamRoleData
+    -- ** aws_iam_role
     , IamRoleData (..)
     , iamRoleData
 
-    -- **  IamServerCertificateData
+    -- ** aws_iam_server_certificate
     , IamServerCertificateData (..)
     , iamServerCertificateData
 
-    -- **  IamUserData
+    -- ** aws_iam_user
     , IamUserData (..)
     , iamUserData
 
-    -- **  InspectorRulesPackagesData
+    -- ** aws_inspector_rules_packages
     , InspectorRulesPackagesData (..)
     , inspectorRulesPackagesData
 
-    -- **  InstanceData
+    -- ** aws_instance
     , InstanceData (..)
     , instanceData
 
-    -- **  InstancesData
+    -- ** aws_instances
     , InstancesData (..)
     , instancesData
 
-    -- **  InternetGatewayData
+    -- ** aws_internet_gateway
     , InternetGatewayData (..)
     , internetGatewayData
 
-    -- **  IotEndpointData
+    -- ** aws_iot_endpoint
     , IotEndpointData (..)
     , iotEndpointData
 
-    -- **  IpRangesData
+    -- ** aws_ip_ranges
     , IpRangesData (..)
     , ipRangesData
 
-    -- **  KinesisStreamData
+    -- ** aws_kinesis_stream
     , KinesisStreamData (..)
     , kinesisStreamData
 
-    -- **  KmsAliasData
+    -- ** aws_kms_alias
     , KmsAliasData (..)
     , kmsAliasData
 
-    -- **  KmsCiphertextData
+    -- ** aws_kms_ciphertext
     , KmsCiphertextData (..)
     , kmsCiphertextData
 
-    -- **  KmsKeyData
+    -- ** aws_kms_key
     , KmsKeyData (..)
     , kmsKeyData
 
-    -- **  KmsSecretData
+    -- ** aws_kms_secret
     , KmsSecretData (..)
     , kmsSecretData
 
-    -- **  KmsSecretsData
+    -- ** aws_kms_secrets
     , KmsSecretsData (..)
     , kmsSecretsData
 
-    -- **  LambdaFunctionData
+    -- ** aws_lambda_function
     , LambdaFunctionData (..)
     , lambdaFunctionData
 
-    -- **  LambdaInvocationData
+    -- ** aws_lambda_invocation
     , LambdaInvocationData (..)
     , lambdaInvocationData
 
-    -- **  LaunchConfigurationData
+    -- ** aws_launch_configuration
     , LaunchConfigurationData (..)
     , launchConfigurationData
 
-    -- **  LbData
+    -- ** aws_lb
     , LbData (..)
     , lbData
 
-    -- **  LbListenerData
+    -- ** aws_lb_listener
     , LbListenerData (..)
     , lbListenerData
 
-    -- **  LbTargetGroupData
+    -- ** aws_lb_target_group
     , LbTargetGroupData (..)
     , lbTargetGroupData
 
-    -- **  MqBrokerData
+    -- ** aws_mq_broker
     , MqBrokerData (..)
     , mqBrokerData
 
-    -- **  NatGatewayData
+    -- ** aws_nat_gateway
     , NatGatewayData (..)
     , natGatewayData
 
-    -- **  NetworkAclsData
+    -- ** aws_network_acls
     , NetworkAclsData (..)
     , networkAclsData
 
-    -- **  NetworkInterfaceData
+    -- ** aws_network_interface
     , NetworkInterfaceData (..)
     , networkInterfaceData
 
-    -- **  NetworkInterfacesData
+    -- ** aws_network_interfaces
     , NetworkInterfacesData (..)
     , networkInterfacesData
 
-    -- **  PartitionData
+    -- ** aws_partition
     , PartitionData (..)
     , partitionData
 
@@ -362,15 +362,22 @@ import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Schema       as TF
 
 -- | @aws_acm_certificate@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_acm_certificate terraform documentation>
+-- for more information.
 data AcmCertificateData s = AcmCertificateData'
     { _domain     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @domain@ - (Required)
+    --
     , _mostRecent :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @most_recent@ - (Optional)
+    --
     , _statuses   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @statuses@ - (Optional)
+    --
     , _types      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @types@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (AcmCertificateData s) where
@@ -382,7 +389,7 @@ instance TF.IsObject (AcmCertificateData s) where
         ]
 
 acmCertificateData
-    :: TF.Attr s P.Text -- ^ @domain@
+    :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.DataSource P.Provider (AcmCertificateData s)
 acmCertificateData _domain =
     TF.newDataSource "aws_acm_certificate" $
@@ -396,30 +403,38 @@ acmCertificateData _domain =
 instance P.HasDomain (AcmCertificateData s) (TF.Attr s P.Text) where
     domain =
         P.lens (_domain :: AcmCertificateData s -> TF.Attr s P.Text)
-               (\s a -> s { _domain = a } :: AcmCertificateData s)
+               (\s a -> s { _domain = a
+                          } :: AcmCertificateData s)
 
 instance P.HasMostRecent (AcmCertificateData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: AcmCertificateData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a } :: AcmCertificateData s)
+               (\s a -> s { _mostRecent = a
+                          } :: AcmCertificateData s)
 
 instance P.HasStatuses (AcmCertificateData s) (TF.Attr s [TF.Attr s P.Text]) where
     statuses =
         P.lens (_statuses :: AcmCertificateData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _statuses = a } :: AcmCertificateData s)
+               (\s a -> s { _statuses = a
+                          } :: AcmCertificateData s)
 
 instance P.HasTypes (AcmCertificateData s) (TF.Attr s [TF.Attr s P.Text]) where
     types =
         P.lens (_types :: AcmCertificateData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _types = a } :: AcmCertificateData s)
+               (\s a -> s { _types = a
+                          } :: AcmCertificateData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AcmCertificateData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
 -- | @aws_acmpca_certificate_authority@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_acmpca_certificate_authority terraform documentation>
+-- for more information.
 data AcmpcaCertificateAuthorityData s = AcmpcaCertificateAuthorityData'
     { _arn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @arn@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (AcmpcaCertificateAuthorityData s) where
@@ -428,7 +443,7 @@ instance TF.IsObject (AcmpcaCertificateAuthorityData s) where
         ]
 
 acmpcaCertificateAuthorityData
-    :: TF.Attr s P.Text -- ^ @arn@
+    :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> TF.DataSource P.Provider (AcmpcaCertificateAuthorityData s)
 acmpcaCertificateAuthorityData _arn =
     TF.newDataSource "aws_acmpca_certificate_authority" $
@@ -439,7 +454,8 @@ acmpcaCertificateAuthorityData _arn =
 instance P.HasArn (AcmpcaCertificateAuthorityData s) (TF.Attr s P.Text) where
     arn =
         P.lens (_arn :: AcmpcaCertificateAuthorityData s -> TF.Attr s P.Text)
-               (\s a -> s { _arn = a } :: AcmpcaCertificateAuthorityData s)
+               (\s a -> s { _arn = a
+                          } :: AcmpcaCertificateAuthorityData s)
 
 instance s ~ s' => P.HasComputedCertificate (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
     computedCertificate x = TF.compute (TF.refKey x) "certificate"
@@ -472,6 +488,9 @@ instance s ~ s' => P.HasComputedType' (TF.Ref s' (AcmpcaCertificateAuthorityData
     computedType' x = TF.compute (TF.refKey x) "type"
 
 -- | @aws_alb@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_alb terraform documentation>
+-- for more information.
 data AlbData s = AlbData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -530,6 +549,9 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (AlbData s)) (TF.Attr s P.Text
     computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
 -- | @aws_alb_listener@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_alb_listener terraform documentation>
+-- for more information.
 data AlbListenerData s = AlbListenerData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -564,6 +586,9 @@ instance s ~ s' => P.HasComputedSslPolicy (TF.Ref s' (AlbListenerData s)) (TF.At
     computedSslPolicy x = TF.compute (TF.refKey x) "ssl_policy"
 
 -- | @aws_alb_target_group@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_alb_target_group terraform documentation>
+-- for more information.
 data AlbTargetGroupData s = AlbTargetGroupData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -610,17 +635,25 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (AlbTargetGroupData s)) (TF.Att
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_ami@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ami terraform documentation>
+-- for more information.
 data AmiData s = AmiData'
     { _executableUsers :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @executable_users@ - (Optional)
+    --
     , _filter          :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     , _mostRecent      :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @most_recent@ - (Optional)
+    --
     , _nameRegex       :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name_regex@ - (Optional)
+    --
     , _owners          :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @owners@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (AmiData s) where
@@ -647,27 +680,32 @@ amiData =
 instance P.HasExecutableUsers (AmiData s) (TF.Attr s [TF.Attr s P.Text]) where
     executableUsers =
         P.lens (_executableUsers :: AmiData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _executableUsers = a } :: AmiData s)
+               (\s a -> s { _executableUsers = a
+                          } :: AmiData s)
 
 instance P.HasFilter (AmiData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: AmiData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: AmiData s)
+               (\s a -> s { _filter = a
+                          } :: AmiData s)
 
 instance P.HasMostRecent (AmiData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: AmiData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a } :: AmiData s)
+               (\s a -> s { _mostRecent = a
+                          } :: AmiData s)
 
 instance P.HasNameRegex (AmiData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: AmiData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a } :: AmiData s)
+               (\s a -> s { _nameRegex = a
+                          } :: AmiData s)
 
 instance P.HasOwners (AmiData s) (TF.Attr s [TF.Attr s P.Text]) where
     owners =
         P.lens (_owners :: AmiData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _owners = a } :: AmiData s)
+               (\s a -> s { _owners = a
+                          } :: AmiData s)
 
 instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (AmiData s)) (TF.Attr s P.Text) where
     computedArchitecture x = TF.compute (TF.refKey x) "architecture"
@@ -742,15 +780,22 @@ instance s ~ s' => P.HasComputedVirtualizationType (TF.Ref s' (AmiData s)) (TF.A
     computedVirtualizationType x = TF.compute (TF.refKey x) "virtualization_type"
 
 -- | @aws_ami_ids@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ami_ids terraform documentation>
+-- for more information.
 data AmiIdsData s = AmiIdsData'
     { _executableUsers :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @executable_users@ - (Optional)
+    --
     , _filter          :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     , _nameRegex       :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name_regex@ - (Optional)
+    --
     , _owners          :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @owners@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (AmiIdsData s) where
@@ -775,30 +820,38 @@ amiIdsData =
 instance P.HasExecutableUsers (AmiIdsData s) (TF.Attr s [TF.Attr s P.Text]) where
     executableUsers =
         P.lens (_executableUsers :: AmiIdsData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _executableUsers = a } :: AmiIdsData s)
+               (\s a -> s { _executableUsers = a
+                          } :: AmiIdsData s)
 
 instance P.HasFilter (AmiIdsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: AmiIdsData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: AmiIdsData s)
+               (\s a -> s { _filter = a
+                          } :: AmiIdsData s)
 
 instance P.HasNameRegex (AmiIdsData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: AmiIdsData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a } :: AmiIdsData s)
+               (\s a -> s { _nameRegex = a
+                          } :: AmiIdsData s)
 
 instance P.HasOwners (AmiIdsData s) (TF.Attr s [TF.Attr s P.Text]) where
     owners =
         P.lens (_owners :: AmiIdsData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _owners = a } :: AmiIdsData s)
+               (\s a -> s { _owners = a
+                          } :: AmiIdsData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (AmiIdsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "ids"
 
 -- | @aws_api_gateway_rest_api@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_api_gateway_rest_api terraform documentation>
+-- for more information.
 data ApiGatewayRestApiData s = ApiGatewayRestApiData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ApiGatewayRestApiData s) where
@@ -807,7 +860,7 @@ instance TF.IsObject (ApiGatewayRestApiData s) where
         ]
 
 apiGatewayRestApiData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ApiGatewayRestApiData s)
 apiGatewayRestApiData _name =
     TF.newDataSource "aws_api_gateway_rest_api" $
@@ -818,15 +871,20 @@ apiGatewayRestApiData _name =
 instance P.HasName (ApiGatewayRestApiData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ApiGatewayRestApiData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ApiGatewayRestApiData s)
+               (\s a -> s { _name = a
+                          } :: ApiGatewayRestApiData s)
 
 instance s ~ s' => P.HasComputedRootResourceId (TF.Ref s' (ApiGatewayRestApiData s)) (TF.Attr s P.Text) where
     computedRootResourceId x = TF.compute (TF.refKey x) "root_resource_id"
 
 -- | @aws_arn@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_arn terraform documentation>
+-- for more information.
 data ArnData s = ArnData'
     { _arn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @arn@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ArnData s) where
@@ -835,7 +893,7 @@ instance TF.IsObject (ArnData s) where
         ]
 
 arnData
-    :: TF.Attr s P.Text -- ^ @arn@
+    :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> TF.DataSource P.Provider (ArnData s)
 arnData _arn =
     TF.newDataSource "aws_arn" $
@@ -846,7 +904,8 @@ arnData _arn =
 instance P.HasArn (ArnData s) (TF.Attr s P.Text) where
     arn =
         P.lens (_arn :: ArnData s -> TF.Attr s P.Text)
-               (\s a -> s { _arn = a } :: ArnData s)
+               (\s a -> s { _arn = a
+                          } :: ArnData s)
 
 instance s ~ s' => P.HasComputedAccount (TF.Ref s' (ArnData s)) (TF.Attr s P.Text) where
     computedAccount x = TF.compute (TF.refKey x) "account"
@@ -864,9 +923,13 @@ instance s ~ s' => P.HasComputedService (TF.Ref s' (ArnData s)) (TF.Attr s P.Tex
     computedService x = TF.compute (TF.refKey x) "service"
 
 -- | @aws_autoscaling_groups@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_autoscaling_groups terraform documentation>
+-- for more information.
 data AutoscalingGroupsData s = AutoscalingGroupsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (AutoscalingGroupsData s) where
@@ -885,12 +948,16 @@ autoscalingGroupsData =
 instance P.HasFilter (AutoscalingGroupsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: AutoscalingGroupsData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: AutoscalingGroupsData s)
+               (\s a -> s { _filter = a
+                          } :: AutoscalingGroupsData s)
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (AutoscalingGroupsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNames x = TF.compute (TF.refKey x) "names"
 
 -- | @aws_availability_zone@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_availability_zone terraform documentation>
+-- for more information.
 data AvailabilityZoneData s = AvailabilityZoneData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -916,9 +983,13 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (AvailabilityZoneData s)) (TF.A
     computedState x = TF.compute (TF.refKey x) "state"
 
 -- | @aws_availability_zones@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_availability_zones terraform documentation>
+-- for more information.
 data AvailabilityZonesData s = AvailabilityZonesData'
     { _state :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @state@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (AvailabilityZonesData s) where
@@ -937,15 +1008,20 @@ availabilityZonesData =
 instance P.HasState (AvailabilityZonesData s) (TF.Attr s P.Text) where
     state =
         P.lens (_state :: AvailabilityZonesData s -> TF.Attr s P.Text)
-               (\s a -> s { _state = a } :: AvailabilityZonesData s)
+               (\s a -> s { _state = a
+                          } :: AvailabilityZonesData s)
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (AvailabilityZonesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNames x = TF.compute (TF.refKey x) "names"
 
 -- | @aws_batch_compute_environment@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_batch_compute_environment terraform documentation>
+-- for more information.
 data BatchComputeEnvironmentData s = BatchComputeEnvironmentData'
     { _computeEnvironmentName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @compute_environment_name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (BatchComputeEnvironmentData s) where
@@ -954,7 +1030,7 @@ instance TF.IsObject (BatchComputeEnvironmentData s) where
         ]
 
 batchComputeEnvironmentData
-    :: TF.Attr s P.Text -- ^ @compute_environment_name@
+    :: TF.Attr s P.Text -- ^ @compute_environment_name@ - 'P.computeEnvironmentName'
     -> TF.DataSource P.Provider (BatchComputeEnvironmentData s)
 batchComputeEnvironmentData _computeEnvironmentName =
     TF.newDataSource "aws_batch_compute_environment" $
@@ -965,7 +1041,8 @@ batchComputeEnvironmentData _computeEnvironmentName =
 instance P.HasComputeEnvironmentName (BatchComputeEnvironmentData s) (TF.Attr s P.Text) where
     computeEnvironmentName =
         P.lens (_computeEnvironmentName :: BatchComputeEnvironmentData s -> TF.Attr s P.Text)
-               (\s a -> s { _computeEnvironmentName = a } :: BatchComputeEnvironmentData s)
+               (\s a -> s { _computeEnvironmentName = a
+                          } :: BatchComputeEnvironmentData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (BatchComputeEnvironmentData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -989,9 +1066,13 @@ instance s ~ s' => P.HasComputedType' (TF.Ref s' (BatchComputeEnvironmentData s)
     computedType' x = TF.compute (TF.refKey x) "type"
 
 -- | @aws_batch_job_queue@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_batch_job_queue terraform documentation>
+-- for more information.
 data BatchJobQueueData s = BatchJobQueueData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (BatchJobQueueData s) where
@@ -1000,7 +1081,7 @@ instance TF.IsObject (BatchJobQueueData s) where
         ]
 
 batchJobQueueData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (BatchJobQueueData s)
 batchJobQueueData _name =
     TF.newDataSource "aws_batch_job_queue" $
@@ -1011,7 +1092,8 @@ batchJobQueueData _name =
 instance P.HasName (BatchJobQueueData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: BatchJobQueueData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: BatchJobQueueData s)
+               (\s a -> s { _name = a
+                          } :: BatchJobQueueData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1032,6 +1114,9 @@ instance s ~ s' => P.HasComputedStatusReason (TF.Ref s' (BatchJobQueueData s)) (
     computedStatusReason x = TF.compute (TF.refKey x) "status_reason"
 
 -- | @aws_billing_service_account@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_billing_service_account terraform documentation>
+-- for more information.
 data BillingServiceAccountData s = BillingServiceAccountData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -1048,6 +1133,9 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (BillingServiceAccountData s)) (T
     computedArn x = TF.compute (TF.refKey x) "arn"
 
 -- | @aws_caller_identity@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_caller_identity terraform documentation>
+-- for more information.
 data CallerIdentityData s = CallerIdentityData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -1070,6 +1158,9 @@ instance s ~ s' => P.HasComputedUserId (TF.Ref s' (CallerIdentityData s)) (TF.At
     computedUserId x = TF.compute (TF.refKey x) "user_id"
 
 -- | @aws_canonical_user_id@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_canonical_user_id terraform documentation>
+-- for more information.
 data CanonicalUserIdData s = CanonicalUserIdData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -1086,9 +1177,13 @@ instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (CanonicalUserIdData s)) 
     computedDisplayName x = TF.compute (TF.refKey x) "display_name"
 
 -- | @aws_cloudformation_export@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_cloudformation_export terraform documentation>
+-- for more information.
 data CloudformationExportData s = CloudformationExportData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (CloudformationExportData s) where
@@ -1097,7 +1192,7 @@ instance TF.IsObject (CloudformationExportData s) where
         ]
 
 cloudformationExportData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (CloudformationExportData s)
 cloudformationExportData _name =
     TF.newDataSource "aws_cloudformation_export" $
@@ -1108,7 +1203,8 @@ cloudformationExportData _name =
 instance P.HasName (CloudformationExportData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CloudformationExportData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: CloudformationExportData s)
+               (\s a -> s { _name = a
+                          } :: CloudformationExportData s)
 
 instance s ~ s' => P.HasComputedExportingStackId (TF.Ref s' (CloudformationExportData s)) (TF.Attr s P.Text) where
     computedExportingStackId x = TF.compute (TF.refKey x) "exporting_stack_id"
@@ -1117,9 +1213,13 @@ instance s ~ s' => P.HasComputedValue (TF.Ref s' (CloudformationExportData s)) (
     computedValue x = TF.compute (TF.refKey x) "value"
 
 -- | @aws_cloudformation_stack@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_cloudformation_stack terraform documentation>
+-- for more information.
 data CloudformationStackData s = CloudformationStackData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (CloudformationStackData s) where
@@ -1128,7 +1228,7 @@ instance TF.IsObject (CloudformationStackData s) where
         ]
 
 cloudformationStackData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (CloudformationStackData s)
 cloudformationStackData _name =
     TF.newDataSource "aws_cloudformation_stack" $
@@ -1139,7 +1239,8 @@ cloudformationStackData _name =
 instance P.HasName (CloudformationStackData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CloudformationStackData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: CloudformationStackData s)
+               (\s a -> s { _name = a
+                          } :: CloudformationStackData s)
 
 instance s ~ s' => P.HasComputedCapabilities (TF.Ref s' (CloudformationStackData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     computedCapabilities x = TF.compute (TF.refKey x) "capabilities"
@@ -1172,9 +1273,13 @@ instance s ~ s' => P.HasComputedTimeoutInMinutes (TF.Ref s' (CloudformationStack
     computedTimeoutInMinutes x = TF.compute (TF.refKey x) "timeout_in_minutes"
 
 -- | @aws_cloudtrail_service_account@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_cloudtrail_service_account terraform documentation>
+-- for more information.
 data CloudtrailServiceAccountData s = CloudtrailServiceAccountData'
     { _region :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @region@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (CloudtrailServiceAccountData s) where
@@ -1193,15 +1298,20 @@ cloudtrailServiceAccountData =
 instance P.HasRegion (CloudtrailServiceAccountData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: CloudtrailServiceAccountData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a } :: CloudtrailServiceAccountData s)
+               (\s a -> s { _region = a
+                          } :: CloudtrailServiceAccountData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudtrailServiceAccountData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
 -- | @aws_cloudwatch_log_group@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_cloudwatch_log_group terraform documentation>
+-- for more information.
 data CloudwatchLogGroupData s = CloudwatchLogGroupData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (CloudwatchLogGroupData s) where
@@ -1210,7 +1320,7 @@ instance TF.IsObject (CloudwatchLogGroupData s) where
         ]
 
 cloudwatchLogGroupData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (CloudwatchLogGroupData s)
 cloudwatchLogGroupData _name =
     TF.newDataSource "aws_cloudwatch_log_group" $
@@ -1221,7 +1331,8 @@ cloudwatchLogGroupData _name =
 instance P.HasName (CloudwatchLogGroupData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CloudwatchLogGroupData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: CloudwatchLogGroupData s)
+               (\s a -> s { _name = a
+                          } :: CloudwatchLogGroupData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudwatchLogGroupData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1230,9 +1341,13 @@ instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (CloudwatchLogGroupData 
     computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
 
 -- | @aws_codecommit_repository@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_codecommit_repository terraform documentation>
+-- for more information.
 data CodecommitRepositoryData s = CodecommitRepositoryData'
     { _repositoryName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @repository_name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (CodecommitRepositoryData s) where
@@ -1241,7 +1356,7 @@ instance TF.IsObject (CodecommitRepositoryData s) where
         ]
 
 codecommitRepositoryData
-    :: TF.Attr s P.Text -- ^ @repository_name@
+    :: TF.Attr s P.Text -- ^ @repository_name@ - 'P.repositoryName'
     -> TF.DataSource P.Provider (CodecommitRepositoryData s)
 codecommitRepositoryData _repositoryName =
     TF.newDataSource "aws_codecommit_repository" $
@@ -1252,7 +1367,8 @@ codecommitRepositoryData _repositoryName =
 instance P.HasRepositoryName (CodecommitRepositoryData s) (TF.Attr s P.Text) where
     repositoryName =
         P.lens (_repositoryName :: CodecommitRepositoryData s -> TF.Attr s P.Text)
-               (\s a -> s { _repositoryName = a } :: CodecommitRepositoryData s)
+               (\s a -> s { _repositoryName = a
+                          } :: CodecommitRepositoryData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CodecommitRepositoryData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1267,9 +1383,13 @@ instance s ~ s' => P.HasComputedRepositoryId (TF.Ref s' (CodecommitRepositoryDat
     computedRepositoryId x = TF.compute (TF.refKey x) "repository_id"
 
 -- | @aws_cognito_user_pools@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_cognito_user_pools terraform documentation>
+-- for more information.
 data CognitoUserPoolsData s = CognitoUserPoolsData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (CognitoUserPoolsData s) where
@@ -1278,7 +1398,7 @@ instance TF.IsObject (CognitoUserPoolsData s) where
         ]
 
 cognitoUserPoolsData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (CognitoUserPoolsData s)
 cognitoUserPoolsData _name =
     TF.newDataSource "aws_cognito_user_pools" $
@@ -1289,7 +1409,8 @@ cognitoUserPoolsData _name =
 instance P.HasName (CognitoUserPoolsData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CognitoUserPoolsData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: CognitoUserPoolsData s)
+               (\s a -> s { _name = a
+                          } :: CognitoUserPoolsData s)
 
 instance s ~ s' => P.HasComputedArns (TF.Ref s' (CognitoUserPoolsData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     computedArns x = TF.compute (TF.refKey x) "arns"
@@ -1298,19 +1419,28 @@ instance s ~ s' => P.HasComputedIds (TF.Ref s' (CognitoUserPoolsData s)) (TF.Att
     computedIds x = TF.compute (TF.refKey x) "ids"
 
 -- | @aws_db_cluster_snapshot@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_db_cluster_snapshot terraform documentation>
+-- for more information.
 data DbClusterSnapshotData s = DbClusterSnapshotData'
     { _dbClusterIdentifier         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @db_cluster_identifier@ - (Optional)
+    --
     , _dbClusterSnapshotIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @db_cluster_snapshot_identifier@ - (Optional)
+    --
     , _includePublic               :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @include_public@ - (Optional)
+    --
     , _includeShared               :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @include_shared@ - (Optional)
+    --
     , _mostRecent                  :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @most_recent@ - (Optional)
+    --
     , _snapshotType                :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @snapshot_type@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (DbClusterSnapshotData s) where
@@ -1339,32 +1469,38 @@ dbClusterSnapshotData =
 instance P.HasDbClusterIdentifier (DbClusterSnapshotData s) (TF.Attr s P.Text) where
     dbClusterIdentifier =
         P.lens (_dbClusterIdentifier :: DbClusterSnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _dbClusterIdentifier = a } :: DbClusterSnapshotData s)
+               (\s a -> s { _dbClusterIdentifier = a
+                          } :: DbClusterSnapshotData s)
 
 instance P.HasDbClusterSnapshotIdentifier (DbClusterSnapshotData s) (TF.Attr s P.Text) where
     dbClusterSnapshotIdentifier =
         P.lens (_dbClusterSnapshotIdentifier :: DbClusterSnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _dbClusterSnapshotIdentifier = a } :: DbClusterSnapshotData s)
+               (\s a -> s { _dbClusterSnapshotIdentifier = a
+                          } :: DbClusterSnapshotData s)
 
 instance P.HasIncludePublic (DbClusterSnapshotData s) (TF.Attr s P.Bool) where
     includePublic =
         P.lens (_includePublic :: DbClusterSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _includePublic = a } :: DbClusterSnapshotData s)
+               (\s a -> s { _includePublic = a
+                          } :: DbClusterSnapshotData s)
 
 instance P.HasIncludeShared (DbClusterSnapshotData s) (TF.Attr s P.Bool) where
     includeShared =
         P.lens (_includeShared :: DbClusterSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _includeShared = a } :: DbClusterSnapshotData s)
+               (\s a -> s { _includeShared = a
+                          } :: DbClusterSnapshotData s)
 
 instance P.HasMostRecent (DbClusterSnapshotData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: DbClusterSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a } :: DbClusterSnapshotData s)
+               (\s a -> s { _mostRecent = a
+                          } :: DbClusterSnapshotData s)
 
 instance P.HasSnapshotType (DbClusterSnapshotData s) (TF.Attr s P.Text) where
     snapshotType =
         P.lens (_snapshotType :: DbClusterSnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotType = a } :: DbClusterSnapshotData s)
+               (\s a -> s { _snapshotType = a
+                          } :: DbClusterSnapshotData s)
 
 instance s ~ s' => P.HasComputedAllocatedStorage (TF.Ref s' (DbClusterSnapshotData s)) (TF.Attr s P.Integer) where
     computedAllocatedStorage x = TF.compute (TF.refKey x) "allocated_storage"
@@ -1406,9 +1542,13 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DbClusterSnapshotData s)) (TF.
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_db_instance@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_db_instance terraform documentation>
+-- for more information.
 data DbInstanceData s = DbInstanceData'
     { _dbInstanceIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @db_instance_identifier@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (DbInstanceData s) where
@@ -1417,7 +1557,7 @@ instance TF.IsObject (DbInstanceData s) where
         ]
 
 dbInstanceData
-    :: TF.Attr s P.Text -- ^ @db_instance_identifier@
+    :: TF.Attr s P.Text -- ^ @db_instance_identifier@ - 'P.dbInstanceIdentifier'
     -> TF.DataSource P.Provider (DbInstanceData s)
 dbInstanceData _dbInstanceIdentifier =
     TF.newDataSource "aws_db_instance" $
@@ -1428,7 +1568,8 @@ dbInstanceData _dbInstanceIdentifier =
 instance P.HasDbInstanceIdentifier (DbInstanceData s) (TF.Attr s P.Text) where
     dbInstanceIdentifier =
         P.lens (_dbInstanceIdentifier :: DbInstanceData s -> TF.Attr s P.Text)
-               (\s a -> s { _dbInstanceIdentifier = a } :: DbInstanceData s)
+               (\s a -> s { _dbInstanceIdentifier = a
+                          } :: DbInstanceData s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (DbInstanceData s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
@@ -1536,19 +1677,28 @@ instance s ~ s' => P.HasComputedVpcSecurityGroups (TF.Ref s' (DbInstanceData s))
     computedVpcSecurityGroups x = TF.compute (TF.refKey x) "vpc_security_groups"
 
 -- | @aws_db_snapshot@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_db_snapshot terraform documentation>
+-- for more information.
 data DbSnapshotData s = DbSnapshotData'
     { _dbInstanceIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @db_instance_identifier@ - (Optional)
+    --
     , _dbSnapshotIdentifier :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @db_snapshot_identifier@ - (Optional)
+    --
     , _includePublic        :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @include_public@ - (Optional)
+    --
     , _includeShared        :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @include_shared@ - (Optional)
+    --
     , _mostRecent           :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @most_recent@ - (Optional)
+    --
     , _snapshotType         :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @snapshot_type@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (DbSnapshotData s) where
@@ -1577,32 +1727,38 @@ dbSnapshotData =
 instance P.HasDbInstanceIdentifier (DbSnapshotData s) (TF.Attr s P.Text) where
     dbInstanceIdentifier =
         P.lens (_dbInstanceIdentifier :: DbSnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _dbInstanceIdentifier = a } :: DbSnapshotData s)
+               (\s a -> s { _dbInstanceIdentifier = a
+                          } :: DbSnapshotData s)
 
 instance P.HasDbSnapshotIdentifier (DbSnapshotData s) (TF.Attr s P.Text) where
     dbSnapshotIdentifier =
         P.lens (_dbSnapshotIdentifier :: DbSnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _dbSnapshotIdentifier = a } :: DbSnapshotData s)
+               (\s a -> s { _dbSnapshotIdentifier = a
+                          } :: DbSnapshotData s)
 
 instance P.HasIncludePublic (DbSnapshotData s) (TF.Attr s P.Bool) where
     includePublic =
         P.lens (_includePublic :: DbSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _includePublic = a } :: DbSnapshotData s)
+               (\s a -> s { _includePublic = a
+                          } :: DbSnapshotData s)
 
 instance P.HasIncludeShared (DbSnapshotData s) (TF.Attr s P.Bool) where
     includeShared =
         P.lens (_includeShared :: DbSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _includeShared = a } :: DbSnapshotData s)
+               (\s a -> s { _includeShared = a
+                          } :: DbSnapshotData s)
 
 instance P.HasMostRecent (DbSnapshotData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: DbSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a } :: DbSnapshotData s)
+               (\s a -> s { _mostRecent = a
+                          } :: DbSnapshotData s)
 
 instance P.HasSnapshotType (DbSnapshotData s) (TF.Attr s P.Text) where
     snapshotType =
         P.lens (_snapshotType :: DbSnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotType = a } :: DbSnapshotData s)
+               (\s a -> s { _snapshotType = a
+                          } :: DbSnapshotData s)
 
 instance s ~ s' => P.HasComputedAllocatedStorage (TF.Ref s' (DbSnapshotData s)) (TF.Attr s P.Integer) where
     computedAllocatedStorage x = TF.compute (TF.refKey x) "allocated_storage"
@@ -1656,9 +1812,13 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DbSnapshotData s)) (TF.Attr s 
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_dx_gateway@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_dx_gateway terraform documentation>
+-- for more information.
 data DxGatewayData s = DxGatewayData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (DxGatewayData s) where
@@ -1667,7 +1827,7 @@ instance TF.IsObject (DxGatewayData s) where
         ]
 
 dxGatewayData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (DxGatewayData s)
 dxGatewayData _name =
     TF.newDataSource "aws_dx_gateway" $
@@ -1678,15 +1838,20 @@ dxGatewayData _name =
 instance P.HasName (DxGatewayData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DxGatewayData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: DxGatewayData s)
+               (\s a -> s { _name = a
+                          } :: DxGatewayData s)
 
 instance s ~ s' => P.HasComputedAmazonSideAsn (TF.Ref s' (DxGatewayData s)) (TF.Attr s P.Text) where
     computedAmazonSideAsn x = TF.compute (TF.refKey x) "amazon_side_asn"
 
 -- | @aws_dynamodb_table@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_dynamodb_table terraform documentation>
+-- for more information.
 data DynamodbTableData s = DynamodbTableData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (DynamodbTableData s) where
@@ -1695,7 +1860,7 @@ instance TF.IsObject (DynamodbTableData s) where
         ]
 
 dynamodbTableData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (DynamodbTableData s)
 dynamodbTableData _name =
     TF.newDataSource "aws_dynamodb_table" $
@@ -1706,7 +1871,8 @@ dynamodbTableData _name =
 instance P.HasName (DynamodbTableData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DynamodbTableData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: DynamodbTableData s)
+               (\s a -> s { _name = a
+                          } :: DynamodbTableData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DynamodbTableData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1754,17 +1920,25 @@ instance s ~ s' => P.HasComputedWriteCapacity (TF.Ref s' (DynamodbTableData s)) 
     computedWriteCapacity x = TF.compute (TF.refKey x) "write_capacity"
 
 -- | @aws_ebs_snapshot@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ebs_snapshot terraform documentation>
+-- for more information.
 data EbsSnapshotData s = EbsSnapshotData'
     { _filter              :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     , _mostRecent          :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @most_recent@ - (Optional)
+    --
     , _owners              :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @owners@ - (Optional)
+    --
     , _restorableByUserIds :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @restorable_by_user_ids@ - (Optional)
+    --
     , _snapshotIds         :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @snapshot_ids@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EbsSnapshotData s) where
@@ -1791,27 +1965,32 @@ ebsSnapshotData =
 instance P.HasFilter (EbsSnapshotData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: EbsSnapshotData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: EbsSnapshotData s)
+               (\s a -> s { _filter = a
+                          } :: EbsSnapshotData s)
 
 instance P.HasMostRecent (EbsSnapshotData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: EbsSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a } :: EbsSnapshotData s)
+               (\s a -> s { _mostRecent = a
+                          } :: EbsSnapshotData s)
 
 instance P.HasOwners (EbsSnapshotData s) (TF.Attr s [TF.Attr s P.Text]) where
     owners =
         P.lens (_owners :: EbsSnapshotData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _owners = a } :: EbsSnapshotData s)
+               (\s a -> s { _owners = a
+                          } :: EbsSnapshotData s)
 
 instance P.HasRestorableByUserIds (EbsSnapshotData s) (TF.Attr s [TF.Attr s P.Text]) where
     restorableByUserIds =
         P.lens (_restorableByUserIds :: EbsSnapshotData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _restorableByUserIds = a } :: EbsSnapshotData s)
+               (\s a -> s { _restorableByUserIds = a
+                          } :: EbsSnapshotData s)
 
 instance P.HasSnapshotIds (EbsSnapshotData s) (TF.Attr s [TF.Attr s P.Text]) where
     snapshotIds =
         P.lens (_snapshotIds :: EbsSnapshotData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _snapshotIds = a } :: EbsSnapshotData s)
+               (\s a -> s { _snapshotIds = a
+                          } :: EbsSnapshotData s)
 
 instance s ~ s' => P.HasComputedDataEncryptionKeyId (TF.Ref s' (EbsSnapshotData s)) (TF.Attr s P.Text) where
     computedDataEncryptionKeyId x = TF.compute (TF.refKey x) "data_encryption_key_id"
@@ -1847,13 +2026,19 @@ instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (EbsSnapshotData s)) (TF.A
     computedVolumeSize x = TF.compute (TF.refKey x) "volume_size"
 
 -- | @aws_ebs_snapshot_ids@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ebs_snapshot_ids terraform documentation>
+-- for more information.
 data EbsSnapshotIdsData s = EbsSnapshotIdsData'
     { _filter              :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     , _owners              :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @owners@ - (Optional)
+    --
     , _restorableByUserIds :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @restorable_by_user_ids@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EbsSnapshotIdsData s) where
@@ -1876,27 +2061,35 @@ ebsSnapshotIdsData =
 instance P.HasFilter (EbsSnapshotIdsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: EbsSnapshotIdsData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: EbsSnapshotIdsData s)
+               (\s a -> s { _filter = a
+                          } :: EbsSnapshotIdsData s)
 
 instance P.HasOwners (EbsSnapshotIdsData s) (TF.Attr s [TF.Attr s P.Text]) where
     owners =
         P.lens (_owners :: EbsSnapshotIdsData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _owners = a } :: EbsSnapshotIdsData s)
+               (\s a -> s { _owners = a
+                          } :: EbsSnapshotIdsData s)
 
 instance P.HasRestorableByUserIds (EbsSnapshotIdsData s) (TF.Attr s [TF.Attr s P.Text]) where
     restorableByUserIds =
         P.lens (_restorableByUserIds :: EbsSnapshotIdsData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _restorableByUserIds = a } :: EbsSnapshotIdsData s)
+               (\s a -> s { _restorableByUserIds = a
+                          } :: EbsSnapshotIdsData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (EbsSnapshotIdsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "ids"
 
 -- | @aws_ebs_volume@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ebs_volume terraform documentation>
+-- for more information.
 data EbsVolumeData s = EbsVolumeData'
     { _filter     :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     , _mostRecent :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @most_recent@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EbsVolumeData s) where
@@ -1917,12 +2110,14 @@ ebsVolumeData =
 instance P.HasFilter (EbsVolumeData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: EbsVolumeData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: EbsVolumeData s)
+               (\s a -> s { _filter = a
+                          } :: EbsVolumeData s)
 
 instance P.HasMostRecent (EbsVolumeData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: EbsVolumeData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a } :: EbsVolumeData s)
+               (\s a -> s { _mostRecent = a
+                          } :: EbsVolumeData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EbsVolumeData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1955,9 +2150,13 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (EbsVolumeData s)) (TF.Att
     computedVolumeType x = TF.compute (TF.refKey x) "volume_type"
 
 -- | @aws_ecr_repository@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ecr_repository terraform documentation>
+-- for more information.
 data EcrRepositoryData s = EcrRepositoryData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EcrRepositoryData s) where
@@ -1966,7 +2165,7 @@ instance TF.IsObject (EcrRepositoryData s) where
         ]
 
 ecrRepositoryData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (EcrRepositoryData s)
 ecrRepositoryData _name =
     TF.newDataSource "aws_ecr_repository" $
@@ -1977,7 +2176,8 @@ ecrRepositoryData _name =
 instance P.HasName (EcrRepositoryData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: EcrRepositoryData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: EcrRepositoryData s)
+               (\s a -> s { _name = a
+                          } :: EcrRepositoryData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EcrRepositoryData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1989,9 +2189,13 @@ instance s ~ s' => P.HasComputedRepositoryUrl (TF.Ref s' (EcrRepositoryData s)) 
     computedRepositoryUrl x = TF.compute (TF.refKey x) "repository_url"
 
 -- | @aws_ecs_cluster@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ecs_cluster terraform documentation>
+-- for more information.
 data EcsClusterData s = EcsClusterData'
     { _clusterName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cluster_name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EcsClusterData s) where
@@ -2000,7 +2204,7 @@ instance TF.IsObject (EcsClusterData s) where
         ]
 
 ecsClusterData
-    :: TF.Attr s P.Text -- ^ @cluster_name@
+    :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
     -> TF.DataSource P.Provider (EcsClusterData s)
 ecsClusterData _clusterName =
     TF.newDataSource "aws_ecs_cluster" $
@@ -2011,7 +2215,8 @@ ecsClusterData _clusterName =
 instance P.HasClusterName (EcsClusterData s) (TF.Attr s P.Text) where
     clusterName =
         P.lens (_clusterName :: EcsClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterName = a } :: EcsClusterData s)
+               (\s a -> s { _clusterName = a
+                          } :: EcsClusterData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EcsClusterData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -2029,11 +2234,16 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (EcsClusterData s)) (TF.Attr s
     computedStatus x = TF.compute (TF.refKey x) "status"
 
 -- | @aws_ecs_container_definition@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ecs_container_definition terraform documentation>
+-- for more information.
 data EcsContainerDefinitionData s = EcsContainerDefinitionData'
     { _containerName  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @container_name@ - (Required)
+    --
     , _taskDefinition :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @task_definition@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EcsContainerDefinitionData s) where
@@ -2043,8 +2253,8 @@ instance TF.IsObject (EcsContainerDefinitionData s) where
         ]
 
 ecsContainerDefinitionData
-    :: TF.Attr s P.Text -- ^ @container_name@
-    -> TF.Attr s P.Text -- ^ @task_definition@
+    :: TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
+    -> TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
     -> TF.DataSource P.Provider (EcsContainerDefinitionData s)
 ecsContainerDefinitionData _containerName _taskDefinition =
     TF.newDataSource "aws_ecs_container_definition" $
@@ -2056,12 +2266,14 @@ ecsContainerDefinitionData _containerName _taskDefinition =
 instance P.HasContainerName (EcsContainerDefinitionData s) (TF.Attr s P.Text) where
     containerName =
         P.lens (_containerName :: EcsContainerDefinitionData s -> TF.Attr s P.Text)
-               (\s a -> s { _containerName = a } :: EcsContainerDefinitionData s)
+               (\s a -> s { _containerName = a
+                          } :: EcsContainerDefinitionData s)
 
 instance P.HasTaskDefinition (EcsContainerDefinitionData s) (TF.Attr s P.Text) where
     taskDefinition =
         P.lens (_taskDefinition :: EcsContainerDefinitionData s -> TF.Attr s P.Text)
-               (\s a -> s { _taskDefinition = a } :: EcsContainerDefinitionData s)
+               (\s a -> s { _taskDefinition = a
+                          } :: EcsContainerDefinitionData s)
 
 instance s ~ s' => P.HasComputedCpu (TF.Ref s' (EcsContainerDefinitionData s)) (TF.Attr s P.Integer) where
     computedCpu x = TF.compute (TF.refKey x) "cpu"
@@ -2088,11 +2300,16 @@ instance s ~ s' => P.HasComputedMemoryReservation (TF.Ref s' (EcsContainerDefini
     computedMemoryReservation x = TF.compute (TF.refKey x) "memory_reservation"
 
 -- | @aws_ecs_service@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ecs_service terraform documentation>
+-- for more information.
 data EcsServiceData s = EcsServiceData'
     { _clusterArn  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cluster_arn@ - (Required)
+    --
     , _serviceName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @service_name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EcsServiceData s) where
@@ -2102,8 +2319,8 @@ instance TF.IsObject (EcsServiceData s) where
         ]
 
 ecsServiceData
-    :: TF.Attr s P.Text -- ^ @cluster_arn@
-    -> TF.Attr s P.Text -- ^ @service_name@
+    :: TF.Attr s P.Text -- ^ @cluster_arn@ - 'P.clusterArn'
+    -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> TF.DataSource P.Provider (EcsServiceData s)
 ecsServiceData _clusterArn _serviceName =
     TF.newDataSource "aws_ecs_service" $
@@ -2115,12 +2332,14 @@ ecsServiceData _clusterArn _serviceName =
 instance P.HasClusterArn (EcsServiceData s) (TF.Attr s P.Text) where
     clusterArn =
         P.lens (_clusterArn :: EcsServiceData s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterArn = a } :: EcsServiceData s)
+               (\s a -> s { _clusterArn = a
+                          } :: EcsServiceData s)
 
 instance P.HasServiceName (EcsServiceData s) (TF.Attr s P.Text) where
     serviceName =
         P.lens (_serviceName :: EcsServiceData s -> TF.Attr s P.Text)
-               (\s a -> s { _serviceName = a } :: EcsServiceData s)
+               (\s a -> s { _serviceName = a
+                          } :: EcsServiceData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EcsServiceData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -2138,9 +2357,13 @@ instance s ~ s' => P.HasComputedTaskDefinition (TF.Ref s' (EcsServiceData s)) (T
     computedTaskDefinition x = TF.compute (TF.refKey x) "task_definition"
 
 -- | @aws_ecs_task_definition@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ecs_task_definition terraform documentation>
+-- for more information.
 data EcsTaskDefinitionData s = EcsTaskDefinitionData'
     { _taskDefinition :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @task_definition@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EcsTaskDefinitionData s) where
@@ -2149,7 +2372,7 @@ instance TF.IsObject (EcsTaskDefinitionData s) where
         ]
 
 ecsTaskDefinitionData
-    :: TF.Attr s P.Text -- ^ @task_definition@
+    :: TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
     -> TF.DataSource P.Provider (EcsTaskDefinitionData s)
 ecsTaskDefinitionData _taskDefinition =
     TF.newDataSource "aws_ecs_task_definition" $
@@ -2160,7 +2383,8 @@ ecsTaskDefinitionData _taskDefinition =
 instance P.HasTaskDefinition (EcsTaskDefinitionData s) (TF.Attr s P.Text) where
     taskDefinition =
         P.lens (_taskDefinition :: EcsTaskDefinitionData s -> TF.Attr s P.Text)
-               (\s a -> s { _taskDefinition = a } :: EcsTaskDefinitionData s)
+               (\s a -> s { _taskDefinition = a
+                          } :: EcsTaskDefinitionData s)
 
 instance s ~ s' => P.HasComputedFamily' (TF.Ref s' (EcsTaskDefinitionData s)) (TF.Attr s P.Text) where
     computedFamily' x = TF.compute (TF.refKey x) "family"
@@ -2178,6 +2402,9 @@ instance s ~ s' => P.HasComputedTaskRoleArn (TF.Ref s' (EcsTaskDefinitionData s)
     computedTaskRoleArn x = TF.compute (TF.refKey x) "task_role_arn"
 
 -- | @aws_efs_file_system@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_efs_file_system terraform documentation>
+-- for more information.
 data EfsFileSystemData s = EfsFileSystemData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -2212,9 +2439,13 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (EfsFileSystemData s)) (TF.Attr 
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_efs_mount_target@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_efs_mount_target terraform documentation>
+-- for more information.
 data EfsMountTargetData s = EfsMountTargetData'
     { _mountTargetId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @mount_target_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EfsMountTargetData s) where
@@ -2223,7 +2454,7 @@ instance TF.IsObject (EfsMountTargetData s) where
         ]
 
 efsMountTargetData
-    :: TF.Attr s P.Text -- ^ @mount_target_id@
+    :: TF.Attr s P.Text -- ^ @mount_target_id@ - 'P.mountTargetId'
     -> TF.DataSource P.Provider (EfsMountTargetData s)
 efsMountTargetData _mountTargetId =
     TF.newDataSource "aws_efs_mount_target" $
@@ -2234,7 +2465,8 @@ efsMountTargetData _mountTargetId =
 instance P.HasMountTargetId (EfsMountTargetData s) (TF.Attr s P.Text) where
     mountTargetId =
         P.lens (_mountTargetId :: EfsMountTargetData s -> TF.Attr s P.Text)
-               (\s a -> s { _mountTargetId = a } :: EfsMountTargetData s)
+               (\s a -> s { _mountTargetId = a
+                          } :: EfsMountTargetData s)
 
 instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (EfsMountTargetData s)) (TF.Attr s P.Text) where
     computedDnsName x = TF.compute (TF.refKey x) "dns_name"
@@ -2255,6 +2487,9 @@ instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (EfsMountTargetData s)) (TF.
     computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
 
 -- | @aws_eip@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_eip terraform documentation>
+-- for more information.
 data EipData s = EipData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -2274,9 +2509,13 @@ instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (EipData s)) (TF.Attr s P.Te
     computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
 
 -- | @aws_eks_cluster@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_eks_cluster terraform documentation>
+-- for more information.
 data EksClusterData s = EksClusterData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (EksClusterData s) where
@@ -2285,7 +2524,7 @@ instance TF.IsObject (EksClusterData s) where
         ]
 
 eksClusterData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (EksClusterData s)
 eksClusterData _name =
     TF.newDataSource "aws_eks_cluster" $
@@ -2296,7 +2535,8 @@ eksClusterData _name =
 instance P.HasName (EksClusterData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: EksClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: EksClusterData s)
+               (\s a -> s { _name = a
+                          } :: EksClusterData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EksClusterData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -2320,9 +2560,13 @@ instance s ~ s' => P.HasComputedVpcConfig (TF.Ref s' (EksClusterData s)) (TF.Att
     computedVpcConfig x = TF.compute (TF.refKey x) "vpc_config"
 
 -- | @aws_elastic_beanstalk_hosted_zone@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_elastic_beanstalk_hosted_zone terraform documentation>
+-- for more information.
 data ElasticBeanstalkHostedZoneData s = ElasticBeanstalkHostedZoneData'
     { _region :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @region@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElasticBeanstalkHostedZoneData s) where
@@ -2341,14 +2585,20 @@ elasticBeanstalkHostedZoneData =
 instance P.HasRegion (ElasticBeanstalkHostedZoneData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: ElasticBeanstalkHostedZoneData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a } :: ElasticBeanstalkHostedZoneData s)
+               (\s a -> s { _region = a
+                          } :: ElasticBeanstalkHostedZoneData s)
 
 -- | @aws_elastic_beanstalk_solution_stack@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_elastic_beanstalk_solution_stack terraform documentation>
+-- for more information.
 data ElasticBeanstalkSolutionStackData s = ElasticBeanstalkSolutionStackData'
     { _mostRecent :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @most_recent@ - (Optional)
+    --
     , _nameRegex  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name_regex@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElasticBeanstalkSolutionStackData s) where
@@ -2358,7 +2608,7 @@ instance TF.IsObject (ElasticBeanstalkSolutionStackData s) where
         ]
 
 elasticBeanstalkSolutionStackData
-    :: TF.Attr s P.Text -- ^ @name_regex@
+    :: TF.Attr s P.Text -- ^ @name_regex@ - 'P.nameRegex'
     -> TF.DataSource P.Provider (ElasticBeanstalkSolutionStackData s)
 elasticBeanstalkSolutionStackData _nameRegex =
     TF.newDataSource "aws_elastic_beanstalk_solution_stack" $
@@ -2370,20 +2620,26 @@ elasticBeanstalkSolutionStackData _nameRegex =
 instance P.HasMostRecent (ElasticBeanstalkSolutionStackData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: ElasticBeanstalkSolutionStackData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a } :: ElasticBeanstalkSolutionStackData s)
+               (\s a -> s { _mostRecent = a
+                          } :: ElasticBeanstalkSolutionStackData s)
 
 instance P.HasNameRegex (ElasticBeanstalkSolutionStackData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: ElasticBeanstalkSolutionStackData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a } :: ElasticBeanstalkSolutionStackData s)
+               (\s a -> s { _nameRegex = a
+                          } :: ElasticBeanstalkSolutionStackData s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ElasticBeanstalkSolutionStackData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
 -- | @aws_elasticache_cluster@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_elasticache_cluster terraform documentation>
+-- for more information.
 data ElasticacheClusterData s = ElasticacheClusterData'
     { _clusterId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @cluster_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElasticacheClusterData s) where
@@ -2392,7 +2648,7 @@ instance TF.IsObject (ElasticacheClusterData s) where
         ]
 
 elasticacheClusterData
-    :: TF.Attr s P.Text -- ^ @cluster_id@
+    :: TF.Attr s P.Text -- ^ @cluster_id@ - 'P.clusterId'
     -> TF.DataSource P.Provider (ElasticacheClusterData s)
 elasticacheClusterData _clusterId =
     TF.newDataSource "aws_elasticache_cluster" $
@@ -2403,7 +2659,8 @@ elasticacheClusterData _clusterId =
 instance P.HasClusterId (ElasticacheClusterData s) (TF.Attr s P.Text) where
     clusterId =
         P.lens (_clusterId :: ElasticacheClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterId = a } :: ElasticacheClusterData s)
+               (\s a -> s { _clusterId = a
+                          } :: ElasticacheClusterData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElasticacheClusterData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -2466,9 +2723,13 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElasticacheClusterData s)) (TF.
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_elasticache_replication_group@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_elasticache_replication_group terraform documentation>
+-- for more information.
 data ElasticacheReplicationGroupData s = ElasticacheReplicationGroupData'
     { _replicationGroupId :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @replication_group_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElasticacheReplicationGroupData s) where
@@ -2477,7 +2738,7 @@ instance TF.IsObject (ElasticacheReplicationGroupData s) where
         ]
 
 elasticacheReplicationGroupData
-    :: TF.Attr s P.Text -- ^ @replication_group_id@
+    :: TF.Attr s P.Text -- ^ @replication_group_id@ - 'P.replicationGroupId'
     -> TF.DataSource P.Provider (ElasticacheReplicationGroupData s)
 elasticacheReplicationGroupData _replicationGroupId =
     TF.newDataSource "aws_elasticache_replication_group" $
@@ -2488,7 +2749,8 @@ elasticacheReplicationGroupData _replicationGroupId =
 instance P.HasReplicationGroupId (ElasticacheReplicationGroupData s) (TF.Attr s P.Text) where
     replicationGroupId =
         P.lens (_replicationGroupId :: ElasticacheReplicationGroupData s -> TF.Attr s P.Text)
-               (\s a -> s { _replicationGroupId = a } :: ElasticacheReplicationGroupData s)
+               (\s a -> s { _replicationGroupId = a
+                          } :: ElasticacheReplicationGroupData s)
 
 instance s ~ s' => P.HasComputedAuthTokenEnabled (TF.Ref s' (ElasticacheReplicationGroupData s)) (TF.Attr s P.Bool) where
     computedAuthTokenEnabled x = TF.compute (TF.refKey x) "auth_token_enabled"
@@ -2524,9 +2786,13 @@ instance s ~ s' => P.HasComputedSnapshotWindow (TF.Ref s' (ElasticacheReplicatio
     computedSnapshotWindow x = TF.compute (TF.refKey x) "snapshot_window"
 
 -- | @aws_elb@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_elb terraform documentation>
+-- for more information.
 data ElbData s = ElbData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElbData s) where
@@ -2535,7 +2801,7 @@ instance TF.IsObject (ElbData s) where
         ]
 
 elbData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ElbData s)
 elbData _name =
     TF.newDataSource "aws_elb" $
@@ -2546,7 +2812,8 @@ elbData _name =
 instance P.HasName (ElbData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ElbData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ElbData s)
+               (\s a -> s { _name = a
+                          } :: ElbData s)
 
 instance s ~ s' => P.HasComputedAccessLogs (TF.Ref s' (ElbData s)) (TF.Attr s [AccessLogs s]) where
     computedAccessLogs x = TF.compute (TF.refKey x) "access_logs"
@@ -2600,9 +2867,13 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (ElbData s)) (TF.Attr s P.Text
     computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
 -- | @aws_elb_hosted_zone_id@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_elb_hosted_zone_id terraform documentation>
+-- for more information.
 data ElbHostedZoneIdData s = ElbHostedZoneIdData'
     { _region :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @region@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElbHostedZoneIdData s) where
@@ -2621,12 +2892,17 @@ elbHostedZoneIdData =
 instance P.HasRegion (ElbHostedZoneIdData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: ElbHostedZoneIdData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a } :: ElbHostedZoneIdData s)
+               (\s a -> s { _region = a
+                          } :: ElbHostedZoneIdData s)
 
 -- | @aws_elb_service_account@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_elb_service_account terraform documentation>
+-- for more information.
 data ElbServiceAccountData s = ElbServiceAccountData'
     { _region :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @region@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (ElbServiceAccountData s) where
@@ -2645,19 +2921,26 @@ elbServiceAccountData =
 instance P.HasRegion (ElbServiceAccountData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: ElbServiceAccountData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a } :: ElbServiceAccountData s)
+               (\s a -> s { _region = a
+                          } :: ElbServiceAccountData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElbServiceAccountData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
 -- | @aws_glue_script@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_glue_script terraform documentation>
+-- for more information.
 data GlueScriptData s = GlueScriptData'
     { _dagEdge  :: TF.Attr s [DagEdge s]
-    -- ^ Undocumented.
+    -- ^ @dag_edge@ - (Required)
+    --
     , _dagNode  :: TF.Attr s [DagNode s]
-    -- ^ Undocumented.
+    -- ^ @dag_node@ - (Required)
+    --
     , _language :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @language@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (GlueScriptData s) where
@@ -2668,8 +2951,8 @@ instance TF.IsObject (GlueScriptData s) where
         ]
 
 glueScriptData
-    :: TF.Attr s [DagEdge s] -- ^ @dag_edge@
-    -> TF.Attr s [DagNode s] -- ^ @dag_node@
+    :: TF.Attr s [DagEdge s] -- ^ @dag_edge@ - 'P.dagEdge'
+    -> TF.Attr s [DagNode s] -- ^ @dag_node@ - 'P.dagNode'
     -> TF.DataSource P.Provider (GlueScriptData s)
 glueScriptData _dagEdge _dagNode =
     TF.newDataSource "aws_glue_script" $
@@ -2682,17 +2965,20 @@ glueScriptData _dagEdge _dagNode =
 instance P.HasDagEdge (GlueScriptData s) (TF.Attr s [DagEdge s]) where
     dagEdge =
         P.lens (_dagEdge :: GlueScriptData s -> TF.Attr s [DagEdge s])
-               (\s a -> s { _dagEdge = a } :: GlueScriptData s)
+               (\s a -> s { _dagEdge = a
+                          } :: GlueScriptData s)
 
 instance P.HasDagNode (GlueScriptData s) (TF.Attr s [DagNode s]) where
     dagNode =
         P.lens (_dagNode :: GlueScriptData s -> TF.Attr s [DagNode s])
-               (\s a -> s { _dagNode = a } :: GlueScriptData s)
+               (\s a -> s { _dagNode = a
+                          } :: GlueScriptData s)
 
 instance P.HasLanguage (GlueScriptData s) (TF.Attr s P.Text) where
     language =
         P.lens (_language :: GlueScriptData s -> TF.Attr s P.Text)
-               (\s a -> s { _language = a } :: GlueScriptData s)
+               (\s a -> s { _language = a
+                          } :: GlueScriptData s)
 
 instance s ~ s' => P.HasComputedPythonScript (TF.Ref s' (GlueScriptData s)) (TF.Attr s P.Text) where
     computedPythonScript x = TF.compute (TF.refKey x) "python_script"
@@ -2701,6 +2987,9 @@ instance s ~ s' => P.HasComputedScalaCode (TF.Ref s' (GlueScriptData s)) (TF.Att
     computedScalaCode x = TF.compute (TF.refKey x) "scala_code"
 
 -- | @aws_iam_account_alias@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_account_alias terraform documentation>
+-- for more information.
 data IamAccountAliasData s = IamAccountAliasData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -2717,9 +3006,13 @@ instance s ~ s' => P.HasComputedAccountAlias (TF.Ref s' (IamAccountAliasData s))
     computedAccountAlias x = TF.compute (TF.refKey x) "account_alias"
 
 -- | @aws_iam_group@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_group terraform documentation>
+-- for more information.
 data IamGroupData s = IamGroupData'
     { _groupName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @group_name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamGroupData s) where
@@ -2728,7 +3021,7 @@ instance TF.IsObject (IamGroupData s) where
         ]
 
 iamGroupData
-    :: TF.Attr s P.Text -- ^ @group_name@
+    :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
     -> TF.DataSource P.Provider (IamGroupData s)
 iamGroupData _groupName =
     TF.newDataSource "aws_iam_group" $
@@ -2739,7 +3032,8 @@ iamGroupData _groupName =
 instance P.HasGroupName (IamGroupData s) (TF.Attr s P.Text) where
     groupName =
         P.lens (_groupName :: IamGroupData s -> TF.Attr s P.Text)
-               (\s a -> s { _groupName = a } :: IamGroupData s)
+               (\s a -> s { _groupName = a
+                          } :: IamGroupData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamGroupData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -2751,9 +3045,13 @@ instance s ~ s' => P.HasComputedPath (TF.Ref s' (IamGroupData s)) (TF.Attr s P.T
     computedPath x = TF.compute (TF.refKey x) "path"
 
 -- | @aws_iam_instance_profile@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_instance_profile terraform documentation>
+-- for more information.
 data IamInstanceProfileData s = IamInstanceProfileData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamInstanceProfileData s) where
@@ -2762,7 +3060,7 @@ instance TF.IsObject (IamInstanceProfileData s) where
         ]
 
 iamInstanceProfileData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (IamInstanceProfileData s)
 iamInstanceProfileData _name =
     TF.newDataSource "aws_iam_instance_profile" $
@@ -2773,7 +3071,8 @@ iamInstanceProfileData _name =
 instance P.HasName (IamInstanceProfileData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: IamInstanceProfileData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: IamInstanceProfileData s)
+               (\s a -> s { _name = a
+                          } :: IamInstanceProfileData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamInstanceProfileData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -2794,9 +3093,13 @@ instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (IamInstanceProfileData s)) 
     computedRoleName x = TF.compute (TF.refKey x) "role_name"
 
 -- | @aws_iam_policy@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_policy terraform documentation>
+-- for more information.
 data IamPolicyData s = IamPolicyData'
     { _arn :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @arn@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamPolicyData s) where
@@ -2805,7 +3108,7 @@ instance TF.IsObject (IamPolicyData s) where
         ]
 
 iamPolicyData
-    :: TF.Attr s P.Text -- ^ @arn@
+    :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> TF.DataSource P.Provider (IamPolicyData s)
 iamPolicyData _arn =
     TF.newDataSource "aws_iam_policy" $
@@ -2816,7 +3119,8 @@ iamPolicyData _arn =
 instance P.HasArn (IamPolicyData s) (TF.Attr s P.Text) where
     arn =
         P.lens (_arn :: IamPolicyData s -> TF.Attr s P.Text)
-               (\s a -> s { _arn = a } :: IamPolicyData s)
+               (\s a -> s { _arn = a
+                          } :: IamPolicyData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (IamPolicyData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
@@ -2831,15 +3135,22 @@ instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (IamPolicyData s)) (TF.Attr s 
     computedPolicy x = TF.compute (TF.refKey x) "policy"
 
 -- | @aws_iam_policy_document@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_policy_document terraform documentation>
+-- for more information.
 data IamPolicyDocumentData s = IamPolicyDocumentData'
     { _overrideJson :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @override_json@ - (Optional)
+    --
     , _policyId     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @policy_id@ - (Optional)
+    --
     , _sourceJson   :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @source_json@ - (Optional)
+    --
     , _statement    :: TF.Attr s [Statement s]
-    -- ^ Undocumented.
+    -- ^ @statement@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamPolicyDocumentData s) where
@@ -2851,7 +3162,7 @@ instance TF.IsObject (IamPolicyDocumentData s) where
         ]
 
 iamPolicyDocumentData
-    :: TF.Attr s [Statement s] -- ^ @statement@
+    :: TF.Attr s [Statement s] -- ^ @statement@ - 'P.statement'
     -> TF.DataSource P.Provider (IamPolicyDocumentData s)
 iamPolicyDocumentData _statement =
     TF.newDataSource "aws_iam_policy_document" $
@@ -2865,32 +3176,41 @@ iamPolicyDocumentData _statement =
 instance P.HasOverrideJson (IamPolicyDocumentData s) (TF.Attr s P.Text) where
     overrideJson =
         P.lens (_overrideJson :: IamPolicyDocumentData s -> TF.Attr s P.Text)
-               (\s a -> s { _overrideJson = a } :: IamPolicyDocumentData s)
+               (\s a -> s { _overrideJson = a
+                          } :: IamPolicyDocumentData s)
 
 instance P.HasPolicyId (IamPolicyDocumentData s) (TF.Attr s P.Text) where
     policyId =
         P.lens (_policyId :: IamPolicyDocumentData s -> TF.Attr s P.Text)
-               (\s a -> s { _policyId = a } :: IamPolicyDocumentData s)
+               (\s a -> s { _policyId = a
+                          } :: IamPolicyDocumentData s)
 
 instance P.HasSourceJson (IamPolicyDocumentData s) (TF.Attr s P.Text) where
     sourceJson =
         P.lens (_sourceJson :: IamPolicyDocumentData s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceJson = a } :: IamPolicyDocumentData s)
+               (\s a -> s { _sourceJson = a
+                          } :: IamPolicyDocumentData s)
 
 instance P.HasStatement (IamPolicyDocumentData s) (TF.Attr s [Statement s]) where
     statement =
         P.lens (_statement :: IamPolicyDocumentData s -> TF.Attr s [Statement s])
-               (\s a -> s { _statement = a } :: IamPolicyDocumentData s)
+               (\s a -> s { _statement = a
+                          } :: IamPolicyDocumentData s)
 
 instance s ~ s' => P.HasComputedJson (TF.Ref s' (IamPolicyDocumentData s)) (TF.Attr s P.Text) where
     computedJson x = TF.compute (TF.refKey x) "json"
 
 -- | @aws_iam_role@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_role terraform documentation>
+-- for more information.
 data IamRoleData s = IamRoleData'
     { _name     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Optional)
+    --
     , _roleName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @role_name@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamRoleData s) where
@@ -2911,12 +3231,14 @@ iamRoleData =
 instance P.HasName (IamRoleData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: IamRoleData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: IamRoleData s)
+               (\s a -> s { _name = a
+                          } :: IamRoleData s)
 
 instance P.HasRoleName (IamRoleData s) (TF.Attr s P.Text) where
     roleName =
         P.lens (_roleName :: IamRoleData s -> TF.Attr s P.Text)
-               (\s a -> s { _roleName = a } :: IamRoleData s)
+               (\s a -> s { _roleName = a
+                          } :: IamRoleData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -2949,13 +3271,19 @@ instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamRoleData s)) (TF.Attr s 
     computedUniqueId x = TF.compute (TF.refKey x) "unique_id"
 
 -- | @aws_iam_server_certificate@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_server_certificate terraform documentation>
+-- for more information.
 data IamServerCertificateData s = IamServerCertificateData'
     { _latest     :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @latest@ - (Optional)
+    --
     , _namePrefix :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name_prefix@ - (Optional)
+    --
     , _pathPrefix :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @path_prefix@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamServerCertificateData s) where
@@ -2978,17 +3306,20 @@ iamServerCertificateData =
 instance P.HasLatest (IamServerCertificateData s) (TF.Attr s P.Bool) where
     latest =
         P.lens (_latest :: IamServerCertificateData s -> TF.Attr s P.Bool)
-               (\s a -> s { _latest = a } :: IamServerCertificateData s)
+               (\s a -> s { _latest = a
+                          } :: IamServerCertificateData s)
 
 instance P.HasNamePrefix (IamServerCertificateData s) (TF.Attr s P.Text) where
     namePrefix =
         P.lens (_namePrefix :: IamServerCertificateData s -> TF.Attr s P.Text)
-               (\s a -> s { _namePrefix = a } :: IamServerCertificateData s)
+               (\s a -> s { _namePrefix = a
+                          } :: IamServerCertificateData s)
 
 instance P.HasPathPrefix (IamServerCertificateData s) (TF.Attr s P.Text) where
     pathPrefix =
         P.lens (_pathPrefix :: IamServerCertificateData s -> TF.Attr s P.Text)
-               (\s a -> s { _pathPrefix = a } :: IamServerCertificateData s)
+               (\s a -> s { _pathPrefix = a
+                          } :: IamServerCertificateData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamServerCertificateData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -3012,9 +3343,13 @@ instance s ~ s' => P.HasComputedUploadDate (TF.Ref s' (IamServerCertificateData 
     computedUploadDate x = TF.compute (TF.refKey x) "upload_date"
 
 -- | @aws_iam_user@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_user terraform documentation>
+-- for more information.
 data IamUserData s = IamUserData'
     { _userName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @user_name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IamUserData s) where
@@ -3023,7 +3358,7 @@ instance TF.IsObject (IamUserData s) where
         ]
 
 iamUserData
-    :: TF.Attr s P.Text -- ^ @user_name@
+    :: TF.Attr s P.Text -- ^ @user_name@ - 'P.userName'
     -> TF.DataSource P.Provider (IamUserData s)
 iamUserData _userName =
     TF.newDataSource "aws_iam_user" $
@@ -3034,7 +3369,8 @@ iamUserData _userName =
 instance P.HasUserName (IamUserData s) (TF.Attr s P.Text) where
     userName =
         P.lens (_userName :: IamUserData s -> TF.Attr s P.Text)
-               (\s a -> s { _userName = a } :: IamUserData s)
+               (\s a -> s { _userName = a
+                          } :: IamUserData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamUserData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -3049,6 +3385,9 @@ instance s ~ s' => P.HasComputedUserId (TF.Ref s' (IamUserData s)) (TF.Attr s P.
     computedUserId x = TF.compute (TF.refKey x) "user_id"
 
 -- | @aws_inspector_rules_packages@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_inspector_rules_packages terraform documentation>
+-- for more information.
 data InspectorRulesPackagesData s = InspectorRulesPackagesData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -3065,13 +3404,19 @@ instance s ~ s' => P.HasComputedArns (TF.Ref s' (InspectorRulesPackagesData s)) 
     computedArns x = TF.compute (TF.refKey x) "arns"
 
 -- | @aws_instance@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_instance terraform documentation>
+-- for more information.
 data InstanceData s = InstanceData'
     { _filter          :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     , _getPasswordData :: TF.Attr s P.Bool
-    -- ^ Undocumented.
+    -- ^ @get_password_data@ - (Optional)
+    --
     , _instanceId      :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @instance_id@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (InstanceData s) where
@@ -3094,17 +3439,20 @@ instanceData =
 instance P.HasFilter (InstanceData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: InstanceData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: InstanceData s)
+               (\s a -> s { _filter = a
+                          } :: InstanceData s)
 
 instance P.HasGetPasswordData (InstanceData s) (TF.Attr s P.Bool) where
     getPasswordData =
         P.lens (_getPasswordData :: InstanceData s -> TF.Attr s P.Bool)
-               (\s a -> s { _getPasswordData = a } :: InstanceData s)
+               (\s a -> s { _getPasswordData = a
+                          } :: InstanceData s)
 
 instance P.HasInstanceId (InstanceData s) (TF.Attr s P.Text) where
     instanceId =
         P.lens (_instanceId :: InstanceData s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceId = a } :: InstanceData s)
+               (\s a -> s { _instanceId = a
+                          } :: InstanceData s)
 
 instance s ~ s' => P.HasComputedAmi (TF.Ref s' (InstanceData s)) (TF.Attr s P.Text) where
     computedAmi x = TF.compute (TF.refKey x) "ami"
@@ -3197,11 +3545,16 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (InstanceData s))
     computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "vpc_security_group_ids"
 
 -- | @aws_instances@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_instances terraform documentation>
+-- for more information.
 data InstancesData s = InstancesData'
     { _filter             :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     , _instanceStateNames :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @instance_state_names@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (InstancesData s) where
@@ -3222,12 +3575,14 @@ instancesData =
 instance P.HasFilter (InstancesData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: InstancesData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: InstancesData s)
+               (\s a -> s { _filter = a
+                          } :: InstancesData s)
 
 instance P.HasInstanceStateNames (InstancesData s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     instanceStateNames =
         P.lens (_instanceStateNames :: InstancesData s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _instanceStateNames = a } :: InstancesData s)
+               (\s a -> s { _instanceStateNames = a
+                          } :: InstancesData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (InstancesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "ids"
@@ -3242,9 +3597,13 @@ instance s ~ s' => P.HasComputedPublicIps (TF.Ref s' (InstancesData s)) (TF.Attr
     computedPublicIps x = TF.compute (TF.refKey x) "public_ips"
 
 -- | @aws_internet_gateway@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_internet_gateway terraform documentation>
+-- for more information.
 data InternetGatewayData s = InternetGatewayData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (InternetGatewayData s) where
@@ -3263,7 +3622,8 @@ internetGatewayData =
 instance P.HasFilter (InternetGatewayData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: InternetGatewayData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: InternetGatewayData s)
+               (\s a -> s { _filter = a
+                          } :: InternetGatewayData s)
 
 instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (InternetGatewayData s)) (TF.Attr s [Attachments s]) where
     computedAttachments x = TF.compute (TF.refKey x) "attachments"
@@ -3275,6 +3635,9 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (InternetGatewayData s)) (TF.Att
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_iot_endpoint@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_iot_endpoint terraform documentation>
+-- for more information.
 data IotEndpointData s = IotEndpointData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -3291,11 +3654,16 @@ instance s ~ s' => P.HasComputedEndpointAddress (TF.Ref s' (IotEndpointData s)) 
     computedEndpointAddress x = TF.compute (TF.refKey x) "endpoint_address"
 
 -- | @aws_ip_ranges@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_ip_ranges terraform documentation>
+-- for more information.
 data IpRangesData s = IpRangesData'
     { _regions  :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @regions@ - (Optional)
+    --
     , _services :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
-    -- ^ Undocumented.
+    -- ^ @services@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (IpRangesData s) where
@@ -3305,7 +3673,7 @@ instance TF.IsObject (IpRangesData s) where
         ]
 
 ipRangesData
-    :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @services@
+    :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @services@ - 'P.services'
     -> TF.DataSource P.Provider (IpRangesData s)
 ipRangesData _services =
     TF.newDataSource "aws_ip_ranges" $
@@ -3317,12 +3685,14 @@ ipRangesData _services =
 instance P.HasRegions (IpRangesData s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     regions =
         P.lens (_regions :: IpRangesData s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _regions = a } :: IpRangesData s)
+               (\s a -> s { _regions = a
+                          } :: IpRangesData s)
 
 instance P.HasServices (IpRangesData s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     services =
         P.lens (_services :: IpRangesData s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _services = a } :: IpRangesData s)
+               (\s a -> s { _services = a
+                          } :: IpRangesData s)
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
@@ -3334,9 +3704,13 @@ instance s ~ s' => P.HasComputedSyncToken (TF.Ref s' (IpRangesData s)) (TF.Attr 
     computedSyncToken x = TF.compute (TF.refKey x) "sync_token"
 
 -- | @aws_kinesis_stream@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_kinesis_stream terraform documentation>
+-- for more information.
 data KinesisStreamData s = KinesisStreamData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (KinesisStreamData s) where
@@ -3345,7 +3719,7 @@ instance TF.IsObject (KinesisStreamData s) where
         ]
 
 kinesisStreamData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (KinesisStreamData s)
 kinesisStreamData _name =
     TF.newDataSource "aws_kinesis_stream" $
@@ -3356,7 +3730,8 @@ kinesisStreamData _name =
 instance P.HasName (KinesisStreamData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: KinesisStreamData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: KinesisStreamData s)
+               (\s a -> s { _name = a
+                          } :: KinesisStreamData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (KinesisStreamData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -3383,9 +3758,13 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (KinesisStreamData s)) (TF.Attr 
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_kms_alias@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_kms_alias terraform documentation>
+-- for more information.
 data KmsAliasData s = KmsAliasData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (KmsAliasData s) where
@@ -3394,7 +3773,7 @@ instance TF.IsObject (KmsAliasData s) where
         ]
 
 kmsAliasData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (KmsAliasData s)
 kmsAliasData _name =
     TF.newDataSource "aws_kms_alias" $
@@ -3405,7 +3784,8 @@ kmsAliasData _name =
 instance P.HasName (KmsAliasData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: KmsAliasData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: KmsAliasData s)
+               (\s a -> s { _name = a
+                          } :: KmsAliasData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (KmsAliasData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -3417,13 +3797,19 @@ instance s ~ s' => P.HasComputedTargetKeyId (TF.Ref s' (KmsAliasData s)) (TF.Att
     computedTargetKeyId x = TF.compute (TF.refKey x) "target_key_id"
 
 -- | @aws_kms_ciphertext@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_kms_ciphertext terraform documentation>
+-- for more information.
 data KmsCiphertextData s = KmsCiphertextData'
     { _context   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ Undocumented.
+    -- ^ @context@ - (Optional)
+    --
     , _keyId     :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @key_id@ - (Required)
+    --
     , _plaintext :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @plaintext@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (KmsCiphertextData s) where
@@ -3434,8 +3820,8 @@ instance TF.IsObject (KmsCiphertextData s) where
         ]
 
 kmsCiphertextData
-    :: TF.Attr s P.Text -- ^ @key_id@
-    -> TF.Attr s P.Text -- ^ @plaintext@
+    :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
+    -> TF.Attr s P.Text -- ^ @plaintext@ - 'P.plaintext'
     -> TF.DataSource P.Provider (KmsCiphertextData s)
 kmsCiphertextData _keyId _plaintext =
     TF.newDataSource "aws_kms_ciphertext" $
@@ -3448,27 +3834,35 @@ kmsCiphertextData _keyId _plaintext =
 instance P.HasContext (KmsCiphertextData s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     context =
         P.lens (_context :: KmsCiphertextData s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _context = a } :: KmsCiphertextData s)
+               (\s a -> s { _context = a
+                          } :: KmsCiphertextData s)
 
 instance P.HasKeyId (KmsCiphertextData s) (TF.Attr s P.Text) where
     keyId =
         P.lens (_keyId :: KmsCiphertextData s -> TF.Attr s P.Text)
-               (\s a -> s { _keyId = a } :: KmsCiphertextData s)
+               (\s a -> s { _keyId = a
+                          } :: KmsCiphertextData s)
 
 instance P.HasPlaintext (KmsCiphertextData s) (TF.Attr s P.Text) where
     plaintext =
         P.lens (_plaintext :: KmsCiphertextData s -> TF.Attr s P.Text)
-               (\s a -> s { _plaintext = a } :: KmsCiphertextData s)
+               (\s a -> s { _plaintext = a
+                          } :: KmsCiphertextData s)
 
 instance s ~ s' => P.HasComputedCiphertextBlob (TF.Ref s' (KmsCiphertextData s)) (TF.Attr s P.Text) where
     computedCiphertextBlob x = TF.compute (TF.refKey x) "ciphertext_blob"
 
 -- | @aws_kms_key@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_kms_key terraform documentation>
+-- for more information.
 data KmsKeyData s = KmsKeyData'
     { _grantTokens :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ Undocumented.
+    -- ^ @grant_tokens@ - (Optional)
+    --
     , _keyId       :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @key_id@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (KmsKeyData s) where
@@ -3478,7 +3872,7 @@ instance TF.IsObject (KmsKeyData s) where
         ]
 
 kmsKeyData
-    :: TF.Attr s P.Text -- ^ @key_id@
+    :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
     -> TF.DataSource P.Provider (KmsKeyData s)
 kmsKeyData _keyId =
     TF.newDataSource "aws_kms_key" $
@@ -3490,12 +3884,14 @@ kmsKeyData _keyId =
 instance P.HasGrantTokens (KmsKeyData s) (TF.Attr s [TF.Attr s P.Text]) where
     grantTokens =
         P.lens (_grantTokens :: KmsKeyData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _grantTokens = a } :: KmsKeyData s)
+               (\s a -> s { _grantTokens = a
+                          } :: KmsKeyData s)
 
 instance P.HasKeyId (KmsKeyData s) (TF.Attr s P.Text) where
     keyId =
         P.lens (_keyId :: KmsKeyData s -> TF.Attr s P.Text)
-               (\s a -> s { _keyId = a } :: KmsKeyData s)
+               (\s a -> s { _keyId = a
+                          } :: KmsKeyData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (KmsKeyData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -3534,11 +3930,16 @@ instance s ~ s' => P.HasComputedValidTo (TF.Ref s' (KmsKeyData s)) (TF.Attr s P.
     computedValidTo x = TF.compute (TF.refKey x) "valid_to"
 
 -- | @aws_kms_secret@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_kms_secret terraform documentation>
+-- for more information.
 data KmsSecretData s = KmsSecretData'
     { _hasDynamicAttributes :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @__has_dynamic_attributes@ - (Optional)
+    --
     , _secret               :: TF.Attr s [TF.Attr s (Secret s)]
-    -- ^ Undocumented.
+    -- ^ @secret@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (KmsSecretData s) where
@@ -3548,7 +3949,7 @@ instance TF.IsObject (KmsSecretData s) where
         ]
 
 kmsSecretData
-    :: TF.Attr s [TF.Attr s (Secret s)] -- ^ @secret@
+    :: TF.Attr s [TF.Attr s (Secret s)] -- ^ @secret@ - 'P.secret'
     -> TF.DataSource P.Provider (KmsSecretData s)
 kmsSecretData _secret =
     TF.newDataSource "aws_kms_secret" $
@@ -3560,17 +3961,23 @@ kmsSecretData _secret =
 instance P.HasHasDynamicAttributes (KmsSecretData s) (TF.Attr s P.Text) where
     hasDynamicAttributes =
         P.lens (_hasDynamicAttributes :: KmsSecretData s -> TF.Attr s P.Text)
-               (\s a -> s { _hasDynamicAttributes = a } :: KmsSecretData s)
+               (\s a -> s { _hasDynamicAttributes = a
+                          } :: KmsSecretData s)
 
 instance P.HasSecret (KmsSecretData s) (TF.Attr s [TF.Attr s (Secret s)]) where
     secret =
         P.lens (_secret :: KmsSecretData s -> TF.Attr s [TF.Attr s (Secret s)])
-               (\s a -> s { _secret = a } :: KmsSecretData s)
+               (\s a -> s { _secret = a
+                          } :: KmsSecretData s)
 
 -- | @aws_kms_secrets@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_kms_secrets terraform documentation>
+-- for more information.
 data KmsSecretsData s = KmsSecretsData'
     { _secret :: TF.Attr s [TF.Attr s (Secret s)]
-    -- ^ Undocumented.
+    -- ^ @secret@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (KmsSecretsData s) where
@@ -3579,7 +3986,7 @@ instance TF.IsObject (KmsSecretsData s) where
         ]
 
 kmsSecretsData
-    :: TF.Attr s [TF.Attr s (Secret s)] -- ^ @secret@
+    :: TF.Attr s [TF.Attr s (Secret s)] -- ^ @secret@ - 'P.secret'
     -> TF.DataSource P.Provider (KmsSecretsData s)
 kmsSecretsData _secret =
     TF.newDataSource "aws_kms_secrets" $
@@ -3590,17 +3997,23 @@ kmsSecretsData _secret =
 instance P.HasSecret (KmsSecretsData s) (TF.Attr s [TF.Attr s (Secret s)]) where
     secret =
         P.lens (_secret :: KmsSecretsData s -> TF.Attr s [TF.Attr s (Secret s)])
-               (\s a -> s { _secret = a } :: KmsSecretsData s)
+               (\s a -> s { _secret = a
+                          } :: KmsSecretsData s)
 
 instance s ~ s' => P.HasComputedPlaintext (TF.Ref s' (KmsSecretsData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedPlaintext x = TF.compute (TF.refKey x) "plaintext"
 
 -- | @aws_lambda_function@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_lambda_function terraform documentation>
+-- for more information.
 data LambdaFunctionData s = LambdaFunctionData'
     { _functionName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @function_name@ - (Required)
+    --
     , _qualifier    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @qualifier@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (LambdaFunctionData s) where
@@ -3610,7 +4023,7 @@ instance TF.IsObject (LambdaFunctionData s) where
         ]
 
 lambdaFunctionData
-    :: TF.Attr s P.Text -- ^ @function_name@
+    :: TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
     -> TF.DataSource P.Provider (LambdaFunctionData s)
 lambdaFunctionData _functionName =
     TF.newDataSource "aws_lambda_function" $
@@ -3622,12 +4035,14 @@ lambdaFunctionData _functionName =
 instance P.HasFunctionName (LambdaFunctionData s) (TF.Attr s P.Text) where
     functionName =
         P.lens (_functionName :: LambdaFunctionData s -> TF.Attr s P.Text)
-               (\s a -> s { _functionName = a } :: LambdaFunctionData s)
+               (\s a -> s { _functionName = a
+                          } :: LambdaFunctionData s)
 
 instance P.HasQualifier (LambdaFunctionData s) (TF.Attr s P.Text) where
     qualifier =
         P.lens (_qualifier :: LambdaFunctionData s -> TF.Attr s P.Text)
-               (\s a -> s { _qualifier = a } :: LambdaFunctionData s)
+               (\s a -> s { _qualifier = a
+                          } :: LambdaFunctionData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -3687,13 +4102,19 @@ instance s ~ s' => P.HasComputedVpcConfig (TF.Ref s' (LambdaFunctionData s)) (TF
     computedVpcConfig x = TF.compute (TF.refKey x) "vpc_config"
 
 -- | @aws_lambda_invocation@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_lambda_invocation terraform documentation>
+-- for more information.
 data LambdaInvocationData s = LambdaInvocationData'
     { _functionName :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @function_name@ - (Required)
+    --
     , _input        :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @input@ - (Required)
+    --
     , _qualifier    :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @qualifier@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (LambdaInvocationData s) where
@@ -3704,8 +4125,8 @@ instance TF.IsObject (LambdaInvocationData s) where
         ]
 
 lambdaInvocationData
-    :: TF.Attr s P.Text -- ^ @function_name@
-    -> TF.Attr s P.Text -- ^ @input@
+    :: TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
+    -> TF.Attr s P.Text -- ^ @input@ - 'P.input'
     -> TF.DataSource P.Provider (LambdaInvocationData s)
 lambdaInvocationData _functionName _input =
     TF.newDataSource "aws_lambda_invocation" $
@@ -3718,17 +4139,20 @@ lambdaInvocationData _functionName _input =
 instance P.HasFunctionName (LambdaInvocationData s) (TF.Attr s P.Text) where
     functionName =
         P.lens (_functionName :: LambdaInvocationData s -> TF.Attr s P.Text)
-               (\s a -> s { _functionName = a } :: LambdaInvocationData s)
+               (\s a -> s { _functionName = a
+                          } :: LambdaInvocationData s)
 
 instance P.HasInput (LambdaInvocationData s) (TF.Attr s P.Text) where
     input =
         P.lens (_input :: LambdaInvocationData s -> TF.Attr s P.Text)
-               (\s a -> s { _input = a } :: LambdaInvocationData s)
+               (\s a -> s { _input = a
+                          } :: LambdaInvocationData s)
 
 instance P.HasQualifier (LambdaInvocationData s) (TF.Attr s P.Text) where
     qualifier =
         P.lens (_qualifier :: LambdaInvocationData s -> TF.Attr s P.Text)
-               (\s a -> s { _qualifier = a } :: LambdaInvocationData s)
+               (\s a -> s { _qualifier = a
+                          } :: LambdaInvocationData s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (LambdaInvocationData s)) (TF.Attr s P.Text) where
     computedResult x = TF.compute (TF.refKey x) "result"
@@ -3737,9 +4161,13 @@ instance s ~ s' => P.HasComputedResultMap (TF.Ref s' (LambdaInvocationData s)) (
     computedResultMap x = TF.compute (TF.refKey x) "result_map"
 
 -- | @aws_launch_configuration@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_launch_configuration terraform documentation>
+-- for more information.
 data LaunchConfigurationData s = LaunchConfigurationData'
     { _name :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @name@ - (Required)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (LaunchConfigurationData s) where
@@ -3748,7 +4176,7 @@ instance TF.IsObject (LaunchConfigurationData s) where
         ]
 
 launchConfigurationData
-    :: TF.Attr s P.Text -- ^ @name@
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (LaunchConfigurationData s)
 launchConfigurationData _name =
     TF.newDataSource "aws_launch_configuration" $
@@ -3759,7 +4187,8 @@ launchConfigurationData _name =
 instance P.HasName (LaunchConfigurationData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: LaunchConfigurationData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LaunchConfigurationData s)
+               (\s a -> s { _name = a
+                          } :: LaunchConfigurationData s)
 
 instance s ~ s' => P.HasComputedAssociatePublicIpAddress (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Bool) where
     computedAssociatePublicIpAddress x = TF.compute (TF.refKey x) "associate_public_ip_address"
@@ -3810,6 +4239,9 @@ instance s ~ s' => P.HasComputedVpcClassicLinkSecurityGroups (TF.Ref s' (LaunchC
     computedVpcClassicLinkSecurityGroups x = TF.compute (TF.refKey x) "vpc_classic_link_security_groups"
 
 -- | @aws_lb@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_lb terraform documentation>
+-- for more information.
 data LbData s = LbData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -3868,6 +4300,9 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (LbData s)) (TF.Attr s P.Text)
     computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
 -- | @aws_lb_listener@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_lb_listener terraform documentation>
+-- for more information.
 data LbListenerData s = LbListenerData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -3902,6 +4337,9 @@ instance s ~ s' => P.HasComputedSslPolicy (TF.Ref s' (LbListenerData s)) (TF.Att
     computedSslPolicy x = TF.compute (TF.refKey x) "ssl_policy"
 
 -- | @aws_lb_target_group@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_lb_target_group terraform documentation>
+-- for more information.
 data LbTargetGroupData s = LbTargetGroupData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -3948,6 +4386,9 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (LbTargetGroupData s)) (TF.Attr
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_mq_broker@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_mq_broker terraform documentation>
+-- for more information.
 data MqBrokerData s = MqBrokerData'
     deriving (P.Show, P.Eq, P.Generic)
 
@@ -4006,9 +4447,13 @@ instance s ~ s' => P.HasComputedUser (TF.Ref s' (MqBrokerData s)) (TF.Attr s [TF
     computedUser x = TF.compute (TF.refKey x) "user"
 
 -- | @aws_nat_gateway@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_nat_gateway terraform documentation>
+-- for more information.
 data NatGatewayData s = NatGatewayData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NatGatewayData s) where
@@ -4027,7 +4472,8 @@ natGatewayData =
 instance P.HasFilter (NatGatewayData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: NatGatewayData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: NatGatewayData s)
+               (\s a -> s { _filter = a
+                          } :: NatGatewayData s)
 
 instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (NatGatewayData s)) (TF.Attr s P.Text) where
     computedAllocationId x = TF.compute (TF.refKey x) "allocation_id"
@@ -4057,11 +4503,16 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (NatGatewayData s)) (TF.Attr s 
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_network_acls@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_network_acls terraform documentation>
+-- for more information.
 data NetworkAclsData s = NetworkAclsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     , _vpcId  :: TF.Attr s P.Text
-    -- ^ Undocumented.
+    -- ^ @vpc_id@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NetworkAclsData s) where
@@ -4082,12 +4533,14 @@ networkAclsData =
 instance P.HasFilter (NetworkAclsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: NetworkAclsData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: NetworkAclsData s)
+               (\s a -> s { _filter = a
+                          } :: NetworkAclsData s)
 
 instance P.HasVpcId (NetworkAclsData s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: NetworkAclsData s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a } :: NetworkAclsData s)
+               (\s a -> s { _vpcId = a
+                          } :: NetworkAclsData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (NetworkAclsData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     computedIds x = TF.compute (TF.refKey x) "ids"
@@ -4096,9 +4549,13 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkAclsData s)) (TF.Attr s 
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_network_interface@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_network_interface terraform documentation>
+-- for more information.
 data NetworkInterfaceData s = NetworkInterfaceData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NetworkInterfaceData s) where
@@ -4117,7 +4574,8 @@ networkInterfaceData =
 instance P.HasFilter (NetworkInterfaceData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: NetworkInterfaceData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: NetworkInterfaceData s)
+               (\s a -> s { _filter = a
+                          } :: NetworkInterfaceData s)
 
 instance s ~ s' => P.HasComputedAssociation (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s [Association s]) where
     computedAssociation x = TF.compute (TF.refKey x) "association"
@@ -4171,9 +4629,13 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (NetworkInterfaceData s)) (TF.A
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_network_interfaces@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_network_interfaces terraform documentation>
+-- for more information.
 data NetworkInterfacesData s = NetworkInterfacesData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ Undocumented.
+    -- ^ @filter@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 instance TF.IsObject (NetworkInterfacesData s) where
@@ -4192,7 +4654,8 @@ networkInterfacesData =
 instance P.HasFilter (NetworkInterfacesData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: NetworkInterfacesData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a } :: NetworkInterfacesData s)
+               (\s a -> s { _filter = a
+                          } :: NetworkInterfacesData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (NetworkInterfacesData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
     computedIds x = TF.compute (TF.refKey x) "ids"
@@ -4201,6 +4664,9 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkInterfacesData s)) (TF.A
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_partition@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/aws_partition terraform documentation>
+-- for more information.
 data PartitionData s = PartitionData'
     deriving (P.Show, P.Eq, P.Generic)
 
