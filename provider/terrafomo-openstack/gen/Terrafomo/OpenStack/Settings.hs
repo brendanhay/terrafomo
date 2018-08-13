@@ -114,6 +114,8 @@ module Terrafomo.OpenStack.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
 import qualified Data.List.NonEmpty        as P
@@ -221,10 +223,10 @@ newRoles =
     Roles'
 
 instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (Roles s)) (TF.Attr s P.Text) where
-    computedRoleId x = TF.compute (TF.refKey x) "role_id"
+    computedRoleId x = TF.compute (TF.refKey x) "_computedRoleId"
 
 instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (Roles s)) (TF.Attr s P.Text) where
-    computedRoleName x = TF.compute (TF.refKey x) "role_name"
+    computedRoleName x = TF.compute (TF.refKey x) "_computedRoleName"
 
 -- | @multi_factor_auth_rule@ nested settings.
 data MultiFactorAuthRule s = MultiFactorAuthRule'
@@ -269,10 +271,10 @@ newHostRoutes =
     HostRoutes'
 
 instance s ~ s' => P.HasComputedDestinationCidr (TF.Ref s' (HostRoutes s)) (TF.Attr s P.Text) where
-    computedDestinationCidr x = TF.compute (TF.refKey x) "destination_cidr"
+    computedDestinationCidr x = TF.compute (TF.refKey x) "_computedDestinationCidr"
 
 instance s ~ s' => P.HasComputedNextHop (TF.Ref s' (HostRoutes s)) (TF.Attr s P.Text) where
-    computedNextHop x = TF.compute (TF.refKey x) "next_hop"
+    computedNextHop x = TF.compute (TF.refKey x) "_computedNextHop"
 
 -- | @database@ nested settings.
 data Database s = Database'
@@ -432,13 +434,13 @@ newDpd =
     Dpd'
 
 instance s ~ s' => P.HasComputedAction (TF.Ref s' (Dpd s)) (TF.Attr s P.Text) where
-    computedAction x = TF.compute (TF.refKey x) "action"
+    computedAction x = TF.compute (TF.refKey x) "_computedAction"
 
 instance s ~ s' => P.HasComputedInterval (TF.Ref s' (Dpd s)) (TF.Attr s P.Integer) where
-    computedInterval x = TF.compute (TF.refKey x) "interval"
+    computedInterval x = TF.compute (TF.refKey x) "_computedInterval"
 
 instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (Dpd s)) (TF.Attr s P.Integer) where
-    computedTimeout x = TF.compute (TF.refKey x) "timeout"
+    computedTimeout x = TF.compute (TF.refKey x) "_computedTimeout"
 
 -- | @volume@ nested settings.
 data Volume s = Volume'
@@ -469,10 +471,10 @@ instance P.HasVolumeId (Volume s) (TF.Attr s P.Text) where
                           } :: Volume s)
 
 instance s ~ s' => P.HasComputedDevice (TF.Ref s' (Volume s)) (TF.Attr s P.Text) where
-    computedDevice x = TF.compute (TF.refKey x) "device"
+    computedDevice x = TF.compute (TF.refKey x) "_computedDevice"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Volume s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @lifetime@ nested settings.
 data Lifetime s = Lifetime'
@@ -489,10 +491,10 @@ newLifetime =
     Lifetime'
 
 instance s ~ s' => P.HasComputedUnits (TF.Ref s' (Lifetime s)) (TF.Attr s P.Text) where
-    computedUnits x = TF.compute (TF.refKey x) "units"
+    computedUnits x = TF.compute (TF.refKey x) "_computedUnits"
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (Lifetime s)) (TF.Attr s P.Integer) where
-    computedValue x = TF.compute (TF.refKey x) "value"
+    computedValue x = TF.compute (TF.refKey x) "_computedValue"
 
 -- | @rule@ nested settings.
 data Rule s = Rule'
@@ -580,7 +582,7 @@ instance P.HasToPort (Rule s) (TF.Attr s P.Integer) where
                           } :: Rule s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Rule s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @network@ nested settings.
 data Network s = Network'
@@ -657,13 +659,13 @@ newAttachment =
     Attachment'
 
 instance s ~ s' => P.HasComputedDevice (TF.Ref s' (Attachment s)) (TF.Attr s P.Text) where
-    computedDevice x = TF.compute (TF.refKey x) "device"
+    computedDevice x = TF.compute (TF.refKey x) "_computedDevice"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Attachment s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (Attachment s)) (TF.Attr s P.Text) where
-    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
+    computedInstanceId x = TF.compute (TF.refKey x) "_computedInstanceId"
 
 -- | @user@ nested settings.
 data User s = User'
@@ -946,10 +948,10 @@ newAllocationPools =
     AllocationPools'
 
 instance s ~ s' => P.HasComputedEnd (TF.Ref s' (AllocationPools s)) (TF.Attr s P.Text) where
-    computedEnd x = TF.compute (TF.refKey x) "end"
+    computedEnd x = TF.compute (TF.refKey x) "_computedEnd"
 
 instance s ~ s' => P.HasComputedStart (TF.Ref s' (AllocationPools s)) (TF.Attr s P.Text) where
-    computedStart x = TF.compute (TF.refKey x) "start"
+    computedStart x = TF.compute (TF.refKey x) "_computedStart"
 
 -- | @configuration@ nested settings.
 data Configuration s = Configuration'

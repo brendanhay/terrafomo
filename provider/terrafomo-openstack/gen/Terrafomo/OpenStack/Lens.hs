@@ -333,7 +333,6 @@ module Terrafomo.OpenStack.Lens
     , HasComputedExternalV6Ip (..)
     , HasComputedDefaultPrefixlen (..)
     , HasComputedChecksum (..)
-    , HasComputedData' (..)
     , HasComputedGatewayIp (..)
     , HasComputedUpdateAt (..)
     , HasComputedConnectionLimit (..)
@@ -386,8 +385,10 @@ module Terrafomo.OpenStack.Lens
     , HasComputedInstanceId (..)
     , HasComputedCidr (..)
     , HasComputedLifetime (..)
+    , HasComputedData (..)
     , HasComputedDevice (..)
     , HasComputedExternalGateway (..)
+    , HasComputedType (..)
     , HasComputedDeleteAt (..)
     , HasComputedRoles (..)
     , HasComputedInterval (..)
@@ -410,7 +411,6 @@ module Terrafomo.OpenStack.Lens
     , HasComputedAllFixedIps (..)
     , HasComputedEtag (..)
     , HasComputedMembers (..)
-    , HasComputedType' (..)
     , HasComputedNetworkId (..)
     , HasComputedTimeout (..)
     , HasComputedIpVersion (..)
@@ -2128,9 +2128,6 @@ class HasComputedDefaultPrefixlen a b | a -> b where
 class HasComputedChecksum a b | a -> b where
     computedChecksum :: a -> b
 
-class HasComputedData' a b | a -> b where
-    computedData' :: a -> b
-
 class HasComputedGatewayIp a b | a -> b where
     computedGatewayIp :: a -> b
 
@@ -2287,11 +2284,17 @@ class HasComputedCidr a b | a -> b where
 class HasComputedLifetime a b | a -> b where
     computedLifetime :: a -> b
 
+class HasComputedData a b | a -> b where
+    computedData :: a -> b
+
 class HasComputedDevice a b | a -> b where
     computedDevice :: a -> b
 
 class HasComputedExternalGateway a b | a -> b where
     computedExternalGateway :: a -> b
+
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
 
 class HasComputedDeleteAt a b | a -> b where
     computedDeleteAt :: a -> b
@@ -2358,9 +2361,6 @@ class HasComputedEtag a b | a -> b where
 
 class HasComputedMembers a b | a -> b where
     computedMembers :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedNetworkId a b | a -> b where
     computedNetworkId :: a -> b
