@@ -1,61 +1,12 @@
 {
     "settings": [],
-    "arguments": [
-        {
-            "default": "_akey",
-            "computed": false,
-            "required": true,
-            "help": [
-                "A DNSMadeEasy API Key."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"akey\"",
-            "name": "akey",
-            "method": "akey",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAkey",
-            "optional": false,
-            "label": "_akey"
-        },
-        {
-            "default": "_skey",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The Secret Key for API operations."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"skey\"",
-            "name": "skey",
-            "method": "skey",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasSkey",
-            "optional": false,
-            "label": "_skey"
-        },
-        {
-            "default": "_usesandbox",
-            "computed": false,
-            "required": true,
-            "help": [
-                "If true, use the DME Sandbox."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"usesandbox\"",
-            "name": "usesandbox",
-            "method": "usesandbox",
-            "conflicts": [],
-            "type": "P.Bool",
-            "class": "HasUsesandbox",
-            "optional": false,
-            "label": "_usesandbox"
-        }
-    ],
     "dataSources": [],
     "resources": [
         {
+            "con": {
+                "smart": "recordResource",
+                "name": "RecordResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -64,13 +15,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_domainid",
@@ -79,13 +31,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"domainid\" <$> TF.attribute",
-                    "name": "domainid",
+                    "name": "_domainid",
                     "method": "domainid",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDomainid",
+                    "validate": false,
                     "optional": false,
-                    "label": "_domainid"
+                    "original": "domainid"
                 },
                 {
                     "default": "TF.Nil",
@@ -94,13 +47,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"gtdLocation\" <$> TF.attribute",
-                    "name": "gtdLocation",
+                    "name": "_gtdLocation",
                     "method": "gtdLocation",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasGtdLocation",
+                    "validate": false,
                     "optional": true,
-                    "label": "_gtdLocation"
+                    "original": "gtdLocation"
                 },
                 {
                     "default": "TF.Nil",
@@ -109,13 +63,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"hardLink\" <$> TF.attribute",
-                    "name": "hardLink",
+                    "name": "_hardLink",
                     "method": "hardLink",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasHardLink",
+                    "validate": false,
                     "optional": true,
-                    "label": "_hardLink"
+                    "original": "hardLink"
                 },
                 {
                     "default": "TF.Nil",
@@ -124,13 +79,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"keywords\" <$> TF.attribute",
-                    "name": "keywords",
+                    "name": "_keywords",
                     "method": "keywords",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKeywords",
+                    "validate": false,
                     "optional": true,
-                    "label": "_keywords"
+                    "original": "keywords"
                 },
                 {
                     "default": "TF.Nil",
@@ -139,13 +95,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"mxLevel\" <$> TF.attribute",
-                    "name": "mxLevel",
+                    "name": "_mxLevel",
                     "method": "mxLevel",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasMxLevel",
+                    "validate": false,
                     "optional": true,
-                    "label": "_mxLevel"
+                    "original": "mxLevel"
                 },
                 {
                     "default": "_name",
@@ -154,13 +111,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -169,13 +127,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"port\" <$> TF.attribute",
-                    "name": "port",
+                    "name": "_port",
                     "method": "port",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasPort",
+                    "validate": false,
                     "optional": true,
-                    "label": "_port"
+                    "original": "port"
                 },
                 {
                     "default": "TF.Nil",
@@ -184,13 +143,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"priority\" <$> TF.attribute",
-                    "name": "priority",
+                    "name": "_priority",
                     "method": "priority",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasPriority",
+                    "validate": false,
                     "optional": true,
-                    "label": "_priority"
+                    "original": "priority"
                 },
                 {
                     "default": "TF.Nil",
@@ -199,13 +159,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"redirectType\" <$> TF.attribute",
-                    "name": "redirectType",
+                    "name": "_redirectType",
                     "method": "redirectType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRedirectType",
+                    "validate": false,
                     "optional": true,
-                    "label": "_redirectType"
+                    "original": "redirectType"
                 },
                 {
                     "default": "TF.Nil",
@@ -214,13 +175,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"title\" <$> TF.attribute",
-                    "name": "title",
+                    "name": "_title",
                     "method": "title",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTitle",
+                    "validate": false,
                     "optional": true,
-                    "label": "_title"
+                    "original": "title"
                 },
                 {
                     "default": "TF.Nil",
@@ -229,13 +191,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ttl\" <$> TF.attribute",
-                    "name": "ttl",
+                    "name": "_ttl",
                     "method": "ttl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasTtl",
+                    "validate": false,
                     "optional": true,
-                    "label": "_ttl"
+                    "original": "ttl"
                 },
                 {
                     "default": "_type'",
@@ -244,13 +207,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 },
                 {
                     "default": "_value",
@@ -259,13 +223,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "value",
+                    "name": "_value",
                     "method": "value",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasValue",
+                    "validate": false,
                     "optional": false,
-                    "label": "_value"
+                    "original": "value"
                 },
                 {
                     "default": "TF.Nil",
@@ -274,17 +239,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"weight\" <$> TF.attribute",
-                    "name": "weight",
+                    "name": "_weight",
                     "method": "weight",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasWeight",
+                    "validate": false,
                     "optional": true,
-                    "label": "_weight"
+                    "original": "weight"
                 }
             ],
-            "schema": "Resource",
             "name": "RecordResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -294,13 +260,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"domainid\" <$> TF.attribute",
-                    "name": "domainid",
+                    "name": "_domainid",
                     "method": "domainid",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDomainid",
+                    "validate": false,
                     "optional": false,
-                    "label": "_domainid"
+                    "original": "domainid"
                 },
                 {
                     "default": "_name",
@@ -309,13 +276,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_type'",
@@ -324,13 +292,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 },
                 {
                     "default": "_value",
@@ -339,19 +308,145 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "value",
+                    "name": "_value",
                     "method": "value",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasValue",
+                    "validate": false,
                     "optional": false,
-                    "label": "_value"
+                    "original": "value"
                 }
             ],
+            "conflicts": [],
             "type": "RecordResource s",
             "original": "dme_record"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "_akey",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "A DNSMadeEasy API Key."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"akey\"",
+                "name": "_akey",
+                "method": "akey",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAkey",
+                "validate": false,
+                "optional": false,
+                "original": "akey"
+            },
+            {
+                "default": "_skey",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The Secret Key for API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"skey\"",
+                "name": "_skey",
+                "method": "skey",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasSkey",
+                "validate": false,
+                "optional": false,
+                "original": "skey"
+            },
+            {
+                "default": "_usesandbox",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "If true, use the DME Sandbox."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"usesandbox\"",
+                "name": "_usesandbox",
+                "method": "usesandbox",
+                "conflicts": [],
+                "type": "P.Bool",
+                "class": "HasUsesandbox",
+                "validate": false,
+                "optional": false,
+                "original": "usesandbox"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_akey",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "A DNSMadeEasy API Key."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"akey\"",
+                "name": "_akey",
+                "method": "akey",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAkey",
+                "validate": false,
+                "optional": false,
+                "original": "akey"
+            },
+            {
+                "default": "_skey",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The Secret Key for API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"skey\"",
+                "name": "_skey",
+                "method": "skey",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasSkey",
+                "validate": false,
+                "optional": false,
+                "original": "skey"
+            },
+            {
+                "default": "_usesandbox",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "If true, use the DME Sandbox."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"usesandbox\"",
+                "name": "_usesandbox",
+                "method": "usesandbox",
+                "conflicts": [],
+                "type": "P.Bool",
+                "class": "HasUsesandbox",
+                "validate": false,
+                "optional": false,
+                "original": "usesandbox"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -361,60 +456,6 @@
         "microlens"
     ],
     "name": "DNSMadeEasy",
-    "parameters": [
-        {
-            "default": "_akey",
-            "computed": false,
-            "required": true,
-            "help": [
-                "A DNSMadeEasy API Key."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"akey\"",
-            "name": "akey",
-            "method": "akey",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAkey",
-            "optional": false,
-            "label": "_akey"
-        },
-        {
-            "default": "_skey",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The Secret Key for API operations."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"skey\"",
-            "name": "skey",
-            "method": "skey",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasSkey",
-            "optional": false,
-            "label": "_skey"
-        },
-        {
-            "default": "_usesandbox",
-            "computed": false,
-            "required": true,
-            "help": [
-                "If true, use the DME Sandbox."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"usesandbox\"",
-            "name": "usesandbox",
-            "method": "usesandbox",
-            "conflicts": [],
-            "type": "P.Bool",
-            "class": "HasUsesandbox",
-            "optional": false,
-            "label": "_usesandbox"
-        }
-    ],
     "package": "terrafomo-dnsmadeeasy",
-    "type": "Provider",
     "original": "dme"
 }
