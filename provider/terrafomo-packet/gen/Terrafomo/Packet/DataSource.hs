@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,7 +25,6 @@ module Terrafomo.Packet.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -32,7 +32,10 @@ import Terrafomo.Packet.Settings
 
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
 import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
@@ -44,6 +47,7 @@ import qualified Terrafomo.Packet.Lens     as P
 import qualified Terrafomo.Packet.Provider as P
 import qualified Terrafomo.Packet.Types    as P
 import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Validator       as TF
 
 -- | @packet_precreated_ip_block@ DataSource.
 --
@@ -64,14 +68,6 @@ data PrecreatedIpBlockData s = PrecreatedIpBlockData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (PrecreatedIpBlockData s) where
-    toObject PrecreatedIpBlockData'{..} = catMaybes
-        [ TF.assign "address_family" <$> TF.attribute _addressFamily
-        , TF.assign "facility" <$> TF.attribute _facility
-        , TF.assign "project_id" <$> TF.attribute _projectId
-        , TF.assign "public" <$> TF.attribute _public
-        ]
-
 precreatedIpBlockData
     :: TF.Attr s P.Integer -- ^ @address_family@ - 'P.addressFamily'
     -> TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
@@ -79,7 +75,7 @@ precreatedIpBlockData
     -> TF.Attr s P.Bool -- ^ @public@ - 'P.public'
     -> TF.DataSource P.Provider (PrecreatedIpBlockData s)
 precreatedIpBlockData _addressFamily _facility _projectId _public =
-    TF.newDataSource "packet_precreated_ip_block" $
+    TF.newDataSource "packet_precreated_ip_block" TF.validator $
         PrecreatedIpBlockData'
             { _addressFamily = _addressFamily
             , _facility = _facility
@@ -87,29 +83,36 @@ precreatedIpBlockData _addressFamily _facility _projectId _public =
             , _public = _public
             }
 
+instance TF.IsObject (PrecreatedIpBlockData s) where
+    toObject PrecreatedIpBlockData'{..} = P.catMaybes
+        [ TF.assign "address_family" <$> TF.attribute _addressFamily
+        , TF.assign "facility" <$> TF.attribute _facility
+        , TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "public" <$> TF.attribute _public
+        ]
+
+instance TF.IsValid (PrecreatedIpBlockData s) where
+    validator = P.mempty
+
 instance P.HasAddressFamily (PrecreatedIpBlockData s) (TF.Attr s P.Integer) where
     addressFamily =
         P.lens (_addressFamily :: PrecreatedIpBlockData s -> TF.Attr s P.Integer)
-               (\s a -> s { _addressFamily = a
-                          } :: PrecreatedIpBlockData s)
+               (\s a -> s { _addressFamily = a } :: PrecreatedIpBlockData s)
 
 instance P.HasFacility (PrecreatedIpBlockData s) (TF.Attr s P.Text) where
     facility =
         P.lens (_facility :: PrecreatedIpBlockData s -> TF.Attr s P.Text)
-               (\s a -> s { _facility = a
-                          } :: PrecreatedIpBlockData s)
+               (\s a -> s { _facility = a } :: PrecreatedIpBlockData s)
 
 instance P.HasProjectId (PrecreatedIpBlockData s) (TF.Attr s P.Text) where
     projectId =
         P.lens (_projectId :: PrecreatedIpBlockData s -> TF.Attr s P.Text)
-               (\s a -> s { _projectId = a
-                          } :: PrecreatedIpBlockData s)
+               (\s a -> s { _projectId = a } :: PrecreatedIpBlockData s)
 
 instance P.HasPublic (PrecreatedIpBlockData s) (TF.Attr s P.Bool) where
     public =
         P.lens (_public :: PrecreatedIpBlockData s -> TF.Attr s P.Bool)
-               (\s a -> s { _public = a
-                          } :: PrecreatedIpBlockData s)
+               (\s a -> s { _public = a } :: PrecreatedIpBlockData s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "_computedAddress"

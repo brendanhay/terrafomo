@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -52,7 +53,6 @@ module Terrafomo.Packet.Resource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -60,7 +60,10 @@ import Terrafomo.Packet.Settings
 
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
 import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
@@ -72,6 +75,7 @@ import qualified Terrafomo.Packet.Lens     as P
 import qualified Terrafomo.Packet.Provider as P
 import qualified Terrafomo.Packet.Types    as P
 import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Validator       as TF
 
 -- | @packet_device@ Resource.
 --
@@ -116,22 +120,6 @@ data DeviceResource s = DeviceResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DeviceResource s) where
-    toObject DeviceResource'{..} = catMaybes
-        [ TF.assign "always_pxe" <$> TF.attribute _alwaysPxe
-        , TF.assign "billing_cycle" <$> TF.attribute _billingCycle
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "facility" <$> TF.attribute _facility
-        , TF.assign "hostname" <$> TF.attribute _hostname
-        , TF.assign "ipxe_script_url" <$> TF.attribute _ipxeScriptUrl
-        , TF.assign "operating_system" <$> TF.attribute _operatingSystem
-        , TF.assign "plan" <$> TF.attribute _plan
-        , TF.assign "project_id" <$> TF.attribute _projectId
-        , TF.assign "storage" <$> TF.attribute _storage
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "user_data" <$> TF.attribute _userData
-        ]
-
 deviceResource
     :: TF.Attr s P.Text -- ^ @billing_cycle@ - 'P.billingCycle'
     -> TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
@@ -141,7 +129,7 @@ deviceResource
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Resource P.Provider (DeviceResource s)
 deviceResource _billingCycle _facility _hostname _operatingSystem _plan _projectId =
-    TF.newResource "packet_device" $
+    TF.newResource "packet_device" TF.validator $
         DeviceResource'
             { _alwaysPxe = TF.value P.False
             , _billingCycle = _billingCycle
@@ -157,77 +145,84 @@ deviceResource _billingCycle _facility _hostname _operatingSystem _plan _project
             , _userData = TF.Nil
             }
 
+instance TF.IsObject (DeviceResource s) where
+    toObject DeviceResource'{..} = P.catMaybes
+        [ TF.assign "always_pxe" <$> TF.attribute _alwaysPxe
+        , TF.assign "billing_cycle" <$> TF.attribute _billingCycle
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "facility" <$> TF.attribute _facility
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "ipxe_script_url" <$> TF.attribute _ipxeScriptUrl
+        , TF.assign "operating_system" <$> TF.attribute _operatingSystem
+        , TF.assign "plan" <$> TF.attribute _plan
+        , TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "storage" <$> TF.attribute _storage
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "user_data" <$> TF.attribute _userData
+        ]
+
+instance TF.IsValid (DeviceResource s) where
+    validator = P.mempty
+
 instance P.HasAlwaysPxe (DeviceResource s) (TF.Attr s P.Bool) where
     alwaysPxe =
         P.lens (_alwaysPxe :: DeviceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _alwaysPxe = a
-                          } :: DeviceResource s)
+               (\s a -> s { _alwaysPxe = a } :: DeviceResource s)
 
 instance P.HasBillingCycle (DeviceResource s) (TF.Attr s P.Text) where
     billingCycle =
         P.lens (_billingCycle :: DeviceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _billingCycle = a
-                          } :: DeviceResource s)
+               (\s a -> s { _billingCycle = a } :: DeviceResource s)
 
 instance P.HasDescription (DeviceResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: DeviceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: DeviceResource s)
+               (\s a -> s { _description = a } :: DeviceResource s)
 
 instance P.HasFacility (DeviceResource s) (TF.Attr s P.Text) where
     facility =
         P.lens (_facility :: DeviceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _facility = a
-                          } :: DeviceResource s)
+               (\s a -> s { _facility = a } :: DeviceResource s)
 
 instance P.HasHostname (DeviceResource s) (TF.Attr s P.Text) where
     hostname =
         P.lens (_hostname :: DeviceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _hostname = a
-                          } :: DeviceResource s)
+               (\s a -> s { _hostname = a } :: DeviceResource s)
 
 instance P.HasIpxeScriptUrl (DeviceResource s) (TF.Attr s P.Text) where
     ipxeScriptUrl =
         P.lens (_ipxeScriptUrl :: DeviceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ipxeScriptUrl = a
-                          } :: DeviceResource s)
+               (\s a -> s { _ipxeScriptUrl = a } :: DeviceResource s)
 
 instance P.HasOperatingSystem (DeviceResource s) (TF.Attr s P.Text) where
     operatingSystem =
         P.lens (_operatingSystem :: DeviceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _operatingSystem = a
-                          } :: DeviceResource s)
+               (\s a -> s { _operatingSystem = a } :: DeviceResource s)
 
 instance P.HasPlan (DeviceResource s) (TF.Attr s P.Text) where
     plan =
         P.lens (_plan :: DeviceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _plan = a
-                          } :: DeviceResource s)
+               (\s a -> s { _plan = a } :: DeviceResource s)
 
 instance P.HasProjectId (DeviceResource s) (TF.Attr s P.Text) where
     projectId =
         P.lens (_projectId :: DeviceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _projectId = a
-                          } :: DeviceResource s)
+               (\s a -> s { _projectId = a } :: DeviceResource s)
 
 instance P.HasStorage (DeviceResource s) (TF.Attr s P.Text) where
     storage =
         P.lens (_storage :: DeviceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _storage = a
-                          } :: DeviceResource s)
+               (\s a -> s { _storage = a } :: DeviceResource s)
 
 instance P.HasTags (DeviceResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
         P.lens (_tags :: DeviceResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a
-                          } :: DeviceResource s)
+               (\s a -> s { _tags = a } :: DeviceResource s)
 
 instance P.HasUserData (DeviceResource s) (TF.Attr s P.Text) where
     userData =
         P.lens (_userData :: DeviceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _userData = a
-                          } :: DeviceResource s)
+               (\s a -> s { _userData = a } :: DeviceResource s)
 
 instance s ~ s' => P.HasComputedAccessPrivateIpv4 (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
     computedAccessPrivateIpv4 x = TF.compute (TF.refKey x) "_computedAccessPrivateIpv4"
@@ -247,7 +242,7 @@ instance s ~ s' => P.HasComputedHardwareReservationId (TF.Ref s' (DeviceResource
 instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Bool) where
     computedLocked x = TF.compute (TF.refKey x) "_computedLocked"
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (DeviceResource s)) (TF.Attr s [Network s]) where
+instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (DeviceResource s)) (TF.Attr s [TF.Attr s (Network s)]) where
     computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
 instance s ~ s' => P.HasComputedPublicIpv4SubnetSize (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Integer) where
@@ -275,34 +270,35 @@ data IpAttachmentResource s = IpAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IpAttachmentResource s) where
-    toObject IpAttachmentResource'{..} = catMaybes
-        [ TF.assign "cidr_notation" <$> TF.attribute _cidrNotation
-        , TF.assign "device_id" <$> TF.attribute _deviceId
-        ]
-
 ipAttachmentResource
     :: TF.Attr s P.Text -- ^ @cidr_notation@ - 'P.cidrNotation'
     -> TF.Attr s P.Text -- ^ @device_id@ - 'P.deviceId'
     -> TF.Resource P.Provider (IpAttachmentResource s)
 ipAttachmentResource _cidrNotation _deviceId =
-    TF.newResource "packet_ip_attachment" $
+    TF.newResource "packet_ip_attachment" TF.validator $
         IpAttachmentResource'
             { _cidrNotation = _cidrNotation
             , _deviceId = _deviceId
             }
 
+instance TF.IsObject (IpAttachmentResource s) where
+    toObject IpAttachmentResource'{..} = P.catMaybes
+        [ TF.assign "cidr_notation" <$> TF.attribute _cidrNotation
+        , TF.assign "device_id" <$> TF.attribute _deviceId
+        ]
+
+instance TF.IsValid (IpAttachmentResource s) where
+    validator = P.mempty
+
 instance P.HasCidrNotation (IpAttachmentResource s) (TF.Attr s P.Text) where
     cidrNotation =
         P.lens (_cidrNotation :: IpAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _cidrNotation = a
-                          } :: IpAttachmentResource s)
+               (\s a -> s { _cidrNotation = a } :: IpAttachmentResource s)
 
 instance P.HasDeviceId (IpAttachmentResource s) (TF.Attr s P.Text) where
     deviceId =
         P.lens (_deviceId :: IpAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _deviceId = a
-                          } :: IpAttachmentResource s)
+               (\s a -> s { _deviceId = a } :: IpAttachmentResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
@@ -353,20 +349,11 @@ data OrganizationResource s = OrganizationResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (OrganizationResource s) where
-    toObject OrganizationResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "logo" <$> TF.attribute _logo
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "twitter" <$> TF.attribute _twitter
-        , TF.assign "website" <$> TF.attribute _website
-        ]
-
 organizationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (OrganizationResource s)
 organizationResource _name =
-    TF.newResource "packet_organization" $
+    TF.newResource "packet_organization" TF.validator $
         OrganizationResource'
             { _description = TF.Nil
             , _logo = TF.Nil
@@ -375,35 +362,42 @@ organizationResource _name =
             , _website = TF.Nil
             }
 
+instance TF.IsObject (OrganizationResource s) where
+    toObject OrganizationResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "logo" <$> TF.attribute _logo
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "twitter" <$> TF.attribute _twitter
+        , TF.assign "website" <$> TF.attribute _website
+        ]
+
+instance TF.IsValid (OrganizationResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (OrganizationResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: OrganizationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: OrganizationResource s)
+               (\s a -> s { _description = a } :: OrganizationResource s)
 
 instance P.HasLogo (OrganizationResource s) (TF.Attr s P.Text) where
     logo =
         P.lens (_logo :: OrganizationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _logo = a
-                          } :: OrganizationResource s)
+               (\s a -> s { _logo = a } :: OrganizationResource s)
 
 instance P.HasName (OrganizationResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OrganizationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: OrganizationResource s)
+               (\s a -> s { _name = a } :: OrganizationResource s)
 
 instance P.HasTwitter (OrganizationResource s) (TF.Attr s P.Text) where
     twitter =
         P.lens (_twitter :: OrganizationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _twitter = a
-                          } :: OrganizationResource s)
+               (\s a -> s { _twitter = a } :: OrganizationResource s)
 
 instance P.HasWebsite (OrganizationResource s) (TF.Attr s P.Text) where
     website =
         P.lens (_website :: OrganizationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _website = a
-                          } :: OrganizationResource s)
+               (\s a -> s { _website = a } :: OrganizationResource s)
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
     computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
@@ -421,25 +415,27 @@ data ProjectResource s = ProjectResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ProjectResource s) where
-    toObject ProjectResource'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 projectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (ProjectResource s)
 projectResource _name =
-    TF.newResource "packet_project" $
+    TF.newResource "packet_project" TF.validator $
         ProjectResource'
             { _name = _name
             }
 
+instance TF.IsObject (ProjectResource s) where
+    toObject ProjectResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ProjectResource s) where
+    validator = P.mempty
+
 instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ProjectResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ProjectResource s)
+               (\s a -> s { _name = a } :: ProjectResource s)
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
@@ -469,43 +465,43 @@ data ReservedIpBlockResource s = ReservedIpBlockResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ReservedIpBlockResource s) where
-    toObject ReservedIpBlockResource'{..} = catMaybes
-        [ TF.assign "facility" <$> TF.attribute _facility
-        , TF.assign "project_id" <$> TF.attribute _projectId
-        , TF.assign "quantity" <$> TF.attribute _quantity
-        ]
-
 reservedIpBlockResource
     :: TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Integer -- ^ @quantity@ - 'P.quantity'
     -> TF.Resource P.Provider (ReservedIpBlockResource s)
 reservedIpBlockResource _facility _projectId _quantity =
-    TF.newResource "packet_reserved_ip_block" $
+    TF.newResource "packet_reserved_ip_block" TF.validator $
         ReservedIpBlockResource'
             { _facility = _facility
             , _projectId = _projectId
             , _quantity = _quantity
             }
 
+instance TF.IsObject (ReservedIpBlockResource s) where
+    toObject ReservedIpBlockResource'{..} = P.catMaybes
+        [ TF.assign "facility" <$> TF.attribute _facility
+        , TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "quantity" <$> TF.attribute _quantity
+        ]
+
+instance TF.IsValid (ReservedIpBlockResource s) where
+    validator = P.mempty
+
 instance P.HasFacility (ReservedIpBlockResource s) (TF.Attr s P.Text) where
     facility =
         P.lens (_facility :: ReservedIpBlockResource s -> TF.Attr s P.Text)
-               (\s a -> s { _facility = a
-                          } :: ReservedIpBlockResource s)
+               (\s a -> s { _facility = a } :: ReservedIpBlockResource s)
 
 instance P.HasProjectId (ReservedIpBlockResource s) (TF.Attr s P.Text) where
     projectId =
         P.lens (_projectId :: ReservedIpBlockResource s -> TF.Attr s P.Text)
-               (\s a -> s { _projectId = a
-                          } :: ReservedIpBlockResource s)
+               (\s a -> s { _projectId = a } :: ReservedIpBlockResource s)
 
 instance P.HasQuantity (ReservedIpBlockResource s) (TF.Attr s P.Integer) where
     quantity =
         P.lens (_quantity :: ReservedIpBlockResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _quantity = a
-                          } :: ReservedIpBlockResource s)
+               (\s a -> s { _quantity = a } :: ReservedIpBlockResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
@@ -550,34 +546,35 @@ data SshKeyResource s = SshKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SshKeyResource s) where
-    toObject SshKeyResource'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "public_key" <$> TF.attribute _publicKey
-        ]
-
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
     -> TF.Resource P.Provider (SshKeyResource s)
 sshKeyResource _name _publicKey =
-    TF.newResource "packet_ssh_key" $
+    TF.newResource "packet_ssh_key" TF.validator $
         SshKeyResource'
             { _name = _name
             , _publicKey = _publicKey
             }
 
+instance TF.IsObject (SshKeyResource s) where
+    toObject SshKeyResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "public_key" <$> TF.attribute _publicKey
+        ]
+
+instance TF.IsValid (SshKeyResource s) where
+    validator = P.mempty
+
 instance P.HasName (SshKeyResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SshKeyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: SshKeyResource s)
+               (\s a -> s { _name = a } :: SshKeyResource s)
 
 instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
     publicKey =
         P.lens (_publicKey :: SshKeyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _publicKey = a
-                          } :: SshKeyResource s)
+               (\s a -> s { _publicKey = a } :: SshKeyResource s)
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
@@ -611,21 +608,10 @@ data VolumeResource s = VolumeResource'
     , _size             :: TF.Attr s P.Integer
     -- ^ @size@ - (Required)
     --
-    , _snapshotPolicies :: TF.Attr s [SnapshotPolicies s]
+    , _snapshotPolicies :: TF.Attr s [TF.Attr s (SnapshotPolicies s)]
     -- ^ @snapshot_policies@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance TF.IsObject (VolumeResource s) where
-    toObject VolumeResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "facility" <$> TF.attribute _facility
-        , TF.assign "locked" <$> TF.attribute _locked
-        , TF.assign "plan" <$> TF.attribute _plan
-        , TF.assign "project_id" <$> TF.attribute _projectId
-        , TF.assign "size" <$> TF.attribute _size
-        , TF.assign "snapshot_policies" <$> TF.attribute _snapshotPolicies
-        ]
 
 volumeResource
     :: TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
@@ -634,7 +620,7 @@ volumeResource
     -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
     -> TF.Resource P.Provider (VolumeResource s)
 volumeResource _facility _plan _projectId _size =
-    TF.newResource "packet_volume" $
+    TF.newResource "packet_volume" TF.validator $
         VolumeResource'
             { _description = TF.Nil
             , _facility = _facility
@@ -645,49 +631,60 @@ volumeResource _facility _plan _projectId _size =
             , _snapshotPolicies = TF.Nil
             }
 
+instance TF.IsObject (VolumeResource s) where
+    toObject VolumeResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "facility" <$> TF.attribute _facility
+        , TF.assign "locked" <$> TF.attribute _locked
+        , TF.assign "plan" <$> TF.attribute _plan
+        , TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "snapshot_policies" <$> TF.attribute _snapshotPolicies
+        ]
+
+instance TF.IsValid (VolumeResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_snapshotPolicies"
+                  (_snapshotPolicies
+                      :: VolumeResource s -> TF.Attr s [TF.Attr s (SnapshotPolicies s)])
+                  TF.validator
+
 instance P.HasDescription (VolumeResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: VolumeResource s)
+               (\s a -> s { _description = a } :: VolumeResource s)
 
 instance P.HasFacility (VolumeResource s) (TF.Attr s P.Text) where
     facility =
         P.lens (_facility :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _facility = a
-                          } :: VolumeResource s)
+               (\s a -> s { _facility = a } :: VolumeResource s)
 
 instance P.HasLocked (VolumeResource s) (TF.Attr s P.Bool) where
     locked =
         P.lens (_locked :: VolumeResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _locked = a
-                          } :: VolumeResource s)
+               (\s a -> s { _locked = a } :: VolumeResource s)
 
 instance P.HasPlan (VolumeResource s) (TF.Attr s P.Text) where
     plan =
         P.lens (_plan :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _plan = a
-                          } :: VolumeResource s)
+               (\s a -> s { _plan = a } :: VolumeResource s)
 
 instance P.HasProjectId (VolumeResource s) (TF.Attr s P.Text) where
     projectId =
         P.lens (_projectId :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _projectId = a
-                          } :: VolumeResource s)
+               (\s a -> s { _projectId = a } :: VolumeResource s)
 
 instance P.HasSize (VolumeResource s) (TF.Attr s P.Integer) where
     size =
         P.lens (_size :: VolumeResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _size = a
-                          } :: VolumeResource s)
+               (\s a -> s { _size = a } :: VolumeResource s)
 
-instance P.HasSnapshotPolicies (VolumeResource s) (TF.Attr s [SnapshotPolicies s]) where
+instance P.HasSnapshotPolicies (VolumeResource s) (TF.Attr s [TF.Attr s (SnapshotPolicies s)]) where
     snapshotPolicies =
-        P.lens (_snapshotPolicies :: VolumeResource s -> TF.Attr s [SnapshotPolicies s])
-               (\s a -> s { _snapshotPolicies = a
-                          } :: VolumeResource s)
+        P.lens (_snapshotPolicies :: VolumeResource s -> TF.Attr s [TF.Attr s (SnapshotPolicies s)])
+               (\s a -> s { _snapshotPolicies = a } :: VolumeResource s)
 
-instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (VolumeResource s)) (TF.Attr s [Attachments s]) where
+instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (VolumeResource s)) (TF.Attr s [TF.Attr s (Attachments s)]) where
     computedAttachments x = TF.compute (TF.refKey x) "_computedAttachments"
 
 instance s ~ s' => P.HasComputedBillingCycle (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
@@ -718,31 +715,32 @@ data VolumeAttachmentResource s = VolumeAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (VolumeAttachmentResource s) where
-    toObject VolumeAttachmentResource'{..} = catMaybes
-        [ TF.assign "device_id" <$> TF.attribute _deviceId
-        , TF.assign "volume_id" <$> TF.attribute _volumeId
-        ]
-
 volumeAttachmentResource
     :: TF.Attr s P.Text -- ^ @device_id@ - 'P.deviceId'
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> TF.Resource P.Provider (VolumeAttachmentResource s)
 volumeAttachmentResource _deviceId _volumeId =
-    TF.newResource "packet_volume_attachment" $
+    TF.newResource "packet_volume_attachment" TF.validator $
         VolumeAttachmentResource'
             { _deviceId = _deviceId
             , _volumeId = _volumeId
             }
 
+instance TF.IsObject (VolumeAttachmentResource s) where
+    toObject VolumeAttachmentResource'{..} = P.catMaybes
+        [ TF.assign "device_id" <$> TF.attribute _deviceId
+        , TF.assign "volume_id" <$> TF.attribute _volumeId
+        ]
+
+instance TF.IsValid (VolumeAttachmentResource s) where
+    validator = P.mempty
+
 instance P.HasDeviceId (VolumeAttachmentResource s) (TF.Attr s P.Text) where
     deviceId =
         P.lens (_deviceId :: VolumeAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _deviceId = a
-                          } :: VolumeAttachmentResource s)
+               (\s a -> s { _deviceId = a } :: VolumeAttachmentResource s)
 
 instance P.HasVolumeId (VolumeAttachmentResource s) (TF.Attr s P.Text) where
     volumeId =
         P.lens (_volumeId :: VolumeAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _volumeId = a
-                          } :: VolumeAttachmentResource s)
+               (\s a -> s { _volumeId = a } :: VolumeAttachmentResource s)
