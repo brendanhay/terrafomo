@@ -1,78 +1,11 @@
 {
     "settings": [],
-    "arguments": [
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "The GitLab Base API URL"
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"base_url\" <$>",
-            "name": "base_url",
-            "method": "baseUrl",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasBaseUrl",
-            "optional": true,
-            "label": "_baseUrl"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "A file containing the ca certificate to use in case ssl certificate is not",
-                "from a standard chain"
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"cacert_file\" <$>",
-            "name": "cacert_file",
-            "method": "cacertFile",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasCacertFile",
-            "optional": true,
-            "label": "_cacertFile"
-        },
-        {
-            "default": "P.False",
-            "computed": false,
-            "required": false,
-            "help": [
-                "Disable SSL verification of API calls"
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"insecure\"",
-            "name": "insecure",
-            "method": "insecure",
-            "conflicts": [],
-            "type": "P.Bool",
-            "class": "HasInsecure",
-            "optional": true,
-            "label": "_insecure"
-        },
-        {
-            "default": "_token",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The OAuth token used to connect to GitLab."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"token\"",
-            "name": "token",
-            "method": "token",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasToken",
-            "optional": false,
-            "label": "_token"
-        }
-    ],
     "dataSources": [
         {
+            "con": {
+                "smart": "projectData",
+                "name": "ProjectData'"
+            },
             "arguments": [
                 {
                     "default": "_id",
@@ -81,17 +14,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_id",
                     "method": "id",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_id"
+                    "original": "id"
                 }
             ],
-            "schema": "DataSource",
             "name": "ProjectData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -101,19 +35,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_id",
                     "method": "id",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_id"
+                    "original": "id"
                 }
             ],
+            "conflicts": [],
             "type": "ProjectData s",
             "original": "gitlab_project"
         },
         {
+            "con": {
+                "smart": "userData",
+                "name": "UserData'"
+            },
             "arguments": [
                 {
                     "default": "_email",
@@ -122,17 +62,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "email",
+                    "name": "_email",
                     "method": "email",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEmail",
+                    "validate": false,
                     "optional": false,
-                    "label": "_email"
+                    "original": "email"
                 }
             ],
-            "schema": "DataSource",
             "name": "UserData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -142,21 +83,27 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "email",
+                    "name": "_email",
                     "method": "email",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEmail",
+                    "validate": false,
                     "optional": false,
-                    "label": "_email"
+                    "original": "email"
                 }
             ],
+            "conflicts": [],
             "type": "UserData s",
             "original": "gitlab_user"
         }
     ],
     "resources": [
         {
+            "con": {
+                "smart": "deployKeyResource",
+                "name": "DeployKeyResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value P.False",
@@ -165,13 +112,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"can_push\" <$> TF.attribute",
-                    "name": "can_push",
+                    "name": "_canPush",
                     "method": "canPush",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasCanPush",
+                    "validate": false,
                     "optional": true,
-                    "label": "_canPush"
+                    "original": "can_push"
                 },
                 {
                     "default": "_key",
@@ -180,13 +128,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"key\" <$> TF.attribute",
-                    "name": "key",
+                    "name": "_key",
                     "method": "key",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_key"
+                    "original": "key"
                 },
                 {
                     "default": "_project",
@@ -195,13 +144,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"project\" <$> TF.attribute",
-                    "name": "project",
+                    "name": "_project",
                     "method": "project",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProject",
+                    "validate": false,
                     "optional": false,
-                    "label": "_project"
+                    "original": "project"
                 },
                 {
                     "default": "_title",
@@ -210,17 +160,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"title\" <$> TF.attribute",
-                    "name": "title",
+                    "name": "_title",
                     "method": "title",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTitle",
+                    "validate": false,
                     "optional": false,
-                    "label": "_title"
+                    "original": "title"
                 }
             ],
-            "schema": "Resource",
             "name": "DeployKeyResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -230,13 +181,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"key\" <$> TF.attribute",
-                    "name": "key",
+                    "name": "_key",
                     "method": "key",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_key"
+                    "original": "key"
                 },
                 {
                     "default": "_project",
@@ -245,13 +197,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"project\" <$> TF.attribute",
-                    "name": "project",
+                    "name": "_project",
                     "method": "project",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProject",
+                    "validate": false,
                     "optional": false,
-                    "label": "_project"
+                    "original": "project"
                 },
                 {
                     "default": "_title",
@@ -260,19 +213,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"title\" <$> TF.attribute",
-                    "name": "title",
+                    "name": "_title",
                     "method": "title",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTitle",
+                    "validate": false,
                     "optional": false,
-                    "label": "_title"
+                    "original": "title"
                 }
             ],
+            "conflicts": [],
             "type": "DeployKeyResource s",
             "original": "gitlab_deploy_key"
         },
         {
+            "con": {
+                "smart": "groupResource",
+                "name": "GroupResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -281,13 +240,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.value P.True",
@@ -296,13 +256,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"lfs_enabled\" <$> TF.attribute",
-                    "name": "lfs_enabled",
+                    "name": "_lfsEnabled",
                     "method": "lfsEnabled",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasLfsEnabled",
+                    "validate": false,
                     "optional": true,
-                    "label": "_lfsEnabled"
+                    "original": "lfs_enabled"
                 },
                 {
                     "default": "_name",
@@ -311,13 +272,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.value 0",
@@ -326,13 +288,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"parent_id\" <$> TF.attribute",
-                    "name": "parent_id",
+                    "name": "_parentId",
                     "method": "parentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasParentId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_parentId"
+                    "original": "parent_id"
                 },
                 {
                     "default": "_path",
@@ -341,13 +304,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_path"
+                    "original": "path"
                 },
                 {
                     "default": "TF.value P.False",
@@ -356,17 +320,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"request_access_enabled\" <$> TF.attribute",
-                    "name": "request_access_enabled",
+                    "name": "_requestAccessEnabled",
                     "method": "requestAccessEnabled",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasRequestAccessEnabled",
+                    "validate": false,
                     "optional": true,
-                    "label": "_requestAccessEnabled"
+                    "original": "request_access_enabled"
                 }
             ],
-            "schema": "Resource",
             "name": "GroupResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -375,13 +340,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"visibility_level\" <$> TF.attribute",
-                    "name": "visibility_level",
+                    "name": "_computedVisibilityLevel",
                     "method": "computedVisibilityLevel",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVisibilityLevel",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVisibilityLevel"
+                    "original": "visibility_level"
                 }
             ],
             "parameters": [
@@ -392,13 +358,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_path",
@@ -407,19 +374,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_path"
+                    "original": "path"
                 }
             ],
+            "conflicts": [],
             "type": "GroupResource s",
             "original": "gitlab_group"
         },
         {
+            "con": {
+                "smart": "labelResource",
+                "name": "LabelResource'"
+            },
             "arguments": [
                 {
                     "default": "_color",
@@ -428,13 +401,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"color\" <$> TF.attribute",
-                    "name": "color",
+                    "name": "_color",
                     "method": "color",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasColor",
+                    "validate": false,
                     "optional": false,
-                    "label": "_color"
+                    "original": "color"
                 },
                 {
                     "default": "TF.Nil",
@@ -443,13 +417,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_name",
@@ -458,13 +433,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_project",
@@ -473,17 +449,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"project\" <$> TF.attribute",
-                    "name": "project",
+                    "name": "_project",
                     "method": "project",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProject",
+                    "validate": false,
                     "optional": false,
-                    "label": "_project"
+                    "original": "project"
                 }
             ],
-            "schema": "Resource",
             "name": "LabelResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -493,13 +470,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"color\" <$> TF.attribute",
-                    "name": "color",
+                    "name": "_color",
                     "method": "color",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasColor",
+                    "validate": false,
                     "optional": false,
-                    "label": "_color"
+                    "original": "color"
                 },
                 {
                     "default": "_name",
@@ -508,13 +486,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_project",
@@ -523,19 +502,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"project\" <$> TF.attribute",
-                    "name": "project",
+                    "name": "_project",
                     "method": "project",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProject",
+                    "validate": false,
                     "optional": false,
-                    "label": "_project"
+                    "original": "project"
                 }
             ],
+            "conflicts": [],
             "type": "LabelResource s",
             "original": "gitlab_label"
         },
         {
+            "con": {
+                "smart": "projectResource",
+                "name": "ProjectResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -544,13 +529,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"default_branch\" <$> TF.attribute",
-                    "name": "default_branch",
+                    "name": "_defaultBranch",
                     "method": "defaultBranch",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDefaultBranch",
+                    "validate": false,
                     "optional": true,
-                    "label": "_defaultBranch"
+                    "original": "default_branch"
                 },
                 {
                     "default": "TF.Nil",
@@ -559,13 +545,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.value P.True",
@@ -574,13 +561,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"issues_enabled\" <$> TF.attribute",
-                    "name": "issues_enabled",
+                    "name": "_issuesEnabled",
                     "method": "issuesEnabled",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasIssuesEnabled",
+                    "validate": false,
                     "optional": true,
-                    "label": "_issuesEnabled"
+                    "original": "issues_enabled"
                 },
                 {
                     "default": "TF.value P.True",
@@ -589,13 +577,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"merge_requests_enabled\" <$> TF.attribute",
-                    "name": "merge_requests_enabled",
+                    "name": "_mergeRequestsEnabled",
                     "method": "mergeRequestsEnabled",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasMergeRequestsEnabled",
+                    "validate": false,
                     "optional": true,
-                    "label": "_mergeRequestsEnabled"
+                    "original": "merge_requests_enabled"
                 },
                 {
                     "default": "_name",
@@ -604,13 +593,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -619,13 +609,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": true,
-                    "label": "_path"
+                    "original": "path"
                 },
                 {
                     "default": "TF.value P.True",
@@ -634,13 +625,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"snippets_enabled\" <$> TF.attribute",
-                    "name": "snippets_enabled",
+                    "name": "_snippetsEnabled",
                     "method": "snippetsEnabled",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasSnippetsEnabled",
+                    "validate": false,
                     "optional": true,
-                    "label": "_snippetsEnabled"
+                    "original": "snippets_enabled"
                 },
                 {
                     "default": "TF.value \"private\"",
@@ -649,13 +641,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"visibility_level\" <$> TF.attribute",
-                    "name": "visibility_level",
+                    "name": "_visibilityLevel",
                     "method": "visibilityLevel",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVisibilityLevel",
+                    "validate": false,
                     "optional": true,
-                    "label": "_visibilityLevel"
+                    "original": "visibility_level"
                 },
                 {
                     "default": "TF.value P.True",
@@ -664,17 +657,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"wiki_enabled\" <$> TF.attribute",
-                    "name": "wiki_enabled",
+                    "name": "_wikiEnabled",
                     "method": "wikiEnabled",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasWikiEnabled",
+                    "validate": false,
                     "optional": true,
-                    "label": "_wikiEnabled"
+                    "original": "wiki_enabled"
                 }
             ],
-            "schema": "Resource",
             "name": "ProjectResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -683,13 +677,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"http_url_to_repo\" <$> TF.attribute",
-                    "name": "http_url_to_repo",
+                    "name": "_computedHttpUrlToRepo",
                     "method": "computedHttpUrlToRepo",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHttpUrlToRepo",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedHttpUrlToRepo"
+                    "original": "http_url_to_repo"
                 },
                 {
                     "default": "TF.Nil",
@@ -698,13 +693,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"namespace_id\" <$> TF.attribute",
-                    "name": "namespace_id",
+                    "name": "_computedNamespaceId",
                     "method": "computedNamespaceId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedNamespaceId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedNamespaceId"
+                    "original": "namespace_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -713,13 +709,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ssh_url_to_repo\" <$> TF.attribute",
-                    "name": "ssh_url_to_repo",
+                    "name": "_computedSshUrlToRepo",
                     "method": "computedSshUrlToRepo",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSshUrlToRepo",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedSshUrlToRepo"
+                    "original": "ssh_url_to_repo"
                 },
                 {
                     "default": "TF.Nil",
@@ -728,13 +725,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"web_url\" <$> TF.attribute",
-                    "name": "web_url",
+                    "name": "_computedWebUrl",
                     "method": "computedWebUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedWebUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedWebUrl"
+                    "original": "web_url"
                 }
             ],
             "parameters": [
@@ -745,19 +743,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "ProjectResource s",
             "original": "gitlab_project"
         },
         {
+            "con": {
+                "smart": "projectHookResource",
+                "name": "ProjectHookResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value P.True",
@@ -766,13 +770,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"enable_ssl_verification\" <$> TF.attribute",
-                    "name": "enable_ssl_verification",
+                    "name": "_enableSslVerification",
                     "method": "enableSslVerification",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasEnableSslVerification",
+                    "validate": false,
                     "optional": true,
-                    "label": "_enableSslVerification"
+                    "original": "enable_ssl_verification"
                 },
                 {
                     "default": "TF.value P.False",
@@ -781,13 +786,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"issues_events\" <$> TF.attribute",
-                    "name": "issues_events",
+                    "name": "_issuesEvents",
                     "method": "issuesEvents",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasIssuesEvents",
+                    "validate": false,
                     "optional": true,
-                    "label": "_issuesEvents"
+                    "original": "issues_events"
                 },
                 {
                     "default": "TF.value P.False",
@@ -796,13 +802,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"job_events\" <$> TF.attribute",
-                    "name": "job_events",
+                    "name": "_jobEvents",
                     "method": "jobEvents",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasJobEvents",
+                    "validate": false,
                     "optional": true,
-                    "label": "_jobEvents"
+                    "original": "job_events"
                 },
                 {
                     "default": "TF.value P.False",
@@ -811,13 +818,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"merge_requests_events\" <$> TF.attribute",
-                    "name": "merge_requests_events",
+                    "name": "_mergeRequestsEvents",
                     "method": "mergeRequestsEvents",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasMergeRequestsEvents",
+                    "validate": false,
                     "optional": true,
-                    "label": "_mergeRequestsEvents"
+                    "original": "merge_requests_events"
                 },
                 {
                     "default": "TF.value P.False",
@@ -826,13 +834,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"note_events\" <$> TF.attribute",
-                    "name": "note_events",
+                    "name": "_noteEvents",
                     "method": "noteEvents",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasNoteEvents",
+                    "validate": false,
                     "optional": true,
-                    "label": "_noteEvents"
+                    "original": "note_events"
                 },
                 {
                     "default": "TF.value P.False",
@@ -841,13 +850,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"pipeline_events\" <$> TF.attribute",
-                    "name": "pipeline_events",
+                    "name": "_pipelineEvents",
                     "method": "pipelineEvents",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasPipelineEvents",
+                    "validate": false,
                     "optional": true,
-                    "label": "_pipelineEvents"
+                    "original": "pipeline_events"
                 },
                 {
                     "default": "_project",
@@ -856,13 +866,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"project\" <$> TF.attribute",
-                    "name": "project",
+                    "name": "_project",
                     "method": "project",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProject",
+                    "validate": false,
                     "optional": false,
-                    "label": "_project"
+                    "original": "project"
                 },
                 {
                     "default": "TF.value P.True",
@@ -871,13 +882,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"push_events\" <$> TF.attribute",
-                    "name": "push_events",
+                    "name": "_pushEvents",
                     "method": "pushEvents",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasPushEvents",
+                    "validate": false,
                     "optional": true,
-                    "label": "_pushEvents"
+                    "original": "push_events"
                 },
                 {
                     "default": "TF.value P.False",
@@ -886,13 +898,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"tag_push_events\" <$> TF.attribute",
-                    "name": "tag_push_events",
+                    "name": "_tagPushEvents",
                     "method": "tagPushEvents",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasTagPushEvents",
+                    "validate": false,
                     "optional": true,
-                    "label": "_tagPushEvents"
+                    "original": "tag_push_events"
                 },
                 {
                     "default": "TF.Nil",
@@ -901,13 +914,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"token\" <$> TF.attribute",
-                    "name": "token",
+                    "name": "_token",
                     "method": "token",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasToken",
+                    "validate": false,
                     "optional": true,
-                    "label": "_token"
+                    "original": "token"
                 },
                 {
                     "default": "_url",
@@ -916,13 +930,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"url\" <$> TF.attribute",
-                    "name": "url",
+                    "name": "_url",
                     "method": "url",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_url"
+                    "original": "url"
                 },
                 {
                     "default": "TF.value P.False",
@@ -931,17 +946,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"wiki_page_events\" <$> TF.attribute",
-                    "name": "wiki_page_events",
+                    "name": "_wikiPageEvents",
                     "method": "wikiPageEvents",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasWikiPageEvents",
+                    "validate": false,
                     "optional": true,
-                    "label": "_wikiPageEvents"
+                    "original": "wiki_page_events"
                 }
             ],
-            "schema": "Resource",
             "name": "ProjectHookResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -951,13 +967,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"project\" <$> TF.attribute",
-                    "name": "project",
+                    "name": "_project",
                     "method": "project",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProject",
+                    "validate": false,
                     "optional": false,
-                    "label": "_project"
+                    "original": "project"
                 },
                 {
                     "default": "_url",
@@ -966,19 +983,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"url\" <$> TF.attribute",
-                    "name": "url",
+                    "name": "_url",
                     "method": "url",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_url"
+                    "original": "url"
                 }
             ],
+            "conflicts": [],
             "type": "ProjectHookResource s",
             "original": "gitlab_project_hook"
         },
         {
+            "con": {
+                "smart": "projectMembershipResource",
+                "name": "ProjectMembershipResource'"
+            },
             "arguments": [
                 {
                     "default": "_accessLevel",
@@ -987,13 +1010,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"access_level\" <$> TF.attribute",
-                    "name": "access_level",
+                    "name": "_accessLevel",
                     "method": "accessLevel",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAccessLevel",
+                    "validate": false,
                     "optional": false,
-                    "label": "_accessLevel"
+                    "original": "access_level"
                 },
                 {
                     "default": "_projectId",
@@ -1002,13 +1026,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"project_id\" <$> TF.attribute",
-                    "name": "project_id",
+                    "name": "_projectId",
                     "method": "projectId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProjectId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_projectId"
+                    "original": "project_id"
                 },
                 {
                     "default": "_userId",
@@ -1017,17 +1042,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"user_id\" <$> TF.attribute",
-                    "name": "user_id",
+                    "name": "_userId",
                     "method": "userId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasUserId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_userId"
+                    "original": "user_id"
                 }
             ],
-            "schema": "Resource",
             "name": "ProjectMembershipResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1037,13 +1063,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"access_level\" <$> TF.attribute",
-                    "name": "access_level",
+                    "name": "_accessLevel",
                     "method": "accessLevel",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAccessLevel",
+                    "validate": false,
                     "optional": false,
-                    "label": "_accessLevel"
+                    "original": "access_level"
                 },
                 {
                     "default": "_projectId",
@@ -1052,13 +1079,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"project_id\" <$> TF.attribute",
-                    "name": "project_id",
+                    "name": "_projectId",
                     "method": "projectId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProjectId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_projectId"
+                    "original": "project_id"
                 },
                 {
                     "default": "_userId",
@@ -1067,19 +1095,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"user_id\" <$> TF.attribute",
-                    "name": "user_id",
+                    "name": "_userId",
                     "method": "userId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasUserId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_userId"
+                    "original": "user_id"
                 }
             ],
+            "conflicts": [],
             "type": "ProjectMembershipResource s",
             "original": "gitlab_project_membership"
         },
         {
+            "con": {
+                "smart": "userResource",
+                "name": "UserResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value P.False",
@@ -1088,13 +1122,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"can_create_group\" <$> TF.attribute",
-                    "name": "can_create_group",
+                    "name": "_canCreateGroup",
                     "method": "canCreateGroup",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasCanCreateGroup",
+                    "validate": false,
                     "optional": true,
-                    "label": "_canCreateGroup"
+                    "original": "can_create_group"
                 },
                 {
                     "default": "_email",
@@ -1103,13 +1138,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "email",
+                    "name": "_email",
                     "method": "email",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEmail",
+                    "validate": false,
                     "optional": false,
-                    "label": "_email"
+                    "original": "email"
                 },
                 {
                     "default": "TF.value P.False",
@@ -1118,13 +1154,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"is_admin\" <$> TF.attribute",
-                    "name": "is_admin",
+                    "name": "_isAdmin",
                     "method": "isAdmin",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasIsAdmin",
+                    "validate": false,
                     "optional": true,
-                    "label": "_isAdmin"
+                    "original": "is_admin"
                 },
                 {
                     "default": "TF.value P.False",
@@ -1133,13 +1170,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"is_external\" <$> TF.attribute",
-                    "name": "is_external",
+                    "name": "_isExternal",
                     "method": "isExternal",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasIsExternal",
+                    "validate": false,
                     "optional": true,
-                    "label": "_isExternal"
+                    "original": "is_external"
                 },
                 {
                     "default": "_name",
@@ -1148,13 +1186,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_password",
@@ -1163,13 +1202,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"password\" <$> TF.attribute",
-                    "name": "password",
+                    "name": "_password",
                     "method": "password",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPassword",
+                    "validate": false,
                     "optional": false,
-                    "label": "_password"
+                    "original": "password"
                 },
                 {
                     "default": "TF.value 0",
@@ -1178,13 +1218,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"projects_limit\" <$> TF.attribute",
-                    "name": "projects_limit",
+                    "name": "_projectsLimit",
                     "method": "projectsLimit",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasProjectsLimit",
+                    "validate": false,
                     "optional": true,
-                    "label": "_projectsLimit"
+                    "original": "projects_limit"
                 },
                 {
                     "default": "TF.value P.True",
@@ -1193,13 +1234,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"skip_confirmation\" <$> TF.attribute",
-                    "name": "skip_confirmation",
+                    "name": "_skipConfirmation",
                     "method": "skipConfirmation",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasSkipConfirmation",
+                    "validate": false,
                     "optional": true,
-                    "label": "_skipConfirmation"
+                    "original": "skip_confirmation"
                 },
                 {
                     "default": "_username",
@@ -1208,17 +1250,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"username\" <$> TF.attribute",
-                    "name": "username",
+                    "name": "_username",
                     "method": "username",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUsername",
+                    "validate": false,
                     "optional": false,
-                    "label": "_username"
+                    "original": "username"
                 }
             ],
-            "schema": "Resource",
             "name": "UserResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1228,13 +1271,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "email",
+                    "name": "_email",
                     "method": "email",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEmail",
+                    "validate": false,
                     "optional": false,
-                    "label": "_email"
+                    "original": "email"
                 },
                 {
                     "default": "_name",
@@ -1243,13 +1287,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_password",
@@ -1258,13 +1303,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"password\" <$> TF.attribute",
-                    "name": "password",
+                    "name": "_password",
                     "method": "password",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPassword",
+                    "validate": false,
                     "optional": false,
-                    "label": "_password"
+                    "original": "password"
                 },
                 {
                     "default": "_username",
@@ -1273,19 +1319,128 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"username\" <$> TF.attribute",
-                    "name": "username",
+                    "name": "_username",
                     "method": "username",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUsername",
+                    "validate": false,
                     "optional": false,
-                    "label": "_username"
+                    "original": "username"
                 }
             ],
+            "conflicts": [],
             "type": "UserResource s",
             "original": "gitlab_user"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "The GitLab Base API URL"
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"base_url\" <$>",
+                "name": "_baseUrl",
+                "method": "baseUrl",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasBaseUrl",
+                "validate": false,
+                "optional": true,
+                "original": "base_url"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "A file containing the ca certificate to use in case ssl certificate is not",
+                    "from a standard chain"
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"cacert_file\" <$>",
+                "name": "_cacertFile",
+                "method": "cacertFile",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasCacertFile",
+                "validate": false,
+                "optional": true,
+                "original": "cacert_file"
+            },
+            {
+                "default": "P.False",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "Disable SSL verification of API calls"
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"insecure\"",
+                "name": "_insecure",
+                "method": "insecure",
+                "conflicts": [],
+                "type": "P.Bool",
+                "class": "HasInsecure",
+                "validate": false,
+                "optional": true,
+                "original": "insecure"
+            },
+            {
+                "default": "_token",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The OAuth token used to connect to GitLab."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"token\"",
+                "name": "_token",
+                "method": "token",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasToken",
+                "validate": false,
+                "optional": false,
+                "original": "token"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_token",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The OAuth token used to connect to GitLab."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"token\"",
+                "name": "_token",
+                "method": "token",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasToken",
+                "validate": false,
+                "optional": false,
+                "original": "token"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -1295,26 +1450,6 @@
         "microlens"
     ],
     "name": "Gitlab",
-    "parameters": [
-        {
-            "default": "_token",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The OAuth token used to connect to GitLab."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"token\"",
-            "name": "token",
-            "method": "token",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasToken",
-            "optional": false,
-            "label": "_token"
-        }
-    ],
     "package": "terrafomo-gitlab",
-    "type": "Provider",
     "original": "gitlab"
 }
