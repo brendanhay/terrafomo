@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,7 +25,6 @@ module Terrafomo.OpsGenie.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -32,7 +32,10 @@ import Terrafomo.OpsGenie.Settings
 
 import qualified Data.Hashable               as P
 import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Maybe                  as P
+import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
 import qualified GHC.Generics                as P
 import qualified Lens.Micro                  as P
@@ -44,6 +47,7 @@ import qualified Terrafomo.OpsGenie.Lens     as P
 import qualified Terrafomo.OpsGenie.Provider as P
 import qualified Terrafomo.OpsGenie.Types    as P
 import qualified Terrafomo.Schema            as TF
+import qualified Terrafomo.Validator         as TF
 
 -- | @opsgenie_user@ DataSource.
 --
@@ -55,25 +59,27 @@ data UserData s = UserData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (UserData s) where
-    toObject UserData'{..} = catMaybes
-        [ TF.assign "username" <$> TF.attribute _username
-        ]
-
 userData
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> TF.DataSource P.Provider (UserData s)
 userData _username =
-    TF.newDataSource "opsgenie_user" $
+    TF.newDataSource "opsgenie_user" TF.validator $
         UserData'
             { _username = _username
             }
 
+instance TF.IsObject (UserData s) where
+    toObject UserData'{..} = P.catMaybes
+        [ TF.assign "username" <$> TF.attribute _username
+        ]
+
+instance TF.IsValid (UserData s) where
+    validator = P.mempty
+
 instance P.HasUsername (UserData s) (TF.Attr s P.Text) where
     username =
         P.lens (_username :: UserData s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a
-                          } :: UserData s)
+               (\s a -> s { _username = a } :: UserData s)
 
 instance s ~ s' => P.HasComputedFullName (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
     computedFullName x = TF.compute (TF.refKey x) "_computedFullName"

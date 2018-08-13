@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,13 +25,15 @@ module Terrafomo.OpsGenie.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable            as P
 import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as Map
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Maybe               as P
+import qualified Data.Monoid              as P
 import qualified Data.Text                as P
 import qualified GHC.Generics             as P
 import qualified Lens.Micro               as P
@@ -40,6 +43,7 @@ import qualified Terrafomo.HCL            as TF
 import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.OpsGenie.Lens  as P
 import qualified Terrafomo.OpsGenie.Types as P
+import qualified Terrafomo.Validator      as TF
 
 -- | @member@ nested settings.
 data Member s = Member'
@@ -51,14 +55,6 @@ data Member s = Member'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Member s)
-instance TF.IsValue  (Member s)
-instance TF.IsObject (Member s) where
-    toObject Member'{..} = catMaybes
-        [ TF.assign "role" <$> TF.attribute _role
-        , TF.assign "username" <$> TF.attribute _username
-        ]
-
 newMember
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> Member s
@@ -68,14 +64,23 @@ newMember _username =
         , _username = _username
         }
 
+instance P.Hashable  (Member s)
+instance TF.IsValue  (Member s)
+instance TF.IsObject (Member s) where
+    toObject Member'{..} = P.catMaybes
+        [ TF.assign "role" <$> TF.attribute _role
+        , TF.assign "username" <$> TF.attribute _username
+        ]
+
+instance TF.IsValid (Member s) where
+    validator = P.mempty
+
 instance P.HasRole (Member s) (TF.Attr s P.Text) where
     role =
         P.lens (_role :: Member s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a
-                          } :: Member s)
+               (\s a -> s { _role = a } :: Member s)
 
 instance P.HasUsername (Member s) (TF.Attr s P.Text) where
     username =
         P.lens (_username :: Member s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a
-                          } :: Member s)
+               (\s a -> s { _username = a } :: Member s)
