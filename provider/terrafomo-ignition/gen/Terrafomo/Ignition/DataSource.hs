@@ -117,7 +117,7 @@ data ConfigData s = ConfigData'
     , _networkd    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @networkd@ - (Optional)
     --
-    , _replace     :: TF.Attr s [Replace s]
+    , _replace     :: TF.Attr s (Replace s)
     -- ^ @replace@ - (Optional)
     --
     , _systemd     :: TF.Attr s [TF.Attr s P.Text]
@@ -217,9 +217,9 @@ instance P.HasNetworkd (ConfigData s) (TF.Attr s [TF.Attr s P.Text]) where
                (\s a -> s { _networkd = a
                           } :: ConfigData s)
 
-instance P.HasReplace (ConfigData s) (TF.Attr s [Replace s]) where
+instance P.HasReplace (ConfigData s) (TF.Attr s (Replace s)) where
     replace =
-        P.lens (_replace :: ConfigData s -> TF.Attr s [Replace s])
+        P.lens (_replace :: ConfigData s -> TF.Attr s (Replace s))
                (\s a -> s { _replace = a
                           } :: ConfigData s)
 
@@ -236,7 +236,7 @@ instance P.HasUsers (ConfigData s) (TF.Attr s [TF.Attr s P.Text]) where
                           } :: ConfigData s)
 
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (ConfigData s)) (TF.Attr s P.Text) where
-    computedRendered x = TF.compute (TF.refKey x) "rendered"
+    computedRendered x = TF.compute (TF.refKey x) "_computedRendered"
 
 -- | @ignition_directory@ DataSource.
 --
@@ -370,7 +370,7 @@ instance P.HasWipeTable (DiskData s) (TF.Attr s P.Bool) where
 -- See the <https://www.terraform.io/docs/providers/Ignition/ignition_file terraform documentation>
 -- for more information.
 data FileData s = FileData'
-    { _content    :: TF.Attr s [Content s]
+    { _content    :: TF.Attr s (Content s)
     -- ^ @content@ - (Optional)
     --
     , _filesystem :: TF.Attr s P.Text
@@ -385,7 +385,7 @@ data FileData s = FileData'
     , _path       :: TF.Attr s P.Text
     -- ^ @path@ - (Required)
     --
-    , _source     :: TF.Attr s [Source s]
+    , _source     :: TF.Attr s (Source s)
     -- ^ @source@ - (Optional)
     --
     , _uid        :: TF.Attr s P.Integer
@@ -420,9 +420,9 @@ fileData _filesystem _path =
             , _uid = TF.Nil
             }
 
-instance P.HasContent (FileData s) (TF.Attr s [Content s]) where
+instance P.HasContent (FileData s) (TF.Attr s (Content s)) where
     content =
-        P.lens (_content :: FileData s -> TF.Attr s [Content s])
+        P.lens (_content :: FileData s -> TF.Attr s (Content s))
                (\s a -> s { _content = a
                           } :: FileData s)
 
@@ -450,9 +450,9 @@ instance P.HasPath (FileData s) (TF.Attr s P.Text) where
                (\s a -> s { _path = a
                           } :: FileData s)
 
-instance P.HasSource (FileData s) (TF.Attr s [Source s]) where
+instance P.HasSource (FileData s) (TF.Attr s (Source s)) where
     source =
-        P.lens (_source :: FileData s -> TF.Attr s [Source s])
+        P.lens (_source :: FileData s -> TF.Attr s (Source s))
                (\s a -> s { _source = a
                           } :: FileData s)
 
@@ -467,7 +467,7 @@ instance P.HasUid (FileData s) (TF.Attr s P.Integer) where
 -- See the <https://www.terraform.io/docs/providers/Ignition/ignition_filesystem terraform documentation>
 -- for more information.
 data FilesystemData s = FilesystemData'
-    { _mount :: TF.Attr s [Mount s]
+    { _mount :: TF.Attr s (Mount s)
     -- ^ @mount@ - (Optional)
     --
     , _name  :: TF.Attr s P.Text
@@ -495,9 +495,9 @@ filesystemData =
             , _path = TF.Nil
             }
 
-instance P.HasMount (FilesystemData s) (TF.Attr s [Mount s]) where
+instance P.HasMount (FilesystemData s) (TF.Attr s (Mount s)) where
     mount =
-        P.lens (_mount :: FilesystemData s -> TF.Attr s [Mount s])
+        P.lens (_mount :: FilesystemData s -> TF.Attr s (Mount s))
                (\s a -> s { _mount = a
                           } :: FilesystemData s)
 
