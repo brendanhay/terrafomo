@@ -92,7 +92,7 @@ instance P.HasName (DataBagResource s) (TF.Attr s P.Text) where
                           } :: DataBagResource s)
 
 instance s ~ s' => P.HasComputedApiUri (TF.Ref s' (DataBagResource s)) (TF.Attr s P.Text) where
-    computedApiUri x = TF.compute (TF.refKey x) "api_uri"
+    computedApiUri x = TF.compute (TF.refKey x) "_computedApiUri"
 
 -- | @chef_data_bag_item@ Resource.
 --
@@ -137,7 +137,7 @@ instance P.HasDataBagName (DataBagItemResource s) (TF.Attr s P.Text) where
                           } :: DataBagItemResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DataBagItemResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @chef_environment@ Resource.
 --
