@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newRegionLimit",
+                "name": "RegionLimit'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -9,13 +13,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cpu\" <$> TF.attribute",
-                    "name": "cpu",
+                    "name": "_cpu",
                     "method": "cpu",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasCpu",
+                    "validate": false,
                     "optional": true,
-                    "label": "_cpu"
+                    "original": "cpu"
                 },
                 {
                     "default": "TF.Nil",
@@ -24,23 +29,29 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"memory_mb\" <$> TF.attribute",
-                    "name": "memory_mb",
+                    "name": "_memoryMb",
                     "method": "memoryMb",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasMemoryMb",
+                    "validate": false,
                     "optional": true,
-                    "label": "_memoryMb"
+                    "original": "memory_mb"
                 }
             ],
             "name": "RegionLimit",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "RegionLimit s",
             "original": "region_limit"
         },
         {
+            "con": {
+                "smart": "newLimits",
+                "name": "Limits'"
+            },
             "arguments": [
                 {
                     "default": "_region",
@@ -51,13 +62,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"region\" <$> TF.attribute",
-                    "name": "region",
+                    "name": "_region",
                     "method": "region",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRegion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_region"
+                    "original": "region"
                 },
                 {
                     "default": "_regionLimit",
@@ -68,16 +80,18 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"region_limit\" <$> TF.attribute",
-                    "name": "region_limit",
+                    "name": "_regionLimit",
                     "method": "regionLimit",
                     "conflicts": [],
-                    "type": "TF.Attr s (TF.Attr s (RegionLimit s))",
+                    "type": "TF.Attr s (RegionLimit s)",
                     "class": "HasRegionLimit",
+                    "validate": true,
                     "optional": false,
-                    "label": "_regionLimit"
+                    "original": "region_limit"
                 }
             ],
             "name": "Limits",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -89,13 +103,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"region\" <$> TF.attribute",
-                    "name": "region",
+                    "name": "_region",
                     "method": "region",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRegion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_region"
+                    "original": "region"
                 },
                 {
                     "default": "_regionLimit",
@@ -106,148 +121,30 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"region_limit\" <$> TF.attribute",
-                    "name": "region_limit",
+                    "name": "_regionLimit",
                     "method": "regionLimit",
                     "conflicts": [],
-                    "type": "TF.Attr s (TF.Attr s (RegionLimit s))",
+                    "type": "TF.Attr s (RegionLimit s)",
                     "class": "HasRegionLimit",
+                    "validate": true,
                     "optional": false,
-                    "label": "_regionLimit"
+                    "original": "region_limit"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Limits s",
             "original": "limits"
         }
     ],
-    "arguments": [
-        {
-            "default": "_address",
-            "computed": false,
-            "required": true,
-            "help": [
-                "URL of the root of the target Nomad agent."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"address\"",
-            "name": "address",
-            "method": "address",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAddress",
-            "optional": false,
-            "label": "_address"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "A path to a PEM-encoded certificate authority used to verify the remote",
-                "agent's certificate."
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"ca_file\" <$>",
-            "name": "ca_file",
-            "method": "caFile",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasCaFile",
-            "optional": true,
-            "label": "_caFile"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "A path to a PEM-encoded certificate provided to the remote agent; requires",
-                "use of key_file."
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"cert_file\" <$>",
-            "name": "cert_file",
-            "method": "certFile",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasCertFile",
-            "optional": true,
-            "label": "_certFile"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "A path to a PEM-encoded private key, required if cert_file is specified."
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"key_file\" <$>",
-            "name": "key_file",
-            "method": "keyFile",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasKeyFile",
-            "optional": true,
-            "label": "_keyFile"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "Region of the target Nomad agent."
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"region\" <$>",
-            "name": "region",
-            "method": "region",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasRegion",
-            "optional": true,
-            "label": "_region"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "ACL token secret for API requests."
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"secret_id\" <$>",
-            "name": "secret_id",
-            "method": "secretId",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasSecretId",
-            "optional": true,
-            "label": "_secretId"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "Vault token if policies are specified in the job file."
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"vault_token\" <$>",
-            "name": "vault_token",
-            "method": "vaultToken",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasVaultToken",
-            "optional": true,
-            "label": "_vaultToken"
-        }
-    ],
     "dataSources": [
         {
+            "con": {
+                "smart": "regionsData",
+                "name": "RegionsData'"
+            },
             "arguments": [],
-            "schema": "DataSource",
             "name": "RegionsData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -256,22 +153,28 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"regions\" <$> TF.attribute",
-                    "name": "regions",
+                    "name": "_computedRegions",
                     "method": "computedRegions",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedRegions",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedRegions"
+                    "original": "regions"
                 }
             ],
             "parameters": [],
+            "conflicts": [],
             "type": "RegionsData s",
             "original": "nomad_regions"
         }
     ],
     "resources": [
         {
+            "con": {
+                "smart": "aclPolicyResource",
+                "name": "AclPolicyResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -282,13 +185,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_name",
@@ -299,13 +203,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_rulesHcl",
@@ -317,17 +222,18 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"rules_hcl\" <$> TF.attribute",
-                    "name": "rules_hcl",
+                    "name": "_rulesHcl",
                     "method": "rulesHcl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRulesHcl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_rulesHcl"
+                    "original": "rules_hcl"
                 }
             ],
-            "schema": "Resource",
             "name": "AclPolicyResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -339,13 +245,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_rulesHcl",
@@ -357,19 +264,25 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"rules_hcl\" <$> TF.attribute",
-                    "name": "rules_hcl",
+                    "name": "_rulesHcl",
                     "method": "rulesHcl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRulesHcl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_rulesHcl"
+                    "original": "rules_hcl"
                 }
             ],
+            "conflicts": [],
             "type": "AclPolicyResource s",
             "original": "nomad_acl_policy"
         },
         {
+            "con": {
+                "smart": "aclTokenResource",
+                "name": "AclTokenResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value P.False",
@@ -380,13 +293,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"global\" <$> TF.attribute",
-                    "name": "global",
+                    "name": "_global",
                     "method": "global",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasGlobal",
+                    "validate": false,
                     "optional": true,
-                    "label": "_global"
+                    "original": "global"
                 },
                 {
                     "default": "TF.Nil",
@@ -397,13 +311,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -414,13 +329,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"policies\" <$> TF.attribute",
-                    "name": "policies",
+                    "name": "_policies",
                     "method": "policies",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasPolicies",
+                    "validate": false,
                     "optional": true,
-                    "label": "_policies"
+                    "original": "policies"
                 },
                 {
                     "default": "_type'",
@@ -431,17 +347,18 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "schema": "Resource",
             "name": "AclTokenResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -452,13 +369,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"accessor_id\" <$> TF.attribute",
-                    "name": "accessor_id",
+                    "name": "_computedAccessorId",
                     "method": "computedAccessorId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAccessorId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAccessorId"
+                    "original": "accessor_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -469,13 +387,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"secret_id\" <$> TF.attribute",
-                    "name": "secret_id",
+                    "name": "_computedSecretId",
                     "method": "computedSecretId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSecretId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedSecretId"
+                    "original": "secret_id"
                 }
             ],
             "parameters": [
@@ -488,19 +407,25 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
+            "conflicts": [],
             "type": "AclTokenResource s",
             "original": "nomad_acl_token"
         },
         {
+            "con": {
+                "smart": "jobResource",
+                "name": "JobResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value P.True",
@@ -511,13 +436,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"deregister_on_destroy\" <$> TF.attribute",
-                    "name": "deregister_on_destroy",
+                    "name": "_deregisterOnDestroy",
                     "method": "deregisterOnDestroy",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasDeregisterOnDestroy",
+                    "validate": false,
                     "optional": true,
-                    "label": "_deregisterOnDestroy"
+                    "original": "deregister_on_destroy"
                 },
                 {
                     "default": "TF.value P.True",
@@ -528,13 +454,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"deregister_on_id_change\" <$> TF.attribute",
-                    "name": "deregister_on_id_change",
+                    "name": "_deregisterOnIdChange",
                     "method": "deregisterOnIdChange",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasDeregisterOnIdChange",
+                    "validate": false,
                     "optional": true,
-                    "label": "_deregisterOnIdChange"
+                    "original": "deregister_on_id_change"
                 },
                 {
                     "default": "_jobspec",
@@ -545,13 +472,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"jobspec\" <$> TF.attribute",
-                    "name": "jobspec",
+                    "name": "_jobspec",
                     "method": "jobspec",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasJobspec",
+                    "validate": false,
                     "optional": false,
-                    "label": "_jobspec"
+                    "original": "jobspec"
                 },
                 {
                     "default": "TF.Nil",
@@ -562,17 +490,18 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"policy_override\" <$> TF.attribute",
-                    "name": "policy_override",
+                    "name": "_policyOverride",
                     "method": "policyOverride",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasPolicyOverride",
+                    "validate": false,
                     "optional": true,
-                    "label": "_policyOverride"
+                    "original": "policy_override"
                 }
             ],
-            "schema": "Resource",
             "name": "JobResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -584,19 +513,25 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"jobspec\" <$> TF.attribute",
-                    "name": "jobspec",
+                    "name": "_jobspec",
                     "method": "jobspec",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasJobspec",
+                    "validate": false,
                     "optional": false,
-                    "label": "_jobspec"
+                    "original": "jobspec"
                 }
             ],
+            "conflicts": [],
             "type": "JobResource s",
             "original": "nomad_job"
         },
         {
+            "con": {
+                "smart": "namespaceResource",
+                "name": "NamespaceResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -607,13 +542,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_name",
@@ -624,13 +560,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -641,17 +578,18 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"quota\" <$> TF.attribute",
-                    "name": "quota",
+                    "name": "_quota",
                     "method": "quota",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasQuota",
+                    "validate": false,
                     "optional": true,
-                    "label": "_quota"
+                    "original": "quota"
                 }
             ],
-            "schema": "Resource",
             "name": "NamespaceResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -663,19 +601,25 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "NamespaceResource s",
             "original": "nomad_namespace"
         },
         {
+            "con": {
+                "smart": "quotaSpecificationResource",
+                "name": "QuotaSpecificationResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -686,13 +630,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_limits",
@@ -703,13 +648,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"limits\" <$> TF.attribute",
-                    "name": "limits",
+                    "name": "_limits",
                     "method": "limits",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s (Limits s)]",
                     "class": "HasLimits",
+                    "validate": true,
                     "optional": false,
-                    "label": "_limits"
+                    "original": "limits"
                 },
                 {
                     "default": "_name",
@@ -720,17 +666,18 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "QuotaSpecificationResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -742,13 +689,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"limits\" <$> TF.attribute",
-                    "name": "limits",
+                    "name": "_limits",
                     "method": "limits",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s (Limits s)]",
                     "class": "HasLimits",
+                    "validate": true,
                     "optional": false,
-                    "label": "_limits"
+                    "original": "limits"
                 },
                 {
                     "default": "_name",
@@ -759,19 +707,25 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "QuotaSpecificationResource s",
             "original": "nomad_quota_specification"
         },
         {
+            "con": {
+                "smart": "sentinelPolicyResource",
+                "name": "SentinelPolicyResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -782,13 +736,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_enforcementLevel",
@@ -799,13 +754,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"enforcement_level\" <$> TF.attribute",
-                    "name": "enforcement_level",
+                    "name": "_enforcementLevel",
                     "method": "enforcementLevel",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnforcementLevel",
+                    "validate": false,
                     "optional": false,
-                    "label": "_enforcementLevel"
+                    "original": "enforcement_level"
                 },
                 {
                     "default": "_name",
@@ -816,13 +772,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_policy",
@@ -833,13 +790,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"policy\" <$> TF.attribute",
-                    "name": "policy",
+                    "name": "_policy",
                     "method": "policy",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPolicy",
+                    "validate": false,
                     "optional": false,
-                    "label": "_policy"
+                    "original": "policy"
                 },
                 {
                     "default": "_scope",
@@ -851,17 +809,18 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"scope\" <$> TF.attribute",
-                    "name": "scope",
+                    "name": "_scope",
                     "method": "scope",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasScope",
+                    "validate": false,
                     "optional": false,
-                    "label": "_scope"
+                    "original": "scope"
                 }
             ],
-            "schema": "Resource",
             "name": "SentinelPolicyResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -873,13 +832,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"enforcement_level\" <$> TF.attribute",
-                    "name": "enforcement_level",
+                    "name": "_enforcementLevel",
                     "method": "enforcementLevel",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnforcementLevel",
+                    "validate": false,
                     "optional": false,
-                    "label": "_enforcementLevel"
+                    "original": "enforcement_level"
                 },
                 {
                     "default": "_name",
@@ -890,13 +850,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_policy",
@@ -907,13 +868,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"policy\" <$> TF.attribute",
-                    "name": "policy",
+                    "name": "_policy",
                     "method": "policy",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPolicy",
+                    "validate": false,
                     "optional": false,
-                    "label": "_policy"
+                    "original": "policy"
                 },
                 {
                     "default": "_scope",
@@ -925,19 +887,183 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"scope\" <$> TF.attribute",
-                    "name": "scope",
+                    "name": "_scope",
                     "method": "scope",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasScope",
+                    "validate": false,
                     "optional": false,
-                    "label": "_scope"
+                    "original": "scope"
                 }
             ],
+            "conflicts": [],
             "type": "SentinelPolicyResource s",
             "original": "nomad_sentinel_policy"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "_address",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "URL of the root of the target Nomad agent."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"address\"",
+                "name": "_address",
+                "method": "address",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAddress",
+                "validate": false,
+                "optional": false,
+                "original": "address"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "A path to a PEM-encoded certificate authority used to verify the remote",
+                    "agent's certificate."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"ca_file\" <$>",
+                "name": "_caFile",
+                "method": "caFile",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasCaFile",
+                "validate": false,
+                "optional": true,
+                "original": "ca_file"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "A path to a PEM-encoded certificate provided to the remote agent; requires",
+                    "use of key_file."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"cert_file\" <$>",
+                "name": "_certFile",
+                "method": "certFile",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasCertFile",
+                "validate": false,
+                "optional": true,
+                "original": "cert_file"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "A path to a PEM-encoded private key, required if cert_file is specified."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"key_file\" <$>",
+                "name": "_keyFile",
+                "method": "keyFile",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasKeyFile",
+                "validate": false,
+                "optional": true,
+                "original": "key_file"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "Region of the target Nomad agent."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"region\" <$>",
+                "name": "_region",
+                "method": "region",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasRegion",
+                "validate": false,
+                "optional": true,
+                "original": "region"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "ACL token secret for API requests."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"secret_id\" <$>",
+                "name": "_secretId",
+                "method": "secretId",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasSecretId",
+                "validate": false,
+                "optional": true,
+                "original": "secret_id"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "Vault token if policies are specified in the job file."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"vault_token\" <$>",
+                "name": "_vaultToken",
+                "method": "vaultToken",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasVaultToken",
+                "validate": false,
+                "optional": true,
+                "original": "vault_token"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_address",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "URL of the root of the target Nomad agent."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"address\"",
+                "name": "_address",
+                "method": "address",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAddress",
+                "validate": false,
+                "optional": false,
+                "original": "address"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -947,26 +1073,6 @@
         "microlens"
     ],
     "name": "Nomad",
-    "parameters": [
-        {
-            "default": "_address",
-            "computed": false,
-            "required": true,
-            "help": [
-                "URL of the root of the target Nomad agent."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"address\"",
-            "name": "address",
-            "method": "address",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAddress",
-            "optional": false,
-            "label": "_address"
-        }
-    ],
     "package": "terrafomo-nomad",
-    "type": "Provider",
     "original": "nomad"
 }
