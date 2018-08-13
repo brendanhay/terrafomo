@@ -202,4 +202,4 @@ instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
                           } :: UserResource s)
 
 instance s ~ s' => P.HasComputedAdmin (TF.Ref s' (UserResource s)) (TF.Attr s P.Bool) where
-    computedAdmin x = TF.compute (TF.refKey x) "admin"
+    computedAdmin x = TF.compute (TF.refKey x) "_computedAdmin"
