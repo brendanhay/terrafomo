@@ -100,25 +100,25 @@ instance P.HasNameFilter (BootscriptData s) (TF.Attr s P.Text) where
                           } :: BootscriptData s)
 
 instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
-    computedArchitecture x = TF.compute (TF.refKey x) "architecture"
+    computedArchitecture x = TF.compute (TF.refKey x) "_computedArchitecture"
 
 instance s ~ s' => P.HasComputedBootCmdArgs (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
-    computedBootCmdArgs x = TF.compute (TF.refKey x) "boot_cmd_args"
+    computedBootCmdArgs x = TF.compute (TF.refKey x) "_computedBootCmdArgs"
 
 instance s ~ s' => P.HasComputedDtb (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
-    computedDtb x = TF.compute (TF.refKey x) "dtb"
+    computedDtb x = TF.compute (TF.refKey x) "_computedDtb"
 
 instance s ~ s' => P.HasComputedInitrd (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
-    computedInitrd x = TF.compute (TF.refKey x) "initrd"
+    computedInitrd x = TF.compute (TF.refKey x) "_computedInitrd"
 
 instance s ~ s' => P.HasComputedKernel (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
-    computedKernel x = TF.compute (TF.refKey x) "kernel"
+    computedKernel x = TF.compute (TF.refKey x) "_computedKernel"
 
 instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
-    computedOrganization x = TF.compute (TF.refKey x) "organization"
+    computedOrganization x = TF.compute (TF.refKey x) "_computedOrganization"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "public"
+    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
 
 -- | @scaleway_image@ DataSource.
 --
@@ -184,16 +184,16 @@ instance P.HasNameFilter (ImageData s) (TF.Attr s P.Text) where
                           } :: ImageData s)
 
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
+    computedCreationDate x = TF.compute (TF.refKey x) "_computedCreationDate"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedOrganization x = TF.compute (TF.refKey x) "organization"
+    computedOrganization x = TF.compute (TF.refKey x) "_computedOrganization"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (ImageData s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "public"
+    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
 
 -- | @scaleway_security_group@ DataSource.
 --
@@ -227,10 +227,10 @@ instance P.HasName (SecurityGroupData s) (TF.Attr s P.Text) where
                           } :: SecurityGroupData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedEnableDefaultSecurity (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Bool) where
-    computedEnableDefaultSecurity x = TF.compute (TF.refKey x) "enable_default_security"
+    computedEnableDefaultSecurity x = TF.compute (TF.refKey x) "_computedEnableDefaultSecurity"
 
 -- | @scaleway_volume@ DataSource.
 --
@@ -264,10 +264,10 @@ instance P.HasName (VolumeData s) (TF.Attr s P.Text) where
                           } :: VolumeData s)
 
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text) where
-    computedServer x = TF.compute (TF.refKey x) "server"
+    computedServer x = TF.compute (TF.refKey x) "_computedServer"
 
 instance s ~ s' => P.HasComputedSizeInGb (TF.Ref s' (VolumeData s)) (TF.Attr s P.Integer) where
-    computedSizeInGb x = TF.compute (TF.refKey x) "size_in_gb"
+    computedSizeInGb x = TF.compute (TF.refKey x) "_computedSizeInGb"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"

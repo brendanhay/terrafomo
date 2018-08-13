@@ -26,6 +26,8 @@ module Terrafomo.Scaleway.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable            as P
 import qualified Data.HashMap.Strict      as P
 import qualified Data.List.NonEmpty       as P
@@ -80,4 +82,4 @@ instance P.HasType' (Volume s) (TF.Attr s P.Text) where
                           } :: Volume s)
 
 instance s ~ s' => P.HasComputedVolumeId (TF.Ref s' (Volume s)) (TF.Attr s P.Text) where
-    computedVolumeId x = TF.compute (TF.refKey x) "volume_id"
+    computedVolumeId x = TF.compute (TF.refKey x) "_computedVolumeId"

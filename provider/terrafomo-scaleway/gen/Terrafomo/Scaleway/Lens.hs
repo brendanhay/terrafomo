@@ -66,13 +66,13 @@ module Terrafomo.Scaleway.Lens
     , HasComputedAccessKey (..)
     , HasComputedIp (..)
     , HasComputedVolumeId (..)
+    , HasComputedType (..)
     , HasComputedKernel (..)
     , HasComputedExpirationDate (..)
     , HasComputedArchitecture (..)
     , HasComputedPublicIpv6 (..)
     , HasComputedBootType (..)
     , HasComputedServer (..)
-    , HasComputedType' (..)
     , HasComputedSizeInGb (..)
     , HasComputedUserId (..)
     ) where
@@ -319,6 +319,9 @@ class HasComputedIp a b | a -> b where
 class HasComputedVolumeId a b | a -> b where
     computedVolumeId :: a -> b
 
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
+
 class HasComputedKernel a b | a -> b where
     computedKernel :: a -> b
 
@@ -336,9 +339,6 @@ class HasComputedBootType a b | a -> b where
 
 class HasComputedServer a b | a -> b where
     computedServer :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedSizeInGb a b | a -> b where
     computedSizeInGb :: a -> b

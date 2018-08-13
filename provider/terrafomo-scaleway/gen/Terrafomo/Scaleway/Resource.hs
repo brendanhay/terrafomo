@@ -108,10 +108,10 @@ instance P.HasReverse (IpResource s) (TF.Attr s P.Text) where
                           } :: IpResource s)
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "ip"
+    computedIp x = TF.compute (TF.refKey x) "_computedIp"
 
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
-    computedServer x = TF.compute (TF.refKey x) "server"
+    computedServer x = TF.compute (TF.refKey x) "_computedServer"
 
 -- | @scaleway_security_group@ Resource.
 --
@@ -395,22 +395,22 @@ instance P.HasVolume (ServerResource s) (TF.Attr s [Volume s]) where
                           } :: ServerResource s)
 
 instance s ~ s' => P.HasComputedBootType (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedBootType x = TF.compute (TF.refKey x) "boot_type"
+    computedBootType x = TF.compute (TF.refKey x) "_computedBootType"
 
 instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
+    computedPrivateIp x = TF.compute (TF.refKey x) "_computedPrivateIp"
 
 instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
+    computedPublicIp x = TF.compute (TF.refKey x) "_computedPublicIp"
 
 instance s ~ s' => P.HasComputedPublicIpv6 (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPublicIpv6 x = TF.compute (TF.refKey x) "public_ipv6"
+    computedPublicIpv6 x = TF.compute (TF.refKey x) "_computedPublicIpv6"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 instance s ~ s' => P.HasComputedStateDetail (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedStateDetail x = TF.compute (TF.refKey x) "state_detail"
+    computedStateDetail x = TF.compute (TF.refKey x) "_computedStateDetail"
 
 -- | @scaleway_ssh_key@ Resource.
 --
@@ -498,22 +498,22 @@ instance P.HasPassword (TokenResource s) (TF.Attr s P.Text) where
                           } :: TokenResource s)
 
 instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
-    computedAccessKey x = TF.compute (TF.refKey x) "access_key"
+    computedAccessKey x = TF.compute (TF.refKey x) "_computedAccessKey"
 
 instance s ~ s' => P.HasComputedCreationIp (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
-    computedCreationIp x = TF.compute (TF.refKey x) "creation_ip"
+    computedCreationIp x = TF.compute (TF.refKey x) "_computedCreationIp"
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "email"
+    computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
 
 instance s ~ s' => P.HasComputedExpirationDate (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
-    computedExpirationDate x = TF.compute (TF.refKey x) "expiration_date"
+    computedExpirationDate x = TF.compute (TF.refKey x) "_computedExpirationDate"
 
 instance s ~ s' => P.HasComputedSecretKey (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
-    computedSecretKey x = TF.compute (TF.refKey x) "secret_key"
+    computedSecretKey x = TF.compute (TF.refKey x) "_computedSecretKey"
 
 instance s ~ s' => P.HasComputedUserId (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
-    computedUserId x = TF.compute (TF.refKey x) "user_id"
+    computedUserId x = TF.compute (TF.refKey x) "_computedUserId"
 
 -- | @scaleway_user_data@ Resource.
 --
@@ -630,7 +630,7 @@ instance P.HasType' (VolumeResource s) (TF.Attr s P.Text) where
                           } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedServer x = TF.compute (TF.refKey x) "server"
+    computedServer x = TF.compute (TF.refKey x) "_computedServer"
 
 -- | @scaleway_volume_attachment@ Resource.
 --
