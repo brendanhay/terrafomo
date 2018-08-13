@@ -35,10 +35,13 @@ import Control.Monad.Except (Except)
 import Control.Monad.Morph  (MFunctor (hoist))
 import Control.Monad.Trans  (MonadTrans (lift))
 
-import Data.Map.Strict (Map)
-import Data.Proxy      (Proxy (..))
-import Data.Semigroup  (Semigroup ((<>)))
-import Data.Typeable   (Typeable)
+import Data.Hashable       (Hashable)
+import Data.HashMap.Strict (HashMap)
+import Data.HashSet        (HashSet)
+import Data.Proxy          (Proxy (..))
+import Data.Semigroup      (Semigroup ((<>)))
+import Data.Text           (Text)
+import Data.Typeable       (Typeable)
 
 import Terrafomo.Attribute   (Attr (Compute))
 import Terrafomo.Backend
@@ -48,6 +51,7 @@ import Terrafomo.Output
 import Terrafomo.Provider
 import Terrafomo.RemoteState
 import Terrafomo.Schema      (Schema (..))
+import Terrafomo.Validator   (Validator (applyValidator))
 import Terrafomo.ValueMap    (ValueMap)
 
 import qualified Control.Monad.Except              as MTL
@@ -61,7 +65,7 @@ import qualified Control.Monad.Trans.State.Lazy    as Lazy
 import qualified Control.Monad.Trans.State.Strict  as Strict
 import qualified Control.Monad.Trans.Writer.Lazy   as Lazy
 import qualified Control.Monad.Trans.Writer.Strict as Strict
-import qualified Data.Map.Strict                   as Map
+import qualified Data.HashMap.Strict               as Map
 import qualified Data.Text.Lazy                    as LText
 import qualified System.IO                         as IO
 import qualified Terrafomo.Format                  as Format
@@ -72,12 +76,13 @@ import qualified Terrafomo.ValueMap                as VMap
 data Error
     = NonUniqueRef    !Key  !HCL.Section
     | NonUniqueOutput !Name !HCL.Section
+    | ConflictsWith   !Key  !(HashMap Text (HashSet Text))
       deriving (Eq, Show, Typeable)
 
 instance Exception Error
 
 newtype Config = Config
-    { aliases :: Map Type Key
+    { aliases :: HashMap Type Key
     }
 
 -- | Provides key uniquness invariants and ordering of output statements.
@@ -287,10 +292,8 @@ define
     => Name
     -> Schema l p a
     -> m (Ref s a)
-define name x@Schema{_schemaProvider, _schemaConfig} =
+define name x@Schema{_schemaProvider, _schemaConfig, _schemaValidator} =
     liftTerraform $ do
-        void $ insertProvider _schemaProvider
-
         let typ   = _schemaType x
             key   = Key typ name
             value = HCL.toSection $
@@ -300,7 +303,14 @@ define name x@Schema{_schemaProvider, _schemaConfig} =
                                   <> pure (HCL.name  name)
                           }
 
-        unique <- insertValue key value references (\s w -> w { references = s })
+        case applyValidator _schemaValidator _schemaConfig of
+            Nothing   -> pure ()
+            Just errs -> MTL.throwError (ConflictsWith key errs)
+
+        void $ insertProvider _schemaProvider
+
+        unique <-
+            insertValue key value references (\s w -> w { references = s })
 
         unless unique $
             MTL.throwError (NonUniqueRef key value)
@@ -336,7 +346,8 @@ output attr =
             out   = Output b name attr
             value = HCL.toSection out
 
-        unique <- insertValue name value outputs (\s w -> w { outputs = s })
+        unique <-
+            insertValue name value outputs (\s w -> w { outputs = s })
 
         unless unique $
             MTL.throwError (NonUniqueOutput name value)
@@ -358,7 +369,8 @@ remote x@(Output _ _ attr) =
             key   = remoteStateKey state
             value = HCL.toSection state
 
-        exists <- MTL.gets (VMap.member key . remotes)
+        exists <-
+            MTL.gets (VMap.member key . remotes)
 
         unless exists $
             void $ insertValue key value remotes (\s w -> w { remotes = s })
@@ -370,7 +382,8 @@ remote x@(Output _ _ attr) =
 
 insertValue
     :: ( MonadTerraform s m
-       , Ord k
+       , Eq k
+       , Hashable k
        )
     => k
     -- ^ The key.

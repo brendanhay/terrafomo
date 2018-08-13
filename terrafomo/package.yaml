@@ -33,11 +33,11 @@ library:
     - Terrafomo.RemoteState
     - Terrafomo.Schema
     - Terrafomo.TH
+    - Terrafomo.Validator
 
   dependencies:
     - aeson
     - aeson-pretty
-    - containers
     - formatting >= 6.2.5
     - hashable
     - iproute
