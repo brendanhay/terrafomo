@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newFilters",
+                "name": "Filters'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -9,13 +13,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"custom_property_name\" <$> TF.attribute",
-                    "name": "custom_property_name",
+                    "name": "_customPropertyName",
                     "method": "customPropertyName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCustomPropertyName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_customPropertyName"
+                    "original": "custom_property_name"
                 },
                 {
                     "default": "TF.Nil",
@@ -24,13 +29,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"custom_property_value\" <$> TF.attribute",
-                    "name": "custom_property_value",
+                    "name": "_customPropertyValue",
                     "method": "customPropertyValue",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCustomPropertyValue",
+                    "validate": false,
                     "optional": true,
-                    "label": "_customPropertyValue"
+                    "original": "custom_property_value"
                 },
                 {
                     "default": "TF.Nil",
@@ -39,13 +45,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"operator\" <$> TF.attribute",
-                    "name": "operator",
+                    "name": "_operator",
                     "method": "operator",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOperator",
+                    "validate": false,
                     "optional": true,
-                    "label": "_operator"
+                    "original": "operator"
                 },
                 {
                     "default": "TF.Nil",
@@ -54,13 +61,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"property\" <$> TF.attribute",
-                    "name": "property",
+                    "name": "_property",
                     "method": "property",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProperty",
+                    "validate": false,
                     "optional": true,
-                    "label": "_property"
+                    "original": "property"
                 },
                 {
                     "default": "TF.Nil",
@@ -69,72 +77,31 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "value",
+                    "name": "_value",
                     "method": "value",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasValue",
+                    "validate": false,
                     "optional": true,
-                    "label": "_value"
+                    "original": "value"
                 }
             ],
             "name": "Filters",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "Filters s",
             "original": "filters"
         }
     ],
-    "arguments": [
-        {
-            "default": "_apiId",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"api_id\"",
-            "name": "api_id",
-            "method": "apiId",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasApiId",
-            "optional": false,
-            "label": "_apiId"
-        },
-        {
-            "default": "_apiKey",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"api_key\"",
-            "name": "api_key",
-            "method": "apiKey",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasApiKey",
-            "optional": false,
-            "label": "_apiKey"
-        },
-        {
-            "default": "_company",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"company\"",
-            "name": "company",
-            "method": "company",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasCompany",
-            "optional": false,
-            "label": "_company"
-        }
-    ],
     "dataSources": [
         {
+            "con": {
+                "smart": "collectorsData",
+                "name": "CollectorsData'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -143,13 +110,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"filters\" <$> TF.attribute",
-                    "name": "filters",
+                    "name": "_filters",
                     "method": "filters",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s (Filters s)]",
                     "class": "HasFilters",
+                    "validate": true,
                     "optional": true,
-                    "label": "_filters"
+                    "original": "filters"
                 },
                 {
                     "default": "TF.value P.False",
@@ -158,13 +126,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"most_recent\" <$> TF.attribute",
-                    "name": "most_recent",
+                    "name": "_mostRecent",
                     "method": "mostRecent",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasMostRecent",
+                    "validate": false,
                     "optional": true,
-                    "label": "_mostRecent"
+                    "original": "most_recent"
                 },
                 {
                     "default": "TF.value 0",
@@ -173,13 +142,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"offset\" <$> TF.attribute",
-                    "name": "offset",
+                    "name": "_offset",
                     "method": "offset",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasOffset",
+                    "validate": false,
                     "optional": true,
-                    "label": "_offset"
+                    "original": "offset"
                 },
                 {
                     "default": "TF.value 50",
@@ -188,23 +158,29 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"size\" <$> TF.attribute",
-                    "name": "size",
+                    "name": "_size",
                     "method": "size",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasSize",
+                    "validate": false,
                     "optional": true,
-                    "label": "_size"
+                    "original": "size"
                 }
             ],
-            "schema": "DataSource",
             "name": "CollectorsData",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
+            "conflicts": [],
             "type": "CollectorsData s",
             "original": "logicmonitor_collectors"
         },
         {
+            "con": {
+                "smart": "deviceGroupData",
+                "name": "DeviceGroupData'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -213,13 +189,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"filters\" <$> TF.attribute",
-                    "name": "filters",
+                    "name": "_filters",
                     "method": "filters",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s (Filters s)]",
                     "class": "HasFilters",
+                    "validate": true,
                     "optional": true,
-                    "label": "_filters"
+                    "original": "filters"
                 },
                 {
                     "default": "TF.value 0",
@@ -228,13 +205,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"offset\" <$> TF.attribute",
-                    "name": "offset",
+                    "name": "_offset",
                     "method": "offset",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasOffset",
+                    "validate": false,
                     "optional": true,
-                    "label": "_offset"
+                    "original": "offset"
                 },
                 {
                     "default": "TF.value 50",
@@ -243,25 +221,31 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"size\" <$> TF.attribute",
-                    "name": "size",
+                    "name": "_size",
                     "method": "size",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasSize",
+                    "validate": false,
                     "optional": true,
-                    "label": "_size"
+                    "original": "size"
                 }
             ],
-            "schema": "DataSource",
             "name": "DeviceGroupData",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
+            "conflicts": [],
             "type": "DeviceGroupData s",
             "original": "logicmonitor_device_group"
         }
     ],
     "resources": [
         {
+            "con": {
+                "smart": "collectorResource",
+                "name": "CollectorResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -270,13 +254,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"backup_collector_id\" <$> TF.attribute",
-                    "name": "backup_collector_id",
+                    "name": "_backupCollectorId",
                     "method": "backupCollectorId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasBackupCollectorId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_backupCollectorId"
+                    "original": "backup_collector_id"
                 },
                 {
                     "default": "TF.value 1",
@@ -285,13 +270,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"collector_group_id\" <$> TF.attribute",
-                    "name": "collector_group_id",
+                    "name": "_collectorGroupId",
                     "method": "collectorGroupId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasCollectorGroupId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_collectorGroupId"
+                    "original": "collector_group_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -300,13 +286,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.Nil",
@@ -315,13 +302,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"enable_collector_device_failover\" <$> TF.attribute",
-                    "name": "enable_collector_device_failover",
+                    "name": "_enableCollectorDeviceFailover",
                     "method": "enableCollectorDeviceFailover",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasEnableCollectorDeviceFailover",
+                    "validate": false,
                     "optional": true,
-                    "label": "_enableCollectorDeviceFailover"
+                    "original": "enable_collector_device_failover"
                 },
                 {
                     "default": "TF.Nil",
@@ -330,13 +318,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"enable_failback\" <$> TF.attribute",
-                    "name": "enable_failback",
+                    "name": "_enableFailback",
                     "method": "enableFailback",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasEnableFailback",
+                    "validate": false,
                     "optional": true,
-                    "label": "_enableFailback"
+                    "original": "enable_failback"
                 },
                 {
                     "default": "TF.Nil",
@@ -345,13 +334,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"escalation_chain_id\" <$> TF.attribute",
-                    "name": "escalation_chain_id",
+                    "name": "_escalationChainId",
                     "method": "escalationChainId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasEscalationChainId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_escalationChainId"
+                    "original": "escalation_chain_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -360,13 +350,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"resend_interval\" <$> TF.attribute",
-                    "name": "resend_interval",
+                    "name": "_resendInterval",
                     "method": "resendInterval",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasResendInterval",
+                    "validate": false,
                     "optional": true,
-                    "label": "_resendInterval"
+                    "original": "resend_interval"
                 },
                 {
                     "default": "TF.Nil",
@@ -375,23 +366,29 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"suppress_alert_clear\" <$> TF.attribute",
-                    "name": "suppress_alert_clear",
+                    "name": "_suppressAlertClear",
                     "method": "suppressAlertClear",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasSuppressAlertClear",
+                    "validate": false,
                     "optional": true,
-                    "label": "_suppressAlertClear"
+                    "original": "suppress_alert_clear"
                 }
             ],
-            "schema": "Resource",
             "name": "CollectorResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
+            "conflicts": [],
             "type": "CollectorResource s",
             "original": "logicmonitor_collector"
         },
         {
+            "con": {
+                "smart": "collectorGroupResource",
+                "name": "CollectorGroupResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -400,13 +397,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.Nil",
@@ -415,23 +413,29 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "CollectorGroupResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
+            "conflicts": [],
             "type": "CollectorGroupResource s",
             "original": "logicmonitor_collector_group"
         },
         {
+            "con": {
+                "smart": "deviceResource",
+                "name": "DeviceResource'"
+            },
             "arguments": [
                 {
                     "default": "_collector",
@@ -440,13 +444,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"collector\" <$> TF.attribute",
-                    "name": "collector",
+                    "name": "_collector",
                     "method": "collector",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasCollector",
+                    "validate": false,
                     "optional": false,
-                    "label": "_collector"
+                    "original": "collector"
                 },
                 {
                     "default": "TF.Nil",
@@ -455,13 +460,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.value P.True",
@@ -470,13 +476,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"disable_alerting\" <$> TF.attribute",
-                    "name": "disable_alerting",
+                    "name": "_disableAlerting",
                     "method": "disableAlerting",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasDisableAlerting",
+                    "validate": false,
                     "optional": true,
-                    "label": "_disableAlerting"
+                    "original": "disable_alerting"
                 },
                 {
                     "default": "TF.Nil",
@@ -485,13 +492,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"display_name\" <$> TF.attribute",
-                    "name": "display_name",
+                    "name": "_displayName",
                     "method": "displayName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDisplayName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_displayName"
+                    "original": "display_name"
                 },
                 {
                     "default": "TF.Nil",
@@ -500,13 +508,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"hostgroup_id\" <$> TF.attribute",
-                    "name": "hostgroup_id",
+                    "name": "_hostgroupId",
                     "method": "hostgroupId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasHostgroupId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_hostgroupId"
+                    "original": "hostgroup_id"
                 },
                 {
                     "default": "_ipAddr",
@@ -515,13 +524,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ip_addr\" <$> TF.attribute",
-                    "name": "ip_addr",
+                    "name": "_ipAddr",
                     "method": "ipAddr",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasIpAddr",
+                    "validate": false,
                     "optional": false,
-                    "label": "_ipAddr"
+                    "original": "ip_addr"
                 },
                 {
                     "default": "TF.Nil",
@@ -530,17 +540,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"properties\" <$> TF.attribute",
-                    "name": "properties",
+                    "name": "_properties",
                     "method": "properties",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasProperties",
+                    "validate": false,
                     "optional": true,
-                    "label": "_properties"
+                    "original": "properties"
                 }
             ],
-            "schema": "Resource",
             "name": "DeviceResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -550,13 +561,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"collector\" <$> TF.attribute",
-                    "name": "collector",
+                    "name": "_collector",
                     "method": "collector",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasCollector",
+                    "validate": false,
                     "optional": false,
-                    "label": "_collector"
+                    "original": "collector"
                 },
                 {
                     "default": "_ipAddr",
@@ -565,19 +577,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ip_addr\" <$> TF.attribute",
-                    "name": "ip_addr",
+                    "name": "_ipAddr",
                     "method": "ipAddr",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasIpAddr",
+                    "validate": false,
                     "optional": false,
-                    "label": "_ipAddr"
+                    "original": "ip_addr"
                 }
             ],
+            "conflicts": [],
             "type": "DeviceResource s",
             "original": "logicmonitor_device"
         },
         {
+            "con": {
+                "smart": "deviceGroupResource",
+                "name": "DeviceGroupResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -586,13 +604,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"applies_to\" <$> TF.attribute",
-                    "name": "applies_to",
+                    "name": "_appliesTo",
                     "method": "appliesTo",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAppliesTo",
+                    "validate": false,
                     "optional": true,
-                    "label": "_appliesTo"
+                    "original": "applies_to"
                 },
                 {
                     "default": "TF.Nil",
@@ -601,13 +620,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.value P.True",
@@ -616,13 +636,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"disable_alerting\" <$> TF.attribute",
-                    "name": "disable_alerting",
+                    "name": "_disableAlerting",
                     "method": "disableAlerting",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasDisableAlerting",
+                    "validate": false,
                     "optional": true,
-                    "label": "_disableAlerting"
+                    "original": "disable_alerting"
                 },
                 {
                     "default": "_name",
@@ -631,13 +652,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -646,13 +668,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"parent_id\" <$> TF.attribute",
-                    "name": "parent_id",
+                    "name": "_parentId",
                     "method": "parentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasParentId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_parentId"
+                    "original": "parent_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -661,17 +684,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"properties\" <$> TF.attribute",
-                    "name": "properties",
+                    "name": "_properties",
                     "method": "properties",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasProperties",
+                    "validate": false,
                     "optional": true,
-                    "label": "_properties"
+                    "original": "properties"
                 }
             ],
-            "schema": "Resource",
             "name": "DeviceGroupResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -681,19 +705,133 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "DeviceGroupResource s",
             "original": "logicmonitor_device_group"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "_apiId",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"api_id\"",
+                "name": "_apiId",
+                "method": "apiId",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasApiId",
+                "validate": false,
+                "optional": false,
+                "original": "api_id"
+            },
+            {
+                "default": "_apiKey",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"api_key\"",
+                "name": "_apiKey",
+                "method": "apiKey",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasApiKey",
+                "validate": false,
+                "optional": false,
+                "original": "api_key"
+            },
+            {
+                "default": "_company",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"company\"",
+                "name": "_company",
+                "method": "company",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasCompany",
+                "validate": false,
+                "optional": false,
+                "original": "company"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_apiId",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"api_id\"",
+                "name": "_apiId",
+                "method": "apiId",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasApiId",
+                "validate": false,
+                "optional": false,
+                "original": "api_id"
+            },
+            {
+                "default": "_apiKey",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"api_key\"",
+                "name": "_apiKey",
+                "method": "apiKey",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasApiKey",
+                "validate": false,
+                "optional": false,
+                "original": "api_key"
+            },
+            {
+                "default": "_company",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"company\"",
+                "name": "_company",
+                "method": "company",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasCompany",
+                "validate": false,
+                "optional": false,
+                "original": "company"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -703,54 +841,6 @@
         "microlens"
     ],
     "name": "LogicMonitor",
-    "parameters": [
-        {
-            "default": "_apiId",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"api_id\"",
-            "name": "api_id",
-            "method": "apiId",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasApiId",
-            "optional": false,
-            "label": "_apiId"
-        },
-        {
-            "default": "_apiKey",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"api_key\"",
-            "name": "api_key",
-            "method": "apiKey",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasApiKey",
-            "optional": false,
-            "label": "_apiKey"
-        },
-        {
-            "default": "_company",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"company\"",
-            "name": "company",
-            "method": "company",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasCompany",
-            "optional": false,
-            "label": "_company"
-        }
-    ],
     "package": "terrafomo-logicmonitor",
-    "type": "Provider",
     "original": "logicmonitor"
 }
