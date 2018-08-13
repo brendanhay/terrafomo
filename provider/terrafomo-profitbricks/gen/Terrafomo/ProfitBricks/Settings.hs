@@ -38,6 +38,8 @@ module Terrafomo.ProfitBricks.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable                as P
 import qualified Data.HashMap.Strict          as P
 import qualified Data.List.NonEmpty           as P
@@ -146,7 +148,7 @@ instance P.HasNat (Nic s) (TF.Attr s P.Bool) where
                           } :: Nic s)
 
 instance s ~ s' => P.HasComputedIps (TF.Ref s' (Nic s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIps x = TF.compute (TF.refKey x) "ips"
+    computedIps x = TF.compute (TF.refKey x) "_computedIps"
 
 -- | @users@ nested settings.
 data Users s = Users'
@@ -163,22 +165,22 @@ newUsers =
     Users'
 
 instance s ~ s' => P.HasComputedAdministrator (TF.Ref s' (Users s)) (TF.Attr s P.Bool) where
-    computedAdministrator x = TF.compute (TF.refKey x) "administrator"
+    computedAdministrator x = TF.compute (TF.refKey x) "_computedAdministrator"
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "email"
+    computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
 
 instance s ~ s' => P.HasComputedFirstName (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedFirstName x = TF.compute (TF.refKey x) "first_name"
+    computedFirstName x = TF.compute (TF.refKey x) "_computedFirstName"
 
 instance s ~ s' => P.HasComputedForceSecAuth (TF.Ref s' (Users s)) (TF.Attr s P.Bool) where
-    computedForceSecAuth x = TF.compute (TF.refKey x) "force_sec_auth"
+    computedForceSecAuth x = TF.compute (TF.refKey x) "_computedForceSecAuth"
 
 instance s ~ s' => P.HasComputedLastName (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedLastName x = TF.compute (TF.refKey x) "last_name"
+    computedLastName x = TF.compute (TF.refKey x) "_computedLastName"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "password"
+    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
 
 -- | @volume@ nested settings.
 data Volume s = Volume'

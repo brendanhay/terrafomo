@@ -136,7 +136,7 @@ instance P.HasName (DatacenterResource s) (TF.Attr s P.Text) where
                           } :: DatacenterResource s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 -- | @profitbricks_firewall@ Resource.
 --
@@ -378,7 +378,7 @@ instance P.HasUserId (GroupResource s) (TF.Attr s P.Text) where
                           } :: GroupResource s)
 
 instance s ~ s' => P.HasComputedUsers (TF.Ref s' (GroupResource s)) (TF.Attr s [TF.Attr s (Users s)]) where
-    computedUsers x = TF.compute (TF.refKey x) "users"
+    computedUsers x = TF.compute (TF.refKey x) "_computedUsers"
 
 -- | @profitbricks_ipblock@ Resource.
 --
@@ -434,7 +434,7 @@ instance P.HasSize (IpblockResource s) (TF.Attr s P.Integer) where
                           } :: IpblockResource s)
 
 instance s ~ s' => P.HasComputedIps (TF.Ref s' (IpblockResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIps x = TF.compute (TF.refKey x) "ips"
+    computedIps x = TF.compute (TF.refKey x) "_computedIps"
 
 -- | @profitbricks_ipfailover@ Resource.
 --
@@ -741,7 +741,7 @@ instance P.HasServerId (NicResource s) (TF.Attr s P.Text) where
                           } :: NicResource s)
 
 instance s ~ s' => P.HasComputedIps (TF.Ref s' (NicResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIps x = TF.compute (TF.refKey x) "ips"
+    computedIps x = TF.compute (TF.refKey x) "_computedIps"
 
 -- | @profitbricks_server@ Resource.
 --
@@ -867,19 +867,19 @@ instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (Volume s)]) where
                           } :: ServerResource s)
 
 instance s ~ s' => P.HasComputedBootCdrom (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedBootCdrom x = TF.compute (TF.refKey x) "boot_cdrom"
+    computedBootCdrom x = TF.compute (TF.refKey x) "_computedBootCdrom"
 
 instance s ~ s' => P.HasComputedBootImage (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedBootImage x = TF.compute (TF.refKey x) "boot_image"
+    computedBootImage x = TF.compute (TF.refKey x) "_computedBootImage"
 
 instance s ~ s' => P.HasComputedBootVolume (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedBootVolume x = TF.compute (TF.refKey x) "boot_volume"
+    computedBootVolume x = TF.compute (TF.refKey x) "_computedBootVolume"
 
 instance s ~ s' => P.HasComputedPrimaryIp (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPrimaryIp x = TF.compute (TF.refKey x) "primary_ip"
+    computedPrimaryIp x = TF.compute (TF.refKey x) "_computedPrimaryIp"
 
 instance s ~ s' => P.HasComputedPrimaryNic (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPrimaryNic x = TF.compute (TF.refKey x) "primary_nic"
+    computedPrimaryNic x = TF.compute (TF.refKey x) "_computedPrimaryNic"
 
 -- | @profitbricks_share@ Resource.
 --
@@ -1235,4 +1235,4 @@ instance P.HasSshKeyPath (VolumeResource s) (TF.Attr s [TF.Attr s P.Text]) where
                           } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedSshkey (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedSshkey x = TF.compute (TF.refKey x) "sshkey"
+    computedSshkey x = TF.compute (TF.refKey x) "_computedSshkey"
