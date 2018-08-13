@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -64,7 +65,6 @@ module Terrafomo.PagerDuty.Resource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -72,7 +72,10 @@ import Terrafomo.PagerDuty.Settings
 
 import qualified Data.Hashable                as P
 import qualified Data.HashMap.Strict          as P
+import qualified Data.HashMap.Strict          as Map
 import qualified Data.List.NonEmpty           as P
+import qualified Data.Maybe                   as P
+import qualified Data.Monoid                  as P
 import qualified Data.Text                    as P
 import qualified GHC.Generics                 as P
 import qualified Lens.Micro                   as P
@@ -84,6 +87,7 @@ import qualified Terrafomo.PagerDuty.Lens     as P
 import qualified Terrafomo.PagerDuty.Provider as P
 import qualified Terrafomo.PagerDuty.Types    as P
 import qualified Terrafomo.Schema             as TF
+import qualified Terrafomo.Validator          as TF
 
 -- | @pagerduty_addon@ Resource.
 --
@@ -98,34 +102,35 @@ data AddonResource s = AddonResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AddonResource s) where
-    toObject AddonResource'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "src" <$> TF.attribute _src
-        ]
-
 addonResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @src@ - 'P.src'
     -> TF.Resource P.Provider (AddonResource s)
 addonResource _name _src =
-    TF.newResource "pagerduty_addon" $
+    TF.newResource "pagerduty_addon" TF.validator $
         AddonResource'
             { _name = _name
             , _src = _src
             }
 
+instance TF.IsObject (AddonResource s) where
+    toObject AddonResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "src" <$> TF.attribute _src
+        ]
+
+instance TF.IsValid (AddonResource s) where
+    validator = P.mempty
+
 instance P.HasName (AddonResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: AddonResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: AddonResource s)
+               (\s a -> s { _name = a } :: AddonResource s)
 
 instance P.HasSrc (AddonResource s) (TF.Attr s P.Text) where
     src =
         P.lens (_src :: AddonResource s -> TF.Attr s P.Text)
-               (\s a -> s { _src = a
-                          } :: AddonResource s)
+               (\s a -> s { _src = a } :: AddonResource s)
 
 -- | @pagerduty_escalation_policy@ Resource.
 --
@@ -141,7 +146,7 @@ data EscalationPolicyResource s = EscalationPolicyResource'
     , _numLoops    :: TF.Attr s P.Integer
     -- ^ @num_loops@ - (Optional)
     --
-    , _rule        :: TF.Attr s [Rule s]
+    , _rule        :: TF.Attr s [TF.Attr s (Rule s)]
     -- ^ @rule@ - (Required)
     --
     , _teams       :: TF.Attr s [TF.Attr s P.Text]
@@ -149,21 +154,12 @@ data EscalationPolicyResource s = EscalationPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EscalationPolicyResource s) where
-    toObject EscalationPolicyResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "num_loops" <$> TF.attribute _numLoops
-        , TF.assign "rule" <$> TF.attribute _rule
-        , TF.assign "teams" <$> TF.attribute _teams
-        ]
-
 escalationPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [Rule s] -- ^ @rule@ - 'P.rule'
+    -> TF.Attr s [TF.Attr s (Rule s)] -- ^ @rule@ - 'P.rule'
     -> TF.Resource P.Provider (EscalationPolicyResource s)
 escalationPolicyResource _name _rule =
-    TF.newResource "pagerduty_escalation_policy" $
+    TF.newResource "pagerduty_escalation_policy" TF.validator $
         EscalationPolicyResource'
             { _description = TF.value "Managed by Terraform"
             , _name = _name
@@ -172,35 +168,46 @@ escalationPolicyResource _name _rule =
             , _teams = TF.Nil
             }
 
+instance TF.IsObject (EscalationPolicyResource s) where
+    toObject EscalationPolicyResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "num_loops" <$> TF.attribute _numLoops
+        , TF.assign "rule" <$> TF.attribute _rule
+        , TF.assign "teams" <$> TF.attribute _teams
+        ]
+
+instance TF.IsValid (EscalationPolicyResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_rule"
+                  (_rule
+                      :: EscalationPolicyResource s -> TF.Attr s [TF.Attr s (Rule s)])
+                  TF.validator
+
 instance P.HasDescription (EscalationPolicyResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: EscalationPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: EscalationPolicyResource s)
+               (\s a -> s { _description = a } :: EscalationPolicyResource s)
 
 instance P.HasName (EscalationPolicyResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: EscalationPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: EscalationPolicyResource s)
+               (\s a -> s { _name = a } :: EscalationPolicyResource s)
 
 instance P.HasNumLoops (EscalationPolicyResource s) (TF.Attr s P.Integer) where
     numLoops =
         P.lens (_numLoops :: EscalationPolicyResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _numLoops = a
-                          } :: EscalationPolicyResource s)
+               (\s a -> s { _numLoops = a } :: EscalationPolicyResource s)
 
-instance P.HasRule (EscalationPolicyResource s) (TF.Attr s [Rule s]) where
+instance P.HasRule (EscalationPolicyResource s) (TF.Attr s [TF.Attr s (Rule s)]) where
     rule =
-        P.lens (_rule :: EscalationPolicyResource s -> TF.Attr s [Rule s])
-               (\s a -> s { _rule = a
-                          } :: EscalationPolicyResource s)
+        P.lens (_rule :: EscalationPolicyResource s -> TF.Attr s [TF.Attr s (Rule s)])
+               (\s a -> s { _rule = a } :: EscalationPolicyResource s)
 
 instance P.HasTeams (EscalationPolicyResource s) (TF.Attr s [TF.Attr s P.Text]) where
     teams =
         P.lens (_teams :: EscalationPolicyResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _teams = a
-                          } :: EscalationPolicyResource s)
+               (\s a -> s { _teams = a } :: EscalationPolicyResource s)
 
 -- | @pagerduty_extension@ Resource.
 --
@@ -210,7 +217,7 @@ data ExtensionResource s = ExtensionResource'
     { _endpointUrl      :: TF.Attr s P.Text
     -- ^ @endpoint_url@ - (Optional)
     --
-    , _extensionObjects :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _extensionObjects :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @extension_objects@ - (Required)
     --
     , _extensionSchema  :: TF.Attr s P.Text
@@ -218,42 +225,42 @@ data ExtensionResource s = ExtensionResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ExtensionResource s) where
-    toObject ExtensionResource'{..} = catMaybes
-        [ TF.assign "endpoint_url" <$> TF.attribute _endpointUrl
-        , TF.assign "extension_objects" <$> TF.attribute _extensionObjects
-        , TF.assign "extension_schema" <$> TF.attribute _extensionSchema
-        ]
-
 extensionResource
-    :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @extension_objects@ - 'P.extensionObjects'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @extension_objects@ - 'P.extensionObjects'
     -> TF.Attr s P.Text -- ^ @extension_schema@ - 'P.extensionSchema'
     -> TF.Resource P.Provider (ExtensionResource s)
 extensionResource _extensionObjects _extensionSchema =
-    TF.newResource "pagerduty_extension" $
+    TF.newResource "pagerduty_extension" TF.validator $
         ExtensionResource'
             { _endpointUrl = TF.Nil
             , _extensionObjects = _extensionObjects
             , _extensionSchema = _extensionSchema
             }
 
+instance TF.IsObject (ExtensionResource s) where
+    toObject ExtensionResource'{..} = P.catMaybes
+        [ TF.assign "endpoint_url" <$> TF.attribute _endpointUrl
+        , TF.assign "extension_objects" <$> TF.attribute _extensionObjects
+        , TF.assign "extension_schema" <$> TF.attribute _extensionSchema
+        ]
+
+instance TF.IsValid (ExtensionResource s) where
+    validator = P.mempty
+
 instance P.HasEndpointUrl (ExtensionResource s) (TF.Attr s P.Text) where
     endpointUrl =
         P.lens (_endpointUrl :: ExtensionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _endpointUrl = a
-                          } :: ExtensionResource s)
+               (\s a -> s { _endpointUrl = a } :: ExtensionResource s)
 
-instance P.HasExtensionObjects (ExtensionResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance P.HasExtensionObjects (ExtensionResource s) (TF.Attr s [TF.Attr s P.Text]) where
     extensionObjects =
-        P.lens (_extensionObjects :: ExtensionResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _extensionObjects = a
-                          } :: ExtensionResource s)
+        P.lens (_extensionObjects :: ExtensionResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _extensionObjects = a } :: ExtensionResource s)
 
 instance P.HasExtensionSchema (ExtensionResource s) (TF.Attr s P.Text) where
     extensionSchema =
         P.lens (_extensionSchema :: ExtensionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _extensionSchema = a
-                          } :: ExtensionResource s)
+               (\s a -> s { _extensionSchema = a } :: ExtensionResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "_computedName"
@@ -280,21 +287,13 @@ data MaintenanceWindowResource s = MaintenanceWindowResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (MaintenanceWindowResource s) where
-    toObject MaintenanceWindowResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "end_time" <$> TF.attribute _endTime
-        , TF.assign "services" <$> TF.attribute _services
-        , TF.assign "start_time" <$> TF.attribute _startTime
-        ]
-
 maintenanceWindowResource
     :: TF.Attr s P.Text -- ^ @end_time@ - 'P.endTime'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
     -> TF.Attr s P.Text -- ^ @start_time@ - 'P.startTime'
     -> TF.Resource P.Provider (MaintenanceWindowResource s)
 maintenanceWindowResource _endTime _services _startTime =
-    TF.newResource "pagerduty_maintenance_window" $
+    TF.newResource "pagerduty_maintenance_window" TF.validator $
         MaintenanceWindowResource'
             { _description = TF.value "Managed by Terraform"
             , _endTime = _endTime
@@ -302,29 +301,36 @@ maintenanceWindowResource _endTime _services _startTime =
             , _startTime = _startTime
             }
 
+instance TF.IsObject (MaintenanceWindowResource s) where
+    toObject MaintenanceWindowResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "end_time" <$> TF.attribute _endTime
+        , TF.assign "services" <$> TF.attribute _services
+        , TF.assign "start_time" <$> TF.attribute _startTime
+        ]
+
+instance TF.IsValid (MaintenanceWindowResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (MaintenanceWindowResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: MaintenanceWindowResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: MaintenanceWindowResource s)
+               (\s a -> s { _description = a } :: MaintenanceWindowResource s)
 
 instance P.HasEndTime (MaintenanceWindowResource s) (TF.Attr s P.Text) where
     endTime =
         P.lens (_endTime :: MaintenanceWindowResource s -> TF.Attr s P.Text)
-               (\s a -> s { _endTime = a
-                          } :: MaintenanceWindowResource s)
+               (\s a -> s { _endTime = a } :: MaintenanceWindowResource s)
 
 instance P.HasServices (MaintenanceWindowResource s) (TF.Attr s [TF.Attr s P.Text]) where
     services =
         P.lens (_services :: MaintenanceWindowResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _services = a
-                          } :: MaintenanceWindowResource s)
+               (\s a -> s { _services = a } :: MaintenanceWindowResource s)
 
 instance P.HasStartTime (MaintenanceWindowResource s) (TF.Attr s P.Text) where
     startTime =
         P.lens (_startTime :: MaintenanceWindowResource s -> TF.Attr s P.Text)
-               (\s a -> s { _startTime = a
-                          } :: MaintenanceWindowResource s)
+               (\s a -> s { _startTime = a } :: MaintenanceWindowResource s)
 
 -- | @pagerduty_schedule@ Resource.
 --
@@ -334,7 +340,7 @@ data ScheduleResource s = ScheduleResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _layer       :: TF.Attr s [Layer s]
+    , _layer       :: TF.Attr s [TF.Attr s (Layer s)]
     -- ^ @layer@ - (Required)
     --
     , _name        :: TF.Attr s P.Text
@@ -348,21 +354,12 @@ data ScheduleResource s = ScheduleResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ScheduleResource s) where
-    toObject ScheduleResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "layer" <$> TF.attribute _layer
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "overflow" <$> TF.attribute _overflow
-        , TF.assign "time_zone" <$> TF.attribute _timeZone
-        ]
-
 scheduleResource
-    :: TF.Attr s [Layer s] -- ^ @layer@ - 'P.layer'
+    :: TF.Attr s [TF.Attr s (Layer s)] -- ^ @layer@ - 'P.layer'
     -> TF.Attr s P.Text -- ^ @time_zone@ - 'P.timeZone'
     -> TF.Resource P.Provider (ScheduleResource s)
 scheduleResource _layer _timeZone =
-    TF.newResource "pagerduty_schedule" $
+    TF.newResource "pagerduty_schedule" TF.validator $
         ScheduleResource'
             { _description = TF.value "Managed by Terraform"
             , _layer = _layer
@@ -371,35 +368,46 @@ scheduleResource _layer _timeZone =
             , _timeZone = _timeZone
             }
 
+instance TF.IsObject (ScheduleResource s) where
+    toObject ScheduleResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "layer" <$> TF.attribute _layer
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "overflow" <$> TF.attribute _overflow
+        , TF.assign "time_zone" <$> TF.attribute _timeZone
+        ]
+
+instance TF.IsValid (ScheduleResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_layer"
+                  (_layer
+                      :: ScheduleResource s -> TF.Attr s [TF.Attr s (Layer s)])
+                  TF.validator
+
 instance P.HasDescription (ScheduleResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: ScheduleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: ScheduleResource s)
+               (\s a -> s { _description = a } :: ScheduleResource s)
 
-instance P.HasLayer (ScheduleResource s) (TF.Attr s [Layer s]) where
+instance P.HasLayer (ScheduleResource s) (TF.Attr s [TF.Attr s (Layer s)]) where
     layer =
-        P.lens (_layer :: ScheduleResource s -> TF.Attr s [Layer s])
-               (\s a -> s { _layer = a
-                          } :: ScheduleResource s)
+        P.lens (_layer :: ScheduleResource s -> TF.Attr s [TF.Attr s (Layer s)])
+               (\s a -> s { _layer = a } :: ScheduleResource s)
 
 instance P.HasName (ScheduleResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ScheduleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ScheduleResource s)
+               (\s a -> s { _name = a } :: ScheduleResource s)
 
 instance P.HasOverflow (ScheduleResource s) (TF.Attr s P.Bool) where
     overflow =
         P.lens (_overflow :: ScheduleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _overflow = a
-                          } :: ScheduleResource s)
+               (\s a -> s { _overflow = a } :: ScheduleResource s)
 
 instance P.HasTimeZone (ScheduleResource s) (TF.Attr s P.Text) where
     timeZone =
         P.lens (_timeZone :: ScheduleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _timeZone = a
-                          } :: ScheduleResource s)
+               (\s a -> s { _timeZone = a } :: ScheduleResource s)
 
 -- | @pagerduty_service@ Resource.
 --
@@ -424,7 +432,7 @@ data ServiceResource s = ServiceResource'
     , _name                   :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _scheduledActions       :: TF.Attr s [ScheduledActions s]
+    , _scheduledActions       :: TF.Attr s [TF.Attr s (ScheduledActions s)]
     -- ^ @scheduled_actions@ - (Optional)
     --
     , _supportHours           :: TF.Attr s (SupportHours s)
@@ -432,23 +440,11 @@ data ServiceResource s = ServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ServiceResource s) where
-    toObject ServiceResource'{..} = catMaybes
-        [ TF.assign "acknowledgement_timeout" <$> TF.attribute _acknowledgementTimeout
-        , TF.assign "alert_creation" <$> TF.attribute _alertCreation
-        , TF.assign "auto_resolve_timeout" <$> TF.attribute _autoResolveTimeout
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "escalation_policy" <$> TF.attribute _escalationPolicy
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "scheduled_actions" <$> TF.attribute _scheduledActions
-        , TF.assign "support_hours" <$> TF.attribute _supportHours
-        ]
-
 serviceResource
     :: TF.Attr s P.Text -- ^ @escalation_policy@ - 'P.escalationPolicy'
     -> TF.Resource P.Provider (ServiceResource s)
 serviceResource _escalationPolicy =
-    TF.newResource "pagerduty_service" $
+    TF.newResource "pagerduty_service" TF.validator $
         ServiceResource'
             { _acknowledgementTimeout = TF.value "1800"
             , _alertCreation = TF.value "create_incidents"
@@ -460,53 +456,68 @@ serviceResource _escalationPolicy =
             , _supportHours = TF.Nil
             }
 
+instance TF.IsObject (ServiceResource s) where
+    toObject ServiceResource'{..} = P.catMaybes
+        [ TF.assign "acknowledgement_timeout" <$> TF.attribute _acknowledgementTimeout
+        , TF.assign "alert_creation" <$> TF.attribute _alertCreation
+        , TF.assign "auto_resolve_timeout" <$> TF.attribute _autoResolveTimeout
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "escalation_policy" <$> TF.attribute _escalationPolicy
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "scheduled_actions" <$> TF.attribute _scheduledActions
+        , TF.assign "support_hours" <$> TF.attribute _supportHours
+        ]
+
+instance TF.IsValid (ServiceResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_scheduledActions"
+                  (_scheduledActions
+                      :: ServiceResource s -> TF.Attr s [TF.Attr s (ScheduledActions s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_supportHours"
+                  (_supportHours
+                      :: ServiceResource s -> TF.Attr s (SupportHours s))
+                  TF.validator
+
 instance P.HasAcknowledgementTimeout (ServiceResource s) (TF.Attr s P.Text) where
     acknowledgementTimeout =
         P.lens (_acknowledgementTimeout :: ServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _acknowledgementTimeout = a
-                          } :: ServiceResource s)
+               (\s a -> s { _acknowledgementTimeout = a } :: ServiceResource s)
 
 instance P.HasAlertCreation (ServiceResource s) (TF.Attr s P.Text) where
     alertCreation =
         P.lens (_alertCreation :: ServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _alertCreation = a
-                          } :: ServiceResource s)
+               (\s a -> s { _alertCreation = a } :: ServiceResource s)
 
 instance P.HasAutoResolveTimeout (ServiceResource s) (TF.Attr s P.Text) where
     autoResolveTimeout =
         P.lens (_autoResolveTimeout :: ServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _autoResolveTimeout = a
-                          } :: ServiceResource s)
+               (\s a -> s { _autoResolveTimeout = a } :: ServiceResource s)
 
 instance P.HasDescription (ServiceResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: ServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: ServiceResource s)
+               (\s a -> s { _description = a } :: ServiceResource s)
 
 instance P.HasEscalationPolicy (ServiceResource s) (TF.Attr s P.Text) where
     escalationPolicy =
         P.lens (_escalationPolicy :: ServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _escalationPolicy = a
-                          } :: ServiceResource s)
+               (\s a -> s { _escalationPolicy = a } :: ServiceResource s)
 
 instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ServiceResource s)
+               (\s a -> s { _name = a } :: ServiceResource s)
 
-instance P.HasScheduledActions (ServiceResource s) (TF.Attr s [ScheduledActions s]) where
+instance P.HasScheduledActions (ServiceResource s) (TF.Attr s [TF.Attr s (ScheduledActions s)]) where
     scheduledActions =
-        P.lens (_scheduledActions :: ServiceResource s -> TF.Attr s [ScheduledActions s])
-               (\s a -> s { _scheduledActions = a
-                          } :: ServiceResource s)
+        P.lens (_scheduledActions :: ServiceResource s -> TF.Attr s [TF.Attr s (ScheduledActions s)])
+               (\s a -> s { _scheduledActions = a } :: ServiceResource s)
 
 instance P.HasSupportHours (ServiceResource s) (TF.Attr s (SupportHours s)) where
     supportHours =
         P.lens (_supportHours :: ServiceResource s -> TF.Attr s (SupportHours s))
-               (\s a -> s { _supportHours = a
-                          } :: ServiceResource s)
+               (\s a -> s { _supportHours = a } :: ServiceResource s)
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "_computedCreatedAt"
@@ -533,33 +544,34 @@ data ServiceIntegrationResource s = ServiceIntegrationResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ServiceIntegrationResource s) where
-    toObject ServiceIntegrationResource'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "service" <$> TF.attribute _service
-        ]
-
 serviceIntegrationResource
     :: TF.Attr s P.Text -- ^ @service@ - 'P.service'
     -> TF.Resource P.Provider (ServiceIntegrationResource s)
 serviceIntegrationResource _service =
-    TF.newResource "pagerduty_service_integration" $
+    TF.newResource "pagerduty_service_integration" TF.validator $
         ServiceIntegrationResource'
             { _name = TF.Nil
             , _service = _service
             }
 
+instance TF.IsObject (ServiceIntegrationResource s) where
+    toObject ServiceIntegrationResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "service" <$> TF.attribute _service
+        ]
+
+instance TF.IsValid (ServiceIntegrationResource s) where
+    validator = P.mempty
+
 instance P.HasName (ServiceIntegrationResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ServiceIntegrationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ServiceIntegrationResource s)
+               (\s a -> s { _name = a } :: ServiceIntegrationResource s)
 
 instance P.HasService (ServiceIntegrationResource s) (TF.Attr s P.Text) where
     service =
         P.lens (_service :: ServiceIntegrationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _service = a
-                          } :: ServiceIntegrationResource s)
+               (\s a -> s { _service = a } :: ServiceIntegrationResource s)
 
 instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
     computedHtmlUrl x = TF.compute (TF.refKey x) "_computedHtmlUrl"
@@ -589,33 +601,34 @@ data TeamResource s = TeamResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (TeamResource s) where
-    toObject TeamResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (TeamResource s)
 teamResource _name =
-    TF.newResource "pagerduty_team" $
+    TF.newResource "pagerduty_team" TF.validator $
         TeamResource'
             { _description = TF.value "Managed by Terraform"
             , _name = _name
             }
 
+instance TF.IsObject (TeamResource s) where
+    toObject TeamResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (TeamResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (TeamResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: TeamResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: TeamResource s)
+               (\s a -> s { _description = a } :: TeamResource s)
 
 instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: TeamResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: TeamResource s)
+               (\s a -> s { _name = a } :: TeamResource s)
 
 -- | @pagerduty_team_membership@ Resource.
 --
@@ -630,34 +643,35 @@ data TeamMembershipResource s = TeamMembershipResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (TeamMembershipResource s) where
-    toObject TeamMembershipResource'{..} = catMaybes
-        [ TF.assign "team_id" <$> TF.attribute _teamId
-        , TF.assign "user_id" <$> TF.attribute _userId
-        ]
-
 teamMembershipResource
     :: TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
     -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'
     -> TF.Resource P.Provider (TeamMembershipResource s)
 teamMembershipResource _teamId _userId =
-    TF.newResource "pagerduty_team_membership" $
+    TF.newResource "pagerduty_team_membership" TF.validator $
         TeamMembershipResource'
             { _teamId = _teamId
             , _userId = _userId
             }
 
+instance TF.IsObject (TeamMembershipResource s) where
+    toObject TeamMembershipResource'{..} = P.catMaybes
+        [ TF.assign "team_id" <$> TF.attribute _teamId
+        , TF.assign "user_id" <$> TF.attribute _userId
+        ]
+
+instance TF.IsValid (TeamMembershipResource s) where
+    validator = P.mempty
+
 instance P.HasTeamId (TeamMembershipResource s) (TF.Attr s P.Text) where
     teamId =
         P.lens (_teamId :: TeamMembershipResource s -> TF.Attr s P.Text)
-               (\s a -> s { _teamId = a
-                          } :: TeamMembershipResource s)
+               (\s a -> s { _teamId = a } :: TeamMembershipResource s)
 
 instance P.HasUserId (TeamMembershipResource s) (TF.Attr s P.Text) where
     userId =
         P.lens (_userId :: TeamMembershipResource s -> TF.Attr s P.Text)
-               (\s a -> s { _userId = a
-                          } :: TeamMembershipResource s)
+               (\s a -> s { _userId = a } :: TeamMembershipResource s)
 
 -- | @pagerduty_user@ Resource.
 --
@@ -679,27 +693,17 @@ data UserResource s = UserResource'
     , _role        :: TF.Attr s P.Text
     -- ^ @role@ - (Optional)
     --
-    , _teams       :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _teams       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @teams@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance TF.IsObject (UserResource s) where
-    toObject UserResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "email" <$> TF.attribute _email
-        , TF.assign "job_title" <$> TF.attribute _jobTitle
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "role" <$> TF.attribute _role
-        , TF.assign "teams" <$> TF.attribute _teams
-        ]
 
 userResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (UserResource s)
 userResource _email _name =
-    TF.newResource "pagerduty_user" $
+    TF.newResource "pagerduty_user" TF.validator $
         UserResource'
             { _description = TF.value "Managed by Terraform"
             , _email = _email
@@ -709,41 +713,48 @@ userResource _email _name =
             , _teams = TF.Nil
             }
 
+instance TF.IsObject (UserResource s) where
+    toObject UserResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "email" <$> TF.attribute _email
+        , TF.assign "job_title" <$> TF.attribute _jobTitle
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "role" <$> TF.attribute _role
+        , TF.assign "teams" <$> TF.attribute _teams
+        ]
+
+instance TF.IsValid (UserResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (UserResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: UserResource s)
+               (\s a -> s { _description = a } :: UserResource s)
 
 instance P.HasEmail (UserResource s) (TF.Attr s P.Text) where
     email =
         P.lens (_email :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _email = a
-                          } :: UserResource s)
+               (\s a -> s { _email = a } :: UserResource s)
 
 instance P.HasJobTitle (UserResource s) (TF.Attr s P.Text) where
     jobTitle =
         P.lens (_jobTitle :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _jobTitle = a
-                          } :: UserResource s)
+               (\s a -> s { _jobTitle = a } :: UserResource s)
 
 instance P.HasName (UserResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: UserResource s)
+               (\s a -> s { _name = a } :: UserResource s)
 
 instance P.HasRole (UserResource s) (TF.Attr s P.Text) where
     role =
         P.lens (_role :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a
-                          } :: UserResource s)
+               (\s a -> s { _role = a } :: UserResource s)
 
-instance P.HasTeams (UserResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance P.HasTeams (UserResource s) (TF.Attr s [TF.Attr s P.Text]) where
     teams =
-        P.lens (_teams :: UserResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _teams = a
-                          } :: UserResource s)
+        P.lens (_teams :: UserResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _teams = a } :: UserResource s)
 
 instance s ~ s' => P.HasComputedAvatarUrl (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedAvatarUrl x = TF.compute (TF.refKey x) "_computedAvatarUrl"
@@ -785,16 +796,6 @@ data UserContactMethodResource s = UserContactMethodResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (UserContactMethodResource s) where
-    toObject UserContactMethodResource'{..} = catMaybes
-        [ TF.assign "address" <$> TF.attribute _address
-        , TF.assign "country_code" <$> TF.attribute _countryCode
-        , TF.assign "label" <$> TF.attribute _label
-        , TF.assign "send_short_email" <$> TF.attribute _sendShortEmail
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "user_id" <$> TF.attribute _userId
-        ]
-
 userContactMethodResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @label@ - 'P.label'
@@ -802,7 +803,7 @@ userContactMethodResource
     -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'
     -> TF.Resource P.Provider (UserContactMethodResource s)
 userContactMethodResource _address _label _type' _userId =
-    TF.newResource "pagerduty_user_contact_method" $
+    TF.newResource "pagerduty_user_contact_method" TF.validator $
         UserContactMethodResource'
             { _address = _address
             , _countryCode = TF.Nil
@@ -812,41 +813,48 @@ userContactMethodResource _address _label _type' _userId =
             , _userId = _userId
             }
 
+instance TF.IsObject (UserContactMethodResource s) where
+    toObject UserContactMethodResource'{..} = P.catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "country_code" <$> TF.attribute _countryCode
+        , TF.assign "label" <$> TF.attribute _label
+        , TF.assign "send_short_email" <$> TF.attribute _sendShortEmail
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "user_id" <$> TF.attribute _userId
+        ]
+
+instance TF.IsValid (UserContactMethodResource s) where
+    validator = P.mempty
+
 instance P.HasAddress (UserContactMethodResource s) (TF.Attr s P.Text) where
     address =
         P.lens (_address :: UserContactMethodResource s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a
-                          } :: UserContactMethodResource s)
+               (\s a -> s { _address = a } :: UserContactMethodResource s)
 
 instance P.HasCountryCode (UserContactMethodResource s) (TF.Attr s P.Integer) where
     countryCode =
         P.lens (_countryCode :: UserContactMethodResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _countryCode = a
-                          } :: UserContactMethodResource s)
+               (\s a -> s { _countryCode = a } :: UserContactMethodResource s)
 
 instance P.HasLabel (UserContactMethodResource s) (TF.Attr s P.Text) where
     label =
         P.lens (_label :: UserContactMethodResource s -> TF.Attr s P.Text)
-               (\s a -> s { _label = a
-                          } :: UserContactMethodResource s)
+               (\s a -> s { _label = a } :: UserContactMethodResource s)
 
 instance P.HasSendShortEmail (UserContactMethodResource s) (TF.Attr s P.Bool) where
     sendShortEmail =
         P.lens (_sendShortEmail :: UserContactMethodResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _sendShortEmail = a
-                          } :: UserContactMethodResource s)
+               (\s a -> s { _sendShortEmail = a } :: UserContactMethodResource s)
 
 instance P.HasType' (UserContactMethodResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: UserContactMethodResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: UserContactMethodResource s)
+               (\s a -> s { _type' = a } :: UserContactMethodResource s)
 
 instance P.HasUserId (UserContactMethodResource s) (TF.Attr s P.Text) where
     userId =
         P.lens (_userId :: UserContactMethodResource s -> TF.Attr s P.Text)
-               (\s a -> s { _userId = a
-                          } :: UserContactMethodResource s)
+               (\s a -> s { _userId = a } :: UserContactMethodResource s)
 
 instance s ~ s' => P.HasComputedBlacklisted (TF.Ref s' (UserContactMethodResource s)) (TF.Attr s P.Bool) where
     computedBlacklisted x = TF.compute (TF.refKey x) "_computedBlacklisted"

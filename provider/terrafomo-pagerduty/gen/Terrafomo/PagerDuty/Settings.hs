@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -60,13 +61,15 @@ module Terrafomo.PagerDuty.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
 import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
@@ -76,6 +79,7 @@ import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.PagerDuty.Lens  as P
 import qualified Terrafomo.PagerDuty.Types as P
+import qualified Terrafomo.Validator       as TF
 
 -- | @restriction@ nested settings.
 data Restriction s = Restriction'
@@ -93,16 +97,6 @@ data Restriction s = Restriction'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Restriction s)
-instance TF.IsValue  (Restriction s)
-instance TF.IsObject (Restriction s) where
-    toObject Restriction'{..} = catMaybes
-        [ TF.assign "duration_seconds" <$> TF.attribute _durationSeconds
-        , TF.assign "start_day_of_week" <$> TF.attribute _startDayOfWeek
-        , TF.assign "start_time_of_day" <$> TF.attribute _startTimeOfDay
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
 newRestriction
     :: TF.Attr s P.Integer -- ^ @duration_seconds@ - 'P.durationSeconds'
     -> TF.Attr s P.Text -- ^ @start_time_of_day@ - 'P.startTimeOfDay'
@@ -116,29 +110,38 @@ newRestriction _durationSeconds _startTimeOfDay _type' =
         , _type' = _type'
         }
 
+instance P.Hashable  (Restriction s)
+instance TF.IsValue  (Restriction s)
+instance TF.IsObject (Restriction s) where
+    toObject Restriction'{..} = P.catMaybes
+        [ TF.assign "duration_seconds" <$> TF.attribute _durationSeconds
+        , TF.assign "start_day_of_week" <$> TF.attribute _startDayOfWeek
+        , TF.assign "start_time_of_day" <$> TF.attribute _startTimeOfDay
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (Restriction s) where
+    validator = P.mempty
+
 instance P.HasDurationSeconds (Restriction s) (TF.Attr s P.Integer) where
     durationSeconds =
         P.lens (_durationSeconds :: Restriction s -> TF.Attr s P.Integer)
-               (\s a -> s { _durationSeconds = a
-                          } :: Restriction s)
+               (\s a -> s { _durationSeconds = a } :: Restriction s)
 
 instance P.HasStartDayOfWeek (Restriction s) (TF.Attr s P.Integer) where
     startDayOfWeek =
         P.lens (_startDayOfWeek :: Restriction s -> TF.Attr s P.Integer)
-               (\s a -> s { _startDayOfWeek = a
-                          } :: Restriction s)
+               (\s a -> s { _startDayOfWeek = a } :: Restriction s)
 
 instance P.HasStartTimeOfDay (Restriction s) (TF.Attr s P.Text) where
     startTimeOfDay =
         P.lens (_startTimeOfDay :: Restriction s -> TF.Attr s P.Text)
-               (\s a -> s { _startTimeOfDay = a
-                          } :: Restriction s)
+               (\s a -> s { _startTimeOfDay = a } :: Restriction s)
 
 instance P.HasType' (Restriction s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: Restriction s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: Restriction s)
+               (\s a -> s { _type' = a } :: Restriction s)
 
 -- | @at@ nested settings.
 data At s = At'
@@ -150,14 +153,6 @@ data At s = At'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (At s)
-instance TF.IsValue  (At s)
-instance TF.IsObject (At s) where
-    toObject At'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
 newAt
     :: At s
 newAt =
@@ -166,21 +161,30 @@ newAt =
         , _type' = TF.Nil
         }
 
+instance P.Hashable  (At s)
+instance TF.IsValue  (At s)
+instance TF.IsObject (At s) where
+    toObject At'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (At s) where
+    validator = P.mempty
+
 instance P.HasName (At s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: At s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: At s)
+               (\s a -> s { _name = a } :: At s)
 
 instance P.HasType' (At s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: At s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: At s)
+               (\s a -> s { _type' = a } :: At s)
 
 -- | @scheduled_actions@ nested settings.
 data ScheduledActions s = ScheduledActions'
-    { _at        :: TF.Attr s [At s]
+    { _at        :: TF.Attr s [TF.Attr s (At s)]
     -- ^ @at@ - (Optional)
     --
     , _toUrgency :: TF.Attr s P.Text
@@ -191,15 +195,6 @@ data ScheduledActions s = ScheduledActions'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (ScheduledActions s)
-instance TF.IsValue  (ScheduledActions s)
-instance TF.IsObject (ScheduledActions s) where
-    toObject ScheduledActions'{..} = catMaybes
-        [ TF.assign "at" <$> TF.attribute _at
-        , TF.assign "to_urgency" <$> TF.attribute _toUrgency
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
 newScheduledActions
     :: ScheduledActions s
 newScheduledActions =
@@ -209,23 +204,36 @@ newScheduledActions =
         , _type' = TF.Nil
         }
 
-instance P.HasAt (ScheduledActions s) (TF.Attr s [At s]) where
+instance P.Hashable  (ScheduledActions s)
+instance TF.IsValue  (ScheduledActions s)
+instance TF.IsObject (ScheduledActions s) where
+    toObject ScheduledActions'{..} = P.catMaybes
+        [ TF.assign "at" <$> TF.attribute _at
+        , TF.assign "to_urgency" <$> TF.attribute _toUrgency
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (ScheduledActions s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_at"
+                  (_at
+                      :: ScheduledActions s -> TF.Attr s [TF.Attr s (At s)])
+                  TF.validator
+
+instance P.HasAt (ScheduledActions s) (TF.Attr s [TF.Attr s (At s)]) where
     at =
-        P.lens (_at :: ScheduledActions s -> TF.Attr s [At s])
-               (\s a -> s { _at = a
-                          } :: ScheduledActions s)
+        P.lens (_at :: ScheduledActions s -> TF.Attr s [TF.Attr s (At s)])
+               (\s a -> s { _at = a } :: ScheduledActions s)
 
 instance P.HasToUrgency (ScheduledActions s) (TF.Attr s P.Text) where
     toUrgency =
         P.lens (_toUrgency :: ScheduledActions s -> TF.Attr s P.Text)
-               (\s a -> s { _toUrgency = a
-                          } :: ScheduledActions s)
+               (\s a -> s { _toUrgency = a } :: ScheduledActions s)
 
 instance P.HasType' (ScheduledActions s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: ScheduledActions s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: ScheduledActions s)
+               (\s a -> s { _type' = a } :: ScheduledActions s)
 
 -- | @support_hours@ nested settings.
 data SupportHours s = SupportHours'
@@ -246,17 +254,6 @@ data SupportHours s = SupportHours'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (SupportHours s)
-instance TF.IsValue  (SupportHours s)
-instance TF.IsObject (SupportHours s) where
-    toObject SupportHours'{..} = catMaybes
-        [ TF.assign "days_of_week" <$> TF.attribute _daysOfWeek
-        , TF.assign "end_time" <$> TF.attribute _endTime
-        , TF.assign "start_time" <$> TF.attribute _startTime
-        , TF.assign "time_zone" <$> TF.attribute _timeZone
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
 newSupportHours
     :: SupportHours s
 newSupportHours =
@@ -268,57 +265,58 @@ newSupportHours =
         , _type' = TF.Nil
         }
 
+instance P.Hashable  (SupportHours s)
+instance TF.IsValue  (SupportHours s)
+instance TF.IsObject (SupportHours s) where
+    toObject SupportHours'{..} = P.catMaybes
+        [ TF.assign "days_of_week" <$> TF.attribute _daysOfWeek
+        , TF.assign "end_time" <$> TF.attribute _endTime
+        , TF.assign "start_time" <$> TF.attribute _startTime
+        , TF.assign "time_zone" <$> TF.attribute _timeZone
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (SupportHours s) where
+    validator = P.mempty
+
 instance P.HasDaysOfWeek (SupportHours s) (TF.Attr s [TF.Attr s P.Integer]) where
     daysOfWeek =
         P.lens (_daysOfWeek :: SupportHours s -> TF.Attr s [TF.Attr s P.Integer])
-               (\s a -> s { _daysOfWeek = a
-                          } :: SupportHours s)
+               (\s a -> s { _daysOfWeek = a } :: SupportHours s)
 
 instance P.HasEndTime (SupportHours s) (TF.Attr s P.Text) where
     endTime =
         P.lens (_endTime :: SupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _endTime = a
-                          } :: SupportHours s)
+               (\s a -> s { _endTime = a } :: SupportHours s)
 
 instance P.HasStartTime (SupportHours s) (TF.Attr s P.Text) where
     startTime =
         P.lens (_startTime :: SupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _startTime = a
-                          } :: SupportHours s)
+               (\s a -> s { _startTime = a } :: SupportHours s)
 
 instance P.HasTimeZone (SupportHours s) (TF.Attr s P.Text) where
     timeZone =
         P.lens (_timeZone :: SupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _timeZone = a
-                          } :: SupportHours s)
+               (\s a -> s { _timeZone = a } :: SupportHours s)
 
 instance P.HasType' (SupportHours s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: SupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: SupportHours s)
+               (\s a -> s { _type' = a } :: SupportHours s)
 
 -- | @rule@ nested settings.
 data Rule s = Rule'
     { _escalationDelayInMinutes :: TF.Attr s P.Integer
     -- ^ @escalation_delay_in_minutes@ - (Required)
     --
-    , _target                   :: TF.Attr s [Target s]
+    , _target                   :: TF.Attr s [TF.Attr s (Target s)]
     -- ^ @target@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Rule s)
-instance TF.IsValue  (Rule s)
-instance TF.IsObject (Rule s) where
-    toObject Rule'{..} = catMaybes
-        [ TF.assign "escalation_delay_in_minutes" <$> TF.attribute _escalationDelayInMinutes
-        , TF.assign "target" <$> TF.attribute _target
-        ]
-
 newRule
     :: TF.Attr s P.Integer -- ^ @escalation_delay_in_minutes@ - 'P.escalationDelayInMinutes'
-    -> TF.Attr s [Target s] -- ^ @target@ - 'P.target'
+    -> TF.Attr s [TF.Attr s (Target s)] -- ^ @target@ - 'P.target'
     -> Rule s
 newRule _escalationDelayInMinutes _target =
     Rule'
@@ -326,17 +324,30 @@ newRule _escalationDelayInMinutes _target =
         , _target = _target
         }
 
+instance P.Hashable  (Rule s)
+instance TF.IsValue  (Rule s)
+instance TF.IsObject (Rule s) where
+    toObject Rule'{..} = P.catMaybes
+        [ TF.assign "escalation_delay_in_minutes" <$> TF.attribute _escalationDelayInMinutes
+        , TF.assign "target" <$> TF.attribute _target
+        ]
+
+instance TF.IsValid (Rule s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_target"
+                  (_target
+                      :: Rule s -> TF.Attr s [TF.Attr s (Target s)])
+                  TF.validator
+
 instance P.HasEscalationDelayInMinutes (Rule s) (TF.Attr s P.Integer) where
     escalationDelayInMinutes =
         P.lens (_escalationDelayInMinutes :: Rule s -> TF.Attr s P.Integer)
-               (\s a -> s { _escalationDelayInMinutes = a
-                          } :: Rule s)
+               (\s a -> s { _escalationDelayInMinutes = a } :: Rule s)
 
-instance P.HasTarget (Rule s) (TF.Attr s [Target s]) where
+instance P.HasTarget (Rule s) (TF.Attr s [TF.Attr s (Target s)]) where
     target =
-        P.lens (_target :: Rule s -> TF.Attr s [Target s])
-               (\s a -> s { _target = a
-                          } :: Rule s)
+        P.lens (_target :: Rule s -> TF.Attr s [TF.Attr s (Target s)])
+               (\s a -> s { _target = a } :: Rule s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Rule s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -357,16 +368,6 @@ data IncidentUrgencyRule s = IncidentUrgencyRule'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (IncidentUrgencyRule s)
-instance TF.IsValue  (IncidentUrgencyRule s)
-instance TF.IsObject (IncidentUrgencyRule s) where
-    toObject IncidentUrgencyRule'{..} = catMaybes
-        [ TF.assign "during_support_hours" <$> TF.attribute _duringSupportHours
-        , TF.assign "outside_support_hours" <$> TF.attribute _outsideSupportHours
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "urgency" <$> TF.attribute _urgency
-        ]
-
 newIncidentUrgencyRule
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> IncidentUrgencyRule s
@@ -378,29 +379,46 @@ newIncidentUrgencyRule _type' =
         , _urgency = TF.Nil
         }
 
+instance P.Hashable  (IncidentUrgencyRule s)
+instance TF.IsValue  (IncidentUrgencyRule s)
+instance TF.IsObject (IncidentUrgencyRule s) where
+    toObject IncidentUrgencyRule'{..} = P.catMaybes
+        [ TF.assign "during_support_hours" <$> TF.attribute _duringSupportHours
+        , TF.assign "outside_support_hours" <$> TF.attribute _outsideSupportHours
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "urgency" <$> TF.attribute _urgency
+        ]
+
+instance TF.IsValid (IncidentUrgencyRule s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_duringSupportHours"
+                  (_duringSupportHours
+                      :: IncidentUrgencyRule s -> TF.Attr s (DuringSupportHours s))
+                  TF.validator
+           P.<> TF.settingsValidator "_outsideSupportHours"
+                  (_outsideSupportHours
+                      :: IncidentUrgencyRule s -> TF.Attr s (OutsideSupportHours s))
+                  TF.validator
+
 instance P.HasDuringSupportHours (IncidentUrgencyRule s) (TF.Attr s (DuringSupportHours s)) where
     duringSupportHours =
         P.lens (_duringSupportHours :: IncidentUrgencyRule s -> TF.Attr s (DuringSupportHours s))
-               (\s a -> s { _duringSupportHours = a
-                          } :: IncidentUrgencyRule s)
+               (\s a -> s { _duringSupportHours = a } :: IncidentUrgencyRule s)
 
 instance P.HasOutsideSupportHours (IncidentUrgencyRule s) (TF.Attr s (OutsideSupportHours s)) where
     outsideSupportHours =
         P.lens (_outsideSupportHours :: IncidentUrgencyRule s -> TF.Attr s (OutsideSupportHours s))
-               (\s a -> s { _outsideSupportHours = a
-                          } :: IncidentUrgencyRule s)
+               (\s a -> s { _outsideSupportHours = a } :: IncidentUrgencyRule s)
 
 instance P.HasType' (IncidentUrgencyRule s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: IncidentUrgencyRule s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: IncidentUrgencyRule s)
+               (\s a -> s { _type' = a } :: IncidentUrgencyRule s)
 
 instance P.HasUrgency (IncidentUrgencyRule s) (TF.Attr s P.Text) where
     urgency =
         P.lens (_urgency :: IncidentUrgencyRule s -> TF.Attr s P.Text)
-               (\s a -> s { _urgency = a
-                          } :: IncidentUrgencyRule s)
+               (\s a -> s { _urgency = a } :: IncidentUrgencyRule s)
 
 -- | @during_support_hours@ nested settings.
 data DuringSupportHours s = DuringSupportHours'
@@ -412,14 +430,6 @@ data DuringSupportHours s = DuringSupportHours'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (DuringSupportHours s)
-instance TF.IsValue  (DuringSupportHours s)
-instance TF.IsObject (DuringSupportHours s) where
-    toObject DuringSupportHours'{..} = catMaybes
-        [ TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "urgency" <$> TF.attribute _urgency
-        ]
-
 newDuringSupportHours
     :: DuringSupportHours s
 newDuringSupportHours =
@@ -428,24 +438,33 @@ newDuringSupportHours =
         , _urgency = TF.Nil
         }
 
+instance P.Hashable  (DuringSupportHours s)
+instance TF.IsValue  (DuringSupportHours s)
+instance TF.IsObject (DuringSupportHours s) where
+    toObject DuringSupportHours'{..} = P.catMaybes
+        [ TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "urgency" <$> TF.attribute _urgency
+        ]
+
+instance TF.IsValid (DuringSupportHours s) where
+    validator = P.mempty
+
 instance P.HasType' (DuringSupportHours s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: DuringSupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: DuringSupportHours s)
+               (\s a -> s { _type' = a } :: DuringSupportHours s)
 
 instance P.HasUrgency (DuringSupportHours s) (TF.Attr s P.Text) where
     urgency =
         P.lens (_urgency :: DuringSupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _urgency = a
-                          } :: DuringSupportHours s)
+               (\s a -> s { _urgency = a } :: DuringSupportHours s)
 
 -- | @layer@ nested settings.
 data Layer s = Layer'
     { _end                       :: TF.Attr s P.Text
     -- ^ @end@ - (Optional)
     --
-    , _restriction               :: TF.Attr s [Restriction s]
+    , _restriction               :: TF.Attr s [TF.Attr s (Restriction s)]
     -- ^ @restriction@ - (Optional)
     --
     , _rotationTurnLengthSeconds :: TF.Attr s P.Integer
@@ -461,18 +480,6 @@ data Layer s = Layer'
     -- ^ @users@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance P.Hashable  (Layer s)
-instance TF.IsValue  (Layer s)
-instance TF.IsObject (Layer s) where
-    toObject Layer'{..} = catMaybes
-        [ TF.assign "end" <$> TF.attribute _end
-        , TF.assign "restriction" <$> TF.attribute _restriction
-        , TF.assign "rotation_turn_length_seconds" <$> TF.attribute _rotationTurnLengthSeconds
-        , TF.assign "rotation_virtual_start" <$> TF.attribute _rotationVirtualStart
-        , TF.assign "start" <$> TF.attribute _start
-        , TF.assign "users" <$> TF.attribute _users
-        ]
 
 newLayer
     :: TF.Attr s P.Integer -- ^ @rotation_turn_length_seconds@ - 'P.rotationTurnLengthSeconds'
@@ -490,41 +497,54 @@ newLayer _rotationTurnLengthSeconds _rotationVirtualStart _start _users =
         , _users = _users
         }
 
+instance P.Hashable  (Layer s)
+instance TF.IsValue  (Layer s)
+instance TF.IsObject (Layer s) where
+    toObject Layer'{..} = P.catMaybes
+        [ TF.assign "end" <$> TF.attribute _end
+        , TF.assign "restriction" <$> TF.attribute _restriction
+        , TF.assign "rotation_turn_length_seconds" <$> TF.attribute _rotationTurnLengthSeconds
+        , TF.assign "rotation_virtual_start" <$> TF.attribute _rotationVirtualStart
+        , TF.assign "start" <$> TF.attribute _start
+        , TF.assign "users" <$> TF.attribute _users
+        ]
+
+instance TF.IsValid (Layer s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_restriction"
+                  (_restriction
+                      :: Layer s -> TF.Attr s [TF.Attr s (Restriction s)])
+                  TF.validator
+
 instance P.HasEnd (Layer s) (TF.Attr s P.Text) where
     end =
         P.lens (_end :: Layer s -> TF.Attr s P.Text)
-               (\s a -> s { _end = a
-                          } :: Layer s)
+               (\s a -> s { _end = a } :: Layer s)
 
-instance P.HasRestriction (Layer s) (TF.Attr s [Restriction s]) where
+instance P.HasRestriction (Layer s) (TF.Attr s [TF.Attr s (Restriction s)]) where
     restriction =
-        P.lens (_restriction :: Layer s -> TF.Attr s [Restriction s])
-               (\s a -> s { _restriction = a
-                          } :: Layer s)
+        P.lens (_restriction :: Layer s -> TF.Attr s [TF.Attr s (Restriction s)])
+               (\s a -> s { _restriction = a } :: Layer s)
 
 instance P.HasRotationTurnLengthSeconds (Layer s) (TF.Attr s P.Integer) where
     rotationTurnLengthSeconds =
         P.lens (_rotationTurnLengthSeconds :: Layer s -> TF.Attr s P.Integer)
-               (\s a -> s { _rotationTurnLengthSeconds = a
-                          } :: Layer s)
+               (\s a -> s { _rotationTurnLengthSeconds = a } :: Layer s)
 
 instance P.HasRotationVirtualStart (Layer s) (TF.Attr s P.Text) where
     rotationVirtualStart =
         P.lens (_rotationVirtualStart :: Layer s -> TF.Attr s P.Text)
-               (\s a -> s { _rotationVirtualStart = a
-                          } :: Layer s)
+               (\s a -> s { _rotationVirtualStart = a } :: Layer s)
 
 instance P.HasStart (Layer s) (TF.Attr s P.Text) where
     start =
         P.lens (_start :: Layer s -> TF.Attr s P.Text)
-               (\s a -> s { _start = a
-                          } :: Layer s)
+               (\s a -> s { _start = a } :: Layer s)
 
 instance P.HasUsers (Layer s) (TF.Attr s [TF.Attr s P.Text]) where
     users =
         P.lens (_users :: Layer s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _users = a
-                          } :: Layer s)
+               (\s a -> s { _users = a } :: Layer s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Layer s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -542,14 +562,6 @@ data Target s = Target'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Target s)
-instance TF.IsValue  (Target s)
-instance TF.IsObject (Target s) where
-    toObject Target'{..} = catMaybes
-        [ TF.assign "id" <$> TF.attribute _id
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
 newTarget
     :: TF.Attr s P.Text -- ^ @id@ - 'P.id'
     -> Target s
@@ -559,17 +571,26 @@ newTarget _id =
         , _type' = TF.value "user_reference"
         }
 
+instance P.Hashable  (Target s)
+instance TF.IsValue  (Target s)
+instance TF.IsObject (Target s) where
+    toObject Target'{..} = P.catMaybes
+        [ TF.assign "id" <$> TF.attribute _id
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (Target s) where
+    validator = P.mempty
+
 instance P.HasId (Target s) (TF.Attr s P.Text) where
     id =
         P.lens (_id :: Target s -> TF.Attr s P.Text)
-               (\s a -> s { _id = a
-                          } :: Target s)
+               (\s a -> s { _id = a } :: Target s)
 
 instance P.HasType' (Target s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: Target s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: Target s)
+               (\s a -> s { _type' = a } :: Target s)
 
 -- | @outside_support_hours@ nested settings.
 data OutsideSupportHours s = OutsideSupportHours'
@@ -581,14 +602,6 @@ data OutsideSupportHours s = OutsideSupportHours'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (OutsideSupportHours s)
-instance TF.IsValue  (OutsideSupportHours s)
-instance TF.IsObject (OutsideSupportHours s) where
-    toObject OutsideSupportHours'{..} = catMaybes
-        [ TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "urgency" <$> TF.attribute _urgency
-        ]
-
 newOutsideSupportHours
     :: OutsideSupportHours s
 newOutsideSupportHours =
@@ -597,14 +610,23 @@ newOutsideSupportHours =
         , _urgency = TF.Nil
         }
 
+instance P.Hashable  (OutsideSupportHours s)
+instance TF.IsValue  (OutsideSupportHours s)
+instance TF.IsObject (OutsideSupportHours s) where
+    toObject OutsideSupportHours'{..} = P.catMaybes
+        [ TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "urgency" <$> TF.attribute _urgency
+        ]
+
+instance TF.IsValid (OutsideSupportHours s) where
+    validator = P.mempty
+
 instance P.HasType' (OutsideSupportHours s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: OutsideSupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: OutsideSupportHours s)
+               (\s a -> s { _type' = a } :: OutsideSupportHours s)
 
 instance P.HasUrgency (OutsideSupportHours s) (TF.Attr s P.Text) where
     urgency =
         P.lens (_urgency :: OutsideSupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _urgency = a
-                          } :: OutsideSupportHours s)
+               (\s a -> s { _urgency = a } :: OutsideSupportHours s)
