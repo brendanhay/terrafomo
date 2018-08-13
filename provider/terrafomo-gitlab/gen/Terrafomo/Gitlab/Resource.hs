@@ -221,7 +221,7 @@ instance P.HasRequestAccessEnabled (GroupResource s) (TF.Attr s P.Bool) where
                           } :: GroupResource s)
 
 instance s ~ s' => P.HasComputedVisibilityLevel (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
-    computedVisibilityLevel x = TF.compute (TF.refKey x) "visibility_level"
+    computedVisibilityLevel x = TF.compute (TF.refKey x) "_computedVisibilityLevel"
 
 -- | @gitlab_label@ Resource.
 --
@@ -407,16 +407,16 @@ instance P.HasWikiEnabled (ProjectResource s) (TF.Attr s P.Bool) where
                           } :: ProjectResource s)
 
 instance s ~ s' => P.HasComputedHttpUrlToRepo (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedHttpUrlToRepo x = TF.compute (TF.refKey x) "http_url_to_repo"
+    computedHttpUrlToRepo x = TF.compute (TF.refKey x) "_computedHttpUrlToRepo"
 
 instance s ~ s' => P.HasComputedNamespaceId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Integer) where
-    computedNamespaceId x = TF.compute (TF.refKey x) "namespace_id"
+    computedNamespaceId x = TF.compute (TF.refKey x) "_computedNamespaceId"
 
 instance s ~ s' => P.HasComputedSshUrlToRepo (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedSshUrlToRepo x = TF.compute (TF.refKey x) "ssh_url_to_repo"
+    computedSshUrlToRepo x = TF.compute (TF.refKey x) "_computedSshUrlToRepo"
 
 instance s ~ s' => P.HasComputedWebUrl (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedWebUrl x = TF.compute (TF.refKey x) "web_url"
+    computedWebUrl x = TF.compute (TF.refKey x) "_computedWebUrl"
 
 -- | @gitlab_project_hook@ Resource.
 --
