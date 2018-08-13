@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newRule",
+                "name": "Rule'"
+            },
             "arguments": [
                 {
                     "default": "_action",
@@ -9,13 +13,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"action\" <$> TF.attribute",
-                    "name": "action",
+                    "name": "_action",
                     "method": "action",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAction",
+                    "validate": false,
                     "optional": false,
-                    "label": "_action"
+                    "original": "action"
                 },
                 {
                     "default": "_source",
@@ -24,16 +29,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_source",
                     "method": "source",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSource",
+                    "validate": false,
                     "optional": false,
-                    "label": "_source"
+                    "original": "source"
                 }
             ],
             "name": "Rule",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -43,13 +50,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"action\" <$> TF.attribute",
-                    "name": "action",
+                    "name": "_action",
                     "method": "action",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAction",
+                    "validate": false,
                     "optional": false,
-                    "label": "_action"
+                    "original": "action"
                 },
                 {
                     "default": "_source",
@@ -58,22 +66,28 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_source",
                     "method": "source",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSource",
+                    "validate": false,
                     "optional": false,
-                    "label": "_source"
+                    "original": "source"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Rule s",
             "original": "rule"
         },
         {
+            "con": {
+                "smart": "newOrganization",
+                "name": "Organization'"
+            },
             "arguments": [],
             "name": "Organization",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -82,13 +96,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"locked\" <$> TF.attribute",
-                    "name": "locked",
+                    "name": "_computedLocked",
                     "method": "computedLocked",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedLocked",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedLocked"
+                    "original": "locked"
                 },
                 {
                     "default": "TF.Nil",
@@ -97,13 +112,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_computedName",
                     "method": "computedName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedName"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -112,23 +128,29 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"personal\" <$> TF.attribute",
-                    "name": "personal",
+                    "name": "_computedPersonal",
                     "method": "computedPersonal",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedPersonal",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedPersonal"
+                    "original": "personal"
                 }
             ],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "Organization s",
             "original": "organization"
         },
         {
+            "con": {
+                "smart": "newTunnels",
+                "name": "Tunnels'"
+            },
             "arguments": [],
             "name": "Tunnels",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -137,13 +159,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ip\" <$> TF.attribute",
-                    "name": "ip",
+                    "name": "_computedIp",
                     "method": "computedIp",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIp",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedIp"
+                    "original": "ip"
                 },
                 {
                     "default": "TF.Nil",
@@ -152,70 +175,28 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"pre_shared_key\" <$> TF.attribute",
-                    "name": "pre_shared_key",
+                    "name": "_computedPreSharedKey",
                     "method": "computedPreSharedKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPreSharedKey",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedPreSharedKey"
+                    "original": "pre_shared_key"
                 }
             ],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "Tunnels s",
             "original": "tunnels"
         }
     ],
-    "arguments": [
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [],
-            "forceNew": false,
-            "encoder": "TF.assign \"api_key\" <$>",
-            "name": "api_key",
-            "method": "apiKey",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasApiKey",
-            "optional": true,
-            "label": "_apiKey"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [],
-            "forceNew": false,
-            "encoder": "TF.assign \"email\" <$>",
-            "name": "email",
-            "method": "email",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasEmail",
-            "optional": true,
-            "label": "_email"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [],
-            "forceNew": false,
-            "encoder": "TF.assign \"headers\" <$>",
-            "name": "headers",
-            "method": "headers",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasHeaders",
-            "optional": true,
-            "label": "_headers"
-        }
-    ],
     "dataSources": [
         {
+            "con": {
+                "smart": "appData",
+                "name": "AppData'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -224,17 +205,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "DataSource",
             "name": "AppData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -243,13 +225,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"acm\" <$> TF.attribute",
-                    "name": "acm",
+                    "name": "_computedAcm",
                     "method": "computedAcm",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedAcm",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAcm"
+                    "original": "acm"
                 },
                 {
                     "default": "TF.Nil",
@@ -258,13 +241,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"buildpacks\" <$> TF.attribute",
-                    "name": "buildpacks",
+                    "name": "_computedBuildpacks",
                     "method": "computedBuildpacks",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedBuildpacks",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedBuildpacks"
+                    "original": "buildpacks"
                 },
                 {
                     "default": "TF.Nil",
@@ -273,13 +257,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"config_vars\" <$> TF.attribute",
-                    "name": "config_vars",
+                    "name": "_computedConfigVars",
                     "method": "computedConfigVars",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasComputedConfigVars",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedConfigVars"
+                    "original": "config_vars"
                 },
                 {
                     "default": "TF.Nil",
@@ -288,13 +273,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"git_url\" <$> TF.attribute",
-                    "name": "git_url",
+                    "name": "_computedGitUrl",
                     "method": "computedGitUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedGitUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedGitUrl"
+                    "original": "git_url"
                 },
                 {
                     "default": "TF.Nil",
@@ -303,13 +289,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"heroku_hostname\" <$> TF.attribute",
-                    "name": "heroku_hostname",
+                    "name": "_computedHerokuHostname",
                     "method": "computedHerokuHostname",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHerokuHostname",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedHerokuHostname"
+                    "original": "heroku_hostname"
                 },
                 {
                     "default": "TF.Nil",
@@ -318,13 +305,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"internal_routing\" <$> TF.attribute",
-                    "name": "internal_routing",
+                    "name": "_computedInternalRouting",
                     "method": "computedInternalRouting",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedInternalRouting",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedInternalRouting"
+                    "original": "internal_routing"
                 },
                 {
                     "default": "TF.Nil",
@@ -333,13 +321,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"organization\" <$> TF.attribute",
-                    "name": "organization",
+                    "name": "_computedOrganization",
                     "method": "computedOrganization",
                     "conflicts": [],
-                    "type": "TF.Attr s [Organization s]",
+                    "type": "TF.Attr s [TF.Attr s (Organization s)]",
                     "class": "HasComputedOrganization",
+                    "validate": true,
                     "optional": false,
-                    "label": "_computedOrganization"
+                    "original": "organization"
                 },
                 {
                     "default": "TF.Nil",
@@ -348,13 +337,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"region\" <$> TF.attribute",
-                    "name": "region",
+                    "name": "_computedRegion",
                     "method": "computedRegion",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRegion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedRegion"
+                    "original": "region"
                 },
                 {
                     "default": "TF.Nil",
@@ -363,13 +353,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"space\" <$> TF.attribute",
-                    "name": "space",
+                    "name": "_computedSpace",
                     "method": "computedSpace",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSpace",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedSpace"
+                    "original": "space"
                 },
                 {
                     "default": "TF.Nil",
@@ -378,13 +369,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"stack\" <$> TF.attribute",
-                    "name": "stack",
+                    "name": "_computedStack",
                     "method": "computedStack",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStack",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedStack"
+                    "original": "stack"
                 },
                 {
                     "default": "TF.Nil",
@@ -393,13 +385,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"web_url\" <$> TF.attribute",
-                    "name": "web_url",
+                    "name": "_computedWebUrl",
                     "method": "computedWebUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedWebUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedWebUrl"
+                    "original": "web_url"
                 }
             ],
             "parameters": [
@@ -410,19 +403,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "AppData s",
             "original": "heroku_app"
         },
         {
+            "con": {
+                "smart": "spaceData",
+                "name": "SpaceData'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -431,17 +430,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "DataSource",
             "name": "SpaceData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -450,13 +450,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"organization\" <$> TF.attribute",
-                    "name": "organization",
+                    "name": "_computedOrganization",
                     "method": "computedOrganization",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOrganization",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedOrganization"
+                    "original": "organization"
                 },
                 {
                     "default": "TF.Nil",
@@ -465,13 +466,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"outbound_ips\" <$> TF.attribute",
-                    "name": "outbound_ips",
+                    "name": "_computedOutboundIps",
                     "method": "computedOutboundIps",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedOutboundIps",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedOutboundIps"
+                    "original": "outbound_ips"
                 },
                 {
                     "default": "TF.Nil",
@@ -480,13 +482,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"region\" <$> TF.attribute",
-                    "name": "region",
+                    "name": "_computedRegion",
                     "method": "computedRegion",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRegion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedRegion"
+                    "original": "region"
                 },
                 {
                     "default": "TF.Nil",
@@ -495,13 +498,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"shield\" <$> TF.attribute",
-                    "name": "shield",
+                    "name": "_computedShield",
                     "method": "computedShield",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedShield",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedShield"
+                    "original": "shield"
                 },
                 {
                     "default": "TF.Nil",
@@ -510,13 +514,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"state\" <$> TF.attribute",
-                    "name": "state",
+                    "name": "_computedState",
                     "method": "computedState",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedState",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedState"
+                    "original": "state"
                 },
                 {
                     "default": "TF.Nil",
@@ -525,13 +530,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"trusted_ip_ranges\" <$> TF.attribute",
-                    "name": "trusted_ip_ranges",
+                    "name": "_computedTrustedIpRanges",
                     "method": "computedTrustedIpRanges",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedTrustedIpRanges",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedTrustedIpRanges"
+                    "original": "trusted_ip_ranges"
                 }
             ],
             "parameters": [
@@ -542,19 +548,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "SpaceData s",
             "original": "heroku_space"
         },
         {
+            "con": {
+                "smart": "spacePeeringInfoData",
+                "name": "SpacePeeringInfoData'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -563,17 +575,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "DataSource",
             "name": "SpacePeeringInfoData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -582,13 +595,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"aws_account_id\" <$> TF.attribute",
-                    "name": "aws_account_id",
+                    "name": "_computedAwsAccountId",
                     "method": "computedAwsAccountId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAwsAccountId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAwsAccountId"
+                    "original": "aws_account_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -597,13 +611,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"aws_region\" <$> TF.attribute",
-                    "name": "aws_region",
+                    "name": "_computedAwsRegion",
                     "method": "computedAwsRegion",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAwsRegion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAwsRegion"
+                    "original": "aws_region"
                 },
                 {
                     "default": "TF.Nil",
@@ -612,13 +627,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"dyno_cidr_blocks\" <$> TF.attribute",
-                    "name": "dyno_cidr_blocks",
+                    "name": "_computedDynoCidrBlocks",
                     "method": "computedDynoCidrBlocks",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedDynoCidrBlocks",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedDynoCidrBlocks"
+                    "original": "dyno_cidr_blocks"
                 },
                 {
                     "default": "TF.Nil",
@@ -627,13 +643,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"unavailable_cidr_blocks\" <$> TF.attribute",
-                    "name": "unavailable_cidr_blocks",
+                    "name": "_computedUnavailableCidrBlocks",
                     "method": "computedUnavailableCidrBlocks",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedUnavailableCidrBlocks",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedUnavailableCidrBlocks"
+                    "original": "unavailable_cidr_blocks"
                 },
                 {
                     "default": "TF.Nil",
@@ -642,13 +659,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"vpc_cidr\" <$> TF.attribute",
-                    "name": "vpc_cidr",
+                    "name": "_computedVpcCidr",
                     "method": "computedVpcCidr",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedVpcCidr",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedVpcCidr"
+                    "original": "vpc_cidr"
                 },
                 {
                     "default": "TF.Nil",
@@ -657,13 +675,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"vpc_id\" <$> TF.attribute",
-                    "name": "vpc_id",
+                    "name": "_computedVpcId",
                     "method": "computedVpcId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVpcId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedVpcId"
+                    "original": "vpc_id"
                 }
             ],
             "parameters": [
@@ -674,21 +693,27 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "SpacePeeringInfoData s",
             "original": "heroku_space_peering_info"
         }
     ],
     "resources": [
         {
+            "con": {
+                "smart": "addonResource",
+                "name": "AddonResource'"
+            },
             "arguments": [
                 {
                     "default": "_app",
@@ -697,13 +722,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "TF.Nil",
@@ -712,13 +738,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"config\" <$> TF.attribute",
-                    "name": "config",
+                    "name": "_config",
                     "method": "config",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]",
                     "class": "HasConfig",
+                    "validate": false,
                     "optional": true,
-                    "label": "_config"
+                    "original": "config"
                 },
                 {
                     "default": "_plan",
@@ -727,17 +754,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"plan\" <$> TF.attribute",
-                    "name": "plan",
+                    "name": "_plan",
                     "method": "plan",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPlan",
+                    "validate": false,
                     "optional": false,
-                    "label": "_plan"
+                    "original": "plan"
                 }
             ],
-            "schema": "Resource",
             "name": "AddonResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -746,13 +774,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"config_vars\" <$> TF.attribute",
-                    "name": "config_vars",
+                    "name": "_computedConfigVars",
                     "method": "computedConfigVars",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedConfigVars",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedConfigVars"
+                    "original": "config_vars"
                 },
                 {
                     "default": "TF.Nil",
@@ -761,13 +790,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_computedName",
                     "method": "computedName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedName"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -776,13 +806,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"provider_id\" <$> TF.attribute",
-                    "name": "provider_id",
+                    "name": "_computedProviderId",
                     "method": "computedProviderId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedProviderId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedProviderId"
+                    "original": "provider_id"
                 }
             ],
             "parameters": [
@@ -793,13 +824,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_plan",
@@ -808,19 +840,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"plan\" <$> TF.attribute",
-                    "name": "plan",
+                    "name": "_plan",
                     "method": "plan",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPlan",
+                    "validate": false,
                     "optional": false,
-                    "label": "_plan"
+                    "original": "plan"
                 }
             ],
+            "conflicts": [],
             "type": "AddonResource s",
             "original": "heroku_addon"
         },
         {
+            "con": {
+                "smart": "addonAttachmentResource",
+                "name": "AddonAttachmentResource'"
+            },
             "arguments": [
                 {
                     "default": "_addonId",
@@ -829,13 +867,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"addon_id\" <$> TF.attribute",
-                    "name": "addon_id",
+                    "name": "_addonId",
                     "method": "addonId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAddonId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_addonId"
+                    "original": "addon_id"
                 },
                 {
                     "default": "_appId",
@@ -844,17 +883,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app_id\" <$> TF.attribute",
-                    "name": "app_id",
+                    "name": "_appId",
                     "method": "appId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAppId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_appId"
+                    "original": "app_id"
                 }
             ],
-            "schema": "Resource",
             "name": "AddonAttachmentResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -863,13 +903,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_computedName",
                     "method": "computedName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedName"
+                    "original": "name"
                 }
             ],
             "parameters": [
@@ -880,13 +921,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"addon_id\" <$> TF.attribute",
-                    "name": "addon_id",
+                    "name": "_addonId",
                     "method": "addonId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAddonId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_addonId"
+                    "original": "addon_id"
                 },
                 {
                     "default": "_appId",
@@ -895,19 +937,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app_id\" <$> TF.attribute",
-                    "name": "app_id",
+                    "name": "_appId",
                     "method": "appId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAppId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_appId"
+                    "original": "app_id"
                 }
             ],
+            "conflicts": [],
             "type": "AddonAttachmentResource s",
             "original": "heroku_addon_attachment"
         },
         {
+            "con": {
+                "smart": "appResource",
+                "name": "AppResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -916,13 +964,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"acm\" <$> TF.attribute",
-                    "name": "acm",
+                    "name": "_acm",
                     "method": "acm",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasAcm",
+                    "validate": false,
                     "optional": true,
-                    "label": "_acm"
+                    "original": "acm"
                 },
                 {
                     "default": "TF.Nil",
@@ -931,13 +980,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"buildpacks\" <$> TF.attribute",
-                    "name": "buildpacks",
+                    "name": "_buildpacks",
                     "method": "buildpacks",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasBuildpacks",
+                    "validate": false,
                     "optional": true,
-                    "label": "_buildpacks"
+                    "original": "buildpacks"
                 },
                 {
                     "default": "_name",
@@ -946,13 +996,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -961,13 +1012,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"organization\" <$> TF.attribute",
-                    "name": "organization",
+                    "name": "_organization",
                     "method": "organization",
                     "conflicts": [],
-                    "type": "TF.Attr s [Organization s]",
+                    "type": "TF.Attr s [TF.Attr s (Organization s)]",
                     "class": "HasOrganization",
+                    "validate": true,
                     "optional": true,
-                    "label": "_organization"
+                    "original": "organization"
                 },
                 {
                     "default": "_region",
@@ -976,13 +1028,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"region\" <$> TF.attribute",
-                    "name": "region",
+                    "name": "_region",
                     "method": "region",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRegion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_region"
+                    "original": "region"
                 },
                 {
                     "default": "TF.Nil",
@@ -991,17 +1044,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"space\" <$> TF.attribute",
-                    "name": "space",
+                    "name": "_space",
                     "method": "space",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSpace",
+                    "validate": false,
                     "optional": true,
-                    "label": "_space"
+                    "original": "space"
                 }
             ],
-            "schema": "Resource",
             "name": "AppResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1010,13 +1064,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"all_config_vars\" <$> TF.attribute",
-                    "name": "all_config_vars",
+                    "name": "_computedAllConfigVars",
                     "method": "computedAllConfigVars",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasComputedAllConfigVars",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAllConfigVars"
+                    "original": "all_config_vars"
                 },
                 {
                     "default": "TF.Nil",
@@ -1025,13 +1080,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"config_vars\" <$> TF.attribute",
-                    "name": "config_vars",
+                    "name": "_computedConfigVars",
                     "method": "computedConfigVars",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]",
                     "class": "HasComputedConfigVars",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedConfigVars"
+                    "original": "config_vars"
                 },
                 {
                     "default": "TF.Nil",
@@ -1040,13 +1096,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"git_url\" <$> TF.attribute",
-                    "name": "git_url",
+                    "name": "_computedGitUrl",
                     "method": "computedGitUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedGitUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedGitUrl"
+                    "original": "git_url"
                 },
                 {
                     "default": "TF.Nil",
@@ -1055,13 +1112,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"heroku_hostname\" <$> TF.attribute",
-                    "name": "heroku_hostname",
+                    "name": "_computedHerokuHostname",
                     "method": "computedHerokuHostname",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHerokuHostname",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedHerokuHostname"
+                    "original": "heroku_hostname"
                 },
                 {
                     "default": "TF.Nil",
@@ -1070,13 +1128,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"internal_routing\" <$> TF.attribute",
-                    "name": "internal_routing",
+                    "name": "_computedInternalRouting",
                     "method": "computedInternalRouting",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedInternalRouting",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedInternalRouting"
+                    "original": "internal_routing"
                 },
                 {
                     "default": "TF.Nil",
@@ -1085,13 +1144,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"stack\" <$> TF.attribute",
-                    "name": "stack",
+                    "name": "_computedStack",
                     "method": "computedStack",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStack",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedStack"
+                    "original": "stack"
                 },
                 {
                     "default": "TF.Nil",
@@ -1100,13 +1160,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"web_url\" <$> TF.attribute",
-                    "name": "web_url",
+                    "name": "_computedWebUrl",
                     "method": "computedWebUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedWebUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedWebUrl"
+                    "original": "web_url"
                 }
             ],
             "parameters": [
@@ -1117,13 +1178,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_region",
@@ -1132,19 +1194,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"region\" <$> TF.attribute",
-                    "name": "region",
+                    "name": "_region",
                     "method": "region",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRegion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_region"
+                    "original": "region"
                 }
             ],
+            "conflicts": [],
             "type": "AppResource s",
             "original": "heroku_app"
         },
         {
+            "con": {
+                "smart": "appFeatureResource",
+                "name": "AppFeatureResource'"
+            },
             "arguments": [
                 {
                     "default": "_app",
@@ -1153,13 +1221,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "TF.value P.True",
@@ -1168,13 +1237,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"enabled\" <$> TF.attribute",
-                    "name": "enabled",
+                    "name": "_enabled",
                     "method": "enabled",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasEnabled",
+                    "validate": false,
                     "optional": true,
-                    "label": "_enabled"
+                    "original": "enabled"
                 },
                 {
                     "default": "_name",
@@ -1183,17 +1253,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "AppFeatureResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1203,13 +1274,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_name",
@@ -1218,19 +1290,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "AppFeatureResource s",
             "original": "heroku_app_feature"
         },
         {
+            "con": {
+                "smart": "appReleaseResource",
+                "name": "AppReleaseResource'"
+            },
             "arguments": [
                 {
                     "default": "_app",
@@ -1239,13 +1317,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_slugId",
@@ -1254,17 +1333,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"slug_id\" <$> TF.attribute",
-                    "name": "slug_id",
+                    "name": "_slugId",
                     "method": "slugId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSlugId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_slugId"
+                    "original": "slug_id"
                 }
             ],
-            "schema": "Resource",
             "name": "AppReleaseResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1273,13 +1353,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_computedDescription",
                     "method": "computedDescription",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedDescription"
+                    "original": "description"
                 }
             ],
             "parameters": [
@@ -1290,13 +1371,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_slugId",
@@ -1305,19 +1387,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"slug_id\" <$> TF.attribute",
-                    "name": "slug_id",
+                    "name": "_slugId",
                     "method": "slugId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSlugId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_slugId"
+                    "original": "slug_id"
                 }
             ],
+            "conflicts": [],
             "type": "AppReleaseResource s",
             "original": "heroku_app_release"
         },
         {
+            "con": {
+                "smart": "certResource",
+                "name": "CertResource'"
+            },
             "arguments": [
                 {
                     "default": "_app",
@@ -1326,13 +1414,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_certificateChain",
@@ -1341,13 +1430,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"certificate_chain\" <$> TF.attribute",
-                    "name": "certificate_chain",
+                    "name": "_certificateChain",
                     "method": "certificateChain",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCertificateChain",
+                    "validate": false,
                     "optional": false,
-                    "label": "_certificateChain"
+                    "original": "certificate_chain"
                 },
                 {
                     "default": "_privateKey",
@@ -1356,17 +1446,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"private_key\" <$> TF.attribute",
-                    "name": "private_key",
+                    "name": "_privateKey",
                     "method": "privateKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPrivateKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_privateKey"
+                    "original": "private_key"
                 }
             ],
-            "schema": "Resource",
             "name": "CertResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1375,13 +1466,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cname\" <$> TF.attribute",
-                    "name": "cname",
+                    "name": "_computedCname",
                     "method": "computedCname",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCname",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCname"
+                    "original": "cname"
                 },
                 {
                     "default": "TF.Nil",
@@ -1390,13 +1482,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_computedName",
                     "method": "computedName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedName"
+                    "original": "name"
                 }
             ],
             "parameters": [
@@ -1407,13 +1500,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_certificateChain",
@@ -1422,13 +1516,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"certificate_chain\" <$> TF.attribute",
-                    "name": "certificate_chain",
+                    "name": "_certificateChain",
                     "method": "certificateChain",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCertificateChain",
+                    "validate": false,
                     "optional": false,
-                    "label": "_certificateChain"
+                    "original": "certificate_chain"
                 },
                 {
                     "default": "_privateKey",
@@ -1437,19 +1532,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"private_key\" <$> TF.attribute",
-                    "name": "private_key",
+                    "name": "_privateKey",
                     "method": "privateKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPrivateKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_privateKey"
+                    "original": "private_key"
                 }
             ],
+            "conflicts": [],
             "type": "CertResource s",
             "original": "heroku_cert"
         },
         {
+            "con": {
+                "smart": "domainResource",
+                "name": "DomainResource'"
+            },
             "arguments": [
                 {
                     "default": "_app",
@@ -1458,13 +1559,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_hostname",
@@ -1473,17 +1575,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"hostname\" <$> TF.attribute",
-                    "name": "hostname",
+                    "name": "_hostname",
                     "method": "hostname",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasHostname",
+                    "validate": false,
                     "optional": false,
-                    "label": "_hostname"
+                    "original": "hostname"
                 }
             ],
-            "schema": "Resource",
             "name": "DomainResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1492,13 +1595,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cname\" <$> TF.attribute",
-                    "name": "cname",
+                    "name": "_computedCname",
                     "method": "computedCname",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCname",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCname"
+                    "original": "cname"
                 }
             ],
             "parameters": [
@@ -1509,13 +1613,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_hostname",
@@ -1524,19 +1629,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"hostname\" <$> TF.attribute",
-                    "name": "hostname",
+                    "name": "_hostname",
                     "method": "hostname",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasHostname",
+                    "validate": false,
                     "optional": false,
-                    "label": "_hostname"
+                    "original": "hostname"
                 }
             ],
+            "conflicts": [],
             "type": "DomainResource s",
             "original": "heroku_domain"
         },
         {
+            "con": {
+                "smart": "drainResource",
+                "name": "DrainResource'"
+            },
             "arguments": [
                 {
                     "default": "_app",
@@ -1545,13 +1656,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_url",
@@ -1560,17 +1672,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"url\" <$> TF.attribute",
-                    "name": "url",
+                    "name": "_url",
                     "method": "url",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_url"
+                    "original": "url"
                 }
             ],
-            "schema": "Resource",
             "name": "DrainResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1579,13 +1692,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"token\" <$> TF.attribute",
-                    "name": "token",
+                    "name": "_computedToken",
                     "method": "computedToken",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedToken",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedToken"
+                    "original": "token"
                 }
             ],
             "parameters": [
@@ -1596,13 +1710,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_url",
@@ -1611,19 +1726,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"url\" <$> TF.attribute",
-                    "name": "url",
+                    "name": "_url",
                     "method": "url",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_url"
+                    "original": "url"
                 }
             ],
+            "conflicts": [],
             "type": "DrainResource s",
             "original": "heroku_drain"
         },
         {
+            "con": {
+                "smart": "formationResource",
+                "name": "FormationResource'"
+            },
             "arguments": [
                 {
                     "default": "_app",
@@ -1632,13 +1753,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_quantity",
@@ -1647,13 +1769,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"quantity\" <$> TF.attribute",
-                    "name": "quantity",
+                    "name": "_quantity",
                     "method": "quantity",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasQuantity",
+                    "validate": false,
                     "optional": false,
-                    "label": "_quantity"
+                    "original": "quantity"
                 },
                 {
                     "default": "_size",
@@ -1662,13 +1785,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"size\" <$> TF.attribute",
-                    "name": "size",
+                    "name": "_size",
                     "method": "size",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSize",
+                    "validate": false,
                     "optional": false,
-                    "label": "_size"
+                    "original": "size"
                 },
                 {
                     "default": "_type'",
@@ -1677,17 +1801,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "schema": "Resource",
             "name": "FormationResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1697,13 +1822,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_quantity",
@@ -1712,13 +1838,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"quantity\" <$> TF.attribute",
-                    "name": "quantity",
+                    "name": "_quantity",
                     "method": "quantity",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasQuantity",
+                    "validate": false,
                     "optional": false,
-                    "label": "_quantity"
+                    "original": "quantity"
                 },
                 {
                     "default": "_size",
@@ -1727,13 +1854,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"size\" <$> TF.attribute",
-                    "name": "size",
+                    "name": "_size",
                     "method": "size",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSize",
+                    "validate": false,
                     "optional": false,
-                    "label": "_size"
+                    "original": "size"
                 },
                 {
                     "default": "_type'",
@@ -1742,19 +1870,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
+            "conflicts": [],
             "type": "FormationResource s",
             "original": "heroku_formation"
         },
         {
+            "con": {
+                "smart": "pipelineResource",
+                "name": "PipelineResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -1763,17 +1897,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "PipelineResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1783,19 +1918,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "PipelineResource s",
             "original": "heroku_pipeline"
         },
         {
+            "con": {
+                "smart": "pipelineCouplingResource",
+                "name": "PipelineCouplingResource'"
+            },
             "arguments": [
                 {
                     "default": "_app",
@@ -1804,13 +1945,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_pipeline",
@@ -1819,13 +1961,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"pipeline\" <$> TF.attribute",
-                    "name": "pipeline",
+                    "name": "_pipeline",
                     "method": "pipeline",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPipeline",
+                    "validate": false,
                     "optional": false,
-                    "label": "_pipeline"
+                    "original": "pipeline"
                 },
                 {
                     "default": "_stage",
@@ -1834,17 +1977,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"stage\" <$> TF.attribute",
-                    "name": "stage",
+                    "name": "_stage",
                     "method": "stage",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasStage",
+                    "validate": false,
                     "optional": false,
-                    "label": "_stage"
+                    "original": "stage"
                 }
             ],
-            "schema": "Resource",
             "name": "PipelineCouplingResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1853,13 +1997,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"app_id\" <$> TF.attribute",
-                    "name": "app_id",
+                    "name": "_computedAppId",
                     "method": "computedAppId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAppId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAppId"
+                    "original": "app_id"
                 }
             ],
             "parameters": [
@@ -1870,13 +2015,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_pipeline",
@@ -1885,13 +2031,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"pipeline\" <$> TF.attribute",
-                    "name": "pipeline",
+                    "name": "_pipeline",
                     "method": "pipeline",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPipeline",
+                    "validate": false,
                     "optional": false,
-                    "label": "_pipeline"
+                    "original": "pipeline"
                 },
                 {
                     "default": "_stage",
@@ -1900,19 +2047,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"stage\" <$> TF.attribute",
-                    "name": "stage",
+                    "name": "_stage",
                     "method": "stage",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasStage",
+                    "validate": false,
                     "optional": false,
-                    "label": "_stage"
+                    "original": "stage"
                 }
             ],
+            "conflicts": [],
             "type": "PipelineCouplingResource s",
             "original": "heroku_pipeline_coupling"
         },
         {
+            "con": {
+                "smart": "spaceResource",
+                "name": "SpaceResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -1921,13 +2074,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_organization",
@@ -1936,13 +2090,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"organization\" <$> TF.attribute",
-                    "name": "organization",
+                    "name": "_organization",
                     "method": "organization",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOrganization",
+                    "validate": false,
                     "optional": false,
-                    "label": "_organization"
+                    "original": "organization"
                 },
                 {
                     "default": "TF.Nil",
@@ -1951,13 +2106,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"region\" <$> TF.attribute",
-                    "name": "region",
+                    "name": "_region",
                     "method": "region",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRegion",
+                    "validate": false,
                     "optional": true,
-                    "label": "_region"
+                    "original": "region"
                 },
                 {
                     "default": "TF.value P.False",
@@ -1966,17 +2122,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"shield\" <$> TF.attribute",
-                    "name": "shield",
+                    "name": "_shield",
                     "method": "shield",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasShield",
+                    "validate": false,
                     "optional": true,
-                    "label": "_shield"
+                    "original": "shield"
                 }
             ],
-            "schema": "Resource",
             "name": "SpaceResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1985,13 +2142,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"outbound_ips\" <$> TF.attribute",
-                    "name": "outbound_ips",
+                    "name": "_computedOutboundIps",
                     "method": "computedOutboundIps",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedOutboundIps",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedOutboundIps"
+                    "original": "outbound_ips"
                 },
                 {
                     "default": "TF.Nil",
@@ -2000,13 +2158,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"trusted_ip_ranges\" <$> TF.attribute",
-                    "name": "trusted_ip_ranges",
+                    "name": "_computedTrustedIpRanges",
                     "method": "computedTrustedIpRanges",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedTrustedIpRanges",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedTrustedIpRanges"
+                    "original": "trusted_ip_ranges"
                 }
             ],
             "parameters": [
@@ -2017,13 +2176,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_organization",
@@ -2032,19 +2192,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"organization\" <$> TF.attribute",
-                    "name": "organization",
+                    "name": "_organization",
                     "method": "organization",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOrganization",
+                    "validate": false,
                     "optional": false,
-                    "label": "_organization"
+                    "original": "organization"
                 }
             ],
+            "conflicts": [],
             "type": "SpaceResource s",
             "original": "heroku_space"
         },
         {
+            "con": {
+                "smart": "spaceAppAccessResource",
+                "name": "SpaceAppAccessResource'"
+            },
             "arguments": [
                 {
                     "default": "_email",
@@ -2053,13 +2219,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "email",
+                    "name": "_email",
                     "method": "email",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEmail",
+                    "validate": false,
                     "optional": false,
-                    "label": "_email"
+                    "original": "email"
                 },
                 {
                     "default": "_permissions",
@@ -2068,13 +2235,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"permissions\" <$> TF.attribute",
-                    "name": "permissions",
+                    "name": "_permissions",
                     "method": "permissions",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasPermissions",
+                    "validate": false,
                     "optional": false,
-                    "label": "_permissions"
+                    "original": "permissions"
                 },
                 {
                     "default": "_space",
@@ -2083,17 +2251,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"space\" <$> TF.attribute",
-                    "name": "space",
+                    "name": "_space",
                     "method": "space",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSpace",
+                    "validate": false,
                     "optional": false,
-                    "label": "_space"
+                    "original": "space"
                 }
             ],
-            "schema": "Resource",
             "name": "SpaceAppAccessResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -2103,13 +2272,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "email",
+                    "name": "_email",
                     "method": "email",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEmail",
+                    "validate": false,
                     "optional": false,
-                    "label": "_email"
+                    "original": "email"
                 },
                 {
                     "default": "_permissions",
@@ -2118,13 +2288,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"permissions\" <$> TF.attribute",
-                    "name": "permissions",
+                    "name": "_permissions",
                     "method": "permissions",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasPermissions",
+                    "validate": false,
                     "optional": false,
-                    "label": "_permissions"
+                    "original": "permissions"
                 },
                 {
                     "default": "_space",
@@ -2133,19 +2304,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"space\" <$> TF.attribute",
-                    "name": "space",
+                    "name": "_space",
                     "method": "space",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSpace",
+                    "validate": false,
                     "optional": false,
-                    "label": "_space"
+                    "original": "space"
                 }
             ],
+            "conflicts": [],
             "type": "SpaceAppAccessResource s",
             "original": "heroku_space_app_access"
         },
         {
+            "con": {
+                "smart": "spaceInboundRulesetResource",
+                "name": "SpaceInboundRulesetResource'"
+            },
             "arguments": [
                 {
                     "default": "_rule",
@@ -2154,13 +2331,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rule\" <$> TF.attribute",
-                    "name": "rule",
+                    "name": "_rule",
                     "method": "rule",
                     "conflicts": [],
                     "type": "TF.Attr s (P.NonEmpty (TF.Attr s (Rule s)))",
                     "class": "HasRule",
+                    "validate": true,
                     "optional": false,
-                    "label": "_rule"
+                    "original": "rule"
                 },
                 {
                     "default": "_space",
@@ -2169,17 +2347,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"space\" <$> TF.attribute",
-                    "name": "space",
+                    "name": "_space",
                     "method": "space",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSpace",
+                    "validate": false,
                     "optional": false,
-                    "label": "_space"
+                    "original": "space"
                 }
             ],
-            "schema": "Resource",
             "name": "SpaceInboundRulesetResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -2189,13 +2368,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rule\" <$> TF.attribute",
-                    "name": "rule",
+                    "name": "_rule",
                     "method": "rule",
                     "conflicts": [],
                     "type": "TF.Attr s (P.NonEmpty (TF.Attr s (Rule s)))",
                     "class": "HasRule",
+                    "validate": true,
                     "optional": false,
-                    "label": "_rule"
+                    "original": "rule"
                 },
                 {
                     "default": "_space",
@@ -2204,19 +2384,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"space\" <$> TF.attribute",
-                    "name": "space",
+                    "name": "_space",
                     "method": "space",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSpace",
+                    "validate": false,
                     "optional": false,
-                    "label": "_space"
+                    "original": "space"
                 }
             ],
+            "conflicts": [],
             "type": "SpaceInboundRulesetResource s",
             "original": "heroku_space_inbound_ruleset"
         },
         {
+            "con": {
+                "smart": "spacePeeringConnectionAccepterResource",
+                "name": "SpacePeeringConnectionAccepterResource'"
+            },
             "arguments": [
                 {
                     "default": "_space",
@@ -2225,13 +2411,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"space\" <$> TF.attribute",
-                    "name": "space",
+                    "name": "_space",
                     "method": "space",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSpace",
+                    "validate": false,
                     "optional": false,
-                    "label": "_space"
+                    "original": "space"
                 },
                 {
                     "default": "_vpcPeeringConnectionId",
@@ -2240,17 +2427,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"vpc_peering_connection_id\" <$> TF.attribute",
-                    "name": "vpc_peering_connection_id",
+                    "name": "_vpcPeeringConnectionId",
                     "method": "vpcPeeringConnectionId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVpcPeeringConnectionId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_vpcPeeringConnectionId"
+                    "original": "vpc_peering_connection_id"
                 }
             ],
-            "schema": "Resource",
             "name": "SpacePeeringConnectionAccepterResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -2259,13 +2447,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"status\" <$> TF.attribute",
-                    "name": "status",
+                    "name": "_computedStatus",
                     "method": "computedStatus",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStatus",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedStatus"
+                    "original": "status"
                 },
                 {
                     "default": "TF.Nil",
@@ -2274,13 +2463,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
-                    "method": "computedType'",
+                    "name": "_computedType",
+                    "method": "computedType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasComputedType'",
+                    "class": "HasComputedType",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedType'"
+                    "original": "type"
                 }
             ],
             "parameters": [
@@ -2291,13 +2481,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"space\" <$> TF.attribute",
-                    "name": "space",
+                    "name": "_space",
                     "method": "space",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSpace",
+                    "validate": false,
                     "optional": false,
-                    "label": "_space"
+                    "original": "space"
                 },
                 {
                     "default": "_vpcPeeringConnectionId",
@@ -2306,19 +2497,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"vpc_peering_connection_id\" <$> TF.attribute",
-                    "name": "vpc_peering_connection_id",
+                    "name": "_vpcPeeringConnectionId",
                     "method": "vpcPeeringConnectionId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVpcPeeringConnectionId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_vpcPeeringConnectionId"
+                    "original": "vpc_peering_connection_id"
                 }
             ],
+            "conflicts": [],
             "type": "SpacePeeringConnectionAccepterResource s",
             "original": "heroku_space_peering_connection_accepter"
         },
         {
+            "con": {
+                "smart": "spaceVpnConnectionResource",
+                "name": "SpaceVpnConnectionResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -2327,13 +2524,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_publicIp",
@@ -2342,13 +2540,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"public_ip\" <$> TF.attribute",
-                    "name": "public_ip",
+                    "name": "_publicIp",
                     "method": "publicIp",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPublicIp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_publicIp"
+                    "original": "public_ip"
                 },
                 {
                     "default": "_routableCidrs",
@@ -2357,13 +2556,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"routable_cidrs\" <$> TF.attribute",
-                    "name": "routable_cidrs",
+                    "name": "_routableCidrs",
                     "method": "routableCidrs",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasRoutableCidrs",
+                    "validate": false,
                     "optional": false,
-                    "label": "_routableCidrs"
+                    "original": "routable_cidrs"
                 },
                 {
                     "default": "_space",
@@ -2372,17 +2572,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"space\" <$> TF.attribute",
-                    "name": "space",
+                    "name": "_space",
                     "method": "space",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSpace",
+                    "validate": false,
                     "optional": false,
-                    "label": "_space"
+                    "original": "space"
                 }
             ],
-            "schema": "Resource",
             "name": "SpaceVpnConnectionResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -2391,13 +2592,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ike_version\" <$> TF.attribute",
-                    "name": "ike_version",
+                    "name": "_computedIkeVersion",
                     "method": "computedIkeVersion",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedIkeVersion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedIkeVersion"
+                    "original": "ike_version"
                 },
                 {
                     "default": "TF.Nil",
@@ -2406,13 +2608,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"space_cidr_block\" <$> TF.attribute",
-                    "name": "space_cidr_block",
+                    "name": "_computedSpaceCidrBlock",
                     "method": "computedSpaceCidrBlock",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSpaceCidrBlock",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedSpaceCidrBlock"
+                    "original": "space_cidr_block"
                 },
                 {
                     "default": "TF.Nil",
@@ -2421,13 +2624,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"tunnels\" <$> TF.attribute",
-                    "name": "tunnels",
+                    "name": "_computedTunnels",
                     "method": "computedTunnels",
                     "conflicts": [],
-                    "type": "TF.Attr s [Tunnels s]",
+                    "type": "TF.Attr s [TF.Attr s (Tunnels s)]",
                     "class": "HasComputedTunnels",
+                    "validate": true,
                     "optional": true,
-                    "label": "_computedTunnels"
+                    "original": "tunnels"
                 }
             ],
             "parameters": [
@@ -2438,13 +2642,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_publicIp",
@@ -2453,13 +2658,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"public_ip\" <$> TF.attribute",
-                    "name": "public_ip",
+                    "name": "_publicIp",
                     "method": "publicIp",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPublicIp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_publicIp"
+                    "original": "public_ip"
                 },
                 {
                     "default": "_routableCidrs",
@@ -2468,13 +2674,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"routable_cidrs\" <$> TF.attribute",
-                    "name": "routable_cidrs",
+                    "name": "_routableCidrs",
                     "method": "routableCidrs",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasRoutableCidrs",
+                    "validate": false,
                     "optional": false,
-                    "label": "_routableCidrs"
+                    "original": "routable_cidrs"
                 },
                 {
                     "default": "_space",
@@ -2483,19 +2690,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"space\" <$> TF.attribute",
-                    "name": "space",
+                    "name": "_space",
                     "method": "space",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSpace",
+                    "validate": false,
                     "optional": false,
-                    "label": "_space"
+                    "original": "space"
                 }
             ],
+            "conflicts": [],
             "type": "SpaceVpnConnectionResource s",
             "original": "heroku_space_vpn_connection"
         },
         {
+            "con": {
+                "smart": "teamCollaboratorResource",
+                "name": "TeamCollaboratorResource'"
+            },
             "arguments": [
                 {
                     "default": "_app",
@@ -2504,13 +2717,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_email",
@@ -2519,13 +2733,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "email",
+                    "name": "_email",
                     "method": "email",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEmail",
+                    "validate": false,
                     "optional": false,
-                    "label": "_email"
+                    "original": "email"
                 },
                 {
                     "default": "_permissions",
@@ -2534,17 +2749,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"permissions\" <$> TF.attribute",
-                    "name": "permissions",
+                    "name": "_permissions",
                     "method": "permissions",
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s P.Text))",
                     "class": "HasPermissions",
+                    "validate": false,
                     "optional": false,
-                    "label": "_permissions"
+                    "original": "permissions"
                 }
             ],
-            "schema": "Resource",
             "name": "TeamCollaboratorResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -2554,13 +2770,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"app\" <$> TF.attribute",
-                    "name": "app",
+                    "name": "_app",
                     "method": "app",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_app"
+                    "original": "app"
                 },
                 {
                     "default": "_email",
@@ -2569,13 +2786,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "email",
+                    "name": "_email",
                     "method": "email",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEmail",
+                    "validate": false,
                     "optional": false,
-                    "label": "_email"
+                    "original": "email"
                 },
                 {
                     "default": "_permissions",
@@ -2584,19 +2802,84 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"permissions\" <$> TF.attribute",
-                    "name": "permissions",
+                    "name": "_permissions",
                     "method": "permissions",
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (TF.Attr s P.Text)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s P.Text))",
                     "class": "HasPermissions",
+                    "validate": false,
                     "optional": false,
-                    "label": "_permissions"
+                    "original": "permissions"
                 }
             ],
+            "conflicts": [],
             "type": "TeamCollaboratorResource s",
             "original": "heroku_team_collaborator"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [],
+                "forceNew": false,
+                "encoder": "TF.assign \"api_key\" <$>",
+                "name": "_apiKey",
+                "method": "apiKey",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasApiKey",
+                "validate": false,
+                "optional": true,
+                "original": "api_key"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [],
+                "forceNew": false,
+                "encoder": "TF.assign \"email\" <$>",
+                "name": "_email",
+                "method": "email",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasEmail",
+                "validate": false,
+                "optional": true,
+                "original": "email"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [],
+                "forceNew": false,
+                "encoder": "TF.assign \"headers\" <$>",
+                "name": "_headers",
+                "method": "headers",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasHeaders",
+                "validate": false,
+                "optional": true,
+                "original": "headers"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -2606,8 +2889,6 @@
         "microlens"
     ],
     "name": "Heroku",
-    "parameters": [],
     "package": "terrafomo-heroku",
-    "type": "Provider",
     "original": "heroku"
 }
