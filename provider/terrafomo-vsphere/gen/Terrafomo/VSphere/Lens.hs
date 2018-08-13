@@ -385,6 +385,7 @@ module Terrafomo.VSphere.Lens
     , HasComputedTxUplink (..)
     , HasComputedRebootRequired (..)
     , HasComputedManagementShareLevel (..)
+    , HasComputedType (..)
     , HasComputedVdpShareLevel (..)
     , HasComputedIngressShapingPeakBandwidth (..)
     , HasComputedIscsiShareCount (..)
@@ -410,7 +411,6 @@ module Terrafomo.VSphere.Lens
     , HasComputedResourcePoolId (..)
     , HasComputedIscsiMaximumMbit (..)
     , HasComputedAlternateGuestName (..)
-    , HasComputedType' (..)
     , HasComputedSize (..)
     , HasComputedPortPrivateSecondaryVlanId (..)
     , HasComputedIscsiReservationMbit (..)
@@ -2363,6 +2363,9 @@ class HasComputedRebootRequired a b | a -> b where
 class HasComputedManagementShareLevel a b | a -> b where
     computedManagementShareLevel :: a -> b
 
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
+
 class HasComputedVdpShareLevel a b | a -> b where
     computedVdpShareLevel :: a -> b
 
@@ -2437,9 +2440,6 @@ class HasComputedIscsiMaximumMbit a b | a -> b where
 
 class HasComputedAlternateGuestName a b | a -> b where
     computedAlternateGuestName :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedSize a b | a -> b where
     computedSize :: a -> b

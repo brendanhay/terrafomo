@@ -138,7 +138,7 @@ instance P.HasName (ComputeClusterData s) (TF.Attr s P.Text) where
                           } :: ComputeClusterData s)
 
 instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (ComputeClusterData s)) (TF.Attr s P.Text) where
-    computedResourcePoolId x = TF.compute (TF.refKey x) "resource_pool_id"
+    computedResourcePoolId x = TF.compute (TF.refKey x) "_computedResourcePoolId"
 
 -- | @vsphere_custom_attribute@ DataSource.
 --
@@ -172,7 +172,7 @@ instance P.HasName (CustomAttributeData s) (TF.Attr s P.Text) where
                           } :: CustomAttributeData s)
 
 instance s ~ s' => P.HasComputedManagedObjectType (TF.Ref s' (CustomAttributeData s)) (TF.Attr s P.Text) where
-    computedManagedObjectType x = TF.compute (TF.refKey x) "managed_object_type"
+    computedManagedObjectType x = TF.compute (TF.refKey x) "_computedManagedObjectType"
 
 -- | @vsphere_datacenter@ DataSource.
 --
@@ -340,7 +340,7 @@ instance P.HasName (DistributedVirtualSwitchData s) (TF.Attr s P.Text) where
                           } :: DistributedVirtualSwitchData s)
 
 instance s ~ s' => P.HasComputedUplinks (TF.Ref s' (DistributedVirtualSwitchData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedUplinks x = TF.compute (TF.refKey x) "uplinks"
+    computedUplinks x = TF.compute (TF.refKey x) "_computedUplinks"
 
 -- | @vsphere_host@ DataSource.
 --
@@ -387,7 +387,7 @@ instance P.HasName (HostData s) (TF.Attr s P.Text) where
                           } :: HostData s)
 
 instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (HostData s)) (TF.Attr s P.Text) where
-    computedResourcePoolId x = TF.compute (TF.refKey x) "resource_pool_id"
+    computedResourcePoolId x = TF.compute (TF.refKey x) "_computedResourcePoolId"
 
 -- | @vsphere_network@ DataSource.
 --
@@ -434,8 +434,8 @@ instance P.HasName (NetworkData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: NetworkData s)
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (NetworkData s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (NetworkData s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 -- | @vsphere_resource_pool@ DataSource.
 --
@@ -526,7 +526,7 @@ instance P.HasName (TagData s) (TF.Attr s P.Text) where
                           } :: TagData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TagData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 -- | @vsphere_tag_category@ DataSource.
 --
@@ -560,13 +560,13 @@ instance P.HasName (TagCategoryData s) (TF.Attr s P.Text) where
                           } :: TagCategoryData s)
 
 instance s ~ s' => P.HasComputedAssociableTypes (TF.Ref s' (TagCategoryData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedAssociableTypes x = TF.compute (TF.refKey x) "associable_types"
+    computedAssociableTypes x = TF.compute (TF.refKey x) "_computedAssociableTypes"
 
 instance s ~ s' => P.HasComputedCardinality (TF.Ref s' (TagCategoryData s)) (TF.Attr s P.Text) where
-    computedCardinality x = TF.compute (TF.refKey x) "cardinality"
+    computedCardinality x = TF.compute (TF.refKey x) "_computedCardinality"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TagCategoryData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 -- | @vsphere_virtual_machine@ DataSource.
 --
@@ -627,25 +627,25 @@ instance P.HasScsiControllerScanCount (VirtualMachineData s) (TF.Attr s P.Intege
                           } :: VirtualMachineData s)
 
 instance s ~ s' => P.HasComputedAlternateGuestName (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
-    computedAlternateGuestName x = TF.compute (TF.refKey x) "alternate_guest_name"
+    computedAlternateGuestName x = TF.compute (TF.refKey x) "_computedAlternateGuestName"
 
 instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualMachineData s)) (TF.Attr s [Disks s]) where
-    computedDisks x = TF.compute (TF.refKey x) "disks"
+    computedDisks x = TF.compute (TF.refKey x) "_computedDisks"
 
 instance s ~ s' => P.HasComputedFirmware (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
-    computedFirmware x = TF.compute (TF.refKey x) "firmware"
+    computedFirmware x = TF.compute (TF.refKey x) "_computedFirmware"
 
 instance s ~ s' => P.HasComputedGuestId (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
-    computedGuestId x = TF.compute (TF.refKey x) "guest_id"
+    computedGuestId x = TF.compute (TF.refKey x) "_computedGuestId"
 
 instance s ~ s' => P.HasComputedNetworkInterfaceTypes (TF.Ref s' (VirtualMachineData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNetworkInterfaceTypes x = TF.compute (TF.refKey x) "network_interface_types"
+    computedNetworkInterfaceTypes x = TF.compute (TF.refKey x) "_computedNetworkInterfaceTypes"
 
 instance s ~ s' => P.HasComputedScsiBusSharing (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
-    computedScsiBusSharing x = TF.compute (TF.refKey x) "scsi_bus_sharing"
+    computedScsiBusSharing x = TF.compute (TF.refKey x) "_computedScsiBusSharing"
 
 instance s ~ s' => P.HasComputedScsiType (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
-    computedScsiType x = TF.compute (TF.refKey x) "scsi_type"
+    computedScsiType x = TF.compute (TF.refKey x) "_computedScsiType"
 
 -- | @vsphere_vmfs_disks@ DataSource.
 --
@@ -705,4 +705,4 @@ instance P.HasRescan (VmfsDisksData s) (TF.Attr s P.Bool) where
                           } :: VmfsDisksData s)
 
 instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VmfsDisksData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDisks x = TF.compute (TF.refKey x) "disks"
+    computedDisks x = TF.compute (TF.refKey x) "_computedDisks"

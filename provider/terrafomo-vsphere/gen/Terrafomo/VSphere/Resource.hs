@@ -887,7 +887,7 @@ instance P.HasTags (ComputeClusterResource s) (TF.Attr s [TF.Attr s (TF.Attr s P
                           } :: ComputeClusterResource s)
 
 instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
-    computedResourcePoolId x = TF.compute (TF.refKey x) "resource_pool_id"
+    computedResourcePoolId x = TF.compute (TF.refKey x) "_computedResourcePoolId"
 
 -- | @vsphere_compute_cluster_host_group@ Resource.
 --
@@ -1490,7 +1490,7 @@ instance P.HasTags (DatacenterResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Tex
                           } :: DatacenterResource s)
 
 instance s ~ s' => P.HasComputedMoid (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedMoid x = TF.compute (TF.refKey x) "moid"
+    computedMoid x = TF.compute (TF.refKey x) "_computedMoid"
 
 -- | @vsphere_datastore_cluster@ Resource.
 --
@@ -2170,91 +2170,91 @@ instance P.HasVlanOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.
                           } :: DistributedPortGroupResource s)
 
 instance s ~ s' => P.HasComputedActiveUplinks (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedActiveUplinks x = TF.compute (TF.refKey x) "active_uplinks"
+    computedActiveUplinks x = TF.compute (TF.refKey x) "_computedActiveUplinks"
 
 instance s ~ s' => P.HasComputedAllowForgedTransmits (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedAllowForgedTransmits x = TF.compute (TF.refKey x) "allow_forged_transmits"
+    computedAllowForgedTransmits x = TF.compute (TF.refKey x) "_computedAllowForgedTransmits"
 
 instance s ~ s' => P.HasComputedAllowMacChanges (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedAllowMacChanges x = TF.compute (TF.refKey x) "allow_mac_changes"
+    computedAllowMacChanges x = TF.compute (TF.refKey x) "_computedAllowMacChanges"
 
 instance s ~ s' => P.HasComputedAllowPromiscuous (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedAllowPromiscuous x = TF.compute (TF.refKey x) "allow_promiscuous"
+    computedAllowPromiscuous x = TF.compute (TF.refKey x) "_computedAllowPromiscuous"
 
 instance s ~ s' => P.HasComputedBlockAllPorts (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedBlockAllPorts x = TF.compute (TF.refKey x) "block_all_ports"
+    computedBlockAllPorts x = TF.compute (TF.refKey x) "_computedBlockAllPorts"
 
 instance s ~ s' => P.HasComputedCheckBeacon (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedCheckBeacon x = TF.compute (TF.refKey x) "check_beacon"
+    computedCheckBeacon x = TF.compute (TF.refKey x) "_computedCheckBeacon"
 
 instance s ~ s' => P.HasComputedConfigVersion (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedConfigVersion x = TF.compute (TF.refKey x) "config_version"
+    computedConfigVersion x = TF.compute (TF.refKey x) "_computedConfigVersion"
 
 instance s ~ s' => P.HasComputedDirectpathGen2Allowed (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedDirectpathGen2Allowed x = TF.compute (TF.refKey x) "directpath_gen2_allowed"
+    computedDirectpathGen2Allowed x = TF.compute (TF.refKey x) "_computedDirectpathGen2Allowed"
 
 instance s ~ s' => P.HasComputedEgressShapingAverageBandwidth (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedEgressShapingAverageBandwidth x = TF.compute (TF.refKey x) "egress_shaping_average_bandwidth"
+    computedEgressShapingAverageBandwidth x = TF.compute (TF.refKey x) "_computedEgressShapingAverageBandwidth"
 
 instance s ~ s' => P.HasComputedEgressShapingBurstSize (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedEgressShapingBurstSize x = TF.compute (TF.refKey x) "egress_shaping_burst_size"
+    computedEgressShapingBurstSize x = TF.compute (TF.refKey x) "_computedEgressShapingBurstSize"
 
 instance s ~ s' => P.HasComputedEgressShapingEnabled (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedEgressShapingEnabled x = TF.compute (TF.refKey x) "egress_shaping_enabled"
+    computedEgressShapingEnabled x = TF.compute (TF.refKey x) "_computedEgressShapingEnabled"
 
 instance s ~ s' => P.HasComputedEgressShapingPeakBandwidth (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedEgressShapingPeakBandwidth x = TF.compute (TF.refKey x) "egress_shaping_peak_bandwidth"
+    computedEgressShapingPeakBandwidth x = TF.compute (TF.refKey x) "_computedEgressShapingPeakBandwidth"
 
 instance s ~ s' => P.HasComputedFailback (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedFailback x = TF.compute (TF.refKey x) "failback"
+    computedFailback x = TF.compute (TF.refKey x) "_computedFailback"
 
 instance s ~ s' => P.HasComputedIngressShapingAverageBandwidth (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedIngressShapingAverageBandwidth x = TF.compute (TF.refKey x) "ingress_shaping_average_bandwidth"
+    computedIngressShapingAverageBandwidth x = TF.compute (TF.refKey x) "_computedIngressShapingAverageBandwidth"
 
 instance s ~ s' => P.HasComputedIngressShapingBurstSize (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedIngressShapingBurstSize x = TF.compute (TF.refKey x) "ingress_shaping_burst_size"
+    computedIngressShapingBurstSize x = TF.compute (TF.refKey x) "_computedIngressShapingBurstSize"
 
 instance s ~ s' => P.HasComputedIngressShapingEnabled (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedIngressShapingEnabled x = TF.compute (TF.refKey x) "ingress_shaping_enabled"
+    computedIngressShapingEnabled x = TF.compute (TF.refKey x) "_computedIngressShapingEnabled"
 
 instance s ~ s' => P.HasComputedIngressShapingPeakBandwidth (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedIngressShapingPeakBandwidth x = TF.compute (TF.refKey x) "ingress_shaping_peak_bandwidth"
+    computedIngressShapingPeakBandwidth x = TF.compute (TF.refKey x) "_computedIngressShapingPeakBandwidth"
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "key"
+    computedKey x = TF.compute (TF.refKey x) "_computedKey"
 
 instance s ~ s' => P.HasComputedLacpEnabled (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedLacpEnabled x = TF.compute (TF.refKey x) "lacp_enabled"
+    computedLacpEnabled x = TF.compute (TF.refKey x) "_computedLacpEnabled"
 
 instance s ~ s' => P.HasComputedLacpMode (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedLacpMode x = TF.compute (TF.refKey x) "lacp_mode"
+    computedLacpMode x = TF.compute (TF.refKey x) "_computedLacpMode"
 
 instance s ~ s' => P.HasComputedNetflowEnabled (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedNetflowEnabled x = TF.compute (TF.refKey x) "netflow_enabled"
+    computedNetflowEnabled x = TF.compute (TF.refKey x) "_computedNetflowEnabled"
 
 instance s ~ s' => P.HasComputedNotifySwitches (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedNotifySwitches x = TF.compute (TF.refKey x) "notify_switches"
+    computedNotifySwitches x = TF.compute (TF.refKey x) "_computedNotifySwitches"
 
 instance s ~ s' => P.HasComputedNumberOfPorts (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedNumberOfPorts x = TF.compute (TF.refKey x) "number_of_ports"
+    computedNumberOfPorts x = TF.compute (TF.refKey x) "_computedNumberOfPorts"
 
 instance s ~ s' => P.HasComputedPortPrivateSecondaryVlanId (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedPortPrivateSecondaryVlanId x = TF.compute (TF.refKey x) "port_private_secondary_vlan_id"
+    computedPortPrivateSecondaryVlanId x = TF.compute (TF.refKey x) "_computedPortPrivateSecondaryVlanId"
 
 instance s ~ s' => P.HasComputedStandbyUplinks (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedStandbyUplinks x = TF.compute (TF.refKey x) "standby_uplinks"
+    computedStandbyUplinks x = TF.compute (TF.refKey x) "_computedStandbyUplinks"
 
 instance s ~ s' => P.HasComputedTeamingPolicy (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedTeamingPolicy x = TF.compute (TF.refKey x) "teaming_policy"
+    computedTeamingPolicy x = TF.compute (TF.refKey x) "_computedTeamingPolicy"
 
 instance s ~ s' => P.HasComputedTxUplink (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedTxUplink x = TF.compute (TF.refKey x) "tx_uplink"
+    computedTxUplink x = TF.compute (TF.refKey x) "_computedTxUplink"
 
 instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedVlanId x = TF.compute (TF.refKey x) "vlan_id"
+    computedVlanId x = TF.compute (TF.refKey x) "_computedVlanId"
 
 instance s ~ s' => P.HasComputedVlanRange (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s [TF.Attr s (VlanRange s)]) where
-    computedVlanRange x = TF.compute (TF.refKey x) "vlan_range"
+    computedVlanRange x = TF.compute (TF.refKey x) "_computedVlanRange"
 
 -- | @vsphere_distributed_virtual_switch@ Resource.
 --
@@ -2526,211 +2526,211 @@ instance P.HasTags (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s (T
                           } :: DistributedVirtualSwitchResource s)
 
 instance s ~ s' => P.HasComputedActiveUplinks (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedActiveUplinks x = TF.compute (TF.refKey x) "active_uplinks"
+    computedActiveUplinks x = TF.compute (TF.refKey x) "_computedActiveUplinks"
 
 instance s ~ s' => P.HasComputedAllowForgedTransmits (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedAllowForgedTransmits x = TF.compute (TF.refKey x) "allow_forged_transmits"
+    computedAllowForgedTransmits x = TF.compute (TF.refKey x) "_computedAllowForgedTransmits"
 
 instance s ~ s' => P.HasComputedAllowMacChanges (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedAllowMacChanges x = TF.compute (TF.refKey x) "allow_mac_changes"
+    computedAllowMacChanges x = TF.compute (TF.refKey x) "_computedAllowMacChanges"
 
 instance s ~ s' => P.HasComputedAllowPromiscuous (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedAllowPromiscuous x = TF.compute (TF.refKey x) "allow_promiscuous"
+    computedAllowPromiscuous x = TF.compute (TF.refKey x) "_computedAllowPromiscuous"
 
 instance s ~ s' => P.HasComputedBlockAllPorts (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedBlockAllPorts x = TF.compute (TF.refKey x) "block_all_ports"
+    computedBlockAllPorts x = TF.compute (TF.refKey x) "_computedBlockAllPorts"
 
 instance s ~ s' => P.HasComputedCheckBeacon (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedCheckBeacon x = TF.compute (TF.refKey x) "check_beacon"
+    computedCheckBeacon x = TF.compute (TF.refKey x) "_computedCheckBeacon"
 
 instance s ~ s' => P.HasComputedConfigVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedConfigVersion x = TF.compute (TF.refKey x) "config_version"
+    computedConfigVersion x = TF.compute (TF.refKey x) "_computedConfigVersion"
 
 instance s ~ s' => P.HasComputedDirectpathGen2Allowed (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedDirectpathGen2Allowed x = TF.compute (TF.refKey x) "directpath_gen2_allowed"
+    computedDirectpathGen2Allowed x = TF.compute (TF.refKey x) "_computedDirectpathGen2Allowed"
 
 instance s ~ s' => P.HasComputedEgressShapingAverageBandwidth (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedEgressShapingAverageBandwidth x = TF.compute (TF.refKey x) "egress_shaping_average_bandwidth"
+    computedEgressShapingAverageBandwidth x = TF.compute (TF.refKey x) "_computedEgressShapingAverageBandwidth"
 
 instance s ~ s' => P.HasComputedEgressShapingBurstSize (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedEgressShapingBurstSize x = TF.compute (TF.refKey x) "egress_shaping_burst_size"
+    computedEgressShapingBurstSize x = TF.compute (TF.refKey x) "_computedEgressShapingBurstSize"
 
 instance s ~ s' => P.HasComputedEgressShapingEnabled (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedEgressShapingEnabled x = TF.compute (TF.refKey x) "egress_shaping_enabled"
+    computedEgressShapingEnabled x = TF.compute (TF.refKey x) "_computedEgressShapingEnabled"
 
 instance s ~ s' => P.HasComputedEgressShapingPeakBandwidth (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedEgressShapingPeakBandwidth x = TF.compute (TF.refKey x) "egress_shaping_peak_bandwidth"
+    computedEgressShapingPeakBandwidth x = TF.compute (TF.refKey x) "_computedEgressShapingPeakBandwidth"
 
 instance s ~ s' => P.HasComputedFailback (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedFailback x = TF.compute (TF.refKey x) "failback"
+    computedFailback x = TF.compute (TF.refKey x) "_computedFailback"
 
 instance s ~ s' => P.HasComputedFaulttoleranceMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedFaulttoleranceMaximumMbit x = TF.compute (TF.refKey x) "faulttolerance_maximum_mbit"
+    computedFaulttoleranceMaximumMbit x = TF.compute (TF.refKey x) "_computedFaulttoleranceMaximumMbit"
 
 instance s ~ s' => P.HasComputedFaulttoleranceReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedFaulttoleranceReservationMbit x = TF.compute (TF.refKey x) "faulttolerance_reservation_mbit"
+    computedFaulttoleranceReservationMbit x = TF.compute (TF.refKey x) "_computedFaulttoleranceReservationMbit"
 
 instance s ~ s' => P.HasComputedFaulttoleranceShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedFaulttoleranceShareCount x = TF.compute (TF.refKey x) "faulttolerance_share_count"
+    computedFaulttoleranceShareCount x = TF.compute (TF.refKey x) "_computedFaulttoleranceShareCount"
 
 instance s ~ s' => P.HasComputedFaulttoleranceShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedFaulttoleranceShareLevel x = TF.compute (TF.refKey x) "faulttolerance_share_level"
+    computedFaulttoleranceShareLevel x = TF.compute (TF.refKey x) "_computedFaulttoleranceShareLevel"
 
 instance s ~ s' => P.HasComputedHbrMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedHbrMaximumMbit x = TF.compute (TF.refKey x) "hbr_maximum_mbit"
+    computedHbrMaximumMbit x = TF.compute (TF.refKey x) "_computedHbrMaximumMbit"
 
 instance s ~ s' => P.HasComputedHbrReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedHbrReservationMbit x = TF.compute (TF.refKey x) "hbr_reservation_mbit"
+    computedHbrReservationMbit x = TF.compute (TF.refKey x) "_computedHbrReservationMbit"
 
 instance s ~ s' => P.HasComputedHbrShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedHbrShareCount x = TF.compute (TF.refKey x) "hbr_share_count"
+    computedHbrShareCount x = TF.compute (TF.refKey x) "_computedHbrShareCount"
 
 instance s ~ s' => P.HasComputedHbrShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedHbrShareLevel x = TF.compute (TF.refKey x) "hbr_share_level"
+    computedHbrShareLevel x = TF.compute (TF.refKey x) "_computedHbrShareLevel"
 
 instance s ~ s' => P.HasComputedIngressShapingAverageBandwidth (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedIngressShapingAverageBandwidth x = TF.compute (TF.refKey x) "ingress_shaping_average_bandwidth"
+    computedIngressShapingAverageBandwidth x = TF.compute (TF.refKey x) "_computedIngressShapingAverageBandwidth"
 
 instance s ~ s' => P.HasComputedIngressShapingBurstSize (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedIngressShapingBurstSize x = TF.compute (TF.refKey x) "ingress_shaping_burst_size"
+    computedIngressShapingBurstSize x = TF.compute (TF.refKey x) "_computedIngressShapingBurstSize"
 
 instance s ~ s' => P.HasComputedIngressShapingEnabled (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedIngressShapingEnabled x = TF.compute (TF.refKey x) "ingress_shaping_enabled"
+    computedIngressShapingEnabled x = TF.compute (TF.refKey x) "_computedIngressShapingEnabled"
 
 instance s ~ s' => P.HasComputedIngressShapingPeakBandwidth (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedIngressShapingPeakBandwidth x = TF.compute (TF.refKey x) "ingress_shaping_peak_bandwidth"
+    computedIngressShapingPeakBandwidth x = TF.compute (TF.refKey x) "_computedIngressShapingPeakBandwidth"
 
 instance s ~ s' => P.HasComputedIscsiMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedIscsiMaximumMbit x = TF.compute (TF.refKey x) "iscsi_maximum_mbit"
+    computedIscsiMaximumMbit x = TF.compute (TF.refKey x) "_computedIscsiMaximumMbit"
 
 instance s ~ s' => P.HasComputedIscsiReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedIscsiReservationMbit x = TF.compute (TF.refKey x) "iscsi_reservation_mbit"
+    computedIscsiReservationMbit x = TF.compute (TF.refKey x) "_computedIscsiReservationMbit"
 
 instance s ~ s' => P.HasComputedIscsiShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedIscsiShareCount x = TF.compute (TF.refKey x) "iscsi_share_count"
+    computedIscsiShareCount x = TF.compute (TF.refKey x) "_computedIscsiShareCount"
 
 instance s ~ s' => P.HasComputedIscsiShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedIscsiShareLevel x = TF.compute (TF.refKey x) "iscsi_share_level"
+    computedIscsiShareLevel x = TF.compute (TF.refKey x) "_computedIscsiShareLevel"
 
 instance s ~ s' => P.HasComputedLacpApiVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedLacpApiVersion x = TF.compute (TF.refKey x) "lacp_api_version"
+    computedLacpApiVersion x = TF.compute (TF.refKey x) "_computedLacpApiVersion"
 
 instance s ~ s' => P.HasComputedLacpEnabled (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedLacpEnabled x = TF.compute (TF.refKey x) "lacp_enabled"
+    computedLacpEnabled x = TF.compute (TF.refKey x) "_computedLacpEnabled"
 
 instance s ~ s' => P.HasComputedLacpMode (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedLacpMode x = TF.compute (TF.refKey x) "lacp_mode"
+    computedLacpMode x = TF.compute (TF.refKey x) "_computedLacpMode"
 
 instance s ~ s' => P.HasComputedManagementMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedManagementMaximumMbit x = TF.compute (TF.refKey x) "management_maximum_mbit"
+    computedManagementMaximumMbit x = TF.compute (TF.refKey x) "_computedManagementMaximumMbit"
 
 instance s ~ s' => P.HasComputedManagementReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedManagementReservationMbit x = TF.compute (TF.refKey x) "management_reservation_mbit"
+    computedManagementReservationMbit x = TF.compute (TF.refKey x) "_computedManagementReservationMbit"
 
 instance s ~ s' => P.HasComputedManagementShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedManagementShareCount x = TF.compute (TF.refKey x) "management_share_count"
+    computedManagementShareCount x = TF.compute (TF.refKey x) "_computedManagementShareCount"
 
 instance s ~ s' => P.HasComputedManagementShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedManagementShareLevel x = TF.compute (TF.refKey x) "management_share_level"
+    computedManagementShareLevel x = TF.compute (TF.refKey x) "_computedManagementShareLevel"
 
 instance s ~ s' => P.HasComputedMaxMtu (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedMaxMtu x = TF.compute (TF.refKey x) "max_mtu"
+    computedMaxMtu x = TF.compute (TF.refKey x) "_computedMaxMtu"
 
 instance s ~ s' => P.HasComputedMulticastFilteringMode (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedMulticastFilteringMode x = TF.compute (TF.refKey x) "multicast_filtering_mode"
+    computedMulticastFilteringMode x = TF.compute (TF.refKey x) "_computedMulticastFilteringMode"
 
 instance s ~ s' => P.HasComputedNetflowEnabled (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedNetflowEnabled x = TF.compute (TF.refKey x) "netflow_enabled"
+    computedNetflowEnabled x = TF.compute (TF.refKey x) "_computedNetflowEnabled"
 
 instance s ~ s' => P.HasComputedNetworkResourceControlVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedNetworkResourceControlVersion x = TF.compute (TF.refKey x) "network_resource_control_version"
+    computedNetworkResourceControlVersion x = TF.compute (TF.refKey x) "_computedNetworkResourceControlVersion"
 
 instance s ~ s' => P.HasComputedNfsMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedNfsMaximumMbit x = TF.compute (TF.refKey x) "nfs_maximum_mbit"
+    computedNfsMaximumMbit x = TF.compute (TF.refKey x) "_computedNfsMaximumMbit"
 
 instance s ~ s' => P.HasComputedNfsReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedNfsReservationMbit x = TF.compute (TF.refKey x) "nfs_reservation_mbit"
+    computedNfsReservationMbit x = TF.compute (TF.refKey x) "_computedNfsReservationMbit"
 
 instance s ~ s' => P.HasComputedNfsShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedNfsShareCount x = TF.compute (TF.refKey x) "nfs_share_count"
+    computedNfsShareCount x = TF.compute (TF.refKey x) "_computedNfsShareCount"
 
 instance s ~ s' => P.HasComputedNfsShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedNfsShareLevel x = TF.compute (TF.refKey x) "nfs_share_level"
+    computedNfsShareLevel x = TF.compute (TF.refKey x) "_computedNfsShareLevel"
 
 instance s ~ s' => P.HasComputedNotifySwitches (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedNotifySwitches x = TF.compute (TF.refKey x) "notify_switches"
+    computedNotifySwitches x = TF.compute (TF.refKey x) "_computedNotifySwitches"
 
 instance s ~ s' => P.HasComputedPortPrivateSecondaryVlanId (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedPortPrivateSecondaryVlanId x = TF.compute (TF.refKey x) "port_private_secondary_vlan_id"
+    computedPortPrivateSecondaryVlanId x = TF.compute (TF.refKey x) "_computedPortPrivateSecondaryVlanId"
 
 instance s ~ s' => P.HasComputedStandbyUplinks (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedStandbyUplinks x = TF.compute (TF.refKey x) "standby_uplinks"
+    computedStandbyUplinks x = TF.compute (TF.refKey x) "_computedStandbyUplinks"
 
 instance s ~ s' => P.HasComputedTeamingPolicy (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedTeamingPolicy x = TF.compute (TF.refKey x) "teaming_policy"
+    computedTeamingPolicy x = TF.compute (TF.refKey x) "_computedTeamingPolicy"
 
 instance s ~ s' => P.HasComputedTxUplink (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedTxUplink x = TF.compute (TF.refKey x) "tx_uplink"
+    computedTxUplink x = TF.compute (TF.refKey x) "_computedTxUplink"
 
 instance s ~ s' => P.HasComputedUplinks (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedUplinks x = TF.compute (TF.refKey x) "uplinks"
+    computedUplinks x = TF.compute (TF.refKey x) "_computedUplinks"
 
 instance s ~ s' => P.HasComputedVdpMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVdpMaximumMbit x = TF.compute (TF.refKey x) "vdp_maximum_mbit"
+    computedVdpMaximumMbit x = TF.compute (TF.refKey x) "_computedVdpMaximumMbit"
 
 instance s ~ s' => P.HasComputedVdpReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVdpReservationMbit x = TF.compute (TF.refKey x) "vdp_reservation_mbit"
+    computedVdpReservationMbit x = TF.compute (TF.refKey x) "_computedVdpReservationMbit"
 
 instance s ~ s' => P.HasComputedVdpShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVdpShareCount x = TF.compute (TF.refKey x) "vdp_share_count"
+    computedVdpShareCount x = TF.compute (TF.refKey x) "_computedVdpShareCount"
 
 instance s ~ s' => P.HasComputedVdpShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedVdpShareLevel x = TF.compute (TF.refKey x) "vdp_share_level"
+    computedVdpShareLevel x = TF.compute (TF.refKey x) "_computedVdpShareLevel"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
+    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
 
 instance s ~ s' => P.HasComputedVirtualmachineMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVirtualmachineMaximumMbit x = TF.compute (TF.refKey x) "virtualmachine_maximum_mbit"
+    computedVirtualmachineMaximumMbit x = TF.compute (TF.refKey x) "_computedVirtualmachineMaximumMbit"
 
 instance s ~ s' => P.HasComputedVirtualmachineReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVirtualmachineReservationMbit x = TF.compute (TF.refKey x) "virtualmachine_reservation_mbit"
+    computedVirtualmachineReservationMbit x = TF.compute (TF.refKey x) "_computedVirtualmachineReservationMbit"
 
 instance s ~ s' => P.HasComputedVirtualmachineShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVirtualmachineShareCount x = TF.compute (TF.refKey x) "virtualmachine_share_count"
+    computedVirtualmachineShareCount x = TF.compute (TF.refKey x) "_computedVirtualmachineShareCount"
 
 instance s ~ s' => P.HasComputedVirtualmachineShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedVirtualmachineShareLevel x = TF.compute (TF.refKey x) "virtualmachine_share_level"
+    computedVirtualmachineShareLevel x = TF.compute (TF.refKey x) "_computedVirtualmachineShareLevel"
 
 instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVlanId x = TF.compute (TF.refKey x) "vlan_id"
+    computedVlanId x = TF.compute (TF.refKey x) "_computedVlanId"
 
 instance s ~ s' => P.HasComputedVlanRange (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s (VlanRange s)]) where
-    computedVlanRange x = TF.compute (TF.refKey x) "vlan_range"
+    computedVlanRange x = TF.compute (TF.refKey x) "_computedVlanRange"
 
 instance s ~ s' => P.HasComputedVmotionMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVmotionMaximumMbit x = TF.compute (TF.refKey x) "vmotion_maximum_mbit"
+    computedVmotionMaximumMbit x = TF.compute (TF.refKey x) "_computedVmotionMaximumMbit"
 
 instance s ~ s' => P.HasComputedVmotionReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVmotionReservationMbit x = TF.compute (TF.refKey x) "vmotion_reservation_mbit"
+    computedVmotionReservationMbit x = TF.compute (TF.refKey x) "_computedVmotionReservationMbit"
 
 instance s ~ s' => P.HasComputedVmotionShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVmotionShareCount x = TF.compute (TF.refKey x) "vmotion_share_count"
+    computedVmotionShareCount x = TF.compute (TF.refKey x) "_computedVmotionShareCount"
 
 instance s ~ s' => P.HasComputedVmotionShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedVmotionShareLevel x = TF.compute (TF.refKey x) "vmotion_share_level"
+    computedVmotionShareLevel x = TF.compute (TF.refKey x) "_computedVmotionShareLevel"
 
 instance s ~ s' => P.HasComputedVsanMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVsanMaximumMbit x = TF.compute (TF.refKey x) "vsan_maximum_mbit"
+    computedVsanMaximumMbit x = TF.compute (TF.refKey x) "_computedVsanMaximumMbit"
 
 instance s ~ s' => P.HasComputedVsanReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVsanReservationMbit x = TF.compute (TF.refKey x) "vsan_reservation_mbit"
+    computedVsanReservationMbit x = TF.compute (TF.refKey x) "_computedVsanReservationMbit"
 
 instance s ~ s' => P.HasComputedVsanShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVsanShareCount x = TF.compute (TF.refKey x) "vsan_share_count"
+    computedVsanShareCount x = TF.compute (TF.refKey x) "_computedVsanShareCount"
 
 instance s ~ s' => P.HasComputedVsanShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedVsanShareLevel x = TF.compute (TF.refKey x) "vsan_share_level"
+    computedVsanShareLevel x = TF.compute (TF.refKey x) "_computedVsanShareLevel"
 
 -- | @vsphere_dpm_host_override@ Resource.
 --
@@ -3511,13 +3511,13 @@ instance P.HasVlanId (HostPortGroupResource s) (TF.Attr s P.Integer) where
                           } :: HostPortGroupResource s)
 
 instance s ~ s' => P.HasComputedComputedPolicy (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedComputedPolicy x = TF.compute (TF.refKey x) "computed_policy"
+    computedComputedPolicy x = TF.compute (TF.refKey x) "_computedComputedPolicy"
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "key"
+    computedKey x = TF.compute (TF.refKey x) "_computedKey"
 
 instance s ~ s' => P.HasComputedPorts (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s (TF.Attr s (Ports s))) where
-    computedPorts x = TF.compute (TF.refKey x) "ports"
+    computedPorts x = TF.compute (TF.refKey x) "_computedPorts"
 
 -- | @vsphere_host_virtual_switch@ Resource.
 --
@@ -3846,16 +3846,16 @@ instance P.HasLicenseKey (LicenseResource s) (TF.Attr s P.Text) where
                           } :: LicenseResource s)
 
 instance s ~ s' => P.HasComputedEditionKey (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
-    computedEditionKey x = TF.compute (TF.refKey x) "edition_key"
+    computedEditionKey x = TF.compute (TF.refKey x) "_computedEditionKey"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedTotal (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Integer) where
-    computedTotal x = TF.compute (TF.refKey x) "total"
+    computedTotal x = TF.compute (TF.refKey x) "_computedTotal"
 
 instance s ~ s' => P.HasComputedUsed (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Integer) where
-    computedUsed x = TF.compute (TF.refKey x) "used"
+    computedUsed x = TF.compute (TF.refKey x) "_computedUsed"
 
 -- | @vsphere_nas_datastore@ Resource.
 --
@@ -4023,28 +4023,28 @@ instance P.HasType' (NasDatastoreResource s) (TF.Attr s P.Text) where
                           } :: NasDatastoreResource s)
 
 instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Bool) where
-    computedAccessible x = TF.compute (TF.refKey x) "accessible"
+    computedAccessible x = TF.compute (TF.refKey x) "_computedAccessible"
 
 instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Integer) where
-    computedCapacity x = TF.compute (TF.refKey x) "capacity"
+    computedCapacity x = TF.compute (TF.refKey x) "_computedCapacity"
 
 instance s ~ s' => P.HasComputedFreeSpace (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Integer) where
-    computedFreeSpace x = TF.compute (TF.refKey x) "free_space"
+    computedFreeSpace x = TF.compute (TF.refKey x) "_computedFreeSpace"
 
 instance s ~ s' => P.HasComputedMaintenanceMode (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedMaintenanceMode x = TF.compute (TF.refKey x) "maintenance_mode"
+    computedMaintenanceMode x = TF.compute (TF.refKey x) "_computedMaintenanceMode"
 
 instance s ~ s' => P.HasComputedMultipleHostAccess (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Bool) where
-    computedMultipleHostAccess x = TF.compute (TF.refKey x) "multiple_host_access"
+    computedMultipleHostAccess x = TF.compute (TF.refKey x) "_computedMultipleHostAccess"
 
 instance s ~ s' => P.HasComputedProtocolEndpoint (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedProtocolEndpoint x = TF.compute (TF.refKey x) "protocol_endpoint"
+    computedProtocolEndpoint x = TF.compute (TF.refKey x) "_computedProtocolEndpoint"
 
 instance s ~ s' => P.HasComputedUncommittedSpace (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Integer) where
-    computedUncommittedSpace x = TF.compute (TF.refKey x) "uncommitted_space"
+    computedUncommittedSpace x = TF.compute (TF.refKey x) "_computedUncommittedSpace"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
 
 -- | @vsphere_resource_pool@ Resource.
 --
@@ -4220,10 +4220,10 @@ instance P.HasTags (ResourcePoolResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.T
                           } :: ResourcePoolResource s)
 
 instance s ~ s' => P.HasComputedCpuShares (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Integer) where
-    computedCpuShares x = TF.compute (TF.refKey x) "cpu_shares"
+    computedCpuShares x = TF.compute (TF.refKey x) "_computedCpuShares"
 
 instance s ~ s' => P.HasComputedMemoryShares (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Integer) where
-    computedMemoryShares x = TF.compute (TF.refKey x) "memory_shares"
+    computedMemoryShares x = TF.compute (TF.refKey x) "_computedMemoryShares"
 
 -- | @vsphere_storage_drs_vm_override@ Resource.
 --
@@ -4619,10 +4619,10 @@ instance P.HasTags (VappContainerResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.
                           } :: VappContainerResource s)
 
 instance s ~ s' => P.HasComputedCpuShares (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Integer) where
-    computedCpuShares x = TF.compute (TF.refKey x) "cpu_shares"
+    computedCpuShares x = TF.compute (TF.refKey x) "_computedCpuShares"
 
 instance s ~ s' => P.HasComputedMemoryShares (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Integer) where
-    computedMemoryShares x = TF.compute (TF.refKey x) "memory_shares"
+    computedMemoryShares x = TF.compute (TF.refKey x) "_computedMemoryShares"
 
 -- | @vsphere_virtual_disk@ Resource.
 --
@@ -4749,11 +4749,11 @@ data VirtualMachineResource s = VirtualMachineResource'
     -- If set to true, a virtual machine that fails to boot will try again after
     -- the delay defined in boot_retry_delay.
     --
-    , _cdrom :: TF.Attr s [Cdrom s]
+    , _cdrom :: TF.Attr s (Cdrom s)
     -- ^ @cdrom@ - (Optional)
     -- A specification for a CDROM device on this virtual machine.
     --
-    , _clone :: TF.Attr s [Clone s]
+    , _clone :: TF.Attr s (Clone s)
     -- ^ @clone@ - (Optional)
     -- A specification for cloning a virtual machine from template.
     --
@@ -4960,7 +4960,7 @@ data VirtualMachineResource s = VirtualMachineResource'
     -- ^ @tags@ - (Optional)
     -- A list of tag IDs to apply to this object.
     --
-    , _vapp :: TF.Attr s [Vapp s]
+    , _vapp :: TF.Attr s (Vapp s)
     -- ^ @vapp@ - (Optional)
     -- VApp configuration data for this virtual machine. Can be used to provide
     -- configuration data for OVF images.
@@ -5129,15 +5129,15 @@ instance P.HasBootRetryEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) whe
                (\s a -> s { _bootRetryEnabled = a
                           } :: VirtualMachineResource s)
 
-instance P.HasCdrom (VirtualMachineResource s) (TF.Attr s [Cdrom s]) where
+instance P.HasCdrom (VirtualMachineResource s) (TF.Attr s (Cdrom s)) where
     cdrom =
-        P.lens (_cdrom :: VirtualMachineResource s -> TF.Attr s [Cdrom s])
+        P.lens (_cdrom :: VirtualMachineResource s -> TF.Attr s (Cdrom s))
                (\s a -> s { _cdrom = a
                           } :: VirtualMachineResource s)
 
-instance P.HasClone (VirtualMachineResource s) (TF.Attr s [Clone s]) where
+instance P.HasClone (VirtualMachineResource s) (TF.Attr s (Clone s)) where
     clone =
-        P.lens (_clone :: VirtualMachineResource s -> TF.Attr s [Clone s])
+        P.lens (_clone :: VirtualMachineResource s -> TF.Attr s (Clone s))
                (\s a -> s { _clone = a
                           } :: VirtualMachineResource s)
 
@@ -5399,9 +5399,9 @@ instance P.HasTags (VirtualMachineResource s) (TF.Attr s [TF.Attr s (TF.Attr s P
                (\s a -> s { _tags = a
                           } :: VirtualMachineResource s)
 
-instance P.HasVapp (VirtualMachineResource s) (TF.Attr s [Vapp s]) where
+instance P.HasVapp (VirtualMachineResource s) (TF.Attr s (Vapp s)) where
     vapp =
-        P.lens (_vapp :: VirtualMachineResource s -> TF.Attr s [Vapp s])
+        P.lens (_vapp :: VirtualMachineResource s -> TF.Attr s (Vapp s))
                (\s a -> s { _vapp = a
                           } :: VirtualMachineResource s)
 
@@ -5418,49 +5418,49 @@ instance P.HasWaitForGuestNetTimeout (VirtualMachineResource s) (TF.Attr s P.Int
                           } :: VirtualMachineResource s)
 
 instance s ~ s' => P.HasComputedChangeVersion (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedChangeVersion x = TF.compute (TF.refKey x) "change_version"
+    computedChangeVersion x = TF.compute (TF.refKey x) "_computedChangeVersion"
 
 instance s ~ s' => P.HasComputedCpuShareCount (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Integer) where
-    computedCpuShareCount x = TF.compute (TF.refKey x) "cpu_share_count"
+    computedCpuShareCount x = TF.compute (TF.refKey x) "_computedCpuShareCount"
 
 instance s ~ s' => P.HasComputedDatastoreId (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedDatastoreId x = TF.compute (TF.refKey x) "datastore_id"
+    computedDatastoreId x = TF.compute (TF.refKey x) "_computedDatastoreId"
 
 instance s ~ s' => P.HasComputedDefaultIpAddress (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedDefaultIpAddress x = TF.compute (TF.refKey x) "default_ip_address"
+    computedDefaultIpAddress x = TF.compute (TF.refKey x) "_computedDefaultIpAddress"
 
 instance s ~ s' => P.HasComputedDisk (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [Disk s]) where
-    computedDisk x = TF.compute (TF.refKey x) "disk"
+    computedDisk x = TF.compute (TF.refKey x) "_computedDisk"
 
 instance s ~ s' => P.HasComputedGuestIpAddresses (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedGuestIpAddresses x = TF.compute (TF.refKey x) "guest_ip_addresses"
+    computedGuestIpAddresses x = TF.compute (TF.refKey x) "_computedGuestIpAddresses"
 
 instance s ~ s' => P.HasComputedHostSystemId (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedHostSystemId x = TF.compute (TF.refKey x) "host_system_id"
+    computedHostSystemId x = TF.compute (TF.refKey x) "_computedHostSystemId"
 
 instance s ~ s' => P.HasComputedImported (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Bool) where
-    computedImported x = TF.compute (TF.refKey x) "imported"
+    computedImported x = TF.compute (TF.refKey x) "_computedImported"
 
 instance s ~ s' => P.HasComputedMemoryShareCount (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Integer) where
-    computedMemoryShareCount x = TF.compute (TF.refKey x) "memory_share_count"
+    computedMemoryShareCount x = TF.compute (TF.refKey x) "_computedMemoryShareCount"
 
 instance s ~ s' => P.HasComputedMoid (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedMoid x = TF.compute (TF.refKey x) "moid"
+    computedMoid x = TF.compute (TF.refKey x) "_computedMoid"
 
 instance s ~ s' => P.HasComputedRebootRequired (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Bool) where
-    computedRebootRequired x = TF.compute (TF.refKey x) "reboot_required"
+    computedRebootRequired x = TF.compute (TF.refKey x) "_computedRebootRequired"
 
 instance s ~ s' => P.HasComputedUuid (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedUuid x = TF.compute (TF.refKey x) "uuid"
+    computedUuid x = TF.compute (TF.refKey x) "_computedUuid"
 
 instance s ~ s' => P.HasComputedVappTransport (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedVappTransport x = TF.compute (TF.refKey x) "vapp_transport"
+    computedVappTransport x = TF.compute (TF.refKey x) "_computedVappTransport"
 
 instance s ~ s' => P.HasComputedVmwareToolsStatus (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedVmwareToolsStatus x = TF.compute (TF.refKey x) "vmware_tools_status"
+    computedVmwareToolsStatus x = TF.compute (TF.refKey x) "_computedVmwareToolsStatus"
 
 instance s ~ s' => P.HasComputedVmxPath (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedVmxPath x = TF.compute (TF.refKey x) "vmx_path"
+    computedVmxPath x = TF.compute (TF.refKey x) "_computedVmxPath"
 
 -- | @vsphere_virtual_machine_snapshot@ Resource.
 --
@@ -5676,22 +5676,22 @@ instance P.HasTags (VmfsDatastoreResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.
                           } :: VmfsDatastoreResource s)
 
 instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Bool) where
-    computedAccessible x = TF.compute (TF.refKey x) "accessible"
+    computedAccessible x = TF.compute (TF.refKey x) "_computedAccessible"
 
 instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Integer) where
-    computedCapacity x = TF.compute (TF.refKey x) "capacity"
+    computedCapacity x = TF.compute (TF.refKey x) "_computedCapacity"
 
 instance s ~ s' => P.HasComputedFreeSpace (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Integer) where
-    computedFreeSpace x = TF.compute (TF.refKey x) "free_space"
+    computedFreeSpace x = TF.compute (TF.refKey x) "_computedFreeSpace"
 
 instance s ~ s' => P.HasComputedMaintenanceMode (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedMaintenanceMode x = TF.compute (TF.refKey x) "maintenance_mode"
+    computedMaintenanceMode x = TF.compute (TF.refKey x) "_computedMaintenanceMode"
 
 instance s ~ s' => P.HasComputedMultipleHostAccess (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Bool) where
-    computedMultipleHostAccess x = TF.compute (TF.refKey x) "multiple_host_access"
+    computedMultipleHostAccess x = TF.compute (TF.refKey x) "_computedMultipleHostAccess"
 
 instance s ~ s' => P.HasComputedUncommittedSpace (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Integer) where
-    computedUncommittedSpace x = TF.compute (TF.refKey x) "uncommitted_space"
+    computedUncommittedSpace x = TF.compute (TF.refKey x) "_computedUncommittedSpace"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"

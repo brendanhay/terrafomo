@@ -70,6 +70,8 @@ module Terrafomo.VSphere.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable           as P
 import qualified Data.HashMap.Strict     as P
 import qualified Data.List.NonEmpty      as P
@@ -175,16 +177,16 @@ instance P.HasUseStaticMac (NetworkInterface s) (TF.Attr s P.Bool) where
                           } :: NetworkInterface s)
 
 instance s ~ s' => P.HasComputedBandwidthShareCount (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Integer) where
-    computedBandwidthShareCount x = TF.compute (TF.refKey x) "bandwidth_share_count"
+    computedBandwidthShareCount x = TF.compute (TF.refKey x) "_computedBandwidthShareCount"
 
 instance s ~ s' => P.HasComputedDeviceAddress (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Text) where
-    computedDeviceAddress x = TF.compute (TF.refKey x) "device_address"
+    computedDeviceAddress x = TF.compute (TF.refKey x) "_computedDeviceAddress"
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Integer) where
-    computedKey x = TF.compute (TF.refKey x) "key"
+    computedKey x = TF.compute (TF.refKey x) "_computedKey"
 
 instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Text) where
-    computedMacAddress x = TF.compute (TF.refKey x) "mac_address"
+    computedMacAddress x = TF.compute (TF.refKey x) "_computedMacAddress"
 
 -- | @vapp@ nested settings.
 data Vapp s = Vapp'
@@ -438,16 +440,16 @@ instance P.HasWriteThrough (Disk s) (TF.Attr s P.Bool) where
                           } :: Disk s)
 
 instance s ~ s' => P.HasComputedDeviceAddress (TF.Ref s' (Disk s)) (TF.Attr s P.Text) where
-    computedDeviceAddress x = TF.compute (TF.refKey x) "device_address"
+    computedDeviceAddress x = TF.compute (TF.refKey x) "_computedDeviceAddress"
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (Disk s)) (TF.Attr s P.Integer) where
-    computedKey x = TF.compute (TF.refKey x) "key"
+    computedKey x = TF.compute (TF.refKey x) "_computedKey"
 
 instance s ~ s' => P.HasComputedPath (TF.Ref s' (Disk s)) (TF.Attr s P.Text) where
-    computedPath x = TF.compute (TF.refKey x) "path"
+    computedPath x = TF.compute (TF.refKey x) "_computedPath"
 
 instance s ~ s' => P.HasComputedUuid (TF.Ref s' (Disk s)) (TF.Attr s P.Text) where
-    computedUuid x = TF.compute (TF.refKey x) "uuid"
+    computedUuid x = TF.compute (TF.refKey x) "_computedUuid"
 
 -- | @windows_options@ nested settings.
 data WindowsOptions s = WindowsOptions'
@@ -648,7 +650,7 @@ instance P.HasWorkgroup (WindowsOptions s) (TF.Attr s P.Text) where
 
 -- | @clone@ nested settings.
 data Clone s = Clone'
-    { _customize    :: TF.Attr s [Customize s]
+    { _customize    :: TF.Attr s (Customize s)
     -- ^ @customize@ - (Optional)
     -- The customization spec for this clone. This allows the user to configure the
     -- virtual machine post-clone.
@@ -689,9 +691,9 @@ newClone _templateUuid =
         , _timeout = TF.value 30
         }
 
-instance P.HasCustomize (Clone s) (TF.Attr s [Customize s]) where
+instance P.HasCustomize (Clone s) (TF.Attr s (Customize s)) where
     customize =
-        P.lens (_customize :: Clone s -> TF.Attr s [Customize s])
+        P.lens (_customize :: Clone s -> TF.Attr s (Customize s))
                (\s a -> s { _customize = a
                           } :: Clone s)
 
@@ -766,10 +768,10 @@ instance P.HasPath (Cdrom s) (TF.Attr s P.Text) where
                           } :: Cdrom s)
 
 instance s ~ s' => P.HasComputedDeviceAddress (TF.Ref s' (Cdrom s)) (TF.Attr s P.Text) where
-    computedDeviceAddress x = TF.compute (TF.refKey x) "device_address"
+    computedDeviceAddress x = TF.compute (TF.refKey x) "_computedDeviceAddress"
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (Cdrom s)) (TF.Attr s P.Integer) where
-    computedKey x = TF.compute (TF.refKey x) "key"
+    computedKey x = TF.compute (TF.refKey x) "_computedKey"
 
 -- | @ports@ nested settings.
 data Ports s = Ports'
@@ -786,13 +788,13 @@ newPorts =
     Ports'
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (Ports s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "key"
+    computedKey x = TF.compute (TF.refKey x) "_computedKey"
 
 instance s ~ s' => P.HasComputedMacAddresses (TF.Ref s' (Ports s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedMacAddresses x = TF.compute (TF.refKey x) "mac_addresses"
+    computedMacAddresses x = TF.compute (TF.refKey x) "_computedMacAddresses"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (Ports s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (Ports s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 -- | @customize@ nested settings.
 data Customize s = Customize'
@@ -818,7 +820,7 @@ data Customize s = Customize'
     -- virtual machine. This address must be local to a static IPv4 address
     -- configured in an interface sub-resource.
     --
-    , _linuxOptions       :: TF.Attr s [LinuxOptions s]
+    , _linuxOptions       :: TF.Attr s (LinuxOptions s)
     -- ^ @linux_options@ - (Optional)
     -- A list of configuration options specific to Linux virtual machines.
     --
@@ -836,7 +838,7 @@ data Customize s = Customize'
     -- complete before returning with an error. Setting this value to 0 or a
     -- negative value skips the waiter.
     --
-    , _windowsOptions     :: TF.Attr s [WindowsOptions s]
+    , _windowsOptions     :: TF.Attr s (WindowsOptions s)
     -- ^ @windows_options@ - (Optional)
     -- A list of configuration options specific to Windows virtual machines.
     --
@@ -908,9 +910,9 @@ instance P.HasIpv6Gateway (Customize s) (TF.Attr s P.Text) where
                (\s a -> s { _ipv6Gateway = a
                           } :: Customize s)
 
-instance P.HasLinuxOptions (Customize s) (TF.Attr s [LinuxOptions s]) where
+instance P.HasLinuxOptions (Customize s) (TF.Attr s (LinuxOptions s)) where
     linuxOptions =
-        P.lens (_linuxOptions :: Customize s -> TF.Attr s [LinuxOptions s])
+        P.lens (_linuxOptions :: Customize s -> TF.Attr s (LinuxOptions s))
                (\s a -> s { _linuxOptions = a
                           , _windowsSysprepText = TF.Nil
                           , _windowsOptions = TF.Nil
@@ -928,9 +930,9 @@ instance P.HasTimeout (Customize s) (TF.Attr s P.Integer) where
                (\s a -> s { _timeout = a
                           } :: Customize s)
 
-instance P.HasWindowsOptions (Customize s) (TF.Attr s [WindowsOptions s]) where
+instance P.HasWindowsOptions (Customize s) (TF.Attr s (WindowsOptions s)) where
     windowsOptions =
-        P.lens (_windowsOptions :: Customize s -> TF.Attr s [WindowsOptions s])
+        P.lens (_windowsOptions :: Customize s -> TF.Attr s (WindowsOptions s))
                (\s a -> s { _windowsOptions = a
                           , _windowsSysprepText = TF.Nil
                           , _linuxOptions = TF.Nil
@@ -1043,13 +1045,13 @@ newDisks =
     Disks'
 
 instance s ~ s' => P.HasComputedEagerlyScrub (TF.Ref s' (Disks s)) (TF.Attr s P.Bool) where
-    computedEagerlyScrub x = TF.compute (TF.refKey x) "eagerly_scrub"
+    computedEagerlyScrub x = TF.compute (TF.refKey x) "_computedEagerlyScrub"
 
 instance s ~ s' => P.HasComputedSize (TF.Ref s' (Disks s)) (TF.Attr s P.Integer) where
-    computedSize x = TF.compute (TF.refKey x) "size"
+    computedSize x = TF.compute (TF.refKey x) "_computedSize"
 
 instance s ~ s' => P.HasComputedThinProvisioned (TF.Ref s' (Disks s)) (TF.Attr s P.Bool) where
-    computedThinProvisioned x = TF.compute (TF.refKey x) "thin_provisioned"
+    computedThinProvisioned x = TF.compute (TF.refKey x) "_computedThinProvisioned"
 
 -- | @linux_options@ nested settings.
 data LinuxOptions s = LinuxOptions'
