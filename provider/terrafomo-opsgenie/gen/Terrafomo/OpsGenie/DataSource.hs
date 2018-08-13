@@ -76,7 +76,7 @@ instance P.HasUsername (UserData s) (TF.Attr s P.Text) where
                           } :: UserData s)
 
 instance s ~ s' => P.HasComputedFullName (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedFullName x = TF.compute (TF.refKey x) "full_name"
+    computedFullName x = TF.compute (TF.refKey x) "_computedFullName"
 
 instance s ~ s' => P.HasComputedRole (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedRole x = TF.compute (TF.refKey x) "role"
+    computedRole x = TF.compute (TF.refKey x) "_computedRole"
