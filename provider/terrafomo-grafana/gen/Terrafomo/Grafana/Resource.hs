@@ -122,7 +122,7 @@ instance P.HasType' (AlertNotificationResource s) (TF.Attr s P.Text) where
                           } :: AlertNotificationResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertNotificationResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @grafana_dashboard@ Resource.
 --
@@ -155,7 +155,7 @@ instance P.HasConfigJson (DashboardResource s) (TF.Attr s P.Text) where
                           } :: DashboardResource s)
 
 instance s ~ s' => P.HasComputedSlug (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
-    computedSlug x = TF.compute (TF.refKey x) "slug"
+    computedSlug x = TF.compute (TF.refKey x) "_computedSlug"
 
 -- | @grafana_data_source@ Resource.
 --
@@ -321,7 +321,7 @@ instance P.HasUsername (DataSourceResource s) (TF.Attr s P.Text) where
                           } :: DataSourceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @grafana_organization@ Resource.
 --
@@ -409,4 +409,4 @@ instance P.HasViewers (OrganizationResource s) (TF.Attr s [TF.Attr s P.Text]) wh
                           } :: OrganizationResource s)
 
 instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Integer) where
-    computedOrgId x = TF.compute (TF.refKey x) "org_id"
+    computedOrgId x = TF.compute (TF.refKey x) "_computedOrgId"
