@@ -397,10 +397,10 @@ instance P.HasWebsiteUrl (TestResource s) (TF.Attr s P.Text) where
                           } :: TestResource s)
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 instance s ~ s' => P.HasComputedTestId (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedTestId x = TF.compute (TF.refKey x) "test_id"
+    computedTestId x = TF.compute (TF.refKey x) "_computedTestId"
 
 instance s ~ s' => P.HasComputedUptime (TF.Ref s' (TestResource s)) (TF.Attr s P.Double) where
-    computedUptime x = TF.compute (TF.refKey x) "uptime"
+    computedUptime x = TF.compute (TF.refKey x) "_computedUptime"
