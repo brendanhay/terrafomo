@@ -98,4 +98,4 @@ instance P.HasWorkingDir (Data s) (TF.Attr s P.Text) where
                           } :: Data s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (Data s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedResult x = TF.compute (TF.refKey x) "result"
+    computedResult x = TF.compute (TF.refKey x) "_computedResult"

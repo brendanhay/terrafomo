@@ -87,4 +87,4 @@ instance P.HasUrl (Data s) (TF.Attr s P.Text) where
                           } :: Data s)
 
 instance s ~ s' => P.HasComputedBody (TF.Ref s' (Data s)) (TF.Attr s P.Text) where
-    computedBody x = TF.compute (TF.refKey x) "body"
+    computedBody x = TF.compute (TF.refKey x) "_computedBody"

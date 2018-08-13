@@ -118,19 +118,19 @@ instance P.HasPrefix (IdResource s) (TF.Attr s P.Text) where
                           } :: IdResource s)
 
 instance s ~ s' => P.HasComputedB64 (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedB64 x = TF.compute (TF.refKey x) "b64"
+    computedB64 x = TF.compute (TF.refKey x) "_computedB64"
 
 instance s ~ s' => P.HasComputedB64Std (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedB64Std x = TF.compute (TF.refKey x) "b64_std"
+    computedB64Std x = TF.compute (TF.refKey x) "_computedB64Std"
 
 instance s ~ s' => P.HasComputedB64Url (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedB64Url x = TF.compute (TF.refKey x) "b64_url"
+    computedB64Url x = TF.compute (TF.refKey x) "_computedB64Url"
 
 instance s ~ s' => P.HasComputedDec (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedDec x = TF.compute (TF.refKey x) "dec"
+    computedDec x = TF.compute (TF.refKey x) "_computedDec"
 
 instance s ~ s' => P.HasComputedHex (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedHex x = TF.compute (TF.refKey x) "hex"
+    computedHex x = TF.compute (TF.refKey x) "_computedHex"
 
 -- | @random_integer@ Resource.
 --
@@ -197,7 +197,7 @@ instance P.HasSeed (IntegerResource s) (TF.Attr s P.Text) where
                           } :: IntegerResource s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (IntegerResource s)) (TF.Attr s P.Integer) where
-    computedResult x = TF.compute (TF.refKey x) "result"
+    computedResult x = TF.compute (TF.refKey x) "_computedResult"
 
 -- | @random_pet@ Resource.
 --
@@ -325,7 +325,7 @@ instance P.HasSeed (ShuffleResource s) (TF.Attr s P.Text) where
                           } :: ShuffleResource s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (ShuffleResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedResult x = TF.compute (TF.refKey x) "result"
+    computedResult x = TF.compute (TF.refKey x) "_computedResult"
 
 -- | @random_string@ Resource.
 --
@@ -468,7 +468,7 @@ instance P.HasUpper (StringResource s) (TF.Attr s P.Bool) where
                           } :: StringResource s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
-    computedResult x = TF.compute (TF.refKey x) "result"
+    computedResult x = TF.compute (TF.refKey x) "_computedResult"
 
 -- | @random_uuid@ Resource.
 --
@@ -500,4 +500,4 @@ instance P.HasKeepers (UuidResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P
                           } :: UuidResource s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (UuidResource s)) (TF.Attr s P.Text) where
-    computedResult x = TF.compute (TF.refKey x) "result"
+    computedResult x = TF.compute (TF.refKey x) "_computedResult"

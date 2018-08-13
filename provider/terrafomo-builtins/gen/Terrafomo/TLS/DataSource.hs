@@ -77,10 +77,10 @@ instance P.HasPrivateKeyPem (PublicKeyData s) (TF.Attr s P.Text) where
                           } :: PublicKeyData s)
 
 instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (PublicKeyData s)) (TF.Attr s P.Text) where
-    computedAlgorithm x = TF.compute (TF.refKey x) "algorithm"
+    computedAlgorithm x = TF.compute (TF.refKey x) "_computedAlgorithm"
 
 instance s ~ s' => P.HasComputedPublicKeyOpenssh (TF.Ref s' (PublicKeyData s)) (TF.Attr s P.Text) where
-    computedPublicKeyOpenssh x = TF.compute (TF.refKey x) "public_key_openssh"
+    computedPublicKeyOpenssh x = TF.compute (TF.refKey x) "_computedPublicKeyOpenssh"
 
 instance s ~ s' => P.HasComputedPublicKeyPem (TF.Ref s' (PublicKeyData s)) (TF.Attr s P.Text) where
-    computedPublicKeyPem x = TF.compute (TF.refKey x) "public_key_pem"
+    computedPublicKeyPem x = TF.compute (TF.refKey x) "_computedPublicKeyPem"

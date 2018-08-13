@@ -138,7 +138,7 @@ instance P.HasSubject (CertRequestResource s) (TF.Attr s [Subject s]) where
                           } :: CertRequestResource s)
 
 instance s ~ s' => P.HasComputedCertRequestPem (TF.Ref s' (CertRequestResource s)) (TF.Attr s P.Text) where
-    computedCertRequestPem x = TF.compute (TF.refKey x) "cert_request_pem"
+    computedCertRequestPem x = TF.compute (TF.refKey x) "_computedCertRequestPem"
 
 -- | @tls_locally_signed_cert@ Resource.
 --
@@ -262,13 +262,13 @@ instance P.HasValidityPeriodHours (LocallySignedCertResource s) (TF.Attr s P.Int
                           } :: LocallySignedCertResource s)
 
 instance s ~ s' => P.HasComputedCertPem (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedCertPem x = TF.compute (TF.refKey x) "cert_pem"
+    computedCertPem x = TF.compute (TF.refKey x) "_computedCertPem"
 
 instance s ~ s' => P.HasComputedValidityEndTime (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedValidityEndTime x = TF.compute (TF.refKey x) "validity_end_time"
+    computedValidityEndTime x = TF.compute (TF.refKey x) "_computedValidityEndTime"
 
 instance s ~ s' => P.HasComputedValidityStartTime (TF.Ref s' (LocallySignedCertResource s)) (TF.Attr s P.Text) where
-    computedValidityStartTime x = TF.compute (TF.refKey x) "validity_start_time"
+    computedValidityStartTime x = TF.compute (TF.refKey x) "_computedValidityStartTime"
 
 -- | @tls_private_key@ Resource.
 --
@@ -326,13 +326,13 @@ instance P.HasRsaBits (PrivateKeyResource s) (TF.Attr s P.Integer) where
                           } :: PrivateKeyResource s)
 
 instance s ~ s' => P.HasComputedPrivateKeyPem (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
-    computedPrivateKeyPem x = TF.compute (TF.refKey x) "private_key_pem"
+    computedPrivateKeyPem x = TF.compute (TF.refKey x) "_computedPrivateKeyPem"
 
 instance s ~ s' => P.HasComputedPublicKeyOpenssh (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
-    computedPublicKeyOpenssh x = TF.compute (TF.refKey x) "public_key_openssh"
+    computedPublicKeyOpenssh x = TF.compute (TF.refKey x) "_computedPublicKeyOpenssh"
 
 instance s ~ s' => P.HasComputedPublicKeyPem (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
-    computedPublicKeyPem x = TF.compute (TF.refKey x) "public_key_pem"
+    computedPublicKeyPem x = TF.compute (TF.refKey x) "_computedPublicKeyPem"
 
 -- | @tls_self_signed_cert@ Resource.
 --
@@ -466,10 +466,10 @@ instance P.HasValidityPeriodHours (SelfSignedCertResource s) (TF.Attr s P.Intege
                           } :: SelfSignedCertResource s)
 
 instance s ~ s' => P.HasComputedCertPem (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedCertPem x = TF.compute (TF.refKey x) "cert_pem"
+    computedCertPem x = TF.compute (TF.refKey x) "_computedCertPem"
 
 instance s ~ s' => P.HasComputedValidityEndTime (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedValidityEndTime x = TF.compute (TF.refKey x) "validity_end_time"
+    computedValidityEndTime x = TF.compute (TF.refKey x) "_computedValidityEndTime"
 
 instance s ~ s' => P.HasComputedValidityStartTime (TF.Ref s' (SelfSignedCertResource s)) (TF.Attr s P.Text) where
-    computedValidityStartTime x = TF.compute (TF.refKey x) "validity_start_time"
+    computedValidityStartTime x = TF.compute (TF.refKey x) "_computedValidityStartTime"

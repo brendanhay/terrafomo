@@ -102,7 +102,7 @@ instance P.HasPart (CloudinitConfigData s) (TF.Attr s [Part s]) where
                           } :: CloudinitConfigData s)
 
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (CloudinitConfigData s)) (TF.Attr s P.Text) where
-    computedRendered x = TF.compute (TF.refKey x) "rendered"
+    computedRendered x = TF.compute (TF.refKey x) "_computedRendered"
 
 -- | @template_file@ DataSource.
 --
@@ -167,4 +167,4 @@ instance P.HasVars (FileData s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
                           } :: FileData s)
 
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
-    computedRendered x = TF.compute (TF.refKey x) "rendered"
+    computedRendered x = TF.compute (TF.refKey x) "_computedRendered"

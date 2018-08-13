@@ -41,6 +41,7 @@ import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.TLS.Lens  as P
+import qualified Terrafomo.TLS.Types as P
 
 -- | The @TLS@ Terraform provider configuration.
 --
@@ -62,7 +63,7 @@ instance TF.IsSection Provider where
                   ])
 
 instance TF.IsProvider Provider where
-    type ProviderType Provider = "tls"
+    type ProviderType Provider = "provider"
 
 newProvider
     :: Provider

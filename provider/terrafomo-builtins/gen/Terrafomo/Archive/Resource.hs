@@ -185,16 +185,16 @@ instance P.HasType' (FileResource s) (TF.Attr s P.Text) where
                           } :: FileResource s)
 
 instance s ~ s' => P.HasComputedOutputBase64sha256 (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedOutputBase64sha256 x = TF.compute (TF.refKey x) "output_base64sha256"
+    computedOutputBase64sha256 x = TF.compute (TF.refKey x) "_computedOutputBase64sha256"
 
 instance s ~ s' => P.HasComputedOutputMd5 (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedOutputMd5 x = TF.compute (TF.refKey x) "output_md5"
+    computedOutputMd5 x = TF.compute (TF.refKey x) "_computedOutputMd5"
 
 instance s ~ s' => P.HasComputedOutputSha (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedOutputSha x = TF.compute (TF.refKey x) "output_sha"
+    computedOutputSha x = TF.compute (TF.refKey x) "_computedOutputSha"
 
 instance s ~ s' => P.HasComputedOutputSize (TF.Ref s' (FileResource s)) (TF.Attr s P.Integer) where
-    computedOutputSize x = TF.compute (TF.refKey x) "output_size"
+    computedOutputSize x = TF.compute (TF.refKey x) "_computedOutputSize"
 
 instance s ~ s' => P.HasComputedSource (TF.Ref s' (FileResource s)) (TF.Attr s [TF.Attr s (Source s)]) where
-    computedSource x = TF.compute (TF.refKey x) "source"
+    computedSource x = TF.compute (TF.refKey x) "_computedSource"

@@ -77,4 +77,4 @@ instance P.HasFilename (FileData s) (TF.Attr s P.Text) where
                           } :: FileData s)
 
 instance s ~ s' => P.HasComputedContent (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
-    computedContent x = TF.compute (TF.refKey x) "content"
+    computedContent x = TF.compute (TF.refKey x) "_computedContent"
