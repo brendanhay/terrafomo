@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -52,7 +53,6 @@ module Terrafomo.Consul.Resource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -60,7 +60,10 @@ import Terrafomo.Consul.Settings
 
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
 import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
@@ -72,6 +75,7 @@ import qualified Terrafomo.Consul.Types    as P
 import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Validator       as TF
 
 -- | @consul_agent_service@ Resource.
 --
@@ -89,41 +93,41 @@ data AgentServiceResource s = AgentServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AgentServiceResource s) where
-    toObject AgentServiceResource'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "tags" <$> TF.attribute _tags
-        ]
-
 agentServiceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (AgentServiceResource s)
 agentServiceResource _name =
-    TF.newResource "consul_agent_service" $
+    TF.newResource "consul_agent_service" TF.validator $
         AgentServiceResource'
             { _name = _name
             , _port = TF.Nil
             , _tags = TF.Nil
             }
 
+instance TF.IsObject (AgentServiceResource s) where
+    toObject AgentServiceResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (AgentServiceResource s) where
+    validator = P.mempty
+
 instance P.HasName (AgentServiceResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: AgentServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: AgentServiceResource s)
+               (\s a -> s { _name = a } :: AgentServiceResource s)
 
 instance P.HasPort (AgentServiceResource s) (TF.Attr s P.Integer) where
     port =
         P.lens (_port :: AgentServiceResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a
-                          } :: AgentServiceResource s)
+               (\s a -> s { _port = a } :: AgentServiceResource s)
 
 instance P.HasTags (AgentServiceResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
         P.lens (_tags :: AgentServiceResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a
-                          } :: AgentServiceResource s)
+               (\s a -> s { _tags = a } :: AgentServiceResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (AgentServiceResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
@@ -147,20 +151,12 @@ data CatalogEntryResource s = CatalogEntryResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CatalogEntryResource s) where
-    toObject CatalogEntryResource'{..} = catMaybes
-        [ TF.assign "address" <$> TF.attribute _address
-        , TF.assign "node" <$> TF.attribute _node
-        , TF.assign "service" <$> TF.attribute _service
-        , TF.assign "token" <$> TF.attribute _token
-        ]
-
 catalogEntryResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @node@ - 'P.node'
     -> TF.Resource P.Provider (CatalogEntryResource s)
 catalogEntryResource _address _node =
-    TF.newResource "consul_catalog_entry" $
+    TF.newResource "consul_catalog_entry" TF.validator $
         CatalogEntryResource'
             { _address = _address
             , _node = _node
@@ -168,29 +164,40 @@ catalogEntryResource _address _node =
             , _token = TF.Nil
             }
 
+instance TF.IsObject (CatalogEntryResource s) where
+    toObject CatalogEntryResource'{..} = P.catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "node" <$> TF.attribute _node
+        , TF.assign "service" <$> TF.attribute _service
+        , TF.assign "token" <$> TF.attribute _token
+        ]
+
+instance TF.IsValid (CatalogEntryResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_service"
+                  (_service
+                      :: CatalogEntryResource s -> TF.Attr s [TF.Attr s (Service s)])
+                  TF.validator
+
 instance P.HasAddress (CatalogEntryResource s) (TF.Attr s P.Text) where
     address =
         P.lens (_address :: CatalogEntryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a
-                          } :: CatalogEntryResource s)
+               (\s a -> s { _address = a } :: CatalogEntryResource s)
 
 instance P.HasNode (CatalogEntryResource s) (TF.Attr s P.Text) where
     node =
         P.lens (_node :: CatalogEntryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _node = a
-                          } :: CatalogEntryResource s)
+               (\s a -> s { _node = a } :: CatalogEntryResource s)
 
 instance P.HasService (CatalogEntryResource s) (TF.Attr s [TF.Attr s (Service s)]) where
     service =
         P.lens (_service :: CatalogEntryResource s -> TF.Attr s [TF.Attr s (Service s)])
-               (\s a -> s { _service = a
-                          } :: CatalogEntryResource s)
+               (\s a -> s { _service = a } :: CatalogEntryResource s)
 
 instance P.HasToken (CatalogEntryResource s) (TF.Attr s P.Text) where
     token =
         P.lens (_token :: CatalogEntryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a
-                          } :: CatalogEntryResource s)
+               (\s a -> s { _token = a } :: CatalogEntryResource s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (CatalogEntryResource s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
@@ -217,22 +224,13 @@ data IntentionResource s = IntentionResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IntentionResource s) where
-    toObject IntentionResource'{..} = catMaybes
-        [ TF.assign "action" <$> TF.attribute _action
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "destination_name" <$> TF.attribute _destinationName
-        , TF.assign "meta" <$> TF.attribute _meta
-        , TF.assign "source_name" <$> TF.attribute _sourceName
-        ]
-
 intentionResource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @destination_name@ - 'P.destinationName'
     -> TF.Attr s P.Text -- ^ @source_name@ - 'P.sourceName'
     -> TF.Resource P.Provider (IntentionResource s)
 intentionResource _action _destinationName _sourceName =
-    TF.newResource "consul_intention" $
+    TF.newResource "consul_intention" TF.validator $
         IntentionResource'
             { _action = _action
             , _description = TF.Nil
@@ -241,35 +239,42 @@ intentionResource _action _destinationName _sourceName =
             , _sourceName = _sourceName
             }
 
+instance TF.IsObject (IntentionResource s) where
+    toObject IntentionResource'{..} = P.catMaybes
+        [ TF.assign "action" <$> TF.attribute _action
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "destination_name" <$> TF.attribute _destinationName
+        , TF.assign "meta" <$> TF.attribute _meta
+        , TF.assign "source_name" <$> TF.attribute _sourceName
+        ]
+
+instance TF.IsValid (IntentionResource s) where
+    validator = P.mempty
+
 instance P.HasAction (IntentionResource s) (TF.Attr s P.Text) where
     action =
         P.lens (_action :: IntentionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _action = a
-                          } :: IntentionResource s)
+               (\s a -> s { _action = a } :: IntentionResource s)
 
 instance P.HasDescription (IntentionResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: IntentionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: IntentionResource s)
+               (\s a -> s { _description = a } :: IntentionResource s)
 
 instance P.HasDestinationName (IntentionResource s) (TF.Attr s P.Text) where
     destinationName =
         P.lens (_destinationName :: IntentionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _destinationName = a
-                          } :: IntentionResource s)
+               (\s a -> s { _destinationName = a } :: IntentionResource s)
 
 instance P.HasMeta (IntentionResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     meta =
         P.lens (_meta :: IntentionResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _meta = a
-                          } :: IntentionResource s)
+               (\s a -> s { _meta = a } :: IntentionResource s)
 
 instance P.HasSourceName (IntentionResource s) (TF.Attr s P.Text) where
     sourceName =
         P.lens (_sourceName :: IntentionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceName = a
-                          } :: IntentionResource s)
+               (\s a -> s { _sourceName = a } :: IntentionResource s)
 
 -- | @consul_key_prefix@ Resource.
 --
@@ -287,42 +292,42 @@ data KeyPrefixResource s = KeyPrefixResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KeyPrefixResource s) where
-    toObject KeyPrefixResource'{..} = catMaybes
-        [ TF.assign "path_prefix" <$> TF.attribute _pathPrefix
-        , TF.assign "subkeys" <$> TF.attribute _subkeys
-        , TF.assign "token" <$> TF.attribute _token
-        ]
-
 keyPrefixResource
     :: TF.Attr s P.Text -- ^ @path_prefix@ - 'P.pathPrefix'
     -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)) -- ^ @subkeys@ - 'P.subkeys'
     -> TF.Resource P.Provider (KeyPrefixResource s)
 keyPrefixResource _pathPrefix _subkeys =
-    TF.newResource "consul_key_prefix" $
+    TF.newResource "consul_key_prefix" TF.validator $
         KeyPrefixResource'
             { _pathPrefix = _pathPrefix
             , _subkeys = _subkeys
             , _token = TF.Nil
             }
 
+instance TF.IsObject (KeyPrefixResource s) where
+    toObject KeyPrefixResource'{..} = P.catMaybes
+        [ TF.assign "path_prefix" <$> TF.attribute _pathPrefix
+        , TF.assign "subkeys" <$> TF.attribute _subkeys
+        , TF.assign "token" <$> TF.attribute _token
+        ]
+
+instance TF.IsValid (KeyPrefixResource s) where
+    validator = P.mempty
+
 instance P.HasPathPrefix (KeyPrefixResource s) (TF.Attr s P.Text) where
     pathPrefix =
         P.lens (_pathPrefix :: KeyPrefixResource s -> TF.Attr s P.Text)
-               (\s a -> s { _pathPrefix = a
-                          } :: KeyPrefixResource s)
+               (\s a -> s { _pathPrefix = a } :: KeyPrefixResource s)
 
 instance P.HasSubkeys (KeyPrefixResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     subkeys =
         P.lens (_subkeys :: KeyPrefixResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _subkeys = a
-                          } :: KeyPrefixResource s)
+               (\s a -> s { _subkeys = a } :: KeyPrefixResource s)
 
 instance P.HasToken (KeyPrefixResource s) (TF.Attr s P.Text) where
     token =
         P.lens (_token :: KeyPrefixResource s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a
-                          } :: KeyPrefixResource s)
+               (\s a -> s { _token = a } :: KeyPrefixResource s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeyPrefixResource s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
@@ -340,32 +345,37 @@ data KeysResource s = KeysResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KeysResource s) where
-    toObject KeysResource'{..} = catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "token" <$> TF.attribute _token
-        ]
-
 keysResource
     :: TF.Resource P.Provider (KeysResource s)
 keysResource =
-    TF.newResource "consul_keys" $
+    TF.newResource "consul_keys" TF.validator $
         KeysResource'
             { _key = TF.Nil
             , _token = TF.Nil
             }
 
+instance TF.IsObject (KeysResource s) where
+    toObject KeysResource'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "token" <$> TF.attribute _token
+        ]
+
+instance TF.IsValid (KeysResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_key"
+                  (_key
+                      :: KeysResource s -> TF.Attr s [TF.Attr s (Key s)])
+                  TF.validator
+
 instance P.HasKey (KeysResource s) (TF.Attr s [TF.Attr s (Key s)]) where
     key =
         P.lens (_key :: KeysResource s -> TF.Attr s [TF.Attr s (Key s)])
-               (\s a -> s { _key = a
-                          } :: KeysResource s)
+               (\s a -> s { _key = a } :: KeysResource s)
 
 instance P.HasToken (KeysResource s) (TF.Attr s P.Text) where
     token =
         P.lens (_token :: KeysResource s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a
-                          } :: KeysResource s)
+               (\s a -> s { _token = a } :: KeysResource s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeysResource s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
@@ -389,42 +399,42 @@ data NodeResource s = NodeResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (NodeResource s) where
-    toObject NodeResource'{..} = catMaybes
-        [ TF.assign "address" <$> TF.attribute _address
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "token" <$> TF.attribute _token
-        ]
-
 nodeResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (NodeResource s)
 nodeResource _address _name =
-    TF.newResource "consul_node" $
+    TF.newResource "consul_node" TF.validator $
         NodeResource'
             { _address = _address
             , _name = _name
             , _token = TF.Nil
             }
 
+instance TF.IsObject (NodeResource s) where
+    toObject NodeResource'{..} = P.catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "token" <$> TF.attribute _token
+        ]
+
+instance TF.IsValid (NodeResource s) where
+    validator = P.mempty
+
 instance P.HasAddress (NodeResource s) (TF.Attr s P.Text) where
     address =
         P.lens (_address :: NodeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a
-                          } :: NodeResource s)
+               (\s a -> s { _address = a } :: NodeResource s)
 
 instance P.HasName (NodeResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: NodeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: NodeResource s)
+               (\s a -> s { _name = a } :: NodeResource s)
 
 instance P.HasToken (NodeResource s) (TF.Attr s P.Text) where
     token =
         P.lens (_token :: NodeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a
-                          } :: NodeResource s)
+               (\s a -> s { _token = a } :: NodeResource s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
@@ -461,7 +471,7 @@ data PreparedQueryResource s = PreparedQueryResource'
     , _storedToken :: TF.Attr s P.Text
     -- ^ @stored_token@ - (Optional)
     --
-    , _tags        :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _tags        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
     , _template    :: TF.Attr s (Template s)
@@ -472,28 +482,12 @@ data PreparedQueryResource s = PreparedQueryResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (PreparedQueryResource s) where
-    toObject PreparedQueryResource'{..} = catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "dns" <$> TF.attribute _dns
-        , TF.assign "failover" <$> TF.attribute _failover
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "near" <$> TF.attribute _near
-        , TF.assign "only_passing" <$> TF.attribute _onlyPassing
-        , TF.assign "service" <$> TF.attribute _service
-        , TF.assign "session" <$> TF.attribute _session
-        , TF.assign "stored_token" <$> TF.attribute _storedToken
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "template" <$> TF.attribute _template
-        , TF.assign "token" <$> TF.attribute _token
-        ]
-
 preparedQueryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @service@ - 'P.service'
     -> TF.Resource P.Provider (PreparedQueryResource s)
 preparedQueryResource _name _service =
-    TF.newResource "consul_prepared_query" $
+    TF.newResource "consul_prepared_query" TF.validator $
         PreparedQueryResource'
             { _datacenter = TF.Nil
             , _dns = TF.Nil
@@ -509,77 +503,96 @@ preparedQueryResource _name _service =
             , _token = TF.Nil
             }
 
+instance TF.IsObject (PreparedQueryResource s) where
+    toObject PreparedQueryResource'{..} = P.catMaybes
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "dns" <$> TF.attribute _dns
+        , TF.assign "failover" <$> TF.attribute _failover
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "near" <$> TF.attribute _near
+        , TF.assign "only_passing" <$> TF.attribute _onlyPassing
+        , TF.assign "service" <$> TF.attribute _service
+        , TF.assign "session" <$> TF.attribute _session
+        , TF.assign "stored_token" <$> TF.attribute _storedToken
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "template" <$> TF.attribute _template
+        , TF.assign "token" <$> TF.attribute _token
+        ]
+
+instance TF.IsValid (PreparedQueryResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_dns"
+                  (_dns
+                      :: PreparedQueryResource s -> TF.Attr s (Dns s))
+                  TF.validator
+           P.<> TF.settingsValidator "_failover"
+                  (_failover
+                      :: PreparedQueryResource s -> TF.Attr s (Failover s))
+                  TF.validator
+           P.<> TF.settingsValidator "_template"
+                  (_template
+                      :: PreparedQueryResource s -> TF.Attr s (Template s))
+                  TF.validator
+
 instance P.HasDatacenter (PreparedQueryResource s) (TF.Attr s P.Text) where
     datacenter =
         P.lens (_datacenter :: PreparedQueryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenter = a
-                          } :: PreparedQueryResource s)
+               (\s a -> s { _datacenter = a } :: PreparedQueryResource s)
 
 instance P.HasDns (PreparedQueryResource s) (TF.Attr s (Dns s)) where
     dns =
         P.lens (_dns :: PreparedQueryResource s -> TF.Attr s (Dns s))
-               (\s a -> s { _dns = a
-                          } :: PreparedQueryResource s)
+               (\s a -> s { _dns = a } :: PreparedQueryResource s)
 
 instance P.HasFailover (PreparedQueryResource s) (TF.Attr s (Failover s)) where
     failover =
         P.lens (_failover :: PreparedQueryResource s -> TF.Attr s (Failover s))
-               (\s a -> s { _failover = a
-                          } :: PreparedQueryResource s)
+               (\s a -> s { _failover = a } :: PreparedQueryResource s)
 
 instance P.HasName (PreparedQueryResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: PreparedQueryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: PreparedQueryResource s)
+               (\s a -> s { _name = a } :: PreparedQueryResource s)
 
 instance P.HasNear (PreparedQueryResource s) (TF.Attr s P.Text) where
     near =
         P.lens (_near :: PreparedQueryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _near = a
-                          } :: PreparedQueryResource s)
+               (\s a -> s { _near = a } :: PreparedQueryResource s)
 
 instance P.HasOnlyPassing (PreparedQueryResource s) (TF.Attr s P.Bool) where
     onlyPassing =
         P.lens (_onlyPassing :: PreparedQueryResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _onlyPassing = a
-                          } :: PreparedQueryResource s)
+               (\s a -> s { _onlyPassing = a } :: PreparedQueryResource s)
 
 instance P.HasService (PreparedQueryResource s) (TF.Attr s P.Text) where
     service =
         P.lens (_service :: PreparedQueryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _service = a
-                          } :: PreparedQueryResource s)
+               (\s a -> s { _service = a } :: PreparedQueryResource s)
 
 instance P.HasSession (PreparedQueryResource s) (TF.Attr s P.Text) where
     session =
         P.lens (_session :: PreparedQueryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _session = a
-                          } :: PreparedQueryResource s)
+               (\s a -> s { _session = a } :: PreparedQueryResource s)
 
 instance P.HasStoredToken (PreparedQueryResource s) (TF.Attr s P.Text) where
     storedToken =
         P.lens (_storedToken :: PreparedQueryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _storedToken = a
-                          } :: PreparedQueryResource s)
+               (\s a -> s { _storedToken = a } :: PreparedQueryResource s)
 
-instance P.HasTags (PreparedQueryResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance P.HasTags (PreparedQueryResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
-        P.lens (_tags :: PreparedQueryResource s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _tags = a
-                          } :: PreparedQueryResource s)
+        P.lens (_tags :: PreparedQueryResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: PreparedQueryResource s)
 
 instance P.HasTemplate (PreparedQueryResource s) (TF.Attr s (Template s)) where
     template =
         P.lens (_template :: PreparedQueryResource s -> TF.Attr s (Template s))
-               (\s a -> s { _template = a
-                          } :: PreparedQueryResource s)
+               (\s a -> s { _template = a } :: PreparedQueryResource s)
 
 instance P.HasToken (PreparedQueryResource s) (TF.Attr s P.Text) where
     token =
         P.lens (_token :: PreparedQueryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a
-                          } :: PreparedQueryResource s)
+               (\s a -> s { _token = a } :: PreparedQueryResource s)
 
 -- | @consul_service@ Resource.
 --
@@ -600,20 +613,12 @@ data ServiceResource s = ServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ServiceResource s) where
-    toObject ServiceResource'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "node" <$> TF.attribute _node
-        , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "tags" <$> TF.attribute _tags
-        ]
-
 serviceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @node@ - 'P.node'
     -> TF.Resource P.Provider (ServiceResource s)
 serviceResource _name _node =
-    TF.newResource "consul_service" $
+    TF.newResource "consul_service" TF.validator $
         ServiceResource'
             { _name = _name
             , _node = _node
@@ -621,29 +626,36 @@ serviceResource _name _node =
             , _tags = TF.Nil
             }
 
+instance TF.IsObject (ServiceResource s) where
+    toObject ServiceResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "node" <$> TF.attribute _node
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
+
+instance TF.IsValid (ServiceResource s) where
+    validator = P.mempty
+
 instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ServiceResource s)
+               (\s a -> s { _name = a } :: ServiceResource s)
 
 instance P.HasNode (ServiceResource s) (TF.Attr s P.Text) where
     node =
         P.lens (_node :: ServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _node = a
-                          } :: ServiceResource s)
+               (\s a -> s { _node = a } :: ServiceResource s)
 
 instance P.HasPort (ServiceResource s) (TF.Attr s P.Integer) where
     port =
         P.lens (_port :: ServiceResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a
-                          } :: ServiceResource s)
+               (\s a -> s { _port = a } :: ServiceResource s)
 
 instance P.HasTags (ServiceResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
         P.lens (_tags :: ServiceResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a
-                          } :: ServiceResource s)
+               (\s a -> s { _tags = a } :: ServiceResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "_computedAddress"

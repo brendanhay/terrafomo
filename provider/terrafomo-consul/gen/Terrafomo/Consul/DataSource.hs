@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -60,7 +61,6 @@ module Terrafomo.Consul.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -68,7 +68,10 @@ import Terrafomo.Consul.Settings
 
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
 import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
@@ -80,6 +83,7 @@ import qualified Terrafomo.Consul.Types    as P
 import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Validator       as TF
 
 -- | @consul_agent_config@ DataSource.
 --
@@ -88,14 +92,17 @@ import qualified Terrafomo.Schema          as TF
 data AgentConfigData s = AgentConfigData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AgentConfigData s) where
-    toObject _ = []
-
 agentConfigData
     :: TF.DataSource P.Provider (AgentConfigData s)
 agentConfigData =
-    TF.newDataSource "consul_agent_config" $
+    TF.newDataSource "consul_agent_config" TF.validator $
         AgentConfigData'
+
+instance TF.IsObject (AgentConfigData s) where
+    toObject _ = []
+
+instance TF.IsValid (AgentConfigData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
@@ -122,14 +129,17 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (AgentConfigData s)) (TF.Attr
 data AgentSelfData s = AgentSelfData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AgentSelfData s) where
-    toObject _ = []
-
 agentSelfData
     :: TF.DataSource P.Provider (AgentSelfData s)
 agentSelfData =
-    TF.newDataSource "consul_agent_self" $
+    TF.newDataSource "consul_agent_self" TF.validator $
         AgentSelfData'
+
+instance TF.IsObject (AgentSelfData s) where
+    toObject _ = []
+
+instance TF.IsValid (AgentSelfData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedAclDatacenter (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
     computedAclDatacenter x = TF.compute (TF.refKey x) "_computedAclDatacenter"
@@ -357,24 +367,30 @@ data CatalogNodesData s = CatalogNodesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CatalogNodesData s) where
-    toObject CatalogNodesData'{..} = catMaybes
-        [ TF.assign "query_options" <$> TF.attribute _queryOptions
-        ]
-
 catalogNodesData
     :: TF.DataSource P.Provider (CatalogNodesData s)
 catalogNodesData =
-    TF.newDataSource "consul_catalog_nodes" $
+    TF.newDataSource "consul_catalog_nodes" TF.validator $
         CatalogNodesData'
             { _queryOptions = TF.Nil
             }
 
+instance TF.IsObject (CatalogNodesData s) where
+    toObject CatalogNodesData'{..} = P.catMaybes
+        [ TF.assign "query_options" <$> TF.attribute _queryOptions
+        ]
+
+instance TF.IsValid (CatalogNodesData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_queryOptions"
+                  (_queryOptions
+                      :: CatalogNodesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+                  TF.validator
+
 instance P.HasQueryOptions (CatalogNodesData s) (TF.Attr s [TF.Attr s (QueryOptions s)]) where
     queryOptions =
         P.lens (_queryOptions :: CatalogNodesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
-               (\s a -> s { _queryOptions = a
-                          } :: CatalogNodesData s)
+               (\s a -> s { _queryOptions = a } :: CatalogNodesData s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (CatalogNodesData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
@@ -385,7 +401,7 @@ instance s ~ s' => P.HasComputedNodeIds (TF.Ref s' (CatalogNodesData s)) (TF.Att
 instance s ~ s' => P.HasComputedNodeNames (TF.Ref s' (CatalogNodesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNodeNames x = TF.compute (TF.refKey x) "_computedNodeNames"
 
-instance s ~ s' => P.HasComputedNodes (TF.Ref s' (CatalogNodesData s)) (TF.Attr s [Nodes s]) where
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (CatalogNodesData s)) (TF.Attr s [TF.Attr s (Nodes s)]) where
     computedNodes x = TF.compute (TF.refKey x) "_computedNodes"
 
 -- | @consul_catalog_service@ DataSource.
@@ -407,19 +423,11 @@ data CatalogServiceData s = CatalogServiceData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CatalogServiceData s) where
-    toObject CatalogServiceData'{..} = catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "query_options" <$> TF.attribute _queryOptions
-        , TF.assign "tag" <$> TF.attribute _tag
-        ]
-
 catalogServiceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (CatalogServiceData s)
 catalogServiceData _name =
-    TF.newDataSource "consul_catalog_service" $
+    TF.newDataSource "consul_catalog_service" TF.validator $
         CatalogServiceData'
             { _datacenter = TF.Nil
             , _name = _name
@@ -427,31 +435,42 @@ catalogServiceData _name =
             , _tag = TF.Nil
             }
 
+instance TF.IsObject (CatalogServiceData s) where
+    toObject CatalogServiceData'{..} = P.catMaybes
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "query_options" <$> TF.attribute _queryOptions
+        , TF.assign "tag" <$> TF.attribute _tag
+        ]
+
+instance TF.IsValid (CatalogServiceData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_queryOptions"
+                  (_queryOptions
+                      :: CatalogServiceData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+                  TF.validator
+
 instance P.HasDatacenter (CatalogServiceData s) (TF.Attr s P.Text) where
     datacenter =
         P.lens (_datacenter :: CatalogServiceData s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenter = a
-                          } :: CatalogServiceData s)
+               (\s a -> s { _datacenter = a } :: CatalogServiceData s)
 
 instance P.HasName (CatalogServiceData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CatalogServiceData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: CatalogServiceData s)
+               (\s a -> s { _name = a } :: CatalogServiceData s)
 
 instance P.HasQueryOptions (CatalogServiceData s) (TF.Attr s [TF.Attr s (QueryOptions s)]) where
     queryOptions =
         P.lens (_queryOptions :: CatalogServiceData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
-               (\s a -> s { _queryOptions = a
-                          } :: CatalogServiceData s)
+               (\s a -> s { _queryOptions = a } :: CatalogServiceData s)
 
 instance P.HasTag (CatalogServiceData s) (TF.Attr s P.Text) where
     tag =
         P.lens (_tag :: CatalogServiceData s -> TF.Attr s P.Text)
-               (\s a -> s { _tag = a
-                          } :: CatalogServiceData s)
+               (\s a -> s { _tag = a } :: CatalogServiceData s)
 
-instance s ~ s' => P.HasComputedService (TF.Ref s' (CatalogServiceData s)) (TF.Attr s [Service s]) where
+instance s ~ s' => P.HasComputedService (TF.Ref s' (CatalogServiceData s)) (TF.Attr s [TF.Attr s (Service s)]) where
     computedService x = TF.compute (TF.refKey x) "_computedService"
 
 -- | @consul_catalog_services@ DataSource.
@@ -464,24 +483,30 @@ data CatalogServicesData s = CatalogServicesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CatalogServicesData s) where
-    toObject CatalogServicesData'{..} = catMaybes
-        [ TF.assign "query_options" <$> TF.attribute _queryOptions
-        ]
-
 catalogServicesData
     :: TF.DataSource P.Provider (CatalogServicesData s)
 catalogServicesData =
-    TF.newDataSource "consul_catalog_services" $
+    TF.newDataSource "consul_catalog_services" TF.validator $
         CatalogServicesData'
             { _queryOptions = TF.Nil
             }
 
+instance TF.IsObject (CatalogServicesData s) where
+    toObject CatalogServicesData'{..} = P.catMaybes
+        [ TF.assign "query_options" <$> TF.attribute _queryOptions
+        ]
+
+instance TF.IsValid (CatalogServicesData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_queryOptions"
+                  (_queryOptions
+                      :: CatalogServicesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+                  TF.validator
+
 instance P.HasQueryOptions (CatalogServicesData s) (TF.Attr s [TF.Attr s (QueryOptions s)]) where
     queryOptions =
         P.lens (_queryOptions :: CatalogServicesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
-               (\s a -> s { _queryOptions = a
-                          } :: CatalogServicesData s)
+               (\s a -> s { _queryOptions = a } :: CatalogServicesData s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (CatalogServicesData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
@@ -508,41 +533,45 @@ data KeyPrefixData s = KeyPrefixData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KeyPrefixData s) where
-    toObject KeyPrefixData'{..} = catMaybes
-        [ TF.assign "path_prefix" <$> TF.attribute _pathPrefix
-        , TF.assign "subkey" <$> TF.attribute _subkey
-        , TF.assign "token" <$> TF.attribute _token
-        ]
-
 keyPrefixData
     :: TF.Attr s P.Text -- ^ @path_prefix@ - 'P.pathPrefix'
     -> TF.DataSource P.Provider (KeyPrefixData s)
 keyPrefixData _pathPrefix =
-    TF.newDataSource "consul_key_prefix" $
+    TF.newDataSource "consul_key_prefix" TF.validator $
         KeyPrefixData'
             { _pathPrefix = _pathPrefix
             , _subkey = TF.Nil
             , _token = TF.Nil
             }
 
+instance TF.IsObject (KeyPrefixData s) where
+    toObject KeyPrefixData'{..} = P.catMaybes
+        [ TF.assign "path_prefix" <$> TF.attribute _pathPrefix
+        , TF.assign "subkey" <$> TF.attribute _subkey
+        , TF.assign "token" <$> TF.attribute _token
+        ]
+
+instance TF.IsValid (KeyPrefixData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_subkey"
+                  (_subkey
+                      :: KeyPrefixData s -> TF.Attr s [TF.Attr s (Subkey s)])
+                  TF.validator
+
 instance P.HasPathPrefix (KeyPrefixData s) (TF.Attr s P.Text) where
     pathPrefix =
         P.lens (_pathPrefix :: KeyPrefixData s -> TF.Attr s P.Text)
-               (\s a -> s { _pathPrefix = a
-                          } :: KeyPrefixData s)
+               (\s a -> s { _pathPrefix = a } :: KeyPrefixData s)
 
 instance P.HasSubkey (KeyPrefixData s) (TF.Attr s [TF.Attr s (Subkey s)]) where
     subkey =
         P.lens (_subkey :: KeyPrefixData s -> TF.Attr s [TF.Attr s (Subkey s)])
-               (\s a -> s { _subkey = a
-                          } :: KeyPrefixData s)
+               (\s a -> s { _subkey = a } :: KeyPrefixData s)
 
 instance P.HasToken (KeyPrefixData s) (TF.Attr s P.Text) where
     token =
         P.lens (_token :: KeyPrefixData s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a
-                          } :: KeyPrefixData s)
+               (\s a -> s { _token = a } :: KeyPrefixData s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeyPrefixData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
@@ -566,32 +595,37 @@ data KeysData s = KeysData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KeysData s) where
-    toObject KeysData'{..} = catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "token" <$> TF.attribute _token
-        ]
-
 keysData
     :: TF.DataSource P.Provider (KeysData s)
 keysData =
-    TF.newDataSource "consul_keys" $
+    TF.newDataSource "consul_keys" TF.validator $
         KeysData'
             { _key = TF.Nil
             , _token = TF.Nil
             }
 
+instance TF.IsObject (KeysData s) where
+    toObject KeysData'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "token" <$> TF.attribute _token
+        ]
+
+instance TF.IsValid (KeysData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_key"
+                  (_key
+                      :: KeysData s -> TF.Attr s [TF.Attr s (Key s)])
+                  TF.validator
+
 instance P.HasKey (KeysData s) (TF.Attr s [TF.Attr s (Key s)]) where
     key =
         P.lens (_key :: KeysData s -> TF.Attr s [TF.Attr s (Key s)])
-               (\s a -> s { _key = a
-                          } :: KeysData s)
+               (\s a -> s { _key = a } :: KeysData s)
 
 instance P.HasToken (KeysData s) (TF.Attr s P.Text) where
     token =
         P.lens (_token :: KeysData s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a
-                          } :: KeysData s)
+               (\s a -> s { _token = a } :: KeysData s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeysData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
@@ -609,24 +643,30 @@ data NodesData s = NodesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (NodesData s) where
-    toObject NodesData'{..} = catMaybes
-        [ TF.assign "query_options" <$> TF.attribute _queryOptions
-        ]
-
 nodesData
     :: TF.DataSource P.Provider (NodesData s)
 nodesData =
-    TF.newDataSource "consul_nodes" $
+    TF.newDataSource "consul_nodes" TF.validator $
         NodesData'
             { _queryOptions = TF.Nil
             }
 
+instance TF.IsObject (NodesData s) where
+    toObject NodesData'{..} = P.catMaybes
+        [ TF.assign "query_options" <$> TF.attribute _queryOptions
+        ]
+
+instance TF.IsValid (NodesData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_queryOptions"
+                  (_queryOptions
+                      :: NodesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+                  TF.validator
+
 instance P.HasQueryOptions (NodesData s) (TF.Attr s [TF.Attr s (QueryOptions s)]) where
     queryOptions =
         P.lens (_queryOptions :: NodesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
-               (\s a -> s { _queryOptions = a
-                          } :: NodesData s)
+               (\s a -> s { _queryOptions = a } :: NodesData s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (NodesData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
@@ -637,7 +677,7 @@ instance s ~ s' => P.HasComputedNodeIds (TF.Ref s' (NodesData s)) (TF.Attr s [TF
 instance s ~ s' => P.HasComputedNodeNames (TF.Ref s' (NodesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNodeNames x = TF.compute (TF.refKey x) "_computedNodeNames"
 
-instance s ~ s' => P.HasComputedNodes (TF.Ref s' (NodesData s)) (TF.Attr s [Nodes s]) where
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (NodesData s)) (TF.Attr s [TF.Attr s (Nodes s)]) where
     computedNodes x = TF.compute (TF.refKey x) "_computedNodes"
 
 -- | @consul_service@ DataSource.
@@ -659,19 +699,11 @@ data ServiceData s = ServiceData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ServiceData s) where
-    toObject ServiceData'{..} = catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "query_options" <$> TF.attribute _queryOptions
-        , TF.assign "tag" <$> TF.attribute _tag
-        ]
-
 serviceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ServiceData s)
 serviceData _name =
-    TF.newDataSource "consul_service" $
+    TF.newDataSource "consul_service" TF.validator $
         ServiceData'
             { _datacenter = TF.Nil
             , _name = _name
@@ -679,31 +711,42 @@ serviceData _name =
             , _tag = TF.Nil
             }
 
+instance TF.IsObject (ServiceData s) where
+    toObject ServiceData'{..} = P.catMaybes
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "query_options" <$> TF.attribute _queryOptions
+        , TF.assign "tag" <$> TF.attribute _tag
+        ]
+
+instance TF.IsValid (ServiceData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_queryOptions"
+                  (_queryOptions
+                      :: ServiceData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+                  TF.validator
+
 instance P.HasDatacenter (ServiceData s) (TF.Attr s P.Text) where
     datacenter =
         P.lens (_datacenter :: ServiceData s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenter = a
-                          } :: ServiceData s)
+               (\s a -> s { _datacenter = a } :: ServiceData s)
 
 instance P.HasName (ServiceData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ServiceData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ServiceData s)
+               (\s a -> s { _name = a } :: ServiceData s)
 
 instance P.HasQueryOptions (ServiceData s) (TF.Attr s [TF.Attr s (QueryOptions s)]) where
     queryOptions =
         P.lens (_queryOptions :: ServiceData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
-               (\s a -> s { _queryOptions = a
-                          } :: ServiceData s)
+               (\s a -> s { _queryOptions = a } :: ServiceData s)
 
 instance P.HasTag (ServiceData s) (TF.Attr s P.Text) where
     tag =
         P.lens (_tag :: ServiceData s -> TF.Attr s P.Text)
-               (\s a -> s { _tag = a
-                          } :: ServiceData s)
+               (\s a -> s { _tag = a } :: ServiceData s)
 
-instance s ~ s' => P.HasComputedService (TF.Ref s' (ServiceData s)) (TF.Attr s [Service s]) where
+instance s ~ s' => P.HasComputedService (TF.Ref s' (ServiceData s)) (TF.Attr s [TF.Attr s (Service s)]) where
     computedService x = TF.compute (TF.refKey x) "_computedService"
 
 -- | @consul_services@ DataSource.
@@ -716,24 +759,30 @@ data ServicesData s = ServicesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ServicesData s) where
-    toObject ServicesData'{..} = catMaybes
-        [ TF.assign "query_options" <$> TF.attribute _queryOptions
-        ]
-
 servicesData
     :: TF.DataSource P.Provider (ServicesData s)
 servicesData =
-    TF.newDataSource "consul_services" $
+    TF.newDataSource "consul_services" TF.validator $
         ServicesData'
             { _queryOptions = TF.Nil
             }
 
+instance TF.IsObject (ServicesData s) where
+    toObject ServicesData'{..} = P.catMaybes
+        [ TF.assign "query_options" <$> TF.attribute _queryOptions
+        ]
+
+instance TF.IsValid (ServicesData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_queryOptions"
+                  (_queryOptions
+                      :: ServicesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+                  TF.validator
+
 instance P.HasQueryOptions (ServicesData s) (TF.Attr s [TF.Attr s (QueryOptions s)]) where
     queryOptions =
         P.lens (_queryOptions :: ServicesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
-               (\s a -> s { _queryOptions = a
-                          } :: ServicesData s)
+               (\s a -> s { _queryOptions = a } :: ServicesData s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ServicesData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"

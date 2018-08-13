@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.Consul.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.Consul.Settings
 
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
@@ -42,6 +45,7 @@ import qualified Terrafomo.Consul.Types as P
 import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Provider     as TF
+import qualified Terrafomo.Validator    as TF
 
 -- | The @Consul@ Terraform provider configuration.
 --
@@ -77,30 +81,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "address" <$> _address
-                  , TF.assign "ca_file" <$> _caFile
-                  , TF.assign "cert_file" <$> _certFile
-                  , TF.assign "datacenter" <$> _datacenter
-                  , TF.assign "http_auth" <$> _httpAuth
-                  , P.Just $ TF.assign "insecure_https" _insecureHttps
-                  , TF.assign "key_file" <$> _keyFile
-                  , TF.assign "scheme" <$> _scheme
-                  , TF.assign "token" <$> _token
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: Provider
 newProvider =
@@ -116,56 +96,74 @@ newProvider =
         , _token = P.Nothing
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "address" <$> _address
+                  , TF.assign "ca_file" <$> _caFile
+                  , TF.assign "cert_file" <$> _certFile
+                  , TF.assign "datacenter" <$> _datacenter
+                  , TF.assign "http_auth" <$> _httpAuth
+                  , P.Just $ TF.assign "insecure_https" _insecureHttps
+                  , TF.assign "key_file" <$> _keyFile
+                  , TF.assign "scheme" <$> _scheme
+                  , TF.assign "token" <$> _token
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
 instance P.HasAddress (Provider) (P.Maybe P.Text) where
     address =
         P.lens (_address :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _address = a
-                          } :: Provider)
+               (\s a -> s { _address = a } :: Provider)
 
 instance P.HasCaFile (Provider) (P.Maybe P.Text) where
     caFile =
         P.lens (_caFile :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _caFile = a
-                          } :: Provider)
+               (\s a -> s { _caFile = a } :: Provider)
 
 instance P.HasCertFile (Provider) (P.Maybe P.Text) where
     certFile =
         P.lens (_certFile :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _certFile = a
-                          } :: Provider)
+               (\s a -> s { _certFile = a } :: Provider)
 
 instance P.HasDatacenter (Provider) (P.Maybe P.Text) where
     datacenter =
         P.lens (_datacenter :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _datacenter = a
-                          } :: Provider)
+               (\s a -> s { _datacenter = a } :: Provider)
 
 instance P.HasHttpAuth (Provider) (P.Maybe P.Text) where
     httpAuth =
         P.lens (_httpAuth :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _httpAuth = a
-                          } :: Provider)
+               (\s a -> s { _httpAuth = a } :: Provider)
 
 instance P.HasInsecureHttps (Provider) (P.Bool) where
     insecureHttps =
         P.lens (_insecureHttps :: Provider -> P.Bool)
-               (\s a -> s { _insecureHttps = a
-                          } :: Provider)
+               (\s a -> s { _insecureHttps = a } :: Provider)
 
 instance P.HasKeyFile (Provider) (P.Maybe P.Text) where
     keyFile =
         P.lens (_keyFile :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _keyFile = a
-                          } :: Provider)
+               (\s a -> s { _keyFile = a } :: Provider)
 
 instance P.HasScheme (Provider) (P.Maybe P.Text) where
     scheme =
         P.lens (_scheme :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _scheme = a
-                          } :: Provider)
+               (\s a -> s { _scheme = a } :: Provider)
 
 instance P.HasToken (Provider) (P.Maybe P.Text) where
     token =
         P.lens (_token :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _token = a
-                          } :: Provider)
+               (\s a -> s { _token = a } :: Provider)

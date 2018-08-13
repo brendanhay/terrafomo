@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -92,13 +93,15 @@ module Terrafomo.Consul.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
@@ -108,20 +111,24 @@ import qualified Terrafomo.Consul.Lens  as P
 import qualified Terrafomo.Consul.Types as P
 import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Validator    as TF
 
 -- | @telemetry@ nested settings.
 data Telemetry s = Telemetry'
     deriving (P.Show, P.Eq, P.Generic)
+
+newTelemetry
+    :: Telemetry s
+newTelemetry =
+    Telemetry'
 
 instance P.Hashable  (Telemetry s)
 instance TF.IsValue  (Telemetry s)
 instance TF.IsObject (Telemetry s) where
     toObject Telemetry' = []
 
-newTelemetry
-    :: Telemetry s
-newTelemetry =
-    Telemetry'
+instance TF.IsValid (Telemetry s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedCirconusApiApp (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
     computedCirconusApiApp x = TF.compute (TF.refKey x) "_computedCirconusApiApp"
@@ -208,20 +215,6 @@ data QueryOptions s = QueryOptions'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (QueryOptions s)
-instance TF.IsValue  (QueryOptions s)
-instance TF.IsObject (QueryOptions s) where
-    toObject QueryOptions'{..} = catMaybes
-        [ TF.assign "allow_stale" <$> TF.attribute _allowStale
-        , TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "near" <$> TF.attribute _near
-        , TF.assign "node_meta" <$> TF.attribute _nodeMeta
-        , TF.assign "require_consistent" <$> TF.attribute _requireConsistent
-        , TF.assign "token" <$> TF.attribute _token
-        , TF.assign "wait_index" <$> TF.attribute _waitIndex
-        , TF.assign "wait_time" <$> TF.attribute _waitTime
-        ]
-
 newQueryOptions
     :: QueryOptions s
 newQueryOptions =
@@ -236,67 +229,79 @@ newQueryOptions =
         , _waitTime = TF.Nil
         }
 
+instance P.Hashable  (QueryOptions s)
+instance TF.IsValue  (QueryOptions s)
+instance TF.IsObject (QueryOptions s) where
+    toObject QueryOptions'{..} = P.catMaybes
+        [ TF.assign "allow_stale" <$> TF.attribute _allowStale
+        , TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "near" <$> TF.attribute _near
+        , TF.assign "node_meta" <$> TF.attribute _nodeMeta
+        , TF.assign "require_consistent" <$> TF.attribute _requireConsistent
+        , TF.assign "token" <$> TF.attribute _token
+        , TF.assign "wait_index" <$> TF.attribute _waitIndex
+        , TF.assign "wait_time" <$> TF.attribute _waitTime
+        ]
+
+instance TF.IsValid (QueryOptions s) where
+    validator = P.mempty
+
 instance P.HasAllowStale (QueryOptions s) (TF.Attr s P.Bool) where
     allowStale =
         P.lens (_allowStale :: QueryOptions s -> TF.Attr s P.Bool)
-               (\s a -> s { _allowStale = a
-                          } :: QueryOptions s)
+               (\s a -> s { _allowStale = a } :: QueryOptions s)
 
 instance P.HasDatacenter (QueryOptions s) (TF.Attr s P.Text) where
     datacenter =
         P.lens (_datacenter :: QueryOptions s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenter = a
-                          } :: QueryOptions s)
+               (\s a -> s { _datacenter = a } :: QueryOptions s)
 
 instance P.HasNear (QueryOptions s) (TF.Attr s P.Text) where
     near =
         P.lens (_near :: QueryOptions s -> TF.Attr s P.Text)
-               (\s a -> s { _near = a
-                          } :: QueryOptions s)
+               (\s a -> s { _near = a } :: QueryOptions s)
 
 instance P.HasNodeMeta (QueryOptions s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     nodeMeta =
         P.lens (_nodeMeta :: QueryOptions s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _nodeMeta = a
-                          } :: QueryOptions s)
+               (\s a -> s { _nodeMeta = a } :: QueryOptions s)
 
 instance P.HasRequireConsistent (QueryOptions s) (TF.Attr s P.Bool) where
     requireConsistent =
         P.lens (_requireConsistent :: QueryOptions s -> TF.Attr s P.Bool)
-               (\s a -> s { _requireConsistent = a
-                          } :: QueryOptions s)
+               (\s a -> s { _requireConsistent = a } :: QueryOptions s)
 
 instance P.HasToken (QueryOptions s) (TF.Attr s P.Text) where
     token =
         P.lens (_token :: QueryOptions s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a
-                          } :: QueryOptions s)
+               (\s a -> s { _token = a } :: QueryOptions s)
 
 instance P.HasWaitIndex (QueryOptions s) (TF.Attr s P.Integer) where
     waitIndex =
         P.lens (_waitIndex :: QueryOptions s -> TF.Attr s P.Integer)
-               (\s a -> s { _waitIndex = a
-                          } :: QueryOptions s)
+               (\s a -> s { _waitIndex = a } :: QueryOptions s)
 
 instance P.HasWaitTime (QueryOptions s) (TF.Attr s P.Text) where
     waitTime =
         P.lens (_waitTime :: QueryOptions s -> TF.Attr s P.Text)
-               (\s a -> s { _waitTime = a
-                          } :: QueryOptions s)
+               (\s a -> s { _waitTime = a } :: QueryOptions s)
 
 -- | @service@ nested settings.
 data Service s = Service'
     deriving (P.Show, P.Eq, P.Generic)
+
+newService
+    :: Service s
+newService =
+    Service'
 
 instance P.Hashable  (Service s)
 instance TF.IsValue  (Service s)
 instance TF.IsObject (Service s) where
     toObject Service' = []
 
-newService
-    :: Service s
-newService =
-    Service'
+instance TF.IsValid (Service s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (Service s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
@@ -341,15 +346,18 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (Service s)) (TF.Attr s [TF.Attr
 data Performance s = Performance'
     deriving (P.Show, P.Eq, P.Generic)
 
+newPerformance
+    :: Performance s
+newPerformance =
+    Performance'
+
 instance P.Hashable  (Performance s)
 instance TF.IsValue  (Performance s)
 instance TF.IsObject (Performance s) where
     toObject Performance' = []
 
-newPerformance
-    :: Performance s
-newPerformance =
-    Performance'
+instance TF.IsValid (Performance s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedRaftMultiplier (TF.Ref s' (Performance s)) (TF.Attr s P.Text) where
     computedRaftMultiplier x = TF.compute (TF.refKey x) "_computedRaftMultiplier"
@@ -358,15 +366,18 @@ instance s ~ s' => P.HasComputedRaftMultiplier (TF.Ref s' (Performance s)) (TF.A
 data Addresses s = Addresses'
     deriving (P.Show, P.Eq, P.Generic)
 
+newAddresses
+    :: Addresses s
+newAddresses =
+    Addresses'
+
 instance P.Hashable  (Addresses s)
 instance TF.IsValue  (Addresses s)
 instance TF.IsObject (Addresses s) where
     toObject Addresses' = []
 
-newAddresses
-    :: Addresses s
-newAddresses =
-    Addresses'
+instance TF.IsValid (Addresses s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedDns (TF.Ref s' (Addresses s)) (TF.Attr s P.Text) where
     computedDns x = TF.compute (TF.refKey x) "_computedDns"
@@ -384,15 +395,18 @@ instance s ~ s' => P.HasComputedRpc (TF.Ref s' (Addresses s)) (TF.Attr s P.Text)
 data UnixSockets s = UnixSockets'
     deriving (P.Show, P.Eq, P.Generic)
 
+newUnixSockets
+    :: UnixSockets s
+newUnixSockets =
+    UnixSockets'
+
 instance P.Hashable  (UnixSockets s)
 instance TF.IsValue  (UnixSockets s)
 instance TF.IsObject (UnixSockets s) where
     toObject UnixSockets' = []
 
-newUnixSockets
-    :: UnixSockets s
-newUnixSockets =
-    UnixSockets'
+instance TF.IsValid (UnixSockets s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedGroup (TF.Ref s' (UnixSockets s)) (TF.Attr s P.Text) where
     computedGroup x = TF.compute (TF.refKey x) "_computedGroup"
@@ -407,15 +421,18 @@ instance s ~ s' => P.HasComputedUser (TF.Ref s' (UnixSockets s)) (TF.Attr s P.Te
 data RetryJoinGce s = RetryJoinGce'
     deriving (P.Show, P.Eq, P.Generic)
 
+newRetryJoinGce
+    :: RetryJoinGce s
+newRetryJoinGce =
+    RetryJoinGce'
+
 instance P.Hashable  (RetryJoinGce s)
 instance TF.IsValue  (RetryJoinGce s)
 instance TF.IsObject (RetryJoinGce s) where
     toObject RetryJoinGce' = []
 
-newRetryJoinGce
-    :: RetryJoinGce s
-newRetryJoinGce =
-    RetryJoinGce'
+instance TF.IsValid (RetryJoinGce s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedCredentialsFile (TF.Ref s' (RetryJoinGce s)) (TF.Attr s P.Text) where
     computedCredentialsFile x = TF.compute (TF.refKey x) "_computedCredentialsFile"
@@ -433,15 +450,18 @@ instance s ~ s' => P.HasComputedZonePattern (TF.Ref s' (RetryJoinGce s)) (TF.Att
 data RetryJoinEc2 s = RetryJoinEc2'
     deriving (P.Show, P.Eq, P.Generic)
 
+newRetryJoinEc2
+    :: RetryJoinEc2 s
+newRetryJoinEc2 =
+    RetryJoinEc2'
+
 instance P.Hashable  (RetryJoinEc2 s)
 instance TF.IsValue  (RetryJoinEc2 s)
 instance TF.IsObject (RetryJoinEc2 s) where
     toObject RetryJoinEc2' = []
 
-newRetryJoinEc2
-    :: RetryJoinEc2 s
-newRetryJoinEc2 =
-    RetryJoinEc2'
+instance TF.IsValid (RetryJoinEc2 s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (RetryJoinEc2 s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
@@ -462,14 +482,6 @@ data Failover s = Failover'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Failover s)
-instance TF.IsValue  (Failover s)
-instance TF.IsObject (Failover s) where
-    toObject Failover'{..} = catMaybes
-        [ TF.assign "datacenters" <$> TF.attribute _datacenters
-        , TF.assign "nearest_n" <$> TF.attribute _nearestN
-        ]
-
 newFailover
     :: Failover s
 newFailover =
@@ -478,17 +490,26 @@ newFailover =
         , _nearestN = TF.Nil
         }
 
+instance P.Hashable  (Failover s)
+instance TF.IsValue  (Failover s)
+instance TF.IsObject (Failover s) where
+    toObject Failover'{..} = P.catMaybes
+        [ TF.assign "datacenters" <$> TF.attribute _datacenters
+        , TF.assign "nearest_n" <$> TF.attribute _nearestN
+        ]
+
+instance TF.IsValid (Failover s) where
+    validator = P.mempty
+
 instance P.HasDatacenters (Failover s) (TF.Attr s [TF.Attr s P.Text]) where
     datacenters =
         P.lens (_datacenters :: Failover s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _datacenters = a
-                          } :: Failover s)
+               (\s a -> s { _datacenters = a } :: Failover s)
 
 instance P.HasNearestN (Failover s) (TF.Attr s P.Integer) where
     nearestN =
         P.lens (_nearestN :: Failover s -> TF.Attr s P.Integer)
-               (\s a -> s { _nearestN = a
-                          } :: Failover s)
+               (\s a -> s { _nearestN = a } :: Failover s)
 
 -- | @key@ nested settings.
 data Key s = Key'
@@ -503,15 +524,6 @@ data Key s = Key'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Key s)
-instance TF.IsValue  (Key s)
-instance TF.IsObject (Key s) where
-    toObject Key'{..} = catMaybes
-        [ TF.assign "default" <$> TF.attribute _default'
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "path" <$> TF.attribute _path
-        ]
-
 newKey
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -523,37 +535,49 @@ newKey _name _path =
         , _path = _path
         }
 
+instance P.Hashable  (Key s)
+instance TF.IsValue  (Key s)
+instance TF.IsObject (Key s) where
+    toObject Key'{..} = P.catMaybes
+        [ TF.assign "default" <$> TF.attribute _default'
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "path" <$> TF.attribute _path
+        ]
+
+instance TF.IsValid (Key s) where
+    validator = P.mempty
+
 instance P.HasDefault' (Key s) (TF.Attr s P.Text) where
     default' =
         P.lens (_default' :: Key s -> TF.Attr s P.Text)
-               (\s a -> s { _default' = a
-                          } :: Key s)
+               (\s a -> s { _default' = a } :: Key s)
 
 instance P.HasName (Key s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Key s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: Key s)
+               (\s a -> s { _name = a } :: Key s)
 
 instance P.HasPath (Key s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: Key s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a
-                          } :: Key s)
+               (\s a -> s { _path = a } :: Key s)
 
 -- | @ports@ nested settings.
 data Ports s = Ports'
     deriving (P.Show, P.Eq, P.Generic)
+
+newPorts
+    :: Ports s
+newPorts =
+    Ports'
 
 instance P.Hashable  (Ports s)
 instance TF.IsValue  (Ports s)
 instance TF.IsObject (Ports s) where
     toObject Ports' = []
 
-newPorts
-    :: Ports s
-newPorts =
-    Ports'
+instance TF.IsValid (Ports s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedDns (TF.Ref s' (Ports s)) (TF.Attr s P.Integer) where
     computedDns x = TF.compute (TF.refKey x) "_computedDns"
@@ -580,15 +604,18 @@ instance s ~ s' => P.HasComputedServer (TF.Ref s' (Ports s)) (TF.Attr s P.Intege
 data AdvertiseAddrs s = AdvertiseAddrs'
     deriving (P.Show, P.Eq, P.Generic)
 
+newAdvertiseAddrs
+    :: AdvertiseAddrs s
+newAdvertiseAddrs =
+    AdvertiseAddrs'
+
 instance P.Hashable  (AdvertiseAddrs s)
 instance TF.IsValue  (AdvertiseAddrs s)
 instance TF.IsObject (AdvertiseAddrs s) where
     toObject AdvertiseAddrs' = []
 
-newAdvertiseAddrs
-    :: AdvertiseAddrs s
-newAdvertiseAddrs =
-    AdvertiseAddrs'
+instance TF.IsValid (AdvertiseAddrs s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedRpc (TF.Ref s' (AdvertiseAddrs s)) (TF.Attr s P.Text) where
     computedRpc x = TF.compute (TF.refKey x) "_computedRpc"
@@ -609,14 +636,6 @@ data Template s = Template'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Template s)
-instance TF.IsValue  (Template s)
-instance TF.IsObject (Template s) where
-    toObject Template'{..} = catMaybes
-        [ TF.assign "regexp" <$> TF.attribute _regexp
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
 newTemplate
     :: TF.Attr s P.Text -- ^ @regexp@ - 'P.regexp'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -627,17 +646,26 @@ newTemplate _regexp _type' =
         , _type' = _type'
         }
 
+instance P.Hashable  (Template s)
+instance TF.IsValue  (Template s)
+instance TF.IsObject (Template s) where
+    toObject Template'{..} = P.catMaybes
+        [ TF.assign "regexp" <$> TF.attribute _regexp
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (Template s) where
+    validator = P.mempty
+
 instance P.HasRegexp (Template s) (TF.Attr s P.Text) where
     regexp =
         P.lens (_regexp :: Template s -> TF.Attr s P.Text)
-               (\s a -> s { _regexp = a
-                          } :: Template s)
+               (\s a -> s { _regexp = a } :: Template s)
 
 instance P.HasType' (Template s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: Template s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: Template s)
+               (\s a -> s { _type' = a } :: Template s)
 
 -- | @subkey@ nested settings.
 data Subkey s = Subkey'
@@ -652,15 +680,6 @@ data Subkey s = Subkey'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Subkey s)
-instance TF.IsValue  (Subkey s)
-instance TF.IsObject (Subkey s) where
-    toObject Subkey'{..} = catMaybes
-        [ TF.assign "default" <$> TF.attribute _default'
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "path" <$> TF.attribute _path
-        ]
-
 newSubkey
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -672,37 +691,49 @@ newSubkey _name _path =
         , _path = _path
         }
 
+instance P.Hashable  (Subkey s)
+instance TF.IsValue  (Subkey s)
+instance TF.IsObject (Subkey s) where
+    toObject Subkey'{..} = P.catMaybes
+        [ TF.assign "default" <$> TF.attribute _default'
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "path" <$> TF.attribute _path
+        ]
+
+instance TF.IsValid (Subkey s) where
+    validator = P.mempty
+
 instance P.HasDefault' (Subkey s) (TF.Attr s P.Text) where
     default' =
         P.lens (_default' :: Subkey s -> TF.Attr s P.Text)
-               (\s a -> s { _default' = a
-                          } :: Subkey s)
+               (\s a -> s { _default' = a } :: Subkey s)
 
 instance P.HasName (Subkey s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Subkey s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: Subkey s)
+               (\s a -> s { _name = a } :: Subkey s)
 
 instance P.HasPath (Subkey s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: Subkey s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a
-                          } :: Subkey s)
+               (\s a -> s { _path = a } :: Subkey s)
 
 -- | @nodes@ nested settings.
 data Nodes s = Nodes'
     deriving (P.Show, P.Eq, P.Generic)
+
+newNodes
+    :: Nodes s
+newNodes =
+    Nodes'
 
 instance P.Hashable  (Nodes s)
 instance TF.IsValue  (Nodes s)
 instance TF.IsObject (Nodes s) where
     toObject Nodes' = []
 
-newNodes
-    :: Nodes s
-newNodes =
-    Nodes'
+instance TF.IsValid (Nodes s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (Nodes s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
@@ -723,15 +754,18 @@ instance s ~ s' => P.HasComputedTaggedAddresses (TF.Ref s' (Nodes s)) (TF.Attr s
 data TaggedAddresses s = TaggedAddresses'
     deriving (P.Show, P.Eq, P.Generic)
 
+newTaggedAddresses
+    :: TaggedAddresses s
+newTaggedAddresses =
+    TaggedAddresses'
+
 instance P.Hashable  (TaggedAddresses s)
 instance TF.IsValue  (TaggedAddresses s)
 instance TF.IsObject (TaggedAddresses s) where
     toObject TaggedAddresses' = []
 
-newTaggedAddresses
-    :: TaggedAddresses s
-newTaggedAddresses =
-    TaggedAddresses'
+instance TF.IsValid (TaggedAddresses s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedLan (TF.Ref s' (TaggedAddresses s)) (TF.Attr s P.Text) where
     computedLan x = TF.compute (TF.refKey x) "_computedLan"
@@ -743,15 +777,18 @@ instance s ~ s' => P.HasComputedWan (TF.Ref s' (TaggedAddresses s)) (TF.Attr s P
 data Services s = Services'
     deriving (P.Show, P.Eq, P.Generic)
 
+newServices
+    :: Services s
+newServices =
+    Services'
+
 instance P.Hashable  (Services s)
 instance TF.IsValue  (Services s)
 instance TF.IsObject (Services s) where
     toObject Services' = []
 
-newServices
-    :: Services s
-newServices =
-    Services'
+instance TF.IsValid (Services s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (Services s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedTags x = TF.compute (TF.refKey x) "_computedTags"
@@ -760,15 +797,18 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (Services s)) (TF.Attr s [TF.Att
 data Dns s = Dns'
     deriving (P.Show, P.Eq, P.Generic)
 
+newDns
+    :: Dns s
+newDns =
+    Dns'
+
 instance P.Hashable  (Dns s)
 instance TF.IsValue  (Dns s)
 instance TF.IsObject (Dns s) where
     toObject Dns' = []
 
-newDns
-    :: Dns s
-newDns =
-    Dns'
+instance TF.IsValid (Dns s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedAllowStale (TF.Ref s' (Dns s)) (TF.Attr s P.Bool) where
     computedAllowStale x = TF.compute (TF.refKey x) "_computedAllowStale"
