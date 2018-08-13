@@ -1,61 +1,12 @@
 {
     "settings": [],
-    "arguments": [
-        {
-            "default": "_account",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The account for API operations."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"account\"",
-            "name": "account",
-            "method": "account",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAccount",
-            "optional": false,
-            "label": "_account"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "The DNSimple account email address."
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"email\" <$>",
-            "name": "email",
-            "method": "email",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasEmail",
-            "optional": true,
-            "label": "_email"
-        },
-        {
-            "default": "_token",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The API v2 token for API operations."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"token\"",
-            "name": "token",
-            "method": "token",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasToken",
-            "optional": false,
-            "label": "_token"
-        }
-    ],
     "dataSources": [],
     "resources": [
         {
+            "con": {
+                "smart": "recordResource",
+                "name": "RecordResource'"
+            },
             "arguments": [
                 {
                     "default": "_domain",
@@ -64,13 +15,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"domain\" <$> TF.attribute",
-                    "name": "domain",
+                    "name": "_domain",
                     "method": "domain",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDomain",
+                    "validate": false,
                     "optional": false,
-                    "label": "_domain"
+                    "original": "domain"
                 },
                 {
                     "default": "_name",
@@ -79,13 +31,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.value \"3600\"",
@@ -94,13 +47,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ttl\" <$> TF.attribute",
-                    "name": "ttl",
+                    "name": "_ttl",
                     "method": "ttl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTtl",
+                    "validate": false,
                     "optional": true,
-                    "label": "_ttl"
+                    "original": "ttl"
                 },
                 {
                     "default": "_type'",
@@ -109,13 +63,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 },
                 {
                     "default": "_value",
@@ -124,17 +79,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "value",
+                    "name": "_value",
                     "method": "value",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasValue",
+                    "validate": false,
                     "optional": false,
-                    "label": "_value"
+                    "original": "value"
                 }
             ],
-            "schema": "Resource",
             "name": "RecordResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -143,13 +99,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"domain_id\" <$> TF.attribute",
-                    "name": "domain_id",
+                    "name": "_computedDomainId",
                     "method": "computedDomainId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDomainId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedDomainId"
+                    "original": "domain_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -158,13 +115,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"hostname\" <$> TF.attribute",
-                    "name": "hostname",
+                    "name": "_computedHostname",
                     "method": "computedHostname",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHostname",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedHostname"
+                    "original": "hostname"
                 },
                 {
                     "default": "TF.Nil",
@@ -173,13 +131,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"priority\" <$> TF.attribute",
-                    "name": "priority",
+                    "name": "_computedPriority",
                     "method": "computedPriority",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPriority",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedPriority"
+                    "original": "priority"
                 }
             ],
             "parameters": [
@@ -190,13 +149,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"domain\" <$> TF.attribute",
-                    "name": "domain",
+                    "name": "_domain",
                     "method": "domain",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDomain",
+                    "validate": false,
                     "optional": false,
-                    "label": "_domain"
+                    "original": "domain"
                 },
                 {
                     "default": "_name",
@@ -205,13 +165,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_type'",
@@ -220,13 +181,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 },
                 {
                     "default": "_value",
@@ -235,19 +197,127 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "value",
+                    "name": "_value",
                     "method": "value",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasValue",
+                    "validate": false,
                     "optional": false,
-                    "label": "_value"
+                    "original": "value"
                 }
             ],
+            "conflicts": [],
             "type": "RecordResource s",
             "original": "dnsimple_record"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "_account",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The account for API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"account\"",
+                "name": "_account",
+                "method": "account",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAccount",
+                "validate": false,
+                "optional": false,
+                "original": "account"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "The DNSimple account email address."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"email\" <$>",
+                "name": "_email",
+                "method": "email",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasEmail",
+                "validate": false,
+                "optional": true,
+                "original": "email"
+            },
+            {
+                "default": "_token",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The API v2 token for API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"token\"",
+                "name": "_token",
+                "method": "token",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasToken",
+                "validate": false,
+                "optional": false,
+                "original": "token"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_account",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The account for API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"account\"",
+                "name": "_account",
+                "method": "account",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAccount",
+                "validate": false,
+                "optional": false,
+                "original": "account"
+            },
+            {
+                "default": "_token",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The API v2 token for API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"token\"",
+                "name": "_token",
+                "method": "token",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasToken",
+                "validate": false,
+                "optional": false,
+                "original": "token"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -257,43 +327,6 @@
         "microlens"
     ],
     "name": "DNSimple",
-    "parameters": [
-        {
-            "default": "_account",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The account for API operations."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"account\"",
-            "name": "account",
-            "method": "account",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAccount",
-            "optional": false,
-            "label": "_account"
-        },
-        {
-            "default": "_token",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The API v2 token for API operations."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"token\"",
-            "name": "token",
-            "method": "token",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasToken",
-            "optional": false,
-            "label": "_token"
-        }
-    ],
     "package": "terrafomo-dnsimple",
-    "type": "Provider",
     "original": "dnsimple"
 }
