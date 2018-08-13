@@ -125,8 +125,8 @@ instance P.HasName (ExtensionSchemaData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: ExtensionSchemaData s)
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ExtensionSchemaData s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (ExtensionSchemaData s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 -- | @pagerduty_schedule@ DataSource.
 --
@@ -190,7 +190,7 @@ instance P.HasName (TeamData s) (TF.Attr s P.Text) where
                           } :: TeamData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 -- | @pagerduty_user@ DataSource.
 --
@@ -223,7 +223,7 @@ instance P.HasEmail (UserData s) (TF.Attr s P.Text) where
                           } :: UserData s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @pagerduty_vendor@ DataSource.
 --
@@ -266,5 +266,5 @@ instance P.HasNameRegex (VendorData s) (TF.Attr s P.Text) where
                (\s a -> s { _nameRegex = a
                           } :: VendorData s)
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (VendorData s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (VendorData s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"

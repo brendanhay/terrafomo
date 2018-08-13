@@ -84,9 +84,9 @@ module Terrafomo.PagerDuty.Lens
     , HasComputedIntegrationEmail (..)
     , HasComputedVendor (..)
     , HasComputedIntegrationKey (..)
+    , HasComputedType (..)
     , HasComputedIncidentUrgencyRule (..)
     , HasComputedColor (..)
-    , HasComputedType' (..)
     , HasComputedEnabled (..)
     ) where
 
@@ -455,14 +455,14 @@ class HasComputedVendor a b | a -> b where
 class HasComputedIntegrationKey a b | a -> b where
     computedIntegrationKey :: a -> b
 
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
+
 class HasComputedIncidentUrgencyRule a b | a -> b where
     computedIncidentUrgencyRule :: a -> b
 
 class HasComputedColor a b | a -> b where
     computedColor :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedEnabled a b | a -> b where
     computedEnabled :: a -> b

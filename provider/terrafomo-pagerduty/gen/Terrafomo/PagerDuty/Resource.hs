@@ -256,10 +256,10 @@ instance P.HasExtensionSchema (ExtensionResource s) (TF.Attr s P.Text) where
                           } :: ExtensionResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 -- | @pagerduty_maintenance_window@ Resource.
 --
@@ -427,7 +427,7 @@ data ServiceResource s = ServiceResource'
     , _scheduledActions       :: TF.Attr s [ScheduledActions s]
     -- ^ @scheduled_actions@ - (Optional)
     --
-    , _supportHours           :: TF.Attr s (P.NonEmpty (SupportHours s))
+    , _supportHours           :: TF.Attr s (SupportHours s)
     -- ^ @support_hours@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -502,23 +502,23 @@ instance P.HasScheduledActions (ServiceResource s) (TF.Attr s [ScheduledActions 
                (\s a -> s { _scheduledActions = a
                           } :: ServiceResource s)
 
-instance P.HasSupportHours (ServiceResource s) (TF.Attr s (P.NonEmpty (SupportHours s))) where
+instance P.HasSupportHours (ServiceResource s) (TF.Attr s (SupportHours s)) where
     supportHours =
-        P.lens (_supportHours :: ServiceResource s -> TF.Attr s (P.NonEmpty (SupportHours s)))
+        P.lens (_supportHours :: ServiceResource s -> TF.Attr s (SupportHours s))
                (\s a -> s { _supportHours = a
                           } :: ServiceResource s)
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
+    computedCreatedAt x = TF.compute (TF.refKey x) "_computedCreatedAt"
 
-instance s ~ s' => P.HasComputedIncidentUrgencyRule (TF.Ref s' (ServiceResource s)) (TF.Attr s [IncidentUrgencyRule s]) where
-    computedIncidentUrgencyRule x = TF.compute (TF.refKey x) "incident_urgency_rule"
+instance s ~ s' => P.HasComputedIncidentUrgencyRule (TF.Ref s' (ServiceResource s)) (TF.Attr s (IncidentUrgencyRule s)) where
+    computedIncidentUrgencyRule x = TF.compute (TF.refKey x) "_computedIncidentUrgencyRule"
 
 instance s ~ s' => P.HasComputedLastIncidentTimestamp (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedLastIncidentTimestamp x = TF.compute (TF.refKey x) "last_incident_timestamp"
+    computedLastIncidentTimestamp x = TF.compute (TF.refKey x) "_computedLastIncidentTimestamp"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 -- | @pagerduty_service_integration@ Resource.
 --
@@ -562,19 +562,19 @@ instance P.HasService (ServiceIntegrationResource s) (TF.Attr s P.Text) where
                           } :: ServiceIntegrationResource s)
 
 instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
+    computedHtmlUrl x = TF.compute (TF.refKey x) "_computedHtmlUrl"
 
 instance s ~ s' => P.HasComputedIntegrationEmail (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedIntegrationEmail x = TF.compute (TF.refKey x) "integration_email"
+    computedIntegrationEmail x = TF.compute (TF.refKey x) "_computedIntegrationEmail"
 
 instance s ~ s' => P.HasComputedIntegrationKey (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedIntegrationKey x = TF.compute (TF.refKey x) "integration_key"
+    computedIntegrationKey x = TF.compute (TF.refKey x) "_computedIntegrationKey"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 instance s ~ s' => P.HasComputedVendor (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedVendor x = TF.compute (TF.refKey x) "vendor"
+    computedVendor x = TF.compute (TF.refKey x) "_computedVendor"
 
 -- | @pagerduty_team@ Resource.
 --
@@ -746,19 +746,19 @@ instance P.HasTeams (UserResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) 
                           } :: UserResource s)
 
 instance s ~ s' => P.HasComputedAvatarUrl (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedAvatarUrl x = TF.compute (TF.refKey x) "avatar_url"
+    computedAvatarUrl x = TF.compute (TF.refKey x) "_computedAvatarUrl"
 
 instance s ~ s' => P.HasComputedColor (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedColor x = TF.compute (TF.refKey x) "color"
+    computedColor x = TF.compute (TF.refKey x) "_computedColor"
 
 instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
+    computedHtmlUrl x = TF.compute (TF.refKey x) "_computedHtmlUrl"
 
 instance s ~ s' => P.HasComputedInvitationSent (TF.Ref s' (UserResource s)) (TF.Attr s P.Bool) where
-    computedInvitationSent x = TF.compute (TF.refKey x) "invitation_sent"
+    computedInvitationSent x = TF.compute (TF.refKey x) "_computedInvitationSent"
 
 instance s ~ s' => P.HasComputedTimeZone (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedTimeZone x = TF.compute (TF.refKey x) "time_zone"
+    computedTimeZone x = TF.compute (TF.refKey x) "_computedTimeZone"
 
 -- | @pagerduty_user_contact_method@ Resource.
 --
@@ -849,7 +849,7 @@ instance P.HasUserId (UserContactMethodResource s) (TF.Attr s P.Text) where
                           } :: UserContactMethodResource s)
 
 instance s ~ s' => P.HasComputedBlacklisted (TF.Ref s' (UserContactMethodResource s)) (TF.Attr s P.Bool) where
-    computedBlacklisted x = TF.compute (TF.refKey x) "blacklisted"
+    computedBlacklisted x = TF.compute (TF.refKey x) "_computedBlacklisted"
 
 instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (UserContactMethodResource s)) (TF.Attr s P.Bool) where
-    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+    computedEnabled x = TF.compute (TF.refKey x) "_computedEnabled"

@@ -62,6 +62,8 @@ module Terrafomo.PagerDuty.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
 import qualified Data.List.NonEmpty        as P
@@ -337,14 +339,14 @@ instance P.HasTarget (Rule s) (TF.Attr s [Target s]) where
                           } :: Rule s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Rule s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @incident_urgency_rule@ nested settings.
 data IncidentUrgencyRule s = IncidentUrgencyRule'
-    { _duringSupportHours  :: TF.Attr s (P.NonEmpty (DuringSupportHours s))
+    { _duringSupportHours  :: TF.Attr s (DuringSupportHours s)
     -- ^ @during_support_hours@ - (Optional)
     --
-    , _outsideSupportHours :: TF.Attr s (P.NonEmpty (OutsideSupportHours s))
+    , _outsideSupportHours :: TF.Attr s (OutsideSupportHours s)
     -- ^ @outside_support_hours@ - (Optional)
     --
     , _type'               :: TF.Attr s P.Text
@@ -376,15 +378,15 @@ newIncidentUrgencyRule _type' =
         , _urgency = TF.Nil
         }
 
-instance P.HasDuringSupportHours (IncidentUrgencyRule s) (TF.Attr s (P.NonEmpty (DuringSupportHours s))) where
+instance P.HasDuringSupportHours (IncidentUrgencyRule s) (TF.Attr s (DuringSupportHours s)) where
     duringSupportHours =
-        P.lens (_duringSupportHours :: IncidentUrgencyRule s -> TF.Attr s (P.NonEmpty (DuringSupportHours s)))
+        P.lens (_duringSupportHours :: IncidentUrgencyRule s -> TF.Attr s (DuringSupportHours s))
                (\s a -> s { _duringSupportHours = a
                           } :: IncidentUrgencyRule s)
 
-instance P.HasOutsideSupportHours (IncidentUrgencyRule s) (TF.Attr s (P.NonEmpty (OutsideSupportHours s))) where
+instance P.HasOutsideSupportHours (IncidentUrgencyRule s) (TF.Attr s (OutsideSupportHours s)) where
     outsideSupportHours =
-        P.lens (_outsideSupportHours :: IncidentUrgencyRule s -> TF.Attr s (P.NonEmpty (OutsideSupportHours s)))
+        P.lens (_outsideSupportHours :: IncidentUrgencyRule s -> TF.Attr s (OutsideSupportHours s))
                (\s a -> s { _outsideSupportHours = a
                           } :: IncidentUrgencyRule s)
 
@@ -525,10 +527,10 @@ instance P.HasUsers (Layer s) (TF.Attr s [TF.Attr s P.Text]) where
                           } :: Layer s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Layer s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Layer s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @target@ nested settings.
 data Target s = Target'
