@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -32,7 +33,6 @@ module Terrafomo.Vault.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -40,7 +40,10 @@ import Terrafomo.Vault.Settings
 
 import qualified Data.Hashable            as P
 import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as Map
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Maybe               as P
+import qualified Data.Monoid              as P
 import qualified Data.Text                as P
 import qualified GHC.Generics             as P
 import qualified Lens.Micro               as P
@@ -49,6 +52,7 @@ import qualified Terrafomo.Attribute      as TF
 import qualified Terrafomo.HCL            as TF
 import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.Schema         as TF
+import qualified Terrafomo.Validator      as TF
 import qualified Terrafomo.Vault.Lens     as P
 import qualified Terrafomo.Vault.Provider as P
 import qualified Terrafomo.Vault.Types    as P
@@ -68,33 +72,34 @@ data ApproleAuthBackendRoleIdData s = ApproleAuthBackendRoleIdData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ApproleAuthBackendRoleIdData s) where
-    toObject ApproleAuthBackendRoleIdData'{..} = catMaybes
-        [ TF.assign "backend" <$> TF.attribute _backend
-        , TF.assign "role_name" <$> TF.attribute _roleName
-        ]
-
 approleAuthBackendRoleIdData
     :: TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
     -> TF.DataSource P.Provider (ApproleAuthBackendRoleIdData s)
 approleAuthBackendRoleIdData _roleName =
-    TF.newDataSource "vault_approle_auth_backend_role_id" $
+    TF.newDataSource "vault_approle_auth_backend_role_id" TF.validator $
         ApproleAuthBackendRoleIdData'
             { _backend = TF.value "approle"
             , _roleName = _roleName
             }
 
+instance TF.IsObject (ApproleAuthBackendRoleIdData s) where
+    toObject ApproleAuthBackendRoleIdData'{..} = P.catMaybes
+        [ TF.assign "backend" <$> TF.attribute _backend
+        , TF.assign "role_name" <$> TF.attribute _roleName
+        ]
+
+instance TF.IsValid (ApproleAuthBackendRoleIdData s) where
+    validator = P.mempty
+
 instance P.HasBackend (ApproleAuthBackendRoleIdData s) (TF.Attr s P.Text) where
     backend =
         P.lens (_backend :: ApproleAuthBackendRoleIdData s -> TF.Attr s P.Text)
-               (\s a -> s { _backend = a
-                          } :: ApproleAuthBackendRoleIdData s)
+               (\s a -> s { _backend = a } :: ApproleAuthBackendRoleIdData s)
 
 instance P.HasRoleName (ApproleAuthBackendRoleIdData s) (TF.Attr s P.Text) where
     roleName =
         P.lens (_roleName :: ApproleAuthBackendRoleIdData s -> TF.Attr s P.Text)
-               (\s a -> s { _roleName = a
-                          } :: ApproleAuthBackendRoleIdData s)
+               (\s a -> s { _roleName = a } :: ApproleAuthBackendRoleIdData s)
 
 instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ApproleAuthBackendRoleIdData s)) (TF.Attr s P.Text) where
     computedRoleId x = TF.compute (TF.refKey x) "_computedRoleId"
@@ -119,42 +124,42 @@ data AwsAccessCredentialsData s = AwsAccessCredentialsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AwsAccessCredentialsData s) where
-    toObject AwsAccessCredentialsData'{..} = catMaybes
-        [ TF.assign "backend" <$> TF.attribute _backend
-        , TF.assign "role" <$> TF.attribute _role
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
 awsAccessCredentialsData
     :: TF.Attr s P.Text -- ^ @backend@ - 'P.backend'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> TF.DataSource P.Provider (AwsAccessCredentialsData s)
 awsAccessCredentialsData _backend _role =
-    TF.newDataSource "vault_aws_access_credentials" $
+    TF.newDataSource "vault_aws_access_credentials" TF.validator $
         AwsAccessCredentialsData'
             { _backend = _backend
             , _role = _role
             , _type' = TF.value "creds"
             }
 
+instance TF.IsObject (AwsAccessCredentialsData s) where
+    toObject AwsAccessCredentialsData'{..} = P.catMaybes
+        [ TF.assign "backend" <$> TF.attribute _backend
+        , TF.assign "role" <$> TF.attribute _role
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (AwsAccessCredentialsData s) where
+    validator = P.mempty
+
 instance P.HasBackend (AwsAccessCredentialsData s) (TF.Attr s P.Text) where
     backend =
         P.lens (_backend :: AwsAccessCredentialsData s -> TF.Attr s P.Text)
-               (\s a -> s { _backend = a
-                          } :: AwsAccessCredentialsData s)
+               (\s a -> s { _backend = a } :: AwsAccessCredentialsData s)
 
 instance P.HasRole (AwsAccessCredentialsData s) (TF.Attr s P.Text) where
     role =
         P.lens (_role :: AwsAccessCredentialsData s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a
-                          } :: AwsAccessCredentialsData s)
+               (\s a -> s { _role = a } :: AwsAccessCredentialsData s)
 
 instance P.HasType' (AwsAccessCredentialsData s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: AwsAccessCredentialsData s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: AwsAccessCredentialsData s)
+               (\s a -> s { _type' = a } :: AwsAccessCredentialsData s)
 
 instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
     computedAccessKey x = TF.compute (TF.refKey x) "_computedAccessKey"
@@ -188,25 +193,27 @@ data GenericSecretData s = GenericSecretData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (GenericSecretData s) where
-    toObject GenericSecretData'{..} = catMaybes
-        [ TF.assign "path" <$> TF.attribute _path
-        ]
-
 genericSecretData
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> TF.DataSource P.Provider (GenericSecretData s)
 genericSecretData _path =
-    TF.newDataSource "vault_generic_secret" $
+    TF.newDataSource "vault_generic_secret" TF.validator $
         GenericSecretData'
             { _path = _path
             }
 
+instance TF.IsObject (GenericSecretData s) where
+    toObject GenericSecretData'{..} = P.catMaybes
+        [ TF.assign "path" <$> TF.attribute _path
+        ]
+
+instance TF.IsValid (GenericSecretData s) where
+    validator = P.mempty
+
 instance P.HasPath (GenericSecretData s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: GenericSecretData s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a
-                          } :: GenericSecretData s)
+               (\s a -> s { _path = a } :: GenericSecretData s)
 
 instance s ~ s' => P.HasComputedData (TF.Ref s' (GenericSecretData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedData x = TF.compute (TF.refKey x) "_computedData"
