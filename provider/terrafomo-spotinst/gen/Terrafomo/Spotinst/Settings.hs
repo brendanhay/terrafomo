@@ -142,6 +142,8 @@ module Terrafomo.Spotinst.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable            as P
 import qualified Data.HashMap.Strict      as P
 import qualified Data.List.NonEmpty       as P
@@ -240,7 +242,7 @@ instance P.HasSecondaryPrivateIpAddressCount (NetworkInterface s) (TF.Attr s P.T
                           } :: NetworkInterface s)
 
 instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Bool) where
-    computedDeleteOnTermination x = TF.compute (TF.refKey x) "delete_on_termination"
+    computedDeleteOnTermination x = TF.compute (TF.refKey x) "_computedDeleteOnTermination"
 
 -- | @integration_codedeploy@ nested settings.
 data IntegrationCodedeploy s = IntegrationCodedeploy'
@@ -407,13 +409,13 @@ instance P.HasVolumeSize (EbsBlockDevice s) (TF.Attr s P.Integer) where
                           } :: EbsBlockDevice s)
 
 instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (EbsBlockDevice s)) (TF.Attr s P.Bool) where
-    computedDeleteOnTermination x = TF.compute (TF.refKey x) "delete_on_termination"
+    computedDeleteOnTermination x = TF.compute (TF.refKey x) "_computedDeleteOnTermination"
 
 instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (EbsBlockDevice s)) (TF.Attr s P.Bool) where
-    computedEncrypted x = TF.compute (TF.refKey x) "encrypted"
+    computedEncrypted x = TF.compute (TF.refKey x) "_computedEncrypted"
 
 instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (EbsBlockDevice s)) (TF.Attr s P.Text) where
-    computedVolumeType x = TF.compute (TF.refKey x) "volume_type"
+    computedVolumeType x = TF.compute (TF.refKey x) "_computedVolumeType"
 
 -- | @autoscale_labels@ nested settings.
 data AutoscaleLabels s = AutoscaleLabels'
@@ -516,10 +518,10 @@ data IntegrationNomad s = IntegrationNomad'
     , _autoscaleCooldown    :: TF.Attr s P.Integer
     -- ^ @autoscale_cooldown@ - (Optional)
     --
-    , _autoscaleDown        :: TF.Attr s [AutoscaleDown s]
+    , _autoscaleDown        :: TF.Attr s (AutoscaleDown s)
     -- ^ @autoscale_down@ - (Optional)
     --
-    , _autoscaleHeadroom    :: TF.Attr s [AutoscaleHeadroom s]
+    , _autoscaleHeadroom    :: TF.Attr s (AutoscaleHeadroom s)
     -- ^ @autoscale_headroom@ - (Optional)
     --
     , _autoscaleIsEnabled   :: TF.Attr s P.Bool
@@ -581,15 +583,15 @@ instance P.HasAutoscaleCooldown (IntegrationNomad s) (TF.Attr s P.Integer) where
                (\s a -> s { _autoscaleCooldown = a
                           } :: IntegrationNomad s)
 
-instance P.HasAutoscaleDown (IntegrationNomad s) (TF.Attr s [AutoscaleDown s]) where
+instance P.HasAutoscaleDown (IntegrationNomad s) (TF.Attr s (AutoscaleDown s)) where
     autoscaleDown =
-        P.lens (_autoscaleDown :: IntegrationNomad s -> TF.Attr s [AutoscaleDown s])
+        P.lens (_autoscaleDown :: IntegrationNomad s -> TF.Attr s (AutoscaleDown s))
                (\s a -> s { _autoscaleDown = a
                           } :: IntegrationNomad s)
 
-instance P.HasAutoscaleHeadroom (IntegrationNomad s) (TF.Attr s [AutoscaleHeadroom s]) where
+instance P.HasAutoscaleHeadroom (IntegrationNomad s) (TF.Attr s (AutoscaleHeadroom s)) where
     autoscaleHeadroom =
-        P.lens (_autoscaleHeadroom :: IntegrationNomad s -> TF.Attr s [AutoscaleHeadroom s])
+        P.lens (_autoscaleHeadroom :: IntegrationNomad s -> TF.Attr s (AutoscaleHeadroom s))
                (\s a -> s { _autoscaleHeadroom = a
                           } :: IntegrationNomad s)
 
@@ -828,22 +830,22 @@ instance P.HasUnit (ScalingUpPolicy s) (TF.Attr s P.Text) where
                           } :: ScalingUpPolicy s)
 
 instance s ~ s' => P.HasComputedCooldown (TF.Ref s' (ScalingUpPolicy s)) (TF.Attr s P.Integer) where
-    computedCooldown x = TF.compute (TF.refKey x) "cooldown"
+    computedCooldown x = TF.compute (TF.refKey x) "_computedCooldown"
 
 instance s ~ s' => P.HasComputedEvaluationPeriods (TF.Ref s' (ScalingUpPolicy s)) (TF.Attr s P.Integer) where
-    computedEvaluationPeriods x = TF.compute (TF.refKey x) "evaluation_periods"
+    computedEvaluationPeriods x = TF.compute (TF.refKey x) "_computedEvaluationPeriods"
 
 instance s ~ s' => P.HasComputedOperator (TF.Ref s' (ScalingUpPolicy s)) (TF.Attr s P.Text) where
-    computedOperator x = TF.compute (TF.refKey x) "operator"
+    computedOperator x = TF.compute (TF.refKey x) "_computedOperator"
 
 instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (ScalingUpPolicy s)) (TF.Attr s P.Integer) where
-    computedPeriod x = TF.compute (TF.refKey x) "period"
+    computedPeriod x = TF.compute (TF.refKey x) "_computedPeriod"
 
 instance s ~ s' => P.HasComputedSource (TF.Ref s' (ScalingUpPolicy s)) (TF.Attr s P.Text) where
-    computedSource x = TF.compute (TF.refKey x) "source"
+    computedSource x = TF.compute (TF.refKey x) "_computedSource"
 
 instance s ~ s' => P.HasComputedStatistic (TF.Ref s' (ScalingUpPolicy s)) (TF.Attr s P.Text) where
-    computedStatistic x = TF.compute (TF.refKey x) "statistic"
+    computedStatistic x = TF.compute (TF.refKey x) "_computedStatistic"
 
 -- | @integration_kubernetes@ nested settings.
 data IntegrationKubernetes s = IntegrationKubernetes'
@@ -853,10 +855,10 @@ data IntegrationKubernetes s = IntegrationKubernetes'
     , _autoscaleCooldown     :: TF.Attr s P.Integer
     -- ^ @autoscale_cooldown@ - (Optional)
     --
-    , _autoscaleDown         :: TF.Attr s [AutoscaleDown s]
+    , _autoscaleDown         :: TF.Attr s (AutoscaleDown s)
     -- ^ @autoscale_down@ - (Optional)
     --
-    , _autoscaleHeadroom     :: TF.Attr s [AutoscaleHeadroom s]
+    , _autoscaleHeadroom     :: TF.Attr s (AutoscaleHeadroom s)
     -- ^ @autoscale_headroom@ - (Optional)
     --
     , _autoscaleIsAutoConfig :: TF.Attr s P.Bool
@@ -923,15 +925,15 @@ instance P.HasAutoscaleCooldown (IntegrationKubernetes s) (TF.Attr s P.Integer) 
                (\s a -> s { _autoscaleCooldown = a
                           } :: IntegrationKubernetes s)
 
-instance P.HasAutoscaleDown (IntegrationKubernetes s) (TF.Attr s [AutoscaleDown s]) where
+instance P.HasAutoscaleDown (IntegrationKubernetes s) (TF.Attr s (AutoscaleDown s)) where
     autoscaleDown =
-        P.lens (_autoscaleDown :: IntegrationKubernetes s -> TF.Attr s [AutoscaleDown s])
+        P.lens (_autoscaleDown :: IntegrationKubernetes s -> TF.Attr s (AutoscaleDown s))
                (\s a -> s { _autoscaleDown = a
                           } :: IntegrationKubernetes s)
 
-instance P.HasAutoscaleHeadroom (IntegrationKubernetes s) (TF.Attr s [AutoscaleHeadroom s]) where
+instance P.HasAutoscaleHeadroom (IntegrationKubernetes s) (TF.Attr s (AutoscaleHeadroom s)) where
     autoscaleHeadroom =
-        P.lens (_autoscaleHeadroom :: IntegrationKubernetes s -> TF.Attr s [AutoscaleHeadroom s])
+        P.lens (_autoscaleHeadroom :: IntegrationKubernetes s -> TF.Attr s (AutoscaleHeadroom s))
                (\s a -> s { _autoscaleHeadroom = a
                           } :: IntegrationKubernetes s)
 
@@ -1112,7 +1114,7 @@ instance P.HasTimeWindows (RevertToSpot s) (TF.Attr s [TF.Attr s P.Text]) where
 
 -- | @integration_gitlab@ nested settings.
 data IntegrationGitlab s = IntegrationGitlab'
-    { _runner :: TF.Attr s [Runner s]
+    { _runner :: TF.Attr s (Runner s)
     -- ^ @runner@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1131,9 +1133,9 @@ newIntegrationGitlab =
         { _runner = TF.Nil
         }
 
-instance P.HasRunner (IntegrationGitlab s) (TF.Attr s [Runner s]) where
+instance P.HasRunner (IntegrationGitlab s) (TF.Attr s (Runner s)) where
     runner =
-        P.lens (_runner :: IntegrationGitlab s -> TF.Attr s [Runner s])
+        P.lens (_runner :: IntegrationGitlab s -> TF.Attr s (Runner s))
                (\s a -> s { _runner = a
                           } :: IntegrationGitlab s)
 
@@ -1145,10 +1147,10 @@ data IntegrationEcs s = IntegrationEcs'
     , _autoscaleCooldown :: TF.Attr s P.Integer
     -- ^ @autoscale_cooldown@ - (Optional)
     --
-    , _autoscaleDown :: TF.Attr s [AutoscaleDown s]
+    , _autoscaleDown :: TF.Attr s (AutoscaleDown s)
     -- ^ @autoscale_down@ - (Optional)
     --
-    , _autoscaleHeadroom :: TF.Attr s [AutoscaleHeadroom s]
+    , _autoscaleHeadroom :: TF.Attr s (AutoscaleHeadroom s)
     -- ^ @autoscale_headroom@ - (Optional)
     --
     , _autoscaleIsEnabled :: TF.Attr s P.Bool
@@ -1201,15 +1203,15 @@ instance P.HasAutoscaleCooldown (IntegrationEcs s) (TF.Attr s P.Integer) where
                (\s a -> s { _autoscaleCooldown = a
                           } :: IntegrationEcs s)
 
-instance P.HasAutoscaleDown (IntegrationEcs s) (TF.Attr s [AutoscaleDown s]) where
+instance P.HasAutoscaleDown (IntegrationEcs s) (TF.Attr s (AutoscaleDown s)) where
     autoscaleDown =
-        P.lens (_autoscaleDown :: IntegrationEcs s -> TF.Attr s [AutoscaleDown s])
+        P.lens (_autoscaleDown :: IntegrationEcs s -> TF.Attr s (AutoscaleDown s))
                (\s a -> s { _autoscaleDown = a
                           } :: IntegrationEcs s)
 
-instance P.HasAutoscaleHeadroom (IntegrationEcs s) (TF.Attr s [AutoscaleHeadroom s]) where
+instance P.HasAutoscaleHeadroom (IntegrationEcs s) (TF.Attr s (AutoscaleHeadroom s)) where
     autoscaleHeadroom =
-        P.lens (_autoscaleHeadroom :: IntegrationEcs s -> TF.Attr s [AutoscaleHeadroom s])
+        P.lens (_autoscaleHeadroom :: IntegrationEcs s -> TF.Attr s (AutoscaleHeadroom s))
                (\s a -> s { _autoscaleHeadroom = a
                           } :: IntegrationEcs s)
 
@@ -1319,13 +1321,13 @@ instance P.HasUnit (ScalingTargetPolicy s) (TF.Attr s P.Text) where
                           } :: ScalingTargetPolicy s)
 
 instance s ~ s' => P.HasComputedCooldown (TF.Ref s' (ScalingTargetPolicy s)) (TF.Attr s P.Integer) where
-    computedCooldown x = TF.compute (TF.refKey x) "cooldown"
+    computedCooldown x = TF.compute (TF.refKey x) "_computedCooldown"
 
 instance s ~ s' => P.HasComputedSource (TF.Ref s' (ScalingTargetPolicy s)) (TF.Attr s P.Text) where
-    computedSource x = TF.compute (TF.refKey x) "source"
+    computedSource x = TF.compute (TF.refKey x) "_computedSource"
 
 instance s ~ s' => P.HasComputedStatistic (TF.Ref s' (ScalingTargetPolicy s)) (TF.Attr s P.Text) where
-    computedStatistic x = TF.compute (TF.refKey x) "statistic"
+    computedStatistic x = TF.compute (TF.refKey x) "_computedStatistic"
 
 -- | @integration_mesosphere@ nested settings.
 data IntegrationMesosphere s = IntegrationMesosphere'
@@ -1520,22 +1522,22 @@ instance P.HasUnit (ScalingDownPolicy s) (TF.Attr s P.Text) where
                           } :: ScalingDownPolicy s)
 
 instance s ~ s' => P.HasComputedCooldown (TF.Ref s' (ScalingDownPolicy s)) (TF.Attr s P.Integer) where
-    computedCooldown x = TF.compute (TF.refKey x) "cooldown"
+    computedCooldown x = TF.compute (TF.refKey x) "_computedCooldown"
 
 instance s ~ s' => P.HasComputedEvaluationPeriods (TF.Ref s' (ScalingDownPolicy s)) (TF.Attr s P.Integer) where
-    computedEvaluationPeriods x = TF.compute (TF.refKey x) "evaluation_periods"
+    computedEvaluationPeriods x = TF.compute (TF.refKey x) "_computedEvaluationPeriods"
 
 instance s ~ s' => P.HasComputedOperator (TF.Ref s' (ScalingDownPolicy s)) (TF.Attr s P.Text) where
-    computedOperator x = TF.compute (TF.refKey x) "operator"
+    computedOperator x = TF.compute (TF.refKey x) "_computedOperator"
 
 instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (ScalingDownPolicy s)) (TF.Attr s P.Integer) where
-    computedPeriod x = TF.compute (TF.refKey x) "period"
+    computedPeriod x = TF.compute (TF.refKey x) "_computedPeriod"
 
 instance s ~ s' => P.HasComputedSource (TF.Ref s' (ScalingDownPolicy s)) (TF.Attr s P.Text) where
-    computedSource x = TF.compute (TF.refKey x) "source"
+    computedSource x = TF.compute (TF.refKey x) "_computedSource"
 
 instance s ~ s' => P.HasComputedStatistic (TF.Ref s' (ScalingDownPolicy s)) (TF.Attr s P.Text) where
-    computedStatistic x = TF.compute (TF.refKey x) "statistic"
+    computedStatistic x = TF.compute (TF.refKey x) "_computedStatistic"
 
 -- | @autoscale_headroom@ nested settings.
 data AutoscaleHeadroom s = AutoscaleHeadroom'
@@ -1990,7 +1992,7 @@ instance P.HasVirtualName (EphemeralBlockDevice s) (TF.Attr s P.Text) where
 
 -- | @update_policy@ nested settings.
 data UpdatePolicy s = UpdatePolicy'
-    { _rollConfig           :: TF.Attr s [RollConfig s]
+    { _rollConfig           :: TF.Attr s (RollConfig s)
     -- ^ @roll_config@ - (Optional)
     --
     , _shouldResumeStateful :: TF.Attr s P.Bool
@@ -2021,9 +2023,9 @@ newUpdatePolicy _shouldResumeStateful _shouldRoll =
         , _shouldRoll = _shouldRoll
         }
 
-instance P.HasRollConfig (UpdatePolicy s) (TF.Attr s [RollConfig s]) where
+instance P.HasRollConfig (UpdatePolicy s) (TF.Attr s (RollConfig s)) where
     rollConfig =
-        P.lens (_rollConfig :: UpdatePolicy s -> TF.Attr s [RollConfig s])
+        P.lens (_rollConfig :: UpdatePolicy s -> TF.Attr s (RollConfig s))
                (\s a -> s { _rollConfig = a
                           } :: UpdatePolicy s)
 
