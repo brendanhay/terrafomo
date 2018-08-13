@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -28,13 +29,15 @@ module Terrafomo.Grafana.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable           as P
 import qualified Data.HashMap.Strict     as P
+import qualified Data.HashMap.Strict     as Map
 import qualified Data.List.NonEmpty      as P
+import qualified Data.Maybe              as P
+import qualified Data.Monoid             as P
 import qualified Data.Text               as P
 import qualified GHC.Generics            as P
 import qualified Lens.Micro              as P
@@ -44,6 +47,7 @@ import qualified Terrafomo.Grafana.Lens  as P
 import qualified Terrafomo.Grafana.Types as P
 import qualified Terrafomo.HCL           as TF
 import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Validator     as TF
 
 -- | @secure_json_data@ nested settings.
 data SecureJsonData s = SecureJsonData'
@@ -55,14 +59,6 @@ data SecureJsonData s = SecureJsonData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (SecureJsonData s)
-instance TF.IsValue  (SecureJsonData s)
-instance TF.IsObject (SecureJsonData s) where
-    toObject SecureJsonData'{..} = catMaybes
-        [ TF.assign "access_key" <$> TF.attribute _accessKey
-        , TF.assign "secret_key" <$> TF.attribute _secretKey
-        ]
-
 newSecureJsonData
     :: TF.Attr s P.Text -- ^ @access_key@ - 'P.accessKey'
     -> TF.Attr s P.Text -- ^ @secret_key@ - 'P.secretKey'
@@ -73,17 +69,26 @@ newSecureJsonData _accessKey _secretKey =
         , _secretKey = _secretKey
         }
 
+instance P.Hashable  (SecureJsonData s)
+instance TF.IsValue  (SecureJsonData s)
+instance TF.IsObject (SecureJsonData s) where
+    toObject SecureJsonData'{..} = P.catMaybes
+        [ TF.assign "access_key" <$> TF.attribute _accessKey
+        , TF.assign "secret_key" <$> TF.attribute _secretKey
+        ]
+
+instance TF.IsValid (SecureJsonData s) where
+    validator = P.mempty
+
 instance P.HasAccessKey (SecureJsonData s) (TF.Attr s P.Text) where
     accessKey =
         P.lens (_accessKey :: SecureJsonData s -> TF.Attr s P.Text)
-               (\s a -> s { _accessKey = a
-                          } :: SecureJsonData s)
+               (\s a -> s { _accessKey = a } :: SecureJsonData s)
 
 instance P.HasSecretKey (SecureJsonData s) (TF.Attr s P.Text) where
     secretKey =
         P.lens (_secretKey :: SecureJsonData s -> TF.Attr s P.Text)
-               (\s a -> s { _secretKey = a
-                          } :: SecureJsonData s)
+               (\s a -> s { _secretKey = a } :: SecureJsonData s)
 
 -- | @json_data@ nested settings.
 data JsonData s = JsonData'
@@ -101,16 +106,6 @@ data JsonData s = JsonData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (JsonData s)
-instance TF.IsValue  (JsonData s)
-instance TF.IsObject (JsonData s) where
-    toObject JsonData'{..} = catMaybes
-        [ TF.assign "assume_role_arn" <$> TF.attribute _assumeRoleArn
-        , TF.assign "auth_type" <$> TF.attribute _authType
-        , TF.assign "custom_metrics_namespaces" <$> TF.attribute _customMetricsNamespaces
-        , TF.assign "default_region" <$> TF.attribute _defaultRegion
-        ]
-
 newJsonData
     :: TF.Attr s P.Text -- ^ @auth_type@ - 'P.authType'
     -> TF.Attr s P.Text -- ^ @default_region@ - 'P.defaultRegion'
@@ -123,26 +118,35 @@ newJsonData _authType _defaultRegion =
         , _defaultRegion = _defaultRegion
         }
 
+instance P.Hashable  (JsonData s)
+instance TF.IsValue  (JsonData s)
+instance TF.IsObject (JsonData s) where
+    toObject JsonData'{..} = P.catMaybes
+        [ TF.assign "assume_role_arn" <$> TF.attribute _assumeRoleArn
+        , TF.assign "auth_type" <$> TF.attribute _authType
+        , TF.assign "custom_metrics_namespaces" <$> TF.attribute _customMetricsNamespaces
+        , TF.assign "default_region" <$> TF.attribute _defaultRegion
+        ]
+
+instance TF.IsValid (JsonData s) where
+    validator = P.mempty
+
 instance P.HasAssumeRoleArn (JsonData s) (TF.Attr s P.Text) where
     assumeRoleArn =
         P.lens (_assumeRoleArn :: JsonData s -> TF.Attr s P.Text)
-               (\s a -> s { _assumeRoleArn = a
-                          } :: JsonData s)
+               (\s a -> s { _assumeRoleArn = a } :: JsonData s)
 
 instance P.HasAuthType (JsonData s) (TF.Attr s P.Text) where
     authType =
         P.lens (_authType :: JsonData s -> TF.Attr s P.Text)
-               (\s a -> s { _authType = a
-                          } :: JsonData s)
+               (\s a -> s { _authType = a } :: JsonData s)
 
 instance P.HasCustomMetricsNamespaces (JsonData s) (TF.Attr s P.Text) where
     customMetricsNamespaces =
         P.lens (_customMetricsNamespaces :: JsonData s -> TF.Attr s P.Text)
-               (\s a -> s { _customMetricsNamespaces = a
-                          } :: JsonData s)
+               (\s a -> s { _customMetricsNamespaces = a } :: JsonData s)
 
 instance P.HasDefaultRegion (JsonData s) (TF.Attr s P.Text) where
     defaultRegion =
         P.lens (_defaultRegion :: JsonData s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultRegion = a
-                          } :: JsonData s)
+               (\s a -> s { _defaultRegion = a } :: JsonData s)

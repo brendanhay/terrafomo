@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -36,7 +37,6 @@ module Terrafomo.Grafana.Resource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -44,7 +44,10 @@ import Terrafomo.Grafana.Settings
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -56,6 +59,7 @@ import qualified Terrafomo.Grafana.Types    as P
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Schema           as TF
+import qualified Terrafomo.Validator        as TF
 
 -- | @grafana_alert_notification@ Resource.
 --
@@ -76,20 +80,12 @@ data AlertNotificationResource s = AlertNotificationResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AlertNotificationResource s) where
-    toObject AlertNotificationResource'{..} = catMaybes
-        [ TF.assign "is_default" <$> TF.attribute _isDefault
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "settings" <$> TF.attribute _settings
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
 alertNotificationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Resource P.Provider (AlertNotificationResource s)
 alertNotificationResource _name _type' =
-    TF.newResource "grafana_alert_notification" $
+    TF.newResource "grafana_alert_notification" TF.validator $
         AlertNotificationResource'
             { _isDefault = TF.value P.False
             , _name = _name
@@ -97,29 +93,36 @@ alertNotificationResource _name _type' =
             , _type' = _type'
             }
 
+instance TF.IsObject (AlertNotificationResource s) where
+    toObject AlertNotificationResource'{..} = P.catMaybes
+        [ TF.assign "is_default" <$> TF.attribute _isDefault
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "settings" <$> TF.attribute _settings
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (AlertNotificationResource s) where
+    validator = P.mempty
+
 instance P.HasIsDefault (AlertNotificationResource s) (TF.Attr s P.Bool) where
     isDefault =
         P.lens (_isDefault :: AlertNotificationResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _isDefault = a
-                          } :: AlertNotificationResource s)
+               (\s a -> s { _isDefault = a } :: AlertNotificationResource s)
 
 instance P.HasName (AlertNotificationResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: AlertNotificationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: AlertNotificationResource s)
+               (\s a -> s { _name = a } :: AlertNotificationResource s)
 
 instance P.HasSettings (AlertNotificationResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     settings =
         P.lens (_settings :: AlertNotificationResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _settings = a
-                          } :: AlertNotificationResource s)
+               (\s a -> s { _settings = a } :: AlertNotificationResource s)
 
 instance P.HasType' (AlertNotificationResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: AlertNotificationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: AlertNotificationResource s)
+               (\s a -> s { _type' = a } :: AlertNotificationResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertNotificationResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -134,25 +137,27 @@ data DashboardResource s = DashboardResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DashboardResource s) where
-    toObject DashboardResource'{..} = catMaybes
-        [ TF.assign "config_json" <$> TF.attribute _configJson
-        ]
-
 dashboardResource
     :: TF.Attr s P.Text -- ^ @config_json@ - 'P.configJson'
     -> TF.Resource P.Provider (DashboardResource s)
 dashboardResource _configJson =
-    TF.newResource "grafana_dashboard" $
+    TF.newResource "grafana_dashboard" TF.validator $
         DashboardResource'
             { _configJson = _configJson
             }
 
+instance TF.IsObject (DashboardResource s) where
+    toObject DashboardResource'{..} = P.catMaybes
+        [ TF.assign "config_json" <$> TF.attribute _configJson
+        ]
+
+instance TF.IsValid (DashboardResource s) where
+    validator = P.mempty
+
 instance P.HasConfigJson (DashboardResource s) (TF.Attr s P.Text) where
     configJson =
         P.lens (_configJson :: DashboardResource s -> TF.Attr s P.Text)
-               (\s a -> s { _configJson = a
-                          } :: DashboardResource s)
+               (\s a -> s { _configJson = a } :: DashboardResource s)
 
 instance s ~ s' => P.HasComputedSlug (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
     computedSlug x = TF.compute (TF.refKey x) "_computedSlug"
@@ -180,7 +185,7 @@ data DataSourceResource s = DataSourceResource'
     , _isDefault         :: TF.Attr s P.Bool
     -- ^ @is_default@ - (Optional)
     --
-    , _jsonData          :: TF.Attr s [JsonData s]
+    , _jsonData          :: TF.Attr s [TF.Attr s (JsonData s)]
     -- ^ @json_data@ - (Optional)
     --
     , _name              :: TF.Attr s P.Text
@@ -189,7 +194,7 @@ data DataSourceResource s = DataSourceResource'
     , _password          :: TF.Attr s P.Text
     -- ^ @password@ - (Optional)
     --
-    , _secureJsonData    :: TF.Attr s [SecureJsonData s]
+    , _secureJsonData    :: TF.Attr s [TF.Attr s (SecureJsonData s)]
     -- ^ @secure_json_data@ - (Optional)
     --
     , _type'             :: TF.Attr s P.Text
@@ -203,29 +208,12 @@ data DataSourceResource s = DataSourceResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DataSourceResource s) where
-    toObject DataSourceResource'{..} = catMaybes
-        [ TF.assign "access_mode" <$> TF.attribute _accessMode
-        , TF.assign "basic_auth_enabled" <$> TF.attribute _basicAuthEnabled
-        , TF.assign "basic_auth_password" <$> TF.attribute _basicAuthPassword
-        , TF.assign "basic_auth_username" <$> TF.attribute _basicAuthUsername
-        , TF.assign "database_name" <$> TF.attribute _databaseName
-        , TF.assign "is_default" <$> TF.attribute _isDefault
-        , TF.assign "json_data" <$> TF.attribute _jsonData
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "password" <$> TF.attribute _password
-        , TF.assign "secure_json_data" <$> TF.attribute _secureJsonData
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "url" <$> TF.attribute _url
-        , TF.assign "username" <$> TF.attribute _username
-        ]
-
 dataSourceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Resource P.Provider (DataSourceResource s)
 dataSourceResource _name _type' =
-    TF.newResource "grafana_data_source" $
+    TF.newResource "grafana_data_source" TF.validator $
         DataSourceResource'
             { _accessMode = TF.value "proxy"
             , _basicAuthEnabled = TF.value P.False
@@ -242,83 +230,98 @@ dataSourceResource _name _type' =
             , _username = TF.Nil
             }
 
+instance TF.IsObject (DataSourceResource s) where
+    toObject DataSourceResource'{..} = P.catMaybes
+        [ TF.assign "access_mode" <$> TF.attribute _accessMode
+        , TF.assign "basic_auth_enabled" <$> TF.attribute _basicAuthEnabled
+        , TF.assign "basic_auth_password" <$> TF.attribute _basicAuthPassword
+        , TF.assign "basic_auth_username" <$> TF.attribute _basicAuthUsername
+        , TF.assign "database_name" <$> TF.attribute _databaseName
+        , TF.assign "is_default" <$> TF.attribute _isDefault
+        , TF.assign "json_data" <$> TF.attribute _jsonData
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "password" <$> TF.attribute _password
+        , TF.assign "secure_json_data" <$> TF.attribute _secureJsonData
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "url" <$> TF.attribute _url
+        , TF.assign "username" <$> TF.attribute _username
+        ]
+
+instance TF.IsValid (DataSourceResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_jsonData"
+                  (_jsonData
+                      :: DataSourceResource s -> TF.Attr s [TF.Attr s (JsonData s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_secureJsonData"
+                  (_secureJsonData
+                      :: DataSourceResource s -> TF.Attr s [TF.Attr s (SecureJsonData s)])
+                  TF.validator
+
 instance P.HasAccessMode (DataSourceResource s) (TF.Attr s P.Text) where
     accessMode =
         P.lens (_accessMode :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _accessMode = a
-                          } :: DataSourceResource s)
+               (\s a -> s { _accessMode = a } :: DataSourceResource s)
 
 instance P.HasBasicAuthEnabled (DataSourceResource s) (TF.Attr s P.Bool) where
     basicAuthEnabled =
         P.lens (_basicAuthEnabled :: DataSourceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _basicAuthEnabled = a
-                          } :: DataSourceResource s)
+               (\s a -> s { _basicAuthEnabled = a } :: DataSourceResource s)
 
 instance P.HasBasicAuthPassword (DataSourceResource s) (TF.Attr s P.Text) where
     basicAuthPassword =
         P.lens (_basicAuthPassword :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _basicAuthPassword = a
-                          } :: DataSourceResource s)
+               (\s a -> s { _basicAuthPassword = a } :: DataSourceResource s)
 
 instance P.HasBasicAuthUsername (DataSourceResource s) (TF.Attr s P.Text) where
     basicAuthUsername =
         P.lens (_basicAuthUsername :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _basicAuthUsername = a
-                          } :: DataSourceResource s)
+               (\s a -> s { _basicAuthUsername = a } :: DataSourceResource s)
 
 instance P.HasDatabaseName (DataSourceResource s) (TF.Attr s P.Text) where
     databaseName =
         P.lens (_databaseName :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _databaseName = a
-                          } :: DataSourceResource s)
+               (\s a -> s { _databaseName = a } :: DataSourceResource s)
 
 instance P.HasIsDefault (DataSourceResource s) (TF.Attr s P.Bool) where
     isDefault =
         P.lens (_isDefault :: DataSourceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _isDefault = a
-                          } :: DataSourceResource s)
+               (\s a -> s { _isDefault = a } :: DataSourceResource s)
 
-instance P.HasJsonData (DataSourceResource s) (TF.Attr s [JsonData s]) where
+instance P.HasJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (JsonData s)]) where
     jsonData =
-        P.lens (_jsonData :: DataSourceResource s -> TF.Attr s [JsonData s])
-               (\s a -> s { _jsonData = a
-                          } :: DataSourceResource s)
+        P.lens (_jsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (JsonData s)])
+               (\s a -> s { _jsonData = a } :: DataSourceResource s)
 
 instance P.HasName (DataSourceResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: DataSourceResource s)
+               (\s a -> s { _name = a } :: DataSourceResource s)
 
 instance P.HasPassword (DataSourceResource s) (TF.Attr s P.Text) where
     password =
         P.lens (_password :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a
-                          } :: DataSourceResource s)
+               (\s a -> s { _password = a } :: DataSourceResource s)
 
-instance P.HasSecureJsonData (DataSourceResource s) (TF.Attr s [SecureJsonData s]) where
+instance P.HasSecureJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (SecureJsonData s)]) where
     secureJsonData =
-        P.lens (_secureJsonData :: DataSourceResource s -> TF.Attr s [SecureJsonData s])
-               (\s a -> s { _secureJsonData = a
-                          } :: DataSourceResource s)
+        P.lens (_secureJsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (SecureJsonData s)])
+               (\s a -> s { _secureJsonData = a } :: DataSourceResource s)
 
 instance P.HasType' (DataSourceResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: DataSourceResource s)
+               (\s a -> s { _type' = a } :: DataSourceResource s)
 
 instance P.HasUrl (DataSourceResource s) (TF.Attr s P.Text) where
     url =
         P.lens (_url :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _url = a
-                          } :: DataSourceResource s)
+               (\s a -> s { _url = a } :: DataSourceResource s)
 
 instance P.HasUsername (DataSourceResource s) (TF.Attr s P.Text) where
     username =
         P.lens (_username :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a
-                          } :: DataSourceResource s)
+               (\s a -> s { _username = a } :: DataSourceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -348,21 +351,11 @@ data OrganizationResource s = OrganizationResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (OrganizationResource s) where
-    toObject OrganizationResource'{..} = catMaybes
-        [ TF.assign "admin_user" <$> TF.attribute _adminUser
-        , TF.assign "admins" <$> TF.attribute _admins
-        , TF.assign "create_users" <$> TF.attribute _createUsers
-        , TF.assign "editors" <$> TF.attribute _editors
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "viewers" <$> TF.attribute _viewers
-        ]
-
 organizationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (OrganizationResource s)
 organizationResource _name =
-    TF.newResource "grafana_organization" $
+    TF.newResource "grafana_organization" TF.validator $
         OrganizationResource'
             { _adminUser = TF.value "admin"
             , _admins = TF.Nil
@@ -372,41 +365,48 @@ organizationResource _name =
             , _viewers = TF.Nil
             }
 
+instance TF.IsObject (OrganizationResource s) where
+    toObject OrganizationResource'{..} = P.catMaybes
+        [ TF.assign "admin_user" <$> TF.attribute _adminUser
+        , TF.assign "admins" <$> TF.attribute _admins
+        , TF.assign "create_users" <$> TF.attribute _createUsers
+        , TF.assign "editors" <$> TF.attribute _editors
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "viewers" <$> TF.attribute _viewers
+        ]
+
+instance TF.IsValid (OrganizationResource s) where
+    validator = P.mempty
+
 instance P.HasAdminUser (OrganizationResource s) (TF.Attr s P.Text) where
     adminUser =
         P.lens (_adminUser :: OrganizationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _adminUser = a
-                          } :: OrganizationResource s)
+               (\s a -> s { _adminUser = a } :: OrganizationResource s)
 
 instance P.HasAdmins (OrganizationResource s) (TF.Attr s [TF.Attr s P.Text]) where
     admins =
         P.lens (_admins :: OrganizationResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _admins = a
-                          } :: OrganizationResource s)
+               (\s a -> s { _admins = a } :: OrganizationResource s)
 
 instance P.HasCreateUsers (OrganizationResource s) (TF.Attr s P.Bool) where
     createUsers =
         P.lens (_createUsers :: OrganizationResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _createUsers = a
-                          } :: OrganizationResource s)
+               (\s a -> s { _createUsers = a } :: OrganizationResource s)
 
 instance P.HasEditors (OrganizationResource s) (TF.Attr s [TF.Attr s P.Text]) where
     editors =
         P.lens (_editors :: OrganizationResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _editors = a
-                          } :: OrganizationResource s)
+               (\s a -> s { _editors = a } :: OrganizationResource s)
 
 instance P.HasName (OrganizationResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: OrganizationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: OrganizationResource s)
+               (\s a -> s { _name = a } :: OrganizationResource s)
 
 instance P.HasViewers (OrganizationResource s) (TF.Attr s [TF.Attr s P.Text]) where
     viewers =
         P.lens (_viewers :: OrganizationResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _viewers = a
-                          } :: OrganizationResource s)
+               (\s a -> s { _viewers = a } :: OrganizationResource s)
 
 instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Integer) where
     computedOrgId x = TF.compute (TF.refKey x) "_computedOrgId"
