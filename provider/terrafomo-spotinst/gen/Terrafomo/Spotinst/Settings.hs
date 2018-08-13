@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -140,13 +141,15 @@ module Terrafomo.Spotinst.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable            as P
 import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as Map
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Maybe               as P
+import qualified Data.Monoid              as P
 import qualified Data.Text                as P
 import qualified GHC.Generics             as P
 import qualified Lens.Micro               as P
@@ -156,6 +159,7 @@ import qualified Terrafomo.HCL            as TF
 import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.Spotinst.Lens  as P
 import qualified Terrafomo.Spotinst.Types as P
+import qualified Terrafomo.Validator      as TF
 
 -- | @network_interface@ nested settings.
 data NetworkInterface s = NetworkInterface'
@@ -179,18 +183,6 @@ data NetworkInterface s = NetworkInterface'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (NetworkInterface s)
-instance TF.IsValue  (NetworkInterface s)
-instance TF.IsObject (NetworkInterface s) where
-    toObject NetworkInterface'{..} = catMaybes
-        [ TF.assign "associate_public_ip_address" <$> TF.attribute _associatePublicIpAddress
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "device_index" <$> TF.attribute _deviceIndex
-        , TF.assign "network_interface_id" <$> TF.attribute _networkInterfaceId
-        , TF.assign "private_ip_address" <$> TF.attribute _privateIpAddress
-        , TF.assign "secondary_private_ip_address_count" <$> TF.attribute _secondaryPrivateIpAddressCount
-        ]
-
 newNetworkInterface
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @device_index@ - 'P.deviceIndex'
@@ -205,41 +197,50 @@ newNetworkInterface _description _deviceIndex =
         , _secondaryPrivateIpAddressCount = TF.Nil
         }
 
+instance P.Hashable  (NetworkInterface s)
+instance TF.IsValue  (NetworkInterface s)
+instance TF.IsObject (NetworkInterface s) where
+    toObject NetworkInterface'{..} = P.catMaybes
+        [ TF.assign "associate_public_ip_address" <$> TF.attribute _associatePublicIpAddress
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "device_index" <$> TF.attribute _deviceIndex
+        , TF.assign "network_interface_id" <$> TF.attribute _networkInterfaceId
+        , TF.assign "private_ip_address" <$> TF.attribute _privateIpAddress
+        , TF.assign "secondary_private_ip_address_count" <$> TF.attribute _secondaryPrivateIpAddressCount
+        ]
+
+instance TF.IsValid (NetworkInterface s) where
+    validator = P.mempty
+
 instance P.HasAssociatePublicIpAddress (NetworkInterface s) (TF.Attr s P.Bool) where
     associatePublicIpAddress =
         P.lens (_associatePublicIpAddress :: NetworkInterface s -> TF.Attr s P.Bool)
-               (\s a -> s { _associatePublicIpAddress = a
-                          } :: NetworkInterface s)
+               (\s a -> s { _associatePublicIpAddress = a } :: NetworkInterface s)
 
 instance P.HasDescription (NetworkInterface s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: NetworkInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: NetworkInterface s)
+               (\s a -> s { _description = a } :: NetworkInterface s)
 
 instance P.HasDeviceIndex (NetworkInterface s) (TF.Attr s P.Text) where
     deviceIndex =
         P.lens (_deviceIndex :: NetworkInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _deviceIndex = a
-                          } :: NetworkInterface s)
+               (\s a -> s { _deviceIndex = a } :: NetworkInterface s)
 
 instance P.HasNetworkInterfaceId (NetworkInterface s) (TF.Attr s P.Text) where
     networkInterfaceId =
         P.lens (_networkInterfaceId :: NetworkInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _networkInterfaceId = a
-                          } :: NetworkInterface s)
+               (\s a -> s { _networkInterfaceId = a } :: NetworkInterface s)
 
 instance P.HasPrivateIpAddress (NetworkInterface s) (TF.Attr s P.Text) where
     privateIpAddress =
         P.lens (_privateIpAddress :: NetworkInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _privateIpAddress = a
-                          } :: NetworkInterface s)
+               (\s a -> s { _privateIpAddress = a } :: NetworkInterface s)
 
 instance P.HasSecondaryPrivateIpAddressCount (NetworkInterface s) (TF.Attr s P.Text) where
     secondaryPrivateIpAddressCount =
         P.lens (_secondaryPrivateIpAddressCount :: NetworkInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _secondaryPrivateIpAddressCount = a
-                          } :: NetworkInterface s)
+               (\s a -> s { _secondaryPrivateIpAddressCount = a } :: NetworkInterface s)
 
 instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Bool) where
     computedDeleteOnTermination x = TF.compute (TF.refKey x) "_computedDeleteOnTermination"
@@ -257,15 +258,6 @@ data IntegrationCodedeploy s = IntegrationCodedeploy'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (IntegrationCodedeploy s)
-instance TF.IsValue  (IntegrationCodedeploy s)
-instance TF.IsObject (IntegrationCodedeploy s) where
-    toObject IntegrationCodedeploy'{..} = catMaybes
-        [ TF.assign "cleanup_on_failure" <$> TF.attribute _cleanupOnFailure
-        , TF.assign "deployment_groups" <$> TF.attribute _deploymentGroups
-        , TF.assign "terminate_instance_on_failure" <$> TF.attribute _terminateInstanceOnFailure
-        ]
-
 newIntegrationCodedeploy
     :: TF.Attr s P.Bool -- ^ @cleanup_on_failure@ - 'P.cleanupOnFailure'
     -> TF.Attr s [TF.Attr s (DeploymentGroups s)] -- ^ @deployment_groups@ - 'P.deploymentGroups'
@@ -278,23 +270,36 @@ newIntegrationCodedeploy _cleanupOnFailure _deploymentGroups _terminateInstanceO
         , _terminateInstanceOnFailure = _terminateInstanceOnFailure
         }
 
+instance P.Hashable  (IntegrationCodedeploy s)
+instance TF.IsValue  (IntegrationCodedeploy s)
+instance TF.IsObject (IntegrationCodedeploy s) where
+    toObject IntegrationCodedeploy'{..} = P.catMaybes
+        [ TF.assign "cleanup_on_failure" <$> TF.attribute _cleanupOnFailure
+        , TF.assign "deployment_groups" <$> TF.attribute _deploymentGroups
+        , TF.assign "terminate_instance_on_failure" <$> TF.attribute _terminateInstanceOnFailure
+        ]
+
+instance TF.IsValid (IntegrationCodedeploy s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_deploymentGroups"
+                  (_deploymentGroups
+                      :: IntegrationCodedeploy s -> TF.Attr s [TF.Attr s (DeploymentGroups s)])
+                  TF.validator
+
 instance P.HasCleanupOnFailure (IntegrationCodedeploy s) (TF.Attr s P.Bool) where
     cleanupOnFailure =
         P.lens (_cleanupOnFailure :: IntegrationCodedeploy s -> TF.Attr s P.Bool)
-               (\s a -> s { _cleanupOnFailure = a
-                          } :: IntegrationCodedeploy s)
+               (\s a -> s { _cleanupOnFailure = a } :: IntegrationCodedeploy s)
 
 instance P.HasDeploymentGroups (IntegrationCodedeploy s) (TF.Attr s [TF.Attr s (DeploymentGroups s)]) where
     deploymentGroups =
         P.lens (_deploymentGroups :: IntegrationCodedeploy s -> TF.Attr s [TF.Attr s (DeploymentGroups s)])
-               (\s a -> s { _deploymentGroups = a
-                          } :: IntegrationCodedeploy s)
+               (\s a -> s { _deploymentGroups = a } :: IntegrationCodedeploy s)
 
 instance P.HasTerminateInstanceOnFailure (IntegrationCodedeploy s) (TF.Attr s P.Bool) where
     terminateInstanceOnFailure =
         P.lens (_terminateInstanceOnFailure :: IntegrationCodedeploy s -> TF.Attr s P.Bool)
-               (\s a -> s { _terminateInstanceOnFailure = a
-                          } :: IntegrationCodedeploy s)
+               (\s a -> s { _terminateInstanceOnFailure = a } :: IntegrationCodedeploy s)
 
 -- | @autoscale_attributes@ nested settings.
 data AutoscaleAttributes s = AutoscaleAttributes'
@@ -306,14 +311,6 @@ data AutoscaleAttributes s = AutoscaleAttributes'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (AutoscaleAttributes s)
-instance TF.IsValue  (AutoscaleAttributes s)
-instance TF.IsObject (AutoscaleAttributes s) where
-    toObject AutoscaleAttributes'{..} = catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
 newAutoscaleAttributes
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
@@ -324,17 +321,26 @@ newAutoscaleAttributes _key _value =
         , _value = _value
         }
 
+instance P.Hashable  (AutoscaleAttributes s)
+instance TF.IsValue  (AutoscaleAttributes s)
+instance TF.IsObject (AutoscaleAttributes s) where
+    toObject AutoscaleAttributes'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (AutoscaleAttributes s) where
+    validator = P.mempty
+
 instance P.HasKey (AutoscaleAttributes s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: AutoscaleAttributes s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a
-                          } :: AutoscaleAttributes s)
+               (\s a -> s { _key = a } :: AutoscaleAttributes s)
 
 instance P.HasValue (AutoscaleAttributes s) (TF.Attr s P.Text) where
     value =
         P.lens (_value :: AutoscaleAttributes s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a
-                          } :: AutoscaleAttributes s)
+               (\s a -> s { _value = a } :: AutoscaleAttributes s)
 
 -- | @ebs_block_device@ nested settings.
 data EbsBlockDevice s = EbsBlockDevice'
@@ -355,17 +361,6 @@ data EbsBlockDevice s = EbsBlockDevice'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (EbsBlockDevice s)
-instance TF.IsValue  (EbsBlockDevice s)
-instance TF.IsObject (EbsBlockDevice s) where
-    toObject EbsBlockDevice'{..} = catMaybes
-        [ TF.assign "device_name" <$> TF.attribute _deviceName
-        , TF.assign "iops" <$> TF.attribute _iops
-        , TF.assign "kms_key_id" <$> TF.attribute _kmsKeyId
-        , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
-        , TF.assign "volume_size" <$> TF.attribute _volumeSize
-        ]
-
 newEbsBlockDevice
     :: TF.Attr s P.Text -- ^ @device_name@ - 'P.deviceName'
     -> EbsBlockDevice s
@@ -378,35 +373,44 @@ newEbsBlockDevice _deviceName =
         , _volumeSize = TF.Nil
         }
 
+instance P.Hashable  (EbsBlockDevice s)
+instance TF.IsValue  (EbsBlockDevice s)
+instance TF.IsObject (EbsBlockDevice s) where
+    toObject EbsBlockDevice'{..} = P.catMaybes
+        [ TF.assign "device_name" <$> TF.attribute _deviceName
+        , TF.assign "iops" <$> TF.attribute _iops
+        , TF.assign "kms_key_id" <$> TF.attribute _kmsKeyId
+        , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
+        , TF.assign "volume_size" <$> TF.attribute _volumeSize
+        ]
+
+instance TF.IsValid (EbsBlockDevice s) where
+    validator = P.mempty
+
 instance P.HasDeviceName (EbsBlockDevice s) (TF.Attr s P.Text) where
     deviceName =
         P.lens (_deviceName :: EbsBlockDevice s -> TF.Attr s P.Text)
-               (\s a -> s { _deviceName = a
-                          } :: EbsBlockDevice s)
+               (\s a -> s { _deviceName = a } :: EbsBlockDevice s)
 
 instance P.HasIops (EbsBlockDevice s) (TF.Attr s P.Integer) where
     iops =
         P.lens (_iops :: EbsBlockDevice s -> TF.Attr s P.Integer)
-               (\s a -> s { _iops = a
-                          } :: EbsBlockDevice s)
+               (\s a -> s { _iops = a } :: EbsBlockDevice s)
 
 instance P.HasKmsKeyId (EbsBlockDevice s) (TF.Attr s P.Text) where
     kmsKeyId =
         P.lens (_kmsKeyId :: EbsBlockDevice s -> TF.Attr s P.Text)
-               (\s a -> s { _kmsKeyId = a
-                          } :: EbsBlockDevice s)
+               (\s a -> s { _kmsKeyId = a } :: EbsBlockDevice s)
 
 instance P.HasSnapshotId (EbsBlockDevice s) (TF.Attr s P.Text) where
     snapshotId =
         P.lens (_snapshotId :: EbsBlockDevice s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotId = a
-                          } :: EbsBlockDevice s)
+               (\s a -> s { _snapshotId = a } :: EbsBlockDevice s)
 
 instance P.HasVolumeSize (EbsBlockDevice s) (TF.Attr s P.Integer) where
     volumeSize =
         P.lens (_volumeSize :: EbsBlockDevice s -> TF.Attr s P.Integer)
-               (\s a -> s { _volumeSize = a
-                          } :: EbsBlockDevice s)
+               (\s a -> s { _volumeSize = a } :: EbsBlockDevice s)
 
 instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (EbsBlockDevice s)) (TF.Attr s P.Bool) where
     computedDeleteOnTermination x = TF.compute (TF.refKey x) "_computedDeleteOnTermination"
@@ -427,14 +431,6 @@ data AutoscaleLabels s = AutoscaleLabels'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (AutoscaleLabels s)
-instance TF.IsValue  (AutoscaleLabels s)
-instance TF.IsObject (AutoscaleLabels s) where
-    toObject AutoscaleLabels'{..} = catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
 newAutoscaleLabels
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
@@ -445,17 +441,26 @@ newAutoscaleLabels _key _value =
         , _value = _value
         }
 
+instance P.Hashable  (AutoscaleLabels s)
+instance TF.IsValue  (AutoscaleLabels s)
+instance TF.IsObject (AutoscaleLabels s) where
+    toObject AutoscaleLabels'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (AutoscaleLabels s) where
+    validator = P.mempty
+
 instance P.HasKey (AutoscaleLabels s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: AutoscaleLabels s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a
-                          } :: AutoscaleLabels s)
+               (\s a -> s { _key = a } :: AutoscaleLabels s)
 
 instance P.HasValue (AutoscaleLabels s) (TF.Attr s P.Text) where
     value =
         P.lens (_value :: AutoscaleLabels s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a
-                          } :: AutoscaleLabels s)
+               (\s a -> s { _value = a } :: AutoscaleLabels s)
 
 -- | @roll_config@ nested settings.
 data RollConfig s = RollConfig'
@@ -470,15 +475,6 @@ data RollConfig s = RollConfig'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (RollConfig s)
-instance TF.IsValue  (RollConfig s)
-instance TF.IsObject (RollConfig s) where
-    toObject RollConfig'{..} = catMaybes
-        [ TF.assign "batch_size_percentage" <$> TF.attribute _batchSizePercentage
-        , TF.assign "grace_period" <$> TF.attribute _gracePeriod
-        , TF.assign "health_check_type" <$> TF.attribute _healthCheckType
-        ]
-
 newRollConfig
     :: TF.Attr s P.Integer -- ^ @batch_size_percentage@ - 'P.batchSizePercentage'
     -> RollConfig s
@@ -489,23 +485,32 @@ newRollConfig _batchSizePercentage =
         , _healthCheckType = TF.Nil
         }
 
+instance P.Hashable  (RollConfig s)
+instance TF.IsValue  (RollConfig s)
+instance TF.IsObject (RollConfig s) where
+    toObject RollConfig'{..} = P.catMaybes
+        [ TF.assign "batch_size_percentage" <$> TF.attribute _batchSizePercentage
+        , TF.assign "grace_period" <$> TF.attribute _gracePeriod
+        , TF.assign "health_check_type" <$> TF.attribute _healthCheckType
+        ]
+
+instance TF.IsValid (RollConfig s) where
+    validator = P.mempty
+
 instance P.HasBatchSizePercentage (RollConfig s) (TF.Attr s P.Integer) where
     batchSizePercentage =
         P.lens (_batchSizePercentage :: RollConfig s -> TF.Attr s P.Integer)
-               (\s a -> s { _batchSizePercentage = a
-                          } :: RollConfig s)
+               (\s a -> s { _batchSizePercentage = a } :: RollConfig s)
 
 instance P.HasGracePeriod (RollConfig s) (TF.Attr s P.Integer) where
     gracePeriod =
         P.lens (_gracePeriod :: RollConfig s -> TF.Attr s P.Integer)
-               (\s a -> s { _gracePeriod = a
-                          } :: RollConfig s)
+               (\s a -> s { _gracePeriod = a } :: RollConfig s)
 
 instance P.HasHealthCheckType (RollConfig s) (TF.Attr s P.Text) where
     healthCheckType =
         P.lens (_healthCheckType :: RollConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _healthCheckType = a
-                          } :: RollConfig s)
+               (\s a -> s { _healthCheckType = a } :: RollConfig s)
 
 -- | @integration_nomad@ nested settings.
 data IntegrationNomad s = IntegrationNomad'
@@ -535,20 +540,6 @@ data IntegrationNomad s = IntegrationNomad'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (IntegrationNomad s)
-instance TF.IsValue  (IntegrationNomad s)
-instance TF.IsObject (IntegrationNomad s) where
-    toObject IntegrationNomad'{..} = catMaybes
-        [ TF.assign "acl_token" <$> TF.attribute _aclToken
-        , TF.assign "autoscale_constraints" <$> TF.attribute _autoscaleConstraints
-        , TF.assign "autoscale_cooldown" <$> TF.attribute _autoscaleCooldown
-        , TF.assign "autoscale_down" <$> TF.attribute _autoscaleDown
-        , TF.assign "autoscale_headroom" <$> TF.attribute _autoscaleHeadroom
-        , TF.assign "autoscale_is_enabled" <$> TF.attribute _autoscaleIsEnabled
-        , TF.assign "master_host" <$> TF.attribute _masterHost
-        , TF.assign "master_port" <$> TF.attribute _masterPort
-        ]
-
 newIntegrationNomad
     :: TF.Attr s P.Text -- ^ @master_host@ - 'P.masterHost'
     -> TF.Attr s P.Integer -- ^ @master_port@ - 'P.masterPort'
@@ -565,53 +556,74 @@ newIntegrationNomad _masterHost _masterPort =
         , _masterPort = _masterPort
         }
 
+instance P.Hashable  (IntegrationNomad s)
+instance TF.IsValue  (IntegrationNomad s)
+instance TF.IsObject (IntegrationNomad s) where
+    toObject IntegrationNomad'{..} = P.catMaybes
+        [ TF.assign "acl_token" <$> TF.attribute _aclToken
+        , TF.assign "autoscale_constraints" <$> TF.attribute _autoscaleConstraints
+        , TF.assign "autoscale_cooldown" <$> TF.attribute _autoscaleCooldown
+        , TF.assign "autoscale_down" <$> TF.attribute _autoscaleDown
+        , TF.assign "autoscale_headroom" <$> TF.attribute _autoscaleHeadroom
+        , TF.assign "autoscale_is_enabled" <$> TF.attribute _autoscaleIsEnabled
+        , TF.assign "master_host" <$> TF.attribute _masterHost
+        , TF.assign "master_port" <$> TF.attribute _masterPort
+        ]
+
+instance TF.IsValid (IntegrationNomad s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_autoscaleConstraints"
+                  (_autoscaleConstraints
+                      :: IntegrationNomad s -> TF.Attr s [TF.Attr s (AutoscaleConstraints s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_autoscaleDown"
+                  (_autoscaleDown
+                      :: IntegrationNomad s -> TF.Attr s (AutoscaleDown s))
+                  TF.validator
+           P.<> TF.settingsValidator "_autoscaleHeadroom"
+                  (_autoscaleHeadroom
+                      :: IntegrationNomad s -> TF.Attr s (AutoscaleHeadroom s))
+                  TF.validator
+
 instance P.HasAclToken (IntegrationNomad s) (TF.Attr s P.Text) where
     aclToken =
         P.lens (_aclToken :: IntegrationNomad s -> TF.Attr s P.Text)
-               (\s a -> s { _aclToken = a
-                          } :: IntegrationNomad s)
+               (\s a -> s { _aclToken = a } :: IntegrationNomad s)
 
 instance P.HasAutoscaleConstraints (IntegrationNomad s) (TF.Attr s [TF.Attr s (AutoscaleConstraints s)]) where
     autoscaleConstraints =
         P.lens (_autoscaleConstraints :: IntegrationNomad s -> TF.Attr s [TF.Attr s (AutoscaleConstraints s)])
-               (\s a -> s { _autoscaleConstraints = a
-                          } :: IntegrationNomad s)
+               (\s a -> s { _autoscaleConstraints = a } :: IntegrationNomad s)
 
 instance P.HasAutoscaleCooldown (IntegrationNomad s) (TF.Attr s P.Integer) where
     autoscaleCooldown =
         P.lens (_autoscaleCooldown :: IntegrationNomad s -> TF.Attr s P.Integer)
-               (\s a -> s { _autoscaleCooldown = a
-                          } :: IntegrationNomad s)
+               (\s a -> s { _autoscaleCooldown = a } :: IntegrationNomad s)
 
 instance P.HasAutoscaleDown (IntegrationNomad s) (TF.Attr s (AutoscaleDown s)) where
     autoscaleDown =
         P.lens (_autoscaleDown :: IntegrationNomad s -> TF.Attr s (AutoscaleDown s))
-               (\s a -> s { _autoscaleDown = a
-                          } :: IntegrationNomad s)
+               (\s a -> s { _autoscaleDown = a } :: IntegrationNomad s)
 
 instance P.HasAutoscaleHeadroom (IntegrationNomad s) (TF.Attr s (AutoscaleHeadroom s)) where
     autoscaleHeadroom =
         P.lens (_autoscaleHeadroom :: IntegrationNomad s -> TF.Attr s (AutoscaleHeadroom s))
-               (\s a -> s { _autoscaleHeadroom = a
-                          } :: IntegrationNomad s)
+               (\s a -> s { _autoscaleHeadroom = a } :: IntegrationNomad s)
 
 instance P.HasAutoscaleIsEnabled (IntegrationNomad s) (TF.Attr s P.Bool) where
     autoscaleIsEnabled =
         P.lens (_autoscaleIsEnabled :: IntegrationNomad s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoscaleIsEnabled = a
-                          } :: IntegrationNomad s)
+               (\s a -> s { _autoscaleIsEnabled = a } :: IntegrationNomad s)
 
 instance P.HasMasterHost (IntegrationNomad s) (TF.Attr s P.Text) where
     masterHost =
         P.lens (_masterHost :: IntegrationNomad s -> TF.Attr s P.Text)
-               (\s a -> s { _masterHost = a
-                          } :: IntegrationNomad s)
+               (\s a -> s { _masterHost = a } :: IntegrationNomad s)
 
 instance P.HasMasterPort (IntegrationNomad s) (TF.Attr s P.Integer) where
     masterPort =
         P.lens (_masterPort :: IntegrationNomad s -> TF.Attr s P.Integer)
-               (\s a -> s { _masterPort = a
-                          } :: IntegrationNomad s)
+               (\s a -> s { _masterPort = a } :: IntegrationNomad s)
 
 -- | @integration_rancher@ nested settings.
 data IntegrationRancher s = IntegrationRancher'
@@ -626,15 +638,6 @@ data IntegrationRancher s = IntegrationRancher'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (IntegrationRancher s)
-instance TF.IsValue  (IntegrationRancher s)
-instance TF.IsObject (IntegrationRancher s) where
-    toObject IntegrationRancher'{..} = catMaybes
-        [ TF.assign "access_key" <$> TF.attribute _accessKey
-        , TF.assign "master_host" <$> TF.attribute _masterHost
-        , TF.assign "secret_key" <$> TF.attribute _secretKey
-        ]
-
 newIntegrationRancher
     :: TF.Attr s P.Text -- ^ @access_key@ - 'P.accessKey'
     -> TF.Attr s P.Text -- ^ @master_host@ - 'P.masterHost'
@@ -647,23 +650,32 @@ newIntegrationRancher _accessKey _masterHost _secretKey =
         , _secretKey = _secretKey
         }
 
+instance P.Hashable  (IntegrationRancher s)
+instance TF.IsValue  (IntegrationRancher s)
+instance TF.IsObject (IntegrationRancher s) where
+    toObject IntegrationRancher'{..} = P.catMaybes
+        [ TF.assign "access_key" <$> TF.attribute _accessKey
+        , TF.assign "master_host" <$> TF.attribute _masterHost
+        , TF.assign "secret_key" <$> TF.attribute _secretKey
+        ]
+
+instance TF.IsValid (IntegrationRancher s) where
+    validator = P.mempty
+
 instance P.HasAccessKey (IntegrationRancher s) (TF.Attr s P.Text) where
     accessKey =
         P.lens (_accessKey :: IntegrationRancher s -> TF.Attr s P.Text)
-               (\s a -> s { _accessKey = a
-                          } :: IntegrationRancher s)
+               (\s a -> s { _accessKey = a } :: IntegrationRancher s)
 
 instance P.HasMasterHost (IntegrationRancher s) (TF.Attr s P.Text) where
     masterHost =
         P.lens (_masterHost :: IntegrationRancher s -> TF.Attr s P.Text)
-               (\s a -> s { _masterHost = a
-                          } :: IntegrationRancher s)
+               (\s a -> s { _masterHost = a } :: IntegrationRancher s)
 
 instance P.HasSecretKey (IntegrationRancher s) (TF.Attr s P.Text) where
     secretKey =
         P.lens (_secretKey :: IntegrationRancher s -> TF.Attr s P.Text)
-               (\s a -> s { _secretKey = a
-                          } :: IntegrationRancher s)
+               (\s a -> s { _secretKey = a } :: IntegrationRancher s)
 
 -- | @scaling_up_policy@ nested settings.
 data ScalingUpPolicy s = ScalingUpPolicy'
@@ -708,25 +720,6 @@ data ScalingUpPolicy s = ScalingUpPolicy'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (ScalingUpPolicy s)
-instance TF.IsValue  (ScalingUpPolicy s)
-instance TF.IsObject (ScalingUpPolicy s) where
-    toObject ScalingUpPolicy'{..} = catMaybes
-        [ TF.assign "action_type" <$> TF.attribute _actionType
-        , TF.assign "adjustment" <$> TF.attribute _adjustment
-        , TF.assign "dimensions" <$> TF.attribute _dimensions
-        , TF.assign "max_target_capacity" <$> TF.attribute _maxTargetCapacity
-        , TF.assign "maximum" <$> TF.attribute _maximum
-        , TF.assign "metric_name" <$> TF.attribute _metricName
-        , TF.assign "min_target_capacity" <$> TF.attribute _minTargetCapacity
-        , TF.assign "minimum" <$> TF.attribute _minimum
-        , TF.assign "namespace" <$> TF.attribute _namespace
-        , TF.assign "policy_name" <$> TF.attribute _policyName
-        , TF.assign "target" <$> TF.attribute _target
-        , TF.assign "threshold" <$> TF.attribute _threshold
-        , TF.assign "unit" <$> TF.attribute _unit
-        ]
-
 newScalingUpPolicy
     :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
@@ -751,83 +744,92 @@ newScalingUpPolicy _metricName _namespace _policyName _threshold _unit =
         , _unit = _unit
         }
 
+instance P.Hashable  (ScalingUpPolicy s)
+instance TF.IsValue  (ScalingUpPolicy s)
+instance TF.IsObject (ScalingUpPolicy s) where
+    toObject ScalingUpPolicy'{..} = P.catMaybes
+        [ TF.assign "action_type" <$> TF.attribute _actionType
+        , TF.assign "adjustment" <$> TF.attribute _adjustment
+        , TF.assign "dimensions" <$> TF.attribute _dimensions
+        , TF.assign "max_target_capacity" <$> TF.attribute _maxTargetCapacity
+        , TF.assign "maximum" <$> TF.attribute _maximum
+        , TF.assign "metric_name" <$> TF.attribute _metricName
+        , TF.assign "min_target_capacity" <$> TF.attribute _minTargetCapacity
+        , TF.assign "minimum" <$> TF.attribute _minimum
+        , TF.assign "namespace" <$> TF.attribute _namespace
+        , TF.assign "policy_name" <$> TF.attribute _policyName
+        , TF.assign "target" <$> TF.attribute _target
+        , TF.assign "threshold" <$> TF.attribute _threshold
+        , TF.assign "unit" <$> TF.attribute _unit
+        ]
+
+instance TF.IsValid (ScalingUpPolicy s) where
+    validator = P.mempty
+
 instance P.HasActionType (ScalingUpPolicy s) (TF.Attr s P.Text) where
     actionType =
         P.lens (_actionType :: ScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _actionType = a
-                          } :: ScalingUpPolicy s)
+               (\s a -> s { _actionType = a } :: ScalingUpPolicy s)
 
 instance P.HasAdjustment (ScalingUpPolicy s) (TF.Attr s P.Text) where
     adjustment =
         P.lens (_adjustment :: ScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _adjustment = a
-                          } :: ScalingUpPolicy s)
+               (\s a -> s { _adjustment = a } :: ScalingUpPolicy s)
 
 instance P.HasDimensions (ScalingUpPolicy s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     dimensions =
         P.lens (_dimensions :: ScalingUpPolicy s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _dimensions = a
-                          } :: ScalingUpPolicy s)
+               (\s a -> s { _dimensions = a } :: ScalingUpPolicy s)
 
 instance P.HasMaxTargetCapacity (ScalingUpPolicy s) (TF.Attr s P.Text) where
     maxTargetCapacity =
         P.lens (_maxTargetCapacity :: ScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _maxTargetCapacity = a
-                          } :: ScalingUpPolicy s)
+               (\s a -> s { _maxTargetCapacity = a } :: ScalingUpPolicy s)
 
 instance P.HasMaximum (ScalingUpPolicy s) (TF.Attr s P.Text) where
     maximum =
         P.lens (_maximum :: ScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _maximum = a
-                          } :: ScalingUpPolicy s)
+               (\s a -> s { _maximum = a } :: ScalingUpPolicy s)
 
 instance P.HasMetricName (ScalingUpPolicy s) (TF.Attr s P.Text) where
     metricName =
         P.lens (_metricName :: ScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _metricName = a
-                          } :: ScalingUpPolicy s)
+               (\s a -> s { _metricName = a } :: ScalingUpPolicy s)
 
 instance P.HasMinTargetCapacity (ScalingUpPolicy s) (TF.Attr s P.Text) where
     minTargetCapacity =
         P.lens (_minTargetCapacity :: ScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _minTargetCapacity = a
-                          } :: ScalingUpPolicy s)
+               (\s a -> s { _minTargetCapacity = a } :: ScalingUpPolicy s)
 
 instance P.HasMinimum (ScalingUpPolicy s) (TF.Attr s P.Text) where
     minimum =
         P.lens (_minimum :: ScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _minimum = a
-                          } :: ScalingUpPolicy s)
+               (\s a -> s { _minimum = a } :: ScalingUpPolicy s)
 
 instance P.HasNamespace (ScalingUpPolicy s) (TF.Attr s P.Text) where
     namespace =
         P.lens (_namespace :: ScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _namespace = a
-                          } :: ScalingUpPolicy s)
+               (\s a -> s { _namespace = a } :: ScalingUpPolicy s)
 
 instance P.HasPolicyName (ScalingUpPolicy s) (TF.Attr s P.Text) where
     policyName =
         P.lens (_policyName :: ScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _policyName = a
-                          } :: ScalingUpPolicy s)
+               (\s a -> s { _policyName = a } :: ScalingUpPolicy s)
 
 instance P.HasTarget (ScalingUpPolicy s) (TF.Attr s P.Text) where
     target =
         P.lens (_target :: ScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _target = a
-                          } :: ScalingUpPolicy s)
+               (\s a -> s { _target = a } :: ScalingUpPolicy s)
 
 instance P.HasThreshold (ScalingUpPolicy s) (TF.Attr s P.Double) where
     threshold =
         P.lens (_threshold :: ScalingUpPolicy s -> TF.Attr s P.Double)
-               (\s a -> s { _threshold = a
-                          } :: ScalingUpPolicy s)
+               (\s a -> s { _threshold = a } :: ScalingUpPolicy s)
 
 instance P.HasUnit (ScalingUpPolicy s) (TF.Attr s P.Text) where
     unit =
         P.lens (_unit :: ScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _unit = a
-                          } :: ScalingUpPolicy s)
+               (\s a -> s { _unit = a } :: ScalingUpPolicy s)
 
 instance s ~ s' => P.HasComputedCooldown (TF.Ref s' (ScalingUpPolicy s)) (TF.Attr s P.Integer) where
     computedCooldown x = TF.compute (TF.refKey x) "_computedCooldown"
@@ -881,22 +883,6 @@ data IntegrationKubernetes s = IntegrationKubernetes'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (IntegrationKubernetes s)
-instance TF.IsValue  (IntegrationKubernetes s)
-instance TF.IsObject (IntegrationKubernetes s) where
-    toObject IntegrationKubernetes'{..} = catMaybes
-        [ TF.assign "api_server" <$> TF.attribute _apiServer
-        , TF.assign "autoscale_cooldown" <$> TF.attribute _autoscaleCooldown
-        , TF.assign "autoscale_down" <$> TF.attribute _autoscaleDown
-        , TF.assign "autoscale_headroom" <$> TF.attribute _autoscaleHeadroom
-        , TF.assign "autoscale_is_auto_config" <$> TF.attribute _autoscaleIsAutoConfig
-        , TF.assign "autoscale_is_enabled" <$> TF.attribute _autoscaleIsEnabled
-        , TF.assign "autoscale_labels" <$> TF.attribute _autoscaleLabels
-        , TF.assign "cluster_identifier" <$> TF.attribute _clusterIdentifier
-        , TF.assign "integration_mode" <$> TF.attribute _integrationMode
-        , TF.assign "token" <$> TF.attribute _token
-        ]
-
 newIntegrationKubernetes
     :: IntegrationKubernetes s
 newIntegrationKubernetes =
@@ -913,65 +899,86 @@ newIntegrationKubernetes =
         , _token = TF.Nil
         }
 
+instance P.Hashable  (IntegrationKubernetes s)
+instance TF.IsValue  (IntegrationKubernetes s)
+instance TF.IsObject (IntegrationKubernetes s) where
+    toObject IntegrationKubernetes'{..} = P.catMaybes
+        [ TF.assign "api_server" <$> TF.attribute _apiServer
+        , TF.assign "autoscale_cooldown" <$> TF.attribute _autoscaleCooldown
+        , TF.assign "autoscale_down" <$> TF.attribute _autoscaleDown
+        , TF.assign "autoscale_headroom" <$> TF.attribute _autoscaleHeadroom
+        , TF.assign "autoscale_is_auto_config" <$> TF.attribute _autoscaleIsAutoConfig
+        , TF.assign "autoscale_is_enabled" <$> TF.attribute _autoscaleIsEnabled
+        , TF.assign "autoscale_labels" <$> TF.attribute _autoscaleLabels
+        , TF.assign "cluster_identifier" <$> TF.attribute _clusterIdentifier
+        , TF.assign "integration_mode" <$> TF.attribute _integrationMode
+        , TF.assign "token" <$> TF.attribute _token
+        ]
+
+instance TF.IsValid (IntegrationKubernetes s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_autoscaleDown"
+                  (_autoscaleDown
+                      :: IntegrationKubernetes s -> TF.Attr s (AutoscaleDown s))
+                  TF.validator
+           P.<> TF.settingsValidator "_autoscaleHeadroom"
+                  (_autoscaleHeadroom
+                      :: IntegrationKubernetes s -> TF.Attr s (AutoscaleHeadroom s))
+                  TF.validator
+           P.<> TF.settingsValidator "_autoscaleLabels"
+                  (_autoscaleLabels
+                      :: IntegrationKubernetes s -> TF.Attr s [TF.Attr s (AutoscaleLabels s)])
+                  TF.validator
+
 instance P.HasApiServer (IntegrationKubernetes s) (TF.Attr s P.Text) where
     apiServer =
         P.lens (_apiServer :: IntegrationKubernetes s -> TF.Attr s P.Text)
-               (\s a -> s { _apiServer = a
-                          } :: IntegrationKubernetes s)
+               (\s a -> s { _apiServer = a } :: IntegrationKubernetes s)
 
 instance P.HasAutoscaleCooldown (IntegrationKubernetes s) (TF.Attr s P.Integer) where
     autoscaleCooldown =
         P.lens (_autoscaleCooldown :: IntegrationKubernetes s -> TF.Attr s P.Integer)
-               (\s a -> s { _autoscaleCooldown = a
-                          } :: IntegrationKubernetes s)
+               (\s a -> s { _autoscaleCooldown = a } :: IntegrationKubernetes s)
 
 instance P.HasAutoscaleDown (IntegrationKubernetes s) (TF.Attr s (AutoscaleDown s)) where
     autoscaleDown =
         P.lens (_autoscaleDown :: IntegrationKubernetes s -> TF.Attr s (AutoscaleDown s))
-               (\s a -> s { _autoscaleDown = a
-                          } :: IntegrationKubernetes s)
+               (\s a -> s { _autoscaleDown = a } :: IntegrationKubernetes s)
 
 instance P.HasAutoscaleHeadroom (IntegrationKubernetes s) (TF.Attr s (AutoscaleHeadroom s)) where
     autoscaleHeadroom =
         P.lens (_autoscaleHeadroom :: IntegrationKubernetes s -> TF.Attr s (AutoscaleHeadroom s))
-               (\s a -> s { _autoscaleHeadroom = a
-                          } :: IntegrationKubernetes s)
+               (\s a -> s { _autoscaleHeadroom = a } :: IntegrationKubernetes s)
 
 instance P.HasAutoscaleIsAutoConfig (IntegrationKubernetes s) (TF.Attr s P.Bool) where
     autoscaleIsAutoConfig =
         P.lens (_autoscaleIsAutoConfig :: IntegrationKubernetes s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoscaleIsAutoConfig = a
-                          } :: IntegrationKubernetes s)
+               (\s a -> s { _autoscaleIsAutoConfig = a } :: IntegrationKubernetes s)
 
 instance P.HasAutoscaleIsEnabled (IntegrationKubernetes s) (TF.Attr s P.Bool) where
     autoscaleIsEnabled =
         P.lens (_autoscaleIsEnabled :: IntegrationKubernetes s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoscaleIsEnabled = a
-                          } :: IntegrationKubernetes s)
+               (\s a -> s { _autoscaleIsEnabled = a } :: IntegrationKubernetes s)
 
 instance P.HasAutoscaleLabels (IntegrationKubernetes s) (TF.Attr s [TF.Attr s (AutoscaleLabels s)]) where
     autoscaleLabels =
         P.lens (_autoscaleLabels :: IntegrationKubernetes s -> TF.Attr s [TF.Attr s (AutoscaleLabels s)])
-               (\s a -> s { _autoscaleLabels = a
-                          } :: IntegrationKubernetes s)
+               (\s a -> s { _autoscaleLabels = a } :: IntegrationKubernetes s)
 
 instance P.HasClusterIdentifier (IntegrationKubernetes s) (TF.Attr s P.Text) where
     clusterIdentifier =
         P.lens (_clusterIdentifier :: IntegrationKubernetes s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterIdentifier = a
-                          } :: IntegrationKubernetes s)
+               (\s a -> s { _clusterIdentifier = a } :: IntegrationKubernetes s)
 
 instance P.HasIntegrationMode (IntegrationKubernetes s) (TF.Attr s P.Text) where
     integrationMode =
         P.lens (_integrationMode :: IntegrationKubernetes s -> TF.Attr s P.Text)
-               (\s a -> s { _integrationMode = a
-                          } :: IntegrationKubernetes s)
+               (\s a -> s { _integrationMode = a } :: IntegrationKubernetes s)
 
 instance P.HasToken (IntegrationKubernetes s) (TF.Attr s P.Text) where
     token =
         P.lens (_token :: IntegrationKubernetes s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a
-                          } :: IntegrationKubernetes s)
+               (\s a -> s { _token = a } :: IntegrationKubernetes s)
 
 -- | @stateful_deallocation@ nested settings.
 data StatefulDeallocation s = StatefulDeallocation'
@@ -989,16 +996,6 @@ data StatefulDeallocation s = StatefulDeallocation'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (StatefulDeallocation s)
-instance TF.IsValue  (StatefulDeallocation s)
-instance TF.IsObject (StatefulDeallocation s) where
-    toObject StatefulDeallocation'{..} = catMaybes
-        [ TF.assign "should_delete_images" <$> TF.attribute _shouldDeleteImages
-        , TF.assign "should_delete_network_interfaces" <$> TF.attribute _shouldDeleteNetworkInterfaces
-        , TF.assign "should_delete_snapshots" <$> TF.attribute _shouldDeleteSnapshots
-        , TF.assign "should_delete_volumes" <$> TF.attribute _shouldDeleteVolumes
-        ]
-
 newStatefulDeallocation
     :: StatefulDeallocation s
 newStatefulDeallocation =
@@ -1009,29 +1006,38 @@ newStatefulDeallocation =
         , _shouldDeleteVolumes = TF.Nil
         }
 
+instance P.Hashable  (StatefulDeallocation s)
+instance TF.IsValue  (StatefulDeallocation s)
+instance TF.IsObject (StatefulDeallocation s) where
+    toObject StatefulDeallocation'{..} = P.catMaybes
+        [ TF.assign "should_delete_images" <$> TF.attribute _shouldDeleteImages
+        , TF.assign "should_delete_network_interfaces" <$> TF.attribute _shouldDeleteNetworkInterfaces
+        , TF.assign "should_delete_snapshots" <$> TF.attribute _shouldDeleteSnapshots
+        , TF.assign "should_delete_volumes" <$> TF.attribute _shouldDeleteVolumes
+        ]
+
+instance TF.IsValid (StatefulDeallocation s) where
+    validator = P.mempty
+
 instance P.HasShouldDeleteImages (StatefulDeallocation s) (TF.Attr s P.Bool) where
     shouldDeleteImages =
         P.lens (_shouldDeleteImages :: StatefulDeallocation s -> TF.Attr s P.Bool)
-               (\s a -> s { _shouldDeleteImages = a
-                          } :: StatefulDeallocation s)
+               (\s a -> s { _shouldDeleteImages = a } :: StatefulDeallocation s)
 
 instance P.HasShouldDeleteNetworkInterfaces (StatefulDeallocation s) (TF.Attr s P.Bool) where
     shouldDeleteNetworkInterfaces =
         P.lens (_shouldDeleteNetworkInterfaces :: StatefulDeallocation s -> TF.Attr s P.Bool)
-               (\s a -> s { _shouldDeleteNetworkInterfaces = a
-                          } :: StatefulDeallocation s)
+               (\s a -> s { _shouldDeleteNetworkInterfaces = a } :: StatefulDeallocation s)
 
 instance P.HasShouldDeleteSnapshots (StatefulDeallocation s) (TF.Attr s P.Bool) where
     shouldDeleteSnapshots =
         P.lens (_shouldDeleteSnapshots :: StatefulDeallocation s -> TF.Attr s P.Bool)
-               (\s a -> s { _shouldDeleteSnapshots = a
-                          } :: StatefulDeallocation s)
+               (\s a -> s { _shouldDeleteSnapshots = a } :: StatefulDeallocation s)
 
 instance P.HasShouldDeleteVolumes (StatefulDeallocation s) (TF.Attr s P.Bool) where
     shouldDeleteVolumes =
         P.lens (_shouldDeleteVolumes :: StatefulDeallocation s -> TF.Attr s P.Bool)
-               (\s a -> s { _shouldDeleteVolumes = a
-                          } :: StatefulDeallocation s)
+               (\s a -> s { _shouldDeleteVolumes = a } :: StatefulDeallocation s)
 
 -- | @instance_types_weights@ nested settings.
 data InstanceTypesWeights s = InstanceTypesWeights'
@@ -1043,14 +1049,6 @@ data InstanceTypesWeights s = InstanceTypesWeights'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (InstanceTypesWeights s)
-instance TF.IsValue  (InstanceTypesWeights s)
-instance TF.IsObject (InstanceTypesWeights s) where
-    toObject InstanceTypesWeights'{..} = catMaybes
-        [ TF.assign "instance_type" <$> TF.attribute _instanceType
-        , TF.assign "weight" <$> TF.attribute _weight
-        ]
-
 newInstanceTypesWeights
     :: TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
     -> TF.Attr s P.Integer -- ^ @weight@ - 'P.weight'
@@ -1061,17 +1059,26 @@ newInstanceTypesWeights _instanceType _weight =
         , _weight = _weight
         }
 
+instance P.Hashable  (InstanceTypesWeights s)
+instance TF.IsValue  (InstanceTypesWeights s)
+instance TF.IsObject (InstanceTypesWeights s) where
+    toObject InstanceTypesWeights'{..} = P.catMaybes
+        [ TF.assign "instance_type" <$> TF.attribute _instanceType
+        , TF.assign "weight" <$> TF.attribute _weight
+        ]
+
+instance TF.IsValid (InstanceTypesWeights s) where
+    validator = P.mempty
+
 instance P.HasInstanceType (InstanceTypesWeights s) (TF.Attr s P.Text) where
     instanceType =
         P.lens (_instanceType :: InstanceTypesWeights s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceType = a
-                          } :: InstanceTypesWeights s)
+               (\s a -> s { _instanceType = a } :: InstanceTypesWeights s)
 
 instance P.HasWeight (InstanceTypesWeights s) (TF.Attr s P.Integer) where
     weight =
         P.lens (_weight :: InstanceTypesWeights s -> TF.Attr s P.Integer)
-               (\s a -> s { _weight = a
-                          } :: InstanceTypesWeights s)
+               (\s a -> s { _weight = a } :: InstanceTypesWeights s)
 
 -- | @revert_to_spot@ nested settings.
 data RevertToSpot s = RevertToSpot'
@@ -1083,14 +1090,6 @@ data RevertToSpot s = RevertToSpot'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (RevertToSpot s)
-instance TF.IsValue  (RevertToSpot s)
-instance TF.IsObject (RevertToSpot s) where
-    toObject RevertToSpot'{..} = catMaybes
-        [ TF.assign "perform_at" <$> TF.attribute _performAt
-        , TF.assign "time_windows" <$> TF.attribute _timeWindows
-        ]
-
 newRevertToSpot
     :: TF.Attr s P.Text -- ^ @perform_at@ - 'P.performAt'
     -> RevertToSpot s
@@ -1100,17 +1099,26 @@ newRevertToSpot _performAt =
         , _timeWindows = TF.Nil
         }
 
+instance P.Hashable  (RevertToSpot s)
+instance TF.IsValue  (RevertToSpot s)
+instance TF.IsObject (RevertToSpot s) where
+    toObject RevertToSpot'{..} = P.catMaybes
+        [ TF.assign "perform_at" <$> TF.attribute _performAt
+        , TF.assign "time_windows" <$> TF.attribute _timeWindows
+        ]
+
+instance TF.IsValid (RevertToSpot s) where
+    validator = P.mempty
+
 instance P.HasPerformAt (RevertToSpot s) (TF.Attr s P.Text) where
     performAt =
         P.lens (_performAt :: RevertToSpot s -> TF.Attr s P.Text)
-               (\s a -> s { _performAt = a
-                          } :: RevertToSpot s)
+               (\s a -> s { _performAt = a } :: RevertToSpot s)
 
 instance P.HasTimeWindows (RevertToSpot s) (TF.Attr s [TF.Attr s P.Text]) where
     timeWindows =
         P.lens (_timeWindows :: RevertToSpot s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _timeWindows = a
-                          } :: RevertToSpot s)
+               (\s a -> s { _timeWindows = a } :: RevertToSpot s)
 
 -- | @integration_gitlab@ nested settings.
 data IntegrationGitlab s = IntegrationGitlab'
@@ -1119,13 +1127,6 @@ data IntegrationGitlab s = IntegrationGitlab'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (IntegrationGitlab s)
-instance TF.IsValue  (IntegrationGitlab s)
-instance TF.IsObject (IntegrationGitlab s) where
-    toObject IntegrationGitlab'{..} = catMaybes
-        [ TF.assign "runner" <$> TF.attribute _runner
-        ]
-
 newIntegrationGitlab
     :: IntegrationGitlab s
 newIntegrationGitlab =
@@ -1133,11 +1134,24 @@ newIntegrationGitlab =
         { _runner = TF.Nil
         }
 
+instance P.Hashable  (IntegrationGitlab s)
+instance TF.IsValue  (IntegrationGitlab s)
+instance TF.IsObject (IntegrationGitlab s) where
+    toObject IntegrationGitlab'{..} = P.catMaybes
+        [ TF.assign "runner" <$> TF.attribute _runner
+        ]
+
+instance TF.IsValid (IntegrationGitlab s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_runner"
+                  (_runner
+                      :: IntegrationGitlab s -> TF.Attr s (Runner s))
+                  TF.validator
+
 instance P.HasRunner (IntegrationGitlab s) (TF.Attr s (Runner s)) where
     runner =
         P.lens (_runner :: IntegrationGitlab s -> TF.Attr s (Runner s))
-               (\s a -> s { _runner = a
-                          } :: IntegrationGitlab s)
+               (\s a -> s { _runner = a } :: IntegrationGitlab s)
 
 -- | @integration_ecs@ nested settings.
 data IntegrationEcs s = IntegrationEcs'
@@ -1164,19 +1178,6 @@ data IntegrationEcs s = IntegrationEcs'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (IntegrationEcs s)
-instance TF.IsValue  (IntegrationEcs s)
-instance TF.IsObject (IntegrationEcs s) where
-    toObject IntegrationEcs'{..} = catMaybes
-        [ TF.assign "autoscale_attributes" <$> TF.attribute _autoscaleAttributes
-        , TF.assign "autoscale_cooldown" <$> TF.attribute _autoscaleCooldown
-        , TF.assign "autoscale_down" <$> TF.attribute _autoscaleDown
-        , TF.assign "autoscale_headroom" <$> TF.attribute _autoscaleHeadroom
-        , TF.assign "autoscale_is_enabled" <$> TF.attribute _autoscaleIsEnabled
-        , TF.assign "autoscale_scale_down_non_service_tasks" <$> TF.attribute _autoscaleScaleDownNonServiceTasks
-        , TF.assign "cluster_name" <$> TF.attribute _clusterName
-        ]
-
 newIntegrationEcs
     :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
     -> IntegrationEcs s
@@ -1191,47 +1192,68 @@ newIntegrationEcs _clusterName =
         , _clusterName = _clusterName
         }
 
+instance P.Hashable  (IntegrationEcs s)
+instance TF.IsValue  (IntegrationEcs s)
+instance TF.IsObject (IntegrationEcs s) where
+    toObject IntegrationEcs'{..} = P.catMaybes
+        [ TF.assign "autoscale_attributes" <$> TF.attribute _autoscaleAttributes
+        , TF.assign "autoscale_cooldown" <$> TF.attribute _autoscaleCooldown
+        , TF.assign "autoscale_down" <$> TF.attribute _autoscaleDown
+        , TF.assign "autoscale_headroom" <$> TF.attribute _autoscaleHeadroom
+        , TF.assign "autoscale_is_enabled" <$> TF.attribute _autoscaleIsEnabled
+        , TF.assign "autoscale_scale_down_non_service_tasks" <$> TF.attribute _autoscaleScaleDownNonServiceTasks
+        , TF.assign "cluster_name" <$> TF.attribute _clusterName
+        ]
+
+instance TF.IsValid (IntegrationEcs s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_autoscaleAttributes"
+                  (_autoscaleAttributes
+                      :: IntegrationEcs s -> TF.Attr s [TF.Attr s (AutoscaleAttributes s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_autoscaleDown"
+                  (_autoscaleDown
+                      :: IntegrationEcs s -> TF.Attr s (AutoscaleDown s))
+                  TF.validator
+           P.<> TF.settingsValidator "_autoscaleHeadroom"
+                  (_autoscaleHeadroom
+                      :: IntegrationEcs s -> TF.Attr s (AutoscaleHeadroom s))
+                  TF.validator
+
 instance P.HasAutoscaleAttributes (IntegrationEcs s) (TF.Attr s [TF.Attr s (AutoscaleAttributes s)]) where
     autoscaleAttributes =
         P.lens (_autoscaleAttributes :: IntegrationEcs s -> TF.Attr s [TF.Attr s (AutoscaleAttributes s)])
-               (\s a -> s { _autoscaleAttributes = a
-                          } :: IntegrationEcs s)
+               (\s a -> s { _autoscaleAttributes = a } :: IntegrationEcs s)
 
 instance P.HasAutoscaleCooldown (IntegrationEcs s) (TF.Attr s P.Integer) where
     autoscaleCooldown =
         P.lens (_autoscaleCooldown :: IntegrationEcs s -> TF.Attr s P.Integer)
-               (\s a -> s { _autoscaleCooldown = a
-                          } :: IntegrationEcs s)
+               (\s a -> s { _autoscaleCooldown = a } :: IntegrationEcs s)
 
 instance P.HasAutoscaleDown (IntegrationEcs s) (TF.Attr s (AutoscaleDown s)) where
     autoscaleDown =
         P.lens (_autoscaleDown :: IntegrationEcs s -> TF.Attr s (AutoscaleDown s))
-               (\s a -> s { _autoscaleDown = a
-                          } :: IntegrationEcs s)
+               (\s a -> s { _autoscaleDown = a } :: IntegrationEcs s)
 
 instance P.HasAutoscaleHeadroom (IntegrationEcs s) (TF.Attr s (AutoscaleHeadroom s)) where
     autoscaleHeadroom =
         P.lens (_autoscaleHeadroom :: IntegrationEcs s -> TF.Attr s (AutoscaleHeadroom s))
-               (\s a -> s { _autoscaleHeadroom = a
-                          } :: IntegrationEcs s)
+               (\s a -> s { _autoscaleHeadroom = a } :: IntegrationEcs s)
 
 instance P.HasAutoscaleIsEnabled (IntegrationEcs s) (TF.Attr s P.Bool) where
     autoscaleIsEnabled =
         P.lens (_autoscaleIsEnabled :: IntegrationEcs s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoscaleIsEnabled = a
-                          } :: IntegrationEcs s)
+               (\s a -> s { _autoscaleIsEnabled = a } :: IntegrationEcs s)
 
 instance P.HasAutoscaleScaleDownNonServiceTasks (IntegrationEcs s) (TF.Attr s P.Bool) where
     autoscaleScaleDownNonServiceTasks =
         P.lens (_autoscaleScaleDownNonServiceTasks :: IntegrationEcs s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoscaleScaleDownNonServiceTasks = a
-                          } :: IntegrationEcs s)
+               (\s a -> s { _autoscaleScaleDownNonServiceTasks = a } :: IntegrationEcs s)
 
 instance P.HasClusterName (IntegrationEcs s) (TF.Attr s P.Text) where
     clusterName =
         P.lens (_clusterName :: IntegrationEcs s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterName = a
-                          } :: IntegrationEcs s)
+               (\s a -> s { _clusterName = a } :: IntegrationEcs s)
 
 -- | @scaling_target_policy@ nested settings.
 data ScalingTargetPolicy s = ScalingTargetPolicy'
@@ -1255,18 +1277,6 @@ data ScalingTargetPolicy s = ScalingTargetPolicy'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (ScalingTargetPolicy s)
-instance TF.IsValue  (ScalingTargetPolicy s)
-instance TF.IsObject (ScalingTargetPolicy s) where
-    toObject ScalingTargetPolicy'{..} = catMaybes
-        [ TF.assign "dimensions" <$> TF.attribute _dimensions
-        , TF.assign "metric_name" <$> TF.attribute _metricName
-        , TF.assign "namespace" <$> TF.attribute _namespace
-        , TF.assign "policy_name" <$> TF.attribute _policyName
-        , TF.assign "target" <$> TF.attribute _target
-        , TF.assign "unit" <$> TF.attribute _unit
-        ]
-
 newScalingTargetPolicy
     :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
@@ -1284,41 +1294,50 @@ newScalingTargetPolicy _metricName _namespace _policyName _target _unit =
         , _unit = _unit
         }
 
+instance P.Hashable  (ScalingTargetPolicy s)
+instance TF.IsValue  (ScalingTargetPolicy s)
+instance TF.IsObject (ScalingTargetPolicy s) where
+    toObject ScalingTargetPolicy'{..} = P.catMaybes
+        [ TF.assign "dimensions" <$> TF.attribute _dimensions
+        , TF.assign "metric_name" <$> TF.attribute _metricName
+        , TF.assign "namespace" <$> TF.attribute _namespace
+        , TF.assign "policy_name" <$> TF.attribute _policyName
+        , TF.assign "target" <$> TF.attribute _target
+        , TF.assign "unit" <$> TF.attribute _unit
+        ]
+
+instance TF.IsValid (ScalingTargetPolicy s) where
+    validator = P.mempty
+
 instance P.HasDimensions (ScalingTargetPolicy s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     dimensions =
         P.lens (_dimensions :: ScalingTargetPolicy s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _dimensions = a
-                          } :: ScalingTargetPolicy s)
+               (\s a -> s { _dimensions = a } :: ScalingTargetPolicy s)
 
 instance P.HasMetricName (ScalingTargetPolicy s) (TF.Attr s P.Text) where
     metricName =
         P.lens (_metricName :: ScalingTargetPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _metricName = a
-                          } :: ScalingTargetPolicy s)
+               (\s a -> s { _metricName = a } :: ScalingTargetPolicy s)
 
 instance P.HasNamespace (ScalingTargetPolicy s) (TF.Attr s P.Text) where
     namespace =
         P.lens (_namespace :: ScalingTargetPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _namespace = a
-                          } :: ScalingTargetPolicy s)
+               (\s a -> s { _namespace = a } :: ScalingTargetPolicy s)
 
 instance P.HasPolicyName (ScalingTargetPolicy s) (TF.Attr s P.Text) where
     policyName =
         P.lens (_policyName :: ScalingTargetPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _policyName = a
-                          } :: ScalingTargetPolicy s)
+               (\s a -> s { _policyName = a } :: ScalingTargetPolicy s)
 
 instance P.HasTarget (ScalingTargetPolicy s) (TF.Attr s P.Double) where
     target =
         P.lens (_target :: ScalingTargetPolicy s -> TF.Attr s P.Double)
-               (\s a -> s { _target = a
-                          } :: ScalingTargetPolicy s)
+               (\s a -> s { _target = a } :: ScalingTargetPolicy s)
 
 instance P.HasUnit (ScalingTargetPolicy s) (TF.Attr s P.Text) where
     unit =
         P.lens (_unit :: ScalingTargetPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _unit = a
-                          } :: ScalingTargetPolicy s)
+               (\s a -> s { _unit = a } :: ScalingTargetPolicy s)
 
 instance s ~ s' => P.HasComputedCooldown (TF.Ref s' (ScalingTargetPolicy s)) (TF.Attr s P.Integer) where
     computedCooldown x = TF.compute (TF.refKey x) "_computedCooldown"
@@ -1336,13 +1355,6 @@ data IntegrationMesosphere s = IntegrationMesosphere'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (IntegrationMesosphere s)
-instance TF.IsValue  (IntegrationMesosphere s)
-instance TF.IsObject (IntegrationMesosphere s) where
-    toObject IntegrationMesosphere'{..} = catMaybes
-        [ TF.assign "api_server" <$> TF.attribute _apiServer
-        ]
-
 newIntegrationMesosphere
     :: TF.Attr s P.Text -- ^ @api_server@ - 'P.apiServer'
     -> IntegrationMesosphere s
@@ -1351,11 +1363,20 @@ newIntegrationMesosphere _apiServer =
         { _apiServer = _apiServer
         }
 
+instance P.Hashable  (IntegrationMesosphere s)
+instance TF.IsValue  (IntegrationMesosphere s)
+instance TF.IsObject (IntegrationMesosphere s) where
+    toObject IntegrationMesosphere'{..} = P.catMaybes
+        [ TF.assign "api_server" <$> TF.attribute _apiServer
+        ]
+
+instance TF.IsValid (IntegrationMesosphere s) where
+    validator = P.mempty
+
 instance P.HasApiServer (IntegrationMesosphere s) (TF.Attr s P.Text) where
     apiServer =
         P.lens (_apiServer :: IntegrationMesosphere s -> TF.Attr s P.Text)
-               (\s a -> s { _apiServer = a
-                          } :: IntegrationMesosphere s)
+               (\s a -> s { _apiServer = a } :: IntegrationMesosphere s)
 
 -- | @scaling_down_policy@ nested settings.
 data ScalingDownPolicy s = ScalingDownPolicy'
@@ -1400,25 +1421,6 @@ data ScalingDownPolicy s = ScalingDownPolicy'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (ScalingDownPolicy s)
-instance TF.IsValue  (ScalingDownPolicy s)
-instance TF.IsObject (ScalingDownPolicy s) where
-    toObject ScalingDownPolicy'{..} = catMaybes
-        [ TF.assign "action_type" <$> TF.attribute _actionType
-        , TF.assign "adjustment" <$> TF.attribute _adjustment
-        , TF.assign "dimensions" <$> TF.attribute _dimensions
-        , TF.assign "max_target_capacity" <$> TF.attribute _maxTargetCapacity
-        , TF.assign "maximum" <$> TF.attribute _maximum
-        , TF.assign "metric_name" <$> TF.attribute _metricName
-        , TF.assign "min_target_capacity" <$> TF.attribute _minTargetCapacity
-        , TF.assign "minimum" <$> TF.attribute _minimum
-        , TF.assign "namespace" <$> TF.attribute _namespace
-        , TF.assign "policy_name" <$> TF.attribute _policyName
-        , TF.assign "target" <$> TF.attribute _target
-        , TF.assign "threshold" <$> TF.attribute _threshold
-        , TF.assign "unit" <$> TF.attribute _unit
-        ]
-
 newScalingDownPolicy
     :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
@@ -1443,83 +1445,92 @@ newScalingDownPolicy _metricName _namespace _policyName _threshold _unit =
         , _unit = _unit
         }
 
+instance P.Hashable  (ScalingDownPolicy s)
+instance TF.IsValue  (ScalingDownPolicy s)
+instance TF.IsObject (ScalingDownPolicy s) where
+    toObject ScalingDownPolicy'{..} = P.catMaybes
+        [ TF.assign "action_type" <$> TF.attribute _actionType
+        , TF.assign "adjustment" <$> TF.attribute _adjustment
+        , TF.assign "dimensions" <$> TF.attribute _dimensions
+        , TF.assign "max_target_capacity" <$> TF.attribute _maxTargetCapacity
+        , TF.assign "maximum" <$> TF.attribute _maximum
+        , TF.assign "metric_name" <$> TF.attribute _metricName
+        , TF.assign "min_target_capacity" <$> TF.attribute _minTargetCapacity
+        , TF.assign "minimum" <$> TF.attribute _minimum
+        , TF.assign "namespace" <$> TF.attribute _namespace
+        , TF.assign "policy_name" <$> TF.attribute _policyName
+        , TF.assign "target" <$> TF.attribute _target
+        , TF.assign "threshold" <$> TF.attribute _threshold
+        , TF.assign "unit" <$> TF.attribute _unit
+        ]
+
+instance TF.IsValid (ScalingDownPolicy s) where
+    validator = P.mempty
+
 instance P.HasActionType (ScalingDownPolicy s) (TF.Attr s P.Text) where
     actionType =
         P.lens (_actionType :: ScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _actionType = a
-                          } :: ScalingDownPolicy s)
+               (\s a -> s { _actionType = a } :: ScalingDownPolicy s)
 
 instance P.HasAdjustment (ScalingDownPolicy s) (TF.Attr s P.Text) where
     adjustment =
         P.lens (_adjustment :: ScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _adjustment = a
-                          } :: ScalingDownPolicy s)
+               (\s a -> s { _adjustment = a } :: ScalingDownPolicy s)
 
 instance P.HasDimensions (ScalingDownPolicy s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     dimensions =
         P.lens (_dimensions :: ScalingDownPolicy s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _dimensions = a
-                          } :: ScalingDownPolicy s)
+               (\s a -> s { _dimensions = a } :: ScalingDownPolicy s)
 
 instance P.HasMaxTargetCapacity (ScalingDownPolicy s) (TF.Attr s P.Text) where
     maxTargetCapacity =
         P.lens (_maxTargetCapacity :: ScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _maxTargetCapacity = a
-                          } :: ScalingDownPolicy s)
+               (\s a -> s { _maxTargetCapacity = a } :: ScalingDownPolicy s)
 
 instance P.HasMaximum (ScalingDownPolicy s) (TF.Attr s P.Text) where
     maximum =
         P.lens (_maximum :: ScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _maximum = a
-                          } :: ScalingDownPolicy s)
+               (\s a -> s { _maximum = a } :: ScalingDownPolicy s)
 
 instance P.HasMetricName (ScalingDownPolicy s) (TF.Attr s P.Text) where
     metricName =
         P.lens (_metricName :: ScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _metricName = a
-                          } :: ScalingDownPolicy s)
+               (\s a -> s { _metricName = a } :: ScalingDownPolicy s)
 
 instance P.HasMinTargetCapacity (ScalingDownPolicy s) (TF.Attr s P.Text) where
     minTargetCapacity =
         P.lens (_minTargetCapacity :: ScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _minTargetCapacity = a
-                          } :: ScalingDownPolicy s)
+               (\s a -> s { _minTargetCapacity = a } :: ScalingDownPolicy s)
 
 instance P.HasMinimum (ScalingDownPolicy s) (TF.Attr s P.Text) where
     minimum =
         P.lens (_minimum :: ScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _minimum = a
-                          } :: ScalingDownPolicy s)
+               (\s a -> s { _minimum = a } :: ScalingDownPolicy s)
 
 instance P.HasNamespace (ScalingDownPolicy s) (TF.Attr s P.Text) where
     namespace =
         P.lens (_namespace :: ScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _namespace = a
-                          } :: ScalingDownPolicy s)
+               (\s a -> s { _namespace = a } :: ScalingDownPolicy s)
 
 instance P.HasPolicyName (ScalingDownPolicy s) (TF.Attr s P.Text) where
     policyName =
         P.lens (_policyName :: ScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _policyName = a
-                          } :: ScalingDownPolicy s)
+               (\s a -> s { _policyName = a } :: ScalingDownPolicy s)
 
 instance P.HasTarget (ScalingDownPolicy s) (TF.Attr s P.Text) where
     target =
         P.lens (_target :: ScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _target = a
-                          } :: ScalingDownPolicy s)
+               (\s a -> s { _target = a } :: ScalingDownPolicy s)
 
 instance P.HasThreshold (ScalingDownPolicy s) (TF.Attr s P.Double) where
     threshold =
         P.lens (_threshold :: ScalingDownPolicy s -> TF.Attr s P.Double)
-               (\s a -> s { _threshold = a
-                          } :: ScalingDownPolicy s)
+               (\s a -> s { _threshold = a } :: ScalingDownPolicy s)
 
 instance P.HasUnit (ScalingDownPolicy s) (TF.Attr s P.Text) where
     unit =
         P.lens (_unit :: ScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _unit = a
-                          } :: ScalingDownPolicy s)
+               (\s a -> s { _unit = a } :: ScalingDownPolicy s)
 
 instance s ~ s' => P.HasComputedCooldown (TF.Ref s' (ScalingDownPolicy s)) (TF.Attr s P.Integer) where
     computedCooldown x = TF.compute (TF.refKey x) "_computedCooldown"
@@ -1552,15 +1563,6 @@ data AutoscaleHeadroom s = AutoscaleHeadroom'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (AutoscaleHeadroom s)
-instance TF.IsValue  (AutoscaleHeadroom s)
-instance TF.IsObject (AutoscaleHeadroom s) where
-    toObject AutoscaleHeadroom'{..} = catMaybes
-        [ TF.assign "cpu_per_unit" <$> TF.attribute _cpuPerUnit
-        , TF.assign "memory_per_unit" <$> TF.attribute _memoryPerUnit
-        , TF.assign "num_of_units" <$> TF.attribute _numOfUnits
-        ]
-
 newAutoscaleHeadroom
     :: AutoscaleHeadroom s
 newAutoscaleHeadroom =
@@ -1570,23 +1572,32 @@ newAutoscaleHeadroom =
         , _numOfUnits = TF.Nil
         }
 
+instance P.Hashable  (AutoscaleHeadroom s)
+instance TF.IsValue  (AutoscaleHeadroom s)
+instance TF.IsObject (AutoscaleHeadroom s) where
+    toObject AutoscaleHeadroom'{..} = P.catMaybes
+        [ TF.assign "cpu_per_unit" <$> TF.attribute _cpuPerUnit
+        , TF.assign "memory_per_unit" <$> TF.attribute _memoryPerUnit
+        , TF.assign "num_of_units" <$> TF.attribute _numOfUnits
+        ]
+
+instance TF.IsValid (AutoscaleHeadroom s) where
+    validator = P.mempty
+
 instance P.HasCpuPerUnit (AutoscaleHeadroom s) (TF.Attr s P.Integer) where
     cpuPerUnit =
         P.lens (_cpuPerUnit :: AutoscaleHeadroom s -> TF.Attr s P.Integer)
-               (\s a -> s { _cpuPerUnit = a
-                          } :: AutoscaleHeadroom s)
+               (\s a -> s { _cpuPerUnit = a } :: AutoscaleHeadroom s)
 
 instance P.HasMemoryPerUnit (AutoscaleHeadroom s) (TF.Attr s P.Integer) where
     memoryPerUnit =
         P.lens (_memoryPerUnit :: AutoscaleHeadroom s -> TF.Attr s P.Integer)
-               (\s a -> s { _memoryPerUnit = a
-                          } :: AutoscaleHeadroom s)
+               (\s a -> s { _memoryPerUnit = a } :: AutoscaleHeadroom s)
 
 instance P.HasNumOfUnits (AutoscaleHeadroom s) (TF.Attr s P.Integer) where
     numOfUnits =
         P.lens (_numOfUnits :: AutoscaleHeadroom s -> TF.Attr s P.Integer)
-               (\s a -> s { _numOfUnits = a
-                          } :: AutoscaleHeadroom s)
+               (\s a -> s { _numOfUnits = a } :: AutoscaleHeadroom s)
 
 -- | @autoscale_down@ nested settings.
 data AutoscaleDown s = AutoscaleDown'
@@ -1595,13 +1606,6 @@ data AutoscaleDown s = AutoscaleDown'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (AutoscaleDown s)
-instance TF.IsValue  (AutoscaleDown s)
-instance TF.IsObject (AutoscaleDown s) where
-    toObject AutoscaleDown'{..} = catMaybes
-        [ TF.assign "evaluation_periods" <$> TF.attribute _evaluationPeriods
-        ]
-
 newAutoscaleDown
     :: AutoscaleDown s
 newAutoscaleDown =
@@ -1609,11 +1613,20 @@ newAutoscaleDown =
         { _evaluationPeriods = TF.Nil
         }
 
+instance P.Hashable  (AutoscaleDown s)
+instance TF.IsValue  (AutoscaleDown s)
+instance TF.IsObject (AutoscaleDown s) where
+    toObject AutoscaleDown'{..} = P.catMaybes
+        [ TF.assign "evaluation_periods" <$> TF.attribute _evaluationPeriods
+        ]
+
+instance TF.IsValid (AutoscaleDown s) where
+    validator = P.mempty
+
 instance P.HasEvaluationPeriods (AutoscaleDown s) (TF.Attr s P.Integer) where
     evaluationPeriods =
         P.lens (_evaluationPeriods :: AutoscaleDown s -> TF.Attr s P.Integer)
-               (\s a -> s { _evaluationPeriods = a
-                          } :: AutoscaleDown s)
+               (\s a -> s { _evaluationPeriods = a } :: AutoscaleDown s)
 
 -- | @deployment_groups@ nested settings.
 data DeploymentGroups s = DeploymentGroups'
@@ -1625,14 +1638,6 @@ data DeploymentGroups s = DeploymentGroups'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (DeploymentGroups s)
-instance TF.IsValue  (DeploymentGroups s)
-instance TF.IsObject (DeploymentGroups s) where
-    toObject DeploymentGroups'{..} = catMaybes
-        [ TF.assign "application_name" <$> TF.attribute _applicationName
-        , TF.assign "deployment_group_name" <$> TF.attribute _deploymentGroupName
-        ]
-
 newDeploymentGroups
     :: TF.Attr s P.Text -- ^ @application_name@ - 'P.applicationName'
     -> TF.Attr s P.Text -- ^ @deployment_group_name@ - 'P.deploymentGroupName'
@@ -1643,17 +1648,26 @@ newDeploymentGroups _applicationName _deploymentGroupName =
         , _deploymentGroupName = _deploymentGroupName
         }
 
+instance P.Hashable  (DeploymentGroups s)
+instance TF.IsValue  (DeploymentGroups s)
+instance TF.IsObject (DeploymentGroups s) where
+    toObject DeploymentGroups'{..} = P.catMaybes
+        [ TF.assign "application_name" <$> TF.attribute _applicationName
+        , TF.assign "deployment_group_name" <$> TF.attribute _deploymentGroupName
+        ]
+
+instance TF.IsValid (DeploymentGroups s) where
+    validator = P.mempty
+
 instance P.HasApplicationName (DeploymentGroups s) (TF.Attr s P.Text) where
     applicationName =
         P.lens (_applicationName :: DeploymentGroups s -> TF.Attr s P.Text)
-               (\s a -> s { _applicationName = a
-                          } :: DeploymentGroups s)
+               (\s a -> s { _applicationName = a } :: DeploymentGroups s)
 
 instance P.HasDeploymentGroupName (DeploymentGroups s) (TF.Attr s P.Text) where
     deploymentGroupName =
         P.lens (_deploymentGroupName :: DeploymentGroups s -> TF.Attr s P.Text)
-               (\s a -> s { _deploymentGroupName = a
-                          } :: DeploymentGroups s)
+               (\s a -> s { _deploymentGroupName = a } :: DeploymentGroups s)
 
 -- | @integration_multai_runtime@ nested settings.
 data IntegrationMultaiRuntime s = IntegrationMultaiRuntime'
@@ -1661,13 +1675,6 @@ data IntegrationMultaiRuntime s = IntegrationMultaiRuntime'
     -- ^ @deployment_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance P.Hashable  (IntegrationMultaiRuntime s)
-instance TF.IsValue  (IntegrationMultaiRuntime s)
-instance TF.IsObject (IntegrationMultaiRuntime s) where
-    toObject IntegrationMultaiRuntime'{..} = catMaybes
-        [ TF.assign "deployment_id" <$> TF.attribute _deploymentId
-        ]
 
 newIntegrationMultaiRuntime
     :: TF.Attr s P.Text -- ^ @deployment_id@ - 'P.deploymentId'
@@ -1677,11 +1684,20 @@ newIntegrationMultaiRuntime _deploymentId =
         { _deploymentId = _deploymentId
         }
 
+instance P.Hashable  (IntegrationMultaiRuntime s)
+instance TF.IsValue  (IntegrationMultaiRuntime s)
+instance TF.IsObject (IntegrationMultaiRuntime s) where
+    toObject IntegrationMultaiRuntime'{..} = P.catMaybes
+        [ TF.assign "deployment_id" <$> TF.attribute _deploymentId
+        ]
+
+instance TF.IsValid (IntegrationMultaiRuntime s) where
+    validator = P.mempty
+
 instance P.HasDeploymentId (IntegrationMultaiRuntime s) (TF.Attr s P.Text) where
     deploymentId =
         P.lens (_deploymentId :: IntegrationMultaiRuntime s -> TF.Attr s P.Text)
-               (\s a -> s { _deploymentId = a
-                          } :: IntegrationMultaiRuntime s)
+               (\s a -> s { _deploymentId = a } :: IntegrationMultaiRuntime s)
 
 -- | @multai_target_sets@ nested settings.
 data MultaiTargetSets s = MultaiTargetSets'
@@ -1693,14 +1709,6 @@ data MultaiTargetSets s = MultaiTargetSets'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (MultaiTargetSets s)
-instance TF.IsValue  (MultaiTargetSets s)
-instance TF.IsObject (MultaiTargetSets s) where
-    toObject MultaiTargetSets'{..} = catMaybes
-        [ TF.assign "balancer_id" <$> TF.attribute _balancerId
-        , TF.assign "target_set_id" <$> TF.attribute _targetSetId
-        ]
-
 newMultaiTargetSets
     :: TF.Attr s P.Text -- ^ @balancer_id@ - 'P.balancerId'
     -> TF.Attr s P.Text -- ^ @target_set_id@ - 'P.targetSetId'
@@ -1711,17 +1719,26 @@ newMultaiTargetSets _balancerId _targetSetId =
         , _targetSetId = _targetSetId
         }
 
+instance P.Hashable  (MultaiTargetSets s)
+instance TF.IsValue  (MultaiTargetSets s)
+instance TF.IsObject (MultaiTargetSets s) where
+    toObject MultaiTargetSets'{..} = P.catMaybes
+        [ TF.assign "balancer_id" <$> TF.attribute _balancerId
+        , TF.assign "target_set_id" <$> TF.attribute _targetSetId
+        ]
+
+instance TF.IsValid (MultaiTargetSets s) where
+    validator = P.mempty
+
 instance P.HasBalancerId (MultaiTargetSets s) (TF.Attr s P.Text) where
     balancerId =
         P.lens (_balancerId :: MultaiTargetSets s -> TF.Attr s P.Text)
-               (\s a -> s { _balancerId = a
-                          } :: MultaiTargetSets s)
+               (\s a -> s { _balancerId = a } :: MultaiTargetSets s)
 
 instance P.HasTargetSetId (MultaiTargetSets s) (TF.Attr s P.Text) where
     targetSetId =
         P.lens (_targetSetId :: MultaiTargetSets s -> TF.Attr s P.Text)
-               (\s a -> s { _targetSetId = a
-                          } :: MultaiTargetSets s)
+               (\s a -> s { _targetSetId = a } :: MultaiTargetSets s)
 
 -- | @runner@ nested settings.
 data Runner s = Runner'
@@ -1730,13 +1747,6 @@ data Runner s = Runner'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Runner s)
-instance TF.IsValue  (Runner s)
-instance TF.IsObject (Runner s) where
-    toObject Runner'{..} = catMaybes
-        [ TF.assign "is_enabled" <$> TF.attribute _isEnabled
-        ]
-
 newRunner
     :: Runner s
 newRunner =
@@ -1744,11 +1754,20 @@ newRunner =
         { _isEnabled = TF.Nil
         }
 
+instance P.Hashable  (Runner s)
+instance TF.IsValue  (Runner s)
+instance TF.IsObject (Runner s) where
+    toObject Runner'{..} = P.catMaybes
+        [ TF.assign "is_enabled" <$> TF.attribute _isEnabled
+        ]
+
+instance TF.IsValid (Runner s) where
+    validator = P.mempty
+
 instance P.HasIsEnabled (Runner s) (TF.Attr s P.Bool) where
     isEnabled =
         P.lens (_isEnabled :: Runner s -> TF.Attr s P.Bool)
-               (\s a -> s { _isEnabled = a
-                          } :: Runner s)
+               (\s a -> s { _isEnabled = a } :: Runner s)
 
 -- | @scheduled_task@ nested settings.
 data ScheduledTask s = ScheduledTask'
@@ -1793,25 +1812,6 @@ data ScheduledTask s = ScheduledTask'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (ScheduledTask s)
-instance TF.IsValue  (ScheduledTask s)
-instance TF.IsObject (ScheduledTask s) where
-    toObject ScheduledTask'{..} = catMaybes
-        [ TF.assign "batch_size_percentage" <$> TF.attribute _batchSizePercentage
-        , TF.assign "cron_expression" <$> TF.attribute _cronExpression
-        , TF.assign "frequency" <$> TF.attribute _frequency
-        , TF.assign "grace_period" <$> TF.attribute _gracePeriod
-        , TF.assign "is_enabled" <$> TF.attribute _isEnabled
-        , TF.assign "max_capacity" <$> TF.attribute _maxCapacity
-        , TF.assign "min_capacity" <$> TF.attribute _minCapacity
-        , TF.assign "scale_max_capacity" <$> TF.attribute _scaleMaxCapacity
-        , TF.assign "scale_min_capacity" <$> TF.attribute _scaleMinCapacity
-        , TF.assign "scale_target_capacity" <$> TF.attribute _scaleTargetCapacity
-        , TF.assign "start_time" <$> TF.attribute _startTime
-        , TF.assign "target_capacity" <$> TF.attribute _targetCapacity
-        , TF.assign "task_type" <$> TF.attribute _taskType
-        ]
-
 newScheduledTask
     :: TF.Attr s P.Text -- ^ @task_type@ - 'P.taskType'
     -> ScheduledTask s
@@ -1832,83 +1832,92 @@ newScheduledTask _taskType =
         , _taskType = _taskType
         }
 
+instance P.Hashable  (ScheduledTask s)
+instance TF.IsValue  (ScheduledTask s)
+instance TF.IsObject (ScheduledTask s) where
+    toObject ScheduledTask'{..} = P.catMaybes
+        [ TF.assign "batch_size_percentage" <$> TF.attribute _batchSizePercentage
+        , TF.assign "cron_expression" <$> TF.attribute _cronExpression
+        , TF.assign "frequency" <$> TF.attribute _frequency
+        , TF.assign "grace_period" <$> TF.attribute _gracePeriod
+        , TF.assign "is_enabled" <$> TF.attribute _isEnabled
+        , TF.assign "max_capacity" <$> TF.attribute _maxCapacity
+        , TF.assign "min_capacity" <$> TF.attribute _minCapacity
+        , TF.assign "scale_max_capacity" <$> TF.attribute _scaleMaxCapacity
+        , TF.assign "scale_min_capacity" <$> TF.attribute _scaleMinCapacity
+        , TF.assign "scale_target_capacity" <$> TF.attribute _scaleTargetCapacity
+        , TF.assign "start_time" <$> TF.attribute _startTime
+        , TF.assign "target_capacity" <$> TF.attribute _targetCapacity
+        , TF.assign "task_type" <$> TF.attribute _taskType
+        ]
+
+instance TF.IsValid (ScheduledTask s) where
+    validator = P.mempty
+
 instance P.HasBatchSizePercentage (ScheduledTask s) (TF.Attr s P.Text) where
     batchSizePercentage =
         P.lens (_batchSizePercentage :: ScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _batchSizePercentage = a
-                          } :: ScheduledTask s)
+               (\s a -> s { _batchSizePercentage = a } :: ScheduledTask s)
 
 instance P.HasCronExpression (ScheduledTask s) (TF.Attr s P.Text) where
     cronExpression =
         P.lens (_cronExpression :: ScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _cronExpression = a
-                          } :: ScheduledTask s)
+               (\s a -> s { _cronExpression = a } :: ScheduledTask s)
 
 instance P.HasFrequency (ScheduledTask s) (TF.Attr s P.Text) where
     frequency =
         P.lens (_frequency :: ScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _frequency = a
-                          } :: ScheduledTask s)
+               (\s a -> s { _frequency = a } :: ScheduledTask s)
 
 instance P.HasGracePeriod (ScheduledTask s) (TF.Attr s P.Text) where
     gracePeriod =
         P.lens (_gracePeriod :: ScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _gracePeriod = a
-                          } :: ScheduledTask s)
+               (\s a -> s { _gracePeriod = a } :: ScheduledTask s)
 
 instance P.HasIsEnabled (ScheduledTask s) (TF.Attr s P.Bool) where
     isEnabled =
         P.lens (_isEnabled :: ScheduledTask s -> TF.Attr s P.Bool)
-               (\s a -> s { _isEnabled = a
-                          } :: ScheduledTask s)
+               (\s a -> s { _isEnabled = a } :: ScheduledTask s)
 
 instance P.HasMaxCapacity (ScheduledTask s) (TF.Attr s P.Text) where
     maxCapacity =
         P.lens (_maxCapacity :: ScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _maxCapacity = a
-                          } :: ScheduledTask s)
+               (\s a -> s { _maxCapacity = a } :: ScheduledTask s)
 
 instance P.HasMinCapacity (ScheduledTask s) (TF.Attr s P.Text) where
     minCapacity =
         P.lens (_minCapacity :: ScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _minCapacity = a
-                          } :: ScheduledTask s)
+               (\s a -> s { _minCapacity = a } :: ScheduledTask s)
 
 instance P.HasScaleMaxCapacity (ScheduledTask s) (TF.Attr s P.Text) where
     scaleMaxCapacity =
         P.lens (_scaleMaxCapacity :: ScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _scaleMaxCapacity = a
-                          } :: ScheduledTask s)
+               (\s a -> s { _scaleMaxCapacity = a } :: ScheduledTask s)
 
 instance P.HasScaleMinCapacity (ScheduledTask s) (TF.Attr s P.Text) where
     scaleMinCapacity =
         P.lens (_scaleMinCapacity :: ScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _scaleMinCapacity = a
-                          } :: ScheduledTask s)
+               (\s a -> s { _scaleMinCapacity = a } :: ScheduledTask s)
 
 instance P.HasScaleTargetCapacity (ScheduledTask s) (TF.Attr s P.Text) where
     scaleTargetCapacity =
         P.lens (_scaleTargetCapacity :: ScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _scaleTargetCapacity = a
-                          } :: ScheduledTask s)
+               (\s a -> s { _scaleTargetCapacity = a } :: ScheduledTask s)
 
 instance P.HasStartTime (ScheduledTask s) (TF.Attr s P.Text) where
     startTime =
         P.lens (_startTime :: ScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _startTime = a
-                          } :: ScheduledTask s)
+               (\s a -> s { _startTime = a } :: ScheduledTask s)
 
 instance P.HasTargetCapacity (ScheduledTask s) (TF.Attr s P.Text) where
     targetCapacity =
         P.lens (_targetCapacity :: ScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _targetCapacity = a
-                          } :: ScheduledTask s)
+               (\s a -> s { _targetCapacity = a } :: ScheduledTask s)
 
 instance P.HasTaskType (ScheduledTask s) (TF.Attr s P.Text) where
     taskType =
         P.lens (_taskType :: ScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _taskType = a
-                          } :: ScheduledTask s)
+               (\s a -> s { _taskType = a } :: ScheduledTask s)
 
 -- | @autoscale_constraints@ nested settings.
 data AutoscaleConstraints s = AutoscaleConstraints'
@@ -1920,14 +1929,6 @@ data AutoscaleConstraints s = AutoscaleConstraints'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (AutoscaleConstraints s)
-instance TF.IsValue  (AutoscaleConstraints s)
-instance TF.IsObject (AutoscaleConstraints s) where
-    toObject AutoscaleConstraints'{..} = catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
 newAutoscaleConstraints
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
@@ -1938,17 +1939,26 @@ newAutoscaleConstraints _key _value =
         , _value = _value
         }
 
+instance P.Hashable  (AutoscaleConstraints s)
+instance TF.IsValue  (AutoscaleConstraints s)
+instance TF.IsObject (AutoscaleConstraints s) where
+    toObject AutoscaleConstraints'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (AutoscaleConstraints s) where
+    validator = P.mempty
+
 instance P.HasKey (AutoscaleConstraints s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: AutoscaleConstraints s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a
-                          } :: AutoscaleConstraints s)
+               (\s a -> s { _key = a } :: AutoscaleConstraints s)
 
 instance P.HasValue (AutoscaleConstraints s) (TF.Attr s P.Text) where
     value =
         P.lens (_value :: AutoscaleConstraints s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a
-                          } :: AutoscaleConstraints s)
+               (\s a -> s { _value = a } :: AutoscaleConstraints s)
 
 -- | @ephemeral_block_device@ nested settings.
 data EphemeralBlockDevice s = EphemeralBlockDevice'
@@ -1960,14 +1970,6 @@ data EphemeralBlockDevice s = EphemeralBlockDevice'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (EphemeralBlockDevice s)
-instance TF.IsValue  (EphemeralBlockDevice s)
-instance TF.IsObject (EphemeralBlockDevice s) where
-    toObject EphemeralBlockDevice'{..} = catMaybes
-        [ TF.assign "device_name" <$> TF.attribute _deviceName
-        , TF.assign "virtual_name" <$> TF.attribute _virtualName
-        ]
-
 newEphemeralBlockDevice
     :: TF.Attr s P.Text -- ^ @device_name@ - 'P.deviceName'
     -> TF.Attr s P.Text -- ^ @virtual_name@ - 'P.virtualName'
@@ -1978,17 +1980,26 @@ newEphemeralBlockDevice _deviceName _virtualName =
         , _virtualName = _virtualName
         }
 
+instance P.Hashable  (EphemeralBlockDevice s)
+instance TF.IsValue  (EphemeralBlockDevice s)
+instance TF.IsObject (EphemeralBlockDevice s) where
+    toObject EphemeralBlockDevice'{..} = P.catMaybes
+        [ TF.assign "device_name" <$> TF.attribute _deviceName
+        , TF.assign "virtual_name" <$> TF.attribute _virtualName
+        ]
+
+instance TF.IsValid (EphemeralBlockDevice s) where
+    validator = P.mempty
+
 instance P.HasDeviceName (EphemeralBlockDevice s) (TF.Attr s P.Text) where
     deviceName =
         P.lens (_deviceName :: EphemeralBlockDevice s -> TF.Attr s P.Text)
-               (\s a -> s { _deviceName = a
-                          } :: EphemeralBlockDevice s)
+               (\s a -> s { _deviceName = a } :: EphemeralBlockDevice s)
 
 instance P.HasVirtualName (EphemeralBlockDevice s) (TF.Attr s P.Text) where
     virtualName =
         P.lens (_virtualName :: EphemeralBlockDevice s -> TF.Attr s P.Text)
-               (\s a -> s { _virtualName = a
-                          } :: EphemeralBlockDevice s)
+               (\s a -> s { _virtualName = a } :: EphemeralBlockDevice s)
 
 -- | @update_policy@ nested settings.
 data UpdatePolicy s = UpdatePolicy'
@@ -2003,15 +2014,6 @@ data UpdatePolicy s = UpdatePolicy'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (UpdatePolicy s)
-instance TF.IsValue  (UpdatePolicy s)
-instance TF.IsObject (UpdatePolicy s) where
-    toObject UpdatePolicy'{..} = catMaybes
-        [ TF.assign "roll_config" <$> TF.attribute _rollConfig
-        , TF.assign "should_resume_stateful" <$> TF.attribute _shouldResumeStateful
-        , TF.assign "should_roll" <$> TF.attribute _shouldRoll
-        ]
-
 newUpdatePolicy
     :: TF.Attr s P.Bool -- ^ @should_resume_stateful@ - 'P.shouldResumeStateful'
     -> TF.Attr s P.Bool -- ^ @should_roll@ - 'P.shouldRoll'
@@ -2023,23 +2025,36 @@ newUpdatePolicy _shouldResumeStateful _shouldRoll =
         , _shouldRoll = _shouldRoll
         }
 
+instance P.Hashable  (UpdatePolicy s)
+instance TF.IsValue  (UpdatePolicy s)
+instance TF.IsObject (UpdatePolicy s) where
+    toObject UpdatePolicy'{..} = P.catMaybes
+        [ TF.assign "roll_config" <$> TF.attribute _rollConfig
+        , TF.assign "should_resume_stateful" <$> TF.attribute _shouldResumeStateful
+        , TF.assign "should_roll" <$> TF.attribute _shouldRoll
+        ]
+
+instance TF.IsValid (UpdatePolicy s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_rollConfig"
+                  (_rollConfig
+                      :: UpdatePolicy s -> TF.Attr s (RollConfig s))
+                  TF.validator
+
 instance P.HasRollConfig (UpdatePolicy s) (TF.Attr s (RollConfig s)) where
     rollConfig =
         P.lens (_rollConfig :: UpdatePolicy s -> TF.Attr s (RollConfig s))
-               (\s a -> s { _rollConfig = a
-                          } :: UpdatePolicy s)
+               (\s a -> s { _rollConfig = a } :: UpdatePolicy s)
 
 instance P.HasShouldResumeStateful (UpdatePolicy s) (TF.Attr s P.Bool) where
     shouldResumeStateful =
         P.lens (_shouldResumeStateful :: UpdatePolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _shouldResumeStateful = a
-                          } :: UpdatePolicy s)
+               (\s a -> s { _shouldResumeStateful = a } :: UpdatePolicy s)
 
 instance P.HasShouldRoll (UpdatePolicy s) (TF.Attr s P.Bool) where
     shouldRoll =
         P.lens (_shouldRoll :: UpdatePolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _shouldRoll = a
-                          } :: UpdatePolicy s)
+               (\s a -> s { _shouldRoll = a } :: UpdatePolicy s)
 
 -- | @signal@ nested settings.
 data Signal s = Signal'
@@ -2051,14 +2066,6 @@ data Signal s = Signal'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Signal s)
-instance TF.IsValue  (Signal s)
-instance TF.IsObject (Signal s) where
-    toObject Signal'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "timeout" <$> TF.attribute _timeout
-        ]
-
 newSignal
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> Signal s
@@ -2068,17 +2075,26 @@ newSignal _name =
         , _timeout = TF.Nil
         }
 
+instance P.Hashable  (Signal s)
+instance TF.IsValue  (Signal s)
+instance TF.IsObject (Signal s) where
+    toObject Signal'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "timeout" <$> TF.attribute _timeout
+        ]
+
+instance TF.IsValid (Signal s) where
+    validator = P.mempty
+
 instance P.HasName (Signal s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Signal s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: Signal s)
+               (\s a -> s { _name = a } :: Signal s)
 
 instance P.HasTimeout (Signal s) (TF.Attr s P.Integer) where
     timeout =
         P.lens (_timeout :: Signal s -> TF.Attr s P.Integer)
-               (\s a -> s { _timeout = a
-                          } :: Signal s)
+               (\s a -> s { _timeout = a } :: Signal s)
 
 -- | @tags@ nested settings.
 data Tags s = Tags'
@@ -2090,14 +2106,6 @@ data Tags s = Tags'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Tags s)
-instance TF.IsValue  (Tags s)
-instance TF.IsObject (Tags s) where
-    toObject Tags'{..} = catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
 newTags
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
@@ -2108,14 +2116,23 @@ newTags _key _value =
         , _value = _value
         }
 
+instance P.Hashable  (Tags s)
+instance TF.IsValue  (Tags s)
+instance TF.IsObject (Tags s) where
+    toObject Tags'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (Tags s) where
+    validator = P.mempty
+
 instance P.HasKey (Tags s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: Tags s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a
-                          } :: Tags s)
+               (\s a -> s { _key = a } :: Tags s)
 
 instance P.HasValue (Tags s) (TF.Attr s P.Text) where
     value =
         P.lens (_value :: Tags s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a
-                          } :: Tags s)
+               (\s a -> s { _value = a } :: Tags s)
