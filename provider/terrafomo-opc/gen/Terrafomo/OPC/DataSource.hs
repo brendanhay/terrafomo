@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -52,7 +53,6 @@ module Terrafomo.OPC.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -60,7 +60,10 @@ import Terrafomo.OPC.Settings
 
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
@@ -72,6 +75,7 @@ import qualified Terrafomo.OPC.Lens     as P
 import qualified Terrafomo.OPC.Provider as P
 import qualified Terrafomo.OPC.Types    as P
 import qualified Terrafomo.Schema       as TF
+import qualified Terrafomo.Validator    as TF
 
 -- | @opc_compute_image_list_entry@ DataSource.
 --
@@ -89,42 +93,42 @@ data ComputeImageListEntryData s = ComputeImageListEntryData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeImageListEntryData s) where
-    toObject ComputeImageListEntryData'{..} = catMaybes
-        [ TF.assign "entry" <$> TF.attribute _entry
-        , TF.assign "image_list" <$> TF.attribute _imageList
-        , TF.assign "version" <$> TF.attribute _version
-        ]
-
 computeImageListEntryData
     :: TF.Attr s P.Text -- ^ @image_list@ - 'P.imageList'
     -> TF.Attr s P.Integer -- ^ @version@ - 'P.version'
     -> TF.DataSource P.Provider (ComputeImageListEntryData s)
 computeImageListEntryData _imageList _version =
-    TF.newDataSource "opc_compute_image_list_entry" $
+    TF.newDataSource "opc_compute_image_list_entry" TF.validator $
         ComputeImageListEntryData'
             { _entry = TF.Nil
             , _imageList = _imageList
             , _version = _version
             }
 
+instance TF.IsObject (ComputeImageListEntryData s) where
+    toObject ComputeImageListEntryData'{..} = P.catMaybes
+        [ TF.assign "entry" <$> TF.attribute _entry
+        , TF.assign "image_list" <$> TF.attribute _imageList
+        , TF.assign "version" <$> TF.attribute _version
+        ]
+
+instance TF.IsValid (ComputeImageListEntryData s) where
+    validator = P.mempty
+
 instance P.HasEntry (ComputeImageListEntryData s) (TF.Attr s P.Integer) where
     entry =
         P.lens (_entry :: ComputeImageListEntryData s -> TF.Attr s P.Integer)
-               (\s a -> s { _entry = a
-                          } :: ComputeImageListEntryData s)
+               (\s a -> s { _entry = a } :: ComputeImageListEntryData s)
 
 instance P.HasImageList (ComputeImageListEntryData s) (TF.Attr s P.Text) where
     imageList =
         P.lens (_imageList :: ComputeImageListEntryData s -> TF.Attr s P.Text)
-               (\s a -> s { _imageList = a
-                          } :: ComputeImageListEntryData s)
+               (\s a -> s { _imageList = a } :: ComputeImageListEntryData s)
 
 instance P.HasVersion (ComputeImageListEntryData s) (TF.Attr s P.Integer) where
     version =
         P.lens (_version :: ComputeImageListEntryData s -> TF.Attr s P.Integer)
-               (\s a -> s { _version = a
-                          } :: ComputeImageListEntryData s)
+               (\s a -> s { _version = a } :: ComputeImageListEntryData s)
 
 instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ComputeImageListEntryData s)) (TF.Attr s P.Text) where
     computedAttributes x = TF.compute (TF.refKey x) "_computedAttributes"
@@ -145,25 +149,27 @@ data ComputeIpAddressReservationData s = ComputeIpAddressReservationData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeIpAddressReservationData s) where
-    toObject ComputeIpAddressReservationData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 computeIpAddressReservationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeIpAddressReservationData s)
 computeIpAddressReservationData _name =
-    TF.newDataSource "opc_compute_ip_address_reservation" $
+    TF.newDataSource "opc_compute_ip_address_reservation" TF.validator $
         ComputeIpAddressReservationData'
             { _name = _name
             }
 
+instance TF.IsObject (ComputeIpAddressReservationData s) where
+    toObject ComputeIpAddressReservationData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeIpAddressReservationData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeIpAddressReservationData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeIpAddressReservationData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeIpAddressReservationData s)
+               (\s a -> s { _name = a } :: ComputeIpAddressReservationData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
@@ -190,25 +196,27 @@ data ComputeIpReservationData s = ComputeIpReservationData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeIpReservationData s) where
-    toObject ComputeIpReservationData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 computeIpReservationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeIpReservationData s)
 computeIpReservationData _name =
-    TF.newDataSource "opc_compute_ip_reservation" $
+    TF.newDataSource "opc_compute_ip_reservation" TF.validator $
         ComputeIpReservationData'
             { _name = _name
             }
 
+instance TF.IsObject (ComputeIpReservationData s) where
+    toObject ComputeIpReservationData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeIpReservationData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeIpReservationData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeIpReservationData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeIpReservationData s)
+               (\s a -> s { _name = a } :: ComputeIpReservationData s)
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Text) where
     computedIp x = TF.compute (TF.refKey x) "_computedIp"
@@ -238,34 +246,35 @@ data ComputeMachineImageData s = ComputeMachineImageData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeMachineImageData s) where
-    toObject ComputeMachineImageData'{..} = catMaybes
-        [ TF.assign "account" <$> TF.attribute _account
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 computeMachineImageData
     :: TF.Attr s P.Text -- ^ @account@ - 'P.account'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeMachineImageData s)
 computeMachineImageData _account _name =
-    TF.newDataSource "opc_compute_machine_image" $
+    TF.newDataSource "opc_compute_machine_image" TF.validator $
         ComputeMachineImageData'
             { _account = _account
             , _name = _name
             }
 
+instance TF.IsObject (ComputeMachineImageData s) where
+    toObject ComputeMachineImageData'{..} = P.catMaybes
+        [ TF.assign "account" <$> TF.attribute _account
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeMachineImageData s) where
+    validator = P.mempty
+
 instance P.HasAccount (ComputeMachineImageData s) (TF.Attr s P.Text) where
     account =
         P.lens (_account :: ComputeMachineImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _account = a
-                          } :: ComputeMachineImageData s)
+               (\s a -> s { _account = a } :: ComputeMachineImageData s)
 
 instance P.HasName (ComputeMachineImageData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeMachineImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeMachineImageData s)
+               (\s a -> s { _name = a } :: ComputeMachineImageData s)
 
 instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
     computedAttributes x = TF.compute (TF.refKey x) "_computedAttributes"
@@ -316,43 +325,43 @@ data ComputeNetworkInterfaceData s = ComputeNetworkInterfaceData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeNetworkInterfaceData s) where
-    toObject ComputeNetworkInterfaceData'{..} = catMaybes
-        [ TF.assign "instance_id" <$> TF.attribute _instanceId
-        , TF.assign "instance_name" <$> TF.attribute _instanceName
-        , TF.assign "interface" <$> TF.attribute _interface
-        ]
-
 computeNetworkInterfaceData
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
     -> TF.Attr s P.Text -- ^ @interface@ - 'P.interface'
     -> TF.DataSource P.Provider (ComputeNetworkInterfaceData s)
 computeNetworkInterfaceData _instanceId _instanceName _interface =
-    TF.newDataSource "opc_compute_network_interface" $
+    TF.newDataSource "opc_compute_network_interface" TF.validator $
         ComputeNetworkInterfaceData'
             { _instanceId = _instanceId
             , _instanceName = _instanceName
             , _interface = _interface
             }
 
+instance TF.IsObject (ComputeNetworkInterfaceData s) where
+    toObject ComputeNetworkInterfaceData'{..} = P.catMaybes
+        [ TF.assign "instance_id" <$> TF.attribute _instanceId
+        , TF.assign "instance_name" <$> TF.attribute _instanceName
+        , TF.assign "interface" <$> TF.attribute _interface
+        ]
+
+instance TF.IsValid (ComputeNetworkInterfaceData s) where
+    validator = P.mempty
+
 instance P.HasInstanceId (ComputeNetworkInterfaceData s) (TF.Attr s P.Text) where
     instanceId =
         P.lens (_instanceId :: ComputeNetworkInterfaceData s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceId = a
-                          } :: ComputeNetworkInterfaceData s)
+               (\s a -> s { _instanceId = a } :: ComputeNetworkInterfaceData s)
 
 instance P.HasInstanceName (ComputeNetworkInterfaceData s) (TF.Attr s P.Text) where
     instanceName =
         P.lens (_instanceName :: ComputeNetworkInterfaceData s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceName = a
-                          } :: ComputeNetworkInterfaceData s)
+               (\s a -> s { _instanceName = a } :: ComputeNetworkInterfaceData s)
 
 instance P.HasInterface (ComputeNetworkInterfaceData s) (TF.Attr s P.Text) where
     interface =
         P.lens (_interface :: ComputeNetworkInterfaceData s -> TF.Attr s P.Text)
-               (\s a -> s { _interface = a
-                          } :: ComputeNetworkInterfaceData s)
+               (\s a -> s { _interface = a } :: ComputeNetworkInterfaceData s)
 
 instance s ~ s' => P.HasComputedDns (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedDns x = TF.compute (TF.refKey x) "_computedDns"
@@ -403,25 +412,27 @@ data ComputeSshKeyData s = ComputeSshKeyData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeSshKeyData s) where
-    toObject ComputeSshKeyData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 computeSshKeyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeSshKeyData s)
 computeSshKeyData _name =
-    TF.newDataSource "opc_compute_ssh_key" $
+    TF.newDataSource "opc_compute_ssh_key" TF.validator $
         ComputeSshKeyData'
             { _name = _name
             }
 
+instance TF.IsObject (ComputeSshKeyData s) where
+    toObject ComputeSshKeyData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeSshKeyData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeSshKeyData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeSshKeyData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeSshKeyData s)
+               (\s a -> s { _name = a } :: ComputeSshKeyData s)
 
 instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeSshKeyData s)) (TF.Attr s P.Bool) where
     computedEnabled x = TF.compute (TF.refKey x) "_computedEnabled"
@@ -439,25 +450,27 @@ data ComputeStorageVolumeSnapshotData s = ComputeStorageVolumeSnapshotData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeStorageVolumeSnapshotData s) where
-    toObject ComputeStorageVolumeSnapshotData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 computeStorageVolumeSnapshotData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeStorageVolumeSnapshotData s)
 computeStorageVolumeSnapshotData _name =
-    TF.newDataSource "opc_compute_storage_volume_snapshot" $
+    TF.newDataSource "opc_compute_storage_volume_snapshot" TF.validator $
         ComputeStorageVolumeSnapshotData'
             { _name = _name
             }
 
+instance TF.IsObject (ComputeStorageVolumeSnapshotData s) where
+    toObject ComputeStorageVolumeSnapshotData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeStorageVolumeSnapshotData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeStorageVolumeSnapshotData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeStorageVolumeSnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeStorageVolumeSnapshotData s)
+               (\s a -> s { _name = a } :: ComputeStorageVolumeSnapshotData s)
 
 instance s ~ s' => P.HasComputedAccount (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
     computedAccount x = TF.compute (TF.refKey x) "_computedAccount"
@@ -520,25 +533,27 @@ data ComputeVnicData s = ComputeVnicData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeVnicData s) where
-    toObject ComputeVnicData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 computeVnicData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeVnicData s)
 computeVnicData _name =
-    TF.newDataSource "opc_compute_vnic" $
+    TF.newDataSource "opc_compute_vnic" TF.validator $
         ComputeVnicData'
             { _name = _name
             }
 
+instance TF.IsObject (ComputeVnicData s) where
+    toObject ComputeVnicData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeVnicData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeVnicData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeVnicData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeVnicData s)
+               (\s a -> s { _name = a } :: ComputeVnicData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeVnicData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"

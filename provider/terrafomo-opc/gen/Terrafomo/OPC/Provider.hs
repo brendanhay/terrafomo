@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.OPC.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.OPC.Settings
 
 import qualified Data.Hashable       as P
 import qualified Data.HashMap.Strict as P
+import qualified Data.HashMap.Strict as Map
 import qualified Data.List.NonEmpty  as P
+import qualified Data.Maybe          as P
+import qualified Data.Monoid         as P
 import qualified Data.Text           as P
 import qualified GHC.Generics        as P
 import qualified Lens.Micro          as P
@@ -42,6 +45,7 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.OPC.Lens  as P
 import qualified Terrafomo.OPC.Types as P
 import qualified Terrafomo.Provider  as TF
+import qualified Terrafomo.Validator as TF
 
 -- | The @OPC@ Terraform provider configuration.
 --
@@ -88,30 +92,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "endpoint" <$> _endpoint
-                  , P.Just $ TF.assign "identity_domain" _identityDomain
-                  , TF.assign "insecure" <$> _insecure
-                  , TF.assign "lbaas_endpoint" <$> _lbaasEndpoint
-                  , TF.assign "max_retries" <$> _maxRetries
-                  , P.Just $ TF.assign "password" _password
-                  , TF.assign "storage_endpoint" <$> _storageEndpoint
-                  , TF.assign "storage_service_id" <$> _storageServiceId
-                  , P.Just $ TF.assign "user" _user
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: P.Text -- ^ @identity_domain@ - 'P.identityDomain'
     -> P.Text -- ^ @password@ - 'P.password'
@@ -130,56 +110,74 @@ newProvider _identityDomain _password _user =
         , _user = _user
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "endpoint" <$> _endpoint
+                  , P.Just $ TF.assign "identity_domain" _identityDomain
+                  , TF.assign "insecure" <$> _insecure
+                  , TF.assign "lbaas_endpoint" <$> _lbaasEndpoint
+                  , TF.assign "max_retries" <$> _maxRetries
+                  , P.Just $ TF.assign "password" _password
+                  , TF.assign "storage_endpoint" <$> _storageEndpoint
+                  , TF.assign "storage_service_id" <$> _storageServiceId
+                  , P.Just $ TF.assign "user" _user
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
 instance P.HasEndpoint (Provider) (P.Maybe P.Text) where
     endpoint =
         P.lens (_endpoint :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _endpoint = a
-                          } :: Provider)
+               (\s a -> s { _endpoint = a } :: Provider)
 
 instance P.HasIdentityDomain (Provider) (P.Text) where
     identityDomain =
         P.lens (_identityDomain :: Provider -> P.Text)
-               (\s a -> s { _identityDomain = a
-                          } :: Provider)
+               (\s a -> s { _identityDomain = a } :: Provider)
 
 instance P.HasInsecure (Provider) (P.Maybe P.Bool) where
     insecure =
         P.lens (_insecure :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _insecure = a
-                          } :: Provider)
+               (\s a -> s { _insecure = a } :: Provider)
 
 instance P.HasLbaasEndpoint (Provider) (P.Maybe P.Text) where
     lbaasEndpoint =
         P.lens (_lbaasEndpoint :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _lbaasEndpoint = a
-                          } :: Provider)
+               (\s a -> s { _lbaasEndpoint = a } :: Provider)
 
 instance P.HasMaxRetries (Provider) (P.Maybe P.Integer) where
     maxRetries =
         P.lens (_maxRetries :: Provider -> P.Maybe P.Integer)
-               (\s a -> s { _maxRetries = a
-                          } :: Provider)
+               (\s a -> s { _maxRetries = a } :: Provider)
 
 instance P.HasPassword (Provider) (P.Text) where
     password =
         P.lens (_password :: Provider -> P.Text)
-               (\s a -> s { _password = a
-                          } :: Provider)
+               (\s a -> s { _password = a } :: Provider)
 
 instance P.HasStorageEndpoint (Provider) (P.Maybe P.Text) where
     storageEndpoint =
         P.lens (_storageEndpoint :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _storageEndpoint = a
-                          } :: Provider)
+               (\s a -> s { _storageEndpoint = a } :: Provider)
 
 instance P.HasStorageServiceId (Provider) (P.Maybe P.Text) where
     storageServiceId =
         P.lens (_storageServiceId :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _storageServiceId = a
-                          } :: Provider)
+               (\s a -> s { _storageServiceId = a } :: Provider)
 
 instance P.HasUser (Provider) (P.Text) where
     user =
         P.lens (_user :: Provider -> P.Text)
-               (\s a -> s { _user = a
-                          } :: Provider)
+               (\s a -> s { _user = a } :: Provider)
