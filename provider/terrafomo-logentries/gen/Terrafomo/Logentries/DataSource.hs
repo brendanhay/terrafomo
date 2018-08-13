@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,7 +25,6 @@ module Terrafomo.Logentries.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -32,7 +32,10 @@ import Terrafomo.Logentries.Settings
 
 import qualified Data.Hashable                 as P
 import qualified Data.HashMap.Strict           as P
+import qualified Data.HashMap.Strict           as Map
 import qualified Data.List.NonEmpty            as P
+import qualified Data.Maybe                    as P
+import qualified Data.Monoid                   as P
 import qualified Data.Text                     as P
 import qualified GHC.Generics                  as P
 import qualified Lens.Micro                    as P
@@ -44,6 +47,7 @@ import qualified Terrafomo.Logentries.Provider as P
 import qualified Terrafomo.Logentries.Types    as P
 import qualified Terrafomo.Name                as TF
 import qualified Terrafomo.Schema              as TF
+import qualified Terrafomo.Validator           as TF
 
 -- | @logentries_logset@ DataSource.
 --
@@ -58,30 +62,31 @@ data LogsetData s = LogsetData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (LogsetData s) where
-    toObject LogsetData'{..} = catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 logsetData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (LogsetData s)
 logsetData _name =
-    TF.newDataSource "logentries_logset" $
+    TF.newDataSource "logentries_logset" TF.validator $
         LogsetData'
             { _location = TF.value "nonlocation"
             , _name = _name
             }
 
+instance TF.IsObject (LogsetData s) where
+    toObject LogsetData'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (LogsetData s) where
+    validator = P.mempty
+
 instance P.HasLocation (LogsetData s) (TF.Attr s P.Text) where
     location =
         P.lens (_location :: LogsetData s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a
-                          } :: LogsetData s)
+               (\s a -> s { _location = a } :: LogsetData s)
 
 instance P.HasName (LogsetData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: LogsetData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: LogsetData s)
+               (\s a -> s { _name = a } :: LogsetData s)
