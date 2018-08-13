@@ -3,11 +3,7 @@
 instance P.{{ field.value.class }} ({{ schema.type }}) ({{ field.value.type }}) where
     {{ field.value.method }} =
         P.lens ({{ field.value.name }} :: {{ schema.type }} -> {{ field.value.type }})
-               (\s a -> s { {{ field.value.name }} = a
-                     {% for conflict in field.value.conflicts %}
-                          , {{ conflict.value.name }} = {{ conflict.value.default }}
-                     {% endfor %}
-                          } :: {{ schema.type }})
+               (\s a -> s { {{ field.value.name }} = a } :: {{ schema.type }})
 {% endfor %}
 {% if schema.attributes %}
   {% for field in schema.attributes %}

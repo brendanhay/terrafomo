@@ -15,8 +15,8 @@ import qualified Terrafomo.Gen.Text as Text
 
 data Type
     = Free   !Text
-    | Data   !DataName
-    | Thread !Type
+    | Data   !Bool !DataName
+    | Attr   !Type
     | App    !Type !Type
       deriving (Show, Eq, Generic)
 
@@ -38,12 +38,12 @@ typeName :: Type -> Text
 typeName = go False
   where
     go p = \case
-        Free   v        -> v
-        Data   v        -> fromName v
-        Thread (Data n) -> parens p (fromName n <> " s")
-        Thread a        -> parens p ("TF.Attr s " <> go True a)
-        App    List b   -> Text.brackets (go False b)
-        App    a    b   -> parens p (go False a <> " " <> go True b)
+        Free v       -> v
+        Data True  v -> parens p (fromName v <> " s")
+        Data False v -> fromName v
+        Attr x       -> parens p ("TF.Attr s " <> go True x)
+        App  List  b -> Text.brackets (go False b)
+        App  a     b -> parens p (go False a <> " " <> go True b)
 
     parens = \case
         True  -> Text.parens
@@ -60,6 +60,16 @@ typeMaybe =
 
 reduce :: Type -> Type
 reduce = \case
-    App Maybe b             -> App Maybe (reduce b)
-    App a     (App Maybe b) -> App a b
-    a                       -> a
+    App    a@List  (App Maybe b) -> App a (reduce b)
+    App    a@List1 (App Maybe b) -> App a (reduce b)
+    App    a@Map   (App Maybe b) -> App a (reduce b)
+    App    a@Maybe b             -> App a (reduce b)
+    App    a       b             -> App (reduce a) (reduce b)
+    a                            -> a
+
+settings :: Type -> Bool
+settings = \case
+    Free {}  -> False
+    Data {}  -> True
+    Attr x   -> settings x
+    App  a b -> settings a || settings b

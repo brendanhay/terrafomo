@@ -1,0 +1,35 @@
+instance TF.IsValid ({{ schema.type }}) where
+  {% if schema.arguments | empty %}
+    validator = P.mempty
+  {% elif schema.conflicts | empty %}
+    validator = P.mempty
+      {% for field in schema.arguments %}
+        {% if field.value.validate %}
+           P.<> TF.settingsValidator "{{ field.value.name }}"
+                  ({{ field.value.name }}
+                      :: {{ schema.type }} -> {{ field.value.type }})
+                  TF.validator
+        {% endif %}
+      {% endfor %}
+  {% else %}
+    validator = TF.fieldsValidator (\{{ schema.con.name }}{..} -> Map.fromList $ P.catMaybes
+      {% for field in schema.conflicts %}
+        {% if field.first %}[ {% else %}, {% endif %}if ({{ field.value.name }} P.== {{ field.value.default }})
+              then P.Nothing
+              else P.Just ("{{ field.value.name }}",
+        {% for conflict in field.value.conflicts %}
+                            {% if conflict.first %}[ {% else %}, {% endif %}"{{ conflict.value.name }}"{% endfor %}
+                            ])
+        {% else %}
+        [
+        {% endfor %}
+        ])
+      {% for field in schema.arguments %}
+        {% if field.value.validate %}
+           P.<> TF.settingsValidator "{{ field.value.name }}"
+                  ({{ field.value.name }}
+                      :: {{ schema.type }} -> {{ field.value.type }})
+                  TF.validator
+        {% endif %}
+      {% endfor %}
+  {% endif %}

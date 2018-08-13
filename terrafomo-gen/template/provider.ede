@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -17,7 +18,6 @@ module {{ namespace }}
 
 import Data.Functor  ((<$>))
 import Data.Function ((&))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -29,9 +29,11 @@ import {{ import.value }}
 {% for import in qualified %}
 import qualified {{ import.value }} as P
 {% endfor %}
+import qualified Data.HashMap.Strict as Map
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.Name as TF
 import qualified Terrafomo.Provider as TF
+import qualified Terrafomo.Validator as TF
 
 -- | The @{{ provider.name }}@ Terraform provider configuration.
 --
@@ -39,24 +41,6 @@ import qualified Terrafomo.Provider as TF
 -- for more information.
 data Provider = {{ provider.schema.con.name }}
 {% include "_include/record.ede" with arguments = provider.schema.arguments %}
-
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@{{ provider.schema.con.name }}{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                {% for field in provider.schema.arguments %}
-                  , {{ field.value.encoder }} {{ field.value.name }}
-                {% endfor %}
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType {{ provider.schema.name }} = "{{ provider.schema.original }}"
 
 {{ provider.schema.con.smart }}
   {% for param in provider.schema.parameters %}
@@ -71,4 +55,24 @@ instance TF.IsProvider Provider where
         {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
         }{% endif %}
       {% endfor %}
+
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@{{ provider.schema.con.name }}{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                {% for field in provider.schema.arguments %}
+                  , {{ field.value.encoder }} {{ field.value.name }}
+                {% endfor %}
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType {{ provider.schema.name }} = "{{ provider.schema.original }}"
+
+{% include "_include/validator.ede" with schema = provider.schema %}
 {% include "_include/lenses.ede" with schema = provider.schema %}

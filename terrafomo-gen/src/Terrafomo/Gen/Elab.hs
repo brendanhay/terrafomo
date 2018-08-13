@@ -67,6 +67,7 @@ run cfg provider =
                     { providerName         = configProviderName cfg
                     , providerPackage      = configPackage      cfg
                     , providerDependencies = configDependencies cfg
+                    , providerOriginal     = Go.providerName provider
                     , providerResources    = resources
                     , providerDataSources  = datasources
                     , providerSettings     = settings
@@ -123,13 +124,15 @@ elabSchema original (data_, con, smart) schemas = do
     thread <- isThreaded
     args   <- elabArguments  original schemas
     attrs  <- elabAttributes original schemas
-    typ    <- elabType data_
+    typ    <- elabData data_
+
     pure $! Schema'
         { schemaName       = data_
         , schemaOriginal   = original
         , schemaType       = typ
         , schemaCon        = Con con smart
         , schemaThreaded   = thread
+        , schemaConflicts  = filterConflicts  args
         , schemaParameters = filterParameters args
         , schemaArguments  = args
         , schemaAttributes = attrs
@@ -138,11 +141,12 @@ elabSchema original (data_, con, smart) schemas = do
 elabNestedSchema :: Go.Schema -> Elab Type
 elabNestedSchema schema
     | Just x <- Go.schemaSchema schema   =
-        fieldType
-            <$> elabField x
-    | Just x <- Go.schemaResource schema =
-        schemaType . fromSettings
-            <$> elabSettings (Go.resourceName x) (Go.resourceSchemas x)
+        fieldType <$> elabField x
+
+    | Just x <- Go.schemaResource schema = do
+        schemaType . fromSettings <$>
+            elabSettings (Go.resourceName x) (Go.resourceSchemas x)
+
     | otherwise                          =
         Except.throwError $
             unlines [ "Expected Schema or Resource for "
@@ -156,6 +160,10 @@ filterParameters =
         case fieldDefault x of
             DefaultParam{} -> True
             _              -> False
+
+filterConflicts :: [Field a] -> [Field a]
+filterConflicts =
+    filter (not . Set.null . fieldConflicts)
 
 elabArguments :: Text -> [Go.Schema] -> Elab [Field Conflict]
 elabArguments name =
@@ -177,42 +185,50 @@ elabField schema = do
     thread   <- isThreaded
     default_ <- elabDefault label schema
 
-    let encoder    =
+    let optional =
+            case default_ of
+                DefaultNil{}
+                    | not thread -> Type.typeMaybe
+                _                -> id
+
+        nonEmpty
+            | Go.schemaMaxItems schema == 1 = id
+            | Go.schemaMinItems schema > 0  = Type.typeList1
+            | otherwise                     = Type.typeList
+
+        encoder  =
             case default_ of
                 DefaultNil{}
                    | not thread -> "TF.assign " <> Text.quotes original <> " <$>"
                 _  | thread     -> "TF.assign " <> Text.quotes original <> " <$> TF.attribute"
                    | otherwise  -> "P.Just $ TF.assign " <> Text.quotes original
 
-        applyMaybe =
-            case default_ of
-                DefaultNil{}
-                    | not thread -> Type.typeMaybe
-                _                -> id
-
-        applyList
-            | Go.schemaMaxItems schema == 1 = id
-            | Go.schemaMinItems schema > 0  = Type.typeList1
-            | otherwise                     = Type.typeList
-
-    typ      <-
+    typ <-
         case Go.schemaType schema of
-            Go.TypeString -> addThread Type.Text
-            Go.TypeInt    -> addThread Type.Integer
-            Go.TypeFloat  -> addThread Type.Double
-            Go.TypeBool   -> addThread Type.Bool
-            Go.TypeSet    ->
-                elabNestedSchema schema
-                    >>= addThread
-                    >>= addThread . applyList
-            Go.TypeList   ->
-                fmap applyList (elabNestedSchema schema)
-                    >>= addThread
-            Go.TypeMap    ->
-                fmap Type.typeMap
-                    ( elabNestedSchema schema
-                  <|> addThread Type.Text
-                    ) >>= addThread
+            Go.TypeString -> elabAttr Type.Text
+            Go.TypeInt    -> elabAttr Type.Integer
+            Go.TypeFloat  -> elabAttr Type.Double
+            Go.TypeBool   -> elabAttr Type.Bool
+
+            Go.TypeSet    -> do
+                s <- elabNestedSchema schema
+                if Go.schemaMaxItems schema == 1
+                    then elabAttr s
+                    else elabAttr s >>= elabAttr . nonEmpty
+
+            Go.TypeList   -> do
+                s <- elabNestedSchema schema
+                elabAttr s >>= elabAttr . nonEmpty
+
+            Go.TypeMap    -> nested <|> primitive
+              where
+                nested = do
+                    s <- elabNestedSchema schema
+                    elabAttr (Type.typeMap s)
+
+                primitive = do
+                    v <- elabAttr Type.Text
+                    elabAttr (Type.typeMap v)
 
     pure $! Field'
         { fieldName      = label
@@ -220,13 +236,14 @@ elabField schema = do
         , fieldHelp      = newHelp (Go.schemaDescription schema)
         , fieldClass     = class_
         , fieldMethod    = method
-        , fieldType      = applyMaybe typ
+        , fieldType      = optional typ
         , fieldOptional  = Go.schemaOptional schema
         , fieldRequired  = Go.schemaRequired schema
         , fieldComputed  = Go.schemaComputed schema
         , fieldForceNew  = Go.schemaForceNew schema
-        , fieldEncoder   = encoder
         , fieldDefault   = default_
+        , fieldEncoder   = encoder
+        , fieldValidate  = Type.settings typ
         , fieldConflicts =
             Set.map Name.conflictName (Go.schemaConflictsWith schema)
         }
@@ -334,14 +351,16 @@ conflictIndex conflicts mk xs =
 
 -- Types + State Threading
 
-elabType :: DataName -> Elab Type
-elabType = addThread . Type.Data
+elabAttr :: Type -> Elab Type
+elabAttr = \case
+    x@Type.Attr{} -> pure x
+    x             ->
+        isThreaded >>= pure . \case
+            True  -> Type.Attr x
+            False -> x
 
-addThread :: Type -> Elab Type
-addThread x =
-    isThreaded >>= pure . \case
-        True  -> Type.Thread x
-        False -> x
+elabData :: DataName -> Elab Type
+elabData x = Type.Data <$> isThreaded <*> pure x
 
 isThreaded :: Elab Bool
 isThreaded = Reader.asks snd

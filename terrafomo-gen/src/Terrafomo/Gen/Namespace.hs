@@ -48,6 +48,8 @@ prelude = Set.fromList
     [ "Data.HashMap.Strict"
     , "Data.Hashable"
     , "Data.List.NonEmpty"
+    , "Data.Maybe"
+    , "Data.Monoid"
     , "Data.Text"
     , "GHC.Generics"
     , "Lens.Micro"

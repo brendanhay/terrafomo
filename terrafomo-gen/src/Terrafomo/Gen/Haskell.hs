@@ -25,6 +25,7 @@ data Provider = Provider'
     { providerName         :: !ProviderName
     , providerPackage      :: !Text
     , providerDependencies :: !(HashSet Text)
+    , providerOriginal     :: !Text
     , providerResources    :: ![Resource]
     , providerDataSources  :: ![DataSource]
     , providerSettings     :: ![Settings]
@@ -33,9 +34,6 @@ data Provider = Provider'
 
 instance JSON.ToJSON Provider where
     toJSON = JSON.genericToJSON (JSON.options "provider")
-
-providerOriginal :: Provider -> Text
-providerOriginal = schemaOriginal . fromSettings . providerSchema
 
 newtype Resource = Resource' { fromResource :: Schema Conflict }
     deriving (Show, Eq, JSON.ToJSON)
@@ -52,6 +50,7 @@ data Schema a = Schema'
     , schemaType       :: !Type
     , schemaCon        :: !Con
     , schemaThreaded   :: !Bool
+    , schemaConflicts  :: ![Field a]
     , schemaParameters :: ![Field a]
     , schemaArguments  :: ![Field a]
     , schemaAttributes :: ![Field LabelName]
@@ -74,6 +73,7 @@ data Field a = Field'
     , fieldForceNew  :: !Bool
     , fieldDefault   :: !Default
     , fieldEncoder   :: !Text
+    , fieldValidate  :: !Bool
     } deriving (Show, Eq, Generic)
 
 instance JSON.ToJSON a => JSON.ToJSON (Field a) where

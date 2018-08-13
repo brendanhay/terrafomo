@@ -12,7 +12,7 @@ import qualified Data.Text          as Text
 import qualified Terrafomo.Gen.Text as Text
 
 newtype Name (a :: Symbol) = Name { fromName :: Text }
-    deriving (Show, Eq, Ord, Hashable, JSON.ToJSON, JSON.FromJSON)
+    deriving (Show, Eq, Ord, Hashable, JSON.ToJSON, JSON.ToJSONKey, JSON.FromJSON)
 
 unsafeRename :: (Text -> Text) -> Name a -> Name b
 unsafeRename f (Name x) = Name (f x)
@@ -44,8 +44,8 @@ settingsNames :: Text -> (DataName, ConName, VarName)
 settingsNames x =
     let name = dataName x
      in ( name
-        , unsafeRename (`Text.snoc` '\'') name
-        , unsafeRename (mappend "new")    name
+        , unsafeRename (`Text.snoc` '\'')   name
+        , unsafeRename (mappend "new")      name
         )
 
 fieldNames :: Bool -> Text -> (LabelName, DataName, VarName)
