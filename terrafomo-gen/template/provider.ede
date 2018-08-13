@@ -59,7 +59,7 @@ data Provider = {{ provider.schema.con.name }}
 instance P.Hashable Provider
 
 instance TF.IsSection Provider where
-    toSection x@{{ provider.schema.con.name }}{..} =
+    toSection x@{{ provider.schema.con.name }}{% if !(provider.schema.arguments | empty) %}{..}{% endif %} =
         let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
