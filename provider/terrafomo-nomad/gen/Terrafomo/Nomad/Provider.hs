@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.Nomad.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.Nomad.Settings
 
 import qualified Data.Hashable         as P
 import qualified Data.HashMap.Strict   as P
+import qualified Data.HashMap.Strict   as Map
 import qualified Data.List.NonEmpty    as P
+import qualified Data.Maybe            as P
+import qualified Data.Monoid           as P
 import qualified Data.Text             as P
 import qualified GHC.Generics          as P
 import qualified Lens.Micro            as P
@@ -42,6 +45,7 @@ import qualified Terrafomo.Name        as TF
 import qualified Terrafomo.Nomad.Lens  as P
 import qualified Terrafomo.Nomad.Types as P
 import qualified Terrafomo.Provider    as TF
+import qualified Terrafomo.Validator   as TF
 
 -- | The @Nomad@ Terraform provider configuration.
 --
@@ -80,28 +84,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "address" _address
-                  , TF.assign "ca_file" <$> _caFile
-                  , TF.assign "cert_file" <$> _certFile
-                  , TF.assign "key_file" <$> _keyFile
-                  , TF.assign "region" <$> _region
-                  , TF.assign "secret_id" <$> _secretId
-                  , TF.assign "vault_token" <$> _vaultToken
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: P.Text -- ^ @address@ - 'P.address'
     -> Provider
@@ -116,44 +98,62 @@ newProvider _address =
         , _vaultToken = P.Nothing
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "address" _address
+                  , TF.assign "ca_file" <$> _caFile
+                  , TF.assign "cert_file" <$> _certFile
+                  , TF.assign "key_file" <$> _keyFile
+                  , TF.assign "region" <$> _region
+                  , TF.assign "secret_id" <$> _secretId
+                  , TF.assign "vault_token" <$> _vaultToken
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
 instance P.HasAddress (Provider) (P.Text) where
     address =
         P.lens (_address :: Provider -> P.Text)
-               (\s a -> s { _address = a
-                          } :: Provider)
+               (\s a -> s { _address = a } :: Provider)
 
 instance P.HasCaFile (Provider) (P.Maybe P.Text) where
     caFile =
         P.lens (_caFile :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _caFile = a
-                          } :: Provider)
+               (\s a -> s { _caFile = a } :: Provider)
 
 instance P.HasCertFile (Provider) (P.Maybe P.Text) where
     certFile =
         P.lens (_certFile :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _certFile = a
-                          } :: Provider)
+               (\s a -> s { _certFile = a } :: Provider)
 
 instance P.HasKeyFile (Provider) (P.Maybe P.Text) where
     keyFile =
         P.lens (_keyFile :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _keyFile = a
-                          } :: Provider)
+               (\s a -> s { _keyFile = a } :: Provider)
 
 instance P.HasRegion (Provider) (P.Maybe P.Text) where
     region =
         P.lens (_region :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _region = a
-                          } :: Provider)
+               (\s a -> s { _region = a } :: Provider)
 
 instance P.HasSecretId (Provider) (P.Maybe P.Text) where
     secretId =
         P.lens (_secretId :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _secretId = a
-                          } :: Provider)
+               (\s a -> s { _secretId = a } :: Provider)
 
 instance P.HasVaultToken (Provider) (P.Maybe P.Text) where
     vaultToken =
         P.lens (_vaultToken :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _vaultToken = a
-                          } :: Provider)
+               (\s a -> s { _vaultToken = a } :: Provider)
