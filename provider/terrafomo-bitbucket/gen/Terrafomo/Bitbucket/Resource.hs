@@ -208,7 +208,7 @@ instance P.HasUrl (HookResource s) (TF.Attr s P.Text) where
                           } :: HookResource s)
 
 instance s ~ s' => P.HasComputedUuid (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
-    computedUuid x = TF.compute (TF.refKey x) "uuid"
+    computedUuid x = TF.compute (TF.refKey x) "_computedUuid"
 
 -- | @bitbucket_repository@ Resource.
 --
@@ -352,10 +352,10 @@ instance P.HasWebsite (RepositoryResource s) (TF.Attr s P.Text) where
                           } :: RepositoryResource s)
 
 instance s ~ s' => P.HasComputedCloneHttps (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedCloneHttps x = TF.compute (TF.refKey x) "clone_https"
+    computedCloneHttps x = TF.compute (TF.refKey x) "_computedCloneHttps"
 
 instance s ~ s' => P.HasComputedCloneSsh (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedCloneSsh x = TF.compute (TF.refKey x) "clone_ssh"
+    computedCloneSsh x = TF.compute (TF.refKey x) "_computedCloneSsh"
 
 instance s ~ s' => P.HasComputedSlug (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedSlug x = TF.compute (TF.refKey x) "slug"
+    computedSlug x = TF.compute (TF.refKey x) "_computedSlug"
