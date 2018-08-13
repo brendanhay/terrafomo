@@ -66,55 +66,55 @@ accountData =
         AccountData'
 
 instance s ~ s' => P.HasComputedAddress1 (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedAddress1 x = TF.compute (TF.refKey x) "address1"
+    computedAddress1 x = TF.compute (TF.refKey x) "_computedAddress1"
 
 instance s ~ s' => P.HasComputedAddress2 (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedAddress2 x = TF.compute (TF.refKey x) "address2"
+    computedAddress2 x = TF.compute (TF.refKey x) "_computedAddress2"
 
 instance s ~ s' => P.HasComputedCcEmail (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedCcEmail x = TF.compute (TF.refKey x) "cc_email"
+    computedCcEmail x = TF.compute (TF.refKey x) "_computedCcEmail"
 
 instance s ~ s' => P.HasComputedCity (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedCity x = TF.compute (TF.refKey x) "city"
+    computedCity x = TF.compute (TF.refKey x) "_computedCity"
 
 instance s ~ s' => P.HasComputedContactGroups (TF.Ref s' (AccountData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedContactGroups x = TF.compute (TF.refKey x) "contact_groups"
+    computedContactGroups x = TF.compute (TF.refKey x) "_computedContactGroups"
 
 instance s ~ s' => P.HasComputedCountry (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedCountry x = TF.compute (TF.refKey x) "country"
+    computedCountry x = TF.compute (TF.refKey x) "_computedCountry"
 
 instance s ~ s' => P.HasComputedCurrent (TF.Ref s' (AccountData s)) (TF.Attr s P.Bool) where
-    computedCurrent x = TF.compute (TF.refKey x) "current"
+    computedCurrent x = TF.compute (TF.refKey x) "_computedCurrent"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedInvites (TF.Ref s' (AccountData s)) (TF.Attr s [Invites s]) where
-    computedInvites x = TF.compute (TF.refKey x) "invites"
+    computedInvites x = TF.compute (TF.refKey x) "_computedInvites"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedOwner x = TF.compute (TF.refKey x) "owner"
+    computedOwner x = TF.compute (TF.refKey x) "_computedOwner"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 instance s ~ s' => P.HasComputedTimezone (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedTimezone x = TF.compute (TF.refKey x) "timezone"
+    computedTimezone x = TF.compute (TF.refKey x) "_computedTimezone"
 
 instance s ~ s' => P.HasComputedUiBaseUrl (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedUiBaseUrl x = TF.compute (TF.refKey x) "ui_base_url"
+    computedUiBaseUrl x = TF.compute (TF.refKey x) "_computedUiBaseUrl"
 
 instance s ~ s' => P.HasComputedUsage (TF.Ref s' (AccountData s)) (TF.Attr s [Usage s]) where
-    computedUsage x = TF.compute (TF.refKey x) "usage"
+    computedUsage x = TF.compute (TF.refKey x) "_computedUsage"
 
 instance s ~ s' => P.HasComputedUsers (TF.Ref s' (AccountData s)) (TF.Attr s [Users s]) where
-    computedUsers x = TF.compute (TF.refKey x) "users"
+    computedUsers x = TF.compute (TF.refKey x) "_computedUsers"
 
 -- | @circonus_collector@ DataSource.
 --
@@ -146,19 +146,19 @@ instance P.HasTags (CollectorData s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) 
                           } :: CollectorData s)
 
 instance s ~ s' => P.HasComputedDetails (TF.Ref s' (CollectorData s)) (TF.Attr s [Details s]) where
-    computedDetails x = TF.compute (TF.refKey x) "details"
+    computedDetails x = TF.compute (TF.refKey x) "_computedDetails"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CollectorData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedLatitude (TF.Ref s' (CollectorData s)) (TF.Attr s P.Text) where
-    computedLatitude x = TF.compute (TF.refKey x) "latitude"
+    computedLatitude x = TF.compute (TF.refKey x) "_computedLatitude"
 
 instance s ~ s' => P.HasComputedLongitude (TF.Ref s' (CollectorData s)) (TF.Attr s P.Text) where
-    computedLongitude x = TF.compute (TF.refKey x) "longitude"
+    computedLongitude x = TF.compute (TF.refKey x) "_computedLongitude"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (CollectorData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (CollectorData s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (CollectorData s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"

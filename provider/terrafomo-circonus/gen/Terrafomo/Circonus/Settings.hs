@@ -26,8 +26,8 @@ module Terrafomo.Circonus.Settings
     , newHttptrap
 
     -- ** if
-    , If (..)
-    , newIf
+    , If' (..)
+    , newIf'
 
     -- ** users
     , Users (..)
@@ -82,8 +82,8 @@ module Terrafomo.Circonus.Settings
     , newMetric
 
     -- ** then
-    , Then (..)
-    , newThen
+    , Then' (..)
+    , newThen'
 
     -- ** tcp
     , Tcp (..)
@@ -145,6 +145,8 @@ module Terrafomo.Circonus.Settings
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
+
+import GHC.Base (($))
 
 import qualified Data.Hashable            as P
 import qualified Data.HashMap.Strict      as P
@@ -246,8 +248,8 @@ instance P.HasSecret (Httptrap s) (TF.Attr s P.Text) where
                           } :: Httptrap s)
 
 -- | @if@ nested settings.
-data If s = If'
-    { _then' :: TF.Attr s (TF.Attr s (Then s))
+data If' s = If''
+    { _then' :: TF.Attr s (TF.Attr s (Then' s))
     -- ^ @then@ - (Optional)
     -- Description of the action(s) to take when this rule set is active
     --
@@ -257,33 +259,33 @@ data If s = If'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (If s)
-instance TF.IsValue  (If s)
-instance TF.IsObject (If s) where
-    toObject If'{..} = catMaybes
+instance P.Hashable  (If' s)
+instance TF.IsValue  (If' s)
+instance TF.IsObject (If' s) where
+    toObject If''{..} = catMaybes
         [ TF.assign "then" <$> TF.attribute _then'
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-newIf
-    :: If s
-newIf =
-    If'
+newIf'
+    :: If' s
+newIf' =
+    If''
         { _then' = TF.Nil
         , _value = TF.Nil
         }
 
-instance P.HasThen' (If s) (TF.Attr s (TF.Attr s (Then s))) where
+instance P.HasThen' (If' s) (TF.Attr s (TF.Attr s (Then' s))) where
     then' =
-        P.lens (_then' :: If s -> TF.Attr s (TF.Attr s (Then s)))
+        P.lens (_then' :: If' s -> TF.Attr s (TF.Attr s (Then' s)))
                (\s a -> s { _then' = a
-                          } :: If s)
+                          } :: If' s)
 
-instance P.HasValue (If s) (TF.Attr s (TF.Attr s (Value s))) where
+instance P.HasValue (If' s) (TF.Attr s (TF.Attr s (Value s))) where
     value =
-        P.lens (_value :: If s -> TF.Attr s (TF.Attr s (Value s)))
+        P.lens (_value :: If' s -> TF.Attr s (TF.Attr s (Value s)))
                (\s a -> s { _value = a
-                          } :: If s)
+                          } :: If' s)
 
 -- | @users@ nested settings.
 data Users s = Users'
@@ -300,10 +302,10 @@ newUsers =
     Users'
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedRole (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedRole x = TF.compute (TF.refKey x) "role"
+    computedRole x = TF.compute (TF.refKey x) "_computedRole"
 
 -- | @mysql@ nested settings.
 data Mysql s = Mysql'
@@ -362,10 +364,10 @@ newInvites =
     Invites'
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (Invites s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "email"
+    computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
 
 instance s ~ s' => P.HasComputedRole (TF.Ref s' (Invites s)) (TF.Attr s P.Text) where
-    computedRole x = TF.compute (TF.refKey x) "role"
+    computedRole x = TF.compute (TF.refKey x) "_computedRole"
 
 -- | @pager_duty@ nested settings.
 data PagerDuty s = PagerDuty'
@@ -1361,10 +1363,10 @@ instance P.HasStack (Metric s) (TF.Attr s P.Text) where
                           } :: Metric s)
 
 instance s ~ s' => P.HasComputedFunction (TF.Ref s' (Metric s)) (TF.Attr s P.Text) where
-    computedFunction x = TF.compute (TF.refKey x) "function"
+    computedFunction x = TF.compute (TF.refKey x) "_computedFunction"
 
 -- | @then@ nested settings.
-data Then s = Then'
+data Then' s = Then''
     { _after    :: TF.Attr s P.Text
     -- ^ @after@ - (Optional)
     -- The length of time we should wait before contacting the contact groups after
@@ -1381,41 +1383,41 @@ data Then s = Then'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Then s)
-instance TF.IsValue  (Then s)
-instance TF.IsObject (Then s) where
-    toObject Then'{..} = catMaybes
+instance P.Hashable  (Then' s)
+instance TF.IsValue  (Then' s)
+instance TF.IsObject (Then' s) where
+    toObject Then''{..} = catMaybes
         [ TF.assign "after" <$> TF.attribute _after
         , TF.assign "notify" <$> TF.attribute _notify
         , TF.assign "severity" <$> TF.attribute _severity
         ]
 
-newThen
-    :: Then s
-newThen =
-    Then'
+newThen'
+    :: Then' s
+newThen' =
+    Then''
         { _after = TF.Nil
         , _notify = TF.Nil
         , _severity = TF.value 1
         }
 
-instance P.HasAfter (Then s) (TF.Attr s P.Text) where
+instance P.HasAfter (Then' s) (TF.Attr s P.Text) where
     after =
-        P.lens (_after :: Then s -> TF.Attr s P.Text)
+        P.lens (_after :: Then' s -> TF.Attr s P.Text)
                (\s a -> s { _after = a
-                          } :: Then s)
+                          } :: Then' s)
 
-instance P.HasNotify (Then s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
+instance P.HasNotify (Then' s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     notify =
-        P.lens (_notify :: Then s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+        P.lens (_notify :: Then' s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
                (\s a -> s { _notify = a
-                          } :: Then s)
+                          } :: Then' s)
 
-instance P.HasSeverity (Then s) (TF.Attr s P.Integer) where
+instance P.HasSeverity (Then' s) (TF.Attr s P.Integer) where
     severity =
-        P.lens (_severity :: Then s -> TF.Attr s P.Integer)
+        P.lens (_severity :: Then' s -> TF.Attr s P.Integer)
                (\s a -> s { _severity = a
-                          } :: Then s)
+                          } :: Then' s)
 
 -- | @tcp@ nested settings.
 data Tcp s = Tcp'
@@ -1621,34 +1623,34 @@ newDetails =
     Details'
 
 instance s ~ s' => P.HasComputedCn (TF.Ref s' (Details s)) (TF.Attr s P.Text) where
-    computedCn x = TF.compute (TF.refKey x) "cn"
+    computedCn x = TF.compute (TF.refKey x) "_computedCn"
 
 instance s ~ s' => P.HasComputedExternalHost (TF.Ref s' (Details s)) (TF.Attr s P.Text) where
-    computedExternalHost x = TF.compute (TF.refKey x) "external_host"
+    computedExternalHost x = TF.compute (TF.refKey x) "_computedExternalHost"
 
 instance s ~ s' => P.HasComputedExternalPort (TF.Ref s' (Details s)) (TF.Attr s P.Integer) where
-    computedExternalPort x = TF.compute (TF.refKey x) "external_port"
+    computedExternalPort x = TF.compute (TF.refKey x) "_computedExternalPort"
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (Details s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "ip"
+    computedIp x = TF.compute (TF.refKey x) "_computedIp"
 
 instance s ~ s' => P.HasComputedMinVersion (TF.Ref s' (Details s)) (TF.Attr s P.Integer) where
-    computedMinVersion x = TF.compute (TF.refKey x) "min_version"
+    computedMinVersion x = TF.compute (TF.refKey x) "_computedMinVersion"
 
 instance s ~ s' => P.HasComputedModules (TF.Ref s' (Details s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedModules x = TF.compute (TF.refKey x) "modules"
+    computedModules x = TF.compute (TF.refKey x) "_computedModules"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (Details s)) (TF.Attr s P.Integer) where
-    computedPort x = TF.compute (TF.refKey x) "port"
+    computedPort x = TF.compute (TF.refKey x) "_computedPort"
 
 instance s ~ s' => P.HasComputedSkew (TF.Ref s' (Details s)) (TF.Attr s P.Text) where
-    computedSkew x = TF.compute (TF.refKey x) "skew"
+    computedSkew x = TF.compute (TF.refKey x) "_computedSkew"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (Details s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (Details s)) (TF.Attr s P.Integer) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
+    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
 
 -- | @alert_option@ nested settings.
 data AlertOption s = AlertOption'
@@ -1818,13 +1820,13 @@ newUsage =
     Usage'
 
 instance s ~ s' => P.HasComputedLimit (TF.Ref s' (Usage s)) (TF.Attr s P.Integer) where
-    computedLimit x = TF.compute (TF.refKey x) "limit"
+    computedLimit x = TF.compute (TF.refKey x) "_computedLimit"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (Usage s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (Usage s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 instance s ~ s' => P.HasComputedUsed (TF.Ref s' (Usage s)) (TF.Attr s P.Integer) where
-    computedUsed x = TF.compute (TF.refKey x) "used"
+    computedUsed x = TF.compute (TF.refKey x) "_computedUsed"
 
 -- | @irc@ nested settings.
 data Irc s = Irc'

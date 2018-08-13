@@ -86,7 +86,7 @@ data CheckResource s = CheckResource'
     -- ^ @collector@ - (Optional)
     -- The collector(s) that are responsible for gathering the metrics
     --
-    , _consul     :: TF.Attr s [Consul s]
+    , _consul     :: TF.Attr s (Consul s)
     -- ^ @consul@ - (Optional)
     -- Consul check configuration
     --
@@ -197,9 +197,9 @@ instance P.HasCollector (CheckResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (Col
                (\s a -> s { _collector = a
                           } :: CheckResource s)
 
-instance P.HasConsul (CheckResource s) (TF.Attr s [Consul s]) where
+instance P.HasConsul (CheckResource s) (TF.Attr s (Consul s)) where
     consul =
-        P.lens (_consul :: CheckResource s -> TF.Attr s [Consul s])
+        P.lens (_consul :: CheckResource s -> TF.Attr s (Consul s))
                (\s a -> s { _consul = a
                           } :: CheckResource s)
 
@@ -264,49 +264,49 @@ instance P.HasTcp (CheckResource s) (TF.Attr s (TF.Attr s (Tcp s))) where
                           } :: CheckResource s)
 
 instance s ~ s' => P.HasComputedCheckByCollector (TF.Ref s' (CheckResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedCheckByCollector x = TF.compute (TF.refKey x) "check_by_collector"
+    computedCheckByCollector x = TF.compute (TF.refKey x) "_computedCheckByCollector"
 
 instance s ~ s' => P.HasComputedCheckId (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedCheckId x = TF.compute (TF.refKey x) "check_id"
+    computedCheckId x = TF.compute (TF.refKey x) "_computedCheckId"
 
 instance s ~ s' => P.HasComputedChecks (TF.Ref s' (CheckResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedChecks x = TF.compute (TF.refKey x) "checks"
+    computedChecks x = TF.compute (TF.refKey x) "_computedChecks"
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (CheckResource s)) (TF.Attr s P.Integer) where
-    computedCreated x = TF.compute (TF.refKey x) "created"
+    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
 
 instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (CheckResource s)) (TF.Attr s P.Integer) where
-    computedLastModified x = TF.compute (TF.refKey x) "last_modified"
+    computedLastModified x = TF.compute (TF.refKey x) "_computedLastModified"
 
 instance s ~ s' => P.HasComputedLastModifiedBy (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedLastModifiedBy x = TF.compute (TF.refKey x) "last_modified_by"
+    computedLastModifiedBy x = TF.compute (TF.refKey x) "_computedLastModifiedBy"
 
 instance s ~ s' => P.HasComputedMetricLimit (TF.Ref s' (CheckResource s)) (TF.Attr s P.Integer) where
-    computedMetricLimit x = TF.compute (TF.refKey x) "metric_limit"
+    computedMetricLimit x = TF.compute (TF.refKey x) "_computedMetricLimit"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedNotes (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedNotes x = TF.compute (TF.refKey x) "notes"
+    computedNotes x = TF.compute (TF.refKey x) "_computedNotes"
 
 instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedPeriod x = TF.compute (TF.refKey x) "period"
+    computedPeriod x = TF.compute (TF.refKey x) "_computedPeriod"
 
 instance s ~ s' => P.HasComputedReverseConnectUrls (TF.Ref s' (CheckResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedReverseConnectUrls x = TF.compute (TF.refKey x) "reverse_connect_urls"
+    computedReverseConnectUrls x = TF.compute (TF.refKey x) "_computedReverseConnectUrls"
 
 instance s ~ s' => P.HasComputedTarget (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedTarget x = TF.compute (TF.refKey x) "target"
+    computedTarget x = TF.compute (TF.refKey x) "_computedTarget"
 
 instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedTimeout x = TF.compute (TF.refKey x) "timeout"
+    computedTimeout x = TF.compute (TF.refKey x) "_computedTimeout"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 instance s ~ s' => P.HasComputedUuids (TF.Ref s' (CheckResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedUuids x = TF.compute (TF.refKey x) "uuids"
+    computedUuids x = TF.compute (TF.refKey x) "_computedUuids"
 
 -- | @circonus_contact_group@ Resource.
 --
@@ -515,10 +515,10 @@ instance P.HasXmpp (ContactGroupResource s) (TF.Attr s [TF.Attr s (Xmpp s)]) whe
                           } :: ContactGroupResource s)
 
 instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (ContactGroupResource s)) (TF.Attr s P.Integer) where
-    computedLastModified x = TF.compute (TF.refKey x) "last_modified"
+    computedLastModified x = TF.compute (TF.refKey x) "_computedLastModified"
 
 instance s ~ s' => P.HasComputedLastModifiedBy (TF.Ref s' (ContactGroupResource s)) (TF.Attr s P.Text) where
-    computedLastModifiedBy x = TF.compute (TF.refKey x) "last_modified_by"
+    computedLastModifiedBy x = TF.compute (TF.refKey x) "_computedLastModifiedBy"
 
 -- | @circonus_graph@ Resource.
 --
@@ -787,10 +787,10 @@ instance P.HasTags (MetricClusterResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.
                           } :: MetricClusterResource s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (MetricClusterResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricClusterResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @circonus_rule_set@ Resource.
 --
@@ -801,7 +801,7 @@ data RuleSetResource s = RuleSetResource'
     -- ^ @check@ - (Required)
     -- The CID of the check that contains the metric for this rule set
     --
-    , _if'        :: TF.Attr s (P.NonEmpty (If s))
+    , _if'        :: TF.Attr s (P.NonEmpty (If' s))
     -- ^ @if@ - (Required)
     -- A rule to execute for this rule set
     --
@@ -830,7 +830,7 @@ instance TF.IsObject (RuleSetResource s) where
 
 ruleSetResource
     :: TF.Attr s P.Text -- ^ @check@ - 'P.check'
-    -> TF.Attr s (P.NonEmpty (If s)) -- ^ @if@ - 'P.if''
+    -> TF.Attr s (P.NonEmpty (If' s)) -- ^ @if@ - 'P.if''
     -> TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> TF.Resource P.Provider (RuleSetResource s)
 ruleSetResource _check _if' _metricName =
@@ -849,9 +849,9 @@ instance P.HasCheck (RuleSetResource s) (TF.Attr s P.Text) where
                (\s a -> s { _check = a
                           } :: RuleSetResource s)
 
-instance P.HasIf' (RuleSetResource s) (TF.Attr s (P.NonEmpty (If s))) where
+instance P.HasIf' (RuleSetResource s) (TF.Attr s (P.NonEmpty (If' s))) where
     if' =
-        P.lens (_if' :: RuleSetResource s -> TF.Attr s (P.NonEmpty (If s)))
+        P.lens (_if' :: RuleSetResource s -> TF.Attr s (P.NonEmpty (If' s)))
                (\s a -> s { _if' = a
                           } :: RuleSetResource s)
 
@@ -874,10 +874,10 @@ instance P.HasTags (RuleSetResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
                           } :: RuleSetResource s)
 
 instance s ~ s' => P.HasComputedLink (TF.Ref s' (RuleSetResource s)) (TF.Attr s P.Text) where
-    computedLink x = TF.compute (TF.refKey x) "link"
+    computedLink x = TF.compute (TF.refKey x) "_computedLink"
 
 instance s ~ s' => P.HasComputedNotes (TF.Ref s' (RuleSetResource s)) (TF.Attr s P.Text) where
-    computedNotes x = TF.compute (TF.refKey x) "notes"
+    computedNotes x = TF.compute (TF.refKey x) "_computedNotes"
 
 instance s ~ s' => P.HasComputedParent (TF.Ref s' (RuleSetResource s)) (TF.Attr s P.Text) where
-    computedParent x = TF.compute (TF.refKey x) "parent"
+    computedParent x = TF.compute (TF.refKey x) "_computedParent"

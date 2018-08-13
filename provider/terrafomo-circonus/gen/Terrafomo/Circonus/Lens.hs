@@ -181,10 +181,10 @@ module Terrafomo.Circonus.Lens
     , HasComputedIp (..)
     , HasComputedFunction (..)
     , HasComputedMetricLimit (..)
+    , HasComputedType (..)
     , HasComputedRole (..)
     , HasComputedSkew (..)
     , HasComputedLongitude (..)
-    , HasComputedType' (..)
     , HasComputedTimeout (..)
     , HasComputedPeriod (..)
     , HasComputedAddress1 (..)
@@ -1071,6 +1071,9 @@ class HasComputedFunction a b | a -> b where
 class HasComputedMetricLimit a b | a -> b where
     computedMetricLimit :: a -> b
 
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
+
 class HasComputedRole a b | a -> b where
     computedRole :: a -> b
 
@@ -1079,9 +1082,6 @@ class HasComputedSkew a b | a -> b where
 
 class HasComputedLongitude a b | a -> b where
     computedLongitude :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedTimeout a b | a -> b where
     computedTimeout :: a -> b
