@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.OVH.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.OVH.Settings
 
 import qualified Data.Hashable       as P
 import qualified Data.HashMap.Strict as P
+import qualified Data.HashMap.Strict as Map
 import qualified Data.List.NonEmpty  as P
+import qualified Data.Maybe          as P
+import qualified Data.Monoid         as P
 import qualified Data.Text           as P
 import qualified GHC.Generics        as P
 import qualified Lens.Micro          as P
@@ -42,6 +45,7 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.OVH.Lens  as P
 import qualified Terrafomo.OVH.Types as P
 import qualified Terrafomo.Provider  as TF
+import qualified Terrafomo.Validator as TF
 
 -- | The @OVH@ Terraform provider configuration.
 --
@@ -66,25 +70,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "application_key" <$> _applicationKey
-                  , TF.assign "application_secret" <$> _applicationSecret
-                  , TF.assign "consumer_key" <$> _consumerKey
-                  , P.Just $ TF.assign "endpoint" _endpoint
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: P.Text -- ^ @endpoint@ - 'P.endpoint'
     -> Provider
@@ -96,26 +81,44 @@ newProvider _endpoint =
         , _endpoint = _endpoint
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "application_key" <$> _applicationKey
+                  , TF.assign "application_secret" <$> _applicationSecret
+                  , TF.assign "consumer_key" <$> _consumerKey
+                  , P.Just $ TF.assign "endpoint" _endpoint
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
 instance P.HasApplicationKey (Provider) (P.Maybe P.Text) where
     applicationKey =
         P.lens (_applicationKey :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _applicationKey = a
-                          } :: Provider)
+               (\s a -> s { _applicationKey = a } :: Provider)
 
 instance P.HasApplicationSecret (Provider) (P.Maybe P.Text) where
     applicationSecret =
         P.lens (_applicationSecret :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _applicationSecret = a
-                          } :: Provider)
+               (\s a -> s { _applicationSecret = a } :: Provider)
 
 instance P.HasConsumerKey (Provider) (P.Maybe P.Text) where
     consumerKey =
         P.lens (_consumerKey :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _consumerKey = a
-                          } :: Provider)
+               (\s a -> s { _consumerKey = a } :: Provider)
 
 instance P.HasEndpoint (Provider) (P.Text) where
     endpoint =
         P.lens (_endpoint :: Provider -> P.Text)
-               (\s a -> s { _endpoint = a
-                          } :: Provider)
+               (\s a -> s { _endpoint = a } :: Provider)
