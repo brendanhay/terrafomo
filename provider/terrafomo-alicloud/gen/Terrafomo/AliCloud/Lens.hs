@@ -387,7 +387,6 @@ module Terrafomo.AliCloud.Lens
     , HasComputedTtl (..)
     , HasComputedHealthCheck (..)
     , HasComputedRecurrenceEndTime (..)
-    , HasComputedInstance' (..)
     , HasComputedAddress (..)
     , HasComputedInstances (..)
     , HasComputedInstanceTypes (..)
@@ -447,6 +446,7 @@ module Terrafomo.AliCloud.Lens
     , HasComputedCookie (..)
     , HasComputedDeviceName (..)
     , HasComputedAccountAlias (..)
+    , HasComputedInstance (..)
     , HasComputedRecurrenceType (..)
     , HasComputedRamUsers (..)
     , HasComputedUnhealthyThreshold (..)
@@ -537,6 +537,7 @@ module Terrafomo.AliCloud.Lens
     , HasComputedLbProtocol (..)
     , HasComputedBandwidth (..)
     , HasComputedZone (..)
+    , HasComputedType (..)
     , HasComputedOppositeRouterType (..)
     , HasComputedRefererConfig (..)
     , HasComputedPlatform (..)
@@ -545,7 +546,6 @@ module Terrafomo.AliCloud.Lens
     , HasComputedStickySessionType (..)
     , HasComputedConnectionString (..)
     , HasComputedInitialCredit (..)
-    , HasComputedFamily' (..)
     , HasComputedAvailableInstanceTypes (..)
     , HasComputedDefaultVersion (..)
     , HasComputedRouterId (..)
@@ -557,6 +557,7 @@ module Terrafomo.AliCloud.Lens
     , HasComputedRouteTableId (..)
     , HasComputedIsSubscribed (..)
     , HasComputedCacheId (..)
+    , HasComputedFamily (..)
     , HasComputedCreateDate (..)
     , HasComputedImageVersion (..)
     , HasComputedRules (..)
@@ -569,7 +570,6 @@ module Terrafomo.AliCloud.Lens
     , HasComputedLastLoginDate (..)
     , HasComputedInternetMaxBandwidthIn (..)
     , HasComputedHeaderId (..)
-    , HasComputedType' (..)
     , HasComputedDomainName (..)
     , HasComputedSize (..)
     , HasComputedRegionId (..)
@@ -2757,9 +2757,6 @@ class HasComputedHealthCheck a b | a -> b where
 class HasComputedRecurrenceEndTime a b | a -> b where
     computedRecurrenceEndTime :: a -> b
 
-class HasComputedInstance' a b | a -> b where
-    computedInstance' :: a -> b
-
 class HasComputedAddress a b | a -> b where
     computedAddress :: a -> b
 
@@ -2936,6 +2933,9 @@ class HasComputedDeviceName a b | a -> b where
 
 class HasComputedAccountAlias a b | a -> b where
     computedAccountAlias :: a -> b
+
+class HasComputedInstance a b | a -> b where
+    computedInstance :: a -> b
 
 class HasComputedRecurrenceType a b | a -> b where
     computedRecurrenceType :: a -> b
@@ -3207,6 +3207,9 @@ class HasComputedBandwidth a b | a -> b where
 class HasComputedZone a b | a -> b where
     computedZone :: a -> b
 
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
+
 class HasComputedOppositeRouterType a b | a -> b where
     computedOppositeRouterType :: a -> b
 
@@ -3230,9 +3233,6 @@ class HasComputedConnectionString a b | a -> b where
 
 class HasComputedInitialCredit a b | a -> b where
     computedInitialCredit :: a -> b
-
-class HasComputedFamily' a b | a -> b where
-    computedFamily' :: a -> b
 
 class HasComputedAvailableInstanceTypes a b | a -> b where
     computedAvailableInstanceTypes :: a -> b
@@ -3266,6 +3266,9 @@ class HasComputedIsSubscribed a b | a -> b where
 
 class HasComputedCacheId a b | a -> b where
     computedCacheId :: a -> b
+
+class HasComputedFamily a b | a -> b where
+    computedFamily :: a -> b
 
 class HasComputedCreateDate a b | a -> b where
     computedCreateDate :: a -> b
@@ -3302,9 +3305,6 @@ class HasComputedInternetMaxBandwidthIn a b | a -> b where
 
 class HasComputedHeaderId a b | a -> b where
     computedHeaderId :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedDomainName a b | a -> b where
     computedDomainName :: a -> b
