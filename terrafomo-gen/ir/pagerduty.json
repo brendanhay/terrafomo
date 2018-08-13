@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newRestriction",
+                "name": "Restriction'"
+            },
             "arguments": [
                 {
                     "default": "_durationSeconds",
@@ -9,13 +13,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"duration_seconds\" <$> TF.attribute",
-                    "name": "duration_seconds",
+                    "name": "_durationSeconds",
                     "method": "durationSeconds",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasDurationSeconds",
+                    "validate": false,
                     "optional": false,
-                    "label": "_durationSeconds"
+                    "original": "duration_seconds"
                 },
                 {
                     "default": "TF.Nil",
@@ -24,13 +29,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"start_day_of_week\" <$> TF.attribute",
-                    "name": "start_day_of_week",
+                    "name": "_startDayOfWeek",
                     "method": "startDayOfWeek",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasStartDayOfWeek",
+                    "validate": false,
                     "optional": true,
-                    "label": "_startDayOfWeek"
+                    "original": "start_day_of_week"
                 },
                 {
                     "default": "_startTimeOfDay",
@@ -39,13 +45,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"start_time_of_day\" <$> TF.attribute",
-                    "name": "start_time_of_day",
+                    "name": "_startTimeOfDay",
                     "method": "startTimeOfDay",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasStartTimeOfDay",
+                    "validate": false,
                     "optional": false,
-                    "label": "_startTimeOfDay"
+                    "original": "start_time_of_day"
                 },
                 {
                     "default": "_type'",
@@ -54,16 +61,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
             "name": "Restriction",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -73,13 +82,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"duration_seconds\" <$> TF.attribute",
-                    "name": "duration_seconds",
+                    "name": "_durationSeconds",
                     "method": "durationSeconds",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasDurationSeconds",
+                    "validate": false,
                     "optional": false,
-                    "label": "_durationSeconds"
+                    "original": "duration_seconds"
                 },
                 {
                     "default": "_startTimeOfDay",
@@ -88,13 +98,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"start_time_of_day\" <$> TF.attribute",
-                    "name": "start_time_of_day",
+                    "name": "_startTimeOfDay",
                     "method": "startTimeOfDay",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasStartTimeOfDay",
+                    "validate": false,
                     "optional": false,
-                    "label": "_startTimeOfDay"
+                    "original": "start_time_of_day"
                 },
                 {
                     "default": "_type'",
@@ -103,20 +114,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Restriction s",
             "original": "restriction"
         },
         {
+            "con": {
+                "smart": "newAt",
+                "name": "At'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -125,13 +141,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -140,23 +157,29 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": true,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
             "name": "At",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "At s",
             "original": "at"
         },
         {
+            "con": {
+                "smart": "newScheduledActions",
+                "name": "ScheduledActions'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -165,13 +188,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"at\" <$> TF.attribute",
-                    "name": "at",
+                    "name": "_at",
                     "method": "at",
                     "conflicts": [],
-                    "type": "TF.Attr s [At s]",
+                    "type": "TF.Attr s [TF.Attr s (At s)]",
                     "class": "HasAt",
+                    "validate": true,
                     "optional": true,
-                    "label": "_at"
+                    "original": "at"
                 },
                 {
                     "default": "TF.Nil",
@@ -180,13 +204,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"to_urgency\" <$> TF.attribute",
-                    "name": "to_urgency",
+                    "name": "_toUrgency",
                     "method": "toUrgency",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasToUrgency",
+                    "validate": false,
                     "optional": true,
-                    "label": "_toUrgency"
+                    "original": "to_urgency"
                 },
                 {
                     "default": "TF.Nil",
@@ -195,23 +220,29 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": true,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
             "name": "ScheduledActions",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "ScheduledActions s",
             "original": "scheduled_actions"
         },
         {
+            "con": {
+                "smart": "newSupportHours",
+                "name": "SupportHours'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -220,13 +251,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"days_of_week\" <$> TF.attribute",
-                    "name": "days_of_week",
+                    "name": "_daysOfWeek",
                     "method": "daysOfWeek",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Integer]",
                     "class": "HasDaysOfWeek",
+                    "validate": false,
                     "optional": true,
-                    "label": "_daysOfWeek"
+                    "original": "days_of_week"
                 },
                 {
                     "default": "TF.Nil",
@@ -235,13 +267,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"end_time\" <$> TF.attribute",
-                    "name": "end_time",
+                    "name": "_endTime",
                     "method": "endTime",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEndTime",
+                    "validate": false,
                     "optional": true,
-                    "label": "_endTime"
+                    "original": "end_time"
                 },
                 {
                     "default": "TF.Nil",
@@ -250,13 +283,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"start_time\" <$> TF.attribute",
-                    "name": "start_time",
+                    "name": "_startTime",
                     "method": "startTime",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasStartTime",
+                    "validate": false,
                     "optional": true,
-                    "label": "_startTime"
+                    "original": "start_time"
                 },
                 {
                     "default": "TF.Nil",
@@ -265,13 +299,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"time_zone\" <$> TF.attribute",
-                    "name": "time_zone",
+                    "name": "_timeZone",
                     "method": "timeZone",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTimeZone",
+                    "validate": false,
                     "optional": true,
-                    "label": "_timeZone"
+                    "original": "time_zone"
                 },
                 {
                     "default": "TF.Nil",
@@ -280,23 +315,29 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": true,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
             "name": "SupportHours",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "SupportHours s",
             "original": "support_hours"
         },
         {
+            "con": {
+                "smart": "newRule",
+                "name": "Rule'"
+            },
             "arguments": [
                 {
                     "default": "_escalationDelayInMinutes",
@@ -305,13 +346,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"escalation_delay_in_minutes\" <$> TF.attribute",
-                    "name": "escalation_delay_in_minutes",
+                    "name": "_escalationDelayInMinutes",
                     "method": "escalationDelayInMinutes",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasEscalationDelayInMinutes",
+                    "validate": false,
                     "optional": false,
-                    "label": "_escalationDelayInMinutes"
+                    "original": "escalation_delay_in_minutes"
                 },
                 {
                     "default": "_target",
@@ -320,16 +362,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"target\" <$> TF.attribute",
-                    "name": "target",
+                    "name": "_target",
                     "method": "target",
                     "conflicts": [],
-                    "type": "TF.Attr s [Target s]",
+                    "type": "TF.Attr s [TF.Attr s (Target s)]",
                     "class": "HasTarget",
+                    "validate": true,
                     "optional": false,
-                    "label": "_target"
+                    "original": "target"
                 }
             ],
             "name": "Rule",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -338,13 +382,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 }
             ],
             "parameters": [
@@ -355,13 +400,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"escalation_delay_in_minutes\" <$> TF.attribute",
-                    "name": "escalation_delay_in_minutes",
+                    "name": "_escalationDelayInMinutes",
                     "method": "escalationDelayInMinutes",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasEscalationDelayInMinutes",
+                    "validate": false,
                     "optional": false,
-                    "label": "_escalationDelayInMinutes"
+                    "original": "escalation_delay_in_minutes"
                 },
                 {
                     "default": "_target",
@@ -370,20 +416,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"target\" <$> TF.attribute",
-                    "name": "target",
+                    "name": "_target",
                     "method": "target",
                     "conflicts": [],
-                    "type": "TF.Attr s [Target s]",
+                    "type": "TF.Attr s [TF.Attr s (Target s)]",
                     "class": "HasTarget",
+                    "validate": true,
                     "optional": false,
-                    "label": "_target"
+                    "original": "target"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Rule s",
             "original": "rule"
         },
         {
+            "con": {
+                "smart": "newIncidentUrgencyRule",
+                "name": "IncidentUrgencyRule'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -392,13 +443,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"during_support_hours\" <$> TF.attribute",
-                    "name": "during_support_hours",
+                    "name": "_duringSupportHours",
                     "method": "duringSupportHours",
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (DuringSupportHours s))",
+                    "type": "TF.Attr s (DuringSupportHours s)",
                     "class": "HasDuringSupportHours",
+                    "validate": true,
                     "optional": true,
-                    "label": "_duringSupportHours"
+                    "original": "during_support_hours"
                 },
                 {
                     "default": "TF.Nil",
@@ -407,13 +459,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"outside_support_hours\" <$> TF.attribute",
-                    "name": "outside_support_hours",
+                    "name": "_outsideSupportHours",
                     "method": "outsideSupportHours",
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (OutsideSupportHours s))",
+                    "type": "TF.Attr s (OutsideSupportHours s)",
                     "class": "HasOutsideSupportHours",
+                    "validate": true,
                     "optional": true,
-                    "label": "_outsideSupportHours"
+                    "original": "outside_support_hours"
                 },
                 {
                     "default": "_type'",
@@ -422,13 +475,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 },
                 {
                     "default": "TF.Nil",
@@ -437,16 +491,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"urgency\" <$> TF.attribute",
-                    "name": "urgency",
+                    "name": "_urgency",
                     "method": "urgency",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUrgency",
+                    "validate": false,
                     "optional": true,
-                    "label": "_urgency"
+                    "original": "urgency"
                 }
             ],
             "name": "IncidentUrgencyRule",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -456,20 +512,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "IncidentUrgencyRule s",
             "original": "incident_urgency_rule"
         },
         {
+            "con": {
+                "smart": "newDuringSupportHours",
+                "name": "DuringSupportHours'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -478,13 +539,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": true,
-                    "label": "_type'"
+                    "original": "type"
                 },
                 {
                     "default": "TF.Nil",
@@ -493,23 +555,29 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"urgency\" <$> TF.attribute",
-                    "name": "urgency",
+                    "name": "_urgency",
                     "method": "urgency",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUrgency",
+                    "validate": false,
                     "optional": true,
-                    "label": "_urgency"
+                    "original": "urgency"
                 }
             ],
             "name": "DuringSupportHours",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "DuringSupportHours s",
             "original": "during_support_hours"
         },
         {
+            "con": {
+                "smart": "newLayer",
+                "name": "Layer'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -518,13 +586,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"end\" <$> TF.attribute",
-                    "name": "end",
+                    "name": "_end",
                     "method": "end",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnd",
+                    "validate": false,
                     "optional": true,
-                    "label": "_end"
+                    "original": "end"
                 },
                 {
                     "default": "TF.Nil",
@@ -533,13 +602,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"restriction\" <$> TF.attribute",
-                    "name": "restriction",
+                    "name": "_restriction",
                     "method": "restriction",
                     "conflicts": [],
-                    "type": "TF.Attr s [Restriction s]",
+                    "type": "TF.Attr s [TF.Attr s (Restriction s)]",
                     "class": "HasRestriction",
+                    "validate": true,
                     "optional": true,
-                    "label": "_restriction"
+                    "original": "restriction"
                 },
                 {
                     "default": "_rotationTurnLengthSeconds",
@@ -548,13 +618,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rotation_turn_length_seconds\" <$> TF.attribute",
-                    "name": "rotation_turn_length_seconds",
+                    "name": "_rotationTurnLengthSeconds",
                     "method": "rotationTurnLengthSeconds",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasRotationTurnLengthSeconds",
+                    "validate": false,
                     "optional": false,
-                    "label": "_rotationTurnLengthSeconds"
+                    "original": "rotation_turn_length_seconds"
                 },
                 {
                     "default": "_rotationVirtualStart",
@@ -563,13 +634,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rotation_virtual_start\" <$> TF.attribute",
-                    "name": "rotation_virtual_start",
+                    "name": "_rotationVirtualStart",
                     "method": "rotationVirtualStart",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRotationVirtualStart",
+                    "validate": false,
                     "optional": false,
-                    "label": "_rotationVirtualStart"
+                    "original": "rotation_virtual_start"
                 },
                 {
                     "default": "_start",
@@ -578,13 +650,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"start\" <$> TF.attribute",
-                    "name": "start",
+                    "name": "_start",
                     "method": "start",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasStart",
+                    "validate": false,
                     "optional": false,
-                    "label": "_start"
+                    "original": "start"
                 },
                 {
                     "default": "_users",
@@ -593,16 +666,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"users\" <$> TF.attribute",
-                    "name": "users",
+                    "name": "_users",
                     "method": "users",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasUsers",
+                    "validate": false,
                     "optional": false,
-                    "label": "_users"
+                    "original": "users"
                 }
             ],
             "name": "Layer",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -611,13 +686,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 },
                 {
                     "default": "TF.Nil",
@@ -626,13 +702,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_computedName",
                     "method": "computedName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedName"
+                    "original": "name"
                 }
             ],
             "parameters": [
@@ -643,13 +720,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rotation_turn_length_seconds\" <$> TF.attribute",
-                    "name": "rotation_turn_length_seconds",
+                    "name": "_rotationTurnLengthSeconds",
                     "method": "rotationTurnLengthSeconds",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasRotationTurnLengthSeconds",
+                    "validate": false,
                     "optional": false,
-                    "label": "_rotationTurnLengthSeconds"
+                    "original": "rotation_turn_length_seconds"
                 },
                 {
                     "default": "_rotationVirtualStart",
@@ -658,13 +736,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rotation_virtual_start\" <$> TF.attribute",
-                    "name": "rotation_virtual_start",
+                    "name": "_rotationVirtualStart",
                     "method": "rotationVirtualStart",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRotationVirtualStart",
+                    "validate": false,
                     "optional": false,
-                    "label": "_rotationVirtualStart"
+                    "original": "rotation_virtual_start"
                 },
                 {
                     "default": "_start",
@@ -673,13 +752,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"start\" <$> TF.attribute",
-                    "name": "start",
+                    "name": "_start",
                     "method": "start",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasStart",
+                    "validate": false,
                     "optional": false,
-                    "label": "_start"
+                    "original": "start"
                 },
                 {
                     "default": "_users",
@@ -688,20 +768,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"users\" <$> TF.attribute",
-                    "name": "users",
+                    "name": "_users",
                     "method": "users",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasUsers",
+                    "validate": false,
                     "optional": false,
-                    "label": "_users"
+                    "original": "users"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Layer s",
             "original": "layer"
         },
         {
+            "con": {
+                "smart": "newTarget",
+                "name": "Target'"
+            },
             "arguments": [
                 {
                     "default": "_id",
@@ -710,13 +795,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_id",
                     "method": "id",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_id"
+                    "original": "id"
                 },
                 {
                     "default": "TF.value \"user_reference\"",
@@ -725,16 +811,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": true,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
             "name": "Target",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -744,20 +832,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_id",
                     "method": "id",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_id"
+                    "original": "id"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Target s",
             "original": "target"
         },
         {
+            "con": {
+                "smart": "newOutsideSupportHours",
+                "name": "OutsideSupportHours'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -766,13 +859,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": true,
-                    "label": "_type'"
+                    "original": "type"
                 },
                 {
                     "default": "TF.Nil",
@@ -781,57 +875,31 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"urgency\" <$> TF.attribute",
-                    "name": "urgency",
+                    "name": "_urgency",
                     "method": "urgency",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUrgency",
+                    "validate": false,
                     "optional": true,
-                    "label": "_urgency"
+                    "original": "urgency"
                 }
             ],
             "name": "OutsideSupportHours",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "OutsideSupportHours s",
             "original": "outside_support_hours"
         }
     ],
-    "arguments": [
-        {
-            "default": "P.False",
-            "computed": false,
-            "required": false,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"skip_credentials_validation\"",
-            "name": "skip_credentials_validation",
-            "method": "skipCredentialsValidation",
-            "conflicts": [],
-            "type": "P.Bool",
-            "class": "HasSkipCredentialsValidation",
-            "optional": true,
-            "label": "_skipCredentialsValidation"
-        },
-        {
-            "default": "_token",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"token\"",
-            "name": "token",
-            "method": "token",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasToken",
-            "optional": false,
-            "label": "_token"
-        }
-    ],
     "dataSources": [
         {
+            "con": {
+                "smart": "escalationPolicyData",
+                "name": "EscalationPolicyData'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -840,17 +908,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "DataSource",
             "name": "EscalationPolicyData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -860,19 +929,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "EscalationPolicyData s",
             "original": "pagerduty_escalation_policy"
         },
         {
+            "con": {
+                "smart": "extensionSchemaData",
+                "name": "ExtensionSchemaData'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -881,17 +956,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "DataSource",
             "name": "ExtensionSchemaData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -900,13 +976,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
-                    "method": "computedType'",
+                    "name": "_computedType",
+                    "method": "computedType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasComputedType'",
+                    "class": "HasComputedType",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedType'"
+                    "original": "type"
                 }
             ],
             "parameters": [
@@ -917,19 +994,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "ExtensionSchemaData s",
             "original": "pagerduty_extension_schema"
         },
         {
+            "con": {
+                "smart": "scheduleData",
+                "name": "ScheduleData'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -938,17 +1021,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "DataSource",
             "name": "ScheduleData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -958,19 +1042,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "ScheduleData s",
             "original": "pagerduty_schedule"
         },
         {
+            "con": {
+                "smart": "teamData",
+                "name": "TeamData'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -981,17 +1071,18 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "DataSource",
             "name": "TeamData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1000,13 +1091,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_computedDescription",
                     "method": "computedDescription",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDescription",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedDescription"
+                    "original": "description"
                 }
             ],
             "parameters": [
@@ -1019,19 +1111,25 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "TeamData s",
             "original": "pagerduty_team"
         },
         {
+            "con": {
+                "smart": "userData",
+                "name": "UserData'"
+            },
             "arguments": [
                 {
                     "default": "_email",
@@ -1040,17 +1138,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "email",
+                    "name": "_email",
                     "method": "email",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEmail",
+                    "validate": false,
                     "optional": false,
-                    "label": "_email"
+                    "original": "email"
                 }
             ],
-            "schema": "DataSource",
             "name": "UserData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1059,13 +1158,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_computedName",
                     "method": "computedName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedName"
+                    "original": "name"
                 }
             ],
             "parameters": [
@@ -1076,19 +1176,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "email",
+                    "name": "_email",
                     "method": "email",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEmail",
+                    "validate": false,
                     "optional": false,
-                    "label": "_email"
+                    "original": "email"
                 }
             ],
+            "conflicts": [],
             "type": "UserData s",
             "original": "pagerduty_user"
         },
         {
+            "con": {
+                "smart": "vendorData",
+                "name": "VendorData'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -1097,13 +1203,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -1112,17 +1219,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name_regex\" <$> TF.attribute",
-                    "name": "name_regex",
+                    "name": "_nameRegex",
                     "method": "nameRegex",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasNameRegex",
+                    "validate": false,
                     "optional": true,
-                    "label": "_nameRegex"
+                    "original": "name_regex"
                 }
             ],
-            "schema": "DataSource",
             "name": "VendorData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1131,13 +1239,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
-                    "method": "computedType'",
+                    "name": "_computedType",
+                    "method": "computedType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasComputedType'",
+                    "class": "HasComputedType",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedType'"
+                    "original": "type"
                 }
             ],
             "parameters": [
@@ -1148,21 +1257,27 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "VendorData s",
             "original": "pagerduty_vendor"
         }
     ],
     "resources": [
         {
+            "con": {
+                "smart": "addonResource",
+                "name": "AddonResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -1171,13 +1286,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_src",
@@ -1186,17 +1302,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"src\" <$> TF.attribute",
-                    "name": "src",
+                    "name": "_src",
                     "method": "src",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSrc",
+                    "validate": false,
                     "optional": false,
-                    "label": "_src"
+                    "original": "src"
                 }
             ],
-            "schema": "Resource",
             "name": "AddonResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1206,13 +1323,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_src",
@@ -1221,19 +1339,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"src\" <$> TF.attribute",
-                    "name": "src",
+                    "name": "_src",
                     "method": "src",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSrc",
+                    "validate": false,
                     "optional": false,
-                    "label": "_src"
+                    "original": "src"
                 }
             ],
+            "conflicts": [],
             "type": "AddonResource s",
             "original": "pagerduty_addon"
         },
         {
+            "con": {
+                "smart": "escalationPolicyResource",
+                "name": "EscalationPolicyResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value \"Managed by Terraform\"",
@@ -1242,13 +1366,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_name",
@@ -1257,13 +1382,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -1272,13 +1398,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"num_loops\" <$> TF.attribute",
-                    "name": "num_loops",
+                    "name": "_numLoops",
                     "method": "numLoops",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasNumLoops",
+                    "validate": false,
                     "optional": true,
-                    "label": "_numLoops"
+                    "original": "num_loops"
                 },
                 {
                     "default": "_rule",
@@ -1287,13 +1414,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rule\" <$> TF.attribute",
-                    "name": "rule",
+                    "name": "_rule",
                     "method": "rule",
                     "conflicts": [],
-                    "type": "TF.Attr s [Rule s]",
+                    "type": "TF.Attr s [TF.Attr s (Rule s)]",
                     "class": "HasRule",
+                    "validate": true,
                     "optional": false,
-                    "label": "_rule"
+                    "original": "rule"
                 },
                 {
                     "default": "TF.Nil",
@@ -1302,17 +1430,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"teams\" <$> TF.attribute",
-                    "name": "teams",
+                    "name": "_teams",
                     "method": "teams",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasTeams",
+                    "validate": false,
                     "optional": true,
-                    "label": "_teams"
+                    "original": "teams"
                 }
             ],
-            "schema": "Resource",
             "name": "EscalationPolicyResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1322,13 +1451,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_rule",
@@ -1337,19 +1467,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rule\" <$> TF.attribute",
-                    "name": "rule",
+                    "name": "_rule",
                     "method": "rule",
                     "conflicts": [],
-                    "type": "TF.Attr s [Rule s]",
+                    "type": "TF.Attr s [TF.Attr s (Rule s)]",
                     "class": "HasRule",
+                    "validate": true,
                     "optional": false,
-                    "label": "_rule"
+                    "original": "rule"
                 }
             ],
+            "conflicts": [],
             "type": "EscalationPolicyResource s",
             "original": "pagerduty_escalation_policy"
         },
         {
+            "con": {
+                "smart": "extensionResource",
+                "name": "ExtensionResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1358,13 +1494,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"endpoint_url\" <$> TF.attribute",
-                    "name": "endpoint_url",
+                    "name": "_endpointUrl",
                     "method": "endpointUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEndpointUrl",
+                    "validate": false,
                     "optional": true,
-                    "label": "_endpointUrl"
+                    "original": "endpoint_url"
                 },
                 {
                     "default": "_extensionObjects",
@@ -1373,13 +1510,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"extension_objects\" <$> TF.attribute",
-                    "name": "extension_objects",
+                    "name": "_extensionObjects",
                     "method": "extensionObjects",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasExtensionObjects",
+                    "validate": false,
                     "optional": false,
-                    "label": "_extensionObjects"
+                    "original": "extension_objects"
                 },
                 {
                     "default": "_extensionSchema",
@@ -1388,17 +1526,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"extension_schema\" <$> TF.attribute",
-                    "name": "extension_schema",
+                    "name": "_extensionSchema",
                     "method": "extensionSchema",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasExtensionSchema",
+                    "validate": false,
                     "optional": false,
-                    "label": "_extensionSchema"
+                    "original": "extension_schema"
                 }
             ],
-            "schema": "Resource",
             "name": "ExtensionResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1407,13 +1546,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_computedName",
                     "method": "computedName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedName"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -1422,13 +1562,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
-                    "method": "computedType'",
+                    "name": "_computedType",
+                    "method": "computedType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasComputedType'",
+                    "class": "HasComputedType",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedType'"
+                    "original": "type"
                 }
             ],
             "parameters": [
@@ -1439,13 +1580,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"extension_objects\" <$> TF.attribute",
-                    "name": "extension_objects",
+                    "name": "_extensionObjects",
                     "method": "extensionObjects",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasExtensionObjects",
+                    "validate": false,
                     "optional": false,
-                    "label": "_extensionObjects"
+                    "original": "extension_objects"
                 },
                 {
                     "default": "_extensionSchema",
@@ -1454,19 +1596,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"extension_schema\" <$> TF.attribute",
-                    "name": "extension_schema",
+                    "name": "_extensionSchema",
                     "method": "extensionSchema",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasExtensionSchema",
+                    "validate": false,
                     "optional": false,
-                    "label": "_extensionSchema"
+                    "original": "extension_schema"
                 }
             ],
+            "conflicts": [],
             "type": "ExtensionResource s",
             "original": "pagerduty_extension"
         },
         {
+            "con": {
+                "smart": "maintenanceWindowResource",
+                "name": "MaintenanceWindowResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value \"Managed by Terraform\"",
@@ -1475,13 +1623,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_endTime",
@@ -1490,13 +1639,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"end_time\" <$> TF.attribute",
-                    "name": "end_time",
+                    "name": "_endTime",
                     "method": "endTime",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEndTime",
+                    "validate": false,
                     "optional": false,
-                    "label": "_endTime"
+                    "original": "end_time"
                 },
                 {
                     "default": "_services",
@@ -1505,13 +1655,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"services\" <$> TF.attribute",
-                    "name": "services",
+                    "name": "_services",
                     "method": "services",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasServices",
+                    "validate": false,
                     "optional": false,
-                    "label": "_services"
+                    "original": "services"
                 },
                 {
                     "default": "_startTime",
@@ -1520,17 +1671,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"start_time\" <$> TF.attribute",
-                    "name": "start_time",
+                    "name": "_startTime",
                     "method": "startTime",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasStartTime",
+                    "validate": false,
                     "optional": false,
-                    "label": "_startTime"
+                    "original": "start_time"
                 }
             ],
-            "schema": "Resource",
             "name": "MaintenanceWindowResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1540,13 +1692,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"end_time\" <$> TF.attribute",
-                    "name": "end_time",
+                    "name": "_endTime",
                     "method": "endTime",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEndTime",
+                    "validate": false,
                     "optional": false,
-                    "label": "_endTime"
+                    "original": "end_time"
                 },
                 {
                     "default": "_services",
@@ -1555,13 +1708,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"services\" <$> TF.attribute",
-                    "name": "services",
+                    "name": "_services",
                     "method": "services",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasServices",
+                    "validate": false,
                     "optional": false,
-                    "label": "_services"
+                    "original": "services"
                 },
                 {
                     "default": "_startTime",
@@ -1570,19 +1724,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"start_time\" <$> TF.attribute",
-                    "name": "start_time",
+                    "name": "_startTime",
                     "method": "startTime",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasStartTime",
+                    "validate": false,
                     "optional": false,
-                    "label": "_startTime"
+                    "original": "start_time"
                 }
             ],
+            "conflicts": [],
             "type": "MaintenanceWindowResource s",
             "original": "pagerduty_maintenance_window"
         },
         {
+            "con": {
+                "smart": "scheduleResource",
+                "name": "ScheduleResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value \"Managed by Terraform\"",
@@ -1591,13 +1751,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_layer",
@@ -1606,13 +1767,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"layer\" <$> TF.attribute",
-                    "name": "layer",
+                    "name": "_layer",
                     "method": "layer",
                     "conflicts": [],
-                    "type": "TF.Attr s [Layer s]",
+                    "type": "TF.Attr s [TF.Attr s (Layer s)]",
                     "class": "HasLayer",
+                    "validate": true,
                     "optional": false,
-                    "label": "_layer"
+                    "original": "layer"
                 },
                 {
                     "default": "TF.Nil",
@@ -1621,13 +1783,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -1636,13 +1799,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"overflow\" <$> TF.attribute",
-                    "name": "overflow",
+                    "name": "_overflow",
                     "method": "overflow",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasOverflow",
+                    "validate": false,
                     "optional": true,
-                    "label": "_overflow"
+                    "original": "overflow"
                 },
                 {
                     "default": "_timeZone",
@@ -1651,17 +1815,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"time_zone\" <$> TF.attribute",
-                    "name": "time_zone",
+                    "name": "_timeZone",
                     "method": "timeZone",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTimeZone",
+                    "validate": false,
                     "optional": false,
-                    "label": "_timeZone"
+                    "original": "time_zone"
                 }
             ],
-            "schema": "Resource",
             "name": "ScheduleResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1671,13 +1836,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"layer\" <$> TF.attribute",
-                    "name": "layer",
+                    "name": "_layer",
                     "method": "layer",
                     "conflicts": [],
-                    "type": "TF.Attr s [Layer s]",
+                    "type": "TF.Attr s [TF.Attr s (Layer s)]",
                     "class": "HasLayer",
+                    "validate": true,
                     "optional": false,
-                    "label": "_layer"
+                    "original": "layer"
                 },
                 {
                     "default": "_timeZone",
@@ -1686,19 +1852,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"time_zone\" <$> TF.attribute",
-                    "name": "time_zone",
+                    "name": "_timeZone",
                     "method": "timeZone",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTimeZone",
+                    "validate": false,
                     "optional": false,
-                    "label": "_timeZone"
+                    "original": "time_zone"
                 }
             ],
+            "conflicts": [],
             "type": "ScheduleResource s",
             "original": "pagerduty_schedule"
         },
         {
+            "con": {
+                "smart": "serviceResource",
+                "name": "ServiceResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value \"1800\"",
@@ -1707,13 +1879,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"acknowledgement_timeout\" <$> TF.attribute",
-                    "name": "acknowledgement_timeout",
+                    "name": "_acknowledgementTimeout",
                     "method": "acknowledgementTimeout",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAcknowledgementTimeout",
+                    "validate": false,
                     "optional": true,
-                    "label": "_acknowledgementTimeout"
+                    "original": "acknowledgement_timeout"
                 },
                 {
                     "default": "TF.value \"create_incidents\"",
@@ -1722,13 +1895,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"alert_creation\" <$> TF.attribute",
-                    "name": "alert_creation",
+                    "name": "_alertCreation",
                     "method": "alertCreation",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAlertCreation",
+                    "validate": false,
                     "optional": true,
-                    "label": "_alertCreation"
+                    "original": "alert_creation"
                 },
                 {
                     "default": "TF.value \"14400\"",
@@ -1737,13 +1911,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"auto_resolve_timeout\" <$> TF.attribute",
-                    "name": "auto_resolve_timeout",
+                    "name": "_autoResolveTimeout",
                     "method": "autoResolveTimeout",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAutoResolveTimeout",
+                    "validate": false,
                     "optional": true,
-                    "label": "_autoResolveTimeout"
+                    "original": "auto_resolve_timeout"
                 },
                 {
                     "default": "TF.value \"Managed by Terraform\"",
@@ -1752,13 +1927,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_escalationPolicy",
@@ -1767,13 +1943,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"escalation_policy\" <$> TF.attribute",
-                    "name": "escalation_policy",
+                    "name": "_escalationPolicy",
                     "method": "escalationPolicy",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEscalationPolicy",
+                    "validate": false,
                     "optional": false,
-                    "label": "_escalationPolicy"
+                    "original": "escalation_policy"
                 },
                 {
                     "default": "TF.Nil",
@@ -1782,13 +1959,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -1797,13 +1975,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"scheduled_actions\" <$> TF.attribute",
-                    "name": "scheduled_actions",
+                    "name": "_scheduledActions",
                     "method": "scheduledActions",
                     "conflicts": [],
-                    "type": "TF.Attr s [ScheduledActions s]",
+                    "type": "TF.Attr s [TF.Attr s (ScheduledActions s)]",
                     "class": "HasScheduledActions",
+                    "validate": true,
                     "optional": true,
-                    "label": "_scheduledActions"
+                    "original": "scheduled_actions"
                 },
                 {
                     "default": "TF.Nil",
@@ -1812,17 +1991,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"support_hours\" <$> TF.attribute",
-                    "name": "support_hours",
+                    "name": "_supportHours",
                     "method": "supportHours",
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (SupportHours s))",
+                    "type": "TF.Attr s (SupportHours s)",
                     "class": "HasSupportHours",
+                    "validate": true,
                     "optional": true,
-                    "label": "_supportHours"
+                    "original": "support_hours"
                 }
             ],
-            "schema": "Resource",
             "name": "ServiceResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1831,13 +2011,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"created_at\" <$> TF.attribute",
-                    "name": "created_at",
+                    "name": "_computedCreatedAt",
                     "method": "computedCreatedAt",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCreatedAt",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCreatedAt"
+                    "original": "created_at"
                 },
                 {
                     "default": "TF.Nil",
@@ -1846,13 +2027,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"incident_urgency_rule\" <$> TF.attribute",
-                    "name": "incident_urgency_rule",
+                    "name": "_computedIncidentUrgencyRule",
                     "method": "computedIncidentUrgencyRule",
                     "conflicts": [],
-                    "type": "TF.Attr s [IncidentUrgencyRule s]",
+                    "type": "TF.Attr s (IncidentUrgencyRule s)",
                     "class": "HasComputedIncidentUrgencyRule",
+                    "validate": true,
                     "optional": true,
-                    "label": "_computedIncidentUrgencyRule"
+                    "original": "incident_urgency_rule"
                 },
                 {
                     "default": "TF.Nil",
@@ -1861,13 +2043,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"last_incident_timestamp\" <$> TF.attribute",
-                    "name": "last_incident_timestamp",
+                    "name": "_computedLastIncidentTimestamp",
                     "method": "computedLastIncidentTimestamp",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLastIncidentTimestamp",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedLastIncidentTimestamp"
+                    "original": "last_incident_timestamp"
                 },
                 {
                     "default": "TF.Nil",
@@ -1876,13 +2059,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"status\" <$> TF.attribute",
-                    "name": "status",
+                    "name": "_computedStatus",
                     "method": "computedStatus",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStatus",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedStatus"
+                    "original": "status"
                 }
             ],
             "parameters": [
@@ -1893,19 +2077,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"escalation_policy\" <$> TF.attribute",
-                    "name": "escalation_policy",
+                    "name": "_escalationPolicy",
                     "method": "escalationPolicy",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEscalationPolicy",
+                    "validate": false,
                     "optional": false,
-                    "label": "_escalationPolicy"
+                    "original": "escalation_policy"
                 }
             ],
+            "conflicts": [],
             "type": "ServiceResource s",
             "original": "pagerduty_service"
         },
         {
+            "con": {
+                "smart": "serviceIntegrationResource",
+                "name": "ServiceIntegrationResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1914,13 +2104,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_service",
@@ -1929,17 +2120,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"service\" <$> TF.attribute",
-                    "name": "service",
+                    "name": "_service",
                     "method": "service",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasService",
+                    "validate": false,
                     "optional": false,
-                    "label": "_service"
+                    "original": "service"
                 }
             ],
-            "schema": "Resource",
             "name": "ServiceIntegrationResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1948,13 +2140,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"html_url\" <$> TF.attribute",
-                    "name": "html_url",
+                    "name": "_computedHtmlUrl",
                     "method": "computedHtmlUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHtmlUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedHtmlUrl"
+                    "original": "html_url"
                 },
                 {
                     "default": "TF.Nil",
@@ -1963,13 +2156,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"integration_email\" <$> TF.attribute",
-                    "name": "integration_email",
+                    "name": "_computedIntegrationEmail",
                     "method": "computedIntegrationEmail",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIntegrationEmail",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedIntegrationEmail"
+                    "original": "integration_email"
                 },
                 {
                     "default": "TF.Nil",
@@ -1978,13 +2172,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"integration_key\" <$> TF.attribute",
-                    "name": "integration_key",
+                    "name": "_computedIntegrationKey",
                     "method": "computedIntegrationKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIntegrationKey",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedIntegrationKey"
+                    "original": "integration_key"
                 },
                 {
                     "default": "TF.Nil",
@@ -1993,15 +2188,16 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
-                    "method": "computedType'",
+                    "name": "_computedType",
+                    "method": "computedType",
                     "conflicts": [
                         "_vendor"
                     ],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasComputedType'",
+                    "class": "HasComputedType",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedType'"
+                    "original": "type"
                 },
                 {
                     "default": "TF.Nil",
@@ -2010,15 +2206,16 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"vendor\" <$> TF.attribute",
-                    "name": "vendor",
+                    "name": "_computedVendor",
                     "method": "computedVendor",
                     "conflicts": [
                         "_type'"
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVendor",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVendor"
+                    "original": "vendor"
                 }
             ],
             "parameters": [
@@ -2029,19 +2226,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"service\" <$> TF.attribute",
-                    "name": "service",
+                    "name": "_service",
                     "method": "service",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasService",
+                    "validate": false,
                     "optional": false,
-                    "label": "_service"
+                    "original": "service"
                 }
             ],
+            "conflicts": [],
             "type": "ServiceIntegrationResource s",
             "original": "pagerduty_service_integration"
         },
         {
+            "con": {
+                "smart": "teamResource",
+                "name": "TeamResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value \"Managed by Terraform\"",
@@ -2050,13 +2253,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_name",
@@ -2065,17 +2269,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "TeamResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -2085,19 +2290,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "TeamResource s",
             "original": "pagerduty_team"
         },
         {
+            "con": {
+                "smart": "teamMembershipResource",
+                "name": "TeamMembershipResource'"
+            },
             "arguments": [
                 {
                     "default": "_teamId",
@@ -2106,13 +2317,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"team_id\" <$> TF.attribute",
-                    "name": "team_id",
+                    "name": "_teamId",
                     "method": "teamId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTeamId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_teamId"
+                    "original": "team_id"
                 },
                 {
                     "default": "_userId",
@@ -2121,17 +2333,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"user_id\" <$> TF.attribute",
-                    "name": "user_id",
+                    "name": "_userId",
                     "method": "userId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUserId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_userId"
+                    "original": "user_id"
                 }
             ],
-            "schema": "Resource",
             "name": "TeamMembershipResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -2141,13 +2354,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"team_id\" <$> TF.attribute",
-                    "name": "team_id",
+                    "name": "_teamId",
                     "method": "teamId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTeamId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_teamId"
+                    "original": "team_id"
                 },
                 {
                     "default": "_userId",
@@ -2156,19 +2370,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"user_id\" <$> TF.attribute",
-                    "name": "user_id",
+                    "name": "_userId",
                     "method": "userId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUserId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_userId"
+                    "original": "user_id"
                 }
             ],
+            "conflicts": [],
             "type": "TeamMembershipResource s",
             "original": "pagerduty_team_membership"
         },
         {
+            "con": {
+                "smart": "userResource",
+                "name": "UserResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value \"Managed by Terraform\"",
@@ -2177,13 +2397,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_email",
@@ -2192,13 +2413,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "email",
+                    "name": "_email",
                     "method": "email",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEmail",
+                    "validate": false,
                     "optional": false,
-                    "label": "_email"
+                    "original": "email"
                 },
                 {
                     "default": "TF.Nil",
@@ -2207,13 +2429,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"job_title\" <$> TF.attribute",
-                    "name": "job_title",
+                    "name": "_jobTitle",
                     "method": "jobTitle",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasJobTitle",
+                    "validate": false,
                     "optional": true,
-                    "label": "_jobTitle"
+                    "original": "job_title"
                 },
                 {
                     "default": "_name",
@@ -2222,13 +2445,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.value \"user\"",
@@ -2237,13 +2461,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"role\" <$> TF.attribute",
-                    "name": "role",
+                    "name": "_role",
                     "method": "role",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRole",
+                    "validate": false,
                     "optional": true,
-                    "label": "_role"
+                    "original": "role"
                 },
                 {
                     "default": "TF.Nil",
@@ -2252,17 +2477,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"teams\" <$> TF.attribute",
-                    "name": "teams",
+                    "name": "_teams",
                     "method": "teams",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasTeams",
+                    "validate": false,
                     "optional": true,
-                    "label": "_teams"
+                    "original": "teams"
                 }
             ],
-            "schema": "Resource",
             "name": "UserResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -2271,13 +2497,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"avatar_url\" <$> TF.attribute",
-                    "name": "avatar_url",
+                    "name": "_computedAvatarUrl",
                     "method": "computedAvatarUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAvatarUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAvatarUrl"
+                    "original": "avatar_url"
                 },
                 {
                     "default": "TF.Nil",
@@ -2286,13 +2513,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"color\" <$> TF.attribute",
-                    "name": "color",
+                    "name": "_computedColor",
                     "method": "computedColor",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedColor",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedColor"
+                    "original": "color"
                 },
                 {
                     "default": "TF.Nil",
@@ -2301,13 +2529,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"html_url\" <$> TF.attribute",
-                    "name": "html_url",
+                    "name": "_computedHtmlUrl",
                     "method": "computedHtmlUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHtmlUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedHtmlUrl"
+                    "original": "html_url"
                 },
                 {
                     "default": "TF.Nil",
@@ -2316,13 +2545,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"invitation_sent\" <$> TF.attribute",
-                    "name": "invitation_sent",
+                    "name": "_computedInvitationSent",
                     "method": "computedInvitationSent",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedInvitationSent",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedInvitationSent"
+                    "original": "invitation_sent"
                 },
                 {
                     "default": "TF.Nil",
@@ -2331,13 +2561,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"time_zone\" <$> TF.attribute",
-                    "name": "time_zone",
+                    "name": "_computedTimeZone",
                     "method": "computedTimeZone",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTimeZone",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedTimeZone"
+                    "original": "time_zone"
                 }
             ],
             "parameters": [
@@ -2348,13 +2579,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "email",
+                    "name": "_email",
                     "method": "email",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEmail",
+                    "validate": false,
                     "optional": false,
-                    "label": "_email"
+                    "original": "email"
                 },
                 {
                     "default": "_name",
@@ -2363,19 +2595,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "UserResource s",
             "original": "pagerduty_user"
         },
         {
+            "con": {
+                "smart": "userContactMethodResource",
+                "name": "UserContactMethodResource'"
+            },
             "arguments": [
                 {
                     "default": "_address",
@@ -2384,13 +2622,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "address",
+                    "name": "_address",
                     "method": "address",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAddress",
+                    "validate": false,
                     "optional": false,
-                    "label": "_address"
+                    "original": "address"
                 },
                 {
                     "default": "TF.Nil",
@@ -2399,13 +2638,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"country_code\" <$> TF.attribute",
-                    "name": "country_code",
+                    "name": "_countryCode",
                     "method": "countryCode",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasCountryCode",
+                    "validate": false,
                     "optional": true,
-                    "label": "_countryCode"
+                    "original": "country_code"
                 },
                 {
                     "default": "_label",
@@ -2414,13 +2654,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"label\" <$> TF.attribute",
-                    "name": "label",
+                    "name": "_label",
                     "method": "label",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLabel",
+                    "validate": false,
                     "optional": false,
-                    "label": "_label"
+                    "original": "label"
                 },
                 {
                     "default": "TF.value P.False",
@@ -2429,13 +2670,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"send_short_email\" <$> TF.attribute",
-                    "name": "send_short_email",
+                    "name": "_sendShortEmail",
                     "method": "sendShortEmail",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasSendShortEmail",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sendShortEmail"
+                    "original": "send_short_email"
                 },
                 {
                     "default": "_type'",
@@ -2444,13 +2686,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 },
                 {
                     "default": "_userId",
@@ -2459,17 +2702,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"user_id\" <$> TF.attribute",
-                    "name": "user_id",
+                    "name": "_userId",
                     "method": "userId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUserId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_userId"
+                    "original": "user_id"
                 }
             ],
-            "schema": "Resource",
             "name": "UserContactMethodResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -2478,13 +2722,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"blacklisted\" <$> TF.attribute",
-                    "name": "blacklisted",
+                    "name": "_computedBlacklisted",
                     "method": "computedBlacklisted",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedBlacklisted",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedBlacklisted"
+                    "original": "blacklisted"
                 },
                 {
                     "default": "TF.Nil",
@@ -2493,13 +2738,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"enabled\" <$> TF.attribute",
-                    "name": "enabled",
+                    "name": "_computedEnabled",
                     "method": "computedEnabled",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedEnabled",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedEnabled"
+                    "original": "enabled"
                 }
             ],
             "parameters": [
@@ -2510,13 +2756,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "address",
+                    "name": "_address",
                     "method": "address",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAddress",
+                    "validate": false,
                     "optional": false,
-                    "label": "_address"
+                    "original": "address"
                 },
                 {
                     "default": "_label",
@@ -2525,13 +2772,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"label\" <$> TF.attribute",
-                    "name": "label",
+                    "name": "_label",
                     "method": "label",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLabel",
+                    "validate": false,
                     "optional": false,
-                    "label": "_label"
+                    "original": "label"
                 },
                 {
                     "default": "_type'",
@@ -2540,13 +2788,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 },
                 {
                     "default": "_userId",
@@ -2555,19 +2804,85 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"user_id\" <$> TF.attribute",
-                    "name": "user_id",
+                    "name": "_userId",
                     "method": "userId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUserId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_userId"
+                    "original": "user_id"
                 }
             ],
+            "conflicts": [],
             "type": "UserContactMethodResource s",
             "original": "pagerduty_user_contact_method"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "P.False",
+                "computed": false,
+                "required": false,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"skip_credentials_validation\"",
+                "name": "_skipCredentialsValidation",
+                "method": "skipCredentialsValidation",
+                "conflicts": [],
+                "type": "P.Bool",
+                "class": "HasSkipCredentialsValidation",
+                "validate": false,
+                "optional": true,
+                "original": "skip_credentials_validation"
+            },
+            {
+                "default": "_token",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"token\"",
+                "name": "_token",
+                "method": "token",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasToken",
+                "validate": false,
+                "optional": false,
+                "original": "token"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_token",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"token\"",
+                "name": "_token",
+                "method": "token",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasToken",
+                "validate": false,
+                "optional": false,
+                "original": "token"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -2577,24 +2892,6 @@
         "microlens"
     ],
     "name": "PagerDuty",
-    "parameters": [
-        {
-            "default": "_token",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"token\"",
-            "name": "token",
-            "method": "token",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasToken",
-            "optional": false,
-            "label": "_token"
-        }
-    ],
     "package": "terrafomo-pagerduty",
-    "type": "Provider",
     "original": "pagerduty"
 }
