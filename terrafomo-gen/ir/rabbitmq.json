@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newSettings",
+                "name": "Settings'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -9,19 +13,20 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"arguments\" <$> TF.attribute",
-                    "name": "arguments",
+                    "name": "_arguments",
                     "method": "arguments",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "argumentsJson",
-                            "label": "_argumentsJson"
+                            "name": "_argumentsJson",
+                            "method": "argumentsJson"
                         }
                     ],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasArguments",
+                    "validate": false,
                     "optional": true,
-                    "label": "_arguments"
+                    "original": "arguments"
                 },
                 {
                     "default": "TF.Nil",
@@ -30,19 +35,20 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"arguments_json\" <$> TF.attribute",
-                    "name": "arguments_json",
+                    "name": "_argumentsJson",
                     "method": "argumentsJson",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "arguments",
-                            "label": "_arguments"
+                            "name": "_arguments",
+                            "method": "arguments"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasArgumentsJson",
+                    "validate": false,
                     "optional": true,
-                    "label": "_argumentsJson"
+                    "original": "arguments_json"
                 },
                 {
                     "default": "TF.value P.False",
@@ -51,13 +57,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"auto_delete\" <$> TF.attribute",
-                    "name": "auto_delete",
+                    "name": "_autoDelete",
                     "method": "autoDelete",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasAutoDelete",
+                    "validate": false,
                     "optional": true,
-                    "label": "_autoDelete"
+                    "original": "auto_delete"
                 },
                 {
                     "default": "TF.value P.False",
@@ -66,23 +73,74 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"durable\" <$> TF.attribute",
-                    "name": "durable",
+                    "name": "_durable",
                     "method": "durable",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasDurable",
+                    "validate": false,
                     "optional": true,
-                    "label": "_durable"
+                    "original": "durable"
                 }
             ],
             "name": "Settings",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"arguments\" <$> TF.attribute",
+                    "name": "_arguments",
+                    "method": "arguments",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_argumentsJson",
+                            "method": "argumentsJson"
+                        }
+                    ],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasArguments",
+                    "validate": false,
+                    "optional": true,
+                    "original": "arguments"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"arguments_json\" <$> TF.attribute",
+                    "name": "_argumentsJson",
+                    "method": "argumentsJson",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_arguments",
+                            "method": "arguments"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasArgumentsJson",
+                    "validate": false,
+                    "optional": true,
+                    "original": "arguments_json"
+                }
+            ],
             "type": "Settings s",
             "original": "settings"
         },
         {
+            "con": {
+                "smart": "newPermissions",
+                "name": "Permissions'"
+            },
             "arguments": [
                 {
                     "default": "_configure",
@@ -91,13 +149,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"configure\" <$> TF.attribute",
-                    "name": "configure",
+                    "name": "_configure",
                     "method": "configure",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasConfigure",
+                    "validate": false,
                     "optional": false,
-                    "label": "_configure"
+                    "original": "configure"
                 },
                 {
                     "default": "_read",
@@ -106,13 +165,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"read\" <$> TF.attribute",
-                    "name": "read",
+                    "name": "_read",
                     "method": "read",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRead",
+                    "validate": false,
                     "optional": false,
-                    "label": "_read"
+                    "original": "read"
                 },
                 {
                     "default": "_write",
@@ -121,16 +181,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"write\" <$> TF.attribute",
-                    "name": "write",
+                    "name": "_write",
                     "method": "write",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasWrite",
+                    "validate": false,
                     "optional": false,
-                    "label": "_write"
+                    "original": "write"
                 }
             ],
             "name": "Permissions",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -140,13 +202,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"configure\" <$> TF.attribute",
-                    "name": "configure",
+                    "name": "_configure",
                     "method": "configure",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasConfigure",
+                    "validate": false,
                     "optional": false,
-                    "label": "_configure"
+                    "original": "configure"
                 },
                 {
                     "default": "_read",
@@ -155,13 +218,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"read\" <$> TF.attribute",
-                    "name": "read",
+                    "name": "_read",
                     "method": "read",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRead",
+                    "validate": false,
                     "optional": false,
-                    "label": "_read"
+                    "original": "read"
                 },
                 {
                     "default": "_write",
@@ -170,20 +234,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"write\" <$> TF.attribute",
-                    "name": "write",
+                    "name": "_write",
                     "method": "write",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasWrite",
+                    "validate": false,
                     "optional": false,
-                    "label": "_write"
+                    "original": "write"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Permissions s",
             "original": "permissions"
         },
         {
+            "con": {
+                "smart": "newPolicy",
+                "name": "Policy'"
+            },
             "arguments": [
                 {
                     "default": "_applyTo",
@@ -192,13 +261,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"apply_to\" <$> TF.attribute",
-                    "name": "apply_to",
+                    "name": "_applyTo",
                     "method": "applyTo",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApplyTo",
+                    "validate": false,
                     "optional": false,
-                    "label": "_applyTo"
+                    "original": "apply_to"
                 },
                 {
                     "default": "_definition",
@@ -207,13 +277,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"definition\" <$> TF.attribute",
-                    "name": "definition",
+                    "name": "_definition",
                     "method": "definition",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasDefinition",
+                    "validate": false,
                     "optional": false,
-                    "label": "_definition"
+                    "original": "definition"
                 },
                 {
                     "default": "_pattern'",
@@ -222,13 +293,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"pattern\" <$> TF.attribute",
-                    "name": "pattern",
+                    "name": "_pattern'",
                     "method": "pattern'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPattern'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_pattern'"
+                    "original": "pattern"
                 },
                 {
                     "default": "_priority",
@@ -237,16 +309,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"priority\" <$> TF.attribute",
-                    "name": "priority",
+                    "name": "_priority",
                     "method": "priority",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasPriority",
+                    "validate": false,
                     "optional": false,
-                    "label": "_priority"
+                    "original": "priority"
                 }
             ],
             "name": "Policy",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -256,13 +330,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"apply_to\" <$> TF.attribute",
-                    "name": "apply_to",
+                    "name": "_applyTo",
                     "method": "applyTo",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasApplyTo",
+                    "validate": false,
                     "optional": false,
-                    "label": "_applyTo"
+                    "original": "apply_to"
                 },
                 {
                     "default": "_definition",
@@ -271,13 +346,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"definition\" <$> TF.attribute",
-                    "name": "definition",
+                    "name": "_definition",
                     "method": "definition",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasDefinition",
+                    "validate": false,
                     "optional": false,
-                    "label": "_definition"
+                    "original": "definition"
                 },
                 {
                     "default": "_pattern'",
@@ -286,13 +362,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"pattern\" <$> TF.attribute",
-                    "name": "pattern",
+                    "name": "_pattern'",
                     "method": "pattern'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPattern'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_pattern'"
+                    "original": "pattern"
                 },
                 {
                     "default": "_priority",
@@ -301,100 +378,28 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"priority\" <$> TF.attribute",
-                    "name": "priority",
+                    "name": "_priority",
                     "method": "priority",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasPriority",
+                    "validate": false,
                     "optional": false,
-                    "label": "_priority"
+                    "original": "priority"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Policy s",
             "original": "policy"
-        }
-    ],
-    "arguments": [
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [],
-            "forceNew": false,
-            "encoder": "TF.assign \"cacert_file\" <$>",
-            "name": "cacert_file",
-            "method": "cacertFile",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasCacertFile",
-            "optional": true,
-            "label": "_cacertFile"
-        },
-        {
-            "default": "_endpoint",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"endpoint\"",
-            "name": "endpoint",
-            "method": "endpoint",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasEndpoint",
-            "optional": false,
-            "label": "_endpoint"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [],
-            "forceNew": false,
-            "encoder": "TF.assign \"insecure\" <$>",
-            "name": "insecure",
-            "method": "insecure",
-            "conflicts": [],
-            "type": "P.Maybe P.Bool",
-            "class": "HasInsecure",
-            "optional": true,
-            "label": "_insecure"
-        },
-        {
-            "default": "_password",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"password\"",
-            "name": "password",
-            "method": "password",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasPassword",
-            "optional": false,
-            "label": "_password"
-        },
-        {
-            "default": "_username",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"username\"",
-            "name": "username",
-            "method": "username",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasUsername",
-            "optional": false,
-            "label": "_username"
         }
     ],
     "dataSources": [],
     "resources": [
         {
+            "con": {
+                "smart": "bindingResource",
+                "name": "BindingResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -403,13 +408,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"arguments\" <$> TF.attribute",
-                    "name": "arguments",
+                    "name": "_arguments",
                     "method": "arguments",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasArguments",
+                    "validate": false,
                     "optional": true,
-                    "label": "_arguments"
+                    "original": "arguments"
                 },
                 {
                     "default": "_destination",
@@ -418,13 +424,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"destination\" <$> TF.attribute",
-                    "name": "destination",
+                    "name": "_destination",
                     "method": "destination",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDestination",
+                    "validate": false,
                     "optional": false,
-                    "label": "_destination"
+                    "original": "destination"
                 },
                 {
                     "default": "_destinationType",
@@ -433,13 +440,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"destination_type\" <$> TF.attribute",
-                    "name": "destination_type",
+                    "name": "_destinationType",
                     "method": "destinationType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDestinationType",
+                    "validate": false,
                     "optional": false,
-                    "label": "_destinationType"
+                    "original": "destination_type"
                 },
                 {
                     "default": "TF.Nil",
@@ -448,13 +456,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"routing_key\" <$> TF.attribute",
-                    "name": "routing_key",
+                    "name": "_routingKey",
                     "method": "routingKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRoutingKey",
+                    "validate": false,
                     "optional": true,
-                    "label": "_routingKey"
+                    "original": "routing_key"
                 },
                 {
                     "default": "_source",
@@ -463,13 +472,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_source",
                     "method": "source",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSource",
+                    "validate": false,
                     "optional": false,
-                    "label": "_source"
+                    "original": "source"
                 },
                 {
                     "default": "_vhost",
@@ -478,17 +488,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"vhost\" <$> TF.attribute",
-                    "name": "vhost",
+                    "name": "_vhost",
                     "method": "vhost",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVhost",
+                    "validate": false,
                     "optional": false,
-                    "label": "_vhost"
+                    "original": "vhost"
                 }
             ],
-            "schema": "Resource",
             "name": "BindingResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -497,13 +508,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"properties_key\" <$> TF.attribute",
-                    "name": "properties_key",
+                    "name": "_computedPropertiesKey",
                     "method": "computedPropertiesKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPropertiesKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedPropertiesKey"
+                    "original": "properties_key"
                 }
             ],
             "parameters": [
@@ -514,13 +526,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"destination\" <$> TF.attribute",
-                    "name": "destination",
+                    "name": "_destination",
                     "method": "destination",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDestination",
+                    "validate": false,
                     "optional": false,
-                    "label": "_destination"
+                    "original": "destination"
                 },
                 {
                     "default": "_destinationType",
@@ -529,13 +542,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"destination_type\" <$> TF.attribute",
-                    "name": "destination_type",
+                    "name": "_destinationType",
                     "method": "destinationType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDestinationType",
+                    "validate": false,
                     "optional": false,
-                    "label": "_destinationType"
+                    "original": "destination_type"
                 },
                 {
                     "default": "_source",
@@ -544,13 +558,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_source",
                     "method": "source",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSource",
+                    "validate": false,
                     "optional": false,
-                    "label": "_source"
+                    "original": "source"
                 },
                 {
                     "default": "_vhost",
@@ -559,19 +574,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"vhost\" <$> TF.attribute",
-                    "name": "vhost",
+                    "name": "_vhost",
                     "method": "vhost",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVhost",
+                    "validate": false,
                     "optional": false,
-                    "label": "_vhost"
+                    "original": "vhost"
                 }
             ],
+            "conflicts": [],
             "type": "BindingResource s",
             "original": "rabbitmq_binding"
         },
         {
+            "con": {
+                "smart": "exchangeResource",
+                "name": "ExchangeResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -580,13 +601,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_settings",
@@ -595,13 +617,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"settings\" <$> TF.attribute",
-                    "name": "settings",
+                    "name": "_settings",
                     "method": "settings",
                     "conflicts": [],
-                    "type": "TF.Attr s [Settings s]",
+                    "type": "TF.Attr s (Settings s)",
                     "class": "HasSettings",
+                    "validate": true,
                     "optional": false,
-                    "label": "_settings"
+                    "original": "settings"
                 },
                 {
                     "default": "TF.value \"/\"",
@@ -610,17 +633,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"vhost\" <$> TF.attribute",
-                    "name": "vhost",
+                    "name": "_vhost",
                     "method": "vhost",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVhost",
+                    "validate": false,
                     "optional": true,
-                    "label": "_vhost"
+                    "original": "vhost"
                 }
             ],
-            "schema": "Resource",
             "name": "ExchangeResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -630,13 +654,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_settings",
@@ -645,19 +670,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"settings\" <$> TF.attribute",
-                    "name": "settings",
+                    "name": "_settings",
                     "method": "settings",
                     "conflicts": [],
-                    "type": "TF.Attr s [Settings s]",
+                    "type": "TF.Attr s (Settings s)",
                     "class": "HasSettings",
+                    "validate": true,
                     "optional": false,
-                    "label": "_settings"
+                    "original": "settings"
                 }
             ],
+            "conflicts": [],
             "type": "ExchangeResource s",
             "original": "rabbitmq_exchange"
         },
         {
+            "con": {
+                "smart": "permissionsResource",
+                "name": "PermissionsResource'"
+            },
             "arguments": [
                 {
                     "default": "_permissions",
@@ -666,13 +697,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"permissions\" <$> TF.attribute",
-                    "name": "permissions",
+                    "name": "_permissions",
                     "method": "permissions",
                     "conflicts": [],
-                    "type": "TF.Attr s [Permissions s]",
+                    "type": "TF.Attr s (Permissions s)",
                     "class": "HasPermissions",
+                    "validate": true,
                     "optional": false,
-                    "label": "_permissions"
+                    "original": "permissions"
                 },
                 {
                     "default": "_user",
@@ -681,13 +713,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"user\" <$> TF.attribute",
-                    "name": "user",
+                    "name": "_user",
                     "method": "user",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUser",
+                    "validate": false,
                     "optional": false,
-                    "label": "_user"
+                    "original": "user"
                 },
                 {
                     "default": "TF.value \"/\"",
@@ -696,17 +729,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"vhost\" <$> TF.attribute",
-                    "name": "vhost",
+                    "name": "_vhost",
                     "method": "vhost",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVhost",
+                    "validate": false,
                     "optional": true,
-                    "label": "_vhost"
+                    "original": "vhost"
                 }
             ],
-            "schema": "Resource",
             "name": "PermissionsResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -716,13 +750,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"permissions\" <$> TF.attribute",
-                    "name": "permissions",
+                    "name": "_permissions",
                     "method": "permissions",
                     "conflicts": [],
-                    "type": "TF.Attr s [Permissions s]",
+                    "type": "TF.Attr s (Permissions s)",
                     "class": "HasPermissions",
+                    "validate": true,
                     "optional": false,
-                    "label": "_permissions"
+                    "original": "permissions"
                 },
                 {
                     "default": "_user",
@@ -731,19 +766,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"user\" <$> TF.attribute",
-                    "name": "user",
+                    "name": "_user",
                     "method": "user",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUser",
+                    "validate": false,
                     "optional": false,
-                    "label": "_user"
+                    "original": "user"
                 }
             ],
+            "conflicts": [],
             "type": "PermissionsResource s",
             "original": "rabbitmq_permissions"
         },
         {
+            "con": {
+                "smart": "policyResource",
+                "name": "PolicyResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -752,13 +793,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_policy",
@@ -767,13 +809,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"policy\" <$> TF.attribute",
-                    "name": "policy",
+                    "name": "_policy",
                     "method": "policy",
                     "conflicts": [],
-                    "type": "TF.Attr s [Policy s]",
+                    "type": "TF.Attr s (Policy s)",
                     "class": "HasPolicy",
+                    "validate": true,
                     "optional": false,
-                    "label": "_policy"
+                    "original": "policy"
                 },
                 {
                     "default": "_vhost",
@@ -782,17 +825,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"vhost\" <$> TF.attribute",
-                    "name": "vhost",
+                    "name": "_vhost",
                     "method": "vhost",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVhost",
+                    "validate": false,
                     "optional": false,
-                    "label": "_vhost"
+                    "original": "vhost"
                 }
             ],
-            "schema": "Resource",
             "name": "PolicyResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -802,13 +846,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_policy",
@@ -817,13 +862,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"policy\" <$> TF.attribute",
-                    "name": "policy",
+                    "name": "_policy",
                     "method": "policy",
                     "conflicts": [],
-                    "type": "TF.Attr s [Policy s]",
+                    "type": "TF.Attr s (Policy s)",
                     "class": "HasPolicy",
+                    "validate": true,
                     "optional": false,
-                    "label": "_policy"
+                    "original": "policy"
                 },
                 {
                     "default": "_vhost",
@@ -832,19 +878,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"vhost\" <$> TF.attribute",
-                    "name": "vhost",
+                    "name": "_vhost",
                     "method": "vhost",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVhost",
+                    "validate": false,
                     "optional": false,
-                    "label": "_vhost"
+                    "original": "vhost"
                 }
             ],
+            "conflicts": [],
             "type": "PolicyResource s",
             "original": "rabbitmq_policy"
         },
         {
+            "con": {
+                "smart": "queueResource",
+                "name": "QueueResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -853,13 +905,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_settings",
@@ -868,13 +921,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"settings\" <$> TF.attribute",
-                    "name": "settings",
+                    "name": "_settings",
                     "method": "settings",
                     "conflicts": [],
-                    "type": "TF.Attr s [Settings s]",
+                    "type": "TF.Attr s (Settings s)",
                     "class": "HasSettings",
+                    "validate": true,
                     "optional": false,
-                    "label": "_settings"
+                    "original": "settings"
                 },
                 {
                     "default": "TF.value \"/\"",
@@ -883,17 +937,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"vhost\" <$> TF.attribute",
-                    "name": "vhost",
+                    "name": "_vhost",
                     "method": "vhost",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVhost",
+                    "validate": false,
                     "optional": true,
-                    "label": "_vhost"
+                    "original": "vhost"
                 }
             ],
-            "schema": "Resource",
             "name": "QueueResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -903,13 +958,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_settings",
@@ -918,19 +974,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"settings\" <$> TF.attribute",
-                    "name": "settings",
+                    "name": "_settings",
                     "method": "settings",
                     "conflicts": [],
-                    "type": "TF.Attr s [Settings s]",
+                    "type": "TF.Attr s (Settings s)",
                     "class": "HasSettings",
+                    "validate": true,
                     "optional": false,
-                    "label": "_settings"
+                    "original": "settings"
                 }
             ],
+            "conflicts": [],
             "type": "QueueResource s",
             "original": "rabbitmq_queue"
         },
         {
+            "con": {
+                "smart": "userResource",
+                "name": "UserResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -939,13 +1001,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_password",
@@ -954,13 +1017,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"password\" <$> TF.attribute",
-                    "name": "password",
+                    "name": "_password",
                     "method": "password",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPassword",
+                    "validate": false,
                     "optional": false,
-                    "label": "_password"
+                    "original": "password"
                 },
                 {
                     "default": "TF.Nil",
@@ -969,17 +1033,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"tags\" <$> TF.attribute",
-                    "name": "tags",
+                    "name": "_tags",
                     "method": "tags",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasTags",
+                    "validate": false,
                     "optional": true,
-                    "label": "_tags"
+                    "original": "tags"
                 }
             ],
-            "schema": "Resource",
             "name": "UserResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -989,13 +1054,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_password",
@@ -1004,19 +1070,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"password\" <$> TF.attribute",
-                    "name": "password",
+                    "name": "_password",
                     "method": "password",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPassword",
+                    "validate": false,
                     "optional": false,
-                    "label": "_password"
+                    "original": "password"
                 }
             ],
+            "conflicts": [],
             "type": "UserResource s",
             "original": "rabbitmq_user"
         },
         {
+            "con": {
+                "smart": "vhostResource",
+                "name": "VhostResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -1025,17 +1097,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "VhostResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1045,19 +1118,165 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "VhostResource s",
             "original": "rabbitmq_vhost"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [],
+                "forceNew": false,
+                "encoder": "TF.assign \"cacert_file\" <$>",
+                "name": "_cacertFile",
+                "method": "cacertFile",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasCacertFile",
+                "validate": false,
+                "optional": true,
+                "original": "cacert_file"
+            },
+            {
+                "default": "_endpoint",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"endpoint\"",
+                "name": "_endpoint",
+                "method": "endpoint",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasEndpoint",
+                "validate": false,
+                "optional": false,
+                "original": "endpoint"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [],
+                "forceNew": false,
+                "encoder": "TF.assign \"insecure\" <$>",
+                "name": "_insecure",
+                "method": "insecure",
+                "conflicts": [],
+                "type": "P.Maybe P.Bool",
+                "class": "HasInsecure",
+                "validate": false,
+                "optional": true,
+                "original": "insecure"
+            },
+            {
+                "default": "_password",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"password\"",
+                "name": "_password",
+                "method": "password",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasPassword",
+                "validate": false,
+                "optional": false,
+                "original": "password"
+            },
+            {
+                "default": "_username",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"username\"",
+                "name": "_username",
+                "method": "username",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasUsername",
+                "validate": false,
+                "optional": false,
+                "original": "username"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_endpoint",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"endpoint\"",
+                "name": "_endpoint",
+                "method": "endpoint",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasEndpoint",
+                "validate": false,
+                "optional": false,
+                "original": "endpoint"
+            },
+            {
+                "default": "_password",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"password\"",
+                "name": "_password",
+                "method": "password",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasPassword",
+                "validate": false,
+                "optional": false,
+                "original": "password"
+            },
+            {
+                "default": "_username",
+                "computed": false,
+                "required": true,
+                "help": [],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"username\"",
+                "name": "_username",
+                "method": "username",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasUsername",
+                "validate": false,
+                "optional": false,
+                "original": "username"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -1067,54 +1286,6 @@
         "microlens"
     ],
     "name": "RabbitMQ",
-    "parameters": [
-        {
-            "default": "_endpoint",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"endpoint\"",
-            "name": "endpoint",
-            "method": "endpoint",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasEndpoint",
-            "optional": false,
-            "label": "_endpoint"
-        },
-        {
-            "default": "_password",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"password\"",
-            "name": "password",
-            "method": "password",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasPassword",
-            "optional": false,
-            "label": "_password"
-        },
-        {
-            "default": "_username",
-            "computed": false,
-            "required": true,
-            "help": [],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"username\"",
-            "name": "username",
-            "method": "username",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasUsername",
-            "optional": false,
-            "label": "_username"
-        }
-    ],
     "package": "terrafomo-rabbitmq",
-    "type": "Provider",
     "original": "rabbitmq"
 }
