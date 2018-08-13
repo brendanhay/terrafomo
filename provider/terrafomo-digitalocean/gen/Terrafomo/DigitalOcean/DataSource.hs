@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -32,7 +33,6 @@ module Terrafomo.DigitalOcean.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -40,7 +40,10 @@ import Terrafomo.DigitalOcean.Settings
 
 import qualified Data.Hashable                   as P
 import qualified Data.HashMap.Strict             as P
+import qualified Data.HashMap.Strict             as Map
 import qualified Data.List.NonEmpty              as P
+import qualified Data.Maybe                      as P
+import qualified Data.Monoid                     as P
 import qualified Data.Text                       as P
 import qualified GHC.Generics                    as P
 import qualified Lens.Micro                      as P
@@ -52,6 +55,7 @@ import qualified Terrafomo.DigitalOcean.Types    as P
 import qualified Terrafomo.HCL                   as TF
 import qualified Terrafomo.Name                  as TF
 import qualified Terrafomo.Schema                as TF
+import qualified Terrafomo.Validator             as TF
 
 -- | @digitalocean_domain@ DataSource.
 --
@@ -64,25 +68,27 @@ data DomainData s = DomainData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DomainData s) where
-    toObject DomainData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 domainData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (DomainData s)
 domainData _name =
-    TF.newDataSource "digitalocean_domain" $
+    TF.newDataSource "digitalocean_domain" TF.validator $
         DomainData'
             { _name = _name
             }
 
+instance TF.IsObject (DomainData s) where
+    toObject DomainData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (DomainData s) where
+    validator = P.mempty
+
 instance P.HasName (DomainData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DomainData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: DomainData s)
+               (\s a -> s { _name = a } :: DomainData s)
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DomainData s)) (TF.Attr s P.Integer) where
     computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
@@ -101,25 +107,27 @@ data ImageData s = ImageData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ImageData s) where
-    toObject ImageData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 imageData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ImageData s)
 imageData _name =
-    TF.newDataSource "digitalocean_image" $
+    TF.newDataSource "digitalocean_image" TF.validator $
         ImageData'
             { _name = _name
             }
 
+instance TF.IsObject (ImageData s) where
+    toObject ImageData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ImageData s) where
+    validator = P.mempty
+
 instance P.HasName (ImageData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ImageData s)
+               (\s a -> s { _name = a } :: ImageData s)
 
 instance s ~ s' => P.HasComputedImage (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedImage x = TF.compute (TF.refKey x) "_computedImage"
@@ -151,34 +159,35 @@ data RecordData s = RecordData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RecordData s) where
-    toObject RecordData'{..} = catMaybes
-        [ TF.assign "domain" <$> TF.attribute _domain
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 recordData
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (RecordData s)
 recordData _domain _name =
-    TF.newDataSource "digitalocean_record" $
+    TF.newDataSource "digitalocean_record" TF.validator $
         RecordData'
             { _domain = _domain
             , _name = _name
             }
 
+instance TF.IsObject (RecordData s) where
+    toObject RecordData'{..} = P.catMaybes
+        [ TF.assign "domain" <$> TF.attribute _domain
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (RecordData s) where
+    validator = P.mempty
+
 instance P.HasDomain (RecordData s) (TF.Attr s P.Text) where
     domain =
         P.lens (_domain :: RecordData s -> TF.Attr s P.Text)
-               (\s a -> s { _domain = a
-                          } :: RecordData s)
+               (\s a -> s { _domain = a } :: RecordData s)
 
 instance P.HasName (RecordData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RecordData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: RecordData s)
+               (\s a -> s { _name = a } :: RecordData s)
 
 instance s ~ s' => P.HasComputedData (TF.Ref s' (RecordData s)) (TF.Attr s P.Text) where
     computedData x = TF.compute (TF.refKey x) "_computedData"
