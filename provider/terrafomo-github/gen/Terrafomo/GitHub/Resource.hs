@@ -115,13 +115,13 @@ data BranchProtectionResource s = BranchProtectionResource'
     , _repository                 :: TF.Attr s P.Text
     -- ^ @repository@ - (Required)
     --
-    , _requiredPullRequestReviews :: TF.Attr s [RequiredPullRequestReviews s]
+    , _requiredPullRequestReviews :: TF.Attr s (RequiredPullRequestReviews s)
     -- ^ @required_pull_request_reviews@ - (Optional)
     --
-    , _requiredStatusChecks       :: TF.Attr s [RequiredStatusChecks s]
+    , _requiredStatusChecks       :: TF.Attr s (RequiredStatusChecks s)
     -- ^ @required_status_checks@ - (Optional)
     --
-    , _restrictions               :: TF.Attr s [Restrictions s]
+    , _restrictions               :: TF.Attr s (Restrictions s)
     -- ^ @restrictions@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -169,21 +169,21 @@ instance P.HasRepository (BranchProtectionResource s) (TF.Attr s P.Text) where
                (\s a -> s { _repository = a
                           } :: BranchProtectionResource s)
 
-instance P.HasRequiredPullRequestReviews (BranchProtectionResource s) (TF.Attr s [RequiredPullRequestReviews s]) where
+instance P.HasRequiredPullRequestReviews (BranchProtectionResource s) (TF.Attr s (RequiredPullRequestReviews s)) where
     requiredPullRequestReviews =
-        P.lens (_requiredPullRequestReviews :: BranchProtectionResource s -> TF.Attr s [RequiredPullRequestReviews s])
+        P.lens (_requiredPullRequestReviews :: BranchProtectionResource s -> TF.Attr s (RequiredPullRequestReviews s))
                (\s a -> s { _requiredPullRequestReviews = a
                           } :: BranchProtectionResource s)
 
-instance P.HasRequiredStatusChecks (BranchProtectionResource s) (TF.Attr s [RequiredStatusChecks s]) where
+instance P.HasRequiredStatusChecks (BranchProtectionResource s) (TF.Attr s (RequiredStatusChecks s)) where
     requiredStatusChecks =
-        P.lens (_requiredStatusChecks :: BranchProtectionResource s -> TF.Attr s [RequiredStatusChecks s])
+        P.lens (_requiredStatusChecks :: BranchProtectionResource s -> TF.Attr s (RequiredStatusChecks s))
                (\s a -> s { _requiredStatusChecks = a
                           } :: BranchProtectionResource s)
 
-instance P.HasRestrictions (BranchProtectionResource s) (TF.Attr s [Restrictions s]) where
+instance P.HasRestrictions (BranchProtectionResource s) (TF.Attr s (Restrictions s)) where
     restrictions =
-        P.lens (_restrictions :: BranchProtectionResource s -> TF.Attr s [Restrictions s])
+        P.lens (_restrictions :: BranchProtectionResource s -> TF.Attr s (Restrictions s))
                (\s a -> s { _restrictions = a
                           } :: BranchProtectionResource s)
 
@@ -253,7 +253,7 @@ instance P.HasRepository (IssueLabelResource s) (TF.Attr s P.Text) where
                           } :: IssueLabelResource s)
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (IssueLabelResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
 
 -- | @github_membership@ Resource.
 --
@@ -338,7 +338,7 @@ instance P.HasName (OrganizationProjectResource s) (TF.Attr s P.Text) where
                           } :: OrganizationProjectResource s)
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (OrganizationProjectResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
 
 -- | @github_organization_webhook@ Resource.
 --
@@ -405,7 +405,7 @@ instance P.HasName (OrganizationWebhookResource s) (TF.Attr s P.Text) where
                           } :: OrganizationWebhookResource s)
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (OrganizationWebhookResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
 
 -- | @github_repository@ Resource.
 --
@@ -603,25 +603,25 @@ instance P.HasTopics (RepositoryResource s) (TF.Attr s [TF.Attr s P.Text]) where
                           } :: RepositoryResource s)
 
 instance s ~ s' => P.HasComputedDefaultBranch (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedDefaultBranch x = TF.compute (TF.refKey x) "default_branch"
+    computedDefaultBranch x = TF.compute (TF.refKey x) "_computedDefaultBranch"
 
 instance s ~ s' => P.HasComputedFullName (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedFullName x = TF.compute (TF.refKey x) "full_name"
+    computedFullName x = TF.compute (TF.refKey x) "_computedFullName"
 
 instance s ~ s' => P.HasComputedGitCloneUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedGitCloneUrl x = TF.compute (TF.refKey x) "git_clone_url"
+    computedGitCloneUrl x = TF.compute (TF.refKey x) "_computedGitCloneUrl"
 
 instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
+    computedHtmlUrl x = TF.compute (TF.refKey x) "_computedHtmlUrl"
 
 instance s ~ s' => P.HasComputedHttpCloneUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedHttpCloneUrl x = TF.compute (TF.refKey x) "http_clone_url"
+    computedHttpCloneUrl x = TF.compute (TF.refKey x) "_computedHttpCloneUrl"
 
 instance s ~ s' => P.HasComputedSshCloneUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedSshCloneUrl x = TF.compute (TF.refKey x) "ssh_clone_url"
+    computedSshCloneUrl x = TF.compute (TF.refKey x) "_computedSshCloneUrl"
 
 instance s ~ s' => P.HasComputedSvnUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedSvnUrl x = TF.compute (TF.refKey x) "svn_url"
+    computedSvnUrl x = TF.compute (TF.refKey x) "_computedSvnUrl"
 
 -- | @github_repository_collaborator@ Resource.
 --
@@ -795,7 +795,7 @@ instance P.HasRepository (RepositoryProjectResource s) (TF.Attr s P.Text) where
                           } :: RepositoryProjectResource s)
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (RepositoryProjectResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
 
 -- | @github_repository_webhook@ Resource.
 --
@@ -874,7 +874,7 @@ instance P.HasRepository (RepositoryWebhookResource s) (TF.Attr s P.Text) where
                           } :: RepositoryWebhookResource s)
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (RepositoryWebhookResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
 
 -- | @github_team@ Resource.
 --
@@ -1087,7 +1087,7 @@ instance P.HasArmoredPublicKey (UserGpgKeyResource s) (TF.Attr s P.Text) where
                           } :: UserGpgKeyResource s)
 
 instance s ~ s' => P.HasComputedKeyId (TF.Ref s' (UserGpgKeyResource s)) (TF.Attr s P.Text) where
-    computedKeyId x = TF.compute (TF.refKey x) "key_id"
+    computedKeyId x = TF.compute (TF.refKey x) "_computedKeyId"
 
 -- | @github_user_ssh_key@ Resource.
 --
@@ -1132,4 +1132,4 @@ instance P.HasTitle (UserSshKeyResource s) (TF.Attr s P.Text) where
                           } :: UserSshKeyResource s)
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (UserSshKeyResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
