@@ -147,10 +147,10 @@ instance P.HasPrivateKey (CertificateResource s) (TF.Attr s P.Text) where
                           } :: CertificateResource s)
 
 instance s ~ s' => P.HasComputedNotAfter (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedNotAfter x = TF.compute (TF.refKey x) "not_after"
+    computedNotAfter x = TF.compute (TF.refKey x) "_computedNotAfter"
 
 instance s ~ s' => P.HasComputedSha1Fingerprint (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedSha1Fingerprint x = TF.compute (TF.refKey x) "sha1_fingerprint"
+    computedSha1Fingerprint x = TF.compute (TF.refKey x) "_computedSha1Fingerprint"
 
 -- | @digitalocean_domain@ Resource.
 --
@@ -360,34 +360,34 @@ instance P.HasVolumeIds (DropletResource s) (TF.Attr s [TF.Attr s P.Text]) where
                           } :: DropletResource s)
 
 instance s ~ s' => P.HasComputedDisk (TF.Ref s' (DropletResource s)) (TF.Attr s P.Integer) where
-    computedDisk x = TF.compute (TF.refKey x) "disk"
+    computedDisk x = TF.compute (TF.refKey x) "_computedDisk"
 
 instance s ~ s' => P.HasComputedIpv4Address (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
-    computedIpv4Address x = TF.compute (TF.refKey x) "ipv4_address"
+    computedIpv4Address x = TF.compute (TF.refKey x) "_computedIpv4Address"
 
 instance s ~ s' => P.HasComputedIpv4AddressPrivate (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
-    computedIpv4AddressPrivate x = TF.compute (TF.refKey x) "ipv4_address_private"
+    computedIpv4AddressPrivate x = TF.compute (TF.refKey x) "_computedIpv4AddressPrivate"
 
 instance s ~ s' => P.HasComputedIpv6Address (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
-    computedIpv6Address x = TF.compute (TF.refKey x) "ipv6_address"
+    computedIpv6Address x = TF.compute (TF.refKey x) "_computedIpv6Address"
 
 instance s ~ s' => P.HasComputedIpv6AddressPrivate (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
-    computedIpv6AddressPrivate x = TF.compute (TF.refKey x) "ipv6_address_private"
+    computedIpv6AddressPrivate x = TF.compute (TF.refKey x) "_computedIpv6AddressPrivate"
 
 instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
-    computedLocked x = TF.compute (TF.refKey x) "locked"
+    computedLocked x = TF.compute (TF.refKey x) "_computedLocked"
 
 instance s ~ s' => P.HasComputedPriceHourly (TF.Ref s' (DropletResource s)) (TF.Attr s P.Double) where
-    computedPriceHourly x = TF.compute (TF.refKey x) "price_hourly"
+    computedPriceHourly x = TF.compute (TF.refKey x) "_computedPriceHourly"
 
 instance s ~ s' => P.HasComputedPriceMonthly (TF.Ref s' (DropletResource s)) (TF.Attr s P.Double) where
-    computedPriceMonthly x = TF.compute (TF.refKey x) "price_monthly"
+    computedPriceMonthly x = TF.compute (TF.refKey x) "_computedPriceMonthly"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 instance s ~ s' => P.HasComputedVcpus (TF.Ref s' (DropletResource s)) (TF.Attr s P.Integer) where
-    computedVcpus x = TF.compute (TF.refKey x) "vcpus"
+    computedVcpus x = TF.compute (TF.refKey x) "_computedVcpus"
 
 -- | @digitalocean_firewall@ Resource.
 --
@@ -464,13 +464,13 @@ instance P.HasTags (FirewallResource s) (TF.Attr s [TF.Attr s P.Text]) where
                           } :: FirewallResource s)
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
+    computedCreatedAt x = TF.compute (TF.refKey x) "_computedCreatedAt"
 
 instance s ~ s' => P.HasComputedPendingChanges (TF.Ref s' (FirewallResource s)) (TF.Attr s [PendingChanges s]) where
-    computedPendingChanges x = TF.compute (TF.refKey x) "pending_changes"
+    computedPendingChanges x = TF.compute (TF.refKey x) "_computedPendingChanges"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 -- | @digitalocean_floating_ip@ Resource.
 --
@@ -514,7 +514,7 @@ instance P.HasRegion (FloatingIpResource s) (TF.Attr s P.Text) where
                           } :: FloatingIpResource s)
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (FloatingIpResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 -- | @digitalocean_loadbalancer@ Resource.
 --
@@ -533,7 +533,7 @@ data LoadbalancerResource s = LoadbalancerResource'
     , _forwardingRule      :: TF.Attr s (P.NonEmpty (ForwardingRule s))
     -- ^ @forwarding_rule@ - (Required)
     --
-    , _healthcheck         :: TF.Attr s [Healthcheck s]
+    , _healthcheck         :: TF.Attr s (Healthcheck s)
     -- ^ @healthcheck@ - (Optional)
     --
     , _name                :: TF.Attr s P.Text
@@ -601,9 +601,9 @@ instance P.HasForwardingRule (LoadbalancerResource s) (TF.Attr s (P.NonEmpty (Fo
                (\s a -> s { _forwardingRule = a
                           } :: LoadbalancerResource s)
 
-instance P.HasHealthcheck (LoadbalancerResource s) (TF.Attr s [Healthcheck s]) where
+instance P.HasHealthcheck (LoadbalancerResource s) (TF.Attr s (Healthcheck s)) where
     healthcheck =
-        P.lens (_healthcheck :: LoadbalancerResource s -> TF.Attr s [Healthcheck s])
+        P.lens (_healthcheck :: LoadbalancerResource s -> TF.Attr s (Healthcheck s))
                (\s a -> s { _healthcheck = a
                           } :: LoadbalancerResource s)
 
@@ -626,10 +626,10 @@ instance P.HasRegion (LoadbalancerResource s) (TF.Attr s P.Text) where
                           } :: LoadbalancerResource s)
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "ip"
+    computedIp x = TF.compute (TF.refKey x) "_computedIp"
 
-instance s ~ s' => P.HasComputedStickySessions (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s [StickySessions s]) where
-    computedStickySessions x = TF.compute (TF.refKey x) "sticky_sessions"
+instance s ~ s' => P.HasComputedStickySessions (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s (StickySessions s)) where
+    computedStickySessions x = TF.compute (TF.refKey x) "_computedStickySessions"
 
 -- | @digitalocean_record@ Resource.
 --
@@ -696,25 +696,25 @@ instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
                           } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedFlags (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedFlags x = TF.compute (TF.refKey x) "flags"
+    computedFlags x = TF.compute (TF.refKey x) "_computedFlags"
 
 instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedFqdn x = TF.compute (TF.refKey x) "fqdn"
+    computedFqdn x = TF.compute (TF.refKey x) "_computedFqdn"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedPort x = TF.compute (TF.refKey x) "port"
+    computedPort x = TF.compute (TF.refKey x) "_computedPort"
 
 instance s ~ s' => P.HasComputedPriority (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedPriority x = TF.compute (TF.refKey x) "priority"
+    computedPriority x = TF.compute (TF.refKey x) "_computedPriority"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedTtl x = TF.compute (TF.refKey x) "ttl"
+    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "value"
+    computedValue x = TF.compute (TF.refKey x) "_computedValue"
 
 instance s ~ s' => P.HasComputedWeight (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedWeight x = TF.compute (TF.refKey x) "weight"
+    computedWeight x = TF.compute (TF.refKey x) "_computedWeight"
 
 -- | @digitalocean_ssh_key@ Resource.
 --
@@ -759,10 +759,10 @@ instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
                           } :: SshKeyResource s)
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @digitalocean_tag@ Resource.
 --
@@ -871,7 +871,7 @@ instance P.HasSize (VolumeResource s) (TF.Attr s P.Integer) where
                           } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedDropletIds (TF.Ref s' (VolumeResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Integer)]) where
-    computedDropletIds x = TF.compute (TF.refKey x) "droplet_ids"
+    computedDropletIds x = TF.compute (TF.refKey x) "_computedDropletIds"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"

@@ -87,7 +87,6 @@ module Terrafomo.DigitalOcean.Lens
     , HasComputedDisk (..)
     , HasComputedFlags (..)
     , HasComputedWeight (..)
-    , HasComputedData' (..)
     , HasComputedFqdn (..)
     , HasComputedDropletIds (..)
     , HasComputedIpv6AddressPrivate (..)
@@ -102,14 +101,15 @@ module Terrafomo.DigitalOcean.Lens
     , HasComputedIpv4Address (..)
     , HasComputedIp (..)
     , HasComputedZoneFile (..)
+    , HasComputedData (..)
     , HasComputedPriceMonthly (..)
+    , HasComputedType (..)
     , HasComputedIpv6Address (..)
     , HasComputedStickySessions (..)
     , HasComputedVcpus (..)
     , HasComputedImage (..)
     , HasComputedIpv4AddressPrivate (..)
     , HasComputedPendingChanges (..)
-    , HasComputedType' (..)
     , HasComputedPrivate (..)
     ) where
 
@@ -505,9 +505,6 @@ class HasComputedFlags a b | a -> b where
 class HasComputedWeight a b | a -> b where
     computedWeight :: a -> b
 
-class HasComputedData' a b | a -> b where
-    computedData' :: a -> b
-
 class HasComputedFqdn a b | a -> b where
     computedFqdn :: a -> b
 
@@ -550,8 +547,14 @@ class HasComputedIp a b | a -> b where
 class HasComputedZoneFile a b | a -> b where
     computedZoneFile :: a -> b
 
+class HasComputedData a b | a -> b where
+    computedData :: a -> b
+
 class HasComputedPriceMonthly a b | a -> b where
     computedPriceMonthly :: a -> b
+
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
 
 class HasComputedIpv6Address a b | a -> b where
     computedIpv6Address :: a -> b
@@ -570,9 +573,6 @@ class HasComputedIpv4AddressPrivate a b | a -> b where
 
 class HasComputedPendingChanges a b | a -> b where
     computedPendingChanges :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedPrivate a b | a -> b where
     computedPrivate :: a -> b

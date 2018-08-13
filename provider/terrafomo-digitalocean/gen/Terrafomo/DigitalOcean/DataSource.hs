@@ -85,10 +85,10 @@ instance P.HasName (DomainData s) (TF.Attr s P.Text) where
                           } :: DomainData s)
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DomainData s)) (TF.Attr s P.Integer) where
-    computedTtl x = TF.compute (TF.refKey x) "ttl"
+    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
 
 instance s ~ s' => P.HasComputedZoneFile (TF.Ref s' (DomainData s)) (TF.Attr s P.Text) where
-    computedZoneFile x = TF.compute (TF.refKey x) "zone_file"
+    computedZoneFile x = TF.compute (TF.refKey x) "_computedZoneFile"
 
 -- | @digitalocean_image@ DataSource.
 --
@@ -122,19 +122,19 @@ instance P.HasName (ImageData s) (TF.Attr s P.Text) where
                           } :: ImageData s)
 
 instance s ~ s' => P.HasComputedImage (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedImage x = TF.compute (TF.refKey x) "image"
+    computedImage x = TF.compute (TF.refKey x) "_computedImage"
 
 instance s ~ s' => P.HasComputedMinDiskSize (TF.Ref s' (ImageData s)) (TF.Attr s P.Integer) where
-    computedMinDiskSize x = TF.compute (TF.refKey x) "min_disk_size"
+    computedMinDiskSize x = TF.compute (TF.refKey x) "_computedMinDiskSize"
 
 instance s ~ s' => P.HasComputedPrivate (TF.Ref s' (ImageData s)) (TF.Attr s P.Bool) where
-    computedPrivate x = TF.compute (TF.refKey x) "private"
+    computedPrivate x = TF.compute (TF.refKey x) "_computedPrivate"
 
 instance s ~ s' => P.HasComputedRegions (TF.Ref s' (ImageData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRegions x = TF.compute (TF.refKey x) "regions"
+    computedRegions x = TF.compute (TF.refKey x) "_computedRegions"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 -- | @digitalocean_record@ DataSource.
 --
@@ -180,29 +180,29 @@ instance P.HasName (RecordData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: RecordData s)
 
-instance s ~ s' => P.HasComputedData' (TF.Ref s' (RecordData s)) (TF.Attr s P.Text) where
-    computedData' x = TF.compute (TF.refKey x) "data"
+instance s ~ s' => P.HasComputedData (TF.Ref s' (RecordData s)) (TF.Attr s P.Text) where
+    computedData x = TF.compute (TF.refKey x) "_computedData"
 
 instance s ~ s' => P.HasComputedFlags (TF.Ref s' (RecordData s)) (TF.Attr s P.Integer) where
-    computedFlags x = TF.compute (TF.refKey x) "flags"
+    computedFlags x = TF.compute (TF.refKey x) "_computedFlags"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordData s)) (TF.Attr s P.Integer) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (RecordData s)) (TF.Attr s P.Integer) where
-    computedPort x = TF.compute (TF.refKey x) "port"
+    computedPort x = TF.compute (TF.refKey x) "_computedPort"
 
 instance s ~ s' => P.HasComputedPriority (TF.Ref s' (RecordData s)) (TF.Attr s P.Integer) where
-    computedPriority x = TF.compute (TF.refKey x) "priority"
+    computedPriority x = TF.compute (TF.refKey x) "_computedPriority"
 
 instance s ~ s' => P.HasComputedTag (TF.Ref s' (RecordData s)) (TF.Attr s P.Text) where
-    computedTag x = TF.compute (TF.refKey x) "tag"
+    computedTag x = TF.compute (TF.refKey x) "_computedTag"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordData s)) (TF.Attr s P.Integer) where
-    computedTtl x = TF.compute (TF.refKey x) "ttl"
+    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (RecordData s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (RecordData s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 instance s ~ s' => P.HasComputedWeight (TF.Ref s' (RecordData s)) (TF.Attr s P.Integer) where
-    computedWeight x = TF.compute (TF.refKey x) "weight"
+    computedWeight x = TF.compute (TF.refKey x) "_computedWeight"
