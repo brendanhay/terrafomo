@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.MySQL.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.MySQL.Settings
 
 import qualified Data.Hashable         as P
 import qualified Data.HashMap.Strict   as P
+import qualified Data.HashMap.Strict   as Map
 import qualified Data.List.NonEmpty    as P
+import qualified Data.Maybe            as P
+import qualified Data.Monoid           as P
 import qualified Data.Text             as P
 import qualified GHC.Generics          as P
 import qualified Lens.Micro            as P
@@ -42,6 +45,7 @@ import qualified Terrafomo.MySQL.Lens  as P
 import qualified Terrafomo.MySQL.Types as P
 import qualified Terrafomo.Name        as TF
 import qualified Terrafomo.Provider    as TF
+import qualified Terrafomo.Validator   as TF
 
 -- | The @MySQL@ Terraform provider configuration.
 --
@@ -59,24 +63,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "endpoint" _endpoint
-                  , TF.assign "password" <$> _password
-                  , P.Just $ TF.assign "username" _username
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: P.Text -- ^ @endpoint@ - 'P.endpoint'
     -> P.Text -- ^ @username@ - 'P.username'
@@ -88,20 +74,38 @@ newProvider _endpoint _username =
         , _username = _username
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "endpoint" _endpoint
+                  , TF.assign "password" <$> _password
+                  , P.Just $ TF.assign "username" _username
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
 instance P.HasEndpoint (Provider) (P.Text) where
     endpoint =
         P.lens (_endpoint :: Provider -> P.Text)
-               (\s a -> s { _endpoint = a
-                          } :: Provider)
+               (\s a -> s { _endpoint = a } :: Provider)
 
 instance P.HasPassword (Provider) (P.Maybe P.Text) where
     password =
         P.lens (_password :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _password = a
-                          } :: Provider)
+               (\s a -> s { _password = a } :: Provider)
 
 instance P.HasUsername (Provider) (P.Text) where
     username =
         P.lens (_username :: Provider -> P.Text)
-               (\s a -> s { _username = a
-                          } :: Provider)
+               (\s a -> s { _username = a } :: Provider)
