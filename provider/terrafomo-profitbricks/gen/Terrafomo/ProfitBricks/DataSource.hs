@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -40,7 +41,6 @@ module Terrafomo.ProfitBricks.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -48,7 +48,10 @@ import Terrafomo.ProfitBricks.Settings
 
 import qualified Data.Hashable                   as P
 import qualified Data.HashMap.Strict             as P
+import qualified Data.HashMap.Strict             as Map
 import qualified Data.List.NonEmpty              as P
+import qualified Data.Maybe                      as P
+import qualified Data.Monoid                     as P
 import qualified Data.Text                       as P
 import qualified GHC.Generics                    as P
 import qualified Lens.Micro                      as P
@@ -60,6 +63,7 @@ import qualified Terrafomo.ProfitBricks.Lens     as P
 import qualified Terrafomo.ProfitBricks.Provider as P
 import qualified Terrafomo.ProfitBricks.Types    as P
 import qualified Terrafomo.Schema                as TF
+import qualified Terrafomo.Validator             as TF
 
 -- | @profitbricks_datacenter@ DataSource.
 --
@@ -74,33 +78,34 @@ data DatacenterData s = DatacenterData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DatacenterData s) where
-    toObject DatacenterData'{..} = catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 datacenterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (DatacenterData s)
 datacenterData _name =
-    TF.newDataSource "profitbricks_datacenter" $
+    TF.newDataSource "profitbricks_datacenter" TF.validator $
         DatacenterData'
             { _location = TF.Nil
             , _name = _name
             }
 
+instance TF.IsObject (DatacenterData s) where
+    toObject DatacenterData'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (DatacenterData s) where
+    validator = P.mempty
+
 instance P.HasLocation (DatacenterData s) (TF.Attr s P.Text) where
     location =
         P.lens (_location :: DatacenterData s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a
-                          } :: DatacenterData s)
+               (\s a -> s { _location = a } :: DatacenterData s)
 
 instance P.HasName (DatacenterData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DatacenterData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: DatacenterData s)
+               (\s a -> s { _name = a } :: DatacenterData s)
 
 -- | @profitbricks_image@ DataSource.
 --
@@ -121,18 +126,10 @@ data ImageData s = ImageData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ImageData s) where
-    toObject ImageData'{..} = catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "version" <$> TF.attribute _version
-        ]
-
 imageData
     :: TF.DataSource P.Provider (ImageData s)
 imageData =
-    TF.newDataSource "profitbricks_image" $
+    TF.newDataSource "profitbricks_image" TF.validator $
         ImageData'
             { _location = TF.Nil
             , _name = TF.Nil
@@ -140,29 +137,36 @@ imageData =
             , _version = TF.Nil
             }
 
+instance TF.IsObject (ImageData s) where
+    toObject ImageData'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "version" <$> TF.attribute _version
+        ]
+
+instance TF.IsValid (ImageData s) where
+    validator = P.mempty
+
 instance P.HasLocation (ImageData s) (TF.Attr s P.Text) where
     location =
         P.lens (_location :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a
-                          } :: ImageData s)
+               (\s a -> s { _location = a } :: ImageData s)
 
 instance P.HasName (ImageData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ImageData s)
+               (\s a -> s { _name = a } :: ImageData s)
 
 instance P.HasType' (ImageData s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: ImageData s)
+               (\s a -> s { _type' = a } :: ImageData s)
 
 instance P.HasVersion (ImageData s) (TF.Attr s P.Text) where
     version =
         P.lens (_version :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _version = a
-                          } :: ImageData s)
+               (\s a -> s { _version = a } :: ImageData s)
 
 -- | @profitbricks_location@ DataSource.
 --
@@ -177,32 +181,33 @@ data LocationData s = LocationData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (LocationData s) where
-    toObject LocationData'{..} = catMaybes
-        [ TF.assign "feature" <$> TF.attribute _feature
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 locationData
     :: TF.DataSource P.Provider (LocationData s)
 locationData =
-    TF.newDataSource "profitbricks_location" $
+    TF.newDataSource "profitbricks_location" TF.validator $
         LocationData'
             { _feature = TF.Nil
             , _name = TF.Nil
             }
 
+instance TF.IsObject (LocationData s) where
+    toObject LocationData'{..} = P.catMaybes
+        [ TF.assign "feature" <$> TF.attribute _feature
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (LocationData s) where
+    validator = P.mempty
+
 instance P.HasFeature (LocationData s) (TF.Attr s P.Text) where
     feature =
         P.lens (_feature :: LocationData s -> TF.Attr s P.Text)
-               (\s a -> s { _feature = a
-                          } :: LocationData s)
+               (\s a -> s { _feature = a } :: LocationData s)
 
 instance P.HasName (LocationData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: LocationData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: LocationData s)
+               (\s a -> s { _name = a } :: LocationData s)
 
 -- | @profitbricks_resource@ DataSource.
 --
@@ -217,32 +222,33 @@ data ResourceData s = ResourceData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ResourceData s) where
-    toObject ResourceData'{..} = catMaybes
-        [ TF.assign "resource_id" <$> TF.attribute _resourceId
-        , TF.assign "resource_type" <$> TF.attribute _resourceType
-        ]
-
 resourceData
     :: TF.DataSource P.Provider (ResourceData s)
 resourceData =
-    TF.newDataSource "profitbricks_resource" $
+    TF.newDataSource "profitbricks_resource" TF.validator $
         ResourceData'
             { _resourceId = TF.Nil
             , _resourceType = TF.Nil
             }
 
+instance TF.IsObject (ResourceData s) where
+    toObject ResourceData'{..} = P.catMaybes
+        [ TF.assign "resource_id" <$> TF.attribute _resourceId
+        , TF.assign "resource_type" <$> TF.attribute _resourceType
+        ]
+
+instance TF.IsValid (ResourceData s) where
+    validator = P.mempty
+
 instance P.HasResourceId (ResourceData s) (TF.Attr s P.Text) where
     resourceId =
         P.lens (_resourceId :: ResourceData s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceId = a
-                          } :: ResourceData s)
+               (\s a -> s { _resourceId = a } :: ResourceData s)
 
 instance P.HasResourceType (ResourceData s) (TF.Attr s P.Text) where
     resourceType =
         P.lens (_resourceType :: ResourceData s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceType = a
-                          } :: ResourceData s)
+               (\s a -> s { _resourceType = a } :: ResourceData s)
 
 -- | @profitbricks_snapshot@ DataSource.
 --
@@ -260,38 +266,38 @@ data SnapshotData s = SnapshotData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SnapshotData s) where
-    toObject SnapshotData'{..} = catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "size" <$> TF.attribute _size
-        ]
-
 snapshotData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (SnapshotData s)
 snapshotData _name =
-    TF.newDataSource "profitbricks_snapshot" $
+    TF.newDataSource "profitbricks_snapshot" TF.validator $
         SnapshotData'
             { _location = TF.Nil
             , _name = _name
             , _size = TF.Nil
             }
 
+instance TF.IsObject (SnapshotData s) where
+    toObject SnapshotData'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "size" <$> TF.attribute _size
+        ]
+
+instance TF.IsValid (SnapshotData s) where
+    validator = P.mempty
+
 instance P.HasLocation (SnapshotData s) (TF.Attr s P.Text) where
     location =
         P.lens (_location :: SnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a
-                          } :: SnapshotData s)
+               (\s a -> s { _location = a } :: SnapshotData s)
 
 instance P.HasName (SnapshotData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: SnapshotData s)
+               (\s a -> s { _name = a } :: SnapshotData s)
 
 instance P.HasSize (SnapshotData s) (TF.Attr s P.Integer) where
     size =
         P.lens (_size :: SnapshotData s -> TF.Attr s P.Integer)
-               (\s a -> s { _size = a
-                          } :: SnapshotData s)
+               (\s a -> s { _size = a } :: SnapshotData s)
