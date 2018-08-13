@@ -38,6 +38,7 @@ import qualified GHC.Generics        as P
 import qualified Lens.Micro          as P
 import qualified Prelude             as P
 import qualified Terrafomo.AWS.Lens  as P
+import qualified Terrafomo.AWS.Types as P
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
@@ -180,7 +181,7 @@ instance TF.IsSection Provider where
                   ])
 
 instance TF.IsProvider Provider where
-    type ProviderType Provider = "aws"
+    type ProviderType Provider = "provider"
 
 newProvider
     :: P.Region -- ^ @region@ - 'P.region'

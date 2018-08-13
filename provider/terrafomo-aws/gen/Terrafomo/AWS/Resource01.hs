@@ -426,13 +426,13 @@ instance P.HasValidationMethod (AcmCertificateResource s) (TF.Attr s P.Text) whe
                           } :: AcmCertificateResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AcmCertificateResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedDomainValidationOptions (TF.Ref s' (AcmCertificateResource s)) (TF.Attr s [DomainValidationOptions s]) where
-    computedDomainValidationOptions x = TF.compute (TF.refKey x) "domain_validation_options"
+    computedDomainValidationOptions x = TF.compute (TF.refKey x) "_computedDomainValidationOptions"
 
 instance s ~ s' => P.HasComputedValidationEmails (TF.Ref s' (AcmCertificateResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedValidationEmails x = TF.compute (TF.refKey x) "validation_emails"
+    computedValidationEmails x = TF.compute (TF.refKey x) "_computedValidationEmails"
 
 -- | @aws_acm_certificate_validation@ Resource.
 --
@@ -480,13 +480,13 @@ instance P.HasValidationRecordFqdns (AcmCertificateValidationResource s) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_acmpca_certificate_authority terraform documentation>
 -- for more information.
 data AcmpcaCertificateAuthorityResource s = AcmpcaCertificateAuthorityResource'
-    { _certificateAuthorityConfiguration :: TF.Attr s [CertificateAuthorityConfiguration s]
+    { _certificateAuthorityConfiguration :: TF.Attr s (CertificateAuthorityConfiguration s)
     -- ^ @certificate_authority_configuration@ - (Required)
     --
     , _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _revocationConfiguration :: TF.Attr s [RevocationConfiguration s]
+    , _revocationConfiguration :: TF.Attr s (RevocationConfiguration s)
     -- ^ @revocation_configuration@ - (Optional)
     --
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -507,7 +507,7 @@ instance TF.IsObject (AcmpcaCertificateAuthorityResource s) where
         ]
 
 acmpcaCertificateAuthorityResource
-    :: TF.Attr s [CertificateAuthorityConfiguration s] -- ^ @certificate_authority_configuration@ - 'P.certificateAuthorityConfiguration'
+    :: TF.Attr s (CertificateAuthorityConfiguration s) -- ^ @certificate_authority_configuration@ - 'P.certificateAuthorityConfiguration'
     -> TF.Resource P.Provider (AcmpcaCertificateAuthorityResource s)
 acmpcaCertificateAuthorityResource _certificateAuthorityConfiguration =
     TF.newResource "aws_acmpca_certificate_authority" $
@@ -519,9 +519,9 @@ acmpcaCertificateAuthorityResource _certificateAuthorityConfiguration =
             , _type' = TF.value "SUBORDINATE"
             }
 
-instance P.HasCertificateAuthorityConfiguration (AcmpcaCertificateAuthorityResource s) (TF.Attr s [CertificateAuthorityConfiguration s]) where
+instance P.HasCertificateAuthorityConfiguration (AcmpcaCertificateAuthorityResource s) (TF.Attr s (CertificateAuthorityConfiguration s)) where
     certificateAuthorityConfiguration =
-        P.lens (_certificateAuthorityConfiguration :: AcmpcaCertificateAuthorityResource s -> TF.Attr s [CertificateAuthorityConfiguration s])
+        P.lens (_certificateAuthorityConfiguration :: AcmpcaCertificateAuthorityResource s -> TF.Attr s (CertificateAuthorityConfiguration s))
                (\s a -> s { _certificateAuthorityConfiguration = a
                           } :: AcmpcaCertificateAuthorityResource s)
 
@@ -531,9 +531,9 @@ instance P.HasEnabled (AcmpcaCertificateAuthorityResource s) (TF.Attr s P.Bool) 
                (\s a -> s { _enabled = a
                           } :: AcmpcaCertificateAuthorityResource s)
 
-instance P.HasRevocationConfiguration (AcmpcaCertificateAuthorityResource s) (TF.Attr s [RevocationConfiguration s]) where
+instance P.HasRevocationConfiguration (AcmpcaCertificateAuthorityResource s) (TF.Attr s (RevocationConfiguration s)) where
     revocationConfiguration =
-        P.lens (_revocationConfiguration :: AcmpcaCertificateAuthorityResource s -> TF.Attr s [RevocationConfiguration s])
+        P.lens (_revocationConfiguration :: AcmpcaCertificateAuthorityResource s -> TF.Attr s (RevocationConfiguration s))
                (\s a -> s { _revocationConfiguration = a
                           } :: AcmpcaCertificateAuthorityResource s)
 
@@ -550,28 +550,28 @@ instance P.HasType' (AcmpcaCertificateAuthorityResource s) (TF.Attr s P.Text) wh
                           } :: AcmpcaCertificateAuthorityResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedCertificate (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedCertificate x = TF.compute (TF.refKey x) "certificate"
+    computedCertificate x = TF.compute (TF.refKey x) "_computedCertificate"
 
 instance s ~ s' => P.HasComputedCertificateChain (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedCertificateChain x = TF.compute (TF.refKey x) "certificate_chain"
+    computedCertificateChain x = TF.compute (TF.refKey x) "_computedCertificateChain"
 
 instance s ~ s' => P.HasComputedCertificateSigningRequest (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedCertificateSigningRequest x = TF.compute (TF.refKey x) "certificate_signing_request"
+    computedCertificateSigningRequest x = TF.compute (TF.refKey x) "_computedCertificateSigningRequest"
 
 instance s ~ s' => P.HasComputedNotAfter (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedNotAfter x = TF.compute (TF.refKey x) "not_after"
+    computedNotAfter x = TF.compute (TF.refKey x) "_computedNotAfter"
 
 instance s ~ s' => P.HasComputedNotBefore (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedNotBefore x = TF.compute (TF.refKey x) "not_before"
+    computedNotBefore x = TF.compute (TF.refKey x) "_computedNotBefore"
 
 instance s ~ s' => P.HasComputedSerial (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedSerial x = TF.compute (TF.refKey x) "serial"
+    computedSerial x = TF.compute (TF.refKey x) "_computedSerial"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 -- | @aws_alb@ Resource.
 --
@@ -668,41 +668,41 @@ instance P.HasTags (AlbResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Tex
                (\s a -> s { _tags = a
                           } :: AlbResource s)
 
-instance s ~ s' => P.HasComputedAccessLogs (TF.Ref s' (AlbResource s)) (TF.Attr s [AccessLogs s]) where
-    computedAccessLogs x = TF.compute (TF.refKey x) "access_logs"
+instance s ~ s' => P.HasComputedAccessLogs (TF.Ref s' (AlbResource s)) (TF.Attr s (AccessLogs s)) where
+    computedAccessLogs x = TF.compute (TF.refKey x) "_computedAccessLogs"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AlbResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedArnSuffix (TF.Ref s' (AlbResource s)) (TF.Attr s P.Text) where
-    computedArnSuffix x = TF.compute (TF.refKey x) "arn_suffix"
+    computedArnSuffix x = TF.compute (TF.refKey x) "_computedArnSuffix"
 
 instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (AlbResource s)) (TF.Attr s P.Text) where
-    computedDnsName x = TF.compute (TF.refKey x) "dns_name"
+    computedDnsName x = TF.compute (TF.refKey x) "_computedDnsName"
 
 instance s ~ s' => P.HasComputedInternal (TF.Ref s' (AlbResource s)) (TF.Attr s P.Bool) where
-    computedInternal x = TF.compute (TF.refKey x) "internal"
+    computedInternal x = TF.compute (TF.refKey x) "_computedInternal"
 
 instance s ~ s' => P.HasComputedIpAddressType (TF.Ref s' (AlbResource s)) (TF.Attr s P.Text) where
-    computedIpAddressType x = TF.compute (TF.refKey x) "ip_address_type"
+    computedIpAddressType x = TF.compute (TF.refKey x) "_computedIpAddressType"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AlbResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (AlbResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedSecurityGroups x = TF.compute (TF.refKey x) "security_groups"
+    computedSecurityGroups x = TF.compute (TF.refKey x) "_computedSecurityGroups"
 
 instance s ~ s' => P.HasComputedSubnetMapping (TF.Ref s' (AlbResource s)) (TF.Attr s [TF.Attr s (SubnetMapping s)]) where
-    computedSubnetMapping x = TF.compute (TF.refKey x) "subnet_mapping"
+    computedSubnetMapping x = TF.compute (TF.refKey x) "_computedSubnetMapping"
 
 instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (AlbResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedSubnets x = TF.compute (TF.refKey x) "subnets"
+    computedSubnets x = TF.compute (TF.refKey x) "_computedSubnets"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (AlbResource s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
+    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
 
 instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (AlbResource s)) (TF.Attr s P.Text) where
-    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
+    computedZoneId x = TF.compute (TF.refKey x) "_computedZoneId"
 
 -- | @aws_alb_listener@ Resource.
 --
@@ -781,10 +781,10 @@ instance P.HasProtocol (AlbListenerResource s) (TF.Attr s P.Text) where
                           } :: AlbListenerResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AlbListenerResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedSslPolicy (TF.Ref s' (AlbListenerResource s)) (TF.Attr s P.Text) where
-    computedSslPolicy x = TF.compute (TF.refKey x) "ssl_policy"
+    computedSslPolicy x = TF.compute (TF.refKey x) "_computedSslPolicy"
 
 -- | @aws_alb_listener_certificate@ Resource.
 --
@@ -883,10 +883,10 @@ instance P.HasListenerArn (AlbListenerRuleResource s) (TF.Attr s P.Text) where
                           } :: AlbListenerRuleResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AlbListenerRuleResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedPriority (TF.Ref s' (AlbListenerRuleResource s)) (TF.Attr s P.Integer) where
-    computedPriority x = TF.compute (TF.refKey x) "priority"
+    computedPriority x = TF.compute (TF.refKey x) "_computedPriority"
 
 -- | @aws_alb_target_group@ Resource.
 --
@@ -1009,19 +1009,19 @@ instance P.HasVpcId (AlbTargetGroupResource s) (TF.Attr s P.Text) where
                           } :: AlbTargetGroupResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AlbTargetGroupResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedArnSuffix (TF.Ref s' (AlbTargetGroupResource s)) (TF.Attr s P.Text) where
-    computedArnSuffix x = TF.compute (TF.refKey x) "arn_suffix"
+    computedArnSuffix x = TF.compute (TF.refKey x) "_computedArnSuffix"
 
-instance s ~ s' => P.HasComputedHealthCheck (TF.Ref s' (AlbTargetGroupResource s)) (TF.Attr s [HealthCheck s]) where
-    computedHealthCheck x = TF.compute (TF.refKey x) "health_check"
+instance s ~ s' => P.HasComputedHealthCheck (TF.Ref s' (AlbTargetGroupResource s)) (TF.Attr s (HealthCheck s)) where
+    computedHealthCheck x = TF.compute (TF.refKey x) "_computedHealthCheck"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AlbTargetGroupResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
-instance s ~ s' => P.HasComputedStickiness (TF.Ref s' (AlbTargetGroupResource s)) (TF.Attr s [Stickiness s]) where
-    computedStickiness x = TF.compute (TF.refKey x) "stickiness"
+instance s ~ s' => P.HasComputedStickiness (TF.Ref s' (AlbTargetGroupResource s)) (TF.Attr s (Stickiness s)) where
+    computedStickiness x = TF.compute (TF.refKey x) "_computedStickiness"
 
 -- | @aws_alb_target_group_attachment@ Resource.
 --
@@ -1217,19 +1217,19 @@ instance P.HasVirtualizationType (AmiResource s) (TF.Attr s P.Text) where
                           } :: AmiResource s)
 
 instance s ~ s' => P.HasComputedEbsBlockDevice (TF.Ref s' (AmiResource s)) (TF.Attr s [TF.Attr s (EbsBlockDevice s)]) where
-    computedEbsBlockDevice x = TF.compute (TF.refKey x) "ebs_block_device"
+    computedEbsBlockDevice x = TF.compute (TF.refKey x) "_computedEbsBlockDevice"
 
 instance s ~ s' => P.HasComputedEphemeralBlockDevice (TF.Ref s' (AmiResource s)) (TF.Attr s [TF.Attr s (EphemeralBlockDevice s)]) where
-    computedEphemeralBlockDevice x = TF.compute (TF.refKey x) "ephemeral_block_device"
+    computedEphemeralBlockDevice x = TF.compute (TF.refKey x) "_computedEphemeralBlockDevice"
 
 instance s ~ s' => P.HasComputedImageLocation (TF.Ref s' (AmiResource s)) (TF.Attr s P.Text) where
-    computedImageLocation x = TF.compute (TF.refKey x) "image_location"
+    computedImageLocation x = TF.compute (TF.refKey x) "_computedImageLocation"
 
 instance s ~ s' => P.HasComputedManageEbsSnapshots (TF.Ref s' (AmiResource s)) (TF.Attr s P.Bool) where
-    computedManageEbsSnapshots x = TF.compute (TF.refKey x) "manage_ebs_snapshots"
+    computedManageEbsSnapshots x = TF.compute (TF.refKey x) "_computedManageEbsSnapshots"
 
 instance s ~ s' => P.HasComputedRootSnapshotId (TF.Ref s' (AmiResource s)) (TF.Attr s P.Text) where
-    computedRootSnapshotId x = TF.compute (TF.refKey x) "root_snapshot_id"
+    computedRootSnapshotId x = TF.compute (TF.refKey x) "_computedRootSnapshotId"
 
 -- | @aws_ami_copy@ Resource.
 --
@@ -1319,43 +1319,43 @@ instance P.HasTags (AmiCopyResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P
                           } :: AmiCopyResource s)
 
 instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (AmiCopyResource s)) (TF.Attr s P.Text) where
-    computedArchitecture x = TF.compute (TF.refKey x) "architecture"
+    computedArchitecture x = TF.compute (TF.refKey x) "_computedArchitecture"
 
 instance s ~ s' => P.HasComputedEbsBlockDevice (TF.Ref s' (AmiCopyResource s)) (TF.Attr s [TF.Attr s (EbsBlockDevice s)]) where
-    computedEbsBlockDevice x = TF.compute (TF.refKey x) "ebs_block_device"
+    computedEbsBlockDevice x = TF.compute (TF.refKey x) "_computedEbsBlockDevice"
 
 instance s ~ s' => P.HasComputedEnaSupport (TF.Ref s' (AmiCopyResource s)) (TF.Attr s P.Bool) where
-    computedEnaSupport x = TF.compute (TF.refKey x) "ena_support"
+    computedEnaSupport x = TF.compute (TF.refKey x) "_computedEnaSupport"
 
 instance s ~ s' => P.HasComputedEphemeralBlockDevice (TF.Ref s' (AmiCopyResource s)) (TF.Attr s [TF.Attr s (EphemeralBlockDevice s)]) where
-    computedEphemeralBlockDevice x = TF.compute (TF.refKey x) "ephemeral_block_device"
+    computedEphemeralBlockDevice x = TF.compute (TF.refKey x) "_computedEphemeralBlockDevice"
 
 instance s ~ s' => P.HasComputedImageLocation (TF.Ref s' (AmiCopyResource s)) (TF.Attr s P.Text) where
-    computedImageLocation x = TF.compute (TF.refKey x) "image_location"
+    computedImageLocation x = TF.compute (TF.refKey x) "_computedImageLocation"
 
 instance s ~ s' => P.HasComputedKernelId (TF.Ref s' (AmiCopyResource s)) (TF.Attr s P.Text) where
-    computedKernelId x = TF.compute (TF.refKey x) "kernel_id"
+    computedKernelId x = TF.compute (TF.refKey x) "_computedKernelId"
 
 instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (AmiCopyResource s)) (TF.Attr s P.Text) where
-    computedKmsKeyId x = TF.compute (TF.refKey x) "kms_key_id"
+    computedKmsKeyId x = TF.compute (TF.refKey x) "_computedKmsKeyId"
 
 instance s ~ s' => P.HasComputedManageEbsSnapshots (TF.Ref s' (AmiCopyResource s)) (TF.Attr s P.Bool) where
-    computedManageEbsSnapshots x = TF.compute (TF.refKey x) "manage_ebs_snapshots"
+    computedManageEbsSnapshots x = TF.compute (TF.refKey x) "_computedManageEbsSnapshots"
 
 instance s ~ s' => P.HasComputedRamdiskId (TF.Ref s' (AmiCopyResource s)) (TF.Attr s P.Text) where
-    computedRamdiskId x = TF.compute (TF.refKey x) "ramdisk_id"
+    computedRamdiskId x = TF.compute (TF.refKey x) "_computedRamdiskId"
 
 instance s ~ s' => P.HasComputedRootDeviceName (TF.Ref s' (AmiCopyResource s)) (TF.Attr s P.Text) where
-    computedRootDeviceName x = TF.compute (TF.refKey x) "root_device_name"
+    computedRootDeviceName x = TF.compute (TF.refKey x) "_computedRootDeviceName"
 
 instance s ~ s' => P.HasComputedRootSnapshotId (TF.Ref s' (AmiCopyResource s)) (TF.Attr s P.Text) where
-    computedRootSnapshotId x = TF.compute (TF.refKey x) "root_snapshot_id"
+    computedRootSnapshotId x = TF.compute (TF.refKey x) "_computedRootSnapshotId"
 
 instance s ~ s' => P.HasComputedSriovNetSupport (TF.Ref s' (AmiCopyResource s)) (TF.Attr s P.Text) where
-    computedSriovNetSupport x = TF.compute (TF.refKey x) "sriov_net_support"
+    computedSriovNetSupport x = TF.compute (TF.refKey x) "_computedSriovNetSupport"
 
 instance s ~ s' => P.HasComputedVirtualizationType (TF.Ref s' (AmiCopyResource s)) (TF.Attr s P.Text) where
-    computedVirtualizationType x = TF.compute (TF.refKey x) "virtualization_type"
+    computedVirtualizationType x = TF.compute (TF.refKey x) "_computedVirtualizationType"
 
 -- | @aws_ami_from_instance@ Resource.
 --
@@ -1433,40 +1433,40 @@ instance P.HasTags (AmiFromInstanceResource s) (TF.Attr s (P.HashMap P.Text (TF.
                           } :: AmiFromInstanceResource s)
 
 instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (AmiFromInstanceResource s)) (TF.Attr s P.Text) where
-    computedArchitecture x = TF.compute (TF.refKey x) "architecture"
+    computedArchitecture x = TF.compute (TF.refKey x) "_computedArchitecture"
 
 instance s ~ s' => P.HasComputedEbsBlockDevice (TF.Ref s' (AmiFromInstanceResource s)) (TF.Attr s [TF.Attr s (EbsBlockDevice s)]) where
-    computedEbsBlockDevice x = TF.compute (TF.refKey x) "ebs_block_device"
+    computedEbsBlockDevice x = TF.compute (TF.refKey x) "_computedEbsBlockDevice"
 
 instance s ~ s' => P.HasComputedEnaSupport (TF.Ref s' (AmiFromInstanceResource s)) (TF.Attr s P.Bool) where
-    computedEnaSupport x = TF.compute (TF.refKey x) "ena_support"
+    computedEnaSupport x = TF.compute (TF.refKey x) "_computedEnaSupport"
 
 instance s ~ s' => P.HasComputedEphemeralBlockDevice (TF.Ref s' (AmiFromInstanceResource s)) (TF.Attr s [TF.Attr s (EphemeralBlockDevice s)]) where
-    computedEphemeralBlockDevice x = TF.compute (TF.refKey x) "ephemeral_block_device"
+    computedEphemeralBlockDevice x = TF.compute (TF.refKey x) "_computedEphemeralBlockDevice"
 
 instance s ~ s' => P.HasComputedImageLocation (TF.Ref s' (AmiFromInstanceResource s)) (TF.Attr s P.Text) where
-    computedImageLocation x = TF.compute (TF.refKey x) "image_location"
+    computedImageLocation x = TF.compute (TF.refKey x) "_computedImageLocation"
 
 instance s ~ s' => P.HasComputedKernelId (TF.Ref s' (AmiFromInstanceResource s)) (TF.Attr s P.Text) where
-    computedKernelId x = TF.compute (TF.refKey x) "kernel_id"
+    computedKernelId x = TF.compute (TF.refKey x) "_computedKernelId"
 
 instance s ~ s' => P.HasComputedManageEbsSnapshots (TF.Ref s' (AmiFromInstanceResource s)) (TF.Attr s P.Bool) where
-    computedManageEbsSnapshots x = TF.compute (TF.refKey x) "manage_ebs_snapshots"
+    computedManageEbsSnapshots x = TF.compute (TF.refKey x) "_computedManageEbsSnapshots"
 
 instance s ~ s' => P.HasComputedRamdiskId (TF.Ref s' (AmiFromInstanceResource s)) (TF.Attr s P.Text) where
-    computedRamdiskId x = TF.compute (TF.refKey x) "ramdisk_id"
+    computedRamdiskId x = TF.compute (TF.refKey x) "_computedRamdiskId"
 
 instance s ~ s' => P.HasComputedRootDeviceName (TF.Ref s' (AmiFromInstanceResource s)) (TF.Attr s P.Text) where
-    computedRootDeviceName x = TF.compute (TF.refKey x) "root_device_name"
+    computedRootDeviceName x = TF.compute (TF.refKey x) "_computedRootDeviceName"
 
 instance s ~ s' => P.HasComputedRootSnapshotId (TF.Ref s' (AmiFromInstanceResource s)) (TF.Attr s P.Text) where
-    computedRootSnapshotId x = TF.compute (TF.refKey x) "root_snapshot_id"
+    computedRootSnapshotId x = TF.compute (TF.refKey x) "_computedRootSnapshotId"
 
 instance s ~ s' => P.HasComputedSriovNetSupport (TF.Ref s' (AmiFromInstanceResource s)) (TF.Attr s P.Text) where
-    computedSriovNetSupport x = TF.compute (TF.refKey x) "sriov_net_support"
+    computedSriovNetSupport x = TF.compute (TF.refKey x) "_computedSriovNetSupport"
 
 instance s ~ s' => P.HasComputedVirtualizationType (TF.Ref s' (AmiFromInstanceResource s)) (TF.Attr s P.Text) where
-    computedVirtualizationType x = TF.compute (TF.refKey x) "virtualization_type"
+    computedVirtualizationType x = TF.compute (TF.refKey x) "_computedVirtualizationType"
 
 -- | @aws_ami_launch_permission@ Resource.
 --
@@ -1539,8 +1539,8 @@ instance P.HasCloudwatchRoleArn (ApiGatewayAccountResource s) (TF.Attr s P.Text)
                (\s a -> s { _cloudwatchRoleArn = a
                           } :: ApiGatewayAccountResource s)
 
-instance s ~ s' => P.HasComputedThrottleSettings (TF.Ref s' (ApiGatewayAccountResource s)) (TF.Attr s [ThrottleSettings s]) where
-    computedThrottleSettings x = TF.compute (TF.refKey x) "throttle_settings"
+instance s ~ s' => P.HasComputedThrottleSettings (TF.Ref s' (ApiGatewayAccountResource s)) (TF.Attr s (ThrottleSettings s)) where
+    computedThrottleSettings x = TF.compute (TF.refKey x) "_computedThrottleSettings"
 
 -- | @aws_api_gateway_api_key@ Resource.
 --
@@ -1606,13 +1606,13 @@ instance P.HasStageKey (ApiGatewayApiKeyResource s) (TF.Attr s [TF.Attr s (Stage
                           } :: ApiGatewayApiKeyResource s)
 
 instance s ~ s' => P.HasComputedCreatedDate (TF.Ref s' (ApiGatewayApiKeyResource s)) (TF.Attr s P.Text) where
-    computedCreatedDate x = TF.compute (TF.refKey x) "created_date"
+    computedCreatedDate x = TF.compute (TF.refKey x) "_computedCreatedDate"
 
 instance s ~ s' => P.HasComputedLastUpdatedDate (TF.Ref s' (ApiGatewayApiKeyResource s)) (TF.Attr s P.Text) where
-    computedLastUpdatedDate x = TF.compute (TF.refKey x) "last_updated_date"
+    computedLastUpdatedDate x = TF.compute (TF.refKey x) "_computedLastUpdatedDate"
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (ApiGatewayApiKeyResource s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "value"
+    computedValue x = TF.compute (TF.refKey x) "_computedValue"
 
 -- | @aws_api_gateway_authorizer@ Resource.
 --
@@ -1827,13 +1827,13 @@ instance P.HasDescription (ApiGatewayClientCertificateResource s) (TF.Attr s P.T
                           } :: ApiGatewayClientCertificateResource s)
 
 instance s ~ s' => P.HasComputedCreatedDate (TF.Ref s' (ApiGatewayClientCertificateResource s)) (TF.Attr s P.Text) where
-    computedCreatedDate x = TF.compute (TF.refKey x) "created_date"
+    computedCreatedDate x = TF.compute (TF.refKey x) "_computedCreatedDate"
 
 instance s ~ s' => P.HasComputedExpirationDate (TF.Ref s' (ApiGatewayClientCertificateResource s)) (TF.Attr s P.Text) where
-    computedExpirationDate x = TF.compute (TF.refKey x) "expiration_date"
+    computedExpirationDate x = TF.compute (TF.refKey x) "_computedExpirationDate"
 
 instance s ~ s' => P.HasComputedPemEncodedCertificate (TF.Ref s' (ApiGatewayClientCertificateResource s)) (TF.Attr s P.Text) where
-    computedPemEncodedCertificate x = TF.compute (TF.refKey x) "pem_encoded_certificate"
+    computedPemEncodedCertificate x = TF.compute (TF.refKey x) "_computedPemEncodedCertificate"
 
 -- | @aws_api_gateway_deployment@ Resource.
 --
@@ -1911,20 +1911,20 @@ instance P.HasVariables (ApiGatewayDeploymentResource s) (TF.Attr s (P.HashMap P
                           } :: ApiGatewayDeploymentResource s)
 
 instance s ~ s' => P.HasComputedCreatedDate (TF.Ref s' (ApiGatewayDeploymentResource s)) (TF.Attr s P.Text) where
-    computedCreatedDate x = TF.compute (TF.refKey x) "created_date"
+    computedCreatedDate x = TF.compute (TF.refKey x) "_computedCreatedDate"
 
 instance s ~ s' => P.HasComputedExecutionArn (TF.Ref s' (ApiGatewayDeploymentResource s)) (TF.Attr s P.Text) where
-    computedExecutionArn x = TF.compute (TF.refKey x) "execution_arn"
+    computedExecutionArn x = TF.compute (TF.refKey x) "_computedExecutionArn"
 
 instance s ~ s' => P.HasComputedInvokeUrl (TF.Ref s' (ApiGatewayDeploymentResource s)) (TF.Attr s P.Text) where
-    computedInvokeUrl x = TF.compute (TF.refKey x) "invoke_url"
+    computedInvokeUrl x = TF.compute (TF.refKey x) "_computedInvokeUrl"
 
 -- | @aws_api_gateway_documentation_part@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_api_gateway_documentation_part terraform documentation>
 -- for more information.
 data ApiGatewayDocumentationPartResource s = ApiGatewayDocumentationPartResource'
-    { _location   :: TF.Attr s [Location s]
+    { _location   :: TF.Attr s (Location s)
     -- ^ @location@ - (Required)
     --
     , _properties :: TF.Attr s P.Text
@@ -1943,7 +1943,7 @@ instance TF.IsObject (ApiGatewayDocumentationPartResource s) where
         ]
 
 apiGatewayDocumentationPartResource
-    :: TF.Attr s [Location s] -- ^ @location@ - 'P.location'
+    :: TF.Attr s (Location s) -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @properties@ - 'P.properties'
     -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
     -> TF.Resource P.Provider (ApiGatewayDocumentationPartResource s)
@@ -1955,9 +1955,9 @@ apiGatewayDocumentationPartResource _location _properties _restApiId =
             , _restApiId = _restApiId
             }
 
-instance P.HasLocation (ApiGatewayDocumentationPartResource s) (TF.Attr s [Location s]) where
+instance P.HasLocation (ApiGatewayDocumentationPartResource s) (TF.Attr s (Location s)) where
     location =
-        P.lens (_location :: ApiGatewayDocumentationPartResource s -> TF.Attr s [Location s])
+        P.lens (_location :: ApiGatewayDocumentationPartResource s -> TF.Attr s (Location s))
                (\s a -> s { _location = a
                           } :: ApiGatewayDocumentationPartResource s)
 
@@ -2196,22 +2196,22 @@ instance P.HasRegionalCertificateName (ApiGatewayDomainNameResource s) (TF.Attr 
                           } :: ApiGatewayDomainNameResource s)
 
 instance s ~ s' => P.HasComputedCertificateUploadDate (TF.Ref s' (ApiGatewayDomainNameResource s)) (TF.Attr s P.Text) where
-    computedCertificateUploadDate x = TF.compute (TF.refKey x) "certificate_upload_date"
+    computedCertificateUploadDate x = TF.compute (TF.refKey x) "_computedCertificateUploadDate"
 
 instance s ~ s' => P.HasComputedCloudfrontDomainName (TF.Ref s' (ApiGatewayDomainNameResource s)) (TF.Attr s P.Text) where
-    computedCloudfrontDomainName x = TF.compute (TF.refKey x) "cloudfront_domain_name"
+    computedCloudfrontDomainName x = TF.compute (TF.refKey x) "_computedCloudfrontDomainName"
 
 instance s ~ s' => P.HasComputedCloudfrontZoneId (TF.Ref s' (ApiGatewayDomainNameResource s)) (TF.Attr s P.Text) where
-    computedCloudfrontZoneId x = TF.compute (TF.refKey x) "cloudfront_zone_id"
+    computedCloudfrontZoneId x = TF.compute (TF.refKey x) "_computedCloudfrontZoneId"
 
-instance s ~ s' => P.HasComputedEndpointConfiguration (TF.Ref s' (ApiGatewayDomainNameResource s)) (TF.Attr s (P.NonEmpty (EndpointConfiguration s))) where
-    computedEndpointConfiguration x = TF.compute (TF.refKey x) "endpoint_configuration"
+instance s ~ s' => P.HasComputedEndpointConfiguration (TF.Ref s' (ApiGatewayDomainNameResource s)) (TF.Attr s (EndpointConfiguration s)) where
+    computedEndpointConfiguration x = TF.compute (TF.refKey x) "_computedEndpointConfiguration"
 
 instance s ~ s' => P.HasComputedRegionalDomainName (TF.Ref s' (ApiGatewayDomainNameResource s)) (TF.Attr s P.Text) where
-    computedRegionalDomainName x = TF.compute (TF.refKey x) "regional_domain_name"
+    computedRegionalDomainName x = TF.compute (TF.refKey x) "_computedRegionalDomainName"
 
 instance s ~ s' => P.HasComputedRegionalZoneId (TF.Ref s' (ApiGatewayDomainNameResource s)) (TF.Attr s P.Text) where
-    computedRegionalZoneId x = TF.compute (TF.refKey x) "regional_zone_id"
+    computedRegionalZoneId x = TF.compute (TF.refKey x) "_computedRegionalZoneId"
 
 -- | @aws_api_gateway_gateway_response@ Resource.
 --
@@ -2484,10 +2484,10 @@ instance P.HasUri (ApiGatewayIntegrationResource s) (TF.Attr s P.Text) where
                           } :: ApiGatewayIntegrationResource s)
 
 instance s ~ s' => P.HasComputedCacheNamespace (TF.Ref s' (ApiGatewayIntegrationResource s)) (TF.Attr s P.Text) where
-    computedCacheNamespace x = TF.compute (TF.refKey x) "cache_namespace"
+    computedCacheNamespace x = TF.compute (TF.refKey x) "_computedCacheNamespace"
 
 instance s ~ s' => P.HasComputedPassthroughBehavior (TF.Ref s' (ApiGatewayIntegrationResource s)) (TF.Attr s P.Text) where
-    computedPassthroughBehavior x = TF.compute (TF.refKey x) "passthrough_behavior"
+    computedPassthroughBehavior x = TF.compute (TF.refKey x) "_computedPassthroughBehavior"
 
 -- | @aws_api_gateway_integration_response@ Resource.
 --
@@ -2887,7 +2887,7 @@ data ApiGatewayMethodSettingsResource s = ApiGatewayMethodSettingsResource'
     , _restApiId  :: TF.Attr s P.Text
     -- ^ @rest_api_id@ - (Required)
     --
-    , _settings   :: TF.Attr s [Settings s]
+    , _settings   :: TF.Attr s (Settings s)
     -- ^ @settings@ - (Required)
     --
     , _stageName  :: TF.Attr s P.Text
@@ -2906,7 +2906,7 @@ instance TF.IsObject (ApiGatewayMethodSettingsResource s) where
 apiGatewayMethodSettingsResource
     :: TF.Attr s P.Text -- ^ @method_path@ - 'P.methodPath'
     -> TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
-    -> TF.Attr s [Settings s] -- ^ @settings@ - 'P.settings'
+    -> TF.Attr s (Settings s) -- ^ @settings@ - 'P.settings'
     -> TF.Attr s P.Text -- ^ @stage_name@ - 'P.stageName'
     -> TF.Resource P.Provider (ApiGatewayMethodSettingsResource s)
 apiGatewayMethodSettingsResource _methodPath _restApiId _settings _stageName =
@@ -2930,9 +2930,9 @@ instance P.HasRestApiId (ApiGatewayMethodSettingsResource s) (TF.Attr s P.Text) 
                (\s a -> s { _restApiId = a
                           } :: ApiGatewayMethodSettingsResource s)
 
-instance P.HasSettings (ApiGatewayMethodSettingsResource s) (TF.Attr s [Settings s]) where
+instance P.HasSettings (ApiGatewayMethodSettingsResource s) (TF.Attr s (Settings s)) where
     settings =
-        P.lens (_settings :: ApiGatewayMethodSettingsResource s -> TF.Attr s [Settings s])
+        P.lens (_settings :: ApiGatewayMethodSettingsResource s -> TF.Attr s (Settings s))
                (\s a -> s { _settings = a
                           } :: ApiGatewayMethodSettingsResource s)
 
@@ -3137,7 +3137,7 @@ instance P.HasRestApiId (ApiGatewayResourceResource s) (TF.Attr s P.Text) where
                           } :: ApiGatewayResourceResource s)
 
 instance s ~ s' => P.HasComputedPath (TF.Ref s' (ApiGatewayResourceResource s)) (TF.Attr s P.Text) where
-    computedPath x = TF.compute (TF.refKey x) "path"
+    computedPath x = TF.compute (TF.refKey x) "_computedPath"
 
 -- | @aws_api_gateway_rest_api@ Resource.
 --
@@ -3236,23 +3236,23 @@ instance P.HasPolicy (ApiGatewayRestApiResource s) (TF.Attr s P.Text) where
                           } :: ApiGatewayRestApiResource s)
 
 instance s ~ s' => P.HasComputedCreatedDate (TF.Ref s' (ApiGatewayRestApiResource s)) (TF.Attr s P.Text) where
-    computedCreatedDate x = TF.compute (TF.refKey x) "created_date"
+    computedCreatedDate x = TF.compute (TF.refKey x) "_computedCreatedDate"
 
-instance s ~ s' => P.HasComputedEndpointConfiguration (TF.Ref s' (ApiGatewayRestApiResource s)) (TF.Attr s (P.NonEmpty (EndpointConfiguration s))) where
-    computedEndpointConfiguration x = TF.compute (TF.refKey x) "endpoint_configuration"
+instance s ~ s' => P.HasComputedEndpointConfiguration (TF.Ref s' (ApiGatewayRestApiResource s)) (TF.Attr s (EndpointConfiguration s)) where
+    computedEndpointConfiguration x = TF.compute (TF.refKey x) "_computedEndpointConfiguration"
 
 instance s ~ s' => P.HasComputedExecutionArn (TF.Ref s' (ApiGatewayRestApiResource s)) (TF.Attr s P.Text) where
-    computedExecutionArn x = TF.compute (TF.refKey x) "execution_arn"
+    computedExecutionArn x = TF.compute (TF.refKey x) "_computedExecutionArn"
 
 instance s ~ s' => P.HasComputedRootResourceId (TF.Ref s' (ApiGatewayRestApiResource s)) (TF.Attr s P.Text) where
-    computedRootResourceId x = TF.compute (TF.refKey x) "root_resource_id"
+    computedRootResourceId x = TF.compute (TF.refKey x) "_computedRootResourceId"
 
 -- | @aws_api_gateway_stage@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_api_gateway_stage terraform documentation>
 -- for more information.
 data ApiGatewayStageResource s = ApiGatewayStageResource'
-    { _accessLogSettings    :: TF.Attr s [AccessLogSettings s]
+    { _accessLogSettings    :: TF.Attr s (AccessLogSettings s)
     -- ^ @access_log_settings@ - (Optional)
     --
     , _cacheClusterEnabled  :: TF.Attr s P.Bool
@@ -3323,9 +3323,9 @@ apiGatewayStageResource _deploymentId _restApiId _stageName =
             , _variables = TF.Nil
             }
 
-instance P.HasAccessLogSettings (ApiGatewayStageResource s) (TF.Attr s [AccessLogSettings s]) where
+instance P.HasAccessLogSettings (ApiGatewayStageResource s) (TF.Attr s (AccessLogSettings s)) where
     accessLogSettings =
-        P.lens (_accessLogSettings :: ApiGatewayStageResource s -> TF.Attr s [AccessLogSettings s])
+        P.lens (_accessLogSettings :: ApiGatewayStageResource s -> TF.Attr s (AccessLogSettings s))
                (\s a -> s { _accessLogSettings = a
                           } :: ApiGatewayStageResource s)
 
@@ -3390,10 +3390,10 @@ instance P.HasVariables (ApiGatewayStageResource s) (TF.Attr s (P.HashMap P.Text
                           } :: ApiGatewayStageResource s)
 
 instance s ~ s' => P.HasComputedExecutionArn (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
-    computedExecutionArn x = TF.compute (TF.refKey x) "execution_arn"
+    computedExecutionArn x = TF.compute (TF.refKey x) "_computedExecutionArn"
 
 instance s ~ s' => P.HasComputedInvokeUrl (TF.Ref s' (ApiGatewayStageResource s)) (TF.Attr s P.Text) where
-    computedInvokeUrl x = TF.compute (TF.refKey x) "invoke_url"
+    computedInvokeUrl x = TF.compute (TF.refKey x) "_computedInvokeUrl"
 
 -- | @aws_api_gateway_usage_plan@ Resource.
 --
@@ -3535,10 +3535,10 @@ instance P.HasUsagePlanId (ApiGatewayUsagePlanKeyResource s) (TF.Attr s P.Text) 
                           } :: ApiGatewayUsagePlanKeyResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ApiGatewayUsagePlanKeyResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (ApiGatewayUsagePlanKeyResource s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "value"
+    computedValue x = TF.compute (TF.refKey x) "_computedValue"
 
 -- | @aws_api_gateway_vpc_link@ Resource.
 --
@@ -3700,7 +3700,7 @@ data AppautoscalingPolicyResource s = AppautoscalingPolicyResource'
     , _stepScalingPolicyConfiguration :: TF.Attr s [StepScalingPolicyConfiguration s]
     -- ^ @step_scaling_policy_configuration@ - (Optional)
     --
-    , _targetTrackingScalingPolicyConfiguration :: TF.Attr s [TargetTrackingScalingPolicyConfiguration s]
+    , _targetTrackingScalingPolicyConfiguration :: TF.Attr s (TargetTrackingScalingPolicyConfiguration s)
     -- ^ @target_tracking_scaling_policy_configuration@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3818,14 +3818,14 @@ instance P.HasStepScalingPolicyConfiguration (AppautoscalingPolicyResource s) (T
                (\s a -> s { _stepScalingPolicyConfiguration = a
                           } :: AppautoscalingPolicyResource s)
 
-instance P.HasTargetTrackingScalingPolicyConfiguration (AppautoscalingPolicyResource s) (TF.Attr s [TargetTrackingScalingPolicyConfiguration s]) where
+instance P.HasTargetTrackingScalingPolicyConfiguration (AppautoscalingPolicyResource s) (TF.Attr s (TargetTrackingScalingPolicyConfiguration s)) where
     targetTrackingScalingPolicyConfiguration =
-        P.lens (_targetTrackingScalingPolicyConfiguration :: AppautoscalingPolicyResource s -> TF.Attr s [TargetTrackingScalingPolicyConfiguration s])
+        P.lens (_targetTrackingScalingPolicyConfiguration :: AppautoscalingPolicyResource s -> TF.Attr s (TargetTrackingScalingPolicyConfiguration s))
                (\s a -> s { _targetTrackingScalingPolicyConfiguration = a
                           } :: AppautoscalingPolicyResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AppautoscalingPolicyResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 -- | @aws_appautoscaling_scheduled_action@ Resource.
 --
@@ -3844,7 +3844,7 @@ data AppautoscalingScheduledActionResource s = AppautoscalingScheduledActionReso
     , _scalableDimension    :: TF.Attr s P.Text
     -- ^ @scalable_dimension@ - (Optional)
     --
-    , _scalableTargetAction :: TF.Attr s [ScalableTargetAction s]
+    , _scalableTargetAction :: TF.Attr s (ScalableTargetAction s)
     -- ^ @scalable_target_action@ - (Optional)
     --
     , _schedule             :: TF.Attr s P.Text
@@ -3912,9 +3912,9 @@ instance P.HasScalableDimension (AppautoscalingScheduledActionResource s) (TF.At
                (\s a -> s { _scalableDimension = a
                           } :: AppautoscalingScheduledActionResource s)
 
-instance P.HasScalableTargetAction (AppautoscalingScheduledActionResource s) (TF.Attr s [ScalableTargetAction s]) where
+instance P.HasScalableTargetAction (AppautoscalingScheduledActionResource s) (TF.Attr s (ScalableTargetAction s)) where
     scalableTargetAction =
-        P.lens (_scalableTargetAction :: AppautoscalingScheduledActionResource s -> TF.Attr s [ScalableTargetAction s])
+        P.lens (_scalableTargetAction :: AppautoscalingScheduledActionResource s -> TF.Attr s (ScalableTargetAction s))
                (\s a -> s { _scalableTargetAction = a
                           } :: AppautoscalingScheduledActionResource s)
 
@@ -3937,7 +3937,7 @@ instance P.HasStartTime (AppautoscalingScheduledActionResource s) (TF.Attr s P.T
                           } :: AppautoscalingScheduledActionResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AppautoscalingScheduledActionResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 -- | @aws_appautoscaling_target@ Resource.
 --
@@ -4018,7 +4018,7 @@ instance P.HasServiceNamespace (AppautoscalingTargetResource s) (TF.Attr s P.Tex
                           } :: AppautoscalingTargetResource s)
 
 instance s ~ s' => P.HasComputedRoleArn (TF.Ref s' (AppautoscalingTargetResource s)) (TF.Attr s P.Text) where
-    computedRoleArn x = TF.compute (TF.refKey x) "role_arn"
+    computedRoleArn x = TF.compute (TF.refKey x) "_computedRoleArn"
 
 -- | @aws_appsync_api_key@ Resource.
 --
@@ -4073,7 +4073,7 @@ instance P.HasExpires (AppsyncApiKeyResource s) (TF.Attr s P.Text) where
                           } :: AppsyncApiKeyResource s)
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (AppsyncApiKeyResource s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "key"
+    computedKey x = TF.compute (TF.refKey x) "_computedKey"
 
 -- | @aws_appsync_datasource@ Resource.
 --
@@ -4086,21 +4086,21 @@ data AppsyncDatasourceResource s = AppsyncDatasourceResource'
     , _description         :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _dynamodbConfig      :: TF.Attr s [DynamodbConfig s]
+    , _dynamodbConfig      :: TF.Attr s (DynamodbConfig s)
     -- ^ @dynamodb_config@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'lambdaConfig'
     -- * 'elasticsearchConfig'
-    , _elasticsearchConfig :: TF.Attr s [ElasticsearchConfig s]
+    , _elasticsearchConfig :: TF.Attr s (ElasticsearchConfig s)
     -- ^ @elasticsearch_config@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'lambdaConfig'
     -- * 'dynamodbConfig'
-    , _lambdaConfig        :: TF.Attr s [LambdaConfig s]
+    , _lambdaConfig        :: TF.Attr s (LambdaConfig s)
     -- ^ @lambda_config@ - (Optional)
     --
     -- Conflicts with:
@@ -4160,25 +4160,25 @@ instance P.HasDescription (AppsyncDatasourceResource s) (TF.Attr s P.Text) where
                (\s a -> s { _description = a
                           } :: AppsyncDatasourceResource s)
 
-instance P.HasDynamodbConfig (AppsyncDatasourceResource s) (TF.Attr s [DynamodbConfig s]) where
+instance P.HasDynamodbConfig (AppsyncDatasourceResource s) (TF.Attr s (DynamodbConfig s)) where
     dynamodbConfig =
-        P.lens (_dynamodbConfig :: AppsyncDatasourceResource s -> TF.Attr s [DynamodbConfig s])
+        P.lens (_dynamodbConfig :: AppsyncDatasourceResource s -> TF.Attr s (DynamodbConfig s))
                (\s a -> s { _dynamodbConfig = a
                           , _lambdaConfig = TF.Nil
                           , _elasticsearchConfig = TF.Nil
                           } :: AppsyncDatasourceResource s)
 
-instance P.HasElasticsearchConfig (AppsyncDatasourceResource s) (TF.Attr s [ElasticsearchConfig s]) where
+instance P.HasElasticsearchConfig (AppsyncDatasourceResource s) (TF.Attr s (ElasticsearchConfig s)) where
     elasticsearchConfig =
-        P.lens (_elasticsearchConfig :: AppsyncDatasourceResource s -> TF.Attr s [ElasticsearchConfig s])
+        P.lens (_elasticsearchConfig :: AppsyncDatasourceResource s -> TF.Attr s (ElasticsearchConfig s))
                (\s a -> s { _elasticsearchConfig = a
                           , _lambdaConfig = TF.Nil
                           , _dynamodbConfig = TF.Nil
                           } :: AppsyncDatasourceResource s)
 
-instance P.HasLambdaConfig (AppsyncDatasourceResource s) (TF.Attr s [LambdaConfig s]) where
+instance P.HasLambdaConfig (AppsyncDatasourceResource s) (TF.Attr s (LambdaConfig s)) where
     lambdaConfig =
-        P.lens (_lambdaConfig :: AppsyncDatasourceResource s -> TF.Attr s [LambdaConfig s])
+        P.lens (_lambdaConfig :: AppsyncDatasourceResource s -> TF.Attr s (LambdaConfig s))
                (\s a -> s { _lambdaConfig = a
                           , _dynamodbConfig = TF.Nil
                           , _elasticsearchConfig = TF.Nil
@@ -4203,7 +4203,7 @@ instance P.HasType' (AppsyncDatasourceResource s) (TF.Attr s P.Text) where
                           } :: AppsyncDatasourceResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AppsyncDatasourceResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 -- | @aws_appsync_graphql_api@ Resource.
 --
@@ -4216,7 +4216,7 @@ data AppsyncGraphqlApiResource s = AppsyncGraphqlApiResource'
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _userPoolConfig     :: TF.Attr s [UserPoolConfig s]
+    , _userPoolConfig     :: TF.Attr s (UserPoolConfig s)
     -- ^ @user_pool_config@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4252,14 +4252,14 @@ instance P.HasName (AppsyncGraphqlApiResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: AppsyncGraphqlApiResource s)
 
-instance P.HasUserPoolConfig (AppsyncGraphqlApiResource s) (TF.Attr s [UserPoolConfig s]) where
+instance P.HasUserPoolConfig (AppsyncGraphqlApiResource s) (TF.Attr s (UserPoolConfig s)) where
     userPoolConfig =
-        P.lens (_userPoolConfig :: AppsyncGraphqlApiResource s -> TF.Attr s [UserPoolConfig s])
+        P.lens (_userPoolConfig :: AppsyncGraphqlApiResource s -> TF.Attr s (UserPoolConfig s))
                (\s a -> s { _userPoolConfig = a
                           } :: AppsyncGraphqlApiResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AppsyncGraphqlApiResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 -- | @aws_athena_database@ Resource.
 --
@@ -4454,7 +4454,7 @@ data AutoscalingGroupResource s = AutoscalingGroupResource'
     -- Conflicts with:
     --
     -- * 'launchTemplate'
-    , _launchTemplate :: TF.Attr s [LaunchTemplate s]
+    , _launchTemplate :: TF.Attr s (LaunchTemplate s)
     -- ^ @launch_template@ - (Optional)
     --
     -- Conflicts with:
@@ -4589,9 +4589,9 @@ instance P.HasLaunchConfiguration (AutoscalingGroupResource s) (TF.Attr s P.Text
                           , _launchTemplate = TF.Nil
                           } :: AutoscalingGroupResource s)
 
-instance P.HasLaunchTemplate (AutoscalingGroupResource s) (TF.Attr s [LaunchTemplate s]) where
+instance P.HasLaunchTemplate (AutoscalingGroupResource s) (TF.Attr s (LaunchTemplate s)) where
     launchTemplate =
-        P.lens (_launchTemplate :: AutoscalingGroupResource s -> TF.Attr s [LaunchTemplate s])
+        P.lens (_launchTemplate :: AutoscalingGroupResource s -> TF.Attr s (LaunchTemplate s))
                (\s a -> s { _launchTemplate = a
                           , _launchConfiguration = TF.Nil
                           } :: AutoscalingGroupResource s)
@@ -4677,34 +4677,34 @@ instance P.HasWaitForElbCapacity (AutoscalingGroupResource s) (TF.Attr s P.Integ
                           } :: AutoscalingGroupResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedAvailabilityZones x = TF.compute (TF.refKey x) "availability_zones"
+    computedAvailabilityZones x = TF.compute (TF.refKey x) "_computedAvailabilityZones"
 
 instance s ~ s' => P.HasComputedDefaultCooldown (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Integer) where
-    computedDefaultCooldown x = TF.compute (TF.refKey x) "default_cooldown"
+    computedDefaultCooldown x = TF.compute (TF.refKey x) "_computedDefaultCooldown"
 
 instance s ~ s' => P.HasComputedDesiredCapacity (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Integer) where
-    computedDesiredCapacity x = TF.compute (TF.refKey x) "desired_capacity"
+    computedDesiredCapacity x = TF.compute (TF.refKey x) "_computedDesiredCapacity"
 
 instance s ~ s' => P.HasComputedHealthCheckType (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedHealthCheckType x = TF.compute (TF.refKey x) "health_check_type"
+    computedHealthCheckType x = TF.compute (TF.refKey x) "_computedHealthCheckType"
 
 instance s ~ s' => P.HasComputedLoadBalancers (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedLoadBalancers x = TF.compute (TF.refKey x) "load_balancers"
+    computedLoadBalancers x = TF.compute (TF.refKey x) "_computedLoadBalancers"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedServiceLinkedRoleArn (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
-    computedServiceLinkedRoleArn x = TF.compute (TF.refKey x) "service_linked_role_arn"
+    computedServiceLinkedRoleArn x = TF.compute (TF.refKey x) "_computedServiceLinkedRoleArn"
 
 instance s ~ s' => P.HasComputedTargetGroupArns (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedTargetGroupArns x = TF.compute (TF.refKey x) "target_group_arns"
+    computedTargetGroupArns x = TF.compute (TF.refKey x) "_computedTargetGroupArns"
 
 instance s ~ s' => P.HasComputedVpcZoneIdentifier (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedVpcZoneIdentifier x = TF.compute (TF.refKey x) "vpc_zone_identifier"
+    computedVpcZoneIdentifier x = TF.compute (TF.refKey x) "_computedVpcZoneIdentifier"
 
 -- | @aws_autoscaling_lifecycle_hook@ Resource.
 --
@@ -4805,7 +4805,7 @@ instance P.HasRoleArn (AutoscalingLifecycleHookResource s) (TF.Attr s P.Text) wh
                           } :: AutoscalingLifecycleHookResource s)
 
 instance s ~ s' => P.HasComputedDefaultResult (TF.Ref s' (AutoscalingLifecycleHookResource s)) (TF.Attr s P.Text) where
-    computedDefaultResult x = TF.compute (TF.refKey x) "default_result"
+    computedDefaultResult x = TF.compute (TF.refKey x) "_computedDefaultResult"
 
 -- | @aws_autoscaling_notification@ Resource.
 --
@@ -4908,7 +4908,7 @@ data AutoscalingPolicyResource s = AutoscalingPolicyResource'
     -- Conflicts with:
     --
     -- * 'scalingAdjustment'
-    , _targetTrackingConfiguration :: TF.Attr s [TargetTrackingConfiguration s]
+    , _targetTrackingConfiguration :: TF.Attr s (TargetTrackingConfiguration s)
     -- ^ @target_tracking_configuration@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5012,17 +5012,17 @@ instance P.HasStepAdjustment (AutoscalingPolicyResource s) (TF.Attr s [TF.Attr s
                           , _scalingAdjustment = TF.Nil
                           } :: AutoscalingPolicyResource s)
 
-instance P.HasTargetTrackingConfiguration (AutoscalingPolicyResource s) (TF.Attr s [TargetTrackingConfiguration s]) where
+instance P.HasTargetTrackingConfiguration (AutoscalingPolicyResource s) (TF.Attr s (TargetTrackingConfiguration s)) where
     targetTrackingConfiguration =
-        P.lens (_targetTrackingConfiguration :: AutoscalingPolicyResource s -> TF.Attr s [TargetTrackingConfiguration s])
+        P.lens (_targetTrackingConfiguration :: AutoscalingPolicyResource s -> TF.Attr s (TargetTrackingConfiguration s))
                (\s a -> s { _targetTrackingConfiguration = a
                           } :: AutoscalingPolicyResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AutoscalingPolicyResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedMetricAggregationType (TF.Ref s' (AutoscalingPolicyResource s)) (TF.Attr s P.Text) where
-    computedMetricAggregationType x = TF.compute (TF.refKey x) "metric_aggregation_type"
+    computedMetricAggregationType x = TF.compute (TF.refKey x) "_computedMetricAggregationType"
 
 -- | @aws_autoscaling_schedule@ Resource.
 --
@@ -5067,25 +5067,25 @@ instance P.HasScheduledActionName (AutoscalingScheduleResource s) (TF.Attr s P.T
                           } :: AutoscalingScheduleResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedDesiredCapacity (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Integer) where
-    computedDesiredCapacity x = TF.compute (TF.refKey x) "desired_capacity"
+    computedDesiredCapacity x = TF.compute (TF.refKey x) "_computedDesiredCapacity"
 
 instance s ~ s' => P.HasComputedEndTime (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
-    computedEndTime x = TF.compute (TF.refKey x) "end_time"
+    computedEndTime x = TF.compute (TF.refKey x) "_computedEndTime"
 
 instance s ~ s' => P.HasComputedMaxSize (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Integer) where
-    computedMaxSize x = TF.compute (TF.refKey x) "max_size"
+    computedMaxSize x = TF.compute (TF.refKey x) "_computedMaxSize"
 
 instance s ~ s' => P.HasComputedMinSize (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Integer) where
-    computedMinSize x = TF.compute (TF.refKey x) "min_size"
+    computedMinSize x = TF.compute (TF.refKey x) "_computedMinSize"
 
 instance s ~ s' => P.HasComputedRecurrence (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
-    computedRecurrence x = TF.compute (TF.refKey x) "recurrence"
+    computedRecurrence x = TF.compute (TF.refKey x) "_computedRecurrence"
 
 instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (AutoscalingScheduleResource s)) (TF.Attr s P.Text) where
-    computedStartTime x = TF.compute (TF.refKey x) "start_time"
+    computedStartTime x = TF.compute (TF.refKey x) "_computedStartTime"
 
 -- | @aws_batch_compute_environment@ Resource.
 --
@@ -5095,7 +5095,7 @@ data BatchComputeEnvironmentResource s = BatchComputeEnvironmentResource'
     { _computeEnvironmentName :: TF.Attr s P.Text
     -- ^ @compute_environment_name@ - (Required)
     --
-    , _computeResources       :: TF.Attr s [ComputeResources s]
+    , _computeResources       :: TF.Attr s (ComputeResources s)
     -- ^ @compute_resources@ - (Optional)
     --
     , _serviceRole            :: TF.Attr s P.Text
@@ -5139,9 +5139,9 @@ instance P.HasComputeEnvironmentName (BatchComputeEnvironmentResource s) (TF.Att
                (\s a -> s { _computeEnvironmentName = a
                           } :: BatchComputeEnvironmentResource s)
 
-instance P.HasComputeResources (BatchComputeEnvironmentResource s) (TF.Attr s [ComputeResources s]) where
+instance P.HasComputeResources (BatchComputeEnvironmentResource s) (TF.Attr s (ComputeResources s)) where
     computeResources =
-        P.lens (_computeResources :: BatchComputeEnvironmentResource s -> TF.Attr s [ComputeResources s])
+        P.lens (_computeResources :: BatchComputeEnvironmentResource s -> TF.Attr s (ComputeResources s))
                (\s a -> s { _computeResources = a
                           } :: BatchComputeEnvironmentResource s)
 
@@ -5164,19 +5164,19 @@ instance P.HasType' (BatchComputeEnvironmentResource s) (TF.Attr s P.Text) where
                           } :: BatchComputeEnvironmentResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (BatchComputeEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedEccClusterArn (TF.Ref s' (BatchComputeEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedEccClusterArn x = TF.compute (TF.refKey x) "ecc_cluster_arn"
+    computedEccClusterArn x = TF.compute (TF.refKey x) "_computedEccClusterArn"
 
 instance s ~ s' => P.HasComputedEcsClusterArn (TF.Ref s' (BatchComputeEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedEcsClusterArn x = TF.compute (TF.refKey x) "ecs_cluster_arn"
+    computedEcsClusterArn x = TF.compute (TF.refKey x) "_computedEcsClusterArn"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (BatchComputeEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 instance s ~ s' => P.HasComputedStatusReason (TF.Ref s' (BatchComputeEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedStatusReason x = TF.compute (TF.refKey x) "status_reason"
+    computedStatusReason x = TF.compute (TF.refKey x) "_computedStatusReason"
 
 -- | @aws_batch_job_definition@ Resource.
 --
@@ -5192,10 +5192,10 @@ data BatchJobDefinitionResource s = BatchJobDefinitionResource'
     , _parameters          :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @parameters@ - (Optional)
     --
-    , _retryStrategy       :: TF.Attr s [RetryStrategy s]
+    , _retryStrategy       :: TF.Attr s (RetryStrategy s)
     -- ^ @retry_strategy@ - (Optional)
     --
-    , _timeout             :: TF.Attr s [Timeout s]
+    , _timeout             :: TF.Attr s (Timeout s)
     -- ^ @timeout@ - (Optional)
     --
     , _type'               :: TF.Attr s P.Text
@@ -5246,15 +5246,15 @@ instance P.HasParameters (BatchJobDefinitionResource s) (TF.Attr s (P.HashMap P.
                (\s a -> s { _parameters = a
                           } :: BatchJobDefinitionResource s)
 
-instance P.HasRetryStrategy (BatchJobDefinitionResource s) (TF.Attr s [RetryStrategy s]) where
+instance P.HasRetryStrategy (BatchJobDefinitionResource s) (TF.Attr s (RetryStrategy s)) where
     retryStrategy =
-        P.lens (_retryStrategy :: BatchJobDefinitionResource s -> TF.Attr s [RetryStrategy s])
+        P.lens (_retryStrategy :: BatchJobDefinitionResource s -> TF.Attr s (RetryStrategy s))
                (\s a -> s { _retryStrategy = a
                           } :: BatchJobDefinitionResource s)
 
-instance P.HasTimeout (BatchJobDefinitionResource s) (TF.Attr s [Timeout s]) where
+instance P.HasTimeout (BatchJobDefinitionResource s) (TF.Attr s (Timeout s)) where
     timeout =
-        P.lens (_timeout :: BatchJobDefinitionResource s -> TF.Attr s [Timeout s])
+        P.lens (_timeout :: BatchJobDefinitionResource s -> TF.Attr s (Timeout s))
                (\s a -> s { _timeout = a
                           } :: BatchJobDefinitionResource s)
 
@@ -5265,10 +5265,10 @@ instance P.HasType' (BatchJobDefinitionResource s) (TF.Attr s P.Text) where
                           } :: BatchJobDefinitionResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (BatchJobDefinitionResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedRevision (TF.Ref s' (BatchJobDefinitionResource s)) (TF.Attr s P.Integer) where
-    computedRevision x = TF.compute (TF.refKey x) "revision"
+    computedRevision x = TF.compute (TF.refKey x) "_computedRevision"
 
 -- | @aws_batch_job_queue@ Resource.
 --
@@ -5337,7 +5337,7 @@ instance P.HasState (BatchJobQueueResource s) (TF.Attr s P.Text) where
                           } :: BatchJobQueueResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (BatchJobQueueResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 -- | @aws_budgets_budget@ Resource.
 --
@@ -5429,19 +5429,19 @@ instance P.HasTimeUnit (BudgetsBudgetResource s) (TF.Attr s P.Text) where
                           } :: BudgetsBudgetResource s)
 
 instance s ~ s' => P.HasComputedAccountId (TF.Ref s' (BudgetsBudgetResource s)) (TF.Attr s P.Text) where
-    computedAccountId x = TF.compute (TF.refKey x) "account_id"
+    computedAccountId x = TF.compute (TF.refKey x) "_computedAccountId"
 
 instance s ~ s' => P.HasComputedCostFilters (TF.Ref s' (BudgetsBudgetResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedCostFilters x = TF.compute (TF.refKey x) "cost_filters"
+    computedCostFilters x = TF.compute (TF.refKey x) "_computedCostFilters"
 
-instance s ~ s' => P.HasComputedCostTypes (TF.Ref s' (BudgetsBudgetResource s)) (TF.Attr s [CostTypes s]) where
-    computedCostTypes x = TF.compute (TF.refKey x) "cost_types"
+instance s ~ s' => P.HasComputedCostTypes (TF.Ref s' (BudgetsBudgetResource s)) (TF.Attr s (CostTypes s)) where
+    computedCostTypes x = TF.compute (TF.refKey x) "_computedCostTypes"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (BudgetsBudgetResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (BudgetsBudgetResource s)) (TF.Attr s P.Text) where
-    computedNamePrefix x = TF.compute (TF.refKey x) "name_prefix"
+    computedNamePrefix x = TF.compute (TF.refKey x) "_computedNamePrefix"
 
 -- | @aws_cloud9_environment_ec2@ Resource.
 --
@@ -5519,13 +5519,13 @@ instance P.HasSubnetId (Cloud9EnvironmentEc2Resource s) (TF.Attr s P.Text) where
                           } :: Cloud9EnvironmentEc2Resource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (Cloud9EnvironmentEc2Resource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedOwnerArn (TF.Ref s' (Cloud9EnvironmentEc2Resource s)) (TF.Attr s P.Text) where
-    computedOwnerArn x = TF.compute (TF.refKey x) "owner_arn"
+    computedOwnerArn x = TF.compute (TF.refKey x) "_computedOwnerArn"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (Cloud9EnvironmentEc2Resource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (Cloud9EnvironmentEc2Resource s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 -- | @aws_cloudformation_stack@ Resource.
 --
@@ -5657,16 +5657,16 @@ instance P.HasTimeoutInMinutes (CloudformationStackResource s) (TF.Attr s P.Inte
                           } :: CloudformationStackResource s)
 
 instance s ~ s' => P.HasComputedOutputs (TF.Ref s' (CloudformationStackResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedOutputs x = TF.compute (TF.refKey x) "outputs"
+    computedOutputs x = TF.compute (TF.refKey x) "_computedOutputs"
 
 instance s ~ s' => P.HasComputedParameters (TF.Ref s' (CloudformationStackResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedParameters x = TF.compute (TF.refKey x) "parameters"
+    computedParameters x = TF.compute (TF.refKey x) "_computedParameters"
 
 instance s ~ s' => P.HasComputedPolicyBody (TF.Ref s' (CloudformationStackResource s)) (TF.Attr s P.Text) where
-    computedPolicyBody x = TF.compute (TF.refKey x) "policy_body"
+    computedPolicyBody x = TF.compute (TF.refKey x) "_computedPolicyBody"
 
 instance s ~ s' => P.HasComputedTemplateBody (TF.Ref s' (CloudformationStackResource s)) (TF.Attr s P.Text) where
-    computedTemplateBody x = TF.compute (TF.refKey x) "template_body"
+    computedTemplateBody x = TF.compute (TF.refKey x) "_computedTemplateBody"
 
 -- | @aws_cloudfront_distribution@ Resource.
 --
@@ -5898,31 +5898,31 @@ instance P.HasWebAclId (CloudfrontDistributionResource s) (TF.Attr s P.Text) whe
                           } :: CloudfrontDistributionResource s)
 
 instance s ~ s' => P.HasComputedActiveTrustedSigners (TF.Ref s' (CloudfrontDistributionResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedActiveTrustedSigners x = TF.compute (TF.refKey x) "active_trusted_signers"
+    computedActiveTrustedSigners x = TF.compute (TF.refKey x) "_computedActiveTrustedSigners"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudfrontDistributionResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedCallerReference (TF.Ref s' (CloudfrontDistributionResource s)) (TF.Attr s P.Text) where
-    computedCallerReference x = TF.compute (TF.refKey x) "caller_reference"
+    computedCallerReference x = TF.compute (TF.refKey x) "_computedCallerReference"
 
 instance s ~ s' => P.HasComputedDomainName (TF.Ref s' (CloudfrontDistributionResource s)) (TF.Attr s P.Text) where
-    computedDomainName x = TF.compute (TF.refKey x) "domain_name"
+    computedDomainName x = TF.compute (TF.refKey x) "_computedDomainName"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (CloudfrontDistributionResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedHostedZoneId (TF.Ref s' (CloudfrontDistributionResource s)) (TF.Attr s P.Text) where
-    computedHostedZoneId x = TF.compute (TF.refKey x) "hosted_zone_id"
+    computedHostedZoneId x = TF.compute (TF.refKey x) "_computedHostedZoneId"
 
 instance s ~ s' => P.HasComputedInProgressValidationBatches (TF.Ref s' (CloudfrontDistributionResource s)) (TF.Attr s P.Integer) where
-    computedInProgressValidationBatches x = TF.compute (TF.refKey x) "in_progress_validation_batches"
+    computedInProgressValidationBatches x = TF.compute (TF.refKey x) "_computedInProgressValidationBatches"
 
 instance s ~ s' => P.HasComputedLastModifiedTime (TF.Ref s' (CloudfrontDistributionResource s)) (TF.Attr s P.Text) where
-    computedLastModifiedTime x = TF.compute (TF.refKey x) "last_modified_time"
+    computedLastModifiedTime x = TF.compute (TF.refKey x) "_computedLastModifiedTime"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CloudfrontDistributionResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 -- | @aws_cloudfront_origin_access_identity@ Resource.
 --
@@ -5954,19 +5954,19 @@ instance P.HasComment (CloudfrontOriginAccessIdentityResource s) (TF.Attr s P.Te
                           } :: CloudfrontOriginAccessIdentityResource s)
 
 instance s ~ s' => P.HasComputedCallerReference (TF.Ref s' (CloudfrontOriginAccessIdentityResource s)) (TF.Attr s P.Text) where
-    computedCallerReference x = TF.compute (TF.refKey x) "caller_reference"
+    computedCallerReference x = TF.compute (TF.refKey x) "_computedCallerReference"
 
 instance s ~ s' => P.HasComputedCloudfrontAccessIdentityPath (TF.Ref s' (CloudfrontOriginAccessIdentityResource s)) (TF.Attr s P.Text) where
-    computedCloudfrontAccessIdentityPath x = TF.compute (TF.refKey x) "cloudfront_access_identity_path"
+    computedCloudfrontAccessIdentityPath x = TF.compute (TF.refKey x) "_computedCloudfrontAccessIdentityPath"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (CloudfrontOriginAccessIdentityResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedIamArn (TF.Ref s' (CloudfrontOriginAccessIdentityResource s)) (TF.Attr s P.Text) where
-    computedIamArn x = TF.compute (TF.refKey x) "iam_arn"
+    computedIamArn x = TF.compute (TF.refKey x) "_computedIamArn"
 
 instance s ~ s' => P.HasComputedS3CanonicalUserId (TF.Ref s' (CloudfrontOriginAccessIdentityResource s)) (TF.Attr s P.Text) where
-    computedS3CanonicalUserId x = TF.compute (TF.refKey x) "s3_canonical_user_id"
+    computedS3CanonicalUserId x = TF.compute (TF.refKey x) "_computedS3CanonicalUserId"
 
 -- | @aws_cloudtrail@ Resource.
 --
@@ -6132,10 +6132,10 @@ instance P.HasTags (CloudtrailResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr 
                           } :: CloudtrailResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudtrailResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedHomeRegion (TF.Ref s' (CloudtrailResource s)) (TF.Attr s P.Text) where
-    computedHomeRegion x = TF.compute (TF.refKey x) "home_region"
+    computedHomeRegion x = TF.compute (TF.refKey x) "_computedHomeRegion"
 
 -- | @aws_cloudwatch_dashboard@ Resource.
 --
@@ -6180,7 +6180,7 @@ instance P.HasDashboardName (CloudwatchDashboardResource s) (TF.Attr s P.Text) w
                           } :: CloudwatchDashboardResource s)
 
 instance s ~ s' => P.HasComputedDashboardArn (TF.Ref s' (CloudwatchDashboardResource s)) (TF.Attr s P.Text) where
-    computedDashboardArn x = TF.compute (TF.refKey x) "dashboard_arn"
+    computedDashboardArn x = TF.compute (TF.refKey x) "_computedDashboardArn"
 
 -- | @aws_cloudwatch_event_permission@ Resource.
 --
@@ -6320,10 +6320,10 @@ instance P.HasScheduleExpression (CloudwatchEventRuleResource s) (TF.Attr s P.Te
                           } :: CloudwatchEventRuleResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudwatchEventRuleResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (CloudwatchEventRuleResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @aws_cloudwatch_event_target@ Resource.
 --
@@ -6333,10 +6333,10 @@ data CloudwatchEventTargetResource s = CloudwatchEventTargetResource'
     { _arn               :: TF.Attr s P.Text
     -- ^ @arn@ - (Required)
     --
-    , _batchTarget       :: TF.Attr s [BatchTarget s]
+    , _batchTarget       :: TF.Attr s (BatchTarget s)
     -- ^ @batch_target@ - (Optional)
     --
-    , _ecsTarget         :: TF.Attr s [EcsTarget s]
+    , _ecsTarget         :: TF.Attr s (EcsTarget s)
     -- ^ @ecs_target@ - (Optional)
     --
     , _input             :: TF.Attr s P.Text
@@ -6351,10 +6351,10 @@ data CloudwatchEventTargetResource s = CloudwatchEventTargetResource'
     -- Conflicts with:
     --
     -- * 'input'
-    , _inputTransformer  :: TF.Attr s [InputTransformer s]
+    , _inputTransformer  :: TF.Attr s (InputTransformer s)
     -- ^ @input_transformer@ - (Optional)
     --
-    , _kinesisTarget     :: TF.Attr s [KinesisTarget s]
+    , _kinesisTarget     :: TF.Attr s (KinesisTarget s)
     -- ^ @kinesis_target@ - (Optional)
     --
     , _roleArn           :: TF.Attr s P.Text
@@ -6366,7 +6366,7 @@ data CloudwatchEventTargetResource s = CloudwatchEventTargetResource'
     , _runCommandTargets :: TF.Attr s [RunCommandTargets s]
     -- ^ @run_command_targets@ - (Optional)
     --
-    , _sqsTarget         :: TF.Attr s [SqsTarget s]
+    , _sqsTarget         :: TF.Attr s (SqsTarget s)
     -- ^ @sqs_target@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6412,15 +6412,15 @@ instance P.HasArn (CloudwatchEventTargetResource s) (TF.Attr s P.Text) where
                (\s a -> s { _arn = a
                           } :: CloudwatchEventTargetResource s)
 
-instance P.HasBatchTarget (CloudwatchEventTargetResource s) (TF.Attr s [BatchTarget s]) where
+instance P.HasBatchTarget (CloudwatchEventTargetResource s) (TF.Attr s (BatchTarget s)) where
     batchTarget =
-        P.lens (_batchTarget :: CloudwatchEventTargetResource s -> TF.Attr s [BatchTarget s])
+        P.lens (_batchTarget :: CloudwatchEventTargetResource s -> TF.Attr s (BatchTarget s))
                (\s a -> s { _batchTarget = a
                           } :: CloudwatchEventTargetResource s)
 
-instance P.HasEcsTarget (CloudwatchEventTargetResource s) (TF.Attr s [EcsTarget s]) where
+instance P.HasEcsTarget (CloudwatchEventTargetResource s) (TF.Attr s (EcsTarget s)) where
     ecsTarget =
-        P.lens (_ecsTarget :: CloudwatchEventTargetResource s -> TF.Attr s [EcsTarget s])
+        P.lens (_ecsTarget :: CloudwatchEventTargetResource s -> TF.Attr s (EcsTarget s))
                (\s a -> s { _ecsTarget = a
                           } :: CloudwatchEventTargetResource s)
 
@@ -6438,15 +6438,15 @@ instance P.HasInputPath (CloudwatchEventTargetResource s) (TF.Attr s P.Text) whe
                           , _input = TF.Nil
                           } :: CloudwatchEventTargetResource s)
 
-instance P.HasInputTransformer (CloudwatchEventTargetResource s) (TF.Attr s [InputTransformer s]) where
+instance P.HasInputTransformer (CloudwatchEventTargetResource s) (TF.Attr s (InputTransformer s)) where
     inputTransformer =
-        P.lens (_inputTransformer :: CloudwatchEventTargetResource s -> TF.Attr s [InputTransformer s])
+        P.lens (_inputTransformer :: CloudwatchEventTargetResource s -> TF.Attr s (InputTransformer s))
                (\s a -> s { _inputTransformer = a
                           } :: CloudwatchEventTargetResource s)
 
-instance P.HasKinesisTarget (CloudwatchEventTargetResource s) (TF.Attr s [KinesisTarget s]) where
+instance P.HasKinesisTarget (CloudwatchEventTargetResource s) (TF.Attr s (KinesisTarget s)) where
     kinesisTarget =
-        P.lens (_kinesisTarget :: CloudwatchEventTargetResource s -> TF.Attr s [KinesisTarget s])
+        P.lens (_kinesisTarget :: CloudwatchEventTargetResource s -> TF.Attr s (KinesisTarget s))
                (\s a -> s { _kinesisTarget = a
                           } :: CloudwatchEventTargetResource s)
 
@@ -6468,14 +6468,14 @@ instance P.HasRunCommandTargets (CloudwatchEventTargetResource s) (TF.Attr s [Ru
                (\s a -> s { _runCommandTargets = a
                           } :: CloudwatchEventTargetResource s)
 
-instance P.HasSqsTarget (CloudwatchEventTargetResource s) (TF.Attr s [SqsTarget s]) where
+instance P.HasSqsTarget (CloudwatchEventTargetResource s) (TF.Attr s (SqsTarget s)) where
     sqsTarget =
-        P.lens (_sqsTarget :: CloudwatchEventTargetResource s -> TF.Attr s [SqsTarget s])
+        P.lens (_sqsTarget :: CloudwatchEventTargetResource s -> TF.Attr s (SqsTarget s))
                (\s a -> s { _sqsTarget = a
                           } :: CloudwatchEventTargetResource s)
 
 instance s ~ s' => P.HasComputedTargetId (TF.Ref s' (CloudwatchEventTargetResource s)) (TF.Attr s P.Text) where
-    computedTargetId x = TF.compute (TF.refKey x) "target_id"
+    computedTargetId x = TF.compute (TF.refKey x) "_computedTargetId"
 
 -- | @aws_cloudwatch_log_destination@ Resource.
 --
@@ -6532,7 +6532,7 @@ instance P.HasTargetArn (CloudwatchLogDestinationResource s) (TF.Attr s P.Text) 
                           } :: CloudwatchLogDestinationResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudwatchLogDestinationResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 -- | @aws_cloudwatch_log_destination_policy@ Resource.
 --
@@ -6639,10 +6639,10 @@ instance P.HasTags (CloudwatchLogGroupResource s) (TF.Attr s (P.HashMap P.Text (
                           } :: CloudwatchLogGroupResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudwatchLogGroupResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (CloudwatchLogGroupResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @aws_cloudwatch_log_metric_filter@ Resource.
 --
@@ -6652,7 +6652,7 @@ data CloudwatchLogMetricFilterResource s = CloudwatchLogMetricFilterResource'
     { _logGroupName         :: TF.Attr s P.Text
     -- ^ @log_group_name@ - (Required)
     --
-    , _metricTransformation :: TF.Attr s [MetricTransformation s]
+    , _metricTransformation :: TF.Attr s (MetricTransformation s)
     -- ^ @metric_transformation@ - (Required)
     --
     , _name                 :: TF.Attr s P.Text
@@ -6673,7 +6673,7 @@ instance TF.IsObject (CloudwatchLogMetricFilterResource s) where
 
 cloudwatchLogMetricFilterResource
     :: TF.Attr s P.Text -- ^ @log_group_name@ - 'P.logGroupName'
-    -> TF.Attr s [MetricTransformation s] -- ^ @metric_transformation@ - 'P.metricTransformation'
+    -> TF.Attr s (MetricTransformation s) -- ^ @metric_transformation@ - 'P.metricTransformation'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @pattern@ - 'P.pattern''
     -> TF.Resource P.Provider (CloudwatchLogMetricFilterResource s)
@@ -6692,9 +6692,9 @@ instance P.HasLogGroupName (CloudwatchLogMetricFilterResource s) (TF.Attr s P.Te
                (\s a -> s { _logGroupName = a
                           } :: CloudwatchLogMetricFilterResource s)
 
-instance P.HasMetricTransformation (CloudwatchLogMetricFilterResource s) (TF.Attr s [MetricTransformation s]) where
+instance P.HasMetricTransformation (CloudwatchLogMetricFilterResource s) (TF.Attr s (MetricTransformation s)) where
     metricTransformation =
-        P.lens (_metricTransformation :: CloudwatchLogMetricFilterResource s -> TF.Attr s [MetricTransformation s])
+        P.lens (_metricTransformation :: CloudwatchLogMetricFilterResource s -> TF.Attr s (MetricTransformation s))
                (\s a -> s { _metricTransformation = a
                           } :: CloudwatchLogMetricFilterResource s)
 
@@ -6795,7 +6795,7 @@ instance P.HasName (CloudwatchLogStreamResource s) (TF.Attr s P.Text) where
                           } :: CloudwatchLogStreamResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudwatchLogStreamResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 -- | @aws_cloudwatch_log_subscription_filter@ Resource.
 --
@@ -6875,7 +6875,7 @@ instance P.HasName (CloudwatchLogSubscriptionFilterResource s) (TF.Attr s P.Text
                           } :: CloudwatchLogSubscriptionFilterResource s)
 
 instance s ~ s' => P.HasComputedRoleArn (TF.Ref s' (CloudwatchLogSubscriptionFilterResource s)) (TF.Attr s P.Text) where
-    computedRoleArn x = TF.compute (TF.refKey x) "role_arn"
+    computedRoleArn x = TF.compute (TF.refKey x) "_computedRoleArn"
 
 -- | @aws_cloudwatch_metric_alarm@ Resource.
 --
@@ -7109,7 +7109,7 @@ instance P.HasUnit (CloudwatchMetricAlarmResource s) (TF.Attr s P.Text) where
                           } :: CloudwatchMetricAlarmResource s)
 
 instance s ~ s' => P.HasComputedEvaluateLowSampleCountPercentiles (TF.Ref s' (CloudwatchMetricAlarmResource s)) (TF.Attr s P.Text) where
-    computedEvaluateLowSampleCountPercentiles x = TF.compute (TF.refKey x) "evaluate_low_sample_count_percentiles"
+    computedEvaluateLowSampleCountPercentiles x = TF.compute (TF.refKey x) "_computedEvaluateLowSampleCountPercentiles"
 
 -- | @aws_codebuild_project@ Resource.
 --
@@ -7125,7 +7125,7 @@ data CodebuildProjectResource s = CodebuildProjectResource'
     , _buildTimeout :: TF.Attr s P.Integer
     -- ^ @build_timeout@ - (Optional)
     --
-    , _cache        :: TF.Attr s [Cache s]
+    , _cache        :: TF.Attr s (Cache s)
     -- ^ @cache@ - (Optional)
     --
     , _environment  :: TF.Attr s (TF.Attr s (Environment s))
@@ -7146,7 +7146,7 @@ data CodebuildProjectResource s = CodebuildProjectResource'
     , _timeout      :: TF.Attr s P.Integer
     -- ^ @timeout@ - (Optional)
     --
-    , _vpcConfig    :: TF.Attr s [VpcConfig s]
+    , _vpcConfig    :: TF.Attr s (VpcConfig s)
     -- ^ @vpc_config@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7207,9 +7207,9 @@ instance P.HasBuildTimeout (CodebuildProjectResource s) (TF.Attr s P.Integer) wh
                (\s a -> s { _buildTimeout = a
                           } :: CodebuildProjectResource s)
 
-instance P.HasCache (CodebuildProjectResource s) (TF.Attr s [Cache s]) where
+instance P.HasCache (CodebuildProjectResource s) (TF.Attr s (Cache s)) where
     cache =
-        P.lens (_cache :: CodebuildProjectResource s -> TF.Attr s [Cache s])
+        P.lens (_cache :: CodebuildProjectResource s -> TF.Attr s (Cache s))
                (\s a -> s { _cache = a
                           } :: CodebuildProjectResource s)
 
@@ -7249,20 +7249,20 @@ instance P.HasTimeout (CodebuildProjectResource s) (TF.Attr s P.Integer) where
                (\s a -> s { _timeout = a
                           } :: CodebuildProjectResource s)
 
-instance P.HasVpcConfig (CodebuildProjectResource s) (TF.Attr s [VpcConfig s]) where
+instance P.HasVpcConfig (CodebuildProjectResource s) (TF.Attr s (VpcConfig s)) where
     vpcConfig =
-        P.lens (_vpcConfig :: CodebuildProjectResource s -> TF.Attr s [VpcConfig s])
+        P.lens (_vpcConfig :: CodebuildProjectResource s -> TF.Attr s (VpcConfig s))
                (\s a -> s { _vpcConfig = a
                           } :: CodebuildProjectResource s)
 
 instance s ~ s' => P.HasComputedBadgeUrl (TF.Ref s' (CodebuildProjectResource s)) (TF.Attr s P.Text) where
-    computedBadgeUrl x = TF.compute (TF.refKey x) "badge_url"
+    computedBadgeUrl x = TF.compute (TF.refKey x) "_computedBadgeUrl"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (CodebuildProjectResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedEncryptionKey (TF.Ref s' (CodebuildProjectResource s)) (TF.Attr s P.Text) where
-    computedEncryptionKey x = TF.compute (TF.refKey x) "encryption_key"
+    computedEncryptionKey x = TF.compute (TF.refKey x) "_computedEncryptionKey"
 
 -- | @aws_codebuild_webhook@ Resource.
 --
@@ -7306,13 +7306,13 @@ instance P.HasProjectName (CodebuildWebhookResource s) (TF.Attr s P.Text) where
                           } :: CodebuildWebhookResource s)
 
 instance s ~ s' => P.HasComputedPayloadUrl (TF.Ref s' (CodebuildWebhookResource s)) (TF.Attr s P.Text) where
-    computedPayloadUrl x = TF.compute (TF.refKey x) "payload_url"
+    computedPayloadUrl x = TF.compute (TF.refKey x) "_computedPayloadUrl"
 
 instance s ~ s' => P.HasComputedSecret (TF.Ref s' (CodebuildWebhookResource s)) (TF.Attr s P.Text) where
-    computedSecret x = TF.compute (TF.refKey x) "secret"
+    computedSecret x = TF.compute (TF.refKey x) "_computedSecret"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (CodebuildWebhookResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
 
 -- | @aws_codecommit_repository@ Resource.
 --
@@ -7367,16 +7367,16 @@ instance P.HasRepositoryName (CodecommitRepositoryResource s) (TF.Attr s P.Text)
                           } :: CodecommitRepositoryResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CodecommitRepositoryResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedCloneUrlHttp (TF.Ref s' (CodecommitRepositoryResource s)) (TF.Attr s P.Text) where
-    computedCloneUrlHttp x = TF.compute (TF.refKey x) "clone_url_http"
+    computedCloneUrlHttp x = TF.compute (TF.refKey x) "_computedCloneUrlHttp"
 
 instance s ~ s' => P.HasComputedCloneUrlSsh (TF.Ref s' (CodecommitRepositoryResource s)) (TF.Attr s P.Text) where
-    computedCloneUrlSsh x = TF.compute (TF.refKey x) "clone_url_ssh"
+    computedCloneUrlSsh x = TF.compute (TF.refKey x) "_computedCloneUrlSsh"
 
 instance s ~ s' => P.HasComputedRepositoryId (TF.Ref s' (CodecommitRepositoryResource s)) (TF.Attr s P.Text) where
-    computedRepositoryId x = TF.compute (TF.refKey x) "repository_id"
+    computedRepositoryId x = TF.compute (TF.refKey x) "_computedRepositoryId"
 
 -- | @aws_codecommit_trigger@ Resource.
 --
@@ -7421,7 +7421,7 @@ instance P.HasTrigger (CodecommitTriggerResource s) (TF.Attr s [TF.Attr s (Trigg
                           } :: CodecommitTriggerResource s)
 
 instance s ~ s' => P.HasComputedConfigurationId (TF.Ref s' (CodecommitTriggerResource s)) (TF.Attr s P.Text) where
-    computedConfigurationId x = TF.compute (TF.refKey x) "configuration_id"
+    computedConfigurationId x = TF.compute (TF.refKey x) "_computedConfigurationId"
 
 -- | @aws_codedeploy_app@ Resource.
 --
@@ -7465,7 +7465,7 @@ instance P.HasName (CodedeployAppResource s) (TF.Attr s P.Text) where
                           } :: CodedeployAppResource s)
 
 instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (CodedeployAppResource s)) (TF.Attr s P.Text) where
-    computedUniqueId x = TF.compute (TF.refKey x) "unique_id"
+    computedUniqueId x = TF.compute (TF.refKey x) "_computedUniqueId"
 
 -- | @aws_codedeploy_deployment_config@ Resource.
 --
@@ -7475,7 +7475,7 @@ data CodedeployDeploymentConfigResource s = CodedeployDeploymentConfigResource'
     { _deploymentConfigName :: TF.Attr s P.Text
     -- ^ @deployment_config_name@ - (Required)
     --
-    , _minimumHealthyHosts  :: TF.Attr s [MinimumHealthyHosts s]
+    , _minimumHealthyHosts  :: TF.Attr s (MinimumHealthyHosts s)
     -- ^ @minimum_healthy_hosts@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7488,7 +7488,7 @@ instance TF.IsObject (CodedeployDeploymentConfigResource s) where
 
 codedeployDeploymentConfigResource
     :: TF.Attr s P.Text -- ^ @deployment_config_name@ - 'P.deploymentConfigName'
-    -> TF.Attr s [MinimumHealthyHosts s] -- ^ @minimum_healthy_hosts@ - 'P.minimumHealthyHosts'
+    -> TF.Attr s (MinimumHealthyHosts s) -- ^ @minimum_healthy_hosts@ - 'P.minimumHealthyHosts'
     -> TF.Resource P.Provider (CodedeployDeploymentConfigResource s)
 codedeployDeploymentConfigResource _deploymentConfigName _minimumHealthyHosts =
     TF.newResource "aws_codedeploy_deployment_config" $
@@ -7503,27 +7503,27 @@ instance P.HasDeploymentConfigName (CodedeployDeploymentConfigResource s) (TF.At
                (\s a -> s { _deploymentConfigName = a
                           } :: CodedeployDeploymentConfigResource s)
 
-instance P.HasMinimumHealthyHosts (CodedeployDeploymentConfigResource s) (TF.Attr s [MinimumHealthyHosts s]) where
+instance P.HasMinimumHealthyHosts (CodedeployDeploymentConfigResource s) (TF.Attr s (MinimumHealthyHosts s)) where
     minimumHealthyHosts =
-        P.lens (_minimumHealthyHosts :: CodedeployDeploymentConfigResource s -> TF.Attr s [MinimumHealthyHosts s])
+        P.lens (_minimumHealthyHosts :: CodedeployDeploymentConfigResource s -> TF.Attr s (MinimumHealthyHosts s))
                (\s a -> s { _minimumHealthyHosts = a
                           } :: CodedeployDeploymentConfigResource s)
 
 instance s ~ s' => P.HasComputedDeploymentConfigId (TF.Ref s' (CodedeployDeploymentConfigResource s)) (TF.Attr s P.Text) where
-    computedDeploymentConfigId x = TF.compute (TF.refKey x) "deployment_config_id"
+    computedDeploymentConfigId x = TF.compute (TF.refKey x) "_computedDeploymentConfigId"
 
 -- | @aws_codedeploy_deployment_group@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_codedeploy_deployment_group terraform documentation>
 -- for more information.
 data CodedeployDeploymentGroupResource s = CodedeployDeploymentGroupResource'
-    { _alarmConfiguration :: TF.Attr s [AlarmConfiguration s]
+    { _alarmConfiguration :: TF.Attr s (AlarmConfiguration s)
     -- ^ @alarm_configuration@ - (Optional)
     --
     , _appName :: TF.Attr s P.Text
     -- ^ @app_name@ - (Required)
     --
-    , _autoRollbackConfiguration :: TF.Attr s [AutoRollbackConfiguration s]
+    , _autoRollbackConfiguration :: TF.Attr s (AutoRollbackConfiguration s)
     -- ^ @auto_rollback_configuration@ - (Optional)
     --
     , _autoscalingGroups :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
@@ -7588,9 +7588,9 @@ codedeployDeploymentGroupResource _appName _deploymentGroupName _serviceRoleArn 
             , _triggerConfiguration = TF.Nil
             }
 
-instance P.HasAlarmConfiguration (CodedeployDeploymentGroupResource s) (TF.Attr s [AlarmConfiguration s]) where
+instance P.HasAlarmConfiguration (CodedeployDeploymentGroupResource s) (TF.Attr s (AlarmConfiguration s)) where
     alarmConfiguration =
-        P.lens (_alarmConfiguration :: CodedeployDeploymentGroupResource s -> TF.Attr s [AlarmConfiguration s])
+        P.lens (_alarmConfiguration :: CodedeployDeploymentGroupResource s -> TF.Attr s (AlarmConfiguration s))
                (\s a -> s { _alarmConfiguration = a
                           } :: CodedeployDeploymentGroupResource s)
 
@@ -7600,9 +7600,9 @@ instance P.HasAppName (CodedeployDeploymentGroupResource s) (TF.Attr s P.Text) w
                (\s a -> s { _appName = a
                           } :: CodedeployDeploymentGroupResource s)
 
-instance P.HasAutoRollbackConfiguration (CodedeployDeploymentGroupResource s) (TF.Attr s [AutoRollbackConfiguration s]) where
+instance P.HasAutoRollbackConfiguration (CodedeployDeploymentGroupResource s) (TF.Attr s (AutoRollbackConfiguration s)) where
     autoRollbackConfiguration =
-        P.lens (_autoRollbackConfiguration :: CodedeployDeploymentGroupResource s -> TF.Attr s [AutoRollbackConfiguration s])
+        P.lens (_autoRollbackConfiguration :: CodedeployDeploymentGroupResource s -> TF.Attr s (AutoRollbackConfiguration s))
                (\s a -> s { _autoRollbackConfiguration = a
                           } :: CodedeployDeploymentGroupResource s)
 
@@ -7654,21 +7654,21 @@ instance P.HasTriggerConfiguration (CodedeployDeploymentGroupResource s) (TF.Att
                (\s a -> s { _triggerConfiguration = a
                           } :: CodedeployDeploymentGroupResource s)
 
-instance s ~ s' => P.HasComputedBlueGreenDeploymentConfig (TF.Ref s' (CodedeployDeploymentGroupResource s)) (TF.Attr s [BlueGreenDeploymentConfig s]) where
-    computedBlueGreenDeploymentConfig x = TF.compute (TF.refKey x) "blue_green_deployment_config"
+instance s ~ s' => P.HasComputedBlueGreenDeploymentConfig (TF.Ref s' (CodedeployDeploymentGroupResource s)) (TF.Attr s (BlueGreenDeploymentConfig s)) where
+    computedBlueGreenDeploymentConfig x = TF.compute (TF.refKey x) "_computedBlueGreenDeploymentConfig"
 
-instance s ~ s' => P.HasComputedDeploymentStyle (TF.Ref s' (CodedeployDeploymentGroupResource s)) (TF.Attr s [DeploymentStyle s]) where
-    computedDeploymentStyle x = TF.compute (TF.refKey x) "deployment_style"
+instance s ~ s' => P.HasComputedDeploymentStyle (TF.Ref s' (CodedeployDeploymentGroupResource s)) (TF.Attr s (DeploymentStyle s)) where
+    computedDeploymentStyle x = TF.compute (TF.refKey x) "_computedDeploymentStyle"
 
-instance s ~ s' => P.HasComputedLoadBalancerInfo (TF.Ref s' (CodedeployDeploymentGroupResource s)) (TF.Attr s [LoadBalancerInfo s]) where
-    computedLoadBalancerInfo x = TF.compute (TF.refKey x) "load_balancer_info"
+instance s ~ s' => P.HasComputedLoadBalancerInfo (TF.Ref s' (CodedeployDeploymentGroupResource s)) (TF.Attr s (LoadBalancerInfo s)) where
+    computedLoadBalancerInfo x = TF.compute (TF.refKey x) "_computedLoadBalancerInfo"
 
 -- | @aws_codepipeline@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_codepipeline terraform documentation>
 -- for more information.
 data CodepipelineResource s = CodepipelineResource'
-    { _artifactStore :: TF.Attr s [ArtifactStore s]
+    { _artifactStore :: TF.Attr s (ArtifactStore s)
     -- ^ @artifact_store@ - (Required)
     --
     , _name          :: TF.Attr s P.Text
@@ -7691,7 +7691,7 @@ instance TF.IsObject (CodepipelineResource s) where
         ]
 
 codepipelineResource
-    :: TF.Attr s [ArtifactStore s] -- ^ @artifact_store@ - 'P.artifactStore'
+    :: TF.Attr s (ArtifactStore s) -- ^ @artifact_store@ - 'P.artifactStore'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
     -> TF.Attr s (P.NonEmpty (Stage s)) -- ^ @stage@ - 'P.stage'
@@ -7705,9 +7705,9 @@ codepipelineResource _artifactStore _name _roleArn _stage =
             , _stage = _stage
             }
 
-instance P.HasArtifactStore (CodepipelineResource s) (TF.Attr s [ArtifactStore s]) where
+instance P.HasArtifactStore (CodepipelineResource s) (TF.Attr s (ArtifactStore s)) where
     artifactStore =
-        P.lens (_artifactStore :: CodepipelineResource s -> TF.Attr s [ArtifactStore s])
+        P.lens (_artifactStore :: CodepipelineResource s -> TF.Attr s (ArtifactStore s))
                (\s a -> s { _artifactStore = a
                           } :: CodepipelineResource s)
 
@@ -7730,4 +7730,4 @@ instance P.HasStage (CodepipelineResource s) (TF.Attr s (P.NonEmpty (Stage s))) 
                           } :: CodepipelineResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CodepipelineResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+    computedArn x = TF.compute (TF.refKey x) "_computedArn"

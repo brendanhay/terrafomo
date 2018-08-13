@@ -1809,7 +1809,6 @@ module Terrafomo.AWS.Lens
     , HasComputedCpu (..)
     , HasComputedAllowSudo (..)
     , HasComputedNames (..)
-    , HasComputedInstance' (..)
     , HasComputedSourceSecurityGroup (..)
     , HasComputedAddress (..)
     , HasComputedAmiId (..)
@@ -1989,6 +1988,7 @@ module Terrafomo.AWS.Lens
     , HasComputedMasterAccountEmail (..)
     , HasComputedRequireNumbers (..)
     , HasComputedKeepJobFlowAliveWhenNoSteps (..)
+    , HasComputedInstance (..)
     , HasComputedEbsOptions (..)
     , HasComputedSecurityGroupIds (..)
     , HasComputedIpv6CidrBlockAssociationId (..)
@@ -2061,7 +2061,6 @@ module Terrafomo.AWS.Lens
     , HasComputedGlobalSecondaryIndex (..)
     , HasComputedBaseEndpointDnsNames (..)
     , HasComputedStaticRoutesOnly (..)
-    , HasComputedData' (..)
     , HasComputedS3BucketName (..)
     , HasComputedEmailVerificationMessage (..)
     , HasComputedPeerRegion (..)
@@ -2331,6 +2330,7 @@ module Terrafomo.AWS.Lens
     , HasComputedIpv6AddressCount (..)
     , HasComputedAttributeName (..)
     , HasComputedReservedConcurrentExecutions (..)
+    , HasComputedData (..)
     , HasComputedClusterPublicKey (..)
     , HasComputedProjectionType (..)
     , HasComputedDeploymentConfigId (..)
@@ -2345,6 +2345,7 @@ module Terrafomo.AWS.Lens
     , HasComputedDomainValidationOptions (..)
     , HasComputedProductCodeId (..)
     , HasComputedSubnetGroupName (..)
+    , HasComputedType (..)
     , HasComputedIpv6Address (..)
     , HasComputedParameterGroupName (..)
     , HasComputedPerformanceMode (..)
@@ -2365,7 +2366,6 @@ module Terrafomo.AWS.Lens
     , HasComputedSpotInstanceId (..)
     , HasComputedExpired (..)
     , HasComputedNetworkInterfaceIds (..)
-    , HasComputedDefault' (..)
     , HasComputedCrlConfiguration (..)
     , HasComputedValidationEmails (..)
     , HasComputedMaxSessionDuration (..)
@@ -2376,7 +2376,6 @@ module Terrafomo.AWS.Lens
     , HasComputedEgress (..)
     , HasComputedVpcClassicLinkId (..)
     , HasComputedIamArn (..)
-    , HasComputedFamily' (..)
     , HasComputedActiveTrustedSigners (..)
     , HasComputedSpotBidStatus (..)
     , HasComputedExpirationDate (..)
@@ -2414,6 +2413,7 @@ module Terrafomo.AWS.Lens
     , HasComputedNotificationTopicArn (..)
     , HasComputedUsername (..)
     , HasComputedKey (..)
+    , HasComputedDefault (..)
     , HasComputedExpirePasswords (..)
     , HasComputedEnableClassiclinkDnsSupport (..)
     , HasComputedReplicationInstancePublicIps (..)
@@ -2422,6 +2422,7 @@ module Terrafomo.AWS.Lens
     , HasComputedMacAddress (..)
     , HasComputedClassificationType (..)
     , HasComputedEbsBlockDevice (..)
+    , HasComputedFamily (..)
     , HasComputedCreateDate (..)
     , HasComputedSecretString (..)
     , HasComputedExpirationInDays (..)
@@ -2458,7 +2459,6 @@ module Terrafomo.AWS.Lens
     , HasComputedAccessPolicies (..)
     , HasComputedRootDeviceType (..)
     , HasComputedRecurrence (..)
-    , HasComputedType' (..)
     , HasComputedDomainName (..)
     , HasComputedTimeout (..)
     , HasComputedBrokerName (..)
@@ -13048,9 +13048,6 @@ class HasComputedAllowSudo a b | a -> b where
 class HasComputedNames a b | a -> b where
     computedNames :: a -> b
 
-class HasComputedInstance' a b | a -> b where
-    computedInstance' :: a -> b
-
 class HasComputedSourceSecurityGroup a b | a -> b where
     computedSourceSecurityGroup :: a -> b
 
@@ -13588,6 +13585,9 @@ class HasComputedRequireNumbers a b | a -> b where
 class HasComputedKeepJobFlowAliveWhenNoSteps a b | a -> b where
     computedKeepJobFlowAliveWhenNoSteps :: a -> b
 
+class HasComputedInstance a b | a -> b where
+    computedInstance :: a -> b
+
 class HasComputedEbsOptions a b | a -> b where
     computedEbsOptions :: a -> b
 
@@ -13803,9 +13803,6 @@ class HasComputedBaseEndpointDnsNames a b | a -> b where
 
 class HasComputedStaticRoutesOnly a b | a -> b where
     computedStaticRoutesOnly :: a -> b
-
-class HasComputedData' a b | a -> b where
-    computedData' :: a -> b
 
 class HasComputedS3BucketName a b | a -> b where
     computedS3BucketName :: a -> b
@@ -14614,6 +14611,9 @@ class HasComputedAttributeName a b | a -> b where
 class HasComputedReservedConcurrentExecutions a b | a -> b where
     computedReservedConcurrentExecutions :: a -> b
 
+class HasComputedData a b | a -> b where
+    computedData :: a -> b
+
 class HasComputedClusterPublicKey a b | a -> b where
     computedClusterPublicKey :: a -> b
 
@@ -14655,6 +14655,9 @@ class HasComputedProductCodeId a b | a -> b where
 
 class HasComputedSubnetGroupName a b | a -> b where
     computedSubnetGroupName :: a -> b
+
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
 
 class HasComputedIpv6Address a b | a -> b where
     computedIpv6Address :: a -> b
@@ -14716,9 +14719,6 @@ class HasComputedExpired a b | a -> b where
 class HasComputedNetworkInterfaceIds a b | a -> b where
     computedNetworkInterfaceIds :: a -> b
 
-class HasComputedDefault' a b | a -> b where
-    computedDefault' :: a -> b
-
 class HasComputedCrlConfiguration a b | a -> b where
     computedCrlConfiguration :: a -> b
 
@@ -14748,9 +14748,6 @@ class HasComputedVpcClassicLinkId a b | a -> b where
 
 class HasComputedIamArn a b | a -> b where
     computedIamArn :: a -> b
-
-class HasComputedFamily' a b | a -> b where
-    computedFamily' :: a -> b
 
 class HasComputedActiveTrustedSigners a b | a -> b where
     computedActiveTrustedSigners :: a -> b
@@ -14863,6 +14860,9 @@ class HasComputedUsername a b | a -> b where
 class HasComputedKey a b | a -> b where
     computedKey :: a -> b
 
+class HasComputedDefault a b | a -> b where
+    computedDefault :: a -> b
+
 class HasComputedExpirePasswords a b | a -> b where
     computedExpirePasswords :: a -> b
 
@@ -14886,6 +14886,9 @@ class HasComputedClassificationType a b | a -> b where
 
 class HasComputedEbsBlockDevice a b | a -> b where
     computedEbsBlockDevice :: a -> b
+
+class HasComputedFamily a b | a -> b where
+    computedFamily :: a -> b
 
 class HasComputedCreateDate a b | a -> b where
     computedCreateDate :: a -> b
@@ -14994,9 +14997,6 @@ class HasComputedRootDeviceType a b | a -> b where
 
 class HasComputedRecurrence a b | a -> b where
     computedRecurrence :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedDomainName a b | a -> b where
     computedDomainName :: a -> b
