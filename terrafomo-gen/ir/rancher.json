@@ -1,8 +1,13 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newMember",
+                "name": "Member'"
+            },
             "arguments": [],
             "name": "Member",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -11,13 +16,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"external_id\" <$> TF.attribute",
-                    "name": "external_id",
+                    "name": "_computedExternalId",
                     "method": "computedExternalId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedExternalId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedExternalId"
+                    "original": "external_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -26,13 +32,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"external_id_type\" <$> TF.attribute",
-                    "name": "external_id_type",
+                    "name": "_computedExternalIdType",
                     "method": "computedExternalIdType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedExternalIdType",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedExternalIdType"
+                    "original": "external_id_type"
                 },
                 {
                     "default": "TF.Nil",
@@ -41,93 +48,28 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"role\" <$> TF.attribute",
-                    "name": "role",
+                    "name": "_computedRole",
                     "method": "computedRole",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRole",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedRole"
+                    "original": "role"
                 }
             ],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "Member s",
             "original": "member"
         }
     ],
-    "arguments": [
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "API Key used to authenticate with the rancher server"
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"access_key\" <$>",
-            "name": "access_key",
-            "method": "accessKey",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasAccessKey",
-            "optional": true,
-            "label": "_accessKey"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "The URL to the rancher API, must include version uri (ie. v1 or v2-beta)"
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"api_url\" <$>",
-            "name": "api_url",
-            "method": "apiUrl",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasApiUrl",
-            "optional": true,
-            "label": "_apiUrl"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "Path to the Rancher client cli.json config file"
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"config\" <$>",
-            "name": "config",
-            "method": "config",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasConfig",
-            "optional": true,
-            "label": "_config"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "API secret used to authenticate with the rancher server"
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"secret_key\" <$>",
-            "name": "secret_key",
-            "method": "secretKey",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasSecretKey",
-            "optional": true,
-            "label": "_secretKey"
-        }
-    ],
     "dataSources": [
         {
+            "con": {
+                "smart": "certificateData",
+                "name": "CertificateData'"
+            },
             "arguments": [
                 {
                     "default": "_environmentId",
@@ -136,13 +78,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_name",
@@ -151,17 +94,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "DataSource",
             "name": "CertificateData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -170,13 +114,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"algorithm\" <$> TF.attribute",
-                    "name": "algorithm",
+                    "name": "_computedAlgorithm",
                     "method": "computedAlgorithm",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAlgorithm",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAlgorithm"
+                    "original": "algorithm"
                 },
                 {
                     "default": "TF.Nil",
@@ -185,13 +130,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cert_fingerprint\" <$> TF.attribute",
-                    "name": "cert_fingerprint",
+                    "name": "_computedCertFingerprint",
                     "method": "computedCertFingerprint",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCertFingerprint",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCertFingerprint"
+                    "original": "cert_fingerprint"
                 },
                 {
                     "default": "TF.Nil",
@@ -200,13 +146,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cn\" <$> TF.attribute",
-                    "name": "cn",
+                    "name": "_computedCn",
                     "method": "computedCn",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCn",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCn"
+                    "original": "cn"
                 },
                 {
                     "default": "TF.Nil",
@@ -215,13 +162,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_computedDescription",
                     "method": "computedDescription",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDescription",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedDescription"
+                    "original": "description"
                 },
                 {
                     "default": "TF.Nil",
@@ -230,13 +178,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"expires_at\" <$> TF.attribute",
-                    "name": "expires_at",
+                    "name": "_computedExpiresAt",
                     "method": "computedExpiresAt",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedExpiresAt",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedExpiresAt"
+                    "original": "expires_at"
                 },
                 {
                     "default": "TF.Nil",
@@ -245,13 +194,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"issued_at\" <$> TF.attribute",
-                    "name": "issued_at",
+                    "name": "_computedIssuedAt",
                     "method": "computedIssuedAt",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIssuedAt",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedIssuedAt"
+                    "original": "issued_at"
                 },
                 {
                     "default": "TF.Nil",
@@ -260,13 +210,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"issuer\" <$> TF.attribute",
-                    "name": "issuer",
+                    "name": "_computedIssuer",
                     "method": "computedIssuer",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIssuer",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedIssuer"
+                    "original": "issuer"
                 },
                 {
                     "default": "TF.Nil",
@@ -275,13 +226,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"key_size\" <$> TF.attribute",
-                    "name": "key_size",
+                    "name": "_computedKeySize",
                     "method": "computedKeySize",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKeySize",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedKeySize"
+                    "original": "key_size"
                 },
                 {
                     "default": "TF.Nil",
@@ -290,13 +242,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"serial_number\" <$> TF.attribute",
-                    "name": "serial_number",
+                    "name": "_computedSerialNumber",
                     "method": "computedSerialNumber",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSerialNumber",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedSerialNumber"
+                    "original": "serial_number"
                 },
                 {
                     "default": "TF.Nil",
@@ -305,13 +258,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"subject_alternative_names\" <$> TF.attribute",
-                    "name": "subject_alternative_names",
+                    "name": "_computedSubjectAlternativeNames",
                     "method": "computedSubjectAlternativeNames",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedSubjectAlternativeNames",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedSubjectAlternativeNames"
+                    "original": "subject_alternative_names"
                 },
                 {
                     "default": "TF.Nil",
@@ -320,13 +274,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"version\" <$> TF.attribute",
-                    "name": "version",
+                    "name": "_computedVersion",
                     "method": "computedVersion",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVersion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedVersion"
+                    "original": "version"
                 }
             ],
             "parameters": [
@@ -337,13 +292,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_name",
@@ -352,19 +308,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "CertificateData s",
             "original": "rancher_certificate"
         },
         {
+            "con": {
+                "smart": "environmentData",
+                "name": "EnvironmentData'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -373,17 +335,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "DataSource",
             "name": "EnvironmentData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -392,13 +355,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_computedDescription",
                     "method": "computedDescription",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDescription",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedDescription"
+                    "original": "description"
                 },
                 {
                     "default": "TF.Nil",
@@ -407,13 +371,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"member\" <$> TF.attribute",
-                    "name": "member",
+                    "name": "_computedMember",
                     "method": "computedMember",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s (Member s)]",
                     "class": "HasComputedMember",
+                    "validate": true,
                     "optional": false,
-                    "label": "_computedMember"
+                    "original": "member"
                 },
                 {
                     "default": "TF.Nil",
@@ -422,13 +387,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"orchestration\" <$> TF.attribute",
-                    "name": "orchestration",
+                    "name": "_computedOrchestration",
                     "method": "computedOrchestration",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOrchestration",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedOrchestration"
+                    "original": "orchestration"
                 },
                 {
                     "default": "TF.Nil",
@@ -437,13 +403,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"project_template_id\" <$> TF.attribute",
-                    "name": "project_template_id",
+                    "name": "_computedProjectTemplateId",
                     "method": "computedProjectTemplateId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedProjectTemplateId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedProjectTemplateId"
+                    "original": "project_template_id"
                 }
             ],
             "parameters": [
@@ -454,19 +421,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "EnvironmentData s",
             "original": "rancher_environment"
         },
         {
+            "con": {
+                "smart": "settingData",
+                "name": "SettingData'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -475,17 +448,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "DataSource",
             "name": "SettingData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -494,13 +468,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "value",
+                    "name": "_computedValue",
                     "method": "computedValue",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedValue",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedValue"
+                    "original": "value"
                 }
             ],
             "parameters": [
@@ -511,21 +486,27 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "SettingData s",
             "original": "rancher_setting"
         }
     ],
     "resources": [
         {
+            "con": {
+                "smart": "certificateResource",
+                "name": "CertificateResource'"
+            },
             "arguments": [
                 {
                     "default": "_cert",
@@ -534,13 +515,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cert\" <$> TF.attribute",
-                    "name": "cert",
+                    "name": "_cert",
                     "method": "cert",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCert",
+                    "validate": false,
                     "optional": false,
-                    "label": "_cert"
+                    "original": "cert"
                 },
                 {
                     "default": "TF.Nil",
@@ -549,13 +531,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cert_chain\" <$> TF.attribute",
-                    "name": "cert_chain",
+                    "name": "_certChain",
                     "method": "certChain",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCertChain",
+                    "validate": false,
                     "optional": true,
-                    "label": "_certChain"
+                    "original": "cert_chain"
                 },
                 {
                     "default": "TF.Nil",
@@ -564,13 +547,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_environmentId",
@@ -579,13 +563,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_key",
@@ -594,13 +579,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"key\" <$> TF.attribute",
-                    "name": "key",
+                    "name": "_key",
                     "method": "key",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_key"
+                    "original": "key"
                 },
                 {
                     "default": "_name",
@@ -609,17 +595,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "CertificateResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -628,13 +615,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"algorithm\" <$> TF.attribute",
-                    "name": "algorithm",
+                    "name": "_computedAlgorithm",
                     "method": "computedAlgorithm",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAlgorithm",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAlgorithm"
+                    "original": "algorithm"
                 },
                 {
                     "default": "TF.Nil",
@@ -643,13 +631,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cert_fingerprint\" <$> TF.attribute",
-                    "name": "cert_fingerprint",
+                    "name": "_computedCertFingerprint",
                     "method": "computedCertFingerprint",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCertFingerprint",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCertFingerprint"
+                    "original": "cert_fingerprint"
                 },
                 {
                     "default": "TF.Nil",
@@ -658,13 +647,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cn\" <$> TF.attribute",
-                    "name": "cn",
+                    "name": "_computedCn",
                     "method": "computedCn",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCn",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCn"
+                    "original": "cn"
                 },
                 {
                     "default": "TF.Nil",
@@ -673,13 +663,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"expires_at\" <$> TF.attribute",
-                    "name": "expires_at",
+                    "name": "_computedExpiresAt",
                     "method": "computedExpiresAt",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedExpiresAt",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedExpiresAt"
+                    "original": "expires_at"
                 },
                 {
                     "default": "TF.Nil",
@@ -688,13 +679,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 },
                 {
                     "default": "TF.Nil",
@@ -703,13 +695,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"issued_at\" <$> TF.attribute",
-                    "name": "issued_at",
+                    "name": "_computedIssuedAt",
                     "method": "computedIssuedAt",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIssuedAt",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedIssuedAt"
+                    "original": "issued_at"
                 },
                 {
                     "default": "TF.Nil",
@@ -718,13 +711,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"issuer\" <$> TF.attribute",
-                    "name": "issuer",
+                    "name": "_computedIssuer",
                     "method": "computedIssuer",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIssuer",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedIssuer"
+                    "original": "issuer"
                 },
                 {
                     "default": "TF.Nil",
@@ -733,13 +727,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"key_size\" <$> TF.attribute",
-                    "name": "key_size",
+                    "name": "_computedKeySize",
                     "method": "computedKeySize",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKeySize",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedKeySize"
+                    "original": "key_size"
                 },
                 {
                     "default": "TF.Nil",
@@ -748,13 +743,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"serial_number\" <$> TF.attribute",
-                    "name": "serial_number",
+                    "name": "_computedSerialNumber",
                     "method": "computedSerialNumber",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSerialNumber",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedSerialNumber"
+                    "original": "serial_number"
                 },
                 {
                     "default": "TF.Nil",
@@ -763,13 +759,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"subject_alternative_names\" <$> TF.attribute",
-                    "name": "subject_alternative_names",
+                    "name": "_computedSubjectAlternativeNames",
                     "method": "computedSubjectAlternativeNames",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedSubjectAlternativeNames",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedSubjectAlternativeNames"
+                    "original": "subject_alternative_names"
                 },
                 {
                     "default": "TF.Nil",
@@ -778,13 +775,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"version\" <$> TF.attribute",
-                    "name": "version",
+                    "name": "_computedVersion",
                     "method": "computedVersion",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVersion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedVersion"
+                    "original": "version"
                 }
             ],
             "parameters": [
@@ -795,13 +793,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cert\" <$> TF.attribute",
-                    "name": "cert",
+                    "name": "_cert",
                     "method": "cert",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCert",
+                    "validate": false,
                     "optional": false,
-                    "label": "_cert"
+                    "original": "cert"
                 },
                 {
                     "default": "_environmentId",
@@ -810,13 +809,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_key",
@@ -825,13 +825,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"key\" <$> TF.attribute",
-                    "name": "key",
+                    "name": "_key",
                     "method": "key",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_key"
+                    "original": "key"
                 },
                 {
                     "default": "_name",
@@ -840,19 +841,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "CertificateResource s",
             "original": "rancher_certificate"
         },
         {
+            "con": {
+                "smart": "environmentResource",
+                "name": "EnvironmentResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -861,13 +868,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_name",
@@ -876,17 +884,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "EnvironmentResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -895,13 +904,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 },
                 {
                     "default": "TF.Nil",
@@ -910,13 +920,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"member\" <$> TF.attribute",
-                    "name": "member",
+                    "name": "_computedMember",
                     "method": "computedMember",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s (Member s)]",
                     "class": "HasComputedMember",
+                    "validate": true,
                     "optional": true,
-                    "label": "_computedMember"
+                    "original": "member"
                 },
                 {
                     "default": "TF.Nil",
@@ -925,15 +936,16 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"orchestration\" <$> TF.attribute",
-                    "name": "orchestration",
+                    "name": "_computedOrchestration",
                     "method": "computedOrchestration",
                     "conflicts": [
                         "_projectTemplateId"
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOrchestration",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedOrchestration"
+                    "original": "orchestration"
                 },
                 {
                     "default": "TF.Nil",
@@ -942,15 +954,16 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"project_template_id\" <$> TF.attribute",
-                    "name": "project_template_id",
+                    "name": "_computedProjectTemplateId",
                     "method": "computedProjectTemplateId",
                     "conflicts": [
                         "_orchestration"
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedProjectTemplateId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedProjectTemplateId"
+                    "original": "project_template_id"
                 }
             ],
             "parameters": [
@@ -961,19 +974,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "EnvironmentResource s",
             "original": "rancher_environment"
         },
         {
+            "con": {
+                "smart": "hostResource",
+                "name": "HostResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -982,13 +1001,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_environmentId",
@@ -997,13 +1017,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_hostname",
@@ -1012,13 +1033,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"hostname\" <$> TF.attribute",
-                    "name": "hostname",
+                    "name": "_hostname",
                     "method": "hostname",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasHostname",
+                    "validate": false,
                     "optional": false,
-                    "label": "_hostname"
+                    "original": "hostname"
                 },
                 {
                     "default": "TF.Nil",
@@ -1027,13 +1049,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"labels\" <$> TF.attribute",
-                    "name": "labels",
+                    "name": "_labels",
                     "method": "labels",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasLabels",
+                    "validate": false,
                     "optional": true,
-                    "label": "_labels"
+                    "original": "labels"
                 },
                 {
                     "default": "_name",
@@ -1042,17 +1065,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "HostResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1061,13 +1085,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 }
             ],
             "parameters": [
@@ -1078,13 +1103,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_hostname",
@@ -1093,13 +1119,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"hostname\" <$> TF.attribute",
-                    "name": "hostname",
+                    "name": "_hostname",
                     "method": "hostname",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasHostname",
+                    "validate": false,
                     "optional": false,
-                    "label": "_hostname"
+                    "original": "hostname"
                 },
                 {
                     "default": "_name",
@@ -1108,19 +1135,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "HostResource s",
             "original": "rancher_host"
         },
         {
+            "con": {
+                "smart": "registrationTokenResource",
+                "name": "RegistrationTokenResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1129,13 +1162,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"agent_ip\" <$> TF.attribute",
-                    "name": "agent_ip",
+                    "name": "_agentIp",
                     "method": "agentIp",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAgentIp",
+                    "validate": false,
                     "optional": true,
-                    "label": "_agentIp"
+                    "original": "agent_ip"
                 },
                 {
                     "default": "TF.Nil",
@@ -1144,13 +1178,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_environmentId",
@@ -1159,13 +1194,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -1174,13 +1210,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"host_labels\" <$> TF.attribute",
-                    "name": "host_labels",
+                    "name": "_hostLabels",
                     "method": "hostLabels",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasHostLabels",
+                    "validate": false,
                     "optional": true,
-                    "label": "_hostLabels"
+                    "original": "host_labels"
                 },
                 {
                     "default": "_name",
@@ -1189,17 +1226,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "RegistrationTokenResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1208,13 +1246,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"command\" <$> TF.attribute",
-                    "name": "command",
+                    "name": "_computedCommand",
                     "method": "computedCommand",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCommand",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCommand"
+                    "original": "command"
                 },
                 {
                     "default": "TF.Nil",
@@ -1223,13 +1262,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 },
                 {
                     "default": "TF.Nil",
@@ -1238,13 +1278,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"image\" <$> TF.attribute",
-                    "name": "image",
+                    "name": "_computedImage",
                     "method": "computedImage",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedImage",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedImage"
+                    "original": "image"
                 },
                 {
                     "default": "TF.Nil",
@@ -1253,13 +1294,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"registration_url\" <$> TF.attribute",
-                    "name": "registration_url",
+                    "name": "_computedRegistrationUrl",
                     "method": "computedRegistrationUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRegistrationUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedRegistrationUrl"
+                    "original": "registration_url"
                 },
                 {
                     "default": "TF.Nil",
@@ -1268,13 +1310,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"token\" <$> TF.attribute",
-                    "name": "token",
+                    "name": "_computedToken",
                     "method": "computedToken",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedToken",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedToken"
+                    "original": "token"
                 }
             ],
             "parameters": [
@@ -1285,13 +1328,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_name",
@@ -1300,19 +1344,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "RegistrationTokenResource s",
             "original": "rancher_registration_token"
         },
         {
+            "con": {
+                "smart": "registryResource",
+                "name": "RegistryResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1321,13 +1371,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_environmentId",
@@ -1336,13 +1387,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_name",
@@ -1351,13 +1403,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_serverAddress",
@@ -1366,17 +1419,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"server_address\" <$> TF.attribute",
-                    "name": "server_address",
+                    "name": "_serverAddress",
                     "method": "serverAddress",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasServerAddress",
+                    "validate": false,
                     "optional": false,
-                    "label": "_serverAddress"
+                    "original": "server_address"
                 }
             ],
-            "schema": "Resource",
             "name": "RegistryResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1385,13 +1439,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 }
             ],
             "parameters": [
@@ -1402,13 +1457,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_name",
@@ -1417,13 +1473,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_serverAddress",
@@ -1432,19 +1489,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"server_address\" <$> TF.attribute",
-                    "name": "server_address",
+                    "name": "_serverAddress",
                     "method": "serverAddress",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasServerAddress",
+                    "validate": false,
                     "optional": false,
-                    "label": "_serverAddress"
+                    "original": "server_address"
                 }
             ],
+            "conflicts": [],
             "type": "RegistryResource s",
             "original": "rancher_registry"
         },
         {
+            "con": {
+                "smart": "registryCredentialResource",
+                "name": "RegistryCredentialResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1453,13 +1516,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.Nil",
@@ -1468,13 +1532,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "email",
+                    "name": "_email",
                     "method": "email",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEmail",
+                    "validate": false,
                     "optional": true,
-                    "label": "_email"
+                    "original": "email"
                 },
                 {
                     "default": "_name",
@@ -1483,13 +1548,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_publicValue",
@@ -1498,13 +1564,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"public_value\" <$> TF.attribute",
-                    "name": "public_value",
+                    "name": "_publicValue",
                     "method": "publicValue",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPublicValue",
+                    "validate": false,
                     "optional": false,
-                    "label": "_publicValue"
+                    "original": "public_value"
                 },
                 {
                     "default": "_registryId",
@@ -1513,13 +1580,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"registry_id\" <$> TF.attribute",
-                    "name": "registry_id",
+                    "name": "_registryId",
                     "method": "registryId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRegistryId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_registryId"
+                    "original": "registry_id"
                 },
                 {
                     "default": "_secretValue",
@@ -1528,17 +1596,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"secret_value\" <$> TF.attribute",
-                    "name": "secret_value",
+                    "name": "_secretValue",
                     "method": "secretValue",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSecretValue",
+                    "validate": false,
                     "optional": false,
-                    "label": "_secretValue"
+                    "original": "secret_value"
                 }
             ],
-            "schema": "Resource",
             "name": "RegistryCredentialResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1547,13 +1616,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 }
             ],
             "parameters": [
@@ -1564,13 +1634,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_publicValue",
@@ -1579,13 +1650,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"public_value\" <$> TF.attribute",
-                    "name": "public_value",
+                    "name": "_publicValue",
                     "method": "publicValue",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPublicValue",
+                    "validate": false,
                     "optional": false,
-                    "label": "_publicValue"
+                    "original": "public_value"
                 },
                 {
                     "default": "_registryId",
@@ -1594,13 +1666,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"registry_id\" <$> TF.attribute",
-                    "name": "registry_id",
+                    "name": "_registryId",
                     "method": "registryId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRegistryId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_registryId"
+                    "original": "registry_id"
                 },
                 {
                     "default": "_secretValue",
@@ -1609,19 +1682,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"secret_value\" <$> TF.attribute",
-                    "name": "secret_value",
+                    "name": "_secretValue",
                     "method": "secretValue",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSecretValue",
+                    "validate": false,
                     "optional": false,
-                    "label": "_secretValue"
+                    "original": "secret_value"
                 }
             ],
+            "conflicts": [],
             "type": "RegistryCredentialResource s",
             "original": "rancher_registry_credential"
         },
         {
+            "con": {
+                "smart": "secretResource",
+                "name": "SecretResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1630,13 +1709,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_environmentId",
@@ -1645,13 +1725,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_name",
@@ -1660,13 +1741,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_value",
@@ -1675,17 +1757,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "value",
+                    "name": "_value",
                     "method": "value",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasValue",
+                    "validate": false,
                     "optional": false,
-                    "label": "_value"
+                    "original": "value"
                 }
             ],
-            "schema": "Resource",
             "name": "SecretResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1694,13 +1777,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 }
             ],
             "parameters": [
@@ -1711,13 +1795,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_name",
@@ -1726,13 +1811,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_value",
@@ -1741,19 +1827,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "value",
+                    "name": "_value",
                     "method": "value",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasValue",
+                    "validate": false,
                     "optional": false,
-                    "label": "_value"
+                    "original": "value"
                 }
             ],
+            "conflicts": [],
             "type": "SecretResource s",
             "original": "rancher_secret"
         },
         {
+            "con": {
+                "smart": "stackResource",
+                "name": "StackResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1762,13 +1854,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"catalog_id\" <$> TF.attribute",
-                    "name": "catalog_id",
+                    "name": "_catalogId",
                     "method": "catalogId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCatalogId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_catalogId"
+                    "original": "catalog_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -1777,13 +1870,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.Nil",
@@ -1792,13 +1886,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"docker_compose\" <$> TF.attribute",
-                    "name": "docker_compose",
+                    "name": "_dockerCompose",
                     "method": "dockerCompose",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDockerCompose",
+                    "validate": false,
                     "optional": true,
-                    "label": "_dockerCompose"
+                    "original": "docker_compose"
                 },
                 {
                     "default": "TF.Nil",
@@ -1807,13 +1902,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"environment\" <$> TF.attribute",
-                    "name": "environment",
+                    "name": "_environment",
                     "method": "environment",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasEnvironment",
+                    "validate": false,
                     "optional": true,
-                    "label": "_environment"
+                    "original": "environment"
                 },
                 {
                     "default": "_environmentId",
@@ -1822,13 +1918,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -1837,13 +1934,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"finish_upgrade\" <$> TF.attribute",
-                    "name": "finish_upgrade",
+                    "name": "_finishUpgrade",
                     "method": "finishUpgrade",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasFinishUpgrade",
+                    "validate": false,
                     "optional": true,
-                    "label": "_finishUpgrade"
+                    "original": "finish_upgrade"
                 },
                 {
                     "default": "_name",
@@ -1852,13 +1950,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -1867,13 +1966,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rancher_compose\" <$> TF.attribute",
-                    "name": "rancher_compose",
+                    "name": "_rancherCompose",
                     "method": "rancherCompose",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRancherCompose",
+                    "validate": false,
                     "optional": true,
-                    "label": "_rancherCompose"
+                    "original": "rancher_compose"
                 },
                 {
                     "default": "TF.value \"user\"",
@@ -1882,17 +1982,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"scope\" <$> TF.attribute",
-                    "name": "scope",
+                    "name": "_scope",
                     "method": "scope",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasScope",
+                    "validate": false,
                     "optional": true,
-                    "label": "_scope"
+                    "original": "scope"
                 }
             ],
-            "schema": "Resource",
             "name": "StackResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1901,13 +2002,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 },
                 {
                     "default": "TF.Nil",
@@ -1916,13 +2018,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rendered_docker_compose\" <$> TF.attribute",
-                    "name": "rendered_docker_compose",
+                    "name": "_computedRenderedDockerCompose",
                     "method": "computedRenderedDockerCompose",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRenderedDockerCompose",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedRenderedDockerCompose"
+                    "original": "rendered_docker_compose"
                 },
                 {
                     "default": "TF.Nil",
@@ -1931,13 +2034,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rendered_rancher_compose\" <$> TF.attribute",
-                    "name": "rendered_rancher_compose",
+                    "name": "_computedRenderedRancherCompose",
                     "method": "computedRenderedRancherCompose",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRenderedRancherCompose",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedRenderedRancherCompose"
+                    "original": "rendered_rancher_compose"
                 },
                 {
                     "default": "TF.Nil",
@@ -1946,13 +2050,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"start_on_create\" <$> TF.attribute",
-                    "name": "start_on_create",
+                    "name": "_computedStartOnCreate",
                     "method": "computedStartOnCreate",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedStartOnCreate",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedStartOnCreate"
+                    "original": "start_on_create"
                 }
             ],
             "parameters": [
@@ -1963,13 +2068,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_name",
@@ -1978,19 +2084,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "StackResource s",
             "original": "rancher_stack"
         },
         {
+            "con": {
+                "smart": "volumeResource",
+                "name": "VolumeResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1999,13 +2111,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_driver",
@@ -2014,13 +2127,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"driver\" <$> TF.attribute",
-                    "name": "driver",
+                    "name": "_driver",
                     "method": "driver",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDriver",
+                    "validate": false,
                     "optional": false,
-                    "label": "_driver"
+                    "original": "driver"
                 },
                 {
                     "default": "_environmentId",
@@ -2029,13 +2143,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_name",
@@ -2044,17 +2159,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "VolumeResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -2063,13 +2179,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 }
             ],
             "parameters": [
@@ -2080,13 +2197,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"driver\" <$> TF.attribute",
-                    "name": "driver",
+                    "name": "_driver",
                     "method": "driver",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDriver",
+                    "validate": false,
                     "optional": false,
-                    "label": "_driver"
+                    "original": "driver"
                 },
                 {
                     "default": "_environmentId",
@@ -2095,13 +2213,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"environment_id\" <$> TF.attribute",
-                    "name": "environment_id",
+                    "name": "_environmentId",
                     "method": "environmentId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEnvironmentId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_environmentId"
+                    "original": "environment_id"
                 },
                 {
                     "default": "_name",
@@ -2110,19 +2229,108 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "VolumeResource s",
             "original": "rancher_volume"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "API Key used to authenticate with the rancher server"
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"access_key\" <$>",
+                "name": "_accessKey",
+                "method": "accessKey",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasAccessKey",
+                "validate": false,
+                "optional": true,
+                "original": "access_key"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "The URL to the rancher API, must include version uri (ie. v1 or v2-beta)"
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"api_url\" <$>",
+                "name": "_apiUrl",
+                "method": "apiUrl",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasApiUrl",
+                "validate": false,
+                "optional": true,
+                "original": "api_url"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "Path to the Rancher client cli.json config file"
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"config\" <$>",
+                "name": "_config",
+                "method": "config",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasConfig",
+                "validate": false,
+                "optional": true,
+                "original": "config"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "API secret used to authenticate with the rancher server"
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"secret_key\" <$>",
+                "name": "_secretKey",
+                "method": "secretKey",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasSecretKey",
+                "validate": false,
+                "optional": true,
+                "original": "secret_key"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -2132,8 +2340,6 @@
         "microlens"
     ],
     "name": "Rancher",
-    "parameters": [],
     "package": "terrafomo-rancher",
-    "type": "Provider",
     "original": "rancher"
 }
