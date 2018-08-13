@@ -34,6 +34,8 @@ module Terrafomo.Packet.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
 import qualified Data.List.NonEmpty     as P
@@ -62,7 +64,7 @@ newAttachments =
     Attachments'
 
 instance s ~ s' => P.HasComputedHref (TF.Ref s' (Attachments s)) (TF.Attr s P.Text) where
-    computedHref x = TF.compute (TF.refKey x) "href"
+    computedHref x = TF.compute (TF.refKey x) "_computedHref"
 
 -- | @network@ nested settings.
 data Network s = Network'
@@ -79,19 +81,19 @@ newNetwork =
     Network'
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (Network s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
+    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (Network s)) (TF.Attr s P.Integer) where
-    computedCidr x = TF.compute (TF.refKey x) "cidr"
+    computedCidr x = TF.compute (TF.refKey x) "_computedCidr"
 
-instance s ~ s' => P.HasComputedFamily' (TF.Ref s' (Network s)) (TF.Attr s P.Integer) where
-    computedFamily' x = TF.compute (TF.refKey x) "family"
+instance s ~ s' => P.HasComputedFamily (TF.Ref s' (Network s)) (TF.Attr s P.Integer) where
+    computedFamily x = TF.compute (TF.refKey x) "_computedFamily"
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (Network s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "gateway"
+    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (Network s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "public"
+    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
 
 -- | @snapshot_policies@ nested settings.
 data SnapshotPolicies s = SnapshotPolicies'

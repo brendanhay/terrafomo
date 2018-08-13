@@ -67,12 +67,12 @@ module Terrafomo.Packet.Lens
     , HasComputedRootPassword (..)
     , HasComputedAccessPublicIpv4 (..)
     , HasComputedCidr (..)
-    , HasComputedFamily' (..)
     , HasComputedManageable (..)
     , HasComputedBillingCycle (..)
     , HasComputedUpdated (..)
     , HasComputedOrganizationId (..)
     , HasComputedNetmask (..)
+    , HasComputedFamily (..)
     , HasComputedCidrNotation (..)
     , HasComputedHref (..)
     ) where
@@ -319,9 +319,6 @@ class HasComputedAccessPublicIpv4 a b | a -> b where
 class HasComputedCidr a b | a -> b where
     computedCidr :: a -> b
 
-class HasComputedFamily' a b | a -> b where
-    computedFamily' :: a -> b
-
 class HasComputedManageable a b | a -> b where
     computedManageable :: a -> b
 
@@ -336,6 +333,9 @@ class HasComputedOrganizationId a b | a -> b where
 
 class HasComputedNetmask a b | a -> b where
     computedNetmask :: a -> b
+
+class HasComputedFamily a b | a -> b where
+    computedFamily :: a -> b
 
 class HasComputedCidrNotation a b | a -> b where
     computedCidrNotation :: a -> b

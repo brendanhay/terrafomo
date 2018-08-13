@@ -112,28 +112,28 @@ instance P.HasPublic (PrecreatedIpBlockData s) (TF.Attr s P.Bool) where
                           } :: PrecreatedIpBlockData s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
+    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Integer) where
-    computedCidr x = TF.compute (TF.refKey x) "cidr"
+    computedCidr x = TF.compute (TF.refKey x) "_computedCidr"
 
 instance s ~ s' => P.HasComputedCidrNotation (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
-    computedCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
+    computedCidrNotation x = TF.compute (TF.refKey x) "_computedCidrNotation"
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "gateway"
+    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
 
 instance s ~ s' => P.HasComputedManageable (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Bool) where
-    computedManageable x = TF.compute (TF.refKey x) "manageable"
+    computedManageable x = TF.compute (TF.refKey x) "_computedManageable"
 
 instance s ~ s' => P.HasComputedManagement (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Bool) where
-    computedManagement x = TF.compute (TF.refKey x) "management"
+    computedManagement x = TF.compute (TF.refKey x) "_computedManagement"
 
 instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
-    computedNetmask x = TF.compute (TF.refKey x) "netmask"
+    computedNetmask x = TF.compute (TF.refKey x) "_computedNetmask"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
 instance s ~ s' => P.HasComputedQuantity (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Integer) where
-    computedQuantity x = TF.compute (TF.refKey x) "quantity"
+    computedQuantity x = TF.compute (TF.refKey x) "_computedQuantity"

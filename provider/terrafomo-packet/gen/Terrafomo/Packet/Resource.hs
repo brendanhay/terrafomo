@@ -230,37 +230,37 @@ instance P.HasUserData (DeviceResource s) (TF.Attr s P.Text) where
                           } :: DeviceResource s)
 
 instance s ~ s' => P.HasComputedAccessPrivateIpv4 (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedAccessPrivateIpv4 x = TF.compute (TF.refKey x) "access_private_ipv4"
+    computedAccessPrivateIpv4 x = TF.compute (TF.refKey x) "_computedAccessPrivateIpv4"
 
 instance s ~ s' => P.HasComputedAccessPublicIpv4 (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedAccessPublicIpv4 x = TF.compute (TF.refKey x) "access_public_ipv4"
+    computedAccessPublicIpv4 x = TF.compute (TF.refKey x) "_computedAccessPublicIpv4"
 
 instance s ~ s' => P.HasComputedAccessPublicIpv6 (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedAccessPublicIpv6 x = TF.compute (TF.refKey x) "access_public_ipv6"
+    computedAccessPublicIpv6 x = TF.compute (TF.refKey x) "_computedAccessPublicIpv6"
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "created"
+    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
 
 instance s ~ s' => P.HasComputedHardwareReservationId (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedHardwareReservationId x = TF.compute (TF.refKey x) "hardware_reservation_id"
+    computedHardwareReservationId x = TF.compute (TF.refKey x) "_computedHardwareReservationId"
 
 instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Bool) where
-    computedLocked x = TF.compute (TF.refKey x) "locked"
+    computedLocked x = TF.compute (TF.refKey x) "_computedLocked"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (DeviceResource s)) (TF.Attr s [Network s]) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
 instance s ~ s' => P.HasComputedPublicIpv4SubnetSize (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Integer) where
-    computedPublicIpv4SubnetSize x = TF.compute (TF.refKey x) "public_ipv4_subnet_size"
+    computedPublicIpv4SubnetSize x = TF.compute (TF.refKey x) "_computedPublicIpv4SubnetSize"
 
 instance s ~ s' => P.HasComputedRootPassword (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedRootPassword x = TF.compute (TF.refKey x) "root_password"
+    computedRootPassword x = TF.compute (TF.refKey x) "_computedRootPassword"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "updated"
+    computedUpdated x = TF.compute (TF.refKey x) "_computedUpdated"
 
 -- | @packet_ip_attachment@ Resource.
 --
@@ -305,31 +305,31 @@ instance P.HasDeviceId (IpAttachmentResource s) (TF.Attr s P.Text) where
                           } :: IpAttachmentResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
+    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
 
 instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Integer) where
-    computedAddressFamily x = TF.compute (TF.refKey x) "address_family"
+    computedAddressFamily x = TF.compute (TF.refKey x) "_computedAddressFamily"
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Integer) where
-    computedCidr x = TF.compute (TF.refKey x) "cidr"
+    computedCidr x = TF.compute (TF.refKey x) "_computedCidr"
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "gateway"
+    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
 
 instance s ~ s' => P.HasComputedManageable (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Bool) where
-    computedManageable x = TF.compute (TF.refKey x) "manageable"
+    computedManageable x = TF.compute (TF.refKey x) "_computedManageable"
 
 instance s ~ s' => P.HasComputedManagement (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Bool) where
-    computedManagement x = TF.compute (TF.refKey x) "management"
+    computedManagement x = TF.compute (TF.refKey x) "_computedManagement"
 
 instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedNetmask x = TF.compute (TF.refKey x) "netmask"
+    computedNetmask x = TF.compute (TF.refKey x) "_computedNetmask"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "public"
+    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
 
 -- | @packet_organization@ Resource.
 --
@@ -406,10 +406,10 @@ instance P.HasWebsite (OrganizationResource s) (TF.Attr s P.Text) where
                           } :: OrganizationResource s)
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "created"
+    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
 
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "updated"
+    computedUpdated x = TF.compute (TF.refKey x) "_computedUpdated"
 
 -- | @packet_project@ Resource.
 --
@@ -442,16 +442,16 @@ instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
                           } :: ProjectResource s)
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "created"
+    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
 
 instance s ~ s' => P.HasComputedOrganizationId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedOrganizationId x = TF.compute (TF.refKey x) "organization_id"
+    computedOrganizationId x = TF.compute (TF.refKey x) "_computedOrganizationId"
 
 instance s ~ s' => P.HasComputedPaymentMethodId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedPaymentMethodId x = TF.compute (TF.refKey x) "payment_method_id"
+    computedPaymentMethodId x = TF.compute (TF.refKey x) "_computedPaymentMethodId"
 
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "updated"
+    computedUpdated x = TF.compute (TF.refKey x) "_computedUpdated"
 
 -- | @packet_reserved_ip_block@ Resource.
 --
@@ -508,34 +508,34 @@ instance P.HasQuantity (ReservedIpBlockResource s) (TF.Attr s P.Integer) where
                           } :: ReservedIpBlockResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
+    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
 
 instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Integer) where
-    computedAddressFamily x = TF.compute (TF.refKey x) "address_family"
+    computedAddressFamily x = TF.compute (TF.refKey x) "_computedAddressFamily"
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Integer) where
-    computedCidr x = TF.compute (TF.refKey x) "cidr"
+    computedCidr x = TF.compute (TF.refKey x) "_computedCidr"
 
 instance s ~ s' => P.HasComputedCidrNotation (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
+    computedCidrNotation x = TF.compute (TF.refKey x) "_computedCidrNotation"
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "gateway"
+    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
 
 instance s ~ s' => P.HasComputedManageable (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Bool) where
-    computedManageable x = TF.compute (TF.refKey x) "manageable"
+    computedManageable x = TF.compute (TF.refKey x) "_computedManageable"
 
 instance s ~ s' => P.HasComputedManagement (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Bool) where
-    computedManagement x = TF.compute (TF.refKey x) "management"
+    computedManagement x = TF.compute (TF.refKey x) "_computedManagement"
 
 instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedNetmask x = TF.compute (TF.refKey x) "netmask"
+    computedNetmask x = TF.compute (TF.refKey x) "_computedNetmask"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "public"
+    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
 
 -- | @packet_ssh_key@ Resource.
 --
@@ -580,13 +580,13 @@ instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
                           } :: SshKeyResource s)
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "created"
+    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
 
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "updated"
+    computedUpdated x = TF.compute (TF.refKey x) "_computedUpdated"
 
 -- | @packet_volume@ Resource.
 --
@@ -688,22 +688,22 @@ instance P.HasSnapshotPolicies (VolumeResource s) (TF.Attr s [SnapshotPolicies s
                           } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (VolumeResource s)) (TF.Attr s [Attachments s]) where
-    computedAttachments x = TF.compute (TF.refKey x) "attachments"
+    computedAttachments x = TF.compute (TF.refKey x) "_computedAttachments"
 
 instance s ~ s' => P.HasComputedBillingCycle (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedBillingCycle x = TF.compute (TF.refKey x) "billing_cycle"
+    computedBillingCycle x = TF.compute (TF.refKey x) "_computedBillingCycle"
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "created"
+    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "updated"
+    computedUpdated x = TF.compute (TF.refKey x) "_computedUpdated"
 
 -- | @packet_volume_attachment@ Resource.
 --
