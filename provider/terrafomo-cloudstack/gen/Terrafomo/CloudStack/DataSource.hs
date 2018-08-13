@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,7 +25,6 @@ module Terrafomo.CloudStack.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -32,7 +32,10 @@ import Terrafomo.CloudStack.Settings
 
 import qualified Data.Hashable                 as P
 import qualified Data.HashMap.Strict           as P
+import qualified Data.HashMap.Strict           as Map
 import qualified Data.List.NonEmpty            as P
+import qualified Data.Maybe                    as P
+import qualified Data.Monoid                   as P
 import qualified Data.Text                     as P
 import qualified GHC.Generics                  as P
 import qualified Lens.Micro                    as P
@@ -44,6 +47,7 @@ import qualified Terrafomo.CloudStack.Types    as P
 import qualified Terrafomo.HCL                 as TF
 import qualified Terrafomo.Name                as TF
 import qualified Terrafomo.Schema              as TF
+import qualified Terrafomo.Validator           as TF
 
 -- | @cloudstack_template@ DataSource.
 --
@@ -58,34 +62,39 @@ data TemplateData s = TemplateData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (TemplateData s) where
-    toObject TemplateData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "template_filter" <$> TF.attribute _templateFilter
-        ]
-
 templateData
     :: TF.Attr s [TF.Attr s (Filter s)] -- ^ @filter@ - 'P.filter'
     -> TF.Attr s P.Text -- ^ @template_filter@ - 'P.templateFilter'
     -> TF.DataSource P.Provider (TemplateData s)
 templateData _filter _templateFilter =
-    TF.newDataSource "cloudstack_template" $
+    TF.newDataSource "cloudstack_template" TF.validator $
         TemplateData'
             { _filter = _filter
             , _templateFilter = _templateFilter
             }
 
+instance TF.IsObject (TemplateData s) where
+    toObject TemplateData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "template_filter" <$> TF.attribute _templateFilter
+        ]
+
+instance TF.IsValid (TemplateData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: TemplateData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasFilter (TemplateData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: TemplateData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: TemplateData s)
+               (\s a -> s { _filter = a } :: TemplateData s)
 
 instance P.HasTemplateFilter (TemplateData s) (TF.Attr s P.Text) where
     templateFilter =
         P.lens (_templateFilter :: TemplateData s -> TF.Attr s P.Text)
-               (\s a -> s { _templateFilter = a
-                          } :: TemplateData s)
+               (\s a -> s { _templateFilter = a } :: TemplateData s)
 
 instance s ~ s' => P.HasComputedAccount (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedAccount x = TF.compute (TF.refKey x) "_computedAccount"

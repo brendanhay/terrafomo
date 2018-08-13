@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -32,13 +33,15 @@ module Terrafomo.CloudStack.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -48,6 +51,7 @@ import qualified Terrafomo.CloudStack.Lens  as P
 import qualified Terrafomo.CloudStack.Types as P
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.Name             as TF
+import qualified Terrafomo.Validator        as TF
 
 -- | @forward@ nested settings.
 data Forward s = Forward'
@@ -68,17 +72,6 @@ data Forward s = Forward'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Forward s)
-instance TF.IsValue  (Forward s)
-instance TF.IsObject (Forward s) where
-    toObject Forward'{..} = catMaybes
-        [ TF.assign "private_port" <$> TF.attribute _privatePort
-        , TF.assign "protocol" <$> TF.attribute _protocol
-        , TF.assign "public_port" <$> TF.attribute _publicPort
-        , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
-        , TF.assign "vm_guest_ip" <$> TF.attribute _vmGuestIp
-        ]
-
 newForward
     :: TF.Attr s P.Integer -- ^ @private_port@ - 'P.privatePort'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
@@ -94,45 +87,54 @@ newForward _privatePort _protocol _publicPort _virtualMachineId =
         , _vmGuestIp = TF.Nil
         }
 
+instance P.Hashable  (Forward s)
+instance TF.IsValue  (Forward s)
+instance TF.IsObject (Forward s) where
+    toObject Forward'{..} = P.catMaybes
+        [ TF.assign "private_port" <$> TF.attribute _privatePort
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "public_port" <$> TF.attribute _publicPort
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
+        , TF.assign "vm_guest_ip" <$> TF.attribute _vmGuestIp
+        ]
+
+instance TF.IsValid (Forward s) where
+    validator = P.mempty
+
 instance P.HasPrivatePort (Forward s) (TF.Attr s P.Integer) where
     privatePort =
         P.lens (_privatePort :: Forward s -> TF.Attr s P.Integer)
-               (\s a -> s { _privatePort = a
-                          } :: Forward s)
+               (\s a -> s { _privatePort = a } :: Forward s)
 
 instance P.HasProtocol (Forward s) (TF.Attr s P.Text) where
     protocol =
         P.lens (_protocol :: Forward s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a
-                          } :: Forward s)
+               (\s a -> s { _protocol = a } :: Forward s)
 
 instance P.HasPublicPort (Forward s) (TF.Attr s P.Integer) where
     publicPort =
         P.lens (_publicPort :: Forward s -> TF.Attr s P.Integer)
-               (\s a -> s { _publicPort = a
-                          } :: Forward s)
+               (\s a -> s { _publicPort = a } :: Forward s)
 
 instance P.HasVirtualMachineId (Forward s) (TF.Attr s P.Text) where
     virtualMachineId =
         P.lens (_virtualMachineId :: Forward s -> TF.Attr s P.Text)
-               (\s a -> s { _virtualMachineId = a
-                          } :: Forward s)
+               (\s a -> s { _virtualMachineId = a } :: Forward s)
 
 instance P.HasVmGuestIp (Forward s) (TF.Attr s P.Text) where
     vmGuestIp =
         P.lens (_vmGuestIp :: Forward s -> TF.Attr s P.Text)
-               (\s a -> s { _vmGuestIp = a
-                          } :: Forward s)
+               (\s a -> s { _vmGuestIp = a } :: Forward s)
 
 instance s ~ s' => P.HasComputedUuid (TF.Ref s' (Forward s)) (TF.Attr s P.Text) where
     computedUuid x = TF.compute (TF.refKey x) "_computedUuid"
 
 -- | @rule@ nested settings.
 data Rule s = Rule'
-    { _cidrList              :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _cidrList              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @cidr_list@ - (Optional)
     --
-    , _ports                 :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _ports                 :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ports@ - (Optional)
     --
     , _protocol              :: TF.Attr s P.Text
@@ -141,21 +143,10 @@ data Rule s = Rule'
     , _trafficType           :: TF.Attr s P.Text
     -- ^ @traffic_type@ - (Optional)
     --
-    , _userSecurityGroupList :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _userSecurityGroupList :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @user_security_group_list@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance P.Hashable  (Rule s)
-instance TF.IsValue  (Rule s)
-instance TF.IsObject (Rule s) where
-    toObject Rule'{..} = catMaybes
-        [ TF.assign "cidr_list" <$> TF.attribute _cidrList
-        , TF.assign "ports" <$> TF.attribute _ports
-        , TF.assign "protocol" <$> TF.attribute _protocol
-        , TF.assign "traffic_type" <$> TF.attribute _trafficType
-        , TF.assign "user_security_group_list" <$> TF.attribute _userSecurityGroupList
-        ]
 
 newRule
     :: TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
@@ -169,35 +160,44 @@ newRule _protocol =
         , _userSecurityGroupList = TF.Nil
         }
 
-instance P.HasCidrList (Rule s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    cidrList =
-        P.lens (_cidrList :: Rule s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _cidrList = a
-                          } :: Rule s)
+instance P.Hashable  (Rule s)
+instance TF.IsValue  (Rule s)
+instance TF.IsObject (Rule s) where
+    toObject Rule'{..} = P.catMaybes
+        [ TF.assign "cidr_list" <$> TF.attribute _cidrList
+        , TF.assign "ports" <$> TF.attribute _ports
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "traffic_type" <$> TF.attribute _trafficType
+        , TF.assign "user_security_group_list" <$> TF.attribute _userSecurityGroupList
+        ]
 
-instance P.HasPorts (Rule s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance TF.IsValid (Rule s) where
+    validator = P.mempty
+
+instance P.HasCidrList (Rule s) (TF.Attr s [TF.Attr s P.Text]) where
+    cidrList =
+        P.lens (_cidrList :: Rule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _cidrList = a } :: Rule s)
+
+instance P.HasPorts (Rule s) (TF.Attr s [TF.Attr s P.Text]) where
     ports =
-        P.lens (_ports :: Rule s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _ports = a
-                          } :: Rule s)
+        P.lens (_ports :: Rule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _ports = a } :: Rule s)
 
 instance P.HasProtocol (Rule s) (TF.Attr s P.Text) where
     protocol =
         P.lens (_protocol :: Rule s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a
-                          } :: Rule s)
+               (\s a -> s { _protocol = a } :: Rule s)
 
 instance P.HasTrafficType (Rule s) (TF.Attr s P.Text) where
     trafficType =
         P.lens (_trafficType :: Rule s -> TF.Attr s P.Text)
-               (\s a -> s { _trafficType = a
-                          } :: Rule s)
+               (\s a -> s { _trafficType = a } :: Rule s)
 
-instance P.HasUserSecurityGroupList (Rule s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance P.HasUserSecurityGroupList (Rule s) (TF.Attr s [TF.Attr s P.Text]) where
     userSecurityGroupList =
-        P.lens (_userSecurityGroupList :: Rule s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _userSecurityGroupList = a
-                          } :: Rule s)
+        P.lens (_userSecurityGroupList :: Rule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _userSecurityGroupList = a } :: Rule s)
 
 instance s ~ s' => P.HasComputedIcmpCode (TF.Ref s' (Rule s)) (TF.Attr s P.Integer) where
     computedIcmpCode x = TF.compute (TF.refKey x) "_computedIcmpCode"
@@ -218,14 +218,6 @@ data Filter s = Filter'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Filter s)
-instance TF.IsValue  (Filter s)
-instance TF.IsObject (Filter s) where
-    toObject Filter'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
 newFilter
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
@@ -236,14 +228,23 @@ newFilter _name _value =
         , _value = _value
         }
 
+instance P.Hashable  (Filter s)
+instance TF.IsValue  (Filter s)
+instance TF.IsObject (Filter s) where
+    toObject Filter'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (Filter s) where
+    validator = P.mempty
+
 instance P.HasName (Filter s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Filter s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: Filter s)
+               (\s a -> s { _name = a } :: Filter s)
 
 instance P.HasValue (Filter s) (TF.Attr s P.Text) where
     value =
         P.lens (_value :: Filter s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a
-                          } :: Filter s)
+               (\s a -> s { _value = a } :: Filter s)
