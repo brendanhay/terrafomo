@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,7 +25,6 @@ module Terrafomo.DNSimple.Resource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -32,7 +32,10 @@ import Terrafomo.DNSimple.Settings
 
 import qualified Data.Hashable               as P
 import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Maybe                  as P
+import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
 import qualified GHC.Generics                as P
 import qualified Lens.Micro                  as P
@@ -44,6 +47,7 @@ import qualified Terrafomo.DNSimple.Types    as P
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.Schema            as TF
+import qualified Terrafomo.Validator         as TF
 
 -- | @dnsimple_record@ Resource.
 --
@@ -67,15 +71,6 @@ data RecordResource s = RecordResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RecordResource s) where
-    toObject RecordResource'{..} = catMaybes
-        [ TF.assign "domain" <$> TF.attribute _domain
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "ttl" <$> TF.attribute _ttl
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
 recordResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -83,7 +78,7 @@ recordResource
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> TF.Resource P.Provider (RecordResource s)
 recordResource _domain _name _type' _value =
-    TF.newResource "dnsimple_record" $
+    TF.newResource "dnsimple_record" TF.validator $
         RecordResource'
             { _domain = _domain
             , _name = _name
@@ -92,35 +87,42 @@ recordResource _domain _name _type' _value =
             , _value = _value
             }
 
+instance TF.IsObject (RecordResource s) where
+    toObject RecordResource'{..} = P.catMaybes
+        [ TF.assign "domain" <$> TF.attribute _domain
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "ttl" <$> TF.attribute _ttl
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (RecordResource s) where
+    validator = P.mempty
+
 instance P.HasDomain (RecordResource s) (TF.Attr s P.Text) where
     domain =
         P.lens (_domain :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _domain = a
-                          } :: RecordResource s)
+               (\s a -> s { _domain = a } :: RecordResource s)
 
 instance P.HasName (RecordResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: RecordResource s)
+               (\s a -> s { _name = a } :: RecordResource s)
 
 instance P.HasTtl (RecordResource s) (TF.Attr s P.Text) where
     ttl =
         P.lens (_ttl :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ttl = a
-                          } :: RecordResource s)
+               (\s a -> s { _ttl = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: RecordResource s)
+               (\s a -> s { _type' = a } :: RecordResource s)
 
 instance P.HasValue (RecordResource s) (TF.Attr s P.Text) where
     value =
         P.lens (_value :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a
-                          } :: RecordResource s)
+               (\s a -> s { _value = a } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedDomainId x = TF.compute (TF.refKey x) "_computedDomainId"
