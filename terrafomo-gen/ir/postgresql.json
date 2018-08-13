@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newPolicy",
+                "name": "Policy'"
+            },
             "arguments": [
                 {
                     "default": "TF.value P.False",
@@ -12,19 +16,20 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"create\" <$> TF.attribute",
-                    "name": "create",
+                    "name": "_create",
                     "method": "create",
                     "conflicts": [
                         {
                             "default": "TF.value P.False",
-                            "method": "createWithGrant",
-                            "label": "_createWithGrant"
+                            "name": "_createWithGrant",
+                            "method": "createWithGrant"
                         }
                     ],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasCreate",
+                    "validate": false,
                     "optional": true,
-                    "label": "_create"
+                    "original": "create"
                 },
                 {
                     "default": "TF.value P.False",
@@ -36,19 +41,20 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"create_with_grant\" <$> TF.attribute",
-                    "name": "create_with_grant",
+                    "name": "_createWithGrant",
                     "method": "createWithGrant",
                     "conflicts": [
                         {
                             "default": "TF.value P.False",
-                            "method": "create",
-                            "label": "_create"
+                            "name": "_create",
+                            "method": "create"
                         }
                     ],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasCreateWithGrant",
+                    "validate": false,
                     "optional": true,
-                    "label": "_createWithGrant"
+                    "original": "create_with_grant"
                 },
                 {
                     "default": "TF.Nil",
@@ -59,13 +65,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"role\" <$> TF.attribute",
-                    "name": "role",
+                    "name": "_role",
                     "method": "role",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRole",
+                    "validate": false,
                     "optional": true,
-                    "label": "_role"
+                    "original": "role"
                 },
                 {
                     "default": "TF.value P.False",
@@ -76,19 +83,20 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"usage\" <$> TF.attribute",
-                    "name": "usage",
+                    "name": "_usage",
                     "method": "usage",
                     "conflicts": [
                         {
                             "default": "TF.value P.False",
-                            "method": "usageWithGrant",
-                            "label": "_usageWithGrant"
+                            "name": "_usageWithGrant",
+                            "method": "usageWithGrant"
                         }
                     ],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasUsage",
+                    "validate": false,
                     "optional": true,
-                    "label": "_usage"
+                    "original": "usage"
                 },
                 {
                     "default": "TF.value P.False",
@@ -100,207 +108,138 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"usage_with_grant\" <$> TF.attribute",
-                    "name": "usage_with_grant",
+                    "name": "_usageWithGrant",
                     "method": "usageWithGrant",
                     "conflicts": [
                         {
                             "default": "TF.value P.False",
-                            "method": "usage",
-                            "label": "_usage"
+                            "name": "_usage",
+                            "method": "usage"
                         }
                     ],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasUsageWithGrant",
+                    "validate": false,
                     "optional": true,
-                    "label": "_usageWithGrant"
+                    "original": "usage_with_grant"
                 }
             ],
             "name": "Policy",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, allow the specified ROLEs to CREATE new objects within the",
+                        "schema(s)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"create\" <$> TF.attribute",
+                    "name": "_create",
+                    "method": "create",
+                    "conflicts": [
+                        {
+                            "default": "TF.value P.False",
+                            "name": "_createWithGrant",
+                            "method": "createWithGrant"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasCreate",
+                    "validate": false,
+                    "optional": true,
+                    "original": "create"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, allow the specified ROLEs to CREATE new objects within the",
+                        "schema(s) and GRANT the same CREATE privilege to different ROLEs"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"create_with_grant\" <$> TF.attribute",
+                    "name": "_createWithGrant",
+                    "method": "createWithGrant",
+                    "conflicts": [
+                        {
+                            "default": "TF.value P.False",
+                            "name": "_create",
+                            "method": "create"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasCreateWithGrant",
+                    "validate": false,
+                    "optional": true,
+                    "original": "create_with_grant"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, allow the specified ROLEs to use objects within the schema(s)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"usage\" <$> TF.attribute",
+                    "name": "_usage",
+                    "method": "usage",
+                    "conflicts": [
+                        {
+                            "default": "TF.value P.False",
+                            "name": "_usageWithGrant",
+                            "method": "usageWithGrant"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasUsage",
+                    "validate": false,
+                    "optional": true,
+                    "original": "usage"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, allow the specified ROLEs to use objects within the schema(s) and",
+                        "GRANT the same USAGE privilege to different ROLEs"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"usage_with_grant\" <$> TF.attribute",
+                    "name": "_usageWithGrant",
+                    "method": "usageWithGrant",
+                    "conflicts": [
+                        {
+                            "default": "TF.value P.False",
+                            "name": "_usage",
+                            "method": "usage"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasUsageWithGrant",
+                    "validate": false,
+                    "optional": true,
+                    "original": "usage_with_grant"
+                }
+            ],
             "type": "Policy s",
             "original": "policy"
-        }
-    ],
-    "arguments": [
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "Maximum wait for connection, in seconds. Zero or not specified means wait",
-                "indefinitely."
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"connect_timeout\" <$>",
-            "name": "connect_timeout",
-            "method": "connectTimeout",
-            "conflicts": [],
-            "type": "P.Maybe P.Integer",
-            "class": "HasConnectTimeout",
-            "optional": true,
-            "label": "_connectTimeout"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "The name of the database to connect to in order to conenct to (defaults to",
-                "`postgres`)."
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"database\" <$>",
-            "name": "database",
-            "method": "database",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasDatabase",
-            "optional": true,
-            "label": "_database"
-        },
-        {
-            "default": "\"9.0.0\"",
-            "computed": false,
-            "required": false,
-            "help": [
-                "Specify the expected version of PostgreSQL."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"expected_version\"",
-            "name": "expected_version",
-            "method": "expectedVersion",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasExpectedVersion",
-            "optional": true,
-            "label": "_expectedVersion"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "Name of PostgreSQL server address to connect to"
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"host\" <$>",
-            "name": "host",
-            "method": "host",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasHost",
-            "optional": true,
-            "label": "_host"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "Maximum number of connections to establish to the database. Zero means",
-                "unlimited."
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"max_connections\" <$>",
-            "name": "max_connections",
-            "method": "maxConnections",
-            "conflicts": [],
-            "type": "P.Maybe P.Integer",
-            "class": "HasMaxConnections",
-            "optional": true,
-            "label": "_maxConnections"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "Password to be used if the PostgreSQL server demands password authentication"
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"password\" <$>",
-            "name": "password",
-            "method": "password",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasPassword",
-            "optional": true,
-            "label": "_password"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "The PostgreSQL port number to connect to at the server host, or socket file",
-                "name extension for Unix-domain connections"
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"port\" <$>",
-            "name": "port",
-            "method": "port",
-            "conflicts": [],
-            "type": "P.Maybe P.Integer",
-            "class": "HasPort",
-            "optional": true,
-            "label": "_port"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [],
-            "forceNew": false,
-            "encoder": "TF.assign \"ssl_mode\" <$>",
-            "name": "ssl_mode",
-            "method": "sslMode",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasSslMode",
-            "optional": true,
-            "label": "_sslMode"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "This option determines whether or with what priority a secure SSL TCP/IP",
-                "connection will be negotiated with the PostgreSQL server"
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"sslmode\" <$>",
-            "name": "sslmode",
-            "method": "sslmode",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasSslmode",
-            "optional": true,
-            "label": "_sslmode"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "PostgreSQL user name to connect as"
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"username\" <$>",
-            "name": "username",
-            "method": "username",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasUsername",
-            "optional": true,
-            "label": "_username"
         }
     ],
     "dataSources": [],
     "resources": [
         {
+            "con": {
+                "smart": "databaseResource",
+                "name": "DatabaseResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value P.True",
@@ -311,13 +250,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"allow_connections\" <$> TF.attribute",
-                    "name": "allow_connections",
+                    "name": "_allowConnections",
                     "method": "allowConnections",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasAllowConnections",
+                    "validate": false,
                     "optional": true,
-                    "label": "_allowConnections"
+                    "original": "allow_connections"
                 },
                 {
                     "default": "TF.value (-1)",
@@ -328,13 +268,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"connection_limit\" <$> TF.attribute",
-                    "name": "connection_limit",
+                    "name": "_connectionLimit",
                     "method": "connectionLimit",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasConnectionLimit",
+                    "validate": false,
                     "optional": true,
-                    "label": "_connectionLimit"
+                    "original": "connection_limit"
                 },
                 {
                     "default": "_name",
@@ -345,17 +286,18 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "DatabaseResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -366,13 +308,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"encoding\" <$> TF.attribute",
-                    "name": "encoding",
+                    "name": "_computedEncoding",
                     "method": "computedEncoding",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedEncoding",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedEncoding"
+                    "original": "encoding"
                 },
                 {
                     "default": "TF.Nil",
@@ -384,13 +327,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"is_template\" <$> TF.attribute",
-                    "name": "is_template",
+                    "name": "_computedIsTemplate",
                     "method": "computedIsTemplate",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedIsTemplate",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedIsTemplate"
+                    "original": "is_template"
                 },
                 {
                     "default": "TF.Nil",
@@ -401,13 +345,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"lc_collate\" <$> TF.attribute",
-                    "name": "lc_collate",
+                    "name": "_computedLcCollate",
                     "method": "computedLcCollate",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLcCollate",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedLcCollate"
+                    "original": "lc_collate"
                 },
                 {
                     "default": "TF.Nil",
@@ -418,13 +363,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"lc_ctype\" <$> TF.attribute",
-                    "name": "lc_ctype",
+                    "name": "_computedLcCtype",
                     "method": "computedLcCtype",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLcCtype",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedLcCtype"
+                    "original": "lc_ctype"
                 },
                 {
                     "default": "TF.Nil",
@@ -435,13 +381,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"owner\" <$> TF.attribute",
-                    "name": "owner",
+                    "name": "_computedOwner",
                     "method": "computedOwner",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOwner",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedOwner"
+                    "original": "owner"
                 },
                 {
                     "default": "TF.Nil",
@@ -452,13 +399,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"tablespace_name\" <$> TF.attribute",
-                    "name": "tablespace_name",
+                    "name": "_computedTablespaceName",
                     "method": "computedTablespaceName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTablespaceName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedTablespaceName"
+                    "original": "tablespace_name"
                 },
                 {
                     "default": "TF.Nil",
@@ -469,13 +417,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"template\" <$> TF.attribute",
-                    "name": "template",
+                    "name": "_computedTemplate",
                     "method": "computedTemplate",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTemplate",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedTemplate"
+                    "original": "template"
                 }
             ],
             "parameters": [
@@ -488,19 +437,25 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "DatabaseResource s",
             "original": "postgresql_database"
         },
         {
+            "con": {
+                "smart": "extensionResource",
+                "name": "ExtensionResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -509,17 +464,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "ExtensionResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -530,13 +486,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"schema\" <$> TF.attribute",
-                    "name": "schema",
+                    "name": "_computedSchema",
                     "method": "computedSchema",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSchema",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedSchema"
+                    "original": "schema"
                 },
                 {
                     "default": "TF.Nil",
@@ -547,13 +504,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"version\" <$> TF.attribute",
-                    "name": "version",
+                    "name": "_computedVersion",
                     "method": "computedVersion",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVersion",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVersion"
+                    "original": "version"
                 }
             ],
             "parameters": [
@@ -564,19 +522,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "ExtensionResource s",
             "original": "postgresql_extension"
         },
         {
+            "con": {
+                "smart": "roleResource",
+                "name": "RoleResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value P.False",
@@ -587,13 +551,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"bypass_row_level_security\" <$> TF.attribute",
-                    "name": "bypass_row_level_security",
+                    "name": "_bypassRowLevelSecurity",
                     "method": "bypassRowLevelSecurity",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasBypassRowLevelSecurity",
+                    "validate": false,
                     "optional": true,
-                    "label": "_bypassRowLevelSecurity"
+                    "original": "bypass_row_level_security"
                 },
                 {
                     "default": "TF.value (-1)",
@@ -604,13 +569,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"connection_limit\" <$> TF.attribute",
-                    "name": "connection_limit",
+                    "name": "_connectionLimit",
                     "method": "connectionLimit",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasConnectionLimit",
+                    "validate": false,
                     "optional": true,
-                    "label": "_connectionLimit"
+                    "original": "connection_limit"
                 },
                 {
                     "default": "TF.value P.False",
@@ -621,13 +587,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"create_database\" <$> TF.attribute",
-                    "name": "create_database",
+                    "name": "_createDatabase",
                     "method": "createDatabase",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasCreateDatabase",
+                    "validate": false,
                     "optional": true,
-                    "label": "_createDatabase"
+                    "original": "create_database"
                 },
                 {
                     "default": "TF.value P.False",
@@ -638,13 +605,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"create_role\" <$> TF.attribute",
-                    "name": "create_role",
+                    "name": "_createRole",
                     "method": "createRole",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasCreateRole",
+                    "validate": false,
                     "optional": true,
-                    "label": "_createRole"
+                    "original": "create_role"
                 },
                 {
                     "default": "TF.Nil",
@@ -653,13 +621,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"encrypted\" <$> TF.attribute",
-                    "name": "encrypted",
+                    "name": "_encrypted",
                     "method": "encrypted",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEncrypted",
+                    "validate": false,
                     "optional": true,
-                    "label": "_encrypted"
+                    "original": "encrypted"
                 },
                 {
                     "default": "TF.value P.True",
@@ -670,13 +639,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"encrypted_password\" <$> TF.attribute",
-                    "name": "encrypted_password",
+                    "name": "_encryptedPassword",
                     "method": "encryptedPassword",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasEncryptedPassword",
+                    "validate": false,
                     "optional": true,
-                    "label": "_encryptedPassword"
+                    "original": "encrypted_password"
                 },
                 {
                     "default": "TF.value P.True",
@@ -688,13 +658,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"inherit\" <$> TF.attribute",
-                    "name": "inherit",
+                    "name": "_inherit",
                     "method": "inherit",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasInherit",
+                    "validate": false,
                     "optional": true,
-                    "label": "_inherit"
+                    "original": "inherit"
                 },
                 {
                     "default": "TF.value P.False",
@@ -705,13 +676,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"login\" <$> TF.attribute",
-                    "name": "login",
+                    "name": "_login",
                     "method": "login",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasLogin",
+                    "validate": false,
                     "optional": true,
-                    "label": "_login"
+                    "original": "login"
                 },
                 {
                     "default": "_name",
@@ -722,13 +694,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.value P.False",
@@ -740,13 +713,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"replication\" <$> TF.attribute",
-                    "name": "replication",
+                    "name": "_replication",
                     "method": "replication",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasReplication",
+                    "validate": false,
                     "optional": true,
-                    "label": "_replication"
+                    "original": "replication"
                 },
                 {
                     "default": "TF.value P.False",
@@ -758,13 +732,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"skip_drop_role\" <$> TF.attribute",
-                    "name": "skip_drop_role",
+                    "name": "_skipDropRole",
                     "method": "skipDropRole",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasSkipDropRole",
+                    "validate": false,
                     "optional": true,
-                    "label": "_skipDropRole"
+                    "original": "skip_drop_role"
                 },
                 {
                     "default": "TF.value P.False",
@@ -776,13 +751,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"skip_reassign_owned\" <$> TF.attribute",
-                    "name": "skip_reassign_owned",
+                    "name": "_skipReassignOwned",
                     "method": "skipReassignOwned",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasSkipReassignOwned",
+                    "validate": false,
                     "optional": true,
-                    "label": "_skipReassignOwned"
+                    "original": "skip_reassign_owned"
                 },
                 {
                     "default": "TF.value P.False",
@@ -793,13 +769,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"superuser\" <$> TF.attribute",
-                    "name": "superuser",
+                    "name": "_superuser",
                     "method": "superuser",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasSuperuser",
+                    "validate": false,
                     "optional": true,
-                    "label": "_superuser"
+                    "original": "superuser"
                 },
                 {
                     "default": "TF.value \"infinity\"",
@@ -810,17 +787,18 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"valid_until\" <$> TF.attribute",
-                    "name": "valid_until",
+                    "name": "_validUntil",
                     "method": "validUntil",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasValidUntil",
+                    "validate": false,
                     "optional": true,
-                    "label": "_validUntil"
+                    "original": "valid_until"
                 }
             ],
-            "schema": "Resource",
             "name": "RoleResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -831,13 +809,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"password\" <$> TF.attribute",
-                    "name": "password",
+                    "name": "_computedPassword",
                     "method": "computedPassword",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPassword",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedPassword"
+                    "original": "password"
                 }
             ],
             "parameters": [
@@ -850,19 +829,25 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "RoleResource s",
             "original": "postgresql_role"
         },
         {
+            "con": {
+                "smart": "schemaResource",
+                "name": "SchemaResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value P.True",
@@ -873,13 +858,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"if_not_exists\" <$> TF.attribute",
-                    "name": "if_not_exists",
+                    "name": "_ifNotExists",
                     "method": "ifNotExists",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasIfNotExists",
+                    "validate": false,
                     "optional": true,
-                    "label": "_ifNotExists"
+                    "original": "if_not_exists"
                 },
                 {
                     "default": "_name",
@@ -890,17 +876,18 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "SchemaResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -911,13 +898,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"owner\" <$> TF.attribute",
-                    "name": "owner",
+                    "name": "_computedOwner",
                     "method": "computedOwner",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOwner",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedOwner"
+                    "original": "owner"
                 },
                 {
                     "default": "TF.Nil",
@@ -926,13 +914,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"policy\" <$> TF.attribute",
-                    "name": "policy",
+                    "name": "_computedPolicy",
                     "method": "computedPolicy",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s (Policy s)]",
                     "class": "HasComputedPolicy",
+                    "validate": true,
                     "optional": true,
-                    "label": "_computedPolicy"
+                    "original": "policy"
                 }
             ],
             "parameters": [
@@ -945,19 +934,219 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "SchemaResource s",
             "original": "postgresql_schema"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "Maximum wait for connection, in seconds. Zero or not specified means wait",
+                    "indefinitely."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"connect_timeout\" <$>",
+                "name": "_connectTimeout",
+                "method": "connectTimeout",
+                "conflicts": [],
+                "type": "P.Maybe P.Integer",
+                "class": "HasConnectTimeout",
+                "validate": false,
+                "optional": true,
+                "original": "connect_timeout"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "The name of the database to connect to in order to conenct to (defaults to",
+                    "`postgres`)."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"database\" <$>",
+                "name": "_database",
+                "method": "database",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasDatabase",
+                "validate": false,
+                "optional": true,
+                "original": "database"
+            },
+            {
+                "default": "\"9.0.0\"",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "Specify the expected version of PostgreSQL."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"expected_version\"",
+                "name": "_expectedVersion",
+                "method": "expectedVersion",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasExpectedVersion",
+                "validate": false,
+                "optional": true,
+                "original": "expected_version"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "Name of PostgreSQL server address to connect to"
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"host\" <$>",
+                "name": "_host",
+                "method": "host",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasHost",
+                "validate": false,
+                "optional": true,
+                "original": "host"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "Maximum number of connections to establish to the database. Zero means",
+                    "unlimited."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"max_connections\" <$>",
+                "name": "_maxConnections",
+                "method": "maxConnections",
+                "conflicts": [],
+                "type": "P.Maybe P.Integer",
+                "class": "HasMaxConnections",
+                "validate": false,
+                "optional": true,
+                "original": "max_connections"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "Password to be used if the PostgreSQL server demands password authentication"
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"password\" <$>",
+                "name": "_password",
+                "method": "password",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasPassword",
+                "validate": false,
+                "optional": true,
+                "original": "password"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "The PostgreSQL port number to connect to at the server host, or socket file",
+                    "name extension for Unix-domain connections"
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"port\" <$>",
+                "name": "_port",
+                "method": "port",
+                "conflicts": [],
+                "type": "P.Maybe P.Integer",
+                "class": "HasPort",
+                "validate": false,
+                "optional": true,
+                "original": "port"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [],
+                "forceNew": false,
+                "encoder": "TF.assign \"ssl_mode\" <$>",
+                "name": "_sslMode",
+                "method": "sslMode",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasSslMode",
+                "validate": false,
+                "optional": true,
+                "original": "ssl_mode"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "This option determines whether or with what priority a secure SSL TCP/IP",
+                    "connection will be negotiated with the PostgreSQL server"
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"sslmode\" <$>",
+                "name": "_sslmode",
+                "method": "sslmode",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasSslmode",
+                "validate": false,
+                "optional": true,
+                "original": "sslmode"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "PostgreSQL user name to connect as"
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"username\" <$>",
+                "name": "_username",
+                "method": "username",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasUsername",
+                "validate": false,
+                "optional": true,
+                "original": "username"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -967,8 +1156,6 @@
         "microlens"
     ],
     "name": "PostgreSQL",
-    "parameters": [],
     "package": "terrafomo-postgresql",
-    "type": "Provider",
     "original": "postgresql"
 }
