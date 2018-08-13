@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -28,7 +29,6 @@ module Terrafomo.Kubernetes.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -36,7 +36,10 @@ import Terrafomo.Kubernetes.Settings
 
 import qualified Data.Hashable                 as P
 import qualified Data.HashMap.Strict           as P
+import qualified Data.HashMap.Strict           as Map
 import qualified Data.List.NonEmpty            as P
+import qualified Data.Maybe                    as P
+import qualified Data.Monoid                   as P
 import qualified Data.Text                     as P
 import qualified GHC.Generics                  as P
 import qualified Lens.Micro                    as P
@@ -48,6 +51,7 @@ import qualified Terrafomo.Kubernetes.Provider as P
 import qualified Terrafomo.Kubernetes.Types    as P
 import qualified Terrafomo.Name                as TF
 import qualified Terrafomo.Schema              as TF
+import qualified Terrafomo.Validator           as TF
 
 -- | @kubernetes_service@ DataSource.
 --
@@ -61,27 +65,33 @@ data ServiceData s = ServiceData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ServiceData s) where
-    toObject ServiceData'{..} = catMaybes
-        [ TF.assign "metadata" <$> TF.attribute _metadata
-        ]
-
 serviceData
     :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.DataSource P.Provider (ServiceData s)
 serviceData _metadata =
-    TF.newDataSource "kubernetes_service" $
+    TF.newDataSource "kubernetes_service" TF.validator $
         ServiceData'
             { _metadata = _metadata
             }
 
+instance TF.IsObject (ServiceData s) where
+    toObject ServiceData'{..} = P.catMaybes
+        [ TF.assign "metadata" <$> TF.attribute _metadata
+        ]
+
+instance TF.IsValid (ServiceData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_metadata"
+                  (_metadata
+                      :: ServiceData s -> TF.Attr s (Metadata s))
+                  TF.validator
+
 instance P.HasMetadata (ServiceData s) (TF.Attr s (Metadata s)) where
     metadata =
         P.lens (_metadata :: ServiceData s -> TF.Attr s (Metadata s))
-               (\s a -> s { _metadata = a
-                          } :: ServiceData s)
+               (\s a -> s { _metadata = a } :: ServiceData s)
 
-instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceData s)) (TF.Attr s [LoadBalancerIngress s]) where
+instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceData s)) (TF.Attr s [TF.Attr s (LoadBalancerIngress s)]) where
     computedLoadBalancerIngress x = TF.compute (TF.refKey x) "_computedLoadBalancerIngress"
 
 instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ServiceData s)) (TF.Attr s (Spec s)) where
@@ -99,25 +109,31 @@ data StorageClassData s = StorageClassData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (StorageClassData s) where
-    toObject StorageClassData'{..} = catMaybes
-        [ TF.assign "metadata" <$> TF.attribute _metadata
-        ]
-
 storageClassData
     :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.DataSource P.Provider (StorageClassData s)
 storageClassData _metadata =
-    TF.newDataSource "kubernetes_storage_class" $
+    TF.newDataSource "kubernetes_storage_class" TF.validator $
         StorageClassData'
             { _metadata = _metadata
             }
 
+instance TF.IsObject (StorageClassData s) where
+    toObject StorageClassData'{..} = P.catMaybes
+        [ TF.assign "metadata" <$> TF.attribute _metadata
+        ]
+
+instance TF.IsValid (StorageClassData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_metadata"
+                  (_metadata
+                      :: StorageClassData s -> TF.Attr s (Metadata s))
+                  TF.validator
+
 instance P.HasMetadata (StorageClassData s) (TF.Attr s (Metadata s)) where
     metadata =
         P.lens (_metadata :: StorageClassData s -> TF.Attr s (Metadata s))
-               (\s a -> s { _metadata = a
-                          } :: StorageClassData s)
+               (\s a -> s { _metadata = a } :: StorageClassData s)
 
 instance s ~ s' => P.HasComputedParameters (TF.Ref s' (StorageClassData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedParameters x = TF.compute (TF.refKey x) "_computedParameters"

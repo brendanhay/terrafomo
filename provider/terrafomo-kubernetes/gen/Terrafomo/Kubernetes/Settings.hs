@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -268,13 +269,15 @@ module Terrafomo.Kubernetes.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -284,10 +287,11 @@ import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.Kubernetes.Lens  as P
 import qualified Terrafomo.Kubernetes.Types as P
 import qualified Terrafomo.Name             as TF
+import qualified Terrafomo.Validator        as TF
 
 -- | @ceph_fs@ nested settings.
 data CephFs s = CephFs'
-    { _monitors   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _monitors   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @monitors@ - (Required)
     -- Monitors is a collection of Ceph monitors More info:
     -- http://releases.k8s.io/HEAD/examples/volumes/cephfs/README.md#how-to-use-it
@@ -320,20 +324,8 @@ data CephFs s = CephFs'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (CephFs s)
-instance TF.IsValue  (CephFs s)
-instance TF.IsObject (CephFs s) where
-    toObject CephFs'{..} = catMaybes
-        [ TF.assign "monitors" <$> TF.attribute _monitors
-        , TF.assign "path" <$> TF.attribute _path
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "secret_file" <$> TF.attribute _secretFile
-        , TF.assign "secret_ref" <$> TF.attribute _secretRef
-        , TF.assign "user" <$> TF.attribute _user
-        ]
-
 newCephFs
-    :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @monitors@ - 'P.monitors'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @monitors@ - 'P.monitors'
     -> CephFs s
 newCephFs _monitors =
     CephFs'
@@ -345,41 +337,54 @@ newCephFs _monitors =
         , _user = TF.Nil
         }
 
-instance P.HasMonitors (CephFs s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance P.Hashable  (CephFs s)
+instance TF.IsValue  (CephFs s)
+instance TF.IsObject (CephFs s) where
+    toObject CephFs'{..} = P.catMaybes
+        [ TF.assign "monitors" <$> TF.attribute _monitors
+        , TF.assign "path" <$> TF.attribute _path
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "secret_file" <$> TF.attribute _secretFile
+        , TF.assign "secret_ref" <$> TF.attribute _secretRef
+        , TF.assign "user" <$> TF.attribute _user
+        ]
+
+instance TF.IsValid (CephFs s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_secretRef"
+                  (_secretRef
+                      :: CephFs s -> TF.Attr s (SecretRef s))
+                  TF.validator
+
+instance P.HasMonitors (CephFs s) (TF.Attr s [TF.Attr s P.Text]) where
     monitors =
-        P.lens (_monitors :: CephFs s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _monitors = a
-                          } :: CephFs s)
+        P.lens (_monitors :: CephFs s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _monitors = a } :: CephFs s)
 
 instance P.HasPath (CephFs s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: CephFs s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a
-                          } :: CephFs s)
+               (\s a -> s { _path = a } :: CephFs s)
 
 instance P.HasReadOnly (CephFs s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: CephFs s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: CephFs s)
+               (\s a -> s { _readOnly = a } :: CephFs s)
 
 instance P.HasSecretFile (CephFs s) (TF.Attr s P.Text) where
     secretFile =
         P.lens (_secretFile :: CephFs s -> TF.Attr s P.Text)
-               (\s a -> s { _secretFile = a
-                          } :: CephFs s)
+               (\s a -> s { _secretFile = a } :: CephFs s)
 
 instance P.HasSecretRef (CephFs s) (TF.Attr s (SecretRef s)) where
     secretRef =
         P.lens (_secretRef :: CephFs s -> TF.Attr s (SecretRef s))
-               (\s a -> s { _secretRef = a
-                          } :: CephFs s)
+               (\s a -> s { _secretRef = a } :: CephFs s)
 
 instance P.HasUser (CephFs s) (TF.Attr s P.Text) where
     user =
         P.lens (_user :: CephFs s -> TF.Attr s P.Text)
-               (\s a -> s { _user = a
-                          } :: CephFs s)
+               (\s a -> s { _user = a } :: CephFs s)
 
 -- | @image_pull_secret@ nested settings.
 data ImagePullSecret s = ImagePullSecret'
@@ -390,13 +395,6 @@ data ImagePullSecret s = ImagePullSecret'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (ImagePullSecret s)
-instance TF.IsValue  (ImagePullSecret s)
-instance TF.IsObject (ImagePullSecret s) where
-    toObject ImagePullSecret'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 newImagePullSecret
     :: ImagePullSecret s
 newImagePullSecret =
@@ -404,11 +402,20 @@ newImagePullSecret =
         { _name = TF.Nil
         }
 
+instance P.Hashable  (ImagePullSecret s)
+instance TF.IsValue  (ImagePullSecret s)
+instance TF.IsObject (ImagePullSecret s) where
+    toObject ImagePullSecret'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ImagePullSecret s) where
+    validator = P.mempty
+
 instance P.HasName (ImagePullSecret s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ImagePullSecret s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ImagePullSecret s)
+               (\s a -> s { _name = a } :: ImagePullSecret s)
 
 -- | @cinder@ nested settings.
 data Cinder s = Cinder'
@@ -432,15 +439,6 @@ data Cinder s = Cinder'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Cinder s)
-instance TF.IsValue  (Cinder s)
-instance TF.IsObject (Cinder s) where
-    toObject Cinder'{..} = catMaybes
-        [ TF.assign "fs_type" <$> TF.attribute _fsType
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "volume_id" <$> TF.attribute _volumeId
-        ]
-
 newCinder
     :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> Cinder s
@@ -451,23 +449,32 @@ newCinder _volumeId =
         , _volumeId = _volumeId
         }
 
+instance P.Hashable  (Cinder s)
+instance TF.IsValue  (Cinder s)
+instance TF.IsObject (Cinder s) where
+    toObject Cinder'{..} = P.catMaybes
+        [ TF.assign "fs_type" <$> TF.attribute _fsType
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "volume_id" <$> TF.attribute _volumeId
+        ]
+
+instance TF.IsValid (Cinder s) where
+    validator = P.mempty
+
 instance P.HasFsType (Cinder s) (TF.Attr s P.Text) where
     fsType =
         P.lens (_fsType :: Cinder s -> TF.Attr s P.Text)
-               (\s a -> s { _fsType = a
-                          } :: Cinder s)
+               (\s a -> s { _fsType = a } :: Cinder s)
 
 instance P.HasReadOnly (Cinder s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: Cinder s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: Cinder s)
+               (\s a -> s { _readOnly = a } :: Cinder s)
 
 instance P.HasVolumeId (Cinder s) (TF.Attr s P.Text) where
     volumeId =
         P.lens (_volumeId :: Cinder s -> TF.Attr s P.Text)
-               (\s a -> s { _volumeId = a
-                          } :: Cinder s)
+               (\s a -> s { _volumeId = a } :: Cinder s)
 
 -- | @post_start@ nested settings.
 data PostStart s = PostStart'
@@ -479,21 +486,12 @@ data PostStart s = PostStart'
     -- ^ @http_get@ - (Optional)
     -- Specifies the http request to perform.
     --
-    , _tcpSocket :: TF.Attr s [TcpSocket s]
+    , _tcpSocket :: TF.Attr s [TF.Attr s (TcpSocket s)]
     -- ^ @tcp_socket@ - (Optional)
     -- TCPSocket specifies an action involving a TCP port. TCP hooks not yet
     -- supported
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance P.Hashable  (PostStart s)
-instance TF.IsValue  (PostStart s)
-instance TF.IsObject (PostStart s) where
-    toObject PostStart'{..} = catMaybes
-        [ TF.assign "exec" <$> TF.attribute _exec
-        , TF.assign "http_get" <$> TF.attribute _httpGet
-        , TF.assign "tcp_socket" <$> TF.attribute _tcpSocket
-        ]
 
 newPostStart
     :: PostStart s
@@ -504,23 +502,44 @@ newPostStart =
         , _tcpSocket = TF.Nil
         }
 
+instance P.Hashable  (PostStart s)
+instance TF.IsValue  (PostStart s)
+instance TF.IsObject (PostStart s) where
+    toObject PostStart'{..} = P.catMaybes
+        [ TF.assign "exec" <$> TF.attribute _exec
+        , TF.assign "http_get" <$> TF.attribute _httpGet
+        , TF.assign "tcp_socket" <$> TF.attribute _tcpSocket
+        ]
+
+instance TF.IsValid (PostStart s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_exec"
+                  (_exec
+                      :: PostStart s -> TF.Attr s (Exec s))
+                  TF.validator
+           P.<> TF.settingsValidator "_httpGet"
+                  (_httpGet
+                      :: PostStart s -> TF.Attr s (HttpGet s))
+                  TF.validator
+           P.<> TF.settingsValidator "_tcpSocket"
+                  (_tcpSocket
+                      :: PostStart s -> TF.Attr s [TF.Attr s (TcpSocket s)])
+                  TF.validator
+
 instance P.HasExec (PostStart s) (TF.Attr s (Exec s)) where
     exec =
         P.lens (_exec :: PostStart s -> TF.Attr s (Exec s))
-               (\s a -> s { _exec = a
-                          } :: PostStart s)
+               (\s a -> s { _exec = a } :: PostStart s)
 
 instance P.HasHttpGet (PostStart s) (TF.Attr s (HttpGet s)) where
     httpGet =
         P.lens (_httpGet :: PostStart s -> TF.Attr s (HttpGet s))
-               (\s a -> s { _httpGet = a
-                          } :: PostStart s)
+               (\s a -> s { _httpGet = a } :: PostStart s)
 
-instance P.HasTcpSocket (PostStart s) (TF.Attr s [TcpSocket s]) where
+instance P.HasTcpSocket (PostStart s) (TF.Attr s [TF.Attr s (TcpSocket s)]) where
     tcpSocket =
-        P.lens (_tcpSocket :: PostStart s -> TF.Attr s [TcpSocket s])
-               (\s a -> s { _tcpSocket = a
-                          } :: PostStart s)
+        P.lens (_tcpSocket :: PostStart s -> TF.Attr s [TF.Attr s (TcpSocket s)])
+               (\s a -> s { _tcpSocket = a } :: PostStart s)
 
 -- | @host_path@ nested settings.
 data HostPath s = HostPath'
@@ -531,13 +550,6 @@ data HostPath s = HostPath'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (HostPath s)
-instance TF.IsValue  (HostPath s)
-instance TF.IsObject (HostPath s) where
-    toObject HostPath'{..} = catMaybes
-        [ TF.assign "path" <$> TF.attribute _path
-        ]
-
 newHostPath
     :: HostPath s
 newHostPath =
@@ -545,11 +557,20 @@ newHostPath =
         { _path = TF.Nil
         }
 
+instance P.Hashable  (HostPath s)
+instance TF.IsValue  (HostPath s)
+instance TF.IsObject (HostPath s) where
+    toObject HostPath'{..} = P.catMaybes
+        [ TF.assign "path" <$> TF.attribute _path
+        ]
+
+instance TF.IsValid (HostPath s) where
+    validator = P.mempty
+
 instance P.HasPath (HostPath s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: HostPath s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a
-                          } :: HostPath s)
+               (\s a -> s { _path = a } :: HostPath s)
 
 -- | @flocker@ nested settings.
 data Flocker s = Flocker'
@@ -564,14 +585,6 @@ data Flocker s = Flocker'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Flocker s)
-instance TF.IsValue  (Flocker s)
-instance TF.IsObject (Flocker s) where
-    toObject Flocker'{..} = catMaybes
-        [ TF.assign "dataset_name" <$> TF.attribute _datasetName
-        , TF.assign "dataset_uuid" <$> TF.attribute _datasetUuid
-        ]
-
 newFlocker
     :: Flocker s
 newFlocker =
@@ -580,17 +593,26 @@ newFlocker =
         , _datasetUuid = TF.Nil
         }
 
+instance P.Hashable  (Flocker s)
+instance TF.IsValue  (Flocker s)
+instance TF.IsObject (Flocker s) where
+    toObject Flocker'{..} = P.catMaybes
+        [ TF.assign "dataset_name" <$> TF.attribute _datasetName
+        , TF.assign "dataset_uuid" <$> TF.attribute _datasetUuid
+        ]
+
+instance TF.IsValid (Flocker s) where
+    validator = P.mempty
+
 instance P.HasDatasetName (Flocker s) (TF.Attr s P.Text) where
     datasetName =
         P.lens (_datasetName :: Flocker s -> TF.Attr s P.Text)
-               (\s a -> s { _datasetName = a
-                          } :: Flocker s)
+               (\s a -> s { _datasetName = a } :: Flocker s)
 
 instance P.HasDatasetUuid (Flocker s) (TF.Attr s P.Text) where
     datasetUuid =
         P.lens (_datasetUuid :: Flocker s -> TF.Attr s P.Text)
-               (\s a -> s { _datasetUuid = a
-                          } :: Flocker s)
+               (\s a -> s { _datasetUuid = a } :: Flocker s)
 
 -- | @readiness_probe@ nested settings.
 data ReadinessProbe s = ReadinessProbe'
@@ -622,7 +644,7 @@ data ReadinessProbe s = ReadinessProbe'
     -- Minimum consecutive successes for the probe to be considered successful
     -- after having failed.
     --
-    , _tcpSocket           :: TF.Attr s [TcpSocket s]
+    , _tcpSocket           :: TF.Attr s [TF.Attr s (TcpSocket s)]
     -- ^ @tcp_socket@ - (Optional)
     -- TCPSocket specifies an action involving a TCP port. TCP hooks not yet
     -- supported
@@ -633,20 +655,6 @@ data ReadinessProbe s = ReadinessProbe'
     -- http://kubernetes.io/docs/user-guide/pod-states#container-probes
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance P.Hashable  (ReadinessProbe s)
-instance TF.IsValue  (ReadinessProbe s)
-instance TF.IsObject (ReadinessProbe s) where
-    toObject ReadinessProbe'{..} = catMaybes
-        [ TF.assign "exec" <$> TF.attribute _exec
-        , TF.assign "failure_threshold" <$> TF.attribute _failureThreshold
-        , TF.assign "http_get" <$> TF.attribute _httpGet
-        , TF.assign "initial_delay_seconds" <$> TF.attribute _initialDelaySeconds
-        , TF.assign "period_seconds" <$> TF.attribute _periodSeconds
-        , TF.assign "success_threshold" <$> TF.attribute _successThreshold
-        , TF.assign "tcp_socket" <$> TF.attribute _tcpSocket
-        , TF.assign "timeout_seconds" <$> TF.attribute _timeoutSeconds
-        ]
 
 newReadinessProbe
     :: ReadinessProbe s
@@ -662,53 +670,74 @@ newReadinessProbe =
         , _timeoutSeconds = TF.value 1
         }
 
+instance P.Hashable  (ReadinessProbe s)
+instance TF.IsValue  (ReadinessProbe s)
+instance TF.IsObject (ReadinessProbe s) where
+    toObject ReadinessProbe'{..} = P.catMaybes
+        [ TF.assign "exec" <$> TF.attribute _exec
+        , TF.assign "failure_threshold" <$> TF.attribute _failureThreshold
+        , TF.assign "http_get" <$> TF.attribute _httpGet
+        , TF.assign "initial_delay_seconds" <$> TF.attribute _initialDelaySeconds
+        , TF.assign "period_seconds" <$> TF.attribute _periodSeconds
+        , TF.assign "success_threshold" <$> TF.attribute _successThreshold
+        , TF.assign "tcp_socket" <$> TF.attribute _tcpSocket
+        , TF.assign "timeout_seconds" <$> TF.attribute _timeoutSeconds
+        ]
+
+instance TF.IsValid (ReadinessProbe s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_exec"
+                  (_exec
+                      :: ReadinessProbe s -> TF.Attr s (Exec s))
+                  TF.validator
+           P.<> TF.settingsValidator "_httpGet"
+                  (_httpGet
+                      :: ReadinessProbe s -> TF.Attr s (HttpGet s))
+                  TF.validator
+           P.<> TF.settingsValidator "_tcpSocket"
+                  (_tcpSocket
+                      :: ReadinessProbe s -> TF.Attr s [TF.Attr s (TcpSocket s)])
+                  TF.validator
+
 instance P.HasExec (ReadinessProbe s) (TF.Attr s (Exec s)) where
     exec =
         P.lens (_exec :: ReadinessProbe s -> TF.Attr s (Exec s))
-               (\s a -> s { _exec = a
-                          } :: ReadinessProbe s)
+               (\s a -> s { _exec = a } :: ReadinessProbe s)
 
 instance P.HasFailureThreshold (ReadinessProbe s) (TF.Attr s P.Integer) where
     failureThreshold =
         P.lens (_failureThreshold :: ReadinessProbe s -> TF.Attr s P.Integer)
-               (\s a -> s { _failureThreshold = a
-                          } :: ReadinessProbe s)
+               (\s a -> s { _failureThreshold = a } :: ReadinessProbe s)
 
 instance P.HasHttpGet (ReadinessProbe s) (TF.Attr s (HttpGet s)) where
     httpGet =
         P.lens (_httpGet :: ReadinessProbe s -> TF.Attr s (HttpGet s))
-               (\s a -> s { _httpGet = a
-                          } :: ReadinessProbe s)
+               (\s a -> s { _httpGet = a } :: ReadinessProbe s)
 
 instance P.HasInitialDelaySeconds (ReadinessProbe s) (TF.Attr s P.Integer) where
     initialDelaySeconds =
         P.lens (_initialDelaySeconds :: ReadinessProbe s -> TF.Attr s P.Integer)
-               (\s a -> s { _initialDelaySeconds = a
-                          } :: ReadinessProbe s)
+               (\s a -> s { _initialDelaySeconds = a } :: ReadinessProbe s)
 
 instance P.HasPeriodSeconds (ReadinessProbe s) (TF.Attr s P.Integer) where
     periodSeconds =
         P.lens (_periodSeconds :: ReadinessProbe s -> TF.Attr s P.Integer)
-               (\s a -> s { _periodSeconds = a
-                          } :: ReadinessProbe s)
+               (\s a -> s { _periodSeconds = a } :: ReadinessProbe s)
 
 instance P.HasSuccessThreshold (ReadinessProbe s) (TF.Attr s P.Integer) where
     successThreshold =
         P.lens (_successThreshold :: ReadinessProbe s -> TF.Attr s P.Integer)
-               (\s a -> s { _successThreshold = a
-                          } :: ReadinessProbe s)
+               (\s a -> s { _successThreshold = a } :: ReadinessProbe s)
 
-instance P.HasTcpSocket (ReadinessProbe s) (TF.Attr s [TcpSocket s]) where
+instance P.HasTcpSocket (ReadinessProbe s) (TF.Attr s [TF.Attr s (TcpSocket s)]) where
     tcpSocket =
-        P.lens (_tcpSocket :: ReadinessProbe s -> TF.Attr s [TcpSocket s])
-               (\s a -> s { _tcpSocket = a
-                          } :: ReadinessProbe s)
+        P.lens (_tcpSocket :: ReadinessProbe s -> TF.Attr s [TF.Attr s (TcpSocket s)])
+               (\s a -> s { _tcpSocket = a } :: ReadinessProbe s)
 
 instance P.HasTimeoutSeconds (ReadinessProbe s) (TF.Attr s P.Integer) where
     timeoutSeconds =
         P.lens (_timeoutSeconds :: ReadinessProbe s -> TF.Attr s P.Integer)
-               (\s a -> s { _timeoutSeconds = a
-                          } :: ReadinessProbe s)
+               (\s a -> s { _timeoutSeconds = a } :: ReadinessProbe s)
 
 -- | @empty_dir@ nested settings.
 data EmptyDir s = EmptyDir'
@@ -721,13 +750,6 @@ data EmptyDir s = EmptyDir'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (EmptyDir s)
-instance TF.IsValue  (EmptyDir s)
-instance TF.IsObject (EmptyDir s) where
-    toObject EmptyDir'{..} = catMaybes
-        [ TF.assign "medium" <$> TF.attribute _medium
-        ]
-
 newEmptyDir
     :: EmptyDir s
 newEmptyDir =
@@ -735,11 +757,20 @@ newEmptyDir =
         { _medium = TF.Nil
         }
 
+instance P.Hashable  (EmptyDir s)
+instance TF.IsValue  (EmptyDir s)
+instance TF.IsObject (EmptyDir s) where
+    toObject EmptyDir'{..} = P.catMaybes
+        [ TF.assign "medium" <$> TF.attribute _medium
+        ]
+
+instance TF.IsValid (EmptyDir s) where
+    validator = P.mempty
+
 instance P.HasMedium (EmptyDir s) (TF.Attr s P.Text) where
     medium =
         P.lens (_medium :: EmptyDir s -> TF.Attr s P.Text)
-               (\s a -> s { _medium = a
-                          } :: EmptyDir s)
+               (\s a -> s { _medium = a } :: EmptyDir s)
 
 -- | @env@ nested settings.
 data Env s = Env'
@@ -762,15 +793,6 @@ data Env s = Env'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Env s)
-instance TF.IsValue  (Env s)
-instance TF.IsObject (Env s) where
-    toObject Env'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "value" <$> TF.attribute _value
-        , TF.assign "value_from" <$> TF.attribute _valueFrom
-        ]
-
 newEnv
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> Env s
@@ -781,27 +803,40 @@ newEnv _name =
         , _valueFrom = TF.Nil
         }
 
+instance P.Hashable  (Env s)
+instance TF.IsValue  (Env s)
+instance TF.IsObject (Env s) where
+    toObject Env'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "value" <$> TF.attribute _value
+        , TF.assign "value_from" <$> TF.attribute _valueFrom
+        ]
+
+instance TF.IsValid (Env s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_valueFrom"
+                  (_valueFrom
+                      :: Env s -> TF.Attr s (ValueFrom s))
+                  TF.validator
+
 instance P.HasName (Env s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Env s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: Env s)
+               (\s a -> s { _name = a } :: Env s)
 
 instance P.HasValue (Env s) (TF.Attr s P.Text) where
     value =
         P.lens (_value :: Env s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a
-                          } :: Env s)
+               (\s a -> s { _value = a } :: Env s)
 
 instance P.HasValueFrom (Env s) (TF.Attr s (ValueFrom s)) where
     valueFrom =
         P.lens (_valueFrom :: Env s -> TF.Attr s (ValueFrom s))
-               (\s a -> s { _valueFrom = a
-                          } :: Env s)
+               (\s a -> s { _valueFrom = a } :: Env s)
 
 -- | @selector@ nested settings.
 data Selector s = Selector'
-    { _matchExpressions :: TF.Attr s [MatchExpressions s]
+    { _matchExpressions :: TF.Attr s [TF.Attr s (MatchExpressions s)]
     -- ^ @match_expressions@ - (Optional)
     -- A list of label selector requirements. The requirements are ANDed.
     --
@@ -814,14 +849,6 @@ data Selector s = Selector'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Selector s)
-instance TF.IsValue  (Selector s)
-instance TF.IsObject (Selector s) where
-    toObject Selector'{..} = catMaybes
-        [ TF.assign "match_expressions" <$> TF.attribute _matchExpressions
-        , TF.assign "match_labels" <$> TF.attribute _matchLabels
-        ]
-
 newSelector
     :: Selector s
 newSelector =
@@ -830,17 +857,30 @@ newSelector =
         , _matchLabels = TF.Nil
         }
 
-instance P.HasMatchExpressions (Selector s) (TF.Attr s [MatchExpressions s]) where
+instance P.Hashable  (Selector s)
+instance TF.IsValue  (Selector s)
+instance TF.IsObject (Selector s) where
+    toObject Selector'{..} = P.catMaybes
+        [ TF.assign "match_expressions" <$> TF.attribute _matchExpressions
+        , TF.assign "match_labels" <$> TF.attribute _matchLabels
+        ]
+
+instance TF.IsValid (Selector s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_matchExpressions"
+                  (_matchExpressions
+                      :: Selector s -> TF.Attr s [TF.Attr s (MatchExpressions s)])
+                  TF.validator
+
+instance P.HasMatchExpressions (Selector s) (TF.Attr s [TF.Attr s (MatchExpressions s)]) where
     matchExpressions =
-        P.lens (_matchExpressions :: Selector s -> TF.Attr s [MatchExpressions s])
-               (\s a -> s { _matchExpressions = a
-                          } :: Selector s)
+        P.lens (_matchExpressions :: Selector s -> TF.Attr s [TF.Attr s (MatchExpressions s)])
+               (\s a -> s { _matchExpressions = a } :: Selector s)
 
 instance P.HasMatchLabels (Selector s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     matchLabels =
         P.lens (_matchLabels :: Selector s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _matchLabels = a
-                          } :: Selector s)
+               (\s a -> s { _matchLabels = a } :: Selector s)
 
 -- | @downward_api@ nested settings.
 data DownwardApi s = DownwardApi'
@@ -852,7 +892,7 @@ data DownwardApi s = DownwardApi'
     -- affect the file mode, like fsGroup, and the result can be other mode bits
     -- set.
     --
-    , _items       :: TF.Attr s [Items s]
+    , _items       :: TF.Attr s [TF.Attr s (Items s)]
     -- ^ @items@ - (Optional)
     -- If unspecified, each key-value pair in the Data field of the referenced
     -- ConfigMap will be projected into the volume as a file whose name is the key
@@ -864,14 +904,6 @@ data DownwardApi s = DownwardApi'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (DownwardApi s)
-instance TF.IsValue  (DownwardApi s)
-instance TF.IsObject (DownwardApi s) where
-    toObject DownwardApi'{..} = catMaybes
-        [ TF.assign "default_mode" <$> TF.attribute _defaultMode
-        , TF.assign "items" <$> TF.attribute _items
-        ]
-
 newDownwardApi
     :: DownwardApi s
 newDownwardApi =
@@ -880,17 +912,30 @@ newDownwardApi =
         , _items = TF.Nil
         }
 
+instance P.Hashable  (DownwardApi s)
+instance TF.IsValue  (DownwardApi s)
+instance TF.IsObject (DownwardApi s) where
+    toObject DownwardApi'{..} = P.catMaybes
+        [ TF.assign "default_mode" <$> TF.attribute _defaultMode
+        , TF.assign "items" <$> TF.attribute _items
+        ]
+
+instance TF.IsValid (DownwardApi s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_items"
+                  (_items
+                      :: DownwardApi s -> TF.Attr s [TF.Attr s (Items s)])
+                  TF.validator
+
 instance P.HasDefaultMode (DownwardApi s) (TF.Attr s P.Integer) where
     defaultMode =
         P.lens (_defaultMode :: DownwardApi s -> TF.Attr s P.Integer)
-               (\s a -> s { _defaultMode = a
-                          } :: DownwardApi s)
+               (\s a -> s { _defaultMode = a } :: DownwardApi s)
 
-instance P.HasItems (DownwardApi s) (TF.Attr s [Items s]) where
+instance P.HasItems (DownwardApi s) (TF.Attr s [TF.Attr s (Items s)]) where
     items =
-        P.lens (_items :: DownwardApi s -> TF.Attr s [Items s])
-               (\s a -> s { _items = a
-                          } :: DownwardApi s)
+        P.lens (_items :: DownwardApi s -> TF.Attr s [TF.Attr s (Items s)])
+               (\s a -> s { _items = a } :: DownwardApi s)
 
 -- | @persistent_volume_source@ nested settings.
 data PersistentVolumeSource s = PersistentVolumeSource'
@@ -984,29 +1029,6 @@ data PersistentVolumeSource s = PersistentVolumeSource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (PersistentVolumeSource s)
-instance TF.IsValue  (PersistentVolumeSource s)
-instance TF.IsObject (PersistentVolumeSource s) where
-    toObject PersistentVolumeSource'{..} = catMaybes
-        [ TF.assign "aws_elastic_block_store" <$> TF.attribute _awsElasticBlockStore
-        , TF.assign "azure_disk" <$> TF.attribute _azureDisk
-        , TF.assign "azure_file" <$> TF.attribute _azureFile
-        , TF.assign "ceph_fs" <$> TF.attribute _cephFs
-        , TF.assign "cinder" <$> TF.attribute _cinder
-        , TF.assign "fc" <$> TF.attribute _fc
-        , TF.assign "flex_volume" <$> TF.attribute _flexVolume
-        , TF.assign "flocker" <$> TF.attribute _flocker
-        , TF.assign "gce_persistent_disk" <$> TF.attribute _gcePersistentDisk
-        , TF.assign "glusterfs" <$> TF.attribute _glusterfs
-        , TF.assign "host_path" <$> TF.attribute _hostPath
-        , TF.assign "iscsi" <$> TF.attribute _iscsi
-        , TF.assign "nfs" <$> TF.attribute _nfs
-        , TF.assign "photon_persistent_disk" <$> TF.attribute _photonPersistentDisk
-        , TF.assign "quobyte" <$> TF.attribute _quobyte
-        , TF.assign "rbd" <$> TF.attribute _rbd
-        , TF.assign "vsphere_volume" <$> TF.attribute _vsphereVolume
-        ]
-
 newPersistentVolumeSource
     :: PersistentVolumeSource s
 newPersistentVolumeSource =
@@ -1030,107 +1052,184 @@ newPersistentVolumeSource =
         , _vsphereVolume = TF.Nil
         }
 
+instance P.Hashable  (PersistentVolumeSource s)
+instance TF.IsValue  (PersistentVolumeSource s)
+instance TF.IsObject (PersistentVolumeSource s) where
+    toObject PersistentVolumeSource'{..} = P.catMaybes
+        [ TF.assign "aws_elastic_block_store" <$> TF.attribute _awsElasticBlockStore
+        , TF.assign "azure_disk" <$> TF.attribute _azureDisk
+        , TF.assign "azure_file" <$> TF.attribute _azureFile
+        , TF.assign "ceph_fs" <$> TF.attribute _cephFs
+        , TF.assign "cinder" <$> TF.attribute _cinder
+        , TF.assign "fc" <$> TF.attribute _fc
+        , TF.assign "flex_volume" <$> TF.attribute _flexVolume
+        , TF.assign "flocker" <$> TF.attribute _flocker
+        , TF.assign "gce_persistent_disk" <$> TF.attribute _gcePersistentDisk
+        , TF.assign "glusterfs" <$> TF.attribute _glusterfs
+        , TF.assign "host_path" <$> TF.attribute _hostPath
+        , TF.assign "iscsi" <$> TF.attribute _iscsi
+        , TF.assign "nfs" <$> TF.attribute _nfs
+        , TF.assign "photon_persistent_disk" <$> TF.attribute _photonPersistentDisk
+        , TF.assign "quobyte" <$> TF.attribute _quobyte
+        , TF.assign "rbd" <$> TF.attribute _rbd
+        , TF.assign "vsphere_volume" <$> TF.attribute _vsphereVolume
+        ]
+
+instance TF.IsValid (PersistentVolumeSource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_awsElasticBlockStore"
+                  (_awsElasticBlockStore
+                      :: PersistentVolumeSource s -> TF.Attr s (AwsElasticBlockStore s))
+                  TF.validator
+           P.<> TF.settingsValidator "_azureDisk"
+                  (_azureDisk
+                      :: PersistentVolumeSource s -> TF.Attr s (AzureDisk s))
+                  TF.validator
+           P.<> TF.settingsValidator "_azureFile"
+                  (_azureFile
+                      :: PersistentVolumeSource s -> TF.Attr s (AzureFile s))
+                  TF.validator
+           P.<> TF.settingsValidator "_cephFs"
+                  (_cephFs
+                      :: PersistentVolumeSource s -> TF.Attr s (CephFs s))
+                  TF.validator
+           P.<> TF.settingsValidator "_cinder"
+                  (_cinder
+                      :: PersistentVolumeSource s -> TF.Attr s (Cinder s))
+                  TF.validator
+           P.<> TF.settingsValidator "_fc"
+                  (_fc
+                      :: PersistentVolumeSource s -> TF.Attr s (Fc s))
+                  TF.validator
+           P.<> TF.settingsValidator "_flexVolume"
+                  (_flexVolume
+                      :: PersistentVolumeSource s -> TF.Attr s (FlexVolume s))
+                  TF.validator
+           P.<> TF.settingsValidator "_flocker"
+                  (_flocker
+                      :: PersistentVolumeSource s -> TF.Attr s (Flocker s))
+                  TF.validator
+           P.<> TF.settingsValidator "_gcePersistentDisk"
+                  (_gcePersistentDisk
+                      :: PersistentVolumeSource s -> TF.Attr s (GcePersistentDisk s))
+                  TF.validator
+           P.<> TF.settingsValidator "_glusterfs"
+                  (_glusterfs
+                      :: PersistentVolumeSource s -> TF.Attr s (Glusterfs s))
+                  TF.validator
+           P.<> TF.settingsValidator "_hostPath"
+                  (_hostPath
+                      :: PersistentVolumeSource s -> TF.Attr s (HostPath s))
+                  TF.validator
+           P.<> TF.settingsValidator "_iscsi"
+                  (_iscsi
+                      :: PersistentVolumeSource s -> TF.Attr s (Iscsi s))
+                  TF.validator
+           P.<> TF.settingsValidator "_nfs"
+                  (_nfs
+                      :: PersistentVolumeSource s -> TF.Attr s (Nfs s))
+                  TF.validator
+           P.<> TF.settingsValidator "_photonPersistentDisk"
+                  (_photonPersistentDisk
+                      :: PersistentVolumeSource s -> TF.Attr s (PhotonPersistentDisk s))
+                  TF.validator
+           P.<> TF.settingsValidator "_quobyte"
+                  (_quobyte
+                      :: PersistentVolumeSource s -> TF.Attr s (Quobyte s))
+                  TF.validator
+           P.<> TF.settingsValidator "_rbd"
+                  (_rbd
+                      :: PersistentVolumeSource s -> TF.Attr s (Rbd s))
+                  TF.validator
+           P.<> TF.settingsValidator "_vsphereVolume"
+                  (_vsphereVolume
+                      :: PersistentVolumeSource s -> TF.Attr s (VsphereVolume s))
+                  TF.validator
+
 instance P.HasAwsElasticBlockStore (PersistentVolumeSource s) (TF.Attr s (AwsElasticBlockStore s)) where
     awsElasticBlockStore =
         P.lens (_awsElasticBlockStore :: PersistentVolumeSource s -> TF.Attr s (AwsElasticBlockStore s))
-               (\s a -> s { _awsElasticBlockStore = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _awsElasticBlockStore = a } :: PersistentVolumeSource s)
 
 instance P.HasAzureDisk (PersistentVolumeSource s) (TF.Attr s (AzureDisk s)) where
     azureDisk =
         P.lens (_azureDisk :: PersistentVolumeSource s -> TF.Attr s (AzureDisk s))
-               (\s a -> s { _azureDisk = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _azureDisk = a } :: PersistentVolumeSource s)
 
 instance P.HasAzureFile (PersistentVolumeSource s) (TF.Attr s (AzureFile s)) where
     azureFile =
         P.lens (_azureFile :: PersistentVolumeSource s -> TF.Attr s (AzureFile s))
-               (\s a -> s { _azureFile = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _azureFile = a } :: PersistentVolumeSource s)
 
 instance P.HasCephFs (PersistentVolumeSource s) (TF.Attr s (CephFs s)) where
     cephFs =
         P.lens (_cephFs :: PersistentVolumeSource s -> TF.Attr s (CephFs s))
-               (\s a -> s { _cephFs = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _cephFs = a } :: PersistentVolumeSource s)
 
 instance P.HasCinder (PersistentVolumeSource s) (TF.Attr s (Cinder s)) where
     cinder =
         P.lens (_cinder :: PersistentVolumeSource s -> TF.Attr s (Cinder s))
-               (\s a -> s { _cinder = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _cinder = a } :: PersistentVolumeSource s)
 
 instance P.HasFc (PersistentVolumeSource s) (TF.Attr s (Fc s)) where
     fc =
         P.lens (_fc :: PersistentVolumeSource s -> TF.Attr s (Fc s))
-               (\s a -> s { _fc = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _fc = a } :: PersistentVolumeSource s)
 
 instance P.HasFlexVolume (PersistentVolumeSource s) (TF.Attr s (FlexVolume s)) where
     flexVolume =
         P.lens (_flexVolume :: PersistentVolumeSource s -> TF.Attr s (FlexVolume s))
-               (\s a -> s { _flexVolume = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _flexVolume = a } :: PersistentVolumeSource s)
 
 instance P.HasFlocker (PersistentVolumeSource s) (TF.Attr s (Flocker s)) where
     flocker =
         P.lens (_flocker :: PersistentVolumeSource s -> TF.Attr s (Flocker s))
-               (\s a -> s { _flocker = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _flocker = a } :: PersistentVolumeSource s)
 
 instance P.HasGcePersistentDisk (PersistentVolumeSource s) (TF.Attr s (GcePersistentDisk s)) where
     gcePersistentDisk =
         P.lens (_gcePersistentDisk :: PersistentVolumeSource s -> TF.Attr s (GcePersistentDisk s))
-               (\s a -> s { _gcePersistentDisk = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _gcePersistentDisk = a } :: PersistentVolumeSource s)
 
 instance P.HasGlusterfs (PersistentVolumeSource s) (TF.Attr s (Glusterfs s)) where
     glusterfs =
         P.lens (_glusterfs :: PersistentVolumeSource s -> TF.Attr s (Glusterfs s))
-               (\s a -> s { _glusterfs = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _glusterfs = a } :: PersistentVolumeSource s)
 
 instance P.HasHostPath (PersistentVolumeSource s) (TF.Attr s (HostPath s)) where
     hostPath =
         P.lens (_hostPath :: PersistentVolumeSource s -> TF.Attr s (HostPath s))
-               (\s a -> s { _hostPath = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _hostPath = a } :: PersistentVolumeSource s)
 
 instance P.HasIscsi (PersistentVolumeSource s) (TF.Attr s (Iscsi s)) where
     iscsi =
         P.lens (_iscsi :: PersistentVolumeSource s -> TF.Attr s (Iscsi s))
-               (\s a -> s { _iscsi = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _iscsi = a } :: PersistentVolumeSource s)
 
 instance P.HasNfs (PersistentVolumeSource s) (TF.Attr s (Nfs s)) where
     nfs =
         P.lens (_nfs :: PersistentVolumeSource s -> TF.Attr s (Nfs s))
-               (\s a -> s { _nfs = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _nfs = a } :: PersistentVolumeSource s)
 
 instance P.HasPhotonPersistentDisk (PersistentVolumeSource s) (TF.Attr s (PhotonPersistentDisk s)) where
     photonPersistentDisk =
         P.lens (_photonPersistentDisk :: PersistentVolumeSource s -> TF.Attr s (PhotonPersistentDisk s))
-               (\s a -> s { _photonPersistentDisk = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _photonPersistentDisk = a } :: PersistentVolumeSource s)
 
 instance P.HasQuobyte (PersistentVolumeSource s) (TF.Attr s (Quobyte s)) where
     quobyte =
         P.lens (_quobyte :: PersistentVolumeSource s -> TF.Attr s (Quobyte s))
-               (\s a -> s { _quobyte = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _quobyte = a } :: PersistentVolumeSource s)
 
 instance P.HasRbd (PersistentVolumeSource s) (TF.Attr s (Rbd s)) where
     rbd =
         P.lens (_rbd :: PersistentVolumeSource s -> TF.Attr s (Rbd s))
-               (\s a -> s { _rbd = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _rbd = a } :: PersistentVolumeSource s)
 
 instance P.HasVsphereVolume (PersistentVolumeSource s) (TF.Attr s (VsphereVolume s)) where
     vsphereVolume =
         P.lens (_vsphereVolume :: PersistentVolumeSource s -> TF.Attr s (VsphereVolume s))
-               (\s a -> s { _vsphereVolume = a
-                          } :: PersistentVolumeSource s)
+               (\s a -> s { _vsphereVolume = a } :: PersistentVolumeSource s)
 
 -- | @vsphere_volume@ nested settings.
 data VsphereVolume s = VsphereVolume'
@@ -1146,14 +1245,6 @@ data VsphereVolume s = VsphereVolume'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (VsphereVolume s)
-instance TF.IsValue  (VsphereVolume s)
-instance TF.IsObject (VsphereVolume s) where
-    toObject VsphereVolume'{..} = catMaybes
-        [ TF.assign "fs_type" <$> TF.attribute _fsType
-        , TF.assign "volume_path" <$> TF.attribute _volumePath
-        ]
-
 newVsphereVolume
     :: TF.Attr s P.Text -- ^ @volume_path@ - 'P.volumePath'
     -> VsphereVolume s
@@ -1163,17 +1254,26 @@ newVsphereVolume _volumePath =
         , _volumePath = _volumePath
         }
 
+instance P.Hashable  (VsphereVolume s)
+instance TF.IsValue  (VsphereVolume s)
+instance TF.IsObject (VsphereVolume s) where
+    toObject VsphereVolume'{..} = P.catMaybes
+        [ TF.assign "fs_type" <$> TF.attribute _fsType
+        , TF.assign "volume_path" <$> TF.attribute _volumePath
+        ]
+
+instance TF.IsValid (VsphereVolume s) where
+    validator = P.mempty
+
 instance P.HasFsType (VsphereVolume s) (TF.Attr s P.Text) where
     fsType =
         P.lens (_fsType :: VsphereVolume s -> TF.Attr s P.Text)
-               (\s a -> s { _fsType = a
-                          } :: VsphereVolume s)
+               (\s a -> s { _fsType = a } :: VsphereVolume s)
 
 instance P.HasVolumePath (VsphereVolume s) (TF.Attr s P.Text) where
     volumePath =
         P.lens (_volumePath :: VsphereVolume s -> TF.Attr s P.Text)
-               (\s a -> s { _volumePath = a
-                          } :: VsphereVolume s)
+               (\s a -> s { _volumePath = a } :: VsphereVolume s)
 
 -- | @secret_ref@ nested settings.
 data SecretRef s = SecretRef'
@@ -1184,13 +1284,6 @@ data SecretRef s = SecretRef'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (SecretRef s)
-instance TF.IsValue  (SecretRef s)
-instance TF.IsObject (SecretRef s) where
-    toObject SecretRef'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 newSecretRef
     :: SecretRef s
 newSecretRef =
@@ -1198,11 +1291,20 @@ newSecretRef =
         { _name = TF.Nil
         }
 
+instance P.Hashable  (SecretRef s)
+instance TF.IsValue  (SecretRef s)
+instance TF.IsObject (SecretRef s) where
+    toObject SecretRef'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (SecretRef s) where
+    validator = P.mempty
+
 instance P.HasName (SecretRef s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SecretRef s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: SecretRef s)
+               (\s a -> s { _name = a } :: SecretRef s)
 
 -- | @volume@ nested settings.
 data Volume s = Volume'
@@ -1328,36 +1430,6 @@ data Volume s = Volume'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Volume s)
-instance TF.IsValue  (Volume s)
-instance TF.IsObject (Volume s) where
-    toObject Volume'{..} = catMaybes
-        [ TF.assign "aws_elastic_block_store" <$> TF.attribute _awsElasticBlockStore
-        , TF.assign "azure_disk" <$> TF.attribute _azureDisk
-        , TF.assign "azure_file" <$> TF.attribute _azureFile
-        , TF.assign "ceph_fs" <$> TF.attribute _cephFs
-        , TF.assign "cinder" <$> TF.attribute _cinder
-        , TF.assign "config_map" <$> TF.attribute _configMap
-        , TF.assign "downward_api" <$> TF.attribute _downwardApi
-        , TF.assign "empty_dir" <$> TF.attribute _emptyDir
-        , TF.assign "fc" <$> TF.attribute _fc
-        , TF.assign "flex_volume" <$> TF.attribute _flexVolume
-        , TF.assign "flocker" <$> TF.attribute _flocker
-        , TF.assign "gce_persistent_disk" <$> TF.attribute _gcePersistentDisk
-        , TF.assign "git_repo" <$> TF.attribute _gitRepo
-        , TF.assign "glusterfs" <$> TF.attribute _glusterfs
-        , TF.assign "host_path" <$> TF.attribute _hostPath
-        , TF.assign "iscsi" <$> TF.attribute _iscsi
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "nfs" <$> TF.attribute _nfs
-        , TF.assign "persistent_volume_claim" <$> TF.attribute _persistentVolumeClaim
-        , TF.assign "photon_persistent_disk" <$> TF.attribute _photonPersistentDisk
-        , TF.assign "quobyte" <$> TF.attribute _quobyte
-        , TF.assign "rbd" <$> TF.attribute _rbd
-        , TF.assign "secret" <$> TF.attribute _secret
-        , TF.assign "vsphere_volume" <$> TF.attribute _vsphereVolume
-        ]
-
 newVolume
     :: Volume s
 newVolume =
@@ -1388,149 +1460,250 @@ newVolume =
         , _vsphereVolume = TF.Nil
         }
 
+instance P.Hashable  (Volume s)
+instance TF.IsValue  (Volume s)
+instance TF.IsObject (Volume s) where
+    toObject Volume'{..} = P.catMaybes
+        [ TF.assign "aws_elastic_block_store" <$> TF.attribute _awsElasticBlockStore
+        , TF.assign "azure_disk" <$> TF.attribute _azureDisk
+        , TF.assign "azure_file" <$> TF.attribute _azureFile
+        , TF.assign "ceph_fs" <$> TF.attribute _cephFs
+        , TF.assign "cinder" <$> TF.attribute _cinder
+        , TF.assign "config_map" <$> TF.attribute _configMap
+        , TF.assign "downward_api" <$> TF.attribute _downwardApi
+        , TF.assign "empty_dir" <$> TF.attribute _emptyDir
+        , TF.assign "fc" <$> TF.attribute _fc
+        , TF.assign "flex_volume" <$> TF.attribute _flexVolume
+        , TF.assign "flocker" <$> TF.attribute _flocker
+        , TF.assign "gce_persistent_disk" <$> TF.attribute _gcePersistentDisk
+        , TF.assign "git_repo" <$> TF.attribute _gitRepo
+        , TF.assign "glusterfs" <$> TF.attribute _glusterfs
+        , TF.assign "host_path" <$> TF.attribute _hostPath
+        , TF.assign "iscsi" <$> TF.attribute _iscsi
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "nfs" <$> TF.attribute _nfs
+        , TF.assign "persistent_volume_claim" <$> TF.attribute _persistentVolumeClaim
+        , TF.assign "photon_persistent_disk" <$> TF.attribute _photonPersistentDisk
+        , TF.assign "quobyte" <$> TF.attribute _quobyte
+        , TF.assign "rbd" <$> TF.attribute _rbd
+        , TF.assign "secret" <$> TF.attribute _secret
+        , TF.assign "vsphere_volume" <$> TF.attribute _vsphereVolume
+        ]
+
+instance TF.IsValid (Volume s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_awsElasticBlockStore"
+                  (_awsElasticBlockStore
+                      :: Volume s -> TF.Attr s (AwsElasticBlockStore s))
+                  TF.validator
+           P.<> TF.settingsValidator "_azureDisk"
+                  (_azureDisk
+                      :: Volume s -> TF.Attr s (AzureDisk s))
+                  TF.validator
+           P.<> TF.settingsValidator "_azureFile"
+                  (_azureFile
+                      :: Volume s -> TF.Attr s (AzureFile s))
+                  TF.validator
+           P.<> TF.settingsValidator "_cephFs"
+                  (_cephFs
+                      :: Volume s -> TF.Attr s (CephFs s))
+                  TF.validator
+           P.<> TF.settingsValidator "_cinder"
+                  (_cinder
+                      :: Volume s -> TF.Attr s (Cinder s))
+                  TF.validator
+           P.<> TF.settingsValidator "_configMap"
+                  (_configMap
+                      :: Volume s -> TF.Attr s (ConfigMap s))
+                  TF.validator
+           P.<> TF.settingsValidator "_downwardApi"
+                  (_downwardApi
+                      :: Volume s -> TF.Attr s (DownwardApi s))
+                  TF.validator
+           P.<> TF.settingsValidator "_emptyDir"
+                  (_emptyDir
+                      :: Volume s -> TF.Attr s (EmptyDir s))
+                  TF.validator
+           P.<> TF.settingsValidator "_fc"
+                  (_fc
+                      :: Volume s -> TF.Attr s (Fc s))
+                  TF.validator
+           P.<> TF.settingsValidator "_flexVolume"
+                  (_flexVolume
+                      :: Volume s -> TF.Attr s (FlexVolume s))
+                  TF.validator
+           P.<> TF.settingsValidator "_flocker"
+                  (_flocker
+                      :: Volume s -> TF.Attr s (Flocker s))
+                  TF.validator
+           P.<> TF.settingsValidator "_gcePersistentDisk"
+                  (_gcePersistentDisk
+                      :: Volume s -> TF.Attr s (GcePersistentDisk s))
+                  TF.validator
+           P.<> TF.settingsValidator "_gitRepo"
+                  (_gitRepo
+                      :: Volume s -> TF.Attr s (GitRepo s))
+                  TF.validator
+           P.<> TF.settingsValidator "_glusterfs"
+                  (_glusterfs
+                      :: Volume s -> TF.Attr s (Glusterfs s))
+                  TF.validator
+           P.<> TF.settingsValidator "_hostPath"
+                  (_hostPath
+                      :: Volume s -> TF.Attr s (HostPath s))
+                  TF.validator
+           P.<> TF.settingsValidator "_iscsi"
+                  (_iscsi
+                      :: Volume s -> TF.Attr s (Iscsi s))
+                  TF.validator
+           P.<> TF.settingsValidator "_nfs"
+                  (_nfs
+                      :: Volume s -> TF.Attr s (Nfs s))
+                  TF.validator
+           P.<> TF.settingsValidator "_persistentVolumeClaim"
+                  (_persistentVolumeClaim
+                      :: Volume s -> TF.Attr s (PersistentVolumeClaim s))
+                  TF.validator
+           P.<> TF.settingsValidator "_photonPersistentDisk"
+                  (_photonPersistentDisk
+                      :: Volume s -> TF.Attr s (PhotonPersistentDisk s))
+                  TF.validator
+           P.<> TF.settingsValidator "_quobyte"
+                  (_quobyte
+                      :: Volume s -> TF.Attr s (Quobyte s))
+                  TF.validator
+           P.<> TF.settingsValidator "_rbd"
+                  (_rbd
+                      :: Volume s -> TF.Attr s (Rbd s))
+                  TF.validator
+           P.<> TF.settingsValidator "_secret"
+                  (_secret
+                      :: Volume s -> TF.Attr s (Secret s))
+                  TF.validator
+           P.<> TF.settingsValidator "_vsphereVolume"
+                  (_vsphereVolume
+                      :: Volume s -> TF.Attr s (VsphereVolume s))
+                  TF.validator
+
 instance P.HasAwsElasticBlockStore (Volume s) (TF.Attr s (AwsElasticBlockStore s)) where
     awsElasticBlockStore =
         P.lens (_awsElasticBlockStore :: Volume s -> TF.Attr s (AwsElasticBlockStore s))
-               (\s a -> s { _awsElasticBlockStore = a
-                          } :: Volume s)
+               (\s a -> s { _awsElasticBlockStore = a } :: Volume s)
 
 instance P.HasAzureDisk (Volume s) (TF.Attr s (AzureDisk s)) where
     azureDisk =
         P.lens (_azureDisk :: Volume s -> TF.Attr s (AzureDisk s))
-               (\s a -> s { _azureDisk = a
-                          } :: Volume s)
+               (\s a -> s { _azureDisk = a } :: Volume s)
 
 instance P.HasAzureFile (Volume s) (TF.Attr s (AzureFile s)) where
     azureFile =
         P.lens (_azureFile :: Volume s -> TF.Attr s (AzureFile s))
-               (\s a -> s { _azureFile = a
-                          } :: Volume s)
+               (\s a -> s { _azureFile = a } :: Volume s)
 
 instance P.HasCephFs (Volume s) (TF.Attr s (CephFs s)) where
     cephFs =
         P.lens (_cephFs :: Volume s -> TF.Attr s (CephFs s))
-               (\s a -> s { _cephFs = a
-                          } :: Volume s)
+               (\s a -> s { _cephFs = a } :: Volume s)
 
 instance P.HasCinder (Volume s) (TF.Attr s (Cinder s)) where
     cinder =
         P.lens (_cinder :: Volume s -> TF.Attr s (Cinder s))
-               (\s a -> s { _cinder = a
-                          } :: Volume s)
+               (\s a -> s { _cinder = a } :: Volume s)
 
 instance P.HasConfigMap (Volume s) (TF.Attr s (ConfigMap s)) where
     configMap =
         P.lens (_configMap :: Volume s -> TF.Attr s (ConfigMap s))
-               (\s a -> s { _configMap = a
-                          } :: Volume s)
+               (\s a -> s { _configMap = a } :: Volume s)
 
 instance P.HasDownwardApi (Volume s) (TF.Attr s (DownwardApi s)) where
     downwardApi =
         P.lens (_downwardApi :: Volume s -> TF.Attr s (DownwardApi s))
-               (\s a -> s { _downwardApi = a
-                          } :: Volume s)
+               (\s a -> s { _downwardApi = a } :: Volume s)
 
 instance P.HasEmptyDir (Volume s) (TF.Attr s (EmptyDir s)) where
     emptyDir =
         P.lens (_emptyDir :: Volume s -> TF.Attr s (EmptyDir s))
-               (\s a -> s { _emptyDir = a
-                          } :: Volume s)
+               (\s a -> s { _emptyDir = a } :: Volume s)
 
 instance P.HasFc (Volume s) (TF.Attr s (Fc s)) where
     fc =
         P.lens (_fc :: Volume s -> TF.Attr s (Fc s))
-               (\s a -> s { _fc = a
-                          } :: Volume s)
+               (\s a -> s { _fc = a } :: Volume s)
 
 instance P.HasFlexVolume (Volume s) (TF.Attr s (FlexVolume s)) where
     flexVolume =
         P.lens (_flexVolume :: Volume s -> TF.Attr s (FlexVolume s))
-               (\s a -> s { _flexVolume = a
-                          } :: Volume s)
+               (\s a -> s { _flexVolume = a } :: Volume s)
 
 instance P.HasFlocker (Volume s) (TF.Attr s (Flocker s)) where
     flocker =
         P.lens (_flocker :: Volume s -> TF.Attr s (Flocker s))
-               (\s a -> s { _flocker = a
-                          } :: Volume s)
+               (\s a -> s { _flocker = a } :: Volume s)
 
 instance P.HasGcePersistentDisk (Volume s) (TF.Attr s (GcePersistentDisk s)) where
     gcePersistentDisk =
         P.lens (_gcePersistentDisk :: Volume s -> TF.Attr s (GcePersistentDisk s))
-               (\s a -> s { _gcePersistentDisk = a
-                          } :: Volume s)
+               (\s a -> s { _gcePersistentDisk = a } :: Volume s)
 
 instance P.HasGitRepo (Volume s) (TF.Attr s (GitRepo s)) where
     gitRepo =
         P.lens (_gitRepo :: Volume s -> TF.Attr s (GitRepo s))
-               (\s a -> s { _gitRepo = a
-                          } :: Volume s)
+               (\s a -> s { _gitRepo = a } :: Volume s)
 
 instance P.HasGlusterfs (Volume s) (TF.Attr s (Glusterfs s)) where
     glusterfs =
         P.lens (_glusterfs :: Volume s -> TF.Attr s (Glusterfs s))
-               (\s a -> s { _glusterfs = a
-                          } :: Volume s)
+               (\s a -> s { _glusterfs = a } :: Volume s)
 
 instance P.HasHostPath (Volume s) (TF.Attr s (HostPath s)) where
     hostPath =
         P.lens (_hostPath :: Volume s -> TF.Attr s (HostPath s))
-               (\s a -> s { _hostPath = a
-                          } :: Volume s)
+               (\s a -> s { _hostPath = a } :: Volume s)
 
 instance P.HasIscsi (Volume s) (TF.Attr s (Iscsi s)) where
     iscsi =
         P.lens (_iscsi :: Volume s -> TF.Attr s (Iscsi s))
-               (\s a -> s { _iscsi = a
-                          } :: Volume s)
+               (\s a -> s { _iscsi = a } :: Volume s)
 
 instance P.HasName (Volume s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Volume s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: Volume s)
+               (\s a -> s { _name = a } :: Volume s)
 
 instance P.HasNfs (Volume s) (TF.Attr s (Nfs s)) where
     nfs =
         P.lens (_nfs :: Volume s -> TF.Attr s (Nfs s))
-               (\s a -> s { _nfs = a
-                          } :: Volume s)
+               (\s a -> s { _nfs = a } :: Volume s)
 
 instance P.HasPersistentVolumeClaim (Volume s) (TF.Attr s (PersistentVolumeClaim s)) where
     persistentVolumeClaim =
         P.lens (_persistentVolumeClaim :: Volume s -> TF.Attr s (PersistentVolumeClaim s))
-               (\s a -> s { _persistentVolumeClaim = a
-                          } :: Volume s)
+               (\s a -> s { _persistentVolumeClaim = a } :: Volume s)
 
 instance P.HasPhotonPersistentDisk (Volume s) (TF.Attr s (PhotonPersistentDisk s)) where
     photonPersistentDisk =
         P.lens (_photonPersistentDisk :: Volume s -> TF.Attr s (PhotonPersistentDisk s))
-               (\s a -> s { _photonPersistentDisk = a
-                          } :: Volume s)
+               (\s a -> s { _photonPersistentDisk = a } :: Volume s)
 
 instance P.HasQuobyte (Volume s) (TF.Attr s (Quobyte s)) where
     quobyte =
         P.lens (_quobyte :: Volume s -> TF.Attr s (Quobyte s))
-               (\s a -> s { _quobyte = a
-                          } :: Volume s)
+               (\s a -> s { _quobyte = a } :: Volume s)
 
 instance P.HasRbd (Volume s) (TF.Attr s (Rbd s)) where
     rbd =
         P.lens (_rbd :: Volume s -> TF.Attr s (Rbd s))
-               (\s a -> s { _rbd = a
-                          } :: Volume s)
+               (\s a -> s { _rbd = a } :: Volume s)
 
 instance P.HasSecret (Volume s) (TF.Attr s (Secret s)) where
     secret =
         P.lens (_secret :: Volume s -> TF.Attr s (Secret s))
-               (\s a -> s { _secret = a
-                          } :: Volume s)
+               (\s a -> s { _secret = a } :: Volume s)
 
 instance P.HasVsphereVolume (Volume s) (TF.Attr s (VsphereVolume s)) where
     vsphereVolume =
         P.lens (_vsphereVolume :: Volume s -> TF.Attr s (VsphereVolume s))
-               (\s a -> s { _vsphereVolume = a
-                          } :: Volume s)
+               (\s a -> s { _vsphereVolume = a } :: Volume s)
 
 -- | @se_linux_options@ nested settings.
 data SeLinuxOptions s = SeLinuxOptions'
@@ -1552,16 +1725,6 @@ data SeLinuxOptions s = SeLinuxOptions'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (SeLinuxOptions s)
-instance TF.IsValue  (SeLinuxOptions s)
-instance TF.IsObject (SeLinuxOptions s) where
-    toObject SeLinuxOptions'{..} = catMaybes
-        [ TF.assign "level" <$> TF.attribute _level
-        , TF.assign "role" <$> TF.attribute _role
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "user" <$> TF.attribute _user
-        ]
-
 newSeLinuxOptions
     :: SeLinuxOptions s
 newSeLinuxOptions =
@@ -1572,29 +1735,38 @@ newSeLinuxOptions =
         , _user = TF.Nil
         }
 
+instance P.Hashable  (SeLinuxOptions s)
+instance TF.IsValue  (SeLinuxOptions s)
+instance TF.IsObject (SeLinuxOptions s) where
+    toObject SeLinuxOptions'{..} = P.catMaybes
+        [ TF.assign "level" <$> TF.attribute _level
+        , TF.assign "role" <$> TF.attribute _role
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "user" <$> TF.attribute _user
+        ]
+
+instance TF.IsValid (SeLinuxOptions s) where
+    validator = P.mempty
+
 instance P.HasLevel (SeLinuxOptions s) (TF.Attr s P.Text) where
     level =
         P.lens (_level :: SeLinuxOptions s -> TF.Attr s P.Text)
-               (\s a -> s { _level = a
-                          } :: SeLinuxOptions s)
+               (\s a -> s { _level = a } :: SeLinuxOptions s)
 
 instance P.HasRole (SeLinuxOptions s) (TF.Attr s P.Text) where
     role =
         P.lens (_role :: SeLinuxOptions s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a
-                          } :: SeLinuxOptions s)
+               (\s a -> s { _role = a } :: SeLinuxOptions s)
 
 instance P.HasType' (SeLinuxOptions s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: SeLinuxOptions s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: SeLinuxOptions s)
+               (\s a -> s { _type' = a } :: SeLinuxOptions s)
 
 instance P.HasUser (SeLinuxOptions s) (TF.Attr s P.Text) where
     user =
         P.lens (_user :: SeLinuxOptions s -> TF.Attr s P.Text)
-               (\s a -> s { _user = a
-                          } :: SeLinuxOptions s)
+               (\s a -> s { _user = a } :: SeLinuxOptions s)
 
 -- | @exec@ nested settings.
 data Exec s = Exec'
@@ -1608,13 +1780,6 @@ data Exec s = Exec'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Exec s)
-instance TF.IsValue  (Exec s)
-instance TF.IsObject (Exec s) where
-    toObject Exec'{..} = catMaybes
-        [ TF.assign "command" <$> TF.attribute _command
-        ]
-
 newExec
     :: Exec s
 newExec =
@@ -1622,11 +1787,20 @@ newExec =
         { _command = TF.Nil
         }
 
+instance P.Hashable  (Exec s)
+instance TF.IsValue  (Exec s)
+instance TF.IsObject (Exec s) where
+    toObject Exec'{..} = P.catMaybes
+        [ TF.assign "command" <$> TF.attribute _command
+        ]
+
+instance TF.IsValid (Exec s) where
+    validator = P.mempty
+
 instance P.HasCommand (Exec s) (TF.Attr s [TF.Attr s P.Text]) where
     command =
         P.lens (_command :: Exec s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _command = a
-                          } :: Exec s)
+               (\s a -> s { _command = a } :: Exec s)
 
 -- | @glusterfs@ nested settings.
 data Glusterfs s = Glusterfs'
@@ -1648,15 +1822,6 @@ data Glusterfs s = Glusterfs'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Glusterfs s)
-instance TF.IsValue  (Glusterfs s)
-instance TF.IsObject (Glusterfs s) where
-    toObject Glusterfs'{..} = catMaybes
-        [ TF.assign "endpoints_name" <$> TF.attribute _endpointsName
-        , TF.assign "path" <$> TF.attribute _path
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        ]
-
 newGlusterfs
     :: TF.Attr s P.Text -- ^ @endpoints_name@ - 'P.endpointsName'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -1668,23 +1833,32 @@ newGlusterfs _endpointsName _path =
         , _readOnly = TF.Nil
         }
 
+instance P.Hashable  (Glusterfs s)
+instance TF.IsValue  (Glusterfs s)
+instance TF.IsObject (Glusterfs s) where
+    toObject Glusterfs'{..} = P.catMaybes
+        [ TF.assign "endpoints_name" <$> TF.attribute _endpointsName
+        , TF.assign "path" <$> TF.attribute _path
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        ]
+
+instance TF.IsValid (Glusterfs s) where
+    validator = P.mempty
+
 instance P.HasEndpointsName (Glusterfs s) (TF.Attr s P.Text) where
     endpointsName =
         P.lens (_endpointsName :: Glusterfs s -> TF.Attr s P.Text)
-               (\s a -> s { _endpointsName = a
-                          } :: Glusterfs s)
+               (\s a -> s { _endpointsName = a } :: Glusterfs s)
 
 instance P.HasPath (Glusterfs s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: Glusterfs s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a
-                          } :: Glusterfs s)
+               (\s a -> s { _path = a } :: Glusterfs s)
 
 instance P.HasReadOnly (Glusterfs s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: Glusterfs s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: Glusterfs s)
+               (\s a -> s { _readOnly = a } :: Glusterfs s)
 
 -- | @nfs@ nested settings.
 data Nfs s = Nfs'
@@ -1706,15 +1880,6 @@ data Nfs s = Nfs'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Nfs s)
-instance TF.IsValue  (Nfs s)
-instance TF.IsObject (Nfs s) where
-    toObject Nfs'{..} = catMaybes
-        [ TF.assign "path" <$> TF.attribute _path
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "server" <$> TF.attribute _server
-        ]
-
 newNfs
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> TF.Attr s P.Text -- ^ @server@ - 'P.server'
@@ -1726,23 +1891,32 @@ newNfs _path _server =
         , _server = _server
         }
 
+instance P.Hashable  (Nfs s)
+instance TF.IsValue  (Nfs s)
+instance TF.IsObject (Nfs s) where
+    toObject Nfs'{..} = P.catMaybes
+        [ TF.assign "path" <$> TF.attribute _path
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "server" <$> TF.attribute _server
+        ]
+
+instance TF.IsValid (Nfs s) where
+    validator = P.mempty
+
 instance P.HasPath (Nfs s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: Nfs s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a
-                          } :: Nfs s)
+               (\s a -> s { _path = a } :: Nfs s)
 
 instance P.HasReadOnly (Nfs s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: Nfs s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: Nfs s)
+               (\s a -> s { _readOnly = a } :: Nfs s)
 
 instance P.HasServer (Nfs s) (TF.Attr s P.Text) where
     server =
         P.lens (_server :: Nfs s -> TF.Attr s P.Text)
-               (\s a -> s { _server = a
-                          } :: Nfs s)
+               (\s a -> s { _server = a } :: Nfs s)
 
 -- | @items@ nested settings.
 data Items s = Items'
@@ -1765,15 +1939,6 @@ data Items s = Items'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Items s)
-instance TF.IsValue  (Items s)
-instance TF.IsObject (Items s) where
-    toObject Items'{..} = catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "mode" <$> TF.attribute _mode
-        , TF.assign "path" <$> TF.attribute _path
-        ]
-
 newItems
     :: Items s
 newItems =
@@ -1783,23 +1948,32 @@ newItems =
         , _path = TF.Nil
         }
 
+instance P.Hashable  (Items s)
+instance TF.IsValue  (Items s)
+instance TF.IsObject (Items s) where
+    toObject Items'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "mode" <$> TF.attribute _mode
+        , TF.assign "path" <$> TF.attribute _path
+        ]
+
+instance TF.IsValid (Items s) where
+    validator = P.mempty
+
 instance P.HasKey (Items s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: Items s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a
-                          } :: Items s)
+               (\s a -> s { _key = a } :: Items s)
 
 instance P.HasMode (Items s) (TF.Attr s P.Integer) where
     mode =
         P.lens (_mode :: Items s -> TF.Attr s P.Integer)
-               (\s a -> s { _mode = a
-                          } :: Items s)
+               (\s a -> s { _mode = a } :: Items s)
 
 instance P.HasPath (Items s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: Items s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a
-                          } :: Items s)
+               (\s a -> s { _path = a } :: Items s)
 
 -- | @secret@ nested settings.
 data Secret s = Secret'
@@ -1810,13 +1984,6 @@ data Secret s = Secret'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Secret s)
-instance TF.IsValue  (Secret s)
-instance TF.IsObject (Secret s) where
-    toObject Secret'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 newSecret
     :: Secret s
 newSecret =
@@ -1824,25 +1991,37 @@ newSecret =
         { _name = TF.Nil
         }
 
+instance P.Hashable  (Secret s)
+instance TF.IsValue  (Secret s)
+instance TF.IsObject (Secret s) where
+    toObject Secret'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (Secret s) where
+    validator = P.mempty
+
 instance P.HasName (Secret s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Secret s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: Secret s)
+               (\s a -> s { _name = a } :: Secret s)
 
 -- | @limits@ nested settings.
 data Limits s = Limits'
     deriving (P.Show, P.Eq, P.Generic)
+
+newLimits
+    :: Limits s
+newLimits =
+    Limits'
 
 instance P.Hashable  (Limits s)
 instance TF.IsValue  (Limits s)
 instance TF.IsObject (Limits s) where
     toObject Limits' = []
 
-newLimits
-    :: Limits s
-newLimits =
-    Limits'
+instance TF.IsValid (Limits s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedCpu (TF.Ref s' (Limits s)) (TF.Attr s P.Text) where
     computedCpu x = TF.compute (TF.refKey x) "_computedCpu"
@@ -1852,7 +2031,7 @@ instance s ~ s' => P.HasComputedMemory (TF.Ref s' (Limits s)) (TF.Attr s P.Text)
 
 -- | @lifecycle@ nested settings.
 data Lifecycle s = Lifecycle'
-    { _postStart :: TF.Attr s [PostStart s]
+    { _postStart :: TF.Attr s [TF.Attr s (PostStart s)]
     -- ^ @post_start@ - (Optional)
     -- Post_start is called immediately after a container is created. If the
     -- handler fails, the container is terminated and restarted according to its
@@ -1860,7 +2039,7 @@ data Lifecycle s = Lifecycle'
     -- completes. More info:
     -- http://kubernetes.io/docs/user-guide/container-environment#hook-details
     --
-    , _preStop   :: TF.Attr s [PreStop s]
+    , _preStop   :: TF.Attr s [TF.Attr s (PreStop s)]
     -- ^ @pre_stop@ - (Optional)
     -- Pre_stop is called immediately before a container is terminated. The
     -- container is terminated after the handler completes. The reason for
@@ -1871,14 +2050,6 @@ data Lifecycle s = Lifecycle'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Lifecycle s)
-instance TF.IsValue  (Lifecycle s)
-instance TF.IsObject (Lifecycle s) where
-    toObject Lifecycle'{..} = catMaybes
-        [ TF.assign "post_start" <$> TF.attribute _postStart
-        , TF.assign "pre_stop" <$> TF.attribute _preStop
-        ]
-
 newLifecycle
     :: Lifecycle s
 newLifecycle =
@@ -1887,17 +2058,34 @@ newLifecycle =
         , _preStop = TF.Nil
         }
 
-instance P.HasPostStart (Lifecycle s) (TF.Attr s [PostStart s]) where
-    postStart =
-        P.lens (_postStart :: Lifecycle s -> TF.Attr s [PostStart s])
-               (\s a -> s { _postStart = a
-                          } :: Lifecycle s)
+instance P.Hashable  (Lifecycle s)
+instance TF.IsValue  (Lifecycle s)
+instance TF.IsObject (Lifecycle s) where
+    toObject Lifecycle'{..} = P.catMaybes
+        [ TF.assign "post_start" <$> TF.attribute _postStart
+        , TF.assign "pre_stop" <$> TF.attribute _preStop
+        ]
 
-instance P.HasPreStop (Lifecycle s) (TF.Attr s [PreStop s]) where
+instance TF.IsValid (Lifecycle s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_postStart"
+                  (_postStart
+                      :: Lifecycle s -> TF.Attr s [TF.Attr s (PostStart s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_preStop"
+                  (_preStop
+                      :: Lifecycle s -> TF.Attr s [TF.Attr s (PreStop s)])
+                  TF.validator
+
+instance P.HasPostStart (Lifecycle s) (TF.Attr s [TF.Attr s (PostStart s)]) where
+    postStart =
+        P.lens (_postStart :: Lifecycle s -> TF.Attr s [TF.Attr s (PostStart s)])
+               (\s a -> s { _postStart = a } :: Lifecycle s)
+
+instance P.HasPreStop (Lifecycle s) (TF.Attr s [TF.Attr s (PreStop s)]) where
     preStop =
-        P.lens (_preStop :: Lifecycle s -> TF.Attr s [PreStop s])
-               (\s a -> s { _preStop = a
-                          } :: Lifecycle s)
+        P.lens (_preStop :: Lifecycle s -> TF.Attr s [TF.Attr s (PreStop s)])
+               (\s a -> s { _preStop = a } :: Lifecycle s)
 
 -- | @resource_field_ref@ nested settings.
 data ResourceFieldRef s = ResourceFieldRef'
@@ -1913,15 +2101,6 @@ data ResourceFieldRef s = ResourceFieldRef'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (ResourceFieldRef s)
-instance TF.IsValue  (ResourceFieldRef s)
-instance TF.IsObject (ResourceFieldRef s) where
-    toObject ResourceFieldRef'{..} = catMaybes
-        [ TF.assign "container_name" <$> TF.attribute _containerName
-        , TF.assign "quantity" <$> TF.attribute _quantity
-        , TF.assign "resource" <$> TF.attribute _resource
-        ]
-
 newResourceFieldRef
     :: TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
     -> TF.Attr s P.Text -- ^ @resource@ - 'P.resource'
@@ -1933,37 +2112,49 @@ newResourceFieldRef _containerName _resource =
         , _resource = _resource
         }
 
+instance P.Hashable  (ResourceFieldRef s)
+instance TF.IsValue  (ResourceFieldRef s)
+instance TF.IsObject (ResourceFieldRef s) where
+    toObject ResourceFieldRef'{..} = P.catMaybes
+        [ TF.assign "container_name" <$> TF.attribute _containerName
+        , TF.assign "quantity" <$> TF.attribute _quantity
+        , TF.assign "resource" <$> TF.attribute _resource
+        ]
+
+instance TF.IsValid (ResourceFieldRef s) where
+    validator = P.mempty
+
 instance P.HasContainerName (ResourceFieldRef s) (TF.Attr s P.Text) where
     containerName =
         P.lens (_containerName :: ResourceFieldRef s -> TF.Attr s P.Text)
-               (\s a -> s { _containerName = a
-                          } :: ResourceFieldRef s)
+               (\s a -> s { _containerName = a } :: ResourceFieldRef s)
 
 instance P.HasQuantity (ResourceFieldRef s) (TF.Attr s P.Text) where
     quantity =
         P.lens (_quantity :: ResourceFieldRef s -> TF.Attr s P.Text)
-               (\s a -> s { _quantity = a
-                          } :: ResourceFieldRef s)
+               (\s a -> s { _quantity = a } :: ResourceFieldRef s)
 
 instance P.HasResource (ResourceFieldRef s) (TF.Attr s P.Text) where
     resource =
         P.lens (_resource :: ResourceFieldRef s -> TF.Attr s P.Text)
-               (\s a -> s { _resource = a
-                          } :: ResourceFieldRef s)
+               (\s a -> s { _resource = a } :: ResourceFieldRef s)
 
 -- | @resources@ nested settings.
 data Resources s = Resources'
     deriving (P.Show, P.Eq, P.Generic)
+
+newResources
+    :: Resources s
+newResources =
+    Resources'
 
 instance P.Hashable  (Resources s)
 instance TF.IsValue  (Resources s)
 instance TF.IsObject (Resources s) where
     toObject Resources' = []
 
-newResources
-    :: Resources s
-newResources =
-    Resources'
+instance TF.IsValid (Resources s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedLimits (TF.Ref s' (Resources s)) (TF.Attr s (Limits s)) where
     computedLimits x = TF.compute (TF.refKey x) "_computedLimits"
@@ -1978,7 +2169,7 @@ data HttpGet s = HttpGet'
     -- Host name to connect to, defaults to the pod IP. You probably want to set
     -- "Host" in httpHeaders instead.
     --
-    , _httpHeader :: TF.Attr s [HttpHeader s]
+    , _httpHeader :: TF.Attr s [TF.Attr s (HttpHeader s)]
     -- ^ @http_header@ - (Optional)
     -- Scheme to use for connecting to the host.
     --
@@ -1997,17 +2188,6 @@ data HttpGet s = HttpGet'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (HttpGet s)
-instance TF.IsValue  (HttpGet s)
-instance TF.IsObject (HttpGet s) where
-    toObject HttpGet'{..} = catMaybes
-        [ TF.assign "host" <$> TF.attribute _host
-        , TF.assign "http_header" <$> TF.attribute _httpHeader
-        , TF.assign "path" <$> TF.attribute _path
-        , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "scheme" <$> TF.attribute _scheme
-        ]
-
 newHttpGet
     :: HttpGet s
 newHttpGet =
@@ -2019,35 +2199,48 @@ newHttpGet =
         , _scheme = TF.value "HTTP"
         }
 
+instance P.Hashable  (HttpGet s)
+instance TF.IsValue  (HttpGet s)
+instance TF.IsObject (HttpGet s) where
+    toObject HttpGet'{..} = P.catMaybes
+        [ TF.assign "host" <$> TF.attribute _host
+        , TF.assign "http_header" <$> TF.attribute _httpHeader
+        , TF.assign "path" <$> TF.attribute _path
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "scheme" <$> TF.attribute _scheme
+        ]
+
+instance TF.IsValid (HttpGet s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_httpHeader"
+                  (_httpHeader
+                      :: HttpGet s -> TF.Attr s [TF.Attr s (HttpHeader s)])
+                  TF.validator
+
 instance P.HasHost (HttpGet s) (TF.Attr s P.Text) where
     host =
         P.lens (_host :: HttpGet s -> TF.Attr s P.Text)
-               (\s a -> s { _host = a
-                          } :: HttpGet s)
+               (\s a -> s { _host = a } :: HttpGet s)
 
-instance P.HasHttpHeader (HttpGet s) (TF.Attr s [HttpHeader s]) where
+instance P.HasHttpHeader (HttpGet s) (TF.Attr s [TF.Attr s (HttpHeader s)]) where
     httpHeader =
-        P.lens (_httpHeader :: HttpGet s -> TF.Attr s [HttpHeader s])
-               (\s a -> s { _httpHeader = a
-                          } :: HttpGet s)
+        P.lens (_httpHeader :: HttpGet s -> TF.Attr s [TF.Attr s (HttpHeader s)])
+               (\s a -> s { _httpHeader = a } :: HttpGet s)
 
 instance P.HasPath (HttpGet s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: HttpGet s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a
-                          } :: HttpGet s)
+               (\s a -> s { _path = a } :: HttpGet s)
 
 instance P.HasPort (HttpGet s) (TF.Attr s P.Text) where
     port =
         P.lens (_port :: HttpGet s -> TF.Attr s P.Text)
-               (\s a -> s { _port = a
-                          } :: HttpGet s)
+               (\s a -> s { _port = a } :: HttpGet s)
 
 instance P.HasScheme (HttpGet s) (TF.Attr s P.Text) where
     scheme =
         P.lens (_scheme :: HttpGet s -> TF.Attr s P.Text)
-               (\s a -> s { _scheme = a
-                          } :: HttpGet s)
+               (\s a -> s { _scheme = a } :: HttpGet s)
 
 -- | @aws_elastic_block_store@ nested settings.
 data AwsElasticBlockStore s = AwsElasticBlockStore'
@@ -2078,16 +2271,6 @@ data AwsElasticBlockStore s = AwsElasticBlockStore'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (AwsElasticBlockStore s)
-instance TF.IsValue  (AwsElasticBlockStore s)
-instance TF.IsObject (AwsElasticBlockStore s) where
-    toObject AwsElasticBlockStore'{..} = catMaybes
-        [ TF.assign "fs_type" <$> TF.attribute _fsType
-        , TF.assign "partition" <$> TF.attribute _partition
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "volume_id" <$> TF.attribute _volumeId
-        ]
-
 newAwsElasticBlockStore
     :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> AwsElasticBlockStore s
@@ -2099,29 +2282,38 @@ newAwsElasticBlockStore _volumeId =
         , _volumeId = _volumeId
         }
 
+instance P.Hashable  (AwsElasticBlockStore s)
+instance TF.IsValue  (AwsElasticBlockStore s)
+instance TF.IsObject (AwsElasticBlockStore s) where
+    toObject AwsElasticBlockStore'{..} = P.catMaybes
+        [ TF.assign "fs_type" <$> TF.attribute _fsType
+        , TF.assign "partition" <$> TF.attribute _partition
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "volume_id" <$> TF.attribute _volumeId
+        ]
+
+instance TF.IsValid (AwsElasticBlockStore s) where
+    validator = P.mempty
+
 instance P.HasFsType (AwsElasticBlockStore s) (TF.Attr s P.Text) where
     fsType =
         P.lens (_fsType :: AwsElasticBlockStore s -> TF.Attr s P.Text)
-               (\s a -> s { _fsType = a
-                          } :: AwsElasticBlockStore s)
+               (\s a -> s { _fsType = a } :: AwsElasticBlockStore s)
 
 instance P.HasPartition (AwsElasticBlockStore s) (TF.Attr s P.Integer) where
     partition =
         P.lens (_partition :: AwsElasticBlockStore s -> TF.Attr s P.Integer)
-               (\s a -> s { _partition = a
-                          } :: AwsElasticBlockStore s)
+               (\s a -> s { _partition = a } :: AwsElasticBlockStore s)
 
 instance P.HasReadOnly (AwsElasticBlockStore s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: AwsElasticBlockStore s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: AwsElasticBlockStore s)
+               (\s a -> s { _readOnly = a } :: AwsElasticBlockStore s)
 
 instance P.HasVolumeId (AwsElasticBlockStore s) (TF.Attr s P.Text) where
     volumeId =
         P.lens (_volumeId :: AwsElasticBlockStore s -> TF.Attr s P.Text)
-               (\s a -> s { _volumeId = a
-                          } :: AwsElasticBlockStore s)
+               (\s a -> s { _volumeId = a } :: AwsElasticBlockStore s)
 
 -- | @field_ref@ nested settings.
 data FieldRef s = FieldRef'
@@ -2136,14 +2328,6 @@ data FieldRef s = FieldRef'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (FieldRef s)
-instance TF.IsValue  (FieldRef s)
-instance TF.IsObject (FieldRef s) where
-    toObject FieldRef'{..} = catMaybes
-        [ TF.assign "api_version" <$> TF.attribute _apiVersion
-        , TF.assign "field_path" <$> TF.attribute _fieldPath
-        ]
-
 newFieldRef
     :: FieldRef s
 newFieldRef =
@@ -2152,21 +2336,30 @@ newFieldRef =
         , _fieldPath = TF.Nil
         }
 
+instance P.Hashable  (FieldRef s)
+instance TF.IsValue  (FieldRef s)
+instance TF.IsObject (FieldRef s) where
+    toObject FieldRef'{..} = P.catMaybes
+        [ TF.assign "api_version" <$> TF.attribute _apiVersion
+        , TF.assign "field_path" <$> TF.attribute _fieldPath
+        ]
+
+instance TF.IsValid (FieldRef s) where
+    validator = P.mempty
+
 instance P.HasApiVersion (FieldRef s) (TF.Attr s P.Text) where
     apiVersion =
         P.lens (_apiVersion :: FieldRef s -> TF.Attr s P.Text)
-               (\s a -> s { _apiVersion = a
-                          } :: FieldRef s)
+               (\s a -> s { _apiVersion = a } :: FieldRef s)
 
 instance P.HasFieldPath (FieldRef s) (TF.Attr s P.Text) where
     fieldPath =
         P.lens (_fieldPath :: FieldRef s -> TF.Attr s P.Text)
-               (\s a -> s { _fieldPath = a
-                          } :: FieldRef s)
+               (\s a -> s { _fieldPath = a } :: FieldRef s)
 
 -- | @rbd@ nested settings.
 data Rbd s = Rbd'
-    { _cephMonitors :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _cephMonitors :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ceph_monitors@ - (Required)
     -- A collection of Ceph monitors. More info:
     -- http://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
@@ -2207,21 +2400,8 @@ data Rbd s = Rbd'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Rbd s)
-instance TF.IsValue  (Rbd s)
-instance TF.IsObject (Rbd s) where
-    toObject Rbd'{..} = catMaybes
-        [ TF.assign "ceph_monitors" <$> TF.attribute _cephMonitors
-        , TF.assign "fs_type" <$> TF.attribute _fsType
-        , TF.assign "rados_user" <$> TF.attribute _radosUser
-        , TF.assign "rbd_image" <$> TF.attribute _rbdImage
-        , TF.assign "rbd_pool" <$> TF.attribute _rbdPool
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "secret_ref" <$> TF.attribute _secretRef
-        ]
-
 newRbd
-    :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @ceph_monitors@ - 'P.cephMonitors'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @ceph_monitors@ - 'P.cephMonitors'
     -> TF.Attr s P.Text -- ^ @rbd_image@ - 'P.rbdImage'
     -> Rbd s
 newRbd _cephMonitors _rbdImage =
@@ -2235,47 +2415,60 @@ newRbd _cephMonitors _rbdImage =
         , _secretRef = TF.Nil
         }
 
-instance P.HasCephMonitors (Rbd s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance P.Hashable  (Rbd s)
+instance TF.IsValue  (Rbd s)
+instance TF.IsObject (Rbd s) where
+    toObject Rbd'{..} = P.catMaybes
+        [ TF.assign "ceph_monitors" <$> TF.attribute _cephMonitors
+        , TF.assign "fs_type" <$> TF.attribute _fsType
+        , TF.assign "rados_user" <$> TF.attribute _radosUser
+        , TF.assign "rbd_image" <$> TF.attribute _rbdImage
+        , TF.assign "rbd_pool" <$> TF.attribute _rbdPool
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "secret_ref" <$> TF.attribute _secretRef
+        ]
+
+instance TF.IsValid (Rbd s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_secretRef"
+                  (_secretRef
+                      :: Rbd s -> TF.Attr s (SecretRef s))
+                  TF.validator
+
+instance P.HasCephMonitors (Rbd s) (TF.Attr s [TF.Attr s P.Text]) where
     cephMonitors =
-        P.lens (_cephMonitors :: Rbd s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _cephMonitors = a
-                          } :: Rbd s)
+        P.lens (_cephMonitors :: Rbd s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _cephMonitors = a } :: Rbd s)
 
 instance P.HasFsType (Rbd s) (TF.Attr s P.Text) where
     fsType =
         P.lens (_fsType :: Rbd s -> TF.Attr s P.Text)
-               (\s a -> s { _fsType = a
-                          } :: Rbd s)
+               (\s a -> s { _fsType = a } :: Rbd s)
 
 instance P.HasRadosUser (Rbd s) (TF.Attr s P.Text) where
     radosUser =
         P.lens (_radosUser :: Rbd s -> TF.Attr s P.Text)
-               (\s a -> s { _radosUser = a
-                          } :: Rbd s)
+               (\s a -> s { _radosUser = a } :: Rbd s)
 
 instance P.HasRbdImage (Rbd s) (TF.Attr s P.Text) where
     rbdImage =
         P.lens (_rbdImage :: Rbd s -> TF.Attr s P.Text)
-               (\s a -> s { _rbdImage = a
-                          } :: Rbd s)
+               (\s a -> s { _rbdImage = a } :: Rbd s)
 
 instance P.HasRbdPool (Rbd s) (TF.Attr s P.Text) where
     rbdPool =
         P.lens (_rbdPool :: Rbd s -> TF.Attr s P.Text)
-               (\s a -> s { _rbdPool = a
-                          } :: Rbd s)
+               (\s a -> s { _rbdPool = a } :: Rbd s)
 
 instance P.HasReadOnly (Rbd s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: Rbd s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: Rbd s)
+               (\s a -> s { _readOnly = a } :: Rbd s)
 
 instance P.HasSecretRef (Rbd s) (TF.Attr s (SecretRef s)) where
     secretRef =
         P.lens (_secretRef :: Rbd s -> TF.Attr s (SecretRef s))
-               (\s a -> s { _secretRef = a
-                          } :: Rbd s)
+               (\s a -> s { _secretRef = a } :: Rbd s)
 
 instance s ~ s' => P.HasComputedKeyring (TF.Ref s' (Rbd s)) (TF.Attr s P.Text) where
     computedKeyring x = TF.compute (TF.refKey x) "_computedKeyring"
@@ -2304,7 +2497,7 @@ data Container s = Container'
     -- variable exists or not. Cannot be updated. More info:
     -- http://kubernetes.io/docs/user-guide/containers#containers-and-commands
     --
-    , _env                    :: TF.Attr s [Env s]
+    , _env                    :: TF.Attr s [TF.Attr s (Env s)]
     -- ^ @env@ - (Optional)
     -- List of environment variables to set in the container. Cannot be updated.
     --
@@ -2328,7 +2521,7 @@ data Container s = Container'
     -- Name of the container specified as a DNS_LABEL. Each container in a pod must
     -- have a unique name (DNS_LABEL). Cannot be updated.
     --
-    , _port                   :: TF.Attr s [Port s]
+    , _port                   :: TF.Attr s [TF.Attr s (Port s)]
     -- ^ @port@ - (Optional)
     -- List of ports to expose from the container. Exposing a port here gives the
     -- system additional information about the network connections a container
@@ -2376,7 +2569,7 @@ data Container s = Container'
     -- ^ @tty@ - (Optional)
     -- Whether this container should allocate a TTY for itself
     --
-    , _volumeMount            :: TF.Attr s [VolumeMount s]
+    , _volumeMount            :: TF.Attr s [TF.Attr s (VolumeMount s)]
     -- ^ @volume_mount@ - (Optional)
     -- Pod volumes to mount into the container's filesystem. Cannot be updated.
     --
@@ -2387,28 +2580,6 @@ data Container s = Container'
     -- Cannot be updated.
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance P.Hashable  (Container s)
-instance TF.IsValue  (Container s)
-instance TF.IsObject (Container s) where
-    toObject Container'{..} = catMaybes
-        [ TF.assign "args" <$> TF.attribute _args
-        , TF.assign "command" <$> TF.attribute _command
-        , TF.assign "env" <$> TF.attribute _env
-        , TF.assign "image" <$> TF.attribute _image
-        , TF.assign "lifecycle" <$> TF.attribute _lifecycle
-        , TF.assign "liveness_probe" <$> TF.attribute _livenessProbe
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "readiness_probe" <$> TF.attribute _readinessProbe
-        , TF.assign "security_context" <$> TF.attribute _securityContext
-        , TF.assign "stdin" <$> TF.attribute _stdin
-        , TF.assign "stdin_once" <$> TF.attribute _stdinOnce
-        , TF.assign "termination_message_path" <$> TF.attribute _terminationMessagePath
-        , TF.assign "tty" <$> TF.attribute _tty
-        , TF.assign "volume_mount" <$> TF.attribute _volumeMount
-        , TF.assign "working_dir" <$> TF.attribute _workingDir
-        ]
 
 newContainer
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2433,101 +2604,138 @@ newContainer _name =
         , _workingDir = TF.Nil
         }
 
+instance P.Hashable  (Container s)
+instance TF.IsValue  (Container s)
+instance TF.IsObject (Container s) where
+    toObject Container'{..} = P.catMaybes
+        [ TF.assign "args" <$> TF.attribute _args
+        , TF.assign "command" <$> TF.attribute _command
+        , TF.assign "env" <$> TF.attribute _env
+        , TF.assign "image" <$> TF.attribute _image
+        , TF.assign "lifecycle" <$> TF.attribute _lifecycle
+        , TF.assign "liveness_probe" <$> TF.attribute _livenessProbe
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "readiness_probe" <$> TF.attribute _readinessProbe
+        , TF.assign "security_context" <$> TF.attribute _securityContext
+        , TF.assign "stdin" <$> TF.attribute _stdin
+        , TF.assign "stdin_once" <$> TF.attribute _stdinOnce
+        , TF.assign "termination_message_path" <$> TF.attribute _terminationMessagePath
+        , TF.assign "tty" <$> TF.attribute _tty
+        , TF.assign "volume_mount" <$> TF.attribute _volumeMount
+        , TF.assign "working_dir" <$> TF.attribute _workingDir
+        ]
+
+instance TF.IsValid (Container s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_env"
+                  (_env
+                      :: Container s -> TF.Attr s [TF.Attr s (Env s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_lifecycle"
+                  (_lifecycle
+                      :: Container s -> TF.Attr s (Lifecycle s))
+                  TF.validator
+           P.<> TF.settingsValidator "_livenessProbe"
+                  (_livenessProbe
+                      :: Container s -> TF.Attr s (LivenessProbe s))
+                  TF.validator
+           P.<> TF.settingsValidator "_port"
+                  (_port
+                      :: Container s -> TF.Attr s [TF.Attr s (Port s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_readinessProbe"
+                  (_readinessProbe
+                      :: Container s -> TF.Attr s (ReadinessProbe s))
+                  TF.validator
+           P.<> TF.settingsValidator "_securityContext"
+                  (_securityContext
+                      :: Container s -> TF.Attr s (SecurityContext s))
+                  TF.validator
+           P.<> TF.settingsValidator "_volumeMount"
+                  (_volumeMount
+                      :: Container s -> TF.Attr s [TF.Attr s (VolumeMount s)])
+                  TF.validator
+
 instance P.HasArgs (Container s) (TF.Attr s [TF.Attr s P.Text]) where
     args =
         P.lens (_args :: Container s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _args = a
-                          } :: Container s)
+               (\s a -> s { _args = a } :: Container s)
 
 instance P.HasCommand (Container s) (TF.Attr s [TF.Attr s P.Text]) where
     command =
         P.lens (_command :: Container s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _command = a
-                          } :: Container s)
+               (\s a -> s { _command = a } :: Container s)
 
-instance P.HasEnv (Container s) (TF.Attr s [Env s]) where
+instance P.HasEnv (Container s) (TF.Attr s [TF.Attr s (Env s)]) where
     env =
-        P.lens (_env :: Container s -> TF.Attr s [Env s])
-               (\s a -> s { _env = a
-                          } :: Container s)
+        P.lens (_env :: Container s -> TF.Attr s [TF.Attr s (Env s)])
+               (\s a -> s { _env = a } :: Container s)
 
 instance P.HasImage (Container s) (TF.Attr s P.Text) where
     image =
         P.lens (_image :: Container s -> TF.Attr s P.Text)
-               (\s a -> s { _image = a
-                          } :: Container s)
+               (\s a -> s { _image = a } :: Container s)
 
 instance P.HasLifecycle (Container s) (TF.Attr s (Lifecycle s)) where
     lifecycle =
         P.lens (_lifecycle :: Container s -> TF.Attr s (Lifecycle s))
-               (\s a -> s { _lifecycle = a
-                          } :: Container s)
+               (\s a -> s { _lifecycle = a } :: Container s)
 
 instance P.HasLivenessProbe (Container s) (TF.Attr s (LivenessProbe s)) where
     livenessProbe =
         P.lens (_livenessProbe :: Container s -> TF.Attr s (LivenessProbe s))
-               (\s a -> s { _livenessProbe = a
-                          } :: Container s)
+               (\s a -> s { _livenessProbe = a } :: Container s)
 
 instance P.HasName (Container s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Container s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: Container s)
+               (\s a -> s { _name = a } :: Container s)
 
-instance P.HasPort (Container s) (TF.Attr s [Port s]) where
+instance P.HasPort (Container s) (TF.Attr s [TF.Attr s (Port s)]) where
     port =
-        P.lens (_port :: Container s -> TF.Attr s [Port s])
-               (\s a -> s { _port = a
-                          } :: Container s)
+        P.lens (_port :: Container s -> TF.Attr s [TF.Attr s (Port s)])
+               (\s a -> s { _port = a } :: Container s)
 
 instance P.HasReadinessProbe (Container s) (TF.Attr s (ReadinessProbe s)) where
     readinessProbe =
         P.lens (_readinessProbe :: Container s -> TF.Attr s (ReadinessProbe s))
-               (\s a -> s { _readinessProbe = a
-                          } :: Container s)
+               (\s a -> s { _readinessProbe = a } :: Container s)
 
 instance P.HasSecurityContext (Container s) (TF.Attr s (SecurityContext s)) where
     securityContext =
         P.lens (_securityContext :: Container s -> TF.Attr s (SecurityContext s))
-               (\s a -> s { _securityContext = a
-                          } :: Container s)
+               (\s a -> s { _securityContext = a } :: Container s)
 
 instance P.HasStdin (Container s) (TF.Attr s P.Bool) where
     stdin =
         P.lens (_stdin :: Container s -> TF.Attr s P.Bool)
-               (\s a -> s { _stdin = a
-                          } :: Container s)
+               (\s a -> s { _stdin = a } :: Container s)
 
 instance P.HasStdinOnce (Container s) (TF.Attr s P.Bool) where
     stdinOnce =
         P.lens (_stdinOnce :: Container s -> TF.Attr s P.Bool)
-               (\s a -> s { _stdinOnce = a
-                          } :: Container s)
+               (\s a -> s { _stdinOnce = a } :: Container s)
 
 instance P.HasTerminationMessagePath (Container s) (TF.Attr s P.Text) where
     terminationMessagePath =
         P.lens (_terminationMessagePath :: Container s -> TF.Attr s P.Text)
-               (\s a -> s { _terminationMessagePath = a
-                          } :: Container s)
+               (\s a -> s { _terminationMessagePath = a } :: Container s)
 
 instance P.HasTty (Container s) (TF.Attr s P.Bool) where
     tty =
         P.lens (_tty :: Container s -> TF.Attr s P.Bool)
-               (\s a -> s { _tty = a
-                          } :: Container s)
+               (\s a -> s { _tty = a } :: Container s)
 
-instance P.HasVolumeMount (Container s) (TF.Attr s [VolumeMount s]) where
+instance P.HasVolumeMount (Container s) (TF.Attr s [TF.Attr s (VolumeMount s)]) where
     volumeMount =
-        P.lens (_volumeMount :: Container s -> TF.Attr s [VolumeMount s])
-               (\s a -> s { _volumeMount = a
-                          } :: Container s)
+        P.lens (_volumeMount :: Container s -> TF.Attr s [TF.Attr s (VolumeMount s)])
+               (\s a -> s { _volumeMount = a } :: Container s)
 
 instance P.HasWorkingDir (Container s) (TF.Attr s P.Text) where
     workingDir =
         P.lens (_workingDir :: Container s -> TF.Attr s P.Text)
-               (\s a -> s { _workingDir = a
-                          } :: Container s)
+               (\s a -> s { _workingDir = a } :: Container s)
 
 instance s ~ s' => P.HasComputedImagePullPolicy (TF.Ref s' (Container s)) (TF.Attr s P.Text) where
     computedImagePullPolicy x = TF.compute (TF.refKey x) "_computedImagePullPolicy"
@@ -2547,14 +2755,6 @@ data PersistentVolumeClaim s = PersistentVolumeClaim'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (PersistentVolumeClaim s)
-instance TF.IsValue  (PersistentVolumeClaim s)
-instance TF.IsObject (PersistentVolumeClaim s) where
-    toObject PersistentVolumeClaim'{..} = catMaybes
-        [ TF.assign "claim_name" <$> TF.attribute _claimName
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        ]
-
 newPersistentVolumeClaim
     :: PersistentVolumeClaim s
 newPersistentVolumeClaim =
@@ -2563,17 +2763,26 @@ newPersistentVolumeClaim =
         , _readOnly = TF.value P.False
         }
 
+instance P.Hashable  (PersistentVolumeClaim s)
+instance TF.IsValue  (PersistentVolumeClaim s)
+instance TF.IsObject (PersistentVolumeClaim s) where
+    toObject PersistentVolumeClaim'{..} = P.catMaybes
+        [ TF.assign "claim_name" <$> TF.attribute _claimName
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        ]
+
+instance TF.IsValid (PersistentVolumeClaim s) where
+    validator = P.mempty
+
 instance P.HasClaimName (PersistentVolumeClaim s) (TF.Attr s P.Text) where
     claimName =
         P.lens (_claimName :: PersistentVolumeClaim s -> TF.Attr s P.Text)
-               (\s a -> s { _claimName = a
-                          } :: PersistentVolumeClaim s)
+               (\s a -> s { _claimName = a } :: PersistentVolumeClaim s)
 
 instance P.HasReadOnly (PersistentVolumeClaim s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: PersistentVolumeClaim s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: PersistentVolumeClaim s)
+               (\s a -> s { _readOnly = a } :: PersistentVolumeClaim s)
 
 -- | @config_map_key_ref@ nested settings.
 data ConfigMapKeyRef s = ConfigMapKeyRef'
@@ -2588,14 +2797,6 @@ data ConfigMapKeyRef s = ConfigMapKeyRef'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (ConfigMapKeyRef s)
-instance TF.IsValue  (ConfigMapKeyRef s)
-instance TF.IsObject (ConfigMapKeyRef s) where
-    toObject ConfigMapKeyRef'{..} = catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 newConfigMapKeyRef
     :: ConfigMapKeyRef s
 newConfigMapKeyRef =
@@ -2604,17 +2805,26 @@ newConfigMapKeyRef =
         , _name = TF.Nil
         }
 
+instance P.Hashable  (ConfigMapKeyRef s)
+instance TF.IsValue  (ConfigMapKeyRef s)
+instance TF.IsObject (ConfigMapKeyRef s) where
+    toObject ConfigMapKeyRef'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ConfigMapKeyRef s) where
+    validator = P.mempty
+
 instance P.HasKey (ConfigMapKeyRef s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: ConfigMapKeyRef s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a
-                          } :: ConfigMapKeyRef s)
+               (\s a -> s { _key = a } :: ConfigMapKeyRef s)
 
 instance P.HasName (ConfigMapKeyRef s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ConfigMapKeyRef s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ConfigMapKeyRef s)
+               (\s a -> s { _name = a } :: ConfigMapKeyRef s)
 
 -- | @image_pull_secrets@ nested settings.
 data ImagePullSecrets s = ImagePullSecrets'
@@ -2625,13 +2835,6 @@ data ImagePullSecrets s = ImagePullSecrets'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (ImagePullSecrets s)
-instance TF.IsValue  (ImagePullSecrets s)
-instance TF.IsObject (ImagePullSecrets s) where
-    toObject ImagePullSecrets'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 newImagePullSecrets
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> ImagePullSecrets s
@@ -2640,11 +2843,20 @@ newImagePullSecrets _name =
         { _name = _name
         }
 
+instance P.Hashable  (ImagePullSecrets s)
+instance TF.IsValue  (ImagePullSecrets s)
+instance TF.IsObject (ImagePullSecrets s) where
+    toObject ImagePullSecrets'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ImagePullSecrets s) where
+    validator = P.mempty
+
 instance P.HasName (ImagePullSecrets s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ImagePullSecrets s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ImagePullSecrets s)
+               (\s a -> s { _name = a } :: ImagePullSecrets s)
 
 -- | @volume_mount@ nested settings.
 data VolumeMount s = VolumeMount'
@@ -2669,16 +2881,6 @@ data VolumeMount s = VolumeMount'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (VolumeMount s)
-instance TF.IsValue  (VolumeMount s)
-instance TF.IsObject (VolumeMount s) where
-    toObject VolumeMount'{..} = catMaybes
-        [ TF.assign "mount_path" <$> TF.attribute _mountPath
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "sub_path" <$> TF.attribute _subPath
-        ]
-
 newVolumeMount
     :: TF.Attr s P.Text -- ^ @mount_path@ - 'P.mountPath'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2691,29 +2893,38 @@ newVolumeMount _mountPath _name =
         , _subPath = TF.Nil
         }
 
+instance P.Hashable  (VolumeMount s)
+instance TF.IsValue  (VolumeMount s)
+instance TF.IsObject (VolumeMount s) where
+    toObject VolumeMount'{..} = P.catMaybes
+        [ TF.assign "mount_path" <$> TF.attribute _mountPath
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "sub_path" <$> TF.attribute _subPath
+        ]
+
+instance TF.IsValid (VolumeMount s) where
+    validator = P.mempty
+
 instance P.HasMountPath (VolumeMount s) (TF.Attr s P.Text) where
     mountPath =
         P.lens (_mountPath :: VolumeMount s -> TF.Attr s P.Text)
-               (\s a -> s { _mountPath = a
-                          } :: VolumeMount s)
+               (\s a -> s { _mountPath = a } :: VolumeMount s)
 
 instance P.HasName (VolumeMount s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: VolumeMount s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: VolumeMount s)
+               (\s a -> s { _name = a } :: VolumeMount s)
 
 instance P.HasReadOnly (VolumeMount s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: VolumeMount s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: VolumeMount s)
+               (\s a -> s { _readOnly = a } :: VolumeMount s)
 
 instance P.HasSubPath (VolumeMount s) (TF.Attr s P.Text) where
     subPath =
         P.lens (_subPath :: VolumeMount s -> TF.Attr s P.Text)
-               (\s a -> s { _subPath = a
-                          } :: VolumeMount s)
+               (\s a -> s { _subPath = a } :: VolumeMount s)
 
 -- | @value_from@ nested settings.
 data ValueFrom s = ValueFrom'
@@ -2741,16 +2952,6 @@ data ValueFrom s = ValueFrom'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (ValueFrom s)
-instance TF.IsValue  (ValueFrom s)
-instance TF.IsObject (ValueFrom s) where
-    toObject ValueFrom'{..} = catMaybes
-        [ TF.assign "config_map_key_ref" <$> TF.attribute _configMapKeyRef
-        , TF.assign "field_ref" <$> TF.attribute _fieldRef
-        , TF.assign "resource_field_ref" <$> TF.attribute _resourceFieldRef
-        , TF.assign "secret_key_ref" <$> TF.attribute _secretKeyRef
-        ]
-
 newValueFrom
     :: ValueFrom s
 newValueFrom =
@@ -2761,43 +2962,71 @@ newValueFrom =
         , _secretKeyRef = TF.Nil
         }
 
+instance P.Hashable  (ValueFrom s)
+instance TF.IsValue  (ValueFrom s)
+instance TF.IsObject (ValueFrom s) where
+    toObject ValueFrom'{..} = P.catMaybes
+        [ TF.assign "config_map_key_ref" <$> TF.attribute _configMapKeyRef
+        , TF.assign "field_ref" <$> TF.attribute _fieldRef
+        , TF.assign "resource_field_ref" <$> TF.attribute _resourceFieldRef
+        , TF.assign "secret_key_ref" <$> TF.attribute _secretKeyRef
+        ]
+
+instance TF.IsValid (ValueFrom s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_configMapKeyRef"
+                  (_configMapKeyRef
+                      :: ValueFrom s -> TF.Attr s (ConfigMapKeyRef s))
+                  TF.validator
+           P.<> TF.settingsValidator "_fieldRef"
+                  (_fieldRef
+                      :: ValueFrom s -> TF.Attr s (FieldRef s))
+                  TF.validator
+           P.<> TF.settingsValidator "_resourceFieldRef"
+                  (_resourceFieldRef
+                      :: ValueFrom s -> TF.Attr s (ResourceFieldRef s))
+                  TF.validator
+           P.<> TF.settingsValidator "_secretKeyRef"
+                  (_secretKeyRef
+                      :: ValueFrom s -> TF.Attr s (SecretKeyRef s))
+                  TF.validator
+
 instance P.HasConfigMapKeyRef (ValueFrom s) (TF.Attr s (ConfigMapKeyRef s)) where
     configMapKeyRef =
         P.lens (_configMapKeyRef :: ValueFrom s -> TF.Attr s (ConfigMapKeyRef s))
-               (\s a -> s { _configMapKeyRef = a
-                          } :: ValueFrom s)
+               (\s a -> s { _configMapKeyRef = a } :: ValueFrom s)
 
 instance P.HasFieldRef (ValueFrom s) (TF.Attr s (FieldRef s)) where
     fieldRef =
         P.lens (_fieldRef :: ValueFrom s -> TF.Attr s (FieldRef s))
-               (\s a -> s { _fieldRef = a
-                          } :: ValueFrom s)
+               (\s a -> s { _fieldRef = a } :: ValueFrom s)
 
 instance P.HasResourceFieldRef (ValueFrom s) (TF.Attr s (ResourceFieldRef s)) where
     resourceFieldRef =
         P.lens (_resourceFieldRef :: ValueFrom s -> TF.Attr s (ResourceFieldRef s))
-               (\s a -> s { _resourceFieldRef = a
-                          } :: ValueFrom s)
+               (\s a -> s { _resourceFieldRef = a } :: ValueFrom s)
 
 instance P.HasSecretKeyRef (ValueFrom s) (TF.Attr s (SecretKeyRef s)) where
     secretKeyRef =
         P.lens (_secretKeyRef :: ValueFrom s -> TF.Attr s (SecretKeyRef s))
-               (\s a -> s { _secretKeyRef = a
-                          } :: ValueFrom s)
+               (\s a -> s { _secretKeyRef = a } :: ValueFrom s)
 
 -- | @requests@ nested settings.
 data Requests s = Requests'
     deriving (P.Show, P.Eq, P.Generic)
+
+newRequests
+    :: Requests s
+newRequests =
+    Requests'
 
 instance P.Hashable  (Requests s)
 instance TF.IsValue  (Requests s)
 instance TF.IsObject (Requests s) where
     toObject Requests' = []
 
-newRequests
-    :: Requests s
-newRequests =
-    Requests'
+instance TF.IsValid (Requests s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedCpu (TF.Ref s' (Requests s)) (TF.Attr s P.Text) where
     computedCpu x = TF.compute (TF.refKey x) "_computedCpu"
@@ -2819,14 +3048,6 @@ data PhotonPersistentDisk s = PhotonPersistentDisk'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (PhotonPersistentDisk s)
-instance TF.IsValue  (PhotonPersistentDisk s)
-instance TF.IsObject (PhotonPersistentDisk s) where
-    toObject PhotonPersistentDisk'{..} = catMaybes
-        [ TF.assign "fs_type" <$> TF.attribute _fsType
-        , TF.assign "pd_id" <$> TF.attribute _pdId
-        ]
-
 newPhotonPersistentDisk
     :: TF.Attr s P.Text -- ^ @pd_id@ - 'P.pdId'
     -> PhotonPersistentDisk s
@@ -2836,17 +3057,26 @@ newPhotonPersistentDisk _pdId =
         , _pdId = _pdId
         }
 
+instance P.Hashable  (PhotonPersistentDisk s)
+instance TF.IsValue  (PhotonPersistentDisk s)
+instance TF.IsObject (PhotonPersistentDisk s) where
+    toObject PhotonPersistentDisk'{..} = P.catMaybes
+        [ TF.assign "fs_type" <$> TF.attribute _fsType
+        , TF.assign "pd_id" <$> TF.attribute _pdId
+        ]
+
+instance TF.IsValid (PhotonPersistentDisk s) where
+    validator = P.mempty
+
 instance P.HasFsType (PhotonPersistentDisk s) (TF.Attr s P.Text) where
     fsType =
         P.lens (_fsType :: PhotonPersistentDisk s -> TF.Attr s P.Text)
-               (\s a -> s { _fsType = a
-                          } :: PhotonPersistentDisk s)
+               (\s a -> s { _fsType = a } :: PhotonPersistentDisk s)
 
 instance P.HasPdId (PhotonPersistentDisk s) (TF.Attr s P.Text) where
     pdId =
         P.lens (_pdId :: PhotonPersistentDisk s -> TF.Attr s P.Text)
-               (\s a -> s { _pdId = a
-                          } :: PhotonPersistentDisk s)
+               (\s a -> s { _pdId = a } :: PhotonPersistentDisk s)
 
 -- | @init_container@ nested settings.
 data InitContainer s = InitContainer'
@@ -2872,7 +3102,7 @@ data InitContainer s = InitContainer'
     -- variable exists or not. Cannot be updated. More info:
     -- http://kubernetes.io/docs/user-guide/containers#containers-and-commands
     --
-    , _env                    :: TF.Attr s [Env s]
+    , _env                    :: TF.Attr s [TF.Attr s (Env s)]
     -- ^ @env@ - (Optional)
     -- List of environment variables to set in the container. Cannot be updated.
     --
@@ -2896,7 +3126,7 @@ data InitContainer s = InitContainer'
     -- Name of the container specified as a DNS_LABEL. Each container in a pod must
     -- have a unique name (DNS_LABEL). Cannot be updated.
     --
-    , _port                   :: TF.Attr s [Port s]
+    , _port                   :: TF.Attr s [TF.Attr s (Port s)]
     -- ^ @port@ - (Optional)
     -- List of ports to expose from the container. Exposing a port here gives the
     -- system additional information about the network connections a container
@@ -2944,7 +3174,7 @@ data InitContainer s = InitContainer'
     -- ^ @tty@ - (Optional)
     -- Whether this container should allocate a TTY for itself
     --
-    , _volumeMount            :: TF.Attr s [VolumeMount s]
+    , _volumeMount            :: TF.Attr s [TF.Attr s (VolumeMount s)]
     -- ^ @volume_mount@ - (Optional)
     -- Pod volumes to mount into the container's filesystem. Cannot be updated.
     --
@@ -2955,28 +3185,6 @@ data InitContainer s = InitContainer'
     -- Cannot be updated.
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance P.Hashable  (InitContainer s)
-instance TF.IsValue  (InitContainer s)
-instance TF.IsObject (InitContainer s) where
-    toObject InitContainer'{..} = catMaybes
-        [ TF.assign "args" <$> TF.attribute _args
-        , TF.assign "command" <$> TF.attribute _command
-        , TF.assign "env" <$> TF.attribute _env
-        , TF.assign "image" <$> TF.attribute _image
-        , TF.assign "lifecycle" <$> TF.attribute _lifecycle
-        , TF.assign "liveness_probe" <$> TF.attribute _livenessProbe
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "readiness_probe" <$> TF.attribute _readinessProbe
-        , TF.assign "security_context" <$> TF.attribute _securityContext
-        , TF.assign "stdin" <$> TF.attribute _stdin
-        , TF.assign "stdin_once" <$> TF.attribute _stdinOnce
-        , TF.assign "termination_message_path" <$> TF.attribute _terminationMessagePath
-        , TF.assign "tty" <$> TF.attribute _tty
-        , TF.assign "volume_mount" <$> TF.attribute _volumeMount
-        , TF.assign "working_dir" <$> TF.attribute _workingDir
-        ]
 
 newInitContainer
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3001,101 +3209,138 @@ newInitContainer _name =
         , _workingDir = TF.Nil
         }
 
+instance P.Hashable  (InitContainer s)
+instance TF.IsValue  (InitContainer s)
+instance TF.IsObject (InitContainer s) where
+    toObject InitContainer'{..} = P.catMaybes
+        [ TF.assign "args" <$> TF.attribute _args
+        , TF.assign "command" <$> TF.attribute _command
+        , TF.assign "env" <$> TF.attribute _env
+        , TF.assign "image" <$> TF.attribute _image
+        , TF.assign "lifecycle" <$> TF.attribute _lifecycle
+        , TF.assign "liveness_probe" <$> TF.attribute _livenessProbe
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "readiness_probe" <$> TF.attribute _readinessProbe
+        , TF.assign "security_context" <$> TF.attribute _securityContext
+        , TF.assign "stdin" <$> TF.attribute _stdin
+        , TF.assign "stdin_once" <$> TF.attribute _stdinOnce
+        , TF.assign "termination_message_path" <$> TF.attribute _terminationMessagePath
+        , TF.assign "tty" <$> TF.attribute _tty
+        , TF.assign "volume_mount" <$> TF.attribute _volumeMount
+        , TF.assign "working_dir" <$> TF.attribute _workingDir
+        ]
+
+instance TF.IsValid (InitContainer s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_env"
+                  (_env
+                      :: InitContainer s -> TF.Attr s [TF.Attr s (Env s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_lifecycle"
+                  (_lifecycle
+                      :: InitContainer s -> TF.Attr s (Lifecycle s))
+                  TF.validator
+           P.<> TF.settingsValidator "_livenessProbe"
+                  (_livenessProbe
+                      :: InitContainer s -> TF.Attr s (LivenessProbe s))
+                  TF.validator
+           P.<> TF.settingsValidator "_port"
+                  (_port
+                      :: InitContainer s -> TF.Attr s [TF.Attr s (Port s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_readinessProbe"
+                  (_readinessProbe
+                      :: InitContainer s -> TF.Attr s (ReadinessProbe s))
+                  TF.validator
+           P.<> TF.settingsValidator "_securityContext"
+                  (_securityContext
+                      :: InitContainer s -> TF.Attr s (SecurityContext s))
+                  TF.validator
+           P.<> TF.settingsValidator "_volumeMount"
+                  (_volumeMount
+                      :: InitContainer s -> TF.Attr s [TF.Attr s (VolumeMount s)])
+                  TF.validator
+
 instance P.HasArgs (InitContainer s) (TF.Attr s [TF.Attr s P.Text]) where
     args =
         P.lens (_args :: InitContainer s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _args = a
-                          } :: InitContainer s)
+               (\s a -> s { _args = a } :: InitContainer s)
 
 instance P.HasCommand (InitContainer s) (TF.Attr s [TF.Attr s P.Text]) where
     command =
         P.lens (_command :: InitContainer s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _command = a
-                          } :: InitContainer s)
+               (\s a -> s { _command = a } :: InitContainer s)
 
-instance P.HasEnv (InitContainer s) (TF.Attr s [Env s]) where
+instance P.HasEnv (InitContainer s) (TF.Attr s [TF.Attr s (Env s)]) where
     env =
-        P.lens (_env :: InitContainer s -> TF.Attr s [Env s])
-               (\s a -> s { _env = a
-                          } :: InitContainer s)
+        P.lens (_env :: InitContainer s -> TF.Attr s [TF.Attr s (Env s)])
+               (\s a -> s { _env = a } :: InitContainer s)
 
 instance P.HasImage (InitContainer s) (TF.Attr s P.Text) where
     image =
         P.lens (_image :: InitContainer s -> TF.Attr s P.Text)
-               (\s a -> s { _image = a
-                          } :: InitContainer s)
+               (\s a -> s { _image = a } :: InitContainer s)
 
 instance P.HasLifecycle (InitContainer s) (TF.Attr s (Lifecycle s)) where
     lifecycle =
         P.lens (_lifecycle :: InitContainer s -> TF.Attr s (Lifecycle s))
-               (\s a -> s { _lifecycle = a
-                          } :: InitContainer s)
+               (\s a -> s { _lifecycle = a } :: InitContainer s)
 
 instance P.HasLivenessProbe (InitContainer s) (TF.Attr s (LivenessProbe s)) where
     livenessProbe =
         P.lens (_livenessProbe :: InitContainer s -> TF.Attr s (LivenessProbe s))
-               (\s a -> s { _livenessProbe = a
-                          } :: InitContainer s)
+               (\s a -> s { _livenessProbe = a } :: InitContainer s)
 
 instance P.HasName (InitContainer s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: InitContainer s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: InitContainer s)
+               (\s a -> s { _name = a } :: InitContainer s)
 
-instance P.HasPort (InitContainer s) (TF.Attr s [Port s]) where
+instance P.HasPort (InitContainer s) (TF.Attr s [TF.Attr s (Port s)]) where
     port =
-        P.lens (_port :: InitContainer s -> TF.Attr s [Port s])
-               (\s a -> s { _port = a
-                          } :: InitContainer s)
+        P.lens (_port :: InitContainer s -> TF.Attr s [TF.Attr s (Port s)])
+               (\s a -> s { _port = a } :: InitContainer s)
 
 instance P.HasReadinessProbe (InitContainer s) (TF.Attr s (ReadinessProbe s)) where
     readinessProbe =
         P.lens (_readinessProbe :: InitContainer s -> TF.Attr s (ReadinessProbe s))
-               (\s a -> s { _readinessProbe = a
-                          } :: InitContainer s)
+               (\s a -> s { _readinessProbe = a } :: InitContainer s)
 
 instance P.HasSecurityContext (InitContainer s) (TF.Attr s (SecurityContext s)) where
     securityContext =
         P.lens (_securityContext :: InitContainer s -> TF.Attr s (SecurityContext s))
-               (\s a -> s { _securityContext = a
-                          } :: InitContainer s)
+               (\s a -> s { _securityContext = a } :: InitContainer s)
 
 instance P.HasStdin (InitContainer s) (TF.Attr s P.Bool) where
     stdin =
         P.lens (_stdin :: InitContainer s -> TF.Attr s P.Bool)
-               (\s a -> s { _stdin = a
-                          } :: InitContainer s)
+               (\s a -> s { _stdin = a } :: InitContainer s)
 
 instance P.HasStdinOnce (InitContainer s) (TF.Attr s P.Bool) where
     stdinOnce =
         P.lens (_stdinOnce :: InitContainer s -> TF.Attr s P.Bool)
-               (\s a -> s { _stdinOnce = a
-                          } :: InitContainer s)
+               (\s a -> s { _stdinOnce = a } :: InitContainer s)
 
 instance P.HasTerminationMessagePath (InitContainer s) (TF.Attr s P.Text) where
     terminationMessagePath =
         P.lens (_terminationMessagePath :: InitContainer s -> TF.Attr s P.Text)
-               (\s a -> s { _terminationMessagePath = a
-                          } :: InitContainer s)
+               (\s a -> s { _terminationMessagePath = a } :: InitContainer s)
 
 instance P.HasTty (InitContainer s) (TF.Attr s P.Bool) where
     tty =
         P.lens (_tty :: InitContainer s -> TF.Attr s P.Bool)
-               (\s a -> s { _tty = a
-                          } :: InitContainer s)
+               (\s a -> s { _tty = a } :: InitContainer s)
 
-instance P.HasVolumeMount (InitContainer s) (TF.Attr s [VolumeMount s]) where
+instance P.HasVolumeMount (InitContainer s) (TF.Attr s [TF.Attr s (VolumeMount s)]) where
     volumeMount =
-        P.lens (_volumeMount :: InitContainer s -> TF.Attr s [VolumeMount s])
-               (\s a -> s { _volumeMount = a
-                          } :: InitContainer s)
+        P.lens (_volumeMount :: InitContainer s -> TF.Attr s [TF.Attr s (VolumeMount s)])
+               (\s a -> s { _volumeMount = a } :: InitContainer s)
 
 instance P.HasWorkingDir (InitContainer s) (TF.Attr s P.Text) where
     workingDir =
         P.lens (_workingDir :: InitContainer s -> TF.Attr s P.Text)
-               (\s a -> s { _workingDir = a
-                          } :: InitContainer s)
+               (\s a -> s { _workingDir = a } :: InitContainer s)
 
 instance s ~ s' => P.HasComputedImagePullPolicy (TF.Ref s' (InitContainer s)) (TF.Attr s P.Text) where
     computedImagePullPolicy x = TF.compute (TF.refKey x) "_computedImagePullPolicy"
@@ -3107,20 +3352,23 @@ instance s ~ s' => P.HasComputedResources (TF.Ref s' (InitContainer s)) (TF.Attr
 data Spec s = Spec'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Spec s)
-instance TF.IsValue  (Spec s)
-instance TF.IsObject (Spec s) where
-    toObject Spec' = []
-
 newSpec
     :: Spec s
 newSpec =
     Spec'
 
+instance P.Hashable  (Spec s)
+instance TF.IsValue  (Spec s)
+instance TF.IsObject (Spec s) where
+    toObject Spec' = []
+
+instance TF.IsValid (Spec s) where
+    validator = P.mempty
+
 instance s ~ s' => P.HasComputedClusterIp (TF.Ref s' (Spec s)) (TF.Attr s P.Text) where
     computedClusterIp x = TF.compute (TF.refKey x) "_computedClusterIp"
 
-instance s ~ s' => P.HasComputedExternalIps (TF.Ref s' (Spec s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedExternalIps (TF.Ref s' (Spec s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedExternalIps x = TF.compute (TF.refKey x) "_computedExternalIps"
 
 instance s ~ s' => P.HasComputedExternalName (TF.Ref s' (Spec s)) (TF.Attr s P.Text) where
@@ -3129,10 +3377,10 @@ instance s ~ s' => P.HasComputedExternalName (TF.Ref s' (Spec s)) (TF.Attr s P.T
 instance s ~ s' => P.HasComputedLoadBalancerIp (TF.Ref s' (Spec s)) (TF.Attr s P.Text) where
     computedLoadBalancerIp x = TF.compute (TF.refKey x) "_computedLoadBalancerIp"
 
-instance s ~ s' => P.HasComputedLoadBalancerSourceRanges (TF.Ref s' (Spec s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedLoadBalancerSourceRanges (TF.Ref s' (Spec s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedLoadBalancerSourceRanges x = TF.compute (TF.refKey x) "_computedLoadBalancerSourceRanges"
 
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (Spec s)) (TF.Attr s (P.NonEmpty (Port s))) where
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (Spec s)) (TF.Attr s (P.NonEmpty (TF.Attr s (Port s)))) where
     computedPort x = TF.compute (TF.refKey x) "_computedPort"
 
 instance s ~ s' => P.HasComputedSelector (TF.Ref s' (Spec s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
@@ -3161,14 +3409,6 @@ data Metadata s = Metadata'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Metadata s)
-instance TF.IsValue  (Metadata s)
-instance TF.IsObject (Metadata s) where
-    toObject Metadata'{..} = catMaybes
-        [ TF.assign "annotations" <$> TF.attribute _annotations
-        , TF.assign "labels" <$> TF.attribute _labels
-        ]
-
 newMetadata
     :: Metadata s
 newMetadata =
@@ -3177,17 +3417,26 @@ newMetadata =
         , _labels = TF.Nil
         }
 
+instance P.Hashable  (Metadata s)
+instance TF.IsValue  (Metadata s)
+instance TF.IsObject (Metadata s) where
+    toObject Metadata'{..} = P.catMaybes
+        [ TF.assign "annotations" <$> TF.attribute _annotations
+        , TF.assign "labels" <$> TF.attribute _labels
+        ]
+
+instance TF.IsValid (Metadata s) where
+    validator = P.mempty
+
 instance P.HasAnnotations (Metadata s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     annotations =
         P.lens (_annotations :: Metadata s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _annotations = a
-                          } :: Metadata s)
+               (\s a -> s { _annotations = a } :: Metadata s)
 
 instance P.HasLabels (Metadata s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     labels =
         P.lens (_labels :: Metadata s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _labels = a
-                          } :: Metadata s)
+               (\s a -> s { _labels = a } :: Metadata s)
 
 instance s ~ s' => P.HasComputedGeneration (TF.Ref s' (Metadata s)) (TF.Attr s P.Integer) where
     computedGeneration x = TF.compute (TF.refKey x) "_computedGeneration"
@@ -3215,7 +3464,7 @@ data MatchExpressions s = MatchExpressions'
     -- A key's relationship to a set of values. Valid operators ard `In`, `NotIn`,
     -- `Exists` and `DoesNotExist`.
     --
-    , _values   :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _values   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @values@ - (Optional)
     -- An array of string values. If the operator is `In` or `NotIn`, the values
     -- array must be non-empty. If the operator is `Exists` or `DoesNotExist`, the
@@ -3223,15 +3472,6 @@ data MatchExpressions s = MatchExpressions'
     -- patch.
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance P.Hashable  (MatchExpressions s)
-instance TF.IsValue  (MatchExpressions s)
-instance TF.IsObject (MatchExpressions s) where
-    toObject MatchExpressions'{..} = catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "operator" <$> TF.attribute _operator
-        , TF.assign "values" <$> TF.attribute _values
-        ]
 
 newMatchExpressions
     :: MatchExpressions s
@@ -3242,23 +3482,32 @@ newMatchExpressions =
         , _values = TF.Nil
         }
 
+instance P.Hashable  (MatchExpressions s)
+instance TF.IsValue  (MatchExpressions s)
+instance TF.IsObject (MatchExpressions s) where
+    toObject MatchExpressions'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "operator" <$> TF.attribute _operator
+        , TF.assign "values" <$> TF.attribute _values
+        ]
+
+instance TF.IsValid (MatchExpressions s) where
+    validator = P.mempty
+
 instance P.HasKey (MatchExpressions s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: MatchExpressions s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a
-                          } :: MatchExpressions s)
+               (\s a -> s { _key = a } :: MatchExpressions s)
 
 instance P.HasOperator (MatchExpressions s) (TF.Attr s P.Text) where
     operator =
         P.lens (_operator :: MatchExpressions s -> TF.Attr s P.Text)
-               (\s a -> s { _operator = a
-                          } :: MatchExpressions s)
+               (\s a -> s { _operator = a } :: MatchExpressions s)
 
-instance P.HasValues (MatchExpressions s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance P.HasValues (MatchExpressions s) (TF.Attr s [TF.Attr s P.Text]) where
     values =
-        P.lens (_values :: MatchExpressions s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _values = a
-                          } :: MatchExpressions s)
+        P.lens (_values :: MatchExpressions s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _values = a } :: MatchExpressions s)
 
 -- | @git_repo@ nested settings.
 data GitRepo s = GitRepo'
@@ -3279,15 +3528,6 @@ data GitRepo s = GitRepo'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (GitRepo s)
-instance TF.IsValue  (GitRepo s)
-instance TF.IsObject (GitRepo s) where
-    toObject GitRepo'{..} = catMaybes
-        [ TF.assign "directory" <$> TF.attribute _directory
-        , TF.assign "repository" <$> TF.attribute _repository
-        , TF.assign "revision" <$> TF.attribute _revision
-        ]
-
 newGitRepo
     :: GitRepo s
 newGitRepo =
@@ -3297,23 +3537,32 @@ newGitRepo =
         , _revision = TF.Nil
         }
 
+instance P.Hashable  (GitRepo s)
+instance TF.IsValue  (GitRepo s)
+instance TF.IsObject (GitRepo s) where
+    toObject GitRepo'{..} = P.catMaybes
+        [ TF.assign "directory" <$> TF.attribute _directory
+        , TF.assign "repository" <$> TF.attribute _repository
+        , TF.assign "revision" <$> TF.attribute _revision
+        ]
+
+instance TF.IsValid (GitRepo s) where
+    validator = P.mempty
+
 instance P.HasDirectory (GitRepo s) (TF.Attr s P.Text) where
     directory =
         P.lens (_directory :: GitRepo s -> TF.Attr s P.Text)
-               (\s a -> s { _directory = a
-                          } :: GitRepo s)
+               (\s a -> s { _directory = a } :: GitRepo s)
 
 instance P.HasRepository (GitRepo s) (TF.Attr s P.Text) where
     repository =
         P.lens (_repository :: GitRepo s -> TF.Attr s P.Text)
-               (\s a -> s { _repository = a
-                          } :: GitRepo s)
+               (\s a -> s { _repository = a } :: GitRepo s)
 
 instance P.HasRevision (GitRepo s) (TF.Attr s P.Text) where
     revision =
         P.lens (_revision :: GitRepo s -> TF.Attr s P.Text)
-               (\s a -> s { _revision = a
-                          } :: GitRepo s)
+               (\s a -> s { _revision = a } :: GitRepo s)
 
 -- | @tcp_socket@ nested settings.
 data TcpSocket s = TcpSocket'
@@ -3324,13 +3573,6 @@ data TcpSocket s = TcpSocket'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (TcpSocket s)
-instance TF.IsValue  (TcpSocket s)
-instance TF.IsObject (TcpSocket s) where
-    toObject TcpSocket'{..} = catMaybes
-        [ TF.assign "port" <$> TF.attribute _port
-        ]
-
 newTcpSocket
     :: TF.Attr s P.Text -- ^ @port@ - 'P.port'
     -> TcpSocket s
@@ -3339,11 +3581,20 @@ newTcpSocket _port =
         { _port = _port
         }
 
+instance P.Hashable  (TcpSocket s)
+instance TF.IsValue  (TcpSocket s)
+instance TF.IsObject (TcpSocket s) where
+    toObject TcpSocket'{..} = P.catMaybes
+        [ TF.assign "port" <$> TF.attribute _port
+        ]
+
+instance TF.IsValid (TcpSocket s) where
+    validator = P.mempty
+
 instance P.HasPort (TcpSocket s) (TF.Attr s P.Text) where
     port =
         P.lens (_port :: TcpSocket s -> TF.Attr s P.Text)
-               (\s a -> s { _port = a
-                          } :: TcpSocket s)
+               (\s a -> s { _port = a } :: TcpSocket s)
 
 -- | @limit@ nested settings.
 data Limit s = Limit'
@@ -3372,17 +3623,6 @@ data Limit s = Limit'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Limit s)
-instance TF.IsValue  (Limit s)
-instance TF.IsObject (Limit s) where
-    toObject Limit'{..} = catMaybes
-        [ TF.assign "default" <$> TF.attribute _default'
-        , TF.assign "max" <$> TF.attribute _max
-        , TF.assign "max_limit_request_ratio" <$> TF.attribute _maxLimitRequestRatio
-        , TF.assign "min" <$> TF.attribute _min
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
 newLimit
     :: Limit s
 newLimit =
@@ -3394,35 +3634,44 @@ newLimit =
         , _type' = TF.Nil
         }
 
+instance P.Hashable  (Limit s)
+instance TF.IsValue  (Limit s)
+instance TF.IsObject (Limit s) where
+    toObject Limit'{..} = P.catMaybes
+        [ TF.assign "default" <$> TF.attribute _default'
+        , TF.assign "max" <$> TF.attribute _max
+        , TF.assign "max_limit_request_ratio" <$> TF.attribute _maxLimitRequestRatio
+        , TF.assign "min" <$> TF.attribute _min
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (Limit s) where
+    validator = P.mempty
+
 instance P.HasDefault' (Limit s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     default' =
         P.lens (_default' :: Limit s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _default' = a
-                          } :: Limit s)
+               (\s a -> s { _default' = a } :: Limit s)
 
 instance P.HasMax (Limit s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     max =
         P.lens (_max :: Limit s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _max = a
-                          } :: Limit s)
+               (\s a -> s { _max = a } :: Limit s)
 
 instance P.HasMaxLimitRequestRatio (Limit s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     maxLimitRequestRatio =
         P.lens (_maxLimitRequestRatio :: Limit s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _maxLimitRequestRatio = a
-                          } :: Limit s)
+               (\s a -> s { _maxLimitRequestRatio = a } :: Limit s)
 
 instance P.HasMin (Limit s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     min =
         P.lens (_min :: Limit s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _min = a
-                          } :: Limit s)
+               (\s a -> s { _min = a } :: Limit s)
 
 instance P.HasType' (Limit s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: Limit s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: Limit s)
+               (\s a -> s { _type' = a } :: Limit s)
 
 instance s ~ s' => P.HasComputedDefaultRequest (TF.Ref s' (Limit s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedDefaultRequest x = TF.compute (TF.refKey x) "_computedDefaultRequest"
@@ -3431,15 +3680,18 @@ instance s ~ s' => P.HasComputedDefaultRequest (TF.Ref s' (Limit s)) (TF.Attr s 
 data LoadBalancerIngress s = LoadBalancerIngress'
     deriving (P.Show, P.Eq, P.Generic)
 
+newLoadBalancerIngress
+    :: LoadBalancerIngress s
+newLoadBalancerIngress =
+    LoadBalancerIngress'
+
 instance P.Hashable  (LoadBalancerIngress s)
 instance TF.IsValue  (LoadBalancerIngress s)
 instance TF.IsObject (LoadBalancerIngress s) where
     toObject LoadBalancerIngress' = []
 
-newLoadBalancerIngress
-    :: LoadBalancerIngress s
-newLoadBalancerIngress =
-    LoadBalancerIngress'
+instance TF.IsValid (LoadBalancerIngress s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (LoadBalancerIngress s)) (TF.Attr s P.Text) where
     computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
@@ -3464,25 +3716,15 @@ data Fc s = Fc'
     -- Whether to force the read-only setting in VolumeMounts. Defaults to false
     -- (read/write).
     --
-    , _targetWwNs :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _targetWwNs :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @target_ww_ns@ - (Required)
     -- FC target worldwide names (WWNs)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Fc s)
-instance TF.IsValue  (Fc s)
-instance TF.IsObject (Fc s) where
-    toObject Fc'{..} = catMaybes
-        [ TF.assign "fs_type" <$> TF.attribute _fsType
-        , TF.assign "lun" <$> TF.attribute _lun
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "target_ww_ns" <$> TF.attribute _targetWwNs
-        ]
-
 newFc
     :: TF.Attr s P.Integer -- ^ @lun@ - 'P.lun'
-    -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @target_ww_ns@ - 'P.targetWwNs'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @target_ww_ns@ - 'P.targetWwNs'
     -> Fc s
 newFc _lun _targetWwNs =
     Fc'
@@ -3492,29 +3734,38 @@ newFc _lun _targetWwNs =
         , _targetWwNs = _targetWwNs
         }
 
+instance P.Hashable  (Fc s)
+instance TF.IsValue  (Fc s)
+instance TF.IsObject (Fc s) where
+    toObject Fc'{..} = P.catMaybes
+        [ TF.assign "fs_type" <$> TF.attribute _fsType
+        , TF.assign "lun" <$> TF.attribute _lun
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "target_ww_ns" <$> TF.attribute _targetWwNs
+        ]
+
+instance TF.IsValid (Fc s) where
+    validator = P.mempty
+
 instance P.HasFsType (Fc s) (TF.Attr s P.Text) where
     fsType =
         P.lens (_fsType :: Fc s -> TF.Attr s P.Text)
-               (\s a -> s { _fsType = a
-                          } :: Fc s)
+               (\s a -> s { _fsType = a } :: Fc s)
 
 instance P.HasLun (Fc s) (TF.Attr s P.Integer) where
     lun =
         P.lens (_lun :: Fc s -> TF.Attr s P.Integer)
-               (\s a -> s { _lun = a
-                          } :: Fc s)
+               (\s a -> s { _lun = a } :: Fc s)
 
 instance P.HasReadOnly (Fc s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: Fc s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: Fc s)
+               (\s a -> s { _readOnly = a } :: Fc s)
 
-instance P.HasTargetWwNs (Fc s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance P.HasTargetWwNs (Fc s) (TF.Attr s [TF.Attr s P.Text]) where
     targetWwNs =
-        P.lens (_targetWwNs :: Fc s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _targetWwNs = a
-                          } :: Fc s)
+        P.lens (_targetWwNs :: Fc s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _targetWwNs = a } :: Fc s)
 
 -- | @liveness_probe@ nested settings.
 data LivenessProbe s = LivenessProbe'
@@ -3546,7 +3797,7 @@ data LivenessProbe s = LivenessProbe'
     -- Minimum consecutive successes for the probe to be considered successful
     -- after having failed.
     --
-    , _tcpSocket           :: TF.Attr s [TcpSocket s]
+    , _tcpSocket           :: TF.Attr s [TF.Attr s (TcpSocket s)]
     -- ^ @tcp_socket@ - (Optional)
     -- TCPSocket specifies an action involving a TCP port. TCP hooks not yet
     -- supported
@@ -3557,20 +3808,6 @@ data LivenessProbe s = LivenessProbe'
     -- http://kubernetes.io/docs/user-guide/pod-states#container-probes
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance P.Hashable  (LivenessProbe s)
-instance TF.IsValue  (LivenessProbe s)
-instance TF.IsObject (LivenessProbe s) where
-    toObject LivenessProbe'{..} = catMaybes
-        [ TF.assign "exec" <$> TF.attribute _exec
-        , TF.assign "failure_threshold" <$> TF.attribute _failureThreshold
-        , TF.assign "http_get" <$> TF.attribute _httpGet
-        , TF.assign "initial_delay_seconds" <$> TF.attribute _initialDelaySeconds
-        , TF.assign "period_seconds" <$> TF.attribute _periodSeconds
-        , TF.assign "success_threshold" <$> TF.attribute _successThreshold
-        , TF.assign "tcp_socket" <$> TF.attribute _tcpSocket
-        , TF.assign "timeout_seconds" <$> TF.attribute _timeoutSeconds
-        ]
 
 newLivenessProbe
     :: LivenessProbe s
@@ -3586,53 +3823,74 @@ newLivenessProbe =
         , _timeoutSeconds = TF.value 1
         }
 
+instance P.Hashable  (LivenessProbe s)
+instance TF.IsValue  (LivenessProbe s)
+instance TF.IsObject (LivenessProbe s) where
+    toObject LivenessProbe'{..} = P.catMaybes
+        [ TF.assign "exec" <$> TF.attribute _exec
+        , TF.assign "failure_threshold" <$> TF.attribute _failureThreshold
+        , TF.assign "http_get" <$> TF.attribute _httpGet
+        , TF.assign "initial_delay_seconds" <$> TF.attribute _initialDelaySeconds
+        , TF.assign "period_seconds" <$> TF.attribute _periodSeconds
+        , TF.assign "success_threshold" <$> TF.attribute _successThreshold
+        , TF.assign "tcp_socket" <$> TF.attribute _tcpSocket
+        , TF.assign "timeout_seconds" <$> TF.attribute _timeoutSeconds
+        ]
+
+instance TF.IsValid (LivenessProbe s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_exec"
+                  (_exec
+                      :: LivenessProbe s -> TF.Attr s (Exec s))
+                  TF.validator
+           P.<> TF.settingsValidator "_httpGet"
+                  (_httpGet
+                      :: LivenessProbe s -> TF.Attr s (HttpGet s))
+                  TF.validator
+           P.<> TF.settingsValidator "_tcpSocket"
+                  (_tcpSocket
+                      :: LivenessProbe s -> TF.Attr s [TF.Attr s (TcpSocket s)])
+                  TF.validator
+
 instance P.HasExec (LivenessProbe s) (TF.Attr s (Exec s)) where
     exec =
         P.lens (_exec :: LivenessProbe s -> TF.Attr s (Exec s))
-               (\s a -> s { _exec = a
-                          } :: LivenessProbe s)
+               (\s a -> s { _exec = a } :: LivenessProbe s)
 
 instance P.HasFailureThreshold (LivenessProbe s) (TF.Attr s P.Integer) where
     failureThreshold =
         P.lens (_failureThreshold :: LivenessProbe s -> TF.Attr s P.Integer)
-               (\s a -> s { _failureThreshold = a
-                          } :: LivenessProbe s)
+               (\s a -> s { _failureThreshold = a } :: LivenessProbe s)
 
 instance P.HasHttpGet (LivenessProbe s) (TF.Attr s (HttpGet s)) where
     httpGet =
         P.lens (_httpGet :: LivenessProbe s -> TF.Attr s (HttpGet s))
-               (\s a -> s { _httpGet = a
-                          } :: LivenessProbe s)
+               (\s a -> s { _httpGet = a } :: LivenessProbe s)
 
 instance P.HasInitialDelaySeconds (LivenessProbe s) (TF.Attr s P.Integer) where
     initialDelaySeconds =
         P.lens (_initialDelaySeconds :: LivenessProbe s -> TF.Attr s P.Integer)
-               (\s a -> s { _initialDelaySeconds = a
-                          } :: LivenessProbe s)
+               (\s a -> s { _initialDelaySeconds = a } :: LivenessProbe s)
 
 instance P.HasPeriodSeconds (LivenessProbe s) (TF.Attr s P.Integer) where
     periodSeconds =
         P.lens (_periodSeconds :: LivenessProbe s -> TF.Attr s P.Integer)
-               (\s a -> s { _periodSeconds = a
-                          } :: LivenessProbe s)
+               (\s a -> s { _periodSeconds = a } :: LivenessProbe s)
 
 instance P.HasSuccessThreshold (LivenessProbe s) (TF.Attr s P.Integer) where
     successThreshold =
         P.lens (_successThreshold :: LivenessProbe s -> TF.Attr s P.Integer)
-               (\s a -> s { _successThreshold = a
-                          } :: LivenessProbe s)
+               (\s a -> s { _successThreshold = a } :: LivenessProbe s)
 
-instance P.HasTcpSocket (LivenessProbe s) (TF.Attr s [TcpSocket s]) where
+instance P.HasTcpSocket (LivenessProbe s) (TF.Attr s [TF.Attr s (TcpSocket s)]) where
     tcpSocket =
-        P.lens (_tcpSocket :: LivenessProbe s -> TF.Attr s [TcpSocket s])
-               (\s a -> s { _tcpSocket = a
-                          } :: LivenessProbe s)
+        P.lens (_tcpSocket :: LivenessProbe s -> TF.Attr s [TF.Attr s (TcpSocket s)])
+               (\s a -> s { _tcpSocket = a } :: LivenessProbe s)
 
 instance P.HasTimeoutSeconds (LivenessProbe s) (TF.Attr s P.Integer) where
     timeoutSeconds =
         P.lens (_timeoutSeconds :: LivenessProbe s -> TF.Attr s P.Integer)
-               (\s a -> s { _timeoutSeconds = a
-                          } :: LivenessProbe s)
+               (\s a -> s { _timeoutSeconds = a } :: LivenessProbe s)
 
 -- | @azure_file@ nested settings.
 data AzureFile s = AzureFile'
@@ -3651,15 +3909,6 @@ data AzureFile s = AzureFile'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (AzureFile s)
-instance TF.IsValue  (AzureFile s)
-instance TF.IsObject (AzureFile s) where
-    toObject AzureFile'{..} = catMaybes
-        [ TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "secret_name" <$> TF.attribute _secretName
-        , TF.assign "share_name" <$> TF.attribute _shareName
-        ]
-
 newAzureFile
     :: TF.Attr s P.Text -- ^ @secret_name@ - 'P.secretName'
     -> TF.Attr s P.Text -- ^ @share_name@ - 'P.shareName'
@@ -3671,23 +3920,32 @@ newAzureFile _secretName _shareName =
         , _shareName = _shareName
         }
 
+instance P.Hashable  (AzureFile s)
+instance TF.IsValue  (AzureFile s)
+instance TF.IsObject (AzureFile s) where
+    toObject AzureFile'{..} = P.catMaybes
+        [ TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "secret_name" <$> TF.attribute _secretName
+        , TF.assign "share_name" <$> TF.attribute _shareName
+        ]
+
+instance TF.IsValid (AzureFile s) where
+    validator = P.mempty
+
 instance P.HasReadOnly (AzureFile s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: AzureFile s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: AzureFile s)
+               (\s a -> s { _readOnly = a } :: AzureFile s)
 
 instance P.HasSecretName (AzureFile s) (TF.Attr s P.Text) where
     secretName =
         P.lens (_secretName :: AzureFile s -> TF.Attr s P.Text)
-               (\s a -> s { _secretName = a
-                          } :: AzureFile s)
+               (\s a -> s { _secretName = a } :: AzureFile s)
 
 instance P.HasShareName (AzureFile s) (TF.Attr s P.Text) where
     shareName =
         P.lens (_shareName :: AzureFile s -> TF.Attr s P.Text)
-               (\s a -> s { _shareName = a
-                          } :: AzureFile s)
+               (\s a -> s { _shareName = a } :: AzureFile s)
 
 -- | @scale_target_ref@ nested settings.
 data ScaleTargetRef s = ScaleTargetRef'
@@ -3707,15 +3965,6 @@ data ScaleTargetRef s = ScaleTargetRef'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (ScaleTargetRef s)
-instance TF.IsValue  (ScaleTargetRef s)
-instance TF.IsObject (ScaleTargetRef s) where
-    toObject ScaleTargetRef'{..} = catMaybes
-        [ TF.assign "api_version" <$> TF.attribute _apiVersion
-        , TF.assign "kind" <$> TF.attribute _kind
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 newScaleTargetRef
     :: TF.Attr s P.Text -- ^ @kind@ - 'P.kind'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3727,23 +3976,32 @@ newScaleTargetRef _kind _name =
         , _name = _name
         }
 
+instance P.Hashable  (ScaleTargetRef s)
+instance TF.IsValue  (ScaleTargetRef s)
+instance TF.IsObject (ScaleTargetRef s) where
+    toObject ScaleTargetRef'{..} = P.catMaybes
+        [ TF.assign "api_version" <$> TF.attribute _apiVersion
+        , TF.assign "kind" <$> TF.attribute _kind
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ScaleTargetRef s) where
+    validator = P.mempty
+
 instance P.HasApiVersion (ScaleTargetRef s) (TF.Attr s P.Text) where
     apiVersion =
         P.lens (_apiVersion :: ScaleTargetRef s -> TF.Attr s P.Text)
-               (\s a -> s { _apiVersion = a
-                          } :: ScaleTargetRef s)
+               (\s a -> s { _apiVersion = a } :: ScaleTargetRef s)
 
 instance P.HasKind (ScaleTargetRef s) (TF.Attr s P.Text) where
     kind =
         P.lens (_kind :: ScaleTargetRef s -> TF.Attr s P.Text)
-               (\s a -> s { _kind = a
-                          } :: ScaleTargetRef s)
+               (\s a -> s { _kind = a } :: ScaleTargetRef s)
 
 instance P.HasName (ScaleTargetRef s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ScaleTargetRef s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ScaleTargetRef s)
+               (\s a -> s { _name = a } :: ScaleTargetRef s)
 
 -- | @pre_stop@ nested settings.
 data PreStop s = PreStop'
@@ -3755,21 +4013,12 @@ data PreStop s = PreStop'
     -- ^ @http_get@ - (Optional)
     -- Specifies the http request to perform.
     --
-    , _tcpSocket :: TF.Attr s [TcpSocket s]
+    , _tcpSocket :: TF.Attr s [TF.Attr s (TcpSocket s)]
     -- ^ @tcp_socket@ - (Optional)
     -- TCPSocket specifies an action involving a TCP port. TCP hooks not yet
     -- supported
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance P.Hashable  (PreStop s)
-instance TF.IsValue  (PreStop s)
-instance TF.IsObject (PreStop s) where
-    toObject PreStop'{..} = catMaybes
-        [ TF.assign "exec" <$> TF.attribute _exec
-        , TF.assign "http_get" <$> TF.attribute _httpGet
-        , TF.assign "tcp_socket" <$> TF.attribute _tcpSocket
-        ]
 
 newPreStop
     :: PreStop s
@@ -3780,23 +4029,44 @@ newPreStop =
         , _tcpSocket = TF.Nil
         }
 
+instance P.Hashable  (PreStop s)
+instance TF.IsValue  (PreStop s)
+instance TF.IsObject (PreStop s) where
+    toObject PreStop'{..} = P.catMaybes
+        [ TF.assign "exec" <$> TF.attribute _exec
+        , TF.assign "http_get" <$> TF.attribute _httpGet
+        , TF.assign "tcp_socket" <$> TF.attribute _tcpSocket
+        ]
+
+instance TF.IsValid (PreStop s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_exec"
+                  (_exec
+                      :: PreStop s -> TF.Attr s (Exec s))
+                  TF.validator
+           P.<> TF.settingsValidator "_httpGet"
+                  (_httpGet
+                      :: PreStop s -> TF.Attr s (HttpGet s))
+                  TF.validator
+           P.<> TF.settingsValidator "_tcpSocket"
+                  (_tcpSocket
+                      :: PreStop s -> TF.Attr s [TF.Attr s (TcpSocket s)])
+                  TF.validator
+
 instance P.HasExec (PreStop s) (TF.Attr s (Exec s)) where
     exec =
         P.lens (_exec :: PreStop s -> TF.Attr s (Exec s))
-               (\s a -> s { _exec = a
-                          } :: PreStop s)
+               (\s a -> s { _exec = a } :: PreStop s)
 
 instance P.HasHttpGet (PreStop s) (TF.Attr s (HttpGet s)) where
     httpGet =
         P.lens (_httpGet :: PreStop s -> TF.Attr s (HttpGet s))
-               (\s a -> s { _httpGet = a
-                          } :: PreStop s)
+               (\s a -> s { _httpGet = a } :: PreStop s)
 
-instance P.HasTcpSocket (PreStop s) (TF.Attr s [TcpSocket s]) where
+instance P.HasTcpSocket (PreStop s) (TF.Attr s [TF.Attr s (TcpSocket s)]) where
     tcpSocket =
-        P.lens (_tcpSocket :: PreStop s -> TF.Attr s [TcpSocket s])
-               (\s a -> s { _tcpSocket = a
-                          } :: PreStop s)
+        P.lens (_tcpSocket :: PreStop s -> TF.Attr s [TF.Attr s (TcpSocket s)])
+               (\s a -> s { _tcpSocket = a } :: PreStop s)
 
 -- | @flex_volume@ nested settings.
 data FlexVolume s = FlexVolume'
@@ -3828,17 +4098,6 @@ data FlexVolume s = FlexVolume'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (FlexVolume s)
-instance TF.IsValue  (FlexVolume s)
-instance TF.IsObject (FlexVolume s) where
-    toObject FlexVolume'{..} = catMaybes
-        [ TF.assign "driver" <$> TF.attribute _driver
-        , TF.assign "fs_type" <$> TF.attribute _fsType
-        , TF.assign "options" <$> TF.attribute _options
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "secret_ref" <$> TF.attribute _secretRef
-        ]
-
 newFlexVolume
     :: TF.Attr s P.Text -- ^ @driver@ - 'P.driver'
     -> FlexVolume s
@@ -3851,35 +4110,48 @@ newFlexVolume _driver =
         , _secretRef = TF.Nil
         }
 
+instance P.Hashable  (FlexVolume s)
+instance TF.IsValue  (FlexVolume s)
+instance TF.IsObject (FlexVolume s) where
+    toObject FlexVolume'{..} = P.catMaybes
+        [ TF.assign "driver" <$> TF.attribute _driver
+        , TF.assign "fs_type" <$> TF.attribute _fsType
+        , TF.assign "options" <$> TF.attribute _options
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "secret_ref" <$> TF.attribute _secretRef
+        ]
+
+instance TF.IsValid (FlexVolume s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_secretRef"
+                  (_secretRef
+                      :: FlexVolume s -> TF.Attr s (SecretRef s))
+                  TF.validator
+
 instance P.HasDriver (FlexVolume s) (TF.Attr s P.Text) where
     driver =
         P.lens (_driver :: FlexVolume s -> TF.Attr s P.Text)
-               (\s a -> s { _driver = a
-                          } :: FlexVolume s)
+               (\s a -> s { _driver = a } :: FlexVolume s)
 
 instance P.HasFsType (FlexVolume s) (TF.Attr s P.Text) where
     fsType =
         P.lens (_fsType :: FlexVolume s -> TF.Attr s P.Text)
-               (\s a -> s { _fsType = a
-                          } :: FlexVolume s)
+               (\s a -> s { _fsType = a } :: FlexVolume s)
 
 instance P.HasOptions (FlexVolume s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     options =
         P.lens (_options :: FlexVolume s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _options = a
-                          } :: FlexVolume s)
+               (\s a -> s { _options = a } :: FlexVolume s)
 
 instance P.HasReadOnly (FlexVolume s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: FlexVolume s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: FlexVolume s)
+               (\s a -> s { _readOnly = a } :: FlexVolume s)
 
 instance P.HasSecretRef (FlexVolume s) (TF.Attr s (SecretRef s)) where
     secretRef =
         P.lens (_secretRef :: FlexVolume s -> TF.Attr s (SecretRef s))
-               (\s a -> s { _secretRef = a
-                          } :: FlexVolume s)
+               (\s a -> s { _secretRef = a } :: FlexVolume s)
 
 -- | @secret_key_ref@ nested settings.
 data SecretKeyRef s = SecretKeyRef'
@@ -3894,14 +4166,6 @@ data SecretKeyRef s = SecretKeyRef'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (SecretKeyRef s)
-instance TF.IsValue  (SecretKeyRef s)
-instance TF.IsObject (SecretKeyRef s) where
-    toObject SecretKeyRef'{..} = catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 newSecretKeyRef
     :: SecretKeyRef s
 newSecretKeyRef =
@@ -3910,17 +4174,26 @@ newSecretKeyRef =
         , _name = TF.Nil
         }
 
+instance P.Hashable  (SecretKeyRef s)
+instance TF.IsValue  (SecretKeyRef s)
+instance TF.IsObject (SecretKeyRef s) where
+    toObject SecretKeyRef'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (SecretKeyRef s) where
+    validator = P.mempty
+
 instance P.HasKey (SecretKeyRef s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: SecretKeyRef s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a
-                          } :: SecretKeyRef s)
+               (\s a -> s { _key = a } :: SecretKeyRef s)
 
 instance P.HasName (SecretKeyRef s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SecretKeyRef s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: SecretKeyRef s)
+               (\s a -> s { _name = a } :: SecretKeyRef s)
 
 -- | @http_header@ nested settings.
 data HttpHeader s = HttpHeader'
@@ -3934,14 +4207,6 @@ data HttpHeader s = HttpHeader'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (HttpHeader s)
-instance TF.IsValue  (HttpHeader s)
-instance TF.IsObject (HttpHeader s) where
-    toObject HttpHeader'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
 newHttpHeader
     :: HttpHeader s
 newHttpHeader =
@@ -3950,17 +4215,26 @@ newHttpHeader =
         , _value = TF.Nil
         }
 
+instance P.Hashable  (HttpHeader s)
+instance TF.IsValue  (HttpHeader s)
+instance TF.IsObject (HttpHeader s) where
+    toObject HttpHeader'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (HttpHeader s) where
+    validator = P.mempty
+
 instance P.HasName (HttpHeader s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: HttpHeader s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: HttpHeader s)
+               (\s a -> s { _name = a } :: HttpHeader s)
 
 instance P.HasValue (HttpHeader s) (TF.Attr s P.Text) where
     value =
         P.lens (_value :: HttpHeader s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a
-                          } :: HttpHeader s)
+               (\s a -> s { _value = a } :: HttpHeader s)
 
 -- | @template@ nested settings.
 data Template s = Template'
@@ -3970,7 +4244,7 @@ data Template s = Template'
     -- StartTime before the system will actively try to mark it failed and kill
     -- associated containers. Value must be a positive integer.
     --
-    , _container :: TF.Attr s [Container s]
+    , _container :: TF.Attr s [TF.Attr s (Container s)]
     -- ^ @container@ - (Optional)
     -- List of containers belonging to the pod. Containers cannot currently be
     -- added or removed. There must be at least one container in a Pod. Cannot be
@@ -3994,7 +4268,7 @@ data Template s = Template'
     -- ^ @host_pid@ - (Optional)
     -- Use the host's pid namespace.
     --
-    , _initContainer :: TF.Attr s [InitContainer s]
+    , _initContainer :: TF.Attr s [TF.Attr s (InitContainer s)]
     -- ^ @init_container@ - (Optional)
     -- List of init containers belonging to the pod. Init containers always run to
     -- completion and each must complete succesfully before the next is started.
@@ -4033,31 +4307,12 @@ data Template s = Template'
     -- time when the processes are forcibly halted with a kill signal. Set this
     -- value longer than the expected cleanup time for your process.
     --
-    , _volume :: TF.Attr s [Volume s]
+    , _volume :: TF.Attr s [TF.Attr s (Volume s)]
     -- ^ @volume@ - (Optional)
     -- List of volumes that can be mounted by containers belonging to the pod. More
     -- info: http://kubernetes.io/docs/user-guide/volumes
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance P.Hashable  (Template s)
-instance TF.IsValue  (Template s)
-instance TF.IsObject (Template s) where
-    toObject Template'{..} = catMaybes
-        [ TF.assign "active_deadline_seconds" <$> TF.attribute _activeDeadlineSeconds
-        , TF.assign "container" <$> TF.attribute _container
-        , TF.assign "dns_policy" <$> TF.attribute _dnsPolicy
-        , TF.assign "host_ipc" <$> TF.attribute _hostIpc
-        , TF.assign "host_network" <$> TF.attribute _hostNetwork
-        , TF.assign "host_pid" <$> TF.attribute _hostPid
-        , TF.assign "init_container" <$> TF.attribute _initContainer
-        , TF.assign "node_selector" <$> TF.attribute _nodeSelector
-        , TF.assign "restart_policy" <$> TF.attribute _restartPolicy
-        , TF.assign "security_context" <$> TF.attribute _securityContext
-        , TF.assign "subdomain" <$> TF.attribute _subdomain
-        , TF.assign "termination_grace_period_seconds" <$> TF.attribute _terminationGracePeriodSeconds
-        , TF.assign "volume" <$> TF.attribute _volume
-        ]
 
 newTemplate
     :: Template s
@@ -4078,88 +4333,113 @@ newTemplate =
         , _volume = TF.Nil
         }
 
+instance P.Hashable  (Template s)
+instance TF.IsValue  (Template s)
+instance TF.IsObject (Template s) where
+    toObject Template'{..} = P.catMaybes
+        [ TF.assign "active_deadline_seconds" <$> TF.attribute _activeDeadlineSeconds
+        , TF.assign "container" <$> TF.attribute _container
+        , TF.assign "dns_policy" <$> TF.attribute _dnsPolicy
+        , TF.assign "host_ipc" <$> TF.attribute _hostIpc
+        , TF.assign "host_network" <$> TF.attribute _hostNetwork
+        , TF.assign "host_pid" <$> TF.attribute _hostPid
+        , TF.assign "init_container" <$> TF.attribute _initContainer
+        , TF.assign "node_selector" <$> TF.attribute _nodeSelector
+        , TF.assign "restart_policy" <$> TF.attribute _restartPolicy
+        , TF.assign "security_context" <$> TF.attribute _securityContext
+        , TF.assign "subdomain" <$> TF.attribute _subdomain
+        , TF.assign "termination_grace_period_seconds" <$> TF.attribute _terminationGracePeriodSeconds
+        , TF.assign "volume" <$> TF.attribute _volume
+        ]
+
+instance TF.IsValid (Template s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_container"
+                  (_container
+                      :: Template s -> TF.Attr s [TF.Attr s (Container s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_initContainer"
+                  (_initContainer
+                      :: Template s -> TF.Attr s [TF.Attr s (InitContainer s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_securityContext"
+                  (_securityContext
+                      :: Template s -> TF.Attr s (SecurityContext s))
+                  TF.validator
+           P.<> TF.settingsValidator "_volume"
+                  (_volume
+                      :: Template s -> TF.Attr s [TF.Attr s (Volume s)])
+                  TF.validator
+
 instance P.HasActiveDeadlineSeconds (Template s) (TF.Attr s P.Integer) where
     activeDeadlineSeconds =
         P.lens (_activeDeadlineSeconds :: Template s -> TF.Attr s P.Integer)
-               (\s a -> s { _activeDeadlineSeconds = a
-                          } :: Template s)
+               (\s a -> s { _activeDeadlineSeconds = a } :: Template s)
 
-instance P.HasContainer (Template s) (TF.Attr s [Container s]) where
+instance P.HasContainer (Template s) (TF.Attr s [TF.Attr s (Container s)]) where
     container =
-        P.lens (_container :: Template s -> TF.Attr s [Container s])
-               (\s a -> s { _container = a
-                          } :: Template s)
+        P.lens (_container :: Template s -> TF.Attr s [TF.Attr s (Container s)])
+               (\s a -> s { _container = a } :: Template s)
 
 instance P.HasDnsPolicy (Template s) (TF.Attr s P.Text) where
     dnsPolicy =
         P.lens (_dnsPolicy :: Template s -> TF.Attr s P.Text)
-               (\s a -> s { _dnsPolicy = a
-                          } :: Template s)
+               (\s a -> s { _dnsPolicy = a } :: Template s)
 
 instance P.HasHostIpc (Template s) (TF.Attr s P.Bool) where
     hostIpc =
         P.lens (_hostIpc :: Template s -> TF.Attr s P.Bool)
-               (\s a -> s { _hostIpc = a
-                          } :: Template s)
+               (\s a -> s { _hostIpc = a } :: Template s)
 
 instance P.HasHostNetwork (Template s) (TF.Attr s P.Bool) where
     hostNetwork =
         P.lens (_hostNetwork :: Template s -> TF.Attr s P.Bool)
-               (\s a -> s { _hostNetwork = a
-                          } :: Template s)
+               (\s a -> s { _hostNetwork = a } :: Template s)
 
 instance P.HasHostPid (Template s) (TF.Attr s P.Bool) where
     hostPid =
         P.lens (_hostPid :: Template s -> TF.Attr s P.Bool)
-               (\s a -> s { _hostPid = a
-                          } :: Template s)
+               (\s a -> s { _hostPid = a } :: Template s)
 
-instance P.HasInitContainer (Template s) (TF.Attr s [InitContainer s]) where
+instance P.HasInitContainer (Template s) (TF.Attr s [TF.Attr s (InitContainer s)]) where
     initContainer =
-        P.lens (_initContainer :: Template s -> TF.Attr s [InitContainer s])
-               (\s a -> s { _initContainer = a
-                          } :: Template s)
+        P.lens (_initContainer :: Template s -> TF.Attr s [TF.Attr s (InitContainer s)])
+               (\s a -> s { _initContainer = a } :: Template s)
 
 instance P.HasNodeSelector (Template s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     nodeSelector =
         P.lens (_nodeSelector :: Template s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _nodeSelector = a
-                          } :: Template s)
+               (\s a -> s { _nodeSelector = a } :: Template s)
 
 instance P.HasRestartPolicy (Template s) (TF.Attr s P.Text) where
     restartPolicy =
         P.lens (_restartPolicy :: Template s -> TF.Attr s P.Text)
-               (\s a -> s { _restartPolicy = a
-                          } :: Template s)
+               (\s a -> s { _restartPolicy = a } :: Template s)
 
 instance P.HasSecurityContext (Template s) (TF.Attr s (SecurityContext s)) where
     securityContext =
         P.lens (_securityContext :: Template s -> TF.Attr s (SecurityContext s))
-               (\s a -> s { _securityContext = a
-                          } :: Template s)
+               (\s a -> s { _securityContext = a } :: Template s)
 
 instance P.HasSubdomain (Template s) (TF.Attr s P.Text) where
     subdomain =
         P.lens (_subdomain :: Template s -> TF.Attr s P.Text)
-               (\s a -> s { _subdomain = a
-                          } :: Template s)
+               (\s a -> s { _subdomain = a } :: Template s)
 
 instance P.HasTerminationGracePeriodSeconds (Template s) (TF.Attr s P.Integer) where
     terminationGracePeriodSeconds =
         P.lens (_terminationGracePeriodSeconds :: Template s -> TF.Attr s P.Integer)
-               (\s a -> s { _terminationGracePeriodSeconds = a
-                          } :: Template s)
+               (\s a -> s { _terminationGracePeriodSeconds = a } :: Template s)
 
-instance P.HasVolume (Template s) (TF.Attr s [Volume s]) where
+instance P.HasVolume (Template s) (TF.Attr s [TF.Attr s (Volume s)]) where
     volume =
-        P.lens (_volume :: Template s -> TF.Attr s [Volume s])
-               (\s a -> s { _volume = a
-                          } :: Template s)
+        P.lens (_volume :: Template s -> TF.Attr s [TF.Attr s (Volume s)])
+               (\s a -> s { _volume = a } :: Template s)
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (Template s)) (TF.Attr s P.Text) where
     computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
 
-instance s ~ s' => P.HasComputedImagePullSecrets (TF.Ref s' (Template s)) (TF.Attr s [ImagePullSecrets s]) where
+instance s ~ s' => P.HasComputedImagePullSecrets (TF.Ref s' (Template s)) (TF.Attr s [TF.Attr s (ImagePullSecrets s)]) where
     computedImagePullSecrets x = TF.compute (TF.refKey x) "_computedImagePullSecrets"
 
 instance s ~ s' => P.HasComputedNodeName (TF.Ref s' (Template s)) (TF.Attr s P.Text) where
@@ -4201,18 +4481,6 @@ data Iscsi s = Iscsi'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Iscsi s)
-instance TF.IsValue  (Iscsi s)
-instance TF.IsObject (Iscsi s) where
-    toObject Iscsi'{..} = catMaybes
-        [ TF.assign "fs_type" <$> TF.attribute _fsType
-        , TF.assign "iqn" <$> TF.attribute _iqn
-        , TF.assign "iscsi_interface" <$> TF.attribute _iscsiInterface
-        , TF.assign "lun" <$> TF.attribute _lun
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "target_portal" <$> TF.attribute _targetPortal
-        ]
-
 newIscsi
     :: TF.Attr s P.Text -- ^ @iqn@ - 'P.iqn'
     -> TF.Attr s P.Text -- ^ @target_portal@ - 'P.targetPortal'
@@ -4227,41 +4495,50 @@ newIscsi _iqn _targetPortal =
         , _targetPortal = _targetPortal
         }
 
+instance P.Hashable  (Iscsi s)
+instance TF.IsValue  (Iscsi s)
+instance TF.IsObject (Iscsi s) where
+    toObject Iscsi'{..} = P.catMaybes
+        [ TF.assign "fs_type" <$> TF.attribute _fsType
+        , TF.assign "iqn" <$> TF.attribute _iqn
+        , TF.assign "iscsi_interface" <$> TF.attribute _iscsiInterface
+        , TF.assign "lun" <$> TF.attribute _lun
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "target_portal" <$> TF.attribute _targetPortal
+        ]
+
+instance TF.IsValid (Iscsi s) where
+    validator = P.mempty
+
 instance P.HasFsType (Iscsi s) (TF.Attr s P.Text) where
     fsType =
         P.lens (_fsType :: Iscsi s -> TF.Attr s P.Text)
-               (\s a -> s { _fsType = a
-                          } :: Iscsi s)
+               (\s a -> s { _fsType = a } :: Iscsi s)
 
 instance P.HasIqn (Iscsi s) (TF.Attr s P.Text) where
     iqn =
         P.lens (_iqn :: Iscsi s -> TF.Attr s P.Text)
-               (\s a -> s { _iqn = a
-                          } :: Iscsi s)
+               (\s a -> s { _iqn = a } :: Iscsi s)
 
 instance P.HasIscsiInterface (Iscsi s) (TF.Attr s P.Text) where
     iscsiInterface =
         P.lens (_iscsiInterface :: Iscsi s -> TF.Attr s P.Text)
-               (\s a -> s { _iscsiInterface = a
-                          } :: Iscsi s)
+               (\s a -> s { _iscsiInterface = a } :: Iscsi s)
 
 instance P.HasLun (Iscsi s) (TF.Attr s P.Integer) where
     lun =
         P.lens (_lun :: Iscsi s -> TF.Attr s P.Integer)
-               (\s a -> s { _lun = a
-                          } :: Iscsi s)
+               (\s a -> s { _lun = a } :: Iscsi s)
 
 instance P.HasReadOnly (Iscsi s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: Iscsi s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: Iscsi s)
+               (\s a -> s { _readOnly = a } :: Iscsi s)
 
 instance P.HasTargetPortal (Iscsi s) (TF.Attr s P.Text) where
     targetPortal =
         P.lens (_targetPortal :: Iscsi s -> TF.Attr s P.Text)
-               (\s a -> s { _targetPortal = a
-                          } :: Iscsi s)
+               (\s a -> s { _targetPortal = a } :: Iscsi s)
 
 -- | @azure_disk@ nested settings.
 data AzureDisk s = AzureDisk'
@@ -4290,17 +4567,6 @@ data AzureDisk s = AzureDisk'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (AzureDisk s)
-instance TF.IsValue  (AzureDisk s)
-instance TF.IsObject (AzureDisk s) where
-    toObject AzureDisk'{..} = catMaybes
-        [ TF.assign "caching_mode" <$> TF.attribute _cachingMode
-        , TF.assign "data_disk_uri" <$> TF.attribute _dataDiskUri
-        , TF.assign "disk_name" <$> TF.attribute _diskName
-        , TF.assign "fs_type" <$> TF.attribute _fsType
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        ]
-
 newAzureDisk
     :: TF.Attr s P.Text -- ^ @caching_mode@ - 'P.cachingMode'
     -> TF.Attr s P.Text -- ^ @data_disk_uri@ - 'P.dataDiskUri'
@@ -4315,35 +4581,44 @@ newAzureDisk _cachingMode _dataDiskUri _diskName =
         , _readOnly = TF.value P.False
         }
 
+instance P.Hashable  (AzureDisk s)
+instance TF.IsValue  (AzureDisk s)
+instance TF.IsObject (AzureDisk s) where
+    toObject AzureDisk'{..} = P.catMaybes
+        [ TF.assign "caching_mode" <$> TF.attribute _cachingMode
+        , TF.assign "data_disk_uri" <$> TF.attribute _dataDiskUri
+        , TF.assign "disk_name" <$> TF.attribute _diskName
+        , TF.assign "fs_type" <$> TF.attribute _fsType
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        ]
+
+instance TF.IsValid (AzureDisk s) where
+    validator = P.mempty
+
 instance P.HasCachingMode (AzureDisk s) (TF.Attr s P.Text) where
     cachingMode =
         P.lens (_cachingMode :: AzureDisk s -> TF.Attr s P.Text)
-               (\s a -> s { _cachingMode = a
-                          } :: AzureDisk s)
+               (\s a -> s { _cachingMode = a } :: AzureDisk s)
 
 instance P.HasDataDiskUri (AzureDisk s) (TF.Attr s P.Text) where
     dataDiskUri =
         P.lens (_dataDiskUri :: AzureDisk s -> TF.Attr s P.Text)
-               (\s a -> s { _dataDiskUri = a
-                          } :: AzureDisk s)
+               (\s a -> s { _dataDiskUri = a } :: AzureDisk s)
 
 instance P.HasDiskName (AzureDisk s) (TF.Attr s P.Text) where
     diskName =
         P.lens (_diskName :: AzureDisk s -> TF.Attr s P.Text)
-               (\s a -> s { _diskName = a
-                          } :: AzureDisk s)
+               (\s a -> s { _diskName = a } :: AzureDisk s)
 
 instance P.HasFsType (AzureDisk s) (TF.Attr s P.Text) where
     fsType =
         P.lens (_fsType :: AzureDisk s -> TF.Attr s P.Text)
-               (\s a -> s { _fsType = a
-                          } :: AzureDisk s)
+               (\s a -> s { _fsType = a } :: AzureDisk s)
 
 instance P.HasReadOnly (AzureDisk s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: AzureDisk s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: AzureDisk s)
+               (\s a -> s { _readOnly = a } :: AzureDisk s)
 
 -- | @security_context@ nested settings.
 data SecurityContext s = SecurityContext'
@@ -4375,24 +4650,13 @@ data SecurityContext s = SecurityContext'
     -- PodSecurityContext, the value specified in SecurityContext takes precedence
     -- for that container.
     --
-    , _supplementalGroups :: TF.Attr s [TF.Attr s (TF.Attr s P.Integer)]
+    , _supplementalGroups :: TF.Attr s [TF.Attr s P.Integer]
     -- ^ @supplemental_groups@ - (Optional)
     -- A list of groups applied to the first process run in each container, in
     -- addition to the container's primary GID. If unspecified, no groups will be
     -- added to any container.
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance P.Hashable  (SecurityContext s)
-instance TF.IsValue  (SecurityContext s)
-instance TF.IsObject (SecurityContext s) where
-    toObject SecurityContext'{..} = catMaybes
-        [ TF.assign "fs_group" <$> TF.attribute _fsGroup
-        , TF.assign "run_as_non_root" <$> TF.attribute _runAsNonRoot
-        , TF.assign "run_as_user" <$> TF.attribute _runAsUser
-        , TF.assign "se_linux_options" <$> TF.attribute _seLinuxOptions
-        , TF.assign "supplemental_groups" <$> TF.attribute _supplementalGroups
-        ]
 
 newSecurityContext
     :: SecurityContext s
@@ -4405,35 +4669,48 @@ newSecurityContext =
         , _supplementalGroups = TF.Nil
         }
 
+instance P.Hashable  (SecurityContext s)
+instance TF.IsValue  (SecurityContext s)
+instance TF.IsObject (SecurityContext s) where
+    toObject SecurityContext'{..} = P.catMaybes
+        [ TF.assign "fs_group" <$> TF.attribute _fsGroup
+        , TF.assign "run_as_non_root" <$> TF.attribute _runAsNonRoot
+        , TF.assign "run_as_user" <$> TF.attribute _runAsUser
+        , TF.assign "se_linux_options" <$> TF.attribute _seLinuxOptions
+        , TF.assign "supplemental_groups" <$> TF.attribute _supplementalGroups
+        ]
+
+instance TF.IsValid (SecurityContext s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_seLinuxOptions"
+                  (_seLinuxOptions
+                      :: SecurityContext s -> TF.Attr s (SeLinuxOptions s))
+                  TF.validator
+
 instance P.HasFsGroup (SecurityContext s) (TF.Attr s P.Integer) where
     fsGroup =
         P.lens (_fsGroup :: SecurityContext s -> TF.Attr s P.Integer)
-               (\s a -> s { _fsGroup = a
-                          } :: SecurityContext s)
+               (\s a -> s { _fsGroup = a } :: SecurityContext s)
 
 instance P.HasRunAsNonRoot (SecurityContext s) (TF.Attr s P.Bool) where
     runAsNonRoot =
         P.lens (_runAsNonRoot :: SecurityContext s -> TF.Attr s P.Bool)
-               (\s a -> s { _runAsNonRoot = a
-                          } :: SecurityContext s)
+               (\s a -> s { _runAsNonRoot = a } :: SecurityContext s)
 
 instance P.HasRunAsUser (SecurityContext s) (TF.Attr s P.Integer) where
     runAsUser =
         P.lens (_runAsUser :: SecurityContext s -> TF.Attr s P.Integer)
-               (\s a -> s { _runAsUser = a
-                          } :: SecurityContext s)
+               (\s a -> s { _runAsUser = a } :: SecurityContext s)
 
 instance P.HasSeLinuxOptions (SecurityContext s) (TF.Attr s (SeLinuxOptions s)) where
     seLinuxOptions =
         P.lens (_seLinuxOptions :: SecurityContext s -> TF.Attr s (SeLinuxOptions s))
-               (\s a -> s { _seLinuxOptions = a
-                          } :: SecurityContext s)
+               (\s a -> s { _seLinuxOptions = a } :: SecurityContext s)
 
-instance P.HasSupplementalGroups (SecurityContext s) (TF.Attr s [TF.Attr s (TF.Attr s P.Integer)]) where
+instance P.HasSupplementalGroups (SecurityContext s) (TF.Attr s [TF.Attr s P.Integer]) where
     supplementalGroups =
-        P.lens (_supplementalGroups :: SecurityContext s -> TF.Attr s [TF.Attr s (TF.Attr s P.Integer)])
-               (\s a -> s { _supplementalGroups = a
-                          } :: SecurityContext s)
+        P.lens (_supplementalGroups :: SecurityContext s -> TF.Attr s [TF.Attr s P.Integer])
+               (\s a -> s { _supplementalGroups = a } :: SecurityContext s)
 
 -- | @capabilities@ nested settings.
 data Capabilities s = Capabilities'
@@ -4447,14 +4724,6 @@ data Capabilities s = Capabilities'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Capabilities s)
-instance TF.IsValue  (Capabilities s)
-instance TF.IsObject (Capabilities s) where
-    toObject Capabilities'{..} = catMaybes
-        [ TF.assign "add" <$> TF.attribute _add
-        , TF.assign "drop" <$> TF.attribute _drop
-        ]
-
 newCapabilities
     :: Capabilities s
 newCapabilities =
@@ -4463,17 +4732,26 @@ newCapabilities =
         , _drop = TF.Nil
         }
 
+instance P.Hashable  (Capabilities s)
+instance TF.IsValue  (Capabilities s)
+instance TF.IsObject (Capabilities s) where
+    toObject Capabilities'{..} = P.catMaybes
+        [ TF.assign "add" <$> TF.attribute _add
+        , TF.assign "drop" <$> TF.attribute _drop
+        ]
+
+instance TF.IsValid (Capabilities s) where
+    validator = P.mempty
+
 instance P.HasAdd (Capabilities s) (TF.Attr s [TF.Attr s P.Text]) where
     add =
         P.lens (_add :: Capabilities s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _add = a
-                          } :: Capabilities s)
+               (\s a -> s { _add = a } :: Capabilities s)
 
 instance P.HasDrop (Capabilities s) (TF.Attr s [TF.Attr s P.Text]) where
     drop =
         P.lens (_drop :: Capabilities s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _drop = a
-                          } :: Capabilities s)
+               (\s a -> s { _drop = a } :: Capabilities s)
 
 -- | @gce_persistent_disk@ nested settings.
 data GcePersistentDisk s = GcePersistentDisk'
@@ -4504,16 +4782,6 @@ data GcePersistentDisk s = GcePersistentDisk'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (GcePersistentDisk s)
-instance TF.IsValue  (GcePersistentDisk s)
-instance TF.IsObject (GcePersistentDisk s) where
-    toObject GcePersistentDisk'{..} = catMaybes
-        [ TF.assign "fs_type" <$> TF.attribute _fsType
-        , TF.assign "partition" <$> TF.attribute _partition
-        , TF.assign "pd_name" <$> TF.attribute _pdName
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        ]
-
 newGcePersistentDisk
     :: TF.Attr s P.Text -- ^ @pd_name@ - 'P.pdName'
     -> GcePersistentDisk s
@@ -4525,29 +4793,38 @@ newGcePersistentDisk _pdName =
         , _readOnly = TF.Nil
         }
 
+instance P.Hashable  (GcePersistentDisk s)
+instance TF.IsValue  (GcePersistentDisk s)
+instance TF.IsObject (GcePersistentDisk s) where
+    toObject GcePersistentDisk'{..} = P.catMaybes
+        [ TF.assign "fs_type" <$> TF.attribute _fsType
+        , TF.assign "partition" <$> TF.attribute _partition
+        , TF.assign "pd_name" <$> TF.attribute _pdName
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        ]
+
+instance TF.IsValid (GcePersistentDisk s) where
+    validator = P.mempty
+
 instance P.HasFsType (GcePersistentDisk s) (TF.Attr s P.Text) where
     fsType =
         P.lens (_fsType :: GcePersistentDisk s -> TF.Attr s P.Text)
-               (\s a -> s { _fsType = a
-                          } :: GcePersistentDisk s)
+               (\s a -> s { _fsType = a } :: GcePersistentDisk s)
 
 instance P.HasPartition (GcePersistentDisk s) (TF.Attr s P.Integer) where
     partition =
         P.lens (_partition :: GcePersistentDisk s -> TF.Attr s P.Integer)
-               (\s a -> s { _partition = a
-                          } :: GcePersistentDisk s)
+               (\s a -> s { _partition = a } :: GcePersistentDisk s)
 
 instance P.HasPdName (GcePersistentDisk s) (TF.Attr s P.Text) where
     pdName =
         P.lens (_pdName :: GcePersistentDisk s -> TF.Attr s P.Text)
-               (\s a -> s { _pdName = a
-                          } :: GcePersistentDisk s)
+               (\s a -> s { _pdName = a } :: GcePersistentDisk s)
 
 instance P.HasReadOnly (GcePersistentDisk s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: GcePersistentDisk s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: GcePersistentDisk s)
+               (\s a -> s { _readOnly = a } :: GcePersistentDisk s)
 
 -- | @config_map@ nested settings.
 data ConfigMap s = ConfigMap'
@@ -4559,7 +4836,7 @@ data ConfigMap s = ConfigMap'
     -- affect the file mode, like fsGroup, and the result can be other mode bits
     -- set.
     --
-    , _items       :: TF.Attr s [Items s]
+    , _items       :: TF.Attr s [TF.Attr s (Items s)]
     -- ^ @items@ - (Optional)
     -- If unspecified, each key-value pair in the Data field of the referenced
     -- ConfigMap will be projected into the volume as a file whose name is the key
@@ -4576,15 +4853,6 @@ data ConfigMap s = ConfigMap'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (ConfigMap s)
-instance TF.IsValue  (ConfigMap s)
-instance TF.IsObject (ConfigMap s) where
-    toObject ConfigMap'{..} = catMaybes
-        [ TF.assign "default_mode" <$> TF.attribute _defaultMode
-        , TF.assign "items" <$> TF.attribute _items
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 newConfigMap
     :: ConfigMap s
 newConfigMap =
@@ -4594,23 +4862,36 @@ newConfigMap =
         , _name = TF.Nil
         }
 
+instance P.Hashable  (ConfigMap s)
+instance TF.IsValue  (ConfigMap s)
+instance TF.IsObject (ConfigMap s) where
+    toObject ConfigMap'{..} = P.catMaybes
+        [ TF.assign "default_mode" <$> TF.attribute _defaultMode
+        , TF.assign "items" <$> TF.attribute _items
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ConfigMap s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_items"
+                  (_items
+                      :: ConfigMap s -> TF.Attr s [TF.Attr s (Items s)])
+                  TF.validator
+
 instance P.HasDefaultMode (ConfigMap s) (TF.Attr s P.Integer) where
     defaultMode =
         P.lens (_defaultMode :: ConfigMap s -> TF.Attr s P.Integer)
-               (\s a -> s { _defaultMode = a
-                          } :: ConfigMap s)
+               (\s a -> s { _defaultMode = a } :: ConfigMap s)
 
-instance P.HasItems (ConfigMap s) (TF.Attr s [Items s]) where
+instance P.HasItems (ConfigMap s) (TF.Attr s [TF.Attr s (Items s)]) where
     items =
-        P.lens (_items :: ConfigMap s -> TF.Attr s [Items s])
-               (\s a -> s { _items = a
-                          } :: ConfigMap s)
+        P.lens (_items :: ConfigMap s -> TF.Attr s [TF.Attr s (Items s)])
+               (\s a -> s { _items = a } :: ConfigMap s)
 
 instance P.HasName (ConfigMap s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ConfigMap s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ConfigMap s)
+               (\s a -> s { _name = a } :: ConfigMap s)
 
 -- | @quobyte@ nested settings.
 data Quobyte s = Quobyte'
@@ -4640,17 +4921,6 @@ data Quobyte s = Quobyte'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Quobyte s)
-instance TF.IsValue  (Quobyte s)
-instance TF.IsObject (Quobyte s) where
-    toObject Quobyte'{..} = catMaybes
-        [ TF.assign "group" <$> TF.attribute _group
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "registry" <$> TF.attribute _registry
-        , TF.assign "user" <$> TF.attribute _user
-        , TF.assign "volume" <$> TF.attribute _volume
-        ]
-
 newQuobyte
     :: TF.Attr s P.Text -- ^ @registry@ - 'P.registry'
     -> TF.Attr s P.Text -- ^ @volume@ - 'P.volume'
@@ -4664,49 +4934,61 @@ newQuobyte _registry _volume =
         , _volume = _volume
         }
 
+instance P.Hashable  (Quobyte s)
+instance TF.IsValue  (Quobyte s)
+instance TF.IsObject (Quobyte s) where
+    toObject Quobyte'{..} = P.catMaybes
+        [ TF.assign "group" <$> TF.attribute _group
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "registry" <$> TF.attribute _registry
+        , TF.assign "user" <$> TF.attribute _user
+        , TF.assign "volume" <$> TF.attribute _volume
+        ]
+
+instance TF.IsValid (Quobyte s) where
+    validator = P.mempty
+
 instance P.HasGroup (Quobyte s) (TF.Attr s P.Text) where
     group =
         P.lens (_group :: Quobyte s -> TF.Attr s P.Text)
-               (\s a -> s { _group = a
-                          } :: Quobyte s)
+               (\s a -> s { _group = a } :: Quobyte s)
 
 instance P.HasReadOnly (Quobyte s) (TF.Attr s P.Bool) where
     readOnly =
         P.lens (_readOnly :: Quobyte s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a
-                          } :: Quobyte s)
+               (\s a -> s { _readOnly = a } :: Quobyte s)
 
 instance P.HasRegistry (Quobyte s) (TF.Attr s P.Text) where
     registry =
         P.lens (_registry :: Quobyte s -> TF.Attr s P.Text)
-               (\s a -> s { _registry = a
-                          } :: Quobyte s)
+               (\s a -> s { _registry = a } :: Quobyte s)
 
 instance P.HasUser (Quobyte s) (TF.Attr s P.Text) where
     user =
         P.lens (_user :: Quobyte s -> TF.Attr s P.Text)
-               (\s a -> s { _user = a
-                          } :: Quobyte s)
+               (\s a -> s { _user = a } :: Quobyte s)
 
 instance P.HasVolume (Quobyte s) (TF.Attr s P.Text) where
     volume =
         P.lens (_volume :: Quobyte s -> TF.Attr s P.Text)
-               (\s a -> s { _volume = a
-                          } :: Quobyte s)
+               (\s a -> s { _volume = a } :: Quobyte s)
 
 -- | @port@ nested settings.
 data Port s = Port'
     deriving (P.Show, P.Eq, P.Generic)
+
+newPort
+    :: Port s
+newPort =
+    Port'
 
 instance P.Hashable  (Port s)
 instance TF.IsValue  (Port s)
 instance TF.IsObject (Port s) where
     toObject Port' = []
 
-newPort
-    :: Port s
-newPort =
-    Port'
+instance TF.IsValid (Port s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Port s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "_computedName"

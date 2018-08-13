@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.Kubernetes.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.Kubernetes.Settings
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -42,6 +45,7 @@ import qualified Terrafomo.Kubernetes.Lens  as P
 import qualified Terrafomo.Kubernetes.Types as P
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Provider         as TF
+import qualified Terrafomo.Validator        as TF
 
 -- | The @Kubernetes@ Terraform provider configuration.
 --
@@ -101,34 +105,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "client_certificate" <$> _clientCertificate
-                  , TF.assign "client_key" <$> _clientKey
-                  , TF.assign "cluster_ca_certificate" <$> _clusterCaCertificate
-                  , TF.assign "config_context" <$> _configContext
-                  , TF.assign "config_context_auth_info" <$> _configContextAuthInfo
-                  , TF.assign "config_context_cluster" <$> _configContextCluster
-                  , TF.assign "config_path" <$> _configPath
-                  , TF.assign "host" <$> _host
-                  , TF.assign "insecure" <$> _insecure
-                  , TF.assign "load_config_file" <$> _loadConfigFile
-                  , TF.assign "password" <$> _password
-                  , TF.assign "token" <$> _token
-                  , TF.assign "username" <$> _username
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: Provider
 newProvider =
@@ -148,80 +124,98 @@ newProvider =
         , _username = P.Nothing
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "client_certificate" <$> _clientCertificate
+                  , TF.assign "client_key" <$> _clientKey
+                  , TF.assign "cluster_ca_certificate" <$> _clusterCaCertificate
+                  , TF.assign "config_context" <$> _configContext
+                  , TF.assign "config_context_auth_info" <$> _configContextAuthInfo
+                  , TF.assign "config_context_cluster" <$> _configContextCluster
+                  , TF.assign "config_path" <$> _configPath
+                  , TF.assign "host" <$> _host
+                  , TF.assign "insecure" <$> _insecure
+                  , TF.assign "load_config_file" <$> _loadConfigFile
+                  , TF.assign "password" <$> _password
+                  , TF.assign "token" <$> _token
+                  , TF.assign "username" <$> _username
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
 instance P.HasClientCertificate (Provider) (P.Maybe P.Text) where
     clientCertificate =
         P.lens (_clientCertificate :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _clientCertificate = a
-                          } :: Provider)
+               (\s a -> s { _clientCertificate = a } :: Provider)
 
 instance P.HasClientKey (Provider) (P.Maybe P.Text) where
     clientKey =
         P.lens (_clientKey :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _clientKey = a
-                          } :: Provider)
+               (\s a -> s { _clientKey = a } :: Provider)
 
 instance P.HasClusterCaCertificate (Provider) (P.Maybe P.Text) where
     clusterCaCertificate =
         P.lens (_clusterCaCertificate :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _clusterCaCertificate = a
-                          } :: Provider)
+               (\s a -> s { _clusterCaCertificate = a } :: Provider)
 
 instance P.HasConfigContext (Provider) (P.Maybe P.Text) where
     configContext =
         P.lens (_configContext :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _configContext = a
-                          } :: Provider)
+               (\s a -> s { _configContext = a } :: Provider)
 
 instance P.HasConfigContextAuthInfo (Provider) (P.Maybe P.Text) where
     configContextAuthInfo =
         P.lens (_configContextAuthInfo :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _configContextAuthInfo = a
-                          } :: Provider)
+               (\s a -> s { _configContextAuthInfo = a } :: Provider)
 
 instance P.HasConfigContextCluster (Provider) (P.Maybe P.Text) where
     configContextCluster =
         P.lens (_configContextCluster :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _configContextCluster = a
-                          } :: Provider)
+               (\s a -> s { _configContextCluster = a } :: Provider)
 
 instance P.HasConfigPath (Provider) (P.Maybe P.Text) where
     configPath =
         P.lens (_configPath :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _configPath = a
-                          } :: Provider)
+               (\s a -> s { _configPath = a } :: Provider)
 
 instance P.HasHost (Provider) (P.Maybe P.Text) where
     host =
         P.lens (_host :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _host = a
-                          } :: Provider)
+               (\s a -> s { _host = a } :: Provider)
 
 instance P.HasInsecure (Provider) (P.Maybe P.Bool) where
     insecure =
         P.lens (_insecure :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _insecure = a
-                          } :: Provider)
+               (\s a -> s { _insecure = a } :: Provider)
 
 instance P.HasLoadConfigFile (Provider) (P.Maybe P.Bool) where
     loadConfigFile =
         P.lens (_loadConfigFile :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _loadConfigFile = a
-                          } :: Provider)
+               (\s a -> s { _loadConfigFile = a } :: Provider)
 
 instance P.HasPassword (Provider) (P.Maybe P.Text) where
     password =
         P.lens (_password :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _password = a
-                          } :: Provider)
+               (\s a -> s { _password = a } :: Provider)
 
 instance P.HasToken (Provider) (P.Maybe P.Text) where
     token =
         P.lens (_token :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _token = a
-                          } :: Provider)
+               (\s a -> s { _token = a } :: Provider)
 
 instance P.HasUsername (Provider) (P.Maybe P.Text) where
     username =
         P.lens (_username :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _username = a
-                          } :: Provider)
+               (\s a -> s { _username = a } :: Provider)
