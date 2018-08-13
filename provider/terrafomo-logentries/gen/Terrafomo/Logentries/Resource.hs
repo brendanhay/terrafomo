@@ -136,7 +136,7 @@ instance P.HasType' (LogResource s) (TF.Attr s P.Text) where
                           } :: LogResource s)
 
 instance s ~ s' => P.HasComputedToken (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
-    computedToken x = TF.compute (TF.refKey x) "token"
+    computedToken x = TF.compute (TF.refKey x) "_computedToken"
 
 -- | @logentries_logset@ Resource.
 --
