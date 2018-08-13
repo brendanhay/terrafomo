@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -32,7 +33,6 @@ module Terrafomo.InfluxDB.Resource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -40,7 +40,10 @@ import Terrafomo.InfluxDB.Settings
 
 import qualified Data.Hashable               as P
 import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Maybe                  as P
+import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
 import qualified GHC.Generics                as P
 import qualified Lens.Micro                  as P
@@ -52,6 +55,7 @@ import qualified Terrafomo.InfluxDB.Provider as P
 import qualified Terrafomo.InfluxDB.Types    as P
 import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.Schema            as TF
+import qualified Terrafomo.Validator         as TF
 
 -- | @influxdb_continuous_query@ Resource.
 --
@@ -69,43 +73,43 @@ data ContinuousQueryResource s = ContinuousQueryResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ContinuousQueryResource s) where
-    toObject ContinuousQueryResource'{..} = catMaybes
-        [ TF.assign "database" <$> TF.attribute _database
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "query" <$> TF.attribute _query
-        ]
-
 continuousQueryResource
     :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @query@ - 'P.query'
     -> TF.Resource P.Provider (ContinuousQueryResource s)
 continuousQueryResource _database _name _query =
-    TF.newResource "influxdb_continuous_query" $
+    TF.newResource "influxdb_continuous_query" TF.validator $
         ContinuousQueryResource'
             { _database = _database
             , _name = _name
             , _query = _query
             }
 
+instance TF.IsObject (ContinuousQueryResource s) where
+    toObject ContinuousQueryResource'{..} = P.catMaybes
+        [ TF.assign "database" <$> TF.attribute _database
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "query" <$> TF.attribute _query
+        ]
+
+instance TF.IsValid (ContinuousQueryResource s) where
+    validator = P.mempty
+
 instance P.HasDatabase (ContinuousQueryResource s) (TF.Attr s P.Text) where
     database =
         P.lens (_database :: ContinuousQueryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _database = a
-                          } :: ContinuousQueryResource s)
+               (\s a -> s { _database = a } :: ContinuousQueryResource s)
 
 instance P.HasName (ContinuousQueryResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ContinuousQueryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ContinuousQueryResource s)
+               (\s a -> s { _name = a } :: ContinuousQueryResource s)
 
 instance P.HasQuery (ContinuousQueryResource s) (TF.Attr s P.Text) where
     query =
         P.lens (_query :: ContinuousQueryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _query = a
-                          } :: ContinuousQueryResource s)
+               (\s a -> s { _query = a } :: ContinuousQueryResource s)
 
 -- | @influxdb_database@ Resource.
 --
@@ -115,38 +119,43 @@ data DatabaseResource s = DatabaseResource'
     { _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _retentionPolicies :: TF.Attr s [RetentionPolicies s]
+    , _retentionPolicies :: TF.Attr s [TF.Attr s (RetentionPolicies s)]
     -- ^ @retention_policies@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance TF.IsObject (DatabaseResource s) where
-    toObject DatabaseResource'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "retention_policies" <$> TF.attribute _retentionPolicies
-        ]
 
 databaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (DatabaseResource s)
 databaseResource _name =
-    TF.newResource "influxdb_database" $
+    TF.newResource "influxdb_database" TF.validator $
         DatabaseResource'
             { _name = _name
             , _retentionPolicies = TF.Nil
             }
 
+instance TF.IsObject (DatabaseResource s) where
+    toObject DatabaseResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "retention_policies" <$> TF.attribute _retentionPolicies
+        ]
+
+instance TF.IsValid (DatabaseResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_retentionPolicies"
+                  (_retentionPolicies
+                      :: DatabaseResource s -> TF.Attr s [TF.Attr s (RetentionPolicies s)])
+                  TF.validator
+
 instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: DatabaseResource s)
+               (\s a -> s { _name = a } :: DatabaseResource s)
 
-instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s [RetentionPolicies s]) where
+instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s [TF.Attr s (RetentionPolicies s)]) where
     retentionPolicies =
-        P.lens (_retentionPolicies :: DatabaseResource s -> TF.Attr s [RetentionPolicies s])
-               (\s a -> s { _retentionPolicies = a
-                          } :: DatabaseResource s)
+        P.lens (_retentionPolicies :: DatabaseResource s -> TF.Attr s [TF.Attr s (RetentionPolicies s)])
+               (\s a -> s { _retentionPolicies = a } :: DatabaseResource s)
 
 -- | @influxdb_user@ Resource.
 --
@@ -164,42 +173,46 @@ data UserResource s = UserResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (UserResource s) where
-    toObject UserResource'{..} = catMaybes
-        [ TF.assign "grant" <$> TF.attribute _grant
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "password" <$> TF.attribute _password
-        ]
-
 userResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> TF.Resource P.Provider (UserResource s)
 userResource _name _password =
-    TF.newResource "influxdb_user" $
+    TF.newResource "influxdb_user" TF.validator $
         UserResource'
             { _grant = TF.Nil
             , _name = _name
             , _password = _password
             }
 
+instance TF.IsObject (UserResource s) where
+    toObject UserResource'{..} = P.catMaybes
+        [ TF.assign "grant" <$> TF.attribute _grant
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "password" <$> TF.attribute _password
+        ]
+
+instance TF.IsValid (UserResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_grant"
+                  (_grant
+                      :: UserResource s -> TF.Attr s [TF.Attr s (Grant s)])
+                  TF.validator
+
 instance P.HasGrant (UserResource s) (TF.Attr s [TF.Attr s (Grant s)]) where
     grant =
         P.lens (_grant :: UserResource s -> TF.Attr s [TF.Attr s (Grant s)])
-               (\s a -> s { _grant = a
-                          } :: UserResource s)
+               (\s a -> s { _grant = a } :: UserResource s)
 
 instance P.HasName (UserResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: UserResource s)
+               (\s a -> s { _name = a } :: UserResource s)
 
 instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
     password =
         P.lens (_password :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a
-                          } :: UserResource s)
+               (\s a -> s { _password = a } :: UserResource s)
 
 instance s ~ s' => P.HasComputedAdmin (TF.Ref s' (UserResource s)) (TF.Attr s P.Bool) where
     computedAdmin x = TF.compute (TF.refKey x) "_computedAdmin"
