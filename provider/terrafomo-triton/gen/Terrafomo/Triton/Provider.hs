@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.Triton.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.Triton.Settings
 
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
@@ -42,6 +45,7 @@ import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Provider     as TF
 import qualified Terrafomo.Triton.Lens  as P
 import qualified Terrafomo.Triton.Types as P
+import qualified Terrafomo.Validator    as TF
 
 -- | The @Triton@ Terraform provider configuration.
 --
@@ -68,27 +72,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "account" _account
-                  , TF.assign "insecure_skip_tls_verify" <$> _insecureSkipTlsVerify
-                  , P.Just $ TF.assign "key_id" _keyId
-                  , TF.assign "key_material" <$> _keyMaterial
-                  , P.Just $ TF.assign "url" _url
-                  , P.Just $ TF.assign "user" _user
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: P.Text -- ^ @account@ - 'P.account'
     -> P.Text -- ^ @key_id@ - 'P.keyId'
@@ -105,38 +88,56 @@ newProvider _account _keyId _url _user =
         , _user = _user
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "account" _account
+                  , TF.assign "insecure_skip_tls_verify" <$> _insecureSkipTlsVerify
+                  , P.Just $ TF.assign "key_id" _keyId
+                  , TF.assign "key_material" <$> _keyMaterial
+                  , P.Just $ TF.assign "url" _url
+                  , P.Just $ TF.assign "user" _user
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
 instance P.HasAccount (Provider) (P.Text) where
     account =
         P.lens (_account :: Provider -> P.Text)
-               (\s a -> s { _account = a
-                          } :: Provider)
+               (\s a -> s { _account = a } :: Provider)
 
 instance P.HasInsecureSkipTlsVerify (Provider) (P.Maybe P.Bool) where
     insecureSkipTlsVerify =
         P.lens (_insecureSkipTlsVerify :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _insecureSkipTlsVerify = a
-                          } :: Provider)
+               (\s a -> s { _insecureSkipTlsVerify = a } :: Provider)
 
 instance P.HasKeyId (Provider) (P.Text) where
     keyId =
         P.lens (_keyId :: Provider -> P.Text)
-               (\s a -> s { _keyId = a
-                          } :: Provider)
+               (\s a -> s { _keyId = a } :: Provider)
 
 instance P.HasKeyMaterial (Provider) (P.Maybe P.Text) where
     keyMaterial =
         P.lens (_keyMaterial :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _keyMaterial = a
-                          } :: Provider)
+               (\s a -> s { _keyMaterial = a } :: Provider)
 
 instance P.HasUrl (Provider) (P.Text) where
     url =
         P.lens (_url :: Provider -> P.Text)
-               (\s a -> s { _url = a
-                          } :: Provider)
+               (\s a -> s { _url = a } :: Provider)
 
 instance P.HasUser (Provider) (P.Text) where
     user =
         P.lens (_user :: Provider -> P.Text)
-               (\s a -> s { _user = a
-                          } :: Provider)
+               (\s a -> s { _user = a } :: Provider)

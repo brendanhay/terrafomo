@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -36,13 +37,15 @@ module Terrafomo.Triton.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
@@ -52,6 +55,7 @@ import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Triton.Lens  as P
 import qualified Terrafomo.Triton.Types as P
+import qualified Terrafomo.Validator    as TF
 
 -- | @nic@ nested settings.
 data Nic s = Nic'
@@ -61,13 +65,6 @@ data Nic s = Nic'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Nic s)
-instance TF.IsValue  (Nic s)
-instance TF.IsObject (Nic s) where
-    toObject Nic'{..} = catMaybes
-        [ TF.assign "network" <$> TF.attribute _network
-        ]
-
 newNic
     :: TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> Nic s
@@ -76,11 +73,20 @@ newNic _network =
         { _network = _network
         }
 
+instance P.Hashable  (Nic s)
+instance TF.IsValue  (Nic s)
+instance TF.IsObject (Nic s) where
+    toObject Nic'{..} = P.catMaybes
+        [ TF.assign "network" <$> TF.attribute _network
+        ]
+
+instance TF.IsValid (Nic s) where
+    validator = P.mempty
+
 instance P.HasNetwork (Nic s) (TF.Attr s P.Text) where
     network =
         P.lens (_network :: Nic s -> TF.Attr s P.Text)
-               (\s a -> s { _network = a
-                          } :: Nic s)
+               (\s a -> s { _network = a } :: Nic s)
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (Nic s)) (TF.Attr s P.Text) where
     computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
@@ -112,14 +118,6 @@ data Cns s = Cns'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Cns s)
-instance TF.IsValue  (Cns s)
-instance TF.IsObject (Cns s) where
-    toObject Cns'{..} = catMaybes
-        [ TF.assign "disable" <$> TF.attribute _disable
-        , TF.assign "services" <$> TF.attribute _services
-        ]
-
 newCns
     :: Cns s
 newCns =
@@ -128,17 +126,26 @@ newCns =
         , _services = TF.Nil
         }
 
+instance P.Hashable  (Cns s)
+instance TF.IsValue  (Cns s)
+instance TF.IsObject (Cns s) where
+    toObject Cns'{..} = P.catMaybes
+        [ TF.assign "disable" <$> TF.attribute _disable
+        , TF.assign "services" <$> TF.attribute _services
+        ]
+
+instance TF.IsValid (Cns s) where
+    validator = P.mempty
+
 instance P.HasDisable (Cns s) (TF.Attr s P.Bool) where
     disable =
         P.lens (_disable :: Cns s -> TF.Attr s P.Bool)
-               (\s a -> s { _disable = a
-                          } :: Cns s)
+               (\s a -> s { _disable = a } :: Cns s)
 
 instance P.HasServices (Cns s) (TF.Attr s [TF.Attr s P.Text]) where
     services =
         P.lens (_services :: Cns s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _services = a
-                          } :: Cns s)
+               (\s a -> s { _services = a } :: Cns s)
 
 -- | @locality@ nested settings.
 data Locality s = Locality'
@@ -152,14 +159,6 @@ data Locality s = Locality'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Locality s)
-instance TF.IsValue  (Locality s)
-instance TF.IsObject (Locality s) where
-    toObject Locality'{..} = catMaybes
-        [ TF.assign "close_to" <$> TF.attribute _closeTo
-        , TF.assign "far_from" <$> TF.attribute _farFrom
-        ]
-
 newLocality
     :: Locality s
 newLocality =
@@ -168,17 +167,26 @@ newLocality =
         , _farFrom = TF.Nil
         }
 
+instance P.Hashable  (Locality s)
+instance TF.IsValue  (Locality s)
+instance TF.IsObject (Locality s) where
+    toObject Locality'{..} = P.catMaybes
+        [ TF.assign "close_to" <$> TF.attribute _closeTo
+        , TF.assign "far_from" <$> TF.attribute _farFrom
+        ]
+
+instance TF.IsValid (Locality s) where
+    validator = P.mempty
+
 instance P.HasCloseTo (Locality s) (TF.Attr s [TF.Attr s P.Text]) where
     closeTo =
         P.lens (_closeTo :: Locality s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _closeTo = a
-                          } :: Locality s)
+               (\s a -> s { _closeTo = a } :: Locality s)
 
 instance P.HasFarFrom (Locality s) (TF.Attr s [TF.Attr s P.Text]) where
     farFrom =
         P.lens (_farFrom :: Locality s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _farFrom = a
-                          } :: Locality s)
+               (\s a -> s { _farFrom = a } :: Locality s)
 
 -- | @filter@ nested settings.
 data Filter s = Filter'
@@ -208,20 +216,6 @@ data Filter s = Filter'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Filter s)
-instance TF.IsValue  (Filter s)
-instance TF.IsObject (Filter s) where
-    toObject Filter'{..} = catMaybes
-        [ TF.assign "disk" <$> TF.attribute _disk
-        , TF.assign "group" <$> TF.attribute _group
-        , TF.assign "lwps" <$> TF.attribute _lwps
-        , TF.assign "memory" <$> TF.attribute _memory
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "swap" <$> TF.attribute _swap
-        , TF.assign "vcpus" <$> TF.attribute _vcpus
-        , TF.assign "version" <$> TF.attribute _version
-        ]
-
 newFilter
     :: Filter s
 newFilter =
@@ -236,50 +230,59 @@ newFilter =
         , _version = TF.Nil
         }
 
+instance P.Hashable  (Filter s)
+instance TF.IsValue  (Filter s)
+instance TF.IsObject (Filter s) where
+    toObject Filter'{..} = P.catMaybes
+        [ TF.assign "disk" <$> TF.attribute _disk
+        , TF.assign "group" <$> TF.attribute _group
+        , TF.assign "lwps" <$> TF.attribute _lwps
+        , TF.assign "memory" <$> TF.attribute _memory
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "swap" <$> TF.attribute _swap
+        , TF.assign "vcpus" <$> TF.attribute _vcpus
+        , TF.assign "version" <$> TF.attribute _version
+        ]
+
+instance TF.IsValid (Filter s) where
+    validator = P.mempty
+
 instance P.HasDisk (Filter s) (TF.Attr s P.Integer) where
     disk =
         P.lens (_disk :: Filter s -> TF.Attr s P.Integer)
-               (\s a -> s { _disk = a
-                          } :: Filter s)
+               (\s a -> s { _disk = a } :: Filter s)
 
 instance P.HasGroup (Filter s) (TF.Attr s P.Text) where
     group =
         P.lens (_group :: Filter s -> TF.Attr s P.Text)
-               (\s a -> s { _group = a
-                          } :: Filter s)
+               (\s a -> s { _group = a } :: Filter s)
 
 instance P.HasLwps (Filter s) (TF.Attr s P.Integer) where
     lwps =
         P.lens (_lwps :: Filter s -> TF.Attr s P.Integer)
-               (\s a -> s { _lwps = a
-                          } :: Filter s)
+               (\s a -> s { _lwps = a } :: Filter s)
 
 instance P.HasMemory (Filter s) (TF.Attr s P.Integer) where
     memory =
         P.lens (_memory :: Filter s -> TF.Attr s P.Integer)
-               (\s a -> s { _memory = a
-                          } :: Filter s)
+               (\s a -> s { _memory = a } :: Filter s)
 
 instance P.HasName (Filter s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Filter s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: Filter s)
+               (\s a -> s { _name = a } :: Filter s)
 
 instance P.HasSwap (Filter s) (TF.Attr s P.Integer) where
     swap =
         P.lens (_swap :: Filter s -> TF.Attr s P.Integer)
-               (\s a -> s { _swap = a
-                          } :: Filter s)
+               (\s a -> s { _swap = a } :: Filter s)
 
 instance P.HasVcpus (Filter s) (TF.Attr s P.Integer) where
     vcpus =
         P.lens (_vcpus :: Filter s -> TF.Attr s P.Integer)
-               (\s a -> s { _vcpus = a
-                          } :: Filter s)
+               (\s a -> s { _vcpus = a } :: Filter s)
 
 instance P.HasVersion (Filter s) (TF.Attr s P.Text) where
     version =
         P.lens (_version :: Filter s -> TF.Attr s P.Text)
-               (\s a -> s { _version = a
-                          } :: Filter s)
+               (\s a -> s { _version = a } :: Filter s)

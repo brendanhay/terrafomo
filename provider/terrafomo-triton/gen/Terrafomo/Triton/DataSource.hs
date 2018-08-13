@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -48,7 +49,6 @@ module Terrafomo.Triton.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -56,7 +56,10 @@ import Terrafomo.Triton.Settings
 
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
 import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
@@ -68,6 +71,7 @@ import qualified Terrafomo.Schema          as TF
 import qualified Terrafomo.Triton.Lens     as P
 import qualified Terrafomo.Triton.Provider as P
 import qualified Terrafomo.Triton.Types    as P
+import qualified Terrafomo.Validator       as TF
 
 -- | @triton_account@ DataSource.
 --
@@ -76,14 +80,17 @@ import qualified Terrafomo.Triton.Types    as P
 data AccountData s = AccountData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AccountData s) where
-    toObject _ = []
-
 accountData
     :: TF.DataSource P.Provider (AccountData s)
 accountData =
-    TF.newDataSource "triton_account" $
+    TF.newDataSource "triton_account" TF.validator $
         AccountData'
+
+instance TF.IsObject (AccountData s) where
+    toObject _ = []
+
+instance TF.IsValid (AccountData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedCnsEnabled (TF.Ref s' (AccountData s)) (TF.Attr s P.Bool) where
     computedCnsEnabled x = TF.compute (TF.refKey x) "_computedCnsEnabled"
@@ -101,14 +108,17 @@ instance s ~ s' => P.HasComputedLogin (TF.Ref s' (AccountData s)) (TF.Attr s P.T
 data DatacenterData s = DatacenterData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DatacenterData s) where
-    toObject _ = []
-
 datacenterData
     :: TF.DataSource P.Provider (DatacenterData s)
 datacenterData =
-    TF.newDataSource "triton_datacenter" $
+    TF.newDataSource "triton_datacenter" TF.validator $
         DatacenterData'
+
+instance TF.IsObject (DatacenterData s) where
+    toObject _ = []
+
+instance TF.IsValid (DatacenterData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
     computedEndpoint x = TF.compute (TF.refKey x) "_computedEndpoint"
@@ -129,34 +139,35 @@ data FabricNetworkData s = FabricNetworkData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (FabricNetworkData s) where
-    toObject FabricNetworkData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "vlan_id" <$> TF.attribute _vlanId
-        ]
-
 fabricNetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @vlan_id@ - 'P.vlanId'
     -> TF.DataSource P.Provider (FabricNetworkData s)
 fabricNetworkData _name _vlanId =
-    TF.newDataSource "triton_fabric_network" $
+    TF.newDataSource "triton_fabric_network" TF.validator $
         FabricNetworkData'
             { _name = _name
             , _vlanId = _vlanId
             }
 
+instance TF.IsObject (FabricNetworkData s) where
+    toObject FabricNetworkData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "vlan_id" <$> TF.attribute _vlanId
+        ]
+
+instance TF.IsValid (FabricNetworkData s) where
+    validator = P.mempty
+
 instance P.HasName (FabricNetworkData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: FabricNetworkData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: FabricNetworkData s)
+               (\s a -> s { _name = a } :: FabricNetworkData s)
 
 instance P.HasVlanId (FabricNetworkData s) (TF.Attr s P.Integer) where
     vlanId =
         P.lens (_vlanId :: FabricNetworkData s -> TF.Attr s P.Integer)
-               (\s a -> s { _vlanId = a
-                          } :: FabricNetworkData s)
+               (\s a -> s { _vlanId = a } :: FabricNetworkData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
@@ -204,40 +215,40 @@ data FabricVlanData s = FabricVlanData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (FabricVlanData s) where
-    toObject FabricVlanData'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "vlan_id" <$> TF.attribute _vlanId
-        ]
-
 fabricVlanData
     :: TF.DataSource P.Provider (FabricVlanData s)
 fabricVlanData =
-    TF.newDataSource "triton_fabric_vlan" $
+    TF.newDataSource "triton_fabric_vlan" TF.validator $
         FabricVlanData'
             { _description = TF.Nil
             , _name = TF.Nil
             , _vlanId = TF.Nil
             }
 
+instance TF.IsObject (FabricVlanData s) where
+    toObject FabricVlanData'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "vlan_id" <$> TF.attribute _vlanId
+        ]
+
+instance TF.IsValid (FabricVlanData s) where
+    validator = P.mempty
+
 instance P.HasDescription (FabricVlanData s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: FabricVlanData s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: FabricVlanData s)
+               (\s a -> s { _description = a } :: FabricVlanData s)
 
 instance P.HasName (FabricVlanData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: FabricVlanData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: FabricVlanData s)
+               (\s a -> s { _name = a } :: FabricVlanData s)
 
 instance P.HasVlanId (FabricVlanData s) (TF.Attr s P.Integer) where
     vlanId =
         P.lens (_vlanId :: FabricVlanData s -> TF.Attr s P.Integer)
-               (\s a -> s { _vlanId = a
-                          } :: FabricVlanData s)
+               (\s a -> s { _vlanId = a } :: FabricVlanData s)
 
 -- | @triton_image@ DataSource.
 --
@@ -270,22 +281,10 @@ data ImageData s = ImageData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ImageData s) where
-    toObject ImageData'{..} = catMaybes
-        [ TF.assign "most_recent" <$> TF.attribute _mostRecent
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "os" <$> TF.attribute _os
-        , TF.assign "owner" <$> TF.attribute _owner
-        , TF.assign "public" <$> TF.attribute _public
-        , TF.assign "state" <$> TF.attribute _state
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "version" <$> TF.attribute _version
-        ]
-
 imageData
     :: TF.DataSource P.Provider (ImageData s)
 imageData =
-    TF.newDataSource "triton_image" $
+    TF.newDataSource "triton_image" TF.validator $
         ImageData'
             { _mostRecent = TF.value P.False
             , _name = TF.Nil
@@ -297,53 +296,60 @@ imageData =
             , _version = TF.Nil
             }
 
+instance TF.IsObject (ImageData s) where
+    toObject ImageData'{..} = P.catMaybes
+        [ TF.assign "most_recent" <$> TF.attribute _mostRecent
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "os" <$> TF.attribute _os
+        , TF.assign "owner" <$> TF.attribute _owner
+        , TF.assign "public" <$> TF.attribute _public
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "version" <$> TF.attribute _version
+        ]
+
+instance TF.IsValid (ImageData s) where
+    validator = P.mempty
+
 instance P.HasMostRecent (ImageData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: ImageData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a
-                          } :: ImageData s)
+               (\s a -> s { _mostRecent = a } :: ImageData s)
 
 instance P.HasName (ImageData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ImageData s)
+               (\s a -> s { _name = a } :: ImageData s)
 
 instance P.HasOs (ImageData s) (TF.Attr s P.Text) where
     os =
         P.lens (_os :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _os = a
-                          } :: ImageData s)
+               (\s a -> s { _os = a } :: ImageData s)
 
 instance P.HasOwner (ImageData s) (TF.Attr s P.Text) where
     owner =
         P.lens (_owner :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _owner = a
-                          } :: ImageData s)
+               (\s a -> s { _owner = a } :: ImageData s)
 
 instance P.HasPublic (ImageData s) (TF.Attr s P.Bool) where
     public =
         P.lens (_public :: ImageData s -> TF.Attr s P.Bool)
-               (\s a -> s { _public = a
-                          } :: ImageData s)
+               (\s a -> s { _public = a } :: ImageData s)
 
 instance P.HasState (ImageData s) (TF.Attr s P.Text) where
     state =
         P.lens (_state :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _state = a
-                          } :: ImageData s)
+               (\s a -> s { _state = a } :: ImageData s)
 
 instance P.HasType' (ImageData s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: ImageData s)
+               (\s a -> s { _type' = a } :: ImageData s)
 
 instance P.HasVersion (ImageData s) (TF.Attr s P.Text) where
     version =
         P.lens (_version :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _version = a
-                          } :: ImageData s)
+               (\s a -> s { _version = a } :: ImageData s)
 
 -- | @triton_network@ DataSource.
 --
@@ -355,25 +361,27 @@ data NetworkData s = NetworkData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (NetworkData s) where
-    toObject NetworkData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 networkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (NetworkData s)
 networkData _name =
-    TF.newDataSource "triton_network" $
+    TF.newDataSource "triton_network" TF.validator $
         NetworkData'
             { _name = _name
             }
 
+instance TF.IsObject (NetworkData s) where
+    toObject NetworkData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (NetworkData s) where
+    validator = P.mempty
+
 instance P.HasName (NetworkData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: NetworkData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: NetworkData s)
+               (\s a -> s { _name = a } :: NetworkData s)
 
 instance s ~ s' => P.HasComputedFabric (TF.Ref s' (NetworkData s)) (TF.Attr s P.Bool) where
     computedFabric x = TF.compute (TF.refKey x) "_computedFabric"
@@ -391,25 +399,31 @@ data PackageData s = PackageData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (PackageData s) where
-    toObject PackageData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        ]
-
 packageData
     :: TF.Attr s [TF.Attr s (Filter s)] -- ^ @filter@ - 'P.filter'
     -> TF.DataSource P.Provider (PackageData s)
 packageData _filter =
-    TF.newDataSource "triton_package" $
+    TF.newDataSource "triton_package" TF.validator $
         PackageData'
             { _filter = _filter
             }
 
+instance TF.IsObject (PackageData s) where
+    toObject PackageData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        ]
+
+instance TF.IsValid (PackageData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: PackageData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasFilter (PackageData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: PackageData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: PackageData s)
+               (\s a -> s { _filter = a } :: PackageData s)
 
 instance s ~ s' => P.HasComputedDisk (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
     computedDisk x = TF.compute (TF.refKey x) "_computedDisk"
