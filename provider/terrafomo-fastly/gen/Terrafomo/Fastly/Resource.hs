@@ -288,7 +288,7 @@ instance P.HasVcl (ServiceV1Resource s) (TF.Attr s [TF.Attr s (Vcl s)]) where
                           } :: ServiceV1Resource s)
 
 instance s ~ s' => P.HasComputedActiveVersion (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Integer) where
-    computedActiveVersion x = TF.compute (TF.refKey x) "active_version"
+    computedActiveVersion x = TF.compute (TF.refKey x) "_computedActiveVersion"
 
 instance s ~ s' => P.HasComputedDefaultHost (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
-    computedDefaultHost x = TF.compute (TF.refKey x) "default_host"
+    computedDefaultHost x = TF.compute (TF.refKey x) "_computedDefaultHost"

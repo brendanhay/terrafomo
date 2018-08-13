@@ -90,6 +90,8 @@ module Terrafomo.Fastly.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
 import qualified Data.List.NonEmpty     as P
@@ -1599,13 +1601,13 @@ instance P.HasType' (Header s) (TF.Attr s P.Text) where
                           } :: Header s)
 
 instance s ~ s' => P.HasComputedRegex (TF.Ref s' (Header s)) (TF.Attr s P.Text) where
-    computedRegex x = TF.compute (TF.refKey x) "regex"
+    computedRegex x = TF.compute (TF.refKey x) "_computedRegex"
 
 instance s ~ s' => P.HasComputedSource (TF.Ref s' (Header s)) (TF.Attr s P.Text) where
-    computedSource x = TF.compute (TF.refKey x) "source"
+    computedSource x = TF.compute (TF.refKey x) "_computedSource"
 
 instance s ~ s' => P.HasComputedSubstitution (TF.Ref s' (Header s)) (TF.Attr s P.Text) where
-    computedSubstitution x = TF.compute (TF.refKey x) "substitution"
+    computedSubstitution x = TF.compute (TF.refKey x) "_computedSubstitution"
 
 -- | @bigquerylogging@ nested settings.
 data Bigquerylogging s = Bigquerylogging'

@@ -30,17 +30,18 @@ import GHC.Base (($))
 
 import Terrafomo.Fastly.Settings
 
-import qualified Data.Hashable         as P
-import qualified Data.HashMap.Strict   as P
-import qualified Data.List.NonEmpty    as P
-import qualified Data.Text             as P
-import qualified GHC.Generics          as P
-import qualified Lens.Micro            as P
-import qualified Prelude               as P
-import qualified Terrafomo.Fastly.Lens as P
-import qualified Terrafomo.HCL         as TF
-import qualified Terrafomo.Name        as TF
-import qualified Terrafomo.Provider    as TF
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Fastly.Lens  as P
+import qualified Terrafomo.Fastly.Types as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Provider     as TF
 
 -- | The @Fastly@ Terraform provider configuration.
 --
@@ -72,7 +73,7 @@ instance TF.IsSection Provider where
                   ])
 
 instance TF.IsProvider Provider where
-    type ProviderType Provider = "fastly"
+    type ProviderType Provider = "provider"
 
 newProvider
     :: Provider
