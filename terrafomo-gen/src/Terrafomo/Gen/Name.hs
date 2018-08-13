@@ -29,15 +29,15 @@ resourceNames x =
     let name = Name (resourceName x <> "Resource")
      in ( name
         , unsafeRename (`Text.snoc` '\'') name
-        , unsafeRename Text.lowerHead     name
+        , unsafeRename (Text.unreserved . Text.lowerHead) name
         )
 
-datasourceNames :: Text -> (DataName, ConName, VarName)
-datasourceNames x =
+dataSourceNames :: Text -> (DataName, ConName, VarName)
+dataSourceNames x =
     let name = Name (resourceName x <> "Data")
      in ( name
         , unsafeRename (`Text.snoc` '\'') name
-        , unsafeRename Text.lowerHead     name
+        , unsafeRename (Text.unreserved . Text.lowerHead) name
         )
 
 settingsNames :: Text -> (DataName, ConName, VarName)

@@ -102,7 +102,7 @@ elabDataSource :: Text -> [Go.Schema] -> Elab DataSource
 elabDataSource original =
     withThreaded
         . fmap DataSource'
-            . elabSchema original (Name.resourceNames original)
+            . elabSchema original (Name.dataSourceNames original)
 
 elabSettings :: Text -> [Go.Schema] -> Elab Settings
 elabSettings original schemas = do
