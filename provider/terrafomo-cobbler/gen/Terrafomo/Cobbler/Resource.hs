@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -44,7 +45,6 @@ module Terrafomo.Cobbler.Resource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -52,7 +52,10 @@ import Terrafomo.Cobbler.Settings
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -64,6 +67,7 @@ import qualified Terrafomo.Cobbler.Types    as P
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Schema           as TF
+import qualified Terrafomo.Validator        as TF
 
 -- | @cobbler_distro@ Resource.
 --
@@ -87,15 +91,6 @@ data DistroResource s = DistroResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DistroResource s) where
-    toObject DistroResource'{..} = catMaybes
-        [ TF.assign "breed" <$> TF.attribute _breed
-        , TF.assign "initrd" <$> TF.attribute _initrd
-        , TF.assign "kernel" <$> TF.attribute _kernel
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "os_version" <$> TF.attribute _osVersion
-        ]
-
 distroResource
     :: TF.Attr s P.Text -- ^ @breed@ - 'P.breed'
     -> TF.Attr s P.Text -- ^ @initrd@ - 'P.initrd'
@@ -104,7 +99,7 @@ distroResource
     -> TF.Attr s P.Text -- ^ @os_version@ - 'P.osVersion'
     -> TF.Resource P.Provider (DistroResource s)
 distroResource _breed _initrd _kernel _name _osVersion =
-    TF.newResource "cobbler_distro" $
+    TF.newResource "cobbler_distro" TF.validator $
         DistroResource'
             { _breed = _breed
             , _initrd = _initrd
@@ -113,35 +108,42 @@ distroResource _breed _initrd _kernel _name _osVersion =
             , _osVersion = _osVersion
             }
 
+instance TF.IsObject (DistroResource s) where
+    toObject DistroResource'{..} = P.catMaybes
+        [ TF.assign "breed" <$> TF.attribute _breed
+        , TF.assign "initrd" <$> TF.attribute _initrd
+        , TF.assign "kernel" <$> TF.attribute _kernel
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "os_version" <$> TF.attribute _osVersion
+        ]
+
+instance TF.IsValid (DistroResource s) where
+    validator = P.mempty
+
 instance P.HasBreed (DistroResource s) (TF.Attr s P.Text) where
     breed =
         P.lens (_breed :: DistroResource s -> TF.Attr s P.Text)
-               (\s a -> s { _breed = a
-                          } :: DistroResource s)
+               (\s a -> s { _breed = a } :: DistroResource s)
 
 instance P.HasInitrd (DistroResource s) (TF.Attr s P.Text) where
     initrd =
         P.lens (_initrd :: DistroResource s -> TF.Attr s P.Text)
-               (\s a -> s { _initrd = a
-                          } :: DistroResource s)
+               (\s a -> s { _initrd = a } :: DistroResource s)
 
 instance P.HasKernel (DistroResource s) (TF.Attr s P.Text) where
     kernel =
         P.lens (_kernel :: DistroResource s -> TF.Attr s P.Text)
-               (\s a -> s { _kernel = a
-                          } :: DistroResource s)
+               (\s a -> s { _kernel = a } :: DistroResource s)
 
 instance P.HasName (DistroResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DistroResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: DistroResource s)
+               (\s a -> s { _name = a } :: DistroResource s)
 
 instance P.HasOsVersion (DistroResource s) (TF.Attr s P.Text) where
     osVersion =
         P.lens (_osVersion :: DistroResource s -> TF.Attr s P.Text)
-               (\s a -> s { _osVersion = a
-                          } :: DistroResource s)
+               (\s a -> s { _osVersion = a } :: DistroResource s)
 
 instance s ~ s' => P.HasComputedArch (TF.Ref s' (DistroResource s)) (TF.Attr s P.Text) where
     computedArch x = TF.compute (TF.refKey x) "_computedArch"
@@ -189,34 +191,35 @@ data KickstartFileResource s = KickstartFileResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KickstartFileResource s) where
-    toObject KickstartFileResource'{..} = catMaybes
-        [ TF.assign "body" <$> TF.attribute _body
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 kickstartFileResource
     :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (KickstartFileResource s)
 kickstartFileResource _body _name =
-    TF.newResource "cobbler_kickstart_file" $
+    TF.newResource "cobbler_kickstart_file" TF.validator $
         KickstartFileResource'
             { _body = _body
             , _name = _name
             }
 
+instance TF.IsObject (KickstartFileResource s) where
+    toObject KickstartFileResource'{..} = P.catMaybes
+        [ TF.assign "body" <$> TF.attribute _body
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (KickstartFileResource s) where
+    validator = P.mempty
+
 instance P.HasBody (KickstartFileResource s) (TF.Attr s P.Text) where
     body =
         P.lens (_body :: KickstartFileResource s -> TF.Attr s P.Text)
-               (\s a -> s { _body = a
-                          } :: KickstartFileResource s)
+               (\s a -> s { _body = a } :: KickstartFileResource s)
 
 instance P.HasName (KickstartFileResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: KickstartFileResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: KickstartFileResource s)
+               (\s a -> s { _name = a } :: KickstartFileResource s)
 
 -- | @cobbler_profile@ Resource.
 --
@@ -231,34 +234,35 @@ data ProfileResource s = ProfileResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ProfileResource s) where
-    toObject ProfileResource'{..} = catMaybes
-        [ TF.assign "distro" <$> TF.attribute _distro
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 profileResource
     :: TF.Attr s P.Text -- ^ @distro@ - 'P.distro'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (ProfileResource s)
 profileResource _distro _name =
-    TF.newResource "cobbler_profile" $
+    TF.newResource "cobbler_profile" TF.validator $
         ProfileResource'
             { _distro = _distro
             , _name = _name
             }
 
+instance TF.IsObject (ProfileResource s) where
+    toObject ProfileResource'{..} = P.catMaybes
+        [ TF.assign "distro" <$> TF.attribute _distro
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ProfileResource s) where
+    validator = P.mempty
+
 instance P.HasDistro (ProfileResource s) (TF.Attr s P.Text) where
     distro =
         P.lens (_distro :: ProfileResource s -> TF.Attr s P.Text)
-               (\s a -> s { _distro = a
-                          } :: ProfileResource s)
+               (\s a -> s { _distro = a } :: ProfileResource s)
 
 instance P.HasName (ProfileResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ProfileResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ProfileResource s)
+               (\s a -> s { _name = a } :: ProfileResource s)
 
 instance s ~ s' => P.HasComputedBootFiles (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
     computedBootFiles x = TF.compute (TF.refKey x) "_computedBootFiles"
@@ -366,43 +370,43 @@ data RepoResource s = RepoResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RepoResource s) where
-    toObject RepoResource'{..} = catMaybes
-        [ TF.assign "breed" <$> TF.attribute _breed
-        , TF.assign "mirror" <$> TF.attribute _mirror
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 repoResource
     :: TF.Attr s P.Text -- ^ @breed@ - 'P.breed'
     -> TF.Attr s P.Text -- ^ @mirror@ - 'P.mirror'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (RepoResource s)
 repoResource _breed _mirror _name =
-    TF.newResource "cobbler_repo" $
+    TF.newResource "cobbler_repo" TF.validator $
         RepoResource'
             { _breed = _breed
             , _mirror = _mirror
             , _name = _name
             }
 
+instance TF.IsObject (RepoResource s) where
+    toObject RepoResource'{..} = P.catMaybes
+        [ TF.assign "breed" <$> TF.attribute _breed
+        , TF.assign "mirror" <$> TF.attribute _mirror
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (RepoResource s) where
+    validator = P.mempty
+
 instance P.HasBreed (RepoResource s) (TF.Attr s P.Text) where
     breed =
         P.lens (_breed :: RepoResource s -> TF.Attr s P.Text)
-               (\s a -> s { _breed = a
-                          } :: RepoResource s)
+               (\s a -> s { _breed = a } :: RepoResource s)
 
 instance P.HasMirror (RepoResource s) (TF.Attr s P.Text) where
     mirror =
         P.lens (_mirror :: RepoResource s -> TF.Attr s P.Text)
-               (\s a -> s { _mirror = a
-                          } :: RepoResource s)
+               (\s a -> s { _mirror = a } :: RepoResource s)
 
 instance P.HasName (RepoResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RepoResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: RepoResource s)
+               (\s a -> s { _name = a } :: RepoResource s)
 
 instance s ~ s' => P.HasComputedAptComponents (TF.Ref s' (RepoResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAptComponents x = TF.compute (TF.refKey x) "_computedAptComponents"
@@ -450,34 +454,35 @@ data SnippetResource s = SnippetResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SnippetResource s) where
-    toObject SnippetResource'{..} = catMaybes
-        [ TF.assign "body" <$> TF.attribute _body
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 snippetResource
     :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (SnippetResource s)
 snippetResource _body _name =
-    TF.newResource "cobbler_snippet" $
+    TF.newResource "cobbler_snippet" TF.validator $
         SnippetResource'
             { _body = _body
             , _name = _name
             }
 
+instance TF.IsObject (SnippetResource s) where
+    toObject SnippetResource'{..} = P.catMaybes
+        [ TF.assign "body" <$> TF.attribute _body
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (SnippetResource s) where
+    validator = P.mempty
+
 instance P.HasBody (SnippetResource s) (TF.Attr s P.Text) where
     body =
         P.lens (_body :: SnippetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _body = a
-                          } :: SnippetResource s)
+               (\s a -> s { _body = a } :: SnippetResource s)
 
 instance P.HasName (SnippetResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SnippetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: SnippetResource s)
+               (\s a -> s { _name = a } :: SnippetResource s)
 
 -- | @cobbler_system@ Resource.
 --
@@ -492,34 +497,35 @@ data SystemResource s = SystemResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SystemResource s) where
-    toObject SystemResource'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "profile" <$> TF.attribute _profile
-        ]
-
 systemResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @profile@ - 'P.profile'
     -> TF.Resource P.Provider (SystemResource s)
 systemResource _name _profile =
-    TF.newResource "cobbler_system" $
+    TF.newResource "cobbler_system" TF.validator $
         SystemResource'
             { _name = _name
             , _profile = _profile
             }
 
+instance TF.IsObject (SystemResource s) where
+    toObject SystemResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "profile" <$> TF.attribute _profile
+        ]
+
+instance TF.IsValid (SystemResource s) where
+    validator = P.mempty
+
 instance P.HasName (SystemResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SystemResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: SystemResource s)
+               (\s a -> s { _name = a } :: SystemResource s)
 
 instance P.HasProfile (SystemResource s) (TF.Attr s P.Text) where
     profile =
         P.lens (_profile :: SystemResource s -> TF.Attr s P.Text)
-               (\s a -> s { _profile = a
-                          } :: SystemResource s)
+               (\s a -> s { _profile = a } :: SystemResource s)
 
 instance s ~ s' => P.HasComputedBootFiles (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
     computedBootFiles x = TF.compute (TF.refKey x) "_computedBootFiles"
